@@ -1,9 +1,10 @@
 import gql from 'graphql-tag';
 
 export const user_registration = gql`
-  mutation user_registration($full_name: String!, $email: String!,$term_condition:Boolean,$domain:String!) {
+  mutation user_registration($full_name: String!, $mobile_number: String, $email: String!,$term_condition:Boolean,$domain:String!) {
     user_registration(
-      full_name: $full_name
+      full_name: $full_name,
+      mobile_number:$mobile_number,
       email: $email,
       term_condition: $term_condition,
       domain:$domain

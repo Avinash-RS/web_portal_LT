@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { MustMatch } from '@core/services/_helpers/must-match.validator';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import * as myGlobals from '@core/globals';
 import { ToastrService } from 'ngx-toastr';
@@ -31,22 +31,33 @@ export class PasswordComponent implements OnInit {
   showpsseye  = false;
   showconpassbutton  = false;
   showconpsseye  = false;
+  useridData: any;
+  email: any;
+  emailid: any;
+
 
   constructor(public translate: TranslateService,
               private router: Router,
               private loader: Ng4LoadingSpinnerService,
               private formBuilder: FormBuilder,
               private toastr: ToastrService,
-              public service: LearnerServicesService) { }
+              private activeroute: ActivatedRoute,
+              public service: LearnerServicesService) {
+
+                this.activeroute.queryParams.subscribe(params => {
+                  this.email = params.code;
+                  // localStorage.setItem('OTPFeature', this.otpFeature);
+                  this.get_user_detail(this.email);
+                });
+               }
 
   ngOnInit() {
     this.translate.use(localStorage.getItem('language'));
     this.systemip = localStorage.getItem('Systemip');
-    this.userNamesuggestion();
+    // this.userNamesuggestion();
     this.passwordForm = this.formBuilder.group({
       // username: new FormControl('', myGlobals.usernamesplVal),
-      username: ['', [Validators.required, Validators.minLength(3),
-      Validators.maxLength(20), Validators.pattern(/^[a-zA-Z0-9!@#$&()\\-`.+,/\"]*$/)]],
+      username: [''],
       password: ['', [Validators.required, Validators.minLength(8),  Validators.maxLength(20),
       Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?=.*?^[A-Za-z0-9!<>?/{}\|+-_=@#%$^*()]*$)/)]],
       confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8),
@@ -95,11 +106,11 @@ export class PasswordComponent implements OnInit {
     localStorage.removeItem('adminDetails');
     this.loader.show();
     this.userid = localStorage.getItem('key');
-    this.service.user_registration_done(this.userid, this.passwordForm.value.username, this.passwordForm.value.password, this.systemip)
+    this.service.user_registration_done(this.userid, this.emailid, this.passwordForm.value.password, this.systemip)
     .subscribe((data: any) => {
       if (data.data.user_registration_done.success === 'true') {
         // Added by Mythreyi - for user story 19 first time login
-        this.service.login(this.passwordForm.value.username, this.passwordForm.value.password, false)
+        this.service.login(this.emailid, this.passwordForm.value.password, false)
           .subscribe((loginresult: any) => {
             if (loginresult.data.login) {
               if (loginresult.data.login.success) {
@@ -135,17 +146,17 @@ export class PasswordComponent implements OnInit {
       }
     });
   }
-
-  userNamesuggestion() {
-    this.userid = localStorage.getItem('key');
-    this.service.userNamesuggestion(this.userid).subscribe((data: any) => {
-      if (data.data.user_registration_username_suggestion.success === 'true') {
-        this.options = data.data.user_registration_username_suggestion.data;
-      } else {
-        this.toastr.error(data.data.user_registration_username_suggestion.message, null);
-      }
-    });
-  }
+ // new flow removed
+   // userNamesuggestion() {
+  //   this.userid = localStorage.getItem('key');
+  //   this.service.userNamesuggestion(this.userid).subscribe((data: any) => {
+  //     if (data.data.user_registration_username_suggestion.success === 'true') {
+  //       this.options = data.data.user_registration_username_suggestion.data;
+  //     } else {
+  //       this.toastr.error(data.data.user_registration_username_suggestion.message, null);
+  //     }
+  //   });
+  // }
 
   /* function that checks for existing user or not on blur event in username field */
   checkForExistingUser() {
@@ -161,4 +172,18 @@ export class PasswordComponent implements OnInit {
       }
     }
   }
+
+  get_user_detail(email) {
+    try {
+      this.service.get_user_detail(email).subscribe((data: any) => {
+        this.useridData = data.data;
+        this.emailid =  this.useridData.get_user_detail.message[0].email;
+        this.userid = this.useridData.get_user_detail.message[0].user_id;
+        localStorage.setItem('key', this.userid);
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
+

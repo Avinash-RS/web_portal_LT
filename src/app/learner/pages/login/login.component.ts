@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router } from '@angular/router';
 import * as myGlobals from '@core/globals';
@@ -33,7 +33,9 @@ export class LoginComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('adminDetails');
     this.loginForm = this.formBuilder.group({
-      username: new FormControl('', myGlobals.req),
+      // username: new FormControl('', myGlobals.req),
+      username: ['', [ Validators.minLength(6),
+        Validators.maxLength(64), Validators.pattern(/^([A-Za-z]|[0-9])[A-Za-z0-9._-]+[A-Za-z0-9]@((?:[-a-z0-9]+\.)+[a-z]{2,})$/)]],
       password: new FormControl('', myGlobals.req),
       remember_me: new FormControl(false, []),
       language: new FormControl(false, [])

@@ -58,7 +58,7 @@ describe('LoginComponent', () => {
       .compileComponents();
   }));
 
- 
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
@@ -76,13 +76,13 @@ describe('LoginComponent', () => {
     localStorage.removeItem('adminDetails');
     fixture.detectChanges();
   });
- 
+
 
   it('should create and identify components', () => {
     expect(component).toBeTruthy();
     let loginBtnContainer = fixture.debugElement.nativeElement.querySelector('#login');
-    expect(component.loginForm.controls['username']).toBeDefined();
-    expect(component.loginForm.controls['password']).toBeDefined();
+    expect(component.loginForm.controls.username).toBeDefined();
+    expect(component.loginForm.controls.password).toBeDefined();
     expect(loginBtnContainer).toBeDefined();
   });
 
@@ -91,32 +91,32 @@ describe('LoginComponent', () => {
   });
 
   it('should click remember me change value', () => {
-    let myCheckboxControl = component.loginForm.controls['remember_me'];
+    let myCheckboxControl = component.loginForm.controls.remember_me;
     expect(myCheckboxControl.value).toEqual(false);
-    //set checkbox state to true
+    // set checkbox state to true
     myCheckboxControl.setValue(true);
     fixture.detectChanges();
   });
 
   it('username field validity', () => {
     let errors = {};
-    let uname = component.loginForm.controls['username'];
+    let uname = component.loginForm.controls.username;
     expect(uname.valid).toBeFalsy();
     errors = uname.errors || {};
-    expect(errors['required']).toBe(true);
+    expect(errors.required).toBe(true);
     uname.setValue("test");
     errors = uname.errors || {};
-    expect(errors['required']).toBeFalsy();
+    expect(errors.required).toBeFalsy();
   });
 
   it('password field validity', () => {
     let errors = {};
-    let password = component.loginForm.controls['password'];
+    let password = component.loginForm.controls.password;
     errors = password.errors || {};
-    expect(errors['required']).toBeTruthy();
+    expect(errors.required).toBeTruthy();
     password.setValue("123456");
     errors = password.errors || {};
-    expect(errors['required']).toBeFalsy();
+    expect(errors.required).toBeFalsy();
   });
 
   it('submitting a form emits a user while remeber me is true', () => {
@@ -124,18 +124,18 @@ describe('LoginComponent', () => {
 
     const component = fixture.componentInstance;
     const navigateSpy = spyOn(router, 'navigate');
-    
+
     expect(component.loginForm.valid).toBeFalsy();
-    component.loginForm.controls['username'].setValue("test");
-    component.loginForm.controls['remember_me'].setValue(true);
-    component.loginForm.controls['password'].setValue("123Aa!@#");
+    component.loginForm.controls.username.setValue("test");
+    component.loginForm.controls.remember_me.setValue(true);
+    component.loginForm.controls.password.setValue("123Aa!@#");
     expect(component.loginForm.valid).toBeTruthy();
 
     fixture.detectChanges();
     service = TestBed.get(MockServiceService);
 
     const button = fixture.debugElement.nativeElement.querySelector('#login');
-    
+
     button.click();
     expect(component.login())
     let loginresult;
@@ -146,7 +146,7 @@ describe('LoginComponent', () => {
         if (loginresult.data.login && component.loginForm.value.remember_me === true) {
           localStorage.setItem('uname', component.loginForm.value.username);
           localStorage.setItem('remember_me', 'true');
-          var ps = btoa(component.loginForm.value.password);
+          const ps = btoa(component.loginForm.value.password);
           localStorage.setItem('ps', ps);
           localStorage.setItem('login', 'true');
           localStorage.setItem('role', 'learner')
@@ -167,7 +167,7 @@ describe('LoginComponent', () => {
           localStorage.setItem('login', 'true');
           localStorage.setItem('role', 'learner');
           localStorage.setItem('token', loginresult.data.login.message.token)
-          var ps = btoa(component.loginForm.value.password);
+          const ps = btoa(component.loginForm.value.password);
           localStorage.setItem('ps', ps);
           // if (loginresult.data.login.message.is_profile_updated)
           //   router.navigate(['/Learner/MyCourse'])
