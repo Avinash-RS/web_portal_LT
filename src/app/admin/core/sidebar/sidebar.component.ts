@@ -13,11 +13,10 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
   }
 
-  today: number = Date.now();
+today: number = Date.now();
   // public bufferValue;
 
-    events = [
-          {
+events = [{
             id: 'id',
             title: 'Business Meeting',
             time: '05:00 PM',
@@ -66,7 +65,7 @@ export class SidebarComponent implements OnInit {
         },
     ];
 
-    messages = [
+messages = [
         {from: 'Catherin', subject: 'Shopping', content: 'hi there??'},
         {from: 'Jack', subject: 'Function', content: 'yes'},
         {from: 'Karina', subject: 'Get together', content: 'nice'},

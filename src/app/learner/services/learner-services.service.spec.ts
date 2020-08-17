@@ -18,7 +18,6 @@ describe('LearnerServicesService', () => {
       RouterTestingModule
  ],
  providers: [ {provide: ActivatedRoute, useValue: fakeActivatedRoute} ],
-  
     schemas: [
       CUSTOM_ELEMENTS_SCHEMA
     ],

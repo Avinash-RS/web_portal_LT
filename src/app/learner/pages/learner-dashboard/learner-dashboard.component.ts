@@ -25,19 +25,18 @@ export class LearnerDashboardComponent implements OnInit {
     this.userDetailes = this.gs.checkLogout();
     this.getLearnerDashboard()
   }
-  
-  getLearnerDashboard(){
+
+  getLearnerDashboard() {
     if (this.userDetailes.group_id)
     this.service.get_learner_dashboard(this.userDetailes.user_id).subscribe((response: any) => {
       if (response.data.getlearnerdashboarddetails && response.data.getlearnerdashboarddetails.success) {
         this.dashboardData = response.data.getlearnerdashboarddetails.data;
       }
-  
     });
   }
 
-  gotohome(){
-    this.router.navigate(['/Learner/home'])
+  gotohome() {
+    this.router.navigate(['/Learner/home']);
   }
 
 }

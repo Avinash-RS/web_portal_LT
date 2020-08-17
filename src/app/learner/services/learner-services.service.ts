@@ -83,7 +83,7 @@ export class LearnerServicesService {
   envCourseApi: any = environment.createCourseApi;
   envDomain: any = environment.domain;
 
-  constructor(private Apollo: Apollo, private http: HttpClient) {}
+  constructor(private Apollo : Apollo, private http: HttpClient) {}
 
   public getData(userid, date) {
     return this.Apollo.query({

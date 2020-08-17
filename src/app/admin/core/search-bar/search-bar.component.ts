@@ -6,10 +6,10 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent implements OnInit {
-	public bigMenu;
-	@Input() open;
-	constructor() { }
+public bigMenu;
+@Input() open;
+constructor() { }
 
-	ngOnInit() {}
+ngOnInit() {}
 
 }
