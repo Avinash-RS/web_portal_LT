@@ -800,3 +800,37 @@ hr {
   }
 
 }
+.assignbtn {
+  position: relative;
+  left: 21px;
+  bottom: 39px;
+}
+.discussionbtn {
+  position: relative;
+  left: -25px;
+  bottom: 39px;
+}
+.buttonCls {
+button {
+  border: solid 1px black !important;
+  color: $lxp-text;
+}
+mat-icon {
+  position: relative;
+  top: 4px;
+}
+}
+.clr {
+  background-color: $color-white;
+  color: $lxp-button-text;
+}
+
+.clr:hover {
+  background-color: $lxp-dark-gray !important;
+  color: $color-white !important;
+}
+.upcoming {
+  position: relative;
+  bottom: 24px;
+  left: 19px;
+}

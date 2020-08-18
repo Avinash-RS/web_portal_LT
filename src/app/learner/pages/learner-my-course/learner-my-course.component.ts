@@ -242,5 +242,25 @@ export class LearnerMyCourseComponent implements OnInit {
   launchActivity(value) {
       window.open(value.activity_details.link);
   }
+  goToAssignment(c) {
+    const detail = {
+      id: c.course_id,
+      wishlist: c.wishlisted || false,
+      wishlist_id: c.wishlist_id || null,
+      enrollment_status: null,
+      assignmentVal: true
+    };
+    this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+  }
+  goToForum(c) {
+    const detail = {
+      id: c.course_id,
+      wishlist: c.wishlisted || false,
+      wishlist_id: c.wishlist_id || null,
+      enrollment_status: null,
+      assignmentVal: true
+    };
+    this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+  }
 }
 
