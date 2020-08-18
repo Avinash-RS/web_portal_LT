@@ -148,6 +148,8 @@ export class LearnerMyCourseComponent implements OnInit {
         // });
         this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
         this.enrolledCourses.forEach(element => {
+          const assignmentCount = element.assignmentCount;
+          const forumCount = element.forumCount;
           if (element.course_duration) {
             if (Number(element.course_duration.slice(3, 5)) >= 30) {
               element.course_duration = Number(element.course_duration.slice(0, 2)) + 1;
@@ -258,9 +260,14 @@ export class LearnerMyCourseComponent implements OnInit {
       wishlist: c.wishlisted || false,
       wishlist_id: c.wishlist_id || null,
       enrollment_status: null,
-      assignmentVal: true
+      forumVal: true
     };
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+  }
+  getCountForCategories() {
+    this.learnerService.getCountForCategories().subscribe((data: any) => {
+
+    });
   }
 }
 

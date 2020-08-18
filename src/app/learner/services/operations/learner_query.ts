@@ -793,6 +793,8 @@ export const getLearnerenrolledCourses = gql`
           rating
           price
           totalLearners
+          assignmentCount
+          forumCount
           course_duration
           coursePlayerStatus {
             status
@@ -1189,6 +1191,23 @@ export const get_organization_by_id = gql`
               admin_email
               admin_username
       }
+      }
+    }
+  }
+`;
+export const getCountForCategories = gql`
+  query getCountForCategories() {
+    getCountForCategories() {
+      message
+      success
+      data{
+        catalogueId
+        catalogueName
+        categories{
+          categoryId
+          categoryName
+          totalCount
+        }
       }
     }
   }
