@@ -20,7 +20,7 @@
                 </span>
             </div>
 
-                <mat-tab-group #tabs animationDuration="1000ms">
+                <mat-tab-group [(selectedIndex)]="selectedTabIndex" #tabs animationDuration="1000ms">
                     <mat-tab label="{{course?.course_name | titlecase }}" >
                         <mat-drawer-container [class.drawer-opened]="drawer.opened" class="course-details-container">
                         

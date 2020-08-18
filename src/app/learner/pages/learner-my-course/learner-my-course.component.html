@@ -7,9 +7,10 @@
     <div class="col-2 mt-4">
         <span>
             <mat-button class="available-course-btn">
-                <mat-select class="mypanel" placeholder="Available Courses" name="availableCourses" [(ngModel)]="availableCourses"
-                (selectionChange)="availableCoursesDropdown(availableCourses)" required>
-                <mat-option [value]="'ontime'">
+                <mat-select class="mypanel" placeholder="{{catalogueName}}" name="availableCourses" [(ngModel)]="availableCourses"
+                (selectionChange)="availableCoursesDropdown(availableCourses)" 
+                 required>
+                <!-- <mat-option [value]="'ontime'">
                     <span>
                         College Connect
                     </span>
@@ -20,6 +21,9 @@
                     Pro Certification
                 </span>
                 <span matBadge="10" matBadgePosition="after"></span>
+            </mat-option> -->
+            <mat-option *ngFor="let category of categoryDetails" [value]="category.categoryId">{{category.categoryName}}
+                <span matBadge="{{category.categoryCount}}" matBadgePosition="after"></span>
             </mat-option>
               </mat-select>
             </mat-button>
@@ -88,14 +92,13 @@
                    <span>
                     <button class="clr" (click)="goToAssignment(course)">
                         <mat-icon class="btn-icon">description</mat-icon>
-                        ASSIGNMENTS(4)
-                    </button>
+                        ASSIGNMENTS({{course.assignmentCount}})                    </button>
                    </span>
                
                <span>
                 <button class="clr ml-4" (click)="goToForum(course)">
                     <mat-icon class="btn-icon">forum</mat-icon>
-                    DISCUSSION FORUM(14)
+                    DISCUSSION FORUM({{course.forumCount}})
                 </button>
                </span>
            
@@ -240,6 +243,28 @@
                             <!-- </div> -->
                             <!-- </div> -->
 
+                        </div><br>
+                        <div class="row buttonCls">
+                            <div class="col-2"></div>
+                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12
+                                                            assignbtn">
+                                <button class="clr" (click)="goToAssignment(course)">
+                                    <mat-icon>description</mat-icon>
+                                    ASSIGNMENTS({{course.assignmentCount}})
+                                </button>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 discussionbtn">
+                                <button class="clr" (click)="goToForum(course)">
+                                    <mat-icon>forum</mat-icon>
+                                    DISCUSSION FORUM({{course.forumCount}})
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row upcoming">
+                            <div class="col-2"></div>
+                            <div class="col-2">
+                                <span>Upcoming...</span>
+                            </div>
                         </div>
                     </mat-card>
                 </div>
@@ -332,6 +357,28 @@
                     </span>
                   </button>
                                 </div>
+                            </div>
+                        </div><br>
+                        <div class="row buttonCls">
+                            <div class="col-2"></div>
+                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12
+                                                            assignbtn">
+                                <button class="clr" (click)="goToAssignment(course)">
+                                    <mat-icon>description</mat-icon>
+                                    ASSIGNMENTS({{course.assignmentCount}})
+                                </button>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 discussionbtn">
+                                <button class="clr" (click)="goToForum(course)">
+                                    <mat-icon>forum</mat-icon>
+                                    DISCUSSION FORUM({{course.forumCount}})
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row upcoming">
+                            <div class="col-2"></div>
+                            <div class="col-2">
+                                <span>Upcoming...</span>
                             </div>
                         </div>
                         <!-- </div> -->

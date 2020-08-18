@@ -41,6 +41,8 @@ export class LearnerMyCourseComponent implements OnInit {
   showCompleted: string;
   showOngoing: string;
   showUpcoming: string;
+  categoryDetails: any;
+  catalogueName: any;
 
 
 
@@ -51,6 +53,7 @@ export class LearnerMyCourseComponent implements OnInit {
     this.userDetailes = this.gs.checkLogout();
     this.getEnrolledCourses();
     this.getScreenSize();
+    this.getCountForCategories();
   }
   @HostListener('window:resize', ['$event'])
   // ngOnInit() {
@@ -80,11 +83,9 @@ export class LearnerMyCourseComponent implements OnInit {
 
     const currentDate = new Date();
     const formatDate = moment(currentDate).format();
-    console.log(formatDate, 'currentDate');
 
     const topicStart = new Date();
     const dateValue = moment(topicStart).format('YYYY-MM-DD');
-  //   console.log(dateValue);
     this.learnerService.getData(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
       this.results = data.data.get_read_learner_activity;
 
@@ -148,6 +149,8 @@ export class LearnerMyCourseComponent implements OnInit {
         // });
         this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
         this.enrolledCourses.forEach(element => {
+          const assignmentCount = element.assignmentCount;
+          const forumCount = element.forumCount;
           if (element.course_duration) {
             if (Number(element.course_duration.slice(3, 5)) >= 30) {
               element.course_duration = Number(element.course_duration.slice(0, 2)) + 1;
@@ -258,9 +261,20 @@ export class LearnerMyCourseComponent implements OnInit {
       wishlist: c.wishlisted || false,
       wishlist_id: c.wishlist_id || null,
       enrollment_status: null,
-      assignmentVal: true
+      forumVal: true
     };
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+  }
+  getCountForCategories() {
+    this.learnerService.getCountForCategories().subscribe((data: any) => {
+      if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
+      this.catalogueName = data.data.getCountForCategories.data.catalogueName;
+      this.categoryDetails = data.data.getCountForCategories.data.categories;
+      this.categoryDetails.forEach(element => {
+        element.categoryCount = element.totalCount;
+      });
+    }
+    });
   }
 }
 

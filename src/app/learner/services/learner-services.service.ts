@@ -37,7 +37,8 @@ import {
   ViewAllThreadData,
   // get_read_learner_activity,
   getReadLeanerActivity,
-  get_organization_by_id
+  get_organization_by_id,
+  getCountForCategories
 } from './operations/learner_query';
 
 import {
@@ -570,6 +571,11 @@ export class LearnerServicesService {
         user_id,
         user_obj_id: id
       }
+    });
+  }
+  getCountForCategories() {
+    return this.Apollo.query({
+      query: getCountForCategories
     });
   }
 
