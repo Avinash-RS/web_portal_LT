@@ -8,7 +8,7 @@ import { menus } from './menu-element';
 })
 export class SidemenuComponent implements OnInit {
 
-    @Input() iconOnly:boolean = false;
+    @Input() iconOnly: boolean = false;
     public menus = menus;
 
     constructor() { }

@@ -45,8 +45,12 @@
                         <h1 class=" animated animatedFadeInUp fadeInUp signIn">Create an account</h1><br><br>
                         <mat-form-field  appearance="outline">
                             <mat-label class="label-color">Full Name</mat-label>
-                            <input matInput id="fullname"  #fullname placeholder="Enter the full name"  formControlName="fullname" 
+                            <input matInput id="fullname" list="title" value="Mr"  #fullname placeholder="Enter the full name"  formControlName="fullname" 
                               maxlength="50" required>
+                              <datalist id="title">
+                                <option value="Mr"></option>
+                                <option value="Ms"></option>
+                              </datalist>
                             <mat-icon matPrefix class="icon-color">person_outline</mat-icon>
                           
                             <!-- <mat-error class="error" *ngIf="f.fullname.touched && f.fullname.errors">Fullname is required</mat-error>
@@ -82,15 +86,26 @@
                         <br><br>
 
                         <mat-form-field appearance="outline">
+                          <mat-label class="label-color">Email</mat-label>
+                          <input matInput  id="email" #email placeholder="Enter the email"  formControlName="email" maxlength="64"
+                          required>
+                          <mat-icon matPrefix class="icon-color">mail_outline</mat-icon>
+                          <mat-error class="error" *ngIf="registerForm.get('email').hasError('required')">Email is required</mat-error>
+                          <!-- <mat-error class="error" *ngIf="f.email.errors.required">Email ID is required</mat-error> -->
+                          <mat-error class="error" *ngIf="registerForm.get('email').hasError('pattern')">Please enter a valid email address</mat-error>
+                        </mat-form-field>
+                        <br><br>
+
+                        <mat-form-field appearance="outline">
                           <mat-label class="label-color">{{'Mobile number'}}</mat-label>
                           <input matInput  [placeholder]="'Enter mobile number without country code' "   minlength="10" pattern="[1-9]{1}[0-9]{9}"
                            mask="0000000000"  maxlength="10"
-                           formControlName="mobile"   [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }" required>
+                           formControlName="mobile"   [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }">
                           <mat-icon matPrefix class="icon-color" fontSet="material-icons-outlined">
                             phone</mat-icon>
-                          <mat-error class="error"  *ngIf="registerForm.get('mobile').hasError('required')">
+                          <!-- <mat-error class="error"  *ngIf="registerForm.get('mobile').hasError('required')">
                             {{'Mobile number is required' }}
-                          </mat-error>
+                          </mat-error> -->
                           <mat-error class="error"  *ngIf="registerForm.get('mobile').hasError('minlength')">
                             {{'Mobile number must be 10 digits'}}
                           </mat-error>
@@ -100,15 +115,7 @@
                           </mat-error>
                         </mat-form-field>
                         <br><br>
-                        <mat-form-field appearance="outline">
-                            <mat-label class="label-color">Email</mat-label>
-                            <input matInput  id="email" #email placeholder="Enter the email"  formControlName="email" maxlength="64"
-                            required>
-                            <mat-icon matPrefix class="icon-color">mail_outline</mat-icon>
-                            <mat-error class="error" *ngIf="registerForm.get('email').hasError('required')">Email is required</mat-error>
-                            <!-- <mat-error class="error" *ngIf="f.email.errors.required">Email ID is required</mat-error> -->
-                            <mat-error class="error" *ngIf="registerForm.get('email').hasError('pattern')">Please enter a valid email address</mat-error>
-                          </mat-form-field>
+                    
                         <div class=" space5">
                             <!-- <label class="fromLabel">Email ID</label>
                             <input type="text" id="email" #email formControlName="email" maxlength="64"

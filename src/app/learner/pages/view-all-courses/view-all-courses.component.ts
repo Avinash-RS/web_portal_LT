@@ -60,8 +60,8 @@ export class ViewAllCoursesComponent implements OnInit {
   level3selectedID: any = [];
   selectedFilter: any = [];
   isCollapsed: Boolean;
-  publishedToDate: String;
-  publishedFromDate: String;
+  publishedToDate: string;
+  publishedFromDate: string;
   showCategory: Boolean = false;
   element: any;
 

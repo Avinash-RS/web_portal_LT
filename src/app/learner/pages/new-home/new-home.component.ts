@@ -27,7 +27,7 @@ export class NewHomeComponent implements OnInit {
   results = [];
 
 
-  constructor(public translate: TranslateService,public learnerService: LearnerServicesService, 
+  constructor(public translate: TranslateService, public learnerService: LearnerServicesService,
               private gs: GlobalServiceService, private router: Router) {
     this.userDetailes = this.gs.checkLogout();
     this.getEnrolledCourses();
@@ -46,22 +46,21 @@ export class NewHomeComponent implements OnInit {
     //     event.getUTCSeconds()
     //   )
     // ).toISOString();
-    var dateValue = new Date().toISOString()
+    var dateValue = new Date().toISOString();
     this.learnerService.getReadLeanerActivity(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
       this.results = data.data.get_read_learner_activity;
       this.results['message'].forEach((element, index) => {
-        if (index == 0) {
-          element.activity_details.ongoing = "true"
-        }
-        else {
-          element.activity_details.ongoing = "false"
+        if (index === 0) {
+          element.activity_details.ongoing = 'true';
+        } else {
+          element.activity_details.ongoing = 'false';
         }
       });
-      console.log("after playlist order UPDATED", data.data);
+      console.log('after playlist order UPDATED', data.data);
     }, (error) => {
       console.log('there was an error sending the query', error);
     })
-    console.log("data retreived", data);
+    console.log('data retreived', data);
 
   }
 
@@ -86,7 +85,7 @@ export class NewHomeComponent implements OnInit {
         this.enrolledCourses.forEach(element => {
           if (element.course_duration) {
             if (Number(element.course_duration.slice(3, 5)) >= 30) {
-              element.course_duration = Number(element.course_duration.slice(0, 2)) + 1
+              element.course_duration = Number(element.course_duration.slice(0, 2)) + 1;
             } else {
               element.course_duration = Number(element.course_duration.slice(0, 2));
             }
@@ -158,12 +157,12 @@ export class NewHomeComponent implements OnInit {
   close() {
     this.show = false;
   }
-  launchActivity(value){    
-    if(value.activity_details.activitytype == "Assignment"){
+  launchActivity(value) {
+    if (value.activity_details.activitytype === 'Assignment'){
       this.router.navigate(['/Learner/courseDetail']);
       // this.router.navigateByUrl('/Learner/profile', { state: { type } });
-    }else{
-      window.open(value.activity_details.link)
+    } else {
+      window.open(value.activity_details.link);
     }
   }
 }
