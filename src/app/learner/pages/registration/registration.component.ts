@@ -35,7 +35,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.translate.use(localStorage.getItem('language'));
+    this.translate.use(localStorage.getItem('language') ? localStorage.getItem('language') : 'en');
     this.registerForm = this.formBuilder.group({
       fullname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50),
         Validators.pattern(/^[-a-zA-Z-() ]+(\s+[-a-zA-Z-()]+)*$/)]],

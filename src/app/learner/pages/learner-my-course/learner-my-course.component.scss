@@ -12,7 +12,11 @@
   justify-content: center;
   color: $lxp-theme-green;
 }
-
+.forgot1 {
+  color: $lxp-text ;
+  // cursor: pointer;
+  font-size: 13px;
+}
 .dot {
   font-size: 16px;
   font-weight: bolder;
@@ -598,7 +602,7 @@ hr {
   color: $label;
   font-weight: 500;
   background-color: $profile-t-grey;
-  text-align: right;
+  text-align: left;
   border-top: 2px solid $profile-p-grey;
 }
 

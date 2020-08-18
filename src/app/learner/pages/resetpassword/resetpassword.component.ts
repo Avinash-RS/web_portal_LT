@@ -58,6 +58,7 @@ export class ResetpasswordComponent implements OnInit {
         // const originalText = bytes.toString(CryptoJS.enc.Utf8);
         const decryptedString = atob(params.code);
         this.user = decryptedString;
+        console.log(this.user);
         this.get_user_detail_username(this.user);
       } else {
         this.user = localStorage.getItem('Username');
