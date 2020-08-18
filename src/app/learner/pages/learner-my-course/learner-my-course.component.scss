@@ -202,8 +202,7 @@
   margin-top: 1%;
   margin-bottom: 1%;
   box-shadow: none;
-  border-bottom: 1px solid #bebebead;
-
+  
 }
 
 .hrStyle {
@@ -529,6 +528,8 @@ hr {
   // text-align: left;
   /* justify-content: end; */
   position: relative;
+  left: 268px;
+    bottom: 5px;
   // margin-left: 25%;
 }
 
@@ -559,7 +560,7 @@ hr {
 .statBtn {
   border: 1px solid $lxp-theme-green;
   border-radius: 4px;
-  width: 110px;
+  width: 103px;
 }
 
 .statBtn1 {
@@ -572,12 +573,16 @@ hr {
 
 .timer {
   position: relative;
-  top: 5px;
+  top: 3px;
+  font-size : 15px;
+  left: 8px;
+  
 }
 
 .aligned-with-icon {
-  position: absolute;
-  margin-top: 5px;
+  position: relative;
+  left: 420px;
+  font-size:12px;
 }
 
 .noCourse {
@@ -823,6 +828,9 @@ mat-icon {
 .clr {
   background-color: $color-white;
   color: $lxp-button-text;
+  border: solid 1px black !important;
+  color: $lxp-text;
+
 }
 
 .clr:hover {
@@ -833,8 +841,9 @@ mat-icon {
   position: relative;
   bottom: 24px;
   left: 19px;
+}
 .mypanel{
-  width: 117px !important;
+  width: 110px !important;
 }
 .available-course-btn{
   border: 1px solid $lxp-gray;
@@ -849,4 +858,7 @@ mat-icon {
   position: relative !important;
   left: 100px !important;
 }
+.btn-icon{
+  position: relative;
+  top: 3px;
 }
