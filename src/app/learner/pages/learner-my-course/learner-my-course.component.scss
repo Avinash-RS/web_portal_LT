@@ -134,8 +134,25 @@
 
 .progess {
   width: 75px;
-  margin-left: 24%;
+  // margin-left: 24%;
   // position: absolute;
+
+}
+.finalScore{
+  font-size: 22px;
+    padding: 16px;
+    margin-top: 11px;
+
+}
+.padscore{
+  font-size: 32px;
+  color: $lxp-theme-green;
+}
+.point{
+  font-size: 32px;
+    padding: 23px;
+    margin-top: 5px;
+    color: $light-green;
 
 }
 
@@ -202,7 +219,7 @@
 
 .coursebg {
   background-color: $color_white;
-  // margin-bottom: 10px;\
+  margin-left: 1%;
   margin-top: 1%;
   margin-bottom: 1%;
   box-shadow: none;
@@ -484,6 +501,7 @@ hr {
 .blue_clr {
   background-color: $color-white;
   color: $lxp-button-text;
+
 }
 
 .blue_clr:hover {
@@ -526,14 +544,18 @@ hr {
 .width_35 {
   width: 35% !important;
 }
+.p-l-8{
+  padding-left: 8%;
+}
 
 .btl-alin {
   /* margin-top: -0.5%; */
   // text-align: left;
   /* justify-content: end; */
-  position: relative;
-  left: 268px;
-    bottom: 5px;
+  position: absolute;
+    margin-left: 18;
+  // left: 268px;
+    // bottom: 5px;
   // margin-left: 25%;
 }
 
@@ -585,8 +607,9 @@ hr {
 
 .aligned-with-icon {
   position: relative;
-  left: 420px;
+  // left: 420px;
   font-size:12px;
+  margin-top: 10%;
 }
 
 .noCourse {
@@ -832,8 +855,10 @@ mat-icon {
 .clr {
   background-color: $color-white;
   color: $lxp-button-text;
-  border: solid 1px black !important;
+  border: solid 1px $color-border !important;
   color: $lxp-text;
+  margin-left: 9.5%;
+  height: 30px;
 
 }
 
@@ -864,5 +889,5 @@ mat-icon {
 }
 .btn-icon{
   position: relative;
-  top: 3px;
+  top: 4px;
 }

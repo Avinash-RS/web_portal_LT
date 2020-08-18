@@ -47,104 +47,129 @@
                                 <!-- <div class="row width_100 no_margin"> -->
                                 <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
                                 <div class="row">
+<!-- // Card start -->
+<!-- <div class="col-8 ml-4"> -->
+    <!-- <div class="row"> -->
+   
 
-<div class="col-8 ml-4">
-    <div class="row">
-    <div class="col-2">
-        <div class="courseHover" (click)="gotoDesc(course)"  data-toggle="modal" data-target="#myModal">
-            <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
-            <div class="overlay">
-                <mat-icon class="text"> play_arrow </mat-icon>
+     <div class="col-7" style="border-right: 1.5px solid; border-right-style: dashed;">
+       <div class="row">
+        <div class="col-2">
+            <div class="courseHover" (click)="gotoDesc(course)"  data-toggle="modal" data-target="#myModal">
+                <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
+                <div class="overlay">
+                    <mat-icon class="text"> play_arrow </mat-icon>
+                </div>
             </div>
         </div>
-    </div>
-
-     <div class="col-6 ml-4 pt-3">
-        
-       <div class="row">
-            <div class="col">
-                <div class="no_pl f_size_18 f_wt_500 pointer" >
+            <div class="col-8" style="margin-top: 2%;">
+                <div class="p-l-8 f_size_18 f_wt_500 pointer" >
                    <span>
                     {{course.course_name}}
                    </span> 
-
-                    <span class="aligned-with-icon">  <mat-icon class="timer"> alarm_on </mat-icon> <span>
-                        {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
-                    </span> </span>
-                
                 </div> 
-                
-            </div>
-        </div> 
-     <div class="row">
-            <div class="col p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400  pointer" (click)="gotoDesc(course)">
-                <span>
-                    <p>
-                        {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
-                    </p>
-                   
-                </span>
-               
-            </div>
-        </div>
-        <div class="row">
-           <div class="col">
-                   <span>
-                    <button class="clr" (click)="goToAssignment(course)">
-                        <mat-icon class="btn-icon">description</mat-icon>
-                        ASSIGNMENTS({{course.assignmentCount}})                    </button>
-                   </span>
-               
-               <span>
-                <button class="clr ml-4" (click)="goToForum(course)">
-                    <mat-icon class="btn-icon">forum</mat-icon>
-                    DISCUSSION FORUM({{course.forumCount}})
-                </button>
-               </span>
-           
-               
-               <span class="">
+                <div class="row">
+                    <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400  pointer" (click)="gotoDesc(course)">
+                            <p style="margin-left: 41px;">
+                                {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
+                            </p>
+                    </div>
+                </div>
+                <div class="row">
+                   <div class="col-10">
+                            <button class="clr" (click)="goToAssignment(course)">
+                                <mat-icon class="btn-icon">description</mat-icon>
+                                <span>Assignments ({{course.assignmentCount}})</span>
+                            </button>
+                       
+                  
+                        <button class="clr ml-4" (click)="goToForum(course)">
+                            <mat-icon class="btn-icon">forum</mat-icon>
+                            <span>Discussion Forum ({{course.forumCount}})</span>
+                        </button>       
+                   </div>
+                   <div class="">
                     <button mat-stroked-button  data-toggle="modal" data-target="#myModal" *ngIf="course?.coursePlayerStatus?.status !== 'completed'" class=" btl-alin blue_clr cap pointer" (click)="gotoDesc(course)">
-                      <mat-icon class="icon-color">play_circle_outline</mat-icon>
+                        <mat-icon class="icon-color">play_circle_outline</mat-icon>
+                        <span class="cap f_wt_400">
+                          {{course?.coursePlayerStatus?.status === 'incomplete | translate ' ? 'Resume | translate ' : 
+                              course?.coursePlayerStatus?.status === 'suspend | translate ' ? 'Resume | translate ' : 'Start' | translate }}&nbsp;
+                        </span>
+                      </button>
+                      <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'" class="btl-alin blue_clr cap pointer" data-toggle="modal" data-target="#myModal" (click)="gotoDesc(course)">
+                      <mat-icon class="icon-color">replay</mat-icon>
                       <span class="cap f_wt_400">
-                        {{course?.coursePlayerStatus?.status === 'incomplete | translate ' ? 'Resume | translate ' : 
-                            course?.coursePlayerStatus?.status === 'suspend | translate ' ? 'Resume | translate ' : 'Start' | translate }}&nbsp;
+                        {{'Replay' | translate }}&nbsp;
                       </span>
                     </button>
-                    <button mat-stroked-button *ngIf="course?.coursePlayerStatus?.status === 'completed'" class="btl-alin blue_clr cap pointer" data-toggle="modal" data-target="#myModal" (click)="gotoDesc(course)">
-                    <mat-icon class="icon-color">replay</mat-icon>
-                    <span class="cap f_wt_400">
-                      {{'Replay' | translate }}&nbsp;
-                    </span>
-                  </button>
-               </span>           
-           </div>
-        </div>
-        
-            
-            
-            
-       
-        <div class="row">
-            <div class="col">
-                <span>
-                    <span>Upcoming...</span>
-                </span> 
-                
-                <span>
-                   
-                        9am live class room and icon
-                    
-                </span>
-            </div>
-    
-        </div>
-    </div> 
-</div>
-</div>
-<div class="col-4">
+                   </div>
+                </div>
 
-</div>
+                <div class="row">
+                    <div class="col-12">
+                            <span style="margin-left: 7.5%;">Upcoming...</span>
+                        <span>
+                            9am live class room and icon
+                        </span>
+                    </div>
+            
+                </div>
+            </div>
+
+            <div class="col-2">
+                <span class="aligned-with-icon">  
+                    <mat-icon class="timer"> alarm_on </mat-icon>
+                     <span>
+                    {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
+                </span> 
+            </span>
+            </div>
+        </div> 
+    </div> 
+        <div class="col-5">
+            <div class="row" style="margin-top: 2%;margin-left: 2px;">
+                <div class="col-3">
+                    <div>Activity</div>
+                </div>
+                <div class="col-3">
+                    <div>Learning effort</div>
+                </div>
+                <div class="col-3">
+                    <div>Points earned</div>
+                </div>
+                <div class="col-3">
+                    <div >Final score</div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 2%;margin-left: 2px;">
+                <div class="col-3">
+                    <div style="margin-top: 23%"><sapn class="padscore">4</sapn> <sapn class="f_size_22">/</sapn> <span class="f_size_20">20</span></div>
+                </div>
+                <div class="col-3">
+                    <div class="progess pointer">
+                        <circle-progress [percent]="course?.coursePlayerStatus?.course_percentage|| 0" [radius]="10" [outerStrokeWidth]="1" [innerStrokeWidth]="1" [space]="-1" [outerStrokeColor]="'#ffcc00'" [innerStrokeColor]="'#9d9d9d'" [titleFontSize]="5" [unitsFontSize]="5"
+                            [showSubtitle]="false" [animation]="true" [animationDuration]="300" [startFromZero]="false" [responsive]="true">
+                        </circle-progress>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="point">56</div>
+                </div>
+                <div class="col-3">
+                    <div class="finalScore">- - -</div>
+                </div>
+            </div>
+        </div>
+<!-- </div> -->
+<!-- </div> -->
+
+
+<!-- <div class="col-4">
+
+</div> -->
+
+<!-- card end -->
         </div>
         </mat-card>
                   </div>
