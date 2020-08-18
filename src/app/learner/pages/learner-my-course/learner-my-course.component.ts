@@ -41,6 +41,8 @@ export class LearnerMyCourseComponent implements OnInit {
   showCompleted: string;
   showOngoing: string;
   showUpcoming: string;
+  categoryDetails: any;
+  catalogueName: any;
 
 
 
@@ -51,6 +53,7 @@ export class LearnerMyCourseComponent implements OnInit {
     this.userDetailes = this.gs.checkLogout();
     this.getEnrolledCourses();
     this.getScreenSize();
+    this.getCountForCategories();
   }
   @HostListener('window:resize', ['$event'])
   // ngOnInit() {
@@ -80,11 +83,9 @@ export class LearnerMyCourseComponent implements OnInit {
 
     const currentDate = new Date();
     const formatDate = moment(currentDate).format();
-    console.log(formatDate, 'currentDate');
 
     const topicStart = new Date();
     const dateValue = moment(topicStart).format('YYYY-MM-DD');
-  //   console.log(dateValue);
     this.learnerService.getData(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
       this.results = data.data.get_read_learner_activity;
 
@@ -266,7 +267,13 @@ export class LearnerMyCourseComponent implements OnInit {
   }
   getCountForCategories() {
     this.learnerService.getCountForCategories().subscribe((data: any) => {
-
+      if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
+      this.catalogueName = data.data.getCountForCategories.data.catalogueName;
+      this.categoryDetails = data.data.getCountForCategories.data.categories;
+      this.categoryDetails.forEach(element => {
+        element.categoryCount = element.totalCount;
+      });
+    }
     });
   }
 }

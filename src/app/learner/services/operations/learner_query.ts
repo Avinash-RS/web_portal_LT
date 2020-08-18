@@ -1196,8 +1196,8 @@ export const get_organization_by_id = gql`
   }
 `;
 export const getCountForCategories = gql`
-  query getCountForCategories() {
-    getCountForCategories() {
+  query getCountForCategories {
+    getCountForCategories {
       message
       success
       data{
