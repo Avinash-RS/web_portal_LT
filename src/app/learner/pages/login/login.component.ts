@@ -34,8 +34,7 @@ export class LoginComponent implements OnInit {
     localStorage.removeItem('adminDetails');
     this.loginForm = this.formBuilder.group({
       // username: new FormControl('', myGlobals.req),
-      username: ['', [ Validators.minLength(6),
-        Validators.maxLength(64), Validators.pattern(/^([A-Za-z]|[0-9])[A-Za-z0-9._-]+[A-Za-z0-9]@((?:[-a-z0-9]+\.)+[a-z]{2,})$/)]],
+      username: ['',  myGlobals.req],
       password: new FormControl('', myGlobals.req),
       remember_me: new FormControl(false, []),
       language: new FormControl(false, [])
