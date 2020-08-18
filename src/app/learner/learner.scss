@@ -70,7 +70,10 @@ button, input, optgroup, select, textarea , h1 , span ,div , h2 ,h3,h4,h5{
   justify-content: space-between;
   min-width: 70px !important;
 }
-
+.forgot1 {
+  color: $lxp-text ;
+  font-size: 13px;
+}
 
 .form-control.is-invalid,
 .was-validated .form-control:invalid {
