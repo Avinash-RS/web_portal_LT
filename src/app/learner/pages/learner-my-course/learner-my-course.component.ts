@@ -320,10 +320,11 @@ export class LearnerMyCourseComponent implements OnInit {
       this.dialog.closeAll();
     }
     claimCourse(courseId) {
-      console.log('courseId', courseId);
       this.learnerService.claimcourse(this.userDetailes._id, this.userDetailes.user_id,
         courseId).subscribe((data: any) => {
-          console.log('data', data);
+          if (data.data.claimcourse.success === true) {
+          this.claimVal = true;
+          }
         });
     }
 }
