@@ -11,6 +11,7 @@
             <span (click)="showHeader()">
                 <mat-icon class="closebgt" *ngIf="!drawer.opened" (click)="drawer.toggle()">menu</mat-icon>
             </span>
+            {{drawer.opened}}
             <div class="prevBtn">
                 <button class=" pointer" mat-button [disabled]="isprevEnable" (click)="topicPrve()">{{'Prev' | translate }}</button>
                 <span class="">|</span>

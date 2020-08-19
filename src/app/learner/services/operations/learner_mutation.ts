@@ -849,8 +849,10 @@ mutation playerstatusrealtime($user_id: String, $contentID:String,$module:[modul
   }`;
 
 export const CreateNewThread = gql`
-mutation CreateNewThread($uid: Int!, $course_id : String!, $module_name:String!, $title:String!, $content:String!, $course_name : String!){
-  CreateNewThread(uid: $uid, course_id : $course_id, module_name:$module_name,title:$title,content:$content, course_name:$course_name) {
+mutation CreateNewThread($uid: Int!, $course_id: String!, $module_name:String!, $title:String!, $content:String!, $course_name: String!,
+$batch_id: String, $batch_name: String){
+  CreateNewThread(uid: $uid, course_id : $course_id, module_name:$module_name,title:$title,content:$content, course_name:$course_name,
+    batch_id: $batch_id, batch_name:$batch_name ) {
     success
     message
   }

@@ -39,7 +39,8 @@ import {
   getReadLeanerActivity,
   get_organization_by_id,
   getCountForCategories,
-  getCoureBasedOnCatalog
+  getCoureBasedOnCatalog,
+  singleBatchInfo
 } from './operations/learner_query';
 
 import {
@@ -85,7 +86,7 @@ export class LearnerServicesService {
   envCourseApi: any = environment.createCourseApi;
   envDomain: any = environment.domain;
 
-  constructor(private Apollo : Apollo, private http: HttpClient) {}
+  constructor(private Apollo: Apollo, private http: HttpClient) { }
 
   public getData(userid, date) {
     return this.Apollo.query({
@@ -695,26 +696,22 @@ export class LearnerServicesService {
     });
   }
 
-  ViewAllThreadData(modId, cid) {
+  ViewAllThreadData(modId, cid, bid) {
     return this.Apollo.query({
       query: ViewAllThreadData,
       variables: {
         module_name: modId,
-        course_id: cid
+        course_id: cid,
+        batch_id: bid
       }
     });
   }
 
-  createNewThread(uid, course_id, module_name, title, content, course_name) {
+  createNewThread(uid, course_id, module_name, title, content, course_name, bid, bname) {
     return this.Apollo.query({
       query: CreateNewThread,
       variables: {
-        uid,
-        course_id,
-        module_name,
-        title,
-        content,
-        course_name
+        uid, course_id, module_name, title, content, course_name, batch_name: bname, batch_id: bid
       }
     });
   }
@@ -734,6 +731,16 @@ export class LearnerServicesService {
       query: get_organization_by_id,
       variables: {
         organization_id
+      }
+    });
+  }
+
+  getSingleBatchInfo(uid, cid) {
+    return this.Apollo.query({
+      query: singleBatchInfo,
+      variables: {
+        user_id: uid,
+        course_id: cid
       }
     });
   }

@@ -1080,8 +1080,8 @@ export const ViewSingleTopicDiscussionData = gql`
 `;
 
 export const ViewAllThreadData = gql`
-  query ViewAllThreadData($module_name: String, $course_id: String) {
-    ViewAllThreadData(module_name: $module_name, course_id: $course_id) {
+  query ViewAllThreadData($module_name: String, $course_id: String, $batch_id: String) {
+    ViewAllThreadData(module_name: $module_name, course_id: $course_id, batch_id: $batch_id) {
       success
       message
       data {
@@ -1236,6 +1236,26 @@ export const getCoureBasedOnCatalog = gql`
         enrollment_start
         mobile_available
         short_description
+      }
+    }
+  }
+`;
+
+export const singleBatchInfo = gql`
+  query single_batch_info($user_id: String!, $course_id: String!) {
+    single_batch_info(user_id: $user_id, course_id: $course_id) {
+      success
+      error_msg
+      message {
+        _id
+        is_active
+        role_type
+        created_by
+        description
+        updated_on
+        created_on
+        updated_by
+        role_type_id
       }
     }
   }

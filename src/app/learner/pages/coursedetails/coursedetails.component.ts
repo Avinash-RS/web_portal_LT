@@ -180,6 +180,8 @@ export class CoursedetailsComponent implements OnInit {
       this.refreshData();
       this.autoHide();
       this.getPlayerNextPrve();
+      this.Lservice.getSingleBatchInfo(this.userDetail.user_id, detail && detail.id).subscribe((viewCourse: any) => {
+      });
       this.service.viewCurseByID(detail && detail.id || this.localStoCourseid, this.userDetail.user_id)
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
@@ -843,7 +845,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   viewAllThreads() {
-    this.Lservice.ViewAllThreadData(this.selectedModuleData?.title, this.course?.course_id).subscribe((result: any) => {
+    this.Lservice.ViewAllThreadData(this.selectedModuleData?.title, this.course?.course_id, '230984078162594').subscribe((result: any) => {
       const temp = result.data.ViewAllThreadData.data;
       if (result?.data?.ViewAllThreadData?.data !== '') {
         result?.data?.ViewAllThreadData?.data?.topics.sort((a, b) => new Date(b.lastposttimeISO || b.timestampISO).getTime() -
@@ -863,6 +865,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   createNewThread() {
+    const bid = { batch_id: null, batch_name: null };
     this.addThreadForm.value.thread_name = this.addThreadForm.value.thread_name.trim()
       || this.addThreadForm.value.thread_name?.trimLeft() || this.addThreadForm.value.thread_name?.trimEnd();
     const desc: any = {};
@@ -876,7 +879,8 @@ export class CoursedetailsComponent implements OnInit {
         this.closedialogbox();
         this.loadingForum = true;
         this.Lservice.createNewThread(this.userDetail.nodebb_response.uid, this.course.course_id, this.selectedModuleData?.title,
-          this.addThreadForm.value.thread_name, this.addThreadForm.value.thread_description, this.course.course_name)
+          this.addThreadForm.value.thread_name, this.addThreadForm.value.thread_description, this.course.course_name
+          bid.batch_id, bid.batch_name)
           .subscribe((result: any) => {
             this.loadingForum = true;
             this.addThreadForm?.reset();
