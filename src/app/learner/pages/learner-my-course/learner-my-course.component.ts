@@ -42,7 +42,7 @@ export class LearnerMyCourseComponent implements OnInit {
   showOngoing: string;
   showUpcoming: string;
   categoryDetails: any;
-  catalogueName: any;
+  catalogueDetails: any;
 
 
 
@@ -268,13 +268,13 @@ export class LearnerMyCourseComponent implements OnInit {
   getCountForCategories() {
     this.learnerService.getCountForCategories().subscribe((data: any) => {
       if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
-      this.catalogueName = data.data.getCountForCategories.data.catalogueName;
+      this.catalogueDetails = data.data.getCountForCategories.data;
       this.categoryDetails = data.data.getCountForCategories.data.categories;
-      this.categoryDetails.forEach(element => {
-        element.categoryCount = element.totalCount;
-      });
     }
     });
+  }
+  categorySelect(catalogueId, value) {
+    console.log('val', catalogueId, value);
   }
 }
 
