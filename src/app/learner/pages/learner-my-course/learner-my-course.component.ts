@@ -43,6 +43,8 @@ export class LearnerMyCourseComponent implements OnInit {
   showOngoing: string;
   showUpcoming: string;
   categoryDetails: any;
+  catalogueName: any;
+  activity: any;
   catalogueDetails: any;
   pagenumber = 0;
   allcourses: any;
@@ -90,8 +92,10 @@ export class LearnerMyCourseComponent implements OnInit {
     const dateValue = moment(topicStart).format('YYYY-MM-DD');
     this.learnerService.getData(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
       this.results = data.data.get_read_learner_activity;
+      console.log( this.results);
+      // this.activity = data.data.get_read_learner_activity.message[0];
 
-      this.results['message'].forEach((el: any) => {
+      this.results.message.forEach((el: any) => {
         // console.log(el.activity_details.startdate);
         this.currentStartTime = moment(el.activity_details.startdate).format('LT');
       //  console.log(this.currentStartTime)
@@ -118,7 +122,7 @@ export class LearnerMyCourseComponent implements OnInit {
 
       // tslint:disable-next-line:no-string-literal
       // debugger;
-      if (this.results['message'].length < 5) {
+      if (this.results.message.length < 5) {
         this.showViewButton = false;
         // console.log(this.showViewButton);
       } else {
