@@ -778,6 +778,7 @@ export const getLearnerenrolledCourses = gql`
         }
         courseEnrolled {
           course_id
+          course_type
           course_mode
           course_start_datetime
           course_end_datetime

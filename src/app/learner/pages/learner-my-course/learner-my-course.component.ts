@@ -93,7 +93,7 @@ export class LearnerMyCourseComponent implements OnInit {
     this.learnerService.getData(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
       this.results = data.data.get_read_learner_activity;
       console.log( this.results);
-      // this.activity = data.data.get_read_learner_activity.message[0];
+      this.activity = data.data.get_read_learner_activity.message[0];
 
       this.results.message.forEach((el: any) => {
         // console.log(el.activity_details.startdate);

@@ -586,12 +586,13 @@ margin-top: 2%;
   position: relative;
   top: 6px;
   font-size: 20px;
+  margin-left: 8px;
 }
 
 .upcoming {
   position: relative;
     bottom: 22px;
-    left: 53px;
+    left: 38px;
 }
 
 .btl-alin {
@@ -913,11 +914,7 @@ mat-icon {
   background-color: $lxp-dark-gray !important;
   color: $color-white !important;
 }
-.upcoming {
-  position: relative;
-    bottom: 22px;
-    left: 53px;
-}
+
 .mypanel{
   width: 110px !important;
 }
