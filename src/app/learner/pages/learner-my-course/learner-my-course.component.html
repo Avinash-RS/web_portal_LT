@@ -7,12 +7,12 @@
     <div class="col-2 mt-4">
         <span>
             <mat-button class="available-course-btn">
-                <mat-select class="mypanel" placeholder="{{catalogueDetails.catalogueName}}" name="availableCourses"
-                    [(ngModel)]="availableCourses" (selectionChange)="getCoureBasedOnCatalog(catalogueDetails.catalogueId,availableCourses,previewDialog)"
+                <mat-select class="mypanel" placeholder="{{catalogueDetails?.catalogueName}}" name="availableCourses"
+                    [(ngModel)]="availableCourses" (selectionChange)="getCoureBasedOnCatalog(catalogueDetails?.catalogueId,availableCourses,previewDialog)"
                     required>
-                    <mat-option *ngFor="let category of categoryDetails" [value]="category.categoryId">
-                        {{category.categoryName}}
-                        <span matBadge="{{category.totalCount}}" matBadgePosition="after"></span>
+                    <mat-option *ngFor="let category of categoryDetails" [value]="category?.categoryId">
+                        {{category?.categoryName}}
+                        <span matBadge="{{category?.totalCount}}" matBadgePosition="after"></span>
                     </mat-option>
                 </mat-select>
             </mat-button>
@@ -51,6 +51,7 @@
                                             <span>
                                                 {{course.course_name}}
                                             </span>
+                                            <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                         </div>
                                         <div class="row">
                                             <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400  pointer"
@@ -112,7 +113,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-5">
+                            <div class="col-5" *ngIf="course?.course_type != 'free_course'">
                                 <div class="row m-t-2 m-l-2p">
                                     <div class="col-3">
                                         <div>Activity</div>
@@ -165,16 +166,13 @@
                 <div *ngIf="incomplete?.length === 0">
                     <mat-card class="coursebg width_90">
                         <div class="row width_90 no_margin">
-                            <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12 display_flex pointer no_pl"
+                            <div class="col-2 display_flex pointer no_pl"
                                 (click)="gotoDesc(course)">
                                 <div class="lineer"></div>
                                 <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs">
                             </div>
-                            <div class="col-xl-10 col-lg-10 col-md-9 col-sm-12 col-12 no_pl"
-                                style="padding: 5px !important;margin : auto">
-
-                                <span
-                                    style="font-size: medium;">{{'You have no enrolled courses at the moment.' | translate }}</span>
+                            <div class="col-10  no_pl errorboxx">
+                                <span style="font-size: medium;">{{'You have no enrolled courses at the moment.' | translate }}</span>
                             </div>
                         </div>
                     </mat-card>
@@ -206,6 +204,7 @@
                                             <span>
                                                 {{course.course_name}}
                                             </span>
+                                            <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                         </div>
                                         <div class="row">
                                             <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400  pointer"
@@ -267,7 +266,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-5">
+                            <div class="col-5"  *ngIf="course?.course_type != 'free_course'">
                                 <div class="row m-t-2 m-l-2p">
                                     <div class="col-3">
                                         <div>Activity</div>
@@ -317,19 +316,16 @@
                 </div>
 
                 <div *ngIf="completed?.length === 0">
-
                     <mat-card class="coursebg width_90">
                         <div class="row width_90 no_margin">
-                            <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12 display_flex pointer no_pl"
+                            <div class="col-2 display_flex pointer no_pl"
                                 (click)="gotoDesc(course)">
                                 <div class="lineer"></div>
                                 <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs">
                             </div>
-                            <div class="col-xl-10 col-lg-10 col-md-9 col-sm-12 col-12 no_pl"
-                                style="padding: 5px !important;margin : auto">
-
+                            <div class="col-10 errorboxx">
                                 <span style="font-size: medium;">
-                                    {{'You have no enrolled courses at the moment.' | translate }}</span>
+                                    {{'You have no enrolled courses at the moment.' }}</span>
                             </div>
                         </div>
                     </mat-card>
@@ -337,7 +333,7 @@
             </mat-tab>
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span matBadge="{{enrolledCourses?.length}}" matBadgeOverlap="false">{{'All' | translate }}</span>
+                    <span matBadge="{{enrolledCourses?.length}}" matBadgeOverlap="false">{{'All' }}</span>
                 </ng-template>
                 <div *ngFor="let course of enrolledCourses ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
@@ -358,9 +354,10 @@
                                     </div>
                                     <div class="col-8 m-t-2">
                                         <div class="p-l-8 f_size_18 f_wt_500 pointer">
-                                            <span>
+                                            <span >
                                                 {{course.course_name}}
                                             </span>
+                                            <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                         </div>
                                         <div class="row">
                                             <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400  pointer"
@@ -389,8 +386,8 @@
                                                     class=" btl-alin blue_clr cap pointer" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">play_circle_outline</mat-icon>
                                                     <span class="cap f_wt_400">
-                                                        {{course?.coursePlayerStatus?.status === 'incomplete | translate ' ? 'Resume | translate ' : 
-                      course?.coursePlayerStatus?.status === 'suspend | translate ' ? 'Resume | translate ' : 'Start' | translate }}&nbsp;
+                                                        {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume  ' : 
+                      course?.coursePlayerStatus?.status === 'suspend ' ? 'Resume ' : 'Start' }}&nbsp;
                                                     </span>
                                                 </button>
                                                 <button mat-stroked-button
@@ -399,7 +396,7 @@
                                                     data-target="#myModal" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">replay</mat-icon>
                                                     <span class="cap f_wt_400">
-                                                        {{'Replay' | translate }}&nbsp;
+                                                        {{'Replay'  }}&nbsp;
                                                     </span>
                                                 </button>
                                             </div>
@@ -422,7 +419,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-5">
+                            <div class="col-5" *ngIf="course?.course_type != 'free_course'">
                                 <div class="row m-t-2 m-l-2p">
                                     <div class="col-3">
                                         <div>Activity</div>
@@ -476,16 +473,14 @@
                 <div *ngIf="enrolledCourses?.length === 0">
                     <mat-card class="coursebg width_90">
                         <div class="row width_90 no_margin">
-                            <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12 display_flex pointer no_pl"
+                            <div class="col-xl-2 display_flex pointer no_pl"
                                 (click)="gotoDesc(course)">
                                 <div class="lineer"></div>
                                 <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs">
                             </div>
-                            <div class="col-xl-10 col-lg-10 col-md-9 col-sm-12 col-12 no_pl"
-                                style="padding: 5px !important;margin : auto">
-
+                            <div class="col-xl-10  no_pl errorboxx">
                                 <span style="font-size: medium;">
-                                    {{'You have no enrolled courses at the moment.' | translate }}</span>
+                                    {{'You have no enrolled courses at the moment.' }}</span>
                             </div>
                         </div>
                     </mat-card>

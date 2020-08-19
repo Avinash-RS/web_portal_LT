@@ -306,10 +306,15 @@
 
 
 .courseImgs {
-  width: 100%;
-  height: 100%;
+  // width: 100%;
+  // height: 100%;
+  width: 90px;
   // padding: 21px;
   // margin: auto;
+}
+.errorboxx{
+  padding: 5px !important;
+  margin-top: 2.8%;
 }
 
 .m-l-1 {
@@ -389,13 +394,15 @@
 }
 
 .status {
-  background: $lxp-status-yellow;
-  padding: 2px 6px;
-  float: right;
+  background: $lxp-theme-green;
+  // padding: 2px 6px;
+  // float: right;
   border-radius: 4px;
+  width: 50px;
+  border: none;
   font-size: 13px;
   color: $color-white;
-  margin-top: 5px;
+  // margin-top: 5px;
 }
 
 .Completedstatus {
@@ -563,7 +570,7 @@ hr {
 }
 
 .m-t-30{
-  margin-top: 30px;
+  margin-top: 25px;
 }
 .m-t-2{
 margin-top: 2%;
