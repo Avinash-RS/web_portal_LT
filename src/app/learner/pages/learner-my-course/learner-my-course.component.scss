@@ -678,6 +678,8 @@ margin-top: 2%;
   bottom: 0;
   width: 100%;
   color: $label;
+  position: fixed;
+  z-index: 1;
   font-weight: 500;
   background-color: $profile-t-grey;
   text-align: right;
