@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-10">
-        <div class="f_size_22 myC-head animated animatedFadeInUp fadeInUp ">{{'My Courses' | translate }}</div>
+        <div class="f_size_22 myC-head animated animatedFadeInUp fadeInUp ">{{'My Courses' }}</div>
     </div>
     <div class="col-2 mt-4">
         <span>
@@ -10,18 +10,6 @@
                 <mat-select class="mypanel" placeholder="{{catalogueName}}" name="availableCourses"
                     [(ngModel)]="availableCourses" (selectionChange)="availableCoursesDropdown(availableCourses)"
                     required>
-                    <!-- <mat-option [value]="'ontime'">
-                    <span>
-                        College Connect
-                    </span>
-                    <span matBadge="20" matBadgePosition="after" matBadgeColor="warn"></span></mat-option>
-                <mat-option [value]="'late'"><span>Vocational</span>
-                    <span matBadge="10" matBadgePosition="after"></span></mat-option>
-                <mat-option [value]="'not-submitted'"><span>
-                    Pro Certification
-                </span>
-                <span matBadge="10" matBadgePosition="after"></span>
-            </mat-option> -->
                     <mat-option *ngFor="let category of categoryDetails" [value]="category.categoryId">
                         {{category.categoryName}}
                         <span matBadge="{{category.categoryCount}}" matBadgePosition="after"></span>
@@ -40,7 +28,7 @@
             class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span matBadge="{{incomplete?.length}}" matBadgeOverlap="false">{{'Ongoing' | translate }}</span>
+                    <span matBadge="{{incomplete?.length}}" matBadgeOverlap="false">{{'Ongoing' }}</span>
                 </ng-template>
 
  <!-- Card start -->
@@ -91,8 +79,8 @@
                                                     class=" btl-alin blue_clr cap pointer" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">play_circle_outline</mat-icon>
                                                     <span class="cap f_wt_400">
-                                                        {{course?.coursePlayerStatus?.status === 'incomplete | translate ' ? 'Resume | translate ' : 
-                                                          course?.coursePlayerStatus?.status === 'suspend | translate ' ? 'Resume | translate ' : 'Start' | translate }}&nbsp;
+                                                        {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume ' : 
+                                                          course?.coursePlayerStatus?.status === 'suspend  ' ? 'Resume  ' : 'Start'  }}&nbsp;
                                                     </span>
                                                 </button>
                                                 <button mat-stroked-button
@@ -101,16 +89,18 @@
                                                     data-target="#myModal" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">replay</mat-icon>
                                                     <span class="cap f_wt_400">
-                                                        {{'Replay' | translate }}&nbsp;
+                                                        {{'Replay' }}&nbsp;
                                                     </span>
                                                 </button>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-12" class="m-t-30">
-                                                <span class="upcoming">Upcoming... 9 am to 10 am | Live classroom
+                                            <div class="col-12" class="m-t-30" >
+                                                <span *ngFor="let result of results?.message">
+                                                <span class="upcoming" *ngIf="result.activity_details.activitytype == 'Live Classroom'" routerLink="/Learner/calendar" routerLinkActive="active">Upcoming... {{result.activity_details.startdate | date :'MMM d, y h:mm a'}}-{{result.activity_details.enddate | date :'MMM d, y h:mm a'}} | <a>Live classroom</a>
                                                     <mat-icon class="video">videocam</mat-icon></span>
+                                                </span>
                                             </div>
 
                                         </div>
