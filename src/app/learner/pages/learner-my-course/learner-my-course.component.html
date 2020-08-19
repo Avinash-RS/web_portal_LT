@@ -164,7 +164,7 @@
                 <!-- card end -->
 
 
-                <div *ngIf="incomplete?.length === 0" class="space5">
+                <div *ngIf="incomplete?.length === 0">
                     <mat-card class="coursebg width_90">
                         <div class="row width_90 no_margin">
                             <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12 display_flex pointer no_pl"
@@ -318,7 +318,7 @@
                     </mat-card>
                 </div>
 
-                <div *ngIf="completed?.length === 0" class="space5">
+                <div *ngIf="completed?.length === 0">
 
                     <mat-card class="coursebg width_90">
                         <div class="row width_90 no_margin">
@@ -475,7 +475,7 @@
 
 
 
-                <div *ngIf="enrolledCourses?.length === 0" class="space5">
+                <div *ngIf="enrolledCourses?.length === 0">
                     <mat-card class="coursebg width_90">
                         <div class="row width_90 no_margin">
                             <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12 display_flex pointer no_pl"
@@ -514,7 +514,40 @@
     </div>
 </div>
 
-
+<ng-template #previewDialog>
+    <div>
+        <!-- <div *ngFor="let category of categoryDetails">
+            <span>{{category.categoryName}} ({{category.totalCount}})</span>
+        </div> -->
+        <button mat-mini-fab class="close-button">
+          <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
+        </button>
+      </div>
+    <div class="row">
+        <div class="col-4" *ngFor="let course of allcourses">
+            <mat-card>
+                <div class="row">
+                    <a>
+                        <img alt="course image" src="{{course.course_img_url}}" class="courseImage">
+                        <div class="overlay">
+                            <p class="shortdesc">
+                                {{(course.course_description?.length>120)? (course.course_description | slice:0:120)+'...':(course.course_description) }}
+                            </p>
+                        </div>
+                    </a>
+                </div><br>
+                <div class="row">
+                    <span>{{course.course_name}}</span>
+                </div><br>
+                <div class="row">
+                    <div class="col" style="text-align: center;">
+                        <button mat-stroked-button class="blue_clr">Claim</button>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    </ng-template>
 
 
 

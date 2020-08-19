@@ -1,10 +1,11 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, TemplateRef } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Router } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import * as moment from 'moment';
 import {TranslateService} from '@ngx-translate/core';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-learner-my-course',
@@ -44,13 +45,15 @@ export class LearnerMyCourseComponent implements OnInit {
   categoryDetails: any;
   catalogueName: any;
   activity: any;
-
+  catalogueDetails: any;
+  pagenumber = 0;
+  allcourses: any;
 
 
   constructor(
     public translate: TranslateService,
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
-    private router: Router) {
+    private router: Router, private dialog: MatDialog) {
     this.userDetailes = this.gs.checkLogout();
     this.getEnrolledCourses();
     this.getScreenSize();
@@ -271,13 +274,29 @@ export class LearnerMyCourseComponent implements OnInit {
   getCountForCategories() {
     this.learnerService.getCountForCategories().subscribe((data: any) => {
       if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
-      this.catalogueName = data.data.getCountForCategories.data.catalogueName;
+      this.catalogueDetails = data.data.getCountForCategories.data;
       this.categoryDetails = data.data.getCountForCategories.data.categories;
-      this.categoryDetails.forEach(element => {
-        element.categoryCount = element.totalCount;
-      });
     }
     });
   }
+  getCoureBasedOnCatalog(catalogueId, value, templateRef) {
+    this.learnerService.getCoureBasedOnCatalog(catalogueId, this.pagenumber, value).subscribe((course: any) => {
+      if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data){
+      this.allcourses = course.data.getCoureBasedOnCatalog.data;
+      this.viewCourse(templateRef);
+      }
+    });
+  }
+    viewCourse(templateRef: TemplateRef<any>) {
+      this.dialog.open(templateRef, {
+        width: '70%',
+        height: '70%',
+        closeOnNavigation: true,
+        disableClose: true,
+      });
+    }
+    closedialogbox() {
+      this.dialog.closeAll();
+    }
 }
 

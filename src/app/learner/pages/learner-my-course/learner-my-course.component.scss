@@ -258,8 +258,8 @@
   margin: auto;
   margin-left: 0;
   border-radius: 10px;
-
 }
+
 
 .courseHover {
   position: relative;
@@ -939,3 +939,32 @@ mat-icon {
   position: relative;
   top: 4px;
 }
+.close-button {
+  background: $lxp-theme-green !important;
+  float: right;
+  top: -12px;
+  position: relative;
+  right: -9px;
+  height: 35px;
+  width: 35px;
+}
+.download-icon {
+  position: relative;
+}
+//Grid
+.courseImage{
+  height: 178px;
+   width: 100%;
+}
+.overlay {
+  opacity: 1;
+}
+
+.shortdesc{
+  padding: 15px;
+}
+/* dropdown badge alignment */
+// #mat-badge-content-6, #mat-badge-content-7 ,#mat-badge-content-8{
+//   float: right;
+//   position: initial;
+// }
