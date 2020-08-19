@@ -8,9 +8,9 @@
         <span>
             <mat-button class="available-course-btn">
                 <mat-select class="mypanel" placeholder="{{catalogueDetails.catalogueName}}" name="availableCourses"
-                    [(ngModel)]="availableCourses" (selectionChange)="getCoureBasedOnCatalog(catalogueDetails.catalogueId,availableCourses,previewDialog)"
+                    [(ngModel)]="availableCourses" (selectionChange)="getCoureBasedOnCatalog(catalogueDetails,availableCourses,previewDialog)"
                     required>
-                    <mat-option *ngFor="let category of categoryDetails" [value]="category.categoryId">
+                    <mat-option *ngFor="let category of categoryDetails" [value]="category">
                         {{category.categoryName}}
                         <span matBadge="{{category.totalCount}}" matBadgePosition="after"></span>
                     </mat-option>
@@ -516,15 +516,19 @@
 
 <ng-template #previewDialog>
     <div>
-        <!-- <div *ngFor="let category of categoryDetails">
-            <span>{{category.categoryName}} ({{category.totalCount}})</span>
-        </div> -->
+        <div>
+            <span class="f_wt_600 size">{{categoryPopupData.categoryName}} ({{categoryPopupData.totalCount}})</span>
+        </div>
         <button mat-mini-fab class="close-button">
           <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
         </button>
-      </div>
+      </div><br>
+      <div class="row">
+      <input matInput class="form-control search" placeholder="Search" [(ngModel)]="courseSearch">
+      <!-- <mat-icon>search</mat-icon> -->
+    </div>
     <div class="row">
-        <div class="col-4 mt-4" *ngFor="let course of allcourses">
+        <div class="col-4 mt-4" *ngFor="let course of allcourses | search : courseSearch">
             <mat-card class="box-shadow">
                 <div class="row">
                     <a>
@@ -541,7 +545,11 @@
                 </div><br>
                 <div class="row">
                     <div class="col" style="text-align: center;">
-                        <button mat-stroked-button class="blue_clr claimbtn">Claim</button>
+                        <button mat-stroked-button class="blue_clr claimbtn" *ngIf="course.clamaiedStatus == 'false'"
+                        (click)="claimCourse(course.course_id)">Claim</button>
+                        <button mat-stroked-button class="blue_clr claimbtn" [disabled]="course.clamaiedStatus == 'true'"
+                         *ngIf="course.clamaiedStatus == 'true'"
+                        >Claimed</button>
                     </div>
                 </div>
             </mat-card>

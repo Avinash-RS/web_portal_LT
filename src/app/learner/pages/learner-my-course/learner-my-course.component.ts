@@ -51,7 +51,10 @@ export class LearnerMyCourseComponent implements OnInit {
   collegeConnectCount = 0;
   vocationalCount = 0;
   proCertificationCount = 0;
-
+  categoryPopupData: any;
+  courseMapping: any;
+  claimVal = false;
+  courseSearch: any;
 
   constructor(
     public translate: TranslateService,
@@ -295,15 +298,17 @@ export class LearnerMyCourseComponent implements OnInit {
     }
     });
   }
-  getCoureBasedOnCatalog(catalogueId, value, templateRef) {
-    this.learnerService.getCoureBasedOnCatalog(catalogueId, this.pagenumber, value).subscribe((course: any) => {
+  getCoureBasedOnCatalog(catalogue, category, templateRef) {
+    this.learnerService.getCoureBasedOnCatalog(catalogue.catalogueId, this.pagenumber, category.categoryId,
+      this.userDetailes._id).subscribe((course: any) => {
       if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data){
       this.allcourses = course.data.getCoureBasedOnCatalog.data;
-      this.viewCourse(templateRef);
+      this.viewCourse(category, templateRef);
       }
     });
   }
-    viewCourse(templateRef: TemplateRef<any>) {
+    viewCourse(category, templateRef: TemplateRef<any>) {
+      this.categoryPopupData = category;
       this.dialog.open(templateRef, {
         width: '70%',
         height: '70%',
@@ -313,6 +318,13 @@ export class LearnerMyCourseComponent implements OnInit {
     }
     closedialogbox() {
       this.dialog.closeAll();
+    }
+    claimCourse(courseId) {
+      console.log('courseId', courseId);
+      this.learnerService.claimcourse(this.userDetailes._id, this.userDetailes.user_id,
+        courseId).subscribe((data: any) => {
+          console.log('data', data);
+        });
     }
 }
 

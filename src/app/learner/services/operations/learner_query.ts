@@ -1216,11 +1216,13 @@ export const getCountForCategories = gql`
   }
 `;
 export const getCoureBasedOnCatalog = gql`
-  query getCoureBasedOnCatalog($catalogue_id: String!, $pagenumber: Int, $category_id: String!) {
+  query getCoureBasedOnCatalog($catalogue_id: String!, $pagenumber: Int, $category_id: String!,
+    $userObjId: String!) {
     getCoureBasedOnCatalog(catalogue_id: $catalogue_id, pagenumber: $pagenumber,
-      category_id: $category_id) {
+      category_id: $category_id, userObjId: $userObjId) {
       data{
         course_id
+        clamaiedStatus
         course_description
         course_name
         version
