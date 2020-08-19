@@ -257,8 +257,8 @@
   margin: auto;
   margin-left: 0;
   border-radius: 10px;
-
 }
+
 
 .courseHover {
   position: relative;
@@ -550,17 +550,31 @@ hr {
 // .upcoming{
 //   margin-left: 7.5%;
 // }
+.card12{
+  background: transparent !important;
+  // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  // -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  // transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.card12:hover {
+  // box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.10), 0 10px 10px rgba(0, 0, 0, 0.10);
+}
+
 .m-t-30{
   margin-top: 30px;
 }
 .m-t-2{
 margin-top: 2%;
 }
+.m-t-8{
+  margin-top: 8px;
+}
 .m-l-2p{
   margin-left: 2px;
 }
 .m-t{
-  margin-top: 23%
+  margin-top: 20%
 }
 .l-b-2{
   border-right: 1.5px solid $color-border; 
@@ -653,6 +667,8 @@ margin-top: 2%;
   font-size: inherit;
   left: 0;
   bottom: 0;
+  position: fixed;
+  z-index: 1;
   width: 100%;
   color: $label;
   font-weight: 500;
@@ -910,6 +926,7 @@ mat-icon {
   border: 1px solid $lxp-gray;
   padding: 7px;
   border-radius: 4px;
+  margin-left: 50px;
 }
 .mat-badge{
   top:7px
@@ -946,4 +963,8 @@ mat-icon {
 
 .shortdesc{
   padding: 15px;
+/* dropdown badge alignment */
+#mat-badge-content-6, #mat-badge-content-7 ,#mat-badge-content-8{
+  float: right;
+  position: initial;
 }
