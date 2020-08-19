@@ -1212,3 +1212,27 @@ export const getCountForCategories = gql`
     }
   }
 `;
+export const getCoureBasedOnCatalog = gql`
+  query getCoureBasedOnCatalog($catalogue_id: String!, $pagenumber: Int, $category_id: String!) {
+    getCoureBasedOnCatalog(catalogue_id: $catalogue_id, pagenumber: $pagenumber,
+      category_id: $category_id) {
+      data{
+        course_id
+        course_description
+        course_name
+        version
+        course_start_datetime
+        location
+        course_end_datetime
+        advertised_start
+        course_img_url
+        social_sharing_url
+        certificate_display_behaviour
+        certificate_name
+        enrollment_start
+        mobile_available
+        short_description
+      }
+    }
+  }
+`;

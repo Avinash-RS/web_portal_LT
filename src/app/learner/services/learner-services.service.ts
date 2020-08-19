@@ -38,7 +38,8 @@ import {
   // get_read_learner_activity,
   getReadLeanerActivity,
   get_organization_by_id,
-  getCountForCategories
+  getCountForCategories,
+  getCoureBasedOnCatalog
 } from './operations/learner_query';
 
 import {
@@ -576,6 +577,16 @@ export class LearnerServicesService {
   getCountForCategories() {
     return this.Apollo.query({
       query: getCountForCategories
+    });
+  }
+  getCoureBasedOnCatalog(catalogue_id, pagenumber, category_id) {
+    return this.Apollo.query({
+      query: getCoureBasedOnCatalog,
+      variables: {
+        catalogue_id,
+        pagenumber,
+        category_id
+      }
     });
   }
 
