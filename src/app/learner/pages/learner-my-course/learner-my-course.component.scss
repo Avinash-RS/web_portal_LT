@@ -257,8 +257,8 @@
   margin: auto;
   margin-left: 0;
   border-radius: 10px;
-
 }
+
 
 .courseHover {
   position: relative;
@@ -939,4 +939,9 @@ mat-icon {
 .btn-icon{
   position: relative;
   top: 4px;
+}
+/* dropdown badge alignment */
+#mat-badge-content-6, #mat-badge-content-7 ,#mat-badge-content-8{
+  float: right;
+  position: initial;
 }
