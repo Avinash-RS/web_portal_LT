@@ -955,7 +955,8 @@ mat-icon {
 //Grid
 .courseImage{
   height: 178px;
-   width: 100%;
+  width: 100%;
+  margin-top: -15px;
 }
 .overlay {
   opacity: 1;
@@ -964,8 +965,21 @@ mat-icon {
 .shortdesc{
   padding: 15px;
 }
+.box-shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  max-height: 263px;
+}
+.courseName {
+  position: relative;
+  left: 10px;
+}
+.claimbtn {
+  position: relative;
+  bottom: 16px;
+}
 /* dropdown badge alignment */
 // #mat-badge-content-6, #mat-badge-content-7 ,#mat-badge-content-8{
 //   float: right;
 //   position: initial;
 // }
+

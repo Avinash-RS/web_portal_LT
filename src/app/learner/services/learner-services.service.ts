@@ -565,18 +565,23 @@ export class LearnerServicesService {
       }
     });
   }
-  get_enrolled_courses(user_id, id) {
+  get_enrolled_courses(user_id, id, catalogue_id, category_id) {
     return this.Apollo.query({
       query: getLearnerenrolledCourses,
       variables: {
         user_id,
-        user_obj_id: id
+        user_obj_id: id,
+        catalogue_id,
+        category_id
       }
     });
   }
-  getCountForCategories() {
+  getCountForCategories(userObjId) {
     return this.Apollo.query({
-      query: getCountForCategories
+      query: getCountForCategories,
+      variables: {
+        userObjId
+      }
     });
   }
   getCoureBasedOnCatalog(catalogue_id, pagenumber, category_id) {

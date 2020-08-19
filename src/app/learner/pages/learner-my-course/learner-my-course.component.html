@@ -534,8 +534,8 @@
         </button>
       </div>
     <div class="row">
-        <div class="col-4" *ngFor="let course of allcourses">
-            <mat-card>
+        <div class="col-4 mt-4" *ngFor="let course of allcourses">
+            <mat-card class="box-shadow">
                 <div class="row">
                     <a>
                         <img alt="course image" src="{{course.course_img_url}}" class="courseImage">
@@ -547,11 +547,11 @@
                     </a>
                 </div><br>
                 <div class="row">
-                    <span>{{course.course_name}}</span>
+                    <span class="courseName">{{course.course_name}}</span>
                 </div><br>
                 <div class="row">
                     <div class="col" style="text-align: center;">
-                        <button mat-stroked-button class="blue_clr">Claim</button>
+                        <button mat-stroked-button class="blue_clr claimbtn">Claim</button>
                     </div>
                 </div>
             </mat-card>

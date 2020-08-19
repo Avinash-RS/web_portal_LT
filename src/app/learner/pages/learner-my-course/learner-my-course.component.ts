@@ -139,7 +139,8 @@ export class LearnerMyCourseComponent implements OnInit {
   }
   getEnrolledCourses() {
     this.loading = true;
-    this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id).subscribe((enrolledList: any) => {
+    this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
+      '', '').subscribe((enrolledList: any) => {
       if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
         // enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.forEach(element => {
         //   this.learnerService.getModuleData(element.course_id, this.userDetailes.user_id).subscribe((data: any) => {
@@ -268,7 +269,7 @@ export class LearnerMyCourseComponent implements OnInit {
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
   }
   getCountForCategories() {
-    this.learnerService.getCountForCategories().subscribe((data: any) => {
+    this.learnerService.getCountForCategories(this.userDetailes._id).subscribe((data: any) => {
       if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
       this.catalogueDetails = data.data.getCountForCategories.data;
       this.categoryDetails = data.data.getCountForCategories.data.categories;
