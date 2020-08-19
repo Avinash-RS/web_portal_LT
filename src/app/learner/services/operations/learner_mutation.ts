@@ -855,3 +855,12 @@ mutation CreateNewThread($uid: Int!, $course_id : String!, $module_name:String!,
     message
   }
 }`;
+
+export const claimcourse = gql`
+  mutation claimcourse($id: String, $user_id: String, $course_id: [String]) {
+    claimcourse(id: $id, user_id: $user_id, course_id: $course_id) {
+      message
+      success
+    }
+  }
+`;

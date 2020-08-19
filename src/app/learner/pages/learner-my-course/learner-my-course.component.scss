@@ -946,7 +946,7 @@ mat-icon {
 .close-button {
   background: $lxp-theme-green !important;
   float: right;
-  top: -12px;
+  top: -30px;
   position: relative;
   right: -9px;
   height: 35px;
@@ -979,6 +979,14 @@ mat-icon {
 .claimbtn {
   position: relative;
   bottom: 16px;
+}
+.size {
+  font-size: large
+}
+.search {
+  width: 26%;
+  position: relative;
+  left: 78%;
 }
 /* dropdown badge alignment */
 // #mat-badge-content-6, #mat-badge-content-7 ,#mat-badge-content-8{
