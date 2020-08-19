@@ -7,12 +7,12 @@
     <div class="col-2 mt-4">
         <span>
             <mat-button class="available-course-btn">
-                <mat-select class="mypanel" placeholder="{{catalogueDetails.catalogueName}}" name="availableCourses"
-                    [(ngModel)]="availableCourses" (selectionChange)="getCoureBasedOnCatalog(catalogueDetails.catalogueId,availableCourses,previewDialog)"
+                <mat-select class="mypanel" placeholder="{{catalogueDetails?.catalogueName}}" name="availableCourses"
+                    [(ngModel)]="availableCourses" (selectionChange)="getCoureBasedOnCatalog(catalogueDetails?.catalogueId,availableCourses,previewDialog)"
                     required>
-                    <mat-option *ngFor="let category of categoryDetails" [value]="category.categoryId">
-                        {{category.categoryName}}
-                        <span matBadge="{{category.totalCount}}" matBadgePosition="after"></span>
+                    <mat-option *ngFor="let category of categoryDetails" [value]="category?.categoryId">
+                        {{category?.categoryName}}
+                        <span matBadge="{{category?.totalCount}}" matBadgePosition="after"></span>
                     </mat-option>
                 </mat-select>
             </mat-button>
@@ -51,6 +51,7 @@
                                             <span>
                                                 {{course.course_name}}
                                             </span>
+                                            <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                         </div>
                                         <div class="row">
                                             <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400  pointer"
@@ -112,7 +113,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-5">
+                            <div class="col-5" *ngIf="course?.course_type != 'free_course'">
                                 <div class="row m-t-2 m-l-2p">
                                     <div class="col-3">
                                         <div>Activity</div>
@@ -206,6 +207,7 @@
                                             <span>
                                                 {{course.course_name}}
                                             </span>
+                                            <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                         </div>
                                         <div class="row">
                                             <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400  pointer"
@@ -267,7 +269,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-5">
+                            <div class="col-5"  *ngIf="course?.course_type != 'free_course'">
                                 <div class="row m-t-2 m-l-2p">
                                     <div class="col-3">
                                         <div>Activity</div>
@@ -358,9 +360,10 @@
                                     </div>
                                     <div class="col-8 m-t-2">
                                         <div class="p-l-8 f_size_18 f_wt_500 pointer">
-                                            <span>
+                                            <span >
                                                 {{course.course_name}}
                                             </span>
+                                            <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                         </div>
                                         <div class="row">
                                             <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400  pointer"
@@ -422,7 +425,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-5">
+                            <div class="col-5" *ngIf="course?.course_type != 'free_course'">
                                 <div class="row m-t-2 m-l-2p">
                                     <div class="col-3">
                                         <div>Activity</div>
