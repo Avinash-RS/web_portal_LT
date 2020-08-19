@@ -677,6 +677,8 @@ margin-top: 2%;
   left: 0;
   bottom: 0;
   width: 100%;
+  position: fixed;
+  z-index: 1;
   color: $label;
   font-weight: 500;
   background-color: $profile-t-grey;
