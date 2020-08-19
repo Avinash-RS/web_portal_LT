@@ -547,13 +547,45 @@ hr {
 .p-l-8{
   padding-left: 8%;
 }
+// .upcoming{
+//   margin-left: 7.5%;
+// }
+.m-t-30{
+  margin-top: 30px;
+}
+.m-t-2{
+margin-top: 2%;
+}
+.m-l-2p{
+  margin-left: 2px;
+}
+.m-t{
+  margin-top: 23%
+}
+.l-b-2{
+  border-right: 1.5px solid $color-border; 
+  border-right-style: dashed;
+}
+.video{
+  color: $lxp-theme-green;
+  position: relative;
+  top: 6px;
+  font-size: 20px;
+}
+
+.upcoming {
+  position: relative;
+    bottom: 22px;
+    left: 53px;
+}
 
 .btl-alin {
   /* margin-top: -0.5%; */
   // text-align: left;
   /* justify-content: end; */
   position: absolute;
-    margin-left: 18;
+    margin-left: 18%;
+    z-index: 99;
   // left: 268px;
     // bottom: 5px;
   // margin-left: 25%;
@@ -868,8 +900,8 @@ mat-icon {
 }
 .upcoming {
   position: relative;
-  bottom: 24px;
-  left: 19px;
+    bottom: 22px;
+    left: 53px;
 }
 .mypanel{
   width: 110px !important;
