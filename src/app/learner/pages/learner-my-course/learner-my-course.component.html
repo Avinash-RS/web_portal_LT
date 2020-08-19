@@ -7,12 +7,12 @@
     <div class="col-2 mt-4">
         <span>
             <mat-button class="available-course-btn">
-                <mat-select class="mypanel" placeholder="{{catalogueName}}" name="availableCourses"
-                    [(ngModel)]="availableCourses" (selectionChange)="availableCoursesDropdown(availableCourses)"
+                <mat-select class="mypanel" placeholder="{{catalogueDetails.catalogueName}}" name="availableCourses"
+                    [(ngModel)]="availableCourses" (selectionChange)="getCoureBasedOnCatalog(catalogueDetails.catalogueId,availableCourses,previewDialog)"
                     required>
                     <mat-option *ngFor="let category of categoryDetails" [value]="category.categoryId">
                         {{category.categoryName}}
-                        <span matBadge="{{category.categoryCount}}" matBadgePosition="after"></span>
+                        <span matBadge="{{category.totalCount}}" matBadgePosition="after"></span>
                     </mat-option>
                 </mat-select>
             </mat-button>
@@ -495,18 +495,18 @@
             </mat-tab>
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span style="margin-left: 533px !important;" matBadge="10"
+                    <span style="margin-left: 533px !important;" matBadge="{{collegeConnectCount}}"
                         matBadgeOverlap="false">{{'College Connect' | translate }}</span>
                 </ng-template>
             </mat-tab>
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span matBadge="10" matBadgeOverlap="false">{{'Vocational' | translate }}</span>
+                    <span matBadge="{{vocationalCount}}" matBadgeOverlap="false">{{'Vocational' | translate }}</span>
                 </ng-template>
             </mat-tab>
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span matBadge="10" matBadgeOverlap="false">{{'Pro Certification' | translate }}</span>
+                    <span matBadge="{{proCertificationCount}}" matBadgeOverlap="false">{{'Pro Certification' | translate }}</span>
                 </ng-template>
             </mat-tab>
 

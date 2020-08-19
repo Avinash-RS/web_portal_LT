@@ -1209,6 +1209,7 @@ export const getCountForCategories = gql`
           categoryId
           categoryName
           totalCount
+          enrollCount
         }
       }
     }

@@ -48,6 +48,9 @@ export class LearnerMyCourseComponent implements OnInit {
   catalogueDetails: any;
   pagenumber = 0;
   allcourses: any;
+  collegeConnectCount = 0;
+  vocationalCount = 0;
+  proCertificationCount = 0;
 
 
   constructor(
@@ -272,11 +275,23 @@ export class LearnerMyCourseComponent implements OnInit {
     };
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
   }
+
   getCountForCategories() {
     this.learnerService.getCountForCategories(this.userDetailes._id).subscribe((data: any) => {
       if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
       this.catalogueDetails = data.data.getCountForCategories.data;
       this.categoryDetails = data.data.getCountForCategories.data.categories;
+      this.categoryDetails.forEach(element => {
+        if (element.categoryName === 'college connect') {
+          this.collegeConnectCount = element.enrollCount;
+        }
+        if (element.categoryName === 'vocational') {
+        this.vocationalCount = element.enrollCount;
+        }
+        if (element.categoryName === 'pro certification') {
+        this.proCertificationCount = element.enrollCount;
+        }
+      });
     }
     });
   }
