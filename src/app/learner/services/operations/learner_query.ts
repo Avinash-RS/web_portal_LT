@@ -759,8 +759,10 @@ export const getlearnerdashboarddetails = gql`
 `;
 
 export const getLearnerenrolledCourses = gql`
-  query getLearnerenrolledCourses($user_id: String, $user_obj_id: String) {
-    getLearnerenrolledCourses(user_id: $user_id, user_obj_id: $user_obj_id) {
+  query getLearnerenrolledCourses($user_id: String, $user_obj_id: String,
+    $catalogue_id: String, $category_id: String) {
+    getLearnerenrolledCourses(user_id: $user_id, user_obj_id: $user_obj_id,
+      catalogue_id: $catalogue_id, category_id: $category_id) {
       success
       message
       data {
@@ -1197,8 +1199,8 @@ export const get_organization_by_id = gql`
   }
 `;
 export const getCountForCategories = gql`
-  query getCountForCategories {
-    getCountForCategories {
+  query getCountForCategories($userObjId: String!) {
+    getCountForCategories(userObjId: $userObjId) {
       message
       success
       data{
@@ -1208,6 +1210,7 @@ export const getCountForCategories = gql`
           categoryId
           categoryName
           totalCount
+          enrollCount
         }
       }
     }
