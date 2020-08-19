@@ -680,9 +680,11 @@ margin-top: 2%;
   position: fixed;
   z-index: 1;
   color: $label;
+  position: fixed;
+  z-index: 1;
   font-weight: 500;
   background-color: $profile-t-grey;
-  text-align: left;
+  text-align: right;
   border-top: 2px solid $profile-p-grey;
 }
 
