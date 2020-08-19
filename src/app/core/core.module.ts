@@ -103,6 +103,7 @@ import { PdfreaderComponent } from './shared/pdfreader/pdfreader.component';
     ListViewCourseComponentComponent,
     CategoryComponentComponent,
     PdfreaderComponent,
-    GuidelineSearchComponent]
+    GuidelineSearchComponent,
+    SearchPipe]
 })
 export class CoreModule { }

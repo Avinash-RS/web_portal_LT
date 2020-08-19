@@ -69,7 +69,8 @@ import {
   createGuidanceRequest,
   InsertCourseFeedback,
   playerstatusrealtime,
-  CreateNewThread
+  CreateNewThread,
+  claimcourse
 } from './operations/learner_mutation';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -585,13 +586,14 @@ export class LearnerServicesService {
       }
     });
   }
-  getCoureBasedOnCatalog(catalogue_id, pagenumber, category_id) {
+  getCoureBasedOnCatalog(catalogue_id, pagenumber, category_id, userObjId) {
     return this.Apollo.query({
       query: getCoureBasedOnCatalog,
       variables: {
         catalogue_id,
         pagenumber,
-        category_id
+        category_id,
+        userObjId
       }
     });
   }
@@ -731,6 +733,16 @@ export class LearnerServicesService {
       query: get_organization_by_id,
       variables: {
         organization_id
+      }
+    });
+  }
+  claimcourse(id, user_id, course_id) {
+    return this.Apollo.query({
+      query: claimcourse,
+      variables: {
+        id,
+        user_id,
+        course_id
       }
     });
   }
