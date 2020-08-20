@@ -152,11 +152,13 @@
 .point{
   font-size: 32px;
     padding: 23px;
-    margin-top: 5px;
+    // margin-top: 25px;
     color: $light-green;
 
 }
-
+.f_size_13{
+  font-size: 13px;
+}
 .width-80 {
   max-width: 80%
 }
