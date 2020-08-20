@@ -331,7 +331,7 @@
                     </mat-card>
                 </div>
             </mat-tab>
-            <mat-tab>
+            <mat-tab >
                 <ng-template matTabLabel>
                     <span (click)="getEnrolledCourses('','')" matBadge="{{enrolledCourses?.length}}" matBadgeOverlap="false">{{'All' }}</span>
                 </ng-template>
@@ -489,8 +489,9 @@
             <!-----------------------------------Category tabs----------------------------->
             <ng-container *ngFor="let categorytab of categoryDetails">
             <mat-tab *ngIf="categorytab.enrollCount">
-                <ng-template matTabLabel>
-                    <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" style="margin-left: 533px !important;" matBadge="{{categorytab.enrollCount}}"
+                <ng-template matTabLabel >
+                    <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
+                      matBadge="{{categorytab.enrollCount}}"
                         matBadgeOverlap="false">{{categorytab.categoryName}}</span>
                 </ng-template>
 
