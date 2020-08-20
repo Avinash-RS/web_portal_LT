@@ -317,6 +317,7 @@ export class LearnerMyCourseComponent implements OnInit {
               if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
               this.allcourses = course.data.getCoureBasedOnCatalog.data;
               this.getCountForCategories();
+              this.getEnrolledCourses('', '');
               }
             });
           }
