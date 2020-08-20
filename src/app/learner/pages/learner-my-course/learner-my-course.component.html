@@ -11,7 +11,7 @@
               [(value)]="availableCourses" 
                     [(ngModel)]="availableCourses" (selectionChange)="getCoureBasedOnCatalog(catalogueDetails,availableCourses,previewDialog)"
                     required>
-                    <mat-select-trigger>{{availableCourses}}</mat-select-trigger>
+                    <mat-select-trigger>{{categoryData?.categoryName | titlecase}}</mat-select-trigger>
                     <mat-option *ngFor="let category of categoryDetails" [value]="category" class="availableCourseOption">
                     
                             {{category.categoryName | titlecase}}
@@ -707,7 +707,7 @@
 
     <div class="row">
         <div class="col-4">
-            <span class="f_wt_600 size">{{categoryPopupData.categoryName}} ({{categoryPopupData.totalCount}})</span>
+            <span class="f_wt_600 size">{{categoryPopupData.categoryName  | titlecase}} ({{categoryPopupData.totalCount}})</span>
         </div>
         <div class="col-6">
             <input matInput class="form-control search" placeholder="Search" [(ngModel)]="courseSearch">
