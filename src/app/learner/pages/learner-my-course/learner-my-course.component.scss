@@ -17,6 +17,7 @@
   // cursor: pointer;
   font-size: 13px;
 }
+
 .dot {
   font-size: 16px;
   font-weight: bolder;
@@ -184,6 +185,7 @@
   background-color: $lxp-theme-green !important;
   // left: 8px !important;
   // width: 90px !important;
+  
 }
 
 .m-b-2 {
@@ -932,14 +934,13 @@ mat-icon {
 }
 
 .mypanel{
-  width: 110px !important;
-  text-transform: capitalize;
+  width: 130px !important;
 }
 .available-course-btn{
   border: 1px solid $lxp-gray;
   padding: 7px;
   border-radius: 4px;
-  margin-left: 50px;
+  margin-left: 20px;
 }
 .mat-badge{
   top:7px
@@ -1003,4 +1004,15 @@ mat-icon {
 //   float: right;
 //   position: initial;
 // }
+.available-course-drpdwn{
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 5px; /* optional */
+}
 
+::ng-deep .cdk-overlay-container .cdk-overlay-pane .mat-select-panel{
+  min-width: 146px !important;
+  pointer-events: auto !important;
+  font-size: 14px !important;
+  transform: translateX(8px) translateY(-16px) !important;  
+}

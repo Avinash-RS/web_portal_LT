@@ -5,19 +5,21 @@
         <div class="f_size_22 myC-head animated animatedFadeInUp fadeInUp ">{{'My Courses' }}</div>
     </div>
     <div class="col-2 mt-4">
-        <span>
+      <span>
             <mat-button class="available-course-btn">
-                <mat-select class="mypanel" placeholder="{{catalogueDetails?.catalogueName | titlecase}}" name="availableCourses"
+              <mat-select panelClass="mat-select-panel" class="mypanel" placeholder="{{catalogueDetails?.catalogueName | titlecase}}" name="availableCourses"
+
                     [(ngModel)]="availableCourses" (selectionChange)="getCoureBasedOnCatalog(catalogueDetails,availableCourses,previewDialog)"
                     required>
-                    <mat-option *ngFor="let category of categoryDetails" [value]="category">
-                      <span class="cap">{{category.categoryName | titlecase}}</span>  
-                        <span matBadge="{{category.totalCount}}" matBadgePosition="after"></span>
+                    <mat-option *ngFor="let category of categoryDetails" [value]="category" class="testing">
+                      
+                        <div>{{category.categoryName | titlecase}}<span matBadge="{{category.totalCount}}"></span>
+                        </div>
                     </mat-option>
-                </mat-select>
-            </mat-button>
-        </span>
+                </mat-select> 
 
+            </mat-button>
+        </span> 
     </div>
 </div>
 
@@ -351,7 +353,7 @@
                     </mat-card>
                 </div>
             </mat-tab>
-            <mat-tab>
+            <mat-tab >
                 <ng-template matTabLabel>
                     <span (click)="getEnrolledCourses('','')" matBadge="{{enrolledCourses?.length}}" matBadgeOverlap="false">{{'All' }}</span>
                 </ng-template>
@@ -520,9 +522,10 @@
             <!-----------------------------------Category tabs----------------------------->
             <ng-container *ngFor="let categorytab of categoryDetails">
             <mat-tab *ngIf="categorytab.enrollCount">
-                <ng-template matTabLabel>
-                    <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" style="margin-left: 533px !important;" matBadge="{{categorytab.enrollCount}}"
-                        matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span>
+                <ng-template matTabLabel >
+                    <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
+                      matBadge="{{categorytab.enrollCount}}"
+                        matBadgeOverlap="false">{{categorytab.categoryName}}</span>
                 </ng-template>
 
                 <div *ngFor="let course of enrolledCourses ;let j=index">
@@ -687,6 +690,10 @@
             </mat-tab>
         </ng-container>
         </mat-tab-group>
+
+
+
+
     </div>
 </div>
 

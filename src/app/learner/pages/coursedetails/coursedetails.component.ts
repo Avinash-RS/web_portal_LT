@@ -11,7 +11,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 // import { setInterval, clearInterval} from 'timers';
 // import Swal from 'sweetalert2';
 import * as myGlobals from '@core/globals';
-import { MatDialog, MatSidenav } from '@angular/material';
+import { MatDialog, MatSidenav, MatTabGroup } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
@@ -153,9 +153,11 @@ export class CoursedetailsComponent implements OnInit {
   playerTopicLen: any;
   isNextEnable = false;
   isprevEnable = false;
-  selectedTabIndex = 0;
+  selectedTabIndex: any;
   detailData: any;
   batchDetails: any;
+
+  @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
   // initials: any;
   constructor(public translate: TranslateService, private router: ActivatedRoute,
               public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
@@ -292,10 +294,14 @@ export class CoursedetailsComponent implements OnInit {
             });
           });
         });
+        const tabGroup = this.demo3Tab;
+        if (!tabGroup || !(tabGroup instanceof MatTabGroup)) { return; }
+
+        const tabCount = tabGroup._tabs.length;
         if (this.detailData && this.detailData.assignmentVal) {
-          this.selectedTabIndex = 3;
+          this.selectedTabIndex = tabCount - 2;
         } else if (this.detailData && this.detailData.forumVal) {
-          this.selectedTabIndex = 4;
+          this.selectedTabIndex = tabCount - 1;
         }
       }
     });
@@ -420,10 +426,14 @@ export class CoursedetailsComponent implements OnInit {
     this.Lservice.playerModuleAndTopic(this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
       this.scromModuleData = this.scromApiData?.childData;
+      const tabGroup = this.demo3Tab;
+      if (!tabGroup || !(tabGroup instanceof MatTabGroup)) { return; }
+
+      const tabCount = tabGroup._tabs.length;
       if (this.detailData && this.detailData.assignmentVal) {
-        this.selectedTabIndex = 3;
+        this.selectedTabIndex = tabCount - 2;
       } else if (this.detailData && this.detailData.forumVal) {
-        this.selectedTabIndex = 4;
+        this.selectedTabIndex = tabCount - 1;
       }
     });
   }
