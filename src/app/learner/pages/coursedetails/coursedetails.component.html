@@ -9,6 +9,7 @@
 
         <div class="main contents">
             <span (click)="showHeader()">
+                <!-- <button mat-icon-button class="closebgt" (click)="isExpanded = !isExpanded"  (mouseenter)="mouseenter()" (mouseleave)="mouseleave()"><mat-icon>menu</mat-icon></button> -->
                 <mat-icon class="closebgt" *ngIf="!drawer.opened" (click)="drawer.toggle()">menu</mat-icon>
             </span>
             <div class="prevBtn">
@@ -22,9 +23,100 @@
 
                 <mat-tab-group [(selectedIndex)]="selectedTabIndex" #tabs animationDuration="1000ms">
                     <mat-tab label="{{course?.course_name | titlecase }}" >
-                        <mat-drawer-container [class.drawer-opened]="drawer.opened" class="course-details-container">
+
+                        <!-- <mat-sidenav-container class="example-container" autosize>
+                            <mat-sidenav #sidenav class="example-sidenav" mode="push" opened="true">
+                                <mat-nav-list class="course-details-container">
+                                        <mat-toolbar class="header" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
+                                            <div class="row">
+                                                <div class="col-6 Outine">
+                                                    {{'Course Outline' | translate }}
+                                                </div> |
+                                                <div class="col-6">
+                                                    <div class="row">
+                                                        <div class="col-2">
+                                                            <mat-icon class="alarmIcon">alarm</mat-icon>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <span
+                                                                class="courseTime">{{content?.coursetime ? content?.coursetime : '01:00:00'}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </mat-toolbar>
+                                        <div class="contents"  [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
+                            
+                                            <mat-accordion *ngFor="let res of scromModuleData; let i = index"
+                                                (click)="getSelectedIndex(i); getModuleDataForForum(scromModuleData.length, i + 1, res)">
+                                                <mat-expansion-panel class="panel" hideToggle="true" #example [expanded]="selectedIndex === i">
+                                                    <mat-expansion-panel-header>
+                                                        <mat-panel-title class="module-container">
+                                                            <div class="row">
+                                                                <div style="margin-top: 8px;">
+                                                                    <span class='index-number'>{{i+1}}.</span>
+                                                                </div>
+                                                                <div>
+                                                                    <div class="moduleHead" tooltip="{{res?.title}}" placement="right">
+                                                                        <div class="modhead">{{res?.title }}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                            
+                            
+                                                            <span class="moduleund">
+                                                                <mat-icon class="time-icon">alarm</mat-icon>
+                                                                <span class="course-time">
+                                                                    {{res?.moduletime ? res?.moduletime : '01:00:00' }}
+                                                                </span>
+                                                            </span>
+                            
+                                                        </mat-panel-title>
+                            
+                            
+                            
+                                                        <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons mar">done</mat-icon>
+                                                        <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
+                                                        </mat-icon>
+                                                        <mat-icon *ngIf="example.expanded" class="exp-icon">remove_circle_outline
+                                                        </mat-icon>
+                            
+                                                    </mat-expansion-panel-header>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <mat-vertical-stepper [linear]="isLeaner">
+                                                                <ng-container *ngFor="let mod of res?.children; let j = index">
+                                                                    <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
+                                                                    mod.status === 'Process' ? 'colYellow' : 'colWhite'">
+                                                                        <ng-template matStepLabel>
+                                                                            <span class="topicnm"
+                                                                                (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
+                                                                                {{mod?.title}}</span>
+                                                                        </ng-template>
+                                                                    </mat-step>
+                                                                </ng-container>
+                                                            </mat-vertical-stepper>
+                                                        </div>
+                                                    </div>
+                                                </mat-expansion-panel>
+                                            </mat-accordion>
+                                        </div>
+                                </mat-nav-list>
+                            <mat-nav-list>
+                        </mat-nav-list>
+                    </mat-sidenav>
                         
-                                <mat-drawer #drawer class="drawer" mode="side" opened="{{sider}}">
+                            <div class="example-sidenav-content">
+                                    <iframe id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
+                            </div>
+                        
+                        </mat-sidenav-container> -->
+
+
+
+                         <mat-drawer-container [class.drawer-opened]="drawer.opened" class="course-details-container example-container" autosize>
+                            <!-- {{sider}} -->
+                                <mat-drawer #drawer class="drawer" mode="side" opened="true">
                                     <mat-toolbar class="header">
                                         <div class="row">
                                             <div class="col-6 Outine">
@@ -101,13 +193,12 @@
                                         </mat-accordion>
                                     </div>
                                 </mat-drawer>
-                          
-                        
-                                <iframe id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
-                     
-                     
-                     
-                    </mat-drawer-container>
+                                <mat-drawer-content>
+                                <div class="example-sidenav-content">
+                                    <iframe id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
+                                  </div>
+                               </mat-drawer-content>
+                    </mat-drawer-container> 
                     </mat-tab>
 
 
@@ -1106,7 +1197,7 @@
 
     <div class="footer" >
         <span class="powered">
-            <img width="160px" alt="" src="assets/learner/LnT-Full-black-logo.svg">
+            <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
         </span>
     </div>
 </div>

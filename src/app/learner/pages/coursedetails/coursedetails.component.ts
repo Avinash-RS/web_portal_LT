@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
@@ -11,7 +11,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 // import { setInterval, clearInterval} from 'timers';
 // import Swal from 'sweetalert2';
 import * as myGlobals from '@core/globals';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSidenav } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
@@ -155,6 +155,24 @@ export class CoursedetailsComponent implements OnInit {
   isprevEnable = false;
   selectedTabIndex = 0;
   // initials: any;
+  @ViewChild('sidenav') sidenav: MatSidenav;
+  isExpanded = true;
+  showSubmenu  = false;
+  isShowing = false;
+  showSubSubMenu = false;
+
+  mouseenter() {
+    if (!this.isExpanded) {
+      this.isShowing = true;
+    }
+  }
+
+  mouseleave() {
+    if (!this.isExpanded) {
+      this.isShowing = false;
+    }
+  }
+
 
   constructor(public translate: TranslateService, private router: ActivatedRoute,
               public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
