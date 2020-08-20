@@ -59,6 +59,7 @@ export class LearnerMyCourseComponent implements OnInit {
   collegeConnectId: any;
   vocationalId: any;
   proCertificationId: any;
+  categoryData: any;
 
   constructor(
     public translate: TranslateService,
@@ -313,6 +314,7 @@ export class LearnerMyCourseComponent implements OnInit {
     });
   }
   getCoureBasedOnCatalog(catalogue, category, templateRef) {
+    this.categoryData = category;
     this.learnerService.getCoureBasedOnCatalog(catalogue.catalogueId, this.pagenumber, category.categoryId,
       this.userDetailes._id).subscribe((course: any) => {
       if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
@@ -336,8 +338,13 @@ export class LearnerMyCourseComponent implements OnInit {
     claimCourse(courseId) {
       this.learnerService.claimcourse(this.userDetailes._id, this.userDetailes.user_id,
         courseId).subscribe((data: any) => {
-          if (data.data.claimcourse.success === true) {
-          this.claimVal = true;
+          if (data && data.data && data.data.claimcourse && data.data.claimcourse.success) {
+            this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, this.pagenumber, this.categoryData.categoryId,
+              this.userDetailes._id).subscribe((course: any) => {
+              if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
+              this.allcourses = course.data.getCoureBasedOnCatalog.data;
+              }
+            });
           }
         });
     }

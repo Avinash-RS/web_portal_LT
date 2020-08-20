@@ -165,11 +165,6 @@ export class CoursedetailsComponent implements OnInit {
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     if (this.gs.checkLogout()) {
-      if (detail && detail.assignmentVal) {
-        this.selectedTabIndex = 3;
-      } else if (detail && detail.forumVal) {
-        this.selectedTabIndex = 4;
-      }
       this.courseid = detail && detail.id || this.localStoCourseid;
       this.userDetail = this.gs.checkLogout();
       this.localStoCourseid = localStorage.getItem('Courseid');
@@ -237,6 +232,11 @@ export class CoursedetailsComponent implements OnInit {
           this.getuserid._id + '&path=' + this.content.url);
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
+      if (detail && detail.assignmentVal) {
+        this.selectedTabIndex = 3;
+      } else if (detail && detail.forumVal) {
+        this.selectedTabIndex = 4;
+      }
     });
     this.getAssignmentmoduleData();
   }

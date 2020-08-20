@@ -984,10 +984,10 @@
                 </div><br>
                 <div class="row">
                     <div class="col" style="text-align: center;">
-                        <button mat-stroked-button class="blue_clr claimbtn" *ngIf="course.clamaiedStatus == 'false' && claimVal == false"
+                        <button mat-stroked-button class="blue_clr claimbtn" *ngIf="course.clamaiedStatus == 'false'"
                         (click)="claimCourse(course.course_id)">Claim</button>
                         <button mat-stroked-button class="blue_clr claimbtn" [disabled]="course.clamaiedStatus == 'true'"
-                         *ngIf="course.clamaiedStatus == 'true' || claimVal == true"
+                         *ngIf="course.clamaiedStatus == 'true'"
                         >Claimed</button>
                     </div>
                 </div>
