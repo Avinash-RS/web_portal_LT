@@ -11,7 +11,7 @@
                     [(ngModel)]="availableCourses" (selectionChange)="getCoureBasedOnCatalog(catalogueDetails,availableCourses,previewDialog)"
                     required>
                     <mat-option *ngFor="let category of categoryDetails" [value]="category">
-                        {{category.categoryName}}
+                      <span class="cap">{{category.categoryName}}</span>  
                         <span matBadge="{{category.totalCount}}" matBadgePosition="after"></span>
                     </mat-option>
                 </mat-select>
@@ -490,7 +490,7 @@
             <ng-container *ngFor="let categorytab of categoryDetails">
             <mat-tab *ngIf="categorytab.enrollCount">
                 <ng-template matTabLabel>
-                    <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" style="margin-left: 533px !important;" matBadge="{{categorytab.enrollCount}}"
+                    <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" style="margin-left: 533px !important;text-transform: capitalize;" matBadge="{{categorytab.enrollCount}}"
                         matBadgeOverlap="false">{{categorytab.categoryName}}</span>
                 </ng-template>
 

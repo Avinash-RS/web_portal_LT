@@ -157,25 +157,6 @@ export class CoursedetailsComponent implements OnInit {
   detailData: any;
   batchDetails: any;
   // initials: any;
-  @ViewChild('sidenav') sidenav: MatSidenav;
-  isExpanded = true;
-  showSubmenu  = false;
-  isShowing = false;
-  showSubSubMenu = false;
-
-  mouseenter() {
-    if (!this.isExpanded) {
-      this.isShowing = true;
-    }
-  }
-
-  mouseleave() {
-    if (!this.isExpanded) {
-      this.isShowing = false;
-    }
-  }
-
-
   constructor(public translate: TranslateService, private router: ActivatedRoute,
               public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
               public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,

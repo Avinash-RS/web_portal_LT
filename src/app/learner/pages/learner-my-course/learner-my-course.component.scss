@@ -564,6 +564,9 @@ hr {
 .card12:hover {
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2)
 }
+.cap{
+  text-transform: capitalize;
+}
 
 .m-t-30{
   margin-top: 25px;
@@ -924,6 +927,7 @@ mat-icon {
 
 .mypanel{
   width: 110px !important;
+  text-transform: capitalize;
 }
 .available-course-btn{
   border: 1px solid $lxp-gray;
