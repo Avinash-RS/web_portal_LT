@@ -40,7 +40,9 @@ import {
   get_organization_by_id,
   getCountForCategories,
   getCoureBasedOnCatalog,
-  getcalenderactivity
+  getcalenderactivity,
+  singleBatchInfo,
+  ViewAllThreadDataBid
 } from './operations/learner_query';
 
 import {
@@ -70,6 +72,7 @@ import {
   InsertCourseFeedback,
   playerstatusrealtime,
   CreateNewThread,
+  CreateNewThreadBid,
   claimcourse
 } from './operations/learner_mutation';
 
@@ -87,7 +90,7 @@ export class LearnerServicesService {
   envCourseApi: any = environment.createCourseApi;
   envDomain: any = environment.domain;
 
-  constructor(private Apollo : Apollo, private http: HttpClient) {}
+  constructor(private Apollo: Apollo, private http: HttpClient) { }
 
   public getData(userid, date) {
     return this.Apollo.query({
@@ -698,28 +701,43 @@ export class LearnerServicesService {
     });
   }
 
-  ViewAllThreadData(modId, cid) {
-    return this.Apollo.query({
-      query: ViewAllThreadData,
-      variables: {
-        module_name: modId,
-        course_id: cid
-      }
-    });
+  ViewAllThreadData(modId, cid, bid?) {
+    if (bid) {
+      return this.Apollo.query({
+        query: ViewAllThreadDataBid,
+        variables: {
+          module_name: modId,
+          course_id: cid,
+          batch_id: bid
+        }
+      });
+    } else {
+      return this.Apollo.query({
+        query: ViewAllThreadData,
+        variables: {
+          module_name: modId,
+          course_id: cid,
+        }
+      });
+    }
   }
 
-  createNewThread(uid, course_id, module_name, title, content, course_name) {
-    return this.Apollo.query({
-      query: CreateNewThread,
-      variables: {
-        uid,
-        course_id,
-        module_name,
-        title,
-        content,
-        course_name
-      }
-    });
+  createNewThread(uid, course_id, module_name, title, content, course_name, batch?) {
+    if (batch) {
+      return this.Apollo.query({
+        query: CreateNewThreadBid,
+        variables: {
+          uid, course_id, module_name, title, content, course_name, batch_name: batch.batch_name, batch_id: batch.batch_id
+        }
+      });
+    } else {
+      return this.Apollo.query({
+        query: CreateNewThread,
+        variables: {
+          uid, course_id, module_name, title, content, course_name
+        }
+      });
+    }
   }
 
   getReadLeanerActivity(userid, date) {
@@ -757,6 +775,16 @@ export class LearnerServicesService {
         id,
         user_id,
         course_id
+      }
+    });
+  }
+
+  getSingleBatchInfo(uid, cid) {
+    return this.Apollo.query({
+      query: singleBatchInfo,
+      variables: {
+        user_id: uid,
+        course_id: cid
       }
     });
   }

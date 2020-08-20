@@ -759,10 +759,18 @@ export const getlearnerdashboarddetails = gql`
 `;
 
 export const getLearnerenrolledCourses = gql`
-  query getLearnerenrolledCourses($user_id: String, $user_obj_id: String,
-    $catalogue_id: String, $category_id: String) {
-    getLearnerenrolledCourses(user_id: $user_id, user_obj_id: $user_obj_id,
-      catalogue_id: $catalogue_id, category_id: $category_id) {
+  query getLearnerenrolledCourses(
+    $user_id: String
+    $user_obj_id: String
+    $catalogue_id: String
+    $category_id: String
+  ) {
+    getLearnerenrolledCourses(
+      user_id: $user_id
+      user_obj_id: $user_obj_id
+      catalogue_id: $catalogue_id
+      category_id: $category_id
+    ) {
       success
       message
       data {
@@ -947,44 +955,45 @@ export const getAssignmentmoduleData = gql`
 `;
 
 export const get_read_learner_activity = gql`
-query get_read_learner_activity($userid: String!, $date: String!){
-  get_read_learner_activity(userid:$userid,date:$date) {
-        success
-        error_msg
-        message{
+  query get_read_learner_activity($userid: String!, $date: String!) {
+    get_read_learner_activity(userid: $userid, date: $date) {
+      success
+      error_msg
+      message {
+        _id
+        status
+        activity_details {
+          topicname
+          status
+          courseid
+          coursename
+          modulename
+          startdate
+          enddate
+          activitytype
+          activityname
+          resourcefile {
+            assignment
+            checked
+            doc_type
+            filename
+            path
+            size
+            type_name
             _id
-            status
-            activity_details{
-                    topicname
-                    status
-                    courseid
-                    coursename
-                    modulename
-                    startdate
-                    enddate
-                    activitytype
-                    activityname
-                    resourcefile{
-                      assignment
-                      checked
-                      doc_type
-                      filename
-                      path
-                      size
-                      type_name
-                      _id
-              }
+          }
 
-                    score
-                    link
-                    created_on
-                    createdby_name
-                    createdby_role
-                    createdby_id
-            }
+          score
+          link
+          created_on
+          createdby_name
+          createdby_role
+          createdby_id
         }
       }
-    }`;
+    }
+  }
+`;
 
 export const playerModuleAndTopic = gql`
   query playerModuleAndTopic($contentID: String, $user_id: String) {
@@ -1078,10 +1087,66 @@ export const ViewSingleTopicDiscussionData = gql`
     }
   }
 `;
-
+export const ViewAllThreadDataBid = gql`
+  query ViewAllThreadData($module_name: String, $course_id: String, $batch_id: String) {
+    ViewAllThreadData(module_name: $module_name, course_id: $course_id, batch_id: $batch_id) {
+      success
+      message
+      data {
+        cid
+        description
+        name
+        numRecentReplies
+        order
+        parentCid
+        post_count
+        slug
+        topic_count
+        totalPostCount
+        totalTopicCount
+        title
+        topics {
+          cid
+          thread_status
+          deleted
+          postcount
+          slug
+          tid
+          title
+          uid
+          viewcount
+          titleRaw
+          timestampISO
+          lastposttimeISO
+          category {
+            name
+            cid
+          }
+          user {
+            fullname
+            picture
+            postcount
+            status
+            uid
+            username
+            userslug
+          }
+        }
+      }
+    }
+  }
+`;
 export const ViewAllThreadData = gql`
-  query ViewAllThreadData($module_name: String, $course_id: String) {
-    ViewAllThreadData(module_name: $module_name, course_id: $course_id) {
+  query ViewAllThreadData(
+    $module_name: String
+    $course_id: String
+    $batch_id: String
+  ) {
+    ViewAllThreadData(
+      module_name: $module_name
+      course_id: $course_id
+      batch_id: $batch_id
+    ) {
       success
       message
       data {
@@ -1146,7 +1211,7 @@ export const getReadLeanerActivity = gql`
           enddate
           activitytype
           activityname
-          resourcefile{
+          resourcefile {
             assignment
             checked
             doc_type
@@ -1155,7 +1220,7 @@ export const getReadLeanerActivity = gql`
             size
             type_name
             _id
-    }
+          }
 
           score
           link
@@ -1169,31 +1234,30 @@ export const getReadLeanerActivity = gql`
   }
 `;
 
-
 export const get_organization_by_id = gql`
   query get_organization_by_id($organization_id: String!) {
     get_organization_by_id(organization_id: $organization_id) {
       success
       error_msg
-      message{
-          _id
-          is_active
-          organization_name
-          organization_logo
-          organization_id
-          created_by
-          created_on
-          updated_on
-          updated_by
-          learner_login_image
-          role_details{
-              role_id
-              role_name
-          }
-          admin_details{
-              admin_email
-              admin_username
-      }
+      message {
+        _id
+        is_active
+        organization_name
+        organization_logo
+        organization_id
+        created_by
+        created_on
+        updated_on
+        updated_by
+        learner_login_image
+        role_details {
+          role_id
+          role_name
+        }
+        admin_details {
+          admin_email
+          admin_username
+        }
       }
     }
   }
@@ -1203,10 +1267,10 @@ export const getCountForCategories = gql`
     getCountForCategories(userObjId: $userObjId) {
       message
       success
-      data{
+      data {
         catalogueId
         catalogueName
-        categories{
+        categories {
           categoryId
           categoryName
           totalCount
@@ -1253,6 +1317,23 @@ export const getcalenderactivity = gql`
         start
         end
         title
+      }
+    }
+  }
+`;
+export const singleBatchInfo = gql`
+  query getbatchdetails($user_id: String!, $course_id: String!) {
+    getbatchdetails(user_id: $user_id, course_id: $course_id) {
+      success
+      message {
+        _id
+        batchname
+        batchdescription
+        batchstartdate
+        batchenddate
+        isTeams
+        created_on
+        batchid
       }
     }
   }
