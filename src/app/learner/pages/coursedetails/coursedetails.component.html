@@ -48,7 +48,6 @@
                             <mat-icon class="close" (click)="drawer.close()">menu</mat-icon>
                         </mat-toolbar>
                         <div class="contents">
-
                             <mat-accordion *ngFor="let res of scromModuleData; let i = index"
                                 (click)="getSelectedIndex(i); getModuleDataForForum(scromModuleData.length, i + 1, res)">
                                 <mat-expansion-panel class="panel" hideToggle="true" #example
@@ -66,7 +65,6 @@
                                                 </div>
                                             </div>
 
-
                                             <span class="moduleund">
                                                 <mat-icon class="time-icon">alarm</mat-icon>
                                                 <span class="course-time">
@@ -75,9 +73,6 @@
                                             </span>
 
                                         </mat-panel-title>
-
-
-
                                         <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons mar">done
                                         </mat-icon>
                                         <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
@@ -106,17 +101,13 @@
                             </mat-accordion>
                         </div>
                     </mat-drawer>
-
-
-                    <iframe id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
-
-
-
+                    <mat-drawer-content>
+                        <div class="example-sidenav-content">
+                            <iframe id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
+                          </div>
+                       </mat-drawer-content>
                 </mat-drawer-container>
             </mat-tab>
-
-
-
 
             <mat-tab label="About the course">
                 <h3 class="head-h1">Course description</h3>
@@ -1159,7 +1150,7 @@
 
     <div class="footer">
         <span class="powered">
-            <img width="160px" alt="" src="assets/learner/LnT-Full-black-logo.svg">
+            <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
         </span>
     </div>
 </div>
