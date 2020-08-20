@@ -48,20 +48,17 @@ export class LearnerMyCourseComponent implements OnInit {
   catalogueDetails: any;
   pagenumber = 0;
   allcourses: any;
-  collegeConnectCount = 0;
-  vocationalCount = 0;
-  proCertificationCount = 0;
   categoryPopupData: any;
   courseMapping: any;
-  claimVal = false;
   courseSearch: any;
+  categoryData: any;
 
   constructor(
     public translate: TranslateService,
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
     private router: Router, private dialog: MatDialog) {
     this.userDetailes = this.gs.checkLogout();
-    this.getEnrolledCourses();
+    this.getEnrolledCourses('', '');
     this.getScreenSize();
     this.getCountForCategories();
   }
@@ -98,7 +95,7 @@ export class LearnerMyCourseComponent implements OnInit {
     const dateValue = moment(topicStart).format('YYYY-MM-DD');
     this.learnerService.getData(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
       this.results = data.data.get_read_learner_activity;
-      console.log( this.results);
+      // console.log( this.results);
       this.activity = data.data.get_read_learner_activity.message[0];
 
       this.results.message.forEach((el: any) => {
@@ -147,9 +144,12 @@ export class LearnerMyCourseComponent implements OnInit {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
   }
-  getEnrolledCourses() {
+
+
+  getEnrolledCourses(catalougeId, catagoryId) {
     this.loading = true;
-    this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id, '', '').subscribe((enrolledList: any) => {
+    this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
+      catalougeId, catagoryId).subscribe((enrolledList: any) => {
       if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
         // enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.forEach(element => {
         //   this.learnerService.getModuleData(element.course_id, this.userDetailes.user_id).subscribe((data: any) => {
@@ -283,24 +283,14 @@ export class LearnerMyCourseComponent implements OnInit {
       if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
       this.catalogueDetails = data.data.getCountForCategories.data;
       this.categoryDetails = data.data.getCountForCategories.data.categories;
-      this.categoryDetails.forEach(element => {
-        if (element.categoryName === 'college connect') {
-          this.collegeConnectCount = element.enrollCount;
-        }
-        if (element.categoryName === 'vocational') {
-        this.vocationalCount = element.enrollCount;
-        }
-        if (element.categoryName === 'pro certification') {
-        this.proCertificationCount = element.enrollCount;
-        }
-      });
     }
     });
   }
   getCoureBasedOnCatalog(catalogue, category, templateRef) {
+    this.categoryData = category;
     this.learnerService.getCoureBasedOnCatalog(catalogue.catalogueId, this.pagenumber, category.categoryId,
       this.userDetailes._id).subscribe((course: any) => {
-      if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data){
+      if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
       this.allcourses = course.data.getCoureBasedOnCatalog.data;
       this.viewCourse(category, templateRef);
       }
@@ -319,10 +309,18 @@ export class LearnerMyCourseComponent implements OnInit {
       this.dialog.closeAll();
     }
     claimCourse(courseId) {
-      console.log('courseId', courseId);
       this.learnerService.claimcourse(this.userDetailes._id, this.userDetailes.user_id,
         courseId).subscribe((data: any) => {
-          console.log('data', data);
+          if (data && data.data && data.data.claimcourse && data.data.claimcourse.success) {
+            this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, this.pagenumber, this.categoryData.categoryId,
+              this.userDetailes._id).subscribe((course: any) => {
+              if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
+              this.allcourses = course.data.getCoureBasedOnCatalog.data;
+              this.getCountForCategories();
+              this.getEnrolledCourses('', '');
+              }
+            });
+          }
         });
     }
 }
