@@ -119,7 +119,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-5" *ngIf="course?.course_type != 'free_course'">
+                            <div class="col-5" *ngIf="(course?.course_type != 'free_course' && !course.batchCourse) || 
+                            (course?.course_type == 'free_course' && course.batchCourse)">
                                 <div class="row m-t-2 m-l-2p f_size_13">
                                     <div class="col-3">
                                         <div>Activity 
@@ -283,7 +284,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-5"  *ngIf="course?.course_type != 'free_course'">
+                            <div class="col-5"  *ngIf="(course?.course_type != 'free_course' && !course.batchCourse) || 
+                            (course?.course_type == 'free_course' && course.batchCourse)">
                                 <div class="row m-t-2 m-l-2p f_size_13">
                                     <div class="col-3">
                                         <div>Activity 
@@ -448,7 +450,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-5" *ngIf="course?.course_type != 'free_course'">
+                            <div class="col-5" *ngIf="(course?.course_type != 'free_course' && !course.batchCourse) || 
+                            (course?.course_type == 'free_course' && course.batchCourse)">
                                 <div class="row m-t-2 m-l-2p f_size_13">
                                     <div class="col-3">
                                         <div>Activity 
@@ -530,7 +533,7 @@
                 <ng-template matTabLabel >
                     <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
                       matBadge="{{categorytab.enrollCount}}"
-                        matBadgeOverlap="false">{{categorytab.categoryName}}</span>
+                        matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span>
                 </ng-template>
 
                 <div *ngFor="let course of enrolledCourses ;let j=index">
@@ -620,7 +623,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-5" *ngIf="course?.course_type != 'free_course'">
+                            <div class="col-5" *ngIf="(course?.course_type != 'free_course' && !course.batchCourse) || 
+                            (course?.course_type == 'free_course' && course.batchCourse)">
                                 <div class="row m-t-2 m-l-2p f_size_13">
                                     <div class="col-3">
                                         <div>Activity 
