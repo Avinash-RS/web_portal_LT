@@ -1242,3 +1242,18 @@ export const getCoureBasedOnCatalog = gql`
     }
   }
 `;
+
+
+export const getcalenderactivity = gql`
+  query getcalenderactivity($userid: String!, $date: String!) {
+    getcalenderactivity(userid: $userid, date: $date) {
+      success
+      error_msg
+      message {
+        start
+        end
+        title
+      }
+    }
+  }
+`;
