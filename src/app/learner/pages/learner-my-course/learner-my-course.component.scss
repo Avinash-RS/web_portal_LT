@@ -17,6 +17,7 @@
   // cursor: pointer;
   font-size: 13px;
 }
+
 .dot {
   font-size: 16px;
   font-weight: bolder;
@@ -152,11 +153,13 @@
 .point{
   font-size: 32px;
     padding: 23px;
-    margin-top: 5px;
+    // margin-top: 25px;
     color: $light-green;
 
 }
-
+.f_size_13{
+  font-size: 13px;
+}
 .width-80 {
   max-width: 80%
 }
@@ -182,6 +185,7 @@
   background-color: $lxp-theme-green !important;
   // left: 8px !important;
   // width: 90px !important;
+  
 }
 
 .m-b-2 {
@@ -560,13 +564,12 @@ hr {
 // }
 .card12{
   background: transparent !important;
-  // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  // -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  // transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 .card12:hover {
-  // box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.10), 0 10px 10px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2)
+}
+.cap{
+  text-transform: capitalize;
 }
 
 .m-t-30{
@@ -920,7 +923,11 @@ mat-icon {
   height: 30px;
 
 }
-
+.infoIcon{
+  position: relative;
+    font-size: 16px;
+    top: 3px;
+}
 .clr:hover {
   background-color: $lxp-dark-gray !important;
   color: $color-white !important;

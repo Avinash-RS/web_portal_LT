@@ -7,13 +7,13 @@
     <div class="col-2 mt-4">
       <span>
             <mat-button class="available-course-btn">
-              <mat-select panelClass="mat-select-panel" class="mypanel" placeholder="{{catalogueDetails?.catalogueName}}" name="availableCourses"
+              <mat-select panelClass="mat-select-panel" class="mypanel" placeholder="{{catalogueDetails?.catalogueName | titlecase}}" name="availableCourses"
 
                     [(ngModel)]="availableCourses" (selectionChange)="getCoureBasedOnCatalog(catalogueDetails,availableCourses,previewDialog)"
                     required>
                     <mat-option *ngFor="let category of categoryDetails" [value]="category" class="testing">
                       
-                        <div>{{category.categoryName}}<span matBadge="{{category.totalCount}}"></span>
+                        <div>{{category.categoryName | titlecase}}<span matBadge="{{category.totalCount}}"></span>
                         </div>
                     </mat-option>
                 </mat-select> 
@@ -65,13 +65,14 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-10">
-                                                <button class="clr" (click)="goToAssignment(course)">
+                                                <button class="clr" (click)="goToAssignment(course)" [disabled]="course.assignmentCount == 0">
                                                     <mat-icon class="btn-icon">description</mat-icon>
                                                     <span>Assignments ({{course.assignmentCount}})</span>
                                                 </button>
 
 
-                                                <button class="clr ml-4" (click)="goToForum(course)">
+                                                <button class="clr ml-4" (click)="goToForum(course)"
+                                                [disabled]="course.forumCount == 0">
                                                     <mat-icon class="btn-icon">forum</mat-icon>
                                                     <span>Discussion Forum ({{course.forumCount}})</span>
                                                 </button>
@@ -116,18 +117,26 @@
                                 </div>
                             </div>
                             <div class="col-5" *ngIf="course?.course_type != 'free_course'">
-                                <div class="row m-t-2 m-l-2p">
+                                <div class="row m-t-2 m-l-2p f_size_13">
                                     <div class="col-3">
-                                        <div>Activity</div>
+                                        <div>Activity 
+                                            <mat-icon #tooltip="matTooltip"  matTooltip="Info about the action" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
+                                        </div>
                                     </div>
                                     <div class="col-3">
-                                        <div>Learning effort</div>
+                                        <div class="f_size_13">Learning effort
+                                            <mat-icon #tooltip="matTooltip"  matTooltip="Info about the action" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
+                                        </div>
                                     </div>
                                     <div class="col-3">
-                                        <div>Points earned</div>
+                                        <div>Points earned
+                                            <mat-icon #tooltip="matTooltip"  matTooltip="Info about the action" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
+                                        </div>
                                     </div>
                                     <div class="col-3">
-                                        <div>Final score</div>
+                                        <div>Final score
+                                            <mat-icon #tooltip="matTooltip"  matTooltip="Info about the action" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -143,10 +152,11 @@
                                         <div class="progess pointer">
                                             <circle-progress
                                                 [percent]="course?.coursePlayerStatus?.course_percentage|| 0"
-                                                [radius]="10" [outerStrokeWidth]="1" [innerStrokeWidth]="1" [space]="-1"
-                                                [outerStrokeColor]="'#ffcc00'" [innerStrokeColor]="'#9d9d9d'"
+                                                [radius]="10"  [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                                                [outerStrokeGradient]="true" [outerStrokeGradientStopColor] = "'#53a9ff'"
+                                                [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'"
                                                 [titleFontSize]="7" [unitsFontSize]="7" [showSubtitle]="false"
-                                                [animation]="true" [animationDuration]="300" [startFromZero]="false"
+                                                [animation]="true" [animationDuration]="100" [startFromZero]="false"
                                                 [responsive]="true">
                                             </circle-progress>
                                         </div>
@@ -218,13 +228,14 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-10">
-                                                <button class="clr" (click)="goToAssignment(course)">
+                                                <button class="clr" (click)="goToAssignment(course)" [disabled]="course.assignmentCount == 0">
                                                     <mat-icon class="btn-icon">description</mat-icon>
                                                     <span>Assignments ({{course.assignmentCount}})</span>
                                                 </button>
 
 
-                                                <button class="clr ml-4" (click)="goToForum(course)">
+                                                <button class="clr ml-4" (click)="goToForum(course)"
+                                                [disabled]="course.forumCount == 0">
                                                     <mat-icon class="btn-icon">forum</mat-icon>
                                                     <span>Discussion Forum ({{course.forumCount}})</span>
                                                 </button>
@@ -269,18 +280,26 @@
                                 </div>
                             </div>
                             <div class="col-5"  *ngIf="course?.course_type != 'free_course'">
-                                <div class="row m-t-2 m-l-2p">
+                                <div class="row m-t-2 m-l-2p f_size_13">
                                     <div class="col-3">
-                                        <div>Activity</div>
+                                        <div>Activity 
+                                            <mat-icon #tooltip="matTooltip"  matTooltip="Info about the action" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
+                                        </div>
                                     </div>
                                     <div class="col-3">
-                                        <div>Learning effort</div>
+                                        <div>Learning effort
+                                            <mat-icon #tooltip="matTooltip"  matTooltip="Info about the action" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
+                                        </div>
                                     </div>
                                     <div class="col-3">
-                                        <div>Points earned</div>
+                                        <div>Points earned
+                                            <mat-icon #tooltip="matTooltip"  matTooltip="Info about the action" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
+                                        </div>
                                     </div>
                                     <div class="col-3">
-                                        <div>Final score</div>
+                                        <div>Final score
+                                            <mat-icon #tooltip="matTooltip"  matTooltip="Info about the action" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -296,10 +315,11 @@
                                         <div class="progess pointer">
                                             <circle-progress
                                                 [percent]="course?.coursePlayerStatus?.course_percentage|| 0"
-                                                [radius]="10" [outerStrokeWidth]="1" [innerStrokeWidth]="1" [space]="-1"
-                                                [outerStrokeColor]="'#ffcc00'" [innerStrokeColor]="'#9d9d9d'"
+                                                [radius]="10"  [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                                                [outerStrokeGradient]="true" [outerStrokeGradientStopColor] = "'#53a9ff'"
+                                                [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'"
                                                 [titleFontSize]="7" [unitsFontSize]="7" [showSubtitle]="false"
-                                                [animation]="true" [animationDuration]="300" [startFromZero]="false"
+                                                [animation]="true" [animationDuration]="100" [startFromZero]="false"
                                                 [responsive]="true">
                                             </circle-progress>
                                         </div>
@@ -333,7 +353,7 @@
                     </mat-card>
                 </div>
             </mat-tab>
-            <mat-tab>
+            <mat-tab >
                 <ng-template matTabLabel>
                     <span (click)="getEnrolledCourses('','')" matBadge="{{enrolledCourses?.length}}" matBadgeOverlap="false">{{'All' }}</span>
                 </ng-template>
@@ -371,13 +391,15 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-10">
-                                                <button class="clr" (click)="goToAssignment(course)">
+                                                <button class="clr" (click)="goToAssignment(course)"
+                                                [disabled]="course.assignmentCount == 0">
                                                     <mat-icon class="btn-icon">description</mat-icon>
                                                     <span>Assignments ({{course.assignmentCount}})</span>
                                                 </button>
 
 
-                                                <button class="clr ml-4" (click)="goToForum(course)">
+                                                <button class="clr ml-4" (click)="goToForum(course)"
+                                                [disabled]="course.forumCount == 0">
                                                     <mat-icon class="btn-icon">forum</mat-icon>
                                                     <span>Discussion Forum ({{course.forumCount}})</span>
                                                 </button>
@@ -422,18 +444,26 @@
                                 </div>
                             </div>
                             <div class="col-5" *ngIf="course?.course_type != 'free_course'">
-                                <div class="row m-t-2 m-l-2p">
+                                <div class="row m-t-2 m-l-2p f_size_13">
                                     <div class="col-3">
-                                        <div>Activity</div>
+                                        <div>Activity 
+                                            <mat-icon #tooltip="matTooltip"  matTooltip="Info about the action" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
+                                        </div>
                                     </div>
                                     <div class="col-3">
-                                        <div>Learning effort</div>
+                                        <div>Learning effort
+                                            <mat-icon #tooltip="matTooltip"  matTooltip="Info about the action" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
+                                        </div>
                                     </div>
                                     <div class="col-3">
-                                        <div>Points earned</div>
+                                        <div>Points earned
+                                            <mat-icon #tooltip="matTooltip"  matTooltip="Info about the action" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
+                                        </div>
                                     </div>
                                     <div class="col-3">
-                                        <div>Final score</div>
+                                        <div>Final score
+                                            <mat-icon #tooltip="matTooltip"  matTooltip="Info about the action" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -449,10 +479,11 @@
                                         <div class="progess pointer">
                                             <circle-progress
                                                 [percent]="course?.coursePlayerStatus?.course_percentage|| 0"
-                                                [radius]="10" [outerStrokeWidth]="1" [innerStrokeWidth]="1" [space]="-1"
-                                                [outerStrokeColor]="'#ffcc00'" [innerStrokeColor]="'#9d9d9d'"
+                                                [radius]="10"  [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                                                [outerStrokeGradient]="true" [outerStrokeGradientStopColor] = "'#53a9ff'"
+                                                [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'"
                                                 [titleFontSize]="7" [unitsFontSize]="7" [showSubtitle]="false"
-                                                [animation]="true" [animationDuration]="300" [startFromZero]="false"
+                                                [animation]="true" [animationDuration]="100" [startFromZero]="false"
                                                 [responsive]="true">
                                             </circle-progress>
                                         </div>
@@ -491,8 +522,9 @@
             <!-----------------------------------Category tabs----------------------------->
             <ng-container *ngFor="let categorytab of categoryDetails">
             <mat-tab *ngIf="categorytab.enrollCount">
-                <ng-template matTabLabel>
-                    <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" style="margin-left: 533px !important;" matBadge="{{categorytab.enrollCount}}"
+                <ng-template matTabLabel >
+                    <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
+                      matBadge="{{categorytab.enrollCount}}"
                         matBadgeOverlap="false">{{categorytab.categoryName}}</span>
                 </ng-template>
 
@@ -530,13 +562,15 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-10">
-                                                <button class="clr" (click)="goToAssignment(course)">
+                                                <button class="clr" (click)="goToAssignment(course)"
+                                                [disabled]="course.assignmentCount == 0">
                                                     <mat-icon class="btn-icon">description</mat-icon>
                                                     <span>Assignments ({{course.assignmentCount}})</span>
                                                 </button>
 
 
-                                                <button class="clr ml-4" (click)="goToForum(course)">
+                                                <button class="clr ml-4" (click)="goToForum(course)"
+                                                [disabled]="course.forumCount == 0">
                                                     <mat-icon class="btn-icon">forum</mat-icon>
                                                     <span>Discussion Forum ({{course.forumCount}})</span>
                                                 </button>
@@ -581,11 +615,11 @@
                                 </div>
                             </div>
                             <div class="col-5" *ngIf="course?.course_type != 'free_course'">
-                                <div class="row m-t-2 m-l-2p">
+                                <div class="row m-t-2 m-l-2p f_size_13">
                                     <div class="col-3">
                                         <div>Activity</div>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-3" >
                                         <div>Learning effort</div>
                                     </div>
                                     <div class="col-3">
@@ -608,10 +642,11 @@
                                         <div class="progess pointer">
                                             <circle-progress
                                                 [percent]="course?.coursePlayerStatus?.course_percentage|| 0"
-                                                [radius]="10" [outerStrokeWidth]="1" [innerStrokeWidth]="1" [space]="-1"
-                                                [outerStrokeColor]="'#ffcc00'" [innerStrokeColor]="'#9d9d9d'"
+                                                [radius]="10"  [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                                                [outerStrokeGradient]="true" [outerStrokeGradientStopColor] = "'#53a9ff'"
+                                                [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'"
                                                 [titleFontSize]="7" [unitsFontSize]="7" [showSubtitle]="false"
-                                                [animation]="true" [animationDuration]="300" [startFromZero]="false"
+                                                [animation]="true" [animationDuration]="100" [startFromZero]="false"
                                                 [responsive]="true">
                                             </circle-progress>
                                         </div>
@@ -668,7 +703,8 @@
       <!-- <mat-icon>search</mat-icon> -->
     </div>
     <div class="row">
-        <div class="col-4 mt-4" *ngFor="let course of allcourses | search : courseSearch">
+        <div class="col-4 mt-4" *ngFor="let course of allcourses">
+        <!-- <div class="col-4 mt-4" *ngFor="let course of allcourses | search : courseSearch"> -->
             <mat-card class="box-shadow">
                 <div class="row">
                     <a>
