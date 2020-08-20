@@ -52,6 +52,7 @@ export class LearnerMyCourseComponent implements OnInit {
   courseMapping: any;
   courseSearch: any;
   categoryData: any;
+  availableCourses: string;
 
   constructor(
     public translate: TranslateService,
@@ -307,6 +308,7 @@ export class LearnerMyCourseComponent implements OnInit {
     }
     closedialogbox() {
       this.dialog.closeAll();
+      this.availableCourses = '';
     }
     claimCourse(courseId) {
       this.learnerService.claimcourse(this.userDetailes._id, this.userDetailes.user_id,
