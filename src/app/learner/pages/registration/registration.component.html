@@ -1,6 +1,6 @@
 <mat-toolbar>
   <img class="hearder-logo " alt="" src="assets/learner/LT.svg">
-  <span class="headTit">&nbsp;LARSEN & TOUBRO</span>
+  <span class="headTit">&nbsp;{{'LARSEN & TOUBRO' | translate}}</span>
 </mat-toolbar>
 <div class="limiter">
     <div class="row container-reg200">
@@ -42,10 +42,10 @@
                 <!-- <img class="kauhalya" alt="" src='assets/images/l&t.png'> -->
                 <form [formGroup]="registerForm">
                     <!-- <div class="borderbox"> -->
-                        <h1 class=" animated animatedFadeInUp fadeInUp signIn">Create an account</h1><br><br>
+                        <h1 class=" animated animatedFadeInUp fadeInUp signIn">{{'Create an account' | translate}}</h1><br><br>
                         <mat-form-field  appearance="outline">
-                            <mat-label class="label-color">Full Name</mat-label>
-                            <input matInput id="fullname" list="title" value="Mr"  #fullname placeholder="Enter the full name"  formControlName="fullname" 
+                            <mat-label class="label-color">{{'Full Name' | translate}}</mat-label>
+                            <input matInput id="fullname" list="title" value="Mr"  #fullname [placeholder]="'Enter the full name' | translate"  formControlName="fullname" 
                               maxlength="50" required>
                               <datalist id="title">
                                 <option value="Mr"></option>
@@ -56,18 +56,18 @@
                             <!-- <mat-error class="error" *ngIf="f.fullname.touched && f.fullname.errors">Fullname is required</mat-error>
                             <mat-error class="error" *ngIf="f.fullname.errors.pattern">Fullname is invalid</mat-error> -->
                             <mat-error class="error"  *ngIf="registerForm.get('fullname').hasError('required')">
-                                Full name is required
+                                {{'Full name is required' | translate}}
                               </mat-error>
                             <mat-error class="error" *ngIf="registerForm.get('fullname').hasError('minlength')">
-                                Full name should be atleast 3 characters long
+                                {{'Full name should be atleast 3 characters long' | translate}}
                               </mat-error>
                           
                               <mat-error class="error" *ngIf="registerForm.get('fullname').hasError('maxlength')">
-                                Full name can be atmax 50 characters long
+                                {{'Full name can be atmax 50 characters long' | translate}}
                               </mat-error>
                           
                               <mat-error class="error" *ngIf="registerForm.get('fullname').hasError('pattern')">
-                                Full name is invalid
+                                {{'Full name is invalid' | translate}}
                               </mat-error>
                           </mat-form-field>
                         <!-- <div class="form-group">
@@ -90,14 +90,14 @@
                           <input matInput  id="email" #email placeholder="Enter the email"  formControlName="email" maxlength="64"
                           required>
                           <mat-icon matPrefix class="icon-color">mail_outline</mat-icon>
-                          <mat-error class="error" *ngIf="registerForm.get('email').hasError('required')">Email is required</mat-error>
+                          <mat-error class="error" *ngIf="registerForm.get('email').hasError('required')">{{'Email is required' | translate}}</mat-error>
                           <!-- <mat-error class="error" *ngIf="f.email.errors.required">Email ID is required</mat-error> -->
-                          <mat-error class="error" *ngIf="registerForm.get('email').hasError('pattern')">Please enter a valid email address</mat-error>
+                          <mat-error class="error" *ngIf="registerForm.get('email').hasError('pattern')">{{'Please enter a valid email address' | translate}}</mat-error>
                         </mat-form-field>
                         <br><br>
 
                         <mat-form-field appearance="outline">
-                          <mat-label class="label-color">{{'Mobile number'}}</mat-label>
+                          <mat-label class="label-color">{{'Mobile number' | translate}}</mat-label>
                           <input matInput  [placeholder]="'Enter mobile number without country code' "   minlength="10" pattern="[1-9]{1}[0-9]{9}"
                            mask="0000000000"  maxlength="10"
                            formControlName="mobile"   [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }">
@@ -111,7 +111,7 @@
                           </mat-error>
                        
                           <mat-error class="error" *ngIf="registerForm.get('mobile').hasError('pattern')">
-                            {{'Mobile number is invalid' }}
+                            {{'Mobile number is invalid' | translate }}
                           </mat-error>
                         </mat-form-field>
                         <br><br>
@@ -128,17 +128,17 @@
 
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="alert1"> <b>{{'Note'}}</b> {{': Full name will be used in your certificates' }}</div>
+                                    <div class="alert1"> <b>{{'Note' | translate}}</b> {{': Full name will be used in your certificates' | translate }}</div>
                                 </div>
                             </div>
 
 
                             <button class="btn" mat-raised-button id="btnsubmit" [disabled]="!registerForm.valid" (click)="Submit()">
-                                SIGN UP
+                                {{'SIGN UP' | translate}}
                             </button>
 
-                            <div class="account">Already have an account?
-                                <a [routerLink]="['/Learner/login']"><span class="col">Sign in</span></a>
+                            <div class="account">{{'Already have an account?' | translate}}
+                                <a [routerLink]="['/Learner/login']"><span class="col">{{'Sign in' | translate}}</span></a>
                             </div>
                         </div>
                     <!-- </div> -->
@@ -156,7 +156,7 @@
             </div>
             <div class="row footer20">
               <div class="col-12">
-                <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span> 
+                <span class="forgot1">{{'2020 © L&T EduTech All Rights Reserved' | translate}}</span> 
               </div>
             </div>
 

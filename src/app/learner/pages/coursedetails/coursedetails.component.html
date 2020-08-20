@@ -510,10 +510,10 @@
                                 <div class="row" *ngIf="selectedModuleData">
                                     <p (click)="gotoDisplayAllThreads()">
                                         <span
-                                            class="f_size_18 color_black f_wt_400 ">{{selectedModuleData.title || 'Module Name | translate'}}</span>
+                                            class="f_size_18 color_black f_wt_400 ">{{selectedModuleData.title || 'Module Name'}}</span>
                                         &nbsp;({{'Module'+ ' ' +selectedModuleData.indexValue}}) |
                                         {{ discussionData?.topics?.length ? discussionData.topics.length : 0 }}
-                                        {{discussionData?.topics?.length > 1 ? 'Threads | translate ' : 'Thread | translate '}}
+                                        {{discussionData?.topics?.length > 1 ? 'Threads' : 'Thread'}}
 
                                     </p>
                                 </div>
@@ -528,7 +528,7 @@
                                 <div class="row" *ngIf="selectedModuleData" >
                                     <p (click)="gotoDisplayAllThreads();viewAllThreads()">
                                         <span class="color-blue f_size_16 f_wt_500"
-                                            style="text-decoration-line:underline ; cursor: pointer;">{{(selectedModuleData.title | titlecase) || 'Module Name | translate ' + ' '}}({{'Module'+ ' ' +selectedModuleData.indexValue}})
+                                            style="text-decoration-line:underline ; cursor: pointer;">{{(selectedModuleData.title | titlecase) || 'Module Name' + ' '}}({{'Module'+ ' ' +selectedModuleData.indexValue}})
                                         </span> :
                                         &nbsp;&nbsp;
                                     </p>
@@ -617,7 +617,7 @@
                                     <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4 bg_color">
                                         <div class="row center position_hgt ">{{data?.postcount-1}}</div>
                                         <div class="row center position ">
-                                            <p>{{data?.postcount - 1 >= 2 ? 'Comments | translate ' : 'Comment | translate '}}
+                                            <p>{{data?.postcount - 1 >= 2 ? 'Comments' : 'Comment'}}
                                             </p>
                                         </div>
                                     </div>
@@ -674,7 +674,7 @@
                                 <div class=col-1></div>
                                 <div class="col-11 thread_title p-l-0">
                                     <p class="f_size_17 color_black f_wt_400 color_grey">
-                                        {{selectedThreadData?.titleRaw || 'Thread name | translate '}}
+                                        {{selectedThreadData?.titleRaw || 'Thread name'}}
                                     </p>
                                     <div
                                         *ngIf="topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]">

@@ -45,7 +45,10 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
     }
 
 ngOnInit() {
-    this.translate.use(localStorage.getItem('language'));
+    // this.translate.use(localStorage.getItem('language'));
+    const language = localStorage.getItem('language') || 'en';
+    this.translate.setDefaultLang(language);
+    this.translate.use(language);
     this.forgotUsername = this.formBuilder.group({
       mobile: new FormControl('', myGlobals.mobileVal),
       email: new FormControl('', myGlobals.emailVal),

@@ -32,6 +32,9 @@ export class RegistrationComponent implements OnInit {
     public dialog: MatDialog,
     private toastr: ToastrService
   ) {
+    const language = localStorage.getItem('language') || 'en';
+    this.translate.setDefaultLang(language);
+    this.translate.use(language);
   }
 
   ngOnInit() {

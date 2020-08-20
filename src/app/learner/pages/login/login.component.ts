@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
       this.languages = [{lang: 'ta' , languagename: 'Tamil' } , { lang: 'en' , languagename: 'English'  }] ;
 
       // translate.addLangs(['en', 'ta']);
-      translate.setDefaultLang('en');
-      const browserLang = translate.getBrowserLang();
+      // translate.setDefaultLang('en');
+      // const browserLang = translate.getBrowserLang();
   }
 
   ngOnInit() {
@@ -101,6 +101,11 @@ export class LoginComponent implements OnInit {
 
   reserPassword(type) {
     this.router.navigateByUrl('/Learner/recover', { state: { type } });
+  }
+
+  onSelection(lang) {
+    const selectedLanguage = lang.value;
+    localStorage.setItem('language', selectedLanguage);
   }
 
 }

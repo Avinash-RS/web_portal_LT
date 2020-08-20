@@ -806,6 +806,7 @@ export const getLearnerenrolledCourses = gql`
           totalLearners
           assignmentCount
           forumCount
+          batchCourse
           course_duration
           coursePlayerStatus {
             status
@@ -1307,6 +1308,20 @@ export const getCoureBasedOnCatalog = gql`
   }
 `;
 
+
+export const getcalenderactivity = gql`
+  query getcalenderactivity($userid: String!, $date: String!) {
+    getcalenderactivity(userid: $userid, date: $date) {
+      success
+      error_msg
+      message {
+        start
+        end
+        title
+      }
+    }
+  }
+`;
 export const singleBatchInfo = gql`
   query getbatchdetails($user_id: String!, $course_id: String!) {
     getbatchdetails(user_id: $user_id, course_id: $course_id) {
