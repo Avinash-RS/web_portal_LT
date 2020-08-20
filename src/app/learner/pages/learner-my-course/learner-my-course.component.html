@@ -7,11 +7,11 @@
     <div class="col-2 mt-4">
         <span>
             <mat-button class="available-course-btn">
-                <mat-select class="mypanel" placeholder="{{catalogueDetails?.catalogueName}}" name="availableCourses"
+                <mat-select class="mypanel" placeholder="{{catalogueDetails?.catalogueName | titlecase}}" name="availableCourses"
                     [(ngModel)]="availableCourses" (selectionChange)="getCoureBasedOnCatalog(catalogueDetails,availableCourses,previewDialog)"
                     required>
                     <mat-option *ngFor="let category of categoryDetails" [value]="category">
-                        {{category.categoryName}}
+                        {{category.categoryName | titlecase}}
                         <span matBadge="{{category.totalCount}}" matBadgePosition="after"></span>
                     </mat-option>
                 </mat-select>
@@ -63,13 +63,14 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-10">
-                                                <button class="clr" (click)="goToAssignment(course)">
+                                                <button class="clr" (click)="goToAssignment(course)" [disabled]="course.assignmentCount == 0">
                                                     <mat-icon class="btn-icon">description</mat-icon>
                                                     <span>Assignments ({{course.assignmentCount}})</span>
                                                 </button>
 
 
-                                                <button class="clr ml-4" (click)="goToForum(course)">
+                                                <button class="clr ml-4" (click)="goToForum(course)"
+                                                [disabled]="course.forumCount == 0">
                                                     <mat-icon class="btn-icon">forum</mat-icon>
                                                     <span>Discussion Forum ({{course.forumCount}})</span>
                                                 </button>
@@ -216,13 +217,14 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-10">
-                                                <button class="clr" (click)="goToAssignment(course)">
+                                                <button class="clr" (click)="goToAssignment(course)" [disabled]="course.assignmentCount == 0">
                                                     <mat-icon class="btn-icon">description</mat-icon>
                                                     <span>Assignments ({{course.assignmentCount}})</span>
                                                 </button>
 
 
-                                                <button class="clr ml-4" (click)="goToForum(course)">
+                                                <button class="clr ml-4" (click)="goToForum(course)"
+                                                [disabled]="course.forumCount == 0">
                                                     <mat-icon class="btn-icon">forum</mat-icon>
                                                     <span>Discussion Forum ({{course.forumCount}})</span>
                                                 </button>
@@ -369,13 +371,15 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-10">
-                                                <button class="clr" (click)="goToAssignment(course)">
+                                                <button class="clr" (click)="goToAssignment(course)"
+                                                [disabled]="course.assignmentCount == 0">
                                                     <mat-icon class="btn-icon">description</mat-icon>
                                                     <span>Assignments ({{course.assignmentCount}})</span>
                                                 </button>
 
 
-                                                <button class="clr ml-4" (click)="goToForum(course)">
+                                                <button class="clr ml-4" (click)="goToForum(course)"
+                                                [disabled]="course.forumCount == 0">
                                                     <mat-icon class="btn-icon">forum</mat-icon>
                                                     <span>Discussion Forum ({{course.forumCount}})</span>
                                                 </button>
@@ -491,7 +495,7 @@
             <mat-tab *ngIf="categorytab.enrollCount">
                 <ng-template matTabLabel>
                     <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" style="margin-left: 533px !important;" matBadge="{{categorytab.enrollCount}}"
-                        matBadgeOverlap="false">{{categorytab.categoryName}}</span>
+                        matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span>
                 </ng-template>
 
                 <div *ngFor="let course of enrolledCourses ;let j=index">
@@ -528,13 +532,15 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-10">
-                                                <button class="clr" (click)="goToAssignment(course)">
+                                                <button class="clr" (click)="goToAssignment(course)"
+                                                [disabled]="course.assignmentCount == 0">
                                                     <mat-icon class="btn-icon">description</mat-icon>
                                                     <span>Assignments ({{course.assignmentCount}})</span>
                                                 </button>
 
 
-                                                <button class="clr ml-4" (click)="goToForum(course)">
+                                                <button class="clr ml-4" (click)="goToForum(course)"
+                                                [disabled]="course.forumCount == 0">
                                                     <mat-icon class="btn-icon">forum</mat-icon>
                                                     <span>Discussion Forum ({{course.forumCount}})</span>
                                                 </button>
