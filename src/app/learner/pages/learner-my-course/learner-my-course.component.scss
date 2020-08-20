@@ -150,6 +150,12 @@
   font-size: 32px;
   color: $lxp-theme-green;
 }
+.no-border{
+  border: none !important;
+}
+.no-border:focus{
+  border: none !important;
+}
 .point{
   font-size: 32px;
     padding: 23px;

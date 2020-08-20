@@ -102,10 +102,10 @@
                                             </div>
                                         </div>
 
-                                        <div class="row pointer ">
+                                        <div class="row pointer">
                                             <div class="col-12 m-t-30" >
-                                                <span class="upcoming" *ngIf="activity?.activity_details.activitytype == 'Live Classroom'" routerLink="/Learner/calendar" routerLinkActive="active">Upcoming... {{activity?.activity_details.startdate | date :' h:mm a'}} to {{activity?.activity_details.enddate | date :' h:mm a'}} | Live classroom
-                                                    <mat-icon class="video">videocam</mat-icon></span>
+                                                <div class="upcoming" (click)="navToCal()" *ngIf="activity?.activity_details.activitytype == 'Live Classroom'">Upcoming... {{activity?.activity_details.startdate | date :' h:mm a'}} to {{activity?.activity_details.enddate | date :' h:mm a'}} | Live classroom
+                                                    <mat-icon class="video">videocam</mat-icon></div>
                                             </div>
 
                                         </div>
@@ -268,7 +268,7 @@
 
                                         <div class="row pointer ">
                                             <div class="col-12 m-t-30" >
-                                                <span class="upcoming" *ngIf="activity?.activity_details.activitytype == 'Live Classroom'" routerLink="/Learner/calendar" routerLinkActive="active">Upcoming... {{activity?.activity_details.startdate | date :' h:mm a'}} to {{activity?.activity_details.enddate | date :' h:mm a'}} | Live classroom
+                                                <span class="upcoming" (click)="navToCal()" *ngIf="activity?.activity_details.activitytype == 'Live Classroom'" >Upcoming... {{activity?.activity_details.startdate | date :' h:mm a'}} to {{activity?.activity_details.enddate | date :' h:mm a'}} | Live classroom
                                                     <mat-icon class="video">videocam</mat-icon></span>
                                             </div>
 
@@ -433,7 +433,7 @@
 
                                         <div class="row pointer ">
                                             <div class="col-12 m-t-30" >
-                                                <span class="upcoming" *ngIf="activity?.activity_details.activitytype == 'Live Classroom'" routerLink="/Learner/calendar" routerLinkActive="active">Upcoming... {{activity?.activity_details.startdate | date :' h:mm a'}} to {{activity?.activity_details.enddate | date :' h:mm a'}} | Live classroom
+                                                <span class="upcoming" (click)="navToCal()" *ngIf="activity?.activity_details.activitytype == 'Live Classroom'">Upcoming... {{activity?.activity_details.startdate | date :' h:mm a'}} to {{activity?.activity_details.enddate | date :' h:mm a'}} | Live classroom
                                                     <mat-icon class="video">videocam</mat-icon></span>
                                             </div>
 
@@ -605,7 +605,7 @@
 
                                         <div class="row pointer ">
                                             <div class="col-12 m-t-30" >
-                                                <span class="upcoming" *ngIf="activity?.activity_details.activitytype == 'Live Classroom'" routerLink="/Learner/calendar" routerLinkActive="active">Upcoming... {{activity?.activity_details.startdate | date :' h:mm a'}} to {{activity?.activity_details.enddate | date :' h:mm a'}} | Live classroom
+                                                <span class="upcoming" (click)="navToCal()" *ngIf="activity?.activity_details.activitytype == 'Live Classroom'" >Upcoming... {{activity?.activity_details.startdate | date :' h:mm a'}} to {{activity?.activity_details.enddate | date :' h:mm a'}} | Live classroom
                                                     <mat-icon class="video">videocam</mat-icon></span>
                                             </div>
 

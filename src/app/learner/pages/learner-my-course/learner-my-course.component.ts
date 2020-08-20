@@ -325,5 +325,9 @@ export class LearnerMyCourseComponent implements OnInit {
           }
         });
     }
+
+    navToCal() {
+      this.router.navigateByUrl('/Learner/calendar');
+    }
 }
 
