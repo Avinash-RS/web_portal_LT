@@ -16,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
 
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-coursedetails',
@@ -155,6 +155,7 @@ export class CoursedetailsComponent implements OnInit {
   isprevEnable = false;
   selectedTabIndex = 0;
   detailData: any;
+  batchDetails: any;
   // initials: any;
 
   constructor(public translate: TranslateService, private router: ActivatedRoute,
@@ -170,6 +171,7 @@ export class CoursedetailsComponent implements OnInit {
       this.courseid = detail && detail.id || this.localStoCourseid;
       this.userDetail = this.gs.checkLogout();
       this.localStoCourseid = localStorage.getItem('Courseid');
+      this.courseid = detail && detail.id || this.localStoCourseid;
       this.lastpersentage = localStorage.getItem('persentage');
       // this.lastpersentage = detail  && detail.persentage || this.localper ;
       this.loading = true;
@@ -185,7 +187,16 @@ export class CoursedetailsComponent implements OnInit {
             if (this.scromApiData?.childData[0]) {
               this.selectedModuleData.indexValue = 1;
               if (this.selectedModuleData) {
-                this.viewAllThreads();
+                this.Lservice.getSingleBatchInfo(this.userDetail.user_id, this.courseid).subscribe((resdata: any) => {
+                  console.log(resdata);
+                  if (resdata?.data?.getbatchdetails?.message?.batchid !== null) {
+                    this.batchDetails = resdata?.data?.getbatchdetails?.message;
+                    this.viewAllThreads();
+                  } else {
+                    this.batchDetails = null;
+                    this.viewAllThreads();
+                  }
+                });
               }
             }
 
@@ -466,20 +477,20 @@ export class CoursedetailsComponent implements OnInit {
 
   autoHide() {
     this.dataRefresher =
-    setInterval(() => {
-      this.playerModuleAndTopic(false);
-      this.sider = false;
-    }, 10000);
+      setInterval(() => {
+        this.playerModuleAndTopic(false);
+        this.sider = false;
+      }, 10000);
   }
 
   makeFullScreen() {
     const element = document.querySelector('#myPlayer');
     element.requestFullscreen()
-    .then(() => {
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
+      .then(() => {
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   }
 
   showHeader() {
@@ -850,26 +861,34 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   viewAllThreads() {
-    this.Lservice.ViewAllThreadData(this.selectedModuleData?.title, this.course?.course_id).subscribe((result: any) => {
-      const temp = result.data.ViewAllThreadData.data;
-      if (result?.data?.ViewAllThreadData?.data !== '') {
-        result?.data?.ViewAllThreadData?.data?.topics.sort((a, b) => new Date(b.lastposttimeISO || b.timestampISO).getTime() -
-          new Date(a.lastposttimeISO || a.lastposttimeISO).getTime());
-        this.discussionData = result.data.ViewAllThreadData.data;
-        this.discussionData1 = Object.assign({}, result.data.ViewAllThreadData.data);
-        if (this.discussionData?.topics && this.discussionData?.topics?.length > 0) {
-          this.discussionData.topics = this.discussionData?.topics?.filter(i => i.deleted === false);
-          this.discussionData1.topics1 = this.discussionData.topics;
+    // '230984078162594'
+    this.Lservice.ViewAllThreadData(this.selectedModuleData?.title, this.course?.course_id, this.batchDetails?.batchid)
+      .subscribe((result: any) => {
+        const temp = result.data.ViewAllThreadData.data;
+        if (result?.data?.ViewAllThreadData?.data !== '') {
+          result?.data?.ViewAllThreadData?.data?.topics.sort((a, b) => new Date(b.lastposttimeISO || b.timestampISO).getTime() -
+            new Date(a.lastposttimeISO || a.lastposttimeISO).getTime());
+          this.discussionData = result.data.ViewAllThreadData.data;
+          this.discussionData1 = Object.assign({}, result.data.ViewAllThreadData.data);
+          if (this.discussionData?.topics && this.discussionData?.topics?.length > 0) {
+            this.discussionData.topics = this.discussionData?.topics?.filter(i => i.deleted === false);
+            this.discussionData1.topics1 = this.discussionData.topics;
+          }
+          this.loadingForum = false;
+        } else {
+          this.loadingForum = false;
+          this.discussionData = null;
         }
-        this.loadingForum = false;
-      } else {
-        this.loadingForum = false;
-        this.discussionData = null;
-      }
-    });
+      });
   }
 
   createNewThread() {
+    let bid;
+    if (this.batchDetails?.batchid) {
+      bid = { batch_id: this.batchDetails?.batchid, batch_name: this.batchDetails?.batchname };
+    } else {
+      bid = null;
+    }
     this.addThreadForm.value.thread_name = this.addThreadForm.value.thread_name.trim()
       || this.addThreadForm.value.thread_name?.trimLeft() || this.addThreadForm.value.thread_name?.trimEnd();
     const desc: any = {};
@@ -883,7 +902,8 @@ export class CoursedetailsComponent implements OnInit {
         this.closedialogbox();
         this.loadingForum = true;
         this.Lservice.createNewThread(this.userDetail.nodebb_response.uid, this.course.course_id, this.selectedModuleData?.title,
-          this.addThreadForm.value.thread_name, this.addThreadForm.value.thread_description, this.course.course_name)
+          this.addThreadForm.value.thread_name, this.addThreadForm.value.thread_description, this.course.course_name,
+          bid)
           .subscribe((result: any) => {
             this.loadingForum = true;
             this.addThreadForm?.reset();
