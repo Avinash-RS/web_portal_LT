@@ -40,6 +40,7 @@ import {
   get_organization_by_id,
   getCountForCategories,
   getCoureBasedOnCatalog,
+  getcalenderactivity,
   singleBatchInfo,
   ViewAllThreadDataBid
 } from './operations/learner_query';
@@ -742,6 +743,16 @@ export class LearnerServicesService {
   getReadLeanerActivity(userid, date) {
     return this.Apollo.query({
       query: getReadLeanerActivity,
+      variables: {
+        userid,
+        date
+      }
+    });
+  }
+
+  getAllActivity(userid, date) {
+    return this.Apollo.query({
+      query: getcalenderactivity,
       variables: {
         userid,
         date
