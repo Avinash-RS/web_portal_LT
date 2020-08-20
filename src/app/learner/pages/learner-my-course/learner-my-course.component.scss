@@ -152,11 +152,13 @@
 .point{
   font-size: 32px;
     padding: 23px;
-    margin-top: 5px;
+    // margin-top: 25px;
     color: $light-green;
 
 }
-
+.f_size_13{
+  font-size: 13px;
+}
 .width-80 {
   max-width: 80%
 }
@@ -919,7 +921,11 @@ mat-icon {
   height: 30px;
 
 }
-
+.infoIcon{
+  position: relative;
+    font-size: 16px;
+    top: 3px;
+}
 .clr:hover {
   background-color: $lxp-dark-gray !important;
   color: $color-white !important;
