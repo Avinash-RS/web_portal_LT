@@ -506,7 +506,7 @@
                     <br>
                     <div *ngIf="showCourseDetails">
                         <div class="p-l-0 no_border">
-                            <div class="col-12">
+                            <div class="col-12"  [ngClass]="{'width_70 center p-l-0': !drawer.opened}">
                                 <div class="row" *ngIf="selectedModuleData">
                                     <p (click)="gotoDisplayAllThreads()">
                                         <span
@@ -522,10 +522,10 @@
 
                     </div>
 
-                    <div *ngIf="showCommentThread" class="no_border">
+                    <div *ngIf="showCommentThread" class="no_border" >
                         <div class="p-l-0">
-                            <div class="col-12">
-                                <div class="row" *ngIf="selectedModuleData">
+                            <div class="col-12"  [ngClass]="{'width_70 center p-l-0': !drawer.opened}">
+                                <div class="row" *ngIf="selectedModuleData" >
                                     <p (click)="gotoDisplayAllThreads();viewAllThreads()">
                                         <span class="color-blue f_size_16 f_wt_500"
                                             style="text-decoration-line:underline ; cursor: pointer;">{{(selectedModuleData.title | titlecase) || 'Module Name' + ' '}}({{'Module'+ ' ' +selectedModuleData.indexValue}})
@@ -571,8 +571,7 @@
 
                                             <mat-form-field class="no_margin" *ngIf="searchthreadname">
                                                 <input class="toolbar-search"
-                                                    [disabled]="
-                                                                showCourseDetails ? (discussionData === null || discussionData?.topics?.length === 0) :
+                                                    [disabled]="showCourseDetails ? (discussionData === null || discussionData?.topics?.length === 0) :
                                                                 (topicDiscussionData && topicDiscussionData?.posts?.length === 1)" type="text"
                                                     matInput name="searchbar" [(ngModel)]="filterValue"
                                                     (input)="onSearchChange($event.target.value);">
@@ -591,7 +590,7 @@
                                         <div *ngIf="userDetail.is_thread_config"
                                             class="col-xl-4 col-lg-4 col-md-12 col-sm-12 p-5px">
                                             <button mat-button (click)="gotoNewThread(createThreadDialog)"
-                                                [disabled]="course === null || selectedModuleData === null "
+                                                [disabled]="course === null || selectedModuleData === null || disableThreads"
                                                 class="new_Thread " style="border-radius: 0 !important;">
                                                 {{'New thread' | translate }}</button>
                                         </div>
@@ -648,21 +647,21 @@
                         <mat-card class="black_border m-b-10 no-radius no_padding">
                             <!-- name row start -->
                             <div class="no_padding no_margin thread-header">
-                                <!-- box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753); -->
+                                <!-- box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753); {{selectedThreadData?.user?.username | slice:0:1 | uppercase}}-->
                                 <div class="row padding_matcard">
                                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding m-auto-tb">
                                         <button class="profileimg"
-                                            disabled>{{selectedThreadData?.user?.username | slice:0:1 | uppercase}}</button>
+                                            disabled>{{topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]?.user?.username | slice:0:1 | uppercase}}</button>
                                     </div>
                                     <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding m-auto-tb">
                                         <div class="row m-auto-tb">
                                             <div class="col-10 no_padding">
                                                 <strong
-                                                    class="color-blue float_left">{{selectedThreadData?.user?.username | titlecase}}
+                                                    class="color-blue float_left">{{topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]?.user?.username | titlecase}}
                                                     &nbsp;
                                                 </strong> <span>
                                                     &nbsp; | &nbsp;
-                                                    {{selectedThreadData?.timestampISO | date : 'medium'}}
+                                                    {{topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]?.timestampISO | date : 'medium'}}
                                                 </span>
                                             </div>
                                         </div>
@@ -706,10 +705,10 @@
                                             ({{topicDiscussionData?.posts && topicDiscussionData?.posts[0] && topicDiscussionData?.posts[0]?.bookmarks || 0}})
                                         </button> &nbsp;&nbsp;
                                         <button mat-button class="f_size_12 no_padding" (click)="clickToComment()"
-                                            [disabled]="selectedThreadData?.thread_status === false">
+                                            [disabled]="selectedThreadData?.thread_status === false || disableThreads">
                                             <mat-icon class="action_icon"
-                                                [disabled]="selectedThreadData?.thread_status === false">
-                                                comment</mat-icon>{{'Comment' | translate }}
+                                                [disabled]="selectedThreadData?.thread_status === false || disableThreads">
+                                                comment</mat-icon>{{'Comment' | translate }} 
                                         </button>
                                     </div>
                                 </div>
@@ -745,7 +744,7 @@
                             </mat-card-actions>
                         </mat-card>
                         <!-- Header starts here -->
-                        <mat-card class=" black_border box_shadow alignment ">
+                        <mat-card class="m-b-10 black_border box_shadow alignment ">
                             <div class="row" *ngIf="!showSearch">
                                 <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
 
@@ -794,7 +793,7 @@
                                         <div *ngIf="userDetail.is_thread_config"
                                             class="col-xl-4 col-lg-4 col-md-12 col-sm-12 p-5px">
                                             <button mat-button (click)="gotoNewThread(createThreadDialog)"
-                                                [disabled]="course === null || selectedModuleData === null "
+                                                [disabled]="course === null || selectedModuleData === null || disableThreads"
                                                 class="new_Thread " style="border-radius: 0 !important;">
                                                 {{'New thread' | translate }}</button>
                                         </div>
@@ -859,10 +858,10 @@
                                                     ({{post?.bookmarks || 0}})
                                                 </button> &nbsp;&nbsp;
                                                 <button mat-button
-                                                    [disabled]="selectedThreadData?.thread_status === false"
+                                                    [disabled]="selectedThreadData?.thread_status === false || disableThreads"
                                                     (click)="clickToCommentPost(pin)" class="f_size_12 no_padding">
                                                     <mat-icon class="action_icon"
-                                                        [disabled]="selectedThreadData?.thread_status === false">
+                                                        [disabled]="selectedThreadData?.thread_status === false || disableThreads">
                                                         comment</mat-icon>{{'Comment' | translate }}
                                                 </button>
                                             </div>
