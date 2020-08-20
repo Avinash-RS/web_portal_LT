@@ -599,7 +599,7 @@
                                         <div *ngIf="userDetail.is_thread_config"
                                             class="col-xl-4 col-lg-4 col-md-12 col-sm-12 p-5px">
                                             <button mat-button (click)="gotoNewThread(createThreadDialog)"
-                                                [disabled]="course === null || selectedModuleData === null "
+                                                [disabled]="course === null || selectedModuleData === null || disableThreads"
                                                 class="new_Thread " style="border-radius: 0 !important;">
                                                 {{'New thread' | translate }}</button>
                                         </div>
@@ -717,7 +717,7 @@
                                             [disabled]="selectedThreadData?.thread_status === false || disableThreads">
                                             <mat-icon class="action_icon"
                                                 [disabled]="selectedThreadData?.thread_status === false || disableThreads">
-                                                comment</mat-icon>{{'Comment' | translate }}
+                                                comment</mat-icon>{{'Comment' | translate }} 
                                         </button>
                                     </div>
                                 </div>

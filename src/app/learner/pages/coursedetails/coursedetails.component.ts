@@ -196,7 +196,7 @@ export class CoursedetailsComponent implements OnInit {
                     this.batchDetails = resdata?.data?.getbatchdetails?.message;
                     console.log('eeeeeeeeeeeeeeeeeeeee---------------',
                     resdata?.data?.getbatchdetails?.message.batchenddate.slice(0, 10), new Date().toISOString().slice(0, 10));
-                    this.disableThreads = resdata?.data?.getbatchdetails?.message.batchenddate.slice(0, 10) ===
+                    this.disableThreads = resdata?.data?.getbatchdetails?.message.batchenddate.slice(0, 10) <=
                     new Date().toISOString().slice(0, 10) ? true : false;
                     console.log('eeeeeeeeeeeeeeeeeeeee---------------', this.disableThreads);
                     this.viewAllThreads();
