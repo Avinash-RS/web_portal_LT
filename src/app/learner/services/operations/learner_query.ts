@@ -806,6 +806,7 @@ export const getLearnerenrolledCourses = gql`
           totalLearners
           assignmentCount
           forumCount
+          batchCourse
           course_duration
           coursePlayerStatus {
             status
