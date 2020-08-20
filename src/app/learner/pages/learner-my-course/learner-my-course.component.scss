@@ -153,11 +153,13 @@
 .point{
   font-size: 32px;
     padding: 23px;
-    margin-top: 5px;
+    // margin-top: 25px;
     color: $light-green;
 
 }
-
+.f_size_13{
+  font-size: 13px;
+}
 .width-80 {
   max-width: 80%
 }
@@ -566,6 +568,9 @@ hr {
 .card12:hover {
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2)
 }
+.cap{
+  text-transform: capitalize;
+}
 
 .m-t-30{
   margin-top: 25px;
@@ -918,7 +923,11 @@ mat-icon {
   height: 30px;
 
 }
-
+.infoIcon{
+  position: relative;
+    font-size: 16px;
+    top: 3px;
+}
 .clr:hover {
   background-color: $lxp-dark-gray !important;
   color: $color-white !important;
@@ -926,6 +935,7 @@ mat-icon {
 
 .mypanel{
   width: 110px !important;
+  text-transform: capitalize;
 }
 .available-course-btn{
   border: 1px solid $lxp-gray;
