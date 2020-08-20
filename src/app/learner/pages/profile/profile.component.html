@@ -69,22 +69,22 @@
         </div>
 
         <div class="row width_100">
-          <div class="uname width_100 center_align">{{userData?.full_name || 'Full name | translate '}} </div>
+          <div class="uname width_100 center_align">{{userData?.full_name || 'Full name'}} </div>
 
           <div class="width_100 center_align stateDet">
-            {{userData.state_detail && userData.state_detail[0].statename + ', '|| 'State | translate '}}
-            {{userData.country_detail && userData.country_detail[0].countryname || '& Country | translate ' }}
+            {{userData.state_detail && userData.state_detail[0].statename + ', '|| 'State'}}
+            {{userData.country_detail && userData.country_detail[0].countryname || '& Country' }}
           </div>
 
           <div class="f_wt_400 uID">
 
-            <span class="f_size_16"> {{userData.user_dtl && userData.user_dtl.username || 'User Name | translate '}}
+            <span class="f_size_16"> {{userData.user_dtl && userData.user_dtl.username || 'User Name'}}
               &nbsp;&nbsp;</span>
 
             <span class="f_size_16">| &nbsp;&nbsp;
               {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && userData.user_profile[0]?.gender && 
-              userData.user_profile[0]?.gender =='M' ? 'Male | translate ' : userData.user_profile[0].gender =='F' ? 'Female | translate ' : 
-            userData.user_profile[0].gender =='O' ? 'Rather Not Say | translate ' : 'Gender | translate ') : 'Gender | translate ' }}
+              userData.user_profile[0]?.gender =='M' ? 'Male' : userData.user_profile[0].gender =='F' ? 'Female' : 
+            userData.user_profile[0].gender =='O' ? 'Rather Not Say' : 'Gender') : 'Gender' }}
               &nbsp;&nbsp;
             </span>
 
@@ -93,7 +93,7 @@
               <!-- Student -->
               {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && 
               userData.user_profile[0]?.is_student_or_professional =='student' ? 
-            'Student | translate ' : userData.user_profile[0].is_student_or_professional =='professional' ? 'Professional | translate ' : 'Profession | translate ') : 'Profession | translate '}}
+            'Student' : userData.user_profile[0].is_student_or_professional =='professional' ? 'Professional' : 'Profession') : 'Profession'}}
             </span>
 
           </div>

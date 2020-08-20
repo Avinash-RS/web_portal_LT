@@ -107,14 +107,14 @@
             </div>
             <div class="space-20"></div>
 
-            <!-- <div class="form-group">
+            <div class="form-group">
               <mat-form-field>
                 <label>{{'Select Language' | translate }}</label>
-                <mat-select  #langSelect  formControlName="language" disableRipple>
+                <mat-select  #langSelect  formControlName="language" disableRipple (selectionChange)="onSelection($event)">
                   <mat-option *ngFor="let lang of languages" [value]="lang.lang" [selected]="lang === translate.currentLang">{{ lang.languagename }}</mat-option>
                 </mat-select>
               </mat-form-field>
-            </div> -->
+            </div>
 
             <div style="text-align: end;">
               <mat-checkbox class="remember_me" formControlName="remember_me">

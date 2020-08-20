@@ -244,8 +244,8 @@
                                                     class=" btl-alin blue_clr cap pointer" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">play_circle_outline</mat-icon>
                                                     <span class="cap f_wt_400">
-                                                        {{course?.coursePlayerStatus?.status === 'incomplete | translate ' ? 'Resume | translate ' : 
-                      course?.coursePlayerStatus?.status === 'suspend | translate ' ? 'Resume | translate ' : 'Start' | translate }}&nbsp;
+                                                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
+                      course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' | translate }}&nbsp;
                                                     </span>
                                                 </button>
                                                 <button mat-stroked-button
