@@ -11,7 +11,7 @@
 
                     [(ngModel)]="availableCourses" (selectionChange)="getCoureBasedOnCatalog(catalogueDetails,availableCourses,previewDialog)"
                     required>
-                    <mat-option *ngFor="let category of categoryDetails" [value]="category" class="testing">
+                    <mat-option *ngFor="let category of categoryDetails" [value]="category" class="availableCourseOption">
                       
                         <div>{{category.categoryName | titlecase}}<span matBadge="{{category.totalCount}}"></span>
                         </div>
