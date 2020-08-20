@@ -98,7 +98,7 @@ export class LearnerCalendarComponent implements OnInit {
   }
   
 
-  getAllActivity(value){
+  getAllActivity(value?){
 
     if(!value){
       value=new Date();
