@@ -71,7 +71,7 @@ import {
   InsertCourseFeedback,
   playerstatusrealtime,
   CreateNewThread,
-  CreateNewThreadBid
+  CreateNewThreadBid,
   claimcourse
 } from './operations/learner_mutation';
 

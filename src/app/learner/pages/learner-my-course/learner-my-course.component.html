@@ -967,7 +967,8 @@
       <!-- <mat-icon>search</mat-icon> -->
     </div>
     <div class="row">
-        <div class="col-4 mt-4" *ngFor="let course of allcourses | search : courseSearch">
+        <div class="col-4 mt-4" *ngFor="let course of allcourses">
+        <!-- <div class="col-4 mt-4" *ngFor="let course of allcourses | search : courseSearch"> -->
             <mat-card class="box-shadow">
                 <div class="row">
                     <a>

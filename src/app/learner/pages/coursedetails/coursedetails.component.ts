@@ -183,7 +183,7 @@ export class CoursedetailsComponent implements OnInit {
       this.getPlayerNextPrve();
       this.Lservice.getSingleBatchInfo(this.userDetail.user_id, detail && detail.id).subscribe((resdata: any) => {
         console.log(resdata);
-        // this.batchDetails = resdata || null;
+        this.batchDetails = resdata || null;
       });
       this.service.viewCurseByID(detail && detail.id || this.localStoCourseid, this.userDetail.user_id)
         .subscribe((viewCourse: any) => {
@@ -885,7 +885,7 @@ export class CoursedetailsComponent implements OnInit {
         this.loadingForum = true;
         this.Lservice.createNewThread(this.userDetail.nodebb_response.uid, this.course.course_id, this.selectedModuleData?.title,
           this.addThreadForm.value.thread_name, this.addThreadForm.value.thread_description, this.course.course_name,
-          bid.batch_id, bid.batch_name)
+          bid)
           .subscribe((result: any) => {
             this.loadingForum = true;
             this.addThreadForm?.reset();
