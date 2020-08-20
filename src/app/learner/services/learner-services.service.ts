@@ -40,7 +40,8 @@ import {
   get_organization_by_id,
   getCountForCategories,
   getCoureBasedOnCatalog,
-  singleBatchInfo
+  singleBatchInfo,
+  ViewAllThreadDataBid
 } from './operations/learner_query';
 
 import {
@@ -69,7 +70,8 @@ import {
   createGuidanceRequest,
   InsertCourseFeedback,
   playerstatusrealtime,
-  CreateNewThread
+  CreateNewThread,
+  CreateNewThreadBid
 } from './operations/learner_mutation';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -696,24 +698,43 @@ export class LearnerServicesService {
     });
   }
 
-  ViewAllThreadData(modId, cid, bid) {
-    return this.Apollo.query({
-      query: ViewAllThreadData,
-      variables: {
-        module_name: modId,
-        course_id: cid,
-        batch_id: bid
-      }
-    });
+  ViewAllThreadData(modId, cid, bid?) {
+    if (bid) {
+      return this.Apollo.query({
+        query: ViewAllThreadDataBid,
+        variables: {
+          module_name: modId,
+          course_id: cid,
+          batch_id: bid
+        }
+      });
+    } else {
+      return this.Apollo.query({
+        query: ViewAllThreadData,
+        variables: {
+          module_name: modId,
+          course_id: cid,
+        }
+      });
+    }
   }
 
-  createNewThread(uid, course_id, module_name, title, content, course_name, bid, bname) {
-    return this.Apollo.query({
-      query: CreateNewThread,
-      variables: {
-        uid, course_id, module_name, title, content, course_name, batch_name: bname, batch_id: bid
-      }
-    });
+  createNewThread(uid, course_id, module_name, title, content, course_name, batch?) {
+    if (batch) {
+      return this.Apollo.query({
+        query: CreateNewThreadBid,
+        variables: {
+          uid, course_id, module_name, title, content, course_name, batch_name: batch.batch_name, batch_id: batch.batch_id
+        }
+      });
+    } else {
+      return this.Apollo.query({
+        query: CreateNewThread,
+        variables: {
+          uid, course_id, module_name, title, content, course_name
+        }
+      });
+    }
   }
 
   getReadLeanerActivity(userid, date) {

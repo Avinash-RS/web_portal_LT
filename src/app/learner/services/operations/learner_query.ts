@@ -1087,7 +1087,55 @@ export const ViewSingleTopicDiscussionData = gql`
     }
   }
 `;
-
+export const ViewAllThreadDataBid = gql`
+  query ViewAllThreadData($module_name: String, $course_id: String, $batch_id: String) {
+    ViewAllThreadData(module_name: $module_name, course_id: $course_id, batch_id: $batch_id) {
+      success
+      message
+      data {
+        cid
+        description
+        name
+        numRecentReplies
+        order
+        parentCid
+        post_count
+        slug
+        topic_count
+        totalPostCount
+        totalTopicCount
+        title
+        topics {
+          cid
+          thread_status
+          deleted
+          postcount
+          slug
+          tid
+          title
+          uid
+          viewcount
+          titleRaw
+          timestampISO
+          lastposttimeISO
+          category {
+            name
+            cid
+          }
+          user {
+            fullname
+            picture
+            postcount
+            status
+            uid
+            username
+            userslug
+          }
+        }
+      }
+    }
+  }
+`;
 export const ViewAllThreadData = gql`
   query ViewAllThreadData(
     $module_name: String
