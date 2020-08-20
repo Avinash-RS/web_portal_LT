@@ -171,9 +171,9 @@ export class CoursedetailsComponent implements OnInit {
       } else if (detail && detail.forumVal) {
         this.selectedTabIndex = 4;
       }
-      this.courseid = detail && detail.id || this.localStoCourseid;
       this.userDetail = this.gs.checkLogout();
       this.localStoCourseid = localStorage.getItem('Courseid');
+      this.courseid = detail && detail.id || this.localStoCourseid;
       this.lastpersentage = localStorage.getItem('persentage');
       // this.lastpersentage = detail  && detail.persentage || this.localper ;
       this.loading = true;
@@ -181,10 +181,6 @@ export class CoursedetailsComponent implements OnInit {
       this.refreshData();
       this.autoHide();
       this.getPlayerNextPrve();
-      this.Lservice.getSingleBatchInfo(this.userDetail.user_id, detail && detail.id).subscribe((resdata: any) => {
-        console.log(resdata);
-        this.batchDetails = resdata || null;
-      });
       this.service.viewCurseByID(detail && detail.id || this.localStoCourseid, this.userDetail.user_id)
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
@@ -193,7 +189,16 @@ export class CoursedetailsComponent implements OnInit {
             if (this.scromApiData?.childData[0]) {
               this.selectedModuleData.indexValue = 1;
               if (this.selectedModuleData) {
-                this.viewAllThreads();
+                this.Lservice.getSingleBatchInfo(this.userDetail.user_id, this.courseid).subscribe((resdata: any) => {
+                  console.log(resdata);
+                  if (resdata?.data?.getbatchdetails?.message?.batchid !== null) {
+                    this.batchDetails = resdata?.data?.getbatchdetails?.message;
+                    this.viewAllThreads();
+                  } else {
+                    this.batchDetails = null;
+                    this.viewAllThreads();
+                  }
+                });
               }
             }
 
@@ -849,7 +854,7 @@ export class CoursedetailsComponent implements OnInit {
 
   viewAllThreads() {
     // '230984078162594'
-    this.Lservice.ViewAllThreadData(this.selectedModuleData?.title, this.course?.course_id, this.batchDetails.batch_id)
+    this.Lservice.ViewAllThreadData(this.selectedModuleData?.title, this.course?.course_id, this.batchDetails?.batchid)
       .subscribe((result: any) => {
         const temp = result.data.ViewAllThreadData.data;
         if (result?.data?.ViewAllThreadData?.data !== '') {
@@ -870,7 +875,12 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   createNewThread() {
-    const bid = { batch_id: this.batchDetails.batch_id, batch_name: this.batchDetails.batch_name };
+    let bid;
+    if (this.batchDetails?.batchid) {
+      bid = { batch_id: this.batchDetails?.batchid, batch_name: this.batchDetails?.batchname };
+    } else {
+      bid = null;
+    }
     this.addThreadForm.value.thread_name = this.addThreadForm.value.thread_name.trim()
       || this.addThreadForm.value.thread_name?.trimLeft() || this.addThreadForm.value.thread_name?.trimEnd();
     const desc: any = {};
