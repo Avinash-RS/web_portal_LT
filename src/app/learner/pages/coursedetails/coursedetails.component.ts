@@ -247,6 +247,11 @@ export class CoursedetailsComponent implements OnInit {
           this.getuserid._id + '&path=' + this.content.url);
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
+      if (detail && detail.assignmentVal) {
+        this.selectedTabIndex = 3;
+      } else if (detail && detail.forumVal) {
+        this.selectedTabIndex = 4;
+      }
     });
     this.getAssignmentmoduleData();
   }

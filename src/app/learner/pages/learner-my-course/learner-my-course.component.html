@@ -28,7 +28,7 @@
             class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span matBadge="{{incomplete?.length}}" matBadgeOverlap="false">{{'Ongoing' }}</span>
+                    <span (click)="getEnrolledCourses('','')" matBadge="{{incomplete?.length}}" matBadgeOverlap="false">{{'Ongoing' }}</span>
                 </ng-template>
 
  <!-- Card start -->
@@ -180,7 +180,7 @@
             </mat-tab>
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span matBadge="{{completed?.length}}" matBadgeOverlap="false">{{'Completed' | translate }}</span>
+                    <span (click)="getEnrolledCourses('','')" matBadge="{{completed?.length}}" matBadgeOverlap="false">{{'Completed' | translate }}</span>
                 </ng-template>
                 <div *ngFor="let course of completed ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
@@ -333,7 +333,7 @@
             </mat-tab>
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span matBadge="{{enrolledCourses?.length}}" matBadgeOverlap="false">{{'All' }}</span>
+                    <span (click)="getEnrolledCourses('','')" matBadge="{{enrolledCourses?.length}}" matBadgeOverlap="false">{{'All' }}</span>
                 </ng-template>
                 <div *ngFor="let course of enrolledCourses ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
@@ -486,10 +486,12 @@
                     </mat-card>
                 </div>
             </mat-tab>
-            <mat-tab>
+            <!-----------------------------------Category tabs----------------------------->
+            <ng-container *ngFor="let categorytab of categoryDetails">
+            <mat-tab *ngIf="categorytab.enrollCount">
                 <ng-template matTabLabel>
-                    <span (click)="getEnrolledCourses(catalogueId,collegeConnectId)" style="margin-left: 533px !important;" matBadge="{{collegeConnectCount}}"
-                        matBadgeOverlap="false">{{'College Connect' | translate }}</span>
+                    <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" style="margin-left: 533px !important;" matBadge="{{categorytab.enrollCount}}"
+                        matBadgeOverlap="false">{{categorytab.categoryName}}</span>
                 </ng-template>
 
                 <div *ngFor="let course of enrolledCourses ;let j=index">
@@ -641,314 +643,7 @@
                     </mat-card>
                 </div>
             </mat-tab>
-            <mat-tab>
-                <ng-template matTabLabel>
-                    <span (click)="getEnrolledCourses(catalogueId,vocationalId)" matBadge="{{vocationalCount}}" matBadgeOverlap="false">{{'Vocational' | translate }}</span>
-                </ng-template>
-                <div *ngFor="let course of enrolledCourses ;let j=index">
-                    <mat-card class="coursebg card12" matRipple>
-                        <!-- <div class="row width_100 no_margin"> -->
-                        <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
-                        <div class="row">
-                            <!-- // Card start -->
-                            <div class="col-7 l-b-2">
-                                <div class="row">
-                                    <div class="col-2">
-                                        <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
-                                            data-target="#myModal">
-                                            <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
-                                            <div class="overlay">
-                                                <mat-icon class="text"> play_arrow </mat-icon>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-8 m-t-2">
-                                        <div class="p-l-8 f_size_18 f_wt_500 pointer">
-                                            <span >
-                                                {{course.course_name}}
-                                            </span>
-                                            <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400  pointer"
-                                                (click)="gotoDesc(course)">
-                                                <p style="margin-left: 41px;">
-                                                    {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-10">
-                                                <button class="clr" (click)="goToAssignment(course)">
-                                                    <mat-icon class="btn-icon">description</mat-icon>
-                                                    <span>Assignments ({{course.assignmentCount}})</span>
-                                                </button>
-
-
-                                                <button class="clr ml-4" (click)="goToForum(course)">
-                                                    <mat-icon class="btn-icon">forum</mat-icon>
-                                                    <span>Discussion Forum ({{course.forumCount}})</span>
-                                                </button>
-                                            </div>
-                                            <div class="">
-                                                <button mat-stroked-button data-toggle="modal" data-target="#myModal"
-                                                    *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                                                    class=" btl-alin blue_clr cap pointer" (click)="gotoDesc(course)">
-                                                    <mat-icon class="icon-color">play_circle_outline</mat-icon>
-                                                    <span class="cap f_wt_400">
-                                                        {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume  ' : 
-                      course?.coursePlayerStatus?.status === 'suspend ' ? 'Resume ' : 'Start' }}&nbsp;
-                                                    </span>
-                                                </button>
-                                                <button mat-stroked-button
-                                                    *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                    class="btl-alin blue_clr cap pointer" data-toggle="modal"
-                                                    data-target="#myModal" (click)="gotoDesc(course)">
-                                                    <mat-icon class="icon-color">replay</mat-icon>
-                                                    <span class="cap f_wt_400">
-                                                        {{'Replay'  }}&nbsp;
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        <div class="row pointer ">
-                                            <div class="col-12 m-t-30" >
-                                                <span class="upcoming" *ngIf="activity?.activity_details.activitytype == 'Live Classroom'" routerLink="/Learner/calendar" routerLinkActive="active">Upcoming... {{activity?.activity_details.startdate | date :' h:mm a'}} to {{activity?.activity_details.enddate | date :' h:mm a'}} | Live classroom
-                                                    <mat-icon class="video">videocam</mat-icon></span>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-2">
-                                        <div class="aligned-with-icon">
-                                            <mat-icon class="timer"> alarm_on </mat-icon>
-                                            {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-5" *ngIf="course?.course_type != 'free_course'">
-                                <div class="row m-t-2 m-l-2p">
-                                    <div class="col-3">
-                                        <div>Activity</div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div>Learning effort</div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div>Points earned</div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div>Final score</div>
-                                    </div>
-                                </div>
-
-                                <div class="row m-t-2 m-l-2p">
-                                    <div class="col-3">
-                                        <div class="m-t">
-                                            <sapn class="padscore">4</sapn>
-                                            <sapn class="f_size_22">/</sapn> <span class="f_size_20">20</span>
-                                        </div>
-                                        <span>Pending</span>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="progess pointer">
-                                            <circle-progress
-                                                [percent]="course?.coursePlayerStatus?.course_percentage|| 0"
-                                                [radius]="10" [outerStrokeWidth]="1" [innerStrokeWidth]="1" [space]="-1"
-                                                [outerStrokeColor]="'#ffcc00'" [innerStrokeColor]="'#9d9d9d'"
-                                                [titleFontSize]="7" [unitsFontSize]="7" [showSubtitle]="false"
-                                                [animation]="true" [animationDuration]="300" [startFromZero]="false"
-                                                [responsive]="true">
-                                            </circle-progress>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="point">56</div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="finalScore">- - -</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- card end -->
-                        </div>
-                    </mat-card>
-                </div>
-
-                <div *ngIf="enrolledCourses?.length === 0">
-                    <mat-card class="coursebg width_90">
-                        <div class="row width_90 no_margin">
-                            <div class="col-1 display_flex pointer no_pl"
-                                (click)="gotoDesc(course)">
-                                <div class="lineer"></div>
-                                <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs">
-                            </div>
-                            <div class="col-11 errorboxx">
-                                <span style="font-size: medium;">
-                                    {{'You have no courses at the moment.' }}</span>
-                            </div>
-                        </div>
-                    </mat-card>
-                </div>
-            </mat-tab>
-            <mat-tab>
-                <ng-template matTabLabel>
-                    <span (click)="getEnrolledCourses(catalogueId,proCertificationId)" matBadge="{{proCertificationCount}}" matBadgeOverlap="false">{{'Pro Certification' | translate }}</span>
-                </ng-template>
-
-                <div *ngFor="let course of enrolledCourses ;let j=index">
-                    <mat-card class="coursebg card12" matRipple>
-                        <!-- <div class="row width_100 no_margin"> -->
-                        <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
-                        <div class="row">
-                            <!-- // Card start -->
-                            <div class="col-7 l-b-2">
-                                <div class="row">
-                                    <div class="col-2">
-                                        <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
-                                            data-target="#myModal">
-                                            <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
-                                            <div class="overlay">
-                                                <mat-icon class="text"> play_arrow </mat-icon>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-8 m-t-2">
-                                        <div class="p-l-8 f_size_18 f_wt_500 pointer">
-                                            <span >
-                                                {{course.course_name}}
-                                            </span>
-                                            <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400  pointer"
-                                                (click)="gotoDesc(course)">
-                                                <p style="margin-left: 41px;">
-                                                    {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-10">
-                                                <button class="clr" (click)="goToAssignment(course)">
-                                                    <mat-icon class="btn-icon">description</mat-icon>
-                                                    <span>Assignments ({{course.assignmentCount}})</span>
-                                                </button>
-
-
-                                                <button class="clr ml-4" (click)="goToForum(course)">
-                                                    <mat-icon class="btn-icon">forum</mat-icon>
-                                                    <span>Discussion Forum ({{course.forumCount}})</span>
-                                                </button>
-                                            </div>
-                                            <div class="">
-                                                <button mat-stroked-button data-toggle="modal" data-target="#myModal"
-                                                    *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                                                    class=" btl-alin blue_clr cap pointer" (click)="gotoDesc(course)">
-                                                    <mat-icon class="icon-color">play_circle_outline</mat-icon>
-                                                    <span class="cap f_wt_400">
-                                                        {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume  ' : 
-                      course?.coursePlayerStatus?.status === 'suspend ' ? 'Resume ' : 'Start' }}&nbsp;
-                                                    </span>
-                                                </button>
-                                                <button mat-stroked-button
-                                                    *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                    class="btl-alin blue_clr cap pointer" data-toggle="modal"
-                                                    data-target="#myModal" (click)="gotoDesc(course)">
-                                                    <mat-icon class="icon-color">replay</mat-icon>
-                                                    <span class="cap f_wt_400">
-                                                        {{'Replay'  }}&nbsp;
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        <div class="row pointer ">
-                                            <div class="col-12 m-t-30" >
-                                                <span class="upcoming" *ngIf="activity?.activity_details.activitytype == 'Live Classroom'" routerLink="/Learner/calendar" routerLinkActive="active">Upcoming... {{activity?.activity_details.startdate | date :' h:mm a'}} to {{activity?.activity_details.enddate | date :' h:mm a'}} | Live classroom
-                                                    <mat-icon class="video">videocam</mat-icon></span>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-2">
-                                        <div class="aligned-with-icon">
-                                            <mat-icon class="timer"> alarm_on </mat-icon>
-                                            {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-5" *ngIf="course?.course_type != 'free_course'">
-                                <div class="row m-t-2 m-l-2p">
-                                    <div class="col-3">
-                                        <div>Activity</div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div>Learning effort</div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div>Points earned</div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div>Final score</div>
-                                    </div>
-                                </div>
-
-                                <div class="row m-t-2 m-l-2p">
-                                    <div class="col-3">
-                                        <div class="m-t">
-                                            <sapn class="padscore">4</sapn>
-                                            <sapn class="f_size_22">/</sapn> <span class="f_size_20">20</span>
-                                        </div>
-                                        <span>Pending</span>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="progess pointer">
-                                            <circle-progress
-                                                [percent]="course?.coursePlayerStatus?.course_percentage|| 0"
-                                                [radius]="10" [outerStrokeWidth]="1" [innerStrokeWidth]="1" [space]="-1"
-                                                [outerStrokeColor]="'#ffcc00'" [innerStrokeColor]="'#9d9d9d'"
-                                                [titleFontSize]="7" [unitsFontSize]="7" [showSubtitle]="false"
-                                                [animation]="true" [animationDuration]="300" [startFromZero]="false"
-                                                [responsive]="true">
-                                            </circle-progress>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="point">56</div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="finalScore">- - -</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- card end -->
-                        </div>
-                    </mat-card>
-                </div>
-                <div *ngIf="enrolledCourses?.length === 0">
-                    <mat-card class="coursebg width_90">
-                        <div class="row width_90 no_margin">
-                            <div class="col-1 display_flex pointer no_pl"
-                                (click)="gotoDesc(course)">
-                                <div class="lineer"></div>
-                                <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs">
-                            </div>
-                            <div class="col-11 errorboxx">
-                                <span style="font-size: medium;">
-                                    {{'You have no courses at the moment.' }}</span>
-                            </div>
-                        </div>
-                    </mat-card>
-                </div>
-            </mat-tab>
-           
-
+        </ng-container>
         </mat-tab-group>
     </div>
 </div>
@@ -985,10 +680,10 @@
                 </div><br>
                 <div class="row">
                     <div class="col" style="text-align: center;">
-                        <button mat-stroked-button class="blue_clr claimbtn" *ngIf="course.clamaiedStatus == 'false' && claimVal == false"
+                        <button mat-stroked-button class="blue_clr claimbtn" *ngIf="course.clamaiedStatus == 'false'"
                         (click)="claimCourse(course.course_id)">Claim</button>
                         <button mat-stroked-button class="blue_clr claimbtn" [disabled]="course.clamaiedStatus == 'true'"
-                         *ngIf="course.clamaiedStatus == 'true' || claimVal == true"
+                         *ngIf="course.clamaiedStatus == 'true'"
                         >Claimed</button>
                     </div>
                 </div>
