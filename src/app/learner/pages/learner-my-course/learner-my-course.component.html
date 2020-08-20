@@ -8,13 +8,15 @@
       <span>
             <mat-button class="available-course-btn">
               <mat-select panelClass="mat-select-panel" class="mypanel" placeholder="{{catalogueDetails?.catalogueName | titlecase}}" name="availableCourses"
-
+              [(value)]="availableCourses" 
                     [(ngModel)]="availableCourses" (selectionChange)="getCoureBasedOnCatalog(catalogueDetails,availableCourses,previewDialog)"
                     required>
+                    <mat-select-trigger>{{availableCourses}}</mat-select-trigger>
                     <mat-option *ngFor="let category of categoryDetails" [value]="category" class="availableCourseOption">
-                      
-                        <div>{{category.categoryName | titlecase}}<span matBadge="{{category.totalCount}}"></span>
-                        </div>
+                    
+                            {{category.categoryName | titlecase}}
+                    
+                        <span matBadge="{{category.totalCount}}"></span>
                     </mat-option>
                 </mat-select> 
 
@@ -698,16 +700,23 @@
 </div>
 
 <ng-template #previewDialog>
-    <div>
-        <div>
+
+    <div class="row">
+        <div class="col-4">
             <span class="f_wt_600 size">{{categoryPopupData.categoryName}} ({{categoryPopupData.totalCount}})</span>
         </div>
-        <button mat-mini-fab class="close-button">
-          <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
-        </button>
-      </div><br>
+        <div class="col-6">
+            <input matInput class="form-control search" placeholder="Search" [(ngModel)]="courseSearch">
+        </div>
+        <div class="col-2">
+            <button mat-mini-fab class="close-button">
+                <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
+              </button>
+        </div>
+    </div>
+    <br>
       <div class="row">
-      <input matInput class="form-control search" placeholder="Search" [(ngModel)]="courseSearch">
+   
       <!-- <mat-icon>search</mat-icon> -->
     </div>
     <div class="row">
@@ -724,7 +733,7 @@
                         </div>
                     </a>
                 </div><br>
-                <div class="row">
+                <div class="row mb-3">
                     <span class="courseName">{{course.course_name}}</span>
                 </div><br>
                 <div class="row">

@@ -52,7 +52,7 @@ export class LearnerMyCourseComponent implements OnInit {
   courseMapping: any;
   courseSearch: any;
   categoryData: any;
-  availableCourses: string;
+  availableCourses: any;
 
   constructor(
     public translate: TranslateService,
