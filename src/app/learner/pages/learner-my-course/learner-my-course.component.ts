@@ -48,17 +48,9 @@ export class LearnerMyCourseComponent implements OnInit {
   catalogueDetails: any;
   pagenumber = 0;
   allcourses: any;
-  collegeConnectCount = 0;
-  vocationalCount = 0;
-  proCertificationCount = 0;
   categoryPopupData: any;
   courseMapping: any;
-  claimVal = false;
   courseSearch: any;
-  catalogueId: any;
-  collegeConnectId: any;
-  vocationalId: any;
-  proCertificationId: any;
   categoryData: any;
 
   constructor(
@@ -290,26 +282,7 @@ export class LearnerMyCourseComponent implements OnInit {
     this.learnerService.getCountForCategories(this.userDetailes._id).subscribe((data: any) => {
       if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
       this.catalogueDetails = data.data.getCountForCategories.data;
-      this.catalogueId = data.data.getCountForCategories.data.catalogueId;
-      console.log('ctalogue details',  this.catalogueId);
       this.categoryDetails = data.data.getCountForCategories.data.categories;
-      this.categoryDetails.forEach(element => {
-        if (element.categoryName === 'college connect') {
-          this.collegeConnectCount = element.enrollCount;
-          this.collegeConnectId = element.categoryId;
-          console.log('college connect data', element);
-        }
-        if (element.categoryName === 'vocational') {
-        this.vocationalCount = element.enrollCount;
-        this.vocationalId = element.categoryId;
-        console.log('college connect data', element);
-        }
-        if (element.categoryName === 'pro certification') {
-        this.proCertificationCount = element.enrollCount;
-        this.proCertificationId = element.categoryId;
-        console.log('college connect data', element);
-        }
-      });
     }
     });
   }
@@ -343,6 +316,7 @@ export class LearnerMyCourseComponent implements OnInit {
               this.userDetailes._id).subscribe((course: any) => {
               if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
               this.allcourses = course.data.getCoureBasedOnCatalog.data;
+              this.getCountForCategories();
               }
             });
           }
