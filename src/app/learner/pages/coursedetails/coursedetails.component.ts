@@ -155,6 +155,7 @@ export class CoursedetailsComponent implements OnInit {
   isprevEnable = false;
   selectedTabIndex = 0;
   batchDetails: any;
+  disableThreads: boolean;
   // initials: any;
 
   constructor(public translate: TranslateService, private router: ActivatedRoute,
@@ -193,6 +194,11 @@ export class CoursedetailsComponent implements OnInit {
                   console.log(resdata);
                   if (resdata?.data?.getbatchdetails?.message?.batchid !== null) {
                     this.batchDetails = resdata?.data?.getbatchdetails?.message;
+                    console.log('eeeeeeeeeeeeeeeeeeeee---------------',
+                    resdata?.data?.getbatchdetails?.message.batchenddate.slice(0, 10), new Date().toISOString().slice(0, 10));
+                    this.disableThreads = resdata?.data?.getbatchdetails?.message.batchenddate.slice(0, 10) ===
+                    new Date().toISOString().slice(0, 10) ? true : false;
+                    console.log('eeeeeeeeeeeeeeeeeeeee---------------', this.disableThreads);
                     this.viewAllThreads();
                   } else {
                     this.batchDetails = null;
