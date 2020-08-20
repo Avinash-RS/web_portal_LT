@@ -919,7 +919,11 @@ mat-icon {
   height: 30px;
 
 }
-
+.infoIcon{
+  position: relative;
+    font-size: 16px;
+    top: 3px;
+}
 .clr:hover {
   background-color: $lxp-dark-gray !important;
   color: $color-white !important;
