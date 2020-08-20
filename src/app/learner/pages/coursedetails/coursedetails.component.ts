@@ -156,6 +156,8 @@ export class CoursedetailsComponent implements OnInit {
   selectedTabIndex: any;
   detailData: any;
   batchDetails: any;
+  disableThreads: boolean;
+  // initials: any;
 
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
   // initials: any;
@@ -189,9 +191,10 @@ export class CoursedetailsComponent implements OnInit {
               this.selectedModuleData.indexValue = 1;
               if (this.selectedModuleData) {
                 this.Lservice.getSingleBatchInfo(this.userDetail.user_id, this.courseid).subscribe((resdata: any) => {
-                  console.log(resdata);
                   if (resdata?.data?.getbatchdetails?.message?.batchid !== null) {
                     this.batchDetails = resdata?.data?.getbatchdetails?.message;
+                    this.disableThreads = resdata?.data?.getbatchdetails?.message.batchenddate.slice(0, 10) <=
+                    new Date().toISOString().slice(0, 10) ? true : false;
                     this.viewAllThreads();
                   } else {
                     this.batchDetails = null;
