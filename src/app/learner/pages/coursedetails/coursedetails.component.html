@@ -515,7 +515,7 @@
                     <br>
                     <div *ngIf="showCourseDetails">
                         <div class="p-l-0 no_border">
-                            <div class="col-12">
+                            <div class="col-12"  [ngClass]="{'width_70 center p-l-0': !drawer.opened}">
                                 <div class="row" *ngIf="selectedModuleData">
                                     <p (click)="gotoDisplayAllThreads()">
                                         <span
@@ -531,10 +531,10 @@
 
                     </div>
 
-                    <div *ngIf="showCommentThread" class="no_border">
+                    <div *ngIf="showCommentThread" class="no_border" >
                         <div class="p-l-0">
-                            <div class="col-12">
-                                <div class="row" *ngIf="selectedModuleData">
+                            <div class="col-12"  [ngClass]="{'width_70 center p-l-0': !drawer.opened}">
+                                <div class="row" *ngIf="selectedModuleData" >
                                     <p (click)="gotoDisplayAllThreads();viewAllThreads()">
                                         <span class="color-blue f_size_16 f_wt_500"
                                             style="text-decoration-line:underline ; cursor: pointer;">{{(selectedModuleData.title | titlecase) || 'Module Name | translate ' + ' '}}({{'Module'+ ' ' +selectedModuleData.indexValue}})
@@ -580,8 +580,7 @@
 
                                             <mat-form-field class="no_margin" *ngIf="searchthreadname">
                                                 <input class="toolbar-search"
-                                                    [disabled]="
-                                                                showCourseDetails ? (discussionData === null || discussionData?.topics?.length === 0) :
+                                                    [disabled]="showCourseDetails ? (discussionData === null || discussionData?.topics?.length === 0) :
                                                                 (topicDiscussionData && topicDiscussionData?.posts?.length === 1)" type="text"
                                                     matInput name="searchbar" [(ngModel)]="filterValue"
                                                     (input)="onSearchChange($event.target.value);">
@@ -754,7 +753,7 @@
                             </mat-card-actions>
                         </mat-card>
                         <!-- Header starts here -->
-                        <mat-card class=" black_border box_shadow alignment ">
+                        <mat-card class="m-b-10 black_border box_shadow alignment ">
                             <div class="row" *ngIf="!showSearch">
                                 <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
 
