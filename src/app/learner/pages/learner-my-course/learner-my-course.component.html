@@ -5,19 +5,21 @@
         <div class="f_size_22 myC-head animated animatedFadeInUp fadeInUp ">{{'My Courses' }}</div>
     </div>
     <div class="col-2 mt-4">
-        <span>
+      <span>
             <mat-button class="available-course-btn">
-                <mat-select class="mypanel" placeholder="{{catalogueDetails?.catalogueName}}" name="availableCourses"
+              <mat-select panelClass="mat-select-panel" class="mypanel" placeholder="{{catalogueDetails?.catalogueName}}" name="availableCourses"
+
                     [(ngModel)]="availableCourses" (selectionChange)="getCoureBasedOnCatalog(catalogueDetails,availableCourses,previewDialog)"
                     required>
-                    <mat-option *ngFor="let category of categoryDetails" [value]="category">
-                        {{category.categoryName}}
-                        <span matBadge="{{category.totalCount}}" matBadgePosition="after"></span>
+                    <mat-option *ngFor="let category of categoryDetails" [value]="category" class="testing">
+                      
+                        <div>{{category.categoryName}}<span matBadge="{{category.totalCount}}"></span>
+                        </div>
                     </mat-option>
-                </mat-select>
-            </mat-button>
-        </span>
+                </mat-select> 
 
+            </mat-button>
+        </span> 
     </div>
 </div>
 
@@ -645,6 +647,10 @@
             </mat-tab>
         </ng-container>
         </mat-tab-group>
+
+
+
+
     </div>
 </div>
 
