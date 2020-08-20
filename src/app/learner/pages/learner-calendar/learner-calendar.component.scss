@@ -1,230 +1,477 @@
 @import "variable";
-#insidecard.uk-card-default {
-    background: $color-white;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
-    border-radius: 10px;
-    border-left: 8px solid $lxp-light-grey;
-    padding: 10px;
-    margin-bottom: 20px;
-}.f_size_22{
-    font-size: 22px;
-}
-
-div.scrollcard {
-    width: 95%;
-    height: 800px;
+.calender-container {
+    height: calc(100vh - 50px);
     overflow-y: auto;
+    .calender-section {
+        height: 620px;
+        overflow-y: auto;
+    }
+    .f_size_22 {
+        font-size: 22px;
+    }
+    .myC-head {
+        margin-left: 1% !important;
+        margin-top: 2%;
+        margin-bottom: -2%;
+    }
+    .color-grey {
+        border-left: 2px solid #b5acac !important;
+    }
+    .errorbox {
+        border-left: 7px solid;
+        height: 55px;
+        background: #bebdbd !important;
+        border-left-color: #FFCC00;
+        color: #ffffff;
+        text-align: center;
+        padding-top: 15px;
+    }
+    .f_size_24 {
+        font-size: 24px;
+    }
+    .para {
+        display: inline-flex;
+        font-size: 18px;
+    }
+    .iconevent {
+        padding: 9px;
+        font-size: 37px;
+        color: #5c6873;
+    }
+    .color-blue {
+        border-left: 3px solid #ffc107bf !important;
+        color: #1F1A17!important;
+    }
+    .color-blue-card-status {
+        border-left: 3px solid #446bd4d1!important;
+        color: #1F1A17!important;
+    }
+    .color-grey-card-status {
+        border-left: 3px solid #b5acac !important;
+        // color: #b5acac !important;
+    }
+    .color-yellow-card-status {
+        border-left: 3px solid #ffc107bf !important;
+        color: #1F1A17 !important;
+    }
+    .Upcomingstatus {
+        background: #446bd4d1;
+        padding: 2px 6px;
+        float: right;
+        border-radius: 4px;
+        font-size: 13px;
+        color: #ffffff;
+        margin-top: 5px;
+    }
+    .Completedstatus {
+        background: #b5acac;
+        padding: 2px 6px;
+        float: right;
+        border-radius: 4px;
+        font-size: 13px;
+        color: #ffffff;
+        margin-top: 5px;
+    }
+    .color-white {
+        color: #b5acac;
+        background: #ffffff !important;
+        border-left: 0px !important;
+    }
+    .status {
+        background: #ffc107bf;
+        padding: 2px 6px;
+        float: right;
+        border-radius: 4px;
+        font-size: 13px;
+        color: #ffffff;
+        margin-top: 5px;
+        margin-left: 0px;
+    }
+    .blue_clr {
+        background-color: #C02222;
+        color: #69727c;
+    }
+    .cap::first-letter {
+        text-transform: capitalize !important;
+    }
+    .m-b-10 {
+        margin-bottom: 12px;
+    }
+    .statBtn {
+        border: 1px solid #94b5f1;
+    }
+    .mat-stroked-button {
+        border: 1px solid currentColor;
+        padding: 0px 7px;
+        line-height: 25px;
+    }
+    .blue_clr:hover {
+        background-color: #C02222 !important;
+        color: #ffffff !important;
+    }
+    .LaunchBtn {
+        border: 1px solid #C02222 !important;
+        border-radius: 5px;
+        position: relative;
+        float: right;
+        margin-top: -5px;
+        background: #ffffff;
+        color: #9E9E9E;
+        border: 1px solid currentColor;
+        padding: 0px 7px;
+        line-height: 22px;
+    }
+    .m-l-4 {
+        margin-left: 2%;
+    }
+    hr {
+        margin-bottom: 0.5rem;
+    }
+    .no_pl {
+        padding-left: 0 !important;
+    }
+    .coursenameT {
+        // border-left: 5px solid #f3cc58;
+        padding-left: 10px;
+        margin-bottom: 2px;
+        border-radius: 3px;
+        font-weight: 600;
+        height: 40px;
+        padding-top: 9px;
+        font-size: 18px;
+    }
+    .person {
+        position: absolute;
+        margin-left: 10px;
+        color: #5c6873;
+        font-size: 18px;
+    }
+    .aligned-icon {
+        position: absolute;
+        color: #9E9E9E;
+        margin-left: 32px;
+    }
+    .color_black2 {
+        color: #5c6873;
+        ;
+    }
+    .space-10 {
+        margin-top: 10px;
+    }
+    .mainCard {
+        background: #f9f9f9;
+    }
+    .session-card {
+        border-radius: 0px;
+        box-shadow: none;
+        height: auto;
+        margin-bottom: 0%;
+        background: transparent !important;
+    }
+    .session-sub-card {
+        width: 100%;
+        border-bottom: 1px solid #dedede;
+    }
+    .f_size_12 {
+        font-size: 12px;
+    }
+    .btn {
+        color: #fff !important;
+        background-color: #0062cc !important;
+        border-color: #bcc0c5 !important;
+    }
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active,
+    .btn-primary.active {
+        color: #fff !important;
+        background-color: $color-blue !important;
+        border-color: #285e8e !important;
+        /*set the color you want here*/
+    }
 }
 
-::ng-deep.bs-datepicker-body {
-    padding: 10px;
-    border-radius: 0 0 3px 3px;
-    /* min-height: 500px; */
-    min-width: 600px;
-    border: 1px solid #e9edf0;
+// ::ng-deep .cal-month-view .cal-cell-top {
+//     height: 20px !important;
+//     min-height: 20px !important;
+//     flex: 1;
+// }
+::ng-deep .cal-cell-row {
+    height: 100%;
 }
 
-::ng-deep .bs-datepicker-head {
+::ng-deep.cal-month-view .cal-day-cell {
+    height: 80px;
+    min-height: 0px;
+}
+
+::ng-deep.cal-month-view .cal-event {
+    display: none;
+}
+
+::ng-deep .cal-cell-row {
+    height: 100%;
+}
+
+::ng-deep.cal-month-view .cal-day-cell {
+    height: 80px;
+    min-height: 0px;
+}
+
+::ng-deep.cal-month-view .cal-event {
+    display: none;
+}
+
+::ng-deep.cal-month-view .cal-day-badge {
+    background-color: #48b994 !important;
+    color: #fff !important;
+}
+
+::ng-deep.cal-month-view .cal-day-number {
+    color: black;
+}
+
+::ng-deep.cal-month-view .cal-days {
+    border-color: #b3b2b2;
+    border-bottom: 0px;
+}
+
+::ng-deep.cal-month-view .cal-days .cal-cell-row {
+    border-bottom-color: #b3b2b2;
+}
+
+::ng-deep.cal-month-view .cal-day-cell:not(:last-child) {
+    border-right-color: #b3b2b2;
+}
+
+
+// @import "variable";
+// #insidecard.uk-card-default {
+//     background: $color-white;
+//     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+//     border-radius: 10px;
+//     border-left: 8px solid $lxp-light-grey;
+//     padding: 10px;
+//     margin-bottom: 20px;
+// }.f_size_22{
+//     font-size: 22px;
+// }
+
+// div.scrollcard {
+//     width: 95%;
+//     height: 800px;
+//     overflow-y: auto;
+// }
+
+// ::ng-deep.bs-datepicker-body {
+//     padding: 10px;
+//     border-radius: 0 0 3px 3px;
+//     /* min-height: 500px; */
+//     min-width: 600px;
+//     border: 1px solid #e9edf0;
+// }
+
+// ::ng-deep .bs-datepicker-head {
  
-    text-align: center !important;
-}
-.myC-head{
-    margin-left: 1% !important;
-    margin-top: 2%;
-    margin-bottom: -2%;
-  }
-.color-grey {
-    border-left: 2px solid $lxp-light-grey !important;
-}
-.errorbox{
-    border-left: 7px solid;
-    height: 55px;
-    background: $lxp-gray !important;
-    border-left-color: $lxp-theme-yellow-sec;
-    color:$color-white;
-}
-.f_size_24{
-    font-size: 24px;
-}
-.para{
-    display: inline-flex;
-    font-size: 18px;
-}
- :host ::ng-deep.bs-datepicker-container {
- padding: 0px !important; 
- }
-.iconevent{
-    padding: 9px;
-    font-size: 37px;
-    color:$lxp-icon;
-}
-.color-blue {
-    border-left: 3px solid $lxp-status-yellow !important;
-    color: $color-blank!important;
-}
+//     text-align: center !important;
+// }
+// .myC-head{
+//     margin-left: 1% !important;
+//     margin-top: 2%;
+//     margin-bottom: -2%;
+//   }
+// .color-grey {
+//     border-left: 2px solid $lxp-light-grey !important;
+// }
+// .errorbox{
+//     border-left: 7px solid;
+//     height: 55px;
+//     background: $lxp-gray !important;
+//     border-left-color: $lxp-theme-yellow-sec;
+//     color:$color-white;
+// }
+// .f_size_24{
+//     font-size: 24px;
+// }
+// .para{
+//     display: inline-flex;
+//     font-size: 18px;
+// }
+//  :host ::ng-deep.bs-datepicker-container {
+//  padding: 0px !important; 
+//  }
+// .iconevent{
+//     padding: 9px;
+//     font-size: 37px;
+//     color:$lxp-icon;
+// }
+// .color-blue {
+//     border-left: 3px solid $lxp-status-yellow !important;
+//     color: $color-blank!important;
+// }
 
-.color-blue-card-status {
+// .color-blue-card-status {
  
-    border-left: 3px solid $bule2!important;
-    color: $color-blank!important;
-  }
+//     border-left: 3px solid $bule2!important;
+//     color: $color-blank!important;
+//   }
 
-.color-grey-card-status {
-    border-left: 3px solid $lxp-light-grey !important;
-    // color: #b5acac !important;
-  }
+// .color-grey-card-status {
+//     border-left: 3px solid $lxp-light-grey !important;
+//     // color: #b5acac !important;
+//   }
   
-  .color-yellow-card-status {
-    border-left: 3px solid $lxp-status-yellow !important;
-    color: $color-blank !important;
-  }
+//   .color-yellow-card-status {
+//     border-left: 3px solid $lxp-status-yellow !important;
+//     color: $color-blank !important;
+//   }
   
-  .Upcomingstatus{
-    background:$bule2;
-    padding: 2px 6px;
-    float: right;
-    border-radius: 4px;
-    font-size: 13px;
-    color: $color-white;
-    margin-top:5px;
-  }
+//   .Upcomingstatus{
+//     background:$bule2;
+//     padding: 2px 6px;
+//     float: right;
+//     border-radius: 4px;
+//     font-size: 13px;
+//     color: $color-white;
+//     margin-top:5px;
+//   }
 
-  .Completedstatus{
-    background: $lxp-light-grey;
-    padding: 2px 6px;
-    float: right;
-    border-radius: 4px;
-    font-size: 13px;
-    color: $color-white;
-    margin-top:5px;
-  }
+//   .Completedstatus{
+//     background: $lxp-light-grey;
+//     padding: 2px 6px;
+//     float: right;
+//     border-radius: 4px;
+//     font-size: 13px;
+//     color: $color-white;
+//     margin-top:5px;
+//   }
   
-.color-white {
-    color: $lxp-light-grey;
-    background: $color-white !important;
-    border-left: 0px !important;
-}
+// .color-white {
+//     color: $lxp-light-grey;
+//     background: $color-white !important;
+//     border-left: 0px !important;
+// }
 
-.status{
-    background: $lxp-status-yellow;
-    padding: 2px 6px;
-    float: right;
-    border-radius: 4px;
-    font-size: 13px;
-    color: $color-white;
-    margin-top:5px;
-    margin-left:0px;
-  }
+// .status{
+//     background: $lxp-status-yellow;
+//     padding: 2px 6px;
+//     float: right;
+//     border-radius: 4px;
+//     font-size: 13px;
+//     color: $color-white;
+//     margin-top:5px;
+//     margin-left:0px;
+//   }
 
 
-::ng-deep .learner-calender .theme-blue .bs-datepicker-head {
-    background-color: $lxp-theme-green;
-}
+// ::ng-deep .learner-calender .theme-blue .bs-datepicker-head {
+//     background-color: $lxp-theme-green;
+// }
 
-::ng-deep .learner-calender .theme-blue .bs-datepicker-body table td span.selected {
-    background-color: $lxp-theme-green !important;
-}
+// ::ng-deep .learner-calender .theme-blue .bs-datepicker-body table td span.selected {
+//     background-color: $lxp-theme-green !important;
+// }
 
-::ng-deep.theme-blue .bs-datepicker-body table td.week span {
-  color: #5bc0de;
-  display: none;
-}
+// ::ng-deep.theme-blue .bs-datepicker-body table td.week span {
+//   color: #5bc0de;
+//   display: none;
+// }
 
-.blue_clr {
-    background-color: $lxp-theme-green;
-    color: $lxp-button-text;
-}
+// .blue_clr {
+//     background-color: $lxp-theme-green;
+//     color: $lxp-button-text;
+// }
 
-.cap::first-letter {
-    text-transform: capitalize !important;
-}
+// .cap::first-letter {
+//     text-transform: capitalize !important;
+// }
 
-.m-b-10 {
-    margin-bottom: 12px;
-}
+// .m-b-10 {
+//     margin-bottom: 12px;
+// }
 
-.statBtn {
-    border: 1px solid $color-small-blue;
-}
+// .statBtn {
+//     border: 1px solid $color-small-blue;
+// }
 
-.mat-stroked-button {
-    border: 1px solid currentColor;
-    padding: 0px 7px;
-    line-height: 25px;
-}
+// .mat-stroked-button {
+//     border: 1px solid currentColor;
+//     padding: 0px 7px;
+//     line-height: 25px;
+// }
 
-.blue_clr:hover {
-    background-color: $lxp-theme-green !important;
-    color: $color-white !important;
-}
-.LaunchBtn{
-    border: 1px solid $lxp-theme-green !important;
-    border-radius: 5px;
-    position: relative;
-    float: right;
-    margin-top: -5px;
-    background: $color-white;
-    color: $lxp-text;
-    border: 1px solid currentColor;
-    padding: 0px 7px;
-    line-height: 22px;
-  }
-.uk-card-default {
-    color: $color-blank !important;
-}
-.m-l-4{
-    margin-left: 2%;
-  }
-  hr {
+// .blue_clr:hover {
+//     background-color: $lxp-theme-green !important;
+//     color: $color-white !important;
+// }
+// .LaunchBtn{
+//     border: 1px solid $lxp-theme-green !important;
+//     border-radius: 5px;
+//     position: relative;
+//     float: right;
+//     margin-top: -5px;
+//     background: $color-white;
+//     color: $lxp-text;
+//     border: 1px solid currentColor;
+//     padding: 0px 7px;
+//     line-height: 22px;
+//   }
+// .uk-card-default {
+//     color: $color-blank !important;
+// }
+// .m-l-4{
+//     margin-left: 2%;
+//   }
+//   hr {
   
-    margin-bottom: 0.5rem;
-  }
-.no_pl {
-    padding-left: 0 !important;
-  }
-  .coursenameT{
-    // border-left: 5px solid #f3cc58;
-    padding-left: 10px;
-    margin-bottom: 2px;
-    border-radius: 3px;
-    font-weight: 600;
-    height: 40px;
-    padding-top: 9px;
-    font-size: 18px;
+//     margin-bottom: 0.5rem;
+//   }
+// .no_pl {
+//     padding-left: 0 !important;
+//   }
+//   .coursenameT{
+//     // border-left: 5px solid #f3cc58;
+//     padding-left: 10px;
+//     margin-bottom: 2px;
+//     border-radius: 3px;
+//     font-weight: 600;
+//     height: 40px;
+//     padding-top: 9px;
+//     font-size: 18px;
   
-  }
-  .person{
-    position: absolute;
-      margin-left: 10px;
-      color: $lxp-icon;
-      font-size: 18px;
-  }
-  .aligned-icon{
-    position: absolute;
-    color: $lxp-text;
-    margin-left: 32px;
-  }
-  .color_black2 {
-      color: $label;
-  }
+//   }
+//   .person{
+//     position: absolute;
+//       margin-left: 10px;
+//       color: $lxp-icon;
+//       font-size: 18px;
+//   }
+//   .aligned-icon{
+//     position: absolute;
+//     color: $lxp-text;
+//     margin-left: 32px;
+//   }
+//   .color_black2 {
+//       color: $label;
+//   }
   
-  .space-10{
-    margin-top: 10px;
-  }
-.mainCard{
-    background: #f9f9f9;
-    margin-left: 4%;
-  }
-  .session-card{
-    border-radius: 0px;
-    box-shadow: none;
-      height: auto;
-    margin-bottom: 0%;
-    background: transparent !important;
-  }
-  .session-sub-card{
-          width: 100%;
-          border-bottom: 1px solid #dedede;
-          // margin-left: 3%;
-          // padding-left: 14px;
-  }
+//   .space-10{
+//     margin-top: 10px;
+//   }
+// .mainCard{
+//     background: #f9f9f9;
+//     margin-left: 4%;
+//   }
+//   .session-card{
+//     border-radius: 0px;
+//     box-shadow: none;
+//       height: auto;
+//     margin-bottom: 0%;
+//     background: transparent !important;
+//   }
+//   .session-sub-card{
+//           width: 100%;
+//           border-bottom: 1px solid #dedede;
+//           // margin-left: 3%;
+//           // padding-left: 14px;
+//   }
