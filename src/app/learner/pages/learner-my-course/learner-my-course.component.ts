@@ -177,12 +177,12 @@ export class LearnerMyCourseComponent implements OnInit {
         //     element.coursePlayerStatus.course_percentage = Math.round(element.coursePlayerStatus.course_percentage);
         //   }
         // });
-        const arr = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function(item) {
+        const arr = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(item => {
           return item.coursePlayerStatus?.status === 'incomplete' ||
             item.coursePlayerStatus?.status === 'suspend' ||
             item.coursePlayerStatus?.status === 'start';
         });
-        const arr1 = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function(item) {
+        const arr1 = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(item => {
           return item.coursePlayerStatus?.status === 'completed';
         });
         this.completed = arr1;
