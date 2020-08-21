@@ -75,7 +75,7 @@
 
 
                                                 <button class="clr ml-4" (click)="goToForum(course)"
-                                                [disabled]="course.forumCount == 0">
+                                                >
                                                     <mat-icon class="btn-icon">forum</mat-icon>
                                                     <span>Discussion Forum ({{course.forumCount}})</span>
                                                 </button>
@@ -104,7 +104,7 @@
 
                                         <div class="row pointer">
                                             <div class="col-12 m-t-30" >
-                                                <div class="upcoming" (click)="navToCal()" *ngIf="activity?.activity_details.activitytype == 'Live Classroom'">Upcoming... {{activity?.activity_details.startdate | date :' h:mm a'}} to {{activity?.activity_details.enddate | date :' h:mm a'}} | Live classroom
+                                                <div class="upcoming" (click)="navToCal()" *ngIf="course?.upComingLiveClassRoom?.activitytype == 'Live Classroom'">Upcoming... {{course?.upComingLiveClassRoom?.startdate | date :' h:mm a'}} to {{course?.upComingLiveClassRoom?.enddate | date :' h:mm a'}} | Live classroom
                                                     <mat-icon class="video">videocam</mat-icon></div>
                                             </div>
 
@@ -240,7 +240,7 @@
 
 
                                                 <button class="clr ml-4" (click)="goToForum(course)"
-                                                [disabled]="course.forumCount == 0">
+                                                >
                                                     <mat-icon class="btn-icon">forum</mat-icon>
                                                     <span>Discussion Forum ({{course.forumCount}})</span>
                                                 </button>
@@ -406,7 +406,7 @@
 
 
                                                 <button class="clr ml-4" (click)="goToForum(course)"
-                                                [disabled]="course.forumCount == 0">
+                                                >
                                                     <mat-icon class="btn-icon">forum</mat-icon>
                                                     <span>Discussion Forum ({{course.forumCount}})</span>
                                                 </button>
@@ -542,7 +542,7 @@
                         <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
                         <div class="row">
                             <!-- // Card start -->
-                            <div class="col-7 l-b-2">
+                            <div class="col-7">
                                 <div class="row">
                                     <div class="col-2">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
@@ -570,20 +570,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-10">
-                                                <button class="clr" (click)="goToAssignment(course)"
-                                                [disabled]="course.assignmentCount == 0">
-                                                    <mat-icon class="btn-icon">description</mat-icon>
-                                                    <span>Assignments ({{course.assignmentCount}})</span>
-                                                </button>
-
-
-                                                <button class="clr ml-4" (click)="goToForum(course)"
-                                                [disabled]="course.forumCount == 0">
-                                                    <mat-icon class="btn-icon">forum</mat-icon>
-                                                    <span>Discussion Forum ({{course.forumCount}})</span>
-                                                </button>
-                                            </div>
+                                            <div class="col-10"></div>
                                             <div class="">
                                                 <button mat-stroked-button data-toggle="modal" data-target="#myModal"
                                                     *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
@@ -623,7 +610,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-5" *ngIf="(course?.course_type != 'free_course' && !course.batchCourse) || 
+                            <!-- <div class="col-5" *ngIf="(course?.course_type != 'free_course' && !course.batchCourse) || 
                             (course?.course_type == 'free_course' && course.batchCourse)">
                                 <div class="row m-t-2 m-l-2p f_size_13">
                                     <div class="col-3">
@@ -676,7 +663,7 @@
                                         <div class="finalScore">- - -</div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- card end -->
                         </div>
                     </mat-card>
