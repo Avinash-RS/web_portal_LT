@@ -1,10 +1,12 @@
 import gql from 'graphql-tag';
 
 export const user_registration = gql`
-  mutation user_registration($full_name: String!, $mobile_number: String, $email: String!,$term_condition:Boolean,$domain:String!) {
+  mutation user_registration($full_name: String!, $mobile_number: String, $title_id: String,
+   $email: String!,$term_condition:Boolean,$domain:String!) {
     user_registration(
       full_name: $full_name,
       mobile_number:$mobile_number,
+      title_id :$title_id ,
       email: $email,
       term_condition: $term_condition,
       domain:$domain
@@ -872,6 +874,18 @@ export const claimcourse = gql`
     claimcourse(id: $id, user_id: $user_id, course_id: $course_id) {
       message
       success
+    }
+  }
+`;
+
+export const  user_mstr_data = gql`
+  mutation  user_mstr_data {
+    user_mstr_data {
+      success
+        data {
+          _id
+          title
+        }
     }
   }
 `;

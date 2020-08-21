@@ -809,7 +809,7 @@ margin-top: 2%;
 
   .color-white {
     color: #b5acac;
-    background: white !important;
+    background: $color-white !important;
     border-left: 0px !important;
   }
 
@@ -912,7 +912,7 @@ margin-top: 2%;
 }
 .buttonCls {
 button {
-  border: solid 1px black !important;
+  border: solid 1px $color-blank !important;
   color: $lxp-text;
 }
 mat-icon {
@@ -1022,4 +1022,11 @@ mat-icon {
 }
 .availableCourseOption{
   width: 150px;
+}
+::ng-deep .tooltip-inner{
+  
+  opacity: 0.6 !important;
+}
+:host ::ng-deep .tooltip-arrow {
+  opacity: 0.6 !important;
 }
