@@ -976,8 +976,9 @@ mat-icon {
 .courseImage{
   height: 178px;
   width: 100%;
-  margin-top: -15px;
+  
 }
+
 .overlay {
   opacity: 1;
 }
@@ -987,17 +988,14 @@ mat-icon {
 }
 .box-shadow {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  max-height: 283px;
+  max-height: 100%
 }
 .courseName {
   position: relative;
   left: 10px;
   font-size: 18px;
 }
-.claimbtn {
-  position: relative;
-  bottom: 16px;
-}
+
 .size {
   font-size: large
 }
@@ -1005,6 +1003,8 @@ mat-icon {
   width: 60%;
   position: relative;
   bottom: 2px;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(21, 156, 228, 0.4);
   
 }
 /* dropdown badge alignment */
