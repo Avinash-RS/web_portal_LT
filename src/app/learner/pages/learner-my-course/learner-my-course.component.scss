@@ -1023,3 +1023,10 @@ mat-icon {
 .availableCourseOption{
   width: 150px;
 }
+::ng-deep .tooltip-inner{
+  
+  opacity: 0.6 !important;
+}
+:host ::ng-deep .tooltip-arrow {
+  opacity: 0.6 !important;
+}
