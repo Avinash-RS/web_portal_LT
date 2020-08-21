@@ -107,7 +107,7 @@
                             {{'Mobile number is required' }}
                           </mat-error> -->
                           <mat-error class="error"  *ngIf="registerForm.get('mobile').hasError('minlength')">
-                            {{'Mobile number must be 10 digits'}}
+                            {{'Mobile number must be 10 digits' | translate }}
                           </mat-error>
                        
                           <mat-error class="error" *ngIf="registerForm.get('mobile').hasError('pattern')">

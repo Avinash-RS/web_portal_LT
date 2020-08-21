@@ -52,7 +52,6 @@ export class ResetpasswordComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.translate.use(localStorage.getItem('language'));
     this.activeroute.queryParams.subscribe(params => {
       if (params.code) {
         // const decryptedString = simpleCrypto.decrypt(params.code);
