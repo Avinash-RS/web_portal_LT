@@ -68,13 +68,13 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-10">
-                                                <button class="clr" (click)="goToAssignment(course)" [disabled]="course.assignmentCount == 0">
+                                                <button *ngIf="course.batchCourse == true" class="clr" (click)="goToAssignment(course)" [disabled]="course.assignmentCount == 0">
                                                     <mat-icon class="btn-icon">description</mat-icon>
                                                     <span>Assignments ({{course.assignmentCount}})</span>
                                                 </button>
 
 
-                                                <button class="clr ml-4" (click)="goToForum(course)"
+                                                <button *ngIf="course.batchCourse == true" class="clr ml-4" (click)="goToForum(course)"
                                                 >
                                                     <mat-icon class="btn-icon">forum</mat-icon>
                                                     <span>Discussion Forum ({{course.forumCount}})</span>
@@ -119,8 +119,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-5" *ngIf="(course?.course_type != 'free_course' && !course.batchCourse) || 
-                            (course?.course_type == 'free_course' && course.batchCourse)">
+                            <div class="col-5" *ngIf="course.batchCourse == true">
                                 <div class="row m-t-2 m-l-2p f_size_13">
                                     <div class="col-3">
                                         <div>Activity 
@@ -233,13 +232,13 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-10">
-                                                <button class="clr" (click)="goToAssignment(course)" [disabled]="course.assignmentCount == 0">
+                                                <button *ngIf="course.batchCourse == true" class="clr" (click)="goToAssignment(course)" [disabled]="course.assignmentCount == 0">
                                                     <mat-icon class="btn-icon">description</mat-icon>
                                                     <span>Assignments ({{course.assignmentCount}})</span>
                                                 </button>
 
 
-                                                <button class="clr ml-4" (click)="goToForum(course)"
+                                                <button *ngIf="course.batchCourse == true" class="clr ml-4" (click)="goToForum(course)"
                                                 >
                                                     <mat-icon class="btn-icon">forum</mat-icon>
                                                     <span>Discussion Forum ({{course.forumCount}})</span>
@@ -284,8 +283,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-5"  *ngIf="(course?.course_type != 'free_course' && !course.batchCourse) || 
-                            (course?.course_type == 'free_course' && course.batchCourse)">
+                            <div class="col-5" *ngIf="course.batchCourse == true">
                                 <div class="row m-t-2 m-l-2p f_size_13">
                                     <div class="col-3">
                                         <div>Activity 
@@ -398,14 +396,14 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-10">
-                                                <button class="clr" (click)="goToAssignment(course)"
+                                                <button *ngIf="course.batchCourse == true" class="clr" (click)="goToAssignment(course)"
                                                 [disabled]="course.assignmentCount == 0">
                                                     <mat-icon class="btn-icon">description</mat-icon>
                                                     <span>Assignments ({{course.assignmentCount}})</span>
                                                 </button>
 
 
-                                                <button class="clr ml-4" (click)="goToForum(course)"
+                                                <button *ngIf="course.batchCourse == true" class="clr ml-4" (click)="goToForum(course)"
                                                 >
                                                     <mat-icon class="btn-icon">forum</mat-icon>
                                                     <span>Discussion Forum ({{course.forumCount}})</span>
@@ -450,8 +448,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-5" *ngIf="(course?.course_type != 'free_course' && !course.batchCourse) || 
-                            (course?.course_type == 'free_course' && course.batchCourse)">
+                            <div class="col-5" *ngIf="course.batchCourse == true">
                                 <div class="row m-t-2 m-l-2p f_size_13">
                                     <div class="col-3">
                                         <div>Activity 

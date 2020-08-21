@@ -387,13 +387,15 @@
                                                                     <div class="row">
 
                                                                         <span>
-
+                                                                                <button class="uploadBtn"
+                                                                            [disabled]="!file?.enableUpload"
+                                                                            (click)="fileInput.click()">
+                                                                          <span class="uploadIcon">
                                                                             <i class="fa fa-upload searchicon ml-3 tooltip-350"
                                                                                 [tooltip]="popTemplate"
                                                                                 placement="bottom" aria-hidden="true"
                                                                                 placement="bottom"
-                                                                                [disabled]="!assignmentContent?.enableUpload"
-                                                                                (click)="fileInput.click()"></i>
+                                                                                ></i></span></button>
 
                                                                         </span>
 
