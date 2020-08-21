@@ -96,21 +96,12 @@ export class LearnerMyCourseComponent implements OnInit {
     const dateValue = moment(topicStart).format('YYYY-MM-DD');
     this.learnerService.getData(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
       this.results = data.data.get_read_learner_activity;
-      // console.log( this.results);
       this.activity = data.data.get_read_learner_activity.message[0];
-
       this.results.message.forEach((el: any) => {
-        // console.log(el.activity_details.startdate);
         this.currentStartTime = moment(el.activity_details.startdate).format('LT');
-      //  console.log(this.currentStartTime)
         this.currentEndTime = moment(el.activity_details.enddate).format('LT');
-        // console.log(this.currentEndTime);
-
         const StartDate = new Date(el.activity_details.startdate);
-        // console.log(StartDate,"StartDate");
-
         const EndDate = new Date(el.activity_details.enddate);
-        // console.log(EndDate,"EndDate");
 
         if (currentDate > StartDate) {
           this.showCompleted = 'completed';

@@ -1,27 +1,13 @@
 @import "variable";
-
-// :host ::ng-deep input[type="text"] {
-//   width: 100%;
-//   // padding: 12px 20px;
-//   margin: 1px 0;
-//   // background: $color-light-blue;
-//   display: inline-block;
-//   border: 1px solid $color-border;
-//   box-sizing: border-box;
-//   border-radius: 0px !important;
-// }
-
 .otp {
   margin: 0 5px;
   text-align: center;
   font-size: 27px;
   outline: none;
   width: 21%;
-  // background-color:$color-light-blue !important;
   transition: all 0.2s ease-in-out;
 
   &:focus {
-    // border-color: $color-light-blue;
     box-shadow: 0 0 5px $color-light-blue inset;
   }
 
@@ -31,7 +17,7 @@
 }
 .hearder-logo {
   height: 36px;
-  // padding-left: 0.5%;
+
 }
 .mat-toolbar {
   background: $lxp-theme-yellow-sec !important;
@@ -39,16 +25,6 @@
   position: absolute;
   z-index: 4;
 }
-// :host ::ng-deep label {
-//   margin-bottom: 0.1em !important;
-// }
-
-// .btn.disabled,
-// .btn:disabled {
-//   opacity: 0.65;
-//   color: $label2 !important;
-//   background-color: $color-border !important;
-// }
 
 div.account {
   color: $color-blue;
@@ -87,7 +63,6 @@ div.account {
   padding: 7px;
   margin-top: 16px;
   margin-left: 50% !important;
-  /* background-color: #ffffff85; */
   font-size: 14px;
   font-weight: normal !important;
 }
@@ -98,7 +73,6 @@ div.account {
   padding: 7px;
   margin-top: 45%;
   margin-left: 47% !important;
-  /* background-color: #ffffff85; */
   font-size: 14px;
   font-weight: normal !important;
 }
@@ -142,30 +116,11 @@ div.account {
   overflow: hidden !important;
 }
 
-// :host ::ng-deep.signIn {
-//   text-align: center !important;
-//   margin-top: 27px !important;
-//   color: $lxp-theme-green !important;
-//   font-size: 28px;
-//   letter-spacing: 0.5px;
-// }
 
 mat-form-field {
   width: 100%;
 }
-// :host ::ng-deep.footer20{
-//   height: 50px;
-//   bottom: 6px;
-//   width: 100%;
-//   position: absolute;
-// }
 
-// :host ::ng-deep.footericon{
-//   width: 100%;
-//   position: absolute;
-//   margin-left: 5px;
-
-// }
 :host ::ng-deep.footertext{
   font-size: 14px !important;
   font-weight: 400;
@@ -174,13 +129,6 @@ mat-form-field {
   color: $lxp-footer-text;
 }
 
-// :host ::ng-deep .powered{
-//   font-size: 14px !important;
-//   font-weight: 400;
-//   padding: 18px;
-//   position: absolute;
-//   color: $lxp-footer-text;
-// }
 input.mat-input-element {
   margin-top: -3px !important;
 }
@@ -265,6 +213,9 @@ font-size: 16px;
     margin-left: 5px;
     margin-top: 4px;
   }
+  .forgot1{
+    margin-left: -9%;
+  }
 }
 
 @media (max-width: 568px) {
@@ -287,12 +238,14 @@ font-size: 16px;
     margin-left: 5px;
     margin-top: 4px;
   }
+  .forgot1{
+    margin-left: -9%;
+  }
 }
 .img {
   text-align: center;
 }
 .forgot1 {
   color: $lxp-text ;
-  // cursor: pointer;
   font-size: 13px;
 }
