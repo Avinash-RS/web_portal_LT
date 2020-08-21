@@ -89,53 +89,46 @@ export class LearnerMyCourseComponent implements OnInit {
     topicname: 'Codes for Foundations1',
     _id: '5f2a50055e15d300116e4613'}}]}];
 
-    const currentDate = new Date();
-    const formatDate = moment(currentDate).format();
+    // const currentDate = new Date();
+    // const formatDate = moment(currentDate).format();
 
-    const topicStart = new Date();
-    const dateValue = moment(topicStart).format('YYYY-MM-DD');
-    this.learnerService.getData(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
-      this.results = data.data.get_read_learner_activity;
-      // console.log( this.results);
-      this.activity = data.data.get_read_learner_activity.message[0];
+    // const topicStart = new Date();
+    // const dateValue = moment(topicStart).format('YYYY-MM-DD');
+    // this.learnerService.getData(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
+    //   this.results = data.data.get_read_learner_activity;
+    //   this.activity = data.data.get_read_learner_activity.message[0];
 
-      this.results.message.forEach((el: any) => {
-        // console.log(el.activity_details.startdate);
-        this.currentStartTime = moment(el.activity_details.startdate).format('LT');
-      //  console.log(this.currentStartTime)
-        this.currentEndTime = moment(el.activity_details.enddate).format('LT');
-        // console.log(this.currentEndTime);
+    //   this.results.message.forEach((el: any) => {
+    //     this.currentStartTime = moment(el.activity_details.startdate).format('LT');
+    //     this.currentEndTime = moment(el.activity_details.enddate).format('LT');
+    //     const StartDate = new Date(el.activity_details.startdate);
 
-        const StartDate = new Date(el.activity_details.startdate);
-        // console.log(StartDate,"StartDate");
+    //     const EndDate = new Date(el.activity_details.enddate);
 
-        const EndDate = new Date(el.activity_details.enddate);
-        // console.log(EndDate,"EndDate");
+    //     if (currentDate > StartDate) {
+    //       this.showCompleted = 'completed';
+    //     } else if (currentDate === StartDate && currentDate < EndDate ) {
+    //       this.showOngoing = 'ongoing';
+    //     } else {
+    //       this.showUpcoming = 'upcoming';
+    //     }
 
-        if (currentDate > StartDate) {
-          this.showCompleted = 'completed';
-        } else if (currentDate === StartDate && currentDate < EndDate ) {
-          this.showOngoing = 'ongoing';
-        } else {
-          this.showUpcoming = 'upcoming';
-        }
+    //   });
 
-      });
+    //   // console.log("length",this.results['message'].length);
 
-      // console.log("length",this.results['message'].length);
-
-      // tslint:disable-next-line:no-string-literal
-      // debugger;
-      if (this.results.message.length < 5) {
-        this.showViewButton = false;
-        // console.log(this.showViewButton);
-      } else {
-        this.showViewButton = true;
-      }
-      // console.log('after playlist order UPDATED', data.data);
-    }, (error) => {
-      // console.log('there was an error sending the query', error);
-    });
+    //   // tslint:disable-next-line:no-string-literal
+    //   // debugger;
+    //   if (this.results.message.length < 5) {
+    //     this.showViewButton = false;
+    //     // console.log(this.showViewButton);
+    //   } else {
+    //     this.showViewButton = true;
+    //   }
+    //   // console.log('after playlist order UPDATED', data.data);
+    // }, (error) => {
+    //   // console.log('there was an error sending the query', error);
+    // });
     // console.log('data retreived', data);
 
 
@@ -162,6 +155,20 @@ export class LearnerMyCourseComponent implements OnInit {
         // });
         this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
         this.enrolledCourses.forEach(element => {
+          console.log('ele', element.upComingLiveClassRoom);
+          if (element.upComingLiveClassRoom) {
+          const currentDate = new Date();
+          const formatDate = moment(currentDate).format();
+          const StartDate = new Date(element.upComingLiveClassRoom.startdate);
+          const EndDate = new Date(element.upComingLiveClassRoom.enddate);
+          if (currentDate > StartDate) {
+            this.showCompleted = 'completed';
+          } else if (currentDate === StartDate && currentDate < EndDate) {
+            this.showOngoing = 'ongoing';
+          } else {
+            this.showUpcoming = 'upcoming';
+          }
+        }
           const assignmentCount = element.assignmentCount;
           const forumCount = element.forumCount;
           if (element.course_duration) {
@@ -177,12 +184,12 @@ export class LearnerMyCourseComponent implements OnInit {
         //     element.coursePlayerStatus.course_percentage = Math.round(element.coursePlayerStatus.course_percentage);
         //   }
         // });
-        const arr = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function(item) {
+        const arr = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(item => {
           return item.coursePlayerStatus?.status === 'incomplete' ||
             item.coursePlayerStatus?.status === 'suspend' ||
             item.coursePlayerStatus?.status === 'start';
         });
-        const arr1 = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function(item) {
+        const arr1 = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(item => {
           return item.coursePlayerStatus?.status === 'completed';
         });
         this.completed = arr1;

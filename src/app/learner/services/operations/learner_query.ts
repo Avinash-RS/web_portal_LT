@@ -807,6 +807,14 @@ export const getLearnerenrolledCourses = gql`
           assignmentCount
           forumCount
           batchCourse
+          upComingLiveClassRoom{
+            courseid
+            link
+            activitytype
+            startdate
+            enddate
+            status
+          }
           course_duration
           coursePlayerStatus {
             status
