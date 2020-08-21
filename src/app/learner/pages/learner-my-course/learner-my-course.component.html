@@ -32,7 +32,7 @@
             class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span (click)="getEnrolledCourses('','')" matBadge="{{incomplete?.length}}" matBadgeOverlap="false">{{'Ongoing' }}</span>
+                    <span (click)="getEnrolledCourses('','')" matBadge="{{onGoingCourseCount}}" matBadgeOverlap="false">{{'Ongoing' }}</span>
                 </ng-template>
 
  <!-- Card start -->
@@ -179,7 +179,7 @@
                 <!-- card end -->
 
 
-                <div *ngIf="incomplete?.length === 0">
+                <div *ngIf="onGoingCourseCount === 0">
                     <mat-card class="coursebg width_90">
                         <div class="row width_90 no_margin">
                             <div class="col-1 display_flex pointer no_pl"
@@ -196,7 +196,7 @@
             </mat-tab>
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span (click)="getEnrolledCourses('','')" matBadge="{{completed?.length}}" matBadgeOverlap="false">{{'Completed' | translate }}</span>
+                    <span (click)="getEnrolledCourses('','')" matBadge="{{completedCourseCount}}" matBadgeOverlap="false">{{'Completed' | translate }}</span>
                 </ng-template>
                 <div *ngFor="let course of completed ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
@@ -269,7 +269,7 @@
 
                                         <div class="row pointer ">
                                             <div class="col-12 m-t-30" >
-                                                <span class="upcoming" (click)="navToCal()" *ngIf="activity?.activity_details.activitytype == 'Live Classroom'" >Upcoming... {{activity?.activity_details.startdate | date :' h:mm a'}} to {{activity?.activity_details.enddate | date :' h:mm a'}} | Live classroom
+                                                <span class="upcoming" (click)="navToCal()" *ngIf="course?.upComingLiveClassRoom?.activitytype == 'Live Classroom'">Upcoming... {{course?.upComingLiveClassRoom?.startdate | date :' h:mm a'}} to {{course?.upComingLiveClassRoom?.enddate | date :' h:mm a'}} | Live classroom
                                                     <mat-icon class="video">videocam</mat-icon></span>
                                             </div>
 
@@ -343,7 +343,7 @@
                     </mat-card>
                 </div>
 
-                <div *ngIf="completed?.length === 0">
+                <div *ngIf="completedCourseCount === 0">
                     <mat-card class="coursebg width_90">
                         <div class="row width_90 no_margin">
                             <div class="col-1 display_flex pointer no_pl"
@@ -359,9 +359,9 @@
                     </mat-card>
                 </div>
             </mat-tab>
-            <mat-tab >
+            <mat-tab>
                 <ng-template matTabLabel>
-                    <span (click)="getEnrolledCourses('','')" matBadge="{{enrolledCourses?.length}}" matBadgeOverlap="false">{{'All' }}</span>
+                    <span (click)="getEnrolledCourses('','')" matBadge="{{allCourseCount}}" matBadgeOverlap="false">{{'All' }}</span>
                 </ng-template>
                 <div *ngFor="let course of enrolledCourses ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
@@ -435,7 +435,7 @@
 
                                         <div class="row pointer ">
                                             <div class="col-12 m-t-30" >
-                                                <span class="upcoming" (click)="navToCal()" *ngIf="activity?.activity_details.activitytype == 'Live Classroom'">Upcoming... {{activity?.activity_details.startdate | date :' h:mm a'}} to {{activity?.activity_details.enddate | date :' h:mm a'}} | Live classroom
+                                                <span class="upcoming" (click)="navToCal()" *ngIf="course?.upComingLiveClassRoom?.activitytype == 'Live Classroom'">Upcoming... {{course?.upComingLiveClassRoom?.startdate | date :' h:mm a'}} to {{course?.upComingLiveClassRoom?.enddate | date :' h:mm a'}} | Live classroom
                                                     <mat-icon class="video">videocam</mat-icon></span>
                                             </div>
 
@@ -511,7 +511,7 @@
 
 
 
-                <div *ngIf="enrolledCourses?.length === 0">
+                <div *ngIf="allCourseCount === 0">
                     <mat-card class="coursebg width_90">
                         <div class="row width_90 no_margin">
                             <div class="col-xl-1 display_flex pointer no_pl"
@@ -592,14 +592,6 @@
                                                 </button>
                                             </div>
                                         </div>
-
-                                        <div class="row pointer ">
-                                            <div class="col-12 m-t-30" >
-                                                <span class="upcoming" (click)="navToCal()" *ngIf="activity?.activity_details.activitytype == 'Live Classroom'" >Upcoming... {{activity?.activity_details.startdate | date :' h:mm a'}} to {{activity?.activity_details.enddate | date :' h:mm a'}} | Live classroom
-                                                    <mat-icon class="video">videocam</mat-icon></span>
-                                            </div>
-
-                                        </div>
                                     </div>
 
                                     <div class="col-2">
@@ -669,7 +661,7 @@
                     </mat-card>
                 </div>
 
-                <div *ngIf="enrolledCourses?.length === 0">
+                <div *ngIf="allCourseCount === 0">
                     <mat-card class="coursebg width_90">
                         <div class="row width_90 no_margin">
                             <div class="col-1 display_flex pointer no_pl"

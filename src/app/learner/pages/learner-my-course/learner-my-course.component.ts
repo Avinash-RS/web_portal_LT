@@ -53,6 +53,9 @@ export class LearnerMyCourseComponent implements OnInit {
   courseSearch: any;
   categoryData: any;
   availableCourses: any;
+  onGoingCourseCount = 0;
+  completedCourseCount = 0;
+  allCourseCount = 0;
 
   constructor(
     public translate: TranslateService,
@@ -194,6 +197,11 @@ export class LearnerMyCourseComponent implements OnInit {
         });
         this.completed = arr1;
         this.incomplete = arr;
+        if (!catalougeId && !catagoryId) {
+        this.onGoingCourseCount = arr.length;
+        this.completedCourseCount = arr1.length;
+        this.allCourseCount = this.enrolledCourses.length;
+        }
       }
       this.loading = false;
     });
