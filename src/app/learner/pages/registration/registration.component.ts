@@ -65,7 +65,6 @@ export class RegistrationComponent implements OnInit {
     this.loader.show();
     this.fullname = this.registerForm.value.fullname.trimLeft();
     // this.registerForm.value.termsandconditions
-    console.log(this.registerForm.value.title);
     this.service.user_registration(this.registerForm.value.email, this.fullname,
     this.registerForm.value.mobile, this.registerForm.value.title , true ).subscribe((data: any) => {
     this.registerForm.reset();
