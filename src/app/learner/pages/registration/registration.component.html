@@ -49,7 +49,7 @@
                         <mat-form-field appearance="outline">
                           <mat-label class="label-color">{{'Title' | translate}}</mat-label>
                           <mat-select formControlName="title" required>
-                            <mat-option *ngFor="let tit of titleData" [value]="tit._id" >
+                            <mat-option *ngFor="let tit of titleData" [value]="tit.title" >
                               {{tit.title}}
                             </mat-option>
                           </mat-select>
