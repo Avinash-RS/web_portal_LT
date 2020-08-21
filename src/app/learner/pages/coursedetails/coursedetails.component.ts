@@ -171,7 +171,7 @@ export class CoursedetailsComponent implements OnInit {
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     if (this.gs.checkLogout()) {
       this.detailData = detail;
-      this.courseid = detail && detail.id || this.localStoCourseid;
+      // this.courseid = detail && detail.id || this.localStoCourseid;
       this.userDetail = this.gs.checkLogout();
       this.localStoCourseid = localStorage.getItem('Courseid');
       this.courseid = detail && detail.id || this.localStoCourseid;
@@ -258,7 +258,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   getAssignmentmoduleData() {
-    this.Lservice.getAssignmentmoduleData(this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
+    this.Lservice.getAssignmentmoduleData(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
       console.log('testing', this.assignmentContent);
 
