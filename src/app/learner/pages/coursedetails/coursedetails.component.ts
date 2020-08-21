@@ -301,9 +301,10 @@ export class CoursedetailsComponent implements OnInit {
         if (!tabGroup || !(tabGroup instanceof MatTabGroup)) { return; }
 
         const tabCount = tabGroup._tabs.length;
-        if (this.detailData && this.detailData.assignmentVal) {
-          this.selectedTabIndex = tabCount - 2;
-        } else if (this.detailData && this.detailData.forumVal) {
+        // if (this.detailData && this.detailData.assignmentVal) {
+        //   this.selectedTabIndex = tabCount - 2;
+        // } else
+        if (this.detailData && this.detailData.forumVal) {
           this.selectedTabIndex = tabCount - 1;
         }
       }
@@ -433,9 +434,10 @@ export class CoursedetailsComponent implements OnInit {
       if (!tabGroup || !(tabGroup instanceof MatTabGroup)) { return; }
 
       const tabCount = tabGroup._tabs.length;
-      if (this.detailData && this.detailData.assignmentVal) {
-        this.selectedTabIndex = tabCount - 2;
-      } else if (this.detailData && this.detailData.forumVal) {
+      // if (this.detailData && this.detailData.assignmentVal) {
+      //   this.selectedTabIndex = tabCount - 2;
+      // } else
+      if (this.detailData && this.detailData.forumVal) {
         this.selectedTabIndex = tabCount - 1;
       }
     });

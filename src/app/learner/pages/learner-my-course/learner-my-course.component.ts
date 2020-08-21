@@ -271,7 +271,7 @@ export class LearnerMyCourseComponent implements OnInit {
       wishlist: c.wishlisted || false,
       wishlist_id: c.wishlist_id || null,
       enrollment_status: null,
-      assignmentVal: true
+      // assignmentVal: true
     };
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
   }
