@@ -1325,4 +1325,20 @@ iframe.fullScreen {
     max-width: 220px;
     min-width: 220px;
   }
+  .searchdisabledicon{
+      color: $color-lightest-grey;
+  }
+  .uploadBtn {
+    width: 0;
+    height: 0;
+    position: relative;
+    top: 9px;
+    left: 10px;
+  }
+    .uploadIcon {
+        z-index: 1;
+    position: relative;
+    bottom: 13px;
+    right: 20px;
+    }
 //Ramya CSS ends here
