@@ -52,7 +52,8 @@ export class PasswordComponent implements OnInit {
                }
 
   ngOnInit() {
-    this.translate.use(localStorage.getItem('language'));
+    // this.translate.use(localStorage.getItem('language'));
+    this.translate.use(localStorage.getItem('language') ? localStorage.getItem('language') : 'en');
     this.systemip = localStorage.getItem('Systemip');
     // this.userNamesuggestion();
     this.passwordForm = this.formBuilder.group({

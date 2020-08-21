@@ -49,7 +49,7 @@
                         <mat-form-field appearance="outline">
                           <mat-label class="label-color">{{'Title' | translate}}</mat-label>
                           <mat-select formControlName="title" required>
-                            <mat-option *ngFor="let tit of titleData" [value]="tit._id" >
+                            <mat-option *ngFor="let tit of titleData" [value]="tit.title" >
                               {{tit.title}}
                             </mat-option>
                           </mat-select>
@@ -123,7 +123,7 @@
                             {{'Mobile number is required' }}
                           </mat-error> -->
                           <mat-error class="error"  *ngIf="registerForm.get('mobile').hasError('minlength')">
-                            {{'Mobile number must be 10 digits'}}
+                            {{'Mobile number must be 10 digits' | translate }}
                           </mat-error>
                        
                           <mat-error class="error" *ngIf="registerForm.get('mobile').hasError('pattern')">
