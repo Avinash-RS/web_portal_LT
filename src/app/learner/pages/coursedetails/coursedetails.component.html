@@ -519,7 +519,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <div *ngIf="showCommentThread" class="no_border" >
@@ -538,7 +537,7 @@
                     </div>
                     <br>
                   
-                    <div *ngIf="showCourseDetails && discussionData?.topics?.length > 0" 
+                    <div *ngIf="showCourseDetails" 
                         [ngClass]="{'width_70 center' : !drawer.opened}">
                         <!-- Header starts here -->
                         <mat-card class=" black_border box_shadow alignment ">
@@ -639,10 +638,7 @@
 
                     <div class="comment_card" *ngIf="showCommentThread && selectedThreadData != null"
                         [ngClass]="{'width_70 center' : !drawer.opened}">
-
-
                         <!-- for thread -->
-
                         <mat-card class="black_border m-b-10 no-radius no_padding">
                             <!-- name row start -->
                             <div class="no_padding no_margin thread-header">
