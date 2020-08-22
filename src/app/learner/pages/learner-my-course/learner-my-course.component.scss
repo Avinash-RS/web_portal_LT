@@ -236,7 +236,6 @@
   margin-top: 1%;
   margin-bottom: 1%;
   box-shadow: none;
-  border-bottom: 1px solid #e0e0e0;
   
 }
 
@@ -327,7 +326,7 @@
 }
 .errorboxx{
   padding: 5px !important;
-  margin-top: 2.8%;
+  margin-top:4%;
 }
 
 .m-l-1 {
@@ -1104,4 +1103,12 @@ mat-icon {
 }
 .headerDes{
   border-bottom: 1px solid #e6e6e6;
+}
+.errorCard{
+  height: 150px;
+}
+
+.hr-tag{
+  bottom: 16px;
+    position: relative;
 }

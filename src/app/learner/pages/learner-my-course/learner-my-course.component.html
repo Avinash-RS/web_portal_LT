@@ -183,16 +183,15 @@
                             </div>
                         </div>
                     </mat-card>
-                </div>
+                </div> 
                 <!-- card end -->
 
 
                 <div *ngIf="onGoingCourseCount === 0">
-                    <mat-card class="coursebg width_90">
+                    <mat-card class="coursebg width_90 errorCard">
                         <div class="row width_90 no_margin">
-                            <div class="col-1 display_flex pointer no_pl"
+                            <div class="col-1 display_flex pointer no_pl mt-4"
                                 (click)="gotoDesc(course)">
-                                <div class="lineer"></div>
                                 <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs">
                             </div>
                             <div class="col-11  no_pl errorboxx">
@@ -200,6 +199,8 @@
                             </div>
                         </div>
                     </mat-card>
+                    <hr class="hr-tag">
+                  
                 </div>
             </mat-tab>
             <mat-tab>
@@ -351,19 +352,18 @@
                 </div>
 
                 <div *ngIf="completedCourseCount === 0">
-                    <mat-card class="coursebg width_90">
+                    <mat-card class="coursebg width_90 errorCard">
                         <div class="row width_90 no_margin">
-                            <div class="col-1 display_flex pointer no_pl"
+                            <div class="col-1 display_flex pointer no_pl mt-4"
                                 (click)="gotoDesc(course)">
-                                <div class="lineer"></div>
                                 <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs">
                             </div>
-                            <div class="col-11 errorboxx">
-                                <span style="font-size: medium;">
-                                    {{'You have no completed courses at the moment.' }}</span>
+                            <div class="col-11  no_pl errorboxx">
+                                <span style="font-size: medium;">{{'You have no completed courses at the moment.' | translate }}</span>
                             </div>
                         </div>
                     </mat-card>
+                    <hr class="hr-tag">
                 </div>
             </mat-tab>
             <mat-tab>
@@ -518,19 +518,18 @@
 
 
                 <div *ngIf="allCourseCount === 0">
-                    <mat-card class="coursebg width_90">
+                    <mat-card class="coursebg width_90 errorCard">
                         <div class="row width_90 no_margin">
-                            <div class="col-xl-1 display_flex pointer no_pl"
+                            <div class="col-1 display_flex pointer no_pl mt-4"
                                 (click)="gotoDesc(course)">
-                                <div class="lineer"></div>
                                 <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs">
                             </div>
-                            <div class="col-xl-11  no_pl errorboxx">
-                                <span style="font-size: medium;">
-                                    {{'You have no enrolled courses at the moment.' }}</span>
+                            <div class="col-11  no_pl errorboxx">
+                                <span style="font-size: medium;">{{'You have no enrolled courses at the moment.' | translate }}</span>
                             </div>
                         </div>
                     </mat-card>
+                    <hr class="hr-tag">
                 </div>
             </mat-tab>
             <!-----------------------------------Category tabs----------------------------->
@@ -672,19 +671,18 @@
                 </div>
 
                 <div *ngIf="allCourseCount === 0">
-                    <mat-card class="coursebg width_90">
+                    <mat-card class="coursebg width_90 errorCard">
                         <div class="row width_90 no_margin">
-                            <div class="col-1 display_flex pointer no_pl"
+                            <div class="col-1 display_flex pointer no_pl mt-4"
                                 (click)="gotoDesc(course)">
-                                <div class="lineer"></div>
                                 <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs">
                             </div>
-                            <div class="col-11 errorboxx">
-                                <span style="font-size: medium;">
-                                    {{'You have no courses at the moment.' }}</span>
+                            <div class="col-11  no_pl errorboxx">
+                                <span style="font-size: medium;">{{'You have no courses at the moment.' | translate }}</span>
                             </div>
                         </div>
                     </mat-card>
+                    <hr class="hr-tag">
                 </div>
             </mat-tab>
         </ng-container>
