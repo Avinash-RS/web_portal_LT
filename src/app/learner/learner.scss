@@ -506,3 +506,11 @@ color: $lxp-theme-green;
   animation-name: fadeInUp;
   -webkit-animation-name: fadeInUp;
 }
+
+::ng-deep .mat-tab-label:last-child {
+  padding-left: calc(50%) !important; 
+}
+
+.mat-tab-label:last-child {
+  margin-left: auto; 
+}

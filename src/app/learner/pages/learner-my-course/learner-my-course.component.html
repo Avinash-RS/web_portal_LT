@@ -24,7 +24,18 @@
         </span> 
     </div>
 </div>
+<div class="catPost">
+<span *ngFor="let namesss of categoryDetails">
+ 
+ 
+    <sapn *ngIf="namesss.enrollCount"  
+    class="catnamesss" matBadge="{{namesss.enrollCount}}"
+     matBadgeOverlap="false"
+     (click)="getEnrolledCourses(catalogueDetails.catalogueId,namesss.categoryId)"> {{namesss.categoryName | titlecase}}</sapn>
 
+   
+</span>
+</div>
 <!-- tabs here -->
 <div class="row">
     <div class="col-12">
@@ -525,14 +536,17 @@
                 </div>
             </mat-tab>
             <!-----------------------------------Category tabs----------------------------->
+           
             <div class="">
+                
             <ng-container *ngFor="let categorytab of categoryDetails">
+              
             <mat-tab *ngIf="categorytab.enrollCount">
-                <ng-template matTabLabel>
-                    <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
+                <!-- <ng-template matTabLabel> -->
+                    <!-- <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
                       matBadge="{{categorytab.enrollCount}}"
-                        matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span>
-                </ng-template>
+                        matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span> -->
+                <!-- </ng-template> -->
 
                 <div *ngFor="let course of enrolledCourses ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
