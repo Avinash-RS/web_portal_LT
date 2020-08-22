@@ -1010,13 +1010,23 @@ mat-icon {
 .box-shadow {
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   // max-height: 100%
-  
+  box-shadow: none;
     border: 1px solid #ccc;
+}
+.catnamenew{
+  color: #3f444a;
+  text-transform: capitalize;
+  font-size: 22px;
+  font-weight: 600 !important;
 }
 .courseName {
   position: relative;
-  left: 10px;
+  /* left: 10px; */
   font-size: 18px;
+  padding: 0px 19px;
+  color: #3f444a;
+  font-size: 18px;
+  font-weight: 600 !important;
 }
 
 .size {
