@@ -26,12 +26,10 @@
 </div>
 <div class="catPost">
 <span *ngFor="let namesss of categoryDetails">
- 
- 
-    <sapn *ngIf="namesss.enrollCount"  
+    <button *ngIf="namesss.enrollCount"  
     class="catnamesss" matBadge="{{namesss.enrollCount}}"
      matBadgeOverlap="false"
-     (click)="getEnrolledCourses(catalogueDetails.catalogueId,namesss.categoryId)"> {{namesss.categoryName | titlecase}}</sapn>
+     (click)="getEnrolledCourses(catalogueDetails.catalogueId,namesss.categoryId)"> {{namesss.categoryName | titlecase}}</button>
 
    
 </span>

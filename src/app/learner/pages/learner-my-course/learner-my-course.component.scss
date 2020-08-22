@@ -1049,18 +1049,26 @@ mat-icon {
   opacity: 0.6 !important;
 }
 .catnamesss{
-  // float: right;
-  padding: 20px 0px 6px;
+  padding: 0px 0px 6px;
   margin-right: 35px;
+  /* margin-bottom: 28px; */
   color: #b8b8b8;
-  border-bottom: 1px solid #e0e0e0;
+  border: none;
+  background: $color-white;
+  /* border-bottom: 1px solid #e0e0e0; */
   cursor: pointer;
+  height: 34px;
+}
+
+.catnamesss:focus{
+  border-bottom: 2px solid $lxp-theme-green !important;
+  color:$lxp-text !important;
 }
 .catPost{
   position: absolute;
   float: right;
   right: 32px;
-  top: 131px;
+  top: 122px;
   /* bottom: 0; */
   z-index: 999;
 
