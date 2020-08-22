@@ -1049,15 +1049,13 @@ mat-icon {
   opacity: 0.6 !important;
 }
 .catnamesss{
-  padding: 0px 0px 6px;
   margin-right: 35px;
+  cursor: pointer !important;
+  background: $color-white;
+  border: none;
+  height: 40px;
   /* margin-bottom: 28px; */
   color: #b8b8b8;
-  border: none;
-  background: $color-white;
-  /* border-bottom: 1px solid #e0e0e0; */
-  cursor: pointer;
-  height: 34px;
 }
 
 .catnamesss:focus{
@@ -1068,8 +1066,15 @@ mat-icon {
   position: absolute;
   float: right;
   right: 32px;
-  top: 122px;
+  top: 6px;
+  cursor: pointer;
   /* bottom: 0; */
   z-index: 999;
+
+}
+
+.cathd1 {
+  
+  margin-right: 50px;
 
 }
