@@ -27,19 +27,19 @@
 
    
         </span>   -->
-        <span>
-            <mat-button class="available-course-btn" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()">
+        <div>
+            <mat-button class="available-course-btn" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()" >
                 <span class="lxp-text">{{catalogueDetails?.catalogueName | titlecase}} <mat-icon class="dropdownicon">expand_more</mat-icon></span>
               </mat-button>
-                <mat-menu  #menu="matMenu" [overlapTrigger]="false" class="customize">
-                  <span (mouseleave)="menuTrigger.closeMenu()">
-                    <button *ngFor="let category of categoryDetails" mat-menu-item (click)="getCoureBasedOnCatalog(catalogueDetails,category,previewDialog)">
+                <mat-menu focusOnOpen = false  #menu="matMenu" [overlapTrigger]="false" class="customize mouseleave">
+                  <div (mouseleave)="menuTrigger.closeMenu()">
+                    <button  *ngFor="let category of categoryDetails" mat-menu-item (click)="getCoureBasedOnCatalog(catalogueDetails,category,previewDialog)">
                       <span>{{category.categoryName | titlecase}}</span>
                         <span class="matBadge"   matBadge="{{category.totalCount}}"  matBadgeOverlap="false"></span>
                     </button>
-                  </span>
+                  </div>
                   </mat-menu>
-        </span> 
+        </div> 
       
     </div>
 
@@ -755,7 +755,7 @@
                             <div class="overlayimage">
                                 <p class="shortdesc">
                                     <!-- {{course.course_description}} -->
-                                    {{(course.course_description?.length>120)? (course.course_description | slice:0:120)+'...':(course.course_description) }}
+                                 {{(course.course_description?.length>122)? (course.course_description | slice:0:122)+'...':(course.course_description) }} 
                                 </p>
                             </div>
                         </a>
@@ -768,10 +768,10 @@
                 <div class="row">
                     <div class="col-12 center_align">
                         <button mat-stroked-button class="blue_clr btnredClass" *ngIf="course.clamaiedStatus == 'false'"
-                        (click)="claimCourse(course.course_id)">Claim</button>
+                        (click)="claimCourse(course.course_id)"><mat-icon class="mt-1">library_books</mat-icon> Claim</button>
                         <button mat-stroked-button class="blue_clr btnredClass" [disabled]="course.clamaiedStatus == 'true'"
                          *ngIf="course.clamaiedStatus == 'true'"
-                        >Claimed</button>
+                        ><mat-icon class="mt-1">library_books</mat-icon> Claimed</button>
                     </div>
                 </div>
             </mat-card>
