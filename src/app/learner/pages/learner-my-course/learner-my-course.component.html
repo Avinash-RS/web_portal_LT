@@ -47,7 +47,7 @@
                   <div (mouseleave)="menuTrigger.closeMenu()">
                     <button  *ngFor="let category of categoryDetails" mat-menu-item (click)="getCoureBasedOnCatalog(catalogueDetails,category,previewDialog)">
                       <span>{{category.categoryName | titlecase}}</span>
-                        <span class="matBadge"  matBadge="{{category.totalCount}}"  matBadgeOverlap="false"></span>
+                        <span class="matBadge"   matBadge="{{category.totalCount}}"  matBadgeOverlap="false"></span>
                     </button>
                   </div>
                   </mat-menu> -->
@@ -128,7 +128,7 @@
                                                     *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">play_circle_outline</mat-icon>
-                                                    <span class="cap f_wt_400">
+                                                    <span class="cap f_wt_400 m-t-m-2">
                                                         {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume ' : 
                                                           course?.coursePlayerStatus?.status === 'suspend  ' ? 'Resume  ' : 'Start'  }}&nbsp;
                                                     </span>
@@ -138,7 +138,7 @@
                                                     class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
                                                     data-target="#myModal" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">replay</mat-icon>
-                                                    <span class="cap f_wt_400">
+                                                    <span class="cap f_wt_400  m-t-m-2">
                                                         {{'Replay' }}&nbsp;
                                                     </span>
                                                 </button>
@@ -163,7 +163,7 @@
                                 </div>
                             </div>
                             <div class="col-5" *ngIf="course.batchCourse == true">
-                                <div class="row m-t-2 m-l-2p f_size_13">
+                                <div class="row m-p-14 m-t-1 m-l-2p f_size_12">
                                     <div class="col-3">
                                         <div>Activity 
                                             <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
@@ -192,7 +192,7 @@
                                             <sapn class="padscore">4</sapn>
                                             <sapn class="f_size_22">/</sapn> <span class="f_size_20">20</span>
                                         </div>
-                                        <div class="m-t-8">Pending</div>
+                                        <div class="m-l-3 f_size_12">Pending</div>
                                     </div>
                                     <div class="col-3">
                                         <div class="progess pointer">
@@ -294,7 +294,7 @@
                                                     *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">play_circle_outline</mat-icon>
-                                                    <span class="cap f_wt_400">
+                                                    <span class="cap f_wt_400  m-t-m-2">
                                                         {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
                                                          course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' | translate }}&nbsp;
                                                     </span>
@@ -304,7 +304,7 @@
                                                     class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
                                                     data-target="#myModal" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">replay</mat-icon>
-                                                    <span class="cap f_wt_400">
+                                                    <span class="cap f_wt_400  m-t-m-2">
                                                         {{'Replay' | translate }}&nbsp;
                                                     </span>
                                                 </button>
@@ -329,8 +329,8 @@
                                 </div>
                             </div>
                             <div class="col-5" *ngIf="course.batchCourse == true">
-                                <div class="row m-t-2 m-l-2p f_size_13">
-                                    <div class="col-3">
+                                <div class="row m-p-14 m-t-1 m-l-2p f_size_12">
+                                    <div class="col-3 ">
                                         <div>Activity 
                                             <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
                                         </div>
@@ -358,7 +358,8 @@
                                             <sapn class="padscore">4</sapn>
                                             <sapn class="f_size_22">/</sapn> <span class="f_size_20">20</span>
                                         </div>
-                                        <span>Pending</span>
+                                        <div class="m-l-3 f_size_12">Pending</div>
+                                     
                                     </div>
                                     <div class="col-3">
                                         <div class="progess pointer">
@@ -459,9 +460,9 @@
                                                     *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">play_circle_outline</mat-icon>
-                                                    <span class="cap f_wt_400">
+                                                    <span class="cap f_wt_400  m-t-m-2">
                                                         {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume  ' : 
-                      course?.coursePlayerStatus?.status === 'suspend ' ? 'Resume ' : 'Start' }}&nbsp;
+                                                        course?.coursePlayerStatus?.status === 'suspend ' ? 'Resume ' : 'Start' }}&nbsp;
                                                     </span>
                                                 </button>
                                                 <button mat-stroked-button
@@ -469,7 +470,7 @@
                                                     class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
                                                     data-target="#myModal" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">replay</mat-icon>
-                                                    <span class="cap f_wt_400">
+                                                    <span class="cap f_wt_400  m-t-m-2">
                                                         {{'Replay'  }}&nbsp;
                                                     </span>
                                                 </button>
@@ -494,7 +495,7 @@
                                 </div>
                             </div>
                             <div class="col-5" *ngIf="course.batchCourse == true">
-                                <div class="row m-t-2 m-l-2p f_size_13">
+                                <div class="row m-p-14 m-t-1 m-l-2p f_size_12">
                                     <div class="col-3">
                                         <div>Activity 
                                             <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
@@ -523,7 +524,8 @@
                                             <sapn class="padscore">4</sapn>
                                             <sapn class="f_size_22">/</sapn> <span class="f_size_20">20</span>
                                         </div>
-                                        <span>Pending</span>
+                                        <div class="m-l-3 f_size_12">Pending</div>
+
                                     </div>
                                     <div class="col-3">
                                         <div class="progess pointer">
@@ -622,9 +624,9 @@
                                                     *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">play_circle_outline</mat-icon>
-                                                    <span class="cap f_wt_400">
+                                                    <span class="cap f_wt_400  m-t-m-2">
                                                         {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume  ' : 
-                      course?.coursePlayerStatus?.status === 'suspend ' ? 'Resume ' : 'Start' }}&nbsp;
+                                                        course?.coursePlayerStatus?.status === 'suspend ' ? 'Resume ' : 'Start' }}&nbsp;
                                                     </span>
                                                 </button>
                                                 <button mat-stroked-button
@@ -632,7 +634,7 @@
                                                     class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
                                                     data-target="#myModal" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">replay</mat-icon>
-                                                    <span class="cap f_wt_400">
+                                                    <span class="cap f_wt_400  m-t-m-2">
                                                         {{'Replay'  }}&nbsp;
                                                     </span>
                                                 </button>

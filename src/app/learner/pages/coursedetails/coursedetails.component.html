@@ -109,7 +109,7 @@
             </mat-tab>
 
             <mat-tab label="About the course">
-                <div style="margin-left: 8px;">
+                <div >
                 <h3 class="head-h1">Course description</h3>
                 <div class="vertical"></div>
 
@@ -164,7 +164,7 @@
             </mat-tab>
 
             <mat-tab label="Resources">
-                <div class="margin-left:8px">
+                <div >
                 <mat-accordion>
                     <ng-container *ngIf="content?.noresource">
                         <ng-container *ngFor="let res of content?.coursedetails; let i = index">
@@ -261,7 +261,7 @@
             </mat-tab>
 
             <!-- Assignments tab -->
-            <div style="margin-left: 8px;">
+            <div >
                 <mat-tab label="Assignments" class="discussion_forum" *ngIf="assignmentContent?.coursedetails.length">
                     <mat-accordion>
                         <ng-container>
