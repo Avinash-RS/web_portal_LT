@@ -110,6 +110,7 @@
             </mat-tab>
 
             <mat-tab label="About the course">
+                <div style="margin-left: 8px;">
                 <h3 class="head-h1">Course description</h3>
                 <div class="vertical"></div>
 
@@ -160,9 +161,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </mat-tab>
 
             <mat-tab label="Resources">
+                <div class="margin-left:8px">
                 <mat-accordion>
                     <ng-container *ngIf="content?.noresource">
                         <ng-container *ngFor="let res of content?.coursedetails; let i = index">
@@ -255,10 +258,11 @@
                         <span style="padding: 16px;">{{'This course does not have resource files.'| translate}}</span>
                     </ng-container>
                 </mat-accordion>
+            </div>
             </mat-tab>
 
             <!-- Assignments tab -->
-            <div>
+            <div style="margin-left: 8px;">
                 <mat-tab label="Assignments" class="discussion_forum" *ngIf="assignmentContent?.coursedetails.length">
                     <mat-accordion>
                         <ng-container>
