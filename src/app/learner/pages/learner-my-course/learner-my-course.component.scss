@@ -1096,6 +1096,22 @@ mat-icon {
 :host ::ng-deep .tooltip-arrow {
   opacity: 0.6 !important;
 }
+:host ::ng-deep #mat-tab-label-0-3{
+  display: none ;
+
+}
+:host ::ng-deep #mat-tab-label-0-4{
+  display: none ;
+
+}
+:host ::ng-deep #mat-tab-label-0-5{
+  display: none ;
+
+}
+:host ::ng-deep #mat-badge-content-3{
+  background: #898989 !important;
+
+}
 .catnamesss{
   margin-right: 35px;
   cursor: pointer !important;
@@ -1121,7 +1137,10 @@ mat-icon {
   z-index: 999;
 
 }
+.available-course-btn:hover{
+  background-color:#c02524;
 
+}
 .cathd1 {
   
   // margin-right: 50px;
@@ -1165,4 +1184,63 @@ mat-icon {
  right: 19px;
  top: 22px;
  background:$lxp-icon !important;
+}
+.lxp-text:hover{
+  color: #fff;
+
+}
+
+
+.dropbtn {
+  background-color: #ffffff;
+  color: #898989;
+  padding: 6px;
+  font-size: 16px;
+  border: none;
+  border-radius: 11px;
+  border: 1px solid #898989;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 171px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 999999;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #c12924; color: #fff;}
+
+.matBadge12{
+  position: relative;
+  /* float: right; */
+  /* right: 19px; */
+  /* top: 22px; */
+  background: #5c6873 !important;
+}
+
+.contedrop{
+  padding: 15px;
+    cursor: pointer;
+}
+.contedrop:hover{
+  background: #cecece !important;
+
 }

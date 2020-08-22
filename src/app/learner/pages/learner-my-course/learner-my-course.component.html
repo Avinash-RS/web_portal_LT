@@ -27,18 +27,30 @@
 
    
         </span>   -->
+        <div class="dropdown">
+            <button class="dropbtn">{{catalogueDetails?.catalogueName | titlecase}} <mat-icon class="dropdownicon">expand_more</mat-icon></button>
+            <div class="dropdown-content">
+              <div class="contedrop" *ngFor="let category of categoryDetails" (click)="getCoureBasedOnCatalog(catalogueDetails,category,previewDialog)"  >
+                <span>{{category.categoryName | titlecase}}</span>
+                <span class="matBadge12"  matBadge="{{category.totalCount}}"  matBadgeOverlap="false"></span>
+                
+              </div>
+            
+            </div>
+          </div>
         <div>
-            <mat-button class="available-course-btn" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()" >
+           
+            <!-- <mat-button class="available-course-btn" [matMenuTriggerFor]="menunew" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()" >
                 <span class="lxp-text">{{catalogueDetails?.catalogueName | titlecase}} <mat-icon class="dropdownicon">expand_more</mat-icon></span>
               </mat-button>
-                <mat-menu focusOnOpen = false  #menu="matMenu" [overlapTrigger]="false" class="customize mouseleave">
+                <mat-menu focusOnOpen = false  #menunew="matMenu" [overlapTrigger]="false" class="customize mouseleave">
                   <div (mouseleave)="menuTrigger.closeMenu()">
                     <button  *ngFor="let category of categoryDetails" mat-menu-item (click)="getCoureBasedOnCatalog(catalogueDetails,category,previewDialog)">
                       <span>{{category.categoryName | titlecase}}</span>
                         <span class="matBadge"  matBadge="{{category.totalCount}}"  matBadgeOverlap="false"></span>
                     </button>
                   </div>
-                  </mat-menu>
+                  </mat-menu> -->
         </div> 
       
     </div>
@@ -766,10 +778,10 @@
                 <div class="row">
                     <div class="col-12 center_align">
                         <button mat-stroked-button class="blue_clr btnredClass" *ngIf="course.clamaiedStatus == 'false'"
-                        (click)="claimCourse(course.course_id)"><mat-icon class="mt-1">library_books</mat-icon> Claim</button>
+                        (click)="claimCourse(course.course_id)"><mat-icon class="mt-1">queue_play_next</mat-icon> Claim</button>
                         <button mat-stroked-button class="blue_clr btnredClass" [disabled]="course.clamaiedStatus == 'true'"
                          *ngIf="course.clamaiedStatus == 'true'"
-                        ><mat-icon class="mt-1">library_books</mat-icon> Claimed</button>
+                        ><mat-icon class="mt-1">queue_play_next</mat-icon> Claimed</button>
                     </div>
                 </div>
             </mat-card>
