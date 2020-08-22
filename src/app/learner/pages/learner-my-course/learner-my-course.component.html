@@ -699,12 +699,12 @@
 
 <ng-template #previewDialog>
 
-    <div class="row">
+    <div class="row headerDes">
         <div class="col-4">
-            <span class="f_wt_600 size">{{categoryPopupData.categoryName  | titlecase}} ({{categoryPopupData.totalCount}})</span>
+            <span class="f_wt_600 size catnamenew">{{categoryPopupData.categoryName  | titlecase}} ({{categoryPopupData.totalCount}})</span>
         </div>
         <div class="col-6">
-            <input  matInput class="form-control search" placeholder="Search" [(ngModel)]="courseSearch">
+            <!-- <input  matInput class="form-control search" placeholder="Search" [(ngModel)]="courseSearch"> -->
         </div>
         <div class="col-2">
             <button mat-mini-fab class="close-button">
@@ -734,14 +734,14 @@
                     </div>
                  
                 </div><br>
-                <div class="row mb-3">
+                <div class="row">
                     <span class="courseName">{{course.course_name}}</span>
                 </div><br>
                 <div class="row">
                     <div class="col-12 center_align">
-                        <button mat-stroked-button class="blue_clr" *ngIf="course.clamaiedStatus == 'false'"
+                        <button mat-stroked-button class="blue_clr btnredClass" *ngIf="course.clamaiedStatus == 'false'"
                         (click)="claimCourse(course.course_id)">Claim</button>
-                        <button mat-stroked-button class="blue_clr" [disabled]="course.clamaiedStatus == 'true'"
+                        <button mat-stroked-button class="blue_clr btnredClass" [disabled]="course.clamaiedStatus == 'true'"
                          *ngIf="course.clamaiedStatus == 'true'"
                         >Claimed</button>
                     </div>
