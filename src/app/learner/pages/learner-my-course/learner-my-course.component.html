@@ -70,9 +70,9 @@
                 <div *ngFor="let course of incomplete ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
                         <div class="row">
-                            <div class="col-7 ">
+                            <div class="col-7 no-p-l ">
                                 <div class="row">
-                                    <div class="col-2">
+                                    <div class="col-3 ">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
@@ -81,8 +81,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-7 m-t-2 ml-5">
-                                        <div class="f_size_18 f_wt_500 pointer">
+                                    <div class="col-7 m-t-2">
+                                        <div class=" f_size_18 f_wt_500 pointer">
                                             <span>
                                                 {{course.course_name}}
                                             </span>
@@ -236,9 +236,9 @@
                         <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
                         <div class="row">
                             <!-- // Card start -->
-                            <div class="col-7 ">
+                            <div class="col-7 no-p-l">
                                 <div class="row">
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
@@ -247,7 +247,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-7 m-t-2 ml-5">
+                                    <div class="col-7 m-t-2">
                                         <div class="f_size_18 f_wt_500 pointer">
                                             <span>
                                                 {{course.course_name}}
@@ -284,7 +284,7 @@
                                                     <mat-icon class="icon-color">play_circle_outline</mat-icon>
                                                     <span class="cap f_wt_400">
                                                         {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
-                      course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' | translate }}&nbsp;
+                                                         course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' | translate }}&nbsp;
                                                     </span>
                                                 </button>
                                                 <button mat-stroked-button
@@ -400,9 +400,9 @@
                         <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
                         <div class="row">
                             <!-- // Card start -->
-                            <div class="col-7">
+                            <div class="col-7 no-p-l">
                                 <div class="row">
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
@@ -411,7 +411,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-7 m-t-2 ml-5">
+                                    <div class="col-7 m-t-2">
                                         <div class=" f_size_18 f_wt_500 pointer">
                                             <span >
                                                 {{course.course_name}}
@@ -576,9 +576,9 @@
                         <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
                         <div class="row">
                             <!-- // Card start -->
-                            <div class="col-7">
+                            <div class="col-7 no-p-l">
                                 <div class="row">
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
@@ -587,8 +587,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-7 m-t-2 ml-5">
-                                        <div class="f_size_18 f_wt_500 pointer">
+                                    <div class="col-7 m-t-2">
+                                        <div class=" f_size_18 f_wt_500 pointer">
                                             <span >
                                                 {{course.course_name}}
                                             </span>

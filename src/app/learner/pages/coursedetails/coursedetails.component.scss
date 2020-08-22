@@ -523,8 +523,8 @@ iframe.fullScreen {
 // silder
 .closebgt{
     position: absolute;
-    top: 2%;
-    left: 12px;
+    top: 1.8%;
+    left: 8px;
     z-index: 99;
 }
 .example-sidenav-content {
@@ -786,7 +786,15 @@ iframe.fullScreen {
 :host ::ng-deep .mat-step-label {
     white-space: pre-line !important;
 }
-
+.bodybg {
+    width: 100%;
+    padding-left: 18px;
+    padding-right: 18px;
+    min-height: 100vh;
+    display: flex;
+    background-color: $color-white;
+  }
+  
 
 //////////foooter
 .footer {
@@ -796,7 +804,7 @@ iframe.fullScreen {
     bottom: 0;
     width: 100%;
     color: $label;
-    position: fixed;
+    // position: fixed;
     z-index: 1;
     font-weight: 500;
     background-color: $profile-t-grey;
