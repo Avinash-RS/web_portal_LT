@@ -232,7 +232,7 @@
 
 .coursebg {
   background-color: $color_white;
-  margin-left: 1%;
+  // margin-left: 1%;
   margin-top: 1%;
   margin-bottom: 1%;
   box-shadow: none;
@@ -692,7 +692,7 @@ margin-top: 2%;
   position: relative;
   // left: 420px;
   font-size:12px;
-  margin-top: 11%;
+  margin-top: 16%;
 }
 
 .noCourse {
@@ -1058,7 +1058,7 @@ mat-icon {
   cursor: pointer !important;
   background: $color-white;
   border: none;
-  height: 40px;
+  // height: 40px;
   /* margin-bottom: 28px; */
   color: #b8b8b8;
 }
@@ -1066,12 +1066,13 @@ mat-icon {
 .catnamesss:focus{
   border-bottom: 2px solid $lxp-theme-green !important;
   color:$lxp-text !important;
+  padding-bottom: 10px;
 }
 .catPost{
   position: absolute;
   float: right;
-  right: 32px;
-  top: 6px;
+  right: 20px;
+  top: 14px;
   cursor: pointer;
   /* bottom: 0; */
   z-index: 999;
@@ -1080,7 +1081,7 @@ mat-icon {
 
 .cathd1 {
   
-  margin-right: 50px;
+  // margin-right: 50px;
 
 }
 .btnredClass{
