@@ -35,7 +35,7 @@
                   <span (mouseleave)="menuTrigger.closeMenu()">
                     <button *ngFor="let category of categoryDetails" mat-menu-item (click)="getCoureBasedOnCatalog(catalogueDetails,category,previewDialog)">
                       <span>{{category.categoryName | titlecase}}</span>
-                        <span  matBadge="{{category.totalCount}}"  matBadgeOverlap="false"></span>
+                        <span class="matBadge"  matBadge="{{category.totalCount}}"  matBadgeOverlap="false"></span>
                     </button>
                   </span>
                   </mat-menu>

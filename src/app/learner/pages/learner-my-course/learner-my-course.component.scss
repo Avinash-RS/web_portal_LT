@@ -1146,7 +1146,6 @@ mat-icon {
 }
 ::ng-deep .mat-menu-content {
   min-width: 146px !important;
-  padding: 5px !important;
 }
 ::ng-deep .mat-menu-panel{
   // margin-top: 60px !important;
@@ -1154,6 +1153,10 @@ mat-icon {
   top: 55px !important;
   right: 3px !important;
 }
-#matBadge{
-  color: $lxp-icon !important;
+.matBadge{
+ position: relative;
+ float: right;
+ right: 19px;
+ top: 22px;
+ background:$lxp-icon !important;
 }
