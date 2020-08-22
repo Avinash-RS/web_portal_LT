@@ -722,11 +722,13 @@
         <!-- <div class="col-4 mt-4" *ngFor="let course of allcourses | search : courseSearch"> -->
             <mat-card class="box-shadow">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12 imageover">
                         <a>
-                            <img alt="course image" src="{{course.course_img_url}}" class="courseImage">
-                            <div class="overlay">
+                            <img alt="course " src="{{course.course_img_url}}" class="courseImage image">
+                            
+                            <div class="overlayimage">
                                 <p class="shortdesc">
+                                    {{course.course_description}}
                                     {{(course.course_description?.length>120)? (course.course_description | slice:0:120)+'...':(course.course_description) }}
                                 </p>
                             </div>
