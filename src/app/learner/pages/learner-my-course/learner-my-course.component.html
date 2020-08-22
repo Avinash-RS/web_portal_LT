@@ -39,7 +39,7 @@
                 <div *ngFor="let course of incomplete ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
                         <div class="row">
-                            <div class="col-7 l-b-2">
+                            <div class="col-7 ">
                                 <div class="row">
                                     <div class="col-2">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
@@ -59,7 +59,7 @@
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button>
                                         </div>
                                         <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400  pointer"
+                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
                                                 (click)="gotoDesc(course)">
                                                 <p style="margin-left: 41px;">
                                                     {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
@@ -83,7 +83,7 @@
                                             <div class="">
                                                 <button mat-stroked-button data-toggle="modal" data-target="#myModal"
                                                     *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                                                    class=" btl-alin blue_clr cap pointer" (click)="gotoDesc(course)">
+                                                    class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">play_circle_outline</mat-icon>
                                                     <span class="cap f_wt_400">
                                                         {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume ' : 
@@ -92,7 +92,7 @@
                                                 </button>
                                                 <button mat-stroked-button
                                                     *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                    class="btl-alin blue_clr cap pointer" data-toggle="modal"
+                                                    class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
                                                     data-target="#myModal" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">replay</mat-icon>
                                                     <span class="cap f_wt_400">
@@ -203,7 +203,7 @@
                         <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
                         <div class="row">
                             <!-- // Card start -->
-                            <div class="col-7 l-b-2">
+                            <div class="col-7 ">
                                 <div class="row">
                                     <div class="col-2">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
@@ -223,7 +223,7 @@
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button>
                                         </div>
                                         <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400  pointer"
+                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
                                                 (click)="gotoDesc(course)">
                                                 <p style="margin-left: 41px;">
                                                     {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
@@ -247,7 +247,7 @@
                                             <div class="">
                                                 <button mat-stroked-button data-toggle="modal" data-target="#myModal"
                                                     *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                                                    class=" btl-alin blue_clr cap pointer" (click)="gotoDesc(course)">
+                                                    class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">play_circle_outline</mat-icon>
                                                     <span class="cap f_wt_400">
                                                         {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
@@ -256,7 +256,7 @@
                                                 </button>
                                                 <button mat-stroked-button
                                                     *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                    class="btl-alin blue_clr cap pointer" data-toggle="modal"
+                                                    class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
                                                     data-target="#myModal" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">replay</mat-icon>
                                                     <span class="cap f_wt_400">
@@ -367,7 +367,7 @@
                         <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
                         <div class="row">
                             <!-- // Card start -->
-                            <div class="col-7 l-b-2">
+                            <div class="col-7">
                                 <div class="row">
                                     <div class="col-2">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
@@ -387,7 +387,7 @@
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button>
                                         </div>
                                         <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400  pointer"
+                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
                                                 (click)="gotoDesc(course)">
                                                 <p style="margin-left: 41px;">
                                                     {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
@@ -412,7 +412,7 @@
                                             <div class="">
                                                 <button mat-stroked-button data-toggle="modal" data-target="#myModal"
                                                     *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                                                    class=" btl-alin blue_clr cap pointer" (click)="gotoDesc(course)">
+                                                    class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">play_circle_outline</mat-icon>
                                                     <span class="cap f_wt_400">
                                                         {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume  ' : 
@@ -421,7 +421,7 @@
                                                 </button>
                                                 <button mat-stroked-button
                                                     *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                    class="btl-alin blue_clr cap pointer" data-toggle="modal"
+                                                    class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
                                                     data-target="#myModal" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">replay</mat-icon>
                                                     <span class="cap f_wt_400">
@@ -540,7 +540,7 @@
                         <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
                         <div class="row">
                             <!-- // Card start -->
-                            <div class="col-7 l-b-2">
+                            <div class="col-7">
                                 <div class="row">
                                     <div class="col-2">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
@@ -560,7 +560,7 @@
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button>
                                         </div>
                                         <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400  pointer"
+                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
                                                 (click)="gotoDesc(course)">
                                                 <p style="margin-left: 41px;">
                                                     {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
@@ -572,7 +572,7 @@
                                             <div class="">
                                                 <button mat-stroked-button data-toggle="modal" data-target="#myModal"
                                                     *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                                                    class=" btl-alin blue_clr cap pointer" (click)="gotoDesc(course)">
+                                                    class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">play_circle_outline</mat-icon>
                                                     <span class="cap f_wt_400">
                                                         {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume  ' : 
@@ -581,7 +581,7 @@
                                                 </button>
                                                 <button mat-stroked-button
                                                     *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                    class="btl-alin blue_clr cap pointer" data-toggle="modal"
+                                                    class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
                                                     data-target="#myModal" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color">replay</mat-icon>
                                                     <span class="cap f_wt_400">

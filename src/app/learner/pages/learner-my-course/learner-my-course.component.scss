@@ -373,7 +373,7 @@
 }
 
 .statBtn {
-  border: 1px solid #898989 !important;
+  border: 1px solid $lxp-theme-green !important;
   margin-top: 23%;
 }
 
@@ -402,15 +402,23 @@
   cursor: pointer;
 
 }
-
+.m-b-1{
+  margin-bottom: 1%;
+}
+.m-t-05{
+  margin-top: -0.5%;
+}
 .status {
   background: $lxp-theme-green;
   // padding: 2px 6px;
   // float: right;
   border-radius: 4px;
-  width: 50px;
+  // width: 50px;
+  height: 19px;
   border: none;
-  font-size: 13px;
+  font-size: 11px;
+  position: relative;
+  top:-8px;
   color: $color-white;
   // margin-top: 5px;
 }
@@ -610,14 +618,21 @@ margin-top: 2%;
     bottom: 22px;
     left: 38px;
 }
+.tabside{
+  color:$color-blank;
+  position: absolute;
+  font-size: 18px;
+}
 
 .btl-alin {
   /* margin-top: -0.5%; */
   // text-align: left;
   /* justify-content: end; */
+  border: 1px solid $lxp-theme-green !important;
   position: absolute;
     margin-left: 18%;
     z-index: 99;
+    height: 34px;
   // left: 268px;
     // bottom: 5px;
   // margin-left: 25%;
@@ -654,7 +669,7 @@ margin-top: 2%;
 }
 
 .statBtn1 {
-  border: 1px solid $lxp-gray;
+  border: 1px solid $lxp-theme-green;
   border-radius: 4px;
   width: 120px;
 }
@@ -673,7 +688,7 @@ margin-top: 2%;
   position: relative;
   // left: 420px;
   font-size:12px;
-  margin-top: 10%;
+  margin-top: 11%;
 }
 
 .noCourse {
@@ -926,7 +941,7 @@ mat-icon {
   border: solid 1px $color-border !important;
   color: $lxp-text;
   margin-left: 9.5%;
-  height: 30px;
+  height: 32px;
 
 }
 .infoIcon{
