@@ -10,7 +10,7 @@
                     <mat-card class="calender-section">
                         <!-- calender html start-->
                         <div class="row text-center">
-                            <div class="col-md-4">
+                            <div class="col-md-4 nopadding text-left">
                                 <div class="btn-group">
                                     <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="getAllActivity($event)">
                                         Previous
@@ -28,15 +28,15 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="btn-group">
-                                    <div class="btn btn-primary" (click)="setView(CalendarView.Month,viewDate)" [class.active]="view === CalendarView.Month">
+                                    <!-- <div class="btn btn-primary" (click)="setView(CalendarView.Month,viewDate)" [class.active]="view === CalendarView.Month">
                                         Month
-                                    </div>
-                                    <div class="btn btn-primary" (click)="setView(CalendarView.Week,viewDate)" [class.active]="view === CalendarView.Week">
+                                    </div> -->
+                                    <!-- <div class="btn btn-primary" (click)="setView(CalendarView.Week,viewDate)" [class.active]="view === CalendarView.Week">
                                         Week
                                     </div>
                                     <div class="btn btn-primary" (click)="setView(CalendarView.Day,viewDate)" [class.active]="view === CalendarView.Day">
                                         Day
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
