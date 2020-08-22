@@ -136,6 +136,7 @@
 .progess {
   width: 75px;
   margin-left: 3px;
+  margin-top: -9%;
   // margin-left: 24%;
   // position: absolute;
 
@@ -143,8 +144,11 @@
 .finalScore{
   font-size: 22px;
     padding: 16px;
-    margin-top: 11px;
+    margin-top: -3px;
 
+}
+.f_size_12{
+  font-size: 12px;
 }
 .padscore{
   font-size: 32px;
@@ -159,7 +163,7 @@
 .point{
   font-size: 32px;
     padding: 23px;
-    // margin-top: 25px;
+    margin-top: -7px;
     color: $light-green;
 
 }
@@ -214,7 +218,7 @@
   padding-right: 0px;
   padding-left: 0px;
   margin-right: auto;
-  margin-left: auto;
+  margin-left: -8px;
 }
 
 :host /deep/ .mat-tab-body {
@@ -258,7 +262,7 @@
 }
 
 .myC-head {
-  margin-left: 1.4% !important;
+  margin-left: 1% !important;
   margin-top: 2%;
   margin-bottom: 1%;
 }
@@ -598,6 +602,9 @@ hr {
 .m-t-2{
 margin-top: 2%;
 }
+.m-t-m-2{
+  margin-top: -2px;
+}
 .m-t-8{
   margin-top: 8px;
 }
@@ -605,7 +612,7 @@ margin-top: 2%;
   margin-left: 2px;
 }
 .m-t{
-  margin-top: 20%
+  margin-top: 10%
 }
 .l-b-2{
   border-right: 1.5px solid $color-border; 
@@ -636,9 +643,10 @@ margin-top: 2%;
   /* justify-content: end; */
   border: 1px solid $lxp-theme-green !important;
   position: absolute;
-    margin-left: 18%;
-    z-index: 99;
-    height: 34px;
+  margin-left: -10%;
+  margin-top: 2px;
+  z-index: 99;
+  height: 32px;
   // left: 268px;
     // bottom: 5px;
   // margin-left: 25%;
@@ -689,18 +697,25 @@ margin-top: 2%;
   left: 8px;
   
 }
-
+.m-p-14{
+  margin-top: 14px;
+}
 .aligned-with-icon {
   position: relative;
   // left: 420px;
   font-size:12px;
-  margin-top: 16%;
+  margin-top: 15%;
+  left: -94%;
 }
-
+.m-t-1{
+  margin-top: 2.8%;
+}
 .noCourse {
   padding: 50px;
 }
-
+.m-l-3{
+  margin-left: 3px;
+}
 .footer {
   padding: 15px;
   font-size: inherit;
@@ -949,6 +964,8 @@ mat-icon {
   color: $lxp-button-text;
   border: solid 1px $color-border !important;
   color: $lxp-text;
+  border-radius: 4px;
+  margin-top: 2px;
   // margin-left: 9.5%;
   height: 32px;
 
@@ -970,7 +987,7 @@ mat-icon {
   border: 1px solid $lxp-gray;
   padding: 7px;
   border-radius: 4px;
-  margin-left: 20px;
+  margin-left: 30px;
 }
 .mat-badge{
   top:7px
@@ -1165,4 +1182,8 @@ mat-icon {
  right: 19px;
  top: 22px;
  background:$lxp-icon !important;
+}
+:host ::ng-deep mat-badge-content {
+  color: white;
+  background:$lxp-icon !important;
 }

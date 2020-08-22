@@ -1,6 +1,6 @@
 @import "variable";
 .myC-head {
-    margin-left: 1% !important;
+    margin-left: 0.8% !important;
 }
 .calender-container {
     height: calc(100vh - 50px);
@@ -12,11 +12,11 @@
     .f_size_22 {
         font-size: 22px;
     }
-    .myC-head {
-        margin-left: 1% !important;
-        margin-top: 2%;
-        margin-bottom: -2%;
-    }
+    // .myC-head {
+    //     margin-left: 1% !important;
+    //     margin-top: 2%;
+    //     margin-bottom: -2%;
+    // }
     .color-grey {
         border-left: 2px solid #b5acac !important;
     }

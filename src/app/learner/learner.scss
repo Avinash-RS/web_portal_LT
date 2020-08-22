@@ -442,6 +442,10 @@ button:disabled:hover {
   width: 29%;
   bottom: 6px;
 }
+ .mat-badge-content {
+  color: $color-white;
+  background: $lxp-gray;
+}
 
 .beforeloginimg{
     height: 100vh;

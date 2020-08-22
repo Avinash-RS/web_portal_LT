@@ -440,7 +440,10 @@ iframe.fullScreen {
 :host ::ng-deep .mat-tab-body-content {
     height: 100%;
     overflow: hidden !important;
-    padding: 8px !important;
+    padding-top: 8px !important;
+}
+:host ::ng-deep .mat-tab-group{
+    margin-left: 10px !important;
 }
 
 :host ::ng-deep .mat-tab-label-container{
@@ -474,7 +477,7 @@ iframe.fullScreen {
     border-radius: 0px 0px 10px 10px;
 }
 .prevBtn{
-    margin-left: 86%;
+    margin-left: 86.7%;
     position: absolute;
     top: 1%;
     z-index: 99;
