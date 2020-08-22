@@ -943,7 +943,7 @@ mat-icon {
   color: $lxp-button-text;
   border: solid 1px $color-border !important;
   color: $lxp-text;
-  margin-left: 9.5%;
+  // margin-left: 9.5%;
   height: 32px;
 
 }
@@ -998,7 +998,35 @@ mat-icon {
   border-radius: 5px;
   
 }
+.imageover:hover .courseImage {
+  opacity: 0.3;
+}
 
+.imageover:hover .overlayimage {
+  opacity: 1;
+}
+.overlayimage{
+  position: absolute;
+  bottom: -9%;
+  left: 0;
+  margin: 15px;
+  right: 0;
+  background-color: #00000087;
+  overflow: hidden;
+  color: #fff !important;
+  font-size: 17px;
+  height: 178px;
+  transition: .7s ease;
+  border-radius: 5px;
+  opacity: 0;
+  font-size: 18px;
+  padding: 19px;
+  color: #3f444a;
+  font-size: 16px;
+ 
+  
+
+}
 .overlay {
   opacity: 1;
 }
