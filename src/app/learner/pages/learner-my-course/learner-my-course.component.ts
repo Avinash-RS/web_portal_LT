@@ -158,7 +158,7 @@ export class LearnerMyCourseComponent implements OnInit {
         // });
         this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
         this.enrolledCourses.forEach(element => {
-          console.log('ele', element.upComingLiveClassRoom);
+          // console.log('ele', element.upComingLiveClassRoom);
           if (element.upComingLiveClassRoom) {
           const currentDate = new Date();
           const formatDate = moment(currentDate).format();
@@ -247,7 +247,7 @@ export class LearnerMyCourseComponent implements OnInit {
     }
   }
   alterDescriptionText() {
-    console.log('in');
+    // console.log('in');
     this.showShortDesciption = !this.showShortDesciption;
   }
 
