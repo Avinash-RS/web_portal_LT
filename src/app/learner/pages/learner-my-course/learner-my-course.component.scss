@@ -579,6 +579,7 @@ hr {
 .card12{
   background: transparent !important;
 }
+
 .card12:hover {
   // box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2)
 }
@@ -704,7 +705,7 @@ margin-top: 2%;
   // position: fixed;
   z-index: 1;
   color: $label;
-  // position: fixed;
+  // position: absolute;
   z-index: 1;
   font-weight: 500;
   background-color: $profile-t-grey;
