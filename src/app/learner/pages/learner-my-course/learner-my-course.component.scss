@@ -232,7 +232,7 @@
 
 .coursebg {
   background-color: $color_white;
-  margin-left: 1%;
+  // margin-left: 1%;
   margin-top: 1%;
   margin-bottom: 1%;
   box-shadow: none;
@@ -692,7 +692,7 @@ margin-top: 2%;
   position: relative;
   // left: 420px;
   font-size:12px;
-  margin-top: 11%;
+  margin-top: 16%;
 }
 
 .noCourse {
@@ -1067,7 +1067,7 @@ mat-icon {
 .catPost{
   position: absolute;
   float: right;
-  right: 32px;
+  right: 20px;
   top: 14px;
   cursor: pointer;
   /* bottom: 0; */
