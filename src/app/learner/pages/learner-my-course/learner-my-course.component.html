@@ -1,11 +1,13 @@
 <app-header></app-header>
-
 <div class="row">
     <div class="col-10">
         <div class="f_size_22 myC-head animated animatedFadeInUp fadeInUp ">{{'My Courses' }}</div>
+       
     </div>
     <div class="col-2 mt-4">
-      <span>
+        
+      <!-- <span>
+      
             <mat-button class="available-course-btn">
               <mat-select panelClass="mat-select-panel" class="mypanel" placeholder="{{catalogueDetails?.catalogueName | titlecase}}" name="availableCourses"
               [(value)]="availableCourses" 
@@ -20,10 +22,30 @@
                     </mat-option>
                 </mat-select> 
 
-            </mat-button>
+            </mat-button>   
+         
+
+   
+        </span>   -->
+        <span>
+            <mat-button class="available-course-btn" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()">
+                <span class="lxp-text">{{catalogueDetails?.catalogueName | titlecase}} <mat-icon class="dropdownicon">expand_more</mat-icon></span>
+              </mat-button>
+                <mat-menu  #menu="matMenu" [overlapTrigger]="false" class="customize">
+                  <span (mouseleave)="menuTrigger.closeMenu()">
+                    <button *ngFor="let category of categoryDetails" mat-menu-item (click)="getCoureBasedOnCatalog(catalogueDetails,category,previewDialog)">
+                      <span>{{category.categoryName | titlecase}}</span>
+                        <span  matBadge="{{category.totalCount}}"  matBadgeOverlap="false"></span>
+                    </button>
+                  </span>
+                  </mat-menu>
         </span> 
+      
     </div>
+
 </div>
+
+
 
 <!-- tabs here -->
 <div class="row bodybg">
@@ -183,6 +205,7 @@
                             </div>
                         </div>
                     </mat-card>
+                    <hr class="hr-tag">
                 </div> 
                 <!-- card end -->
 
@@ -349,6 +372,7 @@
                             <!-- card end -->
                         </div>
                     </mat-card>
+                    <hr class="hr-tag">
                 </div>
 
                 <div *ngIf="completedCourseCount === 0">
@@ -513,6 +537,7 @@
                             <!-- card end -->
                         </div>
                     </mat-card>
+                    <hr class="hr-tag">
                 </div>
 
 
@@ -668,6 +693,7 @@
                             <!-- card end -->
                         </div>
                     </mat-card>
+                    <hr class="hr-tag">
                 </div>
 
                 <div *ngIf="allCourseCount === 0">

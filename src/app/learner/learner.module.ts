@@ -62,6 +62,7 @@ import { LearnerCalendarComponent } from './pages/learner-calendar/learner-calen
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MatMenuModule } from '@angular/material';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -212,6 +213,7 @@ const routes: Routes = [
     BarRatingModule,
     CommonModule,
     NgxMaskModule,
+    MatMenuModule,
     AngularEditorModule,
     TooltipModule.forRoot(),
     RouterModule.forChild(routes),
@@ -253,6 +255,9 @@ const routes: Routes = [
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+  ],
+  exports: [
+    MatMenuModule 
   ],
   providers: [
     Apollo
