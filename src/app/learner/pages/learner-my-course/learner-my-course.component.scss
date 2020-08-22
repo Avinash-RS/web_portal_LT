@@ -268,7 +268,7 @@
   width: 100%;
   height: 100%;
   margin: auto;
-  margin-left: 0;
+  margin-left: 26px;
   border-radius: 10px;
 }
 
@@ -276,21 +276,22 @@
 .courseHover {
   position: relative;
   width: 150px;
-  height: 150px;
-  padding: 5px 0;
-  padding: 15px 0;
+  height: 136px;
+  padding-top: 15px;
+  // padding: 5px 0;
+  // padding: 15px 0;
 }
 
 .overlay {
   position: absolute;
-  bottom: 10%;
-  left: 0;
+  bottom: 1%;
+  left: 25px;
   right: 0;
-  padding: 15px 0;
+  /* padding: 15px 0; */
   background-color: #0000001f;
   overflow: hidden;
   width: 0;
-  height: 80%;
+  height: 89%;
   transition: .7s ease;
   border-radius: 10px;
 }
@@ -938,12 +939,15 @@ mat-icon {
   top: 4px;
 }
 }
+.no-p-l{
+  padding-left: 0px !important;
+}
 .clr {
   background-color: $color-white;
   color: $lxp-button-text;
   border: solid 1px $color-border !important;
   color: $lxp-text;
-  margin-left: 9.5%;
+  // margin-left: 9.5%;
   height: 32px;
 
 }
