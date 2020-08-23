@@ -153,7 +153,6 @@ describe('LoginComponent', () => {
           localStorage.setItem('token', loginresult.data.login.message.token)
           localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message))
           // debugger
-          
           // if (loginresult.data.login.message.is_profile_updated) {
             // expect(routerStub.navigate).toHaveBeenCalledWith(['/Learner/MyCourse']);
             // expect(navigateSpy).toHaveBeenCalledWith(['/Learner/MyCourse']);

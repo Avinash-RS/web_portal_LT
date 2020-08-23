@@ -81,14 +81,15 @@ export class LoginComponent implements OnInit {
               // localStorage.setItem('token', loginresult.data.login.message.token);
               const ps = btoa(this.loginForm.value.password);
               // if false, then need to update profile
-              if (loginresult.data.login.message.is_profile_updated) {
-                // for june 10 added by ankit
-                this.router.navigate(['/Learner/MyCourse']);
-              } else {
-              //  this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields', { closeButton: true });
-               // this.router.navigate(['/Learner/profile']);
-               this.router.navigate(['/Learner/MyCourse']);
-              }
+              // if (loginresult.data.login.message.is_profile_updated) {
+              //   // for june 10 added by ankit
+              //   this.router.navigate(['/Learner/MyCourse']);
+              // } else {
+              // //  this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields', { closeButton: true });
+              //  // this.router.navigate(['/Learner/profile']);
+              //  this.router.navigate(['/Learner/MyCourse']);
+              // }
+              this.router.navigate(['/Learner/MyCourse']);
             }
           } else {
             this.loginForm.reset();
