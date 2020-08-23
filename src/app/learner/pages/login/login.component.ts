@@ -60,13 +60,17 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('token', loginresult.data.login.message.token);
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
               // if false, then need to update profile
-              if (loginresult.data.login.message.is_profile_updated) {
-                // for june 10 added by ankit
-                this.router.navigate(['/Learner/MyCourse']);
-              } else {
-                this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields', { closeButton: true });
-                this.router.navigate(['/Learner/profile']);
-              }
+              //Afser'schanges on Profile not Mandtory change no #4 Committed condition on and added
+              //page route MyCourse
+              // if (loginresult.data.login.message.is_profile_updated) {
+              //   // for june 10 added by ankit
+              //   this.router.navigate(['/Learner/MyCourse']);
+              // } else {
+              //   this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields', { closeButton: true });
+              //   this.router.navigate(['/Learner/profile']);
+              // }
+
+              this.router.navigate(['/Learner/MyCourse']);
             } else {
               localStorage.setItem('Fullname', loginresult.data.login.message.full_name); // Added ny Mythreyi
               sessionStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
@@ -81,8 +85,9 @@ export class LoginComponent implements OnInit {
                 // for june 10 added by ankit
                 this.router.navigate(['/Learner/MyCourse']);
               } else {
-                this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields', { closeButton: true });
-                this.router.navigate(['/Learner/profile']);
+              //  this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields', { closeButton: true });
+               // this.router.navigate(['/Learner/profile']);
+               this.router.navigate(['/Learner/MyCourse']);
               }
             }
           } else {
