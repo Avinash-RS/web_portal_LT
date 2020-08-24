@@ -6,7 +6,6 @@
 </div>
 
 <div class="container007 animated animatedFadeInUp fadeInUp">
-
     <div class="main contents">
         <span (click)="showHeader()">
             <mat-icon class="closebgt" *ngIf="!drawer.opened" (click)="drawer.toggle()">menu</mat-icon>
@@ -110,6 +109,7 @@
             </mat-tab>
 
             <mat-tab label="About the course">
+                <div >
                 <h3 class="head-h1">Course description</h3>
                 <div class="vertical"></div>
 
@@ -160,9 +160,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </mat-tab>
 
             <mat-tab label="Resources">
+                <div >
                 <mat-accordion>
                     <ng-container *ngIf="content?.noresource">
                         <ng-container *ngFor="let res of content?.coursedetails; let i = index">
@@ -255,10 +257,11 @@
                         <span style="padding: 16px;">{{'This course does not have resource files.'| translate}}</span>
                     </ng-container>
                 </mat-accordion>
+            </div>
             </mat-tab>
 
             <!-- Assignments tab -->
-            <div>
+            <div >
                 <mat-tab label="Assignments" class="discussion_forum" *ngIf="assignmentContent?.coursedetails.length">
                     <mat-accordion>
                         <ng-container>
@@ -344,10 +347,10 @@
                                                                         <span class="ml-3">
                                                                             <mat-icon *ngIf="file.enableView"
                                                                                 (click)="previewDoc(previewDialog,file)"
-                                                                                class="viewDoc">remove_red_eye
+                                                                                class="viewDoc">find_in_page
                                                                             </mat-icon>
                                                                             <mat-icon *ngIf="!file.enableView"
-                                                                                class="viewDoc">remove_red_eye
+                                                                                class="viewDoc">find_in_page
                                                                             </mat-icon>
                                                                         </span>
 
@@ -387,13 +390,15 @@
                                                                     <div class="row">
 
                                                                         <span>
-
+                                                                                <button class="uploadBtn"
+                                                                            [disabled]="!file?.enableUpload"
+                                                                            (click)="fileInput.click()">
+                                                                          <span class="uploadIcon">
                                                                             <i class="fa fa-upload searchicon ml-3 tooltip-350"
                                                                                 [tooltip]="popTemplate"
                                                                                 placement="bottom" aria-hidden="true"
                                                                                 placement="bottom"
-                                                                                [disabled]="!assignmentContent?.enableUpload"
-                                                                                (click)="fileInput.click()"></i>
+                                                                                ></i></span></button>
 
                                                                         </span>
 

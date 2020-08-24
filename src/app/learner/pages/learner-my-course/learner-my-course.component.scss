@@ -136,6 +136,7 @@
 .progess {
   width: 75px;
   margin-left: 3px;
+  margin-top: -9%;
   // margin-left: 24%;
   // position: absolute;
 
@@ -143,8 +144,11 @@
 .finalScore{
   font-size: 22px;
     padding: 16px;
-    margin-top: 11px;
+    margin-top: -3px;
 
+}
+.f_size_12{
+  font-size: 12px;
 }
 .padscore{
   font-size: 32px;
@@ -159,7 +163,7 @@
 .point{
   font-size: 32px;
     padding: 23px;
-    // margin-top: 25px;
+    margin-top: -7px;
     color: $light-green;
 
 }
@@ -197,7 +201,9 @@
 .m-b-2 {
   margin-bottom: 2%;
 }
-
+.m-l-40{
+  margin-left: 40px;
+}
 .bodybg {
   width: auto;
   padding-left: 18px;
@@ -212,7 +218,7 @@
   padding-right: 0px;
   padding-left: 0px;
   margin-right: auto;
-  margin-left: auto;
+  margin-left: -8px;
 }
 
 :host /deep/ .mat-tab-body {
@@ -230,7 +236,7 @@
 
 .coursebg {
   background-color: $color_white;
-  margin-left: 1%;
+  // margin-left: 1%;
   margin-top: 1%;
   margin-bottom: 1%;
   box-shadow: none;
@@ -256,7 +262,7 @@
 }
 
 .myC-head {
-  margin-left: 2% !important;
+  margin-left: 1% !important;
   margin-top: 2%;
   margin-bottom: 1%;
 }
@@ -266,7 +272,7 @@
   width: 100%;
   height: 100%;
   margin: auto;
-  margin-left: 0;
+  margin-left: 26px;
   border-radius: 10px;
 }
 
@@ -274,21 +280,23 @@
 .courseHover {
   position: relative;
   width: 150px;
-  height: 150px;
-  padding: 5px 0;
-  padding: 15px 0;
+  height: 136px;
+  padding-top: 15px;
+  bottom: 1px;
+  // padding: 5px 0;
+  // padding: 15px 0;
 }
 
 .overlay {
   position: absolute;
-  bottom: 10%;
-  left: 0;
+  bottom: 1%;
+  left: 25px;
   right: 0;
-  padding: 15px 0;
+  /* padding: 15px 0; */
   background-color: #0000001f;
   overflow: hidden;
   width: 0;
-  height: 80%;
+  height: 89%;
   transition: .7s ease;
   border-radius: 10px;
 }
@@ -319,12 +327,13 @@
   // width: 100%;
   // height: 100%;
   width: 90px;
+  margin-top: 15%;
   // padding: 21px;
   // margin: auto;
 }
 .errorboxx{
   padding: 5px !important;
-  margin-top: 2.8%;
+  margin-top:5%;
 }
 
 .m-l-1 {
@@ -373,7 +382,7 @@
 }
 
 .statBtn {
-  border: 1px solid #898989 !important;
+  border: 1px solid $lxp-theme-green !important;
   margin-top: 23%;
 }
 
@@ -402,15 +411,23 @@
   cursor: pointer;
 
 }
-
+.m-b-1{
+  margin-bottom: 1%;
+}
+.m-t-05{
+  margin-top: -0.5%;
+}
 .status {
   background: $lxp-theme-green;
   // padding: 2px 6px;
   // float: right;
   border-radius: 4px;
-  width: 50px;
+  // width: 50px;
+  height: 19px;
   border: none;
-  font-size: 13px;
+  font-size: 11px;
+  position: relative;
+  top:-8px;
   color: $color-white;
   // margin-top: 5px;
 }
@@ -571,8 +588,9 @@ hr {
 .card12{
   background: transparent !important;
 }
+
 .card12:hover {
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2)
+  // box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2)
 }
 .cap{
   text-transform: capitalize;
@@ -584,6 +602,9 @@ hr {
 .m-t-2{
 margin-top: 2%;
 }
+.m-t-m-2{
+  margin-top: -2px;
+}
 .m-t-8{
   margin-top: 8px;
 }
@@ -591,7 +612,7 @@ margin-top: 2%;
   margin-left: 2px;
 }
 .m-t{
-  margin-top: 20%
+  margin-top: 10%
 }
 .l-b-2{
   border-right: 1.5px solid $color-border; 
@@ -610,14 +631,23 @@ margin-top: 2%;
     bottom: 22px;
     left: 38px;
 }
+.tabside{
+  color:$color-blank;
+  position: absolute;
+  font-size: 18px;
+}
 
 .btl-alin {
   /* margin-top: -0.5%; */
   // text-align: left;
   /* justify-content: end; */
+  border: 1px solid $lxp-theme-green !important;
   position: absolute;
-    margin-left: 18%;
-    z-index: 99;
+  margin-left: -10%;
+  margin-top: 2px;
+  width: 100px;
+  z-index: 99;
+  height: 32px;
   // left: 268px;
     // bottom: 5px;
   // margin-left: 25%;
@@ -654,7 +684,7 @@ margin-top: 2%;
 }
 
 .statBtn1 {
-  border: 1px solid $lxp-gray;
+  border: 1px solid $lxp-theme-green;
   border-radius: 4px;
   width: 120px;
 }
@@ -668,28 +698,35 @@ margin-top: 2%;
   left: 8px;
   
 }
-
+.m-p-14{
+  margin-top: 14px;
+}
 .aligned-with-icon {
   position: relative;
   // left: 420px;
   font-size:12px;
-  margin-top: 10%;
+  margin-top: 15%;
+  left: -94%;
 }
-
+.m-t-1{
+  margin-top: 2.8%;
+}
 .noCourse {
   padding: 50px;
 }
-
+.m-l-3{
+  margin-left: 3px;
+}
 .footer {
   padding: 15px;
   font-size: inherit;
   left: 0;
   bottom: 0;
   width: 100%;
-  position: fixed;
+  // position: fixed;
   z-index: 1;
   color: $label;
-  position: fixed;
+  // position: absolute;
   z-index: 1;
   font-weight: 500;
   background-color: $profile-t-grey;
@@ -809,7 +846,7 @@ margin-top: 2%;
 
   .color-white {
     color: #b5acac;
-    background: white !important;
+    background: $color-white !important;
     border-left: 0px !important;
   }
 
@@ -912,7 +949,7 @@ margin-top: 2%;
 }
 .buttonCls {
 button {
-  border: solid 1px black !important;
+  border: solid 1px $color-blank !important;
   color: $lxp-text;
 }
 mat-icon {
@@ -920,13 +957,18 @@ mat-icon {
   top: 4px;
 }
 }
+.no-p-l{
+  padding-left: 0px !important;
+}
 .clr {
   background-color: $color-white;
   color: $lxp-button-text;
   border: solid 1px $color-border !important;
   color: $lxp-text;
-  margin-left: 9.5%;
-  height: 30px;
+  border-radius: 4px;
+  margin-top: 2px;
+  // margin-left: 9.5%;
+  height: 32px;
 
 }
 .infoIcon{
@@ -946,7 +988,7 @@ mat-icon {
   border: 1px solid $lxp-gray;
   padding: 7px;
   border-radius: 4px;
-  margin-left: 20px;
+  margin-left: 30px;
 }
 .mat-badge{
   top:7px
@@ -976,7 +1018,38 @@ mat-icon {
 .courseImage{
   height: 178px;
   width: 100%;
-  margin-top: -15px;
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+  
+}
+.imageover:hover .courseImage {
+  opacity: 0.3;
+}
+
+.imageover:hover .overlayimage {
+  opacity: 1;
+}
+.overlayimage{
+  position: absolute;
+  bottom: -9%;
+  left: 0;
+  margin: 15px;
+  right: 0;
+  background-color: #00000087;
+  overflow: hidden;
+  color: #fff !important;
+  font-size: 17px;
+  height: 178px;
+  transition: .7s ease;
+  border-radius: 5px;
+  opacity: 0;
+  font-size: 18px;
+  padding: 19px;
+  color: #3f444a;
+  font-size: 16px;
+ 
+  
+
 }
 .overlay {
   opacity: 1;
@@ -986,18 +1059,27 @@ mat-icon {
   padding: 15px;
 }
 .box-shadow {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  max-height: 283px;
+  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  // max-height: 100%
+  box-shadow: none;
+    border: 1px solid #ccc;
+}
+.catnamenew{
+  color: #3f444a;
+  text-transform: capitalize;
+  font-size: 22px;
+  font-weight: 600 !important;
 }
 .courseName {
   position: relative;
-  left: 10px;
+  /* left: 10px; */
   font-size: 18px;
+  padding: 0px 19px;
+  color: #3f444a;
+  font-size: 18px;
+  font-weight: 600 !important;
 }
-.claimbtn {
-  position: relative;
-  bottom: 16px;
-}
+
 .size {
   font-size: large
 }
@@ -1005,6 +1087,8 @@ mat-icon {
   width: 60%;
   position: relative;
   bottom: 2px;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(21, 156, 228, 0.4);
   
 }
 /* dropdown badge alignment */
@@ -1014,19 +1098,170 @@ mat-icon {
 // }
 
 
-::ng-deep .cdk-overlay-container .cdk-overlay-pane .mat-select-panel{
-  min-width: 146px !important;
-  pointer-events: auto !important;
-  font-size: 14px !important;
-  transform: translateX(7px) translateY(-16px) !important;  
-}
-.availableCourseOption{
-  width: 150px;
-}
+// ::ng-deep .cdk-overlay-container .cdk-overlay-pane .mat-select-panel{
+//   min-width: 146px !important;
+//   pointer-events: auto !important;
+//   font-size: 14px !important;
+//   transform: translateX(7px) translateY(-16px) !important;  
+// }
+// .availableCourseOption{
+//   width: 150px;
+// }
 ::ng-deep .tooltip-inner{
   
   opacity: 0.6 !important;
 }
 :host ::ng-deep .tooltip-arrow {
   opacity: 0.6 !important;
+}
+:host ::ng-deep #mat-tab-label-0-3{
+  display: none ;
+
+}
+:host ::ng-deep #mat-tab-label-0-4{
+  display: none ;
+
+}
+:host ::ng-deep #mat-tab-label-0-5{
+  display: none ;
+
+}
+:host ::ng-deep #mat-badge-content-3{
+  background: #898989 !important;
+
+}
+.catnamesss{
+  margin-right: 35px;
+  cursor: pointer !important;
+  background: $color-white;
+  border: none;
+  // height: 40px;
+  /* margin-bottom: 28px; */
+  color: #b8b8b8;
+}
+
+.catnamesss:focus{
+  border-bottom: 2px solid $lxp-theme-green !important;
+  color:$color-blank !important;
+  padding-bottom: 10px;
+}
+.catPost{
+  position: absolute;
+  float: right;
+  right: 20px;
+  top: 14px;
+  cursor: pointer;
+  /* bottom: 0; */
+  z-index: 999;
+
+}
+.available-course-btn:hover{
+  background-color:#c02524;
+
+}
+.cathd1 {
+  
+  // margin-right: 50px;
+
+}
+.btnredClass{
+  width: 67%;
+  border: 1px solid #c02222;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 13px;
+  border-radius: 8px;
+}
+.headerDes{
+  border-bottom: 1px solid #e6e6e6;
+}
+.errorCard{
+  height: 150px;
+}
+
+.hr-tag{
+    top: 5px;
+    position: relative;
+}
+.dropdownicon{
+  position: relative;
+  top:4px;
+}
+// ::ng-deep .mat-menu-content {
+//   min-width: 146px !important;
+// }
+// ::ng-deep .mat-menu-panel{
+//   // margin-top: 60px !important;
+//   position: relative;
+//   top: 55px !important;
+//   right: 3px !important;
+// }
+.matBadge{
+ position: relative;
+ float: right;
+ right: 19px;
+ top: 22px;
+ background:$lxp-icon !important;
+}
+.lxp-text:hover{
+  color: #fff;
+
+}
+
+
+.dropbtn {
+  background-color: #ffffff;
+  color: #898989;
+  padding: 6px;
+  font-size: 16px;
+  border: none;
+  border-radius: 11px;
+  border: 1px solid #898989;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 171px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 999999;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #c12924; color: #fff;}
+
+.matBadge12{
+  position: relative;
+  /* float: right; */
+  /* right: 19px; */
+  /* top: 22px; */
+  background: #5c6873 !important;
+}
+
+.contedrop{
+  padding: 15px;
+    cursor: pointer;
+}
+.contedrop:hover{
+  background: #cecece !important;
+}
+:host ::ng-deep mat-badge-content {
+  color: white;
+  background:$lxp-icon !important;
 }

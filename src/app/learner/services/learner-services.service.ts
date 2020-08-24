@@ -73,7 +73,8 @@ import {
   playerstatusrealtime,
   CreateNewThread,
   CreateNewThreadBid,
-  claimcourse
+  claimcourse,
+  user_mstr_data
 } from './operations/learner_mutation';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -139,12 +140,13 @@ export class LearnerServicesService {
     return this.http.post(this.envApi + 'post_like', data, httpOptions);
   }
 
-  user_registration(email, full_name, mobile_number, termsandconditions) {
+  user_registration(email, full_name, mobile_number, title_id , termsandconditions) {
     return this.Apollo.query({
       query: user_registration,
       variables: {
         full_name,
         mobile_number,
+        title_id ,
         email,
         term_condition: termsandconditions,
         domain: this.envDomain
@@ -786,6 +788,13 @@ export class LearnerServicesService {
         user_id: uid,
         course_id: cid
       }
+    });
+  }
+
+  getRegisterTitle() {
+    return this.Apollo.query({
+      query: user_mstr_data,
+      variables: {}
     });
   }
 }

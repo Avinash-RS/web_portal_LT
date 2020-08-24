@@ -171,7 +171,7 @@ export class CoursedetailsComponent implements OnInit {
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     if (this.gs.checkLogout()) {
       this.detailData = detail;
-      this.courseid = detail && detail.id || this.localStoCourseid;
+      // this.courseid = detail && detail.id || this.localStoCourseid;
       this.userDetail = this.gs.checkLogout();
       this.localStoCourseid = localStorage.getItem('Courseid');
       this.courseid = detail && detail.id || this.localStoCourseid;
@@ -245,7 +245,7 @@ export class CoursedetailsComponent implements OnInit {
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
-          this.localStoCourseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
+          this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.content.url);
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
@@ -258,7 +258,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   getAssignmentmoduleData() {
-    this.Lservice.getAssignmentmoduleData(this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
+    this.Lservice.getAssignmentmoduleData(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
       console.log('testing', this.assignmentContent);
 
@@ -277,35 +277,32 @@ export class CoursedetailsComponent implements OnInit {
                 const endDate = new Date(date2);
                 fileData.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
                 fileData.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:MM');
-                console.log(fileData.assignmentStartDate);
-                console.log(fileData.assignmentEndDate);
-
                 if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate) {
                   fileData.enableView = true;
                 } else {
                   fileData.enableView = false;
                 }
-
                 if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate &&
                   moment().format('DD-MM-YYYY HH:MM') <= this.courseEndDate) {
-                  this.assignmentContent.enableUpload = true;
+                    fileData.enableUpload = true;
                 } else if (moment().format('DD-MM-YYYY HH:MM') < fileData.assignmentStartDate ||
                   moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate) {
-                  this.assignmentContent.enableUpload = false;
+                    fileData.enableUpload = false;
                 }
               }
             });
           });
         });
-        const tabGroup = this.demo3Tab;
-        if (!tabGroup || !(tabGroup instanceof MatTabGroup)) { return; }
+        // const tabGroup = this.demo3Tab;
+        // if (!tabGroup || !(tabGroup instanceof MatTabGroup)) { return; }
 
-        const tabCount = tabGroup._tabs.length;
-        if (this.detailData && this.detailData.assignmentVal) {
-          this.selectedTabIndex = tabCount - 2;
-        } else if (this.detailData && this.detailData.forumVal) {
-          this.selectedTabIndex = tabCount - 1;
-        }
+        // const tabCount = tabGroup._tabs.length;
+        // if (this.detailData && this.detailData.assignmentVal) {
+        //   this.selectedTabIndex = tabCount - 2;
+        // } else
+        // if (this.detailData && this.detailData.forumVal) {
+        //   this.selectedTabIndex = tabCount - 1;
+        // }
       }
     });
   }
@@ -334,7 +331,7 @@ export class CoursedetailsComponent implements OnInit {
     const payload = new FormData();
     payload.append('learnerdoc', this.assFile, this.assFile.name);
     payload.append('user_id', this.getuserid.user_id);
-    payload.append('course_id', this.localStoCourseid);
+    payload.append('course_id', this.courseid);
     payload.append('topic_id', topicname);
     payload.append('module_id', modulename);
     payload.append('file_id', fileId);
@@ -353,7 +350,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   getPlayerNextPrve() {
-    this.Lservice.playerModuleAndTopic(this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
+    this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
       this.scromModuleData = this.scromApiData?.childData;
       this.moduleLenth = this.scromApiData?.childData.length;
@@ -374,7 +371,7 @@ export class CoursedetailsComponent implements OnInit {
         this.getuserid = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
           (environment.scormUrl + '/scormPlayer.html?contentID=' +
-            this.localStoCourseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
+            this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
             this.getuserid._id + '&path=' + this.gettopicLink.link);
         this.playerstatusrealtime(this.gettopicLink.title, 'topicStatus', this.moduleInfo.title,
           // tslint:disable-next-line:radix
@@ -409,7 +406,7 @@ export class CoursedetailsComponent implements OnInit {
         this.gettopicLink = this.scromModuleData[this.currentPage - 1].children[this.topiccurrentlink];
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
           (environment.scormUrl + '/scormPlayer.html?contentID=' +
-            this.localStoCourseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
+            this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
             this.getuserid._id + '&path=' + this.gettopicLink.link);
       }
       if (this.topiccurrentlink === 0) {
@@ -426,24 +423,25 @@ export class CoursedetailsComponent implements OnInit {
 
   // get Scrom module and topic
   playerModuleAndTopic(setPageFlag) {
-    this.Lservice.playerModuleAndTopic(this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
+    this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
       this.scromModuleData = this.scromApiData?.childData;
-      const tabGroup = this.demo3Tab;
-      if (!tabGroup || !(tabGroup instanceof MatTabGroup)) { return; }
+      // const tabGroup = this.demo3Tab;
+      // if (!tabGroup || !(tabGroup instanceof MatTabGroup)) { return; }
 
-      const tabCount = tabGroup._tabs.length;
-      if (this.detailData && this.detailData.assignmentVal) {
-        this.selectedTabIndex = tabCount - 2;
-      } else if (this.detailData && this.detailData.forumVal) {
-        this.selectedTabIndex = tabCount - 1;
-      }
+      // const tabCount = tabGroup._tabs.length;
+      // if (this.detailData && this.detailData.assignmentVal) {
+      //   this.selectedTabIndex = tabCount - 2;
+      // } else
+      // if (this.detailData && this.detailData.forumVal) {
+      //   this.selectedTabIndex = tabCount - 1;
+      // }
     });
   }
   playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
       (environment.scormUrl + '/scormPlayer.html?contentID=' +
-        this.localStoCourseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url);
+        this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url);
     this.playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex);
   }
 
@@ -465,7 +463,7 @@ export class CoursedetailsComponent implements OnInit {
         }]
       }]
     };
-    this.Lservice.playerstatusrealtime(this.userDetail.user_id, this.localStoCourseid, jsonData.module, this.finalper)
+    this.Lservice.playerstatusrealtime(this.userDetail.user_id, this.courseid, jsonData.module, this.finalper)
       .subscribe((data: any) => {
         if (data.data.playerstatusrealtime.success === true) {
           this.playerModuleAndTopic(true);

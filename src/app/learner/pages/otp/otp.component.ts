@@ -72,7 +72,8 @@ export class OtpComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.translate.use(localStorage.getItem('language'));
+    // this.translate.use(localStorage.getItem('language'));
+    this.translate.use(localStorage.getItem('language') ? localStorage.getItem('language') : 'en');
     this.systemip = localStorage.getItem('Systemip');
     this.otpForm = this.formBuilder.group({
       // mobile: new FormControl('', myGlobals.mobileVal),

@@ -1,4 +1,7 @@
 @import "variable";
+.myC-head {
+    margin-left: 0.8% !important;
+}
 .calender-container {
     height: calc(100vh - 50px);
     overflow-y: auto;
@@ -9,11 +12,11 @@
     .f_size_22 {
         font-size: 22px;
     }
-    .myC-head {
-        margin-left: 1% !important;
-        margin-top: 2%;
-        margin-bottom: -2%;
-    }
+    // .myC-head {
+    //     margin-left: 1% !important;
+    //     margin-top: 2%;
+    //     margin-bottom: -2%;
+    // }
     .color-grey {
         border-left: 2px solid #b5acac !important;
     }
@@ -43,7 +46,7 @@
         color: #1F1A17!important;
     }
     .color-blue-card-status {
-        border-left: 3px solid #446bd4d1!important;
+        border-left: 3px solid #b3b2b2!important;
         color: #1F1A17!important;
     }
     .color-grey-card-status {
@@ -55,7 +58,7 @@
         color: #1F1A17 !important;
     }
     .Upcomingstatus {
-        background: #446bd4d1;
+        background: #b3b2b2;
         padding: 2px 6px;
         float: right;
         border-radius: 4px;
@@ -98,7 +101,7 @@
         margin-bottom: 12px;
     }
     .statBtn {
-        border: 1px solid #94b5f1;
+        border: 1px solid #b3b2b2;
     }
     .mat-stroked-button {
         border: 1px solid currentColor;
@@ -177,7 +180,7 @@
     }
     .btn {
         color: #fff !important;
-        background-color: #0062cc !important;
+        background-color: #b3b2b2 !important;
         border-color: #bcc0c5 !important;
     }
     .btn-primary:hover,
@@ -186,7 +189,7 @@
     .btn-primary.active {
         color: #fff !important;
         background-color: $color-blue !important;
-        border-color: #285e8e !important;
+        border-color: #b3b2b2 !important;
         /*set the color you want here*/
     }
 }

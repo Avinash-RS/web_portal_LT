@@ -23,8 +23,8 @@
 }
 
 .profileimg {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background-color: $color-white;
     color: $lxp-theme-green;
@@ -75,6 +75,10 @@
 :host ::ng-deep.mat-icon-button {
     line-height: 31px !important;
 
+}
+.mat-toolbar-row, .mat-toolbar-single-row {
+    padding: 0 11px !important;
+    width: 100%;
 }
 
 .btn1{
