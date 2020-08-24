@@ -1,5 +1,4 @@
 @import "variable";
-
 .spinner-container {
   position: absolute;
   top: 0;
@@ -1172,9 +1171,7 @@ mat-icon {
   font-size: 13px;
   border-radius: 8px;
 }
-.headerDes{
-  border-bottom: 1px solid #e6e6e6;
-}
+
 .errorCard{
   height: 150px;
 }
@@ -1265,3 +1262,7 @@ mat-icon {
   color: white;
   background:$lxp-icon !important;
 }
+::ng-deep .mat-dialog-container {
+  overflow-y: hidden !important;
+}
+
