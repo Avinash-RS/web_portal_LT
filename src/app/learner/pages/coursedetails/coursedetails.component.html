@@ -1,14 +1,15 @@
-<div>
+<div  (mouseover)="sider=true">
     <!-- id="hideMe" -->
-    <span>
+    <span *ngIf="sider">
         <app-header></app-header>
     </span>
 </div>
 
 <div class="container007 animated animatedFadeInUp fadeInUp">
     <div class="main contents">
-        <span (click)="showHeader()">
-            <mat-icon class="closebgt" *ngIf="!drawer.opened" (click)="drawer.toggle()">menu</mat-icon>
+        <span>
+            <mat-icon class="closebgt" (mouseover)="sider=true" *ngIf="!drawer.opened" (click)="drawer.toggle()">menu</mat-icon>
+            <mat-icon class="closebgt" (mouseover)="sider=true" *ngIf="drawer.opened" (click)="drawer.toggle()">close</mat-icon>
         </span>
         <!-- {{drawer.opened}} -->
         <div class="prevBtn">
@@ -44,7 +45,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <mat-icon class="close" (click)="drawer.close()">menu</mat-icon>
+                            <!-- <mat-icon class="close" (click)="drawer.close()">close</mat-icon> -->
                         </mat-toolbar>
                         <div class="contents">
                             <mat-accordion *ngFor="let res of scromModuleData; let i = index"

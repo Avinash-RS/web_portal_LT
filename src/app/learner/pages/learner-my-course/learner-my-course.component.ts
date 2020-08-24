@@ -25,6 +25,7 @@ import { MatDialog } from '@angular/material';
   ]
 })
 export class LearnerMyCourseComponent implements OnInit {
+  [x: string]: any;
   strDate: Date = new Date();
   userDetailes: any;
   enrolledCourses: any = [];
@@ -159,21 +160,21 @@ export class LearnerMyCourseComponent implements OnInit {
         this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
         this.enrolledCourses.forEach(element => {
           // console.log('ele', element.upComingLiveClassRoom);
-          if (element.upComingLiveClassRoom) {
-          const currentDate = new Date();
-          const formatDate = moment(currentDate).format();
-          const StartDate = new Date(element.upComingLiveClassRoom.startdate);
-          const EndDate = new Date(element.upComingLiveClassRoom.enddate);
-          if (currentDate > StartDate) {
-            this.showCompleted = 'completed';
-          } else if (currentDate === StartDate && currentDate < EndDate) {
-            this.showOngoing = 'ongoing';
-          } else {
-            this.showUpcoming = 'upcoming';
-          }
-        }
-          const assignmentCount = element.assignmentCount;
-          const forumCount = element.forumCount;
+        //   if (element.upComingLiveClassRoom) {
+        //   const currentDate = new Date();
+        //   const formatDate = moment(currentDate).format();
+        //   const StartDate = new Date(element.upComingLiveClassRoom.startdate);
+        //   const EndDate = new Date(element.upComingLiveClassRoom.enddate);
+        //   if (currentDate > StartDate) {
+        //     this.showCompleted = 'completed';
+        //   } else if (currentDate === StartDate && currentDate < EndDate) {
+        //     this.showOngoing = 'ongoing';
+        //   } else {
+        //     this.showUpcoming = 'upcoming';
+        //   }
+        // // }
+        //   const assignmentCount = element.assignmentCount;
+        //   const forumCount = element.forumCount;
           if (element.course_duration) {
             if (Number(element.course_duration.slice(3, 5)) >= 30) {
               element.course_duration = Number(element.course_duration.slice(0, 2)) + 1;
@@ -198,9 +199,9 @@ export class LearnerMyCourseComponent implements OnInit {
         this.completed = arr1;
         this.incomplete = arr;
         if (!catalougeId && !catagoryId) {
-        this.onGoingCourseCount = arr.length;
-        this.completedCourseCount = arr1.length;
-        this.allCourseCount = this.enrolledCourses.length;
+          this.onGoingCourseCount = arr.length;
+          this.completedCourseCount = arr1.length;
+          this.allCourseCount = this.enrolledCourses.length;
         }
       }
       this.loading = false;
@@ -304,11 +305,13 @@ export class LearnerMyCourseComponent implements OnInit {
   }
   getCoureBasedOnCatalog(catalogue, category, templateRef) {
     this.categoryData = category;
+    this.catagoryName = category.categoryName;
+    console.log('caragory', category);
     this.learnerService.getCoureBasedOnCatalog(catalogue.catalogueId, this.pagenumber, category.categoryId,
       this.userDetailes._id).subscribe((course: any) => {
       if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
       this.allcourses = course.data.getCoureBasedOnCatalog.data;
-      this.viewCourse(category, templateRef);
+      // this.viewCourse(category, templateRef);
       }
     });
   }
@@ -316,7 +319,7 @@ export class LearnerMyCourseComponent implements OnInit {
       this.categoryPopupData = category;
       this.dialog.open(templateRef, {
         width: '70%',
-        height: '70%',
+        height: '75%',
         closeOnNavigation: true,
         disableClose: true,
       });

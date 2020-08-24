@@ -30,6 +30,7 @@
     color: $lxp-theme-green;
     cursor: pointer;
     font-size: smaller;
+    left:9px;
 }
 
 :host ::ng-deep .mat-toolbar-row, .mat-toolbar-single-row {
@@ -38,9 +39,9 @@
 
 .hearder-logo {
     height: 20px;
+    cursor: pointer;
     // padding-left: 0.5%;
 }
-
 .edutech {
     display: contents;
     font-size: 22px;

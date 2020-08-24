@@ -467,7 +467,6 @@ export class CoursedetailsComponent implements OnInit {
       .subscribe((data: any) => {
         if (data.data.playerstatusrealtime.success === true) {
           this.playerModuleAndTopic(true);
-        } else {
         }
       });
   }
@@ -480,11 +479,10 @@ export class CoursedetailsComponent implements OnInit {
     this.dataRefresher =
       setInterval(() => {
         this.playerModuleAndTopic(false);
-        // this.sider = false;
+
       }, 20000);
     // this.cancelPageRefresh();
   }
-
   autoHide() {
     this.dataRefresher =
       setInterval(() => {
@@ -503,9 +501,9 @@ export class CoursedetailsComponent implements OnInit {
       });
   }
 
-  showHeader() {
-    this.sider = true;
-  }
+  // showHeader() {
+  //   this.sider = true;
+  // }
   cancelPageRefresh() {
     if (this.dataRefresher) {
       clearInterval(this.dataRefresher);
