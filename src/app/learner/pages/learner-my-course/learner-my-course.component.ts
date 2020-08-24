@@ -160,21 +160,21 @@ export class LearnerMyCourseComponent implements OnInit {
         this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
         this.enrolledCourses.forEach(element => {
           // console.log('ele', element.upComingLiveClassRoom);
-          if (element.upComingLiveClassRoom) {
-          const currentDate = new Date();
-          const formatDate = moment(currentDate).format();
-          const StartDate = new Date(element.upComingLiveClassRoom.startdate);
-          const EndDate = new Date(element.upComingLiveClassRoom.enddate);
-          if (currentDate > StartDate) {
-            this.showCompleted = 'completed';
-          } else if (currentDate === StartDate && currentDate < EndDate) {
-            this.showOngoing = 'ongoing';
-          } else {
-            this.showUpcoming = 'upcoming';
-          }
-        }
-          const assignmentCount = element.assignmentCount;
-          const forumCount = element.forumCount;
+        //   if (element.upComingLiveClassRoom) {
+        //   const currentDate = new Date();
+        //   const formatDate = moment(currentDate).format();
+        //   const StartDate = new Date(element.upComingLiveClassRoom.startdate);
+        //   const EndDate = new Date(element.upComingLiveClassRoom.enddate);
+        //   if (currentDate > StartDate) {
+        //     this.showCompleted = 'completed';
+        //   } else if (currentDate === StartDate && currentDate < EndDate) {
+        //     this.showOngoing = 'ongoing';
+        //   } else {
+        //     this.showUpcoming = 'upcoming';
+        //   }
+        // // }
+        //   const assignmentCount = element.assignmentCount;
+        //   const forumCount = element.forumCount;
           if (element.course_duration) {
             if (Number(element.course_duration.slice(3, 5)) >= 30) {
               element.course_duration = Number(element.course_duration.slice(0, 2)) + 1;
@@ -199,9 +199,9 @@ export class LearnerMyCourseComponent implements OnInit {
         this.completed = arr1;
         this.incomplete = arr;
         if (!catalougeId && !catagoryId) {
-        this.onGoingCourseCount = arr.length;
-        this.completedCourseCount = arr1.length;
-        this.allCourseCount = this.enrolledCourses.length;
+          this.onGoingCourseCount = arr.length;
+          this.completedCourseCount = arr1.length;
+          this.allCourseCount = this.enrolledCourses.length;
         }
       }
       this.loading = false;
