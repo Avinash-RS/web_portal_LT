@@ -444,6 +444,7 @@ iframe.fullScreen {
 }
 :host ::ng-deep .mat-tab-group{
     margin-left: 10px !important;
+    margin-right: 10px !important;
 }
 
 :host ::ng-deep .mat-tab-label-container{
@@ -926,6 +927,9 @@ iframe.fullScreen {
     .createThreadDialog {
         width: 320px;
     }
+    .forum-width {
+        width:100% !important;
+    }
 }
 
 @media screen and (min-width: 768px) and (max-width:1024px) {
@@ -1013,6 +1017,7 @@ iframe.fullScreen {
 //Mythreyi CSS ends here
 
 //Kani CSS starts here 
+
 .thread-header {
     // background-color: #C9E4F35C;
     // background-image: linear-gradient(#C9E4F35C, rgba(244, 246, 247, 0.361));
@@ -1048,10 +1053,21 @@ iframe.fullScreen {
     border-radius: none !important;
     background-color: $lxp-theme-green;
     border: none;
-    margin-right: 10px !important;
+    // margin-right: 10px !important;
     float: right !important;
     margin-top: 2px;
 }
+.send-btn {
+    color: $color-white !important;
+    border-radius: none !important;
+    background-color: $lxp-theme-green;
+    // width: 70px !important;
+    height: 30px !important;
+    display: inline-flex !important;
+    align-items: center;
+  
+  }
+
 
 .no-radius {
     border-radius: 0 !important;
@@ -1105,6 +1121,7 @@ iframe.fullScreen {
 }
 
 .discussion_forum {
+    
     .spinner-container {
         position: absolute;
         top: 20px;
@@ -1188,14 +1205,14 @@ iframe.fullScreen {
 }
 
 @media only screen and (min-width: 300px) and (max-width: 770px) {
-    .new_Thread {
-        color: white !important;
-        border-radius: none !important;
-        background-color: $lxp-theme-green;
-        border: none;
-        margin-right: 10px !important;
-        float: left !important
-    }
+    // .new_Thread {
+    //     color: white !important;
+    //     border-radius: none !important;
+    //     background-color: $lxp-theme-green;
+    //     border: none;
+    //     margin-right: 10px !important;
+    //     float: left !important
+    // }
 
     // .send_pos {
     //     margin-top: 0vh !important;
