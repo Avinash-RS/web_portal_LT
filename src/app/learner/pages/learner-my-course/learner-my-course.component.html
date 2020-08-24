@@ -777,7 +777,7 @@
                         (click)="claimCourse(course.course_id)"><mat-icon class="mt-1">queue_play_next</mat-icon> Claim</button>
                         <button mat-stroked-button class="blue_clr btnredClass" [disabled]="course.clamaiedStatus == 'true'"
                          *ngIf="course.clamaiedStatus == 'true'"
-                        ><mat-icon class="mt-1">queue_play_next</mat-icon> Claimed</button>
+                        ><mat-icon class="mt-1 claimIcon">queue_play_next</mat-icon> Claimed</button>
                     </div>
                 </div>
             </mat-card>

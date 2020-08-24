@@ -1212,7 +1212,7 @@ mat-icon {
   padding: 6px;
   font-size: 16px;
   border: none;
-  border-radius: 11px;
+  // border-radius: 11px;
   border: 1px solid #898989;
   width: 155px;
 }
@@ -1266,5 +1266,8 @@ mat-icon {
 }
 ::ng-deep .mat-dialog-container {
   overflow-y: hidden !important;
+}
+.claimIcon:hover {
+ cursor: not-allowed;
 }
 
