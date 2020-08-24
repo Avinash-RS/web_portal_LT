@@ -10,8 +10,8 @@
 
 
   <div class="bg-img">
-    <span (click)="cannotEdit = !cannotEdit;" class="editText">
-      <mat-icon matTooltip="Click here to change profile details" class="editIcon">create
+    <span (click)="cannotEdit = !cannotEdit;" class="editText" tooltip="Click here to change profile details" placement="right">
+      <mat-icon  class="editIcon">create
       </mat-icon> Edit &nbsp;
     </span>
 
@@ -23,9 +23,12 @@
             <span class="f_size_13 f_wt_500 ">{{'Password : ********'}}</span>
           </div>
           <div class="col-md-2 col-sm-2 col-2">
-            <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup "
-              style="width: 17px;" matTooltip="Click here to change Password" (click)="editPassword(passwordDialog)">
+            <span tooltip="Click here to change Password" placement="bottom" class="tooltip-350">
+              <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup "
+              style="width: 17px;"  (click)="editPassword(passwordDialog)">
               create</mat-icon>
+            </span>
+           
           </div>
         </div>
 
@@ -35,7 +38,7 @@
           </div>
           <div class="col-md-2 col-sm-2 col-2">
             <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup && enableMobileEdit"
-              style="width: 17px;" matTooltip="Click here to change Mobile number" (click)="editmobno(mobDialog)">
+              style="width: 17px;" class="tooltip-350" tooltip="Click here to change Mobile number" placement="bottom" (click)="editmobno(mobDialog)">
               create</mat-icon>
           </div>
         </div>
@@ -46,7 +49,7 @@
           </div>
           <div class="col-md-2 col-sm-2 col-2 ">
             <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb-icon' : 'f_size_17  bb-icon'" *ngIf="editpopup "
-              style="width: 17px;" matTooltip="Click here to change Email Id" (click)="editEmail(emailDialog)">
+              style="width: 17px;" class="tooltip-350" tooltip="Click here to change Email Id" placement="bottom" (click)="editEmail(emailDialog)">
               create</mat-icon>
           </div>
         </div>
