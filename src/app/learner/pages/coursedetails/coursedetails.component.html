@@ -9,6 +9,7 @@
     <div class="main contents">
         <span>
             <mat-icon class="closebgt" (mouseover)="sider=true" *ngIf="!drawer.opened" (click)="drawer.toggle()">menu</mat-icon>
+            <mat-icon class="closebgt" (mouseover)="sider=true" *ngIf="drawer.opened" (click)="drawer.toggle()">close</mat-icon>
         </span>
         <!-- {{drawer.opened}} -->
         <div class="prevBtn">
@@ -44,7 +45,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <mat-icon class="close" (click)="drawer.close()">menu</mat-icon>
+                            <!-- <mat-icon class="close" (click)="drawer.close()">close</mat-icon> -->
                         </mat-toolbar>
                         <div class="contents">
                             <mat-accordion *ngFor="let res of scromModuleData; let i = index"
