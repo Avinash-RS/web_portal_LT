@@ -55,7 +55,21 @@
 
                 <div class="col-md-4">
                     <h1 style="margin-top: 4%;">Activities</h1>
-                    <div>
+                    <div *ngIf="learnerActivityList.length == 0 ">
+                        <div class="row width_100 no_margin">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="box-size w-100">
+                                        <div class=" errorbox">
+                                            <p class="para">{{'Activity details not found'}} </p>
+                                            <!-- {{ results?.error_msg }} -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="learnerActivityList.length != 0 ">
                         <ng-container *ngFor="let data of learnerActivityList">
                             <div class="mainCard animated animatedFadeInUp fadeInUp" (click)="launchAssignment(data)">
                                 <mat-card class="session-card">
@@ -72,12 +86,12 @@
                                            Upcoming</span>
                                             <span class=" Completedstatus lxp-text f_size_14 f_" *ngIf="data.status == 'Completed' ">
                                             completed</span>
-            
-            
+
+
                                         </div>
                                         <p class="coursenameT" [ngClass]="{'color-yellow-card-status': data.status === 'On going', 'color-grey-card-status':data.status === 'Completed','color-blue-card-status':data.status === 'Up Coming' }"> {{ data.activity_details.coursename }}</p>
                                         <h5 class="m-l-4">{{ data.activity_details.topicname }}
-            
+
                                         </h5>
                                         <h5 class="m-l-4"> <span class="f_wt_500 f_size_14">Type </span>: <span class="lxp-text f_size_14 f_wt_400">{{  data.activity_details.activitytype}} </span>
                                             <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon>
@@ -88,7 +102,7 @@
                                 </mat-card>
                             </div>
                         </ng-container>
-            
+
                         <!-- <ng-container *ngFor="let data of learnerActivityList">
                             <div (click)="launchAssignment(data)" id="insidecard" class="uk-card uk-card-default uk-card-body" [ngClass]="{'color-blue': data.activity_details.ongoing == 'true', 'color-grey':data.activity_details.ongoing == 'false' }">
                                 <h5>{{selectedDate | date :'dd MMM yyyy'}}
@@ -104,9 +118,9 @@
                         </ng-container> -->
                         <br />
                     </div>
-                    
+
                 </div>
-                
+
             </div>
         </div>
     </div>
