@@ -30,10 +30,10 @@
         <div class="dropdown">
             <button class="dropbtn">{{catalogueDetails?.catalogueName | titlecase}} <mat-icon class="dropdownicon">expand_more</mat-icon></button>
             <div class="dropdown-content">
+
               <div class="contedrop" *ngFor="let category of categoryDetails" (click)="getCoureBasedOnCatalog(catalogueDetails,category,previewDialog)"  >
                 <span>{{category.categoryName | titlecase}}</span>
                 <span class="matBadge12"  matBadge="{{category.totalCount}}"  matBadgeOverlap="false"></span>
-                
               </div>
             
             </div>
@@ -788,6 +788,13 @@
                 </div>
             </mat-card>
         </div>
+
+
+    <div class="col" *ngIf="allcourses.length<1">
+        <span style="font-size: medium;">
+        No course found on {{catagoryName | titlecase}}.
+        </span>
+    </div>
     </div>
     </ng-template>
 

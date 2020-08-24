@@ -25,6 +25,7 @@ import { MatDialog } from '@angular/material';
   ]
 })
 export class LearnerMyCourseComponent implements OnInit {
+  [x: string]: any;
   strDate: Date = new Date();
   userDetailes: any;
   enrolledCourses: any = [];
@@ -304,6 +305,8 @@ export class LearnerMyCourseComponent implements OnInit {
   }
   getCoureBasedOnCatalog(catalogue, category, templateRef) {
     this.categoryData = category;
+    this.catagoryName = category.categoryName;
+    console.log('caragory', category);
     this.learnerService.getCoureBasedOnCatalog(catalogue.catalogueId, this.pagenumber, category.categoryId,
       this.userDetailes._id).subscribe((course: any) => {
       if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
