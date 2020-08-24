@@ -21,31 +21,31 @@
 }
 
 // auto hide course title 
-#hideMe {
-    -moz-animation: cssAnimation 0s ease-in 20s forwards;
-    -webkit-animation: cssAnimation 0s ease-in 20s forwards;
-    -o-animation: cssAnimation 0s ease-in 20s forwards;
-    animation: cssAnimation 0s ease-in 20s forwards;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-}
+// #hideMe {
+//     -moz-animation: cssAnimation 0s ease-in 20s forwards;
+//     -webkit-animation: cssAnimation 0s ease-in 20s forwards;
+//     -o-animation: cssAnimation 0s ease-in 20s forwards;
+//     animation: cssAnimation 0s ease-in 20s forwards;
+//     -webkit-animation-fill-mode: forwards;
+//     animation-fill-mode: forwards;
+// }
 
 
-@keyframes cssAnimation {
-    to {
-        width: 0;
-        height: 0;
-        overflow: hidden;
-    }
-}
+// @keyframes cssAnimation {
+//     to {
+//         width: 0;
+//         height: 0;
+//         overflow: hidden;
+//     }
+// }
 
-@-webkit-keyframes cssAnimation {
-    to {
-        width: 0;
-        height: 0;
-        visibility: hidden;
-    }
-}
+// @-webkit-keyframes cssAnimation {
+//     to {
+//         width: 0;
+//         height: 0;
+//         visibility: hidden;
+//     }
+// }
 
 // .tooltip1 span {
 //     opacity: 0;
