@@ -67,12 +67,12 @@
             <span *ngFor="let namesss of categoryDetails" class="cathd1">
                 <button *ngIf="namesss.enrollCount"  
                 class="catnamesss" matBadge="{{namesss.enrollCount}}"
-                 matBadgeOverlap="false"
-                 (click)="getEnrolledCourses(catalogueDetails.catalogueId,namesss.categoryId)"> {{namesss.categoryName | titlecase}}</button>
+                 matBadgeOverlap="false" 
+                 (click)="selectedIndex = 3; getEnrolledCourses(catalogueDetails.catalogueId,namesss.categoryId)"> {{namesss.categoryName | titlecase}}</button>
             </span>
             <span></span>
             </div>
-        <mat-tab-group mat-align-tabs="start" animationDuration="1000ms"
+        <mat-tab-group [(selectedIndex)]="selectedIndex" mat-align-tabs="start" animationDuration="1000ms"
             class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
             <mat-tab>
                 <ng-template matTabLabel>
@@ -96,8 +96,10 @@
                                     </div>
                                     <div class="col-7 m-t-2">
                                         <div class=" f_size_18 f_wt_500 pointer">
-                                            <span>
-                                                {{course.course_name}}
+                                            <span tooltip="{{course.course_name}}" placement="right">
+                                                {{(course.course_name?.length > 33)?(course.course_name | slice:0:33)+'...':(course.course_name)}}
+                                                <!-- {{course.course_name}} -->
+                                                
                                             </span>
                                             <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button>
@@ -576,7 +578,7 @@
            
             <div class="">
             <ng-container *ngFor="let categorytab of categoryDetails">
-            <mat-tab *ngIf="categorytab.enrollCount">
+            <mat-tab disabled *ngIf="categorytab.enrollCount">
                 <!-- <ng-template matTabLabel> -->
                     <!-- <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
                       matBadge="{{categorytab.enrollCount}}"

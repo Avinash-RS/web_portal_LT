@@ -63,7 +63,7 @@ export class GraphqlModule {
             localStorage.clear();
             sessionStorage.clear();
             this.httpC.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
-              localStorage.setItem('Systemip', res.ip);
+              localStorage.setItem('Systemip',  res.ip ? res.ip : '');
             });
             this.gs.checkLogout();
           }
