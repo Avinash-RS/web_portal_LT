@@ -1244,7 +1244,7 @@ export const getReadLeanerActivity = gql`
 `;
 
 export const get_organization_by_id = gql`
-  query get_organization_by_id($organization_id: String!) {
+  query get_organization_by_id($organization_id: String) {
     get_organization_by_id(organization_id: $organization_id) {
       success
       error_msg
@@ -1260,12 +1260,19 @@ export const get_organization_by_id = gql`
         updated_by
         learner_login_image
         role_details {
+          _id
           role_id
           role_name
         }
         admin_details {
+          _id
           admin_email
           admin_username
+        }
+        group_details {
+          _id
+          group_id
+          group_name
         }
       }
     }

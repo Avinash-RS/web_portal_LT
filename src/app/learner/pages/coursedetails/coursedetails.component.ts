@@ -787,6 +787,7 @@ export class CoursedetailsComponent implements OnInit {
       //   }
       // });data.user.username, data?.lastposttimeISO, data?.postcount
       if (this.showCommentThread) {
+        this.topicDiscussionData.posts = this.topicDiscussionData1.posts1;
         let arr = this.topicDiscussionData.posts.slice(1);
         const thread = this.topicDiscussionData.posts[0];
         arr = this.topicDiscussionData.posts.filter((item) => {
@@ -941,7 +942,6 @@ export class CoursedetailsComponent implements OnInit {
           d.bookmarked = false;
           d.bookmarks = d.bookmarks > 1 ? d.bookmarks - 1 : 0;
           d.apiCalled = true;
-          console.log(d);
           this.Lservice.unlikepost(data).subscribe((result: any) => {
             if (!result.success) {
               d.bookmarked = true;
@@ -958,7 +958,6 @@ export class CoursedetailsComponent implements OnInit {
           d.bookmarked = true;
           d.bookmarks = d.bookmarks + 1;
           d.apiCalled = true;
-          console.log(d);
           this.Lservice.likepost(data).subscribe((result: any) => {
             if (!result.success) {
               d.apiCalled = false;
