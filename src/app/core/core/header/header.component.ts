@@ -81,7 +81,7 @@ export class HeaderComponent implements OnInit {
             localStorage.clear();
             sessionStorage.clear();
             this.http.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
-              localStorage.setItem('Systemip', res.ip);
+              localStorage.setItem('Systemip',  res.ip ? res.ip : '');
             });
             this.userDetailes = null;
             this.userDetailes = null;
@@ -92,7 +92,7 @@ export class HeaderComponent implements OnInit {
               localStorage.clear();
               sessionStorage.clear();
               this.http.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
-                localStorage.setItem('Systemip', res.ip);
+                localStorage.setItem('Systemip', res.ip ? res.ip : '');
               });
               this.userDetailes = null;
               this.userDetailes = null;
