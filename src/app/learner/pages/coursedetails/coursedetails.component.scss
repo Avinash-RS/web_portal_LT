@@ -155,10 +155,10 @@
 .Outine {
     font-size: 16px;
     font-weight: 400px;
-    margin-left: -5px;
+    margin-left: -4px;
     width: 142px;
-    position: relative;
-    left: 22px;
+    // position: relative;
+    // left: 31px;
 }
 
 button:focus,
@@ -392,6 +392,8 @@ li {
 .index-number {
     // border: 1px solid $color-border;
     padding: 2px 8px;
+    position: relative;
+    left: 6px;
 }
 
 .module-container {
@@ -445,6 +447,7 @@ iframe.fullScreen {
 }
 :host ::ng-deep .mat-tab-group{
     margin-left: 10px !important;
+    margin-right: 10px !important;
 }
 
 :host ::ng-deep .mat-tab-label-container{
@@ -773,10 +776,10 @@ iframe.fullScreen {
 }
 
 .moduleund {
-    margin-left: 36px;
+    margin-left: 35px;
     font-weight: 500;
     height: 20px;
-    margin-top: -8px;
+    margin-top: -2px;
 }
 
 .bottom-border {
@@ -936,6 +939,9 @@ iframe.fullScreen {
     .createThreadDialog {
         width: 320px;
     }
+    .forum-width {
+        width:100% !important;
+    }
 }
 
 @media screen and (min-width: 768px) and (max-width:1024px) {
@@ -1023,6 +1029,7 @@ iframe.fullScreen {
 //Mythreyi CSS ends here
 
 //Kani CSS starts here 
+
 .thread-header {
     // background-color: #C9E4F35C;
     // background-image: linear-gradient(#C9E4F35C, rgba(244, 246, 247, 0.361));
@@ -1058,10 +1065,21 @@ iframe.fullScreen {
     border-radius: none !important;
     background-color: $lxp-theme-green;
     border: none;
-    margin-right: 10px !important;
+    // margin-right: 10px !important;
     float: right !important;
     margin-top: 2px;
 }
+.send-btn {
+    color: $color-white !important;
+    border-radius: none !important;
+    background-color: $lxp-theme-green;
+    // width: 70px !important;
+    height: 30px !important;
+    display: inline-flex !important;
+    align-items: center;
+  
+  }
+
 
 .no-radius {
     border-radius: 0 !important;
@@ -1115,6 +1133,7 @@ iframe.fullScreen {
 }
 
 .discussion_forum {
+    
     .spinner-container {
         position: absolute;
         top: 20px;
@@ -1198,14 +1217,14 @@ iframe.fullScreen {
 }
 
 @media only screen and (min-width: 300px) and (max-width: 770px) {
-    .new_Thread {
-        color: white !important;
-        border-radius: none !important;
-        background-color: $lxp-theme-green;
-        border: none;
-        margin-right: 10px !important;
-        float: left !important
-    }
+    // .new_Thread {
+    //     color: white !important;
+    //     border-radius: none !important;
+    //     background-color: $lxp-theme-green;
+    //     border: none;
+    //     margin-right: 10px !important;
+    //     float: left !important
+    // }
 
     // .send_pos {
     //     margin-top: 0vh !important;
@@ -1365,6 +1384,27 @@ iframe.fullScreen {
     }
     .time {
         position: relative;
-        right: 15px;
+        left: 19px;
+    }
+    .divider {
+        position: relative;
+        left: 52px;
+    }
+    // .mar {
+    //     left: 10px !important;
+    //     bottom: 2px;
+    //     position: relative;
+    //     margin-top: 0px !important;
+    // }
+    .mar {
+    left: 0px !important;
+    position: absolute !important;
+    margin-left: 0px !important;
+    margin-top : -2px !important;
+    height : 20px;
+}
+    .custom-index {
+        margin-top: 8px;
+        height : 20 px;
     }
 //Ramya CSS ends here

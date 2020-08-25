@@ -62,7 +62,7 @@ export class GraphqlModule {
           if (message === 'TokenExpiredError: jwt expired' || message === ' JsonWebTokenError: jwt must be a string') {
             localStorage.clear();
             this.httpC.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
-              localStorage.setItem('Systemip', res.ip);
+              localStorage.setItem('Systemip',  res.ip ? res.ip : '');
             });
             this.gs.checkLogout();
           }
