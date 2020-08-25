@@ -787,8 +787,10 @@ export class CoursedetailsComponent implements OnInit {
       //   }
       // });data.user.username, data?.lastposttimeISO, data?.postcount
       if (this.showCommentThread) {
+        this.topicDiscussionData.posts = this.topicDiscussionData1.posts1;
         let arr = this.topicDiscussionData.posts.slice(1);
         const thread = this.topicDiscussionData.posts[0];
+        console.log(this.topicDiscussionData.posts)
         arr = this.topicDiscussionData.posts.filter((item) => {
           return (item.content?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1 ||
             item.user?.timestampISO?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1 ||
