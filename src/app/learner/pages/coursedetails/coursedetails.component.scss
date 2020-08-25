@@ -155,9 +155,10 @@
 .Outine {
     font-size: 16px;
     font-weight: 400px;
-    margin-left: -8px;
+    margin-left: -5px;
     width: 142px;
-
+    position: relative;
+    left: 22px;
 }
 
 button:focus,
@@ -724,6 +725,9 @@ iframe.fullScreen {
         color: #0E7D12 !important;
         height: 15px !important;
         width: 15px !important;
+        position: relative;
+        bottom: 1px;
+        left: 6px;
     }
 }
 
@@ -733,6 +737,9 @@ iframe.fullScreen {
         color: $color-yellow !important;
         height: 15px !important;
         width: 15px !important;
+        position: relative;
+        bottom: 1px;
+        left: 6px;
     }
 }
 
@@ -743,6 +750,9 @@ iframe.fullScreen {
         border: 2px solid $color-border;
         height: 15px !important;
         width: 15px !important;
+        position: relative;
+        bottom: 1px;
+        left: 6px;
     }
 
 }
@@ -1369,5 +1379,9 @@ iframe.fullScreen {
     position: relative;
     bottom: 13px;
     right: 20px;
+    }
+    .time {
+        position: relative;
+        right: 15px;
     }
 //Ramya CSS ends here
