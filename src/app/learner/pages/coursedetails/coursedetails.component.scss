@@ -1411,4 +1411,27 @@ iframe.fullScreen {
         margin-top: 8px;
         height : 20 px;
     }
+
+    ::ng-deep  .mat-drawer-backdrop.mat-drawer-shown {
+        background-color: transparent;
+    }
+
+    .about-course{
+        
+        height: 100vh;
+      
+    }
+    .drawerOpn{
+        margin-left: 26%;
+    }
+    ::ng-deep .mat-drawer:not(.mat-drawer-side) {
+        box-shadow: none;
+    }
+
+    .drawercls{
+        margin-left: 4%;
+    }
+    .resDrawercls{
+        margin-left: 3%;
+    }
 //Ramya CSS ends here
