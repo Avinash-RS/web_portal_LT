@@ -160,6 +160,7 @@ export class CoursedetailsComponent implements OnInit {
   // initials: any;
 
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
+
   // initials: any;
   constructor(public translate: TranslateService, private router: ActivatedRoute,
               public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
@@ -194,7 +195,7 @@ export class CoursedetailsComponent implements OnInit {
                   if (resdata?.data?.getbatchdetails?.message?.batchid !== null) {
                     this.batchDetails = resdata?.data?.getbatchdetails?.message;
                     this.disableThreads = resdata?.data?.getbatchdetails?.message.batchenddate.slice(0, 10) <=
-                    new Date().toISOString().slice(0, 10) ? true : false;
+                      new Date().toISOString().slice(0, 10) ? true : false;
                     this.viewAllThreads();
                   } else {
                     this.batchDetails = null;
@@ -284,10 +285,10 @@ export class CoursedetailsComponent implements OnInit {
                 }
                 if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate &&
                   moment().format('DD-MM-YYYY HH:MM') <= this.courseEndDate) {
-                    fileData.enableUpload = true;
+                  fileData.enableUpload = true;
                 } else if (moment().format('DD-MM-YYYY HH:MM') < fileData.assignmentStartDate ||
                   moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate) {
-                    fileData.enableUpload = false;
+                  fileData.enableUpload = false;
                 }
               }
             });
