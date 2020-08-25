@@ -512,7 +512,7 @@
                     <br>
                     <div *ngIf="showCourseDetails">
                         <div class="p-l-0 no_border">
-                            <div class="col-12"  [ngClass]="{'width_70 center p-l-0': !drawer.opened}">
+                            <div class="col-12 forum-width"  [ngClass]="{'width_70 center p-l-0': !drawer.opened}">
                                 <div class="row" *ngIf="selectedModuleData">
                                     <p (click)="gotoDisplayAllThreads()">
                                         <span
@@ -529,7 +529,7 @@
 
                     <div *ngIf="showCommentThread" class="no_border" >
                         <div class="p-l-0">
-                            <div class="col-12"  [ngClass]="{'width_70 center p-l-0': !drawer.opened}">
+                            <div class="col-12 forum-width"  [ngClass]="{'width_70 center p-l-0': !drawer.opened}">
                                 <div class="row" *ngIf="selectedModuleData" >
                                     <p (click)="gotoDisplayAllThreads();viewAllThreads()">
                                         <span class="color-blue f_size_16 f_wt_500"
@@ -543,7 +543,7 @@
                     </div>
                     <br>
                   
-                    <div *ngIf="showCourseDetails" 
+                    <div *ngIf="showCourseDetails" class="forum-width"
                         [ngClass]="{'width_70 center' : !drawer.opened}">
                         <!-- Header starts here -->
                         <mat-card class=" black_border box_shadow alignment ">
@@ -633,7 +633,7 @@
 
                     <div
                         *ngIf="!loadingForum && showCourseDetails && (discussionData === null || discussionData?.topics?.length ===0)" 
-                        [ngClass]="{'width_70 center' : !drawer.opened}">
+                        class="forum-width" [ngClass]="{'width_70 center' : !drawer.opened}">
                         <br><br>
                         <mat-card class="black_border m-bt-4 box_shadow center center_align f_size_16">
                             <br>
@@ -642,7 +642,7 @@
                         </mat-card>
                     </div>
 
-                    <div class="comment_card" *ngIf="showCommentThread && selectedThreadData != null"
+                    <div class="comment_card forum-width" *ngIf="showCommentThread && selectedThreadData != null"
                         [ngClass]="{'width_70 center' : !drawer.opened}">
                         <!-- for thread -->
                         <mat-card class="black_border m-b-10 no-radius no_padding">
@@ -727,15 +727,15 @@
                                         style="background: whitesmoke; border: 1px solid #dddddd;">
                                         <div class="row">
                                             <div
-                                                class="col-xl-10 col-lg-10 col-md-10 col-sm-6 col-6 float_right no_padding">
+                                                class="col-xl-10 col-lg-10 col-md-10 col-sm-8 col-8 float_right no_padding">
                                                 <mat-checkbox class="width_100 f_size_15 align-middle"
                                                     [(ngModel)]="a2iFlag">
                                                     &nbsp;&nbsp;{{'Ask the instructor' | translate }}
                                                 </mat-checkbox>
                                             </div>
                                             <div
-                                                class="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-6 float_right no_padding">
-                                                <button mat-button class="new_Thread no-radius ht-30 width_60"
+                                                class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-4 float_right no_padding">
+                                                <button mat-button class="no-radius send-btn"
                                                     [disabled]="addThreadComment == null || addThreadComment?.length == 0 "
                                                     (click)="sendComment('thread',addThreadComment)">{{'Send' | translate }}</button>
                                             </div>
@@ -883,15 +883,15 @@
                                                 style="background: whitesmoke; border: 1px solid #dddddd;">
                                                 <div class="row">
                                                     <div
-                                                        class="col-xl-10 col-lg-9 col-md-9 col-sm-6 col-6 float_right no_padding">
+                                                        class="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 float_right no_padding">
                                                         <mat-checkbox class="width_100 f_size_15 align-middle"
                                                             [(ngModel)]="a2iFlag">
                                                             &nbsp;&nbsp;{{'Ask the instructor' | translate }}
                                                         </mat-checkbox>
                                                     </div>
                                                     <div
-                                                        class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-6 float_right no_padding">
-                                                        <button mat-button class="new_Thread no-radius ht-30 width_50"
+                                                        class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4 float_right no_padding">
+                                                        <button mat-button class="no-radius send-btn"
                                                             (click)="sendComment('post',addPostComment[pin],addPostComment,post)"
                                                             [disabled]="addPostComment && addPostComment[pin] == null">{{'Send' | translate }}</button>
                                                     </div>
@@ -981,17 +981,17 @@
                                                             style="background: whitesmoke; border: 1px solid #dddddd;">
                                                             <div class="row">
                                                                 <div
-                                                                    class="col-xl-10 col-lg-9 col-md-9 col-sm-6 col-6 float_right">
+                                                                    class="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 no_padding float_right">
                                                                     <mat-checkbox
-                                                                        class="width_100 f_size_12 align-middle"
+                                                                        class="width_100 f_size_13 align-middle"
                                                                         [(ngModel)]="a2iFlag">
                                                                         &nbsp;{{'Ask the instructor' | translate }}
                                                                     </mat-checkbox>
                                                                 </div>
                                                                 <div
-                                                                    class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-6 float_right">
+                                                                    class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4 no_padding float_right">
                                                                     <button mat-button
-                                                                        class="new_Thread no-radius ht-30"
+                                                                        class="no-radius send-btn"
                                                                         (click)="sendComment('post',addPostComment[pjn],addPostComment,posts)">{{'Send' | translate }}</button>
                                                                 </div>
                                                             </div>
