@@ -576,7 +576,7 @@
            
             <div class="">
             <ng-container *ngFor="let categorytab of categoryDetails">
-            <mat-tab *ngIf="categorytab.enrollCount">
+            <mat-tab disabled *ngIf="categorytab.enrollCount">
                 <!-- <ng-template matTabLabel> -->
                     <!-- <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
                       matBadge="{{categorytab.enrollCount}}"
