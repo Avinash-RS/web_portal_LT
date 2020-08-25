@@ -57,6 +57,7 @@ export class LearnerMyCourseComponent implements OnInit {
   onGoingCourseCount = 0;
   completedCourseCount = 0;
   allCourseCount = 0;
+  selectedIndex = 0;
 
   constructor(
     public translate: TranslateService,
@@ -93,49 +94,6 @@ export class LearnerMyCourseComponent implements OnInit {
     topicname: 'Codes for Foundations1',
     _id: '5f2a50055e15d300116e4613'}}]}];
 
-    // const currentDate = new Date();
-    // const formatDate = moment(currentDate).format();
-
-    // const topicStart = new Date();
-    // const dateValue = moment(topicStart).format('YYYY-MM-DD');
-    // this.learnerService.getData(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
-    //   this.results = data.data.get_read_learner_activity;
-    //   this.activity = data.data.get_read_learner_activity.message[0];
-
-    //   this.results.message.forEach((el: any) => {
-    //     this.currentStartTime = moment(el.activity_details.startdate).format('LT');
-    //     this.currentEndTime = moment(el.activity_details.enddate).format('LT');
-    //     const StartDate = new Date(el.activity_details.startdate);
-
-    //     const EndDate = new Date(el.activity_details.enddate);
-
-    //     if (currentDate > StartDate) {
-    //       this.showCompleted = 'completed';
-    //     } else if (currentDate === StartDate && currentDate < EndDate ) {
-    //       this.showOngoing = 'ongoing';
-    //     } else {
-    //       this.showUpcoming = 'upcoming';
-    //     }
-
-    //   });
-
-    //   // console.log("length",this.results['message'].length);
-
-    //   // tslint:disable-next-line:no-string-literal
-    //   // debugger;
-    //   if (this.results.message.length < 5) {
-    //     this.showViewButton = false;
-    //     // console.log(this.showViewButton);
-    //   } else {
-    //     this.showViewButton = true;
-    //   }
-    //   // console.log('after playlist order UPDATED', data.data);
-    // }, (error) => {
-    //   // console.log('there was an error sending the query', error);
-    // });
-    // console.log('data retreived', data);
-
-
   }
 
   getScreenSize(event?) {
@@ -149,32 +107,8 @@ export class LearnerMyCourseComponent implements OnInit {
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
       catalougeId, catagoryId).subscribe((enrolledList: any) => {
       if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
-        // enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.forEach(element => {
-        //   this.learnerService.getModuleData(element.course_id, this.userDetailes.user_id).subscribe((data: any) => {
-        //     if (data.data.getmoduleData.data) {
-        //       element.duration = data.data.getmoduleData.data[0]?.coursetime;
-        //     }
-        //   });
-        //   //  element.duration = this.diff_hours(element.course_start_datetime, element.course_start_datetime);
-        // });
         this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
         this.enrolledCourses.forEach(element => {
-          // console.log('ele', element.upComingLiveClassRoom);
-        //   if (element.upComingLiveClassRoom) {
-        //   const currentDate = new Date();
-        //   const formatDate = moment(currentDate).format();
-        //   const StartDate = new Date(element.upComingLiveClassRoom.startdate);
-        //   const EndDate = new Date(element.upComingLiveClassRoom.enddate);
-        //   if (currentDate > StartDate) {
-        //     this.showCompleted = 'completed';
-        //   } else if (currentDate === StartDate && currentDate < EndDate) {
-        //     this.showOngoing = 'ongoing';
-        //   } else {
-        //     this.showUpcoming = 'upcoming';
-        //   }
-        // // }
-        //   const assignmentCount = element.assignmentCount;
-        //   const forumCount = element.forumCount;
           if (element.course_duration) {
             if (Number(element.course_duration.slice(3, 5)) >= 30) {
               element.course_duration = Number(element.course_duration.slice(0, 2)) + 1;
@@ -306,7 +240,6 @@ export class LearnerMyCourseComponent implements OnInit {
   getCoureBasedOnCatalog(catalogue, category, templateRef) {
     this.categoryData = category;
     this.catagoryName = category.categoryName;
-    console.log('caragory', category);
     this.learnerService.getCoureBasedOnCatalog(catalogue.catalogueId, this.pagenumber, category.categoryId,
       this.userDetailes._id).subscribe((course: any) => {
       if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
