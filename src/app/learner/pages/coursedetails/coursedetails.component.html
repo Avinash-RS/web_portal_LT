@@ -1,4 +1,4 @@
-<div  (mouseover)="sider=true">
+<div >
     <!-- id="hideMe" -->
     <span *ngIf="sider">
         <app-header></app-header>
@@ -6,13 +6,16 @@
 </div>
 
 <div class="container007 animated animatedFadeInUp fadeInUp">
+    <div style="height: 2px;" (mouseover)="sider=true">
+
+    </div>
     <div class="main contents">
         <span>
             <mat-icon class="closebgt" (mouseover)="drawer.toggle();sider=true" *ngIf="!drawer.opened" (click)="drawer.toggle()">menu</mat-icon>
-            <mat-icon class="closebgt" (mouseover)="sider=true" *ngIf="drawer.opened" (click)="drawer.toggle()">close</mat-icon>
+            <mat-icon class="closebgt" *ngIf="drawer.opened" (click)="drawer.toggle()">close</mat-icon>
         </span>
         <!-- {{drawer.opened}} -->
-        <div class="prevBtn">
+        <div class="prevBtn" >
             <button class=" pointer" mat-button [disabled]="isprevEnable"
                 (click)="topicPrve()">{{'Prev' | translate }}</button>
             <span class="">|</span>
