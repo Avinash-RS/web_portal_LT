@@ -56,11 +56,12 @@ export class GraphqlModule {
       // console.log(operation);
       if (graphQLErrors) {
         graphQLErrors.forEach(({ message, locations, path }) => {
-          // console.log(
-          //   `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-          // );
-          if (message === 'TokenExpiredError: jwt expired' || message === ' JsonWebTokenError: jwt must be a string') {
+          console.log(
+            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+          );
+          if (message.includes('TokenExpiredError') || message.includes('JsonWebTokenError')) {
             localStorage.clear();
+            sessionStorage.clear();
             this.httpC.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
               localStorage.setItem('Systemip',  res.ip ? res.ip : '');
             });
