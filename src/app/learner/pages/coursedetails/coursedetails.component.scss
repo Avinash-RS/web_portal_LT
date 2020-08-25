@@ -155,10 +155,10 @@
 .Outine {
     font-size: 16px;
     font-weight: 400px;
-    margin-left: -5px;
+    margin-left: -4px;
     width: 142px;
-    position: relative;
-    left: 22px;
+    // position: relative;
+    // left: 31px;
 }
 
 button:focus,
@@ -392,6 +392,8 @@ li {
 .index-number {
     // border: 1px solid $color-border;
     padding: 2px 8px;
+    position: relative;
+    left: 6px;
 }
 
 .module-container {
@@ -773,10 +775,10 @@ iframe.fullScreen {
 }
 
 .moduleund {
-    margin-left: 36px;
+    margin-left: 35px;
     font-weight: 500;
     height: 20px;
-    margin-top: -8px;
+    margin-top: -2px;
 }
 
 .bottom-border {
@@ -1365,6 +1367,27 @@ iframe.fullScreen {
     }
     .time {
         position: relative;
-        right: 15px;
+        left: 19px;
+    }
+    .divider {
+        position: relative;
+        left: 52px;
+    }
+    // .mar {
+    //     left: 10px !important;
+    //     bottom: 2px;
+    //     position: relative;
+    //     margin-top: 0px !important;
+    // }
+    .mar {
+    left: 0px !important;
+    position: absolute !important;
+    margin-left: 0px !important;
+    margin-top : -2px !important;
+    height : 20px;
+}
+    .custom-index {
+        margin-top: 8px;
+        height : 20 px;
     }
 //Ramya CSS ends here
