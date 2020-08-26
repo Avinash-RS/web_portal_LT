@@ -607,8 +607,8 @@ hr {
 
 .upcoming {
   position: relative;
-    bottom: 22px;
-    left: 3px;
+  bottom: 22px;
+  left: 3px;
 }
 .tabside {
   color: $color-blank;
@@ -862,7 +862,7 @@ hr {
   margin-top: 1rem;
 }
 
-.dropdown{
+.dropdown {
   float: right;
 }
 
@@ -974,15 +974,14 @@ hr {
     float: right;
   }
 
-.catnamesss {
-  margin-right: 25px !important;
-}
+  .catnamesss {
+    margin-right: 25px !important;
+  }
 
   .catalogTitle {
     margin: auto;
   }
 }
-
 
 // @media (max-width: 480px) and (max-width: 320px) {
 //   .descmc {
@@ -1029,7 +1028,7 @@ hr {
 
 // }
 @media only screen and (width: 1280px) {
-  .btl-alin{
+  .btl-alin {
     margin-left: -8%;
   }
 }
@@ -1058,7 +1057,7 @@ hr {
     display: block;
   }
 
-  .startBtnRow{
+  .startBtnRow {
     width: 430px;
   }
 
@@ -1191,6 +1190,7 @@ hr {
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   // max-height: 100%
   box-shadow: none;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
 }
 .catnamenew {
@@ -1291,7 +1291,7 @@ hr {
   border-radius: 8px;
 }
 
-.errorCard{
+.errorCard {
   height: 150px;
 }
 
@@ -1345,7 +1345,7 @@ hr {
   position: absolute;
   background-color: #f1f1f1;
   min-width: 155px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 999999;
 }
 
@@ -1386,12 +1386,11 @@ hr {
 }
 :host ::ng-deep mat-badge-content {
   color: white;
-  background:$lxp-icon !important;
+  background: $lxp-icon !important;
 }
 ::ng-deep .mat-dialog-container {
   overflow-y: hidden !important;
 }
 .claimIcon:hover {
- cursor: not-allowed;
+  cursor: not-allowed;
 }
-
