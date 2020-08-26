@@ -1019,7 +1019,6 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   add_topic_reference(res) {
-    console.log(res,'res')
     //  const userid = 'iety1y';
     //  const batchid = '699347730470462';
     //  const courseid = '52i9bdix';
@@ -1028,20 +1027,20 @@ export class CoursedetailsComponent implements OnInit {
     //  const referenceid = '5f43c8929c0ee70012ba98a5';
     //  const referencestatus = true;
     //  const createdby = 'admin';
-    const userid = this.userDetail.user_id;
-    const batchid = this.batchDetails?.batchid;
-    console.log(this.batchDetails, 'bid');
-    const courseid = this.courseid;
-    // console.log( courseid,' courseid')
-    const moduleid = res.modulename;
-    const topicid = res.moduledetails[0].topicname;
-    const referenceid = res. moduledetails[0].resourse.files[0]._id;
-    const referencestatus = true;
-    const createdby = this.course.created_by;
-    this.Lservice.add_topic_reference(userid, batchid, courseid, moduleid, topicid, referenceid, referencestatus, createdby)
-      .subscribe((result: any) => {
-        console.log(result, 'result');
-      });
+    if (this.batchDetails?.batchid) {
+      const userid = this.userDetail.user_id;
+      const batchid = this.batchDetails?.batchid;
+      const courseid = this.courseid;
+      const moduleid = res.modulename;
+      const topicid = res.moduledetails[0].topicname;
+      const referenceid = res. moduledetails[0].resourse.files[0]._id;
+      const referencestatus = true;
+      const createdby = this.course.created_by;
+      this.Lservice.add_topic_reference(userid, batchid, courseid, moduleid, topicid, referenceid, referencestatus, createdby)
+        .subscribe((result: any) => {
+        });
+    }
+
   }
 
 }
