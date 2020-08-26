@@ -890,6 +890,33 @@ export const  user_mstr_data = gql`
   }
 `;
 
+
+
+export const add_topic_reference = gql`
+mutation add_topic_reference($user_id: String!, $batch_id: String, $course_id:String!, $module_id:String!, $topic_id:String!, 
+$reference_id: String,$ reference_status: Boolean, $created_by: String){
+  add_topic_reference(user_id: $user_id, batch_id : $batch_id, course_id:$course_id,module_id:$module_id,topic_id:$topic_id, reference_id:$reference_id,
+    reference_status: $reference_status, created_by:$created_by ) {
+      success
+      error_msg
+      message{
+          is_active
+          _id
+          user_id
+          batch_id
+          course_id
+          module_id
+          topic_id
+          reference_id
+          reference_status
+          created_by
+          created_on
+          updated_by
+          updated_on
+      }
+  }
+}`;
+
 export const  save_attendies = gql`
   mutation  save_attendies(
     $userid:String,
