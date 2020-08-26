@@ -75,11 +75,8 @@ import {
   CreateNewThreadBid,
   claimcourse,
   user_mstr_data,
-<<<<<<< HEAD
-  add_topic_reference
-=======
+  add_topic_reference,
   save_attendies
->>>>>>> CollegeConnect
 } from './operations/learner_mutation';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -816,7 +813,8 @@ export class LearnerServicesService {
         reference_status,
         created_by
       }
-    })
+    });
+  }
   saveAttendees(){
     return  this.Apollo.query({
       query: save_attendies,
