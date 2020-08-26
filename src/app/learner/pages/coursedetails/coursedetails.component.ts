@@ -1012,6 +1012,21 @@ export class CoursedetailsComponent implements OnInit {
   goToSearchThread() {
     this.searchthreadname = true;
   }
+
+  add_topic_reference() {
+         const userid = 'iety1y';
+         const batchid = '699347730470462';
+         const courseid = '52i9bdix';
+         const moduleid = 'IS875 Part 2';
+         const topicid = 'IS875 Part 2';
+         const referenceid = '5f43c8929c0ee70012ba98a5';
+         const referencestatus = true;
+         const createdby = 'admin';
+         this.Lservice.add_topic_reference(userid, batchid, courseid, moduleid, topicid, referenceid, referencestatus, createdby)
+    .subscribe((result: any) => {
+      console.log(result, 'result');
+    });
+  }
 }
 
 
