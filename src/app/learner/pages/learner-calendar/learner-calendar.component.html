@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div *ngIf="learnerActivityList.length != 0 ">
-                        <ng-container *ngFor="let data of learnerActivityList">
+                        <ng-container *ngFor="let data of learnerActivityList; let i = index">
                             <div class="mainCard animated animatedFadeInUp fadeInUp" (click)="launchAssignment(data)">
                                 <mat-card class="session-card">
                                     <div class="session-sub-card">
@@ -89,14 +89,14 @@
 
 
                                         </div>
-                                        <p class="coursenameT" [ngClass]="{'color-yellow-card-status': data.status === 'On going', 'color-grey-card-status':data.status === 'Completed','color-blue-card-status':data.status === 'Up Coming' }"> {{ data.activity_details.coursename }}</p>
+                                        <p class="coursenameT" [ngClass]="{'color-yellow-card-status': data.status === 'On going', 'color-grey-card-status':data.status === 'Completed','color-blue-card-status':data.status === 'Up Coming' }"> {{ data.activity_details.coursename }} fdgsdhstjhtshsthsrthsthsrthrthrthrthsthsethhhrh</p>
                                         <h5 class="m-l-4">{{ data.activity_details.topicname }}
 
                                         </h5>
                                         <h5 class="m-l-4"> <span class="f_wt_500 f_size_14">Type </span>: <span class="lxp-text f_size_14 f_wt_400">{{  data.activity_details.activitytype}} </span>
                                             <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon>
                                             <span class="aligned-icon lxp-text f_size_14 f_wt_400">{{ data.activity_details.createdby_name }}</span>
-                                            <button (click)="launchActivity(data)" *ngIf="data.activity_details.activitytype == 'Live Classroom' && data.status ==='On going'" mat-stroked-button class="blue_clr cap m-b-10 LaunchBtn pointer float-right">Launch</button>
+                                            <button (click)="launchActivity(data,i)" *ngIf="data.activity_details.activitytype == 'Live Classroom' && data.status ==='On going'" mat-stroked-button class="blue_clr cap m-b-10 LaunchBtn pointer float-right">Launch</button>
                                         </h5>
                                     </div>
                                 </mat-card>

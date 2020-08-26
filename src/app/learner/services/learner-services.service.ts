@@ -74,7 +74,8 @@ import {
   CreateNewThread,
   CreateNewThreadBid,
   claimcourse,
-  user_mstr_data
+  user_mstr_data,
+  save_attendies
 } from './operations/learner_mutation';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -795,6 +796,21 @@ export class LearnerServicesService {
     return this.Apollo.query({
       query: user_mstr_data,
       variables: {}
+    });
+  }
+
+  saveAttendees(){
+    return  this.Apollo.query({
+      query: save_attendies,
+      variables: {
+        userid:"fsdfsdfsd",
+        activityid:"432142314",
+        activitynamne:"test",
+        username:"testing",
+        mobile:"9876543234",
+        email:"test@gmail.com",
+        status:"true"
+      }
     });
   }
 }
