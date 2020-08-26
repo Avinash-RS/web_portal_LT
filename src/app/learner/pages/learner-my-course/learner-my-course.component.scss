@@ -874,7 +874,7 @@ hr {
   display: none;
 }
 // Mobile
-@media (max-width: 765.98px) {
+@media (min-width: 200px) and (max-width: 767.98px) {
   .catalogDropdownCol {
     margin-top: 0.5rem;
     padding-right: 1.5rem;
@@ -919,6 +919,10 @@ hr {
 
   .startBtnDiv {
     display: none;
+  }
+
+  .courceNameCol{
+    padding-left: 2rem;
   }
 
   .timer {
@@ -969,11 +973,13 @@ hr {
   }
 }
 
-@media (min-width: 768px) and (max-width: 991.98) {
+@media (min-width: 768px) and (max-width: 991.98px) {
   .courseImg {
     margin-left: 15px;
   }
-
+.color_black2 {
+  padding-left: 0px;
+}
   .catalogDropdownCol {
     margin-top: 0.5rem;
   }
@@ -994,6 +1000,18 @@ hr {
   .span-with-icon {
     display: block;
     float: right;
+  }
+
+  .startBtnicon {
+    display: none;
+  }
+
+  .startBtnDiv{
+    display: block;
+  }
+
+  .aligned-with-icon{
+    display: none;
   }
 
   .catnamesss {
