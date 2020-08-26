@@ -380,9 +380,9 @@ export class CoursedetailsComponent implements OnInit {
             this.getuserid._id + '&path=' + this.gettopicLink.link +
              '&module_status=' + this.moduleSatusCheck
              + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title);
-        this.playerstatusrealtime(this.gettopicLink.title, 'topicStatus', this.moduleInfo.title,
+        // this.playerstatusrealtime(this.gettopicLink.title, 'topicStatus', this.moduleInfo.title,
           // tslint:disable-next-line:radix
-          this.moduleInfo.status, this.moduleLenth, parseInt(this.getTopicLengthofModule), this.topiccurrentPage + 1);
+          // this.moduleInfo.status, this.moduleLenth, parseInt(this.getTopicLengthofModule), this.topiccurrentPage + 1);
       }
       if (this.topiccurrentPage === this.getTopicLengthofModule - 1) {
         this.currentPage++;
@@ -454,7 +454,7 @@ export class CoursedetailsComponent implements OnInit {
         this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
         + '&module_status=' + this.moduleSatusCheck
            + '&module=' + moduleName + '&topic=' + topicName);
-    this.playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex);
+    // this.playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex);
   }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {
