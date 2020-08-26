@@ -3,8 +3,8 @@
     margin-left: 0.8% !important;
 }
 .calender-container {
-    height: calc(100vh - 50px);
-    overflow-y: auto;
+    height: 100vh;
+    overflow-y: hidden;
     .calender-section {
         height: 620px;
         overflow-y: auto;
@@ -24,8 +24,8 @@
         border-left: 7px solid;
         height: 55px;
         background: #bebdbd !important;
-        border-left-color: #FFCC00;
-        color: #ffffff;
+        border-left-color: $lxp-theme-yellow-sec;
+        color: $color-white;
         text-align: center;
         padding-top: 15px;
     }
@@ -63,7 +63,7 @@
         float: right;
         border-radius: 4px;
         font-size: 13px;
-        color: #ffffff;
+        color: $color-white;
         margin-top: 5px;
     }
     .Completedstatus {
@@ -72,12 +72,12 @@
         float: right;
         border-radius: 4px;
         font-size: 13px;
-        color: #ffffff;
+        color: $color-white ;
         margin-top: 5px;
     }
     .color-white {
         color: #b5acac;
-        background: #ffffff !important;
+        background: $color-white !important;
         border-left: 0px !important;
     }
     .status {
@@ -86,12 +86,12 @@
         float: right;
         border-radius: 4px;
         font-size: 13px;
-        color: #ffffff;
+        color: $color-white;
         margin-top: 5px;
         margin-left: 0px;
     }
     .blue_clr {
-        background-color: #C02222;
+        background-color: $lxp-theme-green;
         color: #69727c;
     }
     .cap::first-letter {
@@ -109,16 +109,16 @@
         line-height: 25px;
     }
     .blue_clr:hover {
-        background-color: #C02222 !important;
-        color: #ffffff !important;
+        background-color: $lxp-theme-green !important;
+        color: $color-white !important;
     }
     .LaunchBtn {
-        border: 1px solid #C02222 !important;
+        border: 1px solid $lxp-theme-green !important;
         border-radius: 5px;
         position: relative;
         float: right;
         margin-top: -5px;
-        background: #ffffff;
+        background: $color-white ;
         color: #9E9E9E;
         border: 1px solid currentColor;
         padding: 0px 7px;
@@ -179,7 +179,7 @@
         font-size: 12px;
     }
     .btn {
-        color: #fff !important;
+        color: $color-white  !important;
         background-color: #b3b2b2 !important;
         border-color: #bcc0c5 !important;
     }
@@ -187,7 +187,7 @@
     .btn-primary:focus,
     .btn-primary:active,
     .btn-primary.active {
-        color: #fff !important;
+        color: $color-white  !important;
         background-color: $color-blue !important;
         border-color: #b3b2b2 !important;
         /*set the color you want here*/
@@ -227,11 +227,11 @@
 
 ::ng-deep.cal-month-view .cal-day-badge {
     background-color: #48b994 !important;
-    color: #fff !important;
+    color: $color-white  !important;
 }
 
 ::ng-deep.cal-month-view .cal-day-number {
-    color: black;
+    color: $color-blank;
 }
 
 ::ng-deep.cal-month-view .cal-days {

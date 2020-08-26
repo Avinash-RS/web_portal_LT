@@ -504,7 +504,7 @@ hr {
 
 :host ::ng-deep .mat-badge-content {
   color: $color-white;
-  background: $lxp-gray;
+  background: $lxp-gray !important;
 }
 
 .mat-progress-bar {
@@ -582,7 +582,8 @@ hr {
   margin-top: 2%;
 }
 .m-t-m-2 {
-  margin-top: -2px;
+  top: -1.5px;
+  position: relative;
 }
 .m-t-8 {
   margin-top: 8px;
@@ -607,8 +608,8 @@ hr {
 
 .upcoming {
   position: relative;
-    bottom: 22px;
-    left: 3px;
+  bottom: 22px;
+  left: 3px;
 }
 .tabside {
   color: $color-blank;
@@ -679,7 +680,7 @@ hr {
 }
 .aligned-with-icon {
   position: relative;
-  // left: 420px;
+  cursor: pointer;
   font-size: 12px;
   margin-top: 15%;
   left: -94%;
@@ -862,7 +863,7 @@ hr {
   margin-top: 1rem;
 }
 
-.dropdown{
+.dropdown {
   float: right;
 }
 
@@ -995,15 +996,14 @@ hr {
     float: right;
   }
 
-.catnamesss {
-  margin-right: 25px !important;
-}
+  .catnamesss {
+    margin-right: 25px !important;
+  }
 
   .catalogTitle {
     margin: auto;
   }
 }
-
 
 // @media (max-width: 480px) and (max-width: 320px) {
 //   .descmc {
@@ -1050,7 +1050,7 @@ hr {
 
 // }
 @media only screen and (width: 1280px) {
-  .btl-alin{
+  .btl-alin {
     margin-left: -8%;
   }
 }
@@ -1079,7 +1079,7 @@ hr {
     display: block;
   }
 
-  .startBtnRow{
+  .startBtnRow {
     width: 430px;
   }
 
@@ -1122,6 +1122,7 @@ hr {
   color: $lxp-text;
   border-radius: 4px;
   margin-top: 2px;
+  padding-left: 2px;
   // margin-left: 9.5%;
   height: 32px;
 }
@@ -1190,7 +1191,7 @@ hr {
   right: 0;
   background-color: #00000087;
   overflow: hidden;
-  color: #fff !important;
+  color: $color-white!important;
   font-size: 17px;
   height: 178px;
   transition: 0.7s ease;
@@ -1212,6 +1213,7 @@ hr {
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   // max-height: 100%
   box-shadow: none;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
 }
 .catnamenew {
@@ -1278,6 +1280,7 @@ hr {
   cursor: pointer !important;
   background: $color-white;
   border: none;
+  padding: 0px;
   // height: 40px;
   /* margin-bottom: 28px; */
   color: #b8b8b8;
@@ -1298,21 +1301,21 @@ hr {
   z-index: 999;
 }
 .available-course-btn:hover {
-  background-color: #c02524;
+  background-color: $lxp-theme-green;
 }
 .cathd1 {
   // margin-right: 50px;
 }
 .btnredClass {
   width: 67%;
-  border: 1px solid #c02222;
+  border: 1px solid $lxp-theme-green;
   text-transform: uppercase;
   font-weight: 900;
   font-size: 13px;
   border-radius: 8px;
 }
 
-.errorCard{
+.errorCard {
   height: 150px;
 }
 
@@ -1341,11 +1344,11 @@ hr {
   background: $lxp-icon !important;
 }
 .lxp-text:hover {
-  color: #fff;
+  color: $color-white;
 }
 
 .dropbtn {
-  background-color: #ffffff;
+  background-color: $color-white;
   color: #898989;
   padding: 6px;
   font-size: 16px;
@@ -1366,7 +1369,7 @@ hr {
   position: absolute;
   background-color: #f1f1f1;
   min-width: 155px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 999999;
 }
 
@@ -1386,8 +1389,8 @@ hr {
 }
 
 .dropdown:hover .dropbtn {
-  background-color: #c12924;
-  color: #fff;
+  background-color: $lxp-theme-green;
+  color: $color-white;
 }
 
 .matBadge12 {
@@ -1406,13 +1409,12 @@ hr {
   background: #cecece !important;
 }
 :host ::ng-deep mat-badge-content {
-  color: white;
-  background:$lxp-icon !important;
+  color: $color-white;
+  background: $lxp-icon !important;
 }
 ::ng-deep .mat-dialog-container {
   overflow-y: hidden !important;
 }
 .claimIcon:hover {
- cursor: not-allowed;
+  cursor: not-allowed;
 }
-
