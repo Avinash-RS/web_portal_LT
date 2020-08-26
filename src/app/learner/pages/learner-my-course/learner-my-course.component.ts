@@ -251,7 +251,8 @@ export class LearnerMyCourseComponent implements OnInit {
     viewCourse(category, templateRef: TemplateRef<any>) {
       this.categoryPopupData = category;
       this.dialog.open(templateRef, {
-        width: '70%',
+        minWidth: '75%',
+        maxWidth: '95%',
         height: '75%',
         closeOnNavigation: true,
         disableClose: true,
