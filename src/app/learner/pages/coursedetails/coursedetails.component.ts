@@ -160,6 +160,8 @@ export class CoursedetailsComponent implements OnInit {
   // initials: any;
 
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
+  getModuleandtopicInfo: any;
+  moduleSatusCheck: any;
   // initials: any;
   constructor(public translate: TranslateService, private router: ActivatedRoute,
               public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
@@ -194,7 +196,7 @@ export class CoursedetailsComponent implements OnInit {
                   if (resdata?.data?.getbatchdetails?.message?.batchid !== null) {
                     this.batchDetails = resdata?.data?.getbatchdetails?.message;
                     this.disableThreads = resdata?.data?.getbatchdetails?.message.batchenddate.slice(0, 10) <=
-                    new Date().toISOString().slice(0, 10) ? true : false;
+                      new Date().toISOString().slice(0, 10) ? true : false;
                     this.viewAllThreads();
                   } else {
                     this.batchDetails = null;
@@ -231,6 +233,7 @@ export class CoursedetailsComponent implements OnInit {
       this.content = data.data.getmoduleData.data[0];
       this.assignmentVal = false;
       let noresource = false;
+      this.getModuleandtopicInfo = this.content.coursedetails[0];
       this.content.coursedetails.forEach(element => {
         let resourceFile = false;
         element.moduledetails.forEach(value => {
@@ -246,7 +249,9 @@ export class CoursedetailsComponent implements OnInit {
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
           this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
-          this.getuserid._id + '&path=' + this.content.url);
+          this.getuserid._id + '&path=' + this.content.url +
+          '&module_status=' + 'process'
+          + '&module=' + this.getModuleandtopicInfo.modulename + '&topic=' + this.getModuleandtopicInfo.moduledetails[0].topicname);
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
     });
@@ -260,7 +265,6 @@ export class CoursedetailsComponent implements OnInit {
   getAssignmentmoduleData() {
     this.Lservice.getAssignmentmoduleData(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
-      console.log('testing', this.assignmentContent);
 
       if (this.assignmentContent.courseStartDate && this.assignmentContent.courseEndDate) {
         const batchStartDate = new Date(this.assignmentContent.courseStartDate);
@@ -284,10 +288,10 @@ export class CoursedetailsComponent implements OnInit {
                 }
                 if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate &&
                   moment().format('DD-MM-YYYY HH:MM') <= this.courseEndDate) {
-                    fileData.enableUpload = true;
+                  fileData.enableUpload = true;
                 } else if (moment().format('DD-MM-YYYY HH:MM') < fileData.assignmentStartDate ||
                   moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate) {
-                    fileData.enableUpload = false;
+                  fileData.enableUpload = false;
                 }
               }
             });
@@ -369,13 +373,16 @@ export class CoursedetailsComponent implements OnInit {
         this.gettopicLink = this.scromModuleData[this.currentPage].children[this.topiccurrentPage];
         this.totTopicLenght = this.totTopicLenght + 1;
         this.getuserid = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
+        this.moduleSatusCheck = this.moduleInfo.status ? this.moduleInfo.status : 'process';
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
           (environment.scormUrl + '/scormPlayer.html?contentID=' +
             this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
-            this.getuserid._id + '&path=' + this.gettopicLink.link);
-        this.playerstatusrealtime(this.gettopicLink.title, 'topicStatus', this.moduleInfo.title,
+            this.getuserid._id + '&path=' + this.gettopicLink.link +
+             '&module_status=' + this.moduleSatusCheck
+             + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title);
+        // this.playerstatusrealtime(this.gettopicLink.title, 'topicStatus', this.moduleInfo.title,
           // tslint:disable-next-line:radix
-          this.moduleInfo.status, this.moduleLenth, parseInt(this.getTopicLengthofModule), this.topiccurrentPage + 1);
+          // this.moduleInfo.status, this.moduleLenth, parseInt(this.getTopicLengthofModule), this.topiccurrentPage + 1);
       }
       if (this.topiccurrentPage === this.getTopicLengthofModule - 1) {
         this.currentPage++;
@@ -398,16 +405,18 @@ export class CoursedetailsComponent implements OnInit {
     if (this.currentPage > 0) {
       this.totTopicLenght--;
       this.isNextEnable = false;
-      // debugger;
       if (this.totTopicLenght === 0) {
         this.isprevEnable = true;
       }
       if (this.topiccurrentlink >= 0) {
         this.gettopicLink = this.scromModuleData[this.currentPage - 1].children[this.topiccurrentlink];
+        this.moduleSatusCheck = this.moduleInfo.status ? this.moduleInfo.status : 'process';
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
-          (environment.scormUrl + '/scormPlayer.html?contentID=' +
-            this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
-            this.getuserid._id + '&path=' + this.gettopicLink.link);
+        (environment.scormUrl + '/scormPlayer.html?contentID=' +
+          this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
+          this.getuserid._id + '&path=' + this.gettopicLink.link +
+           '&module_status=' +  this.moduleSatusCheck
+           + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title);
       }
       if (this.topiccurrentlink === 0) {
         this.currentPage--;
@@ -439,10 +448,13 @@ export class CoursedetailsComponent implements OnInit {
     });
   }
   playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {
+    this.moduleSatusCheck = moduleStatus ? moduleStatus : 'process';
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
       (environment.scormUrl + '/scormPlayer.html?contentID=' +
-        this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url);
-    this.playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex);
+        this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
+        + '&module_status=' + this.moduleSatusCheck
+           + '&module=' + moduleName + '&topic=' + topicName);
+    // this.playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex);
   }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {
@@ -467,7 +479,6 @@ export class CoursedetailsComponent implements OnInit {
       .subscribe((data: any) => {
         if (data.data.playerstatusrealtime.success === true) {
           this.playerModuleAndTopic(true);
-        } else {
         }
       });
   }
@@ -480,11 +491,10 @@ export class CoursedetailsComponent implements OnInit {
     this.dataRefresher =
       setInterval(() => {
         this.playerModuleAndTopic(false);
-        // this.sider = false;
+
       }, 20000);
     // this.cancelPageRefresh();
   }
-
   autoHide() {
     this.dataRefresher =
       setInterval(() => {
@@ -503,9 +513,9 @@ export class CoursedetailsComponent implements OnInit {
       });
   }
 
-  showHeader() {
-    this.sider = true;
-  }
+  // showHeader() {
+  //   this.sider = true;
+  // }
   cancelPageRefresh() {
     if (this.dataRefresher) {
       clearInterval(this.dataRefresher);
@@ -789,6 +799,7 @@ export class CoursedetailsComponent implements OnInit {
       //   }
       // });data.user.username, data?.lastposttimeISO, data?.postcount
       if (this.showCommentThread) {
+        this.topicDiscussionData.posts = this.topicDiscussionData1.posts1;
         let arr = this.topicDiscussionData.posts.slice(1);
         const thread = this.topicDiscussionData.posts[0];
         arr = this.topicDiscussionData.posts.filter((item) => {
@@ -943,7 +954,6 @@ export class CoursedetailsComponent implements OnInit {
           d.bookmarked = false;
           d.bookmarks = d.bookmarks > 1 ? d.bookmarks - 1 : 0;
           d.apiCalled = true;
-          console.log(d);
           this.Lservice.unlikepost(data).subscribe((result: any) => {
             if (!result.success) {
               d.bookmarked = true;
@@ -960,7 +970,6 @@ export class CoursedetailsComponent implements OnInit {
           d.bookmarked = true;
           d.bookmarks = d.bookmarks + 1;
           d.apiCalled = true;
-          console.log(d);
           this.Lservice.likepost(data).subscribe((result: any) => {
             if (!result.success) {
               d.apiCalled = false;

@@ -1,5 +1,4 @@
 @import "variable";
-
 .spinner-container {
   position: absolute;
   top: 0;
@@ -608,8 +607,8 @@ hr {
 
 .upcoming {
   position: relative;
-  bottom: 22px;
-  left: 38px;
+    bottom: 22px;
+    left: 3px;
 }
 .tabside {
   color: $color-blank;
@@ -1291,10 +1290,8 @@ hr {
   font-size: 13px;
   border-radius: 8px;
 }
-.headerDes {
-  border-bottom: 1px solid #e6e6e6;
-}
-.errorCard {
+
+.errorCard{
   height: 150px;
 }
 
@@ -1332,8 +1329,9 @@ hr {
   padding: 6px;
   font-size: 16px;
   border: none;
-  border-radius: 11px;
+  // border-radius: 11px;
   border: 1px solid #898989;
+  width: 155px;
 }
 
 .dropdown {
@@ -1346,8 +1344,8 @@ hr {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 171px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  min-width: 155px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 999999;
 }
 
@@ -1373,8 +1371,8 @@ hr {
 
 .matBadge12 {
   position: relative;
-  /* float: right; */
-  /* right: 19px; */
+  float: right;
+  right: 20px;
   /* top: 22px; */
   background: #5c6873 !important;
 }
@@ -1388,5 +1386,12 @@ hr {
 }
 :host ::ng-deep mat-badge-content {
   color: white;
-  background: $lxp-icon !important;
+  background:$lxp-icon !important;
 }
+::ng-deep .mat-dialog-container {
+  overflow-y: hidden !important;
+}
+.claimIcon:hover {
+ cursor: not-allowed;
+}
+

@@ -77,7 +77,7 @@ export class UserMenuComponent implements OnInit {
               this.http
                 .get('http://api.ipify.org/?format=json')
                 .subscribe((res: any) => {
-                  localStorage.setItem('Systemip', res.ip);
+                  localStorage.setItem('Systemip', res.ip ? res.ip : '');
                 });
               this.userDetailes = null;
               this.router.navigate(['/Admin/login']);
@@ -90,7 +90,7 @@ export class UserMenuComponent implements OnInit {
                 this.http
                   .get('http://api.ipify.org/?format=json')
                   .subscribe((res: any) => {
-                    localStorage.setItem('Systemip', res.ip);
+                    localStorage.setItem('Systemip',  res.ip ? res.ip : '');
                   });
                 this.userDetailes = null;
                 this.userDetailes = null;
