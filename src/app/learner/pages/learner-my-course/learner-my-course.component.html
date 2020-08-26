@@ -602,12 +602,12 @@
            
             <div class="">
             <ng-container *ngFor="let categorytab of categoryDetails">
-            <mat-tab disabled *ngIf="categorytab.enrollCount">
-                <!-- <ng-template matTabLabel> -->
-                    <!-- <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
+            <mat-tab *ngIf="categorytab.enrollCount">
+                <ng-template matTabLabel class="template">
+                    <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
                       matBadge="{{categorytab.enrollCount}}"
-                        matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span> -->
-                <!-- </ng-template> -->
+                        matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span>
+                </ng-template>
 
                 <div *ngFor="let course of enrolledCourses ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
@@ -615,9 +615,9 @@
                         <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
                         <div class="row">
                             <!-- // Card start -->
-                            <div class="col-7 no-p-l">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-7 no-p-l">
                                 <div class="row">
-                                    <div class="col-3">
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
@@ -626,13 +626,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-7 m-t-2">
+                                    <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2">
                                         <div class=" f_size_18 f_wt_500 pointer">
                                             <span >
                                                 {{course.course_name}}
                                             </span>
                                             <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button>
+                                            <div class="aligned-with-icon">
+                                                <mat-icon class="timer"> alarm_on </mat-icon>
+                                                {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
@@ -667,7 +671,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-2">
+                                    <div class="col-6 col-sm-6 col-md-2 alarmCol">
                                         <div class="aligned-with-icon">
                                             <mat-icon class="timer"> alarm_on </mat-icon>
                                             {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}

@@ -869,6 +869,9 @@ hr {
 .courseDetailsCol {
   padding-left: 0px;
 }
+.template {
+  display: none;
+}
 // Mobile
 @media (max-width: 765.98px) {
   .catalogDropdownCol {
@@ -944,6 +947,24 @@ hr {
     margin-top: 0px;
     margin-left: 0px;
     position: relative;
+  }
+  .catPost {
+    display: none;
+  }
+  .template {
+    display: block;
+  }
+  :host ::ng-deep #mat-tab-label-0-3 {
+    display: block !important;
+    padding: 14px 28px !important;
+  }
+  :host ::ng-deep #mat-tab-label-0-4 {
+    display: block !important;
+    padding: 14px 28px !important;
+  }
+  :host ::ng-deep #mat-tab-label-0-5 {
+    display: block !important;
+    padding: 14px 28px !important;
   }
 }
 
