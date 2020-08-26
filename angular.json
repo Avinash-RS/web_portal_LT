@@ -35,7 +35,6 @@
               "src/styles.scss",
               "src/app/learner/learner.scss",
               "node_modules/ngx-toastr/toastr.css",
-              "src/app/admin/admin.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/videogular2/fonts/videogular.css",
               "node_modules/ng-pick-datetime/assets/style/picker.min.css",
@@ -129,7 +128,7 @@
               "src/styles.scss",
               "src/app/learner/learner.scss",
               "node_modules/ngx-toastr/toastr.css",
-              "src/app/admin/admin.scss",
+           
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/videogular2/fonts/videogular.css",
               "node_modules/ng-pick-datetime/assets/style/picker.min.css",

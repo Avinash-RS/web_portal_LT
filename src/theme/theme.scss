@@ -1,7 +1,7 @@
 @import '~@angular/material/theming';
 // @import '../app/admin/auth/auth.component.scss';
-@import '../app/admin/core/sidemenu/sidemenu.component.scss';
-@import '../app/admin/core/sidemenu-item/sidemenu-item.component.scss';
+// @import '../app/admin/core/sidemenu/sidemenu.component.scss';
+// @import '../app/admin/core/sidemenu-item/sidemenu-item.component.scss';
 // @import '../app/admin/dashboard-widget/dashcard/dashcard.component.scss';
 // // @import '../app/admin/dashboard-widget/profile-card/profile-card.component.scss';
 // @import '../app/admin/dashboard-widget/round-progressbar/round-progressbar.component.scss';
@@ -40,18 +40,18 @@ $lxp-theme-warn:mat-palette($warn );
 $lxp-theme: mat-light-theme($lxp-theme-primary, $lxp-theme-accent, $lxp-theme-warn);
 
 
-lxp-sidemenu{
-    $sidemenu-app-primary: mat-palette($primary , 400);
-    $sidemenu-app-accent:  mat-palette($accent , 900);
-    $sidemenu-app-warn:    mat-palette($warn );
-    $lxp-sidemenu-theme:   mat-dark-theme($sidemenu-app-primary, $sidemenu-app-accent,$sidemenu-app-warn);
-    @include mat-list-theme($lxp-sidemenu-theme);
-}
+// lxp-sidemenu{
+//     $sidemenu-app-primary: mat-palette($primary , 400);
+//     $sidemenu-app-accent:  mat-palette($accent , 900);
+//     $sidemenu-app-warn:    mat-palette($warn );
+//     $lxp-sidemenu-theme:   mat-dark-theme($sidemenu-app-primary, $sidemenu-app-accent,$sidemenu-app-warn);
+//     @include mat-list-theme($lxp-sidemenu-theme);
+// }
 
 
-lxp-sidemenu-item{
-    @include sidemenu-item($lxp-theme,20px)
-}
+// lxp-sidemenu-item{
+//     @include sidemenu-item($lxp-theme,20px)
+// }
 
 
 // lxp-dashcard {
@@ -62,14 +62,14 @@ lxp-sidemenu-item{
 //     @include dashcard($dashcard-theme);
 // }
 
-lxp-profile-card{
-  $dashboard-profile-primary: mat-palette($primary , 400);
-    $dashboard-profile-accent:  mat-palette($accent , 900);
-    $dashboard-profile-warn:    mat-palette($warn );
-    $lxp-dashboard-profile-theme:   mat-dark-theme($dashboard-profile-primary, $dashboard-profile-accent,$dashboard-profile-warn);
-    // @include dashboard-profile($lxp-dashboard-profile-theme);
-    @include mat-tabs-theme($lxp-dashboard-profile-theme);
-}
+// lxp-profile-card{
+//   $dashboard-profile-primary: mat-palette($primary , 400);
+//     $dashboard-profile-accent:  mat-palette($accent , 900);
+//     $dashboard-profile-warn:    mat-palette($warn );
+//     $lxp-dashboard-profile-theme:   mat-dark-theme($dashboard-profile-primary, $dashboard-profile-accent,$dashboard-profile-warn);
+//     // @include dashboard-profile($lxp-dashboard-profile-theme);
+//     @include mat-tabs-theme($lxp-dashboard-profile-theme);
+// }
 @include angular-material-theme($lxp-theme);
 // // @include auth($lxp-theme);
 // @include round-progressbar($lxp-theme);
