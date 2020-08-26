@@ -37,6 +37,8 @@ export class LearnerCalendarComponent implements OnInit {
   public activityendtime: any;
   public errorMessage: any;
   public showErrorCard: any;
+  public activityName: any;
+  public activityId: any;
   public selectedMoment = new Date();
   selectedToday;
   bsInlineValue = new Date();
@@ -62,6 +64,7 @@ export class LearnerCalendarComponent implements OnInit {
     this.tokenDetails = localStorage.getItem('token');
 
     this.user_id = this.UserDetails.user_id;
+    console.log(this.UserDetails);
     // this.tokenid = this.tokenDetails.token;
     this.selectedDate = moment().format();
     this.getLearnerActivity(this.selectedDate);
@@ -144,8 +147,28 @@ export class LearnerCalendarComponent implements OnInit {
       this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
     }
   }
-  launchActivity(value) {
+  launchActivity(value,i) {
       window.open(value.activity_details.link);
+      console.log(i);
+      this.saveAttendees();
+      // this.activityName = this.learnerActivityList[i].activityname;
+      // this.activityId = 
+  }
+
+  saveAttendees(){
+    console.log(this.UserDetails);
+    // let attendeesData = {
+    //   userid: this.UserDetails.user_id,
+    //   activityid:"432142314",
+    //   activitynamne:"test",
+    //   username:this.UserDetails.username,
+    //   mobile:"9876543234",
+    //   email:this.UserDetails.email,
+    //   status:"true"
+    // }
+   this.service.saveAttendees().subscribe((res:any)=>{
+     console.log("saveAttendees",res);
+   });
   }
 
 
