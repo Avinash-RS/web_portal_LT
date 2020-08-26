@@ -582,7 +582,8 @@ hr {
   margin-top: 2%;
 }
 .m-t-m-2 {
-  margin-top: -2px;
+  top: -1.5px;
+  position: relative;
 }
 .m-t-8 {
   margin-top: 8px;
@@ -679,7 +680,7 @@ hr {
 }
 .aligned-with-icon {
   position: relative;
-  // left: 420px;
+  cursor: pointer;
   font-size: 12px;
   margin-top: 15%;
   left: -94%;
@@ -1101,6 +1102,7 @@ hr {
   color: $lxp-text;
   border-radius: 4px;
   margin-top: 2px;
+  padding-left: 2px;
   // margin-left: 9.5%;
   height: 32px;
 }
