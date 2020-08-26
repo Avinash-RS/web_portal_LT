@@ -74,7 +74,8 @@ import {
   CreateNewThread,
   CreateNewThreadBid,
   claimcourse,
-  user_mstr_data
+  user_mstr_data,
+  add_topic_reference
 } from './operations/learner_mutation';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -796,5 +797,21 @@ export class LearnerServicesService {
       query: user_mstr_data,
       variables: {}
     });
+  }
+
+  add_topic_reference(user_id,batch_id,course_id,module_id,topic_id,reference_id,reference_status,created_by){
+    return this.Apollo.query({
+      query: add_topic_reference,
+      variables: {
+        user_id,
+        batch_id,
+        course_id,
+        module_id,
+        topic_id,
+        reference_id,
+        reference_status,
+        created_by
+      }
+    })
   }
 }
