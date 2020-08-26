@@ -75,7 +75,11 @@ import {
   CreateNewThreadBid,
   claimcourse,
   user_mstr_data,
+<<<<<<< HEAD
   add_topic_reference
+=======
+  save_attendies
+>>>>>>> CollegeConnect
 } from './operations/learner_mutation';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -813,5 +817,18 @@ export class LearnerServicesService {
         created_by
       }
     })
+  saveAttendees(){
+    return  this.Apollo.query({
+      query: save_attendies,
+      variables: {
+        userid:"fsdfsdfsd",
+        activityid:"432142314",
+        activitynamne:"test",
+        username:"testing",
+        mobile:"9876543234",
+        email:"test@gmail.com",
+        status:"true"
+      }
+    });
   }
 }

@@ -917,3 +917,25 @@ $reference_id: String,$ reference_status: Boolean, $created_by: String){
   }
 }`;
 
+export const  save_attendies = gql`
+  mutation  save_attendies(
+    $userid:String,
+    $activityid:String,
+    $activitynamne:String,
+    $username:String,
+    $mobile:String,
+    $email:String,
+    $status:String
+    ) {
+      save_attendies(userid:$userid,
+        activityid:$activityid,
+        activitynamne:$activitynamne,
+        username: $username,
+        mobile:$mobile,
+        email: $email,
+        status:$status){
+          success
+          message
+        }
+  }
+`;

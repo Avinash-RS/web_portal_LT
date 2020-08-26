@@ -161,7 +161,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-6 col-sm-6 col-md-2 alarmCol">
+                                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
                                         <div class="aligned-with-icon">
                                             <mat-icon class="timer"> alarm_on </mat-icon>
                                             {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
@@ -275,9 +275,9 @@
                         <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
                         <div class="row">
                             <!-- // Card start -->
-                            <div class="col-7 no-p-l">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol">
                                 <div class="row">
-                                    <div class="col-3">
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
@@ -286,13 +286,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-7 m-t-2">
+                                    <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2">
                                         <div class="f_size_18 f_wt_500 pointer">
                                             <span>
                                                 {{course.course_name}}
                                             </span>
                                             <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button>
+                                            <div class="span-with-icon">
+                                                <mat-icon class="timer"> alarm_on </mat-icon>
+                                                {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
@@ -302,8 +306,8 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-10">
+                                        <div class="row startBtnRow">
+                                            <div class="col-12 col-sm-12 col-md-10 startBtnCol">
                                                 <button *ngIf="course.batchCourse == true" class="clr" (click)="goToAssignment(course)" [disabled]="course.assignmentCount == 0">
                                                     <mat-icon class="btn-icon">description</mat-icon>
                                                     <span>Assignments ({{course.assignmentCount}})</span>
@@ -316,7 +320,7 @@
                                                     <span>Discussion Forum ({{course.forumCount}})</span>
                                                 </button>
                                             </div>
-                                            <div class="">
+                                            <div class="startBtnDiv">
                                                 <button mat-stroked-button data-toggle="modal" data-target="#myModal"
                                                     *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
@@ -347,15 +351,35 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-2">
+                                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
                                         <div class="aligned-with-icon">
                                             <mat-icon class="timer"> alarm_on </mat-icon>
                                             {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
                                         </div>
+                                        <div class="startBtnicon">
+                                            <button mat-stroked-button data-toggle="modal" data-target="#myModal"
+                                                *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
+                                                class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                                                <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
+                                                <span class="cap f_wt_400  m-t-m-2">
+                                                    {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
+                                                     course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' | translate }}&nbsp;
+                                                </span>
+                                            </button>
+                                            <button mat-stroked-button
+                                                *ngIf="course?.coursePlayerStatus?.status === 'completed'"
+                                                class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
+                                                data-target="#myModal" (click)="gotoDesc(course)">
+                                                <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
+                                                <span class="cap f_wt_400  m-t-m-2">
+                                                    {{'Replay' | translate }}&nbsp;
+                                                </span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-5" *ngIf="course.batchCourse == true">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="course.batchCourse == true">
                                 <div class="row m-p-14 m-t-1 m-l-2p f_size_12">
                                     <div class="col-3 ">
                                         <div>Activity 
@@ -440,9 +464,9 @@
                         <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
                         <div class="row">
                             <!-- // Card start -->
-                            <div class="col-7 no-p-l">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol">
                                 <div class="row">
-                                    <div class="col-3">
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
@@ -451,13 +475,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-7 m-t-2">
+                                    <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2 m-t-2">
                                         <div class=" f_size_18 f_wt_500 pointer">
                                             <span >
                                                 {{course.course_name}}
                                             </span>
                                             <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button>
+                                            <div class="span-with-icon">
+                                                <mat-icon class="timer"> alarm_on </mat-icon>
+                                                {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
@@ -467,8 +495,8 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-10">
+                                        <div class="row startBtnRow">
+                                            <div class="col-12 col-sm-12 col-md-10 startBtnCol">
                                                 <button *ngIf="course.batchCourse == true" class="clr" (click)="goToAssignment(course)"
                                                 [disabled]="course.assignmentCount == 0">
                                                     <mat-icon class="btn-icon">description</mat-icon>
@@ -482,7 +510,7 @@
                                                     <span>Discussion Forum ({{course.forumCount}})</span>
                                                 </button>
                                             </div>
-                                            <div class="">
+                                            <div class="startBtnDiv">
                                                 <button mat-stroked-button data-toggle="modal" data-target="#myModal"
                                                     *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
@@ -513,15 +541,35 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-2">
+                                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
                                         <div class="aligned-with-icon">
                                             <mat-icon class="timer"> alarm_on </mat-icon>
                                             {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
                                         </div>
+                                        <div class="startBtnicon">
+                                            <button mat-stroked-button data-toggle="modal" data-target="#myModal"
+                                                *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
+                                                class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                                                <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
+                                                <span class="cap f_wt_400  m-t-m-2">
+                                                    {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume  ' : 
+                                                    course?.coursePlayerStatus?.status === 'suspend ' ? 'Resume ' : 'Start' }}&nbsp;
+                                                </span>
+                                            </button>
+                                            <button mat-stroked-button
+                                                *ngIf="course?.coursePlayerStatus?.status === 'completed'"
+                                                class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
+                                                data-target="#myModal" (click)="gotoDesc(course)">
+                                                <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
+                                                <span class="cap f_wt_400  m-t-m-2">
+                                                    {{'Replay'  }}&nbsp;
+                                                </span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-5" *ngIf="course.batchCourse == true">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="course.batchCourse == true">
                                 <div class="row m-p-14 m-t-1 m-l-2p f_size_12">
                                     <div class="col-3">
                                         <div>Activity 
@@ -602,12 +650,12 @@
            
             <div class="">
             <ng-container *ngFor="let categorytab of categoryDetails">
-            <mat-tab disabled *ngIf="categorytab.enrollCount">
-                <!-- <ng-template matTabLabel> -->
-                    <!-- <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
+            <mat-tab *ngIf="categorytab.enrollCount">
+                <ng-template matTabLabel class="template">
+                    <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
                       matBadge="{{categorytab.enrollCount}}"
-                        matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span> -->
-                <!-- </ng-template> -->
+                        matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span>
+                </ng-template>
 
                 <div *ngFor="let course of enrolledCourses ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
@@ -615,9 +663,9 @@
                         <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
                         <div class="row">
                             <!-- // Card start -->
-                            <div class="col-7 no-p-l">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-7 no-p-l">
                                 <div class="row">
-                                    <div class="col-3">
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
@@ -626,13 +674,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-7 m-t-2">
+                                    <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2 courceNameCol">
                                         <div class=" f_size_18 f_wt_500 pointer">
                                             <span >
                                                 {{course.course_name}}
                                             </span>
                                             <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button>
+                                            <div class="span-with-icon">
+                                                <mat-icon class="timer"> alarm_on </mat-icon>
+                                                {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
@@ -644,7 +696,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-10"></div>
-                                            <div class="">
+                                            <div class="startBtnDiv">
                                                 <button mat-stroked-button data-toggle="modal" data-target="#myModal"
                                                     *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
@@ -667,10 +719,30 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-2">
+                                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
                                         <div class="aligned-with-icon">
                                             <mat-icon class="timer"> alarm_on </mat-icon>
                                             {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
+                                        </div>
+                                        <div class="startBtnicon">
+                                            <button mat-stroked-button data-toggle="modal" data-target="#myModal"
+                                                *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
+                                                class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                                                <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
+                                                <span class="cap f_wt_400  m-t-m-2">
+                                                    {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume  ' : 
+                                                    course?.coursePlayerStatus?.status === 'suspend ' ? 'Resume ' : 'Start' }}&nbsp;
+                                                </span>
+                                            </button>
+                                            <button mat-stroked-button
+                                                *ngIf="course?.coursePlayerStatus?.status === 'completed'"
+                                                class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
+                                                data-target="#myModal" (click)="gotoDesc(course)">
+                                                <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
+                                                <span class="cap f_wt_400  m-t-m-2">
+                                                    {{'Replay'  }}&nbsp;
+                                                </span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

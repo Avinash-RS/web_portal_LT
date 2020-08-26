@@ -504,7 +504,7 @@ hr {
 
 :host ::ng-deep .mat-badge-content {
   color: $color-white;
-  background: $lxp-gray;
+  background: $lxp-gray !important;
 }
 
 .mat-progress-bar {
@@ -870,8 +870,11 @@ hr {
 .courseDetailsCol {
   padding-left: 0px;
 }
+.template {
+  display: none;
+}
 // Mobile
-@media (max-width: 765.98px) {
+@media (min-width: 200px) and (max-width: 767.98px) {
   .catalogDropdownCol {
     margin-top: 0.5rem;
     padding-right: 1.5rem;
@@ -918,6 +921,10 @@ hr {
     display: none;
   }
 
+  .courceNameCol{
+    padding-left: 2rem;
+  }
+
   .timer {
     left: 0px;
   }
@@ -946,13 +953,33 @@ hr {
     margin-left: 0px;
     position: relative;
   }
+  .catPost {
+    display: none;
+  }
+  .template {
+    display: block;
+  }
+  :host ::ng-deep #mat-tab-label-0-3 {
+    display: block !important;
+    padding: 14px 28px !important;
+  }
+  :host ::ng-deep #mat-tab-label-0-4 {
+    display: block !important;
+    padding: 14px 28px !important;
+  }
+  :host ::ng-deep #mat-tab-label-0-5 {
+    display: block !important;
+    padding: 14px 28px !important;
+  }
 }
 
-@media (min-width: 768px) and (max-width: 991.98) {
+@media (min-width: 768px) and (max-width: 991.98px) {
   .courseImg {
     margin-left: 15px;
   }
-
+.color_black2 {
+  padding-left: 0px;
+}
   .catalogDropdownCol {
     margin-top: 0.5rem;
   }
@@ -973,6 +1000,18 @@ hr {
   .span-with-icon {
     display: block;
     float: right;
+  }
+
+  .startBtnicon {
+    display: none;
+  }
+
+  .startBtnDiv{
+    display: block;
+  }
+
+  .aligned-with-icon{
+    display: none;
   }
 
   .catnamesss {
@@ -1170,7 +1209,7 @@ hr {
   right: 0;
   background-color: #00000087;
   overflow: hidden;
-  color: #fff !important;
+  color: $color-white!important;
   font-size: 17px;
   height: 178px;
   transition: 0.7s ease;
@@ -1259,6 +1298,7 @@ hr {
   cursor: pointer !important;
   background: $color-white;
   border: none;
+  padding: 0px;
   // height: 40px;
   /* margin-bottom: 28px; */
   color: #b8b8b8;
@@ -1279,14 +1319,14 @@ hr {
   z-index: 999;
 }
 .available-course-btn:hover {
-  background-color: #c02524;
+  background-color: $lxp-theme-green;
 }
 .cathd1 {
   // margin-right: 50px;
 }
 .btnredClass {
   width: 67%;
-  border: 1px solid #c02222;
+  border: 1px solid $lxp-theme-green;
   text-transform: uppercase;
   font-weight: 900;
   font-size: 13px;
@@ -1322,11 +1362,11 @@ hr {
   background: $lxp-icon !important;
 }
 .lxp-text:hover {
-  color: #fff;
+  color: $color-white;
 }
 
 .dropbtn {
-  background-color: #ffffff;
+  background-color: $color-white;
   color: #898989;
   padding: 6px;
   font-size: 16px;
@@ -1367,8 +1407,8 @@ hr {
 }
 
 .dropdown:hover .dropbtn {
-  background-color: #c12924;
-  color: #fff;
+  background-color: $lxp-theme-green;
+  color: $color-white;
 }
 
 .matBadge12 {
@@ -1387,7 +1427,7 @@ hr {
   background: #cecece !important;
 }
 :host ::ng-deep mat-badge-content {
-  color: white;
+  color: $color-white;
   background: $lxp-icon !important;
 }
 ::ng-deep .mat-dialog-container {
