@@ -8,7 +8,7 @@
 <div class="container007 animated animatedFadeInUp fadeInUp">
     <div>
         <mat-drawer-container [class.drawer-opened]="drawer.opened" class="example-container">
-            <mat-drawer #drawer class="drawer" mode="side" opened="true">
+            <mat-drawer #drawer class="drawer" mode="side" opened="{{sider}}">
 
                 <mat-toolbar class="header">
                     <mat-icon class="close" *ngIf="drawer.opened" (click)="drawer.close()">close</mat-icon>
@@ -16,13 +16,13 @@
                         menu
                     </mat-icon>
                     <div class="row">
-                        <div class="col-4 Outine">
+                        <div class="col-5 Outine">
                             {{'Course Outline' | translate }}
                         </div>
-                        <div class="col-4 divider">
+                        <div class="col-2 divider">
                             |
                         </div>
-                        <div class="col-4">
+                        <div class="col-5">
                             <div class="row time">
                                 <div class="col-2">
                                     <mat-icon class="alarmIcon">alarm</mat-icon>
@@ -41,7 +41,7 @@
                         <mat-expansion-panel class="panel" hideToggle="true" #example [expanded]="selectedIndex === i">
                             <mat-expansion-panel-header>
                                 <mat-panel-title class="module-container">
-                                    <div class="row">
+                                    <div class="row moduleContainerRow">
                                         <div>
                                             <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons mar">done
                                             </mat-icon>
@@ -102,7 +102,7 @@
                         menu
                     </mat-icon>
 
-                    <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'">
+                    <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'" *ngIf="sider">
                         <button class=" pointer" mat-button [disabled]="isprevEnable"
                             (click)="topicPrve()">{{'Prev' | translate }}</button>
                         <span class="">|</span>
@@ -126,7 +126,7 @@
 
                     </mat-tab>
                     <!-- about the course tab -->
-                    <mat-tab label="About the course">
+                    <mat-tab label="About the course" class="aboutCourseTab">
                         <div [ngClass]="drawer.opened==true?'drawerOpnAboutCourse':'drawerClsAboutCourse'">
                             <h3 class="head-h1">Course description</h3>
                             <div class="vertical"></div>
@@ -547,19 +547,19 @@
                 </div>
             </ng-template>
             </mat-tab>
-
+<!-- forum tab -->
             <mat-tab *ngIf="userDetail.is_forum_config" label="Forum"
                 [disabled]="selectedModuleData === null || selectedModuleData === undefined" class="discussion_forum">
 
 
-                <div>
+                <div [ngClass]="drawer.opened==true?'drawerOpnForum':'drawerClsForum'">
                     <div class="spinner-container" *ngIf="loadingForum">
                         <mat-spinner diameter="40"></mat-spinner>
                     </div>
                     <br>
                     <div *ngIf="showCourseDetails">
                         <div class="p-l-0 no_border">
-                            <div class="col-12 forum-width" [ngClass]="{'width_70 center p-l-0': !drawer.opened}">
+                            <div class="col-12 forum-width" >
                                 <div class="row" *ngIf="selectedModuleData">
                                     <p (click)="gotoDisplayAllThreads()">
                                         <span
@@ -576,7 +576,7 @@
 
                     <div *ngIf="showCommentThread" class="no_border">
                         <div class="p-l-0">
-                            <div class="col-12 forum-width" [ngClass]="{'width_70 center p-l-0': !drawer.opened}">
+                            <div class="col-12 forum-width" >
                                 <div class="row" *ngIf="selectedModuleData">
                                     <p (click)="gotoDisplayAllThreads();viewAllThreads()">
                                         <span class="color-blue f_size_16 f_wt_500"
@@ -590,7 +590,7 @@
                     </div>
                     <br>
 
-                    <div *ngIf="showCourseDetails" class="forum-width" [ngClass]="{'width_70 center' : !drawer.opened}">
+                    <div *ngIf="showCourseDetails" class="forum-width" >
                         <!-- Header starts here -->
                         <mat-card class=" black_border box_shadow alignment ">
                             <div class="row">
@@ -678,7 +678,7 @@
                     </div>
 
                     <div *ngIf="!loadingForum && showCourseDetails && (discussionData === null || discussionData?.topics?.length ===0)"
-                        class="forum-width" [ngClass]="{'width_70 center' : !drawer.opened}">
+                        class="forum-width" >
                         <br><br>
                         <mat-card class="black_border m-bt-4 box_shadow center center_align f_size_16">
                             <br>
@@ -688,7 +688,7 @@
                     </div>
 
                     <div class="comment_card forum-width" *ngIf="showCommentThread && selectedThreadData != null"
-                        [ngClass]="{'width_70 center' : !drawer.opened}">
+                        >
                         <!-- for thread -->
                         <mat-card class="black_border m-b-10 no-radius no_padding">
                             <!-- name row start -->
@@ -1125,6 +1125,8 @@
                     </div>
                 </div>
 
+
+
                 <ng-template #createThreadDialog class="dialogPopup no-radius">
                     <mat-dialog-content class="createThreadDialog no-radius">
                         <form [formGroup]="addThreadForm">
@@ -1189,6 +1191,13 @@
             </mat-tab-group>
     </div>
     </mat-drawer-container>
+
+
+    <div class="footer">
+        <span class="powered">
+            <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
+        </span>
+    </div>
 </div>
 
 
@@ -1196,11 +1205,7 @@
 
 </div>
 
-<div class="footer">
-    <span class="powered">
-        <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
-    </span>
-</div>
+
 
 <ng-template #popTemplate class="tooltip-container">
     <span class="singleline-text">

@@ -879,6 +879,13 @@ hr {
 .template {
   display: none;
 }
+::ng-deep .mat-dialog-container {
+  overflow-y: hidden !important;
+  width: 75% !important;
+  height: 75% !important;
+  margin: auto;
+}
+
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
   .catalogDropdownCol {
@@ -886,9 +893,18 @@ hr {
     padding-right: 1.5rem;
   }
 
+  #cdk-overlay-0 {
+    width: 95%;
+  }
   .dropdown {
     margin-right: 0rem !important;
     float: right;
+  }
+
+  ::ng-deep .mat-dialog-container {
+    width: 95% !important;
+    height: 75% !important;
+    margin: auto;
   }
 
   .finalScore {
@@ -913,6 +929,7 @@ hr {
 
   .courseHover {
     width: 100%;
+    height: 100%;
   }
 
   .startBtnicon {
@@ -927,7 +944,7 @@ hr {
     display: none;
   }
 
-  .courceNameCol{
+  .courceNameCol {
     padding-left: 2rem;
   }
 
@@ -968,14 +985,17 @@ hr {
   :host ::ng-deep #mat-tab-label-0-3 {
     display: block !important;
     padding: 14px 28px !important;
+    color: $lxp-dark-gray !important;
   }
   :host ::ng-deep #mat-tab-label-0-4 {
     display: block !important;
     padding: 14px 28px !important;
+    color: $lxp-dark-gray !important;
   }
   :host ::ng-deep #mat-tab-label-0-5 {
     display: block !important;
     padding: 14px 28px !important;
+    color: $lxp-dark-gray !important;
   }
 }
 
@@ -983,9 +1003,9 @@ hr {
   .courseImg {
     margin-left: 15px;
   }
-.color_black2 {
-  padding-left: 0px;
-}
+  .color_black2 {
+    padding-left: 0px;
+  }
   .catalogDropdownCol {
     margin-top: 0.5rem;
   }
@@ -1012,11 +1032,11 @@ hr {
     display: none;
   }
 
-  .startBtnDiv{
+  .startBtnDiv {
     display: block;
   }
 
-  .aligned-with-icon{
+  .aligned-with-icon {
     display: none;
   }
 
@@ -1215,7 +1235,7 @@ hr {
   right: 0;
   background-color: #00000087;
   overflow: hidden;
-  color: $color-white!important;
+  color: $color-white !important;
   font-size: 17px;
   height: 178px;
   transition: 0.7s ease;
@@ -1436,9 +1456,7 @@ hr {
   color: $color-white;
   background: $lxp-icon !important;
 }
-::ng-deep .mat-dialog-container {
-  overflow-y: hidden !important;
-}
+
 .claimIcon:hover {
   cursor: not-allowed;
 }
