@@ -164,10 +164,10 @@ export class CoursedetailsComponent implements OnInit {
   moduleSatusCheck: any;
   // initials: any;
   constructor(public translate: TranslateService, private router: ActivatedRoute,
-    public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
-    public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
-    public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
-    public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
+              public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
+              public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
+              public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
+              public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
     this.selectedModuleData = null;
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
@@ -175,7 +175,6 @@ export class CoursedetailsComponent implements OnInit {
       this.detailData = detail;
       // this.courseid = detail && detail.id || this.localStoCourseid;
       this.userDetail = this.gs.checkLogout();
-      console.log(this.userDetail, 'this.userDetail')
       this.localStoCourseid = localStorage.getItem('Courseid');
       this.courseid = detail && detail.id || this.localStoCourseid;
       this.lastpersentage = localStorage.getItem('persentage');
@@ -194,7 +193,6 @@ export class CoursedetailsComponent implements OnInit {
               this.selectedModuleData.indexValue = 1;
               if (this.selectedModuleData) {
                 this.Lservice.getSingleBatchInfo(this.userDetail.user_id, this.courseid).subscribe((resdata: any) => {
-                  console.log(resdata,'resdata')
                   if (resdata?.data?.getbatchdetails?.message?.batchid !== null) {
                     this.batchDetails = resdata?.data?.getbatchdetails?.message;
                     this.disableThreads = resdata?.data?.getbatchdetails?.message.batchenddate.slice(0, 10) <=
@@ -234,7 +232,6 @@ export class CoursedetailsComponent implements OnInit {
     this.Lservice.getModuleData(detail && detail.id || this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
       console.log(data, 'module');
       this.content = data.data.getmoduleData.data[0];
-      console.log(this.content,'this.content')
       this.assignmentVal = false;
       let noresource = false;
       this.getModuleandtopicInfo = this.content.coursedetails[0];

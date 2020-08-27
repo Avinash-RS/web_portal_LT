@@ -650,9 +650,9 @@
            
             <div class="">
             <ng-container *ngFor="let categorytab of categoryDetails">
-            <mat-tab *ngIf="categorytab.enrollCount">
-                <ng-template matTabLabel class="template">
-                    <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
+            <mat-tab disabled *ngIf="categorytab.enrollCount">
+                <ng-template disabled matTabLabel>
+                    <span class="template" (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
                       matBadge="{{categorytab.enrollCount}}"
                         matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span>
                 </ng-template>
