@@ -181,8 +181,8 @@ export class CoursedetailsComponent implements OnInit {
       // this.lastpersentage = detail  && detail.persentage || this.localper ;
       this.loading = true;
       this.playerModuleAndTopic(true);
-      this.refreshData();
-      this.autoHide();
+      // this.refreshData();
+      // this.autoHide();
       this.getPlayerNextPrve();
       this.service.viewCurseByID(detail && detail.id || this.localStoCourseid, this.userDetail.user_id)
         .subscribe((viewCourse: any) => {
@@ -1047,6 +1047,7 @@ export class CoursedetailsComponent implements OnInit {
       this.autoHide();
     } else {
       clearInterval(this.dataRefresher);
+      this.sider = false;
     }
   }
 }

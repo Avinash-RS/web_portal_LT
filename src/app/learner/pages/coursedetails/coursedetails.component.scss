@@ -1,7 +1,7 @@
 @import "variable";
 
 .close-button {
-  background: $lxp-theme-green !important;
+  background: $lxp-theme-green !important; //red color
   float: right;
   top: -12px;
   position: relative;
@@ -11,7 +11,7 @@
 }
 
 .download-button {
-    background: $lxp-theme-green !important;
+    background: $lxp-theme-green !important; //red color
     float: right;
     position: relative;
     top: -12px;
@@ -152,10 +152,8 @@
     .Outine {
         font-size: 16px;
         font-weight: 400px;
-        margin-left: -4px;
         width: 142px;
-        // position: relative;
-        // left: 31px;
+        right: 14px;
     }
 
     button:focus,
@@ -639,7 +637,7 @@
     /* For Desktop */
     @media only screen and(min-width: 620px){:host /deep/ .mat-ink-bar {
         height: 2px !important;
-        background-color: $lxp-theme-green !important;
+        background-color: $lxp-theme-green !important; //red color
     }
 
     .moduletime {
@@ -735,12 +733,21 @@
   }
 }
 :host ::ng-deep .mat-stepper-vertical-line::before {
-  position: absolute !important;
-  left: 4px !important;
+    left: -22px !important;
+    height: 33px;
+    content: '';
+    position: absolute;
+    top: -18px;
+    bottom: -16px;
+    left: 0;
+    border-left-width: 1px;
+    border-left-style: solid;
+
+ 
 }
 
 :host ::ng-deep .mat-step-header {
-    margin-left: 0.8% !important;
+    right: 10%;
     height: 0px;
 }
 :host ::ng-deep .mat-step-icon .mat-icon,
@@ -765,7 +772,7 @@
 }
 
 .bottom-border {
-  border-bottom: 3px solid $lxp-theme-green;
+  border-bottom: 3px solid $lxp-theme-green; //red color
   border-right: inset;
   border-left: inset;
   border-left-color: transparent;
@@ -775,7 +782,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   display: inline-block;
-  max-width: 270px;
+  max-width: 195px;
   overflow: hidden;
   font-size: 14px;
   font-weight: 500;
@@ -803,7 +810,7 @@
   width: 100%;
   color: $label;
   // position: fixed;
-  z-index: 1;
+  z-index: 999999;
   font-weight: 500;
   background-color: $profile-t-grey;
   text-align: right;
@@ -837,7 +844,7 @@
     height: 37px;
     margin-bottom: 0;
     cursor: pointer;
-    border-bottom: 2px solid $lxp-theme-green;
+    border-bottom: 2px solid $lxp-theme-green; //red color
 
 }
 
@@ -849,35 +856,6 @@
 
 // }
 
-// / mobile
-@media(min-width: 481px) and(max-width: 767px) {
-    .drawer {
-        width: 100% !important;
-    }
-
-    .player {
-        height: 284px !important;
-    }
-
-  .player {
-    height: 284px !important;
-  }
-}
-
-
-@media(min-width: 320px) and(max-width: 480px) {
-    .drawer {
-        width: 100% !important;
-    }
-
-    .player {
-        height: 284px !important;
-    }
-
-  .player {
-    height: 284px !important;
-  }
-}
 
 // forum CSS
 
@@ -885,7 +863,7 @@
 
 .send_btn {
     -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: $lxp-theme-green;
+    -webkit-text-stroke-color: $lxp-theme-green; //red color
     -webkit-text-fill-color: transparent;
     font-size: 30px;
 }
@@ -919,7 +897,8 @@
   border-radius: 0 !important;
 }
 
-@media screen and (min-width: 320px) and (max-width: 760px) {
+// / mobile
+@media (min-width: 320px) and (max-width: 767px) {
   .createThreadDialog {
     width: 320px;
   }
@@ -927,21 +906,85 @@
     width: 100% !important;
   }
   .prevBtn {
-    margin-left: 55%;
+    margin-left: 45%;
     position: relative;
   }
+
+  .drawerClsTab {
+    bottom: 0px;
+  }
+
+  .drawer {
+    width: 95% !important;
 }
 
-@media screen and(min-width: 320px) and(max-width:760px) {
+.player {
+    height: 284px !important;
+}
+
+.player {
+height: 284px !important;
+}
+
+.black_bo {
+    border: 1px solid $color-border !important;
+}
+
+.black_bor {
+border-top: none !important;
+border-left: none !important;
+border-right: none !important;
+}
+
+.divider {
+    left: 10px !important;
+}
+
+.time {
+  left: 0px !important;
+}
+
+.panel {
+    margin-bottom: 10px;
+}
+
+.moduleund {
+    margin-left: 15px;
+    margin-bottom: 10px;
+  }
+  
+  .module-container {
+    margin-top: 10px;
+    height: 70px;
+}
+
+.exp-icon {
+    margin-top: 17px;
+}
+
+.moduleContainerRow {
+    margin-top: 10px;
+}
+
+.bg_color {
+    margin-left: 18px !important;
+}
+}
+@media (min-width: 768px) and (max-width: 991.98px) {
     .createThreadDialog {
-        width: 320px;
+        width: 600px;
+        position: relative;
     }
-    .forum-width {
-        width: 100% !important;
-    }
-}
+    .prevBtn {
+        margin-left: 75%;
+        position: relative;
+      }
 
-@media screen and(min-width: 768px) and(max-width:1024px) {
+      .drawer {
+          width: 50% !important;
+      }
+}
+@media (min-width: 992px) and (max-width:1024px) {
     .createThreadDialog {
         width: 600px;
         position: relative;
@@ -1010,7 +1053,7 @@
 }
 
 .bg-blue {
-    background-color: $lxp-theme-green;
+    background-color: $lxp-theme-green; //red color
 }
 
 .dialogButtons {
@@ -1056,7 +1099,7 @@
 .new_Thread {
   color: $color-white !important;
   border-radius: none !important;
-  background-color: $lxp-theme-green;
+  background-color: $lxp-theme-green; //red color
   border: none;
   // margin-right: 10px !important;
   float: right !important;
@@ -1065,7 +1108,7 @@
 .send-btn {
     color: $color-white !important;
     border-radius: none !important;
-    background-color: $lxp-theme-green;
+    background-color: $lxp-theme-green; //red color
     // width: 70px !important;
     height: 30px !important;
     display: inline-flex !important;
@@ -1083,7 +1126,7 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: $lxp-theme-green;
+  background-color: $lxp-theme-green; //red color
   cursor: inherit !important;
   color: $color-white;
   font-size: 18px;
@@ -1092,7 +1135,7 @@
 }
 
 .color-blue {
-  color: $lxp-theme-green;
+  color: $lxp-theme-green;  //red color
 }
 
 .black_border {
@@ -1117,7 +1160,7 @@
   padding-right: 25px;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: $profile-t-grey;
-  -webkit-text-fill-color: $lxp-theme-green;
+  -webkit-text-fill-color: $lxp-theme-green;  //red color
   font-size: 20px;
 }
 
@@ -1202,13 +1245,11 @@
     border-radius: 0 !important;
 }
 
-@media only screen and(min-width: 300px) and(max-width: 600px) {
-    .bg_color {
-        margin-left: 18px !important;
-    }
-}
+// @media only screen and(min-width: 300px) and(max-width: 600px) {
 
-@media only screen and(min-width: 300px) and(max-width: 770px) {
+// }
+
+//@media only screen and(min-width: 300px) and(max-width: 770px) {
     // .new_Thread {
     //     color: white !important;
     //     border-radius: none !important;
@@ -1224,16 +1265,8 @@
     // }
 
 
-    .black_bo {
-        border: 1px solid $color-border !important;
-    }
-
-  .black_bor {
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
-  }
-}
+ 
+// }
 
 .send_pos {
   margin-top: 42px;
@@ -1369,11 +1402,11 @@
 }
 .time {
     position: relative;
-    left: 19px;
+    right: 13px;
 }
 .divider {
     position: relative;
-    left: 52px;
+    left: 35px;
 }
 // .mar {
 //     left: 10px !important;
@@ -1392,6 +1425,12 @@
     height: 20 px;
 }
 // Ramya CSS ends here
+
+
+.closeBtn{
+    position: relative;
+    right: 7px;
+}
 
 .about-course {
 
@@ -1418,7 +1457,7 @@
  .drawer {
     position: fixed;
     height: 100vh;
-    width: 25% !important;
+    width: 25%;
     border-right: 1px solid #ccc;
 }
 .drawer .header {
@@ -1483,18 +1522,38 @@
 
 // /* About the course tab */
 .drawerClsAboutCourse {
-    margin-left: 4%;
+    margin-left: 2%;
 }
 
 .drawerOpnAboutCourse {
-    margin-left: 4%;
+    margin-left: 3%;
 }
 
 .drawerOpnResource {
-    margin-left: 3%;
+    margin-left: 2%;
     width: 74%;
 }
 .drawerClsResource {
     width: 100%;
 }
+.drawerOpnForum{
+    margin-left: 3%;
+    width: 74%;
+}
 
+.drawerClsForum{
+    width: 100%;
+}
+// ::ng-deep  .mat-tab-group.mat-primary .mat-ink-bar, .aboutCourseTab{
+//     visibility: visible !important;
+//     left: 225px !important;
+//     width: 105px !important;
+// }
+
+
+// ::ng-deep.mat-ink-bar, .aboutCourseTab{
+//     visibility: visible !important;
+//     left: 225px !important;
+//     width: 105px !important;    
+// }
+// Ramya CSS ends here
