@@ -556,13 +556,6 @@
 
     // :host ::ng-deep .mat-tab-header{
 
-:host ::ng-deep .mat-drawer-content {
-    margin-left: 0px !important;
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-    overflow: hidden !important;
-    margin-right: 0px !important;
-}
     //     display: flex;
     //     overflow: hidden;
     //     position: relative;
@@ -1466,6 +1459,7 @@
     z-index: 20;
     position: relative;
     right: 7px;
+    top: 2px;
 }
 
 
