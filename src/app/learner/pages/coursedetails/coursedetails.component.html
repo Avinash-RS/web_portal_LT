@@ -1,11 +1,14 @@
 <div>
     <!-- id="hideMe" -->
-    <span *ngIf="true">
+    <span *ngIf="sider">
         <app-header></app-header>
     </span>
 </div>
+<div style="height: 2px;" (mouseover)="sider=true">
 
+</div>
 <div class="container007 animated animatedFadeInUp fadeInUp">
+ 
     <div>
         <mat-drawer-container [class.drawer-opened]="drawer.opened" class="example-container">
             <mat-drawer #drawer class="drawer" mode="side" opened="{{sider}}">
