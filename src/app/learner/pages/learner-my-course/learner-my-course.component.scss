@@ -680,6 +680,7 @@ hr {
   top: 3px;
   font-size: 15px;
   left: 8px;
+  cursor: text !important;
 }
 .m-p-14 {
   margin-top: 14px;
@@ -1383,6 +1384,7 @@ hr {
 .dropdownicon {
   position: relative;
   top: 4px;
+  left: 5px;
 }
 // ::ng-deep .mat-menu-content {
 //   min-width: 146px !important;
@@ -1470,6 +1472,16 @@ hr {
   background: $lxp-icon !important;
 }
 
+::ng-deep .tooltip-inner {
+
+  opacity: 1 !important;
+}
+:host ::ng-deep .tooltip-arrow {
+  opacity: 1 !important;
+}
 .claimIcon:hover {
   cursor: not-allowed;
+}
+.alarmcursor {
+  cursor: text;
 }
