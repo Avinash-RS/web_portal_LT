@@ -126,7 +126,7 @@
 
                     </mat-tab>
                     <!-- about the course tab -->
-                    <mat-tab label="About the course">
+                    <mat-tab label="About the course" class="aboutCourseTab">
                         <div [ngClass]="drawer.opened==true?'drawerOpnAboutCourse':'drawerClsAboutCourse'">
                             <h3 class="head-h1">Course description</h3>
                             <div class="vertical"></div>
@@ -1189,6 +1189,13 @@
             </mat-tab-group>
     </div>
     </mat-drawer-container>
+
+
+    <div class="footer">
+        <span class="powered">
+            <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
+        </span>
+    </div>
 </div>
 
 
@@ -1196,11 +1203,7 @@
 
 </div>
 
-<div class="footer">
-    <span class="powered">
-        <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
-    </span>
-</div>
+
 
 <ng-template #popTemplate class="tooltip-container">
     <span class="singleline-text">
