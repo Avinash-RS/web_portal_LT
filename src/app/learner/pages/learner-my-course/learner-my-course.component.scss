@@ -679,6 +679,7 @@ hr {
   top: 3px;
   font-size: 15px;
   left: 8px;
+  cursor: text !important;
 }
 .m-p-14 {
   margin-top: 14px;
@@ -1443,4 +1444,7 @@ hr {
 }
 .claimIcon:hover {
   cursor: not-allowed;
+}
+.alarmcursor {
+  cursor: text;
 }
