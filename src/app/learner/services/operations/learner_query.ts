@@ -806,6 +806,7 @@ export const getLearnerenrolledCourses = gql`
           totalLearners
           assignmentCount
           forumCount
+          categoryName
           batchCourse
           upComingLiveClassRoom{
             courseid

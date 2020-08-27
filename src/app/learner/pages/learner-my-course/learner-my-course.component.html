@@ -88,9 +88,17 @@
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
-                                            <div >
-                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'primer_course'" src="assets/learner/primerFlag.svg"> 
-                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'free_course'" src="assets/learner/freeFlag.svg"> 
+                                            <div > 
+                                                <span *ngIf="course?.course_type === 'primer_course'">
+                                                <img *ngIf="course?.categoryName === 'college connect'" tooltip="College connect" placement="right" alt="flag" class="primerFlage"  src="assets/learner/primerC.svg"> 
+                                                <img *ngIf="course?.categoryName === 'vocational'"  tooltip="Vocational" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/primerV.svg"> 
+                                                <img *ngIf="course?.categoryName === 'pro certification'" tooltip="Pro certification" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/primerP.svg"> 
+                                            </span>
+                                            <span *ngIf="course?.course_type === 'free_course'" class="">
+                                                <img *ngIf="course?.categoryName === 'college connect'" tooltip="College connect" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/freeC.svg"> 
+                                                <img *ngIf="course?.categoryName === 'vocational'" tooltip="Vocational" alt="flag" placement="right" class="primerFlage"  src="../../../../assets/learner/freeV.svg"> 
+                                                <img *ngIf="course?.categoryName === 'pro certification'" tooltip="Pro certification" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/freeP.svg"> 
+                                                </span>
                                             </div>
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
                                        
@@ -285,9 +293,17 @@
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
-                                            <div >
-                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'primer_course'" src="assets/learner/primerFlag.svg"> 
-                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'free_course'" src="assets/learner/freeFlag.svg"> 
+                                            <div > 
+                                                <span *ngIf="course?.course_type === 'primer_course'">
+                                                <img *ngIf="course?.categoryName === 'college connect'" tooltip="College connect" placement="right" alt="flag" class="primerFlage"  src="assets/learner/primerC.svg"> 
+                                                <img *ngIf="course?.categoryName === 'vocational'"  tooltip="Vocational" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/primerV.svg"> 
+                                                <img *ngIf="course?.categoryName === 'pro certification'" tooltip="Pro certification" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/primerP.svg"> 
+                                            </span>
+                                            <span *ngIf="course?.course_type === 'free_course'" class="">
+                                                <img *ngIf="course?.categoryName === 'college connect'" tooltip="College connect" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/freeC.svg"> 
+                                                <img *ngIf="course?.categoryName === 'vocational'" tooltip="Vocational" alt="flag" placement="right" class="primerFlage"  src="../../../../assets/learner/freeV.svg"> 
+                                                <img *ngIf="course?.categoryName === 'pro certification'" tooltip="Pro certification" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/freeP.svg"> 
+                                                </span>
                                             </div>
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
                                             <div class="overlay">
@@ -478,9 +494,17 @@
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
-                                            <div >
-                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'primer_course'" src="assets/learner/primerFlag.svg"> 
-                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'free_course'" src="assets/learner/freeFlag.svg"> 
+                                            <div > 
+                                                <span *ngIf="course?.course_type === 'primer_course'">
+                                                <img *ngIf="course?.categoryName === 'college connect'" tooltip="College connect" placement="right" alt="flag" class="primerFlage"  src="assets/learner/primerC.svg"> 
+                                                <img *ngIf="course?.categoryName === 'vocational'"  tooltip="Vocational" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/primerV.svg"> 
+                                                <img *ngIf="course?.categoryName === 'pro certification'" tooltip="Pro certification" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/primerP.svg"> 
+                                            </span>
+                                            <span *ngIf="course?.course_type === 'free_course'" class="">
+                                                <img *ngIf="course?.categoryName === 'college connect'" tooltip="College connect" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/freeC.svg"> 
+                                                <img *ngIf="course?.categoryName === 'vocational'" tooltip="Vocational" alt="flag" placement="right" class="primerFlage"  src="../../../../assets/learner/freeV.svg"> 
+                                                <img *ngIf="course?.categoryName === 'pro certification'" tooltip="Pro certification" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/freeP.svg"> 
+                                                </span>
                                             </div>
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
                                             <div class="overlay">
@@ -681,9 +705,17 @@
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
-                                            <div >
-                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'primer_course'" src="assets/learner/primerFlag.svg"> 
-                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'free_course'" src="assets/learner/freeFlag.svg"> 
+                                            <div > 
+                                                <span *ngIf="course?.course_type === 'primer_course'">
+                                                <img *ngIf="course?.categoryName === 'college connect'" tooltip="College connect" placement="right" alt="flag" class="primerFlage"  src="assets/learner/primerC.svg"> 
+                                                <img *ngIf="course?.categoryName === 'vocational'"  tooltip="Vocational" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/primerV.svg"> 
+                                                <img *ngIf="course?.categoryName === 'pro certification'" tooltip="Pro certification" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/primerP.svg"> 
+                                            </span>
+                                            <span *ngIf="course?.course_type === 'free_course'" class="">
+                                                <img *ngIf="course?.categoryName === 'college connect'" tooltip="College connect" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/freeC.svg"> 
+                                                <img *ngIf="course?.categoryName === 'vocational'" tooltip="Vocational" alt="flag" placement="right" class="primerFlage"  src="../../../../assets/learner/freeV.svg"> 
+                                                <img *ngIf="course?.categoryName === 'pro certification'" tooltip="Pro certification" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/freeP.svg"> 
+                                                </span>
                                             </div>
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
                                             <div class="overlay">
