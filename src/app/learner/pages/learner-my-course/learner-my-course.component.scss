@@ -225,11 +225,13 @@
   html {
     overflow: scroll;
     overflow-x: hidden !important;
+    scroll-behavior: smooth !important;
   }
 
   ::-webkit-scrollbar {
     width: 0px;
     background: transparent !important;
+    scroll-behavior: smooth !important;
   }
 }
 
