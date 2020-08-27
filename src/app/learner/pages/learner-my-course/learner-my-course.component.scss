@@ -1464,8 +1464,10 @@ hr {
   position: relative;
   float: right;
   right: 20px;
-  /* top: 22px; */
   background: #5c6873 !important;
+  & .mat-badge-content {
+    background: $lxp-gray !important;
+  }
 }
 
 .contedrop {
