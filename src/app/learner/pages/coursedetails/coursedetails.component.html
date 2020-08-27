@@ -115,7 +115,7 @@
                 <mat-tab-group #demo3Tab [(selectedIndex)]="selectedTabIndex" #tabs animationDuration="1000ms"
                     (selectedTabChange)="tabSelection($event)"
                     [ngClass]="drawer.opened==true?'drawerOpnTab':'drawerClsTab'">
-                    <mat-tab label="{{course?.course_name | titlecase }}">
+                    <mat-tab label="{{(course.course_name?.length > 33)?(course.course_name | slice:0:33)+'...':(course.course_name)}}">
 
                         <div [ngClass]="drawer.opened==true?'example-sidenav-content-opn':'example-sidenav-content-cls'"
                             class="">
