@@ -1542,7 +1542,9 @@ border-right: none !important;
 }
 
 .drawerClsForum{
-    width: 100%;
+    width: 70% !important;
+    margin: auto !important;
+    display: block !important;
 }
 // ::ng-deep  .mat-tab-group.mat-primary .mat-ink-bar, .aboutCourseTab{
 //     visibility: visible !important;
