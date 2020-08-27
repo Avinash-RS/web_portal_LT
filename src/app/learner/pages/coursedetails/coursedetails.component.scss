@@ -849,35 +849,6 @@
 
 // }
 
-// / mobile
-@media(min-width: 481px) and(max-width: 767px) {
-    .drawer {
-        width: 100% !important;
-    }
-
-    .player {
-        height: 284px !important;
-    }
-
-  .player {
-    height: 284px !important;
-  }
-}
-
-
-@media(min-width: 320px) and(max-width: 480px) {
-    .drawer {
-        width: 100% !important;
-    }
-
-    .player {
-        height: 284px !important;
-    }
-
-  .player {
-    height: 284px !important;
-  }
-}
 
 // forum CSS
 
@@ -919,7 +890,8 @@
   border-radius: 0 !important;
 }
 
-@media screen and (min-width: 320px) and (max-width: 760px) {
+// / mobile
+@media (min-width: 320px) and (max-width: 767px) {
   .createThreadDialog {
     width: 320px;
   }
@@ -927,21 +899,85 @@
     width: 100% !important;
   }
   .prevBtn {
-    margin-left: 55%;
+    margin-left: 45%;
     position: relative;
   }
+
+  .drawerClsTab {
+    bottom: 0px;
+  }
+
+  .drawer {
+    width: 95% !important;
 }
 
-@media screen and(min-width: 320px) and(max-width:760px) {
+.player {
+    height: 284px !important;
+}
+
+.player {
+height: 284px !important;
+}
+
+.black_bo {
+    border: 1px solid $color-border !important;
+}
+
+.black_bor {
+border-top: none !important;
+border-left: none !important;
+border-right: none !important;
+}
+
+.divider {
+    left: 10px !important;
+}
+
+.time {
+  left: 0px !important;
+}
+
+.panel {
+    margin-bottom: 10px;
+}
+
+.moduleund {
+    margin-left: 15px;
+    margin-bottom: 10px;
+  }
+  
+  .module-container {
+    margin-top: 10px;
+    height: 70px;
+}
+
+.exp-icon {
+    margin-top: 17px;
+}
+
+.moduleContainerRow {
+    margin-top: 10px;
+}
+
+.bg_color {
+    margin-left: 18px !important;
+}
+}
+@media (min-width: 768px) and (max-width: 991.98px) {
     .createThreadDialog {
-        width: 320px;
+        width: 600px;
+        position: relative;
     }
-    .forum-width {
-        width: 100% !important;
-    }
-}
+    .prevBtn {
+        margin-left: 75%;
+        position: relative;
+      }
 
-@media screen and(min-width: 768px) and(max-width:1024px) {
+      .drawer {
+          width: 50% !important;
+      }
+}
+@media (min-width: 992px) and (max-width:1024px) {
     .createThreadDialog {
         width: 600px;
         position: relative;
@@ -1202,13 +1238,11 @@
     border-radius: 0 !important;
 }
 
-@media only screen and(min-width: 300px) and(max-width: 600px) {
-    .bg_color {
-        margin-left: 18px !important;
-    }
-}
+// @media only screen and(min-width: 300px) and(max-width: 600px) {
 
-@media only screen and(min-width: 300px) and(max-width: 770px) {
+// }
+
+//@media only screen and(min-width: 300px) and(max-width: 770px) {
     // .new_Thread {
     //     color: white !important;
     //     border-radius: none !important;
@@ -1224,16 +1258,8 @@
     // }
 
 
-    .black_bo {
-        border: 1px solid $color-border !important;
-    }
-
-  .black_bor {
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
-  }
-}
+ 
+// }
 
 .send_pos {
   margin-top: 42px;
@@ -1418,7 +1444,7 @@
  .drawer {
     position: fixed;
     height: 100vh;
-    width: 25% !important;
+    width: 25%;
     border-right: 1px solid #ccc;
 }
 .drawer .header {
