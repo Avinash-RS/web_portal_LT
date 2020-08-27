@@ -11,7 +11,7 @@
             <mat-drawer #drawer class="drawer" mode="side" opened="{{sider}}">
 
                 <mat-toolbar class="header">
-                    <mat-icon class="close" *ngIf="drawer.opened" (click)="drawer.close()">close</mat-icon>
+                    <mat-icon class="closeBtn" *ngIf="drawer.opened" (click)="drawer.close()">close</mat-icon>
                     <mat-icon *ngIf="!drawer.opened" (click)="drawer.toggle()">
                         menu
                     </mat-icon>
@@ -74,7 +74,7 @@
                             </mat-expansion-panel-header>
                             <div class="row">
                                 <div class="col-12">
-                                    <mat-vertical-stepper [linear]="isLeaner">
+                                    <mat-vertical-stepper class="" [linear]="isLeaner">
                                         <ng-container *ngFor="let mod of res?.children; let j = index">
                                             <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
                                                 mod.status === 'Process' ? 'colYellow' : 'colWhite'">
@@ -324,13 +324,15 @@
 
 
 
-                                                                    <div class="row ">
+                                                                    <div class="row">
                                                                         <div class="col-2 no-cursor">
                                                                             <div class="row">
                                                                                 <span
                                                                                     class="singleline-text "><b>{{'Assignment name' | translate }}</b></span>
                                                                             </div>
                                                                             <div class="row">
+
+                                                                                
                                                                                 <img *ngIf="file.doc_type == 'application/pdf'"
                                                                                     class="size" alt=""
                                                                                     src="assets/learner/fileicon/PDF_Icon.svg">
@@ -375,17 +377,8 @@
                                                                                 *ngIf="file?.size">
                                                                                 {{file.size}}
                                                                             </div>
-                                                                            <div class="col-1">
-                                                                                <a href="{{file?.path}}"
-                                                                                    (click)=" add_topic_reference(res)"
-                                                                                    download>
-                                                                                    <mat-icon
-                                                                                        style="color: #333;font-size: 20px;">
-                                                                                        save_alt </mat-icon>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+                                                                                                                                                  </div>
+                                                                   
                                                                     <div class="col-1 no-cursor">
                                                                         <div class="row">
                                                                             <span><b>{{'Question' | translate }}</b></span>
@@ -508,6 +501,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                </div>
                                                                 </div>
                                                             </div>
                                          
