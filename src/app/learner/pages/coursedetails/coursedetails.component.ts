@@ -1047,6 +1047,7 @@ export class CoursedetailsComponent implements OnInit {
       this.autoHide();
     } else {
       clearInterval(this.dataRefresher);
+      this.sider = false;
     }
   }
 }

@@ -102,7 +102,7 @@
                         menu
                     </mat-icon>
 
-                    <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'">
+                    <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'" *ngIf="sider">
                         <button class=" pointer" mat-button [disabled]="isprevEnable"
                             (click)="topicPrve()">{{'Prev' | translate }}</button>
                         <span class="">|</span>
