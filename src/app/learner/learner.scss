@@ -514,4 +514,11 @@ color: $lxp-theme-green;
 ::ng-deep .mat-tab-label:last-child {
   padding-left: calc(50%) !important; 
 }
+/* tooltip class */
+::ng-deep .tooltip-inner {
 
+  opacity: 0.9 !important;
+}
+:host ::ng-deep .tooltip-arrow {
+  opacity: 0.9 !important;
+}
