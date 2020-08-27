@@ -250,7 +250,20 @@
 ::ng-deep.cal-month-view .cal-day-cell:not(:last-child) {
     border-right-color: #b3b2b2;
 }
-
+.footer {
+    padding: 15px;
+    font-size: inherit;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: $label;
+    // position: fixed;
+    z-index: 999999;
+    font-weight: 500;
+    background-color: $profile-t-grey;
+    text-align: right;
+    border-top: 2px solid $profile-p-grey;
+  }
 
 // @import "variable";
 // #insidecard.uk-card-default {

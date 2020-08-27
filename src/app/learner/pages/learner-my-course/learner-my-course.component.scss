@@ -507,10 +507,12 @@ hr {
 :host ::ng-deep .mat-progress-bar-fill::after {
   background-color: $lxp-gray !important;
 }
-
-:host ::ng-deep .mat-badge-content {
-  color: $color-white;
-  background: $lxp-gray !important;
+.tabsc{
+ & .mat-badge-content {
+    color: $color-white;
+    background: $lxp-gray !important;
+  }
+  
 }
 
 .mat-progress-bar {
@@ -1341,13 +1343,19 @@ hr {
   padding: 0px;
   // height: 40px;
   /* margin-bottom: 28px; */
-  color: #b8b8b8;
+  color: #a2a2a2;
+  & .mat-badge-content{
+    background: #bab9b9 !important;
+  }
 }
 
 .catnamesss:focus {
   border-bottom: 2px solid $lxp-theme-green !important;
   color: $color-blank !important;
   padding-bottom: 10px;
+  & .mat-badge-content{
+    background: $lxp-gray !important;
+  }
 }
 .catPost {
   position: absolute;
@@ -1362,7 +1370,7 @@ hr {
   background-color: $lxp-theme-green;
 }
 .cathd1 {
-  // margin-right: 50px;
+ padding-right: 10px;
 }
 .btnredClass {
   width: 67%;
@@ -1456,8 +1464,10 @@ hr {
   position: relative;
   float: right;
   right: 20px;
-  /* top: 22px; */
   background: #5c6873 !important;
+  & .mat-badge-content {
+    background: $lxp-gray !important;
+  }
 }
 
 .contedrop {
@@ -1467,10 +1477,10 @@ hr {
 .contedrop:hover {
   background: #cecece !important;
 }
-:host ::ng-deep mat-badge-content {
-  color: $color-white;
-  background: $lxp-icon !important;
-}
+// :host ::ng-deep mat-badge-content {
+//   color: $color-white;
+//   background: $lxp-icon !important;
+// }
 
 ::ng-deep .tooltip-inner {
 

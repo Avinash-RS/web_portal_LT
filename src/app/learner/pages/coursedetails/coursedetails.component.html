@@ -1,11 +1,9 @@
-<div>
-    <!-- id="hideMe" -->
-    <span *ngIf="true">
+
+    <span *ngIf="sider">
         <app-header></app-header>
     </span>
-</div>
-
-<div class="container007 animated animatedFadeInUp fadeInUp">
+<div style="height: 2px;" (mouseover)="sider=true"></div>
+<div class="container007 animated animatedFadeInUp fadeInUp bodybg">
     <div>
         <mat-drawer-container [class.drawer-opened]="drawer.opened" class="example-container">
             <mat-drawer #drawer class="drawer" mode="side" opened="{{sider}}">
@@ -50,7 +48,7 @@
                                             <span class="custom-index" class='index-number'>{{i+1}}.</span>
                                         </div>
                                         <div>
-                                            <div class="moduleHead" tooltip="{{res?.title}}" placement="top">
+                                            <div class="moduleHead" tooltip="{{res?.title}}" placement="right">
                                                 <div class="modhead">{{res?.title }}</div>
                                             </div>
                                         </div>
@@ -288,7 +286,7 @@
                     <!-- assignment tab -->
                     <mat-tab label="Assignments" class="discussion_forum"
                         *ngIf="assignmentContent?.coursedetails.length">
-                        <div>
+                        <div [ngClass]="drawer.opened==true?'drawerOpnAss':'drawerClsAss'">
                             <mat-accordion>
                                 <ng-container>
                                     <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
@@ -548,7 +546,7 @@
                     <br>
                     <div *ngIf="showCourseDetails">
                         <div class="p-l-0 no_border">
-                            <div class="col-12 forum-width" >
+                            <div class="col-12 forum-width">
                                 <div class="row" *ngIf="selectedModuleData">
                                     <p (click)="gotoDisplayAllThreads()">
                                         <span
@@ -1179,18 +1177,8 @@
             </mat-tab>
             </mat-tab-group>
     </div>
-    </mat-drawer-container>
-
-
-    <div class="footer">
-        <span class="powered">
-            <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
-        </span>
-    </div>
+    </mat-drawer-container>  
 </div>
-
-
-
 
 </div>
 
@@ -1204,3 +1192,8 @@
 
     </span>
 </ng-template>
+<div class="footer">
+    <span class="powered">
+        <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
+    </span>
+</div>
