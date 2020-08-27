@@ -1035,6 +1035,7 @@ export class CoursedetailsComponent implements OnInit {
       const createdby = this.course.created_by;
       this.Lservice.add_topic_reference(userid, batchid, courseid, moduleid, topicid, referenceid, referencestatus, createdby)
         .subscribe((result: any) => {
+        console.log(result);
         });
     }
 
