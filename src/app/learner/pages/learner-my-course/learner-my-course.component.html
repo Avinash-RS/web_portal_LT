@@ -76,7 +76,7 @@
             class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span (click)="getEnrolledCourses('','')" matBadge="{{onGoingCourseCount}}" matBadgeOverlap="false">{{'Ongoing' }}</span>
+                    <span class="tabsc" (click)="getEnrolledCourses('','')" matBadge="{{onGoingCourseCount}}" matBadgeOverlap="false">{{'Ongoing' }}</span>
                 </ng-template>
 
  <!-- Card start -->
@@ -280,7 +280,7 @@
             </mat-tab>
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span (click)="getEnrolledCourses('','')" matBadge="{{completedCourseCount}}" matBadgeOverlap="false">{{'Completed' | translate }}</span>
+                    <span class="tabsc" (click)="getEnrolledCourses('','')" matBadge="{{completedCourseCount}}" matBadgeOverlap="false">{{'Completed' | translate }}</span>
                 </ng-template>
                 <div *ngFor="let course of completed ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
@@ -483,7 +483,7 @@
             </mat-tab>
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span (click)="getEnrolledCourses('','')" matBadge="{{allCourseCount}}" matBadgeOverlap="false">{{'All' }}</span>
+                    <span class="tabsc" (click)="getEnrolledCourses('','')" matBadge="{{allCourseCount}}" matBadgeOverlap="false">{{'All' }}</span>
                 </ng-template>
                 <div *ngFor="let course of enrolledCourses ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
@@ -693,7 +693,7 @@
             <ng-container *ngFor="let categorytab of categoryDetails">
             <mat-tab disabled *ngIf="categorytab.enrollCount">
                 <ng-template disabled matTabLabel>
-                    <span class="template" (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
+                    <span class="template tabsc" (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
                       matBadge="{{categorytab.enrollCount}}"
                         matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span>
                 </ng-template>
