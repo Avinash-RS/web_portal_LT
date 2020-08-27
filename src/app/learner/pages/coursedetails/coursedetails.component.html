@@ -291,7 +291,7 @@
                     <!-- assignment tab -->
                     <mat-tab label="Assignments" class="discussion_forum"
                         *ngIf="assignmentContent?.coursedetails.length">
-                        <div>
+                        <div [ngClass]="drawer.opened==true?'drawerOpnAss':'drawerClsAss'">
                             <mat-accordion>
                                 <ng-container>
                                     <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
