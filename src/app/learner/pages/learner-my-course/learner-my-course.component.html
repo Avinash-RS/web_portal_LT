@@ -922,7 +922,8 @@
                  
                 </div><br>
                 <div class="row">
-                    <span class="courseName">{{course.course_name}}</span>
+
+                    <span class="courseName">{{(course.course_name?.length > 33)?(course.course_name | slice:0:33)+'...':(course.course_name)}}</span>
                 </div><br>
                 <div class="row">
                     <div class="col-12 center_align">
