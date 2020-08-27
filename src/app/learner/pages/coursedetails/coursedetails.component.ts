@@ -1030,7 +1030,7 @@ export class CoursedetailsComponent implements OnInit {
       const courseid = this.courseid;
       const moduleid = res.modulename;
       const topicid = res.moduledetails[0].topicname;
-      const referenceid = res. moduledetails[0].resourse.files[0]._id;
+      const referenceid = res.moduledetails[0].resourse.files[0]._id;
       const referencestatus = true;
       const createdby = this.course.created_by;
       this.Lservice.add_topic_reference(userid, batchid, courseid, moduleid, topicid, referenceid, referencestatus, createdby)
@@ -1040,6 +1040,15 @@ export class CoursedetailsComponent implements OnInit {
 
   }
 
+  tabSelection(tab) {
+    console.log('selected tab', tab.index);
+    if (tab.index === 0) {
+      this.sider = true;
+      this.autoHide();
+    } else {
+      clearInterval(this.dataRefresher);
+    }
+  }
 }
 
 

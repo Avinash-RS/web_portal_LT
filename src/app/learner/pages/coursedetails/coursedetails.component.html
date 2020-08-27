@@ -8,7 +8,7 @@
 <div class="container007 animated animatedFadeInUp fadeInUp">
     <div>
         <mat-drawer-container [class.drawer-opened]="drawer.opened" class="example-container">
-            <mat-drawer #drawer class="drawer" mode="side" opened="true">
+            <mat-drawer #drawer class="drawer" mode="side" opened="{{sider}}">
 
                 <mat-toolbar class="header">
                     <mat-icon class="close" *ngIf="drawer.opened" (click)="drawer.close()">close</mat-icon>
