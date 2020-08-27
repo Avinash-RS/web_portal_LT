@@ -152,10 +152,8 @@
     .Outine {
         font-size: 16px;
         font-weight: 400px;
-        margin-left: -4px;
         width: 142px;
-        // position: relative;
-        // left: 31px;
+        right: 14px;
     }
 
     button:focus,
@@ -735,12 +733,21 @@
   }
 }
 :host ::ng-deep .mat-stepper-vertical-line::before {
-  position: absolute !important;
-  left: 4px !important;
+    left: -22px !important;
+    height: 33px;
+    content: '';
+    position: absolute;
+    top: -18px;
+    bottom: -16px;
+    left: 0;
+    border-left-width: 1px;
+    border-left-style: solid;
+
+ 
 }
 
 :host ::ng-deep .mat-step-header {
-    margin-left: 0.8% !important;
+    right: 10%;
     height: 0px;
 }
 :host ::ng-deep .mat-step-icon .mat-icon,
@@ -775,7 +782,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   display: inline-block;
-  max-width: 270px;
+  max-width: 195px;
   overflow: hidden;
   font-size: 14px;
   font-weight: 500;
@@ -1369,11 +1376,11 @@
 }
 .time {
     position: relative;
-    left: 19px;
+    right: 13px;
 }
 .divider {
     position: relative;
-    left: 52px;
+    left: 35px;
 }
 // .mar {
 //     left: 10px !important;
@@ -1392,6 +1399,12 @@
     height: 20 px;
 }
 // Ramya CSS ends here
+
+
+.closeBtn{
+    position: relative;
+    right: 7px;
+}
 
 .about-course {
 
@@ -1483,15 +1496,15 @@
 
 // /* About the course tab */
 .drawerClsAboutCourse {
-    margin-left: 4%;
+    margin-left: 2%;
 }
 
 .drawerOpnAboutCourse {
-    margin-left: 4%;
+    margin-left: 3%;
 }
 
 .drawerOpnResource {
-    margin-left: 3%;
+    margin-left: 2%;
     width: 74%;
 }
 .drawerClsResource {
