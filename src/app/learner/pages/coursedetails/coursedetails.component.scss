@@ -1,7 +1,7 @@
 @import "variable";
 
 .close-button {
-  background: $lxp-theme-green !important;
+  background: $lxp-theme-green !important; //red color
   float: right;
   top: -12px;
   position: relative;
@@ -11,7 +11,7 @@
 }
 
 .download-button {
-    background: $lxp-theme-green !important;
+    background: $lxp-theme-green !important; //red color
     float: right;
     position: relative;
     top: -12px;
@@ -480,8 +480,8 @@
     }
     .prevBtn {
         margin-left: 86.7%;
-        position: absolute;
-        top: 2%;
+        position: fixed;
+        margin-top: 0%;
         z-index: 99;
     }
 
@@ -639,7 +639,7 @@
     /* For Desktop */
     @media only screen and(min-width: 620px){:host /deep/ .mat-ink-bar {
         height: 2px !important;
-        background-color: $lxp-theme-green !important;
+        background-color: $lxp-theme-green !important; //red color
     }
 
     .moduletime {
@@ -765,7 +765,7 @@
 }
 
 .bottom-border {
-  border-bottom: 3px solid $lxp-theme-green;
+  border-bottom: 3px solid $lxp-theme-green; //red color
   border-right: inset;
   border-left: inset;
   border-left-color: transparent;
@@ -803,7 +803,7 @@
   width: 100%;
   color: $label;
   // position: fixed;
-  z-index: 1;
+  z-index: 999999;
   font-weight: 500;
   background-color: $profile-t-grey;
   text-align: right;
@@ -837,7 +837,7 @@
     height: 37px;
     margin-bottom: 0;
     cursor: pointer;
-    border-bottom: 2px solid $lxp-theme-green;
+    border-bottom: 2px solid $lxp-theme-green; //red color
 
 }
 
@@ -856,7 +856,7 @@
 
 .send_btn {
     -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: $lxp-theme-green;
+    -webkit-text-stroke-color: $lxp-theme-green; //red color
     -webkit-text-fill-color: transparent;
     font-size: 30px;
 }
@@ -1046,7 +1046,7 @@ border-right: none !important;
 }
 
 .bg-blue {
-    background-color: $lxp-theme-green;
+    background-color: $lxp-theme-green; //red color
 }
 
 .dialogButtons {
@@ -1092,7 +1092,7 @@ border-right: none !important;
 .new_Thread {
   color: $color-white !important;
   border-radius: none !important;
-  background-color: $lxp-theme-green;
+  background-color: $lxp-theme-green; //red color
   border: none;
   // margin-right: 10px !important;
   float: right !important;
@@ -1101,7 +1101,7 @@ border-right: none !important;
 .send-btn {
     color: $color-white !important;
     border-radius: none !important;
-    background-color: $lxp-theme-green;
+    background-color: $lxp-theme-green; //red color
     // width: 70px !important;
     height: 30px !important;
     display: inline-flex !important;
@@ -1119,7 +1119,7 @@ border-right: none !important;
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: $lxp-theme-green;
+  background-color: $lxp-theme-green; //red color
   cursor: inherit !important;
   color: $color-white;
   font-size: 18px;
@@ -1128,7 +1128,7 @@ border-right: none !important;
 }
 
 .color-blue {
-  color: $lxp-theme-green;
+  color: $lxp-theme-green;  //red color
 }
 
 .black_border {
@@ -1153,7 +1153,7 @@ border-right: none !important;
   padding-right: 25px;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: $profile-t-grey;
-  -webkit-text-fill-color: $lxp-theme-green;
+  -webkit-text-fill-color: $lxp-theme-green;  //red color
   font-size: 20px;
 }
 
@@ -1417,7 +1417,7 @@ border-right: none !important;
     margin-top: 8px;
     height: 20 px;
 }
-
+// Ramya CSS ends here
 
 .about-course {
 
@@ -1485,6 +1485,7 @@ border-right: none !important;
     z-index: 20;
     position: relative;
     right: 7px;
+    top: 2px;
 }
 
 
@@ -1522,4 +1523,24 @@ border-right: none !important;
 .drawerClsResource {
     width: 100%;
 }
+.drawerOpnForum{
+    margin-left: 3%;
+    width: 74%;
+}
+
+.drawerClsForum{
+    width: 100%;
+}
+// ::ng-deep  .mat-tab-group.mat-primary .mat-ink-bar, .aboutCourseTab{
+//     visibility: visible !important;
+//     left: 225px !important;
+//     width: 105px !important;
+// }
+
+
+// ::ng-deep.mat-ink-bar, .aboutCourseTab{
+//     visibility: visible !important;
+//     left: 225px !important;
+//     width: 105px !important;    
+// }
 // Ramya CSS ends here

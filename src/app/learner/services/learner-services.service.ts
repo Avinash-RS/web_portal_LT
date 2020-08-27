@@ -75,6 +75,7 @@ import {
   CreateNewThreadBid,
   claimcourse,
   user_mstr_data,
+  add_topic_reference,
   save_attendies
 } from './operations/learner_mutation';
 
@@ -799,6 +800,21 @@ export class LearnerServicesService {
     });
   }
 
+  add_topic_reference(user_id,batch_id,course_id,module_id,topic_id,reference_id,reference_status,created_by){
+    return this.Apollo.query({
+      query: add_topic_reference,
+      variables: {
+        user_id,
+        batch_id,
+        course_id,
+        module_id,
+        topic_id,
+        reference_id,
+        reference_status,
+        created_by
+      }
+    });
+  }
   saveAttendees(){
     return  this.Apollo.query({
       query: save_attendies,

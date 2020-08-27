@@ -16,7 +16,12 @@
   // cursor: pointer;
   font-size: 13px;
 }
-
+.primerFlage{
+  height: 70px;
+  width: 67px;
+  position: absolute;
+  margin-left: 20px;
+}
 .dot {
   font-size: 16px;
   font-weight: bolder;
@@ -979,14 +984,17 @@ hr {
   :host ::ng-deep #mat-tab-label-0-3 {
     display: block !important;
     padding: 14px 28px !important;
+    color: $lxp-dark-gray !important;
   }
   :host ::ng-deep #mat-tab-label-0-4 {
     display: block !important;
     padding: 14px 28px !important;
+    color: $lxp-dark-gray !important;
   }
   :host ::ng-deep #mat-tab-label-0-5 {
     display: block !important;
     padding: 14px 28px !important;
+    color: $lxp-dark-gray !important;
   }
 }
 

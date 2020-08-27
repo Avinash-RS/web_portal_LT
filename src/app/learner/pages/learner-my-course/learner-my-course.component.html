@@ -88,7 +88,12 @@
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
+                                            <div >
+                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'primer_course'" src="assets/learner/primerFlag.svg"> 
+                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'free_course'" src="assets/learner/freeFlag.svg"> 
+                                            </div>
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
+                                       
                                             <div class="overlay">
                                                 <mat-icon class="text"> play_arrow </mat-icon>
                                             </div>
@@ -101,8 +106,8 @@
                                                 <!-- {{course.course_name}} -->
                                                 
                                             </span>
-                                            <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
-                                            <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button>
+                                            <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
+                                            <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                                             <span class="span-with-icon">
                                                 <mat-icon class="timer"> alarm_on </mat-icon>
                                                 {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
@@ -280,6 +285,10 @@
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
+                                            <div >
+                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'primer_course'" src="assets/learner/primerFlag.svg"> 
+                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'free_course'" src="assets/learner/freeFlag.svg"> 
+                                            </div>
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
                                             <div class="overlay">
                                                 <mat-icon class="text"> play_arrow </mat-icon>
@@ -291,8 +300,8 @@
                                             <span>
                                                 {{course.course_name}}
                                             </span>
-                                            <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
-                                            <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button>
+                                            <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
+                                            <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                                             <div class="span-with-icon">
                                                 <mat-icon class="timer"> alarm_on </mat-icon>
                                                 {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
@@ -469,6 +478,10 @@
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
+                                            <div >
+                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'primer_course'" src="assets/learner/primerFlag.svg"> 
+                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'free_course'" src="assets/learner/freeFlag.svg"> 
+                                            </div>
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
                                             <div class="overlay">
                                                 <mat-icon class="text"> play_arrow </mat-icon>
@@ -480,8 +493,8 @@
                                             <span >
                                                 {{course.course_name}}
                                             </span>
-                                            <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
-                                            <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button>
+                                            <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
+                                            <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                                             <div class="span-with-icon">
                                                 <mat-icon class="timer"> alarm_on </mat-icon>
                                                 {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
@@ -650,9 +663,9 @@
            
             <div class="">
             <ng-container *ngFor="let categorytab of categoryDetails">
-            <mat-tab *ngIf="categorytab.enrollCount">
-                <ng-template matTabLabel class="template">
-                    <span (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
+            <mat-tab disabled *ngIf="categorytab.enrollCount">
+                <ng-template disabled matTabLabel>
+                    <span class="template" (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
                       matBadge="{{categorytab.enrollCount}}"
                         matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span>
                 </ng-template>
@@ -668,6 +681,10 @@
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
+                                            <div >
+                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'primer_course'" src="assets/learner/primerFlag.svg"> 
+                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'free_course'" src="assets/learner/freeFlag.svg"> 
+                                            </div>
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
                                             <div class="overlay">
                                                 <mat-icon class="text"> play_arrow </mat-icon>
@@ -679,8 +696,8 @@
                                             <span >
                                                 {{course.course_name}}
                                             </span>
-                                            <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
-                                            <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button>
+                                            <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
+                                            <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                                             <div class="span-with-icon">
                                                 <mat-icon class="timer"> alarm_on </mat-icon>
                                                 {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
