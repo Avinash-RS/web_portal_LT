@@ -313,8 +313,10 @@
                                     </div>
                                     <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2">
                                         <div class="f_size_18 f_wt_500 pointer">
-                                            <span>
-                                                {{course.course_name}}
+                                            <span tooltip="{{course.course_name}}" placement="right">
+                                                {{(course.course_name?.length > 33)?(course.course_name | slice:0:33)+'...':(course.course_name)}}
+                                                <!-- {{course.course_name}} -->
+                                                
                                             </span>
                                             <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
@@ -514,8 +516,10 @@
                                     </div>
                                     <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2 m-t-2">
                                         <div class=" f_size_18 f_wt_500 pointer">
-                                            <span >
-                                                {{course.course_name}}
+                                            <span tooltip="{{course.course_name}}" placement="right">
+                                                {{(course.course_name?.length > 33)?(course.course_name | slice:0:33)+'...':(course.course_name)}}
+                                                <!-- {{course.course_name}} -->
+                                                
                                             </span>
                                             <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
@@ -725,8 +729,10 @@
                                     </div>
                                     <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2 courceNameCol">
                                         <div class=" f_size_18 f_wt_500 pointer">
-                                            <span >
-                                                {{course.course_name}}
+                                            <span tooltip="{{course.course_name}}" placement="right">
+                                                {{(course.course_name?.length > 33)?(course.course_name | slice:0:33)+'...':(course.course_name)}}
+                                                <!-- {{course.course_name}} -->
+                                                
                                             </span>
                                             <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->

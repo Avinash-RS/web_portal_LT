@@ -1375,10 +1375,10 @@ border-right: none !important;
 
 ::ng-deep .tooltip-inner {
 
-    opacity: 0.6 !important;
+    opacity: 1 !important;
 }
 :host ::ng-deep .tooltip-arrow {
-    opacity: 0.6 !important;
+    opacity: 1 !important;
 }
 ::ng-deep .tooltip-350 ~ .tooltip .tooltip-inner {
     max-width: 220px;
