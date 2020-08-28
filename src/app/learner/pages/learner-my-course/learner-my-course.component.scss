@@ -884,10 +884,11 @@ hr {
 .template {
   display: none;
 }
-::ng-deep .mat-dialog-container {
+
+::ng-deep .cdk-overlay-pane {
   overflow-y: hidden !important;
   width: 75% !important;
-  height: 75% !important;
+  max-height: 85% !important;
   margin: auto;
 }
 
@@ -912,9 +913,9 @@ hr {
     float: right;
   }
 
-  ::ng-deep .mat-dialog-container {
+  ::ng-deep .cdk-overlay-pane {
     width: 95% !important;
-    height: 75% !important;
+    max-height: 85% !important;
     margin: auto;
   }
 
