@@ -18,9 +18,9 @@
 }
 .primerFlage{
   height: 70px;
-  width: 67px;
+  // width: 67px;
   position: absolute;
-  margin-left: 20px;
+  // margin-left: 20px;
   z-index: 1;
 }
 .dot {
@@ -209,6 +209,8 @@
   padding-left: 18px;
   padding-right: 18px;
   min-height: 100vh;
+  overflow: auto;
+  scroll-behavior: smooth !important;
   display: flex;
   background-color: $color-white;
 }
@@ -238,8 +240,8 @@
 .coursebg {
   background-color: $color_white;
   // margin-left: 1%;
-  margin-top: 1%;
-  margin-bottom: 1%;
+  // margin-top: 1%;
+  // margin-bottom: 1%;
   box-shadow: none;
 }
 
@@ -272,16 +274,16 @@
   width: 100%;
   height: 100%;
   margin: auto;
-  margin-left: 26px;
+  // margin-left: 26px;
   border-radius: 10px;
 }
 
 .courseHover {
   position: relative;
-  width: 150px;
-  height: 136px;
-  padding-top: 15px;
-  bottom: 1px;
+  // width: 150px;
+  height: 126px;
+  // padding-top: 15px;
+  // bottom: 1px;
   // padding: 5px 0;
   // padding: 15px 0;
 }
@@ -289,13 +291,13 @@
 .overlay {
   position: absolute;
   bottom: 1%;
-  left: 25px;
+  // left: 25px;
   right: 0;
   /* padding: 15px 0; */
   background-color: #0000001f;
   overflow: hidden;
   width: 0;
-  height: 89%;
+  height: 98%;
   transition: 0.7s ease;
   border-radius: 10px;
 }
@@ -618,8 +620,8 @@ hr {
 
 .upcoming {
   position: relative;
-  bottom: 22px;
-  left: 3px;
+  // bottom: 22px;
+  // left: 3px;
 }
 .tabside {
   color: $color-blank;
@@ -693,7 +695,7 @@ hr {
   position: relative;
   cursor: pointer;
   font-size: 12px;
-  margin-top: 15%;
+  // margin-top: 15%;
   left: -94%;
 }
 
@@ -893,6 +895,9 @@ hr {
 
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
+  .coursename{
+    margin-top: 5px;
+  }
   .catalogDropdownCol {
     margin-top: 0.5rem;
     padding-right: 1.5rem;
@@ -1014,6 +1019,9 @@ hr {
   .courseImg {
     margin-left: 15px;
   }
+  .coursename{
+    margin-top: 5px;
+  }
   .color_black2 {
     padding-left: 0px;
   }
@@ -1115,6 +1123,9 @@ hr {
   .btl-alin {
     margin-left: -8%;
   }
+  .coursename{
+    margin-top: 5px;
+  }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1024px) and (orientation: portrait) {
@@ -1122,7 +1133,9 @@ hr {
     max-height: 175px !important;
     min-height: 40px;
   }
-
+.coursename{
+  margin-top: 5px;
+}
   .courseHover {
     width: 100% !important;
     height: 200px !important;
@@ -1432,7 +1445,7 @@ hr {
   color: $color-white;
 }
 .h-50{
-  height: 50px !important;
+  height: 55px !important;
 }
 
 .dropbtn {
