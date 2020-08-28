@@ -30,7 +30,7 @@
         </span>   -->
         <div class="dropdown">
             <button class="dropbtn">{{catalogueDetails?.catalogueName | titlecase}} <mat-icon class="dropdownicon">expand_more</mat-icon></button>
-            <div class="dropdown-content">
+            <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'">
               <div class="contedrop" *ngFor="let category of categoryDetails" (click)="getCoureBasedOnCatalog(catalogueDetails,category,previewDialog);
               viewCourse(category,previewDialog)"  >
                 <span>{{category.categoryName | titlecase}}</span>
