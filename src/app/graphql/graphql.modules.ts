@@ -66,9 +66,7 @@ export class GraphqlModule {
           );
           if (message.includes('TokenExpiredError') || message.includes('JsonWebTokenError')) {
             localStorage.clear();
-            this.httpC.get(this.services.getIpAddressByUrl()).subscribe((res: any) => {
-              localStorage.setItem('Systemip', res.ip);
-            });
+            this.services.getIpAddressByUrl();
             this.gs.checkLogout();
           }
         }

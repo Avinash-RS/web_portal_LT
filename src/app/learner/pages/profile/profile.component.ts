@@ -637,9 +637,7 @@ export class ProfileComponent implements OnInit {
         if (password.data.get_change_password_updateprofile.success === 'true') {
           Swal.fire(password.data.get_change_password_updateprofile.message);
           localStorage.clear();
-          this.httpC.get(this.services.getIpAddressByUrl()).subscribe((res: any) => {
-            localStorage.setItem('Systemip', res.ip);
-          });
+          this.services.getIpAddressByUrl()
           this.dialog.closeAll();
           this.router.navigate(['/Learner/login']);
         } else {

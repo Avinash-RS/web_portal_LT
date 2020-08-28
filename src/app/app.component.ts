@@ -19,7 +19,7 @@ import { environment } from '@env/environment.collageConnect';
   animations: [ slideInAnimation ]
 })
 export class AppComponent implements OnInit {
-  ipAddress = '';
+  // ipAddress = '';
   title = 'LXP';
   isLoader = false;
   loaderSubscription: Subscription;
@@ -33,7 +33,8 @@ export class AppComponent implements OnInit {
               public Lservice: LearnerServicesService,
 
   ) {
-    this.getIPAddress();
+    // this.getIPAddress();
+    this.commonService.getIpAddressByUrl();
     // this.getorganizationbyiddetails();
   }
 
@@ -81,10 +82,10 @@ export class AppComponent implements OnInit {
   }
 
   getIPAddress() {
-    this.http.get(this.commonService.getIpAddressByUrl()).subscribe((res: any) => {
-      this.ipAddress = res.ip;
-      localStorage.setItem('Systemip', this.ipAddress ? this.ipAddress : '' );
-    });
+    // this.http.get(this.commonService.getIpAddressByUrl()).subscribe((res: any) => {
+    //   this.ipAddress = res.ip;
+    //   localStorage.setItem('Systemip', this.ipAddress ? this.ipAddress : '' );
+    // });
   }
 
   ngOnDestroy(): void {
