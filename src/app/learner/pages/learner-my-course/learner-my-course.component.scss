@@ -21,6 +21,7 @@
   width: 67px;
   position: absolute;
   margin-left: 20px;
+  z-index: 1;
 }
 .dot {
   font-size: 16px;
@@ -224,11 +225,13 @@
   html {
     overflow: scroll;
     overflow-x: hidden !important;
+    scroll-behavior: smooth !important;
   }
 
   ::-webkit-scrollbar {
     width: 0px;
     background: transparent !important;
+    scroll-behavior: smooth !important;
   }
 }
 
@@ -246,7 +249,7 @@
 }
 
 :host ::ng-deep.mat-card {
-  padding: 0%;
+  padding: 16px !important;
   border-radius: 0px;
 }
 
@@ -506,10 +509,12 @@ hr {
 :host ::ng-deep .mat-progress-bar-fill::after {
   background-color: $lxp-gray !important;
 }
-
-:host ::ng-deep .mat-badge-content {
-  color: $color-white;
-  background: $lxp-gray !important;
+.tabsc{
+ & .mat-badge-content {
+    color: $color-white;
+    background: $lxp-gray !important;
+  }
+  
 }
 
 .mat-progress-bar {
@@ -679,6 +684,7 @@ hr {
   top: 3px;
   font-size: 15px;
   left: 8px;
+  cursor: text !important;
 }
 .m-p-14 {
   margin-top: 14px;
@@ -891,6 +897,12 @@ hr {
     margin-top: 0.5rem;
     padding-right: 1.5rem;
   }
+  .primerFlage{
+    height: 75px;
+    position: absolute;
+    margin-left: -4px;
+    z-index: 1;
+  }
 
   #cdk-overlay-0 {
     width: 95%;
@@ -1046,6 +1058,13 @@ hr {
   .catalogTitle {
     margin: auto;
   }
+  .primerFlage{
+    height: 75px;
+    position: absolute;
+    margin-left: -4px;
+    z-index: 1;
+  }
+
 }
 
 // @media (max-width: 480px) and (max-width: 320px) {
@@ -1269,12 +1288,28 @@ hr {
   position: relative;
   /* left: 10px; */
   font-size: 18px;
+  // padding: 0px 19px;
+  color: #3f444a;
+  font-size: 18px;
+  font-weight: 600 !important;
+}
+.courseName1{
+  position: relative;
+  /* left: 10px; */
+  font-size: 18px;
   padding: 0px 19px;
   color: #3f444a;
   font-size: 18px;
   font-weight: 600 !important;
 }
-
+:host ::ng-deep body ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 5px !important;
+    height: 5px !important;
+}
+::-webkit-scrollbar {
+  width: 5px !important;
+}
 .size {
   font-size: large;
 }
@@ -1326,13 +1361,19 @@ hr {
   padding: 0px;
   // height: 40px;
   /* margin-bottom: 28px; */
-  color: #b8b8b8;
+  color: #a2a2a2;
+  & .mat-badge-content{
+    background: #bab9b9 !important;
+  }
 }
 
 .catnamesss:focus {
   border-bottom: 2px solid $lxp-theme-green !important;
   color: $color-blank !important;
   padding-bottom: 10px;
+  & .mat-badge-content{
+    background: $lxp-gray !important;
+  }
 }
 .catPost {
   position: absolute;
@@ -1347,7 +1388,7 @@ hr {
   background-color: $lxp-theme-green;
 }
 .cathd1 {
-  // margin-right: 50px;
+ padding-right: 10px;
 }
 .btnredClass {
   width: 67%;
@@ -1369,6 +1410,7 @@ hr {
 .dropdownicon {
   position: relative;
   top: 4px;
+  left: 5px;
 }
 // ::ng-deep .mat-menu-content {
 //   min-width: 146px !important;
@@ -1389,12 +1431,16 @@ hr {
 .lxp-text:hover {
   color: $color-white;
 }
+.h-50{
+  height: 50px !important;
+}
 
 .dropbtn {
   background-color: $color-white;
   color: #898989;
   padding: 6px;
   font-size: 16px;
+  padding-left: 6px;
   border: none;
   // border-radius: 11px;
   border: 1px solid #898989;
@@ -1443,8 +1489,10 @@ hr {
   position: relative;
   float: right;
   right: 20px;
-  /* top: 22px; */
   background: #5c6873 !important;
+  & .mat-badge-content {
+    background: $lxp-gray !important;
+  }
 }
 
 .contedrop {
@@ -1454,11 +1502,28 @@ hr {
 .contedrop:hover {
   background: #cecece !important;
 }
-:host ::ng-deep mat-badge-content {
-  color: $color-white;
-  background: $lxp-icon !important;
-}
+// :host ::ng-deep mat-badge-content {
+//   color: $color-white;
+//   background: $lxp-icon !important;
+// }
 
+::ng-deep .tooltip-inner {
+
+  opacity: 1 !important;
+}
+:host ::ng-deep .tooltip-arrow {
+  opacity: 1 !important;
+}
 .claimIcon:hover {
   cursor: not-allowed;
+}
+.alarmcursor {
+  cursor: text;
+}
+::ng-deep .primerFlage ~ .tooltip{
+// transform: translateX(30px) !important;
+// transform: translateY(5px) !important;
+// position: relative !important;
+// top: 150px !important;
+// right: 2px !important;
 }

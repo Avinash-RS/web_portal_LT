@@ -76,7 +76,7 @@
             class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span (click)="getEnrolledCourses('','')" matBadge="{{onGoingCourseCount}}" matBadgeOverlap="false">{{'Ongoing' }}</span>
+                    <span class="tabsc" (click)="getEnrolledCourses('','')" matBadge="{{onGoingCourseCount}}" matBadgeOverlap="false">{{'Ongoing' }}</span>
                 </ng-template>
 
  <!-- Card start -->
@@ -88,9 +88,17 @@
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
-                                            <div >
-                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'primer_course'" src="assets/learner/primerFlag.svg"> 
-                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'free_course'" src="assets/learner/freeFlag.svg"> 
+                                            <div > 
+                                                <span *ngIf="course?.course_type === 'primer_course'">
+                                                <img *ngIf="course?.categoryName === 'college connect'" tooltip="College connect" placement="right" alt="flag" class="primerFlage"  src="assets/learner/primerC.svg"> 
+                                                <img *ngIf="course?.categoryName === 'vocational'"  tooltip="Vocational" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/primerV.svg"> 
+                                                <img *ngIf="course?.categoryName === 'pro certification'" tooltip="Pro certification" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/primerP.svg"> 
+                                            </span>
+                                            <span *ngIf="course?.course_type === 'free_course'" class="">
+                                                <img *ngIf="course?.categoryName === 'college connect'" tooltip="College connect" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/freeC.svg"> 
+                                                <img *ngIf="course?.categoryName === 'vocational'" tooltip="Vocational" alt="flag" placement="right" class="primerFlage"  src="../../../../assets/learner/freeV.svg"> 
+                                                <img *ngIf="course?.categoryName === 'pro certification'" tooltip="Pro certification" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/freeP.svg"> 
+                                                </span>
                                             </div>
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
                                        
@@ -101,11 +109,8 @@
                                     </div>
                                     <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2">
                                         <div class=" f_size_18 f_wt_500 pointer">
-                                            <span tooltip="{{course.course_name}}" placement="right">
-                                                {{(course.course_name?.length > 33)?(course.course_name | slice:0:33)+'...':(course.course_name)}}
-                                                <!-- {{course.course_name}} -->
-                                                
-                                            </span>
+                                            <span  *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
+                                            <span  *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
                                             <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                                             <span class="span-with-icon">
@@ -114,7 +119,7 @@
                                             </span>
                                         </div>
                                         <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
+                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
                                                 (click)="gotoDesc(course)">
                                                 <p  class="">
                                                     {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
@@ -141,8 +146,8 @@
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                                                     <span class="cap f_wt_400 m-t-m-2">
-                                                        {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume ' : 
-                                                          course?.coursePlayerStatus?.status === 'suspend  ' ? 'Resume  ' : 'Start'  }}&nbsp;
+                                                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
+                                                          course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start'  }}&nbsp;
                                                     </span>
                                                 </button>
                                                 <button mat-stroked-button
@@ -167,7 +172,7 @@
                                     </div>
 
                                     <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
-                                        <div class="aligned-with-icon">
+                                        <div class="aligned-with-icon alarmcursor">
                                             <mat-icon class="timer"> alarm_on </mat-icon>
                                             {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
                                         </div>
@@ -177,8 +182,8 @@
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                                                     <span class="cap f_wt_400 m-t-m-2">
-                                                        {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume ' : 
-                                                          course?.coursePlayerStatus?.status === 'suspend  ' ? 'Resume  ' : 'Start'  }}&nbsp;
+                                                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
+                                                          course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start'  }}&nbsp;
                                                     </span>
                                                 </button>
                                                 <button mat-stroked-button
@@ -272,7 +277,7 @@
             </mat-tab>
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span (click)="getEnrolledCourses('','')" matBadge="{{completedCourseCount}}" matBadgeOverlap="false">{{'Completed' | translate }}</span>
+                    <span class="tabsc" (click)="getEnrolledCourses('','')" matBadge="{{completedCourseCount}}" matBadgeOverlap="false">{{'Completed' | translate }}</span>
                 </ng-template>
                 <div *ngFor="let course of completed ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
@@ -285,9 +290,17 @@
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
-                                            <div >
-                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'primer_course'" src="assets/learner/primerFlag.svg"> 
-                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'free_course'" src="assets/learner/freeFlag.svg"> 
+                                            <div > 
+                                                <span *ngIf="course?.course_type === 'primer_course'">
+                                                <img *ngIf="course?.categoryName === 'college connect'" tooltip="College connect" placement="right" alt="flag" class="primerFlage"  src="assets/learner/primerC.svg"> 
+                                                <img *ngIf="course?.categoryName === 'vocational'"  tooltip="Vocational" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/primerV.svg"> 
+                                                <img *ngIf="course?.categoryName === 'pro certification'" tooltip="Pro certification" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/primerP.svg"> 
+                                            </span>
+                                            <span *ngIf="course?.course_type === 'free_course'" class="">
+                                                <img *ngIf="course?.categoryName === 'college connect'" tooltip="College connect" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/freeC.svg"> 
+                                                <img *ngIf="course?.categoryName === 'vocational'" tooltip="Vocational" alt="flag" placement="right" class="primerFlage"  src="../../../../assets/learner/freeV.svg"> 
+                                                <img *ngIf="course?.categoryName === 'pro certification'" tooltip="Pro certification" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/freeP.svg"> 
+                                                </span>
                                             </div>
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
                                             <div class="overlay">
@@ -297,9 +310,8 @@
                                     </div>
                                     <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2">
                                         <div class="f_size_18 f_wt_500 pointer">
-                                            <span>
-                                                {{course.course_name}}
-                                            </span>
+                                            <span  *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
+                                            <span  *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
                                             <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                                             <div class="span-with-icon">
@@ -308,7 +320,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
+                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
                                                 (click)="gotoDesc(course)">
                                                 <p class="">
                                                     {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
@@ -361,7 +373,7 @@
                                     </div>
 
                                     <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
-                                        <div class="aligned-with-icon">
+                                        <div class="aligned-with-icon alarmcursor">
                                             <mat-icon class="timer"> alarm_on </mat-icon>
                                             {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
                                         </div>
@@ -465,7 +477,7 @@
             </mat-tab>
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span (click)="getEnrolledCourses('','')" matBadge="{{allCourseCount}}" matBadgeOverlap="false">{{'All' }}</span>
+                    <span class="tabsc" (click)="getEnrolledCourses('','')" matBadge="{{allCourseCount}}" matBadgeOverlap="false">{{'All' }}</span>
                 </ng-template>
                 <div *ngFor="let course of enrolledCourses ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
@@ -478,9 +490,17 @@
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
-                                            <div >
-                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'primer_course'" src="assets/learner/primerFlag.svg"> 
-                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'free_course'" src="assets/learner/freeFlag.svg"> 
+                                            <div > 
+                                                <span *ngIf="course?.course_type === 'primer_course'">
+                                                <img *ngIf="course?.categoryName === 'college connect'" tooltip="College connect" placement="right" alt="flag" class="primerFlage"  src="assets/learner/primerC.svg"> 
+                                                <img *ngIf="course?.categoryName === 'vocational'"  tooltip="Vocational" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/primerV.svg"> 
+                                                <img *ngIf="course?.categoryName === 'pro certification'" tooltip="Pro certification" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/primerP.svg"> 
+                                            </span>
+                                            <span *ngIf="course?.course_type === 'free_course'" class="">
+                                                <img *ngIf="course?.categoryName === 'college connect'" tooltip="College connect" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/freeC.svg"> 
+                                                <img *ngIf="course?.categoryName === 'vocational'" tooltip="Vocational" alt="flag" placement="right" class="primerFlage"  src="../../../../assets/learner/freeV.svg"> 
+                                                <img *ngIf="course?.categoryName === 'pro certification'" tooltip="Pro certification" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/freeP.svg"> 
+                                                </span>
                                             </div>
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
                                             <div class="overlay">
@@ -490,9 +510,8 @@
                                     </div>
                                     <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2 m-t-2">
                                         <div class=" f_size_18 f_wt_500 pointer">
-                                            <span >
-                                                {{course.course_name}}
-                                            </span>
+                                            <span  *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
+                                            <span  *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
                                             <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                                             <div class="span-with-icon">
@@ -501,7 +520,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
+                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
                                                 (click)="gotoDesc(course)">
                                                 <p class="">
                                                     {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
@@ -529,8 +548,8 @@
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                                                     <span class="cap f_wt_400  m-t-m-2">
-                                                        {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume  ' : 
-                                                        course?.coursePlayerStatus?.status === 'suspend ' ? 'Resume ' : 'Start' }}&nbsp;
+                                                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
+                                                        course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' }}&nbsp;
                                                     </span>
                                                 </button>
                                                 <button mat-stroked-button
@@ -555,7 +574,7 @@
                                     </div>
 
                                     <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
-                                        <div class="aligned-with-icon">
+                                        <div class="aligned-with-icon alarmcursor">
                                             <mat-icon class="timer"> alarm_on </mat-icon>
                                             {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
                                         </div>
@@ -565,8 +584,8 @@
                                                 class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                 <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                                                 <span class="cap f_wt_400  m-t-m-2">
-                                                    {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume  ' : 
-                                                    course?.coursePlayerStatus?.status === 'suspend ' ? 'Resume ' : 'Start' }}&nbsp;
+                                                    {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
+                                                    course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' }}&nbsp;
                                                 </span>
                                             </button>
                                             <button mat-stroked-button
@@ -663,9 +682,9 @@
            
             <div class="">
             <ng-container *ngFor="let categorytab of categoryDetails">
-            <mat-tab disabled *ngIf="categorytab.enrollCount">
+            <mat-tab  *ngIf="categorytab.enrollCount">
                 <ng-template disabled matTabLabel>
-                    <span class="template" (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
+                    <span class="template tabsc" (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
                       matBadge="{{categorytab.enrollCount}}"
                         matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span>
                 </ng-template>
@@ -681,9 +700,17 @@
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                                         <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
                                             data-target="#myModal">
-                                            <div >
-                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'primer_course'" src="assets/learner/primerFlag.svg"> 
-                                                <img alt="flag" class="primerFlage" *ngIf="course?.course_type === 'free_course'" src="assets/learner/freeFlag.svg"> 
+                                            <div > 
+                                                <span *ngIf="course?.course_type === 'primer_course'">
+                                                <img *ngIf="course?.categoryName === 'college connect'" tooltip="College connect" placement="right" alt="flag" class="primerFlage"  src="assets/learner/primerC.svg"> 
+                                                <img *ngIf="course?.categoryName === 'vocational'"  tooltip="Vocational" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/primerV.svg"> 
+                                                <img *ngIf="course?.categoryName === 'pro certification'" tooltip="Pro certification" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/primerP.svg"> 
+                                            </span>
+                                            <span *ngIf="course?.course_type === 'free_course'" class="">
+                                                <img *ngIf="course?.categoryName === 'college connect'" tooltip="College connect" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/freeC.svg"> 
+                                                <img *ngIf="course?.categoryName === 'vocational'" tooltip="Vocational" alt="flag" placement="right" class="primerFlage"  src="../../../../assets/learner/freeV.svg"> 
+                                                <img *ngIf="course?.categoryName === 'pro certification'" tooltip="Pro certification" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/freeP.svg"> 
+                                                </span>
                                             </div>
                                             <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
                                             <div class="overlay">
@@ -693,9 +720,8 @@
                                     </div>
                                     <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2 courceNameCol">
                                         <div class=" f_size_18 f_wt_500 pointer">
-                                            <span >
-                                                {{course.course_name}}
-                                            </span>
+                                            <span  *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
+                                            <span  *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
                                             <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                                             <div class="span-with-icon">
@@ -704,7 +730,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
+                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
                                                 (click)="gotoDesc(course)">
                                                 <p class="">
                                                     {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
@@ -719,8 +745,8 @@
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                                                     <span class="cap f_wt_400  m-t-m-2">
-                                                        {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume  ' : 
-                                                        course?.coursePlayerStatus?.status === 'suspend ' ? 'Resume ' : 'Start' }}&nbsp;
+                                                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
+                                                        course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' }}&nbsp;
                                                     </span>
                                                 </button>
                                                 <button mat-stroked-button
@@ -737,7 +763,7 @@
                                     </div>
 
                                     <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
-                                        <div class="aligned-with-icon">
+                                        <div class="aligned-with-icon alarmcursor">
                                             <mat-icon class="timer"> alarm_on </mat-icon>
                                             {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
                                         </div>
@@ -747,8 +773,8 @@
                                                 class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                 <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                                                 <span class="cap f_wt_400  m-t-m-2">
-                                                    {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume  ' : 
-                                                    course?.coursePlayerStatus?.status === 'suspend ' ? 'Resume ' : 'Start' }}&nbsp;
+                                                    {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
+                                                    course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' }}&nbsp;
                                                 </span>
                                             </button>
                                             <button mat-stroked-button
@@ -874,7 +900,7 @@
                             <img alt="course " src="{{course.course_img_url}}" class="courseImage image">
                             
                             <div class="overlayimage">
-                                <p class="shortdesc">
+                                <p class="shortdesc h-50">
                                     <!-- {{course.course_description}} -->
                                  {{(course.course_description?.length>122)? (course.course_description | slice:0:122)+'...':(course.course_description) }} 
                                 </p>
@@ -884,7 +910,8 @@
                  
                 </div><br>
                 <div class="row">
-                    <span class="courseName">{{course.course_name}}</span>
+                    <span class="courseName1" *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
+                    <span class="courseName1" *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
                 </div><br>
                 <div class="row">
                     <div class="col-12 center_align">
@@ -899,7 +926,7 @@
         </div>
 
 
-    <div class="col" *ngIf="allcourses.length<1">
+    <div class="col" *ngIf="allcourses?.length<1">
         <span style="font-size: medium;">
         No course found on {{catagoryName | titlecase}}.
         </span>
