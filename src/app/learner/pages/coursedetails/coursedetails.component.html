@@ -838,7 +838,7 @@
                         <!-- for posts -->
                         <div *ngFor="let post of topicDiscussionData?.posts; let pin = index;">
                             <div *ngIf="post.deleted === false">
-                                <mat-card *ngIf="pin !== 0" class="no-radius no_padding"
+                                <mat-card *ngIf="pin !== 0 && post.toPid === null" class="no-radius no_padding"
                                     [ngClass]="post.deleted === false ? 'black_border m-b-8 ' : 'black_border m-b-8 white_card'">
                                     <div class="black_border no_padding no_margin post-header">
                                         <div class="row padding_matcard">
