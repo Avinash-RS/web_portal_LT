@@ -81,7 +81,7 @@ export class AppComponent implements OnInit {
   }
 
   getIPAddress() {
-    this.http.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
+    this.http.get(this.commonService.getIpAddressByUrl()).subscribe((res: any) => {
       this.ipAddress = res.ip;
       localStorage.setItem('Systemip', this.ipAddress);
     });

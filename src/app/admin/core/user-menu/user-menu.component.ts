@@ -75,7 +75,7 @@ export class UserMenuComponent implements OnInit {
             if (logout.data.logout && logout.data.logout.success) {
               // localStorage.clear();
               this.http
-                .get('http://api.ipify.org/?format=json')
+                .get(this.services.getIpAddressByUrl())
                 .subscribe((res: any) => {
                   localStorage.setItem('Systemip', res.ip);
                 });
@@ -88,7 +88,7 @@ export class UserMenuComponent implements OnInit {
               ) {
                 // localStorage.clear();
                 this.http
-                  .get('http://api.ipify.org/?format=json')
+                  .get(this.services.getIpAddressByUrl())
                   .subscribe((res: any) => {
                     localStorage.setItem('Systemip', res.ip);
                   });

@@ -190,4 +190,7 @@ export class CommonServicesService {
       query: getDetailsCount
     });
   }
+  getIpAddressByUrl(){
+    return 'http://api.ipify.org/?format=json';
+  }
 }

@@ -80,7 +80,7 @@ export class HeaderComponent implements OnInit {
           if (logout.data.logout && logout.data.logout.success) {
             localStorage.clear();
             sessionStorage.clear();
-            this.http.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
+            this.http.get(this.services.getIpAddressByUrl()).subscribe((res: any) => {
               localStorage.setItem('Systemip', res.ip);
             });
             this.userDetailes = null;
@@ -91,7 +91,7 @@ export class HeaderComponent implements OnInit {
             if (logout.data.logout.error_msg === 'Authentication error. Token required.') {
               localStorage.clear();
               sessionStorage.clear();
-              this.http.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
+              this.http.get(this.services.getIpAddressByUrl()).subscribe((res: any) => {
                 localStorage.setItem('Systemip', res.ip);
               });
               this.userDetailes = null;

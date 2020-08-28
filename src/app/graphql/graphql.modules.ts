@@ -5,6 +5,7 @@ import { ApolloLink } from 'apollo-link';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { DefaultOptions } from 'apollo-client';
+import { CommonServicesService } from '@core/services/common-services.service'
 // import { environment } from '../../environments/environment';
 
 import { environment } from '@env/environment';
@@ -35,7 +36,8 @@ export class GraphqlModule {
   envApi: any = environment.apiUrl;
   envApiImg: any = environment.apiUrlImg;
   envCourseApi: any = environment.createCourseApi;
-  constructor(apollo: Apollo, httpLink: HttpLink, private gs: GlobalServiceService, private httpC: HttpClient, ) {
+  constructor(apollo: Apollo, httpLink: HttpLink, private gs: GlobalServiceService, private httpC: HttpClient, 
+    private services : CommonServicesService) {
     const http = httpLink.create({ uri: this.envApi + 'graphql' });
     const middleware = new ApolloLink((operation, forward) => {
 
@@ -61,7 +63,7 @@ export class GraphqlModule {
           // );
           if (message === 'TokenExpiredError: jwt expired' || message === ' JsonWebTokenError: jwt must be a string') {
             localStorage.clear();
-            this.httpC.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
+            this.httpC.get(this.services.getIpAddressByUrl()).subscribe((res: any) => {
               localStorage.setItem('Systemip', res.ip);
             });
             this.gs.checkLogout();
