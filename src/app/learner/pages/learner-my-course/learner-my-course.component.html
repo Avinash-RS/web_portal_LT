@@ -63,7 +63,7 @@
 <!-- tabs here -->
 <div class="row bodybg">
     <div class="col-12">
-        <div class="catPost">
+        <!-- <div class="catPost">
             <span *ngFor="let namesss of categoryDetails" class="cathd1">
                 <button *ngIf="namesss.enrollCount"  
                 class="catnamesss" matBadge="{{namesss.enrollCount}}"
@@ -71,7 +71,7 @@
                  (click)="selectedIndex = 3; getEnrolledCourses(catalogueDetails.catalogueId,namesss.categoryId)"> {{namesss.categoryName | titlecase}}</button>
             </span>
             <span></span>
-            </div>
+            </div> -->
         <mat-tab-group [(selectedIndex)]="selectedIndex" mat-align-tabs="start" animationDuration="1000ms"
             class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
             <mat-tab>
@@ -682,12 +682,15 @@
                 </div>
             </mat-tab>
             <!-----------------------------------Category tabs----------------------------->
-           
-            <div class="">
+           <mat-tab disabled></mat-tab>
+           <mat-tab disabled></mat-tab>
+           <mat-tab disabled></mat-tab>
+           <mat-tab disabled></mat-tab>
+            <!-- <div class=""> -->
             <ng-container *ngFor="let categorytab of categoryDetails">
             <mat-tab  *ngIf="categorytab.enrollCount">
-                <ng-template disabled matTabLabel>
-                    <span class="template tabsc" (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
+                <ng-template matTabLabel>
+                    <span class="tabsc" (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)"
                       matBadge="{{categorytab.enrollCount}}"
                         matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span>
                 </ng-template>
@@ -869,7 +872,7 @@
                 </div>
             </mat-tab>
         </ng-container>
-    </div>
+    <!-- </div> -->
         </mat-tab-group>
     </div>
 </div>
