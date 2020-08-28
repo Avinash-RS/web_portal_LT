@@ -886,8 +886,9 @@ hr {
 }
 ::ng-deep .mat-dialog-container {
   overflow-y: hidden !important;
-  width: 75% !important;
-  height: 75% !important;
+  // commenting because all popup are affecting -- please use aprent class
+  // width: 75% !important;
+  // height: 75% !important;
   margin: auto;
 }
 
