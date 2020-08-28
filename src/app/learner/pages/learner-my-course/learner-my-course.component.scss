@@ -1430,6 +1430,9 @@ hr {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+.dropdown-content1 {
+  display: none;
+}
 
 .dropdown:hover .dropbtn {
   background-color: $lxp-theme-green;
