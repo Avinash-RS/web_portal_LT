@@ -30,7 +30,7 @@
         </span>   -->
         <div class="dropdown">
             <button class="dropbtn">{{catalogueDetails?.catalogueName | titlecase}} <mat-icon class="dropdownicon">expand_more</mat-icon></button>
-            <div class="dropdown-content">
+            <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'">
               <div class="contedrop" *ngFor="let category of categoryDetails" (click)="getCoureBasedOnCatalog(catalogueDetails,category,previewDialog);
               viewCourse(category,previewDialog)"  >
                 <span>{{category.categoryName | titlecase}}</span>
@@ -107,13 +107,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2">
-                                        <div class=" f_size_18 f_wt_500 pointer">
-                                            <span tooltip="{{course.course_name}}" placement="right">
-                                                {{(course.course_name?.length > 33)?(course.course_name | slice:0:33)+'...':(course.course_name)}}
-                                                <!-- {{course.course_name}} -->
-                                                
-                                            </span>
+                                    <div class="col-6 col-sm-6 col-md-8 col-lg-7">
+                                        <div class=" f_size_18 f_wt_500 pointer coursename">
+                                            <span  *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
+                                            <span  *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
                                             <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                                             <span class="span-with-icon">
@@ -122,7 +119,7 @@
                                             </span>
                                         </div>
                                         <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
+                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
                                                 (click)="gotoDesc(course)">
                                                 <p  class="">
                                                     {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
@@ -166,8 +163,8 @@
                                         </div>
 
                                         <div class="row pointer">
-                                            <div class="col-12 m-t-30" >
-                                                <div class="upcoming" (click)="navToCal()" *ngIf="course?.upComingLiveClassRoom?.activitytype == 'Live Classroom'">{{course?.upComingLiveClassRoom?.status}} {{course?.upComingLiveClassRoom?.startdate | date :' h:mm a'}} to {{course?.upComingLiveClassRoom?.enddate | date :' h:mm a'}} | Live classroom
+                                            <div class="col-12" >
+                                                <div class="upcoming" (click)="navToCal()" *ngIf="course?.upComingLiveClassRoom?.activitytype == 'Live Classroom'">{{course?.upComingLiveClassRoom?.status}} {{course?.upComingLiveClassRoom?.startdate | date :' h:mm a'}} to {{course?.upComingLiveClassRoom?.enddate | date :' h:mm a'}} | <a>Live classroom</a>
                                                     <mat-icon class="video">videocam</mat-icon></div>
                                             </div>
 
@@ -203,7 +200,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="course.batchCourse == true">
-                                <div class="row m-p-14 m-t-1 m-l-2p f_size_12">
+                                <div class="row  m-l-2p f_size_12">
                                     <div class="col-3">
                                         <div>Activity 
                                             <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
@@ -257,7 +254,7 @@
                             </div>
                         </div>
                     </mat-card>
-                    <hr class="hr-tag">
+                    <div style="border-bottom: 1px solid #cccccc7a"></div>
                 </div> 
                 <!-- card end -->
 
@@ -311,13 +308,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2">
+                                    <div class="col-6 col-sm-6 col-md-8 col-lg-7 ">
                                         <div class="f_size_18 f_wt_500 pointer">
-                                            <span tooltip="{{course.course_name}}" placement="right">
-                                                {{(course.course_name?.length > 33)?(course.course_name | slice:0:33)+'...':(course.course_name)}}
-                                                <!-- {{course.course_name}} -->
-                                                
-                                            </span>
+                                            <span  *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
+                                            <span  *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
                                             <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                                             <div class="span-with-icon">
@@ -326,7 +320,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
+                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
                                                 (click)="gotoDesc(course)">
                                                 <p class="">
                                                     {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
@@ -370,7 +364,7 @@
                                         </div>
 
                                         <div class="row pointer ">
-                                            <div class="col-12 m-t-30" >
+                                            <div class="col-12" >
                                                 <span class="upcoming" (click)="navToCal()" *ngIf="course?.upComingLiveClassRoom?.activitytype == 'Live Classroom'">{{course?.upComingLiveClassRoom?.status}} {{course?.upComingLiveClassRoom?.startdate | date :' h:mm a'}} to {{course?.upComingLiveClassRoom?.enddate | date :' h:mm a'}} | Live classroom
                                                     <mat-icon class="video">videocam</mat-icon></span>
                                             </div>
@@ -407,7 +401,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="course.batchCourse == true">
-                                <div class="row m-p-14 m-t-1 m-l-2p f_size_12">
+                                <div class="row  m-l-2p f_size_12">
                                     <div class="col-3 ">
                                         <div>Activity 
                                             <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
@@ -463,7 +457,7 @@
                             <!-- card end -->
                         </div>
                     </mat-card>
-                    <hr class="hr-tag">
+                    <div style="border-bottom: 1px solid #cccccc7a"></div>
                 </div>
 
                 <div *ngIf="completedCourseCount === 0">
@@ -514,13 +508,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2 m-t-2">
+                                    <div class="col-6 col-sm-6 col-md-8 col-lg-7">
                                         <div class=" f_size_18 f_wt_500 pointer">
-                                            <span tooltip="{{course.course_name}}" placement="right">
-                                                {{(course.course_name?.length > 33)?(course.course_name | slice:0:33)+'...':(course.course_name)}}
-                                                <!-- {{course.course_name}} -->
-                                                
-                                            </span>
+                                            <span  *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
+                                            <span  *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
                                             <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                                             <div class="span-with-icon">
@@ -529,7 +520,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
+                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
                                                 (click)="gotoDesc(course)">
                                                 <p class="">
                                                     {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
@@ -574,7 +565,7 @@
                                         </div>
 
                                         <div class="row pointer ">
-                                            <div class="col-12 m-t-30" >
+                                            <div class="col-12" >
                                                 <span class="upcoming" (click)="navToCal()" *ngIf="course?.upComingLiveClassRoom?.activitytype == 'Live Classroom'">{{course?.upComingLiveClassRoom?.status}} {{course?.upComingLiveClassRoom?.startdate | date :' h:mm a'}} to {{course?.upComingLiveClassRoom?.enddate | date :' h:mm a'}} | Live classroom
                                                     <mat-icon class="video">videocam</mat-icon></span>
                                             </div>
@@ -611,7 +602,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="course.batchCourse == true">
-                                <div class="row m-p-14 m-t-1 m-l-2p f_size_12">
+                                <div class="row  m-l-2p f_size_12">
                                     <div class="col-3">
                                         <div>Activity 
                                             <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
@@ -667,7 +658,7 @@
                             <!-- card end -->
                         </div>
                     </mat-card>
-                    <hr class="hr-tag">
+                    <div style="border-bottom: 1px solid #cccccc7a"></div>
                 </div>
 
 
@@ -727,13 +718,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2 courceNameCol">
+                                    <div class="col-6 col-sm-6 col-md-8 col-lg-7 courceNameCol">
                                         <div class=" f_size_18 f_wt_500 pointer">
-                                            <span tooltip="{{course.course_name}}" placement="right">
-                                                {{(course.course_name?.length > 33)?(course.course_name | slice:0:33)+'...':(course.course_name)}}
-                                                <!-- {{course.course_name}} -->
-                                                
-                                            </span>
+                                            <span  *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
+                                            <span  *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
                                             <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                                             <div class="span-with-icon">
@@ -742,7 +730,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
+                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
                                                 (click)="gotoDesc(course)">
                                                 <p class="">
                                                     {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
@@ -859,7 +847,7 @@
                             <!-- card end -->
                         </div>
                     </mat-card>
-                    <hr class="hr-tag">
+                    <div style="border-bottom: 1px solid #ccc"></div>
                 </div>
 
                 <div *ngIf="allCourseCount === 0">
@@ -912,7 +900,7 @@
                             <img alt="course " src="{{course.course_img_url}}" class="courseImage image">
                             
                             <div class="overlayimage">
-                                <p class="shortdesc">
+                                <p class="shortdesc h-50">
                                     <!-- {{course.course_description}} -->
                                  {{(course.course_description?.length>122)? (course.course_description | slice:0:122)+'...':(course.course_description) }} 
                                 </p>
@@ -922,8 +910,8 @@
                  
                 </div><br>
                 <div class="row">
-                    <span class="courseName" *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
-                    <span class="courseName" *ngIf="course.course_name?.length < 28">{{course.course_name}}</span>
+                    <span class="courseName1" *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
+                    <span class="courseName1" *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
                 </div><br>
                 <div class="row">
                     <div class="col-12 center_align">

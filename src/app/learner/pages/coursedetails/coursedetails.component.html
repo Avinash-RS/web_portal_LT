@@ -72,14 +72,19 @@
                             </mat-expansion-panel-header>
                             <div class="row">
                                 <div class="col-12">
-                                    <mat-vertical-stepper class="" [linear]="isLeaner">
+                                    <mat-vertical-stepper [linear]="isLeaner">
                                         <ng-container *ngFor="let mod of res?.children; let j = index">
                                             <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
                                                 mod.status === 'Process' ? 'colYellow' : 'colWhite'">
                                                 <ng-template matStepLabel>
-                                                    <span class="topicnm"
+                                                    <span  *ngIf="mod?.title?.length > 20" tooltip= "{{mod?.title}}" placement="right" class="topicnm"
                                                         (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
-                                                        {{mod?.title}}</span>
+                                                        {{(mod?.title  | slice:0:20)+'...'}}</span>
+
+                                                        <span  *ngIf="mod?.title?.length <= 20" class="topicnm"
+                                                            (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
+                                                            {{mod?.title}}</span>
+
                                                 </ng-template>
                                             </mat-step>
                                         </ng-container>
@@ -115,7 +120,13 @@
                 <mat-tab-group #demo3Tab [(selectedIndex)]="selectedTabIndex" #tabs animationDuration="1000ms"
                     (selectedTabChange)="tabSelection($event)"
                     [ngClass]="drawer.opened==true?'drawerOpnTab':'drawerClsTab'">
-                    <mat-tab label="{{(course?.course_name?.length > 33)?(course?.course_name | slice:0:33)+'...':(course?.course_name)}}">
+                    <mat-tab>
+
+
+                        <ng-template mat-tab-label>
+                            <label  matTooltip="{{course?.course_name}}" matTooltipPosition="below" matTooltipClass='custom-mat-tooltip'>{{(course?.course_name?.length > 33)?(course?.course_name | slice:0:33)+'...':(course?.course_name)}}  
+                            </label>
+                        </ng-template>
 
                         <div [ngClass]="drawer.opened==true?'example-sidenav-content-opn':'example-sidenav-content-cls'"
                             class="">
