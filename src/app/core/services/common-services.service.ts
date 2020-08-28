@@ -10,13 +10,15 @@ import {
   add_to_wishlist, delete_wishlist, getPlayerStatus, geturl, enrollcourse,
   getCourseCategorySearch, getDetailsCount
 } from '@core/services/operations/common_mutation';
+import { environment } from '@env/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonServicesService {
 
-  constructor(private Apollo: Apollo) { }
+  constructor(private Apollo: Apollo, private http: HttpClient,) { }
   //Search Component for search all courses
   globalSearch$ = new Subject<any>();
   globalSearch = this.globalSearch$.asObservable();
@@ -188,6 +190,13 @@ export class CommonServicesService {
   getGuidelineSearch() {
     return this.Apollo.query({
       query: getDetailsCount
+    });
+  }
+  getIpAddressByUrl() {
+    // return 'http://api.ipify.org/?format=json';
+    this.http.get(environment.systemIp).subscribe((res: any) => {
+      // this.ipAddress = res.ip;
+      localStorage.setItem('Systemip', res.ip);
     });
   }
 }
