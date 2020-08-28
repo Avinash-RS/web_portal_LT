@@ -1,5 +1,19 @@
 @import "variable";
 // gobal css 
+html {
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  scroll-behavior: smooth !important;
+  behavior: 'smooth' !important;
+  overflow-x: hidden;
+}
+
+body { 
+ font-family:  'Roboto Condensed' , sans-serif !important;
+ scroll-behavior: smooth !important;
+ behavior: 'smooth' !important;
+}
 .mat-card {
   font-family: Roboto Condensed !important;
 }
@@ -346,6 +360,8 @@ mat-icon {
   border-radius: 3px;
   overflow: hidden;
 }
+
+
 
 @media (max-width: 480px) {
   .wrap-reg {

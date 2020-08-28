@@ -225,11 +225,13 @@
   html {
     overflow: scroll;
     overflow-x: hidden !important;
+    scroll-behavior: smooth !important;
   }
 
   ::-webkit-scrollbar {
     width: 0px;
     background: transparent !important;
+    scroll-behavior: smooth !important;
   }
 }
 
@@ -247,7 +249,7 @@
 }
 
 :host ::ng-deep.mat-card {
-  padding: 0%;
+  padding: 16px !important;
   border-radius: 0px;
 }
 
@@ -882,10 +884,11 @@ hr {
 .template {
   display: none;
 }
-::ng-deep .mat-dialog-container {
+
+:host ::ng-deep .cdk-overlay-pane {
   overflow-y: hidden !important;
   width: 75% !important;
-  height: 75% !important;
+  max-height: 85% !important;
   margin: auto;
 }
 
@@ -910,9 +913,9 @@ hr {
     float: right;
   }
 
-  ::ng-deep .mat-dialog-container {
+  :host ::ng-deep .cdk-overlay-pane {
     width: 95% !important;
-    height: 75% !important;
+    max-height: 85% !important;
     margin: auto;
   }
 
@@ -1286,12 +1289,28 @@ hr {
   position: relative;
   /* left: 10px; */
   font-size: 18px;
+  // padding: 0px 19px;
+  color: #3f444a;
+  font-size: 18px;
+  font-weight: 600 !important;
+}
+.courseName1{
+  position: relative;
+  /* left: 10px; */
+  font-size: 18px;
   padding: 0px 19px;
   color: #3f444a;
   font-size: 18px;
   font-weight: 600 !important;
 }
-
+:host ::ng-deep body ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 5px !important;
+    height: 5px !important;
+}
+::-webkit-scrollbar {
+  width: 5px !important;
+}
 .size {
   font-size: large;
 }
@@ -1413,12 +1432,16 @@ hr {
 .lxp-text:hover {
   color: $color-white;
 }
+.h-50{
+  height: 50px !important;
+}
 
 .dropbtn {
   background-color: $color-white;
   color: #898989;
   padding: 6px;
   font-size: 16px;
+  padding-left: 6px;
   border: none;
   // border-radius: 11px;
   border: 1px solid #898989;
@@ -1453,6 +1476,9 @@ hr {
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+.dropdown-content1 {
+  display: none;
 }
 
 .dropdown:hover .dropbtn {
@@ -1494,4 +1520,11 @@ hr {
 }
 .alarmcursor {
   cursor: text;
+}
+::ng-deep .primerFlage ~ .tooltip{
+// transform: translateX(30px) !important;
+// transform: translateY(5px) !important;
+// position: relative !important;
+// top: 150px !important;
+// right: 2px !important;
 }

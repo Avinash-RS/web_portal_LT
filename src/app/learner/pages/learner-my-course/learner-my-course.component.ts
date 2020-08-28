@@ -58,7 +58,7 @@ export class LearnerMyCourseComponent implements OnInit {
   completedCourseCount = 0;
   allCourseCount = 0;
   selectedIndex = 0;
-
+  viewCourseClass = true;
   constructor(
     public translate: TranslateService,
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
@@ -249,6 +249,7 @@ export class LearnerMyCourseComponent implements OnInit {
     });
   }
     viewCourse(category, templateRef: TemplateRef<any>) {
+      this.viewCourseClass = false;
       this.categoryPopupData = category;
       this.dialog.open(templateRef, {
         closeOnNavigation: true,
@@ -258,6 +259,7 @@ export class LearnerMyCourseComponent implements OnInit {
     closedialogbox() {
       this.dialog.closeAll();
       this.availableCourses = '';
+      this.viewCourseClass = true;
     }
     claimCourse(courseId) {
       this.learnerService.claimcourse(this.userDetailes._id, this.userDetailes.user_id,

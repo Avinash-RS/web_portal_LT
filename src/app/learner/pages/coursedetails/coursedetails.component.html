@@ -72,14 +72,19 @@
                             </mat-expansion-panel-header>
                             <div class="row">
                                 <div class="col-12">
-                                    <mat-vertical-stepper class="" [linear]="isLeaner">
+                                    <mat-vertical-stepper [linear]="isLeaner">
                                         <ng-container *ngFor="let mod of res?.children; let j = index">
                                             <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
                                                 mod.status === 'Process' ? 'colYellow' : 'colWhite'">
                                                 <ng-template matStepLabel>
-                                                    <span class="topicnm"
+                                                    <span  *ngIf="mod?.title?.length > 20" tooltip= "{{mod?.title}}" placement="right" class="topicnm"
                                                         (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
-                                                        {{mod?.title}}</span>
+                                                        {{(mod?.title  | slice:0:20)+'...'}}</span>
+
+                                                        <span  *ngIf="mod?.title?.length <= 20" class="topicnm"
+                                                            (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
+                                                            {{mod?.title}}</span>
+
                                                 </ng-template>
                                             </mat-step>
                                         </ng-container>
@@ -115,7 +120,16 @@
                 <mat-tab-group #demo3Tab [(selectedIndex)]="selectedTabIndex" #tabs animationDuration="1000ms"
                     (selectedTabChange)="tabSelection($event)"
                     [ngClass]="drawer.opened==true?'drawerOpnTab':'drawerClsTab'">
-                    <mat-tab label="{{course?.course_name | titlecase }}">
+                    <mat-tab class="pointer">
+
+
+                        <ng-template mat-tab-label>
+                            <label class="pointer" *ngIf="course?.course_name?.length>28"  matTooltip="{{course?.course_name}}" matTooltipPosition="below" matTooltipClass='custom-mat-tooltip'>{{(course?.course_name | slice:0:28)+'...'}}  
+                            </label>
+
+                            <label class="pointer" *ngIf="course?.course_name?.length<=28">{{course?.course_name}}  
+                            </label>
+                        </ng-template>
 
                         <div [ngClass]="drawer.opened==true?'example-sidenav-content-opn':'example-sidenav-content-cls'"
                             class="">
@@ -838,7 +852,7 @@
                         <!-- for posts -->
                         <div *ngFor="let post of topicDiscussionData?.posts; let pin = index;">
                             <div *ngIf="post.deleted === false">
-                                <mat-card *ngIf="pin !== 0" class="no-radius no_padding"
+                                <mat-card *ngIf="pin !== 0 && post.toPid === null" class="no-radius no_padding"
                                     [ngClass]="post.deleted === false ? 'black_border m-b-8 ' : 'black_border m-b-8 white_card'">
                                     <div class="black_border no_padding no_margin post-header">
                                         <div class="row padding_matcard">
@@ -916,10 +930,10 @@
                                                 <div class="row">
                                                     <div
                                                         class="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 float_right no_padding">
-                                                        <mat-checkbox class="width_100 f_size_15 align-middle"
+                                                        <!-- <mat-checkbox class="width_100 f_size_15 align-middle"
                                                             [(ngModel)]="a2iFlag">
                                                             &nbsp;&nbsp;{{'Ask the instructor' | translate }}
-                                                        </mat-checkbox>
+                                                        </mat-checkbox> -->
                                                     </div>
                                                     <div
                                                         class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4 float_right no_padding">
@@ -1012,14 +1026,14 @@
                                                         <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 float_right p-5px m-b-15"
                                                             style="background: whitesmoke; border: 1px solid #dddddd;">
                                                             <div class="row">
-                                                                <div
+                                                                <!-- <div
                                                                     class="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 no_padding float_right">
                                                                     <mat-checkbox
                                                                         class="width_100 f_size_13 align-middle"
                                                                         [(ngModel)]="a2iFlag">
                                                                         &nbsp;{{'Ask the instructor' | translate }}
                                                                     </mat-checkbox>
-                                                                </div>
+                                                                </div> -->
                                                                 <div
                                                                     class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4 no_padding float_right">
                                                                     <button mat-button class="no-radius send-btn"
@@ -1192,7 +1206,7 @@
 
     </span>
 </ng-template>
-<div class="footer">
+<div class="footer" style="position: absolute;">
     <span class="powered">
         <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
     </span>
