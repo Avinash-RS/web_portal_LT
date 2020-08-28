@@ -164,10 +164,11 @@
 
                                         <div class="row pointer">
                                             <div class="col-12" >
-                                                <div class="upcoming" (click)="navToCal()" *ngIf="course?.upComingLiveClassRoom?.activitytype == 'Live Classroom'">{{course?.upComingLiveClassRoom?.status}} {{course?.upComingLiveClassRoom?.startdate | date :' h:mm a'}} to {{course?.upComingLiveClassRoom?.enddate | date :' h:mm a'}} | <a>Live classroom</a>
+                                                <div class="upcoming" (click)="navToCal()" *ngIf="course?.upComingLiveClassRoom?.activitytype == 'Live Classroom'">{{course?.upComingLiveClassRoom?.status}}...   <b>{{course?.upComingLiveClassRoom?.startdate | date :' h:mm a'}} to {{course?.upComingLiveClassRoom?.enddate | date :' h:mm a'}}</b> | 
+                                                    <u><b>Live classroom</b></u>
                                                     <mat-icon class="video">videocam</mat-icon></div>
                                             </div>
-
+                                            
                                         </div>
                                     </div>
 
@@ -365,7 +366,8 @@
 
                                         <div class="row pointer ">
                                             <div class="col-12" >
-                                                <span class="upcoming" (click)="navToCal()" *ngIf="course?.upComingLiveClassRoom?.activitytype == 'Live Classroom'">{{course?.upComingLiveClassRoom?.status}} {{course?.upComingLiveClassRoom?.startdate | date :' h:mm a'}} to {{course?.upComingLiveClassRoom?.enddate | date :' h:mm a'}} | Live classroom
+                                                <span class="upcoming" (click)="navToCal()" *ngIf="course?.upComingLiveClassRoom?.activitytype == 'Live Classroom'">{{course?.upComingLiveClassRoom?.status}}...    <b>{{course?.upComingLiveClassRoom?.startdate | date :' h:mm a'}} to {{course?.upComingLiveClassRoom?.enddate | date :' h:mm a'}}</b> | 
+                                                    <u><b>Live classroom</b></u>
                                                     <mat-icon class="video">videocam</mat-icon></span>
                                             </div>
 
@@ -565,8 +567,9 @@
                                         </div>
 
                                         <div class="row pointer ">
-                                            <div class="col-12" >
-                                                <span class="upcoming" (click)="navToCal()" *ngIf="course?.upComingLiveClassRoom?.activitytype == 'Live Classroom'">{{course?.upComingLiveClassRoom?.status}} {{course?.upComingLiveClassRoom?.startdate | date :' h:mm a'}} to {{course?.upComingLiveClassRoom?.enddate | date :' h:mm a'}} | Live classroom
+                                            <div class="col-12 " >
+                                                <span class="upcoming" (click)="navToCal()" *ngIf="course?.upComingLiveClassRoom?.activitytype == 'Live Classroom'">{{course?.upComingLiveClassRoom?.status}}...    <b>{{course?.upComingLiveClassRoom?.startdate | date :' h:mm a'}} to {{course?.upComingLiveClassRoom?.enddate | date :' h:mm a'}}</b> | 
+                                                    <u><b>Live classroom</b></u>
                                                     <mat-icon class="video">videocam</mat-icon></span>
                                             </div>
 

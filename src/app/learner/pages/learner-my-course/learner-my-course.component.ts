@@ -252,6 +252,7 @@ export class LearnerMyCourseComponent implements OnInit {
       this.viewCourseClass = false;
       this.categoryPopupData = category;
       this.dialog.open(templateRef, {
+        panelClass: 'dialogContainer',
         closeOnNavigation: true,
         disableClose: true,
       });

@@ -1394,6 +1394,8 @@ color: $lxp-gray;
     position:  relative !important;
     bottom: 50px !important;
     background-color: black !important;
+    opacity: 1 !important;
+    font-size: 12px !important;
 }
 
 ::ng-deep .tooltip-inner {
