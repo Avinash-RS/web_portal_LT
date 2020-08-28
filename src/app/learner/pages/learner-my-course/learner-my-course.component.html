@@ -119,7 +119,7 @@
                                             </span>
                                         </div>
                                         <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
+                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
                                                 (click)="gotoDesc(course)">
                                                 <p  class="">
                                                     {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
@@ -320,7 +320,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
+                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
                                                 (click)="gotoDesc(course)">
                                                 <p class="">
                                                     {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
@@ -520,7 +520,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
+                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
                                                 (click)="gotoDesc(course)">
                                                 <p class="">
                                                     {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
@@ -730,7 +730,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400  pointer"
+                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
                                                 (click)="gotoDesc(course)">
                                                 <p class="">
                                                     {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
@@ -900,7 +900,7 @@
                             <img alt="course " src="{{course.course_img_url}}" class="courseImage image">
                             
                             <div class="overlayimage">
-                                <p class="shortdesc">
+                                <p class="shortdesc h-50">
                                     <!-- {{course.course_description}} -->
                                  {{(course.course_description?.length>122)? (course.course_description | slice:0:122)+'...':(course.course_description) }} 
                                 </p>
