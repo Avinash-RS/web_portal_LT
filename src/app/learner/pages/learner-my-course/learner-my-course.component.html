@@ -109,8 +109,8 @@
                                     </div>
                                     <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2">
                                         <div class=" f_size_18 f_wt_500 pointer">
-                                            <span class="courseName" *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
-                                            <span class="courseName" *ngIf="course.course_name?.length < 28">{{course.course_name}}</span>
+                                            <span  *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
+                                            <span  *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
                                             <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                                             <span class="span-with-icon">
@@ -310,8 +310,8 @@
                                     </div>
                                     <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2">
                                         <div class="f_size_18 f_wt_500 pointer">
-                                            <span class="courseName" *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
-                                            <span class="courseName" *ngIf="course.course_name?.length < 28">{{course.course_name}}</span>
+                                            <span  *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
+                                            <span  *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
                                             <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                                             <div class="span-with-icon">
@@ -510,8 +510,8 @@
                                     </div>
                                     <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2 m-t-2">
                                         <div class=" f_size_18 f_wt_500 pointer">
-                                            <span class="courseName" *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
-                                            <span class="courseName" *ngIf="course.course_name?.length < 28">{{course.course_name}}</span>
+                                            <span  *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
+                                            <span  *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
                                             <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                                             <div class="span-with-icon">
@@ -720,8 +720,8 @@
                                     </div>
                                     <div class="col-6 col-sm-6 col-md-8 col-lg-7 m-t-2 courceNameCol">
                                         <div class=" f_size_18 f_wt_500 pointer">
-                                            <span class="courseName" *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
-                    <span class="courseName" *ngIf="course.course_name?.length < 28">{{course.course_name}}</span>
+                                            <span  *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
+                                            <span  *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
                                             <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                                             <div class="span-with-icon">
@@ -911,7 +911,7 @@
                 </div><br>
                 <div class="row">
                     <span class="courseName" *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
-                    <span class="courseName" *ngIf="course.course_name?.length < 28">{{course.course_name}}</span>
+                    <span class="courseName" *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
                 </div><br>
                 <div class="row">
                     <div class="col-12 center_align">
