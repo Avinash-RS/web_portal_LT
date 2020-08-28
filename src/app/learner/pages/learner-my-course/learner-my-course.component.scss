@@ -1302,7 +1302,14 @@ hr {
   font-size: 18px;
   font-weight: 600 !important;
 }
-
+:host ::ng-deep body ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 5px !important;
+    height: 5px !important;
+}
+::-webkit-scrollbar {
+  width: 5px !important;
+}
 .size {
   font-size: large;
 }
