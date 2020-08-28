@@ -741,7 +741,7 @@
   }
 }
 :host ::ng-deep .mat-stepper-vertical-line::before {
-    left: -22px !important;
+    left: 1px !important;
     height: 33px;
     content: '';
     position: absolute;
@@ -755,8 +755,9 @@
 }
 
 :host ::ng-deep .mat-step-header {
-    right: 10%;
+
     height: 0px;
+    overflow: visible !important;
 }
 :host ::ng-deep .mat-step-icon .mat-icon,
 .mat-step-icon-content {
@@ -1474,7 +1475,7 @@ border-right: none !important;
     justify-content: space-between;
 }
 .drawer .contents {
-    padding: 16px;
+    padding: 16px 0px 16px 16px;
     margin-top: 12%;
 }
 
@@ -1563,16 +1564,8 @@ width: 100%;
     margin: auto !important;
     display: block !important;
 }
-// ::ng-deep  .mat-tab-group.mat-primary .mat-ink-bar, .aboutCourseTab{
-//     visibility: visible !important;
-//     left: 225px !important;
-//     width: 105px !important;
-// }
 
-
-// ::ng-deep.mat-ink-bar, .aboutCourseTab{
-//     visibility: visible !important;
-//     left: 225px !important;
-//     width: 105px !important;    
-// }
+::ng-deep .panel .mat-expansion-panel-body{
+    padding: 0 !important;
+}
 // Ramya CSS ends here
