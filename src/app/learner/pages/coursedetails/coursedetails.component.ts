@@ -162,6 +162,7 @@ export class CoursedetailsComponent implements OnInit {
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
   getModuleandtopicInfo: any;
   moduleSatusCheck: any;
+  tabInd: any;
   // initials: any;
   constructor(public translate: TranslateService, private router: ActivatedRoute,
               public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
@@ -195,8 +196,13 @@ export class CoursedetailsComponent implements OnInit {
                 this.Lservice.getSingleBatchInfo(this.userDetail.user_id, this.courseid).subscribe((resdata: any) => {
                   if (resdata?.data?.getbatchdetails?.message?.batchid !== null) {
                     this.batchDetails = resdata?.data?.getbatchdetails?.message;
-                    this.disableThreads = resdata?.data?.getbatchdetails?.message.batchenddate.slice(0, 10) <=
-                      new Date().toISOString().slice(0, 10) ? true : false;
+                    console.log(resdata?.data?.getbatchdetails?.message.batchenddate.slice(0, 10));
+                    console.log(new Date().toISOString().slice(0, 10));
+                    const batchEndDate = new Date(resdata?.data?.getbatchdetails?.message.batchenddate);
+                    const courseEndDate = moment(batchEndDate).format('DD-MM-YYYY');
+                    // console.log(batchEndDate, courseEndDate, moment().format('DD-MM-YYYY'))
+                    this.disableThreads = courseEndDate.slice(0, 10) <
+                    moment().format('DD-MM-YYYY') ? true : false;
                     this.viewAllThreads();
                   } else {
                     this.batchDetails = null;
@@ -697,6 +703,7 @@ export class CoursedetailsComponent implements OnInit {
           if (result.success) {
             this.addThreadComment = null;
             this.showThreadComment = false;
+            this.addPostComment = [];
             this.showCommentEditor = [];
             this.viewsingletopicdiscussion(this.selectedThreadData.tid);
             this.toastr.success('Comment added successfully');
@@ -1042,6 +1049,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   tabSelection(tab) {
+    this.tabInd = tab.index;
     console.log('selected tab', tab.index);
     if (tab.index === 0) {
       this.sider = true;
