@@ -149,8 +149,8 @@
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                                                     <span class="cap f_wt_400 m-t-m-2">
-                                                        {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume ' : 
-                                                          course?.coursePlayerStatus?.status === 'suspend  ' ? 'Resume  ' : 'Start'  }}&nbsp;
+                                                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
+                                                          course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start'  }}&nbsp;
                                                     </span>
                                                 </button>
                                                 <button mat-stroked-button
@@ -185,8 +185,8 @@
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                                                     <span class="cap f_wt_400 m-t-m-2">
-                                                        {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume ' : 
-                                                          course?.coursePlayerStatus?.status === 'suspend  ' ? 'Resume  ' : 'Start'  }}&nbsp;
+                                                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
+                                                          course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start'  }}&nbsp;
                                                     </span>
                                                 </button>
                                                 <button mat-stroked-button
@@ -557,8 +557,8 @@
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                                                     <span class="cap f_wt_400  m-t-m-2">
-                                                        {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume  ' : 
-                                                        course?.coursePlayerStatus?.status === 'suspend ' ? 'Resume ' : 'Start' }}&nbsp;
+                                                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
+                                                        course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' }}&nbsp;
                                                     </span>
                                                 </button>
                                                 <button mat-stroked-button
@@ -593,8 +593,8 @@
                                                 class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                 <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                                                 <span class="cap f_wt_400  m-t-m-2">
-                                                    {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume  ' : 
-                                                    course?.coursePlayerStatus?.status === 'suspend ' ? 'Resume ' : 'Start' }}&nbsp;
+                                                    {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
+                                                    course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' }}&nbsp;
                                                 </span>
                                             </button>
                                             <button mat-stroked-button
@@ -757,8 +757,8 @@
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                                                     <span class="cap f_wt_400  m-t-m-2">
-                                                        {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume  ' : 
-                                                        course?.coursePlayerStatus?.status === 'suspend ' ? 'Resume ' : 'Start' }}&nbsp;
+                                                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
+                                                        course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' }}&nbsp;
                                                     </span>
                                                 </button>
                                                 <button mat-stroked-button
@@ -785,8 +785,8 @@
                                                 class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                 <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                                                 <span class="cap f_wt_400  m-t-m-2">
-                                                    {{course?.coursePlayerStatus?.status === 'incomplete ' ? 'Resume  ' : 
-                                                    course?.coursePlayerStatus?.status === 'suspend ' ? 'Resume ' : 'Start' }}&nbsp;
+                                                    {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
+                                                    course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' }}&nbsp;
                                                 </span>
                                             </button>
                                             <button mat-stroked-button
@@ -922,7 +922,8 @@
                  
                 </div><br>
                 <div class="row">
-                    <span class="courseName">{{course.course_name}}</span>
+
+                    <span class="courseName" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name?.length > 33)?(course.course_name | slice:0:33)+'...':(course.course_name)}}</span>
                 </div><br>
                 <div class="row">
                     <div class="col-12 center_align">
