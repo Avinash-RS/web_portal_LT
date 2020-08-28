@@ -25,13 +25,14 @@ export class GlobalServiceService {
   checkLogout() {
     if (this.route.url !== '/' && this.route.url !== '/Learner/login' && this.route.url !== '/Learner' &&
       this.route.url !== '/Admin/login') {
-      const adminDetails = JSON.parse(localStorage.getItem('adminDetails')) || null;
-      const role = localStorage.getItem('role') || sessionStorage.getItem('role') || null;
+      // const adminDetails = JSON.parse(localStorage.getItem('adminDetails')) || null;
+      // const role = localStorage.getItem('role') || sessionStorage.getItem('role') || null;
       const userDetail = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails')) || null;
-      if ((userDetail != null || userDetail !== undefined) && role === 'learner') {
+      console.log(userDetail);
+      if ((userDetail != null && userDetail !== undefined)) {
         return userDetail;
-      } else if ((adminDetails != null || adminDetails !== undefined) && role === 'admin') {
-        return adminDetails;
+        // } else if ((adminDetails != null || adminDetails !== undefined) && role === 'admin') {
+        //   return adminDetails;
       } else {
         this.alert.openAlert('Logged Out!', 'You have been logged out. Please login to continue');
         this.route.navigate(['/Learner/login']);
@@ -42,9 +43,10 @@ export class GlobalServiceService {
   checkProfileFilled() {
     const userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
     if (userDetail && !userDetail.is_profile_updated) {
-      this.route.navigate(['/Learner/profile']);
-      this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
-      return false;
+      //Afser'schanges on Profile not Mandtory change no #3
+      // this.route.navigate(['/Learner/profile']);
+      // this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
+      return true;
     } else {
       return true;
     }

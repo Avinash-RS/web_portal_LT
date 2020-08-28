@@ -1,7 +1,15 @@
 @import "variable";
+.bodybg {
+    width: auto;
+    padding-left: 18px;
+    padding-right: 18px;
+    min-height: 100vh;
+    display: flex;
+    background-color: $color-white;
+}
 
 .close-button {
-    background: $lxp-theme-green !important;
+    background: $lxp-theme-green !important; // red color
     float: right;
     top: -12px;
     position: relative;
@@ -11,58 +19,55 @@
 }
 
 .download-button {
-    background: $lxp-theme-green !important;
+    background: $lxp-theme-green !important; // red color
     float: right;
     position: relative;
     top: -12px;
     right: 26px;
     height: 35px;
     width: 35px;
-}
-
-// auto hide course title 
-#hideMe {
-    -moz-animation: cssAnimation 0s ease-in 20s forwards;
-    -webkit-animation: cssAnimation 0s ease-in 20s forwards;
-    -o-animation: cssAnimation 0s ease-in 20s forwards;
-    animation: cssAnimation 0s ease-in 20s forwards;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-}
+} // auto hide course title
+// #hideMe {
+//     -moz-animation: cssAnimation 0s ease-in 20s forwards;
+//     -webkit-animation: cssAnimation 0s ease-in 20s forwards;
+//     -o-animation: cssAnimation 0s ease-in 20s forwards;
+//     animation: cssAnimation 0s ease-in 20s forwards;
+//     -webkit-animation-fill-mode: forwards;
+//     animation-fill-mode: forwards;
+// }
 
 
-@keyframes cssAnimation {
-    to {
-        width: 0;
-        height: 0;
-        overflow: hidden;
-    }
-}
+// @keyframes cssAnimation {
+//     to {
+//         width: 0;
+//         height: 0;
+//         overflow: hidden;
+//     }
+// }
 
-@-webkit-keyframes cssAnimation {
-    to {
-        width: 0;
-        height: 0;
-        visibility: hidden;
-    }
-}
+// @-webkit-keyframes cssAnimation {
+//     to {
+//         width: 0;
+//         height: 0;
+//         visibility: hidden;
+//     }
+// }
 
 // .tooltip1 span {
 //     opacity: 0;
 //     border: 1px solid transparent;
 //     transition: all .4s 4.6s;
-//   }
-  
-//   .tooltip1:hover span {
+// }
+
+// .tooltip1:hover span {
 //     opacity: 1;
 //     border: 1px solid #000;
 //     opacity: 1;
 //     transition: all .4s;
-//   }
-
-:host ::ng-deep mat-dialog-container {
-    overflow: hidden !important;
-}
+// }:host ::ng-deep mat-dialog-container
+// {
+//     overflow: hidden !important;
+// }
 
 .close-icon {
     transition: 1s ease-in-out;
@@ -155,9 +160,8 @@
 .Outine {
     font-size: 16px;
     font-weight: 400px;
-    margin-left: -8px;
     width: 142px;
-
+    right: 14px;
 }
 
 button:focus,
@@ -179,7 +183,7 @@ button.active:focus {
 }
 
 .viewDoc {
-    color: $color-border;
+    color: $color-blank;
     font-size: 20px;
     width: 20px;
 }
@@ -226,7 +230,7 @@ li {
 
 .head-h2 {
     font-size: 20px;
-    color:$color-blank;
+    color: $color-blank;
     margin-top: 10px;
     font-weight: 500;
 
@@ -250,7 +254,7 @@ li {
     margin-left: 5px;
     // margin-right: 10px;
     display: inline-grid;
-    box-shadow: 1px 1px 0px 2px rgba(158, 158, 158, 0.1), 0 2px 6px 0 rgba(158, 158, 158, 0.88);
+    box-shadow: 1px 1px 0 2px rgba(158, 158, 158, 0.1), 0 2px 6px 0 rgba(158, 158, 158, 0.88);
     border-radius: 2px;
 
 }
@@ -263,20 +267,20 @@ li {
     height: 47px;
     max-width: 99%;
     background: $color-white;
-    box-shadow: 1px 1px 0px 2px rgba(158, 158, 158, 0.1), 0 2px 6px 0 rgba(158, 158, 158, 0.45);
+    box-shadow: 1px 1px 0 2px rgba(158, 158, 158, 0.1), 0 2px 6px 0 rgba(158, 158, 158, 0.45);
 }
 
 .widthAuto {
     width: auto !important;
-    padding-right: 0px !important;
-    padding-left: 0px !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
 }
 
 :host ::ng-deep .row {
     display: flex;
     flex-wrap: wrap;
-    margin-right: 0px !important;
-    margin-left: 0px !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
 }
 
 .borderline {
@@ -391,6 +395,8 @@ li {
 .index-number {
     // border: 1px solid $color-border;
     padding: 2px 8px;
+    position: relative;
+    left: 6px;
 }
 
 .module-container {
@@ -402,21 +408,21 @@ li {
 
 .example-container {
     width: auto;
-    height: 600px;
+    // height: 600px;
     // margin: 12px;
     border: none;
-  }
-  
-//   mat-drawer-content {
+}
+
+// mat-drawer-content {
 //     padding: 12px;
 //     display: flex;
 //     flex-direction: column;
 //     align-items: flex-start;
-//   }
+// }
 .player {
     // align-items: center;
     width: 100%;
-    height: 100vh;
+    height: 560px;
     border: none !important;
     // border: 1px solid $color-border;
 }
@@ -437,13 +443,18 @@ iframe.fullScreen {
     left: 0;
 }
 
+
 :host ::ng-deep .mat-tab-body-content {
     height: 100%;
     overflow: hidden !important;
-    padding: 8px !important;
+    padding-top: 8px !important;
+}
+:host ::ng-deep .mat-tab-group {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
 }
 
-:host ::ng-deep .mat-tab-label-container{
+:host ::ng-deep .mat-tab-label-container {
     margin-left: 2% !important;
 }
 
@@ -464,20 +475,26 @@ iframe.fullScreen {
 }
 
 
-.fullScr{
+.fullScr {
     // margin-left: 96%;
     // position: absolute;
-    margin-top: 4px;
+    margin-top: 5px;
     position: absolute !important;
     // z-index: 99;
     background-color: $color-white;
-    border-radius: 0px 0px 10px 10px;
+    border-radius: 0 0 10px 10px;
 }
-.prevBtn{
-    margin-left: 86%;
-    position: absolute;
-    top: 1%;
+.prevBtn {
+    margin-left: 86.7%;
+    position: fixed;
+    margin-top: 0;
     z-index: 99;
+}
+
+.prevBtnOpn {
+    position: fixed;
+    z-index: 99;
+    margin-left: 61%;
 }
 // .nextBtn{
 //     margin-left: 83%;
@@ -488,18 +505,16 @@ iframe.fullScreen {
 
 // :host ::ng-deep .nextBtn.disabled,
 // .nextBtn:disabled {
-//   opacity: 0.65 !important;
-//   color: $color-border !important;
+// opacity: 0.65 !important;
+// color: $color-border !important;
 // //   border-radius: .25rem;
-//   font-size: 16px;
-// }
-
-:host ::ng-deep .prevBtn.disabled,
+// font-size: 16px;
+// }:host ::ng-deep .prevBtn.disabled,
 .prevBtn:disabled {
-  opacity: 0.65 !important;
-  color: $color-border !important;
-//   border-radius: .25rem;
-  font-size: 16px;
+    opacity: 0.65 !important;
+    color: $color-border !important;
+    // border-radius: .25rem;
+    font-size: 16px;
 }
 // .divder{
 //     margin-left: 83.3%;
@@ -521,55 +536,40 @@ iframe.fullScreen {
 // }
 
 // silder
-.closebgt{
+.closebgt {
     position: absolute;
-    top: 1.3%;
+    top: 1.8%;
+    left: 8px;
     z-index: 99;
 }
-.example-sidenav-content {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-  }
-  
-.drawer {
-    // position: absolute;
-    height: 100%;
-    background: $color-white !important;
-    min-width: 25%;
-    margin-top: 0%;
-    border-right: none !important;
-}
 
-.drawer .header {
-    position: inherit !important;
-    right: 0;
-    justify-content: space-between;
-}
-
-.drawer .contents {
-    padding: 2px !important;
-}
-
-.main {
-    background-color: $color-white;
-}
-
-
-.main.contents {
-    min-height: 100vh;
-}
 
 :host ::ng-deep .mat-toolbar-row,
 .mat-toolbar-single-row {
-    height: 44px !important;
+   
+    // height: 44px !important;
 }
 
-:host ::ng-deep .mat-drawer-inner-container {
-    overflow: hidden !important;
-    background: $color-white !important;
+.drawerOpnTab {
+    position: relative;
+    bottom: 54px;
+    right: 34px;
 }
+
+.drawerClsTab {
+    position: relative;
+    bottom: 54px;
+}
+
+// :host ::ng-deep .mat-tab-header{
+
+//     display: flex;
+//     overflow: hidden;
+//     position: relative;
+//     flex-shrink: 0;
+//     bottom: 48px;
+// }
+
 
 .margin-7per {
     margin-top: 8%;
@@ -579,12 +579,6 @@ iframe.fullScreen {
     color: #9a9898;
 }
 
-:host ::ng-deep .mat-drawer-content {
-    margin-left: 0px !important;
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-    overflow: hidden !important;
-}
 
 .bodybg {
     width: auto;
@@ -602,14 +596,15 @@ iframe.fullScreen {
 
 }
 
-:host ::ng-deep.mat-tab-label .mat-tab-label-content :hover {
+:host ::ng-deep.mat-tab-label .mat-tab-label-content:hover {
+   
     // color: $color-blank !important;
 }
 
-:host ::ng-deep.mat-tab-label-active{
+:host ::ng-deep.mat-tab-label-active {
     // color: $color-blank !important;
     opacity: 1 !important;
-  }
+}
 :host /deep/ .mat-ink-bar {
     height: 2px !important;
     background-color: $lxp-theme-green !important;
@@ -618,266 +613,276 @@ iframe.fullScreen {
 // .example-container {
 //     height: 500px;
 //     border: 1px solid rgba(0, 0, 0, 0.5);
-//   }
-//   .example-sidenav-content {
+// }
+// .example-sidenav-content {
 //     display: flex;
 //     height: 100%;
 //     align-items: center;
 //     justify-content: center;
-//   }
-  .example-sidenav {
-    //  user-select: none;
-  }
-  .full-width {
+// }
+.example-sidenav {
+   
+    // user-select: none;
+}
+.full-width {
+   
     // width: 100%;
-  }
-  .menu-button {
+}
+.menu-button {
+   
     // transition: 300ms ease-in-out;
     // transform: rotate(180deg);
-  }
-  .menu-button.rotated {
+}
+.menu-button.rotated {
+   
     // transform: rotate(180deg);
-  }
-  .submenu {
+}
+.submenu {
+   
     // overflow-y: hidden;
     // transition: transform 300ms ease;
     // transform: scaleY(0);
     // transform-origin: top;
     // padding-left: 30px;
-  }
-  .submenu.expanded {
+}
+.submenu.expanded {
+   
     // transform: scaleY(1);
-  }
+}
 
 /* For Desktop */
-@media only screen and (min-width: 620px) {
+@media only screen and(min-width: 620px){:host /deep/ .mat-ink-bar {
+    height: 2px !important;
+    background-color: $lxp-theme-green !important; // red color
+}
 
-    :host /deep/ .mat-ink-bar {
-        height: 2px !important;
-        background-color: $lxp-theme-green !important;
-    }
+.moduletime {
+    font-size: 12px;
+}
 
-    .moduletime {
-        font-size: 12px;
-    }
+.courseTime {
+    font-size: 12px;
+    display: flex;
+    margin-left: -12px;
+}
 
-    .courseTime {
-        font-size: 12px;
-        display: flex;
-        margin-left: -12px;
-    }
+.time-icon {
+    font-size: 12px;
+}
 
-    .time-icon {
-        font-size: 12px;
-    }
+.course-time {
+    font-size: 12px;
+    margin-left: -8px;
+    position: absolute;
+}
 
-    .course-time {
-        font-size: 12px;
-        margin-left: -8px;
-        position: absolute;
-    }
+.exp-icon {
+    font-size: 22px;
+    margin-top: 7px;
+    color: rgba(158, 158, 158, 0.64);
+}
 
-    .exp-icon {
-        font-size: 22px;
-        margin-top: 7px;
-        color: rgba(158, 158, 158, 0.64);
-    }
+.exp2 {
+    color: rgba(158, 158, 158, 0.64);
+}
 
-    .exp2 {
-        color: rgba(158, 158, 158, 0.64);
-    }
+.mod-check-icon {
+    margin: 3px 8px;
+    height: 22px;
+    font-size: 20px;
+    font-weight: bolder;
+    color: #0E7D12;
+    // border: 1px solid $color-border;
+}
 
-    .mod-check-icon {
-        margin: 3px 8px;
-        height: 22px;
-        font-size: 20px;
-        font-weight: bolder;
-        color: #0E7D12;
-        // border: 1px solid $color-border;
-    }
+.spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .spinner-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .f_size_9 {
-        font-size: 9px !important;
-    }
+.f_size_9 {
+    font-size: 9px !important;
+}
 }
 
 ::ng-deep .mat-step-header[aria-labelledby="colgreen"] {
-    .mat-step-icon {
-        background-color: #0E7D12 !important;
-        color: #0E7D12 !important;
-        height: 20px !important;
-        width: 20px !important;
-    }
+.mat-step-icon {
+    background-color: #0e7d12 !important;
+    color: #0e7d12 !important;
+    height: 15px !important;
+    width: 15px !important;
+    position: relative;
+    bottom: 1px;
+    left: 6px;
+}
 }
 
 ::ng-deep .mat-step-header[aria-labelledby="colYellow"] {
-    .mat-step-icon {
-        background-color: $color-yellow !important;
-        color: $color-yellow !important;
-        height: 20px !important;
-        width: 20px !important;
-    }
+.mat-step-icon {
+    background-color: $color-yellow !important;
+    color: $color-yellow !important;
+    height: 15px !important;
+    width: 15px !important;
+    position: relative;
+    bottom: 1px;
+    left: 6px;
+}
 }
 
 ::ng-deep .mat-step-header[aria-labelledby="colWhite"] {
-    .mat-step-icon {
-        background-color: $color-white !important;
-        color: $color-white !important;
-        border: 2px solid $color-border;
-        height: 20px !important;
-        width: 20px !important;
-    }
+.mat-step-icon {
+    background-color: $color-white !important;
+    color: $color-white !important;
+    border: 2px solid $color-border;
+    height: 15px !important;
+    width: 15px !important;
+    position: relative;
+    bottom: 1px;
+    left: 6px;
+}
+}
+:host ::ng-deep .mat-stepper-vertical-line::before {
+left: 1px !important;
+height: 33px;
+content: '';
+position: absolute;
+top: -18px;
+bottom: -16px;
+left: 0;
+border-left-width: 1px;
+border-left-style: solid;
+
 
 }
 
 :host ::ng-deep .mat-step-header {
-    margin-left: 0.8% !important;
+
+height: 0;
+overflow: visible !important;
 }
-:host ::ng-deep .mat-step-icon .mat-icon, .mat-step-icon-content {
-    color: $color-white !important;
+:host ::ng-deep .mat-step-icon .mat-icon,
+.mat-step-icon-content {
+color: $color-white !important;
 
 }
 .moduleHead {
-    padding-left: 8px;
-    position: absolute;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: flex;
-    flex-wrap: wrap
+padding-left: 8px;
+position: absolute;
+text-overflow: ellipsis;
+overflow: hidden;
+display: flex;
+flex-wrap: wrap;
 }
 
 .moduleund {
-    margin-left: 36px;
-    font-weight: 500;
-    height: 20px;
-    margin-top: -8px;
+margin-left: 35px;
+font-weight: 500;
+height: 20px;
+margin-top: -2px;
 }
 
 .bottom-border {
-    border-bottom: 3px solid $lxp-theme-green;
-    border-right: inset;
-    border-left: inset;
-    border-left-color: transparent;
+border-bottom: 3px solid $lxp-theme-green; // red color
+border-right: inset;
+border-left: inset;
+border-left-color: transparent;
 }
 
 .modhead {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    display: inline-block;
-    max-width: 270px;
-    overflow: hidden;
-    font-size: 14px;
-    font-weight: 500;
+white-space: nowrap;
+text-overflow: ellipsis;
+display: inline-block;
+max-width: 195px;
+overflow: hidden;
+font-size: 14px;
+font-weight: 500;
 }
 
 :host ::ng-deep .mat-step-label {
-    white-space: pre-line !important;
+white-space: pre-line !important;
+}
+.bodybg {
+width: 100%;
+padding-left: 0;
+padding-right: 0;
+min-height: 100vh;
+display: flex;
+background-color: $color-white;
 }
 
 
-//////////foooter
+// ////////foooter
 .footer {
-    padding: 15px;
-    font-size: inherit;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    color: $label;
-    position: fixed;
-    z-index: 1;
-    font-weight: 500;
-    background-color: $profile-t-grey;
-    text-align: right;
-    border-top: 2px solid $profile-p-grey;
+padding: 15px;
+font-size: inherit;
+left: 0;
+bottom: 0;
+width: 100%;
+color: $label;
+// position: fixed;
+z-index: 999999;
+font-weight: 500;
+background-color: $profile-t-grey;
+text-align: right;
+border-top: 2px solid $profile-p-grey;
 }
 
 .mar {
-    margin-right: 6px;
-    margin-top: 5px;
-
+margin-right: 6px;
+margin-top: 5px;
 }
 
 :host ::ng-deep .mat-tab-label .mat-tab-label-content {
-    font-size: 14px !important;
-    // color: $lxp-gray !important;
+font-size: 14px !important;
+// color: $lxp-gray !important;
 }
 
 :host ::ng-deep.footericon {
-    width: 9%;
-    position: absolute;
-    margin-left: 5px;
-
+width: 9%;
+position: absolute;
+margin-left: 5px;
 }
-//  :host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
+// :host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
 //     display: none;
-//   }
+// }
 
 .nameh1 {
-    color: $color-blank !important;
-    padding-left: 8px;
-    font-size: 17px;
-    margin-top: 11px;
-    height: 37px;
-    margin-bottom: 0px;
-    cursor: pointer;
-    border-bottom: 2px solid $lxp-theme-green;
+color: $color-blank !important;
+padding-left: 8px;
+font-size: 17px;
+margin-top: 11px;
+height: 37px;
+margin-bottom: 0;
+cursor: pointer;
+border-bottom: 2px solid $lxp-theme-green; // red color
 
 }
 
 
 :host ::ng-deep .mat-expansion-panel:not([class*=mat-elevation-z]) {
-    box-shadow: none !important;
-    //   border: none !important;
+box-shadow: none !important;
+// border: none !important;
 }
 
 // }
 
-/// mobile 
-@media (min-width: 481px) and (max-width: 767px) {
-    .drawer {
-        width: 100% !important;
-    }
 
-    .player {
-        height: 284px !important;
-    }
+// forum CSS
 
-}
-
-
-@media (min-width: 320px) and (max-width: 480px) {
-    .drawer {
-        width: 100% !important;
-    }
-
-    .player {
-        height: 284px !important;
-    }
-
-}
-
-//forum CSS
-
-//Mythreyi CSS starts here
+// Mythreyi CSS starts here
 
 .send_btn {
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: $lxp-theme-green;
-    ;
-    -webkit-text-fill-color: transparent;
-    font-size: 30px;
+-webkit-text-stroke-width: 2px;
+-webkit-text-stroke-color: $lxp-theme-green; // red color
+-webkit-text-fill-color: transparent;
+font-size: 30px;
 }
 
 // /deep/ .mat-checkbox-layout .mat-checkbox-label {
@@ -897,34 +902,114 @@ iframe.fullScreen {
 // }
 
 .greyBor {
-    border: 1px solid #dddddd;
+border: 1px solid #dddddd;
 }
 
 .createThreadDialog {
-    width: 900px;
+width: 900px;
 }
 
 ::ng-deep .mat-dialog-container {
-    padding: 30px !important;
-    border-radius: 0 !important;
+padding: 30px !important;
+border-radius: 0 !important;
 }
 
-
-@media screen and (min-width: 320px) and (max-width:760px) {
-    .createThreadDialog {
-        width: 320px;
-    }
+// / mobile
+@media(min-width: 320px) and(max-width: 767px) {
+.createThreadDialog {
+    width: 320px;
+}
+.forum-width {
+    width: 100% !important;
+}
+.prevBtn {
+    margin-left: 45%;
+    position: relative;
 }
 
-@media screen and (min-width: 768px) and (max-width:1024px) {
-    .createThreadDialog {
-        width: 600px;
-        position: relative;
-    }
+.drawerClsTab {
+    bottom: 0;
+}
+
+.drawer {
+    width: 95% !important;
+}
+
+.player {
+    height: 284px !important;
+}
+
+.player {
+    height: 284px !important;
+}
+
+.black_bo {
+    border: 1px solid $color-border !important;
+}
+
+.black_bor {
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+}
+
+.divider {
+    left: 10px !important;
+}
+
+.time {
+    left: 0 !important;
+}
+
+.panel {
+    margin-bottom: 10px;
+}
+
+.moduleund {
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+.module-container {
+    margin-top: 10px;
+    height: 70px;
+}
+
+.exp-icon {
+    margin-top: 17px;
+}
+
+.moduleContainerRow {
+    margin-top: 10px;
+}
+
+.bg_color {
+    margin-left: 18px !important;
+}
+}
+@media(min-width: 768px) and(max-width: 991.98px) {
+.createThreadDialog {
+    width: 600px;
+    position: relative;
+}
+.prevBtn {
+    margin-left: 75%;
+    position: relative;
+}
+
+.drawer {
+    width: 50% !important;
+}
+}
+@media(min-width: 992px) and(max-width:1024px) {
+.createThreadDialog {
+    width: 600px;
+    position: relative;
+}
 }
 
 .inputs {
-    border: 1px solid grey;
+border: 1px solid grey;
 }
 
 /deep/ .angular-editor-button[title="Undo"],
@@ -953,158 +1038,167 @@ iframe.fullScreen {
 /deep/ .angular-editor-button[title="Toggle Editor Mode"],
 /deep/ .angular-editor-button[title="Remove Format"],
 /deep/ .angular-editor-button[title="Horizontal Line"] {
-    display: none !important;
+display: none !important;
 }
 
 /deep/ .angular-editor-toolbar .angular-editor-toolbar-set {
-    display: inline-block;
-    /* border-radius: 5px; */
-    background-color: transparent !important;
-    margin-right: 0px !important;
-    vertical-align: middle;
-    border: none !important;
-    margin-bottom: none !important;
+display: inline-block;
+/* border-radius: 5px; */
+background-color: transparent !important;
+margin-right: 0 !important;
+vertical-align: middle;
+border: none !important;
+margin-bottom: none !important;
 }
 
 /deep/ .angular-editor-toolbar .angular-editor-toolbar-set select {
-    display: none !important;
+display: none !important;
 }
 
 /deep/ .angular-editor {
-    border-right: none !important;
+border-right: none !important;
 }
 
 /deep/ .angular-editor img {
-    width: 100% !important;
+width: 100% !important;
 }
 
-@media only screen and (min-width: 770px) {
-    /deep/ .angular-editor img {
-        width: 70% !important;
-    }
+@media only screen and(min-width: 770px) {
+/deep/ .angular-editor img {
+    width: 70% !important;
 }
-
+}
 
 .bg-blue {
-    background-color: $lxp-theme-green;
-    ;
+background-color: $lxp-theme-green; // red color
 }
 
 .dialogButtons {
-    .mat-stroked-button {
-        margin: 0px 0px 0px 15px;
-        padding: 0px 25px;
-        border-radius: 0 !important;
-    }
+.mat-stroked-button {
+    margin: 0 0 0 15px;
+    padding: 0 25px;
+    border-radius: 0 !important;
+}
 }
 
-//Mythreyi CSS ends here
+// Mythreyi CSS ends here
 
-//Kani CSS starts here 
+// Kani CSS starts here
+
 .thread-header {
-    // background-color: #C9E4F35C;
-    // background-image: linear-gradient(#C9E4F35C, rgba(244, 246, 247, 0.361));
-    background-image: linear-gradient(#FFCC00, #faf5cb);  
-    box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753);
-    border-bottom: 1px solid $color-border;
+// background-color: #C9E4F35C;
+// background-image: linear-gradient(#C9E4F35C, rgba(244, 246, 247, 0.361));
+background-image: linear-gradient(#FFCC00, #faf5cb);
+box-shadow: 0 2px 5px 0 rgba(230, 230, 230, 0.753);
+border-bottom: 1px solid $color-border;
 }
 
 .post-header {
-    // background-color: #F1F1F1;
-    background-image: linear-gradient(#f1f1f1, #fafafa);
-    box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753);
-    border-bottom: 1px solid $color-border;
+// background-color: #F1F1F1;
+background-image: linear-gradient(#f1f1f1, #fafafa);
+box-shadow: 0 2px 5px 0 rgba(230, 230, 230, 0.753);
+border-bottom: 1px solid $color-border;
 }
 
 .child-post-header {
-    // background-color: #F1F1F15C;
-    background-image: linear-gradient(#f1f1f15c, #fafafa);
-    box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753);
-    border-bottom: 1px solid $color-border;
+// background-color: #F1F1F15C;
+background-image: linear-gradient(#f1f1f15c, #fafafa);
+box-shadow: 0 2px 5px 0 rgba(230, 230, 230, 0.753);
+border-bottom: 1px solid $color-border;
 }
-
-
 
 
 .pointerNone {
-    pointer-events: none !important;
-    opacity: 0.5;
+pointer-events: none !important;
+opacity: 0.5;
 }
 
 .new_Thread {
-    color: $color-white !important;
-    border-radius: none !important;
-    background-color: $lxp-theme-green;
-    border: none;
-    margin-right: 10px !important;
-    float: right !important;
-    margin-top: 2px;
+color: $color-white !important;
+border-radius: none !important;
+background-color: $lxp-theme-green; // red color
+border: none;
+// margin-right: 10px !important;
+float: right !important;
+margin-top: 2px;
+}
+.send-btn {
+color: $color-white !important;
+border-radius: none !important;
+background-color: $lxp-theme-green; // red color
+// width: 70px !important;
+height: 30px !important;
+display: inline-flex !important;
+align-items: center;
+
 }
 
+
 .no-radius {
-    border-radius: 0 !important;
-    box-shadow: none !important;
+border-radius: 0 !important;
+box-shadow: none !important;
 }
 
 .profileimg {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: $lxp-theme-green;
-    cursor: inherit !important;
-    color: $color-white;
-    font-size: 18px;
-    vertical-align: middle;
-    border: none !important;
+width: 30px;
+height: 30px;
+border-radius: 50%;
+background-color: $lxp-theme-green; // red color
+cursor: inherit !important;
+color: $color-white;
+font-size: 18px;
+vertical-align: middle;
+border: none !important;
 }
 
 .color-blue {
-    color: $lxp-theme-green;
+color: $lxp-theme-green; // red color
 }
 
 .black_border {
-    border: 1px solid $color-border;
+border: 1px solid $color-border;
 }
 
 .m-b-10 {
-    margin-bottom: 10px;
+margin-bottom: 10px;
 }
 
 .action_icon {
-    vertical-align: middle;
-    padding-right: 25px;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: $color-blank;
-    -webkit-text-fill-color: $color-white;
-    font-size: 20px;
+vertical-align: middle;
+padding-right: 25px;
+-webkit-text-stroke-width: 1px;
+-webkit-text-stroke-color: $color-blank;
+-webkit-text-fill-color: $color-white;
+font-size: 20px;
 }
 
 .action_icon_filled {
-    vertical-align: middle;
-    padding-right: 25px;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: $profile-t-grey;
-    -webkit-text-fill-color: $lxp-theme-green;
-    font-size: 20px;
+vertical-align: middle;
+padding-right: 25px;
+-webkit-text-stroke-width: 1px;
+-webkit-text-stroke-color: $profile-t-grey;
+-webkit-text-fill-color: $lxp-theme-green; // red color
+font-size: 20px;
 }
 
 .p-l-0 {
-    padding-left: 0 !important;
+padding-left: 0 !important;
 }
 
 .discussion_forum {
-    .spinner-container {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        right: 20px;
-        bottom: 20px;
-        z-index: 10;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: row;
-    }
+
+.spinner-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
 
 }
 
@@ -1122,117 +1216,102 @@ iframe.fullScreen {
 // }
 
 
+// kani CSS ends here
 
-//kani CSS ends here
-
-//Jasper CSS starts here
+// Jasper CSS starts here
 .bg_color {
-    background-color: $profile-t-grey;
-    text-align: center
+background-color: $profile-t-grey;
+text-align: center;
 }
 
 .position_hgt {
-    font-size: large;
-    padding-top: 12px;
-    font-weight: normal;
+font-size: large;
+padding-top: 12px;
+font-weight: normal;
 }
 
 .position {
-    padding-top: 2px;
-    color: #7e7e7e !important;
+padding-top: 2px;
+color: #7e7e7e !important;
 }
 
 .titlecolor {
-    color: #333333;
+color: #333333;
 }
 
 .date_color {
-    color: #7e7e7e !important;
+color: #7e7e7e !important;
 }
 
 .m-bt-4 {
-    margin-top: 4px !important;
-    margin-bottom: 4px !important;
+margin-top: 4px !important;
+margin-bottom: 4px !important;
 }
 
 .m-b-8 {
-    margin-bottom: 6px !important;
+margin-bottom: 6px !important;
 }
 
 .h-8 {
-    height: 64px !important;
+height: 64px !important;
 }
 
 .box_shadow {
-    transition: none !important;
-    box-shadow: none !important;
-    border-radius: 0px !important;
+transition: none !important;
+box-shadow: none !important;
+border-radius: 0 !important;
 }
 
-@media only screen and (min-width: 300px) and (max-width: 600px) {
-    .bg_color {
-        margin-left: 18px !important;
-    }
-}
+// @media only screen and(min-width: 300px) and(max-width: 600px) {
 
-@media only screen and (min-width: 300px) and (max-width: 770px) {
-    .new_Thread {
-        color: white !important;
-        border-radius: none !important;
-        background-color: $lxp-theme-green;
-        border: none;
-        margin-right: 10px !important;
-        float: left !important
-    }
+// }
 
-    // .send_pos {
-    //     margin-top: 0vh !important;
-    //     margin-left: 0px !important;
-    // }
+// @media only screen and(min-width: 300px) and(max-width: 770px) {
+// .new_Thread {
+//     color: white !important;
+//     border-radius: none !important;
+//     background-color: $lxp-theme-green;
+//     border: none;
+//     margin-right: 10px !important;
+//     float: left !important
+// }
+
+// .send_pos {
+//     margin-top: 0vh !important;
+//     margin-left: 0px !important;
+// }
 
 
-    .black_bo {
-        border: 1px solid $color-border !important;
-    }
-
-    .black_bor {
-        border-top: none !important;
-        border-left: none !important;
-        border-right: none !important
-    }
-}
+// }
 
 .send_pos {
-    margin-top: 42px;
-    background: whitesmoke;
-    border: 1px solid #dddddd;
-    border-left: none;
-    margin-top: 5px;
-    text-align: center;
+margin-top: 42px;
+background: whitesmoke;
+border: 1px solid #dddddd;
+border-left: none;
+margin-top: 5px;
+text-align: center;
 }
 
 .black_bor {
-    border: 1px solid $color-border
+border: 1px solid $color-border;
 }
 
 .black_bo {
-    border: none;
+border: none;
 }
-
 
 .alignment {
-    padding-top: 15px !important;
-    padding-bottom: 12px !important;
+padding-top: 15px !important;
+padding-bottom: 12px !important;
 }
 
-
-
 .m-b-0 {
-    margin-bottom: 0 !important;
+margin-bottom: 0 !important;
 }
 
 .m-t-20 {
-    margin-top: 20px !important;
+margin-top: 20px !important;
 }
 
 // /deep/.dialogPopup.mat-dialog-container {
@@ -1245,84 +1324,266 @@ iframe.fullScreen {
 // }
 
 .m-b-15 {
-    margin-bottom: 15px;
+margin-bottom: 15px;
 }
 
 .p-lr-30 {
-    padding: 0px 30px !important;
+padding: 0 30px !important;
 }
 
 .m-auto-tb {
-    margin-top: auto;
-    margin-bottom: auto;
+margin-top: auto;
+margin-bottom: auto;
 }
 
 .padding_matcard {
-    padding: 5px 30px !important;
+padding: 5px 30px !important;
 }
-
 
 .reset:hover {
-    background-color: #f5f5f5 !important;
+background-color: #f5f5f5 !important;
 }
 
-//Jasper CSS ends here
+// Jasper CSS ends here
 
-//Ramya CSS starts here
+// Ramya CSS starts here
 .icon {
-    color: $color-blue;
-
+color: $color-blue;
 }
 
 .grade {
-    color: $color-dark-green;
+color: $color-dark-green;
 }
-.info-icon{
-    position: relative;
-    left: -17px;
-    top: 36px;
+.info-icon {
+position: relative;
+left: -17px;
+top: 36px;
 }
-.upload-btn{
-    position: relative;
-    bottom: 5px;
-    right: 23px;
-    top: 16px;
+.upload-btn {
+position: relative;
+bottom: 5px;
+right: 23px;
+top: 16px;
 }
-.singleline-text{
-    white-space: nowrap
+.singleline-text {
+white-space: nowrap
 }
 
-.textTruncate{
-    width: 90px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.textTruncate {
+width: 90px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 }
-.status-col{
-    position: relative;
+.status-col {
+position: relative;
 
-    left: 47px;
+left: 47px;
 }
-.detailrow{
+.detailrow {}
+.not-submited {
+color: $lxp-gray;
+}
+// .mat-tooltip {
+//     font-size: 15px;
+//     background: green;
+// }
+
+::ng-deep .custom-mat-tooltip {
     
+    position:  relative !important;
+    bottom: 50px !important;
+    background-color: black !important;
 }
-.not-submited{
-    color: $lxp-gray;
-}
-.mat-tooltip {
-    font-size: 15px;
-    background: green;
-  } 
 
-::ng-deep .tooltip-inner{
-  
-    opacity: 0.6 !important;
+::ng-deep .tooltip-inner {
+
+opacity: 1 !important;
 }
 :host ::ng-deep .tooltip-arrow {
-    opacity: 0.6 !important;
-  }
-  ::ng-deep .tooltip-350 ~ .tooltip .tooltip-inner {
-    max-width: 220px;
-    min-width: 220px;
-  }
-//Ramya CSS ends here
+opacity: 1 !important;
+}
+::ng-deep .tooltip-350 ~ .tooltip .tooltip-inner {
+max-width: 220px;
+min-width: 220px;
+}
+.searchdisabledicon {
+color: $color-lightest-grey;
+}
+.uploadBtn {
+width: 0;
+height: 0;
+position: relative;
+top: 9px;
+left: 10px;
+}
+.uploadIcon {
+z-index: 1;
+position: relative;
+bottom: 13px;
+right: 20px;
+}
+.time {
+position: relative;
+right: 13px;
+}
+.divider {
+position: relative;
+left: 35px;
+}
+// .mar {
+//     left: 10px !important;
+//     bottom: 2px;
+//     position: relative;
+//     margin-top: 0px !important;
+// }
+.mar {
+left: 10px !important;
+position: absolute !important;
+margin-top: -2px !important;
+height: 20px;
+}
+.custom-index {
+margin-top: 8px;
+height: 20 px;
+}
+// Ramya CSS ends here
+
+
+.closeBtn {
+position: relative;
+right: 7px;
+}
+
+.about-course {
+
+height: 100vh;
+
+}
+
+::ng-deep .mat-drawer:not(.mat-drawer-side) {
+box-shadow: none;
+}
+
+::ng-deep .mat-vertical-content {
+padding: 0 !important;
+}
+
+.drawercls {
+margin-left: 4%;
+}
+.resDrawercls {
+margin-left: 3%;
+}
+
+
+.drawer {
+position: fixed;
+height: 100vh;
+width: 25%;
+border-right: 1px solid #ccc;
+}
+.drawer .header {
+position: absolute;
+right: 0;
+justify-content: space-between;
+}
+.drawer .contents {
+padding: 16px 0 16px 16px;
+margin-top: 12%;
+}
+
+.main-opn {
+background-color: #fff;
+}
+
+
+.main-opn {
+position: fixed;
+top: 0;
+width: 100%;
+z-index: 2;
+// border-bottom: 1px solid #ccc;
+}
+.main-cls {
+position: fixed;
+top: 0;
+width: 100%;
+z-index: 2;
+// border-bottom: 1px solid #ccc;
+}
+.main-opn.contents {
+min-height: 100vh;
+margin-top: 64px; /* height of header */
+padding: 16px;
+}
+.drawerHamIcon {
+z-index: 20;
+position: relative;
+right: 7px;
+top: 2px;
+}
+
+
+/* video player tab */
+.example-sidenav-content-opn {
+display: flex;
+height: 100%;
+align-items: center;
+justify-content: center;
+width: 75%;
+margin-left: 2%
+}
+.example-sidenav-content-cls {
+display: flex;
+height: 100%;
+align-items: center;
+justify-content: center;
+
+}
+
+
+// /* About the course tab */
+.drawerClsAboutCourse {
+margin-left: 2%;
+}
+
+.drawerOpnAboutCourse {
+margin-left: 3%;
+}
+
+.drawerOpnResource {
+margin-left: 3%;
+width: 74%;
+}
+.drawerClsResource {
+width: 100%;
+}
+
+
+.drawerOpnAss {
+width: 74%;
+margin-left: 3%;
+}
+.drawerClsAss {
+width: 100%;
+}
+.drawerOpnForum {
+margin-left: 3%;
+width: 74%;
+}
+
+.drawerClsForum {
+width: 70% !important;
+margin: auto !important;
+display: block !important;
+}
+
+::ng-deep .panel .mat-expansion-panel-body {
+padding: 0 !important;
+}
+// Ramya CSS ends here
+
+.posAb {
+    position : absolute;
+}

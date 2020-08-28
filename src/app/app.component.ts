@@ -83,7 +83,7 @@ export class AppComponent implements OnInit {
   getIPAddress() {
     this.http.get(this.commonService.getIpAddressByUrl()).subscribe((res: any) => {
       this.ipAddress = res.ip;
-      localStorage.setItem('Systemip', this.ipAddress);
+      localStorage.setItem('Systemip', this.ipAddress ? this.ipAddress : '' );
     });
   }
 

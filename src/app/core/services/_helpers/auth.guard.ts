@@ -35,15 +35,17 @@ export class AuthGuard implements CanActivate {
         this.router.navigate(['/Learner/MyCourse']);
         return false;
       } else if (!userDetailes.is_profile_updated) {
-        // if profile not updated and trying to access other screens, redirect to profile
-        if (state.url !== '/Learner/profile') {
-          this.router.navigate(['/Learner/profile']);
-          this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields', { closeButton: true });
-          // this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
-          return false;
-        } else {// if url is profile or anything
-          return true;
-        }
+        // if profile not updated and trying to access other screens, redirect to profile 
+        //Iggnite Changes done by Afser on Profile update not Mandtory
+        // if (state.url !== '/Learner/profile') {
+        //   this.router.navigate(['/Learner/profile']);
+        //   this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields', { closeButton: true });
+        //   // this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
+        //   return false;
+        // } else {// if url is profile or anything
+        //   return true;
+        // }
+        return true;
       } else {
         return true;
       }

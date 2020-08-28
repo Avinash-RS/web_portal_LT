@@ -12,7 +12,9 @@
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2) !important;
 
 }
-
+.spacer{
+    flex: 1 1 auto;
+}
 .more-btn {
     height: 100%;
     min-width: 70px;
@@ -23,13 +25,14 @@
 }
 
 .profileimg {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background-color: $color-white;
     color: $lxp-theme-green;
     cursor: pointer;
     font-size: smaller;
+    left:9px;
 }
 
 :host ::ng-deep .mat-toolbar-row, .mat-toolbar-single-row {
@@ -38,9 +41,9 @@
 
 .hearder-logo {
     height: 20px;
+    cursor: pointer;
     // padding-left: 0.5%;
 }
-
 .edutech {
     display: contents;
     font-size: 22px;
@@ -76,6 +79,10 @@
     line-height: 31px !important;
 
 }
+.mat-toolbar-row, .mat-toolbar-single-row {
+    padding: 0 11px !important;
+    width: 100%;
+}
 
 .btn1{
     position: relative;
@@ -88,7 +95,7 @@
     cursor: pointer;
   }
   :host ::ng-deep .btn1:focus {
-    border-bottom: 2px solid $color-blank !important; 
+    border-bottom: 2px solid $lxp-theme-green !important; 
     // border-right: none !important;
     // outline: 0 !important;
     // border-left: none !important;
@@ -123,7 +130,7 @@ color:  $color-blank !important;
     top: 6px;
   }
  .colgreen{
-    border-bottom: 2px solid $color-blank !important; 
+    border-bottom: 2px solid $lxp-theme-green !important; 
     color: $color-blank !important;
     // position: relative;
     // top: 2px;

@@ -43,6 +43,9 @@ export class GraphqlModule {
 
       // Check for token
       const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoibHhwYWRtaW4iLCJyb2xlIjoiYWRtaW
+      // 4iLCJ1c2VyX2lkIjoiMTIzNGFiIiwic2VjX2tleSI6IjEyM0FhIUAjIiwiaWF0IjoxNTk4NDUwMjk3LCJleHAiOjE1OTg0NzE4OTcsImlzcyI6Imh
+      // 0dHBzOi8vd3d3LmxhcnNlbnRvdWJyby5jb20vIn0.y9YcBFZc43QtAP2Wep7rSI1wHtIMkTBeseAb-n0qvpc'
       if (!token) { return forward(operation); }
 
       operation.setContext({
@@ -58,10 +61,10 @@ export class GraphqlModule {
       // console.log(operation);
       if (graphQLErrors) {
         graphQLErrors.forEach(({ message, locations, path }) => {
-          // console.log(
-          //   `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-          // );
-          if (message === 'TokenExpiredError: jwt expired' || message === ' JsonWebTokenError: jwt must be a string') {
+          console.log(
+            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+          );
+          if (message.includes('TokenExpiredError') || message.includes('JsonWebTokenError')) {
             localStorage.clear();
             this.httpC.get(this.services.getIpAddressByUrl()).subscribe((res: any) => {
               localStorage.setItem('Systemip', res.ip);

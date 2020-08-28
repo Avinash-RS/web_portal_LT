@@ -1,5 +1,19 @@
 @import "variable";
 // gobal css 
+html {
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  scroll-behavior: smooth !important;
+  behavior: 'smooth' !important;
+  overflow-x: hidden;
+}
+
+body { 
+ font-family:  'Roboto Condensed' , sans-serif !important;
+ scroll-behavior: smooth !important;
+ behavior: 'smooth' !important;
+}
 .mat-card {
   font-family: Roboto Condensed !important;
 }
@@ -317,7 +331,7 @@ mat-icon {
   padding: 15px;
   background-size: cover !important;
   background-repeat: no-repeat !important;
-  background: url('../../assets/learner/background.jpg');
+  // background: url('../../assets/learner/background.jpg');
 }
 
 .btn {
@@ -346,6 +360,8 @@ mat-icon {
   border-radius: 3px;
   overflow: hidden;
 }
+
+
 
 @media (max-width: 480px) {
   .wrap-reg {
@@ -442,6 +458,10 @@ button:disabled:hover {
   width: 29%;
   bottom: 6px;
 }
+ .mat-badge-content {
+  color: $color-white;
+  background: $lxp-gray;
+}
 
 .beforeloginimg{
     height: 100vh;
@@ -505,4 +525,16 @@ color: $lxp-theme-green;
   opacity: 0;
   animation-name: fadeInUp;
   -webkit-animation-name: fadeInUp;
+}
+
+::ng-deep .mat-tab-label:last-child {
+  padding-left: calc(50%) !important; 
+}
+/* tooltip class */
+::ng-deep .tooltip-inner {
+
+  opacity: 0.9 !important;
+}
+:host ::ng-deep .tooltip-arrow {
+  opacity: 0.9 !important;
 }

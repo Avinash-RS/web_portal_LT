@@ -1,10 +1,12 @@
 import gql from 'graphql-tag';
 
 export const user_registration = gql`
-  mutation user_registration($full_name: String!, $mobile_number: String, $email: String!,$term_condition:Boolean,$domain:String!) {
+  mutation user_registration($full_name: String!, $mobile_number: String, $title_id: String,
+   $email: String!,$term_condition:Boolean,$domain:String!) {
     user_registration(
       full_name: $full_name,
       mobile_number:$mobile_number,
+      title_id :$title_id ,
       email: $email,
       term_condition: $term_condition,
       domain:$domain
@@ -873,5 +875,67 @@ export const claimcourse = gql`
       message
       success
     }
+  }
+`;
+
+export const  user_mstr_data = gql`
+  mutation  user_mstr_data {
+    user_mstr_data {
+      success
+        data {
+          _id
+          title
+        }
+    }
+  }
+`;
+
+
+
+export const add_topic_reference = gql`
+mutation add_topic_reference($user_id: String!, $batch_id: String, $course_id:String!, $module_id:String!, $topic_id:String!, 
+$reference_id: String,$ reference_status: Boolean, $created_by: String){
+  add_topic_reference(user_id: $user_id, batch_id : $batch_id, course_id:$course_id,module_id:$module_id,topic_id:$topic_id, reference_id:$reference_id,
+    reference_status: $reference_status, created_by:$created_by ) {
+      success
+      error_msg
+      message{
+          is_active
+          _id
+          user_id
+          batch_id
+          course_id
+          module_id
+          topic_id
+          reference_id
+          reference_status
+          created_by
+          created_on
+          updated_by
+          updated_on
+      }
+  }
+}`;
+
+export const  save_attendies = gql`
+  mutation  save_attendies(
+    $userid:String,
+    $activityid:String,
+    $activitynamne:String,
+    $username:String,
+    $mobile:String,
+    $email:String,
+    $status:String
+    ) {
+      save_attendies(userid:$userid,
+        activityid:$activityid,
+        activitynamne:$activitynamne,
+        username: $username,
+        mobile:$mobile,
+        email: $email,
+        status:$status){
+          success
+          message
+        }
   }
 `;

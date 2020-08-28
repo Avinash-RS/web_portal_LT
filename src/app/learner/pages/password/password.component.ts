@@ -52,7 +52,8 @@ export class PasswordComponent implements OnInit {
                }
 
   ngOnInit() {
-    this.translate.use(localStorage.getItem('language'));
+    // this.translate.use(localStorage.getItem('language'));
+    this.translate.use(localStorage.getItem('language') ? localStorage.getItem('language') : 'en');
     this.systemip = localStorage.getItem('Systemip');
     // this.userNamesuggestion();
     this.passwordForm = this.formBuilder.group({
@@ -106,7 +107,7 @@ export class PasswordComponent implements OnInit {
     localStorage.removeItem('adminDetails');
     this.loader.show();
     this.userid = localStorage.getItem('key');
-    this.service.user_registration_done(this.userid, this.emailid, this.passwordForm.value.password, this.systemip)
+    this.service.user_registration_done(this.userid, this.emailid, this.passwordForm.value.password, this.systemip ? this.systemip : '')
     .subscribe((data: any) => {
       if (data.data.user_registration_done.success === 'true') {
         // Added by Mythreyi - for user story 19 first time login
@@ -126,13 +127,14 @@ export class PasswordComponent implements OnInit {
                 localStorage.setItem('ps', ps);
                 this.loader.hide();
                 // if false, then need to update profile
-                if (loginresult.data.login.message.is_profile_updated) {
-                  this.router.navigate(['/Learner']);
-                } else {
-                  this.toastr.warning('Your profile is incomplete !',
-                  'Please provide data for all mandatory fields', { closeButton: true});
-                  this.router.navigate(['/Learner/profile']);
-                }
+                // if (loginresult.data.login.message.is_profile_updated) {
+                //   this.router.navigate(['/Learner']);
+                // } else {
+                //   this.toastr.warning('Your profile is incomplete !',
+                //   'Please provide data for all mandatory fields', { closeButton: true});
+                //   this.router.navigate(['/Learner/profile']);
+                // }
+                this.router.navigate(['/Learner/MyCourse']);
               }
             } else {
               this.loader.hide();

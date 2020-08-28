@@ -1,5 +1,4 @@
 @import "variable";
-
 .spinner-container {
   position: absolute;
   top: 0;
@@ -13,11 +12,17 @@
   color: $lxp-theme-green;
 }
 .forgot1 {
-  color: $lxp-text ;
+  color: $lxp-text;
   // cursor: pointer;
   font-size: 13px;
 }
-
+.primerFlage{
+  height: 70px;
+  // width: 67px;
+  position: absolute;
+  // margin-left: 20px;
+  z-index: 1;
+}
 .dot {
   font-size: 16px;
   font-weight: bolder;
@@ -35,7 +40,7 @@
   margin-top: 2%;
 }
 
-.m-left-2{
+.m-left-2 {
   margin-left: 2%;
 }
 // @media screen and (min-width: 270px) and (max-width: 795px) {
@@ -102,7 +107,7 @@
   font-weight: 500 !important;
   color: #616060;
 }
-:host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child{
+:host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
   display: inherit !important;
 }
 :host ::ng-deep .myCc .mat-tab-label .mat-tab-label-content {
@@ -110,7 +115,6 @@
   font-weight: 400 !important;
   // margin-right: 58%;
   // color: $lxp-gray !important;
-
 }
 
 .m-l-4 {
@@ -136,38 +140,39 @@
 .progess {
   width: 75px;
   margin-left: 3px;
+  margin-top: -9%;
   // margin-left: 24%;
   // position: absolute;
-
 }
-.finalScore{
+.finalScore {
   font-size: 22px;
-    padding: 16px;
-    margin-top: 11px;
-
+  padding: 16px;
+  margin-top: -3px;
 }
-.padscore{
+.f_size_12 {
+  font-size: 12px;
+}
+.padscore {
   font-size: 32px;
   color: $lxp-theme-green;
 }
-.no-border{
+.no-border {
   border: none !important;
 }
-.no-border:focus{
+.no-border:focus {
   border: none !important;
 }
-.point{
+.point {
   font-size: 32px;
-    padding: 23px;
-    // margin-top: 25px;
-    color: $light-green;
-
+  padding: 23px;
+  margin-top: -7px;
+  color: $light-green;
 }
-.f_size_13{
+.f_size_13 {
   font-size: 13px;
 }
 .width-80 {
-  max-width: 80%
+  max-width: 80%;
 }
 
 :host ::ng-deep.mat-tab-label {
@@ -191,18 +196,21 @@
   background-color: $lxp-theme-green !important;
   // left: 8px !important;
   // width: 90px !important;
-  
 }
 
 .m-b-2 {
   margin-bottom: 2%;
 }
-
+.m-l-40 {
+  margin-left: 40px;
+}
 .bodybg {
   width: auto;
   padding-left: 18px;
   padding-right: 18px;
   min-height: 100vh;
+  overflow: auto;
+  scroll-behavior: smooth !important;
   display: flex;
   background-color: $color-white;
 }
@@ -212,29 +220,29 @@
   padding-right: 0px;
   padding-left: 0px;
   margin-right: auto;
-  margin-left: auto;
+  margin-left: -8px;
 }
 
 :host /deep/ .mat-tab-body {
-
   html {
     overflow: scroll;
     overflow-x: hidden !important;
+    scroll-behavior: smooth !important;
   }
 
   ::-webkit-scrollbar {
     width: 0px;
     background: transparent !important;
+    scroll-behavior: smooth !important;
   }
 }
 
 .coursebg {
   background-color: $color_white;
-  margin-left: 1%;
-  margin-top: 1%;
-  margin-bottom: 1%;
+  // margin-left: 1%;
+  // margin-top: 1%;
+  // margin-bottom: 1%;
   box-shadow: none;
-  
 }
 
 .hrStyle {
@@ -243,7 +251,7 @@
 }
 
 :host ::ng-deep.mat-card {
-  padding: 0%;
+  padding: 16px !important;
   border-radius: 0px;
 }
 
@@ -256,7 +264,7 @@
 }
 
 .myC-head {
-  margin-left: 2% !important;
+  margin-left: 1% !important;
   margin-top: 2%;
   margin-bottom: 1%;
 }
@@ -266,30 +274,31 @@
   width: 100%;
   height: 100%;
   margin: auto;
-  margin-left: 0;
+  // margin-left: 26px;
   border-radius: 10px;
 }
 
-
 .courseHover {
   position: relative;
-  width: 150px;
-  height: 150px;
-  padding: 5px 0;
-  padding: 15px 0;
+  // width: 150px;
+  height: 126px;
+  // padding-top: 15px;
+  // bottom: 1px;
+  // padding: 5px 0;
+  // padding: 15px 0;
 }
 
 .overlay {
   position: absolute;
-  bottom: 10%;
-  left: 0;
+  bottom: 1%;
+  // left: 25px;
   right: 0;
-  padding: 15px 0;
+  /* padding: 15px 0; */
   background-color: #0000001f;
   overflow: hidden;
   width: 0;
-  height: 80%;
-  transition: .7s ease;
+  height: 98%;
+  transition: 0.7s ease;
   border-radius: 10px;
 }
 
@@ -314,17 +323,17 @@
   text-align: center;
 }
 
-
 .courseImgs {
   // width: 100%;
   // height: 100%;
   width: 90px;
+  margin-top: 15%;
   // padding: 21px;
   // margin: auto;
 }
-.errorboxx{
+.errorboxx {
   padding: 5px !important;
-  margin-top: 2.8%;
+  margin-top: 5%;
 }
 
 .m-l-1 {
@@ -337,7 +346,6 @@
 }
 
 .color-blue-card-status {
-
   border-left: 3px solid $bule2 !important;
   color: $color-blank !important;
 }
@@ -356,7 +364,6 @@
   color: $color-blank !important;
 }
 
-
 .LaunchBtn {
   border: 1px solid $lxp-theme-green !important;
   border-radius: 5px;
@@ -373,7 +380,7 @@
 }
 
 .statBtn {
-  border: 1px solid #898989 !important;
+  border: 1px solid $lxp-theme-green !important;
   margin-top: 23%;
 }
 
@@ -400,17 +407,24 @@
   padding-top: 8px;
   font-size: 16px;
   cursor: pointer;
-
 }
-
+.m-b-1 {
+  margin-bottom: 1%;
+}
+.m-t-05 {
+  margin-top: -0.5%;
+}
 .status {
   background: $lxp-theme-green;
   // padding: 2px 6px;
   // float: right;
   border-radius: 4px;
-  width: 50px;
+  // width: 50px;
+  height: 19px;
   border: none;
-  font-size: 13px;
+  font-size: 11px;
+  position: relative;
+  top: -8px;
   color: $color-white;
   // margin-top: 5px;
 }
@@ -453,7 +467,6 @@
   height: auto;
   margin-bottom: 0%;
   background: transparent !important;
-
 }
 
 .session-sub-card {
@@ -466,13 +479,10 @@
   // padding-bottom: 5px;
 }
 
-
-
 hr {
-
   margin-bottom: 0.5rem;
 }
-.event{
+.event {
   vertical-align: sub;
   color: $lxp-icon;
 }
@@ -501,10 +511,12 @@ hr {
 :host ::ng-deep .mat-progress-bar-fill::after {
   background-color: $lxp-gray !important;
 }
-
-:host ::ng-deep .mat-badge-content {
-  color: $color-white;
-  background: $lxp-gray;
+.tabsc{
+ & .mat-badge-content {
+    color: $color-white;
+    background: $lxp-gray !important;
+  }
+  
 }
 
 .mat-progress-bar {
@@ -519,7 +531,6 @@ hr {
 .blue_clr {
   background-color: $color-white;
   color: $lxp-button-text;
-
 }
 
 .blue_clr:hover {
@@ -537,8 +548,6 @@ hr {
   color: $color-white !important;
 }
 
-
-
 .pad1020 {
   // padding: 20px 0 10px 18px !important;
   padding-top: 20px !important;
@@ -549,7 +558,6 @@ hr {
 .icon-color {
   font-size: 22px;
 }
-
 
 .cap::first-letter {
   text-transform: capitalize !important;
@@ -562,42 +570,47 @@ hr {
 .width_35 {
   width: 35% !important;
 }
-.p-l-8{
+.p-l-8 {
   padding-left: 8%;
 }
 // .upcoming{
 //   margin-left: 7.5%;
 // }
-.card12{
+.card12 {
   background: transparent !important;
 }
+
 .card12:hover {
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2)
+  // box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2)
 }
-.cap{
+.cap {
   text-transform: capitalize;
 }
 
-.m-t-30{
+.m-t-30 {
   margin-top: 25px;
 }
-.m-t-2{
-margin-top: 2%;
+.m-t-2 {
+  margin-top: 2%;
 }
-.m-t-8{
+.m-t-m-2 {
+  top: -1px;
+  position: relative;
+}
+.m-t-8 {
   margin-top: 8px;
 }
-.m-l-2p{
+.m-l-2p {
   margin-left: 2px;
 }
-.m-t{
-  margin-top: 20%
+.m-t {
+  margin-top: 10%;
 }
-.l-b-2{
-  border-right: 1.5px solid $color-border; 
+.l-b-2 {
+  border-right: 1.5px solid $color-border;
   border-right-style: dashed;
 }
-.video{
+.video {
   color: $lxp-theme-green;
   position: relative;
   top: 6px;
@@ -607,19 +620,28 @@ margin-top: 2%;
 
 .upcoming {
   position: relative;
-    bottom: 22px;
-    left: 38px;
+  // bottom: 22px;
+  // left: 3px;
+}
+.tabside {
+  color: $color-blank;
+  position: absolute;
+  font-size: 18px;
 }
 
 .btl-alin {
   /* margin-top: -0.5%; */
   // text-align: left;
   /* justify-content: end; */
+  border: 1px solid $lxp-theme-green !important;
   position: absolute;
-    margin-left: 18%;
-    z-index: 99;
+  margin-left: -10%;
+  margin-top: 2px;
+  width: 100px;
+  z-index: 99;
+  height: 32px;
   // left: 268px;
-    // bottom: 5px;
+  // bottom: 5px;
   // margin-left: 25%;
 }
 
@@ -654,42 +676,60 @@ margin-top: 2%;
 }
 
 .statBtn1 {
-  border: 1px solid $lxp-gray;
+  border: 1px solid $lxp-theme-green;
   border-radius: 4px;
   width: 120px;
 }
 
-
-
 .timer {
   position: relative;
   top: 3px;
-  font-size : 15px;
+  font-size: 15px;
   left: 8px;
-  
+  cursor: text !important;
 }
-
+.m-p-14 {
+  margin-top: 14px;
+}
 .aligned-with-icon {
   position: relative;
-  // left: 420px;
-  font-size:12px;
-  margin-top: 10%;
+  cursor: pointer;
+  font-size: 12px;
+  // margin-top: 15%;
+  left: -94%;
 }
 
+.span-with-icon {
+  display: none;
+}
+
+.startBtnicon {
+  display: none;
+}
+
+.startBtnDiv {
+  display: block;
+}
+
+.m-t-1 {
+  margin-top: 2.8%;
+}
 .noCourse {
   padding: 50px;
 }
-
+.m-l-3 {
+  margin-left: 3px;
+}
 .footer {
   padding: 15px;
   font-size: inherit;
   left: 0;
   bottom: 0;
   width: 100%;
-  position: fixed;
+  // position: fixed;
   z-index: 1;
   color: $label;
-  position: fixed;
+  // position: absolute;
   z-index: 1;
   font-weight: 500;
   background-color: $profile-t-grey;
@@ -701,7 +741,6 @@ margin-top: 2%;
   width: 9%;
   position: absolute;
   margin-left: 5px;
-
 }
 
 .roundbtn {
@@ -731,8 +770,6 @@ margin-top: 2%;
   font-size: 19px;
   font-weight: 500;
 
-
-
   .showbtn {
     color: $lxp-theme-green !important;
     margin-left: -56px;
@@ -745,7 +782,6 @@ margin-top: 2%;
     outline: none !important;
     border: none !important;
   }
-
 
   /* The Modal*/
 
@@ -762,7 +798,6 @@ margin-top: 2%;
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
   }
-
 
   /* Modal Content */
 
@@ -784,7 +819,10 @@ margin-top: 2%;
     padding: 0.75rem;
   }
 
-  :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+  :host
+    ::ng-deep
+    .mat-tab-header-pagination-controls-enabled
+    .mat-tab-header-pagination {
     display: none !important;
   }
 
@@ -809,11 +847,14 @@ margin-top: 2%;
 
   .color-white {
     color: #b5acac;
-    background: white !important;
+    background: $color-white !important;
     border-left: 0px !important;
   }
 
-  :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+  :host
+    ::ng-deep
+    .mat-tab-header-pagination-controls-enabled
+    .mat-tab-header-pagination {
     display: none !important;
   }
 
@@ -831,59 +872,271 @@ margin-top: 2%;
     letter-spacing: 0.5;
   }
 }
+.catalogDropdownCol {
+  margin-top: 1rem;
+}
 
-// Mobile 
-@media (max-width: 480px) and (max-width: 320px) {
-  .descmc {
-    max-height: 175px !important;
-    min-height: 40px;
+.dropdown {
+  float: right;
+}
+
+.courseDetailsCol {
+  padding-left: 0px;
+}
+.template {
+  display: none;
+}
+::ng-deep .mat-dialog-container {
+  overflow-y: hidden !important;
+  // commenting because all popup are affecting -- please use aprent class
+  // width: 75% !important;
+  // height: 75% !important;
+  margin: auto;
+}
+
+// Mobile
+@media (min-width: 200px) and (max-width: 767.98px) {
+  .coursename{
+    margin-top: 5px;
+  }
+  .catalogDropdownCol {
+    margin-top: 0.5rem;
+    padding-right: 1.5rem;
+  }
+  .primerFlage{
+    height: 75px;
+    position: absolute;
+    margin-left: -4px;
+    z-index: 1;
+  }
+
+  #cdk-overlay-0 {
+    width: 95%;
+  }
+  .dropdown {
+    margin-right: 0rem !important;
+    float: right;
+  }
+
+  ::ng-deep .mat-dialog-container {
+    width: 95% !important;
+    height: 75% !important;
+    margin: auto;
+  }
+
+  .finalScore {
+    padding: 16px 9px;
+  }
+
+  .startBtnCol {
+    margin-top: 10px;
+  }
+
+  .bodybg {
+    padding-right: 0px;
+  }
+  .catalogTitle {
+    margin: auto;
+  }
+
+  .aligned-with-icon {
+    left: 0px;
+    margin-top: 5%;
   }
 
   .courseHover {
-    width: 100% !important;
-    height: 200px !important;
-
-  }
-  .show-less {
-    height: 0rem;
-    overflow: hidden;
-    padding: 0rem;
+    width: 100%;
+    height: 100%;
   }
 
-  .pad1020 {
-    padding-top: 0px !important;
-    padding-left: 0px !important;
+  .startBtnicon {
+    display: block;
+    position: relative;
+    font-size: 12px;
+    left: 0px;
+    margin-top: 5%;
+  }
+
+  .startBtnDiv {
+    display: none;
+  }
+
+  .courceNameCol {
+    padding-left: 2rem;
+  }
+
+  .timer {
+    left: 0px;
+  }
+
+  .alarmCol {
+    text-align: right;
+    padding-right: 20px;
+  }
+
+  .courseImg {
+    margin-left: 0px;
+  }
+
+  .courseDetailsCol {
+    padding-left: 15px;
+  }
+
+  .startBtnRow {
+    width: 350px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .btl-alin {
+    margin-top: 0px;
+    margin-left: 0px;
+    position: relative;
+  }
+  .catPost {
+    display: none;
+  }
+  .template {
+    display: block;
+  }
+  :host ::ng-deep #mat-tab-label-0-3 {
+    display: block !important;
+    padding: 14px 28px !important;
+    color: $lxp-dark-gray !important;
+  }
+  :host ::ng-deep #mat-tab-label-0-4 {
+    display: block !important;
+    padding: 14px 28px !important;
+    color: $lxp-dark-gray !important;
+  }
+  :host ::ng-deep #mat-tab-label-0-5 {
+    display: block !important;
+    padding: 14px 28px !important;
+    color: $lxp-dark-gray !important;
   }
 }
 
-@media (max-width: 568px) {
-  .descmc {
-    max-height: 175px !important;
-    min-height: 40px;
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .courseImg {
+    margin-left: 15px;
   }
-  .show-less {
-    height: 0rem;
-    overflow: hidden;
-    padding: 0rem;
+  .coursename{
+    margin-top: 5px;
   }
-  .courseHover {
-    width: 100% !important;
-    height: 200px !important;
+  .color_black2 {
+    padding-left: 0px;
+  }
+  .catalogDropdownCol {
+    margin-top: 0.5rem;
   }
 
-  .pad1020 {
-    padding-top: 0px !important;
-    padding-left: 0px !important;
+  .btl-alin {
+    margin-left: -6%;
+  }
+
+  .timer {
+    font-size: 17px;
+  }
+
+  .dropdown {
+    margin-right: 10px;
+    float: right;
+  }
+
+  .span-with-icon {
+    display: block;
+    float: right;
+  }
+
+  .startBtnicon {
+    display: none;
+  }
+
+  .startBtnDiv {
+    display: block;
+  }
+
+  .aligned-with-icon {
+    display: none;
+  }
+
+  .catnamesss {
+    margin-right: 25px !important;
+  }
+
+  .catalogTitle {
+    margin: auto;
+  }
+  .primerFlage{
+    height: 75px;
+    position: absolute;
+    margin-left: -4px;
+    z-index: 1;
   }
 
 }
 
-@media only screen and (max-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+// @media (max-width: 480px) and (max-width: 320px) {
+//   .descmc {
+//     max-height: 175px !important;
+//     min-height: 40px;
+//   }
+
+//   .courseHover {
+//     width: 100% !important;
+//     height: 200px !important;
+
+//   }
+//   .show-less {
+//     height: 0rem;
+//     overflow: hidden;
+//     padding: 0rem;
+//   }
+
+//   .pad1020 {
+//     padding-top: 0px !important;
+//     padding-left: 0px !important;
+//   }
+// }
+
+// @media (max-width: 568px) {
+//   .descmc {
+//     max-height: 175px !important;
+//     min-height: 40px;
+//   }
+//   .show-less {
+//     height: 0rem;
+//     overflow: hidden;
+//     padding: 0rem;
+//   }
+//   .courseHover {
+//     width: 100% !important;
+//     height: 200px !important;
+//   }
+
+//   .pad1020 {
+//     padding-top: 0px !important;
+//     padding-left: 0px !important;
+//   }
+
+// }
+@media only screen and (width: 1280px) {
+  .btl-alin {
+    margin-left: -8%;
+  }
+  .coursename{
+    margin-top: 5px;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1024px) and (orientation: portrait) {
   .descmc {
     max-height: 175px !important;
     min-height: 40px;
   }
-
+.coursename{
+  margin-top: 5px;
+}
   .courseHover {
     width: 100% !important;
     height: 200px !important;
@@ -894,11 +1147,26 @@ margin-top: 2%;
     padding: 0rem;
   }
 
+  .startBtnDiv {
+    display: none;
+  }
+
+  .startBtnicon {
+    display: block;
+  }
+
+  .startBtnRow {
+    width: 430px;
+  }
+
+  .btl-alin {
+    margin-left: -7.5rem;
+  }
+
   .pad1020 {
     padding-top: 0px !important;
     padding-left: 0px !important;
   }
-
 }
 .assignbtn {
   position: relative;
@@ -911,52 +1179,57 @@ margin-top: 2%;
   bottom: 39px;
 }
 .buttonCls {
-button {
-  border: solid 1px black !important;
-  color: $lxp-text;
+  button {
+    border: solid 1px $color-blank !important;
+    color: $lxp-text;
+  }
+  mat-icon {
+    position: relative;
+    top: 4px;
+  }
 }
-mat-icon {
-  position: relative;
-  top: 4px;
-}
+.no-p-l {
+  padding-left: 0px !important;
 }
 .clr {
   background-color: $color-white;
   color: $lxp-button-text;
   border: solid 1px $color-border !important;
   color: $lxp-text;
-  margin-left: 9.5%;
-  height: 30px;
-
+  border-radius: 4px;
+  margin-top: 2px;
+  padding-left: 2px;
+  // margin-left: 9.5%;
+  height: 32px;
 }
-.infoIcon{
+.infoIcon {
   position: relative;
-    font-size: 16px;
-    top: 3px;
+  font-size: 16px;
+  top: 3px;
 }
 .clr:hover {
   background-color: $lxp-dark-gray !important;
   color: $color-white !important;
 }
 
-.mypanel{
+.mypanel {
   width: 130px !important;
 }
-.available-course-btn{
+.available-course-btn {
   border: 1px solid $lxp-gray;
   padding: 7px;
   border-radius: 4px;
-  margin-left: 20px;
+  margin-left: 30px;
 }
-.mat-badge{
-  top:7px
+.mat-badge {
+  top: 7px;
 }
 
-:host ::ng-deep .cc-tab{
+:host ::ng-deep .cc-tab {
   position: relative !important;
   left: 100px !important;
 }
-.btn-icon{
+.btn-icon {
   position: relative;
   top: 4px;
 }
@@ -973,39 +1246,93 @@ mat-icon {
   position: relative;
 }
 //Grid
-.courseImage{
+.courseImage {
   height: 178px;
   width: 100%;
-  margin-top: -15px;
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+}
+.imageover:hover .courseImage {
+  opacity: 0.3;
+}
+
+.imageover:hover .overlayimage {
+  opacity: 1;
+}
+.overlayimage {
+  position: absolute;
+  bottom: -9%;
+  left: 0;
+  margin: 15px;
+  right: 0;
+  background-color: #00000087;
+  overflow: hidden;
+  color: $color-white !important;
+  font-size: 17px;
+  height: 178px;
+  transition: 0.7s ease;
+  border-radius: 5px;
+  opacity: 0;
+  font-size: 18px;
+  padding: 19px;
+  color: #3f444a;
+  font-size: 16px;
 }
 .overlay {
   opacity: 1;
 }
 
-.shortdesc{
+.shortdesc {
   padding: 15px;
 }
 .box-shadow {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  max-height: 283px;
+  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  // max-height: 100%
+  box-shadow: none;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+.catnamenew {
+  color: #3f444a;
+  text-transform: capitalize;
+  font-size: 22px;
+  font-weight: 600 !important;
 }
 .courseName {
   position: relative;
-  left: 10px;
+  /* left: 10px; */
   font-size: 18px;
+  // padding: 0px 19px;
+  color: #3f444a;
+  font-size: 18px;
+  font-weight: 600 !important;
 }
-.claimbtn {
+.courseName1{
   position: relative;
-  bottom: 16px;
+  /* left: 10px; */
+  font-size: 18px;
+  padding: 0px 19px;
+  color: #3f444a;
+  font-size: 18px;
+  font-weight: 600 !important;
+}
+:host ::ng-deep body ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 5px !important;
+    height: 5px !important;
+}
+::-webkit-scrollbar {
+  width: 5px !important;
 }
 .size {
-  font-size: large
+  font-size: large;
 }
 .search {
   width: 60%;
   position: relative;
   bottom: 2px;
-  
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(21, 156, 228, 0.4);
 }
 /* dropdown badge alignment */
 // #mat-badge-content-6, #mat-badge-content-7 ,#mat-badge-content-8{
@@ -1013,20 +1340,204 @@ mat-icon {
 //   position: initial;
 // }
 
-
-::ng-deep .cdk-overlay-container .cdk-overlay-pane .mat-select-panel{
-  min-width: 146px !important;
-  pointer-events: auto !important;
-  font-size: 14px !important;
-  transform: translateX(7px) translateY(-16px) !important;  
-}
-.availableCourseOption{
-  width: 150px;
-}
-::ng-deep .tooltip-inner{
-  
+// ::ng-deep .cdk-overlay-container .cdk-overlay-pane .mat-select-panel{
+//   min-width: 146px !important;
+//   pointer-events: auto !important;
+//   font-size: 14px !important;
+//   transform: translateX(7px) translateY(-16px) !important;
+// }
+// .availableCourseOption{
+//   width: 150px;
+// }
+::ng-deep .tooltip-inner {
   opacity: 0.6 !important;
 }
 :host ::ng-deep .tooltip-arrow {
   opacity: 0.6 !important;
+}
+:host ::ng-deep #mat-tab-label-0-3 {
+  display: none;
+}
+:host ::ng-deep #mat-tab-label-0-4 {
+  display: none;
+}
+:host ::ng-deep #mat-tab-label-0-5 {
+  display: none;
+}
+:host ::ng-deep #mat-badge-content-3 {
+  background: #898989 !important;
+}
+.catnamesss {
+  margin-right: 35px;
+  cursor: pointer !important;
+  background: $color-white;
+  border: none;
+  padding: 0px;
+  // height: 40px;
+  /* margin-bottom: 28px; */
+  color: #a2a2a2;
+  & .mat-badge-content{
+    background: #bab9b9 !important;
+  }
+}
+
+.catnamesss:focus {
+  border-bottom: 2px solid $lxp-theme-green !important;
+  color: $color-blank !important;
+  padding-bottom: 10px;
+  & .mat-badge-content{
+    background: $lxp-gray !important;
+  }
+}
+.catPost {
+  position: absolute;
+  float: right;
+  right: 20px;
+  top: 14px;
+  cursor: pointer;
+  /* bottom: 0; */
+  z-index: 999;
+}
+.available-course-btn:hover {
+  background-color: $lxp-theme-green;
+}
+.cathd1 {
+ padding-right: 10px;
+}
+.btnredClass {
+  width: 67%;
+  border: 1px solid $lxp-theme-green;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 13px;
+  border-radius: 8px;
+}
+
+.errorCard {
+  height: 150px;
+}
+
+.hr-tag {
+  top: 5px;
+  position: relative;
+}
+.dropdownicon {
+  position: relative;
+  top: 4px;
+  left: 5px;
+}
+// ::ng-deep .mat-menu-content {
+//   min-width: 146px !important;
+// }
+// ::ng-deep .mat-menu-panel{
+//   // margin-top: 60px !important;
+//   position: relative;
+//   top: 55px !important;
+//   right: 3px !important;
+// }
+.matBadge {
+  position: relative;
+  float: right;
+  right: 19px;
+  top: 22px;
+  background: $lxp-icon !important;
+}
+.lxp-text:hover {
+  color: $color-white;
+}
+.h-50{
+  height: 55px !important;
+}
+
+.dropbtn {
+  background-color: $color-white;
+  color: #898989;
+  padding: 6px;
+  font-size: 16px;
+  padding-left: 6px;
+  border: none;
+  // border-radius: 11px;
+  border: 1px solid #898989;
+  width: 155px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 155px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 999999;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown-content1 {
+  display: none;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: $lxp-theme-green;
+  color: $color-white;
+}
+
+.matBadge12 {
+  position: relative;
+  float: right;
+  right: 20px;
+  background: #5c6873 !important;
+  & .mat-badge-content {
+    background: $lxp-gray !important;
+  }
+}
+
+.contedrop {
+  padding: 15px;
+  cursor: pointer;
+}
+.contedrop:hover {
+  background: #cecece !important;
+}
+// :host ::ng-deep mat-badge-content {
+//   color: $color-white;
+//   background: $lxp-icon !important;
+// }
+
+::ng-deep .tooltip-inner {
+
+  opacity: 1 !important;
+}
+:host ::ng-deep .tooltip-arrow {
+  opacity: 1 !important;
+}
+.claimIcon:hover {
+  cursor: not-allowed;
+}
+.alarmcursor {
+  cursor: text;
+}
+::ng-deep .primerFlage ~ .tooltip{
+// transform: translateX(30px) !important;
+// transform: translateY(5px) !important;
+// position: relative !important;
+// top: 150px !important;
+// right: 2px !important;
 }

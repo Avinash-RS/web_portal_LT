@@ -25,6 +25,7 @@ import { MatDialog } from '@angular/material';
   ]
 })
 export class LearnerMyCourseComponent implements OnInit {
+  [x: string]: any;
   strDate: Date = new Date();
   userDetailes: any;
   enrolledCourses: any = [];
@@ -53,7 +54,11 @@ export class LearnerMyCourseComponent implements OnInit {
   courseSearch: any;
   categoryData: any;
   availableCourses: any;
-
+  onGoingCourseCount = 0;
+  completedCourseCount = 0;
+  allCourseCount = 0;
+  selectedIndex = 0;
+  viewCourseClass = true;
   constructor(
     public translate: TranslateService,
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
@@ -89,56 +94,6 @@ export class LearnerMyCourseComponent implements OnInit {
     topicname: 'Codes for Foundations1',
     _id: '5f2a50055e15d300116e4613'}}]}];
 
-    const currentDate = new Date();
-    const formatDate = moment(currentDate).format();
-
-    const topicStart = new Date();
-    const dateValue = moment(topicStart).format('YYYY-MM-DD');
-    this.learnerService.getData(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
-      this.results = data.data.get_read_learner_activity;
-      // console.log( this.results);
-      this.activity = data.data.get_read_learner_activity.message[0];
-
-      this.results.message.forEach((el: any) => {
-        // console.log(el.activity_details.startdate);
-        this.currentStartTime = moment(el.activity_details.startdate).format('LT');
-      //  console.log(this.currentStartTime)
-        this.currentEndTime = moment(el.activity_details.enddate).format('LT');
-        // console.log(this.currentEndTime);
-
-        const StartDate = new Date(el.activity_details.startdate);
-        // console.log(StartDate,"StartDate");
-
-        const EndDate = new Date(el.activity_details.enddate);
-        // console.log(EndDate,"EndDate");
-
-        if (currentDate > StartDate) {
-          this.showCompleted = 'completed';
-        } else if (currentDate === StartDate && currentDate < EndDate ) {
-          this.showOngoing = 'ongoing';
-        } else {
-          this.showUpcoming = 'upcoming';
-        }
-
-      });
-
-      // console.log("length",this.results['message'].length);
-
-      // tslint:disable-next-line:no-string-literal
-      // debugger;
-      if (this.results.message.length < 5) {
-        this.showViewButton = false;
-        // console.log(this.showViewButton);
-      } else {
-        this.showViewButton = true;
-      }
-      // console.log('after playlist order UPDATED', data.data);
-    }, (error) => {
-      // console.log('there was an error sending the query', error);
-    });
-    // console.log('data retreived', data);
-
-
   }
 
   getScreenSize(event?) {
@@ -152,18 +107,8 @@ export class LearnerMyCourseComponent implements OnInit {
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
       catalougeId, catagoryId).subscribe((enrolledList: any) => {
       if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
-        // enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.forEach(element => {
-        //   this.learnerService.getModuleData(element.course_id, this.userDetailes.user_id).subscribe((data: any) => {
-        //     if (data.data.getmoduleData.data) {
-        //       element.duration = data.data.getmoduleData.data[0]?.coursetime;
-        //     }
-        //   });
-        //   //  element.duration = this.diff_hours(element.course_start_datetime, element.course_start_datetime);
-        // });
         this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
         this.enrolledCourses.forEach(element => {
-          const assignmentCount = element.assignmentCount;
-          const forumCount = element.forumCount;
           if (element.course_duration) {
             if (Number(element.course_duration.slice(3, 5)) >= 30) {
               element.course_duration = Number(element.course_duration.slice(0, 2)) + 1;
@@ -187,6 +132,11 @@ export class LearnerMyCourseComponent implements OnInit {
         });
         this.completed = arr1;
         this.incomplete = arr;
+        if (!catalougeId && !catagoryId) {
+          this.onGoingCourseCount = arr.length;
+          this.completedCourseCount = arr1.length;
+          this.allCourseCount = this.enrolledCourses.length;
+        }
       }
       this.loading = false;
     });
@@ -232,7 +182,7 @@ export class LearnerMyCourseComponent implements OnInit {
     }
   }
   alterDescriptionText() {
-    console.log('in');
+    // console.log('in');
     this.showShortDesciption = !this.showShortDesciption;
   }
 
@@ -264,7 +214,7 @@ export class LearnerMyCourseComponent implements OnInit {
       wishlist: c.wishlisted || false,
       wishlist_id: c.wishlist_id || null,
       enrollment_status: null,
-      assignmentVal: true
+      // assignmentVal: true
     };
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
   }
@@ -289,19 +239,19 @@ export class LearnerMyCourseComponent implements OnInit {
   }
   getCoureBasedOnCatalog(catalogue, category, templateRef) {
     this.categoryData = category;
+    this.catagoryName = category.categoryName;
     this.learnerService.getCoureBasedOnCatalog(catalogue.catalogueId, this.pagenumber, category.categoryId,
       this.userDetailes._id).subscribe((course: any) => {
       if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
       this.allcourses = course.data.getCoureBasedOnCatalog.data;
-      this.viewCourse(category, templateRef);
+      // this.viewCourse(category, templateRef);
       }
     });
   }
     viewCourse(category, templateRef: TemplateRef<any>) {
+      this.viewCourseClass = false;
       this.categoryPopupData = category;
       this.dialog.open(templateRef, {
-        width: '70%',
-        height: '70%',
         closeOnNavigation: true,
         disableClose: true,
       });
@@ -309,6 +259,7 @@ export class LearnerMyCourseComponent implements OnInit {
     closedialogbox() {
       this.dialog.closeAll();
       this.availableCourses = '';
+      this.viewCourseClass = true;
     }
     claimCourse(courseId) {
       this.learnerService.claimcourse(this.userDetailes._id, this.userDetailes.user_id,

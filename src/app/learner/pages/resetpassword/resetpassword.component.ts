@@ -45,10 +45,13 @@ export class ResetpasswordComponent implements OnInit {
     private formBuilder: FormBuilder,
     private activeroute: ActivatedRoute,
     private toastr: ToastrService,
-    public service: LearnerServicesService) { }
+    public service: LearnerServicesService) {
+      const language = localStorage.getItem('language') || 'en';
+      this.translate.setDefaultLang(language);
+      this.translate.use(language);
+    }
 
   ngOnInit() {
-    this.translate.use(localStorage.getItem('language'));
     this.activeroute.queryParams.subscribe(params => {
       if (params.code) {
         // const decryptedString = simpleCrypto.decrypt(params.code);

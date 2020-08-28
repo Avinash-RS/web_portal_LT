@@ -73,7 +73,10 @@ import {
   playerstatusrealtime,
   CreateNewThread,
   CreateNewThreadBid,
-  claimcourse
+  claimcourse,
+  user_mstr_data,
+  add_topic_reference,
+  save_attendies
 } from './operations/learner_mutation';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -139,12 +142,13 @@ export class LearnerServicesService {
     return this.http.post(this.envApi + 'post_like', data, httpOptions);
   }
 
-  user_registration(email, full_name, mobile_number, termsandconditions) {
+  user_registration(email, full_name, mobile_number, title_id , termsandconditions) {
     return this.Apollo.query({
       query: user_registration,
       variables: {
         full_name,
         mobile_number,
+        title_id ,
         email,
         term_condition: termsandconditions,
         domain: this.envDomain
@@ -785,6 +789,43 @@ export class LearnerServicesService {
       variables: {
         user_id: uid,
         course_id: cid
+      }
+    });
+  }
+
+  getRegisterTitle() {
+    return this.Apollo.query({
+      query: user_mstr_data,
+      variables: {}
+    });
+  }
+
+  add_topic_reference(user_id,batch_id,course_id,module_id,topic_id,reference_id,reference_status,created_by){
+    return this.Apollo.query({
+      query: add_topic_reference,
+      variables: {
+        user_id,
+        batch_id,
+        course_id,
+        module_id,
+        topic_id,
+        reference_id,
+        reference_status,
+        created_by
+      }
+    });
+  }
+  saveAttendees(){
+    return  this.Apollo.query({
+      query: save_attendies,
+      variables: {
+        userid:"fsdfsdfsd",
+        activityid:"432142314",
+        activitynamne:"test",
+        username:"testing",
+        mobile:"9876543234",
+        email:"test@gmail.com",
+        status:"true"
       }
     });
   }

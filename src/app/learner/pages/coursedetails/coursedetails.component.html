@@ -1,512 +1,563 @@
-<div>
-    <!-- id="hideMe" -->
-    <span>
+
+    <span *ngIf="sider">
         <app-header></app-header>
     </span>
-</div>
+<div style="height: 2px;" (mouseover)="sider=true"></div>
+<div class="container007 animated animatedFadeInUp fadeInUp bodybg">
+    <div>
+        <mat-drawer-container [class.drawer-opened]="drawer.opened" class="example-container">
+            <mat-drawer #drawer class="drawer" mode="side" opened="{{sider}}">
 
-<div class="container007 animated animatedFadeInUp fadeInUp">
-
-    <div class="main contents">
-        <span (click)="showHeader()">
-            <mat-icon class="closebgt" *ngIf="!drawer.opened" (click)="drawer.toggle()">menu</mat-icon>
-        </span>
-        <!-- {{drawer.opened}} -->
-        <div class="prevBtn">
-            <button class=" pointer" mat-button [disabled]="isprevEnable"
-                (click)="topicPrve()">{{'Prev' | translate }}</button>
-            <span class="">|</span>
-            <button class=" pointer" mat-button [disabled]="isNextEnable" (click)="topicNext()">
-                {{'Next' | translate }}</button>
-            <span class="fullScr">
-                <mat-icon (click)="makeFullScreen()">fullscreen</mat-icon>
-            </span>
-        </div>
-
-        <mat-tab-group #demo3Tab [(selectedIndex)]="selectedTabIndex" #tabs animationDuration="1000ms">
-            <mat-tab label="{{course?.course_name | titlecase }}">
-                <mat-drawer-container [class.drawer-opened]="drawer.opened" class="course-details-container">
-
-                    <mat-drawer #drawer class="drawer" mode="side" opened="{{sider}}">
-                        <mat-toolbar class="header">
-                            <div class="row">
-                                <div class="col-6 Outine">
-                                    {{'Course Outline' | translate }}
-                                </div> |
-                                <div class="col-6">
+                <mat-toolbar class="header">
+                    <mat-icon class="closeBtn" *ngIf="drawer.opened" (click)="drawer.close()">close</mat-icon>
+                    <mat-icon *ngIf="!drawer.opened" (click)="drawer.toggle()">
+                        menu
+                    </mat-icon>
+                    <div class="row">
+                        <div class="col-4 Outine">
+                            {{'Course Outline' | translate }}
+                        </div>
+                        <div class="col-4 divider">
+                            |
+                        </div>
+                        <div class="col-4">
+                            <div class="row time">
+                                <div class="col-2">
+                                    <mat-icon class="alarmIcon">alarm</mat-icon>
+                                </div>
+                                <div class="col-4">
+                                    <span
+                                        class="courseTime">{{content?.coursetime ? content?.coursetime : '01:00:00'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-toolbar>
+                <div class="contents">
+                    <mat-accordion *ngFor="let res of scromModuleData; let i = index"
+                        (click)="getSelectedIndex(i); getModuleDataForForum(scromModuleData.length, i + 1, res)">
+                        <mat-expansion-panel class="panel" hideToggle="true" #example [expanded]="selectedIndex === i">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title class="module-container">
                                     <div class="row">
-                                        <div class="col-2">
-                                            <mat-icon class="alarmIcon">alarm</mat-icon>
+                                        <div>
+                                            <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons mar">done
+                                            </mat-icon>
                                         </div>
+                                        <div>
+                                            <span class="custom-index" class='index-number'>{{i+1}}.</span>
+                                        </div>
+                                        <div>
+                                            <div class="moduleHead" tooltip="{{res?.title}}" placement="right">
+                                                <div class="modhead">{{res?.title }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <span class="moduleund">
+                                        <mat-icon class="time-icon">alarm</mat-icon>
+                                        <span class="course-time">
+                                            {{res?.moduletime ? res?.moduletime : '01:00:00' }}
+                                        </span>
+                                    </span>
+
+                                </mat-panel-title>
+                                <!-- <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons mar">done
+                        </mat-icon> -->
+                                <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
+                                </mat-icon>
+                                <mat-icon *ngIf="example.expanded" class="exp-icon">remove_circle_outline
+                                </mat-icon>
+
+                            </mat-expansion-panel-header>
+                            <div class="row">
+                                <div class="col-12">
+                                    <mat-vertical-stepper [linear]="isLeaner">
+                                        <ng-container *ngFor="let mod of res?.children; let j = index">
+                                            <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
+                                                mod.status === 'Process' ? 'colYellow' : 'colWhite'">
+                                                <ng-template matStepLabel>
+                                                    <span  *ngIf="mod?.title?.length > 20" tooltip= "{{mod?.title}}" placement="right" class="topicnm"
+                                                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
+                                                        {{(mod?.title  | slice:0:20)+'...'}}</span>
+
+                                                        <span  *ngIf="mod?.title?.length <= 20" class="topicnm"
+                                                            (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
+                                                            {{mod?.title}}</span>
+
+                                                </ng-template>
+                                            </mat-step>
+                                        </ng-container>
+                                    </mat-vertical-stepper>
+                                </div>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+            </mat-drawer>
+
+
+            <!-- header menu starts here -->
+
+            <div [ngClass]="drawer.opened==true?'main-opn':'main-cls'">
+                <mat-toolbar>
+                    <mat-icon class="drawerHamIcon" *ngIf="!drawer.opened" (click)="drawer.toggle()">
+                        menu
+                    </mat-icon>
+
+                    <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'" *ngIf="sider">
+                        <button class=" pointer" mat-button [disabled]="isprevEnable"
+                            (click)="topicPrve()">{{'Prev' | translate }}</button>
+                        <span class="">|</span>
+                        <button class=" pointer" mat-button [disabled]="isNextEnable" (click)="topicNext()">
+                            {{'Next' | translate }}</button>
+                        <span class="fullScr">
+                            <mat-icon (click)="makeFullScreen()">fullscreen</mat-icon>
+                        </span>
+                    </div>
+                </mat-toolbar>
+                <!-- tabs starts here -->
+                <mat-tab-group #demo3Tab [(selectedIndex)]="selectedTabIndex" #tabs animationDuration="1000ms"
+                    (selectedTabChange)="tabSelection($event)"
+                    [ngClass]="drawer.opened==true?'drawerOpnTab':'drawerClsTab'">
+                    <mat-tab>
+
+
+                        <ng-template mat-tab-label>
+                            <label  matTooltip="{{course?.course_name}}" matTooltipPosition="below" matTooltipClass='custom-mat-tooltip'>{{(course?.course_name?.length > 33)?(course?.course_name | slice:0:33)+'...':(course?.course_name)}}  
+                            </label>
+                        </ng-template>
+
+                        <div [ngClass]="drawer.opened==true?'example-sidenav-content-opn':'example-sidenav-content-cls'"
+                            class="">
+                            <iframe id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
+                        </div>
+
+                    </mat-tab>
+                    <!-- about the course tab -->
+                    <mat-tab label="About the course" class="aboutCourseTab">
+                        <div [ngClass]="drawer.opened==true?'drawerOpnAboutCourse':'drawerClsAboutCourse'">
+                            <h3 class="head-h1">Course description</h3>
+                            <div class="vertical"></div>
+
+                            <div class="curInclu">{{ 'This course includes :' | translate}}</div>
+                            <div class="row display_flex">
+                                <div style="max-width: 196px;">
+                                    <span class="font-color;padding: 5px">{{content?.totalResourseCount}} {{'downloadable
+                                                resources'| translate}}</span>
+                                </div>
+
+                                <span *ngIf="course?.course_mode"> &nbsp; |&nbsp;</span>
+                                <div style="max-width: 100px;">
+                                    <span class="font-color;padding: 5px">
+                                        {{course?.course_mode === 'self-placed' ? 'Self paced' : course?.course_mode}}</span>
+                                </div>
+
+                                <span *ngIf="course?.course_language"> &nbsp; |&nbsp;</span>
+                                <div style="max-width: 78px;">
+                                    <span class="font-color;padding: 5px">{{course?.course_language}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="desc" [innerHTML]="course?.course_long_description">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="course?.author_details[0].author_name != ''">
+                                <h3 class="head-h2">{{'Instructors'| translate}}</h3>
+                                <div class="vertical"></div>
+                                <div class="instr-box" *ngFor="let author of course?.author_details">
+                                    <div class="row">
                                         <div class="col-4">
-                                            <span
-                                                class="courseTime">{{content?.coursetime ? content?.coursetime : '01:00:00'}}</span>
+                                            <img class="img-inst"
+                                                [src]="author.image ? author?.image : 'assets/learner/pro2.png'" alt="">
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="authorname">{{author?.author_name | titlecase| translate}}</div>
+                                        </div>
+
+                                        <div class="row margin-35 borderline">
+                                            <div class="col-12 bottom-border">
+                                                <p class="author-desc">{{author?.description}}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <mat-icon class="close" (click)="drawer.close()">menu</mat-icon>
-                        </mat-toolbar>
-                        <div class="contents">
-                            <mat-accordion *ngFor="let res of scromModuleData; let i = index"
-                                (click)="getSelectedIndex(i); getModuleDataForForum(scromModuleData.length, i + 1, res)">
-                                <mat-expansion-panel class="panel" hideToggle="true" #example
-                                    [expanded]="selectedIndex === i">
-                                    <mat-expansion-panel-header>
-                                        <mat-panel-title class="module-container">
-                                            <div class="row">
-                                                <div style="margin-top: 8px;">
-                                                    <span class='index-number'>{{i+1}}.</span>
-                                                </div>
-                                                <div>
-                                                    <div class="moduleHead" tooltip="{{res?.title}}" placement="right">
-                                                        <div class="modhead">{{res?.title }}</div>
-                                                    </div>
+                        </div>
+                    </mat-tab>
+                    <!-- resource tab -->
+                    <mat-tab label="Resources">
+                        <div [ngClass]="drawer.opened==true?'drawerOpnResource':'drawerClsResource'">
+                            <mat-accordion>
+                                <ng-container *ngIf="content?.noresource">
+                                    <ng-container *ngFor="let res of content?.coursedetails; let i = index">
+                                        <mat-expansion-panel class="panel1" hideToggle="true" #example1
+                                            [expanded]="selectedIndex === i" *ngIf="res.resValue">
+                                            <mat-expansion-panel-header style="height: 50px !important;">
+                                                <mat-panel-title>
+                                                    <span
+                                                        class="sqnumner">{{i+1}}.</span>&nbsp;&nbsp;{{res?.modulename}}<br>
+                                                </mat-panel-title>
+                                                <mat-icon class="exp2" *ngIf="!example1.expanded">add_circle_outline
+                                                </mat-icon>
+                                                <mat-icon class="exp2" *ngIf="example1.expanded">remove_circle_outline
+                                                </mat-icon>
+                                            </mat-expansion-panel-header>
+
+
+                                            <div class="row margin-5">
+                                                <div class="col-12">
+                                                    <mat-list *ngFor="let mod of res?.moduledetails">
+                                                        <mat-list-item *ngIf="res.resValue">
+                                                            <div mat-line class="modTopName"
+                                                                *ngIf="mod.resourse?.files.length">
+                                                                {{mod?.topicname}} :</div>
+                                                            <div class="content">
+                                                                <div class="row"
+                                                                    *ngFor="let file of mod.resourse?.files">
+                                                                    <div class="col-12" style="margin-top:6px">
+                                                                        <div class="row">
+                                                                            <img *ngIf="file.doc_type == 'application/pdf'"
+                                                                                class="size" alt=""
+                                                                                src="assets/learner/fileicon/PDF_Icon.svg">
+                                                                            <img *ngIf="file.doc_type == 'link'"
+                                                                                class="size" alt=""
+                                                                                src="assets/learner/fileicon/Link_Icon.svg">
+                                                                            <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+                                                                                class="size" alt=""
+                                                                                src="assets/learner/fileicon/Excel_Icon.svg">
+                                                                            <img *ngIf="file.doc_type == 'image/jpeg' || file.doc_type == 'image/png' "
+                                                                                class="size" alt=""
+                                                                                src="assets/learner/fileicon/Image_Icon.svg">
+                                                                            <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
+                                                                                class="size" alt=""
+                                                                                src="assets/learner/fileicon/PPT_Icon.svg">
+                                                                            <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+                                                                                class="size" alt=""
+                                                                                src="assets/learner/fileicon/Word_Icon.svg">
+
+                                                                            <img *ngIf="file.doc_type == 'application/msword'"
+                                                                                class="size" alt=""
+                                                                                src="assets/learner/fileicon/Word_Icon.svg">
+
+                                                                            <img *ngIf="file.doc_type == 'application/vnd.ms-excel'"
+                                                                                class="size" alt=""
+                                                                                src="assets/learner/fileicon/Excel_Icon.svg">
+
+                                                                            <mat-icon class="docType"
+                                                                                *ngIf="file.doc_type == 'text/plain' ">
+                                                                                description
+                                                                            </mat-icon>
+                                                                            <div class="col-8">
+                                                                                {{file.type_name}}
+                                                                            </div>
+
+                                                                            <div class="col-2 f_size_12"
+                                                                                *ngIf="file?.type_name =='Link'">
+                                                                                <span class="ml-2">
+                                                                                    NA
+                                                                                </span>
+
+                                                                            </div>
+                                                                            <div class="col-2 f_size_12"
+                                                                                *ngIf="file?.size">
+                                                                                {{file.size}}
+                                                                            </div>
+                                                                            <div class="col-1">
+                                                                                <a href="{{file?.path}}" (click)="add_topic_reference(res)" download>
+                                                                                    <mat-icon
+                                                                                        style="color: #333;font-size: 20px;">
+                                                                                        save_alt </mat-icon>
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </mat-list-item>
+                                                    </mat-list>
                                                 </div>
                                             </div>
+                                        </mat-expansion-panel>
+                                    </ng-container>
+                                </ng-container>
 
-                                            <span class="moduleund">
-                                                <mat-icon class="time-icon">alarm</mat-icon>
-                                                <span class="course-time">
-                                                    {{res?.moduletime ? res?.moduletime : '01:00:00' }}
-                                                </span>
-                                            </span>
 
-                                        </mat-panel-title>
-                                        <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons mar">done
-                                        </mat-icon>
-                                        <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
-                                        </mat-icon>
-                                        <mat-icon *ngIf="example.expanded" class="exp-icon">remove_circle_outline
-                                        </mat-icon>
-
-                                    </mat-expansion-panel-header>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <mat-vertical-stepper [linear]="isLeaner">
-                                                <ng-container *ngFor="let mod of res?.children; let j = index">
-                                                    <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
-                                                                mod.status === 'Process' ? 'colYellow' : 'colWhite'">
-                                                        <ng-template matStepLabel>
-                                                            <span class="topicnm"
-                                                                (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
-                                                                {{mod?.title}}</span>
-                                                        </ng-template>
-                                                    </mat-step>
-                                                </ng-container>
-                                            </mat-vertical-stepper>
-                                        </div>
-                                    </div>
-                                </mat-expansion-panel>
+                                <ng-container *ngIf="!content?.noresource">
+                                    <span
+                                        style="padding: 16px;">{{'This course does not have resource files.'| translate}}</span>
+                                </ng-container>
                             </mat-accordion>
                         </div>
-                    </mat-drawer>
-                    <mat-drawer-content>
-                        <div class="example-sidenav-content">
-                            <iframe id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
-                          </div>
-                       </mat-drawer-content>
-                </mat-drawer-container>
-            </mat-tab>
+                    </mat-tab>
+                    <!-- assignment tab -->
+                    <mat-tab label="Assignments" class="discussion_forum"
+                        *ngIf="assignmentContent?.coursedetails.length">
+                        <div [ngClass]="drawer.opened==true?'drawerOpnAss':'drawerClsAss'">
+                            <mat-accordion>
+                                <ng-container>
+                                    <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
 
-            <mat-tab label="About the course">
-                <h3 class="head-h1">Course description</h3>
-                <div class="vertical"></div>
+                                        <mat-expansion-panel class="panel1" hideToggle="true" #example1
+                                            [expanded]="selectedIndex === i">
+                                            <mat-expansion-panel-header style="height: 50px !important;">
+                                                <mat-panel-title>
+                                                    <span
+                                                        class="sqnumner">{{i+1}}.</span>&nbsp;&nbsp;<span>{{res?.modulename}}
+                                                    </span>
 
-                <div class="curInclu">{{ 'This course includes :' | translate}}</div>
-                <div class="row display_flex">
-                    <div style="max-width: 196px;">
-                        <span class="font-color;padding: 5px">{{content?.totalResourseCount}} {{'downloadable
-                                    resources'| translate}}</span>
-                    </div>
-
-                    <span *ngIf="course?.course_mode"> &nbsp; |&nbsp;</span>
-                    <div style="max-width: 100px;">
-                        <span class="font-color;padding: 5px">
-                            {{course?.course_mode === 'self-placed' ? 'Self paced' : course?.course_mode}}</span>
-                    </div>
-
-                    <span *ngIf="course?.course_language"> &nbsp; |&nbsp;</span>
-                    <div style="max-width: 78px;">
-                        <span class="font-color;padding: 5px">{{course?.course_language}}</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="desc" [innerHTML]="course?.course_long_description">
-
-                        </div>
-                    </div>
-                </div>
-
-                <div *ngIf="course?.author_details[0].author_name != ''">
-                    <h3 class="head-h2">{{'Instructors'| translate}}</h3>
-                    <div class="vertical"></div>
-                    <div class="instr-box" *ngFor="let author of course?.author_details">
-                        <div class="row">
-                            <div class="col-4">
-                                <img class="img-inst" [src]="author.image ? author?.image : 'assets/learner/pro2.png'"
-                                    alt="">
-                            </div>
-                            <div class="col-6">
-                                <div class="authorname">{{author?.author_name | titlecase| translate}}</div>
-                            </div>
-
-                            <div class="row margin-35 borderline">
-                                <div class="col-12 bottom-border">
-                                    <p class="author-desc">{{author?.description}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </mat-tab>
-
-            <mat-tab label="Resources">
-                <mat-accordion>
-                    <ng-container *ngIf="content?.noresource">
-                        <ng-container *ngFor="let res of content?.coursedetails; let i = index">
-                            <mat-expansion-panel class="panel1" hideToggle="true" #example1
-                                [expanded]="selectedIndex === i" *ngIf="res.resValue">
-                                <mat-expansion-panel-header style="height: 50px !important;">
-                                    <mat-panel-title>
-                                        <span class="sqnumner">{{i+1}}.</span>&nbsp;&nbsp;{{res?.modulename}}<br>
-                                    </mat-panel-title>
-                                    <mat-icon class="exp2" *ngIf="!example1.expanded">add_circle_outline
-                                    </mat-icon>
-                                    <mat-icon class="exp2" *ngIf="example1.expanded">remove_circle_outline
-                                    </mat-icon>
-                                </mat-expansion-panel-header>
+                                                </mat-panel-title>
+                                                <mat-icon class="exp2" *ngIf="!example1.expanded">add_circle_outline
+                                                </mat-icon>
+                                                <mat-icon class="exp2" *ngIf="example1.expanded">remove_circle_outline
+                                                </mat-icon>
+                                            </mat-expansion-panel-header>
 
 
-                                <div class="row margin-5">
-                                    <div class="col-12">
-                                        <mat-list *ngFor="let mod of res?.moduledetails">
-                                            <mat-list-item *ngIf="res.resValue">
-                                                <div mat-line class="modTopName" *ngIf="mod.resourse?.files.length">
-                                                    {{mod?.topicname}} :</div>
-                                                <div class="content">
-                                                    <div class="row" *ngFor="let file of mod.resourse?.files">
-                                                        <div class="col-12" style="margin-top:6px">
-                                                            <div class="row">
-                                                                <img *ngIf="file.doc_type == 'application/pdf'"
-                                                                    class="size" alt=""
-                                                                    src="assets/learner/fileicon/PDF_Icon.svg">
-                                                                <img *ngIf="file.doc_type == 'link'" class="size" alt=""
-                                                                    src="assets/learner/fileicon/Link_Icon.svg">
-                                                                <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
-                                                                    class="size" alt=""
-                                                                    src="assets/learner/fileicon/Excel_Icon.svg">
-                                                                <img *ngIf="file.doc_type == 'image/jpeg' || file.doc_type == 'image/png' "
-                                                                    class="size" alt=""
-                                                                    src="assets/learner/fileicon/Image_Icon.svg">
-                                                                <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
-                                                                    class="size" alt=""
-                                                                    src="assets/learner/fileicon/PPT_Icon.svg">
-                                                                <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
-                                                                    class="size" alt=""
-                                                                    src="assets/learner/fileicon/Word_Icon.svg">
+                                            <div class="row margin-5">
+                                                <div class="col-12">
+                                                    <mat-list *ngFor="let mod of res?.moduledetails">
+                                                        <mat-list-item>
+                                                            <div mat-line class="modName">
+                                                                <span> {{mod?.topicname}} :</span>
 
-                                                                <img *ngIf="file.doc_type == 'application/msword'"
-                                                                    class="size" alt=""
-                                                                    src="assets/learner/fileicon/Word_Icon.svg">
+                                                            </div>
 
-                                                                <img *ngIf="file.doc_type == 'application/vnd.ms-excel'"
-                                                                    class="size" alt=""
-                                                                    src="assets/learner/fileicon/Excel_Icon.svg">
+                                                            <div class="row" *ngFor="let file of mod.resourse?.files">
+                                                                <div class="col-12 detailrow pl-0 mt-3"
+                                                                    *ngIf="file?.assignment === true">
+                                                                    <div class="row">
+                                                                        <div class="col-2 no-cursor">
+                                                                            <div class="row">
+                                                                                <span
+                                                                                    class="singleline-text "><b>{{'Assignment name' | translate }}</b></span>
+                                                                            </div>
+                                                                            <div class="row">            
+                                                                                <img *ngIf="file.doc_type == 'application/pdf'"
+                                                                                    class="size" alt=""
+                                                                                    src="assets/learner/fileicon/PDF_Icon.svg">
+                                                                                <img *ngIf="file.doc_type == 'link'"
+                                                                                    class="size" alt=""
+                                                                                    src="assets/learner/fileicon/Link_Icon.svg">
+                                                                                <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+                                                                                    class="size" alt=""
+                                                                                    src="assets/learner/fileicon/Excel_Icon.svg">
+                                                                                <img *ngIf="file.doc_type == 'image/jpeg' || file.doc_type == 'image/png' "
+                                                                                    class="size" alt=""
+                                                                                    src="assets/learner/fileicon/Image_Icon.svg">
+                                                                                <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
+                                                                                    class="size" alt=""
+                                                                                    src="assets/learner/fileicon/PPT_Icon.svg">
+                                                                                <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+                                                                                    class="size" alt=""
+                                                                                    src="assets/learner/fileicon/Word_Icon.svg">
+                                                                                <img *ngIf="file.doc_type == 'application/msword'"
+                                                                                    class="size" alt=""
+                                                                                    src="assets/learner/fileicon/Word_Icon.svg">
+                                                                                <img *ngIf="file.doc_type == 'application/vnd.ms-excel'"
+                                                                                    class="size" alt=""
+                                                                                    src="assets/learner/fileicon/Excel_Icon.svg">
+                                                                                <mat-icon class="docType no-cursor"
+                                                                                    *ngIf="file.doc_type == 'text/plain' ">
+                                                                                    description </mat-icon>&nbsp;
+                                                                                <span class="textTruncate"
+                                                                                    tooltip="{{file.type_name}}"
+                                                                                    placement="bottom">
+                                                                                    {{file.type_name}}
+                                                                                </span>
+                                                                            </div>
+                                                                            <div class="col-2 f_size_12"
+                                                                                *ngIf="file?.type_name =='Link'">
+                                                                                <span class="ml-2">
+                                                                                    NA
+                                                                                </span>
 
-                                                                <mat-icon class="docType"
-                                                                    *ngIf="file.doc_type == 'text/plain' ">
-                                                                    description
-                                                                </mat-icon>
-                                                                <div class="col-8">
-                                                                    {{file.type_name}}
+                                                                            </div>
+                                                                            <div class="col-2 f_size_12"
+                                                                                *ngIf="file?.size">
+                                                                                {{file.size}}
+                                                                            </div>
+                                                                        </div>
+                                                                   
+                                                                    <div class="col-1 no-cursor">
+                                                                        <div class="row">
+                                                                            <span><b>{{'Question' | translate }}</b></span>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <span class="ml-3">
+                                                                                <mat-icon *ngIf="file.enableView"
+                                                                                    (click)="previewDoc(previewDialog,file)"
+                                                                                    class="viewDoc">find_in_page
+                                                                                </mat-icon>
+                                                                                <mat-icon *ngIf="!file.enableView"
+                                                                                    class="viewDoc">find_in_page
+                                                                                </mat-icon>
+                                                                            </span>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-2">
+                                                                        <div class="row">
+                                                                            <span><b>{{'Start date' | translate }}</b></span>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <span class="singleline-text">
+                                                                                {{file.startDate  | date :'MMM d, y h:mm a'
+                                                                                    }}
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <div class="row">
+                                                                            <span><b>{{'End date' | translate }}</b></span>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <span class="singleline-text">
+                                                                                {{file.endDate  | date :'MMM d, y h:mm a'
+                                                                                    }}
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="col-1">
+                                                                        <div class="row">
+                                                                            <span>
+                                                                                <b>{{'Upload' | translate }}</b>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class="row">
+
+                                                                            <span>
+                                                                                <button class="uploadBtn"
+                                                                                    [disabled]="!file?.enableUpload"
+                                                                                    (click)="fileInput.click()">
+                                                                                    <span class="uploadIcon">
+                                                                                        <i class="fa fa-upload searchicon ml-3 tooltip-350"
+                                                                                            [tooltip]="popTemplate"
+                                                                                            placement="bottom"
+                                                                                            aria-hidden="true"
+                                                                                            placement="bottom"></i></span></button>
+
+                                                                            </span>
+
+                                                                            <input class="form-control border-right-0"
+                                                                                type='file' id="upload-photo" #fileInput
+                                                                                (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate,file?.path)">
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-1">
+                                                                        <div class="row">
+                                                                            <span class="singleline-text"><b>
+                                                                                    {{'Max score' | translate }}</b></span>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <span class="ml-3">
+                                                                                {{file?.score}}
+                                                                            </span>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class=col-1>
+                                                                        <div class="row">
+                                                                            <span class="singleline-text">
+                                                                                <b>
+                                                                                    {{'Obtained score' | translate }}
+                                                                                </b>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <span class="ml-5">
+                                                                                {{file?.score_mark}}
+                                                                            </span>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-2 status-col">
+                                                                        <div class="row">
+                                                                            <span><b>{{'Status' | translate }}</b></span>
+                                                                        </div>
+
+                                                                        <div class="row">
+                                                                            <div class="disply no-cursor"
+                                                                                *ngIf="file.doc_status === false && file.grade_status === 'Not Evaluated'">
+                                                                                <div class="icon">
+                                                                                    {{'Submitted' | translate }}</div>
+                                                                            </div>
+                                                                            <div class="disply no-cursor"
+                                                                                *ngIf="file.doc_status && file.grade_status != 'Evaluated'">
+                                                                                <div class="not-submited">
+                                                                                    {{'Yet to Submit' | translate }}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="disply no-cursor"
+                                                                                *ngIf="file.grade_status === 'Evaluated'">
+                                                                                <div class="grade"
+                                                                                    style="padding-top: 4px;color: green;">
+                                                                                    {{'Graded' | translate }}</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-2 f_size_12"
-                                                                    *ngIf="file?.type_name =='Link'">
-                                                                    <span class="ml-2">
-                                                                        NA
-                                                                    </span>
-
-                                                                </div>
-                                                                <div class="col-2 f_size_12" *ngIf="file?.size">
-                                                                    {{file.size}}
-                                                                </div>
-                                                                <div class="col-1">
-                                                                    <a href="{{file?.path}}" download>
-                                                                        <mat-icon style="color: #333;font-size: 20px;">
-                                                                            save_alt </mat-icon>
-                                                                    </a>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </mat-list-item>
-                                        </mat-list>
-                                    </div>
-                                </div>
-                            </mat-expansion-panel>
-                        </ng-container>
-                    </ng-container>
-
-
-                    <ng-container *ngIf="!content?.noresource">
-                        <span style="padding: 16px;">{{'This course does not have resource files.'| translate}}</span>
-                    </ng-container>
-                </mat-accordion>
-            </mat-tab>
-
-            <!-- Assignments tab -->
-            <div>
-                <mat-tab label="Assignments" class="discussion_forum" *ngIf="assignmentContent?.coursedetails.length">
-                    <mat-accordion>
-                        <ng-container>
-                            <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
-
-                                <mat-expansion-panel class="panel1" hideToggle="true" #example1
-                                    [expanded]="selectedIndex === i">
-                                    <mat-expansion-panel-header style="height: 50px !important;">
-                                        <mat-panel-title>
-                                            <span class="sqnumner">{{i+1}}.</span>&nbsp;&nbsp;<span>{{res?.modulename}}
-                                            </span>
-
-                                        </mat-panel-title>
-                                        <mat-icon class="exp2" *ngIf="!example1.expanded">add_circle_outline
-                                        </mat-icon>
-                                        <mat-icon class="exp2" *ngIf="example1.expanded">remove_circle_outline
-                                        </mat-icon>
-                                    </mat-expansion-panel-header>
-
-
-                                    <div class="row margin-5">
-                                        <div class="col-12">
-                                            <mat-list *ngFor="let mod of res?.moduledetails">
-                                                <mat-list-item>
-                                                    <div mat-line class="modName">
-                                                        <span> {{mod?.topicname}} :</span>
-
-                                                    </div>
-
-                                                    <div class="row" *ngFor="let file of mod.resourse?.files">
-                                                        <div class="col-12 detailrow pl-0 mt-3"
-                                                            *ngIf="file?.assignment === true">
-
-
-
-                                                            <div class="row ">
-                                                                <div class="col-2 no-cursor">
-                                                                    <div class="row">
-                                                                        <span
-                                                                            class="singleline-text "><b>{{'Assignment name' | translate }}</b></span>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <img *ngIf="file.doc_type == 'application/pdf'"
-                                                                            class="size" alt=""
-                                                                            src="assets/learner/fileicon/PDF_Icon.svg">
-                                                                        <img *ngIf="file.doc_type == 'link'"
-                                                                            class="size" alt=""
-                                                                            src="assets/learner/fileicon/Link_Icon.svg">
-                                                                        <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
-                                                                            class="size" alt=""
-                                                                            src="assets/learner/fileicon/Excel_Icon.svg">
-                                                                        <img *ngIf="file.doc_type == 'image/jpeg' || file.doc_type == 'image/png' "
-                                                                            class="size" alt=""
-                                                                            src="assets/learner/fileicon/Image_Icon.svg">
-                                                                        <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
-                                                                            class="size" alt=""
-                                                                            src="assets/learner/fileicon/PPT_Icon.svg">
-                                                                        <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
-                                                                            class="size" alt=""
-                                                                            src="assets/learner/fileicon/Word_Icon.svg">
-                                                                        <img *ngIf="file.doc_type == 'application/msword'"
-                                                                            class="size" alt=""
-                                                                            src="assets/learner/fileicon/Word_Icon.svg">
-                                                                        <img *ngIf="file.doc_type == 'application/vnd.ms-excel'"
-                                                                            class="size" alt=""
-                                                                            src="assets/learner/fileicon/Excel_Icon.svg">
-                                                                        <mat-icon class="docType no-cursor"
-                                                                            *ngIf="file.doc_type == 'text/plain' ">
-                                                                            description </mat-icon>&nbsp;
-                                                                        <span class="textTruncate"
-                                                                            tooltip="{{file.type_name}}"
-                                                                            placement="bottom">
-                                                                            {{file.type_name}}
-                                                                        </span>
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-1 no-cursor">
-                                                                    <div class="row">
-                                                                        <span><b>{{'Question' | translate }}</b></span>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <span class="ml-3">
-                                                                            <mat-icon *ngIf="file.enableView"
-                                                                                (click)="previewDoc(previewDialog,file)"
-                                                                                class="viewDoc">remove_red_eye
-                                                                            </mat-icon>
-                                                                            <mat-icon *ngIf="!file.enableView"
-                                                                                class="viewDoc">remove_red_eye
-                                                                            </mat-icon>
-                                                                        </span>
-
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-2">
-                                                                    <div class="row">
-                                                                        <span><b>{{'Start date' | translate }}</b></span>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <span class="singleline-text">
-                                                                            {{file.startDate  | date :'MMM d, y h:mm a'
-                                                                            }}
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-2">
-                                                                    <div class="row">
-                                                                        <span><b>{{'End date' | translate }}</b></span>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <span class="singleline-text">
-                                                                            {{file.endDate  | date :'MMM d, y h:mm a'
-                                                                            }}
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-
-
-                                                                <div class="col-1">
-                                                                    <div class="row">
-                                                                        <span>
-                                                                            <b>{{'Upload' | translate }}</b>
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="row">
-
-                                                                        <span>
-
-                                                                            <i class="fa fa-upload searchicon ml-3 tooltip-350"
-                                                                                [tooltip]="popTemplate"
-                                                                                placement="bottom" aria-hidden="true"
-                                                                                placement="bottom"
-                                                                                [disabled]="!assignmentContent?.enableUpload"
-                                                                                (click)="fileInput.click()"></i>
-
-                                                                        </span>
-
-                                                                        <input class="form-control border-right-0"
-                                                                            type='file' id="upload-photo" #fileInput
-                                                                            (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate,file?.path)">
-
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-1">
-                                                                    <div class="row">
-                                                                        <span class="singleline-text"><b>
-                                                                                {{'Max score' | translate }}</b></span>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <span class="ml-3">
-                                                                            {{file?.score}}
-                                                                        </span>
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class=col-1>
-                                                                    <div class="row">
-                                                                        <span class="singleline-text">
-                                                                            <b>
-                                                                                {{'Obtained score' | translate }}
-                                                                            </b>
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <span class="ml-5">
-                                                                            {{file?.score_mark}}
-                                                                        </span>
-                                                                    </div>
-
-                                                                </div>
-                                                                <div class="col-2 status-col">
-                                                                    <div class="row">
-                                                                        <span><b>{{'Status' | translate }}</b></span>
-                                                                    </div>
-
-                                                                    <div class="row">
-                                                                        <div class="disply no-cursor"
-                                                                            *ngIf="file.doc_status === false && file.grade_status === 'Not Evaluated'">
-                                                                            <div class="icon">
-                                                                                {{'Submitted' | translate }}</div>
-                                                                        </div>
-                                                                        <div class="disply no-cursor"
-                                                                            *ngIf="file.doc_status && file.grade_status != 'Evaluated'">
-                                                                            <div class="not-submited">
-                                                                                {{'Yet to Submit' | translate }}</div>
-                                                                        </div>
-                                                                        <div class="disply no-cursor"
-                                                                            *ngIf="file.grade_status === 'Evaluated'">
-                                                                            <div class="grade"
-                                                                                style="padding-top: 4px;color: green;">
-                                                                                {{'Graded' | translate }}</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                         
 
                                                 </mat-list-item>
                                                 <hr>
-                                            </mat-list>
-                                        </div>
-                                    </div>
-                                </mat-expansion-panel>
-                            </ng-container>
+                                                </mat-list>
+                                            </div>
+                        </div>
+                        </mat-expansion-panel>
+                        </ng-container>
                         </ng-container>
 
-                    </mat-accordion>
-                    <ng-template #previewDialog>
-                        <!-- <button mat-icon-button class="download-button">
-                                    <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
-                                </button> -->
-                        <div>
-                            <button mat-mini-fab class="download-button">
-                                <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
-                            </button>
-                        </div>
-                        <div>
-                            <button mat-mini-fab class="close-button">
-                                <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
-                            </button>
-                        </div>
-                        <!-- <button mat-icon-button class="close-button" [mat-dialog-close]="true">
-                                    <mat-icon class="close-icon" color="warn" (click)="closedialogbox()">close
-                                    </mat-icon>
-                                </button> -->
-                        <div *ngIf="docpath">
-                            <app-pdfreader [url]="docpath"></app-pdfreader>
-                        </div>
-                    </ng-template>
-                </mat-tab>
+                        </mat-accordion>
             </div>
 
-            <!-- Assignments tab end -->
-            <!-- Forum -->
-            <div>
-                <mat-tab *ngIf="userDetail.is_forum_config" label="Forum"
-                    [disabled]="selectedModuleData === null || selectedModuleData === undefined"
-                    class="discussion_forum">
+            <ng-template #previewDialog>
+                <!-- <button mat-icon-button class="download-button">
+                                        <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
+                                    </button> -->
+                <div>
+                    <button mat-mini-fab class="download-button">
+                        <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
+                    </button>
+                </div>
+                <div>
+                    <button mat-mini-fab class="close-button">
+                        <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
+                    </button>
+                </div>
+                <!-- <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+                                        <mat-icon class="close-icon" color="warn" (click)="closedialogbox()">close
+                                        </mat-icon>
+                                    </button> -->
+                <div *ngIf="docpath">
+                    <app-pdfreader [url]="docpath"></app-pdfreader>
+                </div>
+            </ng-template>
+            </mat-tab>
+<!-- forum tab -->
+            <mat-tab *ngIf="userDetail.is_forum_config" label="Forum"
+                [disabled]="selectedModuleData === null || selectedModuleData === undefined" class="discussion_forum">
+
+
+                <div [ngClass]="drawer.opened==true?'drawerOpnForum':'drawerClsForum'">
                     <div class="spinner-container" *ngIf="loadingForum">
                         <mat-spinner diameter="40"></mat-spinner>
                     </div>
                     <br>
                     <div *ngIf="showCourseDetails">
                         <div class="p-l-0 no_border">
-                            <div class="col-12"  [ngClass]="{'width_70 center p-l-0': !drawer.opened}">
+                            <div class="col-12 forum-width">
                                 <div class="row" *ngIf="selectedModuleData">
                                     <p (click)="gotoDisplayAllThreads()">
                                         <span
@@ -521,10 +572,10 @@
                         </div>
                     </div>
 
-                    <div *ngIf="showCommentThread" class="no_border" >
+                    <div *ngIf="showCommentThread" class="no_border">
                         <div class="p-l-0">
-                            <div class="col-12"  [ngClass]="{'width_70 center p-l-0': !drawer.opened}">
-                                <div class="row" *ngIf="selectedModuleData" >
+                            <div class="col-12 forum-width" >
+                                <div class="row" *ngIf="selectedModuleData">
                                     <p (click)="gotoDisplayAllThreads();viewAllThreads()">
                                         <span class="color-blue f_size_16 f_wt_500"
                                             style="text-decoration-line:underline ; cursor: pointer;">{{(selectedModuleData.title | titlecase) || 'Module Name' + ' '}}({{'Module'+ ' ' +selectedModuleData.indexValue}})
@@ -536,9 +587,8 @@
                         </div>
                     </div>
                     <br>
-                  
-                    <div *ngIf="showCourseDetails" 
-                        [ngClass]="{'width_70 center' : !drawer.opened}">
+
+                    <div *ngIf="showCourseDetails" class="forum-width" >
                         <!-- Header starts here -->
                         <mat-card class=" black_border box_shadow alignment ">
                             <div class="row">
@@ -561,17 +611,17 @@
                                         <form class="search-form">
                                             <mat-icon (click)="goToSearchThread()" class="pointer"
                                                 style="margin-top: 12px;" *ngIf="filterValue === null" [ngClass]="
-                                                    (showCourseDetails && (discussionData === null || discussionData?.topics?.length === 0)) ||
-                                                    (showCommentThread && topicDiscussionData && topicDiscussionData?.posts?.length === 1) ?
-                                                    'pointerNone' : 'pointer'">
+                                                            (showCourseDetails && (discussionData === null || discussionData?.topics?.length === 0)) ||
+                                                            (showCommentThread && topicDiscussionData && topicDiscussionData?.posts?.length === 1) ?
+                                                            'pointerNone' : 'pointer'">
                                                 search
                                             </mat-icon>
 
                                             <mat-form-field class="no_margin" *ngIf="searchthreadname">
                                                 <input class="toolbar-search"
                                                     [disabled]="showCourseDetails ? (discussionData === null || discussionData?.topics?.length === 0) :
-                                                                (topicDiscussionData && topicDiscussionData?.posts?.length === 1)" type="text"
-                                                    matInput name="searchbar" [(ngModel)]="filterValue"
+                                                                        (topicDiscussionData && topicDiscussionData?.posts?.length === 1)"
+                                                    type="text" matInput name="searchbar" [(ngModel)]="filterValue"
                                                     (input)="onSearchChange($event.target.value);">
                                                 <mat-icon matSuffix style="font-size: 1.2em" class="pointer"
                                                     (click)="closeSearch()">
@@ -625,9 +675,8 @@
                         </div>
                     </div>
 
-                    <div
-                        *ngIf="!loadingForum && showCourseDetails && (discussionData === null || discussionData?.topics?.length ===0)" 
-                        [ngClass]="{'width_70 center' : !drawer.opened}">
+                    <div *ngIf="!loadingForum && showCourseDetails && (discussionData === null || discussionData?.topics?.length ===0)"
+                        class="forum-width" >
                         <br><br>
                         <mat-card class="black_border m-bt-4 box_shadow center center_align f_size_16">
                             <br>
@@ -636,8 +685,8 @@
                         </mat-card>
                     </div>
 
-                    <div class="comment_card" *ngIf="showCommentThread && selectedThreadData != null"
-                        [ngClass]="{'width_70 center' : !drawer.opened}">
+                    <div class="comment_card forum-width" *ngIf="showCommentThread && selectedThreadData != null"
+                        >
                         <!-- for thread -->
                         <mat-card class="black_border m-b-10 no-radius no_padding">
                             <!-- name row start -->
@@ -703,7 +752,7 @@
                                             [disabled]="selectedThreadData?.thread_status === false || disableThreads">
                                             <mat-icon class="action_icon"
                                                 [disabled]="selectedThreadData?.thread_status === false || disableThreads">
-                                                comment</mat-icon>{{'Comment' | translate }} 
+                                                comment</mat-icon>{{'Comment' | translate }}
                                         </button>
                                     </div>
                                 </div>
@@ -721,15 +770,15 @@
                                         style="background: whitesmoke; border: 1px solid #dddddd;">
                                         <div class="row">
                                             <div
-                                                class="col-xl-10 col-lg-10 col-md-10 col-sm-6 col-6 float_right no_padding">
+                                                class="col-xl-10 col-lg-10 col-md-10 col-sm-8 col-8 float_right no_padding">
                                                 <mat-checkbox class="width_100 f_size_15 align-middle"
                                                     [(ngModel)]="a2iFlag">
                                                     &nbsp;&nbsp;{{'Ask the instructor' | translate }}
                                                 </mat-checkbox>
                                             </div>
                                             <div
-                                                class="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-6 float_right no_padding">
-                                                <button mat-button class="new_Thread no-radius ht-30 width_60"
+                                                class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-4 float_right no_padding">
+                                                <button mat-button class="no-radius send-btn"
                                                     [disabled]="addThreadComment == null || addThreadComment?.length == 0 "
                                                     (click)="sendComment('thread',addThreadComment)">{{'Send' | translate }}</button>
                                             </div>
@@ -760,18 +809,18 @@
                                         <form class="search-form">
                                             <mat-icon (click)="goToSearchThread()" class="pointer"
                                                 style="margin-top: 12px;" *ngIf="filterValue === null" [ngClass]="
-                                                    (showCourseDetails && (discussionData === null || discussionData?.topics?.length === 0)) ||
-                                                    (showCommentThread && topicDiscussionData && topicDiscussionData?.posts?.length === 1) ?
-                                                    'pointerNone' : 'pointer'">
+                                                            (showCourseDetails && (discussionData === null || discussionData?.topics?.length === 0)) ||
+                                                            (showCommentThread && topicDiscussionData && topicDiscussionData?.posts?.length === 1) ?
+                                                            'pointerNone' : 'pointer'">
                                                 search
                                             </mat-icon>
 
                                             <mat-form-field class="no_margin" *ngIf="searchthreadname">
                                                 <input class="toolbar-search"
                                                     [disabled]="
-                                                                showCourseDetails ? (discussionData === null || discussionData?.topics?.length === 0) :
-                                                                (topicDiscussionData && topicDiscussionData?.posts?.length === 1)" type="text"
-                                                    matInput name="searchbar" [(ngModel)]="filterValue"
+                                                                        showCourseDetails ? (discussionData === null || discussionData?.topics?.length === 0) :
+                                                                        (topicDiscussionData && topicDiscussionData?.posts?.length === 1)"
+                                                    type="text" matInput name="searchbar" [(ngModel)]="filterValue"
                                                     (input)="onSearchChange($event.target.value);">
                                                 <mat-icon matSuffix style="font-size: 1.2em" class="pointer"
                                                     (click)="closeSearch()">
@@ -800,7 +849,7 @@
                         <!-- for posts -->
                         <div *ngFor="let post of topicDiscussionData?.posts; let pin = index;">
                             <div *ngIf="post.deleted === false">
-                                <mat-card *ngIf="pin !== 0" class="no-radius no_padding"
+                                <mat-card *ngIf="pin !== 0 && post.toPid === null" class="no-radius no_padding"
                                     [ngClass]="post.deleted === false ? 'black_border m-b-8 ' : 'black_border m-b-8 white_card'">
                                     <div class="black_border no_padding no_margin post-header">
                                         <div class="row padding_matcard">
@@ -877,15 +926,15 @@
                                                 style="background: whitesmoke; border: 1px solid #dddddd;">
                                                 <div class="row">
                                                     <div
-                                                        class="col-xl-10 col-lg-9 col-md-9 col-sm-6 col-6 float_right no_padding">
-                                                        <mat-checkbox class="width_100 f_size_15 align-middle"
+                                                        class="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 float_right no_padding">
+                                                        <!-- <mat-checkbox class="width_100 f_size_15 align-middle"
                                                             [(ngModel)]="a2iFlag">
                                                             &nbsp;&nbsp;{{'Ask the instructor' | translate }}
-                                                        </mat-checkbox>
+                                                        </mat-checkbox> -->
                                                     </div>
                                                     <div
-                                                        class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-6 float_right no_padding">
-                                                        <button mat-button class="new_Thread no-radius ht-30 width_50"
+                                                        class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4 float_right no_padding">
+                                                        <button mat-button class="no-radius send-btn"
                                                             (click)="sendComment('post',addPostComment[pin],addPostComment,post)"
                                                             [disabled]="addPostComment && addPostComment[pin] == null">{{'Send' | translate }}</button>
                                                     </div>
@@ -950,11 +999,11 @@
                                                             </button> &nbsp;&nbsp;
                                                             <!-- // commented by Mythreyi - no need child's child comment -->
                                                             <!-- <button mat-button
-                                                            (click)="showCommentEditor[pjn] = !showCommentEditor[pjn]"
-                                                            class="f_size_12 no_padding">
-                                                            <mat-icon class="action_icon">
-                                                                comment</mat-icon>Comment
-                                                        </button> -->
+                                                                    (click)="showCommentEditor[pjn] = !showCommentEditor[pjn]"
+                                                                    class="f_size_12 no_padding">
+                                                                    <mat-icon class="action_icon">
+                                                                        comment</mat-icon>Comment
+                                                                </button> -->
                                                         </div>
                                                     </div>
                                                     <div class="row p-lr-30" *ngIf="showCommentEditor[pjn]">
@@ -974,18 +1023,17 @@
                                                         <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 float_right p-5px m-b-15"
                                                             style="background: whitesmoke; border: 1px solid #dddddd;">
                                                             <div class="row">
-                                                                <div
-                                                                    class="col-xl-10 col-lg-9 col-md-9 col-sm-6 col-6 float_right">
+                                                                <!-- <div
+                                                                    class="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 no_padding float_right">
                                                                     <mat-checkbox
-                                                                        class="width_100 f_size_12 align-middle"
+                                                                        class="width_100 f_size_13 align-middle"
                                                                         [(ngModel)]="a2iFlag">
                                                                         &nbsp;{{'Ask the instructor' | translate }}
                                                                     </mat-checkbox>
-                                                                </div>
+                                                                </div> -->
                                                                 <div
-                                                                    class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-6 float_right">
-                                                                    <button mat-button
-                                                                        class="new_Thread no-radius ht-30"
+                                                                    class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4 no_padding float_right">
+                                                                    <button mat-button class="no-radius send-btn"
                                                                         (click)="sendComment('post',addPostComment[pjn],addPostComment,posts)">{{'Send' | translate }}</button>
                                                                 </div>
                                                             </div>
@@ -1073,81 +1121,79 @@
                         <div> <br><br>
                             <br><br></div>
                     </div>
+                </div>
 
-                    <ng-template #createThreadDialog class="dialogPopup no-radius">
-                        <mat-dialog-content class="createThreadDialog no-radius">
-                            <form [formGroup]="addThreadForm">
-                                <div class="row m-l-20 m-r-20 m-b-0">
-                                    <div class="col-10">
-                                        <p class="m-t-10 m-b-0 f_size_18">{{'Create a new thread' | translate }}</p>
-                                    </div>
-                                    <div class="col-2">
-                                        <mat-icon (click)="closedialogbox(); addThreadForm?.reset();"
-                                            class="f_size_25 float_right pointer">close
-                                        </mat-icon>
-                                    </div>
+
+
+                <ng-template #createThreadDialog class="dialogPopup no-radius">
+                    <mat-dialog-content class="createThreadDialog no-radius">
+                        <form [formGroup]="addThreadForm">
+                            <div class="row m-l-20 m-r-20 m-b-0">
+                                <div class="col-10">
+                                    <p class="m-t-10 m-b-0 f_size_18">{{'Create a new thread' | translate }}</p>
                                 </div>
-                                <div class="row m-l-20 m-r-20 m-t-20 m-b-0" *ngIf="addThreadForm">
-                                    <div class="col-12">
-                                        <mat-label>Title</mat-label><span class="mand"> *</span>
+                                <div class="col-2">
+                                    <mat-icon (click)="closedialogbox(); addThreadForm?.reset();"
+                                        class="f_size_25 float_right pointer">close
+                                    </mat-icon>
+                                </div>
+                            </div>
+                            <div class="row m-l-20 m-r-20 m-t-20 m-b-0" *ngIf="addThreadForm">
+                                <div class="col-12">
+                                    <mat-label>Title</mat-label><span class="mand"> *</span>
+                                </div>
+                                <div class="col-12 m-b-0 form-group">
+                                    <input type="text" class="width_100 greyBor background_trans" name="thread_name"
+                                        formControlName="thread_name" autofocus>
+                                    <div *ngIf="f.thread_name.touched && f.thread_name.errors" class="mand">
+                                        <div *ngIf="f.thread_name.errors.minlength">
+                                            {{'Title must be minimum of 8 characters' | translate }} </div>
+                                        <div *ngIf="f.thread_name.errors.required">
+                                            {{'Title is required' | translate }}</div>
                                     </div>
-                                    <div class="col-12 m-b-0 form-group">
-                                        <input type="text" class="width_100 greyBor background_trans" name="thread_name"
-                                            formControlName="thread_name" autofocus>
-                                        <div *ngIf="f.thread_name.touched && f.thread_name.errors" class="mand">
-                                            <div *ngIf="f.thread_name.errors.minlength">
-                                                {{'Title must be minimum of 8 characters' | translate }} </div>
-                                            <div *ngIf="f.thread_name.errors.required">
-                                                {{'Title is required' | translate }}</div>
+
+                                </div>
+                            </div>
+
+                            <div class="row m-l-20 m-r-20 m-t-20 m-b-0">
+                                <div class="col-12">
+                                    <mat-label>{{'Post' | translate }}</mat-label><span class="mand"> *</span>
+                                </div>
+                                <div class="col-12 m-b-0">
+                                    <div class="form-group m-b-0">
+                                        <angular-editor [config]="config" formControlName="thread_description">
+                                        </angular-editor>
+                                        <div *ngIf="f.thread_description.touched && f.thread_description.errors"
+                                            class="mand">
+                                            <div *ngIf="f.thread_description.errors.minlength">
+                                                {{'Post must be minimum of 8 characters' | translate }} </div>
+                                            <div *ngIf="f.thread_description.errors.required">
+                                                {{'Post is required' | translate }}</div>
                                         </div>
-
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="row m-l-20 m-r-20 m-t-20 m-b-0">
-                                    <div class="col-12">
-                                        <mat-label>{{'Post' | translate }}</mat-label><span class="mand"> *</span>
-                                    </div>
-                                    <div class="col-12 m-b-0">
-                                        <div class="form-group m-b-0">
-                                            <angular-editor [config]="config" formControlName="thread_description">
-                                            </angular-editor>
-                                            <div *ngIf="f.thread_description.touched && f.thread_description.errors"
-                                                class="mand">
-                                                <div *ngIf="f.thread_description.errors.minlength">
-                                                    {{'Post must be minimum of 8 characters' | translate }} </div>
-                                                <div *ngIf="f.thread_description.errors.required">
-                                                    {{'Post is required' | translate }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <br>
-                            </form>
-                        </mat-dialog-content>
-                        <mat-dialog-actions align="end" class="dialogButtons">
-                            <button mat-stroked-button class="reset" (click)="addThreadForm?.reset()"
-                                [disabled]="addThreadForm.untouched">Reset</button>
-                            <button mat-stroked-button class="bg-blue color_white" (click)="createNewThread()"
-                                [disabled]="addThreadForm.invalid" cdkFocusInitial>{{'Post' | translate }}</button>
-                        </mat-dialog-actions>
-                        <br>
-                    </ng-template>
-                </mat-tab>
-            </div>
-        </mat-tab-group>
-
+                            <br>
+                        </form>
+                    </mat-dialog-content>
+                    <mat-dialog-actions align="end" class="dialogButtons">
+                        <button mat-stroked-button class="reset" (click)="addThreadForm?.reset()"
+                            [disabled]="addThreadForm.untouched">Reset</button>
+                        <button mat-stroked-button class="bg-blue color_white" (click)="createNewThread()"
+                            [disabled]="addThreadForm.invalid" cdkFocusInitial>{{'Post' | translate }}</button>
+                    </mat-dialog-actions>
+                    <br>
+                </ng-template>
+            </mat-tab>
+            </mat-tab-group>
     </div>
-
-
-
-    <div class="footer">
-        <span class="powered">
-            <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
-        </span>
-    </div>
+    </mat-drawer-container>  
 </div>
+
+</div>
+
+
 
 <ng-template #popTemplate class="tooltip-container">
     <span class="singleline-text">
@@ -1157,3 +1203,8 @@
 
     </span>
 </ng-template>
+<div class="footer" [ngClass]="{'posAb' : tabInd === 3 }">
+    <span class="powered">
+        <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
+    </span>
+</div>
