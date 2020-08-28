@@ -885,7 +885,7 @@ hr {
   display: none;
 }
 
-::ng-deep .cdk-overlay-pane {
+:host ::ng-deep .cdk-overlay-pane {
   overflow-y: hidden !important;
   width: 75% !important;
   max-height: 85% !important;
@@ -913,7 +913,7 @@ hr {
     float: right;
   }
 
-  ::ng-deep .cdk-overlay-pane {
+  :host ::ng-deep .cdk-overlay-pane {
     width: 95% !important;
     max-height: 85% !important;
     margin: auto;
