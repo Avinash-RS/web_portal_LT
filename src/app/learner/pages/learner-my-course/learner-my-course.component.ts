@@ -209,6 +209,7 @@ export class LearnerMyCourseComponent implements OnInit {
       window.open(value.activity_details.link);
   }
   goToAssignment(c) {
+    localStorage.setItem('Courseid', c.course_id);
     const detail = {
       id: c.course_id,
       wishlist: c.wishlisted || false,
@@ -219,6 +220,7 @@ export class LearnerMyCourseComponent implements OnInit {
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
   }
   goToForum(c) {
+    localStorage.setItem('Courseid', c.course_id);
     const detail = {
       id: c.course_id,
       wishlist: c.wishlisted || false,
