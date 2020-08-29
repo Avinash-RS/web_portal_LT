@@ -878,7 +878,6 @@
 </div>
 
 <ng-template #previewDialog>
-
         <mat-dialog-title>
             <div class="row">
         <div class="col-8 text-left">
@@ -897,39 +896,42 @@
 
         <mat-dialog-content class="cardContainer">
             <div class="row">
-                <div *ngIf="allcourses?.length>1">    <div  class="col-12 col-sm-12 col-md-6 col-lg-4 mt-4" *ngFor="let course of allcourses">
-                    <!-- <div class="col-4 mt-4" *ngFor="let course of allcourses | search : courseSearch"> -->
-                        <mat-card class="box-shadow">
-                            <div class="row">
-                                <div class="col-12 imageover">
-                                    <a>
-                                        <img alt="course " src="{{course.course_img_url}}" class="courseImage image">
-                                        
-                                        <div class="overlayimage">
-                                            <p class="shortdesc h-50">
-                                                <!-- {{course.course_description}} -->
-                                             {{(course.course_description?.length>122)? (course.course_description | slice:0:122)+'...':(course.course_description) }} 
-                                            </p>
-                                        </div>
-                                    </a>
+                <ng-container *ngIf="categoryData.totalCount > 1">
+                    <div  class="col-12 col-sm-12 col-md-6 col-lg-4 mt-4" *ngFor="let course of allcourses">
+                        <!-- <div class="col-4 mt-4" *ngFor="let course of allcourses | search : courseSearch"> -->
+                            <mat-card class="box-shadow">
+                                <div class="row">
+                                    <div class="col-12 imageover">
+                                        <a>
+                                            <img alt="course " src="{{course.course_img_url}}" class="courseImage image">
+                                            
+                                            <div class="overlayimage">
+                                                <p class="shortdesc h-50">
+                                                    <!-- {{course.course_description}} -->
+                                                 {{(course.course_description?.length>122)? (course.course_description | slice:0:122)+'...':(course.course_description) }} 
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                 
+                                </div><br>
+                                <div class="row">
+                                    <span class="courseName1" *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
+                                    <span class="courseName1" *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
+                                </div><br>
+                                <div class="row">
+                                    <div class="col-12 center_align">
+                                        <button mat-stroked-button class="blue_clr btnredClass" *ngIf="course.clamaiedStatus == 'false'"
+                                        (click)="claimCourse(course.course_id)"><mat-icon class="mt-1">queue_play_next</mat-icon> Claim</button>
+                                        <button mat-stroked-button class="blue_clr btnredClass" [disabled]="course.clamaiedStatus == 'true'"
+                                         *ngIf="course.clamaiedStatus == 'true'"
+                                        ><mat-icon class="mt-1 claimIcon">queue_play_next</mat-icon> Claimed</button>
+                                    </div>
                                 </div>
-                             
-                            </div><br>
-                            <div class="row">
-                                <span class="courseName1" *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
-                                <span class="courseName1" *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
-                            </div><br>
-                            <div class="row">
-                                <div class="col-12 center_align">
-                                    <button mat-stroked-button class="blue_clr btnredClass" *ngIf="course.clamaiedStatus == 'false'"
-                                    (click)="claimCourse(course.course_id)"><mat-icon class="mt-1">queue_play_next</mat-icon> Claim</button>
-                                    <button mat-stroked-button class="blue_clr btnredClass" [disabled]="course.clamaiedStatus == 'true'"
-                                     *ngIf="course.clamaiedStatus == 'true'"
-                                    ><mat-icon class="mt-1 claimIcon">queue_play_next</mat-icon> Claimed</button>
-                                </div>
-                            </div>
-                        </mat-card>
-                    </div></div>
+                            </mat-card>
+                        </div>
+                </ng-container>
+                  
     
 
 

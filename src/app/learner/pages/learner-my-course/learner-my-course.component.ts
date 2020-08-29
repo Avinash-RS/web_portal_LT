@@ -244,11 +244,13 @@ export class LearnerMyCourseComponent implements OnInit {
       this.userDetailes._id).subscribe((course: any) => {
       if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
       this.allcourses = course.data.getCoureBasedOnCatalog.data;
+      this.loading = false;
       // this.viewCourse(category, templateRef);
       }
     });
   }
     viewCourse(category, templateRef: TemplateRef<any>) {
+      this.loading = true;
       this.viewCourseClass = false;
       this.categoryPopupData = category;
       this.dialog.open(templateRef, {
