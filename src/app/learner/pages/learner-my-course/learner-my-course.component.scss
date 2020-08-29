@@ -1450,6 +1450,11 @@ hr {
   height: 50px !important;
 }
 
+.roleDropdown{
+  position: relative;
+  display: inline-block;
+}
+
 .dropbtn {
   background-color: $color-white;
   color: #898989;
@@ -1549,4 +1554,22 @@ hr {
   height: 400px;
   text-align:center;
   padding-top: 17%;
+}
+
+.roledropdown{
+  background-color: $color-white;
+  color: #898989;
+  padding: 6px;
+  font-size: 16px;
+  padding-left: 6px;
+  border: none;
+  // border-radius: 11px;
+  border: 1px solid #898989;
+  width: 155px;
+}
+.roleDropdDwnBtn{
+  margin-right: 66% !important;
+    /* margin-bottom: 3px; */
+    position: relative;
+    bottom: 8px;
 }
