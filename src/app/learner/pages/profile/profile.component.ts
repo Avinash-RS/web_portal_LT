@@ -16,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { slideInAnimation } from 'src/app/router.animation';
 import {TranslateService} from '@ngx-translate/core';
+import { CommonServicesService } from '@core/services/common-services.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -30,7 +31,8 @@ export class ProfileComponent implements OnInit {
               private alert: AlertServiceService, public service: LearnerServicesService,
               private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,
               private loader: Ng4LoadingSpinnerService, private formBuilder: FormBuilder,
-              private router: Router, private gs: GlobalServiceService) {
+              private router: Router, private gs: GlobalServiceService,
+              private services : CommonServicesService) {
     if (this.gs.checkLogout()) {
       // this.urlImage = localStorage.getItem('user_img')
       this.currentUser = this.gs.checkLogout();
@@ -635,9 +637,7 @@ export class ProfileComponent implements OnInit {
         if (password.data.get_change_password_updateprofile.success === 'true') {
           Swal.fire(password.data.get_change_password_updateprofile.message);
           localStorage.clear();
-          this.httpC.get('http://api.ipify.org/?format=json').subscribe((res: any) => {
-            localStorage.setItem('Systemip', res.ip);
-          });
+          this.services.getIpAddressByUrl()
           this.dialog.closeAll();
           this.router.navigate(['/Learner/login']);
         } else {
