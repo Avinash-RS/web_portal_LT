@@ -1521,10 +1521,12 @@ hr {
 .alarmcursor {
   cursor: text;
 }
-::ng-deep .primerFlage ~ .tooltip{
-// transform: translateX(30px) !important;
-// transform: translateY(5px) !important;
-// position: relative !important;
-// top: 150px !important;
-// right: 2px !important;
+::ng-deep .custom-mat-tooltip {
+    
+  position:  relative !important;
+  bottom: 80px !important;
+  background-color: black !important;
+  opacity: 1 !important;
+  right: 20px !important;
+  font-size: 12px !important;
 }
