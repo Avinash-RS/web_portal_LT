@@ -63,6 +63,7 @@ export class LearnerMyCourseComponent implements OnInit {
   viewCourseClass = true;
   jobRole: any = [];
   categoryyName: any;
+  subchildData: any;
   constructor(
     public translate: TranslateService,
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
@@ -112,15 +113,27 @@ export class LearnerMyCourseComponent implements OnInit {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
   }
-  menuSelect(name) {
-    this.categoryyName = name;
-    console.log(name,'asasasdsasad')
+  menuSelect(subchild) {
+    this.categoryyName = subchild;
+    this.subchildData = subchild;
+    console.log(name,'asasasdsasad');
   }
 
   claimAll() {
+    this.allcourses = '';
+    console.log(this.categoryyName.superSubCategoryId,'bulkclaimcoursebulkclaimcourse');
     this.learnerService.bulkclaimcourse(this.userDetailes._id, this.userDetailes.user_id,
-    this.categoryData.categoryId ).subscribe((bulkclaimcourse: any) => {
-      console.log(bulkclaimcourse);
+    this.categoryyName.superSubCategoryId).subscribe((bulkclaimcourse: any) => {
+      if (bulkclaimcourse.data.bulkclaimcourse.success === true) {
+        this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, this.categoryData.categoryId,
+          this.userDetailes._id, this.subchildData.subCategoryId, this.categoryyName.superSubCategoryId).subscribe((course: any) => {
+            if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
+              this.allcourses = course.data.getCoureBasedOnCatalog.data;
+              this.getCountForCategories();
+              this.getEnrolledCourses('', '', '');
+            }
+          });
+      }
       });
   }
   getEnrolledCourses(catalougeId, catagoryId, jobRoleCategoryId) {
