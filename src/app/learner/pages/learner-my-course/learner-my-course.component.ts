@@ -262,15 +262,15 @@ export class LearnerMyCourseComponent implements OnInit {
       this.catalogueDetails = data.data.getCountForCategories.data;
       this.categoryDetails = data.data.getCountForCategories.data.categories;
       this.dropDownCategoryDetails = [data.data.getCountForCategories.data];
-      console.log('details', this.dropDownCategoryDetails);
+      // console.log('details', this.dropDownCategoryDetails);
     }
     });
   }
   getCoureBasedOnCatalog(catalogue, category, subchild, superChild) {
     this.categoryData = category;
-    console.log(this.categoryData, 'this.categoryDatathis.categoryData');
+    // console.log(this.categoryData, 'this.categoryDatathis.categoryData');
     this.catagoryName = category.categoryName;
-    console.log( this.catagoryName ,' this.catagoryName  this.catagoryName ')
+    // console.log( this.catagoryName ,' this.catagoryName  this.catagoryName ')
     this.learnerService.getCoureBasedOnCatalog(catalogue.catalogueId, category.categoryId,
       this.userDetailes._id, subchild, superChild).subscribe((course: any) => {
         if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
@@ -319,7 +319,7 @@ export class LearnerMyCourseComponent implements OnInit {
 
   getCountForJobRole() {
     this.learnerService.getCountForJobroleCategories(this.userDetailes._id).subscribe((data: any) => {
-      console.log('respon', data.data.getCountForJobroleCategories.data);
+      // console.log('respon', data.data.getCountForJobroleCategories.data);
       this.jobRole = data.data.getCountForJobroleCategories.data;
     });
   }
