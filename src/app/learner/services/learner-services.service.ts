@@ -593,14 +593,15 @@ export class LearnerServicesService {
       }
     });
   }
-  getCoureBasedOnCatalog(catalogue_id, pagenumber, category_id, userObjId) {
+  getCoureBasedOnCatalog(catalogue_id, category_id, userObjId, subCategoryId, superSubCategoryId) {
     return this.Apollo.query({
       query: getCoureBasedOnCatalog,
       variables: {
         catalogue_id,
-        pagenumber,
         category_id,
-        userObjId
+        userObjId,
+        subCategoryId,
+        superSubCategoryId
       }
     });
   }

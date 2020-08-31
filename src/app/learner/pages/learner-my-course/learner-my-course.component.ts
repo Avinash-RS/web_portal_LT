@@ -44,6 +44,7 @@ export class LearnerMyCourseComponent implements OnInit {
   showOngoing: string;
   showUpcoming: string;
   categoryDetails: any;
+  dropDownCategoryDetails = [];
   catalogueName: any;
   activity: any;
   catalogueDetails: any;
@@ -236,14 +237,16 @@ export class LearnerMyCourseComponent implements OnInit {
       if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
       this.catalogueDetails = data.data.getCountForCategories.data;
       this.categoryDetails = data.data.getCountForCategories.data.categories;
+      this.dropDownCategoryDetails.push(data.data.getCountForCategories.data);
+      console.log('details', this.dropDownCategoryDetails);
     }
     });
   }
-  getCoureBasedOnCatalog(catalogue, category, templateRef) {
+  getCoureBasedOnCatalog(catalogue, category, subchild, superChild) {
     this.categoryData = category;
     this.catagoryName = category.categoryName;
-    this.learnerService.getCoureBasedOnCatalog(catalogue.catalogueId, this.pagenumber, category.categoryId,
-      this.userDetailes._id).subscribe((course: any) => {
+    this.learnerService.getCoureBasedOnCatalog(catalogue.catalogueId, category.categoryId,
+      this.userDetailes._id, subchild, superChild).subscribe((course: any) => {
       if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
       this.allcourses = course.data.getCoureBasedOnCatalog.data;
       this.loading = false;
