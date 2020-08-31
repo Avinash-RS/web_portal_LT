@@ -1,7 +1,6 @@
-
-    <span *ngIf="sider">
-        <app-header></app-header>
-    </span>
+<span *ngIf="sider">
+    <app-header></app-header>
+</span>
 <div style="height: 2px;" (mouseover)="sider=true"></div>
 <div class="container007 animated animatedFadeInUp fadeInUp bodybg">
     <div>
@@ -77,13 +76,14 @@
                                             <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
                                                 mod.status === 'Process' ? 'colYellow' : 'colWhite'">
                                                 <ng-template matStepLabel>
-                                                    <span  *ngIf="mod?.title?.length > 20" tooltip= "{{mod?.title}}" placement="right" class="topicnm"
+                                                    <span *ngIf="mod?.title?.length > 20" tooltip="{{mod?.title}}"
+                                                        placement="right" class="topicnm"
                                                         (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
                                                         {{(mod?.title  | slice:0:20)+'...'}}</span>
 
-                                                        <span  *ngIf="mod?.title?.length <= 20" class="topicnm"
-                                                            (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
-                                                            {{mod?.title}}</span>
+                                                    <span *ngIf="mod?.title?.length <= 20" class="topicnm"
+                                                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
+                                                        {{mod?.title}}</span>
 
                                                 </ng-template>
                                             </mat-step>
@@ -124,10 +124,12 @@
 
 
                         <ng-template mat-tab-label>
-                            <label class="pointer" *ngIf="course?.course_name?.length>28"  matTooltip="{{course?.course_name}}" matTooltipPosition="below" matTooltipClass='custom-mat-tooltip'>{{(course?.course_name | slice:0:28)+'...'}}  
+                            <label class="pointer" *ngIf="course?.course_name?.length>28"
+                                matTooltip="{{course?.course_name}}" matTooltipPosition="below"
+                                matTooltipClass='custom-mat-tooltip'>{{(course?.course_name | slice:0:28)+'...'}}
                             </label>
 
-                            <label class="pointer" *ngIf="course?.course_name?.length<=28">{{course?.course_name}}  
+                            <label class="pointer" *ngIf="course?.course_name?.length<=28">{{course?.course_name}}
                             </label>
                         </ng-template>
 
@@ -271,7 +273,9 @@
                                                                                 {{file.size}}
                                                                             </div>
                                                                             <div class="col-1">
-                                                                                <a href="{{file?.path}}" (click)="add_topic_reference(res)" download>
+                                                                                <a href="{{file?.path}}"
+                                                                                    (click)="add_topic_reference(res)"
+                                                                                    download>
                                                                                     <mat-icon
                                                                                         style="color: #333;font-size: 20px;">
                                                                                         save_alt </mat-icon>
@@ -339,7 +343,7 @@
                                                                                 <span
                                                                                     class="singleline-text "><b>{{'Assignment name' | translate }}</b></span>
                                                                             </div>
-                                                                            <div class="row">            
+                                                                            <div class="row">
                                                                                 <img *ngIf="file.doc_type == 'application/pdf'"
                                                                                     class="size" alt=""
                                                                                     src="assets/learner/fileicon/PDF_Icon.svg">
@@ -385,161 +389,164 @@
                                                                                 {{file.size}}
                                                                             </div>
                                                                         </div>
-                                                                   
-                                                                    <div class="col-1 no-cursor">
-                                                                        <div class="row">
-                                                                            <span><b>{{'Question' | translate }}</b></span>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <span class="ml-3">
-                                                                                <mat-icon *ngIf="file.enableView"
-                                                                                    (click)="previewDoc(previewDialog,file)"
-                                                                                    class="viewDoc">find_in_page
-                                                                                </mat-icon>
-                                                                                <mat-icon *ngIf="!file.enableView"
-                                                                                    class="viewDoc">find_in_page
-                                                                                </mat-icon>
-                                                                            </span>
 
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="col-2">
-                                                                        <div class="row">
-                                                                            <span><b>{{'Start date' | translate }}</b></span>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <span class="singleline-text">
-                                                                                {{file.startDate  | date :'MMM d, y h:mm a'
-                                                                                    }}
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-2">
-                                                                        <div class="row">
-                                                                            <span><b>{{'End date' | translate }}</b></span>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <span class="singleline-text">
-                                                                                {{file.endDate  | date :'MMM d, y h:mm a'
-                                                                                    }}
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-
-
-                                                                    <div class="col-1">
-                                                                        <div class="row">
-                                                                            <span>
-                                                                                <b>{{'Upload' | translate }}</b>
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="row">
-
-                                                                            <span>
-                                                                                <button class="uploadBtn"
-                                                                                    [disabled]="!file?.enableUpload"
-                                                                                    (click)="fileInput.click()">
-                                                                                    <span class="uploadIcon">
-                                                                                        <i class="fa fa-upload searchicon ml-3 tooltip-350"
-                                                                                            [tooltip]="popTemplate"
-                                                                                            placement="bottom"
-                                                                                            aria-hidden="true"
-                                                                                            placement="bottom"></i></span></button>
-
-                                                                            </span>
-
-                                                                            <input class="form-control border-right-0"
-                                                                                type='file' id="upload-photo" #fileInput
-                                                                                (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate,file?.path)">
-
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="col-1">
-                                                                        <div class="row">
-                                                                            <span class="singleline-text"><b>
-                                                                                    {{'Max score' | translate }}</b></span>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <span class="ml-3">
-                                                                                {{file?.score}}
-                                                                            </span>
-
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class=col-1>
-                                                                        <div class="row">
-                                                                            <span class="singleline-text">
-                                                                                <b>
-                                                                                    {{'Obtained score' | translate }}
-                                                                                </b>
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <span class="ml-5">
-                                                                                {{file?.score_mark}}
-                                                                            </span>
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="col-2 status-col">
-                                                                        <div class="row">
-                                                                            <span><b>{{'Status' | translate }}</b></span>
-                                                                        </div>
-
-                                                                        <div class="row">
-                                                                            <div class="disply no-cursor"
-                                                                                *ngIf="file.doc_status === false && file.grade_status === 'Not Evaluated'">
-                                                                                <div class="icon">
-                                                                                    {{'Submitted' | translate }}</div>
+                                                                        <div class="col-1 no-cursor">
+                                                                            <div class="row">
+                                                                                <span><b>{{'Question' | translate }}</b></span>
                                                                             </div>
-                                                                            <div class="disply no-cursor"
-                                                                                *ngIf="file.doc_status && file.grade_status != 'Evaluated'">
-                                                                                <div class="not-submited">
-                                                                                    {{'Yet to Submit' | translate }}
+                                                                            <div class="row">
+                                                                                <span class="ml-3">
+                                                                                    <mat-icon *ngIf="file.enableView"
+                                                                                        (click)="previewDoc(previewDialog,file)"
+                                                                                        class="viewDoc">find_in_page
+                                                                                    </mat-icon>
+                                                                                    <mat-icon *ngIf="!file.enableView"
+                                                                                        class="viewDoc">find_in_page
+                                                                                    </mat-icon>
+                                                                                </span>
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-2">
+                                                                            <div class="row">
+                                                                                <span><b>{{'Start date' | translate }}</b></span>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <span class="singleline-text">
+                                                                                    {{file.startDate  | date :'MMM d, y h:mm a'
+                                                                                    }}
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-2">
+                                                                            <div class="row">
+                                                                                <span><b>{{'End date' | translate }}</b></span>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <span class="singleline-text">
+                                                                                    {{file.endDate  | date :'MMM d, y h:mm a'
+                                                                                    }}
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                        <div class="col-1">
+                                                                            <div class="row">
+                                                                                <span>
+                                                                                    <b>{{'Upload' | translate }}</b>
+                                                                                </span>
+                                                                            </div>
+                                                                            <div class="row">
+
+                                                                                <span>
+                                                                                    <button class="uploadBtn"
+                                                                                        [disabled]="!file?.enableUpload"
+                                                                                        (click)="fileInput.click()">
+                                                                                        <span class="uploadIcon">
+                                                                                            <i class="fa fa-upload searchicon ml-3 tooltip-350"
+                                                                                                [tooltip]="popTemplate"
+                                                                                                placement="bottom"
+                                                                                                aria-hidden="true"
+                                                                                                placement="bottom"></i></span></button>
+
+                                                                                </span>
+
+                                                                                <input
+                                                                                    class="form-control border-right-0"
+                                                                                    type='file' id="upload-photo"
+                                                                                    #fileInput
+                                                                                    (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate,file?.path)">
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-1">
+                                                                            <div class="row">
+                                                                                <span class="singleline-text"><b>
+                                                                                        {{'Max score' | translate }}</b></span>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <span class="ml-3">
+                                                                                    {{file?.score}}
+                                                                                </span>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class=col-1>
+                                                                            <div class="row">
+                                                                                <span class="singleline-text">
+                                                                                    <b>
+                                                                                        {{'Obtained score' | translate }}
+                                                                                    </b>
+                                                                                </span>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <span class="ml-5">
+                                                                                    {{file?.score_mark}}
+                                                                                </span>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-2 status-col">
+                                                                            <div class="row">
+                                                                                <span><b>{{'Status' | translate }}</b></span>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="disply no-cursor"
+                                                                                    *ngIf="file.doc_status === false && file.grade_status === 'Not Evaluated'">
+                                                                                    <div class="icon">
+                                                                                        {{'Submitted' | translate }}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="disply no-cursor"
+                                                                                    *ngIf="file.doc_status && file.grade_status != 'Evaluated'">
+                                                                                    <div class="not-submited">
+                                                                                        {{'Yet to Submit' | translate }}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="disply no-cursor"
+                                                                                    *ngIf="file.grade_status === 'Evaluated'">
+                                                                                    <div class="grade"
+                                                                                        style="padding-top: 4px;color: green;">
+                                                                                        {{'Graded' | translate }}</div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="disply no-cursor"
-                                                                                *ngIf="file.grade_status === 'Evaluated'">
-                                                                                <div class="grade"
-                                                                                    style="padding-top: 4px;color: green;">
-                                                                                    {{'Graded' | translate }}</div>
-                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                </div>
                                                             </div>
-                                         
 
-                                                </mat-list-item>
-                                                <hr>
-                                                </mat-list>
+
+                                                        </mat-list-item>
+                                                        <hr>
+                                                    </mat-list>
+                                                </div>
                                             </div>
+                                        </mat-expansion-panel>
+                                    </ng-container>
+                                </ng-container>
+
+                            </mat-accordion>
                         </div>
-                        </mat-expansion-panel>
-                        </ng-container>
-                        </ng-container>
 
-                        </mat-accordion>
-            </div>
-
-            <ng-template #previewDialog>
-                <!-- <button mat-icon-button class="download-button">
+                        <ng-template #previewDialog>
+                            <!-- <button mat-icon-button class="download-button">
                                         <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
                                     </button> -->
-                <div>
-                    <button mat-mini-fab class="download-button">
-                        <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
-                    </button>
-                </div>
-                <div>
-                    <button mat-mini-fab class="close-button">
-                        <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
-                    </button>
-                </div>
-                <!-- <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+                            <div>
+                                <button mat-mini-fab class="download-button">
+                                    <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
+                                </button>
+                            </div>
+                            <div>
+                                <button mat-mini-fab class="close-button">
+                                    <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
+                                </button>
+                            </div>
+                            <!-- <button mat-icon-button class="close-button" [mat-dialog-close]="true">
                                         <mat-icon class="close-icon" color="warn" (click)="closedialogbox()">close
                                         </mat-icon>
                                     </button> -->
@@ -548,485 +555,524 @@
                 </div>
             </ng-template>
             </mat-tab>
-<!-- forum tab -->
-            <mat-tab *ngIf="userDetail.is_forum_config" label="Forum"
-                [disabled]="selectedModuleData === null || selectedModuleData === undefined" class="discussion_forum">
+
+                    <!-- forum tab -->
+                    <mat-tab *ngIf="userDetail.is_forum_config" label="Forum"
+                        [disabled]="selectedModuleData === null || selectedModuleData === undefined"
+                        class="discussion_forum">
 
 
-                <div [ngClass]="drawer.opened==true?'drawerOpnForum':''">
-                    <div class="spinner-container" *ngIf="loadingForum">
-                        <mat-spinner diameter="40"></mat-spinner>
-                    </div>
-                    <br>
-                    <div *ngIf="showCourseDetails">
-                        <div class="p-l-0 no_border">
-                            <div class="col-12 forum-width">
-                                <div class="row" *ngIf="selectedModuleData">
-                                    <p (click)="gotoDisplayAllThreads()">
-                                        <span
-                                            class="f_size_18 color_black f_wt_400 ">{{selectedModuleData.title || 'Module Name'}}</span>
-                                        &nbsp;({{'Module'+ ' ' +selectedModuleData.indexValue}}) |
-                                        {{ discussionData?.topics?.length ? discussionData.topics.length : 0 }}
-                                        {{discussionData?.topics?.length > 1 ? 'Threads' : 'Thread'}}
-
-                                    </p>
-                                </div>
+                        <div [ngClass]="drawer.opened==true?'drawerOpnForum':' '">
+                            <div class="spinner-container" *ngIf="loadingForum">
+                                <mat-spinner diameter="40"></mat-spinner>
                             </div>
-                        </div>
-                    </div>
+                            <br>
+                            <div *ngIf="showCourseDetails">
+                                <div class="p-l-0 no_border">
+                                    <div class="col-12 forum-width">
+                                        <div class="row" *ngIf="selectedModuleData">
+                                            <p (click)="gotoDisplayAllThreads()">
+                                                <span
+                                                    class="f_size_18 color_black f_wt_400 ">{{selectedModuleData.title || 'Module Name'}}</span>
+                                                &nbsp;({{'Module'+ ' ' +selectedModuleData.indexValue}}) |
+                                                {{ discussionData?.topics?.length ? discussionData.topics.length : 0 }}
+                                                {{discussionData?.topics?.length > 1 ? 'Threads' : 'Thread'}}
 
-                    <div *ngIf="showCommentThread" class="no_border">
-                        <div class="p-l-0">
-                            <div class="col-12 forum-width" >
-                                <div class="row" *ngIf="selectedModuleData">
-                                    <p (click)="gotoDisplayAllThreads();viewAllThreads()">
-                                        <span class="color-blue f_size_16 f_wt_500"
-                                            style="text-decoration-line:underline ; cursor: pointer;">{{(selectedModuleData.title | titlecase) || 'Module Name' + ' '}}({{'Module'+ ' ' +selectedModuleData.indexValue}})
-                                        </span> :
-                                        &nbsp;&nbsp;
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-
-                    <div *ngIf="showCourseDetails" class="forum-width" >
-                        <!-- Header starts here -->
-                        <mat-card class=" black_border box_shadow alignment ">
-                            <div class="row">
-                                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
-
-                                    <div class="row">
-                                        <mat-icon (click)="sortBox = !sortBox"
-                                            [ngClass]="topicDiscussionData && topicDiscussionData?.posts?.length === 1 ? 'pointerNone' : 'pointer'"
-                                            style="margin-top: 12px;">sort</mat-icon> &nbsp;&nbsp;
-                                        <mat-form-field class="sort no_margin" *ngIf="sortBox">
-                                            <mat-select [(value)]="selected"
-                                                [disabled]="discussionData === null || discussionData?.topics?.length === 0"
-                                                (selectionChange)="changedSort($event.value)">
-                                                <mat-option value="1">{{'Latest' | translate }}</mat-option>
-                                                <mat-option value="0">{{'Oldest' | translate }}</mat-option>
-                                            </mat-select>
-
-                                        </mat-form-field>
-
-                                        <form class="search-form">
-                                            <mat-icon (click)="goToSearchThread()" class="pointer"
-                                                style="margin-top: 12px;" *ngIf="filterValue === null" [ngClass]="
-                                                            (showCourseDetails && (discussionData === null || discussionData?.topics?.length === 0)) ||
-                                                            (showCommentThread && topicDiscussionData && topicDiscussionData?.posts?.length === 1) ?
-                                                            'pointerNone' : 'pointer'">
-                                                search
-                                            </mat-icon>
-
-                                            <mat-form-field class="no_margin" *ngIf="searchthreadname">
-                                                <input class="toolbar-search"
-                                                    [disabled]="showCourseDetails ? (discussionData === null || discussionData?.topics?.length === 0) :
-                                                                        (topicDiscussionData && topicDiscussionData?.posts?.length === 1)"
-                                                    type="text" matInput name="searchbar" [(ngModel)]="filterValue"
-                                                    (input)="onSearchChange($event.target.value);">
-                                                <mat-icon matSuffix style="font-size: 1.2em" class="pointer"
-                                                    (click)="closeSearch()">
-                                                    close</mat-icon>
-
-                                            </mat-form-field>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 float_right no_padding">
-                                    <div class="row">
-                                        <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
-                                        </div>
-                                        <div *ngIf="userDetail.is_thread_config"
-                                            class="col-xl-4 col-lg-4 col-md-12 col-sm-12 p-5px">
-                                            <button mat-button (click)="gotoNewThread(createThreadDialog)"
-                                                [disabled]="course === null || selectedModuleData === null || disableThreads"
-                                                class="new_Thread " style="border-radius: 0 !important;">
-                                                {{'New thread' | translate }}</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </mat-card>
-                        <!-- Header ends here -->
-                        <div *ngFor="let data of discussionData?.topics">
-                            <mat-card class="black_border m-bt-4 box_shadow pointer" (click)="showDetail(data)"
-                                *ngIf="!data.deleted">
-                                <div class="row">
-                                    <div class="col-xl-10 col-lg-10 col-md-8 col-sm-12 col-12">
-                                        <div class="row f_size_18 titlecolor">
-                                            <h3> {{data?.titleRaw | titlecase}}</h3>
-                                        </div>
-                                        <div class="row f_size_14 date_color">
-                                            <p> Last post by <strong
-                                                    class="titlecolor">{{data?.user?.username | titlecase}}
-                                                    &nbsp;</strong>
-                                                &nbsp; | &nbsp; {{data?.lastposttimeISO | date : 'medium'}} </p>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4 bg_color">
-                                        <div class="row center position_hgt ">{{data?.postcount-1}}</div>
-                                        <div class="row center position ">
-                                            <p>{{data?.postcount - 1 >= 2 ? 'Comments' : 'Comment'}}
                                             </p>
                                         </div>
                                     </div>
                                 </div>
-                            </mat-card>
-                        </div>
-                    </div>
+                            </div>
 
-                    <div *ngIf="!loadingForum && showCourseDetails && (discussionData === null || discussionData?.topics?.length ===0)"
-                        class="forum-width" >
-                        <br><br>
-                        <mat-card class="black_border m-bt-4 box_shadow center center_align f_size_16">
+                            <div *ngIf="showCommentThread" class="no_border">
+                                <div class="p-l-0">
+                                    <div class="col-12 forum-width">
+                                        <div class="row" *ngIf="selectedModuleData">
+                                            <p (click)="gotoDisplayAllThreads();viewAllThreads()">
+                                                <span class="color-blue f_size_16 f_wt_500"
+                                                    style="text-decoration-line:underline ; cursor: pointer;">{{(selectedModuleData.title | titlecase) || 'Module Name' + ' '}}({{'Module'+ ' ' +selectedModuleData.indexValue}})
+                                                </span> :
+                                                &nbsp;&nbsp;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <br>
-                            {{'No threads found! create new..' | translate }}
-                            <br> <br>
-                        </mat-card>
-                    </div>
 
-                    <div class="comment_card forum-width" *ngIf="showCommentThread && selectedThreadData != null"
-                        >
-                        <!-- for thread -->
-                        <mat-card class="black_border m-b-10 no-radius no_padding">
-                            <!-- name row start -->
-                            <div class="no_padding no_margin thread-header">
-                                <!-- box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753); {{selectedThreadData?.user?.username | slice:0:1 | uppercase}}-->
-                                <div class="row padding_matcard">
-                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding m-auto-tb">
-                                        <button class="profileimg"
-                                            disabled>{{topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]?.user?.username | slice:0:1 | uppercase}}</button>
-                                    </div>
-                                    <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding m-auto-tb">
-                                        <div class="row m-auto-tb">
-                                            <div class="col-10 no_padding">
-                                                <strong
-                                                    class="color-blue float_left">{{topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]?.user?.username | titlecase}}
-                                                    &nbsp;
-                                                </strong> <span>
-                                                    &nbsp; | &nbsp;
-                                                    {{topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]?.timestampISO | date : 'medium'}}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- name row end -->
-                            <!-- content start -->
-                            <div class="row p-lr-30 m-t-20">
-                                <div class=col-1></div>
-                                <div class="col-11 thread_title p-l-0">
-                                    <p class="f_size_17 color_black f_wt_400 color_grey">
-                                        {{selectedThreadData?.titleRaw || 'Thread name'}}
-                                    </p>
-                                    <div
-                                        *ngIf="topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]">
-                                        <p class="no_margin" *ngIf="topicDiscussionData?.posts[0].deleted === false"
-                                            [innerHTML]="topicDiscussionData?.posts[0].content"></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--content ends  -->
-                            <mat-card-actions class="no_margin no_padding">
-                                <div class="row p-lr-30 m-t-20 m-b-15"
-                                    *ngIf="topicDiscussionData?.posts && topicDiscussionData?.posts[0]">
-                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
-                                    <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
-                                        &nbsp;
-                                        <button mat-button class="f_size_12 no_padding"
-                                            [disabled]="topicDiscussionData.posts[0].apiCalled"
-                                            (click)="likeandunlikepost(topicDiscussionData?.posts && topicDiscussionData?.posts[0])">
-                                            <mat-icon class="action_icon"
-                                                [ngClass]="{ 'pointerNone' : topicDiscussionData.posts[0].apiCalled }"
-                                                *ngIf="topicDiscussionData?.posts && !topicDiscussionData?.posts[0]?.bookmarked">
-                                                thumb_up_alt</mat-icon>
-                                            <mat-icon class="action_icon_filled"
-                                                [ngClass]="{ 'pointerNone' : topicDiscussionData.posts[0].apiCalled }"
-                                                *ngIf="topicDiscussionData?.posts && topicDiscussionData?.posts[0]?.bookmarked">
-                                                thumb_up_alt</mat-icon>{{'Like' | translate }}
-                                            ({{topicDiscussionData?.posts && topicDiscussionData?.posts[0] && topicDiscussionData?.posts[0]?.bookmarks || 0}})
-                                        </button> &nbsp;&nbsp;
-                                        <button mat-button class="f_size_12 no_padding" (click)="clickToComment()"
-                                            [disabled]="selectedThreadData?.thread_status === false || disableThreads">
-                                            <mat-icon class="action_icon"
-                                                [disabled]="selectedThreadData?.thread_status === false || disableThreads">
-                                                comment</mat-icon>{{'Comment' | translate }}
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="row p-lr-30" *ngIf="showThreadComment">
-                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
-                                    <div
-                                        class="form-group col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding m-b-0">
-                                        <angular-editor [config]="config" name="addThreadComment" autofocus
-                                            [placeholder]="'Leave your comments here...' | translate "
-                                            [(ngModel)]="addThreadComment" ngDefaultControl>
-                                        </angular-editor>
-                                    </div>
-                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
-                                    <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 m-b-15 p-5px"
-                                        style="background: whitesmoke; border: 1px solid #dddddd;">
-                                        <div class="row">
-                                            <div
-                                                class="col-xl-10 col-lg-10 col-md-10 col-sm-8 col-8 float_right no_padding">
-                                                <mat-checkbox class="width_100 f_size_15 align-middle"
-                                                    [(ngModel)]="a2iFlag">
-                                                    &nbsp;&nbsp;{{'Ask the instructor' | translate }}
-                                                </mat-checkbox>
-                                            </div>
-                                            <div
-                                                class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-4 float_right no_padding">
-                                                <button mat-button class="no-radius send-btn"
-                                                    [disabled]="addThreadComment == null || addThreadComment?.length == 0 "
-                                                    (click)="sendComment('thread',addThreadComment)">{{'Send' | translate }}</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </mat-card-actions>
-                        </mat-card>
-                        <!-- Header starts here -->
-                        <mat-card class="m-b-10 black_border box_shadow alignment ">
-                            <div class="row">
-                                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
-
+                            <div *ngIf="showCourseDetails" class="forum-width">
+                                <!-- Header starts here -->
+                                <mat-card class=" black_border box_shadow alignment ">
                                     <div class="row">
-                                        <mat-icon (click)="sortBox = !sortBox"
-                                            [ngClass]="topicDiscussionData && topicDiscussionData?.posts?.length === 1 ? 'pointerNone' : 'pointer'"
-                                            style="margin-top: 12px;">sort</mat-icon> &nbsp;&nbsp;
-                                        <mat-form-field class="sort no_margin" *ngIf="sortBox">
-                                            <mat-select [(value)]="selected"
-                                                [disabled]="discussionData === null || discussionData?.topics?.length === 0"
-                                                (selectionChange)="changedSort($event.value)">
-                                                <mat-option value="1">{{'Latest' | translate }}</mat-option>
-                                                <mat-option value="0">{{'Oldest' | translate }}</mat-option>
-                                            </mat-select>
+                                        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 no_padding">
 
-                                        </mat-form-field>
+                                            <div class="row">
+                                                <mat-icon (click)="sortBox = !sortBox"
+                                                    [ngClass]="topicDiscussionData && topicDiscussionData?.posts?.length === 1 ? 'pointerNone' : 'pointer'"
+                                                    style="margin-top: 12px;">sort</mat-icon> &nbsp;&nbsp;
+                                                <mat-form-field class="sort no_margin" *ngIf="sortBox">
+                                                    <mat-select [(value)]="selected"
+                                                        [disabled]="discussionData === null || discussionData?.topics?.length === 0"
+                                                        (selectionChange)="changedSort($event.value)">
+                                                        <mat-option value="1">{{'Latest' | translate }}</mat-option>
+                                                        <mat-option value="0">{{'Oldest' | translate }}</mat-option>
+                                                    </mat-select>
 
-                                        <form class="search-form">
-                                            <mat-icon (click)="goToSearchThread()" class="pointer"
-                                                style="margin-top: 12px;" *ngIf="filterValue === null" [ngClass]="
+                                                </mat-form-field>
+
+                                                <form class="search-form no_margin">
+                                                    <mat-icon (click)="goToSearchThread()" class="pointer"
+                                                        style="margin-top: 12px;" *ngIf="filterValue === null"
+                                                        [ngClass]="
                                                             (showCourseDetails && (discussionData === null || discussionData?.topics?.length === 0)) ||
                                                             (showCommentThread && topicDiscussionData && topicDiscussionData?.posts?.length === 1) ?
                                                             'pointerNone' : 'pointer'">
-                                                search
-                                            </mat-icon>
+                                                        search
+                                                    </mat-icon>
 
-                                            <mat-form-field class="no_margin" *ngIf="searchthreadname">
-                                                <input class="toolbar-search"
-                                                    [disabled]="
-                                                                        showCourseDetails ? (discussionData === null || discussionData?.topics?.length === 0) :
+                                                    <mat-form-field class="no_margin" *ngIf="searchthreadname">
+                                                        <input class="toolbar-search"
+                                                            [disabled]="showCourseDetails ? (discussionData === null || discussionData?.topics?.length === 0) :
                                                                         (topicDiscussionData && topicDiscussionData?.posts?.length === 1)"
-                                                    type="text" matInput name="searchbar" [(ngModel)]="filterValue"
-                                                    (input)="onSearchChange($event.target.value);">
-                                                <mat-icon matSuffix style="font-size: 1.2em" class="pointer"
-                                                    (click)="closeSearch()">
-                                                    close</mat-icon>
+                                                            type="text" matInput name="searchbar"
+                                                            [(ngModel)]="filterValue"
+                                                            (input)="onSearchChange($event.target.value);">
+                                                        <mat-icon matSuffix style="font-size: 1.2em" class="pointer"
+                                                            (click)="closeSearch()">
+                                                            close</mat-icon>
 
-                                            </mat-form-field>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 float_right no_padding">
-                                    <div class="row">
-                                        <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                                                    </mat-form-field>
+                                                </form>
+                                            </div>
                                         </div>
-                                        <div *ngIf="userDetail.is_thread_config"
-                                            class="col-xl-4 col-lg-4 col-md-12 col-sm-12 p-5px">
-                                            <button mat-button (click)="gotoNewThread(createThreadDialog)"
-                                                [disabled]="course === null || selectedModuleData === null || disableThreads"
-                                                class="new_Thread " style="border-radius: 0 !important;">
-                                                {{'New thread' | translate }}</button>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 float_right no_padding">
+                                            <div class="row">
+                                                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                                                </div>
+                                                <div *ngIf="userDetail.is_thread_config"
+                                                    class="col-xl-4 col-lg-4 col-md-12 col-sm-12" style="padding: 0px;">
+                                                    <button mat-button (click)="gotoNewThread(createThreadDialog)"
+                                                        [disabled]="course === null || selectedModuleData === null || disableThreads"
+                                                        class="new_Thread threadbutton" style="border-radius: 0 !important;">
+                                                        {{'New thread' | translate }}</button>
+
+                                                    <button mat-icon-button class="plus_icon"
+                                                        (click)="gotoNewThread(createThreadDialog)"
+                                                        [disabled]="course === null || selectedModuleData === null || disableThreads">
+                                                        <i class="material-icons plus_icon">add_circle</i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                </mat-card>
+                                <!-- Header ends here -->
+                                <div *ngFor="let data of discussionData?.topics">
+                                    <mat-card class="black_border m-bt-4 box_shadow pointer" (click)="showDetail(data)"
+                                        *ngIf="!data.deleted">
+                                        <div class="row">
+                                            <div class="col-xl-10 col-lg-10 col-md-8 col-sm-12 col-12">
+                                                <div class="row f_size_18 titlecolor">
+                                                    <h3> {{data?.titleRaw | titlecase}}</h3>
+                                                </div>
+                                                <div class="row f_size_14 date_color">
+                                                    <p> Last post by <strong
+                                                            class="titlecolor">{{data?.user?.username | titlecase}}
+                                                            &nbsp;</strong>
+                                                        &nbsp; | &nbsp; {{data?.lastposttimeISO | date : 'medium'}} </p>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4 bg_color">
+                                                <div class="row center position_hgt ">{{data?.postcount-1}}</div>
+                                                <div class="row center position ">
+                                                    <p>{{data?.postcount - 1 >= 2 ? 'Comments' : 'Comment'}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-card>
                                 </div>
                             </div>
-                        </mat-card>
-                        <!-- Header ends here -->
-                        <!-- for posts -->
-                        <div *ngFor="let post of topicDiscussionData?.posts; let pin = index;">
-                            <div *ngIf="post.deleted === false">
-                                <mat-card *ngIf="pin !== 0 && post.toPid === null" class="no-radius no_padding"
-                                    [ngClass]="post.deleted === false ? 'black_border m-b-8 ' : 'black_border m-b-8 white_card'">
-                                    <div class="black_border no_padding no_margin post-header">
+
+                            <div *ngIf="!loadingForum && showCourseDetails && (discussionData === null || discussionData?.topics?.length ===0)"
+                                class="forum-width">
+                                <br><br>
+                                <mat-card class="black_border m-bt-4 box_shadow center center_align f_size_16">
+                                    <br>
+                                    {{'No threads found! create new..' | translate }}
+                                    <br> <br>
+                                </mat-card>
+                            </div>
+
+                            <div class="comment_card forum-width"
+                                *ngIf="showCommentThread && selectedThreadData != null">
+                                <!-- for thread -->
+                                <mat-card class="black_border m-b-10 no-radius no_padding">
+                                    <!-- name row start -->
+                                    <div class="no_padding no_margin thread-header">
+                                        <!-- box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753); {{selectedThreadData?.user?.username | slice:0:1 | uppercase}}-->
                                         <div class="row padding_matcard">
                                             <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding m-auto-tb">
                                                 <button class="profileimg"
-                                                    disabled>{{post?.user?.username | slice:0:1 | uppercase}}</button>
+                                                    disabled>{{topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]?.user?.username | slice:0:1 | uppercase}}</button>
                                             </div>
                                             <div
                                                 class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding m-auto-tb">
                                                 <div class="row m-auto-tb">
-                                                    <div class="col-12 no_padding m-auto-tb">
+                                                    <div class="col-10 no_padding">
                                                         <strong
-                                                            class="color-blue float_left">{{post?.user?.username | titlecase}}
-                                                            &nbsp;</strong>
-                                                        <span> &nbsp; | &nbsp;
-                                                            {{post?.timestampISO | date : 'medium'}}
-                                                            &nbsp; </span>
-                                                        <span class="a2i_lable" *ngIf="post.a2i_lable">
-                                                            {{'A2I' | translate }}</span>
+                                                            class="color-blue float_left">{{topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]?.user?.username | titlecase}}
+                                                            &nbsp;
+                                                        </strong> <span>
+                                                            &nbsp; | &nbsp;
+                                                            {{topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]?.timestampISO | date : 'medium'}}
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row p-lr-30 m-t-20">
-                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
-                                        </div>
-                                        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
-                                            <p class="no_margin" *ngIf="post?.deleted === false"
-                                                [innerHTML]="post?.content">
-                                            </p>
 
+                                    <!-- name row end -->
+                                    <!-- content start -->
+                                    <div class="row p-lr-30 m-t-20">
+                                        <div class=col-1></div>
+                                        <div class="col-11 thread_title p-l-0">
+                                            <p class="f_size_17 color_black f_wt_400 color_grey">
+                                                {{selectedThreadData?.titleRaw || 'Thread name'}}
+                                            </p>
+                                            <div
+                                                *ngIf="topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]">
+                                                <p class="no_margin"
+                                                    *ngIf="topicDiscussionData?.posts[0].deleted === false"
+                                                    [innerHTML]="topicDiscussionData?.posts[0].content"></p>
+                                            </div>
                                         </div>
                                     </div>
+                                    <!--content ends  -->
                                     <mat-card-actions class="no_margin no_padding">
-                                        <div class="row p-lr-30 m-t-20 m-b-15">
+                                        <div class="row p-lr-30 m-t-20 m-b-15"
+                                            *ngIf="topicDiscussionData?.posts && topicDiscussionData?.posts[0]">
                                             <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
                                             <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
                                                 &nbsp;
                                                 <button mat-button class="f_size_12 no_padding"
-                                                    [disabled]="post?.apiCalled" (click)="likeandunlikepost(post)">
+                                                    [disabled]="topicDiscussionData.posts[0].apiCalled"
+                                                    (click)="likeandunlikepost(topicDiscussionData?.posts && topicDiscussionData?.posts[0])">
                                                     <mat-icon class="action_icon"
-                                                        [ngClass]="{ 'pointerNone' : post.apiCalled }"
-                                                        *ngIf="!post.bookmarked">
+                                                        [ngClass]="{ 'pointerNone' : topicDiscussionData.posts[0].apiCalled }"
+                                                        *ngIf="topicDiscussionData?.posts && !topicDiscussionData?.posts[0]?.bookmarked">
                                                         thumb_up_alt</mat-icon>
                                                     <mat-icon class="action_icon_filled"
-                                                        [ngClass]="{ 'pointerNone' : post.apiCalled }"
-                                                        *ngIf="post.bookmarked">
+                                                        [ngClass]="{ 'pointerNone' : topicDiscussionData.posts[0].apiCalled }"
+                                                        *ngIf="topicDiscussionData?.posts && topicDiscussionData?.posts[0]?.bookmarked">
                                                         thumb_up_alt</mat-icon>{{'Like' | translate }}
-                                                    ({{post?.bookmarks || 0}})
+                                                    ({{topicDiscussionData?.posts && topicDiscussionData?.posts[0] && topicDiscussionData?.posts[0]?.bookmarks || 0}})
                                                 </button> &nbsp;&nbsp;
-                                                <button mat-button
-                                                    [disabled]="selectedThreadData?.thread_status === false || disableThreads"
-                                                    (click)="clickToCommentPost(pin)" class="f_size_12 no_padding">
+                                                <button mat-button class="f_size_12 no_padding"
+                                                    (click)="clickToComment()"
+                                                    [disabled]="selectedThreadData?.thread_status === false || disableThreads">
                                                     <mat-icon class="action_icon"
                                                         [disabled]="selectedThreadData?.thread_status === false || disableThreads">
                                                         comment</mat-icon>{{'Comment' | translate }}
                                                 </button>
                                             </div>
                                         </div>
-
-                                        <div class="row p-lr-30" *ngIf="showCommentEditor[pin]">
+                                        <div class="row p-lr-30" *ngIf="showThreadComment">
                                             <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
                                             <div
-                                                class="form-group col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 no_padding m-b-0">
-                                                <angular-editor [config]="config" autofocus name="addPostComment[pin]"
+                                                class="form-group col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding m-b-0">
+                                                <angular-editor [config]="config" name="addThreadComment" autofocus
                                                     [placeholder]="'Leave your comments here...' | translate "
-                                                    [(ngModel)]="addPostComment[pin]" ngDefaultControl>
+                                                    [(ngModel)]="addThreadComment" ngDefaultControl>
                                                 </angular-editor>
                                             </div>
                                             <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
-                                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
-                                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 float_right p-5px m-b-15"
+                                            <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 m-b-15 p-5px"
                                                 style="background: whitesmoke; border: 1px solid #dddddd;">
                                                 <div class="row">
                                                     <div
-                                                        class="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 float_right no_padding">
-                                                        <!-- <mat-checkbox class="width_100 f_size_15 align-middle"
+                                                        class="col-xl-10 col-lg-10 col-md-10 col-sm-8 col-8 float_right no_padding">
+                                                        <mat-checkbox class="width_100 f_size_15 align-middle"
                                                             [(ngModel)]="a2iFlag">
                                                             &nbsp;&nbsp;{{'Ask the instructor' | translate }}
-                                                        </mat-checkbox> -->
+                                                        </mat-checkbox>
                                                     </div>
                                                     <div
-                                                        class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4 float_right no_padding">
+                                                        class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-4 float_right no_padding">
                                                         <button mat-button class="no-radius send-btn"
-                                                            (click)="sendComment('post',addPostComment[pin],addPostComment,post)"
-                                                            [disabled]="addPostComment && addPostComment[pin] == null">{{'Send' | translate }}</button>
+                                                            [disabled]="addThreadComment == null || addThreadComment?.length == 0 "
+                                                            (click)="sendComment('thread',addThreadComment)">{{'Send' | translate }}</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </mat-card-actions>
+                                </mat-card>
+                                <!-- Header starts here -->
+                                <mat-card class="m-b-10 black_border box_shadow alignment ">
+                                    <div class="row">
+                                        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 no_padding">
 
-                                    <!-- // 1st child -->
-                                    <div *ngFor="let posts of topicDiscussionData?.posts; let pjn = index;">
-                                        <div style="padding: 0px 10px;" *ngIf="posts.deleted === false">
-                                            <mat-card class="no-radius no_padding black_border m-bt-4"
-                                                *ngIf="pjn !== 0 && post.pid.toString() === posts.toPid">
-                                                <div class="black_border no_padding no_margin child-post-header">
-                                                    <!-- F1F1F15C  -->
-                                                    <div class="row padding_matcard">
-                                                        <div
-                                                            class="col-xl-1 col-lg-1 col-md-1 col-sm-3 col-3 no_padding m-auto-tb">
-                                                            <button class="profileimg"
-                                                                disabled>{{posts?.user?.username | slice:0:1 | uppercase}}</button>
-                                                        </div>
-                                                        <div
-                                                            class="col-xl-11 col-lg-11 col-md-11 col-sm-9 col-9 no_padding m-auto-tb">
-                                                            <strong
-                                                                class="color-blue float_left">{{posts?.user?.username | titlecase}}</strong>
-                                                            <span>
-                                                                &nbsp; | &nbsp;
-                                                                {{posts?.timestampISO | date : 'medium'}}
-                                                            </span>
-                                                        </div>
-                                                    </div>
+                                            <div class="row">
+                                                <mat-icon (click)="sortBox = !sortBox"
+                                                    [ngClass]="topicDiscussionData && topicDiscussionData?.posts?.length === 1 ? 'pointerNone' : 'pointer'"
+                                                    style="margin-top: 12px;">sort</mat-icon> &nbsp;&nbsp;
+                                                <mat-form-field class="sort no_margin" *ngIf="sortBox">
+                                                    <mat-select [(value)]="selected"
+                                                        [disabled]="discussionData === null || discussionData?.topics?.length === 0"
+                                                        (selectionChange)="changedSort($event.value)">
+                                                        <mat-option value="1">{{'Latest' | translate }}</mat-option>
+                                                        <mat-option value="0">{{'Oldest' | translate }}</mat-option>
+                                                    </mat-select>
+
+                                                </mat-form-field>
+
+                                                <form class="search-form">
+                                                    <mat-icon (click)="goToSearchThread()" class="pointer"
+                                                        style="margin-top: 12px;" *ngIf="filterValue === null"
+                                                        [ngClass]="
+                                                            (showCourseDetails && (discussionData === null || discussionData?.topics?.length === 0)) ||
+                                                            (showCommentThread && topicDiscussionData && topicDiscussionData?.posts?.length === 1) ?
+                                                            'pointerNone' : 'pointer'">
+                                                        search
+                                                    </mat-icon>
+
+                                                    <mat-form-field class="no_margin" *ngIf="searchthreadname">
+                                                        <input class="toolbar-search"
+                                                            [disabled]="
+                                                                        showCourseDetails ? (discussionData === null || discussionData?.topics?.length === 0) :
+                                                                        (topicDiscussionData && topicDiscussionData?.posts?.length === 1)"
+                                                            type="text" matInput name="searchbar"
+                                                            [(ngModel)]="filterValue"
+                                                            (input)="onSearchChange($event.target.value);">
+                                                        <mat-icon matSuffix style="font-size: 1.2em" class="pointer"
+                                                            (click)="closeSearch()">
+                                                            close</mat-icon>
+
+                                                    </mat-form-field>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 float_right no_padding">
+                                            <div class="row">
+                                                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
                                                 </div>
-                                                <div class="row p-lr-30 m-t-20">
-                                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
+                                                <div *ngIf="userDetail.is_thread_config"
+                                                    class="col-xl-4 col-lg-4 col-md-12 col-sm-12 p-5px">
+                                                    <!-- <button mat-button (click)="gotoNewThread(createThreadDialog)"
+                                                        [disabled]="course === null || selectedModuleData === null || disableThreads"
+                                                        class="new_Thread " style="border-radius: 0 !important;">
+                                                        {{'New thread' | translate }}</button> -->
+
+
+                                                        <button mat-button (click)="gotoNewThread(createThreadDialog)"
+                                                        [disabled]="course === null || selectedModuleData === null || disableThreads"
+                                                        class="new_Thread threadbutton" style="border-radius: 0 !important;">
+                                                        {{'New thread' | translate }}</button>
+
+                                                    <button mat-icon-button class="plus_icon"
+                                                        (click)="gotoNewThread(createThreadDialog)"
+                                                        [disabled]="course === null || selectedModuleData === null || disableThreads">
+                                                        <i class="material-icons plus_icon">add_circle</i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </mat-card>
+                                <!-- Header ends here -->
+                                <!-- for posts -->
+                                <div *ngFor="let post of topicDiscussionData?.posts; let pin = index;">
+                                    <div *ngIf="post.deleted === false">
+                                        <mat-card *ngIf="pin !== 0 && post.toPid === null" class="no-radius no_padding"
+                                            [ngClass]="post.deleted === false ? 'black_border m-b-8 ' : 'black_border m-b-8 white_card'">
+                                            <div class="black_border no_padding no_margin post-header">
+                                                <div class="row padding_matcard">
+                                                    <div
+                                                        class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding m-auto-tb">
+                                                        <button class="profileimg"
+                                                            disabled>{{post?.user?.username | slice:0:1 | uppercase}}</button>
                                                     </div>
                                                     <div
-                                                        class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
-                                                        <p class="no_margin" *ngIf="posts?.deleted === false"
-                                                            [innerHTML]="posts?.content"></p>
-
+                                                        class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding m-auto-tb">
+                                                        <div class="row m-auto-tb">
+                                                            <div class="col-12 no_padding m-auto-tb">
+                                                                <strong
+                                                                    class="color-blue float_left">{{post?.user?.username | titlecase}}
+                                                                    &nbsp;</strong>
+                                                                <span> &nbsp; | &nbsp;
+                                                                    {{post?.timestampISO | date : 'medium'}}
+                                                                    &nbsp; </span>
+                                                                <span class="a2i_lable" *ngIf="post.a2i_lable">
+                                                                    {{'A2I' | translate }}</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <mat-card-actions class="no_margin no_padding">
-                                                    <div class="row p-lr-30 m-t-20 m-b-15">
-                                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12">
+                                            </div>
+                                            <div class="row p-lr-30 m-t-20">
+                                                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
+                                                </div>
+                                                <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
+                                                    <p class="no_margin" *ngIf="post?.deleted === false"
+                                                        [innerHTML]="post?.content">
+                                                    </p>
+
+                                                </div>
+                                            </div>
+                                            <mat-card-actions class="no_margin no_padding">
+                                                <div class="row p-lr-30 m-t-20 m-b-15">
+                                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
+                                                    <div
+                                                        class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
+                                                        &nbsp;
+                                                        <button mat-button class="f_size_12 no_padding"
+                                                            [disabled]="post?.apiCalled"
+                                                            (click)="likeandunlikepost(post)">
+                                                            <mat-icon class="action_icon"
+                                                                [ngClass]="{ 'pointerNone' : post.apiCalled }"
+                                                                *ngIf="!post.bookmarked">
+                                                                thumb_up_alt</mat-icon>
+                                                            <mat-icon class="action_icon_filled"
+                                                                [ngClass]="{ 'pointerNone' : post.apiCalled }"
+                                                                *ngIf="post.bookmarked">
+                                                                thumb_up_alt</mat-icon>{{'Like' | translate }}
+                                                            ({{post?.bookmarks || 0}})
+                                                        </button> &nbsp;&nbsp;
+                                                        <button mat-button
+                                                            [disabled]="selectedThreadData?.thread_status === false || disableThreads"
+                                                            (click)="clickToCommentPost(pin)"
+                                                            class="f_size_12 no_padding">
+                                                            <mat-icon class="action_icon"
+                                                                [disabled]="selectedThreadData?.thread_status === false || disableThreads">
+                                                                comment</mat-icon>{{'Comment' | translate }}
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row p-lr-30" *ngIf="showCommentEditor[pin]">
+                                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
+                                                    <div
+                                                        class="form-group col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 no_padding m-b-0">
+                                                        <angular-editor [config]="config" autofocus
+                                                            name="addPostComment[pin]"
+                                                            [placeholder]="'Leave your comments here...' | translate "
+                                                            [(ngModel)]="addPostComment[pin]" ngDefaultControl>
+                                                        </angular-editor>
+                                                    </div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
+                                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
+                                                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 float_right p-5px m-b-15"
+                                                        style="background: whitesmoke; border: 1px solid #dddddd;">
+                                                        <div class="row">
+                                                            <div
+                                                                class="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 float_right no_padding">
+                                                                <!-- <mat-checkbox class="width_100 f_size_15 align-middle"
+                                                            [(ngModel)]="a2iFlag">
+                                                            &nbsp;&nbsp;{{'Ask the instructor' | translate }}
+                                                        </mat-checkbox> -->
+                                                            </div>
+                                                            <div
+                                                                class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4 float_right no_padding">
+                                                                <button mat-button class="no-radius send-btn"
+                                                                    (click)="sendComment('post',addPostComment[pin],addPostComment,post)"
+                                                                    [disabled]="addPostComment && addPostComment[pin] == null">{{'Send' | translate }}</button>
+                                                            </div>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </mat-card-actions>
+
+                                            <!-- // 1st child -->
+                                            <div *ngFor="let posts of topicDiscussionData?.posts; let pjn = index;">
+                                                <div style="padding: 0px 10px;" *ngIf="posts.deleted === false">
+                                                    <mat-card class="no-radius no_padding black_border m-bt-4"
+                                                        *ngIf="pjn !== 0 && post.pid.toString() === posts.toPid">
                                                         <div
-                                                            class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
-                                                            &nbsp;
-                                                            <button mat-button class="f_size_12 no_padding"
-                                                                [disabled]="posts.apiCalled"
-                                                                (click)="likeandunlikepost(posts)">
-                                                                <mat-icon class="action_icon"
-                                                                    [ngClass]="{ 'pointerNone' : posts.apiCalled }"
-                                                                    *ngIf="!posts?.bookmarked">
-                                                                    thumb_up_alt</mat-icon>
-                                                                <mat-icon class="action_icon_filled"
-                                                                    [ngClass]="{ 'pointerNone' : posts.apiCalled }"
-                                                                    *ngIf="posts.bookmarked">
-                                                                    thumb_up_alt</mat-icon>{{'Like' | translate }}
-                                                                ({{posts?.bookmarks || 0}})
-                                                            </button> &nbsp;&nbsp;
-                                                            <!-- // commented by Mythreyi - no need child's child comment -->
-                                                            <!-- <button mat-button
+                                                            class="black_border no_padding no_margin child-post-header">
+                                                            <!-- F1F1F15C  -->
+                                                            <div class="row padding_matcard">
+                                                                <div
+                                                                    class="col-xl-1 col-lg-1 col-md-1 col-sm-3 col-3 no_padding m-auto-tb">
+                                                                    <button class="profileimg"
+                                                                        disabled>{{posts?.user?.username | slice:0:1 | uppercase}}</button>
+                                                                </div>
+                                                                <div
+                                                                    class="col-xl-11 col-lg-11 col-md-11 col-sm-9 col-9 no_padding m-auto-tb">
+                                                                    <strong
+                                                                        class="color-blue float_left">{{posts?.user?.username | titlecase}}</strong>
+                                                                    <span>
+                                                                        &nbsp; | &nbsp;
+                                                                        {{posts?.timestampISO | date : 'medium'}}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row p-lr-30 m-t-20">
+                                                            <div
+                                                                class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
+                                                            </div>
+                                                            <div
+                                                                class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
+                                                                <p class="no_margin" *ngIf="posts?.deleted === false"
+                                                                    [innerHTML]="posts?.content"></p>
+
+                                                            </div>
+                                                        </div>
+                                                        <mat-card-actions class="no_margin no_padding">
+                                                            <div class="row p-lr-30 m-t-20 m-b-15">
+                                                                <div
+                                                                    class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12">
+                                                                </div>
+                                                                <div
+                                                                    class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
+                                                                    &nbsp;
+                                                                    <button mat-button class="f_size_12 no_padding"
+                                                                        [disabled]="posts.apiCalled"
+                                                                        (click)="likeandunlikepost(posts)">
+                                                                        <mat-icon class="action_icon"
+                                                                            [ngClass]="{ 'pointerNone' : posts.apiCalled }"
+                                                                            *ngIf="!posts?.bookmarked">
+                                                                            thumb_up_alt</mat-icon>
+                                                                        <mat-icon class="action_icon_filled"
+                                                                            [ngClass]="{ 'pointerNone' : posts.apiCalled }"
+                                                                            *ngIf="posts.bookmarked">
+                                                                            thumb_up_alt</mat-icon>
+                                                                        {{'Like' | translate }}
+                                                                        ({{posts?.bookmarks || 0}})
+                                                                    </button> &nbsp;&nbsp;
+                                                                    <!-- // commented by Mythreyi - no need child's child comment -->
+                                                                    <!-- <button mat-button
                                                                     (click)="showCommentEditor[pjn] = !showCommentEditor[pjn]"
                                                                     class="f_size_12 no_padding">
                                                                     <mat-icon class="action_icon">
                                                                         comment</mat-icon>Comment
                                                                 </button> -->
-                                                        </div>
-                                                    </div>
-                                                    <div class="row p-lr-30" *ngIf="showCommentEditor[pjn]">
-                                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12">
-                                                        </div>
-                                                        <div
-                                                            class="form-group col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 no_padding no_margin">
-                                                            <angular-editor [config]="config"
-                                                                [placeholder]="'Leave your comments here...' | translate "
-                                                                [(ngModel)]="addPostComment[pjn]">
-                                                            </angular-editor>
-                                                        </div>
-                                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12">
-                                                        </div>
-                                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12">
-                                                        </div>
-                                                        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 float_right p-5px m-b-15"
-                                                            style="background: whitesmoke; border: 1px solid #dddddd;">
-                                                            <div class="row">
-                                                                <!-- <div
+                                                                </div>
+                                                            </div>
+                                                            <div class="row p-lr-30" *ngIf="showCommentEditor[pjn]">
+                                                                <div
+                                                                    class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12">
+                                                                </div>
+                                                                <div
+                                                                    class="form-group col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 no_padding no_margin">
+                                                                    <angular-editor [config]="config"
+                                                                        [placeholder]="'Leave your comments here...' | translate "
+                                                                        [(ngModel)]="addPostComment[pjn]">
+                                                                    </angular-editor>
+                                                                </div>
+                                                                <div
+                                                                    class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12">
+                                                                </div>
+                                                                <div
+                                                                    class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12">
+                                                                </div>
+                                                                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 float_right p-5px m-b-15"
+                                                                    style="background: whitesmoke; border: 1px solid #dddddd;">
+                                                                    <div class="row">
+                                                                        <!-- <div
                                                                     class="col-xl-10 col-lg-9 col-md-9 col-sm-8 col-8 no_padding float_right">
                                                                     <mat-checkbox
                                                                         class="width_100 f_size_13 align-middle"
@@ -1034,165 +1080,168 @@
                                                                         &nbsp;{{'Ask the instructor' | translate }}
                                                                     </mat-checkbox>
                                                                 </div> -->
-                                                                <div
-                                                                    class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4 no_padding float_right">
-                                                                    <button mat-button class="no-radius send-btn"
-                                                                        (click)="sendComment('post',addPostComment[pjn],addPostComment,posts)">{{'Send' | translate }}</button>
+                                                                        <div
+                                                                            class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-4 no_padding float_right">
+                                                                            <button mat-button
+                                                                                class="no-radius send-btn"
+                                                                                (click)="sendComment('post',addPostComment[pjn],addPostComment,posts)">{{'Send' | translate }}</button>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
+                                                            </div>
+                                                        </mat-card-actions>
+
+                                                        <!-- // 2nd child --- in learner d.f /// Refer this div-- Kani -- -->
+                                                        <div
+                                                            *ngFor="let postss of topicDiscussionData?.posts; let pkn = index;">
+                                                            <div style="padding: 0px 10px;"
+                                                                *ngIf="postss.deleted === false">
+                                                                <mat-card
+                                                                    class="no-radius no_padding black_border m-bt-4"
+                                                                    *ngIf="pkn !== 0 && posts.pid.toString() === postss.toPid">
+                                                                    <div
+                                                                        class="black_border no_padding no_margin child-post-header">
+                                                                        <div class="row padding_matcard">
+                                                                            <div
+                                                                                class="col-xl-1 col-lg-1 col-md-1 col-sm-3 col-3 no_padding m-auto-tb">
+                                                                                <button class="profileimg"
+                                                                                    disabled>{{postss?.user?.username | slice:0:1 | uppercase}}</button>
+                                                                            </div>
+                                                                            <div
+                                                                                class="col-xl-11 col-lg-11 col-md-9 col-sm-9 col-9 no_padding m-auto-tb">
+                                                                                <strong
+                                                                                    class="color-blue float_left">{{postss?.user?.username | titlecase}}</strong>
+                                                                                <span>
+                                                                                    &nbsp; | &nbsp;
+                                                                                    {{postss?.timestampISO | date : 'medium'}}
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row p-lr-30 m-t-20">
+                                                                        <div
+                                                                            class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
+                                                                        </div>
+                                                                        <div
+                                                                            class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
+                                                                            <p class="no_margin"
+                                                                                *ngIf="postss?.deleted === false"
+                                                                                [innerHTML]="postss?.content"></p>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <mat-card-actions class="no_margin no_padding">
+                                                                        <div class="row p-lr-30 m-t-20 m-b-15">
+                                                                            <div
+                                                                                class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12">
+                                                                            </div>
+                                                                            <div
+                                                                                class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
+                                                                                &nbsp;
+                                                                                <button mat-button
+                                                                                    [disabled]="postss?.apiCalled"
+                                                                                    class="f_size_12 no_padding"
+                                                                                    (click)="likeandunlikepost(postss)">
+                                                                                    <mat-icon class="action_icon"
+                                                                                        [ngClass]="{ 'pointerNone' : postss.apiCalled }"
+                                                                                        *ngIf="!postss?.bookmarked">
+                                                                                        thumb_up_alt</mat-icon>
+                                                                                    <mat-icon class="action_icon_filled"
+                                                                                        [ngClass]="{ 'pointerNone' : postss.apiCalled }"
+                                                                                        *ngIf="postss.bookmarked">
+                                                                                        thumb_up_alt</mat-icon>
+                                                                                    {{'Like' | translate }}
+                                                                                    ({{postss?.bookmarks || 0}})
+                                                                                </button> &nbsp;&nbsp;
+                                                                            </div>
+                                                                        </div>
+                                                                    </mat-card-actions>
+
+                                                                </mat-card>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </mat-card-actions>
 
-                                                <!-- // 2nd child --- in learner d.f /// Refer this div-- Kani -- -->
-                                                <div
-                                                    *ngFor="let postss of topicDiscussionData?.posts; let pkn = index;">
-                                                    <div style="padding: 0px 10px;" *ngIf="postss.deleted === false">
-                                                        <mat-card class="no-radius no_padding black_border m-bt-4"
-                                                            *ngIf="pkn !== 0 && posts.pid.toString() === postss.toPid">
-                                                            <div
-                                                                class="black_border no_padding no_margin child-post-header">
-                                                                <div class="row padding_matcard">
-                                                                    <div
-                                                                        class="col-xl-1 col-lg-1 col-md-1 col-sm-3 col-3 no_padding m-auto-tb">
-                                                                        <button class="profileimg"
-                                                                            disabled>{{postss?.user?.username | slice:0:1 | uppercase}}</button>
-                                                                    </div>
-                                                                    <div
-                                                                        class="col-xl-11 col-lg-11 col-md-9 col-sm-9 col-9 no_padding m-auto-tb">
-                                                                        <strong
-                                                                            class="color-blue float_left">{{postss?.user?.username | titlecase}}</strong>
-                                                                        <span>
-                                                                            &nbsp; | &nbsp;
-                                                                            {{postss?.timestampISO | date : 'medium'}}
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row p-lr-30 m-t-20">
-                                                                <div
-                                                                    class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
-                                                                </div>
-                                                                <div
-                                                                    class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
-                                                                    <p class="no_margin"
-                                                                        *ngIf="postss?.deleted === false"
-                                                                        [innerHTML]="postss?.content"></p>
-
-                                                                </div>
-                                                            </div>
-                                                            <mat-card-actions class="no_margin no_padding">
-                                                                <div class="row p-lr-30 m-t-20 m-b-15">
-                                                                    <div
-                                                                        class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12">
-                                                                    </div>
-                                                                    <div
-                                                                        class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
-                                                                        &nbsp;
-                                                                        <button mat-button
-                                                                            [disabled]="postss?.apiCalled"
-                                                                            class="f_size_12 no_padding"
-                                                                            (click)="likeandunlikepost(postss)">
-                                                                            <mat-icon class="action_icon"
-                                                                                [ngClass]="{ 'pointerNone' : postss.apiCalled }"
-                                                                                *ngIf="!postss?.bookmarked">
-                                                                                thumb_up_alt</mat-icon>
-                                                                            <mat-icon class="action_icon_filled"
-                                                                                [ngClass]="{ 'pointerNone' : postss.apiCalled }"
-                                                                                *ngIf="postss.bookmarked">
-                                                                                thumb_up_alt</mat-icon>
-                                                                            {{'Like' | translate }}
-                                                                            ({{postss?.bookmarks || 0}})
-                                                                        </button> &nbsp;&nbsp;
-                                                                    </div>
-                                                                </div>
-                                                            </mat-card-actions>
-
-                                                        </mat-card>
-                                                    </div>
+                                                    </mat-card>
                                                 </div>
+                                            </div>
 
-                                            </mat-card>
-                                        </div>
+
+                                        </mat-card>
                                     </div>
+                                </div>
 
-
-                                </mat-card>
+                                <div> <br><br>
+                                    <br><br></div>
                             </div>
                         </div>
 
-                        <div> <br><br>
-                            <br><br></div>
-                    </div>
-                </div>
 
 
-
-                <ng-template #createThreadDialog class="dialogPopup no-radius">
-                    <mat-dialog-content class="createThreadDialog no-radius">
-                        <form [formGroup]="addThreadForm">
-                            <div class="row m-l-20 m-r-20 m-b-0">
-                                <div class="col-10">
-                                    <p class="m-t-10 m-b-0 f_size_18">{{'Create a new thread' | translate }}</p>
-                                </div>
-                                <div class="col-2">
-                                    <mat-icon (click)="closedialogbox(); addThreadForm?.reset();"
-                                        class="f_size_25 float_right pointer">close
-                                    </mat-icon>
-                                </div>
-                            </div>
-                            <div class="row m-l-20 m-r-20 m-t-20 m-b-0" *ngIf="addThreadForm">
-                                <div class="col-12">
-                                    <mat-label>Title</mat-label><span class="mand"> *</span>
-                                </div>
-                                <div class="col-12 m-b-0 form-group">
-                                    <input type="text" class="width_100 greyBor background_trans" name="thread_name"
-                                        formControlName="thread_name" autofocus>
-                                    <div *ngIf="f.thread_name.touched && f.thread_name.errors" class="mand">
-                                        <div *ngIf="f.thread_name.errors.minlength">
-                                            {{'Title must be minimum of 8 characters' | translate }} </div>
-                                        <div *ngIf="f.thread_name.errors.required">
-                                            {{'Title is required' | translate }}</div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="row m-l-20 m-r-20 m-t-20 m-b-0">
-                                <div class="col-12">
-                                    <mat-label>{{'Post' | translate }}</mat-label><span class="mand"> *</span>
-                                </div>
-                                <div class="col-12 m-b-0">
-                                    <div class="form-group m-b-0">
-                                        <angular-editor [config]="config" formControlName="thread_description">
-                                        </angular-editor>
-                                        <div *ngIf="f.thread_description.touched && f.thread_description.errors"
-                                            class="mand">
-                                            <div *ngIf="f.thread_description.errors.minlength">
-                                                {{'Post must be minimum of 8 characters' | translate }} </div>
-                                            <div *ngIf="f.thread_description.errors.required">
-                                                {{'Post is required' | translate }}</div>
+                        <ng-template #createThreadDialog class="dialogPopup no-radius">
+                            <mat-dialog-content class="createThreadDialog no-radius">
+                                <form [formGroup]="addThreadForm">
+                                    <div class="row m-l-20 m-r-20 m-b-0">
+                                        <div class="col-10">
+                                            <p class="m-t-10 m-b-0 f_size_18">{{'Create a new thread' | translate }}</p>
+                                        </div>
+                                        <div class="col-2">
+                                            <mat-icon (click)="closedialogbox(); addThreadForm?.reset();"
+                                                class="f_size_25 float_right pointer">close
+                                            </mat-icon>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                    <div class="row m-l-20 m-r-20 m-t-20 m-b-0" *ngIf="addThreadForm">
+                                        <div class="col-12">
+                                            <mat-label>Title</mat-label><span class="mand"> *</span>
+                                        </div>
+                                        <div class="col-12 m-b-0 form-group">
+                                            <input type="text" class="width_100 greyBor background_trans"
+                                                name="thread_name" formControlName="thread_name" autofocus>
+                                            <div *ngIf="f.thread_name.touched && f.thread_name.errors" class="mand">
+                                                <div *ngIf="f.thread_name.errors.minlength">
+                                                    {{'Title must be minimum of 8 characters' | translate }} </div>
+                                                <div *ngIf="f.thread_name.errors.required">
+                                                    {{'Title is required' | translate }}</div>
+                                            </div>
 
+                                        </div>
+                                    </div>
+
+                                    <div class="row m-l-20 m-r-20 m-t-20 m-b-0">
+                                        <div class="col-12">
+                                            <mat-label>{{'Post' | translate }}</mat-label><span class="mand"> *</span>
+                                        </div>
+                                        <div class="col-12 m-b-0">
+                                            <div class="form-group m-b-0">
+                                                <angular-editor [config]="config" formControlName="thread_description">
+                                                </angular-editor>
+                                                <div *ngIf="f.thread_description.touched && f.thread_description.errors"
+                                                    class="mand">
+                                                    <div *ngIf="f.thread_description.errors.minlength">
+                                                        {{'Post must be minimum of 8 characters' | translate }} </div>
+                                                    <div *ngIf="f.thread_description.errors.required">
+                                                        {{'Post is required' | translate }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br>
+                                </form>
+                            </mat-dialog-content>
+                            <mat-dialog-actions align="end" class="dialogButtons">
+                                <button mat-stroked-button class="reset" (click)="addThreadForm?.reset()"
+                                    [disabled]="addThreadForm.untouched">Reset</button>
+                                <button mat-stroked-button class="bg-blue color_white" (click)="createNewThread()"
+                                    [disabled]="addThreadForm.invalid" cdkFocusInitial>{{'Post' | translate }}</button>
+                            </mat-dialog-actions>
                             <br>
-                        </form>
-                    </mat-dialog-content>
-                    <mat-dialog-actions align="end" class="dialogButtons">
-                        <button mat-stroked-button class="reset" (click)="addThreadForm?.reset()"
-                            [disabled]="addThreadForm.untouched">Reset</button>
-                        <button mat-stroked-button class="bg-blue color_white" (click)="createNewThread()"
-                            [disabled]="addThreadForm.invalid" cdkFocusInitial>{{'Post' | translate }}</button>
-                    </mat-dialog-actions>
-                    <br>
-                </ng-template>
-            </mat-tab>
-            </mat-tab-group>
+                        </ng-template>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </mat-drawer-container>
     </div>
-    </mat-drawer-container>  
-</div>
 
 </div>
 
