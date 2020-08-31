@@ -649,7 +649,7 @@
                                                 <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
                                                 </div>
                                                 <div *ngIf="userDetail.is_thread_config"
-                                                    class="col-xl-4 col-lg-4 col-md-12 col-sm-12 p-5px">
+                                                    class="col-xl-4 col-lg-4 col-md-12 col-sm-12" style="padding: 0px;">
                                                     <button mat-button (click)="gotoNewThread(createThreadDialog)"
                                                         [disabled]="course === null || selectedModuleData === null || disableThreads"
                                                         class="new_Thread threadbutton" style="border-radius: 0 !important;">
