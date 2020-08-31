@@ -112,8 +112,8 @@ export class LearnerMyCourseComponent implements OnInit {
 
   claimAll() {
     this.learnerService.bulkclaimcourse(this.userDetailes._id, this.userDetailes.user_id,
-      'catagoryId').subscribe((bulkclaimcourse: any) => {
-
+    this.categoryData.categoryId ).subscribe((bulkclaimcourse: any) => {
+      console.log(bulkclaimcourse);
       });
   }
   getEnrolledCourses(catalougeId, catagoryId, jobRoleCategoryId) {
