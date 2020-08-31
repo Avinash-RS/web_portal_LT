@@ -165,8 +165,7 @@
                             <div class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
-                                        <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
-                                            data-target="#myModal">
+                                        <div class="courseHover" (click)="gotoDesc(course)">
                                             <div > 
                                                 <span *ngIf="course?.course_type === 'primer_course'">
                                                 <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"  matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="assets/learner/primerC.svg"> 
@@ -220,7 +219,7 @@
                                                 </button>
                                             </div>
                                             <div class="startBtnDiv">
-                                                 <button mat-stroked-button data-toggle="modal" data-target="#myModal"
+                                                 <button mat-stroked-button
                                                     *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
@@ -231,8 +230,7 @@
                                                 </button>
                                                 <button mat-stroked-button
                                                     *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                    class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
-                                                    data-target="#myModal" (click)="gotoDesc(course)">
+                                                    class="btl-alin blue_clr cap pointer m-t-05"  (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                                                     <span class="cap f_wt_400  m-t-m-2">
                                                         {{'Replay' }}&nbsp;
@@ -257,7 +255,7 @@
                                             {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
                                         </div>
                                          <div class="startBtnicon">
-                                            <button mat-stroked-button data-toggle="modal" data-target="#myModal"
+                                            <button mat-stroked-button 
                                                     *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
@@ -268,8 +266,7 @@
                                                 </button>
                                                 <button mat-stroked-button
                                                     *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                    class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
-                                                    data-target="#myModal" (click)="gotoDesc(course)">
+                                                    class="btl-alin blue_clr cap pointer m-t-05"  (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                                                     <span class="cap f_wt_400  m-t-m-2">
                                                         {{'Replay' }}&nbsp;
@@ -368,8 +365,7 @@
                             <div class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
-                                        <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
-                                            data-target="#myModal">
+                                        <div class="courseHover" (click)="gotoDesc(course)" >
                                             <div > 
                                                 <span *ngIf="course?.course_type === 'primer_course'">
                                                 <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"  matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="assets/learner/primerC.svg"> 
@@ -422,7 +418,7 @@
                                                 </button>
                                             </div>
                                             <div class="startBtnDiv">
-                                                <button mat-stroked-button data-toggle="modal" data-target="#myModal"
+                                                <button mat-stroked-button 
                                                     *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
@@ -433,8 +429,7 @@
                                                 </button>
                                                 <button mat-stroked-button
                                                     *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                    class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
-                                                    data-target="#myModal" (click)="gotoDesc(course)">
+                                                    class="btl-alin blue_clr cap pointer m-t-05"  (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                                                     <span class="cap f_wt_400  m-t-m-2">
                                                         {{'Replay' | translate }}&nbsp;
@@ -459,7 +454,7 @@
                                             {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
                                         </div>
                                         <div class="startBtnicon">
-                                            <button mat-stroked-button data-toggle="modal" data-target="#myModal"
+                                            <button mat-stroked-button 
                                                 *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                                                 class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                 <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
@@ -470,8 +465,7 @@
                                             </button>
                                             <button mat-stroked-button
                                                 *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
-                                                data-target="#myModal" (click)="gotoDesc(course)">
+                                                class="btl-alin blue_clr cap pointer m-t-05"  (click)="gotoDesc(course)">
                                                 <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                                                 <span class="cap f_wt_400  m-t-m-2">
                                                     {{'Replay' | translate }}&nbsp;
@@ -569,8 +563,7 @@
                             <div class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
-                                        <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
-                                            data-target="#myModal">
+                                        <div class="courseHover" (click)="gotoDesc(course)" >
                                             <div > 
                                                 <span *ngIf="course?.course_type === 'primer_course'">
                                                 <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"  matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="assets/learner/primerC.svg"> 
@@ -624,7 +617,7 @@
                                                 </button>
                                             </div>
                                             <div class="startBtnDiv">
-                                                <button mat-stroked-button data-toggle="modal" data-target="#myModal"
+                                                <button mat-stroked-button 
                                                     *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
@@ -635,8 +628,7 @@
                                                 </button>
                                                 <button mat-stroked-button
                                                     *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                    class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
-                                                    data-target="#myModal" (click)="gotoDesc(course)">
+                                                    class="btl-alin blue_clr cap pointer m-t-05"  (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                                                     <span class="cap f_wt_400  m-t-m-2">
                                                         {{'Replay'  }}&nbsp;
@@ -661,7 +653,7 @@
                                             {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
                                         </div>
                                         <div class="startBtnicon">
-                                            <button mat-stroked-button data-toggle="modal" data-target="#myModal"
+                                            <button mat-stroked-button 
                                                 *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                                                 class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                 <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
@@ -672,8 +664,7 @@
                                             </button>
                                             <button mat-stroked-button
                                                 *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
-                                                data-target="#myModal" (click)="gotoDesc(course)">
+                                                class="btl-alin blue_clr cap pointer m-t-05"  (click)="gotoDesc(course)">
                                                 <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                                                 <span class="cap f_wt_400  m-t-m-2">
                                                     {{'Replay'  }}&nbsp;
@@ -783,8 +774,7 @@
                             <div class="col-12 col-sm-12 col-md-12 col-lg-7 no-p-l">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
-                                        <div class="courseHover" (click)="gotoDesc(course)" data-toggle="modal"
-                                            data-target="#myModal">
+                                        <div class="courseHover" (click)="gotoDesc(course)">
                                             <div > 
                                                 <span *ngIf="course?.course_type === 'primer_course'">
                                                 <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"  matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="assets/learner/primerC.svg"> 
@@ -825,7 +815,7 @@
                                         <div class="row">
                                             <div class="col-10"></div>
                                             <div class="startBtnDiv">
-                                                <button mat-stroked-button data-toggle="modal" data-target="#myModal"
+                                                <button mat-stroked-button 
                                                     *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                                                     class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
@@ -836,8 +826,7 @@
                                                 </button>
                                                 <button mat-stroked-button
                                                     *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                    class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
-                                                    data-target="#myModal" (click)="gotoDesc(course)">
+                                                    class="btl-alin blue_clr cap pointer m-t-05"  (click)="gotoDesc(course)">
                                                     <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                                                     <span class="cap f_wt_400  m-t-m-2">
                                                         {{'Replay'  }}&nbsp;
@@ -853,7 +842,7 @@
                                             {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
                                         </div>
                                         <div class="startBtnicon">
-                                            <button mat-stroked-button data-toggle="modal" data-target="#myModal"
+                                            <button mat-stroked-button 
                                                 *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
                                                 class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                                                 <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
@@ -864,8 +853,7 @@
                                             </button>
                                             <button mat-stroked-button
                                                 *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                class="btl-alin blue_clr cap pointer m-t-05" data-toggle="modal"
-                                                data-target="#myModal" (click)="gotoDesc(course)">
+                                                class="btl-alin blue_clr cap pointer m-t-05"  (click)="gotoDesc(course)">
                                                 <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                                                 <span class="cap f_wt_400  m-t-m-2">
                                                     {{'Replay'  }}&nbsp;
@@ -974,7 +962,20 @@
     </mat-dialog-title>
 
         <mat-dialog-content class="cardContainer">
-            <div class="row">
+            <div class="row a-e">
+                <div class="col-12">
+                    <button mat-stroked-button (click)="claimAll()"
+                    class=" btl-alin blue_clr cap pointer m-t-05">
+                    <!-- <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon> -->
+                    <span class="cap f_wt_400 m-t-m-2">
+                       CLAIM ALL
+                    </span>
+                </button>
+                </div>
+            </div>
+
+            <div class="row m-t-3" >
+          
                 <ng-container *ngIf="categoryData.totalCount > 1">
                     <div  class="col-12 col-sm-12 col-md-6 col-lg-4 mt-4" *ngFor="let course of allcourses">
                         <!-- <div class="col-4 mt-4" *ngFor="let course of allcourses | search : courseSearch"> -->
@@ -1028,7 +1029,8 @@
 </div>
 
 <!-- Model for mobile user  -->
-<div class="modal" *ngIf="show" id="myModal" role="dialog">
+<!-- data-toggle="modal" data-target="#myModal" -->
+<!-- <div class="modal" *ngIf="show" id="myModal" role="dialog">
     <div class="modal-content">
         <div class="modal-header">
             <span style="font-size:22px; color: red;">{{'Alert !' | translate }}</span>
@@ -1063,7 +1065,7 @@
             <button class="roundbtn" data-dismiss="modal" (click)="close()">Close</button>
         </div>
     </div>
-</div>
+</div> -->
 </div>
 
 <br>

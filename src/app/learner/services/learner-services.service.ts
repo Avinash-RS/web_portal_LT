@@ -42,7 +42,8 @@ import {
   getCoureBasedOnCatalog,
   getcalenderactivity,
   singleBatchInfo,
-  ViewAllThreadDataBid
+  ViewAllThreadDataBid,
+  bulkclaimcourse
 } from './operations/learner_query';
 
 import {
@@ -585,6 +586,17 @@ export class LearnerServicesService {
       }
     });
   }
+  bulkclaimcourse( id, user_id, category_id) {
+    return this.Apollo.query({
+      query: bulkclaimcourse,
+      variables: {
+        id,
+        user_id,
+        category_id
+      }
+    });
+  }
+
   getCountForCategories(userObjId) {
     return this.Apollo.query({
       query: getCountForCategories,
