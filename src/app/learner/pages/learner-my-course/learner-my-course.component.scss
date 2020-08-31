@@ -1616,7 +1616,7 @@ hr {
 ::ng-deep .roleDropdDwnBtn{
   position: absolute !important;
     right: 61% !important;
-    bottom: 23% !important;
+    bottom: 2% !important;
 }
 .roleBtn{
   background-color: $color-white;
@@ -1628,8 +1628,8 @@ hr {
   // border-radius: 11px;
   border: 1px solid #898989;
   width: 155px;
-  position: relative;
-  top: 10px;
+  // position: relative;
+  // top: 10px;
 }
 .dropdown:hover .roleBtn{
   background-color: $lxp-theme-green;
@@ -1660,7 +1660,7 @@ hr {
 }
 ::ng-deep .childMenu{
   width: 155px !important;
-    margin-top: 64px !important;
+    margin-top: 49px !important;
 }
 ::ng-deep .subchildMenu{
   width: 155px !important;
