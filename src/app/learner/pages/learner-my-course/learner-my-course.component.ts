@@ -244,14 +244,13 @@ export class LearnerMyCourseComponent implements OnInit {
       if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
       this.catalogueDetails = data.data.getCountForCategories.data;
       this.categoryDetails = data.data.getCountForCategories.data.categories;
-      this.dropDownCategoryDetails.push(data.data.getCountForCategories.data);
+      this.dropDownCategoryDetails = [data.data.getCountForCategories.data];
       console.log('details', this.dropDownCategoryDetails);
     }
     });
   }
   getCoureBasedOnCatalog(catalogue, category, subchild, superChild) {
     this.categoryData = category;
-    console.log('zzzzzzzzzzzzzz', this.categoryData);
     this.catagoryName = category.categoryName;
     this.learnerService.getCoureBasedOnCatalog(catalogue.catalogueId, category.categoryId,
       this.userDetailes._id, subchild, superChild).subscribe((course: any) => {
