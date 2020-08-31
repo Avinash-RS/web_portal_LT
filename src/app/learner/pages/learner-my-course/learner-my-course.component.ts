@@ -1,11 +1,11 @@
-import { Component, OnInit, HostListener, TemplateRef } from '@angular/core';
+import { Component, OnInit, HostListener, TemplateRef, ViewChild } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Router } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import * as moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatMenuTrigger } from '@angular/material';
 
 @Component({
   selector: 'app-learner-my-course',
@@ -25,6 +25,7 @@ import { MatDialog } from '@angular/material';
   ]
 })
 export class LearnerMyCourseComponent implements OnInit {
+  // @ViewChild(MatMenuTrigger) triggerBtn: MatMenuTrigger;
   [x: string]: any;
   strDate: Date = new Date();
   userDetailes: any;
@@ -61,15 +62,17 @@ export class LearnerMyCourseComponent implements OnInit {
   selectedIndex = 0;
   viewCourseClass = true;
   jobRole: any = [];
+  categoryyName: any;
   constructor(
     public translate: TranslateService,
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
     private router: Router, private dialog: MatDialog) {
     this.userDetailes = this.gs.checkLogout();
-    this.getEnrolledCourses('', '','');
+    this.getEnrolledCourses('', '', '');
     this.getScreenSize();
     this.getCountForCategories();
     this.getCountForJobRole();
+    // console.log(this.triggerBtn ,'triggerBtntriggerBtntriggerBtn')
   }
   @HostListener('window:resize', ['$event'])
   // ngOnInit() {
@@ -108,6 +111,10 @@ export class LearnerMyCourseComponent implements OnInit {
   getScreenSize(event?) {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
+  }
+  menuSelect(name) {
+    this.categoryyName = name;
+    console.log(name,'asasasdsasad')
   }
 
   claimAll() {
@@ -244,6 +251,10 @@ export class LearnerMyCourseComponent implements OnInit {
       if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
       this.catalogueDetails = data.data.getCountForCategories.data;
       this.categoryDetails = data.data.getCountForCategories.data.categories;
+      // const toSearch = 'vocational';
+      // const result = this.categoryDetails.filter(o => o.categoryName.includes(toSearch));
+      // this.categoryyName = result.categoryName;
+      // console.log(this.categoryyName, 'kabdmsadkadkdvsavsda');
       this.dropDownCategoryDetails.push(data.data.getCountForCategories.data);
       console.log('details', this.dropDownCategoryDetails);
     }
@@ -251,7 +262,9 @@ export class LearnerMyCourseComponent implements OnInit {
   }
   getCoureBasedOnCatalog(catalogue, category, subchild, superChild) {
     this.categoryData = category;
+    console.log(this.categoryData, 'this.categoryDatathis.categoryData');
     this.catagoryName = category.categoryName;
+    console.log( this.catagoryName ,' this.catagoryName  this.catagoryName ')
     this.learnerService.getCoureBasedOnCatalog(catalogue.catalogueId, category.categoryId,
       this.userDetailes._id, subchild, superChild).subscribe((course: any) => {
         if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
