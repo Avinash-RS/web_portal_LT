@@ -550,18 +550,19 @@
                                         <mat-icon class="close-icon" color="warn" (click)="closedialogbox()">close
                                         </mat-icon>
                                     </button> -->
-                            <div *ngIf="docpath">
-                                <app-pdfreader [url]="docpath"></app-pdfreader>
-                            </div>
-                        </ng-template>
-                    </mat-tab>
+                <div *ngIf="docpath">
+                    <app-pdfreader [url]="docpath"></app-pdfreader>
+                </div>
+            </ng-template>
+            </mat-tab>
+
                     <!-- forum tab -->
                     <mat-tab *ngIf="userDetail.is_forum_config" label="Forum"
                         [disabled]="selectedModuleData === null || selectedModuleData === undefined"
                         class="discussion_forum">
 
 
-                        <div [ngClass]="drawer.opened==true?'drawerOpnForum':'drawerClsForum'">
+                        <div [ngClass]="drawer.opened==true?'drawerOpnForum':' '">
                             <div class="spinner-container" *ngIf="loadingForum">
                                 <mat-spinner diameter="40"></mat-spinner>
                             </div>
