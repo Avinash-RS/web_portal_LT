@@ -1379,6 +1379,8 @@ export const getCountForJobroleCategories = gql`
         jobroleCategoryName
         jobroleEnrollCount
       }
+    }
+  }
       `;
 
 export const bulkclaimcourse = gql`

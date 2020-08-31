@@ -72,7 +72,7 @@ export class NewHomeComponent implements OnInit {
   getEnrolledCourses() {
     this.loading = true;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
-      '', '').subscribe((enrolledList: any) => {
+      '', '', '').subscribe((enrolledList: any) => {
       if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
         // enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.forEach(element => {
         //   this.learnerService.getModuleData(element.course_id, this.userDetailes.user_id).subscribe((data: any) => {
