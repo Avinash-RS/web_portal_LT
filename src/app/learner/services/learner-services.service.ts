@@ -42,7 +42,8 @@ import {
   getCoureBasedOnCatalog,
   getcalenderactivity,
   singleBatchInfo,
-  ViewAllThreadDataBid
+  ViewAllThreadDataBid,
+  getCountForJobroleCategories
 } from './operations/learner_query';
 
 import {
@@ -142,13 +143,13 @@ export class LearnerServicesService {
     return this.http.post(this.envApi + 'post_like', data, httpOptions);
   }
 
-  user_registration(email, full_name, mobile_number, title_id , termsandconditions) {
+  user_registration(email, full_name, mobile_number, title_id, termsandconditions) {
     return this.Apollo.query({
       query: user_registration,
       variables: {
         full_name,
         mobile_number,
-        title_id ,
+        title_id,
         email,
         term_condition: termsandconditions,
         domain: this.envDomain
@@ -574,14 +575,15 @@ export class LearnerServicesService {
       }
     });
   }
-  get_enrolled_courses(user_id, id, catalogue_id, category_id) {
+  get_enrolled_courses(user_id, id, catalogue_id, category_id, jobRoleCategoryId) {
     return this.Apollo.query({
       query: getLearnerenrolledCourses,
       variables: {
         user_id,
         user_obj_id: id,
         catalogue_id,
-        category_id
+        category_id,
+        jobRoleCategoryId
       }
     });
   }
@@ -604,6 +606,8 @@ export class LearnerServicesService {
       }
     });
   }
+
+
 
   get_learner_dashboard(user_id) {
     return this.Apollo.query({
@@ -800,7 +804,7 @@ export class LearnerServicesService {
     });
   }
 
-  add_topic_reference(user_id,batch_id,course_id,module_id,topic_id,reference_id,reference_status,created_by){
+  add_topic_reference(user_id, batch_id, course_id, module_id, topic_id, reference_id, reference_status, created_by) {
     return this.Apollo.query({
       query: add_topic_reference,
       variables: {
@@ -815,18 +819,30 @@ export class LearnerServicesService {
       }
     });
   }
-  saveAttendees(){
-    return  this.Apollo.query({
+  saveAttendees() {
+    return this.Apollo.query({
       query: save_attendies,
       variables: {
-        userid:"fsdfsdfsd",
-        activityid:"432142314",
-        activitynamne:"test",
-        username:"testing",
-        mobile:"9876543234",
-        email:"test@gmail.com",
-        status:"true"
+        userid: 'fsdfsdfsd',
+        activityid: '432142314',
+        activitynamne: 'test',
+        username: 'testing',
+        mobile: '9876543234',
+        email: 'test@gmail.com',
+        status: 'true'
+      }
+    });
+  }
+
+  getCountForJobroleCategories(userObjId) {
+    return this.Apollo.query({
+      query: getCountForJobroleCategories,
+      variables: {
+        userObjId
       }
     });
   }
 }
+
+
+

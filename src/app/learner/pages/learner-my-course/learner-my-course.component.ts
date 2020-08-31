@@ -4,7 +4,7 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 import { Router } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import * as moment from 'moment';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material';
 
 @Component({
@@ -59,6 +59,7 @@ export class LearnerMyCourseComponent implements OnInit {
   allCourseCount = 0;
   selectedIndex = 0;
   viewCourseClass = true;
+  jobRole: any = [];
   constructor(
     public translate: TranslateService,
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
@@ -67,6 +68,7 @@ export class LearnerMyCourseComponent implements OnInit {
     this.getEnrolledCourses('', '');
     this.getScreenSize();
     this.getCountForCategories();
+    this.getCountForJobRole();
   }
   @HostListener('window:resize', ['$event'])
   // ngOnInit() {
@@ -74,25 +76,31 @@ export class LearnerMyCourseComponent implements OnInit {
   // }
   ngOnInit() {
     this.translate.use(localStorage.getItem('language'));
-      // const dateValue = new Date().toISOString()
+    // const dateValue = new Date().toISOString()
     // const static =
-    const message = [{message: [{activity_details: { activityname: 'Test case 12',
-    activitytype: 'Live Classroom',
-    courseid: 'c23ft3yr',
-    coursename: 'Foreman S3',
-    created_on: '2020-08-05T07:12:13.931Z',
-    createdby_id: 'admin',
-    createdby_name: 'lxpadmin',
-    createdby_role: '1234ab',
-    enddate: '2020-08-05T08:35:58.000Z',
-    link: 'https://teams.microsoft.com/l/meetup-join/19%3ameeting_MTk3OGY3MjgtYmI5Zi00MzE5LThjNDUtOGExYmQ4MDU2OGY4%40thread.v2/0?context=%7b%22Tid%22%3a%22b24d70a0-4ca9-4744-b060-812c8f92be7f%22%2c%22Oid%22%3a%224483fef5-e95c-46ce-8890-6c39bc7cd8c7%22%7d',
-    modulename: 'Course 1',
-    resourcefile: null,
-    score: null,
-    startdate: '2020-08-05T06:35:58.000Z',
-    status: 'true',
-    topicname: 'Codes for Foundations1',
-    _id: '5f2a50055e15d300116e4613'}}]}];
+    const message = [{
+      message: [{
+        activity_details: {
+          activityname: 'Test case 12',
+          activitytype: 'Live Classroom',
+          courseid: 'c23ft3yr',
+          coursename: 'Foreman S3',
+          created_on: '2020-08-05T07:12:13.931Z',
+          createdby_id: 'admin',
+          createdby_name: 'lxpadmin',
+          createdby_role: '1234ab',
+          enddate: '2020-08-05T08:35:58.000Z',
+          link: 'https://teams.microsoft.com/l/meetup-join/19%3ameeting_MTk3OGY3MjgtYmI5Zi00MzE5LThjNDUtOGExYmQ4MDU2OGY4%40thread.v2/0?context=%7b%22Tid%22%3a%22b24d70a0-4ca9-4744-b060-812c8f92be7f%22%2c%22Oid%22%3a%224483fef5-e95c-46ce-8890-6c39bc7cd8c7%22%7d',
+          modulename: 'Course 1',
+          resourcefile: null,
+          score: null,
+          startdate: '2020-08-05T06:35:58.000Z',
+          status: 'true',
+          topicname: 'Codes for Foundations1',
+          _id: '5f2a50055e15d300116e4613'
+        }
+      }]
+    }];
 
   }
 
@@ -101,45 +109,48 @@ export class LearnerMyCourseComponent implements OnInit {
     this.screenWidth = window.innerWidth;
   }
 
-
-  getEnrolledCourses(catalougeId, catagoryId) {
+//   user_id
+// user_obj_id
+// catalogue_id
+// jobRoleCategoryId
+  getEnrolledCourses(catalougeId, catagoryId, jobRoleCategoryId) {
     this.loading = true;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
-      catalougeId, catagoryId).subscribe((enrolledList: any) => {
-      if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
-        this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
-        this.enrolledCourses.forEach(element => {
-          if (element.course_duration) {
-            if (Number(element.course_duration.slice(3, 5)) >= 30) {
-              element.course_duration = Number(element.course_duration.slice(0, 2)) + 1;
-            } else {
-              element.course_duration = Number(element.course_duration.slice(0, 2));
+      catalougeId, catagoryId, jobRoleCategoryId ).subscribe((enrolledList: any) => {
+        if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
+          this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
+          this.enrolledCourses.forEach(element => {
+            if (element.course_duration) {
+              if (Number(element.course_duration.slice(3, 5)) >= 30) {
+                element.course_duration = Number(element.course_duration.slice(0, 2)) + 1;
+              } else {
+                element.course_duration = Number(element.course_duration.slice(0, 2));
+              }
             }
+          });
+          // this.enrolledCourses.forEach(element => {
+          //   if (element.coursePlayerStatus.course_percentage) {
+          //     element.coursePlayerStatus.course_percentage = Math.round(element.coursePlayerStatus.course_percentage);
+          //   }
+          // });
+          const arr = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(item => {
+            return item.coursePlayerStatus?.status === 'incomplete' ||
+              item.coursePlayerStatus?.status === 'suspend' ||
+              item.coursePlayerStatus?.status === 'start';
+          });
+          const arr1 = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(item => {
+            return item.coursePlayerStatus?.status === 'completed';
+          });
+          this.completed = arr1;
+          this.incomplete = arr;
+          if (!catalougeId && !catagoryId) {
+            this.onGoingCourseCount = arr.length;
+            this.completedCourseCount = arr1.length;
+            this.allCourseCount = this.enrolledCourses.length;
           }
-        });
-        // this.enrolledCourses.forEach(element => {
-        //   if (element.coursePlayerStatus.course_percentage) {
-        //     element.coursePlayerStatus.course_percentage = Math.round(element.coursePlayerStatus.course_percentage);
-        //   }
-        // });
-        const arr = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(item => {
-          return item.coursePlayerStatus?.status === 'incomplete' ||
-            item.coursePlayerStatus?.status === 'suspend' ||
-            item.coursePlayerStatus?.status === 'start';
-        });
-        const arr1 = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(item => {
-          return item.coursePlayerStatus?.status === 'completed';
-        });
-        this.completed = arr1;
-        this.incomplete = arr;
-        if (!catalougeId && !catagoryId) {
-          this.onGoingCourseCount = arr.length;
-          this.completedCourseCount = arr1.length;
-          this.allCourseCount = this.enrolledCourses.length;
         }
-      }
-      this.loading = false;
-    });
+        this.loading = false;
+      });
   }
 
   diff_hours(dt2, dt1) {
@@ -202,11 +213,11 @@ export class LearnerMyCourseComponent implements OnInit {
           enrollment_status: false
         };
         this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+      }
     }
-   }
   }
   launchActivity(value) {
-      window.open(value.activity_details.link);
+    window.open(value.activity_details.link);
   }
   goToAssignment(c) {
     localStorage.setItem('Courseid', c.course_id);
@@ -234,9 +245,9 @@ export class LearnerMyCourseComponent implements OnInit {
   getCountForCategories() {
     this.learnerService.getCountForCategories(this.userDetailes._id).subscribe((data: any) => {
       if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
-      this.catalogueDetails = data.data.getCountForCategories.data;
-      this.categoryDetails = data.data.getCountForCategories.data.categories;
-    }
+        this.catalogueDetails = data.data.getCountForCategories.data;
+        this.categoryDetails = data.data.getCountForCategories.data.categories;
+      }
     });
   }
   getCoureBasedOnCatalog(catalogue, category, templateRef) {
@@ -244,46 +255,55 @@ export class LearnerMyCourseComponent implements OnInit {
     this.catagoryName = category.categoryName;
     this.learnerService.getCoureBasedOnCatalog(catalogue.catalogueId, this.pagenumber, category.categoryId,
       this.userDetailes._id).subscribe((course: any) => {
-      if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
-      this.allcourses = course.data.getCoureBasedOnCatalog.data;
-      this.loading = false;
-      // this.viewCourse(category, templateRef);
-      }
+        if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
+          this.allcourses = course.data.getCoureBasedOnCatalog.data;
+          this.loading = false;
+          // this.viewCourse(category, templateRef);
+        }
+      });
+  }
+  viewCourse(category, templateRef: TemplateRef<any>) {
+    this.loading = true;
+    this.viewCourseClass = false;
+    this.categoryPopupData = category;
+    this.dialog.open(templateRef, {
+      panelClass: 'dialogContainer',
+      closeOnNavigation: true,
+      disableClose: true,
     });
   }
-    viewCourse(category, templateRef: TemplateRef<any>) {
-      this.loading = true;
-      this.viewCourseClass = false;
-      this.categoryPopupData = category;
-      this.dialog.open(templateRef, {
-        panelClass: 'dialogContainer',
-        closeOnNavigation: true,
-        disableClose: true,
-      });
-    }
-    closedialogbox() {
-      this.dialog.closeAll();
-      this.availableCourses = '';
-      this.viewCourseClass = true;
-    }
-    claimCourse(courseId) {
-      this.learnerService.claimcourse(this.userDetailes._id, this.userDetailes.user_id,
-        courseId).subscribe((data: any) => {
-          if (data && data.data && data.data.claimcourse && data.data.claimcourse.success) {
-            this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, this.pagenumber, this.categoryData.categoryId,
-              this.userDetailes._id).subscribe((course: any) => {
+  closedialogbox() {
+    this.dialog.closeAll();
+    this.availableCourses = '';
+    this.viewCourseClass = true;
+  }
+  claimCourse(courseId) {
+    this.learnerService.claimcourse(this.userDetailes._id, this.userDetailes.user_id,
+      courseId).subscribe((data: any) => {
+        if (data && data.data && data.data.claimcourse && data.data.claimcourse.success) {
+          this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, this.pagenumber, this.categoryData.categoryId,
+            this.userDetailes._id).subscribe((course: any) => {
               if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
-              this.allcourses = course.data.getCoureBasedOnCatalog.data;
-              this.getCountForCategories();
-              this.getEnrolledCourses('', '');
+                this.allcourses = course.data.getCoureBasedOnCatalog.data;
+                this.getCountForCategories();
+                this.getEnrolledCourses('', '');
               }
             });
-          }
-        });
-    }
+        }
+      });
+  }
 
-    navToCal() {
-      this.router.navigateByUrl('/Learner/calendar');
-    }
+  navToCal() {
+    this.router.navigateByUrl('/Learner/calendar');
+  }
+
+
+
+  getCountForJobRole() {
+    this.learnerService.getCountForJobroleCategories(this.userDetailes._id).subscribe((data: any) => {
+      console.log('respon', data.data.getCountForJobroleCategories.data);
+      this.jobRole = data.data.getCountForJobroleCategories.data;
+    });
+  }
 }
 
