@@ -196,13 +196,24 @@ export class CoursedetailsComponent implements OnInit {
                 this.Lservice.getSingleBatchInfo(this.userDetail.user_id, this.courseid).subscribe((resdata: any) => {
                   if (resdata?.data?.getbatchdetails?.message?.batchid !== null) {
                     this.batchDetails = resdata?.data?.getbatchdetails?.message;
-                    console.log(resdata?.data?.getbatchdetails?.message.batchenddate.slice(0, 10));
-                    console.log(new Date().toISOString().slice(0, 10));
+                    // console.log(resdata?.data?.getbatchdetails?.message.batchenddate.slice(0, 10));
+                    // console.log(new Date().toISOString().slice(0, 10));
                     const batchEndDate = new Date(resdata?.data?.getbatchdetails?.message.batchenddate);
                     const courseEndDate = moment(batchEndDate).format('DD-MM-YYYY');
-                    // console.log(batchEndDate, courseEndDate, moment().format('DD-MM-YYYY'))
-                    this.disableThreads = courseEndDate.slice(0, 10) <
-                    moment().format('DD-MM-YYYY') ? true : false;
+                    const today = moment(new Date()).format('DD-MM-YYYY');
+                    console.log('BEFORE FORMAT - BATCH END DATE FOR DF--- ',
+                    resdata?.data?.getbatchdetails?.message.batchenddate.slice(0, 10));
+                    console.log('AFTER FORMAT - BATCH END DATE FOR DF--- ',
+                    batchEndDate.toISOString().slice(0, 10));
+                    console.log('TODAY DATE FOR DF FOR COMPARISON--- ',
+                    new Date().toISOString().slice(0, 10));
+                    console.log('HAS BATCH DATE COMPLETED ? (DF thread disabled ?)--- ',
+                    batchEndDate.toISOString().slice(0, 10) < new Date().toISOString().slice(0, 10));
+                    // console.log(batchEndDate, courseEndDate, today, batchEndDate.toISOString().slice(0, 10),
+                    //   new Date().toISOString().slice(0, 10), moment().toDate(),
+                    //   batchEndDate.toISOString().slice(0, 10) < new Date().toISOString().slice(0, 10),
+                    //   batchEndDate < moment().toDate());
+                    this.disableThreads =  batchEndDate.toISOString().slice(0, 10) < new Date().toISOString().slice(0, 10) ? true : false;
                     this.viewAllThreads();
                   } else {
                     this.batchDetails = null;
@@ -1042,7 +1053,7 @@ export class CoursedetailsComponent implements OnInit {
       const createdby = this.course.created_by;
       this.Lservice.add_topic_reference(userid, batchid, courseid, moduleid, topicid, referenceid, referencestatus, createdby)
         .subscribe((result: any) => {
-        console.log(result);
+          console.log(result);
         });
     }
 

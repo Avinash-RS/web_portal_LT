@@ -62,7 +62,7 @@ import { LearnerCalendarComponent } from './pages/learner-calendar/learner-calen
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { MatMenuModule } from '@angular/material';
+import {MatMenuModule} from '@angular/material/menu';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -257,7 +257,7 @@ const routes: Routes = [
     }),
   ],
   exports: [
-    MatMenuModule 
+    // MatMenuModule
   ],
   providers: [
     Apollo
