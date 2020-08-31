@@ -83,9 +83,10 @@
                    <!-----------------------------Super Sub Category--------------------------------------->
                   <mat-menu class="superSubMenu" #childMenu3="matMenu" [overlapTrigger]="false">
               <span *ngFor="let superChild of subchild.superSubCategory">
-                  <button mat-menu-item color="primary" (click)="menuSelect(subchild,superChild)">
-                    <span (click)="getCoureBasedOnCatalog(item,child,subchild.subCategoryId, superChild.superSubCategoryId);
-                    viewCourse(child,previewDialog)">{{superChild.superSubCategoryName | titlecase}}</span>
+                  <button mat-menu-item color="primary" (click)="menuSelect(subchild,superChild);
+                  getCoureBasedOnCatalog(item,child,subchild.subCategoryId, superChild.superSubCategoryId);
+                    viewCourse(child,previewDialog)">
+                    <span >{{superChild.superSubCategoryName | titlecase}}</span>
                     <span class="matBadge12"  matBadge="{{superChild.totalCount}}"  matBadgeOverlap="false"></span>
                   </button>
               </span>
@@ -867,8 +868,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="col-5" *ngIf="(course?.course_type != 'free_course' && !course.batchCourse) || 
-                            (course?.course_type == 'free_course' && course.batchCourse)">
+                            <!-- <div class="col-5" *ngIf="course.batchCourse == true">
                                 <div class="row m-t-2 m-l-2p f_size_13">
                                     <div class="col-3">
                                         <div>Activity 
