@@ -553,7 +553,7 @@
                 [disabled]="selectedModuleData === null || selectedModuleData === undefined" class="discussion_forum">
 
 
-                <div [ngClass]="drawer.opened==true?'drawerOpnForum':'drawerClsForum'">
+                <div [ngClass]="drawer.opened==true?'drawerOpnForum':''">
                     <div class="spinner-container" *ngIf="loadingForum">
                         <mat-spinner diameter="40"></mat-spinner>
                     </div>

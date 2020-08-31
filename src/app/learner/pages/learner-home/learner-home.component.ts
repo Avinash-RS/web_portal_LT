@@ -102,7 +102,7 @@ export class LearnerHomeComponent implements OnInit {
   getEnrolledCourses() {
     this.loadingCatalogue = true;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
-  '', '').subscribe((enrolledList: any) => {
+  '', '', '').subscribe((enrolledList: any) => {
       if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
         this.loadingCatalogue = false;
         this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;

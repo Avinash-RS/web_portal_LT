@@ -764,12 +764,14 @@ export const getLearnerenrolledCourses = gql`
     $user_obj_id: String
     $catalogue_id: String
     $category_id: String
+    $jobRoleCategoryId: String
   ) {
     getLearnerenrolledCourses(
       user_id: $user_id
       user_obj_id: $user_obj_id
       catalogue_id: $catalogue_id
       category_id: $category_id
+      jobRoleCategoryId: $jobRoleCategoryId
     ) {
       success
       message
@@ -1366,6 +1368,20 @@ export const singleBatchInfo = gql`
     }
   }
 `;
+
+export const getCountForJobroleCategories = gql`
+  query getCountForJobroleCategories($userObjId: String!) {
+    getCountForJobroleCategories(userObjId: $userObjId) {
+      success
+      message
+      data {
+        jobroleCategoryId
+        jobroleCategoryName
+        jobroleEnrollCount
+      }
+    }
+  }
+      `;
 
 export const bulkclaimcourse = gql`
   query bulkclaimcourse($id: String, $user_id: String, $category_id: String,) {
