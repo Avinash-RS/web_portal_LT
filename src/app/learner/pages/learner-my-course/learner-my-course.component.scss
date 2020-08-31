@@ -895,7 +895,9 @@ hr {
   max-height: 85% !important;
   margin: auto;
 }
-
+.menuBtn {
+  display: none;
+}
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
   .catalogDropdownCol {
@@ -1014,6 +1016,13 @@ hr {
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
+  .menuBtn {
+    display: block;
+    position: absolute;
+    top: 1%;
+    right: 1%;
+  }
+
   .courseImg {
     margin-left: 15px;
   }
@@ -1058,6 +1067,11 @@ hr {
     margin-right: 25px !important;
   }
 
+  .roleDropdDwnBtn{
+    margin: 0.5rem 28% 0% 0% !important;
+    
+  }
+
   .catalogTitle {
     margin: auto;
   }
@@ -1077,6 +1091,18 @@ hr {
     display: none !important;
   }
   :host ::ng-deep #mat-tab-label-0-6 {
+    display: none !important;
+  }
+
+  :host ::ng-deep #mat-tab-label-0-7 {
+    display: none !important;
+  }
+
+  :host ::ng-deep #mat-tab-label-0-8 {
+    display: none !important;
+  }
+
+  :host ::ng-deep #mat-tab-label-0-9 {
     display: none !important;
   }
 
@@ -1568,7 +1594,7 @@ hr {
   width: 155px;
 }
 .roleDropdDwnBtn{
-  margin-right: 66% !important;
+  margin-right: 66%;
     /* margin-bottom: 3px; */
     position: relative;
     bottom: 8px;

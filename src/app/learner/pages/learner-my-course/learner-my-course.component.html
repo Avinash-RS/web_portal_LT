@@ -2,8 +2,8 @@
 <div class="myCourse">
 <div class="row">
     <div class="col-6 col-sm-6 col-md-7 col-lg-8 catalogTitle">
-        <div class=" myC-head animated animatedFadeInUp fadeInUp ">My Modules For Job Role: 
-            
+        <div class=" myC-head animated animatedFadeInUp fadeInUp ">
+            <span>My Modules For Job Role: </span>
             <span class="dropdown roleDropdDwnBtn">
                 <button class="roledropdown">{{catalogueDetails?.catalogueName | titlecase}} <mat-icon class="dropdownicon">expand_more</mat-icon></button>
                 <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'">
@@ -12,13 +12,9 @@
                     <span>{{category.categoryName | titlecase}}</span>
                     <span class="matBadge12"  matBadge="{{category.totalCount}}"  matBadgeOverlap="false"></span>
                   </div>
-                
                 </div>
               </span>
-            
         </div>
-     
-       
     </div>
 
     <div class="col-6 col-sm-6 col-md-5 col-lg-4 catalogDropdownCol">
@@ -698,11 +694,11 @@
                 </div>
             </mat-tab>
             <!-----------------------------------Category tabs----------------------------->
+   
            <mat-tab disabled></mat-tab>
            <mat-tab disabled></mat-tab>
            <mat-tab disabled></mat-tab>
            <mat-tab disabled></mat-tab>
-           
             <!-- <div class=""> -->
             <ng-container *ngFor="let categorytab of categoryDetails">
             <mat-tab  *ngIf="categorytab.enrollCount">
@@ -891,6 +887,15 @@
         </ng-container>
     <!-- </div> -->
         </mat-tab-group>
+        <button class="menuBtn" mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" 
+            *ngFor="let categorytab of categoryDetails">
+              <span>{{categorytab.categoryName}}</span>
+            </button>
+          </mat-menu>
     </div>
 </div>
 
