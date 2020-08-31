@@ -101,7 +101,12 @@ export class LearnerMyCourseComponent implements OnInit {
     this.screenWidth = window.innerWidth;
   }
 
+  claimAll() {
+    this.learnerService.bulkclaimcourse(this.userDetailes._id, this.userDetailes.user_id,
+      'catagoryId').subscribe((bulkclaimcourse: any) => {
 
+      });
+  }
   getEnrolledCourses(catalougeId, catagoryId) {
     this.loading = true;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
