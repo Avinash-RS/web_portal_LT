@@ -153,7 +153,7 @@ export class LearnerMyCourseComponent implements OnInit {
           });
           this.completed = arr1;
           this.incomplete = arr;
-          if (!catalougeId && !catagoryId) {
+          if ((!catalougeId && !catagoryId) || jobRoleCategoryId) {
             this.onGoingCourseCount = arr.length;
             this.completedCourseCount = arr1.length;
             this.allCourseCount = this.enrolledCourses.length;
