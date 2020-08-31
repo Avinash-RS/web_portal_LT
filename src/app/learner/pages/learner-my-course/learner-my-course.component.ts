@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import * as moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
-import { MatDialog, MatMenuTrigger } from '@angular/material';
+import { MatDialog} from '@angular/material';
+import {MatMenuTrigger} from '@angular/material';
 
 @Component({
   selector: 'app-learner-my-course',
@@ -25,6 +26,7 @@ import { MatDialog, MatMenuTrigger } from '@angular/material';
   ]
 })
 export class LearnerMyCourseComponent implements OnInit {
+  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   // @ViewChild(MatMenuTrigger) triggerBtn: MatMenuTrigger;
   [x: string]: any;
   strDate: Date = new Date();
@@ -314,7 +316,9 @@ export class LearnerMyCourseComponent implements OnInit {
   navToCal() {
     this.router.navigateByUrl('/Learner/calendar');
   }
-
+  openMyMenu() {
+    this.trigger.toggleMenu();
+  }
 
 
   getCountForJobRole() {

@@ -57,7 +57,8 @@
           <div class="dropdown">
             <span *ngFor="let item of dropDownCategoryDetails">
                 <span *ngIf="item.categories && item.categories.length > 0">
-                  <button class="dropbtn" (click)="menuSelect(item.categories)"  [matMenuTriggerFor]="childMenu">
+                  <button class="catDropdown" (click)="menuSelect(item.categories)"  
+                  [matMenuTriggerFor]="childMenu" (mouseenter)="openMyMenu()">
                     {{item?.catalogueName | titlecase}}
                     <mat-icon class="dropdownicon">expand_more</mat-icon>
                   </button>

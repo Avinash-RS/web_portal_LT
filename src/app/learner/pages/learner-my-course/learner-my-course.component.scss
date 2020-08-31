@@ -1496,6 +1496,21 @@ hr {
   border: 1px solid #898989;
   width: 155px;
 }
+.catDropdown{
+  background-color: $color-white;
+  color: #898989;
+  padding: 6px;
+  font-size: 16px;
+  padding-left: 6px;
+  border: none;
+  // border-radius: 11px;
+  border: 1px solid #898989;
+  width: 155px;
+}
+.dropdown:hover .catDropdown{
+  background-color: $lxp-theme-green !important;
+  color: #ffffff !important;
+}
 
 .dropdown {
   position: relative;
