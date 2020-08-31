@@ -44,7 +44,7 @@ import {
   singleBatchInfo,
   ViewAllThreadDataBid,
   getCountForJobroleCategories,
-  bulkclaimcourse
+  
 } from './operations/learner_query';
 
 import {
@@ -78,7 +78,8 @@ import {
   claimcourse,
   user_mstr_data,
   add_topic_reference,
-  save_attendies
+  save_attendies,
+  bulkclaimcourse
 } from './operations/learner_mutation';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';

@@ -2,20 +2,9 @@
 <div class="myCourse">
 <div class="row">
     <div class="col-6 col-sm-6 col-md-7 col-lg-8 catalogTitle">
-        <div class="f_size_16 myC-head animated animatedFadeInUp fadeInUp "><b>My Modules For Job Role: </b>
-            
-            <!-- <span class="dropdown roleDropdDwnBtn">
-                <button class="roledropdown">Select<mat-icon class="dropdownicon">expand_more</mat-icon></button>
-                <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'">
-                  <div class="contedrop" *ngFor="let role of jobRole">
-                    <span>{{role.jobroleCategoryName | titlecase}}</span>
-                    <span class="matBadge12"  matBadge="{{role.jobroleEnrollCount}}"  matBadgeOverlap="false"></span>
-                  </div>
-                </div>
-              </span> -->
-            
+        <div class="f_size_16 myC-head animated animatedFadeInUp fadeInUp ">
+            <b>My Modules For Job Role: </b>
         </div>
-<!-- sub cat, superb sub -->
         <div class="dropdown roleDropdDwnBtn">
             <button class="roleBtn">
                 <span class="roleSelect">Select</span><mat-icon class="roledropdownicon">expand_more</mat-icon></button>
@@ -24,11 +13,8 @@
                 <span>{{role.jobroleCategoryName | titlecase}}</span>
                 <span class="roleBatch"  matBadge="{{role.jobroleEnrollCount}}"  matBadgeOverlap="false"></span>
               </div>
-            
             </div>
           </div>
-     
-       
     </div>
 
     <div class="col-6 col-sm-6 col-md-5 col-lg-4 catalogDropdownCol">
@@ -71,8 +57,7 @@
           <div class="dropdown">
             <span *ngFor="let item of dropDownCategoryDetails">
                 <span *ngIf="item.categories && item.categories.length > 0">
-                  <button class="dropbtn" [matMenuTriggerFor]="childMenu"
-                  >
+                  <button class="dropbtn" mat-raised-button     (click)="menuSelect(item.categories)"  [matMenuTriggerFor]="childMenu">
                     {{item?.catalogueName | titlecase}}
                     <mat-icon class="dropdownicon">expand_more</mat-icon>
                   </button>
@@ -82,24 +67,22 @@
                   <mat-menu class="childMenu" #childMenu="matMenu" [overlapTrigger]="false">
               <span *ngFor="let child of item.categories">
                 <span *ngIf="child.subCategory && child.subCategory.length > 0">
-                  <button mat-menu-item color="primary" [matMenuTriggerFor]="childMenu2">
+                  <button mat-menu-item color="primary" [matMenuTriggerFor]="childMenu2"   (click)="menuSelect(child)">
                     <span>{{child.categoryName | titlecase}}</span>
                     <span class="matBadge12"  matBadge="{{child.totalCount}}"  matBadgeOverlap="false"></span>
                   </button>
-
-                   <!----------------------------Sub Category--------------------------------->
-                  <mat-menu #childMenu2="matMenu" [overlapTrigger]="false">
+                  <!-----------------------------Sub Category--------------------------------------->
+                  <mat-menu class="subchildMenu" #childMenu2="matMenu" [overlapTrigger]="false">
               <span *ngFor="let subchild of child.subCategory">
                 <span *ngIf="subchild.superSubCategory && subchild.superSubCategory.length > 0">
-                  <button mat-menu-item color="primary" [matMenuTriggerFor]="childMenu3">
-                    <span>{{subchild.subCategoryName | titlecase}}</span>
+                  <button mat-menu-item color="primary" [matMenuTriggerFor]="childMenu3"    (click)="menuSelect(subchild)">
+                    <span>{{subchild.subCategoryName}}</span>
                     <span class="matBadge12"  matBadge="{{subchild.totalCount}}"  matBadgeOverlap="false"></span>
                   </button>
-
-                   <!----------------------------Super sub Category--------------------------------->
-                  <mat-menu #childMenu3="matMenu" [overlapTrigger]="false">
+                   <!-----------------------------Super Sub Category--------------------------------------->
+                  <mat-menu class="superSubMenu" #childMenu3="matMenu" [overlapTrigger]="false">
               <span *ngFor="let superChild of subchild.superSubCategory">
-                  <button mat-menu-item color="primary">
+                  <button mat-menu-item color="primary" (click)="menuSelect(superChild)">
                     <span (click)="getCoureBasedOnCatalog(item,child,subchild.subCategoryId, superChild.superSubCategoryId);
                     viewCourse(child,previewDialog)">{{superChild.superSubCategoryName | titlecase}}</span>
                     <span class="matBadge12"  matBadge="{{superChild.totalCount}}"  matBadgeOverlap="false"></span>
@@ -771,6 +754,7 @@
                 </div>
             </mat-tab>
             <!-----------------------------------Category tabs----------------------------->
+   
            <mat-tab disabled></mat-tab>
            <mat-tab disabled></mat-tab>
            <mat-tab disabled></mat-tab>
@@ -960,6 +944,15 @@
         </ng-container>
     <!-- </div> -->
         </mat-tab-group>
+        <button class="menuBtn" mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" 
+            *ngFor="let categorytab of categoryDetails">
+              <span>{{categorytab.categoryName}}</span>
+            </button>
+          </mat-menu>
     </div>
 </div>
 
@@ -967,7 +960,7 @@
         <mat-dialog-title>
             <div class="row">
         <div class="col-8 text-left">
-            <span class="f_wt_600 size catnamenew">{{categoryPopupData.categoryName  | titlecase}} ({{categoryPopupData.totalCount}})</span>
+            <span class="f_wt_600 size catnamenew">{{ categoryyName?.superSubCategoryName || categoryPopupData?.categoryName  | titlecase}} ({{ categoryyName?.totalCount || categoryPopupData?.totalCount}})</span>
         </div>
         <!-- <div class="col-0 col-sm-0 col-md-0 col-lg-6"> -->
             <!-- <input  matInput class="form-control search" placeholder="Search" [(ngModel)]="courseSearch"> -->
@@ -981,7 +974,7 @@
     </mat-dialog-title>
 
         <mat-dialog-content class="cardContainer">
-            <div class="row a-e">
+            <div class="row a-e" *ngIf="catagoryName === 'vocational'">
                 <div class="col-12">
                     <button mat-stroked-button (click)="claimAll()"
                     class=" btl-alin blue_clr cap pointer m-t-05">
