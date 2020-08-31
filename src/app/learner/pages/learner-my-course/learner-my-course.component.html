@@ -76,7 +76,7 @@
                     {{item?.catalogueName | titlecase}}
                     <mat-icon class="dropdownicon">expand_more</mat-icon>
                   </button>
-                  <mat-menu class="contedrop" #childMenu="matMenu" [overlapTrigger]="false">
+                  <mat-menu class="childMenu" #childMenu="matMenu" [overlapTrigger]="false">
               <span *ngFor="let child of item.categories">
                 <span *ngIf="child.subCategory && child.subCategory.length > 0">
                   <button mat-menu-item color="primary" [matMenuTriggerFor]="childMenu2">
