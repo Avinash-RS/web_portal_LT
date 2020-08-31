@@ -1617,5 +1617,16 @@ hr {
   }
 }
 ::ng-deep .childMenu{
-  
+  width: 155px !important;
+    margin-top: 64px !important;
+}
+::ng-deep .subchildMenu{
+  width: 155px !important;
+  margin-top: 120px !important;
+}
+::ng-deep .superSubMenu{
+  width: 155px !important;
+  position: relative;
+  top: 120px;
+  right: 310px;
 }

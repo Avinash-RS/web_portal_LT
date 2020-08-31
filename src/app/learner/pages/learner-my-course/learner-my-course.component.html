@@ -83,14 +83,14 @@
                     <span>{{child.categoryName | titlecase}}</span>
                     <span class="matBadge12"  matBadge="{{child.totalCount}}"  matBadgeOverlap="false"></span>
                   </button>
-                  <mat-menu #childMenu2="matMenu" [overlapTrigger]="false">
+                  <mat-menu class="subchildMenu" #childMenu2="matMenu" [overlapTrigger]="false">
               <span *ngFor="let subchild of child.subCategory">
                 <span *ngIf="subchild.superSubCategory && subchild.superSubCategory.length > 0">
                   <button mat-menu-item color="primary" [matMenuTriggerFor]="childMenu3">
                     <span>{{subchild.subCategoryName}}</span>
                     <span class="matBadge12"  matBadge="{{subchild.totalCount}}"  matBadgeOverlap="false"></span>
                   </button>
-                  <mat-menu #childMenu3="matMenu" [overlapTrigger]="false">
+                  <mat-menu class="superSubMenu" #childMenu3="matMenu" [overlapTrigger]="false">
               <span *ngFor="let superChild of subchild.superSubCategory">
                   <button mat-menu-item color="primary">
                     <span (click)="getCoureBasedOnCatalog(item,child,subchild.subCategoryId, superChild.superSubCategoryId);
