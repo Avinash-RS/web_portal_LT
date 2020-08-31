@@ -165,10 +165,10 @@ export class CoursedetailsComponent implements OnInit {
   tabInd: any;
   // initials: any;
   constructor(public translate: TranslateService, private router: ActivatedRoute,
-    public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
-    public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
-    public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
-    public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
+              public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
+              public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
+              public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
+              public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
     this.selectedModuleData = null;
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
