@@ -167,22 +167,16 @@ export class LearnerMyCourseComponent implements OnInit {
       enrollment_status: null,
       // persentage : c.coursePlayerStatus.course_percentage || 0
     };
-    if (this.screenWidth < 800) {
-      this.show = true;
-      // Swal.fire({
-      //   title: 'Please login in laptop',
-      // }).then((result) => {
-
-      // });
-    } else {
-      this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
-      localStorage.setItem('Courseid', c.course_id);
-      localStorage.setItem('persentage', c.coursePlayerStatus.course_percentage);
-      this.show = false;
-    }
+    // if (this.screenWidth < 800) {
+    //   this.show = true;
+    // } else {
+    this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+    localStorage.setItem('Courseid', c.course_id);
+    localStorage.setItem('persentage', c.coursePlayerStatus.course_percentage);
+    // this.show = false;
+    // }
   }
   alterDescriptionText() {
-    // console.log('in');
     this.showShortDesciption = !this.showShortDesciption;
   }
 
@@ -191,9 +185,9 @@ export class LearnerMyCourseComponent implements OnInit {
   }
 
   launchAssignment(value) {
-    if (this.screenWidth < 800) {
-      this.show = true;
-    } else {
+    // if (this.screenWidth < 800) {
+      // this.show = true;
+    // } else {
       if (value.activity_details.activitytype === 'Assignment') {
         const detail = {
           id: value.activity_details.courseid,
@@ -203,7 +197,7 @@ export class LearnerMyCourseComponent implements OnInit {
         };
         this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
     }
-   }
+  //  }
   }
   launchActivity(value) {
       window.open(value.activity_details.link);
