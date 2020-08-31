@@ -1574,7 +1574,7 @@ hr {
 ::ng-deep .roleDropdDwnBtn{
   position: absolute !important;
     right: 61% !important;
-    bottom: 7% !important;
+    bottom: 23% !important;
 }
 
 .roleBtn{
@@ -1605,4 +1605,14 @@ hr {
 }
 .mat-menu-item:hover:not([disabled]) {
   background-color: $color-light-grey !important;
+}
+.roleBatch{
+  position: relative;
+  float: right;
+  right: 20px;
+  top: 9px;
+  background: #5c6873 !important;
+  & .mat-badge-content {
+    background: $lxp-gray !important;
+  }
 }

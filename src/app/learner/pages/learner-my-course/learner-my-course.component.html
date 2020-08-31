@@ -22,7 +22,7 @@
             <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'">
               <div class="contedrop" *ngFor="let role of jobRole" (click)="getEnrolledCourses(catalogueDetails.catalogueId,'',role.jobroleCategoryId)">
                 <span>{{role.jobroleCategoryName | titlecase}}</span>
-                <span class="matBadge12"  matBadge="{{role.jobroleEnrollCount}}"  matBadgeOverlap="false"></span>
+                <span class="roleBatch"  matBadge="{{role.jobroleEnrollCount}}"  matBadgeOverlap="false"></span>
               </div>
             
             </div>
