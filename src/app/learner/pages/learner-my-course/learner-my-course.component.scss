@@ -31,6 +31,9 @@
   font-size: 16px;
   font-weight: bolder;
 }
+.a-e{
+  text-align: end;
+}
 
 .m-t-3 {
   margin-top: 3%;
@@ -1508,7 +1511,8 @@ hr {
 .matBadge12 {
   position: relative;
   float: right;
-  right: 20px;
+  right: 11px;
+  top: 22px;
   background: #5c6873 !important;
   & .mat-badge-content {
     background: $lxp-gray !important;
@@ -1598,4 +1602,7 @@ hr {
   position: relative;
     left: 40px;
     top: 3px;
+}
+.mat-menu-item:hover:not([disabled]) {
+  background-color: $color-light-grey !important;
 }

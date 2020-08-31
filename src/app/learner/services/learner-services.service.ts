@@ -43,7 +43,8 @@ import {
   getcalenderactivity,
   singleBatchInfo,
   ViewAllThreadDataBid,
-  getCountForJobroleCategories
+  getCountForJobroleCategories,
+  bulkclaimcourse
 } from './operations/learner_query';
 
 import {
@@ -587,6 +588,17 @@ export class LearnerServicesService {
       }
     });
   }
+  bulkclaimcourse( id, user_id, category_id) {
+    return this.Apollo.query({
+      query: bulkclaimcourse,
+      variables: {
+        id,
+        user_id,
+        category_id
+      }
+    });
+  }
+
   getCountForCategories(userObjId) {
     return this.Apollo.query({
       query: getCountForCategories,
@@ -595,14 +607,15 @@ export class LearnerServicesService {
       }
     });
   }
-  getCoureBasedOnCatalog(catalogue_id, pagenumber, category_id, userObjId) {
+  getCoureBasedOnCatalog(catalogue_id, category_id, userObjId, subCategoryId, superSubCategoryId) {
     return this.Apollo.query({
       query: getCoureBasedOnCatalog,
       variables: {
         catalogue_id,
-        pagenumber,
         category_id,
-        userObjId
+        userObjId,
+        subCategoryId,
+        superSubCategoryId
       }
     });
   }

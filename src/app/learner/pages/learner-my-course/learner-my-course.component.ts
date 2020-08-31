@@ -44,6 +44,7 @@ export class LearnerMyCourseComponent implements OnInit {
   showOngoing: string;
   showUpcoming: string;
   categoryDetails: any;
+  dropDownCategoryDetails = [];
   catalogueName: any;
   activity: any;
   catalogueDetails: any;
@@ -65,7 +66,7 @@ export class LearnerMyCourseComponent implements OnInit {
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
     private router: Router, private dialog: MatDialog) {
     this.userDetailes = this.gs.checkLogout();
-    this.getEnrolledCourses('', '');
+    this.getEnrolledCourses('', '','');
     this.getScreenSize();
     this.getCountForCategories();
     this.getCountForJobRole();
@@ -109,10 +110,12 @@ export class LearnerMyCourseComponent implements OnInit {
     this.screenWidth = window.innerWidth;
   }
 
-//   user_id
-// user_obj_id
-// catalogue_id
-// jobRoleCategoryId
+  claimAll() {
+    this.learnerService.bulkclaimcourse(this.userDetailes._id, this.userDetailes.user_id,
+      'catagoryId').subscribe((bulkclaimcourse: any) => {
+
+      });
+  }
   getEnrolledCourses(catalougeId, catagoryId, jobRoleCategoryId) {
     this.loading = true;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
@@ -178,22 +181,16 @@ export class LearnerMyCourseComponent implements OnInit {
       enrollment_status: null,
       // persentage : c.coursePlayerStatus.course_percentage || 0
     };
-    if (this.screenWidth < 800) {
-      this.show = true;
-      // Swal.fire({
-      //   title: 'Please login in laptop',
-      // }).then((result) => {
-
-      // });
-    } else {
-      this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
-      localStorage.setItem('Courseid', c.course_id);
-      localStorage.setItem('persentage', c.coursePlayerStatus.course_percentage);
-      this.show = false;
-    }
+    // if (this.screenWidth < 800) {
+    //   this.show = true;
+    // } else {
+    this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+    localStorage.setItem('Courseid', c.course_id);
+    localStorage.setItem('persentage', c.coursePlayerStatus.course_percentage);
+    // this.show = false;
+    // }
   }
   alterDescriptionText() {
-    // console.log('in');
     this.showShortDesciption = !this.showShortDesciption;
   }
 
@@ -202,9 +199,9 @@ export class LearnerMyCourseComponent implements OnInit {
   }
 
   launchAssignment(value) {
-    if (this.screenWidth < 800) {
-      this.show = true;
-    } else {
+    // if (this.screenWidth < 800) {
+      // this.show = true;
+    // } else {
       if (value.activity_details.activitytype === 'Assignment') {
         const detail = {
           id: value.activity_details.courseid,
@@ -215,7 +212,7 @@ export class LearnerMyCourseComponent implements OnInit {
         this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
       }
     }
-  }
+
   launchActivity(value) {
     window.open(value.activity_details.link);
   }
@@ -245,16 +242,18 @@ export class LearnerMyCourseComponent implements OnInit {
   getCountForCategories() {
     this.learnerService.getCountForCategories(this.userDetailes._id).subscribe((data: any) => {
       if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
-        this.catalogueDetails = data.data.getCountForCategories.data;
-        this.categoryDetails = data.data.getCountForCategories.data.categories;
-      }
+      this.catalogueDetails = data.data.getCountForCategories.data;
+      this.categoryDetails = data.data.getCountForCategories.data.categories;
+      this.dropDownCategoryDetails.push(data.data.getCountForCategories.data);
+      console.log('details', this.dropDownCategoryDetails);
+    }
     });
   }
-  getCoureBasedOnCatalog(catalogue, category, templateRef) {
+  getCoureBasedOnCatalog(catalogue, category, subchild, superChild) {
     this.categoryData = category;
     this.catagoryName = category.categoryName;
-    this.learnerService.getCoureBasedOnCatalog(catalogue.catalogueId, this.pagenumber, category.categoryId,
-      this.userDetailes._id).subscribe((course: any) => {
+    this.learnerService.getCoureBasedOnCatalog(catalogue.catalogueId, category.categoryId,
+      this.userDetailes._id, subchild, superChild).subscribe((course: any) => {
         if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
           this.allcourses = course.data.getCoureBasedOnCatalog.data;
           this.loading = false;
@@ -281,12 +280,12 @@ export class LearnerMyCourseComponent implements OnInit {
     this.learnerService.claimcourse(this.userDetailes._id, this.userDetailes.user_id,
       courseId).subscribe((data: any) => {
         if (data && data.data && data.data.claimcourse && data.data.claimcourse.success) {
-          this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, this.pagenumber, this.categoryData.categoryId,
-            this.userDetailes._id).subscribe((course: any) => {
+          this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, this.categoryData.categoryId,
+            this.userDetailes._id, '', '').subscribe((course: any) => {
               if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
-                this.getEnrolledCourses('', '');
+                this.getEnrolledCourses('', '', '');
               }
             });
         }

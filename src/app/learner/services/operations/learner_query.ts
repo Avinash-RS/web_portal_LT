@@ -1286,24 +1286,35 @@ export const getCountForCategories = gql`
     getCountForCategories(userObjId: $userObjId) {
       message
       success
-      data {
+      data{
         catalogueId
         catalogueName
-        categories {
+        categories{
           categoryId
           categoryName
           totalCount
           enrollCount
+          subCategory{
+            subCategoryId
+            subCategoryName
+            totalCount
+            superSubCategory{
+              superSubCategoryId
+              superSubCategoryName
+              totalCount
+            }
+          }
         }
       }
+      }
     }
-  }
 `;
 export const getCoureBasedOnCatalog = gql`
-  query getCoureBasedOnCatalog($catalogue_id: String!, $pagenumber: Int, $category_id: String!,
-    $userObjId: String!) {
-    getCoureBasedOnCatalog(catalogue_id: $catalogue_id, pagenumber: $pagenumber,
-      category_id: $category_id, userObjId: $userObjId) {
+  query getCoureBasedOnCatalog($catalogue_id: String!, $category_id: String!,
+    $userObjId: String!, $subCategoryId: String, $superSubCategoryId: String) {
+    getCoureBasedOnCatalog(catalogue_id: $catalogue_id,
+      category_id: $category_id, userObjId: $userObjId, subCategoryId: $subCategoryId,
+      superSubCategoryId: $superSubCategoryId) {
       data{
         course_id
         clamaiedStatus
@@ -1368,6 +1379,13 @@ export const getCountForJobroleCategories = gql`
         jobroleCategoryName
         jobroleEnrollCount
       }
+      `;
+
+export const bulkclaimcourse = gql`
+  query bulkclaimcourse($id: String, $user_id: String, $category_id: String,) {
+    bulkclaimcourse(id: $id, user_id: $user_id, category_id: $category_id) {
+      message
+      success
     }
   }
 `;
