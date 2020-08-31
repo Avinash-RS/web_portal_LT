@@ -113,15 +113,12 @@ export class LearnerMyCourseComponent implements OnInit {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
   }
-  menuSelect(subchild) {
-    this.categoryyName = subchild;
+  menuSelect(subchild, superchild) {
+    this.categoryyName = superchild;
     this.subchildData = subchild;
-    console.log(name,'asasasdsasad');
   }
 
   claimAll() {
-    this.allcourses = '';
-    console.log(this.categoryyName.superSubCategoryId,'bulkclaimcoursebulkclaimcourse');
     this.learnerService.bulkclaimcourse(this.userDetailes._id, this.userDetailes.user_id,
     this.categoryyName.superSubCategoryId).subscribe((bulkclaimcourse: any) => {
       if (bulkclaimcourse.data.bulkclaimcourse.success === true) {

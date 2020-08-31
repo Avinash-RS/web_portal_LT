@@ -82,7 +82,7 @@
                    <!-----------------------------Super Sub Category--------------------------------------->
                   <mat-menu class="superSubMenu" #childMenu3="matMenu" [overlapTrigger]="false">
               <span *ngFor="let superChild of subchild.superSubCategory">
-                  <button mat-menu-item color="primary" (click)="menuSelect(superChild)">
+                  <button mat-menu-item color="primary" (click)="menuSelect(subchild,superChild)">
                     <span (click)="getCoureBasedOnCatalog(item,child,subchild.subCategoryId, superChild.superSubCategoryId);
                     viewCourse(child,previewDialog)">{{superChild.superSubCategoryName | titlecase}}</span>
                     <span class="matBadge12"  matBadge="{{superChild.totalCount}}"  matBadgeOverlap="false"></span>
