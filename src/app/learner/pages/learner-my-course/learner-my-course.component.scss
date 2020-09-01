@@ -1197,6 +1197,23 @@ hr {
   }
 }
 
+@media only screen and (width: 1024px) {
+
+  .roleDropdDwnBtn {
+    right: 46% !important;
+  }
+
+  :host ::ng-deep #mat-tab-label-0-3 {
+    display: none !important;
+  }
+  :host ::ng-deep #mat-tab-label-0-4 {
+    display: none !important;
+  }
+  :host ::ng-deep #mat-tab-label-0-5 {
+    display: none !important;
+  }
+}
+
 @media only screen and (min-width: 992px) and (max-width: 1024px) and (orientation: portrait) {
   .descmc {
     max-height: 175px !important;
@@ -1311,6 +1328,7 @@ hr {
 .download-icon {
   position: relative;
 }
+
 //Grid
 .courseImage {
   height: 178px;
