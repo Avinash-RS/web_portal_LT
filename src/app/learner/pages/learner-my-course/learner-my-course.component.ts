@@ -48,7 +48,7 @@ export class LearnerMyCourseComponent implements OnInit {
   catalogueDetails: any;
   pagenumber = 0;
   allcourses: any;
-  categoryPopupData: any;
+  categoryPopupData: any = [];
   courseMapping: any;
   courseSearch: any;
   categoryData: any;
@@ -112,6 +112,8 @@ export class LearnerMyCourseComponent implements OnInit {
     this.screenWidth = window.innerWidth;
   }
   menuSelect(subchild, superchild) {
+    this.categoryPopupData.categoryName1 = superchild.superSubCategoryName;
+    console.log(this.categoryPopupData,'this.categoryPopupData')
     this.categoryyName = superchild;
     this.subchildData = subchild;
   }
@@ -280,6 +282,7 @@ export class LearnerMyCourseComponent implements OnInit {
     this.loading = true;
     this.viewCourseClass = false;
     this.categoryPopupData = category;
+
     this.dialog.open(templateRef, {
       panelClass: 'dialogContainer',
       closeOnNavigation: true,
