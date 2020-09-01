@@ -180,6 +180,7 @@ export class LearnerMyCourseComponent implements OnInit {
           }
         }
         this.loading = false;
+        
       });
   }
 
