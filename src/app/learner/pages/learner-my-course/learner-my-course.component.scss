@@ -1706,21 +1706,19 @@ hr {
 .roleSelect{
   float: left;
     padding-left: 7px;
-    padding-top: 2px
+    padding-top: 2px;
 }
 .roleSelectChange{	
-  float: left;	
-  position: relative;	
-  left: 7px;	
-  top: 3px;	
+  float: left;
+  padding-left: 7px;
+  padding-top: 2px;
 }
 .roledropdowniconSelect{	
-  position: sticky;	
-    float: right;	
-    padding-top: 4px;	
-    padding-left: 8px;	
+  position: sticky;
+  float: right;
+  padding-top: 4px;
 }
-.roleBatchOnSelect{	
+.roleBatchOnSelect{	  
   position: relative;	
   float: right;	
   right: 46px;	
@@ -1764,9 +1762,4 @@ hr {
 }
 .mat-menu-item-submenu-trigger::after {
   right: 6px !important;
-}
-.roleSelectChange{
-  right: 10px;
-    position: relative;
-    top: 2px;
 }
