@@ -1692,3 +1692,6 @@ hr {
   top: 120px;
   right: 310px;
 }
+.mat-menu-item-submenu-trigger::after {
+  right: 6px !important;
+}
