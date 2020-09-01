@@ -1496,6 +1496,21 @@ hr {
   border: 1px solid #898989;
   width: 155px;
 }
+.catDropdown{
+  background-color: $color-white;
+  color: #898989;
+  padding: 6px;
+  font-size: 16px;
+  padding-left: 6px;
+  border: none;
+  // border-radius: 11px;
+  border: 1px solid #898989;
+  width: 155px;
+}
+.dropdown:hover .catDropdown{
+  background-color: $lxp-theme-green !important;
+  color: #ffffff !important;
+}
 
 .dropdown {
   position: relative;
@@ -1600,8 +1615,8 @@ hr {
 }
 ::ng-deep .roleDropdDwnBtn{
   position: absolute !important;
-    right: 61% !important;
-    bottom: 23% !important;
+    right: 60% !important;
+    bottom: 2% !important;
 }
 .roleBtn{
   background-color: $color-white;
@@ -1613,8 +1628,8 @@ hr {
   // border-radius: 11px;
   border: 1px solid #898989;
   width: 155px;
-  position: relative;
-  top: 10px;
+  // position: relative;
+  // top: 10px;
 }
 .dropdown:hover .roleBtn{
   background-color: $lxp-theme-green;
@@ -1622,12 +1637,13 @@ hr {
 }
 .roleSelect{
   float: left;
-    padding-left: 4px;
+    padding-left: 8px;
     padding-top: 2px
 }
+
 .roledropdownicon{
   position: relative;
-    left: 40px;
+    left: 35px;
     top: 3px;
 }
 .mat-menu-item:hover:not([disabled]) {
@@ -1645,7 +1661,7 @@ hr {
 }
 ::ng-deep .childMenu{
   width: 155px !important;
-    margin-top: 64px !important;
+    margin-top: 49px !important;
 }
 ::ng-deep .subchildMenu{
   width: 155px !important;

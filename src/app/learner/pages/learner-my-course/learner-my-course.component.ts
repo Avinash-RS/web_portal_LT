@@ -1,13 +1,10 @@
-import { Component, OnInit, HostListener, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener, TemplateRef } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Router } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import * as moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog, MatMenuTrigger } from '@angular/material';
-import { constants } from 'zlib';
-
 @Component({
   selector: 'app-learner-my-course',
   templateUrl: './learner-my-course.component.html',
@@ -26,7 +23,6 @@ import { constants } from 'zlib';
   ]
 })
 export class LearnerMyCourseComponent implements OnInit {
-  // @ViewChild(MatMenuTrigger) triggerBtn: MatMenuTrigger;
   [x: string]: any;
   strDate: Date = new Date();
   userDetailes: any;
@@ -314,12 +310,13 @@ export class LearnerMyCourseComponent implements OnInit {
   navToCal() {
     this.router.navigateByUrl('/Learner/calendar');
   }
-
+  openMyMenu() {
+    this.trigger.toggleMenu();
+  }
 
 
   getCountForJobRole() {
     this.learnerService.getCountForJobroleCategories(this.userDetailes._id).subscribe((data: any) => {
-      // console.log('respon', data.data.getCountForJobroleCategories.data);
       this.jobRole = data.data.getCountForJobroleCategories.data;
     });
   }
