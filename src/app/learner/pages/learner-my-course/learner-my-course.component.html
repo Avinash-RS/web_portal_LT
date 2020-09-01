@@ -2,7 +2,7 @@
 <div class="myCourse">
 <div class="row">
     <div  class="col-12 col-sm-12 col-md-7 col-lg-8 catalogTitle">
-        <div *ngIf="jobRole.length > 0">
+        <div *ngIf="jobRole?.length > 0">
             <div class="f_size_16 myC-head">
                 <b>My Modules For Job Role</b>&nbsp;&nbsp;<b>:</b>
             </div>
@@ -13,7 +13,7 @@
                         {{(selectedJobRole | slice:0:12)+'...'}}
                     </span>
                     <span *ngIf="selectedJobRole.length <= 12" [ngClass]="selectedJobRole === 'Select'?'roleSelect':'roleSelectChange'">{{selectedJobRole | titlecase}}</span>
-                    <mat-icon [ngClass]="selectedJobRole === 'Select'?'roledropdownicon':'roledropdowniconSelect'" class="roledropdownicon">expand_more</mat-icon></button>
+                    <mat-icon [ngClass]="selectedJobRole === 'Select'?'roledropdownicon':'roledropdowniconSelect'">expand_more</mat-icon></button>
                 <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'">
                   <div class="contedrop" *ngFor="let role of jobRole" (click)="getEnrolledCourses(catalogueDetails.catalogueId,'',role.jobroleCategoryId);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount)">
                     <span *ngIf="role.jobroleCategoryName.length > 12" tooltip="{{role.jobroleCategoryName | titlecase}}" placement="right">
@@ -26,7 +26,7 @@
               </div>
         </div>
         
-<div *ngIf="jobRole.length < 1" class="f_size_22 myC-head animated animatedFadeInUp fadeInUp">
+<div *ngIf="jobRole?.length < 1" class="f_size_22 myC-head animated animatedFadeInUp fadeInUp">
 <span>My Course</span>
 </div>
         
@@ -34,7 +34,7 @@
 
    
 
-    <div class="col-6 col-sm-6 col-md-5 col-lg-4 catalogDropdownCol">
+    <div class="col-12 col-sm-12 col-md-5 col-lg-4 catalogDropdownCol">
         
       <!-- <span>
       
@@ -79,7 +79,6 @@
                     {{item?.catalogueName | titlecase}}
                     <mat-icon class="dropdownicon">expand_more</mat-icon>
                   </button>
-
                   <!----------------------------Category--------------------------------->
                   <!-- <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'"> -->
                   <mat-menu class="childMenu" #childMenu="matMenu" [overlapTrigger]="false">
@@ -102,7 +101,7 @@
               <span *ngFor="let superChild of subchild.superSubCategory">
                   <button mat-menu-item color="primary" (click)="menuSelect(subchild,superChild);
                   getCoureBasedOnCatalog(item,child,subchild.subCategoryId, superChild.superSubCategoryId);
-                    viewCourse(child,previewDialog)">
+                    viewCourse(child,previewDialog,superChild.superSubCategoryName,superChild.totalCount)">
                     <span >{{superChild.superSubCategoryName | titlecase}}</span>
                     <span class="matBadge12"  matBadge="{{superChild.totalCount}}"  matBadgeOverlap="false"></span>
                   </button>
@@ -121,7 +120,7 @@
                 <span *ngIf="!child.subCategory || child.subCategory.length === 0">
                   <button mat-menu-item [routerLink]="child.route">
                     <span (click)="getCoureBasedOnCatalog(item,child,'','');
-                    viewCourse(child,previewDialog)">{{child.categoryName | titlecase}}</span>
+                    viewCourse(child,previewDialog,child.categoryName,child.totalCount)">{{child.categoryName | titlecase}}</span>
                     <span class="matBadge12"  matBadge="{{child.totalCount}}"  matBadgeOverlap="false"></span>
                   </button>
                 </span>
@@ -972,14 +971,24 @@
               <span>{{categorytab.categoryName}}</span>
             </button>
           </mat-menu>
+          
     </div>
+    <button class="vertDropDown" mat-icon-button [matMenuTriggerFor]="menusDropdown">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu class="vertDropDownMenu" #menusDropdown="matMenu">
+        <button mat-menu-item (click)="getEnrolledCourses(catalogueDetails.catalogueId,'',role.jobroleCategoryId);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount)" 
+        *ngFor="let role of jobRole">
+          <span>{{(role.jobroleCategoryName | slice:0:12)+'...'}}</span>
+        </button>
+        </mat-menu>
 </div>
 
 <ng-template #previewDialog>
         <mat-dialog-title>
             <div class="row">
         <div class="col-8 text-left">
-            <span class="f_wt_600 size catnamenew">{{ categoryPopupData?.categoryName  | titlecase}} ({{ categoryPopupData?.totalCount}})</span>
+            <span class="f_wt_600 size catnamenew">{{ categoryPopupData  | titlecase}} ({{categoryCount}})</span>
         </div>
         <!-- <div class="col-0 col-sm-0 col-md-0 col-lg-6"> -->
             <!-- <input  matInput class="form-control search" placeholder="Search" [(ngModel)]="courseSearch"> -->

@@ -70,6 +70,7 @@ export class LearnerMyCourseComponent implements OnInit {
   claimedStatuts: any;
   color: any;
 
+  categoryCount: number;
 
   constructor(
     public translate: TranslateService,
@@ -139,6 +140,7 @@ export class LearnerMyCourseComponent implements OnInit {
               this.getCountForCategories();
               this.getEnrolledCourses('', '', '');
               this.getCountForJobRole();
+              this.getCountForJobRole();
             }
           });
       }
@@ -150,6 +152,7 @@ export class LearnerMyCourseComponent implements OnInit {
       catalougeId, catagoryId, jobRoleCategoryId ).subscribe((enrolledList: any) => {
         if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
           this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
+          if(this.enrolledCourses.length> 0) {
           this.enrolledCourses.forEach(element => {
             if (element.course_duration) {
               if (Number(element.course_duration.slice(3, 5)) >= 30) {
@@ -159,6 +162,7 @@ export class LearnerMyCourseComponent implements OnInit {
               }
             }
           });
+        }
           // this.enrolledCourses.forEach(element => {
           //   if (element.coursePlayerStatus.course_percentage) {
           //     element.coursePlayerStatus.course_percentage = Math.round(element.coursePlayerStatus.course_percentage);
@@ -292,10 +296,11 @@ export class LearnerMyCourseComponent implements OnInit {
         }
       });
   }
-  viewCourse(category, templateRef: TemplateRef<any>) {
+  viewCourse(category, templateRef: TemplateRef<any> , categoryname , categorycount) {
     this.loading = true;
     this.viewCourseClass = false;
-    this.categoryPopupData = category;
+    this.categoryPopupData = categoryname;
+    this.categoryCount = categorycount;
 
     this.dialog.open(templateRef, {
       panelClass: 'dialogContainer',
@@ -327,6 +332,7 @@ export class LearnerMyCourseComponent implements OnInit {
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
                 this.getEnrolledCourses('', '', '');
+                this.getCountForJobRole();
                 this.getCountForJobRole();
               }
             });
