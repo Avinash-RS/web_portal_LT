@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-6 col-sm-6 col-md-7 col-lg-8 catalogTitle">
         <div class="f_size_16 myC-head animated animatedFadeInUp fadeInUp ">
-            <b>My Modules For Job Role: </b>
+            <b>My Modules For Job Role</b>&nbsp;&nbsp;<b>:</b>
         </div>
         <div class="dropdown roleDropdDwnBtn">
             <button class="roleBtn">
@@ -977,7 +977,7 @@
         <mat-dialog-content class="cardContainer">
             <div class="row a-e" *ngIf="catagoryName === 'vocational'">
                 <div class="col-12">
-                    <button mat-stroked-button (click)="claimAll()"
+                    <button mat-stroked-button (click)="claimAll()" [disabled]="claimedStatuts.length > 0"
                     class=" btl-alin blue_clr cap pointer m-t-05">
                     <!-- <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon> -->
                     <span class="cap f_wt_400 m-t-m-2">

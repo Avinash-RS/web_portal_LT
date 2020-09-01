@@ -1,13 +1,10 @@
-import { Component, OnInit, HostListener, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener, TemplateRef } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Router } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import * as moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
-import { MatDialog} from '@angular/material';
-import {MatMenuTrigger} from '@angular/material';
-
+import { MatDialog, MatMenuTrigger } from '@angular/material';
 @Component({
   selector: 'app-learner-my-course',
   templateUrl: './learner-my-course.component.html',
@@ -26,8 +23,6 @@ import {MatMenuTrigger} from '@angular/material';
   ]
 })
 export class LearnerMyCourseComponent implements OnInit {
-  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
-  // @ViewChild(MatMenuTrigger) triggerBtn: MatMenuTrigger;
   [x: string]: any;
   strDate: Date = new Date();
   userDetailes: any;
@@ -68,8 +63,10 @@ export class LearnerMyCourseComponent implements OnInit {
   subchildData: any;
   subCatId: any;
   superCatId: any;
+  claimedStatuts: any;
 
 
+  
   constructor(
     public translate: TranslateService,
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
@@ -270,7 +267,6 @@ export class LearnerMyCourseComponent implements OnInit {
       this.catalogueDetails = data.data.getCountForCategories.data;
       this.categoryDetails = data.data.getCountForCategories.data.categories;
       this.dropDownCategoryDetails = [data.data.getCountForCategories.data];
-      // console.log('details', this.dropDownCategoryDetails);
     }
     });
   }
@@ -280,13 +276,13 @@ export class LearnerMyCourseComponent implements OnInit {
     this.superCatId = superChild;
     // console.log(this.categoryData, 'this.categoryDatathis.categoryData');
     this.catagoryName = category.categoryName;
-    // console.log( this.catagoryName ,' this.catagoryName  this.catagoryName ')
     this.learnerService.getCoureBasedOnCatalog(catalogue.catalogueId, category.categoryId,
       this.userDetailes._id, subchild, superChild).subscribe((course: any) => {
         if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
           this.allcourses = course.data.getCoureBasedOnCatalog.data;
+          const toSearch = 'true';
+          this.claimedStatuts = this.allcourses.filter(o => o.clamaiedStatus.includes(toSearch));
           this.loading = false;
-          // this.viewCourse(category, templateRef);
         }
       });
   }
@@ -339,7 +335,6 @@ export class LearnerMyCourseComponent implements OnInit {
 
   getCountForJobRole() {
     this.learnerService.getCountForJobroleCategories(this.userDetailes._id).subscribe((data: any) => {
-      // console.log('respon', data.data.getCountForJobroleCategories.data);
       this.jobRole = data.data.getCountForJobroleCategories.data;
     });
   }

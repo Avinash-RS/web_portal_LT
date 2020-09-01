@@ -1615,7 +1615,7 @@ hr {
 }
 ::ng-deep .roleDropdDwnBtn{
   position: absolute !important;
-    right: 61% !important;
+    right: 60% !important;
     bottom: 2% !important;
 }
 .roleBtn{
@@ -1637,12 +1637,13 @@ hr {
 }
 .roleSelect{
   float: left;
-    padding-left: 4px;
+    padding-left: 8px;
     padding-top: 2px
 }
+
 .roledropdownicon{
   position: relative;
-    left: 40px;
+    left: 35px;
     top: 3px;
 }
 .mat-menu-item:hover:not([disabled]) {
