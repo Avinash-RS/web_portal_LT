@@ -138,6 +138,7 @@ export class LearnerMyCourseComponent implements OnInit {
               this.getCountForCategories();
               this.getEnrolledCourses('', '', '');
               this.getCountForJobRole();
+              this.getCountForJobRole();
             }
           });
       }
@@ -289,7 +290,6 @@ export class LearnerMyCourseComponent implements OnInit {
           this.allcourses = course.data.getCoureBasedOnCatalog.data;
           const toSearch = 'false';
           this.claimedStatuts = this.allcourses.filter(o => o.clamaiedStatus.includes(toSearch));
-          console.log(this.claimedStatuts,'this.claimedStatuts');
           this.loading = false;
         }
       });
@@ -328,6 +328,7 @@ export class LearnerMyCourseComponent implements OnInit {
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
                 this.getEnrolledCourses('', '', '');
+                this.getCountForJobRole();
                 this.getCountForJobRole();
               }
             });

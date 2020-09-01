@@ -1684,8 +1684,8 @@ hr {
 }
 ::ng-deep .roleDropdDwnBtn{
   position: absolute !important;
-    right: 59% !important;
-    bottom: 2% !important;
+    right: 60% !important;
+    bottom: 4% !important;
 }
 .roleBtn{
   background-color: $color-white;
@@ -1706,7 +1706,7 @@ hr {
 }
 .roleSelect{
   float: left;
-    padding-left: 4px;
+    padding-left: 7px;
     padding-top: 2px
 }
 .roleSelectChange{	
@@ -1733,8 +1733,8 @@ hr {
 }
 .roledropdownicon{
   position: relative;
-    left: 40px;
     top: 3px;
+    float: right;
 }
 .mat-menu-item:hover:not([disabled]) {
   background-color: $color-light-grey !important;
@@ -1742,7 +1742,7 @@ hr {
 .roleBatch{
   position: relative;
   float: right;
-  right: 38px;
+  right: 20px;
   top: 9px;
   background: #5c6873 !important;
   & .mat-badge-content {
@@ -1751,7 +1751,7 @@ hr {
 }
 ::ng-deep .childMenu{
   width: 155px !important;
-    margin-top: 64px !important;
+    margin-top: 49px !important;
 }
 ::ng-deep .subchildMenu{
   width: 155px !important;
@@ -1763,6 +1763,11 @@ hr {
   top: 120px;
   right: 310px;
 }
-.mat-menu-item-submenu-trigger::after {	
-  right: 5px !important;	
+.mat-menu-item-submenu-trigger::after {
+  right: 6px !important;
+}
+.roleSelectChange{
+  right: 10px;
+    position: relative;
+    top: 2px;
 }
