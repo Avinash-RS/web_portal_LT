@@ -150,6 +150,7 @@ export class LearnerMyCourseComponent implements OnInit {
       catalougeId, catagoryId, jobRoleCategoryId ).subscribe((enrolledList: any) => {
         if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
           this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
+          if(this.enrolledCourses.length> 0) {
           this.enrolledCourses.forEach(element => {
             if (element.course_duration) {
               if (Number(element.course_duration.slice(3, 5)) >= 30) {
@@ -159,6 +160,7 @@ export class LearnerMyCourseComponent implements OnInit {
               }
             }
           });
+        }
           // this.enrolledCourses.forEach(element => {
           //   if (element.coursePlayerStatus.course_percentage) {
           //     element.coursePlayerStatus.course_percentage = Math.round(element.coursePlayerStatus.course_percentage);
