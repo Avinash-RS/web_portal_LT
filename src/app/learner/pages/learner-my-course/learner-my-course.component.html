@@ -80,7 +80,7 @@
                 <span *ngIf="child.subCategory && child.subCategory.length > 0">
                   <button mat-menu-item color="primary" [matMenuTriggerFor]="childMenu2"   (click)="menuSelect(child)">
                     <span>{{child.categoryName | titlecase}}</span>
-                    <span class="matBadge12"  matBadge="{{child.totalCount}}"  matBadgeOverlap="false"></span>
+                    <span class="matBadgeNew"  matBadge="{{child.totalCount}}"  matBadgeOverlap="false"></span>
                   </button>
                   <!-----------------------------Sub Category--------------------------------------->
                   <mat-menu class="subchildMenu" #childMenu2="matMenu" [overlapTrigger]="false">
@@ -88,7 +88,7 @@
                 <span *ngIf="subchild.superSubCategory && subchild.superSubCategory.length > 0">
                   <button mat-menu-item color="primary" [matMenuTriggerFor]="childMenu3"    (click)="menuSelect(subchild)">
                     <span>{{subchild.subCategoryName}}</span>
-                    <span class="matBadge12"  matBadge="{{subchild.totalCount}}"  matBadgeOverlap="false"></span>
+                    <span class="matBadgeSubmenu"  matBadge="{{subchild.totalCount}}"  matBadgeOverlap="false"></span>
                   </button>
                    <!-----------------------------Super Sub Category--------------------------------------->
                   <mat-menu class="superSubMenu" #childMenu3="matMenu" [overlapTrigger]="false">
