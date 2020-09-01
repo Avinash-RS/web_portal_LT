@@ -1,6 +1,6 @@
 @import "variable";
 
-.cardContainer {
+.cardContainer{
   height: 400px !important;
 }
 .spinner-container {
@@ -20,7 +20,7 @@
   // cursor: pointer;
   font-size: 13px;
 }
-.primerFlage {
+.primerFlage{
   height: 70px;
   // width: 67px;
   position: absolute;
@@ -31,7 +31,7 @@
   font-size: 16px;
   font-weight: bolder;
 }
-.a-e {
+.a-e{
   text-align: end;
 }
 
@@ -516,11 +516,12 @@ hr {
 :host ::ng-deep .mat-progress-bar-fill::after {
   background-color: $lxp-gray !important;
 }
-.tabsc {
-  & .mat-badge-content {
+.tabsc{
+ & .mat-badge-content {
     color: $color-white;
     background: $lxp-gray !important;
   }
+  
 }
 
 .mat-progress-bar {
@@ -901,27 +902,17 @@ hr {
 .menuBtn {
   display: none;
 }
-
-.moreVertBtn {
-  display: none;
-}
-
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
   .catalogDropdownCol {
     margin-top: 0.5rem;
     padding-right: 1.5rem;
-    margin-bottom: 0.5rem;
   }
-  .primerFlage {
+  .primerFlage{
     height: 75px;
     position: absolute;
     margin-left: -4px;
     z-index: 1;
-  }
-
-  .dropbtn {
-    padding: 0px !important;
   }
 
   #cdk-overlay-0 {
@@ -932,20 +923,7 @@ hr {
     float: right;
   }
 
-  .roleBtn {
-    // padding: 2px !important;
-    display: none;
-  }
-
-  .roleDropdDwnBtn {
-    right: 5% !important;
-    bottom: 0% !important;
-    top: 0.1rem;
-}
-  .moreVertBtn {
-    display: block;
-  }
-  ::ng-deep .dialogContainer {
+::ng-deep .dialogContainer {
     width: 95% !important;
     max-height: 85% !important;
     margin: auto;
@@ -1038,6 +1016,7 @@ hr {
   :host ::ng-deep #mat-tab-label-0-6 {
     display: none !important;
   }
+
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
@@ -1046,14 +1025,6 @@ hr {
     position: absolute;
     top: 1%;
     right: 1%;
-  }
-
-  .dropbtn {
-    padding: 0px !important;
-  }
-
-  .roleBtn {
-    padding: 2px !important;
   }
 
   .courseImg {
@@ -1100,16 +1071,15 @@ hr {
     margin-right: 25px !important;
   }
 
-  .roleDropdDwnBtn {
-    margin: 0rem 0% 0% 0% !important;
-    right: 23% !important;
-    top: 0%;
+  .roleDropdDwnBtn{
+    margin: 0.5rem 28% 0% 0% !important;
+    
   }
 
   .catalogTitle {
     margin: auto;
   }
-  .primerFlage {
+  .primerFlage{
     height: 75px;
     position: absolute;
     margin-left: -4px;
@@ -1139,6 +1109,7 @@ hr {
   :host ::ng-deep #mat-tab-label-0-9 {
     display: none !important;
   }
+
 }
 
 // @media (max-width: 480px) and (max-width: 320px) {
@@ -1196,42 +1167,9 @@ hr {
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1024px) and (orientation: portrait) {
-  :host ::ng-deep #mat-tab-label-0-3 {
-    display: none !important;
-  }
-
-  :host ::ng-deep #mat-tab-label-0-4 {
-    display: none !important;
-  }
-
-  :host ::ng-deep #mat-tab-label-0-5 {
-    display: none !important;
-  }
-
   .descmc {
     max-height: 175px !important;
     min-height: 40px;
-  }
-  .aligned-with-icon {
-    left: -170%;
-    width: 150px;
-  }
-  .roleDropdDwnBtn {
-    right: 50% !important;
-    margin-right: 0rem !important;
-    bottom: 25% !important;
-  }
-
-  .courseDescriptionRow {
-    width: 300px;
-  }
-
-  .dropbtn {
-    padding: 0px !important;
-  }
-
-  .roleBtn {
-    padding: 2px !important;
   }
 
   .courseHover {
@@ -1404,7 +1342,7 @@ hr {
   font-size: 18px;
   font-weight: 600 !important;
 }
-.courseName1 {
+.courseName1{
   position: relative;
   /* left: 10px; */
   font-size: 18px;
@@ -1414,9 +1352,9 @@ hr {
   font-weight: 600 !important;
 }
 :host ::ng-deep body ::-webkit-scrollbar {
-  -webkit-appearance: none;
-  width: 5px !important;
-  height: 5px !important;
+    -webkit-appearance: none;
+    width: 5px !important;
+    height: 5px !important;
 }
 ::-webkit-scrollbar {
   width: 5px !important;
@@ -1468,7 +1406,7 @@ hr {
   // height: 40px;
   /* margin-bottom: 28px; */
   color: #a2a2a2;
-  & .mat-badge-content {
+  & .mat-badge-content{
     background: #bab9b9 !important;
   }
 }
@@ -1477,7 +1415,7 @@ hr {
   border-bottom: 2px solid $lxp-theme-green !important;
   color: $color-blank !important;
   padding-bottom: 10px;
-  & .mat-badge-content {
+  & .mat-badge-content{
     background: $lxp-gray !important;
   }
 }
@@ -1494,7 +1432,7 @@ hr {
   background-color: $lxp-theme-green;
 }
 .cathd1 {
-  padding-right: 10px;
+ padding-right: 10px;
 }
 .btnredClass {
   width: 67%;
@@ -1537,11 +1475,11 @@ hr {
 .lxp-text:hover {
   color: $color-white;
 }
-.h-50 {
+.h-50{
   height: 50px !important;
 }
 
-.roleDropdown {
+.roleDropdown{
   position: relative;
   display: inline-block;
 }
@@ -1606,7 +1544,7 @@ hr {
   display: none;
 }
 
-.dropdown:hover .dropbtn {
+.dropdown:hover .dropbtn{
   background-color: $lxp-theme-green;
   color: $color-white;
 }
@@ -1655,6 +1593,7 @@ hr {
 // }
 
 ::ng-deep .tooltip-inner {
+
   opacity: 1 !important;
   font-size: 12px !important;
 }
@@ -1668,7 +1607,8 @@ hr {
   cursor: text;
 }
 ::ng-deep .custom-mat-tooltip {
-  position: relative !important;
+    
+  position:  relative !important;
   bottom: 80px !important;
   background-color: black !important;
   opacity: 1 !important;
@@ -1676,13 +1616,13 @@ hr {
   font-size: 12px !important;
 }
 
-.errorDialouge {
+.errorDialouge{
   height: 400px;
-  text-align: center;
+  text-align:center;
   padding-top: 17%;
 }
 
-.roledropdown {
+.roledropdown{
   background-color: $color-white;
   color: #898989;
   padding: 6px;
@@ -1693,12 +1633,12 @@ hr {
   border: 1px solid #898989;
   width: 155px;
 }
-::ng-deep .roleDropdDwnBtn {
+::ng-deep .roleDropdDwnBtn{
   position: absolute !important;
-    right: 60% !important;
-    bottom: 2% !important;
+    right: 61% !important;
+    bottom: 23% !important;
 }
-.roleBtn {
+.roleBtn{
   background-color: $color-white;
   color: #898989;
   padding: 6px;
@@ -1711,39 +1651,24 @@ hr {
   // position: relative;
   // top: 10px;
 }
-.dropdown:hover .roleBtn {
+.dropdown:hover .roleBtn{
   background-color: $lxp-theme-green;
   color: $color-white;
 }
-.roleSelect {
+.roleSelect{
   float: left;
-  position: relative;
-  top: 2px;
-  left: 7px;
+    padding-left: 4px;
+    padding-top: 2px
 }
-.roleSelectChange{
-  float: left;
-  position: relative;
-  left: 7px;
-  top: 1px;
-}
-
 .roledropdownicon{
   position: relative;
-    left: 35px;
+    left: 40px;
     top: 3px;
-}
-
-.roledropdowniconSelect{
-  position: sticky;
-    float: right;
-    padding-top: 3px;
-    padding-left: 8px;
 }
 .mat-menu-item:hover:not([disabled]) {
   background-color: $color-light-grey !important;
 }
-.roleBatch {
+.roleBatch{
   position: relative;
   float: right;
   right: 38px;
@@ -1753,31 +1678,17 @@ hr {
     background: $lxp-gray !important;
   }
 }
-
-.roleBatchOnSelect{
-  position: relative;
-  float: right;
-  right: 46px;
-  top: 11px;
-  background: #5c6873 !important;
-  & .mat-badge-content {
-    background: $lxp-gray !important;
-  }
-}
 ::ng-deep .childMenu{
   width: 155px !important;
-    margin-top: 49px !important;
+    margin-top: 64px !important;
 }
-::ng-deep .subchildMenu {
+::ng-deep .subchildMenu{
   width: 155px !important;
   margin-top: 120px !important;
 }
-::ng-deep .superSubMenu {
+::ng-deep .superSubMenu{
   width: 155px !important;
   position: relative;
   top: 120px;
   right: 310px;
-}
-.mat-menu-item-submenu-trigger::after {
-  right: 5px !important;
 }
