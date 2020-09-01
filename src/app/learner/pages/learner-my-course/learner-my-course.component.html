@@ -101,7 +101,7 @@
               <span *ngFor="let superChild of subchild.superSubCategory">
                   <button mat-menu-item color="primary" (click)="menuSelect(subchild,superChild);
                   getCoureBasedOnCatalog(item,child,subchild.subCategoryId, superChild.superSubCategoryId);
-                    viewCourse(child,previewDialog)">
+                    viewCourse(child,previewDialog,superChild.superSubCategoryName,superChild.totalCount)">
                     <span >{{superChild.superSubCategoryName | titlecase}}</span>
                     <span class="matBadge12"  matBadge="{{superChild.totalCount}}"  matBadgeOverlap="false"></span>
                   </button>
@@ -120,7 +120,7 @@
                 <span *ngIf="!child.subCategory || child.subCategory.length === 0">
                   <button mat-menu-item [routerLink]="child.route">
                     <span (click)="getCoureBasedOnCatalog(item,child,'','');
-                    viewCourse(child,previewDialog)">{{child.categoryName | titlecase}}</span>
+                    viewCourse(child,previewDialog,child.categoryName,child.totalCount)">{{child.categoryName | titlecase}}</span>
                     <span class="matBadge12"  matBadge="{{child.totalCount}}"  matBadgeOverlap="false"></span>
                   </button>
                 </span>
@@ -988,7 +988,7 @@
         <mat-dialog-title>
             <div class="row">
         <div class="col-8 text-left">
-            <span class="f_wt_600 size catnamenew">{{ categoryPopupData?.categoryName  | titlecase}} ({{ categoryPopupData?.totalCount}})</span>
+            <span class="f_wt_600 size catnamenew">{{ categoryPopupData  | titlecase}} ({{categoryCount}})</span>
         </div>
         <!-- <div class="col-0 col-sm-0 col-md-0 col-lg-6"> -->
             <!-- <input  matInput class="form-control search" placeholder="Search" [(ngModel)]="courseSearch"> -->
