@@ -68,6 +68,7 @@ export class LearnerMyCourseComponent implements OnInit {
   subCatId: any;
   superCatId: any;
   claimedStatuts: any;
+  color: any;
 
 
   constructor(
@@ -303,6 +304,7 @@ export class LearnerMyCourseComponent implements OnInit {
     });
   }
   closedialogbox() {
+    this.color = 'white';
     this.dialog.closeAll();
     this.availableCourses = '';
     this.viewCourseClass = true;
@@ -335,10 +337,10 @@ export class LearnerMyCourseComponent implements OnInit {
   navToCal() {
     this.router.navigateByUrl('/Learner/calendar');
   }
-  openMyMenu() {
+  openMyMenu(event) {
+    this.color = event.type === 'mouseenter' ? 'red' : 'white' ;
     this.trigger.toggleMenu();
   }
-
 
   getCountForJobRole() {
     this.learnerService.getCountForJobroleCategories(this.userDetailes._id).subscribe((data: any) => {
