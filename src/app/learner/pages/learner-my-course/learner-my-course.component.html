@@ -11,7 +11,6 @@
                     <!-- {{selectedJobRole | titlecase}} -->
                     {{(selectedJobRole | slice:0:12)+'...'}}
                 </span>
-
                 <span *ngIf="selectedJobRole.length <= 12" [ngClass]="selectedJobRole === 'Select'?'roleSelect':'roleSelectChange'">{{selectedJobRole | titlecase}}</span>
                 <span *ngIf="selectedJobRole != 'Select'" class="roleBatchOnSelect"  matBadge="{{jobroleEnrollCount}}"  matBadgeOverlap="false"></span>
                 <mat-icon [ngClass]="selectedJobRole === 'Select'?'roledropdownicon':'roledropdowniconSelect'" class="roledropdownicon">expand_more</mat-icon></button>
@@ -169,6 +168,7 @@
             <mat-tab>
                 <ng-template matTabLabel>
                     <span class="tabsc" (click)="getEnrolledCourses('','','')" matBadge="{{onGoingCourseCount}}" matBadgeOverlap="false">{{'Ongoing' }}</span>
+
                 </ng-template>
 
  <!-- Card start -->
