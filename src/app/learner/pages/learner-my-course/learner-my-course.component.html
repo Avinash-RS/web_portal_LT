@@ -4,6 +4,7 @@
     <div class="col-12 col-sm-12 col-md-7 col-lg-8 catalogTitle">
         <div class="f_size_16 myC-head">
             <b>My Modules For Job Role</b>&nbsp;&nbsp;<b>:</b>
+           
         </div>
         <div class="dropdown roleDropdDwnBtn">
             <button class="roleBtn">
@@ -23,10 +24,19 @@
                 <span class="roleBatch"  matBadge="{{role.jobroleEnrollCount}}"  matBadgeOverlap="false"></span>
               </div>
             </div>
+            <!-- <button class="vertDropDown" mat-icon-button [matMenuTriggerFor]="menusDropdown">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu class="vertDropDownMenu" #menusDropdown="matMenu">
+                <button mat-menu-item (click)="getEnrolledCourses(catalogueDetails.catalogueId,'',role.jobroleCategoryId);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount)" 
+                *ngFor="let role of jobRole">
+                  <span>{{(role.jobroleCategoryName | slice:0:12)+'...'}}</span>
+                </button>
+                </mat-menu> -->
           </div>
     </div>
 
-    <div class="col-6 col-sm-6 col-md-5 col-lg-4 catalogDropdownCol">
+    <div class="col-12 col-sm-12 col-md-5 col-lg-4 catalogDropdownCol">
         
       <!-- <span>
       
@@ -71,7 +81,6 @@
                     {{item?.catalogueName | titlecase}}
                     <mat-icon class="dropdownicon">expand_more</mat-icon>
                   </button>
-
                   <!----------------------------Category--------------------------------->
                   <!-- <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'"> -->
                   <mat-menu class="childMenu" #childMenu="matMenu" [overlapTrigger]="false">
@@ -964,7 +973,17 @@
               <span>{{categorytab.categoryName}}</span>
             </button>
           </mat-menu>
+          
     </div>
+    <button class="vertDropDown" mat-icon-button [matMenuTriggerFor]="menusDropdown">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu class="vertDropDownMenu" #menusDropdown="matMenu">
+        <button mat-menu-item (click)="getEnrolledCourses(catalogueDetails.catalogueId,'',role.jobroleCategoryId);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount)" 
+        *ngFor="let role of jobRole">
+          <span>{{(role.jobroleCategoryName | slice:0:12)+'...'}}</span>
+        </button>
+        </mat-menu>
 </div>
 
 <ng-template #previewDialog>

@@ -902,10 +902,19 @@ hr {
 .menuBtn {
   display: none;
 }
+
+.vertDropDown {
+  display: none;
+}
+
+.vertDropDownMenu {
+  display: none;
+}
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
   .catalogDropdownCol {
     margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     padding-right: 1.5rem;
   }
   .primerFlage{
@@ -915,6 +924,23 @@ hr {
     z-index: 1;
   }
 
+.vertDropDown {
+  display: block;
+  position: absolute;
+  float: right;
+  top: 8%;
+  right: 2%;
+}
+
+.roleBtn {
+  display: none;
+}
+
+.catDropdown {
+  padding: 2px !important;
+  float: right;
+}
+ 
   #cdk-overlay-0 {
     width: 95%;
   }
@@ -1072,8 +1098,13 @@ hr {
   }
 
   .roleDropdDwnBtn{
-    margin: 0.5rem 28% 0% 0% !important;
-    
+    margin: 0.5rem 23% 0% 0% !important;
+    right: 0% !important;
+    bottom: 0% !important;
+  }
+
+  .roleBtn {
+    padding: 2px !important;
   }
 
   .catalogTitle {
@@ -1635,8 +1666,8 @@ hr {
 }
 ::ng-deep .roleDropdDwnBtn{
   position: absolute !important;
-    right: 61% !important;
-    bottom: 23% !important;
+    right: 59% !important;
+    bottom: 2% !important;
 }
 .roleBtn{
   background-color: $color-white;
@@ -1659,6 +1690,28 @@ hr {
   float: left;
     padding-left: 4px;
     padding-top: 2px
+}
+.roleSelectChange{	
+  float: left;	
+  position: relative;	
+  left: 7px;	
+  top: 3px;	
+}
+.roledropdowniconSelect{	
+  position: sticky;	
+    float: right;	
+    padding-top: 4px;	
+    padding-left: 8px;	
+}
+.roleBatchOnSelect{	
+  position: relative;	
+  float: right;	
+  right: 46px;	
+  top: 12px;	
+  background: #5c6873 !important;	
+  & .mat-badge-content {	
+    background: $lxp-gray !important;	
+  }	
 }
 .roledropdownicon{
   position: relative;
@@ -1691,4 +1744,7 @@ hr {
   position: relative;
   top: 120px;
   right: 310px;
+}
+.mat-menu-item-submenu-trigger::after {	
+  right: 5px !important;	
 }
