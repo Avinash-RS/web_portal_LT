@@ -1,11 +1,11 @@
 <app-header></app-header>
 <div class="myCourse">
 <div class="row">
-    <div class="col-6 col-sm-6 col-md-7 col-lg-8 catalogTitle">
+    <div class="col-12 col-sm-12 col-md-7 col-lg-8 catalogTitle">
         <div class="f_size_16 myC-head">
             <b>My Modules For Job Role</b>&nbsp;&nbsp;<b>:</b>
         </div>
-        <div class="dropdown roleDropdDwnBtn">
+        <div class="dropdowns roleDropdDwnBtn">
             <button class="roleBtn">
                 <span *ngIf="selectedJobRole.length > 12" tooltip="{{selectedJobRole}}" placement="right" [ngClass]="selectedJobRole === 'Select'?'roleSelect':'roleSelectChange'">
                     <!-- {{selectedJobRole | titlecase}} -->
@@ -23,10 +23,19 @@
                 <span class="roleBatch"  matBadge="{{role.jobroleEnrollCount}}"  matBadgeOverlap="false"></span>
               </div>
             </div>
+            <button class="moreVertBtn" mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="getEnrolledCourses(catalogueDetails.catalogueId,'',role.jobroleCategoryId)" 
+                *ngFor="let role of jobRole">
+                  <span>{{role.jobroleCategoryName | titlecase}}</span>
+                </button>
+              </mat-menu>
           </div>
     </div>
 
-    <div class="col-6 col-sm-6 col-md-5 col-lg-4 catalogDropdownCol">
+    <div class="col-12 col-sm-12 col-md-5 col-lg-4 catalogDropdownCol">
         
       <!-- <span>
       
@@ -209,7 +218,7 @@
                                                 {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
                                             </span>
                                         </div>
-                                        <div class="row">
+                                        <div class="row courseDescriptionRow">
                                             <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
                                                 (click)="gotoDesc(course)">
                                                 <p  class="">
@@ -955,10 +964,10 @@
         </ng-container>
     <!-- </div> -->
         </mat-tab-group>
-        <button class="menuBtn" mat-icon-button [matMenuTriggerFor]="menu">
+        <button class="menuBtn" mat-icon-button [matMenuTriggerFor]="menus">
             <mat-icon>more_vert</mat-icon>
           </button>
-          <mat-menu #menu="matMenu">
+          <mat-menu #menus="matMenu">
             <button mat-menu-item (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" 
             *ngFor="let categorytab of categoryDetails">
               <span>{{categorytab.categoryName}}</span>
