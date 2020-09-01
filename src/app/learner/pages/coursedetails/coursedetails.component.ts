@@ -163,6 +163,7 @@ export class CoursedetailsComponent implements OnInit {
   getModuleandtopicInfo: any;
   moduleSatusCheck: any;
   tabInd: any;
+  playerMenuEnable = false;
   // initials: any;
   constructor(public translate: TranslateService, private router: ActivatedRoute,
               public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
@@ -519,6 +520,7 @@ export class CoursedetailsComponent implements OnInit {
       setInterval(() => {
         this.playerModuleAndTopic(false);
         this.sider = false;
+        this.playerMenuEnable = true;
       }, 10000);
   }
 

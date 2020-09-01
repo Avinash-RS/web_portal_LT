@@ -939,3 +939,12 @@ export const  save_attendies = gql`
         }
   }
 `;
+
+export const bulkclaimcourse = gql`
+  mutation bulkclaimcourse($id: String, $user_id: String, $category_id: String,) {
+    bulkclaimcourse(id: $id, user_id: $user_id, category_id: $category_id) {
+      message
+      success
+    }
+  }
+`;
