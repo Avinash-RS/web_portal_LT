@@ -132,10 +132,9 @@ export class LearnerMyCourseComponent implements OnInit {
               this.allcourses = course.data.getCoureBasedOnCatalog.data;
               this.getCountForCategories();
               this.getEnrolledCourses('', '', '');
+              this.getCountForJobRole();
             }
           });
-        this.getCountForCategories();
-        this.getEnrolledCourses('', '', '');
       }
       });
   }
@@ -320,6 +319,7 @@ export class LearnerMyCourseComponent implements OnInit {
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
                 this.getEnrolledCourses('', '', '');
+                this.getCountForJobRole();
               }
             });
         }

@@ -977,7 +977,7 @@
         <mat-dialog-content class="cardContainer">
             <div class="row a-e" *ngIf="catagoryName === 'vocational'">
                 <div class="col-12">
-                    <button mat-stroked-button (click)="claimAll()" [disabled]="claimedStatuts.length > 0"
+                    <button mat-stroked-button (click)="claimAll()" [disabled]="claimedStatuts?.length > 0"
                     class=" btl-alin blue_clr cap pointer m-t-05">
                     <!-- <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon> -->
                     <span class="cap f_wt_400 m-t-m-2">
