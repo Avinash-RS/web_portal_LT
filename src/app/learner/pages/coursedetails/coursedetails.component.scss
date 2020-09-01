@@ -7,7 +7,9 @@
     display: flex;
     background-color: $color-white;
 }
-
+.lab{
+    margin-bottom: 0px !important;
+}
 .close-button {
     background: $lxp-theme-green !important; // red color
     float: right;
@@ -161,7 +163,7 @@
     font-size: 16px;
     font-weight: 400px;
     width: 142px;
-    right: 14px;
+    right: 22px;
 }
 
 button:focus,
@@ -1453,8 +1455,9 @@ height: 20 px;
 
 
 .closeBtn {
-position: relative;
-right: 7px;
+    position: relative;
+    right: -31px;
+    top: 4px;
 }
 
 .about-course {

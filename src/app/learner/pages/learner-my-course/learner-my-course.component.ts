@@ -120,19 +120,20 @@ export class LearnerMyCourseComponent implements OnInit {
     this.screenWidth = window.innerWidth;
   }
   menuSelect(subchild, superchild) {
-    this.categoryPopupData.categoryName1 = superchild.superSubCategoryName;
     console.log(this.categoryPopupData,'this.categoryPopupData')
     this.categoryyName = superchild;
     this.subchildData = subchild;
   }
 
   claimAll() {
+    this.loading = true;
     this.learnerService.bulkclaimcourse(this.userDetailes._id, this.userDetailes.user_id,
     this.categoryyName.superSubCategoryId).subscribe((bulkclaimcourse: any) => {
       if (bulkclaimcourse.data.bulkclaimcourse.success === true) {
         this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, this.categoryData.categoryId,
           this.userDetailes._id, this.subchildData.subCategoryId, this.categoryyName.superSubCategoryId).subscribe((course: any) => {
             if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
+              this.loading = false;
               this.allcourses = course.data.getCoureBasedOnCatalog.data;
               this.getCountForCategories();
               this.getEnrolledCourses('', '', '');
@@ -284,8 +285,9 @@ export class LearnerMyCourseComponent implements OnInit {
       this.userDetailes._id, subchild, superChild).subscribe((course: any) => {
         if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
           this.allcourses = course.data.getCoureBasedOnCatalog.data;
-          const toSearch = 'true';
+          const toSearch = 'false';
           this.claimedStatuts = this.allcourses.filter(o => o.clamaiedStatus.includes(toSearch));
+          console.log(this.claimedStatuts,'this.claimedStatuts');
           this.loading = false;
         }
       });

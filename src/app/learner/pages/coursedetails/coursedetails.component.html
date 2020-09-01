@@ -1,14 +1,14 @@
-<span *ngIf="sider">
+<!-- <span *ngIf="sider"> -->
     <app-header></app-header>
-</span>
-<div style="height: 2px;" (mouseover)="sider=true"></div>
+<!-- </span> -->
+<!-- <div style="height: 2px;" (mouseover)="sider=true"></div> -->
 <div class="container007 animated animatedFadeInUp fadeInUp bodybg">
     <div>
         <mat-drawer-container [class.drawer-opened]="drawer.opened" class="example-container">
             <mat-drawer #drawer class="drawer" mode="side" opened="{{sider}}">
 
                 <mat-toolbar class="header">
-                    <mat-icon class="closeBtn" *ngIf="drawer.opened" (click)="drawer.close()">close</mat-icon>
+                  
                     <mat-icon *ngIf="!drawer.opened" (click)="drawer.toggle()">
                         menu
                     </mat-icon>
@@ -16,10 +16,10 @@
                         <div class="col-4 Outine">
                             {{'Course Outline' | translate }}
                         </div>
-                        <div class="col-4 divider">
+                        <div class="col-3 divider">
                             |
                         </div>
-                        <div class="col-4">
+                        <div class="col-5">
                             <div class="row time">
                                 <div class="col-2">
                                     <mat-icon class="alarmIcon">alarm</mat-icon>
@@ -28,8 +28,12 @@
                                     <span
                                         class="courseTime">{{content?.coursetime ? content?.coursetime : '01:00:00'}}</span>
                                 </div>
+                                <div class="col-2">
+                                    <mat-icon class="closeBtn" *ngIf="drawer.opened" (click)="drawer.close()">close</mat-icon>
+                                </div>
                             </div>
                         </div>
+                     
                     </div>
                 </mat-toolbar>
                 <div class="contents">
@@ -104,8 +108,8 @@
                     <mat-icon class="drawerHamIcon" *ngIf="!drawer.opened" (click)="drawer.toggle()">
                         menu
                     </mat-icon>
-
-                    <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'" *ngIf="sider">
+           
+                    <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'"  *ngIf="playerMenuEnable" >
                         <button class=" pointer" mat-button [disabled]="isprevEnable"
                             (click)="topicPrve()">{{'Prev' | translate }}</button>
                         <span class="">|</span>
@@ -115,6 +119,7 @@
                             <mat-icon (click)="makeFullScreen()">fullscreen</mat-icon>
                         </span>
                     </div>
+              
                 </mat-toolbar>
                 <!-- tabs starts here -->
                 <mat-tab-group #demo3Tab [(selectedIndex)]="selectedTabIndex" #tabs animationDuration="1000ms"
@@ -124,12 +129,12 @@
 
 
                         <ng-template mat-tab-label>
-                            <label class="pointer" *ngIf="course?.course_name?.length>28"
+                            <label  class="pointer lab" *ngIf="course?.course_name?.length>28"
                                 matTooltip="{{course?.course_name}}" matTooltipPosition="below"
                                 matTooltipClass='custom-mat-tooltip'>{{(course?.course_name | slice:0:28)+'...'}}
                             </label>
 
-                            <label class="pointer" *ngIf="course?.course_name?.length<=28">{{course?.course_name}}
+                            <label class="pointer lab" *ngIf="course?.course_name?.length<=28">{{course?.course_name}}
                             </label>
                         </ng-template>
 
