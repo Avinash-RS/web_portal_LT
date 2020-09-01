@@ -75,7 +75,7 @@
             <span *ngFor="let item of dropDownCategoryDetails">
                 <span *ngIf="item.categories && item.categories.length > 0">
                   <button class="catDropdown" (click)="menuSelect(item.categories)"  
-                  [matMenuTriggerFor]="childMenu" (mouseenter)="openMyMenu()">
+                  [matMenuTriggerFor]="childMenu" [ngClass]="color" (mouseenter)="openMyMenu($event)">
                     {{item?.catalogueName | titlecase}}
                     <mat-icon class="dropdownicon">expand_more</mat-icon>
                   </button>
@@ -130,7 +130,7 @@
                 </span>
                 <!-- Leaf node buttons here -->
                 <span *ngIf="!item.categories || item.categories.length === 0">
-                  <button mat-button color="primary" [routerLink]="item.route">
+                  <button [routerLink]="item.route">
                     {{item?.catalogueName | titlecase}}
                   </button>
                 </span>

@@ -1,5 +1,18 @@
 @import "variable";
-
+.catDropdown{
+  background-color: $color-white;
+  color: #898989;
+  padding: 6px;
+  font-size: 16px;
+  padding-left: 6px;
+  border: none;
+  // border-radius: 11px;
+  border: 1px solid #898989;
+  width: 155px;
+  // &:active:hover:focus {
+  //   background-color: $lxp-theme-green !important;
+  // }
+}
 .cardContainer{
   height: 400px !important;
 }
@@ -1554,9 +1567,14 @@ hr {
   border: 1px solid #898989;
   width: 155px;
 }
-.dropdown:hover .catDropdown{
+
+.red {
   background-color: $lxp-theme-green !important;
   color: #ffffff !important;
+}
+.white {
+  background-color: #ffffff !important;
+    color: #898989 !important;
 }
 
 .dropdown {
@@ -1596,6 +1614,7 @@ hr {
   background-color: $lxp-theme-green;
   color: $color-white;
 }
+
 
 .matBadge12 {
   position: relative;
