@@ -28,6 +28,7 @@ import {MatMenuTrigger} from '@angular/material';
 export class LearnerMyCourseComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   // @ViewChild(MatMenuTrigger) triggerBtn: MatMenuTrigger;
+
   [x: string]: any;
   strDate: Date = new Date();
   userDetailes: any;
@@ -66,6 +67,8 @@ export class LearnerMyCourseComponent implements OnInit {
   jobRole: any = [];
   categoryyName: any;
   subchildData: any;
+  selectedJobRole = 'Select';
+  jobroleEnrollCount: any;
   constructor(
     public translate: TranslateService,
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
@@ -326,6 +329,11 @@ export class LearnerMyCourseComponent implements OnInit {
       // console.log('respon', data.data.getCountForJobroleCategories.data);
       this.jobRole = data.data.getCountForJobroleCategories.data;
     });
+  }
+
+  dropdownValueChange(selectedValue, count) {
+    this.selectedJobRole =selectedValue;
+    this.jobroleEnrollCount = count;
   }
 }
 
