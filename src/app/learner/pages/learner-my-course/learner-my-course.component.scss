@@ -1651,8 +1651,10 @@ hr {
 }
 
 .roledropdowniconSelect{
-  float: left;
-  padding-right: 5px;
+  position: sticky;
+    float: right;
+    padding-top: 4px;
+    padding-left: 8px;
 }
 .mat-menu-item:hover:not([disabled]) {
   background-color: $color-light-grey !important;
