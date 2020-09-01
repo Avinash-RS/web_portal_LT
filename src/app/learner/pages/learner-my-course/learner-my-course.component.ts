@@ -66,6 +66,10 @@ export class LearnerMyCourseComponent implements OnInit {
   jobRole: any = [];
   categoryyName: any;
   subchildData: any;
+  subCatId: any;
+  superCatId: any;
+
+
   constructor(
     public translate: TranslateService,
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
@@ -132,6 +136,8 @@ export class LearnerMyCourseComponent implements OnInit {
               this.getEnrolledCourses('', '', '');
             }
           });
+        this.getCountForCategories();
+        this.getEnrolledCourses('', '', '');
       }
       });
   }
@@ -270,6 +276,8 @@ export class LearnerMyCourseComponent implements OnInit {
   }
   getCoureBasedOnCatalog(catalogue, category, subchild, superChild) {
     this.categoryData = category;
+    this.subCatId = subchild;
+    this.superCatId = superChild;
     // console.log(this.categoryData, 'this.categoryDatathis.categoryData');
     this.catagoryName = category.categoryName;
     // console.log( this.catagoryName ,' this.catagoryName  this.catagoryName ')
@@ -298,11 +306,19 @@ export class LearnerMyCourseComponent implements OnInit {
     this.viewCourseClass = true;
   }
   claimCourse(courseId) {
+    let subCat = '';
+    let superSubCat = '';
+    if (this.subCatId) {
+      subCat = this.subchildData.subCategoryId;
+    }
+    if (this.superCatId) {
+      superSubCat = this.categoryyName.superSubCategoryId;
+    }
     this.learnerService.claimcourse(this.userDetailes._id, this.userDetailes.user_id,
       courseId).subscribe((data: any) => {
         if (data && data.data && data.data.claimcourse && data.data.claimcourse.success) {
           this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, this.categoryData.categoryId,
-            this.userDetailes._id, '', '').subscribe((course: any) => {
+            this.userDetailes._id, subCat, superSubCat).subscribe((course: any) => {
               if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
