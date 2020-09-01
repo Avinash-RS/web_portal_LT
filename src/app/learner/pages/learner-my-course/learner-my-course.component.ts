@@ -287,7 +287,6 @@ export class LearnerMyCourseComponent implements OnInit {
           this.allcourses = course.data.getCoureBasedOnCatalog.data;
           const toSearch = 'false';
           this.claimedStatuts = this.allcourses.filter(o => o.clamaiedStatus.includes(toSearch));
-          console.log(this.claimedStatuts,'this.claimedStatuts');
           this.loading = false;
         }
       });
