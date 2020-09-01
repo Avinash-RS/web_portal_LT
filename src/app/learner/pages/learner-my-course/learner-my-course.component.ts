@@ -1,10 +1,11 @@
-import { Component, OnInit, HostListener, TemplateRef } from '@angular/core';
+import { Component, OnInit, HostListener, TemplateRef, ViewChild } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Router } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { TranslateService } from '@ngx-translate/core';
-import { MatDialog, MatMenuTrigger } from '@angular/material';
+import { MatDialog } from '@angular/material';
+import {MatMenuTrigger} from '@angular/material';
 @Component({
   selector: 'app-learner-my-course',
   templateUrl: './learner-my-course.component.html',
@@ -23,6 +24,7 @@ import { MatDialog, MatMenuTrigger } from '@angular/material';
   ]
 })
 export class LearnerMyCourseComponent implements OnInit {
+  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   [x: string]: any;
   strDate: Date = new Date();
   userDetailes: any;
@@ -66,7 +68,6 @@ export class LearnerMyCourseComponent implements OnInit {
   claimedStatuts: any;
 
 
-  
   constructor(
     public translate: TranslateService,
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
