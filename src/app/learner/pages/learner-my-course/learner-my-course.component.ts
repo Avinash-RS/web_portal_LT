@@ -121,7 +121,6 @@ export class LearnerMyCourseComponent implements OnInit {
   }
   menuSelect(subchild, superchild) {
     this.categoryPopupData.categoryName1 = superchild.superSubCategoryName;
-    console.log(this.categoryPopupData,'this.categoryPopupData')
     this.categoryyName = superchild;
     this.subchildData = subchild;
   }
