@@ -1102,7 +1102,7 @@ hr {
 
   .roleDropdDwnBtn {
     margin: 0rem 0% 0% 0% !important;
-    right: 25% !important;
+    right: 23% !important;
     top: 0%;
   }
 
@@ -1188,6 +1188,10 @@ hr {
 @media only screen and (width: 1280px) {
   .btl-alin {
     margin-left: -8%;
+  }
+
+  .roleDropdDwnBtn {
+    right: 58% !important;
   }
 }
 
