@@ -343,7 +343,7 @@ export class LearnerMyCourseComponent implements OnInit {
   }
 
   dropdownValueChange(selectedValue, count) {
-    this.selectedJobRole =selectedValue;
+    this.selectedJobRole = selectedValue;
     this.jobroleEnrollCount = count;
   }
 }
