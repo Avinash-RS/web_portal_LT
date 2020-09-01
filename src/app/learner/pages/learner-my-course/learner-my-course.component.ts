@@ -68,7 +68,7 @@ export class LearnerMyCourseComponent implements OnInit {
   subCatId: any;
   superCatId: any;
   claimedStatuts: any;
-
+  categoryCount: number;
 
   constructor(
     public translate: TranslateService,
@@ -292,10 +292,11 @@ export class LearnerMyCourseComponent implements OnInit {
         }
       });
   }
-  viewCourse(category, templateRef: TemplateRef<any>) {
+  viewCourse(category, templateRef: TemplateRef<any> , categoryname , categorycount) {
     this.loading = true;
     this.viewCourseClass = false;
-    this.categoryPopupData = category;
+    this.categoryPopupData = categoryname;
+    this.categoryCount = categorycount;
 
     this.dialog.open(templateRef, {
       panelClass: 'dialogContainer',
