@@ -120,7 +120,7 @@ export class LearnerMyCourseComponent implements OnInit {
     this.screenWidth = window.innerWidth;
   }
   menuSelect(subchild, superchild) {
-    console.log(this.categoryPopupData,'this.categoryPopupData')
+    // this.categoryPopupData.categoryName1 = superchild.superSubCategoryName;
     this.categoryyName = superchild;
     this.subchildData = subchild;
   }
@@ -348,7 +348,7 @@ export class LearnerMyCourseComponent implements OnInit {
   }
 
   dropdownValueChange(selectedValue, count) {
-    this.selectedJobRole =selectedValue;
+    this.selectedJobRole = selectedValue;
     this.jobroleEnrollCount = count;
   }
 }

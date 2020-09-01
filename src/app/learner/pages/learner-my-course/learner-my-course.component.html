@@ -17,10 +17,10 @@
                 <mat-icon [ngClass]="selectedJobRole === 'Select'?'roledropdownicon':'roledropdowniconSelect'" class="roledropdownicon">expand_more</mat-icon></button>
             <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'">
               <div class="contedrop" *ngFor="let role of jobRole" (click)="getEnrolledCourses(catalogueDetails.catalogueId,'',role.jobroleCategoryId);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount)">
-                <span *ngIf="selectedJobRole.length > 12" tooltip="{{role.jobroleCategoryName | titlecase}}" placement="right">
+                <span *ngIf="role.jobroleCategoryName.length > 12" tooltip="{{role.jobroleCategoryName | titlecase}}" placement="right">
                     {{(role.jobroleCategoryName | slice:0:12)+'...'}}
                 </span>
-                <span *ngIf="selectedJobRole.length <= 12">{{role.jobroleCategoryName | titlecase}}</span>
+                <span *ngIf="role.jobroleCategoryName.length <= 12">{{role.jobroleCategoryName | titlecase}}</span>
                 <span class="roleBatch"  matBadge="{{role.jobroleEnrollCount}}"  matBadgeOverlap="false"></span>
               </div>
             </div>
