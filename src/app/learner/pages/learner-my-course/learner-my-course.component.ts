@@ -69,8 +69,12 @@ export class LearnerMyCourseComponent implements OnInit {
   superCatId: any;
   claimedStatuts: any;
   color = false;
-
   categoryCount: number;
+
+  jobRoleSelected = false;
+  jobOnGoingCourseCount = 0;
+  jobCompletedCourseCount = 0;
+  jobAllCourseCount = 0;
 
   constructor(
     public translate: TranslateService,
@@ -146,6 +150,7 @@ export class LearnerMyCourseComponent implements OnInit {
       });
   }
   getEnrolledCourses(catalougeId, catagoryId, jobRoleCategoryId) {
+    if (!jobRoleCategoryId) { this.selectedJobRole = 'Select'; }
     this.loading = true;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
       catalougeId, catagoryId, jobRoleCategoryId).subscribe((enrolledList: any) => {
@@ -177,10 +182,17 @@ export class LearnerMyCourseComponent implements OnInit {
           });
           this.completed = arr1;
           this.incomplete = arr;
-          if ((!catalougeId && !catagoryId) || jobRoleCategoryId) {
+          if (!catalougeId && !catagoryId) {
             this.onGoingCourseCount = arr.length;
             this.completedCourseCount = arr1.length;
             this.allCourseCount = this.enrolledCourses.length;
+          }
+          this.jobRoleSelected = false;
+          if(jobRoleCategoryId){
+            this.jobRoleSelected = true;
+            this.jobOnGoingCourseCount = arr.length;
+            this.jobCompletedCourseCount = arr1.length;
+            this.jobAllCourseCount = this.enrolledCourses.length;
           }
         }
         this.loading = false;

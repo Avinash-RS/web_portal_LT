@@ -13,7 +13,8 @@
                         {{(selectedJobRole | slice:0:12)+'...'}}
                     </span>
                     <span *ngIf="selectedJobRole.length <= 12" [ngClass]="selectedJobRole === 'Select'?'roleSelect':'roleSelectChange'">{{selectedJobRole | titlecase}}</span>
-                    <mat-icon [ngClass]="selectedJobRole === 'Select'?'roledropdownicon':'roledropdowniconSelect'">expand_more</mat-icon></button>
+                    <mat-icon  [ngClass]="selectedJobRole === 'Select'?'roledropdownicon':'roledropdowniconSelect'">expand_more</mat-icon>
+                </button>
                 <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'">
                   <div class="contedrop" *ngFor="let role of jobRole" (click)="getEnrolledCourses(catalogueDetails.catalogueId,'',role.jobroleCategoryId);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount)">
                     <span *ngIf="role.jobroleCategoryName.length > 12" tooltip="{{role.jobroleCategoryName | titlecase}}" placement="right">
@@ -178,7 +179,7 @@
             class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span class="tabsc" (click)="getEnrolledCourses('','','')" matBadge="{{onGoingCourseCount}}" matBadgeOverlap="false">{{'Ongoing' }}</span>
+                    <span class="tabsc" (click)="getEnrolledCourses('','','')" matBadge="{{ jobRoleSelected === true?jobOnGoingCourseCount : onGoingCourseCount }}" matBadgeOverlap="false">{{'Ongoing' }}</span>
 
                 </ng-template>
 
@@ -378,7 +379,7 @@
             </mat-tab>
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span class="tabsc" (click)="getEnrolledCourses('','','')" matBadge="{{completedCourseCount}}" matBadgeOverlap="false">{{'Completed' | translate }}</span>
+                    <span class="tabsc" (click)="getEnrolledCourses('','','')" matBadge="{{jobRoleSelected === true? jobCompletedCourseCount : completedCourseCount}}" matBadgeOverlap="false">{{'Completed' | translate }}</span>
                 </ng-template>
                 <div *ngFor="let course of completed ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
@@ -577,7 +578,7 @@
             <mat-tab>
                 <ng-template matTabLabel>
                     <span class="tabsc" (click)="getEnrolledCourses('','',
-                    '')" matBadge="{{allCourseCount}}" matBadgeOverlap="false">{{'All' }}</span>
+                    '')" matBadge="{{jobRoleSelected === true? jobAllCourseCount : allCourseCount}}" matBadgeOverlap="false">{{'All' }}</span>
                 </ng-template>
                 <div *ngFor="let course of enrolledCourses ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
