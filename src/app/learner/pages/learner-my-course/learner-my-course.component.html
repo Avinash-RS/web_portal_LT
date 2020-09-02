@@ -120,9 +120,10 @@
             </mat-menu>
                 </span>
                 <span *ngIf="!child.subCategory || child.subCategory.length === 0">
-                  <button mat-menu-item [routerLink]="child.route">
-                    <span (click)="getCoureBasedOnCatalog(item,child,'','');
-                    viewCourse(child,previewDialog,child.categoryName,child.totalCount)">{{child.categoryName | titlecase}}</span>
+                  <button mat-menu-item [routerLink]="child.route"
+                  (click)="getCoureBasedOnCatalog(item,child,'','');
+                    viewCourse(child,previewDialog,child.categoryName,child.totalCount)">
+                    <span>{{child.categoryName | titlecase}}</span>
                     <span class="matBadge12"  matBadge="{{child.totalCount}}"  matBadgeOverlap="false"></span>
                   </button>
                 </span>
