@@ -75,11 +75,12 @@
           <div class="dropdown">
             <span *ngFor="let item of dropDownCategoryDetails">
                 <span *ngIf="item.categories && item.categories.length > 0">
-                  <button class="catDropdown" (click)="menuSelect(item.categories)"  
-                  [matMenuTriggerFor]="childMenu" [ngClass]="color" (mouseenter)="openMyMenu($event)">
-                    {{item?.catalogueName | titlecase}}
-                    <mat-icon class="dropdownicon">expand_more</mat-icon>
-                  </button>
+                    <button (click)="menuSelect(item.categories)"  
+                    [matMenuTriggerFor]="childMenu" [ngClass]="color == true?'hovercolor':'catDropdown'" 
+                    (mouseenter)="openMyMenu()">
+                      {{item?.catalogueName | titlecase}}
+                      <mat-icon class="dropdownicon">expand_more</mat-icon>
+                    </button>
                   <!----------------------------Category--------------------------------->
                   <!-- <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'"> -->
                   <mat-menu class="childMenu" #childMenu="matMenu" [overlapTrigger]="false">
@@ -785,7 +786,7 @@
             <!-- <div class=""> -->
             <ng-container *ngFor="let categorytab of categoryDetails">
             <mat-tab  *ngIf="categorytab.enrollCount">
-                <ng-template matTabLabel >
+                <ng-template matTabLabel>
                     <span class="tabsc" (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId,'')"
                       matBadge="{{categorytab.enrollCount}}"
                         matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span>
