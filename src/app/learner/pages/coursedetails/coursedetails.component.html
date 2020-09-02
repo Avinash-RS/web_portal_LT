@@ -110,10 +110,10 @@
                     </mat-icon>
            
                     <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'"  *ngIf="playerMenuEnable" >
-                        <button class=" pointer" mat-button [disabled]="isprevEnable"
+                        <button class=" pointer" mat-button [disabled]="isprevEnable || scromModuleData.length == 0"
                             (click)="topicPrve()">{{'Prev' | translate }}</button>
                         <span class="">|</span>
-                        <button class=" pointer" mat-button [disabled]="isNextEnable" (click)="topicNext()">
+                        <button class=" pointer" mat-button [disabled]="isNextEnable || scromModuleData.length == 0" (click)="topicNext()">
                             {{'Next' | translate }}</button>
                         <span class="fullScr">
                             <mat-icon (click)="makeFullScreen()">fullscreen</mat-icon>

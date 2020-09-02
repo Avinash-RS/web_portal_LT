@@ -1,9 +1,9 @@
 <app-header></app-header>
 <div class="myCourse">
 <div class="row">
-    <div class="col-12 col-sm-12 col-md-7 col-lg-8 catalogTitle">
+    <div class="col-8 col-sm-8 col-md-7 col-lg-8 catalogTitle">
         <div class="f_size_16 myC-head">
-            <b>My Modules For Job Role</b>&nbsp;&nbsp;<b>:</b>
+            <b>My Modules For</b>&nbsp;<b>:</b>
         </div>
         <div class="dropdown roleDropdDwnBtn">
             <button class="roleBtn">
@@ -26,7 +26,7 @@
           </div>
     </div>
 
-    <div class="col-12 col-sm-12 col-md-5 col-lg-4 catalogDropdownCol">
+    <div class="col-4 col-sm-4 col-md-5 col-lg-4 catalogDropdownCol">
         
       <!-- <span>
       
@@ -153,6 +153,8 @@
 <!-- tabs here -->
 <div class="row bodybg">
     <div class="col-12">
+
+       
         <!-- <div class="catPost">
             <span *ngFor="let namesss of categoryDetails" class="cathd1">
                 <button *ngIf="namesss.enrollCount"  
@@ -165,6 +167,25 @@
         <mat-tab-group [(selectedIndex)]="selectedIndex" mat-align-tabs="start" animationDuration="1000ms"
             class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
             <mat-tab>
+                <div class="row">
+                    <div class="col-6 m-auto">
+                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vrl22wqj7'">College Connect</span>
+                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == '4ai2p2k0d'">Vocational</span> 
+                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vpcqlpdr1'">Pro Certification</span>
+                    </div> 
+                        <div class="col-6">
+                    <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_horiz</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" 
+                        *ngFor="let categorytab of categoryDetails">
+                          <span>{{categorytab.categoryName}}</span>
+                        </button>
+                      </mat-menu>
+                    </div>
+                </div>
+                
                 <ng-template matTabLabel>
                     <span class="tabsc" (click)="getEnrolledCourses('','','')" matBadge="{{onGoingCourseCount}}" matBadgeOverlap="false">{{'Ongoing' }}</span>
 
@@ -197,7 +218,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6 col-sm-6 col-md-8 col-lg-7">
+                                    <div class="col-6 col-sm-6 col-md-8 col-lg-7 coursenameCol">
                                         <div class=" f_size_18 f_wt_500 pointer coursename">
                                             <span  *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
                                             <span  *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
@@ -365,6 +386,25 @@
                 </div>
             </mat-tab>
             <mat-tab>
+                <div class="row">
+                    <div class="col-6 m-auto">
+                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vrl22wqj7 '">College Connect</span>
+                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == '4ai2p2k0d '">Vocational</span> 
+                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vpcqlpdr1 '">Pro Certification</span> 
+                    </div>
+                    <div class="col-6 ">
+                    <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_horiz</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <button mat-menu-item 
+                        (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" 
+                        *ngFor="let categorytab of categoryDetails">
+                          <span>{{categorytab.categoryName}}</span>
+                        </button>
+                      </mat-menu>
+                    </div>
+                </div>
                 <ng-template matTabLabel>
                     <span class="tabsc" (click)="getEnrolledCourses('','','')" matBadge="{{completedCourseCount}}" matBadgeOverlap="false">{{'Completed' | translate }}</span>
                 </ng-template>
@@ -563,6 +603,24 @@
                 </div>
             </mat-tab>
             <mat-tab>
+                <div class="row">
+                    <div class="col-6  m-auto">
+                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vrl22wqj7 '">College Connect</span>
+                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == '4ai2p2k0d '">Vocational</span> 
+                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vpcqlpdr1 '">Pro Certification</span> 
+                    </div>
+                    <div class="col-6">
+                    <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_horiz</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" 
+                        *ngFor="let categorytab of categoryDetails">
+                          <span>{{categorytab.categoryName}}</span>
+                        </button>
+                      </mat-menu>
+                    </div>
+                </div>
                 <ng-template matTabLabel>
                     <span class="tabsc" (click)="getEnrolledCourses('','',
                     '')" matBadge="{{allCourseCount}}" matBadgeOverlap="false">{{'All' }}</span>
@@ -773,6 +831,24 @@
             <!-- <div class=""> -->
             <ng-container *ngFor="let categorytab of categoryDetails">
             <mat-tab  *ngIf="categorytab.enrollCount">
+                <div class="row">
+                    <div class="col-6 m-auto">
+                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vrl22wqj7'">College Connect</span>
+                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == '4ai2p2k0d '">Vocational</span> 
+                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vpcqlpdr1 '">Pro Certification</span> 
+                    </div>
+                    <div class="col-6">
+                    <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_horiz</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" 
+                        *ngFor="let categorytab of categoryDetails">
+                          <span>{{categorytab.categoryName}}</span>
+                        </button>
+                      </mat-menu>
+                    </div>
+                </div>
                 <ng-template matTabLabel>
                     <span class="tabsc" (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId,'')"
                       matBadge="{{categorytab.enrollCount}}"
@@ -965,15 +1041,6 @@
           </mat-menu>
           
     </div>
-    <button class="vertDropDown" mat-icon-button [matMenuTriggerFor]="menusDropdown">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu class="vertDropDownMenu" #menusDropdown="matMenu">
-        <button mat-menu-item (click)="getEnrolledCourses(catalogueDetails.catalogueId,'',role.jobroleCategoryId);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount)" 
-        *ngFor="let role of jobRole">
-          <span>{{(role.jobroleCategoryName | slice:0:12)+'...'}}</span>
-        </button>
-        </mat-menu>
 </div>
 
 <ng-template #previewDialog>

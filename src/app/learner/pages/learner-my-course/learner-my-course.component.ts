@@ -68,6 +68,7 @@ export class LearnerMyCourseComponent implements OnInit {
   subCatId: any;
   superCatId: any;
   claimedStatuts: any;
+  categoryNamePrint: any;
 
 
   constructor(
@@ -145,6 +146,8 @@ export class LearnerMyCourseComponent implements OnInit {
       });
   }
   getEnrolledCourses(catalougeId, catagoryId, jobRoleCategoryId) {
+    this.categoryNamePrint = catagoryId;
+    console.log('this.categoryNamePrint', this.categoryNamePrint);
     this.loading = true;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
       catalougeId, catagoryId, jobRoleCategoryId ).subscribe((enrolledList: any) => {

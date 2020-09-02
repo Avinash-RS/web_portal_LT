@@ -183,11 +183,11 @@
         <br *ngIf="!cannotEdit"> -->
 
         <!-- //////Gender part//////// -->
-        <div class="row" *ngIf="!cannotEdit">
+        <div class="row genderRow" *ngIf="!cannotEdit">
           <div class="col-md-4 col-lg-4 col-sm-12 col-12">
             <label class="p-b-10px f_size_19">{{'Gender'  }}</label>
             <span class="mand p-b-10px"> *</span>
-            <div class="form-group">
+            <div class="form-group radioBtnGrp">
               <mat-radio-group [disabled]='cannotEdit' formControlName="gender" name="gender">
                 <mat-radio-button value="M">{{'Male'}}</mat-radio-button>
                 <mat-radio-button value="F">{{'Female' }}</mat-radio-button>
@@ -285,7 +285,7 @@
      'inputs  background_trans width_80'" formControlName="institute">
               </ng-container>
               <span class="lapview">&nbsp;&nbsp;&nbsp;</span>
-              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" [placeholder]="'Discipline'  " formControlName="discipline"
+              <mat-select [disabled]='cannotEdit' id="disciplingName" [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" [placeholder]="'Discipline'  " formControlName="discipline"
                 name="discipline">
                 <mat-option [value]="item._id" *ngFor="let item of disciplines[in]">
                   {{item.discipline_name}}
