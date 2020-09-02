@@ -69,8 +69,12 @@ export class LearnerMyCourseComponent implements OnInit {
   superCatId: any;
   claimedStatuts: any;
   color: any;
-
   categoryCount: number;
+
+  jobRoleSelected = false;
+  jobOnGoingCourseCount = 0;
+  jobCompletedCourseCount = 0;
+  jobAllCourseCount = 0;
 
   constructor(
     public translate: TranslateService,
@@ -179,11 +183,17 @@ export class LearnerMyCourseComponent implements OnInit {
           });
           this.completed = arr1;
           this.incomplete = arr;
-          if ((!catalougeId && !catagoryId) || jobRoleCategoryId) {
-            console.log('1st', jobRoleCategoryId);
+          if (!catalougeId && !catagoryId) {
             this.onGoingCourseCount = arr.length;
             this.completedCourseCount = arr1.length;
             this.allCourseCount = this.enrolledCourses.length;
+          }
+          this.jobRoleSelected = false;
+          if(jobRoleCategoryId){
+            this.jobRoleSelected = true;
+            this.jobOnGoingCourseCount = arr.length;
+            this.jobCompletedCourseCount = arr1.length;
+            this.jobAllCourseCount = this.enrolledCourses.length;
           }
         }
         this.loading = false;
