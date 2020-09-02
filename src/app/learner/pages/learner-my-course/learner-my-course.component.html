@@ -789,11 +789,11 @@
             <!-- <div class=""> -->
             <ng-container *ngFor="let categorytab of categoryDetails">
             <mat-tab  *ngIf="categorytab.enrollCount">
-                <ng-container matTabLabel>
+                <ng-template matTabLabel>
                     <span class="tabsc" (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId,'')"
                       matBadge="{{categorytab.enrollCount}}"
                         matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span>
-                </ng-container>
+                </ng-template>
 
                 <div *ngFor="let course of enrolledCourses ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
