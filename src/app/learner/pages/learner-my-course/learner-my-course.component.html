@@ -66,11 +66,12 @@
           <div class="dropdown">
             <span *ngFor="let item of dropDownCategoryDetails">
                 <span *ngIf="item.categories && item.categories.length > 0">
-                  <button class="catDropdown" (click)="menuSelect(item.categories)"  
-                  [matMenuTriggerFor]="childMenu" (mouseenter)="openMyMenu()">
-                    {{item?.catalogueName | titlecase}}
-                    <mat-icon class="dropdownicon">expand_more</mat-icon>
-                  </button>
+                    <button (click)="menuSelect(item.categories)"  
+                    [matMenuTriggerFor]="childMenu" [ngClass]="color == true?'hovercolor':'catDropdown'" 
+                    (mouseenter)="openMyMenu()">
+                      {{item?.catalogueName | titlecase}}
+                      <mat-icon class="dropdownicon">expand_more</mat-icon>
+                    </button>
                   <!----------------------------Category--------------------------------->
                   <!-- <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'"> -->
                   <mat-menu class="childMenu" #childMenu="matMenu" [overlapTrigger]="false">
@@ -93,7 +94,7 @@
               <span *ngFor="let superChild of subchild.superSubCategory">
                   <button mat-menu-item color="primary" (click)="menuSelect(subchild,superChild);
                   getCoureBasedOnCatalog(item,child,subchild.subCategoryId, superChild.superSubCategoryId);
-                    viewCourse(child,previewDialog)">
+                    viewCourse(child,previewDialog,superChild.superSubCategoryName,superChild.totalCount)">
                     <span >{{superChild.superSubCategoryName | titlecase}}</span>
                     <span class="matBadge12"  matBadge="{{superChild.totalCount}}"  matBadgeOverlap="false"></span>
                   </button>
@@ -110,9 +111,10 @@
             </mat-menu>
                 </span>
                 <span *ngIf="!child.subCategory || child.subCategory.length === 0">
-                  <button mat-menu-item [routerLink]="child.route">
-                    <span (click)="getCoureBasedOnCatalog(item,child,'','');
-                    viewCourse(child,previewDialog)">{{child.categoryName | titlecase}}</span>
+                  <button mat-menu-item [routerLink]="child.route"
+                  (click)="getCoureBasedOnCatalog(item,child,'','');
+                    viewCourse(child,previewDialog,child.categoryName,child.totalCount)">
+                    <span>{{child.categoryName | titlecase}}</span>
                     <span class="matBadge12"  matBadge="{{child.totalCount}}"  matBadgeOverlap="false"></span>
                   </button>
                 </span>
@@ -122,7 +124,7 @@
                 </span>
                 <!-- Leaf node buttons here -->
                 <span *ngIf="!item.categories || item.categories.length === 0">
-                  <button mat-button color="primary" [routerLink]="item.route">
+                  <button [routerLink]="item.route">
                     {{item?.catalogueName | titlecase}}
                   </button>
                 </span>
@@ -187,8 +189,11 @@
                 </div>
                 
                 <ng-template matTabLabel>
-                    <span class="tabsc" (click)="getEnrolledCourses('','','')" matBadge="{{onGoingCourseCount}}" matBadgeOverlap="false">{{'Ongoing' }}</span>
+                    <div (click)="getEnrolledCourses('','','')">
 
+                   
+                    <span class="tabsc"  matBadge="{{ jobRoleSelected === true?jobOnGoingCourseCount : onGoingCourseCount }}" matBadgeOverlap="false">{{'Ongoing' }}</span>
+                </div>
                 </ng-template>
 
  <!-- Card start -->
@@ -406,7 +411,7 @@
                     </div>
                 </div>
                 <ng-template matTabLabel>
-                    <span class="tabsc" (click)="getEnrolledCourses('','','')" matBadge="{{completedCourseCount}}" matBadgeOverlap="false">{{'Completed' | translate }}</span>
+                    <span class="tabsc" (click)="getEnrolledCourses('','','')" matBadge="{{jobRoleSelected === true? jobCompletedCourseCount : completedCourseCount}}" matBadgeOverlap="false">{{'Completed' | translate }}</span>
                 </ng-template>
                 <div *ngFor="let course of completed ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
@@ -623,7 +628,7 @@
                 </div>
                 <ng-template matTabLabel>
                     <span class="tabsc" (click)="getEnrolledCourses('','',
-                    '')" matBadge="{{allCourseCount}}" matBadgeOverlap="false">{{'All' }}</span>
+                    '')" matBadge="{{jobRoleSelected === true? jobAllCourseCount : allCourseCount}}" matBadgeOverlap="false">{{'All' }}</span>
                 </ng-template>
                 <div *ngFor="let course of enrolledCourses ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
@@ -1047,7 +1052,7 @@
         <mat-dialog-title>
             <div class="row">
         <div class="col-8 text-left">
-            <span class="f_wt_600 size catnamenew">{{ categoryPopupData?.categoryName  | titlecase}} ({{ categoryPopupData?.totalCount}})</span>
+            <span class="f_wt_600 size catnamenew">{{ categoryPopupData  | titlecase}} ({{categoryCount}})</span>
         </div>
         <!-- <div class="col-0 col-sm-0 col-md-0 col-lg-6"> -->
             <!-- <input  matInput class="form-control search" placeholder="Search" [(ngModel)]="courseSearch"> -->
@@ -1062,7 +1067,7 @@
 
         <mat-dialog-content class="cardContainer">
             <div class="row a-e" *ngIf="catagoryName === 'vocational'">
-                <div class="col-12">
+                <div class="col-12" *ngIf="categoryCount > 0">
                     <button mat-stroked-button (click)="claimAll()" [disabled]="claimedStatuts?.length === 0"
                     class=" btl-alin blue_clr cap pointer m-t-05">
                     <!-- <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon> -->
@@ -1114,9 +1119,9 @@
     
 
 
-    <div class="col errorDialouge" *ngIf="categoryData.totalCount < 1">
+    <div class="col errorDialouge" *ngIf="categoryCount < 1">
         <span style="font-size: medium;">
-        No course found on {{catagoryName | titlecase}}.
+        No courses found
         </span>
     </div>
     </div>

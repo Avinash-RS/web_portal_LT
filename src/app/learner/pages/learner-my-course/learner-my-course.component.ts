@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material';
-import {MatMenuTrigger} from '@angular/material';
+import { MatMenuTrigger } from '@angular/material';
 @Component({
   selector: 'app-learner-my-course',
   templateUrl: './learner-my-course.component.html',
@@ -69,7 +69,13 @@ export class LearnerMyCourseComponent implements OnInit {
   superCatId: any;
   claimedStatuts: any;
   categoryNamePrint: any;
+  color = false;
+  categoryCount: number;
 
+  jobRoleSelected = false;
+  jobOnGoingCourseCount = 0;
+  jobCompletedCourseCount = 0;
+  jobAllCourseCount = 0;
 
   constructor(
     public translate: TranslateService,
@@ -80,7 +86,6 @@ export class LearnerMyCourseComponent implements OnInit {
     this.getScreenSize();
     this.getCountForCategories();
     this.getCountForJobRole();
-    // console.log(this.triggerBtn ,'triggerBtntriggerBtntriggerBtn')
   }
   @HostListener('window:resize', ['$event'])
   // ngOnInit() {
@@ -129,41 +134,41 @@ export class LearnerMyCourseComponent implements OnInit {
   claimAll() {
     this.loading = true;
     this.learnerService.bulkclaimcourse(this.userDetailes._id, this.userDetailes.user_id,
-    this.categoryyName.superSubCategoryId).subscribe((bulkclaimcourse: any) => {
-      if (bulkclaimcourse.data.bulkclaimcourse.success === true) {
-        this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, this.categoryData.categoryId,
-          this.userDetailes._id, this.subchildData.subCategoryId, this.categoryyName.superSubCategoryId).subscribe((course: any) => {
-            if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
-              this.loading = false;
-              this.allcourses = course.data.getCoureBasedOnCatalog.data;
-              this.getCountForCategories();
-              this.getEnrolledCourses('', '', '');
-              this.getCountForJobRole();
-              this.getCountForJobRole();
-            }
-          });
-      }
+      this.categoryyName.superSubCategoryId).subscribe((bulkclaimcourse: any) => {
+        if (bulkclaimcourse.data.bulkclaimcourse.success === true) {
+          this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, this.categoryData.categoryId,
+            this.userDetailes._id, this.subchildData.subCategoryId, this.categoryyName.superSubCategoryId).subscribe((course: any) => {
+              if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
+                this.loading = false;
+                this.allcourses = course.data.getCoureBasedOnCatalog.data;
+                this.getCountForCategories();
+                this.getEnrolledCourses('', '', '');
+                this.getCountForJobRole();
+                this.getCountForJobRole();
+              }
+            });
+        }
       });
   }
   getEnrolledCourses(catalougeId, catagoryId, jobRoleCategoryId) {
     this.categoryNamePrint = catagoryId;
-    console.log('this.categoryNamePrint', this.categoryNamePrint);
+    if (!jobRoleCategoryId) { this.selectedJobRole = 'Job Role'; }
     this.loading = true;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
-      catalougeId, catagoryId, jobRoleCategoryId ).subscribe((enrolledList: any) => {
+      catalougeId, catagoryId, jobRoleCategoryId).subscribe((enrolledList: any) => {
         if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
           this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
-          if(this.enrolledCourses.length> 0) {
-          this.enrolledCourses.forEach(element => {
-            if (element.course_duration) {
-              if (Number(element.course_duration.slice(3, 5)) >= 30) {
-                element.course_duration = Number(element.course_duration.slice(0, 2)) + 1;
-              } else {
-                element.course_duration = Number(element.course_duration.slice(0, 2));
+          if (this.enrolledCourses.length > 0) {
+            this.enrolledCourses.forEach(element => {
+              if (element.course_duration) {
+                if (Number(element.course_duration.slice(3, 5)) >= 30) {
+                  element.course_duration = Number(element.course_duration.slice(0, 2)) + 1;
+                } else {
+                  element.course_duration = Number(element.course_duration.slice(0, 2));
+                }
               }
-            }
-          });
-        }
+            });
+          }
           // this.enrolledCourses.forEach(element => {
           //   if (element.coursePlayerStatus.course_percentage) {
           //     element.coursePlayerStatus.course_percentage = Math.round(element.coursePlayerStatus.course_percentage);
@@ -179,10 +184,17 @@ export class LearnerMyCourseComponent implements OnInit {
           });
           this.completed = arr1;
           this.incomplete = arr;
-          if ((!catalougeId && !catagoryId) || jobRoleCategoryId) {
+          if (!catalougeId && !catagoryId) {
             this.onGoingCourseCount = arr.length;
             this.completedCourseCount = arr1.length;
             this.allCourseCount = this.enrolledCourses.length;
+          }
+          this.jobRoleSelected = false;
+          if(jobRoleCategoryId){
+            this.jobRoleSelected = true;
+            this.jobOnGoingCourseCount = arr.length;
+            this.jobCompletedCourseCount = arr1.length;
+            this.jobAllCourseCount = this.enrolledCourses.length;
           }
         }
         this.loading = false;
@@ -233,18 +245,18 @@ export class LearnerMyCourseComponent implements OnInit {
 
   launchAssignment(value) {
     // if (this.screenWidth < 800) {
-      // this.show = true;
+    // this.show = true;
     // } else {
-      if (value.activity_details.activitytype === 'Assignment') {
-        const detail = {
-          id: value.activity_details.courseid,
-          wishlist: false,
-          wishlist_id: false,
-          enrollment_status: false
-        };
-        this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
-      }
+    if (value.activity_details.activitytype === 'Assignment') {
+      const detail = {
+        id: value.activity_details.courseid,
+        wishlist: false,
+        wishlist_id: false,
+        enrollment_status: false
+      };
+      this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
     }
+  }
 
   launchActivity(value) {
     window.open(value.activity_details.link);
@@ -275,17 +287,16 @@ export class LearnerMyCourseComponent implements OnInit {
   getCountForCategories() {
     this.learnerService.getCountForCategories(this.userDetailes._id).subscribe((data: any) => {
       if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
-      this.catalogueDetails = data.data.getCountForCategories.data;
-      this.categoryDetails = data.data.getCountForCategories.data.categories;
-      this.dropDownCategoryDetails = [data.data.getCountForCategories.data];
-    }
+        this.catalogueDetails = data.data.getCountForCategories.data;
+        this.categoryDetails = data.data.getCountForCategories.data.categories;
+        this.dropDownCategoryDetails = [data.data.getCountForCategories.data];
+      }
     });
   }
   getCoureBasedOnCatalog(catalogue, category, subchild, superChild) {
     this.categoryData = category;
     this.subCatId = subchild;
     this.superCatId = superChild;
-    // console.log(this.categoryData, 'this.categoryDatathis.categoryData');
     this.catagoryName = category.categoryName;
     this.learnerService.getCoureBasedOnCatalog(catalogue.catalogueId, category.categoryId,
       this.userDetailes._id, subchild, superChild).subscribe((course: any) => {
@@ -297,10 +308,12 @@ export class LearnerMyCourseComponent implements OnInit {
         }
       });
   }
-  viewCourse(category, templateRef: TemplateRef<any>) {
+  viewCourse(category, templateRef: TemplateRef<any>, categoryname, categorycount) {
+    this.color = false;
     this.loading = true;
     this.viewCourseClass = false;
-    this.categoryPopupData = category;
+    this.categoryPopupData = categoryname;
+    this.categoryCount = categorycount;
 
     this.dialog.open(templateRef, {
       panelClass: 'dialogContainer',
@@ -343,9 +356,13 @@ export class LearnerMyCourseComponent implements OnInit {
     this.router.navigateByUrl('/Learner/calendar');
   }
   openMyMenu() {
+    this.color = true;
     this.trigger.toggleMenu();
   }
-
+  closeMyMenu() {
+    this.color = false;
+    this.trigger.closeMenu();
+  }
 
   getCountForJobRole() {
     this.learnerService.getCountForJobroleCategories(this.userDetailes._id).subscribe((data: any) => {
