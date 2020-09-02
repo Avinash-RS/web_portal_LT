@@ -73,19 +73,21 @@
           <!---------------Multi-level dropdown------------->
 
           <div class="dropdown">
-            <span *ngFor="let item of dropDownCategoryDetails">
-                <span *ngIf="item.categories && item.categories.length > 0">
-                  <button class="catDropdown" (click)="menuSelect(item.categories)"  
-                  [matMenuTriggerFor]="childMenu" [ngClass]="color" (mouseenter)="openMyMenu($event)">
+            <div *ngFor="let item of dropDownCategoryDetails">
+                <div *ngIf="item.categories && item.categories.length > 0">
+                  <button (click)="menuSelect(item.categories)"  
+                  [matMenuTriggerFor]="childMenu" [ngClass]="color == true?'hovercolor':'catDropdown'" 
+                  (mouseenter)="openMyMenu()">
                     {{item?.catalogueName | titlecase}}
                     <mat-icon class="dropdownicon">expand_more</mat-icon>
                   </button>
+                   
                   <!----------------------------Category--------------------------------->
-                  <!-- <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'"> -->
-                  <mat-menu class="childMenu" #childMenu="matMenu" [overlapTrigger]="false">
+                 
+                <mat-menu class="childMenu contedrop" #childMenu="matMenu" [overlapTrigger]="false">
               <span *ngFor="let child of item.categories">
                 <span *ngIf="child.subCategory && child.subCategory.length > 0">
-                  <button mat-menu-item color="primary" [matMenuTriggerFor]="childMenu2"   (click)="menuSelect(child)">
+                  <button mat-menu-item [matMenuTriggerFor]="childMenu2"   (click)="menuSelect(child)">
                     <span>{{child.categoryName | titlecase}}</span>
                     <span class="matBadgeNew"  matBadge="{{child.totalCount}}"  matBadgeOverlap="false"></span>
                   </button>
@@ -93,16 +95,18 @@
                   <mat-menu class="subchildMenu" #childMenu2="matMenu" [overlapTrigger]="false">
               <span *ngFor="let subchild of child.subCategory">
                 <span *ngIf="subchild.superSubCategory && subchild.superSubCategory.length > 0">
-                  <button mat-menu-item color="primary" [matMenuTriggerFor]="childMenu3"    (click)="menuSelect(subchild)">
+                  <button mat-menu-item [matMenuTriggerFor]="childMenu3"   
+                   (click)="menuSelect(subchild)">
                     <span>{{subchild.subCategoryName}}</span>
                     <span class="matBadgeSubmenu"  matBadge="{{subchild.totalCount}}"  matBadgeOverlap="false"></span>
                   </button>
                    <!-----------------------------Super Sub Category--------------------------------------->
                   <mat-menu class="superSubMenu" #childMenu3="matMenu" [overlapTrigger]="false">
               <span *ngFor="let superChild of subchild.superSubCategory">
-                  <button mat-menu-item color="primary" (click)="menuSelect(subchild,superChild);
+                  <button mat-menu-item (click)="menuSelect(subchild,superChild);
                   getCoureBasedOnCatalog(item,child,subchild.subCategoryId, superChild.superSubCategoryId);
-                    viewCourse(child,previewDialog,superChild.superSubCategoryName,superChild.totalCount)">
+                    viewCourse(child,previewDialog,superChild.superSubCategoryName,superChild.totalCount)"
+                   >
                     <span >{{superChild.superSubCategoryName | titlecase}}</span>
                     <span class="matBadge12"  matBadge="{{superChild.totalCount}}"  matBadgeOverlap="false"></span>
                   </button>
@@ -128,14 +132,14 @@
               </span>
             </mat-menu>
             <!-- </div> -->
-                </span>
+        </div>
                 <!-- Leaf node buttons here -->
                 <span *ngIf="!item.categories || item.categories.length === 0">
                   <button [routerLink]="item.route">
                     {{item?.catalogueName | titlecase}}
                   </button>
                 </span>
-              </span>
+            </div>
         </div>
 
         <div>

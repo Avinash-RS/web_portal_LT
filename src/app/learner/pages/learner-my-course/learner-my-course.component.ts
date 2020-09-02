@@ -68,7 +68,7 @@ export class LearnerMyCourseComponent implements OnInit {
   subCatId: any;
   superCatId: any;
   claimedStatuts: any;
-  color: any;
+  color = false;
   categoryCount: number;
 
   jobRoleSelected = false;
@@ -85,7 +85,6 @@ export class LearnerMyCourseComponent implements OnInit {
     this.getScreenSize();
     this.getCountForCategories();
     this.getCountForJobRole();
-    // console.log(this.triggerBtn ,'triggerBtntriggerBtntriggerBtn')
   }
   @HostListener('window:resize', ['$event'])
   // ngOnInit() {
@@ -296,7 +295,6 @@ export class LearnerMyCourseComponent implements OnInit {
     this.categoryData = category;
     this.subCatId = subchild;
     this.superCatId = superChild;
-    // console.log(this.categoryData, 'this.categoryDatathis.categoryData');
     this.catagoryName = category.categoryName;
     this.learnerService.getCoureBasedOnCatalog(catalogue.catalogueId, category.categoryId,
       this.userDetailes._id, subchild, superChild).subscribe((course: any) => {
@@ -309,6 +307,7 @@ export class LearnerMyCourseComponent implements OnInit {
       });
   }
   viewCourse(category, templateRef: TemplateRef<any>, categoryname, categorycount) {
+    this.color = false;
     this.loading = true;
     this.viewCourseClass = false;
     this.categoryPopupData = categoryname;
@@ -321,7 +320,6 @@ export class LearnerMyCourseComponent implements OnInit {
     });
   }
   closedialogbox() {
-    this.color = 'white';
     this.dialog.closeAll();
     this.availableCourses = '';
     this.viewCourseClass = true;
@@ -355,9 +353,13 @@ export class LearnerMyCourseComponent implements OnInit {
   navToCal() {
     this.router.navigateByUrl('/Learner/calendar');
   }
-  openMyMenu(event) {
-    this.color = event.type === 'mouseenter' ? 'red' : 'white';
+  openMyMenu() {
+    this.color = true;
     this.trigger.toggleMenu();
+  }
+  closeMyMenu() {
+    this.color = false;
+    this.trigger.closeMenu();
   }
 
   getCountForJobRole() {
