@@ -171,12 +171,15 @@
             </span>
             <span></span>
             </div> -->
-        <mat-tab-group [(selectedIndex)]="selectedIndex" mat-align-tabs="start" animationDuration="1000ms"
+        <mat-tab-group (selectedTabChange)="getEnrolledCourses('','','')" [(selectedIndex)]="selectedIndex" mat-align-tabs="start" animationDuration="1000ms"
             class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
             <mat-tab>
                 <ng-template matTabLabel>
-                    <span class="tabsc" (click)="getEnrolledCourses('','','')" matBadge="{{ jobRoleSelected === true?jobOnGoingCourseCount : onGoingCourseCount }}" matBadgeOverlap="false">{{'Ongoing' }}</span>
+                    <div (click)="getEnrolledCourses('','','')">
 
+                   
+                    <span class="tabsc"  matBadge="{{ jobRoleSelected === true?jobOnGoingCourseCount : onGoingCourseCount }}" matBadgeOverlap="false">{{'Ongoing' }}</span>
+                </div>
                 </ng-template>
 
  <!-- Card start -->
@@ -782,11 +785,11 @@
             <!-- <div class=""> -->
             <ng-container *ngFor="let categorytab of categoryDetails">
             <mat-tab  *ngIf="categorytab.enrollCount">
-                <ng-template matTabLabel>
+                <ng-container matTabLabel>
                     <span class="tabsc" (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId,'')"
                       matBadge="{{categorytab.enrollCount}}"
                         matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span>
-                </ng-template>
+                </ng-container>
 
                 <div *ngFor="let course of enrolledCourses ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
