@@ -6,14 +6,14 @@
             <b>My Modules For</b>&nbsp;<b>:</b>
         </div>
         <div class="dropdown roleDropdDwnBtn">
-            <button class="roleBtn">
-                <span *ngIf="selectedJobRole.length > 12" tooltip="{{selectedJobRole}}" placement="right" [ngClass]="selectedJobRole === 'Select'?'roleSelect':'roleSelectChange'">
+            <button class="roleBtn" (click)="dropdownSelect()">
+                <span *ngIf="selectedJobRole.length > 12" tooltip="{{selectedJobRole}}" placement="right" [ngClass]="selectedJobRole === 'Job Role'?'roleSelect':'roleSelectChange'">
                     <!-- {{selectedJobRole | titlecase}} -->
                     {{(selectedJobRole | slice:0:12)+'...'}}
                 </span>
-                <span *ngIf="selectedJobRole.length <= 12" [ngClass]="selectedJobRole === 'Select'?'roleSelect':'roleSelectChange'">{{selectedJobRole | titlecase}}</span>
-                <span *ngIf="selectedJobRole != 'Select'" class="roleBatchOnSelect"  matBadge="{{jobroleEnrollCount}}"  matBadgeOverlap="false"></span>
-                <mat-icon [ngClass]="selectedJobRole === 'Select'?'roledropdownicon':'roledropdowniconSelect'" class="roledropdownicon">expand_more</mat-icon></button>
+                <span *ngIf="selectedJobRole.length <= 12" [ngClass]="selectedJobRole === 'Job Role'?'roleSelect':'roleSelectChange'">{{selectedJobRole | titlecase}}</span>
+                <span *ngIf="selectedJobRole != 'Job Role'" class="roleBatchOnSelect"  matBadge="{{jobroleEnrollCount}}"  matBadgeOverlap="false"></span>
+                <mat-icon [ngClass]="selectedJobRole === 'Job Role'?'roledropdownicon':'roledropdowniconSelect'" class="roledropdownicon">expand_more</mat-icon></button>
             <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'">
               <div class="contedrop" *ngFor="let role of jobRole" (click)="getEnrolledCourses(catalogueDetails.catalogueId,'',role.jobroleCategoryId);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount)">
                 <span *ngIf="role.jobroleCategoryName.length > 12" tooltip="{{role.jobroleCategoryName | titlecase}}" placement="right">
@@ -66,6 +66,10 @@
           <div class="dropdown">
             <span *ngFor="let item of dropDownCategoryDetails">
                 <span *ngIf="item.categories && item.categories.length > 0">
+                    <button (click)="openAvailableCource()" class="catDropdowns">
+                      {{item?.catalogueName | titlecase}}
+                      <mat-icon class="dropdownicon">expand_more</mat-icon>
+                    </button>
                     <button (click)="menuSelect(item.categories)"  
                     [matMenuTriggerFor]="childMenu" [ngClass]="color == true?'hovercolor':'catDropdown'" 
                     (mouseenter)="openMyMenu()">
@@ -1050,15 +1054,17 @@
 
 <ng-template #previewDialog>
         <mat-dialog-title>
-            <div class="row">
+            <div class="row rowMargin">
         <div class="col-8 text-left">
-            <span class="f_wt_600 size catnamenew">{{ categoryPopupData  | titlecase}} ({{categoryCount}})</span>
+            <mat-icon class="arrowPopup mr-2" *ngIf="availableCource" aria-hidden="false" (click)="closedialogbox()">keyboard_backspace</mat-icon>
+            <span class="f_wt_600 size catnamenew" *ngIf="!availableCource">{{ categoryPopupData  | titlecase}} ({{categoryCount}})</span>
         </div>
         <!-- <div class="col-0 col-sm-0 col-md-0 col-lg-6"> -->
             <!-- <input  matInput class="form-control search" placeholder="Search" [(ngModel)]="courseSearch"> -->
         <!-- </div> -->
         <div class="col-4 text-right">
-            <button mat-mini-fab class="close-button">
+            <mat-icon class="arrowIcon mr-2" *ngIf="availableCource" aria-hidden="false" (click)="closedialogbox(availableCource = false)">clear</mat-icon>
+            <button mat-mini-fab class="close-button" *ngIf="!availableCource">
                 <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
               </button>
         </div>
@@ -1066,8 +1072,14 @@
     </mat-dialog-title>
 
         <mat-dialog-content class="cardContainer">
+            <div class="row a-e" *ngIf="catagoryName !== 'vocational'">
+                <div class="col-12" *ngIf="categoryCount > 0">
+                    <span class="f_wt_600 size float-left catnamenew" *ngIf="availableCource">{{ categoryPopupData  | titlecase}} ({{categoryCount}})</span>
+                    </div>
+            </div>
             <div class="row a-e" *ngIf="catagoryName === 'vocational'">
                 <div class="col-12" *ngIf="categoryCount > 0">
+                    <span class="f_wt_600 size float-left catnamenew" *ngIf="availableCource">{{ categoryPopupData  | titlecase}} ({{categoryCount}})</span>
                     <button mat-stroked-button (click)="claimAll()" [disabled]="claimedStatuts?.length === 0"
                     class=" btl-alin blue_clr cap pointer m-t-05">
                     <!-- <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon> -->
@@ -1171,13 +1183,71 @@
     </div>
 </div> -->
 </div>
-
-<br>
-<br>
-<div *ngIf="!loading">
+<!----------------------- Overlay available cources screen -------------------------------->
+<div class="container" [ngClass]="availableCource == true ?'availableContainer': 'availableCont'">
+    <div class="row" *ngIf="dropdownCatDetails">
+        <div class="col-12 pr-0">
+            <div class="row">
+                <div class="col-6 text-left font-weight-bold hedding"> <p>Available Cource</p></div>
+                <div class="col-6 text-right"> <mat-icon class="arrowIcon mr-2" aria-hidden="false" (click)="availableCource = false">clear</mat-icon></div>
+            </div>
+            <ng-container *ngFor="let category of dropdownCatDetails.categories">
+                <div class="parrentAccordian">
+                    <div class="row w-100 h-100" >
+                        <div class="col-12 m-auto pr-0"> 
+                            <span class="accordianText" *ngIf="!category.subCategory" (click)="getCoureBasedOnCatalog(dropdownCatDetails,category,'','');viewCourse(category, previewDialog ,category.categoryName, category.totalCount)" (click)="(isExpandCourseTemp && expandActivityNameTemp == category.categoryId) ? onexpTemp(category,category.categoryId,false) : onexpTemp(category,category.categoryId,true)">
+                                {{category.categoryName | titlecase}}<span class="matBadgeAvail"  matBadge="{{category.totalCount}}"  matBadgeOverlap="false"></span>
+                            </span>
+                    <span class="accordianText"  *ngIf="category.subCategory" (click)="(isExpandCourseTemp && expandActivityNameTemp == category.categoryId) ? onexpTemp(category,category.categoryId,false) : onexpTemp(category,category.categoryId,true)">
+                        {{category.categoryName | titlecase}}<span class="matBadgeAvail"  matBadge="{{category.totalCount}}"  matBadgeOverlap="false"></span>
+                    </span>
+                    <mat-icon class="arrowIcon float-right" aria-hidden="false" *ngIf="!category.subCategory" (click)="getCoureBasedOnCatalog(dropdownCatDetails,category,'','');viewCourse(category, previewDialog ,category.categoryName, category.totalCount)">keyboard_arrow_right</mat-icon>
+                    <mat-icon class="arrowIcon float-right" aria-hidden="false" *ngIf="expandActivityNameTemp !== category.categoryId && category.subCategory" (click)="(isExpandCourseTemp && expandActivityNameTemp == category.categoryId) ? onexpTemp(category, category.categoryId,false) : onexpTemp(category, category.categoryId,true)">keyboard_arrow_right</mat-icon>
+                    <mat-icon class="arrowIcon float-right" aria-hidden="false" *ngIf="isExpandCourseTemp && expandActivityNameTemp == category.categoryId" (click)="(isExpandCourseTemp && expandActivityNameTemp == category.categoryId) ? onexpTemp(category, category.categoryId,false) : onexpTemp( category,category.categoryId,true)">keyboard_arrow_up</mat-icon>
+              
+                    <ng-container *ngIf="(isExpandCourseTemp && expandActivityNameTemp == category.categoryId)">
+                        <ng-container *ngFor="let subCatet of category.subCategory">
+                            <div class="parrentAccordianSub">
+                               <div class="row w-100 h-100" >
+                        <div class="col-12 m-auto pr-0"> 
+                                <span class="accordianText ml-5" (click)="(isExpChild && expandActivityNameChildTemp == subCatet.subCategoryId) ? onexpchildTemp( subCatet.subCategoryId,false) : onexpchildTemp( subCatet.subCategoryId,true)">
+                                    {{subCatet.subCategoryName | titlecase}}  <span class="matBadgeAvail"  matBadge="{{subCatet.totalCount}}"  matBadgeOverlap="false"></span>
+                                </span>
+                                <mat-icon class="arrowIcon float-right" aria-hidden="false" *ngIf="expandActivityNameChildTemp !== subCatet.subCategoryId" (click)="(isExpChild && expandActivityNameChildTemp == subCatet.subCategoryId) ? onexpchildTemp( subCatet,subCatet.subCategoryId,false) : onexpchildTemp( subCatet,subCatet.subCategoryId,true)">keyboard_arrow_right</mat-icon>
+                                <mat-icon class="arrowIcon float-right" aria-hidden="false" *ngIf="isExpChild && subCatet.superSubCategory && expandActivityNameChildTemp == subCatet.subCategoryId" (click)="(isExpChild && expandActivityNameChildTemp == subCatet.subCategoryId) ? onexpchildTemp( subCatet,subCatet.subCategoryId,false) : onexpchildTemp( subCatet,subCatet.subCategoryId,true)">keyboard_arrow_up</mat-icon>
+                           
+                                <ng-container *ngIf="(isExpChild && expandActivityNameChildTemp == subCatet.subCategoryId)">
+                                    <ng-container *ngFor="let superSubCat of subCatet.superSubCategory">
+                                        <div class="parrentAccordiansuper">
+                                            <div class="row w-100 h-100 parrentSubAccord">
+                                                <div class="col-12 m-auto pr-0"> 
+                                            <span class="accordianTextsub" (click)="menuSelect(subCatet,superSubCat);
+                                            getCoureBasedOnCatalog(dropdownCatDetails,category,subCatet.subCategoryId, superSubCat.superSubCategoryId);
+                                              viewCourse(category,previewDialog,subCatet.superSubCategoryName,superSubCat.totalCount)">{{superSubCat.superSubCategoryName | titlecase}}<span class="matBadgeAvail"  matBadge="{{superSubCat.totalCount}}"  matBadgeOverlap="false"></span></span>
+                                        </div>
+                                        </div>
+                                        </div>
+                                    </ng-container>
+                                </ng-container>
+                            </div>
+                        </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+            </ng-container>
+        </div>
+    </div>
+<br [ngClass]="availableCource == true ?'displayNone':''">
+<br [ngClass]="availableCource == true ?'displayNone':''">
+<div *ngIf="!loading" [ngClass]="availableCource == true ?'displayNone':''">
     <div class="footer" >
         <span class="powered">
             <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
         </span>
     </div>
+</div>
+ 
 </div>

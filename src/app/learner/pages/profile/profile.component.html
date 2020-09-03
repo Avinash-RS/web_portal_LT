@@ -184,7 +184,7 @@
 
         <!-- //////Gender part//////// -->
         <div class="row genderRow" *ngIf="!cannotEdit">
-          <div class="col-md-4 col-lg-4 col-sm-12 col-12">
+          <div class="col-md-4 col-lg-4 col-sm-12 col-12 genderCol">
             <label class="p-b-10px f_size_19">{{'Gender'  }}</label>
             <span class="mand p-b-10px"> *</span>
             <div class="form-group radioBtnGrp">
@@ -196,7 +196,7 @@
             </div>
           </div>
 
-          <div class="col-md-4 col-lg-4 col-sm-12 col-12">
+          <div class="col-md-4 col-lg-4 col-sm-12 col-12 genderCol">
             <label class="p-b-10px f_size_19">{{'I Am a'  }}</label>
             <span class="mand p-b-10px"> *</span>
             <div class="form-group ">
@@ -208,7 +208,7 @@
             </div>
           </div>
 
-          <div class="col-md-4 col-lg-4 col-sm-12 col-12 ">
+          <div class="col-md-4 col-lg-4 col-sm-12 col-12 genderCol">
             <div class="form-group p-b-10px">
               <label class="f_size_19">{{'Languages known'  }}</label><br>
               <mat-select [disabled]='cannotEdit' multiple class="inputs col-md-6 col-sm-12 col-12"

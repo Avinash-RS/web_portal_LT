@@ -932,6 +932,55 @@ hr {
 .menuBtnHoriz {
   display: none;
 }
+
+.availableCont {
+  display: none;
+}
+.catDropdowns {
+display: none;
+}
+
+.parrentAccordian {
+  border-bottom: 1px solid #E0E0E0;
+  padding: 20px 0px;
+}
+
+.parrentAccordianSub{
+  padding: 20px 0px;
+}
+
+.parrentAccordiansuper{
+  padding: 20px 0px;
+}
+
+.hedding {
+  font-size: 16px;
+}
+.accordianText  {
+  font-size: 16px;
+  color:#000000;
+}
+
+.parrentSubAccord {
+  height: 100%;
+  margin-top: 1rem;
+}
+
+.accordianTextsub {
+  font-size: 16px;
+  color:#000000;
+  margin-left: 5rem;
+}
+
+.matBadgeAvail {
+  position: relative;
+  background: #5c6873 !important;
+  & .mat-badge-content {
+    background: $lxp-gray !important;
+  }
+}
+
+
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
   .catalogDropdownCol {
@@ -939,19 +988,71 @@ hr {
     margin-bottom: 0.5rem;
     padding-right: 1.5rem;
   }
+  .arrowIcon .material-icons {
+    float: right;
+    margin-top: 1%;
+  }
+
+  .cardContainer{
+    height: 100% !important;
+    max-height: 100% !important;
+  }
+  
+  .arrowPopup {
+    font-size: 24px;
+  }
+
+  .rowMargin {
+    margin-bottom: 20px;
+  }
+
   .primerFlage{
     height: 75px;
     position: absolute;
     margin-left: -4px;
     z-index: 1;
   }
+  ::ng-deep .mat-dialog-container {
+    overflow: hidden !important;
+  }
+
+
+  .availableContainer {
+    position: fixed; 
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    padding: 20px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $color_white;
+    z-index: 2; 
+    cursor: pointer; 
+  }
+
+  .displayNone {
+    display: none;
+  }
 
 .catDropdown {
+  display: none;
+  // padding: 2px !important;
+  // float: right;
+  // border: 0px solid #898989 !important;
+  // font-size: 14px !important;
+  // width: 135px !important;
+}
+
+.catDropdowns {
+  display: block;
   padding: 2px !important;
   float: right;
   border: 0px solid #898989 !important;
   font-size: 14px !important;
   width: 135px !important;
+  background-color: white;
 }
  
   #cdk-overlay-0 {
@@ -963,8 +1064,10 @@ hr {
   }
 
 ::ng-deep .dialogContainer {
-    width: 95% !important;
-    max-height: 85% !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    overflow: hidden !important;
     margin: auto;
   }
 
@@ -1072,7 +1175,7 @@ hr {
   .roleBtn {
     font-size: 14px !important;
     padding: 0px !important;
-    width: 100px !important;
+    width: 110px !important;
     border: 0px solid #898989 !important;
   }
 
@@ -1759,6 +1862,7 @@ hr {
   background-color: $lxp-theme-green;
   color: $color-white;
 }
+
 .roleSelect{
   float: left;
     padding-left: 7px;

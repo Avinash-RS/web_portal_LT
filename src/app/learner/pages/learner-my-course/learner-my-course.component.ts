@@ -45,6 +45,7 @@ export class LearnerMyCourseComponent implements OnInit {
   showUpcoming: string;
   categoryDetails: any;
   dropDownCategoryDetails = [];
+  dropdownCatDetails = [];
   catalogueName: any;
   activity: any;
   catalogueDetails: any;
@@ -71,11 +72,16 @@ export class LearnerMyCourseComponent implements OnInit {
   categoryNamePrint: any;
   color = false;
   categoryCount: number;
-
+  availableCource = false;
   jobRoleSelected = false;
   jobOnGoingCourseCount = 0;
   jobCompletedCourseCount = 0;
   jobAllCourseCount = 0;
+  panelOpenState = false;
+  expandActivityNameTemp: any;
+  isExpandCourseTemp: any;
+  expandActivityNameChildTemp: any;
+  isExpChild: any;
 
   constructor(
     public translate: TranslateService,
@@ -125,6 +131,12 @@ export class LearnerMyCourseComponent implements OnInit {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
   }
+
+  openAvailableCource() {
+    this.availableCource = true;
+    console.log('this.availableCource', this.availableCource);
+  }
+
   menuSelect(subchild, superchild) {
     // this.categoryPopupData.categoryName1 = superchild.superSubCategoryName;
     this.categoryyName = superchild;
@@ -150,6 +162,10 @@ export class LearnerMyCourseComponent implements OnInit {
         }
       });
   }
+  dropdownSelect() {
+    this.viewCourseClass = true;
+  }
+
   getEnrolledCourses(catalougeId, catagoryId, jobRoleCategoryId) {
     this.categoryNamePrint = catagoryId;
     if (!jobRoleCategoryId) { this.selectedJobRole = 'Job Role'; }
@@ -163,6 +179,7 @@ export class LearnerMyCourseComponent implements OnInit {
               if (element.course_duration) {
                 if (Number(element.course_duration.slice(3, 5)) >= 30) {
                   element.course_duration = Number(element.course_duration.slice(0, 2)) + 1;
+                  
                 } else {
                   element.course_duration = Number(element.course_duration.slice(0, 2));
                 }
@@ -290,6 +307,8 @@ export class LearnerMyCourseComponent implements OnInit {
         this.catalogueDetails = data.data.getCountForCategories.data;
         this.categoryDetails = data.data.getCountForCategories.data.categories;
         this.dropDownCategoryDetails = [data.data.getCountForCategories.data];
+        this.dropdownCatDetails = this.dropDownCategoryDetails[0];
+        console.log('this.dropDownCategoryDetails', this.dropDownCategoryDetails[0]);
       }
     });
   }
@@ -371,8 +390,28 @@ export class LearnerMyCourseComponent implements OnInit {
   }
 
   dropdownValueChange(selectedValue, count) {
+    this.viewCourseClass = false;
     this.selectedJobRole = selectedValue;
     this.jobroleEnrollCount = count;
+  }
+
+//-------------mobile responsive function-----------------------------
+  
+onexpTemp(category,id, isexps) {
+  console.log('111111111', category);
+  this.expandActivityNameTemp = isexps ? id : null;
+  this.isExpandCourseTemp = false;
+  if(!this.isExpChild && category.subCategory) {
+    this.isExpandCourseTemp = true;
+  } else if (id === 'vrl22wqj7'|| id === 'vpcqlpdr1') {
+    
+  }
+
+  }
+  onexpchildTemp(id, isexp) {
+    console.log('2222222222222');
+    this.expandActivityNameChildTemp = isexp ? id : null;
+    this.isExpChild = isexp ? true : false;
   }
 }
 
