@@ -1471,11 +1471,30 @@ hr {
   font-size: large;
 }
 .search {
-  width: 60%;
+  width: 76%;
+  margin-left: 38px;
+  // position: relative;
+  // left: 69px;
+  // top: 1px;
+  border: 1px solid #898989;
+  border-radius: 0px;
+  height: 38px;
+  // outline: none !important;
+  // box-shadow: 0 0 0 2px rgba(21, 156, 228, 0.4);
+}
+
+.popupsearch {
+  width: 80%;
   position: relative;
-  bottom: 2px;
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(21, 156, 228, 0.4);
+  left: 77px;
+  top: 1px;
+  border: 1px solid #898989;
+  border-radius: 0px;
+  height: 100%;
+  outline: none !important;
+  &:active {
+    display: none;
+  }
 }
 /* dropdown badge alignment */
 // #mat-badge-content-6, #mat-badge-content-7 ,#mat-badge-content-8{
@@ -1808,14 +1827,32 @@ hr {
 }
 ::ng-deep .subchildMenu{
   width: 155px !important;
-  margin-top: 120px !important;
+  position: relative !important;
+  // margin-top: 120px !important;
 }
 ::ng-deep .superSubMenu{
   width: 155px !important;
-  position: relative;
-  top: 120px;
-  right: 310px;
+  position:  relative !important;
+  // position: relative;
+  // top: 120px;
+  // right: 310px;
 }
 .mat-menu-item-submenu-trigger::after {
   right: 6px !important;
 }
+// .searchIcon {
+//   position: relative;
+//     bottom: 26px;
+//     left: 85%;
+// }
+.inner-addon {
+  position: relative;
+}
+
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+.right-addon .glyphicon { right: 42px;}
+.right-addon input { padding-right: 30px; }

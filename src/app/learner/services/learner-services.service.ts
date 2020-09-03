@@ -577,7 +577,7 @@ export class LearnerServicesService {
       }
     });
   }
-  get_enrolled_courses(user_id, id, catalogue_id, category_id, jobRoleCategoryId) {
+  get_enrolled_courses(user_id, id, catalogue_id, category_id, jobRoleCategoryId, searchString) {
     return this.Apollo.query({
       query: getLearnerenrolledCourses,
       variables: {
@@ -585,7 +585,8 @@ export class LearnerServicesService {
         user_obj_id: id,
         catalogue_id,
         category_id,
-        jobRoleCategoryId
+        jobRoleCategoryId,
+        searchString
       }
     });
   }
