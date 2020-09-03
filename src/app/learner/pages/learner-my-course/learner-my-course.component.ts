@@ -134,7 +134,6 @@ export class LearnerMyCourseComponent implements OnInit {
 
   openAvailableCource() {
     this.availableCource = true;
-    console.log('this.availableCource', this.availableCource);
   }
 
   menuSelect(subchild, superchild) {
@@ -308,7 +307,6 @@ export class LearnerMyCourseComponent implements OnInit {
         this.categoryDetails = data.data.getCountForCategories.data.categories;
         this.dropDownCategoryDetails = [data.data.getCountForCategories.data];
         this.dropdownCatDetails = this.dropDownCategoryDetails[0];
-        console.log('this.dropDownCategoryDetails', this.dropDownCategoryDetails[0]);
       }
     });
   }
@@ -398,7 +396,6 @@ export class LearnerMyCourseComponent implements OnInit {
 //-------------mobile responsive function-----------------------------
   
 onexpTemp(category,id, isexps) {
-  console.log('111111111', category);
   this.expandActivityNameTemp = isexps ? id : null;
   this.isExpandCourseTemp = false;
   if(!this.isExpChild && category.subCategory) {
@@ -409,7 +406,6 @@ onexpTemp(category,id, isexps) {
 
   }
   onexpchildTemp(id, isexp) {
-    console.log('2222222222222');
     this.expandActivityNameChildTemp = isexp ? id : null;
     this.isExpChild = isexp ? true : false;
   }
