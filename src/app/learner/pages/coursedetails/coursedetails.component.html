@@ -574,7 +574,7 @@
                             <br>
                             <div *ngIf="showCourseDetails">
                                 <div class="p-l-0 no_border">
-                                    <div class="col-12 forum-width">
+                                    <div class="col-12 forum-width" [ngClass]="{'width_70 center p-l-0': !drawer.opened}">
                                         <div class="row" *ngIf="selectedModuleData">
                                             <p (click)="gotoDisplayAllThreads()">
                                                 <span
@@ -591,7 +591,7 @@
 
                             <div *ngIf="showCommentThread" class="no_border">
                                 <div class="p-l-0">
-                                    <div class="col-12 forum-width">
+                                    <div class="col-12 forum-width" [ngClass]="{'width_70 center p-l-0': !drawer.opened}">
                                         <div class="row" *ngIf="selectedModuleData">
                                             <p (click)="gotoDisplayAllThreads();viewAllThreads()">
                                                 <span class="color-blue f_size_16 f_wt_500"
@@ -605,7 +605,7 @@
                             </div>
                             <br>
 
-                            <div *ngIf="showCourseDetails" class="forum-width">
+                            <div *ngIf="showCourseDetails" class="forum-width" [ngClass]="{'width_70 center' : !drawer.opened}">
                                 <!-- Header starts here -->
                                 <mat-card class=" black_border box_shadow alignment ">
                                     <div class="row">
@@ -701,7 +701,7 @@
                             </div>
 
                             <div *ngIf="!loadingForum && showCourseDetails && (discussionData === null || discussionData?.topics?.length ===0)"
-                                class="forum-width">
+                                class="forum-width" [ngClass]="{'width_70 center' : !drawer.opened}">
                                 <br><br>
                                 <mat-card class="black_border m-bt-4 box_shadow center center_align f_size_16">
                                     <br>
@@ -711,7 +711,7 @@
                             </div>
 
                             <div class="comment_card forum-width"
-                                *ngIf="showCommentThread && selectedThreadData != null">
+                                *ngIf="showCommentThread && selectedThreadData != null" [ngClass]="{'width_70 center' : !drawer.opened}">
                                 <!-- for thread -->
                                 <mat-card class="black_border m-b-10 no-radius no_padding">
                                     <!-- name row start -->
