@@ -15,7 +15,7 @@
                 <span *ngIf="selectedJobRole != 'Job Role'" class="roleBatchOnSelect"  matBadge="{{jobroleEnrollCount}}"  matBadgeOverlap="false"></span>
                 <mat-icon [ngClass]="selectedJobRole === 'Job Role'?'roledropdownicon':'roledropdowniconSelect'" class="roledropdownicon">expand_more</mat-icon></button>
             <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'">
-              <div class="contedrop" *ngFor="let role of jobRole" (click)="getEnrolledCourses(catalogueDetails.catalogueId,'',role.jobroleCategoryId);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount)">
+              <div class="contedrop" *ngFor="let role of jobRole" (click)="getEnrolledCourses(catalogueDetails.catalogueId,'','',role.jobroleCategoryId);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount)">
                 <span *ngIf="role.jobroleCategoryName.length > 12" tooltip="{{role.jobroleCategoryName | titlecase}}" placement="right">
                     {{(role.jobroleCategoryName | slice:0:12)+'...'}}
                 </span>
@@ -175,9 +175,7 @@
             <mat-tab>
                 <div class="row">
                     <div class="col-6 m-auto">
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vrl22wqj7'">College Connect</span>
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == '4ai2p2k0d'">Vocational</span> 
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vpcqlpdr1'">Pro Certification</span>
+                        <span class="menuBtnHoriz">{{categoryNamePrint | titlecase}}</span>
                     </div> 
                         <div class="col-6">
                     <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
@@ -397,9 +395,7 @@
             <mat-tab>
                 <div class="row">
                     <div class="col-6 m-auto">
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vrl22wqj7 '">College Connect</span>
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == '4ai2p2k0d '">Vocational</span> 
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vpcqlpdr1 '">Pro Certification</span> 
+                        <span class="menuBtnHoriz">{{categoryNamePrint | titlecase}}</span>
                     </div>
                     <div class="col-6 ">
                     <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
@@ -614,9 +610,7 @@
             <mat-tab>
                 <div class="row">
                     <div class="col-6  m-auto">
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vrl22wqj7 '">College Connect</span>
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == '4ai2p2k0d '">Vocational</span> 
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vpcqlpdr1 '">Pro Certification</span> 
+                        <span class="menuBtnHoriz">{{categoryNamePrint | titlecase}}</span>                        
                     </div>
                     <div class="col-6">
                     <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
@@ -842,9 +836,7 @@
             <mat-tab  *ngIf="categorytab.enrollCount">
                 <div class="row">
                     <div class="col-6 m-auto">
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vrl22wqj7'">College Connect</span>
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == '4ai2p2k0d '">Vocational</span> 
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vpcqlpdr1 '">Pro Certification</span> 
+                        <span class="menuBtnHoriz">{{categoryNamePrint | titlecase}}</span>
                     </div>
                     <div class="col-6">
                     <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">

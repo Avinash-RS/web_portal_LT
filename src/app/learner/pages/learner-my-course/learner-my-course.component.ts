@@ -43,12 +43,12 @@ export class LearnerMyCourseComponent implements OnInit {
   showCompleted: string;
   showOngoing: string;
   showUpcoming: string;
-  categoryDetails: any;
+  categoryDetails: any[]=[];
   dropDownCategoryDetails = [];
   dropdownCatDetails = [];
   catalogueName: any;
   activity: any;
-  catalogueDetails: any;
+  catalogueDetails : any;
   pagenumber = 0;
   allcourses: any;
   categoryPopupData: any = [];
@@ -88,7 +88,7 @@ export class LearnerMyCourseComponent implements OnInit {
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
     private router: Router, private dialog: MatDialog) {
     this.userDetailes = this.gs.checkLogout();
-    this.getEnrolledCourses('', '', '');
+    this.getEnrolledCourses('', '' ,'');
     this.getScreenSize();
     this.getCountForCategories();
     this.getCountForJobRole();
@@ -153,7 +153,7 @@ export class LearnerMyCourseComponent implements OnInit {
                 this.loading = false;
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
-                this.getEnrolledCourses('', '', '');
+                this.getEnrolledCourses('', '' ,'');
                 this.getCountForJobRole();
                 this.getCountForJobRole();
               }
@@ -164,9 +164,18 @@ export class LearnerMyCourseComponent implements OnInit {
   dropdownSelect() {
     this.viewCourseClass = true;
   }
-
-  getEnrolledCourses(catalougeId, catagoryId, jobRoleCategoryId) {
-    this.categoryNamePrint = catagoryId;
+  getCatName(data) {
+    console.log('data', data);
+  }
+  getEnrolledCourses(catalougeId,catagoryId, jobRoleCategoryId) {
+    let categoryName : any;
+    if (this.catalogueDetails) {
+      categoryName = this.categoryDetails.filter(function(data) {
+        return data.categoryId === catagoryId;
+      });
+      console.log('categoryName', categoryName);
+      this.categoryNamePrint = categoryName[0].categoryName;
+  }
     if (!jobRoleCategoryId) { this.selectedJobRole = 'Job Role'; }
     this.loading = true;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
@@ -360,7 +369,7 @@ export class LearnerMyCourseComponent implements OnInit {
               if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
-                this.getEnrolledCourses('', '', '');
+                this.getEnrolledCourses('', '','');
                 this.getCountForJobRole();
                 this.getCountForJobRole();
               }
