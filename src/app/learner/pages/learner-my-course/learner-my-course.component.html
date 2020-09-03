@@ -98,7 +98,7 @@
                             <span class="matBadgeSubmenu"  matBadge="{{subchild.totalCount}}"  matBadgeOverlap="false"></span>
                           </button>
                            <!-----------------------------Super Sub Category--------------------------------------->
-                          <mat-menu class="subchildMenu" #childMenu3="matMenu" [overlapTrigger]="false">
+                          <mat-menu class="superSubMenu" #childMenu3="matMenu" [overlapTrigger]="false">
                       <span *ngFor="let superChild of subchild.superSubCategory">
                           <button mat-menu-item (click)="menuSelect(subchild,superChild);
                           getCoureBasedOnCatalog(item,child,subchild.subCategoryId, superChild.superSubCategoryId);
