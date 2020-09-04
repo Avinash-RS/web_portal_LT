@@ -167,10 +167,10 @@ export class LearnerMyCourseComponent implements OnInit {
   getCatName(data) {
     console.log('data', data);
   }
-  getEnrolledCourses(catalougeId,catagoryId, jobRoleCategoryId) {
-    let categoryName : any;
+  getEnrolledCourses(catalougeId, catagoryId, jobRoleCategoryId) {
+    let categoryName: any;
     if (this.catalogueDetails) {
-      categoryName = this.categoryDetails.filter(function(data) {
+      categoryName = this.categoryDetails.filter(function(data: any) {
         return data.categoryId === catagoryId;
       });
       console.log('categoryName', categoryName);
@@ -187,7 +187,6 @@ export class LearnerMyCourseComponent implements OnInit {
               if (element.course_duration) {
                 if (Number(element.course_duration.slice(3, 5)) >= 30) {
                   element.course_duration = Number(element.course_duration.slice(0, 2)) + 1;
-                  
                 } else {
                   element.course_duration = Number(element.course_duration.slice(0, 2));
                 }
