@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="myCourse">
 <div class="row">
-    <div class="col-8 col-sm-8 col-md-7 col-lg-8 catalogTitle">
+    <div class="col-8 col-sm-8 col-md-7 col-lg-7 catalogTitle">
         <div class="f_size_16 myC-head">
             <b>My Modules For</b>&nbsp;<b>:</b>
         </div>
@@ -26,7 +26,7 @@
           </div>
     </div>
 
-    <div class="col-4 col-sm-4 col-md-5 col-lg-4 catalogDropdownCol">
+    <div class="col-4 col-sm-4 col-md-5 col-lg-5 catalogDropdownCol">
         
       <!-- <span>
       
@@ -63,14 +63,14 @@
 
           <!---------------Multi-level dropdown------------->
           <div class="row">
-              <div class="col-8">
+              <div class="col-4 col-lg-8 searchCol">
                   <div class="inner-addon right-addon">
                     <mat-icon class="glyphicon">search</mat-icon>
                     <input type="text" class="form-control search"
                     [(ngModel)]="searchName" (keyup)="getEnrolledCourses('','','',searchName)" placeholder="Search courses,categories.." />
                   </div>
               </div>
-              <div class="col-4">
+              <div class="col-8 col-lg-4">
           <div class="dropdown">
             <span *ngFor="let item of dropDownCategoryDetails">
                 <span *ngIf="item.categories && item.categories.length > 0">
@@ -167,7 +167,7 @@
 
 <!-- tabs here -->
 <div class="row bodybg">
-    <div class="col-12">
+    <div class="col-12 matTabCol">
 
        
         <!-- <div class="catPost">
@@ -184,9 +184,7 @@
             <mat-tab>
                 <div class="row">
                     <div class="col-6 m-auto">
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vrl22wqj7'">College Connect</span>
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == '4ai2p2k0d'">Vocational</span> 
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vpcqlpdr1'">Pro Certification</span>
+                        <span class="menuBtnHoriz">{{categoryNamePrint | titlecase}}</span>
                     </div> 
                         <div class="col-6">
                     <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
@@ -390,11 +388,11 @@
                 <div *ngIf="onGoingCourseCount === 0">
                     <mat-card class="coursebg width_90 errorCard">
                         <div class="row width_90 no_margin">
-                            <div class="col-1 display_flex pointer no_pl mt-4"
+                            <div class="col-4 col-sm-4 col-md-1 display_flex pointer no_pl mt-4"
                                 (click)="gotoDesc(course)">
                                 <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs">
                             </div>
-                            <div class="col-11  no_pl errorboxx">
+                            <div class="col-8 col-md-11  no_pl errorboxx">
                                 <span style="font-size: medium;">{{'You have no ongoing courses at the moment.' | translate }}</span>
                             </div>
                         </div>
@@ -406,9 +404,7 @@
             <mat-tab>
                 <div class="row">
                     <div class="col-6 m-auto">
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vrl22wqj7 '">College Connect</span>
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == '4ai2p2k0d '">Vocational</span> 
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vpcqlpdr1 '">Pro Certification</span> 
+                        <span class="menuBtnHoriz">{{categoryNamePrint | titlecase}}</span>
                     </div>
                     <div class="col-6 ">
                     <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
@@ -623,9 +619,7 @@
             <mat-tab>
                 <div class="row">
                     <div class="col-6  m-auto">
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vrl22wqj7 '">College Connect</span>
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == '4ai2p2k0d '">Vocational</span> 
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vpcqlpdr1 '">Pro Certification</span> 
+                        <span class="menuBtnHoriz">{{categoryNamePrint | titlecase}}</span>                        
                     </div>
                     <div class="col-6">
                     <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
@@ -851,9 +845,7 @@
             <mat-tab  *ngIf="categorytab.enrollCount">
                 <div class="row">
                     <div class="col-6 m-auto">
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vrl22wqj7'">College Connect</span>
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == '4ai2p2k0d '">Vocational</span> 
-                        <span class="menuBtnHoriz" *ngIf="categoryNamePrint == 'vpcqlpdr1 '">Pro Certification</span> 
+                        <span class="menuBtnHoriz">{{categoryNamePrint | titlecase}}</span>
                     </div>
                     <div class="col-6">
                     <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
