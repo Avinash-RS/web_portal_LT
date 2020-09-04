@@ -184,7 +184,6 @@ export class LearnerMyCourseComponent implements OnInit {
               if (element.course_duration) {
                 if (Number(element.course_duration.slice(3, 5)) >= 30) {
                   element.course_duration = Number(element.course_duration.slice(0, 2)) + 1;
-                  
                 } else {
                   element.course_duration = Number(element.course_duration.slice(0, 2));
                 }
@@ -399,15 +398,13 @@ export class LearnerMyCourseComponent implements OnInit {
     this.jobroleEnrollCount = count;
   }
 
-//-------------mobile responsive function-----------------------------
-  
-onexpTemp(category,id, isexps) {
+// -------------mobile responsive function-----------------------------
+onexpTemp(category, id, isexps) {
   this.expandActivityNameTemp = isexps ? id : null;
   this.isExpandCourseTemp = false;
-  if(!this.isExpChild && category.subCategory) {
+  if (!this.isExpChild && category.subCategory) {
     this.isExpandCourseTemp = true;
-  } else if (id === 'vrl22wqj7'|| id === 'vpcqlpdr1') {
-    
+  } else if (id === 'vrl22wqj7' || id === 'vpcqlpdr1') {
   }
 
   }
