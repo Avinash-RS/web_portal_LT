@@ -980,7 +980,9 @@ display: none;
   }
 }
 
-
+.searchCol {
+  padding-right: 5px;
+}
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
   .catalogDropdownCol {
@@ -991,6 +993,14 @@ display: none;
   .arrowIcon .material-icons {
     float: right;
     margin-top: 1%;
+  }
+  .matTabCol{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+
+  :host ::ng-deep.container {
+    margin-left: 0px !important;
   }
 
   .errorboxx {
@@ -1049,6 +1059,10 @@ display: none;
   // width: 135px !important;
 }
 
+.hovercolor {
+  display: none;
+}
+
 .catDropdowns {
   display: block;
   padding: 2px !important;
@@ -1084,7 +1098,10 @@ display: none;
   }
 
   .bodybg {
-    padding-right: 0px;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
   }
   .catalogTitle {
     margin: auto;
@@ -1209,6 +1226,18 @@ display: none;
   display: none !important;
 }
 
+// Temporary css 
+.glyphicon {
+  display: none;
+}
+
+.right-addon {
+  display: none;
+}
+
+.popupsearch {
+  display: none;
+}
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
@@ -1307,6 +1336,10 @@ display: none;
     display: none !important;
   }
 
+  // Temp css
+  .inner-addon {
+    display: none;
+  }
 }
 
 // @media (max-width: 480px) and (max-width: 320px) {
@@ -1357,6 +1390,9 @@ display: none;
   .btl-alin {
     margin-left: -8%;
   }
+  .searchCol {
+    padding-right: 15px;
+  }
 
   .roleDropdDwnBtn {
     right: 58% !important;
@@ -1366,7 +1402,21 @@ display: none;
 @media only screen and (width: 1024px) {
 
   .roleDropdDwnBtn {
-    right: 46% !important;
+    right: 50% !important;
+  }
+
+  .searchCol {
+    padding-right: 15px;
+  }
+
+  .right-addon .glyphicon {
+    right: 45px !important;
+}
+
+  .search {
+    width: 83% !important;
+    margin-left: 10px !important;
+    float: left !important;
   }
 
   :host ::ng-deep #mat-tab-label-0-3 {
@@ -1579,10 +1629,30 @@ display: none;
 }
 .search {
   width: 60%;
+  float: right;
+  margin-left: 38px;
+  // position: relative;
+  // left: 69px;
+  // top: 1px;
+  border: 1px solid #898989;
+  border-radius: 0px;
+  height: 38px;
+  // outline: none !important;
+  // box-shadow: 0 0 0 2px rgba(21, 156, 228, 0.4);
+}
+
+.popupsearch {
+  width: 80%;
   position: relative;
-  bottom: 2px;
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(21, 156, 228, 0.4);
+  left: 77px;
+  top: 1px;
+  border: 1px solid #898989;
+  border-radius: 0px;
+  height: 100%;
+  outline: none !important;
+  &:active {
+    display: none;
+  }
 }
 /* dropdown badge alignment */
 // #mat-badge-content-6, #mat-badge-content-7 ,#mat-badge-content-8{
@@ -1846,7 +1916,7 @@ display: none;
 }
 ::ng-deep .roleDropdDwnBtn{
   position: absolute !important;
-    right: 65% !important;
+    right: 62% !important;
     bottom: 2% !important;
 }
 .roleBtn{
@@ -1894,7 +1964,6 @@ display: none;
 }
 .roledropdownicon{
   position: relative;
-    top: 3px;
     float: right;
 }
 .mat-menu-item:hover:not([disabled]) {
@@ -1916,14 +1985,35 @@ display: none;
 }
 ::ng-deep .subchildMenu{
   width: 155px !important;
+  position: relative !important;
   margin-top: 120px !important;
 }
 ::ng-deep .superSubMenu{
   width: 155px !important;
-  position: relative;
-  top: 120px;
-  right: 310px;
+  position: relative !important;
+  top: 120px !important;
+  right: 310px !important;
 }
 .mat-menu-item-submenu-trigger::after {
   right: 6px !important;
+}
+// .searchIcon {
+//   position: relative;
+//     bottom: 26px;
+//     left: 85%;
+// }
+.inner-addon {
+  position: relative;
+}
+
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+.right-addon .glyphicon { right: 15px;}
+.right-addon input { padding-right: 30px; }
+.search:focus {
+  border: 1px solid #C02222;
+  box-shadow: 0 0 0 0.05rem #C02222 !important;
 }

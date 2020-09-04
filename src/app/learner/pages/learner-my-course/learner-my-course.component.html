@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="myCourse">
 <div class="row">
-    <div class="col-8 col-sm-8 col-md-7 col-lg-8 catalogTitle">
+    <div class="col-8 col-sm-8 col-md-7 col-lg-7 catalogTitle">
         <div class="f_size_16 myC-head">
             <b>My Modules For</b>&nbsp;<b>:</b>
         </div>
@@ -15,7 +15,7 @@
                 <span *ngIf="selectedJobRole != 'Job Role'" class="roleBatchOnSelect"  matBadge="{{jobroleEnrollCount}}"  matBadgeOverlap="false"></span>
                 <mat-icon [ngClass]="selectedJobRole === 'Job Role'?'roledropdownicon':'roledropdowniconSelect'" class="roledropdownicon">expand_more</mat-icon></button>
             <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'">
-              <div class="contedrop" *ngFor="let role of jobRole" (click)="getEnrolledCourses(catalogueDetails.catalogueId,'','',role.jobroleCategoryId);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount)">
+              <div class="contedrop" *ngFor="let role of jobRole" (click)="getEnrolledCourses(catalogueDetails.catalogueId,'',role.jobroleCategoryId,searchName);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount)">
                 <span *ngIf="role.jobroleCategoryName.length > 12" tooltip="{{role.jobroleCategoryName | titlecase}}" placement="right">
                     {{(role.jobroleCategoryName | slice:0:12)+'...'}}
                 </span>
@@ -26,7 +26,7 @@
           </div>
     </div>
 
-    <div class="col-4 col-sm-4 col-md-5 col-lg-4 catalogDropdownCol">
+    <div class="col-4 col-sm-4 col-md-5 col-lg-5 catalogDropdownCol">
         
       <!-- <span>
       
@@ -62,7 +62,15 @@
 
 
           <!---------------Multi-level dropdown------------->
-
+          <div class="row">
+              <div class="col-4 col-lg-8 searchCol">
+                  <div class="inner-addon right-addon">
+                    <mat-icon class="glyphicon">search</mat-icon>
+                    <input type="text" class="form-control search"
+                    [(ngModel)]="searchName" (keyup)="getEnrolledCourses('','','',searchName)" placeholder="Search courses,categories.." />
+                  </div>
+              </div>
+              <div class="col-8 col-lg-4">
           <div class="dropdown">
             <span *ngFor="let item of dropDownCategoryDetails">
                 <span *ngIf="item.categories && item.categories.length > 0">
@@ -78,40 +86,40 @@
                     </button>
                   <!----------------------------Category--------------------------------->
                   <!-- <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'"> -->
-                  <mat-menu class="childMenu" #childMenu="matMenu" [overlapTrigger]="false">
+                  <mat-menu class="childMenu" #childMenu="matMenu" xPosition="after" yPosition="below">
               <span *ngFor="let child of item.categories">
                 <span *ngIf="child.subCategory && child.subCategory.length > 0">
-                  <button mat-menu-item color="primary" [matMenuTriggerFor]="childMenu2"   (click)="menuSelect(child)">
+                  <button mat-menu-item [matMenuTriggerFor]="childMenu2"   (click)="menuSelect(child)">
                     <span>{{child.categoryName | titlecase}}</span>
                     <span class="matBadgeNew"  matBadge="{{child.totalCount}}"  matBadgeOverlap="false"></span>
                   </button>
                   <!-----------------------------Sub Category--------------------------------------->
-                  <mat-menu class="subchildMenu" #childMenu2="matMenu" [overlapTrigger]="false">
-              <span *ngFor="let subchild of child.subCategory">
-                <span *ngIf="subchild.superSubCategory && subchild.superSubCategory.length > 0">
-                  <button mat-menu-item color="primary" [matMenuTriggerFor]="childMenu3"    (click)="menuSelect(subchild)">
-                    <span>{{subchild.subCategoryName}}</span>
-                    <span class="matBadgeSubmenu"  matBadge="{{subchild.totalCount}}"  matBadgeOverlap="false"></span>
-                  </button>
-                   <!-----------------------------Super Sub Category--------------------------------------->
-                  <mat-menu class="superSubMenu" #childMenu3="matMenu" [overlapTrigger]="false">
-              <span *ngFor="let superChild of subchild.superSubCategory">
-                  <button mat-menu-item color="primary" (click)="menuSelect(subchild,superChild);
-                  getCoureBasedOnCatalog(item,child,subchild.subCategoryId, superChild.superSubCategoryId);
-                    viewCourse(child,previewDialog,superChild.superSubCategoryName,superChild.totalCount)">
-                    <span >{{superChild.superSubCategoryName | titlecase}}</span>
-                    <span class="matBadge12"  matBadge="{{superChild.totalCount}}"  matBadgeOverlap="false"></span>
-                  </button>
-              </span>
-            </mat-menu>
-                </span>
-                <span *ngIf="!subchild.superSubCategory || subchild.superSubCategory.length === 0">
-                  <button mat-menu-item [routerLink]="child.route">
-                    <span>{{subchild.subCategoryName | titlecase}}</span>
-                    <span class="matBadge12"  matBadge="{{subchild.totalCount}}"  matBadgeOverlap="false"></span>
-                  </button>
-                </span>
-              </span>
+                  <mat-menu class="subchildMenu" #childMenu2="matMenu">
+                    <span *ngFor="let subchild of child.subCategory">
+                        <span *ngIf="subchild.superSubCategory && subchild.superSubCategory.length > 0">
+                          <button mat-menu-item [matMenuTriggerFor]="childMenu3"    (click)="menuSelect(subchild)">
+                            <span>{{subchild.subCategoryName}}</span>
+                            <span class="matBadgeSubmenu"  matBadge="{{subchild.totalCount}}"  matBadgeOverlap="false"></span>
+                          </button>
+                           <!-----------------------------Super Sub Category--------------------------------------->
+                          <mat-menu class="superSubMenu" #childMenu3="matMenu" [overlapTrigger]="false">
+                      <span *ngFor="let superChild of subchild.superSubCategory">
+                          <button mat-menu-item (click)="menuSelect(subchild,superChild);
+                          getCoureBasedOnCatalog(item,child,subchild.subCategoryId, superChild.superSubCategoryId);
+                            viewCourse(child,previewDialog,superChild.superSubCategoryName,superChild.totalCount)">
+                            <span >{{superChild.superSubCategoryName | titlecase}}</span>
+                            <span class="matBadge12"  matBadge="{{superChild.totalCount}}"  matBadgeOverlap="false"></span>
+                          </button>
+                      </span>
+                    </mat-menu>
+                        </span>
+                        <span *ngIf="!subchild.superSubCategory || subchild.superSubCategory.length === 0">
+                          <button mat-menu-item [routerLink]="child.route">
+                            <span>{{subchild.subCategoryName | titlecase}}</span>
+                            <span class="matBadge12"  matBadge="{{subchild.totalCount}}"  matBadgeOverlap="false"></span>
+                          </button>
+                        </span>
+                      </span>
             </mat-menu>
                 </span>
                 <span *ngIf="!child.subCategory || child.subCategory.length === 0">
@@ -134,7 +142,8 @@
                 </span>
               </span>
         </div>
-
+    </div>
+    </div>
         <div>
            
             <!-- <mat-button class="available-course-btn" [matMenuTriggerFor]="menunew" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()" >
@@ -158,7 +167,7 @@
 
 <!-- tabs here -->
 <div class="row bodybg">
-    <div class="col-12">
+    <div class="col-12 matTabCol">
 
        
         <!-- <div class="catPost">
@@ -191,7 +200,7 @@
                 </div>
                 
                 <ng-template matTabLabel>
-                    <div (click)="getEnrolledCourses('','','')">
+                    <div (click)="getEnrolledCourses('','','',searchName)">
 
                    
                     <span class="tabsc"  matBadge="{{ jobRoleSelected === true?jobOnGoingCourseCount : onGoingCourseCount }}" matBadgeOverlap="false">{{'Ongoing' }}</span>
@@ -411,7 +420,7 @@
                     </div>
                 </div>
                 <ng-template matTabLabel>
-                    <span class="tabsc" (click)="getEnrolledCourses('','','')" matBadge="{{jobRoleSelected === true? jobCompletedCourseCount : completedCourseCount}}" matBadgeOverlap="false">{{'Completed' | translate }}</span>
+                    <span class="tabsc" (click)="getEnrolledCourses('','','',searchName)" matBadge="{{jobRoleSelected === true? jobCompletedCourseCount : completedCourseCount}}" matBadgeOverlap="false">{{'Completed' | translate }}</span>
                 </ng-template>
                 <div *ngFor="let course of completed ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
@@ -626,7 +635,7 @@
                 </div>
                 <ng-template matTabLabel>
                     <span class="tabsc" (click)="getEnrolledCourses('','',
-                    '')" matBadge="{{jobRoleSelected === true? jobAllCourseCount : allCourseCount}}" matBadgeOverlap="false">{{'All' }}</span>
+                    '',searchName)" matBadge="{{jobRoleSelected === true? jobAllCourseCount : allCourseCount}}" matBadgeOverlap="false">{{'All' }}</span>
                 </ng-template>
                 <div *ngFor="let course of enrolledCourses ;let j=index">
                     <mat-card class="coursebg card12" matRipple>
@@ -851,7 +860,7 @@
                     </div>
                 </div>
                 <ng-template matTabLabel>
-                    <span class="tabsc" (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId,'')"
+                    <span class="tabsc" (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId,'',searchName)"
                       matBadge="{{categorytab.enrollCount}}"
                         matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span>
                 </ng-template>
@@ -1047,12 +1056,14 @@
 <ng-template #previewDialog>
         <mat-dialog-title>
             <div class="row rowMargin">
-        <div class="col-8 text-left">
+        <div class="col-4 text-left">
             <mat-icon class="arrowPopup mr-2" *ngIf="availableCource" aria-hidden="false" (click)="closedialogbox()">keyboard_backspace</mat-icon>
             <span class="f_wt_600 size catnamenew" *ngIf="!availableCource">{{ categoryPopupData  | titlecase}} ({{categoryCount}})</span>
         </div>
         <!-- <div class="col-0 col-sm-0 col-md-0 col-lg-6"> -->
-            <!-- <input  matInput class="form-control search" placeholder="Search" [(ngModel)]="courseSearch"> -->
+            <div class="col-4">
+            <input  matInput class="form-control popupsearch" placeholder="Search" [(ngModel)]="courseSearch">
+        </div>
         <!-- </div> -->
         <div class="col-4 text-right">
             <mat-icon class="arrowIcon mr-2" *ngIf="availableCource" aria-hidden="false" (click)="closedialogbox(availableCource = false)">clear</mat-icon>
@@ -1085,7 +1096,7 @@
             <div class="row m-t-3" >
           
                 <ng-container *ngIf="categoryData.totalCount > 1">
-                    <div  class="col-12 col-sm-12 col-md-6 col-lg-4 mt-4" *ngFor="let course of allcourses">
+                    <div  class="col-12 col-sm-12 col-md-6 col-lg-4 mt-4" *ngFor="let course of allcourses | search : courseSearch">
                         <!-- <div class="col-4 mt-4" *ngFor="let course of allcourses | search : courseSearch"> -->
                             <mat-card class="box-shadow">
                                 <div class="row">
