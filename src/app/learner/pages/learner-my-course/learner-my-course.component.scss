@@ -983,12 +983,19 @@ display: none;
 .searchCol {
   padding-right: 5px;
 }
+
+.mobileSearchRow {
+  display: none;
+}
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
   .catalogDropdownCol {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     padding-right: 1.5rem;
+  }
+  .mobileSearchRow {
+    display: block;
   }
   .arrowIcon .material-icons {
     float: right;
@@ -1064,6 +1071,7 @@ display: none;
 }
 
 .catDropdowns {
+  margin-right: -2rem;
   display: block;
   padding: 2px !important;
   float: right;
@@ -1147,7 +1155,7 @@ display: none;
   }
 
   .courseDetailsCol {
-    padding-left: 0px;
+    padding-left: 15px;
   }
 
   .startBtnRow {
@@ -1191,6 +1199,7 @@ display: none;
 
   .menuBtnHoriz {
     display: block;
+    margin-left: 10px;
   }
 
   .roleBtn {
@@ -1226,11 +1235,18 @@ display: none;
   display: none !important;
 }
 
-// Temporary css 
-.glyphicon {
-  display: none;
+.search {
+  width: 100% !important;
 }
 
+.glyphicon {
+  display: block;
+  position: absolute;
+  float: right;
+  right: 1rem;
+  top: 0.7rem;
+}
+// Temporary css 
 .right-addon {
   display: none;
 }
@@ -1308,6 +1324,22 @@ display: none;
     padding: 2px !important;
   }
 
+  .search {
+    width: 40% !important;
+  }
+
+  .searchExpand {
+    width: 14rem;
+    float: right;
+    margin-left: 38px;
+    border: 1px solid #898989;
+    border-radius: 0px;
+    height: 38px;
+  }
+  .searchExpand:focus {
+    border: 1px solid #C02222;
+    box-shadow: 0 0 0 0.05rem #C02222 !important;
+  }
   .catalogTitle {
     margin: auto;
   }
@@ -1344,7 +1376,7 @@ display: none;
 
   // Temp css
   .inner-addon {
-    display: none;
+    display: block;
   }
 }
 
@@ -1402,6 +1434,10 @@ display: none;
 
   .roleDropdDwnBtn {
     right: 58% !important;
+  }
+ 
+  :host ::ng-deep #mat-tab-label-0-5 {
+    display: none !important;
   }
 }
 
@@ -2023,3 +2059,4 @@ display: none;
   border: 1px solid #C02222;
   box-shadow: 0 0 0 0.05rem #C02222 !important;
 }
+
