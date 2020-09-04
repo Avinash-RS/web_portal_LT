@@ -2013,7 +2013,7 @@ display: none;
 }
 .inner-addon .popupsearchIcon {
   right: 14%;
-  top: 7px;
+  top: 8px;
   position: absolute;
 }
 .right-addon .glyphicon { right: 15px;}
@@ -2027,12 +2027,9 @@ display: none;
   border: 1px solid $lxp-theme-green !important;
   box-shadow: 0 0 0 0.05rem $lxp-theme-green !important;
 }
-.colSearch:focus {
+.ccSearch:focus {
   border: 1px solid $lxp-theme-green !important;
   box-shadow: 0 0 0 0.05rem $lxp-theme-green !important;
 }
-.colSearch {
-  position: relative;
-  top: 4px;
-}
+
 
