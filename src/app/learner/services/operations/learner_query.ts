@@ -765,6 +765,7 @@ export const getLearnerenrolledCourses = gql`
     $catalogue_id: String
     $category_id: String
     $jobRoleCategoryId: String
+    $searchString: String
   ) {
     getLearnerenrolledCourses(
       user_id: $user_id
@@ -772,6 +773,7 @@ export const getLearnerenrolledCourses = gql`
       catalogue_id: $catalogue_id
       category_id: $category_id
       jobRoleCategoryId: $jobRoleCategoryId
+      searchString: $searchString
     ) {
       success
       message
