@@ -24,9 +24,9 @@ export class HeaderComponent implements OnInit {
   show = true;
 
   constructor(public services: CommonServicesService, private alert: AlertServiceService, private http: HttpClient,
-              public router: Router, private gs: GlobalServiceService) {
-                this.getScreenSize();
-               }
+    public router: Router, private gs: GlobalServiceService) {
+    this.getScreenSize();
+  }
 
   ngOnInit() {
     this.activeUrl = this.router.url;
@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
     this.getShortName(this.fullName);
   }
   getShortName(fullName) {
-    const Name = fullName?.split(' ').map(function(str) {
+    const Name = fullName?.split(' ').map(function (str) {
       return str ? str[0].toUpperCase() : '';
     }).join('');
     if (Name?.length === 1) {
@@ -97,16 +97,24 @@ export class HeaderComponent implements OnInit {
             } else {
               this.alert.openAlert(logout.data.logout.message, null);
             }
-          } 
-          // else {
-          //   this.alert.openAlert('Please try again later', null);
-          // }
+          } else {
+            console.log(logout)
+            logout.errors.forEach(element => {
+              if (element.message.includes('TokenExpiredError') || element.message.includes('JsonWebTokenError')) {
+                localStorage.clear();
+                sessionStorage.clear();
+                this.services.getIpAddressByUrl();
+                this.gs.checkLogout();
+              }
+            });
+            // this.alert.openAlert('Please try again later', null);
+          }
         });
       }
     });
 
   }
   navigateMyCourse() {
-  this.router.navigate(['/Learner/MyCourse']);
-}
+    this.router.navigate(['/Learner/MyCourse']);
+  }
 }
