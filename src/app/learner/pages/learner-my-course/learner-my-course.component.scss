@@ -980,7 +980,9 @@ display: none;
   }
 }
 
-
+.searchCol {
+  padding-right: 5px;
+}
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
   .catalogDropdownCol {
@@ -991,6 +993,18 @@ display: none;
   .arrowIcon .material-icons {
     float: right;
     margin-top: 1%;
+  }
+  .matTabCol{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+
+  :host ::ng-deep.container {
+    margin-left: 0px !important;
+  }
+
+  .errorboxx {
+    margin-top: 15%;
   }
 
   .cardContainer{
@@ -1045,6 +1059,10 @@ display: none;
   // width: 135px !important;
 }
 
+.hovercolor {
+  display: none;
+}
+
 .catDropdowns {
   display: block;
   padding: 2px !important;
@@ -1080,7 +1098,10 @@ display: none;
   }
 
   .bodybg {
-    padding-right: 0px;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
   }
   .catalogTitle {
     margin: auto;
@@ -1205,15 +1226,23 @@ display: none;
   display: none !important;
 }
 
-.container {
-  width: 355px !important;
-  margin-left: 0px !important;
+// Temporary css 
+.glyphicon {
+  display: none;
+}
 
+.right-addon {
+  display: none;
 }
-.bodybg{
-  padding-right: 8px !important;
-  padding-left: 8px !important;
+
+.popupsearch {
+  display: none;
 }
+// .container {
+//   width: 355px !important;
+//   margin-left: 0px !important;
+
+// }
 
 }
 
@@ -1271,7 +1300,7 @@ display: none;
 
   .roleDropdDwnBtn{
     margin: 0.5rem 23% 0% 0% !important;
-    right: 0% !important;
+    right: 13% !important;
     bottom: 0% !important;
   }
 
@@ -1313,6 +1342,10 @@ display: none;
     display: none !important;
   }
 
+  // Temp css
+  .inner-addon {
+    display: none;
+  }
 }
 
 // @media (max-width: 480px) and (max-width: 320px) {
@@ -1363,6 +1396,9 @@ display: none;
   .btl-alin {
     margin-left: -8%;
   }
+  .searchCol {
+    padding-right: 15px;
+  }
 
   .roleDropdDwnBtn {
     right: 58% !important;
@@ -1372,7 +1408,21 @@ display: none;
 @media only screen and (width: 1024px) {
 
   .roleDropdDwnBtn {
-    right: 46% !important;
+    right: 50% !important;
+  }
+
+  .searchCol {
+    padding-right: 15px;
+  }
+
+  .right-addon .glyphicon {
+    right: 45px !important;
+}
+
+  .search {
+    width: 83% !important;
+    margin-left: 10px !important;
+    float: left !important;
   }
 
   :host ::ng-deep #mat-tab-label-0-3 {
@@ -1584,7 +1634,8 @@ display: none;
   font-size: large;
 }
 .search {
-  width: 76%;
+  width: 60%;
+  float: right;
   margin-left: 38px;
   // position: relative;
   // left: 69px;
@@ -1871,7 +1922,7 @@ display: none;
 }
 ::ng-deep .roleDropdDwnBtn{
   position: absolute !important;
-    right: 67% !important;
+    right: 62% !important;
     bottom: 2% !important;
 }
 .roleBtn{
@@ -1966,5 +2017,9 @@ display: none;
   padding: 10px;
   pointer-events: none;
 }
-.right-addon .glyphicon { right: 42px;}
+.right-addon .glyphicon { right: 15px;}
 .right-addon input { padding-right: 30px; }
+.search:focus {
+  border: 1px solid #C02222;
+  box-shadow: 0 0 0 0.05rem #C02222 !important;
+}

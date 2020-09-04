@@ -47,12 +47,12 @@ export class LearnerMyCourseComponent implements OnInit {
   showCompleted: string;
   showOngoing: string;
   showUpcoming: string;
-  categoryDetails: any;
+  categoryDetails: any[]=[];
   dropDownCategoryDetails = [];
   dropdownCatDetails = [];
   catalogueName: any;
   activity: any;
-  catalogueDetails: any;
+  catalogueDetails : any;
   pagenumber = 0;
   allcourses: any;
   categoryPopupData: any = [];
@@ -87,6 +87,9 @@ export class LearnerMyCourseComponent implements OnInit {
   isExpandCourseTemp: any;
   expandActivityNameChildTemp: any;
   isExpChild: any;
+  searchName: any;
+  course: any;
+  catagoryName: any;
 
   constructor(
     public translate: TranslateService,
@@ -170,9 +173,17 @@ export class LearnerMyCourseComponent implements OnInit {
   dropdownSelect() {
     this.viewCourseClass = true;
   }
-
+  getCatName(data) {
+    console.log('data', data);
+  }
   getEnrolledCourses(catalougeId, catagoryId, jobRoleCategoryId, searchName) {
-    this.categoryNamePrint = catagoryId;
+    let categoryName: any;
+    if (this.catalogueDetails && catagoryId && !jobRoleCategoryId && !searchName) {
+      categoryName = this.categoryDetails.filter(function(data: any) {
+        return data.categoryId === catagoryId;
+      });
+      this.categoryNamePrint = categoryName[0].categoryName;
+  }
     if (!jobRoleCategoryId) { this.selectedJobRole = 'Job Role'; }
     this.loading = true;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
