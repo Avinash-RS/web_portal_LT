@@ -183,8 +183,8 @@ export class CoursedetailsComponent implements OnInit {
       // this.lastpersentage = detail  && detail.persentage || this.localper ;
       this.loading = true;
       this.playerModuleAndTopic(true);
-      this.refreshData();
-      this.autoHide();
+      // this.refreshData();
+      // this.autoHide();
       this.getPlayerNextPrve();
       this.service.viewCurseByID(detail && detail.id || this.localStoCourseid, this.userDetail.user_id)
         .subscribe((viewCourse: any) => {
@@ -507,22 +507,22 @@ export class CoursedetailsComponent implements OnInit {
     this.selectedIndex = i;
   }
 
-  refreshData() {
-    this.dataRefresher =
-      setInterval(() => {
-        this.playerModuleAndTopic(false);
+  // refreshData() {
+  //   this.dataRefresher =
+  //     setInterval(() => {
+  //       this.playerModuleAndTopic(false);
 
-      }, 20000);
-    // this.cancelPageRefresh();
-  }
-  autoHide() {
-    this.dataRefresher =
-      setInterval(() => {
-        this.playerModuleAndTopic(false);
-        this.sider = false;
-        this.playerMenuEnable = true;
-      }, 10000);
-  }
+  //     }, 20000);
+   
+  // }
+  // autoHide() {
+  //   this.dataRefresher =
+  //     setInterval(() => {
+  //       this.playerModuleAndTopic(false);
+  //       this.sider = false;
+  //       this.playerMenuEnable = true;
+  //     }, 10000);
+  // }
 
   makeFullScreen() {
     const element = document.querySelector('#myPlayer');
@@ -1066,7 +1066,7 @@ export class CoursedetailsComponent implements OnInit {
     console.log('selected tab', tab.index);
     if (tab.index === 0) {
       this.sider = true;
-      this.autoHide();
+      // this.autoHide();
     } else {
       clearInterval(this.dataRefresher);
       this.sider = false;
