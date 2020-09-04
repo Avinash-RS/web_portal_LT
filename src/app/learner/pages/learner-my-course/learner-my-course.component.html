@@ -1056,14 +1056,14 @@
 <ng-template #previewDialog>
         <mat-dialog-title>
             <div class="row rowMargin">
-        <div class="col-4 text-left">
+        <div class="col-8 text-left">
             <mat-icon class="arrowPopup mr-2" *ngIf="availableCource" aria-hidden="false" (click)="closedialogbox()">keyboard_backspace</mat-icon>
             <span class="f_wt_600 size catnamenew" *ngIf="!availableCource">{{ categoryPopupData  | titlecase}} ({{categoryCount}})</span>
         </div>
         <!-- <div class="col-0 col-sm-0 col-md-0 col-lg-6"> -->
-            <div class="col-4">
+            <!-- <div class="col-4">
             <input  matInput class="form-control popupsearch" placeholder="Search" [(ngModel)]="courseSearch">
-        </div>
+        </div> -->
         <!-- </div> -->
         <div class="col-4 text-right">
             <mat-icon class="arrowIcon mr-2" *ngIf="availableCource" aria-hidden="false" (click)="closedialogbox(availableCource = false)">clear</mat-icon>
@@ -1076,8 +1076,13 @@
 
         <mat-dialog-content class="cardContainer">
             <div class="row a-e" *ngIf="catagoryName !== 'vocational'">
-                <div class="col-12" *ngIf="categoryCount > 0">
+                <div class="col-8" *ngIf="categoryCount > 0">
                     <span class="f_wt_600 size float-left catnamenew" *ngIf="availableCource">{{ categoryPopupData  | titlecase}} ({{categoryCount}})</span>
+                    </div>
+                    <div class="col-4 inner-addon right-addon">
+                        <mat-icon class="searchIcon">search</mat-icon>
+                        <input type="text" class="form-control ccSearch"
+                        [(ngModel)]="courseSearch" placeholder="Search.." />
                     </div>
             </div>
             <div class="row a-e" *ngIf="catagoryName === 'vocational'">
@@ -1090,6 +1095,11 @@
                        CLAIM ALL
                     </span>
                 </button>
+                </div>
+                <div class="col inner-addon right-addon">
+                    <input type="text" class="form-control popupsearch"
+                    [(ngModel)]="courseSearch" placeholder="Search.." />
+                    <mat-icon class="popupsearchIcon">search</mat-icon>
                 </div>
             </div>
 
