@@ -97,9 +97,10 @@ export class HeaderComponent implements OnInit {
             } else {
               this.alert.openAlert(logout.data.logout.message, null);
             }
-          } else {
-            this.alert.openAlert('Please try again later', null);
-          }
+          } 
+          // else {
+          //   this.alert.openAlert('Please try again later', null);
+          // }
         });
       }
     });
