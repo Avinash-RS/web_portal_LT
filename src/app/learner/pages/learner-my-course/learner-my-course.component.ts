@@ -107,6 +107,9 @@ export class LearnerMyCourseComponent implements OnInit {
   // this.translate.use(localStorage.getItem('language'));
   // }
   ngOnInit() {
+    this.gs.theme.subscribe(message  =>
+      this.componentCssClass = message
+      );
     this.translate.use(localStorage.getItem('language'));
     // const dateValue = new Date().toISOString()
     // const static =
