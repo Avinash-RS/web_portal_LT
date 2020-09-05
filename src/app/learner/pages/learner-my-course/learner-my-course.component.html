@@ -335,7 +335,7 @@
                   mat-menu-item
                   (click)="getEnrolledCourses(
                       catalogueDetails.catalogueId,
-                      categorytab.categoryId); this.categoryNamePrint === ''"
+                      categorytab.categoryId);"
                   *ngFor="let categorytab of categoryDetails">
                 <span>{{ categorytab.categoryName }}</span>
                 </button>

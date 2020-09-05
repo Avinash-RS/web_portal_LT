@@ -91,7 +91,7 @@ export class LearnerMyCourseComponent implements OnInit {
   course: any;
   catagoryName: any;
   searchExpand = false;
-  hideCategoryName = false;
+
   constructor(
     public elm: ElementRef,
     public translate: TranslateService,
