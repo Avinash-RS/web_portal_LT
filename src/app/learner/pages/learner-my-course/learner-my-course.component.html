@@ -14,7 +14,7 @@
   </div>
   <div class="row w-100">
     <div class="col-8 col-sm-8 col-md-7 col-lg-7 catalogTitle">
-      <div class="f_size_16 myC-head"><b>My Modules For</b>&nbsp;<b>:</b></div>
+      <div class="f_size_16 myC-head"><span class="module">My Modules For</span>&nbsp;<b>:</b></div>
       <div class="dropdown roleDropdDwnBtn">
         <button class="roleBtn" (click)="dropdownSelect()">
           <span
@@ -327,21 +327,16 @@
               <button
                 class="float-right menuBtnHoriz"
                 mat-icon-button
-                [matMenuTriggerFor]="menu"
-              >
+                [matMenuTriggerFor]="menu">
                 <mat-icon>more_horiz</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
                 <button
                   mat-menu-item
-                  (click)="
-                    getEnrolledCourses(
+                  (click)="getEnrolledCourses(
                       catalogueDetails.catalogueId,
-                      categorytab.categoryId
-                    )
-                  "
-                  *ngFor="let categorytab of categoryDetails"
-                >
+                      categorytab.categoryId);hideInkBar()"
+                  *ngFor="let categorytab of categoryDetails">
                   <span>{{ categorytab.categoryName }}</span>
                 </button>
               </mat-menu>
@@ -2318,7 +2313,7 @@
                           ></span>
                         </span>
                         <mat-icon
-                          class="arrowIcon float-right accordianText "
+                          class="arrowIcon float-right accordianText"
                           aria-hidden="false"
                           *ngIf="
                             expandActivityNameChildTemp !==
@@ -2351,20 +2346,7 @@
                               subCatet.subCategoryId
                           "
                           (click)="
-                            isExpChild &&
-                            expandActivityNameChildTemp ==
-                              subCatet.subCategoryId
-                              ? onexpchildTemp(
-                                  subCatet,
-                                  subCatet.subCategoryId,
-                                  false
-                                )
-                              : onexpchildTemp(
-                                  subCatet,
-                                  subCatet.subCategoryId,
-                                  true
-                                )
-                          "
+                  isExpandCourseTemp && expandActivityNameTemp == category.categoryId ? onexpTemp(category, category.categoryId, false) : onexpTemp(category, category.categoryId, true)"
                           >keyboard_arrow_up</mat-icon
                         >
 </div>

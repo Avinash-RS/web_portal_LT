@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Router } from '@angular/router';
@@ -93,6 +93,7 @@ export class LearnerMyCourseComponent implements OnInit {
   searchExpand = false;
 
   constructor(
+    public elm: ElementRef,
     public translate: TranslateService,
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
     private router: Router, private dialog: MatDialog,
@@ -432,5 +433,11 @@ onexpTemp(category, id, isexps) {
     this.expandActivityNameChildTemp = isexp ? id : null;
     this.isExpChild = isexp ? true : false;
   }
+
+  // hideInkBar() {
+  //   this.elm.nativeElement.classList.add('matInkBar');
+  //   this.selectedIndex = 0;
+  //   console.log('tab select');
+  // }
 }
 
