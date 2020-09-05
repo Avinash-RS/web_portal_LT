@@ -335,16 +335,16 @@
                   mat-menu-item
                   (click)="getEnrolledCourses(
                       catalogueDetails.catalogueId,
-                      categorytab.categoryId);hideInkBar()"
+                      categorytab.categoryId); this.categoryNamePrint === ''"
                   *ngFor="let categorytab of categoryDetails">
-                  <span>{{ categorytab.categoryName }}</span>
+                <span>{{ categorytab.categoryName }}</span>
                 </button>
               </mat-menu>
             </div>
           </div>
 
           <ng-template matTabLabel>
-            <div (click)="getEnrolledCourses('', '', '', searchName)">
+            <div (click)="getEnrolledCourses('', '', '', searchName);">
               <span
                 class="tabsc"
                 matBadge="{{

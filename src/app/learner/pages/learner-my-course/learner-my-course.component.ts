@@ -91,7 +91,7 @@ export class LearnerMyCourseComponent implements OnInit {
   course: any;
   catagoryName: any;
   searchExpand = false;
-
+  hideCategoryName = false;
   constructor(
     public elm: ElementRef,
     public translate: TranslateService,
@@ -182,6 +182,7 @@ export class LearnerMyCourseComponent implements OnInit {
     console.log('data', data);
   }
   getEnrolledCourses(catalougeId, catagoryId, jobRoleCategoryId, searchName) {
+    this.categoryNamePrint = '';
     let categoryName: any;
     if (this.catalogueDetails && catagoryId && !jobRoleCategoryId && !searchName) {
       categoryName = this.categoryDetails.filter(function(data: any) {
@@ -433,11 +434,5 @@ onexpTemp(category, id, isexps) {
     this.expandActivityNameChildTemp = isexp ? id : null;
     this.isExpChild = isexp ? true : false;
   }
-
-  // hideInkBar() {
-  //   this.elm.nativeElement.classList.add('matInkBar');
-  //   this.selectedIndex = 0;
-  //   console.log('tab select');
-  // }
 }
 
