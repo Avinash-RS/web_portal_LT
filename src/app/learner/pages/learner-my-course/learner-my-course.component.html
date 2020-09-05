@@ -327,21 +327,16 @@
               <button
                 class="float-right menuBtnHoriz"
                 mat-icon-button
-                [matMenuTriggerFor]="menu"
-              >
+                [matMenuTriggerFor]="menu">
                 <mat-icon>more_horiz</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
                 <button
                   mat-menu-item
-                  (click)="
-                    getEnrolledCourses(
+                  (click)="getEnrolledCourses(
                       catalogueDetails.catalogueId,
-                      categorytab.categoryId
-                    )
-                  "
-                  *ngFor="let categorytab of categoryDetails"
-                >
+                      categorytab.categoryId);hideInkBar()"
+                  *ngFor="let categorytab of categoryDetails">
                   <span>{{ categorytab.categoryName }}</span>
                 </button>
               </mat-menu>
@@ -2318,7 +2313,7 @@
                           ></span>
                         </span>
                         <mat-icon
-                          class="arrowIcon float-right"
+                          class="arrowIcon float-right accordianText"
                           aria-hidden="false"
                           *ngIf="
                             expandActivityNameChildTemp !==
@@ -2342,7 +2337,7 @@
                           >keyboard_arrow_right</mat-icon
                         >
                         <mat-icon
-                          class="arrowIcon float-right"
+                          class="arrowIcon float-right accordianText"
                           aria-hidden="false"
                           *ngIf="
                             isExpChild &&
