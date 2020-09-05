@@ -2351,20 +2351,7 @@
                               subCatet.subCategoryId
                           "
                           (click)="
-                            isExpChild &&
-                            expandActivityNameChildTemp ==
-                              subCatet.subCategoryId
-                              ? onexpchildTemp(
-                                  subCatet,
-                                  subCatet.subCategoryId,
-                                  false
-                                )
-                              : onexpchildTemp(
-                                  subCatet,
-                                  subCatet.subCategoryId,
-                                  true
-                                )
-                          "
+                  isExpandCourseTemp && expandActivityNameTemp == category.categoryId ? onexpTemp(category, category.categoryId, false) : onexpTemp(category, category.categoryId, true)"
                           >keyboard_arrow_up</mat-icon
                         >
 </div>
