@@ -1079,7 +1079,7 @@
                 <div class="col-8" *ngIf="categoryCount > 0">
                     <span class="f_wt_600 size float-left catnamenew" *ngIf="availableCource">{{ categoryPopupData  | titlecase}} ({{categoryCount}})</span>
                     </div>
-                    <div class="col-4 inner-addon right-addon">
+                    <div class="col-4 inner-addon right-addon" *ngIf="categoryCount > 0">
                         <mat-icon class="searchIcon">search</mat-icon>
                         <input type="text" class="form-control ccSearch"
                         [(ngModel)]="courseSearch" placeholder="Search.." />
@@ -1096,17 +1096,19 @@
                     </span>
                 </button>
                 </div>
-                <div class="col inner-addon right-addon">
+                <div class="col inner-addon right-addon" *ngIf="categoryCount > 0">
                     <input type="text" class="form-control popupsearch"
                     [(ngModel)]="courseSearch" placeholder="Search.." />
                     <mat-icon class="popupsearchIcon">search</mat-icon>
                 </div>
             </div>
 
-            <div class="row" >
+            <div class="row" *ngIf="categoryData.totalCount > 1">
           
-                <ng-container *ngIf="categoryData.totalCount > 1">
+                <ng-container *ngIf="( allcourses | search : courseSearch) as result">
+                    <ng-container *ngIf="result.length > 0">
                     <div  class="col-12 col-sm-12 col-md-6 col-lg-4 mt-4" *ngFor="let course of allcourses | search : courseSearch">
+                       
                         <!-- <div class="col-4 mt-4" *ngFor="let course of allcourses | search : courseSearch"> -->
                             <mat-card class="box-shadow">
                                 <div class="row">
@@ -1139,14 +1141,20 @@
                                 </div>
                             </mat-card>
                         </div>
+                    </ng-container>
+                        <div class="col errorDialouge" *ngIf="result.length === 0">
+                            <span style="font-size: medium;">
+                            No courses found
+                            </span>
+                        </div>
                 </ng-container>
                   
     
-    <div class="col errorDialouge" *ngIf="categoryCount < 1">
+    <!-- <div class="col errorDialouge" *ngIf="categoryCount < 1 && result.length === 0">
         <span style="font-size: medium;">
         No courses found
         </span>
-    </div>
+    </div> -->
     </div>
     </mat-dialog-content>
     </ng-template>

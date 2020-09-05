@@ -358,6 +358,7 @@ export class LearnerMyCourseComponent implements OnInit {
     this.dialog.closeAll();
     this.availableCourses = '';
     this.viewCourseClass = true;
+    this.courseSearch = '';
   }
   claimCourse(courseId) {
     let subCat = '';
