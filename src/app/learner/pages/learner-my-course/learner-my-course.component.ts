@@ -346,6 +346,7 @@ export class LearnerMyCourseComponent implements OnInit {
       });
   }
   viewCourse(category, templateRef: TemplateRef<any>, categoryname, categorycount) {
+    console.log( categoryname, categorycount)
     this.color = false;
     this.loading = true;
     this.viewCourseClass = false;
