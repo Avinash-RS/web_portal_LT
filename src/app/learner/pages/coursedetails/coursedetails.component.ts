@@ -513,7 +513,7 @@ export class CoursedetailsComponent implements OnInit {
         this.playerModuleAndTopic(false);
 
       }, 20000);
-    // this.cancelPageRefresh();
+   
   }
   autoHide() {
     this.dataRefresher =
@@ -1066,7 +1066,7 @@ export class CoursedetailsComponent implements OnInit {
     console.log('selected tab', tab.index);
     if (tab.index === 0) {
       this.sider = true;
-      this.autoHide();
+      // this.autoHide();
     } else {
       clearInterval(this.dataRefresher);
       this.sider = false;
