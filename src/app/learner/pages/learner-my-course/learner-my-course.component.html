@@ -150,7 +150,7 @@
                         ></span>
                       </button>
                       <!-----------------------------Sub Category--------------------------------------->
-                      <mat-menu class="subchildMenu" #childMenu2="matMenu">
+                      <mat-menu class="subchildMenu"  #childMenu2="matMenu">
                         <span *ngFor="let subchild of child.subCategory">
                           <span
                             *ngIf="
@@ -172,7 +172,7 @@
                             </button>
                             <!-----------------------------Super Sub Category--------------------------------------->
                             <mat-menu
-                              class="superSubMenu"
+                            class="superSubMenu"
                               #childMenu3="matMenu"
                               [overlapTrigger]="false"
                             >
@@ -2236,9 +2236,7 @@
         <div class="parrentAccordian">
           <div class="row w-100 h-100">
             <div class="col-12 m-auto pr-0">
-              <span
-                class="accordianText"
-                *ngIf="!category.subCategory"
+                <div *ngIf="!category.subCategory"
                 (click)="
                   getCoureBasedOnCatalog(dropdownCatDetails, category, '', '');
                   viewCourse(
@@ -2253,24 +2251,9 @@
                   expandActivityNameTemp == category.categoryId
                     ? onexpTemp(category, category.categoryId, false)
                     : onexpTemp(category, category.categoryId, true)
-                "
-              >
-                {{ category.categoryName | titlecase
-                }}<span
-                  class="matBadgeAvail"
-                  matBadge="{{ category.totalCount }}"
-                  matBadgeOverlap="false"
-                ></span>
-              </span>
+                ">
               <span
                 class="accordianText"
-                *ngIf="category.subCategory"
-                (click)="
-                  isExpandCourseTemp &&
-                  expandActivityNameTemp == category.categoryId
-                    ? onexpTemp(category, category.categoryId, false)
-                    : onexpTemp(category, category.categoryId, true)
-                "
               >
                 {{ category.categoryName | titlecase
                 }}<span
@@ -2279,6 +2262,24 @@
                   matBadgeOverlap="false"
                 ></span>
               </span>
+                </div>
+            <div *ngIf="category.subCategory" (click)="
+            isExpandCourseTemp &&
+            expandActivityNameTemp == category.categoryId
+              ? onexpTemp(category, category.categoryId, false)
+              : onexpTemp(category, category.categoryId, true)
+          ">
+              <span
+                class="accordianText"
+              >
+                {{ category.categoryName | titlecase
+                }}<span
+                  class="matBadgeAvail"
+                  matBadge="{{ category.totalCount }}"
+                  matBadgeOverlap="false"
+                ></span>
+              </span>
+              </div>
               <mat-icon class="arrowIcon float-right" aria-hidden="false" *ngIf="!category.subCategory && category.categoryName !== 'vocational'"
                 (click)="getCoureBasedOnCatalog(dropdownCatDetails, category, '', '');viewCourse(category,
                     previewDialog,category.categoryName,category.totalCount)">keyboard_arrow_right</mat-icon>
@@ -2299,15 +2300,15 @@
                   <div class="parrentAccordianSub">
                     <div class="row w-100 h-100">
                       <div class="col-12 m-auto pr-0">
+                          <div   (click)="
+                          isExpChild &&
+                          expandActivityNameChildTemp ==
+                            subCatet.subCategoryId
+                            ? onexpchildTemp(subCatet.subCategoryId, false)
+                            : onexpchildTemp(subCatet.subCategoryId, true)
+                        ">
                         <span
                           class="accordianText ml-5"
-                          (click)="
-                            isExpChild &&
-                            expandActivityNameChildTemp ==
-                              subCatet.subCategoryId
-                              ? onexpchildTemp(subCatet.subCategoryId, false)
-                              : onexpchildTemp(subCatet.subCategoryId, true)
-                          "
                         >
                           {{ subCatet.subCategoryName | titlecase }}
                           <span
@@ -2366,7 +2367,7 @@
                           "
                           >keyboard_arrow_up</mat-icon
                         >
-
+</div>
                         <ng-container
                           *ngIf="
                             isExpChild &&
