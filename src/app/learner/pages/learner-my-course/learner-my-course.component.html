@@ -107,19 +107,8 @@
 
       <!---------------Multi-level dropdown------------->
       <div class="row">
-        <div class="col-4 col-lg-8 searchCol">
-          <div class="inner-addon right-addon">
-            <mat-icon class="glyphicon">search</mat-icon>
-            <input
-              type="text" (click)="searchExpand = !searchExpand"
-              [ngClass] = "searchExpand == false?'search':'searchExpand'"
-              [(ngModel)]="searchName"
-              (keyup)="getEnrolledCourses('', '', '', searchName)"
-              placeholder="Search courses,categories.."
-            />
-          </div>
-        </div>
-        <div class="col-8 col-lg-4">
+        <div class="col-12 text-right">
+
           <div class="dropdown">
             <span *ngFor="let item of dropDownCategoryDetails">
               <span *ngIf="item.categories && item.categories.length > 0">
@@ -279,6 +268,17 @@
                 </button>
               </span>
             </span>
+          </div>
+
+          <div class="inner-addon searchDiv right-addon">
+            <mat-icon class="glyphicon">search</mat-icon>
+            <input
+              type="text" (click)="searchExpand = !searchExpand"
+                class="form-control search"
+              [(ngModel)]="searchName"
+              (keyup)="getEnrolledCourses('', '', '', searchName)"
+              placeholder="Search courses,categories.."
+            />
           </div>
         </div>
       </div>

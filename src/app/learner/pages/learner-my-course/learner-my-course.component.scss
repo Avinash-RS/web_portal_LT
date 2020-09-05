@@ -1675,7 +1675,7 @@ display: none;
   font-size: large;
 }
 .search {
-  width: 60%;
+  width: 38%;
   float: right;
   margin-left: 38px;
   // position: relative;
@@ -2041,6 +2041,9 @@ display: none;
 .inner-addon {
   position: relative;
 }
+.searchDiv {
+  right: 12px;
+}
 
 .inner-addon .glyphicon {
   position: absolute;
@@ -2057,7 +2060,7 @@ display: none;
   top: 8px;
   position: absolute;
 }
-.right-addon .glyphicon { right: 15px;}
+.right-addon .glyphicon {right: 181px;}
 .right-addon input { padding-right: 30px; }
 .right-addon .searchIcon { right: 30px;}
 .search:focus {
