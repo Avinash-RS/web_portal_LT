@@ -5,6 +5,16 @@ div.terms {
   font-size: 12px;
 }
 
+#footer {
+  color: $lxp-text ;
+  font-size: 13px;
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  bottom: 5px;
+  text-align: right;
+}
+
 :host ::ng-deep .mat-checkbox-inner-container {
   height: 14px !important;
   width: 14px !important;
@@ -272,6 +282,11 @@ a {
 }
 // mobile screen
 @media (max-width: 480px) {
+
+  #footer {
+    text-align: center ;
+  }
+  
   .wrap-reg {
     width: 100%;
     padding-left: 0px !important;
@@ -321,6 +336,10 @@ a {
 }
 
 @media (max-width: 568px) {
+  #footer {
+    text-align: center ;
+  }
+  
   .wrap-reg {
     width: 100%;
     padding-left: 0px !important;

@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { OverlayContainer } from '@angular/cdk/overlay';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  
   userDetailes: any;
   userimage: any;
   role: string;
@@ -22,9 +25,10 @@ export class HeaderComponent implements OnInit {
   screenHeight: number;
   screenWidth: number;
   show = true;
-
-  constructor(public services: CommonServicesService, private alert: AlertServiceService, private http: HttpClient,
-    public router: Router, private gs: GlobalServiceService) {
+  @HostBinding('class') componentCssClass;
+  constructor(public services: CommonServicesService, private alert: AlertServiceService,
+              private http: HttpClient, public overlayContainer: OverlayContainer,
+              public router: Router, private gs: GlobalServiceService) {
     this.getScreenSize();
   }
 
@@ -40,7 +44,7 @@ export class HeaderComponent implements OnInit {
     this.getShortName(this.fullName);
   }
   getShortName(fullName) {
-    const Name = fullName?.split(' ').map(function (str) {
+    const Name = fullName?.split(' ').map(function(str) {
       return str ? str[0].toUpperCase() : '';
     }).join('');
     if (Name?.length === 1) {
@@ -64,7 +68,12 @@ export class HeaderComponent implements OnInit {
   navigateWishlist() {
     this.router.navigate(['Learner/Thankyou']);
   }
-
+  onSetTheme(selectedValue) {
+    this.overlayContainer.getContainerElement().classList.add(selectedValue);
+    this.componentCssClass = selectedValue;
+    // localStorage.setItem('theme', selectedValue);
+    this.gs.getThemeName(selectedValue);
+  }
   logout() {
 
     Swal.fire({
@@ -98,7 +107,7 @@ export class HeaderComponent implements OnInit {
               this.alert.openAlert(logout.data.logout.message, null);
             }
           } else {
-            console.log(logout)
+            console.log(logout);
             logout.errors.forEach(element => {
               if (element.message.includes('TokenExpiredError') || element.message.includes('JsonWebTokenError')) {
                 localStorage.clear();

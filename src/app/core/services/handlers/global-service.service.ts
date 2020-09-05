@@ -10,6 +10,8 @@ import { LocationStrategy } from '@angular/common';
 })
 export class GlobalServiceService {
 
+  private $theme = new BehaviorSubject('theme-3-primary');
+  theme = this.$theme.asObservable();
   private $callWishlist = new BehaviorSubject(false);
   callWishlist = this.$callWishlist.asObservable();
 
@@ -63,6 +65,11 @@ export class GlobalServiceService {
   getNavigation(navigation: any) {
     this.$navigation.next(navigation);
   }
+
+  getThemeName(theme: string) {
+    this.$theme.next(theme);
+  }
+
 
   preventBackButton() {
     history.pushState(null, null, location.href);
