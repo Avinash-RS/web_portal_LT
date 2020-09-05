@@ -1952,7 +1952,7 @@ display: none;
 }
 ::ng-deep .roleDropdDwnBtn{
   position: absolute !important;
-    right: 62% !important;
+    right: 61% !important;
     bottom: 2% !important;
 }
 .roleBtn{
@@ -2000,7 +2000,8 @@ display: none;
 }
 .roledropdownicon{
   position: relative;
-    float: right;
+  float: right;
+  top: 3px;
 }
 .mat-menu-item:hover:not([disabled]) {
   background-color: $color-light-grey !important;
