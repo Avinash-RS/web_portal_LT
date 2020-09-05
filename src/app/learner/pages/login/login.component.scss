@@ -290,6 +290,22 @@ input.mat-input-element {
     font-family: "Roboto Condensed", sans-serif !important;
 }
 
+.footer20 { 
+    height: 50px;
+    bottom: 6px;
+    width: 100%;
+    position: fixed !important;
+    text-align: end;
+}
+
+.footerCol {
+    text-align: right;
+}
+
+.footerRow {
+margin-top: 5%;
+}
+
 // mobile
 @media (max-width: 480px) and (max-width: 320px) {
     .kauhalya {
@@ -324,7 +340,7 @@ input.mat-input-element {
 }
 
 
-@media (max-width: 568px) {
+@media (max-width: 767.98px) {
     .kauhalya {
         margin-top: 11%;
          margin-left: 0%  !important; 
@@ -339,7 +355,9 @@ input.mat-input-element {
         border-radius: 0 !important;
         margin-left: 0% !important;
     }
-
+    .footerRow {
+        margin-top: 0% !important;
+    }
     .row {
         display: flex;
         flex-wrap: wrap;
@@ -367,7 +385,6 @@ input.mat-input-element {
          padding: 10px;
     }
     .footer20 {
-        position: relative;
         bottom: 25px;
         text-align: center !important;
     }
@@ -376,7 +393,12 @@ input.mat-input-element {
         margin-left: 33px !important;
 }
 .forgot1{
-    margin-left: -9%;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
+
+  .footerCol{
+      text-align: center !important;
   }
 
 }
@@ -424,9 +446,13 @@ input.mat-input-element {
     }
 
     .beforeloginimg {
-        width: 100%;
-         height: 0vh !important; 
+        width: 100% !important;
+        //  height: 0vh !important; 
          padding: 10px;
+    }
+
+    .footerRow {
+        margin-top: 26rem !important;
     }
     .forgot1{
         margin-right: 20px;

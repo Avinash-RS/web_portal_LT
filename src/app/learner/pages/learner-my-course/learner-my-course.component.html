@@ -1,33 +1,78 @@
 <app-header></app-header>
 <div class="myCourse">
-<div class="row">
+  <div class="row mobileSearchRow">
+    <div class="col-12">
+      <mat-icon class="glyphicon">search</mat-icon>
+      <input
+        type="text"
+        class="form-control search"
+        [(ngModel)]="searchName"
+        (keyup)="getEnrolledCourses('', '', '', searchName)"
+        placeholder="Search courses,categories.."
+      />
+    </div>
+  </div>
+  <div class="row w-100">
     <div class="col-8 col-sm-8 col-md-7 col-lg-7 catalogTitle">
-        <div class="f_size_16 myC-head">
-            <b>My Modules For</b>&nbsp;<b>:</b>
-        </div>
-        <div class="dropdown roleDropdDwnBtn">
-            <button class="roleBtn" (click)="dropdownSelect()">
-                <span *ngIf="selectedJobRole.length > 12" tooltip="{{selectedJobRole}}" placement="right" [ngClass]="selectedJobRole === 'Job Role'?'roleSelect':'roleSelectChange'">
-                    <!-- {{selectedJobRole | titlecase}} -->
-                    {{(selectedJobRole | slice:0:12)+'...'}}
-                </span>
-                <span *ngIf="selectedJobRole.length <= 12" [ngClass]="selectedJobRole === 'Job Role'?'roleSelect':'roleSelectChange'">{{selectedJobRole | titlecase}}</span>
-                <span *ngIf="selectedJobRole != 'Job Role'" class="roleBatchOnSelect"  matBadge="{{jobroleEnrollCount}}"  matBadgeOverlap="false"></span>
-                <mat-icon [ngClass]="selectedJobRole === 'Job Role'?'roledropdownicon':'roledropdowniconSelect'" class="roledropdownicon">expand_more</mat-icon></button>
-            <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'">
-              <div class="contedrop" *ngFor="let role of jobRole" (click)="getEnrolledCourses(catalogueDetails.catalogueId,'',role.jobroleCategoryId,searchName);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount)">
-                <span *ngIf="role.jobroleCategoryName.length > 12" tooltip="{{role.jobroleCategoryName | titlecase}}" placement="right">
-                    {{(role.jobroleCategoryName | slice:0:12)+'...'}}
-                </span>
-                <span *ngIf="role.jobroleCategoryName.length <= 12">{{role.jobroleCategoryName | titlecase}}</span>
-                <span class="roleBatch"  matBadge="{{role.jobroleEnrollCount}}"  matBadgeOverlap="false"></span>
-              </div>
-            </div>
+      <div class="f_size_16 myC-head"><b>My Modules For</b>&nbsp;<b>:</b></div>
+      <div class="dropdown roleDropdDwnBtn">
+        <button class="roleBtn" (click)="dropdownSelect()">
+          <span
+            *ngIf="selectedJobRole.length > 12"
+            tooltip="{{ selectedJobRole }}"
+            placement="right"
+            [ngClass]="
+              selectedJobRole === 'Job Role' ? 'roleSelect' : 'roleSelectChange'
+            "
+          >
+            <!-- {{selectedJobRole | titlecase}} -->
+            {{ (selectedJobRole | slice: 0:12) + "..." }}
+          </span>
+          <span
+            *ngIf="selectedJobRole.length <= 12"
+            [ngClass]="
+              selectedJobRole === 'Job Role' ? 'roleSelect' : 'roleSelectChange'
+            "
+            >{{ selectedJobRole | titlecase }}</span
+          >
+          <span
+            *ngIf="selectedJobRole != 'Job Role'"
+            class="roleBatchOnSelect"
+            matBadge="{{ jobroleEnrollCount }}"
+            matBadgeOverlap="false"
+          ></span>
+          <mat-icon
+            [ngClass]="
+              selectedJobRole === 'Job Role'
+                ? 'roledropdownicon'
+                : 'roledropdowniconSelect'
+            "
+            class="roledropdownicon"
+            >expand_more</mat-icon
+          >
+        </button>
+        <div [ngClass]="viewCourseClass == true ? 'dropdown-content' : 'dropdown-content1'">
+          <div class="contedrop" *ngFor="let role of jobRole" (click)="getEnrolledCourses(catalogueDetails.catalogueId,
+          '',role.jobroleCategoryId,searchName);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount
+              )">
+            <span *ngIf="role.jobroleCategoryName.length > 12" tooltip="{{ role.jobroleCategoryName | titlecase }}"
+              placement="right">
+              {{ (role.jobroleCategoryName | slice: 0:12) + "..." }}
+            </span>
+            <span *ngIf="role.jobroleCategoryName.length <= 12">{{
+              role.jobroleCategoryName | titlecase
+            }}</span>
+            <span
+              class="roleBatch"
+              matBadge="{{ role.jobroleEnrollCount }}"
+              matBadgeOverlap="false"
+            ></span>
           </div>
+        </div>
+      </div>
     </div>
 
     <div class="col-4 col-sm-4 col-md-5 col-lg-5 catalogDropdownCol">
-        
       <!-- <span>
       
             <mat-button class="available-course-btn">
@@ -49,7 +94,7 @@
 
    
         </span>   -->
-        <!-- <div class="dropdown">
+      <!-- <div class="dropdown">
             <button class="dropbtn">{{catalogueDetails?.catalogueName | titlecase}} <mat-icon class="dropdownicon">expand_more</mat-icon></button>
             <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'">
               <div class="contedrop" *ngFor="let category of categoryDetails" (click)="getCoureBasedOnCatalog(catalogueDetails,category,previewDialog);
@@ -60,93 +105,185 @@
             </div>
           </div> -->
 
+      <!---------------Multi-level dropdown------------->
+      <div class="row">
+        <div class="col-12 text-right">
 
-          <!---------------Multi-level dropdown------------->
-          <div class="row">
-              <div class="col-4 col-lg-8 searchCol">
-                  <div class="inner-addon right-addon">
-                    <mat-icon class="glyphicon">search</mat-icon>
-                    <input type="text" class="form-control search"
-                    [(ngModel)]="searchName" (keyup)="getEnrolledCourses('','','',searchName)" placeholder="Search courses,categories.." />
-                  </div>
-              </div>
-              <div class="col-8 col-lg-4">
           <div class="dropdown">
             <span *ngFor="let item of dropDownCategoryDetails">
-                <span *ngIf="item.categories && item.categories.length > 0">
-                    <button (click)="openAvailableCource()" class="catDropdowns">
-                      {{item?.catalogueName | titlecase}}
-                      <mat-icon class="dropdownicon">expand_more</mat-icon>
-                    </button>
-                    <button (click)="menuSelect(item.categories)"  
-                    [matMenuTriggerFor]="childMenu" [ngClass]="color == true?'hovercolor':'catDropdown'" 
-                    (mouseenter)="openMyMenu()">
-                      {{item?.catalogueName | titlecase}}
-                      <mat-icon class="dropdownicon">expand_more</mat-icon>
-                    </button>
-                  <!----------------------------Category--------------------------------->
-                  <!-- <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'"> -->
-                  <mat-menu class="childMenu" #childMenu="matMenu" xPosition="after" yPosition="below">
-              <span *ngFor="let child of item.categories">
-                <span *ngIf="child.subCategory && child.subCategory.length > 0">
-                  <button mat-menu-item [matMenuTriggerFor]="childMenu2"   (click)="menuSelect(child)">
-                    <span>{{child.categoryName | titlecase}}</span>
-                    <span class="matBadgeNew"  matBadge="{{child.totalCount}}"  matBadgeOverlap="false"></span>
-                  </button>
-                  <!-----------------------------Sub Category--------------------------------------->
-                  <mat-menu class="subchildMenu" #childMenu2="matMenu">
-                    <span *ngFor="let subchild of child.subCategory">
-                        <span *ngIf="subchild.superSubCategory && subchild.superSubCategory.length > 0">
-                          <button mat-menu-item [matMenuTriggerFor]="childMenu3"    (click)="menuSelect(subchild)">
-                            <span>{{subchild.subCategoryName}}</span>
-                            <span class="matBadgeSubmenu"  matBadge="{{subchild.totalCount}}"  matBadgeOverlap="false"></span>
-                          </button>
-                           <!-----------------------------Super Sub Category--------------------------------------->
-                          <mat-menu class="superSubMenu" #childMenu3="matMenu" [overlapTrigger]="false">
-                      <span *ngFor="let superChild of subchild.superSubCategory">
-                          <button mat-menu-item (click)="menuSelect(subchild,superChild);
-                          getCoureBasedOnCatalog(item,child,subchild.subCategoryId, superChild.superSubCategoryId);
-                            viewCourse(child,previewDialog,superChild.superSubCategoryName,superChild.totalCount)">
-                            <span >{{superChild.superSubCategoryName | titlecase}}</span>
-                            <span class="matBadge12"  matBadge="{{superChild.totalCount}}"  matBadgeOverlap="false"></span>
-                          </button>
-                      </span>
-                    </mat-menu>
+              <span *ngIf="item.categories && item.categories.length > 0">
+                <button (click)="openAvailableCource()" class="catDropdowns">
+                  {{ item?.catalogueName | titlecase }}
+                  <mat-icon class="dropdownicon">expand_more</mat-icon>
+                </button>
+                <button
+                  (click)="menuSelect(item.categories)"
+                  [matMenuTriggerFor]="childMenu"
+                  [ngClass]="color == true ? 'hovercolor' : 'catDropdown'"
+                  (mouseenter)="openMyMenu()"
+                >
+                  {{ item?.catalogueName | titlecase }}
+                  <mat-icon class="dropdownicon">expand_more</mat-icon>
+                </button>
+                <!----------------------------Category--------------------------------->
+                <!-- <div [ngClass]="viewCourseClass == true ?'dropdown-content':'dropdown-content1'"> -->
+                <mat-menu
+                  class="childMenu"
+                  #childMenu="matMenu"
+                  xPosition="after"
+                  yPosition="below"
+                >
+                  <span *ngFor="let child of item.categories">
+                    <span
+                      *ngIf="child.subCategory && child.subCategory.length > 0"
+                    >
+                      <button
+                        mat-menu-item
+                        [matMenuTriggerFor]="childMenu2"
+                        (click)="menuSelect(child)"
+                      >
+                        <span>{{ child.categoryName | titlecase }}</span>
+                        <span
+                          class="matBadgeNew"
+                          matBadge="{{ child.totalCount }}"
+                          matBadgeOverlap="false"
+                        ></span>
+                      </button>
+                      <!-----------------------------Sub Category--------------------------------------->
+                      <mat-menu class="subchildMenu" #childMenu2="matMenu">
+                        <span *ngFor="let subchild of child.subCategory">
+                          <span
+                            *ngIf="
+                              subchild.superSubCategory &&
+                              subchild.superSubCategory.length > 0
+                            "
+                          >
+                            <button
+                              mat-menu-item
+                              [matMenuTriggerFor]="childMenu3"
+                              (click)="menuSelect(subchild)"
+                            >
+                              <span>{{ subchild.subCategoryName }}</span>
+                              <span
+                                class="matBadgeSubmenu"
+                                matBadge="{{ subchild.totalCount }}"
+                                matBadgeOverlap="false"
+                              ></span>
+                            </button>
+                            <!-----------------------------Super Sub Category--------------------------------------->
+                            <mat-menu
+                              class="superSubMenu"
+                              #childMenu3="matMenu"
+                              [overlapTrigger]="false"
+                            >
+                              <span
+                                *ngFor="
+                                  let superChild of subchild.superSubCategory
+                                "
+                              >
+                                <button
+                                  mat-menu-item
+                                  (click)="
+                                    menuSelect(subchild, superChild);
+                                    getCoureBasedOnCatalog(
+                                      item,
+                                      child,
+                                      subchild.subCategoryId,
+                                      superChild.superSubCategoryId
+                                    );
+                                    viewCourse(
+                                      child,
+                                      previewDialog,
+                                      superChild.superSubCategoryName,
+                                      superChild.totalCount
+                                    )
+                                  "
+                                >
+                                  <span>{{
+                                    superChild.superSubCategoryName | titlecase
+                                  }}</span>
+                                  <span
+                                    class="matBadge12"
+                                    matBadge="{{ superChild.totalCount }}"
+                                    matBadgeOverlap="false"
+                                  ></span>
+                                </button>
+                              </span>
+                            </mat-menu>
+                          </span>
+                          <span
+                            *ngIf="
+                              !subchild.superSubCategory ||
+                              subchild.superSubCategory.length === 0
+                            "
+                          >
+                            <button mat-menu-item [routerLink]="child.route">
+                              <span>{{
+                                subchild.subCategoryName | titlecase
+                              }}</span>
+                              <span
+                                class="matBadge12"
+                                matBadge="{{ subchild.totalCount }}"
+                                matBadgeOverlap="false"
+                              ></span>
+                            </button>
+                          </span>
                         </span>
-                        <span *ngIf="!subchild.superSubCategory || subchild.superSubCategory.length === 0">
-                          <button mat-menu-item [routerLink]="child.route">
-                            <span>{{subchild.subCategoryName | titlecase}}</span>
-                            <span class="matBadge12"  matBadge="{{subchild.totalCount}}"  matBadgeOverlap="false"></span>
-                          </button>
-                        </span>
-                      </span>
-            </mat-menu>
-                </span>
-                <span *ngIf="!child.subCategory || child.subCategory.length === 0">
-                  <button mat-menu-item [routerLink]="child.route"
-                  (click)="getCoureBasedOnCatalog(item,child,'','');
-                    viewCourse(child,previewDialog,child.categoryName,child.totalCount)">
-                    <span>{{child.categoryName | titlecase}}</span>
-                    <span class="matBadge12"  matBadge="{{child.totalCount}}"  matBadgeOverlap="false"></span>
-                  </button>
-                </span>
+                      </mat-menu>
+                    </span>
+                    <span
+                      *ngIf="
+                        !child.subCategory || child.subCategory.length === 0
+                      "
+                    >
+                      <button
+                        mat-menu-item
+                        [routerLink]="child.route"
+                        (click)="
+                          getCoureBasedOnCatalog(item, child, '', '');
+                          viewCourse(
+                            child,
+                            previewDialog,
+                            child.categoryName,
+                            child.totalCount
+                          )
+                        "
+                      >
+                        <span>{{ child.categoryName | titlecase }}</span>
+                        <span
+                          class="matBadge12"
+                          matBadge="{{ child.totalCount }}"
+                          matBadgeOverlap="false"
+                        ></span>
+                      </button>
+                    </span>
+                  </span>
+                </mat-menu>
+                <!-- </div> -->
               </span>
-            </mat-menu>
-            <!-- </div> -->
-                </span>
-                <!-- Leaf node buttons here -->
-                <span *ngIf="!item.categories || item.categories.length === 0">
-                  <button [routerLink]="item.route">
-                    {{item?.catalogueName | titlecase}}
-                  </button>
-                </span>
+              <!-- Leaf node buttons here -->
+              <span *ngIf="!item.categories || item.categories.length === 0">
+                <button [routerLink]="item.route">
+                  {{ item?.catalogueName | titlecase }}
+                </button>
               </span>
+            </span>
+          </div>
+
+          <div class="inner-addon searchDiv right-addon">
+            <mat-icon class="glyphicon">search</mat-icon>
+            <input
+              type="text" (click)="searchExpand = !searchExpand"
+                class="form-control search"
+              [(ngModel)]="searchName"
+              (keyup)="getEnrolledCourses('', '', '', searchName)"
+              placeholder="Search courses,categories.."
+            />
+          </div>
         </div>
-    </div>
-    </div>
-        <div>
-           
-            <!-- <mat-button class="available-course-btn" [matMenuTriggerFor]="menunew" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()" >
+      </div>
+      <div>
+        <!-- <mat-button class="available-course-btn" [matMenuTriggerFor]="menunew" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()" >
                 <span class="lxp-text">{{catalogueDetails?.catalogueName | titlecase}} <mat-icon class="dropdownicon">expand_more</mat-icon></span>
               </mat-button>
                 <mat-menu focusOnOpen = false  #menunew="matMenu" [overlapTrigger]="false" class="customize mouseleave">
@@ -157,20 +294,14 @@
                     </button>
                   </div>
                   </mat-menu> -->
-        </div> 
-      
+      </div>
     </div>
+  </div>
 
-</div>
-
-
-
-<!-- tabs here -->
-<div class="row bodybg">
+  <!-- tabs here -->
+  <div class="row bodybg">
     <div class="col-12 matTabCol">
-
-       
-        <!-- <div class="catPost">
+      <!-- <div class="catPost">
             <span *ngFor="let namesss of categoryDetails" class="cathd1">
                 <button *ngIf="namesss.enrollCount"  
                 class="catnamesss" matBadge="{{namesss.enrollCount}}"
@@ -179,791 +310,1647 @@
             </span>
             <span></span>
             </div> -->
-        <mat-tab-group [(selectedIndex)]="selectedIndex" mat-align-tabs="start" animationDuration="1000ms"
-            class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 ">
-            <mat-tab>
-                <div class="row">
-                    <div class="col-6 m-auto">
-                        <span class="menuBtnHoriz">{{categoryNamePrint | titlecase}}</span>
-                    </div> 
-                        <div class="col-6">
-                    <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
-                        <mat-icon>more_horiz</mat-icon>
-                      </button>
-                      <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" 
-                        *ngFor="let categorytab of categoryDetails">
-                          <span>{{categorytab.categoryName}}</span>
-                        </button>
-                      </mat-menu>
-                    </div>
-                </div>
-                
-                <ng-template matTabLabel>
-                    <div (click)="getEnrolledCourses('','','',searchName)">
+      <mat-tab-group
+        [(selectedIndex)]="selectedIndex"
+        mat-align-tabs="start"
+        animationDuration="1000ms"
+        class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0"
+      >
+        <mat-tab>
+          <div class="row">
+            <div class="col-6 m-auto">
+              <span class="menuBtnHoriz">{{
+                categoryNamePrint | titlecase
+              }}</span>
+            </div>
+            <div class="col-6">
+              <button
+                class="float-right menuBtnHoriz"
+                mat-icon-button
+                [matMenuTriggerFor]="menu"
+              >
+                <mat-icon>more_horiz</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button
+                  mat-menu-item
+                  (click)="
+                    getEnrolledCourses(
+                      catalogueDetails.catalogueId,
+                      categorytab.categoryId
+                    )
+                  "
+                  *ngFor="let categorytab of categoryDetails"
+                >
+                  <span>{{ categorytab.categoryName }}</span>
+                </button>
+              </mat-menu>
+            </div>
+          </div>
 
-                   
-                    <span class="tabsc"  matBadge="{{ jobRoleSelected === true?jobOnGoingCourseCount : onGoingCourseCount }}" matBadgeOverlap="false">{{'Ongoing' }}</span>
-                </div>
-                </ng-template>
+          <ng-template matTabLabel>
+            <div (click)="getEnrolledCourses('', '', '', searchName)">
+              <span
+                class="tabsc"
+                matBadge="{{
+                  jobRoleSelected === true
+                    ? jobOnGoingCourseCount
+                    : onGoingCourseCount
+                }}"
+                matBadgeOverlap="false"
+                >{{ "Ongoing" }}</span
+              >
+            </div>
+          </ng-template>
 
- <!-- Card start -->
-                <div *ngFor="let course of incomplete ;let j=index">
-                    <mat-card class="coursebg card12" matRipple>
-                        <div class="row">
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol">
-                                <div class="row">
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-3">
-                                        <div class="courseHover" (click)="gotoDesc(course)">
-                                            <div > 
-                                                <span *ngIf="course?.course_type === 'primer_course'">
-                                                <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"  matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="assets/learner/primerC.svg"> 
-                                                <img *ngIf="course?.categoryName === 'vocational'"  matTooltip="Vocational" matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="../../../../assets/learner/primerV.svg"> 
-                                                <img *ngIf="course?.categoryName === 'pro certification'" matTooltip="Pro certification" placement="right" alt="flag" class="primerFlage"  src="../../../../assets/learner/primerP.svg"> 
-                                            </span>
-                                            <span *ngIf="course?.course_type === 'free_course'">
-                                                <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"  matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="../../../../assets/learner/freeC.svg"> 
-                                                <img *ngIf="course?.categoryName === 'vocational'" matTooltip="Vocational" alt="flag"  matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' class="primerFlage"  src="../../../../assets/learner/freeV.svg"> 
-                                                <img *ngIf="course?.categoryName === 'pro certification'" matTooltip="Pro certification"  matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="../../../../assets/learner/freeP.svg"> 
-                                                </span>
-                                            </div>
-                                            <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
-                                       
-                                            <div class="overlay">
-                                                <mat-icon class="text"> play_arrow </mat-icon>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-sm-6 col-md-8 col-lg-7 coursenameCol">
-                                        <div class=" f_size_18 f_wt_500 pointer coursename">
-                                            <span  *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
-                                            <span  *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
-                                            <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
-                                            <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
-                                            <span class="span-with-icon">
-                                                <mat-icon class="timer"> alarm_on </mat-icon>
-                                                {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
-                                            </span>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
-                                                (click)="gotoDesc(course)">
-                                                <p  class="">
-                                                    {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="row startBtnRow">
-                                            <div class="col-12 col-sm-12 col-md-10 startBtnCol">
-                                                <button *ngIf="course.batchCourse == true" class="clr" (click)="goToAssignment(course)" [disabled]="course.assignmentCount == 0">
-                                                    <mat-icon class="btn-icon">description</mat-icon>
-                                                    <span>Assignments ({{course.assignmentCount}})</span>
-                                                </button>
-
-
-                                                <button *ngIf="course.batchCourse == true" class="clr ml-4" (click)="goToForum(course)"
-                                                >
-                                                    <mat-icon class="btn-icon">forum</mat-icon>
-                                                    <span>Discussion Forum ({{course.forumCount}})</span>
-                                                </button>
-                                            </div>
-                                            <div class="startBtnDiv">
-                                                 <button mat-stroked-button
-                                                    *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                                                    class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
-                                                    <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
-                                                    <span class="cap f_wt_400 m-t-m-2">
-                                                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
-                                                          course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start'  }}&nbsp;
-                                                    </span>
-                                                </button>
-                                                <button mat-stroked-button
-                                                    *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                    class="btl-alin blue_clr cap pointer m-t-05"  (click)="gotoDesc(course)">
-                                                    <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
-                                                    <span class="cap f_wt_400  m-t-m-2">
-                                                        {{'Replay' }}&nbsp;
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        <div class="row pointer">
-                                            <div class="col-12" >
-                                                <div class="upcoming" (click)="navToCal()" *ngIf="course?.upComingLiveClassRoom?.activitytype == 'Live Classroom'">{{course?.upComingLiveClassRoom?.status}}...   <b>{{course?.upComingLiveClassRoom?.startdate | date :' h:mm a'}} to {{course?.upComingLiveClassRoom?.enddate | date :' h:mm a'}}</b> | 
-                                                    <u><b>Live classroom</b></u>
-                                                    <mat-icon class="video">videocam</mat-icon></div>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
-                                        <div class="aligned-with-icon alarmcursor">
-                                            <mat-icon class="timer"> alarm_on </mat-icon>
-                                            {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
-                                        </div>
-                                         <div class="startBtnicon">
-                                            <button mat-stroked-button 
-                                                    *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                                                    class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
-                                                    <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
-                                                    <span class="cap f_wt_400 m-t-m-2">
-                                                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
-                                                          course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start'  }}&nbsp;
-                                                    </span>
-                                                </button>
-                                                <button mat-stroked-button
-                                                    *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                    class="btl-alin blue_clr cap pointer m-t-05"  (click)="gotoDesc(course)">
-                                                    <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
-                                                    <span class="cap f_wt_400  m-t-m-2">
-                                                        {{'Replay' }}&nbsp;
-                                                    </span>
-                                                </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="course.batchCourse == true">
-                                <div class="row  m-l-2p f_size_12">
-                                    <div class="col-3">
-                                        <div>Activity 
-                                            <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="f_size_13">Learning effort
-                                            <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div>Points earned
-                                            <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div>Final score
-                                            <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row m-t-2 m-l-2p">
-                                    <div class="col-3">
-                                        <div class="m-t">
-                                            <sapn class="padscore">4</sapn>
-                                            <sapn class="f_size_22">/</sapn> <span class="f_size_20">20</span>
-                                        </div>
-                                        <div class="m-l-3 f_size_12">Pending</div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="progess pointer">
-                                            <circle-progress
-                                                [percent]="course?.coursePlayerStatus?.course_percentage|| 0"
-                                                [radius]="10"  [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
-                                                [outerStrokeGradient]="true" [outerStrokeGradientStopColor] = "'#53a9ff'"
-                                                [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'"
-                                                [titleFontSize]="7" [unitsFontSize]="7" [showSubtitle]="false"
-                                                [animation]="true" [animationDuration]="100" [startFromZero]="false"
-                                                [responsive]="true">
-                                            </circle-progress>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="point">56</div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="finalScore">- - -</div>
-                                    </div>
-                                </div>
-                            </div>
+          <!-- Card start -->
+          <div *ngFor="let course of incomplete; let j = index">
+            <mat-card class="coursebg card12" matRipple>
+              <div class="row">
+                <div
+                  class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol"
+                >
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-3">
+                      <div class="courseHover" (click)="gotoDesc(course)">
+                        <div>
+                          <span *ngIf="course?.course_type === 'primer_course'">
+                            <img
+                              *ngIf="course?.categoryName === 'college connect'"
+                              matTooltip="College connect"
+                              matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip"
+                              alt="flag"
+                              class="primerFlage"
+                              src="assets/learner/primerC.svg"
+                            />
+                            <img
+                              *ngIf="course?.categoryName === 'vocational'"
+                              matTooltip="Vocational"
+                              matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip"
+                              alt="flag"
+                              class="primerFlage"
+                              src="../../../../assets/learner/primerV.svg"
+                            />
+                            <img
+                              *ngIf="
+                                course?.categoryName === 'pro certification'
+                              "
+                              matTooltip="Pro certification"
+                              placement="right"
+                              alt="flag"
+                              class="primerFlage"
+                              src="../../../../assets/learner/primerP.svg"
+                            />
+                          </span>
+                          <span *ngIf="course?.course_type === 'free_course'">
+                            <img
+                              *ngIf="course?.categoryName === 'college connect'"
+                              matTooltip="College connect"
+                              matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip"
+                              alt="flag"
+                              class="primerFlage"
+                              src="../../../../assets/learner/freeC.svg"
+                            />
+                            <img
+                              *ngIf="course?.categoryName === 'vocational'"
+                              matTooltip="Vocational"
+                              alt="flag"
+                              matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip"
+                              class="primerFlage"
+                              src="../../../../assets/learner/freeV.svg"
+                            />
+                            <img
+                              *ngIf="
+                                course?.categoryName === 'pro certification'
+                              "
+                              matTooltip="Pro certification"
+                              matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip"
+                              alt="flag"
+                              class="primerFlage"
+                              src="../../../../assets/learner/freeP.svg"
+                            />
+                          </span>
                         </div>
-                    </mat-card>
-                    <div style="border-bottom: 1px solid #cccccc7a"></div>
-                </div> 
+                        <img
+                          alt="Course Img"
+                          src="{{ course.course_img_url }}"
+                          class="courseImg"
+                        />
+
+                        <div class="overlay">
+                          <mat-icon class="text"> play_arrow </mat-icon>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-8 col-lg-7 coursenameCol">
+                      <div class="f_size_18 f_wt_500 pointer coursename">
+                        <span
+                          *ngIf="course.course_name?.length > 28"
+                          tooltip="{{ course.course_name }}"
+                          placement="right"
+                          >{{
+                            (course.course_name | slice: 0:28) + "..."
+                          }}</span
+                        >
+                        <span *ngIf="course.course_name?.length <= 28">{{
+                          course.course_name
+                        }}</span>
+                        <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
+                                            <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
+                        <span class="span-with-icon">
+                          <mat-icon class="timer"> alarm_on </mat-icon>
+                          {{
+                            course?.course_duration != 1
+                              ? course.course_duration
+                                ? course.course_duration + " hours"
+                                : "1" + " hour"
+                              : "1" + "hour"
+                          }}
+                        </span>
+                      </div>
+                      <div class="row">
+                        <div
+                          class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
+                          (click)="gotoDesc(course)"
+                        >
+                          <p class="">
+                            {{
+                              course.course_description?.length > 100
+                                ? (course.course_description | slice: 0:100) +
+                                  "..."
+                                : course.course_description
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="row startBtnRow">
+                        <div class="col-12 col-sm-12 col-md-10 startBtnCol">
+                          <button
+                            *ngIf="course.batchCourse == true"
+                            class="clr"
+                            (click)="goToAssignment(course)"
+                            [disabled]="course.assignmentCount == 0"
+                          >
+                            <mat-icon class="btn-icon">description</mat-icon>
+                            <span
+                              >Assignments ({{ course.assignmentCount }})</span
+                            >
+                          </button>
+
+                          <button
+                            *ngIf="course.batchCourse == true"
+                            class="clr ml-4"
+                            (click)="goToForum(course)"
+                          >
+                            <mat-icon class="btn-icon">forum</mat-icon>
+                            <span
+                              >Discussion Forum ({{ course.forumCount }})</span
+                            >
+                          </button>
+                        </div>
+                        <div class="startBtnDiv">
+                          <button
+                            mat-stroked-button
+                            *ngIf="
+                              course?.coursePlayerStatus?.status !== 'completed'
+                            "
+                            class="btl-alin blue_clr cap pointer m-t-05"
+                            (click)="gotoDesc(course)"
+                          >
+                            <mat-icon class="icon-color m-t-m-2"
+                              >play_circle_outline</mat-icon
+                            >
+                            <span class="cap f_wt_400 m-t-m-2">
+                              {{
+                                course?.coursePlayerStatus?.status ===
+                                "incomplete"
+                                  ? "Resume"
+                                  : course?.coursePlayerStatus?.status ===
+                                    "suspend"
+                                  ? "Resume"
+                                  : "Start"
+                              }}&nbsp;
+                            </span>
+                          </button>
+                          <button
+                            mat-stroked-button
+                            *ngIf="
+                              course?.coursePlayerStatus?.status === 'completed'
+                            "
+                            class="btl-alin blue_clr cap pointer m-t-05"
+                            (click)="gotoDesc(course)"
+                          >
+                            <mat-icon class="icon-color m-t-m-2"
+                              >replay</mat-icon
+                            >
+                            <span class="cap f_wt_400 m-t-m-2">
+                              {{ "Replay" }}&nbsp;
+                            </span>
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="row pointer">
+                        <div class="col-12">
+                          <div
+                            class="upcoming"
+                            (click)="navToCal()"
+                            *ngIf="
+                              course?.upComingLiveClassRoom?.activitytype ==
+                              'Live Classroom'
+                            "
+                          >
+                            {{ course?.upComingLiveClassRoom?.status }}...
+                            <b
+                              >{{
+                                course?.upComingLiveClassRoom?.startdate
+                                  | date: " h:mm a"
+                              }}
+                              to
+                              {{
+                                course?.upComingLiveClassRoom?.enddate
+                                  | date: " h:mm a"
+                              }}</b
+                            >
+                            |
+                            <u><b>Live classroom</b></u>
+                            <mat-icon class="video">videocam</mat-icon>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
+                      <div class="aligned-with-icon alarmcursor">
+                        <mat-icon class="timer"> alarm_on </mat-icon>
+                        {{
+                          course?.course_duration != 1
+                            ? course.course_duration
+                              ? course.course_duration + " hours"
+                              : "1" + " hour"
+                            : "1" + "hour"
+                        }}
+                      </div>
+                      <div class="startBtnicon">
+                        <button
+                          mat-stroked-button
+                          *ngIf="
+                            course?.coursePlayerStatus?.status !== 'completed'
+                          "
+                          class="btl-alin blue_clr cap pointer m-t-05"
+                          (click)="gotoDesc(course)"
+                        >
+                          <mat-icon class="icon-color m-t-m-2"
+                            >play_circle_outline</mat-icon
+                          >
+                          <span class="cap f_wt_400 m-t-m-2">
+                            {{
+                              course?.coursePlayerStatus?.status ===
+                              "incomplete"
+                                ? "Resume"
+                                : course?.coursePlayerStatus?.status ===
+                                  "suspend"
+                                ? "Resume"
+                                : "Start"
+                            }}&nbsp;
+                          </span>
+                        </button>
+                        <button
+                          mat-stroked-button
+                          *ngIf="
+                            course?.coursePlayerStatus?.status === 'completed'
+                          "
+                          class="btl-alin blue_clr cap pointer m-t-05"
+                          (click)="gotoDesc(course)"
+                        >
+                          <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
+                          <span class="cap f_wt_400 m-t-m-2">
+                            {{ "Replay" }}&nbsp;
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-12 col-sm-12 col-md-12 col-lg-5"
+                  *ngIf="course.batchCourse == true"
+                >
+                  <div class="row m-l-2p f_size_12">
+                    <div class="col-3">
+                      <div>
+                        Activity
+                        <mat-icon
+                          tooltip="Info about the action"
+                          placement="bottom"
+                          class="infoIcon"
+                          fontSet="material-icons-outlined"
+                          >info</mat-icon
+                        >
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="f_size_13">
+                        Learning effort
+                        <mat-icon
+                          tooltip="Info about the action"
+                          placement="bottom"
+                          class="infoIcon"
+                          fontSet="material-icons-outlined"
+                          >info</mat-icon
+                        >
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div>
+                        Points earned
+                        <mat-icon
+                          tooltip="Info about the action"
+                          placement="bottom"
+                          class="infoIcon"
+                          fontSet="material-icons-outlined"
+                          >info</mat-icon
+                        >
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div>
+                        Final score
+                        <mat-icon
+                          tooltip="Info about the action"
+                          placement="bottom"
+                          class="infoIcon"
+                          fontSet="material-icons-outlined"
+                          >info</mat-icon
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row m-t-2 m-l-2p">
+                    <div class="col-3">
+                      <div class="m-t">
+                        <sapn class="padscore">4</sapn>
+                        <sapn class="f_size_22">/</sapn>
+                        <span class="f_size_20">20</span>
+                      </div>
+                      <div class="m-l-3 f_size_12">Pending</div>
+                    </div>
+                    <div class="col-3">
+                      <div class="progess pointer">
+                        <circle-progress
+                          [percent]="
+                            course?.coursePlayerStatus?.course_percentage || 0
+                          "
+                          [radius]="10"
+                          [outerStrokeWidth]="2"
+                          [innerStrokeWidth]="2"
+                          [space]="-2"
+                          [outerStrokeGradient]="true"
+                          [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'"
+                          [innerStrokeColor]="'#e7e8ea'"
+                          [titleFontSize]="7"
+                          [unitsFontSize]="7"
+                          [showSubtitle]="false"
+                          [animation]="true"
+                          [animationDuration]="100"
+                          [startFromZero]="false"
+                          [responsive]="true"
+                        >
+                        </circle-progress>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="point">56</div>
+                    </div>
+                    <div class="col-3">
+                      <div class="finalScore">- - -</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+            <div style="border-bottom: 1px solid #cccccc7a"></div>
+          </div>
+          <!-- card end -->
+
+          <div *ngIf="onGoingCourseCount === 0">
+            <mat-card class="coursebg width_90 errorCard">
+              <div class="row width_90 no_margin">
+                <div
+                  class="col-4 col-sm-4 col-md-1 display_flex pointer no_pl mt-4"
+                  (click)="gotoDesc(course)"
+                >
+                  <img
+                    alt="Course Img"
+                    src="assets/noCourseImg.jpg"
+                    class="courseImgs"
+                  />
+                </div>
+                <div class="col-8 col-md-11 no_pl errorboxx">
+                  <span style="font-size: medium">{{
+                    "You have no ongoing courses at the moment." | translate
+                  }}</span>
+                </div>
+              </div>
+            </mat-card>
+            <hr class="hr-tag" />
+          </div>
+        </mat-tab>
+        <mat-tab>
+          <div class="row">
+            <div class="col-6 m-auto">
+              <span class="menuBtnHoriz">{{
+                categoryNamePrint | titlecase
+              }}</span>
+            </div>
+            <div class="col-6">
+              <button
+                class="float-right menuBtnHoriz"
+                mat-icon-button
+                [matMenuTriggerFor]="menu"
+              >
+                <mat-icon>more_horiz</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button
+                  mat-menu-item
+                  (click)="
+                    getEnrolledCourses(
+                      catalogueDetails.catalogueId,
+                      categorytab.categoryId
+                    )
+                  "
+                  *ngFor="let categorytab of categoryDetails"
+                >
+                  <span>{{ categorytab.categoryName }}</span>
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+          <ng-template matTabLabel>
+            <span
+              class="tabsc"
+              (click)="getEnrolledCourses('', '', '', searchName)"
+              matBadge="{{
+                jobRoleSelected === true
+                  ? jobCompletedCourseCount
+                  : completedCourseCount
+              }}"
+              matBadgeOverlap="false"
+              >{{ "Completed" | translate }}</span
+            >
+          </ng-template>
+          <div *ngFor="let course of completed; let j = index">
+            <mat-card class="coursebg card12" matRipple>
+              <!-- <div class="row width_100 no_margin"> -->
+              <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
+              <div class="row">
+                <!-- // Card start -->
+                <div
+                  class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol"
+                >
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-3">
+                      <div class="courseHover" (click)="gotoDesc(course)">
+                        <div>
+                          <span *ngIf="course?.course_type === 'primer_course'">
+                            <img
+                              *ngIf="course?.categoryName === 'college connect'"
+                              matTooltip="College connect"
+                              matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip"
+                              alt="flag"
+                              class="primerFlage"
+                              src="assets/learner/primerC.svg"
+                            />
+                            <img
+                              *ngIf="course?.categoryName === 'vocational'"
+                              matTooltip="Vocational"
+                              matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip"
+                              alt="flag"
+                              class="primerFlage"
+                              src="../../../../assets/learner/primerV.svg"
+                            />
+                            <img
+                              *ngIf="
+                                course?.categoryName === 'pro certification'
+                              "
+                              matTooltip="Pro certification"
+                              matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip"
+                              alt="flag"
+                              class="primerFlage"
+                              src="../../../../assets/learner/primerP.svg"
+                            />
+                          </span>
+                          <span
+                            *ngIf="course?.course_type === 'free_course'"
+                            class=""
+                          >
+                            <img
+                              *ngIf="course?.categoryName === 'college connect'"
+                              matTooltip="College connect"
+                              matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip"
+                              alt="flag"
+                              class="primerFlage"
+                              src="../../../../assets/learner/freeC.svg"
+                            />
+                            <img
+                              *ngIf="course?.categoryName === 'vocational'"
+                              matTooltip="Vocational"
+                              alt="flag"
+                              matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip"
+                              class="primerFlage"
+                              src="../../../../assets/learner/freeV.svg"
+                            />
+                            <img
+                              *ngIf="
+                                course?.categoryName === 'pro certification'
+                              "
+                              matTooltip="Pro certification"
+                              matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip"
+                              alt="flag"
+                              class="primerFlage"
+                              src="../../../../assets/learner/freeP.svg"
+                            />
+                          </span>
+                        </div>
+                        <img
+                          alt="Course Img"
+                          src="{{ course.course_img_url }}"
+                          class="courseImg"
+                        />
+                        <div class="overlay">
+                          <mat-icon class="text"> play_arrow </mat-icon>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-8 col-lg-7">
+                      <div class="f_size_18 f_wt_500 pointer">
+                        <span
+                          *ngIf="course.course_name?.length > 28"
+                          tooltip="{{ course.course_name }}"
+                          placement="right"
+                          >{{
+                            (course.course_name | slice: 0:28) + "..."
+                          }}</span
+                        >
+                        <span *ngIf="course.course_name?.length <= 28">{{
+                          course.course_name
+                        }}</span>
+                        <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
+                                            <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
+                        <div class="span-with-icon">
+                          <mat-icon class="timer"> alarm_on </mat-icon>
+                          {{
+                            course?.course_duration != 1
+                              ? course.course_duration
+                                ? course.course_duration + " hours"
+                                : "1" + " hour"
+                              : "1" + "hour"
+                          }}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div
+                          class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
+                          (click)="gotoDesc(course)"
+                        >
+                          <p class="">
+                            {{
+                              course.course_description?.length > 100
+                                ? (course.course_description | slice: 0:100) +
+                                  "..."
+                                : course.course_description
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="row startBtnRow">
+                        <div class="col-12 col-sm-12 col-md-10 startBtnCol">
+                          <button
+                            *ngIf="course.batchCourse == true"
+                            class="clr"
+                            (click)="goToAssignment(course)"
+                            [disabled]="course.assignmentCount == 0"
+                          >
+                            <mat-icon class="btn-icon">description</mat-icon>
+                            <span
+                              >Assignments ({{ course.assignmentCount }})</span
+                            >
+                          </button>
+
+                          <button
+                            *ngIf="course.batchCourse == true"
+                            class="clr ml-4"
+                            (click)="goToForum(course)"
+                          >
+                            <mat-icon class="btn-icon">forum</mat-icon>
+                            <span
+                              >Discussion Forum ({{ course.forumCount }})</span
+                            >
+                          </button>
+                        </div>
+                        <div class="startBtnDiv">
+                          <button
+                            mat-stroked-button
+                            *ngIf="
+                              course?.coursePlayerStatus?.status !== 'completed'
+                            "
+                            class="btl-alin blue_clr cap pointer m-t-05"
+                            (click)="gotoDesc(course)"
+                          >
+                            <mat-icon class="icon-color m-t-m-2"
+                              >play_circle_outline</mat-icon
+                            >
+                            <span class="cap f_wt_400 m-t-m-2">
+                              {{
+                                course?.coursePlayerStatus?.status ===
+                                "incomplete"
+                                  ? "Resume"
+                                  : course?.coursePlayerStatus?.status ===
+                                    "suspend"
+                                  ? "Resume"
+                                  : ("Start" | translate)
+                              }}&nbsp;
+                            </span>
+                          </button>
+                          <button
+                            mat-stroked-button
+                            *ngIf="
+                              course?.coursePlayerStatus?.status === 'completed'
+                            "
+                            class="btl-alin blue_clr cap pointer m-t-05"
+                            (click)="gotoDesc(course)"
+                          >
+                            <mat-icon class="icon-color m-t-m-2"
+                              >replay</mat-icon
+                            >
+                            <span class="cap f_wt_400 m-t-m-2">
+                              {{ "Replay" | translate }}&nbsp;
+                            </span>
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="row pointer">
+                        <div class="col-12">
+                          <span
+                            class="upcoming"
+                            (click)="navToCal()"
+                            *ngIf="
+                              course?.upComingLiveClassRoom?.activitytype ==
+                              'Live Classroom'
+                            "
+                            >{{ course?.upComingLiveClassRoom?.status }}...
+                            <b
+                              >{{
+                                course?.upComingLiveClassRoom?.startdate
+                                  | date: " h:mm a"
+                              }}
+                              to
+                              {{
+                                course?.upComingLiveClassRoom?.enddate
+                                  | date: " h:mm a"
+                              }}</b
+                            >
+                            |
+                            <u><b>Live classroom</b></u>
+                            <mat-icon class="video">videocam</mat-icon></span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
+                      <div class="aligned-with-icon alarmcursor">
+                        <mat-icon class="timer"> alarm_on </mat-icon>
+                        {{
+                          course?.course_duration != 1
+                            ? course.course_duration
+                              ? course.course_duration + " hours"
+                              : "1" + " hour"
+                            : "1" + "hour"
+                        }}
+                      </div>
+                      <div class="startBtnicon">
+                        <button
+                          mat-stroked-button
+                          *ngIf="
+                            course?.coursePlayerStatus?.status !== 'completed'
+                          "
+                          class="btl-alin blue_clr cap pointer m-t-05"
+                          (click)="gotoDesc(course)"
+                        >
+                          <mat-icon class="icon-color m-t-m-2"
+                            >play_circle_outline</mat-icon
+                          >
+                          <span class="cap f_wt_400 m-t-m-2">
+                            {{
+                              course?.coursePlayerStatus?.status ===
+                              "incomplete"
+                                ? "Resume"
+                                : course?.coursePlayerStatus?.status ===
+                                  "suspend"
+                                ? "Resume"
+                                : ("Start" | translate)
+                            }}&nbsp;
+                          </span>
+                        </button>
+                        <button
+                          mat-stroked-button
+                          *ngIf="
+                            course?.coursePlayerStatus?.status === 'completed'
+                          "
+                          class="btl-alin blue_clr cap pointer m-t-05"
+                          (click)="gotoDesc(course)"
+                        >
+                          <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
+                          <span class="cap f_wt_400 m-t-m-2">
+                            {{ "Replay" | translate }}&nbsp;
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-12 col-sm-12 col-md-12 col-lg-5"
+                  *ngIf="course.batchCourse == true"
+                >
+                  <div class="row m-l-2p f_size_12">
+                    <div class="col-3">
+                      <div>
+                        Activity
+                        <mat-icon
+                          tooltip="Info about the action"
+                          placement="bottom"
+                          class="infoIcon"
+                          fontSet="material-icons-outlined"
+                          >info</mat-icon
+                        >
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div>
+                        Learning effort
+                        <mat-icon
+                          tooltip="Info about the action"
+                          placement="bottom"
+                          class="infoIcon"
+                          fontSet="material-icons-outlined"
+                          >info</mat-icon
+                        >
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div>
+                        Points earned
+                        <mat-icon
+                          tooltip="Info about the action"
+                          placement="bottom"
+                          class="infoIcon"
+                          fontSet="material-icons-outlined"
+                          >info</mat-icon
+                        >
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div>
+                        Final score
+                        <mat-icon
+                          tooltip="Info about the action"
+                          placement="bottom"
+                          class="infoIcon"
+                          fontSet="material-icons-outlined"
+                          >info</mat-icon
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row m-t-2 m-l-2p">
+                    <div class="col-3">
+                      <div class="m-t">
+                        <sapn class="padscore">4</sapn>
+                        <sapn class="f_size_22">/</sapn>
+                        <span class="f_size_20">20</span>
+                      </div>
+                      <div class="m-l-3 f_size_12">Pending</div>
+                    </div>
+                    <div class="col-3">
+                      <div class="progess pointer">
+                        <circle-progress
+                          [percent]="
+                            course?.coursePlayerStatus?.course_percentage || 0
+                          "
+                          [radius]="10"
+                          [outerStrokeWidth]="2"
+                          [innerStrokeWidth]="2"
+                          [space]="-2"
+                          [outerStrokeGradient]="true"
+                          [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'"
+                          [innerStrokeColor]="'#e7e8ea'"
+                          [titleFontSize]="7"
+                          [unitsFontSize]="7"
+                          [showSubtitle]="false"
+                          [animation]="true"
+                          [animationDuration]="100"
+                          [startFromZero]="false"
+                          [responsive]="true"
+                        >
+                        </circle-progress>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="point">56</div>
+                    </div>
+                    <div class="col-3">
+                      <div class="finalScore">- - -</div>
+                    </div>
+                  </div>
+                </div>
                 <!-- card end -->
+              </div>
+            </mat-card>
+            <div style="border-bottom: 1px solid #cccccc7a"></div>
+          </div>
 
-
-                <div *ngIf="onGoingCourseCount === 0">
-                    <mat-card class="coursebg width_90 errorCard">
-                        <div class="row width_90 no_margin">
-                            <div class="col-4 col-sm-4 col-md-1 display_flex pointer no_pl mt-4"
-                                (click)="gotoDesc(course)">
-                                <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs">
-                            </div>
-                            <div class="col-8 col-md-11  no_pl errorboxx">
-                                <span style="font-size: medium;">{{'You have no ongoing courses at the moment.' | translate }}</span>
-                            </div>
+          <div *ngIf="completedCourseCount === 0">
+            <mat-card class="coursebg width_90 errorCard">
+              <div class="row width_90 no_margin">
+                <div
+                  class="col-1 display_flex pointer no_pl mt-4"
+                  (click)="gotoDesc(course)"
+                >
+                  <img
+                    alt="Course Img"
+                    src="assets/noCourseImg.jpg"
+                    class="courseImgs"
+                  />
+                </div>
+                <div class="col-11 no_pl errorboxx">
+                  <span style="font-size: medium">{{
+                    "You have no completed courses at the moment." | translate
+                  }}</span>
+                </div>
+              </div>
+            </mat-card>
+            <hr class="hr-tag" />
+          </div>
+        </mat-tab>
+        <mat-tab>
+          <div class="row">
+            <div class="col-6 m-auto">
+              <span class="menuBtnHoriz">{{
+                categoryNamePrint | titlecase
+              }}</span>
+            </div>
+            <div class="col-6">
+              <button
+                class="float-right menuBtnHoriz"
+                mat-icon-button
+                [matMenuTriggerFor]="menu"
+              >
+                <mat-icon>more_horiz</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button
+                  mat-menu-item
+                  (click)="
+                    getEnrolledCourses(
+                      catalogueDetails.catalogueId,
+                      categorytab.categoryId
+                    )
+                  "
+                  *ngFor="let categorytab of categoryDetails"
+                >
+                  <span>{{ categorytab.categoryName }}</span>
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+          <ng-template matTabLabel>
+            <span
+              class="tabsc"
+              (click)="getEnrolledCourses('', '', '', searchName)"
+              matBadge="{{
+                jobRoleSelected === true ? jobAllCourseCount : allCourseCount
+              }}"
+              matBadgeOverlap="false"
+              >{{ "All" }}</span
+            >
+          </ng-template>
+          <div *ngFor="let course of enrolledCourses; let j = index">
+            <mat-card class="coursebg card12" matRipple>
+              <!-- <div class="row width_100 no_margin"> -->
+              <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
+              <div class="row">
+                <!-- // Card start -->
+                <div
+                  class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol"
+                >
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-3">
+                      <div class="courseHover" (click)="gotoDesc(course)">
+                        <div>
+                          <span *ngIf="course?.course_type === 'primer_course'">
+                            <img
+                              *ngIf="course?.categoryName === 'college connect'"
+                              matTooltip="College connect"
+                              matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip"
+                              alt="flag"
+                              class="primerFlage"
+                              src="assets/learner/primerC.svg"
+                            />
+                            <img
+                              *ngIf="course?.categoryName === 'vocational'"
+                              matTooltip="Vocational"
+                              matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip"
+                              alt="flag"
+                              class="primerFlage"
+                              src="../../../../assets/learner/primerV.svg"
+                            />
+                            <img
+                              *ngIf="
+                                course?.categoryName === 'pro certification'
+                              "
+                              matTooltip="Pro certification"
+                              matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip"
+                              alt="flag"
+                              class="primerFlage"
+                              src="../../../../assets/learner/primerP.svg"
+                            />
+                          </span>
+                          <span
+                            *ngIf="course?.course_type === 'free_course'"
+                            class=""
+                          >
+                            <img
+                              *ngIf="course?.categoryName === 'college connect'"
+                              matTooltip="College connect"
+                              matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip"
+                              alt="flag"
+                              class="primerFlage"
+                              src="../../../../assets/learner/freeC.svg"
+                            />
+                            <img
+                              *ngIf="course?.categoryName === 'vocational'"
+                              matTooltip="Vocational"
+                              alt="flag"
+                              matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip"
+                              class="primerFlage"
+                              src="../../../../assets/learner/freeV.svg"
+                            />
+                            <img
+                              *ngIf="
+                                course?.categoryName === 'pro certification'
+                              "
+                              matTooltip="Pro certification"
+                              matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip"
+                              alt="flag"
+                              class="primerFlage"
+                              src="../../../../assets/learner/freeP.svg"
+                            />
+                          </span>
                         </div>
-                    </mat-card>
-                    <hr class="hr-tag">
-                  
-                </div>
-            </mat-tab>
-            <mat-tab>
-                <div class="row">
-                    <div class="col-6 m-auto">
-                        <span class="menuBtnHoriz">{{categoryNamePrint | titlecase}}</span>
+                        <img
+                          alt="Course Img"
+                          src="{{ course.course_img_url }}"
+                          class="courseImg"
+                        />
+                        <div class="overlay">
+                          <mat-icon class="text"> play_arrow </mat-icon>
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-6 ">
-                    <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
-                        <mat-icon>more_horiz</mat-icon>
-                      </button>
-                      <mat-menu #menu="matMenu">
-                        <button mat-menu-item 
-                        (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" 
-                        *ngFor="let categorytab of categoryDetails">
-                          <span>{{categorytab.categoryName}}</span>
-                        </button>
-                      </mat-menu>
-                    </div>
-                </div>
-                <ng-template matTabLabel>
-                    <span class="tabsc" (click)="getEnrolledCourses('','','',searchName)" matBadge="{{jobRoleSelected === true? jobCompletedCourseCount : completedCourseCount}}" matBadgeOverlap="false">{{'Completed' | translate }}</span>
-                </ng-template>
-                <div *ngFor="let course of completed ;let j=index">
-                    <mat-card class="coursebg card12" matRipple>
-                        <!-- <div class="row width_100 no_margin"> -->
-                        <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
-                        <div class="row">
-                            <!-- // Card start -->
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol">
-                                <div class="row">
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-3">
-                                        <div class="courseHover" (click)="gotoDesc(course)" >
-                                            <div > 
-                                                <span *ngIf="course?.course_type === 'primer_course'">
-                                                <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"  matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="assets/learner/primerC.svg"> 
-                                                <img *ngIf="course?.categoryName === 'vocational'"  matTooltip="Vocational" matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="../../../../assets/learner/primerV.svg"> 
-                                                <img *ngIf="course?.categoryName === 'pro certification'" matTooltip="Pro certification" matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="../../../../assets/learner/primerP.svg"> 
-                                            </span>
-                                            <span *ngIf="course?.course_type === 'free_course'" class="">
-                                                <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect" matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="../../../../assets/learner/freeC.svg"> 
-                                                <img *ngIf="course?.categoryName === 'vocational'" matTooltip="Vocational" alt="flag" matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' class="primerFlage"  src="../../../../assets/learner/freeV.svg"> 
-                                                <img *ngIf="course?.categoryName === 'pro certification'" matTooltip="Pro certification" matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="../../../../assets/learner/freeP.svg"> 
-                                                </span>
-                                            </div>
-                                            <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
-                                            <div class="overlay">
-                                                <mat-icon class="text"> play_arrow </mat-icon>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-sm-6 col-md-8 col-lg-7 ">
-                                        <div class="f_size_18 f_wt_500 pointer">
-                                            <span  *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
-                                            <span  *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
-                                            <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
+                    <div class="col-6 col-sm-6 col-md-8 col-lg-7">
+                      <div class="f_size_18 f_wt_500 pointer">
+                        <span
+                          *ngIf="course.course_name?.length > 28"
+                          tooltip="{{ course.course_name }}"
+                          placement="right"
+                          >{{
+                            (course.course_name | slice: 0:28) + "..."
+                          }}</span
+                        >
+                        <span *ngIf="course.course_name?.length <= 28">{{
+                          course.course_name
+                        }}</span>
+                        <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
-                                            <div class="span-with-icon">
-                                                <mat-icon class="timer"> alarm_on </mat-icon>
-                                                {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
-                                                (click)="gotoDesc(course)">
-                                                <p class="">
-                                                    {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="row startBtnRow">
-                                            <div class="col-12 col-sm-12 col-md-10 startBtnCol">
-                                                <button *ngIf="course.batchCourse == true" class="clr" (click)="goToAssignment(course)" [disabled]="course.assignmentCount == 0">
-                                                    <mat-icon class="btn-icon">description</mat-icon>
-                                                    <span>Assignments ({{course.assignmentCount}})</span>
-                                                </button>
-
-
-                                                <button *ngIf="course.batchCourse == true" class="clr ml-4" (click)="goToForum(course)"
-                                                >
-                                                    <mat-icon class="btn-icon">forum</mat-icon>
-                                                    <span>Discussion Forum ({{course.forumCount}})</span>
-                                                </button>
-                                            </div>
-                                            <div class="startBtnDiv">
-                                                <button mat-stroked-button 
-                                                    *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                                                    class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
-                                                    <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
-                                                    <span class="cap f_wt_400  m-t-m-2">
-                                                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
-                                                         course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' | translate }}&nbsp;
-                                                    </span>
-                                                </button>
-                                                <button mat-stroked-button
-                                                    *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                    class="btl-alin blue_clr cap pointer m-t-05"  (click)="gotoDesc(course)">
-                                                    <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
-                                                    <span class="cap f_wt_400  m-t-m-2">
-                                                        {{'Replay' | translate }}&nbsp;
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        <div class="row pointer ">
-                                            <div class="col-12" >
-                                                <span class="upcoming" (click)="navToCal()" *ngIf="course?.upComingLiveClassRoom?.activitytype == 'Live Classroom'">{{course?.upComingLiveClassRoom?.status}}...    <b>{{course?.upComingLiveClassRoom?.startdate | date :' h:mm a'}} to {{course?.upComingLiveClassRoom?.enddate | date :' h:mm a'}}</b> | 
-                                                    <u><b>Live classroom</b></u>
-                                                    <mat-icon class="video">videocam</mat-icon></span>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
-                                        <div class="aligned-with-icon alarmcursor">
-                                            <mat-icon class="timer"> alarm_on </mat-icon>
-                                            {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
-                                        </div>
-                                        <div class="startBtnicon">
-                                            <button mat-stroked-button 
-                                                *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                                                class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
-                                                <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
-                                                <span class="cap f_wt_400  m-t-m-2">
-                                                    {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
-                                                     course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' | translate }}&nbsp;
-                                                </span>
-                                            </button>
-                                            <button mat-stroked-button
-                                                *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                class="btl-alin blue_clr cap pointer m-t-05"  (click)="gotoDesc(course)">
-                                                <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
-                                                <span class="cap f_wt_400  m-t-m-2">
-                                                    {{'Replay' | translate }}&nbsp;
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="course.batchCourse == true">
-                                <div class="row  m-l-2p f_size_12">
-                                    <div class="col-3 ">
-                                        <div>Activity 
-                                            <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div>Learning effort
-                                            <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div>Points earned
-                                            <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div>Final score
-                                            <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row m-t-2 m-l-2p">
-                                    <div class="col-3">
-                                        <div class="m-t">
-                                            <sapn class="padscore">4</sapn>
-                                            <sapn class="f_size_22">/</sapn> <span class="f_size_20">20</span>
-                                        </div>
-                                        <div class="m-l-3 f_size_12">Pending</div>
-                                     
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="progess pointer">
-                                            <circle-progress
-                                                [percent]="course?.coursePlayerStatus?.course_percentage|| 0"
-                                                [radius]="10"  [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
-                                                [outerStrokeGradient]="true" [outerStrokeGradientStopColor] = "'#53a9ff'"
-                                                [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'"
-                                                [titleFontSize]="7" [unitsFontSize]="7" [showSubtitle]="false"
-                                                [animation]="true" [animationDuration]="100" [startFromZero]="false"
-                                                [responsive]="true">
-                                            </circle-progress>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="point">56</div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="finalScore">- - -</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- card end -->
+                        <div class="span-with-icon">
+                          <mat-icon class="timer"> alarm_on </mat-icon>
+                          {{
+                            course?.course_duration != 1
+                              ? course.course_duration
+                                ? course.course_duration + " hours"
+                                : "1" + " hour"
+                              : "1" + "hour"
+                          }}
                         </div>
-                    </mat-card>
-                    <div style="border-bottom: 1px solid #cccccc7a"></div>
-                </div>
-
-                <div *ngIf="completedCourseCount === 0">
-                    <mat-card class="coursebg width_90 errorCard">
-                        <div class="row width_90 no_margin">
-                            <div class="col-1 display_flex pointer no_pl mt-4"
-                                (click)="gotoDesc(course)">
-                                <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs">
-                            </div>
-                            <div class="col-11  no_pl errorboxx">
-                                <span style="font-size: medium;">{{'You have no completed courses at the moment.' | translate }}</span>
-                            </div>
+                      </div>
+                      <div class="row">
+                        <div
+                          class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
+                          (click)="gotoDesc(course)"
+                        >
+                          <p class="">
+                            {{
+                              course.course_description?.length > 100
+                                ? (course.course_description | slice: 0:100) +
+                                  "..."
+                                : course.course_description
+                            }}
+                          </p>
                         </div>
-                    </mat-card>
-                    <hr class="hr-tag">
-                </div>
-            </mat-tab>
-            <mat-tab>
-                <div class="row">
-                    <div class="col-6  m-auto">
-                        <span class="menuBtnHoriz">{{categoryNamePrint | titlecase}}</span>                        
+                      </div>
+                      <div class="row startBtnRow">
+                        <div class="col-12 col-sm-12 col-md-10 startBtnCol">
+                          <button
+                            *ngIf="course.batchCourse == true"
+                            class="clr"
+                            (click)="goToAssignment(course)"
+                            [disabled]="course.assignmentCount == 0"
+                          >
+                            <mat-icon class="btn-icon">description</mat-icon>
+                            <span
+                              >Assignments ({{ course.assignmentCount }})</span
+                            >
+                          </button>
+
+                          <button
+                            *ngIf="course.batchCourse == true"
+                            class="clr ml-4"
+                            (click)="goToForum(course)"
+                          >
+                            <mat-icon class="btn-icon">forum</mat-icon>
+                            <span
+                              >Discussion Forum ({{ course.forumCount }})</span
+                            >
+                          </button>
+                        </div>
+                        <div class="startBtnDiv">
+                          <button
+                            mat-stroked-button
+                            *ngIf="
+                              course?.coursePlayerStatus?.status !== 'completed'
+                            "
+                            class="btl-alin blue_clr cap pointer m-t-05"
+                            (click)="gotoDesc(course)"
+                          >
+                            <mat-icon class="icon-color m-t-m-2"
+                              >play_circle_outline</mat-icon
+                            >
+                            <span class="cap f_wt_400 m-t-m-2">
+                              {{
+                                course?.coursePlayerStatus?.status ===
+                                "incomplete"
+                                  ? "Resume"
+                                  : course?.coursePlayerStatus?.status ===
+                                    "suspend"
+                                  ? "Resume"
+                                  : "Start"
+                              }}&nbsp;
+                            </span>
+                          </button>
+                          <button
+                            mat-stroked-button
+                            *ngIf="
+                              course?.coursePlayerStatus?.status === 'completed'
+                            "
+                            class="btl-alin blue_clr cap pointer m-t-05"
+                            (click)="gotoDesc(course)"
+                          >
+                            <mat-icon class="icon-color m-t-m-2"
+                              >replay</mat-icon
+                            >
+                            <span class="cap f_wt_400 m-t-m-2">
+                              {{ "Replay" }}&nbsp;
+                            </span>
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="row pointer">
+                        <div class="col-12">
+                          <span
+                            class="upcoming"
+                            (click)="navToCal()"
+                            *ngIf="
+                              course?.upComingLiveClassRoom?.activitytype ==
+                              'Live Classroom'
+                            "
+                            >{{ course?.upComingLiveClassRoom?.status }}...
+                            <b
+                              >{{
+                                course?.upComingLiveClassRoom?.startdate
+                                  | date: " h:mm a"
+                              }}
+                              to
+                              {{
+                                course?.upComingLiveClassRoom?.enddate
+                                  | date: " h:mm a"
+                              }}</b
+                            >
+                            |
+                            <u><b>Live classroom</b></u>
+                            <mat-icon class="video">videocam</mat-icon></span
+                          >
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-6">
-                    <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
-                        <mat-icon>more_horiz</mat-icon>
-                      </button>
-                      <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" 
-                        *ngFor="let categorytab of categoryDetails">
-                          <span>{{categorytab.categoryName}}</span>
+
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
+                      <div class="aligned-with-icon alarmcursor">
+                        <mat-icon class="timer"> alarm_on </mat-icon>
+                        {{
+                          course?.course_duration != 1
+                            ? course.course_duration
+                              ? course.course_duration + " hours"
+                              : "1" + " hour"
+                            : "1" + "hour"
+                        }}
+                      </div>
+                      <div class="startBtnicon">
+                        <button
+                          mat-stroked-button
+                          *ngIf="
+                            course?.coursePlayerStatus?.status !== 'completed'
+                          "
+                          class="btl-alin blue_clr cap pointer m-t-05"
+                          (click)="gotoDesc(course)"
+                        >
+                          <mat-icon class="icon-color m-t-m-2"
+                            >play_circle_outline</mat-icon
+                          >
+                          <span class="cap f_wt_400 m-t-m-2">
+                            {{
+                              course?.coursePlayerStatus?.status ===
+                              "incomplete"
+                                ? "Resume"
+                                : course?.coursePlayerStatus?.status ===
+                                  "suspend"
+                                ? "Resume"
+                                : "Start"
+                            }}&nbsp;
+                          </span>
                         </button>
-                      </mat-menu>
-                    </div>
-                </div>
-                <ng-template matTabLabel>
-                    <span class="tabsc" (click)="getEnrolledCourses('','',
-                    '',searchName)" matBadge="{{jobRoleSelected === true? jobAllCourseCount : allCourseCount}}" matBadgeOverlap="false">{{'All' }}</span>
-                </ng-template>
-                <div *ngFor="let course of enrolledCourses ;let j=index">
-                    <mat-card class="coursebg card12" matRipple>
-                        <!-- <div class="row width_100 no_margin"> -->
-                        <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
-                        <div class="row">
-                            <!-- // Card start -->
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol">
-                                <div class="row">
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-3">
-                                        <div class="courseHover" (click)="gotoDesc(course)" >
-                                            <div > 
-                                                <span *ngIf="course?.course_type === 'primer_course'">
-                                                <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"  matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="assets/learner/primerC.svg"> 
-                                                <img *ngIf="course?.categoryName === 'vocational'"  matTooltip="Vocational"  matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="../../../../assets/learner/primerV.svg"> 
-                                                <img *ngIf="course?.categoryName === 'pro certification'" matTooltip="Pro certification"  matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="../../../../assets/learner/primerP.svg"> 
-                                            </span>
-                                            <span *ngIf="course?.course_type === 'free_course'" class="">
-                                                <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"  matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="../../../../assets/learner/freeC.svg"> 
-                                                <img *ngIf="course?.categoryName === 'vocational'" matTooltip="Vocational" alt="flag"  matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' class="primerFlage"  src="../../../../assets/learner/freeV.svg"> 
-                                                <img *ngIf="course?.categoryName === 'pro certification'" matTooltip="Pro certification"  matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="../../../../assets/learner/freeP.svg"> 
-                                                </span>
-                                            </div>
-                                            <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
-                                            <div class="overlay">
-                                                <mat-icon class="text"> play_arrow </mat-icon>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-sm-6 col-md-8 col-lg-7">
-                                        <div class=" f_size_18 f_wt_500 pointer">
-                                            <span  *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
-                                            <span  *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
-                                            <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
-                                            <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
-                                            <div class="span-with-icon">
-                                                <mat-icon class="timer"> alarm_on </mat-icon>
-                                                {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
-                                                (click)="gotoDesc(course)">
-                                                <p class="">
-                                                    {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="row startBtnRow">
-                                            <div class="col-12 col-sm-12 col-md-10 startBtnCol">
-                                                <button *ngIf="course.batchCourse == true" class="clr" (click)="goToAssignment(course)"
-                                                [disabled]="course.assignmentCount == 0">
-                                                    <mat-icon class="btn-icon">description</mat-icon>
-                                                    <span>Assignments ({{course.assignmentCount}})</span>
-                                                </button>
-
-
-                                                <button *ngIf="course.batchCourse == true" class="clr ml-4" (click)="goToForum(course)"
-                                                >
-                                                    <mat-icon class="btn-icon">forum</mat-icon>
-                                                    <span>Discussion Forum ({{course.forumCount}})</span>
-                                                </button>
-                                            </div>
-                                            <div class="startBtnDiv">
-                                                <button mat-stroked-button 
-                                                    *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                                                    class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
-                                                    <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
-                                                    <span class="cap f_wt_400  m-t-m-2">
-                                                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
-                                                        course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' }}&nbsp;
-                                                    </span>
-                                                </button>
-                                                <button mat-stroked-button
-                                                    *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                    class="btl-alin blue_clr cap pointer m-t-05"  (click)="gotoDesc(course)">
-                                                    <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
-                                                    <span class="cap f_wt_400  m-t-m-2">
-                                                        {{'Replay'  }}&nbsp;
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        <div class="row pointer ">
-                                            <div class="col-12 " >
-                                                <span class="upcoming" (click)="navToCal()" *ngIf="course?.upComingLiveClassRoom?.activitytype == 'Live Classroom'">{{course?.upComingLiveClassRoom?.status}}...    <b>{{course?.upComingLiveClassRoom?.startdate | date :' h:mm a'}} to {{course?.upComingLiveClassRoom?.enddate | date :' h:mm a'}}</b> | 
-                                                    <u><b>Live classroom</b></u>
-                                                    <mat-icon class="video">videocam</mat-icon></span>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
-                                        <div class="aligned-with-icon alarmcursor">
-                                            <mat-icon class="timer"> alarm_on </mat-icon>
-                                            {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
-                                        </div>
-                                        <div class="startBtnicon">
-                                            <button mat-stroked-button 
-                                                *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                                                class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
-                                                <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
-                                                <span class="cap f_wt_400  m-t-m-2">
-                                                    {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
-                                                    course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' }}&nbsp;
-                                                </span>
-                                            </button>
-                                            <button mat-stroked-button
-                                                *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                class="btl-alin blue_clr cap pointer m-t-05"  (click)="gotoDesc(course)">
-                                                <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
-                                                <span class="cap f_wt_400  m-t-m-2">
-                                                    {{'Replay'  }}&nbsp;
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="course.batchCourse == true">
-                                <div class="row  m-l-2p f_size_12">
-                                    <div class="col-3">
-                                        <div>Activity 
-                                            <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div>Learning effort
-                                            <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div>Points earned
-                                            <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div>Final score
-                                            <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row m-t-2 m-l-2p">
-                                    <div class="col-3">
-                                        <div class="m-t">
-                                            <sapn class="padscore">4</sapn>
-                                            <sapn class="f_size_22">/</sapn> <span class="f_size_20">20</span>
-                                        </div>
-                                        <div class="m-l-3 f_size_12">Pending</div>
-
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="progess pointer">
-                                            <circle-progress
-                                                [percent]="course?.coursePlayerStatus?.course_percentage|| 0"
-                                                [radius]="10"  [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
-                                                [outerStrokeGradient]="true" [outerStrokeGradientStopColor] = "'#53a9ff'"
-                                                [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'"
-                                                [titleFontSize]="7" [unitsFontSize]="7" [showSubtitle]="false"
-                                                [animation]="true" [animationDuration]="100" [startFromZero]="false"
-                                                [responsive]="true">
-                                            </circle-progress>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="point">56</div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="finalScore">- - -</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- card end -->
-                        </div>
-                    </mat-card>
-                    <div style="border-bottom: 1px solid #cccccc7a"></div>
-                </div>
-
-
-
-                <div *ngIf="allCourseCount === 0">
-                    <mat-card class="coursebg width_90 errorCard">
-                        <div class="row width_90 no_margin">
-                            <div class="col-1 display_flex pointer no_pl mt-4"
-                                (click)="gotoDesc(course)">
-                                <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs">
-                            </div>
-                            <div class="col-11  no_pl errorboxx">
-                                <span style="font-size: medium;">{{'You have no enrolled courses at the moment.' | translate }}</span>
-                            </div>
-                        </div>
-                    </mat-card>
-                    <hr class="hr-tag">
-                </div>
-            </mat-tab>
-            <!-----------------------------------Category tabs----------------------------->
-   
-           <mat-tab disabled></mat-tab>
-           <mat-tab disabled></mat-tab>
-           <mat-tab disabled></mat-tab>
-           <mat-tab disabled></mat-tab>
-            <!-- <div class=""> -->
-            <ng-container *ngFor="let categorytab of categoryDetails">
-            <mat-tab  *ngIf="categorytab.enrollCount">
-                <div class="row">
-                    <div class="col-6 m-auto">
-                        <span class="menuBtnHoriz">{{categoryNamePrint | titlecase}}</span>
-                    </div>
-                    <div class="col-6">
-                    <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
-                        <mat-icon>more_horiz</mat-icon>
-                      </button>
-                      <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" 
-                        *ngFor="let categorytab of categoryDetails">
-                          <span>{{categorytab.categoryName}}</span>
+                        <button
+                          mat-stroked-button
+                          *ngIf="
+                            course?.coursePlayerStatus?.status === 'completed'
+                          "
+                          class="btl-alin blue_clr cap pointer m-t-05"
+                          (click)="gotoDesc(course)"
+                        >
+                          <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
+                          <span class="cap f_wt_400 m-t-m-2">
+                            {{ "Replay" }}&nbsp;
+                          </span>
                         </button>
-                      </mat-menu>
+                      </div>
                     </div>
+                  </div>
                 </div>
-                <ng-template matTabLabel>
-                    <span class="tabsc" (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId,'',searchName)"
-                      matBadge="{{categorytab.enrollCount}}"
-                        matBadgeOverlap="false">{{categorytab.categoryName | titlecase}}</span>
-                </ng-template>
+                <div
+                  class="col-12 col-sm-12 col-md-12 col-lg-5"
+                  *ngIf="course.batchCourse == true"
+                >
+                  <div class="row m-l-2p f_size_12">
+                    <div class="col-3">
+                      <div>
+                        Activity
+                        <mat-icon
+                          tooltip="Info about the action"
+                          placement="bottom"
+                          class="infoIcon"
+                          fontSet="material-icons-outlined"
+                          >info</mat-icon
+                        >
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div>
+                        Learning effort
+                        <mat-icon
+                          tooltip="Info about the action"
+                          placement="bottom"
+                          class="infoIcon"
+                          fontSet="material-icons-outlined"
+                          >info</mat-icon
+                        >
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div>
+                        Points earned
+                        <mat-icon
+                          tooltip="Info about the action"
+                          placement="bottom"
+                          class="infoIcon"
+                          fontSet="material-icons-outlined"
+                          >info</mat-icon
+                        >
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div>
+                        Final score
+                        <mat-icon
+                          tooltip="Info about the action"
+                          placement="bottom"
+                          class="infoIcon"
+                          fontSet="material-icons-outlined"
+                          >info</mat-icon
+                        >
+                      </div>
+                    </div>
+                  </div>
 
-                <div *ngFor="let course of enrolledCourses ;let j=index">
-                    <mat-card class="coursebg card12" matRipple>
-                        <!-- <div class="row width_100 no_margin"> -->
-                        <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
-                        <div class="row">
-                            <!-- // Card start -->
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-7 no-p-l">
-                                <div class="row">
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-3">
-                                        <div class="courseHover" (click)="gotoDesc(course)">
-                                            <div > 
-                                                <span *ngIf="course?.course_type === 'primer_course'">
-                                                <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"  matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="assets/learner/primerC.svg"> 
-                                                <img *ngIf="course?.categoryName === 'vocational'"  matTooltip="Vocational" matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="../../../../assets/learner/primerV.svg"> 
-                                                <img *ngIf="course?.categoryName === 'pro certification'" matTooltip="Pro certification" matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="../../../../assets/learner/primerP.svg"> 
-                                            </span>
-                                            <span *ngIf="course?.course_type === 'free_course'" class="">
-                                                <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"  matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="../../../../assets/learner/freeC.svg"> 
-                                                <img *ngIf="course?.categoryName === 'vocational'" matTooltip="Vocational" alt="flag" matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' class="primerFlage"  src="../../../../assets/learner/freeV.svg"> 
-                                                <img *ngIf="course?.categoryName === 'pro certification'" matTooltip="Pro certification" matTooltipPosition="right" matTooltipClass='custom-mat-tooltip' alt="flag" class="primerFlage"  src="../../../../assets/learner/freeP.svg"> 
-                                                </span>
-                                            </div>
-                                            <img alt="Course Img" src="{{course.course_img_url}}" class="courseImg">
-                                            <div class="overlay">
-                                                <mat-icon class="text"> play_arrow </mat-icon>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-sm-6 col-md-8 col-lg-7 courceNameCol">
-                                        <div class=" f_size_18 f_wt_500 pointer">
-                                            <span  *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
-                                            <span  *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
-                                            <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
+                  <div class="row m-t-2 m-l-2p">
+                    <div class="col-3">
+                      <div class="m-t">
+                        <sapn class="padscore">4</sapn>
+                        <sapn class="f_size_22">/</sapn>
+                        <span class="f_size_20">20</span>
+                      </div>
+                      <div class="m-l-3 f_size_12">Pending</div>
+                    </div>
+                    <div class="col-3">
+                      <div class="progess pointer">
+                        <circle-progress
+                          [percent]="
+                            course?.coursePlayerStatus?.course_percentage || 0
+                          "
+                          [radius]="10"
+                          [outerStrokeWidth]="2"
+                          [innerStrokeWidth]="2"
+                          [space]="-2"
+                          [outerStrokeGradient]="true"
+                          [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'"
+                          [innerStrokeColor]="'#e7e8ea'"
+                          [titleFontSize]="7"
+                          [unitsFontSize]="7"
+                          [showSubtitle]="false"
+                          [animation]="true"
+                          [animationDuration]="100"
+                          [startFromZero]="false"
+                          [responsive]="true"
+                        >
+                        </circle-progress>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="point">56</div>
+                    </div>
+                    <div class="col-3">
+                      <div class="finalScore">- - -</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- card end -->
+              </div>
+            </mat-card>
+            <div style="border-bottom: 1px solid #cccccc7a"></div>
+          </div>
+
+          <div *ngIf="allCourseCount === 0">
+            <mat-card class="coursebg width_90 errorCard">
+              <div class="row width_90 no_margin">
+                <div
+                  class="col-1 display_flex pointer no_pl mt-4"
+                  (click)="gotoDesc(course)"
+                >
+                  <img
+                    alt="Course Img"
+                    src="assets/noCourseImg.jpg"
+                    class="courseImgs"
+                  />
+                </div>
+                <div class="col-11 no_pl errorboxx">
+                  <span style="font-size: medium">{{
+                    "You have no enrolled courses at the moment." | translate
+                  }}</span>
+                </div>
+              </div>
+            </mat-card>
+            <hr class="hr-tag" />
+          </div>
+        </mat-tab>
+        <!-----------------------------------Category tabs----------------------------->
+
+        <mat-tab disabled></mat-tab>
+        <mat-tab disabled></mat-tab>
+        <mat-tab disabled></mat-tab>
+        <mat-tab disabled></mat-tab>
+        <!-- <div class=""> -->
+        <ng-container *ngFor="let categorytab of categoryDetails">
+          <mat-tab *ngIf="categorytab.enrollCount">
+            <div class="row">
+              <div class="col-6 m-auto">
+                <span class="menuBtnHoriz">{{
+                  categoryNamePrint | titlecase
+                }}</span>
+              </div>
+              <div class="col-6">
+                <button
+                  class="float-right menuBtnHoriz"
+                  mat-icon-button
+                  [matMenuTriggerFor]="menu"
+                >
+                  <mat-icon>more_horiz</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button
+                    mat-menu-item
+                    (click)="
+                      getEnrolledCourses(
+                        catalogueDetails.catalogueId,
+                        categorytab.categoryId
+                      )
+                    "
+                    *ngFor="let categorytab of categoryDetails"
+                  >
+                    <span>{{ categorytab.categoryName }}</span>
+                  </button>
+                </mat-menu>
+              </div>
+            </div>
+            <ng-template matTabLabel>
+              <span
+                class="tabsc"
+                (click)="
+                  getEnrolledCourses(
+                    catalogueDetails.catalogueId,
+                    categorytab.categoryId,
+                    '',
+                    searchName
+                  )
+                "
+                matBadge="{{ categorytab.enrollCount }}"
+                matBadgeOverlap="false"
+                >{{ categorytab.categoryName | titlecase }}</span
+              >
+            </ng-template>
+
+            <div *ngFor="let course of enrolledCourses; let j = index">
+              <mat-card class="coursebg card12" matRipple>
+                <!-- <div class="row width_100 no_margin"> -->
+                <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
+                <div class="row">
+                  <!-- // Card start -->
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-7 no-p-l">
+                    <div class="row">
+                      <div class="col-12 col-sm-12 col-md-4 col-lg-3">
+                        <div class="courseHover" (click)="gotoDesc(course)">
+                          <div>
+                            <span
+                              *ngIf="course?.course_type === 'primer_course'"
+                            >
+                              <img
+                                *ngIf="
+                                  course?.categoryName === 'college connect'
+                                "
+                                matTooltip="College connect"
+                                matTooltipPosition="right"
+                                matTooltipClass="custom-mat-tooltip"
+                                alt="flag"
+                                class="primerFlage"
+                                src="assets/learner/primerC.svg"
+                              />
+                              <img
+                                *ngIf="course?.categoryName === 'vocational'"
+                                matTooltip="Vocational"
+                                matTooltipPosition="right"
+                                matTooltipClass="custom-mat-tooltip"
+                                alt="flag"
+                                class="primerFlage"
+                                src="../../../../assets/learner/primerV.svg"
+                              />
+                              <img
+                                *ngIf="
+                                  course?.categoryName === 'pro certification'
+                                "
+                                matTooltip="Pro certification"
+                                matTooltipPosition="right"
+                                matTooltipClass="custom-mat-tooltip"
+                                alt="flag"
+                                class="primerFlage"
+                                src="../../../../assets/learner/primerP.svg"
+                              />
+                            </span>
+                            <span
+                              *ngIf="course?.course_type === 'free_course'"
+                              class=""
+                            >
+                              <img
+                                *ngIf="
+                                  course?.categoryName === 'college connect'
+                                "
+                                matTooltip="College connect"
+                                matTooltipPosition="right"
+                                matTooltipClass="custom-mat-tooltip"
+                                alt="flag"
+                                class="primerFlage"
+                                src="../../../../assets/learner/freeC.svg"
+                              />
+                              <img
+                                *ngIf="course?.categoryName === 'vocational'"
+                                matTooltip="Vocational"
+                                alt="flag"
+                                matTooltipPosition="right"
+                                matTooltipClass="custom-mat-tooltip"
+                                class="primerFlage"
+                                src="../../../../assets/learner/freeV.svg"
+                              />
+                              <img
+                                *ngIf="
+                                  course?.categoryName === 'pro certification'
+                                "
+                                matTooltip="Pro certification"
+                                matTooltipPosition="right"
+                                matTooltipClass="custom-mat-tooltip"
+                                alt="flag"
+                                class="primerFlage"
+                                src="../../../../assets/learner/freeP.svg"
+                              />
+                            </span>
+                          </div>
+                          <img
+                            alt="Course Img"
+                            src="{{ course.course_img_url }}"
+                            class="courseImg"
+                          />
+                          <div class="overlay">
+                            <mat-icon class="text"> play_arrow </mat-icon>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="col-6 col-sm-6 col-md-8 col-lg-7 courceNameCol"
+                      >
+                        <div class="f_size_18 f_wt_500 pointer">
+                          <span
+                            *ngIf="course.course_name?.length > 28"
+                            tooltip="{{ course.course_name }}"
+                            placement="right"
+                            >{{
+                              (course.course_name | slice: 0:28) + "..."
+                            }}</span
+                          >
+                          <span *ngIf="course.course_name?.length <= 28">{{
+                            course.course_name
+                          }}</span>
+                          <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
-                                            <div class="span-with-icon">
-                                                <mat-icon class="timer"> alarm_on </mat-icon>
-                                                {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
-                                                (click)="gotoDesc(course)">
-                                                <p class="">
-                                                    {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-10"></div>
-                                            <div class="startBtnDiv">
-                                                <button mat-stroked-button 
-                                                    *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                                                    class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
-                                                    <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
-                                                    <span class="cap f_wt_400  m-t-m-2">
-                                                        {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
-                                                        course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' }}&nbsp;
-                                                    </span>
-                                                </button>
-                                                <button mat-stroked-button
-                                                    *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                    class="btl-alin blue_clr cap pointer m-t-05"  (click)="gotoDesc(course)">
-                                                    <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
-                                                    <span class="cap f_wt_400  m-t-m-2">
-                                                        {{'Replay'  }}&nbsp;
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+                          <div class="span-with-icon">
+                            <mat-icon class="timer"> alarm_on </mat-icon>
+                            {{
+                              course?.course_duration != 1
+                                ? course.course_duration
+                                  ? course.course_duration + " hours"
+                                  : "1" + " hour"
+                                : "1" + "hour"
+                            }}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div
+                            class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
+                            (click)="gotoDesc(course)"
+                          >
+                            <p class="">
+                              {{
+                                course.course_description?.length > 100
+                                  ? (course.course_description | slice: 0:100) +
+                                    "..."
+                                  : course.course_description
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-10"></div>
+                          <div class="startBtnDiv">
+                            <button
+                              mat-stroked-button
+                              *ngIf="
+                                course?.coursePlayerStatus?.status !==
+                                'completed'
+                              "
+                              class="btl-alin blue_clr cap pointer m-t-05"
+                              (click)="gotoDesc(course)"
+                            >
+                              <mat-icon class="icon-color m-t-m-2"
+                                >play_circle_outline</mat-icon
+                              >
+                              <span class="cap f_wt_400 m-t-m-2">
+                                {{
+                                  course?.coursePlayerStatus?.status ===
+                                  "incomplete"
+                                    ? "Resume"
+                                    : course?.coursePlayerStatus?.status ===
+                                      "suspend"
+                                    ? "Resume"
+                                    : "Start"
+                                }}&nbsp;
+                              </span>
+                            </button>
+                            <button
+                              mat-stroked-button
+                              *ngIf="
+                                course?.coursePlayerStatus?.status ===
+                                'completed'
+                              "
+                              class="btl-alin blue_clr cap pointer m-t-05"
+                              (click)="gotoDesc(course)"
+                            >
+                              <mat-icon class="icon-color m-t-m-2"
+                                >replay</mat-icon
+                              >
+                              <span class="cap f_wt_400 m-t-m-2">
+                                {{ "Replay" }}&nbsp;
+                              </span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
 
-                                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
-                                        <div class="aligned-with-icon alarmcursor">
-                                            <mat-icon class="timer"> alarm_on </mat-icon>
-                                            {{course?.course_duration != 1  ? (course.course_duration ? course.course_duration + ' hours' : '1' + ' hour') : '1' + 'hour'}}
-                                        </div>
-                                        <div class="startBtnicon">
-                                            <button mat-stroked-button 
-                                                *ngIf="course?.coursePlayerStatus?.status !== 'completed'"
-                                                class=" btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
-                                                <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
-                                                <span class="cap f_wt_400  m-t-m-2">
-                                                    {{course?.coursePlayerStatus?.status === 'incomplete' ? 'Resume' : 
-                                                    course?.coursePlayerStatus?.status === 'suspend' ? 'Resume' : 'Start' }}&nbsp;
-                                                </span>
-                                            </button>
-                                            <button mat-stroked-button
-                                                *ngIf="course?.coursePlayerStatus?.status === 'completed'"
-                                                class="btl-alin blue_clr cap pointer m-t-05"  (click)="gotoDesc(course)">
-                                                <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
-                                                <span class="cap f_wt_400  m-t-m-2">
-                                                    {{'Replay'  }}&nbsp;
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- <div class="col-5" *ngIf="course.batchCourse == true">
+                      <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
+                        <div class="aligned-with-icon alarmcursor">
+                          <mat-icon class="timer"> alarm_on </mat-icon>
+                          {{
+                            course?.course_duration != 1
+                              ? course.course_duration
+                                ? course.course_duration + " hours"
+                                : "1" + " hour"
+                              : "1" + "hour"
+                          }}
+                        </div>
+                        <div class="startBtnicon">
+                          <button
+                            mat-stroked-button
+                            *ngIf="
+                              course?.coursePlayerStatus?.status !== 'completed'
+                            "
+                            class="btl-alin blue_clr cap pointer m-t-05"
+                            (click)="gotoDesc(course)"
+                          >
+                            <mat-icon class="icon-color m-t-m-2"
+                              >play_circle_outline</mat-icon
+                            >
+                            <span class="cap f_wt_400 m-t-m-2">
+                              {{
+                                course?.coursePlayerStatus?.status ===
+                                "incomplete"
+                                  ? "Resume"
+                                  : course?.coursePlayerStatus?.status ===
+                                    "suspend"
+                                  ? "Resume"
+                                  : "Start"
+                              }}&nbsp;
+                            </span>
+                          </button>
+                          <button
+                            mat-stroked-button
+                            *ngIf="
+                              course?.coursePlayerStatus?.status === 'completed'
+                            "
+                            class="btl-alin blue_clr cap pointer m-t-05"
+                            (click)="gotoDesc(course)"
+                          >
+                            <mat-icon class="icon-color m-t-m-2"
+                              >replay</mat-icon
+                            >
+                            <span class="cap f_wt_400 m-t-m-2">
+                              {{ "Replay" }}&nbsp;
+                            </span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="col-5" *ngIf="course.batchCourse == true">
                                 <div class="row m-t-2 m-l-2p f_size_13">
                                     <div class="col-3">
                                         <div>Activity 
@@ -1016,42 +2003,57 @@
                                     </div>
                                 </div>
                             </div> -->
-                            <!-- card end -->
-                        </div>
-                    </mat-card>
-                    <div style="border-bottom: 1px solid #ccc"></div>
+                  <!-- card end -->
                 </div>
+              </mat-card>
+              <div style="border-bottom: 1px solid #ccc"></div>
+            </div>
 
-                <div *ngIf="allCourseCount === 0">
-                    <mat-card class="coursebg width_90 errorCard">
-                        <div class="row width_90 no_margin">
-                            <div class="col-1 display_flex pointer no_pl mt-4"
-                                (click)="gotoDesc(course)">
-                                <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs">
-                            </div>
-                            <div class="col-11  no_pl errorboxx">
-                                <span style="font-size: medium;">{{'You have no courses at the moment.' | translate }}</span>
-                            </div>
-                        </div>
-                    </mat-card>
-                    <hr class="hr-tag">
+            <div *ngIf="allCourseCount === 0">
+              <mat-card class="coursebg width_90 errorCard">
+                <div class="row width_90 no_margin">
+                  <div
+                    class="col-1 display_flex pointer no_pl mt-4"
+                    (click)="gotoDesc(course)"
+                  >
+                    <img
+                      alt="Course Img"
+                      src="assets/noCourseImg.jpg"
+                      class="courseImgs"
+                    />
+                  </div>
+                  <div class="col-11 no_pl errorboxx">
+                    <span style="font-size: medium">{{
+                      "You have no courses at the moment." | translate
+                    }}</span>
+                  </div>
                 </div>
-            </mat-tab>
+              </mat-card>
+              <hr class="hr-tag" />
+            </div>
+          </mat-tab>
         </ng-container>
-    <!-- </div> -->
-        </mat-tab-group>
-        <button class="menuBtn" mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="getEnrolledCourses(catalogueDetails.catalogueId,categorytab.categoryId)" 
-            *ngFor="let categorytab of categoryDetails">
-              <span>{{categorytab.categoryName}}</span>
-            </button>
-          </mat-menu>
-          
+        <!-- </div> -->
+      </mat-tab-group>
+      <button class="menuBtn" mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button
+          mat-menu-item
+          (click)="
+            getEnrolledCourses(
+              catalogueDetails.catalogueId,
+              categorytab.categoryId
+            )
+          "
+          *ngFor="let categorytab of categoryDetails"
+        >
+          <span>{{ categorytab.categoryName }}</span>
+        </button>
+      </mat-menu>
     </div>
-</div>
+  </div>
 
 <ng-template #previewDialog>
         <mat-dialog-title>
@@ -1066,12 +2068,20 @@
         </div> -->
         <!-- </div> -->
         <div class="col-4 text-right">
-            <mat-icon class="arrowIcon mr-2" *ngIf="availableCource" aria-hidden="false" (click)="closedialogbox(availableCource = false)">clear</mat-icon>
-            <button mat-mini-fab class="close-button" *ngIf="!availableCource">
-                <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
-              </button>
+          <mat-icon
+            class="arrowIcon mr-2"
+            *ngIf="availableCource"
+            aria-hidden="false"
+            (click)="closedialogbox((availableCource = false))"
+            >clear</mat-icon
+          >
+          <button mat-mini-fab class="close-button" *ngIf="!availableCource">
+            <mat-icon class="download-icon" (click)="closedialogbox()"
+              >close</mat-icon
+            >
+          </button>
         </div>
-    </div>
+      </div>
     </mat-dialog-title>
 
         <mat-dialog-content class="cardContainer">
@@ -1079,7 +2089,7 @@
                 <div class="col-8" *ngIf="categoryCount > 0">
                     <span class="f_wt_600 size float-left catnamenew" *ngIf="availableCource">{{ categoryPopupData  | titlecase}} ({{categoryCount}})</span>
                     </div>
-                    <div class="col-4 inner-addon right-addon">
+                    <div class="col-4 inner-addon right-addon" *ngIf="categoryCount > 0">
                         <mat-icon class="searchIcon">search</mat-icon>
                         <input type="text" class="form-control ccSearch"
                         [(ngModel)]="courseSearch" placeholder="Search.." />
@@ -1096,17 +2106,19 @@
                     </span>
                 </button>
                 </div>
-                <div class="col inner-addon right-addon">
+                <div class="col inner-addon right-addon" *ngIf="categoryCount > 0">
                     <input type="text" class="form-control popupsearch"
                     [(ngModel)]="courseSearch" placeholder="Search.." />
                     <mat-icon class="popupsearchIcon">search</mat-icon>
                 </div>
             </div>
 
-            <div class="row" >
+            <div class="row" *ngIf="categoryData.totalCount > 1">
           
-                <ng-container *ngIf="categoryData.totalCount > 1">
+                <ng-container *ngIf="( allcourses | search : courseSearch) as result">
+                    <ng-container *ngIf="result.length > 0">
                     <div  class="col-12 col-sm-12 col-md-6 col-lg-4 mt-4" *ngFor="let course of allcourses | search : courseSearch">
+                       
                         <!-- <div class="col-4 mt-4" *ngFor="let course of allcourses | search : courseSearch"> -->
                             <mat-card class="box-shadow">
                                 <div class="row">
@@ -1139,25 +2151,31 @@
                                 </div>
                             </mat-card>
                         </div>
+                    </ng-container>
+                        <div class="col errorDialouge" *ngIf="result.length === 0">
+                            <span style="font-size: medium;">
+                            No courses found
+                            </span>
+                        </div>
                 </ng-container>
                   
     
-    <div class="col errorDialouge" *ngIf="categoryCount < 1">
+    <!-- <div class="col errorDialouge" *ngIf="categoryCount < 1 && result.length === 0">
         <span style="font-size: medium;">
         No courses found
         </span>
-    </div>
+    </div> -->
     </div>
     </mat-dialog-content>
-    </ng-template>
+  </ng-template>
 
-<div class="spinner-container" *ngIf="loading">
+  <div class="spinner-container" *ngIf="loading">
     <mat-spinner diameter="40" class="mat-spinner-color"></mat-spinner>
-</div>
+  </div>
 
-<!-- Model for mobile user  -->
-<!-- data-toggle="modal" data-target="#myModal" -->
-<!-- <div class="modal" *ngIf="show" id="myModal" role="dialog">
+  <!-- Model for mobile user  -->
+  <!-- data-toggle="modal" data-target="#myModal" -->
+  <!-- <div class="modal" *ngIf="show" id="myModal" role="dialog">
     <div class="modal-content">
         <div class="modal-header">
             <span style="font-size:22px; color: red;">{{'Alert !' | translate }}</span>
@@ -1195,70 +2213,227 @@
 </div> -->
 </div>
 <!----------------------- Overlay available cources screen -------------------------------->
-<div class="container" [ngClass]="availableCource == true ?'availableContainer': 'availableCont'">
-    <div class="row" *ngIf="dropdownCatDetails">
-        <div class="col-12 pr-0">
-            <div class="row">
-                <div class="col-6 text-left font-weight-bold hedding"> <p>Available Courses</p></div>
-                <div class="col-6 text-right"> <mat-icon class="arrowIcon mr-2" aria-hidden="false" (click)="availableCource = false">clear</mat-icon></div>
-            </div>
-            <ng-container *ngFor="let category of dropdownCatDetails.categories">
-                <div class="parrentAccordian">
-                    <div class="row w-100 h-100" >
-                        <div class="col-12 m-auto pr-0"> 
-                            <span class="accordianText" *ngIf="!category.subCategory" (click)="getCoureBasedOnCatalog(dropdownCatDetails,category,'','');viewCourse(category, previewDialog ,category.categoryName, category.totalCount)" (click)="(isExpandCourseTemp && expandActivityNameTemp == category.categoryId) ? onexpTemp(category,category.categoryId,false) : onexpTemp(category,category.categoryId,true)">
-                                {{category.categoryName | titlecase}}<span class="matBadgeAvail"  matBadge="{{category.totalCount}}"  matBadgeOverlap="false"></span>
-                            </span>
-                    <span class="accordianText"  *ngIf="category.subCategory" (click)="(isExpandCourseTemp && expandActivityNameTemp == category.categoryId) ? onexpTemp(category,category.categoryId,false) : onexpTemp(category,category.categoryId,true)">
-                        {{category.categoryName | titlecase}}<span class="matBadgeAvail"  matBadge="{{category.totalCount}}"  matBadgeOverlap="false"></span>
-                    </span>
-                    <mat-icon class="arrowIcon float-right" aria-hidden="false" *ngIf="!category.subCategory" (click)="getCoureBasedOnCatalog(dropdownCatDetails,category,'','');viewCourse(category, previewDialog ,category.categoryName, category.totalCount)">keyboard_arrow_right</mat-icon>
-                    <mat-icon class="arrowIcon float-right" aria-hidden="false" *ngIf="expandActivityNameTemp !== category.categoryId && category.subCategory" (click)="(isExpandCourseTemp && expandActivityNameTemp == category.categoryId) ? onexpTemp(category, category.categoryId,false) : onexpTemp(category, category.categoryId,true)">keyboard_arrow_right</mat-icon>
-                    <mat-icon class="arrowIcon float-right" aria-hidden="false" *ngIf="isExpandCourseTemp && expandActivityNameTemp == category.categoryId" (click)="(isExpandCourseTemp && expandActivityNameTemp == category.categoryId) ? onexpTemp(category, category.categoryId,false) : onexpTemp( category,category.categoryId,true)">keyboard_arrow_up</mat-icon>
-              
-                    <ng-container *ngIf="(isExpandCourseTemp && expandActivityNameTemp == category.categoryId)">
-                        <ng-container *ngFor="let subCatet of category.subCategory">
-                            <div class="parrentAccordianSub">
-                               <div class="row w-100 h-100" >
-                        <div class="col-12 m-auto pr-0"> 
-                                <span class="accordianText ml-5" (click)="(isExpChild && expandActivityNameChildTemp == subCatet.subCategoryId) ? onexpchildTemp( subCatet.subCategoryId,false) : onexpchildTemp( subCatet.subCategoryId,true)">
-                                    {{subCatet.subCategoryName | titlecase}}  <span class="matBadgeAvail"  matBadge="{{subCatet.totalCount}}"  matBadgeOverlap="false"></span>
-                                </span>
-                                <mat-icon class="arrowIcon float-right" aria-hidden="false" *ngIf="expandActivityNameChildTemp !== subCatet.subCategoryId" (click)="(isExpChild && expandActivityNameChildTemp == subCatet.subCategoryId) ? onexpchildTemp( subCatet,subCatet.subCategoryId,false) : onexpchildTemp( subCatet,subCatet.subCategoryId,true)">keyboard_arrow_right</mat-icon>
-                                <mat-icon class="arrowIcon float-right" aria-hidden="false" *ngIf="isExpChild && subCatet.superSubCategory && expandActivityNameChildTemp == subCatet.subCategoryId" (click)="(isExpChild && expandActivityNameChildTemp == subCatet.subCategoryId) ? onexpchildTemp( subCatet,subCatet.subCategoryId,false) : onexpchildTemp( subCatet,subCatet.subCategoryId,true)">keyboard_arrow_up</mat-icon>
-                           
-                                <ng-container *ngIf="(isExpChild && expandActivityNameChildTemp == subCatet.subCategoryId)">
-                                    <ng-container *ngFor="let superSubCat of subCatet.superSubCategory">
-                                        <div class="parrentAccordiansuper">
-                                            <div class="row w-100 h-100 parrentSubAccord">
-                                                <div class="col-12 m-auto pr-0"> 
-                                            <span class="accordianTextsub" (click)="menuSelect(subCatet,superSubCat);
-                                            getCoureBasedOnCatalog(dropdownCatDetails,category,subCatet.subCategoryId, superSubCat.superSubCategoryId);
-                                              viewCourse(category,previewDialog,subCatet.superSubCategoryName,superSubCat.totalCount)">{{superSubCat.superSubCategoryName | titlecase}}<span class="matBadgeAvail"  matBadge="{{superSubCat.totalCount}}"  matBadgeOverlap="false"></span></span>
-                                        </div>
-                                        </div>
-                                        </div>
-                                    </ng-container>
-                                </ng-container>
+<div
+  class="container"
+  [ngClass]="availableCource == true ? 'availableContainer' : 'availableCont'"
+>
+  <div class="row" *ngIf="dropdownCatDetails">
+    <div class="col-12 pr-0">
+      <div class="row">
+        <div class="col-6 text-left font-weight-bold hedding">
+          <p>Available Courses</p>
+        </div>
+        <div class="col-6 text-right">
+          <mat-icon
+            class="arrowIcon mr-2"
+            aria-hidden="false"
+            (click)="availableCource = false"
+            >clear</mat-icon
+          >
+        </div>
+      </div>
+      <ng-container *ngFor="let category of dropdownCatDetails.categories">
+        <div class="parrentAccordian">
+          <div class="row w-100 h-100">
+            <div class="col-12 m-auto pr-0">
+              <span
+                class="accordianText"
+                *ngIf="!category.subCategory"
+                (click)="
+                  getCoureBasedOnCatalog(dropdownCatDetails, category, '', '');
+                  viewCourse(
+                    category,
+                    previewDialog,
+                    category.categoryName,
+                    category.totalCount
+                  )
+                "
+                (click)="
+                  isExpandCourseTemp &&
+                  expandActivityNameTemp == category.categoryId
+                    ? onexpTemp(category, category.categoryId, false)
+                    : onexpTemp(category, category.categoryId, true)
+                "
+              >
+                {{ category.categoryName | titlecase
+                }}<span
+                  class="matBadgeAvail"
+                  matBadge="{{ category.totalCount }}"
+                  matBadgeOverlap="false"
+                ></span>
+              </span>
+              <span
+                class="accordianText"
+                *ngIf="category.subCategory"
+                (click)="
+                  isExpandCourseTemp &&
+                  expandActivityNameTemp == category.categoryId
+                    ? onexpTemp(category, category.categoryId, false)
+                    : onexpTemp(category, category.categoryId, true)
+                "
+              >
+                {{ category.categoryName | titlecase
+                }}<span
+                  class="matBadgeAvail"
+                  matBadge="{{ category.totalCount }}"
+                  matBadgeOverlap="false"
+                ></span>
+              </span>
+              <mat-icon class="arrowIcon float-right" aria-hidden="false" *ngIf="!category.subCategory && category.categoryName !== 'vocational'"
+                (click)="getCoureBasedOnCatalog(dropdownCatDetails, category, '', '');viewCourse(category,
+                    previewDialog,category.categoryName,category.totalCount)">keyboard_arrow_right</mat-icon>
+              <mat-icon class="arrowIcon float-right" aria-hidden="false" *ngIf="expandActivityNameTemp !== category.categoryId &&
+                  category.subCategory && category.categoryName == 'vocational'" (click)="isExpandCourseTemp && expandActivityNameTemp == category.categoryId ? onexpTemp(category, category.categoryId, false)
+                    : onexpTemp(category, category.categoryId, true)">keyboard_arrow_right</mat-icon>
+              <mat-icon class="arrowIcon float-right" aria-hidden="false" *ngIf="isExpandCourseTemp && expandActivityNameTemp == category.categoryId && category.categoryName == 'vocational'" (click)="
+                  isExpandCourseTemp && expandActivityNameTemp == category.categoryId ? onexpTemp(category, category.categoryId, false) : onexpTemp(category, category.categoryId, true)"
+                >keyboard_arrow_up</mat-icon>
+
+              <ng-container
+                *ngIf="
+                  isExpandCourseTemp &&
+                  expandActivityNameTemp == category.categoryId
+                "
+              >
+                <ng-container *ngFor="let subCatet of category.subCategory">
+                  <div class="parrentAccordianSub">
+                    <div class="row w-100 h-100">
+                      <div class="col-12 m-auto pr-0">
+                        <span
+                          class="accordianText ml-5"
+                          (click)="
+                            isExpChild &&
+                            expandActivityNameChildTemp ==
+                              subCatet.subCategoryId
+                              ? onexpchildTemp(subCatet.subCategoryId, false)
+                              : onexpchildTemp(subCatet.subCategoryId, true)
+                          "
+                        >
+                          {{ subCatet.subCategoryName | titlecase }}
+                          <span
+                            class="matBadgeAvail"
+                            matBadge="{{ subCatet.totalCount }}"
+                            matBadgeOverlap="false"
+                          ></span>
+                        </span>
+                        <mat-icon
+                          class="arrowIcon float-right"
+                          aria-hidden="false"
+                          *ngIf="
+                            expandActivityNameChildTemp !==
+                            subCatet.subCategoryId
+                          "
+                          (click)="
+                            isExpChild &&
+                            expandActivityNameChildTemp ==
+                              subCatet.subCategoryId
+                              ? onexpchildTemp(
+                                  subCatet,
+                                  subCatet.subCategoryId,
+                                  false
+                                )
+                              : onexpchildTemp(
+                                  subCatet,
+                                  subCatet.subCategoryId,
+                                  true
+                                )
+                          "
+                          >keyboard_arrow_right</mat-icon
+                        >
+                        <mat-icon
+                          class="arrowIcon float-right"
+                          aria-hidden="false"
+                          *ngIf="
+                            isExpChild &&
+                            subCatet.superSubCategory &&
+                            expandActivityNameChildTemp ==
+                              subCatet.subCategoryId
+                          "
+                          (click)="
+                            isExpChild &&
+                            expandActivityNameChildTemp ==
+                              subCatet.subCategoryId
+                              ? onexpchildTemp(
+                                  subCatet,
+                                  subCatet.subCategoryId,
+                                  false
+                                )
+                              : onexpchildTemp(
+                                  subCatet,
+                                  subCatet.subCategoryId,
+                                  true
+                                )
+                          "
+                          >keyboard_arrow_up</mat-icon
+                        >
+
+                        <ng-container
+                          *ngIf="
+                            isExpChild &&
+                            expandActivityNameChildTemp ==
+                              subCatet.subCategoryId
+                          "
+                        >
+                          <ng-container
+                            *ngFor="
+                              let superSubCat of subCatet.superSubCategory
+                            "
+                          >
+                            <div class="parrentAccordiansuper">
+                              <div class="row w-100 h-100 parrentSubAccord">
+                                <div class="col-12 m-auto pr-0">
+                                  <span
+                                    class="accordianTextsub"
+                                    (click)="
+                                      menuSelect(subCatet, superSubCat);
+                                      getCoureBasedOnCatalog(
+                                        dropdownCatDetails,
+                                        category,
+                                        subCatet.subCategoryId,
+                                        superSubCat.superSubCategoryId
+                                      );
+                                      viewCourse(
+                                        category,
+                                        previewDialog,
+                                        subCatet.superSubCategoryName,
+                                        superSubCat.totalCount
+                                      )
+                                    "
+                                    >{{
+                                      superSubCat.superSubCategoryName
+                                        | titlecase
+                                    }}<span
+                                      class="matBadgeAvail"
+                                      matBadge="{{ superSubCat.totalCount }}"
+                                      matBadgeOverlap="false"
+                                    ></span
+                                  ></span>
+                                </div>
+                              </div>
                             </div>
-                        </div>
-                            </div>
+                          </ng-container>
                         </ng-container>
-                    </ng-container>
-                </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
             </div>
+          </div>
         </div>
-            </ng-container>
-        </div>
+      </ng-container>
     </div>
-<br [ngClass]="availableCource == true ?'displayNone':''">
-<br [ngClass]="availableCource == true ?'displayNone':''">
-<div *ngIf="!loading" [ngClass]="availableCource == true ?'displayNone':''">
-    <div class="footer" >
-        <span class="powered">
-            <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
-        </span>
+  </div>
+  <br [ngClass]="availableCource == true ? 'displayNone' : ''" />
+  <br [ngClass]="availableCource == true ? 'displayNone' : ''" />
+  <div
+    *ngIf="!loading"
+    [ngClass]="availableCource == true ? 'displayNone' : ''"
+  >
+    <div class="footer">
+      <span class="powered">
+        <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
+      </span>
     </div>
-</div>
- 
+  </div>
 </div>
