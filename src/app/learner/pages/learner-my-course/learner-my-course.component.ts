@@ -90,6 +90,7 @@ export class LearnerMyCourseComponent implements OnInit {
   searchName: any;
   course: any;
   catagoryName: any;
+  searchExpand = false;
 
   constructor(
     public translate: TranslateService,
@@ -410,15 +411,18 @@ export class LearnerMyCourseComponent implements OnInit {
     this.jobroleEnrollCount = count;
   }
 
+  // searchTrigger() {
+  //   this.searchExpand = true;
+  //   console.log('this.searchExpand', this.searchExpand);
+  // }
+
 // -------------mobile responsive function-----------------------------
 onexpTemp(category, id, isexps) {
   this.expandActivityNameTemp = isexps ? id : null;
   this.isExpandCourseTemp = false;
-  if (!this.isExpChild && category.subCategory) {
+  if (category.subCategory) {
     this.isExpandCourseTemp = true;
-  } else if (id === 'vrl22wqj7' || id === 'vpcqlpdr1') {
   }
-
   }
   onexpchildTemp(id, isexp) {
     this.expandActivityNameChildTemp = isexp ? id : null;
