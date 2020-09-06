@@ -107,7 +107,19 @@
 
       <!---------------Multi-level dropdown------------->
       <div class="row">
-        <div class="col-12 text-right">
+        <div class="col-12 text-right searchDiv">
+
+            
+          <div class="inner-addon right-addon">
+            <mat-icon class="glyphicon">search</mat-icon>
+            <input
+              type="text" (click)="searchExpand = !searchExpand"
+                class="form-control search"
+              [(ngModel)]="searchName"
+              (keyup)="getEnrolledCourses('', '', '', searchName)"
+              placeholder="Search courses,categories.."
+            />
+          </div>
 
           <div class="dropdown">
             <span *ngFor="let item of dropDownCategoryDetails">
@@ -130,7 +142,6 @@
                 <mat-menu
                   class="childMenu"
                   #childMenu="matMenu"
-                  xPosition="after"
                   yPosition="below"
                 >
                   <span *ngFor="let child of item.categories">
@@ -150,7 +161,7 @@
                         ></span>
                       </button>
                       <!-----------------------------Sub Category--------------------------------------->
-                      <mat-menu class="subchildMenu"  #childMenu2="matMenu">
+                      <mat-menu class="subchildMenu" yPosition="below"  #childMenu2="matMenu">
                         <span *ngFor="let subchild of child.subCategory">
                           <span
                             *ngIf="
@@ -171,9 +182,8 @@
                               ></span>
                             </button>
                             <!-----------------------------Super Sub Category--------------------------------------->
-                            <mat-menu
-                            class="superSubMenu"
-                              #childMenu3="matMenu"
+                            <mat-menu class="superSubMenu"
+                              #childMenu3="matMenu" yPosition="below"
                               [overlapTrigger]="false"
                             >
                               <span
@@ -270,16 +280,6 @@
             </span>
           </div>
 
-          <div class="inner-addon searchDiv right-addon">
-            <mat-icon class="glyphicon">search</mat-icon>
-            <input
-              type="text" (click)="searchExpand = !searchExpand"
-                class="form-control search"
-              [(ngModel)]="searchName"
-              (keyup)="getEnrolledCourses('', '', '', searchName)"
-              placeholder="Search courses,categories.."
-            />
-          </div>
         </div>
       </div>
       <div>
