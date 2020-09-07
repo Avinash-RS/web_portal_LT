@@ -1,7 +1,7 @@
 @import "variable";
-.catDropdown{
+.dropdown-toggle{
   background-color: $color-white;
-  color: #898989;
+  color: #898989 !important;
   padding: 6px;
   font-size: 16px;
   padding-left: 6px;
@@ -9,19 +9,29 @@
   // border-radius: 11px;
   border: 1px solid #898989;
   width: 155px;
+}
+.dropdown-toggle:hover {
+  background-color: $lxp-theme-green !important;
+  color: $color-white !important;
+}
+.dropdown-toggle:focus, .dropdown-toggle:active:focus, .dropdown-toggle.active:focus {
+  outline: none !important;
+  background-color: $lxp-theme-green !important;
+  color: #ffffff !important;
+  outline-style: none !important;
 }
 
-.hovercolor {
-  color: $color-white !important;
-  padding: 6px;
-  font-size: 16px;
-  padding-left: 6px;
-  border: none;
-  // border-radius: 11px;
-  border: 1px solid #898989;
-  width: 155px;
-  background-color: $lxp-theme-green !important;
-}
+// .hovercolor {
+//   color: $color-white !important;
+//   padding: 6px;
+//   font-size: 16px;
+//   padding-left: 6px;
+//   border: none;
+//   // border-radius: 11px;
+//   border: 1px solid #898989;
+//   width: 155px;
+//   background-color: $lxp-theme-green !important;
+// }
 .cardContainer{
   height: 400px !important;
 }
@@ -1905,11 +1915,18 @@ display: none;
   }
 }
 .matBadgeNew {
-  position: relative;
-  float: right;
-  right: 11px;
-  top: 22px;
+  // position: relative;
+  // float: right;
+  // right: 11px;
+  // top: 22px;
   background: #5c6873 !important;
+  & .mat-badge-content {
+    background: $lxp-gray !important;
+  }
+}
+.dynamicBagde {
+  background: #5c6873 !important;
+  left: 31px !important;
   & .mat-badge-content {
     background: $lxp-gray !important;
   }
@@ -1917,8 +1934,16 @@ display: none;
 .matBadgeSubmenu{
   position: relative;
   float: right;
-  right: 10px;
-  top: 22px;
+  right: 22px;
+  background: #5c6873 !important;
+  & .mat-badge-content {
+    background: $lxp-gray !important;
+  }
+}
+.matBadgesuperSub {
+  position: relative;
+  float: right;
+  right: 22px;
   background: #5c6873 !important;
   & .mat-badge-content {
     background: $lxp-gray !important;
@@ -2103,4 +2128,80 @@ display: none;
 .ccSearch:focus {
   border: 1px solid $lxp-theme-green !important;
   box-shadow: 0 0 0 0.05rem $lxp-theme-green !important;
+}
+
+// New mege menu
+
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-menu:hover {
+  display: block !important;
+}
+
+.dropdown-menu:active {
+  display: block !important;
+}
+:host ::ng-deep .dropdown-menu {
+  min-width: 12rem !important;
+  max-width: auto !important;
+  left: unset !important;
+  right: 5% !important;
+  // height: 38px !important;
+  border-bottom: 1px solid #e4dddd !important;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2) !important;
+  padding-top: 9px !important;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: unset !important;
+  right: 100% !important;
+  margin-top: -6px;
+  margin-left: -1px;
+  -webkit-border-radius: 0 6px 6px 6px;
+  -moz-border-radius: 0 6px 6px;
+  border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-item:hover {
+  background-color: $lxp-light-grey;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #ccc;
+  margin-top: 5px;
+  margin-right: -16px;
+}
+
+.dropdown-submenu:hover>a:after {
+  border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+  float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  -webkit-border-radius: 6px 0 6px 6px;
+  -moz-border-radius: 6px 0 6px 6px;
+  border-radius: 6px 0 6px 6px;
+}
+li {
+  cursor: pointer;
+  height: 37px;
+}
+.subMenu {
+  width: 180px;
 }

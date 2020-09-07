@@ -325,11 +325,14 @@ export class LearnerMyCourseComponent implements OnInit {
   }
 
   getCountForCategories() {
+    let dropDownData = [];
     this.learnerService.getCountForCategories(this.userDetailes._id).subscribe((data: any) => {
       if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
         this.catalogueDetails = data.data.getCountForCategories.data;
         this.categoryDetails = data.data.getCountForCategories.data.categories;
-        this.dropDownCategoryDetails = [data.data.getCountForCategories.data];
+        dropDownData = [data.data.getCountForCategories.data];
+        this.dropDownCategoryDetails = dropDownData[0];
+        this.categories = dropDownData[0].categories;
         this.dropdownCatDetails = this.dropDownCategoryDetails[0];
       }
     });
@@ -350,7 +353,6 @@ export class LearnerMyCourseComponent implements OnInit {
       });
   }
   viewCourse(category, templateRef: TemplateRef<any>, categoryname, categorycount) {
-    console.log( categoryname, categorycount)
     this.color = false;
     this.loading = true;
     this.viewCourseClass = false;
@@ -435,6 +437,12 @@ onexpTemp(category, id, isexps) {
   onexpchildTemp(id, isexp) {
     this.expandActivityNameChildTemp = isexp ? id : null;
     this.isExpChild = isexp ? true : false;
+  }
+  triggerPopup() {
+    document.getElementById('dropMenu').style.display = 'block';
+  }
+  closePopup() {
+    document.getElementById('dropMenu').style.display = 'none';
   }
 }
 
