@@ -63,7 +63,7 @@ export class LearnerMyCourseComponent implements OnInit {
   onGoingCourseCount = 0;
   completedCourseCount = 0;
   allCourseCount = 0;
-  selectedIndex = 0;
+  selectedIndex: number;
   viewCourseClass = true;
   jobRole: any = [];
   categoryyName: any;
@@ -109,6 +109,7 @@ export class LearnerMyCourseComponent implements OnInit {
   // this.translate.use(localStorage.getItem('language'));
   // }
   ngOnInit() {
+    this.selectedIndex = 1;
     this.gs.theme.subscribe(message  =>
       this.componentCssClass = message
       );
@@ -185,6 +186,7 @@ export class LearnerMyCourseComponent implements OnInit {
     this.categoryNamePrint = '';
     let categoryName: any;
     if (this.catalogueDetails && catagoryId && !jobRoleCategoryId && !searchName) {
+      this.selectedIndex = 0;
       categoryName = this.categoryDetails.filter(function(data: any) {
         return data.categoryId === catagoryId;
       });

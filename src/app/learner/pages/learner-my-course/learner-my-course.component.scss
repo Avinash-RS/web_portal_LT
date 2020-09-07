@@ -136,9 +136,9 @@
   font-weight: 500 !important;
   color: #616060;
 }
-:host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
-  display: inherit !important;
-}
+// :host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
+//   display: inherit !important;
+// }
 :host ::ng-deep .myCc .mat-tab-label .mat-tab-label-content {
   font-size: 14px !important;
   font-weight: 400 !important;
@@ -994,6 +994,11 @@ display: none;
 .mobileSearchRow {
   display: none;
 }
+
+::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
+  display: none !important;
+}
+
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
 
@@ -1102,7 +1107,6 @@ display: none;
     width: 95%;
   }
   .dropdown {
-    margin-right: 0rem !important;
     float: right;
   }
 
@@ -1304,6 +1308,7 @@ display: none;
     padding-left: 0px;
   }
   .catalogDropdownCol {
+    padding-right: 0px !important;
     margin-top: 0.5rem;
   }
 
@@ -1353,6 +1358,7 @@ display: none;
 
   .search {
     width: 40% !important;
+    margin-left: 0px !important;
   }
 
   .searchExpand {
@@ -2083,7 +2089,7 @@ display: none;
   top: 8px;
   position: absolute;
 }
-.right-addon .glyphicon {right: 181px;}
+.right-addon .glyphicon {right: 180px;}
 .right-addon input { padding-right: 30px; }
 .right-addon .searchIcon { right: 30px;}
 .search:focus {
