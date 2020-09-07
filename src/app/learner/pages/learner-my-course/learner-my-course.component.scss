@@ -2040,18 +2040,18 @@ display: none;
 }
 ::ng-deep .childMenu{
   width: 155px !important;
-  margin-top: 49px !important;
+    margin-top: 49px !important;
 }
 ::ng-deep .subchildMenu{
-  width: 130px !important;
-  // position: relative !important;
-  // margin-top: 120px !important;
+  width: 155px !important;
+  position: relative !important;
+  margin-top: 120px !important;
 }
 ::ng-deep .superSubMenu{
-  width: 130px !important;
-  // position: relative !important;
-  // top: 120px !important;
-  // right: 310px !important;
+  width: 155px !important;
+  position: relative !important;
+  top: 120px !important;
+  right: 310px !important;
 }
 .mat-menu-item-submenu-trigger::after {
   right: 6px !important;
@@ -2065,8 +2065,7 @@ display: none;
   position: relative;
 }
 .searchDiv {
-  position: relative;
-  left: 17px;
+  right: 12px;
 }
 
 .inner-addon .glyphicon {
@@ -2084,7 +2083,7 @@ display: none;
   top: 8px;
   position: absolute;
 }
-.right-addon .glyphicon {right: 14px;}
+.right-addon .glyphicon {right: 181px;}
 .right-addon input { padding-right: 30px; }
 .right-addon .searchIcon { right: 30px;}
 .search:focus {
