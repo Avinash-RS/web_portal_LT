@@ -218,7 +218,8 @@
             </span>
             <span></span>
             </div> -->
-      <mat-tab-group #tabs
+      <mat-tab-group #tabs (focusChange)="getEnrolledCourses($event ,'',
+      '', '', searchName);"
         [(selectedIndex)]="selectedIndex"
         mat-align-tabs="start"
         animationDuration="1000ms"
@@ -694,7 +695,7 @@
           </div>
 
           <ng-template matTabLabel>
-            <div (click)="getEnrolledCourses('', '', '', searchName);">
+            <div>
               <span
                 class="tabsc"
                 matBadge="{{
@@ -1142,7 +1143,6 @@
           <ng-template matTabLabel>
             <span
               class="tabsc"
-              (click)="getEnrolledCourses('', '', '', searchName)"
               matBadge="{{
                 jobRoleSelected === true
                   ? jobCompletedCourseCount
@@ -1590,7 +1590,6 @@
           <ng-template matTabLabel>
             <span
               class="tabsc"
-              (click)="getEnrolledCourses('', '', '', searchName)"
               matBadge="{{
                 jobRoleSelected === true ? jobAllCourseCount : allCourseCount
               }}"
@@ -2044,14 +2043,6 @@
             <ng-template matTabLabel>
               <span
                 class="tabsc"
-                (click)="
-                  getEnrolledCourses(
-                    catalogueDetails.catalogueId,
-                    categorytab.categoryId,
-                    '',
-                    searchName
-                  )
-                "
                 matBadge="{{ categorytab.enrollCount }}"
                 matBadgeOverlap="false"
                 >{{ categorytab.categoryName | titlecase }}</span

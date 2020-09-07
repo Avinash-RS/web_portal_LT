@@ -1,10 +1,10 @@
-import { Component, OnInit, HostListener, TemplateRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, HostListener, TemplateRef, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Router } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { TranslateService } from '@ngx-translate/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTabChangeEvent } from '@angular/material';
 import { MatMenuTrigger } from '@angular/material';
 import { CommonServicesService } from '@core/services/common-services.service';
 
@@ -29,6 +29,7 @@ import { CommonServicesService } from '@core/services/common-services.service';
 
 export class LearnerMyCourseComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
+  @Output() focusChange: EventEmitter<MatTabChangeEvent>;
   [x: string]: any;
   strDate: Date = new Date();
   userDetailes: any;
@@ -99,7 +100,7 @@ export class LearnerMyCourseComponent implements OnInit {
     private router: Router, private dialog: MatDialog,
     public CommonServices: CommonServicesService) {
     this.userDetailes = this.gs.checkLogout();
-    this.getEnrolledCourses('', '', '', '');
+    this.getEnrolledCourses('','', '', '', '');
     this.getScreenSize();
     this.getCountForCategories();
     this.getCountForJobRole();
@@ -168,7 +169,7 @@ export class LearnerMyCourseComponent implements OnInit {
                 this.loading = false;
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
-                this.getEnrolledCourses('', '', '', '');
+                this.getEnrolledCourses('','', '', '', '');
                 this.getCountForJobRole();
                 this.getCountForJobRole();
               }
@@ -182,7 +183,20 @@ export class LearnerMyCourseComponent implements OnInit {
   getCatName(data) {
     console.log('data', data);
   }
-  getEnrolledCourses(catalougeId, catagoryId, jobRoleCategoryId, searchName) {
+
+  getEnrolledCourses(event, catalougeId, catagoryId, jobRoleCategoryId, searchName) {
+    if (event) {
+      if (event.index === 8) {
+        catalougeId = this.catalogueDetails.catalogueId;
+        catagoryId = this.catalogueDetails.categories[0].categoryId;
+      } else if (event.index === 9) {
+        catalougeId = this.catalogueDetails.catalogueId;
+        catagoryId = this.catalogueDetails.categories[1].categoryId;
+      } else if (event.index === 10) {
+        catalougeId = this.catalogueDetails.catalogueId;
+        catagoryId = this.catalogueDetails.categories[2].categoryId;
+      }
+    }
     this.categoryNamePrint = '';
     let categoryName: any;
     if (this.catalogueDetails && catagoryId && !jobRoleCategoryId && !searchName) {
@@ -388,7 +402,7 @@ export class LearnerMyCourseComponent implements OnInit {
               if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
-                this.getEnrolledCourses('', '', '', '');
+                this.getEnrolledCourses('','', '', '', '');
                 this.getCountForJobRole();
                 this.getCountForJobRole();
               }
