@@ -169,7 +169,7 @@ export class LearnerMyCourseComponent implements OnInit {
                 this.loading = false;
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
-                this.getEnrolledCourses('','', '', '', '');
+                this.getEnrolledCourses('', '', '', '', '');
                 this.getCountForJobRole();
                 this.getCountForJobRole();
               }
@@ -185,14 +185,21 @@ export class LearnerMyCourseComponent implements OnInit {
   }
 
   getEnrolledCourses(event, catalougeId, catagoryId, jobRoleCategoryId, searchName) {
+    console.log('this.categoryDetails', this.categoryDetails);
     if (event) {
-      if (event.index === 8) {
+      if (event.index === 8 && this.categoryDetails[0].enrollCount > 0) {
+        console.log('college connect');
         catalougeId = this.catalogueDetails.catalogueId;
         catagoryId = this.catalogueDetails.categories[0].categoryId;
-      } else if (event.index === 9) {
+      } else if (event.index === 8 && this.categoryDetails[1].enrollCount > 0 ||
+      event.index === 9 && this.categoryDetails[1].enrollCount > 0) {
+        console.log('vocational');
         catalougeId = this.catalogueDetails.catalogueId;
         catagoryId = this.catalogueDetails.categories[1].categoryId;
-      } else if (event.index === 10) {
+      } else if (event.index === 8 && this.categoryDetails[2].enrollCount > 0 ||
+      event.index === 9 && this.categoryDetails[2].enrollCount > 0 ||
+      event.index === 10 && this.categoryDetails[2].enrollCount > 0) {
+        console.log('pro certification');
         catalougeId = this.catalogueDetails.catalogueId;
         catagoryId = this.catalogueDetails.categories[2].categoryId;
       }
