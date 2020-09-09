@@ -111,13 +111,13 @@
 
          <div>
             <button (click)="openAvailableCource()" class="catDropdowns">
-               Available courses
+              {{'Available Courses' | titlecase}}
                 <mat-icon class="dropdownicon">expand_more</mat-icon>
               </button>
-            <button (mouseenter)="triggerPopup()"class="btn dropdown-toggle float-right mr-3" type="button" 
+            <button (mouseenter)="triggerPopup()" (mouseleave)="closePopup()" class="btn dropdown-toggle float-right mr-3" type="button" 
             id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             >
-           Available courses
+          {{'Available Courses' | titlecase}}
               </button>
               <ul class="dropdown-menu multi-level" role="menu" id="dropMenu" aria-labelledby="dropdownMenu">
                  <span  *ngFor="let item of categories">
@@ -132,8 +132,9 @@
                   <li *ngIf="item.subCategory && item.subCategory.length > 0"
                     class="dropdown-submenu">
                     <a  class="dropdown-item" tabindex="-1">
+                      <!-- tooltip="{{item?.categoryName | titlecase}}"  placement="top" -->
                         <span *ngIf="item.categoryName.length > 17"
-                            tooltip="{{item?.categoryName | titlecase}}"  placement="top">{{(item?.categoryName | titlecase | slice:0:17)+'...'}}</span>
+                           >{{(item?.categoryName | titlecase | slice:0:17)+'...'}}</span>
                         <span *ngIf="item.categoryName.length <= 17">{{item?.categoryName | titlecase}}</span>
                         <span class="dynamicBagde"  matBadge="{{item.totalCount}}"  matBadgeOverlap="false"></span>
                     </a>
@@ -141,30 +142,32 @@
                   <ul class="dropdown-menu subMenu">
                     <span  *ngFor="let subchild of item.subCategory">
                     <li *ngIf="subchild.superSubCategory == null" class="dropdown-item">
-                        <span *ngIf="subchild.subCategoryName.length > 17"
-                            tooltip="{{subchild.subCategoryName | titlecase}}"  placement="top">{{(subchild.subCategoryName | titlecase | slice:0:17)+'...'}}</span>
+                      <!-- tooltip="{{subchild.subCategoryName | titlecase}}"  placement="top" -->
+                        <span class="superSubSpan" *ngIf="subchild.subCategoryName.length > 17"
+                           >{{subchild.subCategoryName | titlecase}}</span>
                         <span *ngIf="subchild.subCategoryName.length <= 17">{{subchild.subCategoryName | titlecase}}</span>
                         <span class="matBadgeSubmenu"  matBadge="{{subchild.totalCount}}"  matBadgeOverlap="false"></span></li>
 
                         <li *ngIf="subchild.superSubCategory && subchild.superSubCategory.length > 0" class="dropdown-submenu"
-                            >
+                           >
                             <a  class="dropdown-item" tabindex="-1">
-                                <span *ngIf="subchild.subCategoryName.length >17"
-                                    tooltip="{{subchild.subCategoryName | titlecase}}" placement="top">{{(subchild.subCategoryName | titlecase | slice:0:17)+'...'}}</span>
+                              <!-- tooltip="{{subchild.subCategoryName | titlecase}}" placement="top" -->
+                                <span class="superSubSpan" *ngIf="subchild.subCategoryName.length >17"
+                                    >{{subchild.subCategoryName | titlecase }}</span>
                                 <span *ngIf="subchild.subCategoryName.length <=17">{{subchild.subCategoryName | titlecase}}</span>
                                 <span class="matBadgeSubmenu"  matBadge="{{subchild.totalCount}}"  matBadgeOverlap="false"></span>
                             </a>
 
                        <!------------------------------Super sub menu----------------------------------->
-                      <ul class="dropdown-menu subMenu">
+                      <ul class="dropdown-menu superSubMenu">
                         <span *ngFor="let superChild of subchild.superSubCategory">
-                          <li class="dropdown-item"
-                          (click)="menuSelect(subchild,superChild);
-                            getCoureBasedOnCatalog(dropDownCategoryDetails,item,subchild.subCategoryId, superChild.superSubCategoryId);
-                              viewCourse(item,previewDialog,superChild.superSubCategoryName,superChild.totalCount)">
-                            <span *ngIf="superChild.superSubCategoryName.length > 17"
-                                tooltip="{{superChild.superSubCategoryName | titlecase}}"
-                                placement="top">{{(superChild.superSubCategoryName | titlecase | slice:0:17)+'...'}}</span>
+                          <li class="dropdown-item superSubMenuItem" (click)="menuSelect(subchild,superChild);
+                          getCoureBasedOnCatalog(dropDownCategoryDetails,item,subchild.subCategoryId, superChild.superSubCategoryId);
+                            viewCourse(item,previewDialog,superChild.superSubCategoryName,superChild.totalCount)">
+                            <!-- tooltip="{{superChild.superSubCategoryName | titlecase}}"
+                            placement="top" -->
+                            <span class="superSubSpan" *ngIf="superChild.superSubCategoryName.length > 17"
+                               >{{superChild.superSubCategoryName | titlecase }}</span>
                             <span *ngIf="superChild.superSubCategoryName.length <= 17">{{superChild.superSubCategoryName | titlecase}}</span>
                             <span class="matBadgesuperSub"  matBadge="{{superChild.totalCount}}"  matBadgeOverlap="false"></span>
                           </li>
@@ -352,17 +355,9 @@
                     </div>
                     <div class="col-6 col-sm-6 col-md-8 col-lg-7 coursenameCol">
                       <div class="f_size_18 f_wt_500 pointer coursename">
-                        <span
-                          *ngIf="course.course_name?.length > 28"
-                          tooltip="{{ course.course_name }}"
-                          placement="right"
-                          >{{
-                            (course.course_name | slice: 0:28) + "..."
-                          }}</span
-                        >
-                        <span *ngIf="course.course_name?.length <= 28">{{
-                          course.course_name
-                        }}</span>
+                        <p  style="width: 350px; word-wrap:break-word !important;">
+                          {{course.course_name}}
+                      </p>
                         <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                         <span class="span-with-icon">
@@ -378,7 +373,7 @@
                       </div>
                       <div class="row">
                         <div
-                          class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
+                          class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-30 pointer"
                           (click)="gotoDesc(course)"
                         >
                           <p class="">
@@ -801,17 +796,9 @@
                     </div>
                     <div class="col-6 col-sm-6 col-md-8 col-lg-7">
                       <div class="f_size_18 f_wt_500 pointer">
-                        <span
-                          *ngIf="course.course_name?.length > 28"
-                          tooltip="{{ course.course_name }}"
-                          placement="right"
-                          >{{
-                            (course.course_name | slice: 0:28) + "..."
-                          }}</span
-                        >
-                        <span *ngIf="course.course_name?.length <= 28">{{
-                          course.course_name
-                        }}</span>
+                        <p  style="width: 350px; word-wrap:break-word !important;">
+                          {{course.course_name}}
+                      </p>
                         <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                         <div class="span-with-icon">
@@ -827,7 +814,7 @@
                       </div>
                       <div class="row">
                         <div
-                          class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
+                          class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-30 pointer"
                           (click)="gotoDesc(course)"
                         >
                           <p class="">
@@ -1247,17 +1234,9 @@
                     </div>
                     <div class="col-6 col-sm-6 col-md-8 col-lg-7">
                       <div class="f_size_18 f_wt_500 pointer">
-                        <span
-                          *ngIf="course.course_name?.length > 28"
-                          tooltip="{{ course.course_name }}"
-                          placement="right"
-                          >{{
-                            (course.course_name | slice: 0:28) + "..."
-                          }}</span
-                        >
-                        <span *ngIf="course.course_name?.length <= 28">{{
-                          course.course_name
-                        }}</span>
+                        <p  style="width: 350px; word-wrap:break-word !important;">
+                          {{course.course_name}}
+                      </p>
                         <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                         <div class="span-with-icon">
@@ -1273,7 +1252,7 @@
                       </div>
                       <div class="row">
                         <div
-                          class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
+                          class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-30 pointer"
                           (click)="gotoDesc(course)"
                         >
                           <p class="">
@@ -1713,17 +1692,9 @@
                         class="col-6 col-sm-6 col-md-8 col-lg-7 courceNameCol"
                       >
                         <div class="f_size_18 f_wt_500 pointer">
-                          <span
-                            *ngIf="course.course_name?.length > 28"
-                            tooltip="{{ course.course_name }}"
-                            placement="right"
-                            >{{
-                              (course.course_name | slice: 0:28) + "..."
-                            }}</span
-                          >
-                          <span *ngIf="course.course_name?.length <= 28">{{
-                            course.course_name
-                          }}</span>
+                          <p  style="width: 350px; word-wrap:break-word !important;">
+                            {{course.course_name}}
+                        </p>
                           <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                           <div class="span-with-icon">
@@ -1739,7 +1710,7 @@
                         </div>
                         <div class="row">
                           <div
-                            class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
+                            class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-30 pointer"
                             (click)="gotoDesc(course)"
                           >
                             <p class="">

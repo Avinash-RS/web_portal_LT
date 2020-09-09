@@ -331,7 +331,7 @@ export class LearnerMyCourseComponent implements OnInit {
         dropDownData = [data.data.getCountForCategories.data];
         this.dropDownCategoryDetails = dropDownData[0];
         this.categories = dropDownData[0].categories;
-        this.dropdownCatDetails = this.dropDownCategoryDetails[0];
+        this.dropdownCatDetails = dropDownData[0];
       }
     });
   }
