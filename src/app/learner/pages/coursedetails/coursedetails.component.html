@@ -38,7 +38,7 @@
                 </mat-toolbar>
                 <div class="contents">
                     <mat-accordion *ngFor="let res of scromModuleData; let i = index"
-                        (click)="getSelectedIndex(i); getModuleDataForForum(scromModuleData.length, i + 1, res)">
+                        (click)="getSelectedIndex(i); getModuleDataForForum(scromModuleData?.length, i + 1, res)">
                         <mat-expansion-panel class="panel" hideToggle="true" #example [expanded]="selectedIndex === i">
                             <mat-expansion-panel-header>
                                 <mat-panel-title class="module-container">
@@ -82,11 +82,11 @@
                                                 <ng-template matStepLabel>
                                                     <span *ngIf="mod?.title?.length > 20" tooltip="{{mod?.title}}"
                                                         placement="right" class="topicnm"
-                                                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
+                                                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)">
                                                         {{(mod?.title  | slice:0:20)+'...'}}</span>
 
                                                     <span *ngIf="mod?.title?.length <= 20" class="topicnm"
-                                                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
+                                                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)">
                                                         {{mod?.title}}</span>
 
                                                 </ng-template>
@@ -110,10 +110,10 @@
                     </mat-icon>
            
                     <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'"  >
-                        <button class=" pointer" mat-button [disabled]="isprevEnable || scromModuleData.length == 0"
+                        <button class=" pointer" mat-button [disabled]="isprevEnable || scromModuleData?.length == 0"
                             (click)="topicPrve()">{{'Prev' | translate }}</button>
                         <span class="">|</span>
-                        <button class=" pointer" mat-button [disabled]="isNextEnable || scromModuleData.length == 0" (click)="topicNext()">
+                        <button class=" pointer" mat-button [disabled]="isNextEnable || scromModuleData?.length == 0" (click)="topicNext()">
                             {{'Next' | translate }}</button>
                         <span class="fullScr">
                             <mat-icon (click)="makeFullScreen()">fullscreen</mat-icon>
