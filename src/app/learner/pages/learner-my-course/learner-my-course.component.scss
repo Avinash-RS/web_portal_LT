@@ -6,9 +6,9 @@
   font-size: 16px;
   padding-left: 6px;
   border: none;
-  // border-radius: 11px;
+  border-radius: 0px;
   border: 1px solid #898989;
-  width: 155px;
+  width: 168px;
 }
 .dropdown-toggle:hover {
   background-color: $lxp-theme-green !important;
@@ -916,6 +916,7 @@ hr {
 }
 .catalogDropdownCol {
   // margin-top: 1rem;
+  padding-right: 0px;
   margin-top: 11px;
 }
 
@@ -2072,12 +2073,12 @@ display: none;
   position: relative !important;
   margin-top: 120px !important;
 }
-::ng-deep .superSubMenu{
-  width: 155px !important;
-  position: relative !important;
-  top: 120px !important;
-  right: 310px !important;
-}
+// ::ng-deep .superSubMenu{
+//   width: 155px !important;
+//   position: relative !important;
+//   top: 120px !important;
+//   right: 310px !important;
+// }
 .mat-menu-item-submenu-trigger::after {
   right: 6px !important;
 }
@@ -2108,7 +2109,7 @@ display: none;
   top: 8px;
   position: absolute;
 }
-.right-addon .glyphicon {right: 181px;}
+.right-addon .glyphicon {right: 14rem;}
 .right-addon input { padding-right: 30px; }
 .right-addon .searchIcon { right: 30px;}
 .search:focus {
@@ -2143,20 +2144,20 @@ display: none;
   right: 5% !important;
   // height: 38px !important;
   border-bottom: 1px solid #e4dddd !important;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2) !important;
   padding-top: 9px !important;
+  border-radius: 0px !important;
 }
 .dropdown-submenu>.dropdown-menu {
   top: 0;
   left: unset !important;
   right: 100% !important;
-  margin-top: -6px;
+  margin-top: -1.3rem;
+    position: absolute;
   margin-left: -1px;
   -webkit-border-radius: 0 6px 6px 6px;
   -moz-border-radius: 0 6px 6px;
   border-radius: 0 6px 6px 6px;
 }
-
 .dropdown-submenu:hover>.dropdown-menu {
   display: block;
 }
@@ -2197,5 +2198,33 @@ li {
   height: 37px;
 }
 .subMenu {
-  width: 180px;
+  min-width: 180px;
 }
+
+.superSubMenu {
+  min-width: 320px !important;
+}
+
+.superSubSpan {
+  padding-right: 2rem !important;
+}
+/* toolti[p config for job role by mani */
+:host ::ng-deep .customClass .tooltip-inner{
+ position: relative !important;
+ left: 35px !important;
+    bottom: 5px;
+}
+:host ::ng-deep .customClass .tooltip-arrow{
+  position: relative !important;
+  left: 30px !important;
+ }
+ :host ::ng-deep .custClass .tooltip-inner{
+  position: relative !important;
+  left: 46px !important;
+  bottom: 5px;
+ }
+ :host ::ng-deep .custClass .tooltip-arrow{
+  position: relative !important;
+  left: 41px !important;
+  }
+  /* tooltip config end by mani */

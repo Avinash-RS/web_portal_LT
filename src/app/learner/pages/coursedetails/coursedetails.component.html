@@ -1,11 +1,11 @@
-<!-- <span *ngIf="sider"> -->
+<span *ngIf="sider">
     <app-header></app-header>
-<!-- </span> -->
-<!-- <div style="height: 2px;" (mouseover)="sider=true"></div> -->
+</span>
+<div style="height: 2px;" (mouseover)="sider=true"></div>
 <div class="container007 animated animatedFadeInUp fadeInUp bodybg">
     <div>
         <mat-drawer-container [class.drawer-opened]="drawer.opened" class="example-container">
-            <mat-drawer #drawer class="drawer" mode="side" opened="{{sider}}">
+            <mat-drawer #drawer class="drawer" mode="side" opened="true">
 
                 <mat-toolbar class="header">
                   
@@ -38,7 +38,7 @@
                 </mat-toolbar>
                 <div class="contents">
                     <mat-accordion *ngFor="let res of scromModuleData; let i = index"
-                        (click)="getSelectedIndex(i); getModuleDataForForum(scromModuleData.length, i + 1, res)">
+                        (click)="getSelectedIndex(i); getModuleDataForForum(scromModuleData?.length, i + 1, res)">
                         <mat-expansion-panel class="panel" hideToggle="true" #example [expanded]="selectedIndex === i">
                             <mat-expansion-panel-header>
                                 <mat-panel-title class="module-container">
@@ -82,11 +82,11 @@
                                                 <ng-template matStepLabel>
                                                     <span *ngIf="mod?.title?.length > 20" tooltip="{{mod?.title}}"
                                                         placement="right" class="topicnm"
-                                                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
+                                                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)">
                                                         {{(mod?.title  | slice:0:20)+'...'}}</span>
 
                                                     <span *ngIf="mod?.title?.length <= 20" class="topicnm"
-                                                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData.length,res?.topic_len,j + 1)">
+                                                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)">
                                                         {{mod?.title}}</span>
 
                                                 </ng-template>
@@ -109,11 +109,11 @@
                         menu
                     </mat-icon>
            
-                    <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'"  *ngIf="playerMenuEnable" >
-                        <button class=" pointer" mat-button [disabled]="isprevEnable || scromModuleData.length == 0"
+                    <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'"  >
+                        <button class=" pointer" mat-button [disabled]="isprevEnable || scromModuleData?.length == 0"
                             (click)="topicPrve()">{{'Prev' | translate }}</button>
                         <span class="">|</span>
-                        <button class=" pointer" mat-button [disabled]="isNextEnable || scromModuleData.length == 0" (click)="topicNext()">
+                        <button class=" pointer" mat-button [disabled]="isNextEnable || scromModuleData?.length == 0" (click)="topicNext()">
                             {{'Next' | translate }}</button>
                         <span class="fullScr">
                             <mat-icon (click)="makeFullScreen()">fullscreen</mat-icon>
