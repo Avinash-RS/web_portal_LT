@@ -105,7 +105,7 @@
           </div> -->
 
       <div class="row">
-        <div class="col-12 text-right">
+        <div class="col-12 text-right pr-0">
 
          <!---------------Multi-level dropdown------------->
 
@@ -141,7 +141,7 @@
                   <!----------------------------Sub menu----------------------->
                   <ul class="dropdown-menu subMenu">
                     <span  *ngFor="let subchild of item.subCategory">
-                    <li *ngIf="subchild.superSubCategory == null" class="dropdown-item">
+                    <li *ngIf="subchild.superSubCategory == null" class="dropdown-item superSubMenuItem">
                       <!-- tooltip="{{subchild.subCategoryName | titlecase}}"  placement="top" -->
                         <span class="superSubSpan" *ngIf="subchild.subCategoryName.length > 17"
                            >{{subchild.subCategoryName | titlecase}}</span>

@@ -916,6 +916,7 @@ hr {
 }
 .catalogDropdownCol {
   // margin-top: 1rem;
+  padding-right: 0px;
   margin-top: 11px;
 }
 
@@ -2072,12 +2073,12 @@ display: none;
   position: relative !important;
   margin-top: 120px !important;
 }
-::ng-deep .superSubMenu{
-  width: 155px !important;
-  position: relative !important;
-  top: 120px !important;
-  right: 310px !important;
-}
+// ::ng-deep .superSubMenu{
+//   width: 155px !important;
+//   position: relative !important;
+//   top: 120px !important;
+//   right: 310px !important;
+// }
 .mat-menu-item-submenu-trigger::after {
   right: 6px !important;
 }
@@ -2108,7 +2109,7 @@ display: none;
   top: 8px;
   position: absolute;
 }
-.right-addon .glyphicon {right: 181px;}
+.right-addon .glyphicon {right: 14rem;}
 .right-addon input { padding-right: 30px; }
 .right-addon .searchIcon { right: 30px;}
 .search:focus {
