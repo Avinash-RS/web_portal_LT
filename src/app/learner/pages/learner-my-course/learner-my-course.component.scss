@@ -1,4 +1,9 @@
 @import "variable";
+.cateName {
+  // position: relative;
+  // top: 8px;
+  padding-top: 3px;
+}
 .dropdown-toggle{
   background-color: $color-white;
   color: #898989 !important;
@@ -8,7 +13,7 @@
   border: none;
   border-radius: 0px;
   border: 1px solid #898989;
-  width: 168px;
+  width: 166px;
 }
 .dropdown-toggle:hover {
   background-color: $lxp-theme-green !important;
@@ -2193,6 +2198,7 @@ display: none;
 li {
   cursor: pointer;
   height: 37px;
+  padding-top: 10px;
 }
 .subMenu {
   min-width: 180px;
