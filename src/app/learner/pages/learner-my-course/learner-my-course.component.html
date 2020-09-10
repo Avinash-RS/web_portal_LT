@@ -226,7 +226,7 @@
                 (click)="getEnrolledCourses('',
                 categorytab.categoryId, catalogueDetails.catalogueId, '', ''); "
                 *ngFor="let categorytab of categoryDetails">
-              <span>{{ categorytab.categoryName }}</span>
+              <span>{{ categorytab.categoryName | titlecase }}</span>
               </button>
             </mat-menu>
           </div>
@@ -662,7 +662,7 @@
                 <button mat-menu-item (click)="getEnrolledCourses('',
                       categorytab.categoryId, catalogueDetails.catalogueId, '', ''); "
                   *ngFor="let categorytab of categoryDetails">
-                <span>{{ categorytab.categoryName }} {{categorytab.categoryId}}</span>
+                <span>{{ categorytab.categoryName  | titlecase }}</span>
                 </button>
               </mat-menu>
             </div>
@@ -953,7 +953,7 @@
                       categorytab.categoryId, catalogueDetails.catalogueId,'', ''
                     )
                   " *ngFor="let categorytab of categoryDetails">
-                  <span>{{ categorytab.categoryName }} {{categorytab.categoryId}}</span>
+                  <span>{{ categorytab.categoryName  | titlecase }}</span>
                 </button>
               </mat-menu>
             </div>
@@ -1241,7 +1241,7 @@
                       categorytab.categoryId, catalogueDetails.catalogueId, '', ''
                     )
                   " *ngFor="let categorytab of categoryDetails">
-                  <span>{{ categorytab.categoryName }} {{categorytab.categoryId}}</span>
+                  <span>{{ categorytab.categoryName  | titlecase }}</span>
                 </button>
               </mat-menu>
             </div>
@@ -1535,7 +1535,7 @@
                         categorytab.categoryId, catalogueDetails.catalogueId, '', ''
                       )
                     " *ngFor="let categorytab of categoryDetails">
-                    <span>{{ categorytab.categoryName }}</span>
+                    <span>{{ categorytab.categoryName  | titlecase }}</span>
                   </button>
                 </mat-menu>
               </div>
