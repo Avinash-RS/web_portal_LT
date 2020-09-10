@@ -92,6 +92,7 @@ export class LearnerMyCourseComponent implements OnInit {
   course: any;
   catagoryName: any;
   searchExpand = false;
+  dropdownMenu = false;
 
   constructor(
     public elm: ElementRef,
@@ -183,9 +184,26 @@ export class LearnerMyCourseComponent implements OnInit {
   getCatName(data) {
     console.log('data', data);
   }
-
-  getEnrolledCourses(event, catalougeId, catagoryId, jobRoleCategoryId, searchName) {
-    console.log('this.categoryDetails', this.categoryDetails);
+  // getEnroementCourseName(catagoryId) {
+  //   if (this.catalogueDetails && catagoryId && !jobRoleCategoryId && !searchName) {
+  //     this.selectedIndex = 0;
+  //     categoryName = this.categoryDetails.filter(function(data: any) {
+  //       return data.categoryId === catagoryId;
+  //     });
+  //     this.categoryNamePrint = categoryName[0].categoryName;
+  // }
+  // }
+  getEnrolledCourses(event, catagoryId, catalougeId, jobRoleCategoryId, searchName) {
+    this.categoryNamePrint = '';
+    let categoryName: any;
+    if (this.catalogueDetails && catagoryId && !jobRoleCategoryId && !searchName) {
+      this.selectedIndex = 0;
+      categoryName = this.categoryDetails.filter(function(data: any) {
+        return data.categoryId === catagoryId;
+      });
+      this.categoryNamePrint = categoryName[0].categoryName;
+  }
+  console.log('this.categoryNamePrint', this.categoryNamePrint);
     if (event) {
       if (event.index === 8 && this.categoryDetails[0].enrollCount > 0) {
         console.log('college connect');
@@ -204,15 +222,7 @@ export class LearnerMyCourseComponent implements OnInit {
         catagoryId = this.catalogueDetails.categories[2].categoryId;
       }
     }
-    this.categoryNamePrint = '';
-    let categoryName: any;
-    if (this.catalogueDetails && catagoryId && !jobRoleCategoryId && !searchName) {
-      this.selectedIndex = 0;
-      categoryName = this.categoryDetails.filter(function(data: any) {
-        return data.categoryId === catagoryId;
-      });
-      this.categoryNamePrint = categoryName[0].categoryName;
-  }
+    
     if (!jobRoleCategoryId) { this.selectedJobRole = 'Job Role'; }
     this.loading = true;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
@@ -354,7 +364,7 @@ export class LearnerMyCourseComponent implements OnInit {
         dropDownData = [data.data.getCountForCategories.data];
         this.dropDownCategoryDetails = dropDownData[0];
         this.categories = dropDownData[0].categories;
-        this.dropdownCatDetails = this.dropDownCategoryDetails[0];
+        this.dropdownCatDetails = dropDownData[0];
       }
     });
   }
@@ -459,9 +469,20 @@ onexpTemp(category, id, isexps) {
     this.expandActivityNameChildTemp = isexp ? id : null;
     this.isExpChild = isexp ? true : false;
   }
+
   triggerPopup() {
     document.getElementById('dropMenu').style.display = 'block';
   }
+
+  triggerPopups() {
+    this.dropdownMenu = !this.dropdownMenu;
+    if (this.dropdownMenu) {
+      document.getElementById('dropMenu').style.display = 'block';
+    } else {
+      document.getElementById('dropMenu').style.display = 'none';
+    }
+  }
+
   closePopup() {
     document.getElementById('dropMenu').style.display = 'none';
   }
