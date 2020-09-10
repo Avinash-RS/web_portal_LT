@@ -1456,6 +1456,12 @@ display: none;
 //   }
 
 // }
+@media only screen and (width: 1440px) {
+  .roleDropdDwnBtn {
+    right: 40% !important;
+  }
+}
+
 @media only screen and (width: 1280px) {
   .btl-alin {
     margin-left: -8%;
@@ -1465,7 +1471,7 @@ display: none;
   }
 
   .roleDropdDwnBtn {
-    right: 58% !important;
+    right: 30% !important;
   }
  
   :host ::ng-deep #mat-tab-label-0-5 {
