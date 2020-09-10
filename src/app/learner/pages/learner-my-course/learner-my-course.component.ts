@@ -91,6 +91,7 @@ export class LearnerMyCourseComponent implements OnInit {
   course: any;
   catagoryName: any;
   searchExpand = false;
+  dropdownMenu = false;
 
   constructor(
     public elm: ElementRef,
@@ -436,9 +437,20 @@ onexpTemp(category, id, isexps) {
     this.expandActivityNameChildTemp = isexp ? id : null;
     this.isExpChild = isexp ? true : false;
   }
+
   triggerPopup() {
     document.getElementById('dropMenu').style.display = 'block';
   }
+
+  triggerPopups() {
+    this.dropdownMenu = !this.dropdownMenu;
+    if (this.dropdownMenu) {
+      document.getElementById('dropMenu').style.display = 'block';
+    } else {
+      document.getElementById('dropMenu').style.display = 'none';
+    }
+  }
+
   closePopup() {
     document.getElementById('dropMenu').style.display = 'none';
   }

@@ -16,9 +16,10 @@
 }
 .dropdown-toggle:focus, .dropdown-toggle:active:focus, .dropdown-toggle.active:focus {
   outline: none !important;
-  background-color: $lxp-theme-green !important;
-  color: #ffffff !important;
+  background-color: none;
+  color: #898989;
   outline-style: none !important;
+  box-shadow: none;
 }
 
 // .hovercolor {
@@ -1994,7 +1995,7 @@ display: none;
 }
 ::ng-deep .roleDropdDwnBtn{
   position: absolute !important;
-  right: 51% !important;
+  right: 50% !important;
   bottom: 6% !important;
 }
 .roleBtn{
@@ -2103,9 +2104,11 @@ display: none;
   top: 8px;
   position: absolute;
 }
+
 .right-addon .glyphicon {right: 14rem;}
 .right-addon input { padding-right: 30px; }
 .right-addon .searchIcon { right: 30px;}
+
 .search:focus {
   border: 1px solid $lxp-theme-green !important;
   box-shadow: 0 0 0 0.05rem $lxp-theme-green !important;
@@ -2135,7 +2138,7 @@ display: none;
   min-width: 12rem !important;
   max-width: auto !important;
   left: unset !important;
-  right: 5% !important;
+  right: 2% !important;
   // height: 38px !important;
   border-bottom: 1px solid #e4dddd !important;
   padding-top: 9px !important;
