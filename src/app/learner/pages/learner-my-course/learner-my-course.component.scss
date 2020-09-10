@@ -921,10 +921,6 @@ hr {
   margin-top: 11px;
 }
 
-.dropdown {
-  float: right;
-}
-
 .courseDetailsCol {
   padding-left: 0px;
 }
@@ -1231,12 +1227,8 @@ display: none;
     margin-left: 10px;
   }
 
-  .roleBtn {
-    font-size: 14px !important;
-    padding: 0px !important;
-    width: 110px !important;
-    border: 0px solid #898989 !important;
-  }
+  
+
 
   .roleDropdDwnBtn {
     right: 0% !important;
@@ -1244,6 +1236,7 @@ display: none;
     top: 3px !important;
     left: 48% !important;
   }
+
 
 .coursenameCol {
   margin-top: 10px;
@@ -1871,9 +1864,10 @@ display: none;
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 155px;
+  min-width: 38vh;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 999999;
+  text-transform: capitalize !important;
 }
 
 .dropdown-content a {
@@ -2001,8 +1995,8 @@ display: none;
 }
 ::ng-deep .roleDropdDwnBtn{
   position: absolute !important;
-    right: 61% !important;
-    bottom: 2% !important;
+  right: 50% !important;
+  bottom: 6% !important;
 }
 .roleBtn{
   background-color: $color-white;
@@ -2013,7 +2007,7 @@ display: none;
   border: none;
   // border-radius: 11px;
   border: 1px solid #898989;
-  width: 155px;
+  width: 38vh;
   // position: relative;
   // top: 10px;
 }
@@ -2050,7 +2044,7 @@ display: none;
 .roledropdownicon{
   position: relative;
   float: right;
-  top: 3px;
+ 
 }
 .mat-menu-item:hover:not([disabled]) {
   background-color: $color-light-grey !important;
@@ -2144,7 +2138,7 @@ display: none;
   min-width: 12rem !important;
   max-width: auto !important;
   left: unset !important;
-  right: 5% !important;
+  right: 2% !important;
   // height: 38px !important;
   border-bottom: 1px solid #e4dddd !important;
   padding-top: 9px !important;
@@ -2229,5 +2223,8 @@ li {
  :host ::ng-deep .custClass .tooltip-arrow{
   position: relative !important;
   left: 41px !important;
+  }
+  .h-30{
+    height: 30px !important;
   }
   /* tooltip config end by mani */
