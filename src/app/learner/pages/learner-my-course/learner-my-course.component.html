@@ -114,11 +114,12 @@
               {{'Available Courses' | titlecase}}
                 <mat-icon class="dropdownicon">expand_more</mat-icon>
               </button>
+              <span (click)="triggerPopups()">
             <button (mouseenter)="triggerPopup()" (mouseleave)="closePopup()" class="btn dropdown-toggle float-right mr-3" type="button" 
             id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             >
           {{'Available Courses' | titlecase}}
-              </button>
+              </button></span>
               <ul class="dropdown-menu multi-level" role="menu" id="dropMenu" aria-labelledby="dropdownMenu">
                  <span  *ngFor="let item of categories">
                 <li *ngIf="item.subCategory == null"
