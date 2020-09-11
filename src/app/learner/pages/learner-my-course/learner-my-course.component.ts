@@ -499,7 +499,7 @@ export class LearnerMyCourseComponent implements OnInit {
 
   resettingJobRole() {
     this.selectedJobRole = 'job role';
-    this.getEnrolledCourses('', '', '');
+    this.getEnrolledCourses('', '', '', '', '');
   }
 }
 
