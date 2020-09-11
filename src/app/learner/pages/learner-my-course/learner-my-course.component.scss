@@ -1009,7 +1009,7 @@ display: none;
   display: none;
 }
 
-::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
+:host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
   display: none !important;
 }
 
@@ -1909,10 +1909,11 @@ display: none;
   z-index: 999999;
   text-transform: capitalize !important;
   width: -webkit-fill-available;
-  height: 250px !important;
-  overflow-x: hidden; 
-  overflow-y: auto; 
-  text-align:justify; 
+  min-height: auto;
+  max-height: 250px !important;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: justify;
  
 }
 
