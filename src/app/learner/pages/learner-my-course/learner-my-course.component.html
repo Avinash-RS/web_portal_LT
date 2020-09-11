@@ -36,10 +36,10 @@
           <div class="contedrop" *ngFor="let role of jobRole" (click)="getEnrolledCourses('' ,
           '',role.jobroleCategoryId,catalogueDetails.catalogueId,'',searchName);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount
               )">
-            <span containerClass="custClass">
+            <p class="oneLineCat">
               {{ role.jobroleCategoryName | titlecase}}
            
-            </span>
+            </p>
             <!-- <span *ngIf="role.jobroleCategoryName.length <= 12">{{
               role.jobroleCategoryName | titlecase
             }}</span> -->
