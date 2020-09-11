@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="row w-100">
-    <div class="col-8 col-sm-8 col-md-7 col-lg-7 catalogTitle" *ngIf="jobRole == null">
+    <div class="col-8 col-sm-8 col-md-7 col-lg-7 catalogTitle" *ngIf="jobRole?.length < 1">
       <div class="f_size_16 myC-head"><span class="module"> <b>My Courses</b></span></div>
     </div>
     <div class="col-8 col-sm-8 col-md-7 col-lg-7 catalogTitle" *ngIf="jobRole?.length > 0">
