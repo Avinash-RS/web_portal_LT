@@ -796,5 +796,13 @@
  "Terms & conditions" : "Terms & conditions",
  "& Country" : "& Country",
 
- "NA":"NA"
+ "NA":"NA",
+
+ "Click here to change Password" : "Click here to change Password",
+ "Click here to change profile details" : "Click here to change profile details",
+ "Click here to change Mobile number" : "Click here to change Mobile number",
+ "Click here to change Email Id" : "Click here to change Email Id",
+
+ "Previous" : "Previous",
+ "Today" : "Today"
 }
