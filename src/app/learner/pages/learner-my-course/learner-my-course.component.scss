@@ -1257,10 +1257,10 @@ display: none;
   }
 
   .roleDropdDwnBtn {
-    right: 0% !important;
-    bottom: 0% !important;
-    top: 3px !important;
-    left: 48% !important;
+    // right: 0% !important;
+    // bottom: 0% !important;
+    // top: 3px !important;
+    // left: 48% !important;
   }
 
   .courceNameTag {
@@ -1905,6 +1905,8 @@ display: none;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 999999;
   text-transform: capitalize !important;
+  width: -webkit-fill-available;
+
 }
 
 .dropdown-content a {
@@ -2031,9 +2033,16 @@ display: none;
   width: 155px;
 }
 ::ng-deep .roleDropdDwnBtn{
-  position: absolute !important;
-  right: 51% !important;
-  bottom: 6% !important;
+  // position: absolute !important;
+  // right: 29% !important;
+  // bottom: 6% !important;
+  padding-bottom: 4px; 
+  position: relative!important;
+  /* right: 29% !important; */
+  bottom: 32px !important;
+  /* left: 15%; */
+  margin-left: 16%;
+  //  margin-bottom: 0%;
 }
 .roleBtn{
   background-color: $color-white;
@@ -2044,7 +2053,7 @@ display: none;
   border: none;
   // border-radius: 11px;
   border: 1px solid #898989;
-  width: 237.5px;
+  min-width: 237.5px;
   // position: relative;
   // top: 10px;
 }
@@ -2054,9 +2063,13 @@ display: none;
 }
 
 .roleSelect{
-  float: left;
+  // float: left;
+  //   padding-left: 7px;
+  //   padding-top: 2px;
+    float: left;
     padding-left: 7px;
     padding-top: 2px;
+    white-space: nowrap;
 }
 .roleSelectChange{	
   float: left;
@@ -2081,7 +2094,7 @@ display: none;
 .roledropdownicon{
   position: relative;
   float: right;
- 
+ top: 3px;
 }
 .mat-menu-item:hover:not([disabled]) {
   background-color: $color-light-grey !important;
