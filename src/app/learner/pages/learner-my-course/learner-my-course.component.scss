@@ -1009,7 +1009,7 @@ display: none;
   display: none;
 }
 
-::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
+:host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
   display: none !important;
 }
 
