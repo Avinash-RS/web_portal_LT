@@ -1961,7 +1961,8 @@
           <p>Available Courses</p>
         </div>
         <div class="col-6 text-right">
-          <mat-icon class="arrowIcon mr-2" aria-hidden="false" (click)="availableCource = false">clear</mat-icon>
+          <mat-icon class="arrowIcon mr-2" aria-hidden="false" (click)="availableCource = false; 
+          isExpandCourseTemp = false; expandActivityNameTemp = '';isExpChild = false">clear</mat-icon>
         </div>
       </div>
       <ng-container *ngFor="let category of dropdownCatDetails.categories">
@@ -1988,7 +1989,7 @@
                 </span>
               </div>
               <div *ngIf="category.subCategory" (click)="
-            isExpandCourseTemp &&
+             onCloseTab(); isExpandCourseTemp &&
             expandActivityNameTemp == category.categoryId
               ? onexpTemp(category, category.categoryId, false)
               : onexpTemp(category, category.categoryId, true)
@@ -2007,7 +2008,7 @@
               <mat-icon class="arrowIcon float-right" aria-hidden="false"
                 *ngIf="isExpandCourseTemp && expandActivityNameTemp == category.categoryId && category.categoryName == 'vocational'"
                 (click)="
-                  isExpandCourseTemp && expandActivityNameTemp == category.categoryId ? onexpTemp(category, category.categoryId, false) : onexpTemp(category, category.categoryId, true)">
+                onCloseTab(); isExpandCourseTemp && expandActivityNameTemp == category.categoryId ? onexpTemp(category, category.categoryId, false) : onexpTemp(category, category.categoryId, true)">
                 keyboard_arrow_up</mat-icon>
 
               <ng-container *ngIf="
@@ -2018,7 +2019,7 @@
                   <div class="parrentAccordianSub">
                     <div class="row w-100 h-100">
                       <div class="col-12 m-auto pr-0">
-                        <div (click)="
+                        <div class="pb-3" (click)="
                           isExpChild &&
                           expandActivityNameChildTemp ==
                             subCatet.subCategoryId
@@ -2030,11 +2031,9 @@
                             <span class="matBadgeAvail" matBadge="{{ subCatet.totalCount }}"
                               matBadgeOverlap="false"></span>
                           </span>
-                          <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" *ngIf="
-                            expandActivityNameChildTemp !==
-                            subCatet.subCategoryId
-                          " (click)="
-                            isExpChild &&
+                          <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" 
+                          *ngIf="!isExpChild || expandActivityNameChildTemp !== subCatet.subCategoryId" (click)="
+                          isExpChild &&
                             expandActivityNameChildTemp ==
                               subCatet.subCategoryId
                               ? onexpchildTemp(
@@ -2055,7 +2054,7 @@
                               subCatet.subCategoryId
                           "
                             (click)="
-                  isExpandCourseTemp && expandActivityNameTemp == category.categoryId ? onexpTemp(category, category.categoryId, false) : onexpTemp(category, category.categoryId, true)">
+                            isExpChild">
                             keyboard_arrow_up</mat-icon>
                         </div>
                         <ng-container *ngIf="
