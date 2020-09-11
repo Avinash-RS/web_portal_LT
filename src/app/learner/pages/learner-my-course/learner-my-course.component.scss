@@ -1909,7 +1909,10 @@ display: none;
   z-index: 999999;
   text-transform: capitalize !important;
   width: -webkit-fill-available;
-
+  height: 250px !important;
+  overflow-x: hidden; 
+  overflow-y: auto; 
+  text-align:justify; 
 }
 
 .dropdown-content a {
