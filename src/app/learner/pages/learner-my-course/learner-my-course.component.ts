@@ -1,10 +1,10 @@
-import { Component, OnInit, HostListener, TemplateRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, HostListener, TemplateRef, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Router } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { TranslateService } from '@ngx-translate/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTabChangeEvent } from '@angular/material';
 import { MatMenuTrigger } from '@angular/material';
 import { CommonServicesService } from '@core/services/common-services.service';
 
@@ -29,6 +29,7 @@ import { CommonServicesService } from '@core/services/common-services.service';
 
 export class LearnerMyCourseComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
+  @Output() focusChange: EventEmitter<MatTabChangeEvent>;
   [x: string]: any;
   strDate: Date = new Date();
   userDetailes: any;
@@ -63,7 +64,7 @@ export class LearnerMyCourseComponent implements OnInit {
   onGoingCourseCount = 0;
   completedCourseCount = 0;
   allCourseCount = 0;
-  selectedIndex = 0;
+  selectedIndex: number;
   viewCourseClass = true;
   jobRole: any = [];
   categoryyName: any;
@@ -100,7 +101,7 @@ export class LearnerMyCourseComponent implements OnInit {
     private router: Router, private dialog: MatDialog,
     public CommonServices: CommonServicesService) {
     this.userDetailes = this.gs.checkLogout();
-    this.getEnrolledCourses('', '', '', '');
+    this.getEnrolledCourses('','', '', '', '');
     this.getScreenSize();
     this.getCountForCategories();
     this.getCountForJobRole();
@@ -110,6 +111,7 @@ export class LearnerMyCourseComponent implements OnInit {
   // this.translate.use(localStorage.getItem('language'));
   // }
   ngOnInit() {
+    this.selectedIndex = 1;
     this.gs.theme.subscribe(message  =>
       this.componentCssClass = message
       );
@@ -168,7 +170,7 @@ export class LearnerMyCourseComponent implements OnInit {
                 this.loading = false;
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
-                this.getEnrolledCourses('', '', '', '');
+                this.getEnrolledCourses('', '', '', '', '');
                 this.getCountForJobRole();
                 this.getCountForJobRole();
               }
@@ -182,15 +184,45 @@ export class LearnerMyCourseComponent implements OnInit {
   getCatName(data) {
     console.log('data', data);
   }
-  getEnrolledCourses(catalougeId, catagoryId, jobRoleCategoryId, searchName) {
+  // getEnroementCourseName(catagoryId) {
+  //   if (this.catalogueDetails && catagoryId && !jobRoleCategoryId && !searchName) {
+  //     this.selectedIndex = 0;
+  //     categoryName = this.categoryDetails.filter(function(data: any) {
+  //       return data.categoryId === catagoryId;
+  //     });
+  //     this.categoryNamePrint = categoryName[0].categoryName;
+  // }
+  // }
+  getEnrolledCourses(event, catagoryId, catalougeId, jobRoleCategoryId, searchName) {
     this.categoryNamePrint = '';
     let categoryName: any;
     if (this.catalogueDetails && catagoryId && !jobRoleCategoryId && !searchName) {
+      this.selectedIndex = 0;
       categoryName = this.categoryDetails.filter(function(data: any) {
         return data.categoryId === catagoryId;
       });
       this.categoryNamePrint = categoryName[0].categoryName;
   }
+  console.log('this.categoryNamePrint', this.categoryNamePrint);
+    if (event) {
+      if (event.index === 8 && this.categoryDetails[0].enrollCount > 0) {
+        console.log('college connect');
+        catalougeId = this.catalogueDetails.catalogueId;
+        catagoryId = this.catalogueDetails.categories[0].categoryId;
+      } else if (event.index === 8 && this.categoryDetails[1].enrollCount > 0 ||
+      event.index === 9 && this.categoryDetails[1].enrollCount > 0) {
+        console.log('vocational');
+        catalougeId = this.catalogueDetails.catalogueId;
+        catagoryId = this.catalogueDetails.categories[1].categoryId;
+      } else if (event.index === 8 && this.categoryDetails[2].enrollCount > 0 ||
+      event.index === 9 && this.categoryDetails[2].enrollCount > 0 ||
+      event.index === 10 && this.categoryDetails[2].enrollCount > 0) {
+        console.log('pro certification');
+        catalougeId = this.catalogueDetails.catalogueId;
+        catagoryId = this.catalogueDetails.categories[2].categoryId;
+      }
+    }
+    
     if (!jobRoleCategoryId) { this.selectedJobRole = 'Job Role'; }
     this.loading = true;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
@@ -387,7 +419,7 @@ export class LearnerMyCourseComponent implements OnInit {
               if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
-                this.getEnrolledCourses('', '', '', '');
+                this.getEnrolledCourses('','', '', '', '');
                 this.getCountForJobRole();
                 this.getCountForJobRole();
               }
