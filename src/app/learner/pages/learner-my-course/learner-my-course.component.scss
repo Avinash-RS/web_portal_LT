@@ -1922,7 +1922,12 @@ display: none;
   z-index: 999999;
   text-transform: capitalize !important;
   width: -webkit-fill-available;
-
+  min-height: auto;
+  max-height: 250px !important;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: justify;
+ 
 }
 
 .dropdown-content a {
@@ -1996,7 +2001,8 @@ display: none;
 }
 
 .contedrop {
-  padding: 15px;
+  padding: 14px 0 1px 14px;
+    
   cursor: pointer;
 }
 .contedrop:hover {
@@ -2057,7 +2063,7 @@ display: none;
   /* right: 29% !important; */
   bottom: 32px !important;
   /* left: 15%; */
-  margin-left: 16%;
+  margin-left: 17%;
   //  margin-bottom: 0%;
 }
 .roleBtn{
@@ -2117,10 +2123,10 @@ display: none;
 }
 .roleBatch{
   position: relative;
-  float: right;
-  right: 20px;
-  top: 9px;
-  background: #5c6873 !important;
+    float: right;
+    right: 31px;
+    top: -23px;
+    background: #5c6873 !important;
   & .mat-badge-content {
     background: $lxp-gray !important;
   }
@@ -2293,5 +2299,13 @@ li {
   }
   .h-30{
     height: 30px !important;
+  }
+ .oneLineCat {
+   width: 167px !important;
+   word-wrap:break-word !important;
+  }
+
+ .catalogTitle {
+    height: 60px !important;
   }
   /* tooltip config end by mani */

@@ -48,12 +48,12 @@ export class LearnerMyCourseComponent implements OnInit {
   showCompleted: string;
   showOngoing: string;
   showUpcoming: string;
-  categoryDetails: any[]=[];
+  categoryDetails: any[] = [];
   dropDownCategoryDetails = [];
   dropdownCatDetails = [];
   catalogueName: any;
   activity: any;
-  catalogueDetails : any;
+  catalogueDetails: any;
   pagenumber = 0;
   allcourses: any;
   categoryPopupData: any = [];
@@ -101,7 +101,7 @@ export class LearnerMyCourseComponent implements OnInit {
     private router: Router, private dialog: MatDialog,
     public CommonServices: CommonServicesService) {
     this.userDetailes = this.gs.checkLogout();
-    this.getEnrolledCourses('','', '', '', '');
+    this.getEnrolledCourses('', '', '', '', '');
     this.getScreenSize();
     this.getCountForCategories();
     this.getCountForJobRole();
@@ -112,9 +112,9 @@ export class LearnerMyCourseComponent implements OnInit {
   // }
   ngOnInit() {
     this.selectedIndex = 1;
-    this.gs.theme.subscribe(message  =>
+    this.gs.theme.subscribe(message =>
       this.componentCssClass = message
-      );
+    );
     this.translate.use(localStorage.getItem('language'));
     // const dateValue = new Date().toISOString()
     // const static =
@@ -203,27 +203,27 @@ export class LearnerMyCourseComponent implements OnInit {
         return data.categoryId === catagoryId;
       });
       this.categoryNamePrint = categoryName[0].categoryName;
-  }
-  console.log('this.categoryNamePrint', this.categoryNamePrint);
+    }
+    console.log('this.categoryNamePrint', this.categoryNamePrint);
     if (event) {
       if (event.index === 8 && this.categoryDetails[0].enrollCount > 0) {
         console.log('college connect');
         catalougeId = this.catalogueDetails.catalogueId;
         catagoryId = this.catalogueDetails.categories[0].categoryId;
       } else if (event.index === 8 && this.categoryDetails[1].enrollCount > 0 ||
-      event.index === 9 && this.categoryDetails[1].enrollCount > 0) {
+        event.index === 9 && this.categoryDetails[1].enrollCount > 0) {
         console.log('vocational');
         catalougeId = this.catalogueDetails.catalogueId;
         catagoryId = this.catalogueDetails.categories[1].categoryId;
       } else if (event.index === 8 && this.categoryDetails[2].enrollCount > 0 ||
-      event.index === 9 && this.categoryDetails[2].enrollCount > 0 ||
-      event.index === 10 && this.categoryDetails[2].enrollCount > 0) {
+        event.index === 9 && this.categoryDetails[2].enrollCount > 0 ||
+        event.index === 10 && this.categoryDetails[2].enrollCount > 0) {
         console.log('pro certification');
         catalougeId = this.catalogueDetails.catalogueId;
         catagoryId = this.catalogueDetails.categories[2].categoryId;
       }
     }
-    
+
     if (!jobRoleCategoryId) { this.selectedJobRole = 'Job Role'; }
     this.loading = true;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
@@ -270,6 +270,7 @@ export class LearnerMyCourseComponent implements OnInit {
           }
         }
         this.loading = false;
+        this.viewCourseClass = true;
       });
   }
 
@@ -421,7 +422,7 @@ export class LearnerMyCourseComponent implements OnInit {
               if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
-                this.getEnrolledCourses('','', '', '', '');
+                this.getEnrolledCourses('', '', '', '', '');
                 this.getCountForJobRole();
                 this.getCountForJobRole();
               }
@@ -459,13 +460,13 @@ export class LearnerMyCourseComponent implements OnInit {
   //   console.log('this.searchExpand', this.searchExpand);
   // }
 
-// -------------mobile responsive function-----------------------------
-onexpTemp(category, id, isexps) {
-  this.expandActivityNameTemp = isexps ? id : null;
-  this.isExpandCourseTemp = false;
-  if (category.subCategory) {
-    this.isExpandCourseTemp = true;
-  }
+  // -------------mobile responsive function-----------------------------
+  onexpTemp(category, id, isexps) {
+    this.expandActivityNameTemp = isexps ? id : null;
+    this.isExpandCourseTemp = false;
+    if (category.subCategory) {
+      this.isExpandCourseTemp = true;
+    }
   }
 
   onCloseTab() {
@@ -494,6 +495,11 @@ onexpTemp(category, id, isexps) {
 
   closePopup() {
     document.getElementById('dropMenu').style.display = 'none';
+  }
+
+  resettingJobRole() {
+    this.selectedJobRole = 'job role';
+    this.getEnrolledCourses('', '', '', '', '');
   }
 }
 

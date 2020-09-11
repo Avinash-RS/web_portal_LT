@@ -25,21 +25,26 @@
           <!-- <span *ngIf="selectedJobRole.length <= 12" [ngClass]="
               selectedJobRole === 'Job Role' ? 'roleSelect' : 'roleSelectChange'
             ">{{ selectedJobRole | titlecase }}</span> -->
-          <span *ngIf="selectedJobRole != 'Job Role'" class="roleBatchOnSelect"></span>
-          <mat-icon [ngClass]="
+          <span  *ngIf="selectedJobRole != 'Job Role'" class="roleBatchOnSelect"></span>
+          <mat-icon *ngIf="selectedJobRole === 'Job Role'" [ngClass]="
               selectedJobRole === 'Job Role'
                 ? 'roledropdownicon'
                 : 'roledropdowniconSelect'
             ">expand_more</mat-icon>
+            <mat-icon *ngIf="selectedJobRole != 'Job Role'" [ngClass]="
+            selectedJobRole != 'Job Role'
+              ? 'roledropdownicon'
+              : 'roledropdowniconSelect'
+          " (click)="resettingJobRole()">close</mat-icon>
         </button>
         <div [ngClass]="viewCourseClass == true ? 'dropdown-content' : 'dropdown-content1'">
           <div class="contedrop" *ngFor="let role of jobRole" (click)="getEnrolledCourses('' ,
-          '',role.jobroleCategoryId,catalogueDetails.catalogueId,'',searchName);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount
+          '',catalogueDetails.catalogueId, role.jobroleCategoryId, '',searchName);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount
               )">
-            <span containerClass="custClass">
+            <p class="oneLineCat">
               {{ role.jobroleCategoryName | titlecase}}
            
-            </span>
+            </p>
             <!-- <span *ngIf="role.jobroleCategoryName.length <= 12">{{
               role.jobroleCategoryName | titlecase
             }}</span> -->
