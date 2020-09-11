@@ -183,7 +183,7 @@ export class LearnerMyCourseComponent implements OnInit {
     this.viewCourseClass = true;
   }
   getCatName(data) {
-    console.log('data', data);
+    // console.log('data', data);
   }
   // getEnroementCourseName(catagoryId) {
   //   if (this.catalogueDetails && catagoryId && !jobRoleCategoryId && !searchName) {
@@ -204,21 +204,21 @@ export class LearnerMyCourseComponent implements OnInit {
       });
       this.categoryNamePrint = categoryName[0].categoryName;
     }
-    console.log('this.categoryNamePrint', this.categoryNamePrint);
+    // console.log('this.categoryNamePrint', this.categoryNamePrint);
     if (event) {
       if (event.index === 8 && this.categoryDetails[0].enrollCount > 0) {
-        console.log('college connect');
+        // console.log('college connect');
         catalougeId = this.catalogueDetails.catalogueId;
         catagoryId = this.catalogueDetails.categories[0].categoryId;
       } else if (event.index === 8 && this.categoryDetails[1].enrollCount > 0 ||
         event.index === 9 && this.categoryDetails[1].enrollCount > 0) {
-        console.log('vocational');
+        // console.log('vocational');
         catalougeId = this.catalogueDetails.catalogueId;
         catagoryId = this.catalogueDetails.categories[1].categoryId;
       } else if (event.index === 8 && this.categoryDetails[2].enrollCount > 0 ||
         event.index === 9 && this.categoryDetails[2].enrollCount > 0 ||
         event.index === 10 && this.categoryDetails[2].enrollCount > 0) {
-        console.log('pro certification');
+        // console.log('pro certification');
         catalougeId = this.catalogueDetails.catalogueId;
         catagoryId = this.catalogueDetails.categories[2].categoryId;
       }
