@@ -198,6 +198,15 @@
     }
 }
 
+
+.scroll-bar{
+    background-color:#d2d2d3;
+    width: 450px;
+    height: 550px;
+    overflow-y: scroll;
+  }
+
+
 // ::ng-deep .cal-month-view .cal-cell-top {
 //     height: 20px !important;
 //     min-height: 20px !important;

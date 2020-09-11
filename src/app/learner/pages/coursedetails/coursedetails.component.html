@@ -134,7 +134,7 @@
                                 matTooltipClass='custom-mat-tooltip'>{{(course?.course_name | slice:0:28)+'...'}}
                             </label>
 
-                            <label class="pointer lab" *ngIf="course?.course_name?.length<=28">{{course?.course_name}}
+                            <label class="pointer lab" *ngIf="course?.course_name?.length<=28">{{detailData?.course_name ? detailData?.course_name : course?.course_name}}
                             </label>
                         </ng-template>
 

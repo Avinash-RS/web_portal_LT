@@ -295,6 +295,7 @@ export class LearnerMyCourseComponent implements OnInit {
       wishlist: c.wishlisted || false,
       wishlist_id: c.wishlist_id || null,
       enrollment_status: null,
+      course_name: c.course_name
       // persentage : c.coursePlayerStatus.course_percentage || 0
     };
     // if (this.screenWidth < 800) {
