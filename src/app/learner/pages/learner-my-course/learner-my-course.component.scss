@@ -1869,7 +1869,7 @@ display: none;
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 38vh;
+  min-width: 237.5px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 999999;
   text-transform: capitalize !important;
@@ -2000,7 +2000,7 @@ display: none;
 }
 ::ng-deep .roleDropdDwnBtn{
   position: absolute !important;
-  right: 50% !important;
+  right: 51% !important;
   bottom: 6% !important;
 }
 .roleBtn{
@@ -2012,7 +2012,7 @@ display: none;
   border: none;
   // border-radius: 11px;
   border: 1px solid #898989;
-  width: 38vh;
+  width: 237.5px;
   // position: relative;
   // top: 10px;
 }
