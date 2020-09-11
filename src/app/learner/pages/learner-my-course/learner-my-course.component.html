@@ -4,7 +4,7 @@
     <div class="col-12">
       <mat-icon class="glyphicon">search</mat-icon>
       <input type="text" class="form-control search" [(ngModel)]="searchName"
-        (keyup)="getEnrolledCourses('', '', '', '', searchName)" placeholder="Search courses,categories.." />
+        (keyup)="getEnrolledCourses('', '', '', searchName)" placeholder="Search courses..." />
     </div>
   </div>
   <div class="row w-100">
@@ -166,8 +166,8 @@
           <div class="inner-addon searchDiv right-addon">
             <mat-icon class="glyphicon">search</mat-icon>
             <input type="text" (click)="searchExpand = !searchExpand" class="form-control search"
-              [(ngModel)]="searchName" (keyup)="getEnrolledCourses('', '', '','', searchName)"
-              placeholder="Search courses,categories.." />
+              [(ngModel)]="searchName" (keyup)="getEnrolledCourses('', '', '', searchName)"
+              placeholder="Search courses..." />
           </div>
         </div>
       </div>
