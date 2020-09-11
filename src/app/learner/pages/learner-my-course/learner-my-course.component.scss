@@ -1,4 +1,9 @@
 @import "variable";
+.cateName {
+  // position: relative;
+  // top: 8px;
+  padding-top: 3px;
+}
 .dropdown-toggle{
   background-color: $color-white;
   color: #898989 !important;
@@ -8,7 +13,7 @@
   border: none;
   border-radius: 0px;
   border: 1px solid #898989;
-  width: 168px;
+  width: 166px;
 }
 .dropdown-toggle:hover {
   background-color: $lxp-theme-green !important;
@@ -16,9 +21,10 @@
 }
 .dropdown-toggle:focus, .dropdown-toggle:active:focus, .dropdown-toggle.active:focus {
   outline: none !important;
-  background-color: $lxp-theme-green !important;
-  color: #ffffff !important;
+  background-color: none;
+  color: #898989;
   outline-style: none !important;
+  box-shadow: none;
 }
 
 // .hovercolor {
@@ -146,9 +152,9 @@
   font-weight: 500 !important;
   color: #616060;
 }
-:host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
-  display: inherit !important;
-}
+// :host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
+//   display: inherit !important;
+// }
 :host ::ng-deep .myCc .mat-tab-label .mat-tab-label-content {
   font-size: 14px !important;
   font-weight: 400 !important;
@@ -920,10 +926,6 @@ hr {
   margin-top: 11px;
 }
 
-.dropdown {
-  float: right;
-}
-
 .courseDetailsCol {
   padding-left: 0px;
 }
@@ -1005,8 +1007,22 @@ display: none;
 .mobileSearchRow {
   display: none;
 }
+
+::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
+  display: none !important;
+}
+
+.courceNameTag {
+  width: 350px; 
+  word-wrap:break-word !important;
+}
+
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
+
+.dropdown {
+    margin-right: 0rem !important;
+  }
 
  :host ::ng-deep .matInkBar .mat-ink-bar {
      display: none !important;
@@ -1087,23 +1103,20 @@ display: none;
 
 .catDropdown {
   display: none;
-  // padding: 2px !important;
-  // float: right;
-  // border: 0px solid #898989 !important;
-  // font-size: 14px !important;
-  // width: 135px !important;
 }
+
 
 .hovercolor {
   display: none;
 }
 
 .catDropdowns {
-  margin-right: -2rem;
+  margin-right: -1rem;
   display: block;
   padding: 2px !important;
   float: right;
-  border: 0px solid #898989 !important;
+  border: none;
+  color: #495057;
   font-size: 14px !important;
   width: 135px !important;
   background-color: white;
@@ -1113,7 +1126,6 @@ display: none;
     width: 95%;
   }
   .dropdown {
-    margin-right: 0rem !important;
     float: right;
   }
 
@@ -1203,9 +1215,6 @@ display: none;
   .template {
     display: block;
   }
-  :host ::ng-deep #mat-tab-label-0-3 {
-    display: none !important;
-  }
   :host ::ng-deep #mat-tab-label-0-4 {
     display: none !important;
   }
@@ -1224,17 +1233,27 @@ display: none;
   :host ::ng-deep #mat-tab-label-0-9 {
     display: none !important;
   }
+  :host ::ng-deep #mat-tab-label-0-10 {
+    display: none !important;
+  }
 
   .menuBtnHoriz {
     display: block;
     margin-left: 10px;
   }
 
-  .roleBtn {
+  .dropdown-content {
+    min-width: 20vh !important;
+  }
+
+  .roleSelect {
     font-size: 14px !important;
-    padding: 0px !important;
-    width: 110px !important;
-    border: 0px solid #898989 !important;
+  }
+
+  .roleBtn {
+   width: auto !important;
+   padding: 2px !important;
+   border: none !important;
   }
 
   .roleDropdDwnBtn {
@@ -1242,6 +1261,10 @@ display: none;
     bottom: 0% !important;
     top: 3px !important;
     left: 48% !important;
+  }
+
+  .courceNameTag {
+    width: 200px !important; 
   }
 
 .coursenameCol {
@@ -1315,6 +1338,7 @@ display: none;
     padding-left: 0px;
   }
   .catalogDropdownCol {
+    padding-right: 0px !important;
     margin-top: 0.5rem;
   }
 
@@ -1360,10 +1384,12 @@ display: none;
 
   .roleBtn {
     padding: 2px !important;
+    width: 11.5rem !important;
   }
 
   .search {
     width: 40% !important;
+    margin-left: 0px !important;
   }
 
   .searchExpand {
@@ -1462,6 +1488,12 @@ display: none;
 //   }
 
 // }
+@media only screen and (width: 1440px) {
+  .roleDropdDwnBtn {
+    right: 53% !important;
+  }
+}
+
 @media only screen and (width: 1280px) {
   .btl-alin {
     margin-left: -8%;
@@ -1471,7 +1503,7 @@ display: none;
   }
 
   .roleDropdDwnBtn {
-    right: 58% !important;
+    right: 47% !important;
   }
  
   :host ::ng-deep #mat-tab-label-0-5 {
@@ -1482,7 +1514,7 @@ display: none;
 @media only screen and (width: 1024px) {
 
   .roleDropdDwnBtn {
-    right: 50% !important;
+    right: 34% !important;
   }
 
   .searchCol {
@@ -1490,11 +1522,11 @@ display: none;
   }
 
   .right-addon .glyphicon {
-    right: 45px !important;
+    right: 15rem !important;
 }
 
   .search {
-    width: 83% !important;
+    width: 53% !important;
     margin-left: 10px !important;
     float: left !important;
   }
@@ -1870,9 +1902,10 @@ display: none;
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 155px;
+  min-width: 237.5px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 999999;
+  text-transform: capitalize !important;
 }
 
 .dropdown-content a {
@@ -2000,8 +2033,8 @@ display: none;
 }
 ::ng-deep .roleDropdDwnBtn{
   position: absolute !important;
-    right: 61% !important;
-    bottom: 2% !important;
+  right: 51% !important;
+  bottom: 6% !important;
 }
 .roleBtn{
   background-color: $color-white;
@@ -2012,7 +2045,7 @@ display: none;
   border: none;
   // border-radius: 11px;
   border: 1px solid #898989;
-  width: 155px;
+  width: 237.5px;
   // position: relative;
   // top: 10px;
 }
@@ -2049,7 +2082,7 @@ display: none;
 .roledropdownicon{
   position: relative;
   float: right;
-  top: 3px;
+ 
 }
 .mat-menu-item:hover:not([disabled]) {
   background-color: $color-light-grey !important;
@@ -2109,9 +2142,11 @@ display: none;
   top: 8px;
   position: absolute;
 }
+
 .right-addon .glyphicon {right: 14rem;}
 .right-addon input { padding-right: 30px; }
 .right-addon .searchIcon { right: 30px;}
+
 .search:focus {
   border: 1px solid $lxp-theme-green !important;
   box-shadow: 0 0 0 0.05rem $lxp-theme-green !important;
@@ -2141,7 +2176,7 @@ display: none;
   min-width: 12rem !important;
   max-width: auto !important;
   left: unset !important;
-  right: 5% !important;
+  right: 2% !important;
   // height: 38px !important;
   border-bottom: 1px solid #e4dddd !important;
   padding-top: 9px !important;
@@ -2196,6 +2231,7 @@ display: none;
 li {
   cursor: pointer;
   height: 37px;
+  padding-top: 10px;
 }
 .subMenu {
   min-width: 180px;
@@ -2226,5 +2262,8 @@ li {
  :host ::ng-deep .custClass .tooltip-arrow{
   position: relative !important;
   left: 41px !important;
+  }
+  .h-30{
+    height: 30px !important;
   }
   /* tooltip config end by mani */

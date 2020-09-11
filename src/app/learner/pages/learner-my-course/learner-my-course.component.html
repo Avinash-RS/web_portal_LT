@@ -3,13 +3,8 @@
   <div class="row mobileSearchRow">
     <div class="col-12">
       <mat-icon class="glyphicon">search</mat-icon>
-      <input
-        type="text"
-        class="form-control search"
-        [(ngModel)]="searchName"
-        (keyup)="getEnrolledCourses('', '', '', searchName)"
-        placeholder="Search courses,categories.."
-      />
+      <input type="text" class="form-control search" [(ngModel)]="searchName"
+        (keyup)="getEnrolledCourses('', '', '', searchName)" placeholder="Search courses..." />
     </div>
   </div>
   <div class="row w-100">
@@ -17,55 +12,35 @@
       <div class="f_size_16 myC-head"><span class="module">My Modules For</span>&nbsp;<b>:</b></div>
       <div class="dropdown roleDropdDwnBtn">
         <button class="roleBtn" (click)="dropdownSelect()">
-          <span
-            *ngIf="selectedJobRole.length > 12"
-            tooltip="{{ selectedJobRole }}"
-            placement="right"
+          <span containerClass="customClass" *ngIf="selectedJobRole.length > 12" tooltip="{{ selectedJobRole |titlecase}}" placement="right"
             [ngClass]="
               selectedJobRole === 'Job Role' ? 'roleSelect' : 'roleSelectChange'
-            "
-          >
+            ">
             <!-- {{selectedJobRole | titlecase}} -->
             {{ (selectedJobRole | slice: 0:12) + "..." }}
           </span>
-          <span
-            *ngIf="selectedJobRole.length <= 12"
-            [ngClass]="
+          <span *ngIf="selectedJobRole.length <= 12" [ngClass]="
               selectedJobRole === 'Job Role' ? 'roleSelect' : 'roleSelectChange'
-            "
-            >{{ selectedJobRole | titlecase }}</span
-          >
-          <span
-            *ngIf="selectedJobRole != 'Job Role'"
-            class="roleBatchOnSelect"
-           
-          ></span>
-          <mat-icon
-            [ngClass]="
+            ">{{ selectedJobRole | titlecase }}</span>
+          <span *ngIf="selectedJobRole != 'Job Role'" class="roleBatchOnSelect"></span>
+          <mat-icon [ngClass]="
               selectedJobRole === 'Job Role'
                 ? 'roledropdownicon'
                 : 'roledropdowniconSelect'
-            "
-            class="roledropdownicon"
-            >expand_more</mat-icon
-          >
+            ">expand_more</mat-icon>
         </button>
         <div [ngClass]="viewCourseClass == true ? 'dropdown-content' : 'dropdown-content1'">
-          <div class="contedrop" *ngFor="let role of jobRole" (click)="getEnrolledCourses(catalogueDetails.catalogueId,
-          '',role.jobroleCategoryId,searchName);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount
+          <div class="contedrop" *ngFor="let role of jobRole" (click)="getEnrolledCourses('' ,
+          '',role.jobroleCategoryId,catalogueDetails.catalogueId,'',searchName);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount
               )">
-            <span *ngIf="role.jobroleCategoryName.length > 12" tooltip="{{ role.jobroleCategoryName | titlecase }}"
+            <span containerClass="custClass" *ngIf="role.jobroleCategoryName.length > 12" tooltip="{{ role.jobroleCategoryName | titlecase }}"
               placement="right">
               {{ (role.jobroleCategoryName | slice: 0:12) + "..." }}
             </span>
             <span *ngIf="role.jobroleCategoryName.length <= 12">{{
               role.jobroleCategoryName | titlecase
             }}</span>
-            <span
-              class="roleBatch"
-              matBadge="{{ role.jobroleEnrollCount }}"
-              matBadgeOverlap="false"
-            ></span>
+            <span class="roleBatch" matBadge="{{ role.jobroleEnrollCount }}" matBadgeOverlap="false"></span>
           </div>
         </div>
       </div>
@@ -107,89 +82,92 @@
       <div class="row">
         <div class="col-12 text-right pr-0">
 
-         <!---------------Multi-level dropdown------------->
+          <!---------------Multi-level dropdown------------->
 
-         <div>
+          <div>
             <button (click)="openAvailableCource()" class="catDropdowns">
               {{'Available Courses' | titlecase}}
                 <mat-icon class="dropdownicon">expand_more</mat-icon>
               </button>
-            <button (mouseenter)="triggerPopup()" (mouseleave)="closePopup()" class="btn dropdown-toggle float-right mr-3" type="button" 
+              <span (click)="triggerPopups()">
+            <button (mouseenter)="triggerPopup()" (mouseleave)="closePopup()" class="btn dropdown-toggle catDropdown float-right mr-3" type="button" 
             id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             >
           {{'Available Courses' | titlecase}}
-              </button>
+              </button></span>
               <ul class="dropdown-menu multi-level" role="menu" id="dropMenu" aria-labelledby="dropdownMenu">
                  <span  *ngFor="let item of categories">
                 <li *ngIf="item.subCategory == null"
                   class="dropdown-item"  (click)="getCoureBasedOnCatalog(dropDownCategoryDetails,item,'','');
                     viewCourse(item,previewDialog,item.categoryName,item.totalCount)">
-                  <span *ngIf="item.categoryName.length > 17">{{(item?.categoryName | titlecase | slice:0:17)+'...'}}</span>
+                  <span
+                    *ngIf="item.categoryName.length > 17">{{(item?.categoryName | titlecase | slice:0:17)+'...'}}</span>
                   <span *ngIf="item.categoryName.length <= 17">{{item?.categoryName | titlecase}}</span>
-                  <span class="matBadgeNew"  matBadge="{{item.totalCount}}"  matBadgeOverlap="false"></span>
+                  <span class="matBadgeNew" matBadge="{{item.totalCount}}" matBadgeOverlap="false"></span>
                 </li>
 
-                  <li *ngIf="item.subCategory && item.subCategory.length > 0"
-                    class="dropdown-submenu">
-                    <a  class="dropdown-item" tabindex="-1">
-                      <!-- tooltip="{{item?.categoryName | titlecase}}"  placement="top" -->
-                        <span *ngIf="item.categoryName.length > 17"
-                           >{{(item?.categoryName | titlecase | slice:0:17)+'...'}}</span>
-                        <span *ngIf="item.categoryName.length <= 17">{{item?.categoryName | titlecase}}</span>
-                        <span class="dynamicBagde"  matBadge="{{item.totalCount}}"  matBadgeOverlap="false"></span>
-                    </a>
+                <li *ngIf="item.subCategory && item.subCategory.length > 0" class="dropdown-submenu">
+                  <a class="dropdown-item" tabindex="-1">
+                    <!-- tooltip="{{item?.categoryName | titlecase}}"  placement="top" -->
+                    <span
+                      *ngIf="item.categoryName.length > 17">{{(item?.categoryName | titlecase | slice:0:17)+'...'}}</span>
+                    <span *ngIf="item.categoryName.length <= 17">{{item?.categoryName | titlecase}}</span>
+                    <span class="dynamicBagde" matBadge="{{item.totalCount}}" matBadgeOverlap="false"></span>
+                  </a>
                   <!----------------------------Sub menu----------------------->
                   <ul class="dropdown-menu subMenu">
-                    <span  *ngFor="let subchild of item.subCategory">
-                    <li *ngIf="subchild.superSubCategory == null" class="dropdown-item superSubMenuItem">
-                      <!-- tooltip="{{subchild.subCategoryName | titlecase}}"  placement="top" -->
-                        <span class="superSubSpan" *ngIf="subchild.subCategoryName.length > 17"
-                           >{{subchild.subCategoryName | titlecase}}</span>
-                        <span *ngIf="subchild.subCategoryName.length <= 17">{{subchild.subCategoryName | titlecase}}</span>
-                        <span class="matBadgeSubmenu"  matBadge="{{subchild.totalCount}}"  matBadgeOverlap="false"></span></li>
+                    <span *ngFor="let subchild of item.subCategory">
+                      <li *ngIf="subchild.superSubCategory == null" class="dropdown-item superSubMenuItem">
+                        <!-- tooltip="{{subchild.subCategoryName | titlecase}}"  placement="top" -->
+                        <span class="superSubSpan"
+                          *ngIf="subchild.subCategoryName.length > 17">{{subchild.subCategoryName | titlecase}}</span>
+                        <span
+                          *ngIf="subchild.subCategoryName.length <= 17">{{subchild.subCategoryName | titlecase}}</span>
+                        <span class="matBadgeSubmenu" matBadge="{{subchild.totalCount}}" matBadgeOverlap="false"></span>
+                      </li>
 
-                        <li *ngIf="subchild.superSubCategory && subchild.superSubCategory.length > 0" class="dropdown-submenu"
-                           >
-                            <a  class="dropdown-item" tabindex="-1">
-                              <!-- tooltip="{{subchild.subCategoryName | titlecase}}" placement="top" -->
-                                <span class="superSubSpan" *ngIf="subchild.subCategoryName.length >17"
-                                    >{{subchild.subCategoryName | titlecase }}</span>
-                                <span *ngIf="subchild.subCategoryName.length <=17">{{subchild.subCategoryName | titlecase}}</span>
-                                <span class="matBadgeSubmenu"  matBadge="{{subchild.totalCount}}"  matBadgeOverlap="false"></span>
-                            </a>
+                      <li *ngIf="subchild.superSubCategory && subchild.superSubCategory.length > 0"
+                        class="dropdown-submenu">
+                        <a class="dropdown-item" tabindex="-1">
+                          <!-- tooltip="{{subchild.subCategoryName | titlecase}}" placement="top" -->
+                          <span class="superSubSpan"
+                            *ngIf="subchild.subCategoryName.length >17">{{subchild.subCategoryName | titlecase }}</span>
+                          <span
+                            *ngIf="subchild.subCategoryName.length <=17">{{subchild.subCategoryName | titlecase}}</span>
+                          <span class="matBadgeSubmenu" matBadge="{{subchild.totalCount}}"
+                            matBadgeOverlap="false"></span>
+                        </a>
 
-                       <!------------------------------Super sub menu----------------------------------->
-                      <ul class="dropdown-menu superSubMenu">
-                        <span *ngFor="let superChild of subchild.superSubCategory">
-                          <li class="dropdown-item superSubMenuItem" (click)="menuSelect(subchild,superChild);
+                        <!------------------------------Super sub menu----------------------------------->
+                        <ul class="dropdown-menu superSubMenu">
+                          <span *ngFor="let superChild of subchild.superSubCategory">
+                            <li class="dropdown-item superSubMenuItem" (click)="menuSelect(subchild,superChild);
                           getCoureBasedOnCatalog(dropDownCategoryDetails,item,subchild.subCategoryId, superChild.superSubCategoryId);
                             viewCourse(item,previewDialog,superChild.superSubCategoryName,superChild.totalCount)">
-                            <!-- tooltip="{{superChild.superSubCategoryName | titlecase}}"
+                              <!-- tooltip="{{superChild.superSubCategoryName | titlecase}}"
                             placement="top" -->
-                            <span class="superSubSpan" *ngIf="superChild.superSubCategoryName.length > 17"
-                               >{{superChild.superSubCategoryName | titlecase }}</span>
-                            <span *ngIf="superChild.superSubCategoryName.length <= 17">{{superChild.superSubCategoryName | titlecase}}</span>
-                            <span class="matBadgesuperSub"  matBadge="{{superChild.totalCount}}"  matBadgeOverlap="false"></span>
-                          </li>
+                              <span class="superSubSpan"
+                                *ngIf="superChild.superSubCategoryName.length > 17">{{superChild.superSubCategoryName | titlecase }}</span>
+                              <span
+                                *ngIf="superChild.superSubCategoryName.length <= 17">{{superChild.superSubCategoryName | titlecase}}</span>
+                              <span class="matBadgesuperSub" matBadge="{{superChild.totalCount}}"
+                                matBadgeOverlap="false"></span>
+                            </li>
                           </span>
-                      </ul>
-                    </li>
-                          </span>
-                          </ul>
+                        </ul>
+                      </li>
+                    </span>
+                  </ul>
                 </li>
-                </span>
-                </ul>
-        </div>
+              </span>
+            </ul>
+          </div>
 
           <div class="inner-addon searchDiv right-addon">
             <mat-icon class="glyphicon">search</mat-icon>
-            <input
-              type="text" (click)="searchExpand = !searchExpand"
-                class="form-control search"
-              [(ngModel)]="searchName"
-              (keyup)="getEnrolledCourses('', '', '', searchName)"
-              placeholder="Search courses,categories.."
-            />
+            <input type="text" (click)="searchExpand = !searchExpand" class="form-control search"
+              [(ngModel)]="searchName" (keyup)="getEnrolledCourses('', '', '', searchName)"
+              placeholder="Search courses..." />
           </div>
         </div>
       </div>
@@ -221,12 +199,454 @@
             </span>
             <span></span>
             </div> -->
-      <mat-tab-group
+      <mat-tab-group #tabs (focusChange)="getEnrolledCourses($event ,'',
+      '', '', searchName);"
         [(selectedIndex)]="selectedIndex"
         mat-align-tabs="start"
         animationDuration="1000ms"
         class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0"
       >
+      <mat-tab>
+        <div class="row">
+          <div class="col-6 m-auto">
+            <span class="menuBtnHoriz">{{
+              categoryNamePrint | titlecase
+            }}</span>
+          </div>
+          <div class="col-6">
+            <button
+              class="float-right menuBtnHoriz"
+              mat-icon-button
+              [matMenuTriggerFor]="menu">
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button
+                mat-menu-item
+                (click)="getEnrolledCourses('',
+                categorytab.categoryId, catalogueDetails.catalogueId, '', ''); "
+                *ngFor="let categorytab of categoryDetails">
+              <span>{{ categorytab.categoryName | titlecase }}</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+
+        <ng-template matTabLabel>
+          <div>
+            <span
+              class="tabsc"
+              matBadge="{{
+                jobRoleSelected === true
+                  ? jobOnGoingCourseCount
+                  : onGoingCourseCount
+              }}"
+              matBadgeOverlap="false"
+              >{{ "Ongoing" }}</span
+            >
+          </div>
+        </ng-template>
+
+        <!-- Card start -->
+        <div *ngFor="let course of incomplete; let j = index">
+          <mat-card class="coursebg card12" matRipple>
+            <div class="row">
+              <div
+                class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol"
+              >
+                <div class="row">
+                  <div class="col-12 col-sm-12 col-md-4 col-lg-3">
+                    <div class="courseHover" (click)="gotoDesc(course)">
+                      <div>
+                        <span *ngIf="course?.course_type === 'primer_course'">
+                          <img
+                            *ngIf="course?.categoryName === 'college connect'"
+                            matTooltip="College connect"
+                            matTooltipPosition="right"
+                            matTooltipClass="custom-mat-tooltip"
+                            alt="flag"
+                            class="primerFlage"
+                            src="assets/learner/primerC.svg"
+                          />
+                          <img
+                            *ngIf="course?.categoryName === 'vocational'"
+                            matTooltip="Vocational"
+                            matTooltipPosition="right"
+                            matTooltipClass="custom-mat-tooltip"
+                            alt="flag"
+                            class="primerFlage"
+                            src="../../../../assets/learner/primerV.svg"
+                          />
+                          <img
+                            *ngIf="
+                              course?.categoryName === 'pro certification'
+                            "
+                            matTooltip="Pro certification"
+                            placement="right"
+                            alt="flag"
+                            class="primerFlage"
+                            src="../../../../assets/learner/primerP.svg"
+                          />
+                        </span>
+                        <span *ngIf="course?.course_type === 'free_course'">
+                          <img
+                            *ngIf="course?.categoryName === 'college connect'"
+                            matTooltip="College connect"
+                            matTooltipPosition="right"
+                            matTooltipClass="custom-mat-tooltip"
+                            alt="flag"
+                            class="primerFlage"
+                            src="../../../../assets/learner/freeC.svg"
+                          />
+                          <img
+                            *ngIf="course?.categoryName === 'vocational'"
+                            matTooltip="Vocational"
+                            alt="flag"
+                            matTooltipPosition="right"
+                            matTooltipClass="custom-mat-tooltip"
+                            class="primerFlage"
+                            src="../../../../assets/learner/freeV.svg"
+                          />
+                          <img
+                            *ngIf="
+                              course?.categoryName === 'pro certification'
+                            "
+                            matTooltip="Pro certification"
+                            matTooltipPosition="right"
+                            matTooltipClass="custom-mat-tooltip"
+                            alt="flag"
+                            class="primerFlage"
+                            src="../../../../assets/learner/freeP.svg"
+                          />
+                        </span>
+                      </div>
+                      <img
+                        alt="Course Img"
+                        src="{{ course.course_img_url }}"
+                        class="courseImg"
+                      />
+
+                      <div class="overlay">
+                        <mat-icon class="text"> play_arrow </mat-icon>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 col-sm-6 col-md-8 col-lg-7 coursenameCol">
+                    <div class="f_size_18 f_wt_500 pointer coursename">
+                      <span
+                        *ngIf="course.course_name?.length > 28"
+                        tooltip="{{ course.course_name }}"
+                        placement="right"
+                        >{{
+                          (course.course_name | slice: 0:28) + "..."
+                        }}</span
+                      >
+                      <span *ngIf="course.course_name?.length <= 28">{{
+                        course.course_name
+                      }}</span>
+                      <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
+                                          <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
+                      <span class="span-with-icon">
+                        <mat-icon class="timer"> alarm_on </mat-icon>
+                        {{
+                          course?.course_duration != 1
+                            ? course.course_duration
+                              ? course.course_duration + " hours"
+                              : "1" + " hour"
+                            : "1" + "hour"
+                        }}
+                      </span>
+                    </div>
+                    <div class="row">
+                      <div
+                        class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
+                        (click)="gotoDesc(course)"
+                      >
+                        <p class="">
+                          {{
+                            course.course_description?.length > 100
+                              ? (course.course_description | slice: 0:100) +
+                                "..."
+                              : course.course_description
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row startBtnRow">
+                      <div class="col-12 col-sm-12 col-md-10 startBtnCol">
+                        <button
+                          *ngIf="course.batchCourse == true"
+                          class="clr"
+                          (click)="goToAssignment(course)"
+                          [disabled]="course.assignmentCount == 0"
+                        >
+                          <mat-icon class="btn-icon">description</mat-icon>
+                          <span
+                            >Assignments ({{ course.assignmentCount }})</span
+                          >
+                        </button>
+
+                        <button
+                          *ngIf="course.batchCourse == true"
+                          class="clr ml-4"
+                          (click)="goToForum(course)"
+                        >
+                          <mat-icon class="btn-icon">forum</mat-icon>
+                          <span
+                            >Discussion Forum ({{ course.forumCount }})</span
+                          >
+                        </button>
+                      </div>
+                      <div class="startBtnDiv">
+                        <button
+                          mat-stroked-button
+                          *ngIf="
+                            course?.coursePlayerStatus?.status !== 'completed'
+                          "
+                          class="btl-alin blue_clr cap pointer m-t-05"
+                          (click)="gotoDesc(course)"
+                        >
+                          <mat-icon class="icon-color m-t-m-2"
+                            >play_circle_outline</mat-icon
+                          >
+                          <span class="cap f_wt_400 m-t-m-2">
+                            {{
+                              course?.coursePlayerStatus?.status ===
+                              "incomplete"
+                                ? "Resume"
+                                : course?.coursePlayerStatus?.status ===
+                                  "suspend"
+                                ? "Resume"
+                                : "Start"
+                            }}&nbsp;
+                          </span>
+                        </button>
+                        <button
+                          mat-stroked-button
+                          *ngIf="
+                            course?.coursePlayerStatus?.status === 'completed'
+                          "
+                          class="btl-alin blue_clr cap pointer m-t-05"
+                          (click)="gotoDesc(course)"
+                        >
+                          <mat-icon class="icon-color m-t-m-2"
+                            >replay</mat-icon
+                          >
+                          <span class="cap f_wt_400 m-t-m-2">
+                            {{ "Replay" }}&nbsp;
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="row pointer">
+                      <div class="col-12">
+                        <div
+                          class="upcoming"
+                          (click)="navToCal()"
+                          *ngIf="
+                            course?.upComingLiveClassRoom?.activitytype ==
+                            'Live Classroom'
+                          "
+                        >
+                          {{ course?.upComingLiveClassRoom?.status }}...
+                          <b
+                            >{{
+                              course?.upComingLiveClassRoom?.startdate
+                                | date: " h:mm a"
+                            }}
+                            to
+                            {{
+                              course?.upComingLiveClassRoom?.enddate
+                                | date: " h:mm a"
+                            }}</b
+                          >
+                          |
+                          <u><b>Live classroom</b></u>
+                          <mat-icon class="video">videocam</mat-icon>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
+                    <div class="aligned-with-icon alarmcursor">
+                      <mat-icon class="timer"> alarm_on </mat-icon>
+                      {{
+                        course?.course_duration != 1
+                          ? course.course_duration
+                            ? course.course_duration + " hours"
+                            : "1" + " hour"
+                          : "1" + "hour"
+                      }}
+                    </div>
+                    <div class="startBtnicon">
+                      <button
+                        mat-stroked-button
+                        *ngIf="
+                          course?.coursePlayerStatus?.status !== 'completed'
+                        "
+                        class="btl-alin blue_clr cap pointer m-t-05"
+                        (click)="gotoDesc(course)"
+                      >
+                        <mat-icon class="icon-color m-t-m-2"
+                          >play_circle_outline</mat-icon
+                        >
+                        <span class="cap f_wt_400 m-t-m-2">
+                          {{
+                            course?.coursePlayerStatus?.status ===
+                            "incomplete"
+                              ? "Resume"
+                              : course?.coursePlayerStatus?.status ===
+                                "suspend"
+                              ? "Resume"
+                              : "Start"
+                          }}&nbsp;
+                        </span>
+                      </button>
+                      <button
+                        mat-stroked-button
+                        *ngIf="
+                          course?.coursePlayerStatus?.status === 'completed'
+                        "
+                        class="btl-alin blue_clr cap pointer m-t-05"
+                        (click)="gotoDesc(course)"
+                      >
+                        <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
+                        <span class="cap f_wt_400 m-t-m-2">
+                          {{ "Replay" }}&nbsp;
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-12 col-sm-12 col-md-12 col-lg-5"
+                *ngIf="course.batchCourse == true"
+              >
+                <div class="row m-l-2p f_size_12">
+                  <div class="col-3">
+                    <div>
+                      Activity
+                      <mat-icon
+                        tooltip="Info about the action"
+                        placement="bottom"
+                        class="infoIcon"
+                        fontSet="material-icons-outlined"
+                        >info</mat-icon
+                      >
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="f_size_13">
+                      Learning effort
+                      <mat-icon
+                        tooltip="Info about the action"
+                        placement="bottom"
+                        class="infoIcon"
+                        fontSet="material-icons-outlined"
+                        >info</mat-icon
+                      >
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div>
+                      Points earned
+                      <mat-icon
+                        tooltip="Info about the action"
+                        placement="bottom"
+                        class="infoIcon"
+                        fontSet="material-icons-outlined"
+                        >info</mat-icon
+                      >
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div>
+                      Final score
+                      <mat-icon
+                        tooltip="Info about the action"
+                        placement="bottom"
+                        class="infoIcon"
+                        fontSet="material-icons-outlined"
+                        >info</mat-icon
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row m-t-2 m-l-2p">
+                  <div class="col-3">
+                    <div class="m-t">
+                      <sapn class="padscore">4</sapn>
+                      <sapn class="f_size_22">/</sapn>
+                      <span class="f_size_20">20</span>
+                    </div>
+                    <div class="m-l-3 f_size_12">Pending</div>
+                  </div>
+                  <div class="col-3">
+                    <div class="progess pointer">
+                      <circle-progress
+                        [percent]="
+                          course?.coursePlayerStatus?.course_percentage || 0
+                        "
+                        [radius]="10"
+                        [outerStrokeWidth]="2"
+                        [innerStrokeWidth]="2"
+                        [space]="-2"
+                        [outerStrokeGradient]="true"
+                        [outerStrokeGradientStopColor]="'#53a9ff'"
+                        [outerStrokeColor]="'#4882c2'"
+                        [innerStrokeColor]="'#e7e8ea'"
+                        [titleFontSize]="7"
+                        [unitsFontSize]="7"
+                        [showSubtitle]="false"
+                        [animation]="true"
+                        [animationDuration]="100"
+                        [startFromZero]="false"
+                        [responsive]="true"
+                      >
+                      </circle-progress>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="point">56</div>
+                  </div>
+                  <div class="col-3">
+                    <div class="finalScore">- - -</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-card>
+          <div style="border-bottom: 1px solid #cccccc7a"></div>
+        </div>
+        <!-- card end -->
+
+        <div *ngIf="onGoingCourseCount === 0">
+          <mat-card class="coursebg width_90 errorCard">
+            <div class="row width_90 no_margin">
+              <div
+                class="col-4 col-sm-4 col-md-1 display_flex pointer no_pl mt-4"
+                (click)="gotoDesc(course)"
+              >
+                <img
+                  alt="Course Img"
+                  src="assets/noCourseImg.jpg"
+                  class="courseImgs"
+                />
+              </div>
+              <div class="col-8 col-md-11 no_pl errorboxx">
+                <span style="font-size: medium">{{
+                  "You have no ongoing courses at the moment." | translate
+                }}</span>
+              </div>
+            </div>
+          </mat-card>
+          <hr class="hr-tag" />
+        </div>
+      </mat-tab>
         <mat-tab>
           <div class="row">
             <div class="col-6 m-auto">
@@ -235,37 +655,28 @@
               }}</span>
             </div>
             <div class="col-6">
-              <button
-                class="float-right menuBtnHoriz"
-                mat-icon-button
-                [matMenuTriggerFor]="menu">
+              <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_horiz</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button
-                  mat-menu-item
-                  (click)="getEnrolledCourses(
-                      catalogueDetails.catalogueId,
-                      categorytab.categoryId);"
+                <button mat-menu-item (click)="getEnrolledCourses('',
+                      categorytab.categoryId, catalogueDetails.catalogueId, '', ''); "
                   *ngFor="let categorytab of categoryDetails">
-                <span>{{ categorytab.categoryName }}</span>
+                <span>{{ categorytab.categoryName  | titlecase }}</span>
                 </button>
               </mat-menu>
             </div>
           </div>
 
           <ng-template matTabLabel>
-            <div (click)="getEnrolledCourses('', '', '', searchName);">
+            <div>
               <span
                 class="tabsc"
                 matBadge="{{
                   jobRoleSelected === true
                     ? jobOnGoingCourseCount
                     : onGoingCourseCount
-                }}"
-                matBadgeOverlap="false"
-                >{{ "Ongoing" }}</span
-              >
+                }}" matBadgeOverlap="false">{{ "Ongoing" }}</span>
             </div>
           </ng-template>
 
@@ -273,80 +684,38 @@
           <div *ngFor="let course of incomplete; let j = index">
             <mat-card class="coursebg card12" matRipple>
               <div class="row">
-                <div
-                  class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol"
-                >
+                <div class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol">
                   <div class="row">
                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                       <div class="courseHover" (click)="gotoDesc(course)">
                         <div>
                           <span *ngIf="course?.course_type === 'primer_course'">
-                            <img
-                              *ngIf="course?.categoryName === 'college connect'"
-                              matTooltip="College connect"
-                              matTooltipPosition="right"
-                              matTooltipClass="custom-mat-tooltip"
-                              alt="flag"
-                              class="primerFlage"
-                              src="assets/learner/primerC.svg"
-                            />
-                            <img
-                              *ngIf="course?.categoryName === 'vocational'"
-                              matTooltip="Vocational"
-                              matTooltipPosition="right"
-                              matTooltipClass="custom-mat-tooltip"
-                              alt="flag"
-                              class="primerFlage"
-                              src="../../../../assets/learner/primerV.svg"
-                            />
-                            <img
-                              *ngIf="
+                            <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"
+                              matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" alt="flag"
+                              class="primerFlage" src="assets/learner/primerC.svg" />
+                            <img *ngIf="course?.categoryName === 'vocational'" matTooltip="Vocational"
+                              matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" alt="flag"
+                              class="primerFlage" src="../../../../assets/learner/primerV.svg" />
+                            <img *ngIf="
                                 course?.categoryName === 'pro certification'
-                              "
-                              matTooltip="Pro certification"
-                              placement="right"
-                              alt="flag"
-                              class="primerFlage"
-                              src="../../../../assets/learner/primerP.svg"
-                            />
+                              " matTooltip="Pro certification" placement="right" alt="flag" class="primerFlage"
+                              src="../../../../assets/learner/primerP.svg" />
                           </span>
                           <span *ngIf="course?.course_type === 'free_course'">
-                            <img
-                              *ngIf="course?.categoryName === 'college connect'"
-                              matTooltip="College connect"
-                              matTooltipPosition="right"
-                              matTooltipClass="custom-mat-tooltip"
-                              alt="flag"
-                              class="primerFlage"
-                              src="../../../../assets/learner/freeC.svg"
-                            />
-                            <img
-                              *ngIf="course?.categoryName === 'vocational'"
-                              matTooltip="Vocational"
-                              alt="flag"
-                              matTooltipPosition="right"
-                              matTooltipClass="custom-mat-tooltip"
-                              class="primerFlage"
-                              src="../../../../assets/learner/freeV.svg"
-                            />
-                            <img
-                              *ngIf="
+                            <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"
+                              matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" alt="flag"
+                              class="primerFlage" src="../../../../assets/learner/freeC.svg" />
+                            <img *ngIf="course?.categoryName === 'vocational'" matTooltip="Vocational" alt="flag"
+                              matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" class="primerFlage"
+                              src="../../../../assets/learner/freeV.svg" />
+                            <img *ngIf="
                                 course?.categoryName === 'pro certification'
-                              "
-                              matTooltip="Pro certification"
-                              matTooltipPosition="right"
-                              matTooltipClass="custom-mat-tooltip"
-                              alt="flag"
-                              class="primerFlage"
-                              src="../../../../assets/learner/freeP.svg"
-                            />
+                              " matTooltip="Pro certification" matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage"
+                              src="../../../../assets/learner/freeP.svg" />
                           </span>
                         </div>
-                        <img
-                          alt="Course Img"
-                          src="{{ course.course_img_url }}"
-                          class="courseImg"
-                        />
+                        <img alt="Course Img" src="{{ course.course_img_url }}" class="courseImg" />
 
                         <div class="overlay">
                           <mat-icon class="text"> play_arrow </mat-icon>
@@ -355,9 +724,9 @@
                     </div>
                     <div class="col-6 col-sm-6 col-md-8 col-lg-7 coursenameCol">
                       <div class="f_size_18 f_wt_500 pointer coursename">
-                        <p  style="width: 350px; word-wrap:break-word !important;">
+                        <p class="courceNameTag">
                           {{course.course_name}}
-                      </p>
+                        </p>
                         <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                         <span class="span-with-icon">
@@ -372,57 +741,31 @@
                         </span>
                       </div>
                       <div class="row">
-                        <div
-                          class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-30 pointer"
-                          (click)="gotoDesc(course)"
-                        >
-                          <p class="">
-                            {{
-                              course.course_description?.length > 100
-                                ? (course.course_description | slice: 0:100) +
-                                  "..."
-                                : course.course_description
-                            }}
+                        <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400 h-30 pointer"
+                          (click)="gotoDesc(course)">
+                          <p>
+                            {{(course.course_description?.length > 50)? (course.course_description | slice:0:50)+'...':(course.course_description) }}
                           </p>
                         </div>
                       </div>
                       <div class="row startBtnRow">
                         <div class="col-12 col-sm-12 col-md-10 startBtnCol">
-                          <button
-                            *ngIf="course.batchCourse == true"
-                            class="clr"
-                            (click)="goToAssignment(course)"
-                            [disabled]="course.assignmentCount == 0"
-                          >
+                          <button *ngIf="course.batchCourse == true" class="clr" (click)="goToAssignment(course)"
+                            [disabled]="course.assignmentCount == 0">
                             <mat-icon class="btn-icon">description</mat-icon>
-                            <span
-                              >Assignments ({{ course.assignmentCount }})</span
-                            >
+                            <span>Assignments ({{ course.assignmentCount }})</span>
                           </button>
 
-                          <button
-                            *ngIf="course.batchCourse == true"
-                            class="clr ml-4"
-                            (click)="goToForum(course)"
-                          >
+                          <button *ngIf="course.batchCourse == true" class="clr ml-4" (click)="goToForum(course)">
                             <mat-icon class="btn-icon">forum</mat-icon>
-                            <span
-                              >Discussion Forum ({{ course.forumCount }})</span
-                            >
+                            <span>Discussion Forum ({{ course.forumCount }})</span>
                           </button>
                         </div>
                         <div class="startBtnDiv">
-                          <button
-                            mat-stroked-button
-                            *ngIf="
+                          <button mat-stroked-button *ngIf="
                               course?.coursePlayerStatus?.status !== 'completed'
-                            "
-                            class="btl-alin blue_clr cap pointer m-t-05"
-                            (click)="gotoDesc(course)"
-                          >
-                            <mat-icon class="icon-color m-t-m-2"
-                              >play_circle_outline</mat-icon
-                            >
+                            " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                            <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                             <span class="cap f_wt_400 m-t-m-2">
                               {{
                                 course?.coursePlayerStatus?.status ===
@@ -435,17 +778,10 @@
                               }}&nbsp;
                             </span>
                           </button>
-                          <button
-                            mat-stroked-button
-                            *ngIf="
+                          <button mat-stroked-button *ngIf="
                               course?.coursePlayerStatus?.status === 'completed'
-                            "
-                            class="btl-alin blue_clr cap pointer m-t-05"
-                            (click)="gotoDesc(course)"
-                          >
-                            <mat-icon class="icon-color m-t-m-2"
-                              >replay</mat-icon
-                            >
+                            " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                            <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                             <span class="cap f_wt_400 m-t-m-2">
                               {{ "Replay" }}&nbsp;
                             </span>
@@ -455,17 +791,12 @@
 
                       <div class="row pointer">
                         <div class="col-12">
-                          <div
-                            class="upcoming"
-                            (click)="navToCal()"
-                            *ngIf="
+                          <div class="upcoming" (click)="navToCal()" *ngIf="
                               course?.upComingLiveClassRoom?.activitytype ==
                               'Live Classroom'
-                            "
-                          >
+                            ">
                             {{ course?.upComingLiveClassRoom?.status }}...
-                            <b
-                              >{{
+                            <b>{{
                                 course?.upComingLiveClassRoom?.startdate
                                   | date: " h:mm a"
                               }}
@@ -473,8 +804,7 @@
                               {{
                                 course?.upComingLiveClassRoom?.enddate
                                   | date: " h:mm a"
-                              }}</b
-                            >
+                              }}</b>
                             |
                             <u><b>Live classroom</b></u>
                             <mat-icon class="video">videocam</mat-icon>
@@ -495,17 +825,10 @@
                         }}
                       </div>
                       <div class="startBtnicon">
-                        <button
-                          mat-stroked-button
-                          *ngIf="
+                        <button mat-stroked-button *ngIf="
                             course?.coursePlayerStatus?.status !== 'completed'
-                          "
-                          class="btl-alin blue_clr cap pointer m-t-05"
-                          (click)="gotoDesc(course)"
-                        >
-                          <mat-icon class="icon-color m-t-m-2"
-                            >play_circle_outline</mat-icon
-                          >
+                          " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                          <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                           <span class="cap f_wt_400 m-t-m-2">
                             {{
                               course?.coursePlayerStatus?.status ===
@@ -518,14 +841,9 @@
                             }}&nbsp;
                           </span>
                         </button>
-                        <button
-                          mat-stroked-button
-                          *ngIf="
+                        <button mat-stroked-button *ngIf="
                             course?.coursePlayerStatus?.status === 'completed'
-                          "
-                          class="btl-alin blue_clr cap pointer m-t-05"
-                          (click)="gotoDesc(course)"
-                        >
+                          " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                           <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                           <span class="cap f_wt_400 m-t-m-2">
                             {{ "Replay" }}&nbsp;
@@ -535,57 +853,34 @@
                     </div>
                   </div>
                 </div>
-                <div
-                  class="col-12 col-sm-12 col-md-12 col-lg-5"
-                  *ngIf="course.batchCourse == true"
-                >
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="course.batchCourse == true">
                   <div class="row m-l-2p f_size_12">
                     <div class="col-3">
                       <div>
                         Activity
-                        <mat-icon
-                          tooltip="Info about the action"
-                          placement="bottom"
-                          class="infoIcon"
-                          fontSet="material-icons-outlined"
-                          >info</mat-icon
-                        >
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
                     <div class="col-3">
                       <div class="f_size_13">
                         Learning effort
-                        <mat-icon
-                          tooltip="Info about the action"
-                          placement="bottom"
-                          class="infoIcon"
-                          fontSet="material-icons-outlined"
-                          >info</mat-icon
-                        >
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
                     <div class="col-3">
                       <div>
                         Points earned
-                        <mat-icon
-                          tooltip="Info about the action"
-                          placement="bottom"
-                          class="infoIcon"
-                          fontSet="material-icons-outlined"
-                          >info</mat-icon
-                        >
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
                     <div class="col-3">
                       <div>
                         Final score
-                        <mat-icon
-                          tooltip="Info about the action"
-                          placement="bottom"
-                          class="infoIcon"
-                          fontSet="material-icons-outlined"
-                          >info</mat-icon
-                        >
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
                   </div>
@@ -601,26 +896,13 @@
                     </div>
                     <div class="col-3">
                       <div class="progess pointer">
-                        <circle-progress
-                          [percent]="
+                        <circle-progress [percent]="
                             course?.coursePlayerStatus?.course_percentage || 0
-                          "
-                          [radius]="10"
-                          [outerStrokeWidth]="2"
-                          [innerStrokeWidth]="2"
-                          [space]="-2"
-                          [outerStrokeGradient]="true"
-                          [outerStrokeGradientStopColor]="'#53a9ff'"
-                          [outerStrokeColor]="'#4882c2'"
-                          [innerStrokeColor]="'#e7e8ea'"
-                          [titleFontSize]="7"
-                          [unitsFontSize]="7"
-                          [showSubtitle]="false"
-                          [animation]="true"
-                          [animationDuration]="100"
-                          [startFromZero]="false"
-                          [responsive]="true"
-                        >
+                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                          [startFromZero]="false" [responsive]="true">
                         </circle-progress>
                       </div>
                     </div>
@@ -641,15 +923,8 @@
           <div *ngIf="onGoingCourseCount === 0">
             <mat-card class="coursebg width_90 errorCard">
               <div class="row width_90 no_margin">
-                <div
-                  class="col-4 col-sm-4 col-md-1 display_flex pointer no_pl mt-4"
-                  (click)="gotoDesc(course)"
-                >
-                  <img
-                    alt="Course Img"
-                    src="assets/noCourseImg.jpg"
-                    class="courseImgs"
-                  />
+                <div class="col-4 col-sm-4 col-md-1 display_flex pointer no_pl mt-4" (click)="gotoDesc(course)">
+                  <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs" />
                 </div>
                 <div class="col-8 col-md-11 no_pl errorboxx">
                   <span style="font-size: medium">{{
@@ -669,25 +944,16 @@
               }}</span>
             </div>
             <div class="col-6">
-              <button
-                class="float-right menuBtnHoriz"
-                mat-icon-button
-                [matMenuTriggerFor]="menu"
-              >
+              <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_horiz</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button
-                  mat-menu-item
-                  (click)="
-                    getEnrolledCourses(
-                      catalogueDetails.catalogueId,
-                      categorytab.categoryId
+                <button mat-menu-item (click)="
+                    getEnrolledCourses( '',
+                      categorytab.categoryId, catalogueDetails.catalogueId,'', ''
                     )
-                  "
-                  *ngFor="let categorytab of categoryDetails"
-                >
-                  <span>{{ categorytab.categoryName }}</span>
+                  " *ngFor="let categorytab of categoryDetails">
+                  <span>{{ categorytab.categoryName  | titlecase }}</span>
                 </button>
               </mat-menu>
             </div>
@@ -695,15 +961,11 @@
           <ng-template matTabLabel>
             <span
               class="tabsc"
-              (click)="getEnrolledCourses('', '', '', searchName)"
               matBadge="{{
                 jobRoleSelected === true
                   ? jobCompletedCourseCount
                   : completedCourseCount
-              }}"
-              matBadgeOverlap="false"
-              >{{ "Completed" | translate }}</span
-            >
+              }}" matBadgeOverlap="false">{{ "Completed" | translate }}</span>
           </ng-template>
           <div *ngFor="let course of completed; let j = index">
             <mat-card class="coursebg card12" matRipple>
@@ -711,84 +973,39 @@
               <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
               <div class="row">
                 <!-- // Card start -->
-                <div
-                  class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol"
-                >
+                <div class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol">
                   <div class="row">
                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                       <div class="courseHover" (click)="gotoDesc(course)">
                         <div>
                           <span *ngIf="course?.course_type === 'primer_course'">
-                            <img
-                              *ngIf="course?.categoryName === 'college connect'"
-                              matTooltip="College connect"
-                              matTooltipPosition="right"
-                              matTooltipClass="custom-mat-tooltip"
-                              alt="flag"
-                              class="primerFlage"
-                              src="assets/learner/primerC.svg"
-                            />
-                            <img
-                              *ngIf="course?.categoryName === 'vocational'"
-                              matTooltip="Vocational"
-                              matTooltipPosition="right"
-                              matTooltipClass="custom-mat-tooltip"
-                              alt="flag"
-                              class="primerFlage"
-                              src="../../../../assets/learner/primerV.svg"
-                            />
-                            <img
-                              *ngIf="
+                            <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"
+                              matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" alt="flag"
+                              class="primerFlage" src="assets/learner/primerC.svg" />
+                            <img *ngIf="course?.categoryName === 'vocational'" matTooltip="Vocational"
+                              matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" alt="flag"
+                              class="primerFlage" src="../../../../assets/learner/primerV.svg" />
+                            <img *ngIf="
                                 course?.categoryName === 'pro certification'
-                              "
-                              matTooltip="Pro certification"
-                              matTooltipPosition="right"
-                              matTooltipClass="custom-mat-tooltip"
-                              alt="flag"
-                              class="primerFlage"
-                              src="../../../../assets/learner/primerP.svg"
-                            />
+                              " matTooltip="Pro certification" matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage"
+                              src="../../../../assets/learner/primerP.svg" />
                           </span>
-                          <span
-                            *ngIf="course?.course_type === 'free_course'"
-                            class=""
-                          >
-                            <img
-                              *ngIf="course?.categoryName === 'college connect'"
-                              matTooltip="College connect"
-                              matTooltipPosition="right"
-                              matTooltipClass="custom-mat-tooltip"
-                              alt="flag"
-                              class="primerFlage"
-                              src="../../../../assets/learner/freeC.svg"
-                            />
-                            <img
-                              *ngIf="course?.categoryName === 'vocational'"
-                              matTooltip="Vocational"
-                              alt="flag"
-                              matTooltipPosition="right"
-                              matTooltipClass="custom-mat-tooltip"
-                              class="primerFlage"
-                              src="../../../../assets/learner/freeV.svg"
-                            />
-                            <img
-                              *ngIf="
+                          <span *ngIf="course?.course_type === 'free_course'" class="">
+                            <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"
+                              matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" alt="flag"
+                              class="primerFlage" src="../../../../assets/learner/freeC.svg" />
+                            <img *ngIf="course?.categoryName === 'vocational'" matTooltip="Vocational" alt="flag"
+                              matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" class="primerFlage"
+                              src="../../../../assets/learner/freeV.svg" />
+                            <img *ngIf="
                                 course?.categoryName === 'pro certification'
-                              "
-                              matTooltip="Pro certification"
-                              matTooltipPosition="right"
-                              matTooltipClass="custom-mat-tooltip"
-                              alt="flag"
-                              class="primerFlage"
-                              src="../../../../assets/learner/freeP.svg"
-                            />
+                              " matTooltip="Pro certification" matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage"
+                              src="../../../../assets/learner/freeP.svg" />
                           </span>
                         </div>
-                        <img
-                          alt="Course Img"
-                          src="{{ course.course_img_url }}"
-                          class="courseImg"
-                        />
+                        <img alt="Course Img" src="{{ course.course_img_url }}" class="courseImg" />
                         <div class="overlay">
                           <mat-icon class="text"> play_arrow </mat-icon>
                         </div>
@@ -796,9 +1013,9 @@
                     </div>
                     <div class="col-6 col-sm-6 col-md-8 col-lg-7">
                       <div class="f_size_18 f_wt_500 pointer">
-                        <p  style="width: 350px; word-wrap:break-word !important;">
+                        <p style="width: 350px; word-wrap:break-word !important;">
                           {{course.course_name}}
-                      </p>
+                        </p>
                         <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                         <div class="span-with-icon">
@@ -813,57 +1030,31 @@
                         </div>
                       </div>
                       <div class="row">
-                        <div
-                          class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-30 pointer"
-                          (click)="gotoDesc(course)"
-                        >
-                          <p class="">
-                            {{
-                              course.course_description?.length > 100
-                                ? (course.course_description | slice: 0:100) +
-                                  "..."
-                                : course.course_description
-                            }}
+                        <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400 h-30 pointer"
+                          (click)="gotoDesc(course)">
+                          <p>
+                            {{(course.course_description?.length > 50)? (course.course_description | slice:0:50)+'...':(course.course_description) }}
                           </p>
                         </div>
                       </div>
                       <div class="row startBtnRow">
                         <div class="col-12 col-sm-12 col-md-10 startBtnCol">
-                          <button
-                            *ngIf="course.batchCourse == true"
-                            class="clr"
-                            (click)="goToAssignment(course)"
-                            [disabled]="course.assignmentCount == 0"
-                          >
+                          <button *ngIf="course.batchCourse == true" class="clr" (click)="goToAssignment(course)"
+                            [disabled]="course.assignmentCount == 0">
                             <mat-icon class="btn-icon">description</mat-icon>
-                            <span
-                              >Assignments ({{ course.assignmentCount }})</span
-                            >
+                            <span>Assignments ({{ course.assignmentCount }})</span>
                           </button>
 
-                          <button
-                            *ngIf="course.batchCourse == true"
-                            class="clr ml-4"
-                            (click)="goToForum(course)"
-                          >
+                          <button *ngIf="course.batchCourse == true" class="clr ml-4" (click)="goToForum(course)">
                             <mat-icon class="btn-icon">forum</mat-icon>
-                            <span
-                              >Discussion Forum ({{ course.forumCount }})</span
-                            >
+                            <span>Discussion Forum ({{ course.forumCount }})</span>
                           </button>
                         </div>
                         <div class="startBtnDiv">
-                          <button
-                            mat-stroked-button
-                            *ngIf="
+                          <button mat-stroked-button *ngIf="
                               course?.coursePlayerStatus?.status !== 'completed'
-                            "
-                            class="btl-alin blue_clr cap pointer m-t-05"
-                            (click)="gotoDesc(course)"
-                          >
-                            <mat-icon class="icon-color m-t-m-2"
-                              >play_circle_outline</mat-icon
-                            >
+                            " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                            <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                             <span class="cap f_wt_400 m-t-m-2">
                               {{
                                 course?.coursePlayerStatus?.status ===
@@ -876,17 +1067,10 @@
                               }}&nbsp;
                             </span>
                           </button>
-                          <button
-                            mat-stroked-button
-                            *ngIf="
+                          <button mat-stroked-button *ngIf="
                               course?.coursePlayerStatus?.status === 'completed'
-                            "
-                            class="btl-alin blue_clr cap pointer m-t-05"
-                            (click)="gotoDesc(course)"
-                          >
-                            <mat-icon class="icon-color m-t-m-2"
-                              >replay</mat-icon
-                            >
+                            " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                            <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                             <span class="cap f_wt_400 m-t-m-2">
                               {{ "Replay" | translate }}&nbsp;
                             </span>
@@ -896,16 +1080,11 @@
 
                       <div class="row pointer">
                         <div class="col-12">
-                          <span
-                            class="upcoming"
-                            (click)="navToCal()"
-                            *ngIf="
+                          <span class="upcoming" (click)="navToCal()" *ngIf="
                               course?.upComingLiveClassRoom?.activitytype ==
                               'Live Classroom'
-                            "
-                            >{{ course?.upComingLiveClassRoom?.status }}...
-                            <b
-                              >{{
+                            ">{{ course?.upComingLiveClassRoom?.status }}...
+                            <b>{{
                                 course?.upComingLiveClassRoom?.startdate
                                   | date: " h:mm a"
                               }}
@@ -913,12 +1092,11 @@
                               {{
                                 course?.upComingLiveClassRoom?.enddate
                                   | date: " h:mm a"
-                              }}</b
-                            >
+                              }}</b>
                             |
                             <u><b>Live classroom</b></u>
-                            <mat-icon class="video">videocam</mat-icon></span
-                          >
+                            <mat-icon class="video">videocam</mat-icon>
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -935,17 +1113,10 @@
                         }}
                       </div>
                       <div class="startBtnicon">
-                        <button
-                          mat-stroked-button
-                          *ngIf="
+                        <button mat-stroked-button *ngIf="
                             course?.coursePlayerStatus?.status !== 'completed'
-                          "
-                          class="btl-alin blue_clr cap pointer m-t-05"
-                          (click)="gotoDesc(course)"
-                        >
-                          <mat-icon class="icon-color m-t-m-2"
-                            >play_circle_outline</mat-icon
-                          >
+                          " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                          <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                           <span class="cap f_wt_400 m-t-m-2">
                             {{
                               course?.coursePlayerStatus?.status ===
@@ -958,14 +1129,9 @@
                             }}&nbsp;
                           </span>
                         </button>
-                        <button
-                          mat-stroked-button
-                          *ngIf="
+                        <button mat-stroked-button *ngIf="
                             course?.coursePlayerStatus?.status === 'completed'
-                          "
-                          class="btl-alin blue_clr cap pointer m-t-05"
-                          (click)="gotoDesc(course)"
-                        >
+                          " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                           <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                           <span class="cap f_wt_400 m-t-m-2">
                             {{ "Replay" | translate }}&nbsp;
@@ -975,57 +1141,34 @@
                     </div>
                   </div>
                 </div>
-                <div
-                  class="col-12 col-sm-12 col-md-12 col-lg-5"
-                  *ngIf="course.batchCourse == true"
-                >
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="course.batchCourse == true">
                   <div class="row m-l-2p f_size_12">
                     <div class="col-3">
                       <div>
                         Activity
-                        <mat-icon
-                          tooltip="Info about the action"
-                          placement="bottom"
-                          class="infoIcon"
-                          fontSet="material-icons-outlined"
-                          >info</mat-icon
-                        >
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
                     <div class="col-3">
                       <div>
                         Learning effort
-                        <mat-icon
-                          tooltip="Info about the action"
-                          placement="bottom"
-                          class="infoIcon"
-                          fontSet="material-icons-outlined"
-                          >info</mat-icon
-                        >
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
                     <div class="col-3">
                       <div>
                         Points earned
-                        <mat-icon
-                          tooltip="Info about the action"
-                          placement="bottom"
-                          class="infoIcon"
-                          fontSet="material-icons-outlined"
-                          >info</mat-icon
-                        >
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
                     <div class="col-3">
                       <div>
                         Final score
-                        <mat-icon
-                          tooltip="Info about the action"
-                          placement="bottom"
-                          class="infoIcon"
-                          fontSet="material-icons-outlined"
-                          >info</mat-icon
-                        >
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
                   </div>
@@ -1041,26 +1184,13 @@
                     </div>
                     <div class="col-3">
                       <div class="progess pointer">
-                        <circle-progress
-                          [percent]="
+                        <circle-progress [percent]="
                             course?.coursePlayerStatus?.course_percentage || 0
-                          "
-                          [radius]="10"
-                          [outerStrokeWidth]="2"
-                          [innerStrokeWidth]="2"
-                          [space]="-2"
-                          [outerStrokeGradient]="true"
-                          [outerStrokeGradientStopColor]="'#53a9ff'"
-                          [outerStrokeColor]="'#4882c2'"
-                          [innerStrokeColor]="'#e7e8ea'"
-                          [titleFontSize]="7"
-                          [unitsFontSize]="7"
-                          [showSubtitle]="false"
-                          [animation]="true"
-                          [animationDuration]="100"
-                          [startFromZero]="false"
-                          [responsive]="true"
-                        >
+                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                          [startFromZero]="false" [responsive]="true">
                         </circle-progress>
                       </div>
                     </div>
@@ -1081,15 +1211,8 @@
           <div *ngIf="completedCourseCount === 0">
             <mat-card class="coursebg width_90 errorCard">
               <div class="row width_90 no_margin">
-                <div
-                  class="col-1 display_flex pointer no_pl mt-4"
-                  (click)="gotoDesc(course)"
-                >
-                  <img
-                    alt="Course Img"
-                    src="assets/noCourseImg.jpg"
-                    class="courseImgs"
-                  />
+                <div class="col-1 display_flex pointer no_pl mt-4" (click)="gotoDesc(course)">
+                  <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs" />
                 </div>
                 <div class="col-11 no_pl errorboxx">
                   <span style="font-size: medium">{{
@@ -1109,25 +1232,16 @@
               }}</span>
             </div>
             <div class="col-6">
-              <button
-                class="float-right menuBtnHoriz"
-                mat-icon-button
-                [matMenuTriggerFor]="menu"
-              >
+              <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_horiz</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button
-                  mat-menu-item
-                  (click)="
-                    getEnrolledCourses(
-                      catalogueDetails.catalogueId,
-                      categorytab.categoryId
+                <button mat-menu-item (click)="
+                    getEnrolledCourses('',
+                      categorytab.categoryId, catalogueDetails.catalogueId, '', ''
                     )
-                  "
-                  *ngFor="let categorytab of categoryDetails"
-                >
-                  <span>{{ categorytab.categoryName }}</span>
+                  " *ngFor="let categorytab of categoryDetails">
+                  <span>{{ categorytab.categoryName  | titlecase }}</span>
                 </button>
               </mat-menu>
             </div>
@@ -1135,13 +1249,9 @@
           <ng-template matTabLabel>
             <span
               class="tabsc"
-              (click)="getEnrolledCourses('', '', '', searchName)"
               matBadge="{{
                 jobRoleSelected === true ? jobAllCourseCount : allCourseCount
-              }}"
-              matBadgeOverlap="false"
-              >{{ "All" }}</span
-            >
+              }}" matBadgeOverlap="false">{{ "All" }}</span>
           </ng-template>
           <div *ngFor="let course of enrolledCourses; let j = index">
             <mat-card class="coursebg card12" matRipple>
@@ -1149,84 +1259,39 @@
               <!-- <div class="col-12 display_flex pointer no_pl" (click)="gotoDesc(course)"> -->
               <div class="row">
                 <!-- // Card start -->
-                <div
-                  class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol"
-                >
+                <div class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol">
                   <div class="row">
                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                       <div class="courseHover" (click)="gotoDesc(course)">
                         <div>
                           <span *ngIf="course?.course_type === 'primer_course'">
-                            <img
-                              *ngIf="course?.categoryName === 'college connect'"
-                              matTooltip="College connect"
-                              matTooltipPosition="right"
-                              matTooltipClass="custom-mat-tooltip"
-                              alt="flag"
-                              class="primerFlage"
-                              src="assets/learner/primerC.svg"
-                            />
-                            <img
-                              *ngIf="course?.categoryName === 'vocational'"
-                              matTooltip="Vocational"
-                              matTooltipPosition="right"
-                              matTooltipClass="custom-mat-tooltip"
-                              alt="flag"
-                              class="primerFlage"
-                              src="../../../../assets/learner/primerV.svg"
-                            />
-                            <img
-                              *ngIf="
+                            <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"
+                              matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" alt="flag"
+                              class="primerFlage" src="assets/learner/primerC.svg" />
+                            <img *ngIf="course?.categoryName === 'vocational'" matTooltip="Vocational"
+                              matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" alt="flag"
+                              class="primerFlage" src="../../../../assets/learner/primerV.svg" />
+                            <img *ngIf="
                                 course?.categoryName === 'pro certification'
-                              "
-                              matTooltip="Pro certification"
-                              matTooltipPosition="right"
-                              matTooltipClass="custom-mat-tooltip"
-                              alt="flag"
-                              class="primerFlage"
-                              src="../../../../assets/learner/primerP.svg"
-                            />
+                              " matTooltip="Pro certification" matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage"
+                              src="../../../../assets/learner/primerP.svg" />
                           </span>
-                          <span
-                            *ngIf="course?.course_type === 'free_course'"
-                            class=""
-                          >
-                            <img
-                              *ngIf="course?.categoryName === 'college connect'"
-                              matTooltip="College connect"
-                              matTooltipPosition="right"
-                              matTooltipClass="custom-mat-tooltip"
-                              alt="flag"
-                              class="primerFlage"
-                              src="../../../../assets/learner/freeC.svg"
-                            />
-                            <img
-                              *ngIf="course?.categoryName === 'vocational'"
-                              matTooltip="Vocational"
-                              alt="flag"
-                              matTooltipPosition="right"
-                              matTooltipClass="custom-mat-tooltip"
-                              class="primerFlage"
-                              src="../../../../assets/learner/freeV.svg"
-                            />
-                            <img
-                              *ngIf="
+                          <span *ngIf="course?.course_type === 'free_course'" class="">
+                            <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"
+                              matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" alt="flag"
+                              class="primerFlage" src="../../../../assets/learner/freeC.svg" />
+                            <img *ngIf="course?.categoryName === 'vocational'" matTooltip="Vocational" alt="flag"
+                              matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" class="primerFlage"
+                              src="../../../../assets/learner/freeV.svg" />
+                            <img *ngIf="
                                 course?.categoryName === 'pro certification'
-                              "
-                              matTooltip="Pro certification"
-                              matTooltipPosition="right"
-                              matTooltipClass="custom-mat-tooltip"
-                              alt="flag"
-                              class="primerFlage"
-                              src="../../../../assets/learner/freeP.svg"
-                            />
+                              " matTooltip="Pro certification" matTooltipPosition="right"
+                              matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage"
+                              src="../../../../assets/learner/freeP.svg" />
                           </span>
                         </div>
-                        <img
-                          alt="Course Img"
-                          src="{{ course.course_img_url }}"
-                          class="courseImg"
-                        />
+                        <img alt="Course Img" src="{{ course.course_img_url }}" class="courseImg" />
                         <div class="overlay">
                           <mat-icon class="text"> play_arrow </mat-icon>
                         </div>
@@ -1234,9 +1299,9 @@
                     </div>
                     <div class="col-6 col-sm-6 col-md-8 col-lg-7">
                       <div class="f_size_18 f_wt_500 pointer">
-                        <p  style="width: 350px; word-wrap:break-word !important;">
+                        <p style="width: 350px; word-wrap:break-word !important;">
                           {{course.course_name}}
-                      </p>
+                        </p>
                         <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                         <div class="span-with-icon">
@@ -1251,57 +1316,31 @@
                         </div>
                       </div>
                       <div class="row">
-                        <div
-                          class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-30 pointer"
-                          (click)="gotoDesc(course)"
-                        >
-                          <p class="">
-                            {{
-                              course.course_description?.length > 100
-                                ? (course.course_description | slice: 0:100) +
-                                  "..."
-                                : course.course_description
-                            }}
+                        <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400 h-30 pointer"
+                          (click)="gotoDesc(course)">
+                          <p>
+                            {{(course.course_description?.length > 50)? (course.course_description | slice:0:50)+'...':(course.course_description) }}
                           </p>
                         </div>
                       </div>
                       <div class="row startBtnRow">
                         <div class="col-12 col-sm-12 col-md-10 startBtnCol">
-                          <button
-                            *ngIf="course.batchCourse == true"
-                            class="clr"
-                            (click)="goToAssignment(course)"
-                            [disabled]="course.assignmentCount == 0"
-                          >
+                          <button *ngIf="course.batchCourse == true" class="clr" (click)="goToAssignment(course)"
+                            [disabled]="course.assignmentCount == 0">
                             <mat-icon class="btn-icon">description</mat-icon>
-                            <span
-                              >Assignments ({{ course.assignmentCount }})</span
-                            >
+                            <span>Assignments ({{ course.assignmentCount }})</span>
                           </button>
 
-                          <button
-                            *ngIf="course.batchCourse == true"
-                            class="clr ml-4"
-                            (click)="goToForum(course)"
-                          >
+                          <button *ngIf="course.batchCourse == true" class="clr ml-4" (click)="goToForum(course)">
                             <mat-icon class="btn-icon">forum</mat-icon>
-                            <span
-                              >Discussion Forum ({{ course.forumCount }})</span
-                            >
+                            <span>Discussion Forum ({{ course.forumCount }})</span>
                           </button>
                         </div>
                         <div class="startBtnDiv">
-                          <button
-                            mat-stroked-button
-                            *ngIf="
+                          <button mat-stroked-button *ngIf="
                               course?.coursePlayerStatus?.status !== 'completed'
-                            "
-                            class="btl-alin blue_clr cap pointer m-t-05"
-                            (click)="gotoDesc(course)"
-                          >
-                            <mat-icon class="icon-color m-t-m-2"
-                              >play_circle_outline</mat-icon
-                            >
+                            " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                            <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                             <span class="cap f_wt_400 m-t-m-2">
                               {{
                                 course?.coursePlayerStatus?.status ===
@@ -1314,17 +1353,10 @@
                               }}&nbsp;
                             </span>
                           </button>
-                          <button
-                            mat-stroked-button
-                            *ngIf="
+                          <button mat-stroked-button *ngIf="
                               course?.coursePlayerStatus?.status === 'completed'
-                            "
-                            class="btl-alin blue_clr cap pointer m-t-05"
-                            (click)="gotoDesc(course)"
-                          >
-                            <mat-icon class="icon-color m-t-m-2"
-                              >replay</mat-icon
-                            >
+                            " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                            <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                             <span class="cap f_wt_400 m-t-m-2">
                               {{ "Replay" }}&nbsp;
                             </span>
@@ -1334,16 +1366,11 @@
 
                       <div class="row pointer">
                         <div class="col-12">
-                          <span
-                            class="upcoming"
-                            (click)="navToCal()"
-                            *ngIf="
+                          <span class="upcoming" (click)="navToCal()" *ngIf="
                               course?.upComingLiveClassRoom?.activitytype ==
                               'Live Classroom'
-                            "
-                            >{{ course?.upComingLiveClassRoom?.status }}...
-                            <b
-                              >{{
+                            ">{{ course?.upComingLiveClassRoom?.status }}...
+                            <b>{{
                                 course?.upComingLiveClassRoom?.startdate
                                   | date: " h:mm a"
                               }}
@@ -1351,12 +1378,11 @@
                               {{
                                 course?.upComingLiveClassRoom?.enddate
                                   | date: " h:mm a"
-                              }}</b
-                            >
+                              }}</b>
                             |
                             <u><b>Live classroom</b></u>
-                            <mat-icon class="video">videocam</mat-icon></span
-                          >
+                            <mat-icon class="video">videocam</mat-icon>
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -1373,17 +1399,10 @@
                         }}
                       </div>
                       <div class="startBtnicon">
-                        <button
-                          mat-stroked-button
-                          *ngIf="
+                        <button mat-stroked-button *ngIf="
                             course?.coursePlayerStatus?.status !== 'completed'
-                          "
-                          class="btl-alin blue_clr cap pointer m-t-05"
-                          (click)="gotoDesc(course)"
-                        >
-                          <mat-icon class="icon-color m-t-m-2"
-                            >play_circle_outline</mat-icon
-                          >
+                          " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                          <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                           <span class="cap f_wt_400 m-t-m-2">
                             {{
                               course?.coursePlayerStatus?.status ===
@@ -1396,14 +1415,9 @@
                             }}&nbsp;
                           </span>
                         </button>
-                        <button
-                          mat-stroked-button
-                          *ngIf="
+                        <button mat-stroked-button *ngIf="
                             course?.coursePlayerStatus?.status === 'completed'
-                          "
-                          class="btl-alin blue_clr cap pointer m-t-05"
-                          (click)="gotoDesc(course)"
-                        >
+                          " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
                           <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                           <span class="cap f_wt_400 m-t-m-2">
                             {{ "Replay" }}&nbsp;
@@ -1413,57 +1427,34 @@
                     </div>
                   </div>
                 </div>
-                <div
-                  class="col-12 col-sm-12 col-md-12 col-lg-5"
-                  *ngIf="course.batchCourse == true"
-                >
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="course.batchCourse == true">
                   <div class="row m-l-2p f_size_12">
                     <div class="col-3">
                       <div>
                         Activity
-                        <mat-icon
-                          tooltip="Info about the action"
-                          placement="bottom"
-                          class="infoIcon"
-                          fontSet="material-icons-outlined"
-                          >info</mat-icon
-                        >
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
                     <div class="col-3">
                       <div>
                         Learning effort
-                        <mat-icon
-                          tooltip="Info about the action"
-                          placement="bottom"
-                          class="infoIcon"
-                          fontSet="material-icons-outlined"
-                          >info</mat-icon
-                        >
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
                     <div class="col-3">
                       <div>
                         Points earned
-                        <mat-icon
-                          tooltip="Info about the action"
-                          placement="bottom"
-                          class="infoIcon"
-                          fontSet="material-icons-outlined"
-                          >info</mat-icon
-                        >
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
                     <div class="col-3">
                       <div>
                         Final score
-                        <mat-icon
-                          tooltip="Info about the action"
-                          placement="bottom"
-                          class="infoIcon"
-                          fontSet="material-icons-outlined"
-                          >info</mat-icon
-                        >
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
                   </div>
@@ -1479,26 +1470,13 @@
                     </div>
                     <div class="col-3">
                       <div class="progess pointer">
-                        <circle-progress
-                          [percent]="
+                        <circle-progress [percent]="
                             course?.coursePlayerStatus?.course_percentage || 0
-                          "
-                          [radius]="10"
-                          [outerStrokeWidth]="2"
-                          [innerStrokeWidth]="2"
-                          [space]="-2"
-                          [outerStrokeGradient]="true"
-                          [outerStrokeGradientStopColor]="'#53a9ff'"
-                          [outerStrokeColor]="'#4882c2'"
-                          [innerStrokeColor]="'#e7e8ea'"
-                          [titleFontSize]="7"
-                          [unitsFontSize]="7"
-                          [showSubtitle]="false"
-                          [animation]="true"
-                          [animationDuration]="100"
-                          [startFromZero]="false"
-                          [responsive]="true"
-                        >
+                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                          [startFromZero]="false" [responsive]="true">
                         </circle-progress>
                       </div>
                     </div>
@@ -1519,15 +1497,8 @@
           <div *ngIf="allCourseCount === 0">
             <mat-card class="coursebg width_90 errorCard">
               <div class="row width_90 no_margin">
-                <div
-                  class="col-1 display_flex pointer no_pl mt-4"
-                  (click)="gotoDesc(course)"
-                >
-                  <img
-                    alt="Course Img"
-                    src="assets/noCourseImg.jpg"
-                    class="courseImgs"
-                  />
+                <div class="col-1 display_flex pointer no_pl mt-4" (click)="gotoDesc(course)">
+                  <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs" />
                 </div>
                 <div class="col-11 no_pl errorboxx">
                   <span style="font-size: medium">{{
@@ -1555,40 +1526,29 @@
                 }}</span>
               </div>
               <div class="col-6">
-                <button
-                  class="float-right menuBtnHoriz"
-                  mat-icon-button
-                  [matMenuTriggerFor]="menu"
-                >
+                <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
                   <mat-icon>more_horiz</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
-                  <button
-                    mat-menu-item
-                    (click)="
-                      getEnrolledCourses(
-                        catalogueDetails.catalogueId,
-                        categorytab.categoryId
+                  <button mat-menu-item (click)="
+                      getEnrolledCourses('',
+                        categorytab.categoryId, catalogueDetails.catalogueId, '', ''
                       )
-                    "
-                    *ngFor="let categorytab of categoryDetails"
-                  >
-                    <span>{{ categorytab.categoryName }}</span>
+                    " *ngFor="let categorytab of categoryDetails">
+                    <span>{{ categorytab.categoryName  | titlecase }}</span>
                   </button>
                 </mat-menu>
               </div>
             </div>
             <ng-template matTabLabel>
               <span
-                class="tabsc"
-                (click)="
-                  getEnrolledCourses(
-                    catalogueDetails.catalogueId,
-                    categorytab.categoryId,
-                    '',
-                    searchName
-                  )
-                "
+                class="tabsc" (click)="
+                getEnrolledCourses( $event, 
+                  categorytab.categoryId, catalogueDetails.catalogueId,
+                  '',
+                  searchName
+                )
+              " 
                 matBadge="{{ categorytab.enrollCount }}"
                 matBadgeOverlap="false"
                 >{{ categorytab.categoryName | titlecase }}</span
@@ -1606,95 +1566,48 @@
                       <div class="col-12 col-sm-12 col-md-4 col-lg-3">
                         <div class="courseHover" (click)="gotoDesc(course)">
                           <div>
-                            <span
-                              *ngIf="course?.course_type === 'primer_course'"
-                            >
-                              <img
-                                *ngIf="
+                            <span *ngIf="course?.course_type === 'primer_course'">
+                              <img *ngIf="
                                   course?.categoryName === 'college connect'
-                                "
-                                matTooltip="College connect"
-                                matTooltipPosition="right"
-                                matTooltipClass="custom-mat-tooltip"
-                                alt="flag"
-                                class="primerFlage"
-                                src="assets/learner/primerC.svg"
-                              />
-                              <img
-                                *ngIf="course?.categoryName === 'vocational'"
-                                matTooltip="Vocational"
-                                matTooltipPosition="right"
-                                matTooltipClass="custom-mat-tooltip"
-                                alt="flag"
-                                class="primerFlage"
-                                src="../../../../assets/learner/primerV.svg"
-                              />
-                              <img
-                                *ngIf="
+                                " matTooltip="College connect" matTooltipPosition="right"
+                                matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage"
+                                src="assets/learner/primerC.svg" />
+                              <img *ngIf="course?.categoryName === 'vocational'" matTooltip="Vocational"
+                                matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" alt="flag"
+                                class="primerFlage" src="../../../../assets/learner/primerV.svg" />
+                              <img *ngIf="
                                   course?.categoryName === 'pro certification'
-                                "
-                                matTooltip="Pro certification"
-                                matTooltipPosition="right"
-                                matTooltipClass="custom-mat-tooltip"
-                                alt="flag"
-                                class="primerFlage"
-                                src="../../../../assets/learner/primerP.svg"
-                              />
+                                " matTooltip="Pro certification" matTooltipPosition="right"
+                                matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage"
+                                src="../../../../assets/learner/primerP.svg" />
                             </span>
-                            <span
-                              *ngIf="course?.course_type === 'free_course'"
-                              class=""
-                            >
-                              <img
-                                *ngIf="
+                            <span *ngIf="course?.course_type === 'free_course'" class="">
+                              <img *ngIf="
                                   course?.categoryName === 'college connect'
-                                "
-                                matTooltip="College connect"
-                                matTooltipPosition="right"
-                                matTooltipClass="custom-mat-tooltip"
-                                alt="flag"
-                                class="primerFlage"
-                                src="../../../../assets/learner/freeC.svg"
-                              />
-                              <img
-                                *ngIf="course?.categoryName === 'vocational'"
-                                matTooltip="Vocational"
-                                alt="flag"
-                                matTooltipPosition="right"
-                                matTooltipClass="custom-mat-tooltip"
-                                class="primerFlage"
-                                src="../../../../assets/learner/freeV.svg"
-                              />
-                              <img
-                                *ngIf="
+                                " matTooltip="College connect" matTooltipPosition="right"
+                                matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage"
+                                src="../../../../assets/learner/freeC.svg" />
+                              <img *ngIf="course?.categoryName === 'vocational'" matTooltip="Vocational" alt="flag"
+                                matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" class="primerFlage"
+                                src="../../../../assets/learner/freeV.svg" />
+                              <img *ngIf="
                                   course?.categoryName === 'pro certification'
-                                "
-                                matTooltip="Pro certification"
-                                matTooltipPosition="right"
-                                matTooltipClass="custom-mat-tooltip"
-                                alt="flag"
-                                class="primerFlage"
-                                src="../../../../assets/learner/freeP.svg"
-                              />
+                                " matTooltip="Pro certification" matTooltipPosition="right"
+                                matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage"
+                                src="../../../../assets/learner/freeP.svg" />
                             </span>
                           </div>
-                          <img
-                            alt="Course Img"
-                            src="{{ course.course_img_url }}"
-                            class="courseImg"
-                          />
+                          <img alt="Course Img" src="{{ course.course_img_url }}" class="courseImg" />
                           <div class="overlay">
                             <mat-icon class="text"> play_arrow </mat-icon>
                           </div>
                         </div>
                       </div>
-                      <div
-                        class="col-6 col-sm-6 col-md-8 col-lg-7 courceNameCol"
-                      >
+                      <div class="col-6 col-sm-6 col-md-8 col-lg-7 courceNameCol">
                         <div class="f_size_18 f_wt_500 pointer">
-                          <p  style="width: 350px; word-wrap:break-word !important;">
+                          <p style="width: 350px; word-wrap:break-word !important;">
                             {{course.course_name}}
-                        </p>
+                          </p>
                           <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                             <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                           <div class="span-with-icon">
@@ -1709,35 +1622,21 @@
                           </div>
                         </div>
                         <div class="row">
-                          <div
-                            class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-30 pointer"
-                            (click)="gotoDesc(course)"
-                          >
-                            <p class="">
-                              {{
-                                course.course_description?.length > 100
-                                  ? (course.course_description | slice: 0:100) +
-                                    "..."
-                                  : course.course_description
-                              }}
+                          <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400 h-30 pointer"
+                            (click)="gotoDesc(course)">
+                            <p>
+                              {{(course.course_description?.length > 50)? (course.course_description | slice:0:50)+'...':(course.course_description) }}
                             </p>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-10"></div>
                           <div class="startBtnDiv">
-                            <button
-                              mat-stroked-button
-                              *ngIf="
+                            <button mat-stroked-button *ngIf="
                                 course?.coursePlayerStatus?.status !==
                                 'completed'
-                              "
-                              class="btl-alin blue_clr cap pointer m-t-05"
-                              (click)="gotoDesc(course)"
-                            >
-                              <mat-icon class="icon-color m-t-m-2"
-                                >play_circle_outline</mat-icon
-                              >
+                              " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                              <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                               <span class="cap f_wt_400 m-t-m-2">
                                 {{
                                   course?.coursePlayerStatus?.status ===
@@ -1750,18 +1649,11 @@
                                 }}&nbsp;
                               </span>
                             </button>
-                            <button
-                              mat-stroked-button
-                              *ngIf="
+                            <button mat-stroked-button *ngIf="
                                 course?.coursePlayerStatus?.status ===
                                 'completed'
-                              "
-                              class="btl-alin blue_clr cap pointer m-t-05"
-                              (click)="gotoDesc(course)"
-                            >
-                              <mat-icon class="icon-color m-t-m-2"
-                                >replay</mat-icon
-                              >
+                              " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                              <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                               <span class="cap f_wt_400 m-t-m-2">
                                 {{ "Replay" }}&nbsp;
                               </span>
@@ -1782,17 +1674,10 @@
                           }}
                         </div>
                         <div class="startBtnicon">
-                          <button
-                            mat-stroked-button
-                            *ngIf="
+                          <button mat-stroked-button *ngIf="
                               course?.coursePlayerStatus?.status !== 'completed'
-                            "
-                            class="btl-alin blue_clr cap pointer m-t-05"
-                            (click)="gotoDesc(course)"
-                          >
-                            <mat-icon class="icon-color m-t-m-2"
-                              >play_circle_outline</mat-icon
-                            >
+                            " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                            <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                             <span class="cap f_wt_400 m-t-m-2">
                               {{
                                 course?.coursePlayerStatus?.status ===
@@ -1805,17 +1690,10 @@
                               }}&nbsp;
                             </span>
                           </button>
-                          <button
-                            mat-stroked-button
-                            *ngIf="
+                          <button mat-stroked-button *ngIf="
                               course?.coursePlayerStatus?.status === 'completed'
-                            "
-                            class="btl-alin blue_clr cap pointer m-t-05"
-                            (click)="gotoDesc(course)"
-                          >
-                            <mat-icon class="icon-color m-t-m-2"
-                              >replay</mat-icon
-                            >
+                            " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                            <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                             <span class="cap f_wt_400 m-t-m-2">
                               {{ "Replay" }}&nbsp;
                             </span>
@@ -1886,15 +1764,8 @@
             <div *ngIf="allCourseCount === 0">
               <mat-card class="coursebg width_90 errorCard">
                 <div class="row width_90 no_margin">
-                  <div
-                    class="col-1 display_flex pointer no_pl mt-4"
-                    (click)="gotoDesc(course)"
-                  >
-                    <img
-                      alt="Course Img"
-                      src="assets/noCourseImg.jpg"
-                      class="courseImgs"
-                    />
+                  <div class="col-1 display_flex pointer no_pl mt-4" (click)="gotoDesc(course)">
+                    <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs" />
                   </div>
                   <div class="col-11 no_pl errorboxx">
                     <span style="font-size: medium">{{
@@ -1913,133 +1784,128 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button
-          mat-menu-item
-          (click)="
-            getEnrolledCourses(
-              catalogueDetails.catalogueId,
-              categorytab.categoryId
+        <button mat-menu-item (click)="
+            getEnrolledCourses('',
+              categorytab.categoryId, catalogueDetails.catalogueId, '' , ''
             )
-          "
-          *ngFor="let categorytab of categoryDetails"
-        >
+          " *ngFor="let categorytab of categoryDetails">
           <span>{{ categorytab.categoryName }}</span>
         </button>
       </mat-menu>
     </div>
   </div>
 
-<ng-template #previewDialog>
-        <mat-dialog-title>
-            <div class="row rowMargin">
+  <ng-template #previewDialog>
+    <mat-dialog-title>
+      <div class="row rowMargin">
         <div class="col-8 text-left">
-            <mat-icon class="arrowPopup mr-2" *ngIf="availableCource" aria-hidden="false" (click)="closedialogbox()">keyboard_backspace</mat-icon>
-            <span class="f_wt_600 size catnamenew" *ngIf="!availableCource">{{ categoryPopupData  | titlecase}} ({{categoryCount}})</span>
+          <mat-icon class="arrowPopup mr-2" *ngIf="availableCource" aria-hidden="false" (click)="closedialogbox()">
+            keyboard_backspace</mat-icon>
+          <span class="f_wt_600 size catnamenew" *ngIf="!availableCource">{{ categoryPopupData  | titlecase}}
+            ({{categoryCount}})</span>
         </div>
         <!-- <div class="col-0 col-sm-0 col-md-0 col-lg-6"> -->
-            <!-- <div class="col-4">
+        <!-- <div class="col-4">
             <input  matInput class="form-control popupsearch" placeholder="Search" [(ngModel)]="courseSearch">
         </div> -->
         <!-- </div> -->
         <div class="col-4 text-right">
-          <mat-icon
-            class="arrowIcon mr-2"
-            *ngIf="availableCource"
-            aria-hidden="false"
-            (click)="closedialogbox((availableCource = false))"
-            >clear</mat-icon
-          >
+          <mat-icon class="arrowIcon mr-2" *ngIf="availableCource" aria-hidden="false"
+            (click)="closedialogbox((availableCource = false))">clear</mat-icon>
           <button mat-mini-fab class="close-button" *ngIf="!availableCource">
-            <mat-icon class="download-icon" (click)="closedialogbox()"
-              >close</mat-icon
-            >
+            <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
           </button>
         </div>
       </div>
     </mat-dialog-title>
 
-        <mat-dialog-content class="cardContainer">
-            <div class="row a-e" *ngIf="catagoryName !== 'vocational'">
-                <div class="col-8" *ngIf="categoryCount > 0">
-                    <span class="f_wt_600 size float-left catnamenew" *ngIf="availableCource">{{ categoryPopupData  | titlecase}} ({{categoryCount}})</span>
-                    </div>
-                    <div class="col-4 inner-addon right-addon" *ngIf="categoryCount > 0">
-                        <mat-icon class="searchIcon">search</mat-icon>
-                        <input type="text" class="form-control ccSearch"
-                        [(ngModel)]="courseSearch" placeholder="Search.." />
-                    </div>
-            </div>
-            <div class="row a-e" *ngIf="catagoryName === 'vocational'">
-                <div class="col-12" *ngIf="categoryCount > 0">
-                    <span class="f_wt_600 size float-left catnamenew" *ngIf="availableCource">{{ categoryPopupData  | titlecase}} ({{categoryCount}})</span>
-                    <button mat-stroked-button (click)="claimAll()" [disabled]="claimedStatuts?.length === 0"
-                    class=" btl-alin blue_clr cap pointer m-t-05">
-                    <!-- <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon> -->
-                    <span class="cap f_wt_400 m-t-m-2">
-                       CLAIM ALL
-                    </span>
-                </button>
-                </div>
-                <div class="col inner-addon right-addon" *ngIf="categoryCount > 0">
-                    <input type="text" class="form-control popupsearch"
-                    [(ngModel)]="courseSearch" placeholder="Search.." />
-                    <mat-icon class="popupsearchIcon">search</mat-icon>
-                </div>
-            </div>
+    <mat-dialog-content class="cardContainer">
+      <div class="row a-e" *ngIf="catagoryName !== 'vocational'">
+        <div class="col-8" *ngIf="categoryCount > 0">
+          <span class="f_wt_600 size float-left catnamenew" *ngIf="availableCource">{{ categoryPopupData  | titlecase}}
+            ({{categoryCount}})</span>
+        </div>
+        <div class="col-4 inner-addon right-addon" *ngIf="categoryCount > 0">
+          <mat-icon class="searchIcon">search</mat-icon>
+          <input type="text" class="form-control ccSearch" [(ngModel)]="courseSearch" placeholder="Search.." />
+        </div>
+      </div>
+      <div class="row a-e" *ngIf="catagoryName === 'vocational'">
+        <div class="col-12" *ngIf="categoryCount > 0">
+          <span class="f_wt_600 size float-left catnamenew" *ngIf="availableCource">{{ categoryPopupData  | titlecase}}
+            ({{categoryCount}})</span>
+          <button mat-stroked-button (click)="claimAll()" [disabled]="claimedStatuts?.length === 0"
+            class=" btl-alin blue_clr cap pointer m-t-05">
+            <!-- <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon> -->
+            <span class="cap f_wt_400 m-t-m-2">
+              CLAIM ALL
+            </span>
+          </button>
+        </div>
+        <div class="col inner-addon right-addon" *ngIf="categoryCount > 0">
+          <input type="text" class="form-control popupsearch" [(ngModel)]="courseSearch" placeholder="Search.." />
+          <mat-icon class="popupsearchIcon">search</mat-icon>
+        </div>
+      </div>
 
-            <div class="row" *ngIf="categoryData.totalCount > 1">
-          
-                <ng-container *ngIf="( allcourses | search : courseSearch) as result">
-                    <ng-container *ngIf="result.length > 0">
-                    <div  class="col-12 col-sm-12 col-md-6 col-lg-4 mt-4" *ngFor="let course of allcourses | search : courseSearch">
-                       
-                        <!-- <div class="col-4 mt-4" *ngFor="let course of allcourses | search : courseSearch"> -->
-                            <mat-card class="box-shadow">
-                                <div class="row">
-                                    <div class="col-12 imageover">
-                                        <a>
-                                            <img alt="course " src="{{course.course_img_url}}" class="courseImage image">
-                                            
-                                            <div class="overlayimage">
-                                                <p class="shortdesc h-50">
-                                                    <!-- {{course.course_description}} -->
-                                                 {{(course.course_description?.length>122)? (course.course_description | slice:0:122)+'...':(course.course_description) }} 
-                                                </p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                 
-                                </div><br>
-                                <div class="row">
-                                    <span class="courseName1" *ngIf="course.course_name?.length > 28" tooltip= "{{course.course_name}}" placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
-                                    <span class="courseName1" *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
-                                </div><br>
-                                <div class="row">
-                                    <div class="col-12 center_align">
-                                        <button mat-stroked-button class="blue_clr btnredClass" *ngIf="course.clamaiedStatus == 'false'"
-                                        (click)="claimCourse(course.course_id)"><mat-icon class="mt-1">queue_play_next</mat-icon> Claim</button>
-                                        <button mat-stroked-button class="blue_clr btnredClass" [disabled]="course.clamaiedStatus == 'true'"
-                                         *ngIf="course.clamaiedStatus == 'true'"
-                                        ><mat-icon class="mt-1 claimIcon">queue_play_next</mat-icon> Claimed</button>
-                                    </div>
-                                </div>
-                            </mat-card>
-                        </div>
-                    </ng-container>
-                        <div class="col errorDialouge" *ngIf="result.length === 0">
-                            <span style="font-size: medium;">
-                            No courses found
-                            </span>
-                        </div>
-                </ng-container>
-                  
-    
-    <!-- <div class="col errorDialouge" *ngIf="categoryCount < 1 && result.length === 0">
+      <div class="row" *ngIf="categoryData.totalCount > 1">
+
+        <ng-container *ngIf="( allcourses | search : courseSearch) as result">
+          <ng-container *ngIf="result.length > 0">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 mt-4"
+              *ngFor="let course of allcourses | search : courseSearch">
+
+              <!-- <div class="col-4 mt-4" *ngFor="let course of allcourses | search : courseSearch"> -->
+              <mat-card class="box-shadow">
+                <div class="row">
+                  <div class="col-12 imageover">
+                    <a>
+                      <img alt="course " src="{{course.course_img_url}}" class="courseImage image">
+
+                      <div class="overlayimage">
+                        <p class="shortdesc h-50">
+                          <!-- {{course.course_description}} -->
+                          {{(course.course_description?.length>122)? (course.course_description | slice:0:122)+'...':(course.course_description) }}
+                        </p>
+                      </div>
+                    </a>
+                  </div>
+
+                </div><br>
+                <div class="row">
+                  <span class="courseName1" *ngIf="course.course_name?.length > 28" tooltip="{{course.course_name}}"
+                    placement="right">{{(course.course_name | slice:0:28)+'...'}}</span>
+                  <span class="courseName1" *ngIf="course.course_name?.length <= 28">{{course.course_name}}</span>
+                </div><br>
+                <div class="row">
+                  <div class="col-12 center_align">
+                    <button mat-stroked-button class="blue_clr btnredClass" *ngIf="course.clamaiedStatus == 'false'"
+                      (click)="claimCourse(course.course_id)">
+                      <mat-icon class="mt-1">queue_play_next</mat-icon> Claim
+                    </button>
+                    <button mat-stroked-button class="blue_clr btnredClass" [disabled]="course.clamaiedStatus == 'true'"
+                      *ngIf="course.clamaiedStatus == 'true'">
+                      <mat-icon class="mt-1 claimIcon">queue_play_next</mat-icon> Claimed
+                    </button>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </ng-container>
+          <div class="col errorDialouge" *ngIf="result.length === 0">
+            <span style="font-size: medium;">
+              No courses found
+            </span>
+          </div>
+        </ng-container>
+
+
+        <!-- <div class="col errorDialouge" *ngIf="categoryCount < 1 && result.length === 0">
         <span style="font-size: medium;">
         No courses found
         </span>
     </div> -->
-    </div>
+      </div>
     </mat-dialog-content>
   </ng-template>
 
@@ -2087,10 +1953,7 @@
 </div> -->
 </div>
 <!----------------------- Overlay available cources screen -------------------------------->
-<div
-  class="container"
-  [ngClass]="availableCource == true ? 'availableContainer' : 'availableCont'"
->
+<div class="container" [ngClass]="availableCource == true ? 'availableContainer' : 'availableCont'">
   <div class="row" *ngIf="dropdownCatDetails">
     <div class="col-12 pr-0">
       <div class="row">
@@ -2098,20 +1961,14 @@
           <p>Available Courses</p>
         </div>
         <div class="col-6 text-right">
-          <mat-icon
-            class="arrowIcon mr-2"
-            aria-hidden="false"
-            (click)="availableCource = false"
-            >clear</mat-icon
-          >
+          <mat-icon class="arrowIcon mr-2" aria-hidden="false" (click)="availableCource = false">clear</mat-icon>
         </div>
       </div>
       <ng-container *ngFor="let category of dropdownCatDetails.categories">
         <div class="parrentAccordian">
           <div class="row w-100 h-100">
             <div class="col-12 m-auto pr-0">
-                <div *ngIf="!category.subCategory"
-                (click)="
+              <div *ngIf="!category.subCategory" (click)="
                   getCoureBasedOnCatalog(dropdownCatDetails, category, '', '');
                   viewCourse(
                     category,
@@ -2119,86 +1976,64 @@
                     category.categoryName,
                     category.totalCount
                   )
-                "
-                (click)="
+                " (click)="
                   isExpandCourseTemp &&
                   expandActivityNameTemp == category.categoryId
                     ? onexpTemp(category, category.categoryId, false)
                     : onexpTemp(category, category.categoryId, true)
                 ">
-              <span
-                class="accordianText"
-              >
-                {{ category.categoryName | titlecase
-                }}<span
-                  class="matBadgeAvail"
-                  matBadge="{{ category.totalCount }}"
-                  matBadgeOverlap="false"
-                ></span>
-              </span>
-                </div>
-            <div *ngIf="category.subCategory" (click)="
+                <span class="accordianText">
+                  {{ category.categoryName | titlecase
+                }}<span class="matBadgeAvail" matBadge="{{ category.totalCount }}" matBadgeOverlap="false"></span>
+                </span>
+              </div>
+              <div *ngIf="category.subCategory" (click)="
             isExpandCourseTemp &&
             expandActivityNameTemp == category.categoryId
               ? onexpTemp(category, category.categoryId, false)
               : onexpTemp(category, category.categoryId, true)
           ">
-              <span
-                class="accordianText"
-              >
-                {{ category.categoryName | titlecase
-                }}<span
-                  class="matBadgeAvail"
-                  matBadge="{{ category.totalCount }}"
-                  matBadgeOverlap="false"
-                ></span>
-              </span>
+                <span class="accordianText">
+                  {{ category.categoryName | titlecase
+                }}<span class="matBadgeAvail" matBadge="{{ category.totalCount }}" matBadgeOverlap="false"></span>
+                </span>
               </div>
-              <mat-icon class="arrowIcon float-right " aria-hidden="false" *ngIf="!category.subCategory && category.categoryName !== 'vocational'"
-                (click)="getCoureBasedOnCatalog(dropdownCatDetails, category, '', '');viewCourse(category,
+              <mat-icon class="arrowIcon float-right " aria-hidden="false"
+                *ngIf="!category.subCategory && category.categoryName !== 'vocational'" (click)="getCoureBasedOnCatalog(dropdownCatDetails, category, '', '');viewCourse(category,
                     previewDialog,category.categoryName,category.totalCount)">keyboard_arrow_right</mat-icon>
               <mat-icon class="arrowIcon float-right" aria-hidden="false" *ngIf="expandActivityNameTemp !== category.categoryId &&
                   category.subCategory && category.categoryName == 'vocational'" (click)="isExpandCourseTemp && expandActivityNameTemp == category.categoryId ? onexpTemp(category, category.categoryId, false)
                     : onexpTemp(category, category.categoryId, true)">keyboard_arrow_right</mat-icon>
-              <mat-icon class="arrowIcon float-right" aria-hidden="false" *ngIf="isExpandCourseTemp && expandActivityNameTemp == category.categoryId && category.categoryName == 'vocational'" (click)="
-                  isExpandCourseTemp && expandActivityNameTemp == category.categoryId ? onexpTemp(category, category.categoryId, false) : onexpTemp(category, category.categoryId, true)"
-                >keyboard_arrow_up</mat-icon>
+              <mat-icon class="arrowIcon float-right" aria-hidden="false"
+                *ngIf="isExpandCourseTemp && expandActivityNameTemp == category.categoryId && category.categoryName == 'vocational'"
+                (click)="
+                  isExpandCourseTemp && expandActivityNameTemp == category.categoryId ? onexpTemp(category, category.categoryId, false) : onexpTemp(category, category.categoryId, true)">
+                keyboard_arrow_up</mat-icon>
 
-              <ng-container
-                *ngIf="
+              <ng-container *ngIf="
                   isExpandCourseTemp &&
                   expandActivityNameTemp == category.categoryId
-                "
-              >
+                ">
                 <ng-container *ngFor="let subCatet of category.subCategory">
                   <div class="parrentAccordianSub">
                     <div class="row w-100 h-100">
                       <div class="col-12 m-auto pr-0">
-                          <div   (click)="
+                        <div (click)="
                           isExpChild &&
                           expandActivityNameChildTemp ==
                             subCatet.subCategoryId
                             ? onexpchildTemp(subCatet.subCategoryId, false)
                             : onexpchildTemp(subCatet.subCategoryId, true)
                         ">
-                        <span
-                          class="accordianText ml-5"
-                        >
-                          {{ subCatet.subCategoryName | titlecase }}
-                          <span
-                            class="matBadgeAvail"
-                            matBadge="{{ subCatet.totalCount }}"
-                            matBadgeOverlap="false"
-                          ></span>
-                        </span>
-                        <mat-icon
-                          class="arrowIcon float-right accordianText"
-                          aria-hidden="false"
-                          *ngIf="
+                          <span class="accordianText ml-5">
+                            {{ subCatet.subCategoryName | titlecase }}
+                            <span class="matBadgeAvail" matBadge="{{ subCatet.totalCount }}"
+                              matBadgeOverlap="false"></span>
+                          </span>
+                          <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" *ngIf="
                             expandActivityNameChildTemp !==
                             subCatet.subCategoryId
-                          "
-                          (click)="
+                          " (click)="
                             isExpChild &&
                             expandActivityNameChildTemp ==
                               subCatet.subCategoryId
@@ -2212,41 +2047,29 @@
                                   subCatet.subCategoryId,
                                   true
                                 )
-                          "
-                          >keyboard_arrow_right</mat-icon
-                        >
-                        <mat-icon
-                          class="arrowIcon float-right accordianText"
-                          aria-hidden="false"
-                          *ngIf="
+                          ">keyboard_arrow_right</mat-icon>
+                          <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" *ngIf="
                             isExpChild &&
                             subCatet.superSubCategory &&
                             expandActivityNameChildTemp ==
                               subCatet.subCategoryId
                           "
-                          (click)="
-                  isExpandCourseTemp && expandActivityNameTemp == category.categoryId ? onexpTemp(category, category.categoryId, false) : onexpTemp(category, category.categoryId, true)"
-                          >keyboard_arrow_up</mat-icon
-                        >
-</div>
-                        <ng-container
-                          *ngIf="
+                            (click)="
+                  isExpandCourseTemp && expandActivityNameTemp == category.categoryId ? onexpTemp(category, category.categoryId, false) : onexpTemp(category, category.categoryId, true)">
+                            keyboard_arrow_up</mat-icon>
+                        </div>
+                        <ng-container *ngIf="
                             isExpChild &&
                             expandActivityNameChildTemp ==
                               subCatet.subCategoryId
-                          "
-                        >
-                          <ng-container
-                            *ngFor="
+                          ">
+                          <ng-container *ngFor="
                               let superSubCat of subCatet.superSubCategory
-                            "
-                          >
+                            ">
                             <div class="parrentAccordiansuper">
                               <div class="row w-100 h-100 parrentSubAccord">
                                 <div class="col-12 m-auto pr-0">
-                                  <span
-                                    class="accordianTextsub"
-                                    (click)="
+                                  <span class="accordianTextsub" (click)="
                                       menuSelect(subCatet, superSubCat);
                                       getCoureBasedOnCatalog(
                                         dropdownCatDetails,
@@ -2260,16 +2083,11 @@
                                         superSubCat.superSubCategoryName,
                                         superSubCat.totalCount
                                       )
-                                    "
-                                    >{{
+                                    ">{{
                                       superSubCat.superSubCategoryName
                                         | titlecase
-                                    }}<span
-                                      class="matBadgeAvail"
-                                      matBadge="{{ superSubCat.totalCount }}"
-                                      matBadgeOverlap="false"
-                                    ></span
-                                  ></span>
+                                    }}<span class="matBadgeAvail" matBadge="{{ superSubCat.totalCount }}"
+                                      matBadgeOverlap="false"></span></span>
                                 </div>
                               </div>
                             </div>
@@ -2288,10 +2106,7 @@
   </div>
   <br [ngClass]="availableCource == true ? 'displayNone' : ''" />
   <br [ngClass]="availableCource == true ? 'displayNone' : ''" />
-  <div
-    *ngIf="!loading"
-    [ngClass]="availableCource == true ? 'displayNone' : ''"
-  >
+  <div *ngIf="!loading" [ngClass]="availableCource == true ? 'displayNone' : ''">
     <div class="footer">
       <span class="powered">
         <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
