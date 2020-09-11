@@ -2022,7 +2022,7 @@
                   <div class="parrentAccordianSub">
                     <div class="row w-100 h-100">
                       <div class="col-12 m-auto pr-0">
-                        <div class="pb-3" (click)="
+                        <div class="pb-3 " (click)="
                           isExpChild &&
                           expandActivityNameChildTemp ==
                             subCatet.subCategoryId
@@ -2034,8 +2034,13 @@
                             <span class="matBadgeAvail" matBadge="{{ subCatet.totalCount }}"
                               matBadgeOverlap="false"></span>
                           </span>
+                         <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" 
+                          *ngIf="subCatet.superSubCategory.length == 0 && expandActivityNameChildTemp !== subCatet.subCategoryId" 
+                          (click)="getCoureBasedOnCatalog(dropdownCatDetails, category, '', '');viewCourse(category,
+                          previewDialog,category.categoryName,category.totalCount)">keyboard_arrow_right</mat-icon>
+
                           <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" 
-                          *ngIf="!isExpChild || expandActivityNameChildTemp !== subCatet.subCategoryId" (click)="
+                          *ngIf="subCatet.superSubCategory.length > 0 && !isExpChild || expandActivityNameChildTemp !== subCatet.subCategoryId" (click)="
                           isExpChild &&
                             expandActivityNameChildTemp ==
                               subCatet.subCategoryId
@@ -2070,7 +2075,7 @@
                             ">
                             <div class="parrentAccordiansuper">
                               <div class="row w-100 h-100 parrentSubAccord">
-                                <div class="col-12 m-auto pr-0">
+                                <div class="col-12 m-auto pr-0 superSubCatDiv">
                                   <span class="accordianTextsub" (click)="
                                       menuSelect(subCatet, superSubCat);
                                       getCoureBasedOnCatalog(

@@ -1009,7 +1009,7 @@ display: none;
   display: none;
 }
 
-::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
+:host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
   display: none !important;
 }
 
@@ -1021,7 +1021,13 @@ display: none;
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
 
+  .roleDropdDwnBtn {
+    bottom: 25px !important;
+  }
 
+  .myC-head {
+    margin-top: 6% !important;
+  }
 
  :host ::ng-deep .matInkBar .mat-ink-bar {
      display: none !important;
@@ -1154,6 +1160,7 @@ display: none;
   }
   .catalogTitle {
     margin: auto;
+    height: 3rem !important;
   }
 
   .aligned-with-icon {
@@ -1243,8 +1250,13 @@ display: none;
     margin-left: 10px;
   }
 
+  // .superSubCatDiv .accordianTextsub {
+  //   white-space: nowrap !important;
+  //   text-overflow: ellipsis !important;
+  // }
+
   .dropdown-content {
-    min-width: 20vh !important;
+    // min-width: 20vh !important;
     max-width: 38vh !important;
   }
 
