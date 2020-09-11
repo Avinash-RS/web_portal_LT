@@ -1379,6 +1379,7 @@ display: none;
 
   .roleBtn {
     padding: 2px !important;
+    width: 11.5rem !important;
   }
 
   .search {
@@ -1484,7 +1485,7 @@ display: none;
 // }
 @media only screen and (width: 1440px) {
   .roleDropdDwnBtn {
-    right: 40% !important;
+    right: 53% !important;
   }
 }
 
@@ -1497,7 +1498,7 @@ display: none;
   }
 
   .roleDropdDwnBtn {
-    right: 30% !important;
+    right: 47% !important;
   }
  
   :host ::ng-deep #mat-tab-label-0-5 {
@@ -1508,7 +1509,7 @@ display: none;
 @media only screen and (width: 1024px) {
 
   .roleDropdDwnBtn {
-    right: 50% !important;
+    right: 34% !important;
   }
 
   .searchCol {
@@ -1516,11 +1517,11 @@ display: none;
   }
 
   .right-addon .glyphicon {
-    right: 45px !important;
+    right: 15rem !important;
 }
 
   .search {
-    width: 83% !important;
+    width: 53% !important;
     margin-left: 10px !important;
     float: left !important;
   }
