@@ -2027,7 +2027,7 @@
                   <div class="parrentAccordianSub">
                     <div class="row w-100 h-100">
                       <div class="col-12 m-auto pr-0">
-                        <div class="pb-3 " (click)="
+                        <div class="pb-3 " [disabled] ="subCatet.totalCount == 0" (click)="
                           isExpChild &&
                           expandActivityNameChildTemp ==
                             subCatet.subCategoryId
@@ -2040,12 +2040,11 @@
                               matBadgeOverlap="false"></span>
                           </span>
                          <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" 
-                          *ngIf="subCatet.superSubCategory.length == 0 && expandActivityNameChildTemp !== subCatet.subCategoryId" 
-                          (click)="getCoureBasedOnCatalog(dropdownCatDetails, category, '', '');viewCourse(category,
-                          previewDialog,category.categoryName,category.totalCount)">keyboard_arrow_right</mat-icon>
-
+                          *ngIf="subCatet.totalCount == 0" 
+                          >keyboard_arrow_right</mat-icon>
+                          <span *ngIf="subCatet.totalCount > 0">
                           <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" 
-                          *ngIf="subCatet.superSubCategory.length > 0 && !isExpChild || expandActivityNameChildTemp !== subCatet.subCategoryId" (click)="
+                          *ngIf="!isExpChild || expandActivityNameChildTemp !== subCatet.subCategoryId" (click)="
                           isExpChild &&
                             expandActivityNameChildTemp ==
                               subCatet.subCategoryId
@@ -2059,7 +2058,7 @@
                                   subCatet.subCategoryId,
                                   true
                                 )
-                          ">keyboard_arrow_right</mat-icon>
+                          ">keyboard_arrow_right</mat-icon></span>
                           <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" *ngIf="
                             isExpChild &&
                             subCatet.superSubCategory &&
@@ -2081,7 +2080,7 @@
                             <div class="parrentAccordiansuper">
                               <div class="row w-100 h-100 parrentSubAccord">
                                 <div class="col-12 m-auto pr-0 superSubCatDiv">
-                                  <span class="accordianTextsub" (click)="
+                                  <span *ngIf="superSubCat.superSubCategoryName?.length > 28" class="accordianTextsub" (click)="
                                       menuSelect(subCatet, superSubCat);
                                       getCoureBasedOnCatalog(
                                         dropdownCatDetails,
@@ -2096,10 +2095,29 @@
                                         superSubCat.totalCount
                                       )
                                     ">{{
-                                      superSubCat.superSubCategoryName
-                                        | titlecase
+                                      (superSubCat.superSubCategoryName
+                                        | titlecase | slice:0:28)+'...'
                                     }}<span class="matBadgeAvail" matBadge="{{ superSubCat.totalCount }}"
                                       matBadgeOverlap="false"></span></span>
+                                      <span *ngIf="superSubCat.superSubCategoryName?.length < 28" class="accordianTextsub" (click)="
+                                        menuSelect(subCatet, superSubCat);
+                                        getCoureBasedOnCatalog(
+                                          dropdownCatDetails,
+                                          category,
+                                          subCatet.subCategoryId,
+                                          superSubCat.superSubCategoryId
+                                        );
+                                        viewCourse(
+                                          category,
+                                          previewDialog,
+                                          superSubCat.superSubCategoryName,
+                                          superSubCat.totalCount
+                                        )
+                                      ">{{
+                                        superSubCat.superSubCategoryName
+                                          | titlecase 
+                                      }}<span class="matBadgeAvail" matBadge="{{ superSubCat.totalCount }}"
+                                        matBadgeOverlap="false"></span></span>
                                 </div>
                               </div>
                             </div>
