@@ -1219,10 +1219,10 @@
           <div *ngIf="completedCourseCount === 0">
             <mat-card class="coursebg width_90 errorCard">
               <div class="row width_90 no_margin">
-                <div class="col-1 display_flex pointer no_pl mt-4" (click)="gotoDesc(course)">
+                <div class="col-4 col-sm-4 col-md-1 display_flex pointer no_pl mt-4" (click)="gotoDesc(course)">
                   <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs" />
                 </div>
-                <div class="col-11 no_pl errorboxx">
+                <div class="col-8 col-md-11 no_pl errorboxx">
                   <span style="font-size: medium">{{
                     "You have no completed courses at the moment." | translate
                   }}</span>
@@ -1505,10 +1505,10 @@
           <div *ngIf="allCourseCount === 0">
             <mat-card class="coursebg width_90 errorCard">
               <div class="row width_90 no_margin">
-                <div class="col-1 display_flex pointer no_pl mt-4" (click)="gotoDesc(course)">
+                <div class="col-4 col-sm-4 col-md-1 display_flex pointer no_pl mt-4" (click)="gotoDesc(course)">
                   <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs" />
                 </div>
-                <div class="col-11 no_pl errorboxx">
+                <div class="col-8 col-md-11 no_pl errorboxx">
                   <span style="font-size: medium">{{
                     "You have no enrolled courses at the moment." | translate
                   }}</span>
@@ -1772,10 +1772,10 @@
             <div *ngIf="allCourseCount === 0">
               <mat-card class="coursebg width_90 errorCard">
                 <div class="row width_90 no_margin">
-                  <div class="col-1 display_flex pointer no_pl mt-4" (click)="gotoDesc(course)">
+                  <div class="col-4 col-sm-4 col-md-1 display_flex pointer no_pl mt-4" (click)="gotoDesc(course)">
                     <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs" />
                   </div>
-                  <div class="col-11 no_pl errorboxx">
+                  <div class="col-8 col-md-11 no_pl errorboxx">
                     <span style="font-size: medium">{{
                       "You have no courses at the moment." | translate
                     }}</span>
@@ -2027,7 +2027,7 @@
                   <div class="parrentAccordianSub">
                     <div class="row w-100 h-100">
                       <div class="col-12 m-auto pr-0">
-                        <div class="pb-3" (click)="
+                        <div class="pb-3 " [disabled] ="subCatet.totalCount == 0" (click)="
                           isExpChild &&
                           expandActivityNameChildTemp ==
                             subCatet.subCategoryId
@@ -2039,6 +2039,10 @@
                             <span class="matBadgeAvail" matBadge="{{ subCatet.totalCount }}"
                               matBadgeOverlap="false"></span>
                           </span>
+                         <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" 
+                          *ngIf="subCatet.totalCount == 0" 
+                          >keyboard_arrow_right</mat-icon>
+                          <span *ngIf="subCatet.totalCount > 0">
                           <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" 
                           *ngIf="!isExpChild || expandActivityNameChildTemp !== subCatet.subCategoryId" (click)="
                           isExpChild &&
@@ -2054,7 +2058,7 @@
                                   subCatet.subCategoryId,
                                   true
                                 )
-                          ">keyboard_arrow_right</mat-icon>
+                          ">keyboard_arrow_right</mat-icon></span>
                           <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" *ngIf="
                             isExpChild &&
                             subCatet.superSubCategory &&
@@ -2075,8 +2079,8 @@
                             ">
                             <div class="parrentAccordiansuper">
                               <div class="row w-100 h-100 parrentSubAccord">
-                                <div class="col-12 m-auto pr-0">
-                                  <span class="accordianTextsub" (click)="
+                                <div class="col-12 m-auto pr-0 superSubCatDiv">
+                                  <span *ngIf="superSubCat.superSubCategoryName?.length > 28" class="accordianTextsub" (click)="
                                       menuSelect(subCatet, superSubCat);
                                       getCoureBasedOnCatalog(
                                         dropdownCatDetails,
@@ -2091,10 +2095,29 @@
                                         superSubCat.totalCount
                                       )
                                     ">{{
-                                      superSubCat.superSubCategoryName
-                                        | titlecase
+                                      (superSubCat.superSubCategoryName
+                                        | titlecase | slice:0:28)+'...'
                                     }}<span class="matBadgeAvail" matBadge="{{ superSubCat.totalCount }}"
                                       matBadgeOverlap="false"></span></span>
+                                      <span *ngIf="superSubCat.superSubCategoryName?.length < 28" class="accordianTextsub" (click)="
+                                        menuSelect(subCatet, superSubCat);
+                                        getCoureBasedOnCatalog(
+                                          dropdownCatDetails,
+                                          category,
+                                          subCatet.subCategoryId,
+                                          superSubCat.superSubCategoryId
+                                        );
+                                        viewCourse(
+                                          category,
+                                          previewDialog,
+                                          superSubCat.superSubCategoryName,
+                                          superSubCat.totalCount
+                                        )
+                                      ">{{
+                                        superSubCat.superSubCategoryName
+                                          | titlecase 
+                                      }}<span class="matBadgeAvail" matBadge="{{ superSubCat.totalCount }}"
+                                        matBadgeOverlap="false"></span></span>
                                 </div>
                               </div>
                             </div>
