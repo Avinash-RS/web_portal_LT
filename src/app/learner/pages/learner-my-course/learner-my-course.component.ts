@@ -151,6 +151,7 @@ export class LearnerMyCourseComponent implements OnInit {
 
   openAvailableCource() {
     this.availableCource = true;
+    this.isExpandCourseTemp = this.availableCource;
   }
 
   menuSelect(subchild, superchild) {
@@ -467,6 +468,13 @@ onexpTemp(category, id, isexps) {
     this.isExpandCourseTemp = true;
   }
   }
+
+  onCloseTab() {
+    if (this.isExpandCourseTemp === true) {
+      this.isExpChild = false;
+    }
+  }
+
   onexpchildTemp(id, isexp) {
     this.expandActivityNameChildTemp = isexp ? id : null;
     this.isExpChild = isexp ? true : false;

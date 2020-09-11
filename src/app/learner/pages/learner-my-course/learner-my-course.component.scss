@@ -965,7 +965,7 @@ display: none;
 }
 
 .parrentAccordianSub{
-  padding: 20px 0px;
+  padding: 20px 0px 0px 0px;
 }
 
 .parrentAccordiansuper{
@@ -1245,6 +1245,7 @@ display: none;
 
   .dropdown-content {
     min-width: 20vh !important;
+    max-width: 38vh !important;
   }
 
   .roleSelect {
