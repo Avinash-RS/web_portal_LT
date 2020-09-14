@@ -30,7 +30,7 @@ export class GlobalServiceService {
       // const adminDetails = JSON.parse(localStorage.getItem('adminDetails')) || null;
       // const role = localStorage.getItem('role') || sessionStorage.getItem('role') || null;
       const userDetail = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails')) || null;
-      console.log(userDetail);
+      // console.log(userDetail);
       if ((userDetail != null && userDetail !== undefined)) {
         return userDetail;
         // } else if ((adminDetails != null || adminDetails !== undefined) && role === 'admin') {
