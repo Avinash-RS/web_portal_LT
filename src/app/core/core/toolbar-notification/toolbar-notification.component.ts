@@ -13,7 +13,7 @@ export class ToolbarNotificationComponent implements OnInit {
   constructor(public commonservice: CommonServicesService) { }
 
   ngOnInit() {
-    const learnerDetail = JSON.parse(sessionStorage.getItem('UserDetails'));
+    const learnerDetail = JSON.parse(localStorage.getItem('UserDetails'));
     this.userId = learnerDetail.user_id;
     this.commonservice.getAllNotifications(this.userId, 'learner').subscribe((result: any) => {
       console.log('notification data', result.data.getAllNotifications.data);
