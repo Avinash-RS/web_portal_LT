@@ -199,6 +199,7 @@ export class CommonServicesService {
       localStorage.setItem('Systemip', res.ip);
     });
   }
+  
   getAllNotifications(userId, userType) {
     return this.Apollo.query({
       query: getAllNotifications,

@@ -10,6 +10,7 @@ export const logout = gql`
   }`;
 
 
+  
 export const getAllNotifications = gql`
   query {
     getAllNotifications(userId:"p1xg6y",userType:"learner")
