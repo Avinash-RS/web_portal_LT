@@ -9,6 +9,29 @@ export const logout = gql`
     }
   }`;
 
+
+export const getAllNotifications = gql`
+  query {
+    getAllNotifications(userId:"p1xg6y",userType:"learner")
+    {
+    message
+    success
+    data {
+      _id
+      userObjId
+      userId
+      notificationType
+      notificationMessage
+      created_on
+      updated_on
+      timeAgo
+      notifiedStatus
+      is_active
+    }
+    }
+    }
+    `;
+
 export const viewcourse = gql`
   query viewcourse($course_id: String,$user_id: String){
     viewcourse(course_id: $course_id,user_id:$user_id) {
@@ -86,7 +109,7 @@ export const viewcourse = gql`
           topictime
           }
           }
-          } 
+          }
         people_also_viewed{
           course_id
           course_description
