@@ -1,6 +1,6 @@
 <div class="toolbar-notification-container">
   <button mat-icon-button (click)="isOpen = !isOpen;" [ngClass]="[cssPrefix+'-btn']" [class.open]="isOpen">
-    <mat-icon>notifications_none</mat-icon>
+    <mat-icon class="icon">notifications_none</mat-icon>
     <span class="badge" *ngIf="notifications && notifications?.length !== 0 && !read">{{ notifications?.length }}</span>
   </button>
 
@@ -9,7 +9,7 @@
 
     <div class="card ">
       <div class="header" fxLayout="row" fxLayoutAlign="space-between center">
-        <div class="title">
+        <div class="title" style="width: 90%;">
           <div class="name">Notifications</div>
           <div class="extra">
             You have {{ notifications?.length }} new notifications</div>
