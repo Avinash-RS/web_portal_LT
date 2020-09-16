@@ -200,12 +200,13 @@ export class CommonServicesService {
     });
   }
   
-  getAllNotifications(userId, userType) {
+  getAllNotifications(userId, userType, pagenumber) {
     return this.Apollo.query({
       query: getAllNotifications,
       variables: {
         userId,
-        userType
+        userType,
+        pagenumber
       }
     });
   }

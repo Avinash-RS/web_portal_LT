@@ -12,11 +12,12 @@ export const logout = gql`
 
   
 export const getAllNotifications = gql`
-  query {
-    getAllNotifications(userId:"p1xg6y",userType:"learner")
-    {
+  query getAllNotifications($userId: String!, $userType: String, $pagenumber:Int!) {
+    getAllNotifications(userId: $userId, userType: $userType, pagenumber: $pagenumber) {
     message
     success
+    unReadCount
+    totalCount
     data {
       _id
       userObjId

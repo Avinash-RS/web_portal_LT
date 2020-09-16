@@ -38,11 +38,11 @@ import { GuidelineSearchComponent } from './shared/guideline-search/guideline-se
 import { LandingHeaderComponent } from './core/landing-header/landing-header.component';
 import { CategoryComponentComponent } from './shared/category-component/category-component.component';
 import { PdfreaderComponent } from './shared/pdfreader/pdfreader.component';
-import { ToolbarNotificationComponent } from './core/toolbar-notification/toolbar-notification.component';
+import { ToolbarNotificationComponent } from './shared/toolbar-notification/toolbar-notification.component';
 
 // const routes: Routes = [
-//   { path: 'video', component: VideoPlayerComponent, canActivate: [AuthGuard] },
-//   { path: 'audio', component: AudioPlayerComponent, canActivate: [AuthGuard] },
+//   // { path: 'video', component: VideoPlayerComponent, canActivate: [AuthGuard] },
+//   // { path: 'audio', component: AudioPlayerComponent, canActivate: [AuthGuard] },
 // ];
 @NgModule({
   declarations: [
