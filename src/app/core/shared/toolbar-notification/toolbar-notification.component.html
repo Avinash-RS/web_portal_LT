@@ -1,7 +1,7 @@
 <div class="toolbar-notification-container">
   <button mat-icon-button (click)="isOpen = !isOpen;" [ngClass]="[cssPrefix+'-btn']" [class.open]="isOpen">
     <mat-icon class="icon">notifications_none</mat-icon>
-    <span class="badge" *ngIf="notifications && notifications?.length !== 0 && !read">{{ notifications?.length }}</span>
+    <span class="badge" *ngIf="notifications && notifications?.length !== 0">{{ notifications?.length }}</span>
   </button>
 
 
@@ -14,40 +14,29 @@
           <div class="extra">
             You have {{ notifications?.length }} new notifications</div>
         </div>
-        <!-- <div style="float: right;">
-          <button type="button" mat-icon-button>
-            <mat-icon class="icon">settings</mat-icon>
-          </button>
-        </div> -->
       </div>
       <div *ngIf="notifications?.length !== 0; then thenBlock else elseBlock;">
       </div>
-      <div *ngIf="notifications?.length !== 0;" class="footer" fxLayout="row" (click) = "read = true; viewall()" fxLayoutAlign="center center">
-        <div class="action">Mark all as read</div>
+      <div *ngIf="notifications?.length !== 0;" class="footer" fxLayout="row" (click) = "viewall()" fxLayoutAlign="center center">
+        <div class="action">View all</div>
       </div>
-
-
-      <!-- <div *ngIf="notifications?.length === 0;" class="footer" fxLayout="row" fxLayoutAlign="center center">
-        <div class="action">No new notifications</div>
-    </div> -->
     </div>
-
   </div>
-
 </div>
 
 <ng-template #thenBlock>
   <div class="content">
     <div *ngFor="let notification of notifications; last as isLast">
       <div class="notification" fxLayout="row" fxLayoutAlign="start center" mat-ripple>
-        <!-- <mat-icon class="icon">notifications</mat-icon> -->
-        <div class="title" fxLayout="column">
-          <a class="message" (click)="markAsRead(notification)">{{ notification.notificationMessage }}</a>
+        <div class="title" fxLayout="column" (click)="markAsRead(notification)">
+          <a class="message" *ngIf="notification.notifiedStatus != true" >{{ notification.notificationMessage }}</a>
+          <a class="readed" *ngIf="notification.notifiedStatus == true">{{ notification.notificationMessage }}</a>
           <div class="time">{{ notification.timeAgo }}</div>
         </div>
         <span fxFlex></span>
-        <!-- (click)="removeNotification(notification._id)" -->
-        <mat-icon class="close closeBtn" >drafts</mat-icon>
+        <mat-icon *ngIf="notification.notifiedStatus == true" class="close closeBtn" (click)="markAsRead(notification)" >drafts</mat-icon>
+        <mat-icon *ngIf="notification.notifiedStatus != true" class="close closeBtn" >markunread</mat-icon>
+        
       </div>
       <div class="divider" *ngIf="!isLast"></div>
     </div>
