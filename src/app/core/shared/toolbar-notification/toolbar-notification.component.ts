@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router } from '@angular/router';
 
 
@@ -12,15 +13,26 @@ export class ToolbarNotificationComponent implements OnInit {
   userId: any;
   notifications = [];
   pagenumber = 1;
-  constructor(public commonservice: CommonServicesService,
+
+  notificationMarkRead = [];
+  markasread: any;
+  constructor(public commonservice: CommonServicesService, public Lservice: LearnerServicesService ,
               public router: Router) { }
 
   ngOnInit() {
     const learnerDetail = JSON.parse(localStorage.getItem('UserDetails'));
     this.userId = learnerDetail.user_id;
-    this.commonservice.getAllNotifications(this.userId, 'learner', this.pagenumber).subscribe((result: any) => {
-      console.log('notification data', result.data.getAllNotifications.data);
+    this.commonservice.getAllNotifications(this.userId, 'learner').subscribe((result: any) => {
       this.notifications = result.data.getAllNotifications.data;
+    });
+  }
+
+  markAsRead(notification) {
+    this.notificationMarkRead.push(notification._id);
+    this.Lservice.markAsRead(this.notificationMarkRead).subscribe((result: any) => {
+      if (result.data.markAsRead) {
+        this.markasread = result.data.markAsRead.success;
+      }
     });
   }
   removeNotification(id) {
