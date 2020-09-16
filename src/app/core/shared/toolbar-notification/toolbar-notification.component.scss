@@ -1,7 +1,7 @@
 @import "variable";
 $prefix: 'toolbar-notification';
-::ng-deep .mat-icon {
-    color: $color-blank;
+::ng-deep .icon {
+    color: $color-blank !important;
 }
 .badge {
     position: absolute;
@@ -14,7 +14,7 @@ $prefix: 'toolbar-notification';
     border-radius: 26%;
     width: 50%;
     background-color: #f44336;
-    color: #fff;
+    color: $color-white;
     border-color: #f44336;
 }
 
@@ -33,7 +33,7 @@ $prefix: 'toolbar-notification';
 }
 
 .dropdown {
-    background: white;
+    background: $color-white;
     position: absolute;
     top: 42px;
     right: 28px;
@@ -97,7 +97,7 @@ $prefix: 'toolbar-notification';
                 margin-right: 13px;
                 text-align: center;
                 border-radius: 50%;
-                background: #FFF;
+                background: $color-white;
                 color: #888;
                 border: 1px solid #EEE;
             }
@@ -105,6 +105,7 @@ $prefix: 'toolbar-notification';
             .title {
                 font-weight: 500;
                 font-size: 14px;
+                width: 90%;
             }
 
             .time {
@@ -120,7 +121,7 @@ $prefix: 'toolbar-notification';
 
             &.primary {
                 .icon {
-                    background: #ccc;
+                    background: $color-border;
                     color: #ddd;
                 }
             }
