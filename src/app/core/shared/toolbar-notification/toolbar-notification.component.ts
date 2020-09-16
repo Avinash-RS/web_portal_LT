@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-toolbar-notification',
@@ -10,9 +12,12 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 export class ToolbarNotificationComponent implements OnInit {
   userId: any;
   notifications = [];
+  pagenumber = 1;
+
   notificationMarkRead = [];
   markasread: any;
-  constructor(public commonservice: CommonServicesService,  public Lservice: LearnerServicesService) { }
+  constructor(public commonservice: CommonServicesService, public Lservice: LearnerServicesService ,
+              public router: Router) { }
 
   ngOnInit() {
     const learnerDetail = JSON.parse(localStorage.getItem('UserDetails'));
@@ -36,5 +41,8 @@ export class ToolbarNotificationComponent implements OnInit {
         this.notifications = this.notifications.filter((data) => data._id !== id);
     //   }
     // });
+  }
+  viewall() {
+    this.router.navigate(['/Learner/viewAllnotifications']);
   }
 }

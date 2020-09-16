@@ -59,6 +59,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
 import { NewHomeComponent } from './pages/new-home/new-home.component';
 import { LearnerCalendarComponent } from './pages/learner-calendar/learner-calendar.component';
+import { ViewAllnotificationsComponent } from './pages/view-allnotifications/view-allnotifications.component';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -172,6 +173,10 @@ const routes: Routes = [
     path: 'forbidden',
     component: ForbiddenComponent,
     data: { title: 'Learner Change email' }
+  },
+  {
+    path: 'viewAllnotifications',
+    component: ViewAllnotificationsComponent,
   }
   // { path: 'new-home', component: NewHomeComponent },
 ];
@@ -200,7 +205,8 @@ const routes: Routes = [
     // SearchPipe,
     LearnerDashboardComponent,
     LandingpageComponent,
-    LearnerCalendarComponent
+    LearnerCalendarComponent,
+    ViewAllnotificationsComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
