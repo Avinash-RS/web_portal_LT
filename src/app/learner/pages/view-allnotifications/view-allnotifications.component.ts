@@ -8,27 +8,19 @@ export interface PeriodicElement {
   symbol: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {notificationName: 'Enrolled to marketing course', date: 'a day ago', symbol: 'Icon'},
-  {notificationName: 'Enrolled to marketing course', date: '1 day ago', symbol: 'Icon'},
-  {notificationName: 'Enrolled to marketing course', date: '2 days ago', symbol: 'Icon'},
-  {notificationName: 'Enrolled to marketing course', date: '3 days ago', symbol: 'Icon'},
-  {notificationName: 'Enrolled to marketing course', date: '5 days ago', symbol: 'Icon'},
-  {notificationName: 'Enrolled to marketing course', date: '9 days ago', symbol: 'Icon'},
-  {notificationName: 'Enrolled to marketing course', date: '10 days ago', symbol: 'Icon'}
-];
 @Component({
   selector: 'app-view-allnotifications',
   templateUrl: './view-allnotifications.component.html',
   styleUrls: ['./view-allnotifications.component.scss']
 })
 export class ViewAllnotificationsComponent implements OnInit {
+  notifications: any;
   displayedColumns: string[] = ['notificationName', 'date', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  dataSource = this.notifications;
   limit = 10;
   userId: any;
   pagenumber = 1;
-  notifications: any;
+  totalCount: any;
   constructor(public commonservice: CommonServicesService) { }
 
   ngOnInit() {
@@ -40,8 +32,13 @@ export class ViewAllnotificationsComponent implements OnInit {
   this.commonservice.getAllNotifications(this.userId, 'learner', this.pagenumber).subscribe((result: any) => {
     console.log('notification data', result.data.getAllNotifications.data);
     this.notifications = result.data.getAllNotifications.data;
+    this.totalCount = result.data.getAllNotifications.totalCount;
     console.log('notification', this.notifications);
+    this.dataSource = this.notifications;
   });
+}
+readNotification() {
+  console.log('read');
 }
 
 }
