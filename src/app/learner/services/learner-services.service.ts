@@ -79,7 +79,8 @@ import {
   user_mstr_data,
   add_topic_reference,
   save_attendies,
-  bulkclaimcourse
+  bulkclaimcourse,
+  markAsRead
 } from './operations/learner_mutation';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -857,7 +858,16 @@ export class LearnerServicesService {
       }
     });
   }
+  markAsRead(notifications: any) {
+    return this.Apollo.query({
+      query: markAsRead,
+      variables: {
+        notifications
+      }
+    });
+  }
 }
+
 
 
 
