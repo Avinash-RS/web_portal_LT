@@ -69,7 +69,7 @@ export class LearnerMyCourseComponent implements OnInit {
   jobRole: any = [];
   categoryyName: any;
   subchildData: any;
-  selectedJobRole = 'Select';
+  selectedJobRole = 'Job Role';
   jobroleEnrollCount: any;
   subCatId: any;
   superCatId: any;
@@ -224,7 +224,6 @@ export class LearnerMyCourseComponent implements OnInit {
       }
     }
 
-    if (!jobRoleCategoryId) { this.selectedJobRole = 'Job Role'; }
     this.loading = true;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
       catalougeId, catagoryId, jobRoleCategoryId, searchName).subscribe((enrolledList: any) => {

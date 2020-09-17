@@ -29,8 +29,8 @@
     <div *ngFor="let notification of notifications; last as isLast">
       <div class="notification" fxLayout="row" fxLayoutAlign="start center" mat-ripple>
         <div class="title" fxLayout="column" (click)="markAsRead(notification)">
-          <a class="message" *ngIf="notification.notifiedStatus != true" >{{ notification.notificationMessage }}</a>
-          <a class="readed" *ngIf="notification.notifiedStatus == true">{{ notification.notificationMessage }}</a>
+          <a class="message wordWrap" *ngIf="notification.notifiedStatus != true" >{{ notification.notificationMessage }}</a>
+          <a class="readed wordWrap" *ngIf="notification.notifiedStatus == true">{{ notification.notificationMessage }}</a>
           <div class="time">{{ notification.timeAgo }}</div>
         </div>
         <span fxFlex></span>
