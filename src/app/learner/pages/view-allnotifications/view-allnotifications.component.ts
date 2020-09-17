@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 
 
 export interface PeriodicElement {
@@ -21,7 +22,10 @@ export class ViewAllnotificationsComponent implements OnInit {
   userId: any;
   pagenumber = 1;
   totalCount: any;
-  constructor(public commonservice: CommonServicesService) { }
+  notificationMarkRead = [];
+
+
+  constructor(public commonservice: CommonServicesService, public Lservice: LearnerServicesService) { }
 
   ngOnInit() {
     const learnerDetail = JSON.parse(localStorage.getItem('UserDetails'));
@@ -30,15 +34,24 @@ export class ViewAllnotificationsComponent implements OnInit {
   }
   viewAllnotifications() {
   this.commonservice.getAllNotifications(this.userId, 'learner', this.pagenumber).subscribe((result: any) => {
-    console.log('notification data', result.data.getAllNotifications.data);
     this.notifications = result.data.getAllNotifications.data;
     this.totalCount = result.data.getAllNotifications.totalCount;
-    console.log('notification', this.notifications);
     this.dataSource = this.notifications;
   });
 }
-readNotification() {
-  console.log('read');
+markAsRead(notification, type) {
+  if (type === 'single') {
+  this.notificationMarkRead.push(notification._id);
+  } else if (type === 'all') {
+  this.notifications.forEach(element => {
+    this.notificationMarkRead.push(element._id);
+  });
+}
+  this.Lservice.markAsRead(this.notificationMarkRead).subscribe((result: any) => {
+    if (result.data.markAsRead.success === true) {
+      this.viewAllnotifications();
+    }
+  });
 }
 
 }

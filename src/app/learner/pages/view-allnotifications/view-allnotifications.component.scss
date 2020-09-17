@@ -1,13 +1,42 @@
+@import "variable";
 .head {
-    margin-left: 10px;
-    margin-top: 12px;
+    margin-left: 26px;
+    margin-top: 4px;
+    margin-bottom: 28px;
 }
-.table {
-    width: 100%;
+.tableContainer {
+    width: 80.5%;
+    margin: auto;
 }
 .w-55 {
-    width: 57% !important;
+    width: 76% !important;
 }
 .w-50 {
-    width: 40% !important;
+    width: 30% !important;
 }
+.font {
+    font-size: large;
+}
+.read {
+    color: $lxp-text;
+}
+.unread {
+    color: $color-blank;
+}
+.markAllbtn {
+    margin-top: -33px;
+    margin-right: 136px;
+}
+.readIcon {
+    font-size: 19px;
+}
+// td.mat-cell {
+//     // margin-left: 26px;
+//     text-align: center !important;
+// }
+.pointer {
+    cursor: pointer;
+}
+// th.mat-header-cell {
+//     text-align: center;
+// }
