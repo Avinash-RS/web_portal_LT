@@ -1021,6 +1021,12 @@ display: none;
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
 
+
+ .wordWrapMblView{
+    width: 270px;
+     word-wrap:break-word !important;
+  }
+
   .dropdownicon {
     top: 5px !important; 
   }
