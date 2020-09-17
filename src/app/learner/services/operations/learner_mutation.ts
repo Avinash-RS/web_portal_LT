@@ -948,3 +948,12 @@ export const bulkclaimcourse = gql`
     }
   }
 `;
+
+export const markAsRead = gql`
+  mutation markAsRead($notifications:[String]) {
+    markAsRead(notifications : $notifications) {
+      message
+      success
+    }
+  }
+`;

@@ -1,0 +1,28 @@
+<app-header></app-header>
+<h2 class="head">All notifications</h2>
+<!------------------------------------Table------------------------------------->
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="notificationName">
+    <th class="w-55" mat-header-cell *matHeaderCellDef><b>Notification</b></th>
+    <td mat-cell *matCellDef="let element"> <b>{{element.notificationMessage}}</b> </td>
+  </ng-container>
+
+  <ng-container matColumnDef="date">
+    <th class="w-50" mat-header-cell *matHeaderCellDef><b>Received on </b></th>
+    <td mat-cell *matCellDef="let element"> {{element.timeAgo}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let element"> 
+      <mat-icon (click)="readNotification()">drafts</mat-icon>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator #paginator [length]="totalCount" [pageSize]="limit" (page)="next($event)"
+  showFirstLastButtons>
+</mat-paginator>

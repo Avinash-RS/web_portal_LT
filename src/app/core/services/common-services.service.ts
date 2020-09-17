@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 import {
   logout, viewcourse, view_wishlist, list_content, syllabus_of_particular_scorm,
-  getCoursesByName, get_all_course_by_usergroup
+  getCoursesByName, get_all_course_by_usergroup, getAllNotifications
 } from '@core/services/operations/common_query';
 import {
   add_to_wishlist, delete_wishlist, getPlayerStatus, geturl, enrollcourse,
@@ -18,24 +18,24 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CommonServicesService {
 
-  constructor(private Apollo: Apollo, private http: HttpClient,) { }
-  //Search Component for search all courses
+  constructor(private Apollo: Apollo, private http: HttpClient, ) { }
+  // Search Component for search all courses
   globalSearch$ = new Subject<any>();
   globalSearch = this.globalSearch$.asObservable();
 
-  //Global for all courses(Guideline search to Category and View all courses)
+  // Global for all courses(Guideline search to Category and View all courses)
   globalCourses$ = new Subject<any>();
   globalCourses = this.globalCourses$.asObservable();
 
-  //Guideline search to Category for Clear all filter
+  // Guideline search to Category for Clear all filter
   globalFilterCategory$ = new Subject<any>();
   globalFilterCategory = this.globalFilterCategory$.asObservable();
 
-  //Guideline search to Category for removing Category from applied filter
+  // Guideline search to Category for removing Category from applied filter
   globalCategory$ = new Subject<any>();
   globalCategory = this.globalCategory$.asObservable();
 
-  //Category to view all courses component for applying category
+  // Category to view all courses component for applying category
   globalAllCategory$ = new Subject<any>();
   globalAllCategory = this.globalAllCategory$.asObservable();
 
@@ -52,7 +52,7 @@ export class CommonServicesService {
 
   isLoad = true;
 
-  //While closing video palyer, pause video in course preview page
+  // While closing video palyer, pause video in course preview page
   pauseVideo$ = new Subject<any>();
   pauseVideo = this.pauseVideo$.asObservable();
 
@@ -67,7 +67,7 @@ export class CommonServicesService {
     });
   }
 
-  viewCurseByID(course_id,user_id) {
+  viewCurseByID(course_id, user_id) {
     return this.Apollo.query({
       query: viewcourse,
       variables: {
@@ -167,8 +167,8 @@ export class CommonServicesService {
     });
   }
   postGuildelineSearchData(category: any, sub_category: any, super_sub_category: any, course_language: any, course_mode: any,
-    author_details: any, partner_details: any,
-    pagenumber, perPage, publishedToDate, publishedFromDate) {
+                           author_details: any, partner_details: any,
+                           pagenumber, perPage, publishedToDate, publishedFromDate) {
     return this.Apollo.query({
       query: getCourseCategorySearch,
       variables: {
@@ -197,6 +197,17 @@ export class CommonServicesService {
     this.http.get(environment.systemIp).subscribe((res: any) => {
       // this.ipAddress = res.ip;
       localStorage.setItem('Systemip', res.ip);
+    });
+  }
+  
+  getAllNotifications(userId, userType, pagenumber) {
+    return this.Apollo.query({
+      query: getAllNotifications,
+      variables: {
+        userId,
+        userType,
+        pagenumber
+      }
     });
   }
 }
