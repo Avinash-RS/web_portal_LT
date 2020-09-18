@@ -26,7 +26,7 @@
 
 <ng-template #thenBlock>
   <div class="content">
-    <div *ngFor="let notification of notifications; last as isLast">
+    <div *ngFor="let notification of notifications | slice:0:5">
       <div class="notification" fxLayout="row" fxLayoutAlign="start center" mat-ripple>
         <div class="title" fxLayout="column" (click)="markAsRead(notification)">
           <a class="message wordWrap" *ngIf="notification.notifiedStatus != true" >{{ notification.notificationMessage }}</a>
