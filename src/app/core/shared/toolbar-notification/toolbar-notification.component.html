@@ -1,7 +1,7 @@
 <div class="toolbar-notification-container">
   <button mat-icon-button (click)="isOpen = !isOpen;" [ngClass]="[cssPrefix+'-btn']" [class.open]="isOpen">
     <mat-icon class="icon">notifications_none</mat-icon>
-    <span class="badge" *ngIf="notifications && notifications?.length !== 0">{{ notifications?.length }}</span>
+    <span class="badge">{{ unreadCount }}</span>
   </button>
 
 
@@ -12,7 +12,7 @@
         <div class="title" style="width: 90%;">
           <div class="name">Notifications</div>
           <div class="extra">
-            You have {{ notifications?.length }} new notifications</div>
+            You have {{ unreadCount }} new notifications</div>
         </div>
       </div>
       <div *ngIf="notifications?.length !== 0; then thenBlock else elseBlock;">
@@ -27,15 +27,15 @@
 <ng-template #thenBlock>
   <div class="content">
     <div *ngFor="let notification of notifications; last as isLast">
-      <div class="notification" fxLayout="row" fxLayoutAlign="start center" mat-ripple>
+      <div class="notification" fxLayout="row" fxLayoutAlign="start center" mat-ripple (click)="markAsRead(notification)">
         <div class="title" fxLayout="column" (click)="markAsRead(notification)">
           <a class="message wordWrap" *ngIf="notification.notifiedStatus != true" >{{ notification.notificationMessage }}</a>
           <a class="readed wordWrap" *ngIf="notification.notifiedStatus == true">{{ notification.notificationMessage }}</a>
           <div class="time">{{ notification.timeAgo }}</div>
         </div>
         <span fxFlex></span>
-        <mat-icon *ngIf="notification.notifiedStatus == true" class="close closeBtn" (click)="markAsRead(notification)" >drafts</mat-icon>
-        <mat-icon *ngIf="notification.notifiedStatus != true" class="close closeBtn" >markunread</mat-icon>
+        <mat-icon *ngIf="notification.notifiedStatus == true" class="close closeBtn">drafts</mat-icon>
+        <mat-icon *ngIf="notification.notifiedStatus != true" class="close closeBtn" (click)="markAsRead(notification)">markunread</mat-icon>
         
       </div>
       <div class="divider" *ngIf="!isLast"></div>

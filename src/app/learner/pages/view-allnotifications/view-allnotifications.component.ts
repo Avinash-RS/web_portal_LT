@@ -23,6 +23,8 @@ export class ViewAllnotificationsComponent implements OnInit {
   pagenumber = 1;
   totalCount: any;
   notificationMarkRead = [];
+  offsetVal: number;
+  pagevent: Event;
 
 
   constructor(public commonservice: CommonServicesService, public Lservice: LearnerServicesService) { }
@@ -52,6 +54,10 @@ markAsRead(notification, type) {
       this.viewAllnotifications();
     }
   });
+}
+next(e) {
+  this.pagenumber = e.pageIndex + 1;
+  this.viewAllnotifications();
 }
 
 }
