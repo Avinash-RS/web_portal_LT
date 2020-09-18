@@ -2,7 +2,7 @@
 <div class="row">
   <h2 class="head"><b>All notifications</b></h2>
 </div>
-<div class="row markAllbtn float-right">
+<div class="row markAllbtn float-right" *ngIf="notifications?.length > 0">
   <u class="pointer" (click)="markAsRead(notifications,'all')"><b>Mark all as read</b></u>
 </div>
 
@@ -44,10 +44,12 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<mat-paginator style="margin-right: 103px;" #paginator [length]="totalCount" [pageSize]="limit" (page)="next($event)"
+<div *ngIf="notifications?.length > 0">
+<mat-paginator class="pagination" #paginator [length]="totalCount" [pageSize]="limit" (page)="next($event)"
   showFirstLastButtons>
 </mat-paginator>
+</div>
 
-<!-- <div *ngIf="!notifications?.length">
-  No new notification
-</div> -->
+<div class="nonotifictaion" *ngIf="!notifications?.length">
+  No new notifications
+</div>
