@@ -18,7 +18,6 @@
         <div class="extra" *ngIf="unreadCount == 1">
           You have {{ unreadCount }} new notification</div>
       </div>
-      </div>
       <div *ngIf="notifications?.length !== 0; then thenBlock else elseBlock;">
       </div>
       <div class="footer" fxLayout="row" (click) = "viewall()" fxLayoutAlign="center center">
