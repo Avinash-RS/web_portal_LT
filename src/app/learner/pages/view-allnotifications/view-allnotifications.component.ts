@@ -23,8 +23,6 @@ export class ViewAllnotificationsComponent implements OnInit {
   pagenumber = 1;
   totalCount: any;
   notificationMarkRead = [];
-  offsetVal: number;
-  pagevent: Event;
 
 
   constructor(public commonservice: CommonServicesService, public Lservice: LearnerServicesService) { }
