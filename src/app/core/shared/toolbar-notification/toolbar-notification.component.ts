@@ -19,6 +19,9 @@ export class ToolbarNotificationComponent implements OnInit {
               public router: Router) { }
 
   ngOnInit() {
+    this.commonservice.notificationCount.subscribe((data: any) => {
+      this.unreadCount = data;
+  });
     const learnerDetail = JSON.parse(localStorage.getItem('UserDetails'));
     this.userId = learnerDetail.user_id;
     this.getNotification();

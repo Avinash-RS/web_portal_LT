@@ -52,6 +52,9 @@ export class CommonServicesService {
 
   isLoad = true;
 
+  notificationCount$ = new Subject<any>();
+  notificationCount = this.notificationCount$.asObservable();
+
   // While closing video palyer, pause video in course preview page
   pauseVideo$ = new Subject<any>();
   pauseVideo = this.pauseVideo$.asObservable();
