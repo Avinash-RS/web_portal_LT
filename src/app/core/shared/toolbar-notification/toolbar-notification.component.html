@@ -1,7 +1,8 @@
 <div class="toolbar-notification-container">
   <button mat-icon-button (click)="isOpen = !isOpen;" [ngClass]="[cssPrefix+'-btn']" [class.open]="isOpen">
     <mat-icon class="icon">notifications_none</mat-icon>
-    <span class="badge">{{ unreadCount }}</span>
+    <span *ngIf="unreadCount > 0" class="badge">{{ unreadCount }}</span>
+    <span *ngIf="unreadCount == 0" class="badge"></span>
   </button>
 
 
@@ -11,13 +12,16 @@
       <div class="header" fxLayout="row" fxLayoutAlign="space-between center">
         <div class="title" style="width: 90%;">
           <div class="name">Notifications</div>
-          <div class="extra">
+          <div class="extra" *ngIf="unreadCount > 1">
             You have {{ unreadCount }} new notifications</div>
         </div>
+        <div class="extra" *ngIf="unreadCount == 1">
+          You have {{ unreadCount }} new notification</div>
+      </div>
       </div>
       <div *ngIf="notifications?.length !== 0; then thenBlock else elseBlock;">
       </div>
-      <div *ngIf="notifications?.length !== 0;" class="footer" fxLayout="row" (click) = "viewall()" fxLayoutAlign="center center">
+      <div class="footer" fxLayout="row" (click) = "viewall()" fxLayoutAlign="center center">
         <div class="action">View all</div>
       </div>
     </div>

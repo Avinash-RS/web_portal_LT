@@ -10,7 +10,7 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tableContainer" *ngIf="notifications?.length">
 
   <ng-container matColumnDef="notificationName">
-    <th class="w-55" mat-header-cell *matHeaderCellDef><b class="font">Notification</b></th>
+    <th class="w-55" mat-header-cell *matHeaderCellDef><b class="font">Notifications</b></th>
     <td class="pointer" mat-cell *matCellDef="let element" (click)="markAsRead(element,'single')">
       <span class="read" *ngIf="element.notifiedStatus == true">
       {{element.notificationMessage}}
