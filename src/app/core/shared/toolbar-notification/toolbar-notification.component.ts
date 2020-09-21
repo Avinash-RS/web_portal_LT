@@ -14,6 +14,7 @@ export class ToolbarNotificationComponent implements OnInit {
   notifications = [];
   pagenumber = 1;
   notificationMarkRead = [];
+  unreadCount: any;
   constructor(public commonservice: CommonServicesService, public Lservice: LearnerServicesService ,
               public router: Router) { }
 
@@ -38,6 +39,7 @@ export class ToolbarNotificationComponent implements OnInit {
   getNotification() {
     this.commonservice.getAllNotifications(this.userId, 'learner', this.pagenumber).subscribe((result: any) => {
       this.notifications = result.data.getAllNotifications.data;
+      this.unreadCount = result.data.getAllNotifications.unReadCount;
     });
   }
   viewall() {

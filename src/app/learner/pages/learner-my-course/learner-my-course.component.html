@@ -341,17 +341,10 @@
                   </div>
                   <div class="col-6 col-sm-6 col-md-8 col-lg-7 coursenameCol">
                     <div class="f_size_18 f_wt_500  coursename">
-                      <span
-                        *ngIf="course.course_name?.length > 28"
-                        tooltip="{{ course.course_name }}"
-                        placement="right"
-                        >{{
-                          (course.course_name | slice: 0:28) + "..."
-                        }}</span
-                      >
-                      <span *ngIf="course.course_name?.length <= 28">{{
-                        course.course_name
-                      }}</span>
+                      <p  class="wordWrapMblView">
+                        {{course.course_name}}
+                    
+                    </p>
                       <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
                                           <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                       <span class="span-with-icon">
@@ -366,19 +359,12 @@
                       </span>
                     </div>
                     <div class="row">
-                      <div
-                        class="col-10 p-l-3 width_100 m-l-2 m-b-1 color_black2 f_size_14 descmc f_wt_400 h-50 pointer"
-                        
-                      >
-                        <p class="">
-                          {{
-                            course.course_description?.length > 100
-                              ? (course.course_description | slice: 0:100) +
-                                "..."
-                              : course.course_description
-                          }}
-                        </p>
-                      </div>
+                      <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400 h-30 pointer"
+                                                (click)="gotoDesc(course)">
+                                                <p>
+                                                    {{(course.course_description?.length > 50)? (course.course_description | slice:0:50)+'...':(course.course_description) }}
+                                                </p>
+                                            </div>
                     </div>
                     <div class="row startBtnRow">
                       <div class="col-12 col-sm-12 col-md-10 startBtnCol">
