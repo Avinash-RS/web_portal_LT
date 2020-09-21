@@ -91,9 +91,11 @@
         
         
                                                 </div>
-                                                <p class="coursenameT" [ngClass]="{'color-yellow-card-status': data.status === 'On going', 'color-grey-card-status':data.status === 'Completed','color-blue-card-status':data.status === 'Up Coming' }"> {{ data.activity_details.coursename }}</p>
-                                                <h5 class="m-l-4">{{ data.activity_details.topicname }}
-        
+                                                <p class="coursenameT" [ngClass]="{'color-yellow-card-status': data.status === 'On going', 'color-grey-card-status':data.status === 'Completed','color-blue-card-status':data.status === 'Up Coming' }"> {{ data.activity_details.modulename }}</p>
+                                                <!-- <h5 class="m-l-4"> <span class="f_wt_500 f_size_14">{{'Topic' | translate }} </span>:{{ data.activity_details.topicname }}
+                                                </h5> -->
+                                                <h5 class="m-l-4" ><span class="f_wt_500 f_size_14" >{{'Course' | translate }} </span>:{{ data.activity_details.coursename }}
+                                                    <span class="f_wt_500 f_size_14" style="margin-left: 60px;">{{'Topic' | translate }} : {{ data.activity_details.topicname }} </span>
                                                 </h5>
                                                 <h5 class="m-l-4"> <span class="f_wt_500 f_size_14">{{'Type' | translate }} </span>: <span class="lxp-text f_size_14 f_wt_400">{{  data.activity_details.activitytype}} </span>
                                                     <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon>
@@ -127,9 +129,9 @@
     
     
                                             </div>
-                                            <p class="coursenameT" [ngClass]="{'color-yellow-card-status': data.status === 'On going', 'color-grey-card-status':data.status === 'Completed','color-blue-card-status':data.status === 'Up Coming' }"> {{ data.activity_details.coursename }}</p>
-                                            <h5 class="m-l-4">{{ data.activity_details.topicname }}
-    
+                                            <p class="coursenameT" [ngClass]="{'color-yellow-card-status': data.status === 'On going', 'color-grey-card-status':data.status === 'Completed','color-blue-card-status':data.status === 'Up Coming' }"> {{ data.activity_details.modulename }}</p>
+                                            <h5 class="m-l-4" ><span class="f_wt_500 f_size_14" >{{'Course' | translate }} </span>:{{ data.activity_details.coursename }}
+                                                <span class="f_wt_500 f_size_14" style="margin-left: 60px;">{{'Topic' | translate }} : {{ data.activity_details.topicname }} </span>
                                             </h5>
                                             <h5 class="m-l-4"> <span class="f_wt_500 f_size_14">{{'Type' | translate }} </span>: <span class="lxp-text f_size_14 f_wt_400">{{  data.activity_details.activitytype}} </span>
                                                 <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon>
