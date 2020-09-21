@@ -31,6 +31,7 @@ export class LearnerMyCourseComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   @Output() focusChange: EventEmitter<MatTabChangeEvent>;
   [x: string]: any;
+  jobRoleId: any = '';
   strDate: Date = new Date();
   userDetailes: any;
   enrolledCourses: any = [];
@@ -101,7 +102,7 @@ export class LearnerMyCourseComponent implements OnInit {
     private router: Router, private dialog: MatDialog,
     public CommonServices: CommonServicesService) {
     this.userDetailes = this.gs.checkLogout();
-    this.getEnrolledCourses('', '', '', '', '');
+    this.getEnrolledCourses('', '', '', '', '', '');
     this.getScreenSize();
     this.getCountForCategories();
     this.getCountForJobRole();
@@ -171,7 +172,7 @@ export class LearnerMyCourseComponent implements OnInit {
                 this.loading = false;
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
-                this.getEnrolledCourses('', '', '', '', '');
+                this.getEnrolledCourses('', '', '', '', '', '');
                 this.getCountForJobRole();
                 this.getCountForJobRole();
               }
@@ -194,12 +195,27 @@ export class LearnerMyCourseComponent implements OnInit {
   //     this.categoryNamePrint = categoryName[0].categoryName;
   // }
   // }
-  getEnrolledCourses(event, catagoryId, catalougeId, jobRoleCategoryId, searchName) {
+  getEnrolledCourses(event, catagoryId, catalougeId, jobRoleCategoryId, searchName, jobroleCheck) {
+    if (jobroleCheck && this.jobRoleId) {
+      catalougeId = this.catalogueDetails.catalogueId;
+      jobRoleCategoryId = this.jobRoleId;
+    }
+    // if ( ) {
+    //   jobID = jobRoleCategoryId;
+    //   catlogueID = catalougeId
+    // }
+
+    // if (jobRoleCategoryId) {
+    //   jobID = jobRoleCategoryId;
+    // }
+    // if (catalougeId) {
+    //   catlogueID = catalougeId;
+    // }
     this.categoryNamePrint = '';
     let categoryName: any;
     if (this.catalogueDetails && catagoryId && !jobRoleCategoryId && !searchName) {
       this.selectedIndex = 0;
-      categoryName = this.categoryDetails.filter(function(data: any) {
+      categoryName = this.categoryDetails.filter(function (data: any) {
         return data.categoryId === catagoryId;
       });
       this.categoryNamePrint = categoryName[0].categoryName;
@@ -421,7 +437,7 @@ export class LearnerMyCourseComponent implements OnInit {
               if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
-                this.getEnrolledCourses('', '', '', '', '');
+                this.getEnrolledCourses('', '', '', '', '', '');
                 this.getCountForJobRole();
                 this.getCountForJobRole();
               }
@@ -448,9 +464,10 @@ export class LearnerMyCourseComponent implements OnInit {
     });
   }
 
-  dropdownValueChange(selectedValue, count) {
+  dropdownValueChange(selectedValue, count, jobroleId) {
     this.viewCourseClass = false;
     this.selectedJobRole = selectedValue;
+    this.jobRoleId = jobroleId;
     this.jobroleEnrollCount = count;
   }
 
@@ -497,8 +514,9 @@ export class LearnerMyCourseComponent implements OnInit {
   }
 
   resettingJobRole() {
-    this.selectedJobRole = 'job role';
-    this.getEnrolledCourses('', '', '', '', '');
+    this.selectedJobRole = 'Job Role';
+    this.jobRoleId = null;
+    this.getEnrolledCourses('', '', '', '', '', false);
   }
 }
 
