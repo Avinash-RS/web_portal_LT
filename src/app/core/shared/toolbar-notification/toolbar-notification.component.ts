@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router } from '@angular/router';
@@ -10,13 +10,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./toolbar-notification.component.scss']
 })
 export class ToolbarNotificationComponent implements OnInit {
+  isOpen = false;
   userId: any;
   notifications = [];
   pagenumber = 1;
   notificationMarkRead = [];
   unreadCount: any;
+
+  @HostListener('document:click', ['$event', '$event.target'])
+  onClick(event: MouseEvent, targetElement: HTMLElement) {
+    if (!targetElement) {
+      return;
+    }
+    const clickedInside = this.elementRef.nativeElement.contains(targetElement);
+    if (!clickedInside) {
+      this.isOpen = false;
+    }
+  }
   constructor(public commonservice: CommonServicesService, public Lservice: LearnerServicesService ,
-              public router: Router) { }
+              public router: Router, private elementRef: ElementRef) { }
 
   ngOnInit() {
     this.commonservice.notificationCount.subscribe((data: any) => {
@@ -35,9 +47,6 @@ export class ToolbarNotificationComponent implements OnInit {
       }
     });
   }
-  // removeNotification(id) {
-  //       this.notifications = this.notifications.filter((data) => data._id !== id);
-  // }
 
   getNotification() {
     this.commonservice.getAllNotifications(this.userId, 'learner', this.pagenumber).subscribe((result: any) => {
@@ -46,6 +55,7 @@ export class ToolbarNotificationComponent implements OnInit {
     });
   }
   viewall() {
+    this.isOpen = false;
     this.router.navigate(['/Learner/viewAllnotifications']);
   }
 }
