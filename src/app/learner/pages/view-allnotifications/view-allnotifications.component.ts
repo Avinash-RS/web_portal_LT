@@ -23,6 +23,7 @@ export class ViewAllnotificationsComponent implements OnInit {
   pagenumber = 1;
   totalCount: any;
   notificationMarkRead = [];
+  unreadCount: any;
 
 
   constructor(public commonservice: CommonServicesService, public Lservice: LearnerServicesService) { }
@@ -36,7 +37,10 @@ export class ViewAllnotificationsComponent implements OnInit {
   this.commonservice.getAllNotifications(this.userId, 'learner', this.pagenumber).subscribe((result: any) => {
     this.notifications = result.data.getAllNotifications.data;
     this.totalCount = result.data.getAllNotifications.totalCount;
+    this.unreadCount = result.data.getAllNotifications.unReadCount;
     this.dataSource = this.notifications;
+    const unreadCount = this.unreadCount;
+    this.commonservice.notificationCount$.next(unreadCount);
   });
 }
 markAsRead(notification, type) {
