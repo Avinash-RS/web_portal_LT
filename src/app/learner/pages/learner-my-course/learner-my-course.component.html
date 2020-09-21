@@ -4,7 +4,7 @@
     <div class="col-12">
       <mat-icon class="glyphicon">search</mat-icon>
       <input type="text" class="form-control search" [(ngModel)]="searchName"
-        (keyup)="getEnrolledCourses('', '', '', searchName)" placeholder="Search courses..." />
+        (keyup)="getEnrolledCourses('', '', '', searchName, '',false)" placeholder="Search courses..." />
     </div>
   </div>
   <div class="row w-100">
@@ -39,8 +39,8 @@
         </button>
         <div [ngClass]="viewCourseClass == true ? 'dropdown-content' : 'dropdown-content1'">
           <div class="contedrop" *ngFor="let role of jobRole" (click)="getEnrolledCourses('' ,
-          '',catalogueDetails.catalogueId, role.jobroleCategoryId, '',searchName);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount
-              )">
+          '',catalogueDetails.catalogueId, role.jobroleCategoryId,searchName, false);dropdownValueChange(role.jobroleCategoryName,role.jobroleEnrollCount,
+          role.jobroleCategoryId)">
             <p class="oneLineCat">
               {{ role.jobroleCategoryName | titlecase}}
            
@@ -174,7 +174,7 @@
           <div class="inner-addon searchDiv right-addon">
             <mat-icon class="glyphicon">search</mat-icon>
             <input type="text" (click)="searchExpand = !searchExpand" class="form-control search"
-              [(ngModel)]="searchName" (keyup)="getEnrolledCourses('', '', '', searchName)"
+              [(ngModel)]="searchName" (keyup)="getEnrolledCourses('', '', '', '', searchName,false)"
               placeholder="Search courses..." />
           </div>
         </div>
@@ -208,7 +208,7 @@
             <span></span>
             </div> -->
       <mat-tab-group #tabs (focusChange)="getEnrolledCourses($event ,'',
-      '', '', searchName);"
+      '', '', searchName, true);"
         [(selectedIndex)]="selectedIndex"
         mat-align-tabs="start"
         animationDuration="1000ms"
@@ -232,7 +232,7 @@
               <button
                 mat-menu-item
                 (click)="getEnrolledCourses('',
-                categorytab.categoryId, catalogueDetails.catalogueId, '', ''); "
+                categorytab.categoryId, catalogueDetails.catalogueId, '', '',false); "
                 *ngFor="let categorytab of categoryDetails">
               <span>{{ categorytab.categoryName | titlecase }}</span>
               </button>
@@ -349,13 +349,8 @@
                                           <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                       <span class="span-with-icon">
                         <mat-icon class="timer"> alarm_on </mat-icon>
-                        {{
-                          course?.course_duration != 1
-                            ? course.course_duration
-                              ? course.course_duration + " hours"
-                              : "1" + " hour"
-                            : "1" + "hour"
-                        }}
+                        {{ course?.course_duration != 1 ? course.course_duration ? course.course_duration 
+                          + " hours" : "1" + "hour" : "1" + "hour"}}
                       </span>
                     </div>
                     <div class="row">
@@ -654,7 +649,7 @@
               </button>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="getEnrolledCourses('',
-                      categorytab.categoryId, catalogueDetails.catalogueId, '', ''); "
+                      categorytab.categoryId, catalogueDetails.catalogueId,'', '', true); "
                   *ngFor="let categorytab of categoryDetails">
                 <span>{{ categorytab.categoryName  | titlecase }}</span>
                 </button>
@@ -944,10 +939,10 @@
               <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="
                     getEnrolledCourses( '',
-                      categorytab.categoryId, catalogueDetails.catalogueId,'', ''
+                      categorytab.categoryId, catalogueDetails.catalogueId,'', '',true
                     )
                   " *ngFor="let categorytab of categoryDetails">
-                  <span>{{ categorytab.categoryName  | titlecase }}</span>
+                  <span>{{ categorytab.categoryName  | titlecase }} {{jobRoleId}}</span>
                 </button>
               </mat-menu>
             </div>
@@ -1232,10 +1227,10 @@
               <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="
                     getEnrolledCourses('',
-                      categorytab.categoryId, catalogueDetails.catalogueId, '', ''
+                      categorytab.categoryId, catalogueDetails.catalogueId,'', '', true
                     )
                   " *ngFor="let categorytab of categoryDetails">
-                  <span>{{ categorytab.categoryName  | titlecase }}</span>
+                  <span>{{ categorytab.categoryName  | titlecase }} </span>
                 </button>
               </mat-menu>
             </div>
@@ -1524,11 +1519,8 @@
                   <mat-icon>more_horiz</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
-                  <button mat-menu-item (click)="
-                      getEnrolledCourses('',
-                        categorytab.categoryId, catalogueDetails.catalogueId, '', ''
-                      )
-                    " *ngFor="let categorytab of categoryDetails">
+                  <button mat-menu-item (click)="getEnrolledCourses('',categorytab.categoryId, catalogueDetails.catalogueId, '', '', false
+                      )" *ngFor="let categorytab of categoryDetails">
                     <span>{{ categorytab.categoryName  | titlecase }}</span>
                   </button>
                 </mat-menu>
@@ -1540,8 +1532,8 @@
                 getEnrolledCourses( $event, 
                   categorytab.categoryId, catalogueDetails.catalogueId,
                   '',
-                  searchName
-                )
+                  searchName, false
+                ); resettingJobRole();
               " 
                 matBadge="{{ categorytab.enrollCount }}"
                 matBadgeOverlap="false"
@@ -1780,7 +1772,7 @@
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="
             getEnrolledCourses('',
-              categorytab.categoryId, catalogueDetails.catalogueId, '' , ''
+              categorytab.categoryId, catalogueDetails.catalogueId, '' , '', false
             )
           " *ngFor="let categorytab of categoryDetails">
           <span>{{ categorytab.categoryName }}</span>
