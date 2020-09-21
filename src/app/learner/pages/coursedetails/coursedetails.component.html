@@ -16,17 +16,19 @@
                         <div class="col-4 Outine">
                             {{'Course Outline' | translate }}
                         </div>
-                        <div class="col-3 divider">
-                            |
+                        <div class="col-3 divider" >
+                          <span *ngIf="content?.coursetime.length > 0"> | </span>  
                         </div>
                         <div class="col-5">
                             <div class="row time">
                                 <div class="col-2">
-                                    <mat-icon class="alarmIcon">alarm</mat-icon>
+                                    <mat-icon *ngIf="content?.coursetime.length > 0" class="alarmIcon">alarm</mat-icon>
                                 </div>
                                 <div class="col-4">
+                                    <!-- Satish demo comment -->
+                                    <!-- ? content?.coursetime : '01:00:00' -->
                                     <span
-                                        class="courseTime">{{content?.coursetime ? content?.coursetime : '01:00:00'}}</span>
+                                        class="courseTime">{{content?.coursetime }}</span>
                                 </div>
                                 <div class="col-2">
                                     <mat-icon class="closeBtn" *ngIf="drawer.opened" (click)="drawer.close()">close</mat-icon>
@@ -80,12 +82,14 @@
                                             <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
                                                 mod.status === 'Process' ? 'colYellow' : 'colWhite'">
                                                 <ng-template matStepLabel>
-                                                    <span *ngIf="mod?.title?.length > 20" tooltip="{{mod?.title}}"
+                                                    <!-- // Satish comment  -->
+                                                    <!-- <span *ngIf="mod?.title?.length > 20" tooltip="{{mod?.title}}"
                                                         placement="right" class="topicnm"
                                                         (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)">
-                                                        {{(mod?.title  | slice:0:20)+'...'}}</span>
+                                                        {{(mod?.title  | slice:0:20)+'...'}}</span> -->
 
-                                                    <span *ngIf="mod?.title?.length <= 20" class="topicnm"
+                                                        <!-- *ngIf="mod?.title?.length <= 20" -->
+                                                    <span  class="topicnm"
                                                         (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)">
                                                         {{mod?.title}}</span>
 
@@ -129,12 +133,13 @@
 
 
                         <ng-template mat-tab-label>
-                            <label  class="pointer lab" *ngIf="course?.course_name?.length>28"
+                            <!-- Satish demo comment -->
+                            <!-- <label  class="pointer lab" *ngIf="course?.course_name?.length>28"
                                 matTooltip="{{course?.course_name}}" matTooltipPosition="below"
                                 matTooltipClass='custom-mat-tooltip'>{{(course?.course_name | slice:0:28)+'...'}}
-                            </label>
-
-                            <label class="pointer lab" *ngIf="course?.course_name?.length<=28">{{detailData?.course_name ? detailData?.course_name : course?.course_name}}
+                            </label> -->
+                            <!-- *ngIf="course?.course_name?.length<=28" -->
+                            <label class="pointer lab" >{{detailData?.course_name ? detailData?.course_name : course?.course_name}}
                             </label>
                         </ng-template>
 
