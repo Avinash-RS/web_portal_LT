@@ -349,13 +349,8 @@
                                           <button class="status" *ngIf="course?.course_type === 'primer_course'">Primer</button> -->
                       <span class="span-with-icon">
                         <mat-icon class="timer"> alarm_on </mat-icon>
-                        {{
-                          course?.course_duration != 1
-                            ? course.course_duration
-                              ? course.course_duration + " hours"
-                              : "1" + " hour"
-                            : "1" + "hour"
-                        }}
+                        {{ course?.course_duration != 1 ? course.course_duration ? course.course_duration 
+                          + " hours" : "1" + "hour" : "1" + "hour"}}
                       </span>
                     </div>
                     <div class="row">
