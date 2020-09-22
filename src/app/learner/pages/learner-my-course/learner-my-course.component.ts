@@ -94,6 +94,7 @@ export class LearnerMyCourseComponent implements OnInit {
   catagoryName: any;
   searchExpand = false;
   dropdownMenu = false;
+  disableDropdown: boolean;
 
   constructor(
     public elm: ElementRef,
@@ -112,6 +113,9 @@ export class LearnerMyCourseComponent implements OnInit {
   // this.translate.use(localStorage.getItem('language'));
   // }
   ngOnInit() {
+    this.CommonServices.openNotification.subscribe((data: any) => {
+      this.disableDropdown = data;
+  });
     this.selectedIndex = 1;
     this.gs.theme.subscribe(message =>
       this.componentCssClass = message
