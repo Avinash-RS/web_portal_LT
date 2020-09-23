@@ -65,6 +65,7 @@ export class ScormplayerComponent implements OnInit {
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
     this.passCourseId();
+    console.log('test');
     this.contentid = 'dfdfd';
     this.url = environment.scormUrl + 'scormPlayer.html?contentID=' +
     this.contentid + '&user_id=' + this.user_id + '&course_id=' + this.course_id;
