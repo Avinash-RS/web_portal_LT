@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef} from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router } from '@angular/router';
@@ -25,6 +25,7 @@ export class ToolbarNotificationComponent implements OnInit {
     const clickedInside = this.elementRef.nativeElement.contains(targetElement);
     if (!clickedInside) {
       this.isOpen = false;
+      this.commonservice.openNotification$.next(this.isOpen);
     }
   }
   constructor(public commonservice: CommonServicesService, public Lservice: LearnerServicesService ,
@@ -38,6 +39,11 @@ export class ToolbarNotificationComponent implements OnInit {
     this.userId = learnerDetail.user_id;
     this.getNotification();
   }
+
+    notificationOpen(data) {
+      this.isOpen = data;
+      this.commonservice.openNotification$.next(this.isOpen);
+    }
 
   markAsRead(notification) {
     this.notificationMarkRead.push(notification._id);

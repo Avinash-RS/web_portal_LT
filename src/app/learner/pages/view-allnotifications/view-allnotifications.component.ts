@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { MatTableDataSource } from '@angular/material';
 
 export interface PeriodicElement {
   notificationName: string;
@@ -16,8 +17,9 @@ export interface PeriodicElement {
 })
 export class ViewAllnotificationsComponent implements OnInit {
   notifications: any;
+  ELEMENT_DATA: PeriodicElement[] = [];
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   displayedColumns: string[] = ['notificationName', 'date', 'symbol'];
-  dataSource = this.notifications;
   limit = 10;
   userId: any;
   pagenumber = 1;
@@ -26,7 +28,8 @@ export class ViewAllnotificationsComponent implements OnInit {
   unreadCount: any;
 
 
-  constructor(public commonservice: CommonServicesService, public Lservice: LearnerServicesService) { }
+  constructor(public commonservice: CommonServicesService, public Lservice: LearnerServicesService,
+              private loader: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
     const learnerDetail = JSON.parse(localStorage.getItem('UserDetails'));
@@ -34,11 +37,13 @@ export class ViewAllnotificationsComponent implements OnInit {
     this.viewAllnotifications();
   }
   viewAllnotifications() {
-  this.commonservice.getAllNotifications(this.userId, 'learner', this.pagenumber).subscribe((result: any) => {
+    this.loader.show();
+    this.commonservice.getAllNotifications(this.userId, 'learner', this.pagenumber).subscribe((result: any) => {
     this.notifications = result.data.getAllNotifications.data;
     this.totalCount = result.data.getAllNotifications.totalCount;
     this.unreadCount = result.data.getAllNotifications.unReadCount;
     this.dataSource = this.notifications;
+    this.loader.hide();
     const unreadCount = this.unreadCount;
     this.commonservice.notificationCount$.next(unreadCount);
   });

@@ -119,8 +119,7 @@
         <div class="col-6 col-lg-4 text-right pr-0 availableCol">
           <div>
               <span (click)="triggerPopups()">
-            <button (mouseenter)="triggerPopup()" (mouseleave)="closePopup()" 
-            class="btn dropdown-toggle catDropdown float-right" type="button" 
+            <button [disabled]="disableDropdown" (mouseenter)="triggerPopup()" (mouseleave)="closePopup()" class="btn dropdown-toggle catDropdown float-right mr-3" type="button" 
             id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             >
           {{'Available Courses' | titlecase}}

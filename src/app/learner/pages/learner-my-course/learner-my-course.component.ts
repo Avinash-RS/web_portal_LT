@@ -96,6 +96,7 @@ export class LearnerMyCourseComponent implements OnInit {
   expandSearch = false;
   dropdownMenu = false;
   keyboardUp = true;
+  disableDropdown: boolean;
 
   constructor(
     public elm: ElementRef,
@@ -120,7 +121,9 @@ export class LearnerMyCourseComponent implements OnInit {
      if (this.screenWidth < 800) {
        this.keyboardUp = false;
      }
-     console.log('this.keyboardUp', this.keyboardUp);
+    this.CommonServices.openNotification.subscribe((data: any) => {
+      this.disableDropdown = data;
+  });
     this.selectedIndex = 1;
     this.gs.theme.subscribe(message =>
       this.componentCssClass = message
