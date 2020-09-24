@@ -55,6 +55,12 @@ export class CommonServicesService {
   notificationCount$ = new Subject<any>();
   notificationCount = this.notificationCount$.asObservable();
 
+  openAvailCourcePopup$ = new Subject<any>();
+  openAvailCourcePopup = this.openAvailCourcePopup$.asObservable();
+
+  closeAvailPopup$ = new Subject<any>();
+  closeAvailPopup = this.closeAvailPopup$.asObservable();
+  
   openNotification$ = new Subject<any>();
   openNotification = this.openNotification$.asObservable();
 
