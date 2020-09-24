@@ -93,7 +93,9 @@ export class LearnerMyCourseComponent implements OnInit {
   course: any;
   catagoryName: any;
   searchExpand = false;
+  expandSearch = false;
   dropdownMenu = false;
+  keyboardUp = true;
 
   constructor(
     public elm: ElementRef,
@@ -112,6 +114,13 @@ export class LearnerMyCourseComponent implements OnInit {
   // this.translate.use(localStorage.getItem('language'));
   // }
   ngOnInit() {
+    this.CommonServices.openAvailCourcePopup.subscribe((data: any) => {
+      this.availableCource = data;
+    });
+     if (this.screenWidth < 800) {
+       this.keyboardUp = false;
+     }
+     console.log('this.keyboardUp', this.keyboardUp);
     this.selectedIndex = 1;
     this.gs.theme.subscribe(message =>
       this.componentCssClass = message
@@ -143,6 +152,10 @@ export class LearnerMyCourseComponent implements OnInit {
       }]
     }];
 
+  }
+
+  clostAvailContainer(availableCource) {
+    this.CommonServices.closeAvailPopup$.next(availableCource);
   }
 
   getScreenSize(event?) {
@@ -419,6 +432,7 @@ export class LearnerMyCourseComponent implements OnInit {
     this.availableCourses = '';
     this.viewCourseClass = true;
     this.courseSearch = '';
+    this.CommonServices.closeAvailPopup$.next(false);
   }
   claimCourse(courseId) {
     let subCat = '';

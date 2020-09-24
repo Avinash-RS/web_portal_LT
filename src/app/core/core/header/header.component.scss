@@ -111,7 +111,7 @@ color:  $color-blank !important;
 
   .tab{
     text-align: right;
-    margin-right: 5%;
+    margin-right: 1%;
     width: 100%;
   }
 
@@ -145,4 +145,30 @@ color:  $color-blank !important;
 
 .colWhite{
 
+}
+
+.bookIcon {
+ display: none;
+}
+
+.btn1 {
+    display: block;
+  }
+
+@media screen and (min-width: 200px) and (max-width: 767.98px) {
+    .btn1 {
+      display: none;
+    }
+    
+    .bookIcon {
+        display: block !important;
+        position: relative;
+        font-size: 22px;
+        border: none;
+        height: 50px;
+        padding: 4px;
+        color: #1f1a17;
+        background: #FFCC00 !important;
+        cursor: pointer;
+    }
 }

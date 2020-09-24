@@ -13,7 +13,7 @@
   border: none;
   border-radius: 0px;
   border: 1px solid #898989;
-  width: 166px;
+  width: 100%;
 }
 .dropdown-toggle:hover {
   background-color: $lxp-theme-green !important;
@@ -955,9 +955,6 @@ hr {
 .availableCont {
   display: none;
 }
-.catDropdowns {
-display: none;
-}
 
 .parrentAccordian {
   border-bottom: 1px solid #E0E0E0;
@@ -1005,10 +1002,6 @@ display: none;
   padding-right: 5px;
 }
 
-.mobileSearchRow {
-  display: none;
-}
-
 :host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
   display: none !important;
 }
@@ -1018,12 +1011,61 @@ display: none;
   word-wrap:break-word !important;
 }
 
+.catDropdown {
+  margin-right: 1rem!important;
+}
+
+.myCourseSearch {
+  display: none;
+}
+
+.mobileSearchRow {
+  display: block;
+}
+
+.mobileIcons {
+  display: none;
+}
+
+.mobileRespoForum {
+  display: none;
+}
+
+.forumIcon {
+  color: #878686;
+}
+
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
+  .mobileIcons {
+    display: block;
+  }
 
+  .mobileRespoForum {
+    display: block;
+    width: 70%;
+    float: right;
+    margin-top: 1.2rem;
+  }
+
+  .alarmcursor {
+    float: left;
+  }
+
+.span-with-icon {
+  display: none;
+}
+
+.startBtnRow {
+  display: none;
+}
+
+  .dropdown-content {
+    min-width: 225px !important;
+  }
 
  .wordWrapMblView{
-    width: 270px;
+    width: 100%;
      word-wrap:break-word !important;
   }
 
@@ -1035,7 +1077,9 @@ display: none;
 }
 
   .roleDropdDwnBtn {
-    bottom: 25px !important;
+    bottom: 0px !important;
+    padding-bottom: 0px !important;
+    margin-left: 0px !important;
   }
 
   .myC-head {
@@ -1051,15 +1095,19 @@ display: none;
     font-weight: 500;
     
   }
+  .searchIcons {
+    margin-left: 0.5rem;
+  }
+  
   .catalogDropdownCol {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    padding-right: 1.5rem;
+    
+    padding-left: 0px !important;
+    // margin-top: 0.5rem;
+    // margin-bottom: 0.5rem;
+    // padding-right: 1.5rem;
   }
-  .mobileSearchRow {
-    display: block;
-  }
-  .arrowIcon .material-icons {
+
+   .arrowIcon .material-icons {
     float: right;
     margin-top: 1%;
   }
@@ -1129,23 +1177,12 @@ display: none;
   display: none;
 }
 
-.catDropdowns {
-  margin-right: -1rem;
-  display: block;
-  padding: 2px !important;
-  float: right;
-  border: none;
-  color: #495057;
-  font-size: 14px !important;
-  width: 135px !important;
-  background-color: white;
-}
- 
   #cdk-overlay-0 {
     width: 95%;
   }
   .dropdown {
-    float: right;
+    width: 100%;
+    text-align: right;
     margin-right: 0rem !important;
   }
 
@@ -1173,7 +1210,12 @@ display: none;
   }
   .catalogTitle {
     margin: auto;
+    padding-top: 0.5rem !important ;
     height: 3rem !important;
+  }
+
+  .myModuleRow {
+    border-right: 1px solid #8989897a !important;
   }
 
   .aligned-with-icon {
@@ -1187,7 +1229,7 @@ display: none;
   }
 
   .startBtnicon {
-    display: block;
+    display: none;
     position: relative;
     font-size: 12px;
     left: 0px;
@@ -1208,6 +1250,7 @@ display: none;
 
   .alarmCol {
     text-align: right;
+    padding-left: 5px;
     padding-right: 20px;
   }
 
@@ -1278,10 +1321,12 @@ display: none;
   }
 
   .roleBtn {
-   min-width: 7rem !important;
-   width: auto !important;
-   padding: 2px !important;
-   border: none !important;
+   min-width: 100% !important;
+   padding: 1px !important;
+   border-bottom: 1px solid #898989 !important;
+   border-top: none !important;
+   border-right: none !important;
+   border-left: none !important;
   }
 
   .roleDropdDwnBtn {
@@ -1291,8 +1336,17 @@ display: none;
     // left: 48% !important;
   }
 
+  .matBadgeForum .mat-badge-medium .mat-badge-content { 
+    width: 15px !important;
+    height: 15px !important;
+    line-height: 16px !important;
+    background-color: #C02222;
+    right: 4px !important;
+    top: -20px !important;
+  }
+
   .courceNameTag {
-    width: 200px !important; 
+    width: 100% !important; 
   }
 
 .coursenameCol {
@@ -1316,13 +1370,14 @@ display: none;
 
 .search {
   width: 100% !important;
+  padding-left: 3rem;
 }
 
 .glyphicon {
   display: block;
   position: absolute;
-  float: right;
-  right: 1rem;
+  float: left;
+  left: 2rem;
   top: 0.7rem;
 }
 // Temporary css 
@@ -1342,6 +1397,26 @@ display: none;
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
+  // .searchDiv1 {
+  //   display: block;
+  // }
+
+  // .searchDiv {
+  //   display: none;
+  // }
+
+  .availableCol {
+    padding-left: 0px !important;
+  }
+
+  .right-addon .glyphicon {
+    right: 0.5rem !important;
+    top: 0.1rem !important;
+}
+
+  .catDropdown {
+    margin-right: 0.5rem !important;
+  }
   .module{
     font-size: 14px;
     font-weight: 500;
@@ -1405,8 +1480,8 @@ display: none;
   }
 
   .roleDropdDwnBtn{
-    margin: 0.5rem 23% 0% 0% !important;
-    right: 13% !important;
+    margin: 0rem 23% 0% 0% !important;
+    right: 6% !important;
     bottom: 0% !important;
   }
 
@@ -1416,7 +1491,7 @@ display: none;
   }
 
   .search {
-    width: 40% !important;
+    width: 100% !important;
     margin-left: 0px !important;
   }
 
@@ -1432,9 +1507,7 @@ display: none;
     border: 1px solid #C02222;
     box-shadow: 0 0 0 0.05rem #C02222 !important;
   }
-  .catalogTitle {
-    margin: auto;
-  }
+
   .primerFlage{
     height: 75px;
     position: absolute;
@@ -1516,11 +1589,6 @@ display: none;
 //   }
 
 // }
-@media only screen and (width: 1440px) {
-  .roleDropdDwnBtn {
-    right: 53% !important;
-  }
-}
 
 @media only screen and (width: 1280px) {
   .btl-alin {
@@ -1529,10 +1597,6 @@ display: none;
   .searchCol {
     padding-right: 15px;
   }
-
-  .roleDropdDwnBtn {
-    right: 47% !important;
-  }
  
   :host ::ng-deep #mat-tab-label-0-5 {
     display: none !important;
@@ -1540,9 +1604,12 @@ display: none;
 }
 
 @media only screen and (width: 1024px) {
+  .myC-head {
+    width: 12rem !important;
+  }
 
-  .roleDropdDwnBtn {
-    right: 34% !important;
+  .dropdown {
+    left: 2rem;
   }
 
   .searchCol {
@@ -1550,13 +1617,21 @@ display: none;
   }
 
   .right-addon .glyphicon {
-    right: 15rem !important;
+    right: 2rem !important;
 }
 
   .search {
-    width: 53% !important;
-    margin-left: 10px !important;
+    width: 95% !important;
+    margin-left: 0px !important;
     float: left !important;
+  }
+
+  .dropdown-toggle {
+    width: 10.5rem !important;
+  }
+
+  .catDropdown {
+    margin-right: 0.5rem !important;
   }
 
   :host ::ng-deep #mat-tab-label-0-3 {
@@ -1767,10 +1842,15 @@ display: none;
 .size {
   font-size: large;
 }
+
+.searchCol {
+  padding-right: 0px;
+}
+
 .search {
-  width: 38%;
+  width: 80%;
   float: right;
-  margin-left: 38px;
+  // margin-left: 38px;
   // position: relative;
   // left: 69px;
   // top: 1px;
@@ -2074,9 +2154,9 @@ display: none;
   padding-bottom: 4px; 
   position: relative!important;
   /* right: 29% !important; */
-  bottom: 32px !important;
+  // bottom: 32px !important;
   /* left: 15%; */
-  margin-left: 17%;
+  // margin-left: 17%;
   //  margin-bottom: 0%;
 }
 .roleBtn{
@@ -2172,7 +2252,12 @@ display: none;
 }
 .searchDiv {
   right: 12px;
+  // display: block;
 }
+
+// .searchDiv1 {
+//   display: none;
+// }
 
 .inner-addon .glyphicon {
   position: absolute;
@@ -2190,7 +2275,7 @@ display: none;
   position: absolute;
 }
 
-.right-addon .glyphicon {right: 14rem;}
+.right-addon .glyphicon {right: 1rem; top: 0rem;}
 .right-addon input { padding-right: 30px; }
 .right-addon .searchIcon { right: 30px;}
 
@@ -2320,5 +2405,6 @@ li {
 
  .catalogTitle {
     height: 60px !important;
+    padding-top: 0.8rem;
   }
   /* tooltip config end by mani */

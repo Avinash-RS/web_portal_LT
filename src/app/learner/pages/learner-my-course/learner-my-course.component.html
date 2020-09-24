@@ -1,18 +1,22 @@
 <app-header></app-header>
-<div class="myCourse" (click)="closePopup()">
-  <div class="row mobileSearchRow">
-    <div class="col-12">
-      <mat-icon class="glyphicon">search</mat-icon>
+<div (click)="closePopup()">
+  <div class="row">
+    <div  [ngClass]="expandSearch ? 'mobileSearchRow': 'myCourseSearch'"  class="col-12">
+      <mat-icon class="glyphicon" (click)="expandSearch = !expandSearch">keyboard_backspace</mat-icon>
       <input type="text" class="form-control search" [(ngModel)]="searchName"
         (keyup)="getEnrolledCourses('', '', '', searchName, '',false)" placeholder="Search courses..." />
     </div>
   </div>
-  <div class="row w-100">
-    <div class="col-8 col-sm-8 col-md-7 col-lg-7 catalogTitle" *ngIf="jobRole?.length < 1">
+  <div *ngIf="!expandSearch" class="row w-100 mr-0 ml-0">
+    <div class="col-10 col-sm-10 col-md-7 col-lg-7 catalogTitle" *ngIf="jobRole?.length < 1">
       <div class="f_size_16 myC-head"><span class="module"> <b>My Courses</b></span></div>
     </div>
-    <div class="col-8 col-sm-8 col-md-7 col-lg-7 catalogTitle" *ngIf="jobRole?.length > 0">
-      <div class="f_size_16 myC-head"><span class="module">My Modules For</span>&nbsp;<b>:</b></div>
+    <div class="col-10 col-sm-10 col-md-7 col-lg-7 pl-0 pr-0 catalogTitle" *ngIf="jobRole?.length > 0">
+      <div class="row w-100 ml-0 mr-0">
+      <div class="col-5 col-md-5 col-lg-2 pl-0 pr-0">
+      <div class="f_size_16 myC-head"><lable class="module">My Modules For</lable>&nbsp;<b>:</b></div>
+    </div>
+    <div class="col-7 col-md-7 col-lg-10 pl-0 myModuleRow">
       <div class="dropdown roleDropdDwnBtn">
         <button class="roleBtn" (click)="dropdownSelect()">
           <span containerClass="customClass"
@@ -53,8 +57,22 @@
         </div>
       </div>
     </div>
+  </div>
+    </div>
 
-    <div class="col-4 col-sm-4 col-md-5 col-lg-5 catalogDropdownCol">
+    <div class="col-2 col-sm-2 col-md-5 col-lg-5 catalogDropdownCol">
+     <span class="mobileIcons"><mat-icon class="searchIcons" (click)="expandSearch = !expandSearch">search</mat-icon>
+      <mat-icon class="filterIcon" [matMenuTriggerFor]="menu">filter_alt</mat-icon></span>
+      <mat-menu #menu="matMenu">
+        <button class="matTabMenu"
+          mat-menu-item
+          (click)="getEnrolledCourses('',
+          categorytab.categoryId, catalogueDetails.catalogueId, '', '',false); "
+          *ngFor="let categorytab of categoryDetails">
+        <span>{{ categorytab.categoryName | titlecase }}</span>
+        </button>
+      </mat-menu>
+      
       <!-- <span>
       
             <mat-button class="available-course-btn">
@@ -87,18 +105,22 @@
             </div>
           </div> -->
 
-      <div class="row">
-        <div class="col-12 text-right pr-0">
+      <div class="row ml-0 mr-0">
+        <div class="col-6 col-lg-8 searchCol text-right">
 
           <!---------------Multi-level dropdown------------->
-
+          <div class="inner-addon searchDiv right-addon">
+            <input type="text" (click)="searchExpand = !searchExpand" class="form-control search"
+              [(ngModel)]="searchName" (keyup)="getEnrolledCourses('', '', '', '', searchName,false)"
+              placeholder="Search courses..." />
+              <mat-icon class="glyphicon">search</mat-icon>
+          </div>
+        </div>
+        <div class="col-6 col-lg-4 text-right pr-0 availableCol">
           <div>
-            <button (click)="openAvailableCource()" class="catDropdowns">
-              {{'Available Courses' | titlecase}}
-                <mat-icon class="dropdownicon">expand_more</mat-icon>
-              </button>
               <span (click)="triggerPopups()">
-            <button (mouseenter)="triggerPopup()" (mouseleave)="closePopup()" class="btn dropdown-toggle catDropdown float-right mr-3" type="button" 
+            <button (mouseenter)="triggerPopup()" (mouseleave)="closePopup()" 
+            class="btn dropdown-toggle catDropdown float-right" type="button" 
             id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             >
           {{'Available Courses' | titlecase}}
@@ -171,12 +193,12 @@
             </ul>
           </div>
 
-          <div class="inner-addon searchDiv right-addon">
+          <!-- <div class="inner-addon searchDiv right-addon">
             <mat-icon class="glyphicon">search</mat-icon>
             <input type="text" (click)="searchExpand = !searchExpand" class="form-control search"
               [(ngModel)]="searchName" (keyup)="getEnrolledCourses('', '', '', '', searchName,false)"
               placeholder="Search courses..." />
-          </div>
+          </div> -->
         </div>
       </div>
       <div>
@@ -215,28 +237,11 @@
         class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0"
       >
       <mat-tab>
-        <div class="row">
-          <div class="col-6 m-auto">
+        <div class="row mt-3">
+          <div class="col-12 m-auto">
             <span class="menuBtnHoriz">{{
               categoryNamePrint | titlecase
             }}</span>
-          </div>
-          <div class="col-6">
-            <button
-              class="float-right menuBtnHoriz"
-              mat-icon-button
-              [matMenuTriggerFor]="menu">
-              <mat-icon>more_horiz</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button
-                mat-menu-item
-                (click)="getEnrolledCourses('',
-                categorytab.categoryId, catalogueDetails.catalogueId, '', '',false); "
-                *ngFor="let categorytab of categoryDetails">
-              <span>{{ categorytab.categoryName | titlecase }}</span>
-              </button>
-            </mat-menu>
           </div>
         </div>
 
@@ -339,7 +344,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-6 col-sm-6 col-md-8 col-lg-7 coursenameCol">
+                  <div class="col-12 col-sm-12 col-md-8 col-lg-7 coursenameCol">
                     <div class="f_size_18 f_wt_500  coursename">
                       <p  class="wordWrapMblView">
                         {{course.course_name}}
@@ -458,7 +463,7 @@
                     </div>
                   </div>
 
-                  <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
+                  <div class="col-12 col-sm-12 col-md-6 col-lg-2 alarmCol">
                     <div class="aligned-with-icon alarmcursor">
                       <mat-icon class="timer"> alarm_on </mat-icon>
                       {{
@@ -469,6 +474,12 @@
                           : "1" + "hour"
                       }}
                     </div>
+                    <span class="mobileRespoForum">
+                      <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> text_snippet </mat-icon>
+                      <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> forum </mat-icon>
+                      <mat-icon *ngIf="!keyboardUp" class="forumIcon" (click)="keyboardUp = ! keyboardUp"> keyboard_arrow_down </mat-icon>
+                      <mat-icon *ngIf="keyboardUp" class="forumIcon" (click)=" keyboardUp = !keyboardUp"> keyboard_arrow_up </mat-icon>
+                    </span>
                     <div class="startBtnicon">
                       <button
                         mat-stroked-button
@@ -637,26 +648,6 @@
         </div>
       </mat-tab>
         <mat-tab>
-          <div class="row">
-            <div class="col-6 m-auto">
-              <span class="menuBtnHoriz">{{
-                categoryNamePrint | titlecase
-              }}</span>
-            </div>
-            <div class="col-6">
-              <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon>more_horiz</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="getEnrolledCourses('',
-                      categorytab.categoryId, catalogueDetails.catalogueId,'', '', true); "
-                  *ngFor="let categorytab of categoryDetails">
-                <span>{{ categorytab.categoryName  | titlecase }}</span>
-                </button>
-              </mat-menu>
-            </div>
-          </div>
-
           <ng-template matTabLabel>
             <div>
               <span
@@ -711,7 +702,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-6 col-sm-6 col-md-8 col-lg-7 coursenameCol">
+                    <div class="col-12 col-sm-12 col-md-8 col-lg-7 coursenameCol">
                       <div class="f_size_18 f_wt_500  coursename">
                         <p class="courceNameTag">
                           {{course.course_name}}
@@ -730,7 +721,7 @@
                         </span>
                       </div>
                       <div class="row">
-                        <div class="col-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400 h-30 pointer"
+                        <div class="col-12 col-lg-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400 h-30 pointer"
                          >
                           <p>
                             {{(course.course_description?.length > 50)? (course.course_description | slice:0:50)+'...':(course.course_description) }}
@@ -802,7 +793,7 @@
                       </div>
                     </div>
 
-                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-2 alarmCol">
                       <div class="aligned-with-icon alarmcursor">
                         <mat-icon class="timer"> alarm_on </mat-icon>
                         {{
@@ -813,6 +804,12 @@
                             : "1" + "hour"
                         }}
                       </div>
+                      <span class="mobileRespoForum">
+                        <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> text_snippet </mat-icon>
+                        <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> forum </mat-icon>
+                        <mat-icon *ngIf="!keyboardUp" class="forumIcon" (click)="keyboardUp = ! keyboardUp"> keyboard_arrow_down </mat-icon>
+                        <mat-icon *ngIf="keyboardUp" class="forumIcon" (click)=" keyboardUp = !keyboardUp"> keyboard_arrow_up </mat-icon>
+                      </span>
                       <div class="startBtnicon">
                         <button mat-stroked-button *ngIf="
                             course?.coursePlayerStatus?.status !== 'completed'
@@ -842,7 +839,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="course.batchCourse == true">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="course.batchCourse == true && keyboardUp">
                   <div class="row m-l-2p f_size_12">
                     <div class="col-3">
                       <div>
@@ -926,27 +923,6 @@
           </div>
         </mat-tab>
         <mat-tab>
-          <div class="row">
-            <div class="col-6 m-auto">
-              <span class="menuBtnHoriz">{{
-                categoryNamePrint | titlecase
-              }}</span>
-            </div>
-            <div class="col-6">
-              <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon>more_horiz</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="
-                    getEnrolledCourses( '',
-                      categorytab.categoryId, catalogueDetails.catalogueId,'', '',true
-                    )
-                  " *ngFor="let categorytab of categoryDetails">
-                  <span>{{ categorytab.categoryName  | titlecase }} {{jobRoleId}}</span>
-                </button>
-              </mat-menu>
-            </div>
-          </div>
           <ng-template matTabLabel>
             <span
               class="tabsc"
@@ -1000,7 +976,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-6 col-sm-6 col-md-8 col-lg-7">
+                    <div class="col-12 col-sm-12 col-md-8 col-lg-7">
                       <div class="f_size_18 f_wt_500 ">
                         <p style="width: 350px; word-wrap:break-word !important;">
                           {{course.course_name}}
@@ -1090,7 +1066,7 @@
                       </div>
                     </div>
 
-                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-2 alarmCol">
                       <div class="aligned-with-icon alarmcursor">
                         <mat-icon class="timer"> alarm_on </mat-icon>
                         {{
@@ -1101,6 +1077,12 @@
                             : "1" + "hour"
                         }}
                       </div>
+                      <span class="mobileRespoForum">
+                        <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> text_snippet </mat-icon>
+                        <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> forum </mat-icon>
+                        <mat-icon *ngIf="!keyboardUp" class="forumIcon" (click)="keyboardUp = ! keyboardUp"> keyboard_arrow_down </mat-icon>
+                        <mat-icon *ngIf="keyboardUp" class="forumIcon" (click)=" keyboardUp = !keyboardUp"> keyboard_arrow_up </mat-icon>
+                      </span>
                       <div class="startBtnicon">
                         <button mat-stroked-button *ngIf="
                             course?.coursePlayerStatus?.status !== 'completed'
@@ -1214,27 +1196,6 @@
           </div>
         </mat-tab>
         <mat-tab>
-          <div class="row">
-            <div class="col-6 m-auto">
-              <span class="menuBtnHoriz">{{
-                categoryNamePrint | titlecase
-              }}</span>
-            </div>
-            <div class="col-6">
-              <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon>more_horiz</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="
-                    getEnrolledCourses('',
-                      categorytab.categoryId, catalogueDetails.catalogueId,'', '', true
-                    )
-                  " *ngFor="let categorytab of categoryDetails">
-                  <span>{{ categorytab.categoryName  | titlecase }} </span>
-                </button>
-              </mat-menu>
-            </div>
-          </div>
           <ng-template matTabLabel>
             <span
               class="tabsc"
@@ -1286,9 +1247,9 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-6 col-sm-6 col-md-8 col-lg-7">
+                    <div class="col-12 col-sm-12 col-md-8 col-lg-7">
                       <div class="f_size_18 f_wt_500 ">
-                        <p style="width: 350px; word-wrap:break-word !important;">
+                        <p style="width: 100%; word-wrap:break-word !important;">
                           {{course.course_name}}
                         </p>
                         <!-- <button class="status" *ngIf="course?.course_type === 'free_course'">Free</button>
@@ -1376,7 +1337,7 @@
                       </div>
                     </div>
 
-                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 alarmCol">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-2 alarmCol">
                       <div class="aligned-with-icon alarmcursor">
                         <mat-icon class="timer"> alarm_on </mat-icon>
                         {{
@@ -1387,6 +1348,13 @@
                             : "1" + "hour"
                         }}
                       </div>
+                      <span class="mobileRespoForum">
+                        <!-- <span class="matBadgeForum" matBadge="1"></span> -->
+                        <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> text_snippet </mat-icon>
+                        <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> forum </mat-icon>
+                        <mat-icon *ngIf="!keyboardUp" class="forumIcon" (click)="keyboardUp = ! keyboardUp"> keyboard_arrow_down </mat-icon>
+                        <mat-icon *ngIf="keyboardUp" class="forumIcon" (click)=" keyboardUp = !keyboardUp"> keyboard_arrow_up </mat-icon>
+                      </span>
                       <div class="startBtnicon">
                         <button mat-stroked-button *ngIf="
                             course?.coursePlayerStatus?.status !== 'completed'
@@ -1508,24 +1476,6 @@
         <!-- <div class=""> -->
         <ng-container *ngFor="let categorytab of categoryDetails">
           <mat-tab *ngIf="categorytab.enrollCount">
-            <div class="row">
-              <div class="col-6 m-auto">
-                <span class="menuBtnHoriz">{{
-                  categoryNamePrint | titlecase
-                }}</span>
-              </div>
-              <div class="col-6">
-                <button class="float-right menuBtnHoriz" mat-icon-button [matMenuTriggerFor]="menu">
-                  <mat-icon>more_horiz</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                  <button mat-menu-item (click)="getEnrolledCourses('',categorytab.categoryId, catalogueDetails.catalogueId, '', '', false
-                      )" *ngFor="let categorytab of categoryDetails">
-                    <span>{{ categorytab.categoryName  | titlecase }}</span>
-                  </button>
-                </mat-menu>
-              </div>
-            </div>
             <ng-template matTabLabel>
               <span
                 class="tabsc" (click)="
@@ -1947,7 +1897,7 @@
           <p>Available Courses</p>
         </div>
         <div class="col-6 text-right">
-          <mat-icon class="arrowIcon mr-2" aria-hidden="false" (click)="availableCource = false; 
+          <mat-icon class="arrowIcon mr-2" aria-hidden="false" (click)="clostAvailContainer(availableCource = false); 
           isExpandCourseTemp = false; expandActivityNameTemp = '';isExpChild = false">clear</mat-icon>
         </div>
       </div>
@@ -1987,10 +1937,10 @@
               </div>
               <mat-icon class="arrowIcon float-right " aria-hidden="false"
                 *ngIf="!category.subCategory && category.categoryName !== 'vocational'" (click)="getCoureBasedOnCatalog(dropdownCatDetails, category, '', '');viewCourse(category,
-                    previewDialog,category.categoryName,category.totalCount)">keyboard_arrow_right</mat-icon>
+                    previewDialog,category.categoryName,category.totalCount)">keyboard_arrow_down</mat-icon>
               <mat-icon class="arrowIcon float-right" aria-hidden="false" *ngIf="expandActivityNameTemp !== category.categoryId &&
                   category.subCategory && category.categoryName == 'vocational'" (click)="isExpandCourseTemp && expandActivityNameTemp == category.categoryId ? onexpTemp(category, category.categoryId, false)
-                    : onexpTemp(category, category.categoryId, true)">keyboard_arrow_right</mat-icon>
+                    : onexpTemp(category, category.categoryId, true)">keyboard_arrow_down</mat-icon>
               <mat-icon class="arrowIcon float-right" aria-hidden="false"
                 *ngIf="isExpandCourseTemp && expandActivityNameTemp == category.categoryId && category.categoryName == 'vocational'"
                 (click)="
@@ -2019,7 +1969,7 @@
                           </span>
                          <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" 
                           *ngIf="subCatet.totalCount == 0" 
-                          >keyboard_arrow_right</mat-icon>
+                          >keyboard_arrow_down</mat-icon>
                           <span *ngIf="subCatet.totalCount > 0">
                           <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" 
                           *ngIf="!isExpChild || expandActivityNameChildTemp !== subCatet.subCategoryId" (click)="
@@ -2036,7 +1986,7 @@
                                   subCatet.subCategoryId,
                                   true
                                 )
-                          ">keyboard_arrow_right</mat-icon></span>
+                          ">keyboard_arrow_down</mat-icon></span>
                           <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" *ngIf="
                             isExpChild &&
                             subCatet.superSubCategory &&

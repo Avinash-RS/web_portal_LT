@@ -55,6 +55,11 @@ export class CommonServicesService {
   notificationCount$ = new Subject<any>();
   notificationCount = this.notificationCount$.asObservable();
 
+  openAvailCourcePopup$ = new Subject<any>();
+  openAvailCourcePopup = this.openAvailCourcePopup$.asObservable();
+
+  closeAvailPopup$ = new Subject<any>();
+  closeAvailPopup = this.closeAvailPopup$.asObservable();
   // While closing video palyer, pause video in course preview page
   pauseVideo$ = new Subject<any>();
   pauseVideo = this.pauseVideo$.asObservable();
