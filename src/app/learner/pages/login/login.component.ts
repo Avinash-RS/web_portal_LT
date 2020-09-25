@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('role', 'learner');
               localStorage.setItem('token', loginresult.data.login.message.token);
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
+              sessionStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
               // if false, then need to update profile
               //Afser'schanges on Profile not Mandtory change no #4 Committed condition on and added
               //page route MyCourse

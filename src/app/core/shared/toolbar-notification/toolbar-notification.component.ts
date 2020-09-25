@@ -35,7 +35,7 @@ export class ToolbarNotificationComponent implements OnInit {
     this.commonservice.notificationCount.subscribe((data: any) => {
       this.unreadCount = data;
   });
-    const learnerDetail = JSON.parse(localStorage.getItem('UserDetails'));
+    const learnerDetail = JSON.parse(sessionStorage.getItem('UserDetails'));
     this.userId = learnerDetail.user_id;
     this.getNotification();
   }

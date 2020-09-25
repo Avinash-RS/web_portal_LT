@@ -32,7 +32,7 @@ export class ViewAllnotificationsComponent implements OnInit {
               private loader: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
-    const learnerDetail = JSON.parse(localStorage.getItem('UserDetails'));
+    const learnerDetail = JSON.parse(sessionStorage.getItem('UserDetails'));
     this.userId = learnerDetail.user_id;
     this.viewAllnotifications();
   }
