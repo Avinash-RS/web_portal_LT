@@ -69,7 +69,8 @@
           (click)="getEnrolledCourses('',
           categorytab.categoryId, catalogueDetails.catalogueId, '', '',false); "
           *ngFor="let categorytab of categoryDetails">
-        <span>{{ categorytab.categoryName | titlecase }}</span>
+        <span>{{ categorytab.categoryName | titlecase }} </span>
+        <span class="dynamicBagdes" matBadge="{{categorytab.totalCount}}" matBadgeOverlap="false"></span>
         </button>
       </mat-menu>
       
