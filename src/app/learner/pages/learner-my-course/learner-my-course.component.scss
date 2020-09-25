@@ -1041,6 +1041,20 @@ hr {
     display: block;
   }
 
+  .dynamicBagdes {
+    background: #5c6873 !important;
+    float: right;
+    right: 2rem;
+    top: 1.7rem !important;
+    & .mat-badge-content {
+      background: $lxp-gray !important;
+    }
+  }
+
+ ::ng-deep .mat-menu-panel {
+    min-width: 180px !important;
+  }
+
   .mobileRespoForum {
     display: block;
     width: 70%;
@@ -1220,7 +1234,7 @@ hr {
 
   .aligned-with-icon {
     left: 0px;
-    margin-top: 5%;
+    margin-top: 4%;
   }
 
   .courseHover {
@@ -1370,6 +1384,7 @@ hr {
 
 .search {
   width: 100% !important;
+  transition: width 2s;
   padding-left: 3rem;
 }
 
@@ -1962,12 +1977,7 @@ hr {
 // ::ng-deep .mat-menu-content {
 //   min-width: 146px !important;
 // }
-// ::ng-deep .mat-menu-panel{
-//   // margin-top: 60px !important;
-//   position: relative;
-//   top: 55px !important;
-//   right: 3px !important;
-// }
+
 .matBadge {
   position: relative;
   float: right;
