@@ -25,14 +25,18 @@ export class HeaderComponent implements OnInit {
   screenHeight: number;
   screenWidth: number;
   show = true;
+  isAvailOpen = false;
   @HostBinding('class') componentCssClass;
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
               private http: HttpClient, public overlayContainer: OverlayContainer,
               public router: Router, private gs: GlobalServiceService) {
-    this.getScreenSize();
+    // this.getScreenSize();
   }
 
   ngOnInit() {
+    this.services.closeAvailPopup$.subscribe((data: any) => {
+      this.isAvailOpen = data;
+    });
     this.activeUrl = this.router.url;
     this.orgDetails = JSON.parse(localStorage.getItem('organizationDetails')) || null;
     this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
@@ -53,13 +57,13 @@ export class HeaderComponent implements OnInit {
       this.initials = Name.charAt(0) + Name.charAt(Name.length - 1);
     }
   }
-  getScreenSize(event?) {
-    this.screenHeight = window.innerHeight;
-    this.screenWidth = window.innerWidth;
-    if (this.screenWidth < 800) {
-      this.show = false;
-    }
-  }
+  // getScreenSize(event?) {
+  //   this.screenHeight = window.innerHeight;
+  //   this.screenWidth = window.innerWidth;
+  //   if (this.screenWidth < 800) {
+  //     this.show = false;
+  //   }
+  // }
 
   navigateProfile() {
     this.router.navigate(['Learner/profile']);
@@ -125,5 +129,9 @@ export class HeaderComponent implements OnInit {
   }
   navigateMyCourse() {
     this.router.navigate(['/Learner/MyCourse']);
+  }
+
+  openAvailableCources(isAvailOpen) {
+    this.services.openAvailCourcePopup$.next(isAvailOpen);
   }
 }
