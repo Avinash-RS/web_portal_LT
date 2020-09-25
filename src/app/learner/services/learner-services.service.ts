@@ -591,13 +591,14 @@ export class LearnerServicesService {
       }
     });
   }
-  bulkclaimcourse( id, user_id, category_id) {
+  bulkclaimcourse( id, user_id, category_id, categoryName) {
     return this.Apollo.query({
       query: bulkclaimcourse,
       variables: {
         id,
         user_id,
-        category_id
+        category_id,
+        categoryName
       }
     });
   }
@@ -792,13 +793,16 @@ export class LearnerServicesService {
       }
     });
   }
-  claimcourse(id, user_id, course_id) {
+
+  claimcourse(id, user_id, course_id, courseName, categoryName) {
     return this.Apollo.query({
       query: claimcourse,
       variables: {
         id,
         user_id,
-        course_id
+        course_id,
+        courseName,
+        categoryName
       }
     });
   }
