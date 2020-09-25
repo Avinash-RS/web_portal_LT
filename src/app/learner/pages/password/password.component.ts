@@ -123,6 +123,7 @@ export class PasswordComponent implements OnInit {
                 localStorage.setItem('remember_me', 'true');
                 localStorage.setItem('token', loginresult.data.login.message.token);
                 localStorage.setItem('UserToken', JSON.stringify(data.data.user_registration_done.token));
+                sessionStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
                 const ps = btoa(this.passwordForm.value.password);
                 localStorage.setItem('ps', ps);
                 this.loader.hide();
