@@ -24,6 +24,7 @@ export class RegistrationComponent implements OnInit {
   titleData = [];
   // is_staff: boolean;
   fullname: any;
+  registerSuccess = false;
   constructor(
     public translate: TranslateService,
     private formBuilder: FormBuilder,
@@ -72,12 +73,15 @@ export class RegistrationComponent implements OnInit {
     this.registerForm.updateValueAndValidity();
     if (data.data.user_registration) {
       if (data.data.user_registration.success === 'true') {
+        console.log('success msg');
+        this.registerSuccess = true;
         this.toastr.success(data.data.user_registration.message, null);
         this.loader.hide();
         this.registerForm.setErrors(null);
       } else {
         this.toastr.error(data.data.user_registration.message, null);
         this.loader.hide();
+        this.registerSuccess = false;
       }
      } else {
       this.toastr.warning('Please try after sometime', null);
