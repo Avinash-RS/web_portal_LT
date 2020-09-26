@@ -4,15 +4,16 @@
     <!-- <span class="headTit">&nbsp;LARSEN & TOUBRO</span> -->
   <span class="spacer"></span>
   <div class="tab" *ngIf="show">
-      <button class="btn1 float-right"  [ngClass]="activeUrl === '/Learner/MyCourse' ? 'colgreen' : 
+    <button  class="btn1 float-right" [ngClass]="activeUrl === '/Learner/calendar' ? 'colgreen' : 
+    'colWhite'" md-raised-button  routerLink="/Learner/calendar" routerLinkActive="active">
+  <mat-icon fontSet="material-icons-outlined " class="headicon animated animatedFadeInUp fadeInUp" inline=true> event_note </mat-icon>
+  Calendar </button>
+      <button class="btn1 float-right mr-4"  [ngClass]="activeUrl === '/Learner/MyCourse' ? 'colgreen' : 
       'colWhite'" md-raised-button routerLink="/Learner/MyCourse" >
         <mat-icon fontSet="material-icons-outlined" class="headicon animated animatedFadeInUp fadeInUp " inline=true> local_library </mat-icon> My Courses </button>
         <span style="margin-left: 3%;"></span>
         <!-- Afser's change on Profile not reuired removed *ngIf="loginDetails.is_profile_updated"-->
-        <button  class="btn1 float-right mr-4" [ngClass]="activeUrl === '/Learner/calendar' ? 'colgreen' : 
-        'colWhite'" md-raised-button  routerLink="/Learner/calendar" routerLinkActive="active">
-      <mat-icon fontSet="material-icons-outlined " class="headicon animated animatedFadeInUp fadeInUp" inline=true> event_note </mat-icon>
-      Calendar </button>
+       
 </div>
 <button class="bookIcon" (click)="openAvailableCources(isAvailOpen = !isAvailOpen)" md-raised-button routerLinkActive="active">
   <mat-icon fontSet="material-icons-outlined" class="bookIcon" inline=true> 
