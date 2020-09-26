@@ -98,6 +98,9 @@ export class LearnerMyCourseComponent implements OnInit {
   keyboardUp = true;
   disableDropdown: boolean;
 
+  nextPageLabel     = '';
+  previousPageLabel = '';
+
   constructor(
     public elm: ElementRef,
     public translate: TranslateService,
@@ -179,8 +182,14 @@ export class LearnerMyCourseComponent implements OnInit {
 
   claimAll() {
     this.loading = true;
+    let categoryPopupName = '';
+    if (this.categoryPopupData !== 'college connect' && this.categoryPopupData !== 'pro certification') {
+      categoryPopupName = 'vocational';
+    } else {
+      categoryPopupName = this.categoryPopupData;
+    }
     this.learnerService.bulkclaimcourse(this.userDetailes._id, this.userDetailes.user_id,
-      this.categoryyName.superSubCategoryId).subscribe((bulkclaimcourse: any) => {
+      this.categoryyName.superSubCategoryId, categoryPopupName).subscribe((bulkclaimcourse: any) => {
         if (bulkclaimcourse.data.bulkclaimcourse.success === true) {
           this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, this.categoryData.categoryId,
             this.userDetailes._id, this.subchildData.subCategoryId, this.categoryyName.superSubCategoryId).subscribe((course: any) => {
@@ -422,6 +431,7 @@ export class LearnerMyCourseComponent implements OnInit {
     this.loading = true;
     this.viewCourseClass = false;
     this.categoryPopupData = categoryname;
+    console.log('this.categoryPopupData', this.categoryPopupData);
     this.categoryCount = categorycount;
 
     this.dialog.open(templateRef, {
@@ -437,7 +447,13 @@ export class LearnerMyCourseComponent implements OnInit {
     this.courseSearch = '';
     this.CommonServices.closeAvailPopup$.next(false);
   }
-  claimCourse(courseId) {
+  claimCourse(course) {
+    let categoryPopupName = '';
+    if (this.categoryPopupData !== 'college connect' && this.categoryPopupData !== 'pro certification') {
+      categoryPopupName = 'vocational';
+    } else {
+      categoryPopupName = this.categoryPopupData;
+    }
     let subCat = '';
     let superSubCat = '';
     if (this.subCatId) {
@@ -447,9 +463,10 @@ export class LearnerMyCourseComponent implements OnInit {
       superSubCat = this.categoryyName.superSubCategoryId;
     }
     this.learnerService.claimcourse(this.userDetailes._id, this.userDetailes.user_id,
-      courseId).subscribe((data: any) => {
+      course.course_id, course.course_name , categoryPopupName).subscribe((data: any) => {
         if (data && data.data && data.data.claimcourse && data.data.claimcourse.success) {
-          this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, this.categoryData.categoryId,
+          this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, 
+            this.categoryData.categoryId,
             this.userDetailes._id, subCat, superSubCat).subscribe((course: any) => {
               if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
