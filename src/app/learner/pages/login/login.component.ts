@@ -113,6 +113,7 @@ export class LoginComponent implements OnInit {
   onSelection(lang) {
     const selectedLanguage = lang.value;
     localStorage.setItem('language', selectedLanguage);
+    this.translate.use(localStorage.getItem('language'));
   }
 
 }

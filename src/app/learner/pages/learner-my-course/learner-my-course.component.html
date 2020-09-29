@@ -255,7 +255,7 @@
                   : onGoingCourseCount
               }}"
               matBadgeOverlap="false"
-              >{{ "Ongoing" }}</span
+              >{{ 'Ongoing' | translate }}</span
             >
           </div>
         </ng-template>
@@ -376,7 +376,7 @@
                         >
                           <mat-icon class="btn-icon">description</mat-icon>
                           <span
-                            >Assignments ({{ course.assignmentCount }})</span
+                            >{{'Assignments'| translate }} ({{ course.assignmentCount }})</span
                           >
                         </button>
 
@@ -387,7 +387,7 @@
                         >
                           <mat-icon class="btn-icon">forum</mat-icon>
                           <span
-                            >Discussion Forum ({{ course.forumCount }})</span
+                            >{{'Discussion Forum'| translate }} ({{ course.forumCount }})</span
                           >
                         </button>
                       </div>
@@ -427,7 +427,7 @@
                             >replay</mat-icon
                           >
                           <span class="cap f_wt_400 m-t-m-2">
-                            {{ "Replay" }}&nbsp;
+                            {{ "Replay" | translate }}&nbsp;
                           </span>
                         </button>
                       </div>
@@ -456,7 +456,7 @@
                             }}</b
                           >
                           |
-                          <u><b>Live classroom</b></u>
+                          <u><b>{{'Live classroom'| translate }}</b></u>
                           <mat-icon class="video">videocam</mat-icon>
                         </div>
                       </div>
@@ -638,9 +638,7 @@
                 />
               </div>
               <div class="col-8 col-md-11 no_pl errorboxx">
-                <span style="font-size: medium">{{
-                  "You have no ongoing courses at the moment." | translate
-                }}</span>
+                <span style="font-size: medium">{{ "You have no ongoing courses at the moment." | translate }}</span>
               </div>
             </div>
           </mat-card>
@@ -656,7 +654,7 @@
                   jobRoleSelected === true
                     ? jobOnGoingCourseCount
                     : onGoingCourseCount
-                }}" matBadgeOverlap="false">{{ "Ongoing" }}</span>
+                }}" matBadgeOverlap="false">{{ "Ongoing" | translate  }}</span>
             </div>
           </ng-template>
 
@@ -913,9 +911,7 @@
                   <img alt="Course Img" src="assets/noCourseImg.jpg" class="courseImgs" />
                 </div>
                 <div class="col-8 col-md-11 no_pl errorboxx">
-                  <span style="font-size: medium">{{
-                    "You have no ongoing courses at the moment." | translate
-                  }}</span>
+                  <span style="font-size: medium">{{ "You have no ongoing courses at the moment." | translate }}</span>
                 </div>
               </div>
             </mat-card>
@@ -1201,7 +1197,7 @@
               class="tabsc"
               matBadge="{{
                 jobRoleSelected === true ? jobAllCourseCount : allCourseCount
-              }}" matBadgeOverlap="false">{{ "All" }}</span>
+              }}" matBadgeOverlap="false">{{ "All" | translate }}</span>
           </ng-template>
           <div *ngFor="let course of enrolledCourses; let j = index">
             <mat-card class="coursebg card12" matRipple>
@@ -1774,7 +1770,7 @@
             class=" btl-alin blue_clr cap pointer m-t-05">
             <!-- <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon> -->
             <span class="cap f_wt_400 m-t-m-2">
-              CLAIM ALL
+              {{'CLAIM ALL'| translate }}
             </span>
           </button>
         </div>
@@ -1817,11 +1813,11 @@
                   <div class="col-12 center_align">
                     <button mat-stroked-button class="blue_clr btnredClass" *ngIf="course.clamaiedStatus == 'false'"
                       (click)="claimCourse(course)">
-                      <mat-icon class="mt-1">queue_play_next</mat-icon> Claim
+                      <mat-icon class="mt-1">queue_play_next</mat-icon> {{'Claim'| translate }}
                     </button>
                     <button mat-stroked-button class="blue_clr btnredClass" [disabled]="course.clamaiedStatus == 'true'"
                       *ngIf="course.clamaiedStatus == 'true'">
-                      <mat-icon class="mt-1 claimIcon">queue_play_next</mat-icon> Claimed
+                      <mat-icon class="mt-1 claimIcon">queue_play_next</mat-icon> {{'Claimed'| translate }}
                     </button>
                   </div>
                 </div>
