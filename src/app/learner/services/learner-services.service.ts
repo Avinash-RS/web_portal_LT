@@ -44,7 +44,6 @@ import {
   singleBatchInfo,
   ViewAllThreadDataBid,
   getCountForJobroleCategories,
-  
 } from './operations/learner_query';
 
 import {
