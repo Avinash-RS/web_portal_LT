@@ -993,6 +993,22 @@ hr {
 .matBadgeAvail {
   position: relative;
   background: #5c6873 !important;
+  top: 1.7rem !important;
+  float: right;
+  right: 5rem;
+
+  & .mat-badge-content {
+    background: $lxp-gray !important;
+  }
+}
+
+.matBadgeAvailSuperSub {
+  position: relative;
+  background: #5c6873 !important;
+  top: 0.6rem !important;
+  float: right;
+  right: 5rem;
+
   & .mat-badge-content {
     background: $lxp-gray !important;
   }
@@ -1097,7 +1113,8 @@ hr {
   }
 
   .myC-head {
-    margin-top: 6% !important;
+    margin-top: 2% !important;
+    margin-left: 0% !important;
   }
 
  :host ::ng-deep .matInkBar .mat-ink-bar {
