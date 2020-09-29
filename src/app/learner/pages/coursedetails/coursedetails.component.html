@@ -152,14 +152,13 @@
                     <!-- about the course tab -->
                     <mat-tab label="About the course" class="aboutCourseTab">
                         <div [ngClass]="drawer.opened==true?'drawerOpnAboutCourse':'drawerClsAboutCourse'">
-                            <h3 class="head-h1">Course description</h3>
+                            <h3 class="head-h1">{{'Course description' | translate}</h3>
                             <div class="vertical"></div>
 
                             <div class="curInclu">{{ 'This course includes :' | translate}}</div>
                             <div class="row display_flex">
                                 <div style="max-width: 196px;">
-                                    <span class="font-color;padding: 5px">{{content?.totalResourseCount}} {{'downloadable
-                                                resources'| translate}}</span>
+                                    <span class="font-color;padding: 5px">{{content?.totalResourseCount}} {{'downloadable resources'| translate}}</span>
                                 </div>
 
                                 <span *ngIf="course?.course_mode"> &nbsp; |&nbsp;</span>

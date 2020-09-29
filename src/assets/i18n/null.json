@@ -804,6 +804,14 @@
  "Click here to change Email Id" : "Click here to change Email Id",
 
  "Previous" : "Previous",
- "Today" : "Today"
+ "Today" : "Today",
+
+ "Claim":"Claim",
+ "Claimed" : "Claimed",
+ "CLAIM ALL" : "CLAIM ALL",
+ "You have no ongoing courses at the moment." : "You have no ongoing courses at the moment.",
+ "Live classroom" : "Live classroom",
+ "Discussion Forum" : "Discussion Forum",
+ "You have no completed courses at the moment." : "You have no completed courses at the moment."
 
 }
