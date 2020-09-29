@@ -1816,7 +1816,7 @@
                 <div class="row">
                   <div class="col-12 center_align">
                     <button mat-stroked-button class="blue_clr btnredClass" *ngIf="course.clamaiedStatus == 'false'"
-                      (click)="claimCourse(course.course_id)">
+                      (click)="claimCourse(course)">
                       <mat-icon class="mt-1">queue_play_next</mat-icon> Claim
                     </button>
                     <button mat-stroked-button class="blue_clr btnredClass" [disabled]="course.clamaiedStatus == 'true'"

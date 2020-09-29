@@ -870,8 +870,8 @@ $batch_id: String, $batch_name: String){
   }
 }`;
 export const claimcourse = gql`
-  mutation claimcourse($id: String, $user_id: String, $course_id: [String]) {
-    claimcourse(id: $id, user_id: $user_id, course_id: $course_id) {
+  mutation claimcourse($id: String, $user_id: String, $course_id: [String], $courseName: String, $categoryName: String) {
+    claimcourse(id: $id, user_id: $user_id, course_id: $course_id, courseName: $courseName, categoryName:$categoryName) {
       message
       success
     }
@@ -941,8 +941,8 @@ export const  save_attendies = gql`
 `;
 
 export const bulkclaimcourse = gql`
-  mutation bulkclaimcourse($id: String, $user_id: String, $category_id: String,) {
-    bulkclaimcourse(id: $id, user_id: $user_id, category_id: $category_id) {
+  mutation bulkclaimcourse($id: String, $user_id: String, $category_id: String, $categoryName: String) {
+    bulkclaimcourse(id: $id, user_id: $user_id, category_id: $category_id, categoryName: $categoryName) {
       message
       success
     }
