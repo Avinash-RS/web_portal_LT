@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, HostListener, TemplateRef, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
-import { Router } from '@angular/router';
+import { Router , ActivatedRoute} from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog, MatTabChangeEvent } from '@angular/material';
@@ -103,6 +103,7 @@ export class LearnerMyCourseComponent implements OnInit {
 
   constructor(
     public elm: ElementRef,
+    private route: ActivatedRoute,
     public translate: TranslateService,
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
     private router: Router, private dialog: MatDialog,
@@ -399,16 +400,28 @@ export class LearnerMyCourseComponent implements OnInit {
   }
 
   getCountForCategories() {
+    // let dropDownData = [];
+    // this.learnerService.getCountForCategories(this.userDetailes._id).subscribe((data: any) => {
+    //   if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
+    //     this.catalogueDetails = data.data.getCountForCategories.data;
+    //     this.categoryDetails = data.data.getCountForCategories.data.categories;
+    //     dropDownData = [data.data.getCountForCategories.data];
+    //     this.dropDownCategoryDetails = dropDownData[0];
+    //     this.categories = dropDownData[0].categories;
+    //     this.dropdownCatDetails = dropDownData[0];
+    //   }
+    // });
     let dropDownData = [];
-    this.learnerService.getCountForCategories(this.userDetailes._id).subscribe((data: any) => {
-      if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
-        this.catalogueDetails = data.data.getCountForCategories.data;
-        this.categoryDetails = data.data.getCountForCategories.data.categories;
-        dropDownData = [data.data.getCountForCategories.data];
-        this.dropDownCategoryDetails = dropDownData[0];
-        this.categories = dropDownData[0].categories;
-        this.dropdownCatDetails = dropDownData[0];
-      }
+    this.route.data.subscribe((result: any) => {
+      console.log('after response', result.data.data.getCountForCategories.data);
+      if (result.data && result.data.data && result.data.data.getCountForCategories && result.data.data.getCountForCategories.data) {
+            this.catalogueDetails = result.data.data.getCountForCategories.data;
+            this.categoryDetails = result.data.data.getCountForCategories.data.categories;
+            dropDownData = [result.data.data.getCountForCategories.data];
+            this.dropDownCategoryDetails = dropDownData[0];
+            this.categories = dropDownData[0].categories;
+            this.dropdownCatDetails = dropDownData[0];
+          }
     });
   }
   getCoureBasedOnCatalog(catalogue, category, subchild, superChild) {

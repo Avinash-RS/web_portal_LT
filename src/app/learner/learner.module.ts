@@ -64,6 +64,7 @@ import { ViewAllnotificationsComponent } from './pages/view-allnotifications/vie
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {MatMenuModule} from '@angular/material/menu';
+import { LearnermycourseService } from './pages/learner-my-course/learnermycourse.service';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -127,6 +128,9 @@ const routes: Routes = [
   {
     path: 'MyCourse',
     component: LearnerMyCourseComponent,
+    resolve: {
+      data: LearnermycourseService
+      },
     canActivate: [AuthGuard],
     data: { animation: 'Learner  MyCourse' }
   },
