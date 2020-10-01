@@ -480,8 +480,8 @@
                     <span class="mobileRespoForum">
                       <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> text_snippet </mat-icon>
                       <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> forum </mat-icon>
-                      <mat-icon *ngIf="!keyboardUp" class="forumIcon" (click)="keyboardUp = ! keyboardUp"> keyboard_arrow_down </mat-icon>
-                      <mat-icon *ngIf="keyboardUp" class="forumIcon" (click)=" keyboardUp = !keyboardUp"> keyboard_arrow_up </mat-icon>
+                      <mat-icon *ngIf="!keyboardUp || course.course_id !== opencourceId" class="forumIcon" aria-rowindex="" (click)="keyboardUp = ! keyboardUp; downArrow(course)"> keyboard_arrow_down </mat-icon>
+                        <mat-icon *ngIf="keyboardUp && course.course_id == opencourceId" class="forumIcon" (click)=" keyboardUp = !keyboardUp; upArrow(course)"> keyboard_arrow_up </mat-icon>
                     </span>
                     <div class="startBtnicon">
                       <button
@@ -524,10 +524,7 @@
                   </div>
                 </div>
               </div>
-              <div
-                class="col-12 col-sm-12 col-md-12 col-lg-5"
-               
-              >
+              <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="keyboardUp && course.course_id == opencourceId" >
                 <div class="row m-l-2p f_size_12">
                   <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
                     <div>
@@ -836,8 +833,8 @@
                       <span class="mobileRespoForum">
                         <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> text_snippet </mat-icon>
                         <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> forum </mat-icon>
-                        <mat-icon *ngIf="!keyboardUp" class="forumIcon" (click)="keyboardUp = ! keyboardUp"> keyboard_arrow_down </mat-icon>
-                        <mat-icon *ngIf="keyboardUp" class="forumIcon" (click)=" keyboardUp = !keyboardUp"> keyboard_arrow_up </mat-icon>
+                        <mat-icon *ngIf="!keyboardUp || course.course_id !== opencourceId" class="forumIcon" aria-rowindex="" (click)="keyboardUp = ! keyboardUp; downArrow(course)"> keyboard_arrow_down </mat-icon>
+                        <mat-icon *ngIf="keyboardUp && course.course_id == opencourceId" class="forumIcon" (click)=" keyboardUp = !keyboardUp; upArrow(course)"> keyboard_arrow_up </mat-icon>
                       </span>
                       <div class="startBtnicon">
                         <button mat-stroked-button *ngIf="
@@ -868,7 +865,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="keyboardUp">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="keyboardUp && course.course_id == opencourceId">
                   <div class="row m-l-2p f_size_12">
                     <div class="col-3" *ngIf="course.batchCourse == true">
                       <div>
@@ -1130,8 +1127,8 @@
                       <span class="mobileRespoForum">
                         <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> text_snippet </mat-icon>
                         <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> forum </mat-icon>
-                        <mat-icon *ngIf="!keyboardUp" class="forumIcon" (click)="keyboardUp = ! keyboardUp"> keyboard_arrow_down </mat-icon>
-                        <mat-icon *ngIf="keyboardUp" class="forumIcon" (click)=" keyboardUp = !keyboardUp"> keyboard_arrow_up </mat-icon>
+                        <mat-icon *ngIf="!keyboardUp || course.course_id !== opencourceId" class="forumIcon" aria-rowindex="" (click)="keyboardUp = ! keyboardUp; downArrow(course)"> keyboard_arrow_down </mat-icon>
+                        <mat-icon *ngIf="keyboardUp && course.course_id == opencourceId" class="forumIcon" (click)=" keyboardUp = !keyboardUp; upArrow(course)"> keyboard_arrow_up </mat-icon>
                       </span>
                       <div class="startBtnicon">
                         <button mat-stroked-button *ngIf="
@@ -1162,7 +1159,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-5" >
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="keyboardUp && course.course_id == opencourceId">
                   <div class="row m-l-2p f_size_12">
                     <div class="col-3" *ngIf="course.batchCourse == true">
                       <div>
@@ -1426,8 +1423,8 @@
                         <!-- <span class="matBadgeForum" matBadge="1"></span> -->
                         <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> text_snippet </mat-icon>
                         <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> forum </mat-icon>
-                        <mat-icon *ngIf="!keyboardUp" class="forumIcon" (click)="keyboardUp = ! keyboardUp"> keyboard_arrow_down </mat-icon>
-                        <mat-icon *ngIf="keyboardUp" class="forumIcon" (click)=" keyboardUp = !keyboardUp"> keyboard_arrow_up </mat-icon>
+                        <mat-icon *ngIf="!keyboardUp || course.course_id !== opencourceId" class="forumIcon" aria-rowindex="" (click)="keyboardUp = ! keyboardUp; downArrow(course)"> keyboard_arrow_down </mat-icon>
+                        <mat-icon *ngIf="keyboardUp && course.course_id == opencourceId" class="forumIcon" (click)=" keyboardUp = !keyboardUp; upArrow(course)"> keyboard_arrow_up </mat-icon>
                       </span>
                       <div class="startBtnicon">
                         <button mat-stroked-button *ngIf="
@@ -1458,7 +1455,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-5" >
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="keyboardUp && course.course_id == opencourceId">
                   <div class="row m-l-2p f_size_12">
                     <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
                       <div>
