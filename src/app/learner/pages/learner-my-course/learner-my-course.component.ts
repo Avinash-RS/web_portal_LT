@@ -565,5 +565,9 @@ export class LearnerMyCourseComponent implements OnInit {
     this.jobRoleId = null;
     this.getEnrolledCourses('', '', '', '', '', false);
   }
+  resettingJobRoledata() {
+    this.selectedJobRole = 'Job Role';
+    this.jobRoleId = null;
+  }
 }
 
