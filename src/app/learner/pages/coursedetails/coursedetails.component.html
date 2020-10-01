@@ -17,18 +17,18 @@
                             {{'Course Outline' | translate }}
                         </div>
                         <div class="col-3 divider" >
-                          <span *ngIf="content?.coursetime.length > 0"> | </span>  
+                          <span> | </span>  
                         </div>
                         <div class="col-5">
                             <div class="row time">
                                 <div class="col-2">
-                                    <mat-icon *ngIf="content?.coursetime.length > 0" class="alarmIcon">alarm</mat-icon>
+                                    <mat-icon class="alarmIcon">alarm</mat-icon>
                                 </div>
                                 <div class="col-4">
                                     <!-- Satish demo comment -->
                                     <!-- ? content?.coursetime : '01:00:00' -->
                                     <span
-                                        class="courseTime">{{content?.coursetime }}</span>
+                                        class="courseTime">{{content?.coursetime? content?.coursetime : '01:00:00'}}</span>
                                 </div>
                                 <div class="col-2">
                                     <mat-icon class="closeBtn" *ngIf="drawer.opened" (click)="drawer.close()">close</mat-icon>
@@ -54,7 +54,11 @@
                                         </div>
                                         <div>
                                             <div class="moduleHead">
-                                                <div class="modhead">{{res?.title }}</div>
+                                                <div class="modhead">
+                                                    <p *ngIf="res?.title.length >= 67" class="moduleName" tooltip="{{res?.title}}" placement="right">{{res?.title | slice:0:64}}...</p>
+                                                    <p *ngIf="res?.title.length < 67"class="moduleName">{{res?.title}}</p>
+                                               
+                                                </div>
                                             </div>
                                         </div>
                                   
@@ -95,8 +99,15 @@
 
                                                         <!-- *ngIf="mod?.title?.length <= 20" -->
                                                     <span  class="topicnm"
-                                                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)">
-                                                        {{mod?.title}}</span>
+                                                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)" >
+                                                        <!-- {{mod?.title}} -->
+                                                 <p class="titleName" *ngIf="mod?.title.length >= 65" tooltip="{{mod?.title}}" placement = "right">
+                                                    {{mod?.title | slice:0:64}}...
+                                                 </p> 
+                                                 <p class="titleName" *ngIf="mod?.title.length < 65">
+                                                    {{mod?.title}}
+                                                 </p> 
+                                                    </span>
 
                                                 </ng-template>
                                             </mat-step>
