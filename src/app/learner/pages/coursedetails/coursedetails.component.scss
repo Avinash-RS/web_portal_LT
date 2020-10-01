@@ -819,6 +819,8 @@ font-weight: 500;
 
 :host ::ng-deep .mat-step-label {
 white-space: pre-line !important;
+position: relative;
+    top: 6px;
 }
 .bodybg {
 width: 100%;
@@ -1656,11 +1658,11 @@ padding: 0 !important;
   }
 
   .moduleName {
-    width: 205px !important; 
-    word-wrap:break-word !important;
+    width: 221px !important;
+    white-space: pre-line !important;
   }
   .titleName {
     width: 205px !important; 
-    word-wrap:break-word !important;
+    white-space: pre-line !important;
   }
   
