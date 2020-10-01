@@ -1023,7 +1023,7 @@ hr {
 }
 
 .courceNameTag {
-  width: 350px; 
+  width: 345px; 
   word-wrap:break-word !important;
 }
 
@@ -1055,6 +1055,19 @@ hr {
 @media (min-width: 200px) and (max-width: 767.98px) {
   .mobileIcons {
     display: block;
+  }
+
+  .courseNameCol {
+    margin-top: 0.5rem;
+  }
+
+  .activitiRow {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+  }
+
+  .activityCol {
+    padding-left: 0px !important;
   }
 
   .dynamicBagdes {
@@ -1640,6 +1653,23 @@ hr {
     width: 12rem !important;
   }
 
+  .aligned-with-icon {
+    left: -116% !important;
+    width: 7rem !important;
+  }
+
+  .courceNameTag {
+    width: 17rem !important;
+  }
+
+  .courceDiscription {
+    width: 22rem !important;
+  }
+
+  .iconsSearch {
+    right: 1.5rem !important;
+  }
+
   .dropdown {
     left: 2rem;
   }
@@ -1714,6 +1744,11 @@ hr {
     padding-left: 0px !important;
   }
 }
+@media only screen and (width: 1600px) {
+  .dropdown-menu {
+    min-width: 14.2rem !important;
+  }
+ }
 .assignbtn {
   position: relative;
   left: 21px;
@@ -2342,7 +2377,7 @@ hr {
   display: block !important;
 }
 :host ::ng-deep .dropdown-menu {
-  min-width: 12rem !important;
+  min-width: 12rem;
   max-width: auto !important;
   left: unset !important;
   right: 8% !important;
