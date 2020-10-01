@@ -111,7 +111,7 @@
 
           <!---------------Multi-level dropdown------------->
           <div class="inner-addon searchDiv right-addon">
-            <input type="text" [ngClass]="searchExpand? 'search' :'form-control searchNormal'"
+            <input type="text" [ngClass]="searchExpand? 'form-control search' :'form-control searchNormal'"
               [(ngModel)]="searchName" (keyup)="getEnrolledCourses('', '', '', '', searchName,false)"
               placeholder="Search courses..." />
               <em class="material-icons pointer iconsSearch"
