@@ -53,18 +53,22 @@
                                             <span class="custom-index" class='index-number'>{{i+1}}.</span>
                                         </div>
                                         <div>
-                                            <div class="moduleHead" tooltip="{{res?.title}}" placement="right">
+                                            <div class="moduleHead">
                                                 <div class="modhead">{{res?.title }}</div>
                                             </div>
                                         </div>
+                                  
                                     </div>
-
-                                    <span class="moduleund">
-                                        <mat-icon class="time-icon">alarm</mat-icon>
-                                        <span class="course-time">
-                                            {{res?.moduletime ? res?.moduletime : '01:00:00' }}
-                                        </span>
-                                    </span>
+                                    <div class="row">
+                                        <div class="moduleund">
+                                            
+                                            <span  [ngClass]="res?.title.length > 25? 'course-time':'course-time-default'">
+                                                <mat-icon class="time-icon">alarm</mat-icon> {{res?.moduletime ? res?.moduletime : '01:00:00' }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                 
+                                   
 
                                 </mat-panel-title>
                                 <!-- <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons mar">done
@@ -77,7 +81,8 @@
                             </mat-expansion-panel-header>
                             <div class="row">
                                 <div class="col-12">
-                                    <mat-vertical-stepper [linear]="isLeaner">
+                                    <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title.length > 25?'headerDown':
+                                        ''">
                                         <ng-container *ngFor="let mod of res?.children; let j = index">
                                             <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
                                                 mod.status === 'Process' ? 'colYellow' : 'colWhite'">
@@ -152,7 +157,7 @@
                     <!-- about the course tab -->
                     <mat-tab label="About the course" class="aboutCourseTab">
                         <div [ngClass]="drawer.opened==true?'drawerOpnAboutCourse':'drawerClsAboutCourse'">
-                            <h3 class="head-h1">{{'Course description' | translate}</h3>
+                            <h3 class="head-h1">{{'Course description' | translate}}</h3>
                             <div class="vertical"></div>
 
                             <div class="curInclu">{{ 'This course includes :' | translate}}</div>
