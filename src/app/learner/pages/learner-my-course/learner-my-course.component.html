@@ -2012,9 +2012,9 @@
                           <span class="matBadgeAvail" matBadge="{{ subCatet.totalCount }}"
                           matBadgeOverlap="false"></span>
                          <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" 
-                          *ngIf="!subCatet.superSubCategory" 
+                          *ngIf="subCatet.superSubCategory == null" 
                           >keyboard_arrow_down</mat-icon>
-                          <span *ngIf="subCatet.totalCount > 0">
+                          <span *ngIf="subCatet.superSubCategory !== null">
                           <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" 
                           *ngIf="!isExpChild || expandActivityNameChildTemp !== subCatet.subCategoryId" (click)="
                           isExpChild &&
