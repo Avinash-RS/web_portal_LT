@@ -1057,6 +1057,19 @@ hr {
     display: block;
   }
 
+  .courseNameCol {
+    margin-top: 0.5rem;
+  }
+
+  .activitiRow {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+  }
+
+  .activityCol {
+    padding-left: 0px !important;
+  }
+
   .dynamicBagdes {
     background: #5c6873 !important;
     float: right;
@@ -1638,6 +1651,23 @@ hr {
 @media only screen and (width: 1024px) {
   .myC-head {
     width: 12rem !important;
+  }
+
+  .aligned-with-icon {
+    left: -116% !important;
+    width: 7rem !important;
+  }
+
+  .courceNameTag {
+    width: 17rem !important;
+  }
+
+  .courceDiscription {
+    width: 22rem !important;
+  }
+
+  .iconsSearch {
+    right: 1.5rem !important;
   }
 
   .dropdown {
