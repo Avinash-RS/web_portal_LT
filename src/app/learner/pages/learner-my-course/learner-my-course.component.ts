@@ -420,6 +420,7 @@ export class LearnerMyCourseComponent implements OnInit {
             dropDownData = [result.data.data.getCountForCategories.data];
             this.dropDownCategoryDetails = dropDownData[0];
             this.categories = dropDownData[0].categories;
+            console.log('this.categories', this.categories);
             this.dropdownCatDetails = dropDownData[0];
           }
     });
