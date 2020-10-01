@@ -17,7 +17,7 @@
           <mat-card-content style="margin-top:10px">
 
             <mat-form-field appearance="outline">
-              <mat-label class="label-color">Email</mat-label>
+              <mat-label class="label-color">{{'Email' | translate}}</mat-label>
               <input matInput  id="username" #username [placeholder]="'Enter the email' | translate"  formControlName="username" maxlength="64"
               required>
               <mat-icon matPrefix class="icon-color">mail_outline</mat-icon>
