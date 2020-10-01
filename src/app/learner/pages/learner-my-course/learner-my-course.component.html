@@ -523,10 +523,10 @@
               </div>
               <div
                 class="col-12 col-sm-12 col-md-12 col-lg-5"
-                *ngIf="course.batchCourse == true"
+               
               >
                 <div class="row m-l-2p f_size_12">
-                  <div class="col-3">
+                  <div class="col-3"  *ngIf="course.batchCourse == true">
                     <div>
                       Activity
                       <mat-icon
@@ -538,7 +538,7 @@
                       >
                     </div>
                   </div>
-                  <div class="col-3">
+                  <div class="col-3"  *ngIf="course.batchCourse == true">
                     <div class="f_size_13">
                       Learning effort
                       <mat-icon
@@ -550,7 +550,19 @@
                       >
                     </div>
                   </div>
-                  <div class="col-3">
+                  <div class="col-3"  *ngIf="course.batchCourse != true">
+                    <div class="f_size_13">
+                      Progression
+                      <mat-icon
+                        tooltip="Course progress"
+                        placement="bottom"
+                        class="infoIcon"
+                        fontSet="material-icons-outlined"
+                        >info</mat-icon
+                      >
+                    </div>
+                  </div>
+                  <div class="col-3"  *ngIf="course.batchCourse == true">
                     <div>
                       Points earned
                       <mat-icon
@@ -562,7 +574,7 @@
                       >
                     </div>
                   </div>
-                  <div class="col-3">
+                  <div class="col-3"  *ngIf="course.batchCourse == true">
                     <div>
                       Final score
                       <mat-icon
@@ -577,7 +589,7 @@
                 </div>
 
                 <div class="row m-t-2 m-l-2p">
-                  <div class="col-3">
+                  <div class="col-3"  *ngIf="course.batchCourse == true">
                     <div class="m-t">
                       <sapn class="padscore">4</sapn>
                       <sapn class="f_size_22">/</sapn>
@@ -585,7 +597,7 @@
                     </div>
                     <div class="m-l-3 f_size_12">Pending</div>
                   </div>
-                  <div class="col-3">
+                  <div class="col-3"  *ngIf="course.batchCourse != true">
                     <div class="progess pointer">
                       <circle-progress
                         [percent]="
@@ -610,10 +622,10 @@
                       </circle-progress>
                     </div>
                   </div>
-                  <div class="col-3">
+                  <div class="col-3"  *ngIf="course.batchCourse == true">
                     <div class="point">56</div>
                   </div>
-                  <div class="col-3">
+                  <div class="col-3"  *ngIf="course.batchCourse == true">
                     <div class="finalScore">- - -</div>
                   </div>
                 </div>
@@ -837,30 +849,37 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="course.batchCourse == true && keyboardUp">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="keyboardUp">
                   <div class="row m-l-2p f_size_12">
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div>
                         Activity
                         <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div class="f_size_13">
                         Learning effort
                         <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse != true">
+                      <div class="f_size_13">
+                        Progression
+                        <mat-icon tooltip="Course progress" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
+                      </div>
+                    </div>
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div>
                         Points earned
                         <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div>
                         Final score
                         <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
@@ -870,7 +889,7 @@
                   </div>
 
                   <div class="row m-t-2 m-l-2p">
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div class="m-t">
                         <sapn class="padscore">4</sapn>
                         <sapn class="f_size_22">/</sapn>
@@ -878,7 +897,7 @@
                       </div>
                       <div class="m-l-3 f_size_12">Pending</div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse != true">
                       <div class="progess pointer">
                         <circle-progress [percent]="
                             course?.coursePlayerStatus?.course_percentage || 0
@@ -890,10 +909,10 @@
                         </circle-progress>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div class="point">56</div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div class="finalScore">- - -</div>
                     </div>
                   </div>
@@ -1108,30 +1127,38 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="course.batchCourse == true">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5" >
                   <div class="row m-l-2p f_size_12">
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div>
                         Activity
                         <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div>
                         Learning effort
                         <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
-                    <div class="col-3">
+
+                    <div class="col-3" *ngIf="course.batchCourse != true">
+                      <div class="f_size_13">
+                        Progression
+                        <mat-icon tooltip="Course progress" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
+                      </div>
+                    </div>
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div>
                         Points earned
                         <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div>
                         Final score
                         <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
@@ -1141,7 +1168,7 @@
                   </div>
 
                   <div class="row m-t-2 m-l-2p">
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div class="m-t">
                         <sapn class="padscore">4</sapn>
                         <sapn class="f_size_22">/</sapn>
@@ -1149,7 +1176,7 @@
                       </div>
                       <div class="m-l-3 f_size_12">Pending</div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse != true">
                       <div class="progess pointer">
                         <circle-progress [percent]="
                             course?.coursePlayerStatus?.course_percentage || 0
@@ -1161,10 +1188,10 @@
                         </circle-progress>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div class="point">56</div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div class="finalScore">- - -</div>
                     </div>
                   </div>
@@ -1380,30 +1407,37 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="course.batchCourse == true">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5" >
                   <div class="row m-l-2p f_size_12">
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div>
                         Activity
                         <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div>
                         Learning effort
                         <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse != true">
+                      <div class="f_size_13">
+                        Progression
+                        <mat-icon tooltip="Course progress" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
+                      </div>
+                    </div>
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div>
                         Points earned
                         <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div>
                         Final score
                         <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
@@ -1413,7 +1447,7 @@
                   </div>
 
                   <div class="row m-t-2 m-l-2p">
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div class="m-t">
                         <sapn class="padscore">4</sapn>
                         <sapn class="f_size_22">/</sapn>
@@ -1421,7 +1455,7 @@
                       </div>
                       <div class="m-l-3 f_size_12">Pending</div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse != true">
                       <div class="progess pointer">
                         <circle-progress [percent]="
                             course?.coursePlayerStatus?.course_percentage || 0
@@ -1433,10 +1467,10 @@
                         </circle-progress>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div class="point">56</div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div class="finalScore">- - -</div>
                     </div>
                   </div>
