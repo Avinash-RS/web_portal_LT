@@ -1744,6 +1744,11 @@ hr {
     padding-left: 0px !important;
   }
 }
+@media only screen and (width: 1600px) {
+  .dropdown-menu {
+    min-width: 14.2rem !important;
+  }
+ }
 .assignbtn {
   position: relative;
   left: 21px;
@@ -2372,7 +2377,7 @@ hr {
   display: block !important;
 }
 :host ::ng-deep .dropdown-menu {
-  min-width: 12rem !important;
+  min-width: 12rem;
   max-width: auto !important;
   left: unset !important;
   right: 8% !important;
