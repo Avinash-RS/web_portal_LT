@@ -554,7 +554,7 @@
                     </div>
                   </div>
                   <div class="col-3 activityCol"  *ngIf="course.batchCourse != true">
-                    <div class="f_size_13">
+                    <div class="f_size_13 center" >
                       Progression
                       <mat-icon
                         tooltip="Course progression"
@@ -627,7 +627,7 @@
                   </div>
 
                   <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
-                    <div class="progess pointer">
+                    <div class="progess pointer centerCircel">
                       <circle-progress [percent]="
                           course?.coursePlayerStatus?.course_percentage || 0
                         " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
@@ -885,7 +885,7 @@
                       </div>
                     </div>
                     <div class="col-3" *ngIf="course.batchCourse != true">
-                      <div class="f_size_13">
+                      <div class="f_size_13 center">
                         Progression
                         <mat-icon tooltip="Course progression" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
@@ -930,7 +930,7 @@
                     </div>
 
                     <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
-                      <div class="progess pointer">
+                      <div class="progess pointer centerCircel">
                         <circle-progress [percent]="
                             course?.coursePlayerStatus?.course_percentage || 0
                           " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
@@ -1180,7 +1180,7 @@
                     </div>
 
                     <div class="col-3" *ngIf="course.batchCourse != true">
-                      <div class="f_size_13">
+                      <div class="f_size_13 center">
                         Progression
                         <mat-icon tooltip="Course progression" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
@@ -1225,7 +1225,7 @@
                     </div>
 
                     <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
-                      <div class="progess pointer">
+                      <div class="progess pointer centerCircel">
                         <circle-progress [percent]="
                             course?.coursePlayerStatus?.course_percentage || 0
                           " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
@@ -1475,7 +1475,7 @@
                       </div>
                     </div>
                     <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
-                      <div class="f_size_13">
+                      <div class="f_size_13 center">
                         Progression
                         <mat-icon tooltip="Course progression" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
@@ -1507,7 +1507,7 @@
                       <div class="m-l-3 f_size_12">Pending</div>
                     </div>
                     <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
-                      <div class="progess pointer">
+                      <div class="progess pointer center">
                         <circle-progress [percent]="
                             course?.coursePlayerStatus?.course_percentage || 0
                           " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
@@ -1521,7 +1521,7 @@
                     
 
                     <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
-                      <div class="progess pointer">
+                      <div class="progess pointer centerCircel">
                         <circle-progress [percent]="
                             course?.coursePlayerStatus?.course_percentage || 0
                           " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
