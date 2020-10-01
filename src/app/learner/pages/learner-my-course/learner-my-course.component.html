@@ -111,10 +111,13 @@
 
           <!---------------Multi-level dropdown------------->
           <div class="inner-addon searchDiv right-addon">
-            <input type="text" (click)="searchExpand = !searchExpand" class="form-control search"
+            <input type="text" [ngClass]="searchExpand? 'search' :'form-control searchNormal'"
               [(ngModel)]="searchName" (keyup)="getEnrolledCourses('', '', '', '', searchName,false)"
               placeholder="Search courses..." />
-              <mat-icon class="glyphicon">search</mat-icon>
+              <em class="material-icons pointer iconsSearch"
+              *ngIf="!searchExpand" (click)="searchExpand = !searchExpand">search</em>
+              <em class="material-icons pointer iconsSearch" *ngIf="searchExpand" (click)="searchExpand = !searchExpand">close</em>
+              <!-- <mat-icon class="glyphicon" (click)="searchExpand = !searchExpand">search</mat-icon> -->
           </div>
         </div>
         <div class="col-6 col-lg-4 text-right pr-0 availableCol">

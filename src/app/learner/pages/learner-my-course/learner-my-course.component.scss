@@ -1878,19 +1878,26 @@ hr {
 .searchCol {
   padding-right: 0px;
 }
+.searchNormal{
+  width: 5%;
+  float: right;
+  border: 0px solid #898989;
+  border-radius: 0px;
+  cursor: pointer;
+  height: 38px;
+}
+
+.searchNormal:focus {
+  box-shadow: 0 0 0 0.2rem white;
+}
 
 .search {
   width: 80%;
   float: right;
-  // margin-left: 38px;
-  // position: relative;
-  // left: 69px;
-  // top: 1px;
+  transition: 0.5s;
   border: 1px solid #898989;
   border-radius: 0px;
   height: 38px;
-  // outline: none !important;
-  // box-shadow: 0 0 0 2px rgba(21, 156, 228, 0.4);
 }
 
 .popupsearch {
@@ -2435,3 +2442,10 @@ li {
     padding-top: 0.8rem;
   }
   /* tooltip config end by mani */
+
+  .iconsSearch {
+    position: absolute;
+    color: #69727c;
+    top: 0.7rem;
+    right: 0.5rem;
+  }
