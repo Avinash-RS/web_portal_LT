@@ -313,6 +313,9 @@ margin-top: 5%;
 
 // mobile
 @media (max-width: 480px) and (max-width: 320px) {
+    #footer {
+        display: none;
+    }
     .kauhalya {
         margin-top: 11%;
          margin-left: 0%  !important; 
@@ -355,6 +358,9 @@ margin-top: 5%;
 
 
 @media (max-width: 767.98px) {
+    #footer {
+        display: none;
+    }
     .kauhalya {
         margin-top: 11%;
          margin-left: 0%  !important; 

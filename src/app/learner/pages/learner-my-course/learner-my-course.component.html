@@ -240,13 +240,13 @@
         class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0"
       >
       <mat-tab>
-        <div class="row mt-3">
+       <!--  <div class="row mt-3">
           <div class="col-12 m-auto">
             <span class="menuBtnHoriz">{{
               categoryNamePrint | titlecase
             }}</span>
           </div>
-        </div>
+        </div> -->
 
         <ng-template matTabLabel>
           <div>
@@ -529,7 +529,7 @@
                
               >
                 <div class="row m-l-2p f_size_12">
-                  <div class="col-3"  *ngIf="course.batchCourse == true">
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
                     <div>
                       Activity
                       <mat-icon
@@ -541,7 +541,7 @@
                       >
                     </div>
                   </div>
-                  <div class="col-3"  *ngIf="course.batchCourse == true">
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
                     <div class="f_size_13">
                       Learning effort
                       <mat-icon
@@ -553,11 +553,11 @@
                       >
                     </div>
                   </div>
-                  <div class="col-3"  *ngIf="course.batchCourse != true">
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse != true">
                     <div class="f_size_13">
                       Progression
                       <mat-icon
-                        tooltip="Course progress"
+                        tooltip="Course progression"
                         placement="bottom"
                         class="infoIcon"
                         fontSet="material-icons-outlined"
@@ -565,7 +565,7 @@
                       >
                     </div>
                   </div>
-                  <div class="col-3"  *ngIf="course.batchCourse == true">
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
                     <div>
                       Points earned
                       <mat-icon
@@ -577,7 +577,7 @@
                       >
                     </div>
                   </div>
-                  <div class="col-3"  *ngIf="course.batchCourse == true">
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
                     <div>
                       Final score
                       <mat-icon
@@ -591,8 +591,8 @@
                   </div>
                 </div>
 
-                <div class="row m-t-2 m-l-2p">
-                  <div class="col-3"  *ngIf="course.batchCourse == true">
+                <div class="row m-t-2 m-l-2p activitiRow">
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
                     <div class="m-t">
                       <sapn class="padscore">4</sapn>
                       <sapn class="f_size_22">/</sapn>
@@ -600,7 +600,7 @@
                     </div>
                     <div class="m-l-3 f_size_12">Pending</div>
                   </div>
-                  <div class="col-3"  *ngIf="course.batchCourse != true">
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse != true">
                     <div class="progess pointer">
                       <circle-progress
                         [percent]="
@@ -625,10 +625,10 @@
                       </circle-progress>
                     </div>
                   </div>
-                  <div class="col-3"  *ngIf="course.batchCourse == true">
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
                     <div class="point">56</div>
                   </div>
-                  <div class="col-3"  *ngIf="course.batchCourse == true">
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
                     <div class="finalScore">- - -</div>
                   </div>
                 </div>
@@ -733,7 +733,7 @@
                           }}
                         </span>
                       </div>
-                      <div class="row">
+                      <div class="row courceDiscription">
                         <div class="col-12 col-lg-10 p-l-3 width_100 m-l-2 color_black2 f_size_14 descmc f_wt_400 h-30 pointer"
                          >
                           <p>
@@ -871,7 +871,7 @@
                     <div class="col-3" *ngIf="course.batchCourse != true">
                       <div class="f_size_13">
                         Progression
-                        <mat-icon tooltip="Course progress" placement="bottom" class="infoIcon"
+                        <mat-icon tooltip="Course progression" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
@@ -1150,7 +1150,7 @@
                     <div class="col-3" *ngIf="course.batchCourse != true">
                       <div class="f_size_13">
                         Progression
-                        <mat-icon tooltip="Course progress" placement="bottom" class="infoIcon"
+                        <mat-icon tooltip="Course progression" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
@@ -1273,7 +1273,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-12 col-sm-12 col-md-8 col-lg-7">
+                    <div class="col-12 col-sm-12 col-md-8 col-lg-7 courseNameCol">
                       <div class="f_size_18 f_wt_500 ">
                         <p style="width: 345px; word-wrap:break-word !important;">
                           {{course.course_name}}
@@ -1412,35 +1412,35 @@
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-5" >
                   <div class="row m-l-2p f_size_12">
-                    <div class="col-3" *ngIf="course.batchCourse == true">
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
                       <div>
                         Activity
                         <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
-                    <div class="col-3" *ngIf="course.batchCourse == true">
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
                       <div>
                         Learning effort
                         <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
-                    <div class="col-3" *ngIf="course.batchCourse != true">
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
                       <div class="f_size_13">
                         Progression
-                        <mat-icon tooltip="Course progress" placement="bottom" class="infoIcon"
+                        <mat-icon tooltip="Course progression" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
-                    <div class="col-3" *ngIf="course.batchCourse == true">
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
                       <div>
                         Points earned
                         <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
                       </div>
                     </div>
-                    <div class="col-3" *ngIf="course.batchCourse == true">
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
                       <div>
                         Final score
                         <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
@@ -1449,8 +1449,8 @@
                     </div>
                   </div>
 
-                  <div class="row m-t-2 m-l-2p">
-                    <div class="col-3" *ngIf="course.batchCourse == true">
+                  <div class="row m-t-2 m-l-2p activitiRow">
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
                       <div class="m-t">
                         <sapn class="padscore">4</sapn>
                         <sapn class="f_size_22">/</sapn>
@@ -1458,7 +1458,7 @@
                       </div>
                       <div class="m-l-3 f_size_12">Pending</div>
                     </div>
-                    <div class="col-3" *ngIf="course.batchCourse != true">
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
                       <div class="progess pointer">
                         <circle-progress [percent]="
                             course?.coursePlayerStatus?.course_percentage || 0
@@ -1470,10 +1470,10 @@
                         </circle-progress>
                       </div>
                     </div>
-                    <div class="col-3" *ngIf="course.batchCourse == true">
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
                       <div class="point">56</div>
                     </div>
-                    <div class="col-3" *ngIf="course.batchCourse == true">
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
                       <div class="finalScore">- - -</div>
                     </div>
                   </div>
@@ -2056,7 +2056,7 @@
                                       )
                                     ">{{
                                       (superSubCat.superSubCategoryName
-                                        | titlecase | slice:0:28)+'...'
+                                        | titlecase | slice:0:15)+'...'
                                     }}</span>
                                     <span class="matBadgeAvailSuperSub" matBadge="{{ superSubCat.totalCount }}"
                                       matBadgeOverlap="false"></span>
