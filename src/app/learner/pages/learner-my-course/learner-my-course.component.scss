@@ -1023,8 +1023,8 @@ hr {
 }
 
 .courceNameTag {
-  width: 345px; 
-  word-wrap:break-word !important;
+  width: 344px !important;
+  white-space: pre-line;
 }
 
 .catDropdown {
@@ -2486,4 +2486,7 @@ li {
     color: #69727c;
     top: 0.7rem;
     right: 0.5rem;
+  }
+  .coursename{
+    height: 50px;
   }
