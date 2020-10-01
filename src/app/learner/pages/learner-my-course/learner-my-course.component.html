@@ -70,7 +70,7 @@
           categorytab.categoryId, catalogueDetails.catalogueId, '', '',false); "
           *ngFor="let categorytab of categoryDetails">
         <span>{{ categorytab.categoryName | titlecase }} </span>
-        <span class="dynamicBagdes" matBadge="{{categorytab.totalCount}}" matBadgeOverlap="false"></span>
+        <span class="dynamicBagdes" matBadge="{{categorytab.enrollCount}}" matBadgeOverlap="false"></span>
         </button>
       </mat-menu>
       
@@ -1525,7 +1525,7 @@
                   categorytab.categoryId, catalogueDetails.catalogueId,
                   '',
                   searchName, false
-                ); resettingJobRole();
+                ); resettingJobRoledata();
               " 
                 matBadge="{{ categorytab.enrollCount }}"
                 matBadgeOverlap="false"
@@ -2012,7 +2012,7 @@
                           <span class="matBadgeAvail" matBadge="{{ subCatet.totalCount }}"
                           matBadgeOverlap="false"></span>
                          <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" 
-                          *ngIf="subCatet.totalCount == 0" 
+                          *ngIf="!subCatet.superSubCategory" 
                           >keyboard_arrow_down</mat-icon>
                           <span *ngIf="subCatet.totalCount > 0">
                           <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" 
