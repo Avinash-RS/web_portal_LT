@@ -600,7 +600,7 @@
                     </div>
                     <div class="m-l-3 f_size_12">Pending</div>
                   </div>
-                  <div class="col-3 activityCol"  *ngIf="course.batchCourse != true">
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
                     <div class="progess pointer">
                       <circle-progress
                         [percent]="
@@ -622,6 +622,19 @@
                         [startFromZero]="false"
                         [responsive]="true"
                       >
+                      </circle-progress>
+                    </div>
+                  </div>
+
+                  <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
+                    <div class="progess pointer">
+                      <circle-progress [percent]="
+                          course?.coursePlayerStatus?.course_percentage || 0
+                        " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                        [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                        [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                        [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                        [startFromZero]="false" [responsive]="true">
                       </circle-progress>
                     </div>
                   </div>
@@ -903,7 +916,20 @@
                       </div>
                       <div class="m-l-3 f_size_12">Pending</div>
                     </div>
-                    <div class="col-3" *ngIf="course.batchCourse != true">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div class="progess pointer">
+                        <circle-progress [percent]="
+                            course?.coursePlayerStatus?.course_percentage || 0
+                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                          [startFromZero]="false" [responsive]="true">
+                        </circle-progress>
+                      </div>
+                    </div>
+
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
                       <div class="progess pointer">
                         <circle-progress [percent]="
                             course?.coursePlayerStatus?.course_percentage || 0
@@ -1185,7 +1211,20 @@
                       </div>
                       <div class="m-l-3 f_size_12">Pending</div>
                     </div>
-                    <div class="col-3" *ngIf="course.batchCourse != true">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div class="progess pointer">
+                        <circle-progress [percent]="
+                            course?.coursePlayerStatus?.course_percentage || 0
+                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                          [startFromZero]="false" [responsive]="true">
+                        </circle-progress>
+                      </div>
+                    </div>
+
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
                       <div class="progess pointer">
                         <circle-progress [percent]="
                             course?.coursePlayerStatus?.course_percentage || 0
@@ -1467,6 +1506,20 @@
                       </div>
                       <div class="m-l-3 f_size_12">Pending</div>
                     </div>
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
+                      <div class="progess pointer">
+                        <circle-progress [percent]="
+                            course?.coursePlayerStatus?.course_percentage || 0
+                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                          [startFromZero]="false" [responsive]="true">
+                        </circle-progress>
+                      </div>
+                    </div>
+                    
+
                     <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
                       <div class="progess pointer">
                         <circle-progress [percent]="
