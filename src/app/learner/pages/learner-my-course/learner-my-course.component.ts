@@ -97,6 +97,7 @@ export class LearnerMyCourseComponent implements OnInit {
   dropdownMenu = false;
   keyboardUp = true;
   disableDropdown: boolean;
+  opencourceId: any;
 
   nextPageLabel     = '';
   previousPageLabel = '';
@@ -165,6 +166,14 @@ export class LearnerMyCourseComponent implements OnInit {
     this.CommonServices.closeAvailPopup$.next(availableCource);
   }
 
+  downArrow(event) {
+    this.opencourceId = event.course_id;
+  }
+
+  upArrow(event) {
+    this.opencourceId = event.course_id;
+  }
+
   getScreenSize(event?) {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
@@ -222,6 +231,10 @@ export class LearnerMyCourseComponent implements OnInit {
   // }
   // }
   getEnrolledCourses(event, catagoryId, catalougeId, jobRoleCategoryId, searchName, jobroleCheck) {
+    if (this.screenWidth < 800 && this.keyboardUp) {
+      this.keyboardUp = false;
+      this.opencourceId = '';
+    }
     if (jobroleCheck && this.jobRoleId) {
       catalougeId = this.catalogueDetails.catalogueId;
       jobRoleCategoryId = this.jobRoleId;
