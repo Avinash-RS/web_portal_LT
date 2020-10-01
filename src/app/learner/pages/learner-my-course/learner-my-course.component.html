@@ -600,7 +600,7 @@
                     </div>
                     <div class="m-l-3 f_size_12">Pending</div>
                   </div>
-                  <div class="col-3 activityCol"  *ngIf="course.batchCourse != true">
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
                     <div class="progess pointer">
                       <circle-progress
                         [percent]="
@@ -622,6 +622,19 @@
                         [startFromZero]="false"
                         [responsive]="true"
                       >
+                      </circle-progress>
+                    </div>
+                  </div>
+
+                  <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
+                    <div class="progess pointer">
+                      <circle-progress [percent]="
+                          course?.coursePlayerStatus?.course_percentage || 0
+                        " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                        [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                        [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                        [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                        [startFromZero]="false" [responsive]="true">
                       </circle-progress>
                     </div>
                   </div>
@@ -718,7 +731,7 @@
                     <div class="col-12 col-sm-12 col-md-8 col-lg-7 coursenameCol">
                       <div class="f_size_18 f_wt_500  coursename">
                         <p class="courceNameTag" *ngIf="course.course_name.length >= 84" tooltip="{{course.course_name}}" placement="right">
-                          {{course.course_name  | slice:0:92}}...
+                          {{course.course_name  | slice:0:83}}...
                         </p>
                         <p class="courceNameTag" *ngIf="course.course_name.length < 84">
                           {{course.course_name}}
@@ -903,7 +916,20 @@
                       </div>
                       <div class="m-l-3 f_size_12">Pending</div>
                     </div>
-                    <div class="col-3" *ngIf="course.batchCourse != true">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div class="progess pointer">
+                        <circle-progress [percent]="
+                            course?.coursePlayerStatus?.course_percentage || 0
+                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                          [startFromZero]="false" [responsive]="true">
+                        </circle-progress>
+                      </div>
+                    </div>
+
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
                       <div class="progess pointer">
                         <circle-progress [percent]="
                             course?.coursePlayerStatus?.course_percentage || 0
@@ -1000,7 +1026,7 @@
                     <div class="col-12 col-sm-12 col-md-8 col-lg-7">
                       <div class="f_size_18 f_wt_500 ">
                         <p class="courceNameTag" *ngIf="course.course_name.length >= 84" tooltip="{{course.course_name}}" placement="right">
-                          {{course.course_name  | slice:0:92}}...
+                          {{course.course_name  | slice:0:83}}...
                         </p>
                         <p class="courceNameTag" *ngIf="course.course_name.length < 84">
                           {{course.course_name}}
@@ -1185,7 +1211,20 @@
                       </div>
                       <div class="m-l-3 f_size_12">Pending</div>
                     </div>
-                    <div class="col-3" *ngIf="course.batchCourse != true">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div class="progess pointer">
+                        <circle-progress [percent]="
+                            course?.coursePlayerStatus?.course_percentage || 0
+                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                          [startFromZero]="false" [responsive]="true">
+                        </circle-progress>
+                      </div>
+                    </div>
+
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
                       <div class="progess pointer">
                         <circle-progress [percent]="
                             course?.coursePlayerStatus?.course_percentage || 0
@@ -1282,7 +1321,7 @@
                     <div class="col-12 col-sm-12 col-md-8 col-lg-7 courseNameCol">
                       <div class="f_size_18 f_wt_500 ">
                         <p class="courceNameTag" *ngIf="course.course_name.length >= 84" tooltip="{{course.course_name}}" placement="right">
-                          {{course.course_name | slice:0:92}}...
+                          {{course.course_name | slice:0:83}}...
                         </p>
                         <p class="courceNameTag" *ngIf="course.course_name.length < 84">
                           {{course.course_name}}
@@ -1467,6 +1506,20 @@
                       </div>
                       <div class="m-l-3 f_size_12">Pending</div>
                     </div>
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
+                      <div class="progess pointer">
+                        <circle-progress [percent]="
+                            course?.coursePlayerStatus?.course_percentage || 0
+                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                          [startFromZero]="false" [responsive]="true">
+                        </circle-progress>
+                      </div>
+                    </div>
+                    
+
                     <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
                       <div class="progess pointer">
                         <circle-progress [percent]="
@@ -1584,7 +1637,7 @@
                       <div class="col-6 col-sm-6 col-md-8 col-lg-7 courceNameCol">
                         <div class="f_size_18 f_wt_500">
                           <p class="courceNameTag" *ngIf="course.course_name.length >= 84" tooltip="{{course.course_name}}" placement="right">
-                            {{course.course_name | slice:0:92}}...
+                            {{course.course_name | slice:0:83}}...
                           </p>
                           <p class="courceNameTag" *ngIf="course.course_name.length < 84">
                             {{course.course_name}}
@@ -2012,9 +2065,9 @@
                           <span class="matBadgeAvail" matBadge="{{ subCatet.totalCount }}"
                           matBadgeOverlap="false"></span>
                          <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" 
-                          *ngIf="!subCatet.superSubCategory" 
+                          *ngIf="subCatet.superSubCategory == null" 
                           >keyboard_arrow_down</mat-icon>
-                          <span *ngIf="subCatet.totalCount > 0">
+                          <span *ngIf="subCatet.superSubCategory !== null">
                           <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" 
                           *ngIf="!isExpChild || expandActivityNameChildTemp !== subCatet.subCategoryId" (click)="
                           isExpChild &&
