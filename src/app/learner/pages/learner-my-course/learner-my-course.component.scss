@@ -1058,8 +1058,20 @@ hr {
   color: #878686;
 }
 
+.mobileResponsive {
+  display: none;
+}
+
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
+  .normalScreen {
+    display: none;
+  }
+
+  .mobileResponsive {
+    display: block;
+  }
+
   .mobileIcons {
     display: block;
   }
@@ -2383,6 +2395,7 @@ hr {
 .dropdown-menu:active {
   display: block !important;
 }
+
 :host ::ng-deep .dropdown-menu {
   min-width: 12rem;
   max-width: auto !important;
