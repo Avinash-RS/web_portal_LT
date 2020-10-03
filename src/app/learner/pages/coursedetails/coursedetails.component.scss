@@ -1539,7 +1539,7 @@ left: 10px;
 
 .closeBtn {
     position: relative;
-    right: -38px;
+    right: -31px;
     top: 4px;
 }
 
@@ -1575,8 +1575,8 @@ border-right: 1px solid #ccc;
 // position: absolute;
 // right: 0;
 // justify-content: space-between;
-position: absolute;
-    z-index: 2;
+position: fixed;
+    z-index: 999999;
 }
 .drawer .contents {
 padding: 16px 0 16px 10px;
