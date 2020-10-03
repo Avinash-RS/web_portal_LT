@@ -20,6 +20,12 @@
     width: 35px;
 }
 
+:host ::ng-deep ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 4px !important;
+    height: 10px !important;
+}
+
 .download-button {
     background: $lxp-theme-green !important; // red color
     float: right;
@@ -163,7 +169,7 @@
     font-size: 16px;
     font-weight: 400px;
     width: 142px;
-    right: 22px;
+    right: 20px;
 }
 
 button:focus,
@@ -379,9 +385,21 @@ li {
     margin-top: 1%;
 }
 
-:host ::ng-deep .mat-expansion-panel-header {
-    padding: 0 11px !important;
-    height: 60px !important;
+// :host ::ng-deep .mat-expansion-panel-header {
+//     padding:0 0 0 0!important;
+//     height: 60px !important;
+//     margin-top: 10px !important;
+// }
+
+ ::ng-deep .multiline{
+    padding: 0 0 13px 0 !important;
+    height: 65px !important;
+    margin-top: 10px !important;
+}
+
+ ::ng-deep .singleLine{
+    padding:0 0 0 0!important;
+    height: 48px !important;
     margin-top: 10px !important;
 }
 
@@ -395,18 +413,21 @@ li {
     font-size: 12px;
 }
 
-.index-number {
-    // border: 1px solid $color-border;
-    padding: 2px 8px;
+.index-number-unread {
     position: relative;
-    left: 6px;
+    left: 21px;
 }
+.index-number-read {
+    position: relative;
+}
+
+
 
 .module-container {
     display: flex;
     flex-direction: column;
     height: 55px;
-    margin-top: 2px
+    margin-top: 8px
 }
 
 .example-container {
@@ -678,21 +699,20 @@ iframe.fullScreen {
 
 .course-time {
     font-size: 12px;
-    margin-left: -8px;
     position: relative;
-    top: 22px;
+    bottom: 11px;
 }
 .course-time-default{
     font-size: 12px;
-    margin-left: -8px;
     position: relative;
-    top: 2px;
+    bottom: 7px;
 }
 
 .exp-icon {
     font-size: 22px;
     margin-top: 7px;
     color: rgba(158, 158, 158, 0.64);
+    margin-right: 6px;
 }
 
 .exp2 {
@@ -787,14 +807,9 @@ color: $color-white !important;
 }
 
 .headerDown{
-    margin-top: 6% !important;
+    margin-top: 1rem !important;
 }
-.moduleHead {
-padding-left: 8px;
-position: absolute;
-display: flex;
-flex-wrap: wrap;
-}
+
 
 .moduleund {
 margin-left: 35px;
@@ -810,17 +825,41 @@ border-left: inset;
 border-left-color: transparent;
 }
 
-.modhead {
+// .modhead {
+// display: inline-block;
+// max-width: 195px;
+// font-size: 14px;
+// font-weight: 500;
+// }
+
+.moduleHeadUnread {
+    left: 24px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
 display: inline-block;
 max-width: 195px;
 font-size: 14px;
 font-weight: 500;
-}
+    }
+
+    
+.moduleHeadRead {
+    padding-left: 8px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+display: inline-block;
+max-width: 195px;
+font-size: 14px;
+font-weight: 500;
+    }
 
 :host ::ng-deep .mat-step-label {
 white-space: pre-line !important;
 position: relative;
     top: 6px;
+    overflow: visible !important;
 }
 .bodybg {
 width: 100%;
@@ -849,8 +888,9 @@ border-top: 2px solid $profile-p-grey;
 }
 
 .mar {
-margin-right: 6px;
-margin-top: 5px;
+
+position: relative !important;
+    bottom: 3px;
 }
 
 :host ::ng-deep .mat-tab-label .mat-tab-label-content {
@@ -947,6 +987,10 @@ border-radius: 0 !important;
 
 .drawer {
     width: 95% !important;
+}
+
+.mat-drawer.mat-drawer-side{
+    
 }
 
 .player {
@@ -1479,11 +1523,11 @@ right: 20px;
 }
 .time {
 position: relative;
-right: 13px;
+right: 28px;
 }
 .divider {
 position: relative;
-left: 35px;
+left: 10px;
 }
 // .mar {
 //     left: 10px !important;
@@ -1491,23 +1535,19 @@ left: 35px;
 //     position: relative;
 //     margin-top: 0px !important;
 // }
-.mar {
-left: 10px !important;
-position: absolute !important;
-margin-top: -2px !important;
-height: 20px;
-}
-.custom-index {
-margin-top: 8px;
-height: 20 px;
-}
+
+// .custom-index {
+// margin-top: 8px;
+// height: 20 px;
+// }
 // Ramya CSS ends here
 
 
 .closeBtn {
-    position: relative;
-    right: -31px;
+    position: absolute;
+    right: -23px;
     top: 4px;
+    z-index: 1;
 }
 
 .about-course {
@@ -1539,12 +1579,14 @@ width: 25%;
 border-right: 1px solid #ccc;
 }
 .drawer .header {
-position: absolute;
-right: 0;
-justify-content: space-between;
+// position: absolute;
+// right: 0;
+// justify-content: space-between;
+position: fixed;
+    z-index: 999999;
 }
 .drawer .contents {
-padding: 16px 0 16px 16px;
+padding: 16px 0 16px 10px;
 margin-top: 12%;
 }
 
@@ -1665,4 +1707,17 @@ padding: 0 !important;
     width: 205px !important; 
     white-space: pre-line !important;
   }
-  
+
+
+  ::ng-deep  .drawer {
+overflow-y: unset !important;
+padding: 0px 0 16px 0px !important;
+}
+
+::ng-deep .mat-drawer.mat-drawer-side{
+    z-index: unset !important;
+}
+
+::ng-deep .mat-content{
+    overflow: visible !important;
+}

@@ -847,7 +847,7 @@
                     <div class="col-12 col-sm-12 col-md-8 col-lg-7 coursenameCol">
                       <div class="f_size_18 f_wt_500  coursename">
                         <p class="courceNameTag" *ngIf="course.course_name.length >= 84" tooltip="{{course.course_name}}" placement="right">
-                          {{course.course_name  | slice:0:83}}...
+                          {{course.course_name  | slice:0:75}}...
                         </p>
                         <p class="courceNameTag" *ngIf="course.course_name.length < 84">
                           {{course.course_name}}
@@ -1223,7 +1223,7 @@
                     <div class="col-12 col-sm-12 col-md-8 col-lg-7">
                       <div class="f_size_18 f_wt_500 ">
                         <p class="courceNameTag" *ngIf="course.course_name.length >= 84" tooltip="{{course.course_name}}" placement="right">
-                          {{course.course_name  | slice:0:83}}...
+                          {{course.course_name  | slice:0:75}}...
                         </p>
                         <p class="courceNameTag" *ngIf="course.course_name.length < 84">
                           {{course.course_name}}
@@ -1600,7 +1600,7 @@
                     <div class="col-12 col-sm-12 col-md-8 col-lg-7 courseNameCol">
                       <div class="f_size_18 f_wt_500 ">
                         <p class="courceNameTag" *ngIf="course.course_name.length >= 84" tooltip="{{course.course_name}}" placement="right">
-                          {{course.course_name | slice:0:83}}...
+                          {{course.course_name | slice:0:75}}...
                         </p>
                         <p class="courceNameTag" *ngIf="course.course_name.length < 84">
                           {{course.course_name}}
@@ -1998,7 +1998,7 @@
                       <div class="col-6 col-sm-6 col-md-8 col-lg-7 courceNameCol">
                         <div class="f_size_18 f_wt_500">
                           <p class="courceNameTag" *ngIf="course.course_name.length >= 84" tooltip="{{course.course_name}}" placement="right">
-                            {{course.course_name | slice:0:83}}...
+                            {{course.course_name | slice:0:75}}...
                           </p>
                           <p class="courceNameTag" *ngIf="course.course_name.length < 84">
                             {{course.course_name}}
@@ -2097,24 +2097,31 @@
                       </div>
                     </div>
                   </div>
-                  <!-- <div class="col-5" *ngIf="course.batchCourse == true">
+                <div class="col-5">
                                 <div class="row m-t-2 m-l-2p f_size_13">
-                                    <div class="col-3">
+                                    <div class="col-3"  *ngIf="course.batchCourse == true">
                                         <div>Activity 
                                             <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
                                         </div>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-3"  *ngIf="course.batchCourse == true">
                                         <div>Learning effort
                                             <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
                                         </div>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-3 activityCol" *ngIf="course.batchCourse == false">
+                                      <div class="f_size_13 center">
+                                        Progression
+                                        <mat-icon tooltip="Course progression" placement="bottom" class="infoIcon"
+                                          fontSet="material-icons-outlined">info</mat-icon>
+                                      </div>
+                                    </div>
+                                    <div class="col-3"  *ngIf="course.batchCourse == true">
                                         <div>Points earned
                                             <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
                                         </div>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-3"  *ngIf="course.batchCourse == true">
                                         <div>Final score
                                             <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon" fontSet="material-icons-outlined">info</mat-icon>
                                         </div>
@@ -2122,7 +2129,7 @@
                                 </div>
 
                                 <div class="row m-t-2 m-l-2p">
-                                    <div class="col-3">
+                                    <div class="col-3"  *ngIf="course.batchCourse == true">
                                         <div class="m-t">
                                             <sapn class="padscore">4</sapn>
                                             <sapn class="f_size_22">/</sapn> <span class="f_size_20">20</span>
@@ -2130,7 +2137,7 @@
                                         <span>Pending</span>
                                     </div>
                                     <div class="col-3">
-                                        <div class="progess pointer">
+                                        <div class="progess pointer" *ngIf="course.batchCourse == true">
                                             <circle-progress
                                                 [percent]="course?.coursePlayerStatus?.course_percentage|| 0"
                                                 [radius]="10"  [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
@@ -2142,15 +2149,42 @@
                                             </circle-progress>
                                         </div>
                                     </div>
-                                    <div class="col-3">
+
+                                    <div class="col-3 activityCol" *ngIf="course.batchCourse == false">
+                                      <div class="progess pointer ">
+                                        <circle-progress [percent]="
+                                            course?.coursePlayerStatus?.course_percentage || 0
+                                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                                          [startFromZero]="false" [responsive]="true">
+                                        </circle-progress>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
+                                      <div class="progess pointer centerCircel">
+                                        <circle-progress [percent]="
+                                            course?.coursePlayerStatus?.course_percentage || 0
+                                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                                          [startFromZero]="false" [responsive]="true">
+                                        </circle-progress>
+                                      </div>
+                                    </div>
+                                    <div class="col-3"  *ngIf="course.batchCourse == true">
                                         <div class="point">56</div>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-3"  *ngIf="course.batchCourse == true">
                                         <div class="finalScore">- - -</div>
                                     </div>
                                 </div>
-                            </div> -->
-                  <!-- card end -->
+                            </div>
+                 
+                            <!-- card end -->
                 </div>
               </mat-card>
               <div style="border-bottom: 1px solid #ccc"></div>
