@@ -21,7 +21,7 @@
       </div>
       <div *ngIf="notifications?.length !== 0; then thenBlock else elseBlock;">
       </div>
-      <div class="footer" fxLayout="row" (click) = "viewall()" fxLayoutAlign="center center">
+      <div  *ngIf="notifications?.length !== 0;" class="footer" fxLayout="row" (click) = "viewall()" fxLayoutAlign="center center">
         <div class="action">View all</div>
       </div>
     </div>
