@@ -498,7 +498,7 @@ export class LearnerMyCourseComponent implements OnInit {
                 this.getCountForCategories();
                 this.getEnrolledCourses('', '', '', '', '', '');
                 this.getCountForJobRole();
-                this.getCountForJobRole();
+                // this.getCountForJobRole();
               }
             });
         }
