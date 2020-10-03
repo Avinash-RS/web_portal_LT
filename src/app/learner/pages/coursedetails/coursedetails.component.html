@@ -42,18 +42,18 @@
                     <mat-accordion *ngFor="let res of scromModuleData; let i = index"
                         (click)="getSelectedIndex(i); getModuleDataForForum(scromModuleData?.length, i + 1, res)">
                         <mat-expansion-panel class="panel" hideToggle="true" #example [expanded]="selectedIndex === i">
-                            <mat-expansion-panel-header>
+                            <mat-expansion-panel-header [ngClass]="res?.title.length > 39?'multiline' : 'singleLine'">
                                 <mat-panel-title class="module-container">
                                     <div class="row">
                                         <div>
                                             <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons mar">done
                                             </mat-icon>
                                         </div>
-                                        <div>
-                                            <span class="custom-index" class='index-number'>{{i+1}}.</span>
+                                        <div [ngClass]="res?.status == 'Passed'? 'index-number-read' : 'index-number-unread'">
+                                            <span class="custom-index">{{i+1}}.</span>
                                         </div>
                                         <div>
-                                            <div class="moduleHead">
+                                            <div [ngClass]="res?.status == 'Passed'? 'moduleHeadRead' : 'moduleHeadUnread'">
                                                 <div class="modhead">
                                                     <p *ngIf="res?.title.length >= 67" class="moduleName" tooltip="{{res?.title}}" placement="right">{{res?.title | slice:0:66}}...</p>
                                                     <p *ngIf="res?.title.length < 67"class="moduleName">
@@ -69,7 +69,7 @@
                                     <div class="row">
                                         <div class="moduleund">
                                             
-                                            <span  [ngClass]="res?.title.length > 25? 'course-time':'course-time-default'">
+                                            <span  [ngClass]="res?.title.length > 39? 'course-time':'course-time-default'">
                                                 <mat-icon class="time-icon">alarm</mat-icon> {{res?.moduletime ? res?.moduletime : '01:00:00' }}
                                             </span>
                                         </div>
@@ -88,7 +88,7 @@
                             </mat-expansion-panel-header>
                             <div class="row">
                                 <div class="col-12">
-                                    <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title.length > 25?'headerDown':
+                                    <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title.length > 39?'headerDown':
                                         ''">
                                         <ng-container *ngFor="let mod of res?.children; let j = index">
                                             <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
