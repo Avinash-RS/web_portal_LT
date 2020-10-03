@@ -250,8 +250,7 @@
 
         <ng-template matTabLabel>
           <div>
-            <span
-              class="tabsc"
+            <span class="tabsc"
               matBadge="{{
                 jobRoleSelected === true
                   ? jobOnGoingCourseCount
@@ -645,6 +644,7 @@
               </div>
               <div class="col-12 col-sm-12 col-md-12 col-lg-5 mobileResponsive" *ngIf="keyboardUp && course.course_id == opencourceId" >
                 <div class="row m-l-2p f_size_12">
+                 
                   <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
                     <div>
                       Activity
