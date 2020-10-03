@@ -70,7 +70,7 @@
           categorytab.categoryId, catalogueDetails.catalogueId, '', '',false); "
           *ngFor="let categorytab of categoryDetails">
         <span>{{ categorytab.categoryName | titlecase }} </span>
-        <span class="dynamicBagdes" matBadge="{{categorytab.totalCount}}" matBadgeOverlap="false"></span>
+        <span class="dynamicBagdes" matBadge="{{categorytab.enrollCount}}" matBadgeOverlap="false"></span>
         </button>
       </mat-menu>
       
@@ -480,8 +480,8 @@
                     <span class="mobileRespoForum">
                       <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> text_snippet </mat-icon>
                       <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> forum </mat-icon>
-                      <mat-icon *ngIf="!keyboardUp" class="forumIcon" (click)="keyboardUp = ! keyboardUp"> keyboard_arrow_down </mat-icon>
-                      <mat-icon *ngIf="keyboardUp" class="forumIcon" (click)=" keyboardUp = !keyboardUp"> keyboard_arrow_up </mat-icon>
+                      <mat-icon *ngIf="!keyboardUp || course.course_id !== opencourceId" class="forumIcon" aria-rowindex="" (click)="keyboardUp = ! keyboardUp; downArrow(course)"> keyboard_arrow_down </mat-icon>
+                        <mat-icon *ngIf="keyboardUp && course.course_id == opencourceId" class="forumIcon" (click)=" keyboardUp = !keyboardUp; upArrow(course)"> keyboard_arrow_up </mat-icon>
                     </span>
                     <div class="startBtnicon">
                       <button
@@ -524,10 +524,7 @@
                   </div>
                 </div>
               </div>
-              <div
-                class="col-12 col-sm-12 col-md-12 col-lg-5"
-               
-              >
+              <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="keyboardUp && course.course_id == opencourceId" >
                 <div class="row m-l-2p f_size_12">
                   <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
                     <div>
@@ -554,7 +551,7 @@
                     </div>
                   </div>
                   <div class="col-3 activityCol"  *ngIf="course.batchCourse != true">
-                    <div class="f_size_13">
+                    <div class="f_size_13 center" >
                       Progression
                       <mat-icon
                         tooltip="Course progression"
@@ -600,7 +597,7 @@
                     </div>
                     <div class="m-l-3 f_size_12">Pending</div>
                   </div>
-                  <div class="col-3 activityCol"  *ngIf="course.batchCourse != true">
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
                     <div class="progess pointer">
                       <circle-progress
                         [percent]="
@@ -622,6 +619,19 @@
                         [startFromZero]="false"
                         [responsive]="true"
                       >
+                      </circle-progress>
+                    </div>
+                  </div>
+
+                  <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
+                    <div class="progess pointer centerCircel">
+                      <circle-progress [percent]="
+                          course?.coursePlayerStatus?.course_percentage || 0
+                        " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                        [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                        [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                        [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                        [startFromZero]="false" [responsive]="true">
                       </circle-progress>
                     </div>
                   </div>
@@ -718,7 +728,7 @@
                     <div class="col-12 col-sm-12 col-md-8 col-lg-7 coursenameCol">
                       <div class="f_size_18 f_wt_500  coursename">
                         <p class="courceNameTag" *ngIf="course.course_name.length >= 84" tooltip="{{course.course_name}}" placement="right">
-                          {{course.course_name  | slice:0:92}}...
+                          {{course.course_name  | slice:0:83}}...
                         </p>
                         <p class="courceNameTag" *ngIf="course.course_name.length < 84">
                           {{course.course_name}}
@@ -823,8 +833,8 @@
                       <span class="mobileRespoForum">
                         <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> text_snippet </mat-icon>
                         <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> forum </mat-icon>
-                        <mat-icon *ngIf="!keyboardUp" class="forumIcon" (click)="keyboardUp = ! keyboardUp"> keyboard_arrow_down </mat-icon>
-                        <mat-icon *ngIf="keyboardUp" class="forumIcon" (click)=" keyboardUp = !keyboardUp"> keyboard_arrow_up </mat-icon>
+                        <mat-icon *ngIf="!keyboardUp || course.course_id !== opencourceId" class="forumIcon" aria-rowindex="" (click)="keyboardUp = ! keyboardUp; downArrow(course)"> keyboard_arrow_down </mat-icon>
+                        <mat-icon *ngIf="keyboardUp && course.course_id == opencourceId" class="forumIcon" (click)=" keyboardUp = !keyboardUp; upArrow(course)"> keyboard_arrow_up </mat-icon>
                       </span>
                       <div class="startBtnicon">
                         <button mat-stroked-button *ngIf="
@@ -855,7 +865,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="keyboardUp">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="keyboardUp && course.course_id == opencourceId">
                   <div class="row m-l-2p f_size_12">
                     <div class="col-3" *ngIf="course.batchCourse == true">
                       <div>
@@ -872,7 +882,7 @@
                       </div>
                     </div>
                     <div class="col-3" *ngIf="course.batchCourse != true">
-                      <div class="f_size_13">
+                      <div class="f_size_13 center">
                         Progression
                         <mat-icon tooltip="Course progression" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
@@ -903,8 +913,21 @@
                       </div>
                       <div class="m-l-3 f_size_12">Pending</div>
                     </div>
-                    <div class="col-3" *ngIf="course.batchCourse != true">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div class="progess pointer">
+                        <circle-progress [percent]="
+                            course?.coursePlayerStatus?.course_percentage || 0
+                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                          [startFromZero]="false" [responsive]="true">
+                        </circle-progress>
+                      </div>
+                    </div>
+
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
+                      <div class="progess pointer centerCircel">
                         <circle-progress [percent]="
                             course?.coursePlayerStatus?.course_percentage || 0
                           " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
@@ -1000,7 +1023,7 @@
                     <div class="col-12 col-sm-12 col-md-8 col-lg-7">
                       <div class="f_size_18 f_wt_500 ">
                         <p class="courceNameTag" *ngIf="course.course_name.length >= 84" tooltip="{{course.course_name}}" placement="right">
-                          {{course.course_name  | slice:0:92}}...
+                          {{course.course_name  | slice:0:83}}...
                         </p>
                         <p class="courceNameTag" *ngIf="course.course_name.length < 84">
                           {{course.course_name}}
@@ -1104,8 +1127,8 @@
                       <span class="mobileRespoForum">
                         <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> text_snippet </mat-icon>
                         <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> forum </mat-icon>
-                        <mat-icon *ngIf="!keyboardUp" class="forumIcon" (click)="keyboardUp = ! keyboardUp"> keyboard_arrow_down </mat-icon>
-                        <mat-icon *ngIf="keyboardUp" class="forumIcon" (click)=" keyboardUp = !keyboardUp"> keyboard_arrow_up </mat-icon>
+                        <mat-icon *ngIf="!keyboardUp || course.course_id !== opencourceId" class="forumIcon" aria-rowindex="" (click)="keyboardUp = ! keyboardUp; downArrow(course)"> keyboard_arrow_down </mat-icon>
+                        <mat-icon *ngIf="keyboardUp && course.course_id == opencourceId" class="forumIcon" (click)=" keyboardUp = !keyboardUp; upArrow(course)"> keyboard_arrow_up </mat-icon>
                       </span>
                       <div class="startBtnicon">
                         <button mat-stroked-button *ngIf="
@@ -1136,7 +1159,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-5" >
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="keyboardUp && course.course_id == opencourceId">
                   <div class="row m-l-2p f_size_12">
                     <div class="col-3" *ngIf="course.batchCourse == true">
                       <div>
@@ -1154,7 +1177,7 @@
                     </div>
 
                     <div class="col-3" *ngIf="course.batchCourse != true">
-                      <div class="f_size_13">
+                      <div class="f_size_13 center">
                         Progression
                         <mat-icon tooltip="Course progression" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
@@ -1185,8 +1208,21 @@
                       </div>
                       <div class="m-l-3 f_size_12">Pending</div>
                     </div>
-                    <div class="col-3" *ngIf="course.batchCourse != true">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
                       <div class="progess pointer">
+                        <circle-progress [percent]="
+                            course?.coursePlayerStatus?.course_percentage || 0
+                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                          [startFromZero]="false" [responsive]="true">
+                        </circle-progress>
+                      </div>
+                    </div>
+
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
+                      <div class="progess pointer centerCircel">
                         <circle-progress [percent]="
                             course?.coursePlayerStatus?.course_percentage || 0
                           " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
@@ -1282,7 +1318,7 @@
                     <div class="col-12 col-sm-12 col-md-8 col-lg-7 courseNameCol">
                       <div class="f_size_18 f_wt_500 ">
                         <p class="courceNameTag" *ngIf="course.course_name.length >= 84" tooltip="{{course.course_name}}" placement="right">
-                          {{course.course_name | slice:0:92}}...
+                          {{course.course_name | slice:0:83}}...
                         </p>
                         <p class="courceNameTag" *ngIf="course.course_name.length < 84">
                           {{course.course_name}}
@@ -1387,8 +1423,8 @@
                         <!-- <span class="matBadgeForum" matBadge="1"></span> -->
                         <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> text_snippet </mat-icon>
                         <mat-icon class="forumIcon mr-3" (click)="goToAssignment(course)"> forum </mat-icon>
-                        <mat-icon *ngIf="!keyboardUp" class="forumIcon" (click)="keyboardUp = ! keyboardUp"> keyboard_arrow_down </mat-icon>
-                        <mat-icon *ngIf="keyboardUp" class="forumIcon" (click)=" keyboardUp = !keyboardUp"> keyboard_arrow_up </mat-icon>
+                        <mat-icon *ngIf="!keyboardUp || course.course_id !== opencourceId" class="forumIcon" aria-rowindex="" (click)="keyboardUp = ! keyboardUp; downArrow(course)"> keyboard_arrow_down </mat-icon>
+                        <mat-icon *ngIf="keyboardUp && course.course_id == opencourceId" class="forumIcon" (click)=" keyboardUp = !keyboardUp; upArrow(course)"> keyboard_arrow_up </mat-icon>
                       </span>
                       <div class="startBtnicon">
                         <button mat-stroked-button *ngIf="
@@ -1419,7 +1455,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-5" >
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="keyboardUp && course.course_id == opencourceId">
                   <div class="row m-l-2p f_size_12">
                     <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
                       <div>
@@ -1436,7 +1472,7 @@
                       </div>
                     </div>
                     <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
-                      <div class="f_size_13">
+                      <div class="f_size_13 center">
                         Progression
                         <mat-icon tooltip="Course progression" placement="bottom" class="infoIcon"
                           fontSet="material-icons-outlined">info</mat-icon>
@@ -1467,8 +1503,22 @@
                       </div>
                       <div class="m-l-3 f_size_12">Pending</div>
                     </div>
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
+                      <div class="progess pointer center">
+                        <circle-progress [percent]="
+                            course?.coursePlayerStatus?.course_percentage || 0
+                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                          [startFromZero]="false" [responsive]="true">
+                        </circle-progress>
+                      </div>
+                    </div>
+                    
+
                     <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
-                      <div class="progess pointer">
+                      <div class="progess pointer centerCircel">
                         <circle-progress [percent]="
                             course?.coursePlayerStatus?.course_percentage || 0
                           " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
@@ -1525,7 +1575,7 @@
                   categorytab.categoryId, catalogueDetails.catalogueId,
                   '',
                   searchName, false
-                ); resettingJobRole();
+                ); resettingJobRoledata();
               " 
                 matBadge="{{ categorytab.enrollCount }}"
                 matBadgeOverlap="false"
@@ -1584,7 +1634,7 @@
                       <div class="col-6 col-sm-6 col-md-8 col-lg-7 courceNameCol">
                         <div class="f_size_18 f_wt_500">
                           <p class="courceNameTag" *ngIf="course.course_name.length >= 84" tooltip="{{course.course_name}}" placement="right">
-                            {{course.course_name | slice:0:92}}...
+                            {{course.course_name | slice:0:83}}...
                           </p>
                           <p class="courceNameTag" *ngIf="course.course_name.length < 84">
                             {{course.course_name}}
@@ -2012,9 +2062,9 @@
                           <span class="matBadgeAvail" matBadge="{{ subCatet.totalCount }}"
                           matBadgeOverlap="false"></span>
                          <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" 
-                          *ngIf="subCatet.totalCount == 0" 
+                          *ngIf="subCatet.superSubCategory == null" 
                           >keyboard_arrow_down</mat-icon>
-                          <span *ngIf="subCatet.totalCount > 0">
+                          <span *ngIf="subCatet.superSubCategory !== null">
                           <mat-icon class="arrowIcon float-right accordianText" aria-hidden="false" 
                           *ngIf="!isExpChild || expandActivityNameChildTemp !== subCatet.subCategoryId" (click)="
                           isExpChild &&

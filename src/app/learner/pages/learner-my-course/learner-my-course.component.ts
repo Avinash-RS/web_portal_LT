@@ -97,6 +97,7 @@ export class LearnerMyCourseComponent implements OnInit {
   dropdownMenu = false;
   keyboardUp = true;
   disableDropdown: boolean;
+  opencourceId: any;
 
   nextPageLabel     = '';
   previousPageLabel = '';
@@ -165,6 +166,14 @@ export class LearnerMyCourseComponent implements OnInit {
     this.CommonServices.closeAvailPopup$.next(availableCource);
   }
 
+  downArrow(event) {
+    this.opencourceId = event.course_id;
+  }
+
+  upArrow(event) {
+    this.opencourceId = event.course_id;
+  }
+
   getScreenSize(event?) {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
@@ -222,6 +231,10 @@ export class LearnerMyCourseComponent implements OnInit {
   // }
   // }
   getEnrolledCourses(event, catagoryId, catalougeId, jobRoleCategoryId, searchName, jobroleCheck) {
+    if (this.screenWidth < 800 && this.keyboardUp) {
+      this.keyboardUp = false;
+      this.opencourceId = '';
+    }
     if (jobroleCheck && this.jobRoleId) {
       catalougeId = this.catalogueDetails.catalogueId;
       jobRoleCategoryId = this.jobRoleId;
@@ -400,29 +413,29 @@ export class LearnerMyCourseComponent implements OnInit {
   }
 
   getCountForCategories() {
-    // let dropDownData = [];
-    // this.learnerService.getCountForCategories(this.userDetailes._id).subscribe((data: any) => {
-    //   if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
-    //     this.catalogueDetails = data.data.getCountForCategories.data;
-    //     this.categoryDetails = data.data.getCountForCategories.data.categories;
-    //     dropDownData = [data.data.getCountForCategories.data];
-    //     this.dropDownCategoryDetails = dropDownData[0];
-    //     this.categories = dropDownData[0].categories;
-    //     this.dropdownCatDetails = dropDownData[0];
-    //   }
-    // });
     let dropDownData = [];
-    this.route.data.subscribe((result: any) => {
-      // console.log('after response', result.data.data.getCountForCategories.data);
-      if (result.data && result.data.data && result.data.data.getCountForCategories && result.data.data.getCountForCategories.data) {
-            this.catalogueDetails = result.data.data.getCountForCategories.data;
-            this.categoryDetails = result.data.data.getCountForCategories.data.categories;
-            dropDownData = [result.data.data.getCountForCategories.data];
-            this.dropDownCategoryDetails = dropDownData[0];
-            this.categories = dropDownData[0].categories;
-            this.dropdownCatDetails = dropDownData[0];
-          }
+    this.learnerService.getCountForCategories(this.userDetailes._id).subscribe((data: any) => {
+      if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
+        this.catalogueDetails = data.data.getCountForCategories.data;
+        this.categoryDetails = data.data.getCountForCategories.data.categories;
+        dropDownData = [data.data.getCountForCategories.data];
+        this.dropDownCategoryDetails = dropDownData[0];
+        this.categories = dropDownData[0].categories;
+        this.dropdownCatDetails = dropDownData[0];
+      }
     });
+    // let dropDownData = [];
+    // this.route.data.subscribe((result: any) => {
+    //   console.log('after response', result.data.data.getCountForCategories.data);
+    //   if (result.data && result.data.data && result.data.data.getCountForCategories && result.data.data.getCountForCategories.data) {
+    //         this.catalogueDetails = result.data.data.getCountForCategories.data;
+    //         this.categoryDetails = result.data.data.getCountForCategories.data.categories;
+    //         dropDownData = [result.data.data.getCountForCategories.data];
+    //         this.dropDownCategoryDetails = dropDownData[0];
+    //         this.categories = dropDownData[0].categories;
+    //         this.dropdownCatDetails = dropDownData[0];
+    //       }
+    // });
   }
   getCoureBasedOnCatalog(catalogue, category, subchild, superChild) {
     this.categoryData = category;
@@ -563,6 +576,10 @@ export class LearnerMyCourseComponent implements OnInit {
     this.selectedJobRole = 'Job Role';
     this.jobRoleId = null;
     this.getEnrolledCourses('', '', '', '', '', false);
+  }
+  resettingJobRoledata() {
+    this.selectedJobRole = 'Job Role';
+    this.jobRoleId = null;
   }
 }
 

@@ -55,8 +55,11 @@
                                         <div>
                                             <div class="moduleHead">
                                                 <div class="modhead">
-                                                    <p *ngIf="res?.title.length >= 67" class="moduleName" tooltip="{{res?.title}}" placement="right">{{res?.title | slice:0:64}}...</p>
-                                                    <p *ngIf="res?.title.length < 67"class="moduleName">{{res?.title}}</p>
+                                                    <p *ngIf="res?.title.length >= 67" class="moduleName" tooltip="{{res?.title}}" placement="right">{{res?.title | slice:0:66}}...</p>
+                                                    <p *ngIf="res?.title.length < 67"class="moduleName">
+                                                        <!-- {{res?.title}} -->
+                                                        {{res?.title}}
+                                                    </p>
                                                
                                                 </div>
                                             </div>
@@ -102,7 +105,7 @@
                                                         (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)" >
                                                         <!-- {{mod?.title}} -->
                                                  <p class="titleName" *ngIf="mod?.title.length >= 65" tooltip="{{mod?.title}}" placement = "right">
-                                                    {{mod?.title | slice:0:64}}...
+                                                    {{mod?.title | slice:0:56}}...
                                                  </p> 
                                                  <p class="titleName" *ngIf="mod?.title.length < 65">
                                                     {{mod?.title}}
