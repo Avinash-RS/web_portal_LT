@@ -20,6 +20,12 @@
     width: 35px;
 }
 
+:host ::ng-deep ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 4px !important;
+    height: 10px !important;
+}
+
 .download-button {
     background: $lxp-theme-green !important; // red color
     float: right;
