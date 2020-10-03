@@ -1544,9 +1544,10 @@ left: 10px;
 
 
 .closeBtn {
-    position: relative;
-    right: -10px;
+    position: absolute;
+    right: -23px;
     top: 4px;
+    z-index: 1;
 }
 
 .about-course {
