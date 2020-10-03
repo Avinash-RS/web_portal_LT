@@ -413,7 +413,7 @@ export class LearnerMyCourseComponent implements OnInit {
     // });
     let dropDownData = [];
     this.route.data.subscribe((result: any) => {
-      console.log('after response', result.data.data.getCountForCategories.data);
+      // console.log('after response', result.data.data.getCountForCategories.data);
       if (result.data && result.data.data && result.data.data.getCountForCategories && result.data.data.getCountForCategories.data) {
             this.catalogueDetails = result.data.data.getCountForCategories.data;
             this.categoryDetails = result.data.data.getCountForCategories.data.categories;
@@ -441,10 +441,9 @@ export class LearnerMyCourseComponent implements OnInit {
   }
   viewCourse(category, templateRef: TemplateRef<any>, categoryname, categorycount) {
     this.color = false;
-    this.loading = true;
+    // this.loading = true;
     this.viewCourseClass = false;
     this.categoryPopupData = categoryname;
-    console.log('this.categoryPopupData', this.categoryPopupData);
     this.categoryCount = categorycount;
 
     this.dialog.open(templateRef, {
