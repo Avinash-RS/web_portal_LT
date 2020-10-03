@@ -454,10 +454,9 @@ export class LearnerMyCourseComponent implements OnInit {
   }
   viewCourse(category, templateRef: TemplateRef<any>, categoryname, categorycount) {
     this.color = false;
-    this.loading = true;
+    // this.loading = true;
     this.viewCourseClass = false;
     this.categoryPopupData = categoryname;
-    console.log('this.categoryPopupData', this.categoryPopupData);
     this.categoryCount = categorycount;
 
     this.dialog.open(templateRef, {
