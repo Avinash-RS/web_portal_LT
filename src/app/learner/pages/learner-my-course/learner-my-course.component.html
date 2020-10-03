@@ -524,7 +524,126 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="keyboardUp && course.course_id == opencourceId" >
+              <div class="col-12 col-sm-12 col-md-12 col-lg-5 normalScreen">
+                <div class="row m-l-2p f_size_12">
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
+                    <div>
+                      Activity
+                      <mat-icon
+                        tooltip="Info about the action"
+                        placement="bottom"
+                        class="infoIcon"
+                        fontSet="material-icons-outlined"
+                        >info</mat-icon
+                      >
+                    </div>
+                  </div>
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
+                    <div class="f_size_13">
+                      Learning effort
+                      <mat-icon
+                        tooltip="Info about the action"
+                        placement="bottom"
+                        class="infoIcon"
+                        fontSet="material-icons-outlined"
+                        >info</mat-icon
+                      >
+                    </div>
+                  </div>
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse != true">
+                    <div class="f_size_13 center" >
+                      Progression
+                      <mat-icon
+                        tooltip="Course progression"
+                        placement="bottom"
+                        class="infoIcon"
+                        fontSet="material-icons-outlined"
+                        >info</mat-icon
+                      >
+                    </div>
+                  </div>
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
+                    <div>
+                      Points earned
+                      <mat-icon
+                        tooltip="Info about the action"
+                        placement="bottom"
+                        class="infoIcon"
+                        fontSet="material-icons-outlined"
+                        >info</mat-icon
+                      >
+                    </div>
+                  </div>
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
+                    <div>
+                      Final score
+                      <mat-icon
+                        tooltip="Info about the action"
+                        placement="bottom"
+                        class="infoIcon"
+                        fontSet="material-icons-outlined"
+                        >info</mat-icon
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row m-t-2 m-l-2p activitiRow">
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
+                    <div class="m-t">
+                      <sapn class="padscore">4</sapn>
+                      <sapn class="f_size_22">/</sapn>
+                      <span class="f_size_20">20</span>
+                    </div>
+                    <div class="m-l-3 f_size_12">Pending</div>
+                  </div>
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
+                    <div class="progess pointer">
+                      <circle-progress
+                        [percent]="
+                          course?.coursePlayerStatus?.course_percentage || 0
+                        "
+                        [radius]="10"
+                        [outerStrokeWidth]="2"
+                        [innerStrokeWidth]="2"
+                        [space]="-2"
+                        [outerStrokeGradient]="true"
+                        [outerStrokeGradientStopColor]="'#53a9ff'"
+                        [outerStrokeColor]="'#4882c2'"
+                        [innerStrokeColor]="'#e7e8ea'"
+                        [titleFontSize]="7"
+                        [unitsFontSize]="7"
+                        [showSubtitle]="false"
+                        [animation]="true"
+                        [animationDuration]="100"
+                        [startFromZero]="false"
+                        [responsive]="true"
+                      >
+                      </circle-progress>
+                    </div>
+                  </div>
+
+                  <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
+                    <div class="progess pointer centerCircel">
+                      <circle-progress [percent]="
+                          course?.coursePlayerStatus?.course_percentage || 0
+                        " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                        [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                        [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                        [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                        [startFromZero]="false" [responsive]="true">
+                      </circle-progress>
+                    </div>
+                  </div>
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
+                    <div class="point">56</div>
+                  </div>
+                  <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
+                    <div class="finalScore">- - -</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-12 col-lg-5 mobileResponsive" *ngIf="keyboardUp && course.course_id == opencourceId" >
                 <div class="row m-l-2p f_size_12">
                   <div class="col-3 activityCol"  *ngIf="course.batchCourse == true">
                     <div>
@@ -865,7 +984,88 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="keyboardUp && course.course_id == opencourceId">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5 normalScreen">
+                  <div class="row m-l-2p f_size_12">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div>
+                        Activity
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
+                      </div>
+                    </div>
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div class="f_size_13">
+                        Learning effort
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
+                      </div>
+                    </div>
+                    <div class="col-3" *ngIf="course.batchCourse != true">
+                      <div class="f_size_13 center">
+                        Progression
+                        <mat-icon tooltip="Course progression" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
+                      </div>
+                    </div>
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div>
+                        Points earned
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
+                      </div>
+                    </div>
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div>
+                        Final score
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row m-t-2 m-l-2p">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div class="m-t">
+                        <sapn class="padscore">4</sapn>
+                        <sapn class="f_size_22">/</sapn>
+                        <span class="f_size_20">20</span>
+                      </div>
+                      <div class="m-l-3 f_size_12">Pending</div>
+                    </div>
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div class="progess pointer">
+                        <circle-progress [percent]="
+                            course?.coursePlayerStatus?.course_percentage || 0
+                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                          [startFromZero]="false" [responsive]="true">
+                        </circle-progress>
+                      </div>
+                    </div>
+
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
+                      <div class="progess pointer centerCircel">
+                        <circle-progress [percent]="
+                            course?.coursePlayerStatus?.course_percentage || 0
+                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                          [startFromZero]="false" [responsive]="true">
+                        </circle-progress>
+                      </div>
+                    </div>
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div class="point">56</div>
+                    </div>
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div class="finalScore">- - -</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5 mobileResponsive" *ngIf="keyboardUp && course.course_id == opencourceId">
                   <div class="row m-l-2p f_size_12">
                     <div class="col-3" *ngIf="course.batchCourse == true">
                       <div>
@@ -1159,7 +1359,89 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="keyboardUp && course.course_id == opencourceId">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5 normalScreen">
+                  <div class="row m-l-2p f_size_12">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div>
+                        Activity
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
+                      </div>
+                    </div>
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div>
+                        Learning effort
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
+                      </div>
+                    </div>
+
+                    <div class="col-3" *ngIf="course.batchCourse != true">
+                      <div class="f_size_13 center">
+                        Progression
+                        <mat-icon tooltip="Course progression" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
+                      </div>
+                    </div>
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div>
+                        Points earned
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
+                      </div>
+                    </div>
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div>
+                        Final score
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row m-t-2 m-l-2p">
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div class="m-t">
+                        <sapn class="padscore">4</sapn>
+                        <sapn class="f_size_22">/</sapn>
+                        <span class="f_size_20">20</span>
+                      </div>
+                      <div class="m-l-3 f_size_12">Pending</div>
+                    </div>
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div class="progess pointer">
+                        <circle-progress [percent]="
+                            course?.coursePlayerStatus?.course_percentage || 0
+                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                          [startFromZero]="false" [responsive]="true">
+                        </circle-progress>
+                      </div>
+                    </div>
+
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
+                      <div class="progess pointer centerCircel">
+                        <circle-progress [percent]="
+                            course?.coursePlayerStatus?.course_percentage || 0
+                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                          [startFromZero]="false" [responsive]="true">
+                        </circle-progress>
+                      </div>
+                    </div>
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div class="point">56</div>
+                    </div>
+                    <div class="col-3" *ngIf="course.batchCourse == true">
+                      <div class="finalScore">- - -</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5 mobileResponsive" *ngIf="keyboardUp && course.course_id == opencourceId">
                   <div class="row m-l-2p f_size_12">
                     <div class="col-3" *ngIf="course.batchCourse == true">
                       <div>
@@ -1455,7 +1737,89 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-5" *ngIf="keyboardUp && course.course_id == opencourceId">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5 normalScreen">
+                  <div class="row m-l-2p f_size_12">
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
+                      <div>
+                        Activity
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
+                      </div>
+                    </div>
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
+                      <div>
+                        Learning effort
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
+                      </div>
+                    </div>
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
+                      <div class="f_size_13 center">
+                        Progression
+                        <mat-icon tooltip="Course progression" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
+                      </div>
+                    </div>
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
+                      <div>
+                        Points earned
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
+                      </div>
+                    </div>
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
+                      <div>
+                        Final score
+                        <mat-icon tooltip="Info about the action" placement="bottom" class="infoIcon"
+                          fontSet="material-icons-outlined">info</mat-icon>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row m-t-2 m-l-2p activitiRow">
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
+                      <div class="m-t">
+                        <sapn class="padscore">4</sapn>
+                        <sapn class="f_size_22">/</sapn>
+                        <span class="f_size_20">20</span>
+                      </div>
+                      <div class="m-l-3 f_size_12">Pending</div>
+                    </div>
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
+                      <div class="progess pointer center">
+                        <circle-progress [percent]="
+                            course?.coursePlayerStatus?.course_percentage || 0
+                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                          [startFromZero]="false" [responsive]="true">
+                        </circle-progress>
+                      </div>
+                    </div>
+                    
+
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse != true">
+                      <div class="progess pointer centerCircel">
+                        <circle-progress [percent]="
+                            course?.coursePlayerStatus?.course_percentage || 0
+                          " [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
+                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
+                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
+                          [startFromZero]="false" [responsive]="true">
+                        </circle-progress>
+                      </div>
+                    </div>
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
+                      <div class="point">56</div>
+                    </div>
+                    <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
+                      <div class="finalScore">- - -</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5 mobileResponsive" *ngIf="keyboardUp && course.course_id == opencourceId">
                   <div class="row m-l-2p f_size_12">
                     <div class="col-3 activityCol" *ngIf="course.batchCourse == true">
                       <div>
