@@ -145,7 +145,7 @@
               
                 </mat-toolbar>
                 <!-- tabs starts here -->
-                <mat-tab-group #demo3Tab [(selectedIndex)]="selectedTabIndex" #tabs animationDuration="1000ms"
+                <mat-tab-group #demo3Tab [(selectedIndex)]="selectedTabIndex" #tabs 
                     (selectedTabChange)="tabSelection($event)"
                     [ngClass]="drawer.opened==true?'drawerOpnTab':'drawerClsTab'">
                     <mat-tab class="pointer">
