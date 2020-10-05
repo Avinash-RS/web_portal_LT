@@ -112,7 +112,8 @@ export class LearnerMyCourseComponent implements OnInit {
     this.userDetailes = this.gs.checkLogout();
     this.getEnrolledCourses('', '', '', '', '', '');
     this.getScreenSize();
-    this.getCountForCategories();
+    // this.getCountForCategories();
+    this.getTab();
     this.getCountForJobRole();
   }
   @HostListener('window:resize', ['$event'])
@@ -424,18 +425,20 @@ export class LearnerMyCourseComponent implements OnInit {
         this.dropdownCatDetails = dropDownData[0];
       }
     });
-    // let dropDownData = [];
-    // this.route.data.subscribe((result: any) => {
-    //   console.log('after response', result.data.data.getCountForCategories.data);
-    //   if (result.data && result.data.data && result.data.data.getCountForCategories && result.data.data.getCountForCategories.data) {
-    //         this.catalogueDetails = result.data.data.getCountForCategories.data;
-    //         this.categoryDetails = result.data.data.getCountForCategories.data.categories;
-    //         dropDownData = [result.data.data.getCountForCategories.data];
-    //         this.dropDownCategoryDetails = dropDownData[0];
-    //         this.categories = dropDownData[0].categories;
-    //         this.dropdownCatDetails = dropDownData[0];
-    //       }
-    // });
+  }
+  getTab() {
+    let dropDownData = [];
+    this.route.data.subscribe((result: any) => {
+      console.log('after response', result.data.data.getCountForCategories.data);
+      if (result.data && result.data.data && result.data.data.getCountForCategories && result.data.data.getCountForCategories.data) {
+            this.catalogueDetails = result.data.data.getCountForCategories.data;
+            this.categoryDetails = result.data.data.getCountForCategories.data.categories;
+            dropDownData = [result.data.data.getCountForCategories.data];
+            this.dropDownCategoryDetails = dropDownData[0];
+            this.categories = dropDownData[0].categories;
+            this.dropdownCatDetails = dropDownData[0];
+          }
+    });
   }
   getCoureBasedOnCatalog(catalogue, category, subchild, superChild) {
     this.categoryData = category;
