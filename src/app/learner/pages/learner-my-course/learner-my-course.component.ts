@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, HostListener, TemplateRef, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
-import { Router , ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog, MatTabChangeEvent } from '@angular/material';
@@ -99,7 +99,7 @@ export class LearnerMyCourseComponent implements OnInit {
   disableDropdown: boolean;
   opencourceId: any;
 
-  nextPageLabel     = '';
+  nextPageLabel = '';
   previousPageLabel = '';
 
   constructor(
@@ -109,26 +109,64 @@ export class LearnerMyCourseComponent implements OnInit {
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
     private router: Router, private dialog: MatDialog,
     public CommonServices: CommonServicesService) {
-    this.userDetailes = this.gs.checkLogout();
-    this.getEnrolledCourses('', '', '', '', '', '');
-    this.getScreenSize();
-    this.getCountForCategories();
-    this.getCountForJobRole();
+    this.route.queryParams.subscribe(params => {
+      console.log(params, 'params');
+      // for portal integration
+      if (params.email_id === undefined) {
+        console.log('inside if');
+        this.userDetailes = this.gs.checkLogout();
+        this.getEnrolledCourses('', '', '', '', '', '');
+        this.getScreenSize();
+        this.getCountForCategories();
+        this.getCountForJobRole();
+        // this.insidengOnInit();
+      } else {
+        this.learnerService.getLoginUserDetail(params.email_id).subscribe((isValidEmailResult: any) => {
+          if (isValidEmailResult.data.get_login_details.success === true) {
+            this.userDetailes = (isValidEmailResult.data.get_login_details.message);
+            localStorage.setItem('remember_me', 'true');
+            localStorage.setItem('user_img', isValidEmailResult.data.get_login_details.message.profile_img);
+            localStorage.setItem('Fullname', isValidEmailResult.data.get_login_details.message.full_name);
+            localStorage.setItem('role', 'learner');
+            localStorage.setItem('token', isValidEmailResult.data.get_login_details.message.token);
+            localStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
+            sessionStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
+            this.router.navigateByUrl('/Learner/MyCourse');
+            this.getEnrolledCourses('', '', '', '', '', '');
+            this.getScreenSize();
+            this.getCountForCategories();
+            this.getCountForJobRole();
+            // this.insidengOnInit();
+          } else {
+            localStorage.clear();
+            sessionStorage.clear();
+            this.CommonServices.getIpAddressByUrl();
+            this.router.navigateByUrl('/Learner/login');
+          }
+        });
+      }
+    });
   }
   @HostListener('window:resize', ['$event'])
   // ngOnInit() {
   // this.translate.use(localStorage.getItem('language'));
   // }
   ngOnInit() {
+    if (this.userDetailes) {
+      this.insidengOnInit();
+    }
+  }
+
+  insidengOnInit() {
     this.CommonServices.openAvailCourcePopup.subscribe((data: any) => {
       this.availableCource = data;
     });
-     if (this.screenWidth < 800) {
-       this.keyboardUp = false;
-     }
+    if (this.screenWidth < 800) {
+      this.keyboardUp = false;
+    }
     this.CommonServices.openNotification.subscribe((data: any) => {
       this.disableDropdown = data;
-  });
+    });
     this.selectedIndex = 1;
     this.gs.theme.subscribe(message =>
       this.componentCssClass = message
@@ -489,9 +527,9 @@ export class LearnerMyCourseComponent implements OnInit {
       superSubCat = this.categoryyName.superSubCategoryId;
     }
     this.learnerService.claimcourse(this.userDetailes._id, this.userDetailes.user_id,
-      course.course_id, course.course_name , categoryPopupName).subscribe((data: any) => {
+      course.course_id, course.course_name, categoryPopupName).subscribe((data: any) => {
         if (data && data.data && data.data.claimcourse && data.data.claimcourse.success) {
-          this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, 
+          this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId,
             this.categoryData.categoryId,
             this.userDetailes._id, subCat, superSubCat).subscribe((course: any) => {
               if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
