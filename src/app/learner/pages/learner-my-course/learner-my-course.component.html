@@ -2454,7 +2454,10 @@
                             ? onexpchildTemp(subCatet.subCategoryId, false)
                             : onexpchildTemp(subCatet.subCategoryId, true)
                         ">
-                          <span class="accordianText ml-5">
+                          <span  *ngIf="subCatet.subCategoryName?.length > 28" class="accordianText ml-5">
+                            {{ (subCatet.subCategoryName | titlecase | slice:0:15)+'...' }}
+                          </span>
+                          <span  *ngIf="subCatet.subCategoryName?.length < 28" class="accordianText ml-5">
                             {{ subCatet.subCategoryName | titlecase }}
                           </span>
                           <span class="matBadgeAvail" matBadge="{{ subCatet.totalCount }}"
