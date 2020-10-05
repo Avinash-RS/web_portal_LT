@@ -986,7 +986,7 @@ border-radius: 0 !important;
 }
 
 .drawer {
-    width: 95% !important;
+    width: 100% !important;
 }
 
 .mat-drawer.mat-drawer-side{
@@ -1016,11 +1016,16 @@ border-radius: 0 !important;
 }
 
 .time {
-    left: 0 !important;
+    left: -25px !important;
 }
 
 .panel {
     margin-bottom: 10px;
+}
+.main-opn{
+
+    left: 372px !important;
+
 }
 
 // .moduleund {
@@ -1059,7 +1064,7 @@ border-radius: 0 !important;
     top: -2px;
 }
 .closeBtn {
-    right: -25px !important;
+    right: -50px !important;
 }
 .Outine{
     top: -2px !important;

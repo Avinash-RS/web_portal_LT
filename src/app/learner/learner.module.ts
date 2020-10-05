@@ -128,9 +128,6 @@ const routes: Routes = [
   {
     path: 'MyCourse',
     component: LearnerMyCourseComponent,
-    // resolve: {
-    //   data: LearnermycourseService
-    //   },
     canActivate: [AuthGuard],
     data: { animation: 'Learner  MyCourse' }
   },
