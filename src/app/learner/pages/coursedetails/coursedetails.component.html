@@ -136,7 +136,7 @@
               
                 </mat-toolbar>
                 <!-- tabs starts here -->
-                <mat-icon class="ml-3"[matMenuTriggerFor]="menu">more_horiz</mat-icon>
+                <mat-icon class="ml-3 mobileHoriz" [matMenuTriggerFor]="menu">more_horiz</mat-icon>
                 <mat-menu #menu="matMenu">
                     <button (click)="selectedTabIndex = 0" class="matTabMenu" mat-menu-item>
                     <span>{{detailData?.course_name ? detailData?.course_name : course?.course_name}}</span>
