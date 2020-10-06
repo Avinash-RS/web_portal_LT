@@ -4,17 +4,16 @@
 <!-- <div style="height: 2px;" (mouseover)="sider=true"></div> -->
 <div class="container007 animated animatedFadeInUp fadeInUp bodybg">
     <div>
-        <mat-drawer-container [class.drawer-opened]="drawer.opened" class="example-container">
-            <mat-drawer #drawer class="drawer" mode="side" opened="true">
-
+       
+        <mat-drawer-container *ngIf="drawersOpen !== null" [class.drawer-opened]="drawer.opened" class="example-container">
+            <mat-drawer #drawer class="drawer" mode="side" opened="{{drawersOpen}}">
                 <mat-toolbar class="header">
-                  
                     <mat-icon *ngIf="!drawer.opened" (click)="drawer.toggle()">
                         menu
                     </mat-icon>
                     <div class="row">
                         <div class="col-4 Outine">
-                            {{'Course Outline' | translate }}
+                            {{'Course Outline' | translate }} {{drawersOpen}}
                         </div>
                         <div class="col-3 divider" >
                           <span> | </span>  
@@ -35,7 +34,6 @@
                                 </div>
                             </div>
                         </div>
-                     
                     </div>
                 </mat-toolbar>
                 <div class="contents">
@@ -60,23 +58,17 @@
                                                         <!-- {{res?.title}} -->
                                                         {{res?.title}}
                                                     </p>
-                                               
                                                 </div>
                                             </div>
                                         </div>
-                                  
                                     </div>
                                     <div class="row">
                                         <div class="moduleund">
-                                            
                                             <span  [ngClass]="res?.title.length > 39? 'course-time':'course-time-default'">
                                                 <mat-icon class="time-icon">alarm</mat-icon> {{res?.moduletime ? res?.moduletime : '01:00:00' }}
                                             </span>
                                         </div>
                                     </div>
-                                 
-                                   
-
                                 </mat-panel-title>
                                 <!-- <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons mar">done
                         </mat-icon> -->
@@ -123,7 +115,6 @@
                 </div>
             </mat-drawer>
 
-
             <!-- header menu starts here -->
 
             <div [ngClass]="drawer.opened==true?'main-opn':'main-cls'">
@@ -145,12 +136,28 @@
               
                 </mat-toolbar>
                 <!-- tabs starts here -->
+                <mat-icon class="ml-3"[matMenuTriggerFor]="menu">more_horiz</mat-icon>
+                <mat-menu #menu="matMenu">
+                    <button (click)="selectedTabIndex = 0" class="matTabMenu" mat-menu-item>
+                    <span>{{detailData?.course_name ? detailData?.course_name : course?.course_name}}</span>
+                    </button>
+                    <button (click)="selectedTabIndex = 1" class="matTabMenu" mat-menu-item>
+                      <span>About the course</span>
+                    </button>
+                    <button (click)="selectedTabIndex = 2" class="matTabMenu" mat-menu-item>
+                      <span>Resources</span>
+                    </button>
+                    <button (click)="selectedTabIndex = 3" class="matTabMenu" mat-menu-item>
+                        <span>Assignments</span>
+                      </button>
+                      <button *ngIf="userDetail.is_forum_config && selectedModuleData === null || selectedModuleData === undefined" (click)="selectedTabIndex = 4" class="matTabMenu" mat-menu-item>
+                        <span>Forum</span>
+                      </button>
+                  </mat-menu>
                 <mat-tab-group #demo3Tab [(selectedIndex)]="selectedTabIndex" #tabs 
                     (selectedTabChange)="tabSelection($event)"
                     [ngClass]="drawer.opened==true?'drawerOpnTab':'drawerClsTab'">
                     <mat-tab class="pointer">
-
-
                         <ng-template mat-tab-label>
                             <!-- Satish demo comment -->
                             <!-- <label  class="pointer lab" *ngIf="course?.course_name?.length>28"
@@ -1266,6 +1273,15 @@
                             <br>
                         </ng-template>
                     </mat-tab>
+
+                     <!-- forum tab -->
+                     <!-- <mat-tab>
+                        <div [ngClass]="drawer.opened==true?'example-sidenav-content-opn':'example-sidenav-content-cls'"
+                        class="">
+                        <iframe id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
+                    </div>           
+                 </mat-tab> -->
+                    
                 </mat-tab-group>
             </div>
         </mat-drawer-container>

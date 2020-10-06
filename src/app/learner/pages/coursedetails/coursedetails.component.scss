@@ -970,6 +970,21 @@ border-radius: 0 !important;
 
 // / mobile
 @media(min-width: 320px) and(max-width: 767px) {
+:host ::ng-deep #mat-tab-label-0-0 {
+  display: none !important;
+}
+:host ::ng-deep #mat-tab-label-0-1 {
+  display: none !important;
+}
+:host ::ng-deep #mat-tab-label-0-2 {
+  display: none !important;
+}
+:host ::ng-deep #mat-tab-label-0-3 {
+  display: none !important;
+}
+:host ::ng-deep #mat-tab-label-0-4 {
+    display: none !important;
+  }
 .createThreadDialog {
     width: 320px;
 }
