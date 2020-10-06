@@ -17,9 +17,10 @@ userDetail: any;
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails')) || null;
    }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-
-this.userObjId = this.userDetail._id;
-return this.getCountForCategories(this.userObjId);
+    if (this.userDetail !== null) {
+      this.userObjId = this.userDetail._id;
+      return this.getCountForCategories(this.userObjId);
+    }
   }
   getCountForCategories(userObjId) {
     return this.apollo.query({
