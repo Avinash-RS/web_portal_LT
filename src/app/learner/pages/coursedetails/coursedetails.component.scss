@@ -1002,6 +1002,9 @@ border-radius: 0 !important;
   :host ::ng-deep #mat-tab-label-0-4 {
     display: none !important;
   }
+  :host ::ng-deep .mat-tab-label-container {
+    display: none !important;
+  }
 .createThreadDialog {
     width: 320px;
 }
