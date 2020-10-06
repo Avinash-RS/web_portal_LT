@@ -977,8 +977,34 @@ padding: 30px !important;
 border-radius: 0 !important;
 }
 
+.mobileHoriz {
+    display: none;
+}
+
 // / mobile
 @media(min-width: 320px) and(max-width: 767px) {
+
+.mobileHoriz {
+  display: block;
+}
+:host ::ng-deep #mat-tab-label-0-0 {
+    display: none !important;
+  }
+  :host ::ng-deep #mat-tab-label-0-1 {
+    display: none !important;
+  }
+  :host ::ng-deep #mat-tab-label-0-2 {
+    display: none !important;
+  }
+  :host ::ng-deep #mat-tab-label-0-3 {
+    display: none !important;
+  }
+  :host ::ng-deep #mat-tab-label-0-4 {
+    display: none !important;
+  }
+  :host ::ng-deep .mat-tab-label-container {
+    display: none !important;
+  }
 .createThreadDialog {
     width: 320px;
 }
@@ -1073,6 +1099,7 @@ border-radius: 0 !important;
     top: -2px;
 }
 .closeBtn {
+    left: unset !important;
     right: -50px !important;
 }
 .Outine{

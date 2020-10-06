@@ -157,6 +157,9 @@ export class CoursedetailsComponent implements OnInit {
   detailData: any;
   batchDetails: any;
   disableThreads: boolean;
+  drawersOpen: boolean;
+  screenHeight: number;
+  screenWidth: number;
   // initials: any;
 
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
@@ -171,6 +174,14 @@ export class CoursedetailsComponent implements OnInit {
               public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
               public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
     this.selectedModuleData = null;
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+    if (this.screenWidth < 800) {
+      this.drawersOpen = false;
+    } else {
+      this.drawersOpen = true;
+    }
+    console.log('this.drawersOpen', this.drawersOpen);
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     if (this.gs.checkLogout()) {
