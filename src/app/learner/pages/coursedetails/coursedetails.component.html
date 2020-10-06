@@ -40,9 +40,9 @@
                     <mat-accordion *ngFor="let res of scromModuleData; let i = index"
                         (click)="getSelectedIndex(i); getModuleDataForForum(scromModuleData?.length, i + 1, res)">
                         <mat-expansion-panel class="panel" hideToggle="true" #example [expanded]="selectedIndex === i">
-                            <mat-expansion-panel-header [ngClass]="res?.title.length > 39?'multiline' : 'singleLine'">
+                            <mat-expansion-panel-header class="moduleHeadHight">
                                 <mat-panel-title class="module-container">
-                                    <div class="row">
+                                    <div class="row titleHeight">
                                         <div>
                                             <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons mar">done
                                             </mat-icon>
@@ -64,7 +64,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="moduleund">
-                                            <span  [ngClass]="res?.title.length > 39? 'course-time':'course-time-default'">
+                                            <span class="time-icon">
                                                 <mat-icon class="time-icon">alarm</mat-icon> {{res?.moduletime ? res?.moduletime : '01:00:00' }}
                                             </span>
                                         </div>
