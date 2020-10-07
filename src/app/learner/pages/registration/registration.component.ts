@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
@@ -16,6 +16,7 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
+  @ViewChild(FormGroupDirective) formRef: FormGroupDirective;
   public codeValue: string;
   registerForm: FormGroup;
   loading = false;
@@ -70,6 +71,7 @@ export class RegistrationComponent implements OnInit {
     this.registerForm.value.mobile ?  this.registerForm.value.mobile : '' ,
      this.registerForm.value.title , true ).subscribe((data: any) => {
     this.registerForm.reset();
+    this.formRef.resetForm();
     this.registerForm.setErrors(null); // could be removed
     this.registerForm.updateValueAndValidity();
     if (data.data.user_registration) {
