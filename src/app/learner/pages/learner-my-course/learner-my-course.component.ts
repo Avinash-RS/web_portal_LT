@@ -28,6 +28,7 @@ import { CommonServicesService } from '@core/services/common-services.service';
 })
 
 export class LearnerMyCourseComponent implements OnInit {
+  viewScrollBar = false;
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   @Output() focusChange: EventEmitter<MatTabChangeEvent>;
   [x: string]: any;
