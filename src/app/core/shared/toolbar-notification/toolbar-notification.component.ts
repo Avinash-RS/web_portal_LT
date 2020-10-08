@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class ToolbarNotificationComponent implements OnInit {
   isOpen = false;
   userId: any;
-  notifications = [];
+  notifications: any;
   pagenumber = 1;
   notificationMarkRead = [];
   unreadCount: any;
@@ -35,6 +35,9 @@ export class ToolbarNotificationComponent implements OnInit {
     this.commonservice.notificationCount.subscribe((data: any) => {
       this.unreadCount = data;
   });
+    this.commonservice.notificationStatus.subscribe((status: any) => {
+      this.notifications = status;
+});
     const learnerDetail = JSON.parse(sessionStorage.getItem('UserDetails'));
     this.userId = learnerDetail.user_id;
     this.getNotification();

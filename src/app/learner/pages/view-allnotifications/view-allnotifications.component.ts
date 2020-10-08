@@ -46,6 +46,7 @@ export class ViewAllnotificationsComponent implements OnInit {
     this.loader.hide();
     const unreadCount = this.unreadCount;
     this.commonservice.notificationCount$.next(unreadCount);
+    this.commonservice.notificationStatus$.next(this.notifications);
   });
 }
 markAsRead(notification, type) {
