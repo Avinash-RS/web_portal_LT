@@ -63,6 +63,7 @@ export class GraphqlModule {
             `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
           );
           if (message.includes('TokenExpiredError') || message.includes('JsonWebTokenError')) {
+            console.log('inside');
             localStorage.clear();
             sessionStorage.clear();
             this.services.getIpAddressByUrl();

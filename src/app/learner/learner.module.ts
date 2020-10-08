@@ -131,7 +131,7 @@ const routes: Routes = [
     resolve: {
       data: LearnermycourseService
       },
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     data: { animation: 'Learner  MyCourse' }
   },
   {
