@@ -30,6 +30,35 @@ export const login = gql`
   }
 `;
 
+export const getLoginUserDetail = gql`
+  query get_login_details($username: String!) {
+    get_login_details(username: $username) {
+      success
+      error_msg
+      message {
+        is_admin
+        is_active
+        is_blocked
+        is_profile_updated
+        _id
+        user_id
+        username
+        token
+        full_name
+        is_forum_config
+        is_comment_config
+        is_thread_config
+        message
+        profile_img
+        group_id
+        nodebb_response{
+            uid
+        }
+      }
+    }
+  }
+`;
+
 export const get_country_details = gql`
   query get_country_details {
     get_country_details {

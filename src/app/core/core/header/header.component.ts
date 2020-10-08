@@ -13,7 +13,6 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  
   userDetailes: any;
   userimage: any;
   role: string;
@@ -40,12 +39,15 @@ export class HeaderComponent implements OnInit {
     this.activeUrl = this.router.url;
     this.orgDetails = JSON.parse(localStorage.getItem('organizationDetails')) || null;
     this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
-    // this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
-    this.userDetailes = this.gs.checkLogout();
+    this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
+    // this.userDetailes = this.gs.checkLogout();
     this.role = localStorage.getItem('role') || sessionStorage.getItem('role');
     this.userimage = localStorage.getItem('user_img') || sessionStorage.getItem('user_img');
     this.fullName = localStorage.getItem('Fullname');
     this.getShortName(this.fullName);
+    setTimeout(() => {
+      this.userDetailes = this.gs.checkLogout();
+    }, 3000);
   }
   getShortName(fullName) {
     const Name = fullName?.split(' ').map(function(str) {

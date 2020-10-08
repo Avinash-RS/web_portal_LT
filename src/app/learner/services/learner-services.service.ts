@@ -44,6 +44,7 @@ import {
   singleBatchInfo,
   ViewAllThreadDataBid,
   getCountForJobroleCategories,
+  getLoginUserDetail,
 } from './operations/learner_query';
 
 import {
@@ -360,6 +361,14 @@ export class LearnerServicesService {
       query: get_user_detail,
       variables: {
         email
+      }
+    });
+  }
+  getLoginUserDetail(email) {
+    return this.Apollo.query({
+      query: getLoginUserDetail,
+      variables: {
+        username : email
       }
     });
   }
