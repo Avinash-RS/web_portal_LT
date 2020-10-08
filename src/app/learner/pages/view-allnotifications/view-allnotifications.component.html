@@ -3,7 +3,10 @@
   <h2 class="head"><b>All notifications</b></h2>
 </div>
 <div class="row markAllbtn float-right" *ngIf="notifications?.length > 0">
-  <u class="pointer" (click)="markAsRead(notifications,'all')"><b>Mark all as read</b></u>
+  <button class="markBtn" (click)="markAsRead(notifications,'all')" 
+  [disabled]="unreadCount == 0">
+  <u><b>Mark all as read</b></u>
+</button>
 </div>
 
 <!------------------------------------Table------------------------------------->
