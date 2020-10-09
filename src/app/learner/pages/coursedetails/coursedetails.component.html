@@ -5,7 +5,7 @@
 <div class="container007 animated animatedFadeInUp fadeInUp bodybg">
     <div>
         <mat-drawer-container [class.drawer-opened]="drawer.opened" class="example-container">
-            <mat-drawer #drawer class="drawer" mode="side" opened="true">
+            <mat-drawer #drawer class="drawer" mode="side" opened="{{drawersOpen}}">
             
 <div [ngClass]="viewScrollBar ? 'afterHover': 'beforeHover'">
     <mat-toolbar class="header">
