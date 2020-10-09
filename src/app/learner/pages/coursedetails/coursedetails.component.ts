@@ -183,7 +183,6 @@ export class CoursedetailsComponent implements OnInit {
     } else {
       this.drawersOpen = true;
     }
-    console.log('this.drawersOpen', this.drawersOpen);
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     if (this.gs.checkLogout()) {
@@ -298,9 +297,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('this.course 2', this.course);
     this.translate.use(localStorage.getItem('language'));
-    
     // this.add_topic_reference(res);
   }
 
