@@ -168,6 +168,7 @@ export class CoursedetailsComponent implements OnInit {
   moduleSatusCheck: any;
   tabInd: any;
   playerMenuEnable = false;
+  viewScrollBar = false;
   // initials: any;
   constructor(public translate: TranslateService, private router: ActivatedRoute,
               public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
