@@ -27,6 +27,7 @@ export class CoursedetailsComponent implements OnInit {
   course: any = null;
   loading: boolean;
   pagenumber: any;
+  selectedName: any;
   open = false;
   userDetail: any;
   showShortDesciption = true;
@@ -182,7 +183,6 @@ export class CoursedetailsComponent implements OnInit {
     } else {
       this.drawersOpen = true;
     }
-    console.log('this.drawersOpen', this.drawersOpen);
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     if (this.gs.checkLogout()) {
@@ -202,6 +202,13 @@ export class CoursedetailsComponent implements OnInit {
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
             this.course = viewCourse.data.viewcourse.message;
+            console.log('this.course 1', this.course);
+            if (this.detailData !== undefined) {
+              this.selectedName = this.detailData?.course_name;
+            } else if (this.course !== undefined && this.course !== null) {
+              this.selectedName =  this.course?.course_name;
+            }
+            console.log('this.selectedName', this.selectedName);
             this.selectedModuleData = this.scromApiData?.childData[0] || null;
             if (this.scromApiData?.childData[0]) {
               this.selectedModuleData.indexValue = 1;
