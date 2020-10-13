@@ -152,12 +152,13 @@
               
                 </mat-toolbar>
                 <!-- tabs starts here -->
-                <div class="row ml-0 mr-0">
-                    <div class="col-10 text-left m-auto">
+                <div class="row ml-0 mr-0 ">
+                    <div class="col-10 text-left m-auto moileView">
                         <span>{{selectedName | titlecase}}</span>
+                        <!-- <span *ngIf="course?.course_name?.length > 30">{{(course?.course_name | slice:0:20)+'...'}}</span> -->
                     </div>
-                    <div class="col-2 text-right">
-                <mat-icon class="ml-3 mt-3 mb-3 mobileHoriz" [matMenuTriggerFor]="menu">more_vert</mat-icon>
+                    <div class="col-2 text-right mobileHoriz">
+                <mat-icon class="ml-3 mt-3 mb-3" [matMenuTriggerFor]="menu">more_vert</mat-icon>
                 <mat-menu #menu="matMenu">
                     <button (click)="selectedTabIndex = 0; selectedName = detailData?.course_name ? detailData?.course_name : course?.course_name" class="matTabMenu" mat-menu-item>
                     <span>{{detailData?.course_name ? detailData?.course_name : course?.course_name}}</span>
