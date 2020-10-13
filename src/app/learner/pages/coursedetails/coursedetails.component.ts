@@ -209,7 +209,6 @@ export class CoursedetailsComponent implements OnInit {
             } else if (this.course !== undefined && this.course !== null) {
               this.selectedName =  this.course?.course_name;
             }
-            console.log('this.selectedName', this.selectedName);
             this.selectedModuleData = this.scromApiData?.childData[0] || null;
             if (this.scromApiData?.childData[0]) {
               this.selectedModuleData.indexValue = 1;
