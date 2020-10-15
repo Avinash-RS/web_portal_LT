@@ -7,6 +7,7 @@ import {MatAccordion} from '@angular/material/expansion';
 })
 export class ActivitiesComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
+  public isCollapsed = false;
   constructor() { }
 
   ngOnInit() {
