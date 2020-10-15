@@ -30,3 +30,67 @@
     margin-left: 8px;
   }
   
+  /* mani assignment tab css starts here */
+  .assignmentName {
+    width: 90px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    }
+
+    .viewDoc {
+      color: $color-blank;
+      font-size: 20px;
+      width: 20px;
+  }
+
+  .download-button {
+    background: $lxp-theme-green !important; // red color
+    float: right;
+    position: relative;
+    top: -12px;
+    right: 26px;
+    height: 35px;
+    width: 35px;
+}
+.close-button {
+  background: $lxp-theme-green !important; // red color
+  float: right;
+  top: -12px;
+  position: relative;
+  right: -53px;
+  height: 35px;
+  width: 35px;
+}
+.download-icon {
+  position: relative;
+  bottom: 2px;
+}
+
+.icon {
+  color: $color-blue;
+}
+
+.not-submited {
+    color: $lxp-gray;
+}
+
+.grade {
+  color: $color-dark-green;
+  }
+  #upload-photo {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+::ng-deep .mat-expansion-panel-content {
+margin-bottom: 1% !important;
+}
+
+.gradedUpload {
+  color: $lxp-icon !important;
+  cursor: not-allowed !important;
+}
+
+    /* mani assignment tab css ends here */
