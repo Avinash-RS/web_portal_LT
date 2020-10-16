@@ -227,13 +227,19 @@
             <div class="t-l">Activity : Create cutton mark</div>
           </div>
           <div class="col-2">
-            <span class="f_wt_600">  <span class="dot"></span>Yet to submit</span><br>
+            <span class="f_wt_600">  <span class="dot"></span>Yet to submit</span>
+            <mat-icon  class="f_size_16 arr" aria-hidden="false">keyboard_arrow_down</mat-icon>
+            <br>
             <div class="m-l-23">Iterations : 5</div>
-            <div class="m-l-43">Start date :<span class="margin-5"></span>End date :</div>
-            <div class="m-l-43">Oct 01, 2020<span class="margin-5"></span>Oct 12, 2020 </div> 
+            <div class="m-l-68">Start date :<span class="margin-30"></span>End date :</div>
+            <div class="m-l-68 f_wt_600">Oct 01, 2020<span class="margin-21 f_wt_600"></span>Oct 12, 2020 </div> 
           </div>
+         
+           
         </div>
+        
         <div class="panel" *ngIf="isCollapsed">
+          <hr>
           <div class="row">
             <div class="col-8">
               <div class="f_size_16 f_wt_600">Material for activity</div>
@@ -245,11 +251,11 @@
                   <div class="overlay">
                    <span class="margin-5">Duration : 01:20:00</span> 
                   <div class="row ">
-                    <div class="col-6 dis-line">
-                      <mat-icon  class="f_size_14" aria-hidden="false">play_circle_outline</mat-icon>Play
+                    <div class="col-5 dis-line pointer">
+                      <mat-icon  class="f_size_16" aria-hidden="false">play_circle_outline</mat-icon>Play
                     </div>
-                    <div class="col-6 dis-line">
-                      <mat-icon class="f_size_14" aria-hidden="false">get_app</mat-icon>Download
+                    <div class="col-7 dis-line pointer">
+                      <mat-icon class="f_size_16" aria-hidden="false">get_app</mat-icon>Download
                     </div>
                   </div>
                 </div>
@@ -257,8 +263,34 @@
                 </div>
               </div>
             </div>
+      
             <div class="col-4">
-              <div class="f_size_16 f_wt_600">Your work</div>
+            
+              <div class="f_size_16 f_wt_600 align-center margin-b-9">Your work</div>
+              <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                     iteration 1
+                    </mat-panel-title>
+                    <mat-panel-description>
+                     <span class="width">Score: - / 100</span> 
+                      <span class="f_wt_600">  <span class="dot"></span>Yet to submit</span>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div class="align-center">
+                    <button mat-stroked-button  class="upload-btn"> 
+                      <mat-icon class="icon-color m-t-m-2">add</mat-icon>
+                      Upload video
+                    </button>
+
+                    <button mat-stroked-button  class="submit-btn"> 
+                      Submit
+                    </button>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
             </div>
           </div>
           

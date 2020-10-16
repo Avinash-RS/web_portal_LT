@@ -4,7 +4,11 @@
 }
 .back{
     font-size: 16px;
-    color: $lxp-theme-green;
+    color: $color-blank;
+    cursor: pointer;
+}
+.back :hover{
+    color: $lxp-theme-green !important;
 }
 :host /deep/ .mat-ink-bar {
     height: 2px !important;
@@ -19,11 +23,18 @@
     margin-right: 10px;
     display: inline-block;
   }
-
+.arr{
+    margin-left: 69px;
+    border: 1px solid $color-border;
+    padding: 3px;
+    font-weight: 600;
+}
   .box-0-1{
       margin-top: 10px;
       width: 100%;
       padding: 20px;
+      padding-bottom: 3%;
+      overflow: hidden;
       height: auto;
       background-color: $color-white;
       border : 1px solid $color-border;
@@ -45,12 +56,29 @@
     margin: auto;
     border-radius: 10px;
   }
-
+.upload-btn{
+    width: 100%;
+}
+.margin-30{
+    margin-left: 30px;
+}
+.margin-21{
+    margin-left: 21px;
+}
+.submit-btn{
+    color: $color-white;
+    background-color: $lxp-theme-green;
+    width: 45%;
+    margin-top: 6%;
+}
+.margin-b-9{
+margin-bottom: 9px;
+}
   .m-t{
       margin-top: 10px;
   }
-.m-l-43{
-    margin-left: -43px;
+.m-l-68{
+    margin-left: -68px;
 }
 .m-l-23{
     margin-left: 23px;
@@ -63,17 +91,17 @@
     position: absolute;
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
-    width: 53%;
+    width: 54%;
     color:$color-white;;
     font-size: 12px;
     padding: 5px;
   }
   .overlay {
     position: absolute;
-    bottom: -57px;
+    bottom: -50px;
     background: rgba(0, 0, 0, 0.5);
-    width: 53%;
-    height: 57px;
+    width: 54%;
+    height: 50px;
     transition: .5s ease;
     opacity: 0;
     color: $color-white;
@@ -82,7 +110,12 @@
   .con:hover .overlay {
     opacity: 1;
   }
-  
+  .width{
+    width: 58%;
+  }
+  .align-center{
+      text-align: center;
+  }
 
   
   /* mani assignment tab css starts here */
