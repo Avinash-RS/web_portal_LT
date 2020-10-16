@@ -65,6 +65,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {MatMenuModule} from '@angular/material/menu';
 import { LearnermycourseService } from './pages/learner-my-course/learnermycourse.service';
+import { DiscussionForumComponent } from './pages/discussion-forum/discussion-forum.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -146,6 +147,12 @@ const routes: Routes = [
     data: { animation: 'Calendar' }
   },
 
+  {
+    path: 'discussionForum',
+    component: DiscussionForumComponent,
+    data: { animation: 'Discussion Forum' }
+  },
+
   // {
   //   path: 'terms',
   //   component: TermsconditionsComponent,
@@ -210,7 +217,8 @@ const routes: Routes = [
     LearnerDashboardComponent,
     LandingpageComponent,
     LearnerCalendarComponent,
-    ViewAllnotificationsComponent
+    ViewAllnotificationsComponent,
+    DiscussionForumComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

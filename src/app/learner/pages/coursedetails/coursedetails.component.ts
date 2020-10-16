@@ -531,7 +531,6 @@ export class CoursedetailsComponent implements OnInit {
         this.playerModuleAndTopic(false);
 
       }, 20000);
-   
   }
   autoHide() {
     this.dataRefresher =

@@ -1,134 +1,143 @@
 <!-- <span *ngIf="sider"> -->
-    <app-header></app-header>
+<app-header></app-header>
 <!-- </span> -->
 <!-- <div style="height: 2px;" (mouseover)="sider=true"></div> -->
 <div class="container007 animated animatedFadeInUp fadeInUp bodybg">
     <div>
         <mat-drawer-container [class.drawer-opened]="drawer.opened" class="example-container">
             <mat-drawer #drawer class="drawer" mode="side" opened="{{drawersOpen}}">
-            
-<div [ngClass]="viewScrollBar ? 'afterHover': 'beforeHover'">
-    <mat-toolbar class="header">
-                  
-        <mat-icon *ngIf="!drawer.opened" (click)="drawer.toggle()">
-            menu
-        </mat-icon>
-        <div class="row">
-            <div class="col-4 Outine">
-                {{'Course Outline' | translate }}
-            </div>
-            <div class="col-3 divider" >
-              <span> | </span>  
-            </div>
-            <div class="col-5">
-                <div class="row time">
-                    <div class="col-2">
-                        <mat-icon class="alarmIcon">alarm</mat-icon>
-                    </div>
-                    <div class="col-4">
-                        <!-- Satish demo comment -->
-                        <!-- ? content?.coursetime : '01:00:00' -->
-                        <span
-                            class="courseTime">{{content?.coursetime? content?.coursetime : '01:00:00'}}</span>
-                    </div>
-                    <div class="col-4 col-md-2">
-                        <mat-icon class="closeBtn" *ngIf="drawer.opened" (click)="drawer.close()">close</mat-icon>
-                    </div>
-                </div>
-            </div>
-         
-        </div>
-    </mat-toolbar>
-    <div class="row">
-        <div class="contents" (mouseenter)="viewScrollBar = true" (mouseleave)="viewScrollBar = false">
-            <mat-accordion *ngFor="let res of scromModuleData; let i = index"
-                (click)="getSelectedIndex(i); getModuleDataForForum(scromModuleData?.length, i + 1, res)">
-                <mat-expansion-panel class="panel" hideToggle="true" #example [expanded]="selectedIndex === i">
-                    <mat-expansion-panel-header class="moduleHeadHight">
-                        <mat-panel-title class="module-container">
-                            <div class="row titleHeight">
-                                <div>
-                                    <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons mar">done
-                                    </mat-icon>
-                                </div>
-                                <div [ngClass]="res?.status == 'Passed'? 'index-number-read' : 'index-number-unread'">
-                                    <span class="custom-index">{{i+1}}.</span>
-                                </div>
-                                <div>
-                                    <div [ngClass]="res?.status == 'Passed'? 'moduleHeadRead' : 'moduleHeadUnread'">
-                                        <div class="modhead">
-                                            <p *ngIf="res?.title.length >= 67" class="moduleName" tooltip="{{res?.title}}" placement="right">{{res?.title | slice:0:71}}...</p>
-                                            <p *ngIf="res?.title.length < 67"class="moduleName">
-                                                <!-- {{res?.title}} -->
-                                                {{res?.title}}
-                                            </p>
-                                       
-                                        </div>
+
+                <div [ngClass]="viewScrollBar ? 'afterHover': 'beforeHover'">
+                    <mat-toolbar class="header">
+
+                        <mat-icon *ngIf="!drawer.opened" (click)="drawer.toggle()">
+                            menu
+                        </mat-icon>
+                        <div class="row">
+                            <div class="col-4 Outine">
+                                {{'Course Outline' | translate }}
+                            </div>
+                            <div class="col-3 divider">
+                                <span> | </span>
+                            </div>
+                            <div class="col-5">
+                                <div class="row time">
+                                    <div class="col-2">
+                                        <mat-icon class="alarmIcon">alarm</mat-icon>
+                                    </div>
+                                    <div class="col-4">
+                                        <!-- Satish demo comment -->
+                                        <!-- ? content?.coursetime : '01:00:00' -->
+                                        <span
+                                            class="courseTime">{{content?.coursetime? content?.coursetime : '01:00:00'}}</span>
+                                    </div>
+                                    <div class="col-4 col-md-2">
+                                        <mat-icon class="closeBtn" *ngIf="drawer.opened" (click)="drawer.close()">close
+                                        </mat-icon>
                                     </div>
                                 </div>
-                          
                             </div>
-                            <div class="row">
-                                <div class="moduleund">
-                                    
-                                    <span class="time-icon">
-                                        <mat-icon class="time-icon">alarm</mat-icon> {{res?.moduletime ? res?.moduletime : '01:00:00' }}
-                                    </span>
-                                </div>
-                            </div>
-                         
-                           
 
-                        </mat-panel-title>
-                        <!-- <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons mar">done
-                </mat-icon> -->
-                        <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
-                        </mat-icon>
-                        <mat-icon *ngIf="example.expanded" class="exp-icon">remove_circle_outline
-                        </mat-icon>
-
-                    </mat-expansion-panel-header>
+                        </div>
+                    </mat-toolbar>
                     <div class="row">
-                        <div class="col-12">
-                            <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title.length > 39?'headerDown':
+                        <div class="contents" (mouseenter)="viewScrollBar = true" (mouseleave)="viewScrollBar = false">
+                            <mat-accordion *ngFor="let res of scromModuleData; let i = index"
+                                (click)="getSelectedIndex(i); getModuleDataForForum(scromModuleData?.length, i + 1, res)">
+                                <mat-expansion-panel class="panel" hideToggle="true" #example
+                                    [expanded]="selectedIndex === i">
+                                    <mat-expansion-panel-header class="moduleHeadHight">
+                                        <mat-panel-title class="module-container">
+                                            <div class="row titleHeight">
+                                                <div>
+                                                    <mat-icon *ngIf="res?.status == 'Passed'"
+                                                        class="material-icons mar">done
+                                                    </mat-icon>
+                                                </div>
+                                                <div
+                                                    [ngClass]="res?.status == 'Passed'? 'index-number-read' : 'index-number-unread'">
+                                                    <span class="custom-index">{{i+1}}.</span>
+                                                </div>
+                                                <div>
+                                                    <div
+                                                        [ngClass]="res?.status == 'Passed'? 'moduleHeadRead' : 'moduleHeadUnread'">
+                                                        <div class="modhead">
+                                                            <p *ngIf="res?.title.length >= 67" class="moduleName"
+                                                                tooltip="{{res?.title}}" placement="right">
+                                                                {{res?.title | slice:0:71}}...</p>
+                                                            <p *ngIf="res?.title.length < 67" class="moduleName">
+                                                                <!-- {{res?.title}} -->
+                                                                {{res?.title}}
+                                                            </p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="moduleund">
+
+                                                    <span class="time-icon">
+                                                        <mat-icon class="time-icon">alarm</mat-icon>
+                                                        {{res?.moduletime ? res?.moduletime : '01:00:00' }}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+
+
+                                        </mat-panel-title>
+                                        <!-- <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons mar">done
+                </mat-icon> -->
+                                        <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
+                                        </mat-icon>
+                                        <mat-icon *ngIf="example.expanded" class="exp-icon">remove_circle_outline
+                                        </mat-icon>
+
+                                    </mat-expansion-panel-header>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title.length > 39?'headerDown':
                                 ''">
-                                <ng-container *ngFor="let mod of res?.children; let j = index">
-                                    <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
+                                                <ng-container *ngFor="let mod of res?.children; let j = index">
+                                                    <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
                                         mod.status === 'Process' ? 'colYellow' : 'colWhite'">
-                                        <ng-template matStepLabel>
-                                            <!-- // Satish comment  -->
-                                            <!-- <span *ngIf="mod?.title?.length > 20" tooltip="{{mod?.title}}"
+                                                        <ng-template matStepLabel>
+                                                            <!-- // Satish comment  -->
+                                                            <!-- <span *ngIf="mod?.title?.length > 20" tooltip="{{mod?.title}}"
                                                 placement="right" class="topicnm"
                                                 (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)">
                                                 {{(mod?.title  | slice:0:20)+'...'}}</span> -->
 
-                                                <!-- *ngIf="mod?.title?.length <= 20" -->
-                                            <span  class="topicnm"
-                                                (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)" >
-                                                <!-- {{mod?.title}} -->
-                                         <p class="titleName" *ngIf="mod?.title.length >= 65" tooltip="{{mod?.title}}" placement = "right">
-                                            {{mod?.title | slice:0:69}}...
-                                         </p> 
-                                         <p class="titleName" *ngIf="mod?.title.length < 65">
-                                            {{mod?.title}}
-                                         </p> 
-                                            </span>
+                                                            <!-- *ngIf="mod?.title?.length <= 20" -->
+                                                            <span class="topicnm"
+                                                                (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)">
+                                                                <!-- {{mod?.title}} -->
+                                                                <p class="titleName" *ngIf="mod?.title.length >= 65"
+                                                                    tooltip="{{mod?.title}}" placement="right">
+                                                                    {{mod?.title | slice:0:69}}...
+                                                                </p>
+                                                                <p class="titleName" *ngIf="mod?.title.length < 65">
+                                                                    {{mod?.title}}
+                                                                </p>
+                                                            </span>
 
-                                        </ng-template>
-                                    </mat-step>
-                                </ng-container>
-                            </mat-vertical-stepper>
+                                                        </ng-template>
+                                                    </mat-step>
+                                                </ng-container>
+                                            </mat-vertical-stepper>
+                                        </div>
+                                    </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
                         </div>
                     </div>
-                </mat-expansion-panel>
-            </mat-accordion>
-        </div>
-    </div>
-</div>
+                </div>
 
-         
 
-            
+
+
             </mat-drawer>
 
             <!-- header menu starts here -->
@@ -138,18 +147,19 @@
                     <mat-icon class="drawerHamIcon" *ngIf="!drawer.opened" (click)="drawer.toggle()">
                         menu
                     </mat-icon>
-           
-                    <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'"  >
+
+                    <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'">
                         <button class=" pointer" mat-button [disabled]="isprevEnable || scromModuleData?.length == 0"
                             (click)="topicPrve()">{{'Prev' | translate }}</button>
                         <span class="">|</span>
-                        <button class=" pointer" mat-button [disabled]="isNextEnable || scromModuleData?.length == 0" (click)="topicNext()">
+                        <button class=" pointer" mat-button [disabled]="isNextEnable || scromModuleData?.length == 0"
+                            (click)="topicNext()">
                             {{'Next' | translate }}</button>
                         <span class="fullScr">
                             <mat-icon (click)="makeFullScreen()">fullscreen</mat-icon>
                         </span>
                     </div>
-              
+
                 </mat-toolbar>
                 <!-- tabs starts here -->
                 <div class="row ml-0 mr-0 ">
@@ -158,27 +168,34 @@
                         <!-- <span *ngIf="course?.course_name?.length > 30">{{(course?.course_name | slice:0:20)+'...'}}</span> -->
                     </div>
                     <div class="col-2 text-right mobileHoriz">
-                <mat-icon class="ml-3 mt-3 mb-3" [matMenuTriggerFor]="menu">more_vert</mat-icon>
-                <mat-menu #menu="matMenu">
-                    <button (click)="selectedTabIndex = 0; selectedName = detailData?.course_name ? detailData?.course_name : course?.course_name" class="matTabMenu" mat-menu-item>
-                    <span>{{detailData?.course_name ? detailData?.course_name : course?.course_name}}</span>
-                    </button>
-                    <button (click)="selectedTabIndex = 1; selectedName = 'About the course'" class="matTabMenu" mat-menu-item>
-                      <span>About the course</span>
-                    </button>
-                    <button (click)="selectedTabIndex = 2; selectedName = 'Resources'" class="matTabMenu" mat-menu-item>
-                      <span>Resources</span>
-                    </button>
-                    <button (click)="selectedTabIndex = 3; selectedName = 'Assignments'" class="matTabMenu" mat-menu-item>
-                        <span>Assignments</span>
-                      </button>
-                      <button *ngIf="userDetail.is_forum_config && selectedModuleData === null || selectedModuleData === undefined" (click)="selectedTabIndex = 4; selectedName = 'Forum'" class="matTabMenu" mat-menu-item>
-                        <span>Forum</span>
-                      </button>
-                  </mat-menu>
+                        <mat-icon class="ml-3 mt-3 mb-3" [matMenuTriggerFor]="menu">more_vert</mat-icon>
+                        <mat-menu #menu="matMenu">
+                            <button
+                                (click)="selectedTabIndex = 0; selectedName = detailData?.course_name ? detailData?.course_name : course?.course_name"
+                                class="matTabMenu" mat-menu-item>
+                                <span>{{detailData?.course_name ? detailData?.course_name : course?.course_name}}</span>
+                            </button>
+                            <button (click)="selectedTabIndex = 1; selectedName = 'About the course'" class="matTabMenu"
+                                mat-menu-item>
+                                <span>About the course</span>
+                            </button>
+                            <button (click)="selectedTabIndex = 2; selectedName = 'Resources'" class="matTabMenu"
+                                mat-menu-item>
+                                <span>Resources</span>
+                            </button>
+                            <button (click)="selectedTabIndex = 3; selectedName = 'Assignments'" class="matTabMenu"
+                                mat-menu-item>
+                                <span>Assignments</span>
+                            </button>
+                            <button
+                                *ngIf="userDetail.is_forum_config && selectedModuleData === null || selectedModuleData === undefined"
+                                (click)="selectedTabIndex = 4; selectedName = 'Forum'" class="matTabMenu" mat-menu-item>
+                                <span>Forum</span>
+                            </button>
+                        </mat-menu>
+                    </div>
                 </div>
-                </div>
-                <mat-tab-group #demo3Tab [(selectedIndex)]="selectedTabIndex" #tabs 
+                <mat-tab-group #demo3Tab [(selectedIndex)]="selectedTabIndex" #tabs
                     (selectedTabChange)="tabSelection($event)"
                     [ngClass]="drawer.opened==true?'drawerOpnTab':'drawerClsTab'">
                     <mat-tab class="pointer">
@@ -189,7 +206,8 @@
                                 matTooltipClass='custom-mat-tooltip'>{{(course?.course_name | slice:0:28)+'...'}}
                             </label> -->
                             <!-- *ngIf="course?.course_name?.length<=28" -->
-                            <label class="pointer lab" >{{detailData?.course_name ? detailData?.course_name : course?.course_name}}
+                            <label
+                                class="pointer lab">{{detailData?.course_name ? detailData?.course_name : course?.course_name}}
                             </label>
                         </ng-template>
 
@@ -208,7 +226,8 @@
                             <div class="curInclu">{{ 'This course includes :' | translate}}</div>
                             <div class="row display_flex">
                                 <div style="max-width: 196px;">
-                                    <span class="font-color;padding: 5px">{{content?.totalResourseCount}} {{'downloadable resources'| translate}}</span>
+                                    <span class="font-color;padding: 5px">{{content?.totalResourseCount}}
+                                        {{'downloadable resources'| translate}}</span>
                                 </div>
 
                                 <span *ngIf="course?.course_mode"> &nbsp; |&nbsp;</span>
@@ -609,11 +628,11 @@
                                         <mat-icon class="close-icon" color="warn" (click)="closedialogbox()">close
                                         </mat-icon>
                                     </button> -->
-                <div *ngIf="docpath">
-                    <app-pdfreader [url]="docpath"></app-pdfreader>
-                </div>
-            </ng-template>
-            </mat-tab>
+                            <div *ngIf="docpath">
+                                <app-pdfreader [url]="docpath"></app-pdfreader>
+                            </div>
+                        </ng-template>
+                    </mat-tab>
 
                     <!-- forum tab -->
                     <mat-tab *ngIf="userDetail.is_forum_config" label="Forum"
@@ -628,7 +647,8 @@
                             <br>
                             <div *ngIf="showCourseDetails">
                                 <div class="p-l-0 no_border">
-                                    <div class="col-12 forum-width" [ngClass]="{'width_70 center p-l-0': !drawer.opened}">
+                                    <div class="col-12 forum-width"
+                                        [ngClass]="{'width_70 center p-l-0': !drawer.opened}">
                                         <div class="row" *ngIf="selectedModuleData">
                                             <p (click)="gotoDisplayAllThreads()">
                                                 <span
@@ -645,7 +665,8 @@
 
                             <div *ngIf="showCommentThread" class="no_border">
                                 <div class="p-l-0">
-                                    <div class="col-12 forum-width" [ngClass]="{'width_70 center p-l-0': !drawer.opened}">
+                                    <div class="col-12 forum-width"
+                                        [ngClass]="{'width_70 center p-l-0': !drawer.opened}">
                                         <div class="row" *ngIf="selectedModuleData">
                                             <p (click)="gotoDisplayAllThreads();viewAllThreads()">
                                                 <span class="color-blue f_size_16 f_wt_500"
@@ -659,7 +680,8 @@
                             </div>
                             <br>
 
-                            <div *ngIf="showCourseDetails" class="forum-width" [ngClass]="{'width_70 center' : !drawer.opened}">
+                            <div *ngIf="showCourseDetails" class="forum-width"
+                                [ngClass]="{'width_70 center' : !drawer.opened}">
                                 <!-- Header starts here -->
                                 <mat-card class=" black_border box_shadow alignment ">
                                     <div class="row">
@@ -712,7 +734,8 @@
                                                     class="col-xl-4 col-lg-4 col-md-12 col-sm-12" style="padding: 0px;">
                                                     <button mat-button (click)="gotoNewThread(createThreadDialog)"
                                                         [disabled]="course === null || selectedModuleData === null || disableThreads"
-                                                        class="new_Thread threadbutton" style="border-radius: 0 !important;">
+                                                        class="new_Thread threadbutton"
+                                                        style="border-radius: 0 !important;">
                                                         {{'New thread' | translate }}</button>
 
                                                     <button mat-icon-button class="plus_icon"
@@ -765,7 +788,8 @@
                             </div>
 
                             <div class="comment_card forum-width"
-                                *ngIf="showCommentThread && selectedThreadData != null" [ngClass]="{'width_70 center' : !drawer.opened}">
+                                *ngIf="showCommentThread && selectedThreadData != null"
+                                [ngClass]="{'width_70 center' : !drawer.opened}">
                                 <!-- for thread -->
                                 <mat-card class="black_border m-b-10 no-radius no_padding">
                                     <!-- name row start -->
@@ -926,9 +950,10 @@
                                                         {{'New thread' | translate }}</button> -->
 
 
-                                                        <button mat-button (click)="gotoNewThread(createThreadDialog)"
+                                                    <button mat-button (click)="gotoNewThread(createThreadDialog)"
                                                         [disabled]="course === null || selectedModuleData === null || disableThreads"
-                                                        class="new_Thread threadbutton" style="border-radius: 0 !important;">
+                                                        class="new_Thread threadbutton"
+                                                        style="border-radius: 0 !important;">
                                                         {{'New thread' | translate }}</button>
 
                                                     <button mat-icon-button class="plus_icon"
@@ -1298,14 +1323,14 @@
                         </ng-template>
                     </mat-tab>
 
-                     <!-- forum tab -->
-                     <!-- <mat-tab>
+                    <!-- forum tab -->
+                    <!-- <mat-tab>
                         <div [ngClass]="drawer.opened==true?'example-sidenav-content-opn':'example-sidenav-content-cls'"
                         class="">
                         <iframe id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
                     </div>           
                  </mat-tab> -->
-                    
+
                 </mat-tab-group>
             </div>
         </mat-drawer-container>
