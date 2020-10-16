@@ -538,3 +538,7 @@ color: $lxp-theme-green;
 :host ::ng-deep .tooltip-arrow {
   opacity: 0.9 !important;
 }
+
+.singleline-text {
+  white-space: nowrap
+  }
