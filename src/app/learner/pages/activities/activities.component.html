@@ -300,68 +300,100 @@
 
     <mat-tab label="Project"> 
       <div class="box-0-1">
-        <div class="row">
-          <div class="col-10">
-            <div class="row">
-              <div class="col-1">
-                <mat-icon class="assignIcon">assignment</mat-icon>
-              </div>
-              <div class="col-6">
-                <div class="f_size_16 f_wt_600 projHead">Final year_Project 2020</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-2 group">
-            <button mat-mini-fab>
-              <mat-icon>group</mat-icon>
-            </button> <span class="margin-5">Team_Group A (8)</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-10"></div>
-          <div class="col-2">
-            <span class="f_wt_600">  <span class="dot"></span>Yet to submit</span>
-          </div>
-        </div><br>
-        <div class="row"  (click)="isCollapsed = !isCollapsed">
-          <div class="col-10">
-            <div class="t-l">Complete the worksheet as per the instruction given in the attachment</div>
-          </div>
-          <div class="col-2">
-            <div class="m-l-43">Start date :<span class="m-l-42"></span>End date :</div>
-            <div class="m-l-43"><b>Oct 01, 2020</b><span class="m-l-35"></span><b>Oct 12, 2020</b> </div> 
-          </div>
-        </div>
-        <div class="panel" *ngIf="isCollapsed">
+      <div class="row">
+        <div [ngClass]="openList ? 'col-10' : 'col-12'">
+          <!-----------------------------Row 1--------------------->
           <div class="row">
             <div class="col-8">
-              <div class="f_size_16 f_wt_600">Material for activity</div>
-              <div class="row">
-                <div class="col-4 m-t">
-                  <img alt="Course Img" src="../../../../assets/images/play.jpg" class="courseImg" />
-                  <div class="con">
-                  <div class="uppertext">Material for activity</div>
-                  <div class="overlay">
-                   <span class="margin-5">Duration : 01:20:00</span> 
-                  <div class="row ">
-                    <div class="col-6 dis-line">
-                      <mat-icon  class="f_size_14" aria-hidden="false">play_circle_outline</mat-icon>Play
-                    </div>
-                    <div class="col-6 dis-line">
-                      <mat-icon class="f_size_14" aria-hidden="false">get_app</mat-icon>Download
+              <p class="topic">
+                <mat-icon class="assignIcon">assignment</mat-icon>
+                <span class="f_size_16 f_wt_600 projHead">Final year_Project 2020</span>
+              </p>
+            </div>
+            <!---------------------------Team------------------>
+            <div class="col-4 text-right group">
+              <button mat-mini-fab class="groupBtn">
+                <mat-icon class="grpIcon">group</mat-icon>
+              </button>&nbsp; <span class="margin-5">Team_Group A (8)</span>&nbsp;
+
+              <button mat-mini-fab class="groupBtn" (click)="openList = !openList">
+                <mat-icon class="grpIcon">arrow_back</mat-icon>
+              </button>
+            </div>
+          </div>
+          <!-----------------------------Status------------------------->
+          <div class="row">
+            <div class="col-10"></div>
+            <div class="col-2 text-right">
+              <span class="f_wt_600 status">  <span class="dot"></span>Yet to submit</span>
+            </div>
+          </div><br>
+
+          <div class="row">
+            <div class="col-9">
+              <div class="t-l">Complete the worksheet as per the instruction given in the attachment</div>
+            </div>
+            <div class="col-3 text-right">
+              <div class="m-r-40">Start date :<span class="margin-30"></span>End date :</div>
+              <div class="m-r-2 f_wt_600">Oct 01, 2020<span class="margin-21 f_wt_600"></span>Oct 12, 2020 </div> 
+            </div>
+          </div>
+          <!-----------------------------Materials for activity--------------------->
+          <div class="panel" *ngIf="isCollapsed">
+            <hr>
+            <div class="row">
+              <div class="col-8">
+                <div class="f_size_16 f_wt_600">Material for activity</div>
+                <div class="row">
+                  <div class="col-4 m-t">
+                    <img alt="Course Img" src="../../../../assets/images/play.jpg" class="courseImg" />
+                    <div class="con">
+                    <div class="uppertext">Material for activity</div>
+                    <div class="overlay">
+                     <span class="margin-5">Duration : 01:20:00</span> 
+                    <div class="row ">
+                      <div class="col-6 dis-line">
+                        <mat-icon  class="f_size_14" aria-hidden="false">play_circle_outline</mat-icon>Play
+                      </div>
+                      <div class="col-6 dis-line">
+                        <mat-icon class="f_size_14" aria-hidden="false">get_app</mat-icon>Download
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+                  </div>
                 </div>
               </div>
+              <div class="col-4">
+                <div class="f_size_16 f_wt_600 align-center">Your work</div>
+                <div class="box-0-2">
+                <div class="align-center">
+                  <button mat-stroked-button  class="upload-btn"> 
+                    <mat-icon class="icon-color m-t-m-2">add</mat-icon>
+                    Add your files
+                  </button>
+  
+                  <button mat-stroked-button  class="submit-btn"> 
+                    Submit
+                  </button>
+                </div>
+              </div>
+              </div>
             </div>
-            <div class="col-4">
-              <div class="f_size_16 f_wt_600">Your work</div>
-            </div>
+            
           </div>
-          
+          <mat-icon class="f_size_16 arrow1" aria-hidden="false"
+          (click)="isCollapsed = !isCollapsed">keyboard_arrow_down</mat-icon>
         </div>
+        <div class="col-2" *ngIf="openList">
+          <span>Team_Group A (8)</span>
+            <ul class="ul">
+              <li>Kumar</li>
+              <li>Ram</li>
+              <li>Shri</li>
+            </ul>
+  </div>
+      </div>
       </div>
     </mat-tab>
 

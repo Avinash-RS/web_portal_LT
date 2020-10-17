@@ -45,6 +45,7 @@ import {
   ViewAllThreadDataBid,
   getCountForJobroleCategories,
   getLoginUserDetail,
+  getprojectActivityData,
 } from './operations/learner_query';
 
 import {
@@ -878,6 +879,16 @@ export class LearnerServicesService {
       }
     });
   }
+
+getprojectActivityData(userId, courseId) {
+  return this.Apollo.query({
+    query: getprojectActivityData,
+    variables: {
+      userId,
+      courseId
+    }
+  });
+}
 }
 
 

@@ -19,6 +19,7 @@ export class ActivitiesComponent implements OnInit {
   userDetail: any;
   docpath: any = null;
   assFile: File;
+  openList = false;
   @ViewChild(MatAccordion) accordion: MatAccordion;
   public isCollapsed = false;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,

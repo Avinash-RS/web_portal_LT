@@ -192,17 +192,51 @@ margin-bottom: 1% !important;
   color: $lxp-theme-green;
 }
 .assignIcon {
-  font-size: 23px;
-  margin-bottom: 13px;
-  margin-top: -3px;
+  font-size: 19px;
   margin-left: 20px;
 }
-.m-l-42 {
-  margin-left: 42px;
-}
-.m-l-35 {
-  margin-left: 35px;
-}
 .group {
-  margin: -9px 0px 0px -49px;
+  margin-top: 10px;
+}
+.box-0-2{
+  margin-top: 10px;
+  margin-left: 71px;
+  width: 65%;
+  padding: 20px;
+  padding-bottom: 3%;
+  overflow: hidden;
+  height: auto;
+  background-color: $color-white;
+  border : 1px solid $color-border;
+}
+.groupBtn {
+  background-color: #ffffff;
+  border: 1px solid;
+  color: #1F1A17;
+  width: 27px;
+  height: 27px;
+}
+.grpIcon {
+  font-size: 15px;
+  margin-top: -4px;
+}
+.status {
+  margin-right: 3rem;
+}
+.m-r-40 {
+  margin-right: 40px;
+}
+.m-r-2 {
+  margin-right: 2rem;
+}
+.arrow1 {
+  position: absolute;
+  top: -16px;
+  right: 0;
+}
+.topic {
+  margin-top: 19px;
+}
+.ul {
+  border: 1px solid;
 }
