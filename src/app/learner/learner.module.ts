@@ -66,6 +66,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {MatMenuModule} from '@angular/material/menu';
 import { LearnermycourseService } from './pages/learner-my-course/learnermycourse.service';
 import { DiscussionForumComponent } from './pages/discussion-forum/discussion-forum.component';
+import { LearnerActivityCenterComponent } from './pages/learner-activity-center/learner-activity-center.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -146,6 +148,11 @@ const routes: Routes = [
     component: LearnerCalendarComponent,
     data: { animation: 'Calendar' }
   },
+  {
+    path: 'activitycenter',
+    component: LearnerActivityCenterComponent,
+    data: { animation: 'activitycenter' }
+  },
 
   {
     path: 'discussionForum',
@@ -218,7 +225,8 @@ const routes: Routes = [
     LandingpageComponent,
     LearnerCalendarComponent,
     ViewAllnotificationsComponent,
-    DiscussionForumComponent
+    DiscussionForumComponent,
+    LearnerActivityCenterComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -273,6 +281,7 @@ const routes: Routes = [
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+    AgGridModule.withComponents([])
   ],
   exports: [
     // MatMenuModule
