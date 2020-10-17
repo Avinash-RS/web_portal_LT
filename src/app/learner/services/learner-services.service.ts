@@ -45,6 +45,7 @@ import {
   ViewAllThreadDataBid,
   getCountForJobroleCategories,
   getLoginUserDetail,
+  getperformActivityData
 } from './operations/learner_query';
 
 import {
@@ -878,8 +879,16 @@ export class LearnerServicesService {
       }
     });
   }
+// get oerform activity details
+  getperformActivityData(userId , courseId) {
+    return this.Apollo.query({
+      query: getperformActivityData,
+      variables: {
+        userId,
+        courseId
+      }
+    });
+  }
 }
-
-
 
 

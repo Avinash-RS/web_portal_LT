@@ -1414,4 +1414,62 @@ export const getCountForJobroleCategories = gql`
   }
       `;
 
+export const getperformActivityData = gql`
+query getperformActivityData($userId: String , $courseId: String) {
+  getperformActivityData(userId: $userId , courseId: $courseId ) {
+    success
+    data {
+    _id
+    performActivity {
+    activitystartdate
+    activityenddate
+    cardstatus
+    course_id
+    batchid
+    activityId
+    iterationTotal
+    modulename
+    activityname
+    topicname
+    evaluationmode
+    performtype
+    submittedTotal
+    materialDetails{
+    id
+    materialurl
+    name
+    doctype
+    size
+    }
+    iterationDetails{
+    iterationid
+    iterationcount
+    iterationstatus
+    totalmark
+    scoremark
+    submitted_on
+    submitted_date
+    grade_status
+    instructor_status
+    comments
+    videodetails{
+    id
+    videourl
+    name
+    size
+    }
+    assessmentreport{
+    id
+    imageurl
+    name
+    doctype
+    size
+    }
+    }
+    }
+    }
+  }
+}
+    `;
+
 

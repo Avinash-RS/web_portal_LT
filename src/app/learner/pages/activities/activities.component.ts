@@ -29,13 +29,19 @@ export class ActivitiesComponent implements OnInit {
     }
     this.courseid = localStorage.getItem('Courseid');
     this.getAssignmentmoduleData();
+    // this.getperformActivityData();
   }
 
   ngOnInit() {
   }
 
+  getperformActivityData() {
+    this.Lservice.getperformActivityData(this.userDetail.user_id , 'tqfc4p0e').subscribe((data: any) => {
+      console.log(data);
+    });
+  }
 
-
+  // getperformActivityData
   getAssignmentmoduleData() {
     this.Lservice.getAssignmentmoduleData(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
