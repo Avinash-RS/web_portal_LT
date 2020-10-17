@@ -38,6 +38,8 @@
     "@types/jasminewd2": "^2.0.8",
     "@types/jquery": "^3.3.35",
     "add": "^2.0.6",
+    "ag-grid-angular": "^24.1.0",
+    "ag-grid-community": "^24.1.0",
     "angular-calendar": "^0.28.20",
     "angular-fusioncharts": "^3.0.4",
     "angular-highlight-js": "^2.0.1",

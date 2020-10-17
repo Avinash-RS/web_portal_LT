@@ -1,0 +1,81 @@
+<!-- Activity center starts -->
+<app-header></app-header>
+<br />
+<!-- Start of screen 1 - Homescreen cards -->
+
+<!-- Activity center Homescreen Starts here -->
+<div *ngIf="showHomeScreen">
+
+</div>
+<!-- Activity center Homescreen Ends here -->
+
+<!-- End of screen 1 - Homescreen cards -->
+
+<!-- ******************************************************************************** -->
+
+<!-- Start of screen 2 - Next activity on card -->
+
+<div *ngIf="showNextActivityOn">
+
+</div>
+
+
+<!-- End of screen 2 - Next activity on card-->
+
+<!-- ******************************************************************************** -->
+
+<!-- Start of screen 3 - Completed card -->
+
+
+<div *ngIf="showCompleted">
+
+</div>
+
+
+<!-- End of screen 3 - Completed card-->
+
+<!-- ******************************************************************************** -->
+
+<!-- Start of screen 4 - Pending Activities card -->
+
+
+<div *ngIf="showPendingActivities">
+
+</div>
+
+
+<!-- End of screen 4 - Pending Activities card-->
+
+<!-- ******************************************************************************** -->
+
+<!-- Start of screen 5 - View All Activities card -->
+
+
+<div *ngIf="showViewAllActivities">
+  <div class="row">
+    <div class="col">
+      <form class="search-form float_right search-catalogue" style="display: inline-block; margin-right: 20px;">
+        <mat-form-field appearance="outline" class="pointer search-catalogue">
+          <input matInput placeholder="Search" name="searchbar" [(ngModel)]="catalogue" type="text">
+          <!--  (keyup)="searchCatalogue(catalogue)" -->
+          <mat-icon matSuffix *ngIf="catalogue !== null" (click)="closeSearch()">close</mat-icon>
+          <mat-icon matSuffix [disabled]="true" *ngIf="catalogue === null" class="pointer">search</mat-icon>
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+
+  <ag-grid-angular style="width: 99%; height:  calc(100vh - 50px); margin:auto !important;" class="ag-theme-alpine"
+      [columnDefs]="columnDefs" [defaultColDef]="defaultColDef"  [rowData]="rowData">
+  <!-- [paginationPageSize]="paginationPageSize1" [cacheBlockSize]="cacheBlockSize" (gridReady)="onGridReady1($event)"
+  [rowModelType]="'infinite'" (sortChanged)="rolesort($event)"
+  (cellValueChanged)="onCellValueChanged1($event)"(filterModified)="roleFilter($event)" -->
+    </ag-grid-angular>
+    <br><br><br><br>
+
+</div>
+
+
+<!-- End of screen 5 - View All Activities card-->
+
+<!-- ******************************************************************************** -->
