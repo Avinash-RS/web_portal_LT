@@ -80,34 +80,76 @@ export class LearnerActivityCenterComponent implements OnInit {
       [
         {
           headerName: 'Course',
-          field: 'statusfield',
+          field: 'course',
         },
         {
           headerName: 'Module',
-          field: 'statusfield',
+          field: 'module',
         },
         {
           headerName: 'Topic',
-          field: 'statusfield',
+          field: 'topic',
         },
         {
           headerName: 'Activity',
-          field: 'statusfield',
+          field: 'activity',
         },
         {
           headerName: 'Status',
-          field: 'statusfield',
+          field: 'status',
+          cellRenderer: (data) => {
+            if (data.value === 'submitted') {
+              return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color:#FFA04E">stop_circle</mat-icon></span> Submitted `;
+            } else if (data.value === 'graded') {
+              return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color:green">stop_circle</mat-icon></span> Graded `;
+            } else if (data.value === 'yettosubmit') {
+              return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color:grey">stop_circle</mat-icon></span> Yet to Submit `;
+            } else if (data.value === 'overdue') {
+              return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color:red">stop_circle</mat-icon></span> Overdue`;
+            }
+
+          },
         },
         {
           headerName: 'Score',
-          field: 'statusfield',
+          field: 'score',
         },
       ];
     this.rowData = [
-      { statusfield: 'Emerging technologies' },
-      { statusfield: 'Emerging technologies' },
-      { statusfield: 'Emerging technologies' },
-      { statusfield: 'Emerging technologies' },
+      {
+        course: 'Gardening for all',
+        module: 'Gardening for experts',
+        topic: 'Plants-classifications',
+        activity: 'Assignments',
+        status: 'graded',
+        score: '10/100'
+      },
+      {
+        course: 'Gardening for all',
+        module: 'Gardening for experts',
+        topic: 'Plants-classifications',
+        activity: 'Assignments',
+        status: 'submitted',
+        score: '10/100'
+      },
+      {
+        course: 'Gardening for all',
+        module: 'Gardening for experts',
+        topic: 'Plants-classifications',
+        activity: 'Assignments',
+        status: 'yettosubmit',
+        score: '-/100'
+      },
+      {
+        course: 'Gardening for all',
+        module: 'Gardening for experts',
+        topic: 'Plants-classifications',
+        activity: 'Assignments',
+        status: 'overdue',
+        score: '-/100'
+      }
+
+
     ];
 
   }
