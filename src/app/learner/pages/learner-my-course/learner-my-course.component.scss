@@ -321,7 +321,7 @@
   margin-left: -3px;
 }
 .courseImg {
-  border: 1px solid $profile-s-grey;
+  //border: 1px solid $profile-s-grey;
   width: 100%;
   height: 100%;
   margin: auto;
@@ -341,20 +341,46 @@
 
 .overlay {
   position: absolute;
-  bottom: 1%;
+  bottom:1%;
   // left: 25px;
   right: 0;
   /* padding: 15px 0; */
   background-color: #0000001f;
   overflow: hidden;
-  width: 0;
+  width: 100%;
   height: 98%;
-  transition: 0.7s ease;
+  transition: 0.3s ease;
   border-radius: 10px;
+  display: none;
 }
 
 .courseHover:hover .overlay {
-  width: 100%;
+ display : block
+}
+
+.coursePoints{
+  width:100%;
+  height: 0%;
+  transition: 1s ease;
+  display:none;
+  background-color: #898989;
+  color: white;
+
+}
+.pointhover:hover .coursePoints {
+    display: block;
+    height: 100%;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    margin-top: -15px;
+    padding: 15px 5px 5px 5px
+
+}
+.coursePoints td{
+  padding-bottom: 0px !important;
+}
+.coursePoints table{
+  width: 100% !important;
 }
 
 .text {

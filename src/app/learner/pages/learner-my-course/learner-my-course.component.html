@@ -629,12 +629,14 @@
           </ng-template>
 
           <!-- Card start -->
+          Evie
           <div *ngFor="let course of incomplete; let j = index">
             <mat-card class="coursebg card12" matRipple>
               <div class="row">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-7 courseDetailsCol">
                   <div class="row">
                     <div class="col-12 col-sm-12 col-md-4 col-lg-3">
+                      <div class="pointhover">
                       <div class="courseHover" (click)="gotoDesc(course)">
                         <div>
                           <span *ngIf="course?.course_type === 'primer_course'">
@@ -662,13 +664,37 @@
                               matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage"
                               src="../../../../assets/learner/freeP.svg" />
                           </span>
+                          <div class="overlay">
+                            <mat-icon class="text"> play_arrow </mat-icon>
+                          </div>
                         </div>
                         <img alt="Course Img" src="{{ course.course_img_url }}" class="courseImg" />
-
-                        <div class="overlay">
-                          <mat-icon class="text"> play_arrow </mat-icon>
-                        </div>
                       </div>
+                      <div class="coursePoints" >
+                        <table >
+                          <tr>
+                            <td>Instructor lead session</td>
+                            <td>-</td>
+                          </tr>
+                          <tr>
+                            <td>Self paces learning</td>
+                            <td>-</td>
+                          </tr>
+                          <tr>
+                            <td>Mid course project</td>
+                            <td>-</td>
+                          </tr>
+                          <tr>
+                            <td>Internal assessment</td>
+                            <td>-</td>
+                          </tr>
+                          <tr>
+                            <td>Final assessment</td>
+                            <td>-</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-8 col-lg-7 coursenameCol">
                       <div class="f_size_18 f_wt_500  coursename">
