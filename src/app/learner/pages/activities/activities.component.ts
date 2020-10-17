@@ -22,6 +22,7 @@ export class ActivitiesComponent implements OnInit {
   openList = false;
   @ViewChild(MatAccordion) accordion: MatAccordion;
   public isCollapsed = false;
+  projectDetails: any;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService) {
 
@@ -30,6 +31,7 @@ export class ActivitiesComponent implements OnInit {
     }
     this.courseid = localStorage.getItem('Courseid');
     this.getAssignmentmoduleData();
+    this.getprojectActivityData();
     // this.getperformActivityData();
   }
 
@@ -145,6 +147,14 @@ export class ActivitiesComponent implements OnInit {
         this.toastr.warning(data.message, null);
       }
     });
+  }
+
+  getprojectActivityData() {
+    this.Lservice.getprojectActivityData(this.userDetail.user_id, 'r00owr2x').subscribe((data: any) => {
+      if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
+      this.projectDetails = data.data.getprojectActivityData.data;
+  }
+});
   }
 
 }

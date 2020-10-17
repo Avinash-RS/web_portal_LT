@@ -190,13 +190,14 @@ margin-bottom: 1% !important;
 /* Ramya's css */
 .projHead {
   color: $lxp-theme-green;
+  position: absolute;
 }
 .assignIcon {
   font-size: 19px;
   margin-left: 20px;
 }
 .group {
-  margin-top: 10px;
+  margin-right: 44px;
 }
 .box-0-2{
   margin-top: 10px;
@@ -210,11 +211,36 @@ margin-bottom: 1% !important;
   border : 1px solid $color-border;
 }
 .groupBtn {
+  border: 1px solid #5C6873;
+  opacity: 1;
   background-color: #ffffff;
-  border: 1px solid;
   color: #1F1A17;
   width: 27px;
   height: 27px;
+  // position: absolute;
+  // left: 252px;
+  // top: -4px;
+}
+.arrBtn {
+  background-color: #ffffff;
+  border: 1px solid #5C6873;
+  opacity: 1;
+  color: #1F1A17;
+  width: 27px;
+  height: 27px;
+  // position: relative;
+  // top: 31px;
+  // left: 12px;
+}
+.openarrBtn {
+    background-color: #ffffff;
+    border: 1px solid #5C6873;
+    opacity: 1;
+    color: #1F1A17;
+    width: 27px;
+    height: 27px;
+    // position: relative;
+    // top: 22px;
 }
 .grpIcon {
   font-size: 15px;
@@ -227,16 +253,40 @@ margin-bottom: 1% !important;
   margin-right: 40px;
 }
 .m-r-2 {
-  margin-right: 2rem;
+  margin-right: 37px;
 }
 .arrow1 {
   position: absolute;
-  top: -16px;
-  right: 0;
+  right: 4px;
+  top: 14px;
+  border: 1px solid $color-border;
+  padding: 3px;
+  font-weight: 600;
 }
 .topic {
   margin-top: 19px;
 }
-.ul {
-  border: 1px solid;
+::ng-deep .list-group-item {
+background: #FBF6E1 0% 0% no-repeat padding-box !important;
+box-shadow: 0px 1px 2px #00000029 !important;
+border: 0.5px solid #D6D6D6 !important;
+border-radius: 5px !important;
+opacity: 1 !important;
+}
+.t-l-1 {
+  margin-left: 25px;
+  margin-top: 5px;
+}
+.teamName {
+  position: relative;
+  left: 3px;
+  bottom: 6px;
+}
+.expansionarr {
+  border: 1px solid $color-border;
+  padding: 3px;
+  font-weight: 600;
+  position: absolute;
+  top: -11px;
+  right: 3px;
 }

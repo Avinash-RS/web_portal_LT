@@ -1423,17 +1423,17 @@ export const getprojectActivityData = gql`
         projectActivity {
         activitystartdate
         activityenddate
-        cardstatus
+        submit_status
         course_id
         batchid
         activityId
-        modulename
+        module_id
         activityname
-        topicname
+        topic_id
         evaluationmode
         projecttype
-        totalmark
-        scoremark
+        total_mark
+        score_mark
         submitted_on
         submitted_date
         grade_status
