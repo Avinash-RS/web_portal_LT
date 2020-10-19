@@ -23,6 +23,7 @@ export class ActivitiesComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   public isCollapsed = false;
   projectDetails: any;
+  groupDetails: any;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService) {
 
@@ -153,6 +154,10 @@ export class ActivitiesComponent implements OnInit {
     this.Lservice.getprojectActivityData(this.userDetail.user_id, 'r00owr2x').subscribe((data: any) => {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
       this.projectDetails = data.data.getprojectActivityData.data;
+      this.projectDetails.forEach(element => {
+        this.groupDetails = element.projectActivity.groupDetails;
+        console.log('ele', this.groupDetails);
+      });
   }
 });
   }

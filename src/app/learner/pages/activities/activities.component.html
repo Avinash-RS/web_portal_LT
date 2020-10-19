@@ -302,8 +302,10 @@
       <div class="box-0-1" *ngFor="let project of projectDetails">
         <div class="row">
           <div class="col text-right">
-          <mat-icon class="f_size_16 expansionarr" aria-hidden="false"
+          <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="!isCollapsed"
           (click)="isCollapsed = !isCollapsed">keyboard_arrow_down</mat-icon>
+          <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="isCollapsed"
+          (click)="isCollapsed = !isCollapsed">keyboard_arrow_up</mat-icon>
         </div>
         </div>
       <div class="row">
@@ -321,11 +323,8 @@
                 <mat-icon class="grpIcon">group</mat-icon>
               </button>
               <span class="teamName">{{project.projectActivity.groupname}} ({{project.projectActivity.groupcount}})</span>&nbsp;
-              <button mat-mini-fab [ngClass]="openList ? 'openarrBtn' : 'arrBtn'" *ngIf="!showIcon" (click)="openList = !openList; showIcon = !showIcon">
+              <button mat-mini-fab class="arrBtn" *ngIf="!showIcon" (click)="openList = !openList; showIcon = !showIcon">
                 <mat-icon class="grpIcon">arrow_back</mat-icon>
-              </button>
-              <button mat-mini-fab [ngClass]="openList ? 'openarrBtn' : 'arrBtn'" *ngIf="showIcon" (click)="openList = !openList; showIcon = !showIcon">
-                <mat-icon class="grpIcon">arrow_forward</mat-icon>
               </button>
             </span>
           </div>
@@ -334,7 +333,11 @@
           <div class="row">
             <div class="col-10"></div>
             <div class="col-2 text-right">
-              <span class="f_wt_600 status">  <span class="dot"></span>{{project.projectActivity.submit_status}}</span>
+              <span class="f_wt_600 status" *ngIf="project.projectActivity.submit_status == 'notsubmitted'">  <span class="dot"></span>
+              Yet to submit</span>
+
+              <span class="f_wt_600 submitstatus" *ngIf="project.projectActivity.submit_status == 'submitted'">  <span class="submitdot"></span>
+              Submitted</span>
             </div>
           </div><br>
 
@@ -348,7 +351,7 @@
             </div>
           </div>
           <!-----------------------------Materials for activity--------------------->
-          <div class="panel" *ngIf="isCollapsed">
+          <div class="panel1" *ngIf="isCollapsed">
             <hr>
             <div class="row">
               <div class="col-8">
@@ -393,15 +396,17 @@
           </div>
         </div>
        <!------------------------------------Learner list------------------------------->
-        <div class="col-2" *ngIf="openList">
-          <span class="align-center">{{project.projectActivity.groupname}} ({{project.projectActivity.groupcount}})</span>
-            <ul class="list-group">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Morbi leo risus</li>
-              <li class="list-group-item">Porta ac consectetur ac</li>
-              <li class="list-group-item">Vestibulum at eros</li>
+        <div class="col-2 learnerList" *ngIf="openList">
+          <div class="align-center">{{project.projectActivity.groupname}} ({{project.projectActivity.groupcount}})
+            <button mat-mini-fab class="arrfwd" *ngIf="showIcon" (click)="openList = !openList; showIcon = !showIcon">
+              <mat-icon class="grpIcon">arrow_forward</mat-icon>
+            </button>
+          </div>
+          <div class="list">
+            <ul class="list-group" *ngFor="let learner of groupDetails">
+              <li class="list-group-item">{{learner.name}}</li>
             </ul>
+          </div>
   </div>
       </div>
       </div>
