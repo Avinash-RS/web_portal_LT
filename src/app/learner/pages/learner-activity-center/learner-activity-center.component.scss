@@ -1,0 +1,86 @@
+@import "variable";
+// Activity center Homescreen Starts here //
+
+
+// Activity center Homescreen Ends here //
+
+
+// ******************************************************************************** //
+
+// Start of screen 2 - Next activity on card //
+
+
+
+
+// End of screen 2 - Next activity on card //
+
+// ******************************************************************************** //
+
+// Start of screen 3 - Completed card //
+
+
+
+
+
+// End of screen 3 - Completed card //
+
+// ******************************************************************************** //
+
+// Start of screen 4 - Pending Activities card //
+
+
+
+// End of screen 4 - Pending Activities card //
+
+// ******************************************************************************** //
+
+// Start of screen 5 - View All Activities card //
+button,
+textarea:focus,
+input:focus {
+    outline: none;
+}
+
+.inputs {
+    border: 1.0px solid $color-border !important;
+    padding: 5px !important;
+}
+
+.inputs:focus {
+    border: 1.0px solid $lxp-theme-green!important;
+}
+
+/deep/.search-viewactivities .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding-top: 0px !important;
+    padding-bottom: 5px !important;
+}
+/deep/.search-viewactivities .mat-form-field-suffix {
+    padding-top: 3px !important;
+}
+::ng-deep .search-viewactivities .mat-form-field-appearance-outline .mat-form-field-outline-end {
+    border-radius: 0px !important;
+}
+
+::ng-deep .search-viewactivities  .mat-form-field-appearance-outline .mat-form-field-outline-start {
+    border-radius: 0px !important;
+
+}
+
+::ng-deep .ag-theme-alpine .ag-header {
+    background-color: #F9F2BC;
+}
+::ng-deep .ag-theme-alpine .ag-row {
+    background-color: $color-lightest-grey;
+    border-bottom: 1px solid white;
+}
+
+::ng-deep .ag-theme-alpine {
+border: none !important;
+}
+
+.sub {
+color: #FFA04E !important;
+}
+// End of screen 5 - View All Activities card //
+
+// ******************************************************************************** //

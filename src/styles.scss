@@ -11,6 +11,12 @@
 // @import "~bootstrap/scss/bootstrap-grid";
 
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import "../node_modules/ag-grid-community/src/styles/ag-grid.scss";
+@import "../node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin.scss";
+
+.ag-theme-alpine {
+  @include ag-theme-alpine();
+}
 
 button:disabled:hover {
   cursor: not-allowed;
