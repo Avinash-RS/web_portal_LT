@@ -36,6 +36,7 @@ export class LearnerActivityCenterComponent implements OnInit {
   };
   rowData: any;
   userDetails: any;
+  searchColumn: any;
 
   dataSources: IDatasource = {
     getRows: (params: IGetRowsParams) => {
@@ -46,16 +47,29 @@ export class LearnerActivityCenterComponent implements OnInit {
       const sortType = 'undefined';
       const searchValue = '';
       // for all activities
-      const searchColumn = 'undefined';
+      // const searchColumn = 'undefined';
       // for yet to start
       // const searchColumn = [{ ['files.submit_status']: { '$regex': 'Yet to submit', '$options': 'i' } }];
       // for completed
       // const searchColumn = [[{ '$or': [{ ['files.submit_status']: { '$regex': 'Graded', '$options': 'i' } },
       // { 'files.submit_status': { '$regex': 'Submitted', '$options': 'i' } }] }];
       // JSON.stringify(searchColumn)
-      this.service.getCourseActivities(userId, PageNumber, courseId, sortType, searchValue, searchColumn)
+      if (this.detail.key === 'completed') {
+        // this.searchColumn = 'undefined';
+        const searchC = [{
+          ['$or']: [{ ['files.submit_status']: { '$regex': 'Graded', '$options': 'i' } },
+          { 'files.submit_status': { '$regex': 'Submitted', '$options': 'i' } }]
+        }];
+        this.searchColumn = JSON.stringify(searchC);
+      } else if (this.detail.key === 'pending') {
+        const searchC = [{ ['files.submit_status']: { '$regex': 'Yet to submit', '$options': 'i' } }];
+        this.searchColumn = JSON.stringify(searchC);
+      } else if (this.detail.key === 'allActivities') {
+        this.searchColumn = 'undefined';
+      }
+      this.service.getCourseActivities(userId, PageNumber, courseId, sortType, searchValue, this.searchColumn)
         .subscribe((result: any) => {
-          console.log(result, 'r');
+          // console.log(result, 'r');
           params.successCallback(
             result.data.get_course_activities.message, 10
           );
@@ -63,8 +77,12 @@ export class LearnerActivityCenterComponent implements OnInit {
     }
   };
   gridApi: any;
+  detail: any;
   constructor(private service: LearnerServicesService, private gs: GlobalServiceService,
-              private router: Router, ) {
+    private route: Router, ) {
+    this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
+    // console.log(this.detail.key, 'det');
     this.userDetails = this.gs.checkLogout();
     this.tabledef();
     // this.getCourseActivitiesforTable();
