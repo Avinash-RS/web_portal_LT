@@ -1,4 +1,11 @@
 <app-header></app-header>
+
+<div [ngClass]="{'demo' : loading}"></div>
+
+<!-- <div class="spinner-container" *ngIf="loading">
+  <mat-spinner diameter="40" class="mat-spinner-color"></mat-spinner>
+</div> -->
+
 <div (click)="closePopup()">
   <div class="row">
     <div [ngClass]="expandSearch ? 'mobileSearchRow': 'myCourseSearch'" class="col-12">
@@ -897,7 +904,7 @@
                               </div>
                             </div>
                             <div class="col-4">
-                              <button mat-stroked-button class="btl-alin blue_clr cap pointer">
+                              <button mat-stroked-button class="btl-alin blue_clr cap pointer" (click) = "goToForum(course)">
                                 <span class="cap f_wt_400 m-t-m-2">
                                   {{ "Collaborate" | translate }}&nbsp;
                                 </span>
@@ -2465,9 +2472,7 @@
     </mat-dialog-content>
   </ng-template>
 
-  <div class="spinner-container" *ngIf="loading">
-    <mat-spinner diameter="40" class="mat-spinner-color"></mat-spinner>
-  </div>
+
 
   <!-- Model for mobile user  -->
   <!-- data-toggle="modal" data-target="#myModal" -->
