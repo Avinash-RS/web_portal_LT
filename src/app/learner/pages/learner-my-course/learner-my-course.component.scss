@@ -307,17 +307,19 @@
 }
 .module{
   font-size: 16px;
-  margin-left: 4px;
+  // margin-left: 4px;
   font-weight: 600;
 
 }
 
 .myC-head {
-  margin-left: 1% !important;
+  margin-left:  8.5% !important;
   margin-top: 2%;
   margin-bottom: 1%;
 }
-
+.myCourses {
+  margin-left: -3px;
+}
 .courseImg {
   border: 1px solid $profile-s-grey;
   width: 100%;

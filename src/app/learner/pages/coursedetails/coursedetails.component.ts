@@ -27,6 +27,7 @@ export class CoursedetailsComponent implements OnInit {
   course: any = null;
   loading: boolean;
   pagenumber: any;
+  selectedName: any;
   open = false;
   userDetail: any;
   showShortDesciption = true;
@@ -157,6 +158,9 @@ export class CoursedetailsComponent implements OnInit {
   detailData: any;
   batchDetails: any;
   disableThreads: boolean;
+  drawersOpen: boolean;
+  screenHeight: number;
+  screenWidth: number;
   // initials: any;
 
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
@@ -164,6 +168,7 @@ export class CoursedetailsComponent implements OnInit {
   moduleSatusCheck: any;
   tabInd: any;
   playerMenuEnable = false;
+  viewScrollBar = false;
   // initials: any;
   constructor(public translate: TranslateService, private router: ActivatedRoute,
               public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
@@ -171,6 +176,13 @@ export class CoursedetailsComponent implements OnInit {
               public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
               public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
     this.selectedModuleData = null;
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+    if (this.screenWidth < 800) {
+      this.drawersOpen = false;
+    } else {
+      this.drawersOpen = true;
+    }
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     if (this.gs.checkLogout()) {
@@ -190,6 +202,12 @@ export class CoursedetailsComponent implements OnInit {
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
             this.course = viewCourse.data.viewcourse.message;
+            console.log('this.course 1', this.course);
+            if (this.detailData !== undefined) {
+              this.selectedName = this.detailData?.course_name;
+            } else if (this.course !== undefined && this.course !== null) {
+              this.selectedName =  this.course?.course_name;
+            }
             this.selectedModuleData = this.scromApiData?.childData[0] || null;
             if (this.scromApiData?.childData[0]) {
               this.selectedModuleData.indexValue = 1;

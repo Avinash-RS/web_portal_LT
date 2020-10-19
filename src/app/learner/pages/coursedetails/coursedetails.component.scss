@@ -203,7 +203,7 @@ button.active:focus {
 }
 
 .content {
-    overflow: auto !important;
+    // overflow: auto !important;
 }
 
 li {
@@ -391,16 +391,26 @@ li {
 //     margin-top: 10px !important;
 // }
 
- ::ng-deep .multiline{
-    padding: 0 0 13px 0 !important;
-    height: 65px !important;
-    margin-top: 10px !important;
+//  ::ng-deep .multiline{
+//     padding: 0 0 13px 0 !important;
+//     height: 65px !important;
+//     margin-top: 10px !important;
+// }
+
+//  ::ng-deep .singleLine{
+//     padding:0 0 0 0!important;
+//     height: 48px !important;
+//     margin-top: 10px !important;
+// }
+
+.titleHeight {
+    height: 40px;
 }
 
- ::ng-deep .singleLine{
-    padding:0 0 0 0!important;
-    height: 48px !important;
+.moduleHeadHight{
+    padding: 0 0 13px 0 !important;
     margin-top: 10px !important;
+    height: 60px !important;
 }
 
 .sqnumber {
@@ -807,15 +817,14 @@ color: $color-white !important;
 }
 
 .headerDown{
-    margin-top: 1rem !important;
+    margin-top: 0.5rem !important;
 }
 
 
 .moduleund {
-margin-left: 35px;
+margin-left: 27px;
 font-weight: 500;
-height: 20px;
-margin-top: -2px;
+height: 23px;
 }
 
 .bottom-border {
@@ -968,8 +977,40 @@ padding: 30px !important;
 border-radius: 0 !important;
 }
 
+.mobileHoriz {
+    display: none;
+}
+.moileView {
+    display: none;
+}
+
 // / mobile
 @media(min-width: 320px) and(max-width: 767px) {
+
+.mobileHoriz {
+  display: block;
+}
+.moileView {
+    display: block;
+}
+:host ::ng-deep #mat-tab-label-0-0 {
+    display: none !important;
+  }
+  :host ::ng-deep #mat-tab-label-0-1 {
+    display: none !important;
+  }
+  :host ::ng-deep #mat-tab-label-0-2 {
+    display: none !important;
+  }
+  :host ::ng-deep #mat-tab-label-0-3 {
+    display: none !important;
+  }
+  :host ::ng-deep #mat-tab-label-0-4 {
+    display: none !important;
+  }
+  :host ::ng-deep .mat-tab-label-container {
+    display: none !important;
+  }
 .createThreadDialog {
     width: 320px;
 }
@@ -1064,6 +1105,7 @@ border-radius: 0 !important;
     top: -2px;
 }
 .closeBtn {
+    left: unset !important;
     right: -50px !important;
 }
 .Outine{
@@ -1550,7 +1592,7 @@ left: 10px;
 
 .closeBtn {
     position: absolute;
-    right: -23px;
+    left: 25px;
     top: 4px;
     z-index: 1;
 }
@@ -1725,4 +1767,38 @@ padding: 0px 0 16px 0px !important;
 
 ::ng-deep .mat-content{
     overflow: visible !important;
+}
+
+.exp-icon{
+    margin-top: 17px;
+    z-index: 2 !important;
+    position: relative !important;
+    right: 3px !important;
+    cursor: pointer;
+}
+
+
+// :host ::ng-deep .mat-expansion-panel:not(:last-child) {
+//     border-bottom: none !important;
+// }
+// :host ::ng-deep .mat-expansion-panel:not([class*=mat-elevation-z]) {
+//     box-shadow: none !important;
+//     // border: none !important;
+//     }
+
+
+:host ::ng-deep .mat-drawer-inner-container {
+    width: 100%;
+    height: 100%;
+    overflow: unset !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+.afterHover{
+    overflow: auto;
+    height: 626px;
+}
+.beforeHover{
+    overflow: hidden;
+    height: 626px;
 }
