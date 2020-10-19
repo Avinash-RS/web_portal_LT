@@ -1,4 +1,6 @@
 <app-header></app-header>
+<div [ngClass]="{'demo' : true}"></div>
+{{discussionData.topics === undefined }} length of topics
 <br>
 <p>
   <mat-icon class="material-icons f_size_15 backIc pointer redHover" (click)="goBack()">arrow_back_ios
@@ -427,7 +429,6 @@
                   </button>
                 </div>
               </div>
-
               <div class="row p-lr-30" *ngIf="showCommentEditor[pin]">
                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
                 <div class="form-group col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 no_padding m-b-0">

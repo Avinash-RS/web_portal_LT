@@ -20,8 +20,10 @@ export class DiscussionForumComponent implements OnInit {
   userDetail: any;
   showCourseDetails = true;
   disableThreads = false;
-  discussionData1: any = [];
-  discussionData: any = [];
+  discussionData1: any = {
+  };
+  discussionData: any = {
+  };
   batchDetails: any;
   selectedModuleData: any;
   searchthreadname: boolean;
@@ -29,10 +31,10 @@ export class DiscussionForumComponent implements OnInit {
   selectedThreadData: any;
   showCommentThread: boolean;
   a2iFlag: boolean;
-  showCommentEditor: any[];
+  showCommentEditor: any = [];
   showThreadComment: boolean;
   addThreadComment: any;
-  addPostComment: any[];
+  addPostComment = [];
   filterValue: any = null;
   topicDiscussionData: any;
   topicDiscussionData1: any;
@@ -62,12 +64,10 @@ export class DiscussionForumComponent implements OnInit {
   selectedIndex: any = 0;
 
   constructor(public Lservice: LearnerServicesService, public route: Router, private formBuilder: FormBuilder,
-              private gs: GlobalServiceService, private toastr: ToastrService, private dialog: MatDialog) {
+    private gs: GlobalServiceService, private toastr: ToastrService, private dialog: MatDialog) {
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-    console.log(detail);
     this.course = detail || JSON.parse(atob(localStorage.getItem('course')));
-    console.log(this.course);
     this.userDetail = this.gs.checkLogout();
     this.playerModuleAndTopic(this.course.id);
   }
@@ -78,11 +78,12 @@ export class DiscussionForumComponent implements OnInit {
   goBack() {
     this.route.navigateByUrl('/Learner/MyCourse');
   }
+
   getSelectedIndex(i) {
     this.selectedIndex = i || 0;
   }
+
   playerModuleAndTopic(cid) {
-    console.log(cid);
     this.Lservice.playerModuleAndTopic(cid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromModuleData = data.data?.playerModuleAndTopic?.message[0]?.childData;
       this.selectedModuleData = this.scromModuleData[0] || null;
@@ -112,6 +113,7 @@ export class DiscussionForumComponent implements OnInit {
           result?.data?.ViewAllThreadData?.data?.topics.sort((a, b) => new Date(b.lastposttimeISO || b.timestampISO).getTime() -
             new Date(a.lastposttimeISO || a.lastposttimeISO).getTime());
           this.discussionData = result.data.ViewAllThreadData.data;
+          console.log(this.discussionData)
           this.discussionData1 = Object.assign({}, result.data.ViewAllThreadData.data);
           if (this.discussionData?.topics && this.discussionData?.topics?.length > 0) {
             this.discussionData.topics = this.discussionData?.topics?.filter(i => i.deleted === false);
