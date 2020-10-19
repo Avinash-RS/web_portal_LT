@@ -1414,6 +1414,105 @@ export const getCountForJobroleCategories = gql`
   }
       `;
 
+export const getprojectActivityData = gql`
+      query getprojectActivityData($userId: String, $courseId: String){
+        getprojectActivityData(userId: $userId, courseId: $courseId){
+        success
+        data {
+        _id
+        projectActivity {
+        activitystartdate
+        activityenddate
+        submit_status
+        course_id
+        batchid
+        activityId
+        module_id
+        activityname
+        topic_id
+        evaluationmode
+        projecttype
+        total_mark
+        score_mark
+        submitted_on
+        submitted_date
+        grade_status
+        instructor_status
+        comments
+        groupname
+        groupcount
+        videodetails{
+        id
+        videourl
+        name
+        size
+        }
+        materialDetails{
+        id
+        materialurl
+        name
+        doctype
+        size
+        }
+        groupDetails{
+        id
+        name
+        username
+        email
+        }
+        }
+        }
+        }
+        }
+`;
+export const getperformActivityData = gql`
+query getperformActivityData($userId: String , $courseId: String) {
+  getperformActivityData(userId: $userId , courseId: $courseId ) {
+    success
+    data {
+      _id
+      performActivity {
+        activitystartdate
+        activityenddate
+        submit_status
+        course_id
+        batchid
+        activityId
+        iterationTotal
+        module_id
+        activityname
+        topic_id
+        evaluationmode
+        materialDetails{
+          id
+          materialurl
+          name
+          doctype
+          size
+        }
+        iterationDetails{
+          iterationid
+          iterationcount
+          submit_status
+          total_mark
+          score_mark
+          submitted_on
+          submitted_date
+          grade_status
+          comments
+          videodetails{
+            id
+            videourl
+            name
+            size
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
 
 export const getCourseActivities = gql`
       query  get_course_activities($user_id:String! ,$pagenumber:String!, $course_id:String! , $sort_type:String!, $searchvalue:String!,$searchcolumn:String!) {
