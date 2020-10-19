@@ -45,18 +45,26 @@ export class LearnerActivityCenterComponent implements OnInit {
       const courseId = 'undefined';
       const sortType = 'undefined';
       const searchValue = '';
+      // for all activities
       const searchColumn = 'undefined';
-      this.service.getCourseActivities(userId, PageNumber, courseId, sortType, searchValue, searchColumn).subscribe((result: any) => {
-        console.log(result, 'r');
-        params.successCallback(
-          result.data.get_course_activities.message, 10
-        );
-      });
+      // for yet to start
+      // const searchColumn = [{ ['files.submit_status']: { '$regex': 'Yet to submit', '$options': 'i' } }];
+      // for completed
+      // const searchColumn = [[{ '$or': [{ ['files.submit_status']: { '$regex': 'Graded', '$options': 'i' } },
+      // { 'files.submit_status': { '$regex': 'Submitted', '$options': 'i' } }] }];
+      // JSON.stringify(searchColumn)
+      this.service.getCourseActivities(userId, PageNumber, courseId, sortType, searchValue, searchColumn)
+        .subscribe((result: any) => {
+          console.log(result, 'r');
+          params.successCallback(
+            result.data.get_course_activities.message, 10
+          );
+        });
     }
   };
   gridApi: any;
   constructor(private service: LearnerServicesService, private gs: GlobalServiceService,
-    private router: Router, ) {
+              private router: Router, ) {
     this.userDetails = this.gs.checkLogout();
     this.tabledef();
     // this.getCourseActivitiesforTable();

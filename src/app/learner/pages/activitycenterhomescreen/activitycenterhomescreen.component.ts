@@ -13,6 +13,6 @@ export class ActivitycenterhomescreenComponent implements OnInit {
   ngOnInit() {
   }
   gototable(){
-    this.router.navigate(['Learner/activitycenter']);
+    this.router.navigate(['Learner/activitycenter/?name="allActivities"']);
   }
 }
