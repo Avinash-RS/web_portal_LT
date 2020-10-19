@@ -1,0 +1,292 @@
+@import "variable";
+.con-1{
+    padding: 12px;
+}
+.back{
+    font-size: 16px;
+    color: $color-blank;
+    cursor: pointer;
+}
+.back :hover{
+    color: $lxp-theme-green !important;
+}
+:host /deep/ .mat-ink-bar {
+    height: 2px !important;
+    background-color: $lxp-theme-green !important;
+  }
+  :host /deep/  .mat-expansion-panel:not([class*='mat-elevation-z']) {
+     box-shadow: none !important;
+     border: 1px solid $color-border !important; 
+}
+  //dot
+  .dot {
+    height: 10px;
+    width: 10px;
+    background-color: #bbb;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: inline-block;
+  }
+.arr{
+    margin-left: 69px;
+    border: 1px solid $color-border;
+    padding: 3px;
+    font-weight: 600;
+}
+  .box-0-1{
+      margin-top: 10px;
+      width: 100%;
+      padding: 20px;
+      padding-bottom: 3%;
+      overflow: hidden;
+      height: auto;
+      background-color: $color-white;
+      border : 1px solid $color-border;
+  }
+  .t-l{
+    margin-left: 14px;
+    margin-top: 5px;
+  }
+  .margin-5{
+      margin-left: 5px;
+  }
+  .panel{
+      margin-top: 15px;
+  }
+  .courseImg {
+    border: 1px solid $profile-s-grey;
+    width: 60%;
+    height: 100%;
+    margin: auto;
+    border-radius: 10px;
+  }
+.upload-btn{
+    width: 100%;
+}
+.margin-30{
+    margin-left: 30px;
+}
+.margin-21{
+    margin-left: 21px;
+}
+.submit-btn{
+    color: $color-white;
+    background-color: $lxp-theme-green;
+    width: 45%;
+    margin-top: 6%;
+}
+.margin-b-9{
+margin-bottom: 9px;
+}
+  .m-t{
+      margin-top: 10px;
+  }
+.m-l-68{
+    margin-left: -68px;
+}
+.m-l-23{
+    margin-left: 23px;
+}
+.dis-line{
+    display: flex;
+    line-height: 1.5;
+}
+  .uppertext {
+    position: absolute;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: 54%;
+    color:$color-white;;
+    font-size: 12px;
+    padding: 5px;
+  }
+  .overlay {
+    position: absolute;
+    bottom: -50px;
+    background: rgba(0, 0, 0, 0.5);
+    width: 54%;
+    height: 50px;
+    transition: .5s ease;
+    opacity: 0;
+    color: $color-white;
+    font-size: 12px;
+  }
+  .con:hover .overlay {
+    opacity: 1;
+  }
+  .width{
+    width: 58%;
+  }
+  .align-center{
+      text-align: center;
+  }
+
+  
+  /* mani assignment tab css starts here */
+  .assignmentName {
+    width: 90px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    }
+
+    .viewDoc {
+      color: $color-blank;
+      font-size: 20px;
+      width: 20px;
+  }
+
+  .download-button {
+    background: $lxp-theme-green !important; // red color
+    float: right;
+    position: relative;
+    top: -12px;
+    right: 26px;
+    height: 35px;
+    width: 35px;
+}
+.close-button {
+  background: $lxp-theme-green !important; // red color
+  float: right;
+  top: -12px;
+  position: relative;
+  right: -53px;
+  height: 35px;
+  width: 35px;
+}
+.download-icon {
+  position: relative;
+  bottom: 2px;
+}
+
+.icon {
+  color: $color-blue;
+}
+
+.not-submited {
+    color: $lxp-gray;
+}
+
+.grade {
+  color: $color-dark-green;
+  }
+  #upload-photo {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+::ng-deep .mat-expansion-panel-content {
+margin-bottom: 1% !important;
+}
+
+.gradedUpload {
+  color: $lxp-icon !important;
+  cursor: not-allowed !important;
+}
+
+    /* mani assignment tab css ends here */
+
+/* Ramya's css */
+.projHead {
+  color: $lxp-theme-green;
+  position: absolute;
+}
+.assignIcon {
+  font-size: 19px;
+  margin-left: 20px;
+}
+.group {
+  margin-right: 44px;
+}
+.box-0-2{
+  margin-top: 10px;
+  margin-left: 71px;
+  width: 65%;
+  padding: 20px;
+  padding-bottom: 3%;
+  overflow: hidden;
+  height: auto;
+  background-color: $color-white;
+  border : 1px solid $color-border;
+}
+.groupBtn {
+  border: 1px solid #5C6873;
+  opacity: 1;
+  background-color: #ffffff;
+  color: #1F1A17;
+  width: 27px;
+  height: 27px;
+  // position: absolute;
+  // left: 252px;
+  // top: -4px;
+}
+.arrBtn {
+  background-color: #ffffff;
+  border: 1px solid #5C6873;
+  opacity: 1;
+  color: #1F1A17;
+  width: 27px;
+  height: 27px;
+  // position: relative;
+  // top: 31px;
+  // left: 12px;
+}
+.openarrBtn {
+    background-color: #ffffff;
+    border: 1px solid #5C6873;
+    opacity: 1;
+    color: #1F1A17;
+    width: 27px;
+    height: 27px;
+    // position: relative;
+    // top: 22px;
+}
+.grpIcon {
+  font-size: 15px;
+  margin-top: -4px;
+}
+.status {
+  margin-right: 3rem;
+}
+.m-r-40 {
+  margin-right: 40px;
+}
+.m-r-2 {
+  margin-right: 37px;
+}
+.arrow1 {
+  position: absolute;
+  right: 4px;
+  top: 14px;
+  border: 1px solid $color-border;
+  padding: 3px;
+  font-weight: 600;
+}
+.topic {
+  margin-top: 19px;
+}
+::ng-deep .list-group-item {
+background: #FBF6E1 0% 0% no-repeat padding-box !important;
+box-shadow: 0px 1px 2px #00000029 !important;
+border: 0.5px solid #D6D6D6 !important;
+border-radius: 5px !important;
+opacity: 1 !important;
+}
+.t-l-1 {
+  margin-left: 25px;
+  margin-top: 5px;
+}
+.teamName {
+  position: relative;
+  left: 3px;
+  bottom: 6px;
+}
+.expansionarr {
+  border: 1px solid $color-border;
+  padding: 3px;
+  font-weight: 600;
+  position: absolute;
+  top: -11px;
+  right: 3px;
+}

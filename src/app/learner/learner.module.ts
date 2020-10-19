@@ -65,6 +65,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatMenuModule } from '@angular/material/menu';
 import { LearnermycourseService } from './pages/learner-my-course/learnermycourse.service';
+import { ActivitiesComponent } from './pages/activities/activities.component';
 import { DiscussionForumComponent } from './pages/discussion-forum/discussion-forum.component';
 import { LearnerActivityCenterComponent } from './pages/learner-activity-center/learner-activity-center.component';
 import { AgGridModule } from 'ag-grid-angular';
@@ -132,9 +133,6 @@ const routes: Routes = [
   {
     path: 'MyCourse',
     component: LearnerMyCourseComponent,
-    resolve: {
-      data: LearnermycourseService
-    },
     // canActivate: [AuthGuard],
     data: { animation: 'Learner  MyCourse' }
   },
@@ -150,12 +148,18 @@ const routes: Routes = [
     data: { animation: 'Calendar' }
   },
   {
+    path: 'activities',
+    component: ActivitiesComponent,
+    data: { animation: 'Calendar' }
+  },
+    {
     path: 'activitycenter',
     component: LearnerActivityCenterComponent,
     data: { animation: 'activitycenter' }
   },
 
   {
+
     path: 'discussionForum',
     component: DiscussionForumComponent,
     data: { animation: 'Discussion Forum' }
@@ -233,6 +237,7 @@ const routes: Routes = [
     LandingpageComponent,
     LearnerCalendarComponent,
     ViewAllnotificationsComponent,
+    ActivitiesComponent,
     DiscussionForumComponent,
     LearnerActivityCenterComponent,
     ActivitycenterhomescreenComponent
