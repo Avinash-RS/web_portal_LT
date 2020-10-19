@@ -43,16 +43,44 @@ input:focus {
 
 .inputs {
     border: 1.0px solid $color-border !important;
-    padding: 8px !important;
+    padding: 5px !important;
 }
 
 .inputs:focus {
     border: 1.0px solid $lxp-theme-green!important;
 }
 
+/deep/.search-viewactivities .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding-top: 0px !important;
+    padding-bottom: 5px !important;
+}
+/deep/.search-viewactivities .mat-form-field-suffix {
+    padding-top: 3px !important;
+}
+::ng-deep .search-viewactivities .mat-form-field-appearance-outline .mat-form-field-outline-end {
+    border-radius: 0px !important;
+}
 
+::ng-deep .search-viewactivities  .mat-form-field-appearance-outline .mat-form-field-outline-start {
+    border-radius: 0px !important;
 
+}
 
+::ng-deep .ag-theme-alpine .ag-header {
+    background-color: #F9F2BC;
+}
+::ng-deep .ag-theme-alpine .ag-row {
+    background-color: $color-lightest-grey;
+    border-bottom: 1px solid white;
+}
+
+::ng-deep .ag-theme-alpine {
+border: none !important;
+}
+
+.sub {
+color: #FFA04E !important;
+}
 // End of screen 5 - View All Activities card //
 
 // ******************************************************************************** //

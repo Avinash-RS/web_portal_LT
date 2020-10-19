@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { Router } from '@angular/router';
+import { IDatasource, IGetRowsParams } from 'ag-grid-community';
 
 @Component({
   selector: 'app-learner-activity-center',
@@ -32,8 +35,32 @@ export class LearnerActivityCenterComponent implements OnInit {
     unSortIcon: true,
   };
   rowData: any;
-  constructor(private service: LearnerServicesService) {
+  userDetails: any;
+
+  dataSources: IDatasource = {
+    getRows: (params: IGetRowsParams) => {
+      const userId = this.userDetails.user_id;
+      // const userId = 'egs8fv';
+      const PageNumber = params.startRow / 10 || 0;
+      const courseId = 'undefined';
+      const sortType = 'undefined';
+      const searchValue = '';
+      const searchColumn = 'undefined';
+      this.service.getCourseActivities(userId, PageNumber, courseId, sortType, searchValue, searchColumn).subscribe((result: any) => {
+        console.log(result, 'r');
+        params.successCallback(
+          result.data.get_course_activities.message, 10
+        );
+      });
+    }
+  };
+  gridApi: any;
+  constructor(private service: LearnerServicesService, private gs: GlobalServiceService,
+    private router: Router, ) {
+    this.userDetails = this.gs.checkLogout();
     this.tabledef();
+    // this.getCourseActivitiesforTable();
+
   }
 
   ngOnInit() {
@@ -75,40 +102,101 @@ export class LearnerActivityCenterComponent implements OnInit {
   // ******************************************************************************** //
 
   // Start of screen 5 - View All Activities card //
+  onGridReady(params: any) {
+    this.gridApi = params.api;
+    this.gridApi.setDatasource(this.dataSources);
+  }
+
+  // getCourseActivitiesforTable() {
+  //   // const userId = this.userDetails.user_id;
+  //   const userId = this.userDetails.user_id;
+  //   const PageNumber = '0';
+  //   const courseId = 'undefined';
+  //   const sortType = 'undefined';
+  //   const searchValue = 'undefined';
+  //   const searchColumn = 'undefined';
+  //   this.service.getCourseActivities(userId, PageNumber, courseId, sortType, searchValue, searchColumn).subscribe((result: any) => {
+  //     console.log(result, 'r');
+  //   });
+  // }
+
   tabledef() {
     this.columnDefs =
       [
         {
           headerName: 'Course',
-          field: 'statusfield',
+          field: 'course_name',
         },
         {
           headerName: 'Module',
-          field: 'statusfield',
+          field: 'module_name',
         },
         {
           headerName: 'Topic',
-          field: 'statusfield',
+          field: 'topic_name',
         },
         {
           headerName: 'Activity',
-          field: 'statusfield',
+          field: '-',
         },
         {
           headerName: 'Status',
-          field: 'statusfield',
+          field: 'status',
+          cellRenderer: (data) => {
+            // console.log(data, 'status');
+            if (data.value === 'Submitted') {
+              return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color:#FFA04E">stop_circle</mat-icon></span> Submitted `;
+            } else if (data.value === 'Graded') {
+              return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color:green">stop_circle</mat-icon></span> Graded `;
+            } else if (data.value === 'Yet to submit') {
+              return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color:grey">stop_circle</mat-icon></span> Yet to Submit `;
+            } else if (data.value === 'Overdue') {
+              return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color:red">stop_circle</mat-icon></span> Overdue`;
+            }
+
+          },
         },
         {
           headerName: 'Score',
-          field: 'statusfield',
+          field: 'score',
         },
       ];
-    this.rowData = [
-      { statusfield: 'Emerging technologies' },
-      { statusfield: 'Emerging technologies' },
-      { statusfield: 'Emerging technologies' },
-      { statusfield: 'Emerging technologies' },
-    ];
+    // this.rowData = [
+    //   {
+    //     course: 'Gardening for all',
+    //     module: 'Gardening for experts',
+    //     topic: 'Plants-classifications',
+    //     activity: 'Assignments',
+    //     status: 'graded',
+    //     score: '10/100'
+    //   },
+    //   {
+    //     course: 'Gardening for all',
+    //     module: 'Gardening for experts',
+    //     topic: 'Plants-classifications',
+    //     activity: 'Assignments',
+    //     status: 'submitted',
+    //     score: '10/100'
+    //   },
+    //   {
+    //     course: 'Gardening for all',
+    //     module: 'Gardening for experts',
+    //     topic: 'Plants-classifications',
+    //     activity: 'Assignments',
+    //     status: 'yettosubmit',
+    //     score: '-/100'
+    //   },
+    //   {
+    //     course: 'Gardening for all',
+    //     module: 'Gardening for experts',
+    //     topic: 'Plants-classifications',
+    //     activity: 'Assignments',
+    //     status: 'overdue',
+    //     score: '-/100'
+    //   }
+
+
+    // ];
 
   }
 

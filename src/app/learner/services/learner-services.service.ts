@@ -45,6 +45,7 @@ import {
   ViewAllThreadDataBid,
   getCountForJobroleCategories,
   getLoginUserDetail,
+  getCourseActivities,
   getprojectActivityData,
   getperformActivityData
 } from './operations/learner_query';
@@ -370,7 +371,7 @@ export class LearnerServicesService {
     return this.Apollo.query({
       query: getLoginUserDetail,
       variables: {
-        username : email
+        username: email
       }
     });
   }
@@ -601,7 +602,7 @@ export class LearnerServicesService {
       }
     });
   }
-  bulkclaimcourse( id, user_id, category_id, categoryName) {
+  bulkclaimcourse(id, user_id, category_id, categoryName) {
     return this.Apollo.query({
       query: bulkclaimcourse,
       variables: {
@@ -880,6 +881,21 @@ export class LearnerServicesService {
       }
     });
   }
+  getCourseActivities(userId, PageNumber, courseId, sortType, searchValue, searchColumn) {
+    return this.Apollo.query({
+      query: getCourseActivities,
+      variables: {
+        user_id: userId,
+        pagenumber: PageNumber,
+        course_id: courseId,
+        sort_type: sortType,
+        searchvalue: searchValue,
+        searchcolumn: searchColumn
+      }
+    });
+  }
+
+
 
 getprojectActivityData(userId, courseId) {
   return this.Apollo.query({
