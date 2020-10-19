@@ -156,7 +156,6 @@ export class ActivitiesComponent implements OnInit {
       this.projectDetails = data.data.getprojectActivityData.data;
       this.projectDetails.forEach(element => {
         this.groupDetails = element.projectActivity.groupDetails;
-        console.log('ele', this.groupDetails);
       });
   }
 });
