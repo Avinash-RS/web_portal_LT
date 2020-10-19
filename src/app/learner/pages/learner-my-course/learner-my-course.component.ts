@@ -99,7 +99,7 @@ export class LearnerMyCourseComponent implements OnInit {
   keyboardUp = true;
   disableDropdown: boolean;
   opencourceId: any;
-
+  showAvailableCourse = false;
   nextPageLabel = '';
   previousPageLabel = '';
 
@@ -118,8 +118,8 @@ export class LearnerMyCourseComponent implements OnInit {
         this.userDetailes = this.gs.checkLogout();
         this.getEnrolledCourses('', '', '', '', '', '');
         this.getScreenSize();
-        // this.getCountForCategories();
-        this.getTab();
+        this.getCountForCategories();
+        // this.getTab();
         this.getCountForJobRole();
         // this.insidengOnInit();
       } else {
@@ -136,8 +136,8 @@ export class LearnerMyCourseComponent implements OnInit {
             this.router.navigateByUrl('/Learner/MyCourse');
             this.getEnrolledCourses('', '', '', '', '', '');
             this.getScreenSize();
-            // this.getCountForCategories();
-            this.getTab();
+            this.getCountForCategories();
+            // this.getTab();
             this.getCountForJobRole();
             // this.insidengOnInit();
           } else {
@@ -460,6 +460,7 @@ export class LearnerMyCourseComponent implements OnInit {
     let dropDownData = [];
     this.learnerService.getCountForCategories(this.userDetailes._id).subscribe((data: any) => {
       if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
+        this.showAvailableCourse = true;
         this.catalogueDetails = data.data.getCountForCategories.data;
         this.categoryDetails = data.data.getCountForCategories.data.categories;
         dropDownData = [data.data.getCountForCategories.data];
@@ -472,7 +473,6 @@ export class LearnerMyCourseComponent implements OnInit {
   getTab() {
     let dropDownData = [];
     this.route.data.subscribe((result: any) => {
-      console.log('after response', result.data.data.getCountForCategories.data);
       if (result.data && result.data.data && result.data.data.getCountForCategories && result.data.data.getCountForCategories.data) {
             this.catalogueDetails = result.data.data.getCountForCategories.data;
             this.categoryDetails = result.data.data.getCountForCategories.data.categories;
