@@ -34,6 +34,8 @@ export class LearnerActivityCenterComponent implements OnInit {
   rowData: any;
   constructor(private service: LearnerServicesService) {
     this.tabledef();
+    this.getCourseActivitiesforTable();
+
   }
 
   ngOnInit() {
@@ -75,6 +77,18 @@ export class LearnerActivityCenterComponent implements OnInit {
   // ******************************************************************************** //
 
   // Start of screen 5 - View All Activities card //
+  getCourseActivitiesforTable() {
+    const userId = 'egs8fv';
+    const PageNumber = '0';
+    const courseId = 'wdpd9yr6';
+    const sortType = 'undefined';
+    const searchValue = 'undefined';
+    const searchColumn = 'undefined';
+    this.service.getCourseActivities(userId, PageNumber, courseId, sortType, searchValue, searchColumn).subscribe((result: any) => {
+      console.log(result, 'r');
+    });
+  }
+
   tabledef() {
     this.columnDefs =
       [
