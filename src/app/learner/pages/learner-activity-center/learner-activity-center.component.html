@@ -65,16 +65,17 @@
     <div class="col">
       <form class="search-form float_right search-viewactivities" style="display: inline-block; margin-right: 20px;">
         <mat-form-field appearance="outline" class="pointer search-catalogue">
-          <input matInput placeholder="Search" name="searchbar" [(ngModel)]="catalogue" type="text">
+          <input matInput placeholder="Search" name="searchbar"  [(ngModel)]="quickSearchValue" (keyup)="onKeyChange($event.target.value)" type="text">
           <!--  (keyup)="searchCatalogue(catalogue)" -->
-          <mat-icon matSuffix *ngIf="catalogue !== null" (click)="closeSearch()">close</mat-icon>
+          <mat-icon matSuffix *ngIf="catalogue !== null" (click)="closesearch()">close</mat-icon>
           <mat-icon matSuffix [disabled]="true" *ngIf="catalogue === null" class="pointer">search</mat-icon>
         </mat-form-field>
       </form>
     </div>
   </div>
 
-  <ag-grid-angular style="width: 99%; height:  calc(100vh - 50px); margin:auto !important;" class="ag-theme-alpine allActivities" [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" (gridReady)="onGridReady($event)" [rowModelType]="'infinite'" >
+  <ag-grid-angular style="width: 99%; height:  calc(100vh - 50px); margin:auto !important;" class="ag-theme-alpine allActivities" 
+  [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" (gridReady)="onGridReady($event)" [rowModelType]="'infinite'" >
   <!-- [paginationPageSize]="paginationPageSize1" [cacheBlockSize]="cacheBlockSize" (gridReady)="onGridReady1($event)"
   [rowModelType]="'infinite'" (sortChanged)="rolesort($event)"
   (cellValueChanged)="onCellValueChanged1($event)"(filterModified)="roleFilter($event)" -->
