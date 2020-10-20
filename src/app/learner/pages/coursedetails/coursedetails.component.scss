@@ -984,6 +984,14 @@ border-radius: 0 !important;
     display: none;
 }
 
+.performanceMobile {
+    position: absolute;
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+}
+
 // / mobile
 @media(min-width: 320px) and(max-width: 767px) {
 

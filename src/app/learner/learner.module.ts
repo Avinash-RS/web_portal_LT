@@ -65,6 +65,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {MatMenuModule} from '@angular/material/menu';
 import { LearnermycourseService } from './pages/learner-my-course/learnermycourse.service';
+import { PerformancePageMobileComponent } from './pages/performance-page-mobile/performance-page-mobile.component';
+import { SelfLearnerAvtivityComponent } from './pages/self-learner-avtivity/self-learner-avtivity.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -210,7 +212,9 @@ const routes: Routes = [
     LearnerDashboardComponent,
     LandingpageComponent,
     LearnerCalendarComponent,
-    ViewAllnotificationsComponent
+    ViewAllnotificationsComponent,
+    PerformancePageMobileComponent,
+    SelfLearnerAvtivityComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

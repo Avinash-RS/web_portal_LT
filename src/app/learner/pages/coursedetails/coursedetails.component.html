@@ -175,6 +175,9 @@
                       <button *ngIf="userDetail.is_forum_config && selectedModuleData === null || selectedModuleData === undefined" (click)="selectedTabIndex = 4; selectedName = 'Forum'" class="matTabMenu" mat-menu-item>
                         <span>Forum</span>
                       </button>
+                      <button (click)="selectedName = 'perform'; performPage()" class="matTabMenu" mat-menu-item>
+                        <span>Perform</span>
+                      </button>
                   </mat-menu>
                 </div>
                 </div>
@@ -1310,7 +1313,9 @@
             </div>
         </mat-drawer-container>
     </div>
-
+<div class="performanceMobile" *ngIf="performOverLay && selectedName == 'perform'">
+    <app-performance-page-mobile [detailDataToPerform]='detailData' [courceDetails]='course'></app-performance-page-mobile>
+</div>
 </div>
 
 
