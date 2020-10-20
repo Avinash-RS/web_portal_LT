@@ -584,6 +584,9 @@ export class CoursedetailsComponent implements OnInit {
       this.sider = false;
     }
   }
+  closedialogbox() {
+    this.dialog.closeAll();
+  }
 }
 
 
