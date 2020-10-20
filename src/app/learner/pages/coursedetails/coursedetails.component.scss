@@ -1,4 +1,5 @@
 @import "variable";
+
 .bodybg {
     width: auto;
     padding-left: 18px;
@@ -7,9 +8,11 @@
     display: flex;
     background-color: $color-white;
 }
-.lab{
+
+.lab {
     margin-bottom: 0px !important;
 }
+
 .close-button {
     background: $lxp-theme-green !important; // red color
     float: right;
@@ -34,7 +37,9 @@
     right: 26px;
     height: 35px;
     width: 35px;
-} // auto hide course title
+}
+
+// auto hide course title
 // #hideMe {
 //     -moz-animation: cssAnimation 0s ease-in 20s forwards;
 //     -webkit-animation: cssAnimation 0s ease-in 20s forwards;
@@ -407,7 +412,7 @@ li {
     height: 40px;
 }
 
-.moduleHeadHight{
+.moduleHeadHight {
     padding: 0 0 13px 0 !important;
     margin-top: 10px !important;
     height: 60px !important;
@@ -427,6 +432,7 @@ li {
     position: relative;
     left: 21px;
 }
+
 .index-number-read {
     position: relative;
 }
@@ -460,6 +466,7 @@ li {
     border: none !important;
     // border: 1px solid $color-border;
 }
+
 // .fullScr{
 //     // position: relative;
 //     margin-left: 88%;
@@ -469,6 +476,7 @@ iframe {
     width: 100%;
     height: 100vh;
 }
+
 iframe.fullScreen {
     width: 100%;
     height: 100vh;
@@ -483,6 +491,7 @@ iframe.fullScreen {
     overflow: hidden !important;
     padding-top: 8px !important;
 }
+
 :host ::ng-deep .mat-tab-group {
     margin-left: 10px !important;
     margin-right: 10px !important;
@@ -518,6 +527,7 @@ iframe.fullScreen {
     background-color: $color-white;
     border-radius: 0 0 10px 10px;
 }
+
 .prevBtn {
     margin-left: 86.7%;
     position: fixed;
@@ -530,6 +540,7 @@ iframe.fullScreen {
     z-index: 99;
     margin-left: 61%;
 }
+
 // .nextBtn{
 //     margin-left: 83%;
 //     position: absolute;
@@ -550,6 +561,7 @@ iframe.fullScreen {
     // border-radius: .25rem;
     font-size: 16px;
 }
+
 // .divder{
 //     margin-left: 83.3%;
 //     position: absolute;
@@ -580,7 +592,7 @@ iframe.fullScreen {
 
 :host ::ng-deep .mat-toolbar-row,
 .mat-toolbar-single-row {
-   
+
     // height: 44px !important;
 }
 
@@ -631,7 +643,7 @@ iframe.fullScreen {
 }
 
 :host ::ng-deep.mat-tab-label .mat-tab-label-content:hover {
-   
+
     // color: $color-blank !important;
 }
 
@@ -639,6 +651,7 @@ iframe.fullScreen {
     // color: $color-blank !important;
     opacity: 1 !important;
 }
+
 :host /deep/ .mat-ink-bar {
     height: 2px !important;
     background-color: $lxp-theme-green !important;
@@ -655,183 +668,192 @@ iframe.fullScreen {
 //     justify-content: center;
 // }
 .example-sidenav {
-   
+
     // user-select: none;
 }
+
 .full-width {
-   
+
     // width: 100%;
 }
+
 .menu-button {
-   
+
     // transition: 300ms ease-in-out;
     // transform: rotate(180deg);
 }
+
 .menu-button.rotated {
-   
+
     // transform: rotate(180deg);
 }
+
 .submenu {
-   
+
     // overflow-y: hidden;
     // transition: transform 300ms ease;
     // transform: scaleY(0);
     // transform-origin: top;
     // padding-left: 30px;
 }
+
 .submenu.expanded {
-   
+
     // transform: scaleY(1);
 }
 
 /* For Desktop */
-@media only screen and(min-width: 620px){:host /deep/ .mat-ink-bar {
-    height: 2px !important;
-    background-color: $lxp-theme-green !important; // red color
-}
+@media only screen and(min-width: 620px) {
+    :host /deep/ .mat-ink-bar {
+        height: 2px !important;
+        background-color: $lxp-theme-green !important; // red color
+    }
 
-.moduletime {
-    font-size: 12px;
-}
+    .moduletime {
+        font-size: 12px;
+    }
 
-.courseTime {
-    font-size: 12px;
-    display: flex;
-    margin-left: -12px;
-}
+    .courseTime {
+        font-size: 12px;
+        display: flex;
+        margin-left: -12px;
+    }
 
-.time-icon {
-    position: relative;
-    font-size: 12px;
-    top: 1px;
-    left: 7px;
-}
+    .time-icon {
+        position: relative;
+        font-size: 12px;
+        top: 1px;
+        left: 7px;
+    }
 
-.course-time {
-    font-size: 12px;
-    position: relative;
-    bottom: 11px;
-}
-.course-time-default{
-    font-size: 12px;
-    position: relative;
-    bottom: 7px;
-}
+    .course-time {
+        font-size: 12px;
+        position: relative;
+        bottom: 11px;
+    }
 
-.exp-icon {
-    font-size: 22px;
-    margin-top: 7px;
-    color: rgba(158, 158, 158, 0.64);
-    margin-right: 6px;
-}
+    .course-time-default {
+        font-size: 12px;
+        position: relative;
+        bottom: 7px;
+    }
 
-.exp2 {
-    color: rgba(158, 158, 158, 0.64);
-}
+    .exp-icon {
+        font-size: 22px;
+        margin-top: 7px;
+        color: rgba(158, 158, 158, 0.64);
+        margin-right: 6px;
+    }
 
-.mod-check-icon {
-    margin: 3px 8px;
-    height: 22px;
-    font-size: 20px;
-    font-weight: bolder;
-    color: #0E7D12;
-    // border: 1px solid $color-border;
-}
+    .exp2 {
+        color: rgba(158, 158, 158, 0.64);
+    }
 
-.spinner-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .mod-check-icon {
+        margin: 3px 8px;
+        height: 22px;
+        font-size: 20px;
+        font-weight: bolder;
+        color: #0E7D12;
+        // border: 1px solid $color-border;
+    }
 
-.f_size_9 {
-    font-size: 9px !important;
-}
+    .spinner-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .f_size_9 {
+        font-size: 9px !important;
+    }
 }
 
 ::ng-deep .mat-step-header[aria-labelledby="colgreen"] {
-.mat-step-icon {
-    background-color: #0e7d12 !important;
-    color: #0e7d12 !important;
-    height: 15px !important;
-    width: 15px !important;
-    position: relative;
-    bottom: 1px;
-    left: 6px;
-}
+    .mat-step-icon {
+        background-color: #0e7d12 !important;
+        color: #0e7d12 !important;
+        height: 15px !important;
+        width: 15px !important;
+        position: relative;
+        bottom: 1px;
+        left: 6px;
+    }
 }
 
 ::ng-deep .mat-step-header[aria-labelledby="colYellow"] {
-.mat-step-icon {
-    background-color: $color-yellow !important;
-    color: $color-yellow !important;
-    height: 15px !important;
-    width: 15px !important;
-    position: relative;
-    bottom: 1px;
-    left: 6px;
-}
+    .mat-step-icon {
+        background-color: $color-yellow !important;
+        color: $color-yellow !important;
+        height: 15px !important;
+        width: 15px !important;
+        position: relative;
+        bottom: 1px;
+        left: 6px;
+    }
 }
 
 ::ng-deep .mat-step-header[aria-labelledby="colWhite"] {
-.mat-step-icon {
-    background-color: $color-white !important;
-    color: $color-white !important;
-    border: 2px solid $color-border;
-    height: 15px !important;
-    width: 15px !important;
-    position: relative;
-    bottom: 1px;
-    left: 6px;
+    .mat-step-icon {
+        background-color: $color-white !important;
+        color: $color-white !important;
+        border: 2px solid $color-border;
+        height: 15px !important;
+        width: 15px !important;
+        position: relative;
+        bottom: 1px;
+        left: 6px;
+    }
 }
-}
+
 :host ::ng-deep .mat-stepper-vertical-line::before {
-left: 1px !important;
-height: 33px;
-content: '';
-position: absolute;
-top: -18px;
-bottom: -16px;
-left: 0;
-border-left-width: 1px;
-border-left-style: solid;
+    left: 1px !important;
+    height: 33px;
+    content: '';
+    position: absolute;
+    top: -18px;
+    bottom: -16px;
+    left: 0;
+    border-left-width: 1px;
+    border-left-style: solid;
 
 
 }
 
 :host ::ng-deep .mat-step-header {
 
-height: 0;
-overflow: visible !important;
+    height: 0;
+    overflow: visible !important;
 }
+
 :host ::ng-deep .mat-step-icon .mat-icon,
 .mat-step-icon-content {
-color: $color-white !important;
+    color: $color-white !important;
 
 }
 
-.headerDown{
+.headerDown {
     margin-top: 0.5rem !important;
 }
 
 
 .moduleund {
-margin-left: 27px;
-font-weight: 500;
-height: 23px;
+    margin-left: 27px;
+    font-weight: 500;
+    height: 23px;
 }
 
 .bottom-border {
-border-bottom: 3px solid $lxp-theme-green; // red color
-border-right: inset;
-border-left: inset;
-border-left-color: transparent;
+    border-bottom: 3px solid $lxp-theme-green; // red color
+    border-right: inset;
+    border-left: inset;
+    border-left-color: transparent;
 }
 
 // .modhead {
@@ -846,140 +868,102 @@ border-left-color: transparent;
     position: relative;
     display: flex;
     flex-wrap: wrap;
-display: inline-block;
-max-width: 195px;
-font-size: 14px;
-font-weight: 500;
-    }
+    display: inline-block;
+    max-width: 195px;
+    font-size: 14px;
+    font-weight: 500;
+}
 
-    
+
 .moduleHeadRead {
     padding-left: 8px;
     position: relative;
     display: flex;
     flex-wrap: wrap;
-display: inline-block;
-max-width: 195px;
-font-size: 14px;
-font-weight: 500;
-    }
+    display: inline-block;
+    max-width: 195px;
+    font-size: 14px;
+    font-weight: 500;
+}
 
 :host ::ng-deep .mat-step-label {
-white-space: pre-line !important;
-position: relative;
+    white-space: pre-line !important;
+    position: relative;
     top: 6px;
     overflow: visible !important;
 }
+
 .bodybg {
-width: 100%;
-padding-left: 0;
-padding-right: 0;
-min-height: 100vh;
-display: flex;
-background-color: $color-white;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    min-height: 100vh;
+    display: flex;
+    background-color: $color-white;
 }
 
 
 // ////////foooter
 .footer {
-padding: 15px;
-font-size: inherit;
-left: 0;
-bottom: 0;
-width: 100%;
-color: $label;
-// position: fixed;
-z-index: 999999;
-font-weight: 500;
-background-color: $profile-t-grey;
-text-align: right;
-border-top: 2px solid $profile-p-grey;
+    padding: 15px;
+    font-size: inherit;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: $label;
+    // position: fixed;
+    z-index: 999999;
+    font-weight: 500;
+    background-color: $profile-t-grey;
+    text-align: right;
+    border-top: 2px solid $profile-p-grey;
 }
 
 .mar {
 
-position: relative !important;
+    position: relative !important;
     bottom: 3px;
 }
 
 :host ::ng-deep .mat-tab-label .mat-tab-label-content {
-font-size: 14px !important;
-// color: $lxp-gray !important;
+    font-size: 14px !important;
+    // color: $lxp-gray !important;
 }
 
 :host ::ng-deep.footericon {
-width: 9%;
-position: absolute;
-margin-left: 5px;
+    width: 9%;
+    position: absolute;
+    margin-left: 5px;
 }
+
 // :host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
 //     display: none;
 // }
 
 .nameh1 {
-color: $color-blank !important;
-padding-left: 8px;
-font-size: 17px;
-margin-top: 11px;
-height: 37px;
-margin-bottom: 0;
-cursor: pointer;
-border-bottom: 2px solid $lxp-theme-green; // red color
+    color: $color-blank !important;
+    padding-left: 8px;
+    font-size: 17px;
+    margin-top: 11px;
+    height: 37px;
+    margin-bottom: 0;
+    cursor: pointer;
+    border-bottom: 2px solid $lxp-theme-green; // red color
 
 }
 
 
 :host ::ng-deep .mat-expansion-panel:not([class*=mat-elevation-z]) {
-box-shadow: none !important;
-// border: none !important;
+    box-shadow: none !important;
+    // border: none !important;
 }
 
 // }
-
-
-// forum CSS
-
-// Mythreyi CSS starts here
-
-.send_btn {
--webkit-text-stroke-width: 2px;
--webkit-text-stroke-color: $lxp-theme-green; // red color
--webkit-text-fill-color: transparent;
-font-size: 30px;
-}
-
-// /deep/ .mat-checkbox-layout .mat-checkbox-label {
-//     white-space: normal !important;
-// }
-
-// /deep/ .mat-checkbox-inner-container {
-//     display: inline-block;
-//     height: 16px;
-//     line-height: 0;
-//     margin: 8px 0px 0px 0px !important;
-//     order: 0;
-//     position: relative;
-//     white-space: nowrap;
-//     width: 16px;
-//     flex-shrink: 0;
-// }
-
-.greyBor {
-border: 1px solid #dddddd;
-}
-
-.createThreadDialog {
-width: 900px;
-}
-
-::ng-deep .mat-dialog-container {
-padding: 30px !important;
-border-radius: 0 !important;
-}
 
 .mobileHoriz {
     display: none;
 }
+
 .moileView {
     display: none;
 }
@@ -995,554 +979,206 @@ border-radius: 0 !important;
 // / mobile
 @media(min-width: 320px) and(max-width: 767px) {
 
-.mobileHoriz {
-  display: block;
-}
-.moileView {
-    display: block;
-}
-:host ::ng-deep #mat-tab-label-0-0 {
-    display: none !important;
-  }
-  :host ::ng-deep #mat-tab-label-0-1 {
-    display: none !important;
-  }
-  :host ::ng-deep #mat-tab-label-0-2 {
-    display: none !important;
-  }
-  :host ::ng-deep #mat-tab-label-0-3 {
-    display: none !important;
-  }
-  :host ::ng-deep #mat-tab-label-0-4 {
-    display: none !important;
-  }
-  :host ::ng-deep .mat-tab-label-container {
-    display: none !important;
-  }
-.createThreadDialog {
-    width: 320px;
-}
-.forum-width {
-    width: 100% !important;
-}
-.prevBtn {
-    margin-left: 45%;
-    position: relative;
-}
+    .mobileHoriz {
+        display: block;
+    }
 
-.drawerClsTab {
-    bottom: 0;
-}
+    .moileView {
+        display: block;
+    }
 
-.drawer {
-    width: 100% !important;
-}
+    :host ::ng-deep #mat-tab-label-0-0 {
+        display: none !important;
+    }
 
-.mat-drawer.mat-drawer-side{
-    
-}
+    :host ::ng-deep #mat-tab-label-0-1 {
+        display: none !important;
+    }
 
-.player {
-    height: 284px !important;
-}
+    :host ::ng-deep #mat-tab-label-0-2 {
+        display: none !important;
+    }
 
-.player {
-    height: 284px !important;
-}
+    :host ::ng-deep #mat-tab-label-0-3 {
+        display: none !important;
+    }
 
-.black_bo {
-    border: 1px solid $color-border !important;
-}
+    :host ::ng-deep #mat-tab-label-0-4 {
+        display: none !important;
+    }
 
-.black_bor {
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
-}
+    :host ::ng-deep .mat-tab-label-container {
+        display: none !important;
+    }
 
-.divider {
-    left: 10px !important;
-}
+    .prevBtn {
+        margin-left: 45%;
+        position: relative;
+    }
 
-.time {
-    left: -25px !important;
-}
+    .drawerClsTab {
+        bottom: 0;
+    }
 
-.panel {
-    margin-bottom: 10px;
-}
-.main-opn{
+    .drawer {
+        width: 100% !important;
+    }
 
-    left: 372px !important;
+    .mat-drawer.mat-drawer-side {}
 
-}
+    .player {
+        height: 284px !important;
+    }
 
-// .moduleund {
-//     margin-left: 7px;
-//     margin-bottom: 10px;
-// }
+    .player {
+        height: 284px !important;
+    }
 
-.module-container {
-    margin-top: 10px;
-    height: 70px;
-}
+    .divider {
+        left: 10px !important;
+    }
 
-.exp-icon {
-    margin-top: 17px;
-}
+    .time {
+        left: -25px !important;
+    }
 
-.moduleContainerRow {
-    margin-top: 10px;
-}
+    .panel {
+        margin-bottom: 10px;
+    }
 
-.bg_color {
-    margin-left: 18px !important;
-}
-.courseTime{
-    font-size: 16px;
-    display: block;
-}
+    .main-opn {
 
-.alarmIcon {
-    font-size: 16px !important;
+        left: 372px !important;
 
-}
+    }
 
-.divider{
-    left: 30px !important;
-    top: -2px;
-}
-.closeBtn {
-    left: unset !important;
-    right: -50px !important;
-}
-.Outine{
-    top: -2px !important;
-}
-.drawer .contents {
-    padding: 16px 0 16px 16px;
-    margin-top: 15% !important;
-}
-.time-icon {
-    font-size: 14px !important;
-    margin-left: 5px;
-}
+    // .moduleund {
+    //     margin-left: 7px;
+    //     margin-bottom: 10px;
+    // }
 
-.module-container {
-    margin-top: 28px !important;
-    height: 70px;
-}
+    .module-container {
+        margin-top: 10px;
+        height: 70px;
+    }
 
-.exp-icon {
-    margin-top: 34px !important;
-}
+    .exp-icon {
+        margin-top: 17px;
+    }
+
+    .moduleContainerRow {
+        margin-top: 10px;
+    }
+
+    .courseTime {
+        font-size: 16px;
+        display: block;
+    }
+
+    .alarmIcon {
+        font-size: 16px !important;
+
+    }
+
+    .divider {
+        left: 30px !important;
+        top: -2px;
+    }
+
+    .closeBtn {
+        left: unset !important;
+        right: -50px !important;
+    }
+
+    .Outine {
+        top: -2px !important;
+    }
+
+    .drawer .contents {
+        padding: 16px 0 16px 16px;
+        margin-top: 15% !important;
+    }
+
+    .time-icon {
+        font-size: 14px !important;
+        margin-left: 5px;
+    }
+
+    .module-container {
+        margin-top: 28px !important;
+        height: 70px;
+    }
+
+    .exp-icon {
+        margin-top: 34px !important;
+    }
 
 }
+
 @media(min-width: 768px) and(max-width: 991.98px) {
-.createThreadDialog {
-    width: 600px;
-    position: relative;
+    .prevBtn {
+        margin-left: 75%;
+        position: relative;
+    }
+
+    .drawer {
+        width: 50% !important;
+    }
 }
-.prevBtn {
-    margin-left: 75%;
-    position: relative;
-}
-
-.drawer {
-    width: 50% !important;
-}
-}
-@media(min-width: 992px) and(max-width:1024px) {
-.createThreadDialog {
-    width: 600px;
-    position: relative;
-}
-}
-
-.inputs {
-border: 1px solid grey;
-}
-
-/deep/ .angular-editor-button[title="Undo"],
-/deep/ .angular-editor-button[title="Redo"],
-/deep/ .angular-editor-button[title="Strikethrough"],
-/deep/ .angular-editor-button[title="Superscript"],
-/deep/ .angular-editor-select[title="Formatting"],
-/deep/ .angular-editor-button[title="Font Name"],
-/deep/ .angular-editor-button[title="Subscript"],
-/deep/ .angular-editor-button[title="Justify Left"],
-/deep/ .angular-editor-button[title="Justify Center"],
-/deep/ .angular-editor-button[title="Justify Right"],
-/deep/ .angular-editor-button[title="Justify Full"],
-/deep/ .angular-editor-button[title="Indent"],
-/deep/ .angular-editor-button[title="Outdent"],
-/deep/ .angular-editor-button[title="Heading"],
-/deep/ .angular-editor-select[title="Font Name"],
-/deep/ .angular-editor-button[title="Font Size"],
-/deep/ .angular-editor-button[title="Text Color"],
-/deep/ .angular-editor-button[title="Custom Classes"],
-/deep/ .angular-editor-button[title="Background Color"],
-/deep/ .angular-editor-button[title="Unlink"],
-/deep/ .angular-editor-button[title="Clear Formatting"],
-/deep/ .angular-editor-button[title="HTML Code"],
-/deep/ .angular-editor-button[title="Insert Video"],
-/deep/ .angular-editor-button[title="Toggle Editor Mode"],
-/deep/ .angular-editor-button[title="Remove Format"],
-/deep/ .angular-editor-button[title="Horizontal Line"] {
-display: none !important;
-}
-
-/deep/ .angular-editor-toolbar .angular-editor-toolbar-set {
-display: inline-block;
-/* border-radius: 5px; */
-background-color: transparent !important;
-margin-right: 0 !important;
-vertical-align: middle;
-border: none !important;
-margin-bottom: none !important;
-}
-
-/deep/ .angular-editor-toolbar .angular-editor-toolbar-set select {
-display: none !important;
-}
-
-/deep/ .angular-editor {
-border-right: none !important;
-}
-
-/deep/ .angular-editor img {
-width: 100% !important;
-}
-
-@media only screen and(min-width: 770px) {
-/deep/ .angular-editor img {
-    width: 70% !important;
-}
-}
-
-.bg-blue {
-background-color: $lxp-theme-green; // red color
-}
-
-.dialogButtons {
-.mat-stroked-button {
-    margin: 0 0 0 15px;
-    padding: 0 25px;
-    border-radius: 0 !important;
-}
-}
-
-// Mythreyi CSS ends here
-
-// Kani CSS starts here
-
-.thread-header {
-// background-color: #C9E4F35C;
-// background-image: linear-gradient(#C9E4F35C, rgba(244, 246, 247, 0.361));
-background-image: linear-gradient(#FFCC00, #faf5cb);
-box-shadow: 0 2px 5px 0 rgba(230, 230, 230, 0.753);
-border-bottom: 1px solid $color-border;
-}
-
-.post-header {
-// background-color: #F1F1F1;
-background-image: linear-gradient(#f1f1f1, #fafafa);
-box-shadow: 0 2px 5px 0 rgba(230, 230, 230, 0.753);
-border-bottom: 1px solid $color-border;
-}
-
-.child-post-header {
-// background-color: #F1F1F15C;
-background-image: linear-gradient(#f1f1f15c, #fafafa);
-box-shadow: 0 2px 5px 0 rgba(230, 230, 230, 0.753);
-border-bottom: 1px solid $color-border;
-}
-
-
-.pointerNone {
-pointer-events: none !important;
-opacity: 0.5;
-}
-
-.new_Thread {
-color: $color-white !important;
-border-radius: none !important;
-background-color: $lxp-theme-green; // red color
-border: none;
-// margin-right: 10px !important;
-float: right !important;
-margin-top: 2px;
-}
-.send-btn {
-color: $color-white !important;
-border-radius: none !important;
-background-color: $lxp-theme-green; // red color
-// width: 70px !important;
-height: 30px !important;
-display: inline-flex !important;
-align-items: center;
-
-}
-
-
-.no-radius {
-border-radius: 0 !important;
-box-shadow: none !important;
-}
-
-.profileimg {
-width: 30px;
-height: 30px;
-border-radius: 50%;
-background-color: $lxp-theme-green; // red color
-cursor: inherit !important;
-color: $color-white;
-font-size: 18px;
-vertical-align: middle;
-border: none !important;
-}
-
-.color-blue {
-color: $lxp-theme-green; // red color
-}
-
-.black_border {
-border: 1px solid $color-border;
-}
-
-.m-b-10 {
-margin-bottom: 10px;
-}
-
-.action_icon {
-vertical-align: middle;
-padding-right: 25px;
--webkit-text-stroke-width: 1px;
--webkit-text-stroke-color: $color-blank;
--webkit-text-fill-color: $color-white;
-font-size: 20px;
-}
-
-.action_icon_filled {
-vertical-align: middle;
-padding-right: 25px;
--webkit-text-stroke-width: 1px;
--webkit-text-stroke-color: $profile-t-grey;
--webkit-text-fill-color: $lxp-theme-green; // red color
-font-size: 20px;
-}
-
-.p-l-0 {
-padding-left: 0 !important;
-}
-
-.discussion_forum {
-
-.spinner-container {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-}
-
-}
-
-// .spinner-container {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     right: 0;
-//     bottom: 0;
-//     z-index: 1;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     flex-direction: row;
-// }
-
-
-// kani CSS ends here
-
-// Jasper CSS starts here
-.bg_color {
-background-color: $profile-t-grey;
-text-align: center;
-}
-
-.position_hgt {
-font-size: large;
-padding-top: 12px;
-font-weight: normal;
-}
-
-.position {
-padding-top: 2px;
-color: #7e7e7e !important;
-}
-
-.titlecolor {
-color: #333333;
-}
-
-.date_color {
-color: #7e7e7e !important;
-}
-
-.m-bt-4 {
-margin-top: 4px !important;
-margin-bottom: 4px !important;
-}
-
-.m-b-8 {
-margin-bottom: 6px !important;
-}
-
-.h-8 {
-height: 64px !important;
-}
-
-.box_shadow {
-transition: none !important;
-box-shadow: none !important;
-border-radius: 0 !important;
-}
-
-// @media only screen and(min-width: 300px) and(max-width: 600px) {
-
-// }
-
-// @media only screen and(min-width: 300px) and(max-width: 770px) {
-// .new_Thread {
-//     color: white !important;
-//     border-radius: none !important;
-//     background-color: $lxp-theme-green;
-//     border: none;
-//     margin-right: 10px !important;
-//     float: left !important
-// }
-
-// .send_pos {
-//     margin-top: 0vh !important;
-//     margin-left: 0px !important;
-// }
-
-
-// }
-
-.send_pos {
-margin-top: 42px;
-background: whitesmoke;
-border: 1px solid #dddddd;
-border-left: none;
-margin-top: 5px;
-text-align: center;
-}
-
-.black_bor {
-border: 1px solid $color-border;
-}
-
-.black_bo {
-border: none;
-}
-
-.alignment {
-padding-top: 15px !important;
-padding-bottom: 12px !important;
-}
-
-.m-b-0 {
-margin-bottom: 0 !important;
-}
-
-.m-t-20 {
-margin-top: 20px !important;
-}
-
-// /deep/.dialogPopup.mat-dialog-container {
-//     padding: 30px !important;
-//     border-radius: 0 !important;
-// }
-
-// .m-t-30 {
-//     margin-top: 30px !important;
-// }
-
-.m-b-15 {
-margin-bottom: 15px;
-}
-
-.p-lr-30 {
-padding: 0 30px !important;
-}
-
-.m-auto-tb {
-margin-top: auto;
-margin-bottom: auto;
-}
-
-.padding_matcard {
-padding: 5px 30px !important;
-}
-
-.reset:hover {
-background-color: #f5f5f5 !important;
-}
-
-// Jasper CSS ends here
 
 // Ramya CSS starts here
 .icon {
-color: $color-blue;
+    color: $color-blue;
 }
 
 .grade {
-color: $color-dark-green;
+    color: $color-dark-green;
 }
+
 .info-icon {
-position: relative;
-left: -17px;
-top: 36px;
+    position: relative;
+    left: -17px;
+    top: 36px;
 }
+
 .upload-btn {
-position: relative;
-bottom: 5px;
-right: 23px;
-top: 16px;
+    position: relative;
+    bottom: 5px;
+    right: 23px;
+    top: 16px;
 }
+
 .singleline-text {
-white-space: nowrap
+    white-space: nowrap
 }
 
 .textTruncate {
-width: 90px;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
+    width: 90px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-.status-col {
-position: relative;
 
-left: 47px;
+.status-col {
+    position: relative;
+
+    left: 47px;
 }
+
 .detailrow {}
+
 .not-submited {
-color: $lxp-gray;
+    color: $lxp-gray;
 }
+
 // .mat-tooltip {
 //     font-size: 15px;
 //     background: green;
 // }
 
 ::ng-deep .custom-mat-tooltip {
-    
-    position:  relative !important;
+
+    position: relative !important;
     bottom: 50px !important;
     background-color: black !important;
     opacity: 1 !important;
@@ -1551,39 +1187,47 @@ color: $lxp-gray;
 
 ::ng-deep .tooltip-inner {
 
-opacity: 1 !important;
+    opacity: 1 !important;
 }
+
 :host ::ng-deep .tooltip-arrow {
-opacity: 1 !important;
+    opacity: 1 !important;
 }
-::ng-deep .tooltip-350 ~ .tooltip .tooltip-inner {
-max-width: 220px;
-min-width: 220px;
+
+::ng-deep .tooltip-350~.tooltip .tooltip-inner {
+    max-width: 220px;
+    min-width: 220px;
 }
+
 .searchdisabledicon {
-color: $color-lightest-grey;
+    color: $color-lightest-grey;
 }
+
 .uploadBtn {
-width: 0;
-height: 0;
-position: relative;
-top: 9px;
-left: 10px;
+    width: 0;
+    height: 0;
+    position: relative;
+    top: 9px;
+    left: 10px;
 }
+
 .uploadIcon {
-z-index: 1;
-position: relative;
-bottom: 13px;
-right: 20px;
+    z-index: 1;
+    position: relative;
+    bottom: 13px;
+    right: 20px;
 }
+
 .time {
-position: relative;
-right: 28px;
+    position: relative;
+    right: 28px;
 }
+
 .divider {
-position: relative;
-left: 10px;
+    position: relative;
+    left: 10px;
 }
+
 // .mar {
 //     left: 10px !important;
 //     bottom: 2px;
@@ -1607,177 +1251,192 @@ left: 10px;
 
 .about-course {
 
-height: 100vh;
+    height: 100vh;
 
 }
 
 ::ng-deep .mat-drawer:not(.mat-drawer-side) {
-box-shadow: none;
+    box-shadow: none;
 }
 
 ::ng-deep .mat-vertical-content {
-padding: 0 !important;
+    padding: 0 !important;
 }
 
 .drawercls {
-margin-left: 4%;
+    margin-left: 4%;
 }
+
 .resDrawercls {
-margin-left: 3%;
+    margin-left: 3%;
 }
 
 
 .drawer {
-position: fixed;
-height: 100vh;
-width: 25%;
-border-right: 1px solid #ccc;
+    position: fixed;
+    height: 100vh;
+    width: 25%;
+    border-right: 1px solid #ccc;
 }
+
 .drawer .header {
-// position: absolute;
-// right: 0;
-// justify-content: space-between;
-position: fixed;
+    // position: absolute;
+    // right: 0;
+    // justify-content: space-between;
+    position: fixed;
     z-index: 999999;
 }
+
 .drawer .contents {
-padding: 16px 0 16px 10px;
-margin-top: 12%;
+    padding: 16px 0 16px 10px;
+    margin-top: 12%;
 }
 
 .main-opn {
-background-color: #fff;
+    background-color: #fff;
 }
 
 
 .main-opn {
-position: fixed;
-top: 0;
-width: 100%;
-z-index: 2;
-// border-bottom: 1px solid #ccc;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+    // border-bottom: 1px solid #ccc;
 }
+
 .main-cls {
-position: fixed;
-top: 0;
-width: 100%;
-z-index: 2;
-// border-bottom: 1px solid #ccc;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+    // border-bottom: 1px solid #ccc;
 }
+
 .main-opn.contents {
-min-height: 100vh;
-margin-top: 64px; /* height of header */
-padding: 16px;
+    min-height: 100vh;
+    margin-top: 64px;
+    /* height of header */
+    padding: 16px;
 }
+
 .drawerHamIcon {
-z-index: 20;
-position: relative;
-right: 7px;
-top: 2px;
+    z-index: 20;
+    position: relative;
+    right: 7px;
+    top: 2px;
 }
 
 
 /* video player tab */
 .example-sidenav-content-opn {
-display: flex;
-height: 100%;
-align-items: center;
-justify-content: center;
-width: 75%;
-margin-left: 2%
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    margin-left: 2%
 }
+
 .example-sidenav-content-cls {
-display: flex;
-height: 100%;
-align-items: center;
-justify-content: center;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
 
 }
 
 
 // /* About the course tab */
 .drawerClsAboutCourse {
-margin-left: 2%;
+    margin-left: 2%;
 }
 
 .drawerOpnAboutCourse {
-margin-left: 3%;
+    margin-left: 3%;
 }
 
 .drawerOpnResource {
-margin-left: 3%;
-width: 74%;
+    margin-left: 3%;
+    width: 74%;
 }
+
 .drawerClsResource {
-width: 100%;
+    width: 100%;
 }
 
 
 .drawerOpnAss {
-width: 74%;
-margin-left: 3%;
+    width: 74%;
+    margin-left: 3%;
 }
+
 .drawerClsAss {
-width: 100%;
+    width: 100%;
 }
+
 .drawerOpnForum {
-margin-left: 3%;
-width: 74%;
+    margin-left: 3%;
+    width: 74%;
 }
 
 .drawerClsForum {
-width: 70% !important;
-margin: auto !important;
-display: block !important;
+    width: 70% !important;
+    margin: auto !important;
+    display: block !important;
 }
 
 ::ng-deep .panel .mat-expansion-panel-body {
-padding: 0 !important;
+    padding: 0 !important;
 }
+
 // Ramya CSS ends here
 
 .posAb {
-    position : absolute;
+    position: absolute;
 }
 
 @media screen and (min-width: 320px) and (max-width: 760px) {
     .threadbutton {
-       display :none !important 
-      } 
-      .plus_icon {
-        color:#C02222 
-       } 
-  }
-  @media screen and (min-width: 761px)  {
+        display: none !important
+    }
+
     .plus_icon {
-       display :none 
-      } 
-  }
-
-  .moduleName {
-    width: 221px !important;
-    white-space: pre-line !important;
-  }
-  .titleName {
-    width: 205px !important; 
-    white-space: pre-line !important;
-  }
-
-
-  ::ng-deep  .drawer {
-overflow-y: unset !important;
-padding: 0px 0 16px 0px !important;
+        color: #C02222
+    }
 }
 
-::ng-deep .mat-drawer.mat-drawer-side{
+@media screen and (min-width: 761px) {
+    .plus_icon {
+        display: none
+    }
+}
+
+.moduleName {
+    width: 221px !important;
+    white-space: pre-line !important;
+}
+
+.titleName {
+    width: 205px !important;
+    white-space: pre-line !important;
+}
+
+
+::ng-deep .drawer {
+    overflow-y: unset !important;
+    padding: 0px 0 16px 0px !important;
+}
+
+::ng-deep .mat-drawer.mat-drawer-side {
     z-index: unset !important;
 }
 
-::ng-deep .mat-content{
+::ng-deep .mat-content {
     overflow: visible !important;
 }
 
-.exp-icon{
+.exp-icon {
     margin-top: 17px;
     z-index: 2 !important;
     position: relative !important;
@@ -1802,11 +1461,12 @@ padding: 0px 0 16px 0px !important;
     -webkit-overflow-scrolling: touch;
 }
 
-.afterHover{
+.afterHover {
     overflow: auto;
     height: 626px;
 }
-.beforeHover{
+
+.beforeHover {
     overflow: hidden;
     height: 626px;
 }

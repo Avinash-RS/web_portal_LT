@@ -99,7 +99,7 @@ export class LearnerMyCourseComponent implements OnInit {
   keyboardUp = true;
   disableDropdown: boolean;
   opencourceId: any;
-
+  showAvailableCourse = false;
   nextPageLabel = '';
   previousPageLabel = '';
 
@@ -118,8 +118,8 @@ export class LearnerMyCourseComponent implements OnInit {
         this.userDetailes = this.gs.checkLogout();
         this.getEnrolledCourses('', '', '', '', '', '');
         this.getScreenSize();
-        // this.getCountForCategories();
-        this.getTab();
+        this.getCountForCategories();
+        // this.getTab();
         this.getCountForJobRole();
         // this.insidengOnInit();
       } else {
@@ -136,8 +136,8 @@ export class LearnerMyCourseComponent implements OnInit {
             this.router.navigateByUrl('/Learner/MyCourse');
             this.getEnrolledCourses('', '', '', '', '', '');
             this.getScreenSize();
-            // this.getCountForCategories();
-            this.getTab();
+            this.getCountForCategories();
+            // this.getTab();
             this.getCountForJobRole();
             // this.insidengOnInit();
           } else {
@@ -445,18 +445,36 @@ export class LearnerMyCourseComponent implements OnInit {
     localStorage.setItem('Courseid', c.course_id);
     const detail = {
       id: c.course_id,
-      wishlist: c.wishlisted || false,
-      wishlist_id: c.wishlist_id || null,
-      enrollment_status: null,
-      forumVal: true
+      name: c.course_name
+      // wishlist: c.wishlisted || false,
+      // wishlist_id: c.wishlist_id || null,
+      // enrollment_status: null,
+      // forumVal: true
     };
-    this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+    localStorage.setItem('course', btoa(JSON.stringify(detail)));
+    // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+    this.router.navigateByUrl('/Learner/discussionForum', { state: { detail } });
   }
-
+  gotoSubmissionDetails(c) {
+    localStorage.setItem('Courseid', c.course_id);
+    const detail = {
+      id: c.course_id,
+      name: c.course_name,
+      key: 'submission',
+      // wishlist: c.wishlisted || false,
+      // wishlist_id: c.wishlist_id || null,
+      // enrollment_status: null,
+      // forumVal: true
+    };
+    localStorage.setItem('course', btoa(JSON.stringify(detail)));
+    // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+    this.router.navigateByUrl('/Learner/activitycenter', { state: { detail } });
+  }
   getCountForCategories() {
     let dropDownData = [];
     this.learnerService.getCountForCategories(this.userDetailes._id).subscribe((data: any) => {
       if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
+        this.showAvailableCourse = true;
         this.catalogueDetails = data.data.getCountForCategories.data;
         this.categoryDetails = data.data.getCountForCategories.data.categories;
         dropDownData = [data.data.getCountForCategories.data];
@@ -469,15 +487,14 @@ export class LearnerMyCourseComponent implements OnInit {
   getTab() {
     let dropDownData = [];
     this.route.data.subscribe((result: any) => {
-      console.log('after response', result.data.data.getCountForCategories.data);
       if (result.data && result.data.data && result.data.data.getCountForCategories && result.data.data.getCountForCategories.data) {
-            this.catalogueDetails = result.data.data.getCountForCategories.data;
-            this.categoryDetails = result.data.data.getCountForCategories.data.categories;
-            dropDownData = [result.data.data.getCountForCategories.data];
-            this.dropDownCategoryDetails = dropDownData[0];
-            this.categories = dropDownData[0].categories;
-            this.dropdownCatDetails = dropDownData[0];
-          }
+        this.catalogueDetails = result.data.data.getCountForCategories.data;
+        this.categoryDetails = result.data.data.getCountForCategories.data.categories;
+        dropDownData = [result.data.data.getCountForCategories.data];
+        this.dropDownCategoryDetails = dropDownData[0];
+        this.categories = dropDownData[0].categories;
+        this.dropdownCatDetails = dropDownData[0];
+      }
     });
   }
   getCoureBasedOnCatalog(catalogue, category, subchild, superChild) {

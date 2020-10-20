@@ -25,6 +25,8 @@ export class HeaderComponent implements OnInit {
   screenWidth: number;
   show = true;
   isAvailOpen = false;
+  loading = false;
+
   @HostBinding('class') componentCssClass;
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
               private http: HttpClient, public overlayContainer: OverlayContainer,
@@ -81,7 +83,7 @@ export class HeaderComponent implements OnInit {
     this.gs.getThemeName(selectedValue);
   }
   logout() {
-
+    console.log('inside logout');
     Swal.fire({
       title: 'Are you sure you want to logout?',
       // icon: 'warning',
@@ -90,25 +92,29 @@ export class HeaderComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes'
     }).then((result) => {
+      console.log('inside logout result', result);
       if (result.value) {
+        this.loading = true;
         this.services.logout(this.userDetailes._id, false).subscribe((logout: any) => {
           if (logout.data.logout && logout.data.logout.success) {
+            this.router.navigate(['/Learner/login']);
             localStorage.clear();
             sessionStorage.clear();
             this.services.getIpAddressByUrl();
             this.userDetailes = null;
             this.userDetailes = null;
+            this.loading = false;
             // june 10 added by ankit
-            this.router.navigate(['/Learner/login']);
           } else if (logout.data.logout && !logout.data.logout.success) {
             if (logout.data.logout.error_msg === 'Authentication error. Token required.') {
+              this.router.navigate(['/Learner/login']);
               localStorage.clear();
               sessionStorage.clear();
               this.services.getIpAddressByUrl();
               this.userDetailes = null;
               this.userDetailes = null;
+              this.loading = false;
               // june 10 added by ankit
-              this.router.navigate(['/Learner/login']);
             } else {
               this.alert.openAlert(logout.data.logout.message, null);
             }
@@ -120,6 +126,7 @@ export class HeaderComponent implements OnInit {
                 sessionStorage.clear();
                 this.services.getIpAddressByUrl();
                 this.gs.checkLogout();
+                this.loading = false;
               }
             });
             // this.alert.openAlert('Please try again later', null);

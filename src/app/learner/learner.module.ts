@@ -63,10 +63,15 @@ import { ViewAllnotificationsComponent } from './pages/view-allnotifications/vie
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { LearnermycourseService } from './pages/learner-my-course/learnermycourse.service';
 import { PerformancePageMobileComponent } from './pages/performance-page-mobile/performance-page-mobile.component';
 import { SelfLearnerAvtivityComponent } from './pages/self-learner-avtivity/self-learner-avtivity.component';
+import { ActivitiesComponent } from './pages/activities/activities.component';
+import { DiscussionForumComponent } from './pages/discussion-forum/discussion-forum.component';
+import { LearnerActivityCenterComponent } from './pages/learner-activity-center/learner-activity-center.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { ActivitycenterhomescreenComponent } from './pages/activitycenterhomescreen/activitycenterhomescreen.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -130,9 +135,6 @@ const routes: Routes = [
   {
     path: 'MyCourse',
     component: LearnerMyCourseComponent,
-    resolve: {
-      data: LearnermycourseService
-      },
     // canActivate: [AuthGuard],
     data: { animation: 'Learner  MyCourse' }
   },
@@ -155,6 +157,30 @@ const routes: Routes = [
     path: 'calendar',
     component: LearnerCalendarComponent,
     data: { animation: 'Calendar' }
+  },
+  {
+    path: 'activities',
+    component: ActivitiesComponent,
+    data: { animation: 'Calendar' }
+  },
+    {
+    path: 'activitycenter',
+    component: LearnerActivityCenterComponent,
+    data: { animation: 'activitycenter' }
+  },
+
+  {
+
+    path: 'discussionForum',
+    component: DiscussionForumComponent,
+    data: { animation: 'Discussion Forum' }
+  },
+
+  {
+    path: 'activitycenterhomescreen',
+    component: ActivitycenterhomescreenComponent,
+    data: { animation: 'activitycenterhomescreen' }
+
   },
 
   // {
@@ -223,7 +249,11 @@ const routes: Routes = [
     LearnerCalendarComponent,
     ViewAllnotificationsComponent,
     PerformancePageMobileComponent,
-    SelfLearnerAvtivityComponent
+    SelfLearnerAvtivityComponent,
+    ActivitiesComponent,
+    DiscussionForumComponent,
+    LearnerActivityCenterComponent,
+    ActivitycenterhomescreenComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -278,6 +308,7 @@ const routes: Routes = [
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+    AgGridModule.withComponents([])
   ],
   exports: [
     // MatMenuModule
@@ -288,4 +319,4 @@ const routes: Routes = [
   ],
   entryComponents: [CategoryComponentComponent]
 })
-export class LearnerModule {}
+export class LearnerModule { }
