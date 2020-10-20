@@ -47,7 +47,8 @@ import {
   getLoginUserDetail,
   getCourseActivities,
   getprojectActivityData,
-  getperformActivityData
+  getperformActivityData,
+  get_active_course_count
 } from './operations/learner_query';
 
 import {
@@ -913,6 +914,14 @@ getprojectActivityData(userId, courseId) {
       variables: {
         userId,
         courseId
+      }
+    });
+  }
+  get_active_course_count(user_id){
+    return this.Apollo.query({
+      query: get_active_course_count,
+      variables: {
+        user_id,
       }
     });
   }

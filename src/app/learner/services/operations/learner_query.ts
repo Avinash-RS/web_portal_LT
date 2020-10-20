@@ -1529,6 +1529,24 @@ export const getCourseActivities = gql`
             total_mark
             score
           }
+          total_count
+        }
+      }
+          `;
+export const get_active_course_count = gql`
+      query  get_active_course_count($user_id:String! ) {
+        get_active_course_count(user_id:$user_id ) {
+          success
+          error_msg
+          message{
+                  _id
+                  Yettosubmit
+                  Overdue
+                  Submitted
+                  Graded
+                  Completed
+                  Allactivites
+          }
         }
       }
           `;
