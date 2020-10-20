@@ -219,20 +219,29 @@
     </mat-tab>
 
     <mat-tab label="Perform"> 
-      <div class="box-0-1">
+      <div class="box-0-1" *ngFor="let perform of performDetails; let i = index">
         <div class="row"  (click)="isCollapsed = !isCollapsed">
           <div class="col-10">
-            <div class="f_size_16 f_wt_600">1. Pollution level and corrosion</div>
-            <div class="t-l">Pollution level and corrosion Pollution level and corrosion Pollution level and corrosion</div>
-            <div class="t-l">Activity : Create cutton mark</div>
+            <div class="f_size_16 f_wt_600">{{i+1}}. {{perform.performActivity.module_id}}</div>
+            <div class="t-l">{{perform.performActivity.topic_id}}</div>
+            <div class="t-l">Activity : {{perform.performActivity.activityname}}</div>
           </div>
           <div class="col-2">
-            <span class="f_wt_600">  <span class="dot"></span>Yet to submit</span>
+            <span class="f_wt_600" *ngIf="perform.performActivity.submit_status == 'notsubmitted'">  <span class="dot"></span>
+            Yet to submit</span>
+
+            <span class="f_wt_600 submitstatus" *ngIf="perform.performActivity.submit_status == 'ontime' || 
+            perform.performActivity.submit_status =='late'">  <span class="submitdot"></span>
+            Submitted</span>
+
+            <span class="f_wt_600 gradeStatus" *ngIf="perform.performActivity.grade_status == 'Evaluated'">  <span class="gradedot"></span>
+            Graded</span>
             <mat-icon  class="f_size_16 arr" aria-hidden="false">keyboard_arrow_down</mat-icon>
             <br>
-            <div class="m-l-23">Iterations : 5</div>
+            <div class="m-l-23">Iterations : {{perform.performActivity.iterationTotal}}</div>
             <div class="m-l-68">Start date :<span class="margin-30"></span>End date :</div>
-            <div class="m-l-68 f_wt_600">Oct 01, 2020<span class="margin-21 f_wt_600"></span>Oct 12, 2020 </div> 
+            <div class="m-l-68 f_wt_600">{{perform.activityStartDate}}
+              <span class="margin-21 f_wt_600"></span>{{perform.activityEndDate}}</div> 
           </div>
          
            
@@ -267,16 +276,22 @@
             <div class="col-4">
             
               <div class="f_size_16 f_wt_600 align-center margin-b-9">Your work</div>
-              <mat-accordion>
+              <mat-accordion *ngFor="let itrdata of perform.performActivity.iterationDetails">
                 <mat-expansion-panel (opened)="panelOpenState = true"
                                      (closed)="panelOpenState = false">
                   <mat-expansion-panel-header>
                     <mat-panel-title>
-                     iteration 1
+                  {{itrdata.iterationid}}
                     </mat-panel-title>
                     <mat-panel-description>
-                     <span class="width">Score: - / 100</span> 
-                      <span class="f_wt_600">  <span class="dot"></span>Yet to submit</span>
+                     <span class="width">Score: {{itrdata.score_mark}} / {{itrdata.total_mark}}</span> 
+                      <span class="f_wt_600 iterStatus" *ngIf="itrdata.submit_status == 'notsubmitted'">  <span class="dot"></span>Yet to submit</span>
+                      <span class="f_wt_600 iterSubmit" *ngIf="itrdata.submit_status == 'ontime' ||
+                      itrdata.submit_status == 'late'">  <span class="submitdot"></span>
+            Submitted</span>
+
+            <span class="f_wt_600 iterGrade" *ngIf="itrdata.grade_status == 'Evaluated'">  <span class="gradedot"></span>
+            Graded</span>
                     </mat-panel-description>
                   </mat-expansion-panel-header>
                   <div class="align-center">
@@ -290,7 +305,7 @@
                     </button>
                   </div>
                 </mat-expansion-panel>
-              </mat-accordion>
+              </mat-accordion><br>
             </div>
           </div>
           
@@ -302,8 +317,10 @@
       <div class="box-0-1" *ngFor="let project of projectDetails">
         <div class="row">
           <div class="col text-right">
-          <mat-icon class="f_size_16 expansionarr" aria-hidden="false"
+          <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="!isCollapsed"
           (click)="isCollapsed = !isCollapsed">keyboard_arrow_down</mat-icon>
+          <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="isCollapsed"
+          (click)="isCollapsed = !isCollapsed">keyboard_arrow_up</mat-icon>
         </div>
         </div>
       <div class="row">
@@ -321,11 +338,8 @@
                 <mat-icon class="grpIcon">group</mat-icon>
               </button>
               <span class="teamName">{{project.projectActivity.groupname}} ({{project.projectActivity.groupcount}})</span>&nbsp;
-              <button mat-mini-fab [ngClass]="openList ? 'openarrBtn' : 'arrBtn'" *ngIf="!showIcon" (click)="openList = !openList; showIcon = !showIcon">
+              <button mat-mini-fab class="arrBtn" *ngIf="!showIcon" (click)="openList = !openList; showIcon = !showIcon">
                 <mat-icon class="grpIcon">arrow_back</mat-icon>
-              </button>
-              <button mat-mini-fab [ngClass]="openList ? 'openarrBtn' : 'arrBtn'" *ngIf="showIcon" (click)="openList = !openList; showIcon = !showIcon">
-                <mat-icon class="grpIcon">arrow_forward</mat-icon>
               </button>
             </span>
           </div>
@@ -334,7 +348,15 @@
           <div class="row">
             <div class="col-10"></div>
             <div class="col-2 text-right">
-              <span class="f_wt_600 status">  <span class="dot"></span>{{project.projectActivity.submit_status}}</span>
+              <span class="f_wt_600 status" *ngIf="project.projectActivity.submit_status == 'notsubmitted'">  <span class="dot"></span>
+              Yet to submit</span>
+
+              <span class="f_wt_600 projectSubmitstatus submitted" *ngIf="project.projectActivity.submit_status == 'ontime' || 
+              project.projectActivity.submit_status == 'late'">  <span class="submitdot"></span>
+              Submitted</span>
+
+              <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated'">  <span class="gradedot"></span>
+              Graded</span>
             </div>
           </div><br>
 
@@ -344,11 +366,12 @@
             </div>
             <div class="col-3 text-right">
               <div class="m-r-40">Start date :<span class="margin-30"></span>End date :</div>
-              <div class="m-r-2 f_wt_600">Oct 01, 2020<span class="margin-21 f_wt_600"></span>Oct 12, 2020 </div> 
+              <div class="m-r-2 f_wt_600">{{project.activityStartDate}}
+                <span class="margin-21 f_wt_600"></span>{{project.activityEndDate}}</div> 
             </div>
           </div>
           <!-----------------------------Materials for activity--------------------->
-          <div class="panel" *ngIf="isCollapsed">
+          <div class="panel1" *ngIf="isCollapsed">
             <hr>
             <div class="row">
               <div class="col-8">
@@ -393,15 +416,17 @@
           </div>
         </div>
        <!------------------------------------Learner list------------------------------->
-        <div class="col-2" *ngIf="openList">
-          <span class="align-center">{{project.projectActivity.groupname}} ({{project.projectActivity.groupcount}})</span>
-            <ul class="list-group">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Morbi leo risus</li>
-              <li class="list-group-item">Porta ac consectetur ac</li>
-              <li class="list-group-item">Vestibulum at eros</li>
+        <div class="col-2 learnerList" *ngIf="openList">
+          <div class="align-center">{{project.projectActivity.groupname}} ({{project.projectActivity.groupcount}})
+            <button mat-mini-fab class="arrfwd" *ngIf="showIcon" (click)="openList = !openList; showIcon = !showIcon">
+              <mat-icon class="grpIcon">arrow_forward</mat-icon>
+            </button>
+          </div>
+          <div class="list">
+            <ul class="list-group" *ngFor="let learner of project.projectActivity.groupDetails">
+              <li class="list-group-item">{{learner.name}}</li>
             </ul>
+          </div>
   </div>
       </div>
       </div>
