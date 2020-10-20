@@ -1,15 +1,16 @@
 <app-header></app-header>
-<div *ngIf="loading" class="row w-100 mr-0 ml-0">
+<div *ngIf="showSkeleton" class="row w-100 mr-0 ml-0">
   <div class="col-10 col-sm-10 col-md-7 col-lg-7 catalogTitle">
-    <div class="f_size_16 myCourses"><span class="module"> <b>My Courses</b></span></div>
+    <div class="f_size_16 myCourses"><span class="module"> <b>My Courses </b></span></div>
   </div>
 </div>
-<div [ngClass]="{'demo' : loading}"></div>
-<!-- <div class="spinner-container" *ngIf="loading">
+<div [ngClass]="{'demo' : showSkeleton}"></div>
+<div class="spinner-container" *ngIf="loading">
   <mat-spinner diameter="40" class="mat-spinner-color"></mat-spinner>
-</div> -->
-
-<div (click)="closePopup()" *ngIf="!loading">
+</div>
+<!-- {{loading}}, dd, {{showSkeleton}} -->
+<!-- *ngIf="!showSkeleton" -->
+<div (click)="closePopup()" *ngIf="!showSkeleton">
   <div class="row">
     <div [ngClass]="expandSearch ? 'mobileSearchRow': 'myCourseSearch'" class="col-12">
       <mat-icon class="glyphicon" (click)="expandSearch = !expandSearch">keyboard_backspace</mat-icon>
@@ -992,7 +993,8 @@
                                 </span>
                                 <div *ngIf="course.activityExp" class="f_size_12">
                                   Modules completed --/--<br>
-                                  Topics completed --/--
+                                  Topics completed --/--<br>
+                                  <a class="" style="color: red; font-size: 10px !important;" [routerLink]="" (click)="gotoSubmissionDetails(course)">View submission details</a>
                                 </div>
                               </div>
                               <!-- <div class="row m-auto">
@@ -1761,7 +1763,7 @@
                 getEnrolledCourses( $event, 
                   categorytab.categoryId, catalogueDetails.catalogueId,
                   '',
-                  searchName, false
+                  searchName, false, false
                 ); resettingJobRoledata();
               " matBadge="{{ categorytab.enrollCount }}"
                 matBadgeOverlap="false">{{ categorytab.categoryName | titlecase }}</span>
@@ -2037,7 +2039,7 @@
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="
             getEnrolledCourses('',
-              categorytab.categoryId, catalogueDetails.catalogueId, '' , '', false
+              categorytab.categoryId, catalogueDetails.catalogueId, '' , '', false, false
             )
           " *ngFor="let categorytab of categoryDetails">
           <span>{{ categorytab.categoryName }}</span>
