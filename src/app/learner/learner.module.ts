@@ -137,6 +137,15 @@ const routes: Routes = [
     data: { animation: 'Learner  MyCourse' }
   },
   {
+    path: 'SelfLearner',
+    component: SelfLearnerAvtivityComponent,
+    // resolve: {
+    //   data: LearnermycourseService
+    //   },
+    // canActivate: [AuthGuard],
+    data: { animation: 'Self Learner Avtivity' }
+  },
+  {
     path: 'resetpassword',
     component: ResetpasswordComponent,
     data: { title: 'Learner Reset password' }
