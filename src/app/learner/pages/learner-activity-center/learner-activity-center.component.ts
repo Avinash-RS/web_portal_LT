@@ -17,6 +17,7 @@ export class LearnerActivityCenterComponent implements OnInit {
   showPendingActivities = false;
   showViewAllActivities = true;
 
+
   // String
 
   // Array
@@ -37,42 +38,43 @@ export class LearnerActivityCenterComponent implements OnInit {
   rowData: any;
   userDetails: any;
   searchColumn: any;
-
+  hideCourseColumn: any;
   dataSources: IDatasource = {
     getRows: (params: IGetRowsParams) => {
       const userId = this.userDetails.user_id;
       // const userId = 'egs8fv';
       const PageNumber = params.startRow / 10 || 0;
-      const courseId = 'undefined';
       const sortType = 'undefined';
       const searchValue = '';
-      // for all activities
-      // const searchColumn = 'undefined';
-      // for yet to start
-      // const searchColumn = [{ ['files.submit_status']: { '$regex': 'Yet to submit', '$options': 'i' } }];
-      // for completed
-      // const searchColumn = [[{ '$or': [{ ['files.submit_status']: { '$regex': 'Graded', '$options': 'i' } },
-      // { 'files.submit_status': { '$regex': 'Submitted', '$options': 'i' } }] }];
-      // JSON.stringify(searchColumn)
-      if (this.detail.key === 'completed') {
+
+      if (this.detail?.key === 'completed') {
         // this.searchColumn = 'undefined';
         const searchC = [{
           ['$or']: [{ ['files.submit_status']: { '$regex': 'Graded', '$options': 'i' } },
           { 'files.submit_status': { '$regex': 'Submitted', '$options': 'i' } }]
         }];
         this.searchColumn = JSON.stringify(searchC);
-      } else if (this.detail.key === 'pending') {
+      } else if (this.detail?.key === 'pending') {
         const searchC = [{ ['files.submit_status']: { '$regex': 'Yet to submit', '$options': 'i' } }];
         this.searchColumn = JSON.stringify(searchC);
-      } else if (this.detail.key === 'allActivities') {
+      } else if (this.detail?.key === 'allActivities' || 'submission') {
         this.searchColumn = 'undefined';
       }
-      this.service.getCourseActivities(userId, PageNumber, courseId, sortType, searchValue, this.searchColumn)
+      if (this.detail?.key === 'submission') {
+        // need to add course id from navigation for view submission details
+        this.courseId = this.courseDetails?.id;
+      } else {
+        this.courseId = 'undefined';
+      }
+      this.service.getCourseActivities(userId, PageNumber, this.courseId, sortType, searchValue, this.searchColumn)
         .subscribe((result: any) => {
           // console.log(result, 'r');
-          params.successCallback(
-            result.data.get_course_activities.message, 10
-          );
+          if (result.data.get_course_activities.total_count > 0) {
+            params.successCallback(
+              result.data.get_course_activities.message, result.data.get_course_activities.total_count
+            );
+          } else {
+          }
         });
     }
   };
@@ -82,11 +84,15 @@ export class LearnerActivityCenterComponent implements OnInit {
   delayTimer: NodeJS.Timeout;
   searchValue: any;
   sortType: string;
+  courseId: any;
+  courseDetails: any;
   constructor(private service: LearnerServicesService, private gs: GlobalServiceService,
     private route: Router,) {
     this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     // console.log(this.detail.key, 'det');
+    this.courseDetails = this.detail || JSON.parse(atob(localStorage.getItem('course')));
+    // console.log(this.courseDetails, 'cd');
     this.userDetails = this.gs.checkLogout();
     this.tabledef();
     // this.getCourseActivitiesforTable();
@@ -151,11 +157,16 @@ export class LearnerActivityCenterComponent implements OnInit {
   // }
 
   tabledef() {
+    if (this.detail?.key === 'submission') {
+      this.hideCourseColumn = true;
+    }
+    // console.log(this.hideCourseColumn);
     this.columnDefs =
       [
         {
           headerName: 'Course',
           field: 'course_name',
+          hide: this.hideCourseColumn,
         },
         {
           headerName: 'Module',
@@ -167,7 +178,8 @@ export class LearnerActivityCenterComponent implements OnInit {
         },
         {
           headerName: 'Activity',
-          field: '-',
+          field: 'activity',
+          valueGetter: (params) => params.data?.activity ? params.data.activity : '-',
         },
         {
           headerName: 'Status',
@@ -259,7 +271,7 @@ export class LearnerActivityCenterComponent implements OnInit {
       getRows: (params: IGetRowsParams) => {
         const userId = this.userDetails.user_id;
         const PageNumber = params.startRow / 10 || 0;
-        const courseId = 'undefined';
+        const courseId = this.courseDetails?.id;
         const sortType = 'undefined';
         const searchColumn = 'undefined';
         this.service.getCourseActivities(userId, PageNumber, courseId, sortType, search, searchColumn)

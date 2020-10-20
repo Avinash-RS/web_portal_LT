@@ -1529,6 +1529,7 @@ export const getCourseActivities = gql`
             total_mark
             score
           }
+          total_count
         }
       }
           `;
