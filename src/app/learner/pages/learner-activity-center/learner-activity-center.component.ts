@@ -250,7 +250,11 @@ export class LearnerActivityCenterComponent implements OnInit {
   // ******************************************************************************** //
 
   goBack() {
+    if (this.detail?.key === 'submission') {
+      this.route.navigateByUrl('/Learner/MyCourse');
+    } else {
     this.route.navigateByUrl('/Learner/activitycenterhomescreen');
+    }
   }
 
   onKeyChange(data) {
@@ -294,5 +298,10 @@ export class LearnerActivityCenterComponent implements OnInit {
       this.searchValue || 'undefined',
       this.sortType || 'undefined'
     );
+  }
+
+  onSort(data: any) {
+    const sortState = this.gridApi.getSortModel();
+    console.log(sortState, 'ss');
   }
 }
