@@ -1514,3 +1514,40 @@ query getperformActivityData($userId: String , $courseId: String) {
     `;
 
 
+export const getCourseActivities = gql`
+      query  get_course_activities($user_id:String! ,$pagenumber:String!, $course_id:String! , $sort_type:String!, $searchvalue:String!,$searchcolumn:String!) {
+        get_course_activities(user_id:$user_id ,pagenumber:$pagenumber, course_id: $course_id ,sort_type: $sort_type,searchvalue: $searchvalue, searchcolumn:$searchcolumn) {
+          success
+          message {
+            _id
+            course_id
+            course_name
+            module_name
+            topic_name
+            status
+            score_mark
+            total_mark
+            score
+          }
+          total_count
+        }
+      }
+          `;
+export const get_active_course_count = gql`
+      query  get_active_course_count($user_id:String! ) {
+        get_active_course_count(user_id:$user_id ) {
+          success
+          error_msg
+          message{
+                  _id
+                  Yettosubmit
+                  Overdue
+                  Submitted
+                  Graded
+                  Completed
+                  Allactivites
+          }
+        }
+      }
+          `;
+

@@ -4,7 +4,10 @@
   <span class="spacer"></span>
   <div class="tab" *ngIf="show">
     <button class="btn1 float-right mr-4" [ngClass]="activeUrl === '/Learner/activitycenterhomescreen' ? 'colgreen' : 
-    'colWhite'" md-raised-button routerLink="/Learner/activitycenterhomescreen">
+    'colWhite'" md-raised-button disabled>
+    <!-- <button class="btn1 float-right mr-4" [ngClass]="activeUrl === '/Learner/activitycenterhomescreen' ? 'colgreen' : 
+    'colWhite'" md-raised-button routerLink="/Learner/activitycenterhomescreen"> -->
+  
       <mat-icon fontSet="material-icons-outlined" class="headicon animated animatedFadeInUp fadeInUp " inline=true>
         offline_bolt </mat-icon> Activity Center
     </button>
@@ -97,3 +100,7 @@
     </button>
   </mat-menu>
 </mat-toolbar>
+
+<div class="spinner-container" *ngIf="loading">
+  <mat-spinner diameter="40" class="mat-spinner-color"></mat-spinner>
+</div>
