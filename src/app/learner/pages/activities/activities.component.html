@@ -219,20 +219,29 @@
     </mat-tab>
 
     <mat-tab label="Perform"> 
-      <div class="box-0-1">
+      <div class="box-0-1" *ngFor="let perform of performDetails; let i = index">
         <div class="row"  (click)="isCollapsed = !isCollapsed">
           <div class="col-10">
-            <div class="f_size_16 f_wt_600">1. Pollution level and corrosion</div>
-            <div class="t-l">Pollution level and corrosion Pollution level and corrosion Pollution level and corrosion</div>
-            <div class="t-l">Activity : Create cutton mark</div>
+            <div class="f_size_16 f_wt_600">{{i+1}}. {{perform.performActivity.module_id}}</div>
+            <div class="t-l">{{perform.performActivity.topic_id}}</div>
+            <div class="t-l">Activity : {{perform.performActivity.activityname}}</div>
           </div>
           <div class="col-2">
-            <span class="f_wt_600">  <span class="dot"></span>Yet to submit</span>
+            <span class="f_wt_600" *ngIf="perform.performActivity.submit_status == 'notsubmitted'">  <span class="dot"></span>
+            Yet to submit</span>
+
+            <span class="f_wt_600 submitstatus" *ngIf="perform.performActivity.submit_status == 'ontime' || 
+            perform.performActivity.submit_status =='late'">  <span class="submitdot"></span>
+            Submitted</span>
+
+            <span class="f_wt_600 gradeStatus" *ngIf="perform.performActivity.grade_status == 'Evaluated'">  <span class="gradedot"></span>
+            Graded</span>
             <mat-icon  class="f_size_16 arr" aria-hidden="false">keyboard_arrow_down</mat-icon>
             <br>
-            <div class="m-l-23">Iterations : 5</div>
+            <div class="m-l-23">Iterations : {{perform.performActivity.iterationTotal}}</div>
             <div class="m-l-68">Start date :<span class="margin-30"></span>End date :</div>
-            <div class="m-l-68 f_wt_600">Oct 01, 2020<span class="margin-21 f_wt_600"></span>Oct 12, 2020 </div> 
+            <div class="m-l-68 f_wt_600">{{perform.activityStartDate}}
+              <span class="margin-21 f_wt_600"></span>{{perform.activityEndDate}}</div> 
           </div>
          
            
@@ -267,16 +276,22 @@
             <div class="col-4">
             
               <div class="f_size_16 f_wt_600 align-center margin-b-9">Your work</div>
-              <mat-accordion>
+              <mat-accordion *ngFor="let itrdata of perform.performActivity.iterationDetails">
                 <mat-expansion-panel (opened)="panelOpenState = true"
                                      (closed)="panelOpenState = false">
                   <mat-expansion-panel-header>
                     <mat-panel-title>
-                     iteration 1
+                  {{itrdata.iterationid}}
                     </mat-panel-title>
                     <mat-panel-description>
-                     <span class="width">Score: - / 100</span> 
-                      <span class="f_wt_600">  <span class="dot"></span>Yet to submit</span>
+                     <span class="width">Score: {{itrdata.score_mark}} / {{itrdata.total_mark}}</span> 
+                      <span class="f_wt_600 iterStatus" *ngIf="itrdata.submit_status == 'notsubmitted'">  <span class="dot"></span>Yet to submit</span>
+                      <span class="f_wt_600 iterSubmit" *ngIf="itrdata.submit_status == 'ontime' ||
+                      itrdata.submit_status == 'late'">  <span class="submitdot"></span>
+            Submitted</span>
+
+            <span class="f_wt_600 iterGrade" *ngIf="itrdata.grade_status == 'Evaluated'">  <span class="gradedot"></span>
+            Graded</span>
                     </mat-panel-description>
                   </mat-expansion-panel-header>
                   <div class="align-center">
@@ -290,7 +305,7 @@
                     </button>
                   </div>
                 </mat-expansion-panel>
-              </mat-accordion>
+              </mat-accordion><br>
             </div>
           </div>
           
@@ -336,8 +351,12 @@
               <span class="f_wt_600 status" *ngIf="project.projectActivity.submit_status == 'notsubmitted'">  <span class="dot"></span>
               Yet to submit</span>
 
-              <span class="f_wt_600 submitstatus" *ngIf="project.projectActivity.submit_status == 'submitted'">  <span class="submitdot"></span>
+              <span class="f_wt_600 projectSubmitstatus submitted" *ngIf="project.projectActivity.submit_status == 'ontime' || 
+              project.projectActivity.submit_status == 'late'">  <span class="submitdot"></span>
               Submitted</span>
+
+              <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated'">  <span class="gradedot"></span>
+              Graded</span>
             </div>
           </div><br>
 
@@ -347,7 +366,8 @@
             </div>
             <div class="col-3 text-right">
               <div class="m-r-40">Start date :<span class="margin-30"></span>End date :</div>
-              <div class="m-r-2 f_wt_600">Oct 01, 2020<span class="margin-21 f_wt_600"></span>Oct 12, 2020 </div> 
+              <div class="m-r-2 f_wt_600">{{project.activityStartDate}}
+                <span class="margin-21 f_wt_600"></span>{{project.activityEndDate}}</div> 
             </div>
           </div>
           <!-----------------------------Materials for activity--------------------->
@@ -403,7 +423,7 @@
             </button>
           </div>
           <div class="list">
-            <ul class="list-group" *ngFor="let learner of groupDetails">
+            <ul class="list-group" *ngFor="let learner of project.projectActivity.groupDetails">
               <li class="list-group-item">{{learner.name}}</li>
             </ul>
           </div>

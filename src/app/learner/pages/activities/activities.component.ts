@@ -24,6 +24,10 @@ export class ActivitiesComponent implements OnInit {
   public isCollapsed = false;
   projectDetails: any;
   groupDetails: any;
+  activityStartDate: string;
+  activityEndDate: string;
+  performDetails: any;
+  iterationDetails: any;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService) {
 
@@ -33,16 +37,10 @@ export class ActivitiesComponent implements OnInit {
     this.courseid = localStorage.getItem('Courseid');
     this.getAssignmentmoduleData();
     this.getprojectActivityData();
-    // this.getperformActivityData();
+    this.getperformActivityData();
   }
 
   ngOnInit() {
-  }
-
-  getperformActivityData() {
-    this.Lservice.getperformActivityData(this.userDetail.user_id , 'tqfc4p0e').subscribe((data: any) => {
-      console.log(data);
-    });
   }
 
   // getperformActivityData
@@ -155,10 +153,25 @@ export class ActivitiesComponent implements OnInit {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
       this.projectDetails = data.data.getprojectActivityData.data;
       this.projectDetails.forEach(element => {
-        this.groupDetails = element.projectActivity.groupDetails;
+        const startDate = new Date(element.projectActivity.activitystartdate);
+        element.activityStartDate = moment(startDate).format('ll');
+        const endDate = new Date(element.projectActivity.activityenddate);
+        element.activityEndDate = moment(endDate).format('ll');
       });
-  }
+ }
 });
+  }
+
+  getperformActivityData() {
+    this.Lservice.getperformActivityData(this.userDetail.user_id , 'r00owr2x').subscribe((data: any) => {
+      this.performDetails = data.data.getperformActivityData.data;
+      this.performDetails.forEach(element => {
+        const startDate = new Date(element.performActivity.activitystartdate);
+        element.activityStartDate = moment(startDate).format('ll');
+        const endDate = new Date(element.performActivity.activityenddate);
+        element.activityEndDate = moment(endDate).format('ll');
+      });
+    });
   }
 
 }
