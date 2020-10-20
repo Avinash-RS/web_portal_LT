@@ -47,20 +47,20 @@ export class LearnerActivityCenterComponent implements OnInit {
       const sortType = 'undefined';
       const searchValue = '';
 
-      if (this.detail.key === 'completed') {
+      if (this.detail?.key === 'completed') {
         // this.searchColumn = 'undefined';
         const searchC = [{
           ['$or']: [{ ['files.submit_status']: { '$regex': 'Graded', '$options': 'i' } },
           { 'files.submit_status': { '$regex': 'Submitted', '$options': 'i' } }]
         }];
         this.searchColumn = JSON.stringify(searchC);
-      } else if (this.detail.key === 'pending') {
+      } else if (this.detail?.key === 'pending') {
         const searchC = [{ ['files.submit_status']: { '$regex': 'Yet to submit', '$options': 'i' } }];
         this.searchColumn = JSON.stringify(searchC);
-      } else if (this.detail.key === 'allActivities' || 'submission') {
+      } else if (this.detail?.key === 'allActivities' || 'submission') {
         this.searchColumn = 'undefined';
       }
-      if (this.detail.key === 'submission') {
+      if (this.detail?.key === 'submission') {
         // need to add course id from navigation for view submission details
         this.courseId = this.courseDetails?.id;
       } else {
@@ -80,10 +80,14 @@ export class LearnerActivityCenterComponent implements OnInit {
   };
   gridApi: any;
   detail: any;
+  quickSearchValue = null;
+  delayTimer: NodeJS.Timeout;
+  searchValue: any;
+  sortType: string;
   courseId: any;
   courseDetails: any;
   constructor(private service: LearnerServicesService, private gs: GlobalServiceService,
-    private route: Router, ) {
+    private route: Router,) {
     this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     // console.log(this.detail.key, 'det');
@@ -153,7 +157,7 @@ export class LearnerActivityCenterComponent implements OnInit {
   // }
 
   tabledef() {
-    if (this.detail.key === 'submission') {
+    if (this.detail?.key === 'submission') {
       this.hideCourseColumn = true;
     }
     // console.log(this.hideCourseColumn);
@@ -174,7 +178,8 @@ export class LearnerActivityCenterComponent implements OnInit {
         },
         {
           headerName: 'Activity',
-          field: '-',
+          field: 'activity',
+          valueGetter: (params) => params.data?.activity ? params.data.activity : '-',
         },
         {
           headerName: 'Status',
@@ -248,4 +253,46 @@ export class LearnerActivityCenterComponent implements OnInit {
     this.route.navigateByUrl('/Learner/activitycenterhomescreen');
   }
 
+  onKeyChange(data) {
+    if (data.length >= 3) {
+      this.searchValue = data;
+      clearTimeout(this.delayTimer);
+      this.delayTimer = setTimeout(() => {
+        this.callGridApi(this.searchValue, this.sortType || 'undefined');
+      }, 500)
+
+    } else if (data.length === 0) {
+      this.closesearch();
+    }
+  }
+
+  callGridApi(search, sortType) {
+    this.gridApi.setDatasource({
+      getRows: (params: IGetRowsParams) => {
+        const userId = this.userDetails.user_id;
+        const PageNumber = params.startRow / 10 || 0;
+        const courseId = this.courseDetails?.id;
+        const sortType = 'undefined';
+        const searchColumn = 'undefined';
+        this.service.getCourseActivities(userId, PageNumber, courseId, sortType, search, searchColumn)
+          .subscribe((result: any) => {
+            // console.log(result, 'r');
+            params.successCallback(
+              result.data.get_course_activities.message, 10
+            );
+          });
+      }
+    });
+  }
+
+  closesearch() {
+    this.quickSearchValue = null;
+    // this.paginationPageSize = 10;
+    this.searchValue = 'undefined';
+    this.sortType = 'undefined';
+    this.callGridApi(
+      this.searchValue || 'undefined',
+      this.sortType || 'undefined'
+    );
+  }
 }
