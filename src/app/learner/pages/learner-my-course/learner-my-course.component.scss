@@ -2724,9 +2724,7 @@ li {
   overflow: auto;
 }
 
-.gold-line-b {
-  border-bottom: solid 1px #cccccc7a
-}
+
 
 .gold-line-r {
   border-right: solid 1px #cccccc7a
@@ -2751,6 +2749,18 @@ li {
 
 .m-t-10px {
   margin-top: 10px !important;
+}
+
+.cardHeights{
+  height: 150px !important;
+  margin-top:15px;
+  margin-bottom:15px;
+}
+.inner {
+  width: 80%;
+  height: 1px;
+  margin: 0px auto;
+  border-bottom: 1px solid #cccccc7a;
 }
 
 
