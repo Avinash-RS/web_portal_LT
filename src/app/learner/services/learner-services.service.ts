@@ -900,6 +900,7 @@ getprojectActivityData(userId, courseId) {
       }
     });
   }
+  learnerUploadVideo(data) { return this.http.post(environment.apiUrl + 'wca/learnerUploadVideo', data); }
 }
 
 
