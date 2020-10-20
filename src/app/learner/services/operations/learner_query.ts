@@ -1533,4 +1533,21 @@ export const getCourseActivities = gql`
         }
       }
           `;
+export const get_active_course_count = gql`
+      query  get_active_course_count($user_id:String! ) {
+        get_active_course_count(user_id:$user_id ) {
+          success
+          error_msg
+          message{
+                  _id
+                  Yettosubmit
+                  Overdue
+                  Submitted
+                  Graded
+                  Completed
+                  Allactivites
+          }
+        }
+      }
+          `;
 
