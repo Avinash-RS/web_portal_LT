@@ -45,8 +45,10 @@ import {
   ViewAllThreadDataBid,
   getCountForJobroleCategories,
   getLoginUserDetail,
+  getCourseActivities,
   getprojectActivityData,
-  getperformActivityData
+  getperformActivityData,
+  get_active_course_count
 } from './operations/learner_query';
 
 import {
@@ -370,7 +372,7 @@ export class LearnerServicesService {
     return this.Apollo.query({
       query: getLoginUserDetail,
       variables: {
-        username : email
+        username: email
       }
     });
   }
@@ -601,7 +603,7 @@ export class LearnerServicesService {
       }
     });
   }
-  bulkclaimcourse( id, user_id, category_id, categoryName) {
+  bulkclaimcourse(id, user_id, category_id, categoryName) {
     return this.Apollo.query({
       query: bulkclaimcourse,
       variables: {
@@ -880,6 +882,21 @@ export class LearnerServicesService {
       }
     });
   }
+  getCourseActivities(userId, PageNumber, courseId, sortType, searchValue, searchColumn) {
+    return this.Apollo.query({
+      query: getCourseActivities,
+      variables: {
+        user_id: userId,
+        pagenumber: PageNumber,
+        course_id: courseId,
+        sort_type: sortType,
+        searchvalue: searchValue,
+        searchcolumn: searchColumn
+      }
+    });
+  }
+
+
 
 getprojectActivityData(userId, courseId) {
   return this.Apollo.query({
@@ -897,6 +914,14 @@ getprojectActivityData(userId, courseId) {
       variables: {
         userId,
         courseId
+      }
+    });
+  }
+  get_active_course_count(user_id){
+    return this.Apollo.query({
+      query: get_active_course_count,
+      variables: {
+        user_id,
       }
     });
   }
