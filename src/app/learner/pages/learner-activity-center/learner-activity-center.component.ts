@@ -47,20 +47,20 @@ export class LearnerActivityCenterComponent implements OnInit {
       const sortType = 'undefined';
       const searchValue = '';
 
-      if (this.detail.key === 'completed') {
+      if (this.detail?.key === 'completed') {
         // this.searchColumn = 'undefined';
         const searchC = [{
           ['$or']: [{ ['files.submit_status']: { '$regex': 'Graded', '$options': 'i' } },
           { 'files.submit_status': { '$regex': 'Submitted', '$options': 'i' } }]
         }];
         this.searchColumn = JSON.stringify(searchC);
-      } else if (this.detail.key === 'pending') {
+      } else if (this.detail?.key === 'pending') {
         const searchC = [{ ['files.submit_status']: { '$regex': 'Yet to submit', '$options': 'i' } }];
         this.searchColumn = JSON.stringify(searchC);
-      } else if (this.detail.key === 'allActivities' || 'submission') {
+      } else if (this.detail?.key === 'allActivities' || 'submission') {
         this.searchColumn = 'undefined';
       }
-      if (this.detail.key === 'submission') {
+      if (this.detail?.key === 'submission') {
         // need to add course id from navigation for view submission details
         this.courseId = this.courseDetails?.id;
       } else {
@@ -153,7 +153,7 @@ export class LearnerActivityCenterComponent implements OnInit {
   // }
 
   tabledef() {
-    if (this.detail.key === 'submission') {
+    if (this.detail?.key === 'submission') {
       this.hideCourseColumn = true;
     }
     // console.log(this.hideCourseColumn);
