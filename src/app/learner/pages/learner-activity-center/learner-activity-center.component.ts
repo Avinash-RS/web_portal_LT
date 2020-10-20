@@ -232,4 +232,9 @@ export class LearnerActivityCenterComponent implements OnInit {
   // End of screen 5 - View All Activities card //
 
   // ******************************************************************************** //
+
+  goBack() {
+    this.route.navigateByUrl('/Learner/activitycenterhomescreen');
+  }
+
 }
