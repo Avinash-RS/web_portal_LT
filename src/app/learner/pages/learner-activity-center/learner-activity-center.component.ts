@@ -275,7 +275,7 @@ export class LearnerActivityCenterComponent implements OnInit {
       getRows: (params: IGetRowsParams) => {
         const userId = this.userDetails.user_id;
         const PageNumber = params.startRow / 10 || 0;
-        const courseId = this.courseDetails?.id;
+        const courseId = 'undefined';
         const sortType = 'undefined';
         const searchColumn = 'undefined';
         this.service.getCourseActivities(userId, PageNumber, courseId, sortType, search, searchColumn)
