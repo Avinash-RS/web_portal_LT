@@ -67,8 +67,8 @@
         <mat-form-field appearance="outline" class="pointer search-catalogue">
           <input matInput placeholder="Search" name="searchbar"  [(ngModel)]="quickSearchValue" (keyup)="onKeyChange($event.target.value)" type="text">
           <!--  (keyup)="searchCatalogue(catalogue)" -->
-          <mat-icon matSuffix *ngIf="catalogue !== null" (click)="closesearch()">close</mat-icon>
-          <mat-icon matSuffix [disabled]="true" *ngIf="catalogue === null" class="pointer">search</mat-icon>
+          <mat-icon matSuffix *ngIf="quickSearchValue !== null" (click)="closesearch()">close</mat-icon>
+          <mat-icon matSuffix [disabled]="true" *ngIf="quickSearchValue === null" class="pointer">search</mat-icon>
         </mat-form-field>
       </form>
     </div>
