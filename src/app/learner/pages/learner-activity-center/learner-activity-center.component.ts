@@ -174,7 +174,8 @@ export class LearnerActivityCenterComponent implements OnInit {
         },
         {
           headerName: 'Activity',
-          field: '-',
+          field: 'activity',
+          valueGetter: (params) => params.data?.activity ? params.data.activity : '-',
         },
         {
           headerName: 'Status',
