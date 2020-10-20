@@ -44,6 +44,7 @@ import { LandingHeaderComponent } from './core/landing-header/landing-header.com
 import { CategoryComponentComponent } from './shared/category-component/category-component.component';
 import { PdfreaderComponent } from './shared/pdfreader/pdfreader.component';
 import { ToolbarNotificationComponent } from './shared/toolbar-notification/toolbar-notification.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -103,6 +104,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    NgCircleProgressModule.forRoot({}),
+    NgCircleProgressModule,
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

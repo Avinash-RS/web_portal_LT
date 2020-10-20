@@ -67,4 +67,31 @@ export class MycourseItemComponent implements OnInit {
     // this.show = false;
     // }
   }
+
+  goToForum(c) {
+    localStorage.setItem('Courseid', c.course_id);
+    const detail = {
+      id: c.course_id,
+      name: c.course_name
+     
+    };
+    localStorage.setItem('course', btoa(JSON.stringify(detail)));
+    this.router.navigateByUrl('/Learner/discussionForum', { state: { detail } });
+  }
+
+  gotoSubmissionDetails(c) {
+    localStorage.setItem('Courseid', c.course_id);
+    const detail = {
+      id: c.course_id,
+      name: c.course_name,
+      key: 'submission',
+      // wishlist: c.wishlisted || false,
+      // wishlist_id: c.wishlist_id || null,
+      // enrollment_status: null,
+      // forumVal: true
+    };
+    localStorage.setItem('course', btoa(JSON.stringify(detail)));
+    // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+    this.router.navigateByUrl('/Learner/activitycenter', { state: { detail } });
+  }
 }

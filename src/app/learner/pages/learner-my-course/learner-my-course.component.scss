@@ -2752,9 +2752,9 @@ li {
 }
 
 .cardHeights{
-  height: 150px !important;
+  min-height: 150px !important;
   margin-top:15px;
-  margin-bottom:15px;
+  //margin-bottom:15px;
 }
 .inner {
   width: 80%;
