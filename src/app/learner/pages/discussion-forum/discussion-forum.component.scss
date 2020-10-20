@@ -7,6 +7,7 @@
     margin-right: 0 !important;
     margin-left: 0 !important;
 }
+
 // Mythreyi CSS starts here
 @media screen and (min-width: 320px) and (max-width: 760px) {
     .threadbutton {
@@ -28,6 +29,7 @@
     width: 10px !important;
     margin-left: 10px !important;
 }
+
 .send_btn {
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: $lxp-theme-green; // red color
@@ -563,3 +565,4 @@
 .redHover:hover {
     color: $lxp-theme-green !important;
 }
+
