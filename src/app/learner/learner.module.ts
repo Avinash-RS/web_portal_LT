@@ -65,6 +65,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {MatMenuModule} from '@angular/material/menu';
 import { LearnermycourseService } from './pages/learner-my-course/learnermycourse.service';
+import { KnowledgeResourceHomeComponent } from './pages/knowledge-resource-home/knowledge-resource-home.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -145,6 +146,11 @@ const routes: Routes = [
     component: LearnerCalendarComponent,
     data: { animation: 'Calendar' }
   },
+  {
+    path: 'knowledge',
+    component: KnowledgeResourceHomeComponent,
+    data: { title: 'Knowledge Resources'}
+  },
 
   // {
   //   path: 'terms',
@@ -210,7 +216,8 @@ const routes: Routes = [
     LearnerDashboardComponent,
     LandingpageComponent,
     LearnerCalendarComponent,
-    ViewAllnotificationsComponent
+    ViewAllnotificationsComponent,
+    KnowledgeResourceHomeComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
