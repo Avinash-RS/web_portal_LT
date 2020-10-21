@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { MatAccordion } from '@angular/material/expansion';
+import { Router } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { WcaService } from '@wca/services/wca.service';
@@ -31,16 +32,21 @@ export class ActivitiesComponent implements OnInit {
   iterationDetails: any;
   selectedIndex = 0;
   selectfile: File;
-  constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
+  checkDetails: any;
+  constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, public route: Router,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService) {
 
-    if (this.gs.checkLogout()) {
-      this.userDetail = this.gs.checkLogout();
-    }
-    this.courseid = localStorage.getItem('Courseid');
-    this.getAssignmentmoduleData();
-    this.getprojectActivityData();
-    this.getperformActivityData();
+                const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+                this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
+                this.checkDetails = detail;
+                console.log(this.checkDetails);
+                if (this.gs.checkLogout()) {
+                this.userDetail = this.gs.checkLogout();
+                }
+                this.courseid =  this.checkDetails ?  this.checkDetails.course_id : localStorage.getItem('Courseid');
+                this.getAssignmentmoduleData();
+                this.getprojectActivityData();
+                this.getperformActivityData();
   }
 
   ngOnInit() {
@@ -161,7 +167,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   getprojectActivityData() {
-    this.Lservice.getprojectActivityData(this.userDetail.user_id, 'r00owr2x').subscribe((data: any) => {
+    this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid ).subscribe((data: any) => {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
       this.projectDetails = data.data.getprojectActivityData.data;
       this.projectDetails.forEach(element => {
@@ -175,7 +181,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   getperformActivityData() {
-    this.Lservice.getperformActivityData(this.userDetail.user_id , 'r00owr2x').subscribe((data: any) => {
+    this.Lservice.getperformActivityData(this.userDetail.user_id ,this.courseid).subscribe((data: any) => {
       this.performDetails = data.data.getperformActivityData.data;
       this.performDetails.forEach(element => {
         const startDate = new Date(element.performActivity.activitystartdate);
