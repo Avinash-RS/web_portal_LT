@@ -111,6 +111,12 @@ input:focus {
     align-items: center;
 }
 
+::ng-deep.ag-paging-panel {
+  
+   
+    background-color: #F9F2BC!important
+}
+
 // End of screen 5 - View All Activities card //
 
 // ******************************************************************************** //

@@ -81,7 +81,7 @@
     </div>
   </div>
 
-  <ag-grid-angular style="width: 99%; height:  calc(100vh - 50px); margin:auto !important;" class="ag-theme-alpine" 
+  <ag-grid-angular style="width: 99%; height:  calc(100vh - 50px); margin:auto !important;" class="ag-theme-alpine" [pagination]="true"   [paginationPageSize]="paginationPageSize1" [cacheBlockSize]="cacheBlockSize"
   [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" (gridReady)="onGridReady($event)" [rowModelType]="'infinite'" (sortChanged)="onSort($event)" >
   <!-- [paginationPageSize]="paginationPageSize1" [cacheBlockSize]="cacheBlockSize" (gridReady)="onGridReady1($event)"
   [rowModelType]="'infinite'" (sortChanged)="rolesort($event)"

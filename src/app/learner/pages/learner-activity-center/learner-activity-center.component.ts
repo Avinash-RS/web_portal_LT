@@ -89,7 +89,8 @@ export class LearnerActivityCenterComponent implements OnInit {
   courseDetails: any;
   sortrecord: string;
   rowDataLength: any;
-
+  paginationPageSize = 10;
+  cacheBlockSize: any = 10;
   constructor(private service: LearnerServicesService, private gs: GlobalServiceService,
     private route: Router, private toastr: ToastrService, ) {
     this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
@@ -200,11 +201,11 @@ export class LearnerActivityCenterComponent implements OnInit {
             if (data.value === 'Submitted') {
               return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color:#FFA04E">stop_circle</mat-icon></span> Submitted `;
             } else if (data.value === 'Graded') {
-              return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color:green">stop_circle</mat-icon></span> Graded `;
+              return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color: #679959">stop_circle</mat-icon></span> Graded `;
             } else if (data.value === 'Yet to submit') {
-              return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color:grey">stop_circle</mat-icon></span> Yet to Submit `;
+              return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color: #6A6A6A">stop_circle</mat-icon></span> Yet to Submit `;
             } else if (data.value === 'Overdue') {
-              return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color:red">stop_circle</mat-icon></span> Overdue`;
+              return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color:#C02222 ">stop_circle</mat-icon></span> Overdue`;
             }
 
           },
