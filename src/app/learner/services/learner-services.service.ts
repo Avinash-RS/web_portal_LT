@@ -603,14 +603,17 @@ export class LearnerServicesService {
       }
     });
   }
-  bulkclaimcourse(id, user_id, category_id, categoryName) {
+  bulkclaimcourse(id, user_id, super_sub_category, categoryName , catalogueId , categoryId ,subCategoryId) {
     return this.Apollo.query({
       query: bulkclaimcourse,
       variables: {
         id,
         user_id,
-        category_id,
-        categoryName
+        super_sub_category,
+        categoryName,
+        catalogueId ,
+        categoryId ,
+        subCategoryId
       }
     });
   }
@@ -917,6 +920,7 @@ getprojectActivityData(userId, courseId) {
       }
     });
   }
+  learnerUploadVideo(data) { return this.http.post(environment.apiUrl + 'wca/learnerUploadVideo', data); }
   get_active_course_count(user_id){
     return this.Apollo.query({
       query: get_active_course_count,
