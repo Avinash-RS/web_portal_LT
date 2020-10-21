@@ -314,13 +314,13 @@
        </mat-tab>
 
     <mat-tab label="Project"> 
-      <div class="box-0-1" *ngFor="let project of projectDetails">
+      <div class="box-0-1" *ngFor="let project of projectDetails; let i = index">
         <div class="row">
           <div class="col text-right">
           <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="!isCollapsed"
-          (click)="isCollapsed = !isCollapsed">keyboard_arrow_down</mat-icon>
+          (click)="isCollapsed = !isCollapsed; getSelectedIndex(i)">keyboard_arrow_down</mat-icon>
           <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="isCollapsed"
-          (click)="isCollapsed = !isCollapsed">keyboard_arrow_up</mat-icon>
+          (click)="isCollapsed = !isCollapsed;">keyboard_arrow_up</mat-icon>
         </div>
         </div>
       <div class="row">
@@ -371,16 +371,16 @@
             </div>
           </div>
           <!-----------------------------Materials for activity--------------------->
-          <div class="panel1" *ngIf="isCollapsed">
+          <div class="panel1" *ngIf="isCollapsed && i == selectedIndex">
             <hr>
             <div class="row">
               <div class="col-8">
                 <div class="f_size_16 f_wt_600">Material for activity</div>
-                <div class="row">
+                <div class="row" *ngFor="let material of project.projectActivity.materialDetails">
                   <div class="col-4 m-t">
                     <img alt="Course Img" src="../../../../assets/images/play.jpg" class="courseImg" />
                     <div class="con">
-                    <div class="uppertext">Material for activity</div>
+                    <div class="uppertext">{{material.name}}</div>
                     <div class="overlay">
                      <span class="margin-5">Duration : 01:20:00</span> 
                     <div class="row ">
@@ -399,15 +399,25 @@
               <div class="col-4">
                 <div class="f_size_16 f_wt_600 align-center">Your work</div>
                 <div class="box-0-2">
+                  <div class="box-0-3" *ngIf="fileName">
+                    <p class="selectedfile">
+                      <mat-icon class="fileIcon">add</mat-icon>{{fileName}}
+                      <mat-icon class="fileIcon">close</mat-icon>
+                    </p>
+                  </div><br>
                 <div class="align-center">
-                  <button mat-stroked-button  class="upload-btn"> 
+                  <input type="file" style="display: none" #fileInput [(ngModel)]="fileName"
+                  (change)="uploadDoc($event)" />
+                  <button mat-stroked-button  class="upload-btn" (click)="uploadDocs()"> 
                     <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                     Add your files
                   </button>
   
-                  <button mat-stroked-button  class="submit-btn"> 
+                  <button mat-stroked-button  class="submit-btn" (click)="learnerUploadVideo(project)"> 
                     Submit
-                  </button>
+                  </button><br>
+                  <p>Submitted files cannot be edited</p>
+                  <p *ngIf="showSubmittedon">Submitted on: {{project.projectActivity.submitted_on}}</p>
                 </div>
               </div>
               </div>

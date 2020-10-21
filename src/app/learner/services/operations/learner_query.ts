@@ -1421,6 +1421,7 @@ export const getprojectActivityData = gql`
         data {
         _id
         projectActivity {
+          _id
         activitystartdate
         activityenddate
         submit_status
@@ -1436,6 +1437,8 @@ export const getprojectActivityData = gql`
         score_mark
         submitted_on
         submitted_date
+        submitted_learner
+        project_id
         grade_status
         instructor_status
         comments
@@ -1472,6 +1475,7 @@ query getperformActivityData($userId: String , $courseId: String) {
     data {
       _id
       performActivity {
+        _id
         activitystartdate
         activityenddate
         submit_status
