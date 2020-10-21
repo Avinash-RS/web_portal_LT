@@ -1421,7 +1421,6 @@ export const getprojectActivityData = gql`
         data {
         _id
         projectActivity {
-          _id
         activitystartdate
         activityenddate
         submit_status

@@ -31,7 +31,7 @@ export class ActivitiesComponent implements OnInit {
   iterationDetails: any;
   selectedIndex = 0;
   selectfile: File;
-  showSubmittedon: boolean;
+  showSubmittedon = false;
   fileName: any;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService) {
@@ -51,8 +51,10 @@ export class ActivitiesComponent implements OnInit {
     this.selectedIndex = i;
   }
   uploadDoc(event) {
-    console.log('eve', event);
     this.selectfile = event.target.files[0] as File;
+    // if (this.selectfile) {
+
+    // }
   }
   uploadDocs() {
     this.fileInput.nativeElement.click();
@@ -170,39 +172,56 @@ export class ActivitiesComponent implements OnInit {
       this.projectDetails.forEach(element => {
         const startDate = new Date(element.projectActivity.activitystartdate);
         element.activityStartDate = moment(startDate).format('ll');
+        element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
         const endDate = new Date(element.projectActivity.activityenddate);
         element.activityEndDate = moment(endDate).format('ll');
+        if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
+          element.enableSubmit = false;
+        } else {
+          element.enableSubmit = true;
+        }
       });
  }
 });
   }
-
+// Pass courseid dynamically
   getperformActivityData() {
     this.Lservice.getperformActivityData(this.userDetail.user_id , 'r00owr2x').subscribe((data: any) => {
       this.performDetails = data.data.getperformActivityData.data;
       this.performDetails.forEach(element => {
         const startDate = new Date(element.performActivity.activitystartdate);
         element.activityStartDate = moment(startDate).format('ll');
+        element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
         const endDate = new Date(element.performActivity.activityenddate);
         element.activityEndDate = moment(endDate).format('ll');
       });
     });
   }
   learnerUploadVideo(project) {
+    const startDate1 = new Date(project.projectActivity.activitystartdate);
+    project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:MM');
+    const endDate1 = new Date(project.projectActivity.activityenddate);
+    project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:MM');
+    let submitStatus = '';
+    if (moment().format('DD-MM-YYYY HH:MM') >= project.actstartDate &&
+    moment().format('DD-MM-YYYY HH:MM') <= project.actendDate) {
+    submitStatus = 'ontime';
+    } else if (moment().format('DD-MM-YYYY HH:MM') > project.actendDate) {
+      submitStatus = 'late';
+    }
     const payload = new FormData();
     payload.append('uploadvideo', this.selectfile, this.selectfile.name);
     payload.append('course_id', 'r00owr2x');
     payload.append('module_id', project.projectActivity.module_id);
     payload.append('topic_id', project.projectActivity.topic_id);
     payload.append('user_id', this.userDetail.user_id);
-    payload.append('submit_status', 'late');
+    payload.append('submit_status', submitStatus);
     payload.append('total_mark', project.projectActivity.total_mark);
     payload.append('submitType', 'project');
     payload.append('submitAction', 'true');
     payload.append('iterationid', project.projectActivity.project_id);
-    payload.append('object_id', project.projectActivity._id);
+    payload.append('object_id', project.projectActivity.project_id);
     this.Lservice.learnerUploadVideo(payload).subscribe((data: any) => {
-      console.log('output', data);
       this.showSubmittedon = true;
     });
 }

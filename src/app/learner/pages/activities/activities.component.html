@@ -227,11 +227,12 @@
             <div class="t-l">Activity : {{perform.performActivity.activityname}}</div>
           </div>
           <div class="col-2">
-            <span class="f_wt_600" *ngIf="perform.performActivity.submit_status == 'notsubmitted'">  <span class="dot"></span>
+            <span class="f_wt_600" *ngIf="perform.performActivity.submit_status == 'notsubmitted'
+            && perform.performActivity.grade_status == 'Not Evaluated'">  <span class="dot"></span>
             Yet to submit</span>
 
             <span class="f_wt_600 submitstatus" *ngIf="perform.performActivity.submit_status == 'ontime' || 
-            perform.performActivity.submit_status =='late'">  <span class="submitdot"></span>
+            perform.performActivity.submit_status =='late'  && perform.performActivity.grade_status == 'Not Evaluated'">  <span class="submitdot"></span>
             Submitted</span>
 
             <span class="f_wt_600 gradeStatus" *ngIf="perform.performActivity.grade_status == 'Evaluated'">  <span class="gradedot"></span>
@@ -252,11 +253,11 @@
           <div class="row">
             <div class="col-8">
               <div class="f_size_16 f_wt_600">Material for activity</div>
-              <div class="row">
+              <div class="row" *ngFor="let material of perform.performActivity.materialDetails">
                 <div class="col-4 m-t">
                   <img alt="Course Img" src="../../../../assets/images/play.jpg" class="courseImg" />
                   <div class="con">
-                  <div class="uppertext">Material for activity</div>
+                  <div class="uppertext">{{material.name}}</div>
                   <div class="overlay">
                    <span class="margin-5">Duration : 01:20:00</span> 
                   <div class="row ">
@@ -320,7 +321,7 @@
           <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="!isCollapsed"
           (click)="isCollapsed = !isCollapsed; getSelectedIndex(i)">keyboard_arrow_down</mat-icon>
           <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="isCollapsed"
-          (click)="isCollapsed = !isCollapsed;">keyboard_arrow_up</mat-icon>
+          (click)="isCollapsed = !isCollapsed; getSelectedIndex(i)">keyboard_arrow_up</mat-icon>
         </div>
         </div>
       <div class="row">
@@ -348,17 +349,24 @@
           <div class="row">
             <div class="col-10"></div>
             <div class="col-2 text-right">
-              <span class="f_wt_600 status" *ngIf="project.projectActivity.submit_status == 'notsubmitted'">  <span class="dot"></span>
+              <span class="f_wt_600 status" *ngIf="project.projectActivity.submit_status == 'notsubmitted'
+              && project.projectActivity.grade_status == 'Not Evaluated'">  <span class="dot"></span>
               Yet to submit</span>
 
               <span class="f_wt_600 projectSubmitstatus submitted" *ngIf="project.projectActivity.submit_status == 'ontime' || 
-              project.projectActivity.submit_status == 'late'">  <span class="submitdot"></span>
+              project.projectActivity.submit_status == 'late' && 
+              project.projectActivity.grade_status == 'Not Evaluated'">  <span class="submitdot"></span>
               Submitted</span>
 
               <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated'">  <span class="gradedot"></span>
               Graded</span>
             </div>
           </div><br>
+          <div class="row" *ngIf="project.projectActivity.grade_status == 'Evaluated'">
+            <div class="col text-right">
+              <p class="totscore">Total score: {{project.projectActivity.score_mark}}/{{project.projectActivity.total_mark}}</p>
+            </div>
+          </div>
 
           <div class="row">
             <div class="col-9">
@@ -396,7 +404,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-4">
+              <div class="col-4" *ngIf="project.projectActivity.grade_status == 'Not Evaluated'">
                 <div class="f_size_16 f_wt_600 align-center">Your work</div>
                 <div class="box-0-2">
                   <div class="box-0-3" *ngIf="fileName">
@@ -408,15 +416,19 @@
                 <div class="align-center">
                   <input type="file" style="display: none" #fileInput [(ngModel)]="fileName"
                   (change)="uploadDoc($event)" />
-                  <button mat-stroked-button  class="upload-btn" (click)="uploadDocs()"> 
+                  <button mat-stroked-button  class="upload-btn" (click)="uploadDocs()"
+                  [disabled]="project.enableSubmit == false"> 
                     <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                     Add your files
                   </button>
   
-                  <button mat-stroked-button  class="submit-btn" (click)="learnerUploadVideo(project)"> 
+                  <button mat-stroked-button [disabled]="project.enableSubmit == false" class="submit-btn" (click)="learnerUploadVideo(project)"> 
                     Submit
                   </button><br>
-                  <p>Submitted files cannot be edited</p>
+                  <!-- <button mat-stroked-button  class="submit-btn" *ngIf="project.projectActivity.submit_status"> 
+                    Submitted
+                  </button><br> -->
+                  <p *ngIf="fileName && !showSubmittedon">Submitted files cannot be edited</p>
                   <p *ngIf="showSubmittedon">Submitted on: {{project.projectActivity.submitted_on}}</p>
                 </div>
               </div>
