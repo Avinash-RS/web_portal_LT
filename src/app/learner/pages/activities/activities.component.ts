@@ -313,7 +313,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   removeVideo(videoName) {
-    console.log('removeVideo', removeVideo);
+    console.log('removeVideo', videoName);
     // this.selectPerformfile = this.selectPerformfile.filter(data => data.lastModified !== videoName.lastModified);
   }
 }

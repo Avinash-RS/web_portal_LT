@@ -298,7 +298,7 @@
                     <div class="videoPreview ml-auto mr-auto mb-3" *ngFor="let videoName of itrdata.videodetails">
                       <mat-icon class="videoPlay float-left">play_circle_outline</mat-icon>
                       <span>{{(videoName.name| slice:0:28)+'...'}}</span>
-                      <mat-icon class="closeBtn float-right" (click)="removeVideo(videoName, itrdata)">close</mat-icon>
+                      <mat-icon class="closeBtn float-right" (click)="removeVideo(videoName, itrdata)">delete</mat-icon>
                     </div>
   
                     <input type="file" accept="video/mp4" style="display: none" #fileInput [(ngModel)]="fileName"
