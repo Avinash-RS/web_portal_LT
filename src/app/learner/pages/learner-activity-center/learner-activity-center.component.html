@@ -10,15 +10,13 @@
     </span>
   </span>
 </p>
-<!-- <div class="row">
-<p>Activity center > Completed activities</p>
-</div> -->
+
 <!-- Start of screen 1 - Homescreen cards -->
 
 <!-- Activity center Homescreen Starts here -->
-<div *ngIf="showHomeScreen">
+<!-- <div *ngIf="showHomeScreen">
 
-</div>
+</div> -->
 <!-- Activity center Homescreen Ends here -->
 
 <!-- End of screen 1 - Homescreen cards -->
@@ -27,9 +25,9 @@
 
 <!-- Start of screen 2 - Next activity on card -->
 
-<div *ngIf="showNextActivityOn">
+<!-- <div *ngIf="showNextActivityOn">
 
-</div>
+</div> -->
 
 
 <!-- End of screen 2 - Next activity on card-->
@@ -39,9 +37,9 @@
 <!-- Start of screen 3 - Completed card -->
 
 
-<div *ngIf="showCompleted">
+<!-- <div *ngIf="showCompleted">
 
-</div>
+</div> -->
 
 
 <!-- End of screen 3 - Completed card-->
@@ -50,10 +48,10 @@
 
 <!-- Start of screen 4 - Pending Activities card -->
 
-
+<!-- 
 <div *ngIf="showPendingActivities">
 
-</div>
+</div> -->
 
 
 <!-- End of screen 4 - Pending Activities card-->
@@ -65,6 +63,12 @@
 
 <div *ngIf="showViewAllActivities">
   <div class="row">
+    <div class="col vert-txt-center" *ngIf ="detail?.key !== 'submission'">
+      <p class="m-l-10px">Activity center > {{detail?.key =='allActivities'? 'All' : detail?.key | titlecase}} activities</p>
+    </div>
+    <div class="col vert-txt-center" *ngIf ="detail?.key == 'submission'">
+      <p class="m-l-10px txt-caps">{{courseDetails.name}} > Submission details</p>
+    </div>
     <div class="col">
       <form class="search-form float_right search-viewactivities" style="display: inline-block; margin-right: 20px;">
         <mat-form-field appearance="outline" class="pointer search-catalogue">
@@ -77,7 +81,7 @@
     </div>
   </div>
 
-  <ag-grid-angular style="width: 99%; height:  calc(100vh - 50px); margin:auto !important;" class="ag-theme-alpine allActivities" 
+  <ag-grid-angular style="width: 99%; height:  calc(100vh - 50px); margin:auto !important;" class="ag-theme-alpine" 
   [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" (gridReady)="onGridReady($event)" [rowModelType]="'infinite'" (sortChanged)="onSort($event)" >
   <!-- [paginationPageSize]="paginationPageSize1" [cacheBlockSize]="cacheBlockSize" (gridReady)="onGridReady1($event)"
   [rowModelType]="'infinite'" (sortChanged)="rolesort($event)"

@@ -1,9 +1,11 @@
 @import "variable";
+
 // Activity center Homescreen Starts here //
 .backIc {
     width: 10px !important;
     margin-left: 10px !important;
 }
+
 .redHover:hover {
     color: #C02222 !important;
 }
@@ -53,21 +55,23 @@ input:focus {
 }
 
 .inputs:focus {
-    border: 1.0px solid $lxp-theme-green!important;
+    border: 1.0px solid $lxp-theme-green !important;
 }
 
 /deep/.search-viewactivities .mat-form-field-appearance-outline .mat-form-field-infix {
     padding-top: 0px !important;
     padding-bottom: 5px !important;
 }
+
 /deep/.search-viewactivities .mat-form-field-suffix {
     padding-top: 3px !important;
 }
+
 ::ng-deep .search-viewactivities .mat-form-field-appearance-outline .mat-form-field-outline-end {
     border-radius: 0px !important;
 }
 
-::ng-deep .search-viewactivities  .mat-form-field-appearance-outline .mat-form-field-outline-start {
+::ng-deep .search-viewactivities .mat-form-field-appearance-outline .mat-form-field-outline-start {
     border-radius: 0px !important;
 
 }
@@ -75,18 +79,38 @@ input:focus {
 ::ng-deep .ag-theme-alpine .ag-header {
     background-color: #F9F2BC;
 }
+
 ::ng-deep .ag-theme-alpine .ag-row {
     background-color: $color-lightest-grey;
     border-bottom: 1px solid white;
 }
 
 ::ng-deep .ag-theme-alpine {
-border: none !important;
+    border: none !important;
+}
+// In Learner end table font is replaced with overall font, hence icons are not displaying. so this font-family css is implemented for icons in ag grid
+::ng-deep .ag-theme-alpine .ag-icon {
+    font-family: "agGridAlpine" !important;
+}
+.sub {
+    color: #FFA04E !important;
 }
 
-.sub {
-color: #FFA04E !important;
+.m-l-10px {
+    margin-left: 10px !important;
 }
+
+.txt-caps {
+    ::first-letter {
+        text-transform: capitalize;
+    }
+}
+
+.vert-txt-center {
+    display: inline-flex !important;
+    align-items: center;
+}
+
 // End of screen 5 - View All Activities card //
 
 // ******************************************************************************** //

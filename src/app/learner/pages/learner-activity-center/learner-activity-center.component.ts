@@ -3,6 +3,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Router } from '@angular/router';
 import { IDatasource, IGetRowsParams } from 'ag-grid-community';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-learner-activity-center',
@@ -44,18 +45,18 @@ export class LearnerActivityCenterComponent implements OnInit {
       const userId = this.userDetails.user_id;
       // const userId = 'egs8fv';
       const PageNumber = params.startRow / 10 || 0;
-      const sortType = 'undefined';
-      const searchValue = '';
+      this.sortType = 'undefined';
+      this.searchValue = '';
 
       if (this.detail?.key === 'completed') {
         // this.searchColumn = 'undefined';
         const searchC = [{
-          ['$or']: [{ ['files.submit_status']: { '$regex': 'Graded', '$options': 'i' } },
-          { 'files.submit_status': { '$regex': 'Submitted', '$options': 'i' } }]
+          ['$or']: [{ ['files.submit_status']: { $regex: 'Graded', $options: 'i' } },
+          { 'files.submit_status': { $regex: 'Submitted', $options: 'i' } }]
         }];
         this.searchColumn = JSON.stringify(searchC);
       } else if (this.detail?.key === 'pending') {
-        const searchC = [{ ['files.submit_status']: { '$regex': 'Yet to submit', '$options': 'i' } }];
+        const searchC = [{ ['files.submit_status']: { $regex: 'Yet to submit', $options: 'i' } }];
         this.searchColumn = JSON.stringify(searchC);
       } else if (this.detail?.key === 'allActivities' || 'submission') {
         this.searchColumn = 'undefined';
@@ -66,7 +67,7 @@ export class LearnerActivityCenterComponent implements OnInit {
       } else {
         this.courseId = 'undefined';
       }
-      this.service.getCourseActivities(userId, PageNumber, this.courseId, sortType, searchValue, this.searchColumn)
+      this.service.getCourseActivities(userId, PageNumber, this.courseId, this.sortType, this.searchValue, this.searchColumn)
         .subscribe((result: any) => {
           // console.log(result, 'r');
           if (result.data.get_course_activities.total_count > 0) {
@@ -86,8 +87,11 @@ export class LearnerActivityCenterComponent implements OnInit {
   sortType: string;
   courseId: any;
   courseDetails: any;
+  sortrecord: string;
+  rowDataLength: any;
+
   constructor(private service: LearnerServicesService, private gs: GlobalServiceService,
-    private route: Router,) {
+    private route: Router, private toastr: ToastrService, ) {
     this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     // console.log(this.detail.key, 'det');
@@ -167,23 +171,30 @@ export class LearnerActivityCenterComponent implements OnInit {
           headerName: 'Course',
           field: 'course_name',
           hide: this.hideCourseColumn,
+          sortable: true,
+          filter: true,
         },
         {
           headerName: 'Module',
           field: 'module_name',
+          sortable: true,
         },
         {
           headerName: 'Topic',
           field: 'topic_name',
+          sortable: true,
         },
         {
           headerName: 'Activity',
+          // Need to change field once API is updated and assignments to '-' in value getter
           field: 'activity',
-          valueGetter: (params) => params.data?.activity ? params.data.activity : '-',
+          valueGetter: (params) => params.data?.activity ? params.data.activity : 'Assignments',
+          // sortable: true,
         },
         {
           headerName: 'Status',
           field: 'status',
+          sortable: true,
           cellRenderer: (data) => {
             // console.log(data, 'status');
             if (data.value === 'Submitted') {
@@ -201,6 +212,7 @@ export class LearnerActivityCenterComponent implements OnInit {
         {
           headerName: 'Score',
           field: 'score',
+          sortable: true,
         },
       ];
     // this.rowData = [
@@ -253,55 +265,157 @@ export class LearnerActivityCenterComponent implements OnInit {
     if (this.detail?.key === 'submission') {
       this.route.navigateByUrl('/Learner/MyCourse');
     } else {
-    this.route.navigateByUrl('/Learner/activitycenterhomescreen');
+      this.route.navigateByUrl('/Learner/activitycenterhomescreen');
     }
   }
 
-  onKeyChange(data) {
-    if (data.length >= 3) {
-      this.searchValue = data;
-      clearTimeout(this.delayTimer);
-      this.delayTimer = setTimeout(() => {
-        this.callGridApi(this.searchValue, this.sortType || 'undefined');
-      }, 500)
+  // onKeyChange(data) {
+  //   if (data.length >= 3) {
+  //     this.searchValue = data;
+  //     clearTimeout(this.delayTimer);
+  //     this.delayTimer = setTimeout(() => {
+  //       this.callGridApi(this.searchValue, this.sortType || 'undefined');
+  //     }, 500)
 
-    } else if (data.length === 0) {
-      this.closesearch();
-    }
-  }
+  //   } else if (data.length === 0) {
+  //     this.closesearch();
+  //   }
+  // }
 
-  callGridApi(search, sortType) {
+  // callGridApi(search, sortType, globalSearchValue) {
+  //   this.gridApi.setDatasource({
+  //     getRows: (params: IGetRowsParams) => {
+  //       const userId = this.userDetails.user_id;
+  //       const PageNumber = params.startRow / 10 || 0;
+  //       // this.filteredColumn = searchColumn;
+  //       // this.sortrecord = sortValue;
+  //       // this.rolefilterValue = globalSearchValue;
+  //       this.courseId = 'undefined';
+  //       this.sortType = 'undefined';
+  //       this.searchColumn = 'undefined';
+  //       this.service.getCourseActivities(userId, PageNumber, this.courseId, this.sortType, this.searchValue, this.searchColumn)
+  //         .subscribe((result: any) => {
+  //           // console.log(result, 'r');
+  //           params.successCallback(
+  //             result.data.get_course_activities.message, result.data.get_course_activities.total_count
+  //           );
+  //         });
+  //     }
+  //   });
+  // }
+
+  // closesearch() {
+  //   this.quickSearchValue = null;
+  //   // this.paginationPageSize = 10;
+  //   this.searchValue = 'undefined';
+  //   this.sortType = 'undefined';
+  //   // this.callGridApi(
+  //     this.searchValue || 'undefined',
+  //     this.sortType || 'undefined',
+  //     'undefined'
+  //   );
+  // }
+  callGridApi(sortValue, globalSearchValue, searchColumn) {
+    this.sortrecord = sortValue;
+    this.searchValue = globalSearchValue ? globalSearchValue : '';
+    this.searchColumn = searchColumn;
     this.gridApi.setDatasource({
       getRows: (params: IGetRowsParams) => {
         const userId = this.userDetails.user_id;
         const PageNumber = params.startRow / 10 || 0;
-        const courseId = 'undefined';
-        const sortType = 'undefined';
-        const searchColumn = 'undefined';
-        this.service.getCourseActivities(userId, PageNumber, courseId, sortType, search, searchColumn)
+        if (this.detail?.key === 'completed') {
+          const searchC = [{
+            ['$or']: [{ ['files.submit_status']: { $regex: 'Graded', $options: 'i' } },
+            { 'files.submit_status': { $regex: 'Submitted', $options: 'i' } }]
+          }];
+          this.searchColumn = JSON.stringify(searchC);
+        } else if (this.detail?.key === 'pending') {
+          const searchC = [{ ['files.submit_status']: { $regex: 'Yet to submit', $options: 'i' } }];
+          this.searchColumn = JSON.stringify(searchC);
+        } else if (this.detail?.key === 'allActivities' || 'submission') {
+          this.searchColumn = 'undefined';
+        }
+        if (this.detail?.key === 'submission') {
+          // need to add course id from navigation for view submission details
+          this.courseId = this.courseDetails?.id;
+        } else {
+          this.courseId = 'undefined';
+        }
+        this.service.getCourseActivities(userId, PageNumber, this.courseId, this.sortrecord, this.searchValue, this.searchColumn)
           .subscribe((result: any) => {
             // console.log(result, 'r');
+            if (result.data.get_course_activities.message.length === 0) {
+              this.toastr.warning('No results found');
+            }
+            if (result.data && result.data.get_course_activities?.success) {
+              if (params.startRow === 0) {
+                this.rowData = [];
+              }
+              this.rowData = result.data.get_course_activities.message;
+              this.rowDataLength = result.data.get_course_activities.total_count;
+            }
             params.successCallback(
-              result.data.get_course_activities.message, 10
+              result.data.get_course_activities.message, result.data.get_course_activities.total_count
             );
           });
       }
+      // getRows: (params: IGetRowsParams) => {
+      //   this.adminservice
+      //     .getAllRoles(params.startRow / 10 || 0, this.adminDetails?.user_id,
+      //       this.rolefilterValue !== null && this.rolefilterValue.length > 0 ? this.rolefilterValue : 'undefined',
+      //       this.sortrecord, this.filteredColumn)
+      //     .subscribe((result: any) => {
+      //       if (result.data.get_all_user_roles.message.length === 0) {
+      //         this.toastr.warning('No search results found');
+      //       }
+      //       if (result.data && result.data.get_all_user_roles?.success) {
+      //         if (params.startRow === 0) {
+      //           this.RoleDATA = [];
+      //         }
+      //         this.RoleDATA = result.data.get_all_user_roles.message;
+      //         this.paginationPageSize1 = 10;
+      //         this.allRoles = this.RoleDATA;
+      //         this.roleDataLength = result.data.get_all_user_roles.total_count;
+      //         params.successCallback(
+      //           result.data.get_all_user_roles.message, result.data.get_all_user_roles.total_count
+      //         );
+      //       } else {
+      //         this.toastr.warning('Please try again later');
+      //       }
+      //     });
+      // }
     });
-  }
-
-  closesearch() {
-    this.quickSearchValue = null;
-    // this.paginationPageSize = 10;
-    this.searchValue = 'undefined';
-    this.sortType = 'undefined';
-    this.callGridApi(
-      this.searchValue || 'undefined',
-      this.sortType || 'undefined'
-    );
   }
 
   onSort(data: any) {
     const sortState = this.gridApi.getSortModel();
     console.log(sortState, 'ss');
+    if (sortState.length === 0) {
+      this.sortrecord = 'undefined';
+      this.callGridApi(this.sortrecord, this.searchValue, this.searchColumn);
+    } else {
+      if (sortState[0].colId === 'course_name') {
+        const r = { ['coursenamesortfield']: sortState[0]?.sort === 'asc' ? 1 : -1 };
+        this.sortrecord = JSON.stringify(r);
+      } else if (sortState[0].colId === 'module_name') {
+        const r = { ['modulenamesortfield']: sortState[0]?.sort === 'asc' ? 1 : -1 };
+        this.sortrecord = JSON.stringify(r);
+      } else if (sortState[0].colId === 'topic_name') {
+        const r = { ['topicnamesortfield']: sortState[0]?.sort === 'asc' ? 1 : -1 };
+        this.sortrecord = JSON.stringify(r);
+      } else if (sortState[0].colId === 'score') {
+        const r = { [sortState[0]?.colId]: sortState[0]?.sort === 'asc' ? 1 : -1 };
+        this.sortrecord = JSON.stringify(r);
+      } else if (sortState[0].colId === 'status') {
+        const r = { ['files.submit_status']: sortState[0]?.sort === 'asc' ? 1 : -1 };
+        this.sortrecord = JSON.stringify(r);
+      } else {
+        const r = { [sortState[0]?.colId]: sortState[0]?.sort === 'asc' ? 1 : -1 };
+        this.sortrecord = JSON.stringify(r);
+      }
+      console.log(this.sortrecord, 'sr');
+      this.searchValue = undefined;
+      this.callGridApi(this.sortrecord, this.searchValue, this.searchColumn || 'undefined');
+    }
   }
 }
