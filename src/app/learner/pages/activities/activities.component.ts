@@ -6,6 +6,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-activities',
   templateUrl: './activities.component.html',
@@ -33,13 +34,20 @@ export class ActivitiesComponent implements OnInit {
   selectfile: File;
   showSubmittedon = false;
   fileName: any;
+  submitType: any;
+  checkDetails: any;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
-              private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService) {
+              private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
+              public route: Router) {
 
+    const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+    this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
+    this.checkDetails = detail;
+    console.log(this.checkDetails);
     if (this.gs.checkLogout()) {
-      this.userDetail = this.gs.checkLogout();
+    this.userDetail = this.gs.checkLogout();
     }
-    this.courseid = localStorage.getItem('Courseid');
+    this.courseid =  this.checkDetails ?  this.checkDetails.course_id : localStorage.getItem('Courseid');
     this.getAssignmentmoduleData();
     this.getprojectActivityData();
     this.getperformActivityData();
@@ -50,11 +58,10 @@ export class ActivitiesComponent implements OnInit {
   getSelectedIndex(i) {
     this.selectedIndex = i;
   }
-  uploadDoc(event) {
+  uploadDoc(event, project, submitAction) {
+    console.log('sub', submitAction);
     this.selectfile = event.target.files[0] as File;
-    // if (this.selectfile) {
-
-    // }
+    this.learnerUploadVideo(project, submitAction);
   }
   uploadDocs() {
     this.fileInput.nativeElement.click();
@@ -166,7 +173,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   getprojectActivityData() {
-    this.Lservice.getprojectActivityData(this.userDetail.user_id, 'r00owr2x').subscribe((data: any) => {
+    this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
       this.projectDetails = data.data.getprojectActivityData.data;
       this.projectDetails.forEach(element => {
@@ -186,7 +193,7 @@ export class ActivitiesComponent implements OnInit {
   }
 // Pass courseid dynamically
   getperformActivityData() {
-    this.Lservice.getperformActivityData(this.userDetail.user_id , 'r00owr2x').subscribe((data: any) => {
+    this.Lservice.getperformActivityData(this.userDetail.user_id , this.courseid).subscribe((data: any) => {
       this.performDetails = data.data.getperformActivityData.data;
       this.performDetails.forEach(element => {
         const startDate = new Date(element.performActivity.activitystartdate);
@@ -197,7 +204,7 @@ export class ActivitiesComponent implements OnInit {
       });
     });
   }
-  learnerUploadVideo(project) {
+  learnerUploadVideo(project, submitAction) {
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:MM');
     const endDate1 = new Date(project.projectActivity.activityenddate);
@@ -218,11 +225,12 @@ export class ActivitiesComponent implements OnInit {
     payload.append('submit_status', submitStatus);
     payload.append('total_mark', project.projectActivity.total_mark);
     payload.append('submitType', 'project');
-    payload.append('submitAction', 'true');
+    payload.append('submitAction', submitAction);
     payload.append('iterationid', project.projectActivity.project_id);
     payload.append('object_id', project.projectActivity.project_id);
     this.Lservice.learnerUploadVideo(payload).subscribe((data: any) => {
       this.showSubmittedon = true;
+      this.getprojectActivityData();
     });
 }
 }

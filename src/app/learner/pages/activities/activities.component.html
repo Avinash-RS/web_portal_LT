@@ -286,9 +286,11 @@
                     </mat-panel-title>
                     <mat-panel-description>
                      <span class="width">Score: {{itrdata.score_mark}} / {{itrdata.total_mark}}</span> 
-                      <span class="f_wt_600 iterStatus" *ngIf="itrdata.submit_status == 'notsubmitted'">  <span class="dot"></span>Yet to submit</span>
+                      <span class="f_wt_600 iterStatus" *ngIf="itrdata.submit_status == 'notsubmitted' &&
+                      itrdata.grade_status == 'Not Evaluated'">  <span class="dot"></span>Yet to submit</span>
                       <span class="f_wt_600 iterSubmit" *ngIf="itrdata.submit_status == 'ontime' ||
-                      itrdata.submit_status == 'late'">  <span class="submitdot"></span>
+                      itrdata.submit_status == 'late' &&
+                      itrdata.grade_status == 'Not Evaluated'">  <span class="submitdot"></span>
             Submitted</span>
 
             <span class="f_wt_600 iterGrade" *ngIf="itrdata.grade_status == 'Evaluated'">  <span class="gradedot"></span>
@@ -413,21 +415,29 @@
                       <mat-icon class="fileIcon">close</mat-icon>
                     </p>
                   </div><br>
+                  <div *ngIf="project.projectActivity.videodetails">
+                  <div class="box-0-3" *ngFor="let item of project.projectActivity.videodetails">
+                    <p class="selectedfile">
+                      <mat-icon class="fileIcon">add</mat-icon>{{item.name}}
+                    </p>
+                  </div>
+                </div><br>
                 <div class="align-center">
                   <input type="file" style="display: none" #fileInput [(ngModel)]="fileName"
-                  (change)="uploadDoc($event)" />
+                  (change)="uploadDoc($event, project, 'false')" />
                   <button mat-stroked-button  class="upload-btn" (click)="uploadDocs()"
                   [disabled]="project.enableSubmit == false"> 
                     <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                     Add your files
                   </button>
   
-                  <button mat-stroked-button [disabled]="project.enableSubmit == false" class="submit-btn" (click)="learnerUploadVideo(project)"> 
+                  <button mat-stroked-button [disabled]="project.enableSubmit == false" class="submit-btn" (click)="learnerUploadVideo(project, 'true')"
+                  *ngIf="project.projectActivity.submitAction == 'false'"> 
                     Submit
                   </button><br>
-                  <!-- <button mat-stroked-button  class="submit-btn" *ngIf="project.projectActivity.submit_status"> 
+                  <button mat-stroked-button  class="submit-btn" *ngIf="project.projectActivity.submitAction == 'true'"> 
                     Submitted
-                  </button><br> -->
+                  </button><br>{{project.projectActivity.submitAction}}
                   <p *ngIf="fileName && !showSubmittedon">Submitted files cannot be edited</p>
                   <p *ngIf="showSubmittedon">Submitted on: {{project.projectActivity.submitted_on}}</p>
                 </div>

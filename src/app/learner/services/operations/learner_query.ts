@@ -1448,6 +1448,7 @@ export const getprojectActivityData = gql`
         videourl
         name
         size
+        doc_type
         }
         materialDetails{
         id
@@ -1462,6 +1463,7 @@ export const getprojectActivityData = gql`
         username
         email
         }
+        submitAction
         }
         }
         }
@@ -1508,6 +1510,7 @@ query getperformActivityData($userId: String , $courseId: String) {
             videourl
             name
             size
+            doc_type
           }
         }
       }
