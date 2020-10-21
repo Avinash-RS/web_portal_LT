@@ -12,10 +12,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LearnerActivityCenterComponent implements OnInit {
   // Boolean
-  showHomeScreen = true;
-  showNextActivityOn = false;
-  showCompleted = false;
-  showPendingActivities = false;
+  // showHomeScreen = true;
+  // showNextActivityOn = false;
+  // showCompleted = false;
+  // showPendingActivities = false;
   showViewAllActivities = true;
 
 
@@ -47,19 +47,19 @@ export class LearnerActivityCenterComponent implements OnInit {
       const PageNumber = params.startRow / 10 || 0;
       this.sortType = 'undefined';
       this.searchValue = '';
-
+      this.searchColumn = 'undefined';
       if (this.detail?.key === 'completed') {
         // this.searchColumn = 'undefined';
-        const searchC = [{
+        const statusB = [{
           ['$or']: [{ ['files.submit_status']: { $regex: 'Graded', $options: 'i' } },
           { 'files.submit_status': { $regex: 'Submitted', $options: 'i' } }]
         }];
-        this.searchColumn = JSON.stringify(searchC);
+        this.statusBased = JSON.stringify(statusB);
       } else if (this.detail?.key === 'pending') {
-        const searchC = [{ ['files.submit_status']: { $regex: 'Yet to submit', $options: 'i' } }];
-        this.searchColumn = JSON.stringify(searchC);
+        const statusB = [{ ['files.submit_status']: { $regex: 'Yet to submit', $options: 'i' } }];
+        this.statusBased = JSON.stringify(statusB);
       } else if (this.detail?.key === 'allActivities' || 'submission') {
-        this.searchColumn = 'undefined';
+        this.statusBased = 'undefined';
       }
       if (this.detail?.key === 'submission') {
         // need to add course id from navigation for view submission details
@@ -67,7 +67,8 @@ export class LearnerActivityCenterComponent implements OnInit {
       } else {
         this.courseId = 'undefined';
       }
-      this.service.getCourseActivities(userId, PageNumber, this.courseId, this.sortType, this.searchValue, this.searchColumn)
+      this.service.getCourseActivities(userId, PageNumber, this.courseId, this.sortType, this.searchValue,
+        this.searchColumn, this.statusBased)
         .subscribe((result: any) => {
           // console.log(result, 'r');
           if (result.data.get_course_activities.total_count > 0) {
@@ -89,6 +90,8 @@ export class LearnerActivityCenterComponent implements OnInit {
   courseDetails: any;
   sortrecord: string;
   rowDataLength: any;
+  columnSearch: any;
+  statusBased: string;
 
   constructor(private service: LearnerServicesService, private gs: GlobalServiceService,
     private route: Router, private toastr: ToastrService, ) {
@@ -106,42 +109,6 @@ export class LearnerActivityCenterComponent implements OnInit {
   ngOnInit() {
   }
 
-  // Activity center Homescreen Starts here //
-
-
-  // Activity center Homescreen Ends here //
-
-
-  // ******************************************************************************** //
-
-  // Start of screen 2 - Next activity on card //
-
-
-
-
-  // End of screen 2 - Next activity on card //
-
-  // ******************************************************************************** //
-
-  // Start of screen 3 - Completed card //
-
-
-
-
-
-  // End of screen 3 - Completed card //
-
-  // ******************************************************************************** //
-
-  // Start of screen 4 - Pending Activities card //
-
-
-
-  // End of screen 4 - Pending Activities card //
-
-  // ******************************************************************************** //
-
-  // Start of screen 5 - View All Activities card //
   onGridReady(params: any) {
     this.gridApi = params.api;
     this.gridApi.setDatasource(this.dataSources);
@@ -173,16 +140,21 @@ export class LearnerActivityCenterComponent implements OnInit {
           hide: this.hideCourseColumn,
           sortable: true,
           filter: true,
+          floatingFilterComponentParams: { suppressFilterButton: true },
         },
         {
           headerName: 'Module',
           field: 'module_name',
           sortable: true,
+          filter: true,
+          floatingFilterComponentParams: { suppressFilterButton: true },
         },
         {
           headerName: 'Topic',
           field: 'topic_name',
           sortable: true,
+          filter: true,
+          floatingFilterComponentParams: { suppressFilterButton: true },
         },
         {
           headerName: 'Activity',
@@ -195,6 +167,8 @@ export class LearnerActivityCenterComponent implements OnInit {
           headerName: 'Status',
           field: 'status',
           sortable: true,
+          filter: true,
+          floatingFilterComponentParams: { suppressFilterButton: true },
           cellRenderer: (data) => {
             // console.log(data, 'status');
             if (data.value === 'Submitted') {
@@ -213,53 +187,15 @@ export class LearnerActivityCenterComponent implements OnInit {
           headerName: 'Score',
           field: 'score',
           sortable: true,
+          filter: true,
+          floatingFilterComponentParams: { suppressFilterButton: true },
         },
       ];
-    // this.rowData = [
-    //   {
-    //     course: 'Gardening for all',
-    //     module: 'Gardening for experts',
-    //     topic: 'Plants-classifications',
-    //     activity: 'Assignments',
-    //     status: 'graded',
-    //     score: '10/100'
-    //   },
-    //   {
-    //     course: 'Gardening for all',
-    //     module: 'Gardening for experts',
-    //     topic: 'Plants-classifications',
-    //     activity: 'Assignments',
-    //     status: 'submitted',
-    //     score: '10/100'
-    //   },
-    //   {
-    //     course: 'Gardening for all',
-    //     module: 'Gardening for experts',
-    //     topic: 'Plants-classifications',
-    //     activity: 'Assignments',
-    //     status: 'yettosubmit',
-    //     score: '-/100'
-    //   },
-    //   {
-    //     course: 'Gardening for all',
-    //     module: 'Gardening for experts',
-    //     topic: 'Plants-classifications',
-    //     activity: 'Assignments',
-    //     status: 'overdue',
-    //     score: '-/100'
-    //   }
-
-
-    // ];
-
   }
 
 
 
 
-  // End of screen 5 - View All Activities card //
-
-  // ******************************************************************************** //
 
   goBack() {
     if (this.detail?.key === 'submission') {
@@ -315,25 +251,26 @@ export class LearnerActivityCenterComponent implements OnInit {
   //     'undefined'
   //   );
   // }
-  callGridApi(sortValue, globalSearchValue, searchColumn) {
+  callGridApi(sortValue, globalSearchValue, searchColumnVal) {
     this.sortrecord = sortValue;
     this.searchValue = globalSearchValue ? globalSearchValue : '';
-    this.searchColumn = searchColumn;
+    console.log(searchColumnVal, 'sc');
+    this.searchColumn = searchColumnVal;
     this.gridApi.setDatasource({
       getRows: (params: IGetRowsParams) => {
         const userId = this.userDetails.user_id;
         const PageNumber = params.startRow / 10 || 0;
         if (this.detail?.key === 'completed') {
-          const searchC = [{
+          const statusB = [{
             ['$or']: [{ ['files.submit_status']: { $regex: 'Graded', $options: 'i' } },
             { 'files.submit_status': { $regex: 'Submitted', $options: 'i' } }]
           }];
-          this.searchColumn = JSON.stringify(searchC);
+          this.statusBased = JSON.stringify(statusB);
         } else if (this.detail?.key === 'pending') {
-          const searchC = [{ ['files.submit_status']: { $regex: 'Yet to submit', $options: 'i' } }];
-          this.searchColumn = JSON.stringify(searchC);
+          const statusB = [{ ['files.submit_status']: { $regex: 'Yet to submit', $options: 'i' } }];
+          this.statusBased = JSON.stringify(statusB);
         } else if (this.detail?.key === 'allActivities' || 'submission') {
-          this.searchColumn = 'undefined';
+          this.statusBased = 'undefined';
         }
         if (this.detail?.key === 'submission') {
           // need to add course id from navigation for view submission details
@@ -341,7 +278,8 @@ export class LearnerActivityCenterComponent implements OnInit {
         } else {
           this.courseId = 'undefined';
         }
-        this.service.getCourseActivities(userId, PageNumber, this.courseId, this.sortrecord, this.searchValue, this.searchColumn)
+        this.service.getCourseActivities(userId, PageNumber, this.courseId, this.sortrecord, this.searchValue,
+          this.searchColumn, this.statusBased)
           .subscribe((result: any) => {
             // console.log(result, 'r');
             if (result.data.get_course_activities.message.length === 0) {
@@ -359,31 +297,6 @@ export class LearnerActivityCenterComponent implements OnInit {
             );
           });
       }
-      // getRows: (params: IGetRowsParams) => {
-      //   this.adminservice
-      //     .getAllRoles(params.startRow / 10 || 0, this.adminDetails?.user_id,
-      //       this.rolefilterValue !== null && this.rolefilterValue.length > 0 ? this.rolefilterValue : 'undefined',
-      //       this.sortrecord, this.filteredColumn)
-      //     .subscribe((result: any) => {
-      //       if (result.data.get_all_user_roles.message.length === 0) {
-      //         this.toastr.warning('No search results found');
-      //       }
-      //       if (result.data && result.data.get_all_user_roles?.success) {
-      //         if (params.startRow === 0) {
-      //           this.RoleDATA = [];
-      //         }
-      //         this.RoleDATA = result.data.get_all_user_roles.message;
-      //         this.paginationPageSize1 = 10;
-      //         this.allRoles = this.RoleDATA;
-      //         this.roleDataLength = result.data.get_all_user_roles.total_count;
-      //         params.successCallback(
-      //           result.data.get_all_user_roles.message, result.data.get_all_user_roles.total_count
-      //         );
-      //       } else {
-      //         this.toastr.warning('Please try again later');
-      //       }
-      //     });
-      // }
     });
   }
 
@@ -392,7 +305,7 @@ export class LearnerActivityCenterComponent implements OnInit {
     console.log(sortState, 'ss');
     if (sortState.length === 0) {
       this.sortrecord = 'undefined';
-      this.callGridApi(this.sortrecord, this.searchValue, this.searchColumn);
+      this.callGridApi(this.sortrecord, this.searchValue || '', this.searchColumn);
     } else {
       if (sortState[0].colId === 'course_name') {
         const r = { ['coursenamesortfield']: sortState[0]?.sort === 'asc' ? 1 : -1 };
@@ -414,8 +327,51 @@ export class LearnerActivityCenterComponent implements OnInit {
         this.sortrecord = JSON.stringify(r);
       }
       console.log(this.sortrecord, 'sr');
-      this.searchValue = undefined;
-      this.callGridApi(this.sortrecord, this.searchValue, this.searchColumn || 'undefined');
+      this.searchValue = '';
+      this.callGridApi(this.sortrecord, this.searchValue || '', this.searchColumn || 'undefined');
+    }
+  }
+  activityFilter(event) {
+    let searchString = null;
+    const filterModel = this.gridApi.getFilterModel();
+    searchString = this.gridApi.getFilterModel()[Object.keys(this.gridApi.getFilterModel())[0]]?.filter || null;
+    console.log(searchString);
+    const filterArray = [];
+    for (const keyd in filterModel) {
+      if (filterModel) {
+        const filter: any = {};
+        let propName;
+        propName = keyd;
+        if (propName === 'course_name') {
+          searchString = filterModel[keyd].filter;
+          filter['coursearray' + '.' + propName] = { $regex: searchString.trimEnd(), $options: 'i' };
+        } else if (propName === 'module_name') {
+          searchString = filterModel[keyd].filter;
+          filter['files.module_id'] = { $regex: searchString.trimEnd(), $options: 'i' };
+        } else if (propName === 'topic_name') {
+          searchString = filterModel[keyd].filter;
+          filter['files.topic_id'] = { $regex: searchString.trimEnd(), $options: 'i' };
+        } else if (propName === 'score') {
+          searchString = filterModel[keyd].filter;
+          filter[propName] = { $regex: searchString.trimEnd(), $options: 'i' };
+        } else if (propName === 'status') {
+          searchString = filterModel[keyd].filter;
+          filter['files.submit_status'] = { $regex: searchString.trimEnd(), $options: 'i' };
+        } else {
+          searchString = filterModel[keyd].filter;
+          filter[propName] = { $regex: searchString.trimEnd(), $options: 'i' };
+        }
+        filterArray.push(filter);
+
+      }
+    }
+    if (filterArray.length > 0) {
+      this.searchColumn = JSON.stringify(filterArray);
+      console.log(this.searchColumn, 'searchcol');
+      this.callGridApi(this.sortrecord || 'undefined', this.searchValue || '', this.searchColumn);
+    } else if (!searchString) {
+      this.searchColumn = 'undefined';
+      this.callGridApi(this.sortrecord || 'undefined', this.searchValue || '', this.searchColumn);
     }
   }
 }

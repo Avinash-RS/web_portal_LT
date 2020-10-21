@@ -11,63 +11,13 @@
   </span>
 </p>
 
-<!-- Start of screen 1 - Homescreen cards -->
-
-<!-- Activity center Homescreen Starts here -->
-<!-- <div *ngIf="showHomeScreen">
-
-</div> -->
-<!-- Activity center Homescreen Ends here -->
-
-<!-- End of screen 1 - Homescreen cards -->
-
-<!-- ******************************************************************************** -->
-
-<!-- Start of screen 2 - Next activity on card -->
-
-<!-- <div *ngIf="showNextActivityOn">
-
-</div> -->
-
-
-<!-- End of screen 2 - Next activity on card-->
-
-<!-- ******************************************************************************** -->
-
-<!-- Start of screen 3 - Completed card -->
-
-
-<!-- <div *ngIf="showCompleted">
-
-</div> -->
-
-
-<!-- End of screen 3 - Completed card-->
-
-<!-- ******************************************************************************** -->
-
-<!-- Start of screen 4 - Pending Activities card -->
-
-<!-- 
-<div *ngIf="showPendingActivities">
-
-</div> -->
-
-
-<!-- End of screen 4 - Pending Activities card-->
-
-<!-- ******************************************************************************** -->
-
-<!-- Start of screen 5 - View All Activities card -->
-
-
 <div *ngIf="showViewAllActivities">
   <div class="row">
     <div class="col vert-txt-center" *ngIf ="detail?.key !== 'submission'">
-      <p class="m-l-10px">Activity center > {{detail?.key =='allActivities'? 'All' : detail?.key | titlecase}} activities</p>
+      <p class="m-l-10px">Activity center &nbsp; > &nbsp;{{detail?.key =='allActivities'? 'All' : detail?.key | titlecase}} activities</p>
     </div>
     <div class="col vert-txt-center" *ngIf ="detail?.key == 'submission'">
-      <p class="m-l-10px txt-caps">{{courseDetails.name}} > Submission details</p>
+      <p class="m-l-10px txt-caps">{{courseDetails.name}} &nbsp;>&nbsp; Submission details</p>
     </div>
     <div class="col">
       <form class="search-form float_right search-viewactivities" style="display: inline-block; margin-right: 20px;">
@@ -82,7 +32,8 @@
   </div>
 
   <ag-grid-angular style="width: 99%; height:  calc(100vh - 50px); margin:auto !important;" class="ag-theme-alpine" 
-  [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" (gridReady)="onGridReady($event)" [rowModelType]="'infinite'" (sortChanged)="onSort($event)" >
+  [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" (gridReady)="onGridReady($event)" [rowModelType]="'infinite'"
+   (sortChanged)="onSort($event)" (filterModified)="activityFilter($event)" >
   <!-- [paginationPageSize]="paginationPageSize1" [cacheBlockSize]="cacheBlockSize" (gridReady)="onGridReady1($event)"
   [rowModelType]="'infinite'" (sortChanged)="rolesort($event)"
   (cellValueChanged)="onCellValueChanged1($event)"(filterModified)="roleFilter($event)" -->
@@ -91,7 +42,3 @@
 
 </div>
 
-
-<!-- End of screen 5 - View All Activities card-->
-
-<!-- ******************************************************************************** -->
