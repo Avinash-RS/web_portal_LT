@@ -269,18 +269,17 @@ export class LearnerActivityCenterComponent implements OnInit {
     }
   }
 
-  // onKeyChange(data) {
-  //   if (data.length >= 3) {
-  //     this.searchValue = data;
-  //     clearTimeout(this.delayTimer);
-  //     this.delayTimer = setTimeout(() => {
-  //       this.callGridApi(this.searchValue, this.sortType || 'undefined');
-  //     }, 500)
-
-  //   } else if (data.length === 0) {
-  //     this.closesearch();
-  //   }
-  // }
+  onKeyChange(quickSearchValue) {
+    if (quickSearchValue.length >= 3) {
+      this.searchValue = quickSearchValue;
+      clearTimeout(this.delayTimer);
+      this.delayTimer = setTimeout(() => {
+        this.callGridApi(this.sortrecord || 'undefined', this.searchValue, this.searchColumn || 'undefined');
+      }, 500);
+    } else if (quickSearchValue.length === 0) {
+      this.closesearch();
+    }
+  }
 
   // callGridApi(search, sortType, globalSearchValue) {
   //   this.gridApi.setDatasource({
@@ -304,20 +303,21 @@ export class LearnerActivityCenterComponent implements OnInit {
   //   });
   // }
 
-  // closesearch() {
-  //   this.quickSearchValue = null;
-  //   // this.paginationPageSize = 10;
-  //   this.searchValue = 'undefined';
-  //   this.sortType = 'undefined';
-  //   // this.callGridApi(
-  //     this.searchValue || 'undefined',
-  //     this.sortType || 'undefined',
-  //     'undefined'
-  //   );
-  // }
+  closesearch() {
+    this.quickSearchValue = null;
+    // this.paginationPageSize = 10;
+    // this.searchValue = 'undefined';
+    // this.sortType = 'undefined';
+    this.callGridApi(
+      this.sortrecord || 'undefined',
+       '',
+       this.searchColumn || 'undefined'
+    );
+  }
   callGridApi(sortValue, globalSearchValue, searchColumn) {
     this.sortrecord = sortValue;
     this.searchValue = globalSearchValue ? globalSearchValue : '';
+    console.log(this.searchValue);
     this.searchColumn = searchColumn;
     this.gridApi.setDatasource({
       getRows: (params: IGetRowsParams) => {
