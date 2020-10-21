@@ -318,9 +318,9 @@
         <div class="row">
           <div class="col text-right">
           <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="!isCollapsed"
-          (click)="isCollapsed = !isCollapsed; getSelectedIndex(i)" [expanded]="selectedIndex === i">keyboard_arrow_down</mat-icon>
+          (click)="isCollapsed = !isCollapsed; getSelectedIndex(i)">keyboard_arrow_down</mat-icon>
           <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="isCollapsed"
-          (click)="isCollapsed = !isCollapsed; getSelectedIndex(i)">keyboard_arrow_up</mat-icon>
+          (click)="isCollapsed = !isCollapsed;">keyboard_arrow_up</mat-icon>
         </div>
         </div>
       <div class="row">
@@ -399,17 +399,25 @@
               <div class="col-4">
                 <div class="f_size_16 f_wt_600 align-center">Your work</div>
                 <div class="box-0-2">
+                  <div class="box-0-3" *ngIf="fileName">
+                    <p class="selectedfile">
+                      <mat-icon class="fileIcon">add</mat-icon>{{fileName}}
+                      <mat-icon class="fileIcon">close</mat-icon>
+                    </p>
+                  </div><br>
                 <div class="align-center">
-                  <input type="file" style="display: none" #fileInput accept="image/*" 
+                  <input type="file" style="display: none" #fileInput [(ngModel)]="fileName"
                   (change)="uploadDoc($event)" />
                   <button mat-stroked-button  class="upload-btn" (click)="uploadDocs()"> 
                     <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                     Add your files
                   </button>
   
-                  <button mat-stroked-button  class="submit-btn"> 
+                  <button mat-stroked-button  class="submit-btn" (click)="learnerUploadVideo(project)"> 
                     Submit
-                  </button>
+                  </button><br>
+                  <p>Submitted files cannot be edited</p>
+                  <p *ngIf="showSubmittedon">Submitted on: {{project.projectActivity.submitted_on}}</p>
                 </div>
               </div>
               </div>

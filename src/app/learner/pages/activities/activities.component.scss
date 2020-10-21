@@ -210,6 +210,11 @@ margin-bottom: 1% !important;
   background-color: $color-white;
   border : 1px solid $color-border;
 }
+.box-0-3 {
+  background-color: $color-white;
+  border : 1px solid $color-border;
+  height: auto;
+}
 .groupBtn {
   border: 1px solid #5C6873;
   opacity: 1;
@@ -340,4 +345,11 @@ margin-top: 8px;
 .panel1 {
   margin-top: 15px;
   margin-left: 25px;
+}
+.selectedfile {
+  margin: 0px 10px 8px 10px;
+}
+.fileIcon {
+  position: relative;
+    top: 7px;
 }

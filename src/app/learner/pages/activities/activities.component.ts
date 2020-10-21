@@ -31,6 +31,8 @@ export class ActivitiesComponent implements OnInit {
   iterationDetails: any;
   selectedIndex = 0;
   selectfile: File;
+  showSubmittedon: boolean;
+  fileName: any;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService) {
 
@@ -50,6 +52,7 @@ export class ActivitiesComponent implements OnInit {
   }
   uploadDoc(event) {
     console.log('eve', event);
+    this.selectfile = event.target.files[0] as File;
   }
   uploadDocs() {
     this.fileInput.nativeElement.click();
@@ -185,5 +188,22 @@ export class ActivitiesComponent implements OnInit {
       });
     });
   }
-
+  learnerUploadVideo(project) {
+    const payload = new FormData();
+    payload.append('uploadvideo', this.selectfile, this.selectfile.name);
+    payload.append('course_id', 'r00owr2x');
+    payload.append('module_id', project.projectActivity.module_id);
+    payload.append('topic_id', project.projectActivity.topic_id);
+    payload.append('user_id', this.userDetail.user_id);
+    payload.append('submit_status', 'late');
+    payload.append('total_mark', project.projectActivity.total_mark);
+    payload.append('submitType', 'project');
+    payload.append('submitAction', 'true');
+    payload.append('iterationid', project.projectActivity.project_id);
+    payload.append('object_id', project.projectActivity._id);
+    this.Lservice.learnerUploadVideo(payload).subscribe((data: any) => {
+      console.log('output', data);
+      this.showSubmittedon = true;
+    });
+}
 }
