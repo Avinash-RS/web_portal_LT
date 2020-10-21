@@ -460,6 +460,7 @@ export class LearnerMyCourseComponent implements OnInit {
   }
   gotoSubmissionDetails(c) {
     localStorage.setItem('Courseid', c.course_id);
+    localStorage.setItem('key', 'submission');
     const detail = {
       id: c.course_id,
       name: c.course_name,

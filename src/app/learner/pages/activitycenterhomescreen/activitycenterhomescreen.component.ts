@@ -16,14 +16,15 @@ export class ActivitycenterhomescreenComponent implements OnInit {
               private gs: GlobalServiceService) { this.userDetails = this.gs.checkLogout(); }
 
   ngOnInit() {
-  this.get_active_course_count()
+    this.get_active_course_count();
   }
   gototable1() {
 
     this.router.navigateByUrl('/Learner/activitycenter');
   }
   gototable(e) {
-    console.log(e, 'ee');
+    // console.log(e, 'ee');
+    localStorage.setItem('key', e.key);
     const detail = {
       key: e,
     };
@@ -32,9 +33,9 @@ export class ActivitycenterhomescreenComponent implements OnInit {
   get_active_course_count() {
     const userId = this.userDetails.user_id;
     // this.service.get_active_course_count("egs8fv").subscribe((result: any) => {
-      this.service.get_active_course_count(userId).subscribe((result: any) => {
-      console.log(result, 'result');
-      this.details = result.data.get_active_course_count.message
+    this.service.get_active_course_count(userId).subscribe((result: any) => {
+      // console.log(result, 'result');
+      this.details = result.data.get_active_course_count.message;
     });
   }
 }

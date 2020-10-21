@@ -1515,8 +1515,8 @@ query getperformActivityData($userId: String , $courseId: String) {
 
 
 export const getCourseActivities = gql`
-      query  get_course_activities($user_id:String! ,$pagenumber:String!, $course_id:String! , $sort_type:String!, $searchvalue:String!,$searchcolumn:String!) {
-        get_course_activities(user_id:$user_id ,pagenumber:$pagenumber, course_id: $course_id ,sort_type: $sort_type,searchvalue: $searchvalue, searchcolumn:$searchcolumn) {
+      query  get_course_activities($user_id:String! ,$pagenumber:String!, $course_id:String! , $sort_type:String!, $searchvalue:String!,$searchcolumn:String!, $status: String!) {
+        get_course_activities(user_id:$user_id ,pagenumber:$pagenumber, course_id: $course_id ,sort_type: $sort_type,searchvalue: $searchvalue, searchcolumn:$searchcolumn, status: $status) {
           success
           message {
             _id
