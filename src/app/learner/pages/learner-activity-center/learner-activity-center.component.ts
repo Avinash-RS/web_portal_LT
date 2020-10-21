@@ -24,7 +24,8 @@ export class LearnerActivityCenterComponent implements OnInit {
   // Array
 
   // Number
-
+  paginationPageSize = 10;
+  cacheBlockSize: any = 10;
   // Any
   columnDefs: any;
   defaultColDef = {
@@ -90,8 +91,6 @@ export class LearnerActivityCenterComponent implements OnInit {
   courseDetails: any;
   sortrecord: string;
   rowDataLength: any;
-  paginationPageSize = 10;
-  cacheBlockSize: any = 10;
   columnSearch: any;
   statusBased: string;
 
@@ -116,18 +115,6 @@ export class LearnerActivityCenterComponent implements OnInit {
     this.gridApi.setDatasource(this.dataSources);
   }
 
-  // getCourseActivitiesforTable() {
-  //   // const userId = this.userDetails.user_id;
-  //   const userId = this.userDetails.user_id;
-  //   const PageNumber = '0';
-  //   const courseId = 'undefined';
-  //   const sortType = 'undefined';
-  //   const searchValue = 'undefined';
-  //   const searchColumn = 'undefined';
-  //   this.service.getCourseActivities(userId, PageNumber, courseId, sortType, searchValue, searchColumn).subscribe((result: any) => {
-  //     console.log(result, 'r');
-  //   });
-  // }
 
   tabledef() {
     if (this.detail?.key === 'submission') {
@@ -195,10 +182,6 @@ export class LearnerActivityCenterComponent implements OnInit {
       ];
   }
 
-
-
-
-
   goBack() {
     if (this.detail?.key === 'submission') {
       this.route.navigateByUrl('/Learner/MyCourse');
@@ -212,46 +195,14 @@ export class LearnerActivityCenterComponent implements OnInit {
       this.searchValue = quickSearchValue;
       clearTimeout(this.delayTimer);
       this.delayTimer = setTimeout(() => {
-        this.callGridApi(this.sortrecord || 'undefined', this.searchValue, this.searchColumn || 'undefined');
+        this.callGridApi(this.sortrecord || 'undefined', this.searchValue || '', 'undefined');
+        // this.callGridApi(this.sortrecord || 'undefined', this.searchValue || '', this.searchColumn || 'undefined');
       }, 500);
     } else if (quickSearchValue.length === 0) {
       this.closesearch();
     }
   }
 
-  // callGridApi(search, sortType, globalSearchValue) {
-  //   this.gridApi.setDatasource({
-  //     getRows: (params: IGetRowsParams) => {
-  //       const userId = this.userDetails.user_id;
-  //       const PageNumber = params.startRow / 10 || 0;
-  //       // this.filteredColumn = searchColumn;
-  //       // this.sortrecord = sortValue;
-  //       // this.rolefilterValue = globalSearchValue;
-  //       this.courseId = 'undefined';
-  //       this.sortType = 'undefined';
-  //       this.searchColumn = 'undefined';
-  //       this.service.getCourseActivities(userId, PageNumber, this.courseId, this.sortType, this.searchValue, this.searchColumn)
-  //         .subscribe((result: any) => {
-  //           // console.log(result, 'r');
-  //           params.successCallback(
-  //             result.data.get_course_activities.message, result.data.get_course_activities.total_count
-  //           );
-  //         });
-  //     }
-  //   });
-  // }
-
-  // closesearch() {
-  //   this.quickSearchValue = null;
-  //   // this.paginationPageSize = 10;
-  //   this.searchValue = 'undefined';
-  //   this.sortType = 'undefined';
-  //   // this.callGridApi(
-  //     this.searchValue || 'undefined',
-  //     this.sortType || 'undefined',
-  //     'undefined'
-  //   );
-  // }
   closesearch() {
     this.quickSearchValue = null;
     // this.paginationPageSize = 10;
@@ -259,8 +210,8 @@ export class LearnerActivityCenterComponent implements OnInit {
     // this.sortType = 'undefined';
     this.callGridApi(
       this.sortrecord || 'undefined',
-       '',
-       this.searchColumn || 'undefined'
+      '',
+      this.searchColumn || 'undefined'
     );
   }
   callGridApi(sortValue, globalSearchValue, searchColumnVal) {
@@ -314,7 +265,7 @@ export class LearnerActivityCenterComponent implements OnInit {
 
   onSort(data: any) {
     const sortState = this.gridApi.getSortModel();
-    console.log(sortState, 'ss');
+    // console.log(sortState, 'ss');
     if (sortState.length === 0) {
       this.sortrecord = 'undefined';
       this.callGridApi(this.sortrecord, this.searchValue || '', this.searchColumn);
@@ -338,8 +289,7 @@ export class LearnerActivityCenterComponent implements OnInit {
         const r = { [sortState[0]?.colId]: sortState[0]?.sort === 'asc' ? 1 : -1 };
         this.sortrecord = JSON.stringify(r);
       }
-      console.log(this.sortrecord, 'sr');
-      this.searchValue = '';
+      // console.log(this.sortrecord, 'sr');
       this.callGridApi(this.sortrecord, this.searchValue || '', this.searchColumn || 'undefined');
     }
   }
@@ -347,7 +297,7 @@ export class LearnerActivityCenterComponent implements OnInit {
     let searchString = null;
     const filterModel = this.gridApi.getFilterModel();
     searchString = this.gridApi.getFilterModel()[Object.keys(this.gridApi.getFilterModel())[0]]?.filter || null;
-    console.log(searchString);
+    // console.log(searchString);
     const filterArray = [];
     for (const keyd in filterModel) {
       if (filterModel) {
@@ -379,11 +329,12 @@ export class LearnerActivityCenterComponent implements OnInit {
     }
     if (filterArray.length > 0) {
       this.searchColumn = JSON.stringify(filterArray);
-      console.log(this.searchColumn, 'searchcol');
-      this.callGridApi(this.sortrecord || 'undefined', this.searchValue || '', this.searchColumn);
+      // console.log(this.searchColumn, 'searchcol');
+      this.callGridApi(this.sortrecord || 'undefined', '', this.searchColumn);
+      // this.callGridApi(this.sortrecord || 'undefined', this.searchValue || '', this.searchColumn);
     } else if (!searchString) {
       this.searchColumn = 'undefined';
-      this.callGridApi(this.sortrecord || 'undefined', this.searchValue || '', this.searchColumn);
+      this.callGridApi(this.sortrecord || 'undefined', '', this.searchColumn);
     }
   }
 }
