@@ -295,14 +295,21 @@
 
             <span class="f_wt_600 iterGrade" *ngIf="itrdata.grade_status == 'Evaluated'">  <span class="gradedot"></span>
             Graded</span>
-                    </mat-panel-description>
+                    </mat-panel-description>  
                   </mat-expansion-panel-header>
                   <div class="align-center">
-                    <button mat-stroked-button  class="upload-btn"> 
+                    <div class="videoPreview ml-auto mr-auto mb-3" *ngFor="let videoName of itrdata.videodetails">
+                      <mat-icon class="videoPlay float-left">play_circle_outline</mat-icon>
+                      <span>{{(videoName.name| slice:0:28)+'...'}}</span>
+                      <mat-icon class="closeBtn float-right" (click)="removeVideo(videoName, itrdata)">delete</mat-icon>
+                    </div>
+  
+                    <input type="file" accept="video/mp4" style="display: none" #fileInput [(ngModel)]="fileName"
+                    (change)="uploadDocument($event)" />
+                    <button mat-stroked-button  class="upload-btn mt-3" (click)="uploadDocuments(itrdata, perform, submitType = 'false')"> 
                       <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                       Upload video
                     </button>
-
                     <button mat-stroked-button  class="submit-btn"> 
                       Submit
                     </button>
@@ -423,6 +430,7 @@
                   </div>
                 </div><br>
                 <div class="align-center">
+                 
                   <input type="file" style="display: none" #fileInput [(ngModel)]="fileName"
                   (change)="uploadDoc($event, project, 'false')" />
                   <button mat-stroked-button  class="upload-btn" (click)="uploadDocs()"

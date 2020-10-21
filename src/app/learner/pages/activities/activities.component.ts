@@ -7,13 +7,18 @@ import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { appendFile } from 'fs';
 @Component({
   selector: 'app-activities',
   templateUrl: './activities.component.html',
-  styleUrls: ['./activities.component.scss']
+  styleUrls: ['./activities.component.scss'],
 })
 export class ActivitiesComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
+  selectPerformfile: any[] = [];
+  performsData: any;
+  itrationData: any;
   assignmentContent: any;
   courseStartDate: any;
   courseEndDate: any;
@@ -38,7 +43,7 @@ export class ActivitiesComponent implements OnInit {
   checkDetails: any;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
-              public route: Router) {
+              public route: Router, public datePipe: DatePipe) {
 
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
     this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
@@ -53,8 +58,7 @@ export class ActivitiesComponent implements OnInit {
     this.getperformActivityData();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   getSelectedIndex(i) {
     this.selectedIndex = i;
   }
@@ -69,34 +73,53 @@ export class ActivitiesComponent implements OnInit {
 
   // getperformActivityData
   getAssignmentmoduleData() {
-    this.Lservice.getAssignmentmoduleData(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
+    this.Lservice.getAssignmentmoduleData(
+      this.courseid,
+      this.userDetail.user_id
+    ).subscribe((data: any) => {
       this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
 
-      if (this.assignmentContent.courseStartDate && this.assignmentContent.courseEndDate) {
+      if (
+        this.assignmentContent.courseStartDate &&
+        this.assignmentContent.courseEndDate
+      ) {
         const batchStartDate = new Date(this.assignmentContent.courseStartDate);
         const batchEndDate = new Date(this.assignmentContent.courseEndDate);
         this.courseStartDate = moment(batchStartDate).format('DD-MM-YYYY');
         this.courseEndDate = moment(batchEndDate).format('DD-MM-YYYY');
-        this.assignmentContent.coursedetails.forEach(element => {
-          element.moduledetails.forEach(moduleData => {
-            moduleData.resourse.files.forEach(fileData => {
+        this.assignmentContent.coursedetails.forEach((element) => {
+          element.moduledetails.forEach((moduleData) => {
+            moduleData.resourse.files.forEach((fileData) => {
               if (fileData.startDate && fileData.endDate) {
                 const date1 = JSON.parse(JSON.stringify(fileData.startDate));
                 const date2 = JSON.parse(JSON.stringify(fileData.endDate));
                 const startDate = new Date(date1);
                 const endDate = new Date(date2);
-                fileData.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
-                fileData.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:MM');
-                if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate) {
+                fileData.assignmentStartDate = moment(startDate).format(
+                  'DD-MM-YYYY HH:MM'
+                );
+                fileData.assignmentEndDate = moment(endDate).format(
+                  'DD-MM-YYYY HH:MM'
+                );
+                if (
+                  moment().format('DD-MM-YYYY HH:MM') >=
+                  fileData.assignmentStartDate
+                ) {
                   fileData.enableView = true;
                 } else {
                   fileData.enableView = false;
                 }
-                if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate &&
-                  moment().format('DD-MM-YYYY HH:MM') <= this.courseEndDate) {
+                if (
+                  moment().format('DD-MM-YYYY HH:MM') >=
+                    fileData.assignmentStartDate &&
+                  moment().format('DD-MM-YYYY HH:MM') <= this.courseEndDate
+                ) {
                   fileData.enableUpload = true;
-                } else if (moment().format('DD-MM-YYYY HH:MM') < fileData.assignmentStartDate ||
-                  moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate) {
+                } else if (
+                  moment().format('DD-MM-YYYY HH:MM') <
+                    fileData.assignmentStartDate ||
+                  moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate
+                ) {
                   fileData.enableUpload = false;
                 }
               }
@@ -129,13 +152,37 @@ export class ActivitiesComponent implements OnInit {
     // this.addThreadForm?.reset();
   }
 
-  uploadAssignmentsFile(event, fileId, modulename, topicname, assName, score, endDate, path) {
+  uploadAssignmentsFile(
+    event,
+    fileId,
+    modulename,
+    topicname,
+    assName,
+    score,
+    endDate,
+    path
+  ) {
     this.assFile = event.target.files[0] as File;
-    this.postAssignmentsFile(fileId, modulename, topicname, assName, score, endDate, path);
-
+    this.postAssignmentsFile(
+      fileId,
+      modulename,
+      topicname,
+      assName,
+      score,
+      endDate,
+      path
+    );
   }
 
-  postAssignmentsFile(fileId, modulename, topicname, assName, score, endDate, path) {
+  postAssignmentsFile(
+    fileId,
+    modulename,
+    topicname,
+    assName,
+    score,
+    endDate,
+    path
+  ) {
     if (!score) {
       score = 50;
     }
@@ -143,13 +190,10 @@ export class ActivitiesComponent implements OnInit {
     const todayDate = moment().toDate();
     const startDate = moment(endDate).toDate();
     if (todayDate > startDate) {
-
       submitStatus = 'late';
-
     } else {
       submitStatus = 'ontime';
     }
-
 
     const payload = new FormData();
     payload.append('learnerdoc', this.assFile, this.assFile.name);
@@ -195,7 +239,7 @@ export class ActivitiesComponent implements OnInit {
   getperformActivityData() {
     this.Lservice.getperformActivityData(this.userDetail.user_id , this.courseid).subscribe((data: any) => {
       this.performDetails = data.data.getperformActivityData.data;
-      this.performDetails.forEach(element => {
+      this.performDetails.forEach((element) => {
         const startDate = new Date(element.performActivity.activitystartdate);
         element.activityStartDate = moment(startDate).format('ll');
         element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
@@ -232,5 +276,54 @@ export class ActivitiesComponent implements OnInit {
       this.showSubmittedon = true;
       this.getprojectActivityData();
     });
-}
+  }
+
+  // --------------------- Perform document upload ----------------------------
+
+  uploadDocument(event, perform) {
+    console.log('perform', perform);
+    this.selectPerformfile.push(event.target.files[0] as File);
+    this.performlearnerUploadVideo();
+  }
+
+  uploadDocuments(perform, performans) {
+    console.log('perform', perform);
+    console.log('performans', performans);
+    this.performsData = performans;
+    this.itrationData = perform;
+    this.fileInput.nativeElement.click();
+  }
+
+  performlearnerUploadVideo() {
+    console.log('this.performsData.activityEndDate', this.selectPerformfile);
+    const currentDate = new Date();
+    const performVideo = new FormData();
+    performVideo.append('uploadvideo' , this.selectPerformfile[0]);
+    performVideo.append('course_id', this.performsData.performActivity.course_id);
+    performVideo.append('module_id', this.performsData.performActivity.module_id);
+    performVideo.append('topic_id', this.performsData.performActivity.topic_id);
+    performVideo.append('user_id', this.userDetail.user_id);
+    performVideo.append('submit_status', 'ontime');
+    performVideo.append('total_mark', this.itrationData.total_mark);
+    performVideo.append('submitType', 'perform');
+    performVideo.append('submitAction', this.submitType);
+    performVideo.append('iterationid', this.itrationData.iterationid);
+    performVideo.append('object_id', this.performsData.performActivity.perform_id);
+    console.log('performVideo', performVideo);
+    this.Lservice.learnerUploadVideo(performVideo).subscribe((data: any) => {
+      console.log('uploaded', data);
+      if (data.success === true) {
+        this.toastr.success(data.message);
+        this.getperformActivityData();
+        this.selectPerformfile = [];
+      } else {
+        this.toastr.warning(data.message);
+      }
+    });
+  }
+
+  removeVideo(videoName) {
+    console.log('removeVideo', videoName);
+    // this.selectPerformfile = this.selectPerformfile.filter(data => data.lastModified !== videoName.lastModified);
+  }
 }

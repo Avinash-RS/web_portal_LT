@@ -1,0 +1,378 @@
+<div class="container pl-0 pr-0">
+  <div class="row ml-0 mr-0">
+    <div class="col-10 text-left m-auto moileView">
+      <span class="titleCase">{{ selectedName | titlecase }}</span>
+      <!-- <span *ngIf="course?.course_name?.length > 30">{{(course?.course_name | slice:0:20)+'...'}}</span> -->
+    </div>
+    <div class="col-2 text-right mobileHoriz">
+      <mat-icon class="ml-3 mt-3 mb-3" [matMenuTriggerFor]="menu"
+        >more_vert</mat-icon
+      >
+      <mat-menu #menu="matMenu">
+        <button
+          (click)="
+            selectedTabIndex = 0;
+            selectedName = detailDataToPerform?.course_name
+              ? detailDataToPerform?.course_name
+              : courceDetails?.course_name;
+            emiteData()
+          "
+          class="matTabMenu"
+          mat-menu-item
+        >
+          <span>{{
+            detailDataToPerform?.course_name
+              ? detailDataToPerform?.course_name
+              : courceDetails?.course_name
+          }}</span>
+        </button>
+        <button
+          (click)="
+            selectedTabIndex = 1; selectedName = 'About the course'; emiteData()
+          "
+          class="matTabMenu"
+          mat-menu-item
+        >
+          <span>About the course</span>
+        </button>
+        <button
+          (click)="
+            selectedTabIndex = 2; selectedName = 'Resources'; emiteData()
+          "
+          class="matTabMenu"
+          mat-menu-item
+        >
+          <span>Resources</span>
+        </button>
+        <button
+          (click)="
+            selectedTabIndex = 3; selectedName = 'Assignments'; emiteData()
+          "
+          class="matTabMenu"
+          mat-menu-item
+        >
+          <span>Assignments</span>
+        </button>
+        <button
+          (click)="selectedTabIndex = 4; selectedName = 'Forum'; emiteData()"
+          class="matTabMenu"
+          mat-menu-item
+        >
+          <span>Forum</span>
+        </button>
+        <button
+          (click)="selectedName = 'perform'"
+          class="matTabMenu"
+          mat-menu-item
+        >
+          <span>Perform</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  <div class="row mr-0 ml-0" *ngIf="!performdetailPage">
+    <div class="col-sm-12">
+      <mat-card
+        class="performCard"
+        (click)="performdetailPage = !performdetailPage"
+      >
+        <div class="row ml-0 mr-0">
+          <div class="col-6 pl-0">
+            <p class="subTittle">1. Polution and Corosion</p>
+            <span
+              >Pollution is the introduction of contaminants into the natural
+              environment that cause adverse change.
+            </span>
+          </div>
+          <div class="col-6 pl-0 pr-0">
+            <div class="row mr-0 ml-0 mb-4">
+              <div class="col-12 pl-0 pr-0 text-right">
+                <span>Yet to Submit</span>
+              </div>
+            </div>
+            <div class="row mr-0 ml-0 mb-3">
+              <div class="col-12 pl-0 pr-0 text-right">
+                <span>Itrations: 5</span>
+              </div>
+            </div>
+            <div class="row mr-0 ml-0 mt-4">
+              <div class="col-6 mr-0 pl-0 pr-0 text-left">
+                <span>Start date:</span><br />
+                <span>Sep 23,2020</span>
+              </div>
+              <div class="col-6 mr-0 pl-0 pr-0 text-left">
+                <span class="m-l-5">End date:</span><br />
+                <span class="m-l-5">Sep 25,2020</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="row ml-0 mr-0" *ngIf="performdetailPage">
+    <div class="col-12 pl-0 pr-0">
+      <div class="row ml-0 mr-0">
+        <div class="col-12 text-left">
+          <mat-icon class="arrowPopup mr-2" aria-hidden="false" (click)="performdetailPage = !performdetailPage">
+            keyboard_backspace</mat-icon>
+          <span class="f_wt_600 size catnamenew" (click)="performdetailPage = !performdetailPage">Back</span>
+        </div>
+      </div>
+      <div class="row ml-0 mr-0 mt-3">
+        <div class="col-8 pr-0">
+          <p class="subTittle">1. Polution and Corosion</p>
+          <span
+            >Pollution is the introduction of contaminants into the natural
+            environment that cause adverse change.
+          </span>
+        </div>
+        <div class="col-4 text-right">
+          <p class="yettoSubmit">Yet to submit</p>
+          <p class="itration">5 Itrations</p>
+          <p class="yettoSubmit">Total Score</p>
+          <p>- / 100</p>
+        </div>
+      </div>
+      <div class="row ml-0 mr-0 mt-3">
+        <div class="col-4 pr-0">
+          <p class="yettoSubmit">Activity name</p>
+          <p class="brickMaking">Brick making</p>
+        </div>
+        <div class="col-8 pr-0">
+          <div class="row mr-0 ml-0">
+            <div class="col-2 mr-0 pl-0 pr-0 text-left"></div>
+            <div class="col-5 mr-0 pl-0 pr-0 text-left">
+              <span class="font-weight-bold">Start date:</span><br />
+              <span>Sep 23,2020</span>
+            </div>
+            <div class="col-5 mr-0 pl-0 pr-0 text-left">
+              <span class="m-l-5 font-weight-bold">End date:</span><br />
+              <span class="m-l-5">Sep 25,2020</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row ml-0 mr-0">
+        <div class="col-sm-12 text-left">
+          <span>Material for activity (4)</span>
+        </div>
+      </div>
+      <div class="row ml-0 mr-0 mt-3">
+        <div class="col-12 text-left pl-0 pr-0">
+          <div id="demo" class="carousel" data-ride="carousel">
+            <!-- The slideshow -->
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row ml-0 mr-0">
+                  <div class="col-4 text-left pr-0">
+                <mat-card class="materialCard p-0 mr-2">
+                  <div class="row ml-0 mr-0 matCardIconRow">
+                    <div class="col-12 pl-0 pr-0">
+                      <i class="fa fa-file-pdf-o icons" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <div class="row ml-0 mr-0 h-40" class="fileSelDet">
+                    <div class="col-12">
+                      <span class="fileColor">x0avfd_001.pdf</span><br>
+                      <span class="fileColor">Reference</span>
+                    </div>
+                  </div>
+                </mat-card>
+                </div>
+                <div class="col-4 text-left pr-0">
+                  <mat-card class="materialCard p-0 mr-2">
+                    <div class="row ml-0 mr-0 matCardIconRow">
+                      <div class="col-12 pl-0 pr-0">
+                        <i class="fa fa-file-pdf-o icons" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                    <div class="row ml-0 mr-0 h-40" class="fileSelDet">
+                      <div class="col-12">
+                        <span class="fileColor">x0avfd_001.pdf</span><br>
+                        <span class="fileColor">Reference</span>
+                      </div>
+                    </div>
+                  </mat-card>
+                  </div>
+                  <div class="col-4 text-left pr-0">
+                    <mat-card class="materialCard p-0 mr-2">
+                      <div class="row ml-0 mr-0 matCardIconRow">
+                        <div class="col-12 pl-0 pr-0">
+                          <i class="fa fa-file-pdf-o icons" aria-hidden="true"></i>
+                        </div>
+                      </div>
+                      <div class="row ml-0 mr-0 h-40" class="fileSelDet">
+                        <div class="col-12">
+                          <span class="fileColor">x0avfd_001.pdf</span><br>
+                          <span class="fileColor">Reference</span>
+                        </div>
+                      </div>
+                    </mat-card>
+                    </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row ml-0 mr-0">
+                  <div class="col-4 text-left pr-0">
+                <mat-card class="materialCard p-0 mr-2">
+                  <div class="row ml-0 mr-0 matCardIconRow">
+                    <div class="col-12 pl-0 pr-0">
+                      <i class="fa fa-file-pdf-o icons" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <div class="row ml-0 mr-0 h-40" class="fileSelDet">
+                    <div class="col-12">
+                      <span class="fileColor">x0avfd_001.pdf</span><br>
+                      <span class="fileColor">Reference</span>
+                    </div>
+                  </div>
+                </mat-card>
+                </div>
+                <div class="col-4 text-left pr-0">
+                  <mat-card class="materialCard p-0 mr-2">
+                    <div class="row ml-0 mr-0 matCardIconRow">
+                      <div class="col-12 pl-0 pr-0">
+                        <i class="fa fa-file-pdf-o icons" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                    <div class="row ml-0 mr-0 h-40" class="fileSelDet">
+                      <div class="col-12">
+                        <span class="fileColor">x0avfd_001.pdf</span><br>
+                        <span class="fileColor">Reference</span>
+                      </div>
+                    </div>
+                  </mat-card>
+                  </div>
+                  <div class="col-4 text-left pr-0">
+                    <mat-card class="materialCard p-0 mr-2">
+                      <div class="row ml-0 mr-0 matCardIconRow">
+                        <div class="col-12 pl-0 pr-0">
+                          <i class="fa fa-file-pdf-o icons" aria-hidden="true"></i>
+                        </div>
+                      </div>
+                      <div class="row ml-0 mr-0 h-40" class="fileSelDet">
+                        <div class="col-12">
+                          <span class="fileColor">x0avfd_001.pdf</span><br>
+                          <span class="fileColor">Reference</span>
+                        </div>
+                      </div>
+                    </mat-card>
+                    </div>
+                </div>
+              </div>
+            </div>
+          
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </a>
+          
+          </div>
+          
+          <!-- <mat-card class="materialCard p-0 mr-2">
+            <div class="row ml-0 mr-0">
+              <div class="col-12 pl-0 pr-0">
+                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+              </div>
+            </div>
+            <div class="row ml-0 mr-0" class="fileSelDet">
+              <div class="col-12">
+                <span class="fileColor">x0avfd_001.pdf</span><br>
+                <span class="fileColor">Reference</span>
+              </div>
+            </div>
+          </mat-card>
+          <mat-card class="materialCard p-0">
+            <div class="row ml-0 mr-0">
+              <div class="col-12 pl-0 pr-0">
+                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+              </div>
+            </div>
+            <div class="row ml-0 mr-0" class="fileSelDet">
+              <div class="col-12">
+                <span class="fileColor">x0avfd_001.pdf</span><br>
+                <span class="fileColor">Reference</span>
+              </div>
+            </div>
+          </mat-card> -->
+        </div>
+      </div>
+      <div class="row ml-0 mr-0">
+        <div class="col-12">
+      
+        </div>
+      </div>
+      <div class="row ml-0 mr-0">
+        <div class="col-12 pl-2 pr-2">
+          <mat-card class="matCard mt-3">
+            <div class="row ml-0 mr-0">
+              <div class="col-3 pr-0 pl-0 text-left">
+                <span>Itration 1</span>
+              </div>
+              <div class="col-4 pr-0 pl-0 text-center">
+                <span>Score 80 / 100</span>
+              </div>
+              <div class="col-5 pr-0">
+                <span class="text-gray">Yet to Submit</span>
+                <!-- <span class="text-success">Graded</span>&nbsp;&nbsp;
+                <span class="text-primary">pass</span>&nbsp;&nbsp; -->
+                <mat-icon class="matIcon" *ngIf="!arrowUP" (click)="arrowUP = !arrowUP">keyboard_arrow_down</mat-icon>
+                <mat-icon class="matIcon" *ngIf="arrowUP" (click)="arrowUP = !arrowUP">keyboard_arrow_up</mat-icon>
+              </div>
+            </div>
+            <div class="row ml-0 mr-0" *ngIf="arrowUP">
+              <div class="col-12">
+                <button mat-raised-button class="recordBtn mt-3 w-100"><mat-icon class="video-icon">videocam <i class="fa fa-youtube-play playBtn" aria-hidden="true"></i></mat-icon> Record Video
+                </button>
+                <button mat-stroked-button class="uploadBtn mt-3 w-100"><mat-icon class="add-icon">add</mat-icon>Upload Videos</button>
+                <button mat-stroked-button class="submitBtn mt-3" [disabled]="true">Submit</button>
+              </div>
+
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-------------------------- Preview Video --------------------------------->
+  <div class="row ml-0 mr-0 previewVideoScreen" *ngIf="videoPerview">
+    <div class="col-12 pl-0 pr-0">
+      <div class="row ml-0 mr-0">
+        <div class="col-12 text-left mt-2">
+          <span class="previewTxt">Preview Video</span>
+          </div>
+          </div>
+          <div class="row ml-0 mr-0 p-3">
+            <div class="col-12 previewCol">
+              <mat-card class="previewCard m-auto p-0">
+                <div class="row ml-0 mr-0">
+                  <div class="col-12 pl-0 pr-0">
+                    <video width="100%" controls class="videoCell">
+                      <source src="https://www.youtube.com/watch?v=VHENoFDoLds">
+                      Your browser does not support HTML video.
+                    </video>
+                  </div>
+                </div>
+                <div class="row ml-0 mr-0">
+                  <div class="col-12 text-left">
+                    <p class="textSize mt-3">file name x151</p>
+                    <p class="textSize"><span class="font-weight-bold">MP4 . </span>&nbsp; Recorded on: Sep 24, 2020</p>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+          <div class="row ml-0 mr-0 mt-2">
+            <div class="col-12">
+              <button mat-stroked-button class="cancelBtn mr-4" (click)="videoPerview = !videoPerview">Cancel</button>
+              <button mat-stroked-button class="saveBtn" (click)="videoPerview = !videoPerview">Save</button>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>

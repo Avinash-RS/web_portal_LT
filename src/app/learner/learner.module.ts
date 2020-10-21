@@ -65,6 +65,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatMenuModule } from '@angular/material/menu';
 import { LearnermycourseService } from './pages/learner-my-course/learnermycourse.service';
+import { PerformancePageMobileComponent } from './pages/performance-page-mobile/performance-page-mobile.component';
+import { SelfLearnerAvtivityComponent } from './pages/self-learner-avtivity/self-learner-avtivity.component';
 import { ActivitiesComponent } from './pages/activities/activities.component';
 import { DiscussionForumComponent } from './pages/discussion-forum/discussion-forum.component';
 import { LearnerActivityCenterComponent } from './pages/learner-activity-center/learner-activity-center.component';
@@ -135,6 +137,15 @@ const routes: Routes = [
     component: LearnerMyCourseComponent,
     // canActivate: [AuthGuard],
     data: { animation: 'Learner  MyCourse' }
+  },
+  {
+    path: 'SelfLearner',
+    component: SelfLearnerAvtivityComponent,
+    // resolve: {
+    //   data: LearnermycourseService
+    //   },
+    // canActivate: [AuthGuard],
+    data: { animation: 'Self Learner Avtivity' }
   },
   {
     path: 'resetpassword',
@@ -237,6 +248,8 @@ const routes: Routes = [
     LandingpageComponent,
     LearnerCalendarComponent,
     ViewAllnotificationsComponent,
+    PerformancePageMobileComponent,
+    SelfLearnerAvtivityComponent,
     ActivitiesComponent,
     DiscussionForumComponent,
     LearnerActivityCenterComponent,

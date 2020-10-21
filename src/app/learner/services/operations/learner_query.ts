@@ -1476,7 +1476,7 @@ query getperformActivityData($userId: String , $courseId: String) {
     data {
       _id
       performActivity {
-        _id
+        perform_id
         activitystartdate
         activityenddate
         submit_status

@@ -47,6 +47,10 @@ export class CommonServicesService {
   appliedCategory$ = new Subject<any>();
   appliedCategory = this.appliedCategory$.asObservable();
 
+  //performance mobile Responsive
+  menuSelectedPerform$ = new Subject<any>();
+  menuSelectedPerform = this.menuSelectedPerform$.asObservable();
+
   loader$ = new Subject<boolean>();
   loader = this.loader$.asObservable();
 
