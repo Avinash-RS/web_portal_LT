@@ -17,6 +17,7 @@ import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
 
 import { TranslateService } from '@ngx-translate/core';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-coursedetails',
@@ -488,6 +489,7 @@ export class CoursedetailsComponent implements OnInit {
     this.dialog.open(templateRef, {
       width: '100%',
       height: '100%',
+      scrollStrategy: new NoopScrollStrategy(),
       closeOnNavigation: true,
       disableClose: true,
     });
