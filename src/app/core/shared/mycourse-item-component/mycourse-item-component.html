@@ -34,7 +34,7 @@
                   <mat-icon class="text"> play_arrow </mat-icon>
                 </div>
               </div>
-              <img alt="Course Img" src="{{ course.course_img_url }}" class="courseImg" />
+              <img alt="Course Img" src="{{ course.course_img_url }}"  class="courseImg" />
             </div>
             <div class="coursePoints">
               <table class="f_size_12">
@@ -82,7 +82,7 @@
                 : "1" + "hour"
             }}</p>
             </div>
-            <div class="col-2">
+            <div class="col-2 no_padding">
               Credits: -
             </div>
           </div>
@@ -154,12 +154,12 @@
             </div>
             <div class="col-4">
               <div class="row m-auto">
-                <div class="progess pointer ">
+                <div class=" pointer ">
                   <circle-progress [percent]="course?.coursePlayerStatus?.course_percentage || 0" [radius]="10"
                     [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'"
-                    [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="3" [subtitleFontSize]="6" [animation]="true"
-                    [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" subtitle="11/16"
-                    [showUnits]="false" [showSubtitle]="true">
+                    [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="4" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true"
+                    [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" subtitle="--/--"
+                    [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=500>
                   </circle-progress>
                 </div>
 
@@ -167,18 +167,18 @@
               <div class="row m-auto">
                 <div class="col ">
                   <button mat-stroked-button class="blue_clr cap  pointer m-t-05">
-                    <span class="cap f_size_12 f_wt_400 m-t-m-2">
+                    <span class="cap f_size_12 f_wt_400 ">
                       {{ "Course report" | translate }}&nbsp;
                     </span>
                   </button>
                 </div>
               </div>
-              <div class="row m-auto">
+              <!-- <div class="row m-auto">
                 <div class="col justify-content-center align-self-center">
                   <a class="" style="color: red; font-size: 10px !important;" href="">View assessment
                     report</a>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -217,7 +217,8 @@
                     </span>
                     <div *ngIf="course.progressionExp" class="f_size_12">
                       Modules completed --/--<br>
-                      Topics completed --/--
+                      Topics completed --/--<br>
+                      <span class="pointer f_size_10" style="color: red; text-decoration: underline;" (click)="goToForum(course)">View self-learning activity details..</span>
                     </div>
                   </div>
                 </div>
@@ -273,9 +274,11 @@
                       <mat-icon *ngIf="course.discussExp" class="f_size_10" fontSet="material-icons-outlined">
                         keyboard_arrow_up</mat-icon>
                     </span>
-                    <div *ngIf="course.discussExp" class="f_size_12">
-                      Modules completed --/--<br>
-                      Topics completed --/--
+                    <div *ngIf="course.discussExp" class="f_size_13">
+                      Threads --<br>
+                      Comments --<br>
+                      Replies --<br>
+                      <span class="pointer f_size_10" style="color: red; text-decoration: underline;" (click)="goToForum(course)">View discussions..</span>
                     </div>
                   </div>
                 </div>
@@ -312,9 +315,9 @@
                       <mat-icon *ngIf="course.ledinstExp" class="f_size_10" fontSet="material-icons-outlined">
                         keyboard_arrow_up</mat-icon>
                     </span>
-                    <div *ngIf="course.ledinstExp" class="f_size_12">
-                      Modules completed --/--<br>
-                      Topics completed --/--
+                    <div *ngIf="course.ledinstExp" class="f_size_13">
+                      Sessions attended --/--<br>
+                      <span class="pointer f_size_10" style="color: red; text-decoration: underline;" (click)="goToForum(course)">View sessions details..</span>
                     </div>
                   </div>
                 </div>
@@ -352,9 +355,10 @@
                       <mat-icon *ngIf="course.activityExp" class="f_size_10" fontSet="material-icons-outlined">
                         keyboard_arrow_up</mat-icon>
                     </span>
-                    <div *ngIf="course.activityExp" class="f_size_12">
-                      Modules completed --/--<br>
-                      Topics completed --/--
+                    <div *ngIf="course.activityExp" class="f_size_13">
+                      Assignments completed --/--<br>
+                      projects completed --/--<br>
+                      <span class="pointer f_size_10" style="color: red; text-decoration: underline;" (click)="gotoSubmissionDetails(course)">View submission details..</span>
                     </div>
                   </div>
                   <!-- <div class="row m-auto">
