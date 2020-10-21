@@ -370,8 +370,10 @@ export class CoursedetailsComponent implements OnInit {
   // get Scrom module and topic
   playerModuleAndTopic(setPageFlag) {
     this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
-      this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
-      this.scromModuleData = this.scromApiData?.childData;
+      if (data.data?.playerModuleAndTopic) {
+        this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
+        this.scromModuleData = this.scromApiData?.childData;
+      }
       // const tabGroup = this.demo3Tab;
       // if (!tabGroup || !(tabGroup instanceof MatTabGroup)) { return; }
 

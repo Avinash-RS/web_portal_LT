@@ -1041,29 +1041,99 @@ export const get_read_learner_activity = gql`
 export const playerModuleAndTopic = gql`
   query playerModuleAndTopic($contentID: String, $user_id: String) {
     playerModuleAndTopic(contentID: $contentID, user_id: $user_id) {
-      message {
+      success
+    message{
+      total_topic_len
+      _id
+      url
+      course_id
+      childData{
+        title
         _id
-        url
-        total_topic_len
-        course_id
-        childData {
-          title
+        status
+        moduletime
+        topic_len
+        children{
           _id
+          title
+          link
+          isVisible
           status
-          topic_len
-          moduletime
-          children {
-            _id
-            title
-            link
-            status
-            isVisible
+          children{
+          	_id
+          	title
+          	link
+          	isVisible
+          	status
+            children{
+              	_id
+          		title
+          		link
+          		isVisible
+          		status
+              children{
+                	_id
+          			title
+          			link
+          			isVisible
+          			status
+                children{
+                  	_id
+          					title
+          					link
+          					isVisible
+          					status
+                  	children{
+                      	_id
+          						title
+          						link
+          						isVisible
+          						status
+                      children{
+                        	_id
+          								title
+          								link
+          								isVisible
+          								status
+                        	children{
+                            	_id
+          										title
+          										link
+          										isVisible
+          										status
+                            	children{
+                                	_id
+          												title
+          												link
+          												isVisible
+          												status
+                                	children{
+                                    	_id
+          														title
+          														link
+          														isVisible
+          														status
+                                    	children{
+                                        	_id
+          																title
+          																link
+          																isVisible
+          																status
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                    }
+                }
+              }
+            }
           }
         }
       }
-      success
     }
   }
+}
 `;
 export const ViewSingleTopicDiscussionData = gql`
   query ViewSingleTopicDiscussionData($topic_slug: String, $uid: Int!) {

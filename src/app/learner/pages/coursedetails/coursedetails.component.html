@@ -62,10 +62,10 @@
                                                     <div
                                                         [ngClass]="res?.status == 'Passed'? 'moduleHeadRead' : 'moduleHeadUnread'">
                                                         <div class="modhead">
-                                                            <p *ngIf="res?.title.length >= 67" class="moduleName"
+                                                            <p *ngIf="res?.title?.length >= 67" class="moduleName"
                                                                 tooltip="{{res?.title}}" placement="right">
                                                                 {{res?.title | slice:0:71}}...</p>
-                                                            <p *ngIf="res?.title.length < 67" class="moduleName">
+                                                            <p *ngIf="res?.title?.length < 67" class="moduleName">
                                                                 <!-- {{res?.title}} -->
                                                                 {{res?.title}}
                                                             </p>
@@ -98,11 +98,11 @@
                                     </mat-expansion-panel-header>
                                     <div class="row">
                                         <div class="col-12">
-                                            <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title.length > 39?'headerDown':
+                                            <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title?.length > 39?'headerDown':
                                 ''">
                                                 <ng-container *ngFor="let mod of res?.children; let j = index">
-                                                    <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
-                                        mod.status === 'Process' ? 'colYellow' : 'colWhite'">
+                                                    <mat-step [aria-labelledby]="mod?.status === 'Passed' ? 'colgreen' : 
+                                        mod?.status === 'Process' ? 'colYellow' : 'colWhite'">
                                                         <ng-template matStepLabel>
                                                             <!-- // Satish comment  -->
                                                             <!-- <span *ngIf="mod?.title?.length > 20" tooltip="{{mod?.title}}"
@@ -114,11 +114,11 @@
                                                             <span class="topicnm"
                                                                 (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)">
                                                                 <!-- {{mod?.title}} -->
-                                                                <p class="titleName" *ngIf="mod?.title.length >= 65"
+                                                                <p class="titleName" *ngIf="mod?.title?.length >= 65"
                                                                     tooltip="{{mod?.title}}" placement="right">
                                                                     {{mod?.title | slice:0:69}}...
                                                                 </p>
-                                                                <p class="titleName" *ngIf="mod?.title.length < 65">
+                                                                <p class="titleName" *ngIf="mod?.title?.length < 65">
                                                                     {{mod?.title}}
                                                                 </p>
                                                             </span>
