@@ -370,7 +370,7 @@
               <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated'">  <span class="gradedot"></span>
               Graded</span>
             </div>
-          </div><br>
+          </div>
           <div class="row" *ngIf="project.projectActivity.grade_status == 'Evaluated'">
             <div class="col text-right">
               <p class="totscore">Total score: {{project.projectActivity.score_mark}}/{{project.projectActivity.total_mark}}</p>
@@ -416,45 +416,80 @@
               <div class="col-4" *ngIf="project.projectActivity.grade_status == 'Not Evaluated'">
                 <div class="f_size_16 f_wt_600 align-center">Your work</div>
                 <div class="box-0-2">
-                  <div class="box-0-3" *ngIf="fileName">
+                  <!-- <div class="box-0-3" *ngIf="fileName">
                     <p class="selectedfile">
                       <mat-icon class="fileIcon">add</mat-icon>{{fileName}}
                       <mat-icon class="fileIcon">close</mat-icon>
-                    </p>
-                  </div><br>
+                    </p> -->
+
+                    <div class="videoPreview ml-auto mr-auto mb-3" *ngFor="let item of project.projectActivity.videodetails">
+                      <mat-icon class="videoPlay float-left">play_circle_outline</mat-icon>
+                      <span>{{(item.name| slice:0:28)+'...'}}</span>
+                      <mat-icon class="closeBtn float-right">delete</mat-icon>
+                    </div>
+                  <!-- </div><br>
                   <div *ngIf="project.projectActivity.videodetails">
                   <div class="box-0-3" *ngFor="let item of project.projectActivity.videodetails">
                     <p class="selectedfile">
                       <mat-icon class="fileIcon">add</mat-icon>{{item.name}}
                     </p>
                   </div>
-                </div><br>
+                </div><br> -->
                 <div class="align-center">
                  
-                  <input type="file" style="display: none" #fileInput [(ngModel)]="fileName"
-                  (change)="uploadDoc($event, project, 'false')" />
+                  <input type="file" style="display: none" accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" 
+                  #fileInput [(ngModel)]="fileName"
+                  (change)="uploadDoc($event, project, false)" />
                   <button mat-stroked-button  class="upload-btn" (click)="uploadDocs()"
                   [disabled]="project.enableSubmit == false"> 
                     <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                     Add your files
                   </button>
   
-                  <button mat-stroked-button [disabled]="project.enableSubmit == false" class="submit-btn" (click)="learnerUploadVideo(project, 'true')"
-                  *ngIf="project.projectActivity.submitAction == 'false'"> 
+                  <button mat-stroked-button [disabled]="project.enableSubmit == false" class="submit-btn" (click)="learnerUploadVideo(project, true)"> 
                     Submit
                   </button><br>
-                  <button mat-stroked-button  class="submit-btn" *ngIf="project.projectActivity.submitAction == 'true'"> 
+                  <!-- <button mat-stroked-button  class="submit-btn" *ngIf="project.projectActivity.submitAction == 'true'"> 
                     Submitted
-                  </button><br>{{project.projectActivity.submitAction}}
+                  </button><br> -->
                   <p *ngIf="fileName && !showSubmittedon">Submitted files cannot be edited</p>
-                  <p *ngIf="showSubmittedon">Submitted on: {{project.projectActivity.submitted_on}}</p>
+                  <p *ngIf="showSubmittedon">Submitted on: {{project.submittedOn}}</p>
                 </div>
               </div>
               </div>
             </div>
             
-          </div>
+          </div><br>
+
+           <!-------------------------------------Your files--------------------------------------->
+        <div class="panel1" *ngIf="isCollapsed && i == selectedIndex && project.projectActivity.grade_status == 'Evaluated'">
+          <div class="row">
+            <div class="col-8">
+              <div class="f_size_16 f_wt_600">Your submissions</div>
+              <div class="row" *ngFor="let video of project.projectActivity.videodetails">
+                <div class="col-4 m-t">
+                  <img alt="Course Img" src="../../../../assets/images/play.jpg" class="courseImg" />
+                  <div class="con">
+                  <div class="uppertext">{{video.name}}</div>
+                  <div class="overlay">
+                   <span class="margin-5">Duration : 01:20:00</span> 
+                  <div class="row ">
+                    <div class="col-6 dis-line">
+                      <mat-icon  class="f_size_14" aria-hidden="false">play_circle_outline</mat-icon>Preview
+                    </div>
+                    <div class="col-6 dis-line">
+                      <mat-icon class="f_size_14" aria-hidden="false">get_app</mat-icon>Download
+                    </div>
+                  </div>
+                </div>
+              </div>
+                </div>
+              </div>
+            </div>
+            </div>
         </div>
+        </div>
+       
        <!------------------------------------Learner list------------------------------->
         <div class="col-2 learnerList" *ngIf="openList">
           <div class="align-center">{{project.projectActivity.groupname}} ({{project.projectActivity.groupcount}})

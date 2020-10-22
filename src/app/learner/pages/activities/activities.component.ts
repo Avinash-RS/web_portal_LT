@@ -36,7 +36,7 @@ export class ActivitiesComponent implements OnInit {
   performDetails: any;
   iterationDetails: any;
   selectedIndex = 0;
-  selectfile: File;
+  selectfile = [];
   showSubmittedon = false;
   fileName: any;
   submitType: any;
@@ -63,8 +63,10 @@ export class ActivitiesComponent implements OnInit {
     this.selectedIndex = i;
   }
   uploadDoc(event, project, submitAction) {
-    console.log('sub', submitAction);
-    this.selectfile = event.target.files[0] as File;
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < event.target.files.length; i++) {
+      this.selectfile.push(event.target.files[i]);
+  }
     this.learnerUploadVideo(project, submitAction);
   }
   uploadDocs() {
@@ -217,7 +219,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   getprojectActivityData() {
-    this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
+    this.Lservice.getprojectActivityData(this.userDetail.user_id, 'r00owr2x').subscribe((data: any) => {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
       this.projectDetails = data.data.getprojectActivityData.data;
       this.projectDetails.forEach(element => {
@@ -226,6 +228,8 @@ export class ActivitiesComponent implements OnInit {
         element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
         const endDate = new Date(element.projectActivity.activityenddate);
         element.activityEndDate = moment(endDate).format('ll');
+        const submitDate = new Date(element.projectActivity.submitted_on);
+        element.submittedOn = moment(submitDate).format('ll');
         if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
           element.enableSubmit = false;
         } else {
@@ -261,7 +265,11 @@ export class ActivitiesComponent implements OnInit {
       submitStatus = 'late';
     }
     const payload = new FormData();
-    payload.append('uploadvideo', this.selectfile, this.selectfile.name);
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.selectfile.length; i++) {
+      payload.append('uploadvideo', this.selectfile[i]);
+    }
+    // payload.append('uploadvideo', this.selectfile, this.selectfile.name);
     payload.append('course_id', 'r00owr2x');
     payload.append('module_id', project.projectActivity.module_id);
     payload.append('topic_id', project.projectActivity.topic_id);
@@ -273,8 +281,13 @@ export class ActivitiesComponent implements OnInit {
     payload.append('iterationid', project.projectActivity.project_id);
     payload.append('object_id', project.projectActivity.project_id);
     this.Lservice.learnerUploadVideo(payload).subscribe((data: any) => {
-      this.showSubmittedon = true;
-      this.getprojectActivityData();
+      if (data.success === true) {
+        this.toastr.success(data.message);
+        this.showSubmittedon = true;
+        this.getprojectActivityData();
+      } else {
+        this.toastr.warning(data.message);
+      }
     });
   }
 
