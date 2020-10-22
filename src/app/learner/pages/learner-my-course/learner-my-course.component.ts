@@ -385,6 +385,12 @@ export class LearnerMyCourseComponent implements OnInit {
     };
     this.router.navigateByUrl('/Learner/scorm', { state: { detail: detail1 } });
   }
+Go(course) {
+    const data1 = {
+      courseId: course.course_id
+    };
+    this.router.navigateByUrl('/Learner/activities', { state:  { data:  data1 } });
+  }
 
   gotoDesc(c) {
     const detail = {
