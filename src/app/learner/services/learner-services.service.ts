@@ -885,7 +885,7 @@ export class LearnerServicesService {
       }
     });
   }
-  getCourseActivities(userId, PageNumber, courseId, sortType, searchValue, searchColumn) {
+  getCourseActivities(userId, PageNumber, courseId, sortType, searchValue, searchColumn, statusBased) {
     return this.Apollo.query({
       query: getCourseActivities,
       variables: {
@@ -894,7 +894,8 @@ export class LearnerServicesService {
         course_id: courseId,
         sort_type: sortType,
         searchvalue: searchValue,
-        searchcolumn: searchColumn
+        searchcolumn: searchColumn,
+        status: statusBased,
       }
     });
   }

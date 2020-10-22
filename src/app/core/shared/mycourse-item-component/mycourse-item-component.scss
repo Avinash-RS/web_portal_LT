@@ -277,7 +277,7 @@
   height: 0%;
   transition: 1s ease;
   display: none;
-  background-color: #898989;
+  background-color: #5C6873;
   color: white;
 
 }
@@ -2549,6 +2549,9 @@ li {
 .gold-line-r {
   border-right: solid 1px #cccccc7a
 }
+.gold-line-l{
+  border-left: solid 1px #cccccc7a
+}
 
 //Lienear progress bar
 ::ng-deep .mat-progress-bar-fill::after {
@@ -2574,11 +2577,14 @@ li {
 .cardHeights{
   min-height: 150px !important;
   margin-top:15px;
-  //margin-bottom:15px;
+  margin-bottom:15px;
 }
 .inner {
   width: 80%;
   height: 1px;
   margin: 0px auto;
   border-bottom: 1px solid #cccccc7a;
+}
+.pseudoheight{
+  height: 20px !important;
 }
