@@ -321,7 +321,7 @@
 
 .post-header {
     // background-color: #F1F1F1;
-    background-image: linear-gradient(#f1f1f1, #fafafa);
+    background-image: linear-gradient(#e0dfdf, #f1f1f1);
     box-shadow: 0 2px 5px 0 rgba(230, 230, 230, 0.753);
     border-bottom: 1px solid $color-border;
 }
@@ -566,3 +566,14 @@
     color: $lxp-theme-green !important;
 }
 
+.spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

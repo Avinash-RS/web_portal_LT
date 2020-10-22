@@ -63,7 +63,7 @@ export class CommonServicesService {
 
   closeAvailPopup$ = new Subject<any>();
   closeAvailPopup = this.closeAvailPopup$.asObservable();
-  
+
   openNotification$ = new Subject<any>();
   openNotification = this.openNotification$.asObservable();
 
