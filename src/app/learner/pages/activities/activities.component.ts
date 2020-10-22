@@ -1,17 +1,18 @@
-import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
-import { MatDialog } from "@angular/material";
-import { MatAccordion } from "@angular/material/expansion";
-import { GlobalServiceService } from "@core/services/handlers/global-service.service";
-import { LearnerServicesService } from "@learner/services/learner-services.service";
-import { WcaService } from "@wca/services/wca.service";
-import * as moment from "moment";
-import { ToastrService } from "ngx-toastr";
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { MatAccordion } from '@angular/material/expansion';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { WcaService } from '@wca/services/wca.service';
+import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { appendFile } from 'fs';
 @Component({
-  selector: "app-activities",
-  templateUrl: "./activities.component.html",
-  styleUrls: ["./activities.component.scss"],
+  selector: 'app-activities',
+  templateUrl: './activities.component.html',
+  styleUrls: ['./activities.component.scss'],
 })
 export class ActivitiesComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
@@ -39,23 +40,23 @@ export class ActivitiesComponent implements OnInit {
   performDetails: any;
   iterationDetails: any;
   selectedIndex = 0;
-  selectfile: File;
-  showSubmittedon: boolean;
+  selectfile = [];
+  showSubmittedon = false;
   fileName: any;
   submitType: string;
   submitStatus: string;
-  constructor(
-    public Lservice: LearnerServicesService,
-    private gs: GlobalServiceService,
-    private dialog: MatDialog,
-    public wcaservice: WcaService,
-    private toastr: ToastrService,
-    public datePipe: DatePipe
-  ) {
+  checkDetails: any;
+  constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
+    private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
+    public route: Router, public datePipe: DatePipe) {
+    const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+    this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
+    this.checkDetails = detail;
+    console.log(this.checkDetails);
     if (this.gs.checkLogout()) {
-      this.userDetail = this.gs.checkLogout();
+    this.userDetail = this.gs.checkLogout();
     }
-    this.courseid = localStorage.getItem("Courseid");
+    this.courseid =  this.checkDetails ?  this.checkDetails.course_id : localStorage.getItem('Courseid');
     this.getAssignmentmoduleData();
     this.getprojectActivityData();
     this.getperformActivityData();
@@ -65,9 +66,12 @@ export class ActivitiesComponent implements OnInit {
   getSelectedIndex(i) {
     this.selectedIndex = i;
   }
-  uploadDoc(event) {
-    console.log("eve", event);
-    this.selectfile = event.target.files[0] as File;
+  uploadDoc(event, project, submitAction) {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < event.target.files.length; i++) {
+      this.selectfile.push(event.target.files[i]);
+  }
+    this.learnerUploadVideo(project, submitAction);
   }
   uploadDocs() {
     this.fileInput.nativeElement.click();
@@ -87,8 +91,8 @@ export class ActivitiesComponent implements OnInit {
       ) {
         const batchStartDate = new Date(this.assignmentContent.courseStartDate);
         const batchEndDate = new Date(this.assignmentContent.courseEndDate);
-        this.courseStartDate = moment(batchStartDate).format("DD-MM-YYYY");
-        this.courseEndDate = moment(batchEndDate).format("DD-MM-YYYY");
+        this.courseStartDate = moment(batchStartDate).format('DD-MM-YYYY');
+        this.courseEndDate = moment(batchEndDate).format('DD-MM-YYYY');
         this.assignmentContent.coursedetails.forEach((element) => {
           element.moduledetails.forEach((moduleData) => {
             moduleData.resourse.files.forEach((fileData) => {
@@ -98,13 +102,13 @@ export class ActivitiesComponent implements OnInit {
                 const startDate = new Date(date1);
                 const endDate = new Date(date2);
                 fileData.assignmentStartDate = moment(startDate).format(
-                  "DD-MM-YYYY HH:MM"
+                  'DD-MM-YYYY HH:MM'
                 );
                 fileData.assignmentEndDate = moment(endDate).format(
-                  "DD-MM-YYYY HH:MM"
+                  'DD-MM-YYYY HH:MM'
                 );
                 if (
-                  moment().format("DD-MM-YYYY HH:MM") >=
+                  moment().format('DD-MM-YYYY HH:MM') >=
                   fileData.assignmentStartDate
                 ) {
                   fileData.enableView = true;
@@ -112,15 +116,15 @@ export class ActivitiesComponent implements OnInit {
                   fileData.enableView = false;
                 }
                 if (
-                  moment().format("DD-MM-YYYY HH:MM") >=
+                  moment().format('DD-MM-YYYY HH:MM') >=
                     fileData.assignmentStartDate &&
-                  moment().format("DD-MM-YYYY HH:MM") <= this.courseEndDate
+                  moment().format('DD-MM-YYYY HH:MM') <= this.courseEndDate
                 ) {
                   fileData.enableUpload = true;
                 } else if (
-                  moment().format("DD-MM-YYYY HH:MM") <
+                  moment().format('DD-MM-YYYY HH:MM') <
                     fileData.assignmentStartDate ||
-                  moment().format("DD-MM-YYYY HH:MM") > this.courseEndDate
+                  moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate
                 ) {
                   fileData.enableUpload = false;
                 }
@@ -134,8 +138,8 @@ export class ActivitiesComponent implements OnInit {
 
   previewDoc(templateRef: TemplateRef<any>, path) {
     this.dialog.open(templateRef, {
-      width: "100%",
-      height: "100%",
+      width: '100%',
+      height: '100%',
       closeOnNavigation: true,
       disableClose: true,
     });
@@ -143,9 +147,9 @@ export class ActivitiesComponent implements OnInit {
   }
 
   downloadPdf(doc) {
-    const link = document.createElement("a");
-    link.target = "_blank";
-    link.style.display = "none";
+    const link = document.createElement('a');
+    link.target = '_blank';
+    link.style.display = 'none';
     link.href = doc.path;
     link.click();
   }
@@ -188,26 +192,26 @@ export class ActivitiesComponent implements OnInit {
     if (!score) {
       score = 50;
     }
-    let submitStatus = "ontime";
+    let submitStatus = 'ontime';
     const todayDate = moment().toDate();
     const startDate = moment(endDate).toDate();
     if (todayDate > startDate) {
-      submitStatus = "late";
+      submitStatus = 'late';
     } else {
-      submitStatus = "ontime";
+      submitStatus = 'ontime';
     }
 
     const payload = new FormData();
-    payload.append("learnerdoc", this.assFile, this.assFile.name);
-    payload.append("user_id", this.userDetail.user_id);
-    payload.append("course_id", this.courseid);
-    payload.append("topic_id", topicname);
-    payload.append("module_id", modulename);
-    payload.append("file_id", fileId);
-    payload.append("type_name", assName);
-    payload.append("submit_status", submitStatus);
-    payload.append("total_mark", score);
-    payload.append("questionUrl", path);
+    payload.append('learnerdoc', this.assFile, this.assFile.name);
+    payload.append('user_id', this.userDetail.user_id);
+    payload.append('course_id', this.courseid);
+    payload.append('topic_id', topicname);
+    payload.append('module_id', modulename);
+    payload.append('file_id', fileId);
+    payload.append('type_name', assName);
+    payload.append('submit_status', submitStatus);
+    payload.append('total_mark', score);
+    payload.append('questionUrl', path);
     this.wcaservice.uploadAssignments(payload).subscribe((data: any) => {
       if (data.success === true) {
         this.toastr.success(data.message, null);
@@ -219,27 +223,27 @@ export class ActivitiesComponent implements OnInit {
   }
 
   getprojectActivityData() {
-    this.Lservice.getprojectActivityData(
-      this.userDetail.user_id,
-      "r00owr2x"
-    ).subscribe((data: any) => {
-      if (
-        data &&
-        data.data &&
-        data.data.getprojectActivityData &&
-        data.data.getprojectActivityData.data
-      ) {
-        this.projectDetails = data.data.getprojectActivityData.data;
-        this.projectDetails.forEach((element) => {
-          const startDate = new Date(element.projectActivity.activitystartdate);
-          element.activityStartDate = moment(startDate).format("ll");
-          const endDate = new Date(element.projectActivity.activityenddate);
-          element.activityEndDate = moment(endDate).format("ll");
-        });
-      }
-    });
+    this.Lservice.getprojectActivityData(this.userDetail.user_id, 'r00owr2x').subscribe((data: any) => {
+      if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
+      this.projectDetails = data.data.getprojectActivityData.data;
+      this.projectDetails.forEach(element => {
+        const startDate = new Date(element.projectActivity.activitystartdate);
+        element.activityStartDate = moment(startDate).format('ll');
+        element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
+        const endDate = new Date(element.projectActivity.activityenddate);
+        element.activityEndDate = moment(endDate).format('ll');
+        const submitDate = new Date(element.projectActivity.submitted_on);
+        element.submittedOn = moment(submitDate).format('ll');
+        if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
+          element.enableSubmit = false;
+        } else {
+          element.enableSubmit = true;
+        }
+      });
+ }
+});
   }
-
+// Pass courseid dynamically
   getperformActivityData() {
     this.Lservice.getperformActivityData(
       this.userDetail.user_id,
@@ -268,26 +272,46 @@ export class ActivitiesComponent implements OnInit {
       });
     });
   }
-  learnerUploadVideo(project) {
+  learnerUploadVideo(project, submitAction) {
+    const startDate1 = new Date(project.projectActivity.activitystartdate);
+    project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:MM');
+    const endDate1 = new Date(project.projectActivity.activityenddate);
+    project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:MM');
+    let submitStatus = '';
+    if (moment().format('DD-MM-YYYY HH:MM') >= project.actstartDate &&
+    moment().format('DD-MM-YYYY HH:MM') <= project.actendDate) {
+    submitStatus = 'ontime';
+    } else if (moment().format('DD-MM-YYYY HH:MM') > project.actendDate) {
+      submitStatus = 'late';
+    }
     const payload = new FormData();
-    payload.append("uploadvideo", this.selectfile, this.selectfile.name);
-    payload.append("course_id", "r00owr2x");
-    payload.append("module_id", project.projectActivity.module_id);
-    payload.append("topic_id", project.projectActivity.topic_id);
-    payload.append("user_id", this.userDetail.user_id);
-    payload.append("submit_status", "late");
-    payload.append("total_mark", project.projectActivity.total_mark);
-    payload.append("submitType", "project");
-    payload.append("submitAction", "true");
-    payload.append("iterationid", project.projectActivity.project_id);
-    payload.append("object_id", project.projectActivity._id);
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.selectfile.length; i++) {
+      payload.append('uploadvideo', this.selectfile[i]);
+    }
+    // payload.append('uploadvideo', this.selectfile, this.selectfile.name);
+    payload.append('course_id', 'r00owr2x');
+    payload.append('module_id', project.projectActivity.module_id);
+    payload.append('topic_id', project.projectActivity.topic_id);
+    payload.append('user_id', this.userDetail.user_id);
+    payload.append('submit_status', submitStatus);
+    payload.append('total_mark', project.projectActivity.total_mark);
+    payload.append('submitType', 'project');
+    payload.append('submitAction', submitAction);
+    payload.append('iterationid', project.projectActivity.project_id);
+    payload.append('object_id', project.projectActivity.project_id);
     this.Lservice.learnerUploadVideo(payload).subscribe((data: any) => {
-      console.log("output", data);
-      this.showSubmittedon = true;
+      if (data.success === true) {
+        this.toastr.success(data.message);
+        this.showSubmittedon = true;
+        this.getprojectActivityData();
+      } else {
+        this.toastr.warning(data.message);
+      }
     });
   }
 
-  //--------------------- Perform document upload ----------------------------
+  // --------------------- Perform document upload ----------------------------
 
   uploadDocument(event, perform) {
     console.log('perform', perform);
@@ -339,8 +363,31 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
-  removeVideo(videoName) {
-    console.log('removeVideo', videoName);
-    // this.selectPerformfile = this.selectPerformfile.filter(data => data.lastModified !== videoName.lastModified);
+  submitDeleteVideo(videoName, itrdata, perform) {
+    let videoFile = [];
+    videoFile.push(videoName);
+    let data = {
+      course_id: perform.course_id,
+      module_id: perform.module_id,
+      topic_id: perform.topic_id,
+      user_id: this.userDetail.user_id,
+      submit_status: this.submitStatus,
+      total_mark: itrdata.total_mark,
+      submitType: 'perform',
+      submitAction: this.submitType,
+      iterationid: itrdata.iterationid,
+      object_id: perform.perform_id,
+      videodetails: this.submitType === 'delete' ? videoFile : []
+  };
+    this.Lservice.learnerSumbitdeleteVideo(data).subscribe((response: any) => {
+       console.log('response', response);
+       if (response.success === true) {
+        this.toastr.success(response.message);
+        this.getperformActivityData();
+        videoFile = [];
+      } else {
+        this.toastr.warning(response.message);
+      }
+    });
   }
 }
