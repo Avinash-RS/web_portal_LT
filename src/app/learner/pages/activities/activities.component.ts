@@ -41,6 +41,38 @@ export class ActivitiesComponent implements OnInit {
   fileName: any;
   submitType: any;
   checkDetails: any;
+
+  trendingCategorires: any = {
+    loop: false, // dont make it true
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    autoHeight: true,
+    navSpeed: 900,
+    navText: ['<i class=\'fa fa-chevron-left\'></i>', '<i class=\'fa fa-chevron-right\'></i>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 3,
+        autoHeight: true,
+      },
+      940: {
+        items: 3,
+        autoHeight: true,
+      },
+      1200: {
+        items: 4,
+        autoHeight: true,
+      }
+    },
+    nav: true
+  };
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
               public route: Router, public datePipe: DatePipe) {
