@@ -241,7 +241,8 @@ export class LearnerMyCourseComponent implements OnInit {
       categoryPopupName = this.categoryPopupData;
     }
     this.learnerService.bulkclaimcourse(this.userDetailes._id, this.userDetailes.user_id,
-      this.categoryyName.superSubCategoryId, categoryPopupName).subscribe((bulkclaimcourse: any) => {
+      this.categoryyName.superSubCategoryId, categoryPopupName ,this.catalogueDetails.catalogueId, this.categoryData.categoryId,
+      this.subchildData.subCategoryId).subscribe((bulkclaimcourse: any) => {
         if (bulkclaimcourse.data.bulkclaimcourse.success === true) {
           this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, this.categoryData.categoryId,
             this.userDetailes._id, this.subchildData.subCategoryId, this.categoryyName.superSubCategoryId).subscribe((course: any) => {
@@ -460,18 +461,12 @@ export class LearnerMyCourseComponent implements OnInit {
   }
   gotoSubmissionDetails(c) {
     localStorage.setItem('Courseid', c.course_id);
-    localStorage.setItem('key', 'submission');
     const detail = {
       id: c.course_id,
       name: c.course_name,
-      key: 'submission',
-      // wishlist: c.wishlisted || false,
-      // wishlist_id: c.wishlist_id || null,
-      // enrollment_status: null,
-      // forumVal: true
+      tableType: 'submission',
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
-    // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
     this.router.navigateByUrl('/Learner/activitycenter', { state: { detail } });
   }
   getCountForCategories() {

@@ -24,10 +24,12 @@ export class ActivitycenterhomescreenComponent implements OnInit {
   }
   gototable(e) {
     // console.log(e, 'ee');
-    localStorage.setItem('key', e.key);
+    localStorage.setItem('course', e);
     const detail = {
-      key: e,
+      tableType: e,
     };
+    // localStorage.setItem('key', e);
+    localStorage.setItem('course', btoa(JSON.stringify(detail)));
     this.router.navigateByUrl('/Learner/activitycenter', { state: { detail } });
   }
   get_active_course_count() {
