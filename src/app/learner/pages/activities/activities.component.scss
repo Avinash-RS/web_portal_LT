@@ -121,6 +121,30 @@ margin-bottom: 9px;
   .con:hover .overlay {
     opacity: 1;
   }
+
+  .uppertext-1 {
+    position: absolute;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: 76%;
+    color:$color-white;;
+    font-size: 12px;
+    padding: 5px;
+  }
+  .overlay-1 {
+    position: absolute;
+    bottom: -50px;
+    background: rgba(0, 0, 0, 0.5);
+    width: 76%;
+    height: 50px;
+    transition: .5s ease;
+    opacity: 0;
+    color: $color-white;
+    font-size: 12px;
+  }
+  .con:hover .overlay-1 {
+    opacity: 1;
+  }
   .width{
     width: 58%;
   }
@@ -209,7 +233,7 @@ margin-bottom: 1% !important;
 .box-0-2{
   margin-top: 10px;
   margin-left: 71px;
-  width: 65%;
+  width: 79%;
   padding: 20px;
   padding-bottom: 3%;
   overflow: hidden;
@@ -374,6 +398,29 @@ margin-top: 8px;
 .submission{
   margin-left: 2px; 
 }
+.fileData {
+  background-color: #D5D5D5;
+  border: 0.25px solid #707070;
+  width: 100%;
+  height: 2.8rem;
+  padding: 0.3rem 5px;
+}
+.uploadfileName {
+  position: relative;
+  left: 10px;
+  top: 5px;
+}
+.submitted-btn{
+  color: $color-white;
+  background-color: #898989;
+  width: 45%;
+  margin-top: 6%;
+  cursor: none;
+}
+.deleteIcon {
+  color: #5C6873;
+  font-size: 21px;
+}
 /*Ramya CSS ends here*/
 .videoPreview {
   background-color: #D5D5D5;
@@ -404,4 +451,51 @@ margin-top: 8px;
   height: 2rem;
   padding: 2px;
   border-radius: 2px;
+}
+
+:host ::ng-deep .widthClass .owl-carousel.owl-drag .owl-item {
+  width: 405px !important;
+}
+
+:host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
+  color: #fff;
+  font-size: 30px !important;
+  // background: #252525;
+  background: $color-darkGrey;
+  display: inline-block;
+  cursor: pointer !important;
+  padding: 14px !important;
+  border-radius: 50px !important;
+  width: 40px;
+  z-index: -1 !important;
+  opacity: 0.7;
+}
+
+:host ::ng-deep .arrow .owl-carousel .owl-nav .owl-prev {
+  position: absolute;
+  top: 30%;
+  z-index: 1 !important;
+  left: -18px;
+  height: 50px;
+  width: 50px;
+
+}
+
+:host ::ng-deep .arrow .owl-carousel .owl-nav .owl-next {
+  position: absolute;
+  top: 30%;
+  z-index: 1 !important;
+  right: -18px;
+  height: 50px;
+  width: 50px;
+
+}
+
+::ng-deep .owl-carousel .owl-stage-outer{
+  height: 171px;
+}
+.errormsg {
+  padding: 20px;
+  font-size: 18px;
+  font-weight: 500;
 }
