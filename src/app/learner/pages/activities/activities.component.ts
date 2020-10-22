@@ -14,8 +14,10 @@ import { appendFile } from 'fs';
   styleUrls: ["./activities.component.scss"],
 })
 export class ActivitiesComponent implements OnInit {
-  @ViewChild("fileInput") fileInput;
-  selectPerformfile: any[]=[];
+  @ViewChild('fileInput') fileInput;
+  itrationStarted: boolean;
+  itrationEnded: boolean;
+  selectPerformfile: any[] = [];
   performsData: any;
   itrationData: any;
   assignmentContent: any;
@@ -27,7 +29,9 @@ export class ActivitiesComponent implements OnInit {
   assFile: File;
   openList = false;
   @ViewChild(MatAccordion) accordion: MatAccordion;
-  public isCollapsed = false;
+  isCollapsed = false;
+  isperformColaps = false;
+  performId: any;
   projectDetails: any;
   groupDetails: any;
   activityStartDate: string;
@@ -39,6 +43,7 @@ export class ActivitiesComponent implements OnInit {
   showSubmittedon: boolean;
   fileName: any;
   submitType: string;
+  submitStatus: string;
   constructor(
     public Lservice: LearnerServicesService,
     private gs: GlobalServiceService,
@@ -238,14 +243,28 @@ export class ActivitiesComponent implements OnInit {
   getperformActivityData() {
     this.Lservice.getperformActivityData(
       this.userDetail.user_id,
-      "r00owr2x"
+      'r00owr2x'
     ).subscribe((data: any) => {
       this.performDetails = data.data.getperformActivityData.data;
+      console.log('this.performDetails', this.performDetails);
       this.performDetails.forEach((element) => {
         const startDate = new Date(element.performActivity.activitystartdate);
-        element.activityStartDate = moment(startDate).format("ll");
+        element.activityStartDate = moment(startDate).format('ll');
         const endDate = new Date(element.performActivity.activityenddate);
-        element.activityEndDate = moment(endDate).format("ll");
+        element.activityEndDate = moment(endDate).format('ll');
+        console.log('startDate', element.activityStartDate);
+        if (element.activityStartDate <= moment(new Date()).format('ll')) {
+          this.itrationStarted = false;
+        } else {
+          this.itrationStarted = true;
+        }
+        if (element.activityEndDate > moment(new Date()).format('ll')) {
+          this.itrationEnded = false;
+          this.submitStatus = 'ontime';
+        } else {
+          this.itrationEnded = true;
+          this.submitStatus = 'late';
+        }
       });
     });
   }
@@ -272,7 +291,11 @@ export class ActivitiesComponent implements OnInit {
 
   uploadDocument(event, perform) {
     console.log('perform', perform);
-    this.selectPerformfile.push(event.target.files[0] as File);
+    // this.selectPerformfile.push(event.target.files[0] as File);
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < event.target.files.length; i++) {
+      this.selectPerformfile.push(event.target.files[i]);
+  }
     this.performlearnerUploadVideo();
   }
 
@@ -288,12 +311,16 @@ export class ActivitiesComponent implements OnInit {
     console.log('this.performsData.activityEndDate', this.selectPerformfile);
     const currentDate = new Date();
     const performVideo = new FormData();
-    performVideo.append('uploadvideo' , this.selectPerformfile[0]);
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.selectPerformfile.length; i++) {
+      performVideo.append('uploadvideo', this.selectPerformfile[i]);
+    }
+    // performVideo.append('uploadvideo' , this.selectPerformfile[0]);
     performVideo.append('course_id', this.performsData.performActivity.course_id);
     performVideo.append('module_id', this.performsData.performActivity.module_id);
     performVideo.append('topic_id', this.performsData.performActivity.topic_id);
     performVideo.append('user_id', this.userDetail.user_id);
-    performVideo.append('submit_status', 'ontime');
+    performVideo.append('submit_status', this.submitStatus);
     performVideo.append('total_mark', this.itrationData.total_mark);
     performVideo.append('submitType', 'perform');
     performVideo.append('submitAction', this.submitType);

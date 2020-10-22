@@ -28,11 +28,18 @@
     display: inline-block;
   }
 .arr{
-    margin-left: 69px;
+    position: absolute;
+    top: -15px;
+    right: 0px;
     border: 1px solid $color-border;
     padding: 3px;
     font-weight: 600;
 }
+
+.statusTxt {
+  font-size: 15px;
+}
+
   .box-0-1{
       margin-top: 10px;
       width: 100%;
@@ -245,15 +252,22 @@ margin-bottom: 1% !important;
 .status {
   margin-right: 3rem;
 }
+
+.itrationTxt {
+  margin-left: 33px;
+}
+
 .submitstatus {
   color: #FFA04E;
   position: relative;
   left: 10px;
+  font-size: 15px;
 }
 .gradeStatus {
   color: #0C781B;
   position: relative;
   left: 38px;
+  font-size: 15px;
 }
 .projectSubmitstatus {
   color: #FFA04E;
