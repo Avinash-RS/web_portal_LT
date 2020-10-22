@@ -70,6 +70,7 @@ import { DiscussionForumComponent } from './pages/discussion-forum/discussion-fo
 import { LearnerActivityCenterComponent } from './pages/learner-activity-center/learner-activity-center.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { ActivitycenterhomescreenComponent } from './pages/activitycenterhomescreen/activitycenterhomescreen.component';
+import { InstructorLedComponent } from './pages/instructor-led/instructor-led.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -207,6 +208,11 @@ const routes: Routes = [
   {
     path: 'viewAllnotifications',
     component: ViewAllnotificationsComponent,
+  },
+  {
+    path: 'instructorLed',
+    component: InstructorLedComponent,
+    data: { animation: 'Learner  MyCourse' }
   }
   // { path: 'new-home', component: NewHomeComponent },
 ];
@@ -240,7 +246,8 @@ const routes: Routes = [
     ActivitiesComponent,
     DiscussionForumComponent,
     LearnerActivityCenterComponent,
-    ActivitycenterhomescreenComponent
+    ActivitycenterhomescreenComponent,
+    InstructorLedComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

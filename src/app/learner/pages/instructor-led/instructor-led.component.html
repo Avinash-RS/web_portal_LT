@@ -1,0 +1,70 @@
+<app-header></app-header>
+<div class="example-button-row">
+  <button mat-button (click)="getBack()">
+    <mat-icon>keyboard_arrow_left</mat-icon> Back
+  </button>
+</div>
+
+<div class="formLayout">
+
+  <div layout="row">
+    <div flex>
+      <mat-card class="imgLayout">
+        <div layout="row">
+          <div layout="row" layout-margin>
+            <div flex>
+
+            </div>
+          </div>
+          <div layout="row" layout-margin>
+            <div flex style="font-size: large;color: white;">Introduction to the Quality Management Systems</div>
+          </div>
+        </div>
+      </mat-card>
+      <div class="row" style="margin-top: 5%;">
+        <mat-card class="smallContainer1">
+          <mat-card-subtitle>Total Classes</mat-card-subtitle>
+        </mat-card>
+
+        <mat-card class="smallContainer2">
+          <mat-card-subtitle>Attended Classes</mat-card-subtitle>
+        </mat-card>
+
+        <mat-card class="smallContainer3">
+          <mat-card-subtitle>Recorded Classes</mat-card-subtitle>
+        </mat-card>
+      </div>
+      <div class="row" style="margin-top: 5%; margin-left: 5px;">
+        <h5>My Attendance</h5>
+        <tabel>
+          <tr>
+            <th>Session #</th>
+            <th style="min-width: 400px;">Topic Name</th>
+            <th>Date</th>
+            <th>Present?</th>
+          </tr>
+          <tr *ngFor="let atd of sessionAttendance">
+            <td>{{atd.session}}</td>
+            <td>{{atd.topic}}</td>
+            <td>{{atd.date | date: 'dd/MM/yyyy hh:mm'}}</td>
+            <td>{{atd.isPresent}}</td>
+          </tr>
+        </tabel>
+      </div>
+    </div>
+
+    <!-- Right Side Panel -->
+    <div flex="20" style="margin-left: 5%;">
+      <h4 style="margin-left: 20%;">Upcoming Sessions and Recorded Sessions</h4>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let los of listOfSessions" class="row">
+          <mat-card class="sessionCard">
+            <img height="220" width="180" [src]="los.img">
+            <mat-card-subtitle>{{los.name}}</mat-card-subtitle>
+          </mat-card>
+        </mat-list-item>
+      </mat-nav-list>
+    </div>
+
+  </div>
+</div>

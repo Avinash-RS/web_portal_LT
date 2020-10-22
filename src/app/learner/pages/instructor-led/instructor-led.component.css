@@ -1,0 +1,64 @@
+.formLayout {
+    margin-top: 3%;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.imgLayout {
+    background-color: #00838f;
+    height: 250px;
+    border-radius: unset;
+}
+
+.smallContainer1 {
+    height: 80px;
+    width: 180px;
+    background-color: orangered;
+    margin-left: 15px;
+    border-radius: unset;
+}
+
+.smallContainer2 {
+    height: 80px;
+    width: 180px;
+    background-color: #388E3C;
+    margin-left: 9.5%;
+    border-radius: unset;
+}
+
+.smallContainer3 {
+    height: 80px;
+    width: 180px;
+    background-color: #29B6F6;
+    margin-left: 9.5%;
+    border-radius: unset;
+}
+
+.mat-card-subtitle {
+    color: white;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-left: 15px;
+    /* padding-right: 10px;
+    padding-left: 15px; */
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.sessionCard {
+    border: 1px solid #dddddd;
+    height: 150px;
+    width: -webkit-fill-available;
+    /* background-color: #388E3C; */
+    margin-left: 20%;
+    border-radius: unset;
+}
