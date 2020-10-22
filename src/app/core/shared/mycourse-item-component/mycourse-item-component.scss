@@ -1,79 +1,9 @@
 @import "variable";
 
-.cateName {
-  // position: relative;
-  // top: 8px;
-  padding-top: 3px;
-}
 
-.dropdown-toggle {
-  background-color: $color-white;
-  color: #898989 !important;
-  padding: 6px;
-  font-size: 16px;
-  padding-left: 6px;
-  border: none;
-  border-radius: 0px;
-  border: 1px solid #898989;
-  width: 100%;
-}
 
-.dropdown-toggle:hover {
-  background-color: $lxp-theme-green !important;
-  color: $color-white !important;
-}
 
-.dropdown-toggle:focus,
-.dropdown-toggle:active:focus,
-.dropdown-toggle.active:focus {
-  outline: none !important;
-  background-color: none;
-  color: #898989;
-  outline-style: none !important;
-  box-shadow: none;
-}
 
-// .hovercolor {
-//   color: $color-white !important;
-//   padding: 6px;
-//   font-size: 16px;
-//   padding-left: 6px;
-//   border: none;
-//   // border-radius: 11px;
-//   border: 1px solid #898989;
-//   width: 155px;
-//   background-color: $lxp-theme-green !important;
-// }
-.cardContainer {
-  height: 400px !important;
-}
-
-.spinner-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 999999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: $lxp-theme-green;
-}
-
-.forgot1 {
-  color: $lxp-text;
-  // cursor: pointer;
-  font-size: 13px;
-}
-
-.primerFlage {
-  height: 70px;
-  // width: 67px;
-  position: absolute;
-  // margin-left: 20px;
-  z-index: 1;
-}
 
 .dot {
   font-size: 16px;
@@ -100,53 +30,7 @@
   margin-left: 2%;
 }
 
-// @media screen and (min-width: 270px) and (max-width: 795px) {
-//     .descmc {
-//         max-height: 175px !important;
-//         min-height: 40px;
-//     }
-//     .courseHover {
-//       width: 100% !important;
-//       height: 200px !important;
 
-//   }
-//     @media screen and (max-width: 500px) {
-//         .statBtn {
-//             width: 60%;
-//             margin: auto !important;
-//             text-align: center !important;
-//             display: block !important;
-//         }
-//         .courseHover {
-//           width: 100% !important;
-//           height: 200px !important;
-
-//       }
-//     }
-// }
-
-// @media screen and (min-width: 500px) and (max-width: 765px) {
-//     .statBtn {
-//         width: 50%;
-//         float: right;
-//     }
-//     .courseHover {
-//       width: 100% !important;
-//       height: 200px !important;
-
-//   }
-// }
-
-// @media screen and (min-width: 765px) {
-//     .statBtn {
-//         float: right;
-//     }
-//     .courseHover {
-//       width: 100% !important;
-//       height: 200px !important;
-
-//   }
-// }
 
 .vertical {
   border-left: 160px solid $color-subhead;
@@ -352,7 +236,11 @@
   height: 100%;
   margin: auto;
   // margin-left: 26px;
+  background-image: url(../../../../assets/images/placeholder.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%,100%;
   border-radius: 10px;
+  //content:url(../../../../assets/images/placeholder.jpg)
 }
 
 .courseHover {
@@ -1717,50 +1605,7 @@ hr {
   }
 }
 
-// @media (max-width: 480px) and (max-width: 320px) {
-//   .descmc {
-//     max-height: 175px !important;
-//     min-height: 40px;
-//   }
 
-//   .courseHover {
-//     width: 100% !important;
-//     height: 200px !important;
-
-//   }
-//   .show-less {
-//     height: 0rem;
-//     overflow: hidden;
-//     padding: 0rem;
-//   }
-
-//   .pad1020 {
-//     padding-top: 0px !important;
-//     padding-left: 0px !important;
-//   }
-// }
-
-// @media (max-width: 568px) {
-//   .descmc {
-//     max-height: 175px !important;
-//     min-height: 40px;
-//   }
-//   .show-less {
-//     height: 0rem;
-//     overflow: hidden;
-//     padding: 0rem;
-//   }
-//   .courseHover {
-//     width: 100% !important;
-//     height: 200px !important;
-//   }
-
-//   .pad1020 {
-//     padding-top: 0px !important;
-//     padding-left: 0px !important;
-//   }
-
-// }
 
 @media only screen and (width: 1280px) {
   .btl-alin {
@@ -2110,31 +1955,6 @@ hr {
   font-size: 24px !important;
 }
 
-/* dropdown badge alignment */
-// #mat-badge-content-6, #mat-badge-content-7 ,#mat-badge-content-8{
-//   float: right;
-//   position: initial;
-// }
-
-// ::ng-deep .cdk-overlay-container .cdk-overlay-pane .mat-select-panel{
-//   min-width: 146px !important;
-//   pointer-events: auto !important;
-//   font-size: 14px !important;
-//   transform: translateX(7px) translateY(-16px) !important;
-// }
-// .availableCourseOption{
-//   width: 150px;
-// }
-
-// :host ::ng-deep #mat-tab-label-0-3 {
-//   display: none;
-// }
-// :host ::ng-deep #mat-tab-label-0-4 {
-//   display: none;
-// }
-// :host ::ng-deep #mat-tab-label-0-5 {
-//   display: none;
-// }
 :host ::ng-deep #mat-badge-content-3 {
   background: #898989 !important;
 }
@@ -2761,66 +2581,4 @@ li {
   height: 1px;
   margin: 0px auto;
   border-bottom: 1px solid #cccccc7a;
-}
-
-
-// SKELETON
-.demo:empty {
-  // margin: auto;
-  margin-top: 30px !important;
-  margin-left: 50px !important;
-  width: auto;
-  height: 700px;
-  /* change height to see repeat-y behavior */
-
-  background-image:
-      // radial-gradient(circle 50px at 50px 50px, lightgray 99%, transparent 0),
-      linear-gradient(lightgray 100px, transparent 0),
-      // linear-gradient(lightgray 100px, transparent 0)
-      linear-gradient(100deg, rgba(143, 116, 116, 0), rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 80%),
-      linear-gradient(lightgray 15px, transparent 0),
-      linear-gradient(lightgray 15px, transparent 0),
-      linear-gradient(lightgray 12px, transparent 0),
-      // linear-gradient(lightgray 10px, transparent 0),
-      // linear-gradient(lightgray 12px, transparent 0),
-      linear-gradient(lightgray 10px, transparent 0);
-
-  background-repeat: repeat-y;
-
-  background-size:
-      100px 200px,
-      /* circle */
-      50px 200px,
-      /* highlight */
-      300px 200px,
-      500px 200px,
-      400px 200px,
-      350px 200px;
-
-  background-position:
-      0 0,
-      /* circle */
-      0 0,
-      /* highlight */
-      120px 0,
-      // 120px 0,
-      120px 40px,
-      // 0 0,
-      120px 80px,
-      120px 120px;
-
-  animation: shine 1s infinite;
-}
-
-@keyframes shine {
-  to {
-      background-position:
-          0 0,
-          100% 0,
-          /* move highlight to right */
-          120px 0,
-          120px 40px,
-          120px 80px,
-          120px 120px;
-  }
 }

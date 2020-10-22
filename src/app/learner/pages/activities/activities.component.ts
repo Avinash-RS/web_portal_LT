@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./activities.component.scss']
 })
 export class ActivitiesComponent implements OnInit {
+  @ViewChild('fileInput') fileInput;
   assignmentContent: any;
   courseStartDate: any;
   courseEndDate: any;
@@ -23,6 +24,13 @@ export class ActivitiesComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   public isCollapsed = false;
   projectDetails: any;
+  groupDetails: any;
+  activityStartDate: string;
+  activityEndDate: string;
+  performDetails: any;
+  iterationDetails: any;
+  selectedIndex = 0;
+  selectfile: File;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService) {
 
@@ -32,16 +40,19 @@ export class ActivitiesComponent implements OnInit {
     this.courseid = localStorage.getItem('Courseid');
     this.getAssignmentmoduleData();
     this.getprojectActivityData();
-    // this.getperformActivityData();
+    this.getperformActivityData();
   }
 
   ngOnInit() {
   }
-
-  getperformActivityData() {
-    this.Lservice.getperformActivityData(this.userDetail.user_id , 'tqfc4p0e').subscribe((data: any) => {
-      console.log(data);
-    });
+  getSelectedIndex(i) {
+    this.selectedIndex = i;
+  }
+  uploadDoc(event) {
+    console.log('eve', event);
+  }
+  uploadDocs() {
+    this.fileInput.nativeElement.click();
   }
 
   // getperformActivityData
@@ -153,8 +164,26 @@ export class ActivitiesComponent implements OnInit {
     this.Lservice.getprojectActivityData(this.userDetail.user_id, 'r00owr2x').subscribe((data: any) => {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
       this.projectDetails = data.data.getprojectActivityData.data;
-  }
+      this.projectDetails.forEach(element => {
+        const startDate = new Date(element.projectActivity.activitystartdate);
+        element.activityStartDate = moment(startDate).format('ll');
+        const endDate = new Date(element.projectActivity.activityenddate);
+        element.activityEndDate = moment(endDate).format('ll');
+      });
+ }
 });
+  }
+
+  getperformActivityData() {
+    this.Lservice.getperformActivityData(this.userDetail.user_id , 'r00owr2x').subscribe((data: any) => {
+      this.performDetails = data.data.getperformActivityData.data;
+      this.performDetails.forEach(element => {
+        const startDate = new Date(element.performActivity.activitystartdate);
+        element.activityStartDate = moment(startDate).format('ll');
+        const endDate = new Date(element.performActivity.activityenddate);
+        element.activityEndDate = moment(endDate).format('ll');
+      });
+    });
   }
 
 }

@@ -941,8 +941,10 @@ export const  save_attendies = gql`
 `;
 
 export const bulkclaimcourse = gql`
-  mutation bulkclaimcourse($id: String, $user_id: String, $category_id: String, $categoryName: String) {
-    bulkclaimcourse(id: $id, user_id: $user_id, category_id: $category_id, categoryName: $categoryName) {
+  mutation bulkclaimcourse($id: String, $user_id: String, $super_sub_category: String, $categoryName: String
+  $catalogueId: String ,$categoryId: String ,  $subCategoryId: String) {
+    bulkclaimcourse(id: $id, user_id: $user_id, super_sub_category: $super_sub_category, categoryName: $categoryName,
+      catalogueId: $catalogueId ,categoryId: $categoryId ,  subCategoryId: $subCategoryId) {
       message
       success
     }

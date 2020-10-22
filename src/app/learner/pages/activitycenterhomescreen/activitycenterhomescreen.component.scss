@@ -1,0 +1,73 @@
+@import "variable";
+
+.activity_center {
+    margin-left: 32px;
+    font-size: 18px;
+    font-weight: 800;
+    margin-top: 23px;
+}
+
+.m-t-rw {
+    margin-top: 120px;
+}
+
+.activitycard {
+    width: 440px;
+    height: 110px;
+    border-left: 6px solid $color-yellow;
+    height: 110px;
+    background-color: #F5F5F5;
+    box-shadow: 0px 2px 4px #00000029;
+}
+
+.img_ht_wt {
+    height: 50px;
+    width: 50px;
+    margin-left: 40px;
+}
+
+.next_activity {
+    // padding-top: 1px;
+    // margin-left: 22px;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.m-b-0 {
+    margin-bottom: 0px;
+}
+
+.color_red {
+    color: $lxp-theme-green;
+}
+
+.f-w-800 {
+    font-weight: 800;
+}
+.color_blue{
+    color: $color-subhead !important;
+}
+.color_green{
+    color:$light-green !important;
+}
+.color_orange{
+    color:$color-orange !important;
+}
+.mt8{
+    margin-top: -8px !important;
+}
+.mt9{
+    margin-top: -9px !important;
+}
+.m_t_10{
+    margin-top: -10px !important;
+}
+.mt6{
+    margin-top: -6px !important;
+}
+.m-t-80{
+    margin-top: 80px;
+}
+.color_grey{
+    color: #6A6A6A;
+}

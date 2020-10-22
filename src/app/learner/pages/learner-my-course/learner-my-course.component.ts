@@ -32,6 +32,7 @@ export class LearnerMyCourseComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   @Output() focusChange: EventEmitter<MatTabChangeEvent>;
   [x: string]: any;
+  showSkeleton = false;
   jobRoleId: any = '';
   strDate: Date = new Date();
   userDetailes: any;
@@ -116,7 +117,7 @@ export class LearnerMyCourseComponent implements OnInit {
       if (params.email_id === undefined) {
         console.log('inside if');
         this.userDetailes = this.gs.checkLogout();
-        this.getEnrolledCourses('', '', '', '', '', '');
+        this.getEnrolledCourses('', '', '', '', '', '', true);
         this.getScreenSize();
         this.getCountForCategories();
         // this.getTab();
@@ -134,7 +135,7 @@ export class LearnerMyCourseComponent implements OnInit {
             localStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
             sessionStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
             this.router.navigateByUrl('/Learner/MyCourse');
-            this.getEnrolledCourses('', '', '', '', '', '');
+            this.getEnrolledCourses('', '', '', '', '', '', true);
             this.getScreenSize();
             this.getCountForCategories();
             // this.getTab();
@@ -240,7 +241,8 @@ export class LearnerMyCourseComponent implements OnInit {
       categoryPopupName = this.categoryPopupData;
     }
     this.learnerService.bulkclaimcourse(this.userDetailes._id, this.userDetailes.user_id,
-      this.categoryyName.superSubCategoryId, categoryPopupName).subscribe((bulkclaimcourse: any) => {
+      this.categoryyName.superSubCategoryId, categoryPopupName ,this.catalogueDetails.catalogueId, this.categoryData.categoryId,
+      this.subchildData.subCategoryId).subscribe((bulkclaimcourse: any) => {
         if (bulkclaimcourse.data.bulkclaimcourse.success === true) {
           this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, this.categoryData.categoryId,
             this.userDetailes._id, this.subchildData.subCategoryId, this.categoryyName.superSubCategoryId).subscribe((course: any) => {
@@ -248,7 +250,7 @@ export class LearnerMyCourseComponent implements OnInit {
                 this.loading = false;
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
-                this.getEnrolledCourses('', '', '', '', '', '');
+                this.getEnrolledCourses('', '', '', '', '', '', false);
                 this.getCountForJobRole();
                 // this.getCountForJobRole();
               }
@@ -271,7 +273,7 @@ export class LearnerMyCourseComponent implements OnInit {
   //     this.categoryNamePrint = categoryName[0].categoryName;
   // }
   // }
-  getEnrolledCourses(event, catagoryId, catalougeId, jobRoleCategoryId, searchName, jobroleCheck) {
+  getEnrolledCourses(event, catagoryId, catalougeId, jobRoleCategoryId, searchName, jobroleCheck, showSkelton) {
     if (this.screenWidth < 800 && this.keyboardUp) {
       this.keyboardUp = false;
       this.opencourceId = '';
@@ -320,7 +322,8 @@ export class LearnerMyCourseComponent implements OnInit {
       }
     }
 
-    this.loading = true;
+    this.showSkeleton = showSkelton;
+    this.loading = !showSkelton;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
       catalougeId, catagoryId, jobRoleCategoryId, searchName).subscribe((enrolledList: any) => {
         if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
@@ -364,6 +367,7 @@ export class LearnerMyCourseComponent implements OnInit {
             this.jobAllCourseCount = this.enrolledCourses.length;
           }
         }
+        this.showSkeleton = false;
         this.loading = false;
         this.viewCourseClass = true;
       });
@@ -455,7 +459,21 @@ export class LearnerMyCourseComponent implements OnInit {
     // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
     this.router.navigateByUrl('/Learner/discussionForum', { state: { detail } });
   }
-
+  gotoSubmissionDetails(c) {
+    localStorage.setItem('Courseid', c.course_id);
+    const detail = {
+      id: c.course_id,
+      name: c.course_name,
+      key: 'submission',
+      // wishlist: c.wishlisted || false,
+      // wishlist_id: c.wishlist_id || null,
+      // enrollment_status: null,
+      // forumVal: true
+    };
+    localStorage.setItem('course', btoa(JSON.stringify(detail)));
+    // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+    this.router.navigateByUrl('/Learner/activitycenter', { state: { detail } });
+  }
   getCountForCategories() {
     let dropDownData = [];
     this.learnerService.getCountForCategories(this.userDetailes._id).subscribe((data: any) => {
@@ -474,13 +492,13 @@ export class LearnerMyCourseComponent implements OnInit {
     let dropDownData = [];
     this.route.data.subscribe((result: any) => {
       if (result.data && result.data.data && result.data.data.getCountForCategories && result.data.data.getCountForCategories.data) {
-            this.catalogueDetails = result.data.data.getCountForCategories.data;
-            this.categoryDetails = result.data.data.getCountForCategories.data.categories;
-            dropDownData = [result.data.data.getCountForCategories.data];
-            this.dropDownCategoryDetails = dropDownData[0];
-            this.categories = dropDownData[0].categories;
-            this.dropdownCatDetails = dropDownData[0];
-          }
+        this.catalogueDetails = result.data.data.getCountForCategories.data;
+        this.categoryDetails = result.data.data.getCountForCategories.data.categories;
+        dropDownData = [result.data.data.getCountForCategories.data];
+        this.dropDownCategoryDetails = dropDownData[0];
+        this.categories = dropDownData[0].categories;
+        this.dropdownCatDetails = dropDownData[0];
+      }
     });
   }
   getCoureBasedOnCatalog(catalogue, category, subchild, superChild) {
@@ -543,7 +561,7 @@ export class LearnerMyCourseComponent implements OnInit {
               if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
-                this.getEnrolledCourses('', '', '', '', '', '');
+                this.getEnrolledCourses('', '', '', '', '', '', false);
                 this.getCountForJobRole();
                 // this.getCountForJobRole();
               }
@@ -622,7 +640,7 @@ export class LearnerMyCourseComponent implements OnInit {
   resettingJobRole() {
     this.selectedJobRole = 'Job Role';
     this.jobRoleId = null;
-    this.getEnrolledCourses('', '', '', '', '', false);
+    this.getEnrolledCourses('', '', '', '', '', false, false);
   }
   resettingJobRoledata() {
     this.selectedJobRole = 'Job Role';
