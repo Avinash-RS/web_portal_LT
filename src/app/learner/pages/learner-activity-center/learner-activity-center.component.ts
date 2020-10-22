@@ -49,22 +49,22 @@ export class LearnerActivityCenterComponent implements OnInit {
       this.sortType = 'undefined';
       this.searchValue = '';
       this.searchColumn = 'undefined';
-      if (this.detail?.key === 'completed') {
+      if (this.navDetails?.tableType === 'completed') {
         // this.searchColumn = 'undefined';
         const statusB = [{
           ['$or']: [{ ['files.submit_status']: { $regex: 'Graded', $options: 'i' } },
           { 'files.submit_status': { $regex: 'Submitted', $options: 'i' } }]
         }];
         this.statusBased = JSON.stringify(statusB);
-      } else if (this.detail?.key === 'pending') {
+      } else if (this.navDetails?.tableType === 'pending') {
         const statusB = [{ ['files.submit_status']: { $regex: 'Yet to submit', $options: 'i' } }];
         this.statusBased = JSON.stringify(statusB);
-      } else if (this.detail?.key === 'allActivities' || 'submission') {
+      } else if (this.navDetails?.tableType === 'allActivities' || 'submission') {
         this.statusBased = 'undefined';
       }
-      if (this.detail?.key === 'submission') {
+      if (this.navDetails?.tableType === 'submission') {
         // need to add course id from navigation for view submission details
-        this.courseId = this.courseDetails?.id;
+        this.courseId = this.navDetails?.id;
       } else {
         this.courseId = 'undefined';
       }
@@ -93,14 +93,15 @@ export class LearnerActivityCenterComponent implements OnInit {
   rowDataLength: any;
   columnSearch: any;
   statusBased: string;
+  navDetails: any;
 
   constructor(private service: LearnerServicesService, private gs: GlobalServiceService,
-    private route: Router, private toastr: ToastrService, ) {
+              private route: Router, private toastr: ToastrService, ) {
     this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-    // console.log(this.detail.key, 'det');
-    this.courseDetails = this.detail || JSON.parse(atob(localStorage.getItem('course')));
-    // console.log(this.courseDetails, 'cd');
+    // console.log(this.detail, 'det');
+    this.navDetails = this.detail || JSON.parse(atob(localStorage.getItem('course')));
+    // console.log(this.navDetails, 'cd');
     this.userDetails = this.gs.checkLogout();
     this.tabledef();
     // this.getCourseActivitiesforTable();
@@ -117,7 +118,7 @@ export class LearnerActivityCenterComponent implements OnInit {
 
 
   tabledef() {
-    if (this.detail?.key === 'submission') {
+    if (this.navDetails?.tableType === 'submission') {
       this.hideCourseColumn = true;
     }
     // console.log(this.hideCourseColumn);
@@ -183,7 +184,7 @@ export class LearnerActivityCenterComponent implements OnInit {
   }
 
   goBack() {
-    if (this.detail?.key === 'submission') {
+    if (this.navDetails?.tableType === 'submission') {
       this.route.navigateByUrl('/Learner/MyCourse');
     } else {
       this.route.navigateByUrl('/Learner/activitycenterhomescreen');
@@ -223,21 +224,21 @@ export class LearnerActivityCenterComponent implements OnInit {
       getRows: (params: IGetRowsParams) => {
         const userId = this.userDetails.user_id;
         const PageNumber = params.startRow / 10 || 0;
-        if (this.detail?.key === 'completed') {
+        if (this.navDetails?.tableType === 'completed') {
           const statusB = [{
             ['$or']: [{ ['files.submit_status']: { $regex: 'Graded', $options: 'i' } },
             { 'files.submit_status': { $regex: 'Submitted', $options: 'i' } }]
           }];
           this.statusBased = JSON.stringify(statusB);
-        } else if (this.detail?.key === 'pending') {
+        } else if (this.navDetails?.tableType === 'pending') {
           const statusB = [{ ['files.submit_status']: { $regex: 'Yet to submit', $options: 'i' } }];
           this.statusBased = JSON.stringify(statusB);
-        } else if (this.detail?.key === 'allActivities' || 'submission') {
+        } else if (this.navDetails?.tableType === 'allActivities' || 'submission') {
           this.statusBased = 'undefined';
         }
-        if (this.detail?.key === 'submission') {
+        if (this.navDetails?.tableType === 'submission') {
           // need to add course id from navigation for view submission details
-          this.courseId = this.courseDetails?.id;
+          this.courseId = this.navDetails?.id;
         } else {
           this.courseId = 'undefined';
         }

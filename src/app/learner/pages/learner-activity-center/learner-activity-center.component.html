@@ -15,10 +15,10 @@
   <div class="row">
     <div class="col vert-txt-center" *ngIf="detail?.key !== 'submission'">
       <p class="m-l-10px">Activity center &nbsp; >
-        &nbsp;{{detail?.key =='allActivities'? 'All' : detail?.key | titlecase}} activities</p>
+        &nbsp;{{navDetails?.tableType =='allActivities'? 'All' : navDetails?.tableType | titlecase}} activities</p>
     </div>
     <div class="col vert-txt-center" *ngIf="detail?.key == 'submission'">
-      <p class="m-l-10px txt-caps">{{courseDetails.name}} &nbsp;>&nbsp; Submission details</p>
+      <p class="m-l-10px txt-caps">{{navDetails?.name}} &nbsp;>&nbsp; Submission details</p>
     </div>
     <div class="col">
       <form class="search-form float_right search-viewactivities" style="display: inline-block; margin-right: 20px;">
