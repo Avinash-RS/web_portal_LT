@@ -241,7 +241,8 @@ export class LearnerMyCourseComponent implements OnInit {
       categoryPopupName = this.categoryPopupData;
     }
     this.learnerService.bulkclaimcourse(this.userDetailes._id, this.userDetailes.user_id,
-      this.categoryyName.superSubCategoryId, categoryPopupName).subscribe((bulkclaimcourse: any) => {
+      this.categoryyName.superSubCategoryId, categoryPopupName ,this.catalogueDetails.catalogueId, this.categoryData.categoryId,
+      this.subchildData.subCategoryId).subscribe((bulkclaimcourse: any) => {
         if (bulkclaimcourse.data.bulkclaimcourse.success === true) {
           this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, this.categoryData.categoryId,
             this.userDetailes._id, this.subchildData.subCategoryId, this.categoryyName.superSubCategoryId).subscribe((course: any) => {

@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./activities.component.scss']
 })
 export class ActivitiesComponent implements OnInit {
+  @ViewChild('fileInput') fileInput;
   assignmentContent: any;
   courseStartDate: any;
   courseEndDate: any;
@@ -28,6 +29,8 @@ export class ActivitiesComponent implements OnInit {
   activityEndDate: string;
   performDetails: any;
   iterationDetails: any;
+  selectedIndex = 0;
+  selectfile: File;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService) {
 
@@ -41,6 +44,15 @@ export class ActivitiesComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+  getSelectedIndex(i) {
+    this.selectedIndex = i;
+  }
+  uploadDoc(event) {
+    console.log('eve', event);
+  }
+  uploadDocs() {
+    this.fileInput.nativeElement.click();
   }
 
   // getperformActivityData
