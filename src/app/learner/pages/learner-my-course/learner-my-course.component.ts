@@ -241,8 +241,7 @@ export class LearnerMyCourseComponent implements OnInit {
       categoryPopupName = this.categoryPopupData;
     }
     this.learnerService.bulkclaimcourse(this.userDetailes._id, this.userDetailes.user_id,
-      this.categoryyName.superSubCategoryId, categoryPopupName ,this.catalogueDetails.catalogueId, this.categoryData.categoryId,
-      this.subchildData.subCategoryId).subscribe((bulkclaimcourse: any) => {
+      this.categoryyName.superSubCategoryId, categoryPopupName).subscribe((bulkclaimcourse: any) => {
         if (bulkclaimcourse.data.bulkclaimcourse.success === true) {
           this.learnerService.getCoureBasedOnCatalog(this.catalogueDetails.catalogueId, this.categoryData.categoryId,
             this.userDetailes._id, this.subchildData.subCategoryId, this.categoryyName.superSubCategoryId).subscribe((course: any) => {
@@ -388,6 +387,12 @@ export class LearnerMyCourseComponent implements OnInit {
       feed_back: c.coursePlayerStatus.feed_back
     };
     this.router.navigateByUrl('/Learner/scorm', { state: { detail: detail1 } });
+  }
+Go(course) {
+    const data1 = {
+      courseId: course.course_id
+    };
+    this.router.navigateByUrl('/Learner/activities', { state:  { data:  data1 } });
   }
 
   gotoDesc(c) {
