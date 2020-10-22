@@ -196,8 +196,8 @@ export class LearnerActivityCenterComponent implements OnInit {
       this.searchValue = quickSearchValue;
       clearTimeout(this.delayTimer);
       this.delayTimer = setTimeout(() => {
-        this.callGridApi(this.sortrecord || 'undefined', this.searchValue || '', 'undefined');
-        // this.callGridApi(this.sortrecord || 'undefined', this.searchValue || '', this.searchColumn || 'undefined');
+        // this.callGridApi(this.sortrecord || 'undefined', this.searchValue || '', 'undefined');
+        this.callGridApi(this.sortrecord || 'undefined', this.searchValue || '', this.searchColumn || 'undefined');
       }, 500);
     } else if (quickSearchValue.length === 0) {
       this.closesearch();
@@ -209,16 +209,16 @@ export class LearnerActivityCenterComponent implements OnInit {
     // this.paginationPageSize = 10;
     // this.searchValue = 'undefined';
     // this.sortType = 'undefined';
+
     this.callGridApi(
       this.sortrecord || 'undefined',
-      '',
-      this.searchColumn || 'undefined'
+      '', 'undefined'
     );
   }
   callGridApi(sortValue, globalSearchValue, searchColumnVal) {
     this.sortrecord = sortValue;
     this.searchValue = globalSearchValue ? globalSearchValue : '';
-    console.log(searchColumnVal, 'sc');
+    // console.log(searchColumnVal, 'sc');
     this.searchColumn = searchColumnVal;
     this.gridApi.setDatasource({
       getRows: (params: IGetRowsParams) => {
@@ -249,13 +249,13 @@ export class LearnerActivityCenterComponent implements OnInit {
             if (result.data.get_course_activities.message.length === 0) {
               this.toastr.warning('No results found');
             }
-            if (result.data && result.data.get_course_activities?.success) {
-              if (params.startRow === 0) {
-                this.rowData = [];
-              }
-              this.rowData = result.data.get_course_activities.message;
-              this.rowDataLength = result.data.get_course_activities.total_count;
-            }
+            // if (result.data && result.data.get_course_activities?.success) {
+            //   if (params.startRow === 0) {
+            //     this.rowData = [];
+            //   }
+            //   this.rowData = result.data.get_course_activities.message;
+            //   this.rowDataLength = result.data.get_course_activities.total_count;
+            // }
             params.successCallback(
               result.data.get_course_activities.message, result.data.get_course_activities.total_count
             );
@@ -325,17 +325,16 @@ export class LearnerActivityCenterComponent implements OnInit {
           filter[propName] = { $regex: searchString.trimEnd(), $options: 'i' };
         }
         filterArray.push(filter);
-
       }
     }
     if (filterArray.length > 0) {
       this.searchColumn = JSON.stringify(filterArray);
       // console.log(this.searchColumn, 'searchcol');
-      this.callGridApi(this.sortrecord || 'undefined', '', this.searchColumn);
-      // this.callGridApi(this.sortrecord || 'undefined', this.searchValue || '', this.searchColumn);
-    } else if (!searchString) {
-      this.searchColumn = 'undefined';
-      this.callGridApi(this.sortrecord || 'undefined', '', this.searchColumn);
+      // this.callGridApi(this.sortrecord || 'undefined', '', this.searchColumn);
+      this.callGridApi(this.sortrecord || 'undefined', this.searchValue || '', this.searchColumn);
+    } else {
+      // console.log(searchString, 'ss');
+      this.callGridApi(this.sortrecord || 'undefined', this.searchValue || '', 'undefined');
     }
   }
 }
