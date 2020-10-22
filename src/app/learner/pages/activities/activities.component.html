@@ -4,7 +4,7 @@
 
   <mat-tab-group animationDuration="1000ms">
     <mat-tab label="Assignments">
-      <mat-accordion class="example-headers-align" multi>
+      <mat-accordion class="example-headers-align" multi *ngIf="assignmentMessage">
         <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
           <mat-expansion-panel>
             <mat-expansion-panel-header>
@@ -215,6 +215,11 @@
           </mat-expansion-panel>
         </ng-container>
       </mat-accordion>
+
+      <div class="errormsg" *ngIf="assignmentMessage">
+              No assignment found for this course.
+      
+      </div>
 
     </mat-tab>
 
