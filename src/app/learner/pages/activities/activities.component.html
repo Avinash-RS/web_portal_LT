@@ -552,7 +552,7 @@
                     Add your files
                   </button>
   
-                  <button mat-stroked-button [disabled]="project.enableSubmit == false" class="submit-btn" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')"
+                  <button mat-stroked-button [disabled]="project.enableSubmit == false || project.projectActivity.videodetails < 0 " class="submit-btn" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')"
                   *ngIf="project.projectActivity.submitAction == 'upload'|| project.projectActivity.submitAction == 'delete'"> 
                     Submit
                   </button><br>

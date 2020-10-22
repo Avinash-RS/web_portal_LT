@@ -83,7 +83,7 @@ export class ActivitiesComponent implements OnInit {
     if (this.gs.checkLogout()) {
     this.userDetail = this.gs.checkLogout();
     }
-    this.courseid =  this.checkDetails ?  this.checkDetails.course_id : localStorage.getItem('Courseid');
+    this.courseid =  this.checkDetails ?  this.checkDetails.courseId : localStorage.getItem('Courseid');
     this.getAssignmentmoduleData();
     this.getprojectActivityData();
     this.getperformActivityData();
@@ -250,7 +250,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   getprojectActivityData() {
-    this.Lservice.getprojectActivityData(this.userDetail.user_id, 'r00owr2x').subscribe((data: any) => {
+    this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
       this.projectDetails = data.data.getprojectActivityData.data;
       this.projectDetails.forEach(element => {
@@ -291,7 +291,7 @@ export class ActivitiesComponent implements OnInit {
       payload.append('uploadvideo', this.selectfile[i]);
     }
     // payload.append('uploadvideo', this.selectfile, this.selectfile.name);
-    payload.append('course_id', 'r00owr2x');
+    payload.append('course_id', this.courseid);
     payload.append('module_id', project.projectActivity.module_id);
     payload.append('topic_id', project.projectActivity.topic_id);
     payload.append('user_id', this.userDetail.user_id);
@@ -326,7 +326,7 @@ export class ActivitiesComponent implements OnInit {
       submitStatus = 'late';
     }
     const submitData = {
-      course_id : 'r00owr2x',
+      course_id : this.courseid,
       module_id : project.projectActivity.module_id,
       topic_id : project.projectActivity.topic_id,
       user_id : this.userDetail.user_id,
