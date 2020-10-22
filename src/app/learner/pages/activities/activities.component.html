@@ -390,7 +390,7 @@
         </div>
         </div>
       <div class="row">
-        <div [ngClass]="openList ? 'col-10' : 'col-12'">
+        <div [ngClass]="project.projectActivity.showLearnerList ? 'col-10' : 'col-12'">
           <!-----------------------------Row 1--------------------->
           <div class="row">
             <div class="col-12">
@@ -404,7 +404,7 @@
                 <mat-icon class="grpIcon">group</mat-icon>
               </button>
               <span class="teamName">{{project.projectActivity.groupname}} ({{project.projectActivity.groupcount}})</span>&nbsp;
-              <button mat-mini-fab class="arrBtn" *ngIf="!showIcon" (click)="openList = !openList; showIcon = !showIcon">
+              <button mat-mini-fab class="arrBtn" *ngIf="!project.projectActivity.showLearnerList" (click)="project.projectActivity.showLearnerList = !project.projectActivity.showLearnerList">
                 <mat-icon class="grpIcon">arrow_back</mat-icon>
               </button>
             </span>
@@ -418,9 +418,8 @@
               && project.projectActivity.grade_status == 'Not Evaluated'">  <span class="dot"></span>
               Yet to submit</span>
 
-              <span class="f_wt_600 projectSubmitstatus submitted" *ngIf="project.projectActivity.submit_status == 'ontime' || 
-              project.projectActivity.submit_status == 'late' && 
-              project.projectActivity.grade_status == 'Not Evaluated'">  <span class="submitdot"></span>
+              <span class="f_wt_600 projectSubmitstatus submitted" *ngIf="project.projectActivity.grade_status == 'Not Evaluated'
+               && project.projectActivity.submitAction == 'submit'">  <span class="submitdot"></span>
               Submitted</span>
 
               <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated'">  <span class="gradedot"></span>
@@ -528,12 +527,17 @@
                       <mat-icon class="fileIcon">add</mat-icon>{{fileName}}
                       <mat-icon class="fileIcon">close</mat-icon>
                     </p> -->
-
-                    <div class="videoPreview ml-auto mr-auto mb-3" *ngFor="let item of project.projectActivity.videodetails">
-                      <mat-icon class="videoPlay float-left">play_circle_outline</mat-icon>
-                      <span>{{(item.name| slice:0:28)+'...'}}</span>
-                      <mat-icon class="closeBtn float-right">delete</mat-icon>
+                    <!-- *ngIf="item.doc_type == 'video/mp4'" -->
+                    <div class="fileData ml-auto mr-auto mb-3" *ngFor="let item of project.projectActivity.videodetails">
+                      
+                      <mat-icon  *ngIf="item.doc_type == 'video/mp4'" class="videoPlay float-left">play_circle_outline</mat-icon>
+                      <mat-icon  *ngIf="item.doc_type == 'image/jpeg'|| item.doc_type == 'image/png' || item.doc_type =='image/jpg'" class="videoPlay float-left">photo</mat-icon>
+                      <mat-icon  *ngIf="item.doc_type == 'application/pdf'" class="videoPlay float-left">picture_as_pdf</mat-icon>
+                      <span class="uploadfileName">{{(item.name| slice:0:28)+'...'}}</span>
+                      <mat-icon class="deleteIcon float-right"  *ngIf="project.projectActivity.submitAction !== 'submit'"
+                      (click)="learnerSumbitdeleteVideo(project, item, 'delete')">delete</mat-icon>
                     </div>
+                   
                   <!-- </div><br>
                   <div *ngIf="project.projectActivity.videodetails">
                   <div class="box-0-3" *ngFor="let item of project.projectActivity.videodetails">
@@ -546,21 +550,22 @@
                  
                   <input type="file" style="display: none" accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" 
                   #fileInput [(ngModel)]="fileName"
-                  (change)="uploadDoc($event, project, false)" />
+                  (change)="uploadDoc($event, project, 'upload')" />
                   <button mat-stroked-button  class="upload-btn" (click)="uploadDocs()"
-                  [disabled]="project.enableSubmit == false"> 
+                  [disabled]="project.enableSubmit == false" *ngIf="project.projectActivity.submitAction !== 'submit'"> 
                     <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                     Add your files
                   </button>
   
-                  <button mat-stroked-button [disabled]="project.enableSubmit == false" class="submit-btn" (click)="learnerUploadVideo(project, true)"> 
+                  <button mat-stroked-button [disabled]="project.enableSubmit == false" class="submit-btn" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')"
+                  *ngIf="project.projectActivity.submitAction == 'upload'|| project.projectActivity.submitAction == 'delete'"> 
                     Submit
                   </button><br>
-                  <!-- <button mat-stroked-button  class="submit-btn" *ngIf="project.projectActivity.submitAction == 'true'"> 
+                  <button mat-stroked-button  class="submitted-btn" *ngIf="project.projectActivity.submitAction == 'submit'"> 
                     Submitted
-                  </button><br> -->
+                  </button><br>
                   <p *ngIf="fileName && !showSubmittedon">Submitted files cannot be edited</p>
-                  <p *ngIf="showSubmittedon">Submitted on: {{project.submittedOn}}</p>
+                  <p *ngIf="project.projectActivity.submitAction == 'submit'">Submitted on: {{project.submittedOn}}</p>
                 </div>
               </div>
               </div>
@@ -598,9 +603,9 @@
         </div>
        
        <!------------------------------------Learner list------------------------------->
-        <div class="col-2 learnerList" *ngIf="openList">
+        <div class="col-2 learnerList" *ngIf="project.projectActivity.showLearnerList">
           <div class="align-center">{{project.projectActivity.groupname}} ({{project.projectActivity.groupcount}})
-            <button mat-mini-fab class="arrfwd" *ngIf="showIcon" (click)="openList = !openList; showIcon = !showIcon">
+            <button mat-mini-fab class="arrfwd" *ngIf="project.projectActivity.showLearnerList" (click)="project.projectActivity.showLearnerList = !project.projectActivity.showLearnerList">
               <mat-icon class="grpIcon">arrow_forward</mat-icon>
             </button>
           </div>

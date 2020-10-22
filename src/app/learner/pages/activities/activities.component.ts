@@ -80,7 +80,6 @@ export class ActivitiesComponent implements OnInit {
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
     this.checkDetails = detail;
-    console.log(this.checkDetails);
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout();
     }
@@ -259,37 +258,27 @@ export class ActivitiesComponent implements OnInit {
   getprojectActivityData() {
     this.Lservice.getprojectActivityData(this.userDetail.user_id, 'r00owr2x').subscribe((data: any) => {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
-        this.projectDetails = data.data.getprojectActivityData.data;
-        this.projectDetails.forEach(element => {
-          const startDate = new Date(element.projectActivity.activitystartdate);
-          element.activityStartDate = moment(startDate).format('ll');
-          element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
-          const endDate = new Date(element.projectActivity.activityenddate);
-          element.activityEndDate = moment(endDate).format('ll');
-          const submitDate = new Date(element.projectActivity.submitted_on);
-          element.submittedOn = moment(submitDate).format('ll');
-          if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
-            element.enableSubmit = false;
-          } else {
-            element.enableSubmit = true;
-          }
-        });
-      }
-    });
-  }
-  // Pass courseid dynamically
-  getperformActivityData() {
-    this.Lservice.getperformActivityData(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
-      this.performDetails = data.data.getperformActivityData.data;
-      this.performDetails.forEach((element) => {
-        const startDate = new Date(element.performActivity.activitystartdate);
+      this.projectDetails = data.data.getprojectActivityData.data;
+      this.projectDetails.forEach(element => {
+        element.showLearnerList = false;
+        // element.isCollapsed = false;
+        const startDate = new Date(element.projectActivity.activitystartdate);
         element.activityStartDate = moment(startDate).format('ll');
-        element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
-        const endDate = new Date(element.performActivity.activityenddate);
+        element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
+        const endDate = new Date(element.projectActivity.activityenddate);
         element.activityEndDate = moment(endDate).format('ll');
+        const submitDate = new Date(element.projectActivity.submitted_on);
+        element.submittedOn = moment(submitDate).format('ll');
+        if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
+          element.enableSubmit = false;
+        } else {
+          element.enableSubmit = true;
+        }
       });
-    });
+ }
+});
   }
+
   learnerUploadVideo(project, submitAction) {
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:MM');
@@ -329,24 +318,71 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
+  // Submit or Delete
+  learnerSumbitdeleteVideo(project, deleteItem, submitAction) {
+    const startDate1 = new Date(project.projectActivity.activitystartdate);
+    project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:MM');
+    const endDate1 = new Date(project.projectActivity.activityenddate);
+    project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:MM');
+    let submitStatus = '';
+    if (moment().format('DD-MM-YYYY HH:MM') >= project.actstartDate &&
+    moment().format('DD-MM-YYYY HH:MM') <= project.actendDate) {
+    submitStatus = 'ontime';
+    } else if (moment().format('DD-MM-YYYY HH:MM') > project.actendDate) {
+      submitStatus = 'late';
+    }
+    const submitData = {
+      course_id : 'r00owr2x',
+      module_id : project.projectActivity.module_id,
+      topic_id : project.projectActivity.topic_id,
+      user_id : this.userDetail.user_id,
+      submit_status : submitStatus,
+      total_mark : project.projectActivity.total_mark,
+      submitType : 'project',
+      submitAction,
+      iterationid : project.projectActivity.project_id,
+      object_id : project.projectActivity.project_id,
+      videodetails : submitAction === 'delete' ? [deleteItem] : []
+    };
+    this.Lservice.learnerSumbitdeleteVideo(submitData).subscribe((data: any) => {
+      if (data.success === true) {
+        this.toastr.success(data.message);
+        this.showSubmittedon = true;
+        this.getprojectActivityData();
+      } else {
+        this.toastr.warning(data.message);
+      }
+    });
+  }
+
+  getperformActivityData() {
+    this.Lservice.getperformActivityData(this.userDetail.user_id , this.courseid).subscribe((data: any) => {
+      this.performDetails = data.data.getperformActivityData.data;
+      this.performDetails.forEach((element) => {
+        const startDate = new Date(element.performActivity.activitystartdate);
+        element.activityStartDate = moment(startDate).format('ll');
+        element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
+        const endDate = new Date(element.performActivity.activityenddate);
+        element.activityEndDate = moment(endDate).format('ll');
+      });
+    });
+  }
+
+
   // --------------------- Perform document upload ----------------------------
 
   uploadDocument(event, perform) {
-    console.log('perform', perform);
     this.selectPerformfile.push(event.target.files[0] as File);
     this.performlearnerUploadVideo();
   }
 
   uploadDocuments(perform, performans) {
-    console.log('perform', perform);
-    console.log('performans', performans);
     this.performsData = performans;
     this.itrationData = perform;
     this.fileInput.nativeElement.click();
   }
 
   performlearnerUploadVideo() {
-    console.log('this.performsData.activityEndDate', this.selectPerformfile);
     const currentDate = new Date();
     const performVideo = new FormData();
     performVideo.append('uploadvideo', this.selectPerformfile[0]);
@@ -360,9 +396,7 @@ export class ActivitiesComponent implements OnInit {
     performVideo.append('submitAction', this.submitType);
     performVideo.append('iterationid', this.itrationData.iterationid);
     performVideo.append('object_id', this.performsData.performActivity.perform_id);
-    console.log('performVideo', performVideo);
     this.Lservice.learnerUploadVideo(performVideo).subscribe((data: any) => {
-      console.log('uploaded', data);
       if (data.success === true) {
         this.toastr.success(data.message);
         this.getperformActivityData();
@@ -374,7 +408,6 @@ export class ActivitiesComponent implements OnInit {
   }
 
   removeVideo(videoName) {
-    console.log('removeVideo', videoName);
     // this.selectPerformfile = this.selectPerformfile.filter(data => data.lastModified !== videoName.lastModified);
   }
 }

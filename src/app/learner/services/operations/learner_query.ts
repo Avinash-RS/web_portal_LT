@@ -1449,6 +1449,8 @@ export const getprojectActivityData = gql`
         name
         size
         doc_type
+        uploaded_date
+        is_active
         }
         materialDetails{
         id
