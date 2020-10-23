@@ -554,7 +554,7 @@
                 <div class="align-center">
                  
                   <input type="file" style="display: none" accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" 
-                  #fileInput [(ngModel)]="fileName"
+                  #uploadInput [(ngModel)]="fileName"
                   (change)="uploadDoc($event, project, 'upload')" />
                   <button mat-stroked-button  class="upload-btn" (click)="uploadDocs()"
                   [disabled]="project.enableSubmit == false" *ngIf="project.projectActivity.submitAction !== 'submit'"> 
@@ -595,7 +595,7 @@
                       <mat-icon  class="f_size_14" aria-hidden="false">play_circle_outline</mat-icon>Preview
                     </div>
                     <div class="col-6 dis-line">
-                      <mat-icon class="f_size_14" aria-hidden="false">get_app</mat-icon>Download
+                      <mat-icon class="f_size_14" aria-hidden="false" (click)="downloadDoc(video)">get_app</mat-icon>Download
                     </div>
                   </div>
                 </div>
