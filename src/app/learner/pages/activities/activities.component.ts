@@ -17,6 +17,7 @@ import { appendFile } from 'fs';
 export class ActivitiesComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
   @ViewChild('videoInput') videoInput;
+  @ViewChild('uploadInput') uploadInput;
   hover = false;
   itrationStarted: boolean;
   itrationEnded: boolean;
@@ -33,6 +34,7 @@ export class ActivitiesComponent implements OnInit {
   openList = false;
   @ViewChild(MatAccordion) accordion: MatAccordion;
   isCollapsed = false;
+  projectId: any;
   isperformColaps = false;
   performId: any;
   projectDetails: any;
@@ -80,9 +82,10 @@ export class ActivitiesComponent implements OnInit {
     },
     nav: true
   };
+  courseName: any;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
-    private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
-    public route: Router, public datePipe: DatePipe) {
+              private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
+              public route: Router, public datePipe: DatePipe) {
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
     this.checkDetails = detail;
@@ -90,6 +93,7 @@ export class ActivitiesComponent implements OnInit {
       this.userDetail = this.gs.checkLogout();
     }
     this.courseid =  this.checkDetails ?  this.checkDetails.courseId : localStorage.getItem('Courseid');
+    this.courseName = this.checkDetails ?  this.checkDetails.courseName : localStorage.getItem('CourseName');
     this.getAssignmentmoduleData();
     this.getprojectActivityData();
     this.getperformActivityData();
@@ -107,7 +111,7 @@ export class ActivitiesComponent implements OnInit {
     this.learnerUploadVideo(project, submitAction);
   }
   uploadDocs() {
-    this.fileInput.nativeElement.click();
+    this.uploadInput.nativeElement.click();
   }
 
   // getperformActivityData
@@ -183,6 +187,16 @@ export class ActivitiesComponent implements OnInit {
       disableClose: true,
     });
     this.docpath = path;
+  }
+
+  projectPreviewDoc(templateRef: TemplateRef<any>, path) {
+    this.dialog.open(templateRef, {
+      width: '100%',
+      height: '100%',
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+    this.previewDoc = path.videourl;
   }
 
   downloadPdf(doc) {
@@ -284,14 +298,23 @@ export class ActivitiesComponent implements OnInit {
  }
 });
   }
+
+  // tslint:disable-next-line:adjacent-overload-signatures
+  downloadDoc(doc) {
+    const link = document.createElement('a');
+    link.target = '_blank';
+    link.style.display = 'none';
+    link.href = doc.videourl;
+    link.click();
+  }
 // Pass courseid dynamically
   getperformActivityData() {
     this.Lservice.getperformActivityData(
       this.userDetail.user_id, 'r00owr2x'
       // this.courseid
     ).subscribe((data: any) => {
+      if (data && data.data && data.data.getperformActivityData && data.data.getperformActivityData.data) {
       this.performDetails = data.data.getperformActivityData.data;
-      console.log('this.performDetails', this.performDetails);
       this.performDetails.forEach((element) => {
         const startDate = new Date(element.performActivity.activitystartdate);
         element.activityStartDate = moment(startDate).format('ll');
@@ -313,6 +336,7 @@ export class ActivitiesComponent implements OnInit {
         }
         console.log('this.itrationStarted', this.itrationStarted, 'this.itrationEnded', this.itrationEnded);
       });
+    }
     });
   }
   learnerUploadVideo(project, submitAction) {
@@ -348,6 +372,7 @@ export class ActivitiesComponent implements OnInit {
         this.toastr.success(data.message);
         this.showSubmittedon = true;
         this.getprojectActivityData();
+        this.selectfile = [];
       } else {
         this.toastr.warning(data.message);
       }
@@ -385,6 +410,7 @@ export class ActivitiesComponent implements OnInit {
         this.toastr.success(data.message);
         this.showSubmittedon = true;
         this.getprojectActivityData();
+        deleteItem = [];
       } else {
         this.toastr.warning(data.message);
       }
@@ -394,7 +420,6 @@ export class ActivitiesComponent implements OnInit {
   // --------------------- Perform document upload ----------------------------
 
   uploadDocument(event, perform) {
-    console.log('perform', perform);
     // this.selectPerformfile.push(event.target.files[0] as File);
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < event.target.files.length; i++) {
@@ -455,7 +480,6 @@ export class ActivitiesComponent implements OnInit {
       videodetails: this.submitType === 'delete' ? videoFile : []
   };
     this.Lservice.learnerSumbitdeleteVideo(data).subscribe((response: any) => {
-       console.log('response', response);
        if (response.success === true) {
         this.toastr.success(response.message);
         this.getperformActivityData();
