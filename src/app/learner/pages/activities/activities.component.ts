@@ -16,6 +16,8 @@ import { appendFile } from 'fs';
 })
 export class ActivitiesComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
+  @ViewChild('videoInput') videoInput;
+  hover = false;
   itrationStarted: boolean;
   itrationEnded: boolean;
   selectPerformfile: any[] = [];
@@ -285,8 +287,8 @@ export class ActivitiesComponent implements OnInit {
 // Pass courseid dynamically
   getperformActivityData() {
     this.Lservice.getperformActivityData(
-      this.userDetail.user_id,
-      this.courseid
+      this.userDetail.user_id, 'r00owr2x'
+      // this.courseid
     ).subscribe((data: any) => {
       this.performDetails = data.data.getperformActivityData.data;
       console.log('this.performDetails', this.performDetails);
@@ -297,18 +299,19 @@ export class ActivitiesComponent implements OnInit {
         const endDate = new Date(element.performActivity.activityenddate);
         element.activityEndDate = moment(endDate).format('ll');
         console.log('startDate', element.activityStartDate);
-        if (element.activityStartDate <= moment(new Date()).format('ll')) {
-          this.itrationStarted = false;
-        } else {
+        if (moment(new Date()).format('ll') < element.activityStartDate) {
           this.itrationStarted = true;
+        } else {
+          this.itrationStarted = false;
         }
-        if (element.activityEndDate > moment(new Date()).format('ll')) {
-          this.itrationEnded = false;
+        if ( moment(new Date()).format('ll') > element.activityEndDate) {
+          this.itrationEnded = true;
           this.submitStatus = 'ontime';
         } else {
-          this.itrationEnded = true;
+          this.itrationEnded = false;
           this.submitStatus = 'late';
         }
+        console.log('this.itrationStarted', this.itrationStarted, 'this.itrationEnded', this.itrationEnded);
       });
     });
   }
@@ -403,7 +406,7 @@ export class ActivitiesComponent implements OnInit {
   uploadDocuments(perform, performans) {
     this.performsData = performans;
     this.itrationData = perform;
-    this.fileInput.nativeElement.click();
+    this.videoInput.nativeElement.click();
   }
 
   performlearnerUploadVideo() {
