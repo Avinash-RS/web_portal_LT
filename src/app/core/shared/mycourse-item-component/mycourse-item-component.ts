@@ -49,9 +49,13 @@ export class MycourseItemComponent implements OnInit {
 
   }
   Go(course) {
+    console.log('name', course);
     const data1 = {
-      courseId: course.course_id
+      courseId: course.course_id,
+      courseName: course.course_name
     };
+    localStorage.setItem('Courseid', data1.courseId);
+    localStorage.setItem('CourseName', data1.courseName);
     this.router.navigateByUrl('/Learner/activities', { state:  { data:  data1 } });
   }
   gotoDesc(c) {

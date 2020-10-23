@@ -228,7 +228,7 @@ margin-bottom: 1% !important;
   margin-left: 20px;
 }
 .group {
-  margin-right: 44px;
+  margin-right: 13px;
 }
 .box-0-2{
   margin-top: 10px;
@@ -420,6 +420,22 @@ margin-top: 8px;
 .deleteIcon {
   color: #5C6873;
   font-size: 21px;
+}
+.pointer {
+  cursor: pointer;
+}
+.closeBtn {
+  background: #C02222 !important;
+  float: right;
+  top: -12px;
+  position: relative;
+  right: -11px;
+  height: 35px;
+  width: 35px;
+}
+.work {
+  position: relative;
+  left: 35px;
 }
 /*Ramya CSS ends here*/
 .videoPreview {
