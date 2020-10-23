@@ -29,8 +29,8 @@ export class HeaderComponent implements OnInit {
 
   @HostBinding('class') componentCssClass;
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
-              private http: HttpClient, public overlayContainer: OverlayContainer,
-              public router: Router, private gs: GlobalServiceService) {
+    private http: HttpClient, public overlayContainer: OverlayContainer,
+    public router: Router, private gs: GlobalServiceService) {
     // this.getScreenSize();
   }
 
@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit {
     }, 3000);
   }
   getShortName(fullName) {
-    const Name = fullName?.split(' ').map(function(str) {
+    const Name = fullName?.split(' ').map(function (str) {
       return str ? str[0].toUpperCase() : '';
     }).join('');
     if (Name?.length === 1) {
@@ -92,49 +92,46 @@ export class HeaderComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes'
     }).then((result) => {
-      console.log('inside logout result', result);
+      console.log('inside logout result', result, 'login -', this.loginDetails, 'user - ', this.userDetailes);
       if (result.value) {
-        // this.loading = true;
-        this.router.navigate(['/Learner/login']);
-        localStorage.clear();
-        sessionStorage.clear();
-        this.services.getIpAddressByUrl();
-        this.userDetailes = null;
-        this.services.logout(this.userDetailes._id, false).subscribe((logout: any) => {
+        this.loading = true;
+        // this.router.navigate(['/Learner/login']);
+        // localStorage.clear();
+        // sessionStorage.clear();
+        // this.services.getIpAddressByUrl();
+        // this.userDetailes = null;
+        this.services.logout(this.loginDetails._id, false).subscribe((logout: any) => {
           if (logout.data.logout && logout.data.logout.success) {
-            // this.router.navigate(['/Learner/login']);
-            // localStorage.clear();
-            // sessionStorage.clear();
-            // this.services.getIpAddressByUrl();
-            // this.userDetailes = null;
-            // this.userDetailes = null;
-            // this.loading = false;
+            this.router.navigate(['/Learner/login']);
+            localStorage.clear();
+            sessionStorage.clear();
+            this.services.getIpAddressByUrl();
+            this.userDetailes = null;
+            this.loading = false;
             // june 10 added by ankit
           } else if (logout.data.logout && !logout.data.logout.success) {
             if (logout.data.logout.error_msg === 'Authentication error. Token required.') {
-              // this.router.navigate(['/Learner/login']);
-              // localStorage.clear();
-              // sessionStorage.clear();
-              // this.services.getIpAddressByUrl();
-              // this.userDetailes = null;
-              // this.userDetailes = null;
-              // this.loading = false;
+              this.router.navigate(['/Learner/login']);
+              localStorage.clear();
+              sessionStorage.clear();
+              this.services.getIpAddressByUrl();
+              this.userDetailes = null;
+              this.loading = false;
               // june 10 added by ankit
             } else {
-              // this.alert.openAlert(logout.data.logout.message, null);
+              this.alert.openAlert(logout.data.logout.message, null);
             }
           } else {
-            console.log(logout);
-            // logout.errors.forEach(element => {
-            //   if (element.message.includes('TokenExpiredError') || element.message.includes('JsonWebTokenError')) {
-            //     localStorage.clear();
-            //     sessionStorage.clear();
-            //     this.services.getIpAddressByUrl();
-            //     // this.gs.checkLogout();
-            //     this.loading = false;
-            //   }
-            // });
-            // this.alert.openAlert('Please try again later', null);
+            logout.errors.forEach(element => {
+              if (element.message.includes('TokenExpiredError') || element.message.includes('JsonWebTokenError')) {
+                localStorage.clear();
+                sessionStorage.clear();
+                this.services.getIpAddressByUrl();
+                // this.gs.checkLogout();
+                this.loading = false;
+              }
+            });
+            this.alert.openAlert('Please try again later', null);
           }
         });
       }
