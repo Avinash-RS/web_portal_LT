@@ -16,6 +16,7 @@ import { appendFile } from 'fs';
 })
 export class ActivitiesComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
+  @ViewChild('uploadInput') uploadInput;
   selectPerformfile: any[] = [];
   performsData: any;
   itrationData: any;
@@ -80,6 +81,7 @@ export class ActivitiesComponent implements OnInit {
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
     this.checkDetails = detail;
+    console.log('id', this.checkDetails);
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout();
     }
@@ -101,7 +103,7 @@ export class ActivitiesComponent implements OnInit {
     this.learnerUploadVideo(project, submitAction);
   }
   uploadDocs() {
-    this.fileInput.nativeElement.click();
+    this.uploadInput.nativeElement.click();
   }
 
   // getperformActivityData
@@ -279,6 +281,15 @@ export class ActivitiesComponent implements OnInit {
 });
   }
 
+  // tslint:disable-next-line:adjacent-overload-signatures
+  downloadDoc(doc) {
+    console.log('download', doc);
+    const link = document.createElement('a');
+    link.target = '_blank';
+    link.style.display = 'none';
+    link.href = doc.videourl;
+    link.click();
+  }
   learnerUploadVideo(project, submitAction) {
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:MM');
