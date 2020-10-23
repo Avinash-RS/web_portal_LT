@@ -17,6 +17,8 @@ import { appendFile } from 'fs';
 export class ActivitiesComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
   @ViewChild('uploadInput') uploadInput;
+  itrationStarted: boolean;
+  itrationEnded: boolean;
   selectPerformfile: any[] = [];
   performsData: any;
   itrationData: any;
@@ -29,7 +31,9 @@ export class ActivitiesComponent implements OnInit {
   assFile: File;
   openList = false;
   @ViewChild(MatAccordion) accordion: MatAccordion;
-  public isCollapsed = false;
+  isCollapsed = false;
+  isperformColaps = false;
+  performId: any;
   projectDetails: any;
   groupDetails: any;
   activityStartDate: string;
@@ -40,7 +44,8 @@ export class ActivitiesComponent implements OnInit {
   selectfile = [];
   showSubmittedon = false;
   fileName: any;
-  submitType: any;
+  submitType: string;
+  submitStatus: string;
   checkDetails: any;
   assignmentMessage = false;
   trendingCategorires: any = {
@@ -75,9 +80,8 @@ export class ActivitiesComponent implements OnInit {
     nav: true
   };
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
-              private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
-              public route: Router, public datePipe: DatePipe) {
-
+    private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
+    public route: Router, public datePipe: DatePipe) {
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
     this.checkDetails = detail;
@@ -290,6 +294,36 @@ export class ActivitiesComponent implements OnInit {
     link.href = doc.videourl;
     link.click();
   }
+// Pass courseid dynamically
+  getperformActivityData() {
+    this.Lservice.getperformActivityData(
+      this.userDetail.user_id,
+      this.courseid
+    ).subscribe((data: any) => {
+      this.performDetails = data.data.getperformActivityData.data;
+      console.log('this.performDetails', this.performDetails);
+      this.performDetails.forEach((element) => {
+        const startDate = new Date(element.performActivity.activitystartdate);
+        element.activityStartDate = moment(startDate).format('ll');
+        element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
+        const endDate = new Date(element.performActivity.activityenddate);
+        element.activityEndDate = moment(endDate).format('ll');
+        console.log('startDate', element.activityStartDate);
+        if (element.activityStartDate <= moment(new Date()).format('ll')) {
+          this.itrationStarted = false;
+        } else {
+          this.itrationStarted = true;
+        }
+        if (element.activityEndDate > moment(new Date()).format('ll')) {
+          this.itrationEnded = false;
+          this.submitStatus = 'ontime';
+        } else {
+          this.itrationEnded = true;
+          this.submitStatus = 'late';
+        }
+      });
+    });
+  }
   learnerUploadVideo(project, submitAction) {
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:MM');
@@ -366,24 +400,15 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
-  getperformActivityData() {
-    this.Lservice.getperformActivityData(this.userDetail.user_id , this.courseid).subscribe((data: any) => {
-      this.performDetails = data.data.getperformActivityData.data;
-      this.performDetails.forEach((element) => {
-        const startDate = new Date(element.performActivity.activitystartdate);
-        element.activityStartDate = moment(startDate).format('ll');
-        element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
-        const endDate = new Date(element.performActivity.activityenddate);
-        element.activityEndDate = moment(endDate).format('ll');
-      });
-    });
-  }
-
-
   // --------------------- Perform document upload ----------------------------
 
   uploadDocument(event, perform) {
-    this.selectPerformfile.push(event.target.files[0] as File);
+    console.log('perform', perform);
+    // this.selectPerformfile.push(event.target.files[0] as File);
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < event.target.files.length; i++) {
+      this.selectPerformfile.push(event.target.files[i]);
+  }
     this.performlearnerUploadVideo();
   }
 
@@ -396,12 +421,16 @@ export class ActivitiesComponent implements OnInit {
   performlearnerUploadVideo() {
     const currentDate = new Date();
     const performVideo = new FormData();
-    performVideo.append('uploadvideo', this.selectPerformfile[0]);
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.selectPerformfile.length; i++) {
+      performVideo.append('uploadvideo', this.selectPerformfile[i]);
+    }
+    // performVideo.append('uploadvideo' , this.selectPerformfile[0]);
     performVideo.append('course_id', this.performsData.performActivity.course_id);
     performVideo.append('module_id', this.performsData.performActivity.module_id);
     performVideo.append('topic_id', this.performsData.performActivity.topic_id);
     performVideo.append('user_id', this.userDetail.user_id);
-    performVideo.append('submit_status', 'ontime');
+    performVideo.append('submit_status', this.submitStatus);
     performVideo.append('total_mark', this.itrationData.total_mark);
     performVideo.append('submitType', 'perform');
     performVideo.append('submitAction', this.submitType);
@@ -418,7 +447,31 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
-  removeVideo(videoName) {
-    // this.selectPerformfile = this.selectPerformfile.filter(data => data.lastModified !== videoName.lastModified);
+  submitDeleteVideo(videoName, itrdata, perform) {
+    let videoFile = [];
+    videoFile.push(videoName);
+    let data = {
+      course_id: perform.course_id,
+      module_id: perform.module_id,
+      topic_id: perform.topic_id,
+      user_id: this.userDetail.user_id,
+      submit_status: this.submitStatus,
+      total_mark: itrdata.total_mark,
+      submitType: 'perform',
+      submitAction: this.submitType,
+      iterationid: itrdata.iterationid,
+      object_id: perform.perform_id,
+      videodetails: this.submitType === 'delete' ? videoFile : []
+  };
+    this.Lservice.learnerSumbitdeleteVideo(data).subscribe((response: any) => {
+       console.log('response', response);
+       if (response.success === true) {
+        this.toastr.success(response.message);
+        this.getperformActivityData();
+        videoFile = [];
+      } else {
+        this.toastr.warning(response.message);
+      }
+    });
   }
 }

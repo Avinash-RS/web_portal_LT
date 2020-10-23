@@ -1505,6 +1505,7 @@ query getperformActivityData($userId: String , $courseId: String) {
           score_mark
           submitted_on
           submitted_date
+          submitAction
           grade_status
           comments
           videodetails{
@@ -1513,7 +1514,9 @@ query getperformActivityData($userId: String , $courseId: String) {
             name
             size
             doc_type
-          }
+            uploaded_date
+            is_active
+            }
         }
       }
     }

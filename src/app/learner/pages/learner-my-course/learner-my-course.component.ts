@@ -32,6 +32,7 @@ export class LearnerMyCourseComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   @Output() focusChange: EventEmitter<MatTabChangeEvent>;
   [x: string]: any;
+  showSkeleton = false;
   jobRoleId: any = '';
   strDate: Date = new Date();
   userDetailes: any;
@@ -116,7 +117,7 @@ export class LearnerMyCourseComponent implements OnInit {
       if (params.email_id === undefined) {
         console.log('inside if');
         this.userDetailes = this.gs.checkLogout();
-        this.getEnrolledCourses('', '', '', '', '', '');
+        this.getEnrolledCourses('', '', '', '', '', '', true);
         this.getScreenSize();
         this.getCountForCategories();
         // this.getTab();
@@ -134,7 +135,7 @@ export class LearnerMyCourseComponent implements OnInit {
             localStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
             sessionStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
             this.router.navigateByUrl('/Learner/MyCourse');
-            this.getEnrolledCourses('', '', '', '', '', '');
+            this.getEnrolledCourses('', '', '', '', '', '', true);
             this.getScreenSize();
             this.getCountForCategories();
             // this.getTab();
@@ -248,7 +249,7 @@ export class LearnerMyCourseComponent implements OnInit {
                 this.loading = false;
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
-                this.getEnrolledCourses('', '', '', '', '', '');
+                this.getEnrolledCourses('', '', '', '', '', '', false);
                 this.getCountForJobRole();
                 // this.getCountForJobRole();
               }
@@ -271,7 +272,7 @@ export class LearnerMyCourseComponent implements OnInit {
   //     this.categoryNamePrint = categoryName[0].categoryName;
   // }
   // }
-  getEnrolledCourses(event, catagoryId, catalougeId, jobRoleCategoryId, searchName, jobroleCheck) {
+  getEnrolledCourses(event, catagoryId, catalougeId, jobRoleCategoryId, searchName, jobroleCheck, showSkelton) {
     if (this.screenWidth < 800 && this.keyboardUp) {
       this.keyboardUp = false;
       this.opencourceId = '';
@@ -320,7 +321,8 @@ export class LearnerMyCourseComponent implements OnInit {
       }
     }
 
-    this.loading = true;
+    this.showSkeleton = showSkelton;
+    this.loading = !showSkelton;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
       catalougeId, catagoryId, jobRoleCategoryId, searchName).subscribe((enrolledList: any) => {
         if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
@@ -364,6 +366,7 @@ export class LearnerMyCourseComponent implements OnInit {
             this.jobAllCourseCount = this.enrolledCourses.length;
           }
         }
+        this.showSkeleton = false;
         this.loading = false;
         this.viewCourseClass = true;
       });
@@ -563,7 +566,7 @@ Go(course) {
               if (course && course.data && course.data.getCoureBasedOnCatalog && course.data.getCoureBasedOnCatalog.data) {
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
-                this.getEnrolledCourses('', '', '', '', '', '');
+                this.getEnrolledCourses('', '', '', '', '', '', false);
                 this.getCountForJobRole();
                 // this.getCountForJobRole();
               }
@@ -642,7 +645,7 @@ Go(course) {
   resettingJobRole() {
     this.selectedJobRole = 'Job Role';
     this.jobRoleId = null;
-    this.getEnrolledCourses('', '', '', '', '', false);
+    this.getEnrolledCourses('', '', '', '', '', false, false);
   }
   resettingJobRoledata() {
     this.selectedJobRole = 'Job Role';

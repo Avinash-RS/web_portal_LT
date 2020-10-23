@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+
 // others
 import { BarRatingModule } from 'ngx-bar-rating';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
@@ -27,6 +29,9 @@ import { StickyHeaderDirective } from '@core/services/directives/sticky-header.d
 import { VideoPlayerComponent } from '@core/shared/video-player/video-player.component';
 import { AudioPlayerComponent } from '@core/shared/audio-player/audio-player.component';
 import { DataTableComponent } from './shared/data-table/data-table.component';
+import { MycourseItemComponent } from '@core/shared/mycourse-item-component/mycourse-item-component';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 // Video and Audio Player
 import { VgCoreModule } from 'videogular2/compiled/core';
 import { VgControlsModule } from 'videogular2/compiled/controls';
@@ -39,7 +44,11 @@ import { LandingHeaderComponent } from './core/landing-header/landing-header.com
 import { CategoryComponentComponent } from './shared/category-component/category-component.component';
 import { PdfreaderComponent } from './shared/pdfreader/pdfreader.component';
 import { ToolbarNotificationComponent } from './shared/toolbar-notification/toolbar-notification.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
 // const routes: Routes = [
 //   // { path: 'video', component: VideoPlayerComponent, canActivate: [AuthGuard] },
 //   // { path: 'audio', component: AudioPlayerComponent, canActivate: [AuthGuard] },
@@ -65,7 +74,8 @@ import { ToolbarNotificationComponent } from './shared/toolbar-notification/tool
     LandingHeaderComponent,
     CategoryComponentComponent,
     SearchPipe,
-    ToolbarNotificationComponent
+    ToolbarNotificationComponent,
+    MycourseItemComponent
   ],
 
   imports: [
@@ -86,6 +96,16 @@ import { ToolbarNotificationComponent } from './shared/toolbar-notification/tool
     Ng5SliderModule,
     NgxPaginationModule,
     MyDatePickerModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+    NgCircleProgressModule.forRoot({}),
+    NgCircleProgressModule,
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -106,6 +126,7 @@ import { ToolbarNotificationComponent } from './shared/toolbar-notification/tool
     CategoryComponentComponent,
     PdfreaderComponent,
     GuidelineSearchComponent,
+    MycourseItemComponent,
     SearchPipe]
 })
 export class CoreModule { }
