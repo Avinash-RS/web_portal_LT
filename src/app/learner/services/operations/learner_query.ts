@@ -1058,6 +1058,20 @@ export const playerModuleAndTopic = gql`
             link
             status
             isVisible
+            children {
+              _id
+            title
+            link
+            status
+            isVisible
+            children {
+              _id
+            title
+            link
+            status
+            isVisible
+            }
+            }
           }
         }
       }
