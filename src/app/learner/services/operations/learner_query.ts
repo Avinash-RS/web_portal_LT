@@ -1467,17 +1467,6 @@ export const getprojectActivityData = gql`
         is_active
         }
         materialDetails{
-<<<<<<< HEAD
-          _id
-          doc_type
-          path
-          type_name
-          filename
-          size
-          assignment
-          checked
-      }
-=======
         _id
         doc_type
         path
@@ -1487,7 +1476,6 @@ export const getprojectActivityData = gql`
         assignment
         checked
         }
->>>>>>> 177b23b44e7cf3e30cf90253e1f8b44234ffdd2c
         groupDetails{
         id
         name
