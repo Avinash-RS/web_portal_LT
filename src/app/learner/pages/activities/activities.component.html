@@ -406,7 +406,7 @@
                 <mat-icon class="grpIcon">group</mat-icon>
               </button>
               <span class="teamName">{{(project.projectActivity.groupname| slice:0:10)+'...'}}
-                 ({{project.projectActivity.groupcount}})</span>&nbsp;
+                 ({{project.projectActivity.groupDetails.length}})</span>&nbsp;
               <button mat-mini-fab class="arrBtn" *ngIf="!project.projectActivity.showLearnerList" (click)="project.projectActivity.showLearnerList = !project.projectActivity.showLearnerList">
                 <mat-icon class="grpIcon">arrow_back</mat-icon>
               </button>
@@ -417,12 +417,10 @@
           <div class="row">
             <div class="col-10"></div>
             <div class="col-2 text-right">
-              <span class="f_wt_600 status" *ngIf="project.projectActivity.submit_status == 'notsubmitted'
-              && project.projectActivity.grade_status == 'Not Evaluated'">  <span class="dot"></span>
+              <span class="f_wt_600 status" *ngIf="project.projectActivity.submit_status == 'notsubmitted'">  <span class="dot"></span>
               Yet to submit</span>
 
-              <span class="f_wt_600 projectSubmitstatus submitted" *ngIf="project.projectActivity.grade_status == 'Not Evaluated'
-               && project.projectActivity.submitAction == 'submit'">  <span class="submitdot"></span>
+              <span class="f_wt_600 projectSubmitstatus submitted" *ngIf="project.projectActivity.submitAction == 'submit'">  <span class="submitdot"></span>
               Submitted</span>
 
               <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated'">  <span class="gradedot"></span>
@@ -524,7 +522,8 @@
                       No project yet
                   </h3>
               </div>
-              <div class="col-4" *ngIf="project.projectActivity.grade_status == 'Not Evaluated'">
+              <div class="col-4" *ngIf="project.projectActivity.grade_status == 'Not Evaluated'
+              || project.projectActivity.grade_status == ''">
                 <div class="f_size_16 f_wt_600 align-center work">Your work</div>
                 <div class="box-0-2">
                     <div class="fileData ml-auto mr-auto mb-3" *ngFor="let item of project.projectActivity.videodetails">
@@ -647,7 +646,7 @@
        <!------------------------------------Learner list------------------------------->
         <div class="col-2 learnerList" *ngIf="project.projectActivity.showLearnerList">
           <div class="align-center">{{(project.projectActivity.groupname| slice:0:10)+'...'}}
-            ({{project.projectActivity.groupcount}})
+            ({{project.projectActivity.groupDetails.length}})
             <button mat-mini-fab class="arrfwd" *ngIf="project.projectActivity.showLearnerList" (click)="project.projectActivity.showLearnerList = !project.projectActivity.showLearnerList">
               <mat-icon class="grpIcon">arrow_forward</mat-icon>
             </button>

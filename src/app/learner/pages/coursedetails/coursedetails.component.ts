@@ -60,7 +60,10 @@ export class CoursedetailsComponent implements OnInit {
   finalper2: number;
   localper: string;
   selectedIndex = 0;
-  assignmentVal = false;
+  selectedIndex1 = 0;
+  selectedIndex2 = 0;
+  selectedIndex3 = 0;
+    assignmentVal = false;
   docpath: any = null;
   assFile: File;
   courseStartDate: any;
@@ -443,21 +446,29 @@ export class CoursedetailsComponent implements OnInit {
   getSelectedIndex(i) {
     this.selectedIndex = i;
   }
-
+  getsubSelectedIndex(j) {
+    this.selectedIndex1 = j;
+  }
+  getsupersubSelectedIndex(k) {
+    this.selectedIndex2 = k;
+  }
+  getfourSelectedIndex(l) {
+    this.selectedIndex2 = l;
+  }
   refreshData() {
-    this.dataRefresher =
-      setInterval(() => {
-        this.playerModuleAndTopic(false);
+    // this.dataRefresher =
+    //   setInterval(() => {
+    //     this.playerModuleAndTopic(false);
 
-      }, 20000);
+    //   }, 20000);
   }
   autoHide() {
-    this.dataRefresher =
-      setInterval(() => {
-        this.playerModuleAndTopic(false);
-        this.sider = false;
-        this.playerMenuEnable = true;
-      }, 10000);
+    // this.dataRefresher =
+    //   setInterval(() => {
+    //     this.playerModuleAndTopic(false);
+    //     this.sider = false;
+    //     this.playerMenuEnable = true;
+    //   }, 10000);
   }
 
   makeFullScreen() {
@@ -474,14 +485,14 @@ export class CoursedetailsComponent implements OnInit {
   //   this.sider = true;
   // }
   cancelPageRefresh() {
-    if (this.dataRefresher) {
-      clearInterval(this.dataRefresher);
-    }
+    // if (this.dataRefresher) {
+    //   clearInterval(this.dataRefresher);
+    // }
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnDestroy() {
-    this.cancelPageRefresh();
+    // this.cancelPageRefresh();
   }
 
 
