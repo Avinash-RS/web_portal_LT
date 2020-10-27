@@ -83,6 +83,8 @@ export class ActivitiesComponent implements OnInit {
     nav: true
   };
   courseName: any;
+  mouseOverIndex: any;
+
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
               public route: Router, public datePipe: DatePipe) {
@@ -315,6 +317,7 @@ export class ActivitiesComponent implements OnInit {
     ).subscribe((data: any) => {
       if (data && data.data && data.data.getperformActivityData && data.data.getperformActivityData.data) {
       this.performDetails = data.data.getperformActivityData.data;
+      console.log('this.performDetails', this.performDetails);
       this.performDetails.forEach((element) => {
         const startDate = new Date(element.performActivity.activitystartdate);
         element.activityStartDate = moment(startDate).format('ll');
@@ -488,5 +491,17 @@ export class ActivitiesComponent implements OnInit {
         this.toastr.warning(response.message);
       }
     });
+  }
+
+  playVideo() {
+    console.log('play video');
+  }
+
+  mouseover(index) {
+    this.mouseOverIndex = index;
+  }
+
+  mouseLeave(index) {
+    this.mouseOverIndex = index;
   }
 }

@@ -509,8 +509,12 @@ margin-top: 8px;
 }
 
 .carouselRowHover {
-  height: 5rem;
+  height: 5.7rem;
   background-color: #5C6873;
+}
+
+.playActions {
+  margin-bottom: 10px;
 }
 
 .carouselCol {
@@ -559,10 +563,10 @@ margin-top: 8px;
 }
 
 :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
-  color: #fff;
+  color: $color-darkGrey;
   font-size: 30px !important;
   // background: #252525;
-  background: $color-darkGrey;
+  background: transparent;
   display: inline-block;
   cursor: pointer !important;
   padding: 14px !important;
