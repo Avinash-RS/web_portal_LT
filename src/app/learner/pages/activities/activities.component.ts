@@ -16,7 +16,9 @@ import { appendFile } from 'fs';
 })
 export class ActivitiesComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
+  @ViewChild('videoInput') videoInput;
   @ViewChild('uploadInput') uploadInput;
+  hover = false;
   itrationStarted: boolean;
   itrationEnded: boolean;
   selectPerformfile: any[] = [];
@@ -308,8 +310,8 @@ export class ActivitiesComponent implements OnInit {
 // Pass courseid dynamically
   getperformActivityData() {
     this.Lservice.getperformActivityData(
-      this.userDetail.user_id,
-      this.courseid
+      this.userDetail.user_id, 'r00owr2x'
+      // this.courseid
     ).subscribe((data: any) => {
       if (data && data.data && data.data.getperformActivityData && data.data.getperformActivityData.data) {
       this.performDetails = data.data.getperformActivityData.data;
@@ -319,18 +321,20 @@ export class ActivitiesComponent implements OnInit {
         element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
         const endDate = new Date(element.performActivity.activityenddate);
         element.activityEndDate = moment(endDate).format('ll');
-        if (element.activityStartDate <= moment(new Date()).format('ll')) {
-          this.itrationStarted = false;
-        } else {
+        console.log('startDate', element.activityStartDate);
+        if (moment(new Date()).format('ll') < element.activityStartDate) {
           this.itrationStarted = true;
+        } else {
+          this.itrationStarted = false;
         }
-        if (element.activityEndDate > moment(new Date()).format('ll')) {
-          this.itrationEnded = false;
+        if ( moment(new Date()).format('ll') > element.activityEndDate) {
+          this.itrationEnded = true;
           this.submitStatus = 'ontime';
         } else {
-          this.itrationEnded = true;
+          this.itrationEnded = false;
           this.submitStatus = 'late';
         }
+        console.log('this.itrationStarted', this.itrationStarted, 'this.itrationEnded', this.itrationEnded);
       });
     }
     });
@@ -427,7 +431,7 @@ export class ActivitiesComponent implements OnInit {
   uploadDocuments(perform, performans) {
     this.performsData = performans;
     this.itrationData = perform;
-    this.fileInput.nativeElement.click();
+    this.videoInput.nativeElement.click();
   }
 
   performlearnerUploadVideo() {
