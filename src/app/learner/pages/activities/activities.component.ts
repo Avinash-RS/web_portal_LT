@@ -191,7 +191,16 @@ export class ActivitiesComponent implements OnInit {
     this.docpath = path;
   }
 
-  projectPreviewDoc(templateRef: TemplateRef<any>, path) {
+  projectPreviewDoc(templateRef: TemplateRef<any>, path, type) {
+    if (type === 'material') {
+    this.dialog.open(templateRef, {
+      width: '100%',
+      height: '100%',
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+    this.previewDoc = path;
+  } else if (type === 'files') {
     this.dialog.open(templateRef, {
       width: '100%',
       height: '100%',
@@ -199,6 +208,7 @@ export class ActivitiesComponent implements OnInit {
       disableClose: true,
     });
     this.previewDoc = path.videourl;
+  }
   }
 
   downloadPdf(doc) {
@@ -302,14 +312,22 @@ export class ActivitiesComponent implements OnInit {
   }
 
   // tslint:disable-next-line:adjacent-overload-signatures
-  downloadDoc(doc) {
+  downloadDoc(doc, type) {
+    if (type === 'material') {
     const link = document.createElement('a');
     link.target = '_blank';
     link.style.display = 'none';
-    link.href = doc.videourl;
+    link.href = doc.path;
     link.click();
+    } else if (type === 'files') {
+      const link = document.createElement('a');
+      link.target = '_blank';
+      link.style.display = 'none';
+      link.href = doc.videourl;
+      link.click();
+    }
   }
-// Pass courseid dynamically
+
   getperformActivityData() {
     this.Lservice.getperformActivityData(
       this.userDetail.user_id,  this.courseid
@@ -317,14 +335,12 @@ export class ActivitiesComponent implements OnInit {
     ).subscribe((data: any) => {
       if (data && data.data && data.data.getperformActivityData && data.data.getperformActivityData.data) {
       this.performDetails = data.data.getperformActivityData.data;
-      console.log('this.performDetails', this.performDetails);
       this.performDetails.forEach((element) => {
         const startDate = new Date(element.performActivity.activitystartdate);
         element.activityStartDate = moment(startDate).format('ll');
         element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
         const endDate = new Date(element.performActivity.activityenddate);
         element.activityEndDate = moment(endDate).format('ll');
-        console.log('startDate', element.activityStartDate);
         if (moment(new Date()).format('ll') < element.activityStartDate) {
           this.itrationStarted = true;
         } else {
@@ -337,7 +353,6 @@ export class ActivitiesComponent implements OnInit {
           this.itrationEnded = false;
           this.submitStatus = 'late';
         }
-        console.log('this.itrationStarted', this.itrationStarted, 'this.itrationEnded', this.itrationEnded);
       });
     }
     });

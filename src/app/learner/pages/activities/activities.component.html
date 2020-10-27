@@ -420,10 +420,12 @@
           <div class="row">
             <div class="col-10"></div>
             <div class="col-2 text-right">
-              <span class="f_wt_600 status" *ngIf="project.projectActivity.submit_status == 'notsubmitted'">  <span class="dot"></span>
+              <span class="f_wt_600 status" *ngIf="project.projectActivity.submit_status == 'notsubmitted'
+              && project.projectActivity.grade_status == ''">  <span class="dot"></span>
               Yet to submit</span>
 
-              <span class="f_wt_600 projectSubmitstatus submitted" *ngIf="project.projectActivity.submitAction == 'submit'">  <span class="submitdot"></span>
+              <span class="f_wt_600 projectSubmitstatus submitted" *ngIf="project.projectActivity.submitAction == 'submit'
+              && project.projectActivity.grade_status == 'Not Evaluated' || project.projectActivity.grade_status == ''">  <span class="submitdot"></span>
               Submitted</span>
 
               <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated'">  <span class="gradedot"></span>
@@ -475,15 +477,16 @@
 
                 <owl-carousel-o [options]="trendingCategorires"
                 [ngClass]="project.projectActivity.materialDetails.length <= 4 ? 'widthClass arrow' : 'arrow'">
-                <ng-template class="row ml-0 mr-0" carouselSlide *ngFor="let material of project.projectActivity.materialDetails">
-                    <div (mouseover)="hover = !hover" (mouseout)="hover = !hover" class="col-4 w-100 pt-2 pb-2 carouselCol">
-                      <mat-card class="p-0 carouselCard">
+                <ng-template class="row ml-0 mr-0" carouselSlide *ngFor="let material of project.projectActivity.materialDetails; let i = index">
+                    <div class="col-4 w-100 pt-2 pb-2 carouselCol">
+                      <mat-card class="p-0 carouselCard" (mouseover)="hover = true; mouseover(i)">
+                        <!--  -->
                         <div class="row ml-0 mr-0 carouselRow1">
                           <div class="col-12">
                             
                           </div>
                         </div>
-                        <div [ngClass]="!hover ? 'row ml-0 mr-0 carouselRow' : 'row ml-0 mr-0 carouselRowHover'">
+                        <div (mouseleave)="hover = false" [ngClass]="!hover ? 'row ml-0 mr-0 carouselRow' : 'row ml-0 mr-0 carouselRowHover'">
                           <div class="col-12 text-center m-auto pl-0 pr-0">
                             <span class="carouselText">{{material.filename}}</span>
                             <br>
@@ -494,14 +497,14 @@
                                     <p class="carouselText">Duration:</p>
                                   </div>
                                 </div>
-                                <div class="row ml-0 mr-0">
-                                  <div class="col-5 text-left pr-0 colAction" (click)="projectPreviewDoc(projectPreviewDialog,material)">
+                                <div class="row ml-0 mr-0 playActions">
+                                  <div class="col-5 text-left pr-0 colAction" (click)="projectPreviewDoc(projectPreviewDialog,material, 'material')">
                                     <mat-icon class="position-absolute text-white playBtn">play_circle_outline</mat-icon>
                                     <span class="text-white actionBtn">Play</span>
+                                    <!-- <span class="text-white actionBtn">Preview</span> -->
                                   </div>
-                                  <div class="col-7 text-center pr-0 colAction"
-                                  (click)="downloadDoc(material)">
-                                    <i class="fa fa-download text-white position-absolute downloadBtn" aria-hidden="true"></i>
+                                  <div class="col-7 text-center pr-0 colAction" (click)="downloadDoc(material, 'material')">
+                                   <i class="fa fa-download text-white position-absolute downloadBtn" aria-hidden="true"></i>
                                     <span class="text-white actionBtn1">Download</span>
                                   </div>
                                 </div>
@@ -549,7 +552,7 @@
                   <button mat-stroked-button *ngIf="project.projectActivity.videodetails.length == 0" class="submit-btn"> Submit </button><br>
                   <button mat-stroked-button  class="submitted-btn" *ngIf="project.projectActivity.submitAction == 'submit'"> 
                     Submitted
-                  </button><br>
+                  </button><br><br>
                   <p *ngIf="project.projectActivity.submit_status == 'notsubmitted'">Submitted files cannot be edited</p>
                   <p *ngIf="project.projectActivity.submitAction == 'submit'">Submitted on: {{project.submittedOn}}</p>
                 </div>
@@ -586,16 +589,17 @@
               </div> -->
             
               <owl-carousel-o [options]="trendingCategorires"
-              [ngClass]="project.projectActivity.videodetails.length <= 3 ? 'widthClass arrow' : 'arrow'">
-              <ng-template class="row ml-0 mr-0" carouselSlide *ngFor="let video of project.projectActivity.videodetails">
-                  <div (mouseover)="hover = !hover" (mouseout)="hover = !hover" class="col-4 w-100 pt-2 pb-2 carouselCol">
-                    <mat-card class="p-0 carouselCard">
+              [ngClass]=" project.projectActivity.videodetails.length <= 4 ? 'widthClass arrow' : 'arrow'">
+              <ng-template class="row ml-0 mr-0" carouselSlide *ngFor="let video of project.projectActivity.videodetails; let i = index">
+                  <div class="col-4 w-100 pt-2 pb-2 carouselCol">
+                    <mat-card class="p-0 carouselCard" (mouseover)="hover = true; mouseover(i)">
+                      <!--  -->
                       <div class="row ml-0 mr-0 carouselRow1">
                         <div class="col-12">
                           
                         </div>
                       </div>
-                      <div [ngClass]="!hover ? 'row ml-0 mr-0 carouselRow' : 'row ml-0 mr-0 carouselRowHover'">
+                      <div (mouseleave)="hover = false" [ngClass]="!hover ? 'row ml-0 mr-0 carouselRow' : 'row ml-0 mr-0 carouselRowHover'">
                         <div class="col-12 text-center m-auto pl-0 pr-0">
                           <span class="carouselText">{{video.name}}</span>
                           <br>
@@ -606,16 +610,15 @@
                                   <p class="carouselText">Duration:</p>
                                 </div>
                               </div>
-                              <div class="row ml-0 mr-0">
-                                <div class="col-5 text-left pr-0 colAction">
+                              <div class="row ml-0 mr-0 playActions">
+                                <div class="col-5 text-left pr-0 colAction" (click)="projectPreviewDoc(projectPreviewDialog,video, 'files')">
                                   <mat-icon class="position-absolute text-white playBtn">play_circle_outline</mat-icon>
-                                  <span class="text-white actionBtn"
-                                  (click)="projectPreviewDoc(projectPreviewDialog,video)">Play</span>
+                                  <span class="text-white actionBtn">Play</span>
+                                  <!-- <span class="text-white actionBtn">Preview</span> -->
                                 </div>
-                                <div class="col-7 text-center pr-0 colAction">
-                                  <i class="fa fa-download text-white position-absolute downloadBtn" aria-hidden="true"></i>
-                                  <span class="text-white actionBtn1"
-                                  (click)="downloadDoc(video)">Download</span>
+                                <div class="col-7 text-center pr-0 colAction" (click)="downloadDoc(video, 'files')">
+                                 <i class="fa fa-download text-white position-absolute downloadBtn" aria-hidden="true"></i>
+                                  <span class="text-white actionBtn1">Download</span>
                                 </div>
                               </div>
                             </div>
