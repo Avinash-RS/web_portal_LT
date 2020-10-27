@@ -279,19 +279,18 @@
               <owl-carousel-o [options]="trendingCategorires"
                       [ngClass]="perform.performActivity.materialDetails.length <= 4 ? 'widthClass arrow' : 'arrow'">
                       <ng-template class="row ml-0 mr-0" carouselSlide *ngFor="let material of perform.performActivity.materialDetails">
-                          <div [ngClass]="hover === false ?'col-4 w-100 carouselCol': 'col-4 w-100 carouselHoverCol'">
-                            <mat-card class="p-0 carouselCard" (mouseover)="hover = !hover" (mouseout)="hover = !hover">
-                              <!--  -->
-                              <div [ngClass]="hover === false ? 'row ml-0 mr-0 carouselRow1': 'row ml-0 mr-0 carouselRow2'">
+                          <div (mouseover)="hover = !hover" (mouseout)="hover = !hover" class="col-4 w-100 pt-2 pb-2 carouselCol">
+                            <mat-card class="p-0 carouselCard">
+                              <div class="row ml-0 mr-0 carouselRow1">
                                 <div class="col-12">
                                   
                                 </div>
                               </div>
-                              <div [ngClass]="hover === false ? 'row ml-0 mr-0 carouselRow' : 'row ml-0 mr-0 carouselRowHover'">
+                              <div [ngClass]="!hover ? 'row ml-0 mr-0 carouselRow' : 'row ml-0 mr-0 carouselRowHover'">
                                 <div class="col-12 text-center m-auto pl-0 pr-0">
                                   <span class="carouselText">fileName</span>
                                   <br>
-                                  <div class="row ml-0 mr-0" *ngIf="hover == true">
+                                  <div class="row ml-0 mr-0" *ngIf="hover">
                                     <div class="col-12 pl-0 pr-0">
                                       <div class="row ml-0 mr-0">
                                         <div class="col-12 text-left">
@@ -299,13 +298,13 @@
                                         </div>
                                       </div>
                                       <div class="row ml-0 mr-0">
-                                        <div class="col-6 text-left pr-0">
-                                          <mat-icon class="position-absolute">play_circle_outline</mat-icon>
-                                          <span class="actionBtn">Play</span>
+                                        <div class="col-5 text-left pr-0 colAction">
+                                          <mat-icon class="position-absolute text-white playBtn">play_circle_outline</mat-icon>
+                                          <span class="text-white actionBtn">Play</span>
                                         </div>
-                                        <div class="col-6 text-center">
-                                          <i class="fa fa-download" aria-hidden="true"></i>
-                                          <span class="actionBtn">Download</span>
+                                        <div class="col-7 text-center pr-0 colAction">
+                                          <i class="fa fa-download text-white position-absolute downloadBtn" aria-hidden="true"></i>
+                                          <span class="text-white actionBtn1">Download</span>
                                         </div>
                                       </div>
                                     </div>
@@ -352,7 +351,7 @@
                     <div class="videoPreview ml-auto mr-auto mb-3" *ngFor="let videoName of itrdata.videodetails">
                       <mat-icon class="videoPlay float-left">play_circle_outline</mat-icon>
                       <span>{{(videoName.name| slice:0:28)+'...'}}</span>
-                      <mat-icon class="closeBtn float-right" *ngIf="itrdata.submit_status == 'notsubmitted'" (click)="submitDeleteVideo(videoName, itrdata, perform.performActivity , submitType = 'delete')">delete</mat-icon>
+                      <mat-icon class="deleteBtn float-right" *ngIf="itrdata.submit_status == 'notsubmitted'" (click)="submitDeleteVideo(videoName, itrdata, perform.performActivity , submitType = 'delete')">delete</mat-icon>
                     </div>
   
                     <input type="file" accept="video/mp4" multiple style="display: none" #videoInput [(ngModel)]="fileName"

@@ -447,7 +447,6 @@ margin-top: 8px;
   cursor: pointer;
 }
 .closeBtn {
-  background: #C02222 !important;
   float: right;
   top: -12px;
   position: relative;
@@ -468,9 +467,9 @@ margin-top: 8px;
   padding: 0.3rem 5px;
 }
 
-.closeBtn {
+.deleteBtn {
   color: #5C6873;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .submitted-btn{
@@ -492,45 +491,66 @@ margin-top: 8px;
 }
 
 .carouselCard {
-  height: 100% !important;
   border: 0.5px solid #707070;
+  cursor: pointer;
 }
 
 .carouselRow1 {
-  height: 70%;
+  height: 7rem;
 }
-.carouselRow2 {
-  height: 50%;
-}
+// .carouselRow2 {
+//   height: 50%;
+// }
 
 .carouselRow {
-  height: 30%;
+  height: 3rem;
   background-color: #5C6873;
 }
 
 .carouselRowHover {
-  height: 50%;
+  height: 5rem;
   background-color: #5C6873;
 }
 
 .carouselCol {
   max-width: 100% !important;
-  height: 9rem;
+  height: 15rem;
 }
 
-.carouselHoverCol {
-  max-width: 100% !important;
-  height: 11rem;
-}
+// .carouselHoverCol {
+//   max-width: 100% !important;
+//   height: 11rem;
+// }
 
 .carouselText {
   font-size: 12px;
   color: #ffffff;
 }
 
+.downloadBtn {
+  top: 0.3rem;
+}
+
+.playBtn {
+  font-size: 18px;
+  top: 3px;
+  left: 0.6rem;
+}
+
 .actionBtn {
-  color: #ffffff;
   font-size: 12px;
+  margin-left: 2rem;
+}
+
+.actionBtn1 {
+  font-size: 12px;
+  margin-left: 1.5rem;
+}
+
+.colAction {
+ padding-left: 5px;
+ cursor: pointer;
+ 
 }
 
 :host ::ng-deep .widthClass .owl-carousel.owl-drag .owl-item {
@@ -571,8 +591,12 @@ margin-top: 8px;
 
 }
 
-::ng-deep .owl-carousel .owl-stage-outer{
-  height: 171px;
+:host ::ng-deep .owl-theme {
+ height: 15rem !important;
+}
+
+:host ::ng-deep .owl-carousel .owl-stage-outer{
+  height: 100%;
 }
 .errormsg {
   padding: 20px;

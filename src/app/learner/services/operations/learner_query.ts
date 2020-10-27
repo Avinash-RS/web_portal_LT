@@ -1453,12 +1453,15 @@ export const getprojectActivityData = gql`
         is_active
         }
         materialDetails{
-        id
-        materialurl
-        name
-        doctype
-        size
-        }
+          _id
+          doc_type
+          path
+          type_name
+          filename
+          size
+          assignment
+          checked
+      }
         groupDetails{
         id
         name
@@ -1492,11 +1495,14 @@ query getperformActivityData($userId: String , $courseId: String) {
         topic_id
         evaluationmode
         materialDetails{
-          id
-          materialurl
-          name
-          doctype
+          _id
+          doc_type
+          path
+          type_name
+          filename
           size
+          assignment
+          checked
         }
         iterationDetails{
           iterationid
