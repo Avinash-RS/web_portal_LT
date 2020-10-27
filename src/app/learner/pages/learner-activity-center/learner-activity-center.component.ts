@@ -148,9 +148,12 @@ export class LearnerActivityCenterComponent implements OnInit {
         },
         {
           headerName: 'Activity',
+          sortable: true,
+          filter: true,
+          floatingFilterComponentParams: { suppressFilterButton: true },
           // Need to change field once API is updated and assignments to '-' in value getter
           field: 'activity',
-          valueGetter: (params) => params.data?.activity ? params.data.activity : 'Assignments',
+          valueGetter: (params) => params.data?.activity ? params.data.activity : '-',
           // sortable: true,
         },
         {
@@ -286,6 +289,9 @@ export class LearnerActivityCenterComponent implements OnInit {
       } else if (sortState[0].colId === 'status') {
         const r = { ['files.submit_status']: sortState[0]?.sort === 'asc' ? 1 : -1 };
         this.sortrecord = JSON.stringify(r);
+      } else if (sortState[0].colId === 'activity') {
+        const r = { ['files.activity']: sortState[0]?.sort === 'asc' ? 1 : -1 };
+        this.sortrecord = JSON.stringify(r);
       } else {
         const r = { [sortState[0]?.colId]: sortState[0]?.sort === 'asc' ? 1 : -1 };
         this.sortrecord = JSON.stringify(r);
@@ -320,6 +326,9 @@ export class LearnerActivityCenterComponent implements OnInit {
         } else if (propName === 'status') {
           searchString = filterModel[keyd].filter;
           filter['files.submit_status'] = { $regex: searchString.trimEnd(), $options: 'i' };
+        } else if (propName === 'activity') {
+          searchString = filterModel[keyd].filter;
+          filter['files.activity'] = { $regex: searchString.trimEnd(), $options: 'i' };
         } else {
           searchString = filterModel[keyd].filter;
           filter[propName] = { $regex: searchString.trimEnd(), $options: 'i' };
