@@ -28,7 +28,7 @@ import {
   getDetailsCount,
   getlearnertrack,
   getLearnerenrolledCourses,
-  getlearnerdashboarddetails,
+  getlearnerdashboard,
   getFeedbackQuestion,
   getCoursePlayerStatusForCourse,
   getAssignmentmoduleData,
@@ -641,11 +641,12 @@ export class LearnerServicesService {
 
 
 
-  get_learner_dashboard(user_id) {
+  get_learner_dashboard(user_id,user_obj_id) {
     return this.Apollo.query({
-      query: getlearnerdashboarddetails,
+      query: getlearnerdashboard,
       variables: {
-        user_id
+        user_id:user_id,
+        user_obj_id:user_obj_id
       }
     });
   }

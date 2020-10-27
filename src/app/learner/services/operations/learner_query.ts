@@ -739,51 +739,203 @@ export const getlearnertrack = gql`
     }
   }
 `;
-export const getlearnerdashboarddetails = gql`
-  query getlearnerdashboarddetails($user_id: String) {
-    getlearnerdashboarddetails(user_id: $user_id) {
+export const getlearnerdashboard = gql`
+  query get_learner_dashboard($user_id: String!, $user_obj_id:String!) {
+    get_learner_dashboard(user_id: $user_id, user_obj_id:$user_obj_id) {
       success
-      message
-      data {
-        courseEnrolled {
-          totalCount
-          IncDecPec
-          valueIncDecPec
+      error_msg
+      message{
+            course_details{
+                 _id
+                course_name
+                course_description
+                course_long_description
+                course_img_url
+                preview_video
+                certificate_name
+                course_mode
+                course_type
+                course_language
+                feed_back
+                drm
+                user_role
+                user_id
+                user_name
+                version
+                location
+                course_start_datetime
+                course_end_datetime
+                advertised_start
+                course_video_url
+                social_sharing_url
+                certificate_display_behaviour
+                certificates_show_before_end
+                certificate_html_view_enabled
+                has_any_active_web_certificate
+                lowest_passing_grade
+                mobile_available
+                visible_to_staff_only
+                enrollment_start
+                enrollment_end
+                invitation_only
+                max_student_enrollments_allowed
+                announcement
+                catalog_visibility
+                short_description
+                self_paced
+                marketing_url
+                certificate_available_date
+                article_count
+                downloadable_resource_count
+                course_level
+                step_towards
+                rating
+                price
+                course_category
+                created_by
+                updated_by
+                admin_id
+                is_published
+                learner_count
+                is_active
+                published_by
+                publisher_id
+                updated_by_id
+                course_id
+                created_at
+                updated_at
+                total_module_count
+                total_topic_count
+                week_total_count
+                completed_instructor_lead_session_count
+                total_instructor_lead_session_count
+                completed_mid_course_project_count
+                total_mid_course_project_count
+                assignment_submitted_count
+                assignment_total_count
+                completed_module_count
+                week_completed_count
+                completed_topic_count
+                thread_count
+                comment_count
+                reply_count
+                activity_info{
+                    _id
+                    batchid
+                    courseid
+                    coursename
+                    modulecount
+                    moduledetails{
+                        modulename
+                        topicdetails{
+                            topicname
+                            status
+                            activityid
+                            courseid
+                            coursename
+                            modulename
+                            startdate
+                            enddate
+                            activitytype
+                            activityname
+                            score
+                            link
+                            created_on
+                            createdby_name
+                            createdby_role
+                            createdby_id
+                            perform_details{
+                                projecttype
+                                groupname
+                                iteration
+                                evalutionmode
+                                score
+                                meterials{
+                                    name
+                                    type
+                                    file
+                                }
+                                trainers{
+                                    id
+                                    name
+                                    image
+                                }
+                                learners{
+                                    id
+                                    name
+                                    image
+                                }
+                            }
+                            resourcefile{
+                                assignment
+                                checked
+                                doc_type
+                                filename
+                                path
+                                size
+                                type_name
+                                _id
+                            }
+                        }
+                    }
+                }
+                takeway_details{
+                        text
+                        description
+                        what_will_you_learn
+                        media
+                }
+                coursepartner_details{
+                    name
+                    image
+                }
+                author_details{
+                        image
+                        author_name
+                        description
+                }
+                pre_requisite{
+                    name
+                    image
+                }
+                catalogue_id
+                super_sub_category_id
+                category_id
+                parent_sub_category_id
+                course_content_details{
+                    name
+                    type
+                    is_active
+                    parent_id
+                    description
+                    sub_section_id
+                    file_content{
+                        video_url
+                        image_url
+                        audio_url
+                        file_url
+                    }
+                    unit{
+                        name
+                        type
+                        is_active
+                        parent_id
+                        description
+                        sub_section_id
+                        file_content{
+                                video_url
+                                image_url
+                                audio_url
+                                file_url
+                        }
+                    }
+                }
         }
-        suspend {
-          _id
-          totalCount
-          IncDecPec
-          valueIncDecPec
-        }
-        incomplete {
-          _id
-          totalCount
-          IncDecPec
-          valueIncDecPec
-        }
-        completed {
-          _id
-          totalCount
-          IncDecPec
-          valueIncDecPec
-        }
-        lastAccessedCourses {
-          course_id
-          course_name
-          course_description
-          course_img_url
-          coursePlayerStatus {
-            _id
-            course_id
-            course_percentage
-            location
-            status
-            updated_on
-          }
+        ongoing_count
+        completed_count
+        all_count
         }
       }
-    }
   }
 `;
 
