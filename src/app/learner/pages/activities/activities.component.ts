@@ -310,7 +310,7 @@ export class ActivitiesComponent implements OnInit {
 // Pass courseid dynamically
   getperformActivityData() {
     this.Lservice.getperformActivityData(
-      this.userDetail.user_id, 'r00owr2x'
+      this.userDetail.user_id,  this.courseid
       // this.courseid
     ).subscribe((data: any) => {
       if (data && data.data && data.data.getperformActivityData && data.data.getperformActivityData.data) {
