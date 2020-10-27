@@ -435,7 +435,7 @@
 
           <div class="row">
             <div class="col-9">
-              <div class="t-l-1">{{project.projectActivity.activityname}}</div>
+              <div class="t-l-1">Activity Description: {{project.projectActivity.activityname}}</div>
             </div>
             <div class="col-3 text-right">
               <div class="m-r-40">Start date :<span class="margin-30"></span>End date :</div>
@@ -492,15 +492,14 @@
                                   </div>
                                 </div>
                                 <div class="row ml-0 mr-0">
-                                  <div class="col-5 text-left pr-0 colAction">
+                                  <div class="col-5 text-left pr-0 colAction" (click)="projectPreviewDoc(projectPreviewDialog,material)">
                                     <mat-icon class="position-absolute text-white playBtn">play_circle_outline</mat-icon>
-                                    <span class="text-white actionBtn"
-                                    (click)="projectPreviewDoc(projectPreviewDialog,material)">Play</span>
+                                    <span class="text-white actionBtn">Play</span>
                                   </div>
-                                  <div class="col-7 text-center pr-0 colAction">
+                                  <div class="col-7 text-center pr-0 colAction"
+                                  (click)="downloadDoc(material)">
                                     <i class="fa fa-download text-white position-absolute downloadBtn" aria-hidden="true"></i>
-                                    <span class="text-white actionBtn1"
-                                    (click)="downloadDoc(material)">Download</span>
+                                    <span class="text-white actionBtn1">Download</span>
                                   </div>
                                 </div>
                               </div>
