@@ -4,7 +4,7 @@
 
   <mat-tab-group animationDuration="1000ms">
     <mat-tab label="Assignments">
-      <mat-accordion class="example-headers-align" multi>
+      <mat-accordion class="example-headers-align" multi *ngIf="assignmentMessage">
         <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
           <mat-expansion-panel>
             <mat-expansion-panel-header>
@@ -216,47 +216,52 @@
         </ng-container>
       </mat-accordion>
 
+      <!-- <div class="errormsg" *ngIf="assignmentMessage">
+              No assignment found for this course.
+      
+      </div> -->
+
     </mat-tab>
 
     <mat-tab label="Perform"> 
       <div class="box-0-1" *ngFor="let perform of performDetails; let i = index">
-        <div class="row"  (click)="isCollapsed = !isCollapsed">
+        <div class="row">
           <div class="col-10">
             <div class="f_size_16 f_wt_600">{{i+1}}. {{perform.performActivity.module_id}}</div>
             <div class="t-l">{{perform.performActivity.topic_id}}</div>
             <div class="t-l">Activity : {{perform.performActivity.activityname}}</div>
           </div>
           <div class="col-2">
-            <span class="f_wt_600" *ngIf="perform.performActivity.submit_status == 'notsubmitted'">  <span class="dot"></span>
+            <span class="f_wt_600 statusTxt" *ngIf="perform.performActivity.submit_status == 'notsubmitted'"><span class="dot"></span>
+            <!-- 'notsubmitted' -->
             Yet to submit</span>
 
-            <span class="f_wt_600 submitstatus" *ngIf="perform.performActivity.submit_status == 'ontime' || 
-            perform.performActivity.submit_status =='late'">  <span class="submitdot"></span>
+            <span class="f_wt_600 submitstatus" *ngIf=" perform.performActivity.submit_status == 'submitted'">  <span class="submitdot"></span>
             Submitted</span>
 
-            <span class="f_wt_600 gradeStatus" *ngIf="perform.performActivity.grade_status == 'Evaluated'">  <span class="gradedot"></span>
+            <span class="f_wt_600 gradeStatus" *ngIf="perform.performActivity.submit_status == 'graded'">  <span class="gradedot"></span>
             Graded</span>
-            <mat-icon  class="f_size_16 arr" aria-hidden="false">keyboard_arrow_down</mat-icon>
+            <mat-icon class="f_size_16 arr" aria-hidden="false" *ngIf="!isperformColaps || performId !== i" (click)="isperformColaps = !isperformColaps; performId = i">keyboard_arrow_down</mat-icon>
+           <mat-icon class="f_size_16 arr" aria-hidden="false" *ngIf="isperformColaps && performId === i" (click)="isperformColaps = !isperformColaps; performId = i">keyboard_arrow_up
+            </mat-icon>
             <br>
-            <div class="m-l-23">Iterations : {{perform.performActivity.iterationTotal}}</div>
+            <div class="mt-2 mb-2 itrationTxt">Iterations : {{perform.performActivity.iterationTotal}}</div>
             <div class="m-l-68">Start date :<span class="margin-30"></span>End date :</div>
             <div class="m-l-68 f_wt_600">{{perform.activityStartDate}}
               <span class="margin-21 f_wt_600"></span>{{perform.activityEndDate}}</div> 
           </div>
-         
-           
         </div>
         
-        <div class="panel" *ngIf="isCollapsed">
+        <div class="panel" *ngIf="isperformColaps && performId === i">
           <hr>
           <div class="row">
             <div class="col-8">
               <div class="f_size_16 f_wt_600">Material for activity</div>
-              <div class="row">
+              <!-- <div class="row" *ngFor="let material of perform.performActivity.materialDetails">
                 <div class="col-4 m-t">
                   <img alt="Course Img" src="../../../../assets/images/play.jpg" class="courseImg" />
                   <div class="con">
-                  <div class="uppertext">Material for activity</div>
+                  <div class="uppertext">{{material.name}}</div>
                   <div class="overlay">
                    <span class="margin-5">Duration : 01:20:00</span> 
                   <div class="row ">
@@ -270,7 +275,58 @@
                 </div>
               </div>
                 </div>
-              </div>
+              </div> -->
+              <owl-carousel-o [options]="trendingCategorires"
+                      [ngClass]="perform.performActivity.materialDetails.length <= 3 ? 'widthClass arrow' : 'arrow'">
+                      <ng-template class="row" carouselSlide *ngFor="let material of perform.performActivity.materialDetails">
+                          <div class="col-6 m-t">
+                            <!-- <img alt="Course Img" src="../../../../assets/images/play.jpg" class="courseImg" /> -->
+                            <img *ngIf="material.doctype == 'application/pdf'"
+                                class="courseImg" alt="Course Img"
+                                src="assets/learner/fileicon/PDF_Icon.svg">
+                            <img *ngIf="material.doctype == 'link'"
+                                class="courseImg" alt="Course Img"
+                                src="assets/learner/fileicon/Link_Icon.svg">
+                            <img *ngIf="material.doctype == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+                                class="courseImg" alt="Course Img"
+                                src="assets/learner/fileicon/Excel_Icon.svg">
+                            <img *ngIf="material.doctype == 'image/jpeg' || material.doctype == 'image/png' "
+                                class="courseImg" alt="Course Img"
+                                src="assets/learner/fileicon/Image_Icon.svg">
+                            <img *ngIf="material.doctype == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
+                                class="courseImg" alt="Course Img"
+                                src="assets/learner/fileicon/PPT_Icon.svg">
+                            <img *ngIf="material.doctype == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+                                class="courseImg" alt="Course Img"
+                                src="assets/learner/fileicon/Word_Icon.svg">
+
+                            <img *ngIf="material.doctype == 'application/msword'"
+                                class="courseImg" alt="Course Img"
+                                src="assets/learner/fileicon/Word_Icon.svg">
+
+                            <img *ngIf="material.doctype == 'application/vnd.ms-excel'"
+                                class="courseImg" alt="Course Img"
+                                src="assets/learner/fileicon/Excel_Icon.svg">
+                            <div class="con">
+                            <div class="uppertext-1">{{material.name}}</div>
+                            <div class="overlay-1">
+                              <span class="margin-5">Duration : 01:20:00</span> 
+                            <div class="row ">
+                              <div class="col-6 dis-line">
+                                <mat-icon  class="f_size_14" aria-hidden="false">play_circle_outline</mat-icon>Play
+                              </div>
+                              <div class="col-6 dis-line">
+                                <mat-icon class="f_size_14" aria-hidden="false">get_app</mat-icon>Download
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                          </div>
+                      </ng-template>
+                  </owl-carousel-o>
+                  <h3 *ngIf="perform.performActivity.materialDetails && perform.performActivity.materialDetails.length == 0">
+                      No perform yet
+                  </h3>
             </div>
       
             <div class="col-4">
@@ -284,25 +340,40 @@
                   {{itrdata.iterationid}}
                     </mat-panel-title>
                     <mat-panel-description>
-                     <span class="width">Score: {{itrdata.score_mark}} / {{itrdata.total_mark}}</span> 
-                      <span class="f_wt_600 iterStatus" *ngIf="itrdata.submit_status == 'notsubmitted'">  <span class="dot"></span>Yet to submit</span>
-                      <span class="f_wt_600 iterSubmit" *ngIf="itrdata.submit_status == 'ontime' ||
-                      itrdata.submit_status == 'late'">  <span class="submitdot"></span>
-            Submitted</span>
-
-            <span class="f_wt_600 iterGrade" *ngIf="itrdata.grade_status == 'Evaluated'">  <span class="gradedot"></span>
-            Graded</span>
-                    </mat-panel-description>
+                      <div class="row ml-0 mr-0 w-100">
+                        <div class="col-6 pl-0 text-center w-100">
+                          <span>Score: {{itrdata.score_mark}} / {{itrdata.total_mark}}</span>
+                        </div>
+                        <div class="col-6 pr-0 pl-0 text-right w-100">
+                          <span class="f_wt_600" *ngIf="itrdata.grade_status == 'Not Evaluated' && itrdata.submit_status == 'notsubmitted'"> <span class="dot"></span>Yet to submit</span>
+                          <span class="f_wt_600 iterSubmit" *ngIf="itrdata.grade_status == 'Not Evaluated' && itrdata.submitAction == 'submit'">  <span class="submitdot"></span>
+                          Submitted</span>
+                          <span class="f_wt_600 iterGrade" *ngIf="itrdata.grade_status == 'Evaluated'">  <span class="gradedot"></span>
+                          Graded</span>
+                        </div>
+                      </div>
+                     
+                      
+                    </mat-panel-description>  
                   </mat-expansion-panel-header>
                   <div class="align-center">
-                    <button mat-stroked-button  class="upload-btn"> 
+                    <div class="videoPreview ml-auto mr-auto mb-3" *ngFor="let videoName of itrdata.videodetails">
+                      <mat-icon class="videoPlay float-left">play_circle_outline</mat-icon>
+                      <span>{{(videoName.name| slice:0:28)+'...'}}</span>
+                      <mat-icon class="closeBtn float-right" *ngIf="itrdata.submit_status == 'notsubmitted'" (click)="submitDeleteVideo(videoName, itrdata, perform.performActivity , submitType = 'delete')">delete</mat-icon>
+                    </div>
+  
+                    <input type="file" accept="video/mp4" multiple style="display: none" #fileInput [(ngModel)]="fileName"
+                    (change)="uploadDocument($event)" />
+                    <button mat-stroked-button [disabled]="itrdata.submitAction == 'submit'" class="upload-btn mt-3" (click)="uploadDocuments(itrdata, perform, submitType = 'upload')"> 
                       <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                       Upload video
                     </button>
-
-                    <button mat-stroked-button  class="submit-btn"> 
+                    <button mat-stroked-button class="submit-btn" *ngIf="itrdata.submit_status == 'notsubmitted' && itrdata.videodetails.length > 0" (click)="submitType = 'submit'; submitDeleteVideo({}, itrdata, perform.performActivity)"> 
                       Submit
                     </button>
+                    <button mat-stroked-button *ngIf="itrdata.submitAction == 'submit'" class="submitted-btn"> Submitted </button>
+                    <button mat-stroked-button *ngIf=" itrdata.videodetails.length == 0" class="submitted-btn"> Submit </button>
                   </div>
                 </mat-expansion-panel>
               </mat-accordion><br>
@@ -318,13 +389,13 @@
         <div class="row">
           <div class="col text-right">
           <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="!isCollapsed"
-          (click)="isCollapsed = !isCollapsed; getSelectedIndex(i)" [expanded]="selectedIndex === i">keyboard_arrow_down</mat-icon>
+          (click)="isCollapsed = !isCollapsed; getSelectedIndex(i)">keyboard_arrow_down</mat-icon>
           <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="isCollapsed"
           (click)="isCollapsed = !isCollapsed; getSelectedIndex(i)">keyboard_arrow_up</mat-icon>
         </div>
         </div>
       <div class="row">
-        <div [ngClass]="openList ? 'col-10' : 'col-12'">
+        <div [ngClass]="project.projectActivity.showLearnerList ? 'col-10' : 'col-12'">
           <!-----------------------------Row 1--------------------->
           <div class="row">
             <div class="col-12">
@@ -338,7 +409,7 @@
                 <mat-icon class="grpIcon">group</mat-icon>
               </button>
               <span class="teamName">{{project.projectActivity.groupname}} ({{project.projectActivity.groupcount}})</span>&nbsp;
-              <button mat-mini-fab class="arrBtn" *ngIf="!showIcon" (click)="openList = !openList; showIcon = !showIcon">
+              <button mat-mini-fab class="arrBtn" *ngIf="!project.projectActivity.showLearnerList" (click)="project.projectActivity.showLearnerList = !project.projectActivity.showLearnerList">
                 <mat-icon class="grpIcon">arrow_back</mat-icon>
               </button>
             </span>
@@ -348,17 +419,23 @@
           <div class="row">
             <div class="col-10"></div>
             <div class="col-2 text-right">
-              <span class="f_wt_600 status" *ngIf="project.projectActivity.submit_status == 'notsubmitted'">  <span class="dot"></span>
+              <span class="f_wt_600 status" *ngIf="project.projectActivity.submit_status == 'notsubmitted'
+              && project.projectActivity.grade_status == 'Not Evaluated'">  <span class="dot"></span>
               Yet to submit</span>
 
-              <span class="f_wt_600 projectSubmitstatus submitted" *ngIf="project.projectActivity.submit_status == 'ontime' || 
-              project.projectActivity.submit_status == 'late'">  <span class="submitdot"></span>
+              <span class="f_wt_600 projectSubmitstatus submitted" *ngIf="project.projectActivity.grade_status == 'Not Evaluated'
+               && project.projectActivity.submitAction == 'submit'">  <span class="submitdot"></span>
               Submitted</span>
 
               <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated'">  <span class="gradedot"></span>
               Graded</span>
             </div>
-          </div><br>
+          </div>
+          <div class="row" *ngIf="project.projectActivity.grade_status == 'Evaluated'">
+            <div class="col text-right">
+              <p class="totscore">Total score: {{project.projectActivity.score_mark}}/{{project.projectActivity.total_mark}}</p>
+            </div>
+          </div>
 
           <div class="row">
             <div class="col-9">
@@ -376,7 +453,7 @@
             <div class="row">
               <div class="col-8">
                 <div class="f_size_16 f_wt_600">Material for activity</div>
-                <div class="row" *ngFor="let material of project.projectActivity.materialDetails">
+                <!-- <div class="row" *ngFor="let material of project.projectActivity.materialDetails">
                   <div class="col-4 m-t">
                     <img alt="Course Img" src="../../../../assets/images/play.jpg" class="courseImg" />
                     <div class="con">
@@ -394,33 +471,146 @@
                   </div>
                 </div>
                   </div>
-                </div>
+                </div> -->
+                  <owl-carousel-o [options]="trendingCategorires"
+                      [ngClass]="project.projectActivity.materialDetails.length <= 3 ? 'widthClass arrow' : 'arrow'">
+                      <ng-template class="row" carouselSlide *ngFor="let material of project.projectActivity.materialDetails">
+                          <div class="col-6 m-t">
+                            <!-- <img alt="Course Img" src="../../../../assets/images/play.jpg" class="courseImg" /> -->
+                            <img *ngIf="material.doctype == 'application/pdf'"
+                                class="courseImg" alt="Course Img"
+                                src="assets/learner/fileicon/PDF_Icon.svg">
+                            <img *ngIf="material.doctype == 'link'"
+                                class="courseImg" alt="Course Img"
+                                src="assets/learner/fileicon/Link_Icon.svg">
+                            <img *ngIf="material.doctype == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+                                class="courseImg" alt="Course Img"
+                                src="assets/learner/fileicon/Excel_Icon.svg">
+                            <img *ngIf="material.doctype == 'image/jpeg' || material.doctype == 'image/png' "
+                                class="courseImg" alt="Course Img"
+                                src="assets/learner/fileicon/Image_Icon.svg">
+                            <img *ngIf="material.doctype == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
+                                class="courseImg" alt="Course Img"
+                                src="assets/learner/fileicon/PPT_Icon.svg">
+                            <img *ngIf="material.doctype == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+                                class="courseImg" alt="Course Img"
+                                src="assets/learner/fileicon/Word_Icon.svg">
+
+                            <img *ngIf="material.doctype == 'application/msword'"
+                                class="courseImg" alt="Course Img"
+                                src="assets/learner/fileicon/Word_Icon.svg">
+
+                            <img *ngIf="material.doctype == 'application/vnd.ms-excel'"
+                                class="courseImg" alt="Course Img"
+                                src="assets/learner/fileicon/Excel_Icon.svg">
+                            <div class="con">
+                            <div class="uppertext-1">{{material.name}}</div>
+                            <div class="overlay-1">
+                              <span class="margin-5">Duration : 01:20:00</span> 
+                            <div class="row ">
+                              <div class="col-6 dis-line">
+                                <mat-icon  class="f_size_14" aria-hidden="false">play_circle_outline</mat-icon>Play
+                              </div>
+                              <div class="col-6 dis-line">
+                                <mat-icon class="f_size_14" aria-hidden="false">get_app</mat-icon>Download
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                          </div>
+                      </ng-template>
+                  </owl-carousel-o>
+                  <h3 *ngIf="project.projectActivity.materialDetails && project.projectActivity.materialDetails.length == 0">
+                      No project yet
+                  </h3>
               </div>
-              <div class="col-4">
+              <div class="col-4" *ngIf="project.projectActivity.grade_status == 'Not Evaluated'">
                 <div class="f_size_16 f_wt_600 align-center">Your work</div>
                 <div class="box-0-2">
+                  <!-- <div class="box-0-3" *ngIf="fileName">
+                    <p class="selectedfile">
+                      <mat-icon class="fileIcon">add</mat-icon>{{fileName}}
+                      <mat-icon class="fileIcon">close</mat-icon>
+                    </p> -->
+                    <!-- *ngIf="item.doc_type == 'video/mp4'" -->
+                    <div class="fileData ml-auto mr-auto mb-3" *ngFor="let item of project.projectActivity.videodetails">
+                      
+                      <mat-icon  *ngIf="item.doc_type == 'video/mp4'" class="videoPlay float-left">play_circle_outline</mat-icon>
+                      <mat-icon  *ngIf="item.doc_type == 'image/jpeg'|| item.doc_type == 'image/png' || item.doc_type =='image/jpg'" class="videoPlay float-left">photo</mat-icon>
+                      <mat-icon  *ngIf="item.doc_type == 'application/pdf'" class="videoPlay float-left">picture_as_pdf</mat-icon>
+                      <span class="uploadfileName">{{(item.name| slice:0:28)+'...'}}</span>
+                      <mat-icon class="deleteIcon float-right"  *ngIf="project.projectActivity.submitAction !== 'submit'"
+                      (click)="learnerSumbitdeleteVideo(project, item, 'delete')">delete</mat-icon>
+                    </div>
+                   
+                  <!-- </div><br>
+                  <div *ngIf="project.projectActivity.videodetails">
+                  <div class="box-0-3" *ngFor="let item of project.projectActivity.videodetails">
+                    <p class="selectedfile">
+                      <mat-icon class="fileIcon">add</mat-icon>{{item.name}}
+                    </p>
+                  </div>
+                </div><br> -->
                 <div class="align-center">
-                  <input type="file" style="display: none" #fileInput accept="image/*" 
-                  (change)="uploadDoc($event)" />
-                  <button mat-stroked-button  class="upload-btn" (click)="uploadDocs()"> 
+                 
+                  <input type="file" style="display: none" accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" 
+                  #uploadInput [(ngModel)]="fileName"
+                  (change)="uploadDoc($event, project, 'upload')" />
+                  <button mat-stroked-button  class="upload-btn" (click)="uploadDocs()"
+                  [disabled]="project.enableSubmit == false" *ngIf="project.projectActivity.submitAction !== 'submit'"> 
                     <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                     Add your files
                   </button>
   
-                  <button mat-stroked-button  class="submit-btn"> 
+                  <button mat-stroked-button [disabled]="project.enableSubmit == false || project.projectActivity.videodetails < 0 " class="submit-btn" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')"
+                  *ngIf="project.projectActivity.submitAction == 'upload'|| project.projectActivity.submitAction == 'delete'"> 
                     Submit
-                  </button>
+                  </button><br>
+                  <button mat-stroked-button  class="submitted-btn" *ngIf="project.projectActivity.submitAction == 'submit'"> 
+                    Submitted
+                  </button><br>
+                  <p *ngIf="fileName && !showSubmittedon">Submitted files cannot be edited</p>
+                  <p *ngIf="project.projectActivity.submitAction == 'submit'">Submitted on: {{project.submittedOn}}</p>
                 </div>
               </div>
               </div>
             </div>
             
-          </div>
+          </div><br>
+
+           <!-------------------------------------Your files--------------------------------------->
+        <div class="panel1" *ngIf="isCollapsed && i == selectedIndex && project.projectActivity.grade_status == 'Evaluated'">
+          <div class="row">
+            <div class="col-8">
+              <div class="f_size_16 f_wt_600">Your submissions</div>
+              <div class="row" *ngFor="let video of project.projectActivity.videodetails">
+                <div class="col-4 m-t">
+                  <img alt="Course Img" src="../../../../assets/images/play.jpg" class="courseImg" />
+                  <div class="con">
+                  <div class="uppertext">{{video.name}}</div>
+                  <div class="overlay">
+                   <span class="margin-5">Duration : 01:20:00</span> 
+                  <div class="row ">
+                    <div class="col-6 dis-line">
+                      <mat-icon  class="f_size_14" aria-hidden="false">play_circle_outline</mat-icon>Preview
+                    </div>
+                    <div class="col-6 dis-line">
+                      <mat-icon class="f_size_14" aria-hidden="false" (click)="downloadDoc(video)">get_app</mat-icon>Download
+                    </div>
+                  </div>
+                </div>
+              </div>
+                </div>
+              </div>
+            </div>
+            </div>
         </div>
+        </div>
+       
        <!------------------------------------Learner list------------------------------->
-        <div class="col-2 learnerList" *ngIf="openList">
+        <div class="col-2 learnerList" *ngIf="project.projectActivity.showLearnerList">
           <div class="align-center">{{project.projectActivity.groupname}} ({{project.projectActivity.groupcount}})
-            <button mat-mini-fab class="arrfwd" *ngIf="showIcon" (click)="openList = !openList; showIcon = !showIcon">
+            <button mat-mini-fab class="arrfwd" *ngIf="project.projectActivity.showLearnerList" (click)="project.projectActivity.showLearnerList = !project.projectActivity.showLearnerList">
               <mat-icon class="grpIcon">arrow_forward</mat-icon>
             </button>
           </div>

@@ -1588,6 +1588,8 @@ export const getprojectActivityData = gql`
         score_mark
         submitted_on
         submitted_date
+        submitted_learner
+        project_id
         grade_status
         instructor_status
         comments
@@ -1598,6 +1600,9 @@ export const getprojectActivityData = gql`
         videourl
         name
         size
+        doc_type
+        uploaded_date
+        is_active
         }
         materialDetails{
         id
@@ -1612,6 +1617,7 @@ export const getprojectActivityData = gql`
         username
         email
         }
+        submitAction
         }
         }
         }
@@ -1624,6 +1630,7 @@ query getperformActivityData($userId: String , $courseId: String) {
     data {
       _id
       performActivity {
+        perform_id
         activitystartdate
         activityenddate
         submit_status
@@ -1650,6 +1657,7 @@ query getperformActivityData($userId: String , $courseId: String) {
           score_mark
           submitted_on
           submitted_date
+          submitAction
           grade_status
           comments
           videodetails{
@@ -1657,7 +1665,10 @@ query getperformActivityData($userId: String , $courseId: String) {
             videourl
             name
             size
-          }
+            doc_type
+            uploaded_date
+            is_active
+            }
         }
       }
     }
