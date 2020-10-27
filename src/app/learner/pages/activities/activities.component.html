@@ -278,17 +278,18 @@
               </div> -->
               <owl-carousel-o [options]="trendingCategorires"
                       [ngClass]="perform.performActivity.materialDetails.length <= 4 ? 'widthClass arrow' : 'arrow'">
-                      <ng-template class="row ml-0 mr-0" carouselSlide *ngFor="let material of perform.performActivity.materialDetails">
-                          <div (mouseover)="hover = !hover" (mouseout)="hover = !hover" class="col-4 w-100 pt-2 pb-2 carouselCol">
-                            <mat-card class="p-0 carouselCard">
+                      <ng-template class="row ml-0 mr-0" carouselSlide *ngFor="let material of perform.performActivity.materialDetails; let i = index">
+                          <div class="col-4 w-100 pt-2 pb-2 carouselCol">
+                            <mat-card class="p-0 carouselCard" (mouseover)="hover = true; mouseover(i)">
+                              <!--  -->
                               <div class="row ml-0 mr-0 carouselRow1">
                                 <div class="col-12">
                                   
                                 </div>
                               </div>
-                              <div [ngClass]="!hover ? 'row ml-0 mr-0 carouselRow' : 'row ml-0 mr-0 carouselRowHover'">
+                              <div (mouseleave)="hover = false" [ngClass]="!hover ? 'row ml-0 mr-0 carouselRow' : 'row ml-0 mr-0 carouselRowHover'">
                                 <div class="col-12 text-center m-auto pl-0 pr-0">
-                                  <span class="carouselText">fileName</span>
+                                  <span class="carouselText">{{material.filename}}</span>
                                   <br>
                                   <div class="row ml-0 mr-0" *ngIf="hover">
                                     <div class="col-12 pl-0 pr-0">
@@ -297,14 +298,16 @@
                                           <p class="carouselText">Duration:</p>
                                         </div>
                                       </div>
-                                      <div class="row ml-0 mr-0">
-                                        <div class="col-5 text-left pr-0 colAction">
+                                      <div class="row ml-0 mr-0 playActions">
+                                        <div class="col-5 text-left pr-0 colAction" (click)="playVideo()">
                                           <mat-icon class="position-absolute text-white playBtn">play_circle_outline</mat-icon>
                                           <span class="text-white actionBtn">Play</span>
+                                          <!-- <span class="text-white actionBtn">Preview</span> -->
                                         </div>
                                         <div class="col-7 text-center pr-0 colAction">
-                                          <i class="fa fa-download text-white position-absolute downloadBtn" aria-hidden="true"></i>
-                                          <span class="text-white actionBtn1">Download</span>
+                                          <!-- (click)="downloadVideo()" -->
+                                          <a [href]="material.path" [download]="material.filename"><i class="fa fa-download text-white position-absolute downloadBtn" aria-hidden="true"></i>
+                                          <span class="text-white actionBtn1">Download</span></a>
                                         </div>
                                       </div>
                                     </div>
