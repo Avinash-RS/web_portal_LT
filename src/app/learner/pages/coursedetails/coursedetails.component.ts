@@ -497,14 +497,14 @@ export class CoursedetailsComponent implements OnInit {
   //   this.sider = true;
   // }
   cancelPageRefresh() {
-    // if (this.dataRefresher) {
-    //   clearInterval(this.dataRefresher);
-    // }
+    if (this.dataRefresher) {
+      clearInterval(this.dataRefresher);
+    }
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnDestroy() {
-    // this.cancelPageRefresh();
+    this.cancelPageRefresh();
   }
 
 
