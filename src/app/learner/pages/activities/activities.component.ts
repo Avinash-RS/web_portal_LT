@@ -207,7 +207,8 @@ export class ActivitiesComponent implements OnInit {
       closeOnNavigation: true,
       disableClose: true,
     });
-    this.previewDoc = path.videourl;
+    path.path = path.videourl;
+    this.previewDoc = path;
   }
   }
 

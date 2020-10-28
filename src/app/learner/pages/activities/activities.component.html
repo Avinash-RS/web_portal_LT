@@ -436,7 +436,8 @@
               Graded</span>
             </div>
           </div>
-          <div class="row" *ngIf="project.projectActivity.grade_status == 'Evaluated'">
+          <div class="row" *ngIf="project.projectActivity.grade_status == 'Evaluated' && 
+          project.projectActivity.submitAction == 'submit'">
             <div class="col text-right">
               <p class="totscore">Total score: {{project.projectActivity.score_mark}}/{{project.projectActivity.total_mark}}</p>
             </div>
@@ -503,8 +504,10 @@
                                 </div>
                                 <div class="row ml-0 mr-0 playActions">
                                   <div class="col-5 text-left pr-0 colAction" (click)="projectPreviewDoc(projectPreviewDialog,material, 'material')">
-                                    <mat-icon class="position-absolute text-white playBtn">play_circle_outline</mat-icon>
-                                    <span *ngIf="material.doc_type == 'material/mp4'" class="text-white actionBtn">Play</span>
+                                    <mat-icon class="position-absolute text-white playBtn" *ngIf="material.doc_type == 'video/mp4'">play_circle_outline</mat-icon>
+                                    <mat-icon class="position-absolute text-white playBtn" *ngIf="material.doc_type =='image/jpeg'
+                                    || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">photo_size_select_actual</mat-icon>
+                                    <span *ngIf="material.doc_type == 'video/mp4'" class="text-white actionBtn">Play</span>
                                     <span *ngIf="material.doc_type == 'image/png' || material.doc_type == 'image/jpeg'
                                     || material.doc_type == 'image/jpg'" class="text-white actionBtn">Preview</span>
                                   </div>
@@ -527,8 +530,8 @@
                       No project yet
                   </h3>
               </div>
-              <div class="col-4" *ngIf="project.projectActivity.grade_status == 'Not Evaluated'
-              || project.projectActivity.grade_status == ''">
+              <div class="col-4" *ngIf="project.projectActivity.submit_status == 'notsubmitted'
+              || project.projectActivity.grade_status !== 'Evaluated'">
                 <div class="f_size_16 f_wt_600 align-center work">Your work</div>
                 <div class="box-0-2">
                     <div class="fileData ml-auto mr-auto mb-3" *ngFor="let item of project.projectActivity.videodetails">
@@ -554,7 +557,7 @@
                   *ngIf="project.projectActivity.submit_status == 'notsubmitted' && project.projectActivity.videodetails.length > 0"> 
                     Submit
                   </button><br>
-                  <button mat-stroked-button *ngIf="project.projectActivity.videodetails.length == 0" class="submit-btn"> Submit </button><br>
+                  <button mat-stroked-button [disabled]="project.enableSubmit == false" *ngIf="project.projectActivity.videodetails.length == 0" class="submit-btn"> Submit </button><br>
                   <button mat-stroked-button  class="submitted-btn" *ngIf="project.projectActivity.submitAction == 'submit'"> 
                     Submitted
                   </button><br><br>
@@ -568,7 +571,8 @@
           </div><br>
 
            <!-------------------------------------Your files--------------------------------------->
-        <div class="panel1" *ngIf="isCollapsed && projectId === i && project.projectActivity.grade_status == 'Evaluated'">
+        <div class="panel1" *ngIf="isCollapsed && projectId === i && project.projectActivity.grade_status == 'Evaluated' && 
+        project.projectActivity.submitAction == 'submit'">
           <div class="row">
             <div class="col-8">
               <div class="f_size_16 f_wt_600">Your submissions</div>
@@ -617,7 +621,9 @@
                               </div>
                               <div class="row ml-0 mr-0 playActions">
                                 <div class="col-5 text-left pr-0 colAction" (click)="projectPreviewDoc(projectPreviewDialog,video, 'files')">
-                                  <mat-icon class="position-absolute text-white playBtn">play_circle_outline</mat-icon>
+                                  <mat-icon class="position-absolute text-white playBtn" *ngIf="video.doc_type == 'video/mp4'">play_circle_outline</mat-icon>
+                                  <mat-icon class="position-absolute text-white playBtn" *ngIf="video.doc_type =='image/jpeg'
+                                  || video.doc_type == 'image/png' || video.doc_type == 'image/jpg'">photo_size_select_actual</mat-icon>
                                   <span *ngIf="video.doc_type == 'video/mp4'" class="text-white actionBtn">Play</span>
                                   <span *ngIf="video.doc_type == 'image/png' || video.doc_type == 'image/jpeg'
                                   || video.doc_type == 'image/jpg'" class="text-white actionBtn">Preview</span>
