@@ -1823,6 +1823,7 @@ export const getCourseActivities = gql`
             course_id
             course_name
             module_name
+            activity
             topic_name
             status
             score_mark
