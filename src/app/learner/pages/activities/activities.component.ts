@@ -50,7 +50,7 @@ export class ActivitiesComponent implements OnInit {
   submitType: string;
   submitStatus: string;
   checkDetails: any;
-  assignmentMessage = false;
+  // assignmentMessage = false;
   trendingCategorires: any = {
     loop: false, // dont make it true
     mouseDrag: true,
@@ -123,9 +123,8 @@ export class ActivitiesComponent implements OnInit {
       this.userDetail.user_id
     ).subscribe((data: any) => {
       if (data.data.getAssignmentmoduleData.success) {
-        this.assignmentMessage = true;
+        // this.assignmentMessage = true;
         this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
-
         if (
           this.assignmentContent.courseStartDate &&
           this.assignmentContent.courseEndDate
@@ -176,7 +175,7 @@ export class ActivitiesComponent implements OnInit {
         }
 
       } else {
-        this.assignmentMessage = true;
+        // this.assignmentMessage = false;
       }
     });
   }

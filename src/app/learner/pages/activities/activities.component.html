@@ -4,7 +4,7 @@
   <p><b>{{courseName}}</b></p>
   <mat-tab-group animationDuration="1000ms">
     <mat-tab label="Assignments">
-      <mat-accordion class="example-headers-align" multi *ngIf="assignmentMessage">
+      <mat-accordion class="example-headers-align" multi *ngIf="assignmentContent?.coursedetails.length > 0">
         <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
           <mat-expansion-panel>
             <mat-expansion-panel-header>
@@ -215,15 +215,14 @@
           </mat-expansion-panel>
         </ng-container>
       </mat-accordion>
-
-      <!-- <div class="errormsg" *ngIf="assignmentMessage">
-              No assignment found for this course.
-      
-      </div> -->
+      <div class="errormsg" *ngIf="assignmentContent?.coursedetails.length < 1">
+        Activities not scheduled
+      </div>
 
     </mat-tab>
 
     <mat-tab label="Perform"> 
+      <ng-container *ngIf="performDetails?.length > 0">
       <div class="box-0-1" *ngFor="let perform of performDetails; let i = index">
         <div class="row">
           <div class="col-10">
@@ -286,7 +285,7 @@
                                 <div class="col-12 m-auto">
                                  <mat-icon class="imageIcon" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">photo_size_select_actual</mat-icon>
                                  <mat-icon class="imageIcon" *ngIf="material.doc_type =='video/mp4'">play_circle_outline</mat-icon> 
-                                 <i class="fa fa-file-pdf-o pdfIcon" *ngIf="material.doc_type =='file/pdf'" aria-hidden="true"></i>
+                                 <i class="fa fa-file-pdf-o pdfIcon" *ngIf="material.doc_type =='application/pdf'" aria-hidden="true"></i>
                                 </div>
                               </div>
                               <div (mouseleave)="hover = false" [ngClass]="!hover ? 'row ml-0 mr-0 carouselRow' : 'row ml-0 mr-0 carouselRowHover'">
@@ -385,9 +384,14 @@
           
         </div>
       </div>
+      </ng-container>
+      <div *ngIf="performDetails?.length < 1">
+        <p class="errormsg">Activities not scheduled</p>
+      </div>
        </mat-tab>
 
     <mat-tab label="Project"> 
+      <ng-container *ngIf="projectDetails?.length > 0">
       <div class="box-0-1" *ngFor="let project of projectDetails; let i = index">
         <div class="row">
           <div class="col text-right">
@@ -473,7 +477,7 @@
                            <mat-icon class="imageIcon" *ngIf="material.doc_type =='image/jpeg'
                            || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">photo_size_select_actual</mat-icon>
                            <mat-icon class="imageIcon" *ngIf="material.doc_type =='video/mp4'">play_circle_outline</mat-icon> 
-                           <i class="fa fa-file-pdf-o pdfIcon" *ngIf="material.doc_type =='file/pdf'" aria-hidden="true"></i>
+                           <i class="fa fa-file-pdf-o pdfIcon" *ngIf="material.doc_type =='application/pdf'" aria-hidden="true"></i>
                           </div>
                         </div>
                         <div (mouseleave)="hover = false" [ngClass]="!hover ? 'row ml-0 mr-0 carouselRow' : 'row ml-0 mr-0 carouselRowHover'">
@@ -491,7 +495,8 @@
                                   <div class="col-5 text-left pr-0 colAction" (click)="projectPreviewDoc(projectPreviewDialog,material, 'material')">
                                     <mat-icon class="position-absolute text-white playBtn" *ngIf="material.doc_type == 'video/mp4'">play_circle_outline</mat-icon>
                                     <mat-icon class="position-absolute text-white playBtn" *ngIf="material.doc_type =='image/jpeg'
-                                    || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">photo_size_select_actual</mat-icon>
+                                    || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'
+                                    || material.doc_type == 'application/pdf'">pageview</mat-icon>
                                     <span *ngIf="material.doc_type == 'video/mp4'" class="text-white actionBtn">Play</span>
                                     <span *ngIf="material.doc_type == 'image/png' || material.doc_type == 'image/jpeg'
                                     || material.doc_type == 'image/jpg'" class="text-white actionBtn">Preview</span>
@@ -510,9 +515,9 @@
                 </ng-template>
             </owl-carousel-o>
 
-                  <h3 *ngIf="project.projectActivity.materialDetails && project.projectActivity.materialDetails.length == 0">
+                  <!-- <h3 *ngIf="project.projectActivity.materialDetails && project.projectActivity.materialDetails.length == 0">
                       No project yet
-                  </h3>
+                  </h3> -->
               </div>
               <div class="col-4" *ngIf="project.projectActivity.submit_status == 'notsubmitted'
               || project.projectActivity.grade_status !== 'Evaluated'">
@@ -540,9 +545,9 @@
                   <button mat-stroked-button [disabled]="project.enableSubmit == false" class="submit-btn" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')"
                   *ngIf="project.projectActivity.submit_status == 'notsubmitted' && project.projectActivity.videodetails.length > 0"> 
                     Submit
-                  </button><br>
-                  <button mat-stroked-button [disabled]="project.enableSubmit == false" *ngIf="project.projectActivity.videodetails.length == 0" class="submit-btn"> Submit </button><br>
-                  <button mat-stroked-button  class="submitted-btn" *ngIf="project.projectActivity.submitAction == 'submit'"> 
+                  </button>
+                  <button mat-stroked-button [disabled]="project.enableSubmit == false" *ngIf="project.projectActivity.videodetails.length == 0" class="submit-btn"> Submit </button>
+                  <button mat-stroked-button  class="submitted-btn" [disabled]="true" *ngIf="project.projectActivity.submitAction == 'submit'"> 
                     Submitted
                   </button><br><br>
                   <p *ngIf="project.projectActivity.submit_status == 'notsubmitted'">Submitted files cannot be edited</p>
@@ -572,7 +577,7 @@
                          <mat-icon class="imageIcon" *ngIf="video.doc_type =='image/jpeg'
                          || video.doc_type == 'image/png' || video.doc_type == 'image/jpg'">photo_size_select_actual</mat-icon>
                          <mat-icon class="imageIcon" *ngIf="video.doc_type =='video/mp4'">play_circle_outline</mat-icon> 
-                         <i class="fa fa-file-pdf-o pdfIcon" *ngIf="video.doc_type =='file/pdf'" aria-hidden="true"></i>
+                         <i class="fa fa-file-pdf-o pdfIcon" *ngIf="video.doc_type =='application/pdf'" aria-hidden="true"></i>
                         </div>
                       </div>
                       <div (mouseleave)="hover = false" [ngClass]="!hover ? 'row ml-0 mr-0 carouselRow' : 'row ml-0 mr-0 carouselRowHover'">
@@ -590,10 +595,10 @@
                                 <div class="col-5 text-left pr-0 colAction" (click)="projectPreviewDoc(projectPreviewDialog,video, 'files')">
                                   <mat-icon class="position-absolute text-white playBtn" *ngIf="video.doc_type == 'video/mp4'">play_circle_outline</mat-icon>
                                   <mat-icon class="position-absolute text-white playBtn" *ngIf="video.doc_type =='image/jpeg'
-                                  || video.doc_type == 'image/png' || video.doc_type == 'image/jpg'">photo_size_select_actual</mat-icon>
+                                  || video.doc_type == 'image/png' || video.doc_type == 'image/jpg'|| video.doc_type == 'application/pdf'">pageview</mat-icon>
                                   <span *ngIf="video.doc_type == 'video/mp4'" class="text-white actionBtn">Play</span>
                                   <span *ngIf="video.doc_type == 'image/png' || video.doc_type == 'image/jpeg'
-                                  || video.doc_type == 'image/jpg'" class="text-white actionBtn">Preview</span>
+                                  || video.doc_type == 'image/jpg' || video.doc_type == 'application/pdf'" class="text-white actionBtn">Preview</span>
                                 </div>
                                 <div class="col-7 text-center pr-0 colAction" (click)="downloadDoc(video, 'files')">
                                  <i class="fa fa-download text-white position-absolute downloadBtn" aria-hidden="true"></i>
@@ -616,7 +621,8 @@
        
        <!------------------------------------Learner list------------------------------->
         <div class="col-2 learnerList" *ngIf="project.projectActivity.showLearnerList">
-          <div class="align-center">{{(project.projectActivity.groupname| slice:0:10)+'...'}}
+          <div class="align-center" matTooltip="{{project.projectActivity.groupname}}"
+          matTooltipClass="custom-mat-tooltip">{{(project.projectActivity.groupname.length > 10)? (project.projectActivity.groupname| slice:0:10)+'...' : (project.projectActivity.groupname)}}
             ({{project.projectActivity.groupDetails.length}})
             <button mat-mini-fab class="arrfwd" *ngIf="project.projectActivity.showLearnerList" (click)="project.projectActivity.showLearnerList = !project.projectActivity.showLearnerList">
               <mat-icon class="grpIcon">arrow_forward</mat-icon>
@@ -629,6 +635,10 @@
           </div>
   </div>
       </div>
+      </div>
+    </ng-container>
+      <div *ngIf="projectDetails?.length < 1">
+        <p class="errormsg">Activities not scheduled</p>
       </div>
     </mat-tab>
 
