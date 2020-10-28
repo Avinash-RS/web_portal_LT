@@ -23,16 +23,16 @@ export class LearnerDashboardComponent implements OnInit {
   ngOnInit() {
     this.translate.use(localStorage.getItem('language'));
     this.userDetailes = this.gs.checkLogout();
-    this.getLearnerDashboard()
+   // this.getLearnerDashboard()
   }
 
   getLearnerDashboard() {
-    if (this.userDetailes.group_id)
-    this.service.get_learner_dashboard(this.userDetailes.user_id).subscribe((response: any) => {
-      if (response.data.getlearnerdashboarddetails && response.data.getlearnerdashboarddetails.success) {
-        this.dashboardData = response.data.getlearnerdashboarddetails.data;
-      }
-    });
+    // if (this.userDetailes.group_id)
+    // this.service.get_learner_dashboard(this.userDetailes.user_id).subscribe((response: any) => {
+    //   if (response.data.getlearnerdashboarddetails && response.data.getlearnerdashboarddetails.success) {
+    //     this.dashboardData = response.data.getlearnerdashboarddetails.data;
+    //   }
+    // });
   }
 
   gotohome() {

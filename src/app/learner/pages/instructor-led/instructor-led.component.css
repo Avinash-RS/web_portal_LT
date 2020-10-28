@@ -62,6 +62,7 @@ th {
     /* background-color: #388E3C; */
     /* margin-left: 20%; */
     border-radius: unset;
+    color: black;
 }
 
 .redHover:hover {

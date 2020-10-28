@@ -168,32 +168,27 @@
                         <!-- <span *ngIf="course?.course_name?.length > 30">{{(course?.course_name | slice:0:20)+'...'}}</span> -->
                     </div>
                     <div class="col-2 text-right mobileHoriz">
-                        <mat-icon class="ml-3 mt-3 mb-3" [matMenuTriggerFor]="menu">more_vert</mat-icon>
-                        <mat-menu #menu="matMenu">
-                            <button
-                                (click)="selectedTabIndex = 0; selectedName = detailData?.course_name ? detailData?.course_name : course?.course_name"
-                                class="matTabMenu" mat-menu-item>
-                                <span>{{detailData?.course_name ? detailData?.course_name : course?.course_name}}</span>
-                            </button>
-                            <button (click)="selectedTabIndex = 1; selectedName = 'About the course'" class="matTabMenu"
-                                mat-menu-item>
-                                <span>About the course</span>
-                            </button>
-                            <button (click)="selectedTabIndex = 2; selectedName = 'Resources'" class="matTabMenu"
-                                mat-menu-item>
-                                <span>Resources</span>
-                            </button>
-                            <button (click)="selectedTabIndex = 3; selectedName = 'Assignments'" class="matTabMenu"
-                                mat-menu-item>
-                                <span>Assignments</span>
-                            </button>
-                            <button
-                                *ngIf="userDetail.is_forum_config && selectedModuleData === null || selectedModuleData === undefined"
-                                (click)="selectedTabIndex = 4; selectedName = 'Forum'" class="matTabMenu" mat-menu-item>
-                                <span>Forum</span>
-                            </button>
-                        </mat-menu>
-                    </div>
+                <mat-icon class="ml-3 mt-3 mb-3" [matMenuTriggerFor]="menu">more_vert</mat-icon>
+                <mat-menu #menu="matMenu">
+                    <button (click)="selectedTabIndex = 0; selectedName = detailData?.course_name ? detailData?.course_name : course?.course_name" class="matTabMenu" mat-menu-item>
+                    <span>{{detailData?.course_name ? detailData?.course_name : course?.course_name}}</span>
+                    </button>
+                    <button (click)="selectedTabIndex = 1; selectedName = 'About the course'" class="matTabMenu" mat-menu-item>
+                      <span>About the course</span>
+                    </button>
+                    <button (click)="selectedTabIndex = 2; selectedName = 'Resources'" class="matTabMenu" mat-menu-item>
+                      <span>Resources</span>
+                    </button>
+                    <button (click)="selectedTabIndex = 3; selectedName = 'Assignments'" class="matTabMenu" mat-menu-item>
+                        <span>Assignments</span>
+                      </button>
+                      <button
+                      *ngIf="userDetail.is_forum_config && selectedModuleData === null || selectedModuleData === undefined"
+                      (click)="selectedTabIndex = 4; selectedName = 'Forum'" class="matTabMenu" mat-menu-item>
+                      <span>Forum</span>
+                  </button>
+                  </mat-menu>
+                </div>
                 </div>
                 <mat-tab-group #demo3Tab [(selectedIndex)]="selectedTabIndex" #tabs
                     (selectedTabChange)="tabSelection($event)"
@@ -645,7 +640,9 @@
             </div>
         </mat-drawer-container>
     </div>
-
+<div class="performanceMobile" *ngIf="performOverLay && selectedName == 'perform'">
+    <app-performance-page-mobile [detailDataToPerform]='detailData' [courceDetails]='course'></app-performance-page-mobile>
+</div>
 </div>
 
 

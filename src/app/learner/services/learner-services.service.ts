@@ -28,7 +28,7 @@ import {
   getDetailsCount,
   getlearnertrack,
   getLearnerenrolledCourses,
-  getlearnerdashboarddetails,
+  getlearnerdashboard,
   getFeedbackQuestion,
   getCoursePlayerStatusForCourse,
   getAssignmentmoduleData,
@@ -48,7 +48,8 @@ import {
   getCourseActivities,
   getprojectActivityData,
   getperformActivityData,
-  get_active_course_count
+  get_active_course_count,
+  getActivityDetailsByBatchAndCourseID
 } from './operations/learner_query';
 
 import {
@@ -89,8 +90,9 @@ import {
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
-import { from } from 'rxjs';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators'
+
 @Injectable({
   providedIn: 'root'
 })
@@ -603,17 +605,14 @@ export class LearnerServicesService {
       }
     });
   }
-  bulkclaimcourse(id, user_id, super_sub_category, categoryName , catalogueId , categoryId ,subCategoryId) {
+  bulkclaimcourse(id, user_id, category_id, categoryName) {
     return this.Apollo.query({
       query: bulkclaimcourse,
       variables: {
         id,
         user_id,
-        super_sub_category,
-        categoryName,
-        catalogueId ,
-        categoryId ,
-        subCategoryId
+        category_id,
+        categoryName
       }
     });
   }
@@ -641,11 +640,12 @@ export class LearnerServicesService {
 
 
 
-  get_learner_dashboard(user_id) {
+  get_learner_dashboard(user_id,user_obj_id) {
     return this.Apollo.query({
-      query: getlearnerdashboarddetails,
+      query: getlearnerdashboard,
       variables: {
-        user_id
+        user_id:user_id,
+        user_obj_id:user_obj_id
       }
     });
   }
@@ -885,7 +885,7 @@ export class LearnerServicesService {
       }
     });
   }
-  getCourseActivities(userId, PageNumber, courseId, sortType, searchValue, searchColumn) {
+  getCourseActivities(userId, PageNumber, courseId, sortType, searchValue, searchColumn, statusBased) {
     return this.Apollo.query({
       query: getCourseActivities,
       variables: {
@@ -894,7 +894,8 @@ export class LearnerServicesService {
         course_id: courseId,
         sort_type: sortType,
         searchvalue: searchValue,
-        searchcolumn: searchColumn
+        searchcolumn: searchColumn,
+        status: statusBased,
       }
     });
   }
@@ -921,11 +922,22 @@ getprojectActivityData(userId, courseId) {
     });
   }
   learnerUploadVideo(data) { return this.http.post(environment.apiUrl + 'wca/learnerUploadVideo', data); }
+  learnerSumbitdeleteVideo(submitData) { return this.http.post(environment.apiUrl + 'wca/learnerSumbitdeleteVideo', submitData); }
   get_active_course_count(user_id){
     return this.Apollo.query({
       query: get_active_course_count,
       variables: {
         user_id,
+      }
+    });
+  }
+
+  getActivityDetailsByCourseAndBatchID(batchid, courseid) {
+    return this.Apollo.query({ // Get Activity Details For Instrcutor Led Screen.
+      query: getActivityDetailsByBatchAndCourseID,
+      variables: {
+        batchid,
+        courseid
       }
     });
   }

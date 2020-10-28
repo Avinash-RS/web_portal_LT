@@ -1,0 +1,170 @@
+@import "../../../../assets/variable.scss";
+.performCard {
+    width: 100%;
+    height: 10rem;
+    padding: 8px !important;
+}
+
+.titleCase {
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.subTittle {
+    font-size: 14px;
+    font-weight: bolder;
+    color: black;
+    margin: 0 0 10px !important;
+}
+
+.yettoSubmit {
+    margin: 0px 0px 3px;
+}
+
+.brickMaking {
+  font-size: 20px;
+}
+
+.matCard {
+  padding: 16px 10px 16px 10px !important;
+}
+
+.matIcon {
+    position: absolute;
+    top: -5px;
+    right: 0px;
+}
+
+.arrowPopup {
+    position: absolute;
+    top: -3px;
+}
+
+.itration {
+  margin: 0px 0px 20px;
+}
+
+:host ::ng-deep  .recordBtn .mat-button-wrapper {
+  margin-left: 4rem;
+}
+
+.uploadBtn {
+  height: 3rem;
+  font-weight: bolder;
+  font-size: 15px;
+}
+
+.add-icon {
+  font-weight: bolder;
+}
+
+.recordBtn {
+  height: 4rem;
+  background-color: #F5F5F5;
+  font-size: 16px;
+  font-weight: bolder;
+  color: #666666;
+}
+
+.video-icon {
+  font-size: 55px;
+  color: $lxp-theme-green;
+  position: absolute;
+  left: 5rem;
+  top: 0rem;
+}
+
+.submitBtn {
+  height: 3rem;
+  width: 80%;
+  background-color: $lxp-theme-green;
+  color: $color-white;
+  margin-left: 2.1rem;
+}
+:host ::ng-deep .submitBtn .mat-stroked-button:not([disabled]) {
+  color: #ffffff96 !important;
+  background-color: #c0222299 !important;
+}
+
+.playBtn {
+  font-size: 25px;
+  position: absolute;
+  top: 1.17rem;
+  left: 0.7rem;
+  color: white;
+}
+
+.catnamenew {
+    color: #3f444a;
+    text-transform: capitalize;
+    font-size: 16px;
+    margin-left: 2rem;
+    font-weight: 900 !important;
+  }
+
+  .previewTxt {
+    font-size: 16px;
+  }
+
+  .previewVideoScreen {
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    background-color: white;
+    position: absolute;
+  }
+
+  .previewCol {
+    border: 1px solid #66666680;
+    padding: 1rem;
+  }
+
+  .previewCard {
+    width: 90%;
+  }
+
+  .videoCell {
+    height: 180px;
+  }
+
+  .fileSelDet {
+    background-color: #5C6873;
+    height: 40%;
+  }
+
+  .icons {
+    font-size: 30px;
+    padding: 1.2rem 2.5rem;
+  }
+
+  .materialCard {
+    width: 7rem;
+    height: 8rem;
+  }
+
+  .fileColor {
+    font-size: 10px;
+    color:#E8E8E8;
+  }
+
+  .saveBtn {
+    color: $color-white;
+    background-color: $lxp-theme-green;
+    height: 2rem;
+    width: 6rem;
+  }
+
+  .cancelBtn {
+    border: 1px solid $lxp-theme-green;
+    height: 2rem;
+    width: 6rem;
+    margin-left: 21%;
+  }
+
+  .textSize {
+    font-size: 12px;
+  }
+
+  .matCardIconRow {
+    height: 60%;
+  }

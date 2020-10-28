@@ -1,4 +1,16 @@
 @import "variable";
+.exp-icon-sub{
+    margin-right: 38px;
+    color: rgba(158, 158, 158, 0.64);
+    font-size: 22px;
+    margin-top: 12px;
+}
+.exp-icon-supersub{
+    margin-right: 68px;
+    color: rgba(158, 158, 158, 0.64);
+    font-size: 22px;
+    margin-top: 12px; 
+}
 
 .bodybg {
     width: auto;
@@ -416,6 +428,7 @@ li {
     padding: 0 0 13px 0 !important;
     margin-top: 10px !important;
     height: 60px !important;
+    width: 336px;
 }
 
 .sqnumber {
@@ -430,7 +443,11 @@ li {
 
 .index-number-unread {
     position: relative;
-    left: 21px;
+    left: 13px;
+    font-size: 20px;
+    line-height: initial;
+    display: flex;
+    margin-top: 1px;
 }
 
 .index-number-read {
@@ -968,6 +985,14 @@ iframe.fullScreen {
     display: none;
 }
 
+.performanceMobile {
+    position: absolute;
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+}
+
 // / mobile
 @media(min-width: 320px) and(max-width: 767px) {
 
@@ -1282,6 +1307,7 @@ iframe.fullScreen {
 .drawer .contents {
     padding: 16px 0 16px 10px;
     margin-top: 12%;
+    width: -webkit-fill-available !important; 
 }
 
 .main-opn {
@@ -1407,11 +1433,13 @@ iframe.fullScreen {
 .moduleName {
     width: 221px !important;
     white-space: pre-line !important;
+    font-size: 20px !important;
 }
 
 .titleName {
     width: 205px !important;
     white-space: pre-line !important;
+    // margin-top: -11px;
 }
 
 

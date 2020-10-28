@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
@@ -17,6 +17,7 @@ import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
 
 import { TranslateService } from '@ngx-translate/core';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-coursedetails',
@@ -59,7 +60,10 @@ export class CoursedetailsComponent implements OnInit {
   finalper2: number;
   localper: string;
   selectedIndex = 0;
-  assignmentVal = false;
+  selectedIndex1 = 0;
+  selectedIndex2 = 0;
+  selectedIndex3 = 0;
+    assignmentVal = false;
   docpath: any = null;
   assFile: File;
   courseStartDate: any;
@@ -87,6 +91,7 @@ export class CoursedetailsComponent implements OnInit {
   drawersOpen: boolean;
   screenHeight: number;
   screenWidth: number;
+  performOverLay = false;
   // initials: any;
 
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
@@ -105,8 +110,10 @@ export class CoursedetailsComponent implements OnInit {
     this.screenWidth = window.innerWidth;
     if (this.screenWidth < 800) {
       this.drawersOpen = false;
+      this.performOverLay = true;
     } else {
       this.drawersOpen = true;
+      this.performOverLay = false;
     }
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
@@ -197,6 +204,22 @@ export class CoursedetailsComponent implements OnInit {
   ngOnInit(): void {
     this.translate.use(localStorage.getItem('language'));
     // this.add_topic_reference(res);
+    this.service.menuSelectedPerform.subscribe((emitedData: any) => {
+      console.log('emitedData', emitedData);
+      this.selectedName = emitedData.selectedName;
+      this.selectedTabIndex = emitedData.selectedTabIndex;
+      this.performOverLay = false;
+    });
+  }
+
+  performPage() {
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+    if (this.screenWidth < 800) {
+      this.performOverLay = true;
+    } else {
+      this.performOverLay = false;
+    }
   }
 
   getAssignmentmoduleData() {
@@ -423,21 +446,29 @@ export class CoursedetailsComponent implements OnInit {
   getSelectedIndex(i) {
     this.selectedIndex = i;
   }
-
+  getsubSelectedIndex(j) {
+    this.selectedIndex1 = j;
+  }
+  getsupersubSelectedIndex(k) {
+    this.selectedIndex2 = k;
+  }
+  getfourSelectedIndex(l) {
+    this.selectedIndex2 = l;
+  }
   refreshData() {
-    this.dataRefresher =
-      setInterval(() => {
-        this.playerModuleAndTopic(false);
+    // this.dataRefresher =
+    //   setInterval(() => {
+    //     this.playerModuleAndTopic(false);
 
-      }, 20000);
+    //   }, 20000);
   }
   autoHide() {
-    this.dataRefresher =
-      setInterval(() => {
-        this.playerModuleAndTopic(false);
-        this.sider = false;
-        this.playerMenuEnable = true;
-      }, 10000);
+    // this.dataRefresher =
+    //   setInterval(() => {
+    //     this.playerModuleAndTopic(false);
+    //     this.sider = false;
+    //     this.playerMenuEnable = true;
+    //   }, 10000);
   }
 
   makeFullScreen() {
@@ -454,14 +485,14 @@ export class CoursedetailsComponent implements OnInit {
   //   this.sider = true;
   // }
   cancelPageRefresh() {
-    if (this.dataRefresher) {
-      clearInterval(this.dataRefresher);
-    }
+    // if (this.dataRefresher) {
+    //   clearInterval(this.dataRefresher);
+    // }
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnDestroy() {
-    this.cancelPageRefresh();
+    // this.cancelPageRefresh();
   }
 
 
@@ -469,6 +500,7 @@ export class CoursedetailsComponent implements OnInit {
     this.dialog.open(templateRef, {
       width: '100%',
       height: '100%',
+      scrollStrategy: new NoopScrollStrategy(),
       closeOnNavigation: true,
       disableClose: true,
     });
