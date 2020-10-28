@@ -84,6 +84,7 @@ export class ActivitiesComponent implements OnInit {
   };
   courseName: any;
   mouseOverIndex: any;
+  videoSource: any;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
@@ -508,15 +509,29 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
-  playVideo() {
-    console.log('play video');
+  playVideo(previewDialog, videoDialog, path, docType) {
+    if (docType === 'image/jpeg') {
+    this.projectPreviewDoc(previewDialog, path);
+    } else if (docType === 'video/mp4') {
+      console.log('path video', path);
+      this.videoSource = path;
+      this.videoPreview(videoDialog, path);
+    }
+  }
+
+  videoPreview(templateRef: TemplateRef<any>, path) {
+    console.log('path video1', path);
+    this.dialog.open(templateRef, {
+      width: '90%',
+      height: '95%',
+      panelClass: 'matDialogMat',
+      closeOnNavigation: true,
+      disableClose: true,
+    });
   }
 
   mouseover(index) {
     this.mouseOverIndex = index;
   }
 
-  mouseLeave(index) {
-    this.mouseOverIndex = index;
-  }
 }
