@@ -301,7 +301,7 @@
                                         </div>
                                       </div>
                                       <div class="row ml-0 mr-0 playActions">
-                                        <div class="col-5 text-left pr-0 colAction" (click)="playVideo()">
+                                        <div class="col-5 text-left pr-0 colAction" (click)="playVideo(previewDialog, material.path, material.doc_type)">
                                           <mat-icon class="position-absolute text-white playBtn" *ngIf="material.doc_type =='video/mp4'">play_circle_outline</mat-icon>
                                           <mat-icon class="position-absolute text-white playBtn" *ngIf="material.doc_type =='image/jpeg'">photo_size_select_actual</mat-icon>
                                           <span class="text-white actionBtn" *ngIf="material.doc_type =='video/mp4'">Play</span>
@@ -342,7 +342,7 @@
                           <span>Score: {{itrdata.score_mark}} / {{itrdata.total_mark}}</span>
                         </div>
                         <div class="col-6 pr-0 pl-0 text-right w-100">
-                          <span class="f_wt_600" *ngIf="itrdata.grade_status == 'Not Evaluated' && itrdata.submit_status == 'notsubmitted'"> <span class="dot"></span>Yet to submit</span>
+                          <span class="f_wt_600" *ngIf="itrdata.submit_status == 'notsubmitted'"> <span class="dot"></span>Yet to submit</span>
                           <span class="f_wt_600 iterSubmit" *ngIf="itrdata.grade_status == 'Not Evaluated' && itrdata.submitAction == 'submit'">  <span class="submitdot"></span>
                           Submitted</span>
                           <span class="f_wt_600 iterGrade" *ngIf="itrdata.grade_status == 'Evaluated'">  <span class="gradedot"></span>

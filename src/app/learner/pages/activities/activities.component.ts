@@ -493,15 +493,14 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
-  playVideo() {
-    console.log('play video');
+  playVideo(previewDialog, path, docType) {
+    if (docType === 'image/jpeg') {
+    this.projectPreviewDoc(previewDialog, path);
+    }
   }
 
   mouseover(index) {
     this.mouseOverIndex = index;
   }
 
-  mouseLeave(index) {
-    this.mouseOverIndex = index;
-  }
 }
