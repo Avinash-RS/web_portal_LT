@@ -557,6 +557,17 @@ margin-top: 8px;
  cursor: pointer;
  
 }
+.imageIcon {
+  font-size: 50px;
+  margin-left: 2.7rem;
+  color: #898989;
+}
+
+.pdfIcon {
+  font-size: 50px;
+  margin-left: 3rem;
+  color: #898989;
+}
 
 :host ::ng-deep .widthClass .owl-carousel.owl-drag .owl-item {
   width: 13.5rem !important;
