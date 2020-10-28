@@ -191,16 +191,22 @@ export class ActivitiesComponent implements OnInit {
     this.docpath = path;
   }
 
-  projectPreviewDoc(templateRef: TemplateRef<any>, path, type) {
+  projectPreviewDoc(templateRef: TemplateRef<any>, videoDialog, path, type) {
     if (type === 'material') {
-    this.dialog.open(templateRef, {
-      width: '100%',
-      height: '100%',
-      closeOnNavigation: true,
-      disableClose: true,
-    });
-    this.previewDoc = path;
+      if (path.doc_type !== 'video/mp4') {
+        this.dialog.open(templateRef, {
+          width: '100%',
+          height: '100%',
+          closeOnNavigation: true,
+          disableClose: true,
+        });
+        this.previewDoc = path;
+      } else {
+        this.videoSource = path.path;
+        this.videoPreview(videoDialog, path);
+      }
   } else if (type === 'files') {
+    if (path.doc_type !== 'video/mp4') {
     this.dialog.open(templateRef, {
       width: '100%',
       height: '100%',
@@ -209,6 +215,11 @@ export class ActivitiesComponent implements OnInit {
     });
     path.path = path.videourl;
     this.previewDoc = path;
+  } else {
+    path.path = path.videourl;
+    this.videoSource = path.videourl;
+    this.videoPreview(videoDialog, this.videoSource);
+  }
   }
   }
 
@@ -511,16 +522,14 @@ export class ActivitiesComponent implements OnInit {
 
   playVideo(previewDialog, videoDialog, path, docType) {
     if (docType === 'image/jpeg') {
-    this.projectPreviewDoc(previewDialog, path);
+    this.projectPreviewDoc(previewDialog, videoDialog, path, docType);
     } else if (docType === 'video/mp4') {
-      console.log('path video', path);
       this.videoSource = path;
       this.videoPreview(videoDialog, path);
     }
   }
 
   videoPreview(templateRef: TemplateRef<any>, path) {
-    console.log('path video1', path);
     this.dialog.open(templateRef, {
       width: '90%',
       height: '95%',
