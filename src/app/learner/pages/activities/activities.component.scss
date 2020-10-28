@@ -459,6 +459,15 @@ margin-top: 8px;
   position: relative;
   left: 35px;
 }
+
+::ng-deep .custom-mat-tooltip {
+
+  position: relative !important;
+  bottom: 50px !important;
+  background-color: black !important;
+  opacity: 1 !important;
+  font-size: 12px !important;
+}
 /*Ramya CSS ends here*/
 .videoPreview {
   background-color: #D5D5D5;
@@ -509,8 +518,12 @@ margin-top: 8px;
 }
 
 .carouselRowHover {
-  height: 5rem;
+  height: 5.7rem;
   background-color: #5C6873;
+}
+
+.playActions {
+  margin-bottom: 10px;
 }
 
 .carouselCol {
@@ -553,16 +566,27 @@ margin-top: 8px;
  cursor: pointer;
  
 }
+.imageIcon {
+  font-size: 50px;
+  margin-left: 2.7rem;
+  color: #898989;
+}
+
+.pdfIcon {
+  font-size: 50px;
+  margin-left: 3rem;
+  color: #898989;
+}
 
 :host ::ng-deep .widthClass .owl-carousel.owl-drag .owl-item {
   width: 13.5rem !important;
 }
 
 :host ::ng-deep .arrow .owl-theme .owl-nav [class*='owl-'] {
-  color: #fff;
+  color: $color-darkGrey;
   font-size: 30px !important;
   // background: #252525;
-  background: $color-darkGrey;
+  background: transparent;
   display: inline-block;
   cursor: pointer !important;
   padding: 14px !important;
