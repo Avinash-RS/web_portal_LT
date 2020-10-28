@@ -420,15 +420,16 @@
           <div class="row">
             <div class="col-10"></div>
             <div class="col-2 text-right">
-              <span class="f_wt_600 status" *ngIf="project.projectActivity.submit_status == 'notsubmitted'
-              && project.projectActivity.grade_status == ''">  <span class="dot"></span>
+              <span class="f_wt_600 status" *ngIf="project.projectActivity.submitAction !== 'submit' ||
+              project.projectActivity.submit_status == 'notsubmitted'">  <span class="dot"></span>
               Yet to submit</span>
 
               <span class="f_wt_600 projectSubmitstatus submitted" *ngIf="project.projectActivity.submitAction == 'submit'
-              && project.projectActivity.grade_status == 'Not Evaluated' || project.projectActivity.grade_status == ''">  <span class="submitdot"></span>
+              && project.projectActivity.grade_status == 'Not Evaluated'">  <span class="submitdot"></span>
               Submitted</span>
 
-              <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated'">  <span class="gradedot"></span>
+              <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated' && 
+              project.projectActivity.submitAction == 'submit'">  <span class="gradedot"></span>
               Graded</span>
             </div>
           </div>
@@ -500,8 +501,9 @@
                                 <div class="row ml-0 mr-0 playActions">
                                   <div class="col-5 text-left pr-0 colAction" (click)="projectPreviewDoc(projectPreviewDialog,material, 'material')">
                                     <mat-icon class="position-absolute text-white playBtn">play_circle_outline</mat-icon>
-                                    <span class="text-white actionBtn">Play</span>
-                                    <!-- <span class="text-white actionBtn">Preview</span> -->
+                                    <span *ngIf="material.doc_type == 'material/mp4'" class="text-white actionBtn">Play</span>
+                                    <span *ngIf="material.doc_type == 'image/png' || material.doc_type == 'image/jpeg'
+                                    || material.doc_type == 'image/jpg'" class="text-white actionBtn">Preview</span>
                                   </div>
                                   <div class="col-7 text-center pr-0 colAction" (click)="downloadDoc(material, 'material')">
                                    <i class="fa fa-download text-white position-absolute downloadBtn" aria-hidden="true"></i>
@@ -613,8 +615,9 @@
                               <div class="row ml-0 mr-0 playActions">
                                 <div class="col-5 text-left pr-0 colAction" (click)="projectPreviewDoc(projectPreviewDialog,video, 'files')">
                                   <mat-icon class="position-absolute text-white playBtn">play_circle_outline</mat-icon>
-                                  <span class="text-white actionBtn">Play</span>
-                                  <!-- <span class="text-white actionBtn">Preview</span> -->
+                                  <span *ngIf="video.doc_type == 'video/mp4'" class="text-white actionBtn">Play</span>
+                                  <span *ngIf="video.doc_type == 'image/png' || video.doc_type == 'image/jpeg'
+                                  || video.doc_type == 'image/jpg'" class="text-white actionBtn">Preview</span>
                                 </div>
                                 <div class="col-7 text-center pr-0 colAction" (click)="downloadDoc(video, 'files')">
                                  <i class="fa fa-download text-white position-absolute downloadBtn" aria-hidden="true"></i>
