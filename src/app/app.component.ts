@@ -63,10 +63,6 @@ export class AppComponent implements OnInit {
     //       this.router.navigate(["/Learner/login"]);
     //     }
     //   } else {
-    //     // Commented by rajesh because whenever i will reload the page it clearing my localstorage
-    //     // Yeah Rajesh, u need to enable remember me for this - Mythreyi
-    //     //  If i am first time register i don't have remember me its giving lot of problem  :: ankit
-    //     //  I think now the issue will get resolved - Mythreyi
     //     localStorage.clear();
     //   }
     // }

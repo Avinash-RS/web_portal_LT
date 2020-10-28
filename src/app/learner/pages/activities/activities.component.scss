@@ -77,10 +77,14 @@
     margin-left: 21px;
 }
 .submit-btn{
-    color: $color-white;
+    color: $color-white !important;
     background-color: $lxp-theme-green;
     width: 45%;
     margin-top: 6%;
+}
+.noData {
+  margin-top: 18px;
+  margin-left: 42px;
 }
 .margin-b-9{
 margin-bottom: 9px;
@@ -185,6 +189,20 @@ margin-bottom: 9px;
   height: 35px;
   width: 35px;
 }
+
+.close-buttonVideo {
+  background: $lxp-theme-green !important; // red color
+  float: right;
+  top: -12px;
+  position: relative;
+  height: 35px;
+  width: 35px;
+}
+
+::ng-deep .matDialogMat .mat-dialog-container {
+  overflow: hidden !important;
+}
+
 .download-icon {
   position: relative;
   bottom: 2px;
@@ -278,8 +296,20 @@ margin-bottom: 1% !important;
   margin-right: 3rem;
 }
 
+.endDateTxt {
+  margin-left: 40px;
+}
+
+.EndDate {
+  margin-left: 28px;
+}
+
 .itrationTxt {
   margin-left: 33px;
+}
+
+.itrationTxts {
+  margin-left: 14px;
 }
 
 .upload-bltn {
@@ -350,6 +380,8 @@ margin-bottom: 1% !important;
     width: 10px;
     border-radius: 50%;
     display: inline-block;
+    position: relative;
+    right: 9px;
 }
 .m-r-40 {
   margin-right: 40px;
@@ -434,11 +466,11 @@ margin-top: 8px;
   top: 5px;
 }
 .submitted-btn{
-  color: $color-white;
+  color: $color-white !important;
   background-color: #898989;
   width: 45%;
-  margin-top: 6%;
-  cursor: none;
+  // margin-top: 6%;
+  cursor: not-allowed;
 }
 .deleteIcon {
   color: #5C6873;
@@ -482,13 +514,13 @@ margin-top: 8px;
   font-size: 20px;
 }
 
-.submitted-btn{
-  color: $color-white;
-  background-color: #898989;
-  width: 45%;
-  margin-top: 6%;
-  cursor: none;
-}
+// .submitted-btn{
+//   color: $color-white;
+//   background-color: #898989;
+//   width: 45%;
+//   margin-top: 6%;
+//   cursor: none;
+// }
 
 .videoPlay {
   color: #898989;
@@ -627,4 +659,5 @@ margin-top: 8px;
   padding: 20px;
   font-size: 18px;
   font-weight: 500;
+  margin-left: 7px;
 }
