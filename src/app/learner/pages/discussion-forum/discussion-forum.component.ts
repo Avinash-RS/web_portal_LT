@@ -90,10 +90,12 @@ export class DiscussionForumComponent implements OnInit {
     // this.cS.loader$.next(true);
     this.loading = true;
     this.Lservice.playerModuleAndTopic(cid, this.userDetail.user_id).subscribe((data: any) => {
-      this.scromModuleData = data.data?.playerModuleAndTopic?.message[0]?.childData;
+      this.scromModuleData = data.data?.playerModuleAndTopic?.message && data.data?.playerModuleAndTopic?.message[0]?.childData || [];
       this.selectedModuleData = this.scromModuleData[0] || null;
-      this.selectedModuleData.indexValue = 1;
+      this.loading = false;
       if (this.selectedModuleData) {
+        this.loading = true;
+        this.selectedModuleData.indexValue = 1;
         this.Lservice.getSingleBatchInfo(this.userDetail.user_id, cid).subscribe((resdata: any) => {
           if (resdata?.data?.getbatchdetails?.message?.batchid !== null) {
             this.batchDetails = resdata?.data?.getbatchdetails?.message;
