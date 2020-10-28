@@ -459,6 +459,15 @@ margin-top: 8px;
   position: relative;
   left: 35px;
 }
+
+::ng-deep .custom-mat-tooltip {
+
+  position: relative !important;
+  bottom: 50px !important;
+  background-color: black !important;
+  opacity: 1 !important;
+  font-size: 12px !important;
+}
 /*Ramya CSS ends here*/
 .videoPreview {
   background-color: #D5D5D5;
