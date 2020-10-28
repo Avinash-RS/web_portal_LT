@@ -173,7 +173,6 @@ export class CoursedetailsComponent implements OnInit {
         });
     }
     this.Lservice.getModuleData(detail && detail.id || this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
-      console.log(data, 'module');
       this.content = data.data.getmoduleData.data[0];
       this.assignmentVal = false;
       let noresource = false;
@@ -206,7 +205,6 @@ export class CoursedetailsComponent implements OnInit {
     this.translate.use(localStorage.getItem('language'));
     // this.add_topic_reference(res);
     this.service.menuSelectedPerform.subscribe((emitedData: any) => {
-      console.log('emitedData', emitedData);
       this.selectedName = emitedData.selectedName;
       this.selectedTabIndex = emitedData.selectedTabIndex;
       this.performOverLay = false;
@@ -477,7 +475,7 @@ export class CoursedetailsComponent implements OnInit {
   autoHide() {
     this.dataRefresher =
       setInterval(() => {
-        this.playerModuleAndTopic(false);
+        // this.playerModuleAndTopic(false);
         this.sider = false;
         this.playerMenuEnable = true;
       }, 10000);
