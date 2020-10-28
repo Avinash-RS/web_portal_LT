@@ -37,13 +37,15 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </mat-toolbar>
+
                     <div class="row">
                         <div class="contents" (mouseenter)="viewScrollBar = true" (mouseleave)="viewScrollBar = false">
-                            <mat-accordion *ngFor="let res of scromModuleData; let i = index"
-                                (click)="getSelectedIndex(i); getModuleDataForForum(scromModuleData?.length, i + 1, res)">
+                            <!-- getModuleDataForForum(scromModuleData?.length, i + 1, res)" -->
+                            <!-- Level 1 -->
+                            <mat-accordion *ngFor="let res of scromModuleData; let i = index" multi displayMode=""
+                                (click)="getSelectedIndex(i); ">
                                 <mat-expansion-panel class="panel" hideToggle="true" #example
                                     [expanded]="selectedIndex === i">
                                     <mat-expansion-panel-header class="moduleHeadHight">
@@ -69,77 +71,169 @@
                                                                 <!-- {{res?.title}} -->
                                                                 {{res?.title}}
                                                             </p>
-
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
-                                            <div class="row">
-                                                <div class="moduleund">
 
+                                            <!-- <div class="row">
+                                                <div class="moduleund">
                                                     <span class="time-icon">
                                                         <mat-icon class="time-icon">alarm</mat-icon>
                                                         {{res?.moduletime ? res?.moduletime : '01:00:00' }}
                                                     </span>
                                                 </div>
-                                            </div>
-
-
+                                            </div> -->
 
                                         </mat-panel-title>
-                                        <!-- <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons mar">done
-                </mat-icon> -->
+
                                         <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
                                         </mat-icon>
                                         <mat-icon *ngIf="example.expanded" class="exp-icon">remove_circle_outline
                                         </mat-icon>
-
                                     </mat-expansion-panel-header>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title.length > 39?'headerDown':
-                                ''">
-                                                <ng-container *ngFor="let mod of res?.children; let j = index">
-                                                    <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
-                                        mod.status === 'Process' ? 'colYellow' : 'colWhite'">
-                                                        <ng-template matStepLabel>
-                                                            <!-- // Satish comment  -->
-                                                            <!-- <span *ngIf="mod?.title?.length > 20" tooltip="{{mod?.title}}"
-                                                placement="right" class="topicnm"
-                                                (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)">
-                                                {{(mod?.title  | slice:0:20)+'...'}}</span> -->
 
-                                                            <!-- *ngIf="mod?.title?.length <= 20" -->
+                                    <div class="row"  *ngIf = "treeCourse == true">
+                                        <div class="col-12" *ngFor="let mod of res?.children; let j = index" >
+                                            <!-- Level 2 -->
+                                            <!-- <div > -->
+                                                <mat-accordion  (click)="getsubSelectedIndex(j);"   *ngIf="mod?.children?.length != 0">
+                                                    <mat-expansion-panel class="panel"  hideToggle="true"  #example1
+                                                    [expanded]="selectedIndex1 === j">
+                                                    <mat-expansion-panel-header class="moduleHeadHight">
+                                                        <mat-panel-title class="module-container">
                                                             <span class="topicnm"
-                                                                (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)">
-                                                                <!-- {{mod?.title}} -->
-                                                                <p class="titleName" *ngIf="mod?.title.length >= 65"
-                                                                    tooltip="{{mod?.title}}" placement="right">
-                                                                    {{mod?.title | slice:0:69}}...
-                                                                </p>
-                                                                <p class="titleName" *ngIf="mod?.title.length < 65">
-                                                                    {{mod?.title}}
-                                                                </p>
-                                                            </span>
-
-                                                        </ng-template>
-                                                    </mat-step>
-                                                </ng-container>
-                                            </mat-vertical-stepper>
+                                                            >
+                                                            <p class="titleName" *ngIf="mod?.title?.length >= 65"
+                                                                tooltip="{{mod?.title}}" placement="right">
+                                                                {{mod?.title | slice:0:69}}...
+                                                            </p>
+                                                            <p class="titleName" *ngIf="mod?.title?.length < 65">
+                                                                {{mod?.title}}
+                                                            </p>
+                                                        </span>
+                                                        </mat-panel-title>
+                                                        <mat-icon *ngIf="!example1.expanded" class="exp-icon-sub">add_circle_outline
+                                                        </mat-icon>
+                                                        <mat-icon *ngIf="example1.expanded" class="exp-icon-sub">remove_circle_outline
+                                                        </mat-icon>
+                                                    </mat-expansion-panel-header>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <!-- Level 3 -->
+                                                            <mat-accordion (click)="getsupersubSelectedIndex(k);" *ngFor="let thiredLvl of mod?.children; let k = index" >
+                                                                <mat-expansion-panel class="panel" *ngIf="thiredLvl?.children?.length > 0" hideToggle="true"  #example1
+                                                                [expanded]="selectedIndex2 === k">
+                                                                <mat-expansion-panel-header class="moduleHeadHight">
+                                                                    <mat-panel-title class="module-container">
+                                                                        <span class="topicnm"
+                                                                        >
+                                                                        <p class="titleName" *ngIf="thiredLvl?.title?.length >= 65"
+                                                                            tooltip="{{thiredLvl?.title}}" placement="right">
+                                                                            {{thiredLvl?.title | slice:0:69}}...
+                                                                        </p>
+                                                                        <p class="titleName" *ngIf="thiredLvl?.title?.length < 65">
+                                                                            {{thiredLvl?.title}}
+                                                                        </p>
+                                                                    </span>
+                                                                    </mat-panel-title>
+                                                                    <mat-icon *ngIf="!example1.expanded" class="exp-icon-supersub">add_circle_outline
+                                                                    </mat-icon>
+                                                                    <mat-icon *ngIf="example1.expanded" class="exp-icon-supersub">remove_circle_outline
+                                                                    </mat-icon>
+                                                                </mat-expansion-panel-header>
+                                                                <!-- Level 4 -->
+                                                                <mat-vertical-stepper [linear]="isLeaner" [ngClass]="thiredLvl?.title?.length > 39?'headerDown': ''">
+                                                                    <ng-container *ngFor="let fourLvl of thiredLvl?.children; let l = index">
+                                                                        <mat-step [aria-labelledby]="fourLvl?.status === 'Passed' ? 'colgreen' :  fourLvl?.status === 'Process' ? 'colYellow' : 'colWhite'">
+                                                                            <ng-template matStepLabel>
+                                                                                <span class="topicnm"
+                                                                                    (click)="playTopic(fourLvl.link,fourLvl.title,fourLvl.status,fourLvl?.title,fourLvl?.status,scromModuleData?.length,fourLvl?.topic_len,l + 1)">
+                                                                                    <p class="titleName" *ngIf="fourLvl?.title?.length >= 65"
+                                                                                        tooltip="{{fourLvl?.title}}" placement="right">
+                                                                                        {{fourLvl?.title | slice:0:69}}...
+                                                                                    </p>
+                                                                                    <p class="titleName" *ngIf="fourLvl?.title?.length < 65">
+                                                                                        {{fourLvl?.title}}
+                                                                                    </p>
+                                                                                </span>
+                    
+                                                                            </ng-template>
+                                                                        </mat-step>
+                                                                    </ng-container>
+                                                                </mat-vertical-stepper>
+                                                                <!-- <mat-accordion (click)="getfourSelectedIndex(l);" *ngFor="let fourLvl of thiredLvl?.children; let l = index" >
+                                                                    <mat-expansion-panel class="panel" *ngIf="fourLvl?.children?.length > 0" hideToggle="true"  #example1
+                                                                    [expanded]="selectedIndex3 === l">
+                                                                    <mat-expansion-panel-header class="moduleHeadHight">
+                                                                        <mat-panel-title class="module-container">
+                                                                            <span class="topicnm"
+                                                                            >
+                                                                            <p class="titleName" *ngIf="fourLvl?.title?.length >= 65"
+                                                                                tooltip="{{fourLvl?.title}}" placement="right">
+                                                                                {{fourLvl?.title | slice:0:69}}...
+                                                                            </p>
+                                                                            <p class="titleName" *ngIf="fourLvl?.title?.length < 65">
+                                                                                {{fourLvl?.title}}
+                                                                            </p>
+                                                                        </span>
+                                                                        </mat-panel-title>
+                                                                        <mat-icon *ngIf="!example1.expanded" class="exp-icon-supersub">add_circle_outline
+                                                                        </mat-icon>
+                                                                        <mat-icon *ngIf="example1.expanded" class="exp-icon-supersub">remove_circle_outline
+                                                                        </mat-icon>
+                                                                    </mat-expansion-panel-header>
+                                                                </mat-expansion-panel>
+                                                                </mat-accordion> -->
+                                                                <!-- Level 4 end  -->
+                                                            </mat-expansion-panel>
+                                                            </mat-accordion>
+                                                            <!-- Level 3 end -->
+                                                        </div>
+                                                    </div>
+                                                </mat-expansion-panel>
+                                             
+                                                </mat-accordion>   
+                                            <!-- </div> -->
+                                            
+                                            <!-- Level 2 end -->
+                                           
                                         </div>
                                     </div>
+
+
+                                    <div  *ngIf = "treeCourse != true">
+                                                <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title?.length > 39?'headerDown': ''">
+                                                    <ng-container *ngFor="let mod of res?.children; let j = index">
+                                                        <mat-step [aria-labelledby]="mod?.status === 'Passed' ? 'colgreen' :  mod?.status === 'Process' ? 'colYellow' : 'colWhite'">
+                                                            <ng-template matStepLabel>
+                                                                <span class="topicnm"
+                                                                    (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)">
+                                                                    <p class="titleName" *ngIf="mod?.title?.length >= 65"
+                                                                        tooltip="{{mod?.title}}" placement="right">
+                                                                        {{mod?.title | slice:0:69}}...
+                                                                    </p>
+                                                                    <p class="titleName" *ngIf="mod?.title.length < 65">
+                                                                        {{mod?.title}}
+                                                                    </p>
+                                                                </span>
+        
+                                                            </ng-template>
+                                                        </mat-step>
+                                                    </ng-container>
+                                                </mat-vertical-stepper>
+                                            </div> 
+                                   
                                 </mat-expansion-panel>
                             </mat-accordion>
+                            <!-- Level 3 end -->
                         </div>
                     </div>
+
+
                 </div>
-
-
-
-
             </mat-drawer>
-
+                                      
             <!-- header menu starts here -->
 
             <div [ngClass]="drawer.opened==true?'main-opn':'main-cls'">
