@@ -44,6 +44,8 @@ import {
   singleBatchInfo,
   ViewAllThreadDataBid,
   getCountForJobroleCategories,
+  // get_all_resources_details,
+  resource_details,
 } from './operations/learner_query';
 
 import {
@@ -869,8 +871,10 @@ export class LearnerServicesService {
       }
     });
   }
+
+getResourceDetails() {
+  return this.Apollo.query({
+    query: resource_details
+  });
 }
-
-
-
-
+}

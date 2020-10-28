@@ -66,6 +66,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {MatMenuModule} from '@angular/material/menu';
 import { LearnermycourseService } from './pages/learner-my-course/learnermycourse.service';
 import { KnowledgeResourceHomeComponent } from './pages/knowledge-resource-home/knowledge-resource-home.component';
+import { FilterPipe } from '../pipes/filter.pipe';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -217,7 +218,8 @@ const routes: Routes = [
     LandingpageComponent,
     LearnerCalendarComponent,
     ViewAllnotificationsComponent,
-    KnowledgeResourceHomeComponent
+    KnowledgeResourceHomeComponent,
+    FilterPipe
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

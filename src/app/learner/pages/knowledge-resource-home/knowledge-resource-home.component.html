@@ -1,5 +1,24 @@
 <app-header></app-header>
 
 <div class="know-home-container">
+    
+    <div class="header-div">
+        <h3>Knowledge Ressources</h3>
+     </div> 
+    <div class="search-bar">
+            <form >
+                <input type="search" id="gsearch" name="gsearch" [(ngModel)]="searchDetails" class="no-outline">
+                <label class="search-placeholder">Search...</label>
+                <i class="material-icons" >search</i>
+            </form>
+    </div>
+    
+   <div class="row resource-link">
+    <div class="col-4 resource-col" *ngFor="let item of details | filter:searchDetails">
+        <h1 >{{item.domain}}</h1>
+        <a href="{{item.file}}" >{{item.area_of_interest}}</a><br>
+         <span class="expand-more">More...</span>
+    </div>
 
+  </div>
 </div>

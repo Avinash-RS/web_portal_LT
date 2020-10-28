@@ -1385,4 +1385,23 @@ export const getCountForJobroleCategories = gql`
   }
       `;
 
+export const resource_details = gql`
+query{
+get_all_resources_details{
+    success
+    error_msg
+    message{
+            _id
+            documentname
+            file
+            domain
+            area_of_interest
+            created_on
+            createdby_role
+            createdby_name
+            createdby_id
+    }
+ }
+}
+`;
 
