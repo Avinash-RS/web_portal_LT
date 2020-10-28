@@ -83,15 +83,27 @@ export class InstructorLedComponent implements OnInit {
   }
 
   getSessionsList() { // Http Call
-    this.learnerService.getActivityDetailsByCourseAndBatchID('443222669025448', 'tbiwys0m').subscribe( async res => {
-      debugger
+
+    const userDetails = JSON.parse(sessionStorage.getItem('UserDetails'));
+    console.log(userDetails.user_id);
+    const date = '2020-10-27'; // new Date();
+    const courseid = 'tbiwys0m';
+    const userid = 'aj1yej';
+    this.learnerService.getReadLeanerActivity(userid, date, courseid).subscribe(async res => {
       console.log(res);
-      this.listOfSessions = res.data['get_course_activities_by_id']['data'];
+      this.listOfSessions = res.data['get_read_learner_activity']['message'];
       for (const los of this.listOfSessions) {
-        los.duration = await this.getDiff(los.endDate, los.startDate);
+        console.log(los.activity_details.startDate);
+        console.log(los.activity_details.endDate);
+        los.duration = await this.getDiff(los.activity_details.startDate, los.activity_details.endDate);
       }
       console.log(this.listOfSessions);
     });
+    // this.learnerService.getReadLeanerActivity('443222669025448', 'tbiwys0m').subscribe( async res => {
+    //   debugger
+    //   console.log(res);
+
+    // });
 
     // this.listOfSessions = [{
     //   name: 'Quality Planing',

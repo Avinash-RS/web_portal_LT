@@ -1403,8 +1403,8 @@ export const ViewAllThreadData = gql`
   }
 `;
 export const getReadLeanerActivity = gql`
-  query get_read_learner_activity($userid: String!, $date: String!) {
-    get_read_learner_activity(userid: $userid, date: $date) {
+  query get_read_learner_activity($userid: String!, $date: String!, $courseid: String!) {
+    get_read_learner_activity(userid: $userid, date: $date, courseid: $courseid) {
       success
       error_msg
       message {

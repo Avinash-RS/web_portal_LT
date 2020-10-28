@@ -780,12 +780,13 @@ export class LearnerServicesService {
     }
   }
 
-  getReadLeanerActivity(userid, date) {
+  getReadLeanerActivity(userid, date, courseid) {
     return this.Apollo.query({
       query: getReadLeanerActivity,
       variables: {
         userid,
-        date
+        date,
+        courseid
       }
     });
   }
