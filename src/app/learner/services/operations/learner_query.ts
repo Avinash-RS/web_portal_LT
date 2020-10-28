@@ -745,7 +745,7 @@ export const getlearnerdashboard = gql`
       success
       error_msg
       message{
-            course_details{
+            batch_course_details{
                  _id
                 course_name
                 course_description
@@ -816,15 +816,15 @@ export const getlearnerdashboard = gql`
                 completed_module_count
                 week_completed_count
                 completed_topic_count
-                thread_count
-                comment_count
-                reply_count
                 activity_info{
                     _id
                     batchid
                     courseid
                     coursename
                     modulecount
+                    thread_count
+                    comment_count
+                    reply_count
                     moduledetails{
                         modulename
                         topicdetails{
@@ -844,27 +844,23 @@ export const getlearnerdashboard = gql`
                             createdby_name
                             createdby_role
                             createdby_id
-                            perform_details{
-                                projecttype
-                                groupname
-                                iteration
-                                evalutionmode
-                                score
-                                meterials{
+                            learners{
+                                email
+                                id
+                                image
+                                is_active
+                                name
+                                username
+                            }
+                            evaluationmode
+                            trainers{
                                     name
-                                    type
-                                    file
-                                }
-                                trainers{
-                                    id
-                                    name
-                                    image
-                                }
-                                learners{
-                                    id
-                                    name
-                                    image
-                                }
+                                    role
+                                    role_type_id
+                                    role_type_name
+                                    userid
+                                    roleid
+                                    role_type
                             }
                             resourcefile{
                                 assignment
@@ -929,6 +925,126 @@ export const getlearnerdashboard = gql`
                                 file_url
                         }
                     }
+                }
+        }
+        enrolled_course_details{
+            _id
+            course_id
+            course_description
+            course_name
+            version
+            location
+            course_start_datetime
+            course_end_datetime
+            advertised_start
+            course_img_url
+            social_sharing_url
+            certificate_display_behaviour
+            certificates_show_before_end
+            certificate_html_view_enabled
+            has_any_active_web_certificate
+            certificate_name
+            lowest_passing_grade
+            mobile_available
+            visible_to_staff_only
+            enrollment_start
+            enrollment_end
+            invitation_only
+            max_student_enrollments_allowed
+            announcement
+            catalog_visibility
+            course_video_url
+            short_description
+            self_paced
+            marketing_url
+            course_language
+            certificate_available_date
+            article_count
+            downloadable_resource_count
+            course_level
+            step_towards
+            rating
+            price
+            what_will_you_learn
+            course_category
+            course_type
+            groupid
+            created_by
+            updated_by
+            admin_id
+            is_published
+            course_mode
+            preview_video
+            learner_count
+            is_active
+            published_by
+            publisher_id
+            updated_by_id
+            user_role
+            user_id
+            user_name
+            published_on
+            updated_at
+            created_at
+            catalogue_id
+            feed_back
+            course_long_description
+            published_on_date
+            week_total_count
+            total_module_count
+            total_topic_count
+            week_completed_count
+            completed_module_count
+            completed_topic_count
+            super_sub_category_id
+            pre_requisite{
+                    name
+                    image
+                }
+           takeway_details{
+                text
+                description
+                what_will_you_learn
+                media
+            }
+            coursepartner_details{
+                name
+                image
+            }
+            category_id 
+            parent_sub_category_id
+            course_content_details{
+                    name
+                    type
+                    is_active
+                    parent_id
+                    description
+                    sub_section_id
+                    file_content{
+                        video_url
+                        image_url
+                        audio_url
+                        file_url
+                    }
+                    unit{
+                        name
+                        type
+                        is_active
+                        parent_id
+                        description
+                        sub_section_id
+                        file_content{
+                                video_url
+                                image_url
+                                audio_url
+                                file_url
+                        }
+                    }
+                }
+                author_details{
+                        image
+                        author_name
+                        description
                 }
         }
         ongoing_count
@@ -1707,6 +1823,7 @@ export const getCourseActivities = gql`
             course_id
             course_name
             module_name
+            activity
             topic_name
             status
             score_mark

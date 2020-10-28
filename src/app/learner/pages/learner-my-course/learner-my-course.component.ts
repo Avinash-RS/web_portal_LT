@@ -326,7 +326,7 @@ export class LearnerMyCourseComponent implements OnInit {
     this.loading = !showSkelton;
     this.learnerService.get_learner_dashboard(this.userDetailes.user_id, this.userDetailes._id).subscribe((enrolledList: any) => {
         if (enrolledList.data.get_learner_dashboard && enrolledList.data.get_learner_dashboard.success) {
-          this.enrolledCourses = enrolledList.data.get_learner_dashboard.message.course_details;
+          this.enrolledCourses = enrolledList.data.get_learner_dashboard.message.enrolled_course_details;
           if (this.enrolledCourses.length > 0) {
             this.enrolledCourses.forEach(element => {
               if (element.course_duration) {
@@ -343,12 +343,12 @@ export class LearnerMyCourseComponent implements OnInit {
           //     element.coursePlayerStatus.course_percentage = Math.round(element.coursePlayerStatus.course_percentage);
           //   }
           // });
-          const arr = enrolledList.data.get_learner_dashboard.message.course_details.filter(item => {
+          const arr = enrolledList.data.get_learner_dashboard.message.enrolled_course_details.filter(item => {
             return item.coursePlayerStatus?.status === 'incomplete' ||
               item.coursePlayerStatus?.status === 'suspend' ||
               item.coursePlayerStatus?.status === 'start';
           });
-          const arr1 = enrolledList.data.get_learner_dashboard.message.course_details.filter(item => {
+          const arr1 = enrolledList.data.get_learner_dashboard.message.enrolled_course_details.filter(item => {
             return item.coursePlayerStatus?.status === 'completed';
           });
           this.completed = arr1;
