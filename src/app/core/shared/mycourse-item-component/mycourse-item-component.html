@@ -129,14 +129,6 @@
               </div>
               <div class="row">
                 <div class="col">
-                  Instructor led session completed
-                </div>
-                <div class="col-3">
-                  <strong>--/--</strong>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
                   Mid course project completed
                 </div>
                 <div class="col-3">
@@ -155,10 +147,10 @@
             <div class="col-4">
               <div class="row m-auto">
                 <div >
-                  <circle-progress [percent]="course?.coursePlayerStatus?.course_percentage || 0" [radius]="10"
+                  <circle-progress [percent]="0" [radius]="10"
                     [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'"
                     [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="4" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true"
-                    [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" subtitle="--/--"
+                    [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" subtitle="--/16"
                     [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=500>
                   </circle-progress>
                 </div>
@@ -201,14 +193,15 @@
                   Progression
                 </div>
                 <div class="col justify-content-center align-self-center">
-                  <mat-progress-bar class="example-margin" [mode]="'determinate'" [value]=70>
+                  <mat-progress-bar class="example-margin" [mode]="'determinate'" [value]="course?.coursePlayerStatus?.course_percentage || 0">
                   </mat-progress-bar>
                 </div>
               </div>
               <div class="row m-t-10px">
                 <div class="col-7">
                   <div>
-                    <span class="pointer" (click)="course.progressionExp?course.progressionExp=false:course.progressionExp=true">
+                    <span class="pointer" >
+                      <!-- (click)="course.progressionExp?course.progressionExp=false:course.progressionExp=true" -->
                       <span class="f_size_10">{{course.progressionExp?'Hide details':'See more details' }}</span>
                       <mat-icon *ngIf="!course.progressionExp" class="f_size_10" fontSet="material-icons-outlined">
                         keyboard_arrow_down</mat-icon>
@@ -264,7 +257,8 @@
               <div class="row m-t-10px">
                 <div class="col-7">
                   <div>
-                    <span class="pointer" (click)="course.ledinstExp?course.ledinstExp=false:course.ledinstExp=true">
+                    <span class="pointer" >
+                      <!-- (click)="course.ledinstExp?course.ledinstExp=false:course.ledinstExp=true" -->
                       <span class="f_size_10">{{course.ledinstExp?'Hide details':'See more details' }}</span>
                       <mat-icon *ngIf="!course.ledinstExp" class="f_size_10" fontSet="material-icons-outlined">
                         keyboard_arrow_down</mat-icon>
@@ -309,7 +303,8 @@
               <div class="row m-t-10px">
                 <div class="col-7">
                   <div>
-                    <span class="pointer" (click)="course.discussExp?course.discussExp=false:course.discussExp=true">
+                    <span class="pointer" >
+                      <!-- (click)="course.discussExp?course.discussExp=false:course.discussExp=true" -->
                       <span class="f_size_10">{{course.discussExp?'Hide details':'See more details' }}</span>
                       <mat-icon *ngIf="!course.discussExp" class="f_size_10" fontSet="material-icons-outlined">
                         keyboard_arrow_down</mat-icon>
@@ -350,7 +345,8 @@
               <div class="row m-t-10px">
                 <div class="col-7">
                   <div>
-                    <span class="pointer" (click)="course.activityExp?course.activityExp=false:course.activityExp=true">
+                    <span class="pointer" >
+                      <!-- (click)="course.activityExp?course.activityExp=false:course.activityExp=true" -->
                       <span class="f_size_10">{{course.activityExp?'Hide details':'See more details' }}</span>
                       <mat-icon *ngIf="!course.activityExp" class="f_size_10" fontSet="material-icons-outlined">
                         keyboard_arrow_down</mat-icon>
@@ -359,7 +355,7 @@
                     </span>
                     <div *ngIf="course.activityExp" class="f_size_13">
                       Assignments completed --/--<br>
-                      projects completed --/--<br>
+                      Projects completed --/--<br>
                       <span class="pointer f_size_10" style="color: red; text-decoration: underline;" (click)="gotoSubmissionDetails(course)">View submission details..</span>
                     </div>
                   </div>
