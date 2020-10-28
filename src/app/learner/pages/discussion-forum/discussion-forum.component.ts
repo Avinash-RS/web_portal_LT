@@ -177,8 +177,8 @@ export class DiscussionForumComponent implements OnInit {
     this.addThreadComment = null;
     d = d.replace(/&#160;/g, '').trim() || d.replace(/&#160;/g, '').trimLeft();
     if (d.length > 8) {
-      if (d.length > 55500) {
-        this.toastr.warning('Comment should be less than 60000 characters');
+      if (d.length > 599500) {
+        this.toastr.warning('Comment should be less than 6,00,000 characters');
       } else {
         // this.cS.loader$.next(true);
         this.loading = true;
@@ -374,8 +374,8 @@ export class DiscussionForumComponent implements OnInit {
     desc.d = desc.d.replace(/&#160;/g, '')?.trim() || desc.d.replace(/&#160;/g, '')?.trimLeft() ||
       desc.d.replace(/&#160;/g, '')?.trimEnd();
     if (this.addThreadForm.value.thread_name.length > 8 && desc.d.length > 8) {
-      if (desc.d.length > 55500) {
-        this.toastr.warning('Content should be less than 60000 characters');
+      if (desc.d.length > 599500) {
+        this.toastr.warning('Content should be less than 6,00,000 characters');
       } else {
         // this.cS.loader$.next(true);
         this.loading = true;

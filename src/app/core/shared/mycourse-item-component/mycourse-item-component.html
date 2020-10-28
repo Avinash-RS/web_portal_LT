@@ -7,27 +7,27 @@
             <div class="courseHover" (click)="gotoDesc(course)">
               <div>
                 <span *ngIf="course?.course_type === 'primer_course'">
-                  <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"
+                  <img *ngIf="course?.categoryName === 'college connect'" style="margin-left: -4px;position: absolute;" matTooltip="College connect"
                     matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage"
                     src="assets/learner/primerC.svg" />
-                  <img *ngIf="course?.categoryName === 'vocational'" matTooltip="Vocational" matTooltipPosition="right"
+                  <img *ngIf="course?.categoryName === 'vocational'" style="margin-left: -4px;position: absolute;" matTooltip="Vocational" matTooltipPosition="right"
                     matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage"
                     src="../../../../assets/learner/primerV.svg" />
                   <img *ngIf="
-                    course?.categoryName === 'pro certification'
-                  " matTooltip="Pro certification" placement="right" alt="flag" class="primerFlage"
+                  course?.categoryName === 'pro certification'
+                " matTooltip="Pro certification" style="margin-left: -4px;position: absolute;" placement="right" alt="flag" class="primerFlage"
                     src="../../../../assets/learner/primerP.svg" />
                 </span>
                 <span *ngIf="course?.course_type === 'free_course'">
-                  <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"
+                  <img *ngIf="course?.categoryName === 'college connect'" style="margin-left: -4px;position: absolute;" matTooltip="College connect"
                     matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage"
                     src="../../../../assets/learner/freeC.svg" />
-                  <img *ngIf="course?.categoryName === 'vocational'" matTooltip="Vocational" alt="flag"
+                  <img *ngIf="course?.categoryName === 'vocational'" style="margin-left: -4px;position: absolute;" matTooltip="Vocational" alt="flag"
                     matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" class="primerFlage"
                     src="../../../../assets/learner/freeV.svg" />
                   <img *ngIf="
                     course?.categoryName === 'pro certification'
-                  " matTooltip="Pro certification" matTooltipPosition="right" matTooltipClass="custom-mat-tooltip"
+                  " matTooltip="Pro certification" style="margin-left: -4px;position: absolute;" matTooltipPosition="right" matTooltipClass="custom-mat-tooltip"
                     alt="flag" class="primerFlage" src="../../../../assets/learner/freeP.svg" />
                 </span>
                 <div class="overlay">
