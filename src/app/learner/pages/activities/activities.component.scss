@@ -185,6 +185,20 @@ margin-bottom: 9px;
   height: 35px;
   width: 35px;
 }
+
+.close-buttonVideo {
+  background: $lxp-theme-green !important; // red color
+  float: right;
+  top: -12px;
+  position: relative;
+  height: 35px;
+  width: 35px;
+}
+
+::ng-deep .matDialogMat .mat-dialog-container {
+  overflow: hidden !important;
+}
+
 .download-icon {
   position: relative;
   bottom: 2px;
@@ -278,8 +292,20 @@ margin-bottom: 1% !important;
   margin-right: 3rem;
 }
 
+.endDateTxt {
+  margin-left: 40px;
+}
+
+.EndDate {
+  margin-left: 28px;
+}
+
 .itrationTxt {
   margin-left: 33px;
+}
+
+.itrationTxts {
+  margin-left: 14px;
 }
 
 .upload-bltn {

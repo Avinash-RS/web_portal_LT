@@ -245,10 +245,10 @@
            <mat-icon class="f_size_16 arr" aria-hidden="false" *ngIf="isperformColaps && performId === i" (click)="isperformColaps = !isperformColaps; performId = i">keyboard_arrow_up
             </mat-icon>
             <br>
-            <div class="mt-2 mb-2 itrationTxt">Iterations : <span *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} / </span>{{perform.performActivity.iterationTotal}}</div>
-            <div class="m-l-68">Start date :<span class="margin-30"></span>End date :</div>
+            <div [ngClass]="perform.performActivity.submittedTotal > 0 ? 'mt-2 mb-2 itrationTxts' : 'mt-2 mb-2 itrationTxt'" class="">Iterations : <span *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} / </span>{{perform.performActivity.iterationTotal}}</div>
+            <div class="m-l-68">Start date :<span class="endDateTxt"></span>End date :</div>
             <div class="m-l-68 f_wt_600">{{perform.activityStartDate}}
-              <span class="margin-21 f_wt_600"></span>{{perform.activityEndDate}}</div> 
+              <span class="EndDate f_wt_600"></span>{{perform.activityEndDate}}</div> 
           </div>
         </div>
         
@@ -301,7 +301,7 @@
                                         </div>
                                       </div>
                                       <div class="row ml-0 mr-0 playActions">
-                                        <div class="col-5 text-left pr-0 colAction" (click)="playVideo(previewDialog, material.path, material.doc_type)">
+                                        <div class="col-5 text-left pr-0 colAction" (click)="playVideo(previewDialog, videoDialog, material.path, material.doc_type)">
                                           <mat-icon class="position-absolute text-white playBtn" *ngIf="material.doc_type =='video/mp4'">play_circle_outline</mat-icon>
                                           <mat-icon class="position-absolute text-white playBtn" *ngIf="material.doc_type =='image/jpeg'">photo_size_select_actual</mat-icon>
                                           <span class="text-white actionBtn" *ngIf="material.doc_type =='video/mp4'">Play</span>
@@ -685,6 +685,23 @@
     </div>
   </div>
 </ng-template>
+
+<!---------------------- video play --------------------------------->
+<ng-template #videoDialog>
+  <div class="row">
+    <div class="col-12">
+      <button mat-mini-fab class="close-buttonVideo">
+        <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+    <app-video-player [url]="videoSource"></app-video-player>
+    </div>
+  </div>
+</ng-template>
+
 <!-- tooltip template for assignmnet tab -->
 <ng-template #popTemplate class="tooltip-container">
   <span class="singleline-text">
