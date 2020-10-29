@@ -78,6 +78,7 @@ import { KnowledgeLandingPageComponent } from './pages/knowledge-landing-page/kn
 import { KnowledgePreviewComponent } from './pages/knowledge-preview/knowledge-preview.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FilterPipe } from '../pipes/filter.pipe';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -324,6 +325,7 @@ const routes: Routes = [
     RatingModule,
     NgCircleProgressModule,
     Ng2SearchPipeModule,
+    PdfViewerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

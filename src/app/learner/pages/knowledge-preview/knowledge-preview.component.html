@@ -10,7 +10,7 @@
   </ng-container>
 
   <ng-container *ngIf="fileType == 'pdf'">
-    <pdf-viewer [src]="file"
+    <pdf-viewer [src]="this.batchdialogdata.file"
      [original-size]="false"></pdf-viewer>
   </ng-container>
 
