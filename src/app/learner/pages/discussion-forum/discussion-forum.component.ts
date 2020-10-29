@@ -117,7 +117,8 @@ export class DiscussionForumComponent implements OnInit {
     this.Lservice.ViewAllThreadData(this.selectedModuleData?.title, this.course.id, this.batchDetails?.batchid)
       .subscribe((result: any) => {
         const temp = result.data.ViewAllThreadData.data;
-        if (result?.data?.ViewAllThreadData?.data !== '') {
+        console.log(result?.data?.ViewAllThreadData);
+        if (result?.data?.ViewAllThreadData?.data !== '' && result?.data?.ViewAllThreadData !== null) {
           result?.data?.ViewAllThreadData?.data?.topics.sort((a, b) => new Date(b.lastposttimeISO || b.timestampISO).getTime() -
             new Date(a.lastposttimeISO || a.lastposttimeISO).getTime());
           this.discussionData = result.data.ViewAllThreadData.data;
@@ -140,8 +141,8 @@ export class DiscussionForumComponent implements OnInit {
     if (this.userDetail.nodebb_response != null) {
       this.addThreadForm?.reset();
       this.addThreadForm = this.formBuilder.group({
-        thread_name: new FormControl('', [Validators.minLength(8), Validators.required]),
-        thread_description: new FormControl('', [Validators.minLength(8), Validators.required]),
+        thread_name: new FormControl('', [Validators.minLength(9), Validators.required]),
+        thread_description: new FormControl('', [Validators.minLength(9), Validators.required]),
       });
       this.dialog.open(templateRef);
     } else {

@@ -727,10 +727,10 @@
   "A2I" : "A2I",
   "Create a new thread" : "Create a new thread",
   "Title" : "Title",
-  "Title must be minimum of 8 characters" : "Title must be minimum of 8 characters",
+  "Title must be minimum of 9 characters" : "Title must be minimum of 9 characters",
   "Title is required" : "Title is required",
   "Post" : "Post",
-  "Post must be minimum of 8 characters" : "Post must be minimum of 8 characters",
+  "Post must be minimum of 9 characters" : "Post must be minimum of 9 characters",
   "Post is required" : "Post is required",
   "File size : 10mb, Format : jpg, png, jpeg, pdf" : "File size : 10mb, Format : jpg, png, jpeg, pdf",
   
