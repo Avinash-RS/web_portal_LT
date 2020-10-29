@@ -12,11 +12,14 @@
     </span>
   </span>
 </p>
-<span class="f_wt_600 f_size_16 m-l-13">{{course?.name}} >
-  <!-- <mat-icon class="material-icons f_size_17 pointer" (click)="goBack()">chevron_right
-  </mat-icon>  -->
-  Discussion forum
-</span>
+<div class="f_wt_600 f_size_16 m-l-13">
+  <span>
+    {{course?.name}}
+  </span>
+  <mat-icon class="material-icons f_size_17 pointer" (click)="goBack()">chevron_right
+  </mat-icon>
+  <span>Discussion forum</span>
+</div>
 <br>
 <div class="row">
   <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 col-12">
@@ -47,14 +50,14 @@
                 </div>
 
               </div>
-              <div class="row">
+              <!-- <div class="row">
                 <div class="moduleund">
                   <span class="time-icon">
                     <mat-icon class="time-icon">alarm</mat-icon>
                     {{res?.moduletime ? res?.moduletime : '01:00:00' }}
                   </span>
                 </div>
-              </div>
+              </div> -->
             </mat-panel-title>
             <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
             </mat-icon>
@@ -91,9 +94,9 @@
     </ng-container>
     <ng-template #noModule>
       <br>
-     <span class="center_align">
-      No modules in this course
-     </span>
+      <span class="center_align">
+        No modules in this course
+      </span>
     </ng-template>
   </div>
   <!-- DF -->
