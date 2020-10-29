@@ -92,6 +92,7 @@ export class CoursedetailsComponent implements OnInit {
   screenHeight: number;
   screenWidth: number;
   performOverLay = false;
+  treeCourse = false;
   // initials: any;
 
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
@@ -172,7 +173,6 @@ export class CoursedetailsComponent implements OnInit {
         });
     }
     this.Lservice.getModuleData(detail && detail.id || this.localStoCourseid, this.userDetail.user_id).subscribe((data: any) => {
-      console.log(data, 'module');
       this.content = data.data.getmoduleData.data[0];
       this.assignmentVal = false;
       let noresource = false;
@@ -205,7 +205,6 @@ export class CoursedetailsComponent implements OnInit {
     this.translate.use(localStorage.getItem('language'));
     // this.add_topic_reference(res);
     this.service.menuSelectedPerform.subscribe((emitedData: any) => {
-      console.log('emitedData', emitedData);
       this.selectedName = emitedData.selectedName;
       this.selectedTabIndex = emitedData.selectedTabIndex;
       this.performOverLay = false;
@@ -395,6 +394,17 @@ export class CoursedetailsComponent implements OnInit {
     this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
       this.scromModuleData = this.scromApiData?.childData;
+      // tree level
+      this.scromModuleData.forEach(childData => {
+        childData.children.forEach(subChild => {
+          if (subChild && subChild.children && subChild.children.length > 0  ) {
+            // Check TOC Weekwise or module topic wise
+            this.treeCourse = true;
+          } else {
+            this.treeCourse = false;
+          }
+        });
+      });
       // const tabGroup = this.demo3Tab;
       // if (!tabGroup || !(tabGroup instanceof MatTabGroup)) { return; }
 
@@ -456,19 +466,19 @@ export class CoursedetailsComponent implements OnInit {
     this.selectedIndex2 = l;
   }
   refreshData() {
-    // this.dataRefresher =
-    //   setInterval(() => {
-    //     this.playerModuleAndTopic(false);
+    this.dataRefresher =
+      setInterval(() => {
+        this.playerModuleAndTopic(false);
 
-    //   }, 20000);
+      }, 20000);
   }
   autoHide() {
-    // this.dataRefresher =
-    //   setInterval(() => {
-    //     this.playerModuleAndTopic(false);
-    //     this.sider = false;
-    //     this.playerMenuEnable = true;
-    //   }, 10000);
+    this.dataRefresher =
+      setInterval(() => {
+        // this.playerModuleAndTopic(false);
+        this.sider = false;
+        this.playerMenuEnable = true;
+      }, 10000);
   }
 
   makeFullScreen() {
@@ -485,14 +495,14 @@ export class CoursedetailsComponent implements OnInit {
   //   this.sider = true;
   // }
   cancelPageRefresh() {
-    // if (this.dataRefresher) {
-    //   clearInterval(this.dataRefresher);
-    // }
+    if (this.dataRefresher) {
+      clearInterval(this.dataRefresher);
+    }
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnDestroy() {
-    // this.cancelPageRefresh();
+    this.cancelPageRefresh();
   }
 
 

@@ -90,10 +90,12 @@ export class DiscussionForumComponent implements OnInit {
     // this.cS.loader$.next(true);
     this.loading = true;
     this.Lservice.playerModuleAndTopic(cid, this.userDetail.user_id).subscribe((data: any) => {
-      this.scromModuleData = data.data?.playerModuleAndTopic?.message[0]?.childData;
+      this.scromModuleData = data.data?.playerModuleAndTopic?.message && data.data?.playerModuleAndTopic?.message[0]?.childData || [];
       this.selectedModuleData = this.scromModuleData[0] || null;
-      this.selectedModuleData.indexValue = 1;
+      this.loading = false;
       if (this.selectedModuleData) {
+        this.loading = true;
+        this.selectedModuleData.indexValue = 1;
         this.Lservice.getSingleBatchInfo(this.userDetail.user_id, cid).subscribe((resdata: any) => {
           if (resdata?.data?.getbatchdetails?.message?.batchid !== null) {
             this.batchDetails = resdata?.data?.getbatchdetails?.message;
@@ -177,8 +179,8 @@ export class DiscussionForumComponent implements OnInit {
     this.addThreadComment = null;
     d = d.replace(/&#160;/g, '').trim() || d.replace(/&#160;/g, '').trimLeft();
     if (d.length > 8) {
-      if (d.length > 55500) {
-        this.toastr.warning('Comment should be less than 60000 characters');
+      if (d.length > 59950) {
+        this.toastr.warning('Comment should be less than 60,000 characters');
       } else {
         // this.cS.loader$.next(true);
         this.loading = true;
@@ -374,8 +376,8 @@ export class DiscussionForumComponent implements OnInit {
     desc.d = desc.d.replace(/&#160;/g, '')?.trim() || desc.d.replace(/&#160;/g, '')?.trimLeft() ||
       desc.d.replace(/&#160;/g, '')?.trimEnd();
     if (this.addThreadForm.value.thread_name.length > 8 && desc.d.length > 8) {
-      if (desc.d.length > 55500) {
-        this.toastr.warning('Content should be less than 60000 characters');
+      if (desc.d.length > 59950) {
+        this.toastr.warning('Content should be less than 60,000 characters');
       } else {
         // this.cS.loader$.next(true);
         this.loading = true;
