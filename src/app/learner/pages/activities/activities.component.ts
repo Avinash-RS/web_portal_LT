@@ -50,7 +50,7 @@ export class ActivitiesComponent implements OnInit {
   submitType: string;
   submitStatus: string;
   checkDetails: any;
-  assignmentMessage = false;
+  // assignmentMessage = false;
   trendingCategorires: any = {
     loop: false, // dont make it true
     mouseDrag: true,
@@ -84,6 +84,7 @@ export class ActivitiesComponent implements OnInit {
   };
   courseName: any;
   mouseOverIndex: any;
+  videoSource: any;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
@@ -123,9 +124,8 @@ export class ActivitiesComponent implements OnInit {
       this.userDetail.user_id
     ).subscribe((data: any) => {
       if (data.data.getAssignmentmoduleData.success) {
-        this.assignmentMessage = true;
+        // this.assignmentMessage = true;
         this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
-
         if (
           this.assignmentContent.courseStartDate &&
           this.assignmentContent.courseEndDate
@@ -176,7 +176,7 @@ export class ActivitiesComponent implements OnInit {
         }
 
       } else {
-        this.assignmentMessage = true;
+        // this.assignmentMessage = false;
       }
     });
   }
@@ -191,16 +191,22 @@ export class ActivitiesComponent implements OnInit {
     this.docpath = path;
   }
 
-  projectPreviewDoc(templateRef: TemplateRef<any>, path, type) {
+  projectPreviewDoc(templateRef: TemplateRef<any>, videoDialog, path, type) {
     if (type === 'material') {
-    this.dialog.open(templateRef, {
-      width: '100%',
-      height: '100%',
-      closeOnNavigation: true,
-      disableClose: true,
-    });
-    this.previewDoc = path;
+      if (path.doc_type !== 'video/mp4') {
+        this.dialog.open(templateRef, {
+          width: '100%',
+          height: '100%',
+          closeOnNavigation: true,
+          disableClose: true,
+        });
+        this.previewDoc = path;
+      } else {
+        this.videoSource = path.path;
+        this.videoPreview(videoDialog, path);
+      }
   } else if (type === 'files') {
+    if (path.doc_type !== 'video/mp4') {
     this.dialog.open(templateRef, {
       width: '100%',
       height: '100%',
@@ -209,6 +215,11 @@ export class ActivitiesComponent implements OnInit {
     });
     path.path = path.videourl;
     this.previewDoc = path;
+  } else {
+    path.path = path.videourl;
+    this.videoSource = path.videourl;
+    this.videoPreview(videoDialog, this.videoSource);
+  }
   }
   }
 
@@ -509,15 +520,27 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
-  playVideo() {
-    console.log('play video');
+  playVideo(previewDialog, videoDialog, path, docType) {
+    if (docType === 'image/jpeg') {
+    this.projectPreviewDoc(previewDialog, videoDialog, path, docType);
+    } else if (docType === 'video/mp4') {
+      this.videoSource = path;
+      this.videoPreview(videoDialog, path);
+    }
+  }
+
+  videoPreview(templateRef: TemplateRef<any>, path) {
+    this.dialog.open(templateRef, {
+      width: '90%',
+      height: '95%',
+      panelClass: 'matDialogMat',
+      closeOnNavigation: true,
+      disableClose: true,
+    });
   }
 
   mouseover(index) {
     this.mouseOverIndex = index;
   }
 
-  mouseLeave(index) {
-    this.mouseOverIndex = index;
-  }
 }
