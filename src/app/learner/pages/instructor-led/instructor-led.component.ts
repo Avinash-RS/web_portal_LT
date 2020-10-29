@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LearnerServicesService } from '../../services/learner-services.service';
+import * as _ from 'underscore';
+
 const courseid = 'tbiwys0m';
 const userid = 'aj1yej';
 
@@ -36,7 +38,6 @@ export class InstructorLedComponent implements OnInit {
   }
 
   getAttendance() { // Http Call
-    debugger
     const obj = {
       "batchid": "443222669025448",
       "courseid": courseid,
@@ -45,7 +46,7 @@ export class InstructorLedComponent implements OnInit {
     this.learnerService.getAttendanceByUsername(obj).subscribe(res => {
       console.log(res);
       this.sessionAttendance = res.data;
-      this.attendedSessions = this.sessionAttendance.count(x => x.topicDetails.attendencedetails.Attendence === 'yes');
+      this.attendedSessions = _.countBy(this.sessionAttendance, x => x.topicDetails.attendencedetails.Attendence === 'yes');
       console.log(this.attendedSessions);
       console.log(this.sessionAttendance);
     });
