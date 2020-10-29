@@ -5,6 +5,7 @@ export interface playback {
   value: string;
   viewValue: string;
 }
+
 @Component({
   selector: 'app-video-player',
   templateUrl: './video-player.component.html',
@@ -14,13 +15,13 @@ export interface playback {
 export class VideoPlayerComponent {
   @Input('url') url: any;
   sources: Array<Object>;
-  controls: boolean = false;
-  autoplay: boolean = false;
-  loop: boolean = false;
-  preload: string = 'auto';
+  controls = false;
+  autoplay = false;
+  loop = false;
+  preload = 'auto';
   api: VgAPI;
   fsAPI: VgFullscreenAPI;
-  nativeFs: boolean = true;
+  nativeFs = true;
   playback = '1.0';
   playbackRate: playback[] = [
     { value: '0.5', viewValue: '0.5' },
@@ -30,21 +31,21 @@ export class VideoPlayerComponent {
 
   constructor(public service: CommonServicesService) {
   }
+
   ngOnInit() {
     this.service.pauseVideo.subscribe((data: any) => {
-      if(data == 'off'){
+      if (data === 'off') {
         this.api.pause();
       }
     });
-    console.log('this.url.preview_video',this.url)
     this.sources = [
       {
-        src: this.url.preview_video,
-        type: "video/mp4"
+        src: this.url,
+        type: 'video/mp4'
       },
     ];
   }
-  
+
   onPlayerReady(api: VgAPI) {
     this.api = api;
     this.fsAPI = this.api.fsAPI;
@@ -59,22 +60,22 @@ export class VideoPlayerComponent {
   }
   // added time to 10sec
   next(currenttime) {
-    var time = currenttime + 10
-    this.api.currentTime = time
+    const time = currenttime + 10;
+    this.api.currentTime = time;
   }
   // less time to 10sec
   previous(currenttime) {
-    var time = currenttime - 10
-    this.api.currentTime = time
+    const time = currenttime - 10;
+    this.api.currentTime = time;
   }
 
   onChangeNativeFs($event) {
     this.fsAPI.nativeFullscreen = this.nativeFs;
 
   }
-  // to speed up and speed down 
+  // to speed up and speed down
   playbackValues(playbackValue) {
-    this.api.playbackRate = playbackValue.value
+    this.api.playbackRate = playbackValue.value;
   }
 
 }

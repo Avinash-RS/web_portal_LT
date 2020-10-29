@@ -1176,7 +1176,7 @@ hr {
 
   .primerFlage {
     height: 75px;
-    position: absolute;
+    position: absolute !important;
     margin-left: -4px;
     z-index: 1;
   }
@@ -2587,4 +2587,7 @@ li {
 }
 .pseudoheight{
   height: 20px !important;
+}
+.m-l-10px{
+margin-left: 10px;
 }

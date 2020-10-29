@@ -12,77 +12,89 @@
     </span>
   </span>
 </p>
-<span class="f_wt_600 f_size_16 m-l-13">{{course?.name}}</span>
+<span class="f_wt_600 f_size_16 m-l-13">{{course?.name}} >
+  <!-- <mat-icon class="material-icons f_size_17 pointer" (click)="goBack()">chevron_right
+  </mat-icon>  -->
+  Discussion forum
+</span>
 <br>
 <div class="row">
   <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 col-12">
-    <mat-accordion *ngFor="let res of scromModuleData; let i = index"
-      (click)="getSelectedIndex(i);getModuleDataForForum(scromModuleData?.length, i + 1, res)">
-      <mat-expansion-panel class="panel" hideToggle="true" #example [expanded]="selectedIndex === i">
-        <mat-expansion-panel-header class="moduleHeadHight">
-          <mat-panel-title class="module-container">
-            <div class="row titleHeight">
-              <div>
-                <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons mar">done
-                </mat-icon>
-              </div>
-              <div [ngClass]="res?.status == 'Passed'? 'index-number-read' : 'index-number-unread'">
-                <span class="custom-index">{{i+1}}.</span>
-              </div>
-              <div>
-                <div [ngClass]="res?.status == 'Passed'? 'moduleHeadRead' : 'moduleHeadUnread'">
-                  <div class="modhead">
-                    <p *ngIf="res?.title.length >= 67" class="moduleName" tooltip="{{res?.title}}" placement="right">
-                      {{res?.title | slice:0:71}}...</p>
-                    <p *ngIf="res?.title.length < 67" class="moduleName">
-                      {{res?.title}}
-                    </p>
+    <ng-container *ngIf="scromModuleData?.length > 0; else noModule">
+      <mat-accordion *ngFor="let res of scromModuleData; let i = index"
+        (click)="getSelectedIndex(i);getModuleDataForForum(scromModuleData?.length, i + 1, res)">
+        <mat-expansion-panel class="panel" hideToggle="true" #example [expanded]="selectedIndex === i">
+          <mat-expansion-panel-header class="moduleHeadHight">
+            <mat-panel-title class="module-container">
+              <div class="row titleHeight">
+                <div>
+                  <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons mar">done
+                  </mat-icon>
+                </div>
+                <div [ngClass]="res?.status == 'Passed'? 'index-number-read' : 'index-number-unread'">
+                  <span class="custom-index">{{i+1}}.</span>
+                </div>
+                <div>
+                  <div [ngClass]="res?.status == 'Passed'? 'moduleHeadRead' : 'moduleHeadUnread'">
+                    <div class="modhead">
+                      <p *ngIf="res?.title.length >= 67" class="moduleName" tooltip="{{res?.title}}" placement="right">
+                        {{res?.title | slice:0:71}}...</p>
+                      <p *ngIf="res?.title.length < 67" class="moduleName">
+                        {{res?.title}}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-            </div>
-            <div class="row">
-              <div class="moduleund">
-                <span class="time-icon">
-                  <mat-icon class="time-icon">alarm</mat-icon>
-                  {{res?.moduletime ? res?.moduletime : '01:00:00' }}
-                </span>
               </div>
-            </div>
-          </mat-panel-title>
-          <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
-          </mat-icon>
-          <mat-icon *ngIf="example.expanded" class="exp-icon">remove_circle_outline
-          </mat-icon>
+              <div class="row">
+                <div class="moduleund">
+                  <span class="time-icon">
+                    <mat-icon class="time-icon">alarm</mat-icon>
+                    {{res?.moduletime ? res?.moduletime : '01:00:00' }}
+                  </span>
+                </div>
+              </div>
+            </mat-panel-title>
+            <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
+            </mat-icon>
+            <mat-icon *ngIf="example.expanded" class="exp-icon">remove_circle_outline
+            </mat-icon>
 
-        </mat-expansion-panel-header>
-        <div class="row">
-          <div class="col-12">
-            <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title.length > 39?'headerDown':
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col-12">
+              <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title.length > 39?'headerDown':
 ''">
-              <ng-container *ngFor="let mod of res?.children; let j = index">
-                <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
+                <ng-container *ngFor="let mod of res?.children; let j = index">
+                  <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colgreen' : 
         mod.status === 'Process' ? 'colYellow' : 'colWhite'">
-                  <ng-template matStepLabel>
-                    <span class="topicnm"
-                      (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)">
-                      <p class="titleName" *ngIf="mod?.title.length >= 65" tooltip="{{mod?.title}}" placement="right">
-                        {{mod?.title | slice:0:69}}...
-                      </p>
-                      <p class="titleName" *ngIf="mod?.title.length < 65">
-                        {{mod?.title}}
-                      </p>
-                    </span>
+                    <ng-template matStepLabel>
+                      <span class="topicnm"
+                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)">
+                        <p class="titleName" *ngIf="mod?.title.length >= 65" tooltip="{{mod?.title}}" placement="right">
+                          {{mod?.title | slice:0:69}}...
+                        </p>
+                        <p class="titleName" *ngIf="mod?.title.length < 65">
+                          {{mod?.title}}
+                        </p>
+                      </span>
 
-                  </ng-template>
-                </mat-step>
-              </ng-container>
-            </mat-vertical-stepper>
+                    </ng-template>
+                  </mat-step>
+                </ng-container>
+              </mat-vertical-stepper>
+            </div>
           </div>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </ng-container>
+    <ng-template #noModule>
+      <br>
+     <span class="center_align">
+      No modules in this course
+     </span>
+    </ng-template>
   </div>
   <!-- DF -->
   <div class="col-lg-8 col-xl-8 col-md-8 col-sm-6 col-12 vrl">
@@ -204,7 +216,8 @@
     </div>
     <!-- end of List of threads -->
     <!-- No threads -->
-    <div *ngIf="showCourseDetails && (discussionData === null || discussionData?.topics?.length ===0)">
+    <div
+      *ngIf="showCourseDetails && (discussionData === null || discussionData?.topics?.length === 0 || discussionData.topics === undefined)">
       <br><br>
       <mat-card class="black_border m-bt-4 box_shadow center center_align f_size_16">
         <br>

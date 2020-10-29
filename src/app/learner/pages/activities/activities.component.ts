@@ -50,7 +50,7 @@ export class ActivitiesComponent implements OnInit {
   submitType: string;
   submitStatus: string;
   checkDetails: any;
-  assignmentMessage = false;
+  // assignmentMessage = false;
   trendingCategorires: any = {
     loop: false, // dont make it true
     mouseDrag: true,
@@ -83,6 +83,9 @@ export class ActivitiesComponent implements OnInit {
     nav: true
   };
   courseName: any;
+  mouseOverIndex: any;
+  videoSource: any;
+
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
               public route: Router, public datePipe: DatePipe) {
@@ -121,9 +124,8 @@ export class ActivitiesComponent implements OnInit {
       this.userDetail.user_id
     ).subscribe((data: any) => {
       if (data.data.getAssignmentmoduleData.success) {
-        this.assignmentMessage = true;
+        // this.assignmentMessage = true;
         this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
-
         if (
           this.assignmentContent.courseStartDate &&
           this.assignmentContent.courseEndDate
@@ -174,7 +176,7 @@ export class ActivitiesComponent implements OnInit {
         }
 
       } else {
-        this.assignmentMessage = true;
+        // this.assignmentMessage = false;
       }
     });
   }
@@ -189,14 +191,36 @@ export class ActivitiesComponent implements OnInit {
     this.docpath = path;
   }
 
-  projectPreviewDoc(templateRef: TemplateRef<any>, path) {
+  projectPreviewDoc(templateRef: TemplateRef<any>, videoDialog, path, type) {
+    if (type === 'material') {
+      if (path.doc_type !== 'video/mp4') {
+        this.dialog.open(templateRef, {
+          width: '100%',
+          height: '100%',
+          closeOnNavigation: true,
+          disableClose: true,
+        });
+        this.previewDoc = path;
+      } else {
+        this.videoSource = path.path;
+        this.videoPreview(videoDialog, path);
+      }
+  } else if (type === 'files') {
+    if (path.doc_type !== 'video/mp4') {
     this.dialog.open(templateRef, {
       width: '100%',
       height: '100%',
       closeOnNavigation: true,
       disableClose: true,
     });
-    this.previewDoc = path.videourl;
+    path.path = path.videourl;
+    this.previewDoc = path;
+  } else {
+    path.path = path.videourl;
+    this.videoSource = path.videourl;
+    this.videoPreview(videoDialog, this.videoSource);
+  }
+  }
   }
 
   downloadPdf(doc) {
@@ -300,14 +324,22 @@ export class ActivitiesComponent implements OnInit {
   }
 
   // tslint:disable-next-line:adjacent-overload-signatures
-  downloadDoc(doc) {
+  downloadDoc(doc, type) {
+    if (type === 'material') {
     const link = document.createElement('a');
     link.target = '_blank';
     link.style.display = 'none';
-    link.href = doc.videourl;
+    link.href = doc.path;
     link.click();
+    } else if (type === 'files') {
+      const link = document.createElement('a');
+      link.target = '_blank';
+      link.style.display = 'none';
+      link.href = doc.videourl;
+      link.click();
+    }
   }
-// Pass courseid dynamically
+
   getperformActivityData() {
     this.Lservice.getperformActivityData(
       this.userDetail.user_id,  this.courseid
@@ -321,7 +353,6 @@ export class ActivitiesComponent implements OnInit {
         element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
         const endDate = new Date(element.performActivity.activityenddate);
         element.activityEndDate = moment(endDate).format('ll');
-        console.log('startDate', element.activityStartDate);
         if (moment(new Date()).format('ll') < element.activityStartDate) {
           this.itrationStarted = true;
         } else {
@@ -334,7 +365,6 @@ export class ActivitiesComponent implements OnInit {
           this.itrationEnded = false;
           this.submitStatus = 'late';
         }
-        console.log('this.itrationStarted', this.itrationStarted, 'this.itrationEnded', this.itrationEnded);
       });
     }
     });
@@ -489,4 +519,28 @@ export class ActivitiesComponent implements OnInit {
       }
     });
   }
+
+  playVideo(previewDialog, videoDialog, path, docType) {
+    if (docType === 'image/jpeg') {
+    this.projectPreviewDoc(previewDialog, videoDialog, path, docType);
+    } else if (docType === 'video/mp4') {
+      this.videoSource = path;
+      this.videoPreview(videoDialog, path);
+    }
+  }
+
+  videoPreview(templateRef: TemplateRef<any>, path) {
+    this.dialog.open(templateRef, {
+      width: '90%',
+      height: '95%',
+      panelClass: 'matDialogMat',
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+  }
+
+  mouseover(index) {
+    this.mouseOverIndex = index;
+  }
+
 }
