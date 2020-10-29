@@ -1,10 +1,12 @@
 @import "variable";
+
 .cateName {
   // position: relative;
   // top: 8px;
   padding-top: 3px;
 }
-.dropdown-toggle{
+
+.dropdown-toggle {
   background-color: $color-white;
   color: #898989 !important;
   padding: 6px;
@@ -15,11 +17,15 @@
   border: 1px solid #898989;
   width: 100%;
 }
+
 .dropdown-toggle:hover {
   background-color: $lxp-theme-green !important;
   color: $color-white !important;
 }
-.dropdown-toggle:focus, .dropdown-toggle:active:focus, .dropdown-toggle.active:focus {
+
+.dropdown-toggle:focus,
+.dropdown-toggle:active:focus,
+.dropdown-toggle.active:focus {
   outline: none !important;
   background-color: none;
   color: #898989;
@@ -38,9 +44,10 @@
 //   width: 155px;
 //   background-color: $lxp-theme-green !important;
 // }
-.cardContainer{
+.cardContainer {
   height: 400px !important;
 }
+
 .spinner-container {
   position: absolute;
   top: 0;
@@ -53,23 +60,27 @@
   justify-content: center;
   color: $lxp-theme-green;
 }
+
 .forgot1 {
   color: $lxp-text;
   // cursor: pointer;
   font-size: 13px;
 }
-.primerFlage{
+
+.primerFlage {
   height: 70px;
   // width: 67px;
   position: absolute;
   // margin-left: 20px;
   z-index: 1;
 }
+
 .dot {
   font-size: 16px;
   font-weight: bolder;
 }
-.a-e{
+
+.a-e {
   text-align: end;
 }
 
@@ -88,6 +99,7 @@
 .m-left-2 {
   margin-left: 2%;
 }
+
 // @media screen and (min-width: 270px) and (max-width: 795px) {
 //     .descmc {
 //         max-height: 175px !important;
@@ -152,6 +164,7 @@
   font-weight: 500 !important;
   color: #616060;
 }
+
 // :host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
 //   display: inherit !important;
 // }
@@ -183,39 +196,47 @@
 }
 
 .progess {
-  width: 75px;
+  width: 115px;
   margin-left: 3px;
   margin-top: -9%;
   // margin-left: 24%;
   // position: absolute;
 }
+
 .finalScore {
   font-size: 22px;
   padding: 16px;
   margin-top: -3px;
 }
+
 .f_size_12 {
   font-size: 12px;
 }
+
 .padscore {
   font-size: 32px;
   color: $lxp-theme-green;
 }
+
 .no-border {
   border: none !important;
 }
+
 .no-border:focus {
   border: none !important;
 }
+
 .point {
   font-size: 32px;
   padding: 23px;
   margin-top: -7px;
   color: $light-green;
 }
+
 .f_size_13 {
   font-size: 13px;
 }
+
 .width-80 {
   max-width: 80%;
 }
@@ -246,9 +267,11 @@
 .m-b-2 {
   margin-bottom: 2%;
 }
+
 .m-l-40 {
   margin-left: 40px;
 }
+
 .bodybg {
   width: auto;
   padding-left: 18px;
@@ -305,21 +328,26 @@
 .p-b-5 {
   padding-bottom: 5px;
 }
-.module{
+
+.module {
   font-size: 16px;
-  margin-left: 4px;
+  // margin-left: 4px;
   font-weight: 600;
 
 }
 
 .myC-head {
-  margin-left: 1% !important;
+  margin-left: 8.5% !important;
   margin-top: 2%;
   margin-bottom: 1%;
 }
 
+.myCourses {
+  margin-left: -3px;
+}
+
 .courseImg {
-  border: 1px solid $profile-s-grey;
+  //border: 1px solid $profile-s-grey;
   width: 100%;
   height: 100%;
   margin: auto;
@@ -345,14 +373,42 @@
   /* padding: 15px 0; */
   background-color: #0000001f;
   overflow: hidden;
-  width: 0;
+  width: 100%;
   height: 98%;
-  transition: 0.7s ease;
+  transition: 0.3s ease;
   border-radius: 10px;
+  display: none;
 }
 
 .courseHover:hover .overlay {
+  display: block
+}
+
+.coursePoints {
   width: 100%;
+  height: 0%;
+  transition: 1s ease;
+  display: none;
+  background-color: #898989;
+  color: white;
+
+}
+
+.pointhover:hover .coursePoints {
+  display: block;
+  height: 100%;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin-top: -15px;
+  padding: 15px 5px 5px 5px
+}
+
+.coursePoints td {
+  padding-bottom: 0px !important;
+}
+
+.coursePoints table {
+  width: 100% !important;
 }
 
 .text {
@@ -380,6 +436,7 @@
   // padding: 21px;
   // margin: auto;
 }
+
 .errorboxx {
   padding: 5px !important;
   margin-top: 5%;
@@ -457,12 +514,15 @@
   font-size: 16px;
   cursor: pointer;
 }
+
 .m-b-1 {
   margin-bottom: 1%;
 }
+
 .m-t-05 {
   margin-top: -0.5%;
 }
+
 .status {
   background: $lxp-theme-green;
   // padding: 2px 6px;
@@ -531,6 +591,7 @@
 hr {
   margin-bottom: 0.5rem;
 }
+
 .event {
   vertical-align: sub;
   color: $lxp-icon;
@@ -560,12 +621,13 @@ hr {
 :host ::ng-deep .mat-progress-bar-fill::after {
   background-color: $lxp-gray !important;
 }
-.tabsc{
- & .mat-badge-content {
+
+.tabsc {
+  & .mat-badge-content {
     color: $color-white;
     background: $lxp-gray !important;
   }
-  
+
 }
 
 .mat-progress-bar {
@@ -619,9 +681,11 @@ hr {
 .width_35 {
   width: 35% !important;
 }
+
 .p-l-8 {
   padding-left: 8%;
 }
+
 // .upcoming{
 //   margin-left: 7.5%;
 // }
@@ -632,6 +696,7 @@ hr {
 .card12:hover {
   // box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2)
 }
+
 .cap {
   text-transform: capitalize;
 }
@@ -639,26 +704,33 @@ hr {
 .m-t-30 {
   margin-top: 25px;
 }
+
 .m-t-2 {
   margin-top: 2%;
 }
+
 .m-t-m-2 {
-  top: -1.5px;
+  top: -3px;
   position: relative;
 }
+
 .m-t-8 {
   margin-top: 8px;
 }
+
 .m-l-2p {
   margin-left: 2px;
 }
+
 .m-t {
   margin-top: 10%;
 }
+
 .l-b-2 {
   border-right: 1.5px solid $color-border;
   border-right-style: dashed;
 }
+
 .video {
   color: $lxp-theme-green;
   position: relative;
@@ -672,6 +744,7 @@ hr {
   // bottom: 22px;
   // left: 3px;
 }
+
 .tabside {
   color: $color-blank;
   position: absolute;
@@ -688,7 +761,7 @@ hr {
   margin-top: 2px;
   width: 100px;
   z-index: 99;
-  height: 32px;
+  height: 30px;
   // left: 268px;
   // bottom: 5px;
   // margin-left: 25%;
@@ -737,9 +810,11 @@ hr {
   left: 8px;
   cursor: text !important;
 }
+
 .m-p-14 {
   margin-top: 14px;
 }
+
 .aligned-with-icon {
   position: relative;
   cursor: pointer;
@@ -763,12 +838,15 @@ hr {
 .m-t-1 {
   margin-top: 2.8%;
 }
+
 .noCourse {
   padding: 50px;
 }
+
 .m-l-3 {
   margin-left: 3px;
 }
+
 .footer {
   padding: 15px;
   font-size: inherit;
@@ -868,10 +946,7 @@ hr {
     padding: 0.75rem;
   }
 
-  :host
-    ::ng-deep
-    .mat-tab-header-pagination-controls-enabled
-    .mat-tab-header-pagination {
+  :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
     display: none !important;
   }
 
@@ -900,10 +975,7 @@ hr {
     border-left: 0px !important;
   }
 
-  :host
-    ::ng-deep
-    .mat-tab-header-pagination-controls-enabled
-    .mat-tab-header-pagination {
+  :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
     display: none !important;
   }
 
@@ -921,6 +993,7 @@ hr {
     letter-spacing: 0.5;
   }
 }
+
 .catalogDropdownCol {
   // margin-top: 1rem;
   padding-right: 0px;
@@ -930,6 +1003,7 @@ hr {
 .courseDetailsCol {
   padding-left: 0px;
 }
+
 .template {
   display: none;
 }
@@ -940,6 +1014,7 @@ hr {
   max-height: 85% !important;
   margin: auto;
 }
+
 .menuBtn {
   display: none;
 }
@@ -961,20 +1036,21 @@ hr {
   padding: 20px 0px;
 }
 
-.parrentAccordianSub{
+.parrentAccordianSub {
   padding: 20px 0px 0px 0px;
 }
 
-.parrentAccordiansuper{
+.parrentAccordiansuper {
   padding: 20px 0px;
 }
 
 .hedding {
   font-size: 16px;
 }
-.accordianText  {
+
+.accordianText {
   font-size: 16px;
-  color:#000000;
+  color: #000000;
   position: relative;
   top: 18px;
 }
@@ -986,7 +1062,7 @@ hr {
 
 .accordianTextsub {
   font-size: 16px;
-  color:#000000;
+  color: #000000;
   margin-left: 5rem;
 }
 
@@ -1013,11 +1089,13 @@ hr {
     background: $lxp-gray !important;
   }
 }
-.center{
+
+.center {
   margin-left: 135px !important;
-    width: 140px ;
+  width: 140px;
 }
-.centerCircel{
+
+.centerCircel {
   margin-left: 135px !important;
 }
 
@@ -1025,17 +1103,20 @@ hr {
   padding-right: 5px;
 }
 
-:host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
+:host ::ng-deep .mat-tab-labels>.mat-tab-label:first-child {
   display: none !important;
 }
 
 .courceNameTag {
-  width: 344px !important;
-  white-space: pre-line;
+  //width: 344px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 10px !important;
 }
 
 .catDropdown {
-  margin-right: 1rem!important;
+  margin-right: 1rem !important;
 }
 
 .myCourseSearch {
@@ -1094,12 +1175,13 @@ hr {
     float: right;
     right: 2rem;
     top: 1.7rem !important;
+
     & .mat-badge-content {
       background: $lxp-gray !important;
     }
   }
 
- ::ng-deep .mat-menu-panel {
+  ::ng-deep .mat-menu-panel {
     min-width: 180px !important;
   }
 
@@ -1114,29 +1196,30 @@ hr {
     float: left;
   }
 
-.span-with-icon {
-  display: none;
-}
+  .span-with-icon {
+    display: none;
+  }
 
-.startBtnRow {
-  display: none;
-}
+  .startBtnRow {
+    display: none;
+  }
 
   .dropdown-content {
     min-width: 225px !important;
   }
 
- .wordWrapMblView{
-  width: 345px;
-     word-wrap:break-word !important;
+  .wordWrapMblView {
+    width: 345px;
+    word-wrap: break-word !important;
   }
 
   .dropdownicon {
-    top: 5px !important; 
+    top: 5px !important;
   }
-.roledropdownicon {
-  top: 2px !important;
-}
+
+  .roledropdownicon {
+    top: 2px !important;
+  }
 
   .roleDropdDwnBtn {
     bottom: 0px !important;
@@ -1149,32 +1232,35 @@ hr {
     margin-left: 0% !important;
   }
 
- :host ::ng-deep .matInkBar .mat-ink-bar {
-     display: none !important;
-     visibility: hidden !important;
- }
-  .module{
+  :host ::ng-deep .matInkBar .mat-ink-bar {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  .module {
     font-size: 14px;
     font-weight: 500;
-    
+
   }
+
   .searchIcons {
     margin-left: 0.5rem;
   }
-  
+
   .catalogDropdownCol {
-    
+
     padding-left: 0px !important;
     // margin-top: 0.5rem;
     // margin-bottom: 0.5rem;
     // padding-right: 1.5rem;
   }
 
-   .arrowIcon .material-icons {
+  .arrowIcon .material-icons {
     float: right;
     margin-top: 1%;
   }
-  .matTabCol{
+
+  .matTabCol {
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
@@ -1187,11 +1273,11 @@ hr {
     margin-top: 15%;
   }
 
-  .cardContainer{
+  .cardContainer {
     height: 100% !important;
     max-height: 100% !important;
   }
-  
+
   .arrowPopup {
     font-size: 24px;
   }
@@ -1200,19 +1286,20 @@ hr {
     margin-bottom: 20px;
   }
 
-  .primerFlage{
+  .primerFlage {
     height: 75px;
     position: absolute;
     margin-left: -4px;
     z-index: 1;
   }
+
   ::ng-deep .mat-dialog-container {
     overflow: hidden !important;
   }
 
 
   .availableContainer {
-    position: fixed; 
+    position: fixed;
     overflow-y: auto;
     display: block;
     width: 100%;
@@ -1223,33 +1310,34 @@ hr {
     right: 0;
     bottom: 0;
     background-color: $color_white;
-    z-index: 2; 
-    cursor: pointer; 
+    z-index: 2;
+    cursor: pointer;
   }
 
   .displayNone {
     display: none;
   }
 
-.catDropdown {
-  display: none;
-}
+  .catDropdown {
+    display: none;
+  }
 
 
-.hovercolor {
-  display: none;
-}
+  .hovercolor {
+    display: none;
+  }
 
   #cdk-overlay-0 {
     width: 95%;
   }
+
   .dropdown {
     width: 100%;
     text-align: right;
     margin-right: 0rem !important;
   }
 
-::ng-deep .dialogContainer {
+  ::ng-deep .dialogContainer {
     width: 100% !important;
     height: 100% !important;
     max-height: 100% !important;
@@ -1271,9 +1359,10 @@ hr {
     margin-right: 0px !important;
     margin-left: 0px !important;
   }
+
   .catalogTitle {
     margin: auto;
-    padding-top: 0.5rem !important ;
+    padding-top: 0.5rem !important;
     height: 3rem !important;
   }
 
@@ -1336,30 +1425,39 @@ hr {
     margin-left: 0px;
     position: relative;
   }
+
   .catPost {
     display: none;
   }
+
   .template {
     display: block;
   }
+
   :host ::ng-deep #mat-tab-label-0-4 {
     display: none !important;
   }
+
   :host ::ng-deep #mat-tab-label-0-5 {
     display: none !important;
   }
+
   :host ::ng-deep #mat-tab-label-0-6 {
     display: none !important;
   }
+
   :host ::ng-deep #mat-tab-label-0-7 {
     display: none !important;
   }
+
   :host ::ng-deep #mat-tab-label-0-8 {
     display: none !important;
   }
+
   :host ::ng-deep #mat-tab-label-0-9 {
     display: none !important;
   }
+
   :host ::ng-deep #mat-tab-label-0-10 {
     display: none !important;
   }
@@ -1384,12 +1482,12 @@ hr {
   }
 
   .roleBtn {
-   min-width: 100% !important;
-   padding: 1px !important;
-   border-bottom: 1px solid #898989 !important;
-   border-top: none !important;
-   border-right: none !important;
-   border-left: none !important;
+    min-width: 100% !important;
+    padding: 1px !important;
+    border-bottom: 1px solid #898989 !important;
+    border-top: none !important;
+    border-right: none !important;
+    border-left: none !important;
   }
 
   .roleDropdDwnBtn {
@@ -1399,64 +1497,66 @@ hr {
     // left: 48% !important;
   }
 
-  .matBadgeForum .mat-badge-medium .mat-badge-content { 
+  .matBadgeForum .mat-badge-medium .mat-badge-content {
     width: 15px !important;
     height: 15px !important;
     line-height: 16px !important;
-    background-color: #C02222;
+    background-color: $lxp-theme-green;
     right: 4px !important;
     top: -20px !important;
   }
 
   .courceNameTag {
-    width: 100% !important; 
+    width: 100% !important;
   }
 
-.coursenameCol {
-  margin-top: 10px;
-}
+  .coursenameCol {
+    margin-top: 10px;
+  }
 
-.roledropdowniconSelect {
-  padding-top: 0px !important;
-}
+  .roledropdowniconSelect {
+    padding-top: 0px !important;
+  }
 
-.roleBatchOnSelect {
+  .roleBatchOnSelect {
     display: none;
     font-size: 10px;
     width: 15px !important;
     height: 15px !important;
-}
+  }
 
-:host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
-  display: none !important;
-}
+  :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+    display: none !important;
+  }
 
-.search {
-  width: 100% !important;
-  transition: width 2s;
-  padding-left: 3rem;
-}
+  .search {
+    width: 100% !important;
+    transition: width 2s;
+    padding-left: 3rem;
+  }
 
-.glyphicon {
-  display: block;
-  position: absolute;
-  float: left;
-  left: 2rem;
-  top: 0.7rem;
-}
-// Temporary css 
-.right-addon {
-  display: none;
-}
+  .glyphicon {
+    display: block;
+    position: absolute;
+    float: left;
+    left: 2rem;
+    top: 0.7rem;
+  }
 
-.popupsearch {
-  display: none;
-}
-// .container {
-//   width: 355px !important;
-//   margin-left: 0px !important;
+  // Temporary css 
+  .right-addon {
+    display: none;
+  }
 
-// }
+  .popupsearch {
+    display: none;
+  }
+
+  // .container {
+  //   width: 355px !important;
+  //   margin-left: 0px !important;
+
+  // }
 
 }
 
@@ -1476,34 +1576,37 @@ hr {
   .right-addon .glyphicon {
     right: 0.5rem !important;
     top: 0.1rem !important;
-}
+  }
 
   .catDropdown {
     margin-right: 0.5rem !important;
   }
-  .module{
+
+  .module {
     font-size: 14px;
     font-weight: 500;
-    
+
   }
+
   .menuBtn {
     display: block;
     position: absolute;
     top: 0.2%;
     right: 1%;
   }
-  :host
-  ::ng-deep
-  .mat-tab-header-pagination-controls-enabled
-  .mat-tab-header-pagination {
-  display: none !important;
-}
+
+  :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+    display: none !important;
+  }
+
   .courseImg {
     margin-left: 15px;
   }
+
   .color_black2 {
     padding-left: 0px;
   }
+
   .catalogDropdownCol {
     padding-right: 0px !important;
     margin-top: 0.5rem;
@@ -1543,7 +1646,7 @@ hr {
     margin-right: 25px !important;
   }
 
-  .roleDropdDwnBtn{
+  .roleDropdDwnBtn {
     margin: 0rem 23% 0% 0% !important;
     right: 6% !important;
     bottom: 0% !important;
@@ -1567,26 +1670,31 @@ hr {
     border-radius: 0px;
     height: 38px;
   }
+
   .searchExpand:focus {
-    border: 1px solid #C02222;
-    box-shadow: 0 0 0 0.05rem #C02222 !important;
+    border: 1px solid $lxp-theme-green;
+    box-shadow: 0 0 0 0.05rem $lxp-theme-green !important;
   }
 
-  .primerFlage{
+  .primerFlage {
     height: 75px;
     position: absolute;
     margin-left: -4px;
     z-index: 1;
   }
+
   :host ::ng-deep #mat-tab-label-0-3 {
     display: none !important;
   }
+
   :host ::ng-deep #mat-tab-label-0-4 {
     display: none !important;
   }
+
   :host ::ng-deep #mat-tab-label-0-5 {
     display: none !important;
   }
+
   :host ::ng-deep #mat-tab-label-0-6 {
     display: none !important;
   }
@@ -1658,10 +1766,11 @@ hr {
   .btl-alin {
     margin-left: -8%;
   }
+
   .searchCol {
     padding-right: 15px;
   }
- 
+
   :host ::ng-deep #mat-tab-label-0-5 {
     display: none !important;
   }
@@ -1699,7 +1808,7 @@ hr {
 
   .right-addon .glyphicon {
     right: 2rem !important;
-}
+  }
 
   .search {
     width: 95% !important;
@@ -1718,9 +1827,11 @@ hr {
   :host ::ng-deep #mat-tab-label-0-3 {
     display: none !important;
   }
+
   :host ::ng-deep #mat-tab-label-0-4 {
     display: none !important;
   }
+
   :host ::ng-deep #mat-tab-label-0-5 {
     display: none !important;
   }
@@ -1736,6 +1847,7 @@ hr {
     width: 100% !important;
     height: 200px !important;
   }
+
   .show-less {
     height: 0rem;
     overflow: hidden;
@@ -1763,34 +1875,41 @@ hr {
     padding-left: 0px !important;
   }
 }
+
 @media only screen and (width: 1600px) {
   .dropdown-menu {
     min-width: 14.2rem !important;
   }
- }
+}
+
 .assignbtn {
   position: relative;
   left: 21px;
   bottom: 39px;
 }
+
 .discussionbtn {
   position: relative;
   right: 100px;
   bottom: 39px;
 }
+
 .buttonCls {
   button {
     border: solid 1px $color-blank !important;
     color: $lxp-text;
   }
+
   mat-icon {
     position: relative;
     top: 4px;
   }
 }
+
 .no-p-l {
   padding-left: 0px !important;
 }
+
 .clr {
   background-color: $color-white;
   color: $lxp-button-text;
@@ -1802,11 +1921,13 @@ hr {
   // margin-left: 9.5%;
   height: 32px;
 }
+
 .infoIcon {
   position: relative;
   font-size: 16px;
   top: 3px;
 }
+
 .clr:hover {
   background-color: $lxp-dark-gray !important;
   color: $color-white !important;
@@ -1815,12 +1936,14 @@ hr {
 .mypanel {
   width: 130px !important;
 }
+
 .available-course-btn {
   border: 1px solid $lxp-gray;
   padding: 7px;
   border-radius: 4px;
   margin-left: 30px;
 }
+
 .mat-badge {
   top: 7px;
 }
@@ -1829,10 +1952,12 @@ hr {
   position: relative !important;
   left: 100px !important;
 }
+
 .btn-icon {
   position: relative;
   top: 4px;
 }
+
 .close-button {
   background: $lxp-theme-green !important;
   float: right;
@@ -1842,6 +1967,7 @@ hr {
   height: 35px;
   width: 35px;
 }
+
 .download-icon {
   position: relative;
 }
@@ -1853,6 +1979,7 @@ hr {
   border: 1px solid #e8e8e8;
   border-radius: 5px;
 }
+
 .imageover:hover .courseImage {
   opacity: 0.3;
 }
@@ -1860,6 +1987,7 @@ hr {
 .imageover:hover .overlayimage {
   opacity: 1;
 }
+
 .overlayimage {
   position: absolute;
   bottom: -9%;
@@ -1879,6 +2007,7 @@ hr {
   color: #3f444a;
   font-size: 16px;
 }
+
 .overlay {
   opacity: 1;
 }
@@ -1886,6 +2015,7 @@ hr {
 .shortdesc {
   padding: 15px;
 }
+
 .box-shadow {
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   // max-height: 100%
@@ -1893,12 +2023,14 @@ hr {
   margin-bottom: 10px;
   border: 1px solid #ccc;
 }
+
 .catnamenew {
   color: #3f444a;
   text-transform: capitalize;
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 600 !important;
 }
+
 .courseName {
   position: relative;
   /* left: 10px; */
@@ -1908,7 +2040,12 @@ hr {
   font-size: 18px;
   font-weight: 600 !important;
 }
-.courseName1{
+
+.courseName p {
+  margin-bottom: 0px !important
+}
+
+.courseName1 {
   position: relative;
   /* left: 10px; */
   font-size: 18px;
@@ -1917,14 +2054,17 @@ hr {
   font-size: 18px;
   font-weight: 600 !important;
 }
+
 :host ::ng-deep body ::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 5px !important;
-    height: 5px !important;
+  -webkit-appearance: none;
+  width: 5px !important;
+  height: 5px !important;
 }
+
 ::-webkit-scrollbar {
   width: 5px !important;
 }
+
 .size {
   font-size: large;
 }
@@ -1932,7 +2072,8 @@ hr {
 .searchCol {
   padding-right: 0px;
 }
-.searchNormal{
+
+.searchNormal {
   width: 5%;
   float: right;
   border: 0px solid #898989;
@@ -1964,6 +2105,7 @@ hr {
   height: 32px;
   outline: none !important;
 }
+
 .inner-addon .material-icons {
   font-size: 24px !important;
 }
@@ -1996,6 +2138,7 @@ hr {
 :host ::ng-deep #mat-badge-content-3 {
   background: #898989 !important;
 }
+
 .catnamesss {
   margin-right: 35px;
   cursor: pointer !important;
@@ -2005,7 +2148,8 @@ hr {
   // height: 40px;
   /* margin-bottom: 28px; */
   color: #a2a2a2;
-  & .mat-badge-content{
+
+  & .mat-badge-content {
     background: #bab9b9 !important;
   }
 }
@@ -2014,10 +2158,12 @@ hr {
   border-bottom: 2px solid $lxp-theme-green !important;
   color: $color-blank !important;
   padding-bottom: 10px;
-  & .mat-badge-content{
+
+  & .mat-badge-content {
     background: $lxp-gray !important;
   }
 }
+
 .catPost {
   position: absolute;
   float: right;
@@ -2027,12 +2173,15 @@ hr {
   /* bottom: 0; */
   z-index: 999;
 }
+
 .available-course-btn:hover {
   background-color: $lxp-theme-green;
 }
+
 .cathd1 {
- padding-right: 10px;
+  padding-right: 10px;
 }
+
 .btnredClass {
   width: 67%;
   border: 1px solid $lxp-theme-green;
@@ -2050,11 +2199,13 @@ hr {
   top: 5px;
   position: relative;
 }
+
 .dropdownicon {
   position: relative;
   top: 4px;
   left: 5px;
 }
+
 // ::ng-deep .mat-menu-content {
 //   min-width: 146px !important;
 // }
@@ -2066,14 +2217,16 @@ hr {
   top: 22px;
   background: $lxp-icon !important;
 }
+
 .lxp-text:hover {
   color: $color-white;
 }
-.h-50{
+
+.h-50 {
   height: 50px !important;
 }
 
-.roleDropdown{
+.roleDropdown {
   position: relative;
   display: inline-block;
 }
@@ -2111,7 +2264,7 @@ hr {
   overflow-x: hidden;
   overflow-y: auto;
   text-align: justify;
- 
+
 }
 
 .dropdown-content a {
@@ -2128,11 +2281,12 @@ hr {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
 .dropdown-content1 {
   display: none;
 }
 
-.dropdown:hover .dropbtn{
+.dropdown:hover .dropbtn {
   background-color: $lxp-theme-green;
   color: $color-white;
 }
@@ -2144,41 +2298,50 @@ hr {
   right: 26px;
   top: 22px;
   background: #5c6873 !important;
+
   & .mat-badge-content {
     background: $lxp-gray !important;
   }
 }
+
 .matBadgeNew {
   // position: relative;
   // float: right;
   // right: 11px;
   // top: 22px;
   background: #5c6873 !important;
+
   & .mat-badge-content {
     background: $lxp-gray !important;
   }
 }
+
 .dynamicBagde {
   background: #5c6873 !important;
   left: 31px !important;
+
   & .mat-badge-content {
     background: $lxp-gray !important;
   }
 }
-.matBadgeSubmenu{
+
+.matBadgeSubmenu {
   position: relative;
   float: right;
   right: 22px;
   background: #5c6873 !important;
+
   & .mat-badge-content {
     background: $lxp-gray !important;
   }
 }
+
 .matBadgesuperSub {
   position: relative;
   float: right;
   right: 22px;
   background: #5c6873 !important;
+
   & .mat-badge-content {
     background: $lxp-gray !important;
   }
@@ -2186,12 +2349,14 @@ hr {
 
 .contedrop {
   padding: 14px 0 1px 14px;
-    
+
   cursor: pointer;
 }
+
 .contedrop:hover {
   background: #cecece !important;
 }
+
 // :host ::ng-deep mat-badge-content {
 //   color: $color-white;
 //   background: $lxp-icon !important;
@@ -2202,18 +2367,22 @@ hr {
   opacity: 1 !important;
   font-size: 12px !important;
 }
+
 :host ::ng-deep .tooltip-arrow {
   opacity: 1 !important;
 }
+
 .claimIcon:hover {
   cursor: not-allowed;
 }
+
 .alarmcursor {
   cursor: text;
 }
+
 ::ng-deep .custom-mat-tooltip {
-    
-  position:  relative !important;
+
+  position: relative !important;
   bottom: 80px !important;
   background-color: black !important;
   opacity: 1 !important;
@@ -2221,13 +2390,13 @@ hr {
   font-size: 12px !important;
 }
 
-.errorDialouge{
+.errorDialouge {
   height: 400px;
-  text-align:center;
+  text-align: center;
   padding-top: 13%;
 }
 
-.roledropdown{
+.roledropdown {
   background-color: $color-white;
   color: #898989;
   padding: 6px;
@@ -2238,19 +2407,21 @@ hr {
   border: 1px solid #898989;
   width: 155px;
 }
-::ng-deep .roleDropdDwnBtn{
+
+::ng-deep .roleDropdDwnBtn {
   // position: absolute !important;
   // right: 29% !important;
   // bottom: 6% !important;
-  padding-bottom: 4px; 
-  position: relative!important;
+  padding-bottom: 4px;
+  position: relative !important;
   /* right: 29% !important; */
   // bottom: 32px !important;
   /* left: 15%; */
   // margin-left: 17%;
   //  margin-bottom: 0%;
 }
-.roleBtn{
+
+.roleBtn {
   background-color: $color-white;
   color: #898989;
   padding: 6px;
@@ -2263,67 +2434,79 @@ hr {
   // position: relative;
   // top: 10px;
 }
-.dropdown:hover .roleBtn{
+
+.dropdown:hover .roleBtn {
   background-color: $lxp-theme-green;
   color: $color-white;
 }
 
-.roleSelect{
+.roleSelect {
   // float: left;
   //   padding-left: 7px;
   //   padding-top: 2px;
-    float: left;
-    padding-left: 7px;
-    padding-top: 2px;
-    white-space: nowrap;
+  float: left;
+  padding-left: 7px;
+  padding-top: 2px;
+  white-space: nowrap;
 }
-.roleSelectChange{	
+
+.roleSelectChange {
   float: left;
   padding-left: 7px;
   padding-top: 2px;
 }
-.roledropdowniconSelect{	
+
+.roledropdowniconSelect {
   position: sticky;
   float: right;
   padding-top: 4px;
 }
-.roleBatchOnSelect{	  
-  position: relative;	
-  float: right;	
-  right: 46px;	
-  top: 12px;	
-  background: #5c6873 !important;	
-  & .mat-badge-content {	
-    background: $lxp-gray !important;	
-  }	
-}
-.roledropdownicon{
+
+.roleBatchOnSelect {
   position: relative;
   float: right;
- top: 3px;
-}
-.mat-menu-item:hover:not([disabled]) {
-  background-color: $color-light-grey !important;
-}
-.roleBatch{
-  position: relative;
-    float: right;
-    right: 31px;
-    top: -23px;
-    background: #5c6873 !important;
+  right: 46px;
+  top: 12px;
+  background: #5c6873 !important;
+
   & .mat-badge-content {
     background: $lxp-gray !important;
   }
 }
-::ng-deep .childMenu{
-  width: 155px !important;
-    margin-top: 49px !important;
+
+.roledropdownicon {
+  position: relative;
+  float: right;
+  top: 3px;
 }
-::ng-deep .subchildMenu{
+
+.mat-menu-item:hover:not([disabled]) {
+  background-color: $color-light-grey !important;
+}
+
+.roleBatch {
+  position: relative;
+  float: right;
+  right: 31px;
+  top: -23px;
+  background: #5c6873 !important;
+
+  & .mat-badge-content {
+    background: $lxp-gray !important;
+  }
+}
+
+::ng-deep .childMenu {
+  width: 155px !important;
+  margin-top: 49px !important;
+}
+
+::ng-deep .subchildMenu {
   width: 155px !important;
   position: relative !important;
   margin-top: 120px !important;
 }
+
 // ::ng-deep .superSubMenu{
 //   width: 155px !important;
 //   position: relative !important;
@@ -2333,6 +2516,7 @@ hr {
 .mat-menu-item-submenu-trigger::after {
   right: 6px !important;
 }
+
 // .searchIcon {
 //   position: relative;
 //     bottom: 26px;
@@ -2341,6 +2525,7 @@ hr {
 .inner-addon {
   position: relative;
 }
+
 .searchDiv {
   right: 12px;
   // display: block;
@@ -2355,29 +2540,42 @@ hr {
   padding: 10px;
   pointer-events: none;
 }
+
 .inner-addon .searchIcon {
   position: absolute;
   padding: 10px;
   pointer-events: none;
 }
+
 .inner-addon .popupsearchIcon {
   right: 14%;
   top: 8px;
   position: absolute;
 }
 
-.right-addon .glyphicon {right: 1rem; top: 0rem;}
-.right-addon input { padding-right: 30px; }
-.right-addon .searchIcon { right: 30px;}
+.right-addon .glyphicon {
+  right: 1rem;
+  top: 0rem;
+}
+
+.right-addon input {
+  padding-right: 30px;
+}
+
+.right-addon .searchIcon {
+  right: 30px;
+}
 
 .search:focus {
   border: 1px solid $lxp-theme-green !important;
   box-shadow: 0 0 0 0.05rem $lxp-theme-green !important;
 }
+
 .popupsearch:focus {
   border: 1px solid $lxp-theme-green !important;
   box-shadow: 0 0 0 0.05rem $lxp-theme-green !important;
 }
+
 .ccSearch:focus {
   border: 1px solid $lxp-theme-green !important;
   box-shadow: 0 0 0 0.05rem $lxp-theme-green !important;
@@ -2388,6 +2586,7 @@ hr {
 .dropdown-submenu {
   position: relative;
 }
+
 .dropdown-menu:hover {
   display: block !important;
 }
@@ -2406,23 +2605,27 @@ hr {
   padding-top: 9px !important;
   border-radius: 0px !important;
 }
+
 .dropdown-submenu>.dropdown-menu {
   top: 0;
   left: unset !important;
   right: 100% !important;
   margin-top: -1.3rem;
-    position: absolute;
+  position: absolute;
   margin-left: -1px;
   -webkit-border-radius: 0 6px 6px 6px;
   -moz-border-radius: 0 6px 6px;
   border-radius: 0 6px 6px 6px;
 }
+
 .dropdown-submenu:hover>.dropdown-menu {
   display: block;
 }
+
 .dropdown-item:hover {
   background-color: $lxp-light-grey;
 }
+
 .dropdown-submenu>a:after {
   display: block;
   content: " ";
@@ -2452,11 +2655,13 @@ hr {
   -moz-border-radius: 6px 0 6px 6px;
   border-radius: 6px 0 6px 6px;
 }
+
 li {
   cursor: pointer;
   height: 37px;
   padding-top: 10px;
 }
+
 .subMenu {
   min-width: 180px;
 }
@@ -2468,45 +2673,154 @@ li {
 .superSubSpan {
   padding-right: 2rem !important;
 }
+
 /* toolti[p config for job role by mani */
-:host ::ng-deep .customClass .tooltip-inner{
- position: relative !important;
- left: 35px !important;
-    bottom: 5px;
+:host ::ng-deep .customClass .tooltip-inner {
+  position: relative !important;
+  left: 35px !important;
+  bottom: 5px;
 }
-:host ::ng-deep .customClass .tooltip-arrow{
+
+:host ::ng-deep .customClass .tooltip-arrow {
   position: relative !important;
   left: 30px !important;
- }
- :host ::ng-deep .custClass .tooltip-inner{
+}
+
+:host ::ng-deep .custClass .tooltip-inner {
   position: relative !important;
   left: 46px !important;
   bottom: 5px;
- }
- :host ::ng-deep .custClass .tooltip-arrow{
+}
+
+:host ::ng-deep .custClass .tooltip-arrow {
   position: relative !important;
   left: 41px !important;
-  }
-  .h-30{
-    height: 30px !important;
-  }
- .oneLineCat {
-   width: 167px !important;
-   word-wrap:break-word !important;
-  }
+}
 
- .catalogTitle {
-    height: 60px !important;
-    padding-top: 0.8rem;
-  }
-  /* tooltip config end by mani */
+.h-30 {
+  height: 30px !important;
+}
 
-  .iconsSearch {
-    position: absolute;
-    color: #69727c;
-    top: 0.7rem;
-    right: 0.5rem;
+.oneLineCat {
+  width: 167px !important;
+  word-wrap: break-word !important;
+}
+
+.catalogTitle {
+  height: 60px !important;
+  padding-top: 0.8rem;
+}
+
+/* tooltip config end by mani */
+
+.iconsSearch {
+  position: absolute;
+  color: #69727c;
+  top: 0.7rem;
+  right: 0.5rem;
+}
+
+.descOverflow {
+  overflow: auto;
+}
+
+
+
+.gold-line-r {
+  border-right: solid 1px #cccccc7a
+}
+
+//Lienear progress bar
+::ng-deep .mat-progress-bar-fill::after {
+  background-image: linear-gradient(to right, #ED8464, #CB8758, #119A16);
+}
+
+::ng-deep .mat-progress-bar-buffer {
+  background: #E4E8EB;
+}
+
+::ng-deep .mat-progress-bar {
+  border-radius: 2px;
+}
+
+.f_size_10 {
+  font-size: 10px !important;
+}
+
+.m-t-10px {
+  margin-top: 10px !important;
+}
+
+.cardHeights{
+  min-height: 150px !important;
+  margin-top:15px;
+  margin-bottom:15px;
+}
+.inner {
+  width: 80%;
+  height: 1px;
+  margin: 0px auto;
+  border-bottom: 1px solid #cccccc7a;
+}
+
+
+// SKELETON
+.demo:empty {
+  // margin: auto;
+  margin-top: 30px !important;
+  margin-left: 50px !important;
+  width: auto;
+  height: 700px;
+  /* change height to see repeat-y behavior */
+
+  background-image:
+      // radial-gradient(circle 50px at 50px 50px, lightgray 99%, transparent 0),
+      linear-gradient(lightgray 100px, transparent 0),
+      // linear-gradient(lightgray 100px, transparent 0)
+      linear-gradient(100deg, rgba(143, 116, 116, 0), rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 80%),
+      linear-gradient(lightgray 15px, transparent 0),
+      linear-gradient(lightgray 15px, transparent 0),
+      linear-gradient(lightgray 12px, transparent 0),
+      // linear-gradient(lightgray 10px, transparent 0),
+      // linear-gradient(lightgray 12px, transparent 0),
+      linear-gradient(lightgray 10px, transparent 0);
+
+  background-repeat: repeat-y;
+
+  background-size:
+      100px 200px,
+      /* circle */
+      50px 200px,
+      /* highlight */
+      300px 200px,
+      500px 200px,
+      400px 200px,
+      350px 200px;
+
+  background-position:
+      0 0,
+      /* circle */
+      0 0,
+      /* highlight */
+      120px 0,
+      // 120px 0,
+      120px 40px,
+      // 0 0,
+      120px 80px,
+      120px 120px;
+
+  animation: shine 1s infinite;
+}
+
+@keyframes shine {
+  to {
+      background-position:
+          0 0,
+          100% 0,
+          /* move highlight to right */
+          120px 0,
+          120px 40px,
+          120px 80px,
+          120px 120px;
   }
-  .coursename{
-    height: 50px;
-  }
+}

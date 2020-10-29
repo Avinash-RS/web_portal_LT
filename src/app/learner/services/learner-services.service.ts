@@ -28,7 +28,7 @@ import {
   getDetailsCount,
   getlearnertrack,
   getLearnerenrolledCourses,
-  getlearnerdashboarddetails,
+  getlearnerdashboard,
   getFeedbackQuestion,
   getCoursePlayerStatusForCourse,
   getAssignmentmoduleData,
@@ -44,6 +44,13 @@ import {
   singleBatchInfo,
   ViewAllThreadDataBid,
   getCountForJobroleCategories,
+  getLoginUserDetail,
+  getCourseActivities,
+  getprojectActivityData,
+  getperformActivityData,
+  get_active_course_count,
+  getActivityDetailsByBatchAndCourseID,
+  getTopicAttendanceDetailsByUsername
 } from './operations/learner_query';
 
 import {
@@ -84,12 +91,18 @@ import {
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
-import { from } from 'rxjs';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
 export class LearnerServicesService {
+
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-type': 'application/json', 'authorization': 'Bearer 104150f8e66cae68b40203e1dbba7b4529231970' })
+  };
+
   envWcaApi: any = environment.wcaapiurl;
   envApi: any = environment.apiUrl;
   envApiImg: any = environment.apiUrlImg;
@@ -363,6 +376,14 @@ export class LearnerServicesService {
       }
     });
   }
+  getLoginUserDetail(email) {
+    return this.Apollo.query({
+      query: getLoginUserDetail,
+      variables: {
+        username: email
+      }
+    });
+  }
 
   get_user_detail_username(username) {
     return this.Apollo.query({
@@ -590,7 +611,7 @@ export class LearnerServicesService {
       }
     });
   }
-  bulkclaimcourse( id, user_id, category_id, categoryName) {
+  bulkclaimcourse(id, user_id, category_id, categoryName) {
     return this.Apollo.query({
       query: bulkclaimcourse,
       variables: {
@@ -625,11 +646,12 @@ export class LearnerServicesService {
 
 
 
-  get_learner_dashboard(user_id) {
+  get_learner_dashboard(user_id,user_obj_id) {
     return this.Apollo.query({
-      query: getlearnerdashboarddetails,
+      query: getlearnerdashboard,
       variables: {
-        user_id
+        user_id:user_id,
+        user_obj_id:user_obj_id
       }
     });
   }
@@ -764,12 +786,13 @@ export class LearnerServicesService {
     }
   }
 
-  getReadLeanerActivity(userid, date) {
+  getReadLeanerActivity(userid, date, courseid) {
     return this.Apollo.query({
       query: getReadLeanerActivity,
       variables: {
         userid,
-        date
+        date,
+        courseid
       }
     });
   }
@@ -869,8 +892,74 @@ export class LearnerServicesService {
       }
     });
   }
+  getCourseActivities(userId, PageNumber, courseId, sortType, searchValue, searchColumn, statusBased) {
+    return this.Apollo.query({
+      query: getCourseActivities,
+      variables: {
+        user_id: userId,
+        pagenumber: PageNumber,
+        course_id: courseId,
+        sort_type: sortType,
+        searchvalue: searchValue,
+        searchcolumn: searchColumn,
+        status: statusBased,
+      }
+    });
+  }
+
+
+
+getprojectActivityData(userId, courseId) {
+  return this.Apollo.query({
+    query: getprojectActivityData,
+    variables: {
+      userId,
+      courseId
+    }
+  });
 }
+// get oerform activity details
+  getperformActivityData(userId , courseId) {
+    return this.Apollo.query({
+      query: getperformActivityData,
+      variables: {
+        userId,
+        courseId
+      }
+    });
+  }
+  learnerUploadVideo(data) { return this.http.post(environment.apiUrl + 'wca/learnerUploadVideo', data); }
+  learnerSumbitdeleteVideo(submitData) { return this.http.post(environment.apiUrl + 'wca/learnerSumbitdeleteVideo', submitData); }
+  get_active_course_count(user_id){
+    return this.Apollo.query({
+      query: get_active_course_count,
+      variables: {
+        user_id,
+      }
+    });
+  }
 
+  getActivityDetailsByCourseAndBatchID(batchid, courseid) {
+    return this.Apollo.query({ // Get Activity Details For Instrcutor Led Screen.
+      query: getActivityDetailsByBatchAndCourseID,
+      variables: {
+        batchid,
+        courseid
+      }
+    });
+  }
 
+  getAttendanceByUsername(courseid, full_name, user_id): Observable<any> {
+    return this.Apollo.query({ // Get Activity Details For Instrcutor Led Screen.
+      query: getTopicAttendanceDetailsByUsername,
+      variables: {
+        courseid,
+        full_name,
+        user_id
+      }
+    }).pipe(tap());
+  }
+
+}
 
 

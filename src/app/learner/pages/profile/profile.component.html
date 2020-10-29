@@ -588,7 +588,7 @@
         <h1 class="head">{{'Change the Password' | translate}}</h1>
         <mat-dialog-content style="width: 380px;margin-top: 24px;">
           <form [formGroup]="passwordForm">
-            <label class="f_size_19 f_wt_400">{{'Enter the current password' | translate}}</label>
+            <label class="f_size_19 f_wt_400">{{'Enter current password' | translate}}</label>
             <div class="form-group">
               <input [type]="show ? 'text' : 'password'" name="password" formControlName="currentpassword"
                 onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
@@ -596,15 +596,15 @@
                 [ngClass]="{ 'is-invalid': c.currentpassword.touched && c.currentpassword.errors }" />
               <i [class]="show ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="show = !show"
                 aria-hidden="true"></i>
-              <div *ngIf="c.currentpassword.touched && c.currentpassword.errors" class="invalid-feedback">
+              <!-- <div *ngIf="c.currentpassword.touched && c.currentpassword.errors" class="invalid-feedback">
                 <div *ngIf="c.currentpassword.errors.required">{{'Current Password is required' | translate}}</div>
                 <div *ngIf="c.currentpassword.errors.minlength">{{'Current Password must be at least 8 characters' | translate }}</div>
                 <div *ngIf="c.currentpassword.errors.pattern">{{'Your password must contain at least one number and have a mixture of Special characters, uppercase and lowercase letters.' | translate}}</div>
-              </div>
+              </div> -->
             </div><br>
 
 
-            <label class="f_size_19 f_wt_400">{{'Enter the new password' | translate}}</label>
+            <label class="f_size_19 f_wt_400">{{'Enter new password' | translate}}</label>
             <div class="form-group">
               <input [type]="showNew ? 'text' : 'password'" name="password" formControlName="newpassword"
                 onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
@@ -636,7 +636,7 @@
               </div>
             </div>
             <p class="head f_size_17">{{'The password should not be last password' | translate}}</p>
-            <label class="f_size_19 f_wt_400">{{'Confirm the new password' | translate}}</label>
+            <label class="f_size_19 f_wt_400">{{'Confirm new password' | translate}}</label>
             <div class="form-group">
               <input [type]="showConNew ? 'text' : 'password'" name="password" formControlName="confirmpassword"
                 onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"

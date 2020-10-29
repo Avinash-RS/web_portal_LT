@@ -47,6 +47,10 @@ export class CommonServicesService {
   appliedCategory$ = new Subject<any>();
   appliedCategory = this.appliedCategory$.asObservable();
 
+  //performance mobile Responsive
+  menuSelectedPerform$ = new Subject<any>();
+  menuSelectedPerform = this.menuSelectedPerform$.asObservable();
+
   loader$ = new Subject<boolean>();
   loader = this.loader$.asObservable();
 
@@ -55,12 +59,15 @@ export class CommonServicesService {
   notificationCount$ = new Subject<any>();
   notificationCount = this.notificationCount$.asObservable();
 
+  notificationStatus$ = new Subject<any>();
+  notificationStatus = this.notificationStatus$.asObservable();
+
   openAvailCourcePopup$ = new Subject<any>();
   openAvailCourcePopup = this.openAvailCourcePopup$.asObservable();
 
   closeAvailPopup$ = new Subject<any>();
   closeAvailPopup = this.closeAvailPopup$.asObservable();
-  
+
   openNotification$ = new Subject<any>();
   openNotification = this.openNotification$.asObservable();
 

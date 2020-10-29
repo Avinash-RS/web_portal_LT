@@ -25,6 +25,8 @@ import { ErrorInterceptor } from '@core/services/_helpers';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { ConfigsLoaderService } from '@core/services/configs-loader.service';
 import { NotFoundComponent } from './not-found/not-found.component';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
+import { DatePipe } from '@angular/common';
 // import { ChartsModule } from 'ng2-charts';
 
 // import { JwtInterceptor } from './core/services/_helpers/jwt.interceptor';
@@ -52,6 +54,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     BrowserAnimationsModule,
     Ng5SliderModule,
     PdfJsViewerModule,
+    IvyCarouselModule,
     ToastrModule.forRoot({
       timeOut: 4000,
       positionClass: 'toast-top-right',
@@ -66,7 +69,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     ReactiveFormsModule,
     GraphqlModule
   ],
-  providers: [AlertComponentComponent,
+  providers: [AlertComponentComponent,DatePipe,
     {
       provide: APP_BASE_HREF,
       useFactory: getBaseHref,

@@ -63,9 +63,20 @@ import { ViewAllnotificationsComponent } from './pages/view-allnotifications/vie
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { LearnermycourseService } from './pages/learner-my-course/learnermycourse.service';
+import { PerformancePageMobileComponent } from './pages/performance-page-mobile/performance-page-mobile.component';
+import { SelfLearnerAvtivityComponent } from './pages/self-learner-avtivity/self-learner-avtivity.component';
+import { ActivitiesComponent } from './pages/activities/activities.component';
+import { DiscussionForumComponent } from './pages/discussion-forum/discussion-forum.component';
+import { LearnerActivityCenterComponent } from './pages/learner-activity-center/learner-activity-center.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { ActivitycenterhomescreenComponent } from './pages/activitycenterhomescreen/activitycenterhomescreen.component';
+import { InstructorLedComponent } from './pages/instructor-led/instructor-led.component';
 import { KnowledgeResourceHomeComponent } from './pages/knowledge-resource-home/knowledge-resource-home.component';
+import { KnowledgeLandingPageComponent } from './pages/knowledge-landing-page/knowledge-landing-page.component';
+import { KnowledgePreviewComponent } from './pages/knowledge-preview/knowledge-preview.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -129,11 +140,17 @@ const routes: Routes = [
   {
     path: 'MyCourse',
     component: LearnerMyCourseComponent,
-    resolve: {
-      data: LearnermycourseService
-      },
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     data: { animation: 'Learner  MyCourse' }
+  },
+  {
+    path: 'SelfLearner',
+    component: SelfLearnerAvtivityComponent,
+    // resolve: {
+    //   data: LearnermycourseService
+    //   },
+    // canActivate: [AuthGuard],
+    data: { animation: 'Self Learner Avtivity' }
   },
   {
     path: 'resetpassword',
@@ -147,11 +164,40 @@ const routes: Routes = [
     data: { animation: 'Calendar' }
   },
   {
-    path: 'knowledge',
-    component: KnowledgeResourceHomeComponent,
-    data: { title: 'Knowledge Resources'}
+    path: 'activities',
+    component: ActivitiesComponent,
+    data: { animation: 'Calendar' }
+  },
+    {
+    path: 'activitycenter',
+    component: LearnerActivityCenterComponent,
+    data: { animation: 'activitycenter' }
   },
 
+  {
+
+    path: 'discussionForum',
+    component: DiscussionForumComponent,
+    data: { animation: 'Discussion Forum' }
+  },
+
+  {
+    path: 'activitycenterhomescreen',
+    component: ActivitycenterhomescreenComponent,
+    data: { animation: 'activitycenterhomescreen' }
+
+  },
+  
+  {
+    path: 'knowledge',
+    component: KnowledgeResourceHomeComponent,
+    data: { animation: 'activitycenterhomescreen' }
+  },
+  {
+    path: 'knowledge/preview',
+    component: KnowledgeLandingPageComponent,
+    data: { animation: 'activitycenterhomescreen' }
+  },
   // {
   //   path: 'terms',
   //   component: TermsconditionsComponent,
@@ -187,6 +233,11 @@ const routes: Routes = [
   {
     path: 'viewAllnotifications',
     component: ViewAllnotificationsComponent,
+  },
+  {
+    path: 'instructorLed',
+    component: InstructorLedComponent,
+    data: { animation: 'Learner  MyCourse' }
   }
   // { path: 'new-home', component: NewHomeComponent },
 ];
@@ -217,6 +268,15 @@ const routes: Routes = [
     LandingpageComponent,
     LearnerCalendarComponent,
     ViewAllnotificationsComponent,
+    PerformancePageMobileComponent,
+    SelfLearnerAvtivityComponent,
+    ActivitiesComponent,
+    DiscussionForumComponent,
+    LearnerActivityCenterComponent,
+    ActivitycenterhomescreenComponent,
+    InstructorLedComponent,
+    KnowledgePreviewComponent,
+    KnowledgeLandingPageComponent,
     KnowledgeResourceHomeComponent
   ],
 
@@ -261,6 +321,7 @@ const routes: Routes = [
     PdfJsViewerModule,
     RatingModule,
     NgCircleProgressModule,
+    Ng2SearchPipeModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -272,6 +333,7 @@ const routes: Routes = [
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+    AgGridModule.withComponents([])
   ],
   exports: [
     // MatMenuModule
@@ -280,6 +342,6 @@ const routes: Routes = [
     Apollo
     // { provide: Window, useValue: window }
   ],
-  entryComponents: [CategoryComponentComponent]
+  entryComponents: [CategoryComponentComponent,KnowledgePreviewComponent]
 })
-export class LearnerModule {}
+export class LearnerModule { }

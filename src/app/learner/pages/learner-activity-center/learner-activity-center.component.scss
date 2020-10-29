@@ -1,0 +1,88 @@
+@import "variable";
+
+.backIc {
+    width: 10px !important;
+    margin-left: 10px !important;
+}
+
+.redHover:hover {
+    color: #C02222 !important;
+}
+
+button,
+textarea:focus,
+input:focus {
+    outline: none;
+}
+
+.inputs {
+    border: 1.0px solid $color-border !important;
+    padding: 5px !important;
+}
+
+.inputs:focus {
+    border: 1.0px solid $lxp-theme-green !important;
+}
+
+/deep/.search-viewactivities .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding-top: 0px !important;
+    padding-bottom: 5px !important;
+}
+
+/deep/.search-viewactivities .mat-form-field-suffix {
+    padding-top: 3px !important;
+}
+
+::ng-deep .search-viewactivities .mat-form-field-appearance-outline .mat-form-field-outline-end {
+    border-radius: 0px !important;
+}
+
+::ng-deep .search-viewactivities .mat-form-field-appearance-outline .mat-form-field-outline-start {
+    border-radius: 0px !important;
+
+}
+
+::ng-deep .ag-theme-alpine .ag-header {
+    background-color: #F9F2BC;
+}
+
+::ng-deep .ag-theme-alpine .ag-row {
+    background-color: $color-lightest-grey;
+    border-bottom: 1px solid white;
+}
+
+::ng-deep .ag-theme-alpine {
+    border: none !important;
+}
+// In Learner end table font is replaced with overall font, hence icons are not displaying. so this font-family css is implemented for icons in ag grid
+::ng-deep .ag-theme-alpine .ag-icon {
+    font-family: "agGridAlpine" !important;
+}
+.sub {
+    color: #FFA04E !important;
+}
+
+.m-l-10px {
+    margin-left: 10px !important;
+}
+
+.txt-caps {
+    ::first-letter {
+        text-transform: capitalize;
+    }
+}
+
+.vert-txt-center {
+    display: inline-flex !important;
+    align-items: center;
+}
+
+::ng-deep.ag-paging-panel {
+  
+   
+    background-color: #F9F2BC!important
+}
+
+// End of screen 5 - View All Activities card //
+
+// ******************************************************************************** //
