@@ -18,30 +18,35 @@
     <br>
     <div flex>
       <mat-card class="imgLayout">
-        <div layout="row">
+        <div *ngIf='activityShow === undefined'>
+          <span class="sessionTitle"> No Activities Found..</span>
+        </div>
+        <div layout="row" *ngIf='activityShow !== undefined'>
           <div layout="row" layout-margin>
             <div flex style="margin-top: 30px;">
               <!-- <mat-card> -->
-              <img height="229" width="369" src="../../../../assets/learner/sessionThumbnail_01.png" />
+              <img *ngIf="activityShow?.activity_details.livethumbnail === undefined" height="229" width="369" src="../../../../assets/learner/sessionThumbnail_01.png" />
+              <img *ngIf="activityShow?.activity_details.livethumbnail !== undefined" height="229" width="369" [src]="activityShow?.activity_details.livethumbnail" />
               <!-- </mat-card> -->
             </div>
           </div>
           <div layout="row" layout-margin style="margin-left: 15px;">
+            
             <div flex style="margin-top: 30px;">
-              <span class="sessionTitle">{{activityShow.activity_details.topicname}}</span>
+              <span class="sessionTitle">{{activityShow?.activity_details.topicname}}</span>
               <div class="row" style="color: white; margin-top: 10px;">
                 <spaN>Started @ </spaN> <span>
-                  {{ activityShow.activity_details.startdate | date: 'MMM d, y, h:mm a'}}</span>
+                  {{ activityShow?.activity_details.startdate | date: 'MMM d, y, h:mm a'}}</span>
               </div>
               <div class="row" style="color: white; margin-top: 10px;">
                 <span class="sessionTitle">Duration</span>
               </div>
               <div class="row" style="color: white; margin-top: 10px;">
-                <span class="sessionTitle">{{activityShow.duration}}</span>
+                <span class="sessionTitle">{{activityShow?.duration}}</span>
               </div>
               <div class="row" style="margin-top: 20px;">
                 <button class="actBtn" mat-raised-button
-                  (click)="getAction(activityShow.activity_details.link)">{{activityShow.button}}</button>
+                  (click)="getAction(activityShow.activity_details.link)">{{activityShow?.button}}</button>
               </div>
             </div>
 
@@ -61,7 +66,7 @@
           <mat-card-subtitle class="smallHeadline">Attended Classes</mat-card-subtitle>
           <div class="row">
             <img mat-card-image src="../../../../assets/learner/students.svg">
-            <span class="number">{{attendedSessions.true}}</span>
+            <span class="number">{{attendedSessions?.true}}</span>
           </div>
         </mat-card>
 
@@ -77,7 +82,7 @@
         <span class="tableHeadline">My Attendance</span>
       </div>
       <div class="row">
-        <table>
+        <table style="width: 100%;">
           <tr class="tblheaderFont">
             <th>Session #</th>
             <th style="min-width: 400px;">Topic Name</th>
@@ -86,11 +91,11 @@
           </tr>
           <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
             <td>{{i+1}}</td>
-            <td>{{atd.topicDetails.topicname}}</td>
-            <td>{{atd.topicDetails.startdate | date: 'dd/MM/yyyy hh:mm'}}</td>
+            <td>{{atd.activity.moduledetails.topicdetails.topicname}}</td>
+            <td>{{atd.activity.moduledetails.topicdetails.startdate | date: 'dd/MM/yyyy hh:mm'}}</td>
             <td>
-              <mat-icon *ngIf="atd.topicDetails.attendencedetails.Attendence === 'yes'" style="color: green;">done</mat-icon>
-              <mat-icon *ngIf="atd.topicDetails.attendencedetails.Attendence === 'no'" style="color: red;">close</mat-icon>
+              <mat-icon *ngIf="atd.activity.moduledetails.topicdetails.attendencedetails.Attendence === 'yes'" style="color: green;">done</mat-icon>
+              <mat-icon *ngIf="atd.activity.moduledetails.topicdetails.attendencedetails.Attendence === 'no'" style="color: red;">close</mat-icon>
             </td>
           </tr>
         </table>
@@ -107,8 +112,8 @@
           <mat-card class="sessionCard" (click)="useSession(los)">
             <div class="row">
               <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
-                <img height="220" width="180"
-                  src="https://www.edureka.co/blog/wp-content/uploads/2017/01/What-is-Data-Science-A-2.png">
+                <img *ngIf="los.activity_details.livethumbnail !== undefined" height="220" width="180" [src]="los.activity_details.livethumbnail">
+                <img *ngIf="los.activity_details.livethumbnail === undefined" height="220" width="180" src="../../../../assets/learner/sessionThumbnail_01.png">
                 <h4 style="float: right;
                 background: green;
                 margin-left: -43px;

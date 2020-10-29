@@ -1900,3 +1900,57 @@ query get_course_activities_by_id( $batchid: String!, $courseid: String!){
 }
 }
 `;
+
+export const getTopicAttendanceDetailsByUsername = gql`
+query getTopicAttendanceDetailsByUsername( $courseid: String!, $full_name: String!, $user_id: String!){
+  getTopicAttendanceDetailsByUsername( courseid: $courseid, full_name: $full_name, user_id: $user_id ){
+      success
+      message
+      data{
+          _id
+          activity{
+              _id
+              batchid
+              courseid
+              coursename
+              modulecount
+              moduledetails{
+                  modulename
+                  topicdetails{
+                      topicname
+                      status
+                      activityid
+                      courseid
+                      coursename
+                      modulename
+                      startdate
+                      enddate
+                      activitytype
+                      activityname
+                      link
+                      created_on
+                      createdby_name
+                      createdby_role
+                      createdby_id
+                      copy
+                      topictype
+                      groupname
+                      iterations
+                      evaluationtype
+                      livethumbnail
+                      attendencefile
+                      attendencedetails{
+                          Learners
+                          Attendence
+                      }
+                      evaluationmode
+                      trainers
+                      learners
+                      resourcefile
+                  }
+              }
+          }
+      }
+  }
+}
+`;

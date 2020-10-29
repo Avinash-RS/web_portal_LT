@@ -25,7 +25,7 @@ export class InstructorLedComponent implements OnInit {
               private learnerService: LearnerServicesService) {
               this.course = (this.router.getCurrentNavigation() && this.router.getCurrentNavigation().extras &&
                 this.router.getCurrentNavigation().extras.state && this.router.getCurrentNavigation().extras.state.detail);
-              // console.log(detail);
+              // console.log(this.course);
   }
 
   ngOnInit() {
@@ -38,17 +38,16 @@ export class InstructorLedComponent implements OnInit {
   }
 
   getAttendance() { // Http Call
-    const obj = {
-      "batchid": "443222669025448",
-      "courseid": courseid,
-      "full_name": "Student002"
-    };
-    this.learnerService.getAttendanceByUsername(obj).subscribe(res => {
-      console.log(res);
-      this.sessionAttendance = res.data;
-      this.attendedSessions = _.countBy(this.sessionAttendance, x => x.topicDetails.attendencedetails.Attendence === 'yes');
-      console.log(this.attendedSessions);
-      console.log(this.sessionAttendance);
+    // const obj = {
+    //   "courseid": this.course.id,
+    //   "full_name": "Student002",
+    //   'user_id': 'o5jnyx'
+    // };
+    // console.log(obj);
+    const userDetails = JSON.parse(sessionStorage.getItem('UserDetails'));
+    this.learnerService.getAttendanceByUsername(this.course.id, userDetails.full_name, userDetails.user_id).subscribe(res => {
+      this.sessionAttendance = res.data['getTopicAttendanceDetailsByUsername']['data'];
+      this.attendedSessions = _.countBy(this.sessionAttendance, x => x.activity.moduledetails.topicdetails.attendencedetails.Attendence === 'yes');
     });
   }
 
@@ -79,21 +78,22 @@ export class InstructorLedComponent implements OnInit {
   }
 
   getSessionsList() { // Http Call
-    const date = '2020-10-27'; // new Date();
-    this.learnerService.getReadLeanerActivity(userid, date, courseid).subscribe(async res => {
+    // const date = '2020-10-27'; // new Date();
+    // this.learnerService.getReadLeanerActivity(userid, date, courseid).subscribe(async res => {
+    const date = new Date();
+    const userDetails = JSON.parse(sessionStorage.getItem('UserDetails'));
+    this.learnerService.getReadLeanerActivity(userDetails.user_id, date, this.course.id).subscribe(async res => {
       this.listOfSessions = res.data['get_read_learner_activity']['message'];
       this.totalSessions = this.listOfSessions.length;
       this.recordedSessions = this.listOfSessions.length;
       for (const los of this.listOfSessions) {
         los.duration = await this.getTimes(los.activity_details.enddate, los.activity_details.startdate);
       }
-      console.log(this.listOfSessions);
       this.onGoingSession();
     });
   }
 
   useSession(los) {
-    console.log(los);
     this.activityShow = los;
     if (los.status === 'On going') {
       this.activityShow.button = 'Join Now';
@@ -103,9 +103,9 @@ export class InstructorLedComponent implements OnInit {
   }
 
   onGoingSession() {
-    const ongoing = this.listOfSessions.find(x => x.activity_details.status === 'On going');
+    const ongoing = this.listOfSessions.find(x => x.status === 'On going');
     if (ongoing === undefined) {
-      const upcoming = this.listOfSessions.find(x => x.activity_details.status === 'Up Coming');
+      const upcoming = this.listOfSessions.find(x => x.status === 'Up Coming');
       if (upcoming === undefined) {
         this.activityShow = this.listOfSessions[0];
         this.activityShow.button = 'Play Now';
@@ -117,7 +117,6 @@ export class InstructorLedComponent implements OnInit {
       this.activityShow = ongoing;
       this.activityShow.button = 'Join Now';
     }
-    console.log(this.activityShow);
   }
 
   getAction(link) {

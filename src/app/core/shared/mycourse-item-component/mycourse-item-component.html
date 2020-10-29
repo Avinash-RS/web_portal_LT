@@ -266,12 +266,12 @@
                     </span>
                     <div *ngIf="course.ledinstExp" class="f_size_13">
                       Sessions attended N/A<br>
-                      <span class="pointer f_size_10" style="color: red; text-decoration: underline;" >View sessions details..</span>
+                      <span class="pointer f_size_10" style="color: red; text-decoration: underline;" (click)="goInstructorLed(course)">View sessions details..</span>
                     </div>
                   </div>
                 </div>
                 <div class="col-5">
-                  <button mat-stroked-button class="btl-alin blue_clr cap pointer m-l-10px">
+                  <button mat-stroked-button class="btl-alin blue_clr cap pointer m-l-10px" (click)="goInstructorLed(course)">
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Join" | translate }}&nbsp;
                     </span>

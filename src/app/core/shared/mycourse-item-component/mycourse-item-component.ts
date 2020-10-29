@@ -44,11 +44,9 @@ export class MycourseItemComponent implements OnInit {
     private router: Router, private loader: Ng4LoadingSpinnerService,) {
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('adminDetails')) || null;
     this.role = localStorage.getItem('role') || null;
-    console.log(this.userDetail);
   }
 
   ngOnInit() {
-    console.log(this.course);
   }
   Go(course) {
     console.log('name', course);
@@ -86,8 +84,8 @@ export class MycourseItemComponent implements OnInit {
       name: c.course_name
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
-    // this.router.navigateByUrl('/Learner/discussionForum', { state: { detail } });
-    this.router.navigateByUrl('/Learner/instructorLed', { state: { detail } });
+    this.router.navigateByUrl('/Learner/discussionForum', { state: { detail } });
+    // this.router.navigateByUrl('/Learner/instructorLed', { state: { detail } });
   }
 
 
@@ -100,5 +98,15 @@ export class MycourseItemComponent implements OnInit {
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
     this.router.navigateByUrl('/Learner/activitycenter', { state: { detail } });
+  }
+
+  goInstructorLed(c) {
+    localStorage.setItem('Courseid', c.course_id);
+    const detail = {
+      id: c.course_id,
+      name: c.course_name
+    };
+    localStorage.setItem('course', btoa(JSON.stringify(detail)));
+    this.router.navigateByUrl('/Learner/instructorLed', { state: { detail } });
   }
 }

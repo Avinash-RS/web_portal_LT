@@ -49,7 +49,8 @@ import {
   getprojectActivityData,
   getperformActivityData,
   get_active_course_count,
-  getActivityDetailsByBatchAndCourseID
+  getActivityDetailsByBatchAndCourseID,
+  getTopicAttendanceDetailsByUsername
 } from './operations/learner_query';
 
 import {
@@ -948,9 +949,17 @@ getprojectActivityData(userId, courseId) {
     });
   }
 
-  getAttendanceByUsername(params): Observable<any> {
-    return this.http.post(`http://localhost:3002/getTopicAttendanceDetailsByUsername`, params, this.httpOptions).pipe(tap());
+  getAttendanceByUsername(courseid, full_name, user_id): Observable<any> {
+    return this.Apollo.query({ // Get Activity Details For Instrcutor Led Screen.
+      query: getTopicAttendanceDetailsByUsername,
+      variables: {
+        courseid,
+        full_name,
+        user_id
+      }
+    }).pipe(tap());
   }
+
 }
 
 
