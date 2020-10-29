@@ -91,12 +91,17 @@ import {
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators'
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LearnerServicesService {
+
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-type': 'application/json', 'authorization': 'Bearer 104150f8e66cae68b40203e1dbba7b4529231970' })
+  };
+
   envWcaApi: any = environment.wcaapiurl;
   envApi: any = environment.apiUrl;
   envApiImg: any = environment.apiUrlImg;
@@ -941,6 +946,10 @@ getprojectActivityData(userId, courseId) {
         courseid
       }
     });
+  }
+
+  getAttendanceByUsername(params): Observable<any> {
+    return this.http.post(`http://localhost:3002/getTopicAttendanceDetailsByUsername`, params, this.httpOptions).pipe(tap());
   }
 }
 

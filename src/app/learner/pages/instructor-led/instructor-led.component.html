@@ -1,9 +1,4 @@
 <app-header></app-header>
-<!-- <div class="example-button-row">
-  <button mat-button (click)="getBack()">
-    <mat-icon>keyboard_arrow_left</mat-icon> Back
-  </button>
-</div> -->
 
 <br>
 <p>
@@ -31,10 +26,25 @@
               <!-- </mat-card> -->
             </div>
           </div>
-          <div layout="row" layout-margin>
+          <div layout="row" layout-margin style="margin-left: 15px;">
             <div flex style="margin-top: 30px;">
-              <span class="sessionTitle">Introduction to the Quality Management Systems</span>
+              <span class="sessionTitle">{{activityShow.activity_details.topicname}}</span>
+              <div class="row" style="color: white; margin-top: 10px;">
+                <spaN>Started @ </spaN> <span>
+                  {{ activityShow.activity_details.startdate | date: 'MMM d, y, h:mm a'}}</span>
+              </div>
+              <div class="row" style="color: white; margin-top: 10px;">
+                <span class="sessionTitle">Duration</span>
+              </div>
+              <div class="row" style="color: white; margin-top: 10px;">
+                <span class="sessionTitle">{{activityShow.duration}}</span>
+              </div>
+              <div class="row" style="margin-top: 20px;">
+                <button class="actBtn" mat-raised-button
+                  (click)="getAction(activityShow.activity_details.link)">{{activityShow.button}}</button>
+              </div>
             </div>
+
           </div>
         </div>
       </mat-card>
@@ -43,9 +53,8 @@
           <mat-card-subtitle class="smallHeadline">Total Classes</mat-card-subtitle>
           <div class="row">
             <img mat-card-image src="../../../../assets/learner/elearning.svg">
-            <span class="number">16</span>
+            <span class="number">{{totalSessions}}</span>
           </div>
-
         </mat-card>
 
         <mat-card class="smallContainer2 gap">
@@ -60,7 +69,7 @@
           <mat-card-subtitle class="smallHeadline">Recorded Classes</mat-card-subtitle>
           <div class="row">
             <img mat-card-image src="../../../../assets/learner/video-tutorial.svg">
-            <span class="number">12</span>
+            <span class="number">{{recordedSessions}}</span>
           </div>
         </mat-card>
       </div>
@@ -75,11 +84,14 @@
             <th>Date</th>
             <th>Present?</th>
           </tr>
-          <tr *ngFor="let atd of sessionAttendance">
-            <td>{{atd.session}}</td>
-            <td>{{atd.topic}}</td>
-            <td>{{atd.date | date: 'dd/MM/yyyy hh:mm'}}</td>
-            <td>{{atd.isPresent}}</td>
+          <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
+            <td>{{i+1}}</td>
+            <td>{{atd.topicDetails.topicname}}</td>
+            <td>{{atd.topicDetails.startdate | date: 'dd/MM/yyyy hh:mm'}}</td>
+            <td>
+              <mat-icon *ngIf="atd.topicDetails.attendencedetails.Attendence === 'yes'" style="color: green;">done</mat-icon>
+              <mat-icon *ngIf="atd.topicDetails.attendencedetails.Attendence === 'no'" style="color: red;">close</mat-icon>
+            </td>
           </tr>
         </table>
       </div>
@@ -92,17 +104,21 @@
     <div class="row">
       <mat-nav-list>
         <mat-list-item *ngFor="let los of listOfSessions" class="row">
-          <mat-card class="sessionCard">
+          <mat-card class="sessionCard" (click)="useSession(los)">
             <div class="row">
               <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
                 <img height="220" width="180"
-                src="https://www.edureka.co/blog/wp-content/uploads/2017/01/What-is-Data-Science-A-2.png">
-                <h4>{{los.activity_details.Status}}</h4>
+                  src="https://www.edureka.co/blog/wp-content/uploads/2017/01/What-is-Data-Science-A-2.png">
+                <h4 style="float: right;
+                background: green;
+                margin-left: -43px;
+                color: white;">{{los.status}}</h4>
               </div>
               <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
                 <h4 style="margin-left: 20px;">{{los.activity_details.topicname}}</h4>
-                <h5 style="margin-left: 20px;">Starting On: {{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm'}}</h5>
-                <h5 style="margin-left: 20px;">Duration: {{los.duration}}</h5>
+                <h5 style="margin-left: 20px;">Starting On:
+                  {{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm'}}</h5>
+                <h5 style="margin-left: 20px;">Duration: {{los.duration}} </h5>
               </div>
             </div>
           </mat-card>
@@ -112,68 +128,3 @@
   </div>
 
 </div>
-
-
-<!-- <div class="formLayout">
-
-  <div layout="row"> -->
-<!-- <div flex>
-      <mat-card class="imgLayout">
-        <div layout="row">
-          <div layout="row" layout-margin>
-            <div flex>
-
-            </div>
-          </div>
-          <div layout="row" layout-margin>
-            <div flex style="font-size: large;color: white;">Introduction to the Quality Management Systems</div>
-          </div>
-        </div>
-      </mat-card>
-      <div class="row" style="margin-top: 5%;">
-        <mat-card class="smallContainer1">
-          <mat-card-subtitle>Total Classes</mat-card-subtitle>
-        </mat-card>
-
-        <mat-card class="smallContainer2">
-          <mat-card-subtitle>Attended Classes</mat-card-subtitle>
-        </mat-card>
-
-        <mat-card class="smallContainer3">
-          <mat-card-subtitle>Recorded Classes</mat-card-subtitle>
-        </mat-card>
-      </div>
-      <div class="row" style="margin-top: 5%; margin-left: 5px;">
-        <h5>My Attendance</h5>
-        <tabel>
-          <tr>
-            <th>Session #</th>
-            <th style="min-width: 400px;">Topic Name</th>
-            <th>Date</th>
-            <th>Present?</th>
-          </tr>
-          <tr *ngFor="let atd of sessionAttendance">
-            <td>{{atd.session}}</td>
-            <td>{{atd.topic}}</td>
-            <td>{{atd.date | date: 'dd/MM/yyyy hh:mm'}}</td>
-            <td>{{atd.isPresent}}</td>
-          </tr>
-        </tabel>
-      </div>
-    </div> -->
-
-<!-- Right Side Panel -->
-<!-- <div flex="20" style="margin-left: 5%;">
-      <h4 style="margin-left: 20%;">Upcoming Sessions and Recorded Sessions</h4>
-      <mat-nav-list>
-        <mat-list-item *ngFor="let los of listOfSessions" class="row">
-          <mat-card class="sessionCard">
-            <img height="220" width="180" [src]="los.img">
-            <mat-card-subtitle>{{los.name}}</mat-card-subtitle>
-          </mat-card>
-        </mat-list-item>
-      </mat-nav-list>
-    </div> -->
-
-<!-- </div>
-</div> -->

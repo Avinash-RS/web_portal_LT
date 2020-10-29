@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LearnerServicesService } from '../../services/learner-services.service';
+const courseid = 'tbiwys0m';
+const userid = 'aj1yej';
 
 @Component({
   selector: 'app-instructor-led',
@@ -12,129 +14,112 @@ export class InstructorLedComponent implements OnInit {
   sessionAttendance: any;
   listOfSessions: any;
   course: any;
+  activityShow: any;
+  totalSessions: any;
+  recordedSessions: any;
+  attendedSessions: any;
 
   constructor(private router: Router,
-    private learnerService: LearnerServicesService) {
-    this.course = (this.router.getCurrentNavigation() && this.router.getCurrentNavigation().extras &&
-      this.router.getCurrentNavigation().extras.state && this.router.getCurrentNavigation().extras.state.detail);
-    // console.log(detail);
+              private learnerService: LearnerServicesService) {
+              this.course = (this.router.getCurrentNavigation() && this.router.getCurrentNavigation().extras &&
+                this.router.getCurrentNavigation().extras.state && this.router.getCurrentNavigation().extras.state.detail);
+              // console.log(detail);
   }
 
   ngOnInit() {
     this.getAttendance();
     this.getSessionsList();
-    console.log(this.course);
-    console.log(this.router.getCurrentNavigation());
   }
 
   getBack() {
-    console.log('ggg');
     this.router.navigateByUrl('/Learner/MyCourse');
   }
 
   getAttendance() { // Http Call
-    this.sessionAttendance = [{
-      session: '1',
-      topic: 'Matrix Algebra',
-      date: new Date(),
-      isPresent: true
-    }, {
-      session: '2',
-      topic: 'Explainations of Mathemetical Functions',
-      date: new Date(),
-      isPresent: true
-    }, {
-      session: '3',
-      topic: 'Fourier Series',
-      date: new Date(),
-      isPresent: false
-    }, {
-      session: '4',
-      topic: 'Advanced Design of Reinforced Concrete Building',
-      date: new Date(),
-      isPresent: true
-    }];
+    debugger
+    const obj = {
+      "batchid": "443222669025448",
+      "courseid": courseid,
+      "full_name": "Student002"
+    };
+    this.learnerService.getAttendanceByUsername(obj).subscribe(res => {
+      console.log(res);
+      this.sessionAttendance = res.data;
+      this.attendedSessions = this.sessionAttendance.count(x => x.topicDetails.attendencedetails.Attendence === 'yes');
+      console.log(this.attendedSessions);
+      console.log(this.sessionAttendance);
+    });
   }
 
-  async getDiff(dateFuture, dateNow) {
-    let diffInMilliSeconds = Math.abs(dateFuture - dateNow) / 1000;
-
-    // calculate days
-    const days = Math.floor(diffInMilliSeconds / 86400);
-    diffInMilliSeconds -= days * 86400;
-    console.log('calculated days', days);
-
-    // calculate hours
-    const hours = Math.floor(diffInMilliSeconds / 3600) % 24;
-    diffInMilliSeconds -= hours * 3600;
-    console.log('calculated hours', hours);
-
-    // calculate minutes
-    const minutes = Math.floor(diffInMilliSeconds / 60) % 60;
-    diffInMilliSeconds -= minutes * 60;
-    console.log('minutes', minutes);
-    let difference = '';
-    if (days > 0) {
-      difference += (days === 1) ? `${days} day, ` : `${days} days, `;
+  getTimes(endDate, startDate) {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const s: any = start;
+    const e: any = end;
+    let diff: any = (e - s) / 60000;
+    diff = parseInt(diff, 10);
+    let context = '';
+    let hh = 0;
+    let mm = 0;
+    if (diff > 59) {
+      hh = (diff / 60);
+      mm = (diff % 60);
+      if (mm) {
+        context = hh + ' hour' + mm + ' minutes';
+      } else {
+        context = hh + ' hour';
+      }
+    } else {
+      hh = 0;
+      mm = diff;
+      context = mm + ' minutes';
     }
-    difference += (hours === 0 || hours === 1) ? `${hours} hour, ` : `${hours} hours, `;
-    difference += (minutes === 0 || hours === 1) ? `${minutes} minutes` : `${minutes} minutes`;
-    return difference;
+    return context;
   }
 
   getSessionsList() { // Http Call
-
-    const userDetails = JSON.parse(sessionStorage.getItem('UserDetails'));
-    console.log(userDetails.user_id);
     const date = '2020-10-27'; // new Date();
-    const courseid = 'tbiwys0m';
-    const userid = 'aj1yej';
     this.learnerService.getReadLeanerActivity(userid, date, courseid).subscribe(async res => {
-      console.log(res);
       this.listOfSessions = res.data['get_read_learner_activity']['message'];
+      this.totalSessions = this.listOfSessions.length;
+      this.recordedSessions = this.listOfSessions.length;
       for (const los of this.listOfSessions) {
-        console.log(los.activity_details.startDate);
-        console.log(los.activity_details.endDate);
-        los.duration = await this.getDiff(los.activity_details.startDate, los.activity_details.endDate);
+        los.duration = await this.getTimes(los.activity_details.enddate, los.activity_details.startdate);
       }
       console.log(this.listOfSessions);
+      this.onGoingSession();
     });
-    // this.learnerService.getReadLeanerActivity('443222669025448', 'tbiwys0m').subscribe( async res => {
-    //   debugger
-    //   console.log(res);
+  }
 
-    // });
+  useSession(los) {
+    console.log(los);
+    this.activityShow = los;
+    if (los.status === 'On going') {
+      this.activityShow.button = 'Join Now';
+    } else if (los.status !== 'Up Coming') {
+      this.activityShow.button = 'Play Now';
+    }
+  }
 
-    // this.listOfSessions = [{
-    //   name: 'Quality Planing',
-    //   status: 'Upcoming',
-    //   startedAt: new Date(),
-    //   duration: '1 hour',
-    //   img: 'https://www.edureka.co/blog/wp-content/uploads/2017/01/What-is-Data-Science-A-2.png'
-    // }, {
-    //   name: 'Analysis and Reporting',
-    //   status: 'Upcoming',
-    //   startedAt: new Date(),
-    //   duration: '1 hour',
-    //   img: 'https://www.edureka.co/blog/wp-content/uploads/2017/01/What-is-Data-Science-A-2.png'
-    // }, {
-    //   name: 'Best Marketing Analytics Courses in 2020',
-    //   status: 'Upcoming',
-    //   startedAt: new Date(),
-    //   duration: '1 hour',
-    //   img: 'https://www.edureka.co/blog/wp-content/uploads/2017/01/What-is-Data-Science-A-2.png'
-    // }, {
-    //   name: 'Online Course on Python Version 2020',
-    //   status: 'Completed',
-    //   startedAt: new Date(),
-    //   duration: '1 hour',
-    //   img: 'https://www.edureka.co/blog/wp-content/uploads/2017/01/What-is-Data-Science-A-2.png'
-    // }, {
-    //   name: 'Medical Courses in India After 12th',
-    //   status: 'Completed',
-    //   startedAt: new Date(),
-    //   duration: '1 hour',
-    //   img: 'https://www.edureka.co/blog/wp-content/uploads/2017/01/What-is-Data-Science-A-2.png'
-    // }];
+  onGoingSession() {
+    const ongoing = this.listOfSessions.find(x => x.activity_details.status === 'On going');
+    if (ongoing === undefined) {
+      const upcoming = this.listOfSessions.find(x => x.activity_details.status === 'Up Coming');
+      if (upcoming === undefined) {
+        this.activityShow = this.listOfSessions[0];
+        this.activityShow.button = 'Play Now';
+      } else {
+        this.activityShow = upcoming;
+        // this.activityShow.button = '';
+      }
+    } else {
+      this.activityShow = ongoing;
+      this.activityShow.button = 'Join Now';
+    }
+    console.log(this.activityShow);
+  }
+
+  getAction(link) {
+    window.open(link, '_blank');
   }
 }
