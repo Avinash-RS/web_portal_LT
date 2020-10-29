@@ -77,6 +77,7 @@ import { KnowledgeResourceHomeComponent } from './pages/knowledge-resource-home/
 import { KnowledgeLandingPageComponent } from './pages/knowledge-landing-page/knowledge-landing-page.component';
 import { KnowledgePreviewComponent } from './pages/knowledge-preview/knowledge-preview.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FilterPipe } from '../pipes/filter.pipe';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -277,7 +278,8 @@ const routes: Routes = [
     InstructorLedComponent,
     KnowledgePreviewComponent,
     KnowledgeLandingPageComponent,
-    KnowledgeResourceHomeComponent
+    KnowledgeResourceHomeComponent,
+    FilterPipe
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

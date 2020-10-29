@@ -961,5 +961,3 @@ getprojectActivityData(userId, courseId) {
   }
 
 }
-
-
