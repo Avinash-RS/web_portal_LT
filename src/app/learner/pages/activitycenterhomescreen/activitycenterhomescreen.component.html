@@ -14,9 +14,14 @@
         </div>
         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
             <h2 class="next_activity m-b-0 mt8">Next activity on</h2>
-            <h3 class="m-b-0 color_red f-w-800">15th October 2020 | 11:00 AM</h3>
-            <h2 class="m-b-0 f_size_15 color_red">Perform pollutionlevel and corrosion</h2>
-          
+            <!-- <h3 class="m-b-0 color_red f-w-800">15th October 2020 | 11:00 AM</h3>
+            <h2 class="m-b-0 f_size_15 color_red">Perform pollutionlevel and corrosion</h2> -->
+            <h3 class="m-b-0 color_red f-w-800">{{details?.nextactivity[0].activitystartdate | date:'longDate'}} | {{details?.nextactivity[0].activitystartdate | date:'shortTime'}} </h3>
+            <div  *ngFor="let activities of details.nextactivity">
+            <h2 class="m-b-0 f_size_15">{{activities.activity}} - {{activities.activityname}} </h2>
+            <!-- <h2 class="m-b-0 f_size_15">{{activities.activity}} - {{activities.activityname}} </h2>
+            <h2 class="m-b-0 f_size_15">{{activities.activity}} - {{activities.activityname}} </h2> -->
+          </div>
         </div>
       </div>
       <!-- </mat-card-content> -->

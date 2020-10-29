@@ -1847,6 +1847,15 @@ export const get_active_course_count = gql`
                   Graded
                   Completed
                   Allactivites
+                  nextactivity{
+                    activitystartdate
+                     activityenddate
+                     module_id
+                     topic_id
+                     activity
+                     activityname
+             }
+
           }
         }
       }
