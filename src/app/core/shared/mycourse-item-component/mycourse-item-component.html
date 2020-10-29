@@ -39,24 +39,24 @@
             <div class="coursePoints">
               <table class="f_size_12">
                 <tr>
-                  <td>Instructor lead session</td>
-                  <td>-</td>
+                  <td>Instructor led session</td>
+                  <td>N/A</td>
                 </tr>
                 <tr>
-                  <td>Self paces learning</td>
-                  <td>-</td>
+                  <td>Self paced learning</td>
+                  <td>N/A</td>
                 </tr>
                 <tr>
                   <td>Mid course project</td>
-                  <td>-</td>
+                  <td>N/A</td>
                 </tr>
                 <tr>
                   <td>Internal assessment</td>
-                  <td>-</td>
+                  <td>N/A</td>
                 </tr>
                 <tr>
                   <td>Final assessment</td>
-                  <td>-</td>
+                  <td>N/A</td>
                 </tr>
               </table>
             </div>
@@ -83,7 +83,7 @@
             }}</p>
             </div>
             <div class="col-2 no_padding">
-              Credits: -
+              Credits: N/A
             </div>
           </div>
           <div class="row">
@@ -116,7 +116,7 @@
                   Instructor led session completed
                 </div>
                 <div class="col-3">
-                  <strong>--/--</strong>
+                  N/A
                 </div>
               </div>
               <div class="row">
@@ -124,7 +124,7 @@
                   Internal assessment completed
                 </div>
                 <div class="col-3">
-                  <strong>--/--</strong>
+                  N/A
                 </div>
               </div>
               <div class="row">
@@ -132,7 +132,7 @@
                   Mid course project completed
                 </div>
                 <div class="col-3">
-                  <strong>--/--</strong>
+                  N/A
                 </div>
               </div>
               <div class="row">
@@ -140,7 +140,7 @@
                   Final assessment completed
                 </div>
                 <div class="col-3">
-                  <strong>--/--</strong>
+                  N/A
                 </div>
               </div>
             </div>
@@ -149,8 +149,8 @@
                 <div >
                   <circle-progress [percent]="0" [radius]="10"
                     [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'"
-                    [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="4" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true"
-                    [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" subtitle="--/16"
+                    [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="4" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="5" [animation]="true"
+                    [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" subtitle="01/16"
                     [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=500>
                   </circle-progress>
                 </div>
@@ -199,9 +199,8 @@
               </div>
               <div class="row m-t-10px">
                 <div class="col-7">
-                  <div>
-                    <span class="pointer" >
-                      <!-- (click)="course.progressionExp?course.progressionExp=false:course.progressionExp=true" -->
+                  <div style="display: none;">
+                    <span class="pointer" (click)="course.progressionExp?course.progressionExp=false:course.progressionExp=true">
                       <span class="f_size_10">{{course.progressionExp?'Hide details':'See more details' }}</span>
                       <mat-icon *ngIf="!course.progressionExp" class="f_size_10" fontSet="material-icons-outlined">
                         keyboard_arrow_down</mat-icon>
@@ -209,8 +208,8 @@
                         keyboard_arrow_up</mat-icon>
                     </span>
                     <div *ngIf="course.progressionExp" class="f_size_12">
-                      Modules completed --/--<br>
-                      Topics completed --/--<br>
+                      Modules completed N/A<br>
+                      Topics completed N/A<br>
                       <span class="pointer f_size_10" style="color: red; text-decoration: underline;" >View self-learning activity details..</span>
                     </div>
                   </div>
@@ -218,7 +217,7 @@
                 <div class="col-5">
                   <button mat-stroked-button *ngIf="
                                             course?.coursePlayerStatus?.status !== 'completed'
-                                          " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                                          " class="btl-alin blue_clr cap pointer m-t-05 m-l-10px" (click)="gotoDesc(course)">
                     <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                     <span class="cap f_wt_400 m-t-m-2">
                       {{
@@ -256,7 +255,7 @@
               <div class="row pseudoheight"></div>
               <div class="row m-t-10px">
                 <div class="col-7">
-                  <div>
+                  <div style="display: none;">
                     <span class="pointer" >
                       <!-- (click)="course.ledinstExp?course.ledinstExp=false:course.ledinstExp=true" -->
                       <span class="f_size_10">{{course.ledinstExp?'Hide details':'See more details' }}</span>
@@ -266,13 +265,13 @@
                         keyboard_arrow_up</mat-icon>
                     </span>
                     <div *ngIf="course.ledinstExp" class="f_size_13">
-                      Sessions attended --/--<br>
+                      Sessions attended N/A<br>
                       <span class="pointer f_size_10" style="color: red; text-decoration: underline;" >View sessions details..</span>
                     </div>
                   </div>
                 </div>
                 <div class="col-5">
-                  <button mat-stroked-button class="btl-alin blue_clr cap pointer">
+                  <button mat-stroked-button class="btl-alin blue_clr cap pointer m-l-10px">
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Join" | translate }}&nbsp;
                     </span>
@@ -302,7 +301,7 @@
               <div class="row pseudoheight"></div>
               <div class="row m-t-10px">
                 <div class="col-7">
-                  <div>
+                  <div style="display: none;">
                     <span class="pointer" >
                       <!-- (click)="course.discussExp?course.discussExp=false:course.discussExp=true" -->
                       <span class="f_size_10">{{course.discussExp?'Hide details':'See more details' }}</span>
@@ -320,7 +319,7 @@
                   </div>
                 </div>
                 <div class="col-5">
-                  <button mat-stroked-button class="btl-alin blue_clr cap pointer" (click)="goToForum(course)">
+                  <button mat-stroked-button class="btl-alin blue_clr cap pointer m-l-10px" (click)="goToForum(course)">
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Collaborate" | translate }}&nbsp;
                     </span>
@@ -344,7 +343,7 @@
               <div class="row pseudoheight"></div>
               <div class="row m-t-10px">
                 <div class="col-7">
-                  <div>
+                  <div style="display: none;">
                     <span class="pointer" >
                       <!-- (click)="course.activityExp?course.activityExp=false:course.activityExp=true" -->
                       <span class="f_size_10">{{course.activityExp?'Hide details':'See more details' }}</span>
@@ -354,8 +353,8 @@
                         keyboard_arrow_up</mat-icon>
                     </span>
                     <div *ngIf="course.activityExp" class="f_size_13">
-                      Assignments completed --/--<br>
-                      Projects completed --/--<br>
+                      Assignments completed N/A<br>
+                      Projects completed N/A<br>
                       <span class="pointer f_size_10" style="color: red; text-decoration: underline;" (click)="gotoSubmissionDetails(course)">View submission details..</span>
                     </div>
                   </div>
@@ -366,7 +365,7 @@
                   </div> -->
                 </div>
                 <div class="col-5">
-                  <button mat-stroked-button class="btl-alin blue_clr cap pointer" (click)="Go(course)">
+                  <button mat-stroked-button class="btl-alin blue_clr cap pointer m-l-10px" (click)="Go(course)">
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Go" | translate }}&nbsp;
                     </span>
