@@ -64,12 +64,12 @@
           </div>
         </div>
         <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-          <div class="f_size_18 f_wt_500  coursename">
+          <div class="f_size_17 f_wt_600  coursename">
             <p class="courceNameTag" title="{{course.course_name}}" placement="top">
               {{course.course_name}}
             </p>
           </div>
-          <div class="row">
+          <div class="row color_g">
             <div class="col-5">
               <p style="margin-bottom:10px"> By:
                 {{course.author_details[0].author_name?course.author_details[0].author_name:'N/A'}}
@@ -88,7 +88,7 @@
               Credits: N/A
             </div>
           </div>
-          <div class="row">
+          <div class="row color_g" >
             <div class="col-5" style="margin-bottom:10px;">
               Start Date:
               {{course.course_start_datetime?(course.course_start_datetime|date:'dd MMM yyyy'):'N/A' }}

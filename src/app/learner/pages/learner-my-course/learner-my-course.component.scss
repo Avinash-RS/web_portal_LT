@@ -611,7 +611,7 @@ hr {
 }
 
 .color_black2 {
-  color: $label;
+  color: $lxp-footer-text;
 }
 
 :host ::ng-deep .mat-progress-bar-buffer {
@@ -1509,9 +1509,12 @@ hr {
   .courceNameTag {
     width: 100% !important;
   }
-
+  .color_g {
+    color: $lxp-icon;
+  }
   .coursenameCol {
     margin-top: 10px;
+    letter-spacing: 0.5px;
   }
 
   .roledropdowniconSelect {
