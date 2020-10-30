@@ -20,7 +20,7 @@
   </div>
   <div *ngIf="!expandSearch" class="row w-100 mr-0 ml-0">
     <!-- *ngIf="jobRole?.length < 1" -->
-    <div class="col-10 col-sm-10 col-md-7 col-lg-7 catalogTitle" >
+    <div class="col-10 col-sm-10 col-md-7 col-lg-7 catalogTitle">
       <div class="f_size_16 myCourses"><span class="module"> <b>My Courses</b></span></div>
     </div>
     <!-- <div class="col-10 col-sm-10 col-md-7 col-lg-7 pl-0 pr-0 catalogTitle" *ngIf="jobRole?.length > 0">
@@ -264,11 +264,11 @@
           <!-- Card start -->
           <div *ngFor="let course of incomplete; let j = index">
             <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
-            </div>
+          </div>
           <!-- card end -->
 
           <div *ngIf="onGoingCourseCount === 0">
-            <mat-card class="coursebg width_90 errorCard">
+            <!-- <mat-card class="coursebg width_90 errorCard">
               <div class="row width_90 no_margin">
                 <div class="col-4 col-sm-4 col-md-1 display_flex pointer no_pl mt-4" (click)="gotoDesc(course)">
                   <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
@@ -278,7 +278,17 @@
                 </div>
               </div>
             </mat-card>
-            <hr class="hr-tag" />
+            <hr class="hr-tag" /> -->
+            <mat-card class="coursebg center_align center">
+              <div class="row center">
+                <div class="pointer" (click)="gotoDesc(course)">
+                  <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
+                </div>
+              </div>
+              <div class="row center">
+                <span style="font-size: medium">{{ "You have no courses at the moment!" | translate }}</span>
+              </div>
+            </mat-card>
           </div>
         </mat-tab>
         <mat-tab>
@@ -294,12 +304,12 @@
 
           <!-- Card start -->
           <div *ngFor="let course of incomplete; let j = index">
-            <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component> 
+            <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
           </div>
           <!-- card end -->
 
           <div *ngIf="onGoingCourseCount === 0">
-            <mat-card class="coursebg width_90 errorCard">
+            <!-- <mat-card class="coursebg width_90 errorCard">
               <div class="row width_90 no_margin">
                 <div class="col-4 col-sm-4 col-md-1 display_flex pointer no_pl mt-4" (click)="gotoDesc(course)">
                   <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
@@ -309,7 +319,17 @@
                 </div>
               </div>
             </mat-card>
-            <hr class="hr-tag" />
+            <hr class="hr-tag" /> -->
+            <mat-card class="coursebg center_align center">
+              <div class="row center">
+                <div class="pointer" (click)="gotoDesc(course)">
+                  <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
+                </div>
+              </div>
+              <div class="row center">
+                <span style="font-size: medium">{{ "You have no courses at the moment!" | translate }}</span>
+              </div>
+            </mat-card>
           </div>
         </mat-tab>
         <mat-tab>
@@ -326,7 +346,7 @@
           </div>
 
           <div *ngIf="completedCourseCount === 0">
-            <mat-card class="coursebg width_90 errorCard">
+            <!-- <mat-card class="coursebg width_90 errorCard">
               <div class="row width_90 no_margin">
                 <div class="col-4 col-sm-4 col-md-1 display_flex pointer no_pl mt-4" (click)="gotoDesc(course)">
                   <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
@@ -339,6 +359,20 @@
               </div>
             </mat-card>
             <hr class="hr-tag" />
+          </div> -->
+            <mat-card class="coursebg center_align center">
+              <div class="row center">
+                <div class="pointer" (click)="gotoDesc(course)">
+                  <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
+                </div>
+              </div>
+              <div class="row center">
+                <span style="font-size: medium">{{
+                  "You have no courses at the moment!" | translate
+                }}</span>
+              </div>
+            </mat-card>
+            <!-- <hr class="hr-tag" /> -->
           </div>
         </mat-tab>
         <mat-tab>
@@ -409,7 +443,7 @@
                                   <a class="" style="color: red; font-size: 10px !important;" [routerLink]="" (click)="gotoSubmissionDetails(course)">View submission details</a>
                                 </div>
                               </div> -->
-                            <!-- </div>
+            <!-- </div>
                             <div class="col-4">
                               <button mat-stroked-button class="btl-alin blue_clr cap pointer"
                               (click)="Go(course)">
@@ -731,11 +765,11 @@
               </div>
             </mat-card>
             <div style="border-bottom: 1px solid #cccccc7a"></div> -->
-             <!-- card end -->
+            <!-- card end -->
           </div>
 
           <div *ngIf="allCourseCount === 0">
-            <mat-card class="coursebg width_90 errorCard">
+            <!-- <mat-card class="coursebg width_90 errorCard">
               <div class="row width_90 no_margin">
                 <div class="col-4 col-sm-4 col-md-1 display_flex pointer no_pl mt-4" (click)="gotoDesc(course)">
                   <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
@@ -747,7 +781,17 @@
                 </div>
               </div>
             </mat-card>
-            <hr class="hr-tag" />
+            <hr class="hr-tag" /> -->
+            <mat-card class="coursebg center_align center">
+              <div class="row center">
+                <div class="pointer" (click)="gotoDesc(course)">
+                  <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
+                </div>
+              </div>
+              <div class="row center">
+                <span style="font-size: medium">{{ "You have no courses at the moment!" | translate }}</span>
+              </div>
+            </mat-card>
           </div>
         </mat-tab>
         <!-----------------------------------Category tabs----------------------------->
@@ -774,7 +818,7 @@
               <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
             </div>
             <div *ngIf="allCourseCount === 0">
-              <mat-card class="coursebg width_90 errorCard">
+              <!-- <mat-card class="coursebg width_90 errorCard">
                 <div class="row width_90 no_margin">
                   <div class="col-4 col-sm-4 col-md-1 display_flex pointer no_pl mt-4" (click)="gotoDesc(course)">
                     <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
@@ -786,7 +830,17 @@
                   </div>
                 </div>
               </mat-card>
-              <hr class="hr-tag" />
+              <hr class="hr-tag" /> -->
+              <mat-card class="coursebg center_align center">
+                <div class="row center">
+                  <div class="pointer" (click)="gotoDesc(course)">
+                    <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
+                  </div>
+                </div>
+                <div class="row center">
+                  <span style="font-size: medium">{{ "You have no courses at the moment!" | translate }}</span>
+                </div>
+              </mat-card>
             </div>
           </mat-tab>
         </ng-container>
