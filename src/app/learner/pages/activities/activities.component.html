@@ -1,7 +1,14 @@
 <app-header></app-header>
 <div class="con-1">
-  <span class="back" routerLink="/Learner/MyCourse" routerLinkActive="active"> < Back</span><br><br>
-  <p><b>{{courseName}}</b></p>
+  <!-- <span class="back" routerLink="/Learner/MyCourse" routerLinkActive="active"> < Back</span><br><br> -->
+  <span class="redHover">
+    <mat-icon class="material-icons f_size_15 backIc pointer" (click)="goToCourse()">arrow_back_ios
+    </mat-icon>
+    <span class="f_size_19 pointer" (click)="goToCourse()">
+      Back
+    </span>
+  </span>
+  <p class="courseName"><b>{{courseName}}</b></p>
   <mat-tab-group animationDuration="1000ms">
     <mat-tab label="Assignments">
       <mat-accordion class="example-headers-align" multi *ngIf="assignmentContent?.coursedetails.length > 0">
