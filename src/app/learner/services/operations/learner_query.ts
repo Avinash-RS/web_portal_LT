@@ -1074,6 +1074,22 @@ export const getLearnerenrolledCourses = gql`
     ) {
       success
       message
+      global_data{
+        author
+        course_progression_data{
+          instructor_lead_session
+          internal_assesment_completed
+          mid_course_project_completed
+          final_assesment_completed
+        }
+        on_hover_image_data{
+          instructor_lead_session
+          self_paced_learning
+          mid_course_project
+          internal_assesment
+          final_assesment
+        }
+      }
       data {
         suspend {
           _id

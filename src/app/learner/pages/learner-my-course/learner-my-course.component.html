@@ -263,7 +263,7 @@
 
           <!-- Card start -->
           <div *ngFor="let course of incomplete; let j = index">
-            <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
+            <app-mycourse-item-component [globalData] = "globalData" [courseItems]="course"></app-mycourse-item-component>
             </div>
           <!-- card end -->
 
@@ -294,7 +294,7 @@
 
           <!-- Card start -->
           <div *ngFor="let course of incomplete; let j = index">
-            <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component> 
+            <app-mycourse-item-component [globalData] = "globalData" [courseItems]="course"></app-mycourse-item-component> 
           </div>
           <!-- card end -->
 
@@ -321,7 +321,8 @@
               }}" matBadgeOverlap="false">{{ "Completed" | translate }}</span>
           </ng-template>
           <div *ngFor="let course of completed; let j = index">
-            <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
+            <!-- show 100% by default for completed courses // time-being for pilot run -->
+            <app-mycourse-item-component [courseItems]="course" [globalData] = "globalData" [completedCourse] = "100"></app-mycourse-item-component>
             <div style="border-bottom: 1px solid #cccccc7a"></div>
           </div>
 
@@ -348,7 +349,7 @@
               }}" matBadgeOverlap="false">{{ "All" | translate }}</span>
           </ng-template>
           <div *ngFor="let course of enrolledCourses; let j = index">
-            <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
+            <app-mycourse-item-component [globalData] = "globalData" [courseItems]="course"></app-mycourse-item-component>
             <!-- // Card start for reference-->
             <!-- <mat-card class="coursebg card12" matRipple>
               <div class="row">
@@ -771,7 +772,7 @@
             </ng-template>
 
             <div *ngFor="let course of enrolledCourses; let j = index">
-              <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
+              <app-mycourse-item-component [globalData] = "globalData" [courseItems]="course"></app-mycourse-item-component>
             </div>
             <div *ngIf="allCourseCount === 0">
               <mat-card class="coursebg width_90 errorCard">
