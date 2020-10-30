@@ -165,6 +165,7 @@ export class LearnerMyCourseComponent implements OnInit {
   insidengOnInit() {
     this.CommonServices.openAvailCourcePopup.subscribe((data: any) => {
       this.availableCource = data;
+      console.log(data);
     });
     if (this.screenWidth < 800) {
       this.keyboardUp = false;
@@ -464,7 +465,7 @@ Go(course) {
       // forumVal: true
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
-    // this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+    // this.router.navigateByUrl('/Learner/MyCourse', { state: { detail } });
     this.router.navigateByUrl('/Learner/discussionForum', { state: { detail } });
   }
   gotoSubmissionDetails(c) {

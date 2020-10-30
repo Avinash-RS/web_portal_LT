@@ -1,0 +1,66 @@
+<app-header></app-header>
+<div class="knowledge-landing-container">
+
+  <div class="header-section">
+
+    <nav aria-label="breadcrumb" class="coursebreadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a>Home</a></li>
+        <li class="breadcrumb-item" [routerLink]="['/Learner/knowledge']">
+          <a>knowledge Resource</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+          {{resourceFile[0].area_of_interest}}</li>
+      </ol>
+    </nav>
+
+    <div class="header-carousel">
+      <owl-carousel-o [options]="TopicsOptions" class="questionList">
+        <ng-template *ngFor="let value of topic_list;let i = index" carouselSlide>
+          <div class="topic-container" (click)="onTopicSelection(value)">
+            <div class="{{ selectedTopic == value ? 'topic-chip active-topic' : 'topic-chip'}}">{{value}}</div>
+          </div>
+        </ng-template>
+      </owl-carousel-o>
+
+
+    </div>
+
+
+  </div>
+
+  <div class="main-section">
+    <ng-container *ngFor="let resData of resourceFile">
+      <div class="resource-card" (click)="onPreview(resData)">
+        <div class="card-img">
+          <ng-container *ngIf="resData.fileType == 'pdf'">
+            <img src="../../../../assets/images/PDF-res.svg">
+          </ng-container>
+          <ng-container *ngIf="resData.fileType == 'jpg' || resData.fileType == 'png' || resData.fileType == 'jpeg'">
+            <img src="../../../../assets/images/Image-res.svg">
+          </ng-container>
+          <ng-container *ngIf="resData.fileType == 'mp4'">
+            <img src="../../../../assets/images/video-res.svg">
+          </ng-container>
+          <ng-container *ngIf="resData.fileType == 'mp3'">
+            <img src="../../../../assets/images/Audio-res.svg">
+          </ng-container>
+          <ng-container *ngIf="resData.fileType == undefined || resData.fileType == 'csv'">
+            <img src="../../../../assets/images/Image-res.svg">
+          </ng-container>
+        </div>
+
+        <div class="card-name">
+          <div class="file-name">
+            {{resData.filename}}
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- <ng-container *ngIf="isPreview">
+      <div class="image-container">
+        <img src="https://i.picsum.photos/id/1018/3914/2935.jpg?hmac=3N43cQcvTE8NItexePvXvYBrAoGbRssNMpuvuWlwMKg">
+      </div>
+    </ng-container> -->
+  </div>

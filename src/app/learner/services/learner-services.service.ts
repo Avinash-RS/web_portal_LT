@@ -48,7 +48,9 @@ import {
   getCourseActivities,
   getprojectActivityData,
   getperformActivityData,
-  get_active_course_count
+  get_active_course_count,
+  getActivityDetailsByBatchAndCourseID,
+  getTopicAttendanceDetailsByUsername
 } from './operations/learner_query';
 
 import {
@@ -89,12 +91,18 @@ import {
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
-import { from } from 'rxjs';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
 export class LearnerServicesService {
+
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-type': 'application/json', 'authorization': 'Bearer 104150f8e66cae68b40203e1dbba7b4529231970' })
+  };
+
   envWcaApi: any = environment.wcaapiurl;
   envApi: any = environment.apiUrl;
   envApiImg: any = environment.apiUrlImg;
@@ -778,12 +786,13 @@ export class LearnerServicesService {
     }
   }
 
-  getReadLeanerActivity(userid, date) {
+  getReadLeanerActivity(userid, date, courseid) {
     return this.Apollo.query({
       query: getReadLeanerActivity,
       variables: {
         userid,
-        date
+        date,
+        courseid
       }
     });
   }
@@ -929,6 +938,26 @@ getprojectActivityData(userId, courseId) {
       }
     });
   }
+
+  getActivityDetailsByCourseAndBatchID(batchid, courseid) {
+    return this.Apollo.query({ // Get Activity Details For Instrcutor Led Screen.
+      query: getActivityDetailsByBatchAndCourseID,
+      variables: {
+        batchid,
+        courseid
+      }
+    });
+  }
+
+  getAttendanceByUsername(courseid, full_name, user_id): Observable<any> {
+    return this.Apollo.query({ // Get Activity Details For Instrcutor Led Screen.
+      query: getTopicAttendanceDetailsByUsername,
+      variables: {
+        courseid,
+        full_name,
+        user_id
+      }
+    }).pipe(tap());
+  }
+
 }
-
-
