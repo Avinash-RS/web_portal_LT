@@ -113,10 +113,10 @@ export class LearnerMyCourseComponent implements OnInit {
     private router: Router, private dialog: MatDialog,
     public CommonServices: CommonServicesService) {
     this.route.queryParams.subscribe(params => {
-      console.log(params, 'params');
+      // console.log(params, 'params');
       // for portal integration
       if (params.email_id === undefined) {
-        console.log('inside if');
+        // console.log('inside if');
         this.userDetailes = this.gs.checkLogout();
         this.getEnrolledCourses('', '', '', '', '', '', true);
         this.getScreenSize();

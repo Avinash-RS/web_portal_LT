@@ -105,6 +105,7 @@
     "ngx-perfect-scrollbar": "^5.3.5",
     "ngx-pipes": "^2.7.3",
     "ngx-quill": "^2.2.0",
+    "ngx-socket-io": "^3.2.0",
     "ngx-sortablejs": "^3.1.4",
     "ngx-spinner": "^7.2.0",
     "ngx-toastr": "^10.1.0",

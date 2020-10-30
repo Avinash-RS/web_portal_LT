@@ -12,6 +12,7 @@ export const environment = {
   domain : 'LXP',
   analytics: 'UA-171656647-1',
   systemIp : 'http://api.ipify.org/?format=json',
+  socketio : 'http://20.40.0.83:3009'
 };
 // export const environment = {
 //   production: false,

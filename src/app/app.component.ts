@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { slideInAnimation } from './router.animation';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { environment } from '@env/environment.collageConnect';
+import { SocketioService } from '@learner/services/socketio.service';
 
 
 @Component({
