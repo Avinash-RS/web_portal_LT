@@ -3,6 +3,12 @@
   <!-- <span class="headTit">&nbsp;LARSEN & TOUBRO</span> -->
   <span class="spacer"></span>
   <div class="tab" *ngIf="show">
+    <button class="btn1 float-right" [ngClass]="activeUrl === '/Learner/knowledge' ? 'colgreen' : 
+    'colWhite'" md-raised-button routerLink="/Learner/knowledge" routerLinkActive="active">
+      <mat-icon fontSet="material-icons-outlined " class="headicon animated animatedFadeInUp fadeInUp" inline=true>
+        event_note </mat-icon>
+      Knowledge Resources
+    </button>
     <!-- <button class="btn1 float-right mr-4" [ngClass]="activeUrl === '/Learner/activitycenterhomescreen' ? 'colgreen' : 
     'colWhite'" md-raised-button disabled> -->
     <button class="btn1 float-right mr-4 ac-btn" [ngClass]="activeUrl === '/Learner/activitycenterhomescreen' ? 'colgreen' : 
@@ -11,19 +17,6 @@
         offline_bolt </mat-icon>  -->
       <img class="activity-icon animated animatedFadeInUp fadeInUp" alt=""
         src="assets/learner/ActivityCentre.svg">Activity Center
-    </button>
-    <button class="btn1 float-right" [ngClass]="activeUrl === '/Learner/knowledge' ? 'colgreen' : 
-    'colWhite'" md-raised-button routerLink="/Learner/knowledge" routerLinkActive="active">
-      <mat-icon fontSet="material-icons-outlined " class="headicon animated animatedFadeInUp fadeInUp" inline=true>
-        event_note </mat-icon>
-      Knowledge Resources
-    </button>
-
-    <button class="btn1 float-right mr-4" [ngClass]="activeUrl === '/Learner/activitycenterhomescreen' ? 'colgreen' : 
-    'colWhite'" md-raised-button routerLink="/Learner/activitycenterhomescreen">
-
-      <mat-icon fontSet="material-icons-outlined" class="headicon animated animatedFadeInUp fadeInUp " inline=true>
-        offline_bolt </mat-icon> Activity Center
     </button>
     <button class="btn1 float-right mr-4" [ngClass]="activeUrl === '/Learner/calendar' ? 'colgreen' : 
     'colWhite'" md-raised-button routerLink="/Learner/calendar" routerLinkActive="active">
