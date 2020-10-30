@@ -15,7 +15,7 @@ import { MatDialog, MatSidenav, MatTabGroup } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
-
+import { SocketioService } from '@learner/services/socketio.service';
 import { TranslateService } from '@ngx-translate/core';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
@@ -102,7 +102,7 @@ export class CoursedetailsComponent implements OnInit {
   playerMenuEnable = false;
   viewScrollBar = false;
   // initials: any;
-  constructor(public translate: TranslateService, private router: ActivatedRoute,
+  constructor(public translate: TranslateService, private router: ActivatedRoute, public socketService: SocketioService,
               public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
               public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
               public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
@@ -128,14 +128,14 @@ export class CoursedetailsComponent implements OnInit {
       // this.lastpersentage = detail  && detail.persentage || this.localper ;
       this.loading = true;
       this.playerModuleAndTopic(true);
-      this.refreshData();
-      this.autoHide();
+      // this.refreshData();
+      // this.autoHide();
       this.getPlayerNextPrve();
       this.service.viewCurseByID(detail && detail.id || this.localStoCourseid, this.userDetail.user_id)
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
             this.course = viewCourse.data.viewcourse.message;
-            console.log('this.course 1', this.course);
+            // console.log('this.course 1', this.course);
             if (this.detailData !== undefined) {
               this.selectedName = this.detailData?.course_name;
             } else if (this.course !== undefined && this.course !== null) {
@@ -209,6 +209,11 @@ export class CoursedetailsComponent implements OnInit {
       this.selectedTabIndex = emitedData.selectedTabIndex;
       this.performOverLay = false;
     });
+    this.socketService.change.subscribe(result => {
+      if (result.eventId.length > 0) {
+        this.playerModuleAndTopic(false);
+      }
+     });
   }
 
   performPage() {
@@ -396,14 +401,16 @@ export class CoursedetailsComponent implements OnInit {
       this.scromModuleData = this.scromApiData?.childData;
       // tree level
       this.scromModuleData.forEach(childData => {
-        childData.children.forEach(subChild => {
-          if (subChild && subChild.children && subChild.children.length > 0  ) {
-            // Check TOC Weekwise or module topic wise
-            this.treeCourse = true;
-          } else {
-            this.treeCourse = false;
-          }
-        });
+        if (childData &&  childData.children) {
+          childData.children.forEach(subChild => {
+            if (subChild && subChild.children && subChild.children.length > 0  ) {
+              // Check TOC Weekwise or module topic wise
+              this.treeCourse = true;
+            } else {
+              this.treeCourse = false;
+            }
+          });
+        }
       });
       // const tabGroup = this.demo3Tab;
       // if (!tabGroup || !(tabGroup instanceof MatTabGroup)) { return; }
@@ -465,21 +472,21 @@ export class CoursedetailsComponent implements OnInit {
   getfourSelectedIndex(l) {
     this.selectedIndex2 = l;
   }
-  refreshData() {
-    this.dataRefresher =
-      setInterval(() => {
-        this.playerModuleAndTopic(false);
+  // refreshData() {
+  //   this.dataRefresher =
+  //     setInterval(() => {
+  //       this.playerModuleAndTopic(false);
 
-      }, 20000);
-  }
-  autoHide() {
-    this.dataRefresher =
-      setInterval(() => {
-        // this.playerModuleAndTopic(false);
-        this.sider = false;
-        this.playerMenuEnable = true;
-      }, 10000);
-  }
+  //     }, 20000);
+  // }
+  // autoHide() {
+  //   this.dataRefresher =
+  //     setInterval(() => {
+  //       // this.playerModuleAndTopic(false);
+  //       this.sider = false;
+  //       this.playerMenuEnable = true;
+  //     }, 10000);
+  // }
 
   makeFullScreen() {
     const element = document.querySelector('#myPlayer');
@@ -494,16 +501,16 @@ export class CoursedetailsComponent implements OnInit {
   // showHeader() {
   //   this.sider = true;
   // }
-  cancelPageRefresh() {
-    if (this.dataRefresher) {
-      clearInterval(this.dataRefresher);
-    }
-  }
+  // cancelPageRefresh() {
+  //   if (this.dataRefresher) {
+  //     clearInterval(this.dataRefresher);
+  //   }
+  // }
 
   // tslint:disable-next-line:use-life-cycle-interface
-  ngOnDestroy() {
-    this.cancelPageRefresh();
-  }
+  // ngOnDestroy() {
+  //   this.cancelPageRefresh();
+  // }
 
 
   previewDoc(templateRef: TemplateRef<any>, path) {
@@ -611,7 +618,7 @@ export class CoursedetailsComponent implements OnInit {
       const createdby = this.course.created_by;
       this.Lservice.add_topic_reference(userid, batchid, courseid, moduleid, topicid, referenceid, referencestatus, createdby)
         .subscribe((result: any) => {
-          console.log(result);
+          // console.log(result);
         });
     }
   }
