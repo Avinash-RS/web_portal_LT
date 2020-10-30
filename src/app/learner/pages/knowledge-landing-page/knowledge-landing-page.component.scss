@@ -1,0 +1,102 @@
+.knowledge-landing-container {
+    .header-section {
+        border-bottom: 1px solid lightgray;
+        height: 6.5em;
+        padding: 10px 0;
+        .breadcrumb {
+            // background-color: white !important;
+            padding: 0px 0px 0px 15px !important;
+            font-size: 14px;
+            background: transparent !important;
+            a {
+                font-weight: 600;
+            }
+            .active {
+                font-weight: 600;
+                column-count: unset !important;
+            }
+        }
+        .header-carousel {
+            padding-top: 6px;
+            .topic-chip {
+                border: 2px solid #8f8f8f;
+                text-align: center;
+                padding: 10px;
+                border-radius: 48px;
+                &:active {
+                    background-color: #bbbbbb;
+                }
+            }
+            .topic-container {
+                margin-right: 15px !important;
+                .active-topic {
+                    background: lightgrey;
+                }
+            }
+        }
+    }
+    .main-section {
+        max-height: 32em;
+        display: flex;
+        flex-wrap: wrap;
+        overflow: auto;
+        .resource-card {
+            height: 170px;
+            width: 220px;
+            border: 1px solid #707070;
+            margin-top: 20px;
+            border-radius: 5px;
+            margin-left: 30px;
+            cursor: pointer;
+            &:hover {
+                box-shadow: 0px 3px 15px 1px #888888;
+            }
+            .card-img {
+                height: 60%;
+                img {
+                    width: 60px;
+                    height: 100%;
+                    margin-left: 35%;
+                }
+            }
+            .card-name {
+                height: 40%;
+                background: #5c6873;
+                color: white;
+                padding: 10px 10px 5px 10px;
+                .file-name {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
+                }
+            }
+        }
+    }
+}
+
+::ng-deep .knowledge-landing-container .owl-theme .owl-nav {
+    text-align: inherit !important;
+}
+
+::ng-deep .knowledge-landing-container .owl-carousel .owl-nav .owl-next {
+    float: right !important;
+    position: absolute !important;
+    top: 1% !important;
+    right: 0px !important;
+}
+
+::ng-deep .knowledge-landing-container .owl-carousel .owl-stage-outer {
+    margin-left: 40px !important;
+    margin-right: 40px !important;
+}
+
+::ng-deep .knowledge-landing-container .owl-carousel .owl-nav .owl-prev {
+    position: absolute !important;
+    top: 1% !important;
+}
+
+::ng-deep .knowledge-landing-container .owl-carousel.owl-drag .owl-item {
+    width: 150px !important;
+}

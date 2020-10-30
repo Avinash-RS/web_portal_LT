@@ -1,5 +1,7 @@
+@import "variable";
 .selfContainer {
-    max-width: 100% !important;
+    max-width: 90% !important;
+    margin: auto;
 }
 
 .arrowPopup {
@@ -7,10 +9,123 @@
     top: -3px;
 }
 
-.catnamenew {
-    color: #3f444a;
-    text-transform: capitalize;
-    font-size: 16px;
-    margin-left: 2rem;
-    font-weight: 900 !important;
+// .catnamenew {
+//     color: #3f444a;
+//     text-transform: capitalize;
+//     font-size: 16px;
+//     margin-left: 2rem;
+//     // font-weight: 900 !important;
+// }
+.back {
+ margin-left: 22px;
+}
+
+.card {
+    height: 98%;
+    box-shadow: 0px 5px 20px #00000029;
+    border: 0.5px solid #BEBEBE;
+    border-radius: 3px;
+    opacity: 1;
+}
+.courseProgression {
+    position: relative;
+    top: 57px;
+    left: 34px;
+}
+.prog {
+    position: relative;
+    right: 12px;
+}
+.completion {
+    margin-left: 17px;
+}
+.m-l-58 {
+    margin-left: 58px;
+}
+.m-l-40 {
+    margin-left: 40px;
+}
+.m-l-46 {
+    margin-left: 52px;
+}
+.learning {
+    margin-left: 15px;
+}
+.center {
+    position: relative;
+    left: 50px;
+}
+.progressBar {
+position: relative;
+bottom: 31px;
+}
+.gradedot {
+    background-color: #0C781B;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    top: 10px;
+}
+.name {
+    margin-left: 17px;
+}
+
+.box-0-1{
+    margin-top: 10px;
+    width: 100%;
+    padding: 6px;
+    padding-bottom: 0%;
+    overflow: hidden;
+    height: auto;
+    border: none;
+    background: #F5F5F5 0% 0% no-repeat padding-box;
+}
+.box-0-1 :hover {
+    background-color: #F9F2BC;
+}
+.arrow {
+    position: relative;
+    top: 10px;
+}
+.module {
+    margin-top: 23px;
+}
+
+.progressionChart{
+    display: block !important;
+    width: 136px !important;
+    height: 199px !important;
+    position: absolute !important;
+    top: -44px !important;
+    left: 44px !important;
+}
+.activityChart{
+    display: block !important;
+    width: 230px !important;
+    height: 347px !important;
+    position: absolute !important;
+    top: -98px !important;
+}
+.courseName {
+    margin-left: 9px;
+    margin-top: 12px;
+}
+.noData {
+    margin-left: 64px;
+    margin-top: 62px;
+}
+.redHover:hover {
+    color: $lxp-theme-green !important;
+}
+.backIc {
+    width: 10px !important;
+    margin-left: 10px !important;
+}
+.learningCard {
+    box-shadow: 0px 5px 20px #00000029;
+    border: 0.5px solid #BEBEBE;
+    border-radius: 3px;
+    opacity: 1;
 }

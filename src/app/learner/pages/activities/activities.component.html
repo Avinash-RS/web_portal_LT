@@ -1,7 +1,14 @@
 <app-header></app-header>
 <div class="con-1">
-  <span class="back" routerLink="/Learner/MyCourse" routerLinkActive="active"> < Back</span><br><br>
-  <p><b>{{courseName}}</b></p>
+  <!-- <span class="back" routerLink="/Learner/MyCourse" routerLinkActive="active"> < Back</span><br><br> -->
+  <span class="redHover">
+    <mat-icon class="material-icons f_size_15 backIc pointer" (click)="goToCourse()">arrow_back_ios
+    </mat-icon>
+    <span class="f_size_19 pointer" (click)="goToCourse()">
+      Back
+    </span>
+  </span>
+  <p class="courseName"><b>{{courseName}}</b></p>
   <mat-tab-group animationDuration="1000ms">
     <mat-tab label="Assignments">
       <mat-accordion class="example-headers-align" multi *ngIf="assignmentContent?.coursedetails.length > 0">
@@ -216,7 +223,8 @@
         </ng-container>
       </mat-accordion>
       <div class="errormsg" *ngIf="assignmentContent?.coursedetails.length < 1">
-        You have no assignments at the moment!
+        <img class="assignImg" alt="" src="assets/006-assignment1.svg">
+        <span class="msg">You have no assignments at the moment!</span>
       </div>
 
     </mat-tab>
@@ -385,8 +393,9 @@
         </div>
       </div>
       </ng-container>
-      <div *ngIf="performDetails?.length < 1">
-        <p class="errormsg">You have no perform activity at the moment!</p>
+      <div class="noDatamsg" *ngIf="performDetails?.length < 1">
+        <img class="performIcon" alt="" src="assets/book.svg">
+        <span class="performMsg">You have no perform activity at the moment!</span>
       </div>
        </mat-tab>
 
@@ -637,8 +646,9 @@
       </div>
       </div>
     </ng-container>
-      <div *ngIf="projectDetails?.length < 1">
-        <p class="errormsg">You have no project activity at the moment!</p>
+      <div class="noDatamsg" *ngIf="projectDetails?.length < 1">
+        <img class="performIcon" alt="" src="assets/002-project-management.svg">
+        <span class="performMsg">You have no project activity at the moment!</span>
       </div>
     </mat-tab>
 

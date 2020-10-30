@@ -447,7 +447,9 @@ td {
 .color_blue {
   color: $lxp-theme-green !important; //red color
 }
-
+.bg_lxp_red {
+  background-color: $lxp-theme-green !important;
+}
 .color_white {
   color: $color-white !important;
 }
@@ -913,5 +915,11 @@ mat-header-cell,
 
   .mat-expansion-panel-body {
     padding: 0px;
+  }
+}
+
+.knowledge-preview-popup {
+  .mat-dialog-container {
+      padding: 0px !important;
   }
 }

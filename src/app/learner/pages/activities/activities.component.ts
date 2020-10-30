@@ -103,6 +103,9 @@ export class ActivitiesComponent implements OnInit {
   }
 
   ngOnInit() { }
+  goToCourse() {
+    this.route.navigateByUrl('/Learner/MyCourse');
+  }
   getSelectedIndex(i) {
     this.selectedIndex = i;
   }

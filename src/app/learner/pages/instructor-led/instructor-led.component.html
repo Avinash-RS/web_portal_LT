@@ -1,0 +1,135 @@
+<app-header></app-header>
+
+<br>
+<p>
+  <span class="redHover">
+    <mat-icon class="material-icons f_size_15 backIc pointer" (click)="getBack()">arrow_back_ios
+    </mat-icon>
+    <span class="f_size_19 pointer" (click)="getBack()">
+      Back
+    </span>
+  </span>
+</p>
+<span class="headLine">{{course?.name}}</span>
+
+<div class="row">
+  <!-- Left Side Panel ... -->
+  <div class="col-lg-7 col-xl-7 col-md-7 col-sm-6 col-12">
+    <br>
+    <div flex>
+      <mat-card class="imgLayout">
+        <div *ngIf='activityShow === undefined'>
+          <span class="sessionTitle"> No Activities Found..</span>
+        </div>
+        <div layout="row" *ngIf='activityShow !== undefined'>
+          <div layout="row" layout-margin>
+            <div flex style="margin-top: 30px;">
+              <!-- <mat-card> -->
+              <img *ngIf="activityShow?.activity_details.livethumbnail === undefined" height="229" width="369" src="../../../../assets/learner/sessionThumbnail_01.png" />
+              <img *ngIf="activityShow?.activity_details.livethumbnail !== undefined" height="229" width="369" [src]="activityShow?.activity_details.livethumbnail" />
+              <!-- </mat-card> -->
+            </div>
+          </div>
+          <div layout="row" layout-margin style="margin-left: 15px;">
+            
+            <div flex style="margin-top: 30px;">
+              <span class="sessionTitle">{{activityShow?.activity_details.topicname}}</span>
+              <div class="row" style="color: white; margin-top: 10px;">
+                <spaN>Started @ </spaN> <span>
+                  {{ activityShow?.activity_details.startdate | date: 'MMM d, y, h:mm a'}}</span>
+              </div>
+              <div class="row" style="color: white; margin-top: 10px;">
+                <span class="sessionTitle">Duration</span>
+              </div>
+              <div class="row" style="color: white; margin-top: 10px;">
+                <span class="sessionTitle">{{activityShow?.duration}}</span>
+              </div>
+              <div class="row" style="margin-top: 20px;">
+                <button class="actBtn" mat-raised-button
+                  (click)="getAction(activityShow.activity_details.link)">{{activityShow?.button}}</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </mat-card>
+      <div class="row" style="margin-top: 5%;">
+        <mat-card class="smallContainer1 gap">
+          <mat-card-subtitle class="smallHeadline">Total Classes</mat-card-subtitle>
+          <div class="row">
+            <img mat-card-image src="../../../../assets/learner/elearning.svg">
+            <span class="number">{{totalSessions}}</span>
+          </div>
+        </mat-card>
+
+        <mat-card class="smallContainer2 gap">
+          <mat-card-subtitle class="smallHeadline">Attended Classes</mat-card-subtitle>
+          <div class="row">
+            <img mat-card-image src="../../../../assets/learner/students.svg">
+            <span class="number">{{attendedSessions?.true}}</span>
+          </div>
+        </mat-card>
+
+        <mat-card class="smallContainer3">
+          <mat-card-subtitle class="smallHeadline">Recorded Classes</mat-card-subtitle>
+          <div class="row">
+            <img mat-card-image src="../../../../assets/learner/video-tutorial.svg">
+            <span class="number">{{recordedSessions}}</span>
+          </div>
+        </mat-card>
+      </div>
+      <div class="row" style="margin-top: 5%; margin-left: 5px;">
+        <span class="tableHeadline">My Attendance</span>
+      </div>
+      <div class="row">
+        <table style="width: 100%;">
+          <tr class="tblheaderFont">
+            <th>Session #</th>
+            <th style="min-width: 400px;">Topic Name</th>
+            <th>Date</th>
+            <th>Present?</th>
+          </tr>
+          <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
+            <td>{{i+1}}</td>
+            <td>{{atd.activity.moduledetails.topicdetails.topicname}}</td>
+            <td>{{atd.activity.moduledetails.topicdetails.startdate | date: 'dd/MM/yyyy hh:mm'}}</td>
+            <td>
+              <mat-icon *ngIf="atd.activity.moduledetails.topicdetails.attendencedetails.Attendence === 'yes'" style="color: green;">done</mat-icon>
+              <mat-icon *ngIf="atd.activity.moduledetails.topicdetails.attendencedetails.Attendence === 'no'" style="color: red;">close</mat-icon>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side Panel ...  -->
+  <div class="col-lg-5 col-xl-5 col-md-5 col-sm-6 col-12">
+    <h4>Upcoming Sessions and Recorded Sessions</h4>
+    <div class="row">
+      <mat-nav-list>
+        <mat-list-item *ngFor="let los of listOfSessions" class="row">
+          <mat-card class="sessionCard" (click)="useSession(los)">
+            <div class="row">
+              <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
+                <img *ngIf="los.activity_details.livethumbnail !== undefined" height="220" width="180" [src]="los.activity_details.livethumbnail">
+                <img *ngIf="los.activity_details.livethumbnail === undefined" height="220" width="180" src="../../../../assets/learner/sessionThumbnail_01.png">
+                <h4 style="float: right;
+                background: green;
+                margin-left: -43px;
+                color: white;">{{los.status}}</h4>
+              </div>
+              <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
+                <h4 style="margin-left: 20px;">{{los.activity_details.topicname}}</h4>
+                <h5 style="margin-left: 20px;">Starting On:
+                  {{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm'}}</h5>
+                <h5 style="margin-left: 20px;">Duration: {{los.duration}} </h5>
+              </div>
+            </div>
+          </mat-card>
+        </mat-list-item>
+      </mat-nav-list>
+    </div>
+  </div>
+
+</div>
