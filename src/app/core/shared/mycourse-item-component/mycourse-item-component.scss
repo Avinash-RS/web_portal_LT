@@ -238,7 +238,7 @@
   // margin-left: 26px;
   background-image: url(../../../../assets/images/placeholder.jpg);
   background-repeat: no-repeat;
-  background-size: 100%,100%;
+  background-size: 100%, 100%;
   border-radius: 10px;
   //content:url(../../../../assets/images/placeholder.jpg)
 }
@@ -598,7 +598,7 @@ hr {
 }
 
 .m-t-m-2 {
-  top: -3px;
+  top: -2px;
   position: relative;
 }
 
@@ -647,7 +647,7 @@ hr {
   position: absolute;
   margin-left: -10%;
   margin-top: 2px;
-  width: 100px;
+  width: 105px;
   z-index: 99;
   height: 30px;
   // left: 268px;
@@ -1026,19 +1026,24 @@ hr {
 .forumIcon {
   color: #878686;
 }
+
 .color_black {
   text-shadow: 0 0 #9a9a9a;
 }
+
 .mobileResponsive {
   display: none;
 }
+
 .color_g {
   color: #666666;
   // text-shadow: 0 0 #f1f1f1
 }
+
 .lxp_gray123 {
   color: $lxp-gray;
 }
+
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
   .normalScreen {
@@ -2558,7 +2563,8 @@ li {
 .gold-line-r {
   border-right: solid 1px #cccccc7a
 }
-.gold-line-l{
+
+.gold-line-l {
   border-left: solid 1px #cccccc7a
 }
 
@@ -2583,20 +2589,44 @@ li {
   margin-top: 10px !important;
 }
 
-.cardHeights{
+.cardHeights {
   min-height: 150px !important;
-  margin-top:15px;
-  margin-bottom:15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
+
 .inner {
   width: 80%;
   height: 1px;
   margin: 0px auto;
   border-bottom: 1px solid #cccccc7a;
 }
-.pseudoheight{
+
+.pseudoheight {
   height: 20px !important;
 }
-.m-l-10px{
-margin-left: 10px;
+
+.m-l-10px {
+  margin-left: 10px;
+}
+
+.light_bg_grey {
+  background: whitesmoke;
+  // background-color: yellow;
+  border-radius: 5px;
+}
+
+
+//  ::ng-deep .mat-stroked-button .mat-button-wrapper>* {
+//     vertical-align: sub !important;
+//   }
+
+.p-7-lr {
+  padding-left: 7px !important;
+  padding-right: 7px !important;
+}
+
+.mycourse-btn-img {
+  margin-top: -5px;
+  margin-right: 5px;
 }
