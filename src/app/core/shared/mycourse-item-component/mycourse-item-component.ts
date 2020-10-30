@@ -51,7 +51,6 @@ export class MycourseItemComponent implements OnInit {
   ngOnInit() {
   }
   Go(course) {
-    console.log('name', course);
     const data1 = {
       courseId: course.course_id,
       courseName: course.course_name
@@ -59,6 +58,15 @@ export class MycourseItemComponent implements OnInit {
     localStorage.setItem('Courseid', data1.courseId);
     localStorage.setItem('CourseName', data1.courseName);
     this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
+  }
+  goToSelflearning(course) {
+    const data1 = {
+      courseId: course.course_id,
+      courseName: course.course_name
+    };
+    localStorage.setItem('Courseid', data1.courseId);
+    localStorage.setItem('CourseName', data1.courseName);
+    this.router.navigateByUrl('/Learner/selfLearning', { state:  { data:  data1 } });
   }
   gotoDesc(c) {
     const detail = {

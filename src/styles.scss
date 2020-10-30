@@ -447,7 +447,9 @@ td {
 .color_blue {
   color: $lxp-theme-green !important; //red color
 }
-
+.bg_lxp_red {
+  background-color: $lxp-theme-green !important;
+}
 .color_white {
   color: $color-white !important;
 }

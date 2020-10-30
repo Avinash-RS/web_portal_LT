@@ -1026,12 +1026,15 @@ hr {
 .forumIcon {
   color: #878686;
 }
-
+.color_black {
+  text-shadow: 0 0 #9a9a9a;
+}
 .mobileResponsive {
   display: none;
 }
 .color_g {
   color: #666666;
+  // text-shadow: 0 0 #f1f1f1
 }
 .lxp_gray123 {
   color: $lxp-gray;

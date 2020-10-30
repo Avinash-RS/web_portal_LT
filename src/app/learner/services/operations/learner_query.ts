@@ -1918,6 +1918,38 @@ export const get_active_course_count = gql`
       }
           `;
 
+export const boarddetail = gql`
+      query boarddetail($user_id: String, $course_id: String) {
+        boarddetail(user_id : $user_id, course_id: $course_id) {
+          success
+          data{
+            courseProgression
+            moduleCovered
+            topicCovered
+            totalNumberOfModule
+            totalNumberOfTopic
+            pieData{
+              gradedPercentage
+              overDuePercentage
+              submittedPercentage
+              yetToSubmitPercentage
+              totalNumberOfActivities
+              gradedActivities
+              submittedActivities
+              overDueActivities
+              yetToSubmitActivities
+            }
+            topicData{
+              topicName
+              activityCount
+              activityStartDate
+              activityEndDate
+            }
+          }
+        }
+      }
+`;
+
 export const getActivityDetailsByBatchAndCourseID = gql`
 query get_course_activities_by_id( $batchid: String!, $courseid: String!){
   get_course_activities_by_id( batchid: $batchid, courseid: $courseid){

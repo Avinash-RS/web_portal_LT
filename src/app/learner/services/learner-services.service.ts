@@ -49,6 +49,7 @@ import {
   getprojectActivityData,
   getperformActivityData,
   get_active_course_count,
+  boarddetail,
   getActivityDetailsByBatchAndCourseID,
   getTopicAttendanceDetailsByUsername
 } from './operations/learner_query';
@@ -939,7 +940,18 @@ getprojectActivityData(userId, courseId) {
     });
   }
 
-  getActivityDetailsByCourseAndBatchID(batchid, courseid) {
+  boarddetail(user_id, course_id){
+    return this.Apollo.query({
+      query: boarddetail,
+      variables: {
+        user_id,
+        course_id
+      }
+    });
+  }
+
+
+getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     return this.Apollo.query({ // Get Activity Details For Instrcutor Led Screen.
       query: getActivityDetailsByBatchAndCourseID,
       variables: {
