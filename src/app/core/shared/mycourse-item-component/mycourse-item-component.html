@@ -94,13 +94,13 @@
             <div class="col-5" style="margin-bottom:10px;">
               <span class="lxp_gray123">Start Date:</span>
               <span class="f_wt_500">
-                {{course.course_start_datetime?(course.course_start_datetime|date:'dd MMM yyyy'):'N/A' }}
+                {{course.batch_details?.batch_details?.batchstartdate ?(course.batch_details?.batch_details?.batchstartdate |date:'dd MMM yyyy'):'N/A' }}
               </span>
             </div>
             <div class="col">
               <span class="lxp_gray123">End Date:</span>
               <span class="f_wt_500">
-                {{course.course_end_datetime?(course.course_end_datetime|date:'dd MMM yyyy'):'N/A' }}
+                {{course.batch_details?.batch_details?.batchenddate ?(course.batch_details?.batch_details?.batchenddate |date:'dd MMM yyyy'):'N/A' }}
               </span>
             </div>
           </div>

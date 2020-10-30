@@ -1139,6 +1139,47 @@ export const getLearnerenrolledCourses = gql`
             course_percentage
             feedback_status
           }
+          batch_details{
+                course_id
+                batch_details{
+                    _id
+                    batchname
+                    batchdescription
+                    batchstartdate
+                    batchenddate
+                    isTeams
+                    created_on
+                    batchid
+                    user_details{
+                            id
+                            name
+                            image
+                            email
+                            username
+                            is_active
+                    }
+                    course_details{
+                            id
+                            name
+                            image
+                            description
+                            super_sub_category_name
+                            sub_category_name
+                            category_name
+                    }
+                    instructur_details{
+                            id
+                            name
+                            image
+                            description
+                            role
+                            roleid
+                            userid
+                            role_type_id
+                            role_type_name
+                    }
+                }
+        }
         }
       }
     }
