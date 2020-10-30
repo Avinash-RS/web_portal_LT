@@ -469,7 +469,7 @@
                         </div>
                     </mat-tab>
                     <!-- assignment tab -->
-                    <mat-tab label="Assignments" class="discussion_forum"
+                    <!-- <mat-tab label="Assignments" class="discussion_forum"
                         *ngIf="assignmentContent?.coursedetails.length">
                         <div [ngClass]="drawer.opened==true?'drawerOpnAss':'drawerClsAss'">
                             <mat-accordion>
@@ -700,9 +700,7 @@
                         </div>
 
                         <ng-template #previewDialog>
-                            <!-- <button mat-icon-button class="download-button">
-                                        <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
-                                    </button> -->
+                
                             <div>
                                 <button mat-mini-fab class="download-button">
                                     <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
@@ -713,22 +711,13 @@
                                     <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
                                 </button>
                             </div>
-                            <!-- <button mat-icon-button class="close-button" [mat-dialog-close]="true">
-                                        <mat-icon class="close-icon" color="warn" (click)="closedialogbox()">close
-                                        </mat-icon>
-                                    </button> -->
+                         
                             <div *ngIf="docpath">
                                 <app-pdfreader [url]="docpath"></app-pdfreader>
                             </div>
                         </ng-template>
-                    </mat-tab>
+                    </mat-tab> -->
 
-                    <!-- <mat-tab>
-                        <div [ngClass]="drawer.opened==true?'example-sidenav-content-opn':'example-sidenav-content-cls'"
-                        class="">
-                        <iframe id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
-                    </div>           
-                 </mat-tab> -->
 
                 </mat-tab-group>
             </div>

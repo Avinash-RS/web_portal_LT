@@ -761,7 +761,7 @@ hr {
   margin-top: 2px;
   width: 100px;
   z-index: 99;
-  height: 32px;
+  height: 30px;
   // left: 268px;
   // bottom: 5px;
   // margin-left: 25%;
@@ -1501,7 +1501,7 @@ hr {
     width: 15px !important;
     height: 15px !important;
     line-height: 16px !important;
-    background-color: #C02222;
+    background-color: $lxp-theme-green;
     right: 4px !important;
     top: -20px !important;
   }
@@ -1672,8 +1672,8 @@ hr {
   }
 
   .searchExpand:focus {
-    border: 1px solid #C02222;
-    box-shadow: 0 0 0 0.05rem #C02222 !important;
+    border: 1px solid $lxp-theme-green;
+    box-shadow: 0 0 0 0.05rem $lxp-theme-green !important;
   }
 
   .primerFlage {
@@ -2754,7 +2754,7 @@ li {
 .cardHeights{
   min-height: 150px !important;
   margin-top:15px;
-  //margin-bottom:15px;
+  margin-bottom:15px;
 }
 .inner {
   width: 80%;

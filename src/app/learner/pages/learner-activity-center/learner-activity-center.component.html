@@ -10,66 +10,21 @@
     </span>
   </span>
 </p>
-<!-- <div class="row">
-<p>Activity center > Completed activities</p>
-</div> -->
-<!-- Start of screen 1 - Homescreen cards -->
-
-<!-- Activity center Homescreen Starts here -->
-<div *ngIf="showHomeScreen">
-
-</div>
-<!-- Activity center Homescreen Ends here -->
-
-<!-- End of screen 1 - Homescreen cards -->
-
-<!-- ******************************************************************************** -->
-
-<!-- Start of screen 2 - Next activity on card -->
-
-<div *ngIf="showNextActivityOn">
-
-</div>
-
-
-<!-- End of screen 2 - Next activity on card-->
-
-<!-- ******************************************************************************** -->
-
-<!-- Start of screen 3 - Completed card -->
-
-
-<div *ngIf="showCompleted">
-
-</div>
-
-
-<!-- End of screen 3 - Completed card-->
-
-<!-- ******************************************************************************** -->
-
-<!-- Start of screen 4 - Pending Activities card -->
-
-
-<div *ngIf="showPendingActivities">
-
-</div>
-
-
-<!-- End of screen 4 - Pending Activities card-->
-
-<!-- ******************************************************************************** -->
-
-<!-- Start of screen 5 - View All Activities card -->
-
 
 <div *ngIf="showViewAllActivities">
   <div class="row">
+    <div class="col vert-txt-center" *ngIf="navDetails?.tableType !== 'submission'">
+      <p class="m-l-10px">Activity center &nbsp; >
+        &nbsp;{{navDetails?.tableType =='allActivities'? 'All' : navDetails?.tableType | titlecase}} activities</p>
+    </div>
+    <div class="col vert-txt-center" *ngIf="navDetails?.tableType == 'submission'">
+      <p class="m-l-10px txt-caps">{{navDetails?.name}} &nbsp;>&nbsp; Submission details</p>
+    </div>
     <div class="col">
       <form class="search-form float_right search-viewactivities" style="display: inline-block; margin-right: 20px;">
-        <mat-form-field appearance="outline" class="pointer search-catalogue">
-          <input matInput placeholder="Search" name="searchbar"  [(ngModel)]="quickSearchValue" (keyup)="onKeyChange($event.target.value)" type="text">
-          <!--  (keyup)="searchCatalogue(catalogue)" -->
+        <mat-form-field appearance="outline" class="pointer search-activity">
+          <input matInput placeholder="Search" name="searchbar" [(ngModel)]="quickSearchValue"
+            (keyup)="onKeyChange($event.target.value)" type="text">
           <mat-icon matSuffix *ngIf="quickSearchValue !== null" (click)="closesearch()">close</mat-icon>
           <mat-icon matSuffix [disabled]="true" *ngIf="quickSearchValue === null" class="pointer">search</mat-icon>
         </mat-form-field>
@@ -77,17 +32,11 @@
     </div>
   </div>
 
-  <ag-grid-angular style="width: 99%; height:  calc(100vh - 50px); margin:auto !important;" class="ag-theme-alpine allActivities" 
-  [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" (gridReady)="onGridReady($event)" [rowModelType]="'infinite'" (sortChanged)="onSort($event)" >
-  <!-- [paginationPageSize]="paginationPageSize1" [cacheBlockSize]="cacheBlockSize" (gridReady)="onGridReady1($event)"
-  [rowModelType]="'infinite'" (sortChanged)="rolesort($event)"
-  (cellValueChanged)="onCellValueChanged1($event)"(filterModified)="roleFilter($event)" -->
-    </ag-grid-angular>
-    <br><br><br><br>
+  <ag-grid-angular style="width: 99%; height:  calc(100vh - 50px); margin:auto !important;" class="ag-theme-alpine"
+    [pagination]="true" [paginationPageSize]="paginationPageSize" [cacheBlockSize]="cacheBlockSize"
+    [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" (gridReady)="onGridReady($event)"
+    [rowModelType]="'infinite'" (sortChanged)="onSort($event)" (filterModified)="activityFilter($event)">
+  </ag-grid-angular>
+  <br><br><br><br>
 
 </div>
-
-
-<!-- End of screen 5 - View All Activities card-->
-
-<!-- ******************************************************************************** -->

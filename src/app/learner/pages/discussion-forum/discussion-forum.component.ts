@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { CommonServicesService } from '@core/services/common-services.service';
 
 @Component({
   selector: 'app-discussion-forum',
@@ -62,9 +63,11 @@ export class DiscussionForumComponent implements OnInit {
     toolbarPosition: 'top',
   };
   selectedIndex: any = 0;
+  loading = false;
 
   constructor(public Lservice: LearnerServicesService, public route: Router, private formBuilder: FormBuilder,
-    private gs: GlobalServiceService, private toastr: ToastrService, private dialog: MatDialog) {
+              private gs: GlobalServiceService, private toastr: ToastrService, private dialog: MatDialog,
+              public cS: CommonServicesService) {
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.course = detail || JSON.parse(atob(localStorage.getItem('course')));
@@ -84,11 +87,15 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   playerModuleAndTopic(cid) {
+    // this.cS.loader$.next(true);
+    this.loading = true;
     this.Lservice.playerModuleAndTopic(cid, this.userDetail.user_id).subscribe((data: any) => {
-      this.scromModuleData = data.data?.playerModuleAndTopic?.message[0]?.childData;
+      this.scromModuleData = data.data?.playerModuleAndTopic?.message && data.data?.playerModuleAndTopic?.message[0]?.childData || [];
       this.selectedModuleData = this.scromModuleData[0] || null;
-      this.selectedModuleData.indexValue = 1;
+      this.loading = false;
       if (this.selectedModuleData) {
+        this.loading = true;
+        this.selectedModuleData.indexValue = 1;
         this.Lservice.getSingleBatchInfo(this.userDetail.user_id, cid).subscribe((resdata: any) => {
           if (resdata?.data?.getbatchdetails?.message?.batchid !== null) {
             this.batchDetails = resdata?.data?.getbatchdetails?.message;
@@ -105,21 +112,26 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   viewAllThreads() {
-    // '230984078162594'
+    // this.cS.loader$.next(true);
+    this.loading = true;
     this.Lservice.ViewAllThreadData(this.selectedModuleData?.title, this.course.id, this.batchDetails?.batchid)
       .subscribe((result: any) => {
         const temp = result.data.ViewAllThreadData.data;
-        if (result?.data?.ViewAllThreadData?.data !== '') {
+        console.log(result?.data?.ViewAllThreadData);
+        if (result?.data?.ViewAllThreadData?.data !== '' && result?.data?.ViewAllThreadData !== null) {
           result?.data?.ViewAllThreadData?.data?.topics.sort((a, b) => new Date(b.lastposttimeISO || b.timestampISO).getTime() -
             new Date(a.lastposttimeISO || a.lastposttimeISO).getTime());
           this.discussionData = result.data.ViewAllThreadData.data;
-          console.log(this.discussionData)
           this.discussionData1 = Object.assign({}, result.data.ViewAllThreadData.data);
+          // this.cS.loader$.next(false);
+          this.loading = false;
           if (this.discussionData?.topics && this.discussionData?.topics?.length > 0) {
             this.discussionData.topics = this.discussionData?.topics?.filter(i => i.deleted === false);
             this.discussionData1.topics1 = this.discussionData.topics;
           }
         } else {
+          // this.cS.loader$.next(false);
+          this.loading = false;
           this.discussionData = null;
         }
       });
@@ -129,11 +141,9 @@ export class DiscussionForumComponent implements OnInit {
     if (this.userDetail.nodebb_response != null) {
       this.addThreadForm?.reset();
       this.addThreadForm = this.formBuilder.group({
-        thread_name: new FormControl('', [Validators.minLength(8), Validators.required]),
-        thread_description: new FormControl('', [Validators.minLength(8), Validators.required]),
-        // module: new FormControl('', myGlobals.req),
+        thread_name: new FormControl('', [Validators.minLength(9), Validators.required]),
+        thread_description: new FormControl('', [Validators.minLength(9), Validators.required]),
       });
-      // this.addThreadForm.patchValue(this.catalog);
       this.dialog.open(templateRef);
     } else {
       this.toastr.warning('You are not a registered user for forum');
@@ -164,22 +174,17 @@ export class DiscussionForumComponent implements OnInit {
     this.showThreadComment = false;
   }
 
-  // addComment(i) {
-  //   this.showCommentEditor[i] = !this.showCommentEditor[i];
-  //   this.addCommentForm?.reset();
-  //   // this.addCommentForm = this.formBuilder.group({
-  //   //   add_comment: new FormControl('', myGlobals.textVal),
-  //   // });
-  // }
-
-
   sendComment(type, data, array?, pidData?) {
     let d = data;
+    this.addPostComment = [];
+    this.addThreadComment = null;
     d = d.replace(/&#160;/g, '').trim() || d.replace(/&#160;/g, '').trimLeft();
     if (d.length > 8) {
-      if (d.length > 55500) {
-        this.toastr.warning('Comment should be less than 60000 characters');
+      if (d.length > 59950) {
+        this.toastr.warning('Comment should be less than 60,000 characters');
       } else {
+        // this.cS.loader$.next(true);
+        this.loading = true;
         const UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails')) || null;
         const data1 = {
           content: data,
@@ -195,6 +200,8 @@ export class DiscussionForumComponent implements OnInit {
           a2i: this.a2iFlag || false,
         };
         this.Lservice.postcomment(data1).subscribe((result: any) => {
+          // this.cS.loader$.next(true);
+          this.loading = true;
           this.a2iFlag = false;
           if (result.success) {
             this.addThreadComment = null;
@@ -204,6 +211,8 @@ export class DiscussionForumComponent implements OnInit {
             this.viewsingletopicdiscussion(this.selectedThreadData.tid);
             this.toastr.success('Comment added successfully');
           } else {
+            // this.cS.loader$.next(false);
+            this.loading = false;
             this.toastr.warning(result.message);
           }
         });
@@ -326,6 +335,8 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   viewsingletopicdiscussion(slug) {
+    // this.cS.loader$.next(true);
+    this.loading = true;
     this.topicDiscussionData = [];
     const topicSlug = slug;
     if (this.userDetail?.nodebb_response?.uid) {
@@ -335,6 +346,8 @@ export class DiscussionForumComponent implements OnInit {
         this.topicDiscussionData1.posts1 = (this.topicDiscussionData1.posts);
         const data = this.topicDiscussionData?.posts?.map(item => item.content = this.alterstring(item?.content));
         const data1 = this.topicDiscussionData1?.posts1?.map(item => item.content = this.alterstring(item?.content));
+        // this.cS.loader$.next(false);
+        this.loading = false;
       });
     }
   }
@@ -364,20 +377,25 @@ export class DiscussionForumComponent implements OnInit {
     desc.d = desc.d.replace(/&#160;/g, '')?.trim() || desc.d.replace(/&#160;/g, '')?.trimLeft() ||
       desc.d.replace(/&#160;/g, '')?.trimEnd();
     if (this.addThreadForm.value.thread_name.length > 8 && desc.d.length > 8) {
-      if (desc.d.length > 55500) {
-        this.toastr.warning('Content should be less than 60000 characters');
+      if (desc.d.length > 59950) {
+        this.toastr.warning('Content should be less than 60,000 characters');
       } else {
+        // this.cS.loader$.next(true);
+        this.loading = true;
         this.closedialogbox();
         this.Lservice.createNewThread(this.userDetail.nodebb_response.uid, this.course.id, this.selectedModuleData?.title,
           this.addThreadForm.value.thread_name, this.addThreadForm.value.thread_description, this.course.name,
           bid)
           .subscribe((result: any) => {
             this.addThreadForm?.reset();
+            // this.cS.loader$.next(true);
             if (result.data.CreateNewThread?.success === 'true') {
               this.discussionData = this.discussionData1.topics1 = null;
               this.toastr.success('New thread created successfully');
               this.viewAllThreads();
             } else {
+              // this.cS.loader$.next(false);
+              this.loading = false;
               this.toastr.warning(result.data.CreateNewThread?.message);
             }
           });

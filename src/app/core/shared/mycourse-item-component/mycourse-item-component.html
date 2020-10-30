@@ -7,56 +7,57 @@
             <div class="courseHover" (click)="gotoDesc(course)">
               <div>
                 <span *ngIf="course?.course_type === 'primer_course'">
-                  <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"
-                    matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage"
-                    src="assets/learner/primerC.svg" />
-                  <img *ngIf="course?.categoryName === 'vocational'" matTooltip="Vocational" matTooltipPosition="right"
-                    matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage"
-                    src="../../../../assets/learner/primerV.svg" />
+                  <img *ngIf="course?.categoryName === 'college connect'" style="margin-left: -4px;position: absolute;"
+                    matTooltip="College connect" matTooltipPosition="right" matTooltipClass="custom-mat-tooltip"
+                    alt="flag" class="primerFlage" src="assets/learner/primerC.svg" />
+                  <img *ngIf="course?.categoryName === 'vocational'" style="margin-left: -4px;position: absolute;"
+                    matTooltip="Vocational" matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" alt="flag"
+                    class="primerFlage" src="../../../../assets/learner/primerV.svg" />
                   <img *ngIf="
-                    course?.categoryName === 'pro certification'
-                  " matTooltip="Pro certification" placement="right" alt="flag" class="primerFlage"
-                    src="../../../../assets/learner/primerP.svg" />
+                  course?.categoryName === 'pro certification'
+                " matTooltip="Pro certification" style="margin-left: -4px;position: absolute;" placement="right"
+                    alt="flag" class="primerFlage" src="../../../../assets/learner/primerP.svg" />
                 </span>
                 <span *ngIf="course?.course_type === 'free_course'">
-                  <img *ngIf="course?.categoryName === 'college connect'" matTooltip="College connect"
-                    matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage"
-                    src="../../../../assets/learner/freeC.svg" />
-                  <img *ngIf="course?.categoryName === 'vocational'" matTooltip="Vocational" alt="flag"
-                    matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" class="primerFlage"
-                    src="../../../../assets/learner/freeV.svg" />
+                  <img *ngIf="course?.categoryName === 'college connect'" style="margin-left: -4px;position: absolute;"
+                    matTooltip="College connect" matTooltipPosition="right" matTooltipClass="custom-mat-tooltip"
+                    alt="flag" class="primerFlage" src="../../../../assets/learner/freeC.svg" />
+                  <img *ngIf="course?.categoryName === 'vocational'" style="margin-left: -4px;position: absolute;"
+                    matTooltip="Vocational" alt="flag" matTooltipPosition="right" matTooltipClass="custom-mat-tooltip"
+                    class="primerFlage" src="../../../../assets/learner/freeV.svg" />
                   <img *ngIf="
                     course?.categoryName === 'pro certification'
-                  " matTooltip="Pro certification" matTooltipPosition="right" matTooltipClass="custom-mat-tooltip"
-                    alt="flag" class="primerFlage" src="../../../../assets/learner/freeP.svg" />
+                  " matTooltip="Pro certification" style="margin-left: -4px;position: absolute;"
+                    matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage"
+                    src="../../../../assets/learner/freeP.svg" />
                 </span>
                 <div class="overlay">
                   <mat-icon class="text"> play_arrow </mat-icon>
                 </div>
               </div>
-              <img alt="Course Img" src="{{ course.course_img_url }}"  class="courseImg" />
+              <img alt="Course Img" src="{{ course.course_img_url }}" class="courseImg" />
             </div>
             <div class="coursePoints">
               <table class="f_size_12">
                 <tr>
-                  <td>Instructor lead session</td>
-                  <td>-</td>
+                  <td>Instructor led session</td>
+                  <td>N/A</td>
                 </tr>
                 <tr>
-                  <td>Self paces learning</td>
-                  <td>-</td>
+                  <td>Self paced learning</td>
+                  <td>N/A</td>
                 </tr>
                 <tr>
                   <td>Mid course project</td>
-                  <td>-</td>
+                  <td>N/A</td>
                 </tr>
                 <tr>
                   <td>Internal assessment</td>
-                  <td>-</td>
+                  <td>N/A</td>
                 </tr>
                 <tr>
                   <td>Final assessment</td>
-                  <td>-</td>
+                  <td>N/A</td>
                 </tr>
               </table>
             </div>
@@ -70,11 +71,12 @@
           </div>
           <div class="row">
             <div class="col-5">
-              <p> By: {{course.author_details[0].author_name?course.author_details[0].author_name:'N/A'}}
+              <p style="margin-bottom:10px"> By:
+                {{course.author_details[0].author_name?course.author_details[0].author_name:'N/A'}}
               </p>
             </div>
             <div class="col">
-              <p>Total duration: {{
+              <p style="margin-bottom:10px">Total duration: {{
               course?.course_duration != 1
                 ? course.course_duration
                   ? course.course_duration + " hours"
@@ -83,11 +85,11 @@
             }}</p>
             </div>
             <div class="col-2 no_padding">
-              Credits: -
+              Credits: N/A
             </div>
           </div>
           <div class="row">
-            <div class="col-5" style="margin-bottom:5px;">
+            <div class="col-5" style="margin-bottom:10px;">
               Start Date:
               {{course.course_start_datetime?(course.course_start_datetime|date:'dd MMM yyyy'):'N/A' }}
             </div>
@@ -97,9 +99,9 @@
             </div>
           </div>
           <div class="row">
-            <div class="col color_black2 f_size_14 descmc f_wt_400 h-50 pointer descOverflow">
+            <div class="col color_black2 f_size_14 descmc f_wt_400 h-50 ">
               <p>
-                {{(course.course_description?.length > 200)? (course.course_description | slice:0:200)+'...':(course.course_description) }}
+                {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
               </p>
             </div>
           </div>
@@ -116,7 +118,7 @@
                   Instructor led session completed
                 </div>
                 <div class="col-3">
-                  <strong>--/--</strong>
+                  N/A
                 </div>
               </div>
               <div class="row">
@@ -124,15 +126,7 @@
                   Internal assessment completed
                 </div>
                 <div class="col-3">
-                  <strong>--/--</strong>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  Instructor led session completed
-                </div>
-                <div class="col-3">
-                  <strong>--/--</strong>
+                  N/A
                 </div>
               </div>
               <div class="row">
@@ -140,7 +134,7 @@
                   Mid course project completed
                 </div>
                 <div class="col-3">
-                  <strong>--/--</strong>
+                  N/A
                 </div>
               </div>
               <div class="row">
@@ -148,17 +142,17 @@
                   Final assessment completed
                 </div>
                 <div class="col-3">
-                  <strong>--/--</strong>
+                  N/A
                 </div>
               </div>
             </div>
             <div class="col-4">
               <div class="row m-auto">
-                <div class=" pointer ">
-                  <circle-progress [percent]="course?.coursePlayerStatus?.course_percentage || 0" [radius]="10"
-                    [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'"
-                    [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="4" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true"
-                    [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" subtitle="--/--"
+                <div>
+                  <circle-progress [percent]="0" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2"
+                    [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="4"
+                    [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="5" [animation]="true"
+                    [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" subtitle="01/16"
                     [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=500>
                   </circle-progress>
                 </div>
@@ -182,10 +176,10 @@
             </div>
           </div>
         </div>
-        <!-- //4quadrant -->
-        <div class="col-12 col-sm-12 col-md-4 col-lg-3">
+        <!-- //4quadrant Self-Paced Learning// left lines //remove discussion link -->
+        <div class="col-12 col-sm-12 col-md-4 col-lg-6">
           <div class="row ">
-            <div class="col  gold-line-r cardHeights">
+            <div class="col  gold-line-l gold-line-r cardHeights">
               <div class="row">
                 <div class="col ">
                   <p class="f_size_16 f_wt_500">Self-Paced Learning</p>
@@ -201,14 +195,16 @@
                   Progression
                 </div>
                 <div class="col justify-content-center align-self-center">
-                  <mat-progress-bar class="example-margin" [mode]="'determinate'" [value]=70>
+                  <mat-progress-bar class="example-margin" [mode]="'determinate'"
+                    [value]="course?.coursePlayerStatus?.course_percentage || 0">
                   </mat-progress-bar>
                 </div>
               </div>
               <div class="row m-t-10px">
                 <div class="col-7">
-                  <div>
-                    <span (click)="course.progressionExp?course.progressionExp=false:course.progressionExp=true">
+                  <div style="display: none;">
+                    <span class="pointer"
+                      (click)="course.progressionExp?course.progressionExp=false:course.progressionExp=true">
                       <span class="f_size_10">{{course.progressionExp?'Hide details':'See more details' }}</span>
                       <mat-icon *ngIf="!course.progressionExp" class="f_size_10" fontSet="material-icons-outlined">
                         keyboard_arrow_down</mat-icon>
@@ -216,16 +212,18 @@
                         keyboard_arrow_up</mat-icon>
                     </span>
                     <div *ngIf="course.progressionExp" class="f_size_12">
-                      Modules completed --/--<br>
-                      Topics completed --/--<br>
-                      <span class="pointer f_size_10" style="color: red; text-decoration: underline;" (click)="goToSelflearning(course)">View self-learning activity details..</span>
+                      Modules completed N/A<br>
+                      Topics completed N/A<br>
+                      <span class="pointer f_size_10" style="color: red; text-decoration: underline;">View self-learning
+                        activity details..</span>
                     </div>
                   </div>
                 </div>
                 <div class="col-5">
                   <button mat-stroked-button *ngIf="
                                             course?.coursePlayerStatus?.status !== 'completed'
-                                          " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                                          " class="btl-alin blue_clr cap pointer m-t-05 m-l-10px"
+                    (click)="gotoDesc(course)">
                     <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon>
                     <span class="cap f_wt_400 m-t-m-2">
                       {{
@@ -239,9 +237,9 @@
                                             }}&nbsp;
                     </span>
                   </button>
-                  <button mat-stroked-button *ngIf="
-                                            course?.coursePlayerStatus?.status === 'completed'
-                                          " class="btl-alin blue_clr cap pointer m-t-05" (click)="gotoDesc(course)">
+                  <button mat-stroked-button (click)="gotoDesc(course)" *ngIf="
+                                            course?.coursePlayerStatus?.status === 'completed' 
+                                          " class="btl-alin blue_clr cap pointer m-t-05">
                     <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Replay" | translate }}&nbsp;
@@ -250,10 +248,59 @@
                 </div>
               </div>
             </div>
-            <div class="inner">&nbsp;</div>
+
+            <div class="col gold-line-b cardHeights">
+              <div class="row">
+                <div class="col ">
+                  <p class="f_size_16 f_wt_500">Instructor Led</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col ">
+                  <p>Interact with your faculty, ask questions and learn from classmates.</p>
+                </div>
+              </div>
+              <div class="row pseudoheight"></div>
+              <div class="row m-t-10px">
+                <div class="col-7">
+                  <div style="display: none;">
+                    <span class="pointer">
+                      <!-- (click)="course.ledinstExp?course.ledinstExp=false:course.ledinstExp=true" -->
+                      <span class="f_size_10">{{course.ledinstExp?'Hide details':'See more details' }}</span>
+                      <mat-icon *ngIf="!course.ledinstExp" class="f_size_10" fontSet="material-icons-outlined">
+                        keyboard_arrow_down</mat-icon>
+                      <mat-icon *ngIf="course.ledinstExp" class="f_size_10" fontSet="material-icons-outlined">
+                        keyboard_arrow_up</mat-icon>
+                    </span>
+                    <div *ngIf="course.ledinstExp" class="f_size_13">
+                      Sessions attended N/A<br>
+                      <span class="pointer f_size_10" style="color: red; text-decoration: underline;">View sessions
+                        details..</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-5">
+                  <button mat-stroked-button class="btl-alin blue_clr cap pointer m-l-10px">
+                    <span class="cap f_wt_400 m-t-m-2">
+                      {{ "Join" | translate }}&nbsp;
+                    </span>
+                  </button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="inner">&nbsp;</div>
+            </div>
+            <div class="col-6">
+              <div class="inner">&nbsp;</div>
+            </div>
+
           </div>
           <div class="row ">
-            <div class="col gold-line-r cardHeights">
+            <div class="col gold-line-l gold-line-r cardHeights">
               <div class="row">
                 <div class="col ">
                   <p class="f_size_16 f_wt_500">Discussion forum</p>
@@ -264,10 +311,12 @@
                   <p>Interact with peers by posting thoughts and comments on given topic.</p>
                 </div>
               </div>
+              <div class="row pseudoheight"></div>
               <div class="row m-t-10px">
                 <div class="col-7">
-                  <div>
-                    <span (click)="course.discussExp?course.discussExp=false:course.discussExp=true">
+                  <div style="display: none;">
+                    <span class="pointer">
+                      <!-- (click)="course.discussExp?course.discussExp=false:course.discussExp=true" -->
                       <span class="f_size_10">{{course.discussExp?'Hide details':'See more details' }}</span>
                       <mat-icon *ngIf="!course.discussExp" class="f_size_10" fontSet="material-icons-outlined">
                         keyboard_arrow_down</mat-icon>
@@ -278,12 +327,13 @@
                       Threads --<br>
                       Comments --<br>
                       Replies --<br>
-                      <span class="pointer f_size_10" style="color: red; text-decoration: underline;" (click)="goToForum(course)">View discussions..</span>
+                      <span class="pointer f_size_10" style="color: red; text-decoration: underline;"
+                        (click)="goToForum(course)">View discussions..</span>
                     </div>
                   </div>
                 </div>
                 <div class="col-5">
-                  <button mat-stroked-button class="btl-alin blue_clr cap pointer" (click)="goToForum(course)">
+                  <button mat-stroked-button class="btl-alin blue_clr cap pointer m-l-10px" (click)="goToForum(course)">
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Collaborate" | translate }}&nbsp;
                     </span>
@@ -292,48 +342,7 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-12 col-sm-12 col-md-4 col-lg-3">
-          <div class="row ">
-            <div class="col gold-line-b cardHeights">
-              <div class="row">
-                <div class="col ">
-                  <p class="f_size_16 f_wt_500">Instructor Led</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col ">Interact with your faculty, ask questions and learn from classmates.</div>
-              </div>
-              <div class="row m-t-10px">
-                <div class="col-7">
-                  <div>
-                    <span (click)="course.ledinstExp?course.ledinstExp=false:course.ledinstExp=true">
-                      <span class="f_size_10">{{course.ledinstExp?'Hide details':'See more details' }}</span>
-                      <mat-icon *ngIf="!course.ledinstExp" class="f_size_10" fontSet="material-icons-outlined">
-                        keyboard_arrow_down</mat-icon>
-                      <mat-icon *ngIf="course.ledinstExp" class="f_size_10" fontSet="material-icons-outlined">
-                        keyboard_arrow_up</mat-icon>
-                    </span>
-                    <div *ngIf="course.ledinstExp" class="f_size_13">
-                      Sessions attended --/--<br>
-                      <span class="pointer f_size_10" style="color: red; text-decoration: underline;" (click)="goToForum(course)">View sessions details..</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-5">
-                  <button mat-stroked-button class="btl-alin blue_clr cap pointer">
-                    <span class="cap f_wt_400 m-t-m-2">
-                      {{ "Join" | translate }}&nbsp;
-                    </span>
-                  </button>
 
-                </div>
-              </div>
-            </div>
-            <div class="inner">&nbsp;</div>
-          </div>
-          <div class="row ">
             <div class="col cardHeights">
               <div class="row">
                 <div class="col ">
@@ -345,10 +354,12 @@
                   <p>Practice the skills learnt while reading and attending class.</p>
                 </div>
               </div>
+              <div class="row pseudoheight"></div>
               <div class="row m-t-10px">
                 <div class="col-7">
-                  <div>
-                    <span (click)="course.activityExp?course.activityExp=false:course.activityExp=true">
+                  <div style="display: none;">
+                    <span class="pointer">
+                      <!-- (click)="course.activityExp?course.activityExp=false:course.activityExp=true" -->
                       <span class="f_size_10">{{course.activityExp?'Hide details':'See more details' }}</span>
                       <mat-icon *ngIf="!course.activityExp" class="f_size_10" fontSet="material-icons-outlined">
                         keyboard_arrow_down</mat-icon>
@@ -356,9 +367,10 @@
                         keyboard_arrow_up</mat-icon>
                     </span>
                     <div *ngIf="course.activityExp" class="f_size_13">
-                      Assignments completed --/--<br>
-                      projects completed --/--<br>
-                      <span class="pointer f_size_10" style="color: red; text-decoration: underline;" (click)="gotoSubmissionDetails(course)">View submission details..</span>
+                      Assignments completed N/A<br>
+                      Projects completed N/A<br>
+                      <span class="pointer f_size_10" style="color: red; text-decoration: underline;"
+                        (click)="gotoSubmissionDetails(course)">View submission details..</span>
                     </div>
                   </div>
                   <!-- <div class="row m-auto">
@@ -368,7 +380,7 @@
                   </div> -->
                 </div>
                 <div class="col-5">
-                  <button mat-stroked-button class="btl-alin blue_clr cap pointer" (click)="Go(course)">
+                  <button mat-stroked-button class="btl-alin blue_clr cap pointer m-l-10px" (click)="Go(course)">
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Go" | translate }}&nbsp;
                     </span>
@@ -379,6 +391,7 @@
             </div>
           </div>
         </div>
+
         <!-- <div class="col-12 col-sm-12 col-md-8 col-lg-7 coursenameCol">
           <div class="f_size_18 f_wt_500  coursename">
             <p class="courceNameTag" *ngIf="course.course_name.length >= 84"

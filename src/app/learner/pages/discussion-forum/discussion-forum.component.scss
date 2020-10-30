@@ -8,6 +8,12 @@
     margin-left: 0 !important;
 }
 
+.moduleHeadHight, .moduleName {
+    width: 100% !important;
+}
+.moduleHeadHight {
+    padding: 0 !important;
+}
 // Mythreyi CSS starts here
 @media screen and (min-width: 320px) and (max-width: 760px) {
     .threadbutton {
@@ -69,30 +75,6 @@
         display: block;
     }
 
-    :host ::ng-deep #mat-tab-label-0-0 {
-        display: none !important;
-    }
-
-    :host ::ng-deep #mat-tab-label-0-1 {
-        display: none !important;
-    }
-
-    :host ::ng-deep #mat-tab-label-0-2 {
-        display: none !important;
-    }
-
-    :host ::ng-deep #mat-tab-label-0-3 {
-        display: none !important;
-    }
-
-    :host ::ng-deep #mat-tab-label-0-4 {
-        display: none !important;
-    }
-
-    :host ::ng-deep .mat-tab-label-container {
-        display: none !important;
-    }
-
     .createThreadDialog {
         width: 320px;
     }
@@ -106,24 +88,6 @@
         position: relative;
     }
 
-    .drawerClsTab {
-        bottom: 0;
-    }
-
-    .drawer {
-        width: 100% !important;
-    }
-
-    .mat-drawer.mat-drawer-side {}
-
-    .player {
-        height: 284px !important;
-    }
-
-    .player {
-        height: 284px !important;
-    }
-
     .black_bo {
         border: 1px solid $color-border !important;
     }
@@ -132,35 +96,6 @@
         border-top: none !important;
         border-left: none !important;
         border-right: none !important;
-    }
-
-    .divider {
-        left: 10px !important;
-    }
-
-    .time {
-        left: -25px !important;
-    }
-
-    .panel {
-        margin-bottom: 10px;
-    }
-
-    .main-opn {
-        left: 372px !important;
-    }
-
-    .module-container {
-        margin-top: 10px;
-        height: 70px;
-    }
-
-    .exp-icon {
-        margin-top: 17px;
-    }
-
-    .moduleContainerRow {
-        margin-top: 10px;
     }
 
     .bg_color {
@@ -172,58 +107,12 @@
         display: block;
     }
 
-    .alarmIcon {
-        font-size: 16px !important;
-    }
-
-    .divider {
-        left: 30px !important;
-        top: -2px;
-    }
-
-    .closeBtn {
-        left: unset !important;
-        right: -50px !important;
-    }
-
-    .Outine {
-        top: -2px !important;
-    }
-
-    .drawer .contents {
-        padding: 16px 0 16px 16px;
-        margin-top: 15% !important;
-    }
-
-    .time-icon {
-        font-size: 14px !important;
-        margin-left: 5px;
-    }
-
-    .module-container {
-        margin-top: 28px !important;
-        height: 70px;
-    }
-
-    .exp-icon {
-        margin-top: 34px !important;
-    }
-
 }
 
 @media(min-width: 768px) and(max-width: 991.98px) {
     .createThreadDialog {
         width: 600px;
         position: relative;
-    }
-
-    .prevBtn {
-        margin-left: 75%;
-        position: relative;
-    }
-
-    .drawer {
-        width: 50% !important;
     }
 }
 
@@ -321,7 +210,7 @@
 
 .post-header {
     // background-color: #F1F1F1;
-    background-image: linear-gradient(#f1f1f1, #fafafa);
+    background-image: linear-gradient(#e0dfdf, #f1f1f1);
     box-shadow: 0 2px 5px 0 rgba(230, 230, 230, 0.753);
     border-bottom: 1px solid $color-border;
 }
@@ -480,28 +369,6 @@
     border-radius: 0 !important;
 }
 
-// @media only screen and(min-width: 300px) and(max-width: 600px) {
-
-// }
-
-// @media only screen and(min-width: 300px) and(max-width: 770px) {
-// .new_Thread {
-//     color: white !important;
-//     border-radius: none !important;
-//     background-color: $lxp-theme-green;
-//     border: none;
-//     margin-right: 10px !important;
-//     float: left !important
-// }
-
-// .send_pos {
-//     margin-top: 0vh !important;
-//     margin-left: 0px !important;
-// }
-
-
-// }
-
 .send_pos {
     margin-top: 42px;
     background: whitesmoke;
@@ -532,15 +399,6 @@
     margin-top: 20px !important;
 }
 
-// /deep/.dialogPopup.mat-dialog-container {
-//     padding: 30px !important;
-//     border-radius: 0 !important;
-// }
-
-// .m-t-30 {
-//     margin-top: 30px !important;
-// }
-
 .m-b-15 {
     margin-bottom: 15px;
 }
@@ -566,3 +424,18 @@
     color: $lxp-theme-green !important;
 }
 
+.spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brdcrmb {
+    margin-top: -3px;
+}
