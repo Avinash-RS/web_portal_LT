@@ -189,7 +189,7 @@
             <div class="col  gold-line-l gold-line-r cardHeights">
               <div class="row">
                 <div class="col ">
-                  <p class="f_size_16 f_wt_500 color_black">Self-Paced Learning</p>
+                  <p class="f_size_16 f_wt_500 color_black"><img src="../../../../assets/learner/mycourseicons/readingbook.svg" width="22px" height="22px" style="margin-right: 5px;" >Self-Paced Learning</p>
                 </div>
               </div>
               <div class="row color_g">
@@ -263,7 +263,7 @@
             <div class="col gold-line-b cardHeights">
               <div class="row">
                 <div class="col ">
-                  <p class="f_size_16 f_wt_500 color_black">Instructor Led</p>
+                  <p class="f_size_16 f_wt_500 color_black"> <img src="../../../../assets/learner/mycourseicons/onlinelearning.svg" width="22px" height="22px" style="margin-right: 5px;" >Instructor Led</p>
                 </div>
               </div>
               <div class="row color_g">
@@ -292,7 +292,8 @@
                 </div>
                 <div class="col-5">
                   <button mat-stroked-button class="btl-alin btn-txt-center
-                  blue_clr cap pointer m-l-10px" (click)="goInstructorLed(course)">
+                  blue_clr cap pointer m-l-10px sub-align" (click)="goInstructorLed(course)">
+                  <img class="mycourse-btn-img" src="../../../../assets/learner/mycourseicons/joinmain.svg" width="16px" height="12.5px" >
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Join" | translate }}&nbsp;
                     </span>
@@ -314,7 +315,7 @@
             <div class="col gold-line-l gold-line-r cardHeights">
               <div class="row">
                 <div class="col ">
-                  <p class="f_size_16 f_wt_500 color_black">Discussion Forum</p>
+                  <p class="f_size_16 f_wt_500 color_black"><img src="../../../../assets/learner/mycourseicons/forum-24px.svg" width="22px" height="22px" style="margin-right: 5px;" >Discussion Forum</p>
                 </div>
               </div>
               <div class="row color_g">
@@ -345,7 +346,8 @@
                 </div>
                 <div class="col-5">
                   <button mat-stroked-button *ngIf="userDetail.is_forum_config" class="btl-alin blue_clr btn-txt-center
-                    cap pointer m-l-10px" (click)="goToForum(course)">
+                    cap pointer m-l-10px sub-align p-7-lr" (click)="goToForum(course)">
+                    <img class="mycourse-btn-img" src="../../../../assets/learner/mycourseicons/collaborate.svg"  width="16px" height="12.5px" >
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Collaborate" | translate }}&nbsp;
                     </span>
@@ -358,7 +360,7 @@
             <div class="col cardHeights">
               <div class="row">
                 <div class="col ">
-                  <p class="f_size_16 f_wt_500 color_black">Activities</p>
+                  <p class="f_size_16 f_wt_500 color_black"><img src="../../../../assets/learner/mycourseicons/activities.svg" width="22px" height="22px" style="margin-right: 5px;" >Activities</p>
                 </div>
               </div>
               <div class="row color_g">
@@ -392,8 +394,9 @@
                   </div> -->
                 </div>
                 <div class="col-5">
-                  <button mat-stroked-button class="btl-alin blue_clr cap pointer m-l-10px btn-txt-center"
+                  <button mat-stroked-button class="btl-alin blue_clr cap pointer m-l-10px btn-txt-center sub-align"
                     (click)="Go(course)">
+                    <img class="mycourse-btn-img" src="../../../../assets/learner/mycourseicons/go.svg"  width="16px" height="12.5px">
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Go" | translate }}&nbsp;
                     </span>
