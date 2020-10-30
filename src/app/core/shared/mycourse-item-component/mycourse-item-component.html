@@ -87,7 +87,7 @@
             }}</p>
             </div>
             <div class="col-2 no_padding">
-              Credits: N/A
+              Credits: {{globalData.credits}}
             </div>
           </div>
           <div class="row">
@@ -185,7 +185,7 @@
         </div>
         <!-- //4quadrant Self-Paced Learning// left lines //remove discussion link -->
         <div class="col-12 col-sm-12 col-md-4 col-lg-6">
-          <div class="row ">
+          <div class="row light_bg_grey">
             <div class="col  gold-line-l gold-line-r cardHeights">
               <div class="row">
                 <div class="col ">
@@ -199,9 +199,9 @@
               </div>
               <div class="row lxp_gray123">
                 <div class="col-3">
-                 <span class="">
-                  Progression
-                 </span> 
+                  <span class="">
+                    Progression
+                  </span>
                 </div>
                 <div class="col justify-content-center align-self-center">
                   <mat-progress-bar class="example-margin" [mode]="'determinate'"
@@ -285,7 +285,8 @@
                     </span>
                     <div *ngIf="course.ledinstExp" class="f_size_13">
                       Sessions attended N/A<br>
-                      <span class="pointer f_size_10" style="color: red; text-decoration: underline;" (click)="goInstructorLed(course)">View sessions details..</span>
+                      <span class="pointer f_size_10" style="color: red; text-decoration: underline;"
+                        (click)="goInstructorLed(course)">View sessions details..</span>
                     </div>
                   </div>
                 </div>
@@ -308,9 +309,8 @@
             <div class="col-6">
               <div class="inner">&nbsp;</div>
             </div>
-
           </div>
-          <div class="row">
+          <div class="row light_bg_grey">
             <div class="col gold-line-l gold-line-r cardHeights">
               <div class="row">
                 <div class="col ">
@@ -344,8 +344,7 @@
                   </div>
                 </div>
                 <div class="col-5">
-                  <button mat-stroked-button *ngIf="userDetail.is_forum_config"
-                    class="btl-alin blue_clr btn-txt-center
+                  <button mat-stroked-button *ngIf="userDetail.is_forum_config" class="btl-alin blue_clr btn-txt-center
                     cap pointer m-l-10px" (click)="goToForum(course)">
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Collaborate" | translate }}&nbsp;
@@ -393,7 +392,8 @@
                   </div> -->
                 </div>
                 <div class="col-5">
-                  <button mat-stroked-button class="btl-alin blue_clr cap pointer m-l-10px btn-txt-center" (click)="Go(course)">
+                  <button mat-stroked-button class="btl-alin blue_clr cap pointer m-l-10px btn-txt-center"
+                    (click)="Go(course)">
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Go" | translate }}&nbsp;
                     </span>

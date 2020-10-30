@@ -1076,6 +1076,7 @@ export const getLearnerenrolledCourses = gql`
       message
       global_data{
         author
+        credits
         course_progression_data{
           instructor_lead_session
           internal_assesment_completed
