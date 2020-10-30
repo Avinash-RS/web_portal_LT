@@ -656,12 +656,21 @@ margin-top: 8px;
   height: 100%;
 }
 .errormsg {
-  padding: 20px;
+  padding: 20px 45px 8px 45px;
   font-size: 18px;
   font-weight: 500;
   text-align: center;
   margin-top: 130px;
+  margin-left: 453px;
+  width: 424px;
+  height: 64px;
+  background: #F7FBFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  border: 0.5px solid #707070;
+  border-radius: 10px;
+  opacity: 1;
 }
+
 .redHover:hover {
   color: $lxp-theme-green !important;
 }
@@ -672,4 +681,43 @@ margin-top: 8px;
 .courseName {
   margin-left: 10px;
   margin-top: 12px;
+}
+.assignImg {
+  width: 10%;
+  height: 38px;
+  position: relative;
+  bottom: 8px;
+  right: 9px;
+}
+.msg {
+  position: relative;
+  bottom: 5px;
+  left: 9px;
+}
+.performIcon {
+  width: 10%;
+  height: 38px;
+  position: relative;
+  bottom: 8px;
+  right: 14px;
+}
+.performMsg {
+  position: relative;
+  bottom: 5px;
+  left: 15px;
+}
+.noDatamsg {
+  padding: 20px 45px 8px 45px;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 130px;
+  margin-left: 453px;
+  width: 443px;
+  height: 64px;
+  background: #F7FBFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  border: 0.5px solid #707070;
+  border-radius: 10px;
+  opacity: 1;
 }

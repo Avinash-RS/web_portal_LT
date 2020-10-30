@@ -223,7 +223,8 @@
         </ng-container>
       </mat-accordion>
       <div class="errormsg" *ngIf="assignmentContent?.coursedetails.length < 1">
-        You have no assignments at the moment!
+        <img class="assignImg" alt="" src="assets/006-assignment1.svg">
+        <span class="msg">You have no assignments at the moment!</span>
       </div>
 
     </mat-tab>
@@ -392,8 +393,9 @@
         </div>
       </div>
       </ng-container>
-      <div *ngIf="performDetails?.length < 1">
-        <p class="errormsg">You have no perform activity at the moment!</p>
+      <div class="noDatamsg" *ngIf="performDetails?.length < 1">
+        <img class="performIcon" alt="" src="assets/book.svg">
+        <span class="performMsg">You have no perform activity at the moment!</span>
       </div>
        </mat-tab>
 
@@ -644,8 +646,9 @@
       </div>
       </div>
     </ng-container>
-      <div *ngIf="projectDetails?.length < 1">
-        <p class="errormsg">You have no project activity at the moment!</p>
+      <div class="noDatamsg" *ngIf="projectDetails?.length < 1">
+        <img class="performIcon" alt="" src="assets/002-project-management.svg">
+        <span class="performMsg">You have no project activity at the moment!</span>
       </div>
     </mat-tab>
 
