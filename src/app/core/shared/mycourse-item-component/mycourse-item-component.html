@@ -41,38 +41,40 @@
               <table class="f_size_12">
                 <tr>
                   <td>Instructor led session</td>
-                  <td>N/A</td>
+                  <!-- <td>N/A</td> -->
+                  <td>{{globalData.on_hover_image_data.instructor_lead_session}}</td>
                 </tr>
                 <tr>
                   <td>Self paced learning</td>
-                  <td>N/A</td>
+                  <td>{{globalData.on_hover_image_data.self_paced_learning}}</td>
                 </tr>
                 <tr>
                   <td>Mid course project</td>
-                  <td>N/A</td>
+                  <td>{{globalData.on_hover_image_data.mid_course_project}}</td>
                 </tr>
                 <tr>
                   <td>Internal assessment</td>
-                  <td>N/A</td>
+                  <td>{{globalData.on_hover_image_data.internal_assesment}}</td>
                 </tr>
                 <tr>
                   <td>Final assessment</td>
-                  <td>N/A</td>
+                  <td>{{globalData.on_hover_image_data.final_assesment}}</td>
                 </tr>
               </table>
             </div>
           </div>
         </div>
         <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-          <div class="f_size_18 f_wt_500  coursename">
+          <div class="f_size_17 f_wt_600  coursename">
             <p class="courceNameTag" title="{{course.course_name}}" placement="top">
               {{course.course_name}}
             </p>
           </div>
-          <div class="row">
+          <div class="row lxp_gray123">
             <div class="col-5">
               <p style="margin-bottom:10px"> By:
-                {{course.author_details[0].author_name?course.author_details[0].author_name:'N/A'}}
+                <!-- {{course.author_details[0].author_name?course.author_details[0].author_name:'N/A'}} -->
+                {{globalData.author}}
               </p>
             </div>
             <div class="col">
@@ -90,16 +92,20 @@
           </div>
           <div class="row">
             <div class="col-5" style="margin-bottom:10px;">
-              Start Date:
-              {{course.course_start_datetime?(course.course_start_datetime|date:'dd MMM yyyy'):'N/A' }}
+              <span class="lxp_gray123">Start Date:</span>
+              <span class="f_wt_500">
+                {{course.batch_details?.batch_details?.batchstartdate ?(course.batch_details?.batch_details?.batchstartdate |date:'dd MMM yyyy'):'N/A' }}
+              </span>
             </div>
             <div class="col">
-              End Date:
-              {{course.course_end_datetime?(course.course_end_datetime|date:'dd MMM yyyy'):'N/A' }}
+              <span class="lxp_gray123">End Date:</span>
+              <span class="f_wt_500">
+                {{course.batch_details?.batch_details?.batchenddate ?(course.batch_details?.batch_details?.batchenddate |date:'dd MMM yyyy'):'N/A' }}
+              </span>
             </div>
           </div>
           <div class="row">
-            <div class="col color_black2 f_size_14 descmc f_wt_400 h-50 ">
+            <div class="col color_g f_size_14 descmc f_wt_400 h-50 ">
               <p>
                 {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }}
               </p>
@@ -109,40 +115,41 @@
             <div class="col-8">
               <div class="row">
                 <div class="col">
-                  <p class="f_size_16 f_wt_500">Course progression</p>
+                  <p class="f_size_16 f_wt_500 color_black">Course progression</p>
                 </div>
               </div>
 
-              <div class="row">
+              <div class="row color_g">
                 <div class="col">
                   Instructor led session completed
                 </div>
-                <div class="col-3">
-                  N/A
+                <div class="col-3 f_wt_600">
+                  <!-- N/A -->
+                  {{globalData.course_progression_data.instructor_lead_session}}
                 </div>
               </div>
-              <div class="row">
+              <div class="row color_g">
                 <div class="col">
                   Internal assessment completed
                 </div>
-                <div class="col-3">
-                  N/A
+                <div class="col-3 f_wt_600">
+                  {{globalData.course_progression_data.internal_assesment_completed}}
                 </div>
               </div>
-              <div class="row">
+              <div class="row color_g">
                 <div class="col">
                   Mid course project completed
                 </div>
-                <div class="col-3">
-                  N/A
+                <div class="col-3 f_wt_600">
+                  {{globalData.course_progression_data.mid_course_project_completed}}
                 </div>
               </div>
-              <div class="row">
+              <div class="row color_g">
                 <div class="col">
                   Final assessment completed
                 </div>
-                <div class="col-3">
-                  N/A
+                <div class="col-3 f_wt_600">
+                  {{globalData.course_progression_data.final_assesment_completed}}
                 </div>
               </div>
             </div>
@@ -150,21 +157,21 @@
               <div class="row m-auto">
                 <div>
                   <circle-progress [percent]="0" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2"
-                    [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="4"
-                    [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="5" [animation]="true"
+                    [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="3"
+                    [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="4.5" [animation]="true"
                     [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" subtitle="01/16"
-                    [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=500>
+                    [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600>
                   </circle-progress>
                 </div>
 
               </div>
               <div class="row m-auto">
                 <div class="col ">
-                  <button mat-stroked-button class="blue_clr cap  pointer m-t-05">
+                  <!-- <button mat-stroked-button class="blue_clr cap  pointer m-t-05">
                     <span class="cap f_size_12 f_wt_400 ">
                       {{ "Course report" | translate }}&nbsp;
                     </span>
-                  </button>
+                  </button> -->
                 </div>
               </div>
               <!-- <div class="row m-auto">
@@ -182,21 +189,21 @@
             <div class="col  gold-line-l gold-line-r cardHeights">
               <div class="row">
                 <div class="col ">
-                  <p class="f_size_16 f_wt_500">Self-Paced Learning</p>
+                  <p class="f_size_16 f_wt_500 color_black">Self-Paced Learning</p>
                 </div>
               </div>
-              <div class="row">
+              <div class="row color_g">
                 <div class="col ">
                   <p>Keep learning and revising the topic to hone your skills.</p>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-3">
+              <div class="row color_g ">
+                <div class="col-3 ">
                   Progression
                 </div>
                 <div class="col justify-content-center align-self-center">
                   <mat-progress-bar class="example-margin" [mode]="'determinate'"
-                    [value]="course?.coursePlayerStatus?.course_percentage || 0">
+                    [value]="completedCourse ? 100 : course?.coursePlayerStatus?.course_percentage || 0">
                   </mat-progress-bar>
                 </div>
               </div>
@@ -239,7 +246,7 @@
                   </button>
                   <button mat-stroked-button (click)="gotoDesc(course)" *ngIf="
                                             course?.coursePlayerStatus?.status === 'completed' 
-                                          " class="btl-alin blue_clr cap pointer m-t-05">
+                                          " class="btl-alin blue_clr cap pointer m-t-05 m-l-10px">
                     <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Replay" | translate }}&nbsp;
@@ -252,10 +259,10 @@
             <div class="col gold-line-b cardHeights">
               <div class="row">
                 <div class="col ">
-                  <p class="f_size_16 f_wt_500">Instructor Led</p>
+                  <p class="f_size_16 f_wt_500 color_black">Instructor Led</p>
                 </div>
               </div>
-              <div class="row">
+              <div class="row color_g">
                 <div class="col ">
                   <p>Interact with your faculty, ask questions and learn from classmates.</p>
                 </div>
@@ -299,14 +306,14 @@
             </div>
 
           </div>
-          <div class="row ">
+          <div class="row">
             <div class="col gold-line-l gold-line-r cardHeights">
               <div class="row">
                 <div class="col ">
-                  <p class="f_size_16 f_wt_500">Discussion forum</p>
+                  <p class="f_size_16 f_wt_500 color_black">Discussion forum</p>
                 </div>
               </div>
-              <div class="row">
+              <div class="row color_g">
                 <div class="col ">
                   <p>Interact with peers by posting thoughts and comments on given topic.</p>
                 </div>
@@ -333,7 +340,8 @@
                   </div>
                 </div>
                 <div class="col-5">
-                  <button mat-stroked-button class="btl-alin blue_clr cap pointer m-l-10px" (click)="goToForum(course)">
+                  <button mat-stroked-button *ngIf="userDetail.is_forum_config"
+                    class="btl-alin blue_clr cap pointer m-l-10px" (click)="goToForum(course)">
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Collaborate" | translate }}&nbsp;
                     </span>
@@ -346,10 +354,10 @@
             <div class="col cardHeights">
               <div class="row">
                 <div class="col ">
-                  <p class="f_size_16 f_wt_500">Activities</p>
+                  <p class="f_size_16 f_wt_500 color_black">Activities</p>
                 </div>
               </div>
-              <div class="row">
+              <div class="row color_g">
                 <div class="col ">
                   <p>Practice the skills learnt while reading and attending class.</p>
                 </div>
