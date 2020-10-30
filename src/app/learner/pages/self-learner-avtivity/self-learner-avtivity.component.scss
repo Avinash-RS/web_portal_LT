@@ -103,4 +103,16 @@ bottom: 31px;
 }
 .courseName {
     margin-left: 9px;
+    margin-top: 12px;
 }
+.noData {
+    margin-left: 64px;
+    margin-top: 62px;
+}
+.redHover:hover {
+    color: $lxp-theme-green !important;
+  }
+  .backIc {
+    width: 10px !important;
+    margin-left: 10px !important;
+  }

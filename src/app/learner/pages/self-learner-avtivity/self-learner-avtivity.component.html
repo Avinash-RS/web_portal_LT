@@ -2,9 +2,13 @@
 
   <div class="row ml-0 mr-0 mt-3 mb-3">
     <div class="col-12">
-      <mat-icon class="arrowPopup mr-2" aria-hidden="false">
-        keyboard_arrow_left</mat-icon>
-      <span class="back" routerLink="/Learner/MyCourse" routerLinkActive="active">Back</span>
+      <span class="redHover">
+        <mat-icon class="material-icons f_size_15 backIc pointer" (click)="goToCourse()">arrow_back_ios
+        </mat-icon>
+        <span class="f_size_19 pointer" (click)="goToCourse()">
+          Back
+        </span>
+      </span>
       <p class="courseName"><b>{{courseName}}</b></p>
     </div>
   </div>
@@ -18,7 +22,7 @@
             <b class="courseProgression">Course 
               <p class="prog">Progression</p></b>
           </div>
-          <div class="col-8">
+          <div class="col-8" *ngIf="boardDetails?.courseProgression > 0; else elseBlock">
             <!-- <circle-progress [percent]="70" [radius]="20" [outerStrokeWidth]="5" [innerStrokeWidth]="5" [space]="-2"
                           [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
                           [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
@@ -28,6 +32,8 @@
 
                         <canvas baseChart class="progressionChart" width="100px" height="150px"  [data]="doughnutChartData"  [labels]="doughnutChartLabels"  [plugins]="doughnutPlugins"  [options]="doughnut"   [chartType]="doughnutChartType"   [colors]="doughnutColors">   </canvas>
           </div>
+          <ng-template #elseBlock>
+            <p class="noData">No Data Available.</p></ng-template>
         </div>
       </mat-card>
     </div>
@@ -74,7 +80,7 @@
             </div>
             <div class="col-4">
               Total No. of Activities
-              <p class="center"><b>{{chartData?.totNumberOfActivities || '-'}}</b></p>
+              <p class="center"><b>{{chartData?.totalNumberOfActivities || '-'}}</b></p>
             </div>
           </div>
         </div>
@@ -105,24 +111,24 @@
       </div><br><br>
 
 
-      <div class="box-0-1">
+      <div class="box-0-1" *ngFor="let topic of topicData">
       <div class="row">
         <div class="col-5">
           <span class="gradedot"></span>&nbsp;
           Topic Name
-          <p class="name"><b>Matrix Algebra</b></p>
+          <p class="name"><b>{{topic?.topicName}}</b></p>
         </div>
         <div class="col-2">
           No. of Activities
-          <p><b>04</b></p>
+          <p><b>{{topic?.activityCount}}</b></p>
         </div>
         <div class="col-2">
           Start Date
-          <p><b>28 Oct 2020</b></p>
+          <p><b>{{topic?.activityStartDate}}</b></p>
         </div>
         <div class="col-2">
           End Date
-          <p><b>30 Oct 2020</b></p>
+          <p><b>{{topic?.activityEndDate}}</b></p>
         </div>
         <div class="col-1">
           <mat-icon class="arrow">arrow_drop_down</mat-icon>
@@ -130,30 +136,6 @@
       </div>
     </div>
 
-    <div class="box-0-1">
-      <div class="row">
-        <div class="col-5">
-          <span class="gradedot"></span>&nbsp;
-          Topic Name
-          <p class="name"><b>Expansions of Mathematical Functions</b></p>
-        </div>
-        <div class="col-2">
-          No. of Activities
-          <p><b>04</b></p>
-        </div>
-        <div class="col-2">
-          Start Date
-          <p><b>28 Oct 2020</b></p>
-        </div>
-        <div class="col-2">
-          End Date
-          <p><b>30 Oct 2020</b></p>
-        </div>
-        <div class="col-1">
-          <mat-icon class="arrow">arrow_drop_down</mat-icon>
-        </div>
-      </div>
-      </div>
     </div>
   </mat-card>
   </div>

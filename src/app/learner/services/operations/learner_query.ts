@@ -1598,18 +1598,18 @@ export const boarddetail = gql`
               overDuePercentage
               submittedPercentage
               yetToSubmitPercentage
-              totNumberOfActivities
+              totalNumberOfActivities
               gradedActivities
               submittedActivities
               overDueActivities
               yetToSubmitActivities
             }
-          }
-          topicData{
-            topicName
-            activityCount
-            activityStartDate
-            activityEndDate
+            topicData{
+              topicName
+              activityCount
+              activityStartDate
+              activityEndDate
+            }
           }
         }
       }

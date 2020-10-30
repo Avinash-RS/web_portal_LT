@@ -5,6 +5,7 @@ import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-self-learner-avtivity',
@@ -113,6 +114,7 @@ export class SelfLearnerAvtivityComponent implements OnInit {
   userDetail: any;
   boardDetails: any;
   chartData: any;
+  topicData: any;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               public route: Router) {
@@ -130,11 +132,21 @@ export class SelfLearnerAvtivityComponent implements OnInit {
     this.doughnutChartType = 'doughnut';
     this.getBoarddetails();
   }
+  goToCourse() {
+    this.route.navigateByUrl('/Learner/MyCourse');
+  }
   getBoarddetails() {
     this.Lservice.boarddetail(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
       console.log('data', data);
       this.boardDetails = data.data.boarddetail.data;
       this.chartData = data.data.boarddetail.data.pieData;
+      this.topicData = data.data.boarddetail.data.topicData;
+      this.topicData.forEach(element => {
+        const startDate = new Date(element.activityStartDate);
+        element.activityStartDate = moment(startDate).format('ll');
+        const endDate = new Date(element.activityEndDate);
+        element.activityEndDate = moment(endDate).format('ll');
+      });
       this.doughnutChartData = [this.boardDetails.courseProgression];
       this.activityLabels = ['Graded', 'Submitted', 'Yet to submit', 'Overdue'];
       this.activityData = [this.chartData.gradedPercentage, this.chartData.submittedPercentage, this.chartData.yetToSubmitPercentage,
