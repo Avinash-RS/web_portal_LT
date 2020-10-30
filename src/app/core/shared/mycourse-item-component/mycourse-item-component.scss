@@ -499,7 +499,7 @@ hr {
 }
 
 .color_black2 {
-  color: $label;
+  color: $lxp-footer-text;
 }
 
 :host ::ng-deep .mat-progress-bar-buffer {
@@ -1030,7 +1030,12 @@ hr {
 .mobileResponsive {
   display: none;
 }
-
+.color_g {
+  color: #666666;
+}
+.lxp_gray123 {
+  color: $lxp-gray;
+}
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
   .normalScreen {
@@ -1047,6 +1052,7 @@ hr {
 
   .courseNameCol {
     margin-top: 0.5rem;
+    letter-spacing: 0.5px;
   }
 
   .activitiRow {

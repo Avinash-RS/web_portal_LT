@@ -1,4 +1,3 @@
-
 @import "variable";
 
 :host {
@@ -12,9 +11,11 @@
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2) !important;
 
 }
-.spacer{
+
+.spacer {
     flex: 1 1 auto;
 }
+
 .more-btn {
     height: 100%;
     min-width: 70px;
@@ -32,18 +33,21 @@
     color: $lxp-theme-green;
     cursor: pointer;
     font-size: smaller;
-    left:9px;
+    left: 9px;
 }
 
-:host ::ng-deep .mat-toolbar-row, .mat-toolbar-single-row {
-     height: 55px !important;
+:host ::ng-deep .mat-toolbar-row,
+.mat-toolbar-single-row {
+    height: 55px !important;
 }
 
 .hearder-logo {
     height: 20px;
     cursor: pointer;
+    margin-left: 3px;
     // padding-left: 0.5%;
 }
+
 .edutech {
     display: contents;
     font-size: 22px;
@@ -71,95 +75,110 @@
 
 :host ::ng-deep .mat-toolbar.mat-primary {
     background-color: $lxp-theme-yellow-sec !important;
-    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.1) !important;
+    -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .1) !important;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2) !important;
 
 }
+
 :host ::ng-deep.mat-icon-button {
     line-height: 31px !important;
 
 }
-.mat-toolbar-row, .mat-toolbar-single-row {
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
     padding: 0 11px !important;
     width: 100%;
 }
 
-.btn1{
+.btn1 {
     position: relative;
     font-size: 16px;
     border: none;
     height: 50px;
     padding: 3px 0px;
-    color:$lxp-dark-gray;
+    color: $lxp-dark-gray;
     background: $lxp-theme-yellow-sec !important;
     cursor: pointer;
-  }
-  :host ::ng-deep .btn1:focus {
-    border-bottom: 2px solid $lxp-theme-green !important; 
+}
+
+:host ::ng-deep .btn1:focus {
+    border-bottom: 2px solid $lxp-theme-green !important;
     // border-right: none !important;
     // outline: 0 !important;
     // border-left: none !important;
-  }
-.btn1:hover{
-color:  $color-blank !important;
 }
+
+.btn1:hover {
+    color: $color-blank !important;
+}
+
 :host ::ng-deep button:active {
     outline: none !important;
     border: none;
     color: $color-blank;
-    }
+}
 
-  .tab{
+.tab {
     text-align: right;
     margin-right: 1%;
     width: 100%;
-  }
+}
 
-  .headTit{
+.headTit {
     display: contents;
     font-size: 14px;
     font-style: oblique;
     color: $color-blank;
     margin-left: 2px;
     font-weight: bold;
-  }
-  .headicon{
+}
+
+.headicon {
     font-size: 22px !important;
     // width: 30px !important;
     position: relative;
     top: 6px;
-  }
- .colgreen{
-    border-bottom: 2px solid $lxp-theme-green !important; 
+}
+
+.activity-icon {
+    height: 22px;
+    width: 22px;
+}
+
+
+.colgreen {
+    border-bottom: 2px solid $lxp-theme-green !important;
     color: $color-blank !important;
     // position: relative;
     // top: 2px;
 
- }
- .iconmenu{
-     color: $color-blank !important;
- }
- .mat-h5, .mat-typography h5 {
+}
+
+.iconmenu {
+    color: $color-blank !important;
+}
+
+.mat-h5,
+.mat-typography h5 {
     margin: 0px 0 5px !important;
 }
 
-.colWhite{
-
-}
+.colWhite {}
 
 .bookIcon {
- display: none;
+    display: none;
 }
 
 .btn1 {
     display: block;
-  }
+}
 
 @media screen and (min-width: 200px) and (max-width: 767.98px) {
     .btn1 {
-      display: none;
+        display: none;
     }
-    
+
     .bookIcon {
         display: block !important;
         position: relative;
@@ -184,4 +203,4 @@ color:  $color-blank !important;
     align-items: center;
     justify-content: center;
     color: $lxp-theme-green;
-  }
+}

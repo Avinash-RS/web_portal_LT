@@ -13,7 +13,16 @@ export const environment = {
   analytics: 'UA-171656647-1',
   systemIp : 'http://api.ipify.org/?format=json',
 };
-
+// export const environment = {
+//   production: false,
+//   apiUrl: 'http://20.44.35.112:3000/',
+//   scormUrl:'http://52.140.12.78:8089/',
+//   apiUrlImg:'http://20.44.35.112:3000/',
+//   createCourseApi:'http://52.140.12.145:3002/',
+//   wcaapiurl:'http://20.44.38.161:9001/',
+//   domain : 'LXP',
+//   systemIp : 'http://api.ipify.org/?format=json',
+// };
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

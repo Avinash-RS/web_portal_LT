@@ -16,6 +16,8 @@ import Swal from 'sweetalert2';
 })
 export class MycourseItemComponent implements OnInit {
   @Input('courseItems') course: any = {};
+  @Input() completedCourse: number;
+  @Input() globalData: any = {};
   // @Input('canNavigate') canNavigate: boolean;
   // @Input('showCartBtn') showCartBtn: boolean;
   // @Input('showWishlist') showWishlist: boolean;
@@ -40,9 +42,9 @@ export class MycourseItemComponent implements OnInit {
     public service: CommonServicesService,
     private alert: AlertServiceService,
     private gs: GlobalServiceService,
-    // tslint:disable-next-line:align
-    private router: Router, private loader: Ng4LoadingSpinnerService,) {
-    this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('adminDetails')) || null;
+    private router: Router,
+    private loader: Ng4LoadingSpinnerService, ) {
+    this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails')) || null;
     this.role = localStorage.getItem('role') || null;
   }
 
@@ -56,7 +58,7 @@ export class MycourseItemComponent implements OnInit {
     };
     localStorage.setItem('Courseid', data1.courseId);
     localStorage.setItem('CourseName', data1.courseName);
-    this.router.navigateByUrl('/Learner/activities', { state:  { data:  data1 } });
+    this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
   }
   gotoDesc(c) {
     const detail = {

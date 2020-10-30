@@ -32,6 +32,7 @@ export class LearnerMyCourseComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   @Output() focusChange: EventEmitter<MatTabChangeEvent>;
   [x: string]: any;
+  globalData: any;
   showSkeleton = false;
   jobRoleId: any = '';
   strDate: Date = new Date();
@@ -328,6 +329,8 @@ export class LearnerMyCourseComponent implements OnInit {
       catalougeId, catagoryId, jobRoleCategoryId, searchName).subscribe((enrolledList: any) => {
         if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
           this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
+          this.globalData = enrolledList.data.getLearnerenrolledCourses.global_data;
+          console.log(this.globalData);
           if (this.enrolledCourses.length > 0) {
             this.enrolledCourses.forEach(element => {
               if (element.course_duration) {
