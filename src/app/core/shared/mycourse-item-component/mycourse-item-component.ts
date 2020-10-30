@@ -42,7 +42,7 @@ export class MycourseItemComponent implements OnInit {
     private gs: GlobalServiceService,
     // tslint:disable-next-line:align
     private router: Router, private loader: Ng4LoadingSpinnerService, ) {
-    this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('adminDetails')) || null;
+    this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails')) || null;
     this.role = localStorage.getItem('role') || null;
   }
   ngOnInit(){
