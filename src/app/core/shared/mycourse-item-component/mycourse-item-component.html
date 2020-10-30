@@ -293,7 +293,7 @@
                 <div class="col-5">
                   <button mat-stroked-button class="btl-alin btn-txt-center
                   blue_clr cap pointer m-l-10px sub-align" (click)="goInstructorLed(course)">
-                  <img src="../../../../assets/learner/mycourseicons/joinmain.svg" width="16px" height="12.5px" >
+                  <img class="mycourse-btn-img" src="../../../../assets/learner/mycourseicons/joinmain.svg" width="16px" height="12.5px" >
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Join" | translate }}&nbsp;
                     </span>
@@ -347,7 +347,7 @@
                 <div class="col-5">
                   <button mat-stroked-button *ngIf="userDetail.is_forum_config" class="btl-alin blue_clr btn-txt-center
                     cap pointer m-l-10px sub-align p-7-lr" (click)="goToForum(course)">
-                    <img src="../../../../assets/learner/mycourseicons/collaborate.svg"  width="16px" height="12.5px" >
+                    <img class="mycourse-btn-img" src="../../../../assets/learner/mycourseicons/collaborate.svg"  width="16px" height="12.5px" >
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Collaborate" | translate }}&nbsp;
                     </span>
@@ -396,7 +396,7 @@
                 <div class="col-5">
                   <button mat-stroked-button class="btl-alin blue_clr cap pointer m-l-10px btn-txt-center sub-align"
                     (click)="Go(course)">
-                    <img src="../../../../assets/learner/mycourseicons/go.svg"  width="16px" height="12.5px">
+                    <img class="mycourse-btn-img" src="../../../../assets/learner/mycourseicons/go.svg"  width="16px" height="12.5px">
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Go" | translate }}&nbsp;
                     </span>
