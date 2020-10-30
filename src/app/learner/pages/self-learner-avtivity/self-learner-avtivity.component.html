@@ -1,38 +1,160 @@
-<div class="container selfContainer">
+<app-header></app-header>
+
   <div class="row ml-0 mr-0 mt-3 mb-3">
     <div class="col-12">
       <mat-icon class="arrowPopup mr-2" aria-hidden="false">
         keyboard_arrow_left</mat-icon>
-      <span class="f_wt_600 size catnamenew">Back</span>
-      <p>Emerging Technologies : loT, 3D, Printing, Robotics > Self-learning activity details</p>
+      <span class="back" routerLink="/Learner/MyCourse" routerLinkActive="active">Back</span>
+      <p class="courseName"><b>{{courseName}}</b></p>
     </div>
   </div>
+  <!---------------------------------------Course Progression--------------------------------->
+  <div class="container selfContainer">
   <div class="row ml-0 mr-0">
     <div class="col-4">
-      <mat-card>
+      <mat-card class="card">
         <div class="row ml-0 mr-0">
-          <div class="col-4 pr-0"></div>
+          <div class="col-4 pr-0">
+            <b class="courseProgression">Course 
+              <p class="prog">Progression</p></b>
+          </div>
           <div class="col-8">
-            <circle-progress [percent]="70" [radius]="20" [outerStrokeWidth]="5" [innerStrokeWidth]="5" [space]="-2"
+            <!-- <circle-progress [percent]="70" [radius]="20" [outerStrokeWidth]="5" [innerStrokeWidth]="5" [space]="-2"
                           [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
                           [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
                           [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
                           [startFromZero]="false" [responsive]="true">
-                        </circle-progress>
+                        </circle-progress> -->
+
+                        <canvas baseChart class="progressionChart" width="100px" height="150px"  [data]="doughnutChartData"  [labels]="doughnutChartLabels"  [plugins]="doughnutPlugins"  [options]="doughnut"   [chartType]="doughnutChartType"   [colors]="doughnutColors">   </canvas>
           </div>
         </div>
       </mat-card>
     </div>
+
+    <!---------------------------------------Completion Status--------------------------------->
     <div class="col-4">
-      <mat-card></mat-card>
+      <mat-card class="card">
+        <div class="row">
+          <b class="completion">Completion Status</b>
+        </div><br>
+        <div class="module">
+         <p class="m-l-58">Modules completed <b class="m-l-40">{{boardDetails?.moduleCovered}}</b></p> 
+          <p class="m-l-58">Topics completed <b class="m-l-46">{{boardDetails?.topicCovered}}</b></p> 
+        </div>
+      </mat-card>
     </div>
+    <!---------------------------------------Activity Status--------------------------------->
     <div class="col-4">
-      <mat-card></mat-card>
+      <mat-card class="card">
+        <canvas baseChart class="activityChart" width="100px" height="150px"  [data]="activityData"  [labels]="activityLabels"  [plugins]="activityPlugins"  [options]="activityCount"   [chartType]="activityType"   [colors]="activityColors">   </canvas>
+      </mat-card>
     </div>
-  </div>
-  <div class="row ml-0 mr-0">
+  </div><br>
+
+  <!---------------------------------------Learning Progression--------------------------------->
+  <div class="row ml-0 mr-0 mt-0">
     <div class="col-12">
-      <mat-card></mat-card>
+      <mat-card>
+      <div>
+        <div class="row">
+        <b class="learning">Learning Progression</b>
+      </div><br>
+
+      <div class="row">
+        <div class="col-6">
+          <div class="row">
+            <div class="col-4">
+              Total No. of Modules
+              <p class="center"><b>{{boardDetails?.totalNumberOfModule}}</b></p>
+            </div>
+            <div class="col-4">
+              Total No. of Topics
+              <p class="center"><b>{{boardDetails?.totalNumberOfTopic}}</b></p>
+            </div>
+            <div class="col-4">
+              Total No. of Activities
+              <p class="center"><b>{{chartData?.totNumberOfActivities || '-'}}</b></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="row">
+            <div class="col-6">
+              Graded Activities
+              <p class="center"><b>{{chartData?.gradedActivities}}</b></p>
+            </div>
+            <div class="col-6">
+              Submitted Activities
+              <p class="center"><b>{{chartData?.submittedActivities}}</b></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="row">
+            <div class="col-6">
+              Overdue Activities
+              <p class="center"><b>{{chartData?.overDueActivities}}</b></p>
+            </div>
+            <div class="col-6">
+              Yet to Submit
+              <p class="center"><b>{{chartData?.yetToSubmitActivities}}</b></p>
+            </div>
+          </div>
+        </div>
+      </div><br><br>
+
+
+      <div class="box-0-1">
+      <div class="row">
+        <div class="col-5">
+          <span class="gradedot"></span>&nbsp;
+          Topic Name
+          <p class="name"><b>Matrix Algebra</b></p>
+        </div>
+        <div class="col-2">
+          No. of Activities
+          <p><b>04</b></p>
+        </div>
+        <div class="col-2">
+          Start Date
+          <p><b>28 Oct 2020</b></p>
+        </div>
+        <div class="col-2">
+          End Date
+          <p><b>30 Oct 2020</b></p>
+        </div>
+        <div class="col-1">
+          <mat-icon class="arrow">arrow_drop_down</mat-icon>
+        </div>
+      </div>
     </div>
+
+    <div class="box-0-1">
+      <div class="row">
+        <div class="col-5">
+          <span class="gradedot"></span>&nbsp;
+          Topic Name
+          <p class="name"><b>Expansions of Mathematical Functions</b></p>
+        </div>
+        <div class="col-2">
+          No. of Activities
+          <p><b>04</b></p>
+        </div>
+        <div class="col-2">
+          Start Date
+          <p><b>28 Oct 2020</b></p>
+        </div>
+        <div class="col-2">
+          End Date
+          <p><b>30 Oct 2020</b></p>
+        </div>
+        <div class="col-1">
+          <mat-icon class="arrow">arrow_drop_down</mat-icon>
+        </div>
+      </div>
+      </div>
+    </div>
+  </mat-card>
   </div>
 </div>

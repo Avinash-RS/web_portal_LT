@@ -1583,3 +1583,35 @@ export const get_active_course_count = gql`
       }
           `;
 
+export const boarddetail = gql`
+      query boarddetail($user_id: String, $course_id: String) {
+        boarddetail(user_id : $user_id, course_id: $course_id) {
+          success
+          data{
+            courseProgression
+            moduleCovered
+            topicCovered
+            totalNumberOfModule
+            totalNumberOfTopic
+            pieData{
+              gradedPercentage
+              overDuePercentage
+              submittedPercentage
+              yetToSubmitPercentage
+              totNumberOfActivities
+              gradedActivities
+              submittedActivities
+              overDueActivities
+              yetToSubmitActivities
+            }
+          }
+          topicData{
+            topicName
+            activityCount
+            activityStartDate
+            activityEndDate
+          }
+        }
+      }
+`;
+

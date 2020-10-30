@@ -19,6 +19,7 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { Ng5SliderModule } from 'ng5-slider';
 import { MyDatePickerModule } from 'mydatepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ChartsModule } from 'ng2-charts';
 
 import { MaskingPipePipe } from '@core/core/masking-pipe.pipe';
 import { CoreModule } from '@core/core.module';
@@ -139,7 +140,7 @@ const routes: Routes = [
     data: { animation: 'Learner  MyCourse' }
   },
   {
-    path: 'SelfLearner',
+    path: 'selfLearning',
     component: SelfLearnerAvtivityComponent,
     // resolve: {
     //   data: LearnermycourseService
@@ -268,6 +269,7 @@ const routes: Routes = [
     NgxMaskModule,
     MatMenuModule,
     AngularEditorModule,
+    ChartsModule,
     TooltipModule.forRoot(),
     RouterModule.forChild(routes),
     NgCircleProgressModule.forRoot({
