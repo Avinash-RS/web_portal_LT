@@ -73,6 +73,13 @@ import { DiscussionForumComponent } from './pages/discussion-forum/discussion-fo
 import { LearnerActivityCenterComponent } from './pages/learner-activity-center/learner-activity-center.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { ActivitycenterhomescreenComponent } from './pages/activitycenterhomescreen/activitycenterhomescreen.component';
+import { InstructorLedComponent } from './pages/instructor-led/instructor-led.component';
+import { KnowledgeResourceHomeComponent } from './pages/knowledge-resource-home/knowledge-resource-home.component';
+import { KnowledgeLandingPageComponent } from './pages/knowledge-landing-page/knowledge-landing-page.component';
+import { KnowledgePreviewComponent } from './pages/knowledge-preview/knowledge-preview.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FilterPipe } from '../pipes/filter.pipe';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -183,7 +190,17 @@ const routes: Routes = [
     data: { animation: 'activitycenterhomescreen' }
 
   },
-
+  
+  {
+    path: 'knowledge',
+    component: KnowledgeResourceHomeComponent,
+    data: { animation: 'activitycenterhomescreen' }
+  },
+  {
+    path: 'knowledge/preview',
+    component: KnowledgeLandingPageComponent,
+    data: { animation: 'activitycenterhomescreen' }
+  },
   // {
   //   path: 'terms',
   //   component: TermsconditionsComponent,
@@ -219,6 +236,11 @@ const routes: Routes = [
   {
     path: 'viewAllnotifications',
     component: ViewAllnotificationsComponent,
+  },
+  {
+    path: 'instructorLed',
+    component: InstructorLedComponent,
+    data: { animation: 'Learner  MyCourse' }
   }
   // { path: 'new-home', component: NewHomeComponent },
 ];
@@ -254,7 +276,12 @@ const routes: Routes = [
     ActivitiesComponent,
     DiscussionForumComponent,
     LearnerActivityCenterComponent,
-    ActivitycenterhomescreenComponent
+    ActivitycenterhomescreenComponent,
+    InstructorLedComponent,
+    KnowledgePreviewComponent,
+    KnowledgeLandingPageComponent,
+    KnowledgeResourceHomeComponent,
+    FilterPipe
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -299,6 +326,8 @@ const routes: Routes = [
     PdfJsViewerModule,
     RatingModule,
     NgCircleProgressModule,
+    Ng2SearchPipeModule,
+    PdfViewerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -319,6 +348,6 @@ const routes: Routes = [
     Apollo
     // { provide: Window, useValue: window }
   ],
-  entryComponents: [CategoryComponentComponent]
+  entryComponents: [CategoryComponentComponent,KnowledgePreviewComponent]
 })
 export class LearnerModule { }

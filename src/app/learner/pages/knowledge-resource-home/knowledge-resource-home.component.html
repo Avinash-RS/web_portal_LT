@@ -1,0 +1,27 @@
+<app-header></app-header>
+      <div class="know-home-container">
+        <!-- <div class="header-div">
+            <h3>Knowledge Ressources</h3>
+         </div>  -->
+        <div class="search-bar">
+          <form>
+            <input type="search" id="gsearch" placeholder="Search..." name="gsearch" [(ngModel)]="searchDetails" class="no-outline">
+            <!-- <label class="search-placeholder">Search...</label> -->
+            <i class="material-icons">search</i>
+          </form>
+        </div>
+  
+        <div class="row resource-link">
+          <div class="col-4 resource-col" *ngFor="let item of details | filter:searchDetails">
+            <h1>{{item[0]}}</h1>
+            <ng-container *ngFor="let areaOfInt of item[1];let i = index">
+              <ng-container *ngIf="i < 13 || item[2]">
+                <a (click)="onResourcePreview(areaOfInt)">{{areaOfInt.area_of_interest}}</a><br>
+              </ng-container>
+            </ng-container>
+            <ng-container  *ngIf="item[1].length > 13 && !item[2]">
+              <span (click)="item[2] = true" class="expand-more">More...</span>
+            </ng-container>
+          </div>
+        </div>
+      </div>

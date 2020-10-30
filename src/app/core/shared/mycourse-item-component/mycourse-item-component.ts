@@ -16,6 +16,8 @@ import Swal from 'sweetalert2';
 })
 export class MycourseItemComponent implements OnInit {
   @Input('courseItems') course: any = {};
+  @Input() completedCourse: number;
+  @Input() globalData: any = {};
   // @Input('canNavigate') canNavigate: boolean;
   // @Input('showCartBtn') showCartBtn: boolean;
   // @Input('showWishlist') showWishlist: boolean;
@@ -40,13 +42,13 @@ export class MycourseItemComponent implements OnInit {
     public service: CommonServicesService,
     private alert: AlertServiceService,
     private gs: GlobalServiceService,
-    // tslint:disable-next-line:align
-    private router: Router, private loader: Ng4LoadingSpinnerService, ) {
-    this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('adminDetails')) || null;
+    private router: Router,
+    private loader: Ng4LoadingSpinnerService, ) {
+    this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails')) || null;
     this.role = localStorage.getItem('role') || null;
   }
-  ngOnInit(){
 
+  ngOnInit() {
   }
   Go(course) {
     const data1 = {
@@ -55,7 +57,7 @@ export class MycourseItemComponent implements OnInit {
     };
     localStorage.setItem('Courseid', data1.courseId);
     localStorage.setItem('CourseName', data1.courseName);
-    this.router.navigateByUrl('/Learner/activities', { state:  { data:  data1 } });
+    this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
   }
   goToSelflearning(course) {
     const data1 = {
@@ -93,6 +95,7 @@ export class MycourseItemComponent implements OnInit {
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
     this.router.navigateByUrl('/Learner/discussionForum', { state: { detail } });
+    // this.router.navigateByUrl('/Learner/instructorLed', { state: { detail } });
   }
 
 
@@ -105,5 +108,15 @@ export class MycourseItemComponent implements OnInit {
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
     this.router.navigateByUrl('/Learner/activitycenter', { state: { detail } });
+  }
+
+  goInstructorLed(c) {
+    localStorage.setItem('Courseid', c.course_id);
+    const detail = {
+      id: c.course_id,
+      name: c.course_name
+    };
+    localStorage.setItem('course', btoa(JSON.stringify(detail)));
+    this.router.navigateByUrl('/Learner/instructorLed', { state: { detail } });
   }
 }

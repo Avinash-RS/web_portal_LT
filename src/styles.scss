@@ -915,3 +915,9 @@ mat-header-cell,
     padding: 0px;
   }
 }
+
+.knowledge-preview-popup {
+  .mat-dialog-container {
+      padding: 0px !important;
+  }
+}
