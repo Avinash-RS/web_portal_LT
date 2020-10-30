@@ -1576,8 +1576,8 @@ export const ViewAllThreadData = gql`
   }
 `;
 export const getReadLeanerActivity = gql`
-  query get_read_learner_activity($userid: String!, $date: String!) {
-    get_read_learner_activity(userid: $userid, date: $date) {
+  query get_read_learner_activity($userid: String!, $date: String!, $courseid: String!) {
+    get_read_learner_activity(userid: $userid, date: $date, courseid: $courseid) {
       success
       error_msg
       message {
@@ -1918,3 +1918,96 @@ export const get_active_course_count = gql`
       }
           `;
 
+export const getActivityDetailsByBatchAndCourseID = gql`
+query get_course_activities_by_id( $batchid: String!, $courseid: String!){
+  get_course_activities_by_id( batchid: $batchid, courseid: $courseid){
+  success
+  message
+  data{
+    _id
+    topicDetails{
+            topicname
+            status
+            activityid
+            courseid
+            coursename
+            modulename
+            startdate
+            enddate
+            activitytype
+            activityname
+            link
+            created_on
+            createdby_name
+            createdby_role
+            createdby_id
+            resourcefile{
+              _id
+              doc_type
+              path
+              type_name
+              filename
+              size
+              assignment
+              checked
+            }
+            Status
+    }
+  }
+}
+}
+`;
+
+export const getTopicAttendanceDetailsByUsername = gql`
+query getTopicAttendanceDetailsByUsername( $courseid: String!, $full_name: String!, $user_id: String!){
+  getTopicAttendanceDetailsByUsername( courseid: $courseid, full_name: $full_name, user_id: $user_id ){
+      success
+      message
+      data{
+          _id
+          activity{
+              _id
+              batchid
+              courseid
+              coursename
+              modulecount
+              moduledetails{
+                  modulename
+                  topicdetails{
+                      topicname
+                      status
+                      activityid
+                      courseid
+                      coursename
+                      modulename
+                      startdate
+                      enddate
+                      activitytype
+                      activityname
+                      link
+                      created_on
+                      createdby_name
+                      createdby_role
+                      createdby_id
+                      copy
+                      topictype
+                      groupname
+                      iterations
+                      evaluationtype
+                      livethumbnail
+                      attendencefile
+                      attendencedetails{
+                          Learners
+                          Attendence
+                      }
+                      evaluationmode
+                      trainers
+                      learners
+                      resourcefile
+                  }
+              }
+          }
+      }
+  }
+}
+`;

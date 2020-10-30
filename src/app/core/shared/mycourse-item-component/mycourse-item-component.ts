@@ -49,7 +49,6 @@ export class MycourseItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log(this.globalData);
   }
   Go(course) {
     console.log('name', course);
@@ -88,6 +87,7 @@ export class MycourseItemComponent implements OnInit {
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
     this.router.navigateByUrl('/Learner/discussionForum', { state: { detail } });
+    // this.router.navigateByUrl('/Learner/instructorLed', { state: { detail } });
   }
 
 
@@ -100,5 +100,15 @@ export class MycourseItemComponent implements OnInit {
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
     this.router.navigateByUrl('/Learner/activitycenter', { state: { detail } });
+  }
+
+  goInstructorLed(c) {
+    localStorage.setItem('Courseid', c.course_id);
+    const detail = {
+      id: c.course_id,
+      name: c.course_name
+    };
+    localStorage.setItem('course', btoa(JSON.stringify(detail)));
+    this.router.navigateByUrl('/Learner/instructorLed', { state: { detail } });
   }
 }

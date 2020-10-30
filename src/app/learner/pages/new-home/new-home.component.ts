@@ -47,7 +47,9 @@ export class NewHomeComponent implements OnInit {
     //   )
     // ).toISOString();
     var dateValue = new Date().toISOString();
-    this.learnerService.getReadLeanerActivity(this.userDetailes.user_id, dateValue).subscribe((data: any) => {
+    const empty = undefined;
+    this.learnerService.getReadLeanerActivity(this.userDetailes.user_id, dateValue, empty).subscribe((data: any) => {
+      console.log(data);
       this.results = data.data.get_read_learner_activity;
       this.results['message'].forEach((element, index) => {
         if (index === 0) {
