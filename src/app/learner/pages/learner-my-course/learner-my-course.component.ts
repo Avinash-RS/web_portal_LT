@@ -526,13 +526,14 @@ Go(course) {
     this.viewCourseClass = false;
     this.categoryPopupData = categoryname;
     this.categoryCount = categorycount;
-
+    if (categorycount > 0) {
     this.dialog.open(templateRef, {
       panelClass: 'dialogContainer',
       closeOnNavigation: true,
       disableClose: true,
     });
   }
+}
   closedialogbox() {
     this.dialog.closeAll();
     this.allcourses = [];
