@@ -7,20 +7,14 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
-// import { setInterval, clearInterval} from 'timers';
-// import Swal from 'sweetalert2';
-import * as myGlobals from '@core/globals';
 import { MatDialog, MatSidenav, MatTabGroup } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
-import { SocketioService } from '@learner/services/socketio.service';
 import { TranslateService } from '@ngx-translate/core';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import * as _ from 'lodash';
-import { LegendPosition } from 'ag-grid-community';
-// import { debugger } from 'fusioncharts';
+import { SocketioService } from '@learner/services/socketservice';
 
 @Component({
   selector: 'app-coursedetails',
