@@ -13,6 +13,7 @@ export class KnowledgeResourceHomeComponent implements OnInit {
     'Knowledge Check': /(\.csv)$/i,
   };
   imageView: File;
+  searchDetails: any;
   sampleFileLink = 'https://edutechstorage.blob.core.windows.net/container1/resource/739113684616842-Sample-file.csv'
   @ViewChild('fileInput3') fileInput3;
 

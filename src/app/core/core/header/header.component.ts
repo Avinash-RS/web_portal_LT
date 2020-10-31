@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
-import { SocketioService } from '@learner/services/socketservice';
+import { SocketioService } from '@learner/services/socketio.service';
 
 @Component({
   selector: 'app-header',
@@ -30,8 +30,8 @@ export class HeaderComponent implements OnInit {
 
   @HostBinding('class') componentCssClass;
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
-              private http: HttpClient, public overlayContainer: OverlayContainer, public socketService: SocketioService,
-              public router: Router, private gs: GlobalServiceService) {
+    private http: HttpClient, public overlayContainer: OverlayContainer,  public socketService: SocketioService,
+    public router: Router, private gs: GlobalServiceService) {
     // this.getScreenSize();
   }
 
@@ -93,7 +93,7 @@ export class HeaderComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes'
     }).then((result) => {
-      console.log('inside logout result', result, 'login -', this.loginDetails, 'user - ', this.userDetailes);
+      // console.log('inside logout result', result, 'login -', this.loginDetails, 'user - ', this.userDetailes);
       if (result.value) {
         this.loading = true;
         // this.router.navigate(['/Learner/login']);

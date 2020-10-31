@@ -66,13 +66,15 @@ export class DiscussionForumComponent implements OnInit {
   loading = false;
 
   constructor(public Lservice: LearnerServicesService, public route: Router, private formBuilder: FormBuilder,
-              private gs: GlobalServiceService, private toastr: ToastrService, private dialog: MatDialog,
-              public cS: CommonServicesService) {
+    private gs: GlobalServiceService, private toastr: ToastrService, private dialog: MatDialog,
+    public cS: CommonServicesService) {
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.course = detail || JSON.parse(atob(localStorage.getItem('course')));
     this.userDetail = this.gs.checkLogout();
-    this.playerModuleAndTopic(this.course.id);
+    if (this.course.isBatch) {
+      this.playerModuleAndTopic(this.course.id);
+    }
   }
 
   ngOnInit() {

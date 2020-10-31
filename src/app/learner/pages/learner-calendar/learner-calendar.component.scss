@@ -256,7 +256,7 @@
     border-bottom-color: #b3b2b2;
 }
 
-::ng-deep.cal-month-view .cal-day-cell:not(:last-child) {
+ :host ::ng-deep.cal-month-view .cal-day-cell:not(:last-child) {
     border-right-color: #b3b2b2;
 }
 .footer {

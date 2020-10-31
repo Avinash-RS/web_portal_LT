@@ -3,8 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import * as _ from 'underscore';
 
-const courseid = 'tbiwys0m';
-const userid = 'aj1yej';
+// const courseid = 'tbiwys0m';
+// const userid = 'aj1yej';
 
 @Component({
   selector: 'app-instructor-led',
@@ -25,12 +25,11 @@ export class InstructorLedComponent implements OnInit {
               private learnerService: LearnerServicesService) {
               this.course = (this.router.getCurrentNavigation() && this.router.getCurrentNavigation().extras &&
                 this.router.getCurrentNavigation().extras.state && this.router.getCurrentNavigation().extras.state.detail);
-              // console.log(this.course);
   }
 
   ngOnInit() {
     this.getAttendance();
-    this.getSessionsList();
+    // this.getSessionsList();
   }
 
   getBack() {
@@ -38,17 +37,70 @@ export class InstructorLedComponent implements OnInit {
   }
 
   getAttendance() { // Http Call
-    // const obj = {
-    //   "courseid": this.course.id,
-    //   "full_name": "Student002",
-    //   'user_id': 'o5jnyx'
-    // };
-    // console.log(obj);
     const userDetails = JSON.parse(sessionStorage.getItem('UserDetails'));
     this.learnerService.getAttendanceByUsername(this.course.id, userDetails.full_name, userDetails.user_id).subscribe(res => {
-      this.sessionAttendance = res.data['getTopicAttendanceDetailsByUsername']['data'];
-      this.attendedSessions = _.countBy(this.sessionAttendance, x => x.activity.moduledetails.topicdetails.attendencedetails.Attendence === 'yes');
+      console.log(res);
+      const data = res.data['getTopicAttendanceDetailsByUsername']['data'];
+      this.listOfSessions = data.Activity;
+      this.sessionAttendance = data.Attendance;
+      console.log(this.listOfSessions);
+      for (const los of this.listOfSessions) {
+        los.duration = this.getTimes(los.activity_details.enddate, los.activity_details.startdate);
+      }
+      if (this.listOfSessions.length) {
+        this.onGoingSession();
+      } 
+      this.attendedSessions = _.countBy(this.sessionAttendance, x => x.activity.attendencedetails.Attendence === 'yes');
+      console.log(this.attendedSessions);
     });
+  }  
+
+  // getSessionsList() { // Http Call
+  //   const date = '2020-10-27'; // new Date();
+  //   this.learnerService.getReadLeanerActivity(userid, date, courseid).subscribe(async res => {
+  //   const date = new Date();
+  //   this.learnerService.getReadLeanerActivity(userDetails.user_id, date, this.course.id).subscribe(async res => {
+  //     this.listOfSessions = res.data['get_read_learner_activity']['message'];
+  //     this.totalSessions = this.listOfSessions.length;
+  //     this.recordedSessions = this.listOfSessions.length;s
+  //     for (const los of this.listOfSessions) {
+  //       los.duration = await this.getTimes(los.activity_details.enddate, los.activity_details.startdate);
+  //     }
+  //     if (this.listOfSessions.length) {
+  //       this.onGoingSession();
+  //     }
+  //   });
+  // }
+
+  useSession(los) {
+    this.activityShow = los;
+    if (los.status === 'On going') {
+      this.activityShow.button = 'Join Now';
+    } else if (los.status !== 'Up Coming') {
+      this.activityShow.button = 'Play Now';
+    }
+  }
+
+  onGoingSession() {
+    debugger
+    const ongoing = this.listOfSessions.find(x => x.status === 'On going');
+    if (ongoing === undefined) {
+      const upcoming = this.listOfSessions.find(x => x.status === 'Up Coming');
+      if (upcoming === undefined) {
+        this.activityShow = this.listOfSessions[0];
+        this.activityShow.button = 'Play Now';
+      } else {
+        this.activityShow = upcoming;
+        // this.activityShow.button = '';
+      }
+    } else {
+      this.activityShow = ongoing;
+      this.activityShow.button = 'Join Now';
+    }
+  }
+
+  getAction(link) {
+    window.open(link, '_blank');
   }
 
   getTimes(endDate, startDate) {
@@ -75,51 +127,5 @@ export class InstructorLedComponent implements OnInit {
       context = mm + ' minutes';
     }
     return context;
-  }
-
-  getSessionsList() { // Http Call
-    // const date = '2020-10-27'; // new Date();
-    // this.learnerService.getReadLeanerActivity(userid, date, courseid).subscribe(async res => {
-    const date = new Date();
-    const userDetails = JSON.parse(sessionStorage.getItem('UserDetails'));
-    this.learnerService.getReadLeanerActivity(userDetails.user_id, date, this.course.id).subscribe(async res => {
-      this.listOfSessions = res.data['get_read_learner_activity']['message'];
-      this.totalSessions = this.listOfSessions.length;
-      this.recordedSessions = this.listOfSessions.length;
-      for (const los of this.listOfSessions) {
-        los.duration = await this.getTimes(los.activity_details.enddate, los.activity_details.startdate);
-      }
-      this.onGoingSession();
-    });
-  }
-
-  useSession(los) {
-    this.activityShow = los;
-    if (los.status === 'On going') {
-      this.activityShow.button = 'Join Now';
-    } else if (los.status !== 'Up Coming') {
-      this.activityShow.button = 'Play Now';
-    }
-  }
-
-  onGoingSession() {
-    const ongoing = this.listOfSessions.find(x => x.status === 'On going');
-    if (ongoing === undefined) {
-      const upcoming = this.listOfSessions.find(x => x.status === 'Up Coming');
-      if (upcoming === undefined) {
-        this.activityShow = this.listOfSessions[0];
-        this.activityShow.button = 'Play Now';
-      } else {
-        this.activityShow = upcoming;
-        // this.activityShow.button = '';
-      }
-    } else {
-      this.activityShow = ongoing;
-      this.activityShow.button = 'Join Now';
-    }
-  }
-
-  getAction(link) {
-    window.open(link, '_blank');
   }
 }

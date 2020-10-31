@@ -27,13 +27,13 @@ import { ConfigsLoaderService } from '@core/services/configs-loader.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { DatePipe } from '@angular/common';
-import { SocketioService } from '@learner/services/socketservice';
-
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { SocketioService } from '@learner/services/socketio.service';
 // import { ChartsModule } from 'ng2-charts';
 
 // import { JwtInterceptor } from './core/services/_helpers/jwt.interceptor';
 // import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
+const config: SocketIoConfig = { url: 'http://localhost:4444', options: {} };
 export function getBaseHref(platformLocation: PlatformLocation): string {
   return platformLocation.getBaseHrefFromDOM();
 }
@@ -49,6 +49,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
   ],
   imports: [
     Ng4LoadingSpinnerModule.forRoot(),
+    SocketIoModule.forRoot(config),
     MaterialModule,
     // ChartsModule,
     GraphqlModule,

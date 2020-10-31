@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import * as myGlobals from '@core/globals';
 import { ToastrService } from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
-import { SocketioService } from '@learner/services/socketservice';
+import { SocketioService } from '@learner/services/socketio.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
       .subscribe((loginresult: any) => {
         if (loginresult.data.login) {
           if (loginresult.data.login.success) {
+            // this.socketService.setupSocketConnection();
             localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
             // IF ADDING SOME KEYS IN LOCAL, ADD IN ELSE ALSO - MYTHREYI
             if (loginresult.data.login && this.loginForm.value.remember_me === true) {
@@ -64,13 +65,14 @@ export class LoginComponent implements OnInit {
               this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
               });
               // if false, then need to update profile
-              //Afser'schanges on Profile not Mandtory change no #4 Committed condition on and added
-              //page route MyCourse
+              // Afser'schanges on Profile not Mandtory change no #4 Committed condition on and added
+              // page route MyCourse
               // if (loginresult.data.login.message.is_profile_updated) {
               //   // for june 10 added by ankit
               //   this.router.navigate(['/Learner/MyCourse']);
               // } else {
-              //   this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields', { closeButton: true });
+              //   this.toastr.warning('Your profile is incomplete !',
+              // 'Please provide data for all mandatory fields', { closeButton: true });
               //   this.router.navigate(['/Learner/profile']);
               // }
 
@@ -91,7 +93,8 @@ export class LoginComponent implements OnInit {
               //   // for june 10 added by ankit
               //   this.router.navigate(['/Learner/MyCourse']);
               // } else {
-              // //  this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields', { closeButton: true });
+              // //  this.toastr.warning('Your profile is incomplete !',
+              // 'Please provide data for all mandatory fields', { closeButton: true });
               //  // this.router.navigate(['/Learner/profile']);
               //  this.router.navigate(['/Learner/MyCourse']);
               // }
