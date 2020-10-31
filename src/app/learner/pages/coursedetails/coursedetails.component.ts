@@ -210,6 +210,7 @@ export class CoursedetailsComponent implements OnInit {
       this.performOverLay = false;
     });
     this.socketService.change.subscribe(result => {
+      console.log(result,'dasdadassad');
       if ( result && result.eventId && result.eventId.length > 0) {
         this.playerModuleAndTopic(false);
       }
