@@ -27,6 +27,8 @@ import { ConfigsLoaderService } from '@core/services/configs-loader.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { DatePipe } from '@angular/common';
+import { SocketioService } from '@learner/services/socketservice';
+
 // import { ChartsModule } from 'ng2-charts';
 
 // import { JwtInterceptor } from './core/services/_helpers/jwt.interceptor';
@@ -69,7 +71,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     ReactiveFormsModule,
     GraphqlModule
   ],
-  providers: [AlertComponentComponent,DatePipe,
+  providers: [AlertComponentComponent, DatePipe, SocketioService,
     {
       provide: APP_BASE_HREF,
       useFactory: getBaseHref,

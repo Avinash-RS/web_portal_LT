@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import * as myGlobals from '@core/globals';
 import { ToastrService } from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
+import { SocketioService } from '@learner/services/socketservice';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   languages: any;
 
   constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder,
-              private service: LearnerServicesService, private toastr: ToastrService) {
+              private service: LearnerServicesService, private toastr: ToastrService , public socketService: SocketioService) {
       this.languages = [{lang: 'ta' , languagename: 'Tamil' } , { lang: 'en' , languagename: 'English'  }] ;
 
       // translate.addLangs(['en', 'ta']);
@@ -60,6 +61,8 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('token', loginresult.data.login.message.token);
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
               sessionStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
+              this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
+              });
               // if false, then need to update profile
               //Afser'schanges on Profile not Mandtory change no #4 Committed condition on and added
               //page route MyCourse
@@ -79,6 +82,8 @@ export class LoginComponent implements OnInit {
               sessionStorage.setItem('user_img', loginresult.data.login.message.profile_img);
               sessionStorage.setItem('role', 'learner');
               sessionStorage.setItem('token', loginresult.data.login.message.token);
+              this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
+              });
               // localStorage.setItem('token', loginresult.data.login.message.token);
               const ps = btoa(this.loginForm.value.password);
               // if false, then need to update profile

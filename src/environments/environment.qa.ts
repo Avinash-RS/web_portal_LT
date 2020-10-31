@@ -7,4 +7,6 @@ export const environment = {
   wcaapiurl:'http://20.44.38.161:9001/',
   domain : 'LXP',
   systemIp : 'http://api.ipify.org/?format=json',
+  socketio : '20.40.2.200:3009'
+
 };

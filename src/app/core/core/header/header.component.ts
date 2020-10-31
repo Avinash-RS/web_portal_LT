@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { SocketioService } from '@learner/services/socketservice';
 
 @Component({
   selector: 'app-header',
@@ -29,8 +30,8 @@ export class HeaderComponent implements OnInit {
 
   @HostBinding('class') componentCssClass;
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
-    private http: HttpClient, public overlayContainer: OverlayContainer,
-    public router: Router, private gs: GlobalServiceService) {
+              private http: HttpClient, public overlayContainer: OverlayContainer, public socketService: SocketioService,
+              public router: Router, private gs: GlobalServiceService) {
     // this.getScreenSize();
   }
 
@@ -52,7 +53,7 @@ export class HeaderComponent implements OnInit {
     }, 3000);
   }
   getShortName(fullName) {
-    const Name = fullName?.split(' ').map(function (str) {
+    const Name = fullName?.split(' ').map(function(str) {
       return str ? str[0].toUpperCase() : '';
     }).join('');
     if (Name?.length === 1) {
@@ -102,6 +103,8 @@ export class HeaderComponent implements OnInit {
         // this.userDetailes = null;
         this.services.logout(this.loginDetails._id, false).subscribe((logout: any) => {
           if (logout.data.logout && logout.data.logout.success) {
+            this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
+            });
             this.router.navigate(['/Learner/login']);
             localStorage.clear();
             sessionStorage.clear();
