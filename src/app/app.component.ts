@@ -20,7 +20,8 @@ import { SocketioService } from '@learner/services/socketio.service';
   animations: [ slideInAnimation ]
 })
 export class AppComponent implements OnInit {
-  // ipAddress = '';
+ 
+  ipAddress = '';
   title = 'LXP';
   isLoader = false;
   loaderSubscription: Subscription;
@@ -34,12 +35,19 @@ export class AppComponent implements OnInit {
               public Lservice: LearnerServicesService,
 
   ) {
+    console.error = function(){}
+    console.log = function(){}
+    console.warn = function(){}
+    this.getIPAddress();
     // this.getIPAddress();
     this.commonService.getIpAddressByUrl();
     // this.getorganizationbyiddetails();
   }
 
   ngOnInit() {
+    console.error = function(){}
+    console.log = function(){}
+    console.warn = function(){}
     this.loaderSubscription = this.commonService.loader.subscribe((val) => {
       this.isLoader = val;
     });

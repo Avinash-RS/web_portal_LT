@@ -91,11 +91,11 @@ export class MycourseItemComponent implements OnInit {
     localStorage.setItem('Courseid', c.course_id);
     const detail = {
       id: c.course_id,
-      name: c.course_name
+      name: c.course_name,
+      isBatch : c.batchCourse
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
     this.router.navigateByUrl('/Learner/discussionForum', { state: { detail } });
-    // this.router.navigateByUrl('/Learner/instructorLed', { state: { detail } });
   }
 
 

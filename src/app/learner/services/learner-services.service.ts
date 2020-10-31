@@ -961,7 +961,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
-  getAttendanceByUsername(courseid, full_name, user_id): Observable<any> {
+  getAttendanceByUsername(courseid, full_name, user_id) {
     return this.Apollo.query({ // Get Activity Details For Instrcutor Led Screen.
       query: getTopicAttendanceDetailsByUsername,
       variables: {
@@ -969,7 +969,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
         full_name,
         user_id
       }
-    }).pipe(tap());
+    });
   }
 
 }

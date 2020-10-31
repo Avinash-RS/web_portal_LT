@@ -6,8 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "go": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build",
-    "build:qa": "ng build --configuration qa",
-    "build:dev": "ng build",
+    "build:qa": "ng build --prod --configuration qa",
+    "build:dev": "ng build --prod",
     "test": "ng test --browsers=ChromeHeadless --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -133,7 +133,7 @@
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular/cli": "~7.1.2",
+    "@angular/cli": "^7.0.7",
     "@angular/compiler-cli": "~7.1.0",
     "@angular/language-service": "~7.1.0",
     "@types/jasmine": "^2.8.17",

@@ -373,11 +373,11 @@
   /* padding: 15px 0; */
   background-color: #0000001f;
   overflow: hidden;
-  width: 100%;
+  width: 0px;
   height: 98%;
   transition: 0.3s ease;
   border-radius: 10px;
-  display: none;
+  //display: none;
 }
 
 .courseHover:hover .overlay {
@@ -1319,6 +1319,9 @@ hr {
     display: none;
   }
 
+.dropdown-toggle {
+  display: none;
+}
   .catDropdown {
     display: none;
   }
@@ -1417,7 +1420,7 @@ hr {
 
   .startBtnRow {
     width: 350px;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 10px;
   }
 
@@ -2230,6 +2233,10 @@ hr {
   height: 50px !important;
 }
 
+.h-30{
+  height: 30px !important;
+}
+
 .roleDropdown {
   position: relative;
   display: inline-block;
@@ -2432,7 +2439,7 @@ hr {
   font-size: 16px;
   padding-left: 6px;
   border: none;
-  // border-radius: 11px;
+  // border-radius: 4px;
   border: 1px solid #898989;
   min-width: 237.5px;
   // position: relative;
@@ -2458,12 +2465,13 @@ hr {
   float: left;
   padding-left: 7px;
   padding-top: 2px;
+  
 }
 
 .roledropdowniconSelect {
   position: sticky;
   float: right;
-  padding-top: 4px;
+  
 }
 
 .roleBatchOnSelect {

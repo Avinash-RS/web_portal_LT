@@ -16,6 +16,7 @@ export class ToolbarNotificationComponent implements OnInit {
   pagenumber = 1;
   notificationMarkRead = [];
   unreadCount: any;
+  cssPrefix: any;
 
   @HostListener('document:click', ['$event', '$event.target'])
   onClick(event: MouseEvent, targetElement: HTMLElement) {

@@ -95,9 +95,10 @@
     position: relative;
     font-size: 16px;
     border: none;
-    height: 50px;
-    padding: 3px 0px;
-    color: $lxp-dark-gray;
+    height: 45px;
+    padding: 3px 0;
+    margin-top: 5px !important;
+    color:$lxp-dark-gray;
     background: $lxp-theme-yellow-sec !important;
     cursor: pointer;
 }
@@ -184,8 +185,9 @@
         position: relative;
         font-size: 22px;
         border: none;
-        height: 50px;
-        padding: 4px;
+        height: 39px;
+        padding: 1px;
+        margin-top: 3px;
         color: #1f1a17;
         background: #FFCC00 !important;
         cursor: pointer;

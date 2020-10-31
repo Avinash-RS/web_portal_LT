@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 
 export class SocketioService {
-    socket;
+    socket: any;
     loginDetails: any;
     observer: any;
     @Output() change: EventEmitter<boolean> = new EventEmitter();

@@ -92,6 +92,7 @@ export class LearnerMyCourseComponent implements OnInit {
   isExpandCourseTemp: any;
   expandActivityNameChildTemp: any;
   isExpChild: any;
+  categories: any;
   searchName: any;
   course: any;
   catagoryName: any;
@@ -99,6 +100,7 @@ export class LearnerMyCourseComponent implements OnInit {
   expandSearch = false;
   dropdownMenu = false;
   keyboardUp = true;
+  showAvailableCourse = false;
   disableDropdown: boolean;
   opencourceId: any;
   showAvailableCourse = false;
@@ -112,6 +114,7 @@ export class LearnerMyCourseComponent implements OnInit {
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
     private router: Router, private dialog: MatDialog,
     public CommonServices: CommonServicesService) {
+   
     this.route.queryParams.subscribe(params => {
       // console.log(params, 'params');
       // for portal integration
@@ -330,10 +333,10 @@ export class LearnerMyCourseComponent implements OnInit {
         if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
           this.enrolledCourses = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled;
           this.globalData = enrolledList.data.getLearnerenrolledCourses.global_data;
-          console.log(this.globalData);
           if (this.enrolledCourses.length > 0) {
             this.enrolledCourses.forEach(element => {
-              if (element.course_duration) {
+              if (element.course_duration && typeof element.course_duration === 'string') {
+                // console.log(typeof element.course_duration, element.course_duration);
                 if (Number(element.course_duration.slice(3, 5)) >= 30) {
                   element.course_duration = Number(element.course_duration.slice(0, 2)) + 1;
                 } else {
@@ -505,6 +508,7 @@ Go(course) {
       }
     });
   }
+
   getCoureBasedOnCatalog(catalogue, category, subchild, superChild) {
     this.categoryData = category;
     this.subCatId = subchild;
@@ -578,14 +582,14 @@ Go(course) {
   navToCal() {
     this.router.navigateByUrl('/Learner/calendar');
   }
-  openMyMenu() {
-    this.color = true;
-    this.trigger.toggleMenu();
-  }
-  closeMyMenu() {
-    this.color = false;
-    this.trigger.closeMenu();
-  }
+  // openMyMenu() {
+  //   this.color = true;
+  //   this.trigger.toggleMenu();
+  // }
+  // closeMyMenu() {
+  //   this.color = false;
+  //   this.trigger.closeMenu();
+  // }
 
   getCountForJobRole() {
     this.learnerService.getCountForJobroleCategories(this.userDetailes._id).subscribe((data: any) => {

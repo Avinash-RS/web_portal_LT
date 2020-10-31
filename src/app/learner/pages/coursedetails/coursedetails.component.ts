@@ -18,6 +18,9 @@ import * as moment from 'moment';
 import { SocketioService } from '@learner/services/socketio.service';
 import { TranslateService } from '@ngx-translate/core';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import * as _ from 'lodash';
+import { LegendPosition } from 'ag-grid-community';
+// import { debugger } from 'fusioncharts';
 
 @Component({
   selector: 'app-coursedetails',
@@ -94,6 +97,7 @@ export class CoursedetailsComponent implements OnInit {
   performOverLay = false;
   treeCourse = false;
   // initials: any;
+  selectedModuleData: any;
 
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
   getModuleandtopicInfo: any;
@@ -127,7 +131,7 @@ export class CoursedetailsComponent implements OnInit {
       this.lastpersentage = localStorage.getItem('persentage');
       // this.lastpersentage = detail  && detail.persentage || this.localper ;
       this.loading = true;
-      this.playerModuleAndTopic(true);
+      this.playerModuleAndTopic();
       // this.refreshData();
       // this.autoHide();
       this.getPlayerNextPrve();
@@ -210,11 +214,67 @@ export class CoursedetailsComponent implements OnInit {
       this.performOverLay = false;
     });
     this.socketService.change.subscribe(result => {
-      console.log(result,'dasdadassad');
       if ( result && result.eventId && result.eventId.length > 0) {
-        this.playerModuleAndTopic(false);
+        const courseValue = _.find(result.data.course_dtl, { course_id: this.courseid});
+        const newKeys = {
+          displayName: 'title',
+          moduledetails: 'children',
+          coursedetails: 'childData'
+        };
+        const restructrueArray = [];
+        let i = 0;
+        for (const iterator of courseValue.module) {
+          const renamedObj = this.renameKeys(iterator, newKeys);
+          restructrueArray.push(renamedObj);
+          i = i + 1;
+
+        }
+        const jsonData = [{
+        childData: restructrueArray,
+        total_topic_len: i
+      }];
+
+        this.scromModuleData = jsonData[0].childData;
+        this.scromModuleData.forEach(childData => {
+          if (childData &&  childData.children) {
+          childData.children.forEach(subChild => {
+              if (subChild && subChild.children && subChild.children.length > 0  ) {
+                // Check TOC Weekwise or module topic wise
+                this.treeCourse = true;
+              } else {
+                this.treeCourse = false;
+              }
+            });
+          }
+        });
       }
      });
+  }
+
+   renameKeys(obj, newKeys) {
+    // debugger;
+    const keyValues = Object.keys(obj).map(key => {
+      let newKey = null;
+      const newKey1 = null;
+      if (key === 'topic_name') {
+        newKey = newKeys.displayName;
+      } else if (key === 'topic') {
+        newKey = newKeys.moduledetails;
+      } else if (key === 'module') {
+        newKey = newKeys.coursedetails;
+      } else if (key === 'module_name'){
+        newKey = newKeys.displayName;
+      } else {
+        newKey = key;
+      }
+      if (key === 'topic') {
+        obj[key] = obj[key].map(obj1 => this.renameKeys(obj1, newKeys));
+      }
+      return {
+        [newKey]: obj[key]
+      };
+    });
+    return Object.assign({}, ...keyValues);
   }
 
   performPage() {
@@ -396,15 +456,17 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   // get Scrom module and topic
-  playerModuleAndTopic(setPageFlag) {
+  playerModuleAndTopic() {
     this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
       this.scromModuleData = this.scromApiData?.childData;
       // tree level
       this.scromModuleData.forEach(childData => {
+        // console.log(childData.children);
         if (childData &&  childData.children) {
-          childData.children.forEach(subChild => {
+        childData.children.forEach(subChild => {
             if (subChild && subChild.children && subChild.children.length > 0  ) {
+              // console.log(subChild.children);
               // Check TOC Weekwise or module topic wise
               this.treeCourse = true;
             } else {
@@ -456,7 +518,7 @@ export class CoursedetailsComponent implements OnInit {
     this.Lservice.playerstatusrealtime(this.userDetail.user_id, this.courseid, jsonData.module, this.finalper)
       .subscribe((data: any) => {
         if (data.data.playerstatusrealtime.success === true) {
-          this.playerModuleAndTopic(true);
+          this.playerModuleAndTopic();
         }
       });
   }
@@ -516,6 +578,7 @@ export class CoursedetailsComponent implements OnInit {
 
   previewDoc(templateRef: TemplateRef<any>, path) {
     this.dialog.open(templateRef, {
+      // scrollStrategy: new NoopScrollStrategy(),
       width: '100%',
       height: '100%',
       scrollStrategy: new NoopScrollStrategy(),

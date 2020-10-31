@@ -21,7 +21,7 @@
   <span>Discussion forum</span>
 </div>
 <br>
-<div class="row">
+<div class="row" *ngIf="course?.isBatch">
   <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 col-12">
     <ng-container *ngIf="scromModuleData?.length > 0; else noModule">
       <mat-accordion *ngFor="let res of scromModuleData; let i = index"
@@ -687,3 +687,19 @@
     </ng-template>
   </div>
 </div>
+
+<div *ngIf="!course?.isBatch">
+<!-- <div class="errormsg">
+  <img class="assignImg" alt="" src="assets/forum.svg">
+  <span class="msg">Discussion forum is not available for this course</span>
+</div> -->
+<div class="row ml-0 mr-0 errmsg">
+  <div class="col-12 m-auto text-center">
+    <span class="errormsg">
+      <img class="assignImg" alt="" src="assets/forum.svg">
+      <span>Discussion forum is not available for this course</span>
+    </span>
+  </div>
+</div>
+</div>
+
