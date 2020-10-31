@@ -203,14 +203,14 @@
                 </span></div>
               </div>
               <div class="row">
-                <div class="col-10 justify-content-center align-self-center">
+                <div class="col-12 justify-content-center align-self-center">
                   <mat-progress-bar class="example-margin" [mode]="'determinate'"
                     [value]="completedCourse ? 100 : course?.coursePlayerStatus?.course_percentage || 0">
                   </mat-progress-bar>
                 </div>
-                <div class="col-2 c_per">
+                <!-- <div class="col-2 c_per">
                   {{completedCourse ? 100 : course?.coursePlayerStatus?.course_percentage || 0}}%
-                </div>
+                </div> -->
               </div>
               <div class="row m-t-10px">
                 <div class="col-7">
