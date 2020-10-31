@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import * as myGlobals from '@core/globals';
 import { ToastrService } from 'ngx-toastr';
 import {TranslateService} from '@ngx-translate/core';
+import { SocketioService } from '@learner/services/socketio.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
   languages: any;
 
   constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder,
+              public socketService: SocketioService,
               private service: LearnerServicesService, private toastr: ToastrService) {
       this.languages = [{lang: 'ta' , languagename: 'Tamil' } , { lang: 'en' , languagename: 'English'  }] ;
 
@@ -50,6 +52,7 @@ export class LoginComponent implements OnInit {
       .subscribe((loginresult: any) => {
         if (loginresult.data.login) {
           if (loginresult.data.login.success) {
+            // this.socketService.setupSocketConnection();
             localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
             // IF ADDING SOME KEYS IN LOCAL, ADD IN ELSE ALSO - MYTHREYI
             if (loginresult.data.login && this.loginForm.value.remember_me === true) {
@@ -60,14 +63,17 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('token', loginresult.data.login.message.token);
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
               sessionStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
+              this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
+              });
               // if false, then need to update profile
-              //Afser'schanges on Profile not Mandtory change no #4 Committed condition on and added
-              //page route MyCourse
+              // Afser'schanges on Profile not Mandtory change no #4 Committed condition on and added
+              // page route MyCourse
               // if (loginresult.data.login.message.is_profile_updated) {
               //   // for june 10 added by ankit
               //   this.router.navigate(['/Learner/MyCourse']);
               // } else {
-              //   this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields', { closeButton: true });
+              //   this.toastr.warning('Your profile is incomplete !',
+              // 'Please provide data for all mandatory fields', { closeButton: true });
               //   this.router.navigate(['/Learner/profile']);
               // }
 
@@ -79,6 +85,8 @@ export class LoginComponent implements OnInit {
               sessionStorage.setItem('user_img', loginresult.data.login.message.profile_img);
               sessionStorage.setItem('role', 'learner');
               sessionStorage.setItem('token', loginresult.data.login.message.token);
+              this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
+              });
               // localStorage.setItem('token', loginresult.data.login.message.token);
               const ps = btoa(this.loginForm.value.password);
               // if false, then need to update profile
@@ -86,7 +94,8 @@ export class LoginComponent implements OnInit {
               //   // for june 10 added by ankit
               //   this.router.navigate(['/Learner/MyCourse']);
               // } else {
-              // //  this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields', { closeButton: true });
+              // //  this.toastr.warning('Your profile is incomplete !',
+              // 'Please provide data for all mandatory fields', { closeButton: true });
               //  // this.router.navigate(['/Learner/profile']);
               //  this.router.navigate(['/Learner/MyCourse']);
               // }

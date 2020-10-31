@@ -80,6 +80,7 @@ import { KnowledgePreviewComponent } from './pages/knowledge-preview/knowledge-p
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FilterPipe } from '../pipes/filter.pipe';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { VideoPreviewModalComponent } from './pages/video-preview-modal/video-preview-modal.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -190,7 +191,6 @@ const routes: Routes = [
     data: { animation: 'activitycenterhomescreen' }
 
   },
-  
   {
     path: 'knowledge',
     component: KnowledgeResourceHomeComponent,
@@ -281,7 +281,7 @@ const routes: Routes = [
     KnowledgePreviewComponent,
     KnowledgeLandingPageComponent,
     KnowledgeResourceHomeComponent,
-    FilterPipe
+    VideoPreviewModalComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -348,6 +348,6 @@ const routes: Routes = [
     Apollo
     // { provide: Window, useValue: window }
   ],
-  entryComponents: [CategoryComponentComponent,KnowledgePreviewComponent]
+  entryComponents: [CategoryComponentComponent, KnowledgePreviewComponent]
 })
 export class LearnerModule { }
