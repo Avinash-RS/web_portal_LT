@@ -21,7 +21,7 @@
   <span>Discussion forum</span>
 </div>
 <br>
-<div class="row">
+<div class="row" *ngIf="course?.isBatch">
   <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 col-12">
     <ng-container *ngIf="scromModuleData?.length > 0; else noModule">
       <mat-accordion *ngFor="let res of scromModuleData; let i = index"
@@ -686,4 +686,11 @@
       <br>
     </ng-template>
   </div>
+</div>
+
+<div *ngIf="!course?.isBatch">
+<div class="errormsg">
+  <img class="assignImg" alt="" src="assets/006-assignment1.svg">
+  <span class="msg">You are not allowed at the moment!</span>
+</div>
 </div>

@@ -193,20 +193,23 @@
                 </div>
               </div>
               <div class="row color_g">
-                <div class="col ">
+                <div class="col">
                   <p>Keep learning and revising the topic to hone your skills.</p>
                 </div>
               </div>
               <div class="row lxp_gray123">
-                <div class="col-3">
-                  <span class="">
-                    Progression
-                  </span>
-                </div>
-                <div class="col justify-content-center align-self-center">
+                <div class="col-7"><span class="f_size_13">
+                  Progression
+                </span></div>
+              </div>
+              <div class="row">
+                <div class="col-10 justify-content-center align-self-center">
                   <mat-progress-bar class="example-margin" [mode]="'determinate'"
                     [value]="completedCourse ? 100 : course?.coursePlayerStatus?.course_percentage || 0">
                   </mat-progress-bar>
+                </div>
+                <div class="col-2 c_per">
+                  {{completedCourse ? 100 : course?.coursePlayerStatus?.course_percentage || 0}}%
                 </div>
               </div>
               <div class="row m-t-10px">

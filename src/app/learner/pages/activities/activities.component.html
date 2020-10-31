@@ -8,7 +8,16 @@
       Back
     </span>
   </span>
-  <p class="courseName"><b>{{courseName}}</b></p>
+  <!-- <p class="courseName"><b>{{courseName}}</b></p> -->
+  <!-- // Commented by Mythreyi - UI feedback -->
+  <div class="f_wt_600 f_size_16 m-l-13 display_flex contentTop1">
+    <span>
+      {{courseName}}
+    </span>
+    <mat-icon class="material-icons brdcrmb f_size_25 pointer" (click)="goBack()">chevron_right
+    </mat-icon>
+    <span>Activities</span>
+  </div>
   <mat-tab-group animationDuration="1000ms">
     <mat-tab label="Assignments">
       <mat-accordion class="example-headers-align" multi *ngIf="assignmentContent?.coursedetails.length > 0">
