@@ -10,9 +10,17 @@
     </span>
   </span>
 </p>
+<div class="f_wt_600 f_size_16 m-l-13 display_flex">
+  <span class="pad-t-2">
+    {{course?.name}}
+  </span>
+  <mat-icon class="material-icons brdcrmb f_size_25 pointer" (click)="goBack()">chevron_right
+  </mat-icon>
+  <span class="pad-t-2">Instructor Led</span>
+</div>
 <div class="row" *ngIf="listOfSessions?.length > 0">
   <div class="col-lg-7 col-xl-7 col-md-7 col-sm-7 col-12">
-    <span class="headLine">{{course?.name}}</span>
+    <!-- <span class="headLine">{{course?.name}}</span> -->
   </div>
   <div class="col-lg-5 col-xl-5 col-md-5 col-sm-5 col-12">
     <span class="headLine">Upcoming Sessions and Recorded Sessions</span>

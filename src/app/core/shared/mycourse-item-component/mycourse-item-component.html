@@ -42,7 +42,7 @@
                 <tr>
                   <td>Instructor led sessions</td>
                   <td *ngIf="course.course_id == 'ugqau50t'">NA</td>
-                  <td *ngIf="course.course_id == 'eb9f0bou'">Upto 14 hours</td>
+                  <td *ngIf="course.course_id == 'eb9f0bou'">Upto 14</td>
                   <!-- <td>Upto {{globalData.on_hover_image_data.instructor_lead_session}}</td> -->
                 </tr>
                 <tr>
@@ -58,10 +58,10 @@
                   <td>Internal assessment</td>
                   <td>{{globalData.on_hover_image_data.internal_assesment}}</td>
                 </tr>
-                <!-- <tr>
+                <tr>
                   <td>Final assessment</td>
                   <td>{{globalData.on_hover_image_data.final_assesment}}</td>
-                </tr> -->
+                </tr>
               </table>
             </div>
           </div>
@@ -81,7 +81,7 @@
             </div>
             <div class="col">
               <p style="margin-bottom:10px" *ngIf=" course.course_id == 'eb9f0bou'">Total duration: 48 hours</p>
-              <p style="margin-bottom:10px" *ngIf=" course.course_id == 'ugqau50t'">Total duration: 14 hours</p>
+              <p style="margin-bottom:10px" *ngIf=" course.course_id == 'ugqau50t'">Total duration: 16 hours</p>
               <!-- <p style="margin-bottom:10px">Total duration: {{
               course?.course_duration != 1
                 ? course.course_duration
@@ -130,7 +130,7 @@
                   Instructor led session completed
                 </div>
                 <div class="col-3 f_wt_600">
-                  <ng-container *ngIf="course.course_id == 'ugqau50t'">N/A</ng-container> 
+                  <ng-container *ngIf="course.course_id == 'ugqau50t'">NA</ng-container> 
                   <ng-container *ngIf="course.course_id == 'eb9f0bou'">{{globalData.course_progression_data.instructor_lead_session}}</ng-container> 
                   
                 </div>
@@ -201,7 +201,7 @@
               </div>
               <div class="row color_g">
                 <div class="col">
-                  <span>Keep learning and revising the topic to hone your skills.</span>
+                  <span>Keep learning and revising the topics to hone your skills.</span>
                 </div>
               </div>
               <div class="row lxp_gray123">
@@ -388,7 +388,7 @@
               </div>
               <div class="row color_g">
                 <div class="col ">
-                  <p>Practice the skills learnt while reading and attending class.</p>
+                  <p>Practice the skills learnt while reading and attending classes.</p>
                 </div>
               </div>
               <div class="row pseudoheight"></div>
