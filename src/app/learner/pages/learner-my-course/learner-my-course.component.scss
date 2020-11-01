@@ -2616,6 +2616,7 @@ hr {
   // height: 38px !important;
   border-bottom: 1px solid #e4dddd !important;
   padding-top: 9px !important;
+  top: 36px;
   border-radius: 0px !important;
 }
 
@@ -2775,7 +2776,10 @@ li {
   margin: 0px auto;
   border-bottom: 1px solid #cccccc7a;
 }
-
+::ng-deep .availableCourseSpinner {
+  position: relative !important;
+    left: 67px !important;
+}
 
 // SKELETON
 .demo:empty {
