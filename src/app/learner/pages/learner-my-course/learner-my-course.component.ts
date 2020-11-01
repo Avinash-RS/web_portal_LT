@@ -101,7 +101,6 @@ export class LearnerMyCourseComponent implements OnInit {
   dropdownMenu = false;
   keyboardUp = true;
   showAvailableCourse = false;
-  showDrpdwnBtn = false;
   disableDropdown: boolean;
   opencourceId: any;
   nextPageLabel = '';
@@ -491,7 +490,6 @@ export class LearnerMyCourseComponent implements OnInit {
     let dropDownData = [];
     this.learnerService.getCountForCategories(this.userDetailes._id).subscribe((data: any) => {
       if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
-        this.showDrpdwnBtn = true;
         this.catalogueDetails = data.data.getCountForCategories.data;
         this.categoryDetails = data.data.getCountForCategories.data.categories;
         dropDownData = [data.data.getCountForCategories.data];
