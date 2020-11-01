@@ -238,9 +238,14 @@ li {
     font-weight: 500;
 }
 
-.desc {
+.desc_opn {
     margin-top: 10px;
-    // font-weight: 500;
+    width: 75%;
+    margin-left: -15px;
+}
+.desc_cls {
+    margin-top: 10px;
+    width: 100%;
     margin-left: -15px;
 }
 

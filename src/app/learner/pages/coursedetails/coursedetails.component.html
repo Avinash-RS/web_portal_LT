@@ -383,7 +383,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="desc" [innerHTML]="course?.course_long_description">
+                                    <div [ngClass]=" drawer.opened? 'desc_opn':'desc_cls'"  [innerHTML]="course?.course_long_description">
 
                                     </div>
                                 </div>
