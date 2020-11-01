@@ -103,10 +103,9 @@ export class LearnerMyCourseComponent implements OnInit {
   showAvailableCourse = false;
   disableDropdown: boolean;
   opencourceId: any;
-  showAvailableCourse = false;
   nextPageLabel = '';
   previousPageLabel = '';
-
+  triggerAvailablecourse: any;
   constructor(
     public elm: ElementRef,
     private route: ActivatedRoute,
@@ -114,7 +113,7 @@ export class LearnerMyCourseComponent implements OnInit {
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
     private router: Router, private dialog: MatDialog,
     public CommonServices: CommonServicesService) {
-   
+
     this.route.queryParams.subscribe(params => {
       // console.log(params, 'params');
       // for portal integration
@@ -139,9 +138,9 @@ export class LearnerMyCourseComponent implements OnInit {
             localStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
             sessionStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
             this.router.navigateByUrl('/Learner/MyCourse');
+            this.getCountForCategories();
             this.getEnrolledCourses('', '', '', '', '', '', true);
             this.getScreenSize();
-            this.getCountForCategories();
             // this.getTab();
             this.getCountForJobRole();
             // this.insidengOnInit();
@@ -163,6 +162,11 @@ export class LearnerMyCourseComponent implements OnInit {
     if (this.userDetailes) {
       this.insidengOnInit();
     }
+
+    this.triggerAvailablecourse = setInterval(() => {
+      this.getCountForCategories();
+      console.log('triggering data');
+    }, 500);
   }
 
   insidengOnInit() {
@@ -395,11 +399,11 @@ export class LearnerMyCourseComponent implements OnInit {
     };
     this.router.navigateByUrl('/Learner/scorm', { state: { detail: detail1 } });
   }
-Go(course) {
+  Go(course) {
     const data1 = {
       courseId: course.course_id
     };
-    this.router.navigateByUrl('/Learner/activities', { state:  { data:  data1 } });
+    this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
   }
 
   gotoDesc(c) {
@@ -481,11 +485,12 @@ Go(course) {
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
     this.router.navigateByUrl('/Learner/activitycenter', { state: { detail } });
   }
+
+  /* ---------------------------------------api for available courses------------------------------------ */
   getCountForCategories() {
     let dropDownData = [];
     this.learnerService.getCountForCategories(this.userDetailes._id).subscribe((data: any) => {
       if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
-        this.showAvailableCourse = true;
         this.catalogueDetails = data.data.getCountForCategories.data;
         this.categoryDetails = data.data.getCountForCategories.data.categories;
         dropDownData = [data.data.getCountForCategories.data];
@@ -494,6 +499,7 @@ Go(course) {
         this.dropdownCatDetails = dropDownData[0];
       }
     });
+    clearInterval(this.triggerAvailablecourse);
   }
   getTab() {
     let dropDownData = [];
@@ -524,20 +530,20 @@ Go(course) {
         }
       });
   }
-  viewCourse(category, templateRef: TemplateRef<any>, categoryname, categorycount) {
+  viewCourse(category, categoryname, categorycount) {
     this.color = false;
     // this.loading = true;
     this.viewCourseClass = false;
     this.categoryPopupData = categoryname;
     this.categoryCount = categorycount;
     if (categorycount > 0) {
-    this.dialog.open(templateRef, {
-      panelClass: 'dialogContainer',
-      closeOnNavigation: true,
-      disableClose: true,
-    });
+      // this.dialog.open(templateRef, {
+      //   panelClass: 'dialogContainer',
+      //   closeOnNavigation: true,
+      //   disableClose: true,
+      // });
+    }
   }
-}
   closedialogbox() {
     this.dialog.closeAll();
     this.allcourses = [];
