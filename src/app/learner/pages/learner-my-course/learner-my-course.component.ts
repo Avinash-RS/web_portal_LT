@@ -162,11 +162,11 @@ export class LearnerMyCourseComponent implements OnInit {
     if (this.userDetailes) {
       this.insidengOnInit();
     }
-
-    this.triggerAvailablecourse = setInterval(() => {
-      this.getCountForCategories();
-      console.log('triggering data');
-    }, 500);
+    this.getCountForCategories();
+    // this.triggerAvailablecourse = setInterval(() => {
+    //   this.getCountForCategories();
+    //   console.log('triggering data');
+    // }, 500);
   }
 
   insidengOnInit() {
@@ -500,7 +500,7 @@ export class LearnerMyCourseComponent implements OnInit {
         this.dropdownCatDetails = dropDownData[0];
       }
     });
-    clearInterval(this.triggerAvailablecourse);
+    // clearInterval(this.triggerAvailablecourse);
   }
   getTab() {
     let dropDownData = [];
