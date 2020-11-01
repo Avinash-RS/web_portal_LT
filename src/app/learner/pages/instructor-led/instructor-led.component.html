@@ -10,7 +10,14 @@
     </span>
   </span>
 </p>
-<span class="headLine">{{course?.name}}</span>
+<div class="row" *ngIf="listOfSessions?.length > 0">
+  <div class="col-lg-7 col-xl-7 col-md-7 col-sm-7 col-12">
+    <span class="headLine">{{course?.name}}</span>
+  </div>
+  <div class="col-lg-5 col-xl-5 col-md-5 col-sm-5 col-12">
+    <span class="headLine">Upcoming Sessions and Recorded Sessions</span>
+  </div>
+</div>
 
 <!-- If no records -->
 <div class="row" *ngIf="!listOfSessions?.length">
@@ -63,8 +70,12 @@
                 <span class="sessionTitle">{{activityShow?.duration}}</span>
               </div>
               <div class="row" style="margin-top: 20px;">
-                <button class="actBtn" mat-raised-button
+                <button class="actBtn" mat-raised-button *ngIf="activityShow?.status === 'On going'"
                   (click)="getAction(activityShow.activity_details.link)">{{activityShow?.button}}</button>
+              </div>
+              <div class="row" style="margin-top: 20px;color: white !important;" *ngIf="activityShow?.activity_details.activitytype == 'Recorded'">
+                <button class="actBtn" mat-raised-button 
+                  (click)="preview(activityShow.activity_details.link)">{{activityShow?.button}}</button>
               </div>
             </div>
 
@@ -76,11 +87,9 @@
         <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
           <mat-card class="smallContainer1">
             <mat-card-subtitle class="smallHeadline">Total Classes</mat-card-subtitle>
-            <div class="row">
-              <img mat-card-image src="../../../../assets/learner/elearning.svg">
-            </div>
-            <div class="row">
+            <div class="row d-flex p-t-20">
               <span class="number">{{sessionAttendance?.length}}</span>
+              <img mat-card-image src="../../../../assets/learner/elearning.svg">
             </div>
           </mat-card>
         </div>
@@ -88,13 +97,10 @@
         <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
           <mat-card class="smallContainer2">
             <mat-card-subtitle class="smallHeadline">Attended Classes</mat-card-subtitle>
-            <div class="row">
-              <img mat-card-image src="../../../../assets/learner/students.svg">
-            </div>
-            <div class="row">
+            <div class="row d-flex p-t-20">
               <span class="number" *ngIf="attendedSessions !== undefined">{{attendedSessions?.true}}</span>
               <span class="number" *ngIf="attendedSessions.true === undefined" >0</span>
-              <!-- <span>{{attendedSessions.true}}</span> -->
+              <img mat-card-image src="../../../../assets/learner/students.svg">
             </div>
           </mat-card>
         </div>
@@ -102,11 +108,9 @@
         <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
           <mat-card class="smallContainer3">
             <mat-card-subtitle class="smallHeadline">Recorded Classes</mat-card-subtitle>
-            <div class="row">
-              <img mat-card-image src="../../../../assets/learner/video-tutorial.svg">
-            </div>
-            <div class="row">
+            <div class="row d-flex p-t-20">
               <span class="number">{{listOfSessions?.length}}</span>
+              <img mat-card-image src="../../../../assets/learner/video-tutorial.svg">
             </div>              
           </mat-card>
         </div>
@@ -114,7 +118,7 @@
       <div class="row" style="margin-top: 5%; margin-left: 5px;" *ngIf="sessionAttendance?.length">
         <span class="tableHeadline">My Attendance</span>
       </div>
-      <div class="row" *ngIf="sessionAttendance?.length">
+      <div class="row attendance-table" *ngIf="sessionAttendance?.length">
         <table style="width: 100%;">
           <tr class="tblheaderFont">
             <th>Session #</th>
@@ -138,22 +142,18 @@
 
   <!-- Right Side Panel ...  -->
   <div class="col-lg-5 col-xl-5 col-md-5 col-sm-5 col-12">
-    <h4>Upcoming Sessions and Recorded Sessions</h4>
-    <div class="row">
-      <mat-nav-list style="width: 100% !important;">
+    <div class="row course-list">
+      <mat-nav-list style="width: 100% !important;margin-top: 18px !important;">
         <mat-list-item *ngFor="let los of listOfSessions" class="row">
           <mat-card class="sessionCard" (click)="useSession(los)">
             <div class="row">
-              <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
-                <img *ngIf="los.activity_details.livethumbnail !== undefined" height="220" style="width: 100%; height: 160px;" [src]="los.activity_details.livethumbnail">
-                <img *ngIf="los.activity_details.livethumbnail === undefined" height="220" style="width: 100%; height: 160px;" src="../../../../assets/learner/sessionThumbnail_01.png">
-                <h4 style="float: right;
-                background: green;
-                margin-left: -43px;
-                color: white;">{{los.status}}</h4>
+              <div class="image-container col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
+                <img *ngIf="los.activity_details.livethumbnail !== undefined" height="220" style="width: 100%; height: 140px;" [src]="los.activity_details.livethumbnail">
+                <img *ngIf="los.activity_details.livethumbnail === undefined" height="220" style="width: 100%; height: 140px;" src="../../../../assets/learner/sessionThumbnail_01.png">
+                <div class="bottom-right">{{los.status}}</div>
               </div>
               <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
-                <h4 style="margin-left: 20px;">{{los.activity_details.topicname}}</h4>
+                <h4 style="margin-left: 20px;font-weight: bold;">{{los.activity_details.topicname}}</h4>
                 <h5 style="margin-left: 20px;">Starting On:
                   {{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm'}}</h5>
                 <h5 style="margin-left: 20px;">Duration: {{los.duration}} </h5>

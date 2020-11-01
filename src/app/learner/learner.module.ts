@@ -348,6 +348,6 @@ const routes: Routes = [
     Apollo
     // { provide: Window, useValue: window }
   ],
-  entryComponents: [CategoryComponentComponent, KnowledgePreviewComponent]
+  entryComponents: [CategoryComponentComponent, KnowledgePreviewComponent,VideoPreviewModalComponent]
 })
 export class LearnerModule { }
