@@ -214,8 +214,11 @@ export class CoursedetailsComponent implements OnInit {
       this.performOverLay = false;
     });
     this.socketService.change.subscribe(result => {
+      // debugger;
+      // console.log(result);
       if ( result && result.eventId && result.eventId.length > 0) {
         const courseValue = _.find(result.data.course_dtl, { course_id: this.courseid});
+        console.log(courseValue);
         const newKeys = {
           displayName: 'title',
           moduledetails: 'children',
@@ -235,6 +238,8 @@ export class CoursedetailsComponent implements OnInit {
       }];
 
         this.scromModuleData = jsonData[0].childData;
+        // debugger;
+        console.log(jsonData[0].childData, 'this.scromModuleData');
         this.scromModuleData.forEach(childData => {
           if (childData &&  childData.children) {
           childData.children.forEach(subChild => {
@@ -248,6 +253,7 @@ export class CoursedetailsComponent implements OnInit {
           }
         });
       }
+      this.playerModuleAndTopic();
      });
   }
 
@@ -460,6 +466,7 @@ export class CoursedetailsComponent implements OnInit {
     this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
       this.scromModuleData = this.scromApiData?.childData;
+      console.log(this.scromModuleData);
       // tree level
       this.scromModuleData.forEach(childData => {
         // console.log(childData.children);
