@@ -210,8 +210,6 @@ export class CoursedetailsComponent implements OnInit {
       this.performOverLay = false;
     });
     this.socketService.change.subscribe(result => {
-      // debugger;
-      // console.log(result);
       if ( result && result.eventId && result.eventId.length > 0) {
         const courseValue = _.find(result.data.course_dtl, { course_id: this.courseid});
         console.log(courseValue);
@@ -234,13 +232,11 @@ export class CoursedetailsComponent implements OnInit {
       }];
 
         this.scromModuleData = jsonData[0].childData;
-        // debugger;
         console.log(jsonData[0].childData, 'this.scromModuleData');
         this.scromModuleData.forEach(childData => {
           if (childData &&  childData.children) {
           childData.children.forEach(subChild => {
               if (subChild && subChild.children && subChild.children.length > 0  ) {
-                // Check TOC Weekwise or module topic wise
                 this.treeCourse = true;
               } else {
                 this.treeCourse = false;
@@ -249,12 +245,11 @@ export class CoursedetailsComponent implements OnInit {
           }
         });
       }
-      this.playerModuleAndTopic();
+      // this.playerModuleAndTopic();
      });
   }
 
    renameKeys(obj, newKeys) {
-    // debugger;
     const keyValues = Object.keys(obj).map(key => {
       let newKey = null;
       const newKey1 = null;
