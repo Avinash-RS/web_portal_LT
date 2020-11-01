@@ -38,6 +38,10 @@ export class InstructorLedComponent implements OnInit {
     this.router.navigateByUrl('/Learner/MyCourse');
   }
 
+  goBack() {
+    
+  }
+
   getAttendance() { // Http Call
     const userDetails = JSON.parse(sessionStorage.getItem('UserDetails'));
     this.learnerService.getAttendanceByUsername(this.course.id, userDetails.full_name, userDetails.user_id).subscribe(async res => {
