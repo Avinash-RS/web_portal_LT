@@ -128,7 +128,7 @@
             <!-- <mat-icon class="glyphicon" (click)="searchExpand = !searchExpand">search</mat-icon> -->
           </div>
         </div>
-        <div class="col-6 col-lg-4 text-right pr-0 availableCol">
+        <div class="col-6 col-lg-4 text-right pr-0 availableCol" *ngIf="showDrpdwnBtn">
           <div>
             <span (click)="triggerPopups()">
               <button [disabled]="disableDropdown" (mouseenter)="triggerPopup()" (mouseleave)="closePopup()"
