@@ -253,6 +253,7 @@ export class CoursedetailsComponent implements OnInit {
           }
         });
       }
+      this.playerModuleAndTopic();
      });
   }
 
@@ -465,6 +466,7 @@ export class CoursedetailsComponent implements OnInit {
     this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
       this.scromModuleData = this.scromApiData?.childData;
+      console.log(this.scromModuleData);
       // tree level
       this.scromModuleData.forEach(childData => {
         // console.log(childData.children);
