@@ -49,6 +49,7 @@ export class MycourseItemComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
   Go(course) {
     const data1 = {

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LearnerServicesService } from '../../services/learner-services.service';
+import { VideoPreviewModalComponent } from '../video-preview-modal/video-preview-modal.component';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import * as _ from 'underscore';
 
 // const courseid = 'tbiwys0m';
@@ -9,7 +11,7 @@ import * as _ from 'underscore';
 @Component({
   selector: 'app-instructor-led',
   templateUrl: './instructor-led.component.html',
-  styleUrls: ['./instructor-led.component.css', '../coursedetails/coursedetails.component.scss']
+  styleUrls: ['./instructor-led.component.scss', '../coursedetails/coursedetails.component.scss']
 })
 export class InstructorLedComponent implements OnInit {
 
@@ -22,7 +24,7 @@ export class InstructorLedComponent implements OnInit {
   attendedSessions: any;
 
   constructor(private router: Router,
-              private learnerService: LearnerServicesService) {
+              private learnerService: LearnerServicesService,private dialog: MatDialog) {
               this.course = (this.router.getCurrentNavigation() && this.router.getCurrentNavigation().extras &&
                 this.router.getCurrentNavigation().extras.state && this.router.getCurrentNavigation().extras.state.detail);
   }
@@ -38,10 +40,11 @@ export class InstructorLedComponent implements OnInit {
 
   getAttendance() { // Http Call
     const userDetails = JSON.parse(sessionStorage.getItem('UserDetails'));
-    this.learnerService.getAttendanceByUsername(this.course.id, userDetails.full_name, userDetails.user_id).subscribe(res => {
+    this.learnerService.getAttendanceByUsername(this.course.id, userDetails.full_name, userDetails.user_id).subscribe(async res => {
       console.log(res);
       const data = res.data['getTopicAttendanceDetailsByUsername']['data'];
       this.listOfSessions = data.Activity;
+      console.log(this.listOfSessions)
       this.sessionAttendance = data.Attendance;
       console.log(this.listOfSessions);
       for (const los of this.listOfSessions) {
@@ -52,7 +55,9 @@ export class InstructorLedComponent implements OnInit {
       } 
       this.attendedSessions = _.countBy(this.sessionAttendance, x => x.activity.attendencedetails.Attendence === 'yes');
       console.log(this.attendedSessions);
+      this.useSession(this.listOfSessions[0])
     });
+    
   }  
 
   // getSessionsList() { // Http Call
@@ -82,13 +87,12 @@ export class InstructorLedComponent implements OnInit {
   }
 
   onGoingSession() {
-    debugger
     const ongoing = this.listOfSessions.find(x => x.status === 'On going');
     if (ongoing === undefined) {
       const upcoming = this.listOfSessions.find(x => x.status === 'Up Coming');
       if (upcoming === undefined) {
         this.activityShow = this.listOfSessions[0];
-        this.activityShow.button = 'Play Now';
+        this.activityShow.button = '';
       } else {
         this.activityShow = upcoming;
         // this.activityShow.button = '';
@@ -127,5 +131,17 @@ export class InstructorLedComponent implements OnInit {
       context = mm + ' minutes';
     }
     return context;
+  }
+
+  preview(row) {
+    const dialogRefVideo = this.dialog.open(VideoPreviewModalComponent, {
+      data: { url: row },
+      height: '90%',
+      width: '90%',
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+    dialogRefVideo.afterClosed().subscribe(res => {
+    });
   }
 }

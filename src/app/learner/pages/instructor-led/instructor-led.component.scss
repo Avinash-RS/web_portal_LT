@@ -1,0 +1,210 @@
+@import "variable";
+.formLayout {
+    margin-top: 3%;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.imgLayout {
+    background-color: #346f83;
+    height: 288px;
+    border-radius: unset;
+}
+.p-t-20{
+    padding-top: 20px !important;
+}
+
+.image-container{
+    position: relative;
+    text-align: center;
+}
+.bottom-right{
+    position: absolute;
+    bottom: 0px;
+    color: white;
+    background: green;
+    right: 15px;
+    padding: 4px;
+}
+.smallContainer1 {
+    height: 96px;
+    /* width: 223px; */
+    /* background-color: orangered; */
+    /* margin-left: 15px; */
+    border-radius: unset;
+    background: #e2663d 0% 0% no-repeat padding-box;
+}
+
+.smallContainer2 {
+    height: 96px;
+    /* width: 223px; */
+    background: #0c781b 0% 0% no-repeat padding-box;
+    /* margin-left: 9.5%; */
+    border-radius: unset;
+}
+
+.smallContainer3 {
+    height: 96px;
+    /* width: 223px; */
+    background: #399ce0 0% 0% no-repeat padding-box;
+    /* margin-left: 9.5%; */
+    border-radius: unset;
+}
+
+.mat-card-subtitle {
+    color: white;
+}
+.attendance-table{
+    table {
+        /* background: #ffffff 0% 0% no-repeat padding-box;
+        border: 0.5px solid #898989;
+        opacity: 1; */
+        /* margin-left: 15px; */
+        /* padding-right: 10px;
+        padding-left: 15px; */
+    }
+    
+    td,
+    th {
+        background: #ffffff 0% 0% no-repeat padding-box;
+        border: 0.5px solid #898989;
+        opacity: 1;
+        text-align: center;
+    }
+}
+.sessionCard {
+    border: 1px solid #dddddd;
+    height: 170px;
+    width: -webkit-fill-available;
+    /* background-color: #388E3C; */
+    /* margin-left: 20%; */
+    border-radius: unset;
+    color: black;
+}
+
+.redHover:hover {
+    color: $lxp-theme-green !important;
+}
+
+.backIc {
+    width: 10px !important;
+    margin-left: 10px !important;
+}
+
+.headLine {
+    text-align: left;
+    font: normal normal bold 15px/18px Roboto Condensed;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+    margin-left: 15px !important;
+}
+
+.headLine1 {
+    text-align: left;
+    font: normal normal normal 19px/25px Roboto Condensed;
+    letter-spacing: 0px;
+    color: #f5f5f5;
+    opacity: 1;
+}
+
+.gap {
+    margin-right: 10.6%;
+}
+
+.tableHeadline {
+    text-align: left;
+    font: normal normal bold 13px/15px Roboto Condensed;
+    letter-spacing: 0px;
+    color: #5c6873;
+    opacity: 1;
+}
+
+.smallHeadline {
+    text-align: left;
+    font: normal normal normal 17px/20px Roboto Condensed;
+    letter-spacing: 0px;
+    color: #ffffff;
+    opacity: 1;
+}
+
+.sessionTitle {
+    text-align: left;
+    font: normal normal normal 19px/25px Roboto Condensed;
+    letter-spacing: 0px;
+    color: #f5f5f5;
+    opacity: 1;
+    /* margin-left: 2%; */
+}
+
+.tblheaderFont {
+    text-align: left;
+    font: normal normal normal 15px/18px Roboto Condensed;
+    letter-spacing: 0px;
+    color: #5c6873;
+    opacity: 1;
+}
+
+.mat-card-image {
+    width: 45px;
+    height: 31px;
+    margin-left: 80%;
+    margin-top: -30px;
+}
+
+.number {
+    /* margin-left: 2px;
+    margin-top: -20px; */
+    margin-top: -12%;
+    text-align: left;
+    font: normal normal normal 23px/27px Roboto Condensed;
+    letter-spacing: 0px;
+    color: #ffffff;
+    opacity: 1;
+}
+
+.actBtn {
+    background: #c02222 0% 0% no-repeat padding-box;
+    border-radius: 18px;
+    opacity: 1;
+    color: white;
+}
+
+.noData {
+    text-align: left;
+    font: normal normal normal 25px/29px Roboto Condensed;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+}
+
+.noSessionCard {
+    margin-top: 25%;
+    background: #F7FBFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 0.5px solid #707070;
+    border-radius: 10px;
+    opacity: 1;
+    text-align: center;
+    padding-bottom: 8px !important;
+    padding-right: 0px !important;
+}
+
+.noSessionImg {
+    width: 45px;
+    /* height: 31px; */
+    margin-left: 0%;
+    /* margin-top: 3px; */
+}
+
+.mar-t-12{
+    margin-top: 12px !important;
+}
+
+.noSessionCard .mat-card-image:first-child {
+    margin-top: 0px;
+}
+
+.course-list .mat-nav-list {
+    width: 100%;
+}
