@@ -95,47 +95,48 @@ export class HeaderComponent implements OnInit {
     }).then((result) => {
       // console.log('inside logout result', result, 'login -', this.loginDetails, 'user - ', this.userDetailes);
       if (result.value) {
-        this.loading = true;
-        // this.router.navigate(['/Learner/login']);
-        // localStorage.clear();
-        // sessionStorage.clear();
-        // this.services.getIpAddressByUrl();
-        // this.userDetailes = null;
+        // this.loading = true;
+        this.router.navigate(['/Learner/login']);
+        localStorage.clear();
+        sessionStorage.clear();
+        this.services.getIpAddressByUrl();
+        this.userDetailes = null;
         this.services.logout(this.loginDetails._id, false).subscribe((logout: any) => {
-          if (logout.data.logout && logout.data.logout.success) {
-            this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
-            });
-            this.router.navigate(['/Learner/login']);
-            localStorage.clear();
-            sessionStorage.clear();
-            this.services.getIpAddressByUrl();
-            this.userDetailes = null;
-            this.loading = false;
-            // june 10 added by ankit
-          } else if (logout.data.logout && !logout.data.logout.success) {
-            if (logout.data.logout.error_msg === 'Authentication error. Token required.') {
-              this.router.navigate(['/Learner/login']);
-              localStorage.clear();
-              sessionStorage.clear();
-              this.services.getIpAddressByUrl();
-              this.userDetailes = null;
-              this.loading = false;
-              // june 10 added by ankit
-            } else {
-              this.alert.openAlert(logout.data.logout.message, null);
-            }
-          } else {
-            logout.errors.forEach(element => {
-              if (element.message.includes('TokenExpiredError') || element.message.includes('JsonWebTokenError')) {
-                localStorage.clear();
-                sessionStorage.clear();
-                this.services.getIpAddressByUrl();
-                // this.gs.checkLogout();
-                this.loading = false;
-              }
-            });
-            this.alert.openAlert('Please try again later', null);
-          }
+          // if (logout.data.logout && logout.data.logout.success) {
+          //   this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
+          //   });
+
+          //   this.router.navigate(['/Learner/login']);
+          //   localStorage.clear();
+          //   sessionStorage.clear();
+          //   this.services.getIpAddressByUrl();
+          //   this.userDetailes = null;
+          //   this.loading = false;
+          //   // june 10 added by ankit
+          // } else if (logout.data.logout && !logout.data.logout.success) {
+          //   if (logout.data.logout.error_msg === 'Authentication error. Token required.') {
+          //     this.router.navigate(['/Learner/login']);
+          //     localStorage.clear();
+          //     sessionStorage.clear();
+          //     this.services.getIpAddressByUrl();
+          //     this.userDetailes = null;
+          //     this.loading = false;
+          //     // june 10 added by ankit
+          //   } else {
+          //     this.alert.openAlert(logout.data.logout.message, null);
+          //   }
+          // } else {
+          //   logout.errors.forEach(element => {
+          //     if (element.message.includes('TokenExpiredError') || element.message.includes('JsonWebTokenError')) {
+          //       localStorage.clear();
+          //       sessionStorage.clear();
+          //       this.services.getIpAddressByUrl();
+          //       // this.gs.checkLogout();
+          //       this.loading = false;
+          //     }
+          //   });
+          //   this.alert.openAlert('Please try again later', null);
+          // }
         });
       }
     });

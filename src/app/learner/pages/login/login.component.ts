@@ -20,7 +20,8 @@ export class LoginComponent implements OnInit {
   languages: any;
 
   constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder,
-              private service: LearnerServicesService, private toastr: ToastrService , public socketService: SocketioService) {
+              public socketService: SocketioService,
+              private service: LearnerServicesService, private toastr: ToastrService) {
       this.languages = [{lang: 'ta' , languagename: 'Tamil' } , { lang: 'en' , languagename: 'English'  }] ;
 
       // translate.addLangs(['en', 'ta']);

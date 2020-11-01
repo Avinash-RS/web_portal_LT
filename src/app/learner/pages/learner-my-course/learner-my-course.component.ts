@@ -113,7 +113,6 @@ export class LearnerMyCourseComponent implements OnInit {
     public learnerService: LearnerServicesService, private gs: GlobalServiceService,
     private router: Router, private dialog: MatDialog,
     public CommonServices: CommonServicesService) {
-
     this.route.queryParams.subscribe(params => {
       // console.log(params, 'params');
       // for portal integration
@@ -542,8 +541,8 @@ export class LearnerMyCourseComponent implements OnInit {
       //   closeOnNavigation: true,
       //   disableClose: true,
       // });
-    }
   }
+}
   closedialogbox() {
     this.dialog.closeAll();
     this.allcourses = [];

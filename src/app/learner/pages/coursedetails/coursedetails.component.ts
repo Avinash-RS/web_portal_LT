@@ -11,10 +11,12 @@ import { MatDialog, MatSidenav, MatTabGroup } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
+import { SocketioService } from '@learner/services/socketio.service';
 import { TranslateService } from '@ngx-translate/core';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import * as _ from 'lodash';
-import { SocketioService } from '@learner/services/socketservice';
+import { LegendPosition } from 'ag-grid-community';
+// import { debugger } from 'fusioncharts';
 
 @Component({
   selector: 'app-coursedetails',
@@ -208,8 +210,11 @@ export class CoursedetailsComponent implements OnInit {
       this.performOverLay = false;
     });
     this.socketService.change.subscribe(result => {
+      // debugger;
+      // console.log(result);
       if ( result && result.eventId && result.eventId.length > 0) {
         const courseValue = _.find(result.data.course_dtl, { course_id: this.courseid});
+        console.log(courseValue);
         const newKeys = {
           displayName: 'title',
           moduledetails: 'children',
@@ -229,6 +234,8 @@ export class CoursedetailsComponent implements OnInit {
       }];
 
         this.scromModuleData = jsonData[0].childData;
+        // debugger;
+        console.log(jsonData[0].childData, 'this.scromModuleData');
         this.scromModuleData.forEach(childData => {
           if (childData &&  childData.children) {
           childData.children.forEach(subChild => {
@@ -242,6 +249,7 @@ export class CoursedetailsComponent implements OnInit {
           }
         });
       }
+      this.playerModuleAndTopic();
      });
   }
 
@@ -454,6 +462,7 @@ export class CoursedetailsComponent implements OnInit {
     this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
       this.scromModuleData = this.scromApiData?.childData;
+      console.log(this.scromModuleData);
       // tree level
       this.scromModuleData.forEach(childData => {
         // console.log(childData.children);

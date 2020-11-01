@@ -1,16 +1,16 @@
 @import "variable";
-.exp-icon-sub{
+.exp-icon-sub {
     margin-right: 38px;
     color: rgba(158, 158, 158, 0.64);
     font-size: 22px;
     margin-top: 12px;
     cursor: pointer !important;
 }
-.exp-icon-supersub{
+.exp-icon-supersub {
     margin-right: 68px;
     color: rgba(158, 158, 158, 0.64);
     font-size: 22px;
-    margin-top: 12px; 
+    margin-top: 12px;
     cursor: pointer !important;
 }
 
@@ -62,7 +62,6 @@
 //     -webkit-animation-fill-mode: forwards;
 //     animation-fill-mode: forwards;
 // }
-
 
 // @keyframes cssAnimation {
 //     to {
@@ -198,11 +197,9 @@ button.active:focus {
     outline-style: none !important;
 }
 
-
 .size {
     height: 17px;
     margin-left: 3px;
-
 }
 
 .sm-icon {
@@ -252,7 +249,6 @@ li {
     color: $color-blank;
     margin-top: 10px;
     font-weight: 500;
-
 }
 
 .head-h2 {
@@ -260,12 +256,10 @@ li {
     color: $color-blank;
     margin-top: 10px;
     font-weight: 500;
-
 }
 
 .arrow {
     text-align: right !important;
-
 }
 
 .contentTop {
@@ -283,7 +277,6 @@ li {
     display: inline-grid;
     box-shadow: 1px 1px 0 2px rgba(158, 158, 158, 0.1), 0 2px 6px 0 rgba(158, 158, 158, 0.88);
     border-radius: 2px;
-
 }
 
 .box-sm {
@@ -313,7 +306,6 @@ li {
 .borderline {
     border-top: 1px solid $color-border;
     width: 295px;
-
 }
 
 .hideButton {
@@ -354,10 +346,9 @@ li {
     text-align: left;
     margin-bottom: 10px;
     margin-top: 3px;
-    color: #9E9E9E !important;
+    color: #9e9e9e !important;
     font-size: 12px;
 }
-
 
 .space {
     margin-top: 4%;
@@ -429,7 +420,7 @@ li {
 .moduleHeadHight {
     padding: 0 0 13px 0 !important;
     margin-top: 10px !important;
-    height: 100px !important;
+    height: 80px !important;
     width: 336px;
 }
 .sqnumber {
@@ -444,24 +435,18 @@ li {
 
 .index-number-unread {
     position: relative;
-    left: 13px;
-    font-size: 20px;
-    line-height: initial;
-    display: flex;
-    margin-top: 1px;
+    left: 24px;
 }
 
 .index-number-read {
     position: relative;
 }
 
-
-
 .module-container {
     display: flex;
     flex-direction: column;
     height: 55px;
-    margin-top: 8px
+    margin-top: 8px;
 }
 
 .example-container {
@@ -503,7 +488,6 @@ iframe.fullScreen {
     left: 0;
 }
 
-
 :host ::ng-deep .mat-tab-body-content {
     height: 100%;
     overflow: hidden !important;
@@ -534,7 +518,6 @@ iframe.fullScreen {
     // height: 223px;
     margin-top: 10px;
 }
-
 
 .fullScr {
     // margin-left: 96%;
@@ -607,10 +590,8 @@ iframe.fullScreen {
     z-index: 99;
 }
 
-
 :host ::ng-deep .mat-toolbar-row,
 .mat-toolbar-single-row {
-
     // height: 44px !important;
 }
 
@@ -634,7 +615,6 @@ iframe.fullScreen {
 //     bottom: 48px;
 // }
 
-
 .margin-7per {
     margin-top: 8%;
 }
@@ -642,7 +622,6 @@ iframe.fullScreen {
 .font-color {
     color: #9a9898;
 }
-
 
 .bodybg {
     width: auto;
@@ -657,11 +636,9 @@ iframe.fullScreen {
     font-size: 14px !important;
     // font-weight: 500 !important;
     // color: $color-blank !important;
-
 }
 
 :host ::ng-deep.mat-tab-label .mat-tab-label-content:hover {
-
     // color: $color-blank !important;
 }
 
@@ -686,28 +663,23 @@ iframe.fullScreen {
 //     justify-content: center;
 // }
 .example-sidenav {
-
     // user-select: none;
 }
 
 .full-width {
-
     // width: 100%;
 }
 
 .menu-button {
-
     // transition: 300ms ease-in-out;
     // transform: rotate(180deg);
 }
 
 .menu-button.rotated {
-
     // transform: rotate(180deg);
 }
 
 .submenu {
-
     // overflow-y: hidden;
     // transition: transform 300ms ease;
     // transform: scaleY(0);
@@ -716,7 +688,6 @@ iframe.fullScreen {
 }
 
 .submenu.expanded {
-
     // transform: scaleY(1);
 }
 
@@ -773,7 +744,7 @@ iframe.fullScreen {
         height: 22px;
         font-size: 20px;
         font-weight: bolder;
-        color: #0E7D12;
+        color: #0e7d12;
         // border: 1px solid $color-border;
     }
 
@@ -834,19 +805,16 @@ iframe.fullScreen {
 :host ::ng-deep .mat-stepper-vertical-line::before {
     left: 1px !important;
     height: 33px;
-    content: '';
+    content: "";
     position: absolute;
     top: -18px;
     bottom: -16px;
     left: 0;
     border-left-width: 1px;
     border-left-style: solid;
-
-
 }
 
 :host ::ng-deep .mat-step-header {
-
     height: 0;
     overflow: visible !important;
 }
@@ -854,13 +822,11 @@ iframe.fullScreen {
 :host ::ng-deep .mat-step-icon .mat-icon,
 .mat-step-icon-content {
     color: $color-white !important;
-
 }
 
 .headerDown {
     margin-top: 0.5rem !important;
 }
-
 
 .moduleund {
     margin-left: 27px;
@@ -893,7 +859,6 @@ iframe.fullScreen {
     font-weight: 500;
 }
 
-
 .moduleHeadRead {
     padding-left: 8px;
     position: relative;
@@ -921,7 +886,6 @@ iframe.fullScreen {
     background-color: $color-white;
 }
 
-
 // ////////foooter
 .footer {
     padding: 15px;
@@ -939,7 +903,6 @@ iframe.fullScreen {
 }
 
 .mar {
-
     position: relative !important;
     bottom: 3px;
 }
@@ -968,11 +931,9 @@ iframe.fullScreen {
     margin-bottom: 0;
     cursor: pointer;
     border-bottom: 2px solid $lxp-theme-green; // red color
-
 }
 
-
-:host ::ng-deep .mat-expansion-panel:not([class*=mat-elevation-z]) {
+:host ::ng-deep .mat-expansion-panel:not([class*="mat-elevation-z"]) {
     box-shadow: none !important;
     // border: none !important;
 }
@@ -996,8 +957,7 @@ iframe.fullScreen {
 }
 
 // / mobile
-@media(min-width: 320px) and(max-width: 767px) {
-
+@media (min-width: 320px) and(max-width: 767px) {
     .mobileHoriz {
         display: block;
     }
@@ -1043,7 +1003,8 @@ iframe.fullScreen {
         width: 100% !important;
     }
 
-    .mat-drawer.mat-drawer-side {}
+    .mat-drawer.mat-drawer-side {
+    }
 
     .player {
         height: 284px !important;
@@ -1066,9 +1027,7 @@ iframe.fullScreen {
     }
 
     .main-opn {
-
         left: 372px !important;
-
     }
 
     // .moduleund {
@@ -1097,7 +1056,6 @@ iframe.fullScreen {
 
     .alarmIcon {
         font-size: 16px !important;
-
     }
 
     .divider {
@@ -1133,10 +1091,9 @@ iframe.fullScreen {
         margin-top: 34px !important;
         cursor: pointer !important;
     }
-
 }
 
-@media(min-width: 768px) and(max-width: 991.98px) {
+@media (min-width: 768px) and(max-width: 991.98px) {
     .prevBtn {
         margin-left: 75%;
         position: relative;
@@ -1170,7 +1127,7 @@ iframe.fullScreen {
 }
 
 .singleline-text {
-    white-space: nowrap
+    white-space: nowrap;
 }
 
 .textTruncate {
@@ -1186,7 +1143,8 @@ iframe.fullScreen {
     left: 47px;
 }
 
-.detailrow {}
+.detailrow {
+}
 
 .not-submited {
     color: $lxp-gray;
@@ -1206,7 +1164,6 @@ iframe.fullScreen {
 // }
 
 ::ng-deep .tooltip-inner {
-
     opacity: 1 !important;
 }
 
@@ -1214,7 +1171,7 @@ iframe.fullScreen {
     opacity: 1 !important;
 }
 
-::ng-deep .tooltip-350~.tooltip .tooltip-inner {
+::ng-deep .tooltip-350 ~ .tooltip .tooltip-inner {
     max-width: 220px;
     min-width: 220px;
 }
@@ -1261,7 +1218,6 @@ iframe.fullScreen {
 // }
 // Ramya CSS ends here
 
-
 .closeBtn {
     position: absolute;
     left: 25px;
@@ -1270,9 +1226,7 @@ iframe.fullScreen {
 }
 
 .about-course {
-
     height: 100vh;
-
 }
 
 ::ng-deep .mat-drawer:not(.mat-drawer-side) {
@@ -1290,7 +1244,6 @@ iframe.fullScreen {
 .resDrawercls {
     margin-left: 3%;
 }
-
 
 .drawer {
     position: fixed;
@@ -1310,13 +1263,12 @@ iframe.fullScreen {
 .drawer .contents {
     padding: 16px 0 16px 10px;
     margin-top: 12%;
-    width: -webkit-fill-available !important; 
+    width: -webkit-fill-available !important;
 }
 
 .main-opn {
     background-color: #fff;
 }
-
 
 .main-opn {
     position: fixed;
@@ -1348,7 +1300,6 @@ iframe.fullScreen {
     top: 2px;
 }
 
-
 /* video player tab */
 .example-sidenav-content-opn {
     display: flex;
@@ -1356,7 +1307,7 @@ iframe.fullScreen {
     align-items: center;
     justify-content: center;
     width: 75%;
-    margin-left: 2%
+    margin-left: 2%;
 }
 
 .example-sidenav-content-cls {
@@ -1364,9 +1315,7 @@ iframe.fullScreen {
     height: 100%;
     align-items: center;
     justify-content: center;
-
 }
-
 
 // /* About the course tab */
 .drawerClsAboutCourse {
@@ -1385,7 +1334,6 @@ iframe.fullScreen {
 .drawerClsResource {
     width: 100%;
 }
-
 
 .drawerOpnAss {
     width: 74%;
@@ -1419,17 +1367,17 @@ iframe.fullScreen {
 
 @media screen and (min-width: 320px) and (max-width: 760px) {
     .threadbutton {
-        display: none !important
+        display: none !important;
     }
 
     .plus_icon {
-        color: #C02222
+        color: #c02222;
     }
 }
 
 @media screen and (min-width: 761px) {
     .plus_icon {
-        display: none
+        display: none;
     }
 }
 
@@ -1437,6 +1385,12 @@ iframe.fullScreen {
     width: 221px !important;
     white-space: pre-line !important;
     font-size: 16px !important;
+    margin-left: 5px;
+}
+
+.mod-passed {
+    position: relative;
+    top: 4px;
 }
 
 .titleName {
@@ -1445,7 +1399,6 @@ iframe.fullScreen {
     margin-top: -14px;
     // margin-top: -11px;
 }
-
 
 ::ng-deep .drawer {
     overflow-y: unset !important;
@@ -1464,10 +1417,9 @@ iframe.fullScreen {
     margin-top: 17px;
     z-index: 2 !important;
     position: relative !important;
-    right:14px !important;
+    right: 14px !important;
     cursor: pointer !important;
 }
-
 
 // :host ::ng-deep .mat-expansion-panel:not(:last-child) {
 //     border-bottom: 0px !important;
@@ -1476,7 +1428,6 @@ iframe.fullScreen {
 //     box-shadow: none !important;
 //     // border: none !important;
 //     }
-
 
 :host ::ng-deep .mat-drawer-inner-container {
     width: 100%;
