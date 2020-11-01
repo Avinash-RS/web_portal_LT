@@ -64,12 +64,12 @@
                                                     </div>
                                                    
                                                     <div
-                                                        class="index-number-read">
+                                                    [ngClass]="res?.status == 'Passed'? 'index-number-read' : 'index-number-unread'">
                                                         <span class="custom-index">{{i+1}}.</span>
                                                     </div>
                                                     <div>
                                                         <div
-                                                            class="index-number-read">
+                                                        [ngClass]="res?.status == 'Passed'? 'index-number-read' : 'index-number-unread'">
                                                             <div class="modhead">
                                                                 <p *ngIf="res?.title?.length >= 67" class="moduleName"
                                                                     tooltip="{{res?.title}}" placement="right">
