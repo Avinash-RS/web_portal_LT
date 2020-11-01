@@ -4,16 +4,27 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://facade.southindia.cloudapp.azure.com:3000/',
-  scormUrl: 'http://scorm.southindia.cloudapp.azure.com:8089/',
-  apiUrlImg: 'http://facade.southindia.cloudapp.azure.com:3000/',
-  createCourseApi: 'http://course.southindia.cloudapp.azure.com:3002/',
-  wcaapiurl: 'http://wca.southindia.cloudapp.azure.com:9001/',
+  apiUrl: 'http://20.44.41.200:3000/',
+  scormUrl: 'http://20.44.36.116:8089/',
+  apiUrlImg: 'http://20.44.41.200:3000/',
+  createCourseApi: 'http://20.44.41.55:3002/',
+  wcaapiurl: 'http://20.44.34.169:9001/',
   domain : 'LXP',
   analytics: 'UA-171656647-1',
   systemIp : 'http://api.ipify.org/?format=json',
   socketio : 'http://20.40.0.83:3009'
 };
+// export const environment = {
+//   production: false,
+//   apiUrl: 'http://facade.southindia.cloudapp.azure.com:3000/',
+//   scormUrl: 'http://scorm.southindia.cloudapp.azure.com:8089/',
+//   apiUrlImg: 'http://facade.southindia.cloudapp.azure.com:3000/',
+//   createCourseApi: 'http://course.southindia.cloudapp.azure.com:3002/',
+//   wcaapiurl: 'http://wca.southindia.cloudapp.azure.com:9001/',
+//   domain : 'LXP',
+//   analytics: 'UA-171656647-1',
+//   systemIp : 'http://api.ipify.org/?format=json',
+// };
 // export const environment = {
 //   production: false,
 //   apiUrl: 'http://20.44.35.112:3000/',

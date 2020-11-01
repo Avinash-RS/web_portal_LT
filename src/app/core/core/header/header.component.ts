@@ -53,7 +53,7 @@ export class HeaderComponent implements OnInit {
     }, 3000);
   }
   getShortName(fullName) {
-    const Name = fullName?.split(' ').map(function (str) {
+    const Name = fullName?.split(' ').map(function(str) {
       return str ? str[0].toUpperCase() : '';
     }).join('');
     if (Name?.length === 1) {
