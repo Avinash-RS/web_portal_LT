@@ -24,7 +24,7 @@
   <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-12"></div>
   <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6                                                                                                                                                                                                                                                                                                                            col-12">
     <mat-card class="noSessionCard">
-      <div class="row">
+      <div class="row mar-t-12">
         <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
           <img mat-card-image class="noSessionImg" src="../../../../assets/learner/noSessions.png"> 
         </div>
@@ -51,7 +51,7 @@
         <div class="row" *ngIf='activityShow !== undefined'>
           <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
             <div flex style="margin-top: 15px;">
-              <img style="height: 229px !important; width: -webkit-fill-available;" *ngIf="activityShow?.activity_details.livethumbnail === undefined" height="229" width="369" src="../../../../assets/learner/sessionThumbnail_01.png" />
+              <img style="height: 229px !important; width: -webkit-fill-available;" *ngIf="activityShow?.activity_details.livethumbnail === undefined" height="229" width="369" src="../../../../assets/learner/instructor_image.png" />
               <img style="height: 229px !important; width: -webkit-fill-available;" *ngIf="activityShow?.activity_details.livethumbnail !== undefined" height="229" width="369" [src]="activityShow?.activity_details.livethumbnail" />
             </div>
           </div>
@@ -86,7 +86,7 @@
       <div class="row" style="margin-top: 5%;">
         <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
           <mat-card class="smallContainer1">
-            <mat-card-subtitle class="smallHeadline">Total Classes</mat-card-subtitle>
+            <mat-card-subtitle class="smallHeadline">Total Sessions</mat-card-subtitle>
             <div class="row d-flex p-t-20">
               <span class="number">{{sessionAttendance?.length}}</span>
               <img mat-card-image src="../../../../assets/learner/elearning.svg">
@@ -96,7 +96,7 @@
         
         <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
           <mat-card class="smallContainer2">
-            <mat-card-subtitle class="smallHeadline">Attended Classes</mat-card-subtitle>
+            <mat-card-subtitle class="smallHeadline">Attended Sessions</mat-card-subtitle>
             <div class="row d-flex p-t-20">
               <span class="number" *ngIf="attendedSessions !== undefined">{{attendedSessions?.true}}</span>
               <span class="number" *ngIf="attendedSessions.true === undefined" >0</span>
@@ -107,7 +107,7 @@
 
         <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
           <mat-card class="smallContainer3">
-            <mat-card-subtitle class="smallHeadline">Recorded Classes</mat-card-subtitle>
+            <mat-card-subtitle class="smallHeadline">Recorded Sessions</mat-card-subtitle>
             <div class="row d-flex p-t-20">
               <span class="number">{{listOfSessions?.length}}</span>
               <img mat-card-image src="../../../../assets/learner/video-tutorial.svg">
@@ -149,7 +149,7 @@
             <div class="row">
               <div class="image-container col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
                 <img *ngIf="los.activity_details.livethumbnail !== undefined" height="220" style="width: 100%; height: 140px;" [src]="los.activity_details.livethumbnail">
-                <img *ngIf="los.activity_details.livethumbnail === undefined" height="220" style="width: 100%; height: 140px;" src="../../../../assets/learner/sessionThumbnail_01.png">
+                <img *ngIf="los.activity_details.livethumbnail === undefined" height="220" style="width: 100%; height: 140px;" src="../../../../assets/learner/instructor_image.png">
                 <div class="bottom-right">{{los.status}}</div>
               </div>
               <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
