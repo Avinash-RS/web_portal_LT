@@ -53,7 +53,7 @@
                                     [expanded]="selectedIndex === i">
                                     <mat-expansion-panel-header class="moduleHeadHight">
                                         <mat-panel-title class="module-container">
-                                            <div style="padding-left:14px">
+                                            <div style="margin-bottom: 3px;">
                                                 Week-{{i+1}}
                                             </div>
                                                 <div class="row titleHeight">
@@ -64,12 +64,12 @@
                                                     </div>
                                                    
                                                     <div
-                                                        [ngClass]="res?.status == 'Passed'? 'index-number-read' : 'index-number-unread'">
+                                                        class="index-number-read">
                                                         <span class="custom-index">{{i+1}}.</span>
                                                     </div>
                                                     <div>
                                                         <div
-                                                            [ngClass]="res?.status == 'Passed'? 'moduleHeadRead' : 'moduleHeadUnread'">
+                                                            class="index-number-read">
                                                             <div class="modhead">
                                                                 <p *ngIf="res?.title?.length >= 67" class="moduleName"
                                                                     tooltip="{{res?.title}}" placement="right">
