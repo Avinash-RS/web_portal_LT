@@ -41,8 +41,7 @@
               <table class="f_size_12">
                 <tr>
                   <td>Instructor led sessions</td>
-                  <td *ngIf="course.course_id == 'ugqau50t'">NA</td>
-                  <td *ngIf="course.course_id == 'eb9f0bou'">Upto 14</td>
+                  <td>Upto 14</td>
                   <!-- <td>Upto {{globalData.on_hover_image_data.instructor_lead_session}}</td> -->
                 </tr>
                 <tr>
@@ -130,8 +129,7 @@
                   Instructor led session completed
                 </div>
                 <div class="col-3 f_wt_600">
-                  <ng-container *ngIf="course.course_id == 'ugqau50t'">NA</ng-container> 
-                  <ng-container *ngIf="course.course_id == 'eb9f0bou'">{{globalData.course_progression_data.instructor_lead_session}}</ng-container> 
+                  <ng-container>{{globalData.course_progression_data.instructor_lead_session}}</ng-container> 
                   
                 </div>
               </div>
