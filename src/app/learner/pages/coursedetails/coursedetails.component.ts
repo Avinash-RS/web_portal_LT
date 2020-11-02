@@ -130,7 +130,7 @@ export class CoursedetailsComponent implements OnInit {
       this.playerModuleAndTopic();
       // this.refreshData();
       // this.autoHide();
-      this.getPlayerNextPrve();
+     // this.getPlayerNextPrve();
       this.service.viewCurseByID(detail && detail.id || this.localStoCourseid, this.userDetail.user_id)
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
@@ -211,8 +211,8 @@ export class CoursedetailsComponent implements OnInit {
     });
     this.socketService.change.subscribe(result => {
       if ( result && result.eventId && result.eventId.length > 0) {
-        const courseValue = _.find(result.data.course_dtl, { course_id: this.courseid});
-        console.log(courseValue);
+      //  const courseValue = _.find(result.data.course_dtl, { course_id: this.courseid});
+     //   console.log(courseValue);
         const newKeys = {
           displayName: 'title',
           moduledetails: 'children',
@@ -220,7 +220,7 @@ export class CoursedetailsComponent implements OnInit {
         };
         const restructrueArray = [];
         let i = 0;
-        for (const iterator of courseValue.module) {
+        for (const iterator of result.data.module) {
           const renamedObj = this.renameKeys(iterator, newKeys);
           restructrueArray.push(renamedObj);
           i = i + 1;
@@ -231,7 +231,7 @@ export class CoursedetailsComponent implements OnInit {
         total_topic_len: i
       }];
 
-        this.scromModuleData = jsonData[0].childData;
+      this.scromModuleData = jsonData[0].childData;
         console.log(jsonData[0].childData, 'this.scromModuleData');
         this.scromModuleData.forEach(childData => {
           if (childData &&  childData.children) {
@@ -378,7 +378,7 @@ export class CoursedetailsComponent implements OnInit {
   getPlayerNextPrve() {
     this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
-      this.scromModuleData = this.scromApiData?.childData;
+     /* this.scromModuleData = this.scromApiData?.childData;*/
       this.moduleLenth = this.scromApiData?.childData.length;
       this.playerTopicLen = this.scromApiData.total_topic_len;
 
