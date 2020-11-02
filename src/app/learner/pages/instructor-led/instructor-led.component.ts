@@ -139,7 +139,7 @@ export class InstructorLedComponent implements OnInit {
 
   preview(row) {
     const dialogRefVideo = this.dialog.open(VideoPreviewModalComponent, {
-      data: { url: "https://edtechscorm.blob.core.windows.net/scormcontainer/Webinar/Applied_Industrial_IoT_Webinar.mp4" },
+      data: { url: row },
       height: '100%',
       width: '100%',
       closeOnNavigation: true,
