@@ -636,10 +636,11 @@ export class ProfileComponent implements OnInit {
       this.passwordForm.value.newpassword).subscribe((password: any) => {
         if (password.data.get_change_password_updateprofile.success === 'true') {
           Swal.fire(password.data.get_change_password_updateprofile.message);
-          localStorage.clear();
-          this.services.getIpAddressByUrl()
           this.dialog.closeAll();
           this.router.navigate(['/Learner/login']);
+          localStorage.clear();
+          sessionStorage.clear();
+          this.services.getIpAddressByUrl();
         } else {
           Swal.fire(password.data.get_change_password_updateprofile.message);
         }

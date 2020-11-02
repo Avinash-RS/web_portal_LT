@@ -78,7 +78,7 @@
                 <span class="sessionTitle">{{activityShow?.duration}}</span>
               </div>
               <div class="row" style="margin-top: 20px;">
-                <button class="actBtn" mat-raised-button *ngIf="activityShow?.status === 'On going'"
+                <button class="actBtn" mat-raised-button *ngIf="activityShow?.status === 'On going' && activityShow?.activity_details.activitytype != 'Recorded'"
                   (click)="getAction(activityShow.activity_details.link)">{{activityShow?.button}}</button>
               </div>
               <div class="row" style="margin-top: 20px;color: white !important;" *ngIf="activityShow?.activity_details.activitytype == 'Recorded'">
