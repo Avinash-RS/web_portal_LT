@@ -140,8 +140,8 @@ export class InstructorLedComponent implements OnInit {
   preview(row) {
     const dialogRefVideo = this.dialog.open(VideoPreviewModalComponent, {
       data: { url: row },
-      height: '90%',
-      width: '90%',
+      height: '100%',
+      width: '100%',
       closeOnNavigation: true,
       disableClose: true,
     });

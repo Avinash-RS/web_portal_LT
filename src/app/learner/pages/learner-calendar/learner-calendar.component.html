@@ -79,7 +79,8 @@
                                                 <img *ngIf="data.activity_details.activitytype == 'Live Classroom'" class=float-right src="../../../../assets/images/ms_team.png" width="35" height="35">
                                                 <!--  -->
                                                 <div class="m-l-4">
-                                                    <mat-icon style="vertical-align: middle;">event</mat-icon>
+                                                    <!-- <mat-icon style="vertical-align: middle;">event</mat-icon> -->
+                                                    <img src="../../../../assets/learner/Calendar_black.svg">
                                                     <span class="lxp-text f_size_14 f_wt_400"> {{data.activity_details.startdate | date :'MMM d, y h:mm a'}} - {{data.activity_details.enddate | date :'MMM d, y h:mm a'}}</span>
                                                     <!-- |  <i class="fa fa-clock-o" aria-hidden="true"> {{currentStartTime}}</i>-{{currentEndTime}}  -->
                                                     <span class="status lxp-text f_size_14 f_wt_400" *ngIf="data.status == 'On going' ">
@@ -117,7 +118,8 @@
                                             <img *ngIf="data.activity_details.activitytype == 'Live Classroom'" class=float-right src="../../../../assets/images/ms_team.png" width="35" height="35">
                                             <!--  -->
                                             <div class="m-l-4">
-                                                <mat-icon style="vertical-align: middle;">event</mat-icon>
+                                                <img src="../../../../assets/learner/Calendar_black.svg">
+                                                <!-- <mat-icon style="vertical-align: middle;">event</mat-icon> -->
                                                 <span class="lxp-text f_size_14 f_wt_400"> {{data.activity_details.startdate | date :'MMM d, y h:mm a'}} - {{data.activity_details.enddate | date :'MMM d, y h:mm a'}}</span>
                                                 <!-- |  <i class="fa fa-clock-o" aria-hidden="true"> {{currentStartTime}}</i>-{{currentEndTime}}  -->
                                                 <span class="status lxp-text f_size_14 f_wt_400" *ngIf="data.status == 'On going' ">
