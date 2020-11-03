@@ -479,13 +479,16 @@
                     <button mat-mini-fab class="groupBtn">
                       <mat-icon class="grpIcon">group</mat-icon>
                     </button>
-                    <span class="teamName" matTooltip="{{project.projectActivity.groupname}}"
-                      matTooltipClass="custom-mat-tooltip">{{(project.projectActivity.groupname?.length > 10)? (project.projectActivity.groupname| slice:0:10)+'...'
-                : (project.projectActivity.groupname)}}
-                      ({{project.projectActivity.groupDetails.length}})</span>&nbsp;
+                    <span class="teamName" *ngIf="project.projectActivity.groupname.length < 14">
+                      {{project.projectActivity.groupname}}
+                    </span>
+                    <span class="teamName" *ngIf="project.projectActivity.groupname.length > 14"
+                      matTooltip="{{project.projectActivity.groupname}}" matTooltipClass="custom-mat-tooltip">
+                      {{(project.projectActivity.groupname| slice:0:14)+'...'}}
+                    </span>&nbsp;
                     <button mat-mini-fab class="arrBtn" *ngIf="!project.projectActivity.showLearnerList"
                       (click)="project.projectActivity.showLearnerList = !project.projectActivity.showLearnerList">
-                      <mat-icon class="grpIcon">arrow_back</mat-icon>
+                      <mat-icon class="arrBack">arrow_back</mat-icon>
                     </button>
                   </span>
                 </div>
@@ -553,7 +556,13 @@
                             <div (mouseleave)="hover = false"
                               [ngClass]="!hover ? 'row ml-0 mr-0 carouselRow' : 'row ml-0 mr-0 carouselRowHover'">
                               <div class="col-12 text-center m-auto pl-0 pr-0">
-                                <span class="carouselText">{{material.filename}}</span>
+                                <span class="carouselText" *ngIf="material.filename.length < 28">
+                                  {{material.filename}}
+                                </span>
+                                <span class="carouselText" *ngIf="material.filename.length > 28"
+                                  matTooltip="{{material.filename}}" matTooltipClass="custom-mat-tooltip">
+                                  {{(material.filename| slice:0:28)+'...'}}
+                                </span>
                                 <br>
                                 <div class="row ml-0 mr-0" *ngIf="hover">
                                   <div class="col-12 pl-0 pr-0">
@@ -598,7 +607,7 @@
                   <div class="col-4" *ngIf="project.projectActivity.submit_status == 'notsubmitted'
               || project.projectActivity.grade_status !== 'Evaluated'">
                     <div class="f_size_16 f_wt_600 align-center work">Your work</div>
-                    <div class="box-0-2">
+                    <div [ngClass]="project.projectActivity.showLearnerList ? 'box-0-3' : 'box-0-2'">
                       <div class="fileData ml-auto mr-auto mb-3"
                         *ngFor="let item of project.projectActivity.videodetails">
                         <mat-icon *ngIf="item.doc_type == 'video/mp4'" class="videoPlay float-left">play_circle_outline
@@ -608,7 +617,13 @@
                           class="videoPlay float-left">photo</mat-icon>
                         <mat-icon *ngIf="item.doc_type == 'application/pdf'" class="videoPlay float-left">picture_as_pdf
                         </mat-icon>
-                        <span class="uploadfileName">{{(item.name| slice:0:28)+'...'}}</span>
+                        <span class="uploadfileName" *ngIf="item.name.length < 28">
+                            {{item.name}}
+                          </span>
+                        <span class="uploadfileName" *ngIf="item.name.length > 28" matTooltip="{{item.name}}"
+                        matTooltipClass="custom-mat-tooltip">
+                          {{(item.name| slice:0:28)+'...'}}
+                        </span>
                         <mat-icon class="deleteIcon float-right"
                           *ngIf="project.projectActivity.submitAction !== 'submit'"
                           (click)="learnerSumbitdeleteVideo(project, item, 'delete')">delete</mat-icon>
@@ -675,7 +690,13 @@
                             <div (mouseleave)="hover = false"
                               [ngClass]="!hover ? 'row ml-0 mr-0 carouselRow' : 'row ml-0 mr-0 carouselRowHover'">
                               <div class="col-12 text-center m-auto pl-0 pr-0">
-                                <span class="carouselText">{{video.name}}</span>
+                                <span class="carouselText" *ngIf="video.name.length < 28">
+                                  {{video.name}}
+                                </span>
+                                <span class="carouselText" *ngIf="video.name.length > 28"
+                                  matTooltip="{{video.name}}" matTooltipClass="custom-mat-tooltip">
+                                  {{(video.name| slice:0:28)+'...'}}
+                                </span>
                                 <br>
                                 <div class="row ml-0 mr-0" *ngIf="hover">
                                   <div class="col-12 pl-0 pr-0">
@@ -721,13 +742,18 @@
 
             <!------------------------------------Learner list------------------------------->
             <div class="col-2 learnerList" *ngIf="project.projectActivity.showLearnerList">
-              <div class="align-center" matTooltip="{{project.projectActivity.groupname}}"
-                matTooltipClass="custom-mat-tooltip">
-                {{(project.projectActivity.groupname.length > 10)? (project.projectActivity.groupname| slice:0:10)+'...' : (project.projectActivity.groupname)}}
-                ({{project.projectActivity.groupDetails.length}})
+              <div class="align-center">
+
+                <span *ngIf="project.projectActivity.groupname.length < 14">
+                  {{project.projectActivity.groupname}}
+                </span>
+                <span *ngIf="project.projectActivity.groupname.length > 14"
+                  matTooltip="{{project.projectActivity.groupname}}" matTooltipClass="custom-mat-tooltip">
+                  {{(project.projectActivity.groupname| slice:0:14)+'...'}}
+                </span>
                 <button mat-mini-fab class="arrfwd" *ngIf="project.projectActivity.showLearnerList"
                   (click)="project.projectActivity.showLearnerList = !project.projectActivity.showLearnerList">
-                  <mat-icon class="grpIcon">arrow_forward</mat-icon>
+                  <mat-icon class="arrBack">arrow_forward</mat-icon>
                 </button>
               </div>
               <div class="list">
