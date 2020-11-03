@@ -59,8 +59,8 @@
         <div class="row" *ngIf='activityShow !== undefined'>
           <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
             <div flex style="margin-top: 15px;">
-              <img style="height: 229px !important; width: -webkit-fill-available;" *ngIf="activityShow?.activity_details.livethumbnail === undefined" height="229" width="369" src="../../../../assets/learner/instructor_image.png" />
-              <img style="height: 229px !important; width: -webkit-fill-available;" *ngIf="activityShow?.activity_details.livethumbnail !== undefined" height="229" width="369" [src]="activityShow?.activity_details.livethumbnail" />
+              <img style="height: 229px !important; width: 100% !important;" *ngIf="activityShow?.activity_details.livethumbnail === undefined" height="229" width="369" src="../../../../assets/learner/instructor_image.png" />
+              <img style="height: 229px !important; width: 100%" *ngIf="activityShow?.activity_details.livethumbnail !== undefined" height="229" width="369" [src]="activityShow?.activity_details.livethumbnail" />
             </div>
           </div>
           <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
@@ -68,7 +68,8 @@
             <div flex style="margin-top: 15px;">
               <span class="sessionTitle">{{activityShow?.activity_details.topicname}}</span>
               <div class="row" style="color: white; margin-top: 10px;">
-                <spaN>Started @ </spaN> <span>
+                <span>Held On</span> &nbsp;&nbsp;
+                <span>
                   {{ activityShow?.activity_details.startdate | date: 'MMM d, y, h:mm a'}}</span>
               </div>
               <div class="row" style="color: white; margin-top: 10px;">
@@ -162,7 +163,7 @@
               </div>
               <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
                 <h4 style="margin-left: 20px;font-weight: bold;">{{los.activity_details.topicname}}</h4>
-                <h5 style="margin-left: 20px;">Starting On:
+                <h5 style="margin-left: 20px;">Held On:
                   {{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm'}}</h5>
                 <h5 style="margin-left: 20px;">Duration: {{los.duration}} </h5>
               </div>

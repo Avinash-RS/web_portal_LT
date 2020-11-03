@@ -2330,7 +2330,7 @@ hr {
 .dynamicBagde {
   background: #5c6873 !important;
   left: 31px !important;
-
+top: 9px;
   & .mat-badge-content {
     background: $lxp-gray !important;
   }
@@ -2598,6 +2598,7 @@ hr {
 
 .dropdown-submenu {
   position: relative;
+  bottom: 4px;
 }
 
 .dropdown-menu:hover {
@@ -2609,10 +2610,10 @@ hr {
 }
 
 :host ::ng-deep .dropdown-menu {
-  min-width: 12rem;
+  min-width: 10.5rem;
   max-width: auto !important;
   left: unset !important;
-  right: 8% !important;
+  right: 9% !important;
   // height: 38px !important;
   border-bottom: 1px solid #e4dddd !important;
   padding-top: 9px !important;
@@ -2730,8 +2731,9 @@ li {
 .iconsSearch {
   position: absolute;
   color: #69727c;
-  top: 0.7rem;
+  top: 8px;
   right: 0.5rem;
+  cursor: pointer !important;
 }
 
 .descOverflow {
