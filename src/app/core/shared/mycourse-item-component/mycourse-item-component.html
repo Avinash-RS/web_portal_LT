@@ -41,8 +41,7 @@
               <table class="f_size_12">
                 <tr>
                   <td>Instructor led sessions</td>
-                  <td *ngIf="course.course_id == 'ugqau50t'">NA</td>
-                  <td *ngIf="course.course_id == 'eb9f0bou'">Upto 14</td>
+                  <td>Upto 14</td>
                   <!-- <td>Upto {{globalData.on_hover_image_data.instructor_lead_session}}</td> -->
                 </tr>
                 <tr>
@@ -130,8 +129,7 @@
                   Instructor led session completed
                 </div>
                 <div class="col-3 f_wt_600">
-                  <ng-container *ngIf="course.course_id == 'ugqau50t'">NA</ng-container> 
-                  <ng-container *ngIf="course.course_id == 'eb9f0bou'">{{globalData.course_progression_data.instructor_lead_session}}</ng-container> 
+                  <ng-container>{{globalData.course_progression_data.instructor_lead_session}}</ng-container> 
                   
                 </div>
               </div>
@@ -242,7 +240,7 @@
                   <button mat-stroked-button *ngIf="
                                             course?.coursePlayerStatus?.status !== 'completed'
                                           " class="btl-alin btn-txt-center
-                                           bg_lxp_red color_white cap pointer m-t-05 m-l-10px"
+                                           bg_lxp_red color_white cap pointer m-t-6px m-l-10px"
                     (click)="gotoDesc(course)">
                     <!-- <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon> -->
                     <i class="fa fa-play-circle mycourse-btn-img" aria-hidden="true"></i>

@@ -918,6 +918,15 @@ mat-header-cell,
   }
 }
 
+.mat-typography p {
+  margin: 0 0 12px !important
+}
+
+
+::ng-deep .mat-typography p {
+  margin: 0 0 12px !important
+}
+
 .knowledge-preview-popup {
   .mat-dialog-container {
       padding: 0px !important;
