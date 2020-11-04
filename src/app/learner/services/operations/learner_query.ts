@@ -1766,6 +1766,8 @@ export const getprojectActivityData = gql`
         submit_status
         course_id
         batchid
+        batchstartdate
+        batchenddate
         activityId
         module_id
         activityname

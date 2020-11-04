@@ -162,13 +162,13 @@ export class ActivitiesComponent implements OnInit {
                   if (
                     moment().format('DD-MM-YYYY HH:MM') >=
                     fileData.assignmentStartDate &&
-                    moment().format('DD-MM-YYYY HH:MM') <= this.courseEndDate
+                    moment().format('DD-MM-YYYY') <= this.courseEndDate
                   ) {
                     fileData.enableUpload = true;
                   } else if (
                     moment().format('DD-MM-YYYY HH:MM') <
                     fileData.assignmentStartDate ||
-                    moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate
+                    moment().format('DD-MM-YYYY') > this.courseEndDate
                   ) {
                     fileData.enableUpload = false;
                   }
@@ -309,6 +309,16 @@ export class ActivitiesComponent implements OnInit {
       this.projectDetails.forEach(element => {
         element.showLearnerList = false;
         // element.isCollapsed = false;
+        // Batch date
+        const batchEndDate = new Date(element.projectActivity.batchenddate);
+        element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:MM');
+        console.log('batch', element.batchEndDate);
+        if (moment().format('DD-MM-YYYY HH:MM') <= element.batchEndDate) {
+          element.submitType = true;
+        } else {
+          element.submitType = false;
+        }
+        // Activity Dates
         const startDate = new Date(element.projectActivity.activitystartdate);
         element.activityStartDate = moment(startDate).format('ll');
         element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
@@ -499,7 +509,7 @@ export class ActivitiesComponent implements OnInit {
   submitDeleteVideo(videoName, itrdata, perform) {
     let videoFile = [];
     videoFile.push(videoName);
-    let data = {
+    const data = {
       course_id: perform.course_id,
       module_id: perform.module_id,
       topic_id: perform.topic_id,
