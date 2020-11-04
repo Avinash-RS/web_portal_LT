@@ -51,6 +51,8 @@ export class ActivitiesComponent implements OnInit {
   submitStatus: string;
   checkDetails: any;
   mobileResponsive: boolean;
+  screenHeight: number;
+  screenWidth: number;
   // assignmentMessage = false;
   trendingCategorires: any = {
     loop: false, // dont make it true
@@ -104,6 +106,19 @@ export class ActivitiesComponent implements OnInit {
   }
 
   ngOnInit() { }
+
+  tabChanged(event) {
+    if (event.tab.textLabel === 'Perform') {
+      this.screenHeight = window.innerHeight;
+      this.screenWidth = window.innerWidth;
+      if (this.screenWidth < 800) {
+        this.mobileResponsive = true;
+      } else {
+        this.mobileResponsive = false;
+      }
+    }
+  }
+
   goToCourse() {
     this.route.navigateByUrl('/Learner/MyCourse');
   }
@@ -461,100 +476,100 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
-  // --------------------- Perform document upload ----------------------------
+ // --------------------- Perform document upload ----------------------------
 
-  uploadDocument(event, perform) {
-    // this.selectPerformfile.push(event.target.files[0] as File);
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < event.target.files.length; i++) {
-      this.selectPerformfile.push(event.target.files[i]);
-  }
-    this.performlearnerUploadVideo();
-  }
+ uploadDocument(event, perform) {
+  // this.selectPerformfile.push(event.target.files[0] as File);
+  // tslint:disable-next-line: prefer-for-of
+  for (let i = 0; i < event.target.files.length; i++) {
+    this.selectPerformfile.push(event.target.files[i]);
+}
+  this.performlearnerUploadVideo();
+}
 
-  uploadDocuments(perform, performans) {
-    this.performsData = performans;
-    this.itrationData = perform;
-    this.videoInput.nativeElement.click();
-  }
+uploadDocuments(perform, performans) {
+  this.performsData = performans;
+  this.itrationData = perform;
+  this.videoInput.nativeElement.click();
+}
 
-  performlearnerUploadVideo() {
-    const currentDate = new Date();
-    const performVideo = new FormData();
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < this.selectPerformfile.length; i++) {
-      performVideo.append('uploadvideo', this.selectPerformfile[i]);
+performlearnerUploadVideo() {
+  const currentDate = new Date();
+  const performVideo = new FormData();
+  // tslint:disable-next-line: prefer-for-of
+  for (let i = 0; i < this.selectPerformfile.length; i++) {
+    performVideo.append('uploadvideo', this.selectPerformfile[i]);
+  }
+  // performVideo.append('uploadvideo' , this.selectPerformfile[0]);
+  performVideo.append('course_id', this.performsData.performActivity.course_id);
+  performVideo.append('module_id', this.performsData.performActivity.module_id);
+  performVideo.append('topic_id', this.performsData.performActivity.topic_id);
+  performVideo.append('user_id', this.userDetail.user_id);
+  performVideo.append('submit_status', this.submitStatus);
+  performVideo.append('total_mark', this.itrationData.total_mark);
+  performVideo.append('submitType', 'perform');
+  performVideo.append('submitAction', this.submitType);
+  performVideo.append('iterationid', this.itrationData.iterationid);
+  performVideo.append('object_id', this.performsData.performActivity.perform_id);
+  this.Lservice.learnerUploadVideo(performVideo).subscribe((data: any) => {
+    if (data.success === true) {
+      this.toastr.success(data.message);
+      this.getperformActivityData();
+      this.selectPerformfile = [];
+    } else {
+      this.toastr.warning(data.message);
     }
-    // performVideo.append('uploadvideo' , this.selectPerformfile[0]);
-    performVideo.append('course_id', this.performsData.performActivity.course_id);
-    performVideo.append('module_id', this.performsData.performActivity.module_id);
-    performVideo.append('topic_id', this.performsData.performActivity.topic_id);
-    performVideo.append('user_id', this.userDetail.user_id);
-    performVideo.append('submit_status', this.submitStatus);
-    performVideo.append('total_mark', this.itrationData.total_mark);
-    performVideo.append('submitType', 'perform');
-    performVideo.append('submitAction', this.submitType);
-    performVideo.append('iterationid', this.itrationData.iterationid);
-    performVideo.append('object_id', this.performsData.performActivity.perform_id);
-    this.Lservice.learnerUploadVideo(performVideo).subscribe((data: any) => {
-      if (data.success === true) {
-        this.toastr.success(data.message);
-        this.getperformActivityData();
-        this.selectPerformfile = [];
-      } else {
-        this.toastr.warning(data.message);
-      }
-    });
-  }
+  });
+}
 
-  submitDeleteVideo(videoName, itrdata, perform) {
-    let videoFile = [];
-    videoFile.push(videoName);
-    const data = {
-      course_id: perform.course_id,
-      module_id: perform.module_id,
-      topic_id: perform.topic_id,
-      user_id: this.userDetail.user_id,
-      submit_status: this.submitStatus,
-      total_mark: itrdata.total_mark,
-      submitType: 'perform',
-      submitAction: this.submitType,
-      iterationid: itrdata.iterationid,
-      object_id: perform.perform_id,
-      videodetails: this.submitType === 'delete' ? videoFile : []
-  };
-    this.Lservice.learnerSumbitdeleteVideo(data).subscribe((response: any) => {
-       if (response.success === true) {
-        this.toastr.success(response.message);
-        this.getperformActivityData();
-        videoFile = [];
-      } else {
-        this.toastr.warning(response.message);
-      }
-    });
-  }
-
-  playVideo(previewDialog, videoDialog, path, docType) {
-    if (docType === 'image/jpeg') {
-    this.projectPreviewDoc(previewDialog, videoDialog, path, docType);
-    } else if (docType === 'video/mp4') {
-      this.videoSource = path;
-      this.videoPreview(videoDialog, path);
+submitDeleteVideo(videoName, itrdata, perform) {
+  let videoFile = [];
+  videoFile.push(videoName);
+  let data = {
+    course_id: perform.course_id,
+    module_id: perform.module_id,
+    topic_id: perform.topic_id,
+    user_id: this.userDetail.user_id,
+    submit_status: this.submitStatus,
+    total_mark: itrdata.total_mark,
+    submitType: 'perform',
+    submitAction: this.submitType,
+    iterationid: itrdata.iterationid,
+    object_id: perform.perform_id,
+    videodetails: this.submitType === 'delete' ? videoFile : []
+};
+  this.Lservice.learnerSumbitdeleteVideo(data).subscribe((response: any) => {
+     if (response.success === true) {
+      this.toastr.success(response.message);
+      this.getperformActivityData();
+      videoFile = [];
+    } else {
+      this.toastr.warning(response.message);
     }
-  }
+  });
+}
 
-  videoPreview(templateRef: TemplateRef<any>, path) {
-    this.dialog.open(templateRef, {
-      width: '90%',
-      height: '95%',
-      panelClass: 'matDialogMat',
-      closeOnNavigation: true,
-      disableClose: true,
-    });
+playVideo(previewDialog, videoDialog, path, docType) {
+  if (docType === 'image/jpeg') {
+  this.projectPreviewDoc(previewDialog, videoDialog, path, docType);
+  } else if (docType === 'video/mp4') {
+    this.videoSource = path;
+    this.videoPreview(videoDialog, path);
   }
+}
 
-  mouseover(index) {
-    this.mouseOverIndex = index;
-  }
+videoPreview(templateRef: TemplateRef<any>, path) {
+  this.dialog.open(templateRef, {
+    width: '90%',
+    height: '95%',
+    panelClass: 'matDialogMat',
+    closeOnNavigation: true,
+    disableClose: true,
+  });
+}
+
+mouseover(index) {
+  this.mouseOverIndex = index;
+}
 
 }
