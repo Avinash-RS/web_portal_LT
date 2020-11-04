@@ -309,6 +309,16 @@ export class ActivitiesComponent implements OnInit {
       this.projectDetails.forEach(element => {
         element.showLearnerList = false;
         // element.isCollapsed = false;
+        // Batch date
+        const batchEndDate = new Date(element.projectActivity.batchenddate);
+        element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:MM');
+        console.log('batch', element.batchEndDate);
+        if (moment().format('DD-MM-YYYY HH:MM') <= element.batchEndDate) {
+          element.submitType = true;
+        } else {
+          element.submitType = false;
+        }
+        // Activity Dates
         const startDate = new Date(element.projectActivity.activitystartdate);
         element.activityStartDate = moment(startDate).format('ll');
         element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');

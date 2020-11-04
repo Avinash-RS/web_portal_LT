@@ -634,18 +634,18 @@
                           accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" #uploadInput
                           [(ngModel)]="fileName" (change)="uploadDoc($event, project, 'upload')" />
                         <button mat-stroked-button class="upload-btn" (click)="uploadDocs()"
-                          [disabled]="project.enableSubmit == false"
+                          [disabled]="project.enableSubmit == false && project.submitType == false"
                           *ngIf="project.projectActivity.submitAction !== 'submit'">
                           <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                           Add your files
                         </button>
 
-                        <button mat-stroked-button [disabled]="project.enableSubmit == false" class="submit-btn"
+                        <button mat-stroked-button [disabled]="project.enableSubmit == false  && project.submitType == false" class="submit-btn"
                           (click)="learnerSumbitdeleteVideo(project, '' ,'submit')"
                           *ngIf="project.projectActivity.submit_status == 'notsubmitted' && project.projectActivity.videodetails.length > 0">
                           Submit
                         </button>
-                        <button mat-stroked-button [disabled]="project.enableSubmit == false"
+                        <button mat-stroked-button [disabled]="project.enableSubmit == false  && project.submitType == false"
                           *ngIf="project.projectActivity.videodetails.length == 0" class="submit-btn"> Submit </button>
                         <button mat-stroked-button class="submitted-btn" [disabled]="true"
                           *ngIf="project.projectActivity.submitAction == 'submit'">
