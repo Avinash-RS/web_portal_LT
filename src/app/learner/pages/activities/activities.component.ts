@@ -509,7 +509,7 @@ export class ActivitiesComponent implements OnInit {
   submitDeleteVideo(videoName, itrdata, perform) {
     let videoFile = [];
     videoFile.push(videoName);
-    let data = {
+    const data = {
       course_id: perform.course_id,
       module_id: perform.module_id,
       topic_id: perform.topic_id,
