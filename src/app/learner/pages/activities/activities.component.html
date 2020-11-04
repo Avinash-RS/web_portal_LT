@@ -505,13 +505,11 @@
               && project.projectActivity.grade_status == 'Not Evaluated'"> <span class="submitdot"></span>
                     Submitted</span>
 
-                  <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated' && 
-              project.projectActivity.submitAction == 'submit'"> <span class="gradedot"></span>
+                  <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated'"> <span class="gradedot"></span>
                     Graded</span>
                 </div>
               </div>
-              <div class="row" *ngIf="project.projectActivity.grade_status == 'Evaluated' && 
-          project.projectActivity.submitAction == 'submit'">
+              <div class="row" *ngIf="project.projectActivity.grade_status == 'Evaluated'">
                 <div class="col text-right">
                   <p class="totscore">Total score:
                     {{project.projectActivity.score_mark}}/{{project.projectActivity.total_mark}}</p>
@@ -634,18 +632,18 @@
                           accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" #uploadInput
                           [(ngModel)]="fileName" (change)="uploadDoc($event, project, 'upload')" />
                         <button mat-stroked-button class="upload-btn" (click)="uploadDocs()"
-                          [disabled]="project.enableSubmit == false"
+                          [disabled]="project.enableSubmit == false && project.submitType == false"
                           *ngIf="project.projectActivity.submitAction !== 'submit'">
                           <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                           Add your files
                         </button>
 
-                        <button mat-stroked-button [disabled]="project.enableSubmit == false" class="submit-btn"
+                        <button mat-stroked-button [disabled]="project.enableSubmit == false  && project.submitType == false" class="submit-btn"
                           (click)="learnerSumbitdeleteVideo(project, '' ,'submit')"
                           *ngIf="project.projectActivity.submit_status == 'notsubmitted' && project.projectActivity.videodetails.length > 0">
                           Submit
                         </button>
-                        <button mat-stroked-button [disabled]="project.enableSubmit == false"
+                        <button mat-stroked-button [disabled]="project.enableSubmit == false  && project.submitType == false"
                           *ngIf="project.projectActivity.videodetails.length == 0" class="submit-btn"> Submit </button>
                         <button mat-stroked-button class="submitted-btn" [disabled]="true"
                           *ngIf="project.projectActivity.submitAction == 'submit'">
@@ -663,8 +661,7 @@
               </div><br>
 
               <!-------------------------------------Your files--------------------------------------->
-              <div class="panel1" *ngIf="isCollapsed && projectId === i && project.projectActivity.grade_status == 'Evaluated' && 
-        project.projectActivity.submitAction == 'submit'">
+              <div class="panel1" *ngIf="isCollapsed && projectId === i && project.projectActivity.grade_status == 'Evaluated'">
                 <div class="row">
                   <div class="col-8">
                     <div class="f_size_16 f_wt_600">Your submissions</div>
