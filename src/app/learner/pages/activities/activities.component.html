@@ -505,13 +505,11 @@
               && project.projectActivity.grade_status == 'Not Evaluated'"> <span class="submitdot"></span>
                     Submitted</span>
 
-                  <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated' && 
-              project.projectActivity.submitAction == 'submit'"> <span class="gradedot"></span>
+                  <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated'"> <span class="gradedot"></span>
                     Graded</span>
                 </div>
               </div>
-              <div class="row" *ngIf="project.projectActivity.grade_status == 'Evaluated' && 
-          project.projectActivity.submitAction == 'submit'">
+              <div class="row" *ngIf="project.projectActivity.grade_status == 'Evaluated'">
                 <div class="col text-right">
                   <p class="totscore">Total score:
                     {{project.projectActivity.score_mark}}/{{project.projectActivity.total_mark}}</p>
@@ -663,8 +661,7 @@
               </div><br>
 
               <!-------------------------------------Your files--------------------------------------->
-              <div class="panel1" *ngIf="isCollapsed && projectId === i && project.projectActivity.grade_status == 'Evaluated' && 
-        project.projectActivity.submitAction == 'submit'">
+              <div class="panel1" *ngIf="isCollapsed && projectId === i && project.projectActivity.grade_status == 'Evaluated'">
                 <div class="row">
                   <div class="col-8">
                     <div class="f_size_16 f_wt_600">Your submissions</div>
