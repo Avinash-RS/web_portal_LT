@@ -65,7 +65,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="col-12 col-sm-12 col-md-8 col-lg-4">
           <div class="f_size_17 f_wt_600  coursename">
             <p class="courceNameTag" title="{{course.course_name}}" placement="top">
               {{course.course_name}}
@@ -74,20 +74,17 @@
           <div class="row lxp_gray123">
             <div class="col-5">
               <p style="margin-bottom:10px"> By:
-                <!-- {{course.author_details[0].author_name?course.author_details[0].author_name:'N/A'}} -->
-                {{globalData.author}}
+                {{course.author_details[0].author_name?course.author_details[0].author_name:'N/A'}}
               </p>
             </div>
             <div class="col">
-              <p style="margin-bottom:10px" *ngIf=" course.course_id == 'eb9f0bou'">Total duration: 48 hours</p>
-              <p style="margin-bottom:10px" *ngIf=" course.course_id == 'ugqau50t'">Total duration: 16 hours</p>
-              <!-- <p style="margin-bottom:10px">Total duration: {{
+              <p style="margin-bottom:10px">Total duration: {{
               course?.course_duration != 1
                 ? course.course_duration
                   ? course.course_duration + " hours"
                   : "1" + " hour"
                 : "1" + "hour"
-            }}</p> -->
+            }}</p>
             </div>
             <div class="col-2 no_padding">
               Credits: {{globalData.credits}}
@@ -109,10 +106,10 @@
           </div>
           <div class="row">
             <div class="col color_g f_size_14 descmc f_wt_400 h-80 ">
-              <p>
-                <!-- {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }} -->
-                {{course.course_description}}
-              </p>
+
+              <!-- {{(course.course_description?.length > 100)? (course.course_description | slice:0:100)+'...':(course.course_description) }} -->
+              {{course.course_description}}
+
             </div>
           </div>
           <br>
@@ -129,8 +126,8 @@
                   Instructor led session completed
                 </div>
                 <div class="col-3 f_wt_600">
-                  <ng-container>{{globalData.course_progression_data.instructor_lead_session}}</ng-container> 
-                  
+                  <ng-container>{{globalData.course_progression_data.instructor_lead_session}}</ng-container>
+
                 </div>
               </div>
               <div class="row color_g">
@@ -141,22 +138,22 @@
                   {{globalData.course_progression_data.internal_assesment_completed}}
                 </div>
               </div>
-              <!-- <div class="row color_g">
+              <div class="row color_g">
                 <div class="col m_b3px">
                   Mid course project completed
                 </div>
                 <div class="col-3 f_wt_600">
                   {{globalData.course_progression_data.mid_course_project_completed}}
                 </div>
-              </div> -->
-              <!-- <div class="row color_g">
+              </div>
+              <div class="row color_g">
                 <div class="col m_b3px">
                   Final assessment completed
                 </div>
                 <div class="col-3 f_wt_600">
                   {{globalData.course_progression_data.final_assesment_completed}}
                 </div>
-              </div> -->
+              </div>
             </div>
             <div class="col-4">
               <div class="row m-auto c_progress">
@@ -170,11 +167,11 @@
 
               <div class="row m-auto">
                 <div class="col ">
-                  <!-- <button mat-stroked-button class="blue_clr cap  pointer m-t-05">
+                  <button mat-stroked-button class="blue_clr cap  pointer m-t-05">
                     <span class="cap f_size_12 f_wt_400 ">
                       {{ "Course report" | translate }}&nbsp;
                     </span>
-                  </button> c_progress-->
+                  </button>
                 </div>
               </div>
               <!-- <div class="row m-auto">
@@ -187,7 +184,7 @@
           </div>
         </div>
         <!-- //4quadrant Self-Paced Learning// left lines //remove discussion link -->
-        <div class="col-12 col-sm-12 col-md-4 col-lg-6">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
           <div class="row">
             <div class="col light_bg_grey card-hover  cardHeights grey_border1 m-2px">
               <div class="row">
@@ -208,18 +205,18 @@
                   </span></div>
               </div>
               <div class="row">
-                <div class="col-12 justify-content-center align-self-center">
+                <div class="col-10 justify-content-center align-self-center">
                   <mat-progress-bar class="example-margin" [mode]="'determinate'"
                     [value]="completedCourse ? 100 : course?.coursePlayerStatus?.course_percentage || 0">
                   </mat-progress-bar>
                 </div>
-                <!-- <div class="col-2 c_per">
+                <div class="col-2 c_per">
                   {{completedCourse ? 100 : course?.coursePlayerStatus?.course_percentage || 0}}%
-                </div> -->
+                </div>
               </div>
-              <div class="row m-t-10px">
-                <div class="col-7">
-                  <div style="display: none;">
+              <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                  <div class=" m-t-10px">
                     <span class="pointer"
                       (click)="course.progressionExp?course.progressionExp=false:course.progressionExp=true">
                       <span class="f_size_10">{{course.progressionExp?'Hide details':'See more details' }}</span>
@@ -236,12 +233,11 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-5">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5">
                   <button mat-stroked-button *ngIf="
                                             course?.coursePlayerStatus?.status !== 'completed'
                                           " class="btl-alin btn-txt-center
-                                           bg_lxp_red color_white cap pointer m-t-6px m-l-10px"
-                    (click)="gotoDesc(course)">
+                                           bg_lxp_red color_white cap pointer " (click)="gotoDesc(course)">
                     <!-- <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon> -->
                     <i class="fa fa-play-circle mycourse-btn-img" aria-hidden="true"></i>
                     <span class="cap f_wt_400 m-t-m-2">
@@ -283,11 +279,10 @@
                 </div>
               </div>
               <div class="row pseudoheight"></div>
-              <div class="row m-t-10px">
-                <div class="col-7">
-                  <div style="display: none;">
-                    <span class="pointer">
-                      <!-- (click)="course.ledinstExp?course.ledinstExp=false:course.ledinstExp=true" -->
+              <div class="row ">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                  <div class="m-t-10px">
+                    <span class="pointer" (click)="course.ledinstExp?course.ledinstExp=false:course.ledinstExp=true">
                       <span class="f_size_10">{{course.ledinstExp?'Hide details':'See more details' }}</span>
                       <mat-icon *ngIf="!course.ledinstExp" class="f_size_10" fontSet="material-icons-outlined">
                         keyboard_arrow_down</mat-icon>
@@ -301,13 +296,13 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-5">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5">
                   <button mat-stroked-button class="btl-alin btn-txt-center m_3_px_top
                   blue_clr cap pointer m-l-10px" (click)="goInstructorLed(course)">
                     <!-- <img class="mycourse-btn-img" alt="" src="../../../../assets/learner/mycourseicons/joinmain.svg"
                       width="16px" height="12.5px"> -->
 
-                    
+
                     <span class="cap f_wt_400 m-t-m-2NEW">
                       <i class="fa fa-hand-o-up mycourse-btn-img" aria-hidden="true"></i>
                       {{ "Join" | translate }}&nbsp;
@@ -341,12 +336,11 @@
                   <p>Interact with peers by posting thoughts and comments on given topic.</p>
                 </div>
               </div>
-              <div class="row pseudoheight"></div>
-              <div class="row m-t-10px">
-                <div class="col-7">
-                  <div style="display: none;">
-                    <span class="pointer">
-                      <!-- (click)="course.discussExp?course.discussExp=false:course.discussExp=true" -->
+              <!-- <div class="row pseudoheight"></div> -->
+              <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                  <div class="m-t-10px">
+                    <span class="pointer" (click)="course.discussExp?course.discussExp=false:course.discussExp=true">
                       <span class="f_size_10">{{course.discussExp?'Hide details':'See more details' }}</span>
                       <mat-icon *ngIf="!course.discussExp" class="f_size_10" fontSet="material-icons-outlined">
                         keyboard_arrow_down</mat-icon>
@@ -362,13 +356,13 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-5">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5">
                   <button mat-stroked-button *ngIf="userDetail.is_forum_config" class="btl-alin blue_clr btn-txt-center
                     cap pointer m-l-10px  p-7-lr" (click)="goToForum(course)">
                     <!-- <img class="mycourse-btn-img" alt="" src="../../../../assets/learner/mycourseicons/collaborate.svg"
                       width="16px" height="12.5px"> -->
                     <i class="fa fa-handshake-o mycourse-btn-img" aria-hidden="true"></i>
-                    <span class="cap f_wt_400 m-t-m-2">
+                    <span class="cap f_wt_400 m-t-m-2 span-ellip">
                       {{ "Collaborate" | translate }}&nbsp;
                     </span>
                   </button>
@@ -377,7 +371,7 @@
               </div>
             </div>
 
-            <div class="col-12 col-sm-12 col-md-4 col-lg-6 light_bg_grey card-hover  cardHeights grey_border1 m-2px">
+            <div class="col light_bg_grey card-hover  cardHeights grey_border1 m-2px">
               <div class="row">
                 <div class="col ">
                   <p class="f_size_16 f_wt_500 color_black"><img alt=""
@@ -390,12 +384,11 @@
                   <p>Practice the skills learnt while reading and attending classes.</p>
                 </div>
               </div>
-              <div class="row pseudoheight"></div>
+              <!-- <div class="row pseudoheight"></div> -->
               <div class="row m-t-10px">
-                <div class="col-7">
-                  <div style="display: none;">
-                    <span class="pointer">
-                      <!-- (click)="course.activityExp?course.activityExp=false:course.activityExp=true" -->
+                <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                  <div class="m-t-10px">
+                    <span class="pointer" (click)="course.activityExp?course.activityExp=false:course.activityExp=true">
                       <span class="f_size_10">{{course.activityExp?'Hide details':'See more details' }}</span>
                       <mat-icon *ngIf="!course.activityExp" class="f_size_10" fontSet="material-icons-outlined">
                         keyboard_arrow_down</mat-icon>
@@ -415,7 +408,7 @@
                     </div>
                   </div> -->
                 </div>
-                <div class="col-5">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-5">
                   <button mat-stroked-button class="btl-alin blue_clr cap pointer m-l-10px btn-txt-center "
                     (click)="Go(course)">
                     <!-- <img class="mycourse-btn-img" alt="" src="../../../../assets/learner/mycourseicons/go.svg"
