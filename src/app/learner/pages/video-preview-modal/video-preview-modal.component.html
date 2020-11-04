@@ -2,7 +2,7 @@
   <mat-icon class="closeIcon">close</mat-icon>
 </button>
 <div id="visor-video">
-    <!-- <video controls [src]="displayURL">
-  </video> -->
-  <iframe  [src]="displayURL" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="position:inherit; width:100%; height:88vh; border:none; margin:0; padding:0; overflow:hidden; z-index:1;"></iframe>
+  <video controlsList="nodownload" style="position:inherit; width:100%; height:70vh; border:none; margin:0; padding:0; overflow:hidden; z-index:1;background: black;" controls [src]="displayURL">
+  </video>
+  <!-- <iframe  [src]="displayURL" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="position:inherit; width:100%; height:88vh; border:none; margin:0; padding:0; overflow:hidden; z-index:1;"></iframe> -->
 </div>

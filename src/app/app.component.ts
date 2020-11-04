@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
   title = 'LXP';
   isLoader = false;
   loaderSubscription: Subscription;
+  isMobile: boolean = false;
   constructor(private router: Router,
               private gs: GlobalServiceService,
               private http: HttpClient,
@@ -51,6 +52,9 @@ export class AppComponent implements OnInit {
     this.loaderSubscription = this.commonService.loader.subscribe((val) => {
       this.isLoader = val;
     });
+    if(window.innerWidth<1200){
+      this.isMobile = true;
+    }
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
     ).subscribe(() => {
