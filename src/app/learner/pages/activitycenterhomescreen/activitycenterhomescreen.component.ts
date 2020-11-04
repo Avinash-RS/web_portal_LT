@@ -19,8 +19,6 @@ export class ActivitycenterhomescreenComponent implements OnInit {
     this.get_active_course_count();
   }
   gototable1() {
-
-    this.router.navigateByUrl('/Learner/activitycenter');
   }
   gototable(e) {
     // console.log(e, 'ee');
