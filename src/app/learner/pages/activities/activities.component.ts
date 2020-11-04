@@ -162,13 +162,13 @@ export class ActivitiesComponent implements OnInit {
                   if (
                     moment().format('DD-MM-YYYY HH:MM') >=
                     fileData.assignmentStartDate &&
-                    moment().format('DD-MM-YYYY HH:MM') <= this.courseEndDate
+                    moment().format('DD-MM-YYYY') <= this.courseEndDate
                   ) {
                     fileData.enableUpload = true;
                   } else if (
                     moment().format('DD-MM-YYYY HH:MM') <
                     fileData.assignmentStartDate ||
-                    moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate
+                    moment().format('DD-MM-YYYY') > this.courseEndDate
                   ) {
                     fileData.enableUpload = false;
                   }
