@@ -1,5 +1,6 @@
-<app-header></app-header>
-<div class="con-1">
+<app-performance-page-mobile *ngIf="mobileResponsive"></app-performance-page-mobile>
+<app-header *ngIf="!mobileResponsive"></app-header>
+<div class="con-1" *ngIf="!mobileResponsive">
   <!-- <span class="back" routerLink="/Learner/MyCourse" routerLinkActive="active"> < Back</span><br><br> -->
   <span class="redHover">
     <mat-icon class="material-icons f_size_15 backIc pointer" (click)="goToCourse()">arrow_back_ios
@@ -17,7 +18,7 @@
     </mat-icon>
     <span>Activities</span>
   </div>
-  <mat-tab-group animationDuration="1000ms">
+  <mat-tab-group animationDuration="1000ms" (selectedTabChange)="tabChanged($event)">
     <mat-tab label="Assignments">
       <mat-accordion class="example-headers-align" multi *ngIf="assignmentContent?.coursedetails.length > 0">
         <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
@@ -248,7 +249,7 @@
             <div class="col-10">
               <div class="f_size_16 f_wt_600">{{i+1}}. {{perform.performActivity.module_id}}</div>
               <div class="t-l">{{perform.performActivity.topic_id}}</div>
-              <div class="t-l">Activity : {{perform.performActivity.activityname}}</div>
+              <div class="t-l">Activity description : {{perform.performActivity.activityname}}</div>
             </div>
             <div class="col-2">
               <span class="f_wt_600 statusTxt" *ngIf="perform.performActivity.submit_status == 'notsubmitted'"><span
@@ -411,23 +412,24 @@
                       </div>
 
                       <input type="file" accept="video/mp4" multiple style="display: none" #videoInput
-                        [(ngModel)]="fileName" (change)="uploadDocument($event)" />
-                      <button mat-stroked-button [disabled]="itrdata.submitAction == 'submit'" class="upload-bltn mt-3"
+                        [(ngModel)]="fileName" [disabled]="itrdata.submitAction == 'submit'" (change)="uploadDocument($event)" />
+                      <button mat-stroked-button [disabled]="itrdata.submitAction == 'submit' || itrationStarted || itrationEnded" class="upload-bltn mt-3"
                         (click)="uploadDocuments(itrdata, perform, submitType = 'upload')">
                         <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                         Upload video
                       </button>
                       <br>
-                      <button mat-stroked-button class="submit-btn"
+                      <button mat-stroked-button class="submit-btn mt-2"
                         *ngIf="itrdata.submit_status == 'notsubmitted' && itrdata.videodetails.length > 0"
                         (click)="submitType = 'submit'; submitDeleteVideo({}, itrdata, perform.performActivity)">
                         Submit
                       </button>
-                      <button mat-stroked-button *ngIf="itrdata.submitAction == 'submit'" class="submitted-btn">
-                        Submitted </button>
                       <button mat-stroked-button
-                        *ngIf="itrationStarted || itrationEnded ||  itrdata.videodetails.length == 0"
-                        class="submitted-btn"> Submit </button>
+                      *ngIf="itrdata.submitAction !== 'submit' && itrationStarted || itrationEnded || itrdata.videodetails.length == 0"
+                      class="submitted-btn mt-2"> Submit </button>
+                      <button mat-stroked-button *ngIf="itrdata.submitAction == 'submit'" class="submitted-btn mt-2">
+                        Submitted </button>
+                    
                     </div>
                     <div class="align-center mt-2">
                       <span *ngIf="itrdata.videodetails.length > 0  && itrdata.submitAction !== 'submit'"

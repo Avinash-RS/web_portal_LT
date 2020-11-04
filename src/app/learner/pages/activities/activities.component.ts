@@ -50,6 +50,7 @@ export class ActivitiesComponent implements OnInit {
   submitType: string;
   submitStatus: string;
   checkDetails: any;
+  mobileResponsive: boolean;
   // assignmentMessage = false;
   trendingCategorires: any = {
     loop: false, // dont make it true
