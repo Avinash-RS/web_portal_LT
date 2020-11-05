@@ -338,15 +338,17 @@
                                 </div>
                                 <div class="row ml-0 mr-0 playActions">
                                   <div class="col-5 text-left pr-0 colAction"
-                                    (click)="playVideo(previewDialog, videoDialog, material.path, material.doc_type)">
+                                    (click)="playVideo(projectPreviewDialog, videoDialog, material, material.doc_type)">
                                     <mat-icon class="position-absolute text-white playBtn"
                                       *ngIf="material.doc_type =='video/mp4'">play_circle_outline</mat-icon>
                                     <mat-icon class="position-absolute text-white playBtn"
                                       *ngIf="material.doc_type =='image/jpeg'">photo_size_select_actual</mat-icon>
+                                      <i class="fa fa-file-pdf-o position-absolute text-white playBtn" *ngIf="material.doc_type =='application/pdf'"
+                                      aria-hidden="true"></i>
                                     <span class="text-white actionBtn"
                                       *ngIf="material.doc_type =='video/mp4'">Play</span>
                                     <span class="text-white actionBtn"
-                                      *ngIf="material.doc_type =='image/jpeg'">Preview</span>
+                                      *ngIf="material.doc_type == 'image/jpeg' || material.doc_type == 'application/pdf'">Preview</span>
                                   </div>
                                   <div class="col-7 text-center pr-0 colAction">
                                     <!-- (click)="downloadVideo()" -->
@@ -385,7 +387,7 @@
                             <span>Score: {{itrdata.score_mark}} / {{itrdata.total_mark}}</span>
                           </div>
                           <div class="col-6 pr-0 pl-0 text-right w-100">
-                            <span class="f_wt_600" *ngIf="itrdata.submit_status == 'notsubmitted'"> <span
+                            <span class="f_wt_600" *ngIf="itrdata.submit_status == 'notsubmitted' && itrdata.grade_status !== 'Evaluated'"> <span
                                 class="dot"></span>Yet to submit</span>
                             <span class="f_wt_600 iterSubmit"
                               *ngIf="itrdata.grade_status == 'Not Evaluated' && itrdata.submitAction == 'submit'"> <span

@@ -200,15 +200,7 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
-  previewDoc(templateRef: TemplateRef<any>, path) {
-    this.dialog.open(templateRef, {
-      width: '100%',
-      height: '100%',
-      closeOnNavigation: true,
-      disableClose: true,
-    });
-    this.docpath = path;
-  }
+
 
   projectPreviewDoc(templateRef: TemplateRef<any>, videoDialog, path, type) {
     if (type === 'material') {
@@ -549,12 +541,30 @@ submitDeleteVideo(videoName, itrdata, perform) {
   });
 }
 
-playVideo(previewDialog, videoDialog, path, docType) {
-  if (docType === 'image/jpeg') {
-  this.projectPreviewDoc(previewDialog, videoDialog, path, docType);
+previewDoc(templateRef: TemplateRef<any>, path) {
+  console.log('path', path);
+  this.dialog.open(templateRef, {
+    width: '100%',
+    height: '100%',
+    closeOnNavigation: true,
+    disableClose: true,
+  });
+  this.docpath = path;
+}
+
+playVideo(templateRef: TemplateRef<any>, videoDialog, path, docType) {
+  console.log('docType', path);
+  if (docType === 'image/jpeg' || docType === 'application/pdf') {
+  this.dialog.open(templateRef, {
+    width: '100%',
+    height: '100%',
+    closeOnNavigation: true,
+    disableClose: true,
+  });
+  this.previewDoc = path;
   } else if (docType === 'video/mp4') {
-    this.videoSource = path;
-    this.videoPreview(videoDialog, path);
+    this.videoSource = path.path;
+    this.videoPreview(videoDialog, path.path);
   }
 }
 
