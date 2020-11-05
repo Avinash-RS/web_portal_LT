@@ -14,7 +14,6 @@ export class PdfreaderComponent implements OnInit {
    }
 
   ngOnInit() {
-    console.log('yasdfghsdghaschgasdhgcghsd', this.url);
     if (this.url.doc_type === 'application/pdf') {
       this.isEnable = true;
       // this.pdfSrc = {
