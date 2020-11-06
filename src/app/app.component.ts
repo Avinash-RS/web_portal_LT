@@ -52,9 +52,10 @@ export class AppComponent implements OnInit {
     this.loaderSubscription = this.commonService.loader.subscribe((val) => {
       this.isLoader = val;
     });
-    if(window.innerWidth<1200){
-      this.isMobile = true;
-    }
+    //USE WEN YOU NEED TO BLOCK MOBILE AND TAB SCREENS
+    // if(window.innerWidth<1200){
+    //   this.isMobile = true;
+    // }
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
     ).subscribe(() => {
