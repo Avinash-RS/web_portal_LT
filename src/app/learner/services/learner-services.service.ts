@@ -647,12 +647,15 @@ export class LearnerServicesService {
 
 
 
-  get_learner_dashboard(user_id,user_obj_id) {
+  getLearnerDashboard(user_id,user_obj_id,pagenumber,request_type,course_type) {
     return this.Apollo.query({
       query: getlearnerdashboard,
       variables: {
-        user_id:user_id,
-        user_obj_id:user_obj_id
+        user_id,
+        user_obj_id,
+        pagenumber,
+        request_type,
+        course_type
       }
     });
   }
