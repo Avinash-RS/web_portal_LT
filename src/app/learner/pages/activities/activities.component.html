@@ -1,5 +1,6 @@
-<app-header></app-header>
-<div class="con-1">
+<app-performance-page-mobile *ngIf="mobileResponsive"></app-performance-page-mobile>
+<app-header *ngIf="!mobileResponsive"></app-header>
+<div class="con-1" *ngIf="!mobileResponsive">
   <!-- <span class="back" routerLink="/Learner/MyCourse" routerLinkActive="active"> < Back</span><br><br> -->
   <span class="redHover">
     <mat-icon class="material-icons f_size_15 backIc pointer" (click)="goToCourse()">arrow_back_ios
@@ -17,7 +18,7 @@
     </mat-icon>
     <span>Activities</span>
   </div>
-  <mat-tab-group animationDuration="1000ms">
+  <mat-tab-group animationDuration="1000ms" (selectedTabChange)="tabChanged($event)">
     <mat-tab label="Assignments">
       <mat-accordion class="example-headers-align" multi *ngIf="assignmentContent?.coursedetails.length > 0">
         <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
@@ -248,7 +249,7 @@
             <div class="col-10">
               <div class="f_size_16 f_wt_600">{{i+1}}. {{perform.performActivity.module_id}}</div>
               <div class="t-l">{{perform.performActivity.topic_id}}</div>
-              <div class="t-l">Activity : {{perform.performActivity.activityname}}</div>
+              <div class="t-l">Activity description : {{perform.performActivity.activityname}}</div>
             </div>
             <div class="col-2">
               <span class="f_wt_600 statusTxt" *ngIf="perform.performActivity.submit_status == 'notsubmitted'"><span
@@ -337,15 +338,17 @@
                                 </div>
                                 <div class="row ml-0 mr-0 playActions">
                                   <div class="col-5 text-left pr-0 colAction"
-                                    (click)="playVideo(previewDialog, videoDialog, material.path, material.doc_type)">
+                                    (click)="playVideo(projectPreviewDialog, videoDialog, material, material.doc_type)">
                                     <mat-icon class="position-absolute text-white playBtn"
                                       *ngIf="material.doc_type =='video/mp4'">play_circle_outline</mat-icon>
                                     <mat-icon class="position-absolute text-white playBtn"
                                       *ngIf="material.doc_type =='image/jpeg'">photo_size_select_actual</mat-icon>
+                                      <i class="fa fa-file-pdf-o position-absolute text-white playBtn" *ngIf="material.doc_type =='application/pdf'"
+                                      aria-hidden="true"></i>
                                     <span class="text-white actionBtn"
                                       *ngIf="material.doc_type =='video/mp4'">Play</span>
                                     <span class="text-white actionBtn"
-                                      *ngIf="material.doc_type =='image/jpeg'">Preview</span>
+                                      *ngIf="material.doc_type == 'image/jpeg' || material.doc_type == 'application/pdf'">Preview</span>
                                   </div>
                                   <div class="col-7 text-center pr-0 colAction">
                                     <!-- (click)="downloadVideo()" -->
@@ -384,7 +387,7 @@
                             <span>Score: {{itrdata.score_mark}} / {{itrdata.total_mark}}</span>
                           </div>
                           <div class="col-6 pr-0 pl-0 text-right w-100">
-                            <span class="f_wt_600" *ngIf="itrdata.submit_status == 'notsubmitted'"> <span
+                            <span class="f_wt_600" *ngIf="itrdata.submit_status == 'notsubmitted' && itrdata.grade_status !== 'Evaluated'"> <span
                                 class="dot"></span>Yet to submit</span>
                             <span class="f_wt_600 iterSubmit"
                               *ngIf="itrdata.grade_status == 'Not Evaluated' && itrdata.submitAction == 'submit'"> <span
@@ -412,22 +415,23 @@
 
                       <input type="file" accept="video/mp4" multiple style="display: none" #videoInput
                         [(ngModel)]="fileName" (change)="uploadDocument($event)" />
-                      <button mat-stroked-button [disabled]="itrdata.submitAction == 'submit'" class="upload-bltn mt-3"
+                      <button mat-stroked-button [disabled]="itrdata.submitAction == 'submit' || itrationStarted || itrationEnded" class="upload-bltn mt-3"
                         (click)="uploadDocuments(itrdata, perform, submitType = 'upload')">
                         <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                         Upload video
                       </button>
                       <br>
-                      <button mat-stroked-button class="submit-btn"
+                      <button mat-stroked-button class="submit-btn mt-2"
                         *ngIf="itrdata.submit_status == 'notsubmitted' && itrdata.videodetails.length > 0"
                         (click)="submitType = 'submit'; submitDeleteVideo({}, itrdata, perform.performActivity)">
                         Submit
                       </button>
-                      <button mat-stroked-button *ngIf="itrdata.submitAction == 'submit'" class="submitted-btn">
-                        Submitted </button>
                       <button mat-stroked-button
-                        *ngIf="itrationStarted || itrationEnded ||  itrdata.videodetails.length == 0"
-                        class="submitted-btn"> Submit </button>
+                      *ngIf="itrdata.submitAction !== 'submit' && itrationStarted || itrationEnded || itrdata.videodetails.length == 0"
+                      class="submitted-btn mt-2"> Submit </button>
+                      <button mat-stroked-button *ngIf="itrdata.submitAction == 'submit'" class="submitted-btn mt-2">
+                        Submitted </button>
+                    
                     </div>
                     <div class="align-center mt-2">
                       <span *ngIf="itrdata.videodetails.length > 0  && itrdata.submitAction !== 'submit'"

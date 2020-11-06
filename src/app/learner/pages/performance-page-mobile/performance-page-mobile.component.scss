@@ -1,4 +1,44 @@
 @import "../../../../assets/variable.scss";
+
+@media (max-width: 767px) {
+  .dot {
+    height: 10px;
+    width: 10px;
+    background-color: #6A6A6A;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: inline-block;
+  }
+  
+  .submitdot {
+    background-color: #FFA04E;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: inline-block;
+  }
+
+  .gradedot {
+      background-color: #0C781B;
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      display: inline-block;
+  }
+
+.textGrayColor {
+  color: $color-lightGray;
+}
+
+.submitstatus {
+  color: #FFA04E;
+}
+
+.gradeStatus {
+  color: #0C781B;
+}
+
 .performCard {
     width: 100%;
     height: 10rem;
@@ -21,8 +61,14 @@
     margin: 0px 0px 3px;
 }
 
+.activityDisc {
+  color: $label2;
+  margin: 0px 0px 3px;
+}
+
 .brickMaking {
-  font-size: 20px;
+  font-size: 14px;
+  color: #666666;
 }
 
 .matCard {
@@ -74,6 +120,14 @@
   top: 0rem;
 }
 
+.submitted-btn{
+  color: $color-white !important;
+  background-color: #898989;
+  width: 45%;
+  // margin-top: 6%;
+  cursor: not-allowed;
+}
+
 .submitBtn {
   height: 3rem;
   width: 80%;
@@ -89,8 +143,8 @@
 .playBtn {
   font-size: 25px;
   position: absolute;
-  top: 1.17rem;
-  left: 0.7rem;
+  top: 1.03rem;
+  left: 0.6rem;
   color: white;
 }
 
@@ -132,9 +186,14 @@
     height: 40%;
   }
 
+  .fileNameCol {
+    padding-left: 5px !important;
+  }
+
   .icons {
     font-size: 30px;
     padding: 1.2rem 2.5rem;
+    color: #898989;
   }
 
   .materialCard {
@@ -168,3 +227,26 @@
   .matCardIconRow {
     height: 60%;
   }
+}
+
+//----- video overlay popup --------
+
+.videoRecordOverLay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  background-color: white;
+}
+
+.videoRec {
+  height: 100%;
+}
+
+.closeRow {
+  height: 3rem;
+}
+
+.closeIcon {
+  font-size: 30px;
+}
