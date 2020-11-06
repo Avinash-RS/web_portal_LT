@@ -176,7 +176,7 @@
               <div class="carousel-item active">
                 <div class="row ml-0 mr-0">
                   <div class="col-4 text-left pr-0" *ngFor="let meterial of performActivityData.materialDetails">
-                <mat-card class="materialCard p-0 mr-2">
+                <mat-card class="materialCard p-0 mr-2" (click)="playVideo(projectPreviewDialog, videoDialog, meterial, meterial.doc_type)">
                   <div class="row ml-0 mr-0 matCardIconRow">
                     <div class="col-12 pl-0 pr-0">
                       <i class="fa fa-file-pdf-o icons" *ngIf="meterial.doc_type == 'file/pdf'" aria-hidden="true"></i>
@@ -187,8 +187,7 @@
                   </div>
                   <div class="row ml-0 mr-0 h-40" class="fileSelDet">
                     <div class="col-12 pr-0 fileNameCol">
-                      <span class="fileColor">{{meterial.filename}}</span><br>
-                      <span class="fileColor">Reference</span>
+                      <span class="fileColor">{{(meterial.filename| slice:0:50)+'...'}}</span><br>
                     </div>
                   </div>
                 </mat-card>
@@ -272,7 +271,7 @@
                         <div class="carousel-item active">
                           <div class="row ml-0 mr-0">
                             <div class="col-4 text-left pr-0" *ngFor="let videoData of itration.videodetails">
-                          <mat-card class="materialCard p-0 mr-2">
+                          <mat-card class="materialCard p-0 mr-2" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type)">
                             <div class="row ml-0 mr-0 matCardIconRow">
                               <div class="col-12 pl-0 pr-0">
                                 <i class="fa fa-file-pdf-o icons" *ngIf="videoData.doc_type == 'file/pdf'" aria-hidden="true"></i>
@@ -283,7 +282,7 @@
                             </div>
                             <div class="row ml-0 mr-0 h-40" class="fileSelDet">
                               <div class="col-12 pr-0 fileNameCol">
-                                <span class="fileColor">{{videoData.name}}</span><br>
+                                <span class="fileColor">{{(videoData.name| slice:0:50)+'...'}}</span><br>
                               </div>
                             </div>
                           </mat-card>
@@ -312,7 +311,7 @@
                 <button mat-stroked-button class="uploadBtn mt-3 w-100" *ngIf="itration.submitAction !== 'submit'" (click)="uploadDocuments(itration, performActivityData, submitType = 'upload')"><mat-icon class="add-icon">add</mat-icon>Upload Videos</button>
                 <button mat-stroked-button class="submitBtn mt-3" *ngIf="itration.submit_status == 'notsubmitted' && itration.videodetails.length > 0"
                   (click)="submitType = 'submit'; submitDeleteVideo({}, itration, performActivityData)">Submit</button>
-                <button mat-stroked-button *ngIf="itration.submitAction !== 'submit' && itrationStarted || itrationEnded ||  itration.videodetails.length == 0" class="submitted-btn mt-3"> Submit </button>
+                <button mat-stroked-button *ngIf="itration.submitAction !== 'submit' && !itrationStarted || !itrationEnded ||  itration.videodetails.length == 0" class="submitted-btn mt-3"> Submit </button>
                 <button mat-stroked-button *ngIf="itration.submitAction == 'submit'" class="submitted-btn mt-3"> Submitted </button>
                 <div class="align-center mt-2">
                   <span *ngIf="itration.videodetails.length > 0  && itration.submitAction !== 'submit'"
@@ -330,8 +329,9 @@
     </div>
   </div>
   <!-------------------------- Preview Video --------------------------------->
-  <div class="row ml-0 mr-0 previewVideoScreen" *ngIf="videoPerview">
-    <div class="col-12 pl-0 pr-0">
+  <ng-template #videoDialog>
+  <!-- <div class="row ml-0 mr-0 previewVideoScreen" *ngIf="videoPerview">
+    <div class="col-12 pl-0 pr-0"> -->
       <div class="row ml-0 mr-0">
         <div class="col-12 text-left mt-2">
           <span class="previewTxt">Preview Video</span>
@@ -363,37 +363,24 @@
               <button mat-stroked-button class="saveBtn" (click)="videoPerview = !videoPerview">Save</button>
             </div>
           </div>
-    </div>
-  </div>
+    <!-- </div>
+  </div> -->
+</ng-template>
 
   <!-------------------Preview for Project------------------>
 
 <ng-template #projectPreviewDialog>
-  <div>
+  <div class="row ml-0 mr-0 mb-3">
+    <div class="col-12 text-right">
     <button mat-mini-fab class="closeBtn">
       <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
     </button>
   </div>
-  <div *ngIf="previewDoc">
+  </div>
+  <div class="row ml-0 mr-0" *ngIf="previewDoc">
+    <div class="col-12 pl-0 pr-0">
     <app-pdfreader [url]="previewDoc"></app-pdfreader>
   </div>
-</ng-template>
-<!-- dialogue box for assignment tab view assignment-->
-<ng-template #previewDialog>
-  <div class="row">
-    <div class="col-12">
-      <!-- <button mat-mini-fab class="download-button">
-        <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
-      </button> -->
-      <button mat-mini-fab class="close-button">
-        <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
-      </button>
-    </div>
-  </div>
-  <div class="row" *ngIf="docpath">
-    <div class="col-12">
-      <app-pdfreader [url]="docpath"></app-pdfreader>
-    </div>
   </div>
 </ng-template>
   <!------------- Video Recordpopup ------------------------>

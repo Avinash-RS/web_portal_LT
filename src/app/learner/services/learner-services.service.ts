@@ -940,6 +940,8 @@ getprojectActivityData(userId, courseId) {
     });
   }
 
+  learnerRecordVideo(data) { return this.http.post(environment.apiUrl + 'wca/learnerRecordVideo', data); }
+
   boarddetail(user_id, course_id){
     return this.Apollo.query({
       query: boarddetail,

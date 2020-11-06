@@ -148,7 +148,7 @@ export class PerformVideoRecordComponent implements OnInit {
       // recordedData is a blob object containing the recorded data that
       // can be downloaded by the user, stored on server etc.
       console.log('finished recording: ', this.player.recordedData);
-      this.performlearnerUploadVideo(this.player.recordedData);
+      this.learnerRecordVideo(this.player.recordedData);
     });
 
     // error handling
@@ -169,7 +169,7 @@ export class PerformVideoRecordComponent implements OnInit {
     }
   }
 
-  performlearnerUploadVideo(recordVideo) {
+  learnerRecordVideo(recordVideo) {
     const currentDate = new Date();
     const performVideo = new FormData();
     performVideo.append('uploadvideo', recordVideo);
@@ -182,7 +182,7 @@ export class PerformVideoRecordComponent implements OnInit {
     performVideo.append('submitAction', 'upload');
     performVideo.append('iterationid', this.itrationSend.iterationid);
     performVideo.append('object_id', this.performDetailsSend.perform_id);
-    this.Lservice.learnerUploadVideo(performVideo).subscribe((data: any) => {
+    this.Lservice.learnerRecordVideo(performVideo).subscribe((data: any) => {
       if (data.success === true) {
         this.toastr.success(data.message);
       } else {
