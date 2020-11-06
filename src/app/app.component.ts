@@ -20,12 +20,13 @@ import { SocketioService } from '@learner/services/socketio.service';
   animations: [ slideInAnimation ]
 })
 export class AppComponent implements OnInit {
- 
+  runnablePlatforms = ["MacIntel","Win32","Linux x86_64",]
   ipAddress = '';
   title = 'LXP';
   isLoader = false;
   loaderSubscription: Subscription;
   isMobile: boolean = false;
+  platformTxt = navigator.platform;
   constructor(private router: Router,
               private gs: GlobalServiceService,
               private http: HttpClient,
@@ -52,10 +53,10 @@ export class AppComponent implements OnInit {
     this.loaderSubscription = this.commonService.loader.subscribe((val) => {
       this.isLoader = val;
     });
-    //USE WEN YOU NEED TO BLOCK MOBILE AND TAB SCREENS
-    // if(window.innerWidth<1200){
-    //   this.isMobile = true;
-    // }
+    console.log("--Browser running on--",navigator.platform)
+    if(!this.runnablePlatforms.includes(navigator.platform)){
+      this.isMobile = true;
+    }
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
     ).subscribe(() => {
