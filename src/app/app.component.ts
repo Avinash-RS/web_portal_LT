@@ -20,7 +20,7 @@ import { SocketioService } from '@learner/services/socketio.service';
   animations: [ slideInAnimation ]
 })
 export class AppComponent implements OnInit {
- 
+  runnablePlatforms = ["MacIntel","Win32","Linux x86_64",]
   ipAddress = '';
   title = 'LXP';
   isLoader = false;
@@ -52,7 +52,8 @@ export class AppComponent implements OnInit {
     this.loaderSubscription = this.commonService.loader.subscribe((val) => {
       this.isLoader = val;
     });
-    if(window.innerWidth<1200){
+    console.log("--Browser running on--",navigator.platform)
+    if(!this.runnablePlatforms.includes(navigator.platform)){
       this.isMobile = true;
     }
     this.router.events.pipe(

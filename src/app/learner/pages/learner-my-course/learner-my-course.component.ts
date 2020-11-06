@@ -32,6 +32,7 @@ export class LearnerMyCourseComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   @Output() focusChange: EventEmitter<MatTabChangeEvent>;
   [x: string]: any;
+  courseDetailsList: any= []
   globalData: any;
   showSkeleton = false;
   jobRoleId: any = '';
@@ -107,6 +108,7 @@ export class LearnerMyCourseComponent implements OnInit {
   nextPageLabel = '';
   previousPageLabel = '';
   triggerAvailablecourse: any;
+  batchCourse: any;
   constructor(
     public elm: ElementRef,
     private route: ActivatedRoute,
@@ -115,12 +117,10 @@ export class LearnerMyCourseComponent implements OnInit {
     private router: Router, private dialog: MatDialog,
     public CommonServices: CommonServicesService) {
     this.route.queryParams.subscribe(params => {
-      // console.log(params, 'params');
       // for portal integration
       if (params.email_id === undefined) {
-        // console.log('inside if');
         this.userDetailes = this.gs.checkLogout();
-        this.getEnrolledCourses('', '', '', '', '', '', true);
+        this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
         this.getScreenSize();
         this.getCountForCategories();
         // this.getTab();
@@ -139,7 +139,8 @@ export class LearnerMyCourseComponent implements OnInit {
             sessionStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
             this.router.navigateByUrl('/Learner/MyCourse');
             this.getCountForCategories();
-            this.getEnrolledCourses('', '', '', '', '', '', true);
+            // this.getEnrolledCourses('', '', '', '', '', '', true);
+            this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
             this.getScreenSize();
             // this.getTab();
             this.getCountForJobRole();
@@ -290,17 +291,7 @@ export class LearnerMyCourseComponent implements OnInit {
       catalougeId = this.catalogueDetails.catalogueId;
       jobRoleCategoryId = this.jobRoleId;
     }
-    // if ( ) {
-    //   jobID = jobRoleCategoryId;
-    //   catlogueID = catalougeId
-    // }
 
-    // if (jobRoleCategoryId) {
-    //   jobID = jobRoleCategoryId;
-    // }
-    // if (catalougeId) {
-    //   catlogueID = catalougeId;
-    // }
     this.categoryNamePrint = '';
     let categoryName: any;
     if (this.catalogueDetails && catagoryId && !jobRoleCategoryId && !searchName) {
@@ -313,18 +304,15 @@ export class LearnerMyCourseComponent implements OnInit {
     // console.log('this.categoryNamePrint', this.categoryNamePrint);
     if (event) {
       if (event.index === 8 && this.categoryDetails[0].enrollCount > 0) {
-        // console.log('college connect');
         catalougeId = this.catalogueDetails.catalogueId;
         catagoryId = this.catalogueDetails.categories[0].categoryId;
       } else if (event.index === 8 && this.categoryDetails[1].enrollCount > 0 ||
         event.index === 9 && this.categoryDetails[1].enrollCount > 0) {
-        // console.log('vocational');
         catalougeId = this.catalogueDetails.catalogueId;
         catagoryId = this.catalogueDetails.categories[1].categoryId;
       } else if (event.index === 8 && this.categoryDetails[2].enrollCount > 0 ||
         event.index === 9 && this.categoryDetails[2].enrollCount > 0 ||
         event.index === 10 && this.categoryDetails[2].enrollCount > 0) {
-        // console.log('pro certification');
         catalougeId = this.catalogueDetails.catalogueId;
         catagoryId = this.catalogueDetails.categories[2].categoryId;
       }
@@ -383,6 +371,37 @@ export class LearnerMyCourseComponent implements OnInit {
       });
   }
 
+  //NEW API T0 GET DASHBOARD DATA
+
+  getDashboardMyCourse(userId, userObjId) {
+    console.log(navigator.platform)
+    let requestType = 'ongoing'
+    if(this.selectedIndex){
+      console.log(this.selectedIndex)
+    }
+    this.learnerService.getLearnerDashboard(userId, userObjId, 'undefined', requestType, 'batch').subscribe((BcourseData: any) => {
+      this.courseDetailsList = BcourseData.data.get_learner_dashboard.message.batch_course_details;
+      // Course batch count
+      this.onGoingCourseCount = BcourseData.data.get_learner_dashboard.message.ongoing_count;
+      this.completedCourseCount = BcourseData.data.get_learner_dashboard.message.completed_count;
+      this.allCourseCount = BcourseData.data.get_learner_dashboard.message.all_count;
+     
+      this.learnerService.getLearnerDashboard(userId, userObjId, 'undefined', requestType, 'enrolment').subscribe((EcourseData: any) => {
+        this.enrolledCourses = EcourseData.data.get_learner_dashboard.message.enrolled_course_details;
+        this.courseDetailsList.push(...this.enrolledCourses);
+        // Course overall count
+        this.onGoingCourseCount = Number(this.onGoingCourseCount) + Number(EcourseData.data.get_learner_dashboard.message.ongoing_count);
+        this.completedCourseCount = Number(this.completedCourseCount) + Number(EcourseData.data.get_learner_dashboard.message.completed_count);
+        this.allCourseCount = Number(this.allCourseCount) + Number(EcourseData.data.get_learner_dashboard.message.all_count);
+        console.log(this.courseDetailsList);
+      });
+    });
+  }
+
+  courseTabChange(event,userId, userObjId){
+    console.log(event)
+    this.getDashboardMyCourse(userId, userObjId)
+  }
   diff_hours(dt2, dt1) {
     let diff = (new Date(dt2).getTime() - new Date(dt1).getTime()) / 1000;
     diff /= (60 * 60);
@@ -531,18 +550,18 @@ export class LearnerMyCourseComponent implements OnInit {
         }
       });
   }
-  viewCourse(category, categoryname, categorycount) {
+  viewCourse(category, templateRef: TemplateRef<any>, categoryname, categorycount) {
     this.color = false;
     // this.loading = true;
     this.viewCourseClass = false;
     this.categoryPopupData = categoryname;
     this.categoryCount = categorycount;
     if (categorycount > 0) {
-      // this.dialog.open(templateRef, {
-      //   panelClass: 'dialogContainer',
-      //   closeOnNavigation: true,
-      //   disableClose: true,
-      // });
+      this.dialog.open(templateRef, {
+        panelClass: 'dialogContainer',
+        closeOnNavigation: true,
+        disableClose: true,
+      });
   }
 }
   closedialogbox() {

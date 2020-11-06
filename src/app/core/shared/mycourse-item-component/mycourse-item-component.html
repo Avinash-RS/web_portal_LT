@@ -35,31 +35,31 @@
                   <mat-icon class="text"> play_arrow </mat-icon>
                 </div>
               </div>
-              <img alt="Course Img" src="{{ course.course_img_url }}" class="courseImg" />
+              <img alt="Course Img" [src]=course.course_img_url class="courseImg" />
             </div>
             <div class="coursePoints">
               <table class="f_size_12">
                 <tr>
                   <td>Instructor led sessions</td>
-                  <td>Upto 14</td>
+                  <td>Upto {{course.instructor_lead_session_total_count}}</td>
                   <!-- <td>Upto {{globalData.on_hover_image_data.instructor_lead_session}}</td> -->
                 </tr>
                 <tr>
                   <td>Self paced learning</td>
-                  <td>{{globalData.on_hover_image_data.self_paced_learning}}</td>
+                  <td>{{course.self_paced}}</td>
                 </tr>
                 <tr>
                   <!-- Mid course project -->
                   <td>Course project</td>
-                  <td>{{globalData.on_hover_image_data.mid_course_project}}</td>
+                  <td>{{course.total_mid_course_project_count}}</td>
                 </tr>
                 <tr>
                   <td>Internal assessment</td>
-                  <td>{{globalData.on_hover_image_data.internal_assesment}}</td>
+                  <td>{{course.internal_assesment}}</td>
                 </tr>
                 <tr>
                   <td>Final assessment</td>
-                  <td>{{globalData.on_hover_image_data.final_assesment}}</td>
+                  <td>{{course.final_assesment}}</td>
                 </tr>
               </table>
             </div>
@@ -74,20 +74,20 @@
           <div class="row lxp_gray123">
             <div class="col-5">
               <p style="margin-bottom:10px"> By:
-                {{course.author_details[0].author_name?course.author_details[0].author_name:'N/A'}}
+                {{'N/A'}}
               </p>
             </div>
             <div class="col">
               <p style="margin-bottom:10px">Total duration: {{
               course?.course_duration != 1
-                ? course.course_duration
-                  ? course.course_duration + " hours"
+                ? course.total_duration
+                  ? course.total_duration + " hours"
                   : "1" + " hour"
                 : "1" + "hour"
             }}</p>
             </div>
             <div class="col-2 no_padding">
-              Credits: {{globalData.credits}}
+              Credits: {{course.credits}}
             </div>
           </div>
           <div class="row">
@@ -126,7 +126,7 @@
                   Instructor led session completed
                 </div>
                 <div class="col-3 f_wt_600">
-                  <ng-container>{{globalData.course_progression_data.instructor_lead_session}}</ng-container>
+                  <ng-container>{{course.instructor_lead_session_completed_count}}/{{course.instructor_lead_session_total_count}}</ng-container>
 
                 </div>
               </div>
@@ -135,7 +135,7 @@
                   Internal assessment completed
                 </div>
                 <div class="col-3 f_wt_600">
-                  {{globalData.course_progression_data.internal_assesment_completed}}
+                  {{course.internal_assesment}}
                 </div>
               </div>
               <div class="row color_g">
@@ -143,7 +143,7 @@
                   Mid course project completed
                 </div>
                 <div class="col-3 f_wt_600">
-                  {{globalData.course_progression_data.mid_course_project_completed}}
+                  {{course.completed_mid_course_project_count}}/{{course.completed_mid_course_project_count}}
                 </div>
               </div>
               <div class="row color_g">
@@ -151,7 +151,7 @@
                   Final assessment completed
                 </div>
                 <div class="col-3 f_wt_600">
-                  {{globalData.course_progression_data.final_assesment_completed}}
+                  {{course.final_assesment}}
                 </div>
               </div>
             </div>
