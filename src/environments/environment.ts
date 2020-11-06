@@ -3,8 +3,8 @@
 // The list of file replacements can be found in angular.json.
 
 export const environment = {
-  /*production: false,
-  apiUrl: 'http://20.44.35.112:3000/',
+  production: false,
+  /*apiUrl: 'http://20.44.35.112:3000/',
   scormUrl:'http://52.140.12.78:8089/',
   apiUrlImg:'http://20.44.35.112:3000/',
   createCourseApi:'http://52.140.12.145:3002/',
