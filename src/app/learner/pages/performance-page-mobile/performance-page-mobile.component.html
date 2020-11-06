@@ -365,6 +365,37 @@
           </div>
     </div>
   </div>
+
+  <!-------------------Preview for Project------------------>
+
+<ng-template #projectPreviewDialog>
+  <div>
+    <button mat-mini-fab class="closeBtn">
+      <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
+    </button>
+  </div>
+  <div *ngIf="previewDoc">
+    <app-pdfreader [url]="previewDoc"></app-pdfreader>
+  </div>
+</ng-template>
+<!-- dialogue box for assignment tab view assignment-->
+<ng-template #previewDialog>
+  <div class="row">
+    <div class="col-12">
+      <!-- <button mat-mini-fab class="download-button">
+        <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
+      </button> -->
+      <button mat-mini-fab class="close-button">
+        <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="row" *ngIf="docpath">
+    <div class="col-12">
+      <app-pdfreader [url]="docpath"></app-pdfreader>
+    </div>
+  </div>
+</ng-template>
   <!------------- Video Recordpopup ------------------------>
   <div class="row ml-0 mr-0 videoRecordOverLay" *ngIf="videoRecord" >
     <div class="row ml-0 mr-0 w-100">
