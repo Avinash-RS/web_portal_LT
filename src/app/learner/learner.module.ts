@@ -81,6 +81,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FilterPipe } from '../pipes/filter.pipe';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { VideoPreviewModalComponent } from './pages/video-preview-modal/video-preview-modal.component';
+import { ProjectMobileComponent } from './pages/project-mobile/project-mobile.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -281,7 +282,8 @@ const routes: Routes = [
     KnowledgePreviewComponent,
     KnowledgeLandingPageComponent,
     KnowledgeResourceHomeComponent,
-    VideoPreviewModalComponent
+    VideoPreviewModalComponent,
+    ProjectMobileComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

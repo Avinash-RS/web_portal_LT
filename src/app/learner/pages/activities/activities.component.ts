@@ -88,6 +88,7 @@ export class ActivitiesComponent implements OnInit {
   courseName: any;
   mouseOverIndex: any;
   videoSource: any;
+  projectMobileResponsive: boolean;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
@@ -115,6 +116,19 @@ export class ActivitiesComponent implements OnInit {
         this.mobileResponsive = true;
       } else {
         this.mobileResponsive = false;
+      }
+    }
+  }
+
+  projectTab(event) {
+    console.log('eve', event.tab.textLabel);
+    if (event.tab.textLabel === 'Project') {
+      this.screenHeight = window.innerHeight;
+      this.screenWidth = window.innerWidth;
+      if (this.screenWidth < 800) {
+        this.projectMobileResponsive = true;
+      } else {
+        this.projectMobileResponsive = false;
       }
     }
   }
