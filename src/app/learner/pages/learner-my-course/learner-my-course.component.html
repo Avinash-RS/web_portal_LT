@@ -16,6 +16,7 @@
   <div class="row">
     <div [ngClass]="expandSearch ? 'mobileSearchRow': 'myCourseSearch'" class="col-12">
       <mat-icon class="glyphicon" (click)="expandSearch = !expandSearch">keyboard_backspace</mat-icon>
+      <!-- NEED TO WORK ON SEARCH -->
       <input type="text" class="form-control search" [(ngModel)]="searchName"
         (keyup)="getEnrolledCourses('', '', '', searchName, '',false)" placeholder="Search courses..." />
     </div>
@@ -33,8 +34,7 @@
         <mat-icon class="filterIcon" [matMenuTriggerFor]="menu">filter_alt</mat-icon>
       </span>
       <mat-menu #menu="matMenu">
-        <button class="matTabMenu" mat-menu-item (click)="getEnrolledCourses('',
-          categorytab.categoryId, catalogueDetails.catalogueId, '', '',false); "
+        <button class="matTabMenu" mat-menu-item (click)="getDashboardMyCourse(userDetailes.user_id, userDetailes._id)"
           *ngFor="let categorytab of categoryDetails">
           <span>{{ categorytab.categoryName | titlecase }} </span>
           <span class="dynamicBagdes" matBadge="{{categorytab.enrollCount}}" matBadgeOverlap="false"></span>
@@ -49,7 +49,7 @@
           <!---------------Multi-level dropdown------------->
           <div class="inner-addon searchDiv right-addon">
             <input type="text" [ngClass]="searchExpand? 'form-control search' :'form-control searchNormal'"
-              [(ngModel)]="searchName" (keyup)="getEnrolledCourses('', '', '', '', searchName,false)"
+              [(ngModel)]="searchName" (keyup)="getDashboardMyCourse(userDetailes.user_id, userDetailes._id)"
               placeholder="Search courses..." />
             <em class="material-icons pointer iconsSearch" *ngIf="!searchExpand"
               (click)="searchExpand = !searchExpand">search</em>
@@ -404,11 +404,7 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="
-            getEnrolledCourses('',
-              categorytab.categoryId, catalogueDetails.catalogueId, '' , '', false, false
-            )
-          " *ngFor="let categorytab of categoryDetails">
+        <button mat-menu-item (click)="getDashboardMyCourse(userDetailes.user_id,userDetailes._id)" *ngFor="let categorytab of categoryDetails">
           <span>{{ categorytab.categoryName }}</span>
         </button>
       </mat-menu>
