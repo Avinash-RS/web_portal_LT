@@ -176,7 +176,7 @@
               <div class="carousel-item active">
                 <div class="row ml-0 mr-0">
                   <div class="col-4 text-left pr-0" *ngFor="let meterial of performActivityData.materialDetails">
-                <mat-card class="materialCard p-0 mr-2" (click)="playVideo(projectPreviewDialog, videoDialog, meterial, meterial.doc_type)">
+                <mat-card class="materialCard p-0 mr-2" (click)="playVideo(projectPreviewDialog, videoDialog, meterial, meterial.doc_type, preview = true)">
                   <div class="row ml-0 mr-0 matCardIconRow">
                     <div class="col-12 pl-0 pr-0">
                       <i class="fa fa-file-pdf-o icons" *ngIf="meterial.doc_type == 'file/pdf'" aria-hidden="true"></i>
@@ -271,7 +271,7 @@
                         <div class="carousel-item active">
                           <div class="row ml-0 mr-0">
                             <div class="col-4 text-left pr-0" *ngFor="let videoData of itration.videodetails">
-                          <mat-card class="materialCard p-0 mr-2" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type)">
+                          <mat-card class="materialCard p-0 mr-2" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)">
                             <div class="row ml-0 mr-0 matCardIconRow">
                               <div class="col-12 pl-0 pr-0">
                                 <i class="fa fa-file-pdf-o icons" *ngIf="videoData.doc_type == 'file/pdf'" aria-hidden="true"></i>
@@ -337,7 +337,12 @@
           <span class="previewTxt">Preview Video</span>
           </div>
           </div>
-          <div class="row ml-0 mr-0 p-3">
+          <div class="row ml-0 mr-0 mt-2 videoPlay" *ngIf="preview">
+            <div class="col-12 pl-0 pr-0">
+          <app-video-player  [url]="videoSource"></app-video-player>
+          </div>
+          </div>
+          <div class="row ml-0 mr-0 p-3" *ngIf="!preview">
             <div class="col-12 previewCol">
               <mat-card class="previewCard m-auto p-0">
                 <div class="row ml-0 mr-0">
@@ -357,7 +362,7 @@
               </mat-card>
             </div>
           </div>
-          <div class="row ml-0 mr-0 mt-2">
+          <div class="row ml-0 mr-0 mt-2" *ngIf="!preview">
             <div class="col-12">
               <button mat-stroked-button class="cancelBtn mr-4" (click)="videoPerview = !videoPerview">Cancel</button>
               <button mat-stroked-button class="saveBtn" (click)="videoPerview = !videoPerview">Save</button>

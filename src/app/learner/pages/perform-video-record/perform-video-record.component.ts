@@ -32,6 +32,7 @@ export class PerformVideoRecordComponent implements OnInit {
   courseid: any;
   checkDetails: any;
   courseName: any;
+  
 
   private _elementRef: ElementRef
 
@@ -172,7 +173,7 @@ export class PerformVideoRecordComponent implements OnInit {
   learnerRecordVideo(recordVideo) {
     const currentDate = new Date();
     const performVideo = new FormData();
-    performVideo.append('uploadvideo', recordVideo);
+    performVideo.append('recordvideo', recordVideo);
     performVideo.append('course_id', this.performDetailsSend.course_id);
     performVideo.append('module_id', this.performDetailsSend.module_id);
     performVideo.append('topic_id', this.performDetailsSend.topic_id);

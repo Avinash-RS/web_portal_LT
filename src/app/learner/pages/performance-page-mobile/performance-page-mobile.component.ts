@@ -47,6 +47,8 @@ export class PerformancePageMobileComponent implements OnInit {
   videoRecord = false;
   itrationDataSend: any;
   docpath: any = null;
+  videoSource: any;
+  preview: boolean;
 
   constructor(
     private commonServices: CommonServicesService,
@@ -233,7 +235,7 @@ export class PerformancePageMobileComponent implements OnInit {
       });
       this.previewDoc = path;
   } else {
-    this.videoPreview(videoDialog, path.path);
+    this.videoPreview(videoDialog, path);
   }
 }
 
@@ -249,9 +251,10 @@ previewDoc(templateRef: TemplateRef<any>, path) {
 }
 
 videoPreview(templateRef: TemplateRef<any>, path) {
+  this.videoSource = path.path;
   this.dialog.open(templateRef, {
-    width: '90%',
-    height: '95%',
+    width: '100%',
+    height: '100%',
     panelClass: 'matDialogMat',
     closeOnNavigation: true,
     disableClose: true,
