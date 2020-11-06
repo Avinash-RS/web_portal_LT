@@ -36,7 +36,7 @@ export class MycourseItemComponent implements OnInit {
   finalFullData: any;
   finalStatus: any = null;
   role: any;
-
+  courseWeekCircle:any;
   constructor(
     public translate: TranslateService,
     public service: CommonServicesService,
@@ -49,7 +49,7 @@ export class MycourseItemComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.courseWeekCircle = (this.course.week_completed_count!==null?this.course.week_completed_count:0) +'/'+ (this.course.week_total_count!==null?this.course.week_total_count:0);
   }
   Go(course) {
     const data1 = {

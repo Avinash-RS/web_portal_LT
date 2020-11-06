@@ -1,4 +1,5 @@
 @import "../../../../assets/variable.scss";
+
 @media (max-width: 767px) {
   .dot {
     height: 10px;
@@ -142,8 +143,8 @@
 .playBtn {
   font-size: 25px;
   position: absolute;
-  top: 1.10rem;
-  left: 0.7rem;
+  top: 1.03rem;
+  left: 0.6rem;
   color: white;
 }
 
@@ -228,13 +229,24 @@
   }
 }
 
+//----- video overlay popup --------
+
 .videoRecordOverLay {
   position: absolute;
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  background-color: white;
 }
 
-/* change player background color */
-.video-js video {
-  background-color: #42f489;
+.videoRec {
+  height: 100%;
+}
+
+.closeRow {
+  height: 3rem;
+}
+
+.closeIcon {
+  font-size: 30px;
 }

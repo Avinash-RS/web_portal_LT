@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  Input,
-  Output,
-  EventEmitter,
-} from "@angular/core";
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from "@angular/core";
 import { GlobalServiceService } from "@core/services/handlers/global-service.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { CommonServicesService } from "@core/services/common-services.service";
@@ -18,20 +10,7 @@ import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
 import { DatePipe } from "@angular/common";
 import { appendFile } from "fs";
-import videojs from "video.js";
-import * as adapter from "webrtc-adapter/out/adapter_no_global.js";
-import * as RecordRTC from "recordrtc";
-// Required imports when recording audio-only using the videojs-wavesurfer plugin
-import * as WaveSurfer from "wavesurfer.js";
-import * as MicrophonePlugin from "wavesurfer.js/dist/plugin/wavesurfer.microphone.js";
-WaveSurfer.microphone = MicrophonePlugin;
 
-// Register videojs-wavesurfer plugin
-import Wavesurfer from "videojs-wavesurfer/dist/videojs.wavesurfer.js";
-//import Wavesurfer from 'videojs-wavesurfer/dist/videojs.wavesurfer.js';
-
-// register videojs-record plugin with this import
-import * as Record from "videojs-record/dist/videojs.record.js";
 
 @Component({
   selector: "app-performance-page-mobile",
@@ -39,15 +18,8 @@ import * as Record from "videojs-record/dist/videojs.record.js";
   styleUrls: ["./performance-page-mobile.component.scss"],
 })
 export class PerformancePageMobileComponent implements OnInit {
-  // reference to the element itself: used to access events and methods
-  private _elementRef: ElementRef;
+  // @Input() performDetailsSend: any;
 
-  // index to create unique ID for component
-  idx = "clip1";
-
-  private config: any;
-  private player: any;
-  private plugin: any;
   @ViewChild("videoInput") videoInput;
   selectedName = "Perform";
   selectedTabIndex: number;
@@ -72,6 +44,8 @@ export class PerformancePageMobileComponent implements OnInit {
   itrationData: any;
   selectPerformfile: any[] = [];
   submitType: string;
+  videoRecord = false;
+  itrationDataSend: any;
 
   constructor(
     private commonServices: CommonServicesService,
@@ -81,8 +55,7 @@ export class PerformancePageMobileComponent implements OnInit {
     public wcaservice: WcaService,
     private toastr: ToastrService,
     public route: Router,
-    public datePipe: DatePipe,
-    elementRef: ElementRef
+    public datePipe: DatePipe
   ) {
     const detail =
       this.route.getCurrentNavigation() &&
@@ -94,94 +67,22 @@ export class PerformancePageMobileComponent implements OnInit {
       this.userDetail = this.gs.checkLogout();
       this.courseid = this.checkDetails
         ? this.checkDetails.courseId
-        : localStorage.getItem("Courseid");
+        : localStorage.getItem('Courseid');
       this.courseName = this.checkDetails
         ? this.checkDetails.courseName
-        : localStorage.getItem("CourseName");
+        : localStorage.getItem('CourseName');
     }
-    this.player = false;
-
-    // save reference to plugin (so it initializes)
-    this.plugin = Record;
-
-    // video.js configuration
-    this.config = {
-      controls: true,
-      autoplay: false,
-      fluid: false,
-      loop: false,
-      width: '100%',
-      height: '100%',
-      bigPlayButton: false,
-      controlBar: {
-        volumePanel: false,
-      },
-      plugins: {
-        // configure videojs-record plugin
-        record: {
-          audio: true,
-          video: true,
-          debug: true,
-        },
-      },
-    };
   }
 
   ngOnInit() {
-    console.log("this.performDetails 1");
+    //console.log("this.performDetails 1");
     this.getperformActivityData();
   }
 
-  ngAfterViewInit() {
-    // ID with which to access the template's video element
-    let el = 'video_' + this.idx;
-
-    // setup the player via the unique element ID
-    this.player = videojs(document.getElementById(el), this.config, () => {
-      console.log('player ready! id:', el);
-
-      // print version information at startup
-      var msg = 'Using video.js ' + videojs.VERSION +
-        ' with videojs-record ' + videojs.getPluginVersion('record') +
-        ' and recordrtc ' + RecordRTC.version;
-      videojs.log(msg);
-    });
-
-    // device is ready
-    this.player.on('deviceReady', () => {
-      console.log('device is ready!');
-    });
-
-    // user clicked the record button and started recording
-    this.player.on('startRecord', () => {
-      console.log('started recording!');
-    });
-
-    // user completed recording and stream is available
-    this.player.on('finishRecord', () => {
-      // recordedData is a blob object containing the recorded data that
-      // can be downloaded by the user, stored on server etc.
-      console.log('finished recording: ', this.player.recordedData);
-    });
-
-    // error handling
-    this.player.on('error', (element, error) => {
-      console.warn(error);
-    });
-
-    this.player.on('deviceError', () => {
-      console.error('device error:', this.player.deviceErrorCode);
-    });
+  getData(itration) {
+    this.itrationDataSend = itration;
   }
-
-    // use ngOnDestroy to detach event handlers and remove the player
-    ngOnDestroy() {
-      if (this.player) {
-        this.player.dispose();
-        this.player = false;
-      }
-    }
-
+ 
     submitDeleteVideo(videoName, itrdata, perform) {
       let videoFile = [];
       videoFile.push(videoName);
@@ -248,13 +149,17 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
   emiteData() {
+    if (this.selectedName === 'perform') {
     const data = {
       selectedName: this.selectedName,
       selectedTabIndex: this.selectedTabIndex,
     };
     console.log("data", data);
     this.commonServices.menuSelectedPerform$.next(data);
+  } else {
+    // this.Lservice.performView.next('performData', false)
   }
+}
 
   openItration(index) {
     this.openIndex = index;
