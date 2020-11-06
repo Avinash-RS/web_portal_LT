@@ -816,6 +816,7 @@ message{
         total_module_count
         total_topic_count
         week_total_count
+        week_completed_count
         image_self_paced_learning_time
         total_duration
         instructor_lead_session_completed_count
@@ -824,6 +825,7 @@ message{
         completed_module_count
         completed_topic_count
         batch_start_date
+        batch_end_date
         batch_name
         batch_description
         thread_count

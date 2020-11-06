@@ -374,12 +374,19 @@ export class LearnerMyCourseComponent implements OnInit {
   //NEW API T0 GET DASHBOARD DATA
 
   getDashboardMyCourse(userId, userObjId) {
-    console.log(navigator.platform)
+    this.courseDetailsList = [];
     let requestType = 'ongoing'
-    if(this.selectedIndex){
-      console.log(this.selectedIndex)
+    if(this.selectedIndex === 1){
+      requestType = 'ongoing';
+    } else if (this.selectedIndex === 2){
+      requestType = 'completed';
+    } else if (this.selectedIndex === 3){
+      requestType = 'all';
     }
     this.learnerService.getLearnerDashboard(userId, userObjId, 'undefined', requestType, 'batch').subscribe((BcourseData: any) => {
+      BcourseData.data.get_learner_dashboard.message.batch_course_details.forEach(elem => {
+        elem.isBatchCourse = true;
+      });
       this.courseDetailsList = BcourseData.data.get_learner_dashboard.message.batch_course_details;
       // Course batch count
       this.onGoingCourseCount = BcourseData.data.get_learner_dashboard.message.ongoing_count;
@@ -388,6 +395,9 @@ export class LearnerMyCourseComponent implements OnInit {
      
       this.learnerService.getLearnerDashboard(userId, userObjId, 'undefined', requestType, 'enrolment').subscribe((EcourseData: any) => {
         this.enrolledCourses = EcourseData.data.get_learner_dashboard.message.enrolled_course_details;
+        EcourseData.data.get_learner_dashboard.message.enrolled_course_details.forEach(elem => {
+          elem.isBatchCourse = false;
+        });
         this.courseDetailsList.push(...this.enrolledCourses);
         // Course overall count
         this.onGoingCourseCount = Number(this.onGoingCourseCount) + Number(EcourseData.data.get_learner_dashboard.message.ongoing_count);

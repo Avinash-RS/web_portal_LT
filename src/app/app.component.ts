@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
   isLoader = false;
   loaderSubscription: Subscription;
   isMobile: boolean = false;
+  platformTxt = navigator.platform;
   constructor(private router: Router,
               private gs: GlobalServiceService,
               private http: HttpClient,
