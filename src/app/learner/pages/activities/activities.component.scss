@@ -279,6 +279,7 @@ margin-bottom: 1% !important;
   position: relative;
   right: 38px;
   top: 5px;
+  cursor: default;
 }
 .arrBtn {
   background-color: #ffffff;
@@ -295,17 +296,24 @@ margin-bottom: 1% !important;
   font-size: 11px;
   margin-top: -8px;
   margin-left: -3px;
+  cursor: default;
+}
+.arrBack {
+  font-size: 11px;
+  margin-top: -8px;
+  margin-left: -3px;
+  cursor: pointer;
 }
 .status {
   margin-right: 3rem;
 }
 
 .endDateTxt {
-  margin-left: 40px;
+  margin-left: 45px;
 }
 
 .EndDate {
-  margin-left: 28px;
+  margin-left: 36px;
 }
 
 .itrationTxt {
@@ -362,7 +370,7 @@ margin-bottom: 1% !important;
 .grade {
   color: #0C781B;
   position: relative;
-  right: 43px;
+  // right: 3px;
 }
 .iterSubmit {
   color: #FFA04E;
@@ -479,6 +487,7 @@ margin-top: 8px;
 .deleteIcon {
   color: #5C6873;
   font-size: 21px;
+  margin-top: 4px;
 }
 .pointer {
   cursor: pointer;
@@ -527,13 +536,14 @@ margin-top: 8px;
 // }
 
 .videoPlay {
-  color: #898989;
-  font-size: 25px;
-  background-color: white;
-  width: 2.5rem;
-  height: 2rem;
-  padding: 2px;
-  border-radius: 2px;
+    color: #898989;
+    font-size: 25px;
+    background-color: white;
+    width: 2.5rem;
+    height: 2rem;
+    padding: 4px 5px 5px 7px;
+    border-radius: 2px;
+    cursor: default;
 }
 
 .carouselCard {
@@ -565,6 +575,7 @@ margin-top: 8px;
 .carouselCol {
   max-width: 100% !important;
   height: 15rem;
+  margin-left: -15px;
 }
 
 // .carouselHoverCol {
@@ -694,5 +705,16 @@ margin-top: 8px;
 }
 .assignDetails {
   margin-right: 9px;
+}
+.box-0-3{
+margin-top: 10px;
+margin-left: 34px;
+width: 95%;
+padding: 20px;
+padding-bottom: 3%;
+overflow: hidden;
+height: auto;
+background-color: #ffffff;
+border: 1px solid #ccc;
 }
 

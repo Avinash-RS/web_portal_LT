@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,HostListener } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { GlobalServiceService } from '././core/services/handlers/global-service.service';
@@ -20,12 +20,21 @@ import { SocketioService } from '@learner/services/socketio.service';
   animations: [ slideInAnimation ]
 })
 export class AppComponent implements OnInit {
- 
+   //FOR DRM(Restriction for right click)
+   @HostListener('document:keydown', ['$event'])
+   handleKeyboardEvent(event: KeyboardEvent) {
+     if( (event.which === 67 && event.ctrlKey) || (event.which == 123) ){
+       event.returnValue = false;
+       event.preventDefault();
+     }
+ }
+  runnablePlatforms = ["MacIntel","Win32","Linux x86_64",]
   ipAddress = '';
   title = 'LXP';
   isLoader = false;
   loaderSubscription: Subscription;
   isMobile: boolean = false;
+  platformTxt = navigator.platform;
   constructor(private router: Router,
               private gs: GlobalServiceService,
               private http: HttpClient,
@@ -52,7 +61,8 @@ export class AppComponent implements OnInit {
     this.loaderSubscription = this.commonService.loader.subscribe((val) => {
       this.isLoader = val;
     });
-    if(window.innerWidth<1200){
+    console.log("--Browser running on--",navigator.platform)
+    if(!this.runnablePlatforms.includes(navigator.platform)){
       this.isMobile = true;
     }
     this.router.events.pipe(

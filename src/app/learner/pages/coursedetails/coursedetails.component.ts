@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, TemplateRef, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef, ChangeDetectorRef, ViewChild,HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
@@ -24,6 +24,14 @@ import { LegendPosition } from 'ag-grid-community';
   styleUrls: ['./coursedetails.component.scss']
 })
 export class CoursedetailsComponent implements OnInit {
+  //FOR DRM(Restriction for right click)
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if( (event.which === 67 && event.ctrlKey) || (event.which == 123) ){
+      event.returnValue = false;
+      event.preventDefault();
+    }
+}
   course: any = null;
   loading: boolean;
   pagenumber: any;
