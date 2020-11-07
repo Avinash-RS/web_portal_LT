@@ -151,10 +151,16 @@ export class LearnerActivityCenterComponent implements OnInit {
           sortable: true,
           filter: true,
           floatingFilterComponentParams: { suppressFilterButton: true },
-          // Need to change field once API is updated and assignments to '-' in value getter
           field: 'activity',
           valueGetter: (params) => params.data?.activity ? params.data.activity : '-',
-          // sortable: true,
+        },
+        {
+          headerName: 'Activity description',
+          sortable: true,
+          filter: true,
+          floatingFilterComponentParams: { suppressFilterButton: true },
+          field: 'activity_name',
+          valueGetter: (params) => params.data?.activity_name ? params.data.activity_name : '-',
         },
         {
           headerName: 'Status',
@@ -292,6 +298,9 @@ export class LearnerActivityCenterComponent implements OnInit {
       } else if (sortState[0].colId === 'activity') {
         const r = { ['files.activity']: sortState[0]?.sort === 'asc' ? 1 : -1 };
         this.sortrecord = JSON.stringify(r);
+      } else if (sortState[0].colId === 'activity_name') {
+        const r = { ['activitynamesortfield']: sortState[0]?.sort === 'asc' ? 1 : -1 };
+        this.sortrecord = JSON.stringify(r);
       } else {
         const r = { [sortState[0]?.colId]: sortState[0]?.sort === 'asc' ? 1 : -1 };
         this.sortrecord = JSON.stringify(r);
@@ -329,6 +338,9 @@ export class LearnerActivityCenterComponent implements OnInit {
         } else if (propName === 'activity') {
           searchString = filterModel[keyd].filter;
           filter['files.activity'] = { $regex: searchString.trimEnd(), $options: 'i' };
+        } else if (propName === 'activity_name') {
+          searchString = filterModel[keyd].filter;
+          filter['files.activityname'] = { $regex: searchString.trimEnd(), $options: 'i' };
         } else {
           searchString = filterModel[keyd].filter;
           filter[propName] = { $regex: searchString.trimEnd(), $options: 'i' };
