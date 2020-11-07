@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, ViewChild, TemplateRef, Input, Output, EventEmitter } from "@angular/core";
 import { GlobalServiceService } from "@core/services/handlers/global-service.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { CommonServicesService } from "@core/services/common-services.service";
@@ -46,6 +46,9 @@ export class PerformancePageMobileComponent implements OnInit {
   submitType: string;
   videoRecord = false;
   itrationDataSend: any;
+  docpath: any = null;
+  videoSource: any;
+  preview: boolean;
 
   constructor(
     private commonServices: CommonServicesService,
@@ -176,27 +179,19 @@ export class PerformancePageMobileComponent implements OnInit {
     const performVideo = new FormData();
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.selectPerformfile.length; i++) {
-      performVideo.append("uploadvideo", this.selectPerformfile[i]);
+      performVideo.append('uploadvideo', this.selectPerformfile[i]);
     }
-    performVideo.append(
-      "course_id",
-      this.performsData.performActivity.course_id
-    );
-    performVideo.append(
-      "module_id",
-      this.performsData.performActivity.module_id
-    );
-    performVideo.append("topic_id", this.performsData.performActivity.topic_id);
-    performVideo.append("user_id", this.userDetail.user_id);
-    performVideo.append("submit_status", this.submitStatus);
-    performVideo.append("total_mark", this.itrationData.total_mark);
-    performVideo.append("submitType", "perform");
-    performVideo.append("submitAction", this.submitType);
-    performVideo.append("iterationid", this.itrationData.iterationid);
-    performVideo.append(
-      "object_id",
-      this.performsData.performActivity.perform_id
-    );
+    performVideo.append('course_id', this.performsData.performActivity.course_id);
+    performVideo.append('module_id', this.performsData.performActivity.module_id);
+    performVideo.append('topic_id', this.performsData.performActivity.topic_id);
+    performVideo.append('user_id', this.userDetail.user_id);
+    performVideo.append('submit_status', this.submitStatus);
+    performVideo.append('total_mark', this.itrationData.total_mark);
+    performVideo.append('submitType', 'perform');
+    performVideo.append('submitAction', this.submitType);
+    performVideo.append('iterationid', this.itrationData.iterationid);
+    performVideo.append('object_id', this.performsData.performActivity.perform_id);
+
     this.Lservice.learnerUploadVideo(performVideo).subscribe((data: any) => {
       if (data.success === true) {
         this.toastr.success(data.message);
@@ -221,4 +216,48 @@ export class PerformancePageMobileComponent implements OnInit {
     this.itrationData = itration;
     this.videoInput.nativeElement.click();
   }
+
+
+//----------------- Dialog Functions --------------------------
+
+  closedialogbox() {
+    this.dialog.closeAll();
+    // this.addThreadForm?.reset();
+  }
+
+  playVideo(templateRef: TemplateRef<any>, videoDialog,  path, docType) {
+    if (docType !== 'video/mp4') {
+      this.dialog.open(templateRef, {
+        width: '100%',
+        height: '100%',
+        closeOnNavigation: true,
+        disableClose: true,
+      });
+      this.previewDoc = path;
+  } else {
+    this.videoPreview(videoDialog, path);
+  }
+}
+
+previewDoc(templateRef: TemplateRef<any>, path) {
+  console.log('path', path);
+  this.dialog.open(templateRef, {
+    width: '100%',
+    height: '100%',
+    closeOnNavigation: true,
+    disableClose: true,
+  });
+  this.docpath = path;
+}
+
+videoPreview(templateRef: TemplateRef<any>, path) {
+  this.videoSource = path.path;
+  this.dialog.open(templateRef, {
+    width: '100%',
+    height: '100%',
+    panelClass: 'matDialogMat',
+    closeOnNavigation: true,
+    disableClose: true,
+  });
+}
 }

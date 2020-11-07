@@ -647,12 +647,15 @@ export class LearnerServicesService {
 
 
 
-  get_learner_dashboard(user_id,user_obj_id) {
+  getLearnerDashboard(user_id,user_obj_id,pagenumber,request_type,course_type) {
     return this.Apollo.query({
       query: getlearnerdashboard,
       variables: {
-        user_id:user_id,
-        user_obj_id:user_obj_id
+        user_id,
+        user_obj_id,
+        pagenumber,
+        request_type,
+        course_type
       }
     });
   }
@@ -939,6 +942,8 @@ getprojectActivityData(userId, courseId) {
       }
     });
   }
+
+  learnerRecordVideo(data) { return this.http.post(environment.apiUrl + 'wca/learnerRecordVideo', data); }
 
   boarddetail(user_id, course_id){
     return this.Apollo.query({
