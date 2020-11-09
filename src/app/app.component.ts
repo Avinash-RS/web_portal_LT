@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,HostListener } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { GlobalServiceService } from '././core/services/handlers/global-service.service';
@@ -20,6 +20,14 @@ import { SocketioService } from '@learner/services/socketio.service';
   animations: [ slideInAnimation ]
 })
 export class AppComponent implements OnInit {
+   //FOR DRM(Restriction for right click)
+   @HostListener('document:keydown', ['$event'])
+   handleKeyboardEvent(event: KeyboardEvent) {
+     if( (event.which === 67 && event.ctrlKey && event.shiftKey) || (event.which == 123) ){
+       event.returnValue = false;
+       event.preventDefault();
+     }
+ }
   runnablePlatforms = ["MacIntel","Win32","Linux x86_64",]
   ipAddress = '';
   title = 'LXP';

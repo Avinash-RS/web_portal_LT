@@ -176,7 +176,7 @@
                                                                                 <ng-container
                                                                                     *ngFor="let fourLvl of thiredLvl?.children; let l = index">
                                                                                     <mat-step
-                                                                                        [aria-labelledby]="fourLvl?.status === 'Passed' ? 'colgreen' :  fourLvl?.status === 'Process' ? 'colYellow' : 'colWhite'">
+                                                                                        [aria-labelledby]="fourLvl?.status === 'Passed' ? 'colgreen' :  fourLvl?.status === 'process' ? 'colYellow' : 'colWhite'">
                                                                                         <ng-template matStepLabel>
                                                                                             <span class="topicnm"
                                                                                                 *ngIf="fourLvl?.title?.length >= 65"
@@ -247,7 +247,7 @@
                                                     [ngClass]="res?.title?.length > 39?'headerDown': ''">
                                                     <ng-container *ngFor="let mod of res?.children; let j = index">
                                                         <mat-step
-                                                            [aria-labelledby]="mod?.status === 'Passed' ? 'colgreen' :  mod?.status === 'Process' ? 'colYellow' : 'colWhite'">
+                                                            [aria-labelledby]="mod?.status === 'Passed' ? 'colgreen' :  mod?.status === 'process' ? 'colYellow' : 'colWhite'">
                                                             <ng-template matStepLabel>
                                                                 <span class="topicnm" *ngIf="mod?.title?.length >= 65"
                                                                     tooltip="{{mod?.title}}" placement="right"
