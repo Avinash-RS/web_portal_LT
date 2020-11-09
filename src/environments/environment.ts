@@ -11,7 +11,6 @@ export const environment = {
   wcaapiurl: 'http://wca.southindia.cloudapp.azure.com:9001/',
   domain : 'LXP',
   analytics: 'UA-171656647-1',
-  systemIp : 'http://api.ipify.org/?format=json',
   socketio : 'http://20.40.0.83:3009'
   /*production: false, 
   apiUrl: 'http://20.44.35.112:3000/',

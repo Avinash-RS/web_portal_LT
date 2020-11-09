@@ -1279,9 +1279,9 @@ iframe.fullScreen {
     width: -webkit-fill-available !important;
 }
 
-.main-opn {
-    background-color: #fff;
-}
+// .main-opn {
+//     background-color: #fff;
+// }
 
 .main-opn {
     position: fixed;
@@ -1469,4 +1469,8 @@ iframe.fullScreen {
     background-color: black !important;
     opacity: 0.9 !important;
     font-size: 12px !important;
+}
+
+::ng-deep #content {
+    height: 100vh !important;
 }
