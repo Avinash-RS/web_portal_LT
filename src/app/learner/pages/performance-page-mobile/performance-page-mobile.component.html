@@ -106,8 +106,8 @@
                 <span class="textGrayColor">{{perform.activityStartDate}}</span>
               </div>
               <div class="col-6 mr-0 pl-0 pr-0 text-left">
-                <span class="ml-2 font-weight-bold">End date:</span><br />
-                <span class="ml-2 textGrayColor">{{perform.activityEndDate}}</span>
+                <span class="font-weight-bold">End date:</span><br />
+                <span class="textGrayColor">{{perform.activityEndDate}}</span>
               </div>
             </div>
           </div>
@@ -141,8 +141,8 @@
               <span>{{performActivityData.activitystartdate | date:'MMM dd,yyyy'}}</span>
             </div>
             <div class="col-5 mr-0 pl-0 pr-0 text-left">
-              <span class="font-weight-bold">End date:</span><br />
-              <span >{{performActivityData.activityenddate | date:'MMM dd,yyyy'}}</span>
+              <span class="m-l-5 font-weight-bold">End date:</span><br />
+              <span class="m-l-5">{{performActivityData.activityenddate | date:'MMM dd,yyyy'}}</span>
             </div>
             <div class="col-2 mr-0 pl-0 pr-0 text-left"></div>
           </div>
@@ -302,8 +302,8 @@
                 </div> 
               
               <div class="row ml-0 mr-0 mt-2">
-              <div class="col-12 text-center"> 
-                <button mat-raised-button (click)="videoRecord = true; getData(itration)" class="recordBtn mt-3 w-100" *ngIf="itration.submitAction !== 'submit'"><mat-icon class="video-icon">videocam <i class="fa fa-youtube-play playBtn" aria-hidden="true"></i></mat-icon> Record Video
+              <div class="col-12 text-center" *ngIf="itration.grade_status !== 'Evaluated'"> 
+                <button mat-raised-button (click)="videoRecord = true; getData(videoRecordPopup, itration)" class="recordBtn mt-3 w-100" *ngIf="itration.submitAction !== 'submit'"><mat-icon class="video-icon">videocam <i class="fa fa-youtube-play playBtn" aria-hidden="true"></i></mat-icon> Record Video
                 </button>
                 <input type="file" accept="video/mp4" multiple style="display: none" #videoInput
                     (change)="uploadDocument($event)" />
@@ -317,6 +317,21 @@
                     class="submitedFile">Submitted files cannot be edited</span>
                   <span class="uploadedFile" *ngIf="itration.submitAction == 'submit'">Submitted on :
                     {{itration.submitted_on | date:'MMM dd, yyyy'}}</span>
+                </div>
+              </div>
+              <div class="col-12 pl-0 pr-0" *ngIf="itration.grade_status === 'Evaluated'">
+                <div class="row ml-0 mr-0">
+                  <div class="col-12">
+                    <button mat-stroked-button class="AssignmentBtn mt-3 w-100"><mat-icon class="assignmentIcon">wysiwyg</mat-icon>Assessment report</button>
+                  </div>
+                </div>
+                <div class="row ml-0 mr-0 mt-2">
+                  <div class="col-12 text-left">
+                    <p class="feedBackTxt">Feedback comments</p>
+                    <textarea rows="4" cols="50" class="textArea">
+                      {{itration.comments}}
+                      </textarea>
+                  </div>
                 </div>
               </div>
             </div>
@@ -347,7 +362,7 @@
                 <div class="row ml-0 mr-0">
                   <div class="col-12 pl-0 pr-0">
                     <video width="100%" controls class="videoCell">
-                      <source src="https://www.youtube.com/watch?v=VHENoFDoLds">
+                      <source src="videoUrl">
                       Your browser does not support HTML video.
                     </video>
                   </div>
@@ -388,21 +403,23 @@
   </div>
 </ng-template>
   <!------------- Video Recordpopup ------------------------>
-  <div class="row ml-0 mr-0 videoRecordOverLay" *ngIf="videoRecord" >
+  <ng-template #videoRecordPopup>
+  <!-- <div class="row ml-0 mr-0 videoRecordOverLay" *ngIf="videoRecord" > -->
     <div class="row ml-0 mr-0 w-100">
       <div class="col-12 pl-0 pr-0">
         <div class="row ml-0 mr-0 mt-2 closeRow">
           <div class="col-sm-12 text-right">
-            <mat-icon class="closeIcon" (click)="videoRecord = false">close</mat-icon>
+            <mat-icon class="closeIcon" (click)="closeDialog()">close</mat-icon>
           </div>
         </div>
         <div class="row ml-0 mr-0 mt-2 videoRec">
-          <div class="col-12">
+          <div class="col-12 pl-0 pr-0">
             <app-perform-video-record [performDetailsSend]="performActivityData" [itrationSend]="itrationDataSend"></app-perform-video-record>
             </div>
             </div>
         </div>
         </div>
-  </div>
+  <!-- </div> -->
+</ng-template>
 </div> 
   
