@@ -49,6 +49,7 @@ export class PerformancePageMobileComponent implements OnInit {
   docpath: any = null;
   videoSource: any;
   preview: boolean;
+  videoUrl: any;
 
   constructor(
     private commonServices: CommonServicesService,
@@ -78,12 +79,26 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
   ngOnInit() {
-    //console.log("this.performDetails 1");
+    this.Lservice.closeRecoderdData$.subscribe((data: any) => {
+      this.videoUrl = data;
+      this.closeDialog();
+    });
     this.getperformActivityData();
   }
 
-  getData(itration) {
+  getData(templateRef: TemplateRef<any>, itration) {
     this.itrationDataSend = itration;
+    this.dialog.open(templateRef, {
+      width: '100%',
+      height: '100%',
+      panelClass: 'matDialogMat1',
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+  }
+
+  closeDialog() {
+    this.dialog.closeAll();
   }
  
     submitDeleteVideo(videoName, itrdata, perform) {
@@ -260,4 +275,5 @@ videoPreview(templateRef: TemplateRef<any>, path) {
     disableClose: true,
   });
 }
+
 }

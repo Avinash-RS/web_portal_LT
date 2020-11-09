@@ -258,3 +258,28 @@
 .gradeStatusCol {
   padding-right: 25px !important;
 }
+
+.textArea {
+  align-content: left;
+  border-block-end-width: 1px solid #BEBEBEBF;
+  color: $label2;
+}
+
+.feedBackTxt {
+  color: $label2;
+}
+
+.AssignmentBtn {
+  height: 3rem;
+  font-weight: bolder;
+  font-size: 15px;
+  border: 1px solid #707070;
+}
+
+.assignmentIcon {
+  color: #5C6873;
+}
+
+::ng-deep .matDialogMat1 .mat-dialog-container {
+  padding: 0px !important;
+}
