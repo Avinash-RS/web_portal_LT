@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from "ngx-toastr";
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-
+import { DomSanitizer } from '@angular/platform-browser';
 /*
 // Required imports when recording audio-only using the videojs-wavesurfer plugin
 import * as WaveSurfer from 'wavesurfer.js';
@@ -44,7 +44,7 @@ export class PerformVideoRecordComponent implements OnInit {
   private plugin: any;
   
 
-  constructor(elementRef: ElementRef, private gs: GlobalServiceService,
+  constructor(elementRef: ElementRef, private gs: GlobalServiceService, private sanitizer : DomSanitizer,
     private toastr: ToastrService, public route: Router, public Lservice: LearnerServicesService) {
     const detail =
       this.route.getCurrentNavigation() &&
@@ -107,7 +107,10 @@ export class PerformVideoRecordComponent implements OnInit {
         record: {
           audio: true,
           video: true,
-          debug: true
+          maxLength: 100,
+          debug: true,
+          // fire the timestamp event every 2 seconds
+           timeSlice: 2000
         }
       }
     };
@@ -150,7 +153,14 @@ export class PerformVideoRecordComponent implements OnInit {
       // recordedData is a blob object containing the recorded data that
       // can be downloaded by the user, stored on server etc.
       console.log('finished recording: ', this.player.recordedData);
-      this.learnerRecordVideo(this.player.recordedData);
+      this.player.record().saveAs({'video': 'my-video-file-name.mp4'});
+      var bufferPromise = this.player.recordedData.arrayBuffer();
+      this.player.recordedData.arrayBuffer().then(buffer =>
+        console.log('buffer', buffer)
+        );
+
+      // var buffer = await this.player.recordedData.arrayBuffer();
+      // console.log('buffer buffer', buffer);
     });
 
     // error handling
