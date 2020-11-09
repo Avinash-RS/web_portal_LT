@@ -140,8 +140,8 @@
             <td>{{atd.activity.topicname}}</td>
             <td>{{atd.activity.startdate | date: 'dd/MM/yyyy hh:mm'}}</td>
             <td>
-              <mat-icon *ngIf="atd.activity.attendencedetails.Attendence === 'yes' || atd.activity.attendencedetails.Attendence === 'Yes'" style="color: green;">done</mat-icon>
-              <mat-icon *ngIf="atd.activity.attendencedetails.Attendence === 'no' || atd.activity.attendencedetails.Attendence === 'No'" style="color: red;">close</mat-icon>
+              <mat-icon *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'" style="color: green;">done</mat-icon>
+              <mat-icon *ngIf="atd.activity.attendencedetails.Attendence =='no' || atd.activity.attendencedetails.Attendence == 'No'" style="color: red;">close</mat-icon>
             </td>
           </tr>
         </table>
@@ -163,7 +163,7 @@
               </div>
               <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
                 <h4 style="margin-left: 20px;font-weight: bold;">{{los.activity_details.topicname}}</h4>
-                <h5 style="margin-left: 20px;">Held On:
+                <h5 style="margin-left: 20px;">
                   {{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm'}}</h5>
                 <h5 style="margin-left: 20px;">Duration: {{los.duration}} </h5>
               </div>
