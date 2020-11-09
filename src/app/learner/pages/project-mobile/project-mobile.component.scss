@@ -110,6 +110,26 @@
 // .upload-btn {
 //   width: 100%;
 // }
+.closeDialog {
+  float: right;
+  position: relative;
+  top: -20px;
+  left: 23px;
+  font-size: large;
+}
+    ::ng-deep .learnerDialog .mat-dialog-container {
+      position: relative !important;
+      right: 74px !important;
+      bottom: 49px !important;
+    }
+    ::ng-deep .learner .list-group-item {
+      border: none !important;
+    }
+    .grpName {
+      position: relative;
+    top: -19px;
+    right: 16px;
+    }
   //Ramya's Css ends here
   .dot {
     height: 10px;
