@@ -118,6 +118,7 @@ export class MycourseItemComponent implements OnInit {
       name: c.course_name
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
-    this.router.navigateByUrl('/Learner/instructorLed', { state: { detail } });
+    // this.router.navigateByUrl('/Learner/instructorLed', { state: { detail } });
+    this.router.navigate(['/Learner/instructorLed'], { queryParams: detail }); // ['/booking'],{queryParams: {Id :id}}
   }
 }
