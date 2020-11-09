@@ -1,6 +1,7 @@
 <app-performance-page-mobile *ngIf="mobileResponsive"></app-performance-page-mobile>
-<app-header *ngIf="!mobileResponsive"></app-header>
-<div class="con-1" *ngIf="!mobileResponsive">
+<app-project-mobile *ngIf="projectMobileResponsive"></app-project-mobile>
+<app-header *ngIf="!mobileResponsive && !projectMobileResponsive"></app-header>
+<div class="con-1" *ngIf="!mobileResponsive && !projectMobileResponsive">
   <!-- <span class="back" routerLink="/Learner/MyCourse" routerLinkActive="active"> < Back</span><br><br> -->
   <span class="redHover">
     <mat-icon class="material-icons f_size_15 backIc pointer" (click)="goToCourse()">arrow_back_ios
@@ -18,7 +19,7 @@
     </mat-icon>
     <span>Activities</span>
   </div>
-  <mat-tab-group animationDuration="1000ms" (selectedTabChange)="tabChanged($event)">
+  <mat-tab-group animationDuration="1000ms" (selectedTabChange)="tabChanged($event); projectTab($event)">
     <mat-tab label="Assignments">
       <mat-accordion class="example-headers-align" multi *ngIf="assignmentContent?.coursedetails.length > 0">
         <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
@@ -412,10 +413,9 @@
                           (click)="submitDeleteVideo(videoName, itrdata, perform.performActivity , submitType = 'delete')">
                           delete</mat-icon>
                       </div>
-
                       <input type="file" accept="video/mp4" multiple style="display: none" #videoInput
                         [(ngModel)]="fileName" (change)="uploadDocument($event)" />
-                      <button mat-stroked-button [disabled]="itrdata.submitAction == 'submit' || itrationStarted || itrationEnded" class="upload-bltn mt-3"
+                      <button mat-stroked-button [disabled]="itrdata.submit_status !== 'notsubmitted' && !itrationStarted && itrationEnded" class="upload-bltn mt-3"
                         (click)="uploadDocuments(itrdata, perform, submitType = 'upload')">
                         <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                         Upload video
@@ -470,10 +470,10 @@
             </div>
           </div>
           <div class="row">
-            <div [ngClass]="project.projectActivity.showLearnerList ? 'col-10' : 'col-12'">
+            <div [ngClass]="project.projectActivity.showLearnerList ? 'col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12' : 'col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12'">
               <!-----------------------------Row 1--------------------->
               <div class="row">
-                <div class="col-12">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                   <span class="topic text-left">
                     <mat-icon class="assignIcon">assignment</mat-icon>
                     <span class="f_size_16 f_wt_600 projHead">{{project.projectActivity.topic_id}}</span>
@@ -484,7 +484,7 @@
                       <mat-icon class="grpIcon">group</mat-icon>
                     </button>
                     <span class="teamName" *ngIf="project.projectActivity.groupname.length < 14">
-                      {{project.projectActivity.groupname}}
+                      {{project.projectActivity.groupname}} ({{project.projectActivity.groupDetails.length}})
                     </span>
                     <span class="teamName" *ngIf="project.projectActivity.groupname.length > 14"
                       matTooltip="{{project.projectActivity.groupname}}" matTooltipClass="custom-mat-tooltip">
@@ -499,8 +499,8 @@
               </div>
               <!-----------------------------Status------------------------->
               <div class="row">
-                <div class="col-10"></div>
-                <div class="col-2 text-right">
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12"></div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 text-right">
                   <span class="f_wt_600 status" *ngIf="project.projectActivity.submitAction !== 'submit' ||
               project.projectActivity.submit_status == 'notsubmitted'"> <span class="dot"></span>
                     Yet to submit</span>
@@ -521,10 +521,10 @@
               </div>
 
               <div class="row">
-                <div class="col-9">
+                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12">
                   <div class="t-l-1">Activity Description: {{project.projectActivity.activityname}}</div>
                 </div>
-                <div class="col-3 text-right">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 text-right">
                   <div class="m-r-40">Start date :<span class="margin-30"></span>End date :</div>
                   <div class="m-r-2 f_wt_600">{{project.activityStartDate}}
                     <span class="margin-21 f_wt_600"></span>{{project.activityEndDate}}</div>
@@ -534,7 +534,7 @@
               <div class="panel1" *ngIf="isCollapsed && projectId === i">
                 <hr>
                 <div class="row">
-                  <div class="col-8">
+                  <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12 second">
                     <div class="f_size_16 f_wt_600">Material for activity</div>
 
                     <owl-carousel-o [options]="trendingCategorires"
@@ -584,7 +584,7 @@
                                         <span *ngIf="material.doc_type == 'video/mp4'"
                                           class="text-white actionBtn">Play</span>
                                         <span *ngIf="material.doc_type == 'image/png' || material.doc_type == 'image/jpeg'
-                                    || material.doc_type == 'image/jpg'" class="text-white actionBtn">Preview</span>
+                                    || material.doc_type == 'image/jpg' || material.doc_type == 'application/pdf'" class="text-white actionBtn">Preview</span>
                                       </div>
                                       <div class="col-7 text-center pr-0 colAction"
                                         (click)="downloadDoc(material, 'material')">
@@ -606,7 +606,7 @@
                       No project yet
                   </h3> -->
                   </div>
-                  <div class="col-4" *ngIf="project.projectActivity.submit_status == 'notsubmitted'
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 third" *ngIf="project.projectActivity.submit_status == 'notsubmitted'
               || project.projectActivity.grade_status !== 'Evaluated'">
                     <div class="f_size_16 f_wt_600 align-center work">Your work</div>
                     <div [ngClass]="project.projectActivity.showLearnerList ? 'box-0-3' : 'box-0-2'">
@@ -667,7 +667,7 @@
               <!-------------------------------------Your files--------------------------------------->
               <div class="panel1" *ngIf="isCollapsed && projectId === i && project.projectActivity.grade_status == 'Evaluated'">
                 <div class="row">
-                  <div class="col-8">
+                  <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
                     <div class="f_size_16 f_wt_600">Your submissions</div>
 
                     <owl-carousel-o [options]="trendingCategorires"
@@ -742,11 +742,11 @@
             </div>
 
             <!------------------------------------Learner list------------------------------->
-            <div class="col-2 learnerList" *ngIf="project.projectActivity.showLearnerList">
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 learnerList first" *ngIf="project.projectActivity.showLearnerList">
               <div class="align-center">
 
                 <span *ngIf="project.projectActivity.groupname.length < 14">
-                  {{project.projectActivity.groupname}}
+                  {{project.projectActivity.groupname}} ({{project.projectActivity.groupDetails.length}})
                 </span>
                 <span *ngIf="project.projectActivity.groupname.length > 14"
                   matTooltip="{{project.projectActivity.groupname}}" matTooltipClass="custom-mat-tooltip">

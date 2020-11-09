@@ -88,6 +88,7 @@ export class ActivitiesComponent implements OnInit {
   courseName: any;
   mouseOverIndex: any;
   videoSource: any;
+  projectMobileResponsive: boolean;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
@@ -115,6 +116,19 @@ export class ActivitiesComponent implements OnInit {
         this.mobileResponsive = true;
       } else {
         this.mobileResponsive = false;
+      }
+    }
+  }
+
+  projectTab(event) {
+    console.log('eve', event.tab.textLabel);
+    if (event.tab.textLabel === 'Project') {
+      this.screenHeight = window.innerHeight;
+      this.screenWidth = window.innerWidth;
+      if (this.screenWidth < 800) {
+        this.projectMobileResponsive = true;
+      } else {
+        this.projectMobileResponsive = false;
       }
     }
   }
@@ -374,12 +388,12 @@ export class ActivitiesComponent implements OnInit {
         element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
         const endDate = new Date(element.performActivity.activityenddate);
         element.activityEndDate = moment(endDate).format('ll');
-        if (moment(new Date()).format('ll') < element.activityStartDate) {
+        if (moment(new Date()).format('DD-MM-YYYY HH:MM') < element.activityStartDate) {
           this.itrationStarted = true;
         } else {
           this.itrationStarted = false;
         }
-        if ( moment(new Date()).format('ll') > element.activityEndDate) {
+        if ( moment(new Date()).format('DD-MM-YYYY HH:MM') > element.activityEndDate) {
           this.itrationEnded = true;
           this.submitStatus = 'ontime';
         } else {
@@ -388,8 +402,11 @@ export class ActivitiesComponent implements OnInit {
         }
       });
     }
+    console.log('this.itrationStarted', this.itrationStarted);
+    console.log('this.itrationEnded', this.itrationEnded);
     });
   }
+  
   learnerUploadVideo(project, submitAction) {
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:MM');
@@ -432,6 +449,7 @@ export class ActivitiesComponent implements OnInit {
 
   // Submit or Delete
   learnerSumbitdeleteVideo(project, deleteItem, submitAction) {
+    console.log('project', project);
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:MM');
     const endDate1 = new Date(project.projectActivity.activityenddate);
