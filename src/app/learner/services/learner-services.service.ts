@@ -945,6 +945,10 @@ getprojectActivityData(userId, courseId) {
 
   learnerRecordVideo(data) { return this.http.post(environment.apiUrl + 'wca/learnerRecordVideo', data); }
 
+
+  uploadVideo(image) {
+    return this.http.post(environment.wcaapiurl + 'api/upload/uploadimagefile', image);
+  }
   boarddetail(user_id, course_id){
     return this.Apollo.query({
       query: boarddetail,

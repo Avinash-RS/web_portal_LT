@@ -300,6 +300,7 @@ export const getmoduleData = gql`
         courseid
         _id
         url
+        page
         totalResourseCount
         coursename
         coursefile

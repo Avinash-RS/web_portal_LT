@@ -72,9 +72,9 @@ export class DiscussionForumComponent implements OnInit {
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.course = detail || JSON.parse(atob(localStorage.getItem('course')));
     this.userDetail = this.gs.checkLogout();
-    if (this.course.isBatch) {
-      this.playerModuleAndTopic(this.course.id);
-    }
+    // if (this.course.isBatch) {
+    this.playerModuleAndTopic(this.course.id);
+    // }
   }
 
   ngOnInit() {
