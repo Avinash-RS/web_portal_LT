@@ -494,11 +494,8 @@ export class LearnerMyCourseComponent implements OnInit {
     localStorage.setItem('Courseid', c.course_id);
     const detail = {
       id: c.course_id,
-      name: c.course_name
-      // wishlist: c.wishlisted || false,
-      // wishlist_id: c.wishlist_id || null,
-      // enrollment_status: null,
-      // forumVal: true
+      name: c.course_name,
+      // isBatch : c.batchCourse
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
     // this.router.navigateByUrl('/Learner/MyCourse', { state: { detail } });
