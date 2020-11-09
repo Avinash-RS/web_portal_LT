@@ -1917,6 +1917,7 @@ export const getCourseActivities = gql`
             module_name
             activity
             topic_name
+            activity_name
             status
             score_mark
             total_mark
