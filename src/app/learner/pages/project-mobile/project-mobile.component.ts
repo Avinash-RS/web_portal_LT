@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class ProjectMobileComponent implements OnInit {
 
-  @ViewChild('uploadInput') uploadInput;
+  @ViewChild('uploadFile') uploadFile;
   userDetail: any;
   checkDetails: any;
   courseid: any;
@@ -25,6 +25,7 @@ export class ProjectMobileComponent implements OnInit {
   isCollapsed = false;
   selectfile = [];
   showSubmittedon = false;
+  fileName: any;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
@@ -47,6 +48,7 @@ export class ProjectMobileComponent implements OnInit {
   }
 
   uploadDoc(event, project, submitAction) {
+    console.log('working', event);
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < event.target.files.length; i++) {
       this.selectfile.push(event.target.files[i]);
@@ -54,7 +56,7 @@ export class ProjectMobileComponent implements OnInit {
     this.learnerUploadVideo(project, submitAction);
   }
   uploadDocs() {
-    this.uploadInput.nativeElement.click();
+    this.uploadFile.nativeElement.click();
   }
 
   getprojectActivityData() {

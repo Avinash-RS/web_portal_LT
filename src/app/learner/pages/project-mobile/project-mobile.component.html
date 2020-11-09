@@ -237,15 +237,22 @@
               
               <div class="row ml-0 mr-0 mt-2">
               <div class="col-12 text-center"> 
-                <input type="file" style="display: none"
-                          accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" #uploadInput
-                          [(ngModel)]="fileName" (change)="uploadDoc($event, project, 'upload')" />
-                        <button mat-stroked-button class="upload-btn" (click)="uploadDocs()"
-                          [disabled]="project.enableSubmit == false && project.submitType == false"
-                          *ngIf="project.projectActivity.submitAction !== 'submit'">
-                          <mat-icon class="icon-color m-t-m-2">add</mat-icon>
-                          Add your files
-                        </button>
+                <!-- <input type="file" style="display: none"
+                accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" #uploadFile
+                [(ngModel)]="fileName" (change)="uploadDoc($event, project, 'upload')" />
+              <button mat-stroked-button class="upload-btn" (click)="uploadDocs()"
+                [disabled]="project.enableSubmit == false && project.submitType == false"
+                *ngIf="project.projectActivity.submitAction !== 'submit'">
+                <mat-icon class="icon-color m-t-m-2">add</mat-icon>
+                Add your files
+              </button> -->
+
+              <input type="file" accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf"
+               multiple style="display: none" #uploadFile
+               (change)="uploadDoc($event, project, 'upload')" />
+          <button mat-stroked-button class="uploadBtn mt-3 w-100"  *ngIf="project.projectActivity.submitAction !== 'submit'" 
+          (click)="uploadDocs()">
+            <mat-icon class="add-icon">add</mat-icon> Add your files</button>
 
                         <button mat-stroked-button [disabled]="project.enableSubmit == false  && project.submitType == false" class="submit-btn"
                           (click)="learnerSumbitdeleteVideo(project, '' ,'submit')"
