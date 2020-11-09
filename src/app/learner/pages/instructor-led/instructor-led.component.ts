@@ -38,10 +38,6 @@ export class InstructorLedComponent implements OnInit {
     this.router.navigateByUrl('/Learner/MyCourse');
   }
 
-  goBack() {
-    
-  }
-
   getAttendance() { // Http Call
     const userDetails = JSON.parse(sessionStorage.getItem('UserDetails'));
     this.learnerService.getAttendanceByUsername(this.course.id, userDetails.full_name, userDetails.user_id).subscribe(async res => {
@@ -124,14 +120,15 @@ export class InstructorLedComponent implements OnInit {
     if (diff > 59) {
       hh = (diff / 60);
       mm = (diff % 60);
+      mm = 34.999999;
       if (mm) {
-        context = hh + ' hour' + mm + ' minutes';
+        context = hh.toFixed(0) + ' hour' + mm.toFixed(0) + ' minutes';
       } else {
-        context = hh + ' hour';
+        context = hh.toFixed(0) + ' hour';
       }
     } else {
       hh = 0;
-      mm = diff;
+      mm = diff.toFixed(0);
       context = mm + ' minutes';
     }
     return context;
