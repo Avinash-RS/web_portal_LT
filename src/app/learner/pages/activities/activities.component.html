@@ -412,10 +412,9 @@
                           (click)="submitDeleteVideo(videoName, itrdata, perform.performActivity , submitType = 'delete')">
                           delete</mat-icon>
                       </div>
-
                       <input type="file" accept="video/mp4" multiple style="display: none" #videoInput
                         [(ngModel)]="fileName" (change)="uploadDocument($event)" />
-                      <button mat-stroked-button [disabled]="itrdata.submitAction == 'submit' || itrationStarted || itrationEnded" class="upload-bltn mt-3"
+                      <button mat-stroked-button [disabled]="itrdata.submit_status !== 'notsubmitted' && !itrationStarted && itrationEnded" class="upload-bltn mt-3"
                         (click)="uploadDocuments(itrdata, perform, submitType = 'upload')">
                         <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                         Upload video
