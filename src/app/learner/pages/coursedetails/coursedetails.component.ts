@@ -202,9 +202,10 @@ export class CoursedetailsComponent implements OnInit {
           this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.content.url +
           '&module_status=' + 'process'
-          + '&module=' + this.getModuleandtopicInfo.modulename + '&topic=' + this.getModuleandtopicInfo.moduledetails[0].topicname);
+          + '&module=' + this.getModuleandtopicInfo.modulename + '&topic=' + this.getModuleandtopicInfo.moduledetails[0].topicname + '&location=' + this.content.page );
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
+      console.log(this.urlSafe,'this.urlSafethis.urlSafe');
     });
     this.getAssignmentmoduleData();
   }

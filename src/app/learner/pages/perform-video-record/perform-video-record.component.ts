@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from "ngx-toastr";
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-
+import { DomSanitizer } from '@angular/platform-browser';
 /*
 // Required imports when recording audio-only using the videojs-wavesurfer plugin
 import * as WaveSurfer from 'wavesurfer.js';
@@ -32,7 +32,7 @@ export class PerformVideoRecordComponent implements OnInit {
   courseid: any;
   checkDetails: any;
   courseName: any;
-  
+  imagepath: any;
 
   private _elementRef: ElementRef
 
@@ -42,8 +42,9 @@ export class PerformVideoRecordComponent implements OnInit {
   private config: any;
   private player: any;
   private plugin: any;
+  
 
-  constructor(elementRef: ElementRef, private gs: GlobalServiceService,
+  constructor(elementRef: ElementRef, private gs: GlobalServiceService, private sanitizer : DomSanitizer,
     private toastr: ToastrService, public route: Router, public Lservice: LearnerServicesService) {
     const detail =
       this.route.getCurrentNavigation() &&
@@ -106,7 +107,10 @@ export class PerformVideoRecordComponent implements OnInit {
         record: {
           audio: true,
           video: true,
-          debug: true
+          maxLength: 100,
+          debug: true,
+          // fire the timestamp event every 2 seconds
+           timeSlice: 2000
         }
       }
     };
@@ -149,7 +153,14 @@ export class PerformVideoRecordComponent implements OnInit {
       // recordedData is a blob object containing the recorded data that
       // can be downloaded by the user, stored on server etc.
       console.log('finished recording: ', this.player.recordedData);
-      this.learnerRecordVideo(this.player.recordedData);
+      this.player.record().saveAs({'video': 'my-video-file-name.mp4'});
+      var bufferPromise = this.player.recordedData.arrayBuffer();
+      this.player.recordedData.arrayBuffer().then(buffer =>
+        console.log('buffer', buffer)
+        );
+
+      // var buffer = await this.player.recordedData.arrayBuffer();
+      // console.log('buffer buffer', buffer);
     });
 
     // error handling
@@ -173,7 +184,13 @@ export class PerformVideoRecordComponent implements OnInit {
   learnerRecordVideo(recordVideo) {
     const currentDate = new Date();
     const performVideo = new FormData();
-    performVideo.append('recordvideo', recordVideo);
+
+    const formData = new FormData();
+    formData.append('image', recordVideo);
+    this.Lservice.uploadVideo(formData).subscribe((data: any) => {
+     this.imagepath = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
+    });
+    performVideo.append('recordvideo', this.imagepath);
     performVideo.append('course_id', this.performDetailsSend.course_id);
     performVideo.append('module_id', this.performDetailsSend.module_id);
     performVideo.append('topic_id', this.performDetailsSend.topic_id);
