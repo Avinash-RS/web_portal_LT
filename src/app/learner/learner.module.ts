@@ -82,6 +82,8 @@ import { FilterPipe } from '../pipes/filter.pipe';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { VideoPreviewModalComponent } from './pages/video-preview-modal/video-preview-modal.component';
 import { PerformVideoRecordComponent } from './pages/perform-video-record/perform-video-record.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -330,6 +332,7 @@ const routes: Routes = [
     NgCircleProgressModule,
     Ng2SearchPipeModule,
     PdfViewerModule,
+    NgxSkeletonLoaderModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
