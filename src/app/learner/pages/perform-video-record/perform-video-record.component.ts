@@ -183,21 +183,8 @@ export class PerformVideoRecordComponent implements OnInit {
   learnerRecordVideo(recordVideo) {
     const currentDate = new Date();
     const performVideo = new FormData();
-//     var formData = {
-//     my_field: 'file',
-//     my_file: fs.createReadStream('C:\\Downloads\\my-video-file-name.mp4')
-// };
-// console.log('formData', formData);
-    // let file = recordVideo;
-    // var URL = window.URL;
-    // let prev_url = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file));
-    // console.log(prev_url);
+
     return false;
-    // let file = new Blob([JSON.stringify(recordVideo)], { type: 'application/json' });
-    // console.log('file', file);
-    // performVideo.append('recordvideo', file);
-    // performVideo.entries().next().value
-    // performVideo.append('recordvideo', recordVideo, recordVideo.name);
     performVideo.append('course_id', this.performDetailsSend.course_id);
     performVideo.append('module_id', this.performDetailsSend.module_id);
     performVideo.append('topic_id', this.performDetailsSend.topic_id);
