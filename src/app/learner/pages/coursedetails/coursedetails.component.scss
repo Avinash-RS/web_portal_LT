@@ -913,6 +913,7 @@ iframe.fullScreen {
     background-color: $profile-t-grey;
     text-align: right;
     border-top: 2px solid $profile-p-grey;
+    padding-top: 20px;
 }
 
 .mar {
@@ -1472,5 +1473,5 @@ iframe.fullScreen {
 }
 
 ::ng-deep #content {
-    height: 100vh !important;
+    height: 98vh !important;
 }
