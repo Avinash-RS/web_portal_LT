@@ -32,7 +32,7 @@ export class PerformVideoRecordComponent implements OnInit {
   courseid: any;
   checkDetails: any;
   courseName: any;
-  
+  imagepath: any;
 
   private _elementRef: ElementRef
 
@@ -42,6 +42,7 @@ export class PerformVideoRecordComponent implements OnInit {
   private config: any;
   private player: any;
   private plugin: any;
+  
 
   constructor(elementRef: ElementRef, private gs: GlobalServiceService, private sanitizer : DomSanitizer,
     private toastr: ToastrService, public route: Router, public Lservice: LearnerServicesService) {
@@ -184,7 +185,16 @@ export class PerformVideoRecordComponent implements OnInit {
     const currentDate = new Date();
     const performVideo = new FormData();
 
+<<<<<<< HEAD
     return false;
+=======
+    const formData = new FormData();
+    formData.append('image', recordVideo);
+    this.Lservice.uploadVideo(formData).subscribe((data: any) => {
+     this.imagepath = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
+    });
+    performVideo.append('recordvideo', this.imagepath);
+>>>>>>> 0fed529d201bf910b4b32a87a5cb22d12c1b372d
     performVideo.append('course_id', this.performDetailsSend.course_id);
     performVideo.append('module_id', this.performDetailsSend.module_id);
     performVideo.append('topic_id', this.performDetailsSend.topic_id);
