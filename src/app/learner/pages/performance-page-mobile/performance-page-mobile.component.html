@@ -141,8 +141,8 @@
               <span>{{performActivityData.activitystartdate | date:'MMM dd,yyyy'}}</span>
             </div>
             <div class="col-5 mr-0 pl-0 pr-0 text-left">
-              <span class="m-l-5 font-weight-bold">End date:</span><br />
-              <span class="m-l-5">{{performActivityData.activityenddate | date:'MMM dd,yyyy'}}</span>
+              <span class="font-weight-bold">End date:</span><br />
+              <span >{{performActivityData.activityenddate | date:'MMM dd,yyyy'}}</span>
             </div>
             <div class="col-2 mr-0 pl-0 pr-0 text-left"></div>
           </div>
@@ -307,7 +307,7 @@
                 </button>
                 <input type="file" accept="video/mp4" multiple style="display: none" #videoInput
                     (change)="uploadDocument($event)" />
-                <button mat-stroked-button class="uploadBtn mt-3 w-100" *ngIf="itration.submitAction !== 'submit'" (click)="uploadDocuments(itration, performActivityData, submitType = 'upload')"><mat-icon class="add-icon">add</mat-icon>Upload Videos</button>
+                <button mat-stroked-button class="uploadBtn mt-3 w-100" *ngIf="itration.submit_status !== 'notsubmitted' && !itrationStarted && itrationEnded" (click)="uploadDocuments(itration, performActivityData, submitType = 'upload')"><mat-icon class="add-icon">add</mat-icon>Upload Videos</button>
                 <button mat-stroked-button class="submitBtn mt-3" *ngIf="itration.submit_status == 'notsubmitted' && itration.videodetails.length > 0"
                   (click)="submitType = 'submit'; submitDeleteVideo({}, itration, performActivityData)">Submit</button>
                 <button mat-stroked-button *ngIf="itration.submitAction !== 'submit' && !itrationStarted || !itrationEnded ||  itration.videodetails.length == 0" class="submitted-btn mt-3"> Submit </button>
