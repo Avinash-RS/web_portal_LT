@@ -318,8 +318,8 @@ export class LearnerMyCourseComponent implements OnInit {
       }
     }
 
-    this.showSkeleton = showSkelton;
-    this.loading = !showSkelton;
+    //this.showSkeleton = showSkelton;
+   // this.loading = !showSkelton;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
       catalougeId, catagoryId, jobRoleCategoryId, searchName).subscribe((enrolledList: any) => {
         if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
@@ -365,7 +365,7 @@ export class LearnerMyCourseComponent implements OnInit {
             this.jobAllCourseCount = this.enrolledCourses.length;
           }
         }
-        this.showSkeleton = false;
+        //this.showSkeleton = false;
         this.loading = false;
         this.viewCourseClass = true;
       });
@@ -375,6 +375,7 @@ export class LearnerMyCourseComponent implements OnInit {
 
   getDashboardMyCourse(userId, userObjId) {
     this.courseDetailsList = [];
+    this.showSkeleton = true;
     let requestType = 'ongoing'
     if(this.selectedIndex === 1){
       requestType = 'ongoing';
@@ -403,7 +404,7 @@ export class LearnerMyCourseComponent implements OnInit {
         this.onGoingCourseCount = Number(this.onGoingCourseCount) + Number(EcourseData.data.get_learner_dashboard.message.ongoing_count);
         this.completedCourseCount = Number(this.completedCourseCount) + Number(EcourseData.data.get_learner_dashboard.message.completed_count);
         this.allCourseCount = Number(this.allCourseCount) + Number(EcourseData.data.get_learner_dashboard.message.all_count);
-        console.log(this.courseDetailsList);
+        this.showSkeleton = false
       });
     });
   }
