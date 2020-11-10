@@ -89,10 +89,10 @@ import {
   bulkclaimcourse,
   markAsRead
 } from './operations/learner_mutation';
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
@@ -111,6 +111,9 @@ export class LearnerServicesService {
   envDomain: any = environment.domain;
 
   constructor(private Apollo: Apollo, private http: HttpClient) { }
+
+  closeRecoderdData$ = new Subject<any>();
+  closeRecoderdData = this.closeRecoderdData$.asObservable();
 
   public getData(userid, date) {
     return this.Apollo.query({
@@ -943,6 +946,12 @@ getprojectActivityData(userId, courseId) {
     });
   }
 
+  learnerRecordVideo(data) { return this.http.post(environment.apiUrl + 'wca/learnerRecordVideo', data); }
+
+
+  uploadVideo(image) {
+    return this.http.post(environment.wcaapiurl + 'api/upload/uploadimagefile', image);
+  }
   boarddetail(user_id, course_id){
     return this.Apollo.query({
       query: boarddetail,

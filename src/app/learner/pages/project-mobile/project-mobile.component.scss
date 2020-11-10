@@ -1,6 +1,116 @@
 @import "../../../../assets/variable.scss";
-
 @media (max-width: 767px) {
+  .projHead {
+    color: $lxp-theme-green;
+    position: absolute;
+  }
+  .groupBtn {
+    border: 1px solid #5C6873;
+    opacity: 1;
+    background-color: #ffffff;
+    color: #1F1A17;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 5px;
+    cursor: default;
+  }
+
+  .grpIcon {
+    font-size: 11px;
+    margin-top: -8px;
+    margin-left: -3px;
+    cursor: default;
+  }
+  .teamName {
+    position: relative;
+    bottom: 6px;
+    color: #0000EE;
+  }
+
+  .m-r-40 {
+    margin-right: 40px;
+  }
+.m-rr-5 {
+  margin-right: -5px;
+}
+.ml-16 {
+  margin-left: 16px;
+}
+
+.expansionarr {
+  padding: 3px;
+  font-weight: 600;
+  position: absolute;
+  top: -4px;
+  right: 7px;
+}
+
+.box-0-1{
+  margin-top: 10px;
+  width: 100%;
+  padding: 20px;
+  padding-bottom: 3%;
+  height: auto;
+  background-color: $color-white;
+  border : 1px solid $color-border;
+}
+.m-r-13 {
+  margin-right: 13px;
+}
+.margin-30{
+  margin-left: 12px;
+}
+.margin-21{
+  margin-left: 21px;
+}
+.work {
+  position: relative;
+  left: 118px;
+}
+.fileData {
+  background-color: #D5D5D5;
+  border: 0.25px solid #707070;
+  width: 100%;
+  height: 2.8rem;
+  padding: 0.3rem 5px;
+}
+.videoPlay {
+  color: #898989;
+  font-size: 25px;
+  background-color: white;
+  width: 2.5rem;
+  height: 2rem;
+  padding: 4px 5px 5px 7px;
+  border-radius: 2px;
+  cursor: default;
+}
+.uploadfileName {
+  position: relative;
+  left: 10px;
+  top: 5px;
+}
+.submit-btn{
+  color: $color-white !important;
+  background-color: $lxp-theme-green;
+  width: 45%;
+  margin-top: 6%;
+}
+.box-0-2{
+  margin-top: 10px;
+  margin-left: 30px;
+  width: 79%;
+  padding: 20px;
+  padding-bottom: 3%;
+  overflow: hidden;
+  height: auto;
+  background-color: $color-white;
+  border : 1px solid $color-border;
+}
+// .upload-btn {
+//   width: 100%;
+// }
+  //Ramya's Css ends here
   .dot {
     height: 10px;
     width: 10px;
@@ -124,7 +234,8 @@
   color: $color-white !important;
   background-color: #898989;
   width: 45%;
-  // margin-top: 6%;
+  position: absolute;
+  left: 81px;
   cursor: not-allowed;
 }
 
@@ -143,8 +254,8 @@
 .playBtn {
   font-size: 25px;
   position: absolute;
-  top: 1.03rem;
-  left: 0.6rem;
+  top: 1.10rem;
+  left: 0.7rem;
   color: white;
 }
 
@@ -227,59 +338,4 @@
   .matCardIconRow {
     height: 60%;
   }
-}
-
-//----- video overlay popup --------
-
-.videoRecordOverLay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  background-color: white;
-}
-
-.videoRec {
-  height: 100%;
-}
-
-.closeRow {
-  height: 3rem;
-}
-
-.closeIcon {
-  font-size: 30px;
-}
-
-.videoPlay {
-  height: 20rem;
-}
-
-.gradeStatusCol {
-  padding-right: 25px !important;
-}
-
-.textArea {
-  align-content: left;
-  border-block-end-width: 1px solid #BEBEBEBF;
-  color: $label2;
-}
-
-.feedBackTxt {
-  color: $label2;
-}
-
-.AssignmentBtn {
-  height: 3rem;
-  font-weight: bolder;
-  font-size: 15px;
-  border: 1px solid #707070;
-}
-
-.assignmentIcon {
-  color: #5C6873;
-}
-
-::ng-deep .matDialogMat1 .mat-dialog-container {
-  padding: 0px !important;
 }

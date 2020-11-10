@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from "ngx-toastr";
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-
+import { DomSanitizer } from '@angular/platform-browser';
 /*
 // Required imports when recording audio-only using the videojs-wavesurfer plugin
 import * as WaveSurfer from 'wavesurfer.js';
@@ -32,6 +32,7 @@ export class PerformVideoRecordComponent implements OnInit {
   courseid: any;
   checkDetails: any;
   courseName: any;
+  videopath: any;
 
   private _elementRef: ElementRef
 
@@ -41,9 +42,10 @@ export class PerformVideoRecordComponent implements OnInit {
   private config: any;
   private player: any;
   private plugin: any;
+  
 
-  constructor(elementRef: ElementRef, private gs: GlobalServiceService,
-    private toastr: ToastrService, public route: Router, public Lservice: LearnerServicesService) {
+  constructor(elementRef: ElementRef, private gs: GlobalServiceService, private sanitizer: DomSanitizer,
+  public toastr: ToastrService, public route: Router, public Lservice: LearnerServicesService) {
     const detail =
       this.route.getCurrentNavigation() &&
       this.route.getCurrentNavigation().extras &&
@@ -105,7 +107,10 @@ export class PerformVideoRecordComponent implements OnInit {
         record: {
           audio: true,
           video: true,
-          debug: true
+          maxLength: 100,
+          debug: true,
+          // fire the timestamp event every 2 seconds
+           timeSlice: 2000
         }
       }
     };
@@ -148,7 +153,20 @@ export class PerformVideoRecordComponent implements OnInit {
       // recordedData is a blob object containing the recorded data that
       // can be downloaded by the user, stored on server etc.
       console.log('finished recording: ', this.player.recordedData);
-      this.performlearnerUploadVideo(this.player.recordedData);
+      const performVideo = new FormData();
+      performVideo.append('image', this.player.recordedData);
+      this.Lservice.uploadVideo(performVideo).subscribe((data: any) => {
+        if (data.Message === 'Success') {
+          this.videopath = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
+          this.learnerRecordVideo(data);
+        } else {
+          this.toastr.warning(data.message);
+        }
+      });
+
+
+      // var buffer = await this.player.recordedData.arrayBuffer();
+      // console.log('buffer buffer', buffer);
     });
 
     // error handling
@@ -169,22 +187,33 @@ export class PerformVideoRecordComponent implements OnInit {
     }
   }
 
-  performlearnerUploadVideo(recordVideo) {
-    const currentDate = new Date();
-    const performVideo = new FormData();
-    performVideo.append('uploadvideo', recordVideo);
-    performVideo.append('course_id', this.performDetailsSend.course_id);
-    performVideo.append('module_id', this.performDetailsSend.module_id);
-    performVideo.append('topic_id', this.performDetailsSend.topic_id);
-    performVideo.append('user_id', this.userDetail.user_id);
-    performVideo.append('total_mark', this.itrationSend.total_mark);
-    performVideo.append('submitType', 'perform');
-    performVideo.append('submitAction', 'upload');
-    performVideo.append('iterationid', this.itrationSend.iterationid);
-    performVideo.append('object_id', this.performDetailsSend.perform_id);
-    this.Lservice.learnerUploadVideo(performVideo).subscribe((data: any) => {
+  learnerRecordVideo(recordVideo) {
+    const performVideo = {
+      course_id : this.performDetailsSend.course_id,
+      module_id : this.performDetailsSend.module_id,
+      topic_id : this.performDetailsSend.topic_id,
+      user_id: this.userDetail.user_id,
+      submit_status: 'ontime',
+      total_mark: this.itrationSend.total_mark,
+      submitType: 'perform',
+      submitAction: 'upload',
+      recordvideo : true,
+      iterationid: this.itrationSend.iterationid,
+      object_id: this.performDetailsSend.perform_id,
+      videodetails : {
+          doc_type : 'video/mp4',
+          videourl : recordVideo.Result.url,
+          name : recordVideo.Result.filename,
+          size : recordVideo.Result.size,
+          id : this.performDetailsSend.perform_id,
+          uploaded_date : new Date(),
+          is_active : true
+      }
+    };
+    this.Lservice.learnerRecordVideo(performVideo).subscribe((data: any) => {
+      console.log('performVideo', performVideo);
       if (data.success === true) {
-        this.toastr.success(data.message);
+        this.Lservice.closeRecoderdData$.next(this.videopath);
       } else {
         this.toastr.warning(data.message);
       }

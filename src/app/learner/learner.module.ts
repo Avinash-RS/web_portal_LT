@@ -81,6 +81,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FilterPipe } from '../pipes/filter.pipe';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { VideoPreviewModalComponent } from './pages/video-preview-modal/video-preview-modal.component';
+import { ProjectMobileComponent } from './pages/project-mobile/project-mobile.component';
 import { PerformVideoRecordComponent } from './pages/perform-video-record/perform-video-record.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
@@ -285,6 +286,7 @@ const routes: Routes = [
     KnowledgeLandingPageComponent,
     KnowledgeResourceHomeComponent,
     VideoPreviewModalComponent,
+    ProjectMobileComponent,
     PerformVideoRecordComponent
   ],
 

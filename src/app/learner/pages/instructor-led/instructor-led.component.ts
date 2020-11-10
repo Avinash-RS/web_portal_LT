@@ -24,9 +24,14 @@ export class InstructorLedComponent implements OnInit {
   attendedSessions: any;
 
   constructor(private router: Router,
-              private learnerService: LearnerServicesService,private dialog: MatDialog) {
-              this.course = (this.router.getCurrentNavigation() && this.router.getCurrentNavigation().extras &&
-                this.router.getCurrentNavigation().extras.state && this.router.getCurrentNavigation().extras.state.detail);
+              private learnerService: LearnerServicesService,
+              private dialog: MatDialog,
+              private activeRoute: ActivatedRoute) {
+              // this.course = (this.router.getCurrentNavigation() && this.router.getCurrentNavigation().extras &&
+              //   this.router.getCurrentNavigation().extras.state && this.router.getCurrentNavigation().extras.state.detail);
+                this.activeRoute.queryParams.subscribe(res => {
+                  this.course = res;
+                });
   }
 
   ngOnInit() {
@@ -36,10 +41,6 @@ export class InstructorLedComponent implements OnInit {
 
   getBack() {
     this.router.navigateByUrl('/Learner/MyCourse');
-  }
-
-  goBack() {
-    
   }
 
   getAttendance() { // Http Call
@@ -68,7 +69,7 @@ export class InstructorLedComponent implements OnInit {
   //   const date = '2020-10-27'; // new Date();
   //   this.learnerService.getReadLeanerActivity(userid, date, courseid).subscribe(async res => {
   //   const date = new Date();
-  //   this.learnerService.getReadLeanerActivity(userDetails.user_id, date, this.course.id).subscribe(async res => {
+  //   this.learnerService.getReadLeanerActivity(userDetails.user_id, date, this.course.course_id).subscribe(async res => {
   //     this.listOfSessions = res.data['get_read_learner_activity']['message'];
   //     this.totalSessions = this.listOfSessions.length;
   //     this.recordedSessions = this.listOfSessions.length;s
@@ -124,14 +125,15 @@ export class InstructorLedComponent implements OnInit {
     if (diff > 59) {
       hh = (diff / 60);
       mm = (diff % 60);
+      mm = 34.999999;
       if (mm) {
-        context = hh + ' hour' + mm + ' minutes';
+        context = hh.toFixed(0) + ' hour' + mm.toFixed(0) + ' minutes';
       } else {
-        context = hh + ' hour';
+        context = hh.toFixed(0) + ' hour';
       }
     } else {
       hh = 0;
-      mm = diff;
+      mm = diff.toFixed(0);
       context = mm + ' minutes';
     }
     return context;

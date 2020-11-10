@@ -89,7 +89,7 @@
           </div>
           <div class="col-6 pl-0 pr-0">
             <div class="row mr-0 ml-0 mb-4">
-              <div class="col-12 pl-0 pr-0 text-right">performDetails
+              <div class="col-12 pl-0 pr-0 text-right">
                 <span class="textGrayColor" *ngIf="perform.performActivity.submit_status == 'notsubmitted'">Yet to Submit</span>
                 <span class="submitstatus" *ngIf=" perform.performActivity.submit_status == 'submitted'">Submitted</span>
                 <span class="gradeStatus" *ngIf="perform.performActivity.submit_status == 'graded'">Graded</span>
@@ -106,8 +106,8 @@
                 <span class="textGrayColor">{{perform.activityStartDate}}</span>
               </div>
               <div class="col-6 mr-0 pl-0 pr-0 text-left">
-                <span class="ml-2 font-weight-bold">End date:</span><br />
-                <span class="ml-2 textGrayColor">{{perform.activityEndDate}}</span>
+                <span class="font-weight-bold">End date:</span><br />
+                <span class="textGrayColor">{{perform.activityEndDate}}</span>
               </div>
             </div>
           </div>
@@ -176,19 +176,17 @@
               <div class="carousel-item active">
                 <div class="row ml-0 mr-0">
                   <div class="col-4 text-left pr-0" *ngFor="let meterial of performActivityData.materialDetails">
-                <mat-card class="materialCard p-0 mr-2">
+                <mat-card class="materialCard p-0 mr-2" (click)="playVideo(projectPreviewDialog, videoDialog, meterial, meterial.doc_type, preview = true)">
                   <div class="row ml-0 mr-0 matCardIconRow">
                     <div class="col-12 pl-0 pr-0">
-                      <i class="fa fa-file-pdf-o icons" *ngIf="meterial.doc_type == 'file/pdf'" aria-hidden="true"></i>
-                      <mat-icon class="icons" *ngIf="meterial.doc_type =='image/jpeg'
-                           || meterial.doc_type == 'image/png' || meterial.doc_type == 'image/jpg'">photo_size_select_actual</mat-icon>
+                      <i class="fa fa-file-pdf-o icons" *ngIf="meterial.doc_type == 'file/pdf' || meterial.doc_type == 'application/pdf'" aria-hidden="true"></i>
+                      <mat-icon class="icons" *ngIf="meterial.doc_type == 'image/png' || meterial.doc_type == 'image/jpg' || meterial.doc_type == 'image/jpeg'">photo_size_select_actual</mat-icon>
                       <mat-icon class="icons" *ngIf="meterial.doc_type =='video/mp4'">play_circle_outline</mat-icon> 
                     </div>
                   </div>
                   <div class="row ml-0 mr-0 h-40" class="fileSelDet">
                     <div class="col-12 pr-0 fileNameCol">
-                      <span class="fileColor">{{meterial.filename}}</span><br>
-                      <span class="fileColor">Reference</span>
+                      <span class="fileColor">{{(meterial.filename| slice:0:25)+'...'}}</span><br>
                     </div>
                   </div>
                 </mat-card>
@@ -251,8 +249,8 @@
                 <span>Score: <span *ngIf="itration.score_mark > 0">{{itration.score_mark}}</span>
                 <span *ngIf="itration.score_mark == 0 || itration.score_mark == null">-</span> / {{itration.total_mark}}</span>
               </div>
-              <div class="col-5 pr-0">
-                <span class="textGrayColor" *ngIf="itration.submit_status == 'notsubmitted'">Yet to Submit</span>
+              <div class="col-5 gradeStatusCol text-right">
+                <span class="textGrayColor" *ngIf="itration.submit_status == 'notsubmitted' && itration.grade_status !== 'Evaluated'">Yet to Submit</span>
                 <span class="submitstatus" *ngIf="itration.grade_status == 'Not Evaluated' && itration.submitAction == 'submit'">
                           Submitted</span>
                 <span class="gradeStatus" *ngIf="itration.grade_status == 'Evaluated'">Graded</span>
@@ -272,7 +270,7 @@
                         <div class="carousel-item active">
                           <div class="row ml-0 mr-0">
                             <div class="col-4 text-left pr-0" *ngFor="let videoData of itration.videodetails">
-                          <mat-card class="materialCard p-0 mr-2">
+                          <mat-card class="materialCard p-0 mr-2" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)">
                             <div class="row ml-0 mr-0 matCardIconRow">
                               <div class="col-12 pl-0 pr-0">
                                 <i class="fa fa-file-pdf-o icons" *ngIf="videoData.doc_type == 'file/pdf'" aria-hidden="true"></i>
@@ -283,7 +281,7 @@
                             </div>
                             <div class="row ml-0 mr-0 h-40" class="fileSelDet">
                               <div class="col-12 pr-0 fileNameCol">
-                                <span class="fileColor">{{videoData.name}}</span><br>
+                                <span class="fileColor">{{(videoData.name| slice:0:25)+'...'}}</span><br>
                               </div>
                             </div>
                           </mat-card>
@@ -304,21 +302,36 @@
                 </div> 
               
               <div class="row ml-0 mr-0 mt-2">
-              <div class="col-12 text-center"> 
-                <button mat-raised-button (click)="videoRecord = true; getData(itration)" class="recordBtn mt-3 w-100" *ngIf="itration.submitAction !== 'submit'"><mat-icon class="video-icon">videocam <i class="fa fa-youtube-play playBtn" aria-hidden="true"></i></mat-icon> Record Video
+              <div class="col-12 text-center" *ngIf="itration.grade_status !== 'Evaluated'"> 
+                <button mat-raised-button (click)="videoRecord = true; getData(videoRecordPopup, itration)" class="recordBtn mt-3 w-100" *ngIf="itration.submitAction !== 'submit'"><mat-icon class="video-icon">videocam <i class="fa fa-youtube-play playBtn" aria-hidden="true"></i></mat-icon> Record Video
                 </button>
                 <input type="file" accept="video/mp4" multiple style="display: none" #videoInput
                     (change)="uploadDocument($event)" />
-                <button mat-stroked-button class="uploadBtn mt-3 w-100" *ngIf="itration.submitAction !== 'submit'" (click)="uploadDocuments(itration, performActivityData, submitType = 'upload')"><mat-icon class="add-icon">add</mat-icon>Upload Videos</button>
+                <button mat-stroked-button class="uploadBtn mt-3 w-100" *ngIf="itration.submit_status !== 'notsubmitted' && !itrationStarted && itrationEnded" (click)="uploadDocuments(itration, performActivityData, submitType = 'upload')"><mat-icon class="add-icon">add</mat-icon>Upload Videos</button>
                 <button mat-stroked-button class="submitBtn mt-3" *ngIf="itration.submit_status == 'notsubmitted' && itration.videodetails.length > 0"
                   (click)="submitType = 'submit'; submitDeleteVideo({}, itration, performActivityData)">Submit</button>
-                <button mat-stroked-button *ngIf="itration.submitAction !== 'submit' && itrationStarted || itrationEnded ||  itration.videodetails.length == 0" class="submitted-btn mt-3"> Submit </button>
+                <button mat-stroked-button *ngIf="itration.submitAction !== 'submit' && !itrationStarted || !itrationEnded ||  itration.videodetails.length == 0" class="submitted-btn mt-3"> Submit </button>
                 <button mat-stroked-button *ngIf="itration.submitAction == 'submit'" class="submitted-btn mt-3"> Submitted </button>
                 <div class="align-center mt-2">
                   <span *ngIf="itration.videodetails.length > 0  && itration.submitAction !== 'submit'"
                     class="submitedFile">Submitted files cannot be edited</span>
                   <span class="uploadedFile" *ngIf="itration.submitAction == 'submit'">Submitted on :
                     {{itration.submitted_on | date:'MMM dd, yyyy'}}</span>
+                </div>
+              </div>
+              <div class="col-12 pl-0 pr-0" *ngIf="itration.grade_status === 'Evaluated'">
+                <div class="row ml-0 mr-0">
+                  <div class="col-12">
+                    <button mat-stroked-button class="AssignmentBtn mt-3 w-100"><mat-icon class="assignmentIcon">wysiwyg</mat-icon>Assessment report</button>
+                  </div>
+                </div>
+                <div class="row ml-0 mr-0 mt-2">
+                  <div class="col-12 text-left">
+                    <p class="feedBackTxt">Feedback comments</p>
+                    <textarea rows="4" cols="50" class="textArea">
+                      {{itration.comments}}
+                      </textarea>
+                  </div>
                 </div>
               </div>
             </div>
@@ -330,20 +343,26 @@
     </div>
   </div>
   <!-------------------------- Preview Video --------------------------------->
-  <div class="row ml-0 mr-0 previewVideoScreen" *ngIf="videoPerview">
-    <div class="col-12 pl-0 pr-0">
+  <ng-template #videoDialog>
+  <!-- <div class="row ml-0 mr-0 previewVideoScreen" *ngIf="videoPerview">
+    <div class="col-12 pl-0 pr-0"> -->
       <div class="row ml-0 mr-0">
         <div class="col-12 text-left mt-2">
           <span class="previewTxt">Preview Video</span>
           </div>
           </div>
-          <div class="row ml-0 mr-0 p-3">
+          <div class="row ml-0 mr-0 mt-2 videoPlay" *ngIf="preview">
+            <div class="col-12 pl-0 pr-0">
+          <app-video-player  [url]="videoSource"></app-video-player>
+          </div>
+          </div>
+          <div class="row ml-0 mr-0 p-3" *ngIf="!preview">
             <div class="col-12 previewCol">
               <mat-card class="previewCard m-auto p-0">
                 <div class="row ml-0 mr-0">
                   <div class="col-12 pl-0 pr-0">
                     <video width="100%" controls class="videoCell">
-                      <source src="https://www.youtube.com/watch?v=VHENoFDoLds">
+                      <source src="videoUrl">
                       Your browser does not support HTML video.
                     </video>
                   </div>
@@ -357,30 +376,50 @@
               </mat-card>
             </div>
           </div>
-          <div class="row ml-0 mr-0 mt-2">
+          <div class="row ml-0 mr-0 mt-2" *ngIf="!preview">
             <div class="col-12">
               <button mat-stroked-button class="cancelBtn mr-4" (click)="videoPerview = !videoPerview">Cancel</button>
               <button mat-stroked-button class="saveBtn" (click)="videoPerview = !videoPerview">Save</button>
             </div>
           </div>
-    </div>
+    <!-- </div>
+  </div> -->
+</ng-template>
+
+  <!-------------------Preview for Project------------------>
+
+<ng-template #projectPreviewDialog>
+  <div class="row ml-0 mr-0 mb-3">
+    <div class="col-12 text-right">
+    <button mat-mini-fab class="closeBtn">
+      <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
+    </button>
   </div>
+  </div>
+  <div class="row ml-0 mr-0" *ngIf="previewDoc">
+    <div class="col-12 pl-0 pr-0">
+    <app-pdfreader [url]="previewDoc"></app-pdfreader>
+  </div>
+  </div>
+</ng-template>
   <!------------- Video Recordpopup ------------------------>
-  <div class="row ml-0 mr-0 videoRecordOverLay" *ngIf="videoRecord" >
+  <ng-template #videoRecordPopup>
+  <!-- <div class="row ml-0 mr-0 videoRecordOverLay" *ngIf="videoRecord" > -->
     <div class="row ml-0 mr-0 w-100">
       <div class="col-12 pl-0 pr-0">
         <div class="row ml-0 mr-0 mt-2 closeRow">
           <div class="col-sm-12 text-right">
-            <mat-icon class="closeIcon" (click)="videoRecord = false">close</mat-icon>
+            <mat-icon class="closeIcon" (click)="closeDialog()">close</mat-icon>
           </div>
         </div>
         <div class="row ml-0 mr-0 mt-2 videoRec">
-          <div class="col-12">
+          <div class="col-12 pl-0 pr-0">
             <app-perform-video-record [performDetailsSend]="performActivityData" [itrationSend]="itrationDataSend"></app-perform-video-record>
             </div>
             </div>
         </div>
         </div>
-  </div>
+  <!-- </div> -->
+</ng-template>
 </div> 
   
