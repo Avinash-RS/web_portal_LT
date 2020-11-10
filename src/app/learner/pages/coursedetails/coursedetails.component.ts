@@ -222,7 +222,7 @@ export class CoursedetailsComponent implements OnInit {
       if ( result && result.eventId && result.eventId.length > 0) {
       //  const courseValue = _.find(result.data.course_dtl, { course_id: this.courseid});
      //   console.log(courseValue);
-     if (result.data.course_id === this.courseid) {
+     if (result.data.course_id === this.courseid)  {
         const newKeys = {
           displayName: 'title',
           moduledetails: 'children',
