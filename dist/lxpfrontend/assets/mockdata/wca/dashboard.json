@@ -1,0 +1,69 @@
+{
+    "createdCourse": {
+        "Code": 2001,
+        "Message": "Success",
+        "data": {
+            "get_course_createdby_admin": {
+                "message": {
+                    "Result": [
+                        {
+                            "_id": "5e9a96f4989ce6fcc7165d80",
+                            "courseid": "CRS00013",
+                            "course_name": "Thermodynamics",
+                            "rating": 2,
+                            "max_student_enrollments_allowed": 400,
+                            "price": 450,
+                            "course_img_url": "https://edutechstorage.blob.core.windows.net/container1/images/621874479379863-chennai-tamil-nadu%20(2).jpg",
+                            "short_description": "Intruduction to Thermodynamics",
+                            "publishedOn": "4/18/2020, 10:51:22 AM"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "publishedCourse": {
+        "Code": 200,
+        "Message": "Success",
+        "data": {
+            "get_course_published": {
+                "message": {
+                    "Result": [
+                        {
+                            "_id": "5e9a941b989ce6fcc71496b7",
+                            "course_name": "ReactJs",
+                            "rating": 4,
+                            "max_student_enrollments_allowed": 360,
+                            "price": 450,
+                            "course_img_url": "https://edutechstorage.blob.core.windows.net/container1/images/621874479379863-chennai-tamil-nadu%20(2).jpg",
+                            "short_description": "Intruduction to ReactJs",
+                            "publishedOn": "7/24/2020 11:23:34 AM"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "draftCourse": {
+        "Code": 200,
+        "Message": "Success",
+        "data": {
+            "get_draft_course": {
+                "message": {
+                    "Result": [
+                        {
+                            "_id": "5e9a8e72c7882c16dc70dad9",
+                            "course_name": "Node",
+                            "rating": 0,
+                            "max_student_enrollments_allowed": 0,
+                            "price": 450,
+                            "course_img_url": "https://edutechstorage.blob.core.windows.net/container1/images/621874479379863-chennai-tamil-nadu%20(2).jpg",
+                            "short_description": "Intruduction to Node",
+                            "publishedOn": "4/18/2020, 10:51:22 AM"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

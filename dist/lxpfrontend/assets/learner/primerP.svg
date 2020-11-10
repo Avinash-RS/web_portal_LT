@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="57.156" height="68.826" viewBox="0 0 57.156 68.826">
+  <g id="Group_12220" data-name="Group 12220" transform="translate(7487.641 -1406)">
+    <g id="Group_12219" data-name="Group 12219" transform="translate(-7512 1023)">
+      <path id="Path_10382" data-name="Path 10382" d="M-70.424,1088.528l-.188,44.957,10.738-13.441,45.276-55.386H-50.958Z" transform="translate(96.113 -681.658)" fill="#fc0"/>
+      <text id="Primer" transform="matrix(0.656, -0.755, 0.755, 0.656, 33.416, 427.198)" fill="#333" font-size="13" font-family="RobotoCondensed-Regular, Roboto"><tspan x="0" y="0">Primer</tspan></text>
+    </g>
+    <g id="Component_57_49" data-name="Component 57 – 49" transform="translate(-7460 1408.5)">
+      <g id="Group_11986" data-name="Group 11986">
+        <g id="Ellipse_1" data-name="Ellipse 1" fill="#fff" stroke="#707070" stroke-width="1">
+          <circle cx="7" cy="7" r="7" stroke="none"/>
+          <circle cx="7" cy="7" r="6.5" fill="none"/>
+        </g>
+        <text id="P" transform="matrix(0.656, -0.755, 0.755, 0.656, 7.802, 11.5)" fill="#bf2020" font-size="11" font-family="RobotoCondensed-Bold, Roboto" font-weight="700"><tspan x="0" y="0">P</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="58" height="58" viewBox="0 0 58 58">
+  <g id="vocational" transform="translate(-3 -3)">
+    <path id="Path_1195" data-name="Path 1195" d="M48.5,16.056l.5.289V25h6V16.345l.5-.289a7,7,0,1,0-7,0ZM53,23H51V21h2Zm0-4H51V17h2ZM52,6a4,4,0,1,1-4,4A4.005,4.005,0,0,1,52,6Z" fill="#fff"/>
+    <path id="Path_1196" data-name="Path 1196" d="M57,27H44V55H57ZM50.5,53A4.5,4.5,0,1,1,55,48.5,4.505,4.505,0,0,1,50.5,53ZM55,39H46V37h9Zm0-4H46V33h9Zm0-4H46V29h9Z" fill="#fff"/>
+    <path id="Path_1197" data-name="Path 1197" d="M33,31h5v4H33Z" fill="#fff"/>
+    <circle id="Ellipse_142" data-name="Ellipse 142" cx="2.5" cy="2.5" r="2.5" transform="translate(48 46)" fill="#fff"/>
+    <path id="Path_1198" data-name="Path 1198" d="M12.668,15.017l-.643,7.719L13,24.2l.975-1.462-.643-7.719c-.111,0-.22-.016-.332-.016s-.221.013-.332.017Z" fill="#fff"/>
+    <path id="Path_1199" data-name="Path 1199" d="M59,29V57H27V29H25V59H39.521l.3.4a3.955,3.955,0,0,0,6.359,0l.3-.4H61V29Z" fill="#fff"/>
+    <path id="Path_1200" data-name="Path 1200" d="M28.447,15.1l.553.277V25h6V15.382l.553-.276A6.2,6.2,0,0,0,39,9.528V4.414L37.586,3H35V8a3,3,0,0,1-6,0V3H26.414L25,4.414V9.528A6.2,6.2,0,0,0,28.447,15.1ZM31,17h2v2H31Zm0,4h2v2H31Z" fill="#fff"/>
+    <path id="Path_1201" data-name="Path 1201" d="M15.361,15.293l.664,7.971L13,27.8,9.975,23.265l.664-7.971A10.009,10.009,0,0,0,3,25v9a3,3,0,0,0,3,3V21H8V59a2,2,0,0,0,4,0V33h2V59a2,2,0,0,0,4,0V21h2V37a3,3,0,0,0,3-3V25A10.011,10.011,0,0,0,15.361,15.293Z" fill="#fff"/>
+    <path id="Path_1202" data-name="Path 1202" d="M29,55H42V27H29Zm11-6H38V47h2ZM31,29h9v8H31Zm0,10h9v2H31Zm0,4h9v2H31Zm0,4h5v2H31Zm0,4h9v2H31Z" fill="#fff"/>
+    <circle id="Ellipse_143" data-name="Ellipse 143" cx="5" cy="5" r="5" transform="translate(8 3)" fill="#fff"/>
+  </g>
+</svg>
