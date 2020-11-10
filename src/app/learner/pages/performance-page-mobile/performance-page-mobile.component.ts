@@ -173,10 +173,10 @@ export class PerformancePageMobileComponent implements OnInit {
           }
           if (moment(new Date()).format("DD-MM-YYYY HH:MM") > element.activityEndDate) {
             this.itrationEnded = true;
-            this.submitStatus = "ontime";
+            this.submitStatus = 'late';
           } else {
             this.itrationEnded = false;
-            this.submitStatus = "late";
+            this.submitStatus = 'ontime';
           }
         });
       } else {
