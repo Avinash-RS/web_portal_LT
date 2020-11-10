@@ -502,7 +502,7 @@ export class CoursedetailsComponent implements OnInit {
       (environment.scormUrl + '/scormPlayer.html?contentID=' +
         this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
         + '&module_status=' + this.moduleSatusCheck
-        + '&module=' + moduleName + '&topic=' + topicName);
+        + '&module=' + moduleName);
     // this.playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex);
   }
 
