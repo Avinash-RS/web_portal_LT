@@ -1,6 +1,6 @@
 <app-performance-page-mobile *ngIf="mobileResponsive"></app-performance-page-mobile>
+<app-header *ngIf="!mobileResponsive"></app-header>
 <app-project-mobile *ngIf="projectMobileResponsive"></app-project-mobile>
-<app-header *ngIf="!mobileResponsive && !projectMobileResponsive"></app-header>
 <div class="con-1" *ngIf="!mobileResponsive && !projectMobileResponsive">
   <!-- <span class="back" routerLink="/Learner/MyCourse" routerLinkActive="active"> < Back</span><br><br> -->
   <span class="redHover">
@@ -233,7 +233,7 @@
         </ng-container>
       </mat-accordion>
       <div class="row ml-0 mr-0 errmsg" *ngIf="assignmentContent?.coursedetails.length < 1">
-        <div class="col-12 m-auto text-center">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-auto text-center">
           <span class="errormsg">
             <img class="assignImg" alt="" src="assets/006-assignment1.svg">
             <span>You have no assignments at the moment!</span>
@@ -766,7 +766,7 @@
           </div>
         </div>
       </ng-container>
-      <div class="row ml-0 mr-0 errmsg" *ngIf="projectDetails?.length < 1">
+      <div class="row ml-0 mr-0 errmsg" *ngIf="projectDetails?.length < 1 && !projectMobileResponsive">
         <div class="col-12 m-auto text-center">
           <span class="errormsg">
             <img class="assignImg" alt="" src="assets/002-project-management.svg">

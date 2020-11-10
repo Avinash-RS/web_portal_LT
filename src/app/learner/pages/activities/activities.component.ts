@@ -122,7 +122,6 @@ export class ActivitiesComponent implements OnInit {
   }
 
   projectTab(event) {
-    console.log('eve', event.tab.textLabel);
     if (event.tab.textLabel === 'Project') {
       this.screenHeight = window.innerHeight;
       this.screenWidth = window.innerWidth;

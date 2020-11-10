@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { MatAccordion } from '@angular/material/expansion';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
@@ -30,10 +31,12 @@ export class ProjectMobileComponent implements OnInit {
   groupName: any;
   previewDoc: any;
   videoSource: any;
+  selectedName = 'Project';
+  selectedTabIndex: number;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
-              public route: Router) {
+              public route: Router,  private commonServices: CommonServicesService,) {
                 const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
                 this.checkDetails = detail;
@@ -47,6 +50,17 @@ export class ProjectMobileComponent implements OnInit {
   ngOnInit() {
     this.getprojectActivityData();
   }
+  emiteData() {
+    if (this.selectedName === 'project') {
+    const data = {
+      selectedName: this.selectedName,
+      selectedTabIndex: this.selectedTabIndex,
+    };
+    this.commonServices.menuSelectedPerform$.next(data);
+  } else {
+    // this.Lservice.performView.next('performData', false)
+  }
+}
   goToCourse() {
     this.route.navigateByUrl('/Learner/MyCourse');
   }

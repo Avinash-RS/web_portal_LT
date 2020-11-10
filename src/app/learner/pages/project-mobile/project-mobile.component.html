@@ -73,8 +73,17 @@
       </mat-menu>
     </div>
   </div>
+  <div class="row ml-0 mr-0">
+    <span class="redHover">
+      <mat-icon class="material-icons f_size_15 backIc pointer" (click)="goToCourse()">arrow_back_ios
+      </mat-icon>
+      <span class="f_size_19 pointer" (click)="goToCourse()">
+        Back
+      </span>
+    </span>
+  </div>
 
-  <div class="row mr-0 ml-0">
+  <div class="row mr-0 ml-0" *ngIf="projectDetails?.length > 0">
     <div class="col-sm-12">
       <div class="box-0-1" (click)="getprojectActivityData()"  *ngFor="let project of projectDetails; let i = index" (click)="projectdetailPage = !projectdetailPage">
         <div class="row">
@@ -342,6 +351,15 @@
     </ul>
   </div>
   </ng-template>
+  </div>
+
+  <div class="row mr-0 ml-0" *ngIf="projectDetails?.length < 1">
+    <div class="col-12 m-auto text-center">
+      <span class="errormsg">
+        <img class="assignImg" alt="" src="assets/002-project-management.svg">
+        <span class="txt">You have no project activity at the moment!</span>
+      </span>
+    </div>
   </div>
 
   <ng-template #projectPreviewDialog>
