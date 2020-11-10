@@ -1889,6 +1889,7 @@ query getperformActivityData($userId: String , $courseId: String) {
           submitted_date
           submitAction
           grade_status
+          instructor_status
           comments
           videodetails{
             id
@@ -1899,6 +1900,13 @@ query getperformActivityData($userId: String , $courseId: String) {
             uploaded_date
             is_active
             }
+            assessmentreport{
+            id
+            imageurl
+            name
+            doc_type
+            size
+          }
         }
       }
     }

@@ -121,6 +121,9 @@ export class LearnerServicesService {
   itrationSend$ = new Subject<any>();
   itrationSend = this.itrationSend$.asObservable();
 
+  closeMobileResp$ = new Subject<any>();
+  closeMobileResp = this.closeMobileResp$.asObservable();
+
   public getData(userid, date) {
     return this.Apollo.query({
       query: getReadLeanerActivity,
