@@ -20,6 +20,7 @@ export class ActivitiesComponent implements OnInit {
   @ViewChild('videoInput') videoInput;
   @ViewChild('uploadInput') uploadInput;
   hover = false;
+  hoverfile = false;
   itrationStarted: boolean;
   itrationEnded: boolean;
   selectPerformfile: any[] = [];
@@ -110,6 +111,9 @@ export class ActivitiesComponent implements OnInit {
   ngOnInit() { }
 
   tabChanged(event) {
+    this.Lservice.closeMobileResp$.subscribe((data: any) => {
+      this.mobileResponsive = data;
+    });
     if (event.tab.textLabel === 'Perform') {
       this.screenHeight = window.innerHeight;
       this.screenWidth = window.innerWidth;
@@ -571,9 +575,19 @@ previewDoc(templateRef: TemplateRef<any>, path) {
   this.docpath = path;
 }
 
+openDocument(templateRef: TemplateRef<any>, path, docType) {
+ path.path = path.imageurl;
+ this.dialog.open(templateRef, {
+  width: '100%',
+  height: '100%',
+  closeOnNavigation: true,
+  disableClose: true,
+});
+this.previewDoc = path;
+}
+
 playVideo(templateRef: TemplateRef<any>, videoDialog, path, docType) {
-  console.log('docType', path);
-  if (docType === 'image/jpeg' || docType === 'application/pdf') {
+ if (docType === 'image/jpeg' || docType === 'application/pdf') {
   this.dialog.open(templateRef, {
     width: '100%',
     height: '100%',

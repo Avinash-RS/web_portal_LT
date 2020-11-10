@@ -179,6 +179,8 @@ export class PerformancePageMobileComponent implements OnInit {
             this.submitStatus = "late";
           }
         });
+      } else {
+        this.performDetails = [];
       }
     });
   }
@@ -258,7 +260,7 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
   playVideo(templateRef: TemplateRef<any>, videoDialog,  path, docType) {
-    if (docType !== 'video/mp4') {
+     if (docType !== 'video/mp4') {
       this.dialog.open(templateRef, {
         width: '100%',
         height: '100%',
@@ -319,10 +321,7 @@ learnerRecordVideo() {
         is_active : true
     }
   };
-  console.log('performVideo', performVideo);
-  return false;
   this.Lservice.learnerRecordVideo(performVideo).subscribe((data: any) => {
-    console.log('performVideo', performVideo);
     if (data.success === true) {
       this.toastr.success(data.message);
       this.videoStart = false;
@@ -335,5 +334,9 @@ learnerRecordVideo() {
       this.toastr.warning(data.message);
     }
   });
+}
+
+mobileResponsive() {
+  this.Lservice.closeMobileResp$.next(false);
 }
 }
