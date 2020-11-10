@@ -242,7 +242,7 @@ export class CoursedetailsComponent implements OnInit {
       }];
 
       this.scromModuleData = jsonData[0].childData;
-        console.log(jsonData[0].childData, 'this.scromModuleData');
+        // console.log(jsonData[0].childData, 'this.scromModuleData');
         this.scromModuleData.forEach(childData => {
           if (childData &&  childData.children) {
           childData.children.forEach(subChild => {
