@@ -61,10 +61,10 @@ export class AppComponent implements OnInit {
     this.loaderSubscription = this.commonService.loader.subscribe((val) => {
       this.isLoader = val;
     });
-    console.log("--Browser running on--",navigator.platform)
-    if(!this.runnablePlatforms.includes(navigator.platform)){
-      this.isMobile = true;
-    }
+    // console.log("--Browser running on--",navigator.platform)
+    // if(!this.runnablePlatforms.includes(navigator.platform)){
+    //   this.isMobile = true;
+    // }
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
     ).subscribe(() => {
