@@ -222,6 +222,7 @@ export class CoursedetailsComponent implements OnInit {
       if ( result && result.eventId && result.eventId.length > 0) {
       //  const courseValue = _.find(result.data.course_dtl, { course_id: this.courseid});
      //   console.log(courseValue);
+     if (result.data.course_id === this.courseid)  {
         const newKeys = {
           displayName: 'title',
           moduledetails: 'children',
@@ -241,7 +242,7 @@ export class CoursedetailsComponent implements OnInit {
       }];
 
       this.scromModuleData = jsonData[0].childData;
-        console.log(jsonData[0].childData, 'this.scromModuleData');
+        // console.log(jsonData[0].childData, 'this.scromModuleData');
         this.scromModuleData.forEach(childData => {
           if (childData &&  childData.children) {
           childData.children.forEach(subChild => {
@@ -255,6 +256,7 @@ export class CoursedetailsComponent implements OnInit {
         });
       }
       // this.playerModuleAndTopic();
+    }
      });
   }
 
@@ -500,7 +502,7 @@ export class CoursedetailsComponent implements OnInit {
       (environment.scormUrl + '/scormPlayer.html?contentID=' +
         this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
         + '&module_status=' + this.moduleSatusCheck
-        + '&module=' + moduleName + '&topic=' + topicName);
+        + '&module=' + moduleName);
     // this.playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex);
   }
 

@@ -4,6 +4,7 @@ import { MatAccordion } from '@angular/material/expansion';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { WcaService } from '@wca/services/wca.service';
+import { CommonServicesService } from "@core/services/common-services.service";
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -90,7 +91,7 @@ export class ActivitiesComponent implements OnInit {
   videoSource: any;
   projectMobileResponsive: boolean;
 
-  constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
+  constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
               public route: Router, public datePipe: DatePipe) {
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
@@ -435,6 +436,7 @@ export class ActivitiesComponent implements OnInit {
     payload.append('submitAction', submitAction);
     payload.append('iterationid', project.projectActivity.project_id);
     payload.append('object_id', project.projectActivity.project_id);
+    this.commonServices.loader$.next(true);
     this.Lservice.learnerUploadVideo(payload).subscribe((data: any) => {
       if (data.success === true) {
         this.toastr.success(data.message);
