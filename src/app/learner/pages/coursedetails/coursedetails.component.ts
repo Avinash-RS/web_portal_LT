@@ -202,9 +202,10 @@ export class CoursedetailsComponent implements OnInit {
           this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.content.url +
           '&module_status=' + 'process'
-          + '&module=' + this.getModuleandtopicInfo.modulename + '&topic=' + this.getModuleandtopicInfo.moduledetails[0].topicname);
+          + '&module=' + this.getModuleandtopicInfo.modulename + '&topic=' + this.getModuleandtopicInfo.moduledetails[0].topicname + '&location=' + this.content.page );
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
+      console.log(this.urlSafe,'this.urlSafethis.urlSafe');
     });
     this.getAssignmentmoduleData();
   }
@@ -221,6 +222,7 @@ export class CoursedetailsComponent implements OnInit {
       if ( result && result.eventId && result.eventId.length > 0) {
       //  const courseValue = _.find(result.data.course_dtl, { course_id: this.courseid});
      //   console.log(courseValue);
+     if (result.data.course_id === this.courseid)  {
         const newKeys = {
           displayName: 'title',
           moduledetails: 'children',
@@ -240,7 +242,7 @@ export class CoursedetailsComponent implements OnInit {
       }];
 
       this.scromModuleData = jsonData[0].childData;
-        console.log(jsonData[0].childData, 'this.scromModuleData');
+        // console.log(jsonData[0].childData, 'this.scromModuleData');
         this.scromModuleData.forEach(childData => {
           if (childData &&  childData.children) {
           childData.children.forEach(subChild => {
@@ -254,6 +256,7 @@ export class CoursedetailsComponent implements OnInit {
         });
       }
       // this.playerModuleAndTopic();
+    }
      });
   }
 
