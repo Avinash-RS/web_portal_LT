@@ -2783,6 +2783,9 @@ li {
     left: 67px !important;
 }
 
+::ng-deep .mat-tab-body-content {
+  overflow: hidden !important;
+}
 // SKELETON
 .demo:empty {
   // margin: auto;

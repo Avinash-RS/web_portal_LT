@@ -37,6 +37,9 @@ export class MycourseItemComponent implements OnInit {
   finalStatus: any = null;
   role: any;
   courseWeekCircle:any;
+  instDefault: any = '../../../../assets/learner/mycourseicons/Instructor_default.svg';
+  activityDefault: any = '../../../../assets/learner/mycourseicons/Activities_defult.svg';
+  discussDefault: any = '../../../../assets/learner/mycourseicons/Discussion_default.svg'
   constructor(
     public translate: TranslateService,
     public service: CommonServicesService,
@@ -118,6 +121,7 @@ export class MycourseItemComponent implements OnInit {
       name: c.course_name
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
-    this.router.navigateByUrl('/Learner/instructorLed', { state: { detail } });
+    // this.router.navigateByUrl('/Learner/instructorLed', { state: { detail } });
+    this.router.navigate(['/Learner/instructorLed'], { queryParams: detail }); // ['/booking'],{queryParams: {Id :id}}
   }
 }
