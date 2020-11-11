@@ -622,7 +622,7 @@ hr {
 .tabsc {
   & .mat-badge-content {
     color: $color-white;
-    background: $lxp-theme-green !important;
+  //  background: $lxp-theme-green !important;
   }
 
 }
@@ -2875,4 +2875,12 @@ li {
           120px 80px,
           120px 120px;
   }
+}
+
+::ng-deep .matTabCol .mat-tab-label-active .mat-badge-active{
+background :#BA2020 !important;
+}
+
+::ng-deep .matTabCol .mat-badge-active{
+  background: #B8B8B8 ;
 }
