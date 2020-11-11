@@ -39,7 +39,7 @@
             </div>
             <div class="coursePoints">
               <table class="f_size_12">
-                <tr>
+                <tr *ngIf="course.isBatchCourse">
                   <td>Instructor led sessions</td>
                   <td>Upto {{course.image_instructor_lead_session_time!==""?course.image_instructor_lead_session_time:0}}</td>
                   <!-- <td>Upto {{globalData.on_hover_image_data.instructor_lead_session}}</td> -->
@@ -48,16 +48,16 @@
                   <td>Self paced learning</td>
                   <td>{{course.image_self_paced_learning_time!==""?course.image_self_paced_learning_time:0}}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="course.isBatchCourse">
                   <!-- Mid course project -->
                   <td>Course project</td>
                   <td>{{course.total_mid_course_project_count!==""?course.total_mid_course_project_count:0}}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="course.isBatchCourse">
                   <td>Internal assessment</td>
                   <td>{{course.internal_assesment!==""?course.internal_assesment:0}}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="course.isBatchCourse">
                   <td>Final assessment</td>
                   <td>{{course.final_assesment!==""?course.final_assesment:0}}</td>
                 </tr>
