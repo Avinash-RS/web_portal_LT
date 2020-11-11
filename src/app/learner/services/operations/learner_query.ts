@@ -760,6 +760,7 @@ message{
         course_mode
         course_type
         course_language
+        course_status
         feed_back
         drm
         user_role
