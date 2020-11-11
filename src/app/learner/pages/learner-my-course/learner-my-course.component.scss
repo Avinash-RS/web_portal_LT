@@ -2780,6 +2780,42 @@ li {
 ::ng-deep .mat-tab-body-content {
   overflow: hidden !important;
 }
+
+.noSessionCard {
+  margin: auto;
+  margin-top: 15%;
+  border-radius: 0;
+  opacity: 1;
+  text-align: center;
+  padding-bottom: 8px !important;
+  padding-right: 0px !important;
+
+  background: #F5F5F5 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 4px #00000029;
+  opacity: 1;
+  border-left: 3px solid #ffc107bf !important;
+  width: 40%;
+}
+.noSessionImg {
+  width: 45px;
+  margin-left: 0%;
+}
+
+.mar-t-12{
+  margin-top: 12px !important;
+  margin-bottom: 12px !important;
+}
+.pad-t-2{
+  padding-top: 2px !important;
+}
+.noData {
+  text-align: left;
+  font: normal normal normal 23px/29px Roboto Condensed;
+  letter-spacing: 0px;
+  color: #333333;
+  opacity: 1;
+  padding-top: 10px;
+}
 // SKELETON
 .demo:empty {
   // margin: auto;

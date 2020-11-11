@@ -202,16 +202,16 @@
           <!-- card end -->
 
           <div *ngIf="onGoingCourseCount === 0">
-            <mat-card class="coursebg center_align center">
-              <div class="row center">
-                <div class="pointer" (click)="gotoDesc(course)">
-                  <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
+            <mat-card class="noSessionCard color-yellow-card-status">
+              <div class="row mar-t-12">
+                <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+                  <img class="noSessionImg" src="assets/noCourseNewImg.svg"> 
+                </div>
+                <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+                  <span class=""> You have no ongoing courses at the moment!</span>
                 </div>
               </div>
-              <div class="row center">
-                <span style="font-size: medium">{{ "You have no ongoing courses at the moment!" | translate }}</span>
-              </div>
-            </mat-card>
+            </mat-card> 
           </div>
         </mat-tab>
         <mat-tab>
@@ -243,16 +243,16 @@
               </div>
             </mat-card>
             <hr class="hr-tag" /> -->
-            <mat-card class="coursebg center_align center">
-              <div class="row center">
-                <div class="pointer" (click)="gotoDesc(course)">
-                  <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
+            <mat-card class="noSessionCard color-yellow-card-status">
+              <div class="row mar-t-12">
+                <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+                  <img class="noSessionImg" src="assets/noCourseNewImg.svg"> 
+                </div>
+                <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+                  <span class=""> You have no ongoing courses at the moment!</span>
                 </div>
               </div>
-              <div class="row center">
-                <span style="font-size: medium">{{ "You have no ongoing courses at the moment!" | translate }}</span>
-              </div>
-            </mat-card>
+            </mat-card> 
           </div>
         </mat-tab>
         <mat-tab>
@@ -274,18 +274,16 @@
 
           <div *ngIf="completedCourseCount === 0">
 
-            <mat-card class="coursebg center_align center">
-              <div class="row center">
-                <div class="pointer" (click)="gotoDesc(course)">
-                  <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
+            <mat-card class="noSessionCard color-yellow-card-status">
+              <div class="row mar-t-12">
+                <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+                  <img class="noSessionImg" src="assets/noCourseNewImg.svg"> 
+                </div>
+                <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+                  <span class=""> You have no completed courses at the moment!</span>
                 </div>
               </div>
-              <div class="row center">
-                <span style="font-size: medium">{{
-                  "You have no completed courses at the moment!" | translate
-                }}</span>
-              </div>
-            </mat-card>
+            </mat-card> 
             <!-- <hr class="hr-tag" /> -->
           </div>
         </mat-tab>
@@ -303,16 +301,16 @@
 
           <div *ngIf="allCourseCount === 0">
 
-            <mat-card class="coursebg center_align center">
-              <div class="row center">
-                <div class="pointer" (click)="gotoDesc(course)">
-                  <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
+            <mat-card class="noSessionCard color-yellow-card-status">
+              <div class="row mar-t-12">
+                <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+                  <img class="noSessionImg" src="assets/noCourseNewImg.svg"> 
+                </div>
+                <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+                  <span class=""> You have no courses at the moment!</span>
                 </div>
               </div>
-              <div class="row center">
-                <span style="font-size: medium">{{ "You have no courses at the moment!" | translate }}</span>
-              </div>
-            </mat-card>
+            </mat-card> 
           </div>
         </mat-tab>
         <!-----------------------------------Category tabs----------------------------->
