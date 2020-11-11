@@ -45,7 +45,7 @@ export class ActivitiesComponent implements OnInit {
   activityEndDate: string;
   performDetails: any;
   iterationDetails: any;
-  selectedIndex = 0;
+  selectedIndex: any;
   selectfile = [];
   showSubmittedon = false;
   fileName: any;
@@ -392,6 +392,8 @@ export class ActivitiesComponent implements OnInit {
         element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
         const endDate = new Date(element.performActivity.activityenddate);
         element.activityEndDate = moment(endDate).format('ll');
+        element.endDate = moment(endDate).format('DD-MM-YYYY HH:MM');
+
         if (moment(new Date()).format('DD-MM-YYYY HH:MM') < element.activityStartDate) {
           this.itrationStarted = true;
         } else {
@@ -399,18 +401,19 @@ export class ActivitiesComponent implements OnInit {
         }
         if ( moment(new Date()).format('DD-MM-YYYY HH:MM') > element.activityEndDate) {
           this.itrationEnded = true;
-          this.submitStatus = 'ontime';
         } else {
           this.itrationEnded = false;
-          this.submitStatus = 'late';
         }
+        if (moment().format('DD-MM-YYYY HH:MM') >= element.startDate &&
+        moment().format('DD-MM-YYYY HH:MM') <= element.endDate) {
+        this.submitStatus = 'ontime';
+      } else if (moment().format('DD-MM-YYYY HH:MM') > element.endDate) {
+        this.submitStatus = 'late';
+      }
       });
     }
-    console.log('this.itrationStarted', this.itrationStarted);
-    console.log('this.itrationEnded', this.itrationEnded);
     });
   }
-  
   learnerUploadVideo(project, submitAction) {
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:MM');
