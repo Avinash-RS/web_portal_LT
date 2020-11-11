@@ -404,7 +404,7 @@ margin-bottom: 1% !important;
 .topic {
   margin-top: 19px;
 }
-::ng-deep .list-group-item {
+::ng-deep .learnerData .list-group-item{
 background: #FBF6E1 0% 0% no-repeat padding-box !important;
 box-shadow: 0px 1px 2px #00000029 !important;
 border: 0.5px solid #D6D6D6 !important;
@@ -688,6 +688,30 @@ margin-top: 8px;
  height: 15rem !important;
 }
 
+::ng-deep .itdata .owl-item {
+  width: 160px !important;
+}
+
+::ng-deep .itdata .arrow .owl-carousel .owl-nav .owl-prev {
+  position: absolute;
+  top: 20%;
+  z-index: 1 !important;
+  left: -18px;
+  height: 50px;
+  width: 50px;
+
+}
+
+::ng-deep .itdata .arrow .owl-carousel .owl-nav .owl-next {
+  position: absolute;
+  top: 20%;
+  z-index: 1 !important;
+  right: -18px;
+  height: 50px;
+  width: 50px;
+
+}
+
 :host ::ng-deep .owlItration .owl-theme {
   height: 9rem !important;
  }
@@ -747,7 +771,7 @@ border: 1px solid #ccc;
   height: 60%;
 }
 
-matCardIconRow1 {
+.matCardIconRow1 {
   height: 71%;
 }
 
@@ -773,7 +797,7 @@ matCardIconRow1 {
 }
 
 .fileSelDetHover {
-  height: 5.7rem;
+  height: 3rem;
   background-color: #5C6873;
 }
 
@@ -784,4 +808,34 @@ matCardIconRow1 {
 .fileColor {
   font-size: 10px;
   color:#E8E8E8;
+}
+
+.playBtnmobile {
+  font-size: 14px;
+  top: 3px;
+  left: 0rem;
+}
+
+.actionBtnmobile {
+  font-size: 10px;
+  margin-left: 1rem;
+}
+
+.downloadBtnMobile {
+  font-size: 10px;
+  top: 0.3rem;
+}
+
+.colActionDownload {
+  padding-left: 0px;
+  cursor: pointer;
+}
+
+.actionBtn1Mobile {
+  font-size: 10px;
+  margin-left: 1rem;
+}
+
+.m-l {
+  margin-left: 44px;
 }
