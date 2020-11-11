@@ -203,7 +203,6 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
   getPerformActivity(number, performActivity) {
-    console.log("performActivity", number, performActivity);
     this.indexNumber = number;
     this.performActivityData = performActivity;
   }
@@ -215,16 +214,16 @@ export class PerformancePageMobileComponent implements OnInit {
     for (let i = 0; i < this.selectPerformfile.length; i++) {
       performVideo.append('uploadvideo', this.selectPerformfile[i]);
     }
-    performVideo.append('course_id', this.performsData.performActivity.course_id);
-    performVideo.append('module_id', this.performsData.performActivity.module_id);
-    performVideo.append('topic_id', this.performsData.performActivity.topic_id);
+    performVideo.append('course_id', this.performsData.course_id);
+    performVideo.append('module_id', this.performsData.module_id);
+    performVideo.append('topic_id', this.performsData.topic_id);
     performVideo.append('user_id', this.userDetail.user_id);
     performVideo.append('submit_status', this.submitStatus);
     performVideo.append('total_mark', this.itrationData.total_mark);
     performVideo.append('submitType', 'perform');
     performVideo.append('submitAction', this.submitType);
     performVideo.append('iterationid', this.itrationData.iterationid);
-    performVideo.append('object_id', this.performsData.performActivity.perform_id);
+    performVideo.append('object_id', this.performsData.perform_id);
     this.commonServices.loader$.next(true);
     this.Lservice.learnerUploadVideo(performVideo).subscribe((data: any) => {
       if (data.success === true) {
