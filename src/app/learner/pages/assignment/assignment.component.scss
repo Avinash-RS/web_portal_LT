@@ -1,0 +1,309 @@
+@import "../../../../assets/variable.scss";
+@media (max-width: 768px) {
+  .dot {
+    height: 10px;
+    width: 10px;
+    background-color: #6A6A6A;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: inline-block;
+  }
+  
+  .submitdot {
+    background-color: #FFA04E;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: inline-block;
+  }
+
+  .gradedot {
+      background-color: #0C781B;
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      display: inline-block;
+  }
+
+.textGrayColor {
+  color: $color-lightGray;
+}
+
+.submitstatus {
+  color: #FFA04E;
+}
+
+.gradeStatus {
+  color: #0C781B;
+}
+
+.performCard {
+    width: 100%;
+    height: 10rem;
+    padding: 8px !important;
+}
+
+.titleCase {
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.subTittle {
+    font-size: 14px;
+    font-weight: bolder;
+    color: black;
+    margin: 0 0 10px !important;
+}
+
+.yettoSubmit {
+    margin: 0px 0px 3px;
+}
+
+.activityDisc {
+  color: $label2;
+  margin: 0px 0px 3px;
+}
+
+.brickMaking {
+  font-size: 14px;
+  color: #666666;
+}
+
+.matCard {
+  padding: 16px 10px 16px 10px !important;
+}
+
+.matIcon {
+    position: absolute;
+    top: -5px;
+    right: 0px;
+}
+
+.arrowPopup {
+    position: absolute;
+    top: -3px;
+}
+
+.itration {
+  margin: 0px 0px 20px;
+}
+
+:host ::ng-deep  .recordBtn .mat-button-wrapper {
+  margin-left: 4rem;
+}
+
+.uploadBtn {
+  height: 3rem;
+  font-weight: bolder;
+  font-size: 15px;
+}
+
+.add-icon {
+  font-weight: bolder;
+}
+
+.recordBtn {
+  height: 4rem;
+  background-color: #F5F5F5;
+  font-size: 16px;
+  font-weight: bolder;
+  color: #666666;
+}
+
+.video-icon {
+  font-size: 55px;
+  color: $lxp-theme-green;
+  position: absolute;
+  left: 5rem;
+  top: 0rem;
+}
+
+.submitted-btn{
+  color: $color-white !important;
+  background-color: #898989;
+  width: 45%;
+  // margin-top: 6%;
+  cursor: not-allowed;
+}
+
+.submitBtn {
+  height: 3rem;
+  width: 80%;
+  background-color: $lxp-theme-green;
+  color: $color-white;
+  margin-left: 2.1rem;
+}
+:host ::ng-deep .submitBtn .mat-stroked-button:not([disabled]) {
+  color: #ffffff96 !important;
+  background-color: #c0222299 !important;
+}
+
+.playBtn {
+  font-size: 25px;
+  position: absolute;
+  top: 1.10rem;
+  left: 0.7rem;
+  color: white;
+}
+
+.catnamenew {
+    color: #3f444a;
+    text-transform: capitalize;
+    font-size: 16px;
+    margin-left: 2rem;
+    font-weight: 900 !important;
+  }
+
+  .previewTxt {
+    font-size: 16px;
+  }
+
+  .previewVideoScreen {
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    background-color: white;
+    position: absolute;
+  }
+
+  .previewCol {
+    border: 1px solid #66666680;
+    padding: 1rem;
+  }
+
+  .previewCard {
+    width: 90%;
+  }
+
+  .videoCell {
+    height: 180px;
+  }
+
+  .fileSelDet {
+    background-color: #5C6873;
+    height: 40%;
+  }
+
+  .fileNameCol {
+    padding-left: 5px !important;
+  }
+
+  .icons {
+    font-size: 30px;
+    padding: 1.2rem 2.5rem;
+    color: #898989;
+  }
+
+  .materialCard {
+    width: 7rem;
+    height: 8rem;
+  }
+
+  .fileColor {
+    font-size: 10px;
+    color:#E8E8E8;
+  }
+
+  .saveBtn {
+    color: $color-white;
+    background-color: $lxp-theme-green;
+    height: 2rem;
+    width: 6rem;
+  }
+
+  .cancelBtn {
+    border: 1px solid $lxp-theme-green;
+    height: 2rem;
+    width: 6rem;
+    margin-left: 21%;
+  }
+
+  .textSize {
+    font-size: 12px;
+  }
+
+  .matCardIconRow {
+    height: 60%;
+  }
+  #upload-file {
+    opacity: 0;
+    position: absolute;
+    left: 58px;
+  }
+  .border {
+    border: 1px solid gray;
+  }
+  .width {
+    position: relative;
+    width: 100%;
+  }
+  .gradedUpload {
+    color: $lxp-icon !important;
+    cursor: not-allowed !important;
+  }
+
+  .download-button {
+    background: $lxp-theme-green !important; // red color
+    float: right;
+    position: relative;
+    top: -12px;
+    right: 26px;
+    height: 35px;
+    width: 35px;
+  }
+  .close-button {
+    background: $lxp-theme-green !important; // red color
+    float: right;
+    top: -12px;
+    position: relative;
+    right: -53px;
+    height: 35px;
+    width: 35px;
+  }
+  .download-icon {
+    position: relative;
+    bottom: 2px;
+  }
+  
+  .expand {
+    margin: 10px;
+  }
+
+  .height {
+    position: relative;
+    height: 145px !important;
+    padding-left: 5px;
+    padding-right: 7px;
+  }
+
+  .score {
+    position: absolute;
+    top: 0px;
+    left: 135px;
+  }
+  .errmsg {
+    height: 28rem;
+  }
+  .errormsg {
+    padding: 20px 24px 20px 0px;
+    font-size: 14px;
+    font-weight: 500;
+    background: #F7FBFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 0.5px solid #707070;
+    border-radius: 10px;
+    opacity: 1;
+  }
+  .assignImg {
+    width: 10%;
+    height: 33px;
+  }
+  .m-l {
+    margin-left: 5px;
+  }
+  // :host ::ng-deep .mat-expansion-indicator::after {
+  //   position: relative;
+  //   top: -60px;
+  // }
+}
