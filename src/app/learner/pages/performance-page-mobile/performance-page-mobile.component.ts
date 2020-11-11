@@ -49,6 +49,11 @@ export class PerformancePageMobileComponent implements OnInit {
   docpath: any = null;
   videoSource: any;
   preview: boolean;
+  videoUrl: any;
+  videoStart = false;
+  performDetailsSend: any;
+  itrationSend: any;
+  videoDetails: any;
 
   constructor(
     private commonServices: CommonServicesService,
@@ -78,12 +83,39 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
   ngOnInit() {
-    //console.log("this.performDetails 1");
+    this.Lservice.closeRecoderdData$.subscribe((data: any) => {
+      console.log('data', data);
+      this.videoUrl = data.videourl;
+      this.videoDetails = data;
+      if (this.videoUrl) {
+      this.videoStart = true;
+      }
+    });
+    this.Lservice.performDetailsSend$.subscribe((data: any) => {
+      this.performDetailsSend = data;
+    });
+    this.Lservice.itrationSend$.subscribe((data: any) => {
+      this.itrationSend = data;
+    });
+
+    console.log('this.videoStart', this.videoStart);
     this.getperformActivityData();
   }
 
-  getData(itration) {
+  getData(templateRef: TemplateRef<any>, itration) {
     this.itrationDataSend = itration;
+    this.videoStart = false;
+    this.dialog.open(templateRef, {
+      width: '100%',
+      height: '100%',
+      panelClass: 'matDialogMat1',
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+  }
+
+  closeDialog() {
+    this.dialog.closeAll();
   }
  
     submitDeleteVideo(videoName, itrdata, perform) {
@@ -134,19 +166,21 @@ export class PerformancePageMobileComponent implements OnInit {
           element.startDate = moment(startDate).format("DD-MM-YYYY HH:MM");
           const endDate = new Date(element.performActivity.activityenddate);
           element.activityEndDate = moment(endDate).format("ll");
-          if (moment(new Date()).format("ll") < element.activityStartDate) {
+          if (moment(new Date()).format("DD-MM-YYYY HH:MM") < element.activityStartDate) {
             this.itrationStarted = true;
           } else {
             this.itrationStarted = false;
           }
-          if (moment(new Date()).format("ll") > element.activityEndDate) {
+          if (moment(new Date()).format("DD-MM-YYYY HH:MM") > element.activityEndDate) {
             this.itrationEnded = true;
-            this.submitStatus = "ontime";
+            this.submitStatus = 'late';
           } else {
             this.itrationEnded = false;
-            this.submitStatus = "late";
+            this.submitStatus = 'ontime';
           }
         });
+      } else {
+        this.performDetails = [];
       }
     });
   }
@@ -169,7 +203,6 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
   getPerformActivity(number, performActivity) {
-    console.log("performActivity", number, performActivity);
     this.indexNumber = number;
     this.performActivityData = performActivity;
   }
@@ -181,17 +214,17 @@ export class PerformancePageMobileComponent implements OnInit {
     for (let i = 0; i < this.selectPerformfile.length; i++) {
       performVideo.append('uploadvideo', this.selectPerformfile[i]);
     }
-    performVideo.append('course_id', this.performsData.performActivity.course_id);
-    performVideo.append('module_id', this.performsData.performActivity.module_id);
-    performVideo.append('topic_id', this.performsData.performActivity.topic_id);
+    performVideo.append('course_id', this.performsData.course_id);
+    performVideo.append('module_id', this.performsData.module_id);
+    performVideo.append('topic_id', this.performsData.topic_id);
     performVideo.append('user_id', this.userDetail.user_id);
     performVideo.append('submit_status', this.submitStatus);
     performVideo.append('total_mark', this.itrationData.total_mark);
     performVideo.append('submitType', 'perform');
     performVideo.append('submitAction', this.submitType);
     performVideo.append('iterationid', this.itrationData.iterationid);
-    performVideo.append('object_id', this.performsData.performActivity.perform_id);
-
+    performVideo.append('object_id', this.performsData.perform_id);
+    this.commonServices.loader$.next(true);
     this.Lservice.learnerUploadVideo(performVideo).subscribe((data: any) => {
       if (data.success === true) {
         this.toastr.success(data.message);
@@ -226,7 +259,7 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
   playVideo(templateRef: TemplateRef<any>, videoDialog,  path, docType) {
-    if (docType !== 'video/mp4') {
+     if (docType !== 'video/mp4') {
       this.dialog.open(templateRef, {
         width: '100%',
         height: '100%',
@@ -251,7 +284,9 @@ previewDoc(templateRef: TemplateRef<any>, path) {
 }
 
 videoPreview(templateRef: TemplateRef<any>, path) {
-  this.videoSource = path.path;
+  console.log('path', path);
+  this.videoSource = path.videourl;
+  console.log('this.videoSource', this.videoSource);
   this.dialog.open(templateRef, {
     width: '100%',
     height: '100%',
@@ -259,5 +294,48 @@ videoPreview(templateRef: TemplateRef<any>, path) {
     closeOnNavigation: true,
     disableClose: true,
   });
+}
+
+// upload recorded video
+learnerRecordVideo() {
+  const performVideo = {
+    course_id : this.performDetailsSend.course_id,
+    module_id : this.performDetailsSend.module_id,
+    topic_id : this.performDetailsSend.topic_id,
+    user_id: this.userDetail.user_id,
+    submit_status: 'ontime',
+    total_mark: this.itrationSend.total_mark,
+    submitType: 'perform',
+    submitAction: 'upload',
+    recordvideo : true,
+    iterationid: this.itrationSend.iterationid,
+    object_id: this.performDetailsSend.perform_id,
+    videodetails : {
+        doc_type : 'video/mp4',
+        videourl : this.videoDetails.videourl,
+        name : this.videoDetails.fileName,
+        size : this.videoDetails.size,
+        id : this.performDetailsSend.perform_id,
+        uploaded_date : new Date(),
+        is_active : true
+    }
+  };
+  this.Lservice.learnerRecordVideo(performVideo).subscribe((data: any) => {
+    if (data.success === true) {
+      this.toastr.success(data.message);
+      this.videoStart = false;
+      this.performDetailsSend = {};
+      this.videoDetails = {};
+      this.itrationSend = {};
+      this.closeDialog();
+      this.getperformActivityData();
+    } else {
+      this.toastr.warning(data.message);
+    }
+  });
+}
+
+mobileResponsive() {
+  this.Lservice.closeMobileResp$.next(false);
 }
 }

@@ -4,6 +4,7 @@ import { MatAccordion } from '@angular/material/expansion';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { WcaService } from '@wca/services/wca.service';
+import { CommonServicesService } from "@core/services/common-services.service";
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -19,6 +20,7 @@ export class ActivitiesComponent implements OnInit {
   @ViewChild('videoInput') videoInput;
   @ViewChild('uploadInput') uploadInput;
   hover = false;
+  hoverfile = false;
   itrationStarted: boolean;
   itrationEnded: boolean;
   selectPerformfile: any[] = [];
@@ -43,7 +45,7 @@ export class ActivitiesComponent implements OnInit {
   activityEndDate: string;
   performDetails: any;
   iterationDetails: any;
-  selectedIndex = 0;
+  selectedIndex: any;
   selectfile = [];
   showSubmittedon = false;
   fileName: any;
@@ -90,7 +92,7 @@ export class ActivitiesComponent implements OnInit {
   videoSource: any;
   projectMobileResponsive: boolean;
 
-  constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
+  constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
               public route: Router, public datePipe: DatePipe) {
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
@@ -109,6 +111,9 @@ export class ActivitiesComponent implements OnInit {
   ngOnInit() { }
 
   tabChanged(event) {
+    this.Lservice.closeMobileResp$.subscribe((data: any) => {
+      this.mobileResponsive = data;
+    });
     if (event.tab.textLabel === 'Perform') {
       this.screenHeight = window.innerHeight;
       this.screenWidth = window.innerWidth;
@@ -121,7 +126,6 @@ export class ActivitiesComponent implements OnInit {
   }
 
   projectTab(event) {
-    console.log('eve', event.tab.textLabel);
     if (event.tab.textLabel === 'Project') {
       this.screenHeight = window.innerHeight;
       this.screenWidth = window.innerWidth;
@@ -388,6 +392,8 @@ export class ActivitiesComponent implements OnInit {
         element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
         const endDate = new Date(element.performActivity.activityenddate);
         element.activityEndDate = moment(endDate).format('ll');
+        element.endDate = moment(endDate).format('DD-MM-YYYY HH:MM');
+
         if (moment(new Date()).format('DD-MM-YYYY HH:MM') < element.activityStartDate) {
           this.itrationStarted = true;
         } else {
@@ -395,18 +401,19 @@ export class ActivitiesComponent implements OnInit {
         }
         if ( moment(new Date()).format('DD-MM-YYYY HH:MM') > element.activityEndDate) {
           this.itrationEnded = true;
-          this.submitStatus = 'ontime';
         } else {
           this.itrationEnded = false;
-          this.submitStatus = 'late';
         }
+        if (moment().format('DD-MM-YYYY HH:MM') >= element.startDate &&
+        moment().format('DD-MM-YYYY HH:MM') <= element.endDate) {
+        this.submitStatus = 'ontime';
+      } else if (moment().format('DD-MM-YYYY HH:MM') > element.endDate) {
+        this.submitStatus = 'late';
+      }
       });
     }
-    console.log('this.itrationStarted', this.itrationStarted);
-    console.log('this.itrationEnded', this.itrationEnded);
     });
   }
-  
   learnerUploadVideo(project, submitAction) {
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:MM');
@@ -435,6 +442,7 @@ export class ActivitiesComponent implements OnInit {
     payload.append('submitAction', submitAction);
     payload.append('iterationid', project.projectActivity.project_id);
     payload.append('object_id', project.projectActivity.project_id);
+    this.commonServices.loader$.next(true);
     this.Lservice.learnerUploadVideo(payload).subscribe((data: any) => {
       if (data.success === true) {
         this.toastr.success(data.message);
@@ -521,6 +529,7 @@ performlearnerUploadVideo() {
   performVideo.append('submitAction', this.submitType);
   performVideo.append('iterationid', this.itrationData.iterationid);
   performVideo.append('object_id', this.performsData.performActivity.perform_id);
+  this.commonServices.loader$.next(true);
   this.Lservice.learnerUploadVideo(performVideo).subscribe((data: any) => {
     if (data.success === true) {
       this.toastr.success(data.message);
@@ -570,9 +579,19 @@ previewDoc(templateRef: TemplateRef<any>, path) {
   this.docpath = path;
 }
 
+openDocument(templateRef: TemplateRef<any>, path, docType) {
+ path.path = path.imageurl;
+ this.dialog.open(templateRef, {
+  width: '100%',
+  height: '100%',
+  closeOnNavigation: true,
+  disableClose: true,
+});
+this.previewDoc = path;
+}
+
 playVideo(templateRef: TemplateRef<any>, videoDialog, path, docType) {
-  console.log('docType', path);
-  if (docType === 'image/jpeg' || docType === 'application/pdf') {
+ if (docType === 'image/jpeg' || docType === 'application/pdf') {
   this.dialog.open(templateRef, {
     width: '100%',
     height: '100%',
@@ -581,6 +600,9 @@ playVideo(templateRef: TemplateRef<any>, videoDialog, path, docType) {
   });
   this.previewDoc = path;
   } else if (docType === 'video/mp4') {
+    if (path.videourl) {
+      path.path = path.videourl;
+    }
     this.videoSource = path.path;
     this.videoPreview(videoDialog, path.path);
   }

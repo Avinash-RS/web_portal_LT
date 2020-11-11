@@ -1,4 +1,6 @@
 @import "assets/variable";
+@import '~video.js/dist/video-js.css';
+@import '~videojs-record/dist/css/videojs.record.css';
 /* You can add global styles to this file, and also import other style files */
 // @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 // @import "~@angular/material/prebuilt-themes/indigo-pink.css";
@@ -10,9 +12,12 @@
 @import "~bootstrap/scss/bootstrap-reboot";
 // @import "~bootstrap/scss/bootstrap-grid";
 
+
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 @import "../node_modules/ag-grid-community/src/styles/ag-grid.scss";
 @import "../node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin.scss";
+
+@import "assets/iconfonts";
 
 .ag-theme-alpine {
   @include ag-theme-alpine();
