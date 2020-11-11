@@ -271,11 +271,19 @@
                 (click)="isperformColaps = !isperformColaps; performId = i">keyboard_arrow_up
               </mat-icon>
               <br>
-              <div
+              <div *ngIf="perform.performActivity.submittedTotal == 0"
                 [ngClass]="perform.performActivity.submittedTotal > 0 ? 'mt-2 mb-2 itrationTxts' : 'mt-2 mb-2 itrationTxt'"
                 class="">Iterations : <span
                   *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} /
                 </span>{{perform.performActivity.iterationTotal}}</div>
+
+                <div *ngIf="perform.performActivity.submittedTotal > 0"
+                [ngClass]="perform.performActivity.submittedTotal > 0 ? 'mt-2 mb-2 itrCount' : 'mt-2 mb-2 itrationTxt'"
+                class="">Completed iterations : <span
+                  *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} /
+                </span>{{perform.performActivity.iterationTotal}}</div>
+
+
               <div class="m-l-68">Start date :<span class="endDateTxt"></span>End date :</div>
               <div class="m-l-68 f_wt_600">{{perform.activityStartDate}}
                 <span class="EndDate f_wt_600"></span>{{perform.activityEndDate}}</div>
