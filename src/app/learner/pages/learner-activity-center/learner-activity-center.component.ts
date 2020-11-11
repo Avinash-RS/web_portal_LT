@@ -229,6 +229,7 @@ export class LearnerActivityCenterComponent implements OnInit {
     this.searchValue = globalSearchValue ? globalSearchValue : '';
     // console.log(searchColumnVal, 'sc');
     this.searchColumn = searchColumnVal;
+    console.log(this.searchColumn, searchColumnVal,'sc');
     this.gridApi.setDatasource({
       getRows: (params: IGetRowsParams) => {
         const userId = this.userDetails.user_id;
