@@ -10,6 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { appendFile } from 'fs';
+
+
 @Component({
   selector: 'app-activities',
   templateUrl: './activities.component.html',
@@ -20,6 +22,7 @@ export class ActivitiesComponent implements OnInit {
   @ViewChild('videoInput') videoInput;
   @ViewChild('uploadInput') uploadInput;
   hover = false;
+  isLoader = false;
   hoverfile = false;
   itrationStarted: boolean;
   itrationEnded: boolean;
@@ -393,17 +396,10 @@ export class ActivitiesComponent implements OnInit {
         const endDate = new Date(element.performActivity.activityenddate);
         element.activityEndDate = moment(endDate).format('ll');
         element.endDate = moment(endDate).format('DD-MM-YYYY HH:MM');
-
-        if (moment(new Date()).format('DD-MM-YYYY HH:MM') < element.activityStartDate) {
-          this.itrationStarted = true;
-        } else {
-          this.itrationStarted = false;
-        }
-        if ( moment(new Date()).format('DD-MM-YYYY HH:MM') > element.activityEndDate) {
-          this.itrationEnded = true;
-        } else {
-          this.itrationEnded = false;
-        }
+        let strtDate = new Date(element.activityStartDate);
+        let edDate = new Date(element.activityEndDate);
+        let crrDate = new Date();
+        element['itrationStarted'] = this.dateDiff(strtDate, edDate, crrDate);
         if (moment().format('DD-MM-YYYY HH:MM') >= element.startDate &&
         moment().format('DD-MM-YYYY HH:MM') <= element.endDate) {
         this.submitStatus = 'ontime';
@@ -414,6 +410,18 @@ export class ActivitiesComponent implements OnInit {
     }
     });
   }
+
+  dateDiff(startDate, endDate, currentDate) {
+    let startDateDiff = startDate - currentDate;
+    let endDateDiff = endDate - currentDate;
+    if ((startDateDiff <= 0 ) && (endDateDiff >= 0)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   learnerUploadVideo(project, submitAction) {
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:MM');
@@ -449,9 +457,9 @@ export class ActivitiesComponent implements OnInit {
         this.showSubmittedon = true;
         this.getprojectActivityData();
         this.selectfile = [];
-      } else {
+       } else {
         this.toastr.warning(data.message);
-      }
+       }
     });
   }
 
@@ -505,7 +513,7 @@ export class ActivitiesComponent implements OnInit {
   this.performlearnerUploadVideo();
 }
 
-uploadDocuments(perform, performans) {
+uploadDocuments(e,perform, performans) {
   this.performsData = performans;
   this.itrationData = perform;
   this.videoInput.nativeElement.click();
@@ -529,7 +537,6 @@ performlearnerUploadVideo() {
   performVideo.append('submitAction', this.submitType);
   performVideo.append('iterationid', this.itrationData.iterationid);
   performVideo.append('object_id', this.performsData.performActivity.perform_id);
-  this.commonServices.loader$.next(true);
   this.Lservice.learnerUploadVideo(performVideo).subscribe((data: any) => {
     if (data.success === true) {
       this.toastr.success(data.message);
@@ -537,7 +544,7 @@ performlearnerUploadVideo() {
       this.selectPerformfile = [];
     } else {
       this.toastr.warning(data.message);
-    }
+   }
   });
 }
 
