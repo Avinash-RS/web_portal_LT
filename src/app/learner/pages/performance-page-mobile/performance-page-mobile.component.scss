@@ -86,6 +86,11 @@
     top: -3px;
 }
 
+.arrowPerform {
+  position: absolute;
+  top: 0.6rem;
+}
+
 .itration {
   margin: 0px 0px 20px;
 }
@@ -274,6 +279,7 @@
   align-content: left;
   border-block-end-width: 1px solid #BEBEBEBF;
   color: $label2;
+  width: 100%;
 }
 
 .feedBackTxt {
@@ -293,4 +299,8 @@
 
 ::ng-deep .matDialogMat1 .mat-dialog-container {
   padding: 0px !important;
+}
+
+.performHeight {
+  height: 3rem;
 }

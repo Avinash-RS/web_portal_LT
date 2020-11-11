@@ -615,8 +615,29 @@ margin-top: 8px;
 }
 .imageIcon {
   font-size: 50px;
-  margin-left: 2.7rem;
+  margin-left: 3.2rem;
   color: #898989;
+}
+.feedBackTxt {
+  color: $label2;
+}
+
+.AssignmentBtn {
+  height: 3rem;
+  font-weight: bolder;
+  font-size: 15px;
+  border: 1px solid #707070;
+}
+
+.textArea {
+  align-content: left;
+  border-block-end-width: 1px solid #BEBEBEBF;
+  color: $label2;
+  width: 100%;
+}
+
+.assignmentIcon {
+  color: #5C6873;
 }
 
 .pdfIcon {
@@ -666,6 +687,34 @@ margin-top: 8px;
 :host ::ng-deep .owl-theme {
  height: 15rem !important;
 }
+
+::ng-deep .itdata .owl-item {
+  width: 160px !important;
+}
+
+::ng-deep .itdata .arrow .owl-carousel .owl-nav .owl-prev {
+  position: absolute;
+  top: 20%;
+  z-index: 1 !important;
+  left: -18px;
+  height: 50px;
+  width: 50px;
+
+}
+
+::ng-deep .itdata .arrow .owl-carousel .owl-nav .owl-next {
+  position: absolute;
+  top: 20%;
+  z-index: 1 !important;
+  right: -18px;
+  height: 50px;
+  width: 50px;
+
+}
+
+:host ::ng-deep .owlItration .owl-theme {
+  height: 9rem !important;
+ }
 
 :host ::ng-deep .owl-carousel .owl-stage-outer{
   height: 100%;
@@ -718,3 +767,75 @@ background-color: #ffffff;
 border: 1px solid #ccc;
 }
 
+.matCardIconRow {
+  height: 60%;
+}
+
+.matCardIconRow1 {
+  height: 71%;
+}
+
+.materialCard {
+  width: 7rem;
+  height: 7rem;
+  cursor: pointer;
+}
+
+.icons {
+  font-size: 30px;
+  padding: 1.2rem 0rem;
+  color: #898989;
+}
+
+.fileSelDet {
+  background-color: #5C6873;
+  height: 40%;
+}
+.fileSelDet {
+  height: 2rem;
+  background-color: #5C6873;
+}
+
+.fileSelDetHover {
+  height: 3rem;
+  background-color: #5C6873;
+}
+
+.fileNameCol {
+  padding-left: 5px !important;
+}
+
+.fileColor {
+  font-size: 10px;
+  color:#E8E8E8;
+}
+
+.playBtnmobile {
+  font-size: 14px;
+  top: 3px;
+  left: 0rem;
+}
+
+.actionBtnmobile {
+  font-size: 10px;
+  margin-left: 1rem;
+}
+
+.downloadBtnMobile {
+  font-size: 10px;
+  top: 0.3rem;
+}
+
+.colActionDownload {
+  padding-left: 0px;
+  cursor: pointer;
+}
+
+.actionBtn1Mobile {
+  font-size: 10px;
+  margin-left: 1rem;
+}
+
+.m-l {
+  margin-left: 44px;
+}

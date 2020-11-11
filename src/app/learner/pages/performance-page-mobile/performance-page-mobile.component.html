@@ -1,73 +1,12 @@
 <div class="container pl-0 pr-0">
-  <div class="row ml-0 mr-0">
-    <div class="col-10 text-left m-auto moileView">
+  <div class="row ml-0 mr-0 performHeight">
+    <div class="col-2 pr-0" *ngIf="!performdetailPage">
+      <mat-icon class="arrowPerform mr-2" aria-hidden="false" (click)="mobileResponsive()">
+        keyboard_backspace</mat-icon>
+    </div>
+    <div class="col-10 pl-0 text-left m-auto moileView">
       <span class="titleCase">{{ selectedName | titlecase }}</span>
       <!-- <span *ngIf="course?.course_name?.length > 30">{{(course?.course_name | slice:0:20)+'...'}}</span> -->
-    </div>
-    <div class="col-2 text-right mobileHoriz">
-      <mat-icon class="ml-3 mt-3 mb-3" [matMenuTriggerFor]="menu"
-        >more_vert</mat-icon
-      >
-      <mat-menu #menu="matMenu">
-        <button
-          (click)="
-            selectedTabIndex = 0;
-            selectedName = detailDataToPerform?.course_name
-              ? detailDataToPerform?.course_name
-              : courceDetails?.course_name;
-            emiteData()
-          "
-          class="matTabMenu"
-          mat-menu-item
-        >
-          <span>{{
-            detailDataToPerform?.course_name
-              ? detailDataToPerform?.course_name
-              : courceDetails?.course_name
-          }}</span>
-        </button>
-        <button
-          (click)="
-            selectedTabIndex = 1; selectedName = 'About the course'; emiteData()
-          "
-          class="matTabMenu"
-          mat-menu-item
-        >
-          <span>About the course</span>
-        </button>
-        <button
-          (click)="
-            selectedTabIndex = 2; selectedName = 'Resources'; emiteData()
-          "
-          class="matTabMenu"
-          mat-menu-item
-        >
-          <span>Resources</span>
-        </button>
-        <button
-          (click)="
-            selectedTabIndex = 3; selectedName = 'Assignments'; emiteData()
-          "
-          class="matTabMenu"
-          mat-menu-item
-        >
-          <span>Assignments</span>
-        </button>
-        <button
-          (click)="selectedTabIndex = 4; selectedName = 'Forum'; emiteData()"
-          class="matTabMenu"
-          mat-menu-item
-        >
-          <span>Forum</span>
-        </button>
-        <button
-          (click)="selectedName = 'perform'"
-          class="matTabMenu"
-          mat-menu-item
-        >
-          <span>Perform</span>
-        </button>
-      </mat-menu>
     </div>
   </div>
   <div class="row ml-0 mr-0 errmsg" *ngIf="performDetails?.length == 0">
@@ -307,7 +246,7 @@
                 </button>
                 <input type="file" accept="video/mp4" multiple style="display: none" #videoInput
                     (change)="uploadDocument($event)" />
-                <button mat-stroked-button class="uploadBtn mt-3 w-100" *ngIf="itration.submit_status == 'notsubmitted' && !itrationStarted || !itrationEnded"
+                <button mat-stroked-button class="uploadBtn mt-3 w-100" *ngIf="itration.submit_status == 'notsubmitted' || !itrationStarted && !itrationEnded"
                  (click)="uploadDocuments(itration, performActivityData, submitType = 'upload')"><mat-icon class="add-icon">add</mat-icon>Upload Videos</button>
                 <button mat-stroked-button class="submitBtn mt-3" *ngIf="itration.submit_status == 'notsubmitted' && itration.videodetails.length > 0"
                   (click)="submitType = 'submit'; submitDeleteVideo({}, itration, performActivityData)">Submit</button>
@@ -323,13 +262,13 @@
               <div class="col-12 pl-0 pr-0" *ngIf="itration.grade_status === 'Evaluated'">
                 <div class="row ml-0 mr-0">
                   <div class="col-12">
-                    <button mat-stroked-button class="AssignmentBtn mt-3 w-100"><mat-icon class="assignmentIcon">wysiwyg</mat-icon>Assessment report</button>
+                    <button mat-stroked-button class="AssignmentBtn mt-3 w-100" (click)="playVideo(projectPreviewDialog, videoDialog, itration.assessmentreport[0], itration.assessmentreport[0].doc_type)"><mat-icon class="assignmentIcon mr-2">wysiwyg</mat-icon>Assessment report</button>
                   </div>
                 </div>
                 <div class="row ml-0 mr-0 mt-2">
                   <div class="col-12 text-left">
                     <p class="feedBackTxt">Feedback comments</p>
-                    <textarea rows="4" cols="50" class="textArea">
+                    <textarea disabled rows="4" cols="50" class="textArea">
                       {{itration.comments}}
                       </textarea>
                   </div>
@@ -357,38 +296,11 @@
             </button>
           </div>
           </div>
-          <div class="row ml-0 mr-0 mt-2 videoPlay" *ngIf="preview">
+          <div class="row ml-0 mr-0 mt-2 videoPlay">
             <div class="col-12 pl-0 pr-0">
-          <!-- <app-video-player  [url]="videoSource"></app-video-player> -->
           <video _ngcontent-tls-c58 class="videoCell" controls oncontextmenu="return false;" width="100%" src="{{videoSource}}"></video>
           </div>
           </div>
-          <!-- <div class="row ml-0 mr-0 p-3" *ngIf="!preview">
-            <div class="col-12 previewCol">
-              <mat-card class="previewCard m-auto p-0">
-                <div class="row ml-0 mr-0">
-                  <div class="col-12 pl-0 pr-0">
-                    <video width="100%" controls class="videoCell">
-                      <source src="videoUrl">
-                      Your browser does not support HTML video.
-                    </video>
-                  </div>
-                </div>
-                <div class="row ml-0 mr-0">
-                  <div class="col-12 text-left">
-                    <p class="textSize mt-3">file name x151</p>
-                    <p class="textSize"><span class="font-weight-bold">MP4 . </span>&nbsp; Recorded on: Sep 24, 2020</p>
-                  </div>
-                </div>
-              </mat-card>
-            </div>
-          </div>
-          <div class="row ml-0 mr-0 mt-2" *ngIf="!preview">
-            <div class="col-12">
-              <button mat-stroked-button class="cancelBtn mr-4" (click)="videoPerview = !videoPerview">Cancel</button>
-              <button mat-stroked-button class="saveBtn" (click)="videoPerview = !videoPerview">Save</button>
-            </div>
-          </div> -->
     <!-- </div>
   </div> -->
 </ng-template>
