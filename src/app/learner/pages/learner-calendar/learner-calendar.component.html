@@ -119,7 +119,7 @@
                                               
                                                 <div class="m-l-4">
                                                     <img src="../../../../assets/learner/Calendar_black.svg">
-                                                    <span class="lxp-text f_size_14 f_wt_400"> {{data.activity_details.startdate | date :'MMM d, y h:mm a'}} - {{data.activity_details.enddate | date :'MMM d, y h:mm a'}}</span>
+                                                    <span class="lxp-text f_size_14 f_wt_400"> {{data.activity_details.startdate | date :'d/M/yy h:mm a'}} - {{data.activity_details.enddate | date :'d/M/yy h:mm a'}}</span>
     
                                                     <span class="status lxp-text f_size_14 f_wt_400" *ngIf="data.status == 'On going' ">
                                                     {{'Ongoing' | translate }}</span>
