@@ -22,7 +22,10 @@
     -moz-osx-font-smoothing: grayscale;
    }
 
-   .lxp-calendar:before {
+  .lxp-knowledge:before {
+    content: "\e904";
+  }
+  .lxp-calendar:before {
     content: "\e903";
   }
   .lxp-gauge:before {
