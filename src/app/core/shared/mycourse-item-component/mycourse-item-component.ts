@@ -36,7 +36,7 @@ export class MycourseItemComponent implements OnInit {
   finalFullData: any;
   finalStatus: any = null;
   role: any;
-  courseWeekCircle:any;
+  courseWeekCircle: any;
   instDefault: any = '../../../../assets/learner/mycourseicons/Instructor_default.svg';
   activityDefault: any = '../../../../assets/learner/mycourseicons/Activities_defult.svg';
   discussDefault: any = '../../../../assets/learner/mycourseicons/Discussion_default.svg'
@@ -52,7 +52,7 @@ export class MycourseItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.courseWeekCircle = (this.course.week_completed_count!==null?this.course.week_completed_count:0) +'/'+ (this.course.week_total_count!==null?this.course.week_total_count:0);
+    this.courseWeekCircle = (this.course.week_completed_count !== null ? this.course.week_completed_count : 0) + '/' + (this.course.week_total_count !== null ? this.course.week_total_count : 0);
   }
   Go(course) {
     const data1 = {
@@ -70,7 +70,7 @@ export class MycourseItemComponent implements OnInit {
     };
     localStorage.setItem('Courseid', data1.courseId);
     localStorage.setItem('CourseName', data1.courseName);
-    this.router.navigateByUrl('/Learner/selfLearning', { state:  { data:  data1 } });
+    this.router.navigateByUrl('/Learner/selfLearning', { state: { data: data1 } });
   }
   gotoDesc(c) {
     const detail = {
@@ -93,10 +93,16 @@ export class MycourseItemComponent implements OnInit {
 
   goToForum(c) {
     localStorage.setItem('Courseid', c.course_id);
+    const bt = c.activity_info?.batchid ? {
+      batchid: c.activity_info?.batchid,
+      batchenddate: c.batch_end_date,
+      batch_start_date: c.batch_start_date,
+      batchname: c.batch_name
+    } : null;
     const detail = {
       id: c.course_id,
       name: c.course_name,
-      // isBatch : c.batchCourse
+      batchdetails: bt
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
     this.router.navigateByUrl('/Learner/discussionForum', { state: { detail } });

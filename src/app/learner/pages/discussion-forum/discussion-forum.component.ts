@@ -98,17 +98,24 @@ export class DiscussionForumComponent implements OnInit {
       if (this.selectedModuleData) {
         this.loading = true;
         this.selectedModuleData.indexValue = 1;
-        this.Lservice.getSingleBatchInfo(this.userDetail.user_id, cid).subscribe((resdata: any) => {
-          if (resdata?.data?.getbatchdetails?.message?.batchid !== null) {
-            this.batchDetails = resdata?.data?.getbatchdetails?.message;
-            const batchEndDate = new Date(resdata?.data?.getbatchdetails?.message.batchenddate);
-            this.disableThreads = batchEndDate.toISOString().slice(0, 10) < new Date().toISOString().slice(0, 10) ? true : false;
-            this.viewAllThreads();
-          } else {
-            this.batchDetails = null;
-            this.viewAllThreads();
-          }
-        });
+        // this.Lservice.getSingleBatchInfo(this.userDetail.user_id, cid).subscribe((resdata: any) => {
+        //   if (resdata?.data?.getbatchdetails?.message?.batchid !== null) {
+        //     this.batchDetails = resdata?.data?.getbatchdetails?.message;
+        //     const batchEndDate = new Date(resdata?.data?.getbatchdetails?.message.batchenddate);
+        //     this.disableThreads = batchEndDate.toISOString().slice(0, 10) < new Date().toISOString().slice(0, 10) ? true : false;
+        //     this.viewAllThreads();
+        //   } else {
+        //     this.batchDetails = null;
+        //     this.viewAllThreads();
+        //   }
+        // });
+
+        this.batchDetails = this.course.batchdetails || null;
+        if (this.batchDetails?.batchenddate) {
+          const batchEndDate = new Date(this.batchDetails.batchenddate);
+          this.disableThreads = batchEndDate.toISOString().slice(0, 10) < new Date().toISOString().slice(0, 10) ? true : false;
+        }
+        this.viewAllThreads();
       }
     });
   }
@@ -119,7 +126,6 @@ export class DiscussionForumComponent implements OnInit {
     this.Lservice.ViewAllThreadData(this.selectedModuleData?.title, this.course.id, this.batchDetails?.batchid)
       .subscribe((result: any) => {
         const temp = result.data.ViewAllThreadData.data;
-        console.log(result?.data?.ViewAllThreadData);
         if (result?.data?.ViewAllThreadData?.data !== '' && result?.data?.ViewAllThreadData !== null) {
           result?.data?.ViewAllThreadData?.data?.topics.sort((a, b) => new Date(b.lastposttimeISO || b.timestampISO).getTime() -
             new Date(a.lastposttimeISO || a.lastposttimeISO).getTime());
