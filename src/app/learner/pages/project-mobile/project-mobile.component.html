@@ -73,8 +73,17 @@
       </mat-menu>
     </div>
   </div>
+  <div class="row ml-0 mr-0">
+    <span class="redHover">
+      <mat-icon class="material-icons f_size_15 backIc pointer" (click)="goToCourse()">arrow_back_ios
+      </mat-icon>
+      <span class="f_size_19 pointer" (click)="goToCourse()">
+        Back
+      </span>
+    </span>
+  </div>
 
-  <div class="row mr-0 ml-0">
+  <div class="row mr-0 ml-0" *ngIf="projectDetails?.length > 0">
     <div class="col-sm-12">
       <div class="box-0-1" (click)="getprojectActivityData()"  *ngFor="let project of projectDetails; let i = index" (click)="projectdetailPage = !projectdetailPage">
         <div class="row">
@@ -111,15 +120,16 @@
         <div class="col-5">
           <span class="group">
             <button mat-mini-fab class="groupBtn">
-              <mat-icon class="grpIcon">group</mat-icon>
+              <mat-icon class="grpIcon" (click)="learnerView(learnerDialog, project)">group</mat-icon>
             </button>
-            <span class="teamName" *ngIf="project.projectActivity.groupname.length < 14">
+            <span class="teamName" *ngIf="project.projectActivity.groupname.length < 14"
+            (click)="learnerView(learnerDialog, project)">
               {{project.projectActivity.groupname}} ({{project.projectActivity.groupDetails.length}})
             </span>
-            <span class="teamName" *ngIf="project.projectActivity.groupname.length > 14"
+            <!-- <span class="teamName" *ngIf="project.projectActivity.groupname.length > 14"
               matTooltip="{{project.projectActivity.groupname}}" matTooltipClass="custom-mat-tooltip">
               {{(project.projectActivity.groupname| slice:0:14)+'...'}} 
-            </span>&nbsp;
+            </span>&nbsp; -->
           </span>
         </div>
         <div class="col-7 text-right">
@@ -159,7 +169,7 @@
             <div class="carousel-item active">
               <div class="row ml-0 mr-0">
                 <div class="col-4 text-left pr-0" *ngFor="let material of project.projectActivity.materialDetails">
-              <mat-card class="materialCard p-0 mr-2">
+              <mat-card class="materialCard p-0 mr-2" (click)="playVideo(projectPreviewDialog, videoDialog, material, material.doc_type, preview = true)">
                 <div class="row ml-0 mr-0 matCardIconRow">
                   <div class="col-12 pl-0 pr-0">
                     <i class="fa fa-file-pdf-o icons" *ngIf="material.doc_type == 'file/pdf'" aria-hidden="true"></i>
@@ -170,7 +180,7 @@
                 </div>
                 <div class="row ml-0 mr-0 h-40" class="fileSelDet">
                   <div class="col-12 pr-0 fileNameCol">
-                    <span class="fileColor">{{material.filename}}</span><br>
+                    <span class="fileColor">{{(material.filename| slice:0:50)+'...'}}</span><br>
                   </div>
                 </div>
               </mat-card>
@@ -248,9 +258,11 @@
               </button> -->
 
               <input type="file" accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf"
-               multiple style="display: none" #uploadFile
+              style="display: none" #uploadFile
                (change)="uploadDoc($event, project, 'upload')" />
-          <button mat-stroked-button class="uploadBtn mt-3 w-100"  *ngIf="project.projectActivity.submitAction !== 'submit'" 
+          <button mat-stroked-button class="uploadBtn mt-3 w-100"  
+          *ngIf="project.projectActivity.submitAction !== 'submit'" 
+          [disabled]="project.enableSubmit == false && project.submitType == false"
           (click)="uploadDocs()">
             <mat-icon class="add-icon">add</mat-icon> Add your files</button>
 
@@ -276,8 +288,137 @@
       </div>
 
     </div>
-  </div>
+
+    <!-----------------------------------Your files----------------------------------------->
+    <div *ngIf="isCollapsed && projectId === i && project.projectActivity.grade_status == 'Evaluated'">
+    <div class="row ml-0 mr-0">
+      <div class="col-sm-12 text-left">
+        <span>Your files ({{project.projectActivity.videodetails.length}})</span>
+      </div>
+    </div>
+
+    <div class="row ml-0 mr-0 mt-3">
+      <div class="col-12 text-left pl-0 pr-0">
+        <div id="demo" class="carousel" data-ride="carousel">
+          <!-- The slideshow -->
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="row ml-0 mr-0">
+                <div class="col-4 text-left pr-0" *ngFor="let video of project.projectActivity.videodetails">
+              <mat-card class="materialCard p-0 mr-2" (click)="playVideo(projectPreviewDialog, videoDialog, video, video.doc_type, preview = true)">
+                <div class="row ml-0 mr-0 matCardIconRow">
+                  <div class="col-12 pl-0 pr-0">
+                    <i class="fa fa-file-pdf-o icons" *ngIf="video.doc_type == 'file/pdf'" aria-hidden="true"></i>
+                    <mat-icon class="icons" *ngIf="video.doc_type =='image/jpeg'
+                         || video.doc_type == 'image/png' || video.doc_type == 'image/jpg'">photo_size_select_actual</mat-icon>
+                    <mat-icon class="icons" *ngIf="video.doc_type =='video/mp4'">play_circle_outline</mat-icon> 
+                  </div>
+                </div>
+                <div class="row ml-0 mr-0 h-40" class="fileSelDet">
+                  <div class="col-12 pr-0 fileNameCol">
+                    <span class="fileColor">{{(video.filename| slice:0:50)+'...'}}</span><br>
+                  </div>
+                </div>
+              </mat-card>
+              </div>
+              </div>
+            </div>
+          </div>
+        
+          <!-- Left and right controls -->
+          <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </a>
+          <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </a>
+        
+        </div>
+      </div>
+    </div>
   </div>
 
   </div>
+  </div>
+  <ng-template #learnerDialog>
+    <div>
+        <span class="grpName"><b>{{groupName}} ({{groupDetails.length}})</b></span>
+        <mat-icon class="closeDialog" (click)="closedialogbox()">close</mat-icon>
+    </div>
+    <div class="learner">
+    <ul class="list-group" *ngFor="let learner of groupDetails">
+      <li class="list-group-item">{{learner.name}}</li>
+    </ul>
+  </div>
+  </ng-template>
+  </div>
+
+  <div class="row mr-0 ml-0" *ngIf="projectDetails?.length < 1">
+    <div class="col-12 m-auto text-center">
+      <span class="errormsg">
+        <img class="assignImg" alt="" src="assets/002-project-management.svg">
+        <span class="txt">You have no project activity at the moment!</span>
+      </span>
+    </div>
+  </div>
+
+  <ng-template #projectPreviewDialog>
+    <div>
+      <div class="col-12">
+      <button mat-mini-fab class="download-button">
+        <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
+      </button>
+      <button mat-mini-fab class="closeBtn">
+        <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
+      </button>
+    </div>
+    </div>
+    <div *ngIf="previewDoc">
+      <app-pdfreader [url]="previewDoc"></app-pdfreader>
+    </div>
+  </ng-template>
+
+  <ng-template #videoDialog>
+    <!-- <div class="row ml-0 mr-0 previewVideoScreen" *ngIf="videoPerview">
+      <div class="col-12 pl-0 pr-0"> -->
+        <div class="row ml-0 mr-0">
+          <div class="col-12 text-left mt-2">
+            <span class="previewTxt">Preview Video</span>
+            </div>
+            </div>
+            <div class="row ml-0 mr-0 mt-2 videoPlay" *ngIf="preview">
+              <div class="col-12 pl-0 pr-0">
+            <app-video-player  [url]="videoSource"></app-video-player>
+            </div>
+            </div>
+            <div class="row ml-0 mr-0 p-3" *ngIf="!preview">
+              <div class="col-12 previewCol">
+                <mat-card class="previewCard m-auto p-0">
+                  <div class="row ml-0 mr-0">
+                    <div class="col-12 pl-0 pr-0">
+                      <video width="100%" controls class="videoCell">
+                        <source src="https://www.youtube.com/watch?v=VHENoFDoLds">
+                        Your browser does not support HTML video.
+                      </video>
+                    </div>
+                  </div>
+                  <div class="row ml-0 mr-0">
+                    <div class="col-12 text-left">
+                      <p class="textSize mt-3">file name x151</p>
+                      <p class="textSize"><span class="font-weight-bold">MP4 . </span>&nbsp; Recorded on: Sep 24, 2020</p>
+                    </div>
+                  </div>
+                </mat-card>
+              </div>
+            </div>
+            <div class="row ml-0 mr-0 mt-2" *ngIf="!preview">
+              <div class="col-12">
+                <button mat-stroked-button class="cancelBtn mr-4" (click)="videoPerview = !videoPerview">Cancel</button>
+                <button mat-stroked-button class="saveBtn" (click)="videoPerview = !videoPerview">Save</button>
+              </div>
+            </div>
+      <!-- </div>
+    </div> -->
+  </ng-template>
+  
   

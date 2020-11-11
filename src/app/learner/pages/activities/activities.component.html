@@ -1,7 +1,6 @@
 <app-performance-page-mobile *ngIf="mobileResponsive"></app-performance-page-mobile>
+<app-header *ngIf="!mobileResponsive"></app-header>
 <app-project-mobile *ngIf="projectMobileResponsive"></app-project-mobile>
-<app-header *ngIf="!mobileResponsive && !projectMobileResponsive"></app-header>
-<!-- <app-assignment *ngIf="mobileResponsive"></app-assignment> -->
 <div class="con-1" *ngIf="!mobileResponsive && !projectMobileResponsive">
   <!-- <span class="back" routerLink="/Learner/MyCourse" routerLinkActive="active"> < Back</span><br><br> -->
   <span class="redHover">
@@ -234,7 +233,7 @@
         </ng-container>
       </mat-accordion>
       <div class="row ml-0 mr-0 errmsg" *ngIf="assignmentContent?.coursedetails.length < 1">
-        <div class="col-12 m-auto text-center">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-auto text-center">
           <span class="errormsg">
             <img class="assignImg" alt="" src="assets/006-assignment1.svg">
             <span>You have no assignments at the moment!</span>
@@ -287,7 +286,7 @@
             <hr>
             <div class="row">
               <div class="col-8">
-                <div class="f_size_16 f_wt_600 mb-3">Material for activity</div>
+                <div class="f_size_16 f_wt_600 mb-3">Materials for activity</div>
                 <!-- <div class="row" *ngFor="let material of perform.performActivity.materialDetails">
                 <div class="col-4 m-t">
                   <img alt="Course Img" src="../../../../assets/images/play.jpg" class="courseImg" />
@@ -333,11 +332,11 @@
                             <br>
                             <div class="row ml-0 mr-0" *ngIf="hover">
                               <div class="col-12 pl-0 pr-0">
-                                <div class="row ml-0 mr-0">
+                                <!-- <div class="row ml-0 mr-0">
                                   <div class="col-12 text-left pl-1">
                                     <p class="carouselText">Duration:</p>
                                   </div>
-                                </div>
+                                </div> -->
                                 <div class="row ml-0 mr-0 playActions">
                                   <div class="col-5 text-left pr-0 colAction"
                                     (click)="playVideo(projectPreviewDialog, videoDialog, material, material.doc_type)">
@@ -377,8 +376,9 @@
               <div class="col-4">
 
                 <div class="f_size_16 f_wt_600 align-center margin-b-9">Your work</div>
-                <mat-accordion *ngFor="let itrdata of perform.performActivity.iterationDetails">
-                  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-accordion *ngFor="let itrdata of perform.performActivity.iterationDetails; let i = index"
+                (click)="getSelectedIndex(i);">
+                  <mat-expansion-panel [expanded]="selectedIndex === i">
                     <mat-expansion-panel-header>
                       <mat-panel-title class="mr-0">
                         Iteration {{itrdata.iterationcount}}
@@ -435,7 +435,7 @@
                     
                     </div>
                     <div class="align-center mt-2" *ngIf="itrdata.grade_status !== 'Evaluated'">
-                      <span *ngIf="itrdata.videodetails.length > 0  && itrdata.submitAction !== 'submit'"
+                      <span *ngIf="itrdata.submit_status == 'notsubmitted'"
                         class="submitedFile">Submitted files cannot be edited</span>
                       <span class="uploadedFile" *ngIf="itrdata.submitAction == 'submit'">Submitted on :
                         {{itrdata.submitted_on | date:'MMM dd, yyyy'}}</span>
@@ -598,7 +598,7 @@
                 <hr>
                 <div class="row">
                   <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12 second">
-                    <div class="f_size_16 f_wt_600">Material for activity</div>
+                    <div class="f_size_16 f_wt_600">Material for activity ({{project.projectActivity.materialDetails.length}})</div>
 
                     <owl-carousel-o [options]="trendingCategorires"
                       [ngClass]="project.projectActivity.materialDetails.length <= 4 ? 'widthClass arrow' : 'arrow'">
@@ -631,11 +631,11 @@
                                 <br>
                                 <div class="row ml-0 mr-0" *ngIf="hover">
                                   <div class="col-12 pl-0 pr-0">
-                                    <div class="row ml-0 mr-0">
+                                    <!-- <div class="row ml-0 mr-0">
                                       <div class="col-12 text-left">
                                         <p class="carouselText">Duration:</p>
                                       </div>
-                                    </div>
+                                    </div> -->
                                     <div class="row ml-0 mr-0 playActions">
                                       <div class="col-5 text-left pr-0 colAction"
                                         (click)="projectPreviewDoc(projectPreviewDialog, videoDialog, material, 'material')">
@@ -764,11 +764,11 @@
                                 <br>
                                 <div class="row ml-0 mr-0" *ngIf="hover">
                                   <div class="col-12 pl-0 pr-0">
-                                    <div class="row ml-0 mr-0">
+                                    <!-- <div class="row ml-0 mr-0">
                                       <div class="col-12 text-left">
                                         <p class="carouselText">Duration:</p>
                                       </div>
-                                    </div>
+                                    </div> -->
                                     <div class="row ml-0 mr-0 playActions">
                                       <div class="col-5 text-left pr-0 colAction"
                                         (click)="projectPreviewDoc(projectPreviewDialog,videoDialog, video, 'files')">
@@ -820,7 +820,7 @@
                   <mat-icon class="arrBack">arrow_forward</mat-icon>
                 </button>
               </div>
-              <div class="list">
+              <div class="list learnerData">
                 <ul class="list-group" *ngFor="let learner of project.projectActivity.groupDetails">
                   <li class="list-group-item">{{learner.name}}</li>
                 </ul>
@@ -829,7 +829,7 @@
           </div>
         </div>
       </ng-container>
-      <div class="row ml-0 mr-0 errmsg" *ngIf="projectDetails?.length < 1">
+      <div class="row ml-0 mr-0 errmsg" *ngIf="projectDetails?.length < 1 && !projectMobileResponsive">
         <div class="col-12 m-auto text-center">
           <span class="errormsg">
             <img class="assignImg" alt="" src="assets/002-project-management.svg">
