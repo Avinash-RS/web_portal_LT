@@ -404,7 +404,7 @@ margin-bottom: 1% !important;
 .topic {
   margin-top: 19px;
 }
-::ng-deep .list-group-item {
+::ng-deep .learnerData .list-group-item{
 background: #FBF6E1 0% 0% no-repeat padding-box !important;
 box-shadow: 0px 1px 2px #00000029 !important;
 border: 0.5px solid #D6D6D6 !important;
@@ -512,6 +512,10 @@ margin-top: 8px;
   background-color: black !important;
   opacity: 1 !important;
   font-size: 12px !important;
+}
+.itrCount {
+position: relative;
+right: 36px;
 }
 /*Ramya CSS ends here*/
 .videoPreview {
@@ -688,6 +692,30 @@ margin-top: 8px;
  height: 15rem !important;
 }
 
+::ng-deep .itdata .owl-item {
+  width: 160px !important;
+}
+
+::ng-deep .itdata .arrow .owl-carousel .owl-nav .owl-prev {
+  position: absolute;
+  top: 20%;
+  z-index: 1 !important;
+  left: -18px;
+  height: 50px;
+  width: 50px;
+
+}
+
+::ng-deep .itdata .arrow .owl-carousel .owl-nav .owl-next {
+  position: absolute;
+  top: 20%;
+  z-index: 1 !important;
+  right: -18px;
+  height: 50px;
+  width: 50px;
+
+}
+
 :host ::ng-deep .owlItration .owl-theme {
   height: 9rem !important;
  }
@@ -810,4 +838,8 @@ border: 1px solid #ccc;
 .actionBtn1Mobile {
   font-size: 10px;
   margin-left: 1rem;
+}
+
+.m-l {
+  margin-left: 44px;
 }

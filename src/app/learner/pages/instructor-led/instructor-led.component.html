@@ -29,20 +29,20 @@
 
 <!-- If no records -->
 <div class="row" *ngIf="!listOfSessions?.length">
-  <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-12"></div>
-  <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6                                                                                                                                                                                                                                                                                                                            col-12">
-    <mat-card class="noSessionCard">
-      <div class="row mar-t-12">
-        <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-          <img mat-card-image class="noSessionImg" src="../../../../assets/learner/noSessions.png"> 
+  <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12"></div>
+  <div class="col-lg-4 col-xl-4 col-md-6 col-sm-4 col-12">
+      <mat-card class="noSessionCard color-yellow-card-status">
+        <div class="row mar-t-12">
+          <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+            <img class="noSessionImg" src="../../../../assets/learner/Instructor-led.svg"> 
+          </div>
+          <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12">
+            <span class="noData"> You have no sessions at the moment!</span>
+          </div>
         </div>
-        <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12">
-          <span class="noData"> You have no sessions at the moment!</span>
-        </div>
-      </div>
-    </mat-card>
+      </mat-card> 
   </div>
-  <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-12"></div>  
+  <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12"></div>  
 </div>
 <!-- End of no records -->
 
@@ -118,7 +118,7 @@
           <mat-card class="smallContainer3">
             <mat-card-subtitle class="smallHeadline">Recorded Sessions</mat-card-subtitle>
             <div class="row d-flex p-t-20">
-              <span class="number">{{listOfSessions?.length}}</span>
+              <span class="number">0</span>
               <img mat-card-image src="../../../../assets/learner/video-tutorial.svg">
             </div>              
           </mat-card>

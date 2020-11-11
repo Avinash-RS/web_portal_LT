@@ -5,17 +5,18 @@
   <div class="tab" *ngIf="show">
     <!-- COmmenting knowledge resource/ activity center for UAT release -->
     <!-- KNOWLEDGE RESOURCE -->
-    <button class="btn1 p-x-15px float-right" [ngClass]="activeUrl === '/Learner/knowledge' ? 'colgreen' : 
-    'colWhite'" md-raised-button routerLink="/Learner/knowledge" routerLinkActive="active">
-      <mat-icon fontSet="material-icons-outlined " class="headicon animated animatedFadeInUp fadeInUp" inline=true>
-        event_note </mat-icon>
-      Knowledge Resources
+    <button matRipple class="" [ngClass]="activeUrl === '/Learner/knowledge' ? 'btn2 p-x-15px float-right colgreen' : 
+    'btn1 p-x-15px float-right colWhite'" md-raised-button routerLink="/Learner/knowledge" routerLinkActive="active">
+    <span class="lxp-knowledge headicon animated animatedFadeInUp fadeInUp mr-2"></span>
+      <!-- <mat-icon fontSet="material-icons-outlined " class="headicon animated animatedFadeInUp fadeInUp" inline=true>
+        event_note </mat-icon> -->
+        <div class="imgAdj">Knowledge Resources</div>
     </button>
     <!-- END OF KNOWLEDGE RESOURCE -->
 
     <!-- ACTIVITY CENTER -->
-    <button class="btn1 p-x-15px float-right" [ngClass]="activeUrl === '/Learner/activitycenterhomescreen' ? 'colgreen' : 
-    'colWhite'" md-raised-button routerLink="/Learner/activitycenterhomescreen">
+    <button matRipple class="" [ngClass]="activeUrl === '/Learner/activitycenterhomescreen' ? 'btn2 p-x-15px float-right colgreen' : 
+    'colWhite btn1 p-x-15px float-right'" md-raised-button routerLink="/Learner/activitycenterhomescreen">
         <mat-icon fontSet="material-icons-outlined" class="headicon animated animatedFadeInUp fadeInUp " inline=true>
         offline_bolt </mat-icon> Activity Center
     </button>
@@ -23,8 +24,8 @@
     <!-- END OF ACTIVITY CENTER -->
 
     <!-- CALENDAR -->
-    <button class="btn1 p-x-15px float-right" [ngClass]="activeUrl === '/Learner/calendar' ? 'colgreen' : 
-    'colWhite'" md-raised-button routerLink="/Learner/calendar" routerLinkActive="active">
+    <button matRipple  [ngClass]="activeUrl === '/Learner/calendar' ? 'colgreen btn2 p-x-15px float-right' : 
+    'colWhite btn1 p-x-15px float-right'" md-raised-button routerLink="/Learner/calendar" routerLinkActive="active">
       <!-- <mat-icon fontSet="material-icons-outlined " class="headicon animated animatedFadeInUp fadeInUp" inline=true>
         event_note </mat-icon> -->
         <span class="headicon animated animatedFadeInUp fadeInUp mr-2 lxp-calendar"></span> 
@@ -33,8 +34,8 @@
     <!-- END OF CALENDAR -->
 
     <!-- MY COURSE -->
-    <button class="btn1 p-x-15px float-right" [ngClass]="activeUrl === '/Learner/MyCourse' ? 'colgreen' : 
-      'colWhite'" md-raised-button routerLink="/Learner/MyCourse">
+    <button matRipple [ngClass]="activeUrl === '/Learner/MyCourse' ? 'colgreen btn2 p-x-15px float-right' : 
+      'colWhite btn1 p-x-15px float-right'" md-raised-button routerLink="/Learner/MyCourse">
       <mat-icon fontSet="material-icons-outlined" class="headicon animated animatedFadeInUp fadeInUp " inline=true>
         local_library </mat-icon> 
         My Courses

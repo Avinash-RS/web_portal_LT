@@ -48,7 +48,7 @@ export class LearnerActivityCenterComponent implements OnInit {
       const PageNumber = params.startRow / 10 || 0;
       this.sortType = 'undefined';
       this.searchValue = '';
-      this.searchColumn = 'undefined';
+      this.searchColumn =  this.searchColumn || 'undefined';
       if (this.navDetails?.tableType === 'completed') {
         // this.searchColumn = 'undefined';
         const statusB = [{
@@ -71,7 +71,7 @@ export class LearnerActivityCenterComponent implements OnInit {
       this.service.getCourseActivities(userId, PageNumber, this.courseId, this.sortType, this.searchValue,
         this.searchColumn, this.statusBased)
         .subscribe((result: any) => {
-          // console.log(result, 'r');
+          // console.log(result, 'rinitial');
           if (result.data.get_course_activities.total_count > 0) {
             params.successCallback(
               result.data.get_course_activities.message, result.data.get_course_activities.total_count
@@ -229,6 +229,7 @@ export class LearnerActivityCenterComponent implements OnInit {
     this.searchValue = globalSearchValue ? globalSearchValue : '';
     // console.log(searchColumnVal, 'sc');
     this.searchColumn = searchColumnVal;
+    // console.log(this.searchColumn, searchColumnVal, 'sc');
     this.gridApi.setDatasource({
       getRows: (params: IGetRowsParams) => {
         const userId = this.userDetails.user_id;

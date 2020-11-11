@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { MatAccordion } from '@angular/material/expansion';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
@@ -26,10 +27,16 @@ export class ProjectMobileComponent implements OnInit {
   selectfile = [];
   showSubmittedon = false;
   fileName: any;
+  groupDetails: any;
+  groupName: any;
+  previewDoc: any;
+  videoSource: any;
+  selectedName = 'Project';
+  selectedTabIndex: number;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
-              public route: Router) {
+              public route: Router,  private commonServices: CommonServicesService,) {
                 const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
                 this.checkDetails = detail;
@@ -43,12 +50,23 @@ export class ProjectMobileComponent implements OnInit {
   ngOnInit() {
     this.getprojectActivityData();
   }
+  emiteData() {
+    if (this.selectedName === 'project') {
+    const data = {
+      selectedName: this.selectedName,
+      selectedTabIndex: this.selectedTabIndex,
+    };
+    this.commonServices.menuSelectedPerform$.next(data);
+  } else {
+    // this.Lservice.performView.next('performData', false)
+  }
+}
   goToCourse() {
     this.route.navigateByUrl('/Learner/MyCourse');
   }
 
   uploadDoc(event, project, submitAction) {
-    console.log('working', event);
+    console.log('working');
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < event.target.files.length; i++) {
       this.selectfile.push(event.target.files[i]);
@@ -56,6 +74,7 @@ export class ProjectMobileComponent implements OnInit {
     this.learnerUploadVideo(project, submitAction);
   }
   uploadDocs() {
+    console.log('111111111111111');
     this.uploadFile.nativeElement.click();
   }
 
@@ -64,12 +83,13 @@ export class ProjectMobileComponent implements OnInit {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
       this.projectDetails = data.data.getprojectActivityData.data;
       this.projectDetails.forEach(element => {
+        this.groupDetails = element.projectActivity.groupDetails;
+        // console.log('group', element);
         element.showLearnerList = false;
         // element.isCollapsed = false;
         // Batch date
         const batchEndDate = new Date(element.projectActivity.batchenddate);
         element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:MM');
-        console.log('batch', element.batchEndDate);
         if (moment().format('DD-MM-YYYY HH:MM') <= element.batchEndDate) {
           element.submitType = true;
         } else {
@@ -170,5 +190,42 @@ export class ProjectMobileComponent implements OnInit {
       }
     });
   }
+  learnerView(templateRef: TemplateRef<any>, project) {
+    this.groupName = project.projectActivity.groupname;
+    this.dialog.open(templateRef, {
+          width: '50%',
+          height: '30%',
+          panelClass: 'learnerDialog',
+          closeOnNavigation: true,
+          disableClose: true,
+        });
+        // this.previewDoc = path;
+      }
+      closedialogbox() {
+        this.dialog.closeAll();
+      }
 
+      playVideo(templateRef: TemplateRef<any>, videoDialog,  path, docType) {
+        if (docType !== 'video/mp4') {
+          this.dialog.open(templateRef, {
+            width: '100%',
+            height: '100%',
+            closeOnNavigation: true,
+            disableClose: true,
+          });
+          this.previewDoc = path;
+      } else {
+        this.videoPreview(videoDialog, path);
+      }
+    }
+    videoPreview(templateRef: TemplateRef<any>, path) {
+      this.videoSource = path.path;
+      this.dialog.open(templateRef, {
+        width: '100%',
+        height: '100%',
+        panelClass: 'matDialogMat',
+        closeOnNavigation: true,
+        disableClose: true,
+      });
+    }
 }

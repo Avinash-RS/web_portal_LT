@@ -48,7 +48,7 @@ export class ActivitiesComponent implements OnInit {
   activityEndDate: string;
   performDetails: any;
   iterationDetails: any;
-  selectedIndex = 0;
+  selectedIndex: any;
   selectfile = [];
   showSubmittedon = false;
   fileName: any;
@@ -129,7 +129,6 @@ export class ActivitiesComponent implements OnInit {
   }
 
   projectTab(event) {
-    console.log('eve', event.tab.textLabel);
     if (event.tab.textLabel === 'Project') {
       this.screenHeight = window.innerHeight;
       this.screenWidth = window.innerWidth;
@@ -396,10 +395,17 @@ export class ActivitiesComponent implements OnInit {
         element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
         const endDate = new Date(element.performActivity.activityenddate);
         element.activityEndDate = moment(endDate).format('ll');
+        element.endDate = moment(endDate).format('DD-MM-YYYY HH:MM');
         let strtDate = new Date(element.activityStartDate);
         let edDate = new Date(element.activityEndDate);
         let crrDate = new Date();
         element['itrationStarted'] = this.dateDiff(strtDate, edDate, crrDate);
+        if (moment().format('DD-MM-YYYY HH:MM') >= element.startDate &&
+        moment().format('DD-MM-YYYY HH:MM') <= element.endDate) {
+        this.submitStatus = 'ontime';
+      } else if (moment().format('DD-MM-YYYY HH:MM') > element.endDate) {
+        this.submitStatus = 'late';
+      }
       });
     }
     });

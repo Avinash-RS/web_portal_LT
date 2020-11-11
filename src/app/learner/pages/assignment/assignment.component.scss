@@ -1,166 +1,5 @@
 @import "../../../../assets/variable.scss";
-@media (max-width: 767px) {
-  .projHead {
-    color: $lxp-theme-green;
-    position: absolute;
-  }
-  .groupBtn {
-    border: 1px solid #5C6873;
-    opacity: 1;
-    background-color: #ffffff;
-    color: #1F1A17;
-    width: 20px;
-    height: 20px;
-    position: relative;
-    top: 5px;
-    cursor: default;
-  }
-
-  .grpIcon {
-    font-size: 11px;
-    margin-top: -8px;
-    margin-left: -3px;
-    cursor: default;
-  }
-  .teamName {
-    position: relative;
-    bottom: 6px;
-    color: #0000EE;
-  }
-
-  .m-r-40 {
-    margin-right: 40px;
-  }
-.m-rr-5 {
-  margin-right: -5px;
-}
-.ml-16 {
-  margin-left: 16px;
-}
-
-.expansionarr {
-  padding: 3px;
-  font-weight: 600;
-  position: absolute;
-  top: -4px;
-  right: 7px;
-}
-
-.box-0-1{
-  margin-top: 10px;
-  width: 100%;
-  padding: 20px;
-  padding-bottom: 3%;
-  height: auto;
-  background-color: $color-white;
-  border : 1px solid $color-border;
-}
-.m-r-13 {
-  margin-right: 13px;
-}
-.margin-30{
-  margin-left: 12px;
-}
-.margin-21{
-  margin-left: 21px;
-}
-.work {
-  position: relative;
-  left: 118px;
-}
-.fileData {
-  background-color: #D5D5D5;
-  border: 0.25px solid #707070;
-  width: 100%;
-  height: 2.8rem;
-  padding: 0.3rem 5px;
-}
-.videoPlay {
-  color: #898989;
-  font-size: 25px;
-  background-color: white;
-  width: 2.5rem;
-  height: 2rem;
-  padding: 4px 5px 5px 7px;
-  border-radius: 2px;
-  cursor: default;
-}
-.uploadfileName {
-  position: relative;
-  left: 10px;
-  top: 5px;
-}
-.submit-btn{
-  color: $color-white !important;
-  background-color: $lxp-theme-green;
-  width: 45%;
-  margin-top: 6%;
-}
-.box-0-2{
-  margin-top: 10px;
-  margin-left: 30px;
-  width: 79%;
-  padding: 20px;
-  padding-bottom: 3%;
-  overflow: hidden;
-  height: auto;
-  background-color: $color-white;
-  border : 1px solid $color-border;
-}
-// .upload-btn {
-//   width: 100%;
-// }
-.closeDialog {
-  float: right;
-  position: relative;
-  top: -20px;
-  left: 23px;
-  font-size: large;
-}
-    ::ng-deep .learnerDialog .mat-dialog-container {
-      position: relative !important;
-      right: 74px !important;
-      bottom: 15px !important;
-    }
-    ::ng-deep .learner .list-group-item {
-      border: none !important;
-    }
-    .grpName {
-      position: relative;
-    top: -19px;
-    right: 16px;
-    }
-
-    .redHover:hover {
-      color: $lxp-theme-green !important;
-    }
-    .backIc {
-      width: 10px !important;
-      margin-left: 10px !important;
-    }
-    .errormsg {
-      position: absolute;
-      top: 195px;
-      left: 6px;
-      width: 96%;
-      font-size: 17px;
-      padding: 8px;
-      font-weight: 500;
-      background: #F7FBFF 0% 0% no-repeat padding-box;
-      box-shadow: 0px 3px 6px #00000029;
-      border: 0.5px solid #707070;
-      border-radius: 10px;
-      opacity: 1;
-    }
-    .assignImg {
-      height: 32px;
-    }
-   .txt {
-    margin-left: 5px;
-    position: relative;
-    top: 3px;
-   }
-  //Ramya's Css ends here
+@media (max-width: 768px) {
   .dot {
     height: 10px;
     width: 10px;
@@ -284,8 +123,7 @@
   color: $color-white !important;
   background-color: #898989;
   width: 45%;
-  position: absolute;
-  left: 81px;
+  // margin-top: 6%;
   cursor: not-allowed;
 }
 
@@ -388,4 +226,84 @@
   .matCardIconRow {
     height: 60%;
   }
+  #upload-file {
+    opacity: 0;
+    position: absolute;
+    left: 58px;
+  }
+  .border {
+    border: 1px solid gray;
+  }
+  .width {
+    position: relative;
+    width: 100%;
+  }
+  .gradedUpload {
+    color: $lxp-icon !important;
+    cursor: not-allowed !important;
+  }
+
+  .download-button {
+    background: $lxp-theme-green !important; // red color
+    float: right;
+    position: relative;
+    top: -12px;
+    right: 26px;
+    height: 35px;
+    width: 35px;
+  }
+  .close-button {
+    background: $lxp-theme-green !important; // red color
+    float: right;
+    top: -12px;
+    position: relative;
+    right: -53px;
+    height: 35px;
+    width: 35px;
+  }
+  .download-icon {
+    position: relative;
+    bottom: 2px;
+  }
+  
+  .expand {
+    margin: 10px;
+  }
+
+  .height {
+    position: relative;
+    height: 145px !important;
+    padding-left: 5px;
+    padding-right: 7px;
+  }
+
+  .score {
+    position: absolute;
+    top: 0px;
+    left: 135px;
+  }
+  .errmsg {
+    height: 28rem;
+  }
+  .errormsg {
+    padding: 20px 24px 20px 0px;
+    font-size: 14px;
+    font-weight: 500;
+    background: #F7FBFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 0.5px solid #707070;
+    border-radius: 10px;
+    opacity: 1;
+  }
+  .assignImg {
+    width: 10%;
+    height: 33px;
+  }
+  .m-l {
+    margin-left: 5px;
+  }
+  // :host ::ng-deep .mat-expansion-indicator::after {
+  //   position: relative;
+  //   top: -60px;
+  // }
 }

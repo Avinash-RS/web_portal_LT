@@ -90,15 +90,21 @@
     padding: 0 11px !important;
     width: 100%;
 }
+.btn2 {
+    position: relative;
+    font-size: 15px;
+    font-weight: 500;;
+    border: none;
+    color:$lxp-dark-gray;
+    background: $lxp-theme-green !important;
+    cursor: pointer;
+}
 
 .btn1 {
     position: relative;
-    font-size: 16px;
+    font-size: 15px;
     border: none;
-    //height: 45px;
-    //padding: 3px 0;
-    //margin-top: 5px !important;
-    color:$lxp-dark-gray;
+    color:$color-lightGray;
     background: $lxp-theme-yellow-sec !important;
     cursor: pointer;
 }
@@ -113,7 +119,7 @@
 .btn1:hover {
     //color: $color-blank !important;
     background-color: #77777740 !important;
-    color:black !important
+    color:$color-lightGray !important
 }
 
 :host ::ng-deep button:active {
@@ -153,8 +159,10 @@
 .colgreen {
     border-bottom: 2px solid $lxp-theme-green !important;
     color: #ffffff !important;
-    background-color: #898989 !important;
-
+    background-color: $lxp-theme-green !important;
+}
+.btn2 :hover{
+background-color:$lxp-theme-green !important;
 }
 
 .iconmenu {
@@ -167,7 +175,7 @@
 }
 
 .colWhite {
-    color:black
+    color:$color-lightGray;
 }
 
 .bookIcon {

@@ -84,7 +84,7 @@ import { VideoPreviewModalComponent } from './pages/video-preview-modal/video-pr
 import { ProjectMobileComponent } from './pages/project-mobile/project-mobile.component';
 import { PerformVideoRecordComponent } from './pages/perform-video-record/perform-video-record.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-
+import { AssignmentComponent } from './pages/assignment/assignment.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -287,7 +287,8 @@ const routes: Routes = [
     KnowledgeResourceHomeComponent,
     VideoPreviewModalComponent,
     ProjectMobileComponent,
-    PerformVideoRecordComponent
+    PerformVideoRecordComponent,
+    AssignmentComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
