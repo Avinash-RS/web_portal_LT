@@ -41,17 +41,17 @@
               <table class="f_size_12">
                 <tr>
                   <td>Instructor led sessions</td>
-                  <td>Upto {{course.instructor_lead_session_total_count!==null?course.instructor_lead_session_total_count:0}}</td>
+                  <td>Upto {{course.image_instructor_lead_session_time!==""?course.image_instructor_lead_session_time:0}}</td>
                   <!-- <td>Upto {{globalData.on_hover_image_data.instructor_lead_session}}</td> -->
                 </tr>
                 <tr>
                   <td>Self paced learning</td>
-                  <td>{{course.self_paced!==null?course.self_paced:0}}</td>
+                  <td>{{course.image_self_paced_learning_time!==""?course.image_self_paced_learning_time:0}}</td>
                 </tr>
                 <tr>
                   <!-- Mid course project -->
                   <td>Course project</td>
-                  <td>{{course.total_mid_course_project_count!==null?course.total_mid_course_project_count:0}}</td>
+                  <td>{{course.total_mid_course_project_count!==""?course.total_mid_course_project_count:0}}</td>
                 </tr>
                 <tr>
                   <td>Internal assessment</td>
@@ -154,7 +154,7 @@
             </div>
             <div class="col-4">
               <div class="row m-auto c_progress">
-                <circle-progress percent="{{(100 * (course.week_completed_count!==null?course.week_completed_count:0)) / course.week_total_count!==null?course.week_total_count:1}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                <circle-progress percent="{{((100 * (course.week_completed_count!==null?course.week_completed_count:0)) / (course.week_total_count!==null?course.week_total_count:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
                   [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="3"
                   [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="4.5" [animation]="true"
                   [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="courseWeekCircle"
@@ -208,30 +208,30 @@
                   <div class="row">
                     <div class="col-10 justify-content-center align-self-center">
                       <mat-progress-bar class="example-margin" [mode]="'determinate'"
-                        [value]="completedCourse ? 100 : course?.coursePlayerStatus?.course_percentage || 0">
+                        [value]="course.self_paced_learning_progression!==''?course.self_paced_learning_progression:0">
                       </mat-progress-bar>
                     </div>
                     <div class="col-2 c_per">
-                      {{completedCourse ? 100 : course?.coursePlayerStatus?.course_percentage || 0}}%
+                      {{course.self_paced_learning_progression!==''?(course.self_paced_learning_progression>100?100:course.self_paced_learning_progression):0}}%
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                  <div class="col-5 col-sm-5 col-md-5 col-lg-7">
                     <div class=" m-t-10px">
                       <span class="pointer seemoreHove"
                         (click)="course.progressionExp?course.progressionExp=false:course.progressionExp=true">
                         <span class="f_size_10 ">{{course.progressionExp?'Hide details...':'See more details...' }}</span>
                       </span>
                       <div *ngIf="course.progressionExp" class="f_size_12">
-                        Modules completed {{course.completed_module_count!==null?course.completed_module_count:0 +'/'+ course.total_module_count}}<br>
-                        Topics completed {{course.completed_topic_count!==null?course.completed_topic_count:0 +'/'+ course.total_topic_count}}<br>
+                        Modules completed {{(course.completed_module_count!=null?course.completed_module_count:0) +'/'+ (course.total_module_count!=null?course.total_module_count:0)}}<br>
+                        Topics completed {{(course.completed_topic_count!=null?course.completed_topic_count:0) +'/'+ (course.total_topic_count!=null?course.total_topic_count:0)}}<br>
                         <span class="pointer f_size_10" style="color: red; text-decoration: underline;">View self-learning
                           activity details..</span>
                       </div>
                     </div>
                   </div>
-                  <div class="col-12 col-sm-12 col-md-12 col-lg-5">
+                  <div class="col-6 col-sm-6 col-md-6 col-lg-5">
                     <button mat-stroked-button *ngIf="
                                                         course?.coursePlayerStatus?.status !== 'completed'
                                                       " class="btl-alin btn-txt-center
@@ -253,7 +253,7 @@
                     <button mat-stroked-button (click)="gotoDesc(course)" *ngIf="
                                                         course?.coursePlayerStatus?.status === 'completed' 
                                                       " class="btl-alin btn-txt-center
-                                                      bg_lxp_red color_white cap pointer m-t-05 m-l-10px">
+                                                      bg_lxp_red color_white cap pointer m-t-05 ">
                       <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
                       <span class="cap f_wt_400 m-t-m-2">
                         {{ "Replay" | translate }}&nbsp;
@@ -285,7 +285,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                  <div class="col-5 col-sm-5 col-md-5 col-lg-7">
                     <div class="m-t-10px">
                       <span class="pointer seemoreHove" (click)="course.discussExp?course.discussExp=false:course.discussExp=true">
                         <span class="f_size_10">{{course.discussExp?'Hide details...':'See more details...' }}</span>
@@ -299,9 +299,9 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-12 col-sm-12 col-md-12 col-lg-5">
+                  <div class="col-6 col-sm-6 col-md-6 col-lg-5">
                     <button mat-stroked-button *ngIf="userDetail.is_forum_config" class="btl-alin blue_clr btn-txt-center
-                              cap pointer m-l-10px  p-7-lr" (click)="goToForum(course)">
+                              cap pointer  p-7-lr" (click)="goToForum(course)">
                       <!-- <img class="mycourse-btn-img" alt="" src="../../../../assets/learner/mycourseicons/collaborate.svg"
                                 width="16px" height="12.5px"> -->
                       <i class="fa fa-handshake-o mycourse-btn-img" aria-hidden="true"></i>
@@ -337,7 +337,7 @@
                   </div>
                 </div>
                 <div class="row ">
-                  <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                  <div class="col-5 col-sm-5 col-md-5 col-lg-7">
                     <div class="m-t-10px">
                       <span class="pointer seemoreHove" (click)="course.ledinstExp?course.ledinstExp=false:course.ledinstExp=true">
                         <span class="f_size_10">{{course.ledinstExp?'Hide details...':'See more details...' }}</span>
@@ -350,9 +350,9 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-12 col-sm-12 col-md-12 col-lg-5">
+                  <div class="col-6 col-sm-6 col-md-6 col-lg-5">
                     <button mat-stroked-button class="btl-alin btn-txt-center m_3_px_top
-                            blue_clr cap pointer m-l-10px" (click)="goInstructorLed(course)">
+                            blue_clr cap pointer" (click)="goInstructorLed(course)">
                       <!-- <img class="mycourse-btn-img" alt="" src="../../../../assets/learner/mycourseicons/joinmain.svg"
                                 width="16px" height="12.5px"> -->
           
@@ -390,7 +390,7 @@
               </div>
               <!-- <div class="row pseudoheight"></div> -->
               <div class="row">
-                <div class="col-12 col-sm-12 col-md-12 col-lg-7">
+                <div class="col-5 col-sm-5 col-md-5 col-lg-7">
                   <div class="m-t-10px">
                     <span class="pointer seemoreHove" (click)="course.activityExp?course.activityExp=false:course.activityExp=true">
                       <span class="f_size_10">{{course.activityExp?'Hide details...':'See more details...' }}</span>
@@ -408,8 +408,8 @@
                     </div>
                   </div> -->
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-5">
-                  <button mat-stroked-button class="btl-alin blue_clr cap pointer m-l-10px btn-txt-center "
+                <div class="col-6 col-sm-6 col-md-6 col-lg-5">
+                  <button mat-stroked-button class="btl-alin blue_clr cap pointer btn-txt-center "
                     (click)="Go(course)">
                     <!-- <img class="mycourse-btn-img" alt="" src="../../../../assets/learner/mycourseicons/go.svg"
                       width="16px" height="12.5px"> -->

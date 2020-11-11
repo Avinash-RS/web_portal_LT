@@ -747,7 +747,7 @@ border: 1px solid #ccc;
   height: 60%;
 }
 
-matCardIconRow1 {
+.matCardIconRow1 {
   height: 71%;
 }
 
@@ -773,7 +773,7 @@ matCardIconRow1 {
 }
 
 .fileSelDetHover {
-  height: 5.7rem;
+  height: 3rem;
   background-color: #5C6873;
 }
 
@@ -784,4 +784,30 @@ matCardIconRow1 {
 .fileColor {
   font-size: 10px;
   color:#E8E8E8;
+}
+
+.playBtnmobile {
+  font-size: 14px;
+  top: 3px;
+  left: 0rem;
+}
+
+.actionBtnmobile {
+  font-size: 10px;
+  margin-left: 1rem;
+}
+
+.downloadBtnMobile {
+  font-size: 10px;
+  top: 0.3rem;
+}
+
+.colActionDownload {
+  padding-left: 0px;
+  cursor: pointer;
+}
+
+.actionBtn1Mobile {
+  font-size: 10px;
+  margin-left: 1rem;
 }

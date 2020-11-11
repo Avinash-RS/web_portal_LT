@@ -596,6 +596,9 @@ playVideo(templateRef: TemplateRef<any>, videoDialog, path, docType) {
   });
   this.previewDoc = path;
   } else if (docType === 'video/mp4') {
+    if (path.videourl) {
+      path.path = path.videourl;
+    }
     this.videoSource = path.path;
     this.videoPreview(videoDialog, path.path);
   }

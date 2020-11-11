@@ -444,7 +444,8 @@
                       [ngClass]="perform.performActivity.materialDetails.length <= 3 ? 'owlItration arrow' : 'arrow'">
                       <ng-template class="row ml-0 mr-0" carouselSlide
                       *ngFor="let videoName of itrdata.videodetails; let i = index">
-                        <mat-card class="materialCard p-0 mr-2" (mouseover)="hoverfile = true; mouseover(i)" (mouseleave)="hoverfile = false">
+                        <mat-card class="materialCard p-0 mr-2" (mouseover)="hoverfile = true; mouseover(i)" 
+                        (mouseleave)="hoverfile = false">
                         <!-- (click)="playVideo(projectPreviewDialog, videoDialog, videoName, videoName.doc_type)" -->
                           <div class="row ml-0 mr-0 matCardIconRow1">
                             <div class="col-12 pl-0 pr-0">
@@ -461,23 +462,22 @@
                                 <div class="row ml-0 mr-0 playActions">
                                   <div class="col-5 text-left pr-0 colAction"
                                     (click)="playVideo(projectPreviewDialog, videoDialog, videoName, videoName.doc_type)">
-                                    <mat-icon class="position-absolute text-white playBtn"
+                                    <mat-icon class="position-absolute text-white playBtnmobile"
                                       *ngIf="videoName.doc_type =='video/mp4'">play_circle_outline</mat-icon>
                                     <mat-icon class="position-absolute text-white playBtn"
                                       *ngIf="videoName.doc_type =='image/jpeg'">photo_size_select_actual</mat-icon>
                                       <i class="fa fa-file-pdf-o position-absolute text-white playBtn" *ngIf="videoName.doc_type =='application/pdf'"
                                       aria-hidden="true"></i>
-                                    <span class="text-white actionBtn"
+                                    <span class="text-white actionBtnmobile"
                                       *ngIf="videoName.doc_type =='video/mp4'">Play</span>
                                     <span class="text-white actionBtn"
                                       *ngIf="videoName.doc_type == 'image/jpeg' || videoName.doc_type == 'application/pdf'">Preview</span>
                                   </div>
-                                  <div class="col-7 text-center pr-0 colAction">
-                                    <!-- (click)="downloadVideo()" -->
-                                    <a [href]="videoName.path" [download]="videoName.filename"><i
-                                        class="fa fa-download text-white position-absolute downloadBtn"
+                                  <div class="col-7 text-center pr-0 colActionDownload">
+                                    <a [href]="videoName.path" [download]="videoName.name"><i
+                                        class="fa fa-download text-white position-absolute downloadBtnMobile"
                                         aria-hidden="true"></i>
-                                      <span class="text-white actionBtn1">Download</span></a>
+                                      <span class="text-white actionBtn1Mobile">Download</span></a>
                                   </div>
                                 </div>
                               </div>
