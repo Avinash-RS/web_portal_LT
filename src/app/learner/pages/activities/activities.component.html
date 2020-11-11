@@ -440,12 +440,12 @@
                       <span class="uploadedFile" *ngIf="itrdata.submitAction == 'submit'">Submitted on :
                         {{itrdata.submitted_on | date:'MMM dd, yyyy'}}</span>
                     </div>
-                    <div class="align-center mt-2" *ngIf="itrdata.grade_status === 'Evaluated'">
+                    <div class="align-center mt-2 itdata" *ngIf="itrdata.grade_status === 'Evaluated'">
                       <owl-carousel-o [options]="trendingCategorires"
-                      [ngClass]="perform.performActivity.materialDetails.length <= 3 ? 'owlItration arrow' : 'arrow'">
+                      [ngClass]="perform.performActivity.materialDetails.length <= 2 ? 'owlItration arrow' : 'arrow'">
                       <ng-template class="row ml-0 mr-0" carouselSlide
                       *ngFor="let videoName of itrdata.videodetails; let i = index">
-                        <mat-card class="materialCard p-0 mr-2" (mouseover)="hoverfile = true; mouseover(i)" 
+                        <mat-card class="materialCard p-0 mr-2 .m-l" (mouseover)="hoverfile = true; mouseover(i)" 
                         (mouseleave)="hoverfile = false">
                         <!-- (click)="playVideo(projectPreviewDialog, videoDialog, videoName, videoName.doc_type)" -->
                           <div class="row ml-0 mr-0 matCardIconRow1">
