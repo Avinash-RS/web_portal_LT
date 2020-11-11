@@ -242,8 +242,8 @@
 }
 
 :host ::ng-deep.mat-tab-label {
-  height: 48px;
-  padding: 0px 28px !important;
+  height: 38px;
+  padding: 0px 15px !important;
   // min-width: 130px;
   text-align: center;
   display: inline-flex;
@@ -253,9 +253,6 @@
   position: relative;
 }
 
-:host ::ng-deep.mat-tab-label .mat-tab-label-content :hover {
-  // color: $color-blank !important;
-}
 
 :host /deep/ .mat-ink-bar {
   height: 2px !important;
@@ -625,7 +622,7 @@ hr {
 .tabsc {
   & .mat-badge-content {
     color: $color-white;
-    background: $lxp-gray !important;
+    background: $lxp-theme-green !important;
   }
 
 }
@@ -2142,9 +2139,6 @@ hr {
 // :host ::ng-deep #mat-tab-label-0-5 {
 //   display: none;
 // }
-:host ::ng-deep #mat-badge-content-3 {
-  background: #898989 !important;
-}
 
 .catnamesss {
   margin-right: 35px;
