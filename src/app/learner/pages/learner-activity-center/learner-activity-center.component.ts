@@ -71,7 +71,7 @@ export class LearnerActivityCenterComponent implements OnInit {
       this.service.getCourseActivities(userId, PageNumber, this.courseId, this.sortType, this.searchValue,
         this.searchColumn, this.statusBased)
         .subscribe((result: any) => {
-          console.log(result, 'rinitial');
+          // console.log(result, 'rinitial');
           if (result.data.get_course_activities.total_count > 0) {
             params.successCallback(
               result.data.get_course_activities.message, result.data.get_course_activities.total_count
@@ -229,7 +229,7 @@ export class LearnerActivityCenterComponent implements OnInit {
     this.searchValue = globalSearchValue ? globalSearchValue : '';
     // console.log(searchColumnVal, 'sc');
     this.searchColumn = searchColumnVal;
-    console.log(this.searchColumn, searchColumnVal, 'sc');
+    // console.log(this.searchColumn, searchColumnVal, 'sc');
     this.gridApi.setDatasource({
       getRows: (params: IGetRowsParams) => {
         const userId = this.userDetails.user_id;
@@ -255,7 +255,7 @@ export class LearnerActivityCenterComponent implements OnInit {
         this.service.getCourseActivities(userId, PageNumber, this.courseId, this.sortrecord, this.searchValue,
           this.searchColumn, this.statusBased)
           .subscribe((result: any) => {
-            console.log(result, 'r');
+            // console.log(result, 'r');
             if (result.data.get_course_activities.message.length === 0) {
               this.toastr.warning('No results found');
             }
@@ -351,11 +351,11 @@ export class LearnerActivityCenterComponent implements OnInit {
     }
     if (filterArray.length > 0) {
       this.searchColumn = JSON.stringify(filterArray);
-      console.log(this.searchColumn, 'searchcol');
+      // console.log(this.searchColumn, 'searchcol');
       // this.callGridApi(this.sortrecord || 'undefined', '', this.searchColumn);
       this.callGridApi(this.sortrecord || 'undefined', this.searchValue || '', this.searchColumn);
     } else {
-      console.log(searchString, 'ss');
+      // console.log(searchString, 'ss');
       this.callGridApi(this.sortrecord || 'undefined', this.searchValue || '', 'undefined');
     }
   }
