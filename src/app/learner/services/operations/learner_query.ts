@@ -1866,6 +1866,8 @@ query getperformActivityData($userId: String , $courseId: String) {
         submittedTotal
         course_id
         batchid
+        batchstartdate
+        batchenddate
         activityId
         iterationTotal
         module_id
