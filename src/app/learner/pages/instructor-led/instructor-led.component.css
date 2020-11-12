@@ -65,9 +65,9 @@ th {
     color: black;
 }
 
-.redHover:hover {
+/* .redHover:hover {
     color: $lxp-theme-green !important;
-}
+} */
 
 .backIc {
     width: 10px !important;

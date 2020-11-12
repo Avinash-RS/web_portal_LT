@@ -127,9 +127,9 @@ export class InstructorLedComponent implements OnInit {
       mm = (diff % 60);
       mm = 34.999999;
       if (mm) {
-        context = hh.toFixed(0) + ' hour' + mm.toFixed(0) + ' minutes';
+        context = hh.toFixed(0) + ' hour ' + mm.toFixed(0) + ' minutes';
       } else {
-        context = hh.toFixed(0) + ' hour';
+        context = hh.toFixed(0) + ' hour ';
       }
     } else {
       hh = 0;
