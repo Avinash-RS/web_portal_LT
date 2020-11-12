@@ -410,7 +410,7 @@ export class LearnerMyCourseComponent implements OnInit {
   }
 
   courseTabChange(event,userId, userObjId){
-    console.log(event)
+    console.log(event)//event index not worked
     this.getDashboardMyCourse(userId, userObjId)
   }
   diff_hours(dt2, dt1) {
@@ -559,6 +559,7 @@ export class LearnerMyCourseComponent implements OnInit {
       });
   }
   viewCourse(category, templateRef: TemplateRef<any>, categoryname, categorycount) {
+    return false
     this.color = false;
     // this.loading = true;
     this.viewCourseClass = false;
