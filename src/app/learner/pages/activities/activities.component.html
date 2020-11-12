@@ -297,9 +297,9 @@
                 </span>{{perform.performActivity.iterationTotal}}</div>
 
 
-              <div class="startDate">Start date :<span class="endDateTxt"></span>End date :</div>
-              <div class="startDate f_wt_600">{{perform.activityStartDate}}
-                <span class="f_wt_600"></span>{{perform.activityEndDate}}</div>
+              <div class="m-l-68">Start date :<span class="endDateTxt"></span>End date :</div>
+              <div class="m-l-68 f_wt_600">{{perform.performActivity.activitystartdate | date}}
+                <span class="EndDate f_wt_600"></span>{{perform.performActivity.activityenddate | date}}</div>
             </div>
           </div>
 
@@ -327,11 +327,12 @@
               </div>
                 </div>
               </div> -->
+              
                 <owl-carousel-o [options]="trendingCategorires"
-                  [ngClass]="perform.performActivity.materialDetails.length <= 4 ? 'widthClass arrow' : 'arrow'">
+                  [ngClass]="perform.performActivity.materialDetails.length >= 4 ? 'arrow': 'widthClass arrow' ">
                   <ng-template class="row ml-0 mr-0" carouselSlide
                     *ngFor="let material of perform.performActivity.materialDetails; let i = index">
-                    <div class="col-4 w-100 pt-2 pb-2 carouselCol">
+                    <div [ngClass]="perform.performActivity.materialDetails.length >= 4 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
                       <mat-card class="p-0 carouselCard" (mouseover)="hover = true; mouseover(i)"
                         (mouseleave)="hover = false">
                         <!--  -->
@@ -347,19 +348,19 @@
                           </div>
                         </div>
                         <div (mouseleave)="hover = false"
-                          [ngClass]="!hover ? 'row ml-0 mr-0 carouselRow' : 'row ml-0 mr-0 carouselRowHover'">
-                          <div class="col-12 text-center m-auto pl-0 pr-0">
+                          [ngClass]="hover && mouseOverIndex == i ? 'row ml-0 mr-0 carouselRowHover' : 'row ml-0 mr-0 carouselRow'">
+                          <div class="col-12 text-center mt-2 mb-2 pl-0 pr-0">
                             <span class="carouselText" *ngIf="material.filename?.length > 19">{{(material.filename| slice:0:20)+'...'}}</span>
                             <span class="carouselText" *ngIf="material.filename?.length < 19">{{material.filename}}</span>
                             <br>
-                            <div class="row ml-0 mr-0" *ngIf="hover">
+                            <div class="row ml-0 mr-0" *ngIf="hover && mouseOverIndex == i">
                               <div class="col-12 pl-0 pr-0">
                                 <!-- <div class="row ml-0 mr-0">
                                   <div class="col-12 text-left pl-1">
                                     <p class="carouselText">Duration:</p>
                                   </div>
                                 </div> -->
-                                <div class="row ml-0 mr-0 playActions">
+                                <div class="row ml-0 mr-0 mt-2 playActions">
                                   <div class="col-5 text-left pr-0 colAction"
                                     (click)="playVideo(projectPreviewDialog, videoDialog, material, material.doc_type)">
                                     <mat-icon class="position-absolute text-white playBtn"
@@ -456,17 +457,17 @@
                         Submitted </button>
                     
                     </div>
-                    <div class="align-center mt-2" *ngIf="itrdata.grade_status !== 'Evaluated'">
+                    <div class="align-center   mt-2" *ngIf="itrdata.grade_status !== 'Evaluated'">
                       <span *ngIf="itrdata.submit_status == 'notsubmitted'"
                         class="submitedFile">Submitted files cannot be edited</span>
                       <span class="uploadedFile" *ngIf="itrdata.submitAction == 'submit'">Submitted on :
                         {{itrdata.submitted_on | date:'MMM dd, yyyy'}}</span>
                     </div>
                     <div class="align-center mt-2 itdata" *ngIf="itrdata.grade_status === 'Evaluated'">
-                      <owl-carousel-o [options]="trendingCategorires"
-                      [ngClass]="perform.performActivity.materialDetails.length <= 2 ? 'owlItration arrow' : 'arrow'">
-                      <ng-template class="row ml-0 mr-0" carouselSlide
-                      *ngFor="let videoName of itrdata.videodetails; let i = index">
+                      <owl-carousel-o [options]="trendingItration"
+                      [ngClass]="itrdata.videodetails.length >= 4 ? 'arrow' : 'owlItration arrow'">
+                      <ng-template carouselSlide  *ngFor="let videoName of itrdata.videodetails; let i = index">
+                      <div class="col-6">
                         <mat-card class="materialCard p-0 mr-2 .m-l" (mouseover)="hoverfile = true; mouseover(i)" 
                         (mouseleave)="hoverfile = false">
                         <!-- (click)="playVideo(projectPreviewDialog, videoDialog, videoName, videoName.doc_type)" -->
@@ -477,10 +478,10 @@
                               <mat-icon class="icons" *ngIf="videoName.doc_type =='video/mp4'">play_circle_outline</mat-icon> 
                             </div>
                           </div>
-                          <div class="row ml-0 mr-0 h-40" (mouseleave)="hoverfile = false" [ngClass]="!hoverfile ? 'row ml-0 mr-0 fileSelDet' : 'row ml-0 mr-0 fileSelDetHover'">
+                          <div class="row ml-0 mr-0 h-40" (mouseleave)="hoverfile = false; mouseover(i)" [ngClass]="hoverfile && mouseOverIndex == i ? 'row ml-0 mr-0 fileSelDetHover' : 'row ml-0 mr-0 fileSelDet'">
                             <div class="col-12 pr-0 fileNameCol">
                               <span class="fileColor">{{(videoName.name| slice:0:18)+'...'}}</span>
-                          <div class="row ml-0 mr-0" *ngIf="hoverfile">
+                          <div class="row ml-0 mr-0" *ngIf="hoverfile && mouseOverIndex == i">
                               <div class="col-12 pl-0 pr-0">
                                 <div class="row ml-0 mr-0 playActions">
                                   <div class="col-5 text-left pr-0 colAction"
@@ -508,6 +509,7 @@
                           </div>
                         </div>
                         </mat-card>
+                      </div>
                         </ng-template>
                         </owl-carousel-o>
                       <div class="row ml-0 mr-0 mt-2">
@@ -898,8 +900,14 @@
       <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
     </button>
   </div>
-  <div *ngIf="previewDoc">
+  <!-- <div *ngIf="previewDoc">
     <app-pdfreader [url]="previewDoc"></app-pdfreader>
+  </div> -->
+
+  <div class="row" *ngIf="previewDoc">
+    <div class="col-12">
+      <app-pdfreader [url]="previewDoc"></app-pdfreader>
+    </div>
   </div>
 </ng-template>
 <!-- dialogue box for assignment tab view assignment-->

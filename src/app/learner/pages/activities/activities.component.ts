@@ -59,6 +59,43 @@ export class ActivitiesComponent implements OnInit {
   screenHeight: number;
   screenWidth: number;
   // assignmentMessage = false;
+
+  trendingItration: any = {
+    loop: false, // dont make it true
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    autoHeight: true,
+    autoWidth: true,
+    navSpeed: 900,
+    navText: ['<i class=\'fa fa-chevron-left\'></i>', '<i class=\'fa fa-chevron-right\'></i>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 2,
+        autoHeight: true,
+        autoWidth: true
+      },
+      940: {
+        items: 2,
+        autoHeight: true,
+        autoWidth: true
+      },
+      1200: {
+        items: 2,
+        autoHeight: true,
+        autoWidth: true
+      }
+    },
+    nav: true
+  };
+  
   trendingCategorires: any = {
     loop: false, // dont make it true
     mouseDrag: true,
@@ -385,33 +422,27 @@ export class ActivitiesComponent implements OnInit {
   getperformActivityData() {
     this.Lservice.getperformActivityData(
       this.userDetail.user_id,  this.courseid
-      // this.courseid
     ).subscribe((data: any) => {
       if (data && data.data && data.data.getperformActivityData && data.data.getperformActivityData.data) {
       this.performDetails = data.data.getperformActivityData.data;
       this.performDetails.forEach((element) => {
-        const startDate = new Date(element.performActivity.activitystartdate);
-        element.activityStartDate = moment(startDate).format('DD-MM-YYYY, HH:MM');
-        element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
-        const endDate = new Date(element.performActivity.activityenddate);
-        element.activityEndDate = moment(endDate).format('DD-MM-YYYY, HH:MM');
-        element.endDate = moment(endDate).format('DD-MM-YYYY HH:MM');
-        let strtDate = new Date(startDate);
-        let edDate = new Date(endDate);
-        let crrDate = new Date();
-        if (strtDate <= crrDate && edDate >= crrDate) {
+        const startDate = this.datePipe.transform(element.performActivity.activitystartdate, 'dd-MM-yyyy');
+        // element.activityStartDate = moment(startDate).format('ll, HH:MM');
+        // element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
+        const endDate = this.datePipe.transform(element.performActivity.activityenddate, 'dd-MM-yyyy');
+        // element.activityEndDate = moment(endDate).format('ll, HH:MM');
+        // element.endDate = moment(endDate).format('DD-MM-YYYY HH:MM');
+        console.log('startDate', startDate, endDate);
+        let crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
+        if (startDate <= crrDate && endDate >= crrDate) {
           element['itrationStarted'] = true;
         } else {
           element['itrationStarted'] = false;
         }
         // element['itrationStarted'] = this.dateDiff(strtDate, edDate, crrDate);
-        if (moment().format('DD-MM-YYYY HH:MM') >= element.startDate &&
-        moment().format('DD-MM-YYYY HH:MM') <= element.endDate) {
-        this.submitStatus = 'ontime';
-      } else if (moment().format('DD-MM-YYYY HH:MM') > element.endDate) {
-        this.submitStatus = 'late';
-      }
+      
       });
+      console.log('this.performDetails', this.performDetails);
     }
     });
   }
@@ -471,7 +502,6 @@ export class ActivitiesComponent implements OnInit {
 
   // Submit or Delete
   learnerSumbitdeleteVideo(project, deleteItem, submitAction) {
-    console.log('project', project);
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:MM');
     const endDate1 = new Date(project.projectActivity.activityenddate);
@@ -532,8 +562,15 @@ uploadDocuments(e,perform, performans) {
 }
 
 performlearnerUploadVideo() {
-  const currentDate = new Date();
+  const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
   const performVideo = new FormData();
+  let startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy');
+  let endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy');
+  if (currentDate >= startDate && currentDate <= endDate) {
+    this.submitStatus = 'ontime';
+  } else {
+    this.submitStatus = 'late';
+  }
   // tslint:disable-next-line: prefer-for-of
   for (let i = 0; i < this.selectPerformfile.length; i++) {
     performVideo.append('uploadvideo', this.selectPerformfile[i]);
@@ -549,6 +586,7 @@ performlearnerUploadVideo() {
   performVideo.append('submitAction', this.submitType);
   performVideo.append('iterationid', this.itrationData.iterationid);
   performVideo.append('object_id', this.performsData.performActivity.perform_id);
+  this.commonServices.loader$.next(true);
   this.Lservice.learnerUploadVideo(performVideo).subscribe((data: any) => {
     if (data.success === true) {
       this.toastr.success(data.message);

@@ -206,6 +206,9 @@ margin-bottom: 9px;
 ::ng-deep .matDialogMat .mat-dialog-container {
   overflow: hidden !important;
 }
+::ng-deep .cdk-global-scrollblock{
+  overflow-y: auto !important;
+}
 
 .download-icon {
   position: relative;
@@ -309,11 +312,11 @@ margin-bottom: 1% !important;
 }
 
 .endDateTxt {
-  margin-left: 45px;
+  margin-left: 36px;
 }
 
 .EndDate {
-  margin-left: 36px;
+  margin-left: 1.4rem;
 }
 
 .itrationTxt {
@@ -515,7 +518,7 @@ margin-top: 8px;
 }
 .itrCount {
 position: relative;
-right: 36px;
+right: 3rem;
 }
 .noSessionCard {
   margin: auto;
@@ -605,7 +608,7 @@ right: 36px;
 }
 
 .carouselRowHover {
-  height: 5.7rem;
+  height: 4rem;
   background-color: #5C6873;
 }
 
@@ -614,6 +617,12 @@ right: 36px;
 }
 
 .carouselCol {
+  max-width: 73% !important;
+  height: 15rem;
+  margin-left: 2rem;
+}
+
+.carouselCol1 {
   max-width: 100% !important;
   height: 15rem;
   margin-left: -15px;
@@ -817,9 +826,10 @@ border: 1px solid #ccc;
 }
 
 .materialCard {
-  width: 7rem;
+  width: 8rem;
   height: 7rem;
   cursor: pointer;
+  margin-left: 1rem;
 }
 
 .icons {
