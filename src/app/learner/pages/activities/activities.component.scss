@@ -206,6 +206,9 @@ margin-bottom: 9px;
 ::ng-deep .matDialogMat .mat-dialog-container {
   overflow: hidden !important;
 }
+::ng-deep .cdk-global-scrollblock{
+  overflow-y: auto !important;
+}
 
 .download-icon {
   position: relative;

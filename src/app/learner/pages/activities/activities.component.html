@@ -900,8 +900,14 @@
       <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
     </button>
   </div>
-  <div *ngIf="previewDoc">
+  <!-- <div *ngIf="previewDoc">
     <app-pdfreader [url]="previewDoc"></app-pdfreader>
+  </div> -->
+
+  <div class="row" *ngIf="previewDoc">
+    <div class="col-12">
+      <app-pdfreader [url]="previewDoc"></app-pdfreader>
+    </div>
   </div>
 </ng-template>
 <!-- dialogue box for assignment tab view assignment-->
