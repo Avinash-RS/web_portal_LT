@@ -542,12 +542,18 @@ export class ActivitiesComponent implements OnInit {
 
  uploadDocument(event, perform) {
   // this.selectPerformfile.push(event.target.files[0] as File);
+  const filePath = event.target.files[0].name;
+  const allowedExtensions = /(\.mp4)$/i;
+  if (!allowedExtensions.exec(filePath)) {
+    this.toastr.warning('Please upload video file only.');
+  } else {
   // tslint:disable-next-line: prefer-for-of
   for (let i = 0; i < event.target.files.length; i++) {
     this.selectPerformfile.push(event.target.files[i]);
 }
   this.performlearnerUploadVideo();
 }
+ }
 
 uploadDocuments(e,perform, performans) {
   this.performsData = performans;
