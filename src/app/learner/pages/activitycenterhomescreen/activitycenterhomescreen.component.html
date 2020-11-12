@@ -1,26 +1,31 @@
 <app-header></app-header>
-<div class="row">
+<!-- <div class="row">
   <h2 class="activity_center">Activity center</h2>
-</div>
-
+</div> -->
+<br />
+<div class="f_size_22  m-l-10px myC-head animated animatedFadeInUp fadeInUp " style="font-size: 22px;">
+  {{'Activity Center' | translate }}</div>
+<!-- {{details.Completed == null && details.Graded == null && details.Submitted ==null }}mm -->
 <div class="row m-t-rw">
   <div class="col-xl-2 col-lg-0  col-sm-0"></div>
   <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-    <mat-card class="activitycard pointer" [ngClass]="details?.nextactivity?.length > 1 ? 'ht-130' : 'ht-120'"
+    <mat-card class="activitycard" [ngClass]="details?.nextactivity?.length > 1 ? 'ht-130' : 'ht-120'"
       (click)="gototable1()">
       <!-- <mat-card-content> -->
       <div class="row no_padding ">
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 center">
           <img src="assets/images/Next-Activity.svg" alt="" class="img_ht_wt">
         </div>
         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
           <h2 class="next_activity m-b-0 mt8">Next activity on</h2>
           <!-- <h3 class="m-b-0 color_red f-w-800">15th October 2020 | 11:00 AM</h3>
             <h2 class="m-b-0 f_size_15 color_red">Perform pollutionlevel and corrosion</h2> -->
-          <h3 class="m-b-0  color_grey" *ngIf="details?.nextactivity === null || details?.nextactivity === [] || details?.nextactivity?.length == 0">You have
-            no next activity</h3>
+          <h3 class="m-b-0 color_grey"
+            *ngIf="details?.nextactivity === null || details?.nextactivity === [] || details?.nextactivity?.length == 0">
+            You have no next activity</h3>
           <span *ngIf="details?.nextactivity?.length >= 1">
-            <h4 class="m-b-0 color_red f-w-800">{{details?.nextactivity[0].activitystartdate | date:'longDate'}} &nbsp; |&nbsp;
+            <h4 class="m-b-0 color_red f-w-800">{{details?.nextactivity[0].activitystartdate | date:'longDate'}} &nbsp;
+              |&nbsp;
               {{details?.nextactivity[0].activitystartdate | date:'shortTime'}} </h4>
             <div *ngFor="let activities of details?.nextactivity">
               <p class="m-b-0 f_size_15 p-t-5 color_grey">{{activities?.activity}} - {{activities?.activityname}} </p>
@@ -34,19 +39,29 @@
     </mat-card>
   </div>
   <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-    <mat-card class="activitycard ht-120 pointer" (click)="gototable('completed')">
+    <mat-card class="activitycard ht-120" (click)="gototable('completed')"
+      [ngClass]="(details?.Completed == null && details?.Graded == null && details?.Submitted ==null) ? '': 'pointer'">
       <!-- <mat-card-content> -->
       <div class="row no_padding ">
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 center">
           <img src="assets/images/Completed.svg" alt="" class="img_ht_wt">
         </div>
         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
-          <!-- <div class="row"> -->
           <h2 class="next_activity m-b-0 mt9">Completed</h2>
-          <h3 class="m-b-0 color_blue">You have completed {{details?.Completed || 0}} activities</h3>
-          <h2 class="m-b-0 f_size_15 color_green mt6">Graded - {{details?.Graded || 0}} activities</h2>
-          <h2 class="m-b-0 f_size_15 m_t_10 color_orange">Submitted - {{details?.Submitted || 0}} activities</h2>
-          <!-- </div> -->
+          <!-- <h3 class="m-b-0  color_grey"
+            *ngIf="details?.Completed == null && details?.Graded == null && details?.Submitted ==null">You have no
+            completed activity </h3> -->
+          <!-- <span *ngIf="details?.Completed !== null || details?.Graded !== null || details?.Submitted !== null"> -->
+          <h3 class="m-b-0 color_blue">You have completed
+            {{details?.Completed > 1   ?  details?.Completed + ' activities ': details?.Completed == 1 ?  '1 activity ': '0 activity'}}
+          </h3>
+          <h2 class="m-b-0 f_size_15 color_green mt6">Graded -
+            {{details?.Graded > 1  ? details?.Graded + ' activities ': details?.Graded == 1 ?  '1 activity ': '0 activity'}}
+          </h2>
+          <h2 class="m-b-0 f_size_15 m_t_10 color_orange">Submitted -
+            {{details?.Submitted > 1  ? details?.Submitted + ' activities ': details?.Submitted == 1 ? '1 activity ': '0 activity'}}
+          </h2>
+          <!-- </span> -->
         </div>
       </div>
       <!-- </mat-card-content> -->
@@ -60,14 +75,19 @@
     <mat-card class="activitycard ht-120 pointer" (click)="gototable('pending')">
       <!-- <mat-card-content> -->
       <div class="row no_padding ">
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 center">
           <img src="assets/images/Pending-activities.svg" alt="" class="img_ht_wt">
         </div>
         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
           <h2 class="next_activity m-b-0 mt8">Pending-activities</h2>
-          <h3 class="m-b-0  color_grey">You have {{details?.Yettosubmit || 0}} activities pending</h3>
-
-
+          <!-- <h3 class="m-b-0 color_grey"
+          *ngIf="details?.Yettosubmit === null">
+          You have no pending activity</h3>
+          <span  *ngIf="details?.Yettosubmit === null"> -->
+          <h3 class="m-b-0 color_grey">You have
+            {{details?.Yettosubmit > 1 ? details?.Yettosubmit + ' activities ': details?.Yettosubmit == 1 ?  '1 activity ': '0 activity'}}
+            pending</h3>
+          <!-- </span> -->
         </div>
       </div>
       <!-- </mat-card-content> -->
@@ -77,15 +97,17 @@
     <mat-card class="activitycard ht-120 pointer" (click)="gototable('allActivities')">
       <!-- <mat-card-content> -->
       <div class="row no_padding ">
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 center">
           <img src="assets/images/View-all-activities.svg" alt="" class="img_ht_wt">
         </div>
-        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
-          <!-- <div class="row"> -->
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8"   [ngClass]="details?.Allactivites == null ? 'p-l-30px' :''">
           <h2 class="next_activity m-b-0 mt9">View all activities</h2>
-          <h3 class="m-b-0 color_blue">You have {{details?.Allactivites || 0}} activities overall</h3>
-
-          <!-- </div> -->
+          <h3 class="m-b-0 color_grey" *ngIf="details?.Allactivites == null">
+            You have no activity</h3>
+          <span *ngIf="details?.Allactivites != null">
+            <h3 class="m-b-0 color_blue">You have
+              {{details?.Allactivites > 1 ? details?.Allactivites + ' activities ': details?.Allactivites == 1 ?  '1 activity ': ''}} overall </h3>
+          </span>
         </div>
       </div>
       <!-- </mat-card-content> -->
