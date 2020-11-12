@@ -42,22 +42,27 @@ input:focus {
 
 }
 
-::ng-deep .ag-theme-alpine .ag-header {
-    background-color: #F9F2BC;
-}
+// ::ng-deep .ag-theme-alpine .ag-header {
+//     background-color: #F9F2BC;
+// }
 
-::ng-deep .ag-theme-alpine .ag-row {
-    background-color: $color-lightest-grey;
-    border-bottom: 1px solid white;
+// ::ng-deep .ag-theme-alpine .ag-row {
+//     background-color: $color-lightest-grey;
+//     border-bottom: 1px solid white;
+// }
+:host ::ng-deep.ag-row-hover {
+    background-color: $profile-t-grey !important;
 }
 
 ::ng-deep .ag-theme-alpine {
     border: none !important;
 }
+
 // In Learner end table font is replaced with overall font, hence icons are not displaying. so this font-family css is implemented for icons in ag grid
 ::ng-deep .ag-theme-alpine .ag-icon {
     font-family: "agGridAlpine" !important;
 }
+
 .sub {
     color: #FFA04E !important;
 }
@@ -77,10 +82,9 @@ input:focus {
     align-items: center;
 }
 
-::ng-deep.ag-paging-panel {
-  
-   
-    background-color: #F9F2BC!important
+:host ::ng-deep.ag-paging-panel {
+    // background-color: #F9F2BC!important
+    background-color: #F8F8F8 !important;
 }
 
 // End of screen 5 - View All Activities card //

@@ -16,6 +16,9 @@
     border-left: 6px solid $color-yellow;
     background-color: #F5F5F5;
     box-shadow: 0px 2px 4px #00000029;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .ht-120 {
@@ -90,4 +93,11 @@
 
 .color_grey {
     color: #6A6A6A;
+}
+
+.m-l-10px{
+    margin-left: 10px;
+}
+.p-l-30px {
+    padding-left: 30px;
 }
