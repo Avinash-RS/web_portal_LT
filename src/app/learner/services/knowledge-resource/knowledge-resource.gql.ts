@@ -11,7 +11,9 @@ get_all_resources_details{
             documentname
             file
             domain
+            thumbnail
             area_of_interest
+            thumbnail
             created_on
             createdby_role
             createdby_name
@@ -36,6 +38,7 @@ query get_all_resources_details($domain: String,$area_of_interest: String) {
                     topic
                     url
                     filename
+                    thumbnail
                     area_of_interest
                     created_on
                     createdby_role
@@ -65,3 +68,54 @@ export const update_resource_details = gql`
           error_msg
         }
     }`
+
+    export const get_source_report = gql `
+    query{
+
+      get_source_report{
+  
+          success
+  
+          error_msg
+  
+          message{
+  
+              _id
+  
+              createdon
+  
+              status
+  
+              count
+  
+          }
+  
+      }
+  
+  }`
+    
+export const get_Knowlegde_ResourceReport = gql`
+  query getKnowlegdeResourceReport($reportid: String!){
+    getKnowlegdeResourceReport(reportid: $reportid) {
+      success
+      message {
+        _id
+        resourceid
+        status
+        documentname
+        file
+        domain
+        area_of_interest
+        formate
+        topic
+        filename
+        url
+        thumbnail
+        created_on
+        createdby_role
+        createdby_name
+        createdby_id
+      }
+    }
+  }
+`;

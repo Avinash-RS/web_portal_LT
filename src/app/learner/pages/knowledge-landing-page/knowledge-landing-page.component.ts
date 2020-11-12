@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { knowledgeService } from '@learner/services/knowledge-resource/knowledge-resource.service';
+import { ToastrService } from 'ngx-toastr';
 import { KnowledgePreviewComponent } from '../knowledge-preview/knowledge-preview.component';
 
 @Component({
@@ -45,17 +46,18 @@ export class KnowledgeLandingPageComponent implements OnInit {
   selectedTopic = 'All';
   constructor(public route: ActivatedRoute,
     public apiService: knowledgeService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.resourceParams = {
         domain: params.domain,
-        area_of_interest: params.area_of_interest,
-        _id: params._id
+        area_of_interest: params.area_of_interest
       };
       this.resourceDetails(params.domain, params.area_of_interest);
     });
+
   }
 
   resourceDetails(domain, area_of_interest) {
@@ -67,7 +69,7 @@ export class KnowledgeLandingPageComponent implements OnInit {
       }, {});
       this.resourceFile = Object.entries(tempDetails);
       this.resourceFile[0][1].forEach((d, i) => {
-        let extIdx = d.url.search(/\.pdf|.mp4|.jpg|.mp3|.png|.jpeg|.csv/)
+        let extIdx = d.url.search(/\.pdf|.mp4|.jpg|.mp3|.png|.jpeg/)
         if (extIdx >= 0) {
           d.fileType = d.url.substring(extIdx + 1, extIdx + 4);
         }
@@ -96,6 +98,7 @@ export class KnowledgeLandingPageComponent implements OnInit {
       ? 'image' : (resData.fileType == 'mp3') ? 'audio' : resData.fileType == 'mp4' ? 'video' :
         resData.fileType == 'pdf' ? 'pdf' : 'invalid';
     if (fileType == 'invalid') {
+      this.toastr.warning('Invalid file format to open');
       return false;
     }
     if (fileType == 'pdf') {
@@ -105,10 +108,12 @@ export class KnowledgeLandingPageComponent implements OnInit {
     const dialogRef = this.dialog.open(KnowledgePreviewComponent, {
       data: {
         file,
-        fileType: fileType
+        fileType: fileType,
+        filename: resData.filename
       },
       height: height,
       width: width,
+      backdropClass: 'preview-popup-background',
       panelClass: 'knowledge-preview-popup',
       closeOnNavigation: true
     }).afterClosed().subscribe((res) => {

@@ -18,11 +18,20 @@
         cursor: pointer;
         z-index: 1000;
     }
+    .prev-cancel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: white;
+        margin: 10px;
+        width: 50%;
+        cursor: pointer;
+    }
     .preview-cancel-pdf {
         z-index: 100;
         position: absolute;
-        right: 15.7%;
-        top: 6%;
+        right: 16.5%;
+        top: 6.7%;
         color: grey;
         cursor: pointer;
     }

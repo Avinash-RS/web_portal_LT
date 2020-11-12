@@ -1,7 +1,15 @@
 <div class="knowledge-preview-container">
-
+  <div class="prev-cancel"  (click)="onClose()" *ngIf="isCancelLoad">
+    <mat-icon>arrow_back</mat-icon>
+    <span style="position: absolute;
+    top: 3px;
+    left: 30px;
+    font-size: 16px;">
+      {{batchdialogdata.filename}}
+    </span>
+  </div>
   <ng-container *ngIf="isCancelLoad">
-    <mat-icon [ngClass]="{'preview-cancel-pdf': fileType == 'pdf','preview-cancel' : (fileType == 'image' || fileType == 'video')}" (click)="onClose()">cancel</mat-icon>
+    <!-- <mat-icon [ngClass]="{'preview-cancel-pdf': fileType == 'pdf','preview-cancel' : (fileType == 'image' || fileType == 'video')}" (click)="onClose()">cancel</mat-icon> -->
   </ng-container>
   <ng-container *ngIf="fileType == 'image'">
     <div class="image-container">
@@ -10,8 +18,10 @@
   </ng-container>
 
   <ng-container *ngIf="fileType == 'pdf'">
-    <pdf-viewer [src]="this.batchdialogdata.file"
-     [original-size]="false"></pdf-viewer>
+    <!-- <pdf-viewer [src]="this.batchdialogdata.file"
+     [original-size]="false"></pdf-viewer> -->
+    <iframe width="100%" height="100%" [src]="file" allowfullscreen></iframe>
+
   </ng-container>
 
   <ng-container *ngIf="fileType == 'video' || fileType == 'audio'">

@@ -441,7 +441,7 @@
                         [(ngModel)]="fileName" (change)="uploadDocument($event)" />
                       <button mat-stroked-button [disabled]="itrdata.submit_status !== 'notsubmitted' || !perform.itrationStarted" class="upload-bltn mt-3"
                         (click)="uploadDocuments($event, itrdata, perform, submitType = 'upload')">
-                        <mat-icon class="icon-color m-t-m-2">add</mat-icon>
+                        <mat-icon class="icon-color m-t-m-2 addIcon">add</mat-icon>
                         Upload video
                       </button>
                       <br>

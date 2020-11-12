@@ -1,14 +1,21 @@
 <app-header></app-header>
 <div class="knowledge-landing-container">
 
+  <div class="back-page">
+    <!-- <img src="assets\images\dialog backward.svg"> -->
+    <!-- <span [routerLink]="['/auth/knowledge']"> <font color="black"> < </font> Back </span> -->
+    <i class="fa fa-chevron-left" aria-hidden="true" style="font-size: 12px;cursor: pointer;">
+      <span style="font-family: 'Roboto'" [routerLink]="['/Learner/knowledge']">Back</span></i>
+  </div>
+
   <div class="header-section">
 
     <nav aria-label="breadcrumb" class="coursebreadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item">
+        <li class="breadcrumb-item" [routerLink]="['/Learner/knowledge']">
           <a>Home</a></li>
         <li class="breadcrumb-item" [routerLink]="['/Learner/knowledge']">
-          <a>knowledge Resource</a></li>
+          <a>Knowledge Resources</a></li>
         <li class="breadcrumb-item active" aria-current="page">
           {{resourceFile[0].area_of_interest}}</li>
       </ol>
@@ -18,7 +25,8 @@
       <owl-carousel-o [options]="TopicsOptions" class="questionList">
         <ng-template *ngFor="let value of topic_list;let i = index" carouselSlide>
           <div class="topic-container" (click)="onTopicSelection(value)">
-            <div class="{{ selectedTopic == value ? 'topic-chip active-topic' : 'topic-chip'}}">{{value}}</div>
+            <div class="{{ selectedTopic == value ? 'topic-chip active-topic' : 'topic-chip'}}" 
+            [matTooltip]="value">{{value}}</div>
           </div>
         </ng-template>
       </owl-carousel-o>
@@ -26,27 +34,31 @@
 
     </div>
 
-
-  </div>
+    </div>
 
   <div class="main-section">
     <ng-container *ngFor="let resData of resourceFile">
       <div class="resource-card" (click)="onPreview(resData)">
         <div class="card-img">
-          <ng-container *ngIf="resData.fileType == 'pdf'">
-            <img src="../../../../assets/images/PDF-res.svg">
+          <ng-container *ngIf="resData.thumbnail && resData.thumbnail.length > 0">
+            <img [src]="resData.thumbnail" alt="" class="img-thumb">
           </ng-container>
-          <ng-container *ngIf="resData.fileType == 'jpg' || resData.fileType == 'png' || resData.fileType == 'jpeg'">
-            <img src="../../../../assets/images/Image-res.svg">
-          </ng-container>
-          <ng-container *ngIf="resData.fileType == 'mp4'">
-            <img src="../../../../assets/images/video-res.svg">
-          </ng-container>
-          <ng-container *ngIf="resData.fileType == 'mp3'">
-            <img src="../../../../assets/images/Audio-res.svg">
-          </ng-container>
-          <ng-container *ngIf="resData.fileType == undefined || resData.fileType == 'csv'">
-            <img src="../../../../assets/images/Image-res.svg">
+          <ng-container *ngIf="!resData.thumbnail || resData.thumbnail.length == 0">
+            <ng-container *ngIf="resData.fileType == 'pdf'">
+              <img src="../../../assets/images/PDF-res.svg">
+            </ng-container>
+            <ng-container *ngIf="resData.fileType == 'jpg' || resData.fileType == 'png' || resData.fileType == 'jpeg'">
+              <img src="../../../assets/images/Image-res.svg">
+            </ng-container>
+            <ng-container *ngIf="resData.fileType == 'mp4'">
+              <img src="../../../assets/images/video-res.svg">
+            </ng-container>
+            <ng-container *ngIf="resData.fileType == 'mp3'">
+              <img src="../../../assets/images/Audio-res.svg">
+            </ng-container>
+            <ng-container *ngIf="resData.fileType == undefined || resData.fileType == 'csv'">
+              <img src="../../../assets/images/Image-res.svg">
+            </ng-container>
           </ng-container>
         </div>
 
