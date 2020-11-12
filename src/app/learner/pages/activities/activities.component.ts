@@ -59,6 +59,43 @@ export class ActivitiesComponent implements OnInit {
   screenHeight: number;
   screenWidth: number;
   // assignmentMessage = false;
+
+  trendingItration: any = {
+    loop: false, // dont make it true
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    autoHeight: true,
+    autoWidth: true,
+    navSpeed: 900,
+    navText: ['<i class=\'fa fa-chevron-left\'></i>', '<i class=\'fa fa-chevron-right\'></i>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 2,
+        autoHeight: true,
+        autoWidth: true
+      },
+      940: {
+        items: 2,
+        autoHeight: true,
+        autoWidth: true
+      },
+      1200: {
+        items: 2,
+        autoHeight: true,
+        autoWidth: true
+      }
+    },
+    nav: true
+  };
+  
   trendingCategorires: any = {
     loop: false, // dont make it true
     mouseDrag: true,
@@ -549,6 +586,7 @@ performlearnerUploadVideo() {
   performVideo.append('submitAction', this.submitType);
   performVideo.append('iterationid', this.itrationData.iterationid);
   performVideo.append('object_id', this.performsData.performActivity.perform_id);
+  this.commonServices.loader$.next(true);
   this.Lservice.learnerUploadVideo(performVideo).subscribe((data: any) => {
     if (data.success === true) {
       this.toastr.success(data.message);
