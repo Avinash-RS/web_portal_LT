@@ -200,7 +200,7 @@
           </div>
           <!-- card end -->
 
-          <div *ngIf="onGoingCourseCount === 0">
+          <div *ngIf="showSkeleton==false && onGoingCourseCount === 0">
             <mat-card class="noSessionCard color-yellow-card-status">
               <div class="row mar-t-12">
                 <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
@@ -225,12 +225,14 @@
           </ng-template>
 
           <!-- Card start -->
+          <div *ngIf="!showSkeleton; else skeletonLoad">
           <div *ngFor="let course of courseDetailsList  | filter: searchName">
             <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
           </div>
+          </div>
           <!-- card end -->
 
-          <div *ngIf="onGoingCourseCount === 0">
+          <div *ngIf="showSkeleton==false && onGoingCourseCount === 0">
             <!-- <mat-card class="coursebg width_90 errorCard">
               <div class="row width_90 no_margin">
                 <div class="col-4 col-sm-4 col-md-1 display_flex pointer no_pl mt-4" (click)="gotoDesc(course)">
@@ -271,7 +273,7 @@
             </div>
           </div>
 
-          <div *ngIf="completedCourseCount === 0">
+          <div *ngIf=" showSkeleton==false && completedCourseCount === 0">
 
             <mat-card class="noSessionCard color-yellow-card-status">
               <div class="row mar-t-12">
@@ -298,7 +300,7 @@
           </div>
         </div>
 
-          <div *ngIf="allCourseCount === 0">
+          <div *ngIf="showSkeleton==false && allCourseCount === 0">
 
             <mat-card class="noSessionCard color-yellow-card-status">
               <div class="row mar-t-12">
