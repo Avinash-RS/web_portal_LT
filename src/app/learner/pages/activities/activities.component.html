@@ -279,9 +279,9 @@
                   class="gradedot"></span>
                 Graded</span>
               <mat-icon class="f_size_16 arr" aria-hidden="false" *ngIf="!isperformColaps || performId !== i"
-                (click)="isperformColaps = !isperformColaps; performId = i">keyboard_arrow_down</mat-icon>
+                (click)="isperformColaps = !isperformColaps; performId = i; selectedIndex = null">keyboard_arrow_down</mat-icon>
               <mat-icon class="f_size_16 arr" aria-hidden="false" *ngIf="isperformColaps && performId === i"
-                (click)="isperformColaps = !isperformColaps; performId = i">keyboard_arrow_up
+                (click)="isperformColaps = !isperformColaps; performId = i; selectedIndex = null">keyboard_arrow_up
               </mat-icon>
               <br>
               <div *ngIf="perform.performActivity.submittedTotal == 0"
