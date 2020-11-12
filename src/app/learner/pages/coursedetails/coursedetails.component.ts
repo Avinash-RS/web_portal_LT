@@ -109,6 +109,7 @@ export class CoursedetailsComponent implements OnInit {
   tabInd: any;
   playerMenuEnable = false;
   viewScrollBar = false;
+  fileRef: any[];
   // initials: any;
   constructor(public translate: TranslateService, private router: ActivatedRoute, public socketService: SocketioService,
               public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
@@ -189,8 +190,13 @@ export class CoursedetailsComponent implements OnInit {
         let resourceFile = false;
         element.moduledetails.forEach(value => {
           if (value.resourse && value.resourse.files && value.resourse.files.length) {
-            resourceFile = true;
-            noresource = true;
+            this.fileRef = value.resourse.files.filter(type =>
+              type.fileType === 'Reference'
+            );
+            if (this.fileRef && this.fileRef.length) {
+              resourceFile = true;
+              noresource = true;
+            }
           }
         });
         element.resValue = resourceFile;
@@ -205,7 +211,6 @@ export class CoursedetailsComponent implements OnInit {
           + '&module=' + this.getModuleandtopicInfo.modulename + '&topic=' + this.getModuleandtopicInfo.moduledetails[0].topicname + '&location=' + this.content.page );
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
-      console.log(this.urlSafe,'this.urlSafethis.urlSafe');
     });
     this.getAssignmentmoduleData();
   }
