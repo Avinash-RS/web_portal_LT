@@ -59,6 +59,43 @@ export class ActivitiesComponent implements OnInit {
   screenHeight: number;
   screenWidth: number;
   // assignmentMessage = false;
+
+  trendingItration: any = {
+    loop: false, // dont make it true
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    autoHeight: true,
+    autoWidth: true,
+    navSpeed: 900,
+    navText: ['<i class=\'fa fa-chevron-left\'></i>', '<i class=\'fa fa-chevron-right\'></i>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 2,
+        autoHeight: true,
+        autoWidth: true
+      },
+      940: {
+        items: 2,
+        autoHeight: true,
+        autoWidth: true
+      },
+      1200: {
+        items: 2,
+        autoHeight: true,
+        autoWidth: true
+      }
+    },
+    nav: true
+  };
+  
   trendingCategorires: any = {
     loop: false, // dont make it true
     mouseDrag: true,
@@ -393,11 +430,12 @@ export class ActivitiesComponent implements OnInit {
         // element.activityStartDate = moment(startDate).format('ll, HH:MM');
         // element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
         const endDate = this.datePipe.transform(element.performActivity.activityenddate, 'dd-MM-yyyy');
+        const batchendDate = this.datePipe.transform(element.performActivity.batchenddate, 'dd-MM-yyyy');
         // element.activityEndDate = moment(endDate).format('ll, HH:MM');
         // element.endDate = moment(endDate).format('DD-MM-YYYY HH:MM');
         console.log('startDate', startDate, endDate);
         let crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
-        if (startDate <= crrDate && endDate >= crrDate) {
+        if (startDate <= crrDate && batchendDate >= crrDate) {
           element['itrationStarted'] = true;
         } else {
           element['itrationStarted'] = false;
@@ -549,6 +587,7 @@ performlearnerUploadVideo() {
   performVideo.append('submitAction', this.submitType);
   performVideo.append('iterationid', this.itrationData.iterationid);
   performVideo.append('object_id', this.performsData.performActivity.perform_id);
+  this.commonServices.loader$.next(true);
   this.Lservice.learnerUploadVideo(performVideo).subscribe((data: any) => {
     if (data.success === true) {
       this.toastr.success(data.message);
@@ -563,6 +602,15 @@ performlearnerUploadVideo() {
 submitDeleteVideo(videoName, itrdata, perform) {
   let videoFile = [];
   videoFile.push(videoName);
+  const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
+  const performVideo = new FormData();
+  let startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy');
+  let endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy');
+  if (currentDate >= startDate && currentDate <= endDate) {
+    this.submitStatus = 'ontime';
+  } else {
+    this.submitStatus = 'late';
+  }
   let data = {
     course_id: perform.course_id,
     module_id: perform.module_id,
