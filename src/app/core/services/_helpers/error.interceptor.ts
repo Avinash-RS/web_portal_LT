@@ -10,7 +10,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   constructor(private CommonService: CommonServicesService) { }
   
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        this.showLoader();
+        // this.showLoader();
         return next.handle(request).pipe(tap((event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) {
             this.onEnd();
@@ -23,12 +23,12 @@ export class ErrorInterceptor implements HttpInterceptor {
       private onEnd(): void {
         this.hideLoader();
       }
-      private showLoader(): void {
-        const isLoad = this.CommonService.isLoad;
-        this.CommonService.loader$.next(isLoad);
-      }
+      // private showLoader(): void {
+      //   const isLoad = this.CommonService.isLoad;
+      //   this.CommonService.loader$.next(isLoad);
+      // }
       private hideLoader(): void {
         this.CommonService.loader$.next(false);
-        this.CommonService.isLoad = true;
+        // this.CommonService.isLoad = true;
       }
     }
