@@ -41,12 +41,12 @@
           <!---------------Multi-level dropdown------------->
           <div class="inner-addon searchDiv right-addon">
             <input type="text" [ngClass]="searchExpand? 'form-control search' :'form-control searchNormal'"
-              [(ngModel)]="searchName" (keyup)="getDashboardMyCourse(userDetailes.user_id, userDetailes._id)"
-              placeholder="Search courses..." />
+              [(ngModel)]="searchName" placeholder="Search courses..." />
+              <!-- (keyup)="getDashboardMyCourse(userDetailes.user_id, userDetailes._id)" -->
             <em class="material-icons pointer iconsSearch" *ngIf="!searchExpand"
               (click)="searchExpand = !searchExpand">search</em>
             <em class="material-icons pointer iconsSearch" *ngIf="searchExpand"
-              (click)="searchExpand = !searchExpand">close</em>
+              (click)="searchExpand = !searchExpand; searchName=''">close</em>
             <!-- <mat-icon class="glyphicon" (click)="searchExpand = !searchExpand">search</mat-icon> -->
           </div>
         </div>
