@@ -1,13 +1,48 @@
 .knowledge-landing-container {
+
+    overflow:hidden;
+
+   .back-page{
+       position: fixed;
+       border: none;
+       top: 20%;
+       margin-left: 26px;
+       span{
+        font-size: 15px;
+        margin-left: 5px;
+        margin-top: 2px;
+        border-style:none;
+       }
+       img{
+           width: 5px;
+           height: 5px;
+       }
+       span:hover{
+           border: none;
+           color:red;
+       }
+       span:focus{
+        border: none;
+        border-style:none;
+        // color:red;
+        // font-size: 18px;
+    } span:active{
+        outline: none;
+        border: none;
+        border-style:none;
+        // color:red;
+        // font-size: 18px;
+    }
+    }
     .header-section {
         border-bottom: 1px solid lightgray;
-        height: 6.5em;
-        padding: 10px 0;
+        height: 11em;
+        // margin-top: 30px;
+        padding: 40px 0;
         .breadcrumb {
             // background-color: white !important;
             padding: 0px 0px 0px 15px !important;
             font-size: 14px;
-            background: transparent !important;
             a {
                 font-weight: 600;
             }
@@ -17,12 +52,15 @@
             }
         }
         .header-carousel {
-            padding-top: 6px;
+            margin-top: 2.5%;
             .topic-chip {
                 border: 2px solid #8f8f8f;
                 text-align: center;
                 padding: 10px;
                 border-radius: 48px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
                 &:active {
                     background-color: #bbbbbb;
                 }
@@ -36,7 +74,7 @@
         }
     }
     .main-section {
-        max-height: 32em;
+        max-height: 28em;
         display: flex;
         flex-wrap: wrap;
         overflow: auto;
@@ -74,6 +112,14 @@
             }
         }
     }
+}
+
+.img-thumb {
+    object-fit: cover;
+    width: 100% !important;
+    margin-left: 0 !important;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 ::ng-deep .knowledge-landing-container .owl-theme .owl-nav {
