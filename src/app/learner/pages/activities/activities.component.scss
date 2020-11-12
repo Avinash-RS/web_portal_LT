@@ -515,7 +515,7 @@ margin-top: 8px;
 }
 .itrCount {
 position: relative;
-right: 36px;
+right: 3rem;
 }
 /*Ramya CSS ends here*/
 .videoPreview {
@@ -568,7 +568,7 @@ right: 36px;
 }
 
 .carouselRowHover {
-  height: 5.7rem;
+  height: 4rem;
   background-color: #5C6873;
 }
 
@@ -577,6 +577,12 @@ right: 36px;
 }
 
 .carouselCol {
+  max-width: 73% !important;
+  height: 15rem;
+  margin-left: 2rem;
+}
+
+.carouselCol1 {
   max-width: 100% !important;
   height: 15rem;
   margin-left: -15px;
@@ -780,9 +786,10 @@ border: 1px solid #ccc;
 }
 
 .materialCard {
-  width: 7rem;
+  width: 8rem;
   height: 7rem;
   cursor: pointer;
+  margin-left: 1rem;
 }
 
 .icons {
