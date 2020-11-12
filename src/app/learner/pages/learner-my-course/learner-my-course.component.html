@@ -9,8 +9,7 @@
     <div [ngClass]="expandSearch ? 'mobileSearchRow': 'myCourseSearch'" class="col-12">
       <mat-icon class="glyphicon" (click)="expandSearch = !expandSearch">keyboard_backspace</mat-icon>
       <!-- NEED TO WORK ON SEARCH -->
-      <input type="text" class="form-control search" [(ngModel)]="searchName"
-        (keyup)="getEnrolledCourses('', '', '', searchName, '',false)" placeholder="Search courses..." />
+      <input type="text" class="form-control search" [(ngModel)]="searchName" />
     </div>
   </div>
   <div *ngIf="!expandSearch" class="row w-100 mr-0 ml-0">
@@ -195,7 +194,7 @@
 
           <!-- Card start -->
           <div *ngIf="!showSkeleton; else skeletonLoad">
-          <div *ngFor="let course of courseDetailsList; let j = index">
+          <div *ngFor="let course of courseDetailsList | filter: searchName">
             <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
           </div>
           </div>
@@ -226,7 +225,7 @@
           </ng-template>
 
           <!-- Card start -->
-          <div *ngFor="let course of courseDetailsList; let j = index">
+          <div *ngFor="let course of courseDetailsList  | filter: searchName">
             <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
           </div>
           <!-- card end -->
@@ -264,7 +263,7 @@
               }}" matBadgeOverlap="false">{{ "Completed" | translate }}</span>
           </ng-template>
           <div *ngIf="!showSkeleton; else skeletonLoad">
-            <div *ngFor="let course of courseDetailsList; let j = index">
+            <div *ngFor="let course of courseDetailsList  | filter: searchName">
               <!-- show 100% by default for completed courses // time-being for pilot run -->
               <app-mycourse-item-component [courseItems]="course" [globalData]="globalData" [completedCourse]="100">
               </app-mycourse-item-component>
@@ -294,7 +293,7 @@
               }}" matBadgeOverlap="false">{{ "All" | translate }}</span>
           </ng-template>
           <div *ngIf="!showSkeleton; else skeletonLoad">
-          <div *ngFor="let course of courseDetailsList; let j = index">
+          <div *ngFor="let course of courseDetailsList  | filter: searchName">
             <app-mycourse-item-component [globalData]="globalData" [courseItems]="course"></app-mycourse-item-component>
           </div>
         </div>

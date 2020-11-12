@@ -968,6 +968,7 @@ message{
         course_id
         course_description
         course_name
+        course_status
         version
         location
         course_start_datetime
