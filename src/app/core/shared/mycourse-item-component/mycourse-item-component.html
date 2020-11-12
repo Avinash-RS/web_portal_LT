@@ -39,7 +39,7 @@
             </div>
             <div class="coursePoints">
               <table class="f_size_12">
-                <tr>
+                <tr *ngIf="course.isBatchCourse">
                   <td>Instructor led sessions</td>
                   <td>Upto {{course.image_instructor_lead_session_time!==""?course.image_instructor_lead_session_time:0}}</td>
                   <!-- <td>Upto {{globalData.on_hover_image_data.instructor_lead_session}}</td> -->
@@ -48,16 +48,16 @@
                   <td>Self paced learning</td>
                   <td>{{course.image_self_paced_learning_time!==""?course.image_self_paced_learning_time:0}}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="course.isBatchCourse">
                   <!-- Mid course project -->
                   <td>Course project</td>
                   <td>{{course.total_mid_course_project_count!==""?course.total_mid_course_project_count:0}}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="course.isBatchCourse">
                   <td>Internal assessment</td>
                   <td>{{course.internal_assesment!==""?course.internal_assesment:0}}</td>
                 </tr>
-                <tr>
+                <tr *ngIf="course.isBatchCourse">
                   <td>Final assessment</td>
                   <td>{{course.final_assesment!==""?course.final_assesment:0}}</td>
                 </tr>
@@ -184,7 +184,7 @@
         <div class="col-12 col-sm-12 col-md-12 col-lg-3 p-x-7px">
           <div class="row m-b-15px">
             <div class="col">
-              <div class="card-hover cardHeights grey_border1 ">
+              <div matRipple class="card-hover cardHeights grey_border1 ">
                 <div class="row">
                   <div class="col ">
           
@@ -212,7 +212,7 @@
                       </mat-progress-bar>
                     </div>
                     <div class="col-2 c_per">
-                      {{course.self_paced_learning_progression!==''?(course.self_paced_learning_progression>100?100:course.self_paced_learning_progression):0}}%
+                      {{(course.self_paced_learning_progression!==''?(course.self_paced_learning_progression>100?100:course.self_paced_learning_progression):0)| number:'1.0-0'}}%
                     </div>
                   </div>
                 </div>
@@ -226,24 +226,24 @@
                       <div *ngIf="course.progressionExp" class="f_size_12">
                         Modules completed {{(course.completed_module_count!=null?course.completed_module_count:0) +'/'+ (course.total_module_count!=null?course.total_module_count:0)}}<br>
                         Topics completed {{(course.completed_topic_count!=null?course.completed_topic_count:0) +'/'+ (course.total_topic_count!=null?course.total_topic_count:0)}}<br>
-                        <span class="pointer f_size_10" style="color: red; text-decoration: underline;">View self-learning
+                        <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;">View self-learning
                           activity details..</span>
                       </div>
                     </div>
                   </div>
                   <div class="col-6 col-sm-6 col-md-6 col-lg-5">
                     <button mat-stroked-button *ngIf="
-                                                        course?.coursePlayerStatus?.status !== 'completed'
+                                                        course?.course_status !== 'completed'
                                                       " class="btl-alin btn-txt-center
                                                       bg_lxp_red color_white cap pointer " (click)="gotoDesc(course)">
                       <!-- <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon> -->
                       <i class="fa fa-play-circle mycourse-btn-img" aria-hidden="true"></i>
                       <span class="cap f_wt_400 m-t-m-2">
                         {{
-                                                          course?.coursePlayerStatus?.status ===
+                                                          course?.course_status ===
                                                           "incomplete"
                                                             ? "Resume"
-                                                            : course?.coursePlayerStatus?.status ===
+                                                            : course?.course_status ===
                                                               "suspend"
                                                             ? "Resume"
                                                             : ("Start" | translate)
@@ -251,7 +251,7 @@
                       </span>
                     </button>
                     <button mat-stroked-button (click)="gotoDesc(course)" *ngIf="
-                                                        course?.coursePlayerStatus?.status === 'completed' 
+                                                        course?.course_status === 'completed' 
                                                       " class="btl-alin btn-txt-center
                                                       bg_lxp_red color_white cap pointer m-t-05 ">
                       <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
@@ -266,7 +266,7 @@
           </div>
           <div class="row" *ngIf="course.isBatchCourse">
             <div class="col">
-              <div class="card-hover  card-hover cardHeights grey_border1" (mouseover)="discussDefault ='../../../../assets/learner/mycourseicons/Discussion_hover.svg'" (mouseout)="discussDefault='../../../../assets/learner/mycourseicons/Discussion_default.svg'">
+              <div matRipple class="card-hover cardHeights grey_border1" (mouseover)="discussDefault ='../../../../assets/learner/mycourseicons/Discussion_hover.svg'" (mouseout)="discussDefault='../../../../assets/learner/mycourseicons/Discussion_default.svg'">
                 <div class="row">
                   <div class="col ">
                     <div class="circle_outline pull-left  m-r-15px m-b-10px">
@@ -294,7 +294,7 @@
                         Threads {{course.thread_count!==null?course.thread_count:'N/A'}}<br>
                         Comments {{course.comment_count!==null?course.comment_count:'N/A'}}<br>
                         Replies {{course.reply_count!==null?course.reply_count:'N/A'}}<br>
-                        <span class="pointer f_size_10" style="color: red; text-decoration: underline;"
+                        <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;"
                           (click)="goToForum(course)">View discussions..</span>
                       </div>
                     </div>
@@ -319,7 +319,7 @@
         <div class="col-12 col-sm-12 col-md-12 col-lg-3 p-x-7px">
           <div class="row m-b-15px" *ngIf="course.isBatchCourse">
             <div class="col ">
-              <div class="card-hover  cardHeights grey_border1" (mouseover)="instDefault ='../../../../assets/learner/mycourseicons/Instructor_hover.svg'" (mouseout)="instDefault='../../../../assets/learner/mycourseicons/Instructor_default.svg'">
+              <div matRipple class="card-hover cardHeights grey_border1" (mouseover)="instDefault ='../../../../assets/learner/mycourseicons/Instructor_hover.svg'" (mouseout)="instDefault='../../../../assets/learner/mycourseicons/Instructor_default.svg'">
                 <div class="row">
                   <div class="col ">
                     <div class="circle_outline pull-left  m-r-15px m-b-10px">
@@ -345,7 +345,7 @@
                       <div *ngIf="course.ledinstExp" class="f_size_13">
                         Sessions attended
                         {{course.instructor_lead_session_completed_count+'/'+course.instructor_lead_session_total_count}}<br>
-                        <span class="pointer f_size_10" style="color: red; text-decoration: underline;"
+                        <span class="pointer f_size_10" style="color:#C02222; text-decoration: underline;"
                           (click)="goInstructorLed(course)">View sessions details..</span>
                       </div>
                     </div>
@@ -370,7 +370,7 @@
           </div>
           <div class="row" *ngIf="course.isBatchCourse">
             <div class="col">
-              <div class="card-hover cardHeights grey_border1" (mouseover)="activityDefault ='../../../../assets/learner/mycourseicons/Activities_hover.svg'" (mouseout)="activityDefault='../../../../assets/learner/mycourseicons/Activities_defult.svg'">
+              <div matRipple class="card-hover cardHeights grey_border1" (mouseover)="activityDefault ='../../../../assets/learner/mycourseicons/Activities_hover.svg'" (mouseout)="activityDefault='../../../../assets/learner/mycourseicons/Activities_defult.svg'">
               <div class="row">
                 <div class="col ">
                   <div class="circle_outline pull-left  m-r-15px m-b-10px">
@@ -398,7 +398,7 @@
                     <div *ngIf="course.activityExp" class="f_size_13">
                       Assignments completed {{course.assignment_submitted_count+'/'+course.assignment_total_count}}<br>
                       Projects completed {{course.completed_mid_course_project_count+'/'+course.total_mid_course_project_count}}<br>
-                      <span class="pointer f_size_10" style="color: red; text-decoration: underline;"
+                      <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;"
                         (click)="gotoSubmissionDetails(course)">View submission details..</span>
                     </div>
                   </div>
@@ -429,4 +429,4 @@
     </div>
   </div>
 </mat-card>
-<div style="border-bottom: 1px solid #cccccc7a"></div>
+<div style="border-bottom: 1px solid #FFCC00"></div>

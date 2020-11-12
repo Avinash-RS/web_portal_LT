@@ -129,6 +129,7 @@
     "videogular2": "^7.0.1",
     "videojs-record": "^4.1.1",
     "vued3tree": "^3.5.0",
+    "ngx-ui-loader": "1.2.5",
     "web-animations-js": "^2.3.2",
     "xhr2": "^0.2.0",
     "xlsx": "^0.15.6",

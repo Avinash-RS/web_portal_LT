@@ -10,6 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { appendFile } from 'fs';
+
+
 @Component({
   selector: 'app-activities',
   templateUrl: './activities.component.html',
@@ -20,6 +22,7 @@ export class ActivitiesComponent implements OnInit {
   @ViewChild('videoInput') videoInput;
   @ViewChild('uploadInput') uploadInput;
   hover = false;
+  isLoader = false;
   hoverfile = false;
   itrationStarted: boolean;
   itrationEnded: boolean;
@@ -56,6 +59,43 @@ export class ActivitiesComponent implements OnInit {
   screenHeight: number;
   screenWidth: number;
   // assignmentMessage = false;
+
+  trendingItration: any = {
+    loop: false, // dont make it true
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    autoHeight: true,
+    autoWidth: true,
+    navSpeed: 900,
+    navText: ['<i class=\'fa fa-chevron-left\'></i>', '<i class=\'fa fa-chevron-right\'></i>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 2,
+        autoHeight: true,
+        autoWidth: true
+      },
+      940: {
+        items: 2,
+        autoHeight: true,
+        autoWidth: true
+      },
+      1200: {
+        items: 2,
+        autoHeight: true,
+        autoWidth: true
+      }
+    },
+    nav: true
+  };
+  
   trendingCategorires: any = {
     loop: false, // dont make it true
     mouseDrag: true,
@@ -382,38 +422,44 @@ export class ActivitiesComponent implements OnInit {
   getperformActivityData() {
     this.Lservice.getperformActivityData(
       this.userDetail.user_id,  this.courseid
-      // this.courseid
     ).subscribe((data: any) => {
       if (data && data.data && data.data.getperformActivityData && data.data.getperformActivityData.data) {
       this.performDetails = data.data.getperformActivityData.data;
       this.performDetails.forEach((element) => {
-        const startDate = new Date(element.performActivity.activitystartdate);
-        element.activityStartDate = moment(startDate).format('ll');
-        element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
-        const endDate = new Date(element.performActivity.activityenddate);
-        element.activityEndDate = moment(endDate).format('ll');
-        element.endDate = moment(endDate).format('DD-MM-YYYY HH:MM');
-
-        if (moment(new Date()).format('DD-MM-YYYY HH:MM') < element.activityStartDate) {
-          this.itrationStarted = true;
+        const startDate = this.datePipe.transform(element.performActivity.activitystartdate, 'dd-MM-yyyy');
+        // element.activityStartDate = moment(startDate).format('ll, HH:MM');
+        // element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
+        const endDate = this.datePipe.transform(element.performActivity.activityenddate, 'dd-MM-yyyy');
+        const batchendDate = this.datePipe.transform(element.performActivity.batchenddate, 'dd-MM-yyyy');
+        // element.activityEndDate = moment(endDate).format('ll, HH:MM');
+        // element.endDate = moment(endDate).format('DD-MM-YYYY HH:MM');
+        console.log('startDate', startDate, endDate);
+        let crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
+        if (startDate <= crrDate && batchendDate >= crrDate) {
+          element['itrationStarted'] = true;
         } else {
-          this.itrationStarted = false;
+          element['itrationStarted'] = false;
         }
-        if ( moment(new Date()).format('DD-MM-YYYY HH:MM') > element.activityEndDate) {
-          this.itrationEnded = true;
-        } else {
-          this.itrationEnded = false;
-        }
-        if (moment().format('DD-MM-YYYY HH:MM') >= element.startDate &&
-        moment().format('DD-MM-YYYY HH:MM') <= element.endDate) {
-        this.submitStatus = 'ontime';
-      } else if (moment().format('DD-MM-YYYY HH:MM') > element.endDate) {
-        this.submitStatus = 'late';
-      }
+        // element['itrationStarted'] = this.dateDiff(strtDate, edDate, crrDate);
+      
       });
+      console.log('this.performDetails', this.performDetails);
     }
     });
   }
+
+  dateDiff(startDate, endDate, currentDate) {
+    let startDateDiff = startDate - currentDate;
+    let endDateDiff = endDate - currentDate;
+    console.log('startDateDiff', startDateDiff, 'endDateDiff', endDateDiff);
+    if ((startDateDiff <= 0 ) && (endDateDiff >= 0)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   learnerUploadVideo(project, submitAction) {
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:MM');
@@ -449,15 +495,14 @@ export class ActivitiesComponent implements OnInit {
         this.showSubmittedon = true;
         this.getprojectActivityData();
         this.selectfile = [];
-      } else {
+       } else {
         this.toastr.warning(data.message);
-      }
+       }
     });
   }
 
   // Submit or Delete
   learnerSumbitdeleteVideo(project, deleteItem, submitAction) {
-    console.log('project', project);
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:MM');
     const endDate1 = new Date(project.projectActivity.activityenddate);
@@ -498,22 +543,35 @@ export class ActivitiesComponent implements OnInit {
 
  uploadDocument(event, perform) {
   // this.selectPerformfile.push(event.target.files[0] as File);
+  const filePath = event.target.files[0].name;
+  const allowedExtensions = /(\.mp4)$/i;
+  if (!allowedExtensions.exec(filePath)) {
+    this.toastr.warning('Please upload video file only.');
+  } else {
   // tslint:disable-next-line: prefer-for-of
   for (let i = 0; i < event.target.files.length; i++) {
     this.selectPerformfile.push(event.target.files[i]);
 }
   this.performlearnerUploadVideo();
 }
+ }
 
-uploadDocuments(perform, performans) {
+uploadDocuments(e,perform, performans) {
   this.performsData = performans;
   this.itrationData = perform;
   this.videoInput.nativeElement.click();
 }
 
 performlearnerUploadVideo() {
-  const currentDate = new Date();
+  const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
   const performVideo = new FormData();
+  let startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy');
+  let endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy');
+  if (currentDate >= startDate && currentDate <= endDate) {
+    this.submitStatus = 'ontime';
+  } else {
+    this.submitStatus = 'late';
+  }
   // tslint:disable-next-line: prefer-for-of
   for (let i = 0; i < this.selectPerformfile.length; i++) {
     performVideo.append('uploadvideo', this.selectPerformfile[i]);
@@ -537,13 +595,22 @@ performlearnerUploadVideo() {
       this.selectPerformfile = [];
     } else {
       this.toastr.warning(data.message);
-    }
+   }
   });
 }
 
 submitDeleteVideo(videoName, itrdata, perform) {
   let videoFile = [];
   videoFile.push(videoName);
+  const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
+  const performVideo = new FormData();
+  let startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy');
+  let endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy');
+  if (currentDate >= startDate && currentDate <= endDate) {
+    this.submitStatus = 'ontime';
+  } else {
+    this.submitStatus = 'late';
+  }
   let data = {
     course_id: perform.course_id,
     module_id: perform.module_id,

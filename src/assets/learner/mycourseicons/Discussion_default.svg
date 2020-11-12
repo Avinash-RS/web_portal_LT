@@ -1,12 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="80" viewBox="0 0 100 80">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="89.972" height="71.568" viewBox="0 0 89.972 71.568">
   <defs>
     <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
       <stop offset="0" stop-color="#e89f7e"/>
       <stop offset="1" stop-color="#648ac7"/>
     </linearGradient>
   </defs>
-  <g id="Group_13684" data-name="Group 13684" transform="translate(-3133 -2706)">
-    <rect id="Rectangle_3111" data-name="Rectangle 3111" width="100" height="80" transform="translate(3133 2706)" fill="#fff"/>
+  <g id="Forum_active" transform="translate(-3138.084 -2709.943)">
     <g id="Group_13668" data-name="Group 13668" transform="translate(-0.685 0.5)">
       <g id="Forum" transform="translate(3138.685 2708)">
         <rect id="Rectangle_12" data-name="Rectangle 12" width="8" height="8" transform="translate(67.354 3)" fill="#cc541e"/>

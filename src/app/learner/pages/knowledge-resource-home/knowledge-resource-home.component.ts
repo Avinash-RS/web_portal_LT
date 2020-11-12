@@ -1,6 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { data } from 'jquery';
+import { ToastrService } from 'ngx-toastr';
+import { CommonServicesService } from '@core/services/common-services.service';
 import { knowledgeService } from '@learner/services/knowledge-resource/knowledge-resource.service';
+
 
 @Component({
   selector: 'app-knowledge-resource-home',
@@ -8,17 +12,22 @@ import { knowledgeService } from '@learner/services/knowledge-resource/knowledge
   styleUrls: ['./knowledge-resource-home.component.scss']
 })
 export class KnowledgeResourceHomeComponent implements OnInit {
-  details: any;
+  details = [];
+  isLoadBalanced = false;
+  isReloaded = false;
   fileValidations = {
     'Knowledge Check': /(\.csv)$/i,
   };
   imageView: File;
-  searchDetails: any;
+  searchDetails = '';
+  dummyText = 1;
   sampleFileLink = 'https://edutechstorage.blob.core.windows.net/container1/resource/739113684616842-Sample-file.csv'
   @ViewChild('fileInput3') fileInput3;
-
+  tempDetailsList = [];
 
   constructor(public apiService: knowledgeService,
+    public toast: ToastrService,
+    private CommonService: CommonServicesService,
     private router: Router) { }
 
   ngOnInit() {
@@ -26,8 +35,9 @@ export class KnowledgeResourceHomeComponent implements OnInit {
   }
 
   getResourceFiles() {
+    this.tempDetailsList = [];
     this.apiService.getResourceDetails().subscribe((result: any) => {
-      let resultData = result.data.get_all_resources_details.message &&
+      const resultData = result.data.get_all_resources_details.message &&
         result.data.get_all_resources_details.message.length > 0 ? result.data.get_all_resources_details.message : [];
       let tempDetails = resultData.reduce((r, a) => {
         r[a.domain] = [...r[a.domain] || [], a];
@@ -35,70 +45,103 @@ export class KnowledgeResourceHomeComponent implements OnInit {
       }, {});
       tempDetails = Object.entries(tempDetails);
       tempDetails.forEach((dt) => {
-        dt[2] = false
-      }) 
-      this.details = tempDetails;
-    })
-  }
-
-  onFileDropped(fileInput: any) {
-      const formData = new FormData();
-      formData.append('resource', fileInput[0]);
-      this.apiService.uploadResourceDetail(formData).subscribe((result:any) => {
-        console.log(result);
-        if(result.Code == 200){
-          const knowledgeDetails = {
-            file:'https://edutechstorage.blob.core.windows.net/' + result.Result.path,
-            documentname:result.Result.originalname,
-            createdby_role:"",
-            createdby_name:"",
-            createdby_id:""
-          }
-          console.log("knoedateil",knowledgeDetails)
-          this.apiService.saveResourceData(knowledgeDetails).subscribe(data=>{
-              console.log(data,"1111111111");
-          })
-        }
+        let subTempDetails = dt[1].reduce((r, a) => {
+          r[a.area_of_interest] = [...r[a.area_of_interest] || [], a];
+          return r;
+        }, {});
+        dt[1] = Object.entries(subTempDetails);
+      });
+      tempDetails.forEach((d) => {
+        let b = {
+        domain: '',
+        areaOfInterest: [],
+        isMore: false};
+        b.domain = d[0];
+        
+        d[1].forEach((areaOfInt) => {
+        b.areaOfInterest.push(areaOfInt[0]);
+        })
+        this.tempDetailsList.push(b);
+        })
+      this.details = this.tempDetailsList;
+      this.isLoadBalanced = true;
     });
   }
 
-onSelectFile(fileInput){
-  if (fileInput && fileInput.target && fileInput.target.files && fileInput.target.files[0]) {
+  onFileDropped(fileInput: any) {
+    this.CommonService.loader$.next(true);
+    const formData = new FormData();
+    formData.append('resource', fileInput[0]);
+    this.apiService.uploadResourceDetail(formData).subscribe((result: any) => {
+
+      if (result.Code === 200) {
+        const knowledgeDetails = {
+          documentname: result.Result.originalname,
+          file: 'https://edutechstorage.blob.core.windows.net/' + result.Result.path,
+          createdby_role: "",
+          createdby_name: "",
+          createdby_id: ""
+        };
+        this.apiService.saveResourceData(knowledgeDetails).subscribe((result: any) => {
+          if (result.data.save_resource_data.success === true) {
+            console.log('success');
+            this.toast.success('Resource file upload successfully !!!');
+          } else if (result.data.save_resource_data.error_msg === 'Not Success') {
+            this.toast.warning('Please upload file having extensions - .xls or .xlsx or .csv !!!');
+          }
+        });
+      }
+    });
+  }
+
+  onSelectFile(fileInput) {
+    this.CommonService.loader$.next(true);
+    if (fileInput && fileInput.target && fileInput.target.files && fileInput.target.files[0]) {
       // var allowedExtensions;
       // var filePath = fileInput.target.files[0].name;
       this.imageView = fileInput.target.files[0];
       const formData = new FormData();
       formData.append('resource', this.imageView);
       this.apiService.uploadResourceDetail(formData).subscribe((result: any) => {
-    console.log('result',result);
 
-    if(result.Code == 200){
-      const knowledgeDetails = {
-        file:'https://edutechstorage.blob.core.windows.net/' + result.Result.path,
-        documentname:result.Result.originalname,
-        createdby_role:"",
-        createdby_name:"",
-        createdby_id:""
-      }
-      this.apiService.saveResourceData(knowledgeDetails).subscribe(data=>{
-          console.log(data,"1111111111");
-      })
+        if (result.Code === 200) {
+          const knowledgeDetails = {
+            file: 'https://edutechstorage.blob.core.windows.net/' + result.Result.path,
+            documentname: result.Result.originalname,
+            createdby_role: "",
+            createdby_name: "",
+            createdby_id: ""
+          };
+
+          this.apiService.saveResourceData(knowledgeDetails).subscribe((result: any) => {
+            if (result.data.save_resource_data.success === true) {
+              // console.log("success");
+              this.toast.success('Resource upload successfully !!!');
+            } else if (result.data.save_resource_data.error_msg === 'Not Success') {
+              this.toast.warning('Please upload file having extensions .xls or .xlsx or .csv !!!');
+            }
+          });
+        }
+      });
     }
-
-});
   }
-}
 
-  onResourcePreview(resource) {
+  onResourcePreview(domain,area_of_interest) {
     this.router.navigate(['/Learner/knowledge/preview'],
       {
         queryParams: {
-          domain: resource.domain,
-          area_of_interest: resource.area_of_interest,
-          _id: resource._id
+          domain: domain,
+          area_of_interest: area_of_interest
         }
       });
   }
 
+  onTabChanged(event){
+    // this.isReloaded=true;
+    if(event.index==0){
+      this.getResourceFiles();
+    }
+
+  }
 
 }

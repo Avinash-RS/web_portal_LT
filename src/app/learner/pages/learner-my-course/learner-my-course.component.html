@@ -9,8 +9,7 @@
     <div [ngClass]="expandSearch ? 'mobileSearchRow': 'myCourseSearch'" class="col-12">
       <mat-icon class="glyphicon" (click)="expandSearch = !expandSearch">keyboard_backspace</mat-icon>
       <!-- NEED TO WORK ON SEARCH -->
-      <input type="text" class="form-control search" [(ngModel)]="searchName"
-        (keyup)="getEnrolledCourses('', '', '', searchName, '',false)" placeholder="Search courses..." />
+      <input type="text" class="form-control search" [(ngModel)]="searchName" />
     </div>
   </div>
   <div *ngIf="!expandSearch" class="row w-100 mr-0 ml-0">
@@ -40,14 +39,14 @@
         <div class="col-6 col-lg-8 searchCol text-right">
 
           <!---------------Multi-level dropdown------------->
-          <div class="inner-addon searchDiv right-addon">
+          <div class="inner-addon searchDiv right-addon" style="display: none;">
             <input type="text" [ngClass]="searchExpand? 'form-control search' :'form-control searchNormal'"
-              [(ngModel)]="searchName" (keyup)="getDashboardMyCourse(userDetailes.user_id, userDetailes._id)"
-              placeholder="Search courses..." />
+              [(ngModel)]="searchName" placeholder="Search courses..." />
+              <!-- (keyup)="getDashboardMyCourse(userDetailes.user_id, userDetailes._id)" -->
             <em class="material-icons pointer iconsSearch" *ngIf="!searchExpand"
               (click)="searchExpand = !searchExpand">search</em>
             <em class="material-icons pointer iconsSearch" *ngIf="searchExpand"
-              (click)="searchExpand = !searchExpand">close</em>
+              (click)="searchExpand = !searchExpand; searchName=''">close</em>
             <!-- <mat-icon class="glyphicon" (click)="searchExpand = !searchExpand">search</mat-icon> -->
           </div>
         </div>
@@ -195,23 +194,23 @@
 
           <!-- Card start -->
           <div *ngIf="!showSkeleton; else skeletonLoad">
-          <div *ngFor="let course of courseDetailsList; let j = index">
+          <div *ngFor="let course of courseDetailsList | filter: searchName">
             <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
           </div>
           </div>
           <!-- card end -->
 
           <div *ngIf="onGoingCourseCount === 0">
-            <mat-card class="coursebg center_align center">
-              <div class="row center">
-                <div class="pointer" (click)="gotoDesc(course)">
-                  <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
+            <mat-card class="noSessionCard color-yellow-card-status">
+              <div class="row mar-t-12">
+                <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+                  <img class="noSessionImg" src="assets/noCourseNewImg.svg"> 
+                </div>
+                <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+                  <span class=""> You have no ongoing courses at the moment!</span>
                 </div>
               </div>
-              <div class="row center">
-                <span style="font-size: medium">{{ "You have no ongoing courses at the moment!" | translate }}</span>
-              </div>
-            </mat-card>
+            </mat-card> 
           </div>
         </mat-tab>
         <mat-tab>
@@ -226,7 +225,7 @@
           </ng-template>
 
           <!-- Card start -->
-          <div *ngFor="let course of courseDetailsList; let j = index">
+          <div *ngFor="let course of courseDetailsList  | filter: searchName">
             <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
           </div>
           <!-- card end -->
@@ -243,16 +242,16 @@
               </div>
             </mat-card>
             <hr class="hr-tag" /> -->
-            <mat-card class="coursebg center_align center">
-              <div class="row center">
-                <div class="pointer" (click)="gotoDesc(course)">
-                  <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
+            <mat-card class="noSessionCard color-yellow-card-status">
+              <div class="row mar-t-12">
+                <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+                  <img class="noSessionImg" src="assets/noCourseNewImg.svg"> 
+                </div>
+                <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+                  <span class=""> You have no ongoing courses at the moment!</span>
                 </div>
               </div>
-              <div class="row center">
-                <span style="font-size: medium">{{ "You have no ongoing courses at the moment!" | translate }}</span>
-              </div>
-            </mat-card>
+            </mat-card> 
           </div>
         </mat-tab>
         <mat-tab>
@@ -264,7 +263,7 @@
               }}" matBadgeOverlap="false">{{ "Completed" | translate }}</span>
           </ng-template>
           <div *ngIf="!showSkeleton; else skeletonLoad">
-            <div *ngFor="let course of courseDetailsList; let j = index">
+            <div *ngFor="let course of courseDetailsList  | filter: searchName">
               <!-- show 100% by default for completed courses // time-being for pilot run -->
               <app-mycourse-item-component [courseItems]="course" [globalData]="globalData" [completedCourse]="100">
               </app-mycourse-item-component>
@@ -274,18 +273,16 @@
 
           <div *ngIf="completedCourseCount === 0">
 
-            <mat-card class="coursebg center_align center">
-              <div class="row center">
-                <div class="pointer" (click)="gotoDesc(course)">
-                  <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
+            <mat-card class="noSessionCard color-yellow-card-status">
+              <div class="row mar-t-12">
+                <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+                  <img class="noSessionImg" src="assets/noCourseNewImg.svg"> 
+                </div>
+                <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+                  <span class=""> You have no completed courses at the moment!</span>
                 </div>
               </div>
-              <div class="row center">
-                <span style="font-size: medium">{{
-                  "You have no completed courses at the moment!" | translate
-                }}</span>
-              </div>
-            </mat-card>
+            </mat-card> 
             <!-- <hr class="hr-tag" /> -->
           </div>
         </mat-tab>
@@ -296,23 +293,23 @@
               }}" matBadgeOverlap="false">{{ "All" | translate }}</span>
           </ng-template>
           <div *ngIf="!showSkeleton; else skeletonLoad">
-          <div *ngFor="let course of courseDetailsList; let j = index">
+          <div *ngFor="let course of courseDetailsList  | filter: searchName">
             <app-mycourse-item-component [globalData]="globalData" [courseItems]="course"></app-mycourse-item-component>
           </div>
         </div>
 
           <div *ngIf="allCourseCount === 0">
 
-            <mat-card class="coursebg center_align center">
-              <div class="row center">
-                <div class="pointer" (click)="gotoDesc(course)">
-                  <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
+            <mat-card class="noSessionCard color-yellow-card-status">
+              <div class="row mar-t-12">
+                <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+                  <img class="noSessionImg" src="assets/noCourseNewImg.svg"> 
+                </div>
+                <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+                  <span class=""> You have no courses at the moment!</span>
                 </div>
               </div>
-              <div class="row center">
-                <span style="font-size: medium">{{ "You have no courses at the moment!" | translate }}</span>
-              </div>
-            </mat-card>
+            </mat-card> 
           </div>
         </mat-tab>
         <!-----------------------------------Category tabs----------------------------->

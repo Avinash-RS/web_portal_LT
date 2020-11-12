@@ -328,6 +328,7 @@ export const getmoduleData = gql`
                 path
                 type_name
                 size
+                fileType
               }
               doc_type
               count
@@ -760,6 +761,7 @@ message{
         course_mode
         course_type
         course_language
+        course_status
         feed_back
         drm
         user_role
@@ -966,6 +968,7 @@ message{
         course_id
         course_description
         course_name
+        course_status
         version
         location
         course_start_datetime
@@ -1863,6 +1866,8 @@ query getperformActivityData($userId: String , $courseId: String) {
         submittedTotal
         course_id
         batchid
+        batchstartdate
+        batchenddate
         activityId
         iterationTotal
         module_id

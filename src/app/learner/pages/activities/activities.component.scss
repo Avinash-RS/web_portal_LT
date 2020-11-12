@@ -206,6 +206,12 @@ margin-bottom: 9px;
 ::ng-deep .matDialogMat .mat-dialog-container {
   overflow: hidden !important;
 }
+::ng-deep .cdk-global-scrollblock{
+  overflow-y: auto !important;
+}
+ :disabled .addIcon{
+  cursor: not-allowed;
+}
 
 .download-icon {
   position: relative;
@@ -309,11 +315,11 @@ margin-bottom: 1% !important;
 }
 
 .endDateTxt {
-  margin-left: 45px;
+  margin-left: 36px;
 }
 
 .EndDate {
-  margin-left: 36px;
+  margin-left: 1.4rem;
 }
 
 .itrationTxt {
@@ -513,6 +519,47 @@ margin-top: 8px;
   opacity: 1 !important;
   font-size: 12px !important;
 }
+.itrCount {
+position: relative;
+right: 3rem;
+}
+.noSessionCard {
+  margin: auto;
+  margin-top: 3%;
+  border-radius: 0;
+  opacity: 1;
+  text-align: center;
+  padding-bottom: 8px !important;
+  padding-right: 0px !important;
+  background: #F5F5F5 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 4px #00000029;
+  opacity: 1;
+  border-left: 5px solid #ffc107bf !important;
+  width: 40%;
+}
+.color-yellow-card-status {
+  border-left: 5px solid $lxp-status-yellow !important;
+  color: $color-blank !important;
+  border-radius: 6px;
+}
+.noSessionImg {
+  width: 45px;
+  margin-left: 0%;
+}
+.actImg {
+  position: absolute;
+  top: 19px;
+}
+.noData {
+  font: normal normal normal 23px/29px Roboto Condensed;
+  letter-spacing: 0px;
+  color: #333333;
+  opacity: 1;
+  padding-bottom: 13px;
+}
+.actTxt {
+  margin-left: 12px;
+}
 /*Ramya CSS ends here*/
 .videoPreview {
   background-color: #D5D5D5;
@@ -564,7 +611,7 @@ margin-top: 8px;
 }
 
 .carouselRowHover {
-  height: 5.7rem;
+  height: 4rem;
   background-color: #5C6873;
 }
 
@@ -573,6 +620,12 @@ margin-top: 8px;
 }
 
 .carouselCol {
+  max-width: 73% !important;
+  height: 15rem;
+  margin-left: 2rem;
+}
+
+.carouselCol1 {
   max-width: 100% !important;
   height: 15rem;
   margin-left: -15px;
@@ -688,6 +741,30 @@ margin-top: 8px;
  height: 15rem !important;
 }
 
+::ng-deep .itdata .owl-item {
+  width: 160px !important;
+}
+
+::ng-deep .itdata .arrow .owl-carousel .owl-nav .owl-prev {
+  position: absolute;
+  top: 20%;
+  z-index: 1 !important;
+  left: -18px;
+  height: 50px;
+  width: 50px;
+
+}
+
+::ng-deep .itdata .arrow .owl-carousel .owl-nav .owl-next {
+  position: absolute;
+  top: 20%;
+  z-index: 1 !important;
+  right: -18px;
+  height: 50px;
+  width: 50px;
+
+}
+
 :host ::ng-deep .owlItration .owl-theme {
   height: 9rem !important;
  }
@@ -752,9 +829,10 @@ border: 1px solid #ccc;
 }
 
 .materialCard {
-  width: 7rem;
+  width: 8rem;
   height: 7rem;
   cursor: pointer;
+  margin-left: 1rem;
 }
 
 .icons {
@@ -810,4 +888,12 @@ border: 1px solid #ccc;
 .actionBtn1Mobile {
   font-size: 10px;
   margin-left: 1rem;
+}
+
+.m-l {
+  margin-left: 44px;
+}
+
+.startDate {
+  margin-left: -6rem;
 }
