@@ -391,15 +391,20 @@ export class ActivitiesComponent implements OnInit {
       this.performDetails = data.data.getperformActivityData.data;
       this.performDetails.forEach((element) => {
         const startDate = new Date(element.performActivity.activitystartdate);
-        element.activityStartDate = moment(startDate).format('ll');
+        element.activityStartDate = moment(startDate).format('DD-MM-YYYY, HH:MM');
         element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
         const endDate = new Date(element.performActivity.activityenddate);
-        element.activityEndDate = moment(endDate).format('ll');
+        element.activityEndDate = moment(endDate).format('DD-MM-YYYY, HH:MM');
         element.endDate = moment(endDate).format('DD-MM-YYYY HH:MM');
-        let strtDate = new Date(element.activityStartDate);
-        let edDate = new Date(element.activityEndDate);
+        let strtDate = new Date(startDate);
+        let edDate = new Date(endDate);
         let crrDate = new Date();
-        element['itrationStarted'] = this.dateDiff(strtDate, edDate, crrDate);
+        if (strtDate <= crrDate && edDate >= crrDate) {
+          element['itrationStarted'] = true;
+        } else {
+          element['itrationStarted'] = false;
+        }
+        // element['itrationStarted'] = this.dateDiff(strtDate, edDate, crrDate);
         if (moment().format('DD-MM-YYYY HH:MM') >= element.startDate &&
         moment().format('DD-MM-YYYY HH:MM') <= element.endDate) {
         this.submitStatus = 'ontime';
@@ -414,6 +419,7 @@ export class ActivitiesComponent implements OnInit {
   dateDiff(startDate, endDate, currentDate) {
     let startDateDiff = startDate - currentDate;
     let endDateDiff = endDate - currentDate;
+    console.log('startDateDiff', startDateDiff, 'endDateDiff', endDateDiff);
     if ((startDateDiff <= 0 ) && (endDateDiff >= 0)) {
       return true;
     }
