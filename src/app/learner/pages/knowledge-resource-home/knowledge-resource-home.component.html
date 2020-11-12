@@ -1,27 +1,53 @@
 <app-header></app-header>
-      <div class="know-home-container">
-        <!-- <div class="header-div">
-            <h3>Knowledge Ressources</h3>
-         </div>  -->
-        <div class="search-bar">
-          <form>
-            <input type="search" id="gsearch" placeholder="Search..." name="gsearch" [(ngModel)]="searchDetails" class="no-outline">
-            <!-- <label class="search-placeholder">Search...</label> -->
-            <i class="material-icons">search</i>
-          </form>
-        </div>
-  
-        <div class="row resource-link">
-          <div class="col-4 resource-col" *ngFor="let item of details | filter:searchDetails">
-            <h1>{{item[0]}}</h1>
-            <ng-container *ngFor="let areaOfInt of item[1];let i = index">
-              <ng-container *ngIf="i < 13 || item[2]">
-                <a (click)="onResourcePreview(areaOfInt)">{{areaOfInt.area_of_interest}}</a><br>
-              </ng-container>
-            </ng-container>
-            <ng-container  *ngIf="item[1].length > 13 && !item[2]">
-              <span (click)="item[2] = true" class="expand-more">More...</span>
-            </ng-container>
-          </div>
-        </div>
-      </div>
+    
+<div class="know-home-container">
+  <!-- <div class="header-div">
+      <h3>Knowledge Ressources</h3>
+   </div>  -->
+  <!-- <div class="search-bar" *ngIf="!details">
+   <span>No resource data is available</span>
+  </div> -->
+
+  <div class="search-bar" *ngIf="details.length">
+    <form>
+      <input type="search" id="gsearch" placeholder="Search..." name="gsearch" [(ngModel)]="searchDetails"
+        class="no-outline">
+      <!-- <label class="search-placeholder">Search...</label> -->
+      <i class="material-icons">search</i>
+    </form>
+  </div>
+
+  <div class="no-data" *ngIf="isLoadBalanced  && !details.length">
+    <h2>No resource data is available here</h2>
+  </div>
+
+  <div class="row resource-link">
+    <div class="col-4 resource-col" *ngFor="let item of details | filter:searchDetails">
+      <h1>{{item.domain}}</h1>
+      <ng-container *ngFor="let areaOfIntArr of item.areaOfInterest; let i = index">
+        <ng-container *ngIf="((areaOfIntArr.toLowerCase().search(searchDetails.toLowerCase())) >= 0) || 
+          searchDetails == undefined || (searchDetails && searchDetails.length == 0)">
+
+          <ng-container *ngIf="i < 12">
+            <a style="cursor: pointer;" (click)="onResourcePreview(item.domain,areaOfIntArr)">{{areaOfIntArr}}
+            </a><br>
+          </ng-container>
+          <ng-container *ngIf="(item.isMore && i >= 12) ||
+            (i >= 12 && (searchDetails && searchDetails.length > 0 && 
+            areaOfIntArr.toLowerCase().search(searchDetails.toLowerCase()) >=0 ))">
+            <a style="cursor: pointer;" (click)="onResourcePreview(item.domain,areaOfIntArr)">{{areaOfIntArr}}
+            </a><br>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="!(searchDetails && searchDetails.length > 0)">
+        <ng-container *ngIf="item.areaOfInterest.length > 12 && !item.isMore">
+          <span (click)="item.isMore = true" class="expand-more">More...</span>
+        </ng-container>
+        <ng-container *ngIf="item.areaOfInterest.length > 12 && item.isMore">
+          <span (click)="item.isMore = false" class="expand-more">Less...</span>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>

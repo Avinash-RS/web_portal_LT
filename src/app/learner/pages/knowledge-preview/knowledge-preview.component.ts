@@ -21,7 +21,13 @@ export class KnowledgePreviewComponent implements OnInit {
        this.isCancelLoad = true;
      }, 500);
    this.fileType = this.batchdialogdata.fileType;
+   if(this.fileType == 'pdf') {
+    this.batchdialogdata.file = this.batchdialogdata.file+'#toolbar=0'
+    this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file);
+   }
+   else {
    this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file);
+   }
   }
 
   onClose() {
