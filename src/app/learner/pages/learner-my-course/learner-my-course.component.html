@@ -39,7 +39,7 @@
         <div class="col-6 col-lg-8 searchCol text-right">
 
           <!---------------Multi-level dropdown------------->
-          <div class="inner-addon searchDiv right-addon">
+          <div class="inner-addon searchDiv right-addon" style="display: none;">
             <input type="text" [ngClass]="searchExpand? 'form-control search' :'form-control searchNormal'"
               [(ngModel)]="searchName" placeholder="Search courses..." />
               <!-- (keyup)="getDashboardMyCourse(userDetailes.user_id, userDetailes._id)" -->
