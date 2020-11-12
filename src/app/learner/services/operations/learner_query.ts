@@ -328,6 +328,7 @@ export const getmoduleData = gql`
                 path
                 type_name
                 size
+                fileType
               }
               doc_type
               count

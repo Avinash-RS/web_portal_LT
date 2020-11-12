@@ -232,13 +232,26 @@
           </mat-expansion-panel>
         </ng-container>
       </mat-accordion>
-      <div class="row ml-0 mr-0 errmsg" *ngIf="assignmentContent?.coursedetails.length < 1">
+      <!-- <div class="row ml-0 mr-0 errmsg" *ngIf="assignmentContent?.coursedetails.length < 1">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-auto text-center">
           <span class="errormsg">
             <img class="assignImg" alt="" src="assets/006-assignment1.svg">
             <span>You have no assignments at the moment!</span>
           </span>
         </div>
+      </div> -->
+
+      <div *ngIf="assignmentContent?.coursedetails.length < 1">
+        <mat-card class="noSessionCard color-yellow-card-status">
+          <div class="row mar-t-12">
+            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+              <img class="actImg" src="assets/Assignment.svg"> 
+            </div>
+            <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+              <span class=""> You have no assignments at the moment!</span>
+            </div>
+          </div>
+        </mat-card> 
       </div>
 
     </mat-tab>
@@ -284,9 +297,9 @@
                 </span>{{perform.performActivity.iterationTotal}}</div>
 
 
-              <div class="m-l-68">Start date :<span class="endDateTxt"></span>End date :</div>
-              <div class="m-l-68 f_wt_600">{{perform.activityStartDate}}
-                <span class="EndDate f_wt_600"></span>{{perform.activityEndDate}}</div>
+              <div class="startDate">Start date :<span class="endDateTxt"></span>End date :</div>
+              <div class="startDate f_wt_600">{{perform.activityStartDate}}
+                <span class="f_wt_600"></span>{{perform.activityEndDate}}</div>
             </div>
           </div>
 
@@ -336,7 +349,8 @@
                         <div (mouseleave)="hover = false"
                           [ngClass]="!hover ? 'row ml-0 mr-0 carouselRow' : 'row ml-0 mr-0 carouselRowHover'">
                           <div class="col-12 text-center m-auto pl-0 pr-0">
-                            <span class="carouselText">{{material.filename}}</span>
+                            <span class="carouselText" *ngIf="material.filename?.length > 19">{{(material.filename| slice:0:20)+'...'}}</span>
+                            <span class="carouselText" *ngIf="material.filename?.length < 19">{{material.filename}}</span>
                             <br>
                             <div class="row ml-0 mr-0" *ngIf="hover">
                               <div class="col-12 pl-0 pr-0">
@@ -520,13 +534,26 @@
           </div>
         </div>
       </ng-container>
-      <div class="row ml-0 mr-0 errmsg" *ngIf="performDetails?.length < 1">
+      <!-- <div class="row ml-0 mr-0 errmsg" *ngIf="performDetails?.length < 1">
         <div class="col-12 m-auto text-center">
           <span class="errormsg">
             <img class="assignImg" alt="" src="assets/book.svg">
             <span>You have no perform activity at the moment!</span>
           </span>
         </div>
+      </div> -->
+
+      <div *ngIf="performDetails?.length < 1">
+        <mat-card class="noSessionCard color-yellow-card-status">
+          <div class="row mar-t-12">
+            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+              <img class="actImg" src="assets/Perform.svg"> 
+            </div>
+            <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+              <span class="actTxt"> You have no perform activity at the moment!</span>
+            </div>
+          </div>
+        </mat-card> 
       </div>
     </mat-tab>
 
@@ -838,13 +865,26 @@
           </div>
         </div>
       </ng-container>
-      <div class="row ml-0 mr-0 errmsg" *ngIf="projectDetails?.length < 1 && !projectMobileResponsive">
+      <!-- <div class="row ml-0 mr-0 errmsg" *ngIf="projectDetails?.length < 1 && !projectMobileResponsive">
         <div class="col-12 m-auto text-center">
           <span class="errormsg">
             <img class="assignImg" alt="" src="assets/002-project-management.svg">
             <span>You have no project activity at the moment!</span>
           </span>
         </div>
+      </div> -->
+
+      <div *ngIf="projectDetails?.length < 1 && !projectMobileResponsive">
+        <mat-card class="noSessionCard color-yellow-card-status">
+          <div class="row mar-t-12">
+            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+              <img class="actImg" src="assets/Project.svg"> 
+            </div>
+            <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+              <span class="actTxt"> You have no project activity at the moment!</span>
+            </div>
+          </div>
+        </mat-card> 
       </div>
     </mat-tab>
 

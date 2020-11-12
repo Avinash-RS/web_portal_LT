@@ -517,6 +517,43 @@ margin-top: 8px;
 position: relative;
 right: 36px;
 }
+.noSessionCard {
+  margin: auto;
+  margin-top: 3%;
+  border-radius: 0;
+  opacity: 1;
+  text-align: center;
+  padding-bottom: 8px !important;
+  padding-right: 0px !important;
+  background: #F5F5F5 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 4px #00000029;
+  opacity: 1;
+  border-left: 5px solid #ffc107bf !important;
+  width: 40%;
+}
+.color-yellow-card-status {
+  border-left: 5px solid $lxp-status-yellow !important;
+  color: $color-blank !important;
+  border-radius: 6px;
+}
+.noSessionImg {
+  width: 45px;
+  margin-left: 0%;
+}
+.actImg {
+  position: absolute;
+  top: 19px;
+}
+.noData {
+  font: normal normal normal 23px/29px Roboto Condensed;
+  letter-spacing: 0px;
+  color: #333333;
+  opacity: 1;
+  padding-bottom: 13px;
+}
+.actTxt {
+  margin-left: 12px;
+}
 /*Ramya CSS ends here*/
 .videoPreview {
   background-color: #D5D5D5;
@@ -842,4 +879,8 @@ border: 1px solid #ccc;
 
 .m-l {
   margin-left: 44px;
+}
+
+.startDate {
+  margin-left: -6rem;
 }
