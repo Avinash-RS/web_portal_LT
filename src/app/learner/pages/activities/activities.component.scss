@@ -209,6 +209,9 @@ margin-bottom: 9px;
 ::ng-deep .cdk-global-scrollblock{
   overflow-y: auto !important;
 }
+ :disabled .addIcon{
+  cursor: not-allowed;
+}
 
 .download-icon {
   position: relative;
