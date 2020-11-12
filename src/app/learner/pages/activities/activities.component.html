@@ -297,9 +297,9 @@
                 </span>{{perform.performActivity.iterationTotal}}</div>
 
 
-              <div class="m-l-68">Start date :<span class="endDateTxt"></span>End date :</div>
-              <div class="m-l-68 f_wt_600">{{perform.activityStartDate}}
-                <span class="EndDate f_wt_600"></span>{{perform.activityEndDate}}</div>
+              <div class="startDate">Start date :<span class="endDateTxt"></span>End date :</div>
+              <div class="startDate f_wt_600">{{perform.activityStartDate}}
+                <span class="f_wt_600"></span>{{perform.activityEndDate}}</div>
             </div>
           </div>
 
@@ -349,7 +349,8 @@
                         <div (mouseleave)="hover = false"
                           [ngClass]="!hover ? 'row ml-0 mr-0 carouselRow' : 'row ml-0 mr-0 carouselRowHover'">
                           <div class="col-12 text-center m-auto pl-0 pr-0">
-                            <span class="carouselText">{{material.filename}}</span>
+                            <span class="carouselText" *ngIf="material.filename?.length > 19">{{(material.filename| slice:0:20)+'...'}}</span>
+                            <span class="carouselText" *ngIf="material.filename?.length < 19">{{material.filename}}</span>
                             <br>
                             <div class="row ml-0 mr-0" *ngIf="hover">
                               <div class="col-12 pl-0 pr-0">

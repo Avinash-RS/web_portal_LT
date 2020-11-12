@@ -9,8 +9,7 @@ import { CommonServicesService } from '@core/services/common-services.service';
 import { Subscription } from 'rxjs';
 import { slideInAnimation } from './router.animation';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { environment } from '@env/environment.collageConnect';
-import { SocketioService } from '@learner/services/socketio.service';
+import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 
 
 @Component({
@@ -35,6 +34,8 @@ export class AppComponent implements OnInit {
   loaderSubscription: Subscription;
   isMobile: boolean = false;
   platformTxt = navigator.platform;
+  isProgressBar = false;
+  spinnerType = SPINNER.circle;
   constructor(private router: Router,
               private gs: GlobalServiceService,
               private http: HttpClient,
@@ -43,6 +44,7 @@ export class AppComponent implements OnInit {
               private titleService: Title,
               private commonService: CommonServicesService,
               public Lservice: LearnerServicesService,
+              private ngxService: NgxUiLoaderService
 
   ) {
     // console.error = function(){}
@@ -60,6 +62,14 @@ export class AppComponent implements OnInit {
     // console.warn = function(){}
     this.loaderSubscription = this.commonService.loader.subscribe((val) => {
       this.isLoader = val;
+      if(this.isLoader) {
+        this.ngxService.start();
+      }
+      else {
+        setTimeout(() => {
+        this.ngxService.stop();
+        }, 500);
+      }
     });
     // console.log("--Browser running on--",navigator.platform)
     // if(!this.runnablePlatforms.includes(navigator.platform)){
