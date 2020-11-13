@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTabGroup } from '@angular/material';
 import { MatAccordion } from '@angular/material/expansion';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
@@ -131,6 +131,7 @@ export class ActivitiesComponent implements OnInit {
   mouseOverIndex: any;
   videoSource: any;
   projectMobileResponsive: boolean;
+  demo1TabIndex = 0;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
@@ -148,7 +149,18 @@ export class ActivitiesComponent implements OnInit {
     this.getperformActivityData();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    const index = localStorage.getItem('userTabLocation');
+    if (index) {
+    // tslint:disable-next-line:radix
+    this.demo1TabIndex = parseInt(index);
+    }
+  }
+
+  activeTab(event) {
+    console.log('eve', event.index);
+    localStorage.setItem('userTabLocation', event.index);
+  }
 
   tabChanged(event) {
     this.Lservice.closeMobileResp$.subscribe((data: any) => {
