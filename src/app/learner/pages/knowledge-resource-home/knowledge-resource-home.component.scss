@@ -1,3 +1,4 @@
+@import "variable";
 .know-home-container {
   // margin-left: 130px;
   // margin-right: 130px !important;
@@ -178,4 +179,32 @@ h1 {
     font-size: 16px;
     margin-left: 46px;
   }
+}
+.kr-empty {
+  border-left: 7px solid;
+  height: 100px;
+  background: #F5F5F5;
+  border-left-color: $lxp-theme-yellow-sec;
+  color: black;
+  text-align: center;
+  padding-top: 38px;
+  box-shadow: #00000029;
+  box-shadow: aliceblue;
+  box-shadow: 0px 2px 4px #00000029;
+  width: 45%;
+  margin-left: 30%;
+  }
+.color-icon{
+  color : $lxp-theme-green !important;
+}
+.headicon-kr{
+  color: #C02222 !important; 
+  font-size: 30px !important;
+  vertical-align: sub;
+}
+  .para {
+    display: inline-flex;
+    font-size: 18px;
+    vertical-align: initial;
+    padding-left: 10px;
 }

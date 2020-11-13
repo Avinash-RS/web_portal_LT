@@ -2,7 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { Apollo } from 'apollo-angular';
-import { resource_details, particular_resource_details, update_resource_details } from './knowledge-resource.gql';
+import { particular_resource_details, resource_details, update_resource_details } from './knowledge-resource.gql';
+
 
 @Injectable({
     providedIn: 'root'
@@ -41,3 +42,6 @@ export class knowledgeService {
     }
 
 }
+
+
+

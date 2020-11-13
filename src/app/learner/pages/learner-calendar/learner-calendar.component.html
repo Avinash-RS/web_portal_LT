@@ -120,14 +120,14 @@
                                               
                                                 <div class="m-l-4">
                                                     <img src="../../../../assets/learner/Calendar_black.svg">
-                                                    <span class="lxp-text f_size_14 f_wt_400"> {{data.activity_details.startdate | date :'d/M/yy h:mm a'}} - {{data.activity_details.enddate | date :'d/M/yy h:mm a'}}</span>
+                                                    <span class="f_size_14 f_wt_400"> {{data.activity_details.startdate | date :'d/M/yy h:mm a'}} - {{data.activity_details.enddate | date :'d/M/yy h:mm a'}}</span>
     
                                                     <span class="status lxp-text f_size_14 f_wt_400" *ngIf="data.status == 'On going' ">
                                                     {{'Ongoing' | translate }}</span>
                                                     <span class="Upcomingstatus lxp-text f_size_14 f_" *ngIf="data.status == 'Up Coming' ">
                                                    {{'Upcoming' | translate }}</span>
                                                     <span class=" Completedstatus lxp-text f_size_14 f_" *ngIf="data.status == 'Completed' ">
-                                                    {{'completed' | translate }}</span>
+                                                    {{'Completed' | translate }}</span>
         
         
                                                 </div>
