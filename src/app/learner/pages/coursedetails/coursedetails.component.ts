@@ -27,7 +27,7 @@ export class CoursedetailsComponent implements OnInit {
   //FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    if( (event.which === 67 && event.ctrlKey && event.shiftKey) || (event.which == 123) ){
+    if( (event.which === 67 && event.ctrlKey && event.shiftKey) || (event.which == 123) || (event.which === 73 && event.ctrlKey && event.shiftKey) ){
       event.returnValue = false;
       event.preventDefault();
     }
