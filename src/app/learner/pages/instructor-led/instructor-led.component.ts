@@ -4,6 +4,7 @@ import { LearnerServicesService } from '../../services/learner-services.service'
 import { VideoPreviewModalComponent } from '../video-preview-modal/video-preview-modal.component';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import * as _ from 'underscore';
+import * as moment from 'moment';
 
 // const courseid = 'tbiwys0m';
 // const userid = 'aj1yej';
@@ -115,28 +116,15 @@ export class InstructorLedComponent implements OnInit {
   getTimes(endDate, startDate) {
     const start = new Date(startDate);
     const end = new Date(endDate);
-    const s: any = start;
-    const e: any = end;
-    let diff: any = (e - s) / 60000;
-    diff = parseInt(diff, 10);
-    let context = '';
-    let hh = 0;
-    let mm = 0;
-    if (diff > 59) {
-      hh = (diff / 60);
-      mm = (diff % 60);
-      mm = 34.999999;
-      if (mm) {
-        context = hh.toFixed(0) + ' hour ' + mm.toFixed(0) + ' minutes';
-      } else {
-        context = hh.toFixed(0) + ' hour ';
-      }
-    } else {
-      hh = 0;
-      mm = diff.toFixed(0);
-      context = mm + ' minutes';
+    var ms = moment(end,"DD/MM/YYYY HH:mm:ss").diff(moment(start,"DD/MM/YYYY HH:mm:ss"));
+    var d = moment.duration(ms);
+    if(d.hours() == 0){
+      var time = d.minutes() + ' minutes'
+    }else{
+      var time = d.hours() + ' hour ' + d.minutes() + ' minutes'
     }
-    return context;
+    
+    return time;
   }
 
   preview(row) {
