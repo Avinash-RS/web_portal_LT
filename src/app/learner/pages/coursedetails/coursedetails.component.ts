@@ -24,7 +24,6 @@ import { LegendPosition } from 'ag-grid-community';
   styleUrls: ['./coursedetails.component.scss']
 })
 export class CoursedetailsComponent implements OnInit {
-  //FOR DRM(Restriction for right click)
 
   course: any = null;
   loading: boolean;
@@ -104,7 +103,7 @@ export class CoursedetailsComponent implements OnInit {
   playerMenuEnable = false;
   viewScrollBar = false;
   fileRef: any[];
-
+  // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if ((event.which === 67 && event.ctrlKey && event.shiftKey) || (event.which === 123)) {
