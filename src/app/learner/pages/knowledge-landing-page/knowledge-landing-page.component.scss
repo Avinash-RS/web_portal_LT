@@ -1,38 +1,38 @@
 .knowledge-landing-container {
+    overflow: hidden;
 
-    overflow:hidden;
-
-   .back-page{
-       position: fixed;
-       border: none;
-       top: 20%;
-       margin-left: 26px;
-       span{
-        font-size: 15px;
-        margin-left: 5px;
-        margin-top: 2px;
-        border-style:none;
-       }
-       img{
-           width: 5px;
-           height: 5px;
-       }
-       span:hover{
-           border: none;
-           color:red;
-       }
-       span:focus{
+    .back-page {
+        position: relative;
         border: none;
-        border-style:none;
-        // color:red;
-        // font-size: 18px;
-    } span:active{
-        outline: none;
-        border: none;
-        border-style:none;
-        // color:red;
-        // font-size: 18px;
-    }
+        top: 6.5em;
+        margin-left: 26px;
+        span {
+            font-size: 15px;
+            margin-left: 5px;
+            margin-top: 2px;
+            border-style: none;
+        }
+        img {
+            width: 5px;
+            height: 5px;
+        }
+        span:hover {
+            border: none;
+            color: red;
+        }
+        span:focus {
+            border: none;
+            border-style: none;
+            // color:red;
+            // font-size: 18px;
+        }
+        span:active {
+            outline: none;
+            border: none;
+            border-style: none;
+            // color:red;
+            // font-size: 18px;
+        }
     }
     .header-section {
         border-bottom: 1px solid lightgray;
