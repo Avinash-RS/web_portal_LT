@@ -228,25 +228,25 @@ export class CoursedetailsComponent implements OnInit {
       //  const courseValue = _.find(result.data.course_dtl, { course_id: this.courseid});
      //   console.log(courseValue);
      if (result.data.course_id === this.courseid)  {
-        const newKeys = {
-          displayName: 'title',
-          moduledetails: 'children',
-          coursedetails: 'childData'
-        };
-        const restructrueArray = [];
-        let i = 0;
-        for (const iterator of result.data.module) {
-          const renamedObj = this.renameKeys(iterator, newKeys);
-          restructrueArray.push(renamedObj);
-          i = i + 1;
+      //   const newKeys = {
+      //     displayName: 'title',
+      //     moduledetails: 'children',
+      //     coursedetails: 'childData'
+      //   };
+      //   const restructrueArray = [];
+      //   let i = 0;
+      //   for (const iterator of result.data.module) {
+      //     const renamedObj = this.renameKeys(iterator, newKeys);
+      //     restructrueArray.push(renamedObj);
+      //     i = i + 1;
 
-        }
-        const jsonData = [{
-        childData: restructrueArray,
-        total_topic_len: i
-      }];
+      //   }
+      //   const jsonData = [{
+      //   childData: restructrueArray,
+      //   total_topic_len: i
+      // }];
 
-      this.scromModuleData = jsonData[0].childData;
+      this.scromModuleData = result.data.childData;
         // console.log(jsonData[0].childData, 'this.scromModuleData');
         this.scromModuleData.forEach(childData => {
           if (childData &&  childData.children) {

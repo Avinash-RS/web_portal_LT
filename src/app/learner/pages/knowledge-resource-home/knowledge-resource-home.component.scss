@@ -208,3 +208,17 @@ h1 {
     vertical-align: initial;
     padding-left: 10px;
 }
+
+
+.area-int {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  a {
+    color: #007bff;
+  }
+  a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+}
