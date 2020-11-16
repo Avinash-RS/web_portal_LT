@@ -140,7 +140,7 @@ export class CoursedetailsComponent implements OnInit {
       this.playerModuleAndTopic();
       // this.refreshData();
       // this.autoHide();
-      // this.getPlayerNextPrve();
+      this.getPlayerNextPrve();
       this.service.viewCurseByID(detail && detail.id || this.localStoCourseid, this.userDetail.user_id)
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {

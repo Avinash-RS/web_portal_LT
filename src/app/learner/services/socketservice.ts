@@ -30,7 +30,7 @@ export class SocketioService {
         }
         if (type.type === 'connect') {
             if (this.loginDetails) {
-                console.log(this.loginDetails, 'M<MMMMM');
+                // console.log(this.loginDetails, 'M<MMMMM');
                 this.socket.emit('info', this.loginDetails.user_id);
             }
         }
