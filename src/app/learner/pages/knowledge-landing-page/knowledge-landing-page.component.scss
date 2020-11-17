@@ -4,7 +4,7 @@
     .back-page {
         position: relative;
         border: none;
-        top: 6.5em;
+        top: 1.5em;
         margin-left: 26px;
         span {
             font-size: 15px;
@@ -36,23 +36,33 @@
     }
     .header-section {
         border-bottom: 1px solid lightgray;
-        height: 11em;
-        // margin-top: 30px;
-        padding: 40px 0;
+        height: 9em;
+        //  margin-bottom: 15px;
+        padding: 25px 0;
         .breadcrumb {
-            // background-color: white !important;
-            padding: 0px 0px 0px 15px !important;
+            background-color: white !important;
+            // padding: 0px 0px 0px 15px !important;
             font-size: 14px;
-            a {
-                font-weight: 600;
+            .breadcrumb-item {
+                // font-weight: 400;
+                font-weight: bold;
+                color: black;
             }
-            .active {
-                font-weight: 600;
-                column-count: unset !important;
+            .breadcrumb-item.active {
+                // font-weight: 400;
+                font-weight: bold;
+                color: black;
             }
+            // a {
+            //     font-weight: 600;
+            // }
+            // .active {
+            //     font-weight: 600;
+            //     column-count: unset !important;
+            // }
         }
         .header-carousel {
-            margin-top: 2.5%;
+            margin-top: 1.5%;
             .topic-chip {
                 border: 2px solid #8f8f8f;
                 text-align: center;
@@ -75,6 +85,7 @@
     }
     .main-section {
         max-height: 28em;
+        padding-bottom: 15px;
         display: flex;
         flex-wrap: wrap;
         overflow: auto;
