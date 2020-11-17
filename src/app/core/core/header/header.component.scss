@@ -186,11 +186,18 @@ background-color:$lxp-gray !important;
     display: block;
 }
 
-@media screen and (min-width: 200px) and (max-width: 767.98px) {
-    .btn1 {
-        display: none;
-    }
+@media screen and (min-width: 200px) and (max-width: 770px) {
+  .smNoDisp{
+      display: none;
+  }
 
+.p-x-15px{
+    padding:7px 4px !important; 
+}
+.p5px{
+    background-color: black;
+    padding:7px 4px !important; 
+}
     .bookIcon {
         display: block !important;
         position: relative;
@@ -224,5 +231,5 @@ background-color:$lxp-gray !important;
 }
 
 .p-x-15px{
-    padding:7px 15px !important; 
+    padding:7px 15px; 
 }

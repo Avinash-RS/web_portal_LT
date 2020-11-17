@@ -5,12 +5,12 @@
   <div class="tab" *ngIf="show">
     <!-- COmmenting knowledge resource/ activity center for UAT release -->
     <!-- KNOWLEDGE RESOURCE -->
-    <button matRipple class="" [ngClass]="activeUrl === '/Learner/knowledge' ? 'btn2 p-x-15px float-right colgreen' : 
+    <button matRipple class="" [ngClass]="activeUrl === '/Learner/knowledge' ? 'btn2 p-x-15px p5px float-right colgreen' : 
     'btn1 p-x-15px float-right colWhite'" md-raised-button routerLink="/Learner/knowledge" routerLinkActive="active">
-    <span class="lxp-knowledge headicon animated animatedFadeInUp fadeInUp mr-2"></span>
+    <span class="lxp-knowledge headicon animated animatedFadeInUp fadeInUp"></span>
       <!-- <mat-icon fontSet="material-icons-outlined " class="headicon animated animatedFadeInUp fadeInUp" inline=true>
         event_note </mat-icon> -->
-        <div class="imgAdj">Knowledge Resources</div>
+        <div class="imgAdj"><span class="smNoDisp">&nbsp; Knowledge Resources</span></div>
     </button>
     <!-- END OF KNOWLEDGE RESOURCE -->
 
@@ -18,7 +18,7 @@
     <button matRipple class="" [ngClass]="activeUrl === '/Learner/activitycenterhomescreen' ? 'btn2 p-x-15px float-right colgreen' : 
     'colWhite btn1 p-x-15px float-right'" md-raised-button routerLink="/Learner/activitycenterhomescreen">
         <mat-icon fontSet="material-icons-outlined" class="headicon animated animatedFadeInUp fadeInUp " inline=true>
-        offline_bolt </mat-icon> Activity Center
+        offline_bolt </mat-icon> <span class="smNoDisp"> Activity Center</span> 
     </button>
 
     <!-- END OF ACTIVITY CENTER -->
@@ -28,8 +28,8 @@
     'colWhite btn1 p-x-15px float-right'" md-raised-button routerLink="/Learner/calendar" routerLinkActive="active">
       <!-- <mat-icon fontSet="material-icons-outlined " class="headicon animated animatedFadeInUp fadeInUp" inline=true>
         event_note </mat-icon> -->
-        <span class="headicon animated animatedFadeInUp fadeInUp mr-2 lxp-calendar"></span> 
-        <div class="imgAdj">Calendar</div>
+        <span class="headicon animated animatedFadeInUp fadeInUp lxp-calendar"></span> 
+        <div class="imgAdj smNoDisp">&nbsp;Calendar</div>
     </button>
     <!-- END OF CALENDAR -->
 
@@ -38,7 +38,7 @@
       'colWhite btn1 p-x-15px float-right'" md-raised-button routerLink="/Learner/MyCourse">
       <mat-icon fontSet="material-icons-outlined" class="headicon animated animatedFadeInUp fadeInUp " inline=true>
         local_library </mat-icon> 
-        My Courses
+        <span class="smNoDisp"> My Courses</span>
     </button>
     <!-- END OF MY COURSE -->
 
