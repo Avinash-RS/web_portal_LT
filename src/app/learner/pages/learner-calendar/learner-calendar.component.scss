@@ -55,7 +55,7 @@
         color: #1F1A17!important;
     }
     .color-grey-card-status {
-        border-left: 3px solid #b5acac !important;
+        border-left: 3px solid green !important;
         // color: #b5acac !important;
     }
     .color-yellow-card-status {
@@ -72,13 +72,15 @@
         margin-top: 5px;
     }
     .Completedstatus {
-        background: #b5acac;
+        // background: #b5acac;
+        background: green;
         padding: 2px 6px;
         float: right;
         border-radius: 4px;
         font-size: 13px;
         color: $color-white ;
         margin-top: 5px;
+        margin-right: 11px;
     }
     .color-white {
         color: #b5acac;
@@ -152,6 +154,42 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+    .course-section{
+        width: 50% !important;
+        display: inline-block;
+        white-space: nowrap !important; 
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    .img-show{
+        float: right; 
+        width: 20%;
+        margin-left: 12%;
+        }
+    .activity_type{
+        color: black;
+        display: inline-block;
+        font-family: Roboto Condensed !important;
+        width: 24%;
+        margin-right: 0px;
+    }
+    .topic-section{
+        width: 50% !important;
+        display: inline-block;
+        white-space: nowrap !important; 
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    .created-section{
+        width: 28%;
+        color: black !important;
+        display: inline-block;
+        font-family: Roboto Condensed !important;
+    }
+    .created-name{
+        color: black !important;
+        font-family: Roboto Condensed !important;
+    }
     .person {
         position: absolute;
         margin-left: 10px;
@@ -208,7 +246,7 @@
 .scroll-bar{
     width: 450px;
     height: 550px;
-    overflow-y: scroll;
+    // overflow-y: hidden;
   }
 
 
