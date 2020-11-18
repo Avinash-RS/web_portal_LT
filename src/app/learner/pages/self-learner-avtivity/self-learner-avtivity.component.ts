@@ -79,11 +79,11 @@ export class SelfLearnerAvtivityComponent implements OnInit {
         ctx.fillStyle = 'black';
 
         // Draw text in center
-        ctx.fillText('Activity status', centerX, centerY);
+        ctx.fillText('Topic status', centerX, centerY);
       }
     }
   ];
-  public activityColors: Color[] = [{ backgroundColor: ['#C02222', '#FFCC00', '#679959', '#80808061'] }];
+  public activityColors: Color[] = [{ backgroundColor: ['#679B59', '#FBB439', '#CBCBCB'] }];
   public activityCount: any = {
     responsive: true,
     legend: {
@@ -137,20 +137,19 @@ export class SelfLearnerAvtivityComponent implements OnInit {
   }
   getBoarddetails() {
     this.Lservice.boarddetail(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
-      console.log('data', data);
       this.boardDetails = data.data.boarddetail.data;
-      this.chartData = data.data.boarddetail.data.pieData;
+      this.chartData = data.data.boarddetail.data;
       this.topicData = data.data.boarddetail.data.topicData;
       this.topicData.forEach(element => {
-        const startDate = new Date(element.activityStartDate);
+        const startDate = new Date(element.startDate);
         element.activityStartDate = moment(startDate).format('ll');
-        const endDate = new Date(element.activityEndDate);
+        const endDate = new Date(element.endDate);
         element.activityEndDate = moment(endDate).format('ll');
       });
       this.doughnutChartData = [this.boardDetails.courseProgression];
-      this.activityLabels = ['Graded', 'Submitted', 'Yet to submit', 'Overdue'];
-      this.activityData = [this.chartData.gradedPercentage, this.chartData.submittedPercentage, this.chartData.yetToSubmitPercentage,
-      this.chartData.overDuePercentage];
+      this.activityLabels = ['Completed', 'Ongoing', 'Yet to start'];
+      this.activityData = [this.chartData.completedTopicPercentage, this.chartData.onGoingTopicPercentage,
+        this.chartData.yetToStartTopicPercentage];
     });
   }
 

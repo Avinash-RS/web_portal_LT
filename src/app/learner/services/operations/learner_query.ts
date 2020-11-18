@@ -1972,30 +1972,27 @@ export const boarddetail = gql`
       query boarddetail($user_id: String, $course_id: String) {
         boarddetail(user_id : $user_id, course_id: $course_id) {
           success
-          data{
-            courseProgression
-            moduleCovered
-            topicCovered
-            totalNumberOfModule
-            totalNumberOfTopic
-            pieData{
-              gradedPercentage
-              overDuePercentage
-              submittedPercentage
-              yetToSubmitPercentage
-              totalNumberOfActivities
-              gradedActivities
-              submittedActivities
-              overDueActivities
-              yetToSubmitActivities
-            }
-            topicData{
-              topicName
-              activityCount
-              activityStartDate
-              activityEndDate
-            }
-          }
+          data
+          {
+              courseProgression
+              moduleCovered
+              topicCovered
+              totalNumberOfModule
+              totalNumberOfTopic
+              totalNumberOfCompletedTopic
+              onGoingTopicCount
+              yetToStartTopic
+              completedTopicPercentage
+              onGoingTopicPercentage
+              yetToStartTopicPercentage
+              topicData{
+                  topicName
+                  duration
+                  topicStatus
+                  startDate
+                  endDate
+                  }
+                  }
         }
       }
 `;

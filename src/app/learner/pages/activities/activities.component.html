@@ -638,70 +638,68 @@
                   <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12 second">
                     <div class="f_size_16 f_wt_600">Material for activity ({{project.projectActivity.materialDetails.length}})</div>
 
+            <!--------------------------------New carousel------------------------>
                     <owl-carousel-o [options]="trendingCategorires"
-                      [ngClass]="project.projectActivity.materialDetails.length <= 4 ? 'widthClass arrow' : 'arrow'">
-                      <ng-template class="row ml-0 mr-0" carouselSlide
-                        *ngFor="let material of project.projectActivity.materialDetails; let i = index">
-                        <div class="col-4 w-100 pt-2 pb-2 carouselCol">
-                          <mat-card class="p-0 carouselCard" (mouseover)="hover = true; mouseover(i)">
-                            <!--  -->
-                            <div class="row ml-0 mr-0 carouselRow1">
-                              <div class="col-12 m-auto">
-                                <mat-icon class="imageIcon" *ngIf="material.doc_type =='image/jpeg'
-                           || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
-                                  photo_size_select_actual</mat-icon>
-                                <mat-icon class="imageIcon" *ngIf="material.doc_type =='video/mp4'">play_circle_outline
-                                </mat-icon>
-                                <i class="fa fa-file-pdf-o pdfIcon" *ngIf="material.doc_type =='application/pdf'"
-                                  aria-hidden="true"></i>
-                              </div>
+                    [ngClass]="project.projectActivity.materialDetails.length >= 4 ? 'arrow': 'widthClass arrow' ">
+                    <ng-template class="row ml-0 mr-0" carouselSlide
+                    *ngFor="let material of project.projectActivity.materialDetails; let i = index">
+                      <div [ngClass]="project.projectActivity.materialDetails.length >= 4 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
+                        <mat-card class="p-0 carouselCard" (mouseover)="hover = true; mouseover(i)"
+                          (mouseleave)="hover = false">
+                          <!--  -->
+                          <div class="row ml-0 mr-0 carouselRow1">
+                            <div class="col-12 m-auto">
+                              <mat-icon class="imageIcon"
+                                *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
+                                photo_size_select_actual</mat-icon>
+                              <mat-icon class="imageIcon" *ngIf="material.doc_type =='video/mp4'">play_circle_outline
+                              </mat-icon>
+                              <i class="fa fa-file-pdf-o pdfIcon" *ngIf="material.doc_type =='application/pdf'"
+                                aria-hidden="true"></i>
                             </div>
-                            <div (mouseleave)="hover = false"
-                              [ngClass]="!hover ? 'row ml-0 mr-0 carouselRow' : 'row ml-0 mr-0 carouselRowHover'">
-                              <div class="col-12 text-center m-auto pl-0 pr-0">
-                                <span class="carouselText" *ngIf="material.filename.length < 28">
-                                  {{material.filename}}
-                                </span>
-                                <span class="carouselText" *ngIf="material.filename.length > 28"
-                                  matTooltip="{{material.filename}}" matTooltipClass="custom-mat-tooltip">
-                                  {{(material.filename| slice:0:28)+'...'}}
-                                </span>
-                                <br>
-                                <div class="row ml-0 mr-0" *ngIf="hover">
-                                  <div class="col-12 pl-0 pr-0">
-                                    <!-- <div class="row ml-0 mr-0">
-                                      <div class="col-12 text-left">
-                                        <p class="carouselText">Duration:</p>
-                                      </div>
-                                    </div> -->
-                                    <div class="row ml-0 mr-0 playActions">
-                                      <div class="col-5 text-left pr-0 colAction"
-                                        (click)="projectPreviewDoc(projectPreviewDialog, videoDialog, material, 'material')">
-                                        <mat-icon class="position-absolute text-white playBtn"
-                                          *ngIf="material.doc_type == 'video/mp4'">play_circle_outline</mat-icon>
-                                        <mat-icon class="position-absolute text-white playBtn" *ngIf="material.doc_type =='image/jpeg'
-                                    || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'
-                                    || material.doc_type == 'application/pdf'">pageview</mat-icon>
-                                        <span *ngIf="material.doc_type == 'video/mp4'"
-                                          class="text-white actionBtn">Play</span>
-                                        <span *ngIf="material.doc_type == 'image/png' || material.doc_type == 'image/jpeg'
-                                    || material.doc_type == 'image/jpg' || material.doc_type == 'application/pdf'" class="text-white actionBtn">Preview</span>
-                                      </div>
-                                      <div class="col-7 text-center pr-0 colAction"
-                                        (click)="downloadDoc(material, 'material')">
-                                        <i class="fa fa-download text-white position-absolute downloadBtn"
-                                          aria-hidden="true"></i>
-                                        <span class="text-white actionBtn1">Download</span>
-                                      </div>
+                          </div>
+                          <div (mouseleave)="hover = false"
+                            [ngClass]="hover && mouseOverIndex == i ? 'row ml-0 mr-0 carouselRowHover' : 'row ml-0 mr-0 carouselRow'">
+                            <div class="col-12 text-center mt-2 mb-2 pl-0 pr-0">
+                              <span class="carouselText" *ngIf="material.filename?.length > 19">{{(material.filename| slice:0:20)+'...'}}</span>
+                              <span class="carouselText" *ngIf="material.filename?.length < 19">{{material.filename}}</span>
+                              <br>
+                              <div class="row ml-0 mr-0" *ngIf="hover && mouseOverIndex == i">
+                                <div class="col-12 pl-0 pr-0">
+                                  <!-- <div class="row ml-0 mr-0">
+                                    <div class="col-12 text-left pl-1">
+                                      <p class="carouselText">Duration:</p>
                                     </div>
+                                  </div> -->
+                                  <div class="row ml-0 mr-0 mt-2 playActions">
+                                    <div class="col-5 text-left pr-0 colAction"
+                                    (click)="projectPreviewDoc(projectPreviewDialog, videoDialog, material, 'material')">
+                                      <mat-icon class="position-absolute text-white playBtn"
+                                        *ngIf="material.doc_type =='video/mp4'">play_circle_outline</mat-icon>
+                                      <mat-icon class="position-absolute text-white playBtn"
+                                        *ngIf="material.doc_type =='image/jpeg'">photo_size_select_actual</mat-icon>
+                                        <i class="fa fa-file-pdf-o position-absolute text-white playBtn" *ngIf="material.doc_type =='application/pdf'"
+                                        aria-hidden="true"></i>
+                                      <span class="text-white actionBtn"
+                                        *ngIf="material.doc_type =='video/mp4'">Play</span>
+                                      <span class="text-white actionBtn"
+                                        *ngIf="material.doc_type == 'image/jpeg' || material.doc_type == 'application/pdf'">Preview</span>
+                                    </div>
+                                    <div class="col-7 text-center pr-0 colAction"
+                                    (click)="downloadDoc(material, 'material')">
+                                    <i class="fa fa-download text-white position-absolute downloadBtn"
+                                      aria-hidden="true"></i>
+                                    <span class="text-white actionBtn1">Download</span>
+                                  </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </mat-card>
-                        </div>
-                      </ng-template>
-                    </owl-carousel-o>
+                          </div>
+                        </mat-card>
+                      </div>
+                    </ng-template>
+                  </owl-carousel-o>
 
                     <!-- <h3 *ngIf="project.projectActivity.materialDetails && project.projectActivity.materialDetails.length == 0">
                       No project yet
@@ -737,18 +735,18 @@
                           accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" #uploadInput
                           [(ngModel)]="fileName" (change)="uploadDoc($event, project, 'upload')" />
                         <button mat-stroked-button class="upload-btn" (click)="uploadDocs()"
-                          [disabled]="project.enableSubmit == false && project.submitType == false"
+                          [disabled]="project.enableSubmit == false"
                           *ngIf="project.projectActivity.submitAction !== 'submit'">
                           <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                           Add your files
                         </button>
 
-                        <button mat-stroked-button [disabled]="project.enableSubmit == false  && project.submitType == false" class="submit-btn"
+                        <button mat-stroked-button [disabled]="project.enableSubmit == false" class="submit-btn"
                           (click)="learnerSumbitdeleteVideo(project, '' ,'submit')"
                           *ngIf="project.projectActivity.submit_status == 'notsubmitted' && project.projectActivity.videodetails.length > 0">
                           Submit
                         </button>
-                        <button mat-stroked-button [disabled]="project.enableSubmit == false  && project.submitType == false"
+                        <button mat-stroked-button [disabled]="project.enableSubmit == false"
                           *ngIf="project.projectActivity.videodetails.length == 0" class="submit-btn"> Submit </button>
                         <button mat-stroked-button class="submitted-btn" [disabled]="true"
                           *ngIf="project.projectActivity.submitAction == 'submit'">
@@ -771,13 +769,12 @@
                   <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
                     <div class="f_size_16 f_wt_600">Your submissions</div>
 
-                    <owl-carousel-o [options]="trendingCategorires"
-                      [ngClass]=" project.projectActivity.videodetails.length <= 4 ? 'widthClass arrow' : 'arrow'">
+                    <!-- <owl-carousel-o [options]="trendingCategorires"
+                      [ngClass]="project.projectActivity.videodetails.length <= 4 ? 'widthClass arrow' : 'arrow'">
                       <ng-template class="row ml-0 mr-0" carouselSlide
                         *ngFor="let video of project.projectActivity.videodetails; let i = index">
                         <div class="col-4 w-100 pt-2 pb-2 carouselCol">
                           <mat-card class="p-0 carouselCard" (mouseover)="hover = true; mouseover(i)">
-                            <!--  -->
                             <div class="row ml-0 mr-0 carouselRow1">
                               <div class="col-12 m-auto">
                                 <mat-icon class="imageIcon" *ngIf="video.doc_type =='image/jpeg'
@@ -802,11 +799,11 @@
                                 <br>
                                 <div class="row ml-0 mr-0" *ngIf="hover">
                                   <div class="col-12 pl-0 pr-0">
-                                    <!-- <div class="row ml-0 mr-0">
+                                    <div class="row ml-0 mr-0">
                                       <div class="col-12 text-left">
                                         <p class="carouselText">Duration:</p>
                                       </div>
-                                    </div> -->
+                                    </div>
                                     <div class="row ml-0 mr-0 playActions">
                                       <div class="col-5 text-left pr-0 colAction"
                                         (click)="projectPreviewDoc(projectPreviewDialog,videoDialog, video, 'files')">
@@ -835,7 +832,69 @@
                           </mat-card>
                         </div>
                       </ng-template>
-                    </owl-carousel-o>
+                    </owl-carousel-o> -->
+
+                    <owl-carousel-o [options]="trendingCategorires"
+                    [ngClass]="project.projectActivity.videodetails.length >= 4 ? 'arrow': 'widthClass arrow' ">
+                    <ng-template class="row ml-0 mr-0" carouselSlide
+                    *ngFor="let video of project.projectActivity.videodetails; let i = index">
+                      <div [ngClass]="project.projectActivity.videodetails.length >= 4 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
+                        <mat-card class="p-0 carouselCard" (mouseover)="hover = true; mouseover(i)"
+                          (mouseleave)="hover = false">
+                          <!--  -->
+                          <div class="row ml-0 mr-0 carouselRow1">
+                            <div class="col-12 m-auto">
+                              <mat-icon class="imageIcon"
+                                *ngIf="video.doc_type =='image/jpeg'  || video.doc_type == 'image/png' || video.doc_type == 'image/jpg'">
+                                photo_size_select_actual</mat-icon>
+                              <mat-icon class="imageIcon" *ngIf="video.doc_type =='video/mp4'">play_circle_outline
+                              </mat-icon>
+                              <i class="fa fa-file-pdf-o pdfIcon" *ngIf="video.doc_type =='application/pdf'"
+                                aria-hidden="true"></i>
+                            </div>
+                          </div>
+                          <div (mouseleave)="hover = false"
+                            [ngClass]="hover && mouseOverIndex == i ? 'row ml-0 mr-0 carouselRowHover' : 'row ml-0 mr-0 carouselRow'">
+                            <div class="col-12 text-center mt-2 mb-2 pl-0 pr-0">
+                              <span class="carouselText" *ngIf="video.name?.length > 19">{{(video.name| slice:0:20)+'...'}}</span>
+                              <span class="carouselText" *ngIf="video.name?.length < 19">{{video.name}}</span>
+                              <br>
+                              <div class="row ml-0 mr-0" *ngIf="hover && mouseOverIndex == i">
+                                <div class="col-12 pl-0 pr-0">
+                                  <!-- <div class="row ml-0 mr-0">
+                                    <div class="col-12 text-left pl-1">
+                                      <p class="carouselText">Duration:</p>
+                                    </div>
+                                  </div> -->
+                                  <div class="row ml-0 mr-0 mt-2 playActions">
+                                    <div class="col-5 text-left pr-0 colAction"
+                                    (click)="projectPreviewDoc(projectPreviewDialog,videoDialog, video, 'files')">
+                                      <mat-icon class="position-absolute text-white playBtn"
+                                        *ngIf="video.doc_type =='video/mp4'">play_circle_outline</mat-icon>
+                                      <mat-icon class="position-absolute text-white playBtn"
+                                        *ngIf="video.doc_type =='image/jpeg'">photo_size_select_actual</mat-icon>
+                                        <i class="fa fa-file-pdf-o position-absolute text-white playBtn" *ngIf="video.doc_type =='application/pdf'"
+                                        aria-hidden="true"></i>
+                                      <span class="text-white actionBtn"
+                                        *ngIf="video.doc_type =='video/mp4'">Play</span>
+                                      <span class="text-white actionBtn"
+                                        *ngIf="video.doc_type == 'image/jpeg' || video.doc_type == 'application/pdf'">Preview</span>
+                                    </div>
+                                    <div class="col-7 text-center pr-0 colAction"
+                                    (click)="downloadDoc(video, 'files')">
+                                    <i class="fa fa-download text-white position-absolute downloadBtn"
+                                      aria-hidden="true"></i>
+                                    <span class="text-white actionBtn1">Download</span>
+                                  </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </mat-card>
+                      </div>
+                    </ng-template>
+                  </owl-carousel-o>
 
                   </div>
                 </div>

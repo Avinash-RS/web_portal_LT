@@ -72,31 +72,31 @@
           <div class="row">
             <div class="col-4">
               Total No. of Modules
-              <p class="center"><b>{{boardDetails?.totalNumberOfModule}}</b></p>
+              <p class="center"><b>{{boardDetails?.totalNumberOfModule || '-'}}</b></p>
             </div>
             <div class="col-4">
               Total No. of Topics
-              <p class="center"><b>{{boardDetails?.totalNumberOfTopic}}</b></p>
+              <p class="center"><b>{{boardDetails?.totalNumberOfTopic || '-'}}</b></p>
             </div>
             <div class="col-4">
-              Total No. of Activities
-              <p class="center"><b>{{chartData?.totalNumberOfActivities || '-'}}</b></p>
+             Completed Topics
+              <p class="center"><b>{{chartData?.totalNumberOfCompletedTopic || '-'}}</b></p>
             </div>
           </div>
         </div>
         <div class="col-3">
           <div class="row">
             <div class="col-6">
-              Graded Activities
-              <p class="center"><b>{{chartData?.gradedActivities}}</b></p>
+              Ongoing Topics
+              <p class="center"><b>{{chartData?.onGoingTopicCount || '-'}}</b></p>
             </div>
             <div class="col-6">
-              Submitted Activities
-              <p class="center"><b>{{chartData?.submittedActivities}}</b></p>
+             Yet to start Topics
+              <p class="center"><b>{{chartData?.yetToStartTopic || '-'}}</b></p>
             </div>
           </div>
         </div>
-        <div class="col-3">
+        <!-- <div class="col-3">
           <div class="row">
             <div class="col-6">
               Overdue Activities
@@ -107,32 +107,35 @@
               <p class="center"><b>{{chartData?.yetToSubmitActivities}}</b></p>
             </div>
           </div>
-        </div>
+        </div> -->
       </div><br><br>
 
 
       <div class="box-0-1" *ngFor="let topic of topicData">
       <div class="row">
-        <div class="col-5">
-          <span class="gradedot"></span>&nbsp;
+        <div class="col-7">
+          <span *ngIf="topic?.topicStatus == 'Passed'" class="gradedot"></span>&nbsp;
+          <span *ngIf="topic?.topicStatus == 'process'" class="ongoingDot"></span>&nbsp;
           Topic Name
           <p class="name"><b>{{topic?.topicName}}</b></p>
         </div>
-        <div class="col-2">
-          No. of Activities
-          <p><b>{{topic?.activityCount}}</b></p>
+        <div class="col-1">
+         Duration
+          <p><b>{{topic?.duration || '-'}}</b></p>
         </div>
         <div class="col-2">
           Start Date
-          <p><b>{{topic?.activityStartDate}}</b></p>
+          <p *ngIf="topic?.startDate != null"><b>{{topic?.activityStartDate}}</b></p>
+          <p *ngIf="topic?.startDate == null">-</p>
         </div>
         <div class="col-2">
           End Date
-          <p><b>{{topic?.activityEndDate}}</b></p>
+          <p *ngIf="topic?.endDate != null"><b>{{topic?.activityEndDate}}</b></p>
+          <p *ngIf="topic?.endDate == null">-</p>
         </div>
-        <div class="col-1">
+        <!-- <div class="col-1">
           <mat-icon class="arrow">arrow_drop_down</mat-icon>
-        </div>
+        </div> -->
       </div>
     </div>
 
