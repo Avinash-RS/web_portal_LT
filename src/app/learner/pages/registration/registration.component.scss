@@ -279,6 +279,7 @@ a {
   color: $color-blank;
   position: absolute;
   z-index: 4;
+  height: 55px !important;
 }
 // mobile screen
 @media (max-width: 480px) {
@@ -371,4 +372,7 @@ a {
   // cursor: pointer;
   font-size: 13px;
   margin-top: 25px;
+}
+.headerShadow{
+  box-shadow: 0 3px 3px rgba(0,0,0,.2) !important;
 }

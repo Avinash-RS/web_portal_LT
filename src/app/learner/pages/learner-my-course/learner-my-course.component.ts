@@ -388,18 +388,21 @@ export class LearnerMyCourseComponent implements OnInit {
       BcourseData.data.get_learner_dashboard.message.batch_course_details.forEach(elem => {
         elem.isBatchCourse = true;
       });
-      this.courseDetailsList = BcourseData.data.get_learner_dashboard.message.batch_course_details;
-      // Course batch count init
-      this.onGoingCourseCount = 0;
-      this.completedCourseCount = 0;
-      this.allCourseCount = 0;
+      const tmp_BcourseDetail = BcourseData.data.get_learner_dashboard.message.batch_course_details;
+      this.courseDetailsList = tmp_BcourseDetail && tmp_BcourseDetail !== null ? tmp_BcourseDetail : [];
+      
      
       this.learnerService.getLearnerDashboard(userId, userObjId, 'undefined', requestType, 'enrolment').subscribe((EcourseData: any) => {
-        this.enrolledCourses = EcourseData.data.get_learner_dashboard.message.enrolled_course_details;
-        EcourseData.data.get_learner_dashboard.message.enrolled_course_details.forEach(elem => {
+        const EcourseDetail = EcourseData.data.get_learner_dashboard.message.enrolled_course_details
+        this.enrolledCourses = EcourseDetail && EcourseDetail !== null ? EcourseDetail : [];
+        this.enrolledCourses.forEach(elem => {
           elem.isBatchCourse = false;
         });
         this.courseDetailsList.push(...this.enrolledCourses);
+        // Course batch count reset
+        this.onGoingCourseCount = 0;
+        this.completedCourseCount = 0;
+        this.allCourseCount = 0;
         // Course overall count
         this.onGoingCourseCount = Number(BcourseData.data.get_learner_dashboard.message.ongoing_count) + Number(EcourseData.data.get_learner_dashboard.message.ongoing_count);
         this.completedCourseCount = Number(BcourseData.data.get_learner_dashboard.message.completed_count) + Number(EcourseData.data.get_learner_dashboard.message.completed_count);
