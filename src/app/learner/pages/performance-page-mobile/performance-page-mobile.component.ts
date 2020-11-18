@@ -146,6 +146,7 @@ export class PerformancePageMobileComponent implements OnInit {
     }
 
   getperformActivityData() {
+    this.performDetails = [];
     // console.log("this.performDetails 1234");
     this.Lservice.getperformActivityData(
       this.userDetail.user_id,
