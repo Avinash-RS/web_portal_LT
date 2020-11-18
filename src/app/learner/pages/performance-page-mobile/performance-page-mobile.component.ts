@@ -159,7 +159,7 @@ export class PerformancePageMobileComponent implements OnInit {
         data.data.getperformActivityData.data
       ) {
         this.performDetails = data.data.getperformActivityData.data;
-        console.log("this.performDetails", this.performDetails);
+        this.getPerformActivity(this.indexNumber, this.performDetails[this.indexNumber].performActivity);
         this.performDetails.forEach((element) => {
           const startDate = new Date(element.performActivity.activitystartdate);
           element.activityStartDate = moment(startDate).format("ll");
