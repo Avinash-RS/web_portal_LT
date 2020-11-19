@@ -16,6 +16,7 @@
   border-radius: 0px;
   border: 1px solid #898989;
   width: 100%;
+  position: relative;
 }
 
 .dropdown-toggle:hover {
@@ -251,6 +252,9 @@
   align-items: center;
   white-space: nowrap;
   position: relative;
+}
+::ng-deep.mat-tab-label-active {
+  background-color: #f5f5f5;
 }
 
 
@@ -622,6 +626,10 @@ hr {
 .tabsc {
   & .mat-badge-content {
     color: $color-white;
+    position: relative;
+    left: 0;
+    top: -3px !important;
+    margin-left: 5px;
   //  background: $lxp-theme-green !important;
   }
 
@@ -993,7 +1001,7 @@ hr {
 
 .catalogDropdownCol {
   // margin-top: 1rem;
-  padding-right: 0px;
+  // padding-right: 0px;
   margin-top: 11px;
 }
 
@@ -1114,7 +1122,8 @@ hr {
 }
 
 .catDropdown {
-  margin-right: 1rem !important;
+  // margin-right: 1rem !important;
+  margin-right: 0 !important;
 }
 
 .myCourseSearch {
@@ -1892,6 +1901,50 @@ hr {
 //   }
 // }
 
+
+
+///////
+// .pageheading {
+//   display: flex;
+//   justify-content: space-between;
+//   .heading {
+//     width: 60%;
+//   }
+//   .searchAvailableClases {
+//     width: 40%;
+//     display: flex;
+//     justify-content: space-between;
+//   }
+// }
+// .searchAvailableClases {
+//   .searchFilter {
+//     width: 60%;
+//   }
+//   .availableClasses {
+//     width: 40%;
+//     position: relative;
+//     border: 1px solid;
+//     &:hover {
+//       ul {
+//         display: block;
+//       }
+//     }
+//     ul {
+//       background-color: #f5f5f5;
+//       border: 1px solid #cdcdcd;
+//       width: 100%;
+//       display: none;
+//       list-style-type: none;
+//       margin: 0;
+//       padding: 0;
+//       position: absolute;
+//       right: 0;
+//       top: 100%;
+//     }
+//   }
+// }
+///////
+
 .assignbtn {
   position: relative;
   left: 21px;
@@ -1955,7 +2008,8 @@ hr {
 }
 
 .mat-badge {
-  top: 7px;
+  // top: 7px;
+  top: 3px;
 }
 
 :host ::ng-deep .cc-tab {
@@ -2341,7 +2395,7 @@ top: 9px;
   float: right;
   right: 22px;
   background: #5c6873 !important;
-
+  top: 10px;
   & .mat-badge-content {
     background: $lxp-gray !important;
   }
@@ -2621,6 +2675,18 @@ top: 9px;
   border-radius: 0px !important;
 }
 
+:host ::ng-deep .first-level {
+  width: 100%;
+  left: auto !important;
+  right: 0 !important;
+  top: 98%;
+  min-width: inherit;
+  padding-top: 9px !important;
+  .mat-badge {
+    top: 9px;
+  }
+}
+
 .dropdown-submenu>.dropdown-menu {
   top: 0;
   left: unset !important;
@@ -2674,7 +2740,8 @@ top: 9px;
 li {
   cursor: pointer;
   height: 37px;
-  padding-top: 10px;
+  // padding-top: 10px;
+  padding-top: 7px;
 }
 
 .subMenu {
