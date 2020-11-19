@@ -897,3 +897,32 @@ border: 1px solid #ccc;
 .startDate {
   margin-left: -6rem;
 }
+
+@media (max-width: 767px) {
+.performCard {
+  width: 100%;
+  height: 10rem;
+  padding: 8px !important;
+}
+
+.subTittle {
+  font-size: 14px;
+  font-weight: bolder;
+  color: black;
+  margin: 0 0 10px !important;
+}
+
+
+.textGrayColor1 {
+  color: $color-lightGray;
+}
+
+.submitstatus1 {
+  color: #FFA04E;
+}
+
+.gradeStatus1 {
+  color: #0C781B;
+}
+
+}

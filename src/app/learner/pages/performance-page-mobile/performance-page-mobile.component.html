@@ -1,14 +1,5 @@
+<app-header></app-header>
 <div class="container pl-0 pr-0">
-  <div class="row ml-0 mr-0 performHeight">
-    <div class="col-2 pr-0" *ngIf="!performdetailPage">
-      <mat-icon class="arrowPerform mr-2" aria-hidden="false" (click)="mobileResponsive()">
-        keyboard_backspace</mat-icon>
-    </div>
-    <div class="col-10 pl-0 text-left m-auto moileView">
-      <span class="titleCase">{{ selectedName | titlecase }}</span>
-      <!-- <span *ngIf="course?.course_name?.length > 30">{{(course?.course_name | slice:0:20)+'...'}}</span> -->
-    </div>
-  </div>
   <div class="row ml-0 mr-0 errmsg" *ngIf="performDetails?.length == 0">
     <div class="col-12 m-auto text-center">
       <span class="errormsg">
@@ -17,51 +8,13 @@
       </span>
     </div>
   </div>
-  <div class="row mr-0 ml-0" *ngIf="performDetails.length > 0 && !performdetailPage">
-    <div class="col-sm-12">
-      <mat-card class="performCard mb-3" (click)="getPerformActivity( i+1, perform.performActivity);performdetailPage = !performdetailPage"  *ngFor="let perform of performDetails; let i = index">
-        <div class="row ml-0 mr-0">
-          <div class="col-6 pl-0">
-            <p class="subTittle">{{i+1}}. {{perform.performActivity.module_id}}</p>
-            <span>{{perform.performActivity.topic_id}}
-            </span>
-          </div>
-          <div class="col-6 pl-0 pr-0">
-            <div class="row mr-0 ml-0 mb-4">
-              <div class="col-12 pl-0 pr-0 text-right">
-                <span class="textGrayColor" *ngIf="perform.performActivity.submit_status == 'notsubmitted'">Yet to Submit</span>
-                <span class="submitstatus" *ngIf=" perform.performActivity.submit_status == 'submitted'">Submitted</span>
-                <span class="gradeStatus" *ngIf="perform.performActivity.submit_status == 'graded'">Graded</span>
-              </div>
-            </div>
-            <div class="row mr-0 ml-0 mb-3">
-              <div class="col-12 pl-0 pr-0 text-right">
-                <span class="textGrayColor">Iterations: <span class="textGrayColor" *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} / </span>{{perform.performActivity.iterationTotal}}</span>
-              </div>
-            </div>
-            <div class="row mr-0 ml-0 mt-4">
-              <div class="col-6 mr-0 pl-0 pr-0 text-left">
-                <span class="font-weight-bold">Start date:</span><br />
-                <span class="textGrayColor">{{perform.activityStartDate}}</span>
-              </div>
-              <div class="col-6 mr-0 pl-0 pr-0 text-left">
-                <span class="font-weight-bold">End date:</span><br />
-                <span class="textGrayColor">{{perform.activityEndDate}}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </mat-card>
-    </div>
-  </div>
-
-  <div class="row ml-0 mr-0" *ngIf="performdetailPage">
+  <div class="row ml-0 mr-0 mt-3">
     <div class="col-12 pl-0 pr-0">
       <div class="row ml-0 mr-0">
         <div class="col-12 text-left">
-          <mat-icon class="arrowPopup mr-2" aria-hidden="false" (click)="performdetailPage = !performdetailPage">
+          <mat-icon class="arrowPopup mr-2" aria-hidden="false" (click)="mobileResponsive()">
             keyboard_backspace</mat-icon>
-          <span class="f_wt_600 size catnamenew" (click)="performdetailPage = !performdetailPage">Back</span>
+          <span class="f_wt_600 size catnamenew" (click)="mobileResponsive()">Back</span>
         </div>
       </div>
       <div class="row ml-0 mr-0 mt-3">
@@ -77,21 +30,19 @@
           <div class="row mr-0 ml-0">
             <div class="col-5 mr-0 pl-0 pr-0 text-left">
               <span class="font-weight-bold">Start date:</span><br />
-              <span>{{performActivityData.activitystartdate | date:'MMM dd,yyyy'}}</span>
+              <span>{{performActivityData.activitystartdate | date}}</span>
             </div>
             <div class="col-5 mr-0 pl-0 pr-0 text-left">
               <span class="m-l-5 font-weight-bold">End date:</span><br />
-              <span class="m-l-5">{{performActivityData.activityenddate | date:'MMM dd,yyyy'}}</span>
+              <span class="m-l-5">{{performActivityData.activityenddate | date}}</span>
             </div>
             <div class="col-2 mr-0 pl-0 pr-0 text-left"></div>
           </div>
         </div>
         <div class="col-4 text-right pl-0">
-          <p class="yettoSubmit"><span class="dot"></span> Yet to submit</p>
-          <!-- *ngIf="perform.performActivity.submit_status == 'notsubmitted'" -->
-          <!-- <p class="yettoSubmit" *ngIf=" perform.performActivity.submit_status == 'submitted'"><span class="submitdot"></span> Yet to submit</p>
-          <p class="yettoSubmit" *ngIf="perform.performActivity.submit_status == 'graded'"><span class="gradedot"></span> Yet to submit</p> -->
-          <!-- <p class="itration">5 Itrations</p> -->
+          <p class="yettoSubmit" *ngIf="performActivityData.submit_status == 'notsubmitted'"><span class="dot"></span> Yet to submit</p>
+          <p class="submitstatus" *ngIf="performActivityData.submit_status == 'submitted'"><span class="submitdot"></span>Submitted</p>
+          <p class="gradeStatus" *ngIf="performActivityData.submit_status == 'graded'"><span class="gradedot"></span>Graded</p>
           <p class="textGrayColor">Iterations: <span *ngIf="performActivityData.submittedTotal > 0">{{performActivityData.submittedTotal}} / </span>{{performActivityData.iterationTotal}}<span></span></p>
           <!-- <span class="textGrayColor" *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} / </span>{{perform.performActivity.iterationTotal}} -->
         </div>
@@ -109,23 +60,51 @@
       </div>
       <div class="row ml-0 mr-0 mt-3">
         <div class="col-12 text-left pl-0 pr-0">
-          <div id="demo" class="carousel" data-ride="carousel">
-            <!-- The slideshow -->
+
+          <owl-carousel-o [options]="trendingCategorires"
+          [ngClass]="performActivityData.materialDetails.length >= 4 ? 'arrow': 'widthClass arrow' ">
+          <ng-template class="row ml-0 mr-0" carouselSlide
+            *ngFor="let material of performActivityData.materialDetails; let i = index">
+            <div [ngClass]="performActivityData.materialDetails.length >= 2 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
+              <mat-card class="p-0 iterationCard" (click)="playVideo(projectPreviewDialog, videoDialog, material, material.doc_type, preview = true)">
+                <div class="row ml-0 mr-0 carouselRow1">
+                  <div class="col-12 m-auto">
+                    <mat-icon class="iterationicons"
+                      *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
+                      photo_size_select_actual</mat-icon>
+                    <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4'">play_circle_outline</mat-icon>
+                    <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type =='application/pdf'" aria-hidden="true"></i>
+                  </div>
+                </div>
+                <div class="row ml-0 mr-0 h-40" class="fileSelDet">
+                  <div class="col-12 pr-0 fileNameCol">
+                  <!-- <div class="col-12 text-center mt-2 mb-2 pl-0 pr-0"> -->
+                    <span class="carouselText" *ngIf="material.filename?.length > 30">{{(material.filename| slice:0:20)+'...'}}</span>
+                    <span class="carouselText" *ngIf="material.filename?.length < 30">{{material.filename}}</span>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </ng-template>
+        </owl-carousel-o>
+
+
+          <!-- <div id="demo" class="carousel" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <div class="row ml-0 mr-0">
-                  <div class="col-4 text-left pr-0" *ngFor="let meterial of performActivityData.materialDetails">
-                <mat-card class="materialCard p-0 mr-2" (click)="playVideo(projectPreviewDialog, videoDialog, meterial, meterial.doc_type, preview = true)">
+                  <div class="col-4 text-left pr-0" *ngFor="let material of performActivityData.materialDetails">
+                <mat-card class="materialCard p-0 mr-2" >
                   <div class="row ml-0 mr-0 matCardIconRow">
                     <div class="col-12 pl-0 pr-0">
-                      <i class="fa fa-file-pdf-o icons" *ngIf="meterial.doc_type == 'file/pdf' || meterial.doc_type == 'application/pdf'" aria-hidden="true"></i>
-                      <mat-icon class="icons" *ngIf="meterial.doc_type == 'image/png' || meterial.doc_type == 'image/jpg' || meterial.doc_type == 'image/jpeg'">photo_size_select_actual</mat-icon>
-                      <mat-icon class="icons" *ngIf="meterial.doc_type =='video/mp4'">play_circle_outline</mat-icon> 
+                      <i class="fa fa-file-pdf-o icons" *ngIf="material.doc_type == 'file/pdf' || material.doc_type == 'application/pdf'" aria-hidden="true"></i>
+                      <mat-icon class="icons" *ngIf="material.doc_type == 'image/png' || material.doc_type == 'image/jpg' || material.doc_type == 'image/jpeg'">photo_size_select_actual</mat-icon>
+                      <mat-icon class="icons" *ngIf="material.doc_type =='video/mp4'">play_circle_outline</mat-icon> 
                     </div>
                   </div>
                   <div class="row ml-0 mr-0 h-40" class="fileSelDet">
                     <div class="col-12 pr-0 fileNameCol">
-                      <span class="fileColor">{{(meterial.filename| slice:0:25)+'...'}}</span><br>
+                      <span class="fileColor">{{(material.filename| slice:0:25)+'...'}}</span><br>
                     </div>
                   </div>
                 </mat-card>
@@ -134,7 +113,6 @@
               </div>
             </div>
           
-            <!-- Left and right controls -->
             <a class="carousel-control-prev" href="#demo" data-slide="prev">
               <span class="carousel-control-prev-icon"></span>
             </a>
@@ -142,7 +120,7 @@
               <span class="carousel-control-next-icon"></span>
             </a>
           
-          </div>
+          </div> -->
           
           <!-- <mat-card class="materialCard p-0 mr-2">
             <div class="row ml-0 mr-0">
@@ -178,8 +156,8 @@
         </div>
       </div>
       <div class="row ml-0 mr-0 mt-3">
-        <div class="col-12 pl-2 pr-2">
-          <mat-card class="matCard mb-3" *ngFor="let itration of performActivityData.iterationDetails; let i = index">
+        <div class="col-12">
+          <mat-card class="matCard mb-3" (click)="arrowUP = !arrowUP; openItration(i)" *ngFor="let itration of performActivityData.iterationDetails; let i = index">
             <div class="row ml-0 mr-0">
               <div class="col-3 pr-0 pl-0 text-left">
                 <span>Itration {{itration.iterationcount}}</span>
@@ -192,19 +170,20 @@
                 <span class="textGrayColor" *ngIf="itration.submit_status == 'notsubmitted' && itration.grade_status !== 'Evaluated'">Yet to Submit</span>
                 <span class="submitstatus" *ngIf="itration.grade_status == 'Not Evaluated' && itration.submitAction == 'submit'">
                           Submitted</span>
-                <span class="gradeStatus" *ngIf="itration.grade_status == 'Evaluated'">Graded</span>
+                <span class="gradeStatus" *ngIf="itration.grade_status == 'Evaluated'">Graded <span
+                  *ngIf="itration.grade_status == 'Evaluated' && itration.instructor_status !== null"
+                  [ngClass]="itration.instructor_status === 'Pass'? 'colorGreen ml-1': 'colorRed ml-1'">{{itration.instructor_status | titlecase}}</span></span>
                 <!-- <span class="text-success">Graded</span>&nbsp;&nbsp;
                 <span class="text-primary">pass</span>&nbsp;&nbsp; -->
-                <mat-icon class="matIcon" *ngIf="!arrowUP || openIndex !== i" (click)="arrowUP = !arrowUP; openItration(i)">keyboard_arrow_down</mat-icon>
-                <mat-icon class="matIcon" *ngIf="arrowUP && openIndex == i" (click)="arrowUP = !arrowUP; openItration(i)">keyboard_arrow_up</mat-icon>
+                <mat-icon class="matIcon" *ngIf="!arrowUP || openIndex !== i">keyboard_arrow_down</mat-icon>
+                <mat-icon class="matIcon" *ngIf="arrowUP && openIndex == i">keyboard_arrow_up</mat-icon>
               </div>
             </div>
             <div class="row ml-0 mr-0" *ngIf="arrowUP && openIndex == i">
               <div class="col-12 pl-0 pr-0">
                 <div class="row ml-0 mr-0 mt-3" *ngIf="itration.videodetails.length > 0">
                   <div class="col-12 text-left pl-0 pr-0">
-                    <div id="demo" class="carousel" data-ride="carousel">
-                      <!-- The slideshow -->
+                    <!-- <div id="demo" class="carousel" data-ride="carousel">
                       <div class="carousel-inner">
                         <div class="carousel-item active">
                           <div class="row ml-0 mr-0">
@@ -229,14 +208,42 @@
                         </div>
                       </div>
                     
-                      <!-- Left and right controls -->
                       <a class="carousel-control-prev" href="#demo" data-slide="prev">
                         <span class="carousel-control-prev-icon"></span>
                       </a>
                       <a class="carousel-control-next" href="#demo" data-slide="next">
                         <span class="carousel-control-next-icon"></span>
                       </a>
-                    </div>
+                    </div> -->
+
+                    <owl-carousel-o [options]="trendingCategorires"
+                    [ngClass]="performActivityData.materialDetails.length >= 4 ? 'owlHeight': 'widthClass' ">
+                    <ng-template class="row ml-0 mr-0" carouselSlide
+                      *ngFor="let videoData of itration.videodetails; let i = index">
+                      <div [ngClass]="performActivityData.materialDetails.length >= 2 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
+                        <mat-card class="p-0 iterationCard" >
+                          <div class="row ml-0 mr-0 itCarouselRow1">
+                            <div class="col-12 m-auto">
+                              <mat-icon class="closeIcon" *ngIf="itration.submit_status == 'notsubmitted'" (click)="submitType = 'delete'; submitDeleteVideo(videoData, itration, performActivityData)">close</mat-icon>
+                              <mat-icon class="iterationicons" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)"
+                                *ngIf="videoData.doc_type =='image/jpeg'  || videoData.doc_type == 'image/png' || videoData.doc_type == 'image/jpg'">
+                                photo_size_select_actual</mat-icon>
+                              <mat-icon class="iterationicons" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)" *ngIf="videoData.doc_type =='video/mp4'">play_circle_outline</mat-icon>
+                              <i class="fa fa-file-pdf-o iterationicons" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)" *ngIf="videoData.doc_type =='application/pdf'" aria-hidden="true"></i>
+                            </div>
+                          </div>
+                          <div class="row ml-0 mr-0 h-40" class="fileSelDet" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)">
+                            <div class="col-12 pr-0 fileNameCol">
+                            <!-- <div class="col-12 text-center mt-2 mb-2 pl-0 pr-0"> -->
+                              <span class="carouselText" *ngIf="videoData.name?.length > 40">{{(videoData.name| slice:0:30)+'...'}}</span>
+                              <span class="carouselText" *ngIf="videoData.name?.length < 40">{{videoData.name}}</span>
+                            </div>
+                          </div>
+                        </mat-card>
+                      </div>
+                    </ng-template>
+                  </owl-carousel-o>
+                    
                   </div>
                 </div> 
               
@@ -250,13 +257,13 @@
                  (click)="uploadDocuments(itration, performActivityData, submitType = 'upload')"><mat-icon class="add-icon">add</mat-icon>Upload Videos</button>
                 <button mat-stroked-button class="submitBtn mt-3" *ngIf="itration.submit_status == 'notsubmitted' && itration.videodetails.length > 0"
                   (click)="submitType = 'submit'; submitDeleteVideo({}, itration, performActivityData)">Submit</button>
-                <button mat-stroked-button *ngIf="itration.submitAction !== 'submit' && itration.videodetails.length == 0 && !itrationStarted && !itrationEnded" class="submitted-btn mt-3"> Submit </button>
+                <button mat-stroked-button *ngIf="itration.submit_status == 'notsubmitted' && itration.videodetails.length == 0 && !itrationStarted && !itrationEnded" class="submitted-btn mt-3"> Submit </button>
                 <button mat-stroked-button *ngIf="itration.submitAction == 'submit'" class="submitted-btn mt-3"> Submitted </button>
                 <div class="align-center mt-2">
                   <span *ngIf="itration.videodetails.length > 0  && itration.submitAction !== 'submit'"
                     class="submitedFile">Submitted files cannot be edited</span>
                   <span class="uploadedFile" *ngIf="itration.submitAction == 'submit'">Submitted on :
-                    {{itration.submitted_on | date:'MMM dd, yyyy'}}</span>
+                    {{itration.submitted_on | date}}</span>
                 </div>
               </div>
               <div class="col-12 pl-0 pr-0" *ngIf="itration.grade_status === 'Evaluated'">
@@ -333,17 +340,13 @@
         </div>
         <div class="row ml-0 mr-0 videoRec">
           <div class="col-12 pl-0 pr-0" *ngIf="!videoStart">
-            <app-video-recorder></app-video-recorder>
-            <!-- <app-perform-video-record [performDetailsSend]="performActivityData" [itrationSend]="itrationDataSend"></app-perform-video-record> -->
+            <!-- <app-video-recorder></app-video-recorder> -->
+            <app-perform-video-record [performDetailsSend]="performActivityData" [itrationSend]="itrationDataSend"></app-perform-video-record>
             </div>
             <div class="col-12 previewCol" *ngIf="videoStart">
               <mat-card class="previewCard m-auto p-0">
                 <div class="row ml-0 mr-0">
                   <div class="col-12 pl-0 pr-0">
-                    <!-- <video width="100%" controls >
-                      <source src="videoUrl">
-                      Your browser does not support HTML video.
-                    </video> -->
                     <video _ngcontent-tls-c58 class="videoCell" controls oncontextmenu="return false;" width="100%" src="{{videoUrl}}"></video>
                   </div>
                 </div>
