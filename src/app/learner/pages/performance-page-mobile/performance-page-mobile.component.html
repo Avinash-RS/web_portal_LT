@@ -253,11 +253,11 @@
                 </button>
                 <input type="file" accept="video/mp4" multiple style="display: none" #videoInput
                     (change)="uploadDocument($event)" />
-                <button mat-stroked-button class="uploadBtn mt-3 w-100" *ngIf="itration.submit_status == 'notsubmitted' || !itrationStarted && !itrationEnded"
+                <button mat-stroked-button class="uploadBtn mt-3 w-100" *ngIf="itration.submit_status == 'notsubmitted' || !performActivityData.itrationStarted"
                  (click)="uploadDocuments(itration, performActivityData, submitType = 'upload')"><mat-icon class="add-icon">add</mat-icon>Upload Videos</button>
                 <button mat-stroked-button class="submitBtn mt-3" *ngIf="itration.submit_status == 'notsubmitted' && itration.videodetails.length > 0"
                   (click)="submitType = 'submit'; submitDeleteVideo({}, itration, performActivityData)">Submit</button>
-                <button mat-stroked-button *ngIf="itration.submit_status == 'notsubmitted' && itration.videodetails.length == 0 && !itrationStarted && !itrationEnded" class="submitted-btn mt-3"> Submit </button>
+                <button mat-stroked-button *ngIf="itration.submit_status == 'notsubmitted' && itration.videodetails.length == 0 || !performActivityData.itrationStarted" class="submitted-btn mt-3"> Submit </button>
                 <button mat-stroked-button *ngIf="itration.submitAction == 'submit'" class="submitted-btn mt-3"> Submitted </button>
                 <div class="align-center mt-2">
                   <span *ngIf="itration.videodetails.length > 0  && itration.submitAction !== 'submit'"
