@@ -157,7 +157,7 @@
       </div>
       <div class="row ml-0 mr-0 mt-3">
         <div class="col-12">
-          <mat-card class="matCard mb-3" (click)="arrowUP = !arrowUP; openItration(i)" *ngFor="let itration of performActivityData.iterationDetails; let i = index">
+          <mat-card class="matCard mb-3" *ngFor="let itration of performActivityData.iterationDetails; let i = index">
             <div class="row ml-0 mr-0">
               <div class="col-3 pr-0 pl-0 text-left">
                 <span>Itration {{itration.iterationcount}}</span>
@@ -175,8 +175,8 @@
                   [ngClass]="itration.instructor_status === 'Pass'? 'colorGreen ml-1': 'colorRed ml-1'">{{itration.instructor_status | titlecase}}</span></span>
                 <!-- <span class="text-success">Graded</span>&nbsp;&nbsp;
                 <span class="text-primary">pass</span>&nbsp;&nbsp; -->
-                <mat-icon class="matIcon" *ngIf="!arrowUP || openIndex !== i">keyboard_arrow_down</mat-icon>
-                <mat-icon class="matIcon" *ngIf="arrowUP && openIndex == i">keyboard_arrow_up</mat-icon>
+                <mat-icon class="matIcon" *ngIf="!arrowUP || openIndex !== i" (click)="arrowUP = !arrowUP; openItration(i)">keyboard_arrow_down</mat-icon>
+                <mat-icon class="matIcon" *ngIf="arrowUP && openIndex == i" (click)="arrowUP = !arrowUP; openItration(i)">keyboard_arrow_up</mat-icon>
               </div>
             </div>
             <div class="row ml-0 mr-0" *ngIf="arrowUP && openIndex == i">
@@ -253,12 +253,28 @@
                 </button>
                 <input type="file" accept="video/mp4" multiple style="display: none" #videoInput
                     (change)="uploadDocument($event)" />
-                <button mat-stroked-button class="uploadBtn mt-3 w-100" *ngIf="itration.submit_status == 'notsubmitted' || !performActivityData.itrationStarted"
-                 (click)="uploadDocuments(itration, performActivityData, submitType = 'upload')"><mat-icon class="add-icon">add</mat-icon>Upload Videos</button>
-                <button mat-stroked-button class="submitBtn mt-3" *ngIf="itration.submit_status == 'notsubmitted' && itration.videodetails.length > 0"
+                <!-- <button mat-stroked-button class="uploadBtn mt-3 w-100" *ngIf="itration.submit_status == 'notsubmitted' || !performActivityData.itrationStarted"
+                 (click)="uploadDocuments(itration, performActivityData, submitType = 'upload')"><mat-icon class="add-icon">add</mat-icon>Upload Videos</button> -->
+                 <button mat-stroked-button *ngIf="itration.submit_status !== 'notsubmitted' || !performActivityData.itrationStarted" class="itration.submit_status !== 'notsubmitted' || !performActivityData.itrationStarted? 'mt-3':'uploadBtn mt-3'"
+                 (click)="uploadDocuments(itration, performActivityData, submitType = 'upload')">
+                 <mat-icon *ngIf="itration.submit_status !== 'notsubmitted' || !performActivityData.itrationStarted" class="icon-color m-t-m-2 addIcon">add</mat-icon>
+                 <span *ngIf="itration.submit_status !== 'notsubmitted' || !performActivityData.itrationStarted">Upload video</span>
+               </button>
+                <!-- <button mat-stroked-button class="submitBtn mt-3" *ngIf="itration.submit_status == 'notsubmitted' && itration.videodetails.length > 0"
                   (click)="submitType = 'submit'; submitDeleteVideo({}, itration, performActivityData)">Submit</button>
                 <button mat-stroked-button *ngIf="itration.submit_status == 'notsubmitted' && itration.videodetails.length == 0 || !performActivityData.itrationStarted" class="submitted-btn mt-3"> Submit </button>
-                <button mat-stroked-button *ngIf="itration.submitAction == 'submit'" class="submitted-btn mt-3"> Submitted </button>
+                <button mat-stroked-button *ngIf="itration.submitAction == 'submit'" class="submitted-btn mt-3"> Submitted </button> -->
+
+                <button mat-stroked-button class="submit-btn mt-2"
+                *ngIf="itration.submit_status == 'notsubmitted' && itration.videodetails.length > 0"
+                (click)="submitType = 'submit'; submitDeleteVideo({}, itration, perform.performActivity)">
+                Submit
+              </button>
+              <button mat-stroked-button
+              *ngIf="itration.submit_status == 'notsubmitted' &&  itration.videodetails.length == 0 || !perform.itrationStarted"
+              class="submitted-btn mt-2"> Submit </button>
+              <button mat-stroked-button *ngIf="itration.submitAction == 'submit'" class="submitted-btn mt-2">
+                Submitted </button>
                 <div class="align-center mt-2">
                   <span *ngIf="itration.videodetails.length > 0  && itration.submitAction !== 'submit'"
                     class="submitedFile">Submitted files cannot be edited</span>
