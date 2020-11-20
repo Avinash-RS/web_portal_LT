@@ -419,14 +419,30 @@ li {
 // }
 
 .titleHeight {
-    height: 40px;
+    height: auto;
 }
-
+.collaborateAccordion {
+    .mat-accordion .mat-expansion-panel:last-of-type {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .mat-expanded, .mat-stepper-vertical {
+        background-color: #f5f5f5;
+    }
+    @media only screen and (max-width: 768px) {
+        margin-bottom: 25px;
+    }
+}
+.mat-step-header:hover {
+    background-color: rgba(0,0,0,0);
+}
 .moduleHeadHight {
-    padding: 0 0 13px 0 !important;
-    margin-top: 10px !important;
-    height: 80px !important;
+    padding: 0 0 0 0 !important;
+    margin-top: 0 !important;
+    // height: 80px !important;
+    height: auto !important;
     width: 336px;
+    padding: 15px 0 !important;
 }
 .sqnumber {
     border: 1px solid $color-border;
@@ -450,8 +466,9 @@ li {
 .module-container {
     display: flex;
     flex-direction: column;
-    height: 55px;
-    margin-top: 8px;
+    height: auto;
+    margin-top: 0;
+    justify-content: center;
 }
 
 .example-container {
@@ -738,6 +755,7 @@ iframe.fullScreen {
         color: rgba(158, 158, 158, 0.64);
         margin-right: 6px;
         cursor: pointer !important;
+        display: flex;
     }
 
     .exp2 {
@@ -816,11 +834,14 @@ iframe.fullScreen {
 }
 
 :host ::ng-deep .mat-stepper-vertical-line::before {
-    left: 1px !important;
-    height: 33px;
+    // left: 1px !important;
+    left: 0 !important;
+    // height: 33px;
+    height: 47px;
     content: "";
     position: absolute;
-    top: -18px;
+    // top: -18px;
+    top: -24px;
     bottom: -16px;
     left: 0;
     border-left-width: 1px;
@@ -828,7 +849,8 @@ iframe.fullScreen {
 }
 
 :host ::ng-deep .mat-step-header {
-    height: 0;
+    // height: 0;
+    height: 10px;
     overflow: visible !important;
 }
 
@@ -1097,12 +1119,15 @@ iframe.fullScreen {
     }
 
     .module-container {
-        margin-top: 28px !important;
-        height: 70px;
+        // margin-top: 28px !important;
+        // height: 70px;
+        height: auto;
+        margin-top: 0 !important;
     }
 
     .exp-icon {
-        margin-top: 34px !important;
+        // margin-top: 34px !important;
+        margin-top: 0;
         cursor: pointer !important;
     }
 }
@@ -1400,6 +1425,7 @@ iframe.fullScreen {
     white-space: pre-line !important;
     font-size: 16px !important;
     margin-left: 5px;
+    margin-bottom: 0 !important;
 }
 
 .mod-passed {
@@ -1428,11 +1454,13 @@ iframe.fullScreen {
 }
 
 .exp-icon {
-    margin-top: 17px;
+    margin-top: 0;
     z-index: 2 !important;
     position: relative !important;
-    right: 14px !important;
+    right: 10px !important;
     cursor: pointer !important;
+    margin-right: 0;
+    align-self: center;
 }
 
 // :host ::ng-deep .mat-expansion-panel:not(:last-child) {
