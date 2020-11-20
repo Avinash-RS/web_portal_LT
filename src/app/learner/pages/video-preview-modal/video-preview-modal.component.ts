@@ -18,7 +18,7 @@ export class VideoPreviewModalComponent implements OnInit {
 
   constructor(private sanitizer: DomSanitizer,
               private dialogRefVdo: MatDialogRef<VideoPreviewModalComponent>, @Inject(MAT_DIALOG_DATA) data) {
-              this.displayURL = sanitizer.bypassSecurityTrustResourceUrl(data.url); 
+              this.displayURL = sanitizer.bypassSecurityTrustResourceUrl(data.url);
             }
 
   ngOnInit() {

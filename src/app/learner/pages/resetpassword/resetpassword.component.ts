@@ -12,8 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 // import CryptoJS from 'crypto-js';
 import SimpleCrypto from 'simple-crypto-js';
 import { TranslateService } from '@ngx-translate/core';
-const _secretKey = 'myTotalySecretKey';
-const simpleCrypto = new SimpleCrypto(_secretKey);
+const secretKey = 'myTotalySecretKey';
+const simpleCrypto = new SimpleCrypto(secretKey);
 
 @Component({
   selector: 'app-resetpassword',
@@ -33,7 +33,7 @@ export class ResetpasswordComponent implements OnInit {
   showpsseye = false;
   showconpassbutton = false;
   showconpsseye = false;
-  isLinkActive: Boolean;
+  isLinkActive: boolean;
   hide = true;
   hide2 = true;
 
@@ -61,7 +61,6 @@ export class ResetpasswordComponent implements OnInit {
         // const originalText = bytes.toString(CryptoJS.enc.Utf8);
         const decryptedString = atob(params.code);
         this.user = decryptedString;
-        console.log(this.user);
         this.get_user_detail_username(this.user);
       } else {
         this.user = localStorage.getItem('Username');

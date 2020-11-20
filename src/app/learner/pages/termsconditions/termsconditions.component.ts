@@ -9,9 +9,9 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 export class TermsconditionsComponent implements OnInit {
 
   constructor( private router: Router,
-    public dialog: MatDialog,
-    public dialogRef: MatDialogRef<TermsconditionsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+               public dialog: MatDialog,
+               public dialogRef: MatDialogRef<TermsconditionsComponent>,
+               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
   //   this.dialogRef.keydownEvents().subscribe(event => {

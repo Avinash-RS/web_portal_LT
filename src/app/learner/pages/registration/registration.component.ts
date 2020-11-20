@@ -76,7 +76,6 @@ export class RegistrationComponent implements OnInit {
     this.registerForm.updateValueAndValidity();
     if (data.data.user_registration) {
       if (data.data.user_registration.success === 'true') {
-        console.log('success msg');
         this.registerSuccess = true;
         this.toastr.success(data.data.user_registration.message, null);
         this.loader.hide();

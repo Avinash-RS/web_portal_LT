@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
               private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,
               private loader: Ng4LoadingSpinnerService, private formBuilder: FormBuilder,
               private router: Router, private gs: GlobalServiceService,
-              private services : CommonServicesService) {
+              private services: CommonServicesService) {
     if (this.gs.checkLogout()) {
       // this.urlImage = localStorage.getItem('user_img')
       this.currentUser = this.gs.checkLogout();
@@ -178,23 +178,23 @@ export class ProfileComponent implements OnInit {
       domain: environment.domain
     });
 
-    const job_role = this.profileForm.get('professional.job_role');
+    const jobRole = this.profileForm.get('professional.job_role');
     const org = this.profileForm.get('professional.organization');
     const totalExp = this.profileForm.get('professional.total_experience');
     this.profileForm.get('is_student_or_professional').valueChanges
-      .subscribe(is_student_or_professional => {
-        if (is_student_or_professional === 'professional') {
-          job_role.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Z a-z ]*$/)]);
+      .subscribe(isStudentOrProfessional => {
+        if (isStudentOrProfessional === 'professional') {
+          jobRole.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Z a-z ]*$/)]);
           org.setValidators([Validators.required, Validators.minLength(4), Validators.pattern(/^[A-Z a-z]*$/)]);
           totalExp.setValidators([Validators.required, Validators.minLength(1), Validators.maxLength(2),
             // Validators.pattern(/^[0-9]{1,2}$/)]);
           ]);
         } else {
-          job_role.setValidators(null);
+          jobRole.setValidators(null);
           org.setValidators(null);
           totalExp.setValidators(null);
         }
-        job_role.updateValueAndValidity();
+        jobRole.updateValueAndValidity();
         org.updateValueAndValidity();
         totalExp.updateValueAndValidity();
       });
@@ -308,13 +308,11 @@ export class ProfileComponent implements OnInit {
     this.profileForm.controls.created_by_ip.setValue(ip);
     this.profileForm.controls.user_id.setValue(this.currentUser.user_id);
 
-    // console.log('jsonData', this.profileForm.value)
     // if(this.profileForm.value && this.profileForm.value.qualification) {
     //   this.profileForm.value.qualification.forEach(element => {
     //     if(element.qualification!={}) {element.qualification = element.qualification._id}
     //   });
     // }
-    // console.log('jsonData', this.profileForm.value);
 
     this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
       if (data.data.update_profile.success === 'true') {

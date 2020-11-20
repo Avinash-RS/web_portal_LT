@@ -56,7 +56,7 @@ export class SelfLearnerAvtivityComponent implements OnInit {
 
         // Get options from the center object in options
         const sidePadding = 60;
-        const sidePaddingCalculated = (sidePadding / 100) * (chart.innerRadius * 2)
+        const sidePaddingCalculated = (sidePadding / 100) * (chart.innerRadius * 2);
 
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';

@@ -1,27 +1,27 @@
-import { Component, OnInit, ViewChild, TemplateRef, Input, Output, EventEmitter } from "@angular/core";
-import { GlobalServiceService } from "@core/services/handlers/global-service.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import { CommonServicesService } from "@core/services/common-services.service";
-import { MatDialog } from "@angular/material";
-import { MatAccordion } from "@angular/material/expansion";
-import { LearnerServicesService } from "@learner/services/learner-services.service";
-import { WcaService } from "@wca/services/wca.service";
-import * as moment from "moment";
-import { ToastrService } from "ngx-toastr";
-import { DatePipe } from "@angular/common";
-import { appendFile } from "fs";
+import { Component, OnInit, ViewChild, TemplateRef, Input, Output, EventEmitter } from '@angular/core';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonServicesService } from '@core/services/common-services.service';
+import { MatDialog } from '@angular/material';
+import { MatAccordion } from '@angular/material/expansion';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { WcaService } from '@wca/services/wca.service';
+import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
+import { appendFile } from 'fs';
 
 
 @Component({
-  selector: "app-performance-page-mobile",
-  templateUrl: "./performance-page-mobile.component.html",
-  styleUrls: ["./performance-page-mobile.component.scss"],
+  selector: 'app-performance-page-mobile',
+  templateUrl: './performance-page-mobile.component.html',
+  styleUrls: ['./performance-page-mobile.component.scss'],
 })
 export class PerformancePageMobileComponent implements OnInit {
   // @Input() performDetailsSend: any;
   @Input() performDetailPageData: any;
-  @ViewChild("videoInput") videoInput;
-  selectedName = "Perform";
+  @ViewChild('videoInput') videoInput;
+  selectedName = 'Perform';
   selectedTabIndex: number;
   checkDetails: any;
   arrowUP = false;
@@ -146,11 +146,11 @@ export class PerformancePageMobileComponent implements OnInit {
   closeDialog() {
     this.dialog.closeAll();
   }
- 
+
     submitDeleteVideo(videoName, itrdata, perform) {
       let videoFile = [];
       videoFile.push(videoName);
-      let data = {
+      const data = {
         course_id: perform.course_id,
         module_id: perform.module_id,
         topic_id: perform.topic_id,
@@ -188,20 +188,20 @@ export class PerformancePageMobileComponent implements OnInit {
         data.data.getperformActivityData.data
       ) {
         this.performDetails = data.data.getperformActivityData.data;
-        this.getPerformActivity(this.indexNumber, this.performDetails[this.indexNumber-1].performActivity);
+        this.getPerformActivity(this.indexNumber, this.performDetails[this.indexNumber - 1].performActivity);
         this.performDetails.forEach((element) => {
           const startDate = this.datePipe.transform(element.performActivity.activitystartdate, 'dd-MM-yyyy');
           const endDate = this.datePipe.transform(element.performActivity.activityenddate, 'dd-MM-yyyy');
           const batchendDate = this.datePipe.transform(element.performActivity.batchenddate, 'dd-MM-yyyy');
-          let crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
+          const crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
           if (startDate <= crrDate && batchendDate >= crrDate) {
-            element['itrationStarted'] = true;
+            element.itrationStarted = true;
           } else {
-            element['itrationStarted'] = false;
+            element.itrationStarted = false;
           }
         });
-        let filterData = this.performDetails.filter(data => {
-          return data.performActivity.perform_id === this.performActivityData.perform_id
+        const filterData = this.performDetails.filter((performData: any) => {
+          return performData.performActivity.perform_id === this.performActivityData.perform_id;
         });
         this.performActivityData.push(filterData);
       } else {
@@ -226,16 +226,16 @@ export class PerformancePageMobileComponent implements OnInit {
     this.openIndex = index;
   }
 
-  getPerformActivity(number, performActivity) {
-    this.indexNumber = number;
+  getPerformActivity(index, performActivity) {
+    this.indexNumber = index;
     this.performActivityData = performActivity;
   }
 
   performlearnerUploadVideo() {
     const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
     const performVideo = new FormData();
-    let startDate = this.datePipe.transform(this.performActivityData.activitystartdate, 'dd-MM-yyyy');
-    let endDate = this.datePipe.transform(this.performActivityData.activityenddate, 'dd-MM-yyyy');
+    const startDate = this.datePipe.transform(this.performActivityData.activitystartdate, 'dd-MM-yyyy');
+    const endDate = this.datePipe.transform(this.performActivityData.activityenddate, 'dd-MM-yyyy');
     if (currentDate >= startDate && currentDate <= endDate) {
       this.submitStatus = 'ontime';
     } else {
@@ -282,7 +282,7 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
 
-//----------------- Dialog Functions --------------------------
+// ----------------- Dialog Functions --------------------------
 
   closedialogbox() {
     this.dialog.closeAll();
