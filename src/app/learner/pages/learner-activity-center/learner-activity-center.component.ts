@@ -48,7 +48,7 @@ export class LearnerActivityCenterComponent implements OnInit {
       const PageNumber = params.startRow / 10 || 0;
       this.sortType = 'undefined';
       this.searchValue = '';
-      this.searchColumn =  this.searchColumn || 'undefined';
+      this.searchColumn = this.searchColumn || 'undefined';
       if (this.navDetails?.tableType === 'completed') {
         // this.searchColumn = 'undefined';
         const statusB = [{
@@ -96,7 +96,7 @@ export class LearnerActivityCenterComponent implements OnInit {
   navDetails: any;
 
   constructor(private service: LearnerServicesService, private gs: GlobalServiceService,
-              private route: Router, private toastr: ToastrService, ) {
+    private route: Router, private toastr: ToastrService, ) {
     this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     // console.log(this.detail, 'det');
@@ -161,6 +161,22 @@ export class LearnerActivityCenterComponent implements OnInit {
           floatingFilterComponentParams: { suppressFilterButton: true },
           field: 'activity_name',
           valueGetter: (params) => params.data?.activity_name ? params.data.activity_name : '-',
+        },
+        {
+          headerName: 'Start date',
+          sortable: true,
+          filter: true,
+          floatingFilterComponentParams: { suppressFilterButton: true },
+          field: 'activitystartdate',
+          valueGetter: (params) => params.data?.activitystartdate ? params.data.activitystartdate : '-',
+        },
+        {
+          headerName: 'End date',
+          sortable: true,
+          filter: true,
+          floatingFilterComponentParams: { suppressFilterButton: true },
+          field: 'activityenddate',
+          valueGetter: (params) => params.data?.activityenddate ? params.data.activityenddate : '-',
         },
         {
           headerName: 'Status',
@@ -302,6 +318,12 @@ export class LearnerActivityCenterComponent implements OnInit {
       } else if (sortState[0].colId === 'activity_name') {
         const r = { ['activitynamesortfield']: sortState[0]?.sort === 'asc' ? 1 : -1 };
         this.sortrecord = JSON.stringify(r);
+      } else if (sortState[0].colId === 'activitystartdate') {
+        const r = { ['activitystartdate']: sortState[0]?.sort === 'asc' ? 1 : -1 };
+        this.sortrecord = JSON.stringify(r);
+      } else if (sortState[0].colId === 'activityenddate') {
+        const r = { ['activityenddate']: sortState[0]?.sort === 'asc' ? 1 : -1 };
+        this.sortrecord = JSON.stringify(r);
       } else {
         const r = { [sortState[0]?.colId]: sortState[0]?.sort === 'asc' ? 1 : -1 };
         this.sortrecord = JSON.stringify(r);
@@ -342,6 +364,12 @@ export class LearnerActivityCenterComponent implements OnInit {
         } else if (propName === 'activity_name') {
           searchString = filterModel[keyd].filter;
           filter['files.activityname'] = { $regex: searchString.trimEnd(), $options: 'i' };
+        } else if (propName === 'activitystartdate') {
+          searchString = filterModel[keyd].filter;
+          filter['files.activitystartdate'] = { $regex: searchString.trimEnd(), $options: 'i' };
+        } else if (propName === 'activityenddate') {
+          searchString = filterModel[keyd].filter;
+          filter['files.activityenddate'] = { $regex: searchString.trimEnd(), $options: 'i' };
         } else {
           searchString = filterModel[keyd].filter;
           filter[propName] = { $regex: searchString.trimEnd(), $options: 'i' };
