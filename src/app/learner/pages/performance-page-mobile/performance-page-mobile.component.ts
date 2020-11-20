@@ -201,9 +201,9 @@ export class PerformancePageMobileComponent implements OnInit {
           }
         });
         let filterData = this.performDetails.filter(data => {
-          return data.performActivity.perform_id === this.performActivityData.perform_id
+          return data.performActivity.perform_id === this.performActivityData.perform_id;
         });
-        this.performActivityData.push(filterData);
+        this.performActivityData = filterData[0];
       } else {
         this.performDetails = [];
       }
