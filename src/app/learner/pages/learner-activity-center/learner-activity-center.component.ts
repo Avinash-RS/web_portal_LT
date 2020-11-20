@@ -319,10 +319,10 @@ export class LearnerActivityCenterComponent implements OnInit {
         const r = { ['activitynamesortfield']: sortState[0]?.sort === 'asc' ? 1 : -1 };
         this.sortrecord = JSON.stringify(r);
       } else if (sortState[0].colId === 'activitystartdate') {
-        const r = { ['activitystartdate']: sortState[0]?.sort === 'asc' ? 1 : -1 };
+        const r = { ['files.activitystartdate']: sortState[0]?.sort === 'asc' ? 1 : -1 };
         this.sortrecord = JSON.stringify(r);
       } else if (sortState[0].colId === 'activityenddate') {
-        const r = { ['activityenddate']: sortState[0]?.sort === 'asc' ? 1 : -1 };
+        const r = { ['files.activityenddate']: sortState[0]?.sort === 'asc' ? 1 : -1 };
         this.sortrecord = JSON.stringify(r);
       } else {
         const r = { [sortState[0]?.colId]: sortState[0]?.sort === 'asc' ? 1 : -1 };
