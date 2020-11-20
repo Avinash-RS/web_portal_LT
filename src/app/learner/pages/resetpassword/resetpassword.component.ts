@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import * as myGlobals from '@core/globals';
 import { MustMatch } from '@core/services/_helpers/must-match.validator';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import * as myGlobals from '@core/globals';
 import { ToastrService } from 'ngx-toastr';
 /////// decrypt
 // import 'angular-base64/angular-base64';
 // import * as crypto from 'crypto';
 // import CryptoJS from 'crypto-js';
 import SimpleCrypto from 'simple-crypto-js';
-import { TranslateService } from '@ngx-translate/core';
 const secretKey = 'myTotalySecretKey';
 const simpleCrypto = new SimpleCrypto(secretKey);
 

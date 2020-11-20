@@ -1,6 +1,6 @@
-import { Component, OnInit , Inject} from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-termsconditions',
   templateUrl: './termsconditions.component.html',

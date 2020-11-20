@@ -1,12 +1,12 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { LearnerServicesService } from '../../services/learner-services.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { environment } from '../../../../environments/environment';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { MatDialog , MatDialogConfig} from '@angular/material';
+import { environment } from '../../../../environments/environment';
+import { LearnerServicesService } from '../../services/learner-services.service';
 
 
 @Component({

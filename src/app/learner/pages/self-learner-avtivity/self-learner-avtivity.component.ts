@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Color, Label, MultiDataSet, } from 'ng2-charts';
-import { ChartDataSets, ChartOptions, } from 'chart.js';
-import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Router } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { ChartOptions } from 'chart.js';
+import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import * as moment from 'moment';
+import { Color, Label, MultiDataSet } from 'ng2-charts';
 
 @Component({
   selector: 'app-self-learner-avtivity',

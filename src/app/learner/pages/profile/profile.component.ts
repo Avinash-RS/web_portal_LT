@@ -1,22 +1,18 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { LearnerServicesService } from '../../services/learner-services.service';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { AlertServiceService } from '@core/services/handlers/alert-service.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material';
-import { FormControl, FormGroup, FormBuilder, NgModel, Validators, FormArray } from '@angular/forms';
-import * as myGlobals from '@core/globals';
-import { Certificate } from 'crypto';
-import { MustMatch } from '@core/services/_helpers/must-match.validator';
-import * as _ from 'lodash';
-import { GlobalServiceService } from '@core/services/handlers/global-service.service';
-import * as moment from 'moment';
-import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
-import { slideInAnimation } from 'src/app/router.animation';
-import {TranslateService} from '@ngx-translate/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
+import * as myGlobals from '@core/globals';
 import { CommonServicesService } from '@core/services/common-services.service';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { MustMatch } from '@core/services/_helpers/must-match.validator';
+import { TranslateService } from '@ngx-translate/core';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import Swal from 'sweetalert2';
+import { environment } from '../../../../environments/environment';
+import { LearnerServicesService } from '../../services/learner-services.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',

@@ -1,16 +1,13 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { GlobalServiceService } from '@core/services/handlers/global-service.service';
-import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
-import { Options } from 'ng5-slider';
-// import { SearchPipe } from '../pipes/search.pipe';
-import * as _ from 'lodash';
-import Swal from 'sweetalert2';
-import { element } from 'protractor';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Options } from 'ng5-slider';
+import Swal from 'sweetalert2';
 declare var $: any;
 
 @Component({

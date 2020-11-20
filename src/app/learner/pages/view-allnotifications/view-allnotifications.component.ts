@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { MatTableDataSource } from '@angular/material';
 
 export interface PeriodicElement {
   notificationName: string;
