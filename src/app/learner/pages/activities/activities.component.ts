@@ -162,7 +162,6 @@ export class ActivitiesComponent implements OnInit {
     // tslint:disable-next-line:radix
     this.demo1TabIndex = parseInt(index);
     }
-    console.log('this.demo1TabIndex', this.demo1TabIndex);
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.currentTab === 'Perform' || this.demo1TabIndex === 1 && this.screenWidth < 800) {
@@ -173,7 +172,6 @@ export class ActivitiesComponent implements OnInit {
   }
 
   activeTab(event) {
-    console.log('eve', event.index);
     localStorage.setItem('userTabLocation', event.index);
   }
 
@@ -404,7 +402,6 @@ export class ActivitiesComponent implements OnInit {
         // Batch date
         const batchEndDate = new Date(element.projectActivity.batchenddate);
         element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:MM');
-        console.log('batch', element.batchEndDate);
         if (moment().format('DD-MM-YYYY HH:MM') <= element.batchEndDate) {
           element.submitType = true;
         } else {
@@ -462,7 +459,6 @@ export class ActivitiesComponent implements OnInit {
           element['itrationStarted'] = false;
         }
       });
-      console.log('this.performDetails', this.performDetails);
     }
     });
   }
@@ -470,7 +466,6 @@ export class ActivitiesComponent implements OnInit {
   dateDiff(startDate, endDate, currentDate) {
     let startDateDiff = startDate - currentDate;
     let endDateDiff = endDate - currentDate;
-    console.log('startDateDiff', startDateDiff, 'endDateDiff', endDateDiff);
     if ((startDateDiff <= 0 ) && (endDateDiff >= 0)) {
       return true;
     }
@@ -655,7 +650,6 @@ submitDeleteVideo(videoName, itrdata, perform) {
 }
 
 previewDoc(templateRef: TemplateRef<any>, path) {
-  console.log('path', path);
   this.dialog.open(templateRef, {
     width: '100%',
     height: '100%',
@@ -709,7 +703,6 @@ mouseover(index) {
 }
 
 performdetailPage(index, performData) {
-  console.log(index, performData)
   this.perfornDetaildata = {perfornData: performData, index: index}
 }
 

@@ -113,11 +113,9 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('performDetailPage', this.performDetailPageData);
     this.indexNumber = this.performDetailPageData.index;
     this.performActivityData = this.performDetailPageData.perfornData;
     this.Lservice.closeRecoderdData$.subscribe((data: any) => {
-      console.log('data', data);
       this.videoUrl = data.videourl;
       this.videoDetails = data;
       if (this.videoUrl) {
@@ -131,7 +129,6 @@ export class PerformancePageMobileComponent implements OnInit {
       this.itrationSend = data;
     });
 
-    console.log('this.videoStart', this.videoStart);
   }
 
   getData(templateRef: TemplateRef<any>, itration) {
@@ -151,7 +148,6 @@ export class PerformancePageMobileComponent implements OnInit {
   }
  
     submitDeleteVideo(videoName, itrdata, perform) {
-      console.log('perform', perform);
       let videoFile = [];
       videoFile.push(videoName);
       let data = {
@@ -179,7 +175,6 @@ export class PerformancePageMobileComponent implements OnInit {
     }
 
   getperformActivityData() {
-    // console.log("this.performDetails 1234");
     this.performDetails = [];
     this.Lservice.getperformActivityData(
       this.userDetail.user_id,
@@ -209,7 +204,6 @@ export class PerformancePageMobileComponent implements OnInit {
           return data.performActivity.perform_id === this.performActivityData.perform_id
         });
         this.performActivityData.push(filterData);
-        console.log('this.performActivityData', this.performActivityData);
       } else {
         this.performDetails = [];
       }
@@ -222,7 +216,6 @@ export class PerformancePageMobileComponent implements OnInit {
       selectedName: this.selectedName,
       selectedTabIndex: this.selectedTabIndex,
     };
-    console.log("data", data);
     this.commonServices.menuSelectedPerform$.next(data);
   } else {
     // this.Lservice.performView.next('performData', false)
@@ -311,7 +304,6 @@ export class PerformancePageMobileComponent implements OnInit {
 }
 
 previewDoc(templateRef: TemplateRef<any>, path) {
-  console.log('path', path);
   this.dialog.open(templateRef, {
     width: '100%',
     height: '100%',
@@ -322,9 +314,7 @@ previewDoc(templateRef: TemplateRef<any>, path) {
 }
 
 videoPreview(templateRef: TemplateRef<any>, path) {
-  console.log('path', path);
   this.videoSource = path.videourl;
-  console.log('this.videoSource', this.videoSource);
   this.dialog.open(templateRef, {
     width: '100%',
     height: '100%',

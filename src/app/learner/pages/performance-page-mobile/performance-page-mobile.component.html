@@ -19,9 +19,9 @@
       </div>
       <div class="row ml-0 mr-0 mt-3">
         <div class="col-12 pr-0">
-          <p class="subTittle">{{indexNumber}}. {{performActivityData.module_id}}</p>
+          <p class="subTittle">{{indexNumber}}. {{performActivityData.performActivity.module_id}}</p>
           <span
-            >{{performActivityData.topic_id}}
+            >{{performActivityData.performActivity.topic_id}}
           </span>
         </div>
       </div>
@@ -30,42 +30,42 @@
           <div class="row mr-0 ml-0">
             <div class="col-5 mr-0 pl-0 pr-0 text-left">
               <span class="font-weight-bold">Start date:</span><br />
-              <span>{{performActivityData.activitystartdate | date}}</span>
+              <span>{{performActivityData.performActivity.activitystartdate | date}}</span>
             </div>
             <div class="col-5 mr-0 pl-0 pr-0 text-left">
               <span class="m-l-5 font-weight-bold">End date:</span><br />
-              <span class="m-l-5">{{performActivityData.activityenddate | date}}</span>
+              <span class="m-l-5">{{performActivityData.performActivity.activityenddate | date}}</span>
             </div>
             <div class="col-2 mr-0 pl-0 pr-0 text-left"></div>
           </div>
         </div>
         <div class="col-4 text-right pl-0">
-          <p class="yettoSubmit" *ngIf="performActivityData.submit_status == 'notsubmitted'"><span class="dot"></span> Yet to submit</p>
-          <p class="submitstatus" *ngIf="performActivityData.submit_status == 'submitted'"><span class="submitdot"></span>Submitted</p>
-          <p class="gradeStatus" *ngIf="performActivityData.submit_status == 'graded'"><span class="gradedot"></span>Graded</p>
-          <p class="textGrayColor">Iterations: <span *ngIf="performActivityData.submittedTotal > 0">{{performActivityData.submittedTotal}} / </span>{{performActivityData.iterationTotal}}<span></span></p>
+          <p class="yettoSubmit" *ngIf="performActivityData.performActivity.submit_status == 'notsubmitted'"><span class="dot"></span> Yet to submit</p>
+          <p class="submitstatus" *ngIf="performActivityData.performActivity.submit_status == 'submitted'"><span class="submitdot"></span>Submitted</p>
+          <p class="gradeStatus" *ngIf="performActivityData.performActivity.submit_status == 'graded'"><span class="gradedot"></span>Graded</p>
+          <p class="textGrayColor">Iterations: <span *ngIf="performActivityData.performActivity.submittedTotal > 0">{{performActivityData.performActivity.submittedTotal}} / </span>{{performActivityData.performActivity.iterationTotal}}<span></span></p>
           <!-- <span class="textGrayColor" *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} / </span>{{perform.performActivity.iterationTotal}} -->
         </div>
       </div>
       <div class="row ml-0 mr-0 mt-3">
         <div class="col-12 pr-0 text-left">
           <p class="activityDisc font-weight-bold">Activity description:</p>
-          <p class="brickMaking">{{performActivityData.activityname}}</p>
+          <p class="brickMaking">{{performActivityData.performActivity.activityname}}</p>
         </div>
       </div>
       <div class="row ml-0 mr-0">
         <div class="col-sm-12 text-left">
-          <span>Material for activity ({{performActivityData.materialDetails.length}})</span>
+          <span>Material for activity ({{performActivityData.performActivity.materialDetails.length}})</span>
         </div>
       </div>
       <div class="row ml-0 mr-0 mt-3">
         <div class="col-12 text-left pl-0 pr-0">
 
           <owl-carousel-o [options]="trendingCategorires"
-          [ngClass]="performActivityData.materialDetails.length >= 4 ? 'arrow': 'widthClass arrow' ">
+          [ngClass]="performActivityData.performActivity.materialDetails.length >= 4 ? 'arrow': 'widthClass arrow' ">
           <ng-template class="row ml-0 mr-0" carouselSlide
-            *ngFor="let material of performActivityData.materialDetails; let i = index">
-            <div [ngClass]="performActivityData.materialDetails.length >= 2 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
+            *ngFor="let material of performActivityData.performActivity.materialDetails; let i = index">
+            <div [ngClass]="performActivityData.performActivity.materialDetails.length >= 2 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
               <mat-card class="p-0 iterationCard" (click)="playVideo(projectPreviewDialog, videoDialog, material, material.doc_type, preview = true)">
                 <div class="row ml-0 mr-0 carouselRow1">
                   <div class="col-12 m-auto">
@@ -157,7 +157,7 @@
       </div>
       <div class="row ml-0 mr-0 mt-3">
         <div class="col-12">
-          <mat-card class="matCard mb-3" *ngFor="let itration of performActivityData.iterationDetails; let i = index">
+          <mat-card class="matCard mb-3" *ngFor="let itration of performActivityData.performActivity.iterationDetails; let i = index">
             <div class="row ml-0 mr-0">
               <div class="col-3 pr-0 pl-0 text-left">
                 <span>Itration {{itration.iterationcount}}</span>
@@ -217,14 +217,14 @@
                     </div> -->
 
                     <owl-carousel-o [options]="trendingCategorires"
-                    [ngClass]="performActivityData.materialDetails.length >= 4 ? 'owlHeight': 'widthClass' ">
+                    [ngClass]="performActivityData.performActivity.materialDetails.length >= 4 ? 'owlHeight': 'widthClass' ">
                     <ng-template class="row ml-0 mr-0" carouselSlide
                       *ngFor="let videoData of itration.videodetails; let i = index">
-                      <div [ngClass]="performActivityData.materialDetails.length >= 2 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
+                      <div [ngClass]="performActivityData.performActivity.materialDetails.length >= 2 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
                         <mat-card class="p-0 iterationCard" >
                           <div class="row ml-0 mr-0 itCarouselRow1">
                             <div class="col-12 m-auto">
-                              <mat-icon class="closeIcon" *ngIf="itration.submit_status == 'notsubmitted'" (click)="submitType = 'delete'; submitDeleteVideo(videoData, itration, performActivityData)">close</mat-icon>
+                              <mat-icon class="closeIcon" *ngIf="itration.submit_status == 'notsubmitted'" (click)="submitType = 'delete'; submitDeleteVideo(videoData, itration, performActivityData.performActivity)">close</mat-icon>
                               <mat-icon class="iterationicons" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)"
                                 *ngIf="videoData.doc_type =='image/jpeg'  || videoData.doc_type == 'image/png' || videoData.doc_type == 'image/jpg'">
                                 photo_size_select_actual</mat-icon>
@@ -249,29 +249,22 @@
               
               <div class="row ml-0 mr-0 mt-2">
               <div class="col-12 text-center" *ngIf="itration.grade_status !== 'Evaluated'"> 
-                <button mat-raised-button (click)="videoRecord = true; getData(videoRecordPopup, itration)" class="recordBtn mt-3 w-100" *ngIf="itration.submitAction !== 'submit'"><mat-icon class="video-icon">videocam <i class="fa fa-youtube-play playBtn" aria-hidden="true"></i></mat-icon> Record Video
+                <button mat-raised-button *ngIf="itration.submit_status == 'notsubmitted' && performActivityData.itrationStarted" (click)="videoRecord = true; getData(videoRecordPopup, itration)" class="recordBtn mt-3 w-100"><mat-icon class="video-icon">videocam <i class="fa fa-youtube-play playBtn" aria-hidden="true"></i></mat-icon> Record Video
                 </button>
                 <input type="file" accept="video/mp4" multiple style="display: none" #videoInput
                     (change)="uploadDocument($event)" />
-                <!-- <button mat-stroked-button class="uploadBtn mt-3 w-100" *ngIf="itration.submit_status == 'notsubmitted' || !performActivityData.itrationStarted"
-                 (click)="uploadDocuments(itration, performActivityData, submitType = 'upload')"><mat-icon class="add-icon">add</mat-icon>Upload Videos</button> -->
-                 <button mat-stroked-button *ngIf="itration.submit_status !== 'notsubmitted' || !performActivityData.itrationStarted" class="itration.submit_status !== 'notsubmitted' || !performActivityData.itrationStarted? 'mt-3':'uploadBtn mt-3'"
-                 (click)="uploadDocuments(itration, performActivityData, submitType = 'upload')">
-                 <mat-icon *ngIf="itration.submit_status !== 'notsubmitted' || !performActivityData.itrationStarted" class="icon-color m-t-m-2 addIcon">add</mat-icon>
-                 <span *ngIf="itration.submit_status !== 'notsubmitted' || !performActivityData.itrationStarted">Upload video</span>
+                 <button mat-stroked-button *ngIf="itration.submit_status == 'notsubmitted' && performActivityData.itrationStarted" class="uploadBtn mt-3"
+                 (click)="uploadDocuments(itration, performActivityData.performActivity, submitType = 'upload')">
+                 <mat-icon class="icon-color m-t-m-2 addIcon">add</mat-icon>
+                 <span>Upload video</span>
                </button>
-                <!-- <button mat-stroked-button class="submitBtn mt-3" *ngIf="itration.submit_status == 'notsubmitted' && itration.videodetails.length > 0"
-                  (click)="submitType = 'submit'; submitDeleteVideo({}, itration, performActivityData)">Submit</button>
-                <button mat-stroked-button *ngIf="itration.submit_status == 'notsubmitted' && itration.videodetails.length == 0 || !performActivityData.itrationStarted" class="submitted-btn mt-3"> Submit </button>
-                <button mat-stroked-button *ngIf="itration.submitAction == 'submit'" class="submitted-btn mt-3"> Submitted </button> -->
-
                 <button mat-stroked-button class="submit-btn mt-2"
                 *ngIf="itration.submit_status == 'notsubmitted' && itration.videodetails.length > 0"
-                (click)="submitType = 'submit'; submitDeleteVideo({}, itration, perform.performActivity)">
+                (click)="submitType = 'submit'; submitDeleteVideo({}, itration, performActivityData.performActivity)">
                 Submit
               </button>
               <button mat-stroked-button
-              *ngIf="itration.submit_status == 'notsubmitted' &&  itration.videodetails.length == 0 || !perform.itrationStarted"
+              *ngIf="itration.submit_status == 'notsubmitted' &&  itration.videodetails.length == 0 || !performActivityData.itrationStarted"
               class="submitted-btn mt-2"> Submit </button>
               <button mat-stroked-button *ngIf="itration.submitAction == 'submit'" class="submitted-btn mt-2">
                 Submitted </button>
@@ -357,7 +350,7 @@
         <div class="row ml-0 mr-0 videoRec">
           <div class="col-12 pl-0 pr-0" *ngIf="!videoStart">
             <!-- <app-video-recorder></app-video-recorder> -->
-            <app-perform-video-record [performDetailsSend]="performActivityData" [itrationSend]="itrationDataSend"></app-perform-video-record>
+            <app-perform-video-record [performDetailsSend]="performActivityData.performActivity" [itrationSend]="itrationDataSend"></app-perform-video-record>
             </div>
             <div class="col-12 previewCol" *ngIf="videoStart">
               <mat-card class="previewCard m-auto p-0">

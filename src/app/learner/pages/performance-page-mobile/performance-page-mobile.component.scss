@@ -107,6 +107,10 @@
   font-size: 15px;
 }
 
+.uploadBtndisplayNone {
+  display: none;
+}
+
 .add-icon {
   font-weight: bolder;
 }
@@ -133,6 +137,13 @@
   width: 45%;
   // margin-top: 6%;
   cursor: not-allowed;
+}
+
+.submit-btn{
+  color: $color-white !important;
+  background-color: $lxp-theme-green;
+  width: 45%;
+  margin-top: 6%;
 }
 
 .submitBtn {
