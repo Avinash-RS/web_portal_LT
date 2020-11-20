@@ -146,6 +146,7 @@ export class PerformancePageMobileComponent implements OnInit {
     }
 
   getperformActivityData() {
+    this.performDetails = [];
     // console.log("this.performDetails 1234");
     this.Lservice.getperformActivityData(
       this.userDetail.user_id,
@@ -159,7 +160,7 @@ export class PerformancePageMobileComponent implements OnInit {
         data.data.getperformActivityData.data
       ) {
         this.performDetails = data.data.getperformActivityData.data;
-        console.log("this.performDetails", this.performDetails);
+        this.getPerformActivity(this.indexNumber, this.performDetails[this.indexNumber-1].performActivity);
         this.performDetails.forEach((element) => {
           const startDate = new Date(element.performActivity.activitystartdate);
           element.activityStartDate = moment(startDate).format("ll");

@@ -304,9 +304,9 @@ export class DiscussionForumComponent implements OnInit {
       // });data.user.username, data?.lastposttimeISO, data?.postcount
       if (this.showCommentThread) {
         this.topicDiscussionData.posts = this.topicDiscussionData1.posts1;
-        let arr = this.topicDiscussionData.posts.slice(1);
+        let arr = JSON.parse(JSON.stringify(this.topicDiscussionData1.posts1.slice(1)));
         const thread = this.topicDiscussionData.posts[0];
-        arr = this.topicDiscussionData.posts.filter((item) => {
+        arr = arr.filter((item) => {
           return (item.content?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1 ||
             item.user?.timestampISO?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1 ||
             item?.user?.username?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1
@@ -320,7 +320,8 @@ export class DiscussionForumComponent implements OnInit {
           // }, 3000);
         }
       } else {
-        this.discussionData.topics = this.discussionData?.topics?.filter((item) => {
+        const arr = JSON.parse(JSON.stringify(this.discussionData.topics1));
+        this.discussionData.topics = arr.filter((item) => {
           return (item.title?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1 ||
             item.user?.username?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1 ||
             item.lastposttimeISO?.toLowerCase().indexOf(filterValue.toLowerCase()) > -1

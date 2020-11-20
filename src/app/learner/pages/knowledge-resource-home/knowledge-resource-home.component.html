@@ -18,7 +18,15 @@
   </div>
 
   <div class="no-data" *ngIf="isLoadBalanced  && !details.length">
-    <h2>No resource data is available here</h2>
+    <div class="row">
+      <div class="box-size w-100">
+          <div class="kr-empty">
+            <span class="lxp-knowledge headicon-kr"></span>
+              <p class="para">{{'You have no knowledge resource at this moment!' | translate }} </p>
+              <!-- {{ results?.error_msg }} -->
+          </div>
+      </div>
+  </div>
   </div>
 
   <div class="row resource-link">
@@ -29,14 +37,16 @@
           searchDetails == undefined || (searchDetails && searchDetails.length == 0)">
 
           <ng-container *ngIf="i < 12">
+            <div class="area-int">
             <a style="cursor: pointer;" (click)="onResourcePreview(item.domain,areaOfIntArr)">{{areaOfIntArr}}
-            </a><br>
+            </a></div>
           </ng-container>
           <ng-container *ngIf="(item.isMore && i >= 12) ||
             (i >= 12 && (searchDetails && searchDetails.length > 0 && 
             areaOfIntArr.toLowerCase().search(searchDetails.toLowerCase()) >=0 ))">
+            <div class="area-int">
             <a style="cursor: pointer;" (click)="onResourcePreview(item.domain,areaOfIntArr)">{{areaOfIntArr}}
-            </a><br>
+            </a></div>
           </ng-container>
         </ng-container>
       </ng-container>
@@ -50,4 +60,9 @@
       </ng-container>
     </div>
   </div>
+</div>
+<div class="footer">
+  <span class="powered">
+    <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
+  </span>
 </div>

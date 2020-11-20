@@ -19,7 +19,8 @@
     </mat-icon>
     <span>Activities</span>
   </div>
-  <mat-tab-group animationDuration="1000ms" (selectedTabChange)="tabChanged($event); projectTab($event)">
+  <mat-tab-group  animationDuration="1000ms" (selectedTabChange)="tabChanged($event); projectTab($event); activeTab($event)"
+  [(selectedIndex)]="demo1TabIndex">
     <mat-tab label="Assignments">
       <mat-accordion class="example-headers-align" multi *ngIf="assignmentContent?.coursedetails.length > 0">
         <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
@@ -372,15 +373,14 @@
                                     <span class="text-white actionBtn"
                                       *ngIf="material.doc_type =='video/mp4'">Play</span>
                                     <span class="text-white actionBtn"
-                                      *ngIf="material.doc_type == 'image/jpeg' || material.doc_type == 'application/pdf'">Preview</span>
+                                      *ngIf="material.doc_type == 'image/jpeg' || material.doc_type == 'application/pdf'">View</span>
                                   </div>
-                                  <div class="col-7 text-center pr-0 colAction">
-                                    <!-- (click)="downloadVideo()" -->
+                                  <!-- <div class="col-7 text-center pr-0 colAction">
                                     <a [href]="material.path" [download]="material.filename"><i
                                         class="fa fa-download text-white position-absolute downloadBtn"
                                         aria-hidden="true"></i>
                                       <span class="text-white actionBtn1">Download</span></a>
-                                  </div>
+                                  </div> -->
                                 </div>
                               </div>
                             </div>
@@ -549,10 +549,10 @@
         <mat-card class="noSessionCard color-yellow-card-status">
           <div class="row mar-t-12">
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-              <img class="actImg" src="assets/Perform.svg"> 
+              <img class="" src="assets/Perform.svg"> 
             </div>
             <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
-              <span class="actTxt"> You have no perform activity at the moment!</span>
+              <span class="pull-left"> You have no perform activity at the moment!</span>
             </div>
           </div>
         </mat-card> 
@@ -954,3 +954,8 @@
 
   </span>
 </ng-template>
+<div class="footer">
+  <span class="powered">
+      <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
+  </span>
+</div>

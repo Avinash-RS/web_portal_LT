@@ -12,15 +12,15 @@
 
     <nav aria-label="breadcrumb" class="coursebreadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item" [routerLink]="['/Learner/knowledge']">
-          <a>Home</a></li>
-        <li class="breadcrumb-item" [routerLink]="['/Learner/knowledge']">
+        <!-- <li class="breadcrumb-item">
+          <a>Home</a></li> -->
+        <li class="breadcrumb-item">
           <a>Knowledge Resources</a></li>
         <li class="breadcrumb-item active" aria-current="page">
           {{resourceFile[0].area_of_interest}}</li>
       </ol>
     </nav>
-
+   
     <div class="header-carousel">
       <owl-carousel-o [options]="TopicsOptions" class="questionList">
         <ng-template *ngFor="let value of topic_list;let i = index" carouselSlide>

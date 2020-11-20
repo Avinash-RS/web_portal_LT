@@ -86,10 +86,10 @@
     width: 45%;
     margin-top: 6%;
 }
-.noData {
-  margin-top: 18px;
-  margin-left: 42px;
-}
+// .noData {
+//   margin-top: 18px;
+//   margin-left: 42px;
+// }
 .margin-b-9{
 margin-bottom: 9px;
 }
@@ -896,4 +896,26 @@ border: 1px solid #ccc;
 
 .startDate {
   margin-left: -6rem;
+}
+
+.footer {
+  padding: 15px;
+  font-size: inherit;
+  left: 0;
+  bottom: 0 !important;
+  width: 100%;
+  color: $label;
+  position: fixed;
+  z-index: 999999;
+  font-weight: 500;
+  background-color: $profile-t-grey;
+  text-align: right;
+  border-top: 2px solid $profile-p-grey;
+}
+
+// Mobile
+@media (min-width: 200px) and (max-width: 767.98px) {
+  .footer {
+      text-align: center;
+  }
 }

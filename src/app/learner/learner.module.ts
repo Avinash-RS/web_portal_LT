@@ -288,7 +288,7 @@ const routes: Routes = [
     VideoPreviewModalComponent,
     ProjectMobileComponent,
     PerformVideoRecordComponent,
-    AssignmentComponent
+    AssignmentComponent,
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

@@ -155,7 +155,7 @@ export class LearnerMyCourseComponent implements OnInit {
       }
     });
   }
-  @HostListener('window:resize', ['$event'])
+  // @HostListener('window:resize', ['$event'])
   // ngOnInit() {
   // this.translate.use(localStorage.getItem('language'));
   // }
@@ -388,22 +388,25 @@ export class LearnerMyCourseComponent implements OnInit {
       BcourseData.data.get_learner_dashboard.message.batch_course_details.forEach(elem => {
         elem.isBatchCourse = true;
       });
-      this.courseDetailsList = BcourseData.data.get_learner_dashboard.message.batch_course_details;
-      // Course batch count
-      this.onGoingCourseCount = BcourseData.data.get_learner_dashboard.message.ongoing_count;
-      this.completedCourseCount = BcourseData.data.get_learner_dashboard.message.completed_count;
-      this.allCourseCount = BcourseData.data.get_learner_dashboard.message.all_count;
+      const tmp_BcourseDetail = BcourseData.data.get_learner_dashboard.message.batch_course_details;
+      this.courseDetailsList = tmp_BcourseDetail && tmp_BcourseDetail !== null ? tmp_BcourseDetail : [];
+      
      
       this.learnerService.getLearnerDashboard(userId, userObjId, 'undefined', requestType, 'enrolment').subscribe((EcourseData: any) => {
-        this.enrolledCourses = EcourseData.data.get_learner_dashboard.message.enrolled_course_details;
-        EcourseData.data.get_learner_dashboard.message.enrolled_course_details.forEach(elem => {
+        const EcourseDetail = EcourseData.data.get_learner_dashboard.message.enrolled_course_details
+        this.enrolledCourses = EcourseDetail && EcourseDetail !== null ? EcourseDetail : [];
+        this.enrolledCourses.forEach(elem => {
           elem.isBatchCourse = false;
         });
         this.courseDetailsList.push(...this.enrolledCourses);
+        // Course batch count reset
+        this.onGoingCourseCount = 0;
+        this.completedCourseCount = 0;
+        this.allCourseCount = 0;
         // Course overall count
-        this.onGoingCourseCount = Number(this.onGoingCourseCount) + Number(EcourseData.data.get_learner_dashboard.message.ongoing_count);
-        this.completedCourseCount = Number(this.completedCourseCount) + Number(EcourseData.data.get_learner_dashboard.message.completed_count);
-        this.allCourseCount = Number(this.allCourseCount) + Number(EcourseData.data.get_learner_dashboard.message.all_count);
+        this.onGoingCourseCount = Number(BcourseData.data.get_learner_dashboard.message.ongoing_count) + Number(EcourseData.data.get_learner_dashboard.message.ongoing_count);
+        this.completedCourseCount = Number(BcourseData.data.get_learner_dashboard.message.completed_count) + Number(EcourseData.data.get_learner_dashboard.message.completed_count);
+        this.allCourseCount = Number(BcourseData.data.get_learner_dashboard.message.all_count) + Number(EcourseData.data.get_learner_dashboard.message.all_count);
         this.showSkeleton = false
       });
     });

@@ -110,13 +110,19 @@
             </div>
           </div>
           <br>
-          <div class="row" *ngIf="course.isBatchCourse">
-            <div class="col-8">
-              <div class="row">
-                <div class="col">
-                  <p class="f_size_16 f_wt_500 color_black">Course Progression</p>
-                </div>
+          <div  *ngIf="course.isBatchCourse">
+            <div class="row">
+              <div class="col">
+                <p class="f_size_16 f_wt_500 color_black pull-left">Course Progression</p>
+                <span class="pointer seemoreHove pull-right"
+                        (click)="course.progresslistExp?course.progresslistExp=false:course.progresslistExp=true">
+                        <p class="f_size_10 ">{{course.progresslistExp?'Show more...':'Show less...' }}</p>
+                </span>
               </div>
+            </div>
+            <div class="row" *ngIf="!course.progresslistExp">
+            <div class="col-8">
+           
 
               <div class="row color_g">
                 <div class="col m_b3px">
@@ -179,6 +185,7 @@
               </div> -->
             </div>
           </div>
+          </div>
         </div>
         <!-- //4quadrant Self-Paced Learning// left lines //remove discussion link -->
         <div class="col-12 col-sm-12 col-md-12 col-lg-3 p-x-7px">
@@ -226,7 +233,7 @@
                       <div *ngIf="course.progressionExp" class="f_size_12">
                         Modules completed {{(course.completed_module_count!=null?course.completed_module_count:0) +'/'+ (course.total_module_count!=null?course.total_module_count:0)}}<br>
                         Topics completed {{(course.completed_topic_count!=null?course.completed_topic_count:0) +'/'+ (course.total_topic_count!=null?course.total_topic_count:0)}}<br>
-                        <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;">View self-learning
+                        <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline; display: none;">View self-learning
                           activity details..</span>
                       </div>
                     </div>

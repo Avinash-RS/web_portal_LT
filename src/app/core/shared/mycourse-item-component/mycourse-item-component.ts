@@ -55,6 +55,7 @@ export class MycourseItemComponent implements OnInit {
     this.courseWeekCircle = (this.course.week_completed_count !== null ? this.course.week_completed_count : 0) + '/' + (this.course.week_total_count !== null ? this.course.week_total_count : 0);
   }
   Go(course) {
+    localStorage.removeItem('userTabLocation');
     const data1 = {
       courseId: course.course_id,
       courseName: course.course_name

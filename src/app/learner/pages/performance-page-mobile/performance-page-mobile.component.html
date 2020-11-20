@@ -333,7 +333,8 @@
         </div>
         <div class="row ml-0 mr-0 videoRec">
           <div class="col-12 pl-0 pr-0" *ngIf="!videoStart">
-            <app-perform-video-record [performDetailsSend]="performActivityData" [itrationSend]="itrationDataSend"></app-perform-video-record>
+            <app-video-recorder></app-video-recorder>
+            <!-- <app-perform-video-record [performDetailsSend]="performActivityData" [itrationSend]="itrationDataSend"></app-perform-video-record> -->
             </div>
             <div class="col-12 previewCol" *ngIf="videoStart">
               <mat-card class="previewCard m-auto p-0">

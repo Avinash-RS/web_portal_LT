@@ -155,7 +155,7 @@
 
               <form class="search-form no_margin">
                 <mat-icon (click)="goToSearchThread()" class="pointer" style="margin-top: 12px;"
-                  *ngIf="filterValue === null" [ngClass]="(showCourseDetails && (discussionData === null || discussionData?.topics?.length === 0)) ||
+                   [ngClass]="(showCourseDetails && (discussionData === null || discussionData?.topics?.length === 0)) ||
                     (showCommentThread && topicDiscussionData && topicDiscussionData?.posts?.length === 1) ?
                   'pointerNone' : 'pointer'">
                   search
@@ -346,7 +346,7 @@
 
               <form class="search-form">
                 <mat-icon (click)="goToSearchThread()" class="pointer" style="margin-top: 12px;"
-                  *ngIf="filterValue === null" [ngClass]="
+                  [ngClass]="
                                       (showCourseDetails && (discussionData === null || discussionData?.topics?.length === 0)) ||
                                       (showCommentThread && topicDiscussionData && topicDiscussionData?.posts?.length === 1) ?
                                       'pointerNone' : 'pointer'">
@@ -699,3 +699,9 @@
     </div>
   </div>
 </div> -->
+
+<div class="footer">
+  <span class="powered">
+      <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
+  </span>
+</div>
