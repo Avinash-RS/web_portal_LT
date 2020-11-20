@@ -1,7 +1,7 @@
-<app-performance-page-mobile *ngIf="mobileResponsive"></app-performance-page-mobile>
-<app-header *ngIf="!mobileResponsive"></app-header>
+<app-performance-page-mobile [performDetailPageData]="perfornDetaildata" *ngIf="performdetailPageView"></app-performance-page-mobile>
+<app-header *ngIf="!performdetailPageView"></app-header>
 <app-project-mobile *ngIf="projectMobileResponsive"></app-project-mobile>
-<div class="con-1" *ngIf="!mobileResponsive && !projectMobileResponsive">
+<div class="con-1" *ngIf="!performdetailPageView && !projectMobileResponsive">
   <!-- <span class="back" routerLink="/Learner/MyCourse" routerLinkActive="active"> < Back</span><br><br> -->
   <span class="redHover">
     <mat-icon class="material-icons f_size_15 backIc pointer" (click)="goToCourse()">arrow_back_ios
@@ -258,7 +258,44 @@
     </mat-tab>
 
     <mat-tab label="Perform">
-      <ng-container *ngIf="performDetails?.length > 0">
+      <div class="row mr-0 ml-0 mt-3" *ngIf="performDetails?.length > 0 && mobileResponsive">
+    <div class="col-sm-12 pl-1 pr-1">
+      <mat-card class="performCard mb-3" (click)="performdetailPage(i+1, perform);performdetailPageView = true" *ngFor="let perform of performDetails; let i = index">
+        <div class="row ml-0 mr-0">
+          <div class="col-6 pl-0">
+            <p class="subTittle">{{i+1}}. {{perform.performActivity.module_id}}</p>
+            <span>{{perform.performActivity.topic_id}}
+            </span>
+          </div>
+          <div class="col-6 pl-0 pr-0">
+            <div class="row mr-0 ml-0 mb-4">
+              <div class="col-12 pl-0 pr-0 text-right">
+                <span class="textGrayColor1" *ngIf="perform.performActivity.submit_status == 'notsubmitted'">Yet to Submit</span>
+                <span class="submitstatus1" *ngIf=" perform.performActivity.submit_status == 'submitted'">Submitted</span>
+                <span class="gradeStatus1" *ngIf="perform.performActivity.submit_status == 'graded'">Graded</span>
+              </div>
+            </div>
+            <div class="row mr-0 ml-0 mb-3">
+              <div class="col-12 pl-0 pr-0 text-right">
+                <span class="textGrayColor1">Iterations: <span class="textGrayColor1" *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} / </span>{{perform.performActivity.iterationTotal}}</span>
+              </div>
+            </div>
+            <div class="row mr-0 ml-0 mt-4">
+              <div class="col-6 mr-0 pl-0 pr-0 text-left">
+                <span class="font-weight-bold">Start date:</span><br />
+                <span class="textGrayColor1">{{perform.performActivity.activitystartdate | date}}</span>
+              </div>
+              <div class="col-6 mr-0 pl-0 pr-0 text-left">
+                <span class="font-weight-bold ml-2">End date:</span><br />
+                <span class="textGrayColor1 float-right">{{perform.performActivity.activityenddate | date}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+      <ng-container *ngIf="performDetails?.length > 0 && !mobileResponsive">
         <div class="box-0-1" *ngFor="let perform of performDetails; let i = index">
           <div class="row">
             <div class="col-10">
@@ -547,12 +584,12 @@
 
       <div *ngIf="performDetails?.length < 1">
         <mat-card class="noSessionCard color-yellow-card-status">
-          <div class="row mar-t-12">
+          <div class="row mar-t-12 noSessioncardRow">
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
               <img class="" src="assets/Perform.svg"> 
             </div>
             <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
-              <span class="pull-left"> You have no perform activity at the moment!</span>
+              <span class="spanTxt"> You have no perform activity at the moment!</span>
             </div>
           </div>
         </mat-card> 

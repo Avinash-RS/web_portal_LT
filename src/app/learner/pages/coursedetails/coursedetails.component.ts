@@ -74,8 +74,8 @@ export class CoursedetailsComponent implements OnInit {
   moduleLenth: number;
   topicLenght = 0;
   // urlpath = [];
-  currentPage = 0;
-  topiccurrentPage = 0;
+  currentPage: number;
+  topiccurrentPage: number;
   getTopicLengthofModule: any;
   gettopicLink: any;
   topiccurrentlink = 0;
@@ -225,6 +225,7 @@ export class CoursedetailsComponent implements OnInit {
       this.performOverLay = false;
     });
     this.socketService.change.subscribe(result => {
+      console.log(result)
       if (result && result.eventId && result.eventId.length > 0) {
         //  const courseValue = _.find(result.data.course_dtl, { course_id: this.courseid});
         //   console.log(courseValue);
@@ -248,6 +249,8 @@ export class CoursedetailsComponent implements OnInit {
           // }];
 
           this.scromModuleData = result.data.childData;
+          this.currentPage = result.data.resumeContent;
+          this.topiccurrentPage = result.data.resumeSubContent;
           // console.log(jsonData[0].childData, 'this.scromModuleData');
           this.scromModuleData.forEach(childData => {
             if (childData && childData.children) {
@@ -405,6 +408,7 @@ export class CoursedetailsComponent implements OnInit {
 
 
   topicNext() {
+    debugger
     if (this.currentPage < (this.moduleLenth)) {
       this.getTopicLengthofModule = this.scromModuleData[this.currentPage].topic_len;
       this.moduleInfo = this.scromModuleData[this.currentPage];
@@ -441,6 +445,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   topicPrve() {
+    debugger
     if (this.currentPage >= 0) {
       this.totTopicLenght--;
       this.isNextEnable = false;

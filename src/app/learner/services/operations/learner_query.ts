@@ -1936,6 +1936,8 @@ export const getCourseActivities = gql`
             score_mark
             total_mark
             score
+            activitystartdate
+            activityenddate
           }
           total_count
         }

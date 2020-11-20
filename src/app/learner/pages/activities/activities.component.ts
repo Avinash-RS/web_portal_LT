@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog, MatTabGroup } from '@angular/material';
 import { MatAccordion } from '@angular/material/expansion';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
@@ -22,6 +22,8 @@ export class ActivitiesComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
   @ViewChild('videoInput') videoInput;
   @ViewChild('uploadInput') uploadInput;
+  perfornDetaildata: any
+  performdetailPageView = false;
   hover = false;
   isLoader = false;
   hoverfile = false;
@@ -35,6 +37,7 @@ export class ActivitiesComponent implements OnInit {
   courseEndDate: any;
   courseid: any;
   userDetail: any;
+  
   docpath: any = null;
   assFile: File;
   openList = false;
@@ -133,6 +136,7 @@ export class ActivitiesComponent implements OnInit {
   videoSource: any;
   projectMobileResponsive: boolean;
   demo1TabIndex = 0;
+  currentTab: any;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
@@ -152,21 +156,29 @@ export class ActivitiesComponent implements OnInit {
 
   ngOnInit() {
     const index = localStorage.getItem('userTabLocation');
+    this.Lservice.closeMobileResp$.subscribe((data: any) => {
+      this.performdetailPageView = data;
+    });
     if (index) {
     // tslint:disable-next-line:radix
     this.demo1TabIndex = parseInt(index);
     }
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+    if (this.currentTab === 'Perform' || this.demo1TabIndex === 1 && this.screenWidth < 800) {
+        this.mobileResponsive = true;
+      } else {
+        this.mobileResponsive = false;
+      }
   }
 
   activeTab(event) {
-    console.log('eve', event.index);
     localStorage.setItem('userTabLocation', event.index);
   }
 
   tabChanged(event) {
-    this.Lservice.closeMobileResp$.subscribe((data: any) => {
-      this.mobileResponsive = data;
-    });
+
+    this.currentTab = event.tab.textLabel;
     if (event.tab.textLabel === 'Perform') {
       this.screenHeight = window.innerHeight;
       this.screenWidth = window.innerWidth;
@@ -391,7 +403,6 @@ export class ActivitiesComponent implements OnInit {
         // Batch date
         const batchEndDate = new Date(element.projectActivity.batchenddate);
         element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:MM');
-        console.log('batch', element.batchEndDate);
         if (moment().format('DD-MM-YYYY HH:MM') <= element.batchEndDate) {
           element.submitType = true;
         } else {
@@ -443,23 +454,15 @@ export class ActivitiesComponent implements OnInit {
       this.performDetails = data.data.getperformActivityData.data;
       this.performDetails.forEach((element) => {
         const startDate = this.datePipe.transform(element.performActivity.activitystartdate, 'dd-MM-yyyy');
-        // element.activityStartDate = moment(startDate).format('ll, HH:MM');
-        // element.startDate = moment(startDate).format('DD-MM-YYYY HH:MM');
         const endDate = this.datePipe.transform(element.performActivity.activityenddate, 'dd-MM-yyyy');
         const batchendDate = this.datePipe.transform(element.performActivity.batchenddate, 'dd-MM-yyyy');
-        // element.activityEndDate = moment(endDate).format('ll, HH:MM');
-        // element.endDate = moment(endDate).format('DD-MM-YYYY HH:MM');
-        console.log('startDate', startDate, endDate);
         let crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
         if (startDate <= crrDate && batchendDate >= crrDate) {
           element['itrationStarted'] = true;
         } else {
           element['itrationStarted'] = false;
         }
-        // element['itrationStarted'] = this.dateDiff(strtDate, edDate, crrDate);
-      
       });
-      console.log('this.performDetails', this.performDetails);
     }
     });
   }
@@ -467,7 +470,6 @@ export class ActivitiesComponent implements OnInit {
   dateDiff(startDate, endDate, currentDate) {
     let startDateDiff = startDate - currentDate;
     let endDateDiff = endDate - currentDate;
-    console.log('startDateDiff', startDateDiff, 'endDateDiff', endDateDiff);
     if ((startDateDiff <= 0 ) && (endDateDiff >= 0)) {
       return true;
     }
@@ -652,7 +654,6 @@ submitDeleteVideo(videoName, itrdata, perform) {
 }
 
 previewDoc(templateRef: TemplateRef<any>, path) {
-  console.log('path', path);
   this.dialog.open(templateRef, {
     width: '100%',
     height: '100%',
@@ -703,6 +704,10 @@ videoPreview(templateRef: TemplateRef<any>, path) {
 
 mouseover(index) {
   this.mouseOverIndex = index;
+}
+
+performdetailPage(index, performData) {
+  this.perfornDetaildata = {perfornData: performData, index: index}
 }
 
 }
