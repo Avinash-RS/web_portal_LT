@@ -55,7 +55,7 @@
         color: #1F1A17!important;
     }
     .color-grey-card-status {
-        border-left: 3px solid #b5acac !important;
+        border-left: 3px solid green !important;
         // color: #b5acac !important;
     }
     .color-yellow-card-status {
@@ -72,13 +72,15 @@
         margin-top: 5px;
     }
     .Completedstatus {
-        background: #b5acac;
+        // background: #b5acac;
+        background: green;
         padding: 2px 6px;
         float: right;
         border-radius: 4px;
         font-size: 13px;
         color: $color-white ;
         margin-top: 5px;
+        margin-right: 11px;
     }
     .color-white {
         color: #b5acac;
@@ -122,12 +124,14 @@
         border-radius: 5px;
         position: relative;
         float: right;
-        margin-top: -5px;
+        // margin-top: -5px;
         background: $color-white ;
         color: #9E9E9E;
         border: 1px solid currentColor;
         padding: 0px 7px;
         line-height: 22px;
+        margin-top: 20px;
+        margin-right: 32px;
     }
     .m-l-4 {
         margin-left: 4%;
@@ -151,6 +155,43 @@
         width: 200px; 
         overflow: hidden;
         text-overflow: ellipsis;
+        margin-bottom: 5px !important;
+    }
+    .course-section{
+        width: 50% !important;
+        display: inline-block;
+        white-space: nowrap !important; 
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    .img-show{
+        float: right; 
+        // width: 20%;
+        margin-left: 22%;
+        }
+    .activity_type{
+        color: black;
+        display: inline-block;
+        font-family: Roboto Condensed !important;
+        width: 24%;
+        margin-right: 0px;
+    }
+    .topic-section{
+        width: 50% !important;
+        display: inline-block;
+        white-space: nowrap !important; 
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    .created-section{
+        width: 28%;
+        color: black !important;
+        display: inline-block;
+        font-family: Roboto Condensed !important;
+    }
+    .created-name{
+        color: black !important;
+        font-family: Roboto Condensed !important;
     }
     .person {
         position: absolute;
@@ -208,7 +249,7 @@
 .scroll-bar{
     width: 450px;
     height: 550px;
-    overflow-y: scroll;
+    // overflow-y: hidden;
   }
 
 
@@ -516,3 +557,16 @@
     text-align: center;
 }
 }
+::ng-deep .marginRemove{
+    margin: 0 0 0 16px !important;
+}
+
+::ng-deep .expandLine{
+    margin: 0 0 20px 16px !important;
+}
+
+
+// ::ng-deep .mat-h5, .mat-typography h5 {
+   
+//     margin: 0 0 0 16px !important;
+// }

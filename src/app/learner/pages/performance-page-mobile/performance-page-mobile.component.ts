@@ -19,12 +19,11 @@ import { appendFile } from "fs";
 })
 export class PerformancePageMobileComponent implements OnInit {
   // @Input() performDetailsSend: any;
-
+  @Input() performDetailPageData: any;
   @ViewChild("videoInput") videoInput;
   selectedName = "Perform";
   selectedTabIndex: number;
   checkDetails: any;
-  performdetailPage = false;
   arrowUP = false;
   videoPerview = false;
   @Input() detailDataToPerform;
@@ -54,6 +53,37 @@ export class PerformancePageMobileComponent implements OnInit {
   performDetailsSend: any;
   itrationSend: any;
   videoDetails: any;
+  trendingCategorires: any = {
+    loop: false, // dont make it true
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    autoHeight: true,
+    navSpeed: 900,
+    navText: ['<i class=\'fa fa-chevron-left\'></i>', '<i class=\'fa fa-chevron-right\'></i>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 3,
+        autoHeight: true,
+      },
+      940: {
+        items: 3,
+        autoHeight: true,
+      },
+      1200: {
+        items: 4,
+        autoHeight: true,
+      }
+    },
+    nav: true
+  };
 
   constructor(
     private commonServices: CommonServicesService,
@@ -83,8 +113,9 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.indexNumber = this.performDetailPageData.index;
+    this.performActivityData = this.performDetailPageData.perfornData;
     this.Lservice.closeRecoderdData$.subscribe((data: any) => {
-      console.log('data', data);
       this.videoUrl = data.videourl;
       this.videoDetails = data;
       if (this.videoUrl) {
@@ -98,8 +129,6 @@ export class PerformancePageMobileComponent implements OnInit {
       this.itrationSend = data;
     });
 
-    console.log('this.videoStart', this.videoStart);
-    this.getperformActivityData();
   }
 
   getData(templateRef: TemplateRef<any>, itration) {
@@ -146,7 +175,7 @@ export class PerformancePageMobileComponent implements OnInit {
     }
 
   getperformActivityData() {
-    // console.log("this.performDetails 1234");
+    this.performDetails = [];
     this.Lservice.getperformActivityData(
       this.userDetail.user_id,
       this.courseid
@@ -159,26 +188,22 @@ export class PerformancePageMobileComponent implements OnInit {
         data.data.getperformActivityData.data
       ) {
         this.performDetails = data.data.getperformActivityData.data;
-        console.log("this.performDetails", this.performDetails);
+        this.getPerformActivity(this.indexNumber, this.performDetails[this.indexNumber-1].performActivity);
         this.performDetails.forEach((element) => {
-          const startDate = new Date(element.performActivity.activitystartdate);
-          element.activityStartDate = moment(startDate).format("ll");
-          element.startDate = moment(startDate).format("DD-MM-YYYY HH:MM");
-          const endDate = new Date(element.performActivity.activityenddate);
-          element.activityEndDate = moment(endDate).format("ll");
-          if (moment(new Date()).format("DD-MM-YYYY HH:MM") < element.activityStartDate) {
-            this.itrationStarted = true;
+          const startDate = this.datePipe.transform(element.performActivity.activitystartdate, 'dd-MM-yyyy');
+          const endDate = this.datePipe.transform(element.performActivity.activityenddate, 'dd-MM-yyyy');
+          const batchendDate = this.datePipe.transform(element.performActivity.batchenddate, 'dd-MM-yyyy');
+          let crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
+          if (startDate <= crrDate && batchendDate >= crrDate) {
+            element['itrationStarted'] = true;
           } else {
-            this.itrationStarted = false;
-          }
-          if (moment(new Date()).format("DD-MM-YYYY HH:MM") > element.activityEndDate) {
-            this.itrationEnded = true;
-            this.submitStatus = 'late';
-          } else {
-            this.itrationEnded = false;
-            this.submitStatus = 'ontime';
+            element['itrationStarted'] = false;
           }
         });
+        let filterData = this.performDetails.filter(data => {
+          return data.performActivity.perform_id === this.performActivityData.perform_id
+        });
+        this.performActivityData.push(filterData);
       } else {
         this.performDetails = [];
       }
@@ -191,7 +216,6 @@ export class PerformancePageMobileComponent implements OnInit {
       selectedName: this.selectedName,
       selectedTabIndex: this.selectedTabIndex,
     };
-    console.log("data", data);
     this.commonServices.menuSelectedPerform$.next(data);
   } else {
     // this.Lservice.performView.next('performData', false)
@@ -208,8 +232,15 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
   performlearnerUploadVideo() {
-    const currentDate = new Date();
+    const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
     const performVideo = new FormData();
+    let startDate = this.datePipe.transform(this.performActivityData.activitystartdate, 'dd-MM-yyyy');
+    let endDate = this.datePipe.transform(this.performActivityData.activityenddate, 'dd-MM-yyyy');
+    if (currentDate >= startDate && currentDate <= endDate) {
+      this.submitStatus = 'ontime';
+    } else {
+      this.submitStatus = 'late';
+    }
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.selectPerformfile.length; i++) {
       performVideo.append('uploadvideo', this.selectPerformfile[i]);
@@ -273,7 +304,6 @@ export class PerformancePageMobileComponent implements OnInit {
 }
 
 previewDoc(templateRef: TemplateRef<any>, path) {
-  console.log('path', path);
   this.dialog.open(templateRef, {
     width: '100%',
     height: '100%',
@@ -284,9 +314,7 @@ previewDoc(templateRef: TemplateRef<any>, path) {
 }
 
 videoPreview(templateRef: TemplateRef<any>, path) {
-  console.log('path', path);
   this.videoSource = path.videourl;
-  console.log('this.videoSource', this.videoSource);
   this.dialog.open(templateRef, {
     width: '100%',
     height: '100%',

@@ -74,8 +74,8 @@ export class CoursedetailsComponent implements OnInit {
   moduleLenth: number;
   topicLenght = 0;
   // urlpath = [];
-  currentPage = 0;
-  topiccurrentPage = 0;
+  currentPage: number;
+  topiccurrentPage: number;
   getTopicLengthofModule: any;
   gettopicLink: any;
   topiccurrentlink = 0;
@@ -225,6 +225,7 @@ export class CoursedetailsComponent implements OnInit {
       this.performOverLay = false;
     });
     this.socketService.change.subscribe(result => {
+      console.log(result)
       if (result && result.eventId && result.eventId.length > 0) {
         //  const courseValue = _.find(result.data.course_dtl, { course_id: this.courseid});
         //   console.log(courseValue);
@@ -248,6 +249,8 @@ export class CoursedetailsComponent implements OnInit {
           // }];
 
           this.scromModuleData = result.data.childData;
+          this.currentPage = result.data.resumeContent;
+          this.topiccurrentPage = result.data.resumeSubContent;
           // console.log(jsonData[0].childData, 'this.scromModuleData');
           this.scromModuleData.forEach(childData => {
             if (childData && childData.children) {
@@ -405,6 +408,7 @@ export class CoursedetailsComponent implements OnInit {
 
 
   topicNext() {
+    debugger
     if (this.currentPage < (this.moduleLenth)) {
       this.getTopicLengthofModule = this.scromModuleData[this.currentPage].topic_len;
       this.moduleInfo = this.scromModuleData[this.currentPage];
@@ -441,14 +445,18 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   topicPrve() {
-    if (this.currentPage > 0) {
+    debugger
+    if (this.currentPage >= 0) {
       this.totTopicLenght--;
       this.isNextEnable = false;
+     // console.log( this.totTopicLenght,'tttttttttttttttt')
       if (this.totTopicLenght === 0) {
         this.isprevEnable = true;
       }
       if (this.topiccurrentlink >= 0) {
-        this.gettopicLink = this.scromModuleData[this.currentPage - 1].children[this.topiccurrentlink];
+        this.gettopicLink = this.scromModuleData[this.currentPage ].children[this.topiccurrentlink];
+      
+       // console.log( this.currentPage,'mmmmmmmmm',this.topiccurrentlink)
         this.moduleSatusCheck = this.moduleInfo.status ? this.moduleInfo.status : 'process';
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
           (environment.scormUrl + '/scormPlayer.html?contentID=' +
@@ -459,8 +467,12 @@ export class CoursedetailsComponent implements OnInit {
       }
       if (this.topiccurrentlink === 0) {
         this.currentPage--;
+      //  console.log( this.currentPage,';;;;;;;;;;;;;;;;;;;;;',this.topiccurrentlink)
         if (this.currentPage !== 0) {
-          this.topiccurrentlink = this.scromModuleData[this.currentPage - 1].topic_len;
+          this.topiccurrentlink = this.scromModuleData[this.currentPage].topic_len;
+          this.topiccurrentlink--;
+        }else{
+          this.topiccurrentlink = this.scromModuleData[this.currentPage].topic_len;
           this.topiccurrentlink--;
         }
       } else {
@@ -474,7 +486,7 @@ export class CoursedetailsComponent implements OnInit {
     this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
       this.scromModuleData = this.scromApiData?.childData;
-      console.log(this.scromModuleData);
+     // console.log(this.scromModuleData);
       // tree level
       this.scromModuleData.forEach(childData => {
         // console.log(childData.children);
