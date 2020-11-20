@@ -1,9 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { data } from 'jquery';
-import { ToastrService } from 'ngx-toastr';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { knowledgeService } from '@learner/services/knowledge-resource/knowledge-resource.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -26,9 +25,9 @@ export class KnowledgeResourceHomeComponent implements OnInit {
   tempDetailsList = [];
 
   constructor(public apiService: knowledgeService,
-    public toast: ToastrService,
-    private CommonService: CommonServicesService,
-    private router: Router) { }
+              public toast: ToastrService,
+              private CommonService: CommonServicesService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getResourceFiles();
@@ -45,24 +44,23 @@ export class KnowledgeResourceHomeComponent implements OnInit {
       }, {});
       tempDetails = Object.entries(tempDetails);
       tempDetails.forEach((dt) => {
-        let subTempDetails = dt[1].reduce((r, a) => {
+        const subTempDetails = dt[1].reduce((r, a) => {
           r[a.area_of_interest] = [...r[a.area_of_interest] || [], a];
           return r;
         }, {});
         dt[1] = Object.entries(subTempDetails);
       });
       tempDetails.forEach((d) => {
-        let b = {
+        const b = {
         domain: '',
         areaOfInterest: [],
         isMore: false};
         b.domain = d[0];
-        
         d[1].forEach((areaOfInt) => {
         b.areaOfInterest.push(areaOfInt[0]);
-        })
+        });
         this.tempDetailsList.push(b);
-        })
+        });
       this.details = this.tempDetailsList;
       this.isLoadBalanced = true;
     });
@@ -78,15 +76,14 @@ export class KnowledgeResourceHomeComponent implements OnInit {
         const knowledgeDetails = {
           documentname: result.Result.originalname,
           file: 'https://edutechstorage.blob.core.windows.net/' + result.Result.path,
-          createdby_role: "",
-          createdby_name: "",
-          createdby_id: ""
+          createdby_role: '',
+          createdby_name: '',
+          createdby_id: ''
         };
-        this.apiService.saveResourceData(knowledgeDetails).subscribe((result: any) => {
-          if (result.data.save_resource_data.success === true) {
-            console.log('success');
+        this.apiService.saveResourceData(knowledgeDetails).subscribe((results: any) => {
+          if (results.data.save_resource_data.success === true) {
             this.toast.success('Resource file upload successfully !!!');
-          } else if (result.data.save_resource_data.error_msg === 'Not Success') {
+          } else if (results.data.save_resource_data.error_msg === 'Not Success') {
             this.toast.warning('Please upload file having extensions - .xls or .xlsx or .csv !!!');
           }
         });
@@ -108,16 +105,15 @@ export class KnowledgeResourceHomeComponent implements OnInit {
           const knowledgeDetails = {
             file: 'https://edutechstorage.blob.core.windows.net/' + result.Result.path,
             documentname: result.Result.originalname,
-            createdby_role: "",
-            createdby_name: "",
-            createdby_id: ""
+            createdby_role: '',
+            createdby_name: '',
+            createdby_id: ''
           };
 
-          this.apiService.saveResourceData(knowledgeDetails).subscribe((result: any) => {
-            if (result.data.save_resource_data.success === true) {
-              // console.log("success");
+          this.apiService.saveResourceData(knowledgeDetails).subscribe((results: any) => {
+            if (results.data.save_resource_data.success === true) {
               this.toast.success('Resource upload successfully !!!');
-            } else if (result.data.save_resource_data.error_msg === 'Not Success') {
+            } else if (results.data.save_resource_data.error_msg === 'Not Success') {
               this.toast.warning('Please upload file having extensions .xls or .xlsx or .csv !!!');
             }
           });
@@ -126,19 +122,19 @@ export class KnowledgeResourceHomeComponent implements OnInit {
     }
   }
 
-  onResourcePreview(domain,area_of_interest) {
+  onResourcePreview(domain, areaOfInterest) {
     this.router.navigate(['/Learner/knowledge/preview'],
       {
         queryParams: {
-          domain: domain,
-          area_of_interest: area_of_interest
+          domain,
+          areaOfInterest
         }
       });
   }
 
-  onTabChanged(event){
+  onTabChanged(event) {
     // this.isReloaded=true;
-    if(event.index==0){
+    if (event.index === 0) {
       this.getResourceFiles();
     }
 

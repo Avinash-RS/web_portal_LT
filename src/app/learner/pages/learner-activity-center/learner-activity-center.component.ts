@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { Router } from '@angular/router';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { IDatasource, IGetRowsParams } from 'ag-grid-community';
 import { ToastrService } from 'ngx-toastr';
 
@@ -71,7 +71,6 @@ export class LearnerActivityCenterComponent implements OnInit {
       this.service.getCourseActivities(userId, PageNumber, this.courseId, this.sortType, this.searchValue,
         this.searchColumn, this.statusBased)
         .subscribe((result: any) => {
-          // console.log(result, 'rinitial');
           if (result.data.get_course_activities.total_count > 0) {
             params.successCallback(
               result.data.get_course_activities.message, result.data.get_course_activities.total_count
@@ -96,12 +95,10 @@ export class LearnerActivityCenterComponent implements OnInit {
   navDetails: any;
 
   constructor(private service: LearnerServicesService, private gs: GlobalServiceService,
-    private route: Router, private toastr: ToastrService, ) {
+              private route: Router, private toastr: ToastrService, ) {
     this.detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-    // console.log(this.detail, 'det');
     this.navDetails = this.detail || JSON.parse(atob(localStorage.getItem('course')));
-    // console.log(this.navDetails, 'cd');
     this.userDetails = this.gs.checkLogout();
     this.tabledef();
     // this.getCourseActivitiesforTable();
@@ -121,7 +118,6 @@ export class LearnerActivityCenterComponent implements OnInit {
     if (this.navDetails?.tableType === 'submission') {
       this.hideCourseColumn = true;
     }
-    // console.log(this.hideCourseColumn);
     this.columnDefs =
       [
         {
@@ -185,7 +181,6 @@ export class LearnerActivityCenterComponent implements OnInit {
           filter: true,
           floatingFilterComponentParams: { suppressFilterButton: true },
           cellRenderer: (data) => {
-            // console.log(data, 'status');
             if (data.value === 'Submitted') {
               return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color:#FFA04E">stop_circle</mat-icon></span> Submitted `;
             } else if (data.value === 'Graded') {
@@ -243,9 +238,7 @@ export class LearnerActivityCenterComponent implements OnInit {
   callGridApi(sortValue, globalSearchValue, searchColumnVal) {
     this.sortrecord = sortValue;
     this.searchValue = globalSearchValue ? globalSearchValue : '';
-    // console.log(searchColumnVal, 'sc');
     this.searchColumn = searchColumnVal;
-    // console.log(this.searchColumn, searchColumnVal, 'sc');
     this.gridApi.setDatasource({
       getRows: (params: IGetRowsParams) => {
         const userId = this.userDetails.user_id;
@@ -271,7 +264,6 @@ export class LearnerActivityCenterComponent implements OnInit {
         this.service.getCourseActivities(userId, PageNumber, this.courseId, this.sortrecord, this.searchValue,
           this.searchColumn, this.statusBased)
           .subscribe((result: any) => {
-            // console.log(result, 'r');
             if (result.data.get_course_activities.message.length === 0) {
               this.toastr.warning('No results found');
             }
@@ -292,7 +284,6 @@ export class LearnerActivityCenterComponent implements OnInit {
 
   onSort(data: any) {
     const sortState = this.gridApi.getSortModel();
-    // console.log(sortState, 'ss');
     if (sortState.length === 0) {
       this.sortrecord = 'undefined';
       this.callGridApi(this.sortrecord, this.searchValue || '', this.searchColumn);
@@ -328,7 +319,6 @@ export class LearnerActivityCenterComponent implements OnInit {
         const r = { [sortState[0]?.colId]: sortState[0]?.sort === 'asc' ? 1 : -1 };
         this.sortrecord = JSON.stringify(r);
       }
-      // console.log(this.sortrecord, 'sr');
       this.callGridApi(this.sortrecord, this.searchValue || '', this.searchColumn || 'undefined');
     }
   }
@@ -336,7 +326,6 @@ export class LearnerActivityCenterComponent implements OnInit {
     let searchString = null;
     const filterModel = this.gridApi.getFilterModel();
     searchString = this.gridApi.getFilterModel()[Object.keys(this.gridApi.getFilterModel())[0]]?.filter || null;
-    // console.log(searchString);
     const filterArray = [];
     for (const keyd in filterModel) {
       if (filterModel) {
@@ -379,11 +368,9 @@ export class LearnerActivityCenterComponent implements OnInit {
     }
     if (filterArray.length > 0) {
       this.searchColumn = JSON.stringify(filterArray);
-      // console.log(this.searchColumn, 'searchcol');
       // this.callGridApi(this.sortrecord || 'undefined', '', this.searchColumn);
       this.callGridApi(this.sortrecord || 'undefined', this.searchValue || '', this.searchColumn);
     } else {
-      // console.log(searchString, 'ss');
       this.callGridApi(this.sortrecord || 'undefined', this.searchValue || '', 'undefined');
     }
   }

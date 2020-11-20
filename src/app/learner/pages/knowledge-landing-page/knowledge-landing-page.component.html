@@ -23,7 +23,7 @@
    
     <div class="header-carousel">
       <owl-carousel-o [options]="TopicsOptions" class="questionList">
-        <ng-template *ngFor="let value of topic_list;let i = index" carouselSlide>
+        <ng-template *ngFor="let value of topicList;let i = index" carouselSlide>
           <div class="topic-container" (click)="onTopicSelection(value)">
             <div class="{{ selectedTopic == value ? 'topic-chip active-topic' : 'topic-chip'}}" 
             [matTooltip]="value">{{value}}</div>

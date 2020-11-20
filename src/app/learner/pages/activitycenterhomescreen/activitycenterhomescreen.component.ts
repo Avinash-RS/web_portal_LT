@@ -22,7 +22,6 @@ export class ActivitycenterhomescreenComponent implements OnInit {
     // should be added by team A - if anything
   }
   gototable(e) {
-    // console.log(e, 'ee');
     localStorage.setItem('course', e);
     const detail = {
       tableType: e,
@@ -35,7 +34,6 @@ export class ActivitycenterhomescreenComponent implements OnInit {
     const userId = this.userDetails.user_id;
     // this.service.get_active_course_count("egs8fv").subscribe((result: any) => {
     this.service.get_active_course_count(userId).subscribe((result: any) => {
-      // console.log(result, 'result');
       this.details = result.data.get_active_course_count.message;
     });
   }
