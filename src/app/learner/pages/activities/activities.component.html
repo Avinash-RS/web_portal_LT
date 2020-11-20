@@ -459,7 +459,7 @@
                                 class="gradedot"></span>
                               Graded <span
                                 *ngIf="itrdata.grade_status == 'Evaluated' && itrdata.instructor_status !== null"
-                                [ngClass]="itrdata.instructor_status == 'pass'?'colorGreen ml-1': 'colorRed ml-1'">{{itrdata.instructor_status | titlecase}}</span></span>
+                                [ngClass]="itrdata.instructor_status == 'Pass'?'colorGreen ml-1': 'colorRed ml-1'">{{itrdata.instructor_status | titlecase}}</span></span>
                           </div>
                         </div>
 
