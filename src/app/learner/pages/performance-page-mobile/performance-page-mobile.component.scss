@@ -270,8 +270,11 @@
   height: 3rem;
 }
 
-.closeIcon {
+.closeIcons {
   font-size: 30px;
+  position: absolute;
+  right: 1.2rem;
+  color: $lxp-theme-green;
 }
 
 .videoPlay {
