@@ -23,7 +23,7 @@
 <br>
 <!-- *ngIf="course?.isBatch" -->
 <div class="row" >
-  <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 col-12">
+  <div class="col-lg-4 col-xl-4 col-md-5 col-sm-12 col-12 collaborateAccordion">
     <ng-container *ngIf="scromModuleData?.length > 0; else noModule">
       <mat-accordion *ngFor="let res of scromModuleData; let i = index"
         (click)="getSelectedIndex(i);getModuleDataForForum(scromModuleData?.length, i + 1, res)">
@@ -36,7 +36,7 @@
                   </mat-icon>
                 </div>
                 <div [ngClass]="res?.status == 'Passed'? 'index-number-read' : 'index-number-unread'">
-                  <span class="custom-index">{{i+1}}.</span>
+                  <span class="custom-index">{{i+1}}. &nbsp;</span>
                 </div>
                 <div>
                   <div [ngClass]="res?.status == 'Passed'? 'moduleHeadRead' : 'moduleHeadUnread'">
@@ -68,8 +68,7 @@
           </mat-expansion-panel-header>
           <div class="row">
             <div class="col-12">
-              <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title.length > 39?'headerDown':
-''">
+              <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title.length > 39?'headerDown':''">
                 <ng-container *ngFor="let mod of res?.children; let j = index">
                   <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colWhite' : 
         mod.status === 'Process' ? 'colWhite' : 'colWhite'">
@@ -101,11 +100,12 @@
     </ng-template>
   </div>
   <!-- DF -->
-  <div class="col-lg-8 col-xl-8 col-md-8 col-sm-6 col-12 vrl">
+
+  <div class="col-lg-8 col-xl-8 col-md-7 col-sm-12 col-12 vrl">
     <!-- to show module name in header - DONE-->
     <div *ngIf="showCourseDetails">
       <div class="p-l-0 no_border">
-        <div class="col-12 forum-width">
+        <div class="forum-width">
           <div class="row" *ngIf="selectedModuleData">
             <p (click)="gotoDisplayAllThreads()">
               <span class="f_size_18 color_black f_wt_400 ">{{selectedModuleData.title || 'Module Name'}}</span>
@@ -120,7 +120,7 @@
     <!-- to show title name in header -->
     <div *ngIf="showCommentThread" class="no_border">
       <div class="p-l-0">
-        <div class="col-12 forum-width">
+        <div class="forum-width">
           <div class="row" *ngIf="selectedModuleData">
             <p (click)="gotoDisplayAllThreads();viewAllThreads()">
               <span class="color-blue f_size_16 f_wt_500"
@@ -196,7 +196,7 @@
       <div *ngFor="let data of discussionData?.topics">
         <mat-card class="black_border m-bt-4 box_shadow pointer" (click)="showDetail(data)" *ngIf="!data.deleted">
           <div class="row">
-            <div class="col-xl-10 col-lg-10 col-md-8 col-sm-12 col-12">
+            <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12">
               <div class="row f_size_18 titlecolor">
                 <h3> {{data?.titleRaw | titlecase}}</h3>
               </div>
@@ -207,11 +207,13 @@
 
               </div>
             </div>
-            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4 bg_color">
-              <div class="row center position_hgt ">{{data?.postcount-1}}</div>
-              <div class="row center position ">
-                <p>{{data?.postcount - 1 >= 2 ? 'Comments' : 'Comment'}}
-                </p>
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-6">
+              <div class="bg_color">
+                <div class="row center position_hgt ">{{data?.postcount-1}}</div>
+                <div class="row center position ">
+                  <p>{{data?.postcount - 1 >= 2 ? 'Comments' : 'Comment'}}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -239,15 +241,15 @@
         <div class="no_padding no_margin thread-header">
           <!-- box-shadow: 0px 2px 5px 0px rgba(230, 230, 230, 0.753); {{selectedThreadData?.user?.username | slice:0:1 | uppercase}}-->
           <div class="row padding_matcard">
-            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding m-auto-tb">
+            <div class="col-xl-1 col-lg-1 col-md-2 col-sm-1 col-3 no_padding m-auto-tb">
               <button class="profileimg"
                 disabled>{{topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]?.user?.username | slice:0:1 | uppercase}}</button>
             </div>
-            <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding m-auto-tb">
+            <div class="col-xl-11 col-lg-11 col-md-10 col-sm-11 col-9 no_padding m-auto-tb">
               <div class="row m-auto-tb">
                 <div class="col-10 no_padding">
                   <strong
-                    class="color-blue float_left">{{topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]?.user?.username | titlecase}}
+                    class="color-blue">{{topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]?.user?.username | titlecase}}
                     &nbsp;
                   </strong> <span>
                     &nbsp; | &nbsp;
@@ -261,7 +263,7 @@
 
         <!-- name row end -->
         <!-- content start -->
-        <div class="row p-lr-30 m-t-20">
+        <div class="row p-lr-15 m-t-20">
           <div class=col-1></div>
           <div class="col-11 thread_title p-l-0">
             <p class="f_size_17 color_black f_wt_400 color_grey">
@@ -275,7 +277,7 @@
         </div>
         <!--content ends  -->
         <mat-card-actions class="no_margin no_padding">
-          <div class="row p-lr-30 m-t-20 m-b-15" *ngIf="topicDiscussionData?.posts && topicDiscussionData?.posts[0]">
+          <div class="row p-lr-15 m-t-20 m-b-15" *ngIf="topicDiscussionData?.posts && topicDiscussionData?.posts[0]">
             <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12 col-12"></div>
             <div class="col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 no_padding">
               &nbsp;

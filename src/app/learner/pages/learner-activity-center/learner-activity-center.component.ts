@@ -126,6 +126,7 @@ export class LearnerActivityCenterComponent implements OnInit {
           hide: this.hideCourseColumn,
           sortable: true,
           filter: true,
+          flex: 2,
           floatingFilterComponentParams: { suppressFilterButton: true },
         },
         {
@@ -133,6 +134,7 @@ export class LearnerActivityCenterComponent implements OnInit {
           field: 'module_name',
           sortable: true,
           filter: true,
+          flex: 2,
           floatingFilterComponentParams: { suppressFilterButton: true },
         },
         {
@@ -140,12 +142,14 @@ export class LearnerActivityCenterComponent implements OnInit {
           field: 'topic_name',
           sortable: true,
           filter: true,
+          flex: 2,
           floatingFilterComponentParams: { suppressFilterButton: true },
         },
         {
           headerName: 'Activity',
           sortable: true,
           filter: true,
+          flex: 1.5,
           floatingFilterComponentParams: { suppressFilterButton: true },
           field: 'activity',
           valueGetter: (params) => params.data?.activity ? params.data.activity : '-',
@@ -154,6 +158,7 @@ export class LearnerActivityCenterComponent implements OnInit {
           headerName: 'Activity description',
           sortable: true,
           filter: true,
+          flex: 2,
           floatingFilterComponentParams: { suppressFilterButton: true },
           field: 'activity_name',
           valueGetter: (params) => params.data?.activity_name ? params.data.activity_name : '-',
@@ -162,6 +167,7 @@ export class LearnerActivityCenterComponent implements OnInit {
           headerName: 'Start date',
           sortable: true,
           filter: true,
+          flex: 2,
           floatingFilterComponentParams: { suppressFilterButton: true },
           field: 'activitystartdate',
           valueGetter: (params) => params.data?.activitystartdate ? params.data.activitystartdate : '-',
@@ -170,15 +176,26 @@ export class LearnerActivityCenterComponent implements OnInit {
           headerName: 'End date',
           sortable: true,
           filter: true,
+          flex: 2,
           floatingFilterComponentParams: { suppressFilterButton: true },
           field: 'activityenddate',
           valueGetter: (params) => params.data?.activityenddate ? params.data.activityenddate : '-',
+        },
+        {
+          headerName: 'Iterations',
+          sortable: true,
+          // filter: true,
+          flex: 1.5,
+          floatingFilterComponentParams: { suppressFilterButton: true },
+          field: 'iterationcount',
+          valueGetter: (params) => params.data?.iterationcount ? params.data.iterationcount : '-',
         },
         {
           headerName: 'Status',
           field: 'status',
           sortable: true,
           filter: true,
+          flex: 2,
           floatingFilterComponentParams: { suppressFilterButton: true },
           cellRenderer: (data) => {
             if (data.value === 'Submitted') {
@@ -198,6 +215,7 @@ export class LearnerActivityCenterComponent implements OnInit {
           field: 'score',
           sortable: true,
           filter: true,
+          flex: 1.25,
           floatingFilterComponentParams: { suppressFilterButton: true },
         },
       ];
@@ -310,10 +328,13 @@ export class LearnerActivityCenterComponent implements OnInit {
         const r = { ['activitynamesortfield']: sortState[0]?.sort === 'asc' ? 1 : -1 };
         this.sortrecord = JSON.stringify(r);
       } else if (sortState[0].colId === 'activitystartdate') {
-        const r = { ['activitystartdate']: sortState[0]?.sort === 'asc' ? 1 : -1 };
+        const r = { ['files.activitystartdate']: sortState[0]?.sort === 'asc' ? 1 : -1 };
         this.sortrecord = JSON.stringify(r);
       } else if (sortState[0].colId === 'activityenddate') {
-        const r = { ['activityenddate']: sortState[0]?.sort === 'asc' ? 1 : -1 };
+        const r = { ['files.activityenddate']: sortState[0]?.sort === 'asc' ? 1 : -1 };
+        this.sortrecord = JSON.stringify(r);
+      } else if (sortState[0].colId === 'iterationcount') {
+        const r = { ['files.iterationcount']: sortState[0]?.sort === 'asc' ? 1 : -1 };
         this.sortrecord = JSON.stringify(r);
       } else {
         const r = { [sortState[0]?.colId]: sortState[0]?.sort === 'asc' ? 1 : -1 };
@@ -359,6 +380,9 @@ export class LearnerActivityCenterComponent implements OnInit {
         } else if (propName === 'activityenddate') {
           searchString = filterModel[keyd].filter;
           filter['files.activityenddate'] = { $regex: searchString.trimEnd(), $options: 'i' };
+        } else if (propName === 'iterationcount') {
+          searchString = filterModel[keyd].filter;
+          filter['files.iterationcount'] = { $regex: searchString.trimEnd(), $options: 'i' };
         } else {
           searchString = filterModel[keyd].filter;
           filter[propName] = { $regex: searchString.trimEnd(), $options: 'i' };
