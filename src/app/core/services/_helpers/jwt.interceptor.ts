@@ -1,5 +1,5 @@
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AdminServicesService } from '../../../admin/services/admin-services.service';
 
@@ -23,6 +23,6 @@ export class JwtInterceptor implements HttpInterceptor {
         // }
 
         return next.handle(request);
-    }    
+    }
 
 }

@@ -1,5 +1,6 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
+// tslint:disable-next-line: variable-name
 export const add_to_wishlist = gql`
 mutation add_to_wishlist($user_id: String, $course_id: String){
     add_to_wishlist(user_id: $user_id, course_id: $course_id) {
@@ -10,6 +11,7 @@ mutation add_to_wishlist($user_id: String, $course_id: String){
     }
   }`;
 
+// tslint:disable-next-line: variable-name
 export const delete_wishlist = gql`
   mutation delete_wishlist($wishlist_id: String){
     delete_wishlist(wishlist_id: $wishlist_id) {
@@ -59,7 +61,7 @@ export const getCourseCategorySearch = gql`
        publishedFromDate:$publishedFromDate
       ) {
         success
-        message    
+        message
         data{
           course_id
           course_description
@@ -154,7 +156,7 @@ export const getCourseCategorySearch = gql`
         courseMode{
         course_mode
         count
-        }    
+        }
   }
   }
 `;

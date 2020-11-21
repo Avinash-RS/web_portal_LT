@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -9,24 +9,23 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class KnowledgePreviewComponent implements OnInit {
 
-  fileType: String;
+  fileType;
   file: any;
   isCancelLoad = false;
   constructor(@Optional() public dialogRef: MatDialogRef<KnowledgePreviewComponent>,
-  @Optional() @Inject(MAT_DIALOG_DATA) public batchdialogdata,
-  private sanitizer: DomSanitizer) { }
+              @Optional() @Inject(MAT_DIALOG_DATA) public batchdialogdata,
+              private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-     setTimeout(() => {
-       this.isCancelLoad = true;
-     }, 500);
-   this.fileType = this.batchdialogdata.fileType;
-   if(this.fileType == 'pdf') {
-    this.batchdialogdata.file = this.batchdialogdata.file+'#toolbar=0'
+    setTimeout(() => {
+      this.isCancelLoad = true;
+    }, 500);
+    this.fileType = this.batchdialogdata.fileType;
+    if (this.fileType === 'pdf') {
+      this.batchdialogdata.file = this.batchdialogdata.file + '#toolbar=0';
+      this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file);
+    } else {
     this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file);
-   }
-   else {
-   this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file);
    }
   }
 

@@ -10,7 +10,6 @@ export const logout = gql`
   }`;
 
 
-  
 export const getAllNotifications = gql`
   query getAllNotifications($userId: String!, $userType: String, $pagenumber:Int!) {
     getAllNotifications(userId: $userId, userType: $userType, pagenumber: $pagenumber) {
@@ -401,6 +400,7 @@ export const viewcourse = gql`
     }
   }`;
 
+// tslint:disable-next-line: variable-name
 export const view_wishlist = gql`
   query view_wishlist($user_id: String, $pagenumber: Int ){
     view_wishlist(user_id: $user_id, pagenumber: $pagenumber) {
@@ -426,6 +426,7 @@ export const view_wishlist = gql`
   }`;
 
 
+// tslint:disable-next-line: variable-name
 export const list_content = gql`
     query list_content{
       list_content {
@@ -439,6 +440,7 @@ export const list_content = gql`
       }
   }`;
 
+// tslint:disable-next-line: variable-name
 export const syllabus_of_particular_scorm = gql`
   query syllabus_of_particular_scorm($contentid: String){
     syllabus_of_particular_scorm(contentid: $contentid) {
@@ -555,6 +557,7 @@ export const getCoursesByName = gql`
       }
   `;
 
+// tslint:disable-next-line: variable-name
 export const get_all_course_by_usergroup = gql`
   query get_all_course_by_usergroup($group_id: String!,$pagenumber: Int!,$sort_type:String!){
     get_all_course_by_usergroup(group_id: $group_id,pagenumber: $pagenumber,sort_type: $sort_type){

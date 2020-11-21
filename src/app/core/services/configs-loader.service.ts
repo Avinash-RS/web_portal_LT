@@ -1,5 +1,5 @@
+import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpBackend } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'

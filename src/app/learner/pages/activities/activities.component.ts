@@ -1,15 +1,14 @@
-import { Component, OnInit, Input, TemplateRef, ViewChild } from '@angular/core';
-import { MatDialog, MatTabGroup } from '@angular/material';
+import { DatePipe } from '@angular/common';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { MatAccordion } from '@angular/material/expansion';
+import { Router } from '@angular/router';
+import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { WcaService } from '@wca/services/wca.service';
-import { CommonServicesService } from "@core/services/common-services.service";
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
-import { DatePipe } from '@angular/common';
-import { appendFile } from 'fs';
 
 
 @Component({
@@ -21,7 +20,7 @@ export class ActivitiesComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
   @ViewChild('videoInput') videoInput;
   @ViewChild('uploadInput') uploadInput;
-  perfornDetaildata: any
+  perfornDetaildata: any;
   performdetailPageView = false;
   hover = false;
   isLoader = false;
@@ -36,7 +35,6 @@ export class ActivitiesComponent implements OnInit {
   courseEndDate: any;
   courseid: any;
   userDetail: any;
-  
   docpath: any = null;
   assFile: File;
   openList = false;
@@ -98,7 +96,6 @@ export class ActivitiesComponent implements OnInit {
     },
     nav: true
   };
-  
   trendingCategorires: any = {
     loop: false, // dont make it true
     mouseDrag: true,
@@ -452,7 +449,7 @@ export class ActivitiesComponent implements OnInit {
         const startDate = this.datePipe.transform(element.performActivity.activitystartdate, 'dd-MM-yyyy');
         const endDate = this.datePipe.transform(element.performActivity.activityenddate, 'dd-MM-yyyy');
         const batchendDate = this.datePipe.transform(element.performActivity.batchenddate, 'dd-MM-yyyy');
-        let crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
+        const crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
         if (startDate <= crrDate && batchendDate >= crrDate) {
           element['itrationStarted'] = true;
         } else {
@@ -464,12 +461,11 @@ export class ActivitiesComponent implements OnInit {
   }
 
   dateDiff(startDate, endDate, currentDate) {
-    let startDateDiff = startDate - currentDate;
-    let endDateDiff = endDate - currentDate;
+    const startDateDiff = startDate - currentDate;
+    const endDateDiff = endDate - currentDate;
     if ((startDateDiff <= 0 ) && (endDateDiff >= 0)) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -570,7 +566,7 @@ export class ActivitiesComponent implements OnInit {
 }
  }
 
-uploadDocuments(e,perform, performans) {
+uploadDocuments(e, perform, performans) {
   this.performsData = performans;
   this.itrationData = perform;
   this.videoInput.nativeElement.click();
@@ -579,8 +575,8 @@ uploadDocuments(e,perform, performans) {
 performlearnerUploadVideo() {
   const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
   const performVideo = new FormData();
-  let startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy');
-  let endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy');
+  const startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy');
+  const endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy');
   if (currentDate >= startDate && currentDate <= endDate) {
     this.submitStatus = 'ontime';
   } else {
@@ -618,14 +614,14 @@ submitDeleteVideo(videoName, itrdata, perform) {
   videoFile.push(videoName);
   const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
   const performVideo = new FormData();
-  let startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy');
-  let endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy');
+  const startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy');
+  const endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy');
   if (currentDate >= startDate && currentDate <= endDate) {
     this.submitStatus = 'ontime';
   } else {
     this.submitStatus = 'late';
   }
-  let data = {
+  const data = {
     course_id: perform.course_id,
     module_id: perform.module_id,
     topic_id: perform.topic_id,
@@ -660,14 +656,14 @@ previewDoc(templateRef: TemplateRef<any>, path) {
 }
 
 openDocument(templateRef: TemplateRef<any>, path, docType) {
- path.path = path.imageurl;
- this.dialog.open(templateRef, {
-  width: '100%',
-  height: '100%',
-  closeOnNavigation: true,
-  disableClose: true,
-});
-this.previewDoc = path;
+  path.path = path.imageurl;
+  this.dialog.open(templateRef, {
+    width: '100%',
+    height: '100%',
+    closeOnNavigation: true,
+    disableClose: true,
+  });
+  this.previewDoc = path;
 }
 
 playVideo(templateRef: TemplateRef<any>, videoDialog, path, docType) {
@@ -703,7 +699,7 @@ mouseover(index) {
 }
 
 performdetailPage(index, performData) {
-  this.perfornDetaildata = {perfornData: performData, index: index}
+  this.perfornDetaildata = {perfornData: performData, index}
 }
 
 }

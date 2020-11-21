@@ -1,12 +1,12 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { Router } from '@angular/router';
-import { GlobalServiceService } from '@core/services/handlers/global-service.service';
-import { ToastrService } from 'ngx-toastr';
-import { FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-discussion-forum',
@@ -66,8 +66,8 @@ export class DiscussionForumComponent implements OnInit {
   loading = false;
 
   constructor(public Lservice: LearnerServicesService, public route: Router, private formBuilder: FormBuilder,
-    private gs: GlobalServiceService, private toastr: ToastrService, private dialog: MatDialog,
-    public cS: CommonServicesService) {
+              private gs: GlobalServiceService, private toastr: ToastrService, private dialog: MatDialog,
+              public cS: CommonServicesService) {
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.course = detail || JSON.parse(atob(localStorage.getItem('course')));
