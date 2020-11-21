@@ -252,10 +252,10 @@ export class CoursedetailsComponent implements OnInit {
           this.topiccurrentPage = result.data.resumeSubContent;
           this.moduleInfo = this.scromModuleData[this.currentPage];
           }
-          if (((result.data.resumeContent - 1) !== -1 ) && ((result.data.resumeSubContent - 1) !== -1)) { 
+          if ((this.currentPage !== 0 ) || (this.topiccurrentPage !== 0)) {
             this.isprevEnable = false;
           }
-          if (((result.data.resumeContent + 1) !== this.scromModuleData.length - 1) && ((result.data.resumeSubContent + 1) !== this.scromModuleData[this.scromModuleData.length - 1].children.length)) {
+          if (((this.currentPage + 1) !== this.scromModuleData.length - 1) && ((this.topiccurrentPage + 1) !== this.scromModuleData[this.scromModuleData.length - 1].children.length)) {
             this.isNextEnable = false;
           }
           // console.log(jsonData[0].childData, 'this.scromModuleData');

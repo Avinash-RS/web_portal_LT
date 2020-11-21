@@ -291,10 +291,10 @@
                             </mat-icon>
         
                             <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'">
-                                <button class=" pointer" mat-button [disabled]="isprevEnable && scromModuleData?.length !== 0"
+                                <button class=" pointer" mat-button [disabled]="isprevEnable || scromModuleData?.length == 0"
                                     (click)="topicPrve()">{{'Prev' | translate }}</button>
                                 <span class="">|</span>
-                                <button class=" pointer" mat-button [disabled]="isNextEnable && scromModuleData?.length !== 0"
+                                <button class=" pointer" mat-button [disabled]="isNextEnable || scromModuleData?.length == 0"
                                     (click)="topicNext()">
                                     {{'Next' | translate }}</button>
                                 <span class="fullScr">
