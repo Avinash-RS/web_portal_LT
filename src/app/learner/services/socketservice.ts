@@ -1,8 +1,8 @@
-import { Output, EventEmitter } from '@angular/core';
+import { EventEmitter, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 // import { Observable } from 'rxjs/internal/Observable';
 import * as io from 'socket.io-client';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
 
 export class SocketioService {
     socket: any;

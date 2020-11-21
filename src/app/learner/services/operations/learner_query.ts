@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const login = gql`
   query login($username: String, $password: String, $is_admin: Boolean) {
@@ -59,6 +59,7 @@ export const getLoginUserDetail = gql`
   }
 `;
 
+// tslint:disable-next-line:variable-name
 export const get_country_details = gql`
   query get_country_details {
     get_country_details {
@@ -78,6 +79,7 @@ export const get_country_details = gql`
     }
   }
 `;
+// tslint:disable-next-line:variable-name
 export const get_course_by_user = gql`
   query get_course_by_user($user_id: String) {
     get_course_by_user(user_id: $user_id) {
@@ -104,6 +106,7 @@ export const get_course_by_user = gql`
   }
 `;
 
+// tslint:disable-next-line:variable-name
 export const get_qualification_details = gql`
   query get_qualification_details {
     get_qualification_details {
@@ -120,6 +123,7 @@ export const get_qualification_details = gql`
   }
 `;
 
+// tslint:disable-next-line:variable-name
 export const get_board_university_details = gql`
   query get_board_university_details($_id: String!) {
     get_board_university_details(_id: $_id) {
@@ -154,6 +158,7 @@ export const get_board_university_details = gql`
     }
   }
 `;
+// tslint:disable-next-line:variable-name
 export const get_discipline_details = gql`
   query get_discipline_details($_id: String!) {
     get_discipline_details(_id: $_id) {
@@ -170,6 +175,7 @@ export const get_discipline_details = gql`
   }
 `;
 
+// tslint:disable-next-line:variable-name
 export const get_specification_details = gql`
   query get_specification_details {
     get_specification_details {
@@ -186,6 +192,7 @@ export const get_specification_details = gql`
   }
 `;
 
+// tslint:disable-next-line:variable-name
 export const get_institute_details = gql`
   query get_institute_details {
     get_institute_details {
@@ -202,6 +209,7 @@ export const get_institute_details = gql`
   }
 `;
 
+// tslint:disable-next-line:variable-name
 export const get_language_details = gql`
   query get_language_details {
     get_language_details {
@@ -217,6 +225,7 @@ export const get_language_details = gql`
   }
 `;
 
+// tslint:disable-next-line:variable-name
 export const get_user_detail = gql`
   query get_user_detail($email: String) {
     get_user_detail(email: $email) {
@@ -233,6 +242,7 @@ export const get_user_detail = gql`
   }
 `;
 
+// tslint:disable-next-line:variable-name
 export const get_user_detail_username = gql`
   query get_user_detail_username($username: String) {
     get_user_detail_username(username: $username) {
@@ -242,6 +252,7 @@ export const get_user_detail_username = gql`
   }
 `;
 
+// tslint:disable-next-line:variable-name
 export const list_content = gql`
   query list_content {
     list_content {
@@ -252,6 +263,7 @@ export const list_content = gql`
   }
 `;
 
+// tslint:disable-next-line:variable-name
 export const syllabus_of_particular_scorm = gql`
   query syllabus_of_particular_scorm(
     $contentid: String
@@ -339,6 +351,7 @@ export const getmoduleData = gql`
     }
   }
 `;
+// tslint:disable-next-line:variable-name
 export const check_existing_user = gql`
   query check_existing_user($username: String) {
     check_existing_user(username: $username) {
@@ -348,6 +361,7 @@ export const check_existing_user = gql`
   }
 `;
 
+// tslint:disable-next-line:variable-name
 export const get_all_category = gql`
   query get_all_category($group_id: [String]!) {
     get_all_category(group_id: $group_id) {
@@ -370,6 +384,7 @@ export const get_all_category = gql`
   }
 `;
 
+// tslint:disable-next-line:variable-name
 export const get_sub_category = gql`
   query get_sub_category($category_id: String!) {
     get_sub_category(category_id: $category_id) {
@@ -419,6 +434,7 @@ export const getsupersubcategory = gql`
   }
 `;
 
+// tslint:disable-next-line:variable-name
 export const get_course_by_subcategory = gql`
   query get_course_by_subcategory(
     $input_id: String!
@@ -605,6 +621,7 @@ export const get_course_by_subcategory = gql`
 //     }
 //     }
 //     }`;
+// tslint:disable-next-line:variable-name
 export const get_module_topic = gql`
   query get_module_topic($course_id: String) {
     get_module_topic(course_id: $course_id) {
@@ -1223,6 +1240,7 @@ export const getLearnerenrolledCourses = gql`
   }
 `;
 
+// tslint:disable-next-line:variable-name
 export const get_trending_course = gql`
   query get_trending_course {
     get_trending_course {
@@ -1244,6 +1262,7 @@ export const get_trending_course = gql`
   }
 `;
 
+// tslint:disable-next-line:variable-name
 export const get_popular_course = gql`
   query get_popular_course {
     get_popular_course {
@@ -1359,6 +1378,7 @@ export const getAssignmentmoduleData = gql`
   }
 `;
 
+// tslint:disable-next-line:variable-name
 export const get_read_learner_activity = gql`
   query get_read_learner_activity($userid: String!, $date: String!) {
     get_read_learner_activity(userid: $userid, date: $date) {
@@ -1653,6 +1673,7 @@ export const getReadLeanerActivity = gql`
   }
 `;
 
+// tslint:disable-next-line:variable-name
 export const get_organization_by_id = gql`
   query get_organization_by_id($organization_id: String) {
     get_organization_by_id(organization_id: $organization_id) {
@@ -1944,6 +1965,7 @@ export const getCourseActivities = gql`
         }
       }
           `;
+// tslint:disable-next-line:variable-name
 export const get_active_course_count = gql`
       query  get_active_course_count($user_id:String! ) {
         get_active_course_count(user_id:$user_id ) {
@@ -1975,30 +1997,27 @@ export const boarddetail = gql`
       query boarddetail($user_id: String, $course_id: String) {
         boarddetail(user_id : $user_id, course_id: $course_id) {
           success
-          data{
-            courseProgression
-            moduleCovered
-            topicCovered
-            totalNumberOfModule
-            totalNumberOfTopic
-            pieData{
-              gradedPercentage
-              overDuePercentage
-              submittedPercentage
-              yetToSubmitPercentage
-              totalNumberOfActivities
-              gradedActivities
-              submittedActivities
-              overDueActivities
-              yetToSubmitActivities
-            }
-            topicData{
-              topicName
-              activityCount
-              activityStartDate
-              activityEndDate
-            }
-          }
+          data
+          {
+              courseProgression
+              moduleCovered
+              topicCovered
+              totalNumberOfModule
+              totalNumberOfTopic
+              totalNumberOfCompletedTopic
+              onGoingTopicCount
+              yetToStartTopic
+              completedTopicPercentage
+              onGoingTopicPercentage
+              yetToStartTopicPercentage
+              topicData{
+                  topicName
+                  duration
+                  topicStatus
+                  startDate
+                  endDate
+                  }
+                  }
         }
       }
 `;

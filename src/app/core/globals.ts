@@ -13,7 +13,7 @@ export const usernameVal: any = [
     Validators.pattern(/^[A-Za-z0-9]*$/)
 ];
 
-//username with spl char
+// username with spl char
 export const usernamesplVal: any = [
     Validators.required,
     Validators.minLength(3),

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
@@ -11,13 +11,16 @@ export class WishlistCoursesComponent implements OnInit {
   onResize(event: { target: { innerWidth: number; }; }) {
     throw new Error('Method not implemented.');
   }
+  // tslint:disable-next-line:member-ordering
   wishlist: any = [];
   @Input('from') from: any;
   @Input('showCartBtn') showCartBtn: boolean;
   @Input('showWishlist') showWishlist: boolean;
   @Input('canNavigate') canNavigate: boolean;
   @Input('showStatus') showStatus: boolean;
+  // tslint:disable-next-line:member-ordering
   breakpoint: number;
+  // tslint:disable-next-line:member-ordering
   pagenumber = 0;
 
   constructor(public service: CommonServicesService, private gs: GlobalServiceService, ) { }
@@ -66,11 +69,8 @@ export class WishlistCoursesComponent implements OnInit {
   nextGetWishList() {
     const userdetail = this.gs.checkLogout();
     this.pagenumber = this.pagenumber + 1;
-    console.log(this.pagenumber);
     this.service.viewWishlist(userdetail._id, this.pagenumber).subscribe((result: any) => {
-      console.log(this.wishlist, result);
       this.wishlist.push(...result?.data?.view_wishlist?.message);
-      console.log(this.wishlist);
       });
     }
     // this.adminservice.getAllCatalogue(this.pagenumber).subscribe((result: any) => {

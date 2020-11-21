@@ -7,8 +7,8 @@ export class MockServiceService {
 
   constructor() { }
   getAllLearnerDashboarddata(type, pagenumber): Observable<any> {
-    let learnerDashboard = require("assets/mockdata/admin/admin_dashboard.json");
-    return of(learnerDashboard)
+    const learnerDashboard = require('assets/mockdata/admin/admin_dashboard.json');
+    return of(learnerDashboard);
 }
   login() {
     return {
