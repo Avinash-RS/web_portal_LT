@@ -29,7 +29,7 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { DatePipe } from '@angular/common';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { SocketioService } from '@learner/services/socketio.service';
-import { NgxUiLoaderModule } from  'ngx-ui-loader';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 // import { ChartsModule } from 'ng2-charts';
 
