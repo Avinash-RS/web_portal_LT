@@ -13,18 +13,31 @@ import Swal from 'sweetalert2';
   styleUrls: ['./course-component.component.scss']
 })
 export class CourseComponentComponent implements OnInit {
+  // tslint:disable-next-line:no-input-rename
   @Input('course') course: any = {};
+  // tslint:disable-next-line:no-input-rename
   @Input('canNavigate') canNavigate: boolean;
+  // tslint:disable-next-line:no-input-rename
   @Input('showCartBtn') showCartBtn: boolean;
+  // tslint:disable-next-line:no-input-rename
   @Input('showWishlist') showWishlist: boolean;
+  // tslint:disable-next-line:no-input-rename
   @Input('showStatus') showStatus: boolean;
+  // tslint:disable-next-line:no-input-rename
   @Input('showPrice') showPrice: boolean;
+  // tslint:disable-next-line:no-input-rename
   @Input('showCount') showCount: boolean;
+  // tslint:disable-next-line:no-input-rename
   @Input('showRating') showRating: boolean;
+  // tslint:disable-next-line:no-input-rename
   @Input('showDate') showDate: boolean;
+  // tslint:disable-next-line:no-input-rename
   @Input('goto') goto: string;
+  // tslint:disable-next-line:no-input-rename
   @Input('isDraft') isDraft: boolean;
+  // tslint:disable-next-line:no-input-rename
   @Input('showEnroll') showEnroll: boolean ;
+  // tslint:disable-next-line:no-input-rename
   @Input('btnType') btnType: string;
 
   userDetail: any;

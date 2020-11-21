@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators'
+import { tap } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({

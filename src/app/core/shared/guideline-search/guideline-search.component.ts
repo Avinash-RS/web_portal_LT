@@ -15,15 +15,24 @@ declare var $: any;
   styleUrls: ['./guideline-search.component.scss']
 })
 export class GuidelineSearchComponent implements OnInit {
+  // tslint:disable-next-line:no-input-rename
   @Input('Lvl1CatId') Lvl1CatId: any = [];
+  // tslint:disable-next-line:no-input-rename
   @Input('Lvl2CatId') Lvl2CatId: any = [];
+  // tslint:disable-next-line:no-input-rename
   @Input('Lvl3CatId') Lvl3CatId: any = [];
+  // tslint:disable-next-line:no-input-rename
   @Input('level1selectedID') level1selectedID: any = [];
+  // tslint:disable-next-line:no-input-rename
   @Input('level2selectedID') level2selectedID: any = [];
+  // tslint:disable-next-line:no-input-rename
   @Input('level3selectedID') level3selectedID: any = [];
+  // tslint:disable-next-line:no-input-rename
   @Input('allLvlCategoryFilterVal') allLvlCategoryFilterVal: any = [];
+  // tslint:disable-next-line:no-input-rename
   @Input('allLvlCategory') allLvlCategory: any = [];
-  @Input('viewallcourse') viewallcourse : Boolean;
+  // tslint:disable-next-line:no-input-rename
+  @Input('viewallcourse') viewallcourse: boolean;
   TodateOptions: {
     dateFormat: string; disableSince: { year: number; month: number; day: number; };
     editableDateField: false };

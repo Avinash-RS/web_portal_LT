@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { VgAPI, VgFullscreenAPI } from 'videogular2/compiled/core';
+import { Component, Input } from '@angular/core';
 import { CommonServicesService } from '@core/services/common-services.service';
+import { VgAPI, VgFullscreenAPI } from 'videogular2/compiled/core';
+// tslint:disable-next-line:class-name
 export interface playback {
   value: string;
   viewValue: string;
@@ -13,7 +14,9 @@ export interface playback {
 })
 
 export class VideoPlayerComponent {
+  // tslint:disable-next-line:no-input-rename
   @Input('url') url: any;
+  // tslint:disable-next-line:ban-types
   sources: Array<Object>;
   controls = false;
   autoplay = false;
@@ -32,6 +35,7 @@ export class VideoPlayerComponent {
   constructor(public service: CommonServicesService) {
   }
 
+  // tslint:disable-next-line:use-life-cycle-interface
   ngOnInit() {
     this.service.pauseVideo.subscribe((data: any) => {
       if (data === 'off') {
