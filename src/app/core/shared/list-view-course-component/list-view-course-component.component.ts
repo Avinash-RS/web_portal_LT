@@ -80,7 +80,6 @@ export class ListViewCourseComponentComponent implements OnInit {
   }
 
   ngOnInit() {
-  
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout();
       if (this.role === 'learner') {

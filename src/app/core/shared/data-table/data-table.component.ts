@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, ViewChild, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
-import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-data-table',
@@ -13,23 +12,23 @@ export class DataTableComponent implements OnInit {
   dataSource;
   selectedArray = [];
   @ViewChild(MatSort) sort: MatSort;
-  
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  // tslint:disable-next-line:use-life-cycle-interface
   ngOnChanges(changes: SimpleChanges) {
     this.dataSource = new MatTableDataSource(this.tableData);
     this.dataSource.sort = this.sort;
   }
 
   checkboxLabel(row?) {
-    if (row.isChecked == undefined) {
+    if (row.isChecked === undefined) {
       row.isChecked = true;
       this.selectedArray.push(row);
-    }
-    else {
+    } else {
       row.isChecked = !row.isChecked;
       this.selectedArray  = this.selectedArray.filter(i => i !== row);
     }

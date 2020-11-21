@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
-import { Router } from '@angular/router';
-import * as _ from 'lodash';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import * as _ from 'lodash';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import Swal from 'sweetalert2';
 
@@ -46,7 +46,7 @@ export class CourseComponentComponent implements OnInit {
     this.service.viewWishlist(this.userDetail._id, 0).subscribe((viewWishlist: any) => {
       if (viewWishlist.data.view_wishlist && viewWishlist.data.view_wishlist.success) {
         // tslint:disable-next-line:only-arrow-functions
-        _.filter(viewWishlist.data.view_wishlist.message, function (o) {
+        _.filter(viewWishlist.data.view_wishlist.message, function(o) {
           if (o.course_id === course.course_id) {
             course.wishlisted = true;
             course.wishlist_id = o._id;
