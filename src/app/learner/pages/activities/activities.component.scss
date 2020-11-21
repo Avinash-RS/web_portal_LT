@@ -964,4 +964,13 @@ border: 1px solid #ccc;
   .footer {
       text-align: center;
   }
+  :host ::ng-deep .mat-tab-label, .mat-tab-label-active {
+    min-width: 110px !important;
+    padding: 3px !important;
+    margin: 0px !important;
+}
+
+:host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination { 
+  display: none !important;
+}
 }

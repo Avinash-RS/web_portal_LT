@@ -200,7 +200,7 @@ export class PerformancePageMobileComponent implements OnInit {
         const filterData = this.performDetails.filter((performData: any) => {
           return performData.performActivity.perform_id === this.performActivityData.perform_id;
         });
-        this.performActivityData.push(filterData);
+        this.performActivityData = filterData[0];
       } else {
         this.performDetails = [];
       }
