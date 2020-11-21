@@ -62,26 +62,6 @@
         border-left: 3px solid #ffc107bf !important;
         color: #1F1A17 !important;
     }
-    .Upcomingstatus {
-        background: #b3b2b2;
-        padding: 2px 6px;
-        float: right;
-        border-radius: 4px;
-        font-size: 13px;
-        color: $color-white;
-        margin-top: 5px;
-    }
-    .Completedstatus {
-        // background: #b5acac;
-        background: green;
-        padding: 2px 6px;
-        float: right;
-        border-radius: 4px;
-        font-size: 13px;
-        color: $color-white ;
-        margin-top: 5px;
-        margin-right: 11px;
-    }
     .color-white {
         color: #b5acac;
         background: $color-white !important;
@@ -89,13 +69,41 @@
     }
     .status {
         background: #ffc107bf;
-        padding: 2px 6px;
-        float: right;
+        padding: 2px 6px 3px 6px;
         border-radius: 4px;
         font-size: 13px;
         color: $color-white;
-        margin-top: 5px;
-        margin-left: 0px;
+        display: inline-block;
+        line-height: normal;
+    }
+    .Upcomingstatus {
+        background: #b3b2b2;
+        padding: 2px 6px 3px 6px;
+        border-radius: 4px;
+        font-size: 13px;
+        color: $color-white;
+        display: inline-block;
+        line-height: normal;
+    }
+    .Completedstatus {
+        // background: #b5acac;
+        background: green;
+        padding: 2px 6px 3px 6px;
+        border-radius: 4px;
+        font-size: 13px;
+        color: $color-white ;
+        display: inline-block;
+        line-height: normal;
+    }
+    .expandLine {
+        margin: 10px 0 0 0 !important;
+    }
+    .topicSection {
+        width: 100%;
+    }
+    .activityButton {
+        text-align: right;
+        width: 100%;
     }
     .blue_clr {
         background-color: $lxp-theme-green;
@@ -123,18 +131,20 @@
         border: 1px solid $lxp-theme-green !important;
         border-radius: 5px;
         position: relative;
-        float: right;
+        // float: right;
         // margin-top: -5px;
+        display: inline-block;
         background: $color-white ;
         color: #9E9E9E;
         border: 1px solid currentColor;
         padding: 0px 7px;
         line-height: 22px;
-        margin-top: 20px;
-        margin-right: 32px;
+        margin-top: 10px;
+        margin-bottom: 0 !important;
+        // margin-right: 32px;
     }
     .m-l-4 {
-        margin-left: 4%;
+        // margin-left: 4%;
     }
     hr {
         margin-bottom: 0.5rem;
@@ -144,18 +154,19 @@
     }
     .coursenameT {
         // border-left: 5px solid #f3cc58;
-        padding-left: 10px;
-        margin-bottom: 2px;
-        border-radius: 3px;
+        border-radius: 0;
         font-weight: 600;
-        height: 40px;
-        padding-top: 9px;
+        // height: 40px;
+        padding: 10px 0 10px 10px;
         font-size: 18px;
         white-space: nowrap; 
         width: 200px; 
         overflow: hidden;
         text-overflow: ellipsis;
-        margin-bottom: 5px !important;
+        margin-bottom: 0 !important;
+    }
+    .courseModule {
+        margin: 10px 0 0 0 !important;
     }
     .course-section{
         width: 50% !important;
@@ -164,16 +175,16 @@
         overflow: hidden !important;
         text-overflow: ellipsis !important;
     }
-    .img-show{
-        float: right; 
-        // width: 20%;
-        margin-left: 22%;
+    .img-show {
+        // float: right; 
+        // // width: 20%;
+        // margin-left: 22%;
         }
-    .activity_type{
+    .activity_type {
         color: black;
         display: inline-block;
         font-family: Roboto Condensed !important;
-        width: 24%;
+        // width: 24%;
         margin-right: 0px;
     }
     .topic-section{
@@ -184,7 +195,7 @@
         text-overflow: ellipsis !important;
     }
     .created-section{
-        width: 28%;
+        // width: 28%;
         color: black !important;
         display: inline-block;
         font-family: Roboto Condensed !important;
@@ -200,7 +211,7 @@
         font-size: 18px;
     }
     .aligned-icon {
-        position: absolute;
+        // position: absolute;
         color: #9E9E9E;
         margin-left: 32px;
     }
@@ -220,11 +231,20 @@
         height: auto;
         margin-bottom: 0%;
         background: transparent !important;
+        padding: 16px 16px 0 16px;
        // border-left: 10px solid #ffc107bf !important;
     }
     .session-sub-card {
         width: 100%;
         border-bottom: 1px solid #dedede;
+        padding-bottom: 10px;
+    }
+    .activitiesCard {
+        .mat-icon {
+            width: auto;
+            height: auto;
+            vertical-align: middle;
+        }
     }
     .f_size_12 {
         font-size: 12px;
@@ -247,7 +267,8 @@
 
 
 .scroll-bar{
-    width: 450px;
+    // width: 450px;
+    width: 100%;
     height: 550px;
     // overflow-y: hidden;
   }
