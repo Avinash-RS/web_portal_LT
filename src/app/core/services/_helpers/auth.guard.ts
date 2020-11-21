@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {
-  Router,
-  CanActivate,
-  ActivatedRouteSnapshot,
+  ActivatedRouteSnapshot, CanActivate, Router,
+
+
   RouterStateSnapshot
 } from '@angular/router';
-import { AlertServiceService } from '../handlers/alert-service.service';
 import { ToastrService } from 'ngx-toastr';
+import { AlertServiceService } from '../handlers/alert-service.service';
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
   constructor(
@@ -19,7 +19,6 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails')) || null;
     // const role = localStorage.getItem('role') || sessionStorage.getItem('role') || null;
-    // console.log('role-----',role)
     // for learner ------> 1
     // debugger
     const adminUrl = state.url.includes('Admin');
@@ -36,7 +35,7 @@ export class AuthGuard implements CanActivate {
         return false;
       } else if (!userDetailes.is_profile_updated) {
         // if profile not updated and trying to access other screens, redirect to profile 
-        //Iggnite Changes done by Afser on Profile update not Mandtory
+        // Iggnite Changes done by Afser on Profile update not Mandtory
         // if (state.url !== '/Learner/profile') {
         //   this.router.navigate(['/Learner/profile']);
         //   this.toastr.warning('Your profile is incomplete !', 'Please provide data for all mandatory fields', { closeButton: true });
@@ -61,7 +60,6 @@ export class AuthGuard implements CanActivate {
         return false;
       }
     } else {
-      // console.log('role--33334444---',role)
       this.router.navigate(['/Learner']);
       return false;
     }

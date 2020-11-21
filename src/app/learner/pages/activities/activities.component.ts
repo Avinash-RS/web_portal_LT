@@ -566,7 +566,7 @@ export class ActivitiesComponent implements OnInit {
 }
  }
 
-uploadDocuments(e,perform, performans) {
+uploadDocuments(e, perform, performans) {
   this.performsData = performans;
   this.itrationData = perform;
   this.videoInput.nativeElement.click();
