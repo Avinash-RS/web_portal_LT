@@ -99,7 +99,8 @@
     }
 
     .bg_color {
-        margin-left: 18px !important;
+        // margin-left: 18px !important;
+        margin-left: 0 !important;
     }
 
     .courseTime {
@@ -367,6 +368,20 @@
     transition: none !important;
     box-shadow: none !important;
     border-radius: 0 !important;
+    &.pointer {
+        padding: 16px 0;
+        .bg_color {
+            p {
+                margin-bottom: 0 !important;
+                padding-bottom: 15px;
+            }
+        }
+    }
+}
+.comment_card {
+    .padding_matcard {
+        padding: 5px 15px !important;
+    }
 }
 
 .send_pos {

@@ -1959,6 +1959,7 @@ export const getCourseActivities = gql`
             score
             activitystartdate
             activityenddate
+            iterationcount
           }
           total_count
         }
