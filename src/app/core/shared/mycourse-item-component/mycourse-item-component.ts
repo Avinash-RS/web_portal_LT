@@ -11,6 +11,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
   templateUrl: './mycourse-item-component.html',
   styleUrls: ['./mycourse-item-component.scss']
 })
+
 export class MycourseItemComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
   @Input('courseItems') course: any = {};
@@ -48,6 +49,7 @@ export class MycourseItemComponent implements OnInit {
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails')) || null;
     this.role = localStorage.getItem('role') || null;
   }
+
 
   ngOnInit() {
     this.courseWeekCircle = (this.course.week_completed_count !== null ?

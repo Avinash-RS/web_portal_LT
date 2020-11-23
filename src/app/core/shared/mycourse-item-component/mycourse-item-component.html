@@ -188,197 +188,194 @@
           </div>
         </div>
         <!-- //4quadrant Self-Paced Learning// left lines //remove discussion link -->
-        <div class="col-12 col-sm-12 col-md-12 col-lg-3 p-x-7px">
-          <div class="row m-b-15px">
-            <div class="col">
-              <div matRipple class="card-hover cardHeights grey_border1 ">
-                <div class="row">
-                  <div class="col ">
-          
-                    <div class="circle_outline pull-left  m-r-15px m-b-10px">
-                      <span class="lxp-gauge lxp-theme-red title_img f_size_23"></span>
-                     </div>
-                    <p class="f_size_16 f_wt_500 color_black titleAlign"> Self-Paced Learning</p>
-                  </div>
-                </div>
-                <div class="height_match">
-                  <div class="row color_g f_size_13">
-                    <div class="col">
-                      <span>Keep learning and revising the topics to hone your skills.</span>
+
+
+        <!-- //// -->
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 p-x-7px d-flex justify-content-between flex-wrap">
+          <div class="m-b-15px myCourseCards">
+            <div matRipple class="card-hover cardHeights grey_border1 ">
+              <div class="row">
+                <div class="col ">
+        
+                  <div class="circle_outline pull-left  m-r-15px m-b-10px">
+                    <span class="lxp-gauge lxp-theme-red title_img f_size_23"></span>
                     </div>
-                  </div>
-                  <div class="row lxp_gray123">
-                    <div class="col-7"><span class="f_size_13">
-                        Progression
-                      </span></div>
-                  </div>
-                  <div class="row">
-                    <div class="col-10 justify-content-center align-self-center">
-                      <mat-progress-bar class="example-margin" [mode]="'determinate'"
-                        [value]="course.self_paced_learning_progression!==''?course.self_paced_learning_progression:0">
-                      </mat-progress-bar>
-                    </div>
-                    <div class="col-2 c_per">
-                      {{(course.self_paced_learning_progression!==''?(course.self_paced_learning_progression>100?100:course.self_paced_learning_progression):0)| number:'1.0-0'}}%
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-5 col-sm-5 col-md-5 col-lg-7">
-                    <div class=" m-t-10px">
-                      <span class="pointer seemoreHove"
-                        (click)="course.progressionExp?course.progressionExp=false:course.progressionExp=true">
-                        <span class="f_size_10 ">{{course.progressionExp?'Hide details...':'See more details...' }}</span>
-                      </span>
-                      <div *ngIf="course.progressionExp" class="f_size_12">
-                        Modules completed {{(course.completed_module_count!=null?course.completed_module_count:0) +'/'+ (course.total_module_count!=null?course.total_module_count:0)}}<br>
-                        Topics completed {{(course.completed_topic_count!=null?course.completed_topic_count:0) +'/'+ (course.total_topic_count!=null?course.total_topic_count:0)}}<br>
-                        <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;"
-                        (click)="goToSelflearning(course)">View self-learning
-                          activity details..</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-6 col-sm-6 col-md-6 col-lg-5">
-                    <button mat-stroked-button *ngIf="
-                                                        course?.course_status !== 'completed'
-                                                      " class="btl-alin btn-txt-center
-                                                      bg_lxp_red color_white cap pointer " (click)="gotoDesc(course)">
-                      <!-- <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon> -->
-                      <i class="fa fa-play-circle mycourse-btn-img" aria-hidden="true"></i>
-                      <span class="cap f_wt_400 m-t-m-2">
-                        {{
-                                                          course?.course_status ===
-                                                          "incomplete"
-                                                            ? "Resume"
-                                                            : course?.course_status ===
-                                                              "suspend"
-                                                            ? "Resume"
-                                                            : ("Start" | translate)
-                                                        }}&nbsp;
-                      </span>
-                    </button>
-                    <button mat-stroked-button (click)="gotoDesc(course)" *ngIf="
-                                                        course?.course_status === 'completed' 
-                                                      " class="btl-alin btn-txt-center
-                                                      bg_lxp_red color_white cap pointer m-t-05 ">
-                      <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
-                      <span class="cap f_wt_400 m-t-m-2">
-                        {{ "Replay" | translate }}&nbsp;
-                      </span>
-                    </button>
-                  </div>
+                  <p class="f_size_16 f_wt_500 color_black titleAlign"> Self-Paced Learning</p>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="row" *ngIf="course.isBatchCourse">
-            <div class="col">
-              <div matRipple class="card-hover cardHeights grey_border1" (mouseover)="discussDefault ='../../../../assets/learner/mycourseicons/Discussion_hover.svg'" (mouseout)="discussDefault='../../../../assets/learner/mycourseicons/Discussion_default.svg'">
-                <div class="row">
-                  <div class="col ">
-                    <div class="circle_outline pull-left  m-r-15px m-b-10px">
-                      <span class="lxp-stack lxp-theme-red title_img f_size_23"></span>
-                      </div>
-                    <p class="f_size_16 f_wt_500 color_black titleAlign"> Discussion Forum</p>
-                  </div>
-                </div>
+              <div class="height_match">
                 <div class="row color_g f_size_13">
-                  <div class="col-5 ">
-                    <img alt="" [src]="discussDefault"
-                     width="100px" height="80px">
-                  </div>
-                  <div class="col p-l-0px">
-                    <p>Interact with peers by posting thoughts and comments on given topic.</p>
+                  <div class="col">
+                    <span>Keep learning and revising the topics to hone your skills.</span>
                   </div>
                 </div>
+                <div class="row lxp_gray123">
+                  <div class="col-7"><span class="f_size_13">
+                      Progression
+                    </span></div>
+                </div>
                 <div class="row">
-                  <div class="col-5 col-sm-5 col-md-5 col-lg-7">
-                    <div class="m-t-10px">
-                      <span class="pointer seemoreHove" (click)="course.discussExp?course.discussExp=false:course.discussExp=true">
-                        <span class="f_size_10">{{course.discussExp?'Hide details...':'See more details...' }}</span>
-                      </span>
-                      <div *ngIf="course.discussExp" class="f_size_13">
-                        Threads {{course.thread_count!==null?course.thread_count:'N/A'}}<br>
-                        Comments {{course.comment_count!==null?course.comment_count:'N/A'}}<br>
-                        Replies {{course.reply_count!==null?course.reply_count:'N/A'}}<br>
-                        <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;"
-                          (click)="goToForum(course)">View discussions..</span>
-                      </div>
+                  <div class="col-10 justify-content-center align-self-center">
+                    <mat-progress-bar class="example-margin" [mode]="'determinate'"
+                      [value]="course.self_paced_learning_progression!==''?course.self_paced_learning_progression:0">
+                    </mat-progress-bar>
+                  </div>
+                  <div class="col-2 c_per">
+                    {{(course.self_paced_learning_progression!==''?(course.self_paced_learning_progression>100?100:course.self_paced_learning_progression):0)| number:'1.0-0'}}%
+                  </div>
+                </div>
+              </div>
+
+              <div class="moreDetails d-flex justify-content-between align-items-center">
+                <div class="seeMoreDetails">
+                  <div class="">
+                    <span class="pointer seemoreHove"
+                      (click)="course.progressionExp?course.progressionExp=false:course.progressionExp=true">
+                      <span class="f_size_10 ">{{course.progressionExp?'Hide details...':'See more details...' }}</span>
+                    </span>
+                    <div *ngIf="course.progressionExp" class="f_size_12">
+                      Modules completed {{(course.completed_module_count!=null?course.completed_module_count:0) +'/'+ (course.total_module_count!=null?course.total_module_count:0)}}<br>
+                      Topics completed {{(course.completed_topic_count!=null?course.completed_topic_count:0) +'/'+ (course.total_topic_count!=null?course.total_topic_count:0)}}<br>
+                      <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline; display: none;">View self-learning
+                        activity details..</span>
                     </div>
                   </div>
-                  <div class="col-6 col-sm-6 col-md-6 col-lg-5">
-                    <button mat-stroked-button *ngIf="userDetail.is_forum_config" class="btl-alin blue_clr btn-txt-center
-                              cap pointer  p-7-lr" (click)="goToForum(course)">
-                      <!-- <img class="mycourse-btn-img" alt="" src="../../../../assets/learner/mycourseicons/collaborate.svg"
-                                width="16px" height="12.5px"> -->
-                      <i class="fa fa-handshake-o mycourse-btn-img" aria-hidden="true"></i>
-                      <span class="cap f_wt_400 m-t-m-2 span-ellip">
-                        {{ "Collaborate" | translate }}
-                      </span>
-                    </button>
-          
-                  </div>
+                </div>
+                <div class="cardButton">
+                  <button mat-stroked-button *ngIf="course?.course_status !== 'completed'" class="btl-alin btn-txt-center bg_lxp_red color_white cap pointer " (click)="gotoDesc(course)">
+                    <!-- <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon> -->
+                    <i class="fa fa-play-circle mycourse-btn-img" aria-hidden="true"></i>
+                    <span class="cap f_wt_400 m-t-m-2">
+                      {{
+                                                        course?.course_status ===
+                                                        "incomplete"
+                                                          ? "Resume"
+                                                          : course?.course_status ===
+                                                            "suspend"
+                                                          ? "Resume"
+                                                          : ("Start" | translate)
+                                                      }}&nbsp;
+                    </span>
+                  </button>
+                  <button mat-stroked-button (click)="gotoDesc(course)" *ngIf="
+                                                      course?.course_status === 'completed' 
+                                                    " class="btl-alin btn-txt-center
+                                                    bg_lxp_red color_white cap pointer m-t-05 ">
+                    <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
+                    <span class="cap f_wt_400 m-t-m-2">
+                      {{ "Replay" | translate }}&nbsp;
+                    </span>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-12 col-sm-12 col-md-12 col-lg-3 p-x-7px">
-          <div class="row m-b-15px" *ngIf="course.isBatchCourse">
-            <div class="col ">
-              <div matRipple class="card-hover cardHeights grey_border1" (mouseover)="instDefault ='../../../../assets/learner/mycourseicons/Instructor_hover.svg'" (mouseout)="instDefault='../../../../assets/learner/mycourseicons/Instructor_default.svg'">
-                <div class="row">
-                  <div class="col ">
-                    <div class="circle_outline pull-left  m-r-15px m-b-10px">
-                      <span class="lxp-monitor lxp-theme-red title_img f_size_23"></span>
+
+          <!-- Second -->
+          <div class="m-b-15px myCourseCards" *ngIf="course.isBatchCourse">
+            <div matRipple class="card-hover cardHeights grey_border1" (mouseover)="instDefault ='../../../../assets/learner/mycourseicons/Instructor_hover.svg'" (mouseout)="instDefault='../../../../assets/learner/mycourseicons/Instructor_default.svg'">
+              <div class="row">
+                <div class="col ">
+                  <div class="circle_outline pull-left  m-r-15px m-b-10px">
+                    <span class="lxp-monitor lxp-theme-red title_img f_size_23"></span>
+                  </div>
+                  <p class="f_size_16 f_wt_500 color_black titleAlign"> Instructor Led</p>
+                </div>
+              </div>
+              <div class="row color_g f_size_13">
+                <div class="col-5 ">
+                  <img alt="" class="inst_hover" [src]="instDefault" width="100px" height="80px">
+                </div>
+                <div class="col p-l-0px">
+                  <p>Interact with your faculty, ask questions and learn from your classmates.</p>
+                </div>
+              </div>
+
+              <div class="moreDetails d-flex justify-content-between align-items-center">
+                <div class="seeMoreDetails">
+                  <div class="">
+                    <span class="pointer seemoreHove" (click)="course.ledinstExp?course.ledinstExp=false:course.ledinstExp=true">
+                      <span class="f_size_10">{{course.ledinstExp?'Hide details...':'See more details...' }}</span>
+                    </span>
+                    <div *ngIf="course.ledinstExp" class="f_size_13">
+                      Sessions attended
+                      {{course.instructor_lead_session_completed_count+'/'+course.instructor_lead_session_total_count}}<br>
+                      <span class="pointer f_size_10" style="color:#C02222; text-decoration: underline;"
+                        (click)="goInstructorLed(course)">View sessions details..</span>
                     </div>
-                    <p class="f_size_16 f_wt_500 color_black titleAlign"> Instructor Led</p>
                   </div>
                 </div>
-                <div class="row color_g f_size_13">
-                  <div class="col-5 ">
-                    <img alt="" class="inst_hover" [src]="instDefault" width="100px" height="80px">
-                  </div>
-                  <div class="col p-l-0px">
-                    <p>Interact with your faculty, ask questions and learn from your classmates.</p>
-                  </div>
-                </div>
-                <div class="row ">
-                  <div class="col-5 col-sm-5 col-md-5 col-lg-7">
-                    <div class="m-t-10px">
-                      <span class="pointer seemoreHove" (click)="course.ledinstExp?course.ledinstExp=false:course.ledinstExp=true">
-                        <span class="f_size_10">{{course.ledinstExp?'Hide details...':'See more details...' }}</span>
-                      </span>
-                      <div *ngIf="course.ledinstExp" class="f_size_13">
-                        Sessions attended
-                        {{course.instructor_lead_session_completed_count+'/'+course.instructor_lead_session_total_count}}<br>
-                        <span class="pointer f_size_10" style="color:#C02222; text-decoration: underline;"
-                          (click)="goInstructorLed(course)">View sessions details..</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-6 col-sm-6 col-md-6 col-lg-5">
-                    <button mat-stroked-button class="btl-alin btn-txt-center m_3_px_top
-                            blue_clr cap pointer" (click)="goInstructorLed(course)">
-                      <!-- <img class="mycourse-btn-img" alt="" src="../../../../assets/learner/mycourseicons/joinmain.svg"
-                                width="16px" height="12.5px"> -->
-          
-          
-                      <span class="cap f_wt_400 m-t-m-2NEW">
-                        <i class="fa fa-hand-o-up mycourse-btn-img" aria-hidden="true"></i>
-                        {{ "Join" | translate }}
-                      </span>
-                    </button>
-          
-                  </div>
+                <div class="cardButton">
+                  <button mat-stroked-button class="btl-alin btn-txt-center m_3_px_top
+                          blue_clr cap pointer" (click)="goInstructorLed(course)">
+                    <!-- <img class="mycourse-btn-img" alt="" src="../../../../assets/learner/mycourseicons/joinmain.svg"
+                              width="16px" height="12.5px"> -->
+        
+        
+                    <span class="cap f_wt_400 m-t-m-2NEW">
+                      <i class="fa fa-hand-o-up mycourse-btn-img" aria-hidden="true"></i>
+                      {{ "Join" | translate }}
+                    </span>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row" *ngIf="course.isBatchCourse">
-            <div class="col">
-              <div matRipple class="card-hover cardHeights grey_border1" (mouseover)="activityDefault ='../../../../assets/learner/mycourseicons/Activities_hover.svg'" (mouseout)="activityDefault='../../../../assets/learner/mycourseicons/Activities_defult.svg'">
+
+          <!-- Third -->
+          <div class="m-b-15px myCourseCards" *ngIf="course.isBatchCourse">
+            <div matRipple class="card-hover cardHeights grey_border1" (mouseover)="discussDefault ='../../../../assets/learner/mycourseicons/Discussion_hover.svg'" (mouseout)="discussDefault='../../../../assets/learner/mycourseicons/Discussion_default.svg'">
+              <div class="row">
+                <div class="col ">
+                  <div class="circle_outline pull-left  m-r-15px m-b-10px">
+                    <span class="lxp-stack lxp-theme-red title_img f_size_23"></span>
+                    </div>
+                  <p class="f_size_16 f_wt_500 color_black titleAlign"> Discussion Forum</p>
+                </div>
+              </div>
+              <div class="row color_g f_size_13">
+                <div class="col-5 ">
+                  <img alt="" [src]="discussDefault"
+                    width="100px" height="80px">
+                </div>
+                <div class="col p-l-0px">
+                  <p>Interact with peers by posting thoughts and comments on given topic.</p>
+                </div>
+              </div>
+
+              <div class="moreDetails d-flex justify-content-between align-items-center">
+                <div class="seeMoreDetails">
+                  <div class="">
+                    <span class="pointer seemoreHove" (click)="course.discussExp?course.discussExp=false:course.discussExp=true">
+                      <span class="f_size_10">{{course.discussExp?'Hide details...':'See more details...' }}</span>
+                    </span>
+                    <div *ngIf="course.discussExp" class="f_size_13">
+                      Threads {{course.thread_count!==null?course.thread_count:'N/A'}}<br>
+                      Comments {{course.comment_count!==null?course.comment_count:'N/A'}}<br>
+                      Replies {{course.reply_count!==null?course.reply_count:'N/A'}}<br>
+                      <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;"
+                        (click)="goToForum(course)">View discussions..</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="cardButton">
+                  <button mat-stroked-button *ngIf="userDetail.is_forum_config" class="btl-alin blue_clr btn-txt-center
+                            cap pointer  p-7-lr" (click)="goToForum(course)">
+                    <!-- <img class="mycourse-btn-img" alt="" src="../../../../assets/learner/mycourseicons/collaborate.svg"
+                              width="16px" height="12.5px"> -->
+                    <i class="fa fa-handshake-o mycourse-btn-img" aria-hidden="true"></i>
+                    <span class="cap f_wt_400 m-t-m-2 span-ellip">
+                      {{ "Collaborate" | translate }}
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fourth -->
+          <div class="m-b-15px myCourseCards" *ngIf="course.isBatchCourse">
+            <div matRipple class="card-hover cardHeights grey_border1" (mouseover)="activityDefault ='../../../../assets/learner/mycourseicons/Activities_hover.svg'" (mouseout)="activityDefault='../../../../assets/learner/mycourseicons/Activities_defult.svg'">
               <div class="row">
                 <div class="col ">
                   <div class="circle_outline pull-left  m-r-15px m-b-10px">
@@ -397,9 +394,9 @@
                 </div>
               </div>
               <!-- <div class="row pseudoheight"></div> -->
-              <div class="row">
-                <div class="col-5 col-sm-5 col-md-5 col-lg-7">
-                  <div class="m-t-10px">
+              <div class="moreDetails d-flex justify-content-between align-items-center">
+                <div class="seeMoreDetails">
+                  <div class="">
                     <span class="pointer seemoreHove" (click)="course.activityExp?course.activityExp=false:course.activityExp=true">
                       <span class="f_size_10">{{course.activityExp?'Hide details...':'See more details...' }}</span>
                     </span>
@@ -416,7 +413,7 @@
                     </div>
                   </div> -->
                 </div>
-                <div class="col-6 col-sm-6 col-md-6 col-lg-5">
+                <div class="cardButton">
                   <button mat-stroked-button class="btl-alin blue_clr cap pointer btn-txt-center "
                     (click)="Go(course)">
                     <!-- <img class="mycourse-btn-img" alt="" src="../../../../assets/learner/mycourseicons/go.svg"
@@ -426,13 +423,12 @@
                       {{ "Go" | translate }}
                     </span>
                   </button>
-
                 </div>
               </div>
             </div>
-            </div>
           </div>
         </div>
+        <!-- <div class="col-12 col-sm-12 col-md-12 col-lg-3 p-x-7px"></div> -->
       </div>
     </div>
   </div>
