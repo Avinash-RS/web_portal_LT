@@ -1,11 +1,11 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { GlobalServiceService } from '@core/services/handlers/global-service.service';
-import { Router } from '@angular/router';
-import * as moment from 'moment';
-import { WcaService } from '@wca/services/wca.service';
-import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { WcaService } from '@wca/services/wca.service';
+import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-assignment',
@@ -26,7 +26,7 @@ export class AssignmentComponent implements OnInit {
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               public route: Router, public wcaservice: WcaService,
-              private toastr: ToastrService, private dialog: MatDialog) { 
+              private toastr: ToastrService, private dialog: MatDialog) {
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
     this.checkDetails = detail;
@@ -169,7 +169,6 @@ export class AssignmentComponent implements OnInit {
   }
 
   previewDoc(templateRef: TemplateRef<any>, path) {
-    console.log('path', path);
     this.dialog.open(templateRef, {
       width: '100%',
       height: '100%',

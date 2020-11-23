@@ -1,4 +1,4 @@
-import { Component, OnInit,HostListener } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { GlobalServiceService } from '././core/services/handlers/global-service.service';
@@ -19,10 +19,11 @@ import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
   animations: [ slideInAnimation ]
 })
 export class AppComponent implements OnInit {
-   //FOR DRM(Restriction for right click)
+   // FOR DRM(Restriction for right click)
    @HostListener('document:keydown', ['$event'])
    handleKeyboardEvent(event: KeyboardEvent) {
-     if( (event.which === 67 && event.ctrlKey && event.shiftKey) || (event.which == 123) || (event.which === 73 && event.ctrlKey && event.shiftKey) ){
+     if ( (event.which === 67 && event.ctrlKey && event.shiftKey) || (event.which === 123) ||
+      (event.which === 73 && event.ctrlKey && event.shiftKey) ) {
        event.returnValue = false;
        event.preventDefault();
      }
@@ -62,10 +63,9 @@ export class AppComponent implements OnInit {
     // console.warn = function(){}
     this.loaderSubscription = this.commonService.loader.subscribe((val) => {
       this.isLoader = val;
-      if(this.isLoader) {
+      if (this.isLoader) {
         this.ngxService.start();
-      }
-      else {
+      } else {
         setTimeout(() => {
         this.ngxService.stop();
         }, 500);
@@ -117,6 +117,7 @@ export class AppComponent implements OnInit {
     // });
   }
 
+  // tslint:disable-next-line:use-life-cycle-interface
   ngOnDestroy(): void {
     this.loaderSubscription.unsubscribe();
   }

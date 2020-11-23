@@ -1,13 +1,12 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { MatAccordion } from '@angular/material/expansion';
-import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-mobile',
@@ -36,7 +35,7 @@ export class ProjectMobileComponent implements OnInit {
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
-              public route: Router,  private commonServices: CommonServicesService,) {
+              public route: Router,  private commonServices: CommonServicesService) {
                 const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
                 this.checkDetails = detail;
@@ -66,7 +65,6 @@ export class ProjectMobileComponent implements OnInit {
   }
 
   uploadDoc(event, project, submitAction) {
-    console.log('working');
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < event.target.files.length; i++) {
       this.selectfile.push(event.target.files[i]);
@@ -74,7 +72,6 @@ export class ProjectMobileComponent implements OnInit {
     this.learnerUploadVideo(project, submitAction);
   }
   uploadDocs() {
-    console.log('111111111111111');
     this.uploadFile.nativeElement.click();
   }
 
@@ -84,7 +81,6 @@ export class ProjectMobileComponent implements OnInit {
       this.projectDetails = data.data.getprojectActivityData.data;
       this.projectDetails.forEach(element => {
         this.groupDetails = element.projectActivity.groupDetails;
-        // console.log('group', element);
         element.showLearnerList = false;
         // element.isCollapsed = false;
         // Batch date

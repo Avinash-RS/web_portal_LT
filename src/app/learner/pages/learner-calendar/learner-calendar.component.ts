@@ -1,12 +1,12 @@
 // import { Component, OnInit } from '@angular/core';
-import { Component, OnInit,ChangeDetectionStrategy,ViewChild,TemplateRef} from '@angular/core';
-import { startOfDay,endOfDay,subDays,addDays,endOfMonth,isSameDay,isSameMonth,addHours} from 'date-fns';
-import { Subject } from 'rxjs';
-import { LearnerServicesService } from '../../services/learner-services.service';
-import * as moment from 'moment';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import {CalendarEvent, CalendarEventAction,CalendarEventTimesChangedEvent,CalendarView} from 'angular-calendar';
+import { CalendarEvent, CalendarView } from 'angular-calendar';
+import { isSameDay, isSameMonth } from 'date-fns';
+import * as moment from 'moment';
+import { Subject } from 'rxjs';
+import { LearnerServicesService } from '../../services/learner-services.service';
 
 
 @Component({
@@ -15,7 +15,7 @@ import {CalendarEvent, CalendarEventAction,CalendarEventTimesChangedEvent,Calend
   styleUrls: ['./learner-calendar.component.scss']
 })
 export class LearnerCalendarComponent implements OnInit {
-  start1 = new Date("2020-08-07T11:24:14.761Z")
+  start1 = new Date('2020-08-07T11:24:14.761Z');
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
   viewDate: Date = new Date();
@@ -27,7 +27,7 @@ export class LearnerCalendarComponent implements OnInit {
   public UserDetails: any;
   public tokenDetails: any;
   public tokenid: any;
-  public user_id: any;
+  public userId: any;
   public selectedDate: any;
   public learnerActivityList = [];
   public setColor: any;
@@ -48,7 +48,7 @@ export class LearnerCalendarComponent implements OnInit {
   showUpcoming: any;
   currentStartTime: any;
   currentEndTime: any;
-  activeDayIsOpen: boolean = false;
+  activeDayIsOpen = false;
   constructor(public translate: TranslateService, private service: LearnerServicesService, private router: Router) {}
 
   ngOnInit() {
@@ -63,8 +63,7 @@ export class LearnerCalendarComponent implements OnInit {
 
     this.tokenDetails = localStorage.getItem('token');
 
-    this.user_id = this.UserDetails.user_id;
-    console.log(this.UserDetails);
+    this.userId = this.UserDetails.user_id;
     // this.tokenid = this.tokenDetails.token;
     this.selectedDate = moment().format();
     this.getLearnerActivity(this.selectedDate);
@@ -93,42 +92,37 @@ export class LearnerCalendarComponent implements OnInit {
     this.getLearnerActivity(this.selectedDate);
   }
 
-  todayActivity(){
-    console.log('hello today Activity');
+  todayActivity() {
     const topicStart = new Date();
     const dateValue = moment(topicStart).format('YYYY-MM-DD');
     this.getLearnerActivity(dateValue);
   }
-  
 
-  getAllActivity(value?){
+  getAllActivity(value?) {
 
-    if(!value){
-      value=new Date();
+    if (!value) {
+      value = new Date();
     }
     const monthValue = moment(value).format('YYYY-MM');
-    this.service.getAllActivity(this.UserDetails.user_id, monthValue).subscribe((result : any)=>{
-      var activity_details_list = result.data.getcalenderactivity.message
+    this.service.getAllActivity(this.UserDetails.user_id, monthValue).subscribe((result: any) => {
+      const activityDetailsList = result.data.getcalenderactivity.message;
 
-      activity_details_list.forEach(element => {
+      activityDetailsList.forEach(element => {
         element.start = new Date(element.start);
-        element.end = new Date (element.end)
+        element.end = new Date (element.end);
       });
-    this.events = activity_details_list;
-    })
+      this.events = activityDetailsList;
+    });
   }
 
   getLearnerActivity(selectedDate) {
-    console.log(selectedDate);
-    const dateValue = moment(selectedDate.date).format("YYYY-MM-DD");
+    const dateValue = moment(selectedDate.date).format('YYYY-MM-DD');
     const empty = undefined;
-    this.service.getReadLeanerActivity(this.user_id, dateValue, empty).subscribe(
+    this.service.getReadLeanerActivity(this.userId, dateValue, empty).subscribe(
       (res: any) => {
-        console.log(res);
         if (res.data?.get_read_learner_activity?.message.length > 0) {
           this.showErrorCard = false;
           this.learnerActivityList = res.data?.get_read_learner_activity?.message;
-          console.log(this.learnerActivityList);
         } else {
           this.errorMessage = res.data?.get_read_learner_activity?.error_msg;
           this.showErrorCard = true;
@@ -149,16 +143,14 @@ export class LearnerCalendarComponent implements OnInit {
       this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
     }
   }
-  launchActivity(value,i) {
+  launchActivity(value, i) {
       window.open(value.activity_details.link);
-      console.log(i);
       this.saveAttendees();
       // this.activityName = this.learnerActivityList[i].activityname;
       // this.activityId = 
   }
 
-  saveAttendees(){
-    console.log(this.UserDetails);
+  saveAttendees() {
     // let attendeesData = {
     //   userid: this.UserDetails.user_id,
     //   activityid:"432142314",
@@ -168,14 +160,13 @@ export class LearnerCalendarComponent implements OnInit {
     //   email:this.UserDetails.email,
     //   status:"true"
     // }
-   this.service.saveAttendees().subscribe((res:any)=>{
-     console.log("saveAttendees",res);
-   });
+    this.service.saveAttendees().subscribe((res: any) => {
+      console.log('saveAttendees', res);
+    });
   }
 
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    console.log("dayClicked");
     if (isSameMonth(date, this.viewDate)) {
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -189,11 +180,9 @@ export class LearnerCalendarComponent implements OnInit {
     }
   }
 
-  setView(view: CalendarView,data) {
-    console.log("setView",data);
+  setView(view: CalendarView, data) {
     this.getAllActivity(data);
     this.view = view;
-    console.log(this.view);
   }
 
   closeOpenMonthViewDay() {

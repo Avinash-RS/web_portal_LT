@@ -1,12 +1,10 @@
-import { Component, OnInit, Inject, HostListener } from '@angular/core';
-import { OwlOptions } from 'ngx-owl-carousel-o';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { DOCUMENT } from '@angular/platform-browser';
-import { interval as observableInterval } from 'rxjs';
-import { takeWhile, scan, tap } from 'rxjs/operators';
-import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 @Component({
   selector: 'app-landingpage',
   templateUrl: './landingpage.component.html',
@@ -51,7 +49,6 @@ export class LandingpageComponent implements OnInit {
     // tslint:disable-next-line:align
     public learnerservice: LearnerServicesService, public router: Router) {
 
-    console.log('----------------' + this.router.url);
     this.currentPage = this.router.url;
 
     this.popular();
@@ -156,7 +153,6 @@ export class LandingpageComponent implements OnInit {
   }
 
   getScrollValues(e) {
-    // console.log(e.scrollTop, 'landing');
     this.scrollAchievedValue = e.scrollTop;
     if (e.scrollTop >= 300) {
       this.scrollAchieved = true;

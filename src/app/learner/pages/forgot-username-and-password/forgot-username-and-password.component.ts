@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { LearnerServicesService } from '@learner/services/learner-services.service';
 import * as myGlobals from '@core/globals';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { TranslateService } from '@ngx-translate/core';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-forgot-username-and-password',
   templateUrl: './forgot-username-and-password.component.html',

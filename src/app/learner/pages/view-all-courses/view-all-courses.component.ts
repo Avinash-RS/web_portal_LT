@@ -1,16 +1,13 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { GlobalServiceService } from '@core/services/handlers/global-service.service';
-import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
-import { Options } from 'ng5-slider';
-// import { SearchPipe } from '../pipes/search.pipe';
-import * as _ from 'lodash';
-import Swal from 'sweetalert2';
-import { element } from 'protractor';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Options } from 'ng5-slider';
+import Swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
@@ -41,9 +38,9 @@ export class ViewAllCoursesComponent implements OnInit {
   displayMode = 1;
   paginationpgno: any;
   loader: boolean;
-  sort_type: any = 'A-Z';
-  showAppliedFiltre: Boolean = true;
-  showMore: Boolean = true;
+  sortType: any = 'A-Z';
+  showAppliedFiltre = true;
+  showMore = true;
   errormsg = false;
   allLvlCategory: any;
   Lvl1CatId: any = [];
@@ -59,10 +56,10 @@ export class ViewAllCoursesComponent implements OnInit {
   level2selectedID: any = [];
   level3selectedID: any = [];
   selectedFilter: any = [];
-  isCollapsed: Boolean;
+  isCollapsed: boolean;
   publishedToDate: string;
   publishedFromDate: string;
-  showCategory: Boolean = false;
+  showCategory = false;
   element: any;
 
   constructor(public learnerservice: LearnerServicesService, private alert: AlertServiceService, public translate: TranslateService,
@@ -125,7 +122,7 @@ export class ViewAllCoursesComponent implements OnInit {
 
   getallcourses() {
     if (this.userDetailes.group_id) {
-      this.CommonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
+      this.CommonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sortType).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
         this.courseCount = result.data.get_all_course_by_usergroup.total_count || result.data.get_all_course_by_usergroup.message.length;
       });
@@ -135,7 +132,7 @@ export class ViewAllCoursesComponent implements OnInit {
   onpagination(event) {
     this.paginationpgno = event;
     this.pagenumber = this.pagenumber + 1;
-    this.CommonServices.getallcourses(this.userDetailes.group_id[0], event - 1, this.sort_type).subscribe((result: any) => {
+    this.CommonServices.getallcourses(this.userDetailes.group_id[0], event - 1, this.sortType).subscribe((result: any) => {
       // this.allcourses.push(...result.data.get_all_course_by_usergroup.message);
       this.allcourses = result.data.get_all_course_by_usergroup.message;
       this.courseCount = result.data.get_all_course_by_usergroup.total_count || result.data.get_all_course_by_usergroup.message.length;

@@ -38,7 +38,7 @@
           <h3><b>Language</b></h3><br>
           <ul class="list-group">
             <li class="list-group-item" *ngFor="let language of guidelineSearchVal.course_data
-        | paginate: { itemsPerPage: course_languagePerPage,currentPage: course_languagePageNo}">
+        | paginate: { itemsPerPage: courseLanguagePerPage,currentPage: courseLanguagePageNo}">
               <label class="container1">
                 <input type="checkbox" name="language" (change)="checkedVal($event,language,'language')"
                   [checked]="language.checked" />
@@ -90,7 +90,7 @@
           <h3><b>Learning pace</b></h3><br>
           <ul class="list-group">
             <li class="list-group-item" *ngFor="let courseMode of guidelineSearchVal.coursemode_data 
-        |  paginate: { itemsPerPage: course_modePerPage,currentPage: course_modePageNo}">
+        |  paginate: { itemsPerPage: courseModePerPage,currentPage: courseModePageNo}">
               <label class="container1">
                 <input type="checkbox" name="courseMode" (change)="checkedVal($event,courseMode,'courseMode')"
                   [checked]="courseMode.checked" />

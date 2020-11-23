@@ -1,4 +1,4 @@
-import { Directive, OnInit, ElementRef, HostBinding, HostListener, Output, EventEmitter } from '@angular/core';
+import { Directive, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 
 @Directive({
     /* tslint:disable-next-line:directive-selector */
@@ -15,6 +15,7 @@ export class StickyHeaderDirective implements OnInit {
     constructor() {}
 
     @HostListener('scroll', ['$event']) private onScroll($event: Event): void {
+        // tslint:disable-next-line: deprecation
         this.scrollValues.emit($event.srcElement);
     }
 }

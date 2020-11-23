@@ -1,13 +1,10 @@
-import { Component, OnInit, Output, HostListener, TemplateRef, ViewChild, ElementRef, EventEmitter, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
-import { Router } from '@angular/router';
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import { TranslateService } from '@ngx-translate/core';
-import * as _ from 'lodash';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { TranslateService } from '@ngx-translate/core';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-mycourse-item-component',
@@ -15,6 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./mycourse-item-component.scss']
 })
 export class MycourseItemComponent implements OnInit {
+  // tslint:disable-next-line:no-input-rename
   @Input('courseItems') course: any = {};
   @Input() completedCourse: number;
   @Input() globalData: any = {};
@@ -39,7 +37,7 @@ export class MycourseItemComponent implements OnInit {
   courseWeekCircle: any;
   instDefault: any = '../../../../assets/learner/mycourseicons/Instructor_default.svg';
   activityDefault: any = '../../../../assets/learner/mycourseicons/Activities_defult.svg';
-  discussDefault: any = '../../../../assets/learner/mycourseicons/Discussion_default.svg'
+  discussDefault: any = '../../../../assets/learner/mycourseicons/Discussion_default.svg';
   constructor(
     public translate: TranslateService,
     public service: CommonServicesService,
@@ -52,7 +50,8 @@ export class MycourseItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.courseWeekCircle = (this.course.week_completed_count !== null ? this.course.week_completed_count : 0) + '/' + (this.course.week_total_count !== null ? this.course.week_total_count : 0);
+    this.courseWeekCircle = (this.course.week_completed_count !== null ?
+       this.course.week_completed_count : 0) + '/' + (this.course.week_total_count !== null ? this.course.week_total_count : 0);
   }
   Go(course) {
     localStorage.removeItem('userTabLocation');

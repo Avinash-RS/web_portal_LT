@@ -1,12 +1,12 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { HttpClient } from '@angular/common/http';
+import { Component, HostBinding, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
-import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import Swal from 'sweetalert2';
-import { OverlayContainer } from '@angular/cdk/overlay';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { SocketioService } from '@learner/services/socketio.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-header',
@@ -30,8 +30,8 @@ export class HeaderComponent implements OnInit {
 
   @HostBinding('class') componentCssClass;
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
-    private http: HttpClient, public overlayContainer: OverlayContainer,  public socketService: SocketioService,
-    public router: Router, private gs: GlobalServiceService) {
+              private http: HttpClient, public overlayContainer: OverlayContainer,  public socketService: SocketioService,
+              public router: Router, private gs: GlobalServiceService) {
     // this.getScreenSize();
   }
 
@@ -53,6 +53,7 @@ export class HeaderComponent implements OnInit {
     }, 3000);
   }
   getShortName(fullName) {
+    // tslint:disable-next-line:only-arrow-functions
     const Name = fullName?.split(' ').map(function(str) {
       return str ? str[0].toUpperCase() : '';
     }).join('');

@@ -18,15 +18,16 @@ export class SearchComponent implements OnInit {
   searchCourse(event, val) {
     //  var courseName = event.target.value;
     const courseName = val.replace(/^\s+/g, '');
-    if (event.keyCode == 32 && !courseName.length) {
+    if (event.keyCode === 32 && !courseName.length) {
       this.CommonServices.globalSearch$.next([]);
       return false;
     }
-    var pagenumber = 1;
+    const pagenumber = 1;
     this.CommonServices.getCoursesByName(courseName, pagenumber).subscribe(data => {
+      // tslint:disable-next-line:no-string-literal
       this.searchcourse = data.data['getCoursesByName'].message;
       this.CommonServices.globalSearch$.next(this.searchcourse);
-      if (this.searchcourse.length == 0) {
+      if (this.searchcourse.length === 0) {
         this.searchName = '';
       }
     });

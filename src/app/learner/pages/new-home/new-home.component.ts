@@ -1,11 +1,7 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
-import * as moment from 'moment';
-import { from } from 'rxjs';
-import { data } from 'jquery';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -46,11 +42,10 @@ export class NewHomeComponent implements OnInit {
     //     event.getUTCSeconds()
     //   )
     // ).toISOString();
-    var dateValue = new Date().toISOString();
+    const dateValue = new Date().toISOString();
     const empty = undefined;
-    this.learnerService.getReadLeanerActivity(this.userDetailes.user_id, dateValue, empty).subscribe((data: any) => {
-      console.log(data);
-      this.results = data.data.get_read_learner_activity;
+    this.learnerService.getReadLeanerActivity(this.userDetailes.user_id, dateValue, empty).subscribe((datas: any) => {
+      this.results = datas.data.get_read_learner_activity;
       this.results['message'].forEach((element, index) => {
         if (index === 0) {
           element.activity_details.ongoing = 'true';
@@ -58,11 +53,9 @@ export class NewHomeComponent implements OnInit {
           element.activity_details.ongoing = 'false';
         }
       });
-      console.log('after playlist order UPDATED', data.data);
     }, (error) => {
       console.log('there was an error sending the query', error);
-    })
-    console.log('data retreived', data);
+    });
 
   }
 
@@ -99,12 +92,12 @@ export class NewHomeComponent implements OnInit {
             element.coursePlayerStatus.course_percentage = Math.round(element.coursePlayerStatus.course_percentage);
           }
         });
-        const arr = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function (item) {
+        const arr = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter((item) => {
           return item.coursePlayerStatus?.status === 'incomplete' ||
             item.coursePlayerStatus?.status === 'suspend' ||
             item.coursePlayerStatus?.status === 'start';
         });
-        const arr1 = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter(function (item) {
+        const arr1 = enrolledList.data.getLearnerenrolledCourses.data.courseEnrolled.filter((item) => {
           return item.coursePlayerStatus?.status === 'completed';
         });
         this.completed = arr1;
@@ -161,7 +154,7 @@ export class NewHomeComponent implements OnInit {
     this.show = false;
   }
   launchActivity(value) {
-    if (value.activity_details.activitytype === 'Assignment'){
+    if (value.activity_details.activitytype === 'Assignment') {
       this.router.navigate(['/Learner/courseDetail']);
       // this.router.navigateByUrl('/Learner/profile', { state: { type } });
     } else {

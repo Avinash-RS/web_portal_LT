@@ -1,13 +1,13 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { GlobalServiceService } from '@core/services/handlers/global-service.service';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { CommonServicesService } from '@core/services/common-services.service';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonServicesService } from '@core/services/common-services.service';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
-import Swal from 'sweetalert2';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class LearnerHomeComponent implements OnInit {
   courseCount: number;
   userDetailes: any;
   pagenumber = 0;
-  sort_type: any = 'A-Z';
+  sortType: any = 'A-Z';
   allcourses: any;
   enrolledCourses: any;
   wishList: any = [];
@@ -27,8 +27,8 @@ export class LearnerHomeComponent implements OnInit {
   incomplete: any;
   popularsCourse: any;
   loadingCatalogue = false;
-  showAppliedFiltre: Boolean = true;
-  showCategory: Boolean = true;
+  showAppliedFiltre = true;
+  showCategory = true;
   element: any;
   Lvl1CatId: any = [];
   Lvl2CatId: any = [];
@@ -39,7 +39,7 @@ export class LearnerHomeComponent implements OnInit {
   allLvlCategoryFilterVal: any = [];
   allLvlCategory: any;
   paginationpgno: any;
-  total_count: number;
+  totalCount: number;
 
 
   constructor(public translate: TranslateService,
@@ -83,7 +83,7 @@ export class LearnerHomeComponent implements OnInit {
   onpagination(event) {
     this.paginationpgno = event;
     this.pagenumber = this.pagenumber + 1;
-    this.commonServices.getallcourses(this.userDetailes.group_id[0], event - 1, this.sort_type).subscribe((result: any) => {
+    this.commonServices.getallcourses(this.userDetailes.group_id[0], event - 1, this.sortType).subscribe((result: any) => {
       this.allcourses = result.data.get_all_course_by_usergroup.message;
       this.courseCount = result.data.get_all_course_by_usergroup.total_count || result.data.get_all_course_by_usergroup.message.length;
     });
@@ -91,9 +91,9 @@ export class LearnerHomeComponent implements OnInit {
   getallcourses() {
     this.loadingCatalogue = true;
     if (this.userDetailes.group_id) {
-      this.commonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sort_type).subscribe((result: any) => {
+      this.commonServices.getallcourses(this.userDetailes.group_id[0], this.pagenumber, this.sortType).subscribe((result: any) => {
         this.allcourses = result.data.get_all_course_by_usergroup.message;
-        this.total_count = result.data.get_all_course_by_usergroup.total_count;
+        this.totalCount = result.data.get_all_course_by_usergroup.total_count;
         this.loadingCatalogue = false;
       });
     }

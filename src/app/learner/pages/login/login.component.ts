@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as myGlobals from '@core/globals';
-import { ToastrService } from 'ngx-toastr';
-import {TranslateService} from '@ngx-translate/core';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { SocketioService } from '@learner/services/socketio.service';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

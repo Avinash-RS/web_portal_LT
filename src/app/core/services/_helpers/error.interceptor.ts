@@ -6,9 +6,7 @@ import { CommonServicesService } from '../common-services.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    
   constructor(private CommonService: CommonServicesService) { }
-  
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // this.showLoader();
         return next.handle(request).pipe(tap((event: HttpEvent<any>) => {

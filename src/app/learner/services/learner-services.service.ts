@@ -1,99 +1,33 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
+import { Subject } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { add_topic_reference, bulkclaimcourse, claimcourse, createGuidanceRequest,
+   CreateNewThread, CreateNewThreadBid, delete_qualification, getCourseCategorySearch,
+    getLevelSubCategoryData, gettopicdetail, get_change_password_updateprofile,
+     get_district_details, get_forgot_password_byresetpassword, get_forgot_password_byusername,
+      get_forgot_username_mobile_email, get_state_details, InsertCourseFeedback, markAsRead,
+       playerstatusrealtime, resend_otp_onprofile, save_attendies, update_email_onprofile,
+        update_mobile_onprofile, update_profile, update_verifyotp_mobile_onprofile,
+         user_mstr_data, user_registration, user_registration_done, user_registration_mobile_otp_send,
+          user_registration_mobile_otp_verify, user_registration_username_suggestion, view_profile, view_profile1 } from './operations/learner_mutation';
 import {
-  login,
-  get_course_by_user,
-  get_country_details,
-  get_qualification_details,
-  get_trending_course,
-  get_board_university_details,
-  get_discipline_details,
-  get_specification_details,
-  get_popular_course,
-  get_institute_details,
-  get_language_details,
-  get_user_detail,
-  list_content,
-  syllabus_of_particular_scorm,
-  getmoduleData,
-  get_user_detail_username,
-  check_existing_user,
-  get_all_category,
-  getPopularcourse,
-  get_sub_category,
-  get_course_by_subcategory,
-  get_module_topic,
-  getsupersubcategory,
-  getLevelCategoryData,
-  getDetailsCount,
-  getlearnertrack,
-  getLearnerenrolledCourses,
-  getlearnerdashboard,
-  getFeedbackQuestion,
-  getCoursePlayerStatusForCourse,
-  getAssignmentmoduleData,
-  playerModuleAndTopic,
-  ViewSingleTopicDiscussionData,
-  ViewAllThreadData,
+boarddetail, check_existing_user, getActivityDetailsByBatchAndCourseID, getAssignmentmoduleData,
+ getcalenderactivity, getCountForCategories, getCountForJobroleCategories, getCoureBasedOnCatalog,
+  getCourseActivities, getCoursePlayerStatusForCourse, getDetailsCount, getFeedbackQuestion,
+   getlearnerdashboard, getLearnerenrolledCourses, getlearnertrack, getLevelCategoryData,
+    getLoginUserDetail, getmoduleData, getperformActivityData, getPopularcourse, getprojectActivityData,
   // get_read_learner_activity,
-  getReadLeanerActivity,
-  get_organization_by_id,
-  getCountForCategories,
-  getCoureBasedOnCatalog,
-  getcalenderactivity,
-  singleBatchInfo,
-  ViewAllThreadDataBid,
-  getCountForJobroleCategories,
-  getLoginUserDetail,
-  getCourseActivities,
-  getprojectActivityData,
-  getperformActivityData,
-  get_active_course_count,
-  boarddetail,
-  getActivityDetailsByBatchAndCourseID,
-  getTopicAttendanceDetailsByUsername
+  getReadLeanerActivity, getsupersubcategory, getTopicAttendanceDetailsByUsername, get_active_course_count,
+   get_all_category, get_board_university_details, get_country_details, get_course_by_subcategory,
+    get_course_by_user, get_discipline_details, get_institute_details, get_language_details,
+     get_module_topic, get_organization_by_id, get_popular_course, get_qualification_details,
+      get_specification_details, get_sub_category, get_trending_course, get_user_detail,
+       get_user_detail_username, list_content, login, playerModuleAndTopic, singleBatchInfo,
+        syllabus_of_particular_scorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData
 } from './operations/learner_query';
 
-import {
-  user_registration,
-  user_registration_mobile_otp_send,
-  user_registration_mobile_otp_verify,
-  get_forgot_username_mobile_email,
-  get_forgot_password_byusername,
-  user_registration_username_suggestion,
-  view_profile,
-  get_state_details,
-  user_registration_done,
-  get_forgot_password_byresetpassword,
-  get_district_details,
-  get_change_password_updateprofile,
-  update_mobile_onprofile,
-  getLevelSubCategoryData,
-  update_verifyotp_mobile_onprofile,
-  update_email_onprofile,
-  update_profile,
-  resend_otp_onprofile,
-  delete_qualification,
-  gettopicdetail,
-  getCourseCategorySearch,
-  view_profile1,
-  createGuidanceRequest,
-  InsertCourseFeedback,
-  playerstatusrealtime,
-  CreateNewThread,
-  CreateNewThreadBid,
-  claimcourse,
-  user_mstr_data,
-  add_topic_reference,
-  save_attendies,
-  bulkclaimcourse,
-  markAsRead
-} from './operations/learner_mutation';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-import { Observable, Subject } from 'rxjs';
-import { BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -101,6 +35,7 @@ import { tap } from 'rxjs/operators';
 export class LearnerServicesService {
 
   private httpOptions = {
+    // tslint:disable-next-line:object-literal-key-quotes
     headers: new HttpHeaders({ 'Content-type': 'application/json', 'authorization': 'Bearer 104150f8e66cae68b40203e1dbba7b4529231970' })
   };
 
@@ -110,6 +45,7 @@ export class LearnerServicesService {
   envCourseApi: any = environment.createCourseApi;
   envDomain: any = environment.domain;
 
+  // tslint:disable-next-line:no-shadowed-variable
   constructor(private Apollo: Apollo, private http: HttpClient) { }
 
   closeRecoderdData$ = new Subject<any>();
@@ -133,6 +69,7 @@ export class LearnerServicesService {
       }
     });
   }
+  // tslint:disable-next-line:variable-name
   login(username, password, is_admin) {
     return this.Apollo.query({
       query: login,
@@ -171,6 +108,7 @@ export class LearnerServicesService {
     return this.http.post(this.envApi + 'post_like', data, httpOptions);
   }
 
+  // tslint:disable-next-line:variable-name
   user_registration(email, full_name, mobile_number, title_id, termsandconditions) {
     return this.Apollo.query({
       query: user_registration,
@@ -185,6 +123,7 @@ export class LearnerServicesService {
     });
   }
 
+  // tslint:disable-next-line:variable-name
   submit_otp(user_id, _id, mobile, email) {
     return this.Apollo.query({
       query: user_registration_mobile_otp_send,
@@ -197,6 +136,7 @@ export class LearnerServicesService {
     });
   }
 
+  // tslint:disable-next-line:variable-name
   user_registration_verify(otp, mobile_number) {
     return this.Apollo.query({
       query: user_registration_mobile_otp_verify,
@@ -207,6 +147,7 @@ export class LearnerServicesService {
     });
   }
 
+  // tslint:disable-next-line:variable-name
   user_registration_done(user_id, username, password, created_by_ip) {
     return this.Apollo.query({
       query: user_registration_done,
@@ -218,6 +159,7 @@ export class LearnerServicesService {
       }
     });
   }
+  // tslint:disable-next-line:variable-name
   view_profile(user_id) {
     return this.Apollo.query({
       query: view_profile,
@@ -231,6 +173,7 @@ export class LearnerServicesService {
       query: get_country_details
     });
   }
+  // tslint:disable-next-line:variable-name
   get_state_details(_id) {
     return this.Apollo.query({
       query: get_state_details,
@@ -239,6 +182,7 @@ export class LearnerServicesService {
       }
     });
   }
+  // tslint:disable-next-line:variable-name
   getMyCourse(user_id) {
     return this.Apollo.query({
       query: get_course_by_user,
@@ -274,6 +218,7 @@ export class LearnerServicesService {
     });
   }
 
+  // tslint:disable-next-line:variable-name
   forgotUsernameandPassword(type, subtype, mobile_number, email) {
     return this.Apollo.query({
       query: get_forgot_username_mobile_email,
@@ -327,6 +272,7 @@ export class LearnerServicesService {
     });
   }
 
+  // tslint:disable-next-line:variable-name
   get_change_password_updateprofile(username, old_password, password) {
     return this.Apollo.query({
       query: get_change_password_updateprofile,
@@ -361,6 +307,7 @@ export class LearnerServicesService {
     });
   }
 
+  // tslint:disable-next-line:variable-name
   update_mobile_onprofile(user_id, mobile_number) {
     return this.Apollo.query({
       query: update_mobile_onprofile,
@@ -371,6 +318,7 @@ export class LearnerServicesService {
     });
   }
 
+  // tslint:disable-next-line:variable-name
   update_verifyotp_mobile_onprofile(user_id, mobile_number, otp) {
     return this.Apollo.query({
       query: update_verifyotp_mobile_onprofile,
@@ -407,6 +355,7 @@ export class LearnerServicesService {
     });
   }
 
+  // tslint:disable-next-line:variable-name
   update_email_onprofile(user_id, email) {
     return this.Apollo.query({
       query: update_email_onprofile,
@@ -423,6 +372,7 @@ export class LearnerServicesService {
       variables: {}
     });
   }
+  // tslint:disable-next-line:variable-name
   syllabus_of_particular_scorm(contentid, user_id, course_id) {
     return this.Apollo.query({
       query: syllabus_of_particular_scorm,
@@ -433,6 +383,7 @@ export class LearnerServicesService {
       }
     });
   }
+  // tslint:disable-next-line:variable-name
   getModuleData(course_id, userid) {
     return this.Apollo.query({
       query: getmoduleData,
@@ -457,6 +408,7 @@ export class LearnerServicesService {
     });
   }
 
+  // tslint:disable-next-line:variable-name
   resend_otp_onprofile(user_id) {
     return this.Apollo.query({
       query: resend_otp_onprofile,
@@ -513,6 +465,7 @@ export class LearnerServicesService {
   //     }
   //   });
   // }
+  // tslint:disable-next-line:variable-name
   get_module_topic(course_id) {
     return this.Apollo.query({
       query: get_module_topic,
@@ -521,6 +474,7 @@ export class LearnerServicesService {
       }
     });
   }
+  // tslint:disable-next-line:variable-name
   gettopicdetail(_id, modulename) {
     return this.Apollo.query({
       query: gettopicdetail,
@@ -562,16 +516,23 @@ export class LearnerServicesService {
   // Guildeline selected filter value and getting courses
   postGuildelineSearchData(
     category: any,
+    // tslint:disable-next-line:variable-name
     sub_category: any,
+    // tslint:disable-next-line:variable-name
     super_sub_category: any,
+    // tslint:disable-next-line:variable-name
     course_language: any,
+    // tslint:disable-next-line:variable-name
     course_mode: any,
+    // tslint:disable-next-line:variable-name
     author_details: any,
+    // tslint:disable-next-line:variable-name
     partner_details: any,
     pagenumber,
     perPage,
     publishedToDate,
     publishedFromDate,
+    // tslint:disable-next-line:variable-name
     catalogue_visibility
   ) {
     return this.Apollo.query({
@@ -603,6 +564,7 @@ export class LearnerServicesService {
       }
     });
   }
+  // tslint:disable-next-line:variable-name
   view_profile1(user_id) {
     return this.Apollo.query({
       query: view_profile1,
@@ -611,6 +573,7 @@ export class LearnerServicesService {
       }
     });
   }
+  // tslint:disable-next-line:variable-name
   get_enrolled_courses(user_id, id, catalogue_id, category_id, jobRoleCategoryId, searchString) {
     return this.Apollo.query({
       query: getLearnerenrolledCourses,
@@ -624,6 +587,7 @@ export class LearnerServicesService {
       }
     });
   }
+  // tslint:disable-next-line:variable-name
   bulkclaimcourse(id, user_id, category_id, categoryName) {
     return this.Apollo.query({
       query: bulkclaimcourse,
@@ -644,6 +608,7 @@ export class LearnerServicesService {
       }
     });
   }
+  // tslint:disable-next-line:variable-name
   getCoureBasedOnCatalog(catalogue_id, category_id, userObjId, subCategoryId, superSubCategoryId) {
     return this.Apollo.query({
       query: getCoureBasedOnCatalog,
@@ -658,8 +623,8 @@ export class LearnerServicesService {
   }
 
 
-
-  getLearnerDashboard(user_id,user_obj_id,pagenumber,request_type,course_type) {
+// tslint:disable-next-line:variable-name
+  getLearnerDashboard(user_id, user_obj_id, pagenumber, request_type, course_type) {
     return this.Apollo.query({
       query: getlearnerdashboard,
       variables: {
@@ -711,6 +676,7 @@ export class LearnerServicesService {
       variables: feedback
     });
   }
+  // tslint:disable-next-line:variable-name
   getCoursePlayerStatusForCourse(user_id, course_id) {
     return this.Apollo.query({
       query: getCoursePlayerStatusForCourse,
@@ -720,7 +686,7 @@ export class LearnerServicesService {
       }
     });
   }
-
+// tslint:disable-next-line:variable-name
   getAssignmentmoduleData(courseid, user_id) {
     return this.Apollo.query({
       query: getAssignmentmoduleData,
@@ -730,7 +696,7 @@ export class LearnerServicesService {
       }
     });
   }
-
+// tslint:disable-next-line:variable-name
   playerModuleAndTopic(contentID, user_id) {
     return this.Apollo.query({
       query: playerModuleAndTopic,
@@ -740,7 +706,7 @@ export class LearnerServicesService {
       }
     });
   }
-
+// tslint:disable-next-line:variable-name
   playerstatusrealtime(user_id, contentID, module: any, percentage) {
     return this.Apollo.query({
       query: playerstatusrealtime,
@@ -752,7 +718,7 @@ export class LearnerServicesService {
       }
     });
   }
-
+// tslint:disable-next-line:variable-name
   viewsingletopicdiscussion(topic_slug, uid) {
     return this.Apollo.query({
       query: ViewSingleTopicDiscussionData,
@@ -783,7 +749,7 @@ export class LearnerServicesService {
       });
     }
   }
-
+// tslint:disable-next-line:variable-name
   createNewThread(uid, course_id, module_name, title, content, course_name, batch?) {
     if (batch) {
       return this.Apollo.query({
@@ -822,7 +788,7 @@ export class LearnerServicesService {
       }
     });
   }
-
+// tslint:disable-next-line:variable-name
   get_organization_by_id(organization_id) {
     return this.Apollo.query({
       query: get_organization_by_id,
@@ -831,7 +797,7 @@ export class LearnerServicesService {
       }
     });
   }
-
+// tslint:disable-next-line:variable-name
   claimcourse(id, user_id, course_id, courseName, categoryName) {
     return this.Apollo.query({
       query: claimcourse,
@@ -861,7 +827,7 @@ export class LearnerServicesService {
       variables: {}
     });
   }
-
+// tslint:disable-next-line:variable-name
   add_topic_reference(user_id, batch_id, course_id, module_id, topic_id, reference_id, reference_status, created_by) {
     return this.Apollo.query({
       query: add_topic_reference,
@@ -946,7 +912,8 @@ getprojectActivityData(userId, courseId) {
   }
   learnerUploadVideo(data) { return this.http.post(environment.apiUrl + 'wca/learnerUploadVideo', data); }
   learnerSumbitdeleteVideo(submitData) { return this.http.post(environment.apiUrl + 'wca/learnerSumbitdeleteVideo', submitData); }
-  get_active_course_count(user_id){
+  // tslint:disable-next-line:variable-name
+  get_active_course_count(user_id) {
     return this.Apollo.query({
       query: get_active_course_count,
       variables: {
@@ -961,7 +928,8 @@ getprojectActivityData(userId, courseId) {
   uploadVideo(image) {
     return this.http.post(environment.wcaapiurl + 'api/upload/uploadimagefile', image);
   }
-  boarddetail(user_id, course_id){
+  // tslint:disable-next-line:variable-name
+  boarddetail(user_id, course_id) {
     return this.Apollo.query({
       query: boarddetail,
       variables: {
@@ -981,7 +949,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-
+// tslint:disable-next-line:variable-name
   getAttendanceByUsername(courseid, full_name, user_id) {
     return this.Apollo.query({ // Get Activity Details For Instrcutor Led Screen.
       query: getTopicAttendanceDetailsByUsername,

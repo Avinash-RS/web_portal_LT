@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { knowledgeService } from '@learner/services/knowledge-resource/knowledge-resource.service';
@@ -12,7 +12,7 @@ import { KnowledgePreviewComponent } from '../knowledge-preview/knowledge-previe
 })
 export class KnowledgeLandingPageComponent implements OnInit {
   resourceParams: any;
-  topic_list = [
+  topicList = [
     'All'
   ];
 
@@ -23,7 +23,7 @@ export class KnowledgeLandingPageComponent implements OnInit {
     pullDrag: true,
     dots: false,
     navSpeed: 700,
-    navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right p-t-2'></i>"],
+    navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right p-t-2"></i>'],
     responsive: {
       0: {
         items: 7
@@ -45,9 +45,9 @@ export class KnowledgeLandingPageComponent implements OnInit {
   preResourceFile: any;
   selectedTopic = 'All';
   constructor(public route: ActivatedRoute,
-    public apiService: knowledgeService,
-    public dialog: MatDialog,
-    private toastr: ToastrService) { }
+              public apiService: knowledgeService,
+              public dialog: MatDialog,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -60,59 +60,59 @@ export class KnowledgeLandingPageComponent implements OnInit {
 
   }
 
-  resourceDetails(domain, area_of_interest) {
-    let topics = [];
-    this.apiService.getParticularResourceDetails(domain, area_of_interest).subscribe((data: any) => {
-      let tempDetails = data.data.get_all_resources_details.message.reduce((r, a) => {
+  resourceDetails(domain, areaOfInterest) {
+    const topics = [];
+    this.apiService.getParticularResourceDetails(domain, areaOfInterest).subscribe((data: any) => {
+      const tempDetails = data.data.get_all_resources_details.message.reduce((r, a) => {
         r[a.domain] = [...r[a.domain] || [], a];
         return r;
       }, {});
       this.resourceFile = Object.entries(tempDetails);
       this.resourceFile[0][1].forEach((d, i) => {
-        let extIdx = d.url.search(/\.pdf|.mp4|.jpg|.mp3|.png|.jpeg/)
+        const extIdx = d.url.search(/\.pdf|.mp4|.jpg|.mp3|.png|.jpeg/)
         if (extIdx >= 0) {
           d.fileType = d.url.substring(extIdx + 1, extIdx + 4);
         }
-        if (d.fileType == 'jpe') {
-          d.fileType = 'jpeg'
+        if (d.fileType === 'jpe') {
+          d.fileType = 'jpeg';
         }
         // let idx = d.file.search(/\d[-]/g) + 2;
         // d.fileName = idx > 0 ? d.file.substring(idx) : "";
-        let isPushed = this.topic_list.find(tpc => tpc == d.topic)
+        const isPushed = this.topicList.find(tpc => tpc === d.topic);
         if (!isPushed) {
-          this.topic_list.push(d.topic)
+          this.topicList.push(d.topic);
         }
-      })
+      });
       this.preResourceFile = JSON.parse(JSON.stringify(this.resourceFile[0][1]));
       this.resourceFile = this.resourceFile[0][1];
-    })
+    });
   }
 
   onPreview(resData) {
     this.isPreview = true;
-    let file = resData.url;
+    const file = resData.url;
     let height = '70%';
     let width = '55%';
 
-    let fileType = (resData.fileType == 'jpg' || resData.fileType == 'png' || resData.fileType == 'jpeg')
-      ? 'image' : (resData.fileType == 'mp3') ? 'audio' : resData.fileType == 'mp4' ? 'video' :
-        resData.fileType == 'pdf' ? 'pdf' : 'invalid';
-    if (fileType == 'invalid') {
+    const fileType = (resData.fileType === 'jpg' || resData.fileType === 'png' || resData.fileType === 'jpeg')
+      ? 'image' : (resData.fileType === 'mp3') ? 'audio' : resData.fileType === 'mp4' ? 'video' :
+        resData.fileType === 'pdf' ? 'pdf' : 'invalid';
+    if (fileType === 'invalid') {
       this.toastr.warning('Invalid file format to open');
       return false;
     }
-    if (fileType == 'pdf') {
+    if (fileType === 'pdf') {
       height = '90%';
       width = '70%';
     }
     const dialogRef = this.dialog.open(KnowledgePreviewComponent, {
       data: {
         file,
-        fileType: fileType,
+        fileType,
         filename: resData.filename
       },
-      height: height,
-      width: width,
+      height,
+      width,
       backdropClass: 'preview-popup-background',
       panelClass: 'knowledge-preview-popup',
       closeOnNavigation: true
@@ -122,13 +122,13 @@ export class KnowledgeLandingPageComponent implements OnInit {
 
   onTopicSelection(name) {
     this.selectedTopic = name;
-    if (name == 'All') {
+    if (name === 'All') {
       this.resourceFile = JSON.parse(JSON.stringify(this.preResourceFile));
       return true;
     }
-    let data = [];
+    const data = [];
     this.preResourceFile.forEach((d) => {
-      if (d.topic == name) {
+      if (d.topic === name) {
         data.push(d);
       }
     });
