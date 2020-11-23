@@ -59,8 +59,8 @@ export const getLoginUserDetail = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_country_details = gql`
+
+export const getCountrydetails = gql`
   query get_country_details {
     get_country_details {
       message
@@ -79,8 +79,8 @@ export const get_country_details = gql`
     }
   }
 `;
-// tslint:disable-next-line:variable-name
-export const get_course_by_user = gql`
+
+export const getCoursebyUser = gql`
   query get_course_by_user($user_id: String) {
     get_course_by_user(user_id: $user_id) {
       success
@@ -106,8 +106,8 @@ export const get_course_by_user = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_qualification_details = gql`
+
+export const getQualificationdetails = gql`
   query get_qualification_details {
     get_qualification_details {
       message
@@ -123,8 +123,8 @@ export const get_qualification_details = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_board_university_details = gql`
+
+export const getBoardUniversitydetails = gql`
   query get_board_university_details($_id: String!) {
     get_board_university_details(_id: $_id) {
       message
@@ -158,8 +158,8 @@ export const get_board_university_details = gql`
     }
   }
 `;
-// tslint:disable-next-line:variable-name
-export const get_discipline_details = gql`
+
+export const getDisciplinedetails = gql`
   query get_discipline_details($_id: String!) {
     get_discipline_details(_id: $_id) {
       message
@@ -175,8 +175,8 @@ export const get_discipline_details = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_specification_details = gql`
+
+export const getSpecificationdetails = gql`
   query get_specification_details {
     get_specification_details {
       message
@@ -192,8 +192,8 @@ export const get_specification_details = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_institute_details = gql`
+
+export const getInstitutedetails = gql`
   query get_institute_details {
     get_institute_details {
       message
@@ -209,8 +209,8 @@ export const get_institute_details = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_language_details = gql`
+
+export const getLanguagedetails = gql`
   query get_language_details {
     get_language_details {
       message
@@ -225,8 +225,8 @@ export const get_language_details = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_user_detail = gql`
+
+export const getUserdetail = gql`
   query get_user_detail($email: String) {
     get_user_detail(email: $email) {
       message {
@@ -242,8 +242,8 @@ export const get_user_detail = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_user_detail_username = gql`
+
+export const getUserdetailUsername = gql`
   query get_user_detail_username($username: String) {
     get_user_detail_username(username: $username) {
       message
@@ -252,8 +252,8 @@ export const get_user_detail_username = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const list_content = gql`
+
+export const listContent = gql`
   query list_content {
     list_content {
       message
@@ -263,8 +263,8 @@ export const list_content = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const syllabus_of_particular_scorm = gql`
+
+export const syllabusofParticularScorm = gql`
   query syllabus_of_particular_scorm(
     $contentid: String
     $user_id: String
@@ -351,8 +351,8 @@ export const getmoduleData = gql`
     }
   }
 `;
-// tslint:disable-next-line:variable-name
-export const check_existing_user = gql`
+
+export const checkExistingUser = gql`
   query check_existing_user($username: String) {
     check_existing_user(username: $username) {
       message
@@ -361,8 +361,8 @@ export const check_existing_user = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_all_category = gql`
+
+export const getAllCategory = gql`
   query get_all_category($group_id: [String]!) {
     get_all_category(group_id: $group_id) {
       success
@@ -384,8 +384,8 @@ export const get_all_category = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_sub_category = gql`
+
+export const getSubCategory = gql`
   query get_sub_category($category_id: String!) {
     get_sub_category(category_id: $category_id) {
       success
@@ -434,8 +434,8 @@ export const getsupersubcategory = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_course_by_subcategory = gql`
+
+export const getCoursebySubcategory = gql`
   query get_course_by_subcategory(
     $input_id: String!
     $input_type: String!
@@ -621,8 +621,8 @@ export const get_course_by_subcategory = gql`
 //     }
 //     }
 //     }`;
-// tslint:disable-next-line:variable-name
-export const get_module_topic = gql`
+
+export const getModuletopic = gql`
   query get_module_topic($course_id: String) {
     get_module_topic(course_id: $course_id) {
       data {
@@ -1240,8 +1240,8 @@ export const getLearnerenrolledCourses = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_trending_course = gql`
+
+export const getTrendingcourse = gql`
   query get_trending_course {
     get_trending_course {
       success
@@ -1262,8 +1262,8 @@ export const get_trending_course = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_popular_course = gql`
+
+export const getPopularCourse = gql`
   query get_popular_course {
     get_popular_course {
       success
@@ -1378,8 +1378,8 @@ export const getAssignmentmoduleData = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_read_learner_activity = gql`
+
+export const getReadLearnerActivity = gql`
   query get_read_learner_activity($userid: String!, $date: String!) {
     get_read_learner_activity(userid: $userid, date: $date) {
       success
@@ -1673,8 +1673,8 @@ export const getReadLeanerActivity = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_organization_by_id = gql`
+
+export const getOrganizationbyId = gql`
   query get_organization_by_id($organization_id: String) {
     get_organization_by_id(organization_id: $organization_id) {
       success
@@ -1965,8 +1965,8 @@ export const getCourseActivities = gql`
         }
       }
           `;
-// tslint:disable-next-line:variable-name
-export const get_active_course_count = gql`
+
+export const getActivecourseCount = gql`
       query  get_active_course_count($user_id:String! ) {
         get_active_course_count(user_id:$user_id ) {
           success
