@@ -1,24 +1,21 @@
-import { Injectable } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { Observable } from 'rxjs';
-import { Subject } from 'rxjs/Subject';
-import {
-  logout, viewcourse, view_wishlist, list_content, syllabus_of_particular_scorm,
-  getCoursesByName, get_all_course_by_usergroup, getAllNotifications
-} from '@core/services/operations/common_query';
-import {
-  add_to_wishlist, delete_wishlist, getPlayerStatus, geturl, enrollcourse,
-  getCourseCategorySearch, getDetailsCount
-} from '@core/services/operations/common_mutation';
-import { environment } from '@env/environment';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import {
+  add_to_wishlist, delete_wishlist, enrollcourse,
+  getCourseCategorySearch, getDetailsCount, getPlayerStatus, geturl
+} from '@core/services/operations/common_mutation';
+// tslint:disable-next-line: max-line-length
+import { getAllNotifications, getCoursesByName, get_all_course_by_usergroup, list_content, logout, syllabus_of_particular_scorm, viewcourse, view_wishlist } from '@core/services/operations/common_query';
+import { environment } from '@env/environment';
+import { Apollo } from 'apollo-angular';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonServicesService {
 
-  constructor(private Apollo: Apollo, private http: HttpClient, ) { }
+  constructor(private apollo: Apollo, private http: HttpClient, ) { }
   // Search Component for search all courses
   globalSearch$ = new Subject<any>();
   globalSearch = this.globalSearch$.asObservable();
@@ -47,7 +44,7 @@ export class CommonServicesService {
   appliedCategory$ = new Subject<any>();
   appliedCategory = this.appliedCategory$.asObservable();
 
-  //performance mobile Responsive
+  // performance mobile Responsive
   menuSelectedPerform$ = new Subject<any>();
   menuSelectedPerform = this.menuSelectedPerform$.asObservable();
 
@@ -75,29 +72,29 @@ export class CommonServicesService {
   pauseVideo$ = new Subject<any>();
   pauseVideo = this.pauseVideo$.asObservable();
 
-  logout(user_id, is_admin) {
-    // this.Apollo.getClient().resetStore();
-    return this.Apollo.query({
+  logout(userId, isAdmin) {
+    // this.apollo.getClient().resetStore();
+    return this.apollo.query({
       query: logout,
       variables: {
-        user_id,
-        is_admin
+        userId,
+        isAdmin
       }
     });
   }
 
-  viewCurseByID(course_id, user_id) {
-    return this.Apollo.query({
+  viewCurseByID(courseId, userId) {
+    return this.apollo.query({
       query: viewcourse,
       variables: {
-        course_id,
-        user_id
+        courseId,
+        userId
       }
     });
   }
 
   viewWishlist(userid, pagenumber) {
-    return this.Apollo.query({
+    return this.apollo.query({
       query: view_wishlist,
       variables: {
         user_id: userid,
@@ -106,32 +103,32 @@ export class CommonServicesService {
     });
   }
 
-  addWishlist(course_id, user_id) {
-    return this.Apollo.query({
+  addWishlist(courseId, userId) {
+    return this.apollo.query({
       query: add_to_wishlist,
       variables: {
-        course_id,
-        user_id
+        courseId,
+        userId
       }
     });
   }
 
-  removeWishlist(wishlist_id) {
-    return this.Apollo.query({
+  removeWishlist(wishlistId) {
+    return this.apollo.query({
       query: delete_wishlist,
       variables: {
-        wishlist_id,
+        wishlistId,
       }
     });
   }
   list_content() {
-    return this.Apollo.query({
+    return this.apollo.query({
       query: list_content,
     });
   }
 
   syllabus_of_particular_scorm(contentid) {
-    return this.Apollo.query({
+    return this.apollo.query({
       query: syllabus_of_particular_scorm,
       variables: {
         contentid,
@@ -139,7 +136,7 @@ export class CommonServicesService {
     });
   }
   getPlayerStatus(id) {
-    return this.Apollo.query({
+    return this.apollo.query({
       query: getPlayerStatus,
       variables: {
         user_id: id
@@ -148,7 +145,7 @@ export class CommonServicesService {
   }
 
   geturl(courseid) {
-    return this.Apollo.query({
+    return this.apollo.query({
       query: geturl,
       variables: {
         courseid
@@ -157,7 +154,7 @@ export class CommonServicesService {
   }
 
   getCoursesByName(courseName, pagenumber) {
-    return this.Apollo.query({
+    return this.apollo.query({
       query: getCoursesByName,
       variables: {
         courseName,
@@ -165,39 +162,39 @@ export class CommonServicesService {
       }
     });
   }
-  getallcourses(groupid, pagenumber, sort_type) {
-    return this.Apollo.query({
+  getallcourses(groupid, pagenumber, sortType) {
+    return this.apollo.query({
       query: get_all_course_by_usergroup,
       variables: {
         group_id: groupid,
         pagenumber,
-        sort_type
+        sortType
       }
     });
   }
-  enrollcourse(id, group_id, course_id) {
-    return this.Apollo.query({
+  enrollcourse(id, groupId, courseId) {
+    return this.apollo.query({
       query: enrollcourse,
       variables: {
         user_id: id,
-        group_id,
-        course_id,
+        groupId,
+        courseId,
       }
     });
   }
-  postGuildelineSearchData(category: any, sub_category: any, super_sub_category: any, course_language: any, course_mode: any,
-                           author_details: any, partner_details: any,
+  postGuildelineSearchData(category: any, subCategory: any, superSubCategory: any, courseLanguage: any, courseMode: any,
+                           authorDetails: any, partnerDetails: any,
                            pagenumber, perPage, publishedToDate, publishedFromDate) {
-    return this.Apollo.query({
+    return this.apollo.query({
       query: getCourseCategorySearch,
       variables: {
         category,
-        sub_category,
-        super_sub_category,
-        course_language,
-        course_mode,
-        author_details,
-        partner_details,
+        subCategory,
+        superSubCategory,
+        courseLanguage,
+        courseMode,
+        authorDetails,
+        partnerDetails,
 
         pagenumber,
         perPage,
@@ -207,7 +204,7 @@ export class CommonServicesService {
     });
   }
   getGuidelineSearch() {
-    return this.Apollo.query({
+    return this.apollo.query({
       query: getDetailsCount
     });
   }
@@ -218,9 +215,9 @@ export class CommonServicesService {
       localStorage.setItem('Systemip', res.ip);
     });
   }
-  
+
   getAllNotifications(userId, userType, pagenumber) {
-    return this.Apollo.query({
+    return this.apollo.query({
       query: getAllNotifications,
       variables: {
         userId,

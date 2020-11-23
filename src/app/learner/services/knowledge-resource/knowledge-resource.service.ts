@@ -8,6 +8,7 @@ import { particular_resource_details, resource_details, update_resource_details 
 @Injectable({
     providedIn: 'root'
 })
+// tslint:disable-next-line:class-name
 export class knowledgeService {
 
     constructor(private http: HttpClient, private apollo: Apollo) { }
@@ -19,6 +20,7 @@ export class knowledgeService {
         });
     }
 
+    // tslint:disable-next-line:variable-name
     getParticularResourceDetails(domain, area_of_interest) {
         return this.apollo.query({
             query: particular_resource_details,

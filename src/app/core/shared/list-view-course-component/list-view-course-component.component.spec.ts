@@ -7,7 +7,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ApolloModule } from 'apollo-angular';
 import { MatDialogModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner'
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 describe('ListViewCourseComponentComponent', () => {
   let component: ListViewCourseComponentComponent;
   let fixture: ComponentFixture<ListViewCourseComponentComponent>;

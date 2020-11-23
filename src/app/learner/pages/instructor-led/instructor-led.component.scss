@@ -7,13 +7,16 @@
 
 .imgLayout {
     background-color: #346f83;
-    height: 288px;
+    // height: 288px;
     border-radius: unset;
 }
 .p-t-20{
     padding-top: 20px !important;
 }
-
+.smallContainers {
+    margin-left: -15px !important;
+    margin-right: -15px !important;
+}
 .image-container{
     position: relative;
     text-align: center;
@@ -27,24 +30,30 @@
     padding: 4px;
 }
 .smallContainer1 {
-    height: 96px;
+    // height: 96px;
     /* width: 223px; */
     /* background-color: orangered; */
     /* margin-left: 15px; */
     border-radius: unset;
     background: #e2663d 0% 0% no-repeat padding-box;
+    @media only screen and (max-width: 576px) {
+        margin-bottom: 20px;
+    }
 }
 
 .smallContainer2 {
-    height: 96px;
+    // height: 96px;
     /* width: 223px; */
     background: #0c781b 0% 0% no-repeat padding-box;
     /* margin-left: 9.5%; */
     border-radius: unset;
+    @media only screen and (max-width: 576px) {
+        margin-bottom: 20px;
+    }
 }
 
 .smallContainer3 {
-    height: 96px;
+    // height: 96px;
     /* width: 223px; */
     background: #399ce0 0% 0% no-repeat padding-box;
     /* margin-left: 9.5%; */
@@ -55,6 +64,7 @@
     color: white;
 }
 .attendance-table{
+    overflow: auto;
     table {
         /* background: #ffffff 0% 0% no-repeat padding-box;
         border: 0.5px solid #898989;
@@ -62,24 +72,71 @@
         /* margin-left: 15px; */
         /* padding-right: 10px;
         padding-left: 15px; */
+        min-width: 320px;
+        tr {
+            th {
+                padding: 10px;
+                background-color: #346f83;
+                color: #ffffff;
+            }
+        }
+        tbody {
+            tr {
+                &:nth-child(even) {
+                    background-color: #ffffff;
+                }
+                &:nth-child(odd) {
+                    background-color: #eef4f6;
+                }
+            }
+        }
+        tr {
+            td {
+                padding: 7px;
+            }
+        }
     }
-    
     td,
     th {
-        background: #ffffff 0% 0% no-repeat padding-box;
+        // background: #ffffff 0% 0% no-repeat padding-box;
         border: 0.5px solid #898989;
         opacity: 1;
         text-align: center;
     }
 }
+// .listofSessionContainer {
+//     @media only screen and (max-width: 768px) {
+//         display: flex;
+//         justify-content: space-between;
+//     }
+// }
+// .listofSessionCards {
+//     @media only screen and (max-width: 768px) {
+//         width: 48%;
+//     }
+// }
 .sessionCard {
     border: 1px solid #dddddd;
-    height: 170px;
+    // height: 170px;
     width: -webkit-fill-available;
     /* background-color: #388E3C; */
     /* margin-left: 20%; */
     border-radius: unset;
     color: black;
+    box-shadow: none;
+}
+.content-container {
+    h4 {
+        font-weight: bold;
+        margin-bottom: 10px;
+        @media only screen and (max-width: 576px) {
+            margin-top: 10px;
+        }
+    }
+    h5 {
+        line-height: 24px;
+        margin: 0;
+    }
 }
 
 .redHover:hover {
@@ -90,14 +147,19 @@
     width: 10px !important;
     margin-left: 10px !important;
 }
-
+.display_flex {
+    margin-bottom: 10px;
+}
 .headLine {
     text-align: left;
     font: normal normal bold 15px/18px Roboto Condensed;
     letter-spacing: 0px;
     color: #333333;
     opacity: 1;
-    margin-left: 15px !important;
+    margin: 0 0 15px 0;
+    @media only screen and (max-width: 992px) {
+        margin: 30px 0 15px 0;
+    }
 }
 
 .headLine1 {
@@ -118,6 +180,8 @@
     letter-spacing: 0px;
     color: #5c6873;
     opacity: 1;
+    font-size: 17px;
+    margin-bottom: 10px;
 }
 
 .smallHeadline {
@@ -126,6 +190,7 @@
     letter-spacing: 0px;
     color: #ffffff;
     opacity: 1;
+    margin-bottom: 15px;
 }
 
 .sessionTitle {
@@ -148,14 +213,15 @@
 .mat-card-image {
     width: 45px;
     height: 31px;
-    margin-left: 80%;
-    margin-top: -30px;
+    margin: 0;
+    // margin-left: 80%;
+    // margin-top: -30px;
 }
 
 .number {
     /* margin-left: 2px;
     margin-top: -20px; */
-    margin-top: -12%;
+    // margin-top: -12%;
     text-align: left;
     font: normal normal normal 23px/27px Roboto Condensed;
     letter-spacing: 0px;
@@ -177,8 +243,6 @@
     color: #333333;
     opacity: 1;
 }
-
-
 
 .noSessionCard {
     margin-top: 13%;

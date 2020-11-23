@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { LearnerServicesService } from '@learner/services/learner-services.service'
-import { GlobalServiceService } from '@core/services/handlers/global-service.service';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Router } from '@angular/router';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-learner-dashboard',

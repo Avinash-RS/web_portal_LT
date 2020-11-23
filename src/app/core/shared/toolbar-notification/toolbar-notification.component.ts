@@ -1,7 +1,7 @@
-import { Component, OnInit, HostListener, ElementRef} from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { Router } from '@angular/router';
 
 
 @Component({

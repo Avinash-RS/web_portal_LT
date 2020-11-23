@@ -1,12 +1,12 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { LearnerServicesService } from '../../services/learner-services.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { environment } from '../../../../environments/environment';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { MatDialog , MatDialogConfig} from '@angular/material';
+import { environment } from '../../../../environments/environment';
+import { LearnerServicesService } from '../../services/learner-services.service';
 
 
 @Component({
@@ -23,14 +23,14 @@ export class ScormplayerComponent implements OnInit {
   name = 'Set iframe source';
   url: string;
   urlSafe: SafeResourceUrl;
-  user_id: any;
+  userId: any;
   breakpoint: number;
-  course_id: any;
+  courseId: any;
   courseDeatils: any;
   modulength: any;
   public isCollapsed = false;
   countofdoc: any;
-  question_id: any = [];
+  questionId: any = [];
   playerStatus: any = [];
   jsonData: any;
   allFeedbackQue: any;
@@ -45,12 +45,12 @@ export class ScormplayerComponent implements OnInit {
 
     this.checkDetails = detail;
     this.contentid = detail.id;
-    this.user_id = detail.user;
-    this.course_id = detail.course_id;
-    localStorage.setItem('scorm_user_id', this.user_id);
-    localStorage.setItem('course_id', this.course_id);
+    this.userId = detail.user;
+    this.courseId = detail.course_id;
+    localStorage.setItem('scorm_user_id', this.userId);
+    localStorage.setItem('course_id', this.courseId);
     this.spinner.show();
-    this.commonService.viewCurseByID(this.course_id, this.user_id).subscribe((data: any) => {
+    this.commonService.viewCurseByID(this.courseId, this.userId).subscribe((data: any) => {
       if (data.data.viewcourse.success === true) {
         this.courseDeatils = data.data.viewcourse.message;
         this.spinner.hide();
@@ -67,13 +67,13 @@ export class ScormplayerComponent implements OnInit {
     this.passCourseId();
     this.contentid = 'dfdfd';
     this.url = environment.scormUrl + 'scormPlayer.html?contentID=' +
-    this.contentid + '&user_id=' + this.user_id + '&course_id=' + this.course_id;
+    this.contentid + '&user_id=' + this.userId + '&course_id=' + this.courseId;
     // this.getModuleData();
     this.getFeedbackQue();
     this.getCoursePlayerStatus();
   }
   getCoursePlayerStatus() {
-    this.service.getCoursePlayerStatusForCourse(this.user_id, this.course_id).subscribe((data: any) => {
+    this.service.getCoursePlayerStatusForCourse(this.userId, this.courseId).subscribe((data: any) => {
       this.playerStatus = data.data.getCoursePlayerStatusForCourse.message;
       if (this.checkDetails.feed_back === 1 && this.playerStatus.feedback_status === false && this.playerStatus.status === 'completed') {
     this.show = true;
@@ -87,7 +87,7 @@ export class ScormplayerComponent implements OnInit {
     });
   }
   passCourseId() {
-    this.commonService.geturl(this.course_id).subscribe(data => {
+    this.commonService.geturl(this.courseId).subscribe(data => {
     });
   }
 
@@ -96,6 +96,7 @@ export class ScormplayerComponent implements OnInit {
   //     if (data.data['getmoduleData']['success'] === 'true') {
   //       this.content = data.data['getmoduleData']['data'][0];
   //       this.getuserid= JSON.parse(localStorage.getItem('UserDetails'))
+  // tslint:disable-next-line:max-line-length
   //       this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl( environment.scormUrl+'/scormPlayer.html?contentID='+this.course_id+'&user_id='+this.user_id+'&user_obj_id='+this.getuserid._id);
   //       //this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/scormContent' + this.content.url);
   //       this.modulength = this.content['coursedetails'].length;
@@ -118,6 +119,7 @@ export class ScormplayerComponent implements OnInit {
     link.target = '_blank';
     link.style.display = 'none';
     document.body.appendChild(link);
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < arr.length; i++) {
       link.href = arr[i];
       link.click();
@@ -145,13 +147,13 @@ export class ScormplayerComponent implements OnInit {
     });
   }
   submitFeedback(are, are1, selectOption) {
-    const question_ans: any = [];
-    question_ans.push({ question: 'What do you like about the module ?', answer: are },
+    const questionAns: any = [];
+    questionAns.push({ question: 'What do you like about the module ?', answer: are },
      { question: 'What could be improved ?', answer: are1 }, { question: 'Would you recommend this to a friend ?', answer: selectOption });
-    this.question_id.question_ans = question_ans;
-    this.question_id.user_id = this.user_id;
-    this.question_id.course_id = this.course_id;
-    this.service.InsertCourseFeedback(this.question_id).subscribe((data: any) => {
+    this.questionId.question_ans = questionAns;
+    this.questionId.user_id = this.userId;
+    this.questionId.course_id = this.courseId;
+    this.service.InsertCourseFeedback(this.questionId).subscribe((data: any) => {
       if (data.data.InsertCourseFeedback.success === 'true') {
         this.show = false;
       } else {
@@ -163,7 +165,7 @@ export class ScormplayerComponent implements OnInit {
       rating: rating.newValue,
       question_id: id
     };
-    this.question_id.push(jsonData);
+    this.questionId.push(jsonData);
 
   }
 }

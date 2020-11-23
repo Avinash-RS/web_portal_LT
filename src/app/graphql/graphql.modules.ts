@@ -5,7 +5,7 @@ import { ApolloLink } from 'apollo-link';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { DefaultOptions } from 'apollo-client';
-import { CommonServicesService } from '@core/services/common-services.service'
+import { CommonServicesService } from '@core/services/common-services.service';
 // import { environment } from '../../environments/environment';
 
 import { environment } from '@env/environment';
@@ -36,13 +36,14 @@ export class GraphqlModule {
   envApi: any = environment.apiUrl;
   envApiImg: any = environment.apiUrlImg;
   envCourseApi: any = environment.createCourseApi;
-  constructor(apollo: Apollo, httpLink: HttpLink, private gs: GlobalServiceService, private httpC: HttpClient, 
-    private services : CommonServicesService) {
+  constructor(apollo: Apollo, httpLink: HttpLink, private gs: GlobalServiceService, private httpC: HttpClient,
+              private services: CommonServicesService) {
     const http = httpLink.create({ uri: this.envApi + 'graphql' });
     const middleware = new ApolloLink((operation, forward) => {
 
       // Check for token
       const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      // tslint:disable-next-line:max-line-length
       // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoibHhwYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoiMTIzNGFiIiwic2VjX2tleSI6IjEyM0FhIUAjIiwiaWF0IjoxNTk4NDUwMjk3LCJleHAiOjE1OTg0NzE4OTcsImlzcyI6Imh0dHBzOi8vd3d3LmxhcnNlbnRvdWJyby5jb20vIn0.y9YcBFZc43QtAP2Wep7rSI1wHtIMkTBeseAb-n0qvpc'
       if (!token) { return forward(operation); }
 
