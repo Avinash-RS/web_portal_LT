@@ -147,7 +147,7 @@ export class LearnerCalendarComponent implements OnInit {
       window.open(value.activity_details.link);
       this.saveAttendees();
       // this.activityName = this.learnerActivityList[i].activityname;
-      // this.activityId = 
+      // this.activityId =
   }
 
   saveAttendees() {

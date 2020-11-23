@@ -34,7 +34,7 @@ export class AuthGuard implements CanActivate {
         this.router.navigate(['/Learner/MyCourse']);
         return false;
       } else if (!userDetailes.is_profile_updated) {
-        // if profile not updated and trying to access other screens, redirect to profile 
+        // if profile not updated and trying to access other screens, redirect to profile
         // Iggnite Changes done by Afser on Profile update not Mandtory
         // if (state.url !== '/Learner/profile') {
         //   this.router.navigate(['/Learner/profile']);
