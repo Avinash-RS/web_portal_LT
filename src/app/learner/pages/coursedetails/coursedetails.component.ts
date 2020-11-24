@@ -97,12 +97,18 @@ export class CoursedetailsComponent implements OnInit {
   selectedModuleData: any;
 
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
+  @ViewChild('rationPopup') rationPopup: TemplateRef<any>;
   getModuleandtopicInfo: any;
   moduleSatusCheck: any;
   tabInd: any;
   playerMenuEnable = false;
   viewScrollBar = false;
   fileRef: any[];
+  playerStatus: any;
+  checkDetails: any;
+  allFeedbackQue: any;
+  restdata: any;
+
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -117,6 +123,9 @@ export class CoursedetailsComponent implements OnInit {
               public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
               public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
               public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
+    const Feedbackdetail: any = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+    this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
+    this.checkDetails = Feedbackdetail;
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.screenWidth < 800) {
@@ -138,9 +147,11 @@ export class CoursedetailsComponent implements OnInit {
       // this.lastpersentage = detail  && detail.persentage || this.localper ;
       this.loading = true;
       this.playerModuleAndTopic();
+      this.getFeedbackQue();
       // this.refreshData();
       // this.autoHide();
       this.getPlayerNextPrve();
+     
       this.service.viewCurseByID(detail && detail.id || this.localStoCourseid, this.userDetail.user_id)
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
@@ -219,6 +230,9 @@ export class CoursedetailsComponent implements OnInit {
   ngOnInit(): void {
     this.translate.use(localStorage.getItem('language'));
     // this.add_topic_reference(res);
+    if (this.detailData.course_status === 'completed') {
+      this.ratingPopup();
+    }
     this.service.menuSelectedPerform.subscribe((emitedData: any) => {
       this.selectedName = emitedData.selectedName;
       this.selectedTabIndex = emitedData.selectedTabIndex;
@@ -246,7 +260,7 @@ export class CoursedetailsComponent implements OnInit {
           //   childData: restructrueArray,
           //   total_topic_len: i
           // }];
-          if(this.topiccurrentPage!==result.data.resumeSubContent){
+          if (this.topiccurrentPage !== result.data.resumeSubContent) {
           this.scromModuleData = result.data.childData;
           this.currentPage = result.data.resumeContent;
           this.topiccurrentPage = result.data.resumeSubContent;
@@ -255,11 +269,14 @@ export class CoursedetailsComponent implements OnInit {
           if ((this.currentPage !== 0 ) || (this.topiccurrentPage !== 0)) {
             this.isprevEnable = false;
           }
-          if (((this.currentPage + 1) !== this.scromModuleData.length - 1) && ((this.topiccurrentPage + 1) !== this.scromModuleData[this.scromModuleData.length - 1].children.length)) {
+          if (((this.currentPage + 1) !== this.scromModuleData.length - 1) && ((this.topiccurrentPage + 1)
+          !== this.scromModuleData[this.scromModuleData.length - 1].children.length)) {
             this.isNextEnable = false;
           }
-          // console.log(jsonData[0].childData, 'this.scromModuleData');
-          console.log(result.data.resumeSubContent)
+          this.scromModuleData = result.data.childData;
+          this.currentPage = result.data.resumeContent;
+          this.topiccurrentPage = result.data.resumeSubContent;
+          this.restdata = result;
           this.scromModuleData.forEach(childData => {
             if (childData && childData.children) {
               childData.children.forEach(subChild => {
@@ -272,9 +289,9 @@ export class CoursedetailsComponent implements OnInit {
             }
           });
         }
-        // this.playerModuleAndTopic();
       }
     });
+    this.getCoursePlayerStatus();
   }
 
   renameKeys(obj, newKeys) {
@@ -408,6 +425,7 @@ export class CoursedetailsComponent implements OnInit {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
       /* this.scromModuleData = this.scromApiData?.childData;*/
       this.moduleLenth = this.scromApiData?.childData.length;
+
       this.playerTopicLen = this.scromApiData.total_topic_len;
 
     });
@@ -421,7 +439,7 @@ export class CoursedetailsComponent implements OnInit {
     if (this.currentPage < (this.moduleLenth)) {
       this.getTopicLengthofModule = this.scromModuleData[this.currentPage].topic_len;
       // topic to module change on previous
-      if(this.topiccurrentPage === this.getTopicLengthofModule - 1 ) {
+      if (this.topiccurrentPage === this.getTopicLengthofModule - 1 ) {
         this.currentPage = this.currentPage + 1;
         this.topiccurrentPage = 0;
         this.getTopicLengthofModule = this.scromModuleData[this.currentPage].topic_len;
@@ -431,6 +449,7 @@ export class CoursedetailsComponent implements OnInit {
       // topic
       if (this.topiccurrentPage <= this.getTopicLengthofModule) {
         this.gettopicLink = this.scromModuleData[this.currentPage].children[this.topiccurrentPage];
+        console.log('this.gettopicLink', this.gettopicLink);
         this.moduleSatusCheck = this.moduleInfo.status ? this.moduleInfo.status : 'process';
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
           (environment.scormUrl + '/scormPlayer.html?contentID=' +
@@ -441,55 +460,29 @@ export class CoursedetailsComponent implements OnInit {
       }
     }
 
-    // if (this.currentPage < (this.moduleLenth)) {
-    //   this.getTopicLengthofModule = this.scromModuleData[this.currentPage].topic_len;
-    //   //topic
-    //   if (this.topiccurrentPage < this.getTopicLengthofModule) {
-    //     this.topiccurrentPage = this.topiccurrentPage + 1;
-    //     this.gettopicLink = this.scromModuleData[this.currentPage].children[this.topiccurrentPage];
-    //     this.totTopicLenght = this.totTopicLenght + 1; // check purpose
-    //     this.getuserid = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
-    //     this.moduleSatusCheck = this.moduleInfo.status ? this.moduleInfo.status : 'process';
-    //     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
-    //       (environment.scormUrl + '/scormPlayer.html?contentID=' +
-    //         this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
-    //         this.getuserid._id + '&path=' + this.gettopicLink.link +
-    //         '&module_status=' + this.moduleSatusCheck
-    //         + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title);
-    //   }
-    //   if (this.topiccurrentPage === this.getTopicLengthofModule - 1) {
-    //     this.currentPage++;
-    //     this.topiccurrentPage = 0;
-    //   } else {
-    //     this.topiccurrentPage++;
-    //     this.topiccurrentlink = this.topiccurrentPage;
-    //   }
-    // }
-    // if ((this.totTopicLenght) === this.playerTopicLen) {
-    //   this.isNextEnable = true;
-    // }
+    if (this.totTopicLenght > 0 || this.playerTopicLen === this.totTopicLenght) {
+      this.isprevEnable = false;
+    }
+    const childData = this.scromModuleData[this.moduleLenth - 1].children;
+    const childlength = this.scromModuleData[this.moduleLenth - 1].children.length;
+    console.log(childData[childlength - 1].id);
+    if (this.gettopicLink.id === childData[childlength - 1].id) {
+      this.ratingPopup();
+    }
 
-    // if (this.totTopicLenght > 0 || this.playerTopicLen === this.totTopicLenght) {
-    //   this.isprevEnable = false;
-    // }
   }
 
   topicPrve() {
-    this.isprevEnable = true;
-    this.moduleInfo = this.scromModuleData[this.currentPage];
-    if (this.currentPage < (this.moduleLenth)) {
-      this.getTopicLengthofModule = this.scromModuleData[this.currentPage].topic_len;
-      // topic to module change on previous
-      if(this.currentPage - 1 >= 0 && this.topiccurrentPage === 0){
-        this.currentPage = this.currentPage - 1;
-        this.topiccurrentPage = this.scromModuleData[this.currentPage].children.length - 1;
-        this.getTopicLengthofModule = this.scromModuleData[this.currentPage].topic_len;
-      } else {
-        this.topiccurrentPage = this.topiccurrentPage - 1;
+    if (this.currentPage >= 0) {
+      this.totTopicLenght--;
+      this.isNextEnable = false;
+     // console.log( this.totTopicLenght,'tttttttttttttttt')
+      if (this.totTopicLenght === 0) {
+        this.isprevEnable = true;
       }
-      // topic
-      if (this.topiccurrentPage <= this.getTopicLengthofModule) {
-        this.gettopicLink = this.scromModuleData[this.currentPage].children[this.topiccurrentPage];
+      if (this.topiccurrentlink >= 0) {
+        this.gettopicLink = this.scromModuleData[this.currentPage ].children[this.topiccurrentlink];
+       // console.log( this.currentPage,'mmmmmmmmm',this.topiccurrentlink)
         this.moduleSatusCheck = this.moduleInfo.status ? this.moduleInfo.status : 'process';
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
           (environment.scormUrl + '/scormPlayer.html?contentID=' +
@@ -497,6 +490,19 @@ export class CoursedetailsComponent implements OnInit {
             this.getuserid._id + '&path=' + this.gettopicLink.link +
             '&module_status=' + this.moduleSatusCheck
             + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title);
+      }
+      if (this.topiccurrentlink === 0) {
+        this.currentPage--;
+      //  console.log( this.currentPage,';;;;;;;;;;;;;;;;;;;;;',this.topiccurrentlink)
+        if (this.currentPage !== 0) {
+          this.topiccurrentlink = this.scromModuleData[this.currentPage].topic_len;
+          this.topiccurrentlink--;
+        } else {
+          this.topiccurrentlink = this.scromModuleData[this.currentPage].topic_len;
+          this.topiccurrentlink--;
+        }
+      } else {
+        this.topiccurrentlink--;
       }
     }
 
@@ -579,9 +585,6 @@ export class CoursedetailsComponent implements OnInit {
         + '&module_status=' + this.moduleSatusCheck
         + '&module=' + encodedModuleName + '&topic=' + encodedTopicName);
     console.log('before encodeing', this.urlSafe);
-
-    
-
 
     // this.playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex);
   }
@@ -788,6 +791,33 @@ export class CoursedetailsComponent implements OnInit {
   }
   closedialogbox() {
     this.dialog.closeAll();
+  }
+
+  // -------------------- rating function ------------------
+  getFeedbackQue() {
+    this.Lservice.getFeedbackQuestion().subscribe((data: any) => {
+      if (data.data.getFeedbackQuestion.success === true) {
+        this.allFeedbackQue = data.data.getFeedbackQuestion.data;
+      }
+    });
+  }
+
+  getCoursePlayerStatus() {
+    this.Lservice.getCoursePlayerStatusForCourse(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
+      this.playerStatus = data.data.getCoursePlayerStatusForCourse.message;
+      if (this.checkDetails?.feed_back === 1 && this.playerStatus.feedback_status === false && this.playerStatus.status === 'completed') {
+        this.ratingPopup();
+      }
+    });
+  }
+
+  ratingPopup() {
+    this.dialog.open(this.rationPopup, {
+      width: '100%',
+      height: '100%',
+      closeOnNavigation: true,
+      disableClose: true,
+    });
   }
 }
 
