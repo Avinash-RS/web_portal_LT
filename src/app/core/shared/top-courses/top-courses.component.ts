@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { OwlOptions } from 'ngx-owl-carousel-o';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-top-courses',
@@ -9,11 +8,17 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 export class TopCoursesComponent implements OnInit {
   // CourseList: any = [];
   breakpoint: number;
+  // tslint:disable-next-line:no-input-rename
   @Input('from') from: any;
+  // tslint:disable-next-line:no-input-rename
   @Input('showCartBtn') showCartBtn: boolean;
+  // tslint:disable-next-line:no-input-rename
   @Input('showWishlist') showWishlist: boolean;
+  // tslint:disable-next-line:no-input-rename
   @Input('canNavigate') canNavigate: boolean;
+  // tslint:disable-next-line:no-input-rename
   @Input('showStatus') showStatus: boolean;
+  // tslint:disable-next-line:no-input-rename
   @Input('CourseList') CourseList: any = [];
 
   customOptions: any = {
@@ -39,7 +44,7 @@ export class TopCoursesComponent implements OnInit {
       }
     },
     nav: true
-  }
+  };
 
 
   constructor() { }
@@ -53,27 +58,24 @@ export class TopCoursesComponent implements OnInit {
     // ];
 
 
-    if (window.innerWidth <= 480)
+    if (window.innerWidth <= 480) {
       this.breakpoint = 1;
-    else if (window.innerWidth >= 480 && window.innerWidth <= 768)
+    } else if (window.innerWidth >= 480 && window.innerWidth <= 768) {
       this.breakpoint = 2;
-    else if (window.innerWidth >= 768 && window.innerWidth <= 992) this.breakpoint = 3;
-    // else if (window.innerWidth >= 992 && window.innerWidth <= 1200)
-    //   this.breakpoint = 4;
-    else
+ } else if (window.innerWidth >= 768 && window.innerWidth <= 992) { this.breakpoint = 3; } else {
       this.breakpoint = 4;
+ }
   }
 
   onResize(event) {
-    if (event.target.innerWidth <= 480)
+    if (event.target.innerWidth <= 480) {
       this.breakpoint = 1;
-    else if (event.target.innerWidth >= 480 && event.target.innerWidth <= 768)
+    } else if (event.target.innerWidth >= 480 && event.target.innerWidth <= 768) {
       this.breakpoint = 2;
-    else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 992)
+ } else if (event.target.innerWidth >= 768 && event.target.innerWidth <= 992) {
       this.breakpoint = 3;
-    // else if (event.target.innerWidth >= 992 && event.target.innerWidth <= 1200)
-    //   this.breakpoint = 4;
-    else
+ } else {
       this.breakpoint = 4;
+ }
   }
 }

@@ -17,7 +17,7 @@ export class FilterPipeforselect implements PipeTransform {
       return list;
     }
     return list.map((lock) => {
-      lock.disabled =args.indexOf(lock.name) > -1
+      lock.disabled = args.indexOf(lock.name) > -1;
       return lock;
     });
   }

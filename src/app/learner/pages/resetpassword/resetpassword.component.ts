@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import * as myGlobals from '@core/globals';
 import { MustMatch } from '@core/services/_helpers/must-match.validator';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import * as myGlobals from '@core/globals';
 import { ToastrService } from 'ngx-toastr';
 /////// decrypt
 // import 'angular-base64/angular-base64';
 // import * as crypto from 'crypto';
 // import CryptoJS from 'crypto-js';
 import SimpleCrypto from 'simple-crypto-js';
-import { TranslateService } from '@ngx-translate/core';
-const _secretKey = 'myTotalySecretKey';
-const simpleCrypto = new SimpleCrypto(_secretKey);
+const secretKey = 'myTotalySecretKey';
+const simpleCrypto = new SimpleCrypto(secretKey);
 
 @Component({
   selector: 'app-resetpassword',
@@ -33,7 +33,7 @@ export class ResetpasswordComponent implements OnInit {
   showpsseye = false;
   showconpassbutton = false;
   showconpsseye = false;
-  isLinkActive: Boolean;
+  isLinkActive: boolean;
   hide = true;
   hide2 = true;
 
@@ -61,7 +61,6 @@ export class ResetpasswordComponent implements OnInit {
         // const originalText = bytes.toString(CryptoJS.enc.Utf8);
         const decryptedString = atob(params.code);
         this.user = decryptedString;
-        console.log(this.user);
         this.get_user_detail_username(this.user);
       } else {
         this.user = localStorage.getItem('Username');

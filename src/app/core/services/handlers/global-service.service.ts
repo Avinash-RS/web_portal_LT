@@ -45,7 +45,7 @@ export class GlobalServiceService {
   checkProfileFilled() {
     const userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
     if (userDetail && !userDetail.is_profile_updated) {
-      //Afser'schanges on Profile not Mandtory change no #3
+      // Afser'schanges on Profile not Mandtory change no #3
       // this.route.navigate(['/Learner/profile']);
       // this.alert.openAlert('Your profile is incomplete !', 'Please fill all mandatory details');
       return true;

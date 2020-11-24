@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
+import * as _ from 'underscore';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { VideoPreviewModalComponent } from '../video-preview-modal/video-preview-modal.component';
-import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
-import * as _ from 'underscore';
-import * as moment from 'moment';
 
 // const courseid = 'tbiwys0m';
 // const userid = 'aj1yej';
@@ -47,24 +47,19 @@ export class InstructorLedComponent implements OnInit {
   getAttendance() { // Http Call
     const userDetails = JSON.parse(sessionStorage.getItem('UserDetails'));
     this.learnerService.getAttendanceByUsername(this.course.id, userDetails.full_name, userDetails.user_id).subscribe(async res => {
-      console.log(res);
       const data = res.data['getTopicAttendanceDetailsByUsername']['data'];
       this.listOfSessions = data.Activity;
-      console.log(this.listOfSessions)
       this.sessionAttendance = data.Attendance;
-      console.log(this.listOfSessions);
       for (const los of this.listOfSessions) {
         los.duration = this.getTimes(los.activity_details.enddate, los.activity_details.startdate);
       }
       if (this.listOfSessions.length) {
         this.onGoingSession();
-      } 
+      }
       this.attendedSessions = _.countBy(this.sessionAttendance, x => x.activity.attendencedetails.Attendence === 'yes');
-      console.log(this.attendedSessions);
       this.useSession(this.listOfSessions[0])
     });
-    
-  }  
+  }
 
   // getSessionsList() { // Http Call
   //   const date = '2020-10-27'; // new Date();
@@ -116,14 +111,9 @@ export class InstructorLedComponent implements OnInit {
   getTimes(endDate, startDate) {
     const start = new Date(startDate);
     const end = new Date(endDate);
-    var ms = moment(end,"DD/MM/YYYY HH:mm:ss").diff(moment(start,"DD/MM/YYYY HH:mm:ss"));
-    var d = moment.duration(ms);
-    if(d.hours() == 0){
-      var time = d.minutes() + ' minutes'
-    }else{
-      var time = d.hours() + ' hour ' + d.minutes() + ' minutes'
-    }
-    
+    const ms = moment(end, 'DD/MM/YYYY HH:mm:ss').diff(moment(start, 'DD/MM/YYYY HH:mm:ss'));
+    const d = moment.duration(ms);
+    const time = d.hours() === 0 ? d.minutes() + ' minutes' : d.hours() + ' hour ' + d.minutes() + ' minutes';
     return time;
   }
 

@@ -1,6 +1,7 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 
+// tslint:disable-next-line:variable-name
 export const resource_details = gql`
 query{
 get_all_resources_details{
@@ -23,6 +24,7 @@ get_all_resources_details{
 }
 `;
 
+// tslint:disable-next-line:variable-name
 export const particular_resource_details = gql`
 query get_all_resources_details($domain: String,$area_of_interest: String) {
         get_all_resources_details(
@@ -46,8 +48,9 @@ query get_all_resources_details($domain: String,$area_of_interest: String) {
                     createdby_id
             }
         }
-    }`
+    }`;
 
+// tslint:disable-next-line:variable-name
 export const update_resource_details = gql`
     mutation
     save_resource_data(
@@ -67,33 +70,25 @@ export const update_resource_details = gql`
           success
           error_msg
         }
-    }`
+    }`;
 
-    export const get_source_report = gql `
+// tslint:disable-next-line:variable-name
+export const get_source_report = gql `
     query{
 
       get_source_report{
-  
           success
-  
           error_msg
-  
           message{
-  
               _id
-  
               createdon
-  
               status
-  
               count
-  
           }
-  
       }
-  
-  }`
-    
+  }`;
+
+// tslint:disable-next-line:variable-name
 export const get_Knowlegde_ResourceReport = gql`
   query getKnowlegdeResourceReport($reportid: String!){
     getKnowlegdeResourceReport(reportid: $reportid) {
@@ -117,5 +112,4 @@ export const get_Knowlegde_ResourceReport = gql`
         createdby_id
       }
     }
-  }
-`;
+  }`;
