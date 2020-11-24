@@ -941,3 +941,19 @@ mat-header-cell,
 .preview-popup-background {
   background: rgba(0, 0, 0, 0.85) !important;
 }
+
+.popupContainer {
+  position: relative !important;
+  .closeModal-icon {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+  }
+  .attendance-table {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+.mat-dialog-container {
+  padding: 10px !important;
+}

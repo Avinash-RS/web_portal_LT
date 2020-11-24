@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
@@ -115,6 +115,20 @@ export class InstructorLedComponent implements OnInit {
     const d = moment.duration(ms);
     const time = d.hours() === 0 ? d.minutes() + ' minutes' : d.hours() + ' hour ' + d.minutes() + ' minutes';
     return time;
+  }
+
+  showModal(attendanceDialog: TemplateRef<any>){
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxx")
+    this.dialog.open(attendanceDialog, {
+      width: '90%',
+      height: '50%',
+      panelClass: 'popupContainer',
+      closeOnNavigation: true,
+      disableClose: false,
+    });
+  }
+  closeModal(){
+    this.dialog.closeAll();
   }
 
   preview(row) {
