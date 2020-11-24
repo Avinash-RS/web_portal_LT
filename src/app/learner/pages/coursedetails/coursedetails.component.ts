@@ -103,6 +103,8 @@ export class CoursedetailsComponent implements OnInit {
   playerMenuEnable = false;
   viewScrollBar = false;
   fileRef: any[];
+  nextPrevHolder: number;
+  moduleHolder: number;
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -224,6 +226,7 @@ export class CoursedetailsComponent implements OnInit {
       this.selectedTabIndex = emitedData.selectedTabIndex;
       this.performOverLay = false;
     });
+    let resumeInit = true;
     this.socketService.change.subscribe(result => {
       if (result && result.eventId && result.eventId.length > 0) {
         if (result.data.course_id === this.courseid) {
@@ -232,12 +235,17 @@ export class CoursedetailsComponent implements OnInit {
           this.currentPage = result.data.resumeContent;
           this.topiccurrentPage = result.data.resumeSubContent;
           this.moduleInfo = this.scromModuleData[this.currentPage];
+          if (resumeInit) {
+            this.nextPrevHolder = this.topiccurrentPage;
+            this.moduleHolder = this.currentPage;
+            resumeInit = false;
           }
-          if ((this.currentPage !== 0 ) || (this.topiccurrentPage !== 0)) {
+          }
+          if ((this.currentPage - 1 !== 0 ) && (this.topiccurrentPage - 1 !== 0)) {
             this.isprevEnable = false;
           }
           if (((this.currentPage + 1) !== this.scromModuleData.length - 1)
-            && ((this.topiccurrentPage + 1) !== this.scromModuleData[this.scromModuleData.length - 1].children.length)) {
+            && ((this.topiccurrentPage + 1) !== this.scromModuleData[this.scromModuleData.length - 1].children.length-1)) {
             this.isNextEnable = false;
           }
           // console.log(jsonData[0].childData, 'this.scromModuleData');
@@ -405,10 +413,13 @@ export class CoursedetailsComponent implements OnInit {
       // topic to module change on previous
       if (this.topiccurrentPage === this.getTopicLengthofModule - 1 ) {
         this.currentPage = this.currentPage + 1;
+        this.moduleHolder = this.currentPage;
         this.topiccurrentPage = 0;
+        this.nextPrevHolder = 0;
         this.getTopicLengthofModule = this.scromModuleData[this.currentPage].topic_len;
       } else {
         this.topiccurrentPage = this.topiccurrentPage + 1;
+        this.nextPrevHolder = this.topiccurrentPage;
       }
       // topic
       if (this.topiccurrentPage <= this.getTopicLengthofModule) {
@@ -432,10 +443,13 @@ export class CoursedetailsComponent implements OnInit {
       // topic to module change on previous
       if (this.currentPage - 1 >= 0 && this.topiccurrentPage === 0) {
         this.currentPage = this.currentPage - 1;
+        this.moduleHolder = this.currentPage;
         this.topiccurrentPage = this.scromModuleData[this.currentPage].children.length - 1;
+        this.nextPrevHolder = this.topiccurrentPage;
         this.getTopicLengthofModule = this.scromModuleData[this.currentPage].topic_len;
       } else {
         this.topiccurrentPage = this.topiccurrentPage - 1;
+        this.nextPrevHolder = this.topiccurrentPage;
       }
       // topic
       if (this.topiccurrentPage <= this.getTopicLengthofModule) {
@@ -472,10 +486,12 @@ export class CoursedetailsComponent implements OnInit {
       });
     });
   }
-  playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {
+  playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex, moduleIdx) {
     this.moduleSatusCheck = moduleStatus ? moduleStatus : 'process';
     const encodedModuleName = encodeURIComponent(moduleName);
     const encodedTopicName = encodeURIComponent(topicName);
+    this.nextPrevHolder = topindex - 1;
+    this.moduleHolder = moduleIdx;
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
       (environment.scormUrl + '/scormPlayer.html?contentID=' +
         this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
