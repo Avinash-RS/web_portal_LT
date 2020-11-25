@@ -213,7 +213,7 @@ export class LearnerActivityCenterComponent implements OnInit {
         {
           headerName: 'Score',
           field: 'score',
-          sortable: true,
+          sortable: false,
           filter: true,
           flex: 1.25,
           floatingFilterComponentParams: { suppressFilterButton: true },
