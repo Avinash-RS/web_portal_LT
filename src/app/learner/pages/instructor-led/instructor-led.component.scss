@@ -38,6 +38,7 @@
     background: #e2663d 0% 0% no-repeat padding-box;
     @media only screen and (max-width: 576px) {
         margin-bottom: 20px;
+        padding: 10px;
     }
 }
 
@@ -49,6 +50,7 @@
     border-radius: unset;
     @media only screen and (max-width: 576px) {
         margin-bottom: 20px;
+        padding: 10px;
     }
 }
 
@@ -58,6 +60,9 @@
     background: #399ce0 0% 0% no-repeat padding-box;
     /* margin-left: 9.5%; */
     border-radius: unset;
+    @media only screen and (max-width: 576px) {
+        padding: 10px;
+    }
 }
 
 .mat-card-subtitle {
@@ -191,6 +196,10 @@
     color: #ffffff;
     opacity: 1;
     margin-bottom: 15px;
+    @media only screen and (max-width: 576px)  {
+        font: normal normal normal 13px/14px Roboto Condensed;
+        margin-bottom: 8px;
+    }
 }
 
 .sessionTitle {
@@ -216,6 +225,10 @@
     margin: 0;
     // margin-left: 80%;
     // margin-top: -30px;
+    @media only screen and (max-width: 576px)  {
+        width: 25px;
+        height: 24px;
+    }
 }
 
 .number {
@@ -227,6 +240,9 @@
     letter-spacing: 0px;
     color: #ffffff;
     opacity: 1;
+    @media only screen and (max-width: 576px)  {
+        font: normal normal normal 17px/15px Roboto Condensed;
+    }
 }
 
 .actBtn {
