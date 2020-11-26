@@ -93,20 +93,20 @@
       </mat-card>
       
       <div class="row smallContainers" style="margin-top: 5%;">
-        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
+        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
           <mat-card class="smallContainer1">
             <mat-card-subtitle class="smallHeadline">Total Sessions</mat-card-subtitle>
-            <div class="row d-flex justify-content-between p-t-10">
+            <div class="row d-flex justify-content-between align-items-center p-t-10">
               <span class="number">{{sessionAttendance?.length}}</span>
               <img mat-card-image src="../../../../assets/learner/elearning.svg">
             </div>
           </mat-card>
         </div>
         
-        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
+        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
           <mat-card class="smallContainer2">
             <mat-card-subtitle class="smallHeadline">Attended Sessions</mat-card-subtitle>
-            <div class="row d-flex justify-content-between p-t-10">
+            <div class="row d-flex justify-content-between align-items-center p-t-10">
               <!-- <span class="number" *ngIf="attendedSessions !== undefined">{{attendedSessions?.true}}</span> -->
               <span class="number" *ngIf="attendedSessions.true === undefined" >0</span>
               <img mat-card-image src="../../../../assets/learner/students.svg">
@@ -114,10 +114,10 @@
           </mat-card>
         </div>
 
-        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
+        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
           <mat-card class="smallContainer3">
             <mat-card-subtitle class="smallHeadline">Recorded Sessions</mat-card-subtitle>
-            <div class="row d-flex justify-content-between p-t-10">
+            <div class="row d-flex justify-content-between align-items-center p-t-10">
               <span class="number">0</span>
               <img mat-card-image src="../../../../assets/learner/video-tutorial.svg">
             </div>              
