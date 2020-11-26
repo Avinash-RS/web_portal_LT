@@ -14,151 +14,131 @@
       <mat-icon  class="editIcon">create
       </mat-icon> {{'Edit' | translate}} &nbsp;
     </span>
+  </div>
+  <div class="row details-row d-flex">
 
-    <div class="row details-row">
-
-      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 third" style="margin-top: 17.5em;">
-        <div class="row info-row" *ngIf="userData">
-          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10 bb user-info">
-            <span class="f_size_13 f_wt_500 ">{{'Password : ********' | translate}}</span>
-          </div>
-          <div class="col-md-2 col-sm-2 col-2">
-            <span [tooltip]="'Click here to change Password' | translate" placement="bottom" class="tooltip-350">
-              <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup "
-              style="width: 17px;"  (click)="editPassword(passwordDialog)">
-              create</mat-icon>
-            </span>
-           
-          </div>
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 order-3 order-sm-3 order-lg-1 align-self-end third">
+      <div class="row info-row" *ngIf="userData">
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10 bb user-info">
+          <span class="f_size_15 f_wt_500 ">{{'Password : ********' | translate}}</span>
         </div>
-
-        <div class="row m-t-25px">
-          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10 bb user-info">
-            <span class="f_size_13 f_wt_500">{{'Mobile :' | translate}} {{userData.user_mobile?.mobile_number || 'XXXXXXXXXX'}}</span>
-          </div>
-          <div class="col-md-2 col-sm-2 col-2">
-            <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup && enableMobileEdit"
-              style="width: 17px;" class="tooltip-350" [tooltip]="'Click here to change Mobile number'| translate" placement="bottom" (click)="editmobno(mobDialog)">
-              create</mat-icon>
-          </div>
-        </div>
-
-        <div class="row m-t-25px  m-b-10">
-          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10 bb user-info">
-            <span class="f_size_13 f_wt_500">{{'Email :' | translate }} {{userData.email || 'example@domain.com'}}</span>
-          </div>
-          <div class="col-md-2 col-sm-2 col-2 ">
-            <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb-icon' : 'f_size_17  bb-icon'" *ngIf="editpopup "
-              style="width: 17px;" class="tooltip-350" [tooltip]="'Click here to change Email Id'| translate" placement="bottom" (click)="editEmail(emailDialog)">
-              create</mat-icon>
-          </div>
-        </div>
-
-
-      </div>
-
-      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 center first">
-        <div *ngIf="!cannotEdit" style="margin-left: 21%; color: #333;">{{'Max size: 5 mb, upload format: jpg & png' | translate }}</div>
-        <div class="row">
-          <div class="profile-pic">
-            <mat-icon *ngIf="!cannotEdit" class="cameraIcon" for="fileInput" (click)="fileInput.click()">camera_alt
-            </mat-icon>
-            <img
-              [src]="profileForm.value.profile_img != 'null' && profileForm.value.profile_img != null && profileForm.value.profile_img != ''  ? profileForm.value.profile_img : 'assets/learner/pro2.png'"
-              id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar"
-              [ngClass]="profileForm.value.profile_img ? 'avatar' : 'iconImg'">
-            <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
-          </div>
-        </div>
-
-        <div class="row width_100">
-          <div class="uname width_100 center_align">{{userData?.full_name || 'Full name'}} </div>
-
-          <div class="width_100 center_align stateDet">
-            {{userData.state_detail && userData.state_detail[0].statename + ', '|| 'State'}}
-            {{userData.country_detail && userData.country_detail[0].countryname || '& Country' }}
-          </div>
-
-          <div class="f_wt_400 uID">
-
-            <span class="f_size_16"> {{userData.user_dtl && userData.user_dtl.username || 'User Name'}}
-              &nbsp;&nbsp;</span>
-
-            <span class="f_size_16">| &nbsp;&nbsp;
-              {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && userData.user_profile[0]?.gender && 
-              userData.user_profile[0]?.gender =='M' ? 'Male' : userData.user_profile[0].gender =='F' ? 'Female' : 
-            userData.user_profile[0].gender =='O' ? 'Rather Not Say' : 'Gender') : 'Gender' }}
-              &nbsp;&nbsp;
-            </span>
-
-            <span class="f_size_16">
-              | &nbsp;&nbsp;
-              <!-- Student -->
-              {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && 
-              userData.user_profile[0]?.is_student_or_professional =='student' ? 
-            'Student' : userData.user_profile[0].is_student_or_professional =='professional' ? 'Professional' : 'Profession') : 'Profession'}}
-            </span>
-
-          </div>
-
-          <div class="width_100 bb center center_align p-b-10"
-            *ngIf="userData?.language_detail && userData?.language_detail.length > 0">
-            <!-- <div class="width_100 bb center center_align p-b-10"> -->
-            <span class="f_size_15 color_label f_wt_500" *ngFor="let l of userData?.language_detail;let i = index">
-              {{l.languagename && i != 0 ? ', ' + l.languagename : l.languagename || null}}
-            </span>
-            <!-- <span class="f_size_15 color_label f_wt_500">
-              English
-            </span> -->
-          </div>
-
-          <!-- <div class="width_100 bb center center_align p-b-10" *ngIf="!userData?.language_detail">
-            <span class="f_size_15 color_label f_wt_500">
-              Languages Known
-            </span>
-          </div> -->
-
-          <div class="width_100 center_align m-b-10 color_blue f_wt_500 f_size_16 m-t-5px">
-            {{'Member since' | translate}} &nbsp;
-            {{(userData.user_dtl && (userData.user_dtl.created_on | date)) || ' __  __  __'}}
-          </div>
-
+        <div class="col-md-2 col-sm-2 col-2">
+          <span [tooltip]="'Click here to change Password' | translate" placement="bottom" class="tooltip-350">
+            <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup "
+            style="width: 17px;"  (click)="editPassword(passwordDialog)">
+            create</mat-icon>
+          </span>
+         
         </div>
       </div>
 
-      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12 second">
-        <div class="profile-progress">
-          <span class="percentText float_left no_margin f_size_16">{{'Profile progress'  | translate}}</span><span
-            class="percent  float_right f_size_16">{{profileForm.value.progress || '10'}}%</span>
-          <mat-progress-bar mode="determinate" [value]="profileForm.value.progress || 10">
-          </mat-progress-bar>
+      <div class="row m-t-25px">
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10 bb user-info">
+          <span class="f_size_15 f_wt_500">{{'Mobile :' | translate}} {{userData.user_mobile?.mobile_number || 'XXXXXXXXXX'}}</span>
         </div>
+        <div class="col-md-2 col-sm-2 col-2">
+          <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup && enableMobileEdit"
+            style="width: 17px;" class="tooltip-350" [tooltip]="'Click here to change Mobile number'| translate" placement="bottom" (click)="editmobno(mobDialog)">
+            create</mat-icon>
+        </div>
+      </div>
+
+      <div class="row m-t-25px  m-b-10">
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10 bb user-info">
+          <span class="f_size_15 f_wt_500">{{'Email :' | translate }} {{userData.email || 'example@domain.com'}}</span>
+        </div>
+        <div class="col-md-2 col-sm-2 col-2 ">
+          <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb-icon' : 'f_size_17  bb-icon'" *ngIf="editpopup "
+            style="width: 17px;" class="tooltip-350" [tooltip]="'Click here to change Email Id'| translate" placement="bottom" (click)="editEmail(emailDialog)">
+            create</mat-icon>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 order-1 order-sm-1 order-lg-2 first">
+      <div *ngIf="!cannotEdit" style="margin-left: 21%; color: #333;">{{'Max size: 5 mb, upload format: jpg & png' | translate }}</div>
+      <div class="row">
+        <div class="profile-pic">
+          <mat-icon *ngIf="!cannotEdit" class="cameraIcon" for="fileInput" (click)="fileInput.click()">camera_alt
+          </mat-icon>
+          <img
+            [src]="profileForm.value.profile_img != 'null' && profileForm.value.profile_img != null && profileForm.value.profile_img != ''  ? profileForm.value.profile_img : 'assets/learner/pro2.png'"
+            id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput alt="Avatar"
+            [ngClass]="profileForm.value.profile_img ? 'avatar' : 'iconImg'">
+          <input style="display: none;" id="fileInput" type='file' #fileInput (change)="onSelectFile($event)">
+        </div>
+      </div>
+
+      <div class="row width_100">
+        <div class="uname width_100 center_align">{{userData?.full_name || 'Full name'}} </div>
+
+        <div class="width_100 center_align stateDet">
+          {{userData.state_detail && userData.state_detail[0].statename + ', '|| 'State'}}
+          {{userData.country_detail && userData.country_detail[0].countryname || '& Country' }}
+        </div>
+
+        <div class="f_wt_400 uID">
+
+          <span class="f_size_16"> {{userData.user_dtl && userData.user_dtl.username || 'User Name'}}
+            &nbsp;&nbsp;</span>
+
+          <span class="f_size_16">| &nbsp;&nbsp;
+            {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && userData.user_profile[0]?.gender && 
+            userData.user_profile[0]?.gender =='M' ? 'Male' : userData.user_profile[0].gender =='F' ? 'Female' : 
+          userData.user_profile[0].gender =='O' ? 'Rather Not Say' : 'Gender') : 'Gender' }}
+            &nbsp;&nbsp;
+          </span>
+
+          <span class="f_size_16">
+            | &nbsp;&nbsp;
+            <!-- Student -->
+            {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && 
+            userData.user_profile[0]?.is_student_or_professional =='student' ? 
+          'Student' : userData.user_profile[0].is_student_or_professional =='professional' ? 'Professional' : 'Profession') : 'Profession'}}
+          </span>
+
+        </div>
+
+        <div class="width_100 bb center center_align p-b-10"
+          *ngIf="userData?.language_detail && userData?.language_detail.length > 0">
+          <!-- <div class="width_100 bb center center_align p-b-10"> -->
+          <span class="f_size_15 color_label f_wt_500" *ngFor="let l of userData?.language_detail;let i = index">
+            {{l.languagename && i != 0 ? ', ' + l.languagename : l.languagename || null}}
+          </span>
+          <!-- <span class="f_size_15 color_label f_wt_500">
+            English
+          </span> -->
+        </div>
+
+        <!-- <div class="width_100 bb center center_align p-b-10" *ngIf="!userData?.language_detail">
+          <span class="f_size_15 color_label f_wt_500">
+            Languages Known
+          </span>
+        </div> -->
+
+        <div class="width_100 center_align m-b-10 color_blue f_wt_500 f_size_16 m-t-5px">
+          {{'Member since' | translate}} &nbsp;
+          {{(userData.user_dtl && (userData.user_dtl.created_on | date)) || ' __  __  __'}}
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-xl-4 col-lg-4 col-md-9 col-sm-12 col-12 order-2 order-sm-2 order-lg-3 align-self-end second">
+      <div class="profile-progress">
+        <span class="percentText float_left no_margin f_size_16">{{'Profile progress'  | translate}}</span><span
+          class="percent  float_right f_size_16">{{profileForm.value.progress || '10'}}%</span>
+        <mat-progress-bar mode="determinate" [value]="profileForm.value.progress || 10">
+        </mat-progress-bar>
       </div>
     </div>
   </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <div class="container-reg200 fourth">
     <div class="profile-details">
-
-
-
       <form [formGroup]="profileForm">
         <!-- ////// Info about you//////// -->
         <!-- <div class="row">
@@ -242,11 +222,11 @@
 
 
         <!-- ////////////Qualification row////////////// -->
-        <label class="f_size_19 p-b-10px">{{'Qualification' | translate}}</label><span class="mand"> *</span><br>
+        <label class="f_size_19 p-b-10px">{{'Qualification' | translate}} <span class="mand"> *</span></label>
+        <br>
         <div formArrayName="qualification" *ngFor="let qual of qualification.controls; let in=index">
           <div class="row p-b-10px" [formGroupName]="in">
             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12 m-b-5px display_flex">
-
 
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs' : 'inputs'" [placeholder]="'Level' | translate" formControlName="qualification"
                 name="qualification" (selectionChange)="changed($event.value,in)">
@@ -338,16 +318,11 @@
           </div>
         </div>
 
-        <br>
         <hr class="p-b-10px">
-        <br>
+ 
+        <label class="p-b-10px" class="f_size_19"> {{'Location' | translate}} <span class="mand"> *</span></label>
 
-
-        <label class="p-b-10px" class="f_size_19"> {{'Location' | translate}}</label>
-        <span class="mand"> *</span>
-        <br>
-
-        <div class="row p-b-10px">
+        <div class="row p-b-10px locationFields">
           <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12">
             <div class="form-group width_100">
               <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'"
@@ -380,10 +355,8 @@
           </div>
         </div>
 
-        <br>
         <hr class="p-b-10px">
-        <br>
-
+        
         <!-- ////////////Certificate row////////////// -->
         <label class="p-b-10px" class="f_size_19">{{'Certificate' | translate}}</label><br>
         <div formArrayName="certificate" class="row p-b-10px"

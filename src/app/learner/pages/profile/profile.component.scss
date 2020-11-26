@@ -31,12 +31,11 @@
 
 .profile-progress {
   width: 70%;
+  margin: 0 0 0 auto;
   // float right
-  float: right;
-  text-align: right !important;
-  text-align: end !important;
-  // 
-  margin-top: 70% !important;
+  // float: right;
+  // text-align: right !important;
+  // margin-top: 70% !important;
 }
 
 .m-b-5px {
@@ -126,48 +125,43 @@
     margin-right: 4% !important;
   }
 
-  .first {
-    order: 1;
-    align-items: center;
+  // .first {
+  //   order: 1;
+  //   align-items: center;
 
-  }
+  // }
 
-  .second {
-    order: 2;
-    margin-top: 20px !important;
+  // .second {
+  //   order: 2;
+  //   margin-top: 20px !important;
 
-  }
+  // }
 
-  .third {
-    order: 3;
-    margin-top: 30px !important;
-  }
-
-  .fourth {
-    order: 4;
-    margin-top: 550px !important;
-  }
+  // .third {
+  //   order: 3;
+  //   margin-top: 30px !important;
+  // }
 
   .profile-progress {
     width: 100%;
     margin-top: 20px !important;
+    padding-bottom: 35px;
   }
 
   .details-row {
-    // margin-top: 20% !important;
+    margin-top: -15% !important;
     width: 100%;
-    margin-left: 10% !important;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: 35px;
+    padding: 10px 35px 20px 35px;
   }
 
   .user-info {
     margin-left: auto !important;
 
   }
-  .passwordDialog{
+  .passwordDialog {
     width: 450px !important;
     margin-top: 24px;
   }
@@ -194,7 +188,9 @@
 }
   
 }
-
+.locationFields .form-group {
+  margin-bottom: 0;
+}
 
 @media screen and (min-width:768px) and (max-width:991px) {
 
@@ -210,42 +206,37 @@
     display: block;
   }
 
-  .first {
-    order: 1;
-    align-items: center;
+  // .first {
+  //   order: 1;
+  //   align-items: center;
 
-  }
+  // }
 
-  .second {
-    order: 2;
-  }
+  // .second {
+  //   order: 2;
+  // }
 
-  .third {
-    order: 3;
-    margin-top: 20px !important;
+  // .third {
+  //   order: 3;
+  //   margin-top: 20px !important;
 
-  }
-
-  .fourth {
-    margin-top: 80% !important;
-  }
-
+  // }
 
   .profile-progress {
     width: 100%;
     margin-top: 20px !important;
-    padding-left: 35px;
+    padding-left: 0;
     padding-bottom: 35px;
   }
 
   .details-row {
-    margin-top: 10% !important;
+    margin-top: -15% !important;
     width: 100%;
     margin-left: 10% !important;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: 35px;
+    padding: 10px 35px 25px 35px;
   }
 
   .user-info {
@@ -419,21 +410,12 @@
   }
 
   .details-row {
-    margin-top: 7% !important;
+    margin-top: -8% !important;
     width: 100%;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     padding: 10px 35px 35px 35px;
-  }
-
-  .fourth {
-    margin-top: 300px !important;
-  }
-
-
-  .profile-progress {
-    margin-top: 80% !important;
   }
 
 }
@@ -448,18 +430,8 @@
       width: 95% !important;
     }
   }
-
-
-  .fourth {
-    margin-top: 25% !important;
-  }
-
   .lapview {
     display: block;
-  }
-
-  .profile-progress {
-    margin-top: 70% !important;
   }
 }
 
@@ -468,26 +440,16 @@
     width: 95% !important;
   }
 
-  .fourth {
-    margin-top: 15% !important;
-  }
-
   .lapview {
     display: block;
   }
 
   .details-row {
-    margin-top: 0% !important;
     width: 100%;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: 10px 35px 35px 35px;
-  }
-
-  .profile-progress {
-
-    margin-top: 35% !important;
+    padding: 10px 35px 0 35px;
   }
 }
 
@@ -750,10 +712,22 @@ hr {
 
 .bg-img {
   background-image: url('../../../../assets/learner/p-bg-5.png');
-  height: 210px;
+  // height: 210px;
   width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
+  position: relative;
+  &::before {
+    content: '';
+    display: block;
+    padding-bottom: 25%;
+    @media only screen and (min-width: 992px) {
+      padding-bottom: 18%;
+    }
+    @media only screen and (min-width: 1550px) {
+      padding-bottom: 15%;
+    }
+  }
 }
 
 .editText {
@@ -768,6 +742,9 @@ hr {
   margin-right: 35px;
   margin-top: 25px;
   border: 1px solid $color-white;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .editIcon {
@@ -910,7 +887,6 @@ hr {
 //   width: 0px;
 //   background: transparent !important;
 // }
-
 .qual, .details-row {
   
 @media (min-width: 300px) {
