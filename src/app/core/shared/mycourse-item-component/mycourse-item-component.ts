@@ -39,7 +39,8 @@ export class MycourseItemComponent implements OnInit {
   instDefault: any = '../../../../assets/learner/mycourseicons/Instructor_default.svg';
   activityDefault: any = '../../../../assets/learner/mycourseicons/Activities_defult.svg';
   discussDefault: any = '../../../../assets/learner/mycourseicons/Discussion_default.svg';
-  tabselector: any = 'firsttab';
+  tabselector: any = 0;
+  tabTitleVal: string = 'Self-Paced Learning';
   constructor(
     public translate: TranslateService,
     public service: CommonServicesService,
@@ -133,5 +134,13 @@ export class MycourseItemComponent implements OnInit {
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
     // this.router.navigateByUrl('/Learner/instructorLed', { state: { detail } });
     this.router.navigate(['/Learner/instructorLed'], { queryParams: detail }); // ['/booking'],{queryParams: {Id :id}}
+  }
+
+  tabclicker(indexVal){
+    this.tabTitleVal = ""
+    let titlevalues = ['Self-Paced Learning', 'Instructor Led', 'Discussion Forum', 'Activities']
+    setTimeout(() => {
+      this.tabTitleVal = titlevalues[indexVal]
+    }, 400);
   }
 }

@@ -5,53 +5,24 @@
 
 .tabHeadings {
   .tab {
-    width: 23%;
-    transition: width 0.8s ease-in;
-    &.tab {
-      position: relative;
-      &::after {
-        content: '';
-      }
-    }
+    width: 15%;
+    transition: width 0.5s ease-in-out;
     &.activetab {
-      &.tab {
-        &::after {
-          position: absolute;
-          width: 100%;
-          left: 25px;
-        }
-      }
-      &.first {
-        &::after {
-          content: 'Self-Paced Learning';
-          transition-delay: 0.9s;
-        }
-      }
-      &.second {
-        &::after {
-          content: 'Instructor Led';
-          transition-delay: 0.9s;
-        }
-      }
-      &.third {
-        &::after {
-          content: 'Discussion Forum';
-          transition-delay: 0.9s;
-        }
-      }
-      &.fourth {
-        &::after {
-          content: 'Activities';
-          transition-delay: 0.9s;
-        }
-      }
+      width: 40%;
       .title {
+        // max-width: 300px;
         display: inline-block;
       }
-      width: 41%;
     }
     .title {
       display: none;
+      white-space: nowrap;
+      overflow: hidden;
+      // max-width: 0;
+      // transition: max-width 0.5s ease-in-out;
+    }
+    .tabIcon {
+      position: relative;
     }
     span {
       display: inline-block;
