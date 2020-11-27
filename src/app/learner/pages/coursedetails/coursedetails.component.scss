@@ -1439,6 +1439,9 @@ iframe.fullScreen {
     margin-top: -14px;
     // margin-top: -11px;
 }
+.titleSelected {
+    font-weight: bold;
+}
 
 ::ng-deep .drawer {
     overflow-y: unset !important;
