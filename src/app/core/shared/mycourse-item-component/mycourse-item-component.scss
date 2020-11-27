@@ -5,21 +5,34 @@
 
 .tabHeadings {
   .tab {
-    width: 15%;
-    transition: width 0.5s ease-in-out;
+    // width: 15%;
+    // transition: width 0.5s ease-in-out;
+    // &.activetab {
+    //   width: 40%;
+    //   .title {
+    //     display: inline-block;
+    //   }
+    // }
+    width: 23.5%;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    @media only screen and (min-width: 576px) {
+      width: 20%;
+    }
     &.activetab {
-      width: 40%;
+      background-color: rgba(0, 0, 0, 0.05);
       .title {
-        // max-width: 300px;
-        display: inline-block;
+        color: #C02222;
       }
     }
     .title {
-      display: none;
+      display: block;
       white-space: nowrap;
       overflow: hidden;
-      // max-width: 0;
-      // transition: max-width 0.5s ease-in-out;
+      color: rgba(0, 0, 0, 0.7);
     }
     .tabIcon {
       position: relative;
@@ -27,6 +40,38 @@
     span {
       display: inline-block;
     }
+  }
+}
+.tabContents {
+  .activetab {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  .activetab1, .activetab2 {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+  }
+  .activetab3 {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-left-radius: 8px;
+  }
+}
+.courseCardTab {
+  width: 100%;
+  @media only screen and (min-width: 737px) {
+    display: none;
+  }
+}
+.desktopTab {
+  @media only screen and (max-width: 736px) {
+    display: none !important;
   }
 }
 //Tab Ends
@@ -227,7 +272,7 @@
 }
 
 :host ::ng-deep.mat-card {
-  padding: 16px 16px 0 16px !important;
+  padding: 16px 0 0 0 !important;
   border-radius: 0px;
 }
 
@@ -913,7 +958,8 @@ hr {
 }
 
 .courseDetailsCol {
-  padding-left: 0px;
+  // padding-left: 0px;
+  // padding: 0;
 }
 
 .template {
