@@ -1,3 +1,52 @@
+<!-- Tab sample -->
+<div class="row">
+  <div class="col-xl-3">
+    <div class="courseCardTab" style="margin-top: 20px;">
+      <div class="tabHeadings d-flex justify-content-between">
+        <div class="tab first" (click)="tabselector = 'firsttab'" [ngClass]="tabselector == 'firsttab' ? 'activetab' :''">
+          <span _ngcontent-jtm-c8="" class="lxp-gauge lxp-theme-red title_img f_size_23 tabIcon"></span>
+          <!-- <span class="title">1st tab title</span> -->
+        </div>
+        <div class="tab second" (click)="tabselector = 'secondtab'" [ngClass]="tabselector == 'secondtab' ? 'activetab' :''">
+          <span _ngcontent-wlb-c8="" class="lxp-monitor lxp-theme-red title_img f_size_23 tabIcon"></span>
+          <!-- <span class="title">2nd tab title</span> -->
+        </div>
+        <div class="tab third" (click)="tabselector = 'thirdtab'" [ngClass]="tabselector == 'thirdtab' ? 'activetab' :''">
+          <span _ngcontent-wlb-c8="" class="lxp-stack lxp-theme-red title_img f_size_23 tabIcon"></span>
+          <!-- <span class="title">3rd tab title</span> -->
+        </div>
+        <div class="tab fourth" (click)="tabselector = 'fourthtab'" [ngClass]="tabselector == 'fourthtab' ? 'activetab' :''">
+          <span _ngcontent-wlb-c8="" class="lxp-stack lxp-theme-red title_img f_size_23 tabIcon"></span>
+          <!-- <span class="title">4th tab title</span> -->
+        </div>
+      </div>
+      <div class="tabContents">
+        <div *ngIf="tabselector == 'firsttab'">
+          <p>Content of first tab</p>
+          <p>Content of first tab</p>
+          <p>Content of first tab</p>
+        </div>
+        <div *ngIf="tabselector == 'secondtab'">
+          <p>Content of second tab</p>
+          <p>Content of second tab</p>
+          <p>Content of second tab</p>
+        </div>
+        <div *ngIf="tabselector == 'thirdtab'">
+          <p>Content of third tab</p>
+          <p>Content of third tab</p>
+          <p>Content of third tab</p>
+        </div>
+        <div *ngIf="tabselector == 'fourthtab'">
+          <p>Content of fourth tab</p>
+          <p>Content of fourth tab</p>
+          <p>Content of fourth tab</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- tab sample -->
+
 <mat-card class="coursebg card12">
   <div class="row">
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 courseDetailsCol">
@@ -110,7 +159,7 @@
             </div>
           </div>
           <br>
-          <div  *ngIf="course.isBatchCourse">
+          <div *ngIf="course.isBatchCourse">
             <div class="row">
               <div class="col">
                 <p class="f_size_16 f_wt_500 color_black pull-left">Course Progression</p>
@@ -122,8 +171,6 @@
             </div>
             <div class="row" *ngIf="!course.progresslistExp">
             <div class="col-8">
-           
-
               <div class="row color_g">
                 <div class="col m_b3px">
                   Instructor led session completed

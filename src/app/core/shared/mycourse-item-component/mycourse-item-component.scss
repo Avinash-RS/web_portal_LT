@@ -1,9 +1,64 @@
 @import "variable";
 
 
+//Tab Starts
 
-
-
+.tabHeadings {
+  .tab {
+    width: 23%;
+    transition: width 0.8s ease-in;
+    &.tab {
+      position: relative;
+      &::after {
+        content: '';
+      }
+    }
+    &.activetab {
+      &.tab {
+        &::after {
+          position: absolute;
+          width: 100%;
+          left: 25px;
+        }
+      }
+      &.first {
+        &::after {
+          content: 'Self-Paced Learning';
+          transition-delay: 0.9s;
+        }
+      }
+      &.second {
+        &::after {
+          content: 'Instructor Led';
+          transition-delay: 0.9s;
+        }
+      }
+      &.third {
+        &::after {
+          content: 'Discussion Forum';
+          transition-delay: 0.9s;
+        }
+      }
+      &.fourth {
+        &::after {
+          content: 'Activities';
+          transition-delay: 0.9s;
+        }
+      }
+      .title {
+        display: inline-block;
+      }
+      width: 41%;
+    }
+    .title {
+      display: none;
+    }
+    span {
+      display: inline-block;
+    }
+  }
+}
+//Tab Ends
 
 .dot {
   font-size: 16px;

@@ -39,6 +39,7 @@ export class MycourseItemComponent implements OnInit {
   instDefault: any = '../../../../assets/learner/mycourseicons/Instructor_default.svg';
   activityDefault: any = '../../../../assets/learner/mycourseicons/Activities_defult.svg';
   discussDefault: any = '../../../../assets/learner/mycourseicons/Discussion_default.svg';
+  tabselector: any = 'firsttab';
   constructor(
     public translate: TranslateService,
     public service: CommonServicesService,
@@ -52,6 +53,7 @@ export class MycourseItemComponent implements OnInit {
 
 
   ngOnInit() {
+
     this.courseWeekCircle = (this.course.week_completed_count !== null ?
        this.course.week_completed_count : 0) + '/' + (this.course.week_total_count !== null ? this.course.week_total_count : 0);
   }
