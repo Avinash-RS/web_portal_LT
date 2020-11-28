@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
-// tslint:disable-next-line:variable-name
-export const user_registration = gql`
+
+export const userRegistration = gql`
   mutation user_registration($full_name: String!, $mobile_number: String, $title_id: String,
    $email: String!,$term_condition:Boolean,$domain:String!) {
     user_registration(
@@ -27,7 +27,7 @@ export const user_registration = gql`
 `;
 
 // tslint:disable-next-line:variable-name
-export const user_registration_mobile_otp_send = gql`
+export const userRegistrationmobileOtpsend = gql`
   mutation user_registration_mobile_otp_send($user_id: String,$user: String,$mobile_number: String!,$email: String) {
     user_registration_mobile_otp_send(
       user_id:$user_id,
@@ -42,8 +42,8 @@ export const user_registration_mobile_otp_send = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const user_registration_mobile_otp_verify = gql`
+
+export const userRegistrationmobileOtpverify = gql`
   mutation user_registration_mobile_otp_verify($otp:String!,$mobile_number: String!) {
     user_registration_mobile_otp_verify(
       otp: $otp,
@@ -63,8 +63,8 @@ export const user_registration_mobile_otp_verify = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const user_registration_done = gql`
+
+export const userRegistrationdone = gql`
   mutation user_registration_done($user_id: String,$username: String,$password:String!, $created_by_ip: String!) {
     user_registration_done(
       user_id:$user_id,
@@ -80,8 +80,8 @@ export const user_registration_done = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_forgot_username_mobile_email = gql`
+
+export const getForgotUsernamemobileEmail = gql`
   mutation get_forgot_username_mobile_email($type: String,$subtype:String!, $mobile_number: String,$email: String ,$domain:String!) {
     get_forgot_username_mobile_email(
       type:$type,
@@ -97,8 +97,8 @@ export const get_forgot_username_mobile_email = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_forgot_password_byusername = gql`
+
+export const getForgotpasswordbyUsername = gql`
   mutation get_forgot_password_byusername($username: String) {
     get_forgot_password_byusername(
       username:$username,
@@ -116,8 +116,8 @@ export const get_forgot_password_byusername = gql`
 `;
 
 
-// tslint:disable-next-line:variable-name
-export const user_registration_username_suggestion = gql`
+
+export const userRegistrationUsernamesuggestion = gql`
   mutation user_registration_username_suggestion($user_id: String) {
     user_registration_username_suggestion(
       user_id:$user_id,
@@ -130,8 +130,8 @@ export const user_registration_username_suggestion = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_forgot_password_byresetpassword = gql`
+
+export const getForgotpasswordbyResetpassword = gql`
   mutation get_forgot_password_byresetpassword($username: String!,$password:String!) {
     get_forgot_password_byresetpassword(
       username:$username,
@@ -142,8 +142,8 @@ export const get_forgot_password_byresetpassword = gql`
     }
   }
 `;
-// tslint:disable-next-line:variable-name
-export const view_profile = gql`
+
+export const viewProfile = gql`
   mutation view_profile($user_id: String) {
     view_profile(user_id:$user_id)
     {
@@ -414,8 +414,8 @@ export const view_profile = gql`
 }
 `;
 
-// tslint:disable-next-line:variable-name
-export const get_state_details = gql`
+
+export const getStatedetails = gql`
     mutation   get_state_details($_id: String){
       get_state_details(
         _id: $_id
@@ -439,8 +439,8 @@ export const get_state_details = gql`
     }
     `;
 
-// tslint:disable-next-line:variable-name
-export const get_district_details = gql`
+
+export const getDistrictdetails = gql`
 mutation get_district_details($country: String,$state: String){
 	get_district_details(
 	country: $country,
@@ -461,8 +461,8 @@ mutation get_district_details($country: String,$state: String){
 }
 }
 `;
-// tslint:disable-next-line:variable-name
-export const get_change_password_updateprofile = gql`
+
+export const getChangePasswordupdateprofile = gql`
 mutation get_change_password_updateprofile($username: String, $old_password: String $password: String){
   get_change_password_updateprofile(
     username: $username,
@@ -475,8 +475,8 @@ success
 }
 `;
 
-// tslint:disable-next-line:variable-name
-export const view_profile1 = gql`
+
+export const viewProfile1 = gql`
   mutation view_profile($user_id: String) {
     view_profile(user_id:$user_id) {
     success
@@ -563,11 +563,7 @@ export const view_profile1 = gql`
 `;
 
 
-
-
-
-// tslint:disable-next-line:variable-name
-export const delete_qualification = gql`
+export const deleteQualification = gql`
  mutation delete_qualification($user_id: String,$qualification: String){
   delete_qualification(
     user_id: $user_id,
@@ -580,8 +576,8 @@ export const delete_qualification = gql`
 `;
 
 
-// tslint:disable-next-line:variable-name
-export const update_profile = gql`
+
+export const updateProfile = gql`
   mutation update_profile($user_id: String, $is_student_or_professional: String, $profile_img: String, $year_of_birth: String, $doj_lxp: String,$qualification: [qualification_content],
     $social_media: [social_media_content], $is_active: Boolean, $progress: String, $gender: String, $languages_known: [String],
     $country: String, $state: String, $city_town: String, $about_you: String, $certificate: [String], $student: String,
@@ -621,8 +617,7 @@ export const update_profile = gql`
     }
   }
 `;
-// tslint:disable-next-line:variable-name
-export const update_mobile_onprofile = gql`
+export const updateMobileonprofile = gql`
 mutation update_mobile_onprofile($user_id: String, $mobile_number: String){
 	update_mobile_onprofile(
     user_id: $user_id,
@@ -633,8 +628,8 @@ mutation update_mobile_onprofile($user_id: String, $mobile_number: String){
 }
 }
 `;
-// tslint:disable-next-line:variable-name
-export const update_verifyotp_mobile_onprofile = gql`
+
+export const updateVerifyotpmobileonProfile = gql`
   mutation  update_verifyotp_mobile_onprofile($user_id: String, $mobile_number: String, $otp: String){
     update_verifyotp_mobile_onprofile(
       user_id: $user_id,
@@ -646,8 +641,8 @@ export const update_verifyotp_mobile_onprofile = gql`
     }
   }
 `;
-// tslint:disable-next-line:variable-name
-export const update_email_onprofile = gql`
+
+export const updateEmailonprofile = gql`
   mutation update_email_onprofile($user_id: String, $email: String,$domain:String!){
     update_email_onprofile(
       user_id: $user_id,
@@ -659,8 +654,8 @@ export const update_email_onprofile = gql`
     }
   }
 `;
-// tslint:disable-next-line:variable-name
-export const resend_otp_onprofile = gql`
+
+export const resendOtponprofile = gql`
   mutation resend_otp_onprofile($user_id: String) {
     resend_otp_onprofile(
       user_id:$user_id
@@ -896,8 +891,8 @@ export const claimcourse = gql`
   }
 `;
 
-// tslint:disable-next-line:variable-name
-export const  user_mstr_data = gql`
+
+export const  userMstrdata = gql`
   mutation  user_mstr_data {
     user_mstr_data {
       success
@@ -911,8 +906,8 @@ export const  user_mstr_data = gql`
 
 
 
-// tslint:disable-next-line:variable-name
-export const add_topic_reference = gql`
+
+export const addTopicreference = gql`
 mutation add_topic_reference($user_id: String!, $batch_id: String, $course_id:String!, $module_id:String!, $topic_id:String!,
 $reference_id: String,$ reference_status: Boolean, $created_by: String){
   add_topic_reference(user_id: $user_id, batch_id : $batch_id, course_id:$course_id,module_id:$module_id,topic_id:$topic_id, reference_id:$reference_id,
@@ -937,8 +932,8 @@ $reference_id: String,$ reference_status: Boolean, $created_by: String){
   }
 }`;
 
-// tslint:disable-next-line:variable-name
-export const  save_attendies = gql`
+
+export const  saveAttendies = gql`
   mutation  save_attendies(
     $userid:String,
     $activityid:String,

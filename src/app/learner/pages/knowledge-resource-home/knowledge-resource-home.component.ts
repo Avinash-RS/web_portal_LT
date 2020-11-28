@@ -20,7 +20,7 @@ export class KnowledgeResourceHomeComponent implements OnInit {
   imageView: File;
   searchDetails = '';
   dummyText = 1;
-  sampleFileLink = 'https://edutechstorage.blob.core.windows.net/container1/resource/739113684616842-Sample-file.csv'
+  sampleFileLink = 'https://edutechstorage.blob.core.windows.net/container1/resource/739113684616842-Sample-file.csv';
   @ViewChild('fileInput3') fileInput3;
   tempDetailsList = [];
 
