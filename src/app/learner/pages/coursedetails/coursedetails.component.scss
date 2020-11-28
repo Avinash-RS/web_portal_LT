@@ -852,9 +852,9 @@ iframe.fullScreen {
     // height: 0;
     height: 10px;
     overflow: visible !important;
-    &[aria-selected="true"] {
-        background-color: rgba(0, 0, 0, 0.2);
-    } 
+    // &[aria-selected="true"] {
+    //     background-color: rgba(0, 0, 0, 0.2);
+    // } 
  
 
 }
