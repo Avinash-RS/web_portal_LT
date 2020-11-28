@@ -12,9 +12,9 @@ export class MockServiceService {
 }
   login() {
     return {
-      "data": {
-        "login": {
-          "success": true,
+      data: {
+        login: {
+          success: true,
           "error_msg": null,
           "message": {
             "_id": "5e69f4ad139c79bbf14adc8a",
