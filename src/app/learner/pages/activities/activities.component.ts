@@ -453,8 +453,10 @@ export class ActivitiesComponent implements OnInit {
         const batchendDate = this.datePipe.transform(element.performActivity.batchenddate, 'dd-MM-yyyy');
         const crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
         if (startDate <= crrDate && batchendDate >= crrDate) {
+          // tslint:disable-next-line:no-string-literal
           element['itrationStarted'] = true;
         } else {
+          // tslint:disable-next-line:no-string-literal
           element['itrationStarted'] = false;
         }
       });
@@ -701,7 +703,7 @@ mouseover(index) {
 }
 
 performdetailPage(index, performData) {
-  this.perfornDetaildata = {perfornData: performData, index}
+  this.perfornDetaildata = {perfornData: performData, index};
 }
 
 }

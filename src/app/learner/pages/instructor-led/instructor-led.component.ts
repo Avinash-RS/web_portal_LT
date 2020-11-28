@@ -47,6 +47,7 @@ export class InstructorLedComponent implements OnInit {
   getAttendance() { // Http Call
     const userDetails = JSON.parse(sessionStorage.getItem('UserDetails'));
     this.learnerService.getAttendanceByUsername(this.course.id, userDetails.full_name, userDetails.user_id).subscribe(async res => {
+      // tslint:disable-next-line:no-string-literal
       const data = res.data['getTopicAttendanceDetailsByUsername']['data'];
       this.listOfSessions = data.Activity;
       this.sessionAttendance = data.Attendance;
@@ -57,7 +58,7 @@ export class InstructorLedComponent implements OnInit {
         this.onGoingSession();
       }
       this.attendedSessions = _.countBy(this.sessionAttendance, x => x.activity.attendencedetails.Attendence === 'yes');
-      this.useSession(this.listOfSessions[0])
+      this.useSession(this.listOfSessions[0]);
     });
   }
 

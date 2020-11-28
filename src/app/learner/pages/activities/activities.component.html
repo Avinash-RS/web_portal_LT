@@ -691,7 +691,8 @@
                                 photo_size_select_actual</mat-icon>
                               <mat-icon class="imageIcon" *ngIf="material.doc_type =='video/mp4'">play_circle_outline
                               </mat-icon>
-                              <i class="fa fa-file-pdf-o pdfIcon" *ngIf="material.doc_type =='application/pdf'"
+                              <i class="fa fa-file-pdf-o pdfIcon" *ngIf="material.doc_type =='application/pdf' ||
+                             material.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
                                 aria-hidden="true"></i>
                             </div>
                           </div>
@@ -715,12 +716,14 @@
                                         *ngIf="material.doc_type =='video/mp4'">play_circle_outline</mat-icon>
                                       <mat-icon class="position-absolute text-white playBtn"
                                         *ngIf="material.doc_type =='image/jpeg'">photo_size_select_actual</mat-icon>
-                                        <i class="fa fa-file-pdf-o position-absolute text-white playBtn" *ngIf="material.doc_type =='application/pdf'"
+                                        <i class="fa fa-file-pdf-o position-absolute text-white playBtn" *ngIf="material.doc_type =='application/pdf'
+                                        || material.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
                                         aria-hidden="true"></i>
                                       <span class="text-white actionBtn"
                                         *ngIf="material.doc_type =='video/mp4'">Play</span>
                                       <span class="text-white actionBtn"
-                                        *ngIf="material.doc_type == 'image/jpeg' || material.doc_type == 'application/pdf'">Preview</span>
+                                        *ngIf="material.doc_type == 'image/jpeg' || material.doc_type == 'application/pdf'
+                                        || material.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'">Preview</span>
                                     </div>
                                     <div class="col-7 text-center pr-0 colAction"
                                     (click)="downloadDoc(material, 'material')">
@@ -753,7 +756,8 @@
                         <mat-icon
                           *ngIf="item.doc_type == 'image/jpeg'|| item.doc_type == 'image/png' || item.doc_type =='image/jpg'"
                           class="videoPlay float-left">photo</mat-icon>
-                        <mat-icon *ngIf="item.doc_type == 'application/pdf'" class="videoPlay float-left">picture_as_pdf
+                        <mat-icon *ngIf="item.doc_type == 'application/pdf'
+                        || item.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'" class="videoPlay float-left">picture_as_pdf
                         </mat-icon>
                         <span class="uploadfileName" *ngIf="item.name.length < 28">
                             {{item.name}}
@@ -804,7 +808,7 @@
               <div class="panel1" *ngIf="isCollapsed && projectId === i && project.projectActivity.grade_status == 'Evaluated'">
                 <div class="row">
                   <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
-                    <div class="f_size_16 f_wt_600">Your submissions</div>
+                    <div class="f_size_16 f_wt_600">Your submissions ({{project.projectActivity.videodetails.length}})</div>
 
                     <!-- <owl-carousel-o [options]="trendingCategorires"
                       [ngClass]="project.projectActivity.videodetails.length <= 4 ? 'widthClass arrow' : 'arrow'">
@@ -886,7 +890,8 @@
                                 photo_size_select_actual</mat-icon>
                               <mat-icon class="imageIcon" *ngIf="video.doc_type =='video/mp4'">play_circle_outline
                               </mat-icon>
-                              <i class="fa fa-file-pdf-o pdfIcon" *ngIf="video.doc_type =='application/pdf'"
+                              <i class="fa fa-file-pdf-o pdfIcon" *ngIf="video.doc_type =='application/pdf'
+                              || video.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
                                 aria-hidden="true"></i>
                             </div>
                           </div>
@@ -915,7 +920,8 @@
                                       <span class="text-white actionBtn"
                                         *ngIf="video.doc_type =='video/mp4'">Play</span>
                                       <span class="text-white actionBtn"
-                                        *ngIf="video.doc_type == 'image/jpeg' || video.doc_type == 'application/pdf'">Preview</span>
+                                        *ngIf="video.doc_type == 'image/jpeg' || video.doc_type == 'application/pdf'
+                                        || video.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'">Preview</span>
                                     </div>
                                     <div class="col-7 text-center pr-0 colAction"
                                     (click)="downloadDoc(video, 'files')">
