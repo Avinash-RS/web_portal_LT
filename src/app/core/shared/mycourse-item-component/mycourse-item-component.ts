@@ -11,6 +11,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
   templateUrl: './mycourse-item-component.html',
   styleUrls: ['./mycourse-item-component.scss']
 })
+
 export class MycourseItemComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
   @Input('courseItems') course: any = {};
@@ -38,6 +39,8 @@ export class MycourseItemComponent implements OnInit {
   instDefault: any = '../../../../assets/learner/mycourseicons/Instructor_default.svg';
   activityDefault: any = '../../../../assets/learner/mycourseicons/Activities_defult.svg';
   discussDefault: any = '../../../../assets/learner/mycourseicons/Discussion_default.svg';
+  tabselector: any = 0;
+  // tabTitleVal: string = 'Self-Paced Learning';
   constructor(
     public translate: TranslateService,
     public service: CommonServicesService,
@@ -49,7 +52,9 @@ export class MycourseItemComponent implements OnInit {
     this.role = localStorage.getItem('role') || null;
   }
 
+
   ngOnInit() {
+
     this.courseWeekCircle = (this.course.week_completed_count !== null ?
        this.course.week_completed_count : 0) + '/' + (this.course.week_total_count !== null ? this.course.week_total_count : 0);
   }
@@ -130,4 +135,12 @@ export class MycourseItemComponent implements OnInit {
     // this.router.navigateByUrl('/Learner/instructorLed', { state: { detail } });
     this.router.navigate(['/Learner/instructorLed'], { queryParams: detail }); // ['/booking'],{queryParams: {Id :id}}
   }
+
+  // tabclicker(indexVal){
+  //   this.tabTitleVal = ""
+  //   let titlevalues = ['Self-Paced Learning', 'Instructor Led', 'Discussion Forum', 'Activities']
+  //   setTimeout(() => {
+  //     this.tabTitleVal = titlevalues[indexVal]
+  //   }, 400);
+  // }
 }
