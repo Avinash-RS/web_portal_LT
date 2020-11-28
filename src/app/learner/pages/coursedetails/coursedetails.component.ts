@@ -239,13 +239,15 @@ export class CoursedetailsComponent implements OnInit {
             this.nextPrevHolder = this.topiccurrentPage;
             this.moduleHolder = this.currentPage;
             resumeInit = false;
+            this.isprevEnable = true;
+            this.isNextEnable = true;
           }
           }
-          if ((this.currentPage - 1 !== 0 ) && (this.topiccurrentPage - 1 !== 0)) {
+          if ((this.moduleHolder  !== 0 ) || (this.nextPrevHolder  !== 0)) {
             this.isprevEnable = false;
           }
-          if (((this.currentPage + 1) !== this.scromModuleData.length - 1)
-            && ((this.topiccurrentPage + 1) !== this.scromModuleData[this.scromModuleData.length - 1].children.length-1)) {
+          if (((this.moduleHolder) !== this.scromModuleData.length - 1)
+            || ((this.nextPrevHolder) !== this.scromModuleData[this.scromModuleData.length - 1].children.length - 1)) {
             this.isNextEnable = false;
           }
           // console.log(jsonData[0].childData, 'this.scromModuleData');
@@ -492,6 +494,8 @@ export class CoursedetailsComponent implements OnInit {
     const encodedTopicName = encodeURIComponent(topicName);
     this.nextPrevHolder = topindex - 1;
     this.moduleHolder = moduleIdx;
+    this.isprevEnable = true;
+    this.isNextEnable = true;
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
       (environment.scormUrl + '/scormPlayer.html?contentID=' +
         this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
