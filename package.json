@@ -51,6 +51,7 @@
     "angular-svg-round-progressbar": "^2.0.0",
     "angular2-chartjs": "^0.4.1",
     "angular2-useful-swiper": "^8.0.1-beta.1",
+    "animate.css": "^4.1.1",
     "apollo": "^2.31.0",
     "apollo-angular": "^1.10.0",
     "apollo-angular-link-http": "^1.11.0",

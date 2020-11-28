@@ -189,9 +189,9 @@
 
 
         <!-- //// -->
-        <div class="col-12 col-sm-12 col-md-12 col-lg-6 p-x-7px desktopTab d-flex justify-content-between flex-wrap">
-          <div class="m-b-15px myCourseCards">
-            <div matRipple class="card-hover cardHeights grey_border1 ">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 desktopTab d-flex justify-content-between flex-wrap">
+          <div matRipple class="m-b-15px myCourseCards">
+            <div class="card-hover cardHeights grey_border1 ">
               <div class="row">
                 <div class="col ">
         
@@ -201,26 +201,36 @@
                   <p class="f_size_16 f_wt_500 color_black titleAlign"> Self-Paced Learning</p>
                 </div>
               </div>
+              <!-- ORIGIN CONTENT -->
               <div class="height_match">
-                <div class="row color_g f_size_13">
-                  <div class="col">
-                    <span>Keep learning and revising the topics to hone your skills.</span>
+                <div class="wrapper animate__animated animate__fadeIn" *ngIf="!course.progressionExp">
+                  <div class="row color_g f_size_13">
+                    <div class="col">
+                      <span>Keep learning and revising the topics to hone your skills.</span>
+                    </div>
+                  </div>
+                  <div class="row lxp_gray123">
+                    <div class="col-7"><span class="f_size_13">
+                        Progression
+                      </span></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-10 justify-content-center align-self-center">
+                      <mat-progress-bar class="example-margin" [mode]="'determinate'"
+                        [value]="course.self_paced_learning_progression!==''?course.self_paced_learning_progression:0">
+                      </mat-progress-bar>
+                    </div>
+                    <div class="col-2 c_per">
+                      {{(course.self_paced_learning_progression!==''?(course.self_paced_learning_progression>100?100:course.self_paced_learning_progression):0)| number:'1.0-0'}}%
+                    </div>
                   </div>
                 </div>
-                <div class="row lxp_gray123">
-                  <div class="col-7"><span class="f_size_13">
-                      Progression
-                    </span></div>
-                </div>
-                <div class="row">
-                  <div class="col-10 justify-content-center align-self-center">
-                    <mat-progress-bar class="example-margin" [mode]="'determinate'"
-                      [value]="course.self_paced_learning_progression!==''?course.self_paced_learning_progression:0">
-                    </mat-progress-bar>
-                  </div>
-                  <div class="col-2 c_per">
-                    {{(course.self_paced_learning_progression!==''?(course.self_paced_learning_progression>100?100:course.self_paced_learning_progression):0)| number:'1.0-0'}}%
-                  </div>
+                <!-- SEE MORE CONTENT -->
+                <div *ngIf="course.progressionExp" class="f_size_12 animate__animated animate__fadeInUp">
+                  Modules completed {{(course.completed_module_count!=null?course.completed_module_count:0) +'/'+ (course.total_module_count!=null?course.total_module_count:0)}}<br>
+                  Topics completed {{(course.completed_topic_count!=null?course.completed_topic_count:0) +'/'+ (course.total_topic_count!=null?course.total_topic_count:0)}}<br>
+                  <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline; display: none;">View self-learning
+                    activity details..</span>
                 </div>
               </div>
 
@@ -231,12 +241,7 @@
                       (click)="course.progressionExp?course.progressionExp=false:course.progressionExp=true">
                       <span class="f_size_10 ">{{course.progressionExp?'Hide details...':'See more details...' }}</span>
                     </span>
-                    <div *ngIf="course.progressionExp" class="f_size_12">
-                      Modules completed {{(course.completed_module_count!=null?course.completed_module_count:0) +'/'+ (course.total_module_count!=null?course.total_module_count:0)}}<br>
-                      Topics completed {{(course.completed_topic_count!=null?course.completed_topic_count:0) +'/'+ (course.total_topic_count!=null?course.total_topic_count:0)}}<br>
-                      <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline; display: none;">View self-learning
-                        activity details..</span>
-                    </div>
+                    
                   </div>
                 </div>
                 <div class="cardButton">
@@ -270,8 +275,8 @@
           </div>
 
           <!-- Second -->
-          <div class="m-b-15px myCourseCards" *ngIf="course.isBatchCourse">
-            <div matRipple class="card-hover cardHeights grey_border1" (mouseover)="instDefault ='../../../../assets/learner/mycourseicons/Instructor_hover.svg'" (mouseout)="instDefault='../../../../assets/learner/mycourseicons/Instructor_default.svg'">
+          <div matRipple class="m-b-15px myCourseCards" *ngIf="course.isBatchCourse">
+            <div class="card-hover cardHeights grey_border1" (mouseover)="instDefault ='../../../../assets/learner/mycourseicons/Instructor_hover.svg'" (mouseout)="instDefault='../../../../assets/learner/mycourseicons/Instructor_default.svg'">
               <div class="row">
                 <div class="col ">
                   <div class="circle_outline pull-left  m-r-15px m-b-10px">
@@ -280,12 +285,22 @@
                   <p class="f_size_16 f_wt_500 color_black titleAlign"> Instructor Led</p>
                 </div>
               </div>
-              <div class="row color_g f_size_13">
-                <div class="col-5 ">
-                  <img alt="" class="inst_hover" [src]="instDefault" width="100px" height="80px">
+              <!-- ORIGIN CONTENT -->
+              <div class="height_match">
+                <div class="row color_g f_size_13 animate__animated animate__fadeIn" *ngIf="!course.ledinstExp">
+                  <div class="col-5 ">
+                    <img alt="" class="inst_hover" [src]="instDefault" width="100px" height="80px">
+                  </div>
+                  <div class="col p-l-0px">
+                    <p>Interact with your faculty, ask questions and learn from your classmates.</p>
+                  </div>
                 </div>
-                <div class="col p-l-0px">
-                  <p>Interact with your faculty, ask questions and learn from your classmates.</p>
+                <!-- SEE MORE CONTENT -->
+                <div *ngIf="course.ledinstExp" class="f_size_13 animate__animated animate__fadeInUp">
+                  Sessions attended
+                  {{course.instructor_lead_session_completed_count+'/'+course.instructor_lead_session_total_count}}<br>
+                  <span class="pointer f_size_10" style="color:#C02222; text-decoration: underline;"
+                    (click)="goInstructorLed(course)">View sessions details..</span>
                 </div>
               </div>
 
@@ -295,12 +310,7 @@
                     <span class="pointer seemoreHove" (click)="course.ledinstExp?course.ledinstExp=false:course.ledinstExp=true">
                       <span class="f_size_10">{{course.ledinstExp?'Hide details...':'See more details...' }}</span>
                     </span>
-                    <div *ngIf="course.ledinstExp" class="f_size_13">
-                      Sessions attended
-                      {{course.instructor_lead_session_completed_count+'/'+course.instructor_lead_session_total_count}}<br>
-                      <span class="pointer f_size_10" style="color:#C02222; text-decoration: underline;"
-                        (click)="goInstructorLed(course)">View sessions details..</span>
-                    </div>
+                   
                   </div>
                 </div>
                 <div class="cardButton">
@@ -321,8 +331,8 @@
           </div>
 
           <!-- Third -->
-          <div class="m-b-15px myCourseCards" *ngIf="course.isBatchCourse">
-            <div matRipple class="card-hover cardHeights grey_border1" (mouseover)="discussDefault ='../../../../assets/learner/mycourseicons/Discussion_hover.svg'" (mouseout)="discussDefault='../../../../assets/learner/mycourseicons/Discussion_default.svg'">
+          <div matRipple class="m-b-15px myCourseCards" *ngIf="course.isBatchCourse">
+            <div class="card-hover cardHeights grey_border1" (mouseover)="discussDefault ='../../../../assets/learner/mycourseicons/Discussion_hover.svg'" (mouseout)="discussDefault='../../../../assets/learner/mycourseicons/Discussion_default.svg'">
               <div class="row">
                 <div class="col ">
                   <div class="circle_outline pull-left  m-r-15px m-b-10px">
@@ -331,13 +341,23 @@
                   <p class="f_size_16 f_wt_500 color_black titleAlign"> Discussion Forum</p>
                 </div>
               </div>
-              <div class="row color_g f_size_13">
-                <div class="col-5 ">
-                  <img alt="" [src]="discussDefault"
-                    width="100px" height="80px">
+
+              <div class="height_match">
+                <div class="row color_g f_size_13 animate__animated animate__fadeIn" *ngIf="!course.discussExp">
+                  <div class="col-5 ">
+                    <img alt="" [src]="discussDefault"
+                      width="100px" height="80px">
+                  </div>
+                  <div class="col p-l-0px">
+                    <p>Interact with peers by posting thoughts and comments on given topic.</p>
+                  </div>
                 </div>
-                <div class="col p-l-0px">
-                  <p>Interact with peers by posting thoughts and comments on given topic.</p>
+                <div *ngIf="course.discussExp" class="f_size_13 animate__animated animate__fadeInUp">
+                  Threads {{course.thread_count!==null?course.thread_count:'N/A'}}<br>
+                  Comments {{course.comment_count!==null?course.comment_count:'N/A'}}<br>
+                  Replies {{course.reply_count!==null?course.reply_count:'N/A'}}<br>
+                  <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;"
+                    (click)="goToForum(course)">View discussions..</span>
                 </div>
               </div>
 
@@ -347,13 +367,6 @@
                     <span class="pointer seemoreHove" (click)="course.discussExp?course.discussExp=false:course.discussExp=true">
                       <span class="f_size_10">{{course.discussExp?'Hide details...':'See more details...' }}</span>
                     </span>
-                    <div *ngIf="course.discussExp" class="f_size_13">
-                      Threads {{course.thread_count!==null?course.thread_count:'N/A'}}<br>
-                      Comments {{course.comment_count!==null?course.comment_count:'N/A'}}<br>
-                      Replies {{course.reply_count!==null?course.reply_count:'N/A'}}<br>
-                      <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;"
-                        (click)="goToForum(course)">View discussions..</span>
-                    </div>
                   </div>
                 </div>
                 <div class="cardButton">
@@ -372,8 +385,8 @@
           </div>
 
           <!-- Fourth -->
-          <div class="m-b-15px myCourseCards" *ngIf="course.isBatchCourse">
-            <div matRipple class="card-hover cardHeights grey_border1" (mouseover)="activityDefault ='../../../../assets/learner/mycourseicons/Activities_hover.svg'" (mouseout)="activityDefault='../../../../assets/learner/mycourseicons/Activities_defult.svg'">
+          <div matRipple class="m-b-15px myCourseCards" *ngIf="course.isBatchCourse">
+            <div class="card-hover cardHeights grey_border1" (mouseover)="activityDefault ='../../../../assets/learner/mycourseicons/Activities_hover.svg'" (mouseout)="activityDefault='../../../../assets/learner/mycourseicons/Activities_defult.svg'">
               <div class="row">
                 <div class="col ">
                   <div class="circle_outline pull-left  m-r-15px m-b-10px">
@@ -383,14 +396,24 @@
                      <p class="f_size_16 f_wt_500 color_black titleAlign"> Activities</p>
                 </div>
               </div>
-              <div class="row color_g f_size_13">
-                <div class="col-5 ">
-                  <img alt="" [src]="activityDefault" width="100px" height="80px">
+
+              <div class="height_match">
+                <div class="row color_g f_size_13 animate__animated animate__fadeIn" *ngIf="!course.activityExp" >
+                  <div class="col-5 ">
+                    <img alt="" [src]="activityDefault" width="100px" height="80px">
+                  </div>
+                  <div class="col p-l-0px">
+                    <p>Practice the skills learnt while reading and attending classes.</p>
+                  </div>
                 </div>
-                <div class="col p-l-0px">
-                  <p>Practice the skills learnt while reading and attending classes.</p>
+                <div *ngIf="course.activityExp" class="f_size_13 animate__animated animate__fadeInUp">
+                  Assignments completed {{course.assignment_submitted_count+'/'+course.assignment_total_count}}<br>
+                  Projects completed {{course.completed_mid_course_project_count+'/'+course.total_mid_course_project_count}}<br>
+                  <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;"
+                    (click)="gotoSubmissionDetails(course)">View submission details..</span>
                 </div>
               </div>
+
               <!-- <div class="row pseudoheight"></div> -->
               <div class="moreDetails d-flex justify-content-between align-items-center">
                 <div class="seeMoreDetails">
@@ -398,12 +421,6 @@
                     <span class="pointer seemoreHove" (click)="course.activityExp?course.activityExp=false:course.activityExp=true">
                       <span class="f_size_10">{{course.activityExp?'Hide details...':'See more details...' }}</span>
                     </span>
-                    <div *ngIf="course.activityExp" class="f_size_13">
-                      Assignments completed {{course.assignment_submitted_count+'/'+course.assignment_total_count}}<br>
-                      Projects completed {{course.completed_mid_course_project_count+'/'+course.total_mid_course_project_count}}<br>
-                      <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;"
-                        (click)="gotoSubmissionDetails(course)">View submission details..</span>
-                    </div>
                   </div>
                   <!-- <div class="row m-auto">
                     <div class="col justify-content-center align-self-center">
@@ -430,58 +447,75 @@
 
         <!-- Mobile Device Content -->
         <!-- Tab sample -->
-        <div class="courseCardTab container-fluid" style="margin-top: 20px;">
+        <div class="courseCardTab container-fluid">
           <div class="">
               <div class="tabHeadings d-flex justify-content-between">
-                <div class="tab first" (click)="tabselector = 0; tabclicker(tabselector)" [ngClass]="tabselector == 0 ? 'activetab' :''">
-                  <span _ngcontent-jtm-c8="" class="lxp-gauge lxp-theme-red title_img f_size_23 tabIcon"></span>
-                  <span class="title">Self-Paced <br />Learning</span>
+                <div class="tab first d-flex align-items-end" (click)="tabselector = 0; " [ngClass]="tabselector == 0 ? 'activetab' :''">
+                  <span _ngcontent-jtm-c8="" class="circle_outline lxp-gauge lxp-theme-grey title_img f_size_23 tabIcon"></span>
+                  <!-- <span class="title">Self-Paced <br />Learning</span> -->
                 </div>
-                <div class="tab second" (click)="tabselector = 1; tabclicker(tabselector)" [ngClass]="tabselector == 1 ? 'activetab' :''">
-                  <span _ngcontent-wlb-c8="" class="lxp-monitor lxp-theme-red title_img f_size_23 tabIcon"></span>
-                  <span class="title">Instructor <br />Led</span>
+                <div class="tab second d-flex align-items-end" (click)="tabselector = 1; " [ngClass]="tabselector == 1 ? 'activetab' :''">
+                  <span _ngcontent-wlb-c8="" class="circle_outline lxp-monitor lxp-theme-grey title_img f_size_23 tabIcon"></span>
+                  <!-- <span class="title">Instructor <br />Led</span> -->
                 </div>
-                <div class="tab third" (click)="tabselector = 2; tabclicker(tabselector)" [ngClass]="tabselector == 2 ? 'activetab' :''">
-                  <span _ngcontent-wlb-c8="" class="lxp-stack lxp-theme-red title_img f_size_23 tabIcon"></span>
-                  <span class="title">Discussion <br />Forum</span>
+                <div class="tab third d-flex align-items-end" (click)="tabselector = 2; " [ngClass]="tabselector == 2 ? 'activetab' :''">
+                  <span _ngcontent-wlb-c8="" class="circle_outline lxp-stack lxp-theme-grey title_img f_size_23 tabIcon"></span>
+                  <!-- <span class="title">Discussion <br />Forum</span> -->
                 </div>
-                <div class="tab fourth" (click)="tabselector = 3; tabclicker(tabselector)" [ngClass]="tabselector == 3 ? 'activetab' :''">
-                  <span _ngcontent-wlb-c8="" class="lxp-stack lxp-theme-red title_img f_size_23 tabIcon"></span>
-                  <span class="title">Activities</span>
+                <div class="tab fourth d-flex align-items-end" (click)="tabselector = 3; " [ngClass]="tabselector == 3 ? 'activetab' :''">
+                  <span _ngcontent-wlb-c8="" class="circle_outline tabIcon">
+                    <!-- <img alt="" src="../../../../assets/learner/mycourseicons/activities.svg" width="22px" height="22px" class="title_img activityImg"> -->
+                    <img [src]="(tabselector==3)? '../../../../assets/learner/mycourseicons/activities.svg' : '../../../../assets/learner/mycourseicons/Activities_active.svg'" width="22px" height="22px" class="title_img activityImg"/>
+                  </span>
+                  <!-- <span class="title">Activities</span> -->
                 </div>
               </div>
               <div class="tabContents">
-                <div *ngIf="tabselector == 0" [ngClass]="tabselector == 0 ? 'activetab' :''">
+                <div class="tabTitle d-flex justify-content-between" [ngClass]="tabselector == 1 || tabselector == 2 ? 'borderLeftRadius borderRightRadius':tabselector == 0 ? 'borderRightRadius':'borderLeftRadius'">
+                  <span class="title" [ngClass]="tabselector == 0 ? 'livetab' :''">Self-Paced <br />Learning</span>
+                  <span class="title" [ngClass]="tabselector == 1 ? 'livetab1' :''">Instructor <br />Led</span>
+                  <span class="title" [ngClass]="tabselector == 2 ? 'livetab2' :''">Discussion <br />Forum</span>
+                  <span class="title" [ngClass]="tabselector == 3 ? 'livetab3' :''">Activities</span>
+                </div>
+
+                <div class="cardTabs" *ngIf="tabselector == 0" [ngClass]="tabselector == 0 ? 'activetab' :''">
                   <div matRipple class="card-hover cardHeights grey_border1 ">
                     <div class="row">
-                      <div class="col ">
-              
+                      <!-- <div class="col">
                         <div class="circle_outline pull-left  m-r-15px m-b-10px">
                           <span class="lxp-gauge lxp-theme-red title_img f_size_23"></span>
-                          </div>
+                        </div>
                         <p class="f_size_16 f_wt_500 color_black titleAlign"> Self-Paced Learning</p>
-                      </div>
+                      </div> -->
                     </div>
                     <div class="height_match">
-                      <div class="row color_g f_size_13">
-                        <div class="col">
-                          <span>Keep learning and revising the topics to hone your skills.</span>
+                      <div class="wrapper animate__animated animate__fadeIn" *ngIf="!course.progressionExp">
+                        <div class="row color_g f_size_13">
+                          <div class="col">
+                            <span>Keep learning and revising the topics to hone your skills.</span>
+                          </div>
+                        </div>
+                        <div class="row lxp_gray123">
+                          <div class="col-7"><span class="f_size_13">
+                              Progression
+                            </span></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-10 justify-content-center align-self-center">
+                            <mat-progress-bar class="example-margin" [mode]="'determinate'"
+                              [value]="course.self_paced_learning_progression!==''?course.self_paced_learning_progression:0">
+                            </mat-progress-bar>
+                          </div>
+                          <div class="col-2 c_per">
+                            {{(course.self_paced_learning_progression!==''?(course.self_paced_learning_progression>100?100:course.self_paced_learning_progression):0)| number:'1.0-0'}}%
+                          </div>
                         </div>
                       </div>
-                      <div class="row lxp_gray123">
-                        <div class="col-7"><span class="f_size_13">
-                            Progression
-                          </span></div>
-                      </div>
-                      <div class="row">
-                        <div class="col-10 justify-content-center align-self-center">
-                          <mat-progress-bar class="example-margin" [mode]="'determinate'"
-                            [value]="course.self_paced_learning_progression!==''?course.self_paced_learning_progression:0">
-                          </mat-progress-bar>
-                        </div>
-                        <div class="col-2 c_per">
-                          {{(course.self_paced_learning_progression!==''?(course.self_paced_learning_progression>100?100:course.self_paced_learning_progression):0)| number:'1.0-0'}}%
-                        </div>
+                      <div *ngIf="course.progressionExp" class="f_size_12 animate__animated animate__fadeInUp">
+                        Modules completed {{(course.completed_module_count!=null?course.completed_module_count:0) +'/'+ (course.total_module_count!=null?course.total_module_count:0)}}<br>
+                        Topics completed {{(course.completed_topic_count!=null?course.completed_topic_count:0) +'/'+ (course.total_topic_count!=null?course.total_topic_count:0)}}<br>
+                        <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline; display: none;">View self-learning
+                          activity details..</span>
                       </div>
                     </div>
       
@@ -492,12 +526,6 @@
                             (click)="course.progressionExp?course.progressionExp=false:course.progressionExp=true">
                             <span class="f_size_10 ">{{course.progressionExp?'Hide details...':'See more details...' }}</span>
                           </span>
-                          <div *ngIf="course.progressionExp" class="f_size_12">
-                            Modules completed {{(course.completed_module_count!=null?course.completed_module_count:0) +'/'+ (course.total_module_count!=null?course.total_module_count:0)}}<br>
-                            Topics completed {{(course.completed_topic_count!=null?course.completed_topic_count:0) +'/'+ (course.total_topic_count!=null?course.total_topic_count:0)}}<br>
-                            <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline; display: none;">View self-learning
-                              activity details..</span>
-                          </div>
                         </div>
                       </div>
                       <div class="cardButton">
@@ -529,22 +557,32 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="tabselector == 1" [ngClass]="tabselector == 1 ? 'activetab1' :''">
+
+                <div class="cardTabs" *ngIf="tabselector == 1" [ngClass]="tabselector == 1 ? 'activetab1' :''">
                   <div *ngIf="course.isBatchCourse" matRipple class="card-hover cardHeights grey_border1" (mouseover)="instDefault ='../../../../assets/learner/mycourseicons/Instructor_hover.svg'" (mouseout)="instDefault='../../../../assets/learner/mycourseicons/Instructor_default.svg'">
                     <div class="row">
-                      <div class="col ">
+                      <!-- <div class="col">
                         <div class="circle_outline pull-left  m-r-15px m-b-10px">
                           <span class="lxp-monitor lxp-theme-red title_img f_size_23"></span>
                         </div>
                         <p class="f_size_16 f_wt_500 color_black titleAlign"> Instructor Led</p>
-                      </div>
+                      </div> -->
                     </div>
-                    <div class="row color_g f_size_13">
-                      <div class="col-5 ">
-                        <img alt="" class="inst_hover" [src]="instDefault" width="100px" height="80px">
+                    <div class="height_match">
+                      <div class="row color_g f_size_13 animate__animated animate__fadeIn" *ngIf="!course.ledinstExp">
+                        <div class="col-5 ">
+                          <img alt="" class="inst_hover" [src]="instDefault" width="100px" height="80px">
+                        </div>
+                        <div class="col p-l-0px">
+                          <p>Interact with your faculty, ask questions and learn from your classmates.</p>
+                        </div>
                       </div>
-                      <div class="col p-l-0px">
-                        <p>Interact with your faculty, ask questions and learn from your classmates.</p>
+
+                      <div *ngIf="course.ledinstExp" class="f_size_13 animate__animated animate__fadeInUp">
+                        Sessions attended
+                        {{course.instructor_lead_session_completed_count+'/'+course.instructor_lead_session_total_count}}<br>
+                        <span class="pointer f_size_10" style="color:#C02222; text-decoration: underline;"
+                          (click)="goInstructorLed(course)">View sessions details..</span>
                       </div>
                     </div>
       
@@ -554,12 +592,6 @@
                           <span class="pointer seemoreHove" (click)="course.ledinstExp?course.ledinstExp=false:course.ledinstExp=true">
                             <span class="f_size_10">{{course.ledinstExp?'Hide details...':'See more details...' }}</span>
                           </span>
-                          <div *ngIf="course.ledinstExp" class="f_size_13">
-                            Sessions attended
-                            {{course.instructor_lead_session_completed_count+'/'+course.instructor_lead_session_total_count}}<br>
-                            <span class="pointer f_size_10" style="color:#C02222; text-decoration: underline;"
-                              (click)="goInstructorLed(course)">View sessions details..</span>
-                          </div>
                         </div>
                       </div>
                       <div class="cardButton">
@@ -578,23 +610,34 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="tabselector == 2" [ngClass]="tabselector == 2 ? 'activetab2' :''">
+
+                <div class="cardTabs" *ngIf="tabselector == 2" [ngClass]="tabselector == 2 ? 'activetab2' :''">
                   <div *ngIf="course.isBatchCourse" matRipple class="card-hover cardHeights grey_border1" (mouseover)="discussDefault ='../../../../assets/learner/mycourseicons/Discussion_hover.svg'" (mouseout)="discussDefault='../../../../assets/learner/mycourseicons/Discussion_default.svg'">
                     <div class="row">
-                      <div class="col ">
-                        <div class="circle_outline pull-left  m-r-15px m-b-10px">
+                      <!-- <div class="col">
+                        <div class="circle_outline pull-left m-r-15px m-b-10px">
                           <span class="lxp-stack lxp-theme-red title_img f_size_23"></span>
                           </div>
                         <p class="f_size_16 f_wt_500 color_black titleAlign"> Discussion Forum</p>
-                      </div>
+                      </div> -->
                     </div>
-                    <div class="row color_g f_size_13">
-                      <div class="col-5 ">
-                        <img alt="" [src]="discussDefault"
-                          width="100px" height="80px">
+
+                    <div class="height_match">
+                      <div class="row color_g f_size_13 animate__animated animate__fadeIn"  *ngIf="!course.discussExp">
+                        <div class="col-5 ">
+                          <img alt="" [src]="discussDefault"
+                            width="100px" height="80px">
+                        </div>
+                        <div class="col p-l-0px">
+                          <p>Interact with peers by posting thoughts and comments on given topic.</p>
+                        </div>
                       </div>
-                      <div class="col p-l-0px">
-                        <p>Interact with peers by posting thoughts and comments on given topic.</p>
+                      <div *ngIf="course.discussExp" class="f_size_13 animate__animated animate__fadeInUp">
+                        Threads {{course.thread_count!==null?course.thread_count:'N/A'}}<br>
+                        Comments {{course.comment_count!==null?course.comment_count:'N/A'}}<br>
+                        Replies {{course.reply_count!==null?course.reply_count:'N/A'}}<br>
+                        <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;"
+                          (click)="goToForum(course)">View discussions..</span>
                       </div>
                     </div>
       
@@ -604,13 +647,6 @@
                           <span class="pointer seemoreHove" (click)="course.discussExp?course.discussExp=false:course.discussExp=true">
                             <span class="f_size_10">{{course.discussExp?'Hide details...':'See more details...' }}</span>
                           </span>
-                          <div *ngIf="course.discussExp" class="f_size_13">
-                            Threads {{course.thread_count!==null?course.thread_count:'N/A'}}<br>
-                            Comments {{course.comment_count!==null?course.comment_count:'N/A'}}<br>
-                            Replies {{course.reply_count!==null?course.reply_count:'N/A'}}<br>
-                            <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;"
-                              (click)="goToForum(course)">View discussions..</span>
-                          </div>
                         </div>
                       </div>
                       <div class="cardButton">
@@ -627,25 +663,36 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="tabselector == 3" [ngClass]="tabselector == 3 ? 'activetab3' :''">
+
+                <div class="cardTabs" *ngIf="tabselector == 3" [ngClass]="tabselector == 3 ? 'activetab3' :''">
                   <div *ngIf="course.isBatchCourse" matRipple class="card-hover cardHeights grey_border1" (mouseover)="activityDefault ='../../../../assets/learner/mycourseicons/Activities_hover.svg'" (mouseout)="activityDefault='../../../../assets/learner/mycourseicons/Activities_defult.svg'">
                     <div class="row">
-                      <div class="col ">
+                      <!-- <div class="col">
                         <div class="circle_outline pull-left  m-r-15px m-b-10px">
                           <img alt="" src="../../../../assets/learner/mycourseicons/activities.svg" width="22px" height="22px"
                         class="title_img">
                       </div>                 
-                           <p class="f_size_16 f_wt_500 color_black titleAlign"> Activities</p>
+                        <p class="f_size_16 f_wt_500 color_black titleAlign"> Activities</p>
+                      </div> -->
+                    </div>
+                    
+                    <div class="height_match">
+                      <div class="row color_g f_size_13 animate__animated animate__fadeIn"  *ngIf="!course.activityExp">
+                        <div class="col-5 ">
+                          <img alt="" [src]="activityDefault" width="100px" height="80px">
+                        </div>
+                        <div class="col p-l-0px">
+                          <p>Practice the skills learnt while reading and attending classes.</p>
+                        </div>
+                      </div>
+                      <div *ngIf="course.activityExp" class="f_size_13 animate__animated animate__fadeInUp">
+                        Assignments completed {{course.assignment_submitted_count+'/'+course.assignment_total_count}}<br>
+                        Projects completed {{course.completed_mid_course_project_count+'/'+course.total_mid_course_project_count}}<br>
+                        <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;"
+                          (click)="gotoSubmissionDetails(course)">View submission details..</span>
                       </div>
                     </div>
-                    <div class="row color_g f_size_13">
-                      <div class="col-5 ">
-                        <img alt="" [src]="activityDefault" width="100px" height="80px">
-                      </div>
-                      <div class="col p-l-0px">
-                        <p>Practice the skills learnt while reading and attending classes.</p>
-                      </div>
-                    </div>
+
                     <!-- <div class="row pseudoheight"></div> -->
                     <div class="moreDetails d-flex justify-content-between align-items-center">
                       <div class="seeMoreDetails">
@@ -653,12 +700,6 @@
                           <span class="pointer seemoreHove" (click)="course.activityExp?course.activityExp=false:course.activityExp=true">
                             <span class="f_size_10">{{course.activityExp?'Hide details...':'See more details...' }}</span>
                           </span>
-                          <div *ngIf="course.activityExp" class="f_size_13">
-                            Assignments completed {{course.assignment_submitted_count+'/'+course.assignment_total_count}}<br>
-                            Projects completed {{course.completed_mid_course_project_count+'/'+course.total_mid_course_project_count}}<br>
-                            <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;"
-                              (click)="gotoSubmissionDetails(course)">View submission details..</span>
-                          </div>
                         </div>
                         <!-- <div class="row m-auto">
                           <div class="col justify-content-center align-self-center">

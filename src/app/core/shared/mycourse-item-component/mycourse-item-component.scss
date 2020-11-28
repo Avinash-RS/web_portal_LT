@@ -14,9 +14,9 @@
     //   }
     // }
     width: 23.5%;
-    text-align: center;
+    justify-content: center;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 6px 10px 3px 10px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     @media only screen and (min-width: 576px) {
@@ -27,13 +27,37 @@
       .title {
         color: #C02222;
       }
+      .circle_outline {
+        background-color: transparent;
+        border: none;
+      }
     }
-    .title {
-      display: block;
-      white-space: nowrap;
-      overflow: hidden;
-      color: rgba(0, 0, 0, 0.7);
+    .lxp-gauge, 
+    .lxp-monitor, 
+    .lxp-stack {
+      &::before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 25px;
+      }
     }
+    .activityImg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 75%;
+      object-fit: contain;
+    }
+    // .title {
+    //   display: block;
+    //   white-space: nowrap;
+    //   overflow: hidden;
+    //   color: rgba(0, 0, 0, 0.7);
+    // }
     .tabIcon {
       position: relative;
     }
@@ -43,34 +67,49 @@
   }
 }
 .tabContents {
-  .activetab {
+  .tabTitle {
+    padding-top: 3px;
+    text-align: center;
     background-color: rgba(0, 0, 0, 0.05);
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    border-top-right-radius: 8px;
+    span {
+      line-height: normal;
+      font-size: 13px;
+      width: 23.5%;
+      @media only screen and (min-width: 576px) {
+        width: 20%;
+      }
+    }
+    .livetab, .livetab1, .livetab2, .livetab3 {
+      color: #C02222;
+    }
   }
-  .activetab1, .activetab2 {
-    background-color: rgba(0, 0, 0, 0.05);
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    border-top-right-radius: 8px;
+  .borderLeftRadius {
     border-top-left-radius: 8px;
   }
-  .activetab3 {
-    background-color: rgba(0, 0, 0, 0.05);
-    border-bottom-left-radius: 8px;
+  .borderRightRadius {
+    border-top-right-radius: 8px;
+  }
+  .cardTabs {
     border-bottom-right-radius: 8px;
-    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.05);
   }
 }
+
+.animate__animated.animate__fadeInUp {
+  --animate-duration: 0.3s;
+  --animation-timing-function: ease-in-out;
+}
+
 .courseCardTab {
   width: 100%;
-  @media only screen and (min-width: 737px) {
+  margin: 20px 0;
+  @media only screen and (min-width: 601px) {
     display: none;
   }
 }
 .desktopTab {
-  @media only screen and (max-width: 736px) {
+  @media only screen and (max-width: 600px) {
     display: none !important;
   }
 }
@@ -957,7 +996,11 @@ hr {
   margin-top: 11px;
 }
 
-.courseDetailsCol {
+.courseDetailsCol > .row {
+  margin: 0;
+  @media only screen and (max-width: 600px) {
+    margin: 0 -15px 0 -15px;
+  }
   // padding-left: 0px;
   // padding: 0;
 }
@@ -1071,6 +1114,9 @@ hr {
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 10px !important;
+  @media only screen and (max-width: 767px) {
+    margin-top: 15px !important;
+  }
 }
 
 .catDropdown {
@@ -1117,8 +1163,6 @@ hr {
 .lxp_gray123 {
   color: $lxp-gray;
 }
-
-
 
 .assignbtn {
   position: relative;
@@ -2101,7 +2145,7 @@ li {
 }
 
 .circle_outline {
-  background-color:#fff;
+  background:#fff;
   border:1px solid #C9C9C9;    
   height:40px;
   border-radius:50%;
@@ -2111,6 +2155,7 @@ li {
 //to align img center
   display: flex;
   justify-content: center;
+  transition: background 0.3s ease-in-out;
 }
 .title_img{
 display:block; 
@@ -2132,7 +2177,14 @@ p.titleAlign {
 .lxp-theme-red{
   color:$lxp-theme-green
 }
-
+.lxp-theme-grey {
+  color: #5c6873;
+}
+.activetab {
+  .lxp-theme-grey {
+    color:$lxp-theme-green;
+  }
+}
 /* Shine */
 .shine figure {
 	position: relative;
