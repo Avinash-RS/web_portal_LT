@@ -248,13 +248,15 @@ margin-bottom: 1% !important;
 
 /* Ramya's css */
 .projHead {
-  color: $lxp-theme-green;
+  // color: $lxp-theme-green;
   position: absolute;
+  left: 73px;
 }
 .assignIcon {
   font-size: 19px;
   margin-left: 20px;
   cursor: text;
+  color: $lxp-icon;
 }
 .group {
   margin-right: 13px;
@@ -286,6 +288,28 @@ margin-bottom: 1% !important;
   right: 38px;
   top: 5px;
   cursor: default;
+}
+.groupBtn1 {
+  border: 1px solid #5C6873;
+  opacity: 1;
+  background-color: #ffffff;
+  color: #1F1A17;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  right: 9px;
+  top: 9px;
+  cursor: default;
+}
+.grpName {
+  position: relative;
+  bottom: 2px;
+  left: 1px;
+}
+.groupData {
+  position: relative;
+  bottom: 12px;
+  right: 10px;
 }
 .arrBtn {
   background-color: #ffffff;
@@ -403,7 +427,7 @@ margin-bottom: 1% !important;
     right: 9px;
 }
 .m-r-40 {
-  margin-right: 146px;
+  margin-right: 44px;
 }
 .m-r-2 {
   margin-right: 37px;
@@ -514,7 +538,7 @@ margin-top: 8px;
 
 ::ng-deep .custom-mat-tooltip {
 
-  position: relative !important;
+  position: absolute !important;
   bottom: 50px !important;
   background-color: black !important;
   opacity: 1 !important;
@@ -549,7 +573,7 @@ right: 3rem;
 }
 .actImg {
   position: absolute;
-  top: 19px;
+  // top: 19px;
 }
 .noData {
   font: normal normal normal 23px/29px Roboto Condensed;

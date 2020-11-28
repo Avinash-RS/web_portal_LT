@@ -405,20 +405,18 @@ export class ActivitiesComponent implements OnInit {
         }
         // Activity Dates
         const startDate = new Date(element.projectActivity.activitystartdate);
-        element.activityStartDate = moment(startDate).format('LLL');
-        // element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
+        element.activityStartDate = moment(startDate).format('ll');
+        element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
         const endDate = new Date(element.projectActivity.activityenddate);
-        element.activityEndDate = moment(endDate).format('LLL');
+        element.activityEndDate = moment(endDate).format('ll');
         const submitDate = new Date(element.projectActivity.submitted_on);
         element.submittedOn = moment(submitDate).format('ll');
 
-        console.log('dateeee', moment().format('LLL'), element.activityStartDate);
-        if (moment().format('LLL') < element.activityStartDate) {
+        if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
           element.enableSubmit = false;
         } else {
           element.enableSubmit = true;
         }
-        console.log('submit', element.enableSubmit);
       });
  }
 });
