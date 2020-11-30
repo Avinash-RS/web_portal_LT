@@ -1322,7 +1322,21 @@ hr {
   font-size: 18px;
   font-weight: 600 !important;
 }
-
+.courseWrapper {
+  margin-bottom: 10px;
+  p {
+    margin-bottom: 0 !important;
+  }
+}
+.courseAuthor {
+  width: 40%;
+}
+.courseDuration {
+  width: 39%;
+}
+.courseCredit {
+  width: 19%;
+}
 .courseName p {
   margin-bottom: 0px !important
 }

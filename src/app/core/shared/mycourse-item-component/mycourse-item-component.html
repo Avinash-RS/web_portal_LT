@@ -66,24 +66,19 @@
           </div>
         </div>
         <div class="col-12 col-sm-12 col-md-8 col-lg-4">
-          <div class="f_size_17 f_wt_600  coursename">
+          <div class="f_size_17 f_wt_600 coursename">
             <p class="courceNameTag" title="{{course.course_name}}" placement="top">
               {{course.course_name}}
             </p>
           </div>
-          <div class="row lxp_gray123">
-            <div class="col-5">
-              <p style="margin-bottom:10px"> By:
-                {{course.author_details[0].author_name?course.author_details[0].author_name:'N/A'}}
-              </p>
+          <div class="courseWrapper d-flex justify-content-between lxp_gray123">
+            <div class="courseAuthor">
+              <p> By: {{course.author_details[0].author_name?course.author_details[0].author_name:'N/A'}} </p>
             </div>
-            <div class="col">
-              <p style="margin-bottom:10px">Total duration: {{
-              course.total_duration? course.total_duration + " hours"
-                  : "1" + " hour"
-            }}</p>
+            <div class="courseDuration">
+              <p>Total duration: {{course.total_duration? course.total_duration + " hours" : "1" + " hour"}}</p>
             </div>
-            <div class="col-2 no_padding">
+            <div class="courseCredit">
               Credits: {{course.credits!==null?course.credits:0}}
             </div>
           </div>
@@ -444,6 +439,7 @@
           </div>
         </div>
         <!-- <div class="col-12 col-sm-12 col-md-12 col-lg-3 p-x-7px"></div> -->
+        <!-- Desktop Device Content Ends -->
 
         <!-- Mobile Device Content -->
         <!-- Tab sample -->
@@ -464,7 +460,6 @@
                 </div>
                 <div class="tab fourth d-flex align-items-end" (click)="tabselector = 3; " [ngClass]="tabselector == 3 ? 'activetab' :''">
                   <span _ngcontent-wlb-c8="" class="circle_outline tabIcon">
-                    <!-- <img alt="" src="../../../../assets/learner/mycourseicons/activities.svg" width="22px" height="22px" class="title_img activityImg"> -->
                     <img [src]="(tabselector==3)? '../../../../assets/learner/mycourseicons/activities.svg' : '../../../../assets/learner/mycourseicons/Activities_active.svg'" width="22px" height="22px" class="title_img activityImg"/>
                   </span>
                   <!-- <span class="title">Activities</span> -->
