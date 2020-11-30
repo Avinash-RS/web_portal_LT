@@ -5,43 +5,38 @@
 
   <div class="tab desktopMenu" *ngIf="show">
     <!-- COmmenting knowledge resource/ activity center for UAT release -->
-    <!-- KNOWLEDGE RESOURCE -->
-    <button matRipple class="" [ngClass]="activeUrl === '/Learner/knowledge' ? 'btn2 p-x-15px p5px float-right colgreen' : 
-    'btn1 p-x-15px float-right colWhite'" md-raised-button routerLink="/Learner/knowledge" routerLinkActive="active">
-    <span class="lxp-knowledge headicon animated animatedFadeInUp fadeInUp"></span>
-      <!-- <mat-icon fontSet="material-icons-outlined " class="headicon animated animatedFadeInUp fadeInUp" inline=true>
-        event_note </mat-icon> -->
-        <div class="imgAdj"><span class="smNoDisp">&nbsp; Knowledge Resources</span></div>
-    </button>
-
-    <!-- ACTIVITY CENTER -->
-    <button matRipple class="" [ngClass]="activeUrl === '/Learner/activitycenterhomescreen' ? 'btn2 p-x-15px float-right colgreen' : 
-    'colWhite btn1 p-x-15px float-right'" md-raised-button routerLink="/Learner/activitycenterhomescreen">
-        <mat-icon fontSet="material-icons-outlined" class="headicon animated animatedFadeInUp fadeInUp " inline=true>
-        offline_bolt </mat-icon> <span class="smNoDisp"> Activity Center</span> 
-    </button>
-
-    <!-- CALENDAR -->
-    <button matRipple  [ngClass]="activeUrl === '/Learner/calendar' ? 'colgreen btn2 p-x-15px float-right' : 
-    'colWhite btn1 p-x-15px float-right'" md-raised-button routerLink="/Learner/calendar" routerLinkActive="active">
-      <!-- <mat-icon fontSet="material-icons-outlined " class="headicon animated animatedFadeInUp fadeInUp" inline=true>
-        event_note </mat-icon> -->
-        <span class="headicon animated animatedFadeInUp fadeInUp lxp-calendar"></span> 
-        <div class="imgAdj smNoDisp">&nbsp;Calendar</div>
-    </button>
-
     <!-- MY COURSE -->
-    <button matRipple [ngClass]="activeUrl === '/Learner/MyCourse' ? 'colgreen btn2 p-x-15px float-right' : 
-      'colWhite btn1 p-x-15px float-right'" md-raised-button routerLink="/Learner/MyCourse">
-      <mat-icon fontSet="material-icons-outlined" class="headicon animated animatedFadeInUp fadeInUp " inline=true>
-        local_library </mat-icon> 
+    <button class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/MyCourse' ? 'colgreen btn2 p-x-15px' : 'colWhite btn1 p-x-15px'" md-raised-button routerLink="/Learner/MyCourse">
+      <mat-icon fontSet="material-icons-outlined" class="headicon" inline=true> local_library </mat-icon> 
         <span class="smNoDisp"> My Courses</span>
     </button>
 
-    <span style="margin-left: 3%;"></span>
+    <!-- CALENDAR -->
+    <button class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/calendar' ? 'colgreen btn2 p-x-15px' : 'colWhite btn1 p-x-15px'" md-raised-button routerLink="/Learner/calendar" routerLinkActive="active">
+      <!-- <mat-icon fontSet="material-icons-outlined " class="headicon animated animatedFadeInUp fadeInUp" inline=true>
+        event_note </mat-icon> -->
+        <span class="headicon lxp-calendar"></span> 
+        <div class="imgAdj smNoDisp">&nbsp;Calendar</div>
+    </button>
+
+    <!-- ACTIVITY CENTER -->
+    <button class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/activitycenterhomescreen' ? 'btn2 p-x-15px colgreen' : 'colWhite btn1 p-x-15px'" md-raised-button routerLink="/Learner/activitycenterhomescreen">
+        <mat-icon fontSet="material-icons-outlined" class="headicon" inline=true> offline_bolt </mat-icon>
+        <span class="smNoDisp"> Activity Center</span> 
+    </button>
+
+    <!-- KNOWLEDGE RESOURCE -->
+    <button class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/knowledge' ? 'btn2 p-x-15px p5px colgreen' : 'btn1 p-x-15px colWhite'" md-raised-button routerLink="/Learner/knowledge" routerLinkActive="active">
+    <span class="lxp-knowledge headicon"></span>
+      <!-- <mat-icon fontSet="material-icons-outlined " class="headicon animated animatedFadeInUp fadeInUp" inline=true>
+        event_note </mat-icon> -->
+        <div class="imgAdj"><span class="smNoDisp"> Knowledge Resources</span></div>
+    </button>
+
     <!-- Afser's change on Profile not reuired removed *ngIf="loginDetails.is_profile_updated"-->
   </div>
   <!-- End of desktopMenu -->
+
 
   <!-- Mobile Menu Starts -->
   <div class="tab mobMenu">
@@ -86,7 +81,6 @@
   <button class="mobHamburger" mat-button [matMenuTriggerFor]="mobmenu" style="z-index: 999;">
     <mat-icon>more_vert</mat-icon>
   </button>
-  <div class="cdk-overlay-backdrop cdk-overlay-dark-backdrop cdk-overlay-backdrop-showing asdfa" style="z-index: 99999;"></div>
 
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="navigateProfile()">
