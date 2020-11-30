@@ -958,3 +958,12 @@ mat-header-cell,
 .mat-dialog-container {
   padding: 10px !important;
 }
+// .mobHamburger.mat-button:hover .mat-button-focus-overlay {
+//   opacity: 0 !important;
+// }
+.mobHamburger .mat-button-focus-overlay {
+  background: transparent;
+}
+.mobHamburger .mat-ripple {
+  display: none;
+}
