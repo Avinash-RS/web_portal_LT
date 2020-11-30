@@ -618,13 +618,13 @@
                   </span>
                   <!---------------------------Team------------------>
                   <span class="float-right group">
-                    <button mat-mini-fab class="groupBtn">
+                    <button mat-mini-fab class="groupBtn" *ngIf="!project.projectActivity.showLearnerList">
                       <mat-icon class="grpIcon">group</mat-icon>
                     </button>
-                    <span class="teamName" *ngIf="project.projectActivity.groupname.length < 14">
+                    <span class="teamName" *ngIf="project.projectActivity.groupname.length < 14 && !project.projectActivity.showLearnerList">
                       {{project.projectActivity.groupname}} ({{project.projectActivity.groupDetails.length}})
                     </span>
-                    <span class="teamName" *ngIf="project.projectActivity.groupname.length > 14"
+                    <span class="teamName" *ngIf="project.projectActivity.groupname.length > 14 && !project.projectActivity.showLearnerList"
                       matTooltip="{{project.projectActivity.groupname}}" matTooltipClass="custom-mat-tooltip">
                       {{(project.projectActivity.groupname| slice:0:14)+'...'}}
                     </span>&nbsp;
@@ -759,11 +759,11 @@
                         <mat-icon *ngIf="item.doc_type == 'application/pdf'
                         || item.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'" class="videoPlay float-left">picture_as_pdf
                         </mat-icon>
-                        <span class="uploadfileName" *ngIf="item.name.length < 28">
+                        <span class="uploadfileName" *ngIf="item.name.length <= 27">
                             {{item.name}}
                           </span>
-                        <span class="uploadfileName" *ngIf="item.name.length > 28" matTooltip="{{item.name}}"
-                        matTooltipClass="custom-mat-tooltip">
+                        <span class="uploadfileName" *ngIf="item.name.length >= 28" matTooltip="{{item.name}}"
+                        matTooltipClass="custom-mat-tooltip" placement="right">
                           {{(item.name| slice:0:28)+'...'}}
                         </span>
                         <mat-icon class="deleteIcon float-right"
@@ -782,14 +782,14 @@
                           Add your files
                         </button>
 
-                        <button mat-stroked-button [disabled]="project.enableSubmit == false" class="submit-btn"
+                        <button mat-stroked-button class="submit-btn"
                           (click)="learnerSumbitdeleteVideo(project, '' ,'submit')"
                           *ngIf="project.projectActivity.submit_status == 'notsubmitted' && project.projectActivity.videodetails.length > 0">
                           Submit
                         </button>
-                        <button mat-stroked-button [disabled]="project.enableSubmit == false"
-                          *ngIf="project.projectActivity.videodetails.length == 0" class="submit-btn"> Submit </button>
-                        <button mat-stroked-button class="submitted-btn" [disabled]="true"
+                        <button mat-stroked-button class="submitted-btn mt-2"
+                          *ngIf="project.projectActivity.submit_status == 'notsubmitted' && project.projectActivity.videodetails.length == 0 || project.enableSubmit == false"> Submit </button>
+                          <button mat-stroked-button class="submitted-btn" [disabled]="true"
                           *ngIf="project.projectActivity.submitAction == 'submit'">
                           Submitted
                         </button><br><br>
@@ -946,20 +946,23 @@
 
             <!------------------------------------Learner list------------------------------->
             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 learnerList first" *ngIf="project.projectActivity.showLearnerList">
-              <div class="align-center">
-
-                <span *ngIf="project.projectActivity.groupname.length < 14">
+              <div class="align-center groupData">
+                <button mat-mini-fab class="groupBtn1" *ngIf="project.projectActivity.showLearnerList">
+                  <mat-icon class="grpIcon">group</mat-icon>
+                </button>
+                <span class="grpName" *ngIf="project.projectActivity.groupname.length < 14">
                   {{project.projectActivity.groupname}} ({{project.projectActivity.groupDetails.length}})
                 </span>
-                <span *ngIf="project.projectActivity.groupname.length > 14"
+                <span class="grpName" *ngIf="project.projectActivity.groupname.length > 14"
                   matTooltip="{{project.projectActivity.groupname}}" matTooltipClass="custom-mat-tooltip">
                   {{(project.projectActivity.groupname| slice:0:14)+'...'}}
                 </span>
+                </div>
                 <button mat-mini-fab class="arrfwd" *ngIf="project.projectActivity.showLearnerList"
                   (click)="project.projectActivity.showLearnerList = !project.projectActivity.showLearnerList">
                   <mat-icon class="arrBack">arrow_forward</mat-icon>
                 </button>
-              </div>
+              <!-- </div> -->
               <div class="list learnerData">
                 <ul class="list-group" *ngFor="let learner of project.projectActivity.groupDetails">
                   <li class="list-group-item">{{learner.name}}</li>
