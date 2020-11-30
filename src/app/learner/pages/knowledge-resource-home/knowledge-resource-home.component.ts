@@ -25,9 +25,9 @@ export class KnowledgeResourceHomeComponent implements OnInit {
   tempDetailsList = [];
 
   constructor(public apiService: knowledgeService,
-              public toast: ToastrService,
-              private CommonService: CommonServicesService,
-              private router: Router) { }
+    public toast: ToastrService,
+    private CommonService: CommonServicesService,
+    private router: Router) { }
 
   ngOnInit() {
     this.getResourceFiles();
@@ -52,15 +52,16 @@ export class KnowledgeResourceHomeComponent implements OnInit {
       });
       tempDetails.forEach((d) => {
         const b = {
-        domain: '',
-        areaOfInterest: [],
-        isMore: false};
+          domain: '',
+          areaOfInterest: [],
+          isMore: false
+        };
         b.domain = d[0];
         d[1].forEach((areaOfInt) => {
-        b.areaOfInterest.push(areaOfInt[0]);
+          b.areaOfInterest.push(areaOfInt[0]);
         });
         this.tempDetailsList.push(b);
-        });
+      });
       this.details = this.tempDetailsList;
       this.isLoadBalanced = true;
     });
@@ -122,12 +123,13 @@ export class KnowledgeResourceHomeComponent implements OnInit {
     }
   }
 
-  onResourcePreview(domain, areaOfInterest) {
+  onResourcePreview(domains, areaOfInterest) {
     this.router.navigate(['/Learner/knowledge/preview'],
       {
         queryParams: {
-          domain,
-          areaOfInterest
+          domain: domains,
+          // tslint:disable-next-line: object-literal-shorthand
+          area_of_interest: areaOfInterest
         }
       });
   }
