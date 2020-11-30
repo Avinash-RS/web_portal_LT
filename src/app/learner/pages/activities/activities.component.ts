@@ -74,7 +74,7 @@ export class ActivitiesComponent implements OnInit {
       0: {
         items: 1
       },
-      400: {
+      350: {
         items: 2
       },
       740: {
