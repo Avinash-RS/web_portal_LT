@@ -69,7 +69,7 @@ export class KnowledgeLandingPageComponent implements OnInit {
       }, {});
       this.resourceFile = Object.entries(tempDetails);
       this.resourceFile[0][1].forEach((d, i) => {
-        const extIdx = d.url.search(/\.pdf|.mp4|.jpg|.mp3|.png|.jpeg/)
+        const extIdx = d.url.search(/\.pdf|.mp4|.jpg|.mp3|.png|.jpeg/);
         if (extIdx >= 0) {
           d.fileType = d.url.substring(extIdx + 1, extIdx + 4);
         }

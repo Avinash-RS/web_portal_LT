@@ -3,11 +3,11 @@ import videojs from 'video.js';
 import * as adapter from 'webrtc-adapter/out/adapter_no_global.js';
 import * as RecordRTC from 'recordrtc';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from "ngx-toastr";
+import { ToastrService } from 'ngx-toastr';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { CommonServicesService } from "@core/services/common-services.service";
+import { CommonServicesService } from '@core/services/common-services.service';
 /*
 // Required imports when recording audio-only using the videojs-wavesurfer plugin
 import * as WaveSurfer from 'wavesurfer.js';
@@ -35,7 +35,8 @@ export class PerformVideoRecordComponent implements OnInit {
   courseName: any;
   videopath: any;
 
-  private _elementRef: ElementRef
+  // tslint:disable-next-line:variable-name
+  private _elementRef: ElementRef;
 
   // index to create unique ID for component
   idx = 'clip1';
@@ -43,11 +44,11 @@ export class PerformVideoRecordComponent implements OnInit {
   private config: any;
   private player: any;
   private plugin: any;
-  
 
-  constructor(elementRef: ElementRef, private gs: GlobalServiceService, 
-    private commonServices: CommonServicesService, private sanitizer: DomSanitizer,
-  public toastr: ToastrService, public route: Router, public Lservice: LearnerServicesService) {
+
+  constructor(elementRef: ElementRef, private gs: GlobalServiceService,
+              private commonServices: CommonServicesService, private sanitizer: DomSanitizer,
+              public toastr: ToastrService, public route: Router, public Lservice: LearnerServicesService) {
     const detail =
       this.route.getCurrentNavigation() &&
       this.route.getCurrentNavigation().extras &&
@@ -125,16 +126,17 @@ export class PerformVideoRecordComponent implements OnInit {
     console.log('itrationSend', this.itrationSend);
   }
 
+  // tslint:disable-next-line:use-life-cycle-interface
   ngAfterViewInit() {
     // ID with which to access the template's video element
-    let el = 'video_' + this.idx;
+    const el = 'video_' + this.idx;
 
     // setup the player via the unique element ID
     this.player = videojs(document.getElementById(el), this.config, () => {
       console.log('player ready! id:', el);
 
       // print version information at startup
-      var msg = 'Using video.js ' + videojs.VERSION +
+      const msg = 'Using video.js ' + videojs.VERSION +
         ' with videojs-record ' + videojs.getPluginVersion('record') +
         ' and recordrtc ' + RecordRTC.version;
       videojs.log(msg);
@@ -154,18 +156,16 @@ export class PerformVideoRecordComponent implements OnInit {
     this.player.on('finishRecord', () => {
       // recordedData is a blob object containing the recorded data that
       // can be downloaded by the user, stored on server etc.
-      console.log('finished recording: ', this.player.recordedData);
       const performVideo = new FormData();
       performVideo.append('image', this.player.recordedData);
       this.Lservice.uploadVideo(performVideo).subscribe((data: any) => {
-        console.log('data video', data)
         if (data.Message === 'Success') {
           this.videopath = 'https://edutechstorage.blob.core.windows.net/' + data.Result.path;
-          let videoDetails = {
+          const videoDetails = {
             videourl: this.videopath,
             fileName: data.Result.filename,
             size: data.Result.size
-          }
+          };
           this.Lservice.closeRecoderdData$.next(videoDetails);
           this.Lservice.performDetailsSend$.next(this.performDetailsSend);
           this.Lservice.itrationSend$.next(this.itrationSend);
@@ -190,6 +190,7 @@ export class PerformVideoRecordComponent implements OnInit {
   }
 
   // use ngOnDestroy to detach event handlers and remove the player
+  // tslint:disable-next-line:use-life-cycle-interface
   ngOnDestroy() {
     if (this.player) {
       this.player.dispose();
