@@ -8,8 +8,8 @@
 <div class="row m-t-rw">
   <div class="col-xl-2 col-lg-0  col-sm-0"></div>
   <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-    <mat-card class="activitycard" [ngClass]="details?.nextactivity?.length > 1 ? 'ht-150' : 'ht-120'"
-      (click)="gototable1()">
+    <mat-card class="activitycard ht-120" [ngClass]="details?.nextactivity?.length == 0 ? '': 'pointer'"
+      (click)="details?.nextactivity?.length == 0 ? '': gototable1()">
       <!-- <mat-card-content> -->
       <div class="row no_padding ">
         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 center">
@@ -26,8 +26,9 @@
             <h4 class="m-b-0 color_red f-w-800">{{details?.nextactivity[0].activitystartdate | date:'longDate'}} &nbsp;
               |&nbsp;
               {{details?.nextactivity[0].activitystartdate | date:'shortTime'}} </h4>
-            <div *ngFor="let activities of details?.nextactivity">
-              <h3 class="m-b-0 f_size_15 color_grey no_margin">{{activities?.activity}} - {{activities?.activityname}} </h3>
+            <div>
+              <h3 class="m-b-0 f_size_15 color_grey no_margin">{{details?.nextactivity[0]?.activity}} - {{details?.nextactivity[0]?.activityname}} </h3>  
+              <!-- details?.nextactivity[details.nextactivity.length - 1] -->
               <!-- <p class="m-b-0 f_size_15">Perform-pollutionlevel and corrosion </p>
             <p class="m-b-0 f_size_15">Perform-pollutionlevel and corrosion  </p> -->
             </div>
@@ -38,8 +39,8 @@
     </mat-card>
   </div>
   <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-    <mat-card class="activitycard ht-120" (click)="gototable('completed')"
-      [ngClass]="(details?.Completed == null && details?.Graded == null && details?.Submitted ==null) ? '': 'pointer'">
+    <mat-card class="activitycard ht-120"
+      [ngClass]="(details?.Completed == null && details?.Graded == null && details?.Submitted ==null) ? '': 'pointer'" (click)="(details?.Completed == null && details?.Graded == null && details?.Submitted ==null) ? '': gototable('completed')">
       <!-- <mat-card-content> -->
       <div class="row no_padding ">
         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 center">
@@ -71,7 +72,8 @@
 <div class="row m-t-100  m-b-70">
   <div class="col-xl-2 col-lg-0 col-md-0 col-sm-0"></div>
   <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-    <mat-card class="activitycard ht-120 pointer" (click)="gototable('ongoing')">
+    <mat-card class="activitycard ht-120" (click)="details?.Yettosubmit == null ? '': gototable('ongoing')"
+    [ngClass]="details?.Yettosubmit == null ? '': 'pointer'">
       <!-- <mat-card-content> -->
       <div class="row no_padding ">
         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 center">
@@ -93,7 +95,8 @@
     </mat-card>
   </div>
   <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
-    <mat-card class="activitycard ht-120 pointer" (click)="gototable('allActivities')">
+    <mat-card class="activitycard ht-120" (click)="details?.Allactivites == null ? '': gototable('allActivities')"
+    [ngClass]="details?.Allactivites == null ? '': 'pointer'">
       <!-- <mat-card-content> -->
       <div class="row no_padding ">
         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 center">
