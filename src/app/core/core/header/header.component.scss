@@ -143,26 +143,17 @@
     font-weight: bold;
 }
 
-.headicon {
-    font-size: 22px !important;
-    // width: 30px !important;
-    position: relative;
-    top: 6px;
-}
-
 .activity-icon {
     height: 22px;
     width: 22px;
 }
-
-
 .colgreen {
     border-bottom: 2px solid $lxp-theme-green !important;
     color: #ffffff !important;
     background-color: $lxp-gray !important;
 }
 .btn2 :hover{
-background-color:$lxp-gray !important;
+    background-color:$lxp-gray !important;
 }
 
 .iconmenu {
@@ -232,4 +223,60 @@ background-color:$lxp-gray !important;
 
 .p-x-15px{
     padding:7px 15px; 
+}
+
+.headicon {
+    font-size: 18px !important;
+    // width: 30px !important;
+    position: relative;
+    // top: 6px;
+}
+
+.mobMenu {
+    display: none;
+    @media only screen and (max-width: 991px) {
+        display: block;
+    }
+}
+.mobileMenu {
+    .greyColor {
+        color: #5c6873;
+    }
+    .redColor {
+        background-color: rgba(0,0,0,0.05);
+        color: #C02222;
+    }
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+        cursor: pointer;
+        padding: 6px 20px;
+        &:focus {
+            outline: transparent;
+        }
+        &:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+        .mobContent {
+            margin-left: 8px;
+        }
+    }
+}
+.desktopMenu {
+    display: none;
+    @media only screen and (min-width:992px) {
+        display: block;
+    }
+}
+.mobHamburger {
+    display: none;
+    @media only screen and (max-width: 991px) {
+        display: block;
+    }
+}
+.mat-button {
+    min-width: auto;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.7);
 }
