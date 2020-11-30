@@ -1,9 +1,125 @@
 @import "variable";
 
 
+//Tab Starts
 
+.tabHeadings {
+  .tab {
+    // width: 15%;
+    // transition: width 0.5s ease-in-out;
+    // &.activetab {
+    //   width: 40%;
+    //   .title {
+    //     display: inline-block;
+    //   }
+    // }
+    width: 23.5%;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 6px 10px 3px 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    @media only screen and (min-width: 576px) {
+      width: 20%;
+    }
+    &.activetab {
+      background-color:#f5f5f5;
+      .title {
+        color: #C02222;
+      }
+      .circle_outline {
+        background-color: transparent;
+        border: none;
+      }
+    }
+    .lxp-gauge, 
+    .lxp-monitor, 
+    .lxp-stack {
+      &::before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 25px;
+      }
+    }
+    .activityImg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 75%;
+      object-fit: contain;
+    }
+    // .title {
+    //   display: block;
+    //   white-space: nowrap;
+    //   overflow: hidden;
+    //   color: rgba(0, 0, 0, 0.7);
+    // }
+    .tabIcon {
+      position: relative;
+    }
+    span {
+      display: inline-block;
+    }
+  }
+}
+.tabContents {
+  .tabTitle {
+    padding-top: 3px;
+    padding-bottom: 5px;
+    border-bottom:1px solid #d4d4d4;
+    text-align: center;
+    background-color: #f5f5f5;
+    span {
+      line-height: normal;
+      font-size: 13px;
+      width: 23.5%;
+      @media only screen and (min-width: 576px) {
+        width: 20%;
+      }
+    }
+    .livetab, .livetab1, .livetab2, .livetab3 {
+      color: #C02222;
+    }
+  }
+  .borderLeftRadius {
+    border-top-left-radius: 8px;
+  }
+  .borderRightRadius {
+    border-top-right-radius: 8px;
+  }
+  .cardTabs {
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background-color: #f1f1f1;
+  }
+}
 
+.animate__animated.animate__fadeInUp {
+  --animate-duration: 0.3s;
+  --animation-timing-function: ease-in-out;
+}
+.animate__animated.animate__fadeInDown {
+  --animate-duration: 0.3s;
+  --animation-timing-function: ease-in-out;
+}
 
+.courseCardTab {
+  width: 100%;
+  margin: 20px 0;
+  @media only screen and (min-width: 601px) {
+    display: none;
+  }
+}
+.desktopTab {
+  @media only screen and (max-width: 600px) {
+    display: none !important;
+  }
+}
+//Tab Ends
 
 .dot {
   font-size: 16px;
@@ -201,7 +317,7 @@
 }
 
 :host ::ng-deep.mat-card {
-  padding: 16px !important;
+  padding: 16px 0 0 0 !important;
   border-radius: 0px;
 }
 
@@ -279,7 +395,8 @@
   display: none;
   background-color: #5C6873;
   color: white;
-
+  position: relative;
+  z-index: -10;
 }
 
 .pointhover:hover .coursePoints {
@@ -886,8 +1003,13 @@ hr {
   margin-top: 11px;
 }
 
-.courseDetailsCol {
-  padding-left: 0px;
+.courseDetailsCol > .row {
+  margin: 0;
+  @media only screen and (max-width: 600px) {
+    margin: 0 -15px 0 -15px;
+  }
+  // padding-left: 0px;
+  // padding: 0;
 }
 
 .template {
@@ -999,6 +1121,9 @@ hr {
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 10px !important;
+  @media only screen and (max-width: 767px) {
+    margin-top: 15px !important;
+  }
 }
 
 .catDropdown {
@@ -1045,8 +1170,6 @@ hr {
 .lxp_gray123 {
   color: $lxp-gray;
 }
-
-
 
 .assignbtn {
   position: relative;
@@ -1902,12 +2025,6 @@ li {
   margin-top: 10px !important;
 }
 
-.cardHeights {
-  max-height: 330px !important;
-  padding: 15px;
-  
-}
-
 .inner {
   width: 80%;
   height: 1px;
@@ -1955,11 +2072,38 @@ li {
 
 .grey_border1 {
   //border: 1px solid #898989;
+  // background: #fcfcfc;
+  // opacity: 1;
+  // box-shadow: 0 0 4px #00000040;
+}
+.card-hover:hover {
+  // box-shadow: 0px 2px 12px #00000052;
+}
+
+.grey_border1:hover {
+  //border: 0.25px solid #898989;
+  // border-radius: 10px;
+  // background: #f5f5f5;
+}
+
+.cardHeights {
+  max-height: 330px !important;
+  padding: 15px;
+}
+.myCourseCards {
   background: #fcfcfc;
   opacity: 1;
   box-shadow: 0 0 4px #00000040;
+  width: 49%;
+  img {
+    max-width: 100%;
+  }
 }
-
+.myCourseCards:hover {
+  box-shadow: 0px 2px 12px #00000052;
+  border-radius: 10px;
+  background: #f5f5f5;
+}
 .m-2px {
   margin: 2px !important;
 }
@@ -2007,18 +2151,8 @@ li {
     display:inline-block;
 }
 
-.card-hover:hover {
-  box-shadow: 0px 2px 12px #00000052;
-}
-
-.grey_border1:hover {
-  border-radius: 10px;
-  background: #f5f5f5;
-  //border: 0.25px solid #898989;
-}
-
 .circle_outline {
-  background-color:#fff;
+  background:#fff;
   border:1px solid #C9C9C9;    
   height:40px;
   border-radius:50%;
@@ -2028,6 +2162,7 @@ li {
 //to align img center
   display: flex;
   justify-content: center;
+  transition: background 0.3s ease-in-out;
 }
 .title_img{
 display:block; 
@@ -2049,7 +2184,14 @@ p.titleAlign {
 .lxp-theme-red{
   color:$lxp-theme-green
 }
-
+.lxp-theme-grey {
+  color: #5c6873;
+}
+.activetab {
+  .lxp-theme-grey {
+    color:$lxp-theme-green;
+  }
+}
 /* Shine */
 .shine figure {
 	position: relative;
