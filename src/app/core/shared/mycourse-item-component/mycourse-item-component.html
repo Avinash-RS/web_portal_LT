@@ -31,13 +31,13 @@
                     matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage"
                     src="../../../../assets/learner/freeP.svg" />
                 </span>
-                <div class="overlay">
+                <div class="overlay animate__animated animate__fadeIn">
                   <mat-icon class="text"> play_arrow </mat-icon>
                 </div>
               </div>
               <img alt="Course Img" [src]=course.course_img_url class="courseImg" />
             </div>
-            <div class="coursePoints">
+            <div class="coursePoints animate__animated animate__fadeInDown">
               <table class="f_size_12">
                 <tr *ngIf="course.isBatchCourse">
                   <td>Instructor led sessions</td>
@@ -188,7 +188,7 @@
         <!-- //4quadrant Self-Paced Learning// left lines //remove discussion link -->
 
 
-        <!-- //// -->
+        <!-- //DESKTOP CONTENT STARTS// -->
         <div class="col-12 col-sm-12 col-md-12 col-lg-6 desktopTab d-flex justify-content-between flex-wrap">
           <div matRipple class="m-b-15px myCourseCards">
             <div class="card-hover cardHeights grey_border1 ">
@@ -203,7 +203,7 @@
               </div>
               <!-- ORIGIN CONTENT -->
               <div class="height_match">
-                <div class="wrapper animate__animated animate__fadeIn" *ngIf="!course.progressionExp">
+                <div class="wrapper animate__animated animate__fadeInDown" *ngIf="!course.progressionExp">
                   <div class="row color_g f_size_13">
                     <div class="col">
                       <span>Keep learning and revising the topics to hone your skills.</span>
@@ -287,7 +287,7 @@
               </div>
               <!-- ORIGIN CONTENT -->
               <div class="height_match">
-                <div class="row color_g f_size_13 animate__animated animate__fadeIn" *ngIf="!course.ledinstExp">
+                <div class="row color_g f_size_13 animate__animated animate__fadeInDown" *ngIf="!course.ledinstExp">
                   <div class="col-5 ">
                     <img alt="" class="inst_hover" [src]="instDefault" width="100px" height="80px">
                   </div>
@@ -343,7 +343,7 @@
               </div>
 
               <div class="height_match">
-                <div class="row color_g f_size_13 animate__animated animate__fadeIn" *ngIf="!course.discussExp">
+                <div class="row color_g f_size_13 animate__animated animate__fadeInDown" *ngIf="!course.discussExp">
                   <div class="col-5 ">
                     <img alt="" [src]="discussDefault"
                       width="100px" height="80px">
@@ -398,7 +398,7 @@
               </div>
 
               <div class="height_match">
-                <div class="row color_g f_size_13 animate__animated animate__fadeIn" *ngIf="!course.activityExp" >
+                <div class="row color_g f_size_13 animate__animated animate__fadeInDown" *ngIf="!course.activityExp" >
                   <div class="col-5 ">
                     <img alt="" [src]="activityDefault" width="100px" height="80px">
                   </div>
@@ -454,15 +454,15 @@
                   <span _ngcontent-jtm-c8="" class="circle_outline lxp-gauge lxp-theme-grey title_img f_size_23 tabIcon"></span>
                   <!-- <span class="title">Self-Paced <br />Learning</span> -->
                 </div>
-                <div class="tab second d-flex align-items-end" (click)="tabselector = 1; " [ngClass]="tabselector == 1 ? 'activetab' :''">
+                <div *ngIf="course.isBatchCourse" class="tab second d-flex align-items-end" (click)="tabselector = 1; " [ngClass]="tabselector == 1 ? 'activetab' :''">
                   <span _ngcontent-wlb-c8="" class="circle_outline lxp-monitor lxp-theme-grey title_img f_size_23 tabIcon"></span>
                   <!-- <span class="title">Instructor <br />Led</span> -->
                 </div>
-                <div class="tab third d-flex align-items-end" (click)="tabselector = 2; " [ngClass]="tabselector == 2 ? 'activetab' :''">
+                <div *ngIf="course.isBatchCourse" class="tab third d-flex align-items-end" (click)="tabselector = 2; " [ngClass]="tabselector == 2 ? 'activetab' :''">
                   <span _ngcontent-wlb-c8="" class="circle_outline lxp-stack lxp-theme-grey title_img f_size_23 tabIcon"></span>
                   <!-- <span class="title">Discussion <br />Forum</span> -->
                 </div>
-                <div class="tab fourth d-flex align-items-end" (click)="tabselector = 3; " [ngClass]="tabselector == 3 ? 'activetab' :''">
+                <div *ngIf="course.isBatchCourse" class="tab fourth d-flex align-items-end" (click)="tabselector = 3; " [ngClass]="tabselector == 3 ? 'activetab' :''">
                   <span _ngcontent-wlb-c8="" class="circle_outline tabIcon">
                     <!-- <img alt="" src="../../../../assets/learner/mycourseicons/activities.svg" width="22px" height="22px" class="title_img activityImg"> -->
                     <img [src]="(tabselector==3)? '../../../../assets/learner/mycourseicons/activities.svg' : '../../../../assets/learner/mycourseicons/Activities_active.svg'" width="22px" height="22px" class="title_img activityImg"/>
@@ -473,9 +473,9 @@
               <div class="tabContents">
                 <div class="tabTitle d-flex justify-content-between" [ngClass]="tabselector == 1 || tabselector == 2 ? 'borderLeftRadius borderRightRadius':tabselector == 0 ? 'borderRightRadius':'borderLeftRadius'">
                   <span class="title" [ngClass]="tabselector == 0 ? 'livetab' :''">Self-Paced <br />Learning</span>
-                  <span class="title" [ngClass]="tabselector == 1 ? 'livetab1' :''">Instructor <br />Led</span>
-                  <span class="title" [ngClass]="tabselector == 2 ? 'livetab2' :''">Discussion <br />Forum</span>
-                  <span class="title" [ngClass]="tabselector == 3 ? 'livetab3' :''">Activities</span>
+                  <span *ngIf="course.isBatchCourse" class="title" [ngClass]="tabselector == 1 ? 'livetab1' :''">Instructor <br />Led</span>
+                  <span *ngIf="course.isBatchCourse" class="title" [ngClass]="tabselector == 2 ? 'livetab2' :''">Discussion <br />Forum</span>
+                  <span *ngIf="course.isBatchCourse" class="title" [ngClass]="tabselector == 3 ? 'livetab3' :''">Activities</span>
                 </div>
 
                 <div class="cardTabs" *ngIf="tabselector == 0" [ngClass]="tabselector == 0 ? 'activetab' :''">
@@ -489,7 +489,7 @@
                       </div> -->
                     </div>
                     <div class="height_match">
-                      <div class="wrapper animate__animated animate__fadeIn" *ngIf="!course.progressionExp">
+                      <div class="wrapper animate__animated animate__fadeInDown" *ngIf="!course.progressionExp">
                         <div class="row color_g f_size_13">
                           <div class="col">
                             <span>Keep learning and revising the topics to hone your skills.</span>
@@ -557,7 +557,7 @@
                     </div>
                   </div>
                 </div>
-
+                <!-- TAB 2 -->
                 <div class="cardTabs" *ngIf="tabselector == 1" [ngClass]="tabselector == 1 ? 'activetab1' :''">
                   <div *ngIf="course.isBatchCourse" matRipple class="card-hover cardHeights grey_border1" (mouseover)="instDefault ='../../../../assets/learner/mycourseicons/Instructor_hover.svg'" (mouseout)="instDefault='../../../../assets/learner/mycourseicons/Instructor_default.svg'">
                     <div class="row">
@@ -569,7 +569,7 @@
                       </div> -->
                     </div>
                     <div class="height_match">
-                      <div class="row color_g f_size_13 animate__animated animate__fadeIn" *ngIf="!course.ledinstExp">
+                      <div class="row color_g f_size_13 animate__animated animate__fadeInDown" *ngIf="!course.ledinstExp">
                         <div class="col-5 ">
                           <img alt="" class="inst_hover" [src]="instDefault" width="100px" height="80px">
                         </div>
@@ -610,7 +610,7 @@
                     </div>
                   </div>
                 </div>
-
+                <!-- TAB 3 -->
                 <div class="cardTabs" *ngIf="tabselector == 2" [ngClass]="tabselector == 2 ? 'activetab2' :''">
                   <div *ngIf="course.isBatchCourse" matRipple class="card-hover cardHeights grey_border1" (mouseover)="discussDefault ='../../../../assets/learner/mycourseicons/Discussion_hover.svg'" (mouseout)="discussDefault='../../../../assets/learner/mycourseicons/Discussion_default.svg'">
                     <div class="row">
@@ -623,7 +623,7 @@
                     </div>
 
                     <div class="height_match">
-                      <div class="row color_g f_size_13 animate__animated animate__fadeIn"  *ngIf="!course.discussExp">
+                      <div class="row color_g f_size_13 animate__animated animate__fadeInDown"  *ngIf="!course.discussExp">
                         <div class="col-5 ">
                           <img alt="" [src]="discussDefault"
                             width="100px" height="80px">
@@ -663,7 +663,7 @@
                     </div>
                   </div>
                 </div>
-
+                <!-- TAB 4 -->
                 <div class="cardTabs" *ngIf="tabselector == 3" [ngClass]="tabselector == 3 ? 'activetab3' :''">
                   <div *ngIf="course.isBatchCourse" matRipple class="card-hover cardHeights grey_border1" (mouseover)="activityDefault ='../../../../assets/learner/mycourseicons/Activities_hover.svg'" (mouseout)="activityDefault='../../../../assets/learner/mycourseicons/Activities_defult.svg'">
                     <div class="row">
@@ -677,7 +677,7 @@
                     </div>
                     
                     <div class="height_match">
-                      <div class="row color_g f_size_13 animate__animated animate__fadeIn"  *ngIf="!course.activityExp">
+                      <div class="row color_g f_size_13 animate__animated animate__fadeInDown"  *ngIf="!course.activityExp">
                         <div class="col-5 ">
                           <img alt="" [src]="activityDefault" width="100px" height="80px">
                         </div>

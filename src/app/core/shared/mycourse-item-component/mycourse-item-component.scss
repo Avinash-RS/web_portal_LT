@@ -23,7 +23,7 @@
       width: 20%;
     }
     &.activetab {
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color:#f5f5f5;
       .title {
         color: #C02222;
       }
@@ -69,8 +69,10 @@
 .tabContents {
   .tabTitle {
     padding-top: 3px;
+    padding-bottom: 5px;
+    border-bottom:1px solid #d4d4d4;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: #f5f5f5;
     span {
       line-height: normal;
       font-size: 13px;
@@ -92,11 +94,15 @@
   .cardTabs {
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: #f1f1f1;
   }
 }
 
 .animate__animated.animate__fadeInUp {
+  --animate-duration: 0.3s;
+  --animation-timing-function: ease-in-out;
+}
+.animate__animated.animate__fadeInDown {
   --animate-duration: 0.3s;
   --animation-timing-function: ease-in-out;
 }
@@ -389,7 +395,8 @@
   display: none;
   background-color: #5C6873;
   color: white;
-
+  position: relative;
+  z-index: -10;
 }
 
 .pointhover:hover .coursePoints {
