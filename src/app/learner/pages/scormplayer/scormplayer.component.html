@@ -48,8 +48,8 @@
       <section class="accordion" *ngFor="let res of content?.coursedetails | slice:6">
         <input type="checkbox" name="collapse" [id]="res?.modulename">
         <h2 class="handle">
-          <label [for]="res?.modulename"><strong>{{res?.modulename}}</strong><i class="fa fa-file-text-o doc">
-              <strong style="text-align: right;"> {{countofdoc}} Documents</strong></i> </label>
+          <label [for]="res?.modulename"><strong>{{res?.modulename}}</strong><em class="fa fa-file-text-o doc">
+              <strong style="text-align: right;"> {{countofdoc}} Documents</strong></em> </label>
         </h2>
         <div class="content">
           <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
