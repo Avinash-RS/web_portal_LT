@@ -119,7 +119,6 @@ export class InstructorLedComponent implements OnInit {
   }
 
   showModal(attendanceDialog: TemplateRef<any>){
-    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxx")
     this.dialog.open(attendanceDialog, {
       width: '90%',
       height: '50%',
