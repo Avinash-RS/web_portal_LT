@@ -21,21 +21,12 @@
 
 
     <div class="col-2 col-sm-2 col-md-8 col-lg-6 col-xl-5 catalogDropdownCol">
-      <span class="mobileIcons">
+      <div class="mobileIcons">
         <mat-icon class="searchIcons" (click)="expandSearch = !expandSearch">search</mat-icon>
-        <mat-icon class="filterIcon" [matMenuTriggerFor]="menu">filter_alt</mat-icon>
-      </span>
-      <mat-menu #menu="matMenu">
-        <button class="matTabMenu" mat-menu-item (click)="getDashboardMyCourse(userDetailes.user_id, userDetailes._id)"
-          *ngFor="let categorytab of categoryDetails">
-          <span>{{ categorytab.categoryName | titlecase }} </span>
-          <span class="dynamicBagdes" matBadge="{{categorytab.enrollCount}}" matBadgeOverlap="false"></span>
-        </button>
-      </mat-menu>
+        <mat-icon class="filterIcon" [matMenuTriggerFor]="fMenu">filter_alt</mat-icon>
+      </div>
 
-
-
-      <div class="row ml-0 mr-0">
+      <div class="row ml-0 mr-0 searchWrapper">
         <div class="col-6 col-md-7 col-lg-7 col-xl-7 searchCol text-right">
 
           <!---------------Multi-level dropdown------------->
@@ -157,11 +148,14 @@
                   </div>
                   </mat-menu> -->
       </div>
-    </div>
+      <div class="filterMenu">
+      
+      </div>
+    </div>    
   </div>
 
-  <!-- tabs here -->
-  <div class="row bodybg">
+  <!-- Desktop tab starts here -->
+  <div class="row bodybg desktopWrapper">
     <div class="col-12 matTabCol">
       <!-- <div class="catPost">
             <span *ngFor="let namesss of categoryDetails" class="cathd1">
@@ -203,13 +197,13 @@
           </div>
           <!-- card end -->
 
-          <div *ngIf="showSkeleton==false && onGoingCourseCount === 0">
+          <div *ngIf="showSkeleton==false && onGoingCourseCount === 0"> 
             <mat-card class="noSessionCard color-yellow-card-status">
-              <div class="row mar-t-12">
-                <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+              <div class="d-flex justify-content-between align-items-center flexStyle">
+                <div class="sessionImg">
                   <img class="noSessionImg" src="assets/noCourseNewImg.svg"> 
                 </div>
-                <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+                <div class="noData">
                   <span class=""> You have no ongoing courses at the moment!</span>
                 </div>
               </div>
@@ -248,11 +242,11 @@
             </mat-card>
             <hr class="hr-tag" /> -->
             <mat-card class="noSessionCard color-yellow-card-status">
-              <div class="row mar-t-12">
-                <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+              <div class="d-flex justify-content-between align-items-center flexStyle">
+                <div class="sessionImg">
                   <img class="noSessionImg" src="assets/noCourseNewImg.svg"> 
                 </div>
-                <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+                <div class="noData">
                   <span class=""> You have no ongoing courses at the moment!</span>
                 </div>
               </div>
@@ -279,15 +273,15 @@
           <div *ngIf=" showSkeleton==false && completedCourseCount === 0">
 
             <mat-card class="noSessionCard color-yellow-card-status">
-              <div class="row mar-t-12">
-                <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+              <div class="d-flex justify-content-between align-items-center flexStyle">
+                <div class="sessionImg">
                   <img class="noSessionImg" src="assets/noCourseNewImg.svg"> 
                 </div>
-                <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+                <div class="noData">
                   <span class=""> You have no completed courses at the moment!</span>
                 </div>
               </div>
-            </mat-card> 
+            </mat-card>  
             <!-- <hr class="hr-tag" /> -->
           </div>
         </mat-tab>
@@ -304,13 +298,12 @@
         </div>
 
           <div *ngIf="showSkeleton==false && allCourseCount === 0">
-
             <mat-card class="noSessionCard color-yellow-card-status">
-              <div class="row mar-t-12">
-                <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+              <div class="d-flex justify-content-between align-items-center flexStyle">
+                <div class="sessionImg">
                   <img class="noSessionImg" src="assets/noCourseNewImg.svg"> 
                 </div>
-                <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+                <div class="noData">
                   <span class=""> You have no courses at the moment!</span>
                 </div>
               </div>
@@ -332,6 +325,33 @@
       </mat-menu>
     </div>
   </div>
+
+
+  <!-- Mobile tab Starts here -->
+  <!-- Card start -->
+  <div class="mobileWrapper">
+    <div *ngIf="!showSkeleton; else skeletonLoad">
+      <div *ngFor="let course of courseDetailsList | filter: searchName">
+        <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
+      </div>
+    </div>
+    <!-- card end -->
+    <div *ngIf="showSkeleton==false && ((selectedIndex ==1 && onGoingCourseCount === 0 )||(selectedIndex ==2 && completedCourseCount === 0 )||(selectedIndex ==3 && allCourseCount === 0 ))">
+      <mat-card class="noSessionCard color-yellow-card-status">
+        <div class="d-flex justify-content-between align-items-center flexStyle">
+          <div class="sessionImg">
+            <img class="noSessionImg" src="assets/noCourseNewImg.svg"> 
+          </div>
+          <div class="noData">
+            <span class="" *ngIf="selectedIndex ==1 && onGoingCourseCount === 0"> You have no ongoing courses at the moment!</span>
+            <span class="" *ngIf="selectedIndex ==2 && completedCourseCount === 0"> You have no completed courses at the moment!</span>
+            <span class="" *ngIf="selectedIndex ==3 && allCourseCount === 0"> You have no courses at the moment!</span>
+          </div>
+        </div>
+      </mat-card> 
+    </div>
+  </div>
+  <!-- Mobile tab Ends here -->
 
   <ng-template #skeletonLoad>
     <mat-card class="coursebg card12">
@@ -730,6 +750,22 @@
       </ng-container>
     </div>
   </div>
+  <mat-menu #fMenu="matMenu">
+    <ul class="filMenu">
+      <li class="d-flex align-items-center" [ngClass]="selectedIndex == 1 ? 'redBG' : 'greyBG'" (click)="selectedIndex = 1; getDashboardMyCourse(userDetailes.user_id,userDetailes._id)">
+        <span>Ongoing</span> 
+        <span class="matBadgeNew" matBadge="{{onGoingCourseCount}}" matBadgeOverlap="false"></span>
+      </li>
+      <li class="d-flex align-items-center" [ngClass]="selectedIndex == 2 ? 'redBG' : 'greyBG'" (click)="selectedIndex = 2; getDashboardMyCourse(userDetailes.user_id,userDetailes._id)">
+        <span>Completed</span> 
+        <span class="matBadgeNew" matBadge="{{completedCourseCount}}" matBadgeOverlap="false"></span>
+      </li>
+      <li class="d-flex align-items-center" [ngClass]="selectedIndex == 3 ? 'redBG' : 'greyBG'" (click)="selectedIndex = 3; getDashboardMyCourse(userDetailes.user_id,userDetailes._id)">
+        <span>All</span> 
+        <span matBadge="{{ jobRoleSelected === true ? jobAllCourseCount : allCourseCount }}" class="matBadgeNew" matBadge="{{allCourseCount}}" matBadgeOverlap="false"></span>
+      </li>
+    </ul>
+  </mat-menu>
   <br [ngClass]="availableCource == true ? 'displayNone' : ''" />
   <br [ngClass]="availableCource == true ? 'displayNone' : ''" />
   <div *ngIf="!loading" [ngClass]="availableCource == true ? 'displayNone' : ''">

@@ -2,18 +2,17 @@
 <div class="knowledge-landing-container">
 
   <div class="back-page">
-    <!-- <img src="assets\images\dialog backward.svg"> -->
-    <!-- <span [routerLink]="['/auth/knowledge']"> <font color="black"> < </font> Back </span> -->
-    <i class="fa fa-chevron-left" aria-hidden="true" style="font-size: 12px;cursor: pointer;">
-      <span style="font-family: 'Roboto'" [routerLink]="['/Learner/knowledge']">Back</span></i>
+    <div class="back-icons">
+      <mat-icon class="material-icons f_size_15 backIc">arrow_back_ios
+      </mat-icon>
+      <span [routerLink]="['/Learner/knowledge']">Back</span>
+    </div>
   </div>
 
   <div class="header-section">
 
     <nav aria-label="breadcrumb" class="coursebreadcrumb">
       <ol class="breadcrumb">
-        <!-- <li class="breadcrumb-item">
-          <a>Home</a></li> -->
         <li class="breadcrumb-item">
           <a>Knowledge Resources</a></li>
         <li class="breadcrumb-item active" aria-current="page">
@@ -63,7 +62,7 @@
         </div>
 
         <div class="card-name">
-          <div class="file-name">
+          <div class="file-name" style="-webkit-box-orient: vertical;">
             {{resData.filename}}
           </div>
         </div>
@@ -75,4 +74,10 @@
         <img src="https://i.picsum.photos/id/1018/3914/2935.jpg?hmac=3N43cQcvTE8NItexePvXvYBrAoGbRssNMpuvuWlwMKg">
       </div>
     </ng-container> -->
+  </div>
+
+  <div class="footer">
+    <span class="powered">
+      <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
+    </span>
   </div>
