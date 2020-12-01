@@ -3,20 +3,15 @@
     margin-left: 0.8% !important;
 }
 .calender-container {
-    height: 100vh;
+    // height: 100vh;
     //overflow-y: hidden;
     .calender-section {
-        height: 550px;
-        overflow-y: auto;
+        // height: 550px;
+        // overflow-y: auto;
     }
     .f_size_22 {
         font-size: 22px;
     }
-    // .myC-head {
-    //     margin-left: 1% !important;
-    //     margin-top: 2%;
-    //     margin-bottom: -2%;
-    // }
     .color-grey {
         border-left: 2px solid #b5acac !important;
     }
@@ -50,18 +45,56 @@
         border-left: 3px solid #ffc107bf !important;
         color: #1F1A17!important;
     }
-    .color-blue-card-status {
-        border-left: 3px solid #b3b2b2!important;
-        color: #1F1A17!important;
+    .mainCard {
+        background: #f9f9f9;
+        border-radius: 8px;
+        overflow: hidden;
     }
-    .color-grey-card-status {
-        border-left: 3px solid green !important;
-        // color: #b5acac !important;
+    .session-card {
+        box-shadow: none;
+        height: auto;
+        margin-bottom: 0%;
+        background: transparent !important;
+        padding: 10px;
+        position: relative;
+        &::before {
+            content: '';
+            width: 4px;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        &.color-grey-card-status {
+            &::before {
+                background-color: green;
+            }
+        }
+        &.color-blue-card-status {
+            &::before {
+                background-color: #b3b2b2;
+            }
+        }
+        &.color-yellow-card-status {
+            &::before {
+                background-color: #ffc107;
+            }
+        }
     }
-    .color-yellow-card-status {
-        border-left: 3px solid #ffc107bf !important;
-        color: #1F1A17 !important;
-    }
+
+    // .color-blue-card-status {
+    //     border-left: 3px solid #b3b2b2!important;
+    //     color: #1F1A17!important;
+    // }
+    // .color-grey-card-status {
+    //     border-left: 3px solid green !important;
+    //     // color: #b5acac !important;
+    // }
+    // .color-yellow-card-status {
+    //     border-left: 3px solid #ffc107bf !important;
+    //     color: #1F1A17 !important;
+    // }
+
     .color-white {
         color: #b5acac;
         background: $color-white !important;
@@ -157,7 +190,7 @@
         border-radius: 0;
         font-weight: 600;
         // height: 40px;
-        padding: 10px 0 10px 10px;
+        padding: 10px 0 ;
         font-size: 18px;
         white-space: nowrap; 
         width: 200px; 
@@ -205,15 +238,15 @@
         font-family: Roboto Condensed !important;
     }
     .person {
-        position: absolute;
-        margin-left: 10px;
+        // position: absolute;
+        // margin-left: 10px;
         color: #5c6873;
         font-size: 18px;
     }
     .aligned-icon {
         // position: absolute;
         color: #9E9E9E;
-        margin-left: 32px;
+        // margin-left: 32px;
     }
     .color_black2 {
         color: #5c6873;
@@ -222,26 +255,14 @@
     .space-10 {
         margin-top: 10px;
     }
-    .mainCard {
-        background: #f9f9f9;
-    }
-    .session-card {
-        border-radius: 0px;
-        box-shadow: none;
-        height: auto;
-        margin-bottom: 0%;
-        background: transparent !important;
-        padding: 16px 16px 0 16px;
-       // border-left: 10px solid #ffc107bf !important;
-    }
     .session-sub-card {
         width: 100%;
-        border-bottom: 1px solid #dedede;
-        padding-bottom: 10px;
+        // border-bottom: 1px solid #dedede;
+        // padding-bottom: 10px;
     }
     .activitiesCard {
         .mat-icon {
-            width: auto;
+            // width: auto;
             height: auto;
             vertical-align: middle;
         }
@@ -586,7 +607,12 @@
     margin: 0 0 20px 16px !important;
 }
 
-
+::ng-deep .cal-day-selected{
+    outline: -webkit-focus-ring-color auto 1px;
+    outline-color: -webkit-focus-ring-color;
+    outline-style: auto;
+    outline-width: 1px;
+}
 // ::ng-deep .mat-h5, .mat-typography h5 {
    
 //     margin: 0 0 0 16px !important;

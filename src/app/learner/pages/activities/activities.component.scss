@@ -767,13 +767,9 @@ right: 3rem;
  height: 15rem !important;
 }
 
-::ng-deep .itdata .owl-item {
-  width: 160px !important;
-}
-
 ::ng-deep .itdata .arrow .owl-carousel .owl-nav .owl-prev {
   position: absolute;
-  top: 20%;
+  top: 12%;
   z-index: 1 !important;
   left: -18px;
   height: 50px;
@@ -783,9 +779,9 @@ right: 3rem;
 
 ::ng-deep .itdata .arrow .owl-carousel .owl-nav .owl-next {
   position: absolute;
-  top: 20%;
+  top: 12%;
   z-index: 1 !important;
-  right: -18px;
+  right: -25px;
   height: 50px;
   width: 50px;
 

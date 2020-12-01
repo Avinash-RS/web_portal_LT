@@ -38,6 +38,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/videogular2/fonts/videogular.css",
               "node_modules/ng-pick-datetime/assets/style/picker.min.css",
+              "node_modules/animate.css/animate.min.css",
               "src/theme/theme.scss",
               "src/theme/typography.scss",
               "src/assets/variable.scss"

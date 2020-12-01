@@ -71,9 +71,9 @@
                 <mat-label  class="label-color">{{'Password' | translate }}</mat-label>
                 <input matInput  [placeholder]="'Enter password' | translate " [type]="hide ? 'password' : 'text'" formControlName="password" [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" required>
                 <mat-icon class="icon-color" matPrefix>lock_outline</mat-icon>
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <span  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon class="icon-color">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
+                </span>
                 <mat-error class="error" *ngIf="f.password.touched && f.password.errors" >{{'Password is required' | translate }}</mat-error>
               </mat-form-field>
               <div class="space-20"></div>

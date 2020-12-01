@@ -42,7 +42,7 @@
                         </div>
                         <br />
                         <div [ngSwitch]="view">
-                            <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="getLearnerActivity($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)">
+                            <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="getLearnerActivity($event.day,$event.day)" (eventClicked)="handleEvent('Clicked', $event.event)">
                             </mwl-calendar-month-view>
                             <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)">
                             </mwl-calendar-week-view>
@@ -114,7 +114,7 @@
                             <div class="scroll-bar">
                                 <ng-container *ngFor="let data of learnerActivityList; let i = index">
                                     <div class="mainCard animated animatedFadeInUp fadeInUp" (click)="launchAssignment(data)">
-                                        <mat-card class="session-card">
+                                        <mat-card class="session-card" [ngClass]="{'color-yellow-card-status': data.status === 'On going', 'color-grey-card-status':data.status === 'Completed','color-blue-card-status':data.status === 'Up Coming' }">
                                             <div class="session-sub-card activitiesCard">
                                                 <!-- <img *ngIf="data.activity_details.activitytype == 'Live Classroom'" class=float-right src="../../../../assets/images/ms_team.png" width="35" height="35"> -->
                                               
@@ -132,7 +132,7 @@
                                                     {{'Completed' | translate }}</span> -->
                                                 </div>
                                                 <div class="d-flex align-items-center justify-content-between">
-                                                    <p class="coursenameT" [ngClass]="{'color-yellow-card-status': data.status === 'On going', 'color-grey-card-status':data.status === 'Completed','color-blue-card-status':data.status === 'Up Coming' }"  [tooltip]="data.activity_details.modulename"> {{ data.activity_details.modulename }}</p>
+                                                    <p class="coursenameT" [tooltip]="data.activity_details.modulename"> {{ data.activity_details.modulename }}</p>
                                                     <div class="activity-status">
                                                         <span class="status lxp-text f_size_14 f_wt_400" *ngIf="data.status == 'On going' ">
                                                             {{'Ongoing' | translate }}</span>
@@ -150,9 +150,9 @@
                                                 <h5 class="m-l-4 expandLine d-flex flex-wrap">
                                                     <div class="topicSection d-flex align-items-center justify-content-between">
                                                         <span class="f_wt_500 f_size_14 topic-section" [tooltip]="data.activity_details.topicname">{{'Topic' | translate }} : {{ data.activity_details.topicname }} </span>
-                                                        <span class="created-section">
-                                                        <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon>
-                                                        <span class="aligned-icon lxp-text f_size_14 f_wt_400 created-name">{{ data.activity_details.createdby_name }}</span>
+                                                        <span class="created-section d-flex">
+                                                            <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon>
+                                                            <span class="aligned-icon lxp-text f_size_14 f_wt_400 created-name">{{ data.activity_details.createdby_name }}</span>
                                                         </span>
                                                     </div>
                                                     <div class="activityButton">
