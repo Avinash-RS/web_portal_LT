@@ -357,11 +357,13 @@ margin-top: 5%;
       }
 }
 
-
-@media (max-width: 767.98px) {
-    #footer {
+@media (max-height: 590px) {
+ #footer {
         display: none;
     }
+}
+@media (max-width: 767.98px) {
+   
     .kauhalya {
         margin-top: 11%;
          margin-left: 0%  !important; 
