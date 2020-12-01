@@ -25,12 +25,12 @@
 
       <div class="col-3">
         <button class="submit" (click)="viewCategory(element)"> {{'Category' | translate }}
-          <i class="fa fa-chevron-down colr"></i>
+          <em class="fa fa-chevron-down colr"></em>
         </button>
       </div>
       <div class="col-3">
         <button class="filterbtn" (click)="showAppliedFiltre = !showAppliedFiltre;"> 
-          <i class="fa fa-filter colrr"></i>
+          <em class="fa fa-filter colrr"></em>
           {{'Filter' | translate }}
         </button>
         <select class="category" (change)="onChange($event.target.value)">
@@ -98,7 +98,7 @@
               <span class="count">{{yetToStart?.totalCount}}</span>
             </div>
             <div class="col-2">
-              <img class="icon" src="../../../../assets/learner/CoursesYettoStart.svg">
+              <img class="icon" src="../../../../assets/learner/CoursesYettoStart.svg" alt="CoursesYettoStart">
             </div>
           </div><br>
 
@@ -129,7 +129,7 @@
               <span class="count">{{incomplete?.totalCount}}</span>
             </div>
             <div class="col-2">
-              <img class="icon" src="../../../../assets/learner/CoursesInprogress.svg">
+              <img class="icon" src="../../../../assets/learner/CoursesInprogress.svg" alt="CoursesInprogress">
             </div>
           </div><br>
           <!-- <div class="row">

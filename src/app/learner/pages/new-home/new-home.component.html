@@ -225,7 +225,7 @@
                     <h5>{{strDate | date :'dd MMM yyyy'}}
                         <span *ngIf="result.activity_details.ongoing == 'true' "> | {{'On-going' | translate }}</span>
                     </h5>
-                    1<img *ngIf="data.activity_details.activitytype == 'Live  Classroom'" class="float-right" src="../../../../assets/images/ms_team.png" width="35" height="35">
+                    1<img *ngIf="data.activity_details.activitytype == 'Live  Classroom'" class="float-right" src="../../../../assets/images/ms_team.png" alt="msteam" width="35" height="35">
                     <p> {{ result.activity_details.coursename }}</p>
                     <h5>{{ result.activity_details.activitytype }} | {{ result.activity_details.createdby_name }}</h5>
                 </div>
@@ -245,7 +245,7 @@
             <p class="f_size_16">{{'Accessing courses via mobile is forbidden.' | translate }} </p>
             <div class="row">
                 <div class="col-8">
-                    <p><b>{{'Recommended browsers' | translate }}</b></p>
+                    <p><strong>{{'Recommended browsers' | translate }}</strong></p>
                 </div>
                 <div class="col-1">
                     <a class="showbtn" (click)="alterDescriptionText()"> {{ showShortDesciption ? '>>': '<<' }}</a>
