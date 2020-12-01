@@ -211,16 +211,16 @@
     margin-left: 5px;
 }
 @media screen and (min-width: 200px) and (max-width: 770px) {
-  .smNoDisp{
-      display: none;
-  }
+//   .smNoDisp{
+//       display: none;
+//   }
 
 .p5px {
     background-color: black;
     padding:7px 4px !important; 
 }
     .bookIcon {
-        display: block !important;
+        display: none !important;
         position: relative;
         font-size: 22px;
         border: none;
@@ -264,7 +264,7 @@
 
 .mobMenu {
     display: none;
-    @media only screen and (max-width: 991px) {
+    @media only screen and (max-width: 767px) {
         display: block;
     }
 }
@@ -295,7 +295,13 @@
 }
 .desktopMenu {
     display: none;
-    @media only screen and (min-width:992px) {
+    button {
+        padding: 12px 10px 11px 10px;
+        @media only screen and (min-width: 992px) {
+            padding: 12px 15px 11px 15px;
+        }
+    }
+    @media only screen and (min-width:768px) {
         display: flex;
         justify-content: flex-end;
         align-items: center;
@@ -303,7 +309,7 @@
 }
 .mobHamburger {
     display: none;
-    @media only screen and (max-width: 991px) {
+    @media only screen and (max-width: 767px) {
         display: block;
     }
 }

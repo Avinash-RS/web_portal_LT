@@ -95,8 +95,9 @@ h1{
 }
 h1 {
   color: rgb(95, 93, 93);
-  font-size: 19px !important;
+  font-size: 20px !important;
   font-weight: bold !important;
+  margin-bottom: 12px;
 }
 .resource-col {
   margin-top: 35px;
@@ -225,12 +226,15 @@ h1 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 16px;
+  line-height: 24px;
   a {
     color: #007bff;
+    text-decoration: underline;
   }
   a:hover {
-    color: #0056b3;
-    text-decoration: underline;
+    // color: #0056b3;
+    color: #007bff;
   }
 }
 
