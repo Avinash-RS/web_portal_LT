@@ -54,7 +54,7 @@
                                     <mat-accordion *ngFor="let res of scromModuleData; let i = index" multi displayMode=""
                                         (click)="getSelectedIndex(i); ">
                                         <mat-expansion-panel class="panel" hideToggle="true" #example
-                                            [expanded]="selectedIndex === i">
+                                            [expanded]="moduleHolder === i">
                                             <mat-expansion-panel-header class="moduleHeadHight">
                                                 <mat-panel-title class="module-container">
                                                     <div style="margin-bottom: 3px;">
@@ -182,7 +182,7 @@
                                                                                                 *ngIf="fourLvl?.title?.length >= 65"
                                                                                                 tooltip="{{fourLvl?.title}}"
                                                                                                 placement="right"
-                                                                                                (click)="playTopic(fourLvl.link,fourLvl.title,fourLvl.status,fourLvl?.title,fourLvl?.status,scromModuleData?.length,fourLvl?.topic_len,l + 1)">
+                                                                                                (click)="playTopic(fourLvl.link,fourLvl.title,fourLvl.status,fourLvl?.title,fourLvl?.status,scromModuleData?.length,fourLvl?.topic_len,l + 1,i)">
                                                                                                 <p class="titleName">
                                                                                                     {{fourLvl?.title | slice:0:56}}...
                                                                                                 </p>
@@ -191,7 +191,7 @@
         
                                                                                             <span class="topicnm"
                                                                                                 *ngIf="fourLvl?.title?.length < 65"
-                                                                                                (click)="playTopic(fourLvl.link,fourLvl.title,fourLvl.status,fourLvl?.title,fourLvl?.status,scromModuleData?.length,fourLvl?.topic_len,l + 1)">
+                                                                                                (click)="playTopic(fourLvl.link,fourLvl.title,fourLvl.status,fourLvl?.title,fourLvl?.status,scromModuleData?.length,fourLvl?.topic_len,l + 1,i)">
         
                                                                                                 <p class="titleName">
                                                                                                     {{fourLvl?.title}}
@@ -251,17 +251,17 @@
                                                             <ng-template matStepLabel>
                                                                 <span class="topicnm" *ngIf="mod?.title?.length >= 65"
                                                                     tooltip="{{mod?.title}}" placement="right"
-                                                                    (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)">
-                                                                    <p class="titleName">
+                                                                    (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i)">
+                                                                    <p class="titleName" [ngClass]="(j===nextPrevHolder && i===moduleHolder) ? 'titleSelected' : ''">
                                                                         {{mod?.title | slice:0:56}}...
                                                                     </p>
         
                                                                 </span>
         
                                                                 <span class="topicnm" *ngIf="mod?.title.length < 65"
-                                                                    (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)">
+                                                                    (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i)">
         
-                                                                    <p class="titleName">
+                                                                    <p class="titleName" [ngClass]="(j===nextPrevHolder && i===moduleHolder) ? 'titleSelected' : ''">
                                                                         {{mod?.title}}
                                                                     </p>
                                                                 </span>
@@ -290,12 +290,11 @@
                                 menu
                             </mat-icon>
         
-                            <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'">
-                                <button class=" pointer" mat-button [disabled]="isprevEnable || scromModuleData?.length == 0"
+                            <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'" *ngIf="scromModuleData?.length !== 0">
+                                <button class=" pointer" mat-button [disabled]="isprevEnable"
                                     (click)="topicPrve()">{{'Prev' | translate }}</button>
                                 <span class="">|</span>
-                                <button class=" pointer" mat-button [disabled]="isNextEnable || scromModuleData?.length == 0"
-                                    (click)="topicNext()">
+                                <button class=" pointer" mat-button [disabled]="isNextEnable" (click)="topicNext()">
                                     {{'Next' | translate }}</button>
                                 <span class="fullScr">
                                     <mat-icon (click)="makeFullScreen()">fullscreen</mat-icon>

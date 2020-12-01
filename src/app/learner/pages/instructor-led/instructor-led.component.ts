@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
@@ -47,6 +47,7 @@ export class InstructorLedComponent implements OnInit {
   getAttendance() { // Http Call
     const userDetails = JSON.parse(sessionStorage.getItem('UserDetails'));
     this.learnerService.getAttendanceByUsername(this.course.id, userDetails.full_name, userDetails.user_id).subscribe(async res => {
+      // tslint:disable-next-line:no-string-literal
       const data = res.data['getTopicAttendanceDetailsByUsername']['data'];
       this.listOfSessions = data.Activity;
       this.sessionAttendance = data.Attendance;
@@ -57,7 +58,7 @@ export class InstructorLedComponent implements OnInit {
         this.onGoingSession();
       }
       this.attendedSessions = _.countBy(this.sessionAttendance, x => x.activity.attendencedetails.Attendence === 'yes');
-      this.useSession(this.listOfSessions[0])
+      this.useSession(this.listOfSessions[0]);
     });
   }
 
@@ -115,6 +116,19 @@ export class InstructorLedComponent implements OnInit {
     const d = moment.duration(ms);
     const time = d.hours() === 0 ? d.minutes() + ' minutes' : d.hours() + ' hour ' + d.minutes() + ' minutes';
     return time;
+  }
+
+  showModal(attendanceDialog: TemplateRef<any>){
+    this.dialog.open(attendanceDialog, {
+      width: '90%',
+      height: '50%',
+      panelClass: 'popupContainer',
+      closeOnNavigation: true,
+      disableClose: false,
+    });
+  }
+  closeModal(){
+    this.dialog.closeAll();
   }
 
   preview(row) {

@@ -9,26 +9,144 @@
     background-color: #346f83;
     // height: 288px;
     border-radius: unset;
+    padding: 0;
+    @media only screen and (max-width: 600px) {
+        box-shadow: none;
+    }
+    .moduleImage {
+        width: 50%;
+        padding: 15px 0 15px 15px;
+        @media only screen and (max-width: 600px) {
+            width: 100%;
+            padding: 15px;
+        }
+    }
+    .moduleContent {
+        background-color: #346f83;
+        width: 47%;
+        margin-left: 3%;
+        padding: 15px 15px 15px 0;
+        @media only screen and (max-width: 600px) {
+            width: 100%;
+            padding: 10px;
+            background-color: #ffffff;
+            margin-left: 0;
+            border: 1px solid #cdcdcd;
+        }
+    }
 }
 .p-t-20{
     padding-top: 20px !important;
 }
 .smallContainers {
-    margin-left: -15px !important;
-    margin-right: -15px !important;
+    margin: 25px -15px 0 -15px !important;
+    @media only screen and (max-width: 600px) {
+        margin: 15px -15px 0 -15px !important;
+    }
+}
+.sessionAttendance {
+    margin-top: 25px;
 }
 .image-container{
     position: relative;
     text-align: center;
+    width: 50%;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 }
-.bottom-right{
+.bottom-right {
     position: absolute;
     bottom: 0px;
     color: white;
-    background: green;
-    right: 15px;
+    background: rgba(0, 128, 0, 0.7);
+    right: 0;
     padding: 4px;
 }
+.course-list {
+    @media only screen and (max-width: 576px) {
+        border-top: 1px solid #cdcdcd;
+        margin-top: 15px;
+    }
+    @media only screen and (min-width: 992px) {
+        margin-left: 5% !important;
+    }
+}
+.attendanceWrapper {
+    @media only screen and (max-width: 576px) {
+        display: none;
+    }
+}
+.attandanceShow {
+    display: block;
+    background-color: transparent;
+    border-color: #f44336 !important;
+    border-radius: initial;
+    border-width: 2px;
+    padding: 2px 10px;
+    color: black !important;
+    font-size: 14px;
+    &:active {
+        background-color: transparent !important;
+    }
+    &:focus {
+        box-shadow: none;
+    }
+    @media only screen and (min-width: 577px) {
+        display: none;
+    }
+}
+.headingWrapper {
+    width: 100%;
+    @media only screen and (max-width: 576px) {
+        margin: 10px 0 15px 0;
+    }
+}
+.sessionCard {
+    border: 1px solid #dddddd;
+    // height: 170px;
+    width: -webkit-fill-available;
+    /* background-color: #388E3C; */
+    /* margin-left: 20%; */
+    border-radius: unset;
+    color: black;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 4px;
+    box-shadow: 0px 2px 5px 0px rgba(50, 50, 50, 0.25);
+    @media only screen and (max-width: 991px) {
+        box-shadow: none;
+        margin-bottom: 15px;
+    }
+}
+.content-container {
+    width: 47%;
+    margin-left: 3%;
+    padding: 10px 10px 10px 0;
+    h4 {
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #454545;
+        line-height: normal;
+        @media only screen and (max-width: 576px) {
+            margin-top: 10px;
+        }
+    }
+    h5 {
+        line-height: 24px;
+        margin: 0;
+    }
+    h5 {
+        line-height: 20px;
+        font-size: 14px;
+        span {
+            color: #666666;
+        }
+    }
+}
+
 .smallContainer1 {
     // height: 96px;
     /* width: 223px; */
@@ -37,7 +155,7 @@
     border-radius: unset;
     background: #e2663d 0% 0% no-repeat padding-box;
     @media only screen and (max-width: 576px) {
-        margin-bottom: 20px;
+        padding: 10px;
     }
 }
 
@@ -48,7 +166,7 @@
     /* margin-left: 9.5%; */
     border-radius: unset;
     @media only screen and (max-width: 576px) {
-        margin-bottom: 20px;
+        padding: 10px;
     }
 }
 
@@ -58,6 +176,9 @@
     background: #399ce0 0% 0% no-repeat padding-box;
     /* margin-left: 9.5%; */
     border-radius: unset;
+    @media only screen and (max-width: 576px) {
+        padding: 10px;
+    }
 }
 
 .mat-card-subtitle {
@@ -72,12 +193,18 @@
         /* margin-left: 15px; */
         /* padding-right: 10px;
         padding-left: 15px; */
-        min-width: 320px;
+        // min-width: 320px;
+        width: 100%;
         tr {
             th {
                 padding: 10px;
                 background-color: #346f83;
                 color: #ffffff;
+                &:first-child {
+                    @media only screen and (max-width: 576px) {
+                        display: none;
+                    }
+                }
             }
         }
         tbody {
@@ -93,6 +220,12 @@
         tr {
             td {
                 padding: 7px;
+                line-height: normal;
+                &:first-child {
+                    @media only screen and (max-width: 576px) {
+                        display: none;
+                    }
+                }
             }
         }
     }
@@ -115,30 +248,6 @@
 //         width: 48%;
 //     }
 // }
-.sessionCard {
-    border: 1px solid #dddddd;
-    // height: 170px;
-    width: -webkit-fill-available;
-    /* background-color: #388E3C; */
-    /* margin-left: 20%; */
-    border-radius: unset;
-    color: black;
-    box-shadow: none;
-}
-.content-container {
-    h4 {
-        font-weight: bold;
-        margin-bottom: 10px;
-        @media only screen and (max-width: 576px) {
-            margin-top: 10px;
-        }
-    }
-    h5 {
-        line-height: 24px;
-        margin: 0;
-    }
-}
-
 .redHover:hover {
     color: $lxp-theme-green !important;
 }
@@ -159,6 +268,9 @@
     margin: 0 0 15px 0;
     @media only screen and (max-width: 992px) {
         margin: 30px 0 15px 0;
+    }
+    @media only screen and (max-width: 576px) {
+        margin: 0;
     }
 }
 
@@ -191,6 +303,10 @@
     color: #ffffff;
     opacity: 1;
     margin-bottom: 15px;
+    @media only screen and (max-width: 576px)  {
+        font: normal normal normal 13px/14px Roboto Condensed;
+        margin-bottom: 8px;
+    }
 }
 
 .sessionTitle {
@@ -199,7 +315,22 @@
     letter-spacing: 0px;
     color: #f5f5f5;
     opacity: 1;
+    margin-bottom: 15px;
+    display: inline-block;
     /* margin-left: 2%; */
+    @media only screen and (max-width: 600px) {
+        color: #454545;
+        margin-bottom: 0;
+    }
+}
+.sessionDate, 
+.sessionduration {
+    line-height: 24px;
+    color: #ffffff;
+    @media only screen and (max-width: 600px) {
+        color: #454545;
+        margin-top: 10px;
+    }
 }
 
 .tblheaderFont {
@@ -216,6 +347,10 @@
     margin: 0;
     // margin-left: 80%;
     // margin-top: -30px;
+    @media only screen and (max-width: 576px)  {
+        width: 25px;
+        height: 24px;
+    }
 }
 
 .number {
@@ -227,6 +362,9 @@
     letter-spacing: 0px;
     color: #ffffff;
     opacity: 1;
+    @media only screen and (max-width: 576px)  {
+        font: normal normal normal 17px/15px Roboto Condensed;
+    }
 }
 
 .actBtn {
@@ -242,6 +380,7 @@
     letter-spacing: 0px;
     color: #333333;
     opacity: 1;
+    box-shadow: none;
 }
 
 .noSessionCard {
@@ -290,7 +429,7 @@
     bottom: 0 !important;
     width: 100%;
     color: $label;
-    position: fixed;
+    // position: fixed;
     z-index: 999999;
     font-weight: 500;
     background-color: $profile-t-grey;

@@ -56,33 +56,33 @@
         <!-- <div *ngIf='!listOfSessions?.length'>
           <span class="sessionTitle"> No Activities Found..</span>
         </div> -->
-        <div class="row" *ngIf='activityShow !== undefined'>
-          <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
+        <div class="row d-flex justify-content-start" *ngIf='activityShow !== undefined'>
+          <div class="moduleImage">
             <div flex >
               <img style="width: 100%;" *ngIf="!activityShow?.activity_details.livethumbnail" src="../../../../assets/learner/instructor_image.png" />
               <img style="width: 100%;" *ngIf="activityShow?.activity_details.livethumbnail" [src]="activityShow?.activity_details.livethumbnail" />
             </div>
           </div>
-          <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
+          <div class="moduleContent">
             
             <div flex >
               <span class="sessionTitle">{{activityShow?.activity_details.topicname}}</span>
-              <div class="row" style="color: white; margin-top: 10px;">
+              <div class="row">
                 <!-- <span>Held On</span> &nbsp;&nbsp; -->
-                <span>
-                  {{ activityShow?.activity_details.startdate | date: 'MMM d, y, h:mm a'}}</span>
+                <span class="sessionDate">Date: {{ activityShow?.activity_details.startdate | date: 'MMM d, y, h:mm a'}}</span>
               </div>
-              <div class="row" style="color: white; margin-top: 10px;">
-                <span class="sessionTitle">Duration</span>
+              <div class="row">
+                <span class="sessionduration">Duration: {{activityShow?.duration}}</span>
+                <!-- <span class="sessionTitle">Duration</span> -->
               </div>
-              <div class="row" style="color: white; margin-top: 10px;">
-                <span class="sessionTitle">{{activityShow?.duration}}</span>
-              </div>
-              <div class="row" style="margin-top: 20px;">
+              <!-- <div class="row" style="color: white; margin-top: 10px;">
+                
+              </div> -->
+              <div class="row" style="margin-top: 0px;">
                 <button class="actBtn" mat-raised-button *ngIf="activityShow?.status === 'On going' && activityShow?.activity_details.activitytype != 'Recorded'"
                   (click)="getAction(activityShow.activity_details.link)">{{activityShow?.button}}</button>
               </div>
-              <div class="row" style="margin-top: 20px;color: white !important;" *ngIf="activityShow?.activity_details.activitytype == 'Recorded'">
+              <div class="row" style="margin-top: 0px; color: white !important;" *ngIf="activityShow?.activity_details.activitytype == 'Recorded'">
                 <button class="actBtn" mat-raised-button 
                   (click)="preview(activityShow.activity_details.link)">{{activityShow?.button}}</button>
               </div>
@@ -92,21 +92,21 @@
         </div>
       </mat-card>
       
-      <div class="row smallContainers" style="margin-top: 5%;">
-        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
+      <div class="row smallContainers">
+        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
           <mat-card class="smallContainer1">
             <mat-card-subtitle class="smallHeadline">Total Sessions</mat-card-subtitle>
-            <div class="row d-flex justify-content-between p-t-10">
+            <div class="row d-flex justify-content-between align-items-center p-t-10">
               <span class="number">{{sessionAttendance?.length}}</span>
               <img mat-card-image src="../../../../assets/learner/elearning.svg">
             </div>
           </mat-card>
         </div>
         
-        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
+        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
           <mat-card class="smallContainer2">
             <mat-card-subtitle class="smallHeadline">Attended Sessions</mat-card-subtitle>
-            <div class="row d-flex justify-content-between p-t-10">
+            <div class="row d-flex justify-content-between align-items-center p-t-10">
               <!-- <span class="number" *ngIf="attendedSessions !== undefined">{{attendedSessions?.true}}</span> -->
               <span class="number" *ngIf="attendedSessions.true === undefined" >0</span>
               <img mat-card-image src="../../../../assets/learner/students.svg">
@@ -114,61 +114,94 @@
           </mat-card>
         </div>
 
-        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
+        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
           <mat-card class="smallContainer3">
             <mat-card-subtitle class="smallHeadline">Recorded Sessions</mat-card-subtitle>
-            <div class="row d-flex justify-content-between p-t-10">
+            <div class="row d-flex justify-content-between align-items-center p-t-10">
               <span class="number">0</span>
               <img mat-card-image src="../../../../assets/learner/video-tutorial.svg">
             </div>              
           </mat-card>
         </div>
       </div>
-      <div class="row" style="margin-top: 5%;" *ngIf="sessionAttendance?.length">
-        <span class="tableHeadline">My Attendance</span>
-      </div>
-      <div class="row attendance-table" *ngIf="sessionAttendance?.length">
-        <table style="width: 100%;">
-          <tr class="tblheaderFont">
-            <th width="13%">Session #</th>
-            <th width="55%">Topic Name</th>
-            <th width="22%">Date</th>
-            <th width="10%">Present?</th>
-          </tr>
-          <tbody>
-            <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
-              <td>{{i+1}}</td>
-              <td>{{atd.activity.topicname}}</td>
-              <td>{{atd.activity.startdate | date: 'dd/MM/yyyy hh:mm a'}}</td>
-              <td>
-                <mat-icon *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'" style="color: green;">done</mat-icon>
-                <mat-icon *ngIf="atd.activity.attendencedetails.Attendence =='no' || atd.activity.attendencedetails.Attendence == 'No'" style="color: red;">close</mat-icon>
-              </td>
+
+      <div class="attendanceWrapper">
+        <div class="row sessionAttendance" *ngIf="sessionAttendance?.length">
+          <span class="tableHeadline">My Attendance</span>
+        </div>
+
+        <div class="row attendance-table" *ngIf="sessionAttendance?.length">
+          <table style="width: 100%;">
+            <tr class="tblheaderFont">
+              <th width="13%">Session #</th>
+              <th width="55%">Topic Name</th>
+              <th width="22%">Date</th>
+              <th width="10%">Present?</th>
             </tr>
-          </tbody>
-        </table>
+            <tbody>
+              <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
+                <td>{{i+1}}</td>
+                <td>{{atd.activity.topicname}}</td>
+                <td>{{atd.activity.startdate | date: 'dd/MM/yyyy hh:mm a'}}</td>
+                <td>
+                  <mat-icon *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'" style="color: green;">done</mat-icon>
+                  <mat-icon *ngIf="atd.activity.attendencedetails.Attendence =='no' || atd.activity.attendencedetails.Attendence == 'No'" style="color: red;">close</mat-icon>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
+
     </div>
   </div>
 
+  <ng-template #attendanceDialog>
+    <div class="">
+    <mat-icon class="closeModal-icon" (click)="closeModal()">close</mat-icon>
+    <h2>My Attendance</h2>
+    <div class="row attendance-table">
+      <table>
+        <tr class="tblheaderFont">
+          <th>Session #</th>
+          <th >Topic Name</th>
+          <th>Date</th>
+          <th>Present?</th>
+        </tr>
+        <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
+          <td>{{i+1}}</td>
+          <td>{{atd.activity.topicname}}</td>
+          <td>{{atd.activity.startdate | date: 'dd/MM/yyyy hh:mm a'}}</td>
+          <td>
+            <mat-icon *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'" style="color: green;">done</mat-icon>
+            <mat-icon *ngIf="atd.activity.attendencedetails.Attendence =='no' || atd.activity.attendencedetails.Attendence == 'No'" style="color: red;">close</mat-icon>
+          </td>
+        </tr>
+      </table>
+    </div>
+    </div>
+  </ng-template>
+  
   <!-- Right Side Panel ...  -->
   <div class="col-lg-5 col-xl-5 col-md-12 col-sm-12 col-12">
-    <h3 class="headLine">Upcoming Sessions and Recorded Sessions</h3>
     <div class="row course-list">
+      <div class="headingWrapper d-flex justify-content-between align-items-center">
+        <h3 class="headLine">Upcoming Sessions and Recorded Sessions</h3>
+        <button class="btn btn-light attandanceShow" (click)="showModal(attendanceDialog)">Attendance</button>
+      </div>
       <mat-nav-list class="listofSessionContainer" style="width: 100% !important;">
-        <mat-list-item *ngFor="let los of listOfSessions" class="listofSessionCards row mb-3">
+        <mat-list-item *ngFor="let los of listOfSessions" class="listofSessionCards">
           <mat-card class="sessionCard" (click)="useSession(los)">
-            <div class="row">
-              <div class="image-container col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
+            <div class="row d-flex justify-content-start">
+              <div class="image-container">
                 <img *ngIf="los.activity_details.livethumbnail" style="width: 100%;" [src]="los.activity_details.livethumbnail">
                 <img *ngIf="!los.activity_details.livethumbnail" style="width: 100%;" src="../../../../assets/learner/instructor_image.png">
                 <div class="bottom-right">{{los.status}}</div>
               </div>
-              <div class="content-container col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
+              <div class="content-container">
                 <h4>{{los.activity_details.topicname}}</h4>
-                <h5>
-                  {{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm'}}</h5>
-                <h5>Duration: {{los.duration}} </h5>
+                <h5><span>Starting on:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm'}}</h5>
+                <h5><span>Duration:</span> {{los.duration}} </h5>
               </div>
             </div>
           </mat-card>
