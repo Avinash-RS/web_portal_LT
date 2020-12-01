@@ -347,7 +347,7 @@
             <hr>
             <div class="row">
               <div class="col-8">
-                <div class="f_size_16 f_wt_600 mb-3">Materials for activity</div>
+                <div class="f_size_16 f_wt_600 mb-3">Materials for activity ({{perform.performActivity.materialDetails.length}})</div>
                 <!-- <div class="row" *ngFor="let material of perform.performActivity.materialDetails">
                 <div class="col-4 m-t">
                   <img alt="Course Img" src="../../../../assets/images/play.jpg" class="courseImg" />
@@ -368,7 +368,7 @@
                 </div>
               </div> -->
               
-                <owl-carousel-o [options]="trendingCategorires"
+                <owl-carousel-o [options]="trendingCategorires" *ngIf="perform?.performActivity?.materialDetails?.length > 0"
                   [ngClass]="perform.performActivity.materialDetails.length >= 4 ? 'arrow': 'widthClass arrow' ">
                   <ng-template class="row ml-0 mr-0" carouselSlide
                     *ngFor="let material of perform.performActivity.materialDetails; let i = index">
@@ -431,7 +431,7 @@
                 </owl-carousel-o>
                 <h3
                   *ngIf="perform.performActivity.materialDetails && perform.performActivity.materialDetails.length == 0">
-                  No perform yet
+                  No materials found for this activity.
                 </h3>
               </div>
 
@@ -560,7 +560,7 @@
                             <textarea disabled class="textArea">{{itrdata.comments}}</textarea>
                         </div>
                       </div>
-                      <div class="row ml-0 mr-0">
+                      <div class="row ml-0 mr-0" *ngIf="itrdata.assessmentreport.length > 0">
                         <div class="col-12">
                           <button mat-stroked-button (click)="openDocument(projectPreviewDialog, itrdata.assessmentreport[0], itrdata.assessmentreport[0].doc_type)" class="AssignmentBtn mt-3 w-100"><mat-icon class="assignmentIcon mr-2">wysiwyg</mat-icon>Assessment report</button>
                         </div>
