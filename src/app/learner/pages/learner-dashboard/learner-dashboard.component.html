@@ -16,7 +16,7 @@
           <span class="count">{{dashboardData?.courseEnrolled.totalCount}}</span>
         </div>
         <div class="col-4">
-          <img class="icon" src="../../../../assets/learner/CoursesEnrolled.svg">
+          <img class="icon" src="../../../../assets/learner/CoursesEnrolled.svg" alt="CoursesEnrolled">
         </div>
       </div><br>
 
@@ -47,7 +47,7 @@
           <span class="count">{{dashboardData?.incomplete[0].totalCount}}</span>
         </div>
         <div class="col-4">
-          <img class="icon" src="../../../../assets/learner/CoursesYettoStart.svg">
+          <img class="icon" src="../../../../assets/learner/CoursesYettoStart.svg" alt="CoursesYettoStart">
         </div>
       </div><br>
 
@@ -78,7 +78,7 @@
           <span class="count">{{dashboardData?.suspend[0].totalCount}}</span>
         </div>
         <div class="col-4">
-          <img class="icon" src="../../../../assets/learner/CoursesInprogress.svg">
+          <img class="icon" src="../../../../assets/learner/CoursesInprogress.svg" alt="CoursesInprogress">
         </div>
       </div><br>
 <!-- 
@@ -109,7 +109,7 @@
           <span class="count">{{dashboardData?.completed[0].totalCount}}</span>
         </div>
         <div class="col-4">
-          <img class="icon" src="../../../../assets/learner/CoursesCompleted.svg">
+          <img class="icon" src="../../../../assets/learner/CoursesCompleted.svg" alt="CoursesCompleted">
         </div>
       </div><br>
 
@@ -135,14 +135,14 @@
 
 
 <div class="container containerShadow">
-    <span class="txthead"><b>{{'Last accessed' | translate }} </b><span class="h8">{{'Courses' | translate }}</span> ({{'click on any course to resume' | translate }})</span>
+    <span class="txthead"><strong>{{'Last accessed' | translate }} </strong><span class="h8">{{'Courses' | translate }}</span> ({{'click on any course to resume' | translate }})</span>
             <div class="row" >
               <div class="col-md-6 col-sm-12 col-12" *ngFor="let dashboard of dashboardData?.lastAccessedCourses">
               <div class="lg-box" (click)="gotohome()" >
 
              <div class="row">
                <div class="col-3">
-                <img class="imge" src="{{dashboard?.course_img_url}}">
+                <img class="imge" src="{{dashboard?.course_img_url}}" alt="courseImage">
                </div>
 
                <div class="col-8">
