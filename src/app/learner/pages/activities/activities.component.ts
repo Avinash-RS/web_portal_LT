@@ -134,16 +134,16 @@ export class ActivitiesComponent implements OnInit {
   currentTab: any;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
-              private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
-              public route: Router, public datePipe: DatePipe) {
+    private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
+    public route: Router, public datePipe: DatePipe) {
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
     this.checkDetails = detail;
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout();
     }
-    this.courseid =  this.checkDetails ?  this.checkDetails.courseId : localStorage.getItem('Courseid');
-    this.courseName = this.checkDetails ?  this.checkDetails.courseName : localStorage.getItem('CourseName');
+    this.courseid = this.checkDetails ? this.checkDetails.courseId : localStorage.getItem('Courseid');
+    this.courseName = this.checkDetails ? this.checkDetails.courseName : localStorage.getItem('CourseName');
     this.getAssignmentmoduleData();
     this.getprojectActivityData();
     this.getperformActivityData();
@@ -155,16 +155,16 @@ export class ActivitiesComponent implements OnInit {
       this.performdetailPageView = data;
     });
     if (index) {
-    // tslint:disable-next-line:radix
-    this.demo1TabIndex = parseInt(index);
+      // tslint:disable-next-line:radix
+      this.demo1TabIndex = parseInt(index);
     }
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.currentTab === 'Perform' || this.demo1TabIndex === 1 && this.screenWidth < 800) {
-        this.mobileResponsive = true;
-      } else {
-        this.mobileResponsive = false;
-      }
+      this.mobileResponsive = true;
+    } else {
+      this.mobileResponsive = false;
+    }
   }
 
   activeTab(event) {
@@ -294,22 +294,22 @@ export class ActivitiesComponent implements OnInit {
         this.videoSource = path.path;
         this.videoPreview(videoDialog, path);
       }
-  } else if (type === 'files') {
-    if (path.doc_type !== 'video/mp4') {
-    this.dialog.open(templateRef, {
-      width: '100%',
-      height: '100%',
-      closeOnNavigation: true,
-      disableClose: true,
-    });
-    path.path = path.videourl;
-    this.previewDoc = path;
-  } else {
-    path.path = path.videourl;
-    this.videoSource = path.videourl;
-    this.videoPreview(videoDialog, this.videoSource);
-  }
-  }
+    } else if (type === 'files') {
+      if (path.doc_type !== 'video/mp4') {
+        this.dialog.open(templateRef, {
+          width: '100%',
+          height: '100%',
+          closeOnNavigation: true,
+          disableClose: true,
+        });
+        path.path = path.videourl;
+        this.previewDoc = path;
+      } else {
+        path.path = path.videourl;
+        this.videoSource = path.videourl;
+        this.videoPreview(videoDialog, this.videoSource);
+      }
+    }
   }
 
   downloadPdf(doc) {
@@ -391,45 +391,45 @@ export class ActivitiesComponent implements OnInit {
   getprojectActivityData() {
     this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
-      this.projectDetails = data.data.getprojectActivityData.data;
-      this.projectDetails.forEach(element => {
-        element.showLearnerList = false;
-        // element.isCollapsed = false;
-        // Batch date
-        const batchEndDate = new Date(element.projectActivity.batchenddate);
-        element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:MM');
-        if (moment().format('DD-MM-YYYY HH:MM') <= element.batchEndDate) {
-          element.submitType = true;
-        } else {
-          element.submitType = false;
-        }
-        // Activity Dates
-        const startDate = new Date(element.projectActivity.activitystartdate);
-        element.activityStartDate = moment(startDate).format('ll');
-        element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
-        const endDate = new Date(element.projectActivity.activityenddate);
-        element.activityEndDate = moment(endDate).format('ll');
-        const submitDate = new Date(element.projectActivity.submitted_on);
-        element.submittedOn = moment(submitDate).format('ll');
+        this.projectDetails = data.data.getprojectActivityData.data;
+        this.projectDetails.forEach(element => {
+          element.showLearnerList = false;
+          // element.isCollapsed = false;
+          // Batch date
+          const batchEndDate = new Date(element.projectActivity.batchenddate);
+          element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:MM');
+          if (moment().format('DD-MM-YYYY HH:MM') <= element.batchEndDate) {
+            element.submitType = true;
+          } else {
+            element.submitType = false;
+          }
+          // Activity Dates
+          const startDate = new Date(element.projectActivity.activitystartdate);
+          element.activityStartDate = moment(startDate).format('ll');
+          element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
+          const endDate = new Date(element.projectActivity.activityenddate);
+          element.activityEndDate = moment(endDate).format('ll');
+          const submitDate = new Date(element.projectActivity.submitted_on);
+          element.submittedOn = moment(submitDate).format('ll');
 
-        if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
-          element.enableSubmit = false;
-        } else {
-          element.enableSubmit = true;
-        }
-      });
- }
-});
+          if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
+            element.enableSubmit = false;
+          } else {
+            element.enableSubmit = true;
+          }
+        });
+      }
+    });
   }
 
   // tslint:disable-next-line:adjacent-overload-signatures
   downloadDoc(doc, type) {
     if (type === 'material') {
-    const link = document.createElement('a');
-    link.target = '_blank';
-    link.style.display = 'none';
-    link.href = doc.path;
-    link.click();
+      const link = document.createElement('a');
+      link.target = '_blank';
+      link.style.display = 'none';
+      link.href = doc.path;
+      link.click();
     } else if (type === 'files') {
       const link = document.createElement('a');
       link.target = '_blank';
@@ -441,31 +441,43 @@ export class ActivitiesComponent implements OnInit {
 
   getperformActivityData() {
     this.Lservice.getperformActivityData(
-      this.userDetail.user_id,  this.courseid
+      this.userDetail.user_id, this.courseid
     ).subscribe((data: any) => {
       if (data && data.data && data.data.getperformActivityData && data.data.getperformActivityData.data) {
-      this.performDetails = data.data.getperformActivityData.data;
-      this.performDetails.forEach((element) => {
-        const startDate = this.datePipe.transform(element.performActivity.activitystartdate, 'dd-MM-yyyy');
-        const endDate = this.datePipe.transform(element.performActivity.activityenddate, 'dd-MM-yyyy');
-        const batchendDate = this.datePipe.transform(element.performActivity.batchenddate, 'dd-MM-yyyy');
-        const crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
-        if (startDate <= crrDate && batchendDate >= crrDate) {
-          // tslint:disable-next-line:no-string-literal
-          element['itrationStarted'] = true;
-        } else {
-          // tslint:disable-next-line:no-string-literal
-          element['itrationStarted'] = false;
-        }
-      });
-    }
+        this.performDetails = data.data.getperformActivityData.data;
+        this.performDetails.forEach((element) => {
+          // const startDate = this.datePipe.transform(element.performActivity.activitystartdate, 'dd-MM-yyyy HH:MM aa');
+          // const endDate = this.datePipe.transform(element.performActivity.activityenddate, 'dd-MM-yyyy HH:MM aa');
+          // const batchendDate = this.datePipe.transform(element.performActivity.batchenddate, 'dd-MM-yyyy HH:MM aa');
+          // const crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy  HH:MM  aa');
+          // console.log(moment.utc(element.performActivity.activitystartdate).format());
+          // console.log(startDate);
+          // console.log(endDate);
+          // console.log(batchendDate);
+          // console.log(crrDate);
+          const crrDate = new Date();
+          const startDate = new Date(element.performActivity.activitystartdate);
+          const endDate = new Date(element.performActivity.activityenddate);
+
+            // tslint:disable-next-line:no-string-literal
+          element['itrationStarted']  = this.dateDiff(startDate,
+            endDate , crrDate);
+          // if (startDate <= crrDate && batchendDate >= crrDate) {
+          //   // tslint:disable-next-line:no-string-literal
+          //   element['itrationStarted'] = true;
+          // } else {
+          //   // tslint:disable-next-line:no-string-literal
+          //   element['itrationStarted'] = false;
+          // }
+        });
+      }
     });
   }
 
   dateDiff(startDate, endDate, currentDate) {
     const startDateDiff = startDate - currentDate;
     const endDateDiff = endDate - currentDate;
-    if ((startDateDiff <= 0 ) && (endDateDiff >= 0)) {
+    if ((startDateDiff <= 0) && (endDateDiff >= 0)) {
       return true;
     } else {
       return false;
@@ -507,9 +519,9 @@ export class ActivitiesComponent implements OnInit {
         this.showSubmittedon = true;
         this.getprojectActivityData();
         this.selectfile = [];
-       } else {
+      } else {
         this.toastr.warning(data.message);
-       }
+      }
     });
   }
 
@@ -521,23 +533,23 @@ export class ActivitiesComponent implements OnInit {
     project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:MM');
     let submitStatus = '';
     if (moment().format('DD-MM-YYYY HH:MM') >= project.actstartDate &&
-    moment().format('DD-MM-YYYY HH:MM') <= project.actendDate) {
-    submitStatus = 'ontime';
+      moment().format('DD-MM-YYYY HH:MM') <= project.actendDate) {
+      submitStatus = 'ontime';
     } else if (moment().format('DD-MM-YYYY HH:MM') > project.actendDate) {
       submitStatus = 'late';
     }
     const submitData = {
-      course_id : this.courseid,
-      module_id : project.projectActivity.module_id,
-      topic_id : project.projectActivity.topic_id,
-      user_id : this.userDetail.user_id,
-      submit_status : submitStatus,
-      total_mark : project.projectActivity.total_mark,
-      submitType : 'project',
+      course_id: this.courseid,
+      module_id: project.projectActivity.module_id,
+      topic_id: project.projectActivity.topic_id,
+      user_id: this.userDetail.user_id,
+      submit_status: submitStatus,
+      total_mark: project.projectActivity.total_mark,
+      submitType: 'project',
       submitAction,
-      iterationid : project.projectActivity.project_id,
-      object_id : project.projectActivity.project_id,
-      videodetails : submitAction === 'delete' ? [deleteItem] : []
+      iterationid: project.projectActivity.project_id,
+      object_id: project.projectActivity.project_id,
+      videodetails: submitAction === 'delete' ? [deleteItem] : []
     };
     this.Lservice.learnerSumbitdeleteVideo(submitData).subscribe((data: any) => {
       if (data.success === true) {
@@ -551,157 +563,157 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
- // --------------------- Perform document upload ----------------------------
+  // --------------------- Perform document upload ----------------------------
 
- uploadDocument(event, perform) {
-  // this.selectPerformfile.push(event.target.files[0] as File);
-  const filePath = event.target.files[0].name;
-  const allowedExtensions = /(\.mp4)$/i;
-  if (!allowedExtensions.exec(filePath)) {
-    this.toastr.warning('Please upload video file only.');
-  } else {
-  // tslint:disable-next-line: prefer-for-of
-  for (let i = 0; i < event.target.files.length; i++) {
-    this.selectPerformfile.push(event.target.files[i]);
-}
-  this.performlearnerUploadVideo();
-}
- }
-
-uploadDocuments(e, perform, performans) {
-  this.performsData = performans;
-  this.itrationData = perform;
-  this.videoInput.nativeElement.click();
-}
-
-performlearnerUploadVideo() {
-  const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
-  const performVideo = new FormData();
-  const startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy');
-  const endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy');
-  if (currentDate >= startDate && currentDate <= endDate) {
-    this.submitStatus = 'ontime';
-  } else {
-    this.submitStatus = 'late';
-  }
-  // tslint:disable-next-line: prefer-for-of
-  for (let i = 0; i < this.selectPerformfile.length; i++) {
-    performVideo.append('uploadvideo', this.selectPerformfile[i]);
-  }
-  // performVideo.append('uploadvideo' , this.selectPerformfile[0]);
-  performVideo.append('course_id', this.performsData.performActivity.course_id);
-  performVideo.append('module_id', this.performsData.performActivity.module_id);
-  performVideo.append('topic_id', this.performsData.performActivity.topic_id);
-  performVideo.append('user_id', this.userDetail.user_id);
-  performVideo.append('submit_status', this.submitStatus);
-  performVideo.append('total_mark', this.itrationData.total_mark);
-  performVideo.append('submitType', 'perform');
-  performVideo.append('submitAction', this.submitType);
-  performVideo.append('iterationid', this.itrationData.iterationid);
-  performVideo.append('object_id', this.performsData.performActivity.perform_id);
-  this.commonServices.loader$.next(true);
-  this.Lservice.learnerUploadVideo(performVideo).subscribe((data: any) => {
-    if (data.success === true) {
-      this.toastr.success(data.message);
-      this.getperformActivityData();
-      this.selectPerformfile = [];
+  uploadDocument(event, perform) {
+    // this.selectPerformfile.push(event.target.files[0] as File);
+    const filePath = event.target.files[0].name;
+    const allowedExtensions = /(\.mp4)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+      this.toastr.warning('Please upload video file only.');
     } else {
-      this.toastr.warning(data.message);
-   }
-  });
-}
-
-submitDeleteVideo(videoName, itrdata, perform) {
-  let videoFile = [];
-  videoFile.push(videoName);
-  const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
-  const performVideo = new FormData();
-  const startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy');
-  const endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy');
-  if (currentDate >= startDate && currentDate <= endDate) {
-    this.submitStatus = 'ontime';
-  } else {
-    this.submitStatus = 'late';
+      // tslint:disable-next-line: prefer-for-of
+      for (let i = 0; i < event.target.files.length; i++) {
+        this.selectPerformfile.push(event.target.files[i]);
+      }
+      this.performlearnerUploadVideo();
+    }
   }
-  const data = {
-    course_id: perform.course_id,
-    module_id: perform.module_id,
-    topic_id: perform.topic_id,
-    user_id: this.userDetail.user_id,
-    submit_status: this.submitStatus,
-    total_mark: itrdata.total_mark,
-    submitType: 'perform',
-    submitAction: this.submitType,
-    iterationid: itrdata.iterationid,
-    object_id: perform.perform_id,
-    videodetails: this.submitType === 'delete' ? videoFile : []
-};
-  this.Lservice.learnerSumbitdeleteVideo(data).subscribe((response: any) => {
-     if (response.success === true) {
-      this.toastr.success(response.message);
-      this.getperformActivityData();
-      videoFile = [];
+
+  uploadDocuments(e, perform, performans) {
+    this.performsData = performans;
+    this.itrationData = perform;
+    this.videoInput.nativeElement.click();
+  }
+
+  performlearnerUploadVideo() {
+    const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
+    const performVideo = new FormData();
+    const startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy HH:MM aa');
+    const endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy HH:MM aa');
+    if (currentDate >= startDate && currentDate <= endDate) {
+      this.submitStatus = 'ontime';
     } else {
-      this.toastr.warning(response.message);
+      this.submitStatus = 'late';
     }
-  });
-}
-
-previewDoc(templateRef: TemplateRef<any>, path) {
-  this.dialog.open(templateRef, {
-    width: '100%',
-    height: '100%',
-    closeOnNavigation: true,
-    disableClose: true,
-  });
-  this.docpath = path;
-}
-
-openDocument(templateRef: TemplateRef<any>, path, docType) {
-  path.path = path.imageurl;
-  this.dialog.open(templateRef, {
-    width: '100%',
-    height: '100%',
-    closeOnNavigation: true,
-    disableClose: true,
-  });
-  this.previewDoc = path;
-}
-
-playVideo(templateRef: TemplateRef<any>, videoDialog, path, docType) {
- if (docType === 'image/jpeg' || docType === 'application/pdf') {
-  this.dialog.open(templateRef, {
-    width: '100%',
-    height: '100%',
-    closeOnNavigation: true,
-    disableClose: true,
-  });
-  this.previewDoc = path;
-  } else if (docType === 'video/mp4') {
-    if (path.videourl) {
-      path.path = path.videourl;
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.selectPerformfile.length; i++) {
+      performVideo.append('uploadvideo', this.selectPerformfile[i]);
     }
-    this.videoSource = path.path;
-    this.videoPreview(videoDialog, path.path);
+    // performVideo.append('uploadvideo' , this.selectPerformfile[0]);
+    performVideo.append('course_id', this.performsData.performActivity.course_id);
+    performVideo.append('module_id', this.performsData.performActivity.module_id);
+    performVideo.append('topic_id', this.performsData.performActivity.topic_id);
+    performVideo.append('user_id', this.userDetail.user_id);
+    performVideo.append('submit_status', this.submitStatus);
+    performVideo.append('total_mark', this.itrationData.total_mark);
+    performVideo.append('submitType', 'perform');
+    performVideo.append('submitAction', this.submitType);
+    performVideo.append('iterationid', this.itrationData.iterationid);
+    performVideo.append('object_id', this.performsData.performActivity.perform_id);
+    this.commonServices.loader$.next(true);
+    this.Lservice.learnerUploadVideo(performVideo).subscribe((data: any) => {
+      if (data.success === true) {
+        this.toastr.success(data.message);
+        this.getperformActivityData();
+        this.selectPerformfile = [];
+      } else {
+        this.toastr.warning(data.message);
+      }
+    });
   }
-}
 
-videoPreview(templateRef: TemplateRef<any>, path) {
-  this.dialog.open(templateRef, {
-    width: '90%',
-    height: '95%',
-    panelClass: 'matDialogMat',
-    closeOnNavigation: true,
-    disableClose: true,
-  });
-}
+  submitDeleteVideo(videoName, itrdata, perform) {
+    let videoFile = [];
+    videoFile.push(videoName);
+    const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
+    const performVideo = new FormData();
+    const startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy');
+    const endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy');
+    if (currentDate >= startDate && currentDate <= endDate) {
+      this.submitStatus = 'ontime';
+    } else {
+      this.submitStatus = 'late';
+    }
+    const data = {
+      course_id: perform.course_id,
+      module_id: perform.module_id,
+      topic_id: perform.topic_id,
+      user_id: this.userDetail.user_id,
+      submit_status: this.submitStatus,
+      total_mark: itrdata.total_mark,
+      submitType: 'perform',
+      submitAction: this.submitType,
+      iterationid: itrdata.iterationid,
+      object_id: perform.perform_id,
+      videodetails: this.submitType === 'delete' ? videoFile : []
+    };
+    this.Lservice.learnerSumbitdeleteVideo(data).subscribe((response: any) => {
+      if (response.success === true) {
+        this.toastr.success(response.message);
+        this.getperformActivityData();
+        videoFile = [];
+      } else {
+        this.toastr.warning(response.message);
+      }
+    });
+  }
 
-mouseover(index) {
-  this.mouseOverIndex = index;
-}
+  previewDoc(templateRef: TemplateRef<any>, path) {
+    this.dialog.open(templateRef, {
+      width: '100%',
+      height: '100%',
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+    this.docpath = path;
+  }
 
-performdetailPage(index, performData) {
-  this.perfornDetaildata = {perfornData: performData, index};
-}
+  openDocument(templateRef: TemplateRef<any>, path, docType) {
+    path.path = path.imageurl;
+    this.dialog.open(templateRef, {
+      width: '100%',
+      height: '100%',
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+    this.previewDoc = path;
+  }
+
+  playVideo(templateRef: TemplateRef<any>, videoDialog, path, docType) {
+    if (docType === 'image/jpeg' || docType === 'application/pdf') {
+      this.dialog.open(templateRef, {
+        width: '100%',
+        height: '100%',
+        closeOnNavigation: true,
+        disableClose: true,
+      });
+      this.previewDoc = path;
+    } else if (docType === 'video/mp4') {
+      if (path.videourl) {
+        path.path = path.videourl;
+      }
+      this.videoSource = path.path;
+      this.videoPreview(videoDialog, path.path);
+    }
+  }
+
+  videoPreview(templateRef: TemplateRef<any>, path) {
+    this.dialog.open(templateRef, {
+      width: '90%',
+      height: '95%',
+      panelClass: 'matDialogMat',
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+  }
+
+  mouseover(index) {
+    this.mouseOverIndex = index;
+  }
+
+  performdetailPage(index, performData) {
+    this.perfornDetaildata = { perfornData: performData, index };
+  }
 
 }
