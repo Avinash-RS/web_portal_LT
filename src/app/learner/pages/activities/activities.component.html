@@ -720,7 +720,7 @@
                                       <mat-icon class="position-absolute text-white playBtn"
                                         *ngIf="material.doc_type =='video/mp4'">play_circle_outline</mat-icon>
                                       <mat-icon class="position-absolute text-white playBtn"
-                                        *ngIf="material.doc_type =='image/jpeg'">photo_size_select_actual</mat-icon>
+                                        *ngIf="material.doc_type =='image/jpeg' || material.doc_type == 'image/jpg' ||material.doc_type == 'image/png'">photo_size_select_actual</mat-icon>
                                         <i class="fa fa-file-pdf-o position-absolute text-white playBtn" *ngIf="material.doc_type =='application/pdf'
                                         || material.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
                                         aria-hidden="true"></i>
@@ -728,7 +728,8 @@
                                         *ngIf="material.doc_type =='video/mp4'">Play</span>
                                       <span class="text-white actionBtn"
                                         *ngIf="material.doc_type == 'image/jpeg' || material.doc_type == 'application/pdf'
-                                        || material.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'">View</span>
+                                        || material.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
+                                       material.doc_type == 'image/jpg' ||material.doc_type == 'image/png'">View</span>
                                     </div>
                                     <!-- <div class="col-7 text-center pr-0 colAction"
                                     (click)="downloadDoc(material, 'material')">
@@ -760,7 +761,7 @@
                         <mat-icon *ngIf="item.doc_type == 'application/pdf'
                         || item.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'" class="videoPlay float-left">picture_as_pdf
                         </mat-icon>
-                        <span class="uploadfileName" *ngIf="item.name.length < 27">
+                        <span class="uploadfileName" *ngIf="item.name.length < 19">
                             {{item.name}}
                           </span>
                         <!-- <span class="uploadfileName" *ngIf="item.name.length > 28" matTooltip="{{item.name}}" matTooltipClass="custom-mat-tooltip">
@@ -917,14 +918,15 @@
                                       <mat-icon class="position-absolute text-white playBtn"
                                         *ngIf="video.doc_type =='video/mp4'">play_circle_outline</mat-icon>
                                       <mat-icon class="position-absolute text-white playBtn"
-                                        *ngIf="video.doc_type =='image/jpeg'">photo_size_select_actual</mat-icon>
+                                        *ngIf="video.doc_type =='image/jpeg' || video.doc_type == 'image/jpg' || video.doc_type == 'image/png'">photo_size_select_actual</mat-icon>
                                         <i class="fa fa-file-pdf-o position-absolute text-white playBtn" *ngIf="video.doc_type =='application/pdf'"
                                         aria-hidden="true"></i>
                                       <span class="text-white actionBtn"
                                         *ngIf="video.doc_type =='video/mp4'">Play</span>
                                       <span class="text-white actionBtn"
                                         *ngIf="video.doc_type == 'image/jpeg' || video.doc_type == 'application/pdf'
-                                        || video.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'">Preview</span>
+                                        || video.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || 
+                                        video.doc_type == 'image/jpg' || video.doc_type == 'image/png'">View</span>
                                     </div>
                                     <div class="col-7 text-center pr-0 colAction"
                                     (click)="downloadDoc(video, 'files')">
