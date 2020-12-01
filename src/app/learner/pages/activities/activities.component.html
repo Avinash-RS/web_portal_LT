@@ -558,7 +558,7 @@
                             <textarea disabled class="textArea">{{itrdata.comments}}</textarea>
                         </div>
                       </div>
-                      <div class="row ml-0 mr-0">
+                      <div class="row ml-0 mr-0" *ngIf="itrdata.assessmentreport.length > 0">
                         <div class="col-12">
                           <button mat-stroked-button (click)="openDocument(projectPreviewDialog, itrdata.assessmentreport[0], itrdata.assessmentreport[0].doc_type)" class="AssignmentBtn mt-3 w-100"><mat-icon class="assignmentIcon mr-2">wysiwyg</mat-icon>Assessment report</button>
                         </div>
