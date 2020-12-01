@@ -336,8 +336,10 @@
 
 
               <div class="m-l-68">Start date :<span class="endDateTxt"></span>End date :</div>
-              <div class="m-l-68 f_wt_600">{{perform.performActivity.activitystartdate | date}}
-                <span class="EndDate f_wt_600"></span>{{perform.performActivity.activityenddate | date}}</div>
+              <div class="m-l-68 f_wt_600">
+                {{perform.performActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}
+                <span class="EndDate f_wt_600"></span>
+                {{perform.performActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</div>
             </div>
           </div>
 
@@ -488,7 +490,7 @@
                         Submit
                       </button>
                       <button mat-stroked-button
-                      *ngIf="itrdata.submit_status == 'notsubmitted' &&  itrdata.videodetails.length == 0 || !perform.itrationStarted"
+                      *ngIf="itrdata.submit_status == 'notsubmitted' &&  (itrdata.videodetails.length == 0 || !perform.itrationStarted)"
                       class="submitted-btn mt-2"> Submit </button>
                       <button mat-stroked-button *ngIf="itrdata.submitAction == 'submit'" class="submitted-btn mt-2">
                         Submitted </button>
