@@ -110,7 +110,7 @@
 }
 
 :host ::ng-deep .btn1:focus {
-    border-bottom: 2px solid $lxp-theme-green !important;
+    // border-bottom: 2px solid $lxp-theme-green !important;
     // border-right: none !important;
     // outline: 0 !important;
     // border-left: none !important;
@@ -118,8 +118,8 @@
 
 .btn1:hover {
     //color: $color-blank !important;
-    background-color: #77777740 !important;
-    color:$color-lightGray !important
+    // background-color: #77777740 !important;
+    // color:$color-lightGray !important
 }
 
 :host ::ng-deep button:active {
@@ -148,9 +148,20 @@
     width: 22px;
 }
 .colgreen {
-    border-bottom: 2px solid $lxp-theme-green !important;
     color: #ffffff !important;
     background-color: $lxp-gray !important;
+    position: relative;
+    &:focus {
+        border-bottom: none;
+    }
+    &::after {
+        content: '';
+        border-bottom: 2px solid $lxp-theme-green !important;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+    }
 }
 .btn2 :hover{
     background-color:$lxp-gray !important;
@@ -166,7 +177,27 @@
 }
 
 .colWhite {
-    color:$color-lightGray;
+    // color:$color-lightGray;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    transform: perspective(1px) translateZ(0);
+    transition-property: color, background-color;
+    transition-duration: 0.3s;
+    position: relative;
+    &:hover {
+        background-color: $lxp-gray !important;
+        color: white !important;
+        position: relative;
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            border-bottom: 2px solid $lxp-theme-green !important;
+        }
+    }
 }
 
 .bookIcon {
@@ -176,16 +207,15 @@
 .btn1 {
     display: block;
 }
-
+.smNoDisp {
+    margin-left: 5px;
+}
 @media screen and (min-width: 200px) and (max-width: 770px) {
   .smNoDisp{
       display: none;
   }
 
-.p-x-15px{
-    padding:7px 4px !important; 
-}
-.p5px{
+.p5px {
     background-color: black;
     padding:7px 4px !important; 
 }
@@ -217,12 +247,12 @@
 }
 
 .imgAdj{
-    float: right;
-    margin-top: 6px;
+    // float: right;
+    // margin-top: 6px;
 }
 
-.p-x-15px{
-    padding:7px 15px; 
+.p-x-15px {
+    padding:12px 15px 11px 15px; 
 }
 
 .headicon {
@@ -266,7 +296,9 @@
 .desktopMenu {
     display: none;
     @media only screen and (min-width:992px) {
-        display: block;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
     }
 }
 .mobHamburger {
