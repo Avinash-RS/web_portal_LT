@@ -14,9 +14,15 @@
   </div>
   <div *ngIf="!expandSearch" class="row w-100 mr-0 ml-0">
     <!-- *ngIf="jobRole?.length < 1" -->
-    <div class="col-10 col-sm-10 col-md-4 col-lg-6 col-xl-7 catalogTitle">
-      <div class="f_size_22  myC-head animated animatedFadeInUp fadeInUp " style="font-size: 22px;">
-        {{'My Courses' | translate }}</div>
+    <div class="col-10 col-sm-10 col-md-4 col-lg-6 col-xl-7 catalogTitle align-middle">
+      <div class="f_size_22" style="font-size: 22px;">
+        {{'My Courses' | translate }}
+      </div>
+      <div class="mobCourseStatus">
+        <h4><span *ngIf="selectedIndex ==1"> - Ongoing <span>({{onGoingCourseCount}})</span></span></h4>
+        <h4><span *ngIf="selectedIndex ==2"> - Completed <span>({{completedCourseCount}})</span></span></h4>
+        <h4><span *ngIf="selectedIndex ==3"> - All <span>({{allCourseCount}})</span></span></h4>
+      </div>
     </div>
 
 
@@ -50,73 +56,51 @@
                 {{'Available Courses' | titlecase}}
 
                 <ul class="dropdown-menu first-level multi-level" role="menu" id="dropMenu" aria-labelledby="dropdownMenu">
-                  <span>
-                    <span *ngFor="let item of categories">
-                      <!-- viewCourse(item,item.categoryName,item.totalCount) -->
-                      <li *ngIf="item.subCategory == null" class="dropdown-item"
-                        (click)="getCoureBasedOnCatalog(dropDownCategoryDetails,item,'',''); viewCourse(item,previewDialog, item.categoryName,item.totalCount)">
-                        <span
-                          *ngIf="item.categoryName.length > 17">{{(item?.categoryName | titlecase | slice:0:17)+'...'}}</span>
-                        <span *ngIf="item.categoryName.length <= 17">{{item?.categoryName | titlecase}}</span>
-                        <span class="matBadgeNew" matBadge="{{item.totalCount}}" matBadgeOverlap="false"></span>
-                      </li>
-    
-                      <li *ngIf="item.subCategory && item.subCategory.length > 0" class="dropdown-submenu">
-                        <a class="dropdown-item" tabindex="-1">
-                          <!-- tooltip="{{item?.categoryName | titlecase}}"  placement="top" -->
-                          <span
-                            *ngIf="item.categoryName.length > 17">{{(item?.categoryName | titlecase | slice:0:17)+'...'}}</span>
-                          <span *ngIf="item.categoryName.length <= 17">{{item?.categoryName | titlecase}}</span>
-                          <span class="dynamicBagde" matBadge="{{item.totalCount}}" matBadgeOverlap="false"></span>
-                        </a>
-                        <!----------------------------Sub menu----------------------->
-                        <ul class="dropdown-menu subMenu">
-                          <span *ngFor="let subchild of item.subCategory">
-                            <li *ngIf="subchild.superSubCategory == null" class="dropdown-item superSubMenuItem">
-                              <!-- tooltip="{{subchild.subCategoryName | titlecase}}"  placement="top" -->
-                              <span class="superSubSpan"
-                                *ngIf="subchild.subCategoryName.length > 17">{{subchild.subCategoryName | titlecase}}</span>
-                              <span
-                                *ngIf="subchild.subCategoryName.length <= 17">{{subchild.subCategoryName | titlecase}}</span>
-                              <span class="matBadgeSubmenu" matBadge="{{subchild.totalCount}}"
-                                matBadgeOverlap="false"></span>
-                            </li>
-    
-                            <li *ngIf="subchild.superSubCategory && subchild.superSubCategory.length > 0"
-                              class="dropdown-submenu">
-                              <a class="dropdown-item" tabindex="-1">
-                                <!-- tooltip="{{subchild.subCategoryName | titlecase}}" placement="top" -->
-                                <span class="superSubSpan"
-                                  *ngIf="subchild.subCategoryName.length >17">{{subchild.subCategoryName | titlecase }}</span>
-                                <span
-                                  *ngIf="subchild.subCategoryName.length <=17">{{subchild.subCategoryName | titlecase}}</span>
-                                <span class="matBadgeSubmenu" matBadge="{{subchild.totalCount}}"
-                                  matBadgeOverlap="false"></span>
-                              </a>
-    
-                              <!------------------------------Super sub menu----------------------------------->
-                              <ul class="dropdown-menu superSubMenu">
-                                <span *ngFor="let superChild of subchild.superSubCategory">
-                                  <!-- viewCourse(item,superChild.superSubCategoryName,superChild.totalCount) -->
-                                  <li class="dropdown-item superSubMenuItem"
-                                    (click)="menuSelect(subchild,superChild); viewCourse(item,previewDialog,superChild.superSubCategoryName,superChild.totalCount);
-                                getCoureBasedOnCatalog(dropDownCategoryDetails,item,subchild.subCategoryId, superChild.superSubCategoryId)">
-                                    <!-- tooltip="{{superChild.superSubCategoryName | titlecase}}"
-                                  placement="top" -->
-                                    <span class="superSubSpan"
-                                      *ngIf="superChild.superSubCategoryName.length > 17">{{superChild.superSubCategoryName | titlecase }}</span>
-                                    <span
-                                      *ngIf="superChild.superSubCategoryName.length <= 17">{{superChild.superSubCategoryName | titlecase}}</span>
-                                    <span class="matBadgesuperSub" matBadge="{{superChild.totalCount}}"
-                                      matBadgeOverlap="false"></span>
-                                  </li>
-                                </span>
-                              </ul>
-                            </li>
-                          </span>
-                        </ul>
-                      </li>
-                    </span>
+                  <span *ngFor="let item of categories">
+                    <!-- viewCourse(item,item.categoryName,item.totalCount) -->
+                    <li *ngIf="item.subCategory == null" class="dropdown-item" (click)="getCoureBasedOnCatalog(dropDownCategoryDetails,item,'',''); viewCourse(item,previewDialog, item.categoryName,item.totalCount)">
+                      <!-- <span *ngIf="item.categoryName.length > 17">{{(item?.categoryName | titlecase | slice:0:17)+'...'}}</span> -->
+                      <span>{{item?.categoryName | titlecase}}</span>
+                      <span class="matBadgeNew" matBadge="{{item.totalCount}}" matBadgeOverlap="false"></span>
+                    </li>
+  
+                    <li *ngIf="item.subCategory && item.subCategory.length > 0" class="dropdown-submenu dropdown-item">
+                      <!-- tooltip="{{item?.categoryName | titlecase}}"  placement="top" -->
+                      <span>{{item?.categoryName | titlecase}}</span>
+                      <span class="dynamicBagde" matBadge="{{item.totalCount}}" matBadgeOverlap="false"></span>
+                      <!----------------------------Sub menu----------------------->
+                      <ul class="dropdown-menu subMenu">
+                        <span *ngFor="let subchild of item.subCategory">
+                          <li *ngIf="subchild.superSubCategory == null" class="dropdown-item superSubMenuItem">
+                            <!-- tooltip="{{subchild.subCategoryName | titlecase}}"  placement="top" -->
+                            <span class="superSubSpan" *ngIf="subchild.subCategoryName.length > 17">{{subchild.subCategoryName | titlecase}}</span>
+                            <span *ngIf="subchild.subCategoryName.length <= 17">{{subchild.subCategoryName | titlecase}}</span>
+                            <span class="matBadgeSubmenu" matBadge="{{subchild.totalCount}}" matBadgeOverlap="false"></span>
+                          </li>
+  
+                          <li *ngIf="subchild.superSubCategory && subchild.superSubCategory.length > 0" class="dropdown-submenu dropdown-item">
+                              <!-- tooltip="{{subchild.subCategoryName | titlecase}}" placement="top" -->
+                              <span class="superSubSpan" *ngIf="subchild.subCategoryName.length >17">{{subchild.subCategoryName | titlecase }}</span>
+                              <span *ngIf="subchild.subCategoryName.length <=17">{{subchild.subCategoryName | titlecase}}</span>
+                              <span class="matBadgeSubmenu" matBadge="{{subchild.totalCount}}" matBadgeOverlap="false"></span>
+  
+                            <!------------------------------Super sub menu----------------------------------->
+                            <ul class="dropdown-menu superSubMenu">
+                              <span *ngFor="let superChild of subchild.superSubCategory">
+                                <!-- viewCourse(item,superChild.superSubCategoryName,superChild.totalCount) -->
+                                <li class="dropdown-item superSubMenuItem"
+                                  (click)="menuSelect(subchild,superChild); viewCourse(item,previewDialog,superChild.superSubCategoryName,superChild.totalCount); getCoureBasedOnCatalog(dropDownCategoryDetails,item,subchild.subCategoryId, superChild.superSubCategoryId)">
+                                  <!-- tooltip="{{superChild.superSubCategoryName | titlecase}}" placement="top" -->
+                                  <span class="superSubSpan" *ngIf="superChild.superSubCategoryName.length > 17">{{superChild.superSubCategoryName | titlecase }}</span>
+                                  <span *ngIf="superChild.superSubCategoryName.length <= 17">{{superChild.superSubCategoryName | titlecase}}</span>
+                                  <span class="matBadgesuperSub" matBadge="{{superChild.totalCount}}" matBadgeOverlap="false"></span>
+                                </li>
+                              </span>
+                            </ul>
+                          </li>
+                        </span>
+                      </ul>
+                    </li>
                   </span>
                   <!-- *ngIf="!showAvailableCourse" -->
                   <!-- <span class="availableCourseSpinner">
@@ -762,7 +746,7 @@
       </li>
       <li class="d-flex align-items-center" [ngClass]="selectedIndex == 3 ? 'redBG' : 'greyBG'" (click)="selectedIndex = 3; getDashboardMyCourse(userDetailes.user_id,userDetailes._id)">
         <span>All</span> 
-        <span matBadge="{{ jobRoleSelected === true ? jobAllCourseCount : allCourseCount }}" class="matBadgeNew" matBadge="{{allCourseCount}}" matBadgeOverlap="false"></span>
+        <span class="matBadgeNew" matBadge="{{allCourseCount}}" matBadgeOverlap="false"></span>
       </li>
     </ul>
   </mat-menu>
