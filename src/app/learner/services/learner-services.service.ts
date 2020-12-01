@@ -683,7 +683,7 @@ export class LearnerServicesService {
       query: getAssignmentmoduleData,
       variables: {
         courseid,
-        userId
+        user_id: userId
       }
     });
   }

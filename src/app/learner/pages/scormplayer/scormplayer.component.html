@@ -10,14 +10,14 @@
     </nav>
 
     <div class="left">
-      <iframe class="player" [src]="urlSafe" allowfullscreen></iframe>
+      <iframe title="image" class="player" [src]="urlSafe" allowfullscreen></iframe>
     </div>
     <h1 class="subhead">Resources</h1>
     <section class="accordion" *ngFor="let res of content?.coursedetails | slice:0:5">
       <input type="checkbox" name="collapse" [id]="res?.modulename">
       <h2 class="handle">
-        <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
-            <b style="padding-left: 18px;"> {{countofdoc}} Documents</b></i> </label>
+        <label [for]="res?.modulename"><strong>{{res?.modulename}}</strong><em class="fa fa-file-text-o doc">
+            <strong style="padding-left: 18px;"> {{countofdoc}} Documents</strong></em> </label>
       </h2>
       <div class="content">
         <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
@@ -33,7 +33,7 @@
               <mat-icon matPrefix>folder</mat-icon>
               <mat-select>
                 <mat-option *ngFor="let file of mod.resourse?.files">
-                  <a class="link"  href="{{file.path}}" download><i class="fa fa-file-text size" aria-hidden="true"></i>    {{file.type_name}}   <b class="size" *ngIf="file.size">({{file.size}})</b></a>
+                  <a class="link"  href="{{file.path}}" download><i class="fa fa-file-text size" aria-hidden="true"></i>    {{file.type_name}}   <strong class="size" *ngIf="file.size">({{file.size}})</strong></a>
                 </mat-option>
                 <mat-option *ngIf="mod.resourse?.files.length > 0" style="text-align: center;" (click)="downloadAll(mod.resourse?.files)">
                   <button class="btn">Download all</button>
@@ -48,14 +48,14 @@
       <section class="accordion" *ngFor="let res of content?.coursedetails | slice:6">
         <input type="checkbox" name="collapse" [id]="res?.modulename">
         <h2 class="handle">
-          <label [for]="res?.modulename"><b>{{res?.modulename}}</b><i class="fa fa-file-text-o doc">
-              <b style="text-align: right;"> {{countofdoc}} Documents</b></i> </label>
+          <label [for]="res?.modulename"><strong>{{res?.modulename}}</strong><i class="fa fa-file-text-o doc">
+              <strong style="text-align: right;"> {{countofdoc}} Documents</strong></i> </label>
         </h2>
         <div class="content">
           <div class="row" *ngFor="let mod of res?.moduledetails; let i = index">
             <div class="col-8"><br>
               <ol class="submod">
-                <li><b>{{i+1}} : {{mod?.topicname}}</b></li>
+                <li><strong>{{i+1}} : {{mod?.topicname}}</strong></li>
               </ol>
             </div>
 
@@ -65,7 +65,7 @@
                 <mat-icon matPrefix>folder</mat-icon>
                 <mat-select>
                   <mat-option *ngFor="let file of mod.resourse?.files">
-                    <a class="link"  href="{{file.path}}" download><i class="fa fa-file-text size" aria-hidden="true"></i>    {{file.type_name}}   <b class="size" *ngIf="file.size">({{file.size}})</b></a>
+                    <a class="link"  href="{{file.path}}" download><i class="fa fa-file-text size" aria-hidden="true"></i>    {{file.type_name}}   <strong class="size" *ngIf="file.size">({{file.size}})</strong></a>
                   </mat-option>
                   <mat-option *ngIf="mod.resourse?.files.length > 0" style="text-align: center;" (click)="downloadAll(mod.resourse?.files)">
                     <button class="btn">Download all</button>

@@ -44,19 +44,19 @@
           </ng-container>
           <ng-container *ngIf="!resData.thumbnail || resData.thumbnail.length == 0">
             <ng-container *ngIf="resData.fileType == 'pdf'">
-              <img src="../../../assets/images/PDF-res.svg">
+              <img src="../../../assets/images/PDF-res.svg" alt="pdf">
             </ng-container>
             <ng-container *ngIf="resData.fileType == 'jpg' || resData.fileType == 'png' || resData.fileType == 'jpeg'">
-              <img src="../../../assets/images/Image-res.svg">
+              <img src="../../../assets/images/Image-res.svg" alt="image">
             </ng-container>
             <ng-container *ngIf="resData.fileType == 'mp4'">
-              <img src="../../../assets/images/video-res.svg">
+              <img src="../../../assets/images/video-res.svg" alt="video">
             </ng-container>
             <ng-container *ngIf="resData.fileType == 'mp3'">
-              <img src="../../../assets/images/Audio-res.svg">
+              <img src="../../../assets/images/Audio-res.svg" alt="audio">
             </ng-container>
             <ng-container *ngIf="resData.fileType == undefined || resData.fileType == 'csv'">
-              <img src="../../../assets/images/Image-res.svg">
+              <img src="../../../assets/images/Image-res.svg" alt="image">
             </ng-container>
           </ng-container>
         </div>

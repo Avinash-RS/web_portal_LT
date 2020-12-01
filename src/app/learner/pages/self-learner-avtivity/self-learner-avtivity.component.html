@@ -9,7 +9,7 @@
           Back
         </span>
       </span>
-      <p class="courseName"><b>{{courseName}}</b></p>
+      <p class="courseName"><strong>{{courseName}}</strong></p>
     </div>
   </div>
   <!---------------------------------------Course Progression--------------------------------->
@@ -19,8 +19,8 @@
       <mat-card class="card">
         <div class="row ml-0 mr-0">
           <div class="col-4 pr-0">
-            <b class="courseProgression">Course 
-              <p class="prog">Progression</p></b>
+            <strong class="courseProgression">Course 
+              <p class="prog">Progression</p></strong>
           </div>
           <div class="col-8" *ngIf="boardDetails?.courseProgression > 0; else elseBlock">
             <!-- <circle-progress [percent]="70" [radius]="20" [outerStrokeWidth]="5" [innerStrokeWidth]="5" [space]="-2"
@@ -42,11 +42,11 @@
     <div class="col-4">
       <mat-card class="card">
         <div class="row">
-          <b class="completion">Completion Status</b>
+          <strong class="completion">Completion Status</strong>
         </div><br>
         <div class="module">
-         <p class="m-l-58">Modules completed <b class="m-l-40">{{boardDetails?.moduleCovered}}</b></p> 
-          <p class="m-l-58">Topics completed <b class="m-l-46">{{boardDetails?.topicCovered}}</b></p> 
+         <p class="m-l-58">Modules completed <strong class="m-l-40">{{boardDetails?.moduleCovered}}</strong></p> 
+          <p class="m-l-58">Topics completed <strong class="m-l-46">{{boardDetails?.topicCovered}}</strong></p> 
         </div>
       </mat-card>
     </div>
@@ -64,7 +64,7 @@
       <mat-card class="learningCard">
       <div>
         <div class="row">
-        <b class="learning">Learning Progression</b>
+        <strong class="learning">Learning Progression</strong>
       </div><br>
 
       <div class="row">
@@ -72,7 +72,7 @@
           <div class="row">
             <div class="col-4">
               Total No. of Modules
-              <p class="center"><b>{{boardDetails?.totalNumberOfModule || '-'}}</b></p>
+              <p class="center"><strong>{{boardDetails?.totalNumberOfModule || '-'}}</strong></p>
             </div>
             <div class="col-4">
               Total No. of Topics
