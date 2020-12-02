@@ -105,6 +105,7 @@ export class CoursedetailsComponent implements OnInit {
   fileRef: any[];
   nextPrevHolder: number;
   moduleHolder: number;
+  topicPageStatus: any;
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -147,7 +148,7 @@ export class CoursedetailsComponent implements OnInit {
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
             this.course = viewCourse.data.viewcourse.message;
-            // console.log('this.course 1', this.course);
+             console.log('this.course 1', this.course);
             if (this.detailData !== undefined) {
               this.selectedName = this.detailData?.course_name;
             } else if (this.course !== undefined && this.course !== null) {
@@ -230,10 +231,12 @@ export class CoursedetailsComponent implements OnInit {
     this.socketService.change.subscribe(result => {
       if (result && result.eventId && result.eventId.length > 0) {
         if (result.data.course_id === this.courseid) {
-          if (this.topiccurrentPage !== result.data.resumeSubContent) {
+          if (this.topiccurrentPage !== result.data.resumeSubContent ||
+             result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status !== this.topicPageStatus) {
           this.scromModuleData = result.data.childData;
           this.currentPage = result.data.resumeContent;
           this.topiccurrentPage = result.data.resumeSubContent;
+          this.topicPageStatus = result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status
           this.moduleInfo = this.scromModuleData[this.currentPage];
           if (resumeInit) {
             this.nextPrevHolder = this.topiccurrentPage;
@@ -251,7 +254,7 @@ export class CoursedetailsComponent implements OnInit {
             this.isNextEnable = false;
           }
           // console.log(jsonData[0].childData, 'this.scromModuleData');
-          console.log(result.data.resumeSubContent, 'module=', result.data.resumeContent);
+          console.log(result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status , 'module=', result.data.resumeContent);
           this.scromModuleData.forEach(childData => {
             if (childData && childData.children) {
               childData.children.forEach(subChild => {

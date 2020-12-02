@@ -70,7 +70,7 @@
             <p  title="{{course.course_name}}" placement="top">
               {{course.course_name}}
             
-            <span class="pull-right" (click)="course.courseInfoExp?course.courseInfoExp=false:course.courseInfoExp=true"><mat-icon >{{course.courseInfoExp?'keyboard_arrow_up':'keyboard_arrow_down'}}</mat-icon></span>
+            <span class="pull-right" (click)="course.courseInfoExp?course.courseInfoExp=false:course.courseInfoExp=true"><mat-icon >{{course.courseInfoExp?'keyboard_arrow_down':'keyboard_arrow_up'}}</mat-icon></span>
             </p>
           </div>
           <div *ngIf="!course.courseInfoExp">
