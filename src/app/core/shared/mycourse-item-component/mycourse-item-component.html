@@ -69,8 +69,11 @@
           <div class="f_size_17 f_wt_600 coursename">
             <p  title="{{course.course_name}}" placement="top">
               {{course.course_name}}
+            
+            <span class="pull-right" (click)="course.courseInfoExp?course.courseInfoExp=false:course.courseInfoExp=true"><mat-icon >{{course.courseInfoExp?'keyboard_arrow_down':'keyboard_arrow_up'}}</mat-icon></span>
             </p>
           </div>
+          <div *ngIf="!course.courseInfoExp">
           <div class="courseWrapper d-flex justify-content-between lxp_gray123">
             <div class="courseAuthor">
               <p> By: {{course.author_details[0].author_name?course.author_details[0].author_name:'N/A'}} </p>
@@ -104,6 +107,7 @@
 
             </div>
           </div>
+        </div>
           <br>
           <div *ngIf="course.isBatchCourse">
             <div class="row">

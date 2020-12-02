@@ -108,6 +108,8 @@ export class LearnerMyCourseComponent implements OnInit {
   previousPageLabel = '';
   triggerAvailablecourse: any;
   batchCourse: any;
+  isMobile = false;
+  runnablePlatforms = ['MacIntel', 'Win32', 'Linux x86_64'];
   constructor(
     public elm: ElementRef,
     private route: ActivatedRoute,
@@ -163,6 +165,10 @@ export class LearnerMyCourseComponent implements OnInit {
       this.insidengOnInit();
     }
     this.getCountForCategories();
+    if(!this.runnablePlatforms.includes(navigator.platform)){
+        this.isMobile = true;
+      }
+
     // this.triggerAvailablecourse = setInterval(() => {
     //   this.getCountForCategories();
     //   console.log('triggering data');
@@ -387,6 +393,10 @@ export class LearnerMyCourseComponent implements OnInit {
     this.learnerService.getLearnerDashboard(userId, userObjId, 'undefined', requestType, 'batch').subscribe((BcourseData: any) => {
       BcourseData.data.get_learner_dashboard.message.batch_course_details.forEach(elem => {
         elem.isBatchCourse = true;
+        if (this.isMobile){
+          elem.progresslistExp = true;
+          elem.courseInfoExp = true;
+        }
       });
       const tmpBcourseDetail = BcourseData.data.get_learner_dashboard.message.batch_course_details;
       this.courseDetailsList = tmpBcourseDetail && tmpBcourseDetail !== null ? tmpBcourseDetail : [];
@@ -396,6 +406,10 @@ export class LearnerMyCourseComponent implements OnInit {
         this.enrolledCourses = EcourseDetail && EcourseDetail !== null ? EcourseDetail : [];
         this.enrolledCourses.forEach(elem => {
           elem.isBatchCourse = false;
+          if (this.isMobile){
+            elem.progresslistExp = true;
+            elem.courseInfoExp = true;
+          }
         });
         this.courseDetailsList.push(...this.enrolledCourses);
         // Course batch count reset
