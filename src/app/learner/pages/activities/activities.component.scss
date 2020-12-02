@@ -604,6 +604,7 @@ left: 5px;
 .deleteBtn {
   color: #5C6873;
   font-size: 20px;
+  margin-top: 3px;
 }
 
 // .submitted-btn{
@@ -828,6 +829,10 @@ left: 5px;
 .assignImg {
   width: 10%;
   height: 38px;
+}
+.videoName {
+  position: relative;
+  top: 7px;
 }
 .errmsg {
   height: 30rem;
