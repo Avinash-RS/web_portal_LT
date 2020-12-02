@@ -324,7 +324,7 @@
                                         mat-menu-item>
                                         <span>Resources</span>
                                     </button>
-                                    <button (click)="selectedTabIndex = 3; selectedName = 'Assignments'" class="matTabMenu"
+                                    <!-- <button (click)="selectedTabIndex = 3; selectedName = 'Assignments'" class="matTabMenu"
                                         mat-menu-item>
                                         <span>Assignments</span>
                                     </button>
@@ -332,7 +332,7 @@
                                         *ngIf="userDetail.is_forum_config && selectedModuleData === null || selectedModuleData === undefined"
                                         (click)="selectedTabIndex = 4; selectedName = 'Forum'" class="matTabMenu" mat-menu-item>
                                         <span>Forum</span>
-                                    </button>
+                                    </button> -->
                                 </mat-menu>
                             </div>
                         </div>
@@ -354,7 +354,7 @@
         
                                 <div [ngClass]="drawer.opened==true?'example-sidenav-content-opn':'example-sidenav-content-cls'"
                                     class="">
-                                    <iframe id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
+                                    <iframe title="player" id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
                                 </div>
         
                             </mat-tab>

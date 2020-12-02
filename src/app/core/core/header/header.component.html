@@ -64,11 +64,11 @@
   <!-- End of Mobile Menu -->
   
 
-  <button class="bookIcon" (click)="openAvailableCources(isAvailOpen = !isAvailOpen)" md-raised-button
+  <!-- <button class="bookIcon" (click)="openAvailableCources(isAvailOpen = !isAvailOpen)" md-raised-button
     routerLinkActive="active">
     <mat-icon fontSet="material-icons-outlined" class="bookIcon" inline=true>
       menu_book </mat-icon>
-  </button>
+  </button> -->
 
   <app-toolbar-notification></app-toolbar-notification>
 
@@ -95,7 +95,8 @@
 
     <button mat-menu-item routerLink="/Learner/calendar" routerLinkActive="active" *ngIf="!show">
       <!-- <mat-icon fontSet="material-icons-outlined">event_note</mat-icon> -->
-      <img src="/src/assets/learner/Calendar_black.svg">
+      <!-- <img src="/src/assets/learner/Calendar_black.svg" alt="calendar"> -->
+      <span class="lxp-Calender"></span>
       <span>Calendar</span>
     </button>
 

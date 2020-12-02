@@ -42,6 +42,7 @@
 
 .statusTxt {
   font-size: 15px;
+  margin-left: 52px;
 }
 
   .box-0-1{
@@ -97,7 +98,7 @@ margin-bottom: 9px;
       margin-top: 10px;
   }
 .m-l-68{
-    margin-left: -68px;
+    margin-left: -127px;
 }
 .m-l-23{
     margin-left: 23px;
@@ -339,7 +340,7 @@ margin-bottom: 1% !important;
 }
 
 .endDateTxt {
-  margin-left: 36px;
+  margin-left: 92px;
 }
 
 .EndDate {
@@ -347,7 +348,7 @@ margin-bottom: 1% !important;
 }
 
 .itrationTxt {
-  margin-left: 33px;
+  margin-left: 84px;
 }
 
 .itrationTxts {
@@ -379,13 +380,13 @@ margin-bottom: 1% !important;
 .submitstatus {
   color: #FFA04E;
   position: relative;
-  left: 10px;
+  left: 69px;
   font-size: 15px;
 }
 .gradeStatus {
   color: #0C781B;
   position: relative;
-  left: 38px;
+  left: 98px;
   font-size: 15px;
 }
 .projectSubmitstatus {
@@ -400,8 +401,13 @@ margin-bottom: 1% !important;
 .grade {
   color: #0C781B;
   position: relative;
-  right: 48px;
+  right: 4px;
   // right: 3px;
+}
+.graded {
+  color: #0C781B;
+  position: relative;
+  right: 42px;
 }
 .iterSubmit {
   color: #FFA04E;
@@ -546,7 +552,7 @@ margin-top: 8px;
 }
 .itrCount {
 position: relative;
-right: 3rem;
+left: 5px;
 }
 .noSessionCard {
   margin: auto;
@@ -598,6 +604,7 @@ right: 3rem;
 .deleteBtn {
   color: #5C6873;
   font-size: 20px;
+  margin-top: 3px;
 }
 
 // .submitted-btn{
@@ -623,6 +630,9 @@ right: 3rem;
   border: 0.5px solid #707070;
   cursor: pointer;
 }
+// .carouselCard :hover  {
+//   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+// }
 
 .carouselRow1 {
   height: 7rem;
@@ -820,6 +830,10 @@ right: 3rem;
   width: 10%;
   height: 38px;
 }
+.videoName {
+  position: relative;
+  top: 7px;
+}
 .errmsg {
   height: 30rem;
 }
@@ -993,4 +1007,7 @@ border: 1px solid #ccc;
 :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination { 
   display: none !important;
 }
+}
+::ng-deep  .tooltip-inner {
+    max-width: 250px;
 }

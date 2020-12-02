@@ -39,7 +39,7 @@ export class MycourseItemComponent implements OnInit {
   instDefault: any = '../../../../assets/learner/mycourseicons/Instructor_default.svg';
   activityDefault: any = '../../../../assets/learner/mycourseicons/Activities_defult.svg';
   discussDefault: any = '../../../../assets/learner/mycourseicons/Discussion_default.svg';
-  tabselector: any;
+  tabselector: any = 0;
   // tabTitleVal: string = 'Self-Paced Learning';
   constructor(
     public translate: TranslateService,

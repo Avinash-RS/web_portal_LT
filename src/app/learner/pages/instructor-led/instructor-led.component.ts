@@ -114,7 +114,14 @@ export class InstructorLedComponent implements OnInit {
     const end = new Date(endDate);
     const ms = moment(end, 'DD/MM/YYYY HH:mm:ss').diff(moment(start, 'DD/MM/YYYY HH:mm:ss'));
     const d = moment.duration(ms);
-    const time = d.hours() === 0 ? d.minutes() + ' minutes' : d.hours() + ' hour ' + d.minutes() + ' minutes';
+    let time;
+    if (d.hours() === 0 && d.minutes() !== 0) {
+      time = d.minutes() + ' minutes';
+    } else if (d.hours() !== 0 && d.minutes() === 0) {
+      time = d.hours() + ' hour ';
+    } else {
+      time = d.hours() + ' hour ' + d.minutes() + ' minutes';
+    }
     return time;
   }
 
