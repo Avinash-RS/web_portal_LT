@@ -299,7 +299,8 @@
         <div class="box-0-1" *ngFor="let perform of performDetails; let i = index">
           <div class="row">
             <div class="col-10">
-              <div class="f_size_16 f_wt_600">{{i+1}}. {{perform.performActivity.module_id}}</div>
+              <div class="f_size_16 f_wt_600"><img class="perfimg" src="assets/Assignment.svg" alt="perform"> 
+                <span class="ml-13">{{perform.performActivity.module_id}}</span></div>
               <div class="t-l">{{perform.performActivity.topic_id}}</div>
               <div class="t-l">Activity description : {{perform.performActivity.activityname}}</div>
             </div>
