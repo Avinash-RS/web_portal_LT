@@ -59,8 +59,8 @@
         <div class="row d-flex justify-content-start" *ngIf='activityShow !== undefined'>
           <div class="moduleImage">
             <div flex >
-              <img style="width: 100%;" *ngIf="!activityShow?.activity_details.livethumbnail" alt="instructor" src="../../../../assets/learner/instructor_image.png" />
-              <img style="width: 100%;" *ngIf="activityShow?.activity_details.livethumbnail" alt="instructor" [src]="activityShow?.activity_details.livethumbnail" />
+              <img style="height: 200px !important;width: 100%;" *ngIf="!activityShow?.activity_details.livethumbnail" alt="instructor" src="../../../../assets/learner/instructor_image.png" />
+              <img style="height: 200px !important;width: 100% !important;" *ngIf="activityShow?.activity_details.livethumbnail" alt="instructor" [src]="activityShow?.activity_details.livethumbnail" />
             </div>
           </div>
           <div class="moduleContent">
@@ -194,8 +194,8 @@
           <mat-card class="sessionCard" (click)="useSession(los)">
             <div class="row d-flex justify-content-start">
               <div class="image-container">
-                <img *ngIf="los.activity_details.livethumbnail" alt="image" style="width: 100%;" [src]="los.activity_details.livethumbnail">
-                <img *ngIf="!los.activity_details.livethumbnail" alt="image" style="width: 100%;" src="../../../../assets/learner/instructor_image.png">
+                <img *ngIf="los.activity_details.livethumbnail" alt="image" style="width: 100%; height: 150px !important;object-fit: inherit !important;" [src]="los.activity_details.livethumbnail">
+                <img *ngIf="!los.activity_details.livethumbnail" alt="image" style="width: 100%; height: 150px !important;object-fit: inherit !important;" src="../../../../assets/learner/instructor_image.png">
                 <div class="bottom-right">{{los.status}}</div>
               </div>
               <div class="content-container">
@@ -212,7 +212,7 @@
 
 </div>
 
-<div class="footer">
+<div class="footer" style="position: fixed !important;">
   <span class="powered">
       <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
   </span>

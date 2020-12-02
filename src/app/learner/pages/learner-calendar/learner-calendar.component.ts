@@ -116,7 +116,7 @@ export class LearnerCalendarComponent implements OnInit {
     });
   }
 
-  getLearnerActivity(selectedDate,day?: CalendarMonthViewDay) {
+  getLearnerActivity(selectedDate, day?: CalendarMonthViewDay) {
     const dateValue = moment(selectedDate.date).format('YYYY-MM-DD');
     const empty = undefined;
     this.service.getReadLeanerActivity(this.userId, dateValue, empty).subscribe(
@@ -132,17 +132,20 @@ export class LearnerCalendarComponent implements OnInit {
       },
       err => {}
     );
-    this.selectedMonthViewDay = day;
-    const selectedDateTime = this.selectedMonthViewDay.date.getTime();
-    const dateIndex = this.selectedDays.findIndex(
-      (selectedDay) => selectedDay.date.getTime() === selectedDateTime
-    );
-    if (this.selectedDays.length > 0) {
-      delete this.selectedDays[this.selectedDays.length - 1].cssClass;
+    if (day) {
+      this.selectedMonthViewDay = day;
+      const selectedDateTime = this.selectedMonthViewDay.date.getTime();
+      const dateIndex = this.selectedDays.findIndex(
+        (selectedDay) => selectedDay.date.getTime() === selectedDateTime
+      );
+      if (this.selectedDays.length > 0) {
+        delete this.selectedDays[this.selectedDays.length - 1].cssClass;
+      }
+      this.selectedDays.push(this.selectedMonthViewDay);
+      day.cssClass = 'cal-day-selected';
+      this.selectedMonthViewDay = day;
     }
-    this.selectedDays.push(this.selectedMonthViewDay);
-    day.cssClass = 'cal-day-selected';
-    this.selectedMonthViewDay = day;
+
   }
   launchAssignment(value) {
     if (value.activity_details.activitytype === 'Assignment') {
