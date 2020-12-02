@@ -2,12 +2,26 @@
 .myC-head {
     margin-left: 0.8% !important;
 }
+.scroll-bar{
+    // width: 450px;
+    width: 100%;
+    height: 505px;
+    overflow: auto;
+    // overflow-y: hidden;
+}
 .calender-container {
-    // height: 100vh;
+    height: 100vh;
     //overflow-y: hidden;
     .calender-section {
+        box-shadow: none;
+        padding: 0;
         // height: 550px;
         // overflow-y: auto;
+    }
+    .monthHeading {
+        h1 {
+            margin: 0 !important;
+        }
     }
     .f_size_22 {
         font-size: 22px;
@@ -42,32 +56,65 @@
         color: #5c6873;
     }
     .color-blue {
-        border-left: 3px solid #ffc107bf !important;
+        border-left: 3px solid #FFA04E !important;
         color: #1F1A17!important;
     }
+
+    .activityHeading {
+        color: rgba(51, 51, 51, 1);
+        font-size: 20px;
+        font-weight: 600;
+        @media only screen and (max-width: 991px) {
+            margin-top: 25px;
+        }
+    }
+    .activityDate {
+        font-size: 12px;
+        color: rgba(51, 51, 51, 0.6);
+    }
     .mainCard {
-        background: #f9f9f9;
-        border-radius: 8px;
-        overflow: hidden;
+        background: #F5F5F5;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        // overflow: hidden;
+        margin-bottom: 10px;
+        box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+        &:nth-child(2n+2) {
+            @media only screen and (max-width: 991px) {
+                margin-left: 4%;
+            }
+            @media only screen and (max-width: 767px) {
+                margin-left: 0;
+            }
+        }
+        @media only screen and (max-width: 991px) {
+            display: inline-block;
+            width: 48%;
+        }
+        @media only screen and (max-width: 767px) {
+            width: 100%;
+        }
     }
     .session-card {
         box-shadow: none;
         height: auto;
         margin-bottom: 0%;
         background: transparent !important;
-        padding: 10px;
+        padding: 10px 10px 10px 20px;
         position: relative;
         &::before {
             content: '';
-            width: 4px;
+            width: 6px;
             height: 100%;
             position: absolute;
             left: 0;
             top: 0;
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
         }
         &.color-grey-card-status {
             &::before {
-                background-color: green;
+                background-color: #0C781B;
             }
         }
         &.color-blue-card-status {
@@ -77,104 +124,123 @@
         }
         &.color-yellow-card-status {
             &::before {
-                background-color: #ffc107;
+                background-color: #FFA04E;
             }
         }
     }
-
-    // .color-blue-card-status {
-    //     border-left: 3px solid #b3b2b2!important;
-    //     color: #1F1A17!important;
-    // }
-    // .color-grey-card-status {
-    //     border-left: 3px solid green !important;
-    //     // color: #b5acac !important;
-    // }
-    // .color-yellow-card-status {
-    //     border-left: 3px solid #ffc107bf !important;
-    //     color: #1F1A17 !important;
-    // }
-
     .color-white {
         color: #b5acac;
         background: $color-white !important;
         border-left: 0px !important;
     }
+    .activity-status {
+        span {
+            padding: 2px 6px 3px 6px;
+            border-radius: 4px;
+            color: $color-white;
+            font-size: 12px;
+            display: inline-block;
+            line-height: normal;
+            font-family: Roboto Condensed !important
+        }
+    }
     .status {
-        background: #ffc107bf;
-        padding: 2px 6px 3px 6px;
-        border-radius: 4px;
-        font-size: 13px;
-        color: $color-white;
-        display: inline-block;
-        line-height: normal;
+        background: #FFA04E;
     }
     .Upcomingstatus {
         background: #b3b2b2;
-        padding: 2px 6px 3px 6px;
-        border-radius: 4px;
-        font-size: 13px;
-        color: $color-white;
-        display: inline-block;
-        line-height: normal;
     }
     .Completedstatus {
-        // background: #b5acac;
-        background: green;
-        padding: 2px 6px 3px 6px;
-        border-radius: 4px;
+        background: #0C781B;
+    }
+    .coursenameT {
+        border-radius: 0;
+        font-weight: 600;
+        padding: 5px 0 ;
         font-size: 13px;
-        color: $color-white ;
+        white-space: nowrap; 
+        width: 200px; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 0 !important;
+        color: rgba(51, 51, 51, 1);
+    }
+    .course-section, .topic-section {
+        width: 48%;
         display: inline-block;
-        line-height: normal;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: rgba(58, 58, 58, 1);
+        font-size: 13px;
+    }
+    .topic-section {
+        text-align: right;
     }
     .expandLine {
-        margin: 10px 0 0 0 !important;
+        margin: 5px 0 0 0 !important;
     }
     .topicSection {
         width: 100%;
     }
     .activityButton {
+        width: 30%;
         text-align: right;
-        width: 100%;
     }
-    .blue_clr {
+    .courseModule {
+        margin: 2px 0 0 0 !important;
+    }
+    .img-show {
+        width: 10%;
+        text-align: right;
+        img {
+            object-fit: contain;
+            width: 23px;
+            height: 23px;
+        }
+    }
+    .activity_type {
+        font-size: 12px;
+        color: rgba(58, 58, 58, 1);
+        display: inline-block;
+        font-family: Roboto Condensed !important;
+        margin-right: 0px;
+        width: 60%;
+    }
+    .LaunchBtn {
+        border: 1px solid $lxp-theme-green;
+        border-radius: 5px;
+        position: relative;
+        display: inline-block;
+        font-size: 12px;
+        color: #ffffff;
+        border: 1px solid currentColor;
+        padding: 3px 6px 3px 6px;
+        line-height: 18px;
+        margin-bottom: 0 !important;
         background-color: $lxp-theme-green;
-        color: #69727c;
+    }
+
+    .blue_clr {
+        // color: #69727c;
     }
     .cap::first-letter {
         text-transform: capitalize !important;
     }
-    .m-b-10 {
-        margin-bottom: 12px;
-    }
+    // .m-b-10 {
+    //     margin-bottom: 12px;
+    // }
     .statBtn {
         border: 1px solid #b3b2b2;
     }
-    .mat-stroked-button {
-        border: 1px solid currentColor;
-        padding: 0px 7px;
-        line-height: 25px;
-    }
+    // .mat-stroked-button {
+    //     border: 1px solid currentColor;
+    //     padding: 0px 7px;
+    //     line-height: 25px;
+    // }
     .blue_clr:hover {
         background-color: $lxp-theme-green !important;
         color: $color-white !important;
-    }
-    .LaunchBtn {
-        border: 1px solid $lxp-theme-green !important;
-        border-radius: 5px;
-        position: relative;
-        // float: right;
-        // margin-top: -5px;
-        display: inline-block;
-        background: $color-white ;
-        color: #9E9E9E;
-        border: 1px solid currentColor;
-        padding: 0px 7px;
-        line-height: 22px;
-        margin-top: 10px;
-        margin-bottom: 0 !important;
-        // margin-right: 32px;
     }
     .m-l-4 {
         // margin-left: 4%;
@@ -184,48 +250,6 @@
     }
     .no_pl {
         padding-left: 0 !important;
-    }
-    .coursenameT {
-        // border-left: 5px solid #f3cc58;
-        border-radius: 0;
-        font-weight: 600;
-        // height: 40px;
-        padding: 10px 0 ;
-        font-size: 18px;
-        white-space: nowrap; 
-        width: 200px; 
-        overflow: hidden;
-        text-overflow: ellipsis;
-        margin-bottom: 0 !important;
-    }
-    .courseModule {
-        margin: 10px 0 0 0 !important;
-    }
-    .course-section{
-        width: 50% !important;
-        display: inline-block;
-        white-space: nowrap !important; 
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-    }
-    .img-show {
-        // float: right; 
-        // // width: 20%;
-        // margin-left: 22%;
-        }
-    .activity_type {
-        color: black;
-        display: inline-block;
-        font-family: Roboto Condensed !important;
-        // width: 24%;
-        margin-right: 0px;
-    }
-    .topic-section{
-        width: 50% !important;
-        display: inline-block;
-        white-space: nowrap !important; 
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
     }
     .created-section{
         // width: 28%;
@@ -287,14 +311,6 @@
 }
 
 
-.scroll-bar{
-    // width: 450px;
-    width: 100%;
-    height: 550px;
-    // overflow-y: hidden;
-  }
-
-
 // ::ng-deep .cal-month-view .cal-cell-top {
 //     height: 20px !important;
 //     min-height: 20px !important;
@@ -303,10 +319,20 @@
 ::ng-deep .cal-cell-row {
     height: 100%;
 }
-
+::ng-deep.cal-month-view {
+    margin-top: 20px;
+}
 ::ng-deep.cal-month-view .cal-day-cell {
-    height: 80px;
-    min-height: 0px;
+    min-height: 95px;
+    @media only screen and (max-width: 737px) {
+        // height: 80px;
+        min-height: 7vh;
+    }
+}
+::ng-deep.cal-month-view .cal-cell-top {
+    @media only screen and (max-width: 576px) {
+        min-height: 0;
+    }
 }
 
 ::ng-deep.cal-month-view .cal-event {
@@ -317,10 +343,10 @@
     height: 100%;
 }
 
-::ng-deep.cal-month-view .cal-day-cell {
-    height: 80px;
-    min-height: 0px;
-}
+// ::ng-deep.cal-month-view .cal-day-cell {
+//     height: 80px;
+//     min-height: 0px;
+// }
 
 ::ng-deep.cal-month-view .cal-event {
     display: none;
