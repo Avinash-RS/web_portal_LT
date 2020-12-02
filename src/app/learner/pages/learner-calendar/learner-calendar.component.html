@@ -9,22 +9,23 @@
                 <div class="col-md-12 col-lg-7 col-xl-8">
                     <mat-card class="calender-section">
                         <!-- calender html start-->
-                        <div class="row text-center">
-                            <div class="col-md-4 col-sm-12 col-12 nopadding text-left">
-                                <div class="btn-group">
-                                    <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="getAllActivity($event)">
-                                        {{'Previous' | translate }}
+                        <div class="row text-center d-flex justify-content-between">
+                            <div class="prevNext align-self-center">
+                                <div class="btn-group d-flex align-items-center justify-content-center">
+                                    <mat-icon mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="getAllActivity($event)">
+                                        <!-- {{'Previous' | translate }} -->keyboard_arrow_left
+                                    </mat-icon>
+                                    <div class="currentMonth">
+                                        <!-- {{'Today' | translate }} -->
+                                        <p>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</p>
                                     </div>
-                                    <div class="btn btn-outline-secondary" (click)="todayActivity();getAllActivity()" style="background: white !important;color:black !important" mwlCalendarToday [(viewDate)]="viewDate">
-                                        {{'Today' | translate }}
-                                    </div>
-                                    <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="getAllActivity($event)">
-                                        {{'Next' | translate }}
-                                    </div>
+                                    <mat-icon mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="getAllActivity($event)">
+                                        <!-- {{'Next' | translate }} --> keyboard_arrow_right
+                                    </mat-icon>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-6 col-6 monthHeading">
-                                <h1>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }} </h1>
+                            <div class="monthHeading">
+                                <button class="pointer mat-button" mat-button="" (click)="todayActivity();getAllActivity()" mwlCalendarToday [(viewDate)]="viewDate">Today</button>
                             </div>
                             <!-- <div class="col-md-4 col-sm-6 col-6">
                                 <div class="btn-group">
@@ -40,7 +41,7 @@
                                 </div>
                             </div> -->
                         </div>
-                        
+
                         <div [ngSwitch]="view">
                             <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="getLearnerActivity($event.day,$event.day)" (eventClicked)="handleEvent('Clicked', $event.event)">
                             </mwl-calendar-month-view>
