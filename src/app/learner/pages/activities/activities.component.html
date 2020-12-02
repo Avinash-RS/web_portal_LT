@@ -367,7 +367,9 @@
               </div>
                 </div>
               </div> -->
-              
+              <h3 *ngIf="perform.performActivity.materialDetails && perform.performActivity.materialDetails.length == 0">
+                No materials found for this activity
+              </h3>
                 <owl-carousel-o [options]="trendingCategorires" *ngIf="perform?.performActivity?.materialDetails?.length > 0"
                   [ngClass]="perform.performActivity.materialDetails.length >= 4 ? 'arrow': 'widthClass arrow' ">
                   <ng-template class="row ml-0 mr-0" carouselSlide
@@ -429,9 +431,7 @@
                     </div>
                   </ng-template>
                 </owl-carousel-o>
-                <h3 *ngIf="perform.performActivity.materialDetails && perform.performActivity.materialDetails.length == 0">
-                  No materials found for this activity
-                </h3>
+              
               </div>
 
               <div class="col-4">
