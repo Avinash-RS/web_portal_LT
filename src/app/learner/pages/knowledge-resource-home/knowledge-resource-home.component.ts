@@ -25,9 +25,9 @@ export class KnowledgeResourceHomeComponent implements OnInit {
   tempDetailsList = [];
 
   constructor(public apiService: knowledgeService,
-    public toast: ToastrService,
-    private CommonService: CommonServicesService,
-    private router: Router) { }
+              public toast: ToastrService,
+              private CommonService: CommonServicesService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getResourceFiles();
