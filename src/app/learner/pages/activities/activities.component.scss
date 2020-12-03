@@ -42,6 +42,7 @@
 
 .statusTxt {
   font-size: 15px;
+  margin-left: 52px;
 }
 
   .box-0-1{
@@ -97,7 +98,7 @@ margin-bottom: 9px;
       margin-top: 10px;
   }
 .m-l-68{
-    margin-left: -95px;
+    margin-left: -127px;
 }
 .m-l-23{
     margin-left: 23px;
@@ -347,7 +348,7 @@ margin-bottom: 1% !important;
 }
 
 .itrationTxt {
-  margin-left: 33px;
+  margin-left: 84px;
 }
 
 .itrationTxts {
@@ -379,13 +380,13 @@ margin-bottom: 1% !important;
 .submitstatus {
   color: #FFA04E;
   position: relative;
-  left: 10px;
+  left: 69px;
   font-size: 15px;
 }
 .gradeStatus {
   color: #0C781B;
   position: relative;
-  left: 38px;
+  left: 98px;
   font-size: 15px;
 }
 .projectSubmitstatus {
@@ -400,7 +401,7 @@ margin-bottom: 1% !important;
 .grade {
   color: #0C781B;
   position: relative;
-  right: 48px;
+  right: 4px;
   // right: 3px;
 }
 .iterSubmit {
@@ -546,7 +547,7 @@ margin-top: 8px;
 }
 .itrCount {
 position: relative;
-right: 3rem;
+left: 5px;
 }
 .noSessionCard {
   margin: auto;
@@ -993,4 +994,7 @@ border: 1px solid #ccc;
 :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination { 
   display: none !important;
 }
+}
+::ng-deep  .tooltip-inner {
+    max-width: 250px;
 }

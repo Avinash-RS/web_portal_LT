@@ -35,7 +35,7 @@
     <div class="row">
       <div class="">
         <div class="container1 containerShadow">
-          <h3><b>Language</b></h3><br>
+          <h3><strong>Language</strong></h3><br>
           <ul class="list-group">
             <li class="list-group-item" *ngFor="let language of guidelineSearchVal.course_data
         | paginate: { itemsPerPage: courseLanguagePerPage,currentPage: courseLanguagePageNo}">
@@ -61,7 +61,7 @@
 
           <div class="borderline"></div>
           <br>
-          <h3><b>Instructor name</b></h3><br>
+          <h3><strong>Instructor name</strong></h3><br>
           <ul class="list-group">
             <li class="list-group-item" *ngFor="let authors of guidelineSearchVal.author_data
         | paginate: { itemsPerPage: authorPerPage,currentPage: authorPageNo} ">
@@ -87,7 +87,7 @@
           <div class="borderline"></div><br>
 
 
-          <h3><b>Learning pace</b></h3><br>
+          <h3><strong>Learning pace</strong></h3><br>
           <ul class="list-group">
             <li class="list-group-item" *ngFor="let courseMode of guidelineSearchVal.coursemode_data 
         |  paginate: { itemsPerPage: courseModePerPage,currentPage: courseModePageNo}">
@@ -112,7 +112,7 @@
           </div><br>
           <div class="borderline"></div><br>
 
-          <h3><b>Hours of content </b></h3><br>
+          <h3><strong>Hours of content </strong></h3><br>
           <ul class="list-group">
             <li class="list-group-item">
               <label class="container1">
@@ -124,7 +124,7 @@
           </ul>
           <div class="borderline"></div><br>
 
-          <h3><b>Partners search</b></h3><br>
+          <h3><strong>Partners search</strong></h3><br>
           <ul class="list-group">
             <li class="list-group-item" *ngFor="let coursepartner of guidelineSearchVal.coursepartner_data 
         | paginate: { itemsPerPage: coursepartnerPerPage,currentPage: coursepartnerPageno}">
@@ -148,7 +148,7 @@
             <span class="showmore" (click)="showmore('coursepartner')"> + Show more</span>
           </div><br>
           <div class="borderline"></div><br>
-          <h3><b>Published date</b></h3><br>
+          <h3><strong>Published date</strong></h3><br>
           <div class="row date">
             <div class="col-10 fromdate">
               <my-date-picker name="fromdate" [options]="FromdateOptions" placeholder="From date"

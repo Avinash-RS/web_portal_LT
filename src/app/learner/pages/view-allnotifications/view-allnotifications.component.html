@@ -1,11 +1,11 @@
 <app-header></app-header>
 <div class="row">
-  <h2 class="head"><b>All notifications</b></h2>
+  <h2 class="head"><strong>All notifications</strong></h2>
 </div>
 <div class="row markAllbtn float-right" *ngIf="notifications?.length > 0">
   <button class="markBtn" (click)="markAsRead(notifications,'all')" 
   [disabled]="unreadCount == 0">
-  <u><b>Mark all as read</b></u>
+  <u><strong>Mark all as read</strong></u>
 </button>
 </div>
 
@@ -13,7 +13,7 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tableContainer" *ngIf="notifications?.length">
 
   <ng-container matColumnDef="notificationName">
-    <th class="w-55" mat-header-cell *matHeaderCellDef><b class="font">Notifications</b></th>
+    <th class="w-55" mat-header-cell *matHeaderCellDef><strong class="font">Notifications</strong></th>
     <td class="pointer" mat-cell *matCellDef="let element" (click)="markAsRead(element,'single')">
       <span class="read" *ngIf="element.notifiedStatus == true">
       {{element.notificationMessage}}
@@ -25,7 +25,7 @@
   </ng-container>
 
   <ng-container matColumnDef="date">
-    <th class="w-50 text-center" mat-header-cell *matHeaderCellDef><b class="font">Received on </b></th>
+    <th class="w-50 text-center" mat-header-cell *matHeaderCellDef><strong class="font">Received on </strong></th>
     <td class="pointer text-center" mat-cell *matCellDef="let element" (click)="markAsRead(element,'single')"> 
       <span class="read" *ngIf="element.notifiedStatus == true">
       {{element.timeAgo}} 

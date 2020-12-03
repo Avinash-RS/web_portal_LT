@@ -5,9 +5,9 @@
 <br />
 <div class="f_size_22  m-l-10px myC-head animated animatedFadeInUp fadeInUp " style="font-size: 22px;">
   {{'Activity Center' | translate }}</div>
-<div class="row m-t-rw">
-  <div class="col-xl-2 col-lg-0  col-sm-0"></div>
-  <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+  <div class="container-fluid m-t-rw activityCallouts">
+    <div class="activityCardEmpty"></div>
+    <div class="activityCenterCard activitycard1">
     <mat-card class="activitycard ht-120" [ngClass]="details?.nextactivity?.length == 0 ? '': 'pointer'"
       (click)="details?.nextactivity?.length == 0 ? '': gototable1()">
       <!-- <mat-card-content> -->
@@ -38,7 +38,7 @@
       <!-- </mat-card-content> -->
     </mat-card>
   </div>
-  <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+  <div class="activityCenterCard activitycard2">
     <mat-card class="activitycard ht-120"
       [ngClass]="(details?.Completed == null && details?.Graded == null && details?.Submitted ==null) ? '': 'pointer'" (click)="(details?.Completed == null && details?.Graded == null && details?.Submitted ==null) ? '': gototable('completed')">
       <!-- <mat-card-content> -->
@@ -69,9 +69,9 @@
   </div>
   <div class="activityCardEmpty"></div>
 </div>
-<div class="row m-t-100  m-b-70">
-  <div class="col-xl-2 col-lg-0 col-md-0 col-sm-0"></div>
-  <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+<div class="container-fluid activityCallouts">
+  <div class="activityCardEmpty"></div>
+  <div class="activityCenterCard activitycard1">
     <mat-card class="activitycard ht-120" (click)="details?.Yettosubmit == null ? '': gototable('ongoing')"
     [ngClass]="details?.Yettosubmit == null ? '': 'pointer'">
       <!-- <mat-card-content> -->
@@ -94,7 +94,7 @@
       <!-- </mat-card-content> -->
     </mat-card>
   </div>
-  <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+  <div class="activityCenterCard activitycard2">
     <mat-card class="activitycard ht-120" (click)="details?.Allactivites == null ? '': gototable('allActivities')"
     [ngClass]="details?.Allactivites == null ? '': 'pointer'">
       <!-- <mat-card-content> -->

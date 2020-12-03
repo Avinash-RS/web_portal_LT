@@ -9,38 +9,39 @@
                 <div class="col-md-12 col-lg-7 col-xl-8">
                     <mat-card class="calender-section">
                         <!-- calender html start-->
-                        <div class="row text-center">
-                            <div class="col-md-4 nopadding text-left">
-                                <div class="btn-group">
-                                    <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="getAllActivity($event)">
-                                        {{'Previous' | translate }}
+                        <div class="row text-center d-flex justify-content-between">
+                            <div class="prevNext align-self-center">
+                                <div class="btn-group d-flex align-items-center justify-content-center">
+                                    <mat-icon mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="getAllActivity($event)">
+                                        <!-- {{'Previous' | translate }} -->keyboard_arrow_left
+                                    </mat-icon>
+                                    <div class="currentMonth">
+                                        <!-- {{'Today' | translate }} -->
+                                        <p>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</p>
                                     </div>
-                                    <div class="btn btn-outline-secondary" (click)="todayActivity();getAllActivity()" style="background: white !important;color:black !important" mwlCalendarToday [(viewDate)]="viewDate">
-                                        {{'Today' | translate }}
-                                    </div>
-                                    <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="getAllActivity($event)">
-                                        {{'Next' | translate }}
-                                    </div>
+                                    <mat-icon mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="getAllActivity($event)">
+                                        <!-- {{'Next' | translate }} --> keyboard_arrow_right
+                                    </mat-icon>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <h1>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }} </h1>
+                            <div class="monthHeading">
+                                <button class="pointer mat-button" mat-button="" (click)="todayActivity();getAllActivity()" mwlCalendarToday [(viewDate)]="viewDate">Today</button>
                             </div>
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4 col-sm-6 col-6">
                                 <div class="btn-group">
-                                    <!-- <div class="btn btn-primary" (click)="setView(CalendarView.Month,viewDate)" [class.active]="view === CalendarView.Month">
+                                    <div class="btn btn-primary" (click)="setView(CalendarView.Month,viewDate)" [class.active]="view === CalendarView.Month">
                                         Month
-                                    </div> -->
-                                    <!-- <div class="btn btn-primary" (click)="setView(CalendarView.Week,viewDate)" [class.active]="view === CalendarView.Week">
+                                    </div>
+                                    <div class="btn btn-primary" (click)="setView(CalendarView.Week,viewDate)" [class.active]="view === CalendarView.Week">
                                         Week
                                     </div>
                                     <div class="btn btn-primary" (click)="setView(CalendarView.Day,viewDate)" [class.active]="view === CalendarView.Day">
                                         Day
-                                    </div> -->
+                                    </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
-                        <br />
+
                         <div [ngSwitch]="view">
                             <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="getLearnerActivity($event.day,$event.day)" (eventClicked)="handleEvent('Clicked', $event.event)">
                             </mwl-calendar-month-view>
@@ -54,7 +55,7 @@
                 </div>
 
                 <div class="col-md-12 col-lg-5 col-xl-4">
-                    <h1 style="margin-top: 4%;">{{'Activities' | translate }}</h1>
+                    <h1 class="activityHeading">{{'Activities' | translate }}</h1>
                     <div *ngIf="learnerActivityList.length == 0 ">
                         <div class="row width_100 no_margin">
                             <div class="container-fluid">
@@ -110,61 +111,63 @@
                             </div>
                         </ng-template> -->
                         
-                        <div>
-                            <div class="scroll-bar">
-                                <ng-container *ngFor="let data of learnerActivityList; let i = index">
-                                    <div class="mainCard animated animatedFadeInUp fadeInUp" (click)="launchAssignment(data)">
-                                        <mat-card class="session-card" [ngClass]="{'color-yellow-card-status': data.status === 'On going', 'color-grey-card-status':data.status === 'Completed','color-blue-card-status':data.status === 'Up Coming' }">
-                                            <div class="session-sub-card activitiesCard">
-                                                <!-- <img *ngIf="data.activity_details.activitytype == 'Live Classroom'" class=float-right src="../../../../assets/images/ms_team.png" width="35" height="35"> -->
-                                              
-                                                <div class="m-l-4 d-flex align-items-center justify-content-between">
-                                                    <!-- <img src="../../../../assets/learner/Calendar_black.svg"> -->
-                                                    <span class="f_size_14 f_wt_400"><mat-icon style="font-size: 16px;">event</mat-icon> {{data.activity_details.startdate | date :'d/M/yy h:mm a'}} - {{data.activity_details.enddate | date :'d/M/yy h:mm a'}}</span>
-                                                    <div class="img-show">
-                                                        <img *ngIf="data.activity_details.activitytype == 'Live Classroom'" class=float-right src="../../../assets/images/ms_team.png" width="35" height="35">
-                                                    </div>
-                                                    <!-- <span class="status lxp-text f_size_14 f_wt_400" *ngIf="data.status == 'On going' ">
-                                                    {{'Ongoing' | translate }}</span>
-                                                    <span class="Upcomingstatus lxp-text f_size_14 f_" *ngIf="data.status == 'Up Coming' ">
-                                                   {{'Upcoming' | translate }}</span>
-                                                    <span class=" Completedstatus lxp-text f_size_14 f_" *ngIf="data.status == 'Completed' ">
-                                                    {{'Completed' | translate }}</span> -->
+                        <div class="scroll-bar">
+                            <ng-container *ngFor="let data of learnerActivityList; let i = index">
+                                <div class="mainCard" (click)="launchAssignment(data)">
+                                    <mat-card class="session-card" [ngClass]="{'color-yellow-card-status': data.status === 'On going', 'color-grey-card-status':data.status === 'Completed','color-blue-card-status':data.status === 'Up Coming' }">
+                                        <div class="session-sub-card activitiesCard">
+                                            <!-- <img *ngIf="data.activity_details.activitytype == 'Live Classroom'" class=float-right src="../../../../assets/images/ms_team.png" width="35" height="35"> -->
+                                            
+                                            <div class="m-l-4 d-flex align-items-center justify-content-between">
+                                                <!-- <img src="../../../../assets/learner/Calendar_black.svg"> -->
+                                                <span class="f_wt_400 activityDate">
+                                                    <!-- <mat-icon style="font-size: 16px;">event</mat-icon>  -->
+                                                    {{data.activity_details.startdate | date :'d/M/yy h:mm a'}} - {{data.activity_details.enddate | date :'d/M/yy h:mm a'}}
+                                                </span>
+                                                <div class="activity-status">
+                                                    <span class="status lxp-text" *ngIf="data.status == 'On going'">{{'Ongoing' | translate }}</span>
+                                                    <span class="Upcomingstatus lxp-text" *ngIf="data.status == 'Up Coming'">{{'Upcoming' | translate }}</span>
+                                                    <span class="Completedstatus lxp-text" *ngIf="data.status == 'Completed'">{{'Completed' | translate }}</span>
                                                 </div>
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <p class="coursenameT" [tooltip]="data.activity_details.modulename"> {{ data.activity_details.modulename }}</p>
-                                                    <div class="activity-status">
-                                                        <span class="status lxp-text f_size_14 f_wt_400" *ngIf="data.status == 'On going' ">
-                                                            {{'Ongoing' | translate }}</span>
-                                                        <span class="Upcomingstatus lxp-text f_size_14 f_" *ngIf="data.status == 'Up Coming' ">
-                                                        {{'Upcoming' | translate }}</span>
-                                                        <span class=" Completedstatus lxp-text f_size_14 f_" *ngIf="data.status == 'Completed' ">
-                                                            {{'Completed' | translate }}</span>
-                                                    </div>
-                                                </div>
-                                                <h5 class="m-l-4 marginRemove courseModule d-flex align-items-center justify-content-between">
-                                                    <span class="f_wt_500 f_size_14 course-section" [tooltip]="data.activity_details.coursename">{{'Course' | translate }}:{{ data.activity_details.coursename }}</span>
-                                                    <!-- <span class="f_wt_500 f_size_14" style="margin-left: 60px;">{{'Topic' | translate }} : {{ data.activity_details.topicname }} </span> -->
-                                                    <span class="lxp-text f_size_14 f_wt_400 activity_type">{{  data.activity_details.activitytype}} </span>
-                                                </h5>
-                                                <h5 class="m-l-4 expandLine d-flex flex-wrap">
-                                                    <div class="topicSection d-flex align-items-center justify-content-between">
-                                                        <span class="f_wt_500 f_size_14 topic-section" [tooltip]="data.activity_details.topicname">{{'Topic' | translate }} : {{ data.activity_details.topicname }} </span>
-                                                        <span class="created-section d-flex">
-                                                            <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon>
-                                                            <span class="aligned-icon lxp-text f_size_14 f_wt_400 created-name">{{ data.activity_details.createdby_name }}</span>
-                                                        </span>
-                                                    </div>
+                                                <!-- <span class="status lxp-text f_size_14 f_wt_400" *ngIf="data.status == 'On going' ">
+                                                {{'Ongoing' | translate }}</span>
+                                                <span class="Upcomingstatus lxp-text f_size_14 f_" *ngIf="data.status == 'Up Coming' ">
+                                                {{'Upcoming' | translate }}</span>
+                                                <span class=" Completedstatus lxp-text f_size_14 f_" *ngIf="data.status == 'Completed' ">
+                                                {{'Completed' | translate }}</span> -->
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <p class="coursenameT" [tooltip]="data.activity_details.modulename"> {{ data.activity_details.modulename }}</p>
+                                            </div>
+                                            <div class="m-l-4 marginRemove courseModule d-flex align-items-center justify-content-between">
+                                                <span class="course-section" [tooltip]="data.activity_details.coursename">
+                                                    {{'Course' | translate }}: {{ data.activity_details.coursename }}
+                                                </span>
+                                                <span class="topic-section" [tooltip]="data.activity_details.topicname">
+                                                    {{'Topic' | translate }}: {{ data.activity_details.topicname }}
+                                                </span>
+                                                <!-- <span class="f_wt_500 f_size_14" style="margin-left: 60px;">{{'Topic' | translate }} : {{ data.activity_details.topicname }} </span> -->
+                                            </div>
+                                            <div class="m-l-4 expandLine d-flex flex-wrap">
+                                                <div class="topicSection d-flex align-items-center justify-content-between">
+                                                    <span class="lxp-text activity_type">{{  data.activity_details.activitytype}}</span>
                                                     <div class="activityButton">
                                                         <button (click)="launchActivity(data,i)" *ngIf="data.activity_details.activitytype == 'Live Classroom' && data.status ==='On going'" mat-stroked-button class="blue_clr cap m-b-10 LaunchBtn pointer">Launch</button>
                                                     </div>
-                                                </h5>
-                                                <!-- <button (click)="launchActivity(data,i)" *ngIf="data.activity_details.activitytype == 'Live Classroom' && data.status ==='On going'" mat-stroked-button class="blue_clr cap m-b-10 LaunchBtn pointer float-right">Launch</button> -->
+                                                    <div class="img-show">
+                                                        <img *ngIf="data.activity_details.activitytype == 'Live Classroom'" alt="msteam" src="../../../assets/images/ms_team.png" width="35" height="35">
+                                                    </div>
+                                                    <!-- <span class="created-section d-flex">
+                                                        <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon>
+                                                        <span class="aligned-icon lxp-text f_size_14 f_wt_400 created-name">{{ data.activity_details.createdby_name }}</span>
+                                                    </span> -->
+                                                </div>
                                             </div>
-                                        </mat-card>
-                                    </div>
-                                </ng-container>
-                            </div>
+                                            <!-- <button (click)="launchActivity(data,i)" *ngIf="data.activity_details.activitytype == 'Live Classroom' && data.status ==='On going'" mat-stroked-button class="blue_clr cap m-b-10 LaunchBtn pointer float-right">Launch</button> -->
+                                        </div>
+                                    </mat-card>
+                                </div>
+                            </ng-container>
                         </div>
 
                         <!-- <ng-container *ngFor="let data of learnerActivityList">
