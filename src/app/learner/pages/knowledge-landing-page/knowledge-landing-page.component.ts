@@ -22,7 +22,7 @@ export class KnowledgeLandingPageComponent implements OnInit {
     touchDrag: true,
     pullDrag: true,
     dots: false,
-    navSpeed: 700,
+    slideBy: 7,
     navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right p-t-2"></i>'],
     responsive: {
       0: {

@@ -134,8 +134,8 @@ export class ActivitiesComponent implements OnInit {
   currentTab: any;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
-    private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
-    public route: Router, public datePipe: DatePipe) {
+              private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
+              public route: Router, public datePipe: DatePipe) {
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
     this.checkDetails = detail;
@@ -404,19 +404,22 @@ export class ActivitiesComponent implements OnInit {
             element.submitType = false;
           }
           // Activity Dates
+          const crrDate = new Date();
           const startDate = new Date(element.projectActivity.activitystartdate);
-          element.activityStartDate = moment(startDate).format('ll');
+          // element.activityStartDate = moment(startDate).format('ll');
           element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
           const endDate = new Date(element.projectActivity.activityenddate);
-          element.activityEndDate = moment(endDate).format('ll');
+          // element.activityEndDate = moment(endDate).format('ll');
+          element.enableSubmit  = this.dateDiff(startDate,
+            endDate , crrDate);
           const submitDate = new Date(element.projectActivity.submitted_on);
           element.submittedOn = moment(submitDate).format('ll');
 
-          if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
-            element.enableSubmit = false;
-          } else {
-            element.enableSubmit = true;
-          }
+          // if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
+          //   element.enableSubmit = false;
+          // } else {
+          //   element.enableSubmit = true;
+          // }
         });
       }
     });
@@ -628,8 +631,10 @@ export class ActivitiesComponent implements OnInit {
     videoFile.push(videoName);
     const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
     const performVideo = new FormData();
-    const startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy');
-    const endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy');
+    console.log('this.performDetails', this.performDetails);
+    console.log('this.performsData', this.performsData);
+    const startDate = this.datePipe.transform(this.performsData?.performActivity.activitystartdate, 'dd-MM-yyyy');
+    const endDate = this.datePipe.transform(this.performsData?.performActivity.activityenddate, 'dd-MM-yyyy');
     if (currentDate >= startDate && currentDate <= endDate) {
       this.submitStatus = 'ontime';
     } else {
