@@ -299,7 +299,7 @@
         <div class="box-0-1" *ngFor="let perform of performDetails; let i = index">
           <div class="row">
             <div class="col-10">
-              <div class="f_size_16 f_wt_600"><img class="perfimg" src="assets/Assignment.svg" alt="perform"> 
+              <div class="f_size_16 f_wt_600"><img class="perfimg" src="assets/Perform1.svg" alt="perform"> 
                 <span class="ml-13">{{perform.performActivity.module_id}}</span></div>
               <div class="t-l">{{perform.performActivity.topic_id}}</div>
               <div class="t-l">Activity description : {{perform.performActivity.activityname}}</div>
@@ -660,13 +660,21 @@
               </div>
 
               <div class="row">
-                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
                   <div class="t-l-1">Activity Description: {{project.projectActivity.activityname}}</div>
                 </div>
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 text-right">
+                <!-- <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 text-right">
                   <div class="m-r-40">Start date :<span class="margin-30"></span>End date :</div>
-                  <div class="m-r-2 f_wt_600">{{project.activityStartDate}}
-                    <span class="margin-21 f_wt_600"></span>{{project.activityEndDate}}</div>
+                  <div class="m-r-2 f_wt_600">
+                    {{project.projectActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}
+                    <span class="margin-21 f_wt_600"></span> {{project.projectActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</div>
+                </div> -->
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 text-right">
+                <div class="m-r-74">Start date :<span class="endDateTxt"></span>End date :</div>
+                <div class="m-r-47 f_wt_600">
+                  {{project.projectActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}
+                  <span class="EndDate f_wt_600"></span>
+                  {{project.projectActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</div>
                 </div>
               </div>
               <!-----------------------------Materials for activity--------------------->
@@ -1063,7 +1071,7 @@
 
   </span>
 </ng-template>
-<div class="footer">
+<div class="footer" style="position: fixed;">
   <span class="powered">
       <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
   </span>
