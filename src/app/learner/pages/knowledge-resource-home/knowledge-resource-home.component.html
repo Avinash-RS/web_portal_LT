@@ -3,7 +3,7 @@
 <div class="know-home-container">
   <div class="header-div">
     <div style="font-size: 22px;
-      margin-left: 0.8%;
+      margin-left: 11px;
       margin-bottom: 20px;" class="animated animatedFadeInUp fadeInUp ">Knowledge Resources</div>
   </div>
   <div *ngIf="details.length" style="display: flex;
@@ -30,14 +30,14 @@
     </div>
   </div>
 
-  <div class="container-fluid">
-    <div class="row resource-link">
+    <div class="resource-link">
       <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 resource-col"
         *ngFor="let item of details | filter:searchDetails">
         <h1>{{item.domain}}</h1>
         <ng-container *ngFor="let areaOfIntArr of item.areaOfInterest; let i = index">
           <ng-container *ngIf="((areaOfIntArr.toLowerCase().search(searchDetails.toLowerCase())) >= 0) || 
-            searchDetails == undefined || (searchDetails && searchDetails.length == 0)">
+            searchDetails == undefined || (searchDetails && searchDetails.length == 0) ||
+            (((item.domain.toLowerCase().search(searchDetails.toLowerCase())) >= 0))">
             <ng-container *ngIf="i < 12">
               <div class="area-int">
                 <a style="cursor: pointer;" (click)="onResourcePreview(item.domain,areaOfIntArr)">{{areaOfIntArr}}
@@ -63,7 +63,6 @@
       </div>
     </div>
   </div>
-</div>
 <div class="footer">
   <span class="powered">
     <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>

@@ -45,11 +45,6 @@
 .no-outline:focus {
   outline: none;
 }
-.resource-link {
-  margin-top: 18px;
-  margin-left: 40px;
-  margin-right: 55px !important;
-}
 h1 {
   color: rgb(95, 93, 93);
   font-size: 19px !important;
@@ -72,8 +67,10 @@ h1 {
   outline: none;
 }
 .resource-link {
-  width: 90%;
-  margin: 20px auto 0 auto !important;
+  width: 100%;
+  flex-wrap: wrap;
+  display: flex;
+  padding: 0 10% 0 10%;
 }
 h1 {
   color: rgb(95, 93, 93);
@@ -215,7 +212,7 @@ h1 {
   }
   a:hover {
     // color: #0056b3;
-    color: #007bff;
+    color: #0056b3;
   }
 }
 
