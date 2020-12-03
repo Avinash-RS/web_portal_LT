@@ -628,8 +628,10 @@ export class ActivitiesComponent implements OnInit {
     videoFile.push(videoName);
     const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
     const performVideo = new FormData();
-    const startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy');
-    const endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy');
+    console.log('this.performDetails', this.performDetails);
+    console.log('this.performsData', this.performsData);
+    const startDate = this.datePipe.transform(this.performsData?.performActivity.activitystartdate, 'dd-MM-yyyy');
+    const endDate = this.datePipe.transform(this.performsData?.performActivity.activityenddate, 'dd-MM-yyyy');
     if (currentDate >= startDate && currentDate <= endDate) {
       this.submitStatus = 'ontime';
     } else {
