@@ -283,11 +283,11 @@
             <div class="row mr-0 ml-0 mt-4">
               <div class="col-6 mr-0 pl-0 pr-0 text-left">
                 <span class="font-weight-bold">Start date:</span><br />
-                <span class="textGrayColor1">{{perform.performActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}</span>
+                <span class="textGrayColor1">{{perform.performActivity.activitystartdate | date}}</span>
               </div>
               <div class="col-6 mr-0 pl-0 pr-0 text-left">
                 <span class="font-weight-bold ml-2">End date:</span><br />
-                <span class="textGrayColor1 float-right">{{perform.performActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</span>
+                <span class="textGrayColor1 float-right">{{perform.performActivity.activityenddate | date}}</span>
               </div>
             </div>
           </div>
@@ -640,7 +640,7 @@
               <div class="row">
                 <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12"></div>
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 text-right">
-                  <span class="f_wt_600 status" *ngIf="project.projectActivity.grade_status !== 'Evaluated' && 
+                  <span class="f_wt_600 status" *ngIf="project.projectActivity.submitAction !== 'submit' ||
               project.projectActivity.submit_status == 'notsubmitted'"> <span class="dot"></span>
                     Yet to submit</span>
 
@@ -754,7 +754,8 @@
                     </ng-template>
                   </owl-carousel-o>
                   </div>
-                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 third" *ngIf="project.projectActivity.grade_status !== 'Evaluated'">
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 third" *ngIf="project.projectActivity.submit_status == 'notsubmitted'
+              || project.projectActivity.grade_status !== 'Evaluated'">
                     <div class="f_size_16 f_wt_600 align-center work">Your work</div>
                     <div [ngClass]="project.projectActivity.showLearnerList ? 'box-0-3' : 'box-0-2'">
                       <div class="fileData ml-auto mr-auto mb-3"
