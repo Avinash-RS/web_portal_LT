@@ -275,7 +275,7 @@
                 </div>
               </div>
               <div class="col-12 pl-0 pr-0" *ngIf="itration.grade_status === 'Evaluated'">
-                <div class="row ml-0 mr-0">
+                <div class="row ml-0 mr-0" *ngIf="itration.assessmentreport.length > 0">
                   <div class="col-12">
                     <button mat-stroked-button class="AssignmentBtn mt-3 w-100" (click)="playVideo(projectPreviewDialog, videoDialog, itration.assessmentreport[0], itration.assessmentreport[0].doc_type)"><mat-icon class="assignmentIcon mr-2">wysiwyg</mat-icon>Assessment report</button>
                   </div>
