@@ -264,7 +264,7 @@
                 Submit
               </button>
               <button mat-stroked-button
-              *ngIf="itration.submit_status == 'notsubmitted' &&  itration.videodetails.length == 0 || !performActivityData.itrationStarted"
+              *ngIf="itration.submit_status == 'notsubmitted' &&  (itration.videodetails.length == 0 || !performActivityData.itrationStarted)"
               class="submitted-btn mt-2"> Submit </button>
               <button mat-stroked-button *ngIf="itration.submitAction == 'submit'" class="submitted-btn mt-2">
                 Submitted </button>
