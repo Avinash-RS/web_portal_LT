@@ -5,15 +5,15 @@
 </mat-toolbar>
 <div class="limiter">
   <div class="row container-reg200">
-    <div class="col-md-8 col-sm-12 col-12 border-right no_pl  no_pr">
+    <div class="igniteLogo col-md-8 col-sm-12 col-12 border-right no_pl">
       <div class="main-logo">
       <img alt="" class="beforeloginimg" style="width : inherit" src="assets/learner/iGGnite_SVG.svg">
     </div>
     </div>
-    <div class="col-md-4 col-sm-12 col-12">
+    <div class="loginWrapper col-md-4 col-sm-12 col-12">
       <div class="wrap-reg">
         <form [formGroup]="loginForm">
-          <h1 class="animated animatedFadeInUp fadeInUp signIn"> {{'Sign In to your account' | translate }}</h1> <br><br>
+          <h1 class="animated animatedFadeInUp fadeInUp signIn"> {{'Sign in to your account' | translate }}</h1> <br><br>
           <mat-card-content style="margin-top:10px">
 
             <mat-form-field appearance="outline">
@@ -124,7 +124,7 @@
               <a [routerLink]="['/Learner/register']"><span class="col">{{'Sign up' | translate }}</span></a> </div><br><br>
           </mat-card-content>
         </form>
-        <div class="row"  id="footer">
+        <div class=""  id="footer">
           <div class="col-12">
             <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span> 
           </div>

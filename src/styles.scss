@@ -967,3 +967,15 @@ mat-header-cell,
 .mobHamburger .mat-ripple {
   display: none;
 }
+.monthHeading {
+  .mat-button {
+      &:hover {
+          .mat-button-focus-overlay {
+              opacity: 0;
+          }
+      }
+  }
+}
+.heightClass {
+  height: 100%;
+}

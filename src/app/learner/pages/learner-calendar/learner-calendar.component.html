@@ -1,7 +1,7 @@
 <!-- calender start -->
 <app-header></app-header>
 <br/>
-<div class="f_size_22  myC-head animated animatedFadeInUp fadeInUp " style="font-size: 22px;">{{'Calendar' | translate }}</div>
+<div class="f_size_22 myC-head animated animatedFadeInUp fadeInUp " style="font-size: 22px;">{{'Calendar' | translate }}</div>
 <div class="calender-container">
     <div>
         <div class="container-fluid mt-3">
@@ -152,7 +152,7 @@
                                                 <div class="topicSection d-flex align-items-center justify-content-between">
                                                     <span class="lxp-text activity_type">{{  data.activity_details.activitytype}}</span>
                                                     <div class="activityButton">
-                                                        <button (click)="launchActivity(data,i)" *ngIf="data.activity_details.activitytype == 'Live Classroom' && data.status ==='On going'" mat-stroked-button class="blue_clr cap m-b-10 LaunchBtn pointer">Launch</button>
+                                                        <button (click)="launchActivity(data,i)" *ngIf="data.activity_details.activitytype == 'Live Classroom' && data.status ==='On going'" mat-stroked-button class="blue_clr cap m-b-10 LaunchBtn pointer"><img alt="" src="../../../../assets/learner/mycourseicons/launch_icon.svg" >Launch</button>
                                                     </div>
                                                     <div class="img-show">
                                                         <img *ngIf="data.activity_details.activitytype == 'Live Classroom'" alt="msteam" src="../../../assets/images/ms_team.png" width="35" height="35">
