@@ -12,69 +12,66 @@
 //           font-weight: bold !important;
 //         }
 // }
-.no-data{
+.no-data {
   margin-top: 100px;
   text-align: center !important;
-  span{
+  span {
     font-size: 25px;
   }
+}
+.search-bar {
+  // margin-left: 40px;
+  margin-left: 0;
+  position: relative;
+  input {
+    border: 1px solid gray;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    width: 90%;
+    margin: 0 auto;
+    //  height: 40px;
+    padding: 10px 10px 10px 45px;
+    display: block;
+    //  padding-left: 45px;
+    &:focus {
+      border: 1px solid red;
+    }
+  }
+}
 
-}
-.search-bar{
-    // margin-left: 40px;
-    margin-left: 0;
-    position: relative;
-         input{
-             border: 1px solid gray;
-             box-shadow:  0 3px 3px rgba(0, 0, 0, 0.2);
-             border-radius: 20px;
-             width: 90%;
-             margin: 0 auto;
-            //  height: 40px;
-            padding: 10px 10px 10px 45px;
-            display: block;
-            //  padding-left: 45px;
-            &:focus {
-              border: 1px solid red;
-            }
-         } 
-         
-}
-.material-icons {
-  
-  font-size: 24px;
+.search-icn {
+  font-size: 26px;
   position: absolute;
-  top: 9px;
-  left: 6%;
+  left: 3%;
   color: #5c6873 !important;
+  top: 4.7em;
 }
-.search-placeholder{
-    color: gray;
-    font-size: 16px;
-    position: absolute;
-    top:10px;
-    left: 45px;
+.search-placeholder {
+  color: gray;
+  font-size: 16px;
+  position: absolute;
+  top: 10px;
+  left: 45px;
 }
-.no-outline:focus{
-    outline: none;
+.no-outline:focus {
+  outline: none;
 }
-.resource-link{
-    margin-top: 18px;
-    margin-left: 40px;
-    margin-right: 55px !important;
+.resource-link {
+  margin-top: 18px;
+  margin-left: 40px;
+  margin-right: 55px !important;
 }
-h1{
-    color: rgb(95, 93, 93);
-    font-size: 19px !important;
-    font-weight: bold !important;
-    line-height: normal;
-     
-  }
-  .resource-col{
-    // padding-right: 30px;
-    padding-right: 15px;
-    margin-top: 35px;
-  }
+h1 {
+  color: rgb(95, 93, 93);
+  font-size: 19px !important;
+  font-weight: bold !important;
+  line-height: normal;
+}
+.resource-col {
+  // padding-right: 30px;
+  padding-right: 15px;
+  margin-top: 35px;
+}
 
 .search-placeholder {
   color: gray;
@@ -88,12 +85,12 @@ h1{
 }
 .resource-link {
   // margin-top: 18px;
-    // margin-left: 40px;
-    // margin-left: 0;
-    // margin-right: 55px !important;
-    // margin-right: 0 !important;
-    width: 90%;
-    margin: 20px auto 0 auto !important;
+  // margin-left: 40px;
+  // margin-left: 0;
+  // margin-right: 55px !important;
+  // margin-right: 0 !important;
+  width: 90%;
+  margin: 20px auto 0 auto !important;
 }
 h1 {
   color: rgb(95, 93, 93);
@@ -124,9 +121,9 @@ h1 {
     }
   }
 }
-.upload-resource{
-    margin: 100px auto;
-    margin-bottom: 50px !important;
+.upload-resource {
+  margin: 100px auto;
+  margin-bottom: 50px !important;
 }
 .browse {
   color: white;
@@ -197,7 +194,7 @@ h1 {
 .kr-empty {
   border-left: 7px solid;
   height: 100px;
-  background: #F5F5F5;
+  background: #f5f5f5;
   border-left-color: $lxp-theme-yellow-sec;
   color: black;
   text-align: center;
@@ -207,22 +204,21 @@ h1 {
   box-shadow: 0px 2px 4px #00000029;
   width: 45%;
   margin-left: 30%;
-  }
-.color-icon{
-  color : $lxp-theme-green !important;
 }
-.headicon-kr{
-  color: #C02222 !important; 
+.color-icon {
+  color: $lxp-theme-green !important;
+}
+.headicon-kr {
+  color: #c02222 !important;
   font-size: 30px !important;
   vertical-align: sub;
 }
-  .para {
-    display: inline-flex;
-    font-size: 18px;
-    vertical-align: initial;
-    padding-left: 10px;
+.para {
+  display: inline-flex;
+  font-size: 18px;
+  vertical-align: initial;
+  padding-left: 10px;
 }
-
 
 .area-int {
   white-space: nowrap;
@@ -256,7 +252,27 @@ h1 {
 }
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
-  .footer{
-      text-align: center;
+  .footer {
+    text-align: center;
   }
+}
+.search-inp {
+  width: 95%;
+  height: 40px;
+  border-radius: 25px;
+  border: 1px solid;
+  box-shadow: 0px 5px 10px -5px grey;
+  padding: 0 35px;
+  &:focus {
+    outline: unset !important;
+    border: 1px solid #c02222;
   }
+}
+
+.close-search {
+  font-size: 26px;
+  position: absolute;
+  right: 3.5%;
+  color: #5c6873 !important;
+  top: 4.7em;
+}

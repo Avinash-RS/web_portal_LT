@@ -6,18 +6,13 @@
       margin-left: 0.8%;
       margin-bottom: 20px;" class="animated animatedFadeInUp fadeInUp ">Knowledge Resources</div>
   </div>
-  <!-- <div class="search-bar" *ngIf="!details">
-   <span>No resource data is available</span>
-  </div> -->
-  <div class="container-fluid">
-    <div class="search-bar" *ngIf="details.length">
-      <form>
-        <input type="search" id="gsearch" placeholder="Search..." name="gsearch" [(ngModel)]="searchDetails"
-          class="no-outline">
-        <!-- <label class="search-placeholder">Search...</label> -->
-        <em class="material-icons">search</em>
-      </form>
-    </div>
+  <div *ngIf="details.length" style="display: flex;
+    justify-content: center;">
+    <input class="search-inp" placeholder="Search..." [(ngModel)]="searchDetails">
+    <mat-icon class="search-icn">search</mat-icon>
+    <ng-container *ngIf="searchDetails && searchDetails.length > 0">
+      <mat-icon class="close-search" (click)="searchDetails = ''">close</mat-icon>
+    </ng-container>
   </div>
 
   <div class="no-data" *ngIf="isLoadBalanced  && !details.length">
@@ -26,7 +21,6 @@
         <div class="kr-empty">
           <span class="lxp-knowledge headicon-kr"></span>
           <p class="para">{{'You have no knowledge resource at this moment!' | translate }} </p>
-          <!-- {{ results?.error_msg }} -->
         </div>
       </div>
     </div>
