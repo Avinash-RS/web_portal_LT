@@ -109,7 +109,10 @@
 
 .courseCardTab {
   width: 100%;
-  margin: 20px 0;
+  margin: 10px 0;
+  @media only screen and (min-width: 767px) {
+    margin: 20px 0;
+  }
   @media only screen and (min-width: 601px) {
     display: none;
   }
@@ -1316,6 +1319,44 @@ hr {
   font-weight: 600 !important;
 }
 
+.pointhover {
+  @media only screen and (max-width: 767px) {
+    margin-bottom: 15px;
+  }
+}
+.courseArrow {
+  display: none;
+  @media only screen and (max-width: 767px) {
+    display: block;
+  }
+}
+.desktopCourse, .desktopProgressList, .desktopPointer {
+  display: none;
+  @media only screen and (min-width: 768px) {
+    display: block;
+  }
+}
+.mobileCourse, .mobileProgressList, .mobilePointer {
+  display: none;
+  @media only screen and (max-width: 767px) {
+    display: block;
+  }
+}
+.mobileCourse {
+  @media only screen and (max-width: 767px) {
+    margin-bottom: 15px;
+  }
+}
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translate3d(0,-20%,0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}
 .courseName {
   position: relative;
   /* left: 10px; */
@@ -1497,7 +1538,8 @@ hr {
 }
 
 .h-80 {
-  max-height: 80px !important;
+  max-height: 100px !important;
+  overflow: auto;
   // height: 80px !important;
   // border: 1px solid #dedfe0;
   // background: #f1f1f1;
