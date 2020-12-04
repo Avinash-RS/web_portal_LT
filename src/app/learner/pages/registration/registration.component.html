@@ -2,7 +2,7 @@
   <img class="hearder-logo " alt="" src="assets/learner/LNT_Logo new.svg">
 </mat-toolbar>
 <div class="limiter">
-    <div class="row container-reg200">
+    <div class="container-reg200">
         <!-- <div class="col-md-8 col-sm-12 col-12">
             <img alt="" class="beforeloginimg" style="width : inherit" src="assets/learner/lapBG.jpeg">
             <div class="row footer20">
@@ -16,7 +16,7 @@
                 </div>
               </div>
         </div> -->
-        <div class="col-md-8 col-sm-12 col-12 border-right no_pl  no_pr">
+        <div class="igniteLogo col-xl-8 col-md-6 col-sm-12 col-12 border-right no_pl">
             <!-- <img alt="" class="lnt_logo" src="assets/learner/WHITE_LNT T_LOGO.svg"> -->
             <div class="main-logo">
             <img alt="" class="beforeloginimg" style="width : inherit" src="assets/learner/iGGnite_SVG.svg">
@@ -36,10 +36,10 @@
             </div> -->
           </div>
         
-        <div class="col-md-4 col-sm-12 col-12">
-            <div class="wrap-reg ">
+        <div class="loginWrapper col-xl-4 col-md-6 col-sm-12 col-12">
+            <div class="wrap-reg">
                 <!-- <img class="kauhalya" alt="" src='assets/images/l&t.png'> -->
-                <form [formGroup]="registerForm">
+                <form class="animated animatedFadeInUp fadeInUp" [formGroup]="registerForm">
 
             
                   
@@ -153,11 +153,16 @@
                             </button>
 
                             <div class="account" >{{'Already have an account?' | translate}}
-                                <a [routerLink]="['/Learner/login']"><span  class="col">{{'Sign in' | translate}}</span></a>
+                                <a [routerLink]="['/Learner/login']"><span class="accsignIn"> {{'Sign in' | translate}}</span></a>
                             </div>
                         </div>
                     <!-- </div> -->
                 </form>
+                <div class=""  id="footer">
+                  <div class="col-12">
+                    <span class="">2020 © L&T EduTech All Rights Reserved</span> 
+                  </div>
+                </div>
                 <!-- <div class="row footer20">
                     <div class="col-7">
                         <span class="footertext">© 2020 L&T EduTech.</span>
@@ -168,11 +173,6 @@
                         </span>
                     </div>
                 </div> -->
-            </div>
-            <div class="row "  id="footer">
-              <div class="col-12">
-                <span class="">2020 © L&T EduTech All Rights Reserved</span> 
-              </div>
             </div>
 
         </div>
