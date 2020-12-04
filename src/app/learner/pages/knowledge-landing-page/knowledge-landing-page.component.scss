@@ -89,6 +89,7 @@
         display: flex;
         flex-wrap: wrap;
         min-height: 25.8em;
+        margin-bottom:50px;//for footer temp fix CAN REMOVE
         .resource-card {
             height: 170px;
             width: 220px;
@@ -162,6 +163,7 @@
     font-size: inherit;
     left: 0;
     bottom: 0 !important;
+    position: fixed;
     width: 100%;
     color: $label;
     z-index: 999;

@@ -86,7 +86,7 @@
             </div>
           </div>
           <div class="row" *ngIf="course.isBatchCourse">
-            <div class="col-5" style="margin-bottom:10px;">
+            <div class="col" style="margin-bottom:10px;">
               <span class="lxp_gray123">Start Date:</span>
               <span class="f_wt_500">
                 {{course.batch_start_date ?(course.batch_start_date |date:'dd MMM yyyy'):'N/A' }}
