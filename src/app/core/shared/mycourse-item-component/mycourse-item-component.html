@@ -299,7 +299,7 @@
                   Sessions attended
                   {{course.instructor_lead_session_completed_count+'/'+course.instructor_lead_session_total_count}}<br>
                   <span class="pointer f_size_10" style="color:#C02222; text-decoration: underline;"
-                    (click)="goInstructorLed(course)">View sessions details..</span>
+                    (click)="goInstructorLed(course)">View session details..</span>
                 </div>
               </div>
 
@@ -352,9 +352,11 @@
                   </div>
                 </div>
                 <div *ngIf="course.discussExp" class="f_size_13 animate__animated animate__fadeInUp">
-                  Threads {{course.thread_count!==null?course.thread_count:'N/A'}}<br>
-                  Comments {{course.comment_count!==null?course.comment_count:'N/A'}}<br>
-                  Replies {{course.reply_count!==null?course.reply_count:'N/A'}}<br>
+                  <div class="d-flex justify-content-between">
+                    <span>Threads {{course.thread_count!==null?course.thread_count:'N/A'}}</span>
+                    <span>Comments {{course.comment_count!==null?course.comment_count:'N/A'}}</span>
+                    <span>Replies {{course.reply_count!==null?course.reply_count:'N/A'}}</span>
+                  </div><br>
                   <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;"
                     (click)="goToForum(course)">View discussions..</span>
                 </div>
@@ -581,7 +583,7 @@
                         Sessions attended
                         {{course.instructor_lead_session_completed_count+'/'+course.instructor_lead_session_total_count}}<br>
                         <span class="pointer f_size_10" style="color:#C02222; text-decoration: underline;"
-                          (click)="goInstructorLed(course)">View sessions details..</span>
+                          (click)="goInstructorLed(course)">View session details..</span>
                       </div>
                     </div>
       
@@ -632,9 +634,11 @@
                         </div>
                       </div>
                       <div *ngIf="course.discussExp" class="f_size_13 animate__animated animate__fadeInUp">
-                        Threads {{course.thread_count!==null?course.thread_count:'N/A'}}<br>
-                        Comments {{course.comment_count!==null?course.comment_count:'N/A'}}<br>
-                        Replies {{course.reply_count!==null?course.reply_count:'N/A'}}<br>
+                        <div class="d-flex justify-content-between">
+                          <span>Threads {{course.thread_count!==null?course.thread_count:'N/A'}}</span>
+                          <span>Comments {{course.comment_count!==null?course.comment_count:'N/A'}}</span>
+                          <span>Replies {{course.reply_count!==null?course.reply_count:'N/A'}}</span>
+                        </div><br>
                         <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;"
                           (click)="goToForum(course)">View discussions..</span>
                       </div>

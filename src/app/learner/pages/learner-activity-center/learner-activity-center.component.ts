@@ -56,7 +56,7 @@ export class LearnerActivityCenterComponent implements OnInit {
           { 'files.submit_status': { $regex: 'Submitted', $options: 'i' } }]
         }];
         this.statusBased = JSON.stringify(statusB);
-      } else if (this.navDetails?.tableType === 'pending') {
+      } else if (this.navDetails?.tableType === 'ongoing') {
         const statusB = [{ ['files.submit_status']: { $regex: 'Yet to submit', $options: 'i' } }];
         this.statusBased = JSON.stringify(statusB);
       } else if (this.navDetails?.tableType === 'allActivities' || 'submission') {
@@ -267,7 +267,7 @@ export class LearnerActivityCenterComponent implements OnInit {
             { 'files.submit_status': { $regex: 'Submitted', $options: 'i' } }]
           }];
           this.statusBased = JSON.stringify(statusB);
-        } else if (this.navDetails?.tableType === 'pending') {
+        } else if (this.navDetails?.tableType === 'ongoing') {
           const statusB = [{ ['files.submit_status']: { $regex: 'Yet to submit', $options: 'i' } }];
           this.statusBased = JSON.stringify(statusB);
         } else if (this.navDetails?.tableType === 'allActivities' || 'submission') {
