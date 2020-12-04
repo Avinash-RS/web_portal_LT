@@ -2,7 +2,20 @@
 .brdcrmb {
   margin-top: -3px;
 }
-
+.footer {
+  padding: 15px;
+  font-size: inherit;
+  left: 0;
+  bottom: 0 !important;
+  width: 100%;
+  color: $label;
+  // position: fixed;
+  z-index: 999999;
+  font-weight: 500;
+  background-color: $profile-t-grey;
+  text-align: right;
+  border-top: 2px solid $profile-p-grey;
+}
 .con-1{
     padding: 12px;
 }
@@ -56,7 +69,7 @@
       border : 1px solid $color-border;
   }
   .t-l{
-    margin-left: 14px;
+    margin-left: 29px;
     margin-top: 5px;
   }
   .margin-5{
@@ -99,6 +112,12 @@ margin-bottom: 9px;
   }
 .m-l-68{
     margin-left: -127px;
+}
+.m-r-74{
+  margin-right: 120px;
+}
+.m-r-47{
+  margin-right: 47px;
 }
 .m-l-23{
     margin-left: 23px;
@@ -404,6 +423,11 @@ margin-bottom: 1% !important;
   right: 4px;
   // right: 3px;
 }
+.graded {
+  color: #0C781B;
+  position: relative;
+  right: 42px;
+}
 .iterSubmit {
   color: #FFA04E;
 }
@@ -599,8 +623,15 @@ left: 5px;
 .deleteBtn {
   color: #5C6873;
   font-size: 20px;
+  margin-top: 3px;
 }
-
+.ml-13 {
+  margin-left: 13px;
+}
+.perfimg {
+  width: 16px;
+  margin-bottom: 5px;
+}
 // .submitted-btn{
 //   color: $color-white;
 //   background-color: #898989;
@@ -624,6 +655,9 @@ left: 5px;
   border: 0.5px solid #707070;
   cursor: pointer;
 }
+// .carouselCard :hover  {
+//   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+// }
 
 .carouselRow1 {
   height: 7rem;
@@ -821,6 +855,10 @@ left: 5px;
   width: 10%;
   height: 38px;
 }
+.videoName {
+  position: relative;
+  top: 7px;
+}
 .errmsg {
   height: 30rem;
 }
@@ -971,7 +1009,7 @@ border: 1px solid #ccc;
   bottom: 0 !important;
   width: 100%;
   color: $label;
-  // position: fixed;
+  position: fixed;
   z-index: 999999;
   font-weight: 500;
   background-color: $profile-t-grey;
