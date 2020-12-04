@@ -1,11 +1,11 @@
 <div class="knowledge-preview-container">
-  <div class="prev-cancel"  (click)="onClose()" *ngIf="isCancelLoad">
+  <div class="prev-cancel" (click)="onClose()" *ngIf="isCancelLoad">
     <mat-icon>arrow_back</mat-icon>
     <span style="position: absolute;
     top: 3px;
     left: 30px;
     font-size: 16px;">
-      {{batchdialogdata.filename}}
+      {{batchdialogdata.filename + "." + batchdialogdata.fileTypePrew}}
     </span>
   </div>
   <ng-container *ngIf="isCancelLoad">

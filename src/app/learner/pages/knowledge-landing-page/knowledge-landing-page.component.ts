@@ -109,6 +109,7 @@ export class KnowledgeLandingPageComponent implements OnInit {
       data: {
         file,
         fileType,
+        fileTypePrew: resData.fileType,
         filename: resData.filename
       },
       height,

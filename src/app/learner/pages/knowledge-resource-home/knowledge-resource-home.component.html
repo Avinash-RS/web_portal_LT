@@ -3,21 +3,20 @@
 <div class="know-home-container">
   <div class="header-div">
     <div style="font-size: 22px;
-      margin-left: 0.8%;
+      margin-left: 11px;
       margin-bottom: 20px;" class="animated animatedFadeInUp fadeInUp ">Knowledge Resources</div>
   </div>
-  <!-- <div class="search-bar" *ngIf="!details">
-   <span>No resource data is available</span>
-  </div> -->
-  <div class="container-fluid">
-    <div class="search-bar" *ngIf="details.length">
-      <form>
-        <input type="search" id="gsearch" placeholder="Search..." name="gsearch" [(ngModel)]="searchDetails"
-          class="no-outline">
-        <!-- <label class="search-placeholder">Search...</label> -->
-        <em class="material-icons">search</em>
-      </form>
-    </div>
+  <div *ngIf="details.length" style="display: flex;
+    justify-content: center;">
+    <input class="search-inp" placeholder="Search..." [(ngModel)]="searchDetails">
+    
+    <ng-container *ngIf="searchDetails && searchDetails.length > 0; else searchIcon">
+      <mat-icon class="close-search" (click)="searchDetails = ''">close</mat-icon>
+    </ng-container>
+    <ng-template #searchIcon>
+      <mat-icon class="close-search">search</mat-icon>
+    </ng-template>
+    
   </div>
 
   <div class="no-data" *ngIf="isLoadBalanced  && !details.length">
@@ -26,20 +25,19 @@
         <div class="kr-empty">
           <span class="lxp-knowledge headicon-kr"></span>
           <p class="para">{{'You have no knowledge resource at this moment!' | translate }} </p>
-          <!-- {{ results?.error_msg }} -->
         </div>
       </div>
     </div>
   </div>
 
-  <div class="container-fluid">
-    <div class="row resource-link">
+    <div class="resource-link">
       <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 resource-col"
         *ngFor="let item of details | filter:searchDetails">
         <h1>{{item.domain}}</h1>
         <ng-container *ngFor="let areaOfIntArr of item.areaOfInterest; let i = index">
           <ng-container *ngIf="((areaOfIntArr.toLowerCase().search(searchDetails.toLowerCase())) >= 0) || 
-            searchDetails == undefined || (searchDetails && searchDetails.length == 0)">
+            searchDetails == undefined || (searchDetails && searchDetails.length == 0) ||
+            (((item.domain.toLowerCase().search(searchDetails.toLowerCase())) >= 0))">
             <ng-container *ngIf="i < 12">
               <div class="area-int">
                 <a style="cursor: pointer;" (click)="onResourcePreview(item.domain,areaOfIntArr)">{{areaOfIntArr}}
@@ -65,7 +63,6 @@
       </div>
     </div>
   </div>
-</div>
 <div class="footer">
   <span class="powered">
     <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
