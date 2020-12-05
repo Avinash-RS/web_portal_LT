@@ -84,7 +84,7 @@ export class CoursedetailsComponent implements OnInit {
   playerTopicLen: any;
   isNextEnable = false;
   isprevEnable = false;
-  selectedTabIndex: any;
+  selectedTabIndex: any = 0;
   detailData: any;
   batchDetails: any;
   disableThreads: boolean;

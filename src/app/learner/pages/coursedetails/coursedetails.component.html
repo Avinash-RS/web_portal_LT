@@ -195,7 +195,7 @@
                                                                                                 *ngIf="fourLvl?.title?.length >= 65"
                                                                                                 tooltip="{{fourLvl?.title}}"
                                                                                                 placement="right"
-                                                                                                (click)="playTopic(fourLvl.link,fourLvl.title,fourLvl.status,fourLvl?.title,fourLvl?.status,scromModuleData?.length,fourLvl?.topic_len,l + 1,i)">
+                                                                                                (click)="playTopic(fourLvl.link,fourLvl.title,fourLvl.status,fourLvl?.title,fourLvl?.status,scromModuleData?.length,fourLvl?.topic_len,l + 1,i);!drawersOpen?drawer.close():''">
                                                                                                 <p class="titleName">
                                                                                                     {{fourLvl?.title | slice:0:56}}...
                                                                                                 </p>
@@ -204,7 +204,7 @@
         
                                                                                             <span class="topicnm"
                                                                                                 *ngIf="fourLvl?.title?.length < 65"
-                                                                                                (click)="playTopic(fourLvl.link,fourLvl.title,fourLvl.status,fourLvl?.title,fourLvl?.status,scromModuleData?.length,fourLvl?.topic_len,l + 1,i)">
+                                                                                                (click)="playTopic(fourLvl.link,fourLvl.title,fourLvl.status,fourLvl?.title,fourLvl?.status,scromModuleData?.length,fourLvl?.topic_len,l + 1,i);!drawersOpen?drawer.close():''">
         
                                                                                                 <p class="titleName">
                                                                                                     {{fourLvl?.title}}
@@ -264,7 +264,7 @@
                                                             <ng-template matStepLabel>
                                                                 <span class="topicnm" *ngIf="mod?.title?.length >= 65"
                                                                     tooltip="{{mod?.title}}" placement="right"
-                                                                    (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i)">
+                                                                    (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i);!drawersOpen?drawer.close():''">
                                                                     <p class="titleName" [ngClass]="(j===nextPrevHolder && i===moduleHolder) ? 'titleSelected' : ''">
                                                                         {{mod?.title | slice:0:56}}...
                                                                     </p>
@@ -272,7 +272,7 @@
                                                                 </span>
         
                                                                 <span class="topicnm" *ngIf="mod?.title.length < 65"
-                                                                    (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i)">
+                                                                    (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i);!drawersOpen?drawer.close():''">
         
                                                                     <p class="titleName" [ngClass]="(j===nextPrevHolder && i===moduleHolder) ? 'titleSelected' : ''">
                                                                         {{mod?.title}}
@@ -303,7 +303,7 @@
                                 menu
                             </mat-icon>
         
-                            <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'" *ngIf="scromModuleData?.length !== 0">
+                            <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'" *ngIf="scromModuleData?.length !== 0 && selectedTabIndex == 0">
                                 <button class=" pointer" mat-button [disabled]="isprevEnable"
                                     (click)="topicPrve()">{{'Prev' | translate }}</button>
                                 <span class="">|</span>

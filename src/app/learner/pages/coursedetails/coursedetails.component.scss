@@ -539,7 +539,7 @@ iframe.fullScreen {
     // margin-top: 5px;
 }
 :host ::ng-deep .mat-tab-label-container {
-    margin-left: 3% !important;
+    margin-left: 2% !important;
 }
 
 // :host ::ng-deep.mat-tab-body{
@@ -1586,7 +1586,8 @@ iframe.fullScreen {
 ::ng-deep #content {
     height: 98vh !important;
 }
-@keyframes fadeInUp {
+
+@keyframes fadeInfadeInFake {
     0% {
         opacity: 0;
         transform: translate3d(0,0.2%,0);
