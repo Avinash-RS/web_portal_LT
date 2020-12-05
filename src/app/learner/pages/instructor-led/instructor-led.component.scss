@@ -93,9 +93,17 @@
     position: absolute;
     bottom: 0px;
     color: white;
-    background: rgba(0, 128, 0, 0.7);
     right: 0;
     padding: 4px;
+    &.orange {
+        background: #FFA04E;
+    }
+    &.grey {
+        background: #6A6A6A;
+    }
+    &.greenColor {
+        background: #0C781B;
+    }
 }
 .course-list {
     @media only screen and (max-width: 576px) {
@@ -442,6 +450,10 @@
     background-color: $profile-t-grey;
     text-align: right;
     border-top: 2px solid $profile-p-grey;
+    @media only screen and (max-width: 767px) {
+        position: relative;
+        margin-top: 20px;
+    }
 }
 
 // Mobile
