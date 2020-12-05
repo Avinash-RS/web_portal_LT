@@ -87,8 +87,8 @@ export class CommonServicesService {
     return this.apollo.query({
       query: viewcourse,
       variables: {
-        courseId,
-        userId
+        course_id: courseId,
+        user_id: userId
       }
     });
   }
