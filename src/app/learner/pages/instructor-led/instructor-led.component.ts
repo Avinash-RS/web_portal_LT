@@ -89,9 +89,9 @@ export class InstructorLedComponent implements OnInit {
   }
 
   onGoingSession() {
-    const ongoing = this.listOfSessions.find(x => x.status === 'On going');
+    const ongoing = this.listOfSessions.find(x => x.status === 'Ongoing');
     if (ongoing === undefined) {
-      const upcoming = this.listOfSessions.find(x => x.status === 'Up Coming');
+      const upcoming = this.listOfSessions.find(x => x.status === 'UpComing');
       if (upcoming === undefined) {
         this.activityShow = this.listOfSessions[0];
         this.activityShow.button = '';
