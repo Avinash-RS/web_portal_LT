@@ -498,9 +498,6 @@ li {
     padding-top: 35px;
     height: 0;
     overflow: hidden;
-    @media only screen and (max-width: 576px) {
-        padding-bottom: 60vh;
-    }
     .player {
         position: absolute;
         top:0;
@@ -1590,7 +1587,7 @@ iframe.fullScreen {
     height: 98vh !important;
 }
 
-@keyframes fadeInfadeInFake {
+@keyframes fadeInUp {
     0% {
         opacity: 0;
         transform: translate3d(0,0.2%,0);
