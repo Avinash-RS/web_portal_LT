@@ -41,6 +41,19 @@ export class AssignmentComponent implements OnInit {
   ngOnInit() {
   }
 
+//   emiteData() {
+//   //   if (this.selectedName === 'perform') {
+//   //   const data = {
+//   //     selectedName: this.selectedName,
+//   //     selectedTabIndex: this.selectedTabIndex,
+//   //   };
+//   //   this.commonServices.menuSelectedPerform$.next(data);
+//   // } else {
+//   //   // this.Lservice.performView.next('performData', false)
+//   // }
+// }
+
+
   getAssignmentmoduleData() {
     this.Lservice.getAssignmentmoduleData(
       this.courseid,

@@ -1,79 +1,6 @@
 <div class="container pl-0 pr-0">
-  <div class="row ml-0 mr-0">
-    <div class="col-10 text-left m-auto moileView">
-      <span class="titleCase">{{ selectedName | titlecase }}</span>
-      <!-- <span *ngIf="course?.course_name?.length > 30">{{(course?.course_name | slice:0:20)+'...'}}</span> -->
-    </div>
-    <div class="col-2 text-right mobileHoriz">
-      <mat-icon class="ml-3 mt-3 mb-3" [matMenuTriggerFor]="menu"
-        >more_vert</mat-icon
-      >
-      <mat-menu #menu="matMenu">
-        <button
-          (click)="
-            selectedTabIndex = 0;
-            selectedName = detailDataToPerform?.course_name
-              ? detailDataToPerform?.course_name
-              : courceDetails?.course_name;
-            emiteData()
-          "
-          class="matTabMenu"
-          mat-menu-item
-        >
-          <span>Course Player</span>
-        </button>
-        <button
-          (click)="
-            selectedTabIndex = 1; selectedName = 'About the course'; emiteData()
-          "
-          class="matTabMenu"
-          mat-menu-item
-        >
-          <span>About the course</span>
-        </button>
-        <button
-          (click)="
-            selectedTabIndex = 2; selectedName = 'Resources'; emiteData()
-          "
-          class="matTabMenu"
-          mat-menu-item
-        >
-          <span>Resources</span>
-        </button>
-        <button
-          (click)="
-            selectedTabIndex = 3; selectedName = 'Assignments'; emiteData()
-          "
-          class="matTabMenu"
-          mat-menu-item
-        >
-          <span>Assignments</span>
-        </button>
-        <button
-          (click)="selectedTabIndex = 4; selectedName = 'Forum'; emiteData()"
-          class="matTabMenu"
-          mat-menu-item
-        >
-          <span>Forum</span>
-        </button>
-        <button
-        (click)="selectedName = 'project'"
-        class="matTabMenu"
-        mat-menu-item
-      >
-        <span>Projects</span>
-      </button>
-        <button
-          (click)="selectedName = 'perform'"
-          class="matTabMenu"
-          mat-menu-item
-        >
-          <span>Perform</span>
-        </button>
-      </mat-menu>
-    </div>
-  </div>
-  <div class="row ml-0 mr-0">
+
+  <!-- <div class="row ml-0 mr-0">
     <span class="redHover">
       <mat-icon class="material-icons f_size_15 backIc pointer" (click)="goToCourse()">arrow_back_ios
       </mat-icon>
@@ -81,59 +8,72 @@
         Back
       </span>
     </span>
-  </div>
+  </div> -->
 
   <div class="row mr-0 ml-0" *ngIf="projectDetails?.length > 0">
     <div class="col-sm-12">
-      <div class="box-0-1" (click)="getprojectActivityData()"  *ngFor="let project of projectDetails; let i = index" (click)="projectdetailPage = !projectdetailPage">
+      <div class="box-0-1" *ngFor="let project of projectDetails; let i = index"
+        (click)="projectdetailPage = !projectdetailPage">
         <div class="row">
-        <div class="col-10 text-left">
-          <span class="topic">
-            <!-- <mat-icon class="assignIcon">assignment</mat-icon> -->
-            <span class="f_size_16 f_wt_600 projHead">{{project.projectActivity.topic_id}}</span>
-          </span>
-        </div>
-        <div class="col-2 text-right">
-          <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="!isCollapsed || projectId !== i"
-            (click)="isCollapsed = !isCollapsed; projectId = i">keyboard_arrow_down</mat-icon>
-          <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="isCollapsed && projectId === i"
-            (click)="isCollapsed = !isCollapsed; projectId = i">keyboard_arrow_up</mat-icon>
-        </div>
-      </div><br>
-
-      <div class="row">
-        <div class="col-12 text-right">
-          <span class="f_wt_600 status" *ngIf="project.projectActivity.submitAction !== 'submit' ||
-      project.projectActivity.submit_status == 'notsubmitted'"> <span class="dot"></span>
-            Yet to submit</span>
-
-          <span class="f_wt_600 projectSubmitstatus submitted" *ngIf="project.projectActivity.submitAction == 'submit'
-      && project.projectActivity.grade_status == 'Not Evaluated'"> <span class="submitdot"></span>
-            Submitted</span>
-
-          <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated'"> <span class="gradedot"></span>
-            Graded</span>
-        </div>
-      </div><br>
-
-      <div class="row">
-        <div class="col-5">
-          <span class="group">
-            <button mat-mini-fab class="groupBtn">
-              <mat-icon class="grpIcon" (click)="learnerView(learnerDialog, project)">group</mat-icon>
-            </button>
-            <span class="teamName" *ngIf="project.projectActivity.groupname.length < 14"
-            (click)="learnerView(learnerDialog, project)">
-              {{project.projectActivity.groupname}} ({{project.projectActivity.groupDetails.length}})
+          <div class="col-10 text-left">
+            <span class="topic">
+              <!-- <mat-icon class="assignIcon">assignment</mat-icon> -->
+              <span class="f_size_16 f_wt_600 projHead">{{project.projectActivity.topic_id}}</span>
             </span>
-            <!-- <span class="teamName" *ngIf="project.projectActivity.groupname.length > 14"
+          </div>
+          <div class="col-2 text-right">
+            <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="!isCollapsed || projectId !== i"
+              (click)="isCollapsed = !isCollapsed; projectId = i">keyboard_arrow_down</mat-icon>
+            <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="isCollapsed && projectId === i"
+              (click)="isCollapsed = !isCollapsed; projectId = i">keyboard_arrow_up</mat-icon>
+          </div>
+        </div><br><br>
+
+        <div class="row">
+          <div class="col-6 text-left">
+            <div class="f_wt_600 status singleline-text"><span>Total Score </span>
+              &nbsp;
+              <span *ngIf="(project.projectActivity.score_mark !== null || project.projectActivity.score_mark !== '' || project.projectActivity.score_mark !== undefined) ">
+                {{project.projectActivity.score_mark}}
+              </span>
+              <span *ngIf="(project.projectActivity.score_mark === null || project.projectActivity.score_mark === '' || project.projectActivity.score_mark === undefined)">
+                -
+              </span>
+              /{{project.projectActivity.total_mark}}</div>
+          </div>
+          <div class="col-6 text-right">
+            <span class="f_wt_600 status" *ngIf="project.projectActivity.submitAction !== 'submit' ||
+      project.projectActivity.submit_status == 'notsubmitted'"> <span class="dot"></span>
+              Yet to submit</span>
+
+            <span class="f_wt_600 projectSubmitstatus submitted" *ngIf="project.projectActivity.submitAction == 'submit'
+      && project.projectActivity.grade_status == 'Not Evaluated'"> <span class="submitdot"></span>
+              Submitted</span>
+
+            <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated'"> <span
+                class="gradedot"></span>
+              Graded</span>
+          </div>
+        </div><br>
+
+        <div class="row">
+          <div class="col-5">
+            <span class="group">
+              <button mat-mini-fab class="groupBtn">
+                <mat-icon class="grpIcon" (click)="learnerView(learnerDialog, project)">group</mat-icon>
+              </button>
+              <span class="teamName" *ngIf="project.projectActivity.groupname.length < 14"
+                (click)="learnerView(learnerDialog, project)">
+                {{project.projectActivity.groupname}} ({{project.projectActivity.groupDetails.length}})
+              </span>
+              <!-- <span class="teamName" *ngIf="project.projectActivity.groupname.length > 14"
               matTooltip="{{project.projectActivity.groupname}}" matTooltipClass="custom-mat-tooltip">
               {{(project.projectActivity.groupname| slice:0:14)+'...'}} 
             </span>&nbsp; -->
-          </span>
-        </div>
-        <div class="col-7 text-right">
-          <!-- <div class="m-r-13">Start date :<span class="margin-30"></span>End date :</div>
+            </span>
+          </div>
+          <div class="col-7 text-right">
+            <!-- <div class="m-r-13">Start date :<span class="margin-30"></span>End date :</div>
           <div class="f_wt_600">
             <span>{{project.activityStartDate}}</span>
             <span class="m-r-5"></span>
@@ -142,29 +82,59 @@
             <div>Start date :<span class="margin-30"></span>End date :</div>
             <div class="m-r-2 f_wt_600">{{project.activityStartDate}}
               <span class="f_wt_600"></span>{{project.activityEndDate}}</div>
+          </div>
         </div>
-      </div>
 
-      <div class="ml-16">
-      <div class="row">
-        <span>Activity description:</span>
-      </div>
-      <div class="row">
-        <p>{{project.projectActivity.activityname}}</p>
-      </div>
-    </div>
-    <!-----------------------------Materials for activity--------------------->
-  <div *ngIf="isCollapsed && projectId === i">
-    <div class="row ml-0 mr-0">
-      <div class="col-sm-12 text-left">
-        <span>Material for activity ({{project.projectActivity.materialDetails.length}})</span>
-      </div>
-    </div>
+        <div class="ml-16">
+          <div class="row">
+            <span>Activity description:</span>
+          </div>
+          <div class="row">
+            <p>{{project.projectActivity.activityname}}</p>
+          </div>
+        </div>
+        <!-----------------------------Materials for activity--------------------->
+        <div *ngIf="isCollapsed && projectId === i">
+          <div class="row ml-0 mr-0">
+            <div class="col-sm-12 text-left">
+              <span>Material for activity ({{project.projectActivity.materialDetails.length}})</span>
+            </div>
+          </div>
 
-    <div class="row ml-0 mr-0 mt-3">
-      <div class="col-12 text-left pl-0 pr-0">
-        <div id="demo" class="carousel" data-ride="carousel">
-          <!-- The slideshow -->
+          <div class="row ml-0 mr-0 mt-3">
+            <div class="col-12 text-left pl-0 pr-0">
+
+              <owl-carousel-o [options]="trendingCategorires"
+                [ngClass]="project.projectActivity.materialDetails >= 4 ? 'arrow': 'widthClass arrow' ">
+                <ng-template class="row ml-0 mr-0" carouselSlide
+                  *ngFor="let material of project.projectActivity.materialDetails; let i = index">
+                  <div
+                    [ngClass]="project.projectActivity.materialDetails.length >= 2 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
+                    <mat-card class="p-0 iterationCard"
+                      (click)="projectPreviewDoc(projectPreviewDialog, videoDialog, material, 'material')">
+                      <div class="row ml-0 mr-0 carouselRow1">
+                        <div class="col-12 m-auto">
+                          <mat-icon class="iterationicons"
+                            *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
+                            photo_size_select_actual</mat-icon>
+                          <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4'">play_circle_outline
+                          </mat-icon>
+                          <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type =='application/pdf'"
+                            aria-hidden="true"></i>
+                        </div>
+                      </div>
+                      <div class="row ml-0 mr-0 h-40" class="fileSelDet">
+                        <div class="col-12 pr-0 fileNameCol">
+                          <span class="carouselText"
+                            *ngIf="material.filename?.length > 30">{{(material.filename| slice:0:20)+'...'}}</span>
+                          <span class="carouselText" *ngIf="material.filename?.length < 30">{{material.filename}}</span>
+                        </div>
+                      </div>
+                    </mat-card>
+                  </div>
+                </ng-template>
+              </owl-carousel-o>
+              <!-- <div id="demo" class="carousel" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
               <div class="row ml-0 mr-0">
@@ -188,8 +158,7 @@
               </div>
             </div>
           </div>
-        
-          <!-- Left and right controls -->
+
           <a class="carousel-control-prev" href="#demo" data-slide="prev">
             <span class="carousel-control-prev-icon"></span>
           </a>
@@ -197,30 +166,64 @@
             <span class="carousel-control-next-icon"></span>
           </a>
         
-        </div>
-      </div>
-    </div>
-<!----------------------------------------------Your work---------------------------------->
-    <div class="row ml-0 mr-0 mt-3">
-      <div class="col-12 text-left pl-0 pr-0" *ngIf="project.projectActivity.submit_status == 'notsubmitted'
+        </div> -->
+            </div>
+          </div>
+          <!----------------------------------------------Your work---------------------------------->
+          <div class="row ml-0 mr-0 mt-3 work-border">
+            <div class="col-12 text-left pl-0 pr-0" *ngIf="project.projectActivity.submit_status == 'notsubmitted'
       || project.projectActivity.grade_status !== 'Evaluated'">
               <div class="f_size_16 f_wt_600 align-center work">Your work</div>
               <div class="col-12 pl-0 pr-0">
                 <div class="row ml-0 mr-0 mt-3" *ngIf="project.projectActivity.videodetails.length > 0">
                   <div class="col-12 text-left pl-0 pr-0">
-                    <div id="demo" class="carousel" data-ride="carousel">
-                      <!-- The slideshow -->
+
+                    <owl-carousel-o [options]="trendingCategorires"
+                      [ngClass]="project.projectActivity.videodetails >= 4 ? 'arrow': 'widthClass arrow' ">
+                      <ng-template class="row ml-0 mr-0" carouselSlide
+                        *ngFor="let material of project.projectActivity.videodetails; let i = index">
+                        <div
+                          [ngClass]="project.projectActivity.videodetails.length >= 2 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
+                          <mat-card class="p-0 iterationCard"
+                            (click)="projectPreviewDoc(projectPreviewDialog,videoDialog, material, 'files')">
+                            <div class="row ml-0 mr-0 carouselRow1">
+                              <div class="col-12 m-auto">
+                                <mat-icon class="iterationicons"
+                                  *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
+                                  photo_size_select_actual</mat-icon>
+                                <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4'">
+                                  play_circle_outline</mat-icon>
+                                <i class="fa fa-file-pdf-o iterationicons"
+                                  *ngIf="material.doc_type == 'application/pdf'" aria-hidden="true"></i>
+                              </div>
+                            </div>
+                            <div class="row ml-0 mr-0 h-40" class="fileSelDet">
+                              <div class="col-12 pr-0 fileNameCol">
+                                <span class="carouselText"
+                                  *ngIf="material.name?.length > 30">{{(material.name| slice:0:20)+'...'}}</span>
+                                <span class="carouselText" *ngIf="material.name?.length < 30">{{material.name}}</span>
+                              </div>
+                            </div>
+                            <mat-icon class="deleteIcon float-right del-pos"
+                              *ngIf="project.projectActivity.submitAction !== 'submit'"
+                              (click)="learnerSumbitdeleteVideo(project, material, 'delete')">delete</mat-icon>
+                          </mat-card>
+                        </div>
+                      </ng-template>
+                    </owl-carousel-o>
+
+                    <!-- <div id="demo" class="carousel" data-ride="carousel">
                       <div class="carousel-inner">
                         <div class="carousel-item active">
                           <div class="row ml-0 mr-0">
                             <div class="col-4 text-left pr-0" *ngFor="let videoData of project.projectActivity.videodetails">
-                          <mat-card class="materialCard p-0 mr-2">
+                          <mat-card class="materialCards p-0 mr-2">
                             <div class="row ml-0 mr-0 matCardIconRow">
                               <div class="col-12 pl-0 pr-0">
-                                <i class="fa fa-file-pdf-o icons" *ngIf="videoData.doc_type == 'application/pdf'" aria-hidden="true"></i>
-                                <mat-icon class="icons" *ngIf="videoData.doc_type =='image/jpeg'
+                                <i class="fa fa-file-pdf-o icons-1" *ngIf="videoData.doc_type == 'application/pdf'" aria-hidden="true"></i>
+                                <mat-icon class="icons-1" *ngIf="videoData.doc_type =='image/jpeg'
                                      || videoData.doc_type == 'image/png' || videoData.doc_type == 'image/jpg'">photo_size_select_actual</mat-icon>
-                                <mat-icon class="icons" *ngIf="videoData.doc_type =='video/mp4'">play_circle_outline</mat-icon> 
+                                <mat-icon class="icons-1" *ngIf="videoData.doc_type =='video/mp4'">play_circle_outline</mat-icon> 
                               </div>
                             </div>
                             <div class="row ml-0 mr-0 h-40" class="fileSelDet">
@@ -228,26 +231,29 @@
                                 <span class="fileColor">{{videoData.name}}</span><br>
                               </div>
                             </div>
-                          </mat-card>
+
+                            <mat-icon class="deleteIcon float-right del-pos"
+                              *ngIf="project.projectActivity.submitAction !== 'submit'"
+                              (click)="learnerSumbitdeleteVideo(project, item, 'delete')">delete</mat-icon>
+                            </mat-card>
                           </div>
                           </div>
                         </div>
                       </div>
                     
-                      <!-- Left and right controls -->
                       <a class="carousel-control-prev" href="#demo" data-slide="prev">
                         <span class="carousel-control-prev-icon"></span>
                       </a>
                       <a class="carousel-control-next" href="#demo" data-slide="next">
                         <span class="carousel-control-next-icon"></span>
                       </a>
-                    </div>
+                    </div> -->
                   </div>
-                </div> 
-              
-              <div class="row ml-0 mr-0 mt-2">
-              <div class="col-12 text-center"> 
-                <!-- <input type="file" style="display: none"
+                </div>
+
+                <div class="row ml-0 mr-0 mt-2">
+                  <div class="col-12 text-center">
+                    <!-- <input type="file" style="display: none"
                 accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" #uploadFile
                 [(ngModel)]="fileName" (change)="uploadDoc($event, project, 'upload')" />
               <button mat-stroked-button class="upload-btn" (click)="uploadDocs()"
@@ -257,50 +263,82 @@
                 Add your files
               </button> -->
 
-              <input type="file" accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf"
-              style="display: none" #uploadFile
-               (change)="uploadDoc($event, project, 'upload')" />
-          <button mat-stroked-button class="uploadBtn mt-3 w-100"  
-          *ngIf="project.projectActivity.submitAction !== 'submit'" 
-          [disabled]="project.enableSubmit == false && project.submitType == false"
-          (click)="uploadDocs()">
-            <mat-icon class="add-icon">add</mat-icon> Add your files</button>
+                    <input class="input-hide" type="file"
+                      accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" #uploadFile
+                      [(ngModel)]="fileName" (change)="uploadDoc($event, project, 'upload')" />
+                    <button mat-stroked-button class="uploadBtn mt-3 w-100"
+                      *ngIf="project.projectActivity.submitAction !== 'submit'"
+                      [disabled]="project.enableSubmit == false" (click)="uploadDocs($event)">
+                      <mat-icon class="add-icon">add</mat-icon> Add your files
+                    </button>
 
-                        <button mat-stroked-button [disabled]="project.enableSubmit == false  && project.submitType == false" class="submit-btn"
-                          (click)="learnerSumbitdeleteVideo(project, '' ,'submit')"
-                          *ngIf="project.projectActivity.submit_status == 'notsubmitted' && project.projectActivity.videodetails.length > 0">
-                          Submit
-                        </button>
-                        <button mat-stroked-button [disabled]="project.enableSubmit == false  && project.submitType == false"
-                          *ngIf="project.projectActivity.videodetails.length == 0" class="submit-btn"> Submit </button>
-                        <button mat-stroked-button class="submitted-btn" [disabled]="true"
-                          *ngIf="project.projectActivity.submitAction == 'submit'">
-                          Submitted
-                        </button><br><br>
-                        <p *ngIf="project.projectActivity.submit_status == 'notsubmitted'">Submitted files cannot be
-                          edited</p>
-                        <p *ngIf="project.projectActivity.submitAction == 'submit'">Submitted on:
-                          {{project.submittedOn}}</p>
+                    <button mat-stroked-button class="submit-btn"
+                      (click)="learnerSumbitdeleteVideo(project, '' ,'submit')"
+                      *ngIf="project.projectActivity.submit_status == 'notsubmitted' && project.projectActivity.videodetails.length > 0">
+                      Submit
+                    </button>
+                    <button mat-stroked-button
+                      *ngIf="project.projectActivity.submit_status == 'notsubmitted' && project.projectActivity.videodetails.length == 0 || project.enableSubmit == false"
+                      class="submit-btn"> Submit </button>
+                    <button mat-stroked-button class="submitted-btn" [disabled]="true"
+                      *ngIf="project.projectActivity.submitAction == 'submit'">
+                      Submitted
+                    </button><br><br>
+                    <p *ngIf="project.projectActivity.submit_status == 'notsubmitted'">Submitted files cannot be
+                      edited</p>
+                    <p *ngIf="project.projectActivity.submitAction == 'submit'">Submitted on:
+                      {{project.submittedOn}}</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-      </div>
 
-    </div>
+        </div>
 
-    <!-----------------------------------Your files----------------------------------------->
-    <div *ngIf="isCollapsed && projectId === i && project.projectActivity.grade_status == 'Evaluated'">
-    <div class="row ml-0 mr-0">
-      <div class="col-sm-12 text-left">
-        <span>Your files ({{project.projectActivity.videodetails.length}})</span>
-      </div>
-    </div>
+        <!-----------------------------------Your files----------------------------------------->
+        <div *ngIf="isCollapsed && projectId === i && project.projectActivity.grade_status == 'Evaluated'">
+          <div class="row ml-0 mr-0">
+            <div class="col-sm-12 text-left">
+              <span>Your files ({{project.projectActivity.videodetails.length}})</span>
+            </div>
+          </div>
 
-    <div class="row ml-0 mr-0 mt-3">
-      <div class="col-12 text-left pl-0 pr-0">
-        <div id="demo" class="carousel" data-ride="carousel">
-          <!-- The slideshow -->
+          <div class="row ml-0 mr-0 mt-3">
+            <div class="col-12 text-left pl-0 pr-0">
+
+              <owl-carousel-o [options]="trendingCategorires"
+                [ngClass]="project.projectActivity.videodetails >= 4 ? 'arrow': 'widthClass arrow' ">
+                <ng-template class="row ml-0 mr-0" carouselSlide
+                  *ngFor="let material of project.projectActivity.videodetails; let i = index">
+                  <div
+                    [ngClass]="project.projectActivity.videodetails.length >= 2 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
+                    <mat-card class="p-0 iterationCard"
+                      (click)="projectPreviewDoc(projectPreviewDialog,videoDialog, material, 'files')">
+                      <div class="row ml-0 mr-0 carouselRow1">
+                        <div class="col-12 m-auto">
+                          <mat-icon class="iterationicons"
+                            *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
+                            photo_size_select_actual</mat-icon>
+                          <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4'">play_circle_outline
+                          </mat-icon>
+                          <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type == 'application/pdf'"
+                            aria-hidden="true"></i>
+                        </div>
+                      </div>
+                      <div class="row ml-0 mr-0 h-40" class="fileSelDet">
+                        <div class="col-12 pr-0 fileNameCol">
+                          <span class="carouselText"
+                            *ngIf="material.filename?.length > 30">{{(material.filename| slice:0:20)+'...'}}</span>
+                          <span class="carouselText" *ngIf="material.filename?.length < 30">{{material.filename}}</span>
+                        </div>
+                      </div>
+                    </mat-card>
+                  </div>
+                </ng-template>
+              </owl-carousel-o>
+
+              <!-- <div id="demo" class="carousel" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
               <div class="row ml-0 mr-0">
@@ -325,7 +363,6 @@
             </div>
           </div>
         
-          <!-- Left and right controls -->
           <a class="carousel-control-prev" href="#demo" data-slide="prev">
             <span class="carousel-control-prev-icon"></span>
           </a>
@@ -333,27 +370,27 @@
             <span class="carousel-control-next-icon"></span>
           </a>
         
+        </div> -->
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
-  </div>
-
-  </div>
-  </div>
-  <ng-template #learnerDialog>
-    <div>
+    <ng-template #learnerDialog>
+      <div>
         <span class="grpName"><strong>{{groupName}} ({{groupDetails.length}})</strong></span>
         <mat-icon class="closeDialog" (click)="closedialogbox()">close</mat-icon>
-    </div>
-    <div class="learner">
-    <ul class="list-group" *ngFor="let learner of groupDetails">
-      <li class="list-group-item">{{learner.name}}</li>
-    </ul>
-  </div>
-  </ng-template>
+      </div>
+      <div class="learner">
+        <ul class="list-group" *ngFor="let learner of groupDetails">
+          <li class="list-group-item">{{learner.name}}</li>
+        </ul>
+      </div>
+    </ng-template>
   </div>
 
-  <div class="row mr-0 ml-0" *ngIf="projectDetails?.length < 1">
+  <div class="row mr-0 ml-0" *ngIf="projectDetails?.length == 0">
     <div class="col-12 m-auto text-center">
       <span class="errormsg">
         <img class="assignImg" alt="" src="assets/002-project-management.svg">
@@ -365,60 +402,43 @@
   <ng-template #projectPreviewDialog>
     <div>
       <div class="col-12">
-      <button mat-mini-fab class="download-button">
-        <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
-      </button>
-      <button mat-mini-fab class="closeBtn">
-        <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
-      </button>
-    </div>
+        <button mat-mini-fab class="download-button">
+          <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
+        </button>
+        <button mat-mini-fab class="closeBtn">
+          <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
+        </button>
+      </div>
     </div>
     <div *ngIf="previewDoc">
       <app-pdfreader [url]="previewDoc"></app-pdfreader>
     </div>
   </ng-template>
 
+  <!-- <ng-template #projectPreviewDialog>
+    <div>
+      <div class="col-12">
+        <button mat-mini-fab class="closeBtn">
+          <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div *ngIf="previewDoc">
+      <app-pdfreader [url]="previewDoc"></app-pdfreader>
+    </div>
+  </ng-template> -->
+
   <ng-template #videoDialog>
-    <!-- <div class="row ml-0 mr-0 previewVideoScreen" *ngIf="videoPerview">
-      <div class="col-12 pl-0 pr-0"> -->
-        <div class="row ml-0 mr-0">
-          <div class="col-12 text-left mt-2">
-            <span class="previewTxt">Preview Video</span>
-            </div>
-            </div>
-            <div class="row ml-0 mr-0 mt-2 videoPlay" *ngIf="preview">
-              <div class="col-12 pl-0 pr-0">
-            <app-video-player  [url]="videoSource"></app-video-player>
-            </div>
-            </div>
-            <div class="row ml-0 mr-0 p-3" *ngIf="!preview">
-              <div class="col-12 previewCol">
-                <mat-card class="previewCard m-auto p-0">
-                  <div class="row ml-0 mr-0">
-                    <div class="col-12 pl-0 pr-0">
-                      <video width="100%" controls class="videoCell">
-                        <source src="https://www.youtube.com/watch?v=VHENoFDoLds">
-                        Your browser does not support HTML video.
-                      </video>
-                    </div>
-                  </div>
-                  <div class="row ml-0 mr-0">
-                    <div class="col-12 text-left">
-                      <p class="textSize mt-3">file name x151</p>
-                      <p class="textSize"><span class="font-weight-bold">MP4 . </span>&nbsp; Recorded on: Sep 24, 2020</p>
-                    </div>
-                  </div>
-                </mat-card>
-              </div>
-            </div>
-            <div class="row ml-0 mr-0 mt-2" *ngIf="!preview">
-              <div class="col-12">
-                <button mat-stroked-button class="cancelBtn mr-4" (click)="videoPerview = !videoPerview">Cancel</button>
-                <button mat-stroked-button class="saveBtn" (click)="videoPerview = !videoPerview">Save</button>
-              </div>
-            </div>
-      <!-- </div>
-    </div> -->
+    <div class="row">
+      <div class="col-12">
+        <button mat-mini-fab class="close-buttonVideo">
+          <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <app-video-player [url]="videoSource"></app-video-player>
+      </div>
+    </div>
   </ng-template>
-  
-  

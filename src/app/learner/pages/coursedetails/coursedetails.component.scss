@@ -494,7 +494,7 @@ li {
 // }
 .playerWrapper {
     position: relative;
-    padding-bottom: 45%;
+    padding-bottom: 55%;
     padding-top: 35px;
     height: 0;
     overflow: hidden;
@@ -539,7 +539,7 @@ iframe.fullScreen {
     // margin-top: 5px;
 }
 :host ::ng-deep .mat-tab-label-container {
-    margin-left: 3% !important;
+    margin-left: 2% !important;
 }
 
 // :host ::ng-deep.mat-tab-body{
@@ -1586,6 +1586,7 @@ iframe.fullScreen {
 ::ng-deep #content {
     height: 98vh !important;
 }
+
 @keyframes fadeInUp {
     0% {
         opacity: 0;
