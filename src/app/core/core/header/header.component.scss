@@ -318,3 +318,18 @@
     padding: 0;
     color: rgba(0, 0, 0, 0.7);
 }
+ ::ng-deep .swal2-styled.swal2-confirm {
+    border: 1px solid #C02222 !important;
+    background-color: #ffffff !important;
+    color: #333333 !important;
+
+}
+::ng-deep .swal2-styled.swal2-confirm:hover {
+    // border: 1px solid #C02222 !important;
+    background-color: #C02222 !important;
+    color: #ffffff !important;
+
+}
+::ng-deep .swal2-styled.swal2-cancel {
+    background-color: #C02222 !important;
+}

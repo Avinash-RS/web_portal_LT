@@ -193,7 +193,7 @@
                         </div>
                         <div class="row">
                           <div class="col-12">
-                            <span class="ml-5">
+                            <span class="m-l-4">
                               {{file?.score_mark}}
                             </span>
                           </div>
@@ -263,16 +263,19 @@
       <mat-card class="performCard mb-3" (click)="performdetailPage(i+1, perform);performdetailPageView = true" *ngFor="let perform of performDetails; let i = index">
         <div class="row ml-0 mr-0">
           <div class="col-6 pl-0">
-            <p class="subTittle">{{i+1}}. {{perform.performActivity.module_id}}</p>
+            <p class="subTittle"><img class="perfimg" src="assets/Perform1.svg" alt="perform">&nbsp; {{perform.performActivity.module_id}}</p>
             <span>{{perform.performActivity.topic_id}}
             </span>
           </div>
           <div class="col-6 pl-0 pr-0">
             <div class="row mr-0 ml-0 mb-4">
               <div class="col-12 pl-0 pr-0 text-right">
-                <span class="textGrayColor1" *ngIf="perform.performActivity.submit_status == 'notsubmitted'">Yet to Submit</span>
-                <span class="submitstatus1" *ngIf=" perform.performActivity.submit_status == 'submitted'">Submitted</span>
-                <span class="gradeStatus1" *ngIf="perform.performActivity.submit_status == 'graded'">Graded</span>
+                <span class="textGrayColor1" *ngIf="perform.performActivity.submit_status == 'notsubmitted'"><span
+                  class="dot"></span>Yet to Submit</span>
+                <span class="submitstatus1" *ngIf=" perform.performActivity.submit_status == 'submitted'">
+                  <span class="submitdot"></span>Submitted</span>
+                <span class="gradeStatus1" *ngIf="perform.performActivity.submit_status == 'graded'">
+                  <span class="gradedot"></span>Graded</span>
               </div>
             </div>
             <div class="row mr-0 ml-0 mb-3">
@@ -283,11 +286,11 @@
             <div class="row mr-0 ml-0 mt-4">
               <div class="col-6 mr-0 pl-0 pr-0 text-left">
                 <span class="font-weight-bold">Start date:</span><br />
-                <span class="textGrayColor1">{{perform.performActivity.activitystartdate | date}}</span>
+                <span class="textGrayColor1"> {{perform.performActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}</span>
               </div>
               <div class="col-6 mr-0 pl-0 pr-0 text-left">
                 <span class="font-weight-bold ml-2">End date:</span><br />
-                <span class="textGrayColor1 float-right">{{perform.performActivity.activityenddate | date}}</span>
+                <span class="textGrayColor1 float-right"> {{perform.performActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</span>
               </div>
             </div>
           </div>
@@ -299,7 +302,8 @@
         <div class="box-0-1" *ngFor="let perform of performDetails; let i = index">
           <div class="row">
             <div class="col-10">
-              <div class="f_size_16 f_wt_600">{{i+1}}. {{perform.performActivity.module_id}}</div>
+              <div class="f_size_16 f_wt_600"><img class="perfimg" src="assets/Perform1.svg" alt="perform"> 
+                <span class="ml-13">{{perform.performActivity.module_id}}</span></div>
               <div class="t-l">{{perform.performActivity.topic_id}}</div>
               <div class="t-l">Activity description : {{perform.performActivity.activityname}}</div>
             </div>
@@ -375,8 +379,7 @@
                   <ng-template class="row ml-0 mr-0" carouselSlide
                     *ngFor="let material of perform.performActivity.materialDetails; let i = index">
                     <div [ngClass]="perform.performActivity.materialDetails.length >= 4 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
-                      <mat-card class="p-0 carouselCard" (mouseover)="hover = true; mouseover(i)"
-                        (mouseleave)="hover = false">
+                      <mat-card class="p-0 carouselCard" (click)="playVideo(projectPreviewDialog, videoDialog, material, material.doc_type)">
                         <!--  -->
                         <div class="row ml-0 mr-0 carouselRow1">
                           <div class="col-12 m-auto">
@@ -389,19 +392,19 @@
                               aria-hidden="true"></i>
                           </div>
                         </div>
-                        <div (mouseleave)="hover = false"
-                          [ngClass]="hover && mouseOverIndex == i ? 'row ml-0 mr-0 carouselRowHover' : 'row ml-0 mr-0 carouselRow'">
+                        <div class="row ml-0 mr-0 carouselRow">
                           <div class="col-12 text-center mt-2 mb-2 pl-0 pr-0">
-                            <span class="carouselText" *ngIf="material.filename?.length > 19">{{(material.filename| slice:0:20)+'...'}}</span>
+                            <span class="carouselText" *ngIf="material.filename?.length > 19"
+                              matTooltip="{{material.filename}}" matTooltipClass="custom-mat-tooltip">{{(material.filename| slice:0:20)+'...'}}</span>
                             <span class="carouselText" *ngIf="material.filename?.length < 19">{{material.filename}}</span>
                             <br>
-                            <div class="row ml-0 mr-0" *ngIf="hover && mouseOverIndex == i">
+                            <!-- <div class="row ml-0 mr-0" *ngIf="hover && mouseOverIndex == i">
                               <div class="col-12 pl-0 pr-0">
-                                <!-- <div class="row ml-0 mr-0">
+                                <div class="row ml-0 mr-0">
                                   <div class="col-12 text-left pl-1">
                                     <p class="carouselText">Duration:</p>
                                   </div>
-                                </div> -->
+                                </div>
                                 <div class="row ml-0 mr-0 mt-2 playActions">
                                   <div class="col-5 text-left pr-0 colAction"
                                     (click)="playVideo(projectPreviewDialog, videoDialog, material, material.doc_type)">
@@ -416,15 +419,15 @@
                                     <span class="text-white actionBtn"
                                       *ngIf="material.doc_type == 'image/jpeg' || material.doc_type == 'application/pdf'">View</span>
                                   </div>
-                                  <!-- <div class="col-7 text-center pr-0 colAction">
+                                  <div class="col-7 text-center pr-0 colAction">
                                     <a [href]="material.path" [download]="material.filename"><i
                                         class="fa fa-download text-white position-absolute downloadBtn"
                                         aria-hidden="true"></i>
                                       <span class="text-white actionBtn1">Download</span></a>
-                                  </div> -->
+                                  </div>
                                 </div>
                               </div>
-                            </div>
+                            </div> -->
                           </div>
                         </div>
                       </mat-card>
@@ -470,7 +473,7 @@
                     <div class="align-center" *ngIf="itrdata.grade_status !== 'Evaluated'">
                       <div class="videoPreview ml-auto mr-auto mb-3" *ngFor="let videoName of itrdata.videodetails">
                         <mat-icon class="videoPlay float-left">play_circle_outline</mat-icon>
-                        <span>{{(videoName.name| slice:0:18)+'...'}}</span>
+                        <span class="videoName"  matTooltip="{{videoName.name}}" matTooltipClass="custom-mat-tooltip">{{(videoName.name| slice:0:18)+'...'}}</span>
                         <mat-icon class="deleteBtn float-right" *ngIf="itrdata.submit_status == 'notsubmitted'"
                           (click)="submitDeleteVideo(videoName, itrdata, perform.performActivity , submitType = 'delete')">
                           delete</mat-icon>
@@ -648,7 +651,7 @@
               && project.projectActivity.grade_status == 'Not Evaluated'"> <span class="submitdot"></span>
                     Submitted</span>
 
-                  <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated'"> <span class="gradedot"></span>
+                  <span class="f_wt_600 graded" *ngIf="project.projectActivity.grade_status == 'Evaluated'"> <span class="gradedot"></span>
                     Graded</span>
                 </div>
               </div>
@@ -660,13 +663,21 @@
               </div>
 
               <div class="row">
-                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
                   <div class="t-l-1">Activity Description: {{project.projectActivity.activityname}}</div>
                 </div>
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 text-right">
+                <!-- <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 text-right">
                   <div class="m-r-40">Start date :<span class="margin-30"></span>End date :</div>
-                  <div class="m-r-2 f_wt_600">{{project.activityStartDate}}
-                    <span class="margin-21 f_wt_600"></span>{{project.activityEndDate}}</div>
+                  <div class="m-r-2 f_wt_600">
+                    {{project.projectActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}
+                    <span class="margin-21 f_wt_600"></span> {{project.projectActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</div>
+                </div> -->
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 text-right">
+                <div class="m-r-74">Start date :<span class="endDateTxt"></span>End date :</div>
+                <div class="m-r-47 f_wt_600">
+                  {{project.projectActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}
+                  <span class="EndDate f_wt_600"></span>
+                  {{project.projectActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</div>
                 </div>
               </div>
               <!-----------------------------Materials for activity--------------------->
@@ -681,12 +692,11 @@
                     </h3>
             <!--------------------------------New carousel------------------------>
                     <owl-carousel-o [options]="trendingCategorires" *ngIf="project.projectActivity.materialDetails && project.projectActivity.materialDetails.length > 0"
-                    [ngClass]="project.projectActivity.materialDetails.length >= 4 ? 'arrow': 'widthClass arrow' ">
+                    [ngClass]="project.projectActivity.materialDetails.length >= 4 ? 'hoverCls arrow': 'hoverCls widthClass arrow' ">
                     <ng-template class="row ml-0 mr-0" carouselSlide
                     *ngFor="let material of project.projectActivity.materialDetails; let i = index">
                       <div [ngClass]="project.projectActivity.materialDetails.length >= 4 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
-                        <mat-card class="p-0 carouselCard" (mouseover)="hover = true; mouseover(i)"
-                          (mouseleave)="hover = false">
+                        <mat-card class="p-0 carouselCard" (click)="projectPreviewDoc(projectPreviewDialog, videoDialog, material, 'material')">
                           <!--  -->
                           <div class="row ml-0 mr-0 carouselRow1">
                             <div class="col-12 m-auto">
@@ -700,20 +710,20 @@
                                 aria-hidden="true"></i>
                             </div>
                           </div>
-                          <div (mouseleave)="hover = false"
-                            [ngClass]="hover && mouseOverIndex == i ? 'row ml-0 mr-0 carouselRowHover' : 'row ml-0 mr-0 carouselRow'">
+                          <div class="row ml-0 mr-0 carouselRow">
                             <div class="col-12 text-center mt-2 mb-2 pl-0 pr-0">
                               <span class="carouselText" *ngIf="material.filename?.length > 19"
                                 matTooltip="{{material.filename}}" matTooltipClass="custom-mat-tooltip">{{(material.filename| slice:0:20)+'...'}}</span>
                               <span class="carouselText" *ngIf="material.filename?.length < 19">{{material.filename}}</span>
-                              <br>
+                              </div>
+                              <!-- <br>
                               <div class="row ml-0 mr-0" *ngIf="hover && mouseOverIndex == i">
                                 <div class="col-12 pl-0 pr-0">
-                                  <!-- <div class="row ml-0 mr-0">
+                                  <div class="row ml-0 mr-0">
                                     <div class="col-12 text-left pl-1">
                                       <p class="carouselText">Duration:</p>
                                     </div>
-                                  </div> -->
+                                  </div>
                                   <div class="row ml-0 mr-0 mt-2 playActions">
                                     <div class="col-5 text-left pr-0 colAction"
                                     (click)="projectPreviewDoc(projectPreviewDialog, videoDialog, material, 'material')">
@@ -731,16 +741,16 @@
                                         || material.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
                                        material.doc_type == 'image/jpg' ||material.doc_type == 'image/png'">View</span>
                                     </div>
-                                    <!-- <div class="col-7 text-center pr-0 colAction"
+                                    <div class="col-7 text-center pr-0 colAction"
                                     (click)="downloadDoc(material, 'material')">
                                     <i class="fa fa-download text-white position-absolute downloadBtn"
                                       aria-hidden="true"></i>
                                     <span class="text-white actionBtn1">Download</span>
-                                  </div> -->
+                                  </div>
                                   </div>
                                 </div>
-                              </div>
-                            </div>
+                              </div> -->
+                            <!-- </div> -->
                           </div>
                         </mat-card>
                       </div>
@@ -1064,7 +1074,7 @@
 
   </span>
 </ng-template>
-<div class="footer">
+<div class="footer" style="position: fixed;">
   <span class="powered">
       <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
   </span>
