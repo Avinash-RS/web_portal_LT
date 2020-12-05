@@ -10,7 +10,8 @@
 </div>
 
 <!------------------------------------Table------------------------------------->
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tableContainer" *ngIf="notifications?.length">
+<div class="tableContainer">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 " *ngIf="notifications?.length">
 
   <ng-container matColumnDef="notificationName">
     <th class="w-55" mat-header-cell *matHeaderCellDef><strong class="font">Notifications</strong></th>
@@ -47,10 +48,11 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<div *ngIf="notifications?.length > 0">
+<div *ngIf="notifications?.length > 0" >
 <mat-paginator class="pagination" #paginator [length]="totalCount" [pageSize]="limit" (page)="next($event)"
   showFirstLastButtons>
 </mat-paginator>
+</div>
 </div>
 
 <div class="nonotifictaion" *ngIf="!notifications?.length">
