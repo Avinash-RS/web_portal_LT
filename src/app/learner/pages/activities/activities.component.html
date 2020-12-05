@@ -802,7 +802,7 @@
                           Submit
                         </button>
                         <button mat-stroked-button class="submitted-btn mt-2"
-                          *ngIf="project.projectActivity.submit_status == 'notsubmitted' && project.projectActivity.videodetails.length == 0 || project.enableSubmit == false"> Submit </button>
+                          *ngIf="project.projectActivity.submit_status == 'notsubmitted' && (project.projectActivity.videodetails.length == 0 || project.enableSubmit == false)"> Submit </button>
                           <button mat-stroked-button class="submitted-btn" [disabled]="true"
                           *ngIf="project.projectActivity.submitAction == 'submit'">
                           Submitted
