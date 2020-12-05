@@ -450,7 +450,10 @@
     background-color: $profile-t-grey;
     text-align: right;
     border-top: 2px solid $profile-p-grey;
-    margin-top: 20px;
+    @media only screen and (max-width: 767px) {
+        position: relative;
+        margin-top: 20px;
+    }
 }
 
 // Mobile

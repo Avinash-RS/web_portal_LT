@@ -1973,14 +1973,17 @@ hr {
   border-radius: 0px !important;
 }
 
-:host ::ng-deep .first-level {
+:host ::ng-deep.first-level {
   width: 100%;
   left: auto !important;
   right: 0 !important;
-  top: 98%;
+  top: 98% !important;
   min-width: inherit;
   padding-top: 9px !important;
   // display: block !important;
+  transform: initial !important;
+  &.multi-level {
+  }
   .mat-badge {
     top: 0;
     left: 0 !important;
