@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
@@ -16,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ProjectMobileComponent implements OnInit {
 
   @ViewChild('uploadFile') uploadFile;
+  @Input() projectDetailPageData: any;
   userDetail: any;
   checkDetails: any;
   courseid: any;
@@ -26,12 +27,46 @@ export class ProjectMobileComponent implements OnInit {
   selectfile = [];
   showSubmittedon = false;
   fileName: any;
-  groupDetails: any;
+  groupDetails = [];
   groupName: any;
   previewDoc: any;
   videoSource: any;
   selectedName = 'Project';
   selectedTabIndex: number;
+
+  indexNumber: number;
+  projectActivityData: any;
+  trendingCategorires: any = {
+    loop: false, // dont make it true
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    autoHeight: true,
+    navSpeed: 900,
+    navText: ['<i class=\'fa fa-chevron-left\'></i>', '<i class=\'fa fa-chevron-right\'></i>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 3,
+        autoHeight: true,
+      },
+      940: {
+        items: 3,
+        autoHeight: true,
+      },
+      1200: {
+        items: 4,
+        autoHeight: true,
+      }
+    },
+    nav: true
+  };
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
@@ -47,7 +82,34 @@ export class ProjectMobileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getprojectActivityData();
+    this.projectDetails = this.projectDetailPageData;
+    // this.projectDetails = [];
+    this.projectDetails.forEach(element => {
+      this.groupDetails = element.projectActivity.groupDetails;
+      element.showLearnerList = false;
+      // element.isCollapsed = false;
+      // Batch date
+      const batchEndDate = new Date(element.projectActivity.batchenddate);
+      element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:MM');
+      if (moment().format('DD-MM-YYYY HH:MM') <= element.batchEndDate) {
+        element.submitType = true;
+      } else {
+        element.submitType = false;
+      }
+      // Activity Dates
+      const startDate = new Date(element.projectActivity.activitystartdate);
+      element.activityStartDate = moment(startDate).format('ll');
+      element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
+      const endDate = new Date(element.projectActivity.activityenddate);
+      element.activityEndDate = moment(endDate).format('ll');
+      const submitDate = new Date(element.projectActivity.submitted_on);
+      element.submittedOn = moment(submitDate).format('ll');
+      if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
+        element.enableSubmit = false;
+      } else {
+        element.enableSubmit = true;
+      }
+    });
   }
   emiteData() {
     if (this.selectedName === 'project') {
@@ -71,7 +133,8 @@ export class ProjectMobileComponent implements OnInit {
     }
     this.learnerUploadVideo(project, submitAction);
   }
-  uploadDocs() {
+  uploadDocs(event) {
+    event.stopPropagation();
     this.uploadFile.nativeElement.click();
   }
 

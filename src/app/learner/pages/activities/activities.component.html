@@ -1,7 +1,6 @@
 <app-performance-page-mobile [performDetailPageData]="perfornDetaildata" *ngIf="performdetailPageView"></app-performance-page-mobile>
 <app-header *ngIf="!performdetailPageView"></app-header>
-<app-project-mobile *ngIf="projectMobileResponsive"></app-project-mobile>
-<div class="con-1" *ngIf="!performdetailPageView && !projectMobileResponsive">
+<div class="con-1" *ngIf="!performdetailPageView">
   <!-- <span class="back" routerLink="/Learner/MyCourse" routerLinkActive="active"> < Back</span><br><br> -->
   <span class="redHover">
     <mat-icon class="material-icons f_size_15 backIc pointer" (click)="goToCourse()">arrow_back_ios
@@ -19,7 +18,7 @@
     </mat-icon>
     <span>Activities</span>
   </div>
-  <mat-tab-group  animationDuration="1000ms" (selectedTabChange)="tabChanged($event); projectTab($event); activeTab($event)"
+  <mat-tab-group  animationDuration="1000ms" (selectedTabChange)="tabChanged($event); activeTab($event)"
   [(selectedIndex)]="demo1TabIndex">
     <mat-tab label="Assignments">
       <mat-accordion class="example-headers-align" multi *ngIf="assignmentContent?.coursedetails.length > 0">
@@ -601,7 +600,8 @@
     </mat-tab>
 
     <mat-tab label="Project">
-      <ng-container *ngIf="projectDetails?.length > 0">
+      <app-project-mobile [projectDetailPageData]="projectDetaildata" *ngIf="projectMobileResponsive"></app-project-mobile>
+      <ng-container *ngIf="projectDetails?.length > 0 && !projectMobileResponsive">
         <div class="box-0-1" *ngFor="let project of projectDetails; let i = index">
           <div class="row">
             <div class="col text-right">
