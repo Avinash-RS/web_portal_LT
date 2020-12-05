@@ -1,5 +1,8 @@
 @import "../../../../assets/variable.scss";
 @media (max-width: 767px) {
+  .singleline-text {
+    white-space: nowrap;
+  }
   .projHead {
     color: $lxp-theme-green;
     position: absolute;
@@ -438,6 +441,15 @@
 
   .iterationCard{
     height: 8rem;
+  }
+
+  .close-buttonVideo {
+    background: $lxp-theme-green !important; // red color
+    float: right;
+    top: -8px;
+    position: relative;
+    height: 35px;
+    width: 35px;
   }
 }
 
