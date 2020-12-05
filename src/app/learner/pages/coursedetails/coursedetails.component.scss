@@ -494,7 +494,7 @@ li {
 // }
 .playerWrapper {
     position: relative;
-    padding-bottom: 45%;
+    padding-bottom: 55%;
     padding-top: 35px;
     height: 0;
     overflow: hidden;
@@ -1590,7 +1590,7 @@ iframe.fullScreen {
     height: 98vh !important;
 }
 
-@keyframes fadeInfadeInFake {
+@keyframes fadeInUp {
     0% {
         opacity: 0;
         transform: translate3d(0,0.2%,0);
