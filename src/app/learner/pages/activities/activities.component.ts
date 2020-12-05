@@ -460,7 +460,7 @@ export class ActivitiesComponent implements OnInit {
           // console.log(crrDate);
           const crrDate = new Date();
           const startDate = new Date(element.performActivity.activitystartdate);
-          const endDate = new Date(element.performActivity.activityenddate);
+          const endDate = new Date(element.performActivity.batchenddate);
 
             // tslint:disable-next-line:no-string-literal
           element['itrationStarted']  = this.dateDiff(startDate,
