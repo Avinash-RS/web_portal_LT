@@ -193,7 +193,7 @@
                         </div>
                         <div class="row">
                           <div class="col-12">
-                            <span class="ml-5">
+                            <span class="m-l-4">
                               {{file?.score_mark}}
                             </span>
                           </div>
@@ -263,16 +263,19 @@
       <mat-card class="performCard mb-3" (click)="performdetailPage(i+1, perform);performdetailPageView = true" *ngFor="let perform of performDetails; let i = index">
         <div class="row ml-0 mr-0">
           <div class="col-6 pl-0">
-            <p class="subTittle"><img class="perfimg" src="assets/Perform1.svg" alt="perform"> {{perform.performActivity.module_id}}</p>
+            <p class="subTittle"><img class="perfimg" src="assets/Perform1.svg" alt="perform">&nbsp; {{perform.performActivity.module_id}}</p>
             <span>{{perform.performActivity.topic_id}}
             </span>
           </div>
           <div class="col-6 pl-0 pr-0">
             <div class="row mr-0 ml-0 mb-4">
               <div class="col-12 pl-0 pr-0 text-right">
-                <span class="textGrayColor1" *ngIf="perform.performActivity.submit_status == 'notsubmitted'">Yet to Submit</span>
-                <span class="submitstatus1" *ngIf=" perform.performActivity.submit_status == 'submitted'">Submitted</span>
-                <span class="gradeStatus1" *ngIf="perform.performActivity.submit_status == 'graded'">Graded</span>
+                <span class="textGrayColor1" *ngIf="perform.performActivity.submit_status == 'notsubmitted'"><span
+                  class="dot"></span>Yet to Submit</span>
+                <span class="submitstatus1" *ngIf=" perform.performActivity.submit_status == 'submitted'">
+                  <span class="submitdot"></span>Submitted</span>
+                <span class="gradeStatus1" *ngIf="perform.performActivity.submit_status == 'graded'">
+                  <span class="gradedot"></span>Graded</span>
               </div>
             </div>
             <div class="row mr-0 ml-0 mb-3">
@@ -283,11 +286,11 @@
             <div class="row mr-0 ml-0 mt-4">
               <div class="col-6 mr-0 pl-0 pr-0 text-left">
                 <span class="font-weight-bold">Start date:</span><br />
-                <span class="textGrayColor1">{{perform.performActivity.activitystartdate | date}}</span>
+                <span class="textGrayColor1"> {{perform.performActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}</span>
               </div>
               <div class="col-6 mr-0 pl-0 pr-0 text-left">
                 <span class="font-weight-bold ml-2">End date:</span><br />
-                <span class="textGrayColor1 float-right">{{perform.performActivity.activityenddate | date}}</span>
+                <span class="textGrayColor1 float-right"> {{perform.performActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</span>
               </div>
             </div>
           </div>

@@ -187,15 +187,22 @@ export class PerformancePageMobileComponent implements OnInit {
         this.performDetails = data.data.getperformActivityData.data;
         this.getPerformActivity(this.indexNumber, this.performDetails[this.indexNumber - 1].performActivity);
         this.performDetails.forEach((element) => {
-          const startDate = this.datePipe.transform(element.performActivity.activitystartdate, 'dd-MM-yyyy');
-          const endDate = this.datePipe.transform(element.performActivity.activityenddate, 'dd-MM-yyyy');
-          const batchendDate = this.datePipe.transform(element.performActivity.batchenddate, 'dd-MM-yyyy');
-          const crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
-          if (startDate <= crrDate && batchendDate >= crrDate) {
-            element.itrationStarted = true;
-          } else {
-            element.itrationStarted = false;
-          }
+          // const startDate = this.datePipe.transform(element.performActivity.activitystartdate, 'dd-MM-yyyy');
+          // const endDate = this.datePipe.transform(element.performActivity.activityenddate, 'dd-MM-yyyy');
+          // const batchendDate = this.datePipe.transform(element.performActivity.batchenddate, 'dd-MM-yyyy');
+          // const crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
+          // if (startDate <= crrDate && batchendDate >= crrDate) {
+          //   element.itrationStarted = true;
+          // } else {
+          //   element.itrationStarted = false;
+          // }
+          const crrDate = new Date();
+          const startDate = new Date(element.performActivity.activitystartdate);
+          const endDate = new Date(element.performActivity.batchenddate);
+
+            // tslint:disable-next-line:no-string-literal
+          element['itrationStarted']  = this.dateDiff(startDate,
+            endDate , crrDate);
         });
         const filterData = this.performDetails.filter((performData: any) => {
           return performData.performActivity.perform_id === this.performActivityData.perform_id;
@@ -205,6 +212,15 @@ export class PerformancePageMobileComponent implements OnInit {
         this.performDetails = [];
       }
     });
+  }
+  dateDiff(startDate, endDate, currentDate) {
+    const startDateDiff = startDate - currentDate;
+    const endDateDiff = endDate - currentDate;
+    if ((startDateDiff <= 0) && (endDateDiff >= 0)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   emiteData() {
