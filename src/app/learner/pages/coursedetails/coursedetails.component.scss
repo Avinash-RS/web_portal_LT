@@ -539,7 +539,7 @@ iframe.fullScreen {
     // margin-top: 5px;
 }
 :host ::ng-deep .mat-tab-label-container {
-    margin-left: 5% !important;
+    margin-left: 3% !important;
 }
 
 // :host ::ng-deep.mat-tab-body{
@@ -689,8 +689,12 @@ iframe.fullScreen {
 :host ::ng-deep.mat-tab-label-active {
     // color: $color-blank !important;
     opacity: 1 !important;
+    padding: 0 10px;
 }
-
+:host ::ng-deep.mat-tab-label {
+    padding: 0 10px;
+    min-width: auto;
+}
 :host /deep/ .mat-ink-bar {
     height: 2px !important;
     background-color: $lxp-theme-green !important;
@@ -1423,6 +1427,10 @@ iframe.fullScreen {
     justify-content: center;
 }
 
+.redBG {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #C02222;
+}
 // /* About the course tab */
 .drawerClsAboutCourse {
     margin-left: 2%;
