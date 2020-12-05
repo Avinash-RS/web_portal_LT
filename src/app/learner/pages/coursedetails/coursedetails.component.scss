@@ -498,6 +498,9 @@ li {
     padding-top: 35px;
     height: 0;
     overflow: hidden;
+    @media only screen and (max-width: 576px) {
+        padding-bottom: 60vh;
+    }
     .player {
         position: absolute;
         top:0;
