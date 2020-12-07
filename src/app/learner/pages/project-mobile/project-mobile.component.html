@@ -56,7 +56,7 @@
         </div><br>
 
         <div class="row">
-          <div class="col-5">
+          <div class="col-12">
             <span class="group">
               <button mat-mini-fab class="groupBtn">
                 <mat-icon class="grpIcon" (click)="learnerView(learnerDialog, project)">group</mat-icon>
@@ -65,25 +65,14 @@
                 (click)="learnerView(learnerDialog, project)">
                 {{project.projectActivity.groupname}} ({{project.projectActivity.groupDetails.length}})
               </span>
-              <!-- <span class="teamName" *ngIf="project.projectActivity.groupname.length > 14"
-              matTooltip="{{project.projectActivity.groupname}}" matTooltipClass="custom-mat-tooltip">
-              {{(project.projectActivity.groupname| slice:0:14)+'...'}} 
-            </span>&nbsp; -->
             </span>
           </div>
-          <div class="col-7 text-right">
-            <!-- <div class="m-r-13">Start date :<span class="margin-30"></span>End date :</div>
-          <div class="f_wt_600">
-            <span>{{project.activityStartDate}}</span>
-            <span class="m-r-5"></span>
-            <span>{{project.activityEndDate}}</span></div> -->
-
-            <div>Start date :<span class="margin-30"></span>End date :</div>
-            <div class="m-r-2 f_wt_600">{{project.activityStartDate}}
-              <span class="f_wt_600"></span>{{project.activityEndDate}}</div>
-          </div>
-        </div>
-
+        </div><br>
+            <div class="row">
+            <div class="m-l-16"><strong>Start date :</strong><span class="margin-30"></span><strong> End date : </strong></div>
+            <div class="m-l-16 f_wt_300"> {{project.projectActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}
+              <span class="f_wt_300 m-l-8"></span> {{project.projectActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</div>
+            </div><br>
         <div class="ml-16">
           <div class="row">
             <span>Activity description:</span>
