@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { CalendarEvent, CalendarView } from 'angular-calendar';
+import { CalendarEvent, CalendarView,CalendarMonthViewDay } from 'angular-calendar';
 import { isSameDay, isSameMonth } from 'date-fns';
 import * as moment from 'moment';
 import { Subject } from 'rxjs';
@@ -15,11 +15,12 @@ import { LearnerServicesService } from '../../services/learner-services.service'
   styleUrls: ['./learner-calendar.component.scss']
 })
 export class LearnerCalendarComponent implements OnInit {
-  start1 = new Date('2020-08-07T11:24:14.761Z');
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
   viewDate: Date = new Date();
   refresh: Subject<any> = new Subject();
+  selectedMonthViewDay: CalendarMonthViewDay;
+  selectedDays: any = [];
 
 
   events: CalendarEvent[];
@@ -115,7 +116,7 @@ export class LearnerCalendarComponent implements OnInit {
     });
   }
 
-  getLearnerActivity(selectedDate) {
+  getLearnerActivity(selectedDate, day?: CalendarMonthViewDay) {
     const dateValue = moment(selectedDate.date).format('YYYY-MM-DD');
     const empty = undefined;
     this.service.getReadLeanerActivity(this.userId, dateValue, empty).subscribe(
@@ -131,6 +132,20 @@ export class LearnerCalendarComponent implements OnInit {
       },
       err => {}
     );
+    if (day) {
+      this.selectedMonthViewDay = day;
+      const selectedDateTime = this.selectedMonthViewDay.date.getTime();
+      const dateIndex = this.selectedDays.findIndex(
+        (selectedDay) => selectedDay.date.getTime() === selectedDateTime
+      );
+      if (this.selectedDays.length > 0) {
+        delete this.selectedDays[this.selectedDays.length - 1].cssClass;
+      }
+      this.selectedDays.push(this.selectedMonthViewDay);
+      day.cssClass = 'cal-day-selected';
+      this.selectedMonthViewDay = day;
+    }
+
   }
   launchAssignment(value) {
     if (value.activity_details.activitytype === 'Assignment') {
@@ -147,7 +162,7 @@ export class LearnerCalendarComponent implements OnInit {
       window.open(value.activity_details.link);
       this.saveAttendees();
       // this.activityName = this.learnerActivityList[i].activityname;
-      // this.activityId = 
+      // this.activityId =
   }
 
   saveAttendees() {

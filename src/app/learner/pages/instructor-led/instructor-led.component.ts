@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
@@ -47,6 +47,7 @@ export class InstructorLedComponent implements OnInit {
   getAttendance() { // Http Call
     const userDetails = JSON.parse(sessionStorage.getItem('UserDetails'));
     this.learnerService.getAttendanceByUsername(this.course.id, userDetails.full_name, userDetails.user_id).subscribe(async res => {
+      // tslint:disable-next-line:no-string-literal
       const data = res.data['getTopicAttendanceDetailsByUsername']['data'];
       this.listOfSessions = data.Activity;
       this.sessionAttendance = data.Attendance;
@@ -57,7 +58,7 @@ export class InstructorLedComponent implements OnInit {
         this.onGoingSession();
       }
       this.attendedSessions = _.countBy(this.sessionAttendance, x => x.activity.attendencedetails.Attendence === 'yes');
-      this.useSession(this.listOfSessions[0])
+      this.useSession(this.listOfSessions[0]);
     });
   }
 
@@ -88,9 +89,9 @@ export class InstructorLedComponent implements OnInit {
   }
 
   onGoingSession() {
-    const ongoing = this.listOfSessions.find(x => x.status === 'On going');
+    const ongoing = this.listOfSessions.find(x => x.status === 'Ongoing');
     if (ongoing === undefined) {
-      const upcoming = this.listOfSessions.find(x => x.status === 'Up Coming');
+      const upcoming = this.listOfSessions.find(x => x.status === 'UpComing');
       if (upcoming === undefined) {
         this.activityShow = this.listOfSessions[0];
         this.activityShow.button = '';
@@ -113,8 +114,28 @@ export class InstructorLedComponent implements OnInit {
     const end = new Date(endDate);
     const ms = moment(end, 'DD/MM/YYYY HH:mm:ss').diff(moment(start, 'DD/MM/YYYY HH:mm:ss'));
     const d = moment.duration(ms);
-    const time = d.hours() === 0 ? d.minutes() + ' minutes' : d.hours() + ' hour ' + d.minutes() + ' minutes';
+    let time;
+    if (d.hours() === 0 && d.minutes() !== 0) {
+      time = d.minutes() + ' minutes';
+    } else if (d.hours() !== 0 && d.minutes() === 0) {
+      time = d.hours() + ' hour ';
+    } else {
+      time = d.hours() + ' hour ' + d.minutes() + ' minutes';
+    }
     return time;
+  }
+
+  showModal(attendanceDialog: TemplateRef<any>){
+    this.dialog.open(attendanceDialog, {
+      width: '90%',
+      height: '50%',
+      panelClass: 'popupContainer',
+      closeOnNavigation: true,
+      disableClose: false,
+    });
+  }
+  closeModal(){
+    this.dialog.closeAll();
   }
 
   preview(row) {

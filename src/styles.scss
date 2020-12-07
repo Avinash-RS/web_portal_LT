@@ -18,6 +18,7 @@
 @import "../node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin.scss";
 
 @import "assets/iconfonts";
+@import "~animate.css/animate.min";
 
 .ag-theme-alpine {
   @include ag-theme-alpine();
@@ -368,7 +369,7 @@ body {
 .cdk-overlay-connected-position-bounding-box {
   position: absolute;
   z-index: 1000;
-  top: 54.5px !important;
+  // top: 54.5px !important;
   display: flex;
   min-width: 140px !important;
   flex-direction: column;
@@ -940,4 +941,41 @@ mat-header-cell,
 
 .preview-popup-background {
   background: rgba(0, 0, 0, 0.85) !important;
+}
+
+.popupContainer {
+  position: relative !important;
+  .closeModal-icon {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+  }
+  .attendance-table {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+.mat-dialog-container {
+  padding: 10px !important;
+}
+// .mobHamburger.mat-button:hover .mat-button-focus-overlay {
+//   opacity: 0 !important;
+// }
+.mobHamburger .mat-button-focus-overlay {
+  background: transparent;
+}
+.mobHamburger .mat-ripple {
+  display: none;
+}
+.monthHeading {
+  .mat-button {
+      &:hover {
+          .mat-button-focus-overlay {
+              opacity: 0;
+          }
+      }
+  }
+}
+.heightClass {
+  height: 100%;
 }

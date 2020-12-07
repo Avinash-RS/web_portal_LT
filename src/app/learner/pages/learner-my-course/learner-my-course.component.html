@@ -14,28 +14,25 @@
   </div>
   <div *ngIf="!expandSearch" class="row w-100 mr-0 ml-0">
     <!-- *ngIf="jobRole?.length < 1" -->
-    <div class="col-10 col-sm-10 col-md-4 col-lg-6 col-xl-7 catalogTitle">
-      <div class="f_size_22  myC-head animated animatedFadeInUp fadeInUp " style="font-size: 22px;">
-        {{'My Courses' | translate }}</div>
+    <div class="col-10 col-sm-10 col-md-4 col-lg-6 col-xl-7 catalogTitle align-middle">
+      <div class="f_size_22" style="font-size: 22px;">
+        {{'My Courses' | translate }}
+      </div>
+      <!-- <div class="mobCourseStatus">
+        <h4><span *ngIf="selectedIndex ==1"> - Ongoing <span>({{onGoingCourseCount}})</span></span></h4>
+        <h4><span *ngIf="selectedIndex ==2"> - Completed <span>({{completedCourseCount}})</span></span></h4>
+        <h4><span *ngIf="selectedIndex ==3"> - All <span>({{allCourseCount}})</span></span></h4>
+      </div> -->
     </div>
 
 
     <div class="col-2 col-sm-2 col-md-8 col-lg-6 col-xl-5 catalogDropdownCol">
-      <span class="mobileIcons">
+      <div class="mobileIcons">
         <mat-icon class="searchIcons" (click)="expandSearch = !expandSearch">search</mat-icon>
-        <mat-icon class="filterIcon" [matMenuTriggerFor]="menu">filter_alt</mat-icon>
-      </span>
-      <mat-menu #menu="matMenu">
-        <button class="matTabMenu" mat-menu-item (click)="getDashboardMyCourse(userDetailes.user_id, userDetailes._id)"
-          *ngFor="let categorytab of categoryDetails">
-          <span>{{ categorytab.categoryName | titlecase }} </span>
-          <span class="dynamicBagdes" matBadge="{{categorytab.enrollCount}}" matBadgeOverlap="false"></span>
-        </button>
-      </mat-menu>
+        <mat-icon class="filterIcon" [matMenuTriggerFor]="fMenu">filter_alt</mat-icon>
+      </div>
 
-
-
-      <div class="row ml-0 mr-0">
+      <div class="row ml-0 mr-0 searchWrapper">
         <div class="col-6 col-md-7 col-lg-7 col-xl-7 searchCol text-right">
 
           <!---------------Multi-level dropdown------------->
@@ -59,73 +56,51 @@
                 {{'Available Courses' | titlecase}}
 
                 <ul class="dropdown-menu first-level multi-level" role="menu" id="dropMenu" aria-labelledby="dropdownMenu">
-                  <span>
-                    <span *ngFor="let item of categories">
-                      <!-- viewCourse(item,item.categoryName,item.totalCount) -->
-                      <li *ngIf="item.subCategory == null" class="dropdown-item"
-                        (click)="getCoureBasedOnCatalog(dropDownCategoryDetails,item,'',''); viewCourse(item,previewDialog, item.categoryName,item.totalCount)">
-                        <span
-                          *ngIf="item.categoryName.length > 17">{{(item?.categoryName | titlecase | slice:0:17)+'...'}}</span>
-                        <span *ngIf="item.categoryName.length <= 17">{{item?.categoryName | titlecase}}</span>
-                        <span class="matBadgeNew" matBadge="{{item.totalCount}}" matBadgeOverlap="false"></span>
-                      </li>
-    
-                      <li *ngIf="item.subCategory && item.subCategory.length > 0" class="dropdown-submenu">
-                        <a class="dropdown-item" tabindex="-1">
-                          <!-- tooltip="{{item?.categoryName | titlecase}}"  placement="top" -->
-                          <span
-                            *ngIf="item.categoryName.length > 17">{{(item?.categoryName | titlecase | slice:0:17)+'...'}}</span>
-                          <span *ngIf="item.categoryName.length <= 17">{{item?.categoryName | titlecase}}</span>
-                          <span class="dynamicBagde" matBadge="{{item.totalCount}}" matBadgeOverlap="false"></span>
-                        </a>
-                        <!----------------------------Sub menu----------------------->
-                        <ul class="dropdown-menu subMenu">
-                          <span *ngFor="let subchild of item.subCategory">
-                            <li *ngIf="subchild.superSubCategory == null" class="dropdown-item superSubMenuItem">
-                              <!-- tooltip="{{subchild.subCategoryName | titlecase}}"  placement="top" -->
-                              <span class="superSubSpan"
-                                *ngIf="subchild.subCategoryName.length > 17">{{subchild.subCategoryName | titlecase}}</span>
-                              <span
-                                *ngIf="subchild.subCategoryName.length <= 17">{{subchild.subCategoryName | titlecase}}</span>
-                              <span class="matBadgeSubmenu" matBadge="{{subchild.totalCount}}"
-                                matBadgeOverlap="false"></span>
-                            </li>
-    
-                            <li *ngIf="subchild.superSubCategory && subchild.superSubCategory.length > 0"
-                              class="dropdown-submenu">
-                              <a class="dropdown-item" tabindex="-1">
-                                <!-- tooltip="{{subchild.subCategoryName | titlecase}}" placement="top" -->
-                                <span class="superSubSpan"
-                                  *ngIf="subchild.subCategoryName.length >17">{{subchild.subCategoryName | titlecase }}</span>
-                                <span
-                                  *ngIf="subchild.subCategoryName.length <=17">{{subchild.subCategoryName | titlecase}}</span>
-                                <span class="matBadgeSubmenu" matBadge="{{subchild.totalCount}}"
-                                  matBadgeOverlap="false"></span>
-                              </a>
-    
-                              <!------------------------------Super sub menu----------------------------------->
-                              <ul class="dropdown-menu superSubMenu">
-                                <span *ngFor="let superChild of subchild.superSubCategory">
-                                  <!-- viewCourse(item,superChild.superSubCategoryName,superChild.totalCount) -->
-                                  <li class="dropdown-item superSubMenuItem"
-                                    (click)="menuSelect(subchild,superChild); viewCourse(item,previewDialog,superChild.superSubCategoryName,superChild.totalCount);
-                                getCoureBasedOnCatalog(dropDownCategoryDetails,item,subchild.subCategoryId, superChild.superSubCategoryId)">
-                                    <!-- tooltip="{{superChild.superSubCategoryName | titlecase}}"
-                                  placement="top" -->
-                                    <span class="superSubSpan"
-                                      *ngIf="superChild.superSubCategoryName.length > 17">{{superChild.superSubCategoryName | titlecase }}</span>
-                                    <span
-                                      *ngIf="superChild.superSubCategoryName.length <= 17">{{superChild.superSubCategoryName | titlecase}}</span>
-                                    <span class="matBadgesuperSub" matBadge="{{superChild.totalCount}}"
-                                      matBadgeOverlap="false"></span>
-                                  </li>
-                                </span>
-                              </ul>
-                            </li>
-                          </span>
-                        </ul>
-                      </li>
-                    </span>
+                  <span *ngFor="let item of categories">
+                    <!-- viewCourse(item,item.categoryName,item.totalCount) -->
+                    <li *ngIf="item.subCategory == null" class="dropdown-item" (click)="getCoureBasedOnCatalog(dropDownCategoryDetails,item,'',''); viewCourse(item,previewDialog, item.categoryName,item.totalCount)">
+                      <!-- <span *ngIf="item.categoryName.length > 17">{{(item?.categoryName | titlecase | slice:0:17)+'...'}}</span> -->
+                      <span>{{item?.categoryName | titlecase}}</span>
+                      <span class="matBadgeNew" matBadge="{{item.totalCount}}" matBadgeOverlap="false"></span>
+                    </li>
+  
+                    <li *ngIf="item.subCategory && item.subCategory.length > 0" class="dropdown-submenu dropdown-item">
+                      <!-- tooltip="{{item?.categoryName | titlecase}}"  placement="top" -->
+                      <span>{{item?.categoryName | titlecase}}</span>
+                      <span class="dynamicBagde" matBadge="{{item.totalCount}}" matBadgeOverlap="false"></span>
+                      <!----------------------------Sub menu----------------------->
+                      <ul class="dropdown-menu subMenu">
+                        <span *ngFor="let subchild of item.subCategory">
+                          <li *ngIf="subchild.superSubCategory == null" class="dropdown-item superSubMenuItem">
+                            <!-- tooltip="{{subchild.subCategoryName | titlecase}}"  placement="top" -->
+                            <span class="superSubSpan" *ngIf="subchild.subCategoryName.length > 17">{{subchild.subCategoryName | titlecase}}</span>
+                            <span *ngIf="subchild.subCategoryName.length <= 17">{{subchild.subCategoryName | titlecase}}</span>
+                            <span class="matBadgeSubmenu" matBadge="{{subchild.totalCount}}" matBadgeOverlap="false"></span>
+                          </li>
+  
+                          <li *ngIf="subchild.superSubCategory && subchild.superSubCategory.length > 0" class="dropdown-submenu dropdown-item">
+                              <!-- tooltip="{{subchild.subCategoryName | titlecase}}" placement="top" -->
+                              <span class="superSubSpan" *ngIf="subchild.subCategoryName.length >17">{{subchild.subCategoryName | titlecase }}</span>
+                              <span *ngIf="subchild.subCategoryName.length <=17">{{subchild.subCategoryName | titlecase}}</span>
+                              <span class="matBadgeSubmenu" matBadge="{{subchild.totalCount}}" matBadgeOverlap="false"></span>
+  
+                            <!------------------------------Super sub menu----------------------------------->
+                            <ul class="dropdown-menu superSubMenu">
+                              <span *ngFor="let superChild of subchild.superSubCategory">
+                                <!-- viewCourse(item,superChild.superSubCategoryName,superChild.totalCount) -->
+                                <li class="dropdown-item superSubMenuItem"
+                                  (click)="menuSelect(subchild,superChild); viewCourse(item,previewDialog,superChild.superSubCategoryName,superChild.totalCount); getCoureBasedOnCatalog(dropDownCategoryDetails,item,subchild.subCategoryId, superChild.superSubCategoryId)">
+                                  <!-- tooltip="{{superChild.superSubCategoryName | titlecase}}" placement="top" -->
+                                  <span class="superSubSpan" *ngIf="superChild.superSubCategoryName.length > 17">{{superChild.superSubCategoryName | titlecase }}</span>
+                                  <span *ngIf="superChild.superSubCategoryName.length <= 17">{{superChild.superSubCategoryName | titlecase}}</span>
+                                  <span class="matBadgesuperSub" matBadge="{{superChild.totalCount}}" matBadgeOverlap="false"></span>
+                                </li>
+                              </span>
+                            </ul>
+                          </li>
+                        </span>
+                      </ul>
+                    </li>
                   </span>
                   <!-- *ngIf="!showAvailableCourse" -->
                   <!-- <span class="availableCourseSpinner">
@@ -157,11 +132,14 @@
                   </div>
                   </mat-menu> -->
       </div>
-    </div>
+      <div class="filterMenu">
+      
+      </div>
+    </div>    
   </div>
 
-  <!-- tabs here -->
-  <div class="row bodybg">
+  <!-- Desktop tab starts here -->
+  <div class="row bodybg desktopWrapper">
     <div class="col-12 matTabCol">
       <!-- <div class="catPost">
             <span *ngFor="let namesss of categoryDetails" class="cathd1">
@@ -203,13 +181,13 @@
           </div>
           <!-- card end -->
 
-          <div *ngIf="showSkeleton==false && onGoingCourseCount === 0">
+          <div *ngIf="showSkeleton==false && onGoingCourseCount === 0"> 
             <mat-card class="noSessionCard color-yellow-card-status">
-              <div class="row mar-t-12">
-                <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-                  <img class="noSessionImg" src="assets/noCourseNewImg.svg"> 
+              <div class="d-flex justify-content-between align-items-center flexStyle">
+                <div class="sessionImg">
+                  <img class="noSessionImg" src="assets/noCourseNewImg.svg" alt="nocouse"> 
                 </div>
-                <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+                <div class="noData">
                   <span class=""> You have no ongoing courses at the moment!</span>
                 </div>
               </div>
@@ -248,11 +226,11 @@
             </mat-card>
             <hr class="hr-tag" /> -->
             <mat-card class="noSessionCard color-yellow-card-status">
-              <div class="row mar-t-12">
-                <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-                  <img class="noSessionImg" src="assets/noCourseNewImg.svg"> 
+              <div class="d-flex justify-content-between align-items-center flexStyle">
+                <div class="sessionImg">
+                  <img class="noSessionImg" src="assets/noCourseNewImg.svg" alt="nocourse"> 
                 </div>
-                <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+                <div class="noData">
                   <span class=""> You have no ongoing courses at the moment!</span>
                 </div>
               </div>
@@ -279,15 +257,15 @@
           <div *ngIf=" showSkeleton==false && completedCourseCount === 0">
 
             <mat-card class="noSessionCard color-yellow-card-status">
-              <div class="row mar-t-12">
-                <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-                  <img class="noSessionImg" src="assets/noCourseNewImg.svg"> 
+              <div class="d-flex justify-content-between align-items-center flexStyle">
+                <div class="sessionImg">
+                  <img class="noSessionImg" src="assets/noCourseNewImg.svg" alt="nocourse"> 
                 </div>
-                <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+                <div class="noData">
                   <span class=""> You have no completed courses at the moment!</span>
                 </div>
               </div>
-            </mat-card> 
+            </mat-card>  
             <!-- <hr class="hr-tag" /> -->
           </div>
         </mat-tab>
@@ -304,13 +282,12 @@
         </div>
 
           <div *ngIf="showSkeleton==false && allCourseCount === 0">
-
             <mat-card class="noSessionCard color-yellow-card-status">
-              <div class="row mar-t-12">
-                <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-                  <img class="noSessionImg" src="assets/noCourseNewImg.svg"> 
+              <div class="d-flex justify-content-between align-items-center flexStyle">
+                <div class="sessionImg">
+                  <img class="noSessionImg" src="assets/noCourseNewImg.svg" alt="nocourse"> 
                 </div>
-                <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+                <div class="noData">
                   <span class=""> You have no courses at the moment!</span>
                 </div>
               </div>
@@ -332,6 +309,33 @@
       </mat-menu>
     </div>
   </div>
+
+
+  <!-- Mobile tab Starts here -->
+  <!-- Card start -->
+  <div class="mobileWrapper">
+    <div *ngIf="!showSkeleton; else skeletonLoad">
+      <div *ngFor="let course of courseDetailsList | filter: searchName">
+        <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
+      </div>
+    </div>
+    <!-- card end -->
+    <div *ngIf="showSkeleton==false && ((selectedIndex ==1 && onGoingCourseCount === 0 )||(selectedIndex ==2 && completedCourseCount === 0 )||(selectedIndex ==3 && allCourseCount === 0 ))">
+      <mat-card class="noSessionCard color-yellow-card-status">
+        <div class="d-flex justify-content-between align-items-center flexStyle">
+          <div class="sessionImg">
+            <img class="noSessionImg" src="assets/noCourseNewImg.svg" alt="nocourse"> 
+          </div>
+          <div class="noData">
+            <span class="" *ngIf="selectedIndex ==1 && onGoingCourseCount === 0"> You have no ongoing courses at the moment!</span>
+            <span class="" *ngIf="selectedIndex ==2 && completedCourseCount === 0"> You have no completed courses at the moment!</span>
+            <span class="" *ngIf="selectedIndex ==3 && allCourseCount === 0"> You have no courses at the moment!</span>
+          </div>
+        </div>
+      </mat-card> 
+    </div>
+  </div>
+  <!-- Mobile tab Ends here -->
 
   <ng-template #skeletonLoad>
     <mat-card class="coursebg card12">
@@ -504,13 +508,11 @@
             </span>
           </div>
         </ng-container>
-
-
         <!-- <div class="col errorDialouge" *ngIf="categoryCount < 1 && result.length === 0">
         <span style="font-size: medium;">
         No courses found
         </span>
-    </div> -->
+        </div> -->
       </div>
     </mat-dialog-content>
   </ng-template>
@@ -732,6 +734,22 @@
       </ng-container>
     </div>
   </div>
+  <mat-menu #fMenu="matMenu">
+    <ul class="filMenu">
+      <li class="d-flex align-items-center" [ngClass]="selectedIndex == 1 ? 'redBG' : 'greyBG'" (click)="selectedIndex = 1; getDashboardMyCourse(userDetailes.user_id,userDetailes._id)">
+        <span>Ongoing</span> 
+        <span class="matBadgeNew" matBadge="{{onGoingCourseCount}}" matBadgeOverlap="false"></span>
+      </li>
+      <li class="d-flex align-items-center" [ngClass]="selectedIndex == 2 ? 'redBG' : 'greyBG'" (click)="selectedIndex = 2; getDashboardMyCourse(userDetailes.user_id,userDetailes._id)">
+        <span>Completed</span> 
+        <span class="matBadgeNew" matBadge="{{completedCourseCount}}" matBadgeOverlap="false"></span>
+      </li>
+      <li class="d-flex align-items-center" [ngClass]="selectedIndex == 3 ? 'redBG' : 'greyBG'" (click)="selectedIndex = 3; getDashboardMyCourse(userDetailes.user_id,userDetailes._id)">
+        <span>All</span> 
+        <span class="matBadgeNew" matBadge="{{allCourseCount}}" matBadgeOverlap="false"></span>
+      </li>
+    </ul>
+  </mat-menu>
   <br [ngClass]="availableCource == true ? 'displayNone' : ''" />
   <br [ngClass]="availableCource == true ? 'displayNone' : ''" />
   <div *ngIf="!loading" [ngClass]="availableCource == true ? 'displayNone' : ''">

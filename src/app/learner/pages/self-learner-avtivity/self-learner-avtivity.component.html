@@ -9,7 +9,7 @@
           Back
         </span>
       </span>
-      <p class="courseName"><b>{{courseName}}</b></p>
+      <p class="courseName"><strong>{{courseName}}</strong></p>
     </div>
   </div>
   <!---------------------------------------Course Progression--------------------------------->
@@ -19,17 +19,10 @@
       <mat-card class="card">
         <div class="row ml-0 mr-0">
           <div class="col-4 pr-0">
-            <b class="courseProgression">Course 
-              <p class="prog">Progression</p></b>
+            <strong class="courseProgression">Course 
+              <p class="prog">Progression</p></strong>
           </div>
           <div class="col-8" *ngIf="boardDetails?.courseProgression > 0; else elseBlock">
-            <!-- <circle-progress [percent]="70" [radius]="20" [outerStrokeWidth]="5" [innerStrokeWidth]="5" [space]="-2"
-                          [outerStrokeGradient]="true" [outerStrokeGradientStopColor]="'#53a9ff'"
-                          [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="7"
-                          [unitsFontSize]="7" [showSubtitle]="false" [animation]="true" [animationDuration]="100"
-                          [startFromZero]="false" [responsive]="true">
-                        </circle-progress> -->
-
                         <canvas baseChart class="progressionChart" width="100px" height="150px"  [data]="doughnutChartData"  [labels]="doughnutChartLabels"  [plugins]="doughnutPlugins"  [options]="doughnut"   [chartType]="doughnutChartType"   [colors]="doughnutColors">   </canvas>
           </div>
           <ng-template #elseBlock>
@@ -42,11 +35,11 @@
     <div class="col-4">
       <mat-card class="card">
         <div class="row">
-          <b class="completion">Completion Status</b>
+          <strong class="completion">Completion Status</strong>
         </div><br>
         <div class="module">
-         <p class="m-l-58">Modules completed <b class="m-l-40">{{boardDetails?.moduleCovered}}</b></p> 
-          <p class="m-l-58">Topics completed <b class="m-l-46">{{boardDetails?.topicCovered}}</b></p> 
+         <p class="m-l-58">Modules completed <strong class="m-l-40">{{boardDetails?.moduleCovered}}</strong></p> 
+          <p class="m-l-58">Topics completed <strong class="m-l-46">{{boardDetails?.topicCovered}}</strong></p> 
         </div>
       </mat-card>
     </div>
@@ -64,7 +57,7 @@
       <mat-card class="learningCard">
       <div>
         <div class="row">
-        <b class="learning">Learning Progression</b>
+        <strong class="learning">Learning Progression</strong>
       </div><br>
 
       <div class="row">
@@ -72,15 +65,15 @@
           <div class="row">
             <div class="col-4">
               Total No. of Modules
-              <p class="center"><b>{{boardDetails?.totalNumberOfModule || '-'}}</b></p>
+              <p class="center"><strong>{{boardDetails?.totalNumberOfModule || '-'}}</strong></p>
             </div>
             <div class="col-4">
               Total No. of Topics
-              <p class="center"><b>{{boardDetails?.totalNumberOfTopic || '-'}}</b></p>
+              <p class="center"><strong>{{boardDetails?.totalNumberOfTopic || '-'}}</strong></p>
             </div>
             <div class="col-4">
              Completed Topics
-              <p class="center"><b>{{chartData?.totalNumberOfCompletedTopic || '-'}}</b></p>
+              <p class="center"><strong>{{chartData?.totalNumberOfCompletedTopic || '-'}}</strong></p>
             </div>
           </div>
         </div>
@@ -88,26 +81,14 @@
           <div class="row">
             <div class="col-6">
               Ongoing Topics
-              <p class="center"><b>{{chartData?.onGoingTopicCount || '-'}}</b></p>
+              <p class="center"><strong>{{chartData?.onGoingTopicCount || '-'}}</strong></p>
             </div>
             <div class="col-6">
              Yet to start Topics
-              <p class="center"><b>{{chartData?.yetToStartTopic || '-'}}</b></p>
+              <p class="center"><strong>{{chartData?.yetToStartTopic || '-'}}</strong></p>
             </div>
           </div>
         </div>
-        <!-- <div class="col-3">
-          <div class="row">
-            <div class="col-6">
-              Overdue Activities
-              <p class="center"><b>{{chartData?.overDueActivities}}</b></p>
-            </div>
-            <div class="col-6">
-              Yet to Submit
-              <p class="center"><b>{{chartData?.yetToSubmitActivities}}</b></p>
-            </div>
-          </div>
-        </div> -->
       </div><br><br>
 
 
@@ -117,25 +98,22 @@
           <span *ngIf="topic?.topicStatus == 'Passed'" class="gradedot"></span>&nbsp;
           <span *ngIf="topic?.topicStatus == 'process'" class="ongoingDot"></span>&nbsp;
           Topic Name
-          <p class="name"><b>{{topic?.topicName}}</b></p>
+          <p class="name"><strong>{{topic?.topicName}}</strong></p>
         </div>
         <div class="col-1">
          Duration
-          <p><b>{{topic?.duration || '-'}}</b></p>
+          <p><strong>{{topic?.duration || '-'}}</strong></p>
         </div>
         <div class="col-2">
           Start Date
-          <p *ngIf="topic?.startDate != null"><b>{{topic?.activityStartDate}}</b></p>
+          <p *ngIf="topic?.startDate != null"><strong>{{topic?.activityStartDate}}</strong></p>
           <p *ngIf="topic?.startDate == null">-</p>
         </div>
         <div class="col-2">
           End Date
-          <p *ngIf="topic?.endDate != null"><b>{{topic?.activityEndDate}}</b></p>
+          <p *ngIf="topic?.endDate != null"><strong>{{topic?.activityEndDate}}</strong></p>
           <p *ngIf="topic?.endDate == null">-</p>
         </div>
-        <!-- <div class="col-1">
-          <mat-icon class="arrow">arrow_drop_down</mat-icon>
-        </div> -->
       </div>
     </div>
 

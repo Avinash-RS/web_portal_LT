@@ -84,7 +84,7 @@ export class CoursedetailsComponent implements OnInit {
   playerTopicLen: any;
   isNextEnable = false;
   isprevEnable = false;
-  selectedTabIndex: any;
+  selectedTabIndex: any = 0;
   detailData: any;
   batchDetails: any;
   disableThreads: boolean;
@@ -111,6 +111,7 @@ export class CoursedetailsComponent implements OnInit {
 
   nextPrevHolder: number;
   moduleHolder: number;
+  topicPageStatus: any;
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -158,7 +159,7 @@ export class CoursedetailsComponent implements OnInit {
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
             this.course = viewCourse.data.viewcourse.message;
-            // console.log('this.course 1', this.course);
+             console.log('this.course 1', this.course);
             if (this.detailData !== undefined) {
               this.selectedName = this.detailData?.course_name;
             } else if (this.course !== undefined && this.course !== null) {
@@ -244,26 +245,30 @@ export class CoursedetailsComponent implements OnInit {
     this.socketService.change.subscribe(result => {
       if (result && result.eventId && result.eventId.length > 0) {
         if (result.data.course_id === this.courseid) {
-          if (this.topiccurrentPage !== result.data.resumeSubContent) {
+          if (this.topiccurrentPage !== result.data.resumeSubContent ||
+             result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status !== this.topicPageStatus) {
           this.scromModuleData = result.data.childData;
           this.currentPage = result.data.resumeContent;
           this.topiccurrentPage = result.data.resumeSubContent;
+          this.topicPageStatus = result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status
           this.moduleInfo = this.scromModuleData[this.currentPage];
           if (resumeInit) {
             this.nextPrevHolder = this.topiccurrentPage;
             this.moduleHolder = this.currentPage;
             resumeInit = false;
+            this.isprevEnable = true;
+            this.isNextEnable = true;
           }
           }
-          if ((this.currentPage - 1 !== 0 ) && (this.topiccurrentPage - 1 !== 0)) {
+          if ((this.moduleHolder  !== 0 ) || (this.nextPrevHolder  !== 0)) {
             this.isprevEnable = false;
           }
-          if (((this.currentPage + 1) !== this.scromModuleData.length - 1)
-            && ((this.topiccurrentPage + 1) !== this.scromModuleData[this.scromModuleData.length - 1].children.length-1)) {
+          if (((this.moduleHolder) !== this.scromModuleData.length - 1)
+            || ((this.nextPrevHolder) !== this.scromModuleData[this.scromModuleData.length - 1].children.length - 1)) {
             this.isNextEnable = false;
           }
           // console.log(jsonData[0].childData, 'this.scromModuleData');
-          console.log(result.data.resumeSubContent, 'module=', result.data.resumeContent);
+          console.log(result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status , 'module=', result.data.resumeContent);
           this.scromModuleData.forEach(childData => {
             if (childData && childData.children) {
               childData.children.forEach(subChild => {
@@ -529,6 +534,8 @@ export class CoursedetailsComponent implements OnInit {
     const encodedTopicName = encodeURIComponent(topicName);
     this.nextPrevHolder = topindex - 1;
     this.moduleHolder = moduleIdx;
+    this.isprevEnable = true;
+    this.isNextEnable = true;
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
       (environment.scormUrl + '/scormPlayer.html?contentID=' +
         this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url

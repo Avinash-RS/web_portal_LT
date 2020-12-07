@@ -5,15 +5,15 @@
 </mat-toolbar>
 <div class="limiter">
   <div class="row container-reg200">
-    <div class="col-md-8 col-sm-12 col-12 border-right no_pl  no_pr">
+    <div class="igniteLogo col-xl-8 col-md-6 col-sm-12 col-12 border-right no_pl">
       <div class="main-logo">
       <img alt="" class="beforeloginimg" style="width : inherit" src="assets/learner/iGGnite_SVG.svg">
     </div>
     </div>
-    <div class="col-md-4 col-sm-12 col-12">
+    <div class="loginWrapper col-xl-4 col-md-6 col-sm-12 col-12">
       <div class="wrap-reg">
         <form [formGroup]="loginForm">
-          <h1 class="animated animatedFadeInUp fadeInUp signIn"> {{'Sign In to your account' | translate }}</h1> <br><br>
+          <h1 class="animated animatedFadeInUp fadeInUp signIn"> {{'Sign in to your account' | translate }}</h1> <br><br>
           <mat-card-content style="margin-top:10px">
 
             <mat-form-field appearance="outline">
@@ -71,9 +71,9 @@
                 <mat-label  class="label-color">{{'Password' | translate }}</mat-label>
                 <input matInput  [placeholder]="'Enter password' | translate " [type]="hide ? 'password' : 'text'" formControlName="password" [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" required>
                 <mat-icon class="icon-color" matPrefix>lock_outline</mat-icon>
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <span  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon class="icon-color">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
+                </span>
                 <mat-error class="error" *ngIf="f.password.touched && f.password.errors" >{{'Password is required' | translate }}</mat-error>
               </mat-form-field>
               <div class="space-20"></div>
@@ -99,7 +99,7 @@
               </mat-form-field>
             </div> -->
 
-            <div style="text-align: end;">
+            <div style="text-align: right;">
               <mat-checkbox class="remember_me" formControlName="remember_me">
                 {{'Keep me signed in' | translate }}
               </mat-checkbox>
@@ -124,7 +124,7 @@
               <a [routerLink]="['/Learner/register']"><span class="col">{{'Sign up' | translate }}</span></a> </div><br><br>
           </mat-card-content>
         </form>
-        <div class="row"  id="footer">
+        <div class=""  id="footer">
           <div class="col-12">
             <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span> 
           </div>

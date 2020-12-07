@@ -21,6 +21,7 @@
     min-height: 100vh;
     display: flex;
     background-color: $color-white;
+    overflow: hidden;
 }
 
 .lab {
@@ -186,8 +187,8 @@
 .Outine {
     font-size: 16px;
     font-weight: 400px;
-    width: 142px;
-    right: 20px;
+    // width: 142px;
+    // right: 20px;
 }
 
 button:focus,
@@ -370,7 +371,7 @@ li {
 
 .alarmIcon {
     font-size: 14px !important;
-    margin-left: 100%;
+    // margin-left: 100%;
     cursor: text;
 }
 
@@ -441,7 +442,7 @@ li {
     margin-top: 0 !important;
     // height: 80px !important;
     height: auto !important;
-    width: 336px;
+    // width: 336px;
     padding: 15px 0 !important;
 }
 .sqnumber {
@@ -484,14 +485,28 @@ li {
 //     flex-direction: column;
 //     align-items: flex-start;
 // }
-.player {
-    // align-items: center;
-    width: 100%;
-    height: 560px;
-    border: none !important;
-    // border: 1px solid $color-border;
+// .player {
+//     // align-items: center;
+//     width: 100%;
+//     height: 560px;
+//     border: none !important;
+//     // border: 1px solid $color-border;
+// }
+.playerWrapper {
+    position: relative;
+    padding-bottom: 55%;
+    padding-top: 35px;
+    height: 0;
+    overflow: hidden;
+    .player {
+        position: absolute;
+        top:0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
 }
-
 // .fullScr{
 //     // position: relative;
 //     margin-left: 88%;
@@ -513,14 +528,16 @@ iframe.fullScreen {
 :host ::ng-deep .mat-tab-body-content {
     height: 100%;
     overflow: hidden !important;
-    padding-top: 8px !important;
+    padding: 8px !important;
 }
 
 :host ::ng-deep .mat-tab-group {
-    margin-left: 10px !important;
-    margin-right: 10px !important;
+    // margin-left: 10px !important;
+    // margin-right: 10px !important;
 }
-
+::ng-deep.mat-tab-header {
+    // margin-top: 5px;
+}
 :host ::ng-deep .mat-tab-label-container {
     margin-left: 2% !important;
 }
@@ -552,16 +569,21 @@ iframe.fullScreen {
 }
 
 .prevBtn {
-    margin-left: 86.7%;
+    // margin-left: 82%;
     position: fixed;
     margin-top: 0;
     z-index: 99;
+    right: 30px;
 }
 
 .prevBtnOpn {
     position: fixed;
     z-index: 99;
-    margin-left: 61%;
+    right: 30px;
+    // margin-left: 61%;
+    // @media only screen and (max-width: 991px) {
+    //     margin-left: 51%;
+    // }
 }
 
 // .nextBtn{
@@ -620,7 +642,7 @@ iframe.fullScreen {
 .drawerOpnTab {
     position: relative;
     bottom: 54px;
-    right: 34px;
+    // right: 34px;
 }
 
 .drawerClsTab {
@@ -667,8 +689,12 @@ iframe.fullScreen {
 :host ::ng-deep.mat-tab-label-active {
     // color: $color-blank !important;
     opacity: 1 !important;
+    padding: 0 10px;
 }
-
+:host ::ng-deep.mat-tab-label {
+    padding: 0 10px;
+    min-width: auto;
+}
 :host /deep/ .mat-ink-bar {
     height: 2px !important;
     background-color: $lxp-theme-green !important;
@@ -726,8 +752,8 @@ iframe.fullScreen {
 
     .courseTime {
         font-size: 12px;
-        display: flex;
-        margin-left: -12px;
+        // display: flex;
+        // margin-left: -12px;
     }
 
     .time-icon {
@@ -852,6 +878,11 @@ iframe.fullScreen {
     // height: 0;
     height: 10px;
     overflow: visible !important;
+    // &[aria-selected="true"] {
+    //     background-color: rgba(0, 0, 0, 0.2);
+    // } 
+ 
+
 }
 
 :host ::ng-deep .mat-step-icon .mat-icon,
@@ -1027,27 +1058,23 @@ iframe.fullScreen {
     }
 
     .prevBtn {
-        margin-left: 45%;
-        position: relative;
+        // margin-left: 53%;
+        // position: relative;
     }
 
     .drawerClsTab {
         bottom: 0;
     }
 
-    .drawer {
-        width: 100% !important;
-    }
-
     .mat-drawer.mat-drawer-side {
     }
 
     .player {
-        height: 284px !important;
+        // height: 284px !important;
     }
 
     .player {
-        height: 284px !important;
+        // height: 284px !important;
     }
 
     .divider {
@@ -1062,9 +1089,9 @@ iframe.fullScreen {
         margin-bottom: 10px;
     }
 
-    .main-opn {
-        left: 372px !important;
-    }
+    // .main-opn {
+    //     left: 372px !important;
+    // }
 
     // .moduleund {
     //     margin-left: 7px;
@@ -1099,10 +1126,10 @@ iframe.fullScreen {
         top: -2px;
     }
 
-    .closeBtn {
-        left: unset !important;
-        right: -50px !important;
-    }
+    // .closeBtn {
+    //     left: unset !important;
+    //     right: -50px !important;
+    // }
 
     .Outine {
         top: -2px !important;
@@ -1110,7 +1137,8 @@ iframe.fullScreen {
 
     .drawer .contents {
         padding: 16px 0 16px 16px;
-        margin-top: 15% !important;
+        // margin-top: 15% !important;
+        margin-top: 8% !important;
     }
 
     .time-icon {
@@ -1134,13 +1162,10 @@ iframe.fullScreen {
 
 @media (min-width: 768px) and(max-width: 991.98px) {
     .prevBtn {
-        margin-left: 75%;
-        position: relative;
+        // margin-left: 75%;
+        // position: relative;
     }
 
-    .drawer {
-        width: 50% !important;
-    }
 }
 
 // Ramya CSS starts here
@@ -1236,12 +1261,12 @@ iframe.fullScreen {
 
 .time {
     position: relative;
-    right: 28px;
+    // right: 28px;
 }
 
 .divider {
-    position: relative;
-    left: 10px;
+    // position: relative;
+    // left: 10px;
 }
 
 // .mar {
@@ -1258,9 +1283,9 @@ iframe.fullScreen {
 // Ramya CSS ends here
 
 .closeBtn {
-    position: absolute;
-    left: 25px;
-    top: 4px;
+    // position: absolute;
+    // left: 25px;
+    // top: 4px;
     z-index: 1;
 }
 
@@ -1284,18 +1309,63 @@ iframe.fullScreen {
     margin-left: 3%;
 }
 
+::ng-deep .mat-drawer.mat-drawer-side {
+    z-index: unset !important;
+}
+::ng-deep.mat-drawer.mat-drawer-side {
+    @media only screen and (max-width: 991px) {
+        z-index: 2 !important;
+    }
+}
+::ng-deep.mat-drawer-content {
+    @media only screen and (max-width: 991px) {
+        margin-left: 0 !important;
+    }
+}
+
+.Outine {
+    font-size: 16px;
+}
+.time {
+    position: relative;
+}
+.alarmIcon {
+    font-size: 14px !important;
+    cursor: text;
+    text-align: center;
+    line-height: 24px;
+}
+.alarmTiming {
+    margin-right: 10px;
+}
+.courseTime {
+    font-size: 12px;
+}
+.closeBtn {
+    z-index: 1;
+    line-height: normal;
+}
+.leftHeaderWrapper {
+    width: 100%;
+}
 .drawer {
     position: fixed;
     height: 100vh;
-    width: 25%;
+    width: 100%;
     border-right: 1px solid #ccc;
+    @media only screen and (min-width: 992px) {
+        width: 30%;
+    }
+    @media only screen and (min-width: 1200px) {
+        width: 25%;
+    }
 }
 
 .drawer .header {
-    // position: absolute;
-    // right: 0;
-    // justify-content: space-between;
-    position: fixed;
+    position: absolute;
+    right: 0;
+    justify-content: space-between;
+    // position: fixed;
     z-index: 999999;
 }
 
@@ -1304,7 +1374,6 @@ iframe.fullScreen {
     margin-top: 12%;
     width: -webkit-fill-available !important;
 }
-
 // .main-opn {
 //     background-color: #fff;
 // }
@@ -1341,21 +1410,27 @@ iframe.fullScreen {
 
 /* video player tab */
 .example-sidenav-content-opn {
-    display: flex;
+    // display: flex;
     height: 100%;
     align-items: center;
     justify-content: center;
-    width: 75%;
-    margin-left: 2%;
+    width: 71%;
+    @media only screen and (min-width: 1200px) {
+        width: 75%;
+    }
 }
 
 .example-sidenav-content-cls {
-    display: flex;
+    // display: flex;
     height: 100%;
     align-items: center;
     justify-content: center;
 }
 
+.redBG {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #C02222;
+}
 // /* About the course tab */
 .drawerClsAboutCourse {
     margin-left: 2%;
@@ -1366,8 +1441,14 @@ iframe.fullScreen {
 }
 
 .drawerOpnResource {
-    margin-left: 3%;
-    width: 74%;
+    margin-left: 0.5%;
+    width: 100%;
+    @media only screen and (min-width: 992px) {
+        width: 68.6%;
+    }
+    @media only screen and (min-width: 1200px) {
+        width: 74%;
+    }
 }
 
 .drawerClsResource {
@@ -1448,10 +1529,6 @@ iframe.fullScreen {
     padding: 0px 0 16px 0px !important;
 }
 
-::ng-deep .mat-drawer.mat-drawer-side {
-    z-index: unset !important;
-}
-
 ::ng-deep .mat-content {
     overflow: visible !important;
 }
@@ -1489,6 +1566,9 @@ iframe.fullScreen {
 .beforeHover {
     overflow: hidden;
     height: 626px;
+    @media only screen and (max-width: 991px) {
+        overflow: auto;
+    }
 }
 
 .f_16{
@@ -1566,4 +1646,14 @@ iframe.fullScreen {
 .roundbtn :focus{
   outline: none;
   border: none;
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translate3d(0,0.2%,0);
+    }
+    100% {
+        opacity: 1;
+        transform: translateZ(0);
+    }
 }

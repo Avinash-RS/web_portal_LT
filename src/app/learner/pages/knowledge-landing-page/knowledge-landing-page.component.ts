@@ -22,7 +22,7 @@ export class KnowledgeLandingPageComponent implements OnInit {
     touchDrag: true,
     pullDrag: true,
     dots: false,
-    navSpeed: 700,
+    slideBy: 7,
     navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right p-t-2"></i>'],
     responsive: {
       0: {
@@ -69,7 +69,7 @@ export class KnowledgeLandingPageComponent implements OnInit {
       }, {});
       this.resourceFile = Object.entries(tempDetails);
       this.resourceFile[0][1].forEach((d, i) => {
-        const extIdx = d.url.search(/\.pdf|.mp4|.jpg|.mp3|.png|.jpeg/)
+        const extIdx = d.url.search(/\.pdf|.mp4|.jpg|.mp3|.png|.jpeg/);
         if (extIdx >= 0) {
           d.fileType = d.url.substring(extIdx + 1, extIdx + 4);
         }
@@ -109,6 +109,7 @@ export class KnowledgeLandingPageComponent implements OnInit {
       data: {
         file,
         fileType,
+        fileTypePrew: resData.fileType,
         filename: resData.filename
       },
       height,

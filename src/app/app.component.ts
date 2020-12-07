@@ -19,25 +19,26 @@ import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
   animations: [ slideInAnimation ]
 })
 export class AppComponent implements OnInit {
-  // FOR DRM(Restriction for right click)
-  @HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    if ( (event.which === 67 && event.ctrlKey && event.shiftKey) || (event.which === 123) ||
-      (event.which === 73 && event.ctrlKey && event.shiftKey) ) {
-       event.returnValue = false;
-       event.preventDefault();
-     }
-  }
   runnablePlatforms = ['MacIntel', 'Win32', 'Linux x86_64'];
   ipAddress = '';
   title = 'LXP';
   isLoader = false;
   loaderSubscription: Subscription;
-  isMobile: boolean = false;
+  isMobile = false;
   platformTxt = navigator.platform;
   isProgressBar = false;
   spinnerType = SPINNER.circle;
-  
+
+   // FOR DRM(Restriction for right click)
+   @HostListener('document:keydown', ['$event'])
+   handleKeyboardEvent(event: KeyboardEvent) {
+     if ( (event.which === 67 && event.ctrlKey && event.shiftKey) || (event.which === 123) ||
+      (event.which === 73 && event.ctrlKey && event.shiftKey) ) {
+       event.returnValue = false;
+       event.preventDefault();
+     }
+ }
+
   constructor(private router: Router,
               private gs: GlobalServiceService,
               private http: HttpClient,

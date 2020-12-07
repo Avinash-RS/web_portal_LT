@@ -8,21 +8,22 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
   styleUrls: ['./wishlist-courses.component.scss']
 })
 export class WishlistCoursesComponent implements OnInit {
+  wishlist: any = [];
+  breakpoint: number;
+  pagenumber = 0;
+  // tslint:disable-next-line:no-input-rename
+  @Input('from') from: any;
+  // tslint:disable-next-line:no-input-rename
+  @Input('showCartBtn') showCartBtn: boolean;
+  // tslint:disable-next-line:no-input-rename
+  @Input('showWishlist') showWishlist: boolean;
+  // tslint:disable-next-line:no-input-rename
+  @Input('canNavigate') canNavigate: boolean;
+  // tslint:disable-next-line:no-input-rename
+  @Input('showStatus') showStatus: boolean;
   onResize(event: { target: { innerWidth: number; }; }) {
     throw new Error('Method not implemented.');
   }
-  // tslint:disable-next-line:member-ordering
-  wishlist: any = [];
-  @Input('from') from: any;
-  @Input('showCartBtn') showCartBtn: boolean;
-  @Input('showWishlist') showWishlist: boolean;
-  @Input('canNavigate') canNavigate: boolean;
-  @Input('showStatus') showStatus: boolean;
-  // tslint:disable-next-line:member-ordering
-  breakpoint: number;
-  // tslint:disable-next-line:member-ordering
-  pagenumber = 0;
-
   constructor(public service: CommonServicesService, private gs: GlobalServiceService, ) { }
 
   ngOnInit() {

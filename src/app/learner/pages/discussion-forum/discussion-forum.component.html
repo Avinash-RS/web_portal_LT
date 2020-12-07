@@ -16,7 +16,7 @@
   <span>
     {{course?.name}}
   </span>
-  <mat-icon class="material-icons brdcrmb f_size_25 pointer" (click)="goBack()">chevron_right
+  <mat-icon class="material-icons brdcrmb f_size_25 " >chevron_right
   </mat-icon>
   <span>Discussion Forum</span>
 </div>
@@ -185,7 +185,7 @@
 
                 <button mat-icon-button class="plus_icon" (click)="gotoNewThread(createThreadDialog)"
                   [disabled]="course === null || selectedModuleData === null || disableThreads">
-                  <i class="material-icons plus_icon">add_circle</i>
+                  <em class="material-icons plus_icon">add_circle</em>
                 </button>
               </div>
             </div>
@@ -386,7 +386,7 @@
 
                 <button mat-icon-button class="plus_icon" (click)="gotoNewThread(createThreadDialog)"
                   [disabled]="course === null || selectedModuleData === null || disableThreads">
-                  <i class="material-icons plus_icon">add_circle</i>
+                  <em class="material-icons plus_icon">add_circle</em>
                 </button>
               </div>
             </div>

@@ -82,9 +82,9 @@
             <div *ngIf="showotp">
               <button class="btn" mat-raised-button [disabled]="verifybutton" (click)="otpverify()">{{'VERIFY' | translate }}</button>
             </div><br>
-            <div class="account" *ngIf="resendLabel"><span class="did">Didn't get OTP?</span><b
+            <div class="account" *ngIf="resendLabel"><span class="did">Didn't get OTP?</span><strong
                 (click)="Resendcode()"><br>
-                {{'Resend OTP' | translate }}</b></div>
+                {{'Resend OTP' | translate }}</strong></div>
 
           </div>
           <!-- // sms getway integation pending  -->
@@ -109,5 +109,5 @@
 
 </div>
 
-<img style="width: 100%;" *ngIf="isLinkActive" src="../../../../assets/images/2nd_sample.svg">
+<img style="width: 100%;" *ngIf="isLinkActive" src="../../../../assets/images/2nd_sample.svg" alt="image">
 <h1 class="img" *ngIf="isLinkActive">This Link has already expired..</h1>

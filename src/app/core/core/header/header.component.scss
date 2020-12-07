@@ -110,7 +110,7 @@
 }
 
 :host ::ng-deep .btn1:focus {
-    border-bottom: 2px solid $lxp-theme-green !important;
+    // border-bottom: 2px solid $lxp-theme-green !important;
     // border-right: none !important;
     // outline: 0 !important;
     // border-left: none !important;
@@ -118,8 +118,8 @@
 
 .btn1:hover {
     //color: $color-blank !important;
-    background-color: #77777740 !important;
-    color:$color-lightGray !important
+    // background-color: #77777740 !important;
+    // color:$color-lightGray !important
 }
 
 :host ::ng-deep button:active {
@@ -143,26 +143,28 @@
     font-weight: bold;
 }
 
-.headicon {
-    font-size: 22px !important;
-    // width: 30px !important;
-    position: relative;
-    top: 6px;
-}
-
 .activity-icon {
     height: 22px;
     width: 22px;
 }
-
-
 .colgreen {
-    border-bottom: 2px solid $lxp-theme-green !important;
     color: #ffffff !important;
     background-color: $lxp-gray !important;
+    position: relative;
+    &:focus {
+        border-bottom: none;
+    }
+    &::after {
+        content: '';
+        border-bottom: 2px solid $lxp-theme-green !important;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+    }
 }
 .btn2 :hover{
-background-color:$lxp-gray !important;
+    background-color:$lxp-gray !important;
 }
 
 .iconmenu {
@@ -175,7 +177,27 @@ background-color:$lxp-gray !important;
 }
 
 .colWhite {
-    color:$color-lightGray;
+    // color:$color-lightGray;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    transform: perspective(1px) translateZ(0);
+    transition-property: color, background-color;
+    transition-duration: 0.3s;
+    position: relative;
+    &:hover {
+        background-color: $lxp-gray !important;
+        color: white !important;
+        position: relative;
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            border-bottom: 2px solid $lxp-theme-green !important;
+        }
+    }
 }
 
 .bookIcon {
@@ -185,21 +207,20 @@ background-color:$lxp-gray !important;
 .btn1 {
     display: block;
 }
-
-@media screen and (min-width: 200px) and (max-width: 770px) {
-  .smNoDisp{
-      display: none;
-  }
-
-.p-x-15px{
-    padding:7px 4px !important; 
+.smNoDisp {
+    margin-left: 5px;
 }
-.p5px{
+@media screen and (min-width: 200px) and (max-width: 770px) {
+//   .smNoDisp{
+//       display: none;
+//   }
+
+.p5px {
     background-color: black;
     padding:7px 4px !important; 
 }
     .bookIcon {
-        display: block !important;
+        display: none !important;
         position: relative;
         font-size: 22px;
         border: none;
@@ -226,10 +247,89 @@ background-color:$lxp-gray !important;
 }
 
 .imgAdj{
-    float: right;
-    margin-top: 6px;
+    // float: right;
+    // margin-top: 6px;
 }
 
-.p-x-15px{
-    padding:7px 15px; 
+.p-x-15px {
+    padding:12px 15px 11px 15px; 
+}
+
+.headicon {
+    font-size: 18px !important;
+    // width: 30px !important;
+    position: relative;
+    // top: 6px;
+}
+
+.mobMenu {
+    display: none;
+    @media only screen and (max-width: 767px) {
+        display: block;
+    }
+}
+.mobileMenu {
+    .greyColor {
+        color: #5c6873;
+    }
+    .redColor {
+        background-color: rgba(0,0,0,0.05);
+        color: #C02222;
+    }
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+        cursor: pointer;
+        padding: 6px 20px;
+        &:focus {
+            outline: transparent;
+        }
+        &:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+        .mobContent {
+            margin-left: 8px;
+        }
+    }
+}
+.desktopMenu {
+    display: none;
+    button {
+        padding: 12px 10px 11px 10px;
+        @media only screen and (min-width: 992px) {
+            padding: 12px 15px 11px 15px;
+        }
+    }
+    @media only screen and (min-width:768px) {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+}
+.mobHamburger {
+    display: none;
+    @media only screen and (max-width: 767px) {
+        display: block;
+    }
+}
+.mat-button {
+    min-width: auto;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.7);
+}
+ ::ng-deep .swal2-styled.swal2-confirm {
+    border: 1px solid #C02222 !important;
+    background-color: #ffffff !important;
+    color: #333333 !important;
+
+}
+::ng-deep .swal2-styled.swal2-confirm:hover {
+    // border: 1px solid #C02222 !important;
+    background-color: #C02222 !important;
+    color: #ffffff !important;
+
+}
+::ng-deep .swal2-styled.swal2-cancel {
+    background-color: #C02222 !important;
 }

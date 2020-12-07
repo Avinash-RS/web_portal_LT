@@ -275,11 +275,29 @@
 
 .bodybg {
   width: auto;
-  padding-left: 18px;
-  padding-right: 18px;
+  // padding-left: 18px;
+  // padding-right: 18px;
+  padding: 0;
+  margin: 0;
   min-height: 100vh;
   display: flex;
   background-color: $color-white;
+  .container {
+    margin: 0;
+  }
+}
+.desktopWrapper {
+  display: none;
+  @media only screen and (min-width: 768px) {
+    display: block;
+  }
+}
+.mobileWrapper {
+  min-height: 100vh;
+  display: none;
+  @media only screen and (max-width: 767px) {
+    display: block;
+  }
 }
 
 :host ::ng-deep.container {
@@ -1003,6 +1021,70 @@ hr {
   // margin-top: 1rem;
   // padding-right: 0px;
   margin-top: 11px;
+  @media only screen and (max-width: 768px) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}
+
+.filMenu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  .matBadgeNew {
+    background-color: transparent !important;
+    margin-left: 4px;
+    top: 0;
+    line-height: normal;
+  }
+  li {
+      cursor: pointer;
+      padding: 5px 30px 5px 20px;
+      &.redBG {
+        background-color: rgba(0, 0, 0, 0.05);
+        color: #C02222;
+        .matBadgeNew {
+          .mat-badge-content {
+            background-color: #C02222 !important;
+          }
+        }
+      }
+      &.greyBG {
+        .matBadgeNew {
+          .mat-badge-content {
+            background-color: #898989 !important;
+          }
+        }
+      }
+      &:focus {
+          outline: transparent;
+      }
+      &:hover {
+          background-color: rgba(0,0,0,0.05);
+          color: #C02222;
+      }
+      .mat-badge-content {
+        position: relative;
+        top: 0 !important;
+        right: 0 !important;
+      }
+  }
+}
+
+.mobileIcons {
+  @media only screen and (min-width: 768px) {
+    display: none;
+  }
+  .filterIcon {
+    font-size: 22px;
+  }
+}
+
+.searchIcons, .searchWrapper {
+  @media only screen and (max-width: 767px) {
+    display: none;
+  }
 }
 
 .courseDetailsCol {
@@ -1134,10 +1216,6 @@ hr {
   display: block;
 }
 
-.mobileIcons {
-  display: none;
-}
-
 .mobileRespoForum {
   display: none;
 }
@@ -1156,794 +1234,6 @@ hr {
   display: none;
 }
 }
-
-// @media (min-width: 200px) and (max-width: 767.98px) {
-//   .normalScreen {
-//     display: none;
-//   }
-
-//   .mobileResponsive {
-//     display: block;
-//   }
-
-//   .mobileIcons {
-//     display: block;
-//   }
-
-//   .courseNameCol {
-//     margin-top: 0.5rem;
-//   }
-
-//   .activitiRow {
-//     margin-right: 0px !important;
-//     margin-left: 0px !important;
-//   }
-
-//   .activityCol {
-//     padding-left: 0px !important;
-//   }
-
-//   .dynamicBagdes {
-//     background: #5c6873 !important;
-//     float: right;
-//     right: 2rem;
-//     top: 1.7rem !important;
-
-//     & .mat-badge-content {
-//       background: $lxp-gray !important;
-//     }
-//   }
-
-//   ::ng-deep .mat-menu-panel {
-//     min-width: 180px !important;
-//   }
-
-//   .mobileRespoForum {
-//     display: block;
-//     width: 70%;
-//     float: right;
-//     margin-top: 1.2rem;
-//   }
-
-//   .alarmcursor {
-//     float: left;
-//   }
-
-//   .span-with-icon {
-//     display: none;
-//   }
-
-//   .startBtnRow {
-//     display: none;
-//   }
-
-//   .dropdown-content {
-//     min-width: 225px !important;
-//   }
-
-//   .wordWrapMblView {
-//     width: 345px;
-//     word-wrap: break-word !important;
-//   }
-
-//   .dropdownicon {
-//     top: 5px !important;
-//   }
-
-//   .roledropdownicon {
-//     top: 2px !important;
-//   }
-
-//   .roleDropdDwnBtn {
-//     bottom: 0px !important;
-//     padding-bottom: 0px !important;
-//     margin-left: 0px !important;
-//   }
-
-//   .myC-head {
-//     margin-top: 2% !important;
-//     margin-left: 0% !important;
-//   }
-
-//   :host ::ng-deep .matInkBar .mat-ink-bar {
-//     display: none !important;
-//     visibility: hidden !important;
-//   }
-
-//   .module {
-//     font-size: 14px;
-//     font-weight: 500;
-
-//   }
-
-//   .searchIcons {
-//     margin-left: 0.5rem;
-//   }
-
-//   .catalogDropdownCol {
-
-//     padding-left: 0px !important;
-//     // margin-top: 0.5rem;
-//     // margin-bottom: 0.5rem;
-//     // padding-right: 1.5rem;
-//   }
-
-//   .arrowIcon .material-icons {
-//     float: right;
-//     margin-top: 1%;
-//   }
-
-//   .matTabCol {
-//     padding-left: 0px !important;
-//     padding-right: 0px !important;
-//   }
-
-//   :host ::ng-deep .container {
-//     margin-left: 0px !important;
-//   }
-
-//   .errorboxx {
-//     margin-top: 15%;
-//   }
-
-//   .cardContainer {
-//     height: 100% !important;
-//     max-height: 100% !important;
-//   }
-
-//   .arrowPopup {
-//     font-size: 24px;
-//   }
-
-//   .rowMargin {
-//     margin-bottom: 20px;
-//   }
-
-//   .primerFlage {
-//     height: 75px;
-//     position: absolute;
-//     margin-left: -4px;
-//     z-index: 1;
-//   }
-
-//   ::ng-deep .mat-dialog-container {
-//     overflow: hidden !important;
-//   }
-
-
-//   .availableContainer {
-//     position: fixed;
-//     overflow-y: auto;
-//     display: block;
-//     width: 100%;
-//     height: 100%;
-//     top: 0;
-//     padding: 20px;
-//     left: 0;
-//     right: 0;
-//     bottom: 0;
-//     background-color: $color_white;
-//     z-index: 2;
-//     cursor: pointer;
-//   }
-
-//   .displayNone {
-//     display: none;
-//   }
-
-// .dropdown-toggle {
-//   display: none;
-// }
-//   .catDropdown {
-//     display: none;
-//   }
-
-
-//   .hovercolor {
-//     display: none;
-//   }
-
-//   #cdk-overlay-0 {
-//     width: 95%;
-//   }
-
-//   .dropdown {
-//     width: 100%;
-//     text-align: right;
-//     margin-right: 0rem !important;
-//   }
-
-//   ::ng-deep .dialogContainer {
-//     width: 100% !important;
-//     height: 100% !important;
-//     max-height: 100% !important;
-//     overflow: hidden !important;
-//     margin: auto;
-//   }
-
-//   .finalScore {
-//     padding: 16px 9px;
-//   }
-
-//   .startBtnCol {
-//     margin-top: 10px;
-//   }
-
-//   .bodybg {
-//     padding-right: 0px !important;
-//     padding-left: 0px !important;
-//     margin-right: 0px !important;
-//     margin-left: 0px !important;
-//   }
-
-//   .catalogTitle {
-//     margin: auto;
-//     padding-top: 0.5rem !important;
-//     height: 3rem !important;
-//   }
-
-//   .myModuleRow {
-//     border-right: 1px solid #8989897a !important;
-//   }
-
-//   .aligned-with-icon {
-//     left: 0px;
-//     margin-top: 4%;
-//   }
-
-//   .courseHover {
-//     width: 100%;
-//     height: 100%;
-//   }
-
-//   .startBtnicon {
-//     display: none;
-//     position: relative;
-//     font-size: 12px;
-//     left: 0px;
-//     margin-top: 5%;
-//   }
-
-//   .startBtnDiv {
-//     display: none;
-//   }
-
-//   .courceNameCol {
-//     padding-left: 2rem;
-//   }
-
-//   .timer {
-//     left: 0px;
-//   }
-
-//   .alarmCol {
-//     text-align: right;
-//     padding-left: 5px;
-//     padding-right: 20px;
-//   }
-
-//   .courseImg {
-//     margin-left: 0px;
-//   }
-
-//   .courseDetailsCol {
-//     padding-left: 15px;
-//   }
-
-//   .startBtnRow {
-//     width: 350px;
-//     margin-top: 20px;
-//     margin-bottom: 10px;
-//   }
-
-//   .btl-alin {
-//     margin-top: 0px;
-//     margin-left: 0px;
-//     position: relative;
-//   }
-
-//   .catPost {
-//     display: none;
-//   }
-
-//   .template {
-//     display: block;
-//   }
-
-//   :host ::ng-deep #mat-tab-label-0-4 {
-//     display: none !important;
-//   }
-
-//   :host ::ng-deep #mat-tab-label-0-5 {
-//     display: none !important;
-//   }
-
-//   :host ::ng-deep #mat-tab-label-0-6 {
-//     display: none !important;
-//   }
-
-//   :host ::ng-deep #mat-tab-label-0-7 {
-//     display: none !important;
-//   }
-
-//   :host ::ng-deep #mat-tab-label-0-8 {
-//     display: none !important;
-//   }
-
-//   :host ::ng-deep #mat-tab-label-0-9 {
-//     display: none !important;
-//   }
-
-//   :host ::ng-deep #mat-tab-label-0-10 {
-//     display: none !important;
-//   }
-
-//   .menuBtnHoriz {
-//     display: block;
-//     margin-left: 10px;
-//   }
-
-//   // .superSubCatDiv .accordianTextsub {
-//   //   white-space: nowrap !important;
-//   //   text-overflow: ellipsis !important;
-//   // }
-
-//   .dropdown-content {
-//     // min-width: 20vh !important;
-//     max-width: 38vh !important;
-//   }
-
-//   .roleSelect {
-//     font-size: 14px !important;
-//   }
-
-//   .roleBtn {
-//     min-width: 100% !important;
-//     padding: 1px !important;
-//     border-bottom: 1px solid #898989 !important;
-//     border-top: none !important;
-//     border-right: none !important;
-//     border-left: none !important;
-//   }
-
-//   .roleDropdDwnBtn {
-//     // right: 0% !important;
-//     // bottom: 0% !important;
-//     // top: 3px !important;
-//     // left: 48% !important;
-//   }
-
-//   .matBadgeForum .mat-badge-medium .mat-badge-content {
-//     width: 15px !important;
-//     height: 15px !important;
-//     line-height: 16px !important;
-//     background-color: $lxp-theme-green;
-//     right: 4px !important;
-//     top: -20px !important;
-//   }
-
-//   .courceNameTag {
-//     width: 100% !important;
-//   }
-//   .color_g {
-//     color: $lxp-icon;
-//   }
-//   .coursenameCol {
-//     margin-top: 10px;
-//     letter-spacing: 0.5px;
-//   }
-
-//   .roledropdowniconSelect {
-//     padding-top: 0px !important;
-//   }
-
-//   .roleBatchOnSelect {
-//     display: none;
-//     font-size: 10px;
-//     width: 15px !important;
-//     height: 15px !important;
-//   }
-
-//   :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
-//     display: none !important;
-//   }
-
-//   .search {
-//     width: 100% !important;
-//     transition: width 2s;
-//     padding-left: 3rem;
-//   }
-
-//   .glyphicon {
-//     display: block;
-//     position: absolute;
-//     float: left;
-//     left: 2rem;
-//     top: 0.7rem;
-//   }
-
-//   // Temporary css 
-//   .right-addon {
-//     display: none;
-//   }
-
-//   .popupsearch {
-//     display: none;
-//   }
-
-//   // .container {
-//   //   width: 355px !important;
-//   //   margin-left: 0px !important;
-
-//   // }
-
-// }
-
-// @media (min-width: 768px) and (max-width: 991.98px) {
-//   // .searchDiv1 {
-//   //   display: block;
-//   // }
-
-//   // .searchDiv {
-//   //   display: none;
-//   // }
-
-//   .availableCol {
-//     padding-left: 0px !important;
-//   }
-
-//   .right-addon .glyphicon {
-//     right: 0.5rem !important;
-//     top: 0.1rem !important;
-//   }
-
-//   .catDropdown {
-//     margin-right: 0.5rem !important;
-//   }
-
-//   .module {
-//     font-size: 14px;
-//     font-weight: 500;
-
-//   }
-
-//   .menuBtn {
-//     display: block;
-//     position: absolute;
-//     top: 0.2%;
-//     right: 1%;
-//   }
-
-//   :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
-//     display: none !important;
-//   }
-
-//   .courseImg {
-//     margin-left: 15px;
-//   }
-
-//   .color_black2 {
-//     padding-left: 0px;
-//   }
-
-//   .catalogDropdownCol {
-//     padding-right: 0px !important;
-//     margin-top: 0.5rem;
-//   }
-
-//   .btl-alin {
-//     margin-left: -6%;
-//   }
-
-//   .timer {
-//     font-size: 17px;
-//   }
-
-//   .dropdown {
-//     margin-right: 10px;
-//     float: right;
-//   }
-
-//   .span-with-icon {
-//     display: block;
-//     float: right;
-//   }
-
-//   .startBtnicon {
-//     display: none;
-//   }
-
-//   .startBtnDiv {
-//     display: block;
-//   }
-
-//   .aligned-with-icon {
-//     display: none;
-//   }
-
-//   .catnamesss {
-//     margin-right: 25px !important;
-//   }
-
-//   .roleDropdDwnBtn {
-//     margin: 0rem 23% 0% 0% !important;
-//     right: 6% !important;
-//     bottom: 0% !important;
-//   }
-
-//   .roleBtn {
-//     padding: 2px !important;
-//     width: 11.5rem !important;
-//   }
-
-//   .search {
-//     width: 100% !important;
-//     margin-left: 0px !important;
-//   }
-
-//   .searchExpand {
-//     width: 14rem;
-//     float: right;
-//     margin-left: 38px;
-//     border: 1px solid #898989;
-//     border-radius: 0px;
-//     height: 38px;
-//   }
-
-//   .searchExpand:focus {
-//     border: 1px solid $lxp-theme-green;
-//     box-shadow: 0 0 0 0.05rem $lxp-theme-green !important;
-//   }
-
-//   .primerFlage {
-//     height: 75px;
-//     position: absolute;
-//     margin-left: -4px;
-//     z-index: 1;
-//   }
-
-//   :host ::ng-deep #mat-tab-label-0-3 {
-//     display: none !important;
-//   }
-
-//   :host ::ng-deep #mat-tab-label-0-4 {
-//     display: none !important;
-//   }
-
-//   :host ::ng-deep #mat-tab-label-0-5 {
-//     display: none !important;
-//   }
-
-//   :host ::ng-deep #mat-tab-label-0-6 {
-//     display: none !important;
-//   }
-
-//   :host ::ng-deep #mat-tab-label-0-7 {
-//     display: none !important;
-//   }
-
-//   :host ::ng-deep #mat-tab-label-0-8 {
-//     display: none !important;
-//   }
-
-//   :host ::ng-deep #mat-tab-label-0-9 {
-//     display: none !important;
-//   }
-
-//   // Temp css
-//   .inner-addon {
-//     display: block;
-//   }
-// }
-
-// @media (max-width: 480px) and (max-width: 320px) {
-//   .descmc {
-//     max-height: 175px !important;
-//     min-height: 40px;
-//   }
-
-//   .courseHover {
-//     width: 100% !important;
-//     height: 200px !important;
-
-//   }
-//   .show-less {
-//     height: 0rem;
-//     overflow: hidden;
-//     padding: 0rem;
-//   }
-
-//   .pad1020 {
-//     padding-top: 0px !important;
-//     padding-left: 0px !important;
-//   }
-// }
-
-// @media (max-width: 568px) {
-//   .descmc {
-//     max-height: 175px !important;
-//     min-height: 40px;
-//   }
-//   .show-less {
-//     height: 0rem;
-//     overflow: hidden;
-//     padding: 0rem;
-//   }
-//   .courseHover {
-//     width: 100% !important;
-//     height: 200px !important;
-//   }
-
-//   .pad1020 {
-//     padding-top: 0px !important;
-//     padding-left: 0px !important;
-//   }
-
-// }
-
-// @media only screen and (width: 1280px) {
-//   .btl-alin {
-//     margin-left: -8%;
-//   }
-
-//   .searchCol {
-//     padding-right: 15px;
-//   }
-
-//   :host ::ng-deep #mat-tab-label-0-5 {
-//     display: none !important;
-//   }
-// }
-
-// @media only screen and (width: 1024px) {
-//   .myC-head {
-//     width: 12rem !important;
-//   }
-
-//   .aligned-with-icon {
-//     left: -116% !important;
-//     width: 7rem !important;
-//   }
-
-//   .courceNameTag {
-//     width: 17rem !important;
-//   }
-
-//   .courceDiscription {
-//     width: 22rem !important;
-//   }
-
-//   .iconsSearch {
-//     right: 1.5rem !important;
-//   }
-
-//   .dropdown {
-//     left: 2rem;
-//   }
-
-//   .searchCol {
-//     padding-right: 15px;
-//   }
-
-//   .right-addon .glyphicon {
-//     right: 2rem !important;
-//   }
-
-//   .search {
-//     width: 95% !important;
-//     margin-left: 0px !important;
-//     float: left !important;
-//   }
-
-//   .dropdown-toggle {
-//     width: 10.5rem !important;
-//   }
-
-//   .catDropdown {
-//     margin-right: 0.5rem !important;
-//   }
-
-//   :host ::ng-deep #mat-tab-label-0-3 {
-//     display: none !important;
-//   }
-
-//   :host ::ng-deep #mat-tab-label-0-4 {
-//     display: none !important;
-//   }
-
-//   :host ::ng-deep #mat-tab-label-0-5 {
-//     display: none !important;
-//   }
-// }
-
-// @media only screen and (min-width: 992px) and (max-width: 1024px) and (orientation: portrait) {
-//   .descmc {
-//     max-height: 175px !important;
-//     min-height: 40px;
-//   }
-
-//   .courseHover {
-//     width: 100% !important;
-//     height: 200px !important;
-//   }
-
-//   .show-less {
-//     height: 0rem;
-//     overflow: hidden;
-//     padding: 0rem;
-//   }
-
-//   .startBtnDiv {
-//     display: none;
-//   }
-
-//   .startBtnicon {
-//     display: block;
-//   }
-
-//   .startBtnRow {
-//     width: 430px;
-//   }
-
-//   .btl-alin {
-//     margin-left: -7.5rem;
-//   }
-
-//   .pad1020 {
-//     padding-top: 0px !important;
-//     padding-left: 0px !important;
-//   }
-// }
-
-// @media only screen and (width: 1600px) {
-//   .dropdown-menu {
-//     min-width: 14.2rem !important;
-//   }
-// }
-
-
-
-///////
-// .pageheading {
-//   display: flex;
-//   justify-content: space-between;
-//   .heading {
-//     width: 60%;
-//   }
-//   .searchAvailableClases {
-//     width: 40%;
-//     display: flex;
-//     justify-content: space-between;
-//   }
-// }
-// .searchAvailableClases {
-//   .searchFilter {
-//     width: 60%;
-//   }
-//   .availableClasses {
-//     width: 40%;
-//     position: relative;
-//     border: 1px solid;
-//     &:hover {
-//       ul {
-//         display: block;
-//       }
-//     }
-//     ul {
-//       background-color: #f5f5f5;
-//       border: 1px solid #cdcdcd;
-//       width: 100%;
-//       display: none;
-//       list-style-type: none;
-//       margin: 0;
-//       padding: 0;
-//       position: absolute;
-//       right: 0;
-//       top: 100%;
-//     }
-//   }
-// }
-///////
 
 .assignbtn {
   position: relative;
@@ -2375,29 +1665,34 @@ hr {
   // right: 11px;
   // top: 22px;
   background: #5c6873 !important;
-
-  & .mat-badge-content {
+  .mat-badge-content {
     background: $lxp-gray !important;
+    top: 0 !important;
+    right: 15px !important;
   }
 }
 
 .dynamicBagde {
   background: #5c6873 !important;
   left: 31px !important;
-top: 9px;
-  & .mat-badge-content {
+  top: 9px;
+  .mat-badge-content {
     background: $lxp-gray !important;
+    top: 0 !important;
+    right: 15px !important;
   }
 }
 
 .matBadgeSubmenu {
   position: relative;
-  float: right;
-  right: 22px;
+  // float: right;
+  // right: 22px;
   background: #5c6873 !important;
   top: 10px;
-  & .mat-badge-content {
+  .mat-badge-content {
     background: $lxp-gray !important;
+    top: 0 !important;
+    right: 15px !important;
   }
 }
 
@@ -2406,9 +1701,10 @@ top: 9px;
   float: right;
   right: 22px;
   background: #5c6873 !important;
-
-  & .mat-badge-content {
+  .mat-badge-content {
     background: $lxp-gray !important;
+    top: 0 !important;
+    right: 0 !important;
   }
 }
 
@@ -2446,7 +1742,6 @@ top: 9px;
 }
 
 ::ng-deep .custom-mat-tooltip {
-
   position: relative !important;
   bottom: 80px !important;
   background-color: black !important;
@@ -2652,7 +1947,10 @@ top: 9px;
 
 .dropdown-submenu {
   position: relative;
-  bottom: 4px;
+  // bottom: 4px;
+  .dropdown-item {
+    // padding: 0;
+  }
 }
 
 .dropdown-menu:hover {
@@ -2675,15 +1973,20 @@ top: 9px;
   border-radius: 0px !important;
 }
 
-:host ::ng-deep .first-level {
+:host ::ng-deep.first-level {
   width: 100%;
   left: auto !important;
   right: 0 !important;
-  top: 98%;
+  top: 98% !important;
   min-width: inherit;
   padding-top: 9px !important;
+  // display: block !important;
+  transform: initial !important;
+  &.multi-level {
+  }
   .mat-badge {
-    top: 9px;
+    top: 0;
+    left: 0 !important;
   }
 }
 
@@ -2704,21 +2007,29 @@ top: 9px;
 }
 
 .dropdown-item:hover {
-  background-color: $lxp-light-grey;
+  // background-color: $lxp-light-grey;
+  background-color: #CECECE;
+  &::after {
+    border-left-color: #fff;
+  }
 }
 
-.dropdown-submenu>a:after {
+.dropdown-submenu:after {
   display: block;
   content: " ";
-  float: right;
+  // float: right;
   width: 0;
   height: 0;
   border-color: transparent;
   border-style: solid;
   border-width: 5px 0 5px 5px;
   border-left-color: #ccc;
-  margin-top: 5px;
-  margin-right: -16px;
+  margin-top: 0;
+  margin-right: 0;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .dropdown-submenu:hover>a:after {
@@ -2739,9 +2050,12 @@ top: 9px;
 
 li {
   cursor: pointer;
-  height: 37px;
+  // height: 37px;
   // padding-top: 10px;
-  padding-top: 7px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .subMenu {
@@ -2753,7 +2067,7 @@ li {
 }
 
 .superSubSpan {
-  padding-right: 2rem !important;
+  padding-right: 4rem !important;
 }
 
 /* toolti[p config for job role by mani */
@@ -2791,6 +2105,27 @@ li {
 .catalogTitle {
   height: 60px !important;
   padding-top: 0.8rem;
+  .f_size_22{
+    @media only screen and (min-width: 768px) {
+      margin-top: 1%;
+    }
+  }
+  @media only screen and (max-width: 767px) {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .mobCourseStatus {
+    margin-left: 4px;
+    @media only screen and (min-width: 768px) {
+      display: none;
+    }
+    h4 {
+      margin: 0;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
 }
 
 /* tooltip config end by mani */
@@ -2860,35 +2195,69 @@ li {
   border-radius: 0;
   opacity: 1;
   text-align: center;
-  padding-bottom: 8px !important;
-  padding-right: 0px !important;
-
   background: #F5F5F5 0% 0% no-repeat padding-box;
   box-shadow: 0px 2px 4px #00000029;
   opacity: 1;
   border-left: 3px solid #ffc107bf !important;
-  width: 40%;
+  width: 90%;
+  padding: 20px 15px !important;
+  @media only screen and (min-width: 576px) {
+    width: 90%;
+  }
+  @media only screen and (min-width: 768px) {
+    padding: 30px 15px !important;
+    width: 82%;
+  }
+  @media only screen and (min-width: 992px) {
+    width: 65%;
+  }
+  @media only screen and (min-width: 1200px) {
+    width: 50%;
+  }
+  @media only screen and (min-width: 1600px) {
+    width: 40%;
+  }
+}
+.flexStyle {
+  flex-wrap: wrap;
+  @media only screen and (min-width: 768px) {
+    flex-wrap: nowrap;
+  }
+}
+.sessionImg {
+  width: 100%;
+  @media only screen and (min-width: 768px) {
+    width: 20%;
+  }
+}
+.noData {
+  font: normal normal normal 18px/22px Roboto Condensed;
+  letter-spacing: 0px;
+  color: #333333;
+  opacity: 1;
+  width: 100%;
+  text-align: center;
+  @media only screen and (min-width: 576px) {
+    font: normal normal normal 19px/29px Roboto Condensed;
+  }
+  @media only screen and (min-width: 768px) {
+    text-align: left;
+    width: 78%;
+    font: normal normal normal 23px/29px Roboto Condensed;
+  }
 }
 .noSessionImg {
   width: 45px;
   margin-left: 0%;
 }
-
-.mar-t-12{
+.mar-t-12 {
   margin-top: 12px !important;
   margin-bottom: 12px !important;
 }
 .pad-t-2{
   padding-top: 2px !important;
 }
-.noData {
-  text-align: left;
-  font: normal normal normal 23px/29px Roboto Condensed;
-  letter-spacing: 0px;
-  color: #333333;
-  opacity: 1;
-  padding-top: 10px;
-}
+
 // SKELETON
 .demo:empty {
   // margin: auto;

@@ -3,29 +3,29 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { add_topic_reference, bulkclaimcourse, claimcourse, createGuidanceRequest,
-   CreateNewThread, CreateNewThreadBid, delete_qualification, getCourseCategorySearch,
-    getLevelSubCategoryData, gettopicdetail, get_change_password_updateprofile,
-     get_district_details, get_forgot_password_byresetpassword, get_forgot_password_byusername,
-      get_forgot_username_mobile_email, get_state_details, InsertCourseFeedback, markAsRead,
-       playerstatusrealtime, resend_otp_onprofile, save_attendies, update_email_onprofile,
-        update_mobile_onprofile, update_profile, update_verifyotp_mobile_onprofile,
-         user_mstr_data, user_registration, user_registration_done, user_registration_mobile_otp_send,
-          user_registration_mobile_otp_verify, user_registration_username_suggestion, view_profile, view_profile1 } from './operations/learner_mutation';
+import { addTopicreference, bulkclaimcourse, claimcourse, createGuidanceRequest,
+   CreateNewThread, CreateNewThreadBid, deleteQualification, getCourseCategorySearch,
+    getLevelSubCategoryData, gettopicdetail, getChangePasswordupdateprofile,
+    getDistrictdetails, getForgotpasswordbyResetpassword, getForgotpasswordbyUsername,
+     getForgotUsernamemobileEmail, getStatedetails, InsertCourseFeedback, markAsRead,
+       playerstatusrealtime, resendOtponprofile, saveAttendies, updateEmailonprofile,
+       updateMobileonprofile, updateProfile, updateVerifyotpmobileonProfile,
+       userMstrdata, userRegistration, userRegistrationdone, userRegistrationmobileOtpsend,
+         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, viewProfile1 } from './operations/learner_mutation';
 import {
-boarddetail, check_existing_user, getActivityDetailsByBatchAndCourseID, getAssignmentmoduleData,
+boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignmentmoduleData,
  getcalenderactivity, getCountForCategories, getCountForJobroleCategories, getCoureBasedOnCatalog,
   getCourseActivities, getCoursePlayerStatusForCourse, getDetailsCount, getFeedbackQuestion,
    getlearnerdashboard, getLearnerenrolledCourses, getlearnertrack, getLevelCategoryData,
     getLoginUserDetail, getmoduleData, getperformActivityData, getPopularcourse, getprojectActivityData,
-  // get_read_learner_activity,
-  getReadLeanerActivity, getsupersubcategory, getTopicAttendanceDetailsByUsername, get_active_course_count,
-   get_all_category, get_board_university_details, get_country_details, get_course_by_subcategory,
-    get_course_by_user, get_discipline_details, get_institute_details, get_language_details,
-     get_module_topic, get_organization_by_id, get_popular_course, get_qualification_details,
-      get_specification_details, get_sub_category, get_trending_course, get_user_detail,
-       get_user_detail_username, list_content, login, playerModuleAndTopic, singleBatchInfo,
-        syllabus_of_particular_scorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData
+  // getReadLearnerActivity,
+  getReadLeanerActivity, getsupersubcategory, getTopicAttendanceDetailsByUsername, getActivecourseCount,
+  getAllCategory, getBoardUniversitydetails, getCountrydetails, getCoursebySubcategory,
+   getCoursebyUser, getDisciplinedetails, getInstitutedetails, getLanguagedetails,
+   getModuletopic, getOrganizationbyId, getPopularCourse, getQualificationdetails,
+     getSpecificationdetails, getSubCategory, getTrendingcourse, getUserdetail,
+     getUserdetailUsername, listContent, login, playerModuleAndTopic, singleBatchInfo,
+     syllabusofParticularScorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData
 } from './operations/learner_query';
 
 
@@ -69,14 +69,14 @@ export class LearnerServicesService {
       }
     });
   }
-  // tslint:disable-next-line:variable-name
-  login(username, password, is_admin) {
+
+  login(username, password, isAdmin) {
     return this.Apollo.query({
       query: login,
       variables: {
         username,
         password,
-        is_admin
+        is_admin: isAdmin
       }
     });
   }
@@ -108,14 +108,14 @@ export class LearnerServicesService {
     return this.http.post(this.envApi + 'post_like', data, httpOptions);
   }
 
-  // tslint:disable-next-line:variable-name
-  user_registration(email, full_name, mobile_number, title_id, termsandconditions) {
+
+  user_registration(email, fullName, mobileNumber, titleId, termsandconditions) {
     return this.Apollo.query({
-      query: user_registration,
+      query: userRegistration,
       variables: {
-        full_name,
-        mobile_number,
-        title_id,
+        full_name: fullName,
+        mobile_number: mobileNumber,
+        title_id: titleId,
         email,
         term_condition: termsandconditions,
         domain: this.envDomain
@@ -123,71 +123,71 @@ export class LearnerServicesService {
     });
   }
 
-  // tslint:disable-next-line:variable-name
-  submit_otp(user_id, _id, mobile, email) {
+  submit_otp(userId, id, mobile, email) {
     return this.Apollo.query({
-      query: user_registration_mobile_otp_send,
+      query: userRegistrationmobileOtpsend,
       variables: {
-        user_id,
-        user: _id,
+        user_id: userId,
+        user: id,
         mobile_number: mobile,
         email
       }
     });
   }
 
-  // tslint:disable-next-line:variable-name
-  user_registration_verify(otp, mobile_number) {
+
+  user_registration_verify(otp, mobileNumber) {
     return this.Apollo.query({
-      query: user_registration_mobile_otp_verify,
+      query: userRegistrationmobileOtpverify,
       variables: {
         otp,
-        mobile_number
+        mobile_number: mobileNumber
       }
     });
   }
 
-  // tslint:disable-next-line:variable-name
-  user_registration_done(user_id, username, password, created_by_ip) {
+
+  user_registration_done(userId, username, password, createdByIP) {
     return this.Apollo.query({
-      query: user_registration_done,
+      query: userRegistrationdone,
       variables: {
-        user_id,
+        user_id: userId,
         username,
         password,
-        created_by_ip
+        created_by_ip: createdByIP
       }
     });
   }
-  // tslint:disable-next-line:variable-name
-  view_profile(user_id) {
+
+  view_profile(userId) {
     return this.Apollo.query({
-      query: view_profile,
+      query: viewProfile,
       variables: {
-        user_id
+        user_id: userId
       }
     });
   }
+
   get_country_details() {
     return this.Apollo.query({
-      query: get_country_details
+      query: getCountrydetails
     });
   }
-  // tslint:disable-next-line:variable-name
-  get_state_details(_id) {
+
+  get_state_details(id) {
     return this.Apollo.query({
-      query: get_state_details,
+      query: getStatedetails,
       variables: {
-        _id
+        _id: id
       }
     });
   }
-  // tslint:disable-next-line:variable-name
-  getMyCourse(user_id) {
+
+  getMyCourse(userId) {
     return this.Apollo.query({
-      query: get_course_by_user,
+      query: getCoursebyUser,
       variables: {
-        user_id
+        user_id: userId
       }
     });
   }
@@ -201,7 +201,7 @@ export class LearnerServicesService {
 
   userNamesuggestion(userId) {
     return this.Apollo.query({
-      query: user_registration_username_suggestion,
+      query: userRegistrationUsernamesuggestion,
       variables: {
         user_id: userId
       }
@@ -211,21 +211,21 @@ export class LearnerServicesService {
   // checks for existing user or not
   check_existing_user(name) {
     return this.Apollo.query({
-      query: check_existing_user,
+      query: checkExistingUser,
       variables: {
         username: name
       }
     });
   }
 
-  // tslint:disable-next-line:variable-name
-  forgotUsernameandPassword(type, subtype, mobile_number, email) {
+
+  forgotUsernameandPassword(type, subtype, mobileNumber, email) {
     return this.Apollo.query({
-      query: get_forgot_username_mobile_email,
+      query: getForgotUsernamemobileEmail,
       variables: {
         type,
         subtype,
-        mobile_number,
+        mobile_number: mobileNumber,
         email,
         domain: this.envDomain
       }
@@ -233,7 +233,7 @@ export class LearnerServicesService {
   }
   forgotPasswordByUsername(username) {
     return this.Apollo.query({
-      query: get_forgot_password_byusername,
+      query: getForgotpasswordbyUsername,
       variables: {
         username
       }
@@ -241,7 +241,7 @@ export class LearnerServicesService {
   }
   resetPassword(username, password) {
     return this.Apollo.query({
-      query: get_forgot_password_byresetpassword,
+      query: getForgotpasswordbyResetpassword,
       variables: {
         username,
         password
@@ -250,12 +250,12 @@ export class LearnerServicesService {
   }
   get_qualification_details() {
     return this.Apollo.query({
-      query: get_qualification_details
+      query: getQualificationdetails
     });
   }
   get_board_university_details(id) {
     return this.Apollo.query({
-      query: get_board_university_details,
+      query: getBoardUniversitydetails,
       variables: {
         _id: id
       }
@@ -264,7 +264,7 @@ export class LearnerServicesService {
 
   get_district_details(country, state) {
     return this.Apollo.query({
-      query: get_district_details,
+      query: getDistrictdetails,
       variables: {
         country,
         state
@@ -272,20 +272,20 @@ export class LearnerServicesService {
     });
   }
 
-  // tslint:disable-next-line:variable-name
-  get_change_password_updateprofile(username, old_password, password) {
+
+  get_change_password_updateprofile(username, oldPassword, password) {
     return this.Apollo.query({
-      query: get_change_password_updateprofile,
+      query: getChangePasswordupdateprofile,
       variables: {
         username,
-        old_password,
+        old_password: oldPassword,
         password
       }
     });
   }
   get_discipline_details(id) {
     return this.Apollo.query({
-      query: get_discipline_details,
+      query: getDisciplinedetails,
       variables: {
         _id: id
       }
@@ -293,45 +293,44 @@ export class LearnerServicesService {
   }
   get_specification_details() {
     return this.Apollo.query({
-      query: get_specification_details
+      query: getSpecificationdetails
     });
   }
   get_institute_details() {
     return this.Apollo.query({
-      query: get_institute_details
+      query: getInstitutedetails
     });
   }
   get_language_details() {
     return this.Apollo.query({
-      query: get_language_details
+      query: getLanguagedetails
     });
   }
 
-  // tslint:disable-next-line:variable-name
-  update_mobile_onprofile(user_id, mobile_number) {
+  update_mobile_onprofile(userId, mobileNumber) {
     return this.Apollo.query({
-      query: update_mobile_onprofile,
+      query: updateMobileonprofile,
       variables: {
-        user_id,
-        mobile_number
+        user_id: userId,
+        mobile_number: mobileNumber
       }
     });
   }
 
-  // tslint:disable-next-line:variable-name
-  update_verifyotp_mobile_onprofile(user_id, mobile_number, otp) {
+
+  update_verifyotp_mobile_onprofile(userId, mobileNumber, otp) {
     return this.Apollo.query({
-      query: update_verifyotp_mobile_onprofile,
+      query: updateVerifyotpmobileonProfile,
       variables: {
-        user_id,
-        mobile_number,
+        user_id: userId,
+        mobile_number: mobileNumber,
         otp
       }
     });
   }
   get_user_detail(email) {
     return this.Apollo.query({
-      query: get_user_detail,
+      query: getUserdetail,
       variables: {
         email
       }
@@ -348,19 +347,19 @@ export class LearnerServicesService {
 
   get_user_detail_username(username) {
     return this.Apollo.query({
-      query: get_user_detail_username,
+      query: getUserdetailUsername,
       variables: {
         username
       }
     });
   }
 
-  // tslint:disable-next-line:variable-name
-  update_email_onprofile(user_id, email) {
+
+  update_email_onprofile(userId, email) {
     return this.Apollo.query({
-      query: update_email_onprofile,
+      query: updateEmailonprofile,
       variables: {
-        user_id,
+        user_id: userId,
         email,
         domain: this.envDomain
       }
@@ -368,27 +367,27 @@ export class LearnerServicesService {
   }
   list_content() {
     return this.Apollo.query({
-      query: list_content,
+      query: listContent,
       variables: {}
     });
   }
-  // tslint:disable-next-line:variable-name
-  syllabus_of_particular_scorm(contentid, user_id, course_id) {
+
+  syllabus_of_particular_scorm(contentid, userId, courseId) {
     return this.Apollo.query({
-      query: syllabus_of_particular_scorm,
+      query: syllabusofParticularScorm,
       variables: {
         contentid,
-        user_id,
-        course_id
+        user_id: userId,
+        course_id: courseId
       }
     });
   }
-  // tslint:disable-next-line:variable-name
-  getModuleData(course_id, userid) {
+
+  getModuleData(courseId, userid) {
     return this.Apollo.query({
       query: getmoduleData,
       variables: {
-        courseid: course_id,
+        courseid: courseId,
         user_id: userid
       }
     });
@@ -396,31 +395,31 @@ export class LearnerServicesService {
 
   update_profile(userData) {
     return this.Apollo.query({
-      query: update_profile,
+      query: updateProfile,
       variables: userData
     });
   }
 
   delete_qualification(qualificationData) {
     return this.Apollo.query({
-      query: delete_qualification,
+      query: deleteQualification,
       variables: qualificationData
     });
   }
 
-  // tslint:disable-next-line:variable-name
-  resend_otp_onprofile(user_id) {
+
+  resend_otp_onprofile(userId) {
     return this.Apollo.query({
-      query: resend_otp_onprofile,
+      query: resendOtponprofile,
       variables: {
-        user_id
+        user_id: userId
       }
     });
   }
 
   getcoursecategory(groupid: any) {
     return this.Apollo.query({
-      query: get_all_category,
+      query: getAllCategory,
       variables: {
         group_id: groupid
       }
@@ -429,7 +428,7 @@ export class LearnerServicesService {
 
   getcoursesubcategory(categoryid) {
     return this.Apollo.query({
-      query: get_sub_category,
+      query: getSubCategory,
       variables: {
         category_id: categoryid
       }
@@ -446,7 +445,7 @@ export class LearnerServicesService {
 
   getcourse(subcategory) {
     return this.Apollo.query({
-      query: get_course_by_subcategory,
+      query: getCoursebySubcategory,
       variables: {
         input_id: subcategory._id,
         input_type: subcategory.type,
@@ -465,21 +464,21 @@ export class LearnerServicesService {
   //     }
   //   });
   // }
-  // tslint:disable-next-line:variable-name
-  get_module_topic(course_id) {
+
+  get_module_topic(courseId) {
     return this.Apollo.query({
-      query: get_module_topic,
+      query: getModuletopic,
       variables: {
-        course_id
+        course_id: courseId
       }
     });
   }
-  // tslint:disable-next-line:variable-name
-  gettopicdetail(_id, modulename) {
+
+  gettopicdetail(id, modulename) {
     return this.Apollo.query({
       query: gettopicdetail,
       variables: {
-        _id,
+        _id: id,
         module_name: modulename
       }
     });
@@ -516,41 +515,34 @@ export class LearnerServicesService {
   // Guildeline selected filter value and getting courses
   postGuildelineSearchData(
     category: any,
-    // tslint:disable-next-line:variable-name
-    sub_category: any,
-    // tslint:disable-next-line:variable-name
-    super_sub_category: any,
-    // tslint:disable-next-line:variable-name
-    course_language: any,
-    // tslint:disable-next-line:variable-name
-    course_mode: any,
-    // tslint:disable-next-line:variable-name
-    author_details: any,
-    // tslint:disable-next-line:variable-name
-    partner_details: any,
+    subCategory: any,
+    supeSubcategory: any,
+    courseLanguage: any,
+    courseMode: any,
+    authorDetails: any,
+    partnerDetails: any,
     pagenumber,
     perPage,
     publishedToDate,
     publishedFromDate,
-    // tslint:disable-next-line:variable-name
-    catalogue_visibility
+    catalogueVisibility
   ) {
     return this.Apollo.query({
       query: getCourseCategorySearch,
       variables: {
         category,
-        sub_category,
-        super_sub_category,
-        course_language,
-        course_mode,
-        author_details,
-        partner_details,
+        sub_category: subCategory,
+        super_sub_category: supeSubcategory,
+        course_language: courseLanguage,
+        course_mode: courseMode,
+        author_details: authorDetails,
+        partner_details: partnerDetails,
 
         pagenumber,
         perPage,
         publishedFromDate,
         publishedToDate,
-        catalogue_visibility
+        catalogue_visibility: catalogueVisibility
       }
     });
   }
@@ -564,37 +556,37 @@ export class LearnerServicesService {
       }
     });
   }
-  // tslint:disable-next-line:variable-name
-  view_profile1(user_id) {
+
+  view_profile1(userId) {
     return this.Apollo.query({
-      query: view_profile1,
+      query: viewProfile1,
       variables: {
-        user_id
+        user_id: userId
       }
     });
   }
-  // tslint:disable-next-line:variable-name
-  get_enrolled_courses(user_id, id, catalogue_id, category_id, jobRoleCategoryId, searchString) {
+
+  get_enrolled_courses(userId, id, catalogueId, categoryId, jobRoleCategoryId, searchString) {
     return this.Apollo.query({
       query: getLearnerenrolledCourses,
       variables: {
-        user_id,
+        user_id: userId,
         user_obj_id: id,
-        catalogue_id,
-        category_id,
+        catalogue_id: catalogueId,
+        category_id: categoryId,
         jobRoleCategoryId,
         searchString
       }
     });
   }
-  // tslint:disable-next-line:variable-name
-  bulkclaimcourse(id, user_id, category_id, categoryName) {
+
+  bulkclaimcourse(id, userId, categoryId, categoryName) {
     return this.Apollo.query({
       query: bulkclaimcourse,
       variables: {
         id,
-        user_id,
-        category_id,
+        user_id: userId,
+        category_id: categoryId,
         categoryName
       }
     });
@@ -608,13 +600,13 @@ export class LearnerServicesService {
       }
     });
   }
-  // tslint:disable-next-line:variable-name
-  getCoureBasedOnCatalog(catalogue_id, category_id, userObjId, subCategoryId, superSubCategoryId) {
+
+  getCoureBasedOnCatalog(catalogueId, categoryId, userObjId, subCategoryId, superSubCategoryId) {
     return this.Apollo.query({
       query: getCoureBasedOnCatalog,
       variables: {
-        catalogue_id,
-        category_id,
+        catalogue_id: catalogueId,
+        category_id: categoryId,
         userObjId,
         subCategoryId,
         superSubCategoryId
@@ -623,16 +615,16 @@ export class LearnerServicesService {
   }
 
 
-// tslint:disable-next-line:variable-name
-  getLearnerDashboard(user_id, user_obj_id, pagenumber, request_type, course_type) {
+
+  getLearnerDashboard(userId, userObjId, pagenumber, requesType, courseType) {
     return this.Apollo.query({
       query: getlearnerdashboard,
       variables: {
-        user_id,
-        user_obj_id,
+        user_id: userId,
+        user_obj_id: userObjId,
         pagenumber,
-        request_type,
-        course_type
+        request_type: requesType,
+        course_type: courseType
       }
     });
   }
@@ -651,13 +643,13 @@ export class LearnerServicesService {
 
   getPopularInLanding() {
     return this.Apollo.query({
-      query: get_popular_course
+      query: getPopularCourse
     });
   }
 
   getTrendingInLanding() {
     return this.Apollo.query({
-      query: get_trending_course
+      query: getTrendingcourse
     });
   }
   getPopularcourse() {
@@ -676,54 +668,53 @@ export class LearnerServicesService {
       variables: feedback
     });
   }
-  // tslint:disable-next-line:variable-name
-  getCoursePlayerStatusForCourse(user_id, course_id) {
+
+  getCoursePlayerStatusForCourse(userId, courseId) {
     return this.Apollo.query({
       query: getCoursePlayerStatusForCourse,
       variables: {
-        user_id,
-        course_id
+        user_id: userId,
+        course_id: courseId
       }
     });
   }
-// tslint:disable-next-line:variable-name
-  getAssignmentmoduleData(courseid, user_id) {
+  getAssignmentmoduleData(courseid, userId) {
     return this.Apollo.query({
       query: getAssignmentmoduleData,
       variables: {
         courseid,
-        user_id
+        user_id: userId
       }
     });
   }
-// tslint:disable-next-line:variable-name
-  playerModuleAndTopic(contentID, user_id) {
+
+  playerModuleAndTopic(contentID, userId) {
     return this.Apollo.query({
       query: playerModuleAndTopic,
       variables: {
         contentID,
-        user_id
+        user_id: userId
       }
     });
   }
-// tslint:disable-next-line:variable-name
-  playerstatusrealtime(user_id, contentID, module: any, percentage) {
+
+  playerstatusrealtime(userId, contentID, module: any, percentage) {
     return this.Apollo.query({
       query: playerstatusrealtime,
       variables: {
-        user_id,
+        user_id: userId,
         contentID,
         module,
         percentage
       }
     });
   }
-// tslint:disable-next-line:variable-name
-  viewsingletopicdiscussion(topic_slug, uid) {
+
+  viewsingletopicdiscussion(topicSlug, uid) {
     return this.Apollo.query({
       query: ViewSingleTopicDiscussionData,
       variables: {
-        topic_slug,
+        topic_slug: topicSlug,
         uid
       }
     });
@@ -749,20 +740,27 @@ export class LearnerServicesService {
       });
     }
   }
-// tslint:disable-next-line:variable-name
-  createNewThread(uid, course_id, module_name, title, content, course_name, batch?) {
+
+  createNewThread(uid, courseId, moduleName, title, content, courseName, batch?) {
     if (batch) {
       return this.Apollo.query({
         query: CreateNewThreadBid,
         variables: {
-          uid, course_id, module_name, title, content, course_name, batch_name: batch.batch_name, batch_id: batch.batch_id
+          uid,
+          course_id: courseId,
+           module_name: moduleName,
+            title,
+            content,
+            course_name: courseName,
+            batch_name: batch.batch_name,
+            batch_id: batch.batch_id
         }
       });
     } else {
       return this.Apollo.query({
         query: CreateNewThread,
         variables: {
-          uid, course_id, module_name, title, content, course_name
+          uid, course_id: courseId, module_name: moduleName, title, content, course_name: courseName
         }
       });
     }
@@ -788,23 +786,23 @@ export class LearnerServicesService {
       }
     });
   }
-// tslint:disable-next-line:variable-name
-  get_organization_by_id(organization_id) {
+
+  get_organization_by_id(organizationId) {
     return this.Apollo.query({
-      query: get_organization_by_id,
+      query: getOrganizationbyId,
       variables: {
-        organization_id
+        organization_id: organizationId
       }
     });
   }
-// tslint:disable-next-line:variable-name
-  claimcourse(id, user_id, course_id, courseName, categoryName) {
+
+  claimcourse(id, userId, courseId, courseName, categoryName) {
     return this.Apollo.query({
       query: claimcourse,
       variables: {
         id,
-        user_id,
-        course_id,
+        user_id: userId,
+        course_id: courseId,
         courseName,
         categoryName
       }
@@ -823,29 +821,29 @@ export class LearnerServicesService {
 
   getRegisterTitle() {
     return this.Apollo.query({
-      query: user_mstr_data,
+      query: userMstrdata,
       variables: {}
     });
   }
-// tslint:disable-next-line:variable-name
-  add_topic_reference(user_id, batch_id, course_id, module_id, topic_id, reference_id, reference_status, created_by) {
+
+  add_topic_reference(userId, batchId, courseId, moduleId, topicId, referenceId, referenceStatus, createdBy) {
     return this.Apollo.query({
-      query: add_topic_reference,
+      query: addTopicreference,
       variables: {
-        user_id,
-        batch_id,
-        course_id,
-        module_id,
-        topic_id,
-        reference_id,
-        reference_status,
-        created_by
+        user_id: userId,
+        batch_id: batchId,
+        course_id: courseId,
+        module_id: moduleId,
+        topic_id: topicId,
+        reference_id: referenceId,
+        reference_status: referenceStatus,
+        created_by: createdBy
       }
     });
   }
   saveAttendees() {
     return this.Apollo.query({
-      query: save_attendies,
+      query: saveAttendies,
       variables: {
         userid: 'fsdfsdfsd',
         activityid: '432142314',
@@ -900,7 +898,7 @@ getprojectActivityData(userId, courseId) {
     }
   });
 }
-// get oerform activity details
+// get perform activity details
   getperformActivityData(userId , courseId) {
     return this.Apollo.query({
       query: getperformActivityData,
@@ -912,12 +910,12 @@ getprojectActivityData(userId, courseId) {
   }
   learnerUploadVideo(data) { return this.http.post(environment.apiUrl + 'wca/learnerUploadVideo', data); }
   learnerSumbitdeleteVideo(submitData) { return this.http.post(environment.apiUrl + 'wca/learnerSumbitdeleteVideo', submitData); }
-  // tslint:disable-next-line:variable-name
-  get_active_course_count(user_id) {
+
+  get_active_course_count(userId) {
     return this.Apollo.query({
-      query: get_active_course_count,
+      query: getActivecourseCount,
       variables: {
-        user_id,
+        user_id: userId,
       }
     });
   }
@@ -928,13 +926,13 @@ getprojectActivityData(userId, courseId) {
   uploadVideo(image) {
     return this.http.post(environment.wcaapiurl + 'api/upload/uploadimagefile', image);
   }
-  // tslint:disable-next-line:variable-name
-  boarddetail(user_id, course_id) {
+
+  boarddetail(userId, courseId) {
     return this.Apollo.query({
       query: boarddetail,
       variables: {
-        user_id,
-        course_id
+        user_id: userId,
+        course_id: courseId
       }
     });
   }
@@ -949,14 +947,14 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-// tslint:disable-next-line:variable-name
-  getAttendanceByUsername(courseid, full_name, user_id) {
+
+  getAttendanceByUsername(courseid, fullName, userId) {
     return this.Apollo.query({ // Get Activity Details For Instrcutor Led Screen.
       query: getTopicAttendanceDetailsByUsername,
       variables: {
         courseid,
-        full_name,
-        user_id
+        full_name: fullName,
+        user_id: userId
       }
     });
   }

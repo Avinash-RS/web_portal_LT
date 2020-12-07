@@ -2,18 +2,17 @@
 <div class="knowledge-landing-container">
 
   <div class="back-page">
-    <!-- <img src="assets\images\dialog backward.svg"> -->
-    <!-- <span [routerLink]="['/auth/knowledge']"> <font color="black"> < </font> Back </span> -->
-    <i class="fa fa-chevron-left" aria-hidden="true" style="font-size: 12px;cursor: pointer;">
-      <span style="font-family: 'Roboto'" [routerLink]="['/Learner/knowledge']">Back</span></i>
+    <div class="back-icons">
+      <mat-icon class="material-icons f_size_15 backIc">arrow_back_ios
+      </mat-icon>
+      <span [routerLink]="['/Learner/knowledge']">Back</span>
+    </div>
   </div>
 
   <div class="header-section">
 
     <nav aria-label="breadcrumb" class="coursebreadcrumb">
       <ol class="breadcrumb">
-        <!-- <li class="breadcrumb-item">
-          <a>Home</a></li> -->
         <li class="breadcrumb-item">
           <a>Knowledge Resources</a></li>
         <li class="breadcrumb-item active" aria-current="page">
@@ -45,26 +44,26 @@
           </ng-container>
           <ng-container *ngIf="!resData.thumbnail || resData.thumbnail.length == 0">
             <ng-container *ngIf="resData.fileType == 'pdf'">
-              <img src="../../../assets/images/PDF-res.svg">
+              <img src="../../../assets/images/PDF-res.svg" alt="pdf">
             </ng-container>
             <ng-container *ngIf="resData.fileType == 'jpg' || resData.fileType == 'png' || resData.fileType == 'jpeg'">
-              <img src="../../../assets/images/Image-res.svg">
+              <img src="../../../assets/images/Image-res.svg" alt="image">
             </ng-container>
             <ng-container *ngIf="resData.fileType == 'mp4'">
-              <img src="../../../assets/images/video-res.svg">
+              <img src="../../../assets/images/video-res.svg" alt="video">
             </ng-container>
             <ng-container *ngIf="resData.fileType == 'mp3'">
-              <img src="../../../assets/images/Audio-res.svg">
+              <img src="../../../assets/images/Audio-res.svg" alt="audio">
             </ng-container>
             <ng-container *ngIf="resData.fileType == undefined || resData.fileType == 'csv'">
-              <img src="../../../assets/images/Image-res.svg">
+              <img src="../../../assets/images/Image-res.svg" alt="image">
             </ng-container>
           </ng-container>
         </div>
 
         <div class="card-name">
-          <div class="file-name">
-            {{resData.filename}}
+          <div class="file-name" style="-webkit-box-orient: vertical;">
+            {{resData.filename + '.' + resData.fileType}}
           </div>
         </div>
       </div>
@@ -75,4 +74,10 @@
         <img src="https://i.picsum.photos/id/1018/3914/2935.jpg?hmac=3N43cQcvTE8NItexePvXvYBrAoGbRssNMpuvuWlwMKg">
       </div>
     </ng-container> -->
+  </div>
+
+  <div class="footer">
+    <span class="powered">
+      <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
+    </span>
   </div>
