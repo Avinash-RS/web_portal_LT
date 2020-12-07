@@ -21,14 +21,24 @@
     </nav>
    
     <div class="header-carousel">
-      <owl-carousel-o [options]="TopicsOptions" class="questionList">
+
+      <drag-scroll [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
+        <span *ngFor="let value of topicList;let i = index">
+          <span class="topic-container" (click)="onTopicSelection(value)">
+            <span class="{{ selectedTopic == value ? 'topic-chip active-topic' : 'topic-chip'}}" 
+            [matTooltip]="value">{{value}}</span>
+          </span>
+        </span>
+      </drag-scroll>
+      
+      <!-- <owl-carousel-o [options]="TopicsOptions" class="questionList">
         <ng-template *ngFor="let value of topicList;let i = index" carouselSlide>
           <div class="topic-container" (click)="onTopicSelection(value)">
             <div class="{{ selectedTopic == value ? 'topic-chip active-topic' : 'topic-chip'}}" 
             [matTooltip]="value">{{value}}</div>
           </div>
         </ng-template>
-      </owl-carousel-o>
+      </owl-carousel-o> -->
 
 
     </div>
