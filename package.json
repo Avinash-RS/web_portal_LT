@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod",
     "go": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build",
     "build:qa": "ng build --prod --configuration qa",
     "build:dev": "ng build --prod",

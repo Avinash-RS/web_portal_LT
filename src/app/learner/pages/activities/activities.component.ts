@@ -21,6 +21,8 @@ export class ActivitiesComponent implements OnInit {
   @ViewChild('uploadInput') uploadInput;
   perfornDetaildata: any;
   performdetailPageView = false;
+  projectDetaildata: any;
+  projectdetailPageView = false;
   hover = false;
   isLoader = false;
   hoverfile = false;
@@ -129,7 +131,7 @@ export class ActivitiesComponent implements OnInit {
   courseName: any;
   mouseOverIndex: any;
   videoSource: any;
-  projectMobileResponsive: boolean;
+  projectMobileResponsive = false;
   demo1TabIndex = 0;
   currentTab: any;
 
@@ -154,6 +156,9 @@ export class ActivitiesComponent implements OnInit {
     this.Lservice.closeMobileResp$.subscribe((data: any) => {
       this.performdetailPageView = data;
     });
+    this.Lservice.closeMobileResp$.subscribe((data: any) => {
+      this.projectdetailPageView = data;
+    });
     if (index) {
       // tslint:disable-next-line:radix
       this.demo1TabIndex = parseInt(index);
@@ -161,10 +166,15 @@ export class ActivitiesComponent implements OnInit {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.currentTab === 'Perform' || this.demo1TabIndex === 1 && this.screenWidth < 800) {
-      this.mobileResponsive = true;
-    } else {
-      this.mobileResponsive = false;
-    }
+        this.mobileResponsive = true;
+      } else {
+        this.mobileResponsive = false;
+      }
+    if (this.currentTab === 'Project' || this.demo1TabIndex === 2 && this.screenWidth < 800) {
+        this.projectMobileResponsive = true;
+      } else {
+        this.projectMobileResponsive = false;
+      }
   }
 
   activeTab(event) {
@@ -182,20 +192,29 @@ export class ActivitiesComponent implements OnInit {
       } else {
         this.mobileResponsive = false;
       }
-    }
-  }
-
-  projectTab(event) {
-    if (event.tab.textLabel === 'Project') {
+    } else if (event.tab.textLabel === 'Project') {
       this.screenHeight = window.innerHeight;
       this.screenWidth = window.innerWidth;
       if (this.screenWidth < 800) {
+        this.projectDetaildata = this.projectDetails;
         this.projectMobileResponsive = true;
       } else {
         this.projectMobileResponsive = false;
       }
     }
   }
+
+  // projectTab(event) {
+  //   if (event.tab.textLabel === 'Project') {
+  //     this.screenHeight = window.innerHeight;
+  //     this.screenWidth = window.innerWidth;
+  //     if (this.screenWidth < 800) {
+  //       this.projectMobileResponsive = true;
+  //     } else {
+  //       this.projectMobileResponsive = false;
+  //     }
+  //   }
+  // }
 
   goToCourse() {
     this.route.navigateByUrl('/Learner/MyCourse');
