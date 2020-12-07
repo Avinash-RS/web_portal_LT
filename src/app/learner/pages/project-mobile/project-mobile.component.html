@@ -9,7 +9,19 @@
       </span>
     </span>
   </div> -->
-
+  <div *ngIf="projectDetails?.length == 0">
+    <mat-card class="noSessionCard color-yellow-card-status">
+      <div class="d-flex justify-content-between align-items-center flexStyle">
+        <div class="sessionImg">
+          <img class="noSessionImg" src="assets/noProject.svg" alt="nocourse"> 
+        </div>
+        <div class="noData">
+          <span class=""> You have no project activity at the moment!</span>
+        </div>
+      </div>
+    </mat-card>  
+  </div>
+  
   <div class="row mr-0 ml-0" *ngIf="projectDetails?.length > 0">
     <div class="col-sm-12">
       <div class="box-0-1" *ngFor="let project of projectDetails; let i = index"
@@ -50,14 +62,13 @@
       && project.projectActivity.grade_status == 'Not Evaluated'"> <span class="submitdot"></span>
               Submitted</span>
 
-            <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated'"> <span
-                class="gradedot"></span>
+              <span class="f_wt_600 graded" *ngIf="project.projectActivity.grade_status == 'Evaluated'"> <span class="gradedot"></span>
               Graded</span>
           </div>
         </div><br>
 
         <div class="row">
-          <div class="col-5">
+          <div class="col-12">
             <span class="group">
               <button mat-mini-fab class="groupBtn">
                 <mat-icon class="grpIcon" (click)="learnerView(learnerDialog, project)">group</mat-icon>
@@ -66,25 +77,14 @@
                 (click)="learnerView(learnerDialog, project)">
                 {{project.projectActivity.groupname}} ({{project.projectActivity.groupDetails.length}})
               </span>
-              <!-- <span class="teamName" *ngIf="project.projectActivity.groupname.length > 14"
-              matTooltip="{{project.projectActivity.groupname}}" matTooltipClass="custom-mat-tooltip">
-              {{(project.projectActivity.groupname| slice:0:14)+'...'}} 
-            </span>&nbsp; -->
             </span>
           </div>
-          <div class="col-7 text-right">
-            <!-- <div class="m-r-13">Start date :<span class="margin-30"></span>End date :</div>
-          <div class="f_wt_600">
-            <span>{{project.activityStartDate}}</span>
-            <span class="m-r-5"></span>
-            <span>{{project.activityEndDate}}</span></div> -->
-
-            <div>Start date :<span class="margin-30"></span>End date :</div>
-            <div class="m-r-2 f_wt_600">{{project.activityStartDate}}
-              <span class="f_wt_600"></span>{{project.activityEndDate}}</div>
-          </div>
-        </div>
-
+        </div><br>
+            <div class="row">
+            <div class="m-l-16"><strong>Start date :</strong><span class="margin-30"></span><strong> End date : </strong></div>
+            <div class="m-l-16 f_wt_300"> {{project.projectActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}
+              <span class="f_wt_300 m-l-8"></span> {{project.projectActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</div>
+            </div><br>
         <div class="ml-16">
           <div class="row">
             <span>Activity description:</span>
@@ -184,8 +184,7 @@
                         *ngFor="let material of project.projectActivity.videodetails; let i = index">
                         <div
                           [ngClass]="project.projectActivity.videodetails.length >= 2 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
-                          <mat-card class="p-0 iterationCard"
-                            (click)="projectPreviewDoc(projectPreviewDialog,videoDialog, material, 'files')">
+                          <mat-card class="p-0 iterationCard">
                             <div class="row ml-0 mr-0 carouselRow1">
                               <div class="col-12 m-auto">
                                 <mat-icon class="iterationicons"
@@ -272,14 +271,14 @@
                       <mat-icon class="add-icon">add</mat-icon> Add your files
                     </button>
 
-                    <button mat-stroked-button class="submit-btn"
+                      <button mat-stroked-button class="submit-btn"
                       (click)="learnerSumbitdeleteVideo(project, '' ,'submit')"
                       *ngIf="project.projectActivity.submit_status == 'notsubmitted' && project.projectActivity.videodetails.length > 0">
                       Submit
                     </button>
-                    <button mat-stroked-button
-                      *ngIf="project.projectActivity.submit_status == 'notsubmitted' && project.projectActivity.videodetails.length == 0 || project.enableSubmit == false"
-                      class="submit-btn"> Submit </button>
+                    <button mat-stroked-button class="submitted-btn mt-2"
+                      *ngIf="project.projectActivity.submit_status == 'notsubmitted' && (project.projectActivity.videodetails.length == 0 || project.enableSubmit == false)"> Submit </button>
+
                     <button mat-stroked-button class="submitted-btn" [disabled]="true"
                       *ngIf="project.projectActivity.submitAction == 'submit'">
                       Submitted
@@ -390,48 +389,35 @@
     </ng-template>
   </div>
 
-  <div class="row mr-0 ml-0" *ngIf="projectDetails?.length == 0">
-    <div class="col-12 m-auto text-center">
-      <span class="errormsg">
-        <img class="assignImg" alt="" src="assets/002-project-management.svg">
-        <span class="txt">You have no project activity at the moment!</span>
-      </span>
-    </div>
-  </div>
-
   <ng-template #projectPreviewDialog>
     <div>
-      <div class="col-12">
+      <div class="col-12 text-right" *ngIf="showDownload">
         <button mat-mini-fab class="download-button">
-          <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
+          <mat-icon class="download-icon" (click)="downloadPdf(previewDoc)">get_app</mat-icon>
         </button>
-        <button mat-mini-fab class="closeBtn">
+        <button mat-mini-fab class="close-button">
           <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
         </button>
       </div>
+      <div class="col-12 text-right" *ngIf="!showDownload">
+        <button mat-mini-fab class="closeBtn">
+          <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
+        </button>
+        </div>
     </div>
     <div *ngIf="previewDoc">
       <app-pdfreader [url]="previewDoc"></app-pdfreader>
     </div>
   </ng-template>
 
-  <!-- <ng-template #projectPreviewDialog>
-    <div>
-      <div class="col-12">
-        <button mat-mini-fab class="closeBtn">
-          <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
-        </button>
-      </div>
-    </div>
-    <div *ngIf="previewDoc">
-      <app-pdfreader [url]="previewDoc"></app-pdfreader>
-    </div>
-  </ng-template> -->
 
   <ng-template #videoDialog>
     <div class="row">
-      <div class="col-12">
-        <button mat-mini-fab class="close-buttonVideo">
+      <div class="col-12 text-right">
+        <button mat-mini-fab class="download-button" *ngIf="showDownload">
+          <mat-icon class="download-icon" (click)="downloadFile(videoSource)">get_app</mat-icon>
+        </button>
+        <button mat-mini-fab class="close-button">
           <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
         </button>
       </div>
