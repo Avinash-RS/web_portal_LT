@@ -157,21 +157,39 @@ export class ProjectMobileComponent implements OnInit {
           element.submitType = false;
         }
         // Activity Dates
+        // const startDate = new Date(element.projectActivity.activitystartdate);
+        // element.activityStartDate = moment(startDate).format('ll');
+        // element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
+        // const endDate = new Date(element.projectActivity.activityenddate);
+        // element.activityEndDate = moment(endDate).format('ll');
+
+        const crrDate = new Date();
         const startDate = new Date(element.projectActivity.activitystartdate);
-        element.activityStartDate = moment(startDate).format('ll');
+        // element.activityStartDate = moment(startDate).format('ll');
         element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
         const endDate = new Date(element.projectActivity.activityenddate);
-        element.activityEndDate = moment(endDate).format('ll');
+        // element.activityEndDate = moment(endDate).format('ll');
+        element.enableSubmit = this.dateDiff(startDate,
+          endDate, crrDate);
         const submitDate = new Date(element.projectActivity.submitted_on);
         element.submittedOn = moment(submitDate).format('ll');
-        if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
-          element.enableSubmit = false;
-        } else {
-          element.enableSubmit = true;
-        }
+        // if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
+        //   element.enableSubmit = false;
+        // } else {
+        //   element.enableSubmit = true;
+        // }
       });
  }
 });
+  }
+  dateDiff(startDate, endDate, currentDate) {
+    const startDateDiff = startDate - currentDate;
+    const endDateDiff = endDate - currentDate;
+    if ((startDateDiff <= 0) && (endDateDiff >= 0)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   learnerUploadVideo(project, submitAction) {

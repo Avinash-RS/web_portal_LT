@@ -4,7 +4,7 @@
     white-space: nowrap;
   }
   .projHead {
-    color: $lxp-theme-green;
+    color: $color-blank;
     position: absolute;
   }
   .groupBtn {
@@ -62,7 +62,13 @@
   margin-right: 13px;
 }
 .margin-30{
-  margin-left: 12px;
+  margin-left: 78px;
+}
+.m-l-16 {
+  margin-left: 16px;
+}
+.m-l-8 {
+  margin-left: 8px;
 }
 .margin-21{
   margin-left: 21px;
