@@ -186,12 +186,53 @@
   }
 
   .gradedot {
-      background-color: #0C781B;
-      height: 10px;
-      width: 10px;
-      border-radius: 50%;
-      display: inline-block;
+    background-color: #0C781B;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    right: 9px;
+}
+  .graded {
+    color: #0C781B;
+    position: relative;
+    right: 3px;
   }
+  .download-button {
+    background: #C02222 !important;
+    float: right;
+    position: relative;
+    top: -6px;
+    right: 42px;
+    height: 35px;
+    width: 35px;
+}
+.close-button {
+  background: #C02222 !important;
+  float: right;
+  top: -7px;
+  position: relative;
+  right: -39px;
+  height: 35px;
+  width: 35px;
+}
+.closeBtn {
+  background: #C02222 !important;
+  height: 35px;
+  width: 35px;
+  // position: relative;
+  // left: 37px;
+  // bottom: 5px;
+}
+.close-buttonVideo {
+  background: $lxp-theme-green !important; // red color
+  // float: right;
+  top: -12px;
+  position: relative;
+  height: 35px;
+  width: 35px;
+}
 
 .textGrayColor {
   color: $color-lightGray;
@@ -291,8 +332,8 @@
   color: $color-white !important;
   background-color: #898989;
   width: 45%;
-  position: absolute;
-  left: 81px;
+  // position: absolute;
+  // left: 81px;
   cursor: not-allowed;
 }
 

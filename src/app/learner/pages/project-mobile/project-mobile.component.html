@@ -62,8 +62,7 @@
       && project.projectActivity.grade_status == 'Not Evaluated'"> <span class="submitdot"></span>
               Submitted</span>
 
-            <span class="f_wt_600 grade" *ngIf="project.projectActivity.grade_status == 'Evaluated'"> <span
-                class="gradedot"></span>
+              <span class="f_wt_600 graded" *ngIf="project.projectActivity.grade_status == 'Evaluated'"> <span class="gradedot"></span>
               Graded</span>
           </div>
         </div><br>
@@ -196,8 +195,7 @@
                         *ngFor="let material of project.projectActivity.videodetails; let i = index">
                         <div
                           [ngClass]="project.projectActivity.videodetails.length >= 2 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
-                          <mat-card class="p-0 iterationCard"
-                            (click)="projectPreviewDoc(projectPreviewDialog,videoDialog, material, 'files')">
+                          <mat-card class="p-0 iterationCard">
                             <div class="row ml-0 mr-0 carouselRow1">
                               <div class="col-12 m-auto">
                                 <mat-icon class="iterationicons"
@@ -284,14 +282,14 @@
                       <mat-icon class="add-icon">add</mat-icon> Add your files
                     </button>
 
-                    <button mat-stroked-button class="submit-btn"
+                      <button mat-stroked-button class="submit-btn"
                       (click)="learnerSumbitdeleteVideo(project, '' ,'submit')"
                       *ngIf="project.projectActivity.submit_status == 'notsubmitted' && project.projectActivity.videodetails.length > 0">
                       Submit
                     </button>
-                    <button mat-stroked-button
-                      *ngIf="project.projectActivity.submit_status == 'notsubmitted' && project.projectActivity.videodetails.length == 0 || project.enableSubmit == false"
-                      class="submit-btn"> Submit </button>
+                    <button mat-stroked-button class="submitted-btn mt-2"
+                      *ngIf="project.projectActivity.submit_status == 'notsubmitted' && (project.projectActivity.videodetails.length == 0 || project.enableSubmit == false)"> Submit </button>
+
                     <button mat-stroked-button class="submitted-btn" [disabled]="true"
                       *ngIf="project.projectActivity.submitAction == 'submit'">
                       Submitted
@@ -404,37 +402,33 @@
 
   <ng-template #projectPreviewDialog>
     <div>
-      <div class="col-12">
+      <div class="col-12 text-right" *ngIf="showDownload">
         <button mat-mini-fab class="download-button">
-          <mat-icon class="download-icon" (click)="downloadPdf(docpath)">get_app</mat-icon>
+          <mat-icon class="download-icon" (click)="downloadPdf(previewDoc)">get_app</mat-icon>
         </button>
-        <button mat-mini-fab class="closeBtn">
+        <button mat-mini-fab class="close-button">
           <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
         </button>
       </div>
+      <div class="col-12 text-right" *ngIf="!showDownload">
+        <button mat-mini-fab class="closeBtn">
+          <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
+        </button>
+        </div>
     </div>
     <div *ngIf="previewDoc">
       <app-pdfreader [url]="previewDoc"></app-pdfreader>
     </div>
   </ng-template>
 
-  <!-- <ng-template #projectPreviewDialog>
-    <div>
-      <div class="col-12">
-        <button mat-mini-fab class="closeBtn">
-          <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
-        </button>
-      </div>
-    </div>
-    <div *ngIf="previewDoc">
-      <app-pdfreader [url]="previewDoc"></app-pdfreader>
-    </div>
-  </ng-template> -->
 
   <ng-template #videoDialog>
     <div class="row">
-      <div class="col-12">
-        <button mat-mini-fab class="close-buttonVideo">
+      <div class="col-12 text-right">
+        <button mat-mini-fab class="download-button" *ngIf="showDownload">
+          <mat-icon class="download-icon" (click)="downloadFile(videoSource)">get_app</mat-icon>
+        </button>
+        <button mat-mini-fab class="close-button">
           <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
         </button>
       </div>

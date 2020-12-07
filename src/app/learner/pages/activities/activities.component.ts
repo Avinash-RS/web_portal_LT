@@ -154,6 +154,7 @@ export class ActivitiesComponent implements OnInit {
 
   ngOnInit() {
     const index = localStorage.getItem('userTabLocation');
+    // this.projectDetaildata = this.projectDetails;
     this.Lservice.closeMobileResp$.subscribe((data: any) => {
       this.performdetailPageView = data;
     });
@@ -172,7 +173,8 @@ export class ActivitiesComponent implements OnInit {
         this.mobileResponsive = false;
       }
     if (this.currentTab === 'Project' || this.demo1TabIndex === 2 && this.screenWidth < 800) {
-        this.projectMobileResponsive = true;
+      this.projectDetaildata = this.projectDetails;
+      this.projectMobileResponsive = true;
       } else {
         this.projectMobileResponsive = false;
       }
@@ -217,18 +219,6 @@ export class ActivitiesComponent implements OnInit {
       }
     }
   }
-
-  // projectTab(event) {
-  //   if (event.tab.textLabel === 'Project') {
-  //     this.screenHeight = window.innerHeight;
-  //     this.screenWidth = window.innerWidth;
-  //     if (this.screenWidth < 800) {
-  //       this.projectMobileResponsive = true;
-  //     } else {
-  //       this.projectMobileResponsive = false;
-  //     }
-  //   }
-  // }
 
   goToCourse() {
     this.route.navigateByUrl('/Learner/MyCourse');

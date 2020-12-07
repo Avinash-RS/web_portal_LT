@@ -67,6 +67,7 @@ export class ProjectMobileComponent implements OnInit {
     },
     nav: true
   };
+  showDownload: boolean;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
@@ -83,6 +84,7 @@ export class ProjectMobileComponent implements OnInit {
 
   ngOnInit() {
     this.projectDetails = this.projectDetailPageData;
+    this.getprojectActivityData();
     this.projectDetails.forEach(element => {
       this.groupDetails = element.projectActivity.groupDetails;
       element.showLearnerList = false;
@@ -290,6 +292,7 @@ export class ProjectMobileComponent implements OnInit {
 
     projectPreviewDoc(templateRef: TemplateRef<any>, videoDialog, path, type) {
       if (type === 'material') {
+        this.showDownload = false;
         if (path.doc_type !== 'video/mp4') {
           this.dialog.open(templateRef, {
             width: '100%',
@@ -303,7 +306,7 @@ export class ProjectMobileComponent implements OnInit {
           this.videoPreview(videoDialog, path);
         }
       } else if (type === 'files') {
-        console.log('inside files');
+        this.showDownload = true;
         if (path.doc_type !== 'video/mp4') {
           this.dialog.open(templateRef, {
             width: '100%',
@@ -319,5 +322,17 @@ export class ProjectMobileComponent implements OnInit {
           this.videoPreview(videoDialog, this.videoSource);
         }
       }
+    }
+    downloadPdf(doc) {
+      console.log('doc', doc);
+      const link = document.createElement('a');
+      link.target = '_blank';
+      link.style.display = 'none';
+      link.href = doc.path;
+      link.click();
+    }
+
+    downloadFile(data) {
+      window.open(data);
     }
 }
