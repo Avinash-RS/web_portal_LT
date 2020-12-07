@@ -486,21 +486,21 @@
                                                                                         *ngIf="file.doc_type == 'text/plain' ">
                                                                                         description
                                                                                     </mat-icon>
-                                                                                    <div class="col-8">
+                                                                                    <div class="col-7">
                                                                                         {{file.type_name}}
                                                                                     </div>
-        
                                                                                     <div class="col-2 f_size_12"
-                                                                                        *ngIf="file?.type_name =='Link'">
+                                                                                        *ngIf="file?.doc_type =='link'">
                                                                                         <span class="ml-2">
-                                                                                            NA
+                                                                                           NA
                                                                                         </span>
         
                                                                                     </div>
+                    
                                                                                     <div class="col-2 f_size_12"
-                                                                                        *ngIf="file?.size">
-                                                                                        {{file.size}}
-                                                                                    </div>
+                                                                                    *ngIf="file?.size">
+                                                                                    {{file.size}}
+                                                                                </div>
                                                                                     <div class="col-1">
                                                                                         <a href="{{file?.path}}"
                                                                                             (click)="add_topic_reference(res)"
