@@ -1,5 +1,8 @@
 @import "../../../../assets/variable.scss";
 @media (max-width: 767px) {
+  .singleline-text {
+    white-space: nowrap;
+  }
   .projHead {
     color: $lxp-theme-green;
     position: absolute;
@@ -65,8 +68,8 @@
   margin-left: 21px;
 }
 .work {
-  position: relative;
-  left: 118px;
+  margin-top: 5px;
+  text-align: center;
 }
 .fileData {
   background-color: #D5D5D5;
@@ -112,23 +115,26 @@
 // }
 .closeDialog {
   float: right;
-  position: relative;
-  top: -20px;
-  left: 23px;
+  position: absolute;
+  top: 5px;
+  right: 0px;
   font-size: large;
 }
     ::ng-deep .learnerDialog .mat-dialog-container {
       position: relative !important;
-      right: 74px !important;
-      bottom: 15px !important;
+      right: 80px !important;
+      // bottom: -40px !important;
+      overflow: hidden;
     }
     ::ng-deep .learner .list-group-item {
       border: none !important;
+      padding: 0rem 0rem;
+      padding-bottom: 0.50rem;
     }
     .grpName {
       position: relative;
-    top: -19px;
-    right: 16px;
+      top: -5px;
+      right: 0px;
     }
 
     .redHover:hover {
@@ -258,6 +264,7 @@
   height: 3rem;
   font-weight: bolder;
   font-size: 15px;
+  width: 12rem !important;
 }
 
 .add-icon {
@@ -357,9 +364,21 @@
     color: #898989;
   }
 
+  .icons-1 {
+    font-size: 30px;
+    padding: 1.2rem 5.2rem;
+    color: #898989;
+  }
+
   .materialCard {
     width: 7rem;
     height: 8rem;
+  }
+
+  .materialCards {
+    width: 12rem;
+    height: 8rem;
+    margin-left: 2rem;
   }
 
   .fileColor {
@@ -388,4 +407,85 @@
   .matCardIconRow {
     height: 60%;
   }
+
+  .work-border {
+    border: 0.25px solid #ccc;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 0px 6px #00000029;
+    opacity: 1
+  }
+
+  .deleteIcon {
+    color: #5C6873;
+    font-size: 21px;
+    margin-top: 4px;
+  }
+
+  .del-pos {
+    position: relative;
+    bottom: 155px;
+  }
+
+  .input-hide {
+    position: absolute;
+    left: 60px;
+    top: 29px;
+    opacity: 0;
+  }
+
+  .iterationicons {
+    font-size: 50px;
+    padding: 0.4rem 4.2rem;
+    color: #898989;
+  }
+
+  .iterationCard{
+    height: 8rem;
+  }
+
+  .close-buttonVideo {
+    background: $lxp-theme-green !important; // red color
+    float: right;
+    top: -8px;
+    position: relative;
+    height: 35px;
+    width: 35px;
+  }
+}
+
+
+
+:host ::ng-deep .widthClass .owl-carousel.owl-drag .owl-item {
+  width: 15.5rem !important;
+}
+
+.carouselCol {
+  max-width: 100% !important;
+  height: 15rem;
+}
+
+.carouselCol1 {
+  max-width: 100% !important;
+  height: 11rem;
+}
+
+.carouselRow1 {
+  height: 7rem;
+}
+
+.carouselText {
+  font-size: 12px;
+  color: #ffffff;
+}
+
+:host ::ng-deep .owlHeight .owl-theme {
+  height: 11rem !important;
+}
+
+:host ::ng-deep .widthClass .owl-theme {
+  height: 11rem !important;
+}
+
+:host ::ng-deep .widthClass .owl-theme .owl-nav {
+  display: none !important;
 }
