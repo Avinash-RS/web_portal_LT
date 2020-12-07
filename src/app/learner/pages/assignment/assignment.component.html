@@ -102,7 +102,7 @@
                           <p class="activityDisc font-weight-bold">Score</p>
                           <div>
                             <span>
-                              {{file.score_mark}}/{{file.score}}
+                              {{file.score_mark == null ? '-' : file.score_mark}}/{{file.score}}
                             </span>
                           </div>
                         </div>
