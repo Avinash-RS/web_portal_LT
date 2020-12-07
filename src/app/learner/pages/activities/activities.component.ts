@@ -134,6 +134,7 @@ export class ActivitiesComponent implements OnInit {
   projectMobileResponsive = false;
   demo1TabIndex = 0;
   currentTab: any;
+  assigmentMobileResponsive = false;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
@@ -153,6 +154,7 @@ export class ActivitiesComponent implements OnInit {
 
   ngOnInit() {
     const index = localStorage.getItem('userTabLocation');
+    // this.projectDetaildata = this.projectDetails;
     this.Lservice.closeMobileResp$.subscribe((data: any) => {
       this.performdetailPageView = data;
     });
@@ -171,10 +173,16 @@ export class ActivitiesComponent implements OnInit {
         this.mobileResponsive = false;
       }
     if (this.currentTab === 'Project' || this.demo1TabIndex === 2 && this.screenWidth < 800) {
-        this.projectMobileResponsive = true;
+      this.projectDetaildata = this.projectDetails;
+      this.projectMobileResponsive = true;
       } else {
         this.projectMobileResponsive = false;
       }
+    if (this.currentTab === 'Assignments' || this.demo1TabIndex === 0 && this.screenWidth < 800) {
+      this.assigmentMobileResponsive = true;
+    } else {
+      this.assigmentMobileResponsive = false;
+    }
   }
 
   activeTab(event) {
@@ -201,20 +209,16 @@ export class ActivitiesComponent implements OnInit {
       } else {
         this.projectMobileResponsive = false;
       }
+    } else if (event.tab.textLabel === 'Assignments') {
+      this.screenHeight = window.innerHeight;
+      this.screenWidth = window.innerWidth;
+      if (this.screenWidth < 800) {
+        this.assigmentMobileResponsive = true;
+      } else {
+        this.assigmentMobileResponsive = false;
+      }
     }
   }
-
-  // projectTab(event) {
-  //   if (event.tab.textLabel === 'Project') {
-  //     this.screenHeight = window.innerHeight;
-  //     this.screenWidth = window.innerWidth;
-  //     if (this.screenWidth < 800) {
-  //       this.projectMobileResponsive = true;
-  //     } else {
-  //       this.projectMobileResponsive = false;
-  //     }
-  //   }
-  // }
 
   goToCourse() {
     this.route.navigateByUrl('/Learner/MyCourse');
