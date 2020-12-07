@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
@@ -93,6 +93,8 @@ export class LearnerActivityCenterComponent implements OnInit {
   columnSearch: any;
   statusBased: string;
   navDetails: any;
+  screenHeight = window.innerHeight;
+  screenWidth = window.innerWidth;
 
   constructor(private service: LearnerServicesService, private gs: GlobalServiceService,
               private route: Router, private toastr: ToastrService, ) {
@@ -100,7 +102,12 @@ export class LearnerActivityCenterComponent implements OnInit {
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.navDetails = this.detail || JSON.parse(atob(localStorage.getItem('course')));
     this.userDetails = this.gs.checkLogout();
-    this.tabledef();
+    if (this.screenWidth < 800) {
+      this.tabledef1();
+    } else {
+      this.tabledef();
+      } 
+    // this.tabledef();
     // this.getCourseActivitiesforTable();
 
   }
@@ -220,6 +227,63 @@ export class LearnerActivityCenterComponent implements OnInit {
         },
       ];
   }
+
+  tabledef1() {
+    if (this.navDetails?.tableType === 'submission') {
+      this.hideCourseColumn = true;
+    }
+    this.columnDefs =
+      [
+        {
+          headerName: 'Activity',
+          sortable: true,
+          filter: true,
+          flex: 1.5,
+          floatingFilterComponentParams: { suppressFilterButton: true },
+          field: 'activity',
+          valueGetter: (params) => params.data?.activity ? params.data.activity : '-',
+        },
+        {
+          headerName: 'Start date',
+          sortable: true,
+          filter: true,
+          flex: 2,
+          floatingFilterComponentParams: { suppressFilterButton: true },
+          field: 'activitystartdate',
+          valueGetter: (params) => params.data?.activitystartdate ? params.data.activitystartdate : '-',
+        },
+        {
+          headerName: 'End date',
+          sortable: true,
+          filter: true,
+          flex: 2,
+          floatingFilterComponentParams: { suppressFilterButton: true },
+          field: 'activityenddate',
+          valueGetter: (params) => params.data?.activityenddate ? params.data.activityenddate : '-',
+        },
+        {
+          headerName: 'Status',
+          field: 'status',
+          sortable: true,
+          filter: true,
+          flex: 2,
+          floatingFilterComponentParams: { suppressFilterButton: true },
+          cellRenderer: (data) => {
+            if (data.value === 'Submitted') {
+              return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color:#FFA04E">stop_circle</mat-icon></span> Submitted `;
+            } else if (data.value === 'Graded') {
+              return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color: #679959">stop_circle</mat-icon></span> Graded `;
+            } else if (data.value === 'Yet to submit') {
+              return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color: #6A6A6A">stop_circle</mat-icon></span> Yet to Submit `;
+            } else if (data.value === 'Overdue') {
+              return `<span> <mat-icon class="mat-icon material-icons f_size_16" style="vertical-align: text-top; color:#C02222 ">stop_circle</mat-icon></span> Overdue`;
+            }
+
+          },
+        },
+      ];
+  }
+
 
   goBack() {
     if (this.navDetails?.tableType === 'submission') {

@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
   platformTxt = navigator.platform;
   isProgressBar = false;
   spinnerType = SPINNER.circle;
+  isFooterVisible: boolean = true;
 
    // FOR DRM(Restriction for right click)
    @HostListener('document:keydown', ['$event'])
@@ -79,7 +80,14 @@ export class AppComponent implements OnInit {
     // }
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
-    ).subscribe(() => {
+    ).subscribe((e: any) => {
+      let urlIdentifier = e.url.split("/")
+      let possiblePages = ['register', 'login', 'recover']
+      console.log(urlIdentifier[5],"GOKUL");
+      if(possiblePages.includes(urlIdentifier[2])){
+          this.isFooterVisible = false;
+        }
+
       const rt = this.getChild(this.activatedRoute);
       rt.data.subscribe(data => {
         this.titleService.setTitle(data.title);
