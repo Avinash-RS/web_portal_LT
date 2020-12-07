@@ -85,7 +85,6 @@ export class ProjectMobileComponent implements OnInit {
   ngOnInit() {
     this.projectDetails = this.projectDetailPageData;
     this.getprojectActivityData();
-    // this.projectDetails = [];
     this.projectDetails.forEach(element => {
       this.groupDetails = element.projectActivity.groupDetails;
       element.showLearnerList = false;

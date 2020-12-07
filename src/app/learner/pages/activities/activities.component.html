@@ -21,7 +21,8 @@
   <mat-tab-group  animationDuration="1000ms" (selectedTabChange)="tabChanged($event); activeTab($event)"
   [(selectedIndex)]="demo1TabIndex">
     <mat-tab label="Assignments">
-      <mat-accordion class="example-headers-align" multi *ngIf="assignmentContent?.coursedetails.length > 0">
+      <app-assignment *ngIf="assigmentMobileResponsive"></app-assignment>
+      <mat-accordion class="example-headers-align" multi *ngIf="assignmentContent?.coursedetails.length > 0 && !assigmentMobileResponsive">
         <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
           <mat-expansion-panel>
             <mat-expansion-panel-header>
@@ -241,7 +242,7 @@
         </div>
       </div> -->
 
-      <div *ngIf="assignmentContent?.coursedetails.length < 1">
+      <div *ngIf="assignmentContent?.coursedetails.length < 1 && !assigmentMobileResponsive">
         <mat-card class="noSessionCard color-yellow-card-status">
           <div class="row mar-t-12">
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
@@ -589,7 +590,7 @@
         <mat-card class="noSessionCard color-yellow-card-status">
           <div class="row mar-t-12 noSessioncardRow">
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-              <img class="" src="assets/Perform.svg" alt="perform"> 
+              <img class="" src="assets/noPerform.svg" alt="perform"> 
             </div>
             <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
               <span class="spanTxt"> You have no perform activity at the moment!</span>
@@ -1000,7 +1001,7 @@
         <mat-card class="noSessionCard color-yellow-card-status">
           <div class="row mar-t-12">
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-              <img class="actImg" src="assets/Project.svg" alt="project"> 
+              <img class="actImg" src="assets/noProject.svg" alt="project"> 
             </div>
             <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
               <span class="actTxt"> You have no project activity at the moment!</span>

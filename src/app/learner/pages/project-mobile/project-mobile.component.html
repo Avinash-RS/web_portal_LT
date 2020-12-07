@@ -9,7 +9,19 @@
       </span>
     </span>
   </div> -->
-
+  <div *ngIf="projectDetails?.length == 0">
+    <mat-card class="noSessionCard color-yellow-card-status">
+      <div class="d-flex justify-content-between align-items-center flexStyle">
+        <div class="sessionImg">
+          <img class="noSessionImg" src="assets/noProject.svg" alt="nocourse"> 
+        </div>
+        <div class="noData">
+          <span class=""> You have no project activity at the moment!</span>
+        </div>
+      </div>
+    </mat-card>  
+  </div>
+  
   <div class="row mr-0 ml-0" *ngIf="projectDetails?.length > 0">
     <div class="col-sm-12">
       <div class="box-0-1" *ngFor="let project of projectDetails; let i = index"
@@ -375,15 +387,6 @@
         </ul>
       </div>
     </ng-template>
-  </div>
-
-  <div class="row mr-0 ml-0" *ngIf="projectDetails?.length == 0">
-    <div class="col-12 m-auto text-center">
-      <span class="errormsg">
-        <img class="assignImg" alt="" src="assets/002-project-management.svg">
-        <span class="txt">You have no project activity at the moment!</span>
-      </span>
-    </div>
   </div>
 
   <ng-template #projectPreviewDialog>
