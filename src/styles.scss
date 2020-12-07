@@ -137,6 +137,11 @@ body {
   stroke-linecap: round;
   stroke: #ddd;
 }
+.contentSetter {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
 @keyframes rotate {
   100% {
@@ -978,4 +983,5 @@ mat-header-cell,
 }
 .heightClass {
   height: 100%;
+  flex: 1;
 }
