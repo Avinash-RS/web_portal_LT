@@ -195,7 +195,7 @@
                                                                                                 *ngIf="fourLvl?.title?.length >= 65"
                                                                                                 tooltip="{{fourLvl?.title}}"
                                                                                                 placement="right"
-                                                                                                (click)="playTopic(fourLvl.link,fourLvl.title,fourLvl.status,fourLvl?.title,fourLvl?.status,scromModuleData?.length,fourLvl?.topic_len,l + 1,i)">
+                                                                                                (click)="playTopic(fourLvl.link,fourLvl.title,fourLvl.status,fourLvl?.title,fourLvl?.status,scromModuleData?.length,fourLvl?.topic_len,l + 1,i);!drawersOpen?drawer.close():''">
                                                                                                 <p class="titleName">
                                                                                                     {{fourLvl?.title | slice:0:56}}...
                                                                                                 </p>
@@ -204,7 +204,7 @@
         
                                                                                             <span class="topicnm"
                                                                                                 *ngIf="fourLvl?.title?.length < 65"
-                                                                                                (click)="playTopic(fourLvl.link,fourLvl.title,fourLvl.status,fourLvl?.title,fourLvl?.status,scromModuleData?.length,fourLvl?.topic_len,l + 1,i)">
+                                                                                                (click)="playTopic(fourLvl.link,fourLvl.title,fourLvl.status,fourLvl?.title,fourLvl?.status,scromModuleData?.length,fourLvl?.topic_len,l + 1,i);!drawersOpen?drawer.close():''">
         
                                                                                                 <p class="titleName">
                                                                                                     {{fourLvl?.title}}
@@ -264,7 +264,7 @@
                                                             <ng-template matStepLabel>
                                                                 <span class="topicnm" *ngIf="mod?.title?.length >= 65"
                                                                     tooltip="{{mod?.title}}" placement="right"
-                                                                    (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i)">
+                                                                    (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i);!drawersOpen?drawer.close():''">
                                                                     <p class="titleName" [ngClass]="(j===nextPrevHolder && i===moduleHolder) ? 'titleSelected' : ''">
                                                                         {{mod?.title | slice:0:56}}...
                                                                     </p>
@@ -272,7 +272,7 @@
                                                                 </span>
         
                                                                 <span class="topicnm" *ngIf="mod?.title.length < 65"
-                                                                    (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i)">
+                                                                    (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i);!drawersOpen?drawer.close():''">
         
                                                                     <p class="titleName" [ngClass]="(j===nextPrevHolder && i===moduleHolder) ? 'titleSelected' : ''">
                                                                         {{mod?.title}}
@@ -303,7 +303,7 @@
                                 menu
                             </mat-icon>
         
-                            <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'" *ngIf="scromModuleData?.length !== 0">
+                            <div [ngClass]="drawer.opened==true?'prevBtnOpn':'prevBtn'" *ngIf="scromModuleData?.length !== 0 && selectedTabIndex == 0">
                                 <button class=" pointer" mat-button [disabled]="isprevEnable"
                                     (click)="topicPrve()">{{'Prev' | translate }}</button>
                                 <span class="">|</span>
@@ -323,18 +323,14 @@
                             </div>
                             <div class="col-2 text-right mobileHoriz">
                                 <mat-icon class="ml-3 mt-3 mb-3" [matMenuTriggerFor]="menu">more_vert</mat-icon>
-                                <mat-menu #menu="matMenu">
-                                    <button
-                                        (click)="selectedTabIndex = 0; selectedName = detailData?.course_name ? detailData?.course_name : course?.course_name"
-                                        class="matTabMenu" mat-menu-item>
+                                <mat-menu #menu="matMenu" class="mobVideoMenu">
+                                    <button (click)="selectedTabIndex = 0; selectedName = detailData?.course_name ? detailData?.course_name : course?.course_name" [ngClass]="selectedTabIndex == 0 ? 'redBG' : 'greyBG'" class="matTabMenu" mat-menu-item>
                                         <span>{{detailData?.course_name ? detailData?.course_name : course?.course_name}}</span>
                                     </button>
-                                    <button (click)="selectedTabIndex = 1; selectedName = 'About the course'" class="matTabMenu"
-                                        mat-menu-item>
+                                    <button (click)="selectedTabIndex = 1; selectedName = 'About the course'" [ngClass]="selectedTabIndex == 1 ? 'redBG' : 'greyBG'" class="matTabMenu" mat-menu-item>
                                         <span>About the course</span>
                                     </button>
-                                    <button (click)="selectedTabIndex = 2; selectedName = 'Resources'" class="matTabMenu"
-                                        mat-menu-item>
+                                    <button (click)="selectedTabIndex = 2; selectedName = 'Resources'" [ngClass]="selectedTabIndex == 2 ? 'redBG' : 'greyBG'" class="matTabMenu" mat-menu-item>
                                         <span>Resources</span>
                                     </button>
                                     <!-- <button (click)="selectedTabIndex = 3; selectedName = 'Assignments'" class="matTabMenu"
@@ -490,21 +486,21 @@
                                                                                         *ngIf="file.doc_type == 'text/plain' ">
                                                                                         description
                                                                                     </mat-icon>
-                                                                                    <div class="col-8">
+                                                                                    <div class="col-7">
                                                                                         {{file.type_name}}
                                                                                     </div>
-        
                                                                                     <div class="col-2 f_size_12"
-                                                                                        *ngIf="file?.type_name =='Link'">
+                                                                                        *ngIf="file?.doc_type =='link'">
                                                                                         <span class="ml-2">
-                                                                                            NA
+                                                                                           NA
                                                                                         </span>
         
                                                                                     </div>
+                    
                                                                                     <div class="col-2 f_size_12"
-                                                                                        *ngIf="file?.size">
-                                                                                        {{file.size}}
-                                                                                    </div>
+                                                                                    *ngIf="file?.size">
+                                                                                    {{file.size}}
+                                                                                </div>
                                                                                     <div class="col-1">
                                                                                         <a href="{{file?.path}}"
                                                                                             (click)="add_topic_reference(res)"

@@ -411,7 +411,7 @@ margin-bottom: 1% !important;
 .projectSubmitstatus {
   color: #FFA04E;
   position: relative;
-  right: 40px;
+  right: 49px;
 }
 .iterStatus {
   position: absolute;
@@ -628,6 +628,9 @@ left: 5px;
 .ml-13 {
   margin-left: 13px;
 }
+.m-l-4 {
+  margin-left: 2rem;
+}
 .perfimg {
   width: 16px;
   margin-bottom: 5px;
@@ -643,7 +646,7 @@ left: 5px;
 .videoPlay {
     color: #898989;
     font-size: 25px;
-    background-color: white;
+    // background-color: white;
     width: 2.5rem;
     height: 2rem;
     padding: 4px 5px 5px 7px;
@@ -894,6 +897,7 @@ border: 1px solid #ccc;
   height: 7rem;
   cursor: pointer;
   margin-left: 1rem;
+  border: 0.5px solid #707070;
 }
 
 .icons {

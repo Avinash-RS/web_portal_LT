@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
   platformTxt = navigator.platform;
   isProgressBar = false;
   spinnerType = SPINNER.circle;
+  isFooterVisible: string = '';
 
    // FOR DRM(Restriction for right click)
    @HostListener('document:keydown', ['$event'])
@@ -79,10 +80,20 @@ export class AppComponent implements OnInit {
     // }
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
-    ).subscribe(() => {
+    ).subscribe((e: any) => {
+      const urlIdentifier = e.url.split("/")
+      const possiblePages = ['register', 'login', 'recover']
+
       const rt = this.getChild(this.activatedRoute);
       rt.data.subscribe(data => {
+        this.isFooterVisible = '';
         this.titleService.setTitle(data.title);
+        console.log(urlIdentifier[2], "GOKUL");
+        if (!possiblePages.includes(urlIdentifier[2])) {
+         /// this.isFooterVisible = false;
+         this.isFooterVisible = '<div class="footer" ><span class="powered"><span class="forgot1">2020 © L&T EduTech All Rights Reserved</span></span></div>'
+         
+        }
       });
     });
 

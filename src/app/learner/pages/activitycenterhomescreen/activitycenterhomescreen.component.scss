@@ -140,11 +140,11 @@
 }
 
 .color_green {
-    color: $light-green !important;
+    color: $status-green !important;
 }
 
 .color_orange {
-    color: $color-orange !important;
+    color: $status-orange !important;
 }
 
 .mt8 {
@@ -193,6 +193,10 @@
     background-color: $profile-t-grey;
     text-align: right;
     border-top: 2px solid $profile-p-grey;
+    @media only screen and (max-width: 767px) {
+        position: relative;
+        margin-top: 20px;
+    }
 }
 
 // Mobile

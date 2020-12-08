@@ -1,12 +1,16 @@
 <app-header></app-header>
 <div class="container pl-0 pr-0">
-  <div class="row ml-0 mr-0 errmsg" *ngIf="performDetails?.length == 0">
-    <div class="col-12 m-auto text-center">
-      <span class="errormsg">
-        <img class="assignImg" alt="" src="assets/book.svg">
-        <span>You have no perform activity at the moment!</span>
-      </span>
-    </div>
+  <div *ngIf="performDetails?.length == 0">
+    <mat-card class="noSessionCard color-yellow-card-status">
+      <div class="d-flex justify-content-between align-items-center flexStyle">
+        <div class="sessionImg">
+          <img class="noSessionImg" src="assets/noPerform.svg" alt="nocourse"> 
+        </div>
+        <div class="noData">
+          <span class="">You have no perform activity at the moment!</span>
+        </div>
+      </div>
+    </mat-card>  
   </div>
   <div class="row ml-0 mr-0 mt-3">
     <div class="col-12 pl-0 pr-0">
@@ -19,7 +23,7 @@
       </div>
       <div class="row ml-0 mr-0 mt-3">
         <div class="col-12 pr-0">
-          <p class="subTittle">{{indexNumber}}. {{performActivityData.performActivity.module_id}}</p>
+          <p class="subTittle"><img class="perfimg" src="assets/Perform1.svg" alt="perform">&nbsp; {{performActivityData.performActivity.module_id}}</p>
           <span
             >{{performActivityData.performActivity.topic_id}}
           </span>
@@ -30,11 +34,11 @@
           <div class="row mr-0 ml-0">
             <div class="col-5 mr-0 pl-0 pr-0 text-left">
               <span class="font-weight-bold">Start date:</span><br />
-              <span>{{performActivityData.performActivity.activitystartdate | date}}</span>
+              <span>{{performActivityData.performActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}</span>
             </div>
             <div class="col-5 mr-0 pl-0 pr-0 text-left">
               <span class="m-l-5 font-weight-bold">End date:</span><br />
-              <span class="m-l-5">{{performActivityData.performActivity.activityenddate | date}}</span>
+              <span class="m-l-5"> {{performActivityData.performActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</span>
             </div>
             <div class="col-2 mr-0 pl-0 pr-0 text-left"></div>
           </div>
@@ -49,13 +53,13 @@
       </div>
       <div class="row ml-0 mr-0 mt-3">
         <div class="col-12 pr-0 text-left">
-          <p class="activityDisc font-weight-bold">Activity description:</p>
+          <p class="activityDisc font-weight-bold">Activity description</p>
           <p class="brickMaking">{{performActivityData.performActivity.activityname}}</p>
         </div>
       </div>
       <div class="row ml-0 mr-0">
         <div class="col-sm-12 text-left">
-          <span>Material for activity ({{performActivityData.performActivity.materialDetails.length}})</span>
+          <span><strong>Materials for activity ({{performActivityData.performActivity.materialDetails.length}})</strong></span>
         </div>
       </div>
       <div class="row ml-0 mr-0 mt-3">
@@ -160,7 +164,7 @@
           <mat-card class="matCard mb-3" *ngFor="let itration of performActivityData.performActivity.iterationDetails; let i = index">
             <div class="row ml-0 mr-0" (click)="arrowUP = !arrowUP; openItration(i)">
               <div class="col-3 pr-0 pl-0 text-left">
-                <span>Itration {{itration.iterationcount}}</span>
+                <span>Iteration {{itration.iterationcount}}</span>
               </div>
               <div class="col-4 pr-0 pl-0 text-center">
                 <span>Score: <span *ngIf="itration.score_mark > 0">{{itration.score_mark}}</span>
@@ -178,7 +182,7 @@
                 <mat-icon class="matIcon" *ngIf="!arrowUP || openIndex !== i">keyboard_arrow_down</mat-icon>
                 <mat-icon class="matIcon" *ngIf="arrowUP && openIndex == i">keyboard_arrow_up</mat-icon>
               </div>
-            <div class="row ml-0 mr-0" *ngIf="arrowUP && openIndex == i">
+            <div class="row ml-0 mr-0 w-100" *ngIf="arrowUP && openIndex == i">
               <div class="col-12 pl-0 pr-0">
                 <div class="row ml-0 mr-0 mt-3" *ngIf="itration.videodetails.length > 0">
                   <div class="col-12 text-left pl-0 pr-0">

@@ -1,7 +1,10 @@
 @import "../../../../assets/variable.scss";
 @media (max-width: 767px) {
+  .singleline-text {
+    white-space: nowrap;
+  }
   .projHead {
-    color: $lxp-theme-green;
+    color: $color-blank;
     position: absolute;
   }
   .groupBtn {
@@ -59,14 +62,20 @@
   margin-right: 13px;
 }
 .margin-30{
-  margin-left: 12px;
+  margin-left: 78px;
+}
+.m-l-16 {
+  margin-left: 16px;
+}
+.m-l-8 {
+  margin-left: 8px;
 }
 .margin-21{
   margin-left: 21px;
 }
 .work {
-  position: relative;
-  left: 118px;
+  margin-top: 5px;
+  text-align: center;
 }
 .fileData {
   background-color: #D5D5D5;
@@ -112,23 +121,26 @@
 // }
 .closeDialog {
   float: right;
-  position: relative;
-  top: -20px;
-  left: 23px;
+  position: absolute;
+  top: 5px;
+  right: 0px;
   font-size: large;
 }
     ::ng-deep .learnerDialog .mat-dialog-container {
       position: relative !important;
-      right: 74px !important;
-      bottom: 15px !important;
+      right: 80px !important;
+      // bottom: -40px !important;
+      overflow: hidden;
     }
     ::ng-deep .learner .list-group-item {
       border: none !important;
+      padding: 0rem 0rem;
+      padding-bottom: 0.50rem;
     }
     .grpName {
       position: relative;
-    top: -19px;
-    right: 16px;
+      top: -5px;
+      right: 0px;
     }
 
     .redHover:hover {
@@ -180,12 +192,53 @@
   }
 
   .gradedot {
-      background-color: #0C781B;
-      height: 10px;
-      width: 10px;
-      border-radius: 50%;
-      display: inline-block;
+    background-color: #0C781B;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    right: 9px;
+}
+  .graded {
+    color: #0C781B;
+    position: relative;
+    right: 3px;
   }
+  .download-button {
+    background: #C02222 !important;
+    float: right;
+    position: relative;
+    top: -6px;
+    right: 42px;
+    height: 35px;
+    width: 35px;
+}
+.close-button {
+  background: #C02222 !important;
+  float: right;
+  top: -7px;
+  position: relative;
+  right: -39px;
+  height: 35px;
+  width: 35px;
+}
+.closeBtn {
+  background: #C02222 !important;
+  height: 35px;
+  width: 35px;
+  // position: relative;
+  // left: 37px;
+  // bottom: 5px;
+}
+.close-buttonVideo {
+  background: $lxp-theme-green !important; // red color
+  // float: right;
+  top: -12px;
+  position: relative;
+  height: 35px;
+  width: 35px;
+}
 
 .textGrayColor {
   color: $color-lightGray;
@@ -258,6 +311,7 @@
   height: 3rem;
   font-weight: bolder;
   font-size: 15px;
+  width: 12rem !important;
 }
 
 .add-icon {
@@ -284,8 +338,8 @@
   color: $color-white !important;
   background-color: #898989;
   width: 45%;
-  position: absolute;
-  left: 81px;
+  // position: absolute;
+  // left: 81px;
   cursor: not-allowed;
 }
 
@@ -357,9 +411,21 @@
     color: #898989;
   }
 
+  .icons-1 {
+    font-size: 30px;
+    padding: 1.2rem 5.2rem;
+    color: #898989;
+  }
+
   .materialCard {
     width: 7rem;
     height: 8rem;
+  }
+
+  .materialCards {
+    width: 12rem;
+    height: 8rem;
+    margin-left: 2rem;
   }
 
   .fileColor {
@@ -388,4 +454,155 @@
   .matCardIconRow {
     height: 60%;
   }
+
+  .work-border {
+    border: 0.25px solid #ccc;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 0px 6px #00000029;
+    opacity: 1
+  }
+
+  .deleteIcon {
+    color: #5C6873;
+    font-size: 21px;
+    margin-top: 4px;
+  }
+
+  .del-pos {
+    position: relative;
+    bottom: 155px;
+  }
+
+  .input-hide {
+    position: absolute;
+    left: 60px;
+    top: 29px;
+    opacity: 0;
+  }
+
+  .iterationicons {
+    font-size: 50px;
+    padding: 0.4rem 4.2rem;
+    color: #898989;
+  }
+
+  .iterationCard{
+    height: 8rem;
+  }
+
+  .close-buttonVideo {
+    background: $lxp-theme-green !important; // red color
+    float: right;
+    top: -8px;
+    position: relative;
+    height: 35px;
+    width: 35px;
+  }
+
+  .noSessionCard {
+    margin: auto;
+    margin-top: 15%;
+    border-radius: 0;
+    opacity: 1;
+    text-align: center;
+    background: #F5F5F5 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 4px #00000029;
+    opacity: 1;
+    border-left: 3px solid #ffc107bf !important;
+    width: 90%;
+    padding: 20px 15px !important;
+    @media only screen and (min-width: 576px) {
+      width: 90%;
+    }
+    @media only screen and (min-width: 768px) {
+      padding: 30px 15px !important;
+      width: 82%;
+    }
+    @media only screen and (min-width: 992px) {
+      width: 65%;
+    }
+    @media only screen and (min-width: 1200px) {
+      width: 50%;
+    }
+    @media only screen and (min-width: 1600px) {
+      width: 40%;
+    }
+  }
+  .color-yellow-card-status {
+    border-left: 3px solid $lxp-status-yellow !important;
+    color: $color-blank !important;
+  }
+
+  .flexStyle {
+    flex-wrap: wrap;
+    @media only screen and (min-width: 768px) {
+      flex-wrap: nowrap;
+    }
+  }
+
+  .sessionImg {
+    width: 100%;
+    @media only screen and (min-width: 768px) {
+      width: 20%;
+    }
+  }
+  .noSessionImg {
+    width: 45px;
+    margin-left: 0%;
+  }
+
+  .noData {
+    font: normal normal normal 18px/22px Roboto Condensed;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+    width: 100%;
+    text-align: center;
+    margin-top: 7px;
+    @media only screen and (min-width: 576px) {
+      font: normal normal normal 19px/29px Roboto Condensed;
+    }
+    @media only screen and (min-width: 768px) {
+      text-align: left;
+      width: 78%;
+      font: normal normal normal 23px/29px Roboto Condensed;
+    }
+  }
+}
+
+
+
+:host ::ng-deep .widthClass .owl-carousel.owl-drag .owl-item {
+  width: 15.5rem !important;
+}
+
+.carouselCol {
+  max-width: 100% !important;
+  height: 15rem;
+}
+
+.carouselCol1 {
+  max-width: 100% !important;
+  height: 11rem;
+}
+
+.carouselRow1 {
+  height: 7rem;
+}
+
+.carouselText {
+  font-size: 12px;
+  color: #ffffff;
+}
+
+:host ::ng-deep .owlHeight .owl-theme {
+  height: 11rem !important;
+}
+
+:host ::ng-deep .widthClass .owl-theme {
+  height: 11rem !important;
+}
+
+:host ::ng-deep .widthClass .owl-theme .owl-nav {
+  display: none !important;
 }

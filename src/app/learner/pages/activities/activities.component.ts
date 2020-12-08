@@ -21,6 +21,8 @@ export class ActivitiesComponent implements OnInit {
   @ViewChild('uploadInput') uploadInput;
   perfornDetaildata: any;
   performdetailPageView = false;
+  projectDetaildata: any;
+  projectdetailPageView = false;
   hover = false;
   isLoader = false;
   hoverfile = false;
@@ -129,9 +131,10 @@ export class ActivitiesComponent implements OnInit {
   courseName: any;
   mouseOverIndex: any;
   videoSource: any;
-  projectMobileResponsive: boolean;
+  projectMobileResponsive = false;
   demo1TabIndex = 0;
   currentTab: any;
+  assigmentMobileResponsive = false;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
@@ -151,8 +154,12 @@ export class ActivitiesComponent implements OnInit {
 
   ngOnInit() {
     const index = localStorage.getItem('userTabLocation');
+    // this.projectDetaildata = this.projectDetails;
     this.Lservice.closeMobileResp$.subscribe((data: any) => {
       this.performdetailPageView = data;
+    });
+    this.Lservice.closeMobileResp$.subscribe((data: any) => {
+      this.projectdetailPageView = data;
     });
     if (index) {
       // tslint:disable-next-line:radix
@@ -161,9 +168,20 @@ export class ActivitiesComponent implements OnInit {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.currentTab === 'Perform' || this.demo1TabIndex === 1 && this.screenWidth < 800) {
-      this.mobileResponsive = true;
+        this.mobileResponsive = true;
+      } else {
+        this.mobileResponsive = false;
+      }
+    if (this.currentTab === 'Project' || this.demo1TabIndex === 2 && this.screenWidth < 800) {
+      this.projectDetaildata = this.projectDetails;
+      this.projectMobileResponsive = true;
+      } else {
+        this.projectMobileResponsive = false;
+      }
+    if (this.currentTab === 'Assignments' || this.demo1TabIndex === 0 && this.screenWidth < 800) {
+      this.assigmentMobileResponsive = true;
     } else {
-      this.mobileResponsive = false;
+      this.assigmentMobileResponsive = false;
     }
   }
 
@@ -182,17 +200,22 @@ export class ActivitiesComponent implements OnInit {
       } else {
         this.mobileResponsive = false;
       }
-    }
-  }
-
-  projectTab(event) {
-    if (event.tab.textLabel === 'Project') {
+    } else if (event.tab.textLabel === 'Project') {
       this.screenHeight = window.innerHeight;
       this.screenWidth = window.innerWidth;
       if (this.screenWidth < 800) {
+        this.projectDetaildata = this.projectDetails;
         this.projectMobileResponsive = true;
       } else {
         this.projectMobileResponsive = false;
+      }
+    } else if (event.tab.textLabel === 'Assignments') {
+      this.screenHeight = window.innerHeight;
+      this.screenWidth = window.innerWidth;
+      if (this.screenWidth < 800) {
+        this.assigmentMobileResponsive = true;
+      } else {
+        this.assigmentMobileResponsive = false;
       }
     }
   }
@@ -460,7 +483,7 @@ export class ActivitiesComponent implements OnInit {
           // console.log(crrDate);
           const crrDate = new Date();
           const startDate = new Date(element.performActivity.activitystartdate);
-          const endDate = new Date(element.performActivity.activityenddate);
+          const endDate = new Date(element.performActivity.batchenddate);
 
             // tslint:disable-next-line:no-string-literal
           element['itrationStarted']  = this.dateDiff(startDate,
