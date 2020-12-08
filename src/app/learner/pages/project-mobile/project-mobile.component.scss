@@ -7,6 +7,20 @@
     color: $color-blank;
     position: absolute;
   }
+  .materialCls {
+    position: relative;
+    right: 13px;
+  }
+  .nomaterial {
+    margin-left: 2px;
+  }
+  .m-l-2 {
+    margin-left: 2px;
+  }
+  .topic {
+    position: relative;
+    right: 4px;
+  }
   .groupBtn {
     border: 1px solid #5C6873;
     opacity: 1;

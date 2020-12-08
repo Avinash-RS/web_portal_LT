@@ -64,9 +64,12 @@
       </div>
       <div class="row ml-0 mr-0 mt-3">
         <div class="col-12 text-left pl-0 pr-0">
-
+          <h3 *ngIf="performActivityData.performActivity.materialDetails && performActivityData.performActivity.materialDetails.length == 0">
+            <span class="m-l-16">No materials found for this activity.</span>
+          </h3>
           <owl-carousel-o [options]="trendingCategorires"
-          [ngClass]="performActivityData.performActivity.materialDetails.length >= 4 ? 'arrow': 'widthClass arrow' ">
+          [ngClass]="performActivityData.performActivity.materialDetails.length >= 4 ? 'arrow': 'widthClass arrow' "
+          *ngIf="performActivityData?.performActivity?.materialDetails?.length > 0">
           <ng-template class="row ml-0 mr-0" carouselSlide
             *ngFor="let material of performActivityData.performActivity.materialDetails; let i = index">
             <div [ngClass]="performActivityData.performActivity.materialDetails.length >= 2 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
