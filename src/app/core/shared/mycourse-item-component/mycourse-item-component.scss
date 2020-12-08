@@ -675,7 +675,9 @@ hr {
 }
 
 .icon-color {
-  font-size: 22px;
+  font-size: 18px;
+  height: 16px;
+  width: 16px;
 }
 
 .cap::first-letter {
@@ -718,7 +720,7 @@ hr {
 }
 
 .m-t-m-2 {
-  top: -2px;
+  // top: -2px;
   position: relative;
 }
 
@@ -760,17 +762,42 @@ hr {
 }
 
 .m_3_px_top {
-  margin-top: 2px;
+  // margin-top: 2px;
 }
 
 .btl-alin {
-
   border: 1px solid $lxp-theme-green !important;
   position: relative;
-  width: 100%;
   z-index: 99;
-  height: 30px;
- 
+  // height: 30px;
+  padding: 5px 15px;
+  line-height: normal;
+  display: inline-block;
+  background: #ffffff;
+  transform: perspective(1px) translateZ(0);
+  transition-property: color;
+  transition-duration: 0.3s;
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #C02222;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition-property: transform;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+  }
+  &:hover {
+    color: white;
+    &::before {
+      transform: scaleX(1);
+    }
+  }
 }
 
 ::ng-deep.mat-tab-label,
@@ -2113,12 +2140,12 @@ li {
 //   }
 
 .p-7-lr {
-  padding-left: 7px !important;
-  padding-right: 7px !important;
+  // padding-left: 7px !important;
+  // padding-right: 7px !important;
 }
 
 .mycourse-btn-img {
-  margin-top: -5px;
+  // margin-top: -5px;
   margin-right: 5px;
 }
 
@@ -2162,7 +2189,7 @@ li {
 }
 
 .m-t-m-2NEW{
-  top: -3px;
+  // top: -3px;
   position: relative;
 }
 .m-t-6px{
