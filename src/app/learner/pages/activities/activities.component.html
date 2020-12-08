@@ -5,18 +5,13 @@
   <span class="redHover">
     <mat-icon class="material-icons f_size_15 backIc pointer" (click)="goToCourse()">arrow_back_ios
     </mat-icon>
-    <span class="f_size_19 pointer" (click)="goToCourse()">
-      Back
-    </span>
+    <span class="f_size_19 pointer" (click)="goToCourse()">Back</span>
   </span>
   <!-- <p class="courseName"><b>{{courseName}}</b></p> -->
   <div class="f_wt_600 f_size_16 m-l-13 display_flex contentTop1">
-    <span>
-      {{courseName}}
+    <span class="breadCrumb">
+      <span>{{courseName}}</span> <mat-icon class="material-icons brdcrmb f_size_25 pointer">chevron_right</mat-icon> <span>Activities</span>
     </span>
-    <mat-icon class="material-icons brdcrmb f_size_25 pointer">chevron_right
-    </mat-icon>
-    <span>Activities</span>
   </div>
   <mat-tab-group  animationDuration="1000ms" (selectedTabChange)="tabChanged($event); activeTab($event)"
   [(selectedIndex)]="demo1TabIndex">
@@ -26,9 +21,8 @@
         <ng-container *ngFor="let res of assignmentContent?.coursedetails; let i = index">
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              <mat-panel-title>
-                <span>{{res?.modulename}}
-                </span>
+              <mat-panel-title class="panelTitle">
+                <span>{{res?.modulename}}</span>
               </mat-panel-title>
               <!-- <mat-panel-description>
               Type your name and age
@@ -44,187 +38,114 @@
                   <mat-list-item>
                     <div mat-line class="row">
                       <div class="col-12">
-                        <span>
-                          {{mod?.topicname}} :
-                        </span>
+                        <span>{{mod?.topicname}} :</span>
                       </div>
 
-                    </div><br>
-                    <div class="row assignDetails" *ngFor="let file of mod.resourse?.files">
-                      <div class="col-3">
-                        <div class="row">
-                          <div class="col-12">
-                            <span class="singleline-text"><strong>{{'Assignment name' | translate }}</strong></span>
-                          </div>
+                    </div>
+                    <div class="assignDetails d-flex justify-content-between" *ngFor="let file of mod.resourse?.files">
+                      <div class="assignmentNameFile">
+                        <div class="">
+                          <span class="singleline-text"><strong>{{'Assignment name' | translate }}</strong></span>
                         </div>
-                        <div class="row">
-                          <div class="col-12">
-                            <img *ngIf="file.doc_type == 'application/pdf'" class="size" alt=""
-                              src="assets/learner/fileicon/PDF_Icon.svg">
-                            <img *ngIf="file.doc_type == 'link'" class="size" alt=""
-                              src="assets/learner/fileicon/Link_Icon.svg">
-                            <img
-                              *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
-                              class="size" alt="" src="assets/learner/fileicon/Excel_Icon.svg">
-                            <img *ngIf="file.doc_type == 'image/jpeg' || file.doc_type == 'image/png' " class="size"
-                              alt="" src="assets/learner/fileicon/Image_Icon.svg">
-                            <img
-                              *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
-                              class="size" alt="" src="assets/learner/fileicon/PPT_Icon.svg">
-                            <img
-                              *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
-                              class="size" alt="" src="assets/learner/fileicon/Word_Icon.svg">
-                            <img *ngIf="file.doc_type == 'application/msword'" class="size" alt=""
-                              src="assets/learner/fileicon/Word_Icon.svg">
-                            <img *ngIf="file.doc_type == 'application/vnd.ms-excel'" class="size" alt=""
-                              src="assets/learner/fileicon/Excel_Icon.svg">
-                            <mat-icon class="docType no-cursor" *ngIf="file.doc_type == 'text/plain' ">
-                              description </mat-icon>&nbsp;
-                            <span class="assignmentName" tooltip="{{file.type_name}}"
-                              placement="bottom">{{file.type_name}}</span>
+                        <div class="">
+                          <div class="">
+                            <img *ngIf="file.doc_type == 'application/pdf'" class="size" alt="" src="assets/learner/fileicon/PDF_Icon.svg">
+                            <img *ngIf="file.doc_type == 'link'" class="size" alt="" src="assets/learner/fileicon/Link_Icon.svg">
+                            <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'" class="size" alt="" src="assets/learner/fileicon/Excel_Icon.svg">
+                            <img *ngIf="file.doc_type == 'image/jpeg' || file.doc_type == 'image/png' " class="size" alt="" src="assets/learner/fileicon/Image_Icon.svg">
+                            <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'" class="size" alt="" src="assets/learner/fileicon/PPT_Icon.svg">
+                            <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'" class="size" alt="" src="assets/learner/fileicon/Word_Icon.svg">
+                            <img *ngIf="file.doc_type == 'application/msword'" class="size" alt="" src="assets/learner/fileicon/Word_Icon.svg">
+                            <img *ngIf="file.doc_type == 'application/vnd.ms-excel'" class="size" alt="" src="assets/learner/fileicon/Excel_Icon.svg">
+                            <mat-icon class="docType no-cursor" *ngIf="file.doc_type == 'text/plain' ">description </mat-icon>&nbsp;
+                            <span class="assignmentName" tooltip="{{file.type_name}}" placement="bottom">{{file.type_name}}</span>
                           </div>
-                          <div class="col-12 f_size_12" *ngIf="file?.type_name =='Link'">
-                            <span class="ml-2">
-                              NA
-                            </span>
+                          <div class="col-12 f_size_12" *ngIf="file?.type_name =='Link'"><span class="ml-2"> NA </span></div>
+                          <div class="col-12 f_size_12" *ngIf="file?.size">{{file.size}}</div>
+                        </div>
+                      </div>
 
-                          </div>
-                          <div class="col-12 f_size_12" *ngIf="file?.size">
-                            {{file.size}}
-                          </div>
+                      <div class="assignmentQuestion">
+                        <div class="">
+                          <span><strong>{{'Question' | translate }}</strong></span>
+                        </div>
+                        <div class="">
+                          <span class="ml-3">
+                            <mat-icon *ngIf="file.enableView" (click)="previewDoc(previewDialog,file)" class="viewDoc">find_in_page</mat-icon>
+                            <mat-icon *ngIf="!file.enableView" class="viewDoc">find_in_page</mat-icon>
+                          </span>
+                        </div>
+                      </div>
 
+                      <div class="assignmentStartDate">
+                        <div class="">
+                          <span><strong>{{'Start date' | translate }}</strong></span>
+                        </div>
+                        <div class="">
+                          <span class="singleline-text"> {{file.startDate  | date :'MMM d, y h:mm a'}} </span>
                         </div>
                       </div>
-                      <div class="col-1">
-                        <div class="row">
-                          <div class="col-12">
-                            <span><strong>{{'Question' | translate }}</strong></span>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-12">
-                            <span class="ml-3">
-                              <mat-icon *ngIf="file.enableView" (click)="previewDoc(previewDialog,file)"
-                                class="viewDoc">find_in_page
-                              </mat-icon>
-                              <mat-icon *ngIf="!file.enableView" class="viewDoc">find_in_page
-                              </mat-icon>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-2">
-                        <div class="row">
-                          <div class="col-12">
-                            <span><strong>{{'Start date' | translate }}</strong></span>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-12">
-                            <span class="singleline-text">
-                              {{file.startDate  | date :'MMM d, y h:mm a'
-                              }}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-2">
-                        <div class="row">
-                          <div class="col-12">
-                            <span><strong>{{'End date' | translate }}</strong></span>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-12">
-                            <span class="singleline-text">
-                              {{file.endDate  | date :'MMM d, y h:mm a'
-                              }}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-1">
-                        <div class="row">
-                          <div class="col-12">
-                            <span>
-                              <strong>{{'Upload' | translate }}</strong>
-                            </span>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-12">
-                            <span class="uploadIcon" *ngIf="file?.enableUpload">
-                              <i (click)="fileInput.click()" class="fa fa-upload searchicon ml-3 tooltip-350 pointer"
-                                [tooltip]="popTemplate" placement="bottom" aria-hidden="true"></i>
-                            </span>
 
-                            <span class="uploadIcon" *ngIf="!file?.enableUpload">
-                              <i class="fa fa-upload ml-3 tooltip-350 pointer gradedUpload" aria-hidden="true"></i>
-                            </span>
-                            <input class="form-control border-right-0" type='file' id="upload-photo" #fileInput
-                              (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate,file?.path)">
+                      <div class="assignmentEndDate">
+                        <div class="">
+                          <span><strong>{{'End date' | translate }}</strong></span>
+                        </div>
+                        <div class="">
+                          <span class="singleline-text">{{file.endDate  | date :'MMM d, y h:mm a'}}</span>
+                        </div>
+                      </div>
+
+                      <div class="upload">
+                        <div class="">
+                          <span><strong>{{'Upload' | translate }}</strong></span>
+                        </div>
+                        <div class="">
+                          <span class="uploadIcon" *ngIf="file?.enableUpload">
+                            <i (click)="fileInput.click()" class="fa fa-upload searchicon ml-3 tooltip-350 pointer" [tooltip]="popTemplate" placement="bottom" aria-hidden="true"></i>
+                          </span>
+                          <span class="uploadIcon" *ngIf="!file?.enableUpload">
+                            <i class="fa fa-upload ml-3 tooltip-350 pointer gradedUpload" aria-hidden="true"></i>
+                          </span>
+                          <input class="form-control border-right-0" type='file' id="upload-photo" #fileInput (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate,file?.path)">
+                        </div>
+                      </div>
+                      
+                      <div class="maxScore">
+                        <div class="">
+                          <span class="singleline-text"><strong>{{'Max score' | translate }}</strong></span>
+                        </div>
+                        <div class="">
+                          <span class="ml-3">{{file?.score}}</span>
+                        </div>
+                      </div>
+
+                      <div class="obtScore">
+                        <div class="">
+                          <span class="singleline-text"><strong>{{'Obtained score' | translate }}</strong>
+                          </span>
+                        </div>
+                        <div class="">
+                          <span class="m-l-4">{{file?.score_mark}}</span>
+                        </div>
+                      </div>
+
+                      <div class="subStatus">
+                        <div class="">
+                          <span><strong>{{'Status' | translate }}</strong></span>
+                        </div>
+                        <div class="">
+                          <div class="disply no-cursor" *ngIf="file.doc_status === false && file.grade_status === 'Not Evaluated'">
+                            <div class="icon"> {{'Submitted' | translate }} </div>
+                          </div>
+                          <div class="disply no-cursor" *ngIf="file.doc_status && file.grade_status != 'Evaluated'">
+                            <div class="not-submited"> {{'Yet to Submit' | translate }} </div>
+                          </div>
+                          <div class="disply no-cursor" *ngIf="file.grade_status === 'Evaluated'">
+                            <div class="grade" style="padding-top: 4px;color: green;"> {{'Graded' | translate }}</div>
                           </div>
                         </div>
                       </div>
-                      <div class="col-1">
-                        <div class="row">
-                          <div class="col-12">
-                            <span class="singleline-text"><strong>
-                                {{'Max score' | translate }}</strong></span>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-12">
-                            <span class="ml-3">
-                              {{file?.score}}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-1">
-                        <div class="row">
-                          <div class="col-12">
-                            <span class="singleline-text">
-                              <strong>
-                                {{'Obtained score' | translate }}
-                              </strong>
-                            </span>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-12">
-                            <span class="m-l-4">
-                              {{file?.score_mark}}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-1 subStatus">
-                        <div class="row">
-                          <div class="col-12">
-                            <span><strong>{{'Status' | translate }}</strong></span>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-12">
-                            <div class="disply no-cursor"
-                              *ngIf="file.doc_status === false && file.grade_status === 'Not Evaluated'">
-                              <div class="icon">
-                                {{'Submitted' | translate }}
-                              </div>
-                            </div>
-                            <div class="disply no-cursor" *ngIf="file.doc_status && file.grade_status != 'Evaluated'">
-                              <div class="not-submited">
-                                {{'Yet to Submit' | translate }}
-                              </div>
-                            </div>
-                            <div class="disply no-cursor" *ngIf="file.grade_status === 'Evaluated'">
-                              <div class="grade" style="padding-top: 4px;color: green;">
-                                {{'Graded' | translate }}</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+
                     </div>
                   </mat-list-item>
                 </mat-list>
@@ -259,91 +180,83 @@
 
     <mat-tab label="Perform">
       <div class="row mr-0 ml-0 mt-3" *ngIf="performDetails?.length > 0 && mobileResponsive">
-    <div class="col-sm-12 pl-1 pr-1">
-      <mat-card class="performCard mb-3" (click)="performdetailPage(i+1, perform);performdetailPageView = true" *ngFor="let perform of performDetails; let i = index">
-        <div class="row ml-0 mr-0">
-          <div class="col-6 pl-0">
-            <p class="subTittle"><img class="perfimg" src="assets/Perform1.svg" alt="perform">&nbsp; {{perform.performActivity.module_id}}</p>
-            <span>{{perform.performActivity.topic_id}}
-            </span>
-          </div>
-          <div class="col-6 pl-0 pr-0">
-            <div class="row mr-0 ml-0 mb-4">
-              <div class="col-12 pl-0 pr-0 text-right">
-                <span class="textGrayColor1" *ngIf="perform.performActivity.submit_status == 'notsubmitted'"><span
-                  class="dot"></span>Yet to Submit</span>
-                <span class="submitstatus1" *ngIf=" perform.performActivity.submit_status == 'submitted'">
-                  <span class="submitdot"></span>Submitted</span>
-                <span class="gradeStatus1" *ngIf="perform.performActivity.submit_status == 'graded'">
-                  <span class="gradedot"></span>Graded</span>
+        <div class="col-sm-12 pl-1 pr-1">
+          <mat-card class="performCard mb-3" (click)="performdetailPage(i+1, perform);performdetailPageView = true" *ngFor="let perform of performDetails; let i = index">
+            <div class="row ml-0 mr-0">
+              <div class="col-6 pl-0">
+                <p class="subTittle"><img class="perfimg" src="assets/Perform1.svg" alt="perform">&nbsp; {{perform.performActivity.module_id}}</p>
+                <span>{{perform.performActivity.topic_id}}
+                </span>
+              </div>
+              <div class="col-6 pl-0 pr-0">
+                <div class="row mr-0 ml-0 mb-4">
+                  <div class="col-12 pl-0 pr-0 text-right">
+                    <span class="textGrayColor1" *ngIf="perform.performActivity.submit_status == 'notsubmitted'">
+                      <span class="dot"></span>Yet to Submit</span>
+                    <span class="submitstatus1" *ngIf=" perform.performActivity.submit_status == 'submitted'">
+                      <span class="submitdot"></span>Submitted</span>
+                    <span class="gradeStatus1" *ngIf="perform.performActivity.submit_status == 'graded'">
+                      <span class="gradedot"></span>Graded</span>
+                  </div>
+                </div>
+                <div class="row mr-0 ml-0 mb-3">
+                  <div class="col-12 pl-0 pr-0 text-right">
+                    <span class="textGrayColor1">Iterations: <span class="textGrayColor1" *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} / </span>{{perform.performActivity.iterationTotal}}</span>
+                  </div>
+                </div>
+                <div class="row mr-0 ml-0 mt-4">
+                  <div class="col-6 mr-0 pl-0 pr-0 text-left">
+                    <span class="font-weight-bold">Start date:</span><br />
+                    <span class="textGrayColor1"> {{perform.performActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}</span>
+                  </div>
+                  <div class="col-6 mr-0 pl-0 pr-0 text-left">
+                    <span class="font-weight-bold ml-2">End date:</span><br />
+                    <span class="textGrayColor1 float-right"> {{perform.performActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</span>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="row mr-0 ml-0 mb-3">
-              <div class="col-12 pl-0 pr-0 text-right">
-                <span class="textGrayColor1">Iterations: <span class="textGrayColor1" *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} / </span>{{perform.performActivity.iterationTotal}}</span>
-              </div>
-            </div>
-            <div class="row mr-0 ml-0 mt-4">
-              <div class="col-6 mr-0 pl-0 pr-0 text-left">
-                <span class="font-weight-bold">Start date:</span><br />
-                <span class="textGrayColor1"> {{perform.performActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}</span>
-              </div>
-              <div class="col-6 mr-0 pl-0 pr-0 text-left">
-                <span class="font-weight-bold ml-2">End date:</span><br />
-                <span class="textGrayColor1 float-right"> {{perform.performActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</span>
-              </div>
-            </div>
-          </div>
+          </mat-card>
         </div>
-      </mat-card>
-    </div>
-  </div>
+      </div>
       <ng-container *ngIf="performDetails?.length > 0 && !mobileResponsive">
         <div class="box-0-1" *ngFor="let perform of performDetails; let i = index">
           <div class="row">
             <div class="col-10">
               <div class="f_size_16 f_wt_600"><img class="perfimg" src="assets/Perform1.svg" alt="perform"> 
-                <span class="ml-13">{{perform.performActivity.module_id}}</span></div>
+                <span class="ml-13">{{perform.performActivity.module_id}}</span>
+              </div>
               <div class="t-l">{{perform.performActivity.topic_id}}</div>
               <div class="t-l">Activity description : {{perform.performActivity.activityname}}</div>
             </div>
             <div class="col-2">
-              <span class="f_wt_600 statusTxt" *ngIf="perform.performActivity.submit_status == 'notsubmitted'"><span
-                  class="dot"></span>
-                <!-- 'notsubmitted' -->
-                Yet to submit</span>
+              <span class="f_wt_600 statusTxt" *ngIf="perform.performActivity.submit_status == 'notsubmitted'">
+                <span class="dot"></span><!-- 'notsubmitted' --> Yet to submit</span>
 
-              <span class="f_wt_600 submitstatus" *ngIf=" perform.performActivity.submit_status == 'submitted'"> <span
-                  class="submitdot"></span>
-                Submitted</span>
+              <span class="f_wt_600 submitstatus" *ngIf=" perform.performActivity.submit_status == 'submitted'">
+                <span class="submitdot"></span>Submitted</span>
 
-              <span class="f_wt_600 gradeStatus" *ngIf="perform.performActivity.submit_status == 'graded'"> <span
-                  class="gradedot"></span>
-                Graded</span>
-              <mat-icon class="f_size_16 arr" aria-hidden="false" *ngIf="!isperformColaps || performId !== i"
-                (click)="isperformColaps = !isperformColaps; performId = i; selectedIndex = null">keyboard_arrow_down</mat-icon>
-              <mat-icon class="f_size_16 arr" aria-hidden="false" *ngIf="isperformColaps && performId === i"
-                (click)="isperformColaps = !isperformColaps; performId = i; selectedIndex = null">keyboard_arrow_up
-              </mat-icon>
+              <span class="f_wt_600 gradeStatus" *ngIf="perform.performActivity.submit_status == 'graded'">
+                <span class="gradedot"></span>Graded</span>
+
+              <mat-icon class="f_size_16 arr" aria-hidden="false" *ngIf="!isperformColaps || performId !== i" (click)="isperformColaps = !isperformColaps; performId = i; selectedIndex = null">keyboard_arrow_down</mat-icon>
+              <mat-icon class="f_size_16 arr" aria-hidden="false" *ngIf="isperformColaps && performId === i" (click)="isperformColaps = !isperformColaps; performId = i; selectedIndex = null">keyboard_arrow_up</mat-icon>
               <br>
-              <div *ngIf="perform.performActivity.submittedTotal == 0"
-                [ngClass]="perform.performActivity.submittedTotal > 0 ? 'mt-2 mb-2 itrationTxts' : 'mt-2 mb-2 itrationTxt'"
-                class="">Iterations : <span
-                  *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} /
-                </span>{{perform.performActivity.iterationTotal}}</div>
+              <div *ngIf="perform.performActivity.submittedTotal == 0" [ngClass]="perform.performActivity.submittedTotal > 0 ? 'mt-2 mb-2 itrationTxts' : 'mt-2 mb-2 itrationTxt'"
+                class="">
+                Iterations : <span *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} / </span>{{perform.performActivity.iterationTotal}}
+              </div>
 
-                <div *ngIf="perform.performActivity.submittedTotal > 0"
-                [ngClass]="perform.performActivity.submittedTotal > 0 ? 'mt-2 mb-2 itrCount' : 'mt-2 mb-2 itrationTxt'"
-                class="">Completed iterations : <span
-                  *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} /
-                </span>{{perform.performActivity.iterationTotal}}</div>
-
+                <div *ngIf="perform.performActivity.submittedTotal > 0" [ngClass]="perform.performActivity.submittedTotal > 0 ? 'mt-2 mb-2 itrCount' : 'mt-2 mb-2 itrationTxt'"
+                class="">
+                Completed iterations : <span *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} / </span>{{perform.performActivity.iterationTotal}}
+              </div>
 
               <div class="m-l-68">Start date :<span class="endDateTxt"></span>End date :</div>
-              <div class="m-l-68 f_wt_600">
-                {{perform.performActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}
+              <div class="m-l-68 f_wt_600"> {{perform.performActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}
                 <span class="EndDate f_wt_600"></span>
-                {{perform.performActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</div>
+                {{perform.performActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}
+              </div>
             </div>
           </div>
 
@@ -440,34 +353,28 @@
               <div class="col-4">
 
                 <div class="f_size_16 f_wt_600 align-center margin-b-9">Your work</div>
-                <mat-accordion *ngFor="let itrdata of perform.performActivity.iterationDetails; let i = index"
-                (click)="getSelectedIndex(i);">
+                <mat-accordion *ngFor="let itrdata of perform.performActivity.iterationDetails; let i = index" (click)="getSelectedIndex(i);">
                   <mat-expansion-panel [expanded]="selectedIndex === i">
                     <mat-expansion-panel-header>
-                      <mat-panel-title class="mr-0">
-                        Iteration {{itrdata.iterationcount}}
-                      </mat-panel-title>
+                      <mat-panel-title class="mr-0"> Iteration {{itrdata.iterationcount}} </mat-panel-title>
                       <mat-panel-description>
                         <div class="row ml-0 mr-0 w-100">
                           <div class="col-6 pl-0 text-center w-100">
                             <span>Score: {{itrdata.score_mark}} / {{itrdata.total_mark}}</span>
                           </div>
                           <div class="col-6 pr-0 pl-0 text-right w-100">
-                            <span class="f_wt_600" *ngIf="itrdata.submit_status == 'notsubmitted' && itrdata.grade_status !== 'Evaluated'"> <span
-                                class="dot"></span>Yet to submit</span>
-                            <span class="f_wt_600 iterSubmit"
-                              *ngIf="itrdata.grade_status == 'Not Evaluated' && itrdata.submitAction == 'submit'"> <span
-                                class="submitdot"></span>
-                              Submitted</span>
-                            <span class="f_wt_600 iterGrade" *ngIf="itrdata.grade_status == 'Evaluated'"> <span
-                                class="gradedot"></span>
-                              Graded <span
-                                *ngIf="itrdata.grade_status == 'Evaluated' && itrdata.instructor_status !== null"
-                                [ngClass]="itrdata.instructor_status == 'Pass'?'colorGreen ml-1': 'colorRed ml-1'">{{itrdata.instructor_status | titlecase}}</span></span>
+                            <span class="f_wt_600" *ngIf="itrdata.submit_status == 'notsubmitted' && itrdata.grade_status !== 'Evaluated'"> 
+                              <span class="dot"></span>Yet to submit
+                            </span>
+                            <span class="f_wt_600 iterSubmit" *ngIf="itrdata.grade_status == 'Not Evaluated' && itrdata.submitAction == 'submit'"> 
+                              <span class="submitdot"></span> Submitted
+                            </span>
+                            <span class="f_wt_600 iterGrade" *ngIf="itrdata.grade_status == 'Evaluated'"> 
+                              <span class="gradedot"></span> Graded 
+                              <span *ngIf="itrdata.grade_status == 'Evaluated' && itrdata.instructor_status !== null" [ngClass]="itrdata.instructor_status == 'Pass'?'colorGreen ml-1': 'colorRed ml-1'">{{itrdata.instructor_status | titlecase}}</span>
+                            </span>
                           </div>
                         </div>
-
-
                       </mat-panel-description>
                     </mat-expansion-panel-header>
                     <div class="align-center" *ngIf="itrdata.grade_status !== 'Evaluated'">
@@ -1075,8 +982,3 @@
 
   </span>
 </ng-template>
-<div class="footer" style="position: fixed;">
-  <span class="powered">
-      <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
-  </span>
-</div>
