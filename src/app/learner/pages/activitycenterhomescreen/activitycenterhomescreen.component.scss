@@ -140,11 +140,11 @@
 }
 
 .color_green {
-    color: $light-green !important;
+    color: $status-green !important;
 }
 
 .color_orange {
-    color: $color-orange !important;
+    color: $status-orange !important;
 }
 
 .mt8 {
@@ -178,32 +178,6 @@
 }
 .p-l-30px {
     padding-left: 30px;
-}
-
-.footer {
-    padding: 15px;
-    font-size: inherit;
-    left: 0;
-    bottom: 0 !important;
-    width: 100%;
-    color: $label;
-    position: fixed;
-    z-index: 999999;
-    font-weight: 500;
-    background-color: $profile-t-grey;
-    text-align: right;
-    border-top: 2px solid $profile-p-grey;
-    @media only screen and (max-width: 767px) {
-        position: relative;
-        margin-top: 20px;
-    }
-}
-
-// Mobile
-@media (min-width: 200px) and (max-width: 767.98px) {
-    .footer {
-        text-align: center;
-    }
 }
 
 .m-b-70 {

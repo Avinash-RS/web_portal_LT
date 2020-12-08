@@ -68,8 +68,8 @@ export class AssignmentComponent implements OnInit {
         ) {
           const batchStartDate = new Date(this.assignmentContent.courseStartDate);
           const batchEndDate = new Date(this.assignmentContent.courseEndDate);
-          this.courseStartDate = moment(batchStartDate).format('DD-MM-YYYY');
-          this.courseEndDate = moment(batchEndDate).format('DD-MM-YYYY');
+          this.courseStartDate = moment(batchStartDate).format('DD-MM-YYYY HH:MM A');
+          this.courseEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:MM A');
           this.assignmentContent.coursedetails.forEach((element) => {
             element.moduledetails.forEach((moduleData) => {
               moduleData.resourse.files.forEach((fileData) => {
