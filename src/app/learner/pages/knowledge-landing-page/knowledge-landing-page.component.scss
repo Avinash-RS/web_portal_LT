@@ -167,27 +167,7 @@ drag-scroll {
     width: 150px !important;
 }
 
-.footer {
-    padding: 15px;
-    font-size: inherit;
-    left: 0;
-    bottom: 0 !important;
-    position: fixed;
-    width: 100%;
-    color: $label;
-    z-index: 999;
-    font-weight: 500;
-    background-color: $profile-t-grey;
-    text-align: right;
-    border-top: 2px solid $profile-p-grey;
-}
 
-// Mobile
-@media (min-width: 200px) and (max-width: 767.98px) {
-    .footer {
-        text-align: center;
-    }
-}
 
 .backIc {
     cursor: pointer;
