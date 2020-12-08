@@ -19,6 +19,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+        box-shadow: 0px 2px 12px #00000052;
+        // border-radius: 10px;
+        background-color: #f5f5f5;
+    }
 }
 .activityCallouts {
     width: 100%;
@@ -180,31 +186,31 @@
     padding-left: 30px;
 }
 
-.footer {
-    padding: 15px;
-    font-size: inherit;
-    left: 0;
-    bottom: 0 !important;
-    width: 100%;
-    color: $label;
-    position: fixed;
-    z-index: 999999;
-    font-weight: 500;
-    background-color: $profile-t-grey;
-    text-align: right;
-    border-top: 2px solid $profile-p-grey;
-    @media only screen and (max-width: 767px) {
-        position: relative;
-        margin-top: 20px;
-    }
-}
+// .footer {
+//     padding: 15px;
+//     font-size: inherit;
+//     left: 0;
+//     bottom: 0 !important;
+//     width: 100%;
+//     color: $label;
+//     position: fixed;
+//     z-index: 999999;
+//     font-weight: 500;
+//     background-color: $profile-t-grey;
+//     text-align: right;
+//     border-top: 2px solid $profile-p-grey;
+//     @media only screen and (max-width: 767px) {
+//         position: relative;
+//         margin-top: 20px;
+//     }
+// }
 
-// Mobile
-@media (min-width: 200px) and (max-width: 767.98px) {
-    .footer {
-        text-align: center;
-    }
-}
+// // Mobile
+// @media (min-width: 200px) and (max-width: 767.98px) {
+//     .footer {
+//         text-align: center;
+//     }
+// }
 
 .m-b-70 {
     margin-bottom: 70px;
