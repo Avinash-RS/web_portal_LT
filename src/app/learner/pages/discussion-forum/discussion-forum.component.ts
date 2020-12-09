@@ -64,6 +64,9 @@ export class DiscussionForumComponent implements OnInit {
   };
   selectedIndex: any = 0;
   loading = false;
+  runnablePlatforms = ['MacIntel', 'Win32', 'Linux x86_64'];
+  isHideAccord: boolean = false;
+  isMobile: boolean = false;
 
   constructor(public Lservice: LearnerServicesService, public route: Router, private formBuilder: FormBuilder,
               private gs: GlobalServiceService, private toastr: ToastrService, private dialog: MatDialog,
@@ -78,10 +81,21 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(!this.runnablePlatforms.includes(navigator.platform)){
+        this.isMobile = true;
+      }
   }
 
   goBack() {
-    this.route.navigateByUrl('/Learner/MyCourse');
+    if (this.isMobile) {
+      if (this.isHideAccord) {
+        this.isHideAccord = false;
+      } else {
+        this.route.navigateByUrl('/Learner/MyCourse');
+      }
+    } else {
+      this.route.navigateByUrl('/Learner/MyCourse');
+    }
   }
 
   getSelectedIndex(i) {
