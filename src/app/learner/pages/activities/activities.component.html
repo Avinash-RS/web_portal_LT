@@ -298,8 +298,9 @@
       </mat-card>
     </div>
   </div>
+  <!-- [ngClass]= "isperformColaps?'':''" -->
       <ng-container *ngIf="performDetails?.length > 0 && !mobileResponsive">
-        <div class="box-0-1" *ngFor="let perform of performDetails; let i = index">
+        <div [ngClass]= "isperformColaps ?'box-0-1':'box-0-00'" *ngFor="let perform of performDetails; let i = index">
           <div class="row">
             <div class="col-10">
               <div class="f_size_16 f_wt_600"><img class="perfimg" src="assets/Perform1.svg" alt="perform"> 
@@ -603,7 +604,7 @@
     <mat-tab label="Project">
       <app-project-mobile [projectDetailPageData]="projectDetaildata" *ngIf="projectMobileResponsive"></app-project-mobile>
       <ng-container *ngIf="projectDetails?.length > 0 && !projectMobileResponsive">
-        <div class="box-0-1" *ngFor="let project of projectDetails; let i = index">
+        <div [ngClass]= "isCollapsed? 'box-0-1':'box-0-0'" *ngFor="let project of projectDetails; let i = index">
           <div class="row">
             <div class="col text-right">
               <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="!isCollapsed || projectId !== i"
