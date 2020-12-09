@@ -1038,8 +1038,8 @@ border: 1px solid #ccc;
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
   :host ::ng-deep .mat-tab-label, .mat-tab-label-active {
-    min-width: 110px !important;
-    padding: 3px !important;
+    min-width: auto !important;
+    padding: 3px 22px !important;
     margin: 0px !important;
   }
 
