@@ -2304,3 +2304,23 @@ p.titleAlign {
 		left: 125%;
 	}
 }
+.progress_icon{
+  float: left;
+  margin-top: -1%;
+}
+.course-progress{
+  padding-left: 1%;
+}
+
+@media only screen and (max-width: 576px) {
+  .overlay{
+    display: block;
+  }
+  .progress_icon{
+    float: left;
+    margin-top: -1%;
+  }
+  .course-progress{
+    padding-left: 1%;
+  }
+}

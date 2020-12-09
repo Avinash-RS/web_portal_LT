@@ -23,10 +23,10 @@
 <br>
 <!-- *ngIf="course?.isBatch" -->
 <div class="row" >
-  <div class="col-lg-4 col-xl-4 col-md-5 col-sm-12 col-12 collaborateAccordion">
+  <div *ngIf="(isMobile?(!isHideAccord?true:false):true)" class="col-lg-4 col-xl-4 col-md-5 col-sm-12 col-12 collaborateAccordion">
     <ng-container *ngIf="scromModuleData?.length > 0; else noModule">
       <mat-accordion *ngFor="let res of scromModuleData; let i = index"
-        (click)="getSelectedIndex(i);getModuleDataForForum(scromModuleData?.length, i + 1, res)">
+        (click)="getSelectedIndex(i);getModuleDataForForum(scromModuleData?.length, i + 1, res);isHideAccord=true">
         <mat-expansion-panel class="panel" hideToggle="true" #example [expanded]="selectedIndex === i">
           <mat-expansion-panel-header class="moduleHeadHight">
             <mat-panel-title class="module-container">
@@ -101,7 +101,7 @@
   </div>
   <!-- DF -->
 
-  <div class="col-lg-8 col-xl-8 col-md-7 col-sm-12 col-12 vrl">
+  <div *ngIf="(isMobile?(isHideAccord?true:false):true)" class="col-lg-8 col-xl-8 col-md-7 col-sm-12 col-12 vrl">
     <!-- to show module name in header - DONE-->
     <div *ngIf="showCourseDetails">
       <div class="p-l-0 no_border">
@@ -701,9 +701,3 @@
     </div>
   </div>
 </div> -->
-
-<div class="footer">
-  <span class="powered">
-      <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
-  </span>
-</div>
