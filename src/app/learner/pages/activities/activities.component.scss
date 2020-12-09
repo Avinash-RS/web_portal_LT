@@ -160,6 +160,17 @@
   width: 45%;
   cursor: not-allowed;
 }
+
+  .box-0-1{
+      margin-top: 10px;
+      width: 100%;
+      padding: 20px;
+      padding-bottom: 3%;
+      overflow: hidden;
+      height: auto;
+      background-color: $color-white;
+      border : 1px solid $color-border;
+  }
   .t-l{
     margin-left: 29px;
     margin-top: 5px;

@@ -613,7 +613,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   performlearnerUploadVideo() {
-    const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
+    const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:MM aa');
     const performVideo = new FormData();
     const startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy HH:MM aa');
     const endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy HH:MM aa');
@@ -652,12 +652,10 @@ export class ActivitiesComponent implements OnInit {
   submitDeleteVideo(videoName, itrdata, perform) {
     let videoFile = [];
     videoFile.push(videoName);
-    const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
+    const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:MM aa');
     const performVideo = new FormData();
-    console.log('this.performDetails', this.performDetails);
-    console.log('this.performsData', this.performsData);
-    const startDate = this.datePipe.transform(this.performsData?.performActivity.activitystartdate, 'dd-MM-yyyy');
-    const endDate = this.datePipe.transform(this.performsData?.performActivity.activityenddate, 'dd-MM-yyyy');
+    const startDate = this.datePipe.transform(perform?.activitystartdate, 'dd-MM-yyyy HH:MM aa');
+    const endDate = this.datePipe.transform(perform?.activityenddate, 'dd-MM-yyyy HH:MM aa');
     if (currentDate >= startDate && currentDate <= endDate) {
       this.submitStatus = 'ontime';
     } else {
