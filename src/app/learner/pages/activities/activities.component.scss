@@ -1,7 +1,7 @@
 @import "variable";
 
 .con-1 {
-    padding: 12px;
+    padding: 15px;
 }
 .breadCrumb {
   display: inline-block;
@@ -20,9 +20,18 @@
 ::ng-deep.mat-expansion-panel-header {
   height: auto !important;
   padding: 15px !important;
+  background-color: rgba(0, 0, 0, 0.03);
+}
+::ng-deep.mat-expansion-panel-header.mat-expanded:focus, ::ng-deep.mat-expansion-panel-header.mat-expanded:hover {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+  // border-bottom: 1px solid #B4B4B4 !important;
 }
 ::ng-deep.mat-expansion-panel-body {
   padding: 0 15px 15px !important;
+}
+::ng-deep.iterationAccordion .mat-expansion-panel {
+  margin-top: 10px !important;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.10) !important;
 }
 .panelTitle {
   margin-right: 0;
@@ -104,7 +113,7 @@
   margin-left: 15px;
 }
 .box-0-1 {
-  margin-top: 10px;
+  margin-top: 20px;
   width: 100%;
   padding: 20px;
   overflow: hidden;
@@ -112,6 +121,10 @@
   background-color: $color-white;
   border : 1px solid $color-border;
   position: relative;
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.10);
+  &:last-child {
+    box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.10);
+  }
 }
 .statusTxt {
   font-size: 15px;
@@ -161,16 +174,6 @@
   cursor: not-allowed;
 }
 
-  .box-0-1{
-      margin-top: 10px;
-      width: 100%;
-      padding: 20px;
-      padding-bottom: 3%;
-      overflow: hidden;
-      height: auto;
-      background-color: $color-white;
-      border : 1px solid $color-border;
-  }
   .t-l{
     margin-left: 29px;
     margin-top: 5px;
@@ -822,6 +825,13 @@ margin-top: 8px;
   height: auto !important;
   overflow: visible !important;
 }
+::ng-deep.scrollingData .drag-scroll-content {
+  text-align: left;
+}
+.slideLoop {
+  display: inline-block;
+  text-align: left;
+}
 .materialCard {
   width: 8rem;
   height: 7rem;
@@ -957,7 +967,15 @@ border: 1px solid #ccc;
 }
 
 .matCardIconRow1 {
-  height: 71%;
+  height: 100%;
+  position: relative;
+}
+.fileSelDet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
 }
 
 .icons {
@@ -966,22 +984,23 @@ border: 1px solid #ccc;
   color: #898989;
 }
 
-.fileSelDet {
+.fileSelDet, .fileSelDetHover {
   background-color: #5C6873;
-  height: 40%;
+  // height: 40%;
 }
 .fileSelDet {
-  height: 2rem;
-  background-color: #5C6873;
+  // height: 2rem;
+  // background-color: #5C6873;
 }
 
 .fileSelDetHover {
-  height: 3rem;
-  background-color: #5C6873;
+  // height: 3rem;
+  // background-color: #5C6873;
 }
 
-.fileNameCol {
-  padding-left: 5px !important;
+.fileNameCol, .fileSelDetHover {
+  width: 100%;
+  // padding-left: 5px !important;
 }
 
 .fileColor {
