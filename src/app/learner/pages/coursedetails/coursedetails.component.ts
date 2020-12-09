@@ -475,6 +475,10 @@ export class CoursedetailsComponent implements OnInit {
     this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
       this.scromModuleData = this.scromApiData?.childData;
+      //on Start of the course
+      this.currentPage = 0;
+      this.topiccurrentPage = 0;
+      this.nextPrevHolder = this.topiccurrentPage;
       // tree level
       this.scromModuleData.forEach(childData => {
         // console.log(childData.children);

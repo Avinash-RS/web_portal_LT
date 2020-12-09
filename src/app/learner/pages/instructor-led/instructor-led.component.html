@@ -198,7 +198,7 @@
                 <img *ngIf="!los.activity_details.livethumbnail" alt="image" style="width: 100%; height: 150px !important;object-fit: inherit !important;" src="../../../../assets/learner/instructor_image.png">
                 <!-- <div class="bottom-right" [ngClass]="los.status == 'Ongoing' ? 'organge' : los.status == 'UpComing' ? 'grey' : los.status == 'Completed' ? 'greenColor':''" >{{los.status}}</div> -->
                 <div *ngIf="los.status == 'On going'" class="bottom-right orange">Ongoing</div>
-                <div *ngIf="los.status == 'Up Coming'" class="bottom-right grey">UpComing</div>
+                <div *ngIf="los.status == 'Up Coming'" class="bottom-right grey">Upcoming</div>
                 <div *ngIf="los.status == 'Completed'" class="bottom-right greenColor">{{los.status}}</div>
               </div>
               <div class="content-container">
