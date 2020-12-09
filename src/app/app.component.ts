@@ -88,11 +88,10 @@ export class AppComponent implements OnInit {
       rt.data.subscribe(data => {
         this.isFooterVisible = '';
         this.titleService.setTitle(data.title);
-        console.log(urlIdentifier[2], "GOKUL");
+        // console.log(urlIdentifier[2], "GOKUL");
         if (!possiblePages.includes(urlIdentifier[2])) {
          /// this.isFooterVisible = false;
-         this.isFooterVisible = '<div class="footer" ><span class="powered"><span class="forgot1">2020 © L&T EduTech All Rights Reserved</span></span></div>'
-         
+         this.isFooterVisible = '<div class="footer"><span class="powered"><span class="forgot1">2020 © L&T EduTech All Rights Reserved</span></span></div>'
         }
       });
     });
