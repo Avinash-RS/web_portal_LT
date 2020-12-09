@@ -78,12 +78,14 @@ export class MycourseItemComponent implements OnInit {
     this.router.navigateByUrl('/Learner/selfLearning', { state: { data: data1 } });
   }
   gotoDesc(c) {
+    console.log('c', c);
     const detail = {
       id: c.course_id,
       wishlist: c.wishlisted || false,
       wishlist_id: c.wishlist_id || null,
       enrollment_status: null,
-      course_name: c.course_name
+      course_name: c.course_name,
+      course_status: c.course_status
       // persentage : c.coursePlayerStatus.course_percentage || 0
     };
     // if (this.screenWidth < 800) {
