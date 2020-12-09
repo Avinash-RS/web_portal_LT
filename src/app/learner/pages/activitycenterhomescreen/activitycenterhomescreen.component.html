@@ -8,7 +8,7 @@
   <div class="container-fluid m-t-rw activityCallouts">
     <div class="activityCardEmpty"></div>
     <div class="activityCenterCard activitycard1">
-    <mat-card class="activitycard ht-120" [ngClass]="details?.nextactivity?.length == 0 ? '': 'pointer'"
+    <mat-card matRipple class="activitycard ht-120" [ngClass]="details?.nextactivity?.length == 0 ? '': 'pointer'"
       (click)="details?.nextactivity?.length == 0 ? '': gototable1()">
       <!-- <mat-card-content> -->
       <div class="row no_padding ">
@@ -39,7 +39,7 @@
     </mat-card>
   </div>
   <div class="activityCenterCard activitycard2">
-    <mat-card class="activitycard ht-120"
+    <mat-card matRipple class="activitycard ht-120"
       [ngClass]="(details?.Completed == null && details?.Graded == null && details?.Submitted ==null) ? '': 'pointer'" (click)="(details?.Completed == null && details?.Graded == null && details?.Submitted ==null) ? '': gototable('completed')">
       <!-- <mat-card-content> -->
       <div class="row no_padding ">
@@ -72,7 +72,7 @@
 <div class="container-fluid activityCallouts">
   <div class="activityCardEmpty"></div>
   <div class="activityCenterCard activitycard1">
-    <mat-card class="activitycard ht-120" (click)="details?.Yettosubmit == null ? '': gototable('ongoing')"
+    <mat-card matRipple class="activitycard ht-120" (click)="details?.Yettosubmit == null ? '': gototable('ongoing')"
     [ngClass]="details?.Yettosubmit == null ? '': 'pointer'">
       <!-- <mat-card-content> -->
       <div class="row no_padding ">
@@ -95,7 +95,7 @@
     </mat-card>
   </div>
   <div class="activityCenterCard activitycard2">
-    <mat-card class="activitycard ht-120" (click)="details?.Allactivites == null ? '': gototable('allActivities')"
+    <mat-card matRipple class="activitycard ht-120" (click)="details?.Allactivites == null ? '': gototable('allActivities')"
     [ngClass]="details?.Allactivites == null ? '': 'pointer'">
       <!-- <mat-card-content> -->
       <div class="row no_padding ">
