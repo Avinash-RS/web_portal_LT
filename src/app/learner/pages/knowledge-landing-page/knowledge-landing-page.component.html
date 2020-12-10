@@ -14,9 +14,9 @@
     <nav aria-label="breadcrumb" class="coursebreadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a>Knowledge Resources</a></li>
-        <li class="breadcrumb-item active" aria-current="page">
-          {{resourceFile[0].area_of_interest}}</li>
+          Knowledge Resources > <span class="active">{{resourceFile[0].area_of_interest}}</span></li>
+        <!-- <li class="breadcrumb-item active" aria-current="page">
+          </li> -->
       </ol>
     </nav>
    
@@ -47,35 +47,37 @@
 
   <div class="main-section">
     <ng-container *ngFor="let resData of resourceFile">
-      <div class="resource-card" (click)="onPreview(resData)">
-        <div class="card-img">
-          <ng-container *ngIf="resData.thumbnail && resData.thumbnail.length > 0">
-            <img [src]="resData.thumbnail" alt="" class="img-thumb">
-          </ng-container>
-          <ng-container *ngIf="!resData.thumbnail || resData.thumbnail.length == 0">
-            <ng-container *ngIf="resData.fileType == 'pdf'">
-              <img src="../../../assets/images/PDF-res.svg" alt="pdf">
+      <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+        <div class="resource-card" (click)="onPreview(resData)">
+          <div class="card-img">
+            <ng-container *ngIf="resData.thumbnail && resData.thumbnail.length > 0">
+              <img [src]="resData.thumbnail" alt="" class="img-thumb">
             </ng-container>
-            <ng-container *ngIf="resData.fileType == 'jpg' || resData.fileType == 'png' || resData.fileType == 'jpeg'">
-              <img src="../../../assets/images/Image-res.svg" alt="image">
+            <ng-container *ngIf="!resData.thumbnail || resData.thumbnail.length == 0">
+              <ng-container *ngIf="resData.fileType == 'pdf'">
+                <img src="../../../assets/images/PDF-res.svg" alt="pdf">
+              </ng-container>
+              <ng-container *ngIf="resData.fileType == 'jpg' || resData.fileType == 'png' || resData.fileType == 'jpeg'">
+                <img src="../../../assets/images/Image-res.svg" alt="image">
+              </ng-container>
+              <ng-container *ngIf="resData.fileType == 'mp4'">
+                <img src="../../../assets/images/video-res.svg" alt="video">
+              </ng-container>
+              <ng-container *ngIf="resData.fileType == 'mp3'">
+                <img src="../../../assets/images/Audio-res.svg" alt="audio">
+              </ng-container>
+              <ng-container *ngIf="resData.fileType == undefined || resData.fileType == 'csv'">
+                <img src="../../../assets/images/Image-res.svg" alt="image">
+              </ng-container>
             </ng-container>
-            <ng-container *ngIf="resData.fileType == 'mp4'">
-              <img src="../../../assets/images/video-res.svg" alt="video">
-            </ng-container>
-            <ng-container *ngIf="resData.fileType == 'mp3'">
-              <img src="../../../assets/images/Audio-res.svg" alt="audio">
-            </ng-container>
-            <ng-container *ngIf="resData.fileType == undefined || resData.fileType == 'csv'">
-              <img src="../../../assets/images/Image-res.svg" alt="image">
-            </ng-container>
-          </ng-container>
-        </div>
-
-        <div class="card-name">
-          <div class="file-name" style="-webkit-box-orient: vertical;">
-            {{resData.filename + '.' + resData.fileType}}
+          </div>
+          <div class="card-name">
+            <div class="file-name" style="-webkit-box-orient: vertical;">
+              {{resData.filename + '.' + resData.fileType}}
+            </div>
           </div>
         </div>
+
       </div>
     </ng-container>
 
