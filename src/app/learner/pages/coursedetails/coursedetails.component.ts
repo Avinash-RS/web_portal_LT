@@ -763,9 +763,9 @@ export class CoursedetailsComponent implements OnInit {
       // if (this.checkDetails?.feed_back === 1 && this.playerStatus.feedback_status === false && this.playerStatus.status === 'completed') {
       //   this.ratingPopup();
       // }
-      if (this.playerStatus.feedback_status === false && this.playerStatus.course_percentage === 100 && this.playerStatus.status === 'completed') {
-        this.ratingPopup();
-        }
+      // if (this.playerStatus.feedback_status === false && this.playerStatus.course_percentage === 100 && this.playerStatus.status === 'completed') {
+      //   this.ratingPopup();
+      //   }
     });
   }
 
