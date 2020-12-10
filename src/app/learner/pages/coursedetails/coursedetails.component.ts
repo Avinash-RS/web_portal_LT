@@ -233,7 +233,7 @@ export class CoursedetailsComponent implements OnInit {
   ngOnInit(): void {
     this.translate.use(localStorage.getItem('language'));
     // this.add_topic_reference(res);
-    if (this.detailData.course_status === 'completed') {
+    if (this.detailData?.course_status === 'completed') {
       this.ratingPopup();
     }
     this.service.menuSelectedPerform.subscribe((emitedData: any) => {
@@ -454,9 +454,9 @@ export class CoursedetailsComponent implements OnInit {
       }
     }
     console.log('this.scromModuleData', this.scromModuleData, 'this.currentPage', this.currentPage);
-    this.gettopicLink = this.scromModuleData[this.currentPage - 1].children[this.topiccurrentPage];
-    const childData = this.scromModuleData[this.moduleLenth - 1].children;
-    const childlength = this.scromModuleData[this.moduleLenth - 1].children.length;
+    this.gettopicLink = this.scromModuleData[this.currentPage - 1]?.children[this.topiccurrentPage];
+    const childData = this.scromModuleData[this.moduleLenth - 1]?.children;
+    const childlength = this.scromModuleData[this.moduleLenth - 1]?.children.length;
     console.log(childData[childlength - 1].id);
     console.log('this.gettopicLink', this.gettopicLink);
     if (this.gettopicLink.id === childData[childlength - 1].id) {
