@@ -87,6 +87,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { AssignmentComponent } from './pages/assignment/assignment.component';
 
 import { DragScrollModule } from 'ngx-drag-scroll';
+import { IsLoggedInAuthGuard } from '@core/services/_helpers/is-logged-in-auth.guard';
 // import { VideoRecorderComponent } from './pages/video-recorder/video-recorder.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -97,55 +98,63 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 const routes: Routes = [
   // { path: '', component: LandingpageComponent , canActivate: [AuthGuard], data: { title: 'Welcome to LXP' } },
   // { path: 'login', component: LandingpageComponent, canActivate: [AuthGuard], data: { title: 'Learner Login' } },
+  // {
+  //   path: '',
+  //   component: LoginComponent,
+  //   canActivate: [IsLoggedInAuthGuard],
+  //   data: { title: 'Learner Login' }
+  // },
+  // {
+  //   path: 'login',
+  //   component: LoginComponent,
+  //   canActivate: [IsLoggedInAuthGuard],
+  //   data: { title: 'Learner Login' }
+  // },
   {
     path: '',
-    component: LoginComponent,
-    canActivate: [AuthGuard],
-    data: { title: 'Learner Login' }
+    redirectTo: 'MyCourse',
+    pathMatch: 'full',
+    // canActivate: [AuthGuard],
+    data: { animation: 'Learner  MyCourse' }
   },
-  {
-    path: 'login',
-    component: LoginComponent,
-    canActivate: [AuthGuard],
-    data: { title: 'Learner Login' }
-  },
+
   {
     path: 'courseDetail',
     component: CoursedetailsComponent,
-    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     data: { animation: 'Course details' }
   },
-  {
-    path: 'register',
-    component: RegistrationComponent,
-    data: { animation: 'Learner  Registration' }
-  },
-  {
-    path: 'otp',
-    component: OtpComponent,
-    // canActivate: [AuthGuard],
-    data: { title: 'Learner  Registration OTP' }
-  },
-  {
-    path: 'password',
-    component: PasswordComponent,
-    // canActivate: [AuthGuard],
-    data: { title: 'Learner  Registration Username/Password' }
-  },
-  {
-    path: 'recover',
-    component: ForgotUsernameAndPasswordComponent,
-    data: { animation: 'Learner Forget Password' }
-  },
-  {
-    path: 'recoverotp',
-    component: RecoverFogotpasswordOTPComponent,
-    data: { title: 'Learner Forget Password OTP' }
-  },
+  // {
+  //   path: 'register',
+  //   component: RegistrationComponent,
+  //   data: { animation: 'Learner  Registration' }
+  // },
+  // {
+  //   path: 'otp',
+  //   component: OtpComponent,
+  //   // canActivate: [AuthGuard],
+  //   data: { title: 'Learner  Registration OTP' }
+  // },
+  // {
+  //   path: 'password',
+  //   component: PasswordComponent,
+  //   // canActivate: [AuthGuard],
+  //   data: { title: 'Learner  Registration Username/Password' }
+  // },
+  // {
+  //   path: 'recover',
+  //   component: ForgotUsernameAndPasswordComponent,
+  //   data: { animation: 'Learner Forget Password' }
+  // },
+  // {
+  //   path: 'recoverotp',
+  //   component: RecoverFogotpasswordOTPComponent,
+  //   data: { title: 'Learner Forget Password OTP' }
+  // },
   {
     path: 'profile',
     component: ProfileComponent,
-    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     data: { animation: 'Learner  Profile' }
   },
   {
@@ -222,7 +231,7 @@ const routes: Routes = [
   {
     path: 'viewallcourses',
     component: ViewAllCoursesComponent,
-    canActivate: [AuthGuard]
+    canLoad: [AuthGuard]
   },
   // {
   //   path: 'dashboard',
@@ -254,22 +263,22 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    LoginComponent,
+    // LoginComponent,
     // NewHomeComponent,
     LearnerHomeComponent,
     CoursedetailsComponent,
-    RegistrationComponent,
-    OtpComponent,
-    PasswordComponent,
-    ForgotUsernameAndPasswordComponent,
-    RecoverFogotpasswordOTPComponent,
+    // RegistrationComponent,
+    // OtpComponent,
+    // PasswordComponent,
+    // ForgotUsernameAndPasswordComponent,
+    // RecoverFogotpasswordOTPComponent,
     ProfileComponent,
     LearnerMyCourseComponent,
     LearnerMyCourseComponent,
     ResetpasswordComponent,
     TermsconditionsComponent,
     ScormplayerComponent,
-    MaskingPipePipe,
+    // MaskingPipePipe,
     ForbiddenComponent,
     NewHomeComponent,
     ViewAllCoursesComponent,
