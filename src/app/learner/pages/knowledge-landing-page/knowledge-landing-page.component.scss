@@ -63,15 +63,17 @@
             }
         }
         .header-carousel {
-            margin-top: 1.5%;
+            margin: 10px 20px 15px 15px;
             .topic-chip {
                 border: 1px solid #8f8f8f;
                 text-align: center;
-                padding: 10px;
+                padding: 10px 30px;
                 border-radius: 48px;
                 text-overflow: ellipsis;
                 overflow: hidden;
                 white-space: nowrap;
+                cursor: grab;
+                user-select: none;
                 &:active {
                     background-color: #bbbbbb;
                 }
@@ -132,7 +134,14 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
-
+drag-scroll {
+    height: 50px;
+    width: auto;
+}
+::ng-deep.drag-scroll-content {
+    display: flex !important;
+    align-items: center;
+}
 ::ng-deep .knowledge-landing-container .owl-theme .owl-nav {
     text-align: inherit !important;
 }
@@ -158,27 +167,7 @@
     width: 150px !important;
 }
 
-.footer {
-    padding: 15px;
-    font-size: inherit;
-    left: 0;
-    bottom: 0 !important;
-    position: fixed;
-    width: 100%;
-    color: $label;
-    z-index: 999;
-    font-weight: 500;
-    background-color: $profile-t-grey;
-    text-align: right;
-    border-top: 2px solid $profile-p-grey;
-}
 
-// Mobile
-@media (min-width: 200px) and (max-width: 767.98px) {
-    .footer {
-        text-align: center;
-    }
-}
 
 .backIc {
     cursor: pointer;
