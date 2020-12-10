@@ -40,7 +40,7 @@ export class KnowledgeLandingPageComponent implements OnInit {
     },
     nav: true
   };
-  resourceFile: any;
+  resourceFile = [];
   isPreview = false;
   preResourceFile: any;
   selectedTopic = 'All';
