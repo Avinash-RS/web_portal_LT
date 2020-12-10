@@ -247,8 +247,7 @@
                 </div> 
               
               <div class="row ml-0 mr-0 mt-2">
-                <input type="file" accept="video/mp4" multiple style="display: none" #videoInput
-                  (change)="uploadDocument($event)" />
+                
               <div class="col-12 text-center" *ngIf="itration.grade_status !== 'Evaluated'"> 
                 <!-- <button mat-raised-button *ngIf="itration.submit_status == 'notsubmitted' && performActivityData.itrationStarted" (click)="videoRecord = true; getData(videoRecordPopup, itration)" class="recordBtn mt-3 w-100"><mat-icon class="video-icon">videocam <i class="fa fa-youtube-play playBtn" aria-hidden="true"></i></mat-icon> Record Video
                 </button> -->
@@ -292,11 +291,14 @@
             </div>
           </div>
             </div>
+            <input type="file" accept="video/mp4" multiple style="display: none" #videoInput
+            (change)="uploadDocument($event)" />
           </div>
           </mat-card>
         </div>
       </div>
     </div>
+   
   </div>
   <!-------------------------- Preview Video --------------------------------->
   <ng-template #videoDialog>
