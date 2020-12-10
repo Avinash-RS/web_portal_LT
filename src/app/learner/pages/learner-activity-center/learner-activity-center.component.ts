@@ -30,7 +30,6 @@ export class LearnerActivityCenterComponent implements OnInit {
   columnDefs: any;
   defaultColDef = {
     flex: 1,
-    minWidth: 30,
     resizable: true,
     floatingFilter: true,
     suppressMenu: true,
@@ -173,6 +172,7 @@ export class LearnerActivityCenterComponent implements OnInit {
         {
           headerName: 'Start date',
           sortable: true,
+          minWidth: 155,
           filter: true,
           flex: 2,
           floatingFilterComponentParams: { suppressFilterButton: true },
@@ -183,6 +183,7 @@ export class LearnerActivityCenterComponent implements OnInit {
           headerName: 'End date',
           sortable: true,
           filter: true,
+          minWidth: 155,
           flex: 2,
           floatingFilterComponentParams: { suppressFilterButton: true },
           field: 'activityenddate',
