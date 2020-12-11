@@ -8,14 +8,14 @@ import { AuthGuard } from '@core/services/_helpers';
 const routes: Routes = [
 
   {
-    path: '',
+    path: 'Learner',
     loadChildren: './learner/login.module#LoginModule',
     canActivate: [IsLoggedInAuthGuard],
      data : {title: 'Welcome to EduTech'}
   },
 
   {
-    path: 'Learner',
+    path: '',
     loadChildren: './learner/learner.module#LearnerModule',
     canLoad: [AuthGuard],
     data : {animation: 'Learner'}

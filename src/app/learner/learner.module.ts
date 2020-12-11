@@ -29,7 +29,6 @@ import { CoursedetailsComponent } from '@learner/pages/coursedetails/coursedetai
 import { LearnerHomeComponent } from '@learner/pages/learner-home/learner-home.component';
 import { ProfileComponent } from '@learner/pages/profile/profile.component';
 import { LearnerMyCourseComponent } from '@learner/pages/learner-my-course/learner-my-course.component';
-import { ResetpasswordComponent } from '@learner/pages/resetpassword/resetpassword.component';
 import { TermsconditionsComponent } from '@learner/pages/termsconditions/termsconditions.component';
 import { ScormplayerComponent } from './pages/scormplayer/scormplayer.component';
 import { NgOtpInputModule } from 'ng-otp-input';
@@ -86,125 +85,56 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 
 const routes: Routes = [
-  // { path: '', component: LandingpageComponent , canActivate: [AuthGuard], data: { title: 'Welcome to LXP' } },
-  // { path: 'login', component: LandingpageComponent, canActivate: [AuthGuard], data: { title: 'Learner Login' } },
-  // {
-  //   path: '',
-  //   component: LoginComponent,
-  //   canActivate: [IsLoggedInAuthGuard],
-  //   data: { title: 'Learner Login' }
-  // },
-  // {
-  //   path: 'login',
-  //   component: LoginComponent,
-  //   canActivate: [IsLoggedInAuthGuard],
-  //   data: { title: 'Learner Login' }
-  // },
   {
     path: '',
-    redirectTo: 'MyCourse',
+    // component: LearnerMyCourseComponent,
+    redirectTo: 'Learner',
     pathMatch: 'full',
-    // canActivate: [AuthGuard],
-    data: { animation: 'Learner  MyCourse' }
-  },
-
-  {
-    path: 'courseDetail',
-    component: CoursedetailsComponent,
     canLoad: [AuthGuard],
-    data: { animation: 'Course details' }
   },
-  // {
-  //   path: 'register',
-  //   component: RegistrationComponent,
-  //   data: { animation: 'Learner  Registration' }
-  // },
-  // {
-  //   path: 'otp',
-  //   component: OtpComponent,
-  //   // canActivate: [AuthGuard],
-  //   data: { title: 'Learner  Registration OTP' }
-  // },
-  // {
-  //   path: 'password',
-  //   component: PasswordComponent,
-  //   // canActivate: [AuthGuard],
-  //   data: { title: 'Learner  Registration Username/Password' }
-  // },
-  // {
-  //   path: 'recover',
-  //   component: ForgotUsernameAndPasswordComponent,
-  //   data: { animation: 'Learner Forget Password' }
-  // },
-  // {
-  //   path: 'recoverotp',
-  //   component: RecoverFogotpasswordOTPComponent,
-  //   data: { title: 'Learner Forget Password OTP' }
-  // },
   {
-    path: 'profile',
+    path: 'Learner',
+    // component: LearnerMyCourseComponent,
+    loadChildren: './mycourses.module#MycoursesModule',
+    canLoad: [AuthGuard],
+  },
+  {
+    path: 'Learner/profile',
     component: ProfileComponent,
     canLoad: [AuthGuard],
     data: { animation: 'Learner  Profile' }
   },
   {
-    path: 'MyCourse',
-    component: LearnerMyCourseComponent,
-    // canActivate: [AuthGuard],
-    data: { animation: 'Learner  MyCourse' }
-  },
-  {
-    path: 'selfLearning',
+    path: 'Learner/selfLearning',
     component: SelfLearnerAvtivityComponent,
     // resolve: {
     //   data: LearnermycourseService
     //   },
     // canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     data: { animation: 'Self Learner Avtivity' }
   },
   {
-    path: 'resetpassword',
-    component: ResetpasswordComponent,
-    data: { title: 'Learner Reset password' }
-  },
-
-  {
-    path: 'calendar',
-    component: LearnerCalendarComponent,
+    path: 'Learner/calendar',
+    // component: LearnerCalendarComponent,
+    loadChildren: './calendar.module#CalendarModules',
+    canLoad: [AuthGuard],
     data: { animation: 'Calendar' }
   },
-  {
-    path: 'activities',
-    component: ActivitiesComponent,
-    data: { animation: 'Calendar' }
-  },
-    {
-    path: 'activitycenter',
-    component: LearnerActivityCenterComponent,
-    data: { animation: 'activitycenter' }
-  },
 
   {
-
-    path: 'discussionForum',
-    component: DiscussionForumComponent,
-    data: { animation: 'Discussion Forum' }
-  },
-
-  {
-    path: 'activitycenterhomescreen',
-    component: ActivitycenterhomescreenComponent,
+    path: 'Learner/activitycenterhomescreen',
+    // component: ActivitycenterhomescreenComponent,
+    loadChildren: './activitycenter.module#ActivitycenterModule',
+    canLoad: [AuthGuard],
     data: { animation: 'activitycenterhomescreen' }
 
   },
   {
-    path: 'knowledge',
-    component: KnowledgeResourceHomeComponent,
-    data: { animation: 'activitycenterhomescreen' }
-  },
-  {
-    path: 'knowledge/preview',
-    component: KnowledgeLandingPageComponent,
+    path: 'Learner/knowledge',
+    // component: KnowledgeResourceHomeComponent,
+    loadChildren: './knowledgeresources.module#KnowledgeresourcesModule',
+    canLoad: [AuthGuard],
     data: { animation: 'activitycenterhomescreen' }
   },
   // {
@@ -219,7 +149,7 @@ const routes: Routes = [
   //   data: { title: 'Course Player' }
   // },
   {
-    path: 'viewallcourses',
+    path: 'Learner/viewallcourses',
     component: ViewAllCoursesComponent,
     canLoad: [AuthGuard]
   },
@@ -235,19 +165,15 @@ const routes: Routes = [
   //   data: { animation: 'Learner home' }
   // },
   {
-    path: 'forbidden',
+    path: 'Learner/forbidden',
     component: ForbiddenComponent,
     data: { title: 'Learner Change email' }
   },
   {
-    path: 'viewAllnotifications',
+    path: 'Learner/viewAllnotifications',
     component: ViewAllnotificationsComponent,
+    canLoad: [AuthGuard],
   },
-  {
-    path: 'instructorLed',
-    component: InstructorLedComponent,
-    data: { animation: 'Learner  MyCourse' }
-  }
   // { path: 'new-home', component: NewHomeComponent },
 ];
 
@@ -256,16 +182,16 @@ const routes: Routes = [
     // LoginComponent,
     // NewHomeComponent,
     LearnerHomeComponent,
-    CoursedetailsComponent,
+    // CoursedetailsComponent,
     // RegistrationComponent,
     // OtpComponent,
     // PasswordComponent,
     // ForgotUsernameAndPasswordComponent,
     // RecoverFogotpasswordOTPComponent,
     ProfileComponent,
-    LearnerMyCourseComponent,
-    LearnerMyCourseComponent,
-    ResetpasswordComponent,
+    // LearnerMyCourseComponent,
+    // LearnerMyCourseComponent,
+    // ResetpasswordComponent,
     TermsconditionsComponent,
     ScormplayerComponent,
     // MaskingPipePipe,
@@ -275,18 +201,18 @@ const routes: Routes = [
     // SearchPipe,
     LearnerDashboardComponent,
     LandingpageComponent,
-    LearnerCalendarComponent,
+    // LearnerCalendarComponent,
     ViewAllnotificationsComponent,
     PerformancePageMobileComponent,
     SelfLearnerAvtivityComponent,
-    ActivitiesComponent,
-    DiscussionForumComponent,
-    LearnerActivityCenterComponent,
-    ActivitycenterhomescreenComponent,
-    InstructorLedComponent,
-    KnowledgePreviewComponent,
-    KnowledgeLandingPageComponent,
-    KnowledgeResourceHomeComponent,
+    // ActivitiesComponent,
+    // DiscussionForumComponent,
+    // LearnerActivityCenterComponent,
+    // ActivitycenterhomescreenComponent,
+    // InstructorLedComponent,
+    // KnowledgePreviewComponent,
+    // KnowledgeLandingPageComponent,
+    // KnowledgeResourceHomeComponent,
     VideoPreviewModalComponent,
     ProjectMobileComponent,
     PerformVideoRecordComponent,
@@ -360,6 +286,6 @@ const routes: Routes = [
     Apollo
     // { provide: Window, useValue: window }
   ],
-  entryComponents: [CategoryComponentComponent, KnowledgePreviewComponent, VideoPreviewModalComponent]
+  entryComponents: [CategoryComponentComponent, VideoPreviewModalComponent]
 })
 export class LearnerModule { }

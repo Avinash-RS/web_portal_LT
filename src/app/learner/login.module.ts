@@ -15,6 +15,7 @@ import { HttpClient } from '@angular/common/http';
 import { MaterialModule } from '@core/material.module';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
 
 const routes: Routes = [
   {
@@ -24,42 +25,42 @@ const routes: Routes = [
     data: { title: 'Learner Login' }
   },
   {
-    path: 'Learner/login',
+    path: 'login',
     component: LoginComponent,
     canActivate: [IsLoggedInAuthGuard],
     data: { title: 'Learner Login' }
   },
   {
-    path: 'Learner/register',
+    path: 'register',
     component: RegistrationComponent,
-    canActivate: [IsLoggedInAuthGuard],
     data: { animation: 'Learner  Registration' }
   },
   {
-    path: 'Learner/otp',
+    path: 'otp',
     component: OtpComponent,
     // canActivate: [AuthGuard],
-    canActivate: [IsLoggedInAuthGuard],
     data: { title: 'Learner  Registration OTP' }
   },
   {
-    path: 'Learner/password',
+    path: 'password',
     component: PasswordComponent,
     // canActivate: [AuthGuard],
-    canActivate: [IsLoggedInAuthGuard],
     data: { title: 'Learner  Registration Username/Password' }
   },
   {
-    path: 'Learner/recover',
+    path: 'recover',
     component: ForgotUsernameAndPasswordComponent,
-    canActivate: [IsLoggedInAuthGuard],
     data: { animation: 'Learner Forget Password' }
   },
   {
-    path: 'Learner/recoverotp',
+    path: 'recoverotp',
     component: RecoverFogotpasswordOTPComponent,
-    canActivate: [IsLoggedInAuthGuard],
     data: { title: 'Learner Forget Password OTP' }
+  },
+  {
+    path: 'resetpassword',
+    component: ResetpasswordComponent,
+    data: { title: 'Learner Reset password' }
   },
 ]
 
@@ -71,6 +72,7 @@ const routes: Routes = [
     PasswordComponent,
     ForgotUsernameAndPasswordComponent,
     RecoverFogotpasswordOTPComponent,
+    ResetpasswordComponent,
     MaskingPipePipe,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

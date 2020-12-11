@@ -28,7 +28,7 @@ export class ActivitycenterhomescreenComponent implements OnInit {
     };
     // localStorage.setItem('key', e);
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
-    this.router.navigateByUrl('/Learner/activitycenter', { state: { detail } });
+    this.router.navigateByUrl('/Learner/activitycenterhomescreen/activitycenter', { state: { detail } });
   }
   get_active_course_count() {
     const userId = this.userDetails.user_id;
