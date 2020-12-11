@@ -21,19 +21,12 @@ import { MyDatePickerModule } from 'mydatepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ChartsModule } from 'ng2-charts';
 
-import { MaskingPipePipe } from '@core/core/masking-pipe.pipe';
 import { CoreModule } from '@core/core.module';
 import { MaterialModule } from '@core/material.module';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
-import { LoginComponent } from '@learner/pages/login/login.component';
 // import { NewHomeComponent } from '@learner/pages/new-home/new-home.component';
 import { CoursedetailsComponent } from '@learner/pages/coursedetails/coursedetails.component';
-import { RegistrationComponent } from '@learner/pages/registration/registration.component';
-import { OtpComponent } from '@learner/pages/otp/otp.component';
-import { PasswordComponent } from '@learner/pages/password/password.component';
 import { LearnerHomeComponent } from '@learner/pages/learner-home/learner-home.component';
-import { ForgotUsernameAndPasswordComponent } from '@learner/pages/forgot-username-and-password/forgot-username-and-password.component';
-import { RecoverFogotpasswordOTPComponent } from '@learner/pages/recover-fogotpassword-otp/recover-fogotpassword-otp.component';
 import { ProfileComponent } from '@learner/pages/profile/profile.component';
 import { LearnerMyCourseComponent } from '@learner/pages/learner-my-course/learner-my-course.component';
 import { ResetpasswordComponent } from '@learner/pages/resetpassword/resetpassword.component';
@@ -65,7 +58,6 @@ import { ViewAllnotificationsComponent } from './pages/view-allnotifications/vie
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatMenuModule } from '@angular/material/menu';
-import { LearnermycourseService } from './pages/learner-my-course/learnermycourse.service';
 import { PerformancePageMobileComponent } from './pages/performance-page-mobile/performance-page-mobile.component';
 import { SelfLearnerAvtivityComponent } from './pages/self-learner-avtivity/self-learner-avtivity.component';
 import { ActivitiesComponent } from './pages/activities/activities.component';
@@ -78,7 +70,6 @@ import { KnowledgeResourceHomeComponent } from './pages/knowledge-resource-home/
 import { KnowledgeLandingPageComponent } from './pages/knowledge-landing-page/knowledge-landing-page.component';
 import { KnowledgePreviewComponent } from './pages/knowledge-preview/knowledge-preview.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { FilterPipe } from '../pipes/filter.pipe';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { VideoPreviewModalComponent } from './pages/video-preview-modal/video-preview-modal.component';
 import { ProjectMobileComponent } from './pages/project-mobile/project-mobile.component';
@@ -87,7 +78,6 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { AssignmentComponent } from './pages/assignment/assignment.component';
 
 import { DragScrollModule } from 'ngx-drag-scroll';
-import { IsLoggedInAuthGuard } from '@core/services/_helpers/is-logged-in-auth.guard';
 // import { VideoRecorderComponent } from './pages/video-recorder/video-recorder.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {

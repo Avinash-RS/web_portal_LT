@@ -30,15 +30,8 @@ import { DatePipe } from '@angular/common';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { SocketioService } from '@learner/services/socketio.service';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
-import { LoginComponent } from '@learner/pages/login/login.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '@core/core.module';
-import { RegistrationComponent } from '@learner/pages/registration/registration.component';
-import { OtpComponent } from '@learner/pages/otp/otp.component';
-import { PasswordComponent } from '@learner/pages/password/password.component';
-import { ForgotUsernameAndPasswordComponent } from '@learner/pages/forgot-username-and-password/forgot-username-and-password.component';
-import { RecoverFogotpasswordOTPComponent } from '@learner/pages/recover-fogotpassword-otp/recover-fogotpassword-otp.component';
-import { MaskingPipePipe } from '@core/core/masking-pipe.pipe';
 
 // import { ChartsModule } from 'ng2-charts';
 
@@ -55,13 +48,6 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
   declarations: [
     AppComponent,
     AlertComponentComponent,
-    LoginComponent,
-    RegistrationComponent,
-    OtpComponent,
-    PasswordComponent,
-    ForgotUsernameAndPasswordComponent,
-    RecoverFogotpasswordOTPComponent,
-    MaskingPipePipe,
     // DialogComponent,
     NotFoundComponent,
   ],
