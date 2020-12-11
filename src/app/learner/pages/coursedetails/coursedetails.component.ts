@@ -233,9 +233,9 @@ export class CoursedetailsComponent implements OnInit {
   ngOnInit(): void {
     this.translate.use(localStorage.getItem('language'));
     // this.add_topic_reference(res);
-    if (this.detailData?.course_status === 'completed') {
-      this.ratingPopup();
-    }
+    // if (this.detailData.course_status === 'completed') {
+    //   this.ratingPopup();
+    // }
     this.service.menuSelectedPerform.subscribe((emitedData: any) => {
       this.selectedName = emitedData.selectedName;
       this.selectedTabIndex = emitedData.selectedTabIndex;
@@ -459,9 +459,9 @@ export class CoursedetailsComponent implements OnInit {
     const childlength = this.scromModuleData[this.moduleLenth - 1]?.children.length;
     console.log(childData[childlength - 1].id);
     console.log('this.gettopicLink', this.gettopicLink);
-    if (this.gettopicLink.id === childData[childlength - 1].id) {
-      this.ratingPopup();
-    }
+    // if (this.gettopicLink.id === childData[childlength - 1].id) {
+    //   this.ratingPopup();
+    // }
   }
 
   topicPrve() {
@@ -760,9 +760,12 @@ export class CoursedetailsComponent implements OnInit {
   getCoursePlayerStatus() {
     this.Lservice.getCoursePlayerStatusForCourse(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
       this.playerStatus = data.data.getCoursePlayerStatusForCourse.message;
-      if (this.checkDetails?.feed_back === 1 && this.playerStatus.feedback_status === false && this.playerStatus.status === 'completed') {
-        this.ratingPopup();
-      }
+      // if (this.checkDetails?.feed_back === 1 && this.playerStatus.feedback_status === false && this.playerStatus.status === 'completed') {
+      //   this.ratingPopup();
+      // }
+      // if (this.playerStatus.feedback_status === false && this.playerStatus.course_percentage === 100 && this.playerStatus.status === 'completed') {
+      //   this.ratingPopup();
+      //   }
     });
   }
 

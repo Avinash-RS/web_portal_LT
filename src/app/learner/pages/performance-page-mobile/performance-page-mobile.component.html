@@ -73,7 +73,7 @@
           <ng-template class="row ml-0 mr-0" carouselSlide
             *ngFor="let material of performActivityData.performActivity.materialDetails; let i = index">
             <div [ngClass]="performActivityData.performActivity.materialDetails.length >= 2 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
-              <mat-card class="p-0 iterationCard" (click)="playVideo(projectPreviewDialog, videoDialog, material, material.doc_type, preview = true)">
+              <mat-card class="p-0 iterationCard" (click)="playVideoMaterial(projectPreviewDialog, videoDialog, material, material.doc_type, preview = true)">
                 <div class="row ml-0 mr-0 carouselRow1">
                   <div class="col-12 m-auto">
                     <mat-icon class="iterationicons"
