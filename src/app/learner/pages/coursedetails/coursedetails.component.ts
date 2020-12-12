@@ -155,10 +155,10 @@ export class CoursedetailsComponent implements OnInit {
       // this.autoHide();
       this.getPlayerNextPrve();
      
-      this.service.viewCurseByID(detail && detail.id || this.localStoCourseid, this.userDetail.user_id)
+      this.service.viewCurseByIDForLearner(detail && detail.id || this.localStoCourseid)
         .subscribe((viewCourse: any) => {
-          if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
-            this.course = viewCourse.data.viewcourse.message;
+          if (viewCourse.data.view_course_for_learner && viewCourse.data.view_course_for_learner.success) {
+            this.course = viewCourse.data.view_course_for_learner.message;
              console.log('this.course 1', this.course);
             if (this.detailData !== undefined) {
               this.selectedName = this.detailData?.course_name;
@@ -454,9 +454,9 @@ export class CoursedetailsComponent implements OnInit {
       }
     }
     console.log('this.scromModuleData', this.scromModuleData, 'this.currentPage', this.currentPage);
-    this.gettopicLink = this.scromModuleData[this.currentPage - 1].children[this.topiccurrentPage];
-    const childData = this.scromModuleData[this.moduleLenth - 1].children;
-    const childlength = this.scromModuleData[this.moduleLenth - 1].children.length;
+    this.gettopicLink = this.scromModuleData[this.currentPage - 1]?.children[this.topiccurrentPage];
+    const childData = this.scromModuleData[this.moduleLenth - 1]?.children;
+    const childlength = this.scromModuleData[this.moduleLenth - 1]?.children.length;
     console.log(childData[childlength - 1].id);
     console.log('this.gettopicLink', this.gettopicLink);
     // if (this.gettopicLink.id === childData[childlength - 1].id) {
