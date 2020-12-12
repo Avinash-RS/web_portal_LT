@@ -294,7 +294,7 @@ export class ProjectMobileComponent implements OnInit {
           });
           this.previewDoc = path;
       } else {
-        this.videoPreview(videoDialog, path);
+        this.videoPreview(videoDialog, path.path);
       }
     }
     videoPreview(templateRef: TemplateRef<any>, path) {
@@ -321,7 +321,7 @@ export class ProjectMobileComponent implements OnInit {
           this.previewDoc = path;
         } else {
           this.videoSource = path.path;
-          this.videoPreview(videoDialog, path);
+          this.videoPreview(videoDialog, path.path);
         }
       } else if (type === 'files') {
         this.showDownload = true;

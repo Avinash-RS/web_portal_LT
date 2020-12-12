@@ -400,6 +400,29 @@ export const viewcourse = gql`
     }
   }`;
 
+  export const view_course_for_learner = gql`
+  query view_course_for_learner($course_id: String!){
+    view_course_for_learner(course_id: $course_id) {
+      success
+      error_msg
+      message{
+        _id
+        course_name
+        course_long_description
+        course_mode
+        course_language
+        created_by
+        course_id
+        author_details{
+          _id
+          author_name
+          description
+          image
+        }
+      }
+    }
+  }`;
+
 // tslint:disable-next-line: variable-name
 export const view_wishlist = gql`
   query view_wishlist($user_id: String, $pagenumber: Int ){

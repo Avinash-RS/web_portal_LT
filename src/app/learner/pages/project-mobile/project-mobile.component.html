@@ -419,7 +419,7 @@
         <button mat-mini-fab class="download-button" *ngIf="showDownload">
           <mat-icon class="download-icon" (click)="downloadFile(videoSource)">get_app</mat-icon>
         </button>
-        <button mat-mini-fab class="close-button">
+        <button mat-mini-fab [ngClass]="showDownload ? 'close-button': 'close-button1'">
           <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
         </button>
       </div>

@@ -50,13 +50,13 @@ export class ScormplayerComponent implements OnInit {
     localStorage.setItem('scorm_user_id', this.userId);
     localStorage.setItem('course_id', this.courseId);
     this.spinner.show();
-    this.commonService.viewCurseByID(this.courseId, this.userId).subscribe((data: any) => {
-      if (data.data.viewcourse.success === true) {
-        this.courseDeatils = data.data.viewcourse.message;
+    this.commonService.viewCurseByIDForLearner(this.courseId).subscribe((data: any) => {
+      if (data.data.view_course_for_learner.success === true) {
+        this.courseDeatils = data.data.view_course_for_learner.message;
         this.spinner.hide();
       } else {
         this.spinner.hide();
-        this.alert.openAlert(data.data.viewcourse.error_msg, null);
+        this.alert.openAlert(data.data.view_course_for_learner.error_msg, null);
       }
 
     });
