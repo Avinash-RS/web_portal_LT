@@ -10,6 +10,18 @@
     vertical-align: middle;
   }
 }
+::ng-deep.materialsScrollActivity .drag-scroll-wrapper.drag-scroll-container {
+  height: auto !important;
+}
+.carouselCol1 {
+  padding: 0 !important;
+  margin-left: 0;
+  // height: initial;
+  width: 13em;
+  height: 9.7em;
+  display: inline-block;
+  margin-right: 10px;
+}
 ::ng-deep.mat-expansion-panel {
   margin-top: 20px !important;
   border-radius: 0 !important;
@@ -40,6 +52,9 @@
 }
 .assignmentNameFile {
   width: 25%;
+}
+.imageIcon {
+  margin-left: 0;
 }
 .assignmentQuestion {
   width: 8%;
@@ -721,21 +736,28 @@ margin-top: 8px;
 .carouselCard {
   border: 0.5px solid #707070;
   cursor: pointer;
+  height: 100%;
+  position: relative;
 }
 // .carouselCard :hover  {
 //   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 // }
 
 .carouselRow1 {
-  height: 7rem;
+  height: 100%;
+  // height: 7rem;
 }
 // .carouselRow2 {
 //   height: 50%;
 // }
 
 .carouselRow {
-  height: 3rem;
+  // height: 3rem;
   background-color: #5C6873;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 .carouselRowHover {
@@ -754,9 +776,9 @@ margin-top: 8px;
 }
 
 .carouselCol1 {
-  max-width: 100% !important;
-  height: 15rem;
-  margin-left: -15px;
+  // max-width: 100% !important;
+  // height: 15rem;
+  // margin-left: -15px;
 }
 
 // .carouselHoverCol {
@@ -1056,16 +1078,27 @@ border: 1px solid #ccc;
 }
 
 .performCard {
+  // height: 10rem;
+  margin-top: 20px;
   width: 100%;
-  height: 10rem;
-  padding: 8px !important;
+  padding: 15px !important;
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  border-radius: 0;
 }
-
+.SEDate, 
+.iterationSubmit, 
+.performHeading {
+  width: 100%;
+}
+.SEDate, .iterationSubmit {
+  margin-top: 15px;
+}
 .subTittle {
   font-size: 14px;
   font-weight: bolder;
   color: black;
-  margin: 0 0 10px !important;
+  margin: 0 !important;
 }
 
 
