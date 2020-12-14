@@ -1572,6 +1572,10 @@ hr {
   // border-radius: 10px;
   // margin: 0px 13px;
   // padding: 5px;
+  @media only screen and (max-width: 991px) {
+    height: auto !important;
+    max-height: 100px !important;
+  }
 }
 .courseProgression {
   margin-top: 20px;
