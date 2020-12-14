@@ -529,7 +529,7 @@ export class LearnerMyCourseComponent implements OnInit {
       tableType: 'submission',
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
-    this.router.navigateByUrl('/Learner/activitycenter', { state: { detail } });
+    this.router.navigateByUrl('/Learner/activitycenterhomescreen/activitycenter', { state: { detail } });
   }
 
   /* ---------------------------------------api for available courses------------------------------------ */

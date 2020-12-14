@@ -93,7 +93,7 @@ export class MycourseItemComponent implements OnInit {
     // } else {
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
     localStorage.setItem('Courseid', c.course_id);
-    localStorage.setItem('persentage', c.coursePlayerStatus?.course_percentage);
+    localStorage.setItem('persentage', c && c.coursePlayerStatus && c.coursePlayerStatus.course_percentage ? c.coursePlayerStatus.course_percentage : '');
     localStorage.setItem('CourseName', c.course_name);
     // this.show = false;
     // }
@@ -125,7 +125,7 @@ export class MycourseItemComponent implements OnInit {
       tableType: 'submission',
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
-    this.router.navigateByUrl('/Learner/activitycenter', { state: { detail } });
+    this.router.navigateByUrl('/Learner/activitycenterhomescreen/activitycenter', { state: { detail } });
   }
 
   goInstructorLed(c) {
