@@ -49,6 +49,7 @@ export class InstructorLedComponent implements OnInit {
     this.learnerService.getAttendanceByUsername(this.course.id, userDetails.full_name, userDetails.user_id).subscribe(async res => {
       // tslint:disable-next-line:no-string-literal
       const data = res.data['getTopicAttendanceDetailsByUsername']['data'];
+      console.log(data, 'asdfasdf')
       this.listOfSessions = data.Activity;
       this.sessionAttendance = data.Attendance;
       for (const los of this.listOfSessions) {

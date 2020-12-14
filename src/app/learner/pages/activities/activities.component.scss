@@ -21,6 +21,7 @@
   height: 9.7em;
   display: inline-block;
   margin-right: 10px;
+  vertical-align: top;
 }
 ::ng-deep.mat-expansion-panel {
   margin-top: 20px !important;
@@ -163,7 +164,7 @@
 .projectSubmitstatus {
   color: #FFA04E;
   position: relative;
-  right: 49px;
+  // right: 49px;
 }
 .iterStatus {
   position: absolute;
@@ -177,7 +178,7 @@
 .graded {
   color: #0C781B;
   position: relative;
-  right: 42px;
+  // right: 42px;
 }
 .performRightContent {
   padding-right: 30px;
@@ -343,15 +344,6 @@ margin-bottom: 9px;
   height: 35px;
   width: 35px;
 }
-.activityFullWidth {
-  width: 100%;
-}
-.activityhalfWidth {
-  width: 84%;
-}
-.learnerList {
-  width: 15%;
-}
 ::ng-deep .matDialogMat .mat-dialog-container {
   overflow: hidden !important;
 }
@@ -398,28 +390,39 @@ margin-bottom: 9px;
 /* Ramya's css */
 .projHead {
   // color: $lxp-theme-green;
-  position: absolute;
-  left: 73px;
+  // position: absolute;
+  // left: 73px;
 }
 .assignIcon {
   font-size: 19px;
-  margin-left: 20px;
   cursor: text;
   color: $lxp-icon;
+  // margin-left: 20px;
 }
 .group {
   // margin-right: 13px;
 }
-.box-0-2{
+.activityFullWidth {
+  width: 100%;
+}
+.activityhalfWidth {
+  width: 80%;
+}
+.learnerList {
+  width: 19%;
+  padding-right: 35px;
+  box-sizing: border-box;
+}
+.box-0-2 {
   margin-top: 10px;
-  margin-left: 71px;
-  width: 79%;
+  width: 100%;
   padding: 20px;
-  padding-bottom: 3%;
   overflow: hidden;
   height: auto;
   background-color: $color-white;
   border : 1px solid $color-border;
+  // margin-left: 71px;
+  // padding-bottom: 3%;
 }
 .box-0-3 {
   background-color: $color-white;
@@ -433,6 +436,21 @@ margin-bottom: 9px;
   justify-content: flex-end;
   // bottom: 12px;
   // right: 10px;
+}
+.projDate, .projTotalScore, .activityStatus {
+  margin-top: 10px;
+}
+.projDate span {
+  display: block;
+}
+.activityhalfWidth .projectRightContent {
+  padding-right: 10px;
+}
+.projectRightContent {
+  padding-right: 35px;
+}
+.projEndDate {
+  margin-left: 10px;
 }
 .groupBtn {
   border: 1px solid #5C6873;
@@ -476,6 +494,14 @@ margin-bottom: 9px;
   // bottom: 2px;
   // left: 1px;
 }
+.totscore {
+  position: relative;
+  // right: 40px;
+}
+.trendingCategoriesScrollActivity .slideLoop {
+  display: inline-block;
+  text-align: left;
+}
 ::ng-deep.groupBtn.mat-mini-fab .mat-button-wrapper, 
 ::ng-deep.arrBtn.mat-mini-fab .mat-button-wrapper {
   padding: 0;
@@ -491,6 +517,34 @@ margin-bottom: 9px;
   border-radius: 5px !important;
   opacity: 1 !important;
   padding: 7px 15px !important;
+}
+.box-0-3{
+  margin-top: 10px;
+  width: 100%;
+  padding: 20px;
+  overflow: hidden;
+  height: auto;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+}
+.expansionarr {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: 1px solid #ccc;
+  padding: 3px;
+  font-weight: 600;
+}
+.t-l-1 {
+  // margin-left: 25px;
+  margin-top: 5px;
+}
+.topic {
+  // margin-top: 19px;
+}
+.panel1 {
+  // margin-top: 15px;
+  // margin-left: 25px;
 }
 // .groupBtn1 {
 //   border: 1px solid #5C6873;
@@ -530,11 +584,9 @@ margin-bottom: 9px;
 .status {
   // margin-right: 3rem;
 }
-
 .endDateTxt {
   margin-left: 92px;
 }
-
 // .itrationTxt {
 //   margin-left: 84px;
 // }
@@ -594,31 +646,11 @@ margin-bottom: 9px;
 .m-r-2 {
   margin-right: 37px;
 }
-.topic {
-  margin-top: 19px;
-}
 .list {
 margin-top: 8px;
 }
-.t-l-1 {
-  margin-left: 25px;
-  margin-top: 5px;
-}
-.expansionarr {
-  border: 1px solid $color-border;
-  padding: 3px;
-  font-weight: 600;
-  margin-top: -6px;
-  position: absolute;
-  top: -11px;
-  right: 3px;
-}
 .learnerList {
-  margin-top: 8px;
-}
-.panel1 {
-  margin-top: 15px;
-  margin-left: 25px;
+  // margin-top: 8px;
 }
 .selectedfile {
   margin: 0px 10px 8px 10px;
@@ -626,10 +658,6 @@ margin-top: 8px;
 .fileIcon {
   position: relative;
     top: 7px;
-}
-.totscore {
-  position: relative;
-  right: 40px;
 }
 .submission{
   margin-left: 2px; 
@@ -664,7 +692,6 @@ margin-top: 8px;
 }
 .work {
   position: relative;
-  left: 35px;
 }
 
 ::ng-deep .custom-mat-tooltip {
@@ -789,8 +816,9 @@ margin-top: 8px;
 }
 
 .carouselRowHover {
-  height: 4rem;
+  // height: 4rem;
   background-color: #5C6873;
+  width: 100%;
 }
 
 .playActions {
@@ -871,7 +899,8 @@ margin-top: 8px;
   margin-bottom: 30px;
   overflow: visible !important;
 }
-::ng-deep.scrollingData .drag-scroll-wrapper.drag-scroll-container {
+::ng-deep.scrollingData .drag-scroll-wrapper.drag-scroll-container, 
+::ng-deep.trendingCategoriesScrollActivity .drag-scroll-wrapper.drag-scroll-container {
   height: auto !important;
   overflow: visible !important;
 }
@@ -1000,18 +1029,6 @@ margin-top: 8px;
 .errmsg {
   height: 30rem;
 }
-.box-0-3{
-margin-top: 10px;
-margin-left: 34px;
-width: 95%;
-padding: 20px;
-padding-bottom: 3%;
-overflow: hidden;
-height: auto;
-background-color: #ffffff;
-border: 1px solid #ccc;
-}
-
 .matCardIconRow {
   height: 60%;
 }
