@@ -248,8 +248,7 @@
           <div *ngIf="!showSkeleton; else skeletonLoad">
             <div *ngFor="let course of courseDetailsList  | filter: searchName">
               <!-- show 100% by default for completed courses // time-being for pilot run -->
-              <app-mycourse-item-component [courseItems]="course" [globalData]="globalData" [completedCourse]="100">
-              </app-mycourse-item-component>
+              <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
               <div style="border-bottom: 1px solid #cccccc7a"></div>
             </div>
           </div>
@@ -277,7 +276,7 @@
           </ng-template>
           <div *ngIf="!showSkeleton; else skeletonLoad">
           <div *ngFor="let course of courseDetailsList  | filter: searchName">
-            <app-mycourse-item-component [globalData]="globalData" [courseItems]="course"></app-mycourse-item-component>
+            <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
           </div>
         </div>
 
