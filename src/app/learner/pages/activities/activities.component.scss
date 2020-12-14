@@ -343,7 +343,15 @@ margin-bottom: 9px;
   height: 35px;
   width: 35px;
 }
-
+.activityFullWidth {
+  width: 100%;
+}
+.activityhalfWidth {
+  width: 84%;
+}
+.learnerList {
+  width: 15%;
+}
 ::ng-deep .matDialogMat .mat-dialog-container {
   overflow: hidden !important;
 }
@@ -400,7 +408,7 @@ margin-bottom: 9px;
   color: $lxp-icon;
 }
 .group {
-  margin-right: 13px;
+  // margin-right: 13px;
 }
 .box-0-2{
   margin-top: 10px;
@@ -418,6 +426,14 @@ margin-bottom: 9px;
   border : 1px solid $color-border;
   height: auto;
 }
+.groupData {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  // bottom: 12px;
+  // right: 10px;
+}
 .groupBtn {
   border: 1px solid #5C6873;
   opacity: 1;
@@ -426,31 +442,10 @@ margin-bottom: 9px;
   width: 20px;
   height: 20px;
   position: relative;
-  right: 38px;
-  top: 5px;
+  margin-right: 10px;
   cursor: default;
-}
-.groupBtn1 {
-  border: 1px solid #5C6873;
-  opacity: 1;
-  background-color: #ffffff;
-  color: #1F1A17;
-  width: 20px;
-  height: 20px;
-  position: relative;
-  right: 9px;
-  top: 9px;
-  cursor: default;
-}
-.grpName {
-  position: relative;
-  bottom: 2px;
-  left: 1px;
-}
-.groupData {
-  position: relative;
-  bottom: 12px;
-  right: 10px;
+  // right: 38px;
+  // top: 5px;
 }
 .arrBtn {
   background-color: #ffffff;
@@ -459,24 +454,81 @@ margin-bottom: 9px;
   color: #1F1A17;
   width: 20px;
   height: 20px;
-  position: absolute;
-  right: 32px;
-  top: 5px;
+  position: relative;
+  margin-left: 10px;
+  // position: absolute;
+  // right: 32px;
+  // top: 5px;
 }
-.grpIcon {
+.arrBack, .grpIcon {
   font-size: 11px;
-  margin-top: -8px;
-  margin-left: -3px;
-  cursor: default;
-}
-.arrBack {
-  font-size: 11px;
-  margin-top: -8px;
-  margin-left: -3px;
   cursor: pointer;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // margin-top: -8px;
+  // margin-left: -3px;
 }
+.grpName, .teamName {
+  position: relative;
+  // bottom: 2px;
+  // left: 1px;
+}
+::ng-deep.groupBtn.mat-mini-fab .mat-button-wrapper, 
+::ng-deep.arrBtn.mat-mini-fab .mat-button-wrapper {
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+::ng-deep .learnerData .list-group-item{
+  background: #FBF6E1 0% 0% no-repeat padding-box !important;
+  box-shadow: 0px 1px 2px #00000029 !important;
+  border: 0.5px solid #D6D6D6 !important;
+  border-radius: 5px !important;
+  opacity: 1 !important;
+  padding: 7px 15px !important;
+}
+// .groupBtn1 {
+//   border: 1px solid #5C6873;
+//   opacity: 1;
+//   background-color: #ffffff;
+//   color: #1F1A17;
+//   width: 20px;
+//   height: 20px;
+//   position: relative;
+//   right: 9px;
+//   top: 9px;
+//   cursor: default;
+// }
+.teamName {
+  // position: relative;
+  // right: 28px;
+  // bottom: 6px;
+}
+// .grpIcon {
+//   font-size: 11px;
+//   cursor: default;
+//   // margin-top: -8px;
+//   // margin-left: -3px;
+// }
+// .arrfwd {
+//   background-color: #ffffff;
+//   border: 1px solid #5C6873;
+//   opacity: 1;
+//   color: #1F1A17;
+//   width: 20px;
+//   height: 20px;
+//   float: right;
+//   position: absolute;
+//   right: 32px;
+//   top: -3px;
+// }
 .status {
-  margin-right: 3rem;
+  // margin-right: 3rem;
 }
 
 .endDateTxt {
@@ -545,24 +597,12 @@ margin-bottom: 9px;
 .topic {
   margin-top: 19px;
 }
-::ng-deep .learnerData .list-group-item{
-background: #FBF6E1 0% 0% no-repeat padding-box !important;
-box-shadow: 0px 1px 2px #00000029 !important;
-border: 0.5px solid #D6D6D6 !important;
-border-radius: 5px !important;
-opacity: 1 !important;
-}
 .list {
 margin-top: 8px;
 }
 .t-l-1 {
   margin-left: 25px;
   margin-top: 5px;
-}
-.teamName {
-  position: relative;
-  right: 28px;
-  bottom: 6px;
 }
 .expansionarr {
   border: 1px solid $color-border;
@@ -572,18 +612,6 @@ margin-top: 8px;
   position: absolute;
   top: -11px;
   right: 3px;
-}
-.arrfwd {
-  background-color: #ffffff;
-  border: 1px solid #5C6873;
-  opacity: 1;
-  color: #1F1A17;
-  width: 20px;
-  height: 20px;
-  float: right;
-  position: absolute;
-  right: 32px;
-  top: -3px;
 }
 .learnerList {
   margin-top: 8px;

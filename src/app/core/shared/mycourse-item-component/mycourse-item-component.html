@@ -108,85 +108,84 @@
             </div>
           </div>
         </div>
-          <br>
-          <div *ngIf="course.isBatchCourse">
-            <div class="row">
-              <div class="col">
-                <span class="progress_icon">
-                  <img alt="Course Img" src="..\assets\Progression.svg" class="progress_icon" />
-                </span>
-                <p class="f_size_16 f_wt_500 color_black pull-left course-progress">Course Progression</p>
-                <span class="pointer seemoreHove pull-right"
-                        (click)="course.progresslistExp?course.progresslistExp=false:course.progresslistExp=true">
-                        <p class="f_size_10 ">{{course.progresslistExp?'Show more...':'Show less...' }}</p>
-                </span>
-              </div>
-            </div>
-            <div class="row" *ngIf="!course.progresslistExp">
-            <div class="col-8">
-              <div class="row color_g">
-                <div class="col m_b3px">
-                  Instructor led session completed
-                </div>
-                <div class="col-3 f_wt_600">
-                  <ng-container>{{course.instructor_lead_session_completed_count}}/{{course.instructor_lead_session_total_count}}</ng-container>
-
-                </div>
-              </div>
-              <div class="row color_g">
-                <div class="col m_b3px">
-                  Internal assessment completed
-                </div>
-                <div class="col-3 f_wt_600">
-                  {{course.internal_assesment?course.internal_assesment:'N/A'}}
-                </div>
-              </div>
-              <!-- <div class="row color_g">
-                <div class="col m_b3px">
-                  Mid course project completed
-                </div>
-                <div class="col-3 f_wt_600">
-                  {{course.completed_mid_course_project_count}}/{{course.completed_mid_course_project_count}}
-                </div>
-              </div>
-              <div class="row color_g">
-                <div class="col m_b3px">
-                  Final assessment completed
-                </div>
-                <div class="col-3 f_wt_600">
-                  {{course.final_assesment?course.final_assesment:'N/A'}}
-                </div>
-              </div> -->
-            </div>
-            <div class="col-4">
-              <div class="row m-auto c_progress">
-                <circle-progress percent="{{((100 * (course.week_completed_count!==null?course.week_completed_count:0)) / (course.week_total_count!==null?course.week_total_count:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
-                  [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="3"
-                  [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="4.5" [animation]="true"
-                  [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="courseWeekCircle"
-                  [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600>
-                </circle-progress>
-              </div>
-
-              <div class="row m-auto" style="display:none">
-                <div class="col ">
-                  <button mat-stroked-button class="blue_clr cap  pointer m-t-05">
-                    <span class="cap f_size_12 f_wt_400 ">
-                      {{ "Course report" | translate }}
-                    </span>
-                  </button>
-                </div>
-              </div>
-              <!-- <div class="row m-auto">
-                <div class="col justify-content-center align-self-center">
-                  <a class="" style="color: red; font-size: 10px !important;" href="">View assessment
-                    report</a>
-                </div>
-              </div> -->
+        <div class="courseProgression" *ngIf="course.isBatchCourse">
+          <div class="row">
+            <div class="col">
+              <span class="progress_icon">
+                <img alt="Course Img" src="..\assets\Progression.svg" class="progress_icon" />
+              </span>
+              <p class="f_size_16 f_wt_500 color_black pull-left course-progress">Course Progression</p>
+              <span class="pointer seemoreHove pull-right"
+                      (click)="course.progresslistExp?course.progresslistExp=false:course.progresslistExp=true">
+                      <p class="f_size_10 ">{{course.progresslistExp?'Show more...':'Show less...' }}</p>
+              </span>
             </div>
           </div>
+          <div class="row" *ngIf="!course.progresslistExp">
+          <div class="col-8">
+            <div class="row color_g">
+              <div class="col m_b3px">
+                Instructor led session completed
+              </div>
+              <div class="col-3 f_wt_600">
+                <ng-container>{{course.instructor_lead_session_completed_count}}/{{course.instructor_lead_session_total_count}}</ng-container>
+
+              </div>
+            </div>
+            <div class="row color_g">
+              <div class="col m_b3px">
+                Internal assessment completed
+              </div>
+              <div class="col-3 f_wt_600">
+                {{course.internal_assesment?course.internal_assesment:'N/A'}}
+              </div>
+            </div>
+            <!-- <div class="row color_g">
+              <div class="col m_b3px">
+                Mid course project completed
+              </div>
+              <div class="col-3 f_wt_600">
+                {{course.completed_mid_course_project_count}}/{{course.completed_mid_course_project_count}}
+              </div>
+            </div>
+            <div class="row color_g">
+              <div class="col m_b3px">
+                Final assessment completed
+              </div>
+              <div class="col-3 f_wt_600">
+                {{course.final_assesment?course.final_assesment:'N/A'}}
+              </div>
+            </div> -->
+          </div>
+          <div class="col-4">
+            <div class="row m-auto c_progress">
+              <circle-progress percent="{{((100 * (course.week_completed_count!==null?course.week_completed_count:0)) / (course.week_total_count!==null?course.week_total_count:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2"
+                [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="3"
+                [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="4.5" [animation]="true"
+                [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="courseWeekCircle"
+                [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600>
+              </circle-progress>
+            </div>
+
+            <div class="row m-auto" style="display:none">
+              <div class="col ">
+                <button mat-stroked-button class="blue_clr cap  pointer m-t-05">
+                  <span class="cap f_size_12 f_wt_400 ">
+                    {{ "Course report" | translate }}
+                  </span>
+                </button>
+              </div>
+            </div>
+            <!-- <div class="row m-auto">
+              <div class="col justify-content-center align-self-center">
+                <a class="" style="color: red; font-size: 10px !important;" href="">View assessment
+                  report</a>
+              </div>
+            </div> -->
           </div>
         </div>
+      </div>
+    </div>
         <!-- //4quadrant Self-Paced Learning// left lines //remove discussion link -->
 
 

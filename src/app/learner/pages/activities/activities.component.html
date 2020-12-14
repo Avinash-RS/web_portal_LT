@@ -540,17 +540,23 @@
                 (click)="isCollapsed = !isCollapsed; projectId = i">keyboard_arrow_up</mat-icon>
             </div>
           </div>
-          <div class="row">
-            <div [ngClass]="project.projectActivity.showLearnerList ? 'col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12' : 'col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12'">
-              <!-----------------------------Row 1--------------------->
+
+          <!-- Project Tab Desktop -->
+          <div class="d-flex justify-content-between">
+            <div class="projectActivityDetails" [ngClass]="project.projectActivity.showLearnerList ? 'activityhalfWidth' : 'activityFullWidth'">
+
               <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                  <span class="topic text-left">
+                <div class="col-sm-6">
+                  <div class="topic text-left">
                     <mat-icon class="assignIcon">assignment</mat-icon>
                     <span class="f_size_16 f_wt_600 projHead">{{project.projectActivity.topic_id}}</span>
-                  </span>
-                  <!---------------------------Team------------------>
-                  <span class="float-right group">
+                    <div class="t-l-1">
+                      Activity Description: {{project.projectActivity.activityname}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="groupData">
                     <button mat-mini-fab class="groupBtn" *ngIf="!project.projectActivity.showLearnerList">
                       <mat-icon class="grpIcon">group</mat-icon>
                     </button>
@@ -565,50 +571,37 @@
                       (click)="project.projectActivity.showLearnerList = !project.projectActivity.showLearnerList">
                       <mat-icon class="arrBack">arrow_back</mat-icon>
                     </button>
-                  </span>
+                  </div>
+                  <div class="text-right">
+                    <span class="f_wt_600 status" *ngIf="project.projectActivity.submitAction !== 'submit' || project.projectActivity.submit_status == 'notsubmitted'">
+                      <span class="dot"></span>Yet to submit
+                    </span>
+                    <span class="f_wt_600 projectSubmitstatus submitted" *ngIf="project.projectActivity.submitAction == 'submit' && project.projectActivity.grade_status == 'Not Evaluated'">
+                      <span class="submitdot"></span>Submitted
+                    </span>
+                    <span class="f_wt_600 graded" *ngIf="project.projectActivity.grade_status == 'Evaluated'">
+                      <span class="gradedot"></span>Graded
+                    </span>
+                  </div>
+                  <div class="" *ngIf="project.projectActivity.grade_status == 'Evaluated'">
+                    <div class="text-right">
+                      <p class="totscore">Total score:
+                        {{project.projectActivity.score_mark}}/{{project.projectActivity.total_mark}}</p>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-end SEDate">
+                    <div class="">
+                      <span class="font-weight-bold">Start date:</span><br />
+                      <span class="textGrayColor1"> {{project.projectActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}</span>
+                    </div>
+                    <div class="">
+                      <span class="font-weight-bold">End date:</span><br />
+                      <span class="textGrayColor1"> {{project.projectActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <!-----------------------------Status------------------------->
-              <div class="row">
-                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12"></div>
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 text-right">
-                  <span class="f_wt_600 status" *ngIf="project.projectActivity.submitAction !== 'submit' ||
-              project.projectActivity.submit_status == 'notsubmitted'"> <span class="dot"></span>
-                    Yet to submit</span>
 
-                  <span class="f_wt_600 projectSubmitstatus submitted" *ngIf="project.projectActivity.submitAction == 'submit'
-              && project.projectActivity.grade_status == 'Not Evaluated'"> <span class="submitdot"></span>
-                    Submitted</span>
-
-                  <span class="f_wt_600 graded" *ngIf="project.projectActivity.grade_status == 'Evaluated'"> <span class="gradedot"></span>
-                    Graded</span>
-                </div>
-              </div>
-              <div class="row" *ngIf="project.projectActivity.grade_status == 'Evaluated'">
-                <div class="col text-right">
-                  <p class="totscore">Total score:
-                    {{project.projectActivity.score_mark}}/{{project.projectActivity.total_mark}}</p>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
-                  <div class="t-l-1">Activity Description: {{project.projectActivity.activityname}}</div>
-                </div>
-                <!-- <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 text-right">
-                  <div class="m-r-40">Start date :<span class="margin-30"></span>End date :</div>
-                  <div class="m-r-2 f_wt_600">
-                    {{project.projectActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}
-                    <span class="margin-21 f_wt_600"></span> {{project.projectActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</div>
-                </div> -->
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 text-right">
-                <div class="m-r-74">Start date :<span class="endDateTxt"></span>End date :</div>
-                <div class="m-r-47 f_wt_600">
-                  {{project.projectActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}
-                  <span class="EndDate f_wt_600"></span>
-                  {{project.projectActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</div>
-                </div>
-              </div>
               <!-----------------------------Materials for activity--------------------->
               <div class="panel1" *ngIf="isCollapsed && projectId === i">
                 <hr>
@@ -887,23 +880,23 @@
             </div>
 
             <!------------------------------------Learner list------------------------------->
-            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 learnerList first" *ngIf="project.projectActivity.showLearnerList">
+            <div class="learnerList first" *ngIf="project.projectActivity.showLearnerList">
               <div class="align-center groupData">
-                <button mat-mini-fab class="groupBtn1" *ngIf="project.projectActivity.showLearnerList">
+                <button mat-mini-fab class="groupBtn" *ngIf="project.projectActivity.showLearnerList">
                   <mat-icon class="grpIcon">group</mat-icon>
                 </button>
-                <span class="grpName" *ngIf="project.projectActivity.groupname.length < 14">
+                <span class="teamName" *ngIf="project.projectActivity.groupname.length < 14">
                   {{project.projectActivity.groupname}} ({{project.projectActivity.groupDetails.length}})
                 </span>
-                <span class="grpName" *ngIf="project.projectActivity.groupname.length > 14"
+                <span class="teamName" *ngIf="project.projectActivity.groupname.length > 14"
                   matTooltip="{{project.projectActivity.groupname}}" matTooltipClass="custom-mat-tooltip">
                   {{(project.projectActivity.groupname| slice:0:14)+'...'}}
                 </span>
-                </div>
-                <button mat-mini-fab class="arrfwd" *ngIf="project.projectActivity.showLearnerList"
+                <button mat-mini-fab class="arrBtn" *ngIf="project.projectActivity.showLearnerList"
                   (click)="project.projectActivity.showLearnerList = !project.projectActivity.showLearnerList">
                   <mat-icon class="arrBack">arrow_forward</mat-icon>
                 </button>
+              </div>
               <!-- </div> -->
               <div class="list learnerData">
                 <ul class="list-group" *ngFor="let learner of project.projectActivity.groupDetails">
