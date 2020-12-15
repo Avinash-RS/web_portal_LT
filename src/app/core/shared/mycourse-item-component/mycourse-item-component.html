@@ -76,7 +76,7 @@
           <div *ngIf="!course.courseInfoExp">
           <div class="courseWrapper d-flex justify-content-between lxp_gray123">
             <div class="courseAuthor">
-              <p> By: {{course.author_details[0].author_name?course.author_details[0].author_name:'N/A'}} </p>
+              <p> By: {{course.author_name?course.author_name:'N/A'}} </p>
             </div>
             <div class="courseDuration">
               <p>Total duration: {{course.total_duration? course.total_duration : "1" + " hour"}}</p>

@@ -90,8 +90,8 @@ export class MycourseItemComponent implements OnInit {
 
   goToForum(c) {
     localStorage.setItem('Courseid', c.course_id);
-    const bt = c.activity_info?.batchid ? {
-      batchid: c.activity_info?.batchid,
+    const bt = c.batchid ? {
+      batchid: c.batchid,
       batchenddate: c.batch_end_date,
       batch_start_date: c.batch_start_date,
       batchname: c.batch_name
