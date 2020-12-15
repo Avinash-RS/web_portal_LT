@@ -96,7 +96,30 @@
             <h3 *ngIf="project.projectActivity.materialDetails && project.projectActivity.materialDetails.length == 0">
               <span class="m-l-2">No materials found for this activity.</span>
             </h3>
-            <owl-carousel-o [options]="trendingCategorires" [ngClass]="project.projectActivity.materialDetails >= 4 ? 'arrow': 'widthClass arrow' " *ngIf="project.projectActivity.materialDetails && project.projectActivity.materialDetails.length > 0">
+            <drag-scroll class="trendingCategoriesScrollActivity" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
+              <span class="slideLoop" *ngFor="let material of project.projectActivity.materialDetails; let i = index">
+                <div [ngClass]="project.projectActivity.materialDetails.length >= 2 ? 'carouselCol': 'carouselCol1'">
+                  <mat-card class="p-0 iterationCard" (click)="projectPreviewDoc(projectPreviewDialog, videoDialog, material, 'material')">
+                    <div class="row ml-0 mr-0 carouselRow1">
+                      <div class="col-12 m-auto">
+                        <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
+                          photo_size_select_actual</mat-icon>
+                        <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4'">play_circle_outline</mat-icon>
+                        <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type =='application/pdf'" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                    <div class="ml-0 mr-0 h-40" class="fileSelDet">
+                      <div class="fileNameCol">
+                        <span class="carouselText" *ngIf="material.filename?.length > 30">{{(material.filename| slice:0:20)+'...'}}</span>
+                        <span class="carouselText" *ngIf="material.filename?.length < 30">{{material.filename}}</span>
+                      </div>
+                    </div>
+                  </mat-card>
+                </div>
+              </span>
+            </drag-scroll>
+
+            <!-- <owl-carousel-o [options]="trendingCategorires" [ngClass]="project.projectActivity.materialDetails >= 4 ? 'arrow': 'widthClass arrow' " *ngIf="project.projectActivity.materialDetails && project.projectActivity.materialDetails.length > 0">
               <ng-template class="row ml-0 mr-0" carouselSlide *ngFor="let material of project.projectActivity.materialDetails; let i = index">
                 <div [ngClass]="project.projectActivity.materialDetails.length >= 2 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
                   <mat-card class="p-0 iterationCard" (click)="projectPreviewDoc(projectPreviewDialog, videoDialog, material, 'material')">
@@ -117,7 +140,8 @@
                   </mat-card>
                 </div>
               </ng-template>
-            </owl-carousel-o>
+            </owl-carousel-o> -->
+
             <!-- <div id="demo" class="carousel" data-ride="carousel">
             <div class="carousel-inner">
             <div class="carousel-item active">

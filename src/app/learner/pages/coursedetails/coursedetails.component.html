@@ -4,7 +4,7 @@
         <app-header></app-header>
         <!-- </span> -->
         <!-- <div style="height: 2px;" (mouseover)="sider=true"></div> -->
-        <div class="container007 animated animatedFadeInUp fadeInUp bodybg">
+        <div class="container007 animated fakefadeInUp bodybg">
             <div>
                 <mat-drawer-container [class.drawer-opened]="drawer.opened" class="example-container">
                     <mat-drawer #drawer class="drawer" mode="side" opened="{{drawersOpen}}">
@@ -364,7 +364,7 @@
                                 <div [ngClass]="drawer.opened==true?'example-sidenav-content-opn':'example-sidenav-content-cls'"
                                     class="">
                                     <div class="playerWrapper">
-                                        <iframe title="player" id="myPlayer" class="player" [src]="urlSafe" allowfullscreen style="width:100%;height:90%;background-repeat:no-repeat;background-size: cover;background-image:url(../../../../assets/learner/bg_Loader.gif)"></iframe>
+                                        <iframe title="player" id="myPlayer" class="player" [src]="urlSafe" allowfullscreen style="width:100%; background-repeat:no-repeat;background-size: cover; background-image:url(../../../../assets/learner/bg_Loader.gif)"></iframe>
                                     </div>
                                 </div>
         

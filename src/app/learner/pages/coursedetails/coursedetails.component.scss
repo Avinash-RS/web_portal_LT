@@ -1650,7 +1650,12 @@ iframe.fullScreen {
   outline: none;
   border: none;
 }
-@keyframes fadeInUp {
+
+.fakefadeInUp {
+    opacity: 0;
+    animation-name: fakefadeInUp;
+}
+@keyframes fakefadeInUp {
     0% {
         opacity: 0;
         transform: translate3d(0,0.2%,0);

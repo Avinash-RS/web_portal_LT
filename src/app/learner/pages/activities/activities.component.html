@@ -599,17 +599,41 @@
                 <hr>
                 <div class="row">
                   <div class="col-md-8 col-sm-12 col-12 second">
-                    <div class="f_size_16 f_wt_600">
+                    <div style="margin-bottom: 10px;" class="f_size_16 f_wt_600">
                       Materials for activity ({{project.projectActivity.materialDetails.length}})
                     </div>
                     <h3 *ngIf="project.projectActivity.materialDetails && project.projectActivity.materialDetails.length == 0">No materials found for this activity</h3>
                     <!--------------------------------New carousel------------------------>
-                    <owl-carousel-o [options]="trendingCategorires" *ngIf="project.projectActivity.materialDetails && project.projectActivity.materialDetails.length > 0"
+                    <drag-scroll class="trendingCategoriesScrollActivity" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
+                      <span class="slideLoop" *ngFor="let material of project.projectActivity.materialDetails; let i = index">
+                        <div [ngClass]="project.projectActivity.materialDetails.length >= 4 ? 'carouselCol': 'carouselCol1'">
+                          <mat-card class="p-0 carouselCard" (click)="projectPreviewDoc(projectPreviewDialog, videoDialog, material, 'material')">
+                            <div class="row ml-0 mr-0 carouselRow1">
+                              <div class="col-12 m-auto">
+                                <mat-icon class="imageIcon" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
+                                  photo_size_select_actual</mat-icon>
+                                <mat-icon class="imageIcon" *ngIf="material.doc_type =='video/mp4'">play_circle_outline</mat-icon>
+                                <i class="fa fa-file-pdf-o pdfIcon" *ngIf="material.doc_type =='application/pdf' || material.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+                                  aria-hidden="true"></i>
+                              </div>
+                            </div>
+                            <div class="row ml-0 mr-0 carouselRow">
+                              <div class="col-12 text-center mt-2 mb-2 pl-0 pr-0">
+                                <span class="carouselText" *ngIf="material.filename?.length > 19"
+                                  matTooltip="{{material.filename}}" matTooltipClass="custom-mat-tooltip">{{(material.filename| slice:0:20)+'...'}}</span>
+                                <span class="carouselText" *ngIf="material.filename?.length < 19">{{material.filename}}</span>
+                              </div>
+                            </div>
+                          </mat-card>
+                        </div>
+                      </span>
+                    </drag-scroll>
+
+                    <!-- <owl-carousel-o [options]="trendingCategorires" *ngIf="project.projectActivity.materialDetails && project.projectActivity.materialDetails.length > 0"
                     [ngClass]="project.projectActivity.materialDetails.length >= 4 ? 'hoverCls arrow': 'hoverCls widthClass arrow' ">
                       <ng-template class="row ml-0 mr-0" carouselSlide *ngFor="let material of project.projectActivity.materialDetails; let i = index">
                         <div [ngClass]="project.projectActivity.materialDetails.length >= 4 ? 'col-3 w-100 pt-2 pb-2  carouselCol': 'col-3 w-100 pt-2 pb-2  carouselCol1'">
                           <mat-card class="p-0 carouselCard" (click)="projectPreviewDoc(projectPreviewDialog, videoDialog, material, 'material')">
-                            <!--  -->
                             <div class="row ml-0 mr-0 carouselRow1">
                               <div class="col-12 m-auto">
                                 <mat-icon class="imageIcon" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
@@ -629,7 +653,7 @@
                           </mat-card>
                         </div>
                       </ng-template>
-                    </owl-carousel-o>
+                    </owl-carousel-o> -->
                   </div>
                   <div class="col-md-4 col-sm-12 col-12 third" *ngIf="project.projectActivity.submit_status == 'notsubmitted' || project.projectActivity.grade_status !== 'Evaluated'">
                     <div class="f_size_16 f_wt_600 align-center work">Your work</div>
