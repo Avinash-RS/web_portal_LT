@@ -297,17 +297,17 @@ export const getmoduleData = gql`
       data {
         playerstatusData {
           success
-          playerstatus {
-            course_dtl {
-              module {
-                topic {
-                  topic_name
-                  status
-                }
-                module_name
-              }
-            }
-          }
+          # playerstatus {
+          #   course_dtl {
+          #     module {
+          #       topic {
+          #         topic_name
+          #         status
+          #       }
+          #       module_name
+          #     }
+          #   }
+          # }
         }
         courseid
         _id
@@ -315,10 +315,10 @@ export const getmoduleData = gql`
         page
         totalResourseCount
         coursename
-        coursefile
-        coursestatus
+        # coursefile
+        # coursestatus
         coursetime
-        coursecreated_on
+        # coursecreated_on
         coursedetails {
           modulename
           modulestatus
@@ -1326,10 +1326,10 @@ export const getCoursePlayerStatusForCourse = gql`
       message {
         _id
         status
-        location
-        course_id
+        # location
+        # course_id
         feedback_status
-        course_percentage
+        # course_percentage
       }
     }
   }
@@ -1389,31 +1389,31 @@ export const getReadLearnerActivity = gql`
         status
         activity_details {
           topicname
-          status
+          #status
           courseid
           coursename
-          modulename
+          #modulename
           startdate
           enddate
           activitytype
           activityname
-          resourcefile {
-            assignment
-            checked
-            doc_type
-            filename
-            path
-            size
-            type_name
-            _id
-          }
+          # resourcefile {
+          #   assignment
+          #   checked
+          #   doc_type
+          #   filename
+          #   path
+          #   size
+          #   type_name
+          #   _id
+          # }
 
-          score
+          # score
           link
-          created_on
+          # created_on
           createdby_name
-          createdby_role
-          createdby_id
+          # createdby_role
+          # createdby_id
         }
       }
     }
@@ -1642,31 +1642,31 @@ export const getReadLeanerActivity = gql`
         status
         activity_details {
           topicname
-          status
+          # status
           courseid
           coursename
-          modulename
+          # modulename
           startdate
           enddate
           activitytype
           activityname
-          resourcefile {
-            assignment
-            checked
-            doc_type
-            filename
-            path
-            size
-            type_name
-            _id
-          }
+          # resourcefile {
+          #   assignment
+          #   checked
+          #   doc_type
+          #   filename
+          #   path
+          #   size
+          #   type_name
+          #   _id
+          # }
 
-          score
+          # score
           link
-          created_on
+          # created_on
           createdby_name
-          createdby_role
-          createdby_id
+          # createdby_role
+          # createdby_id
         }
       }
     }
@@ -1786,11 +1786,11 @@ export const singleBatchInfo = gql`
       message {
         _id
         batchname
-        batchdescription
-        batchstartdate
-        batchenddate
-        isTeams
-        created_on
+        # batchdescription
+        # batchstartdate
+        # batchenddate
+        # isTeams
+        # created_on
         batchid
       }
     }
