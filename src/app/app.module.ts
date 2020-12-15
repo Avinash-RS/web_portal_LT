@@ -32,6 +32,7 @@ import { SocketioService } from '@learner/services/socketio.service';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '@core/core.module';
+import { InterceptorService } from '@learner/services/interceptor.service';
 
 // import { ChartsModule } from 'ng2-charts';
 
@@ -85,7 +86,8 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     }),
 
   ],
-  providers: [AlertComponentComponent, DatePipe, SocketioService,
+  providers: [AlertComponentComponent, DatePipe, SocketioService, InterceptorService,
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
     {
       provide: APP_BASE_HREF,
       useFactory: getBaseHref,
