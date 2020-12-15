@@ -21,22 +21,14 @@ import { MyDatePickerModule } from 'mydatepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ChartsModule } from 'ng2-charts';
 
-import { MaskingPipePipe } from '@core/core/masking-pipe.pipe';
 import { CoreModule } from '@core/core.module';
 import { MaterialModule } from '@core/material.module';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
-import { LoginComponent } from '@learner/pages/login/login.component';
 // import { NewHomeComponent } from '@learner/pages/new-home/new-home.component';
 import { CoursedetailsComponent } from '@learner/pages/coursedetails/coursedetails.component';
-import { RegistrationComponent } from '@learner/pages/registration/registration.component';
-import { OtpComponent } from '@learner/pages/otp/otp.component';
-import { PasswordComponent } from '@learner/pages/password/password.component';
 import { LearnerHomeComponent } from '@learner/pages/learner-home/learner-home.component';
-import { ForgotUsernameAndPasswordComponent } from '@learner/pages/forgot-username-and-password/forgot-username-and-password.component';
-import { RecoverFogotpasswordOTPComponent } from '@learner/pages/recover-fogotpassword-otp/recover-fogotpassword-otp.component';
 import { ProfileComponent } from '@learner/pages/profile/profile.component';
 import { LearnerMyCourseComponent } from '@learner/pages/learner-my-course/learner-my-course.component';
-import { ResetpasswordComponent } from '@learner/pages/resetpassword/resetpassword.component';
 import { TermsconditionsComponent } from '@learner/pages/termsconditions/termsconditions.component';
 import { ScormplayerComponent } from './pages/scormplayer/scormplayer.component';
 import { NgOtpInputModule } from 'ng-otp-input';
@@ -65,7 +57,6 @@ import { ViewAllnotificationsComponent } from './pages/view-allnotifications/vie
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatMenuModule } from '@angular/material/menu';
-import { LearnermycourseService } from './pages/learner-my-course/learnermycourse.service';
 import { PerformancePageMobileComponent } from './pages/performance-page-mobile/performance-page-mobile.component';
 import { SelfLearnerAvtivityComponent } from './pages/self-learner-avtivity/self-learner-avtivity.component';
 import { ActivitiesComponent } from './pages/activities/activities.component';
@@ -78,7 +69,6 @@ import { KnowledgeResourceHomeComponent } from './pages/knowledge-resource-home/
 import { KnowledgeLandingPageComponent } from './pages/knowledge-landing-page/knowledge-landing-page.component';
 import { KnowledgePreviewComponent } from './pages/knowledge-preview/knowledge-preview.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { FilterPipe } from '../pipes/filter.pipe';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { VideoPreviewModalComponent } from './pages/video-preview-modal/video-preview-modal.component';
 import { ProjectMobileComponent } from './pages/project-mobile/project-mobile.component';
@@ -95,117 +85,56 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 
 const routes: Routes = [
-  // { path: '', component: LandingpageComponent , canActivate: [AuthGuard], data: { title: 'Welcome to LXP' } },
-  // { path: 'login', component: LandingpageComponent, canActivate: [AuthGuard], data: { title: 'Learner Login' } },
   {
     path: '',
-    component: LoginComponent,
-    canActivate: [AuthGuard],
-    data: { title: 'Learner Login' }
+    // component: LearnerMyCourseComponent,
+    redirectTo: 'Learner',
+    pathMatch: 'full',
+    canLoad: [AuthGuard],
   },
   {
-    path: 'login',
-    component: LoginComponent,
-    canActivate: [AuthGuard],
-    data: { title: 'Learner Login' }
+    path: 'Learner',
+    // component: LearnerMyCourseComponent,
+    loadChildren: './mycourses.module#MycoursesModule',
+    canLoad: [AuthGuard],
   },
   {
-    path: 'courseDetail',
-    component: CoursedetailsComponent,
-    canActivate: [AuthGuard],
-    data: { animation: 'Course details' }
-  },
-  {
-    path: 'register',
-    component: RegistrationComponent,
-    data: { animation: 'Learner  Registration' }
-  },
-  {
-    path: 'otp',
-    component: OtpComponent,
-    // canActivate: [AuthGuard],
-    data: { title: 'Learner  Registration OTP' }
-  },
-  {
-    path: 'password',
-    component: PasswordComponent,
-    // canActivate: [AuthGuard],
-    data: { title: 'Learner  Registration Username/Password' }
-  },
-  {
-    path: 'recover',
-    component: ForgotUsernameAndPasswordComponent,
-    data: { animation: 'Learner Forget Password' }
-  },
-  {
-    path: 'recoverotp',
-    component: RecoverFogotpasswordOTPComponent,
-    data: { title: 'Learner Forget Password OTP' }
-  },
-  {
-    path: 'profile',
+    path: 'Learner/profile',
     component: ProfileComponent,
-    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     data: { animation: 'Learner  Profile' }
   },
   {
-    path: 'MyCourse',
-    component: LearnerMyCourseComponent,
-    // canActivate: [AuthGuard],
-    data: { animation: 'Learner  MyCourse' }
-  },
-  {
-    path: 'selfLearning',
+    path: 'Learner/selfLearning',
     component: SelfLearnerAvtivityComponent,
     // resolve: {
     //   data: LearnermycourseService
     //   },
     // canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     data: { animation: 'Self Learner Avtivity' }
   },
   {
-    path: 'resetpassword',
-    component: ResetpasswordComponent,
-    data: { title: 'Learner Reset password' }
-  },
-
-  {
-    path: 'calendar',
-    component: LearnerCalendarComponent,
+    path: 'Learner/calendar',
+    // component: LearnerCalendarComponent,
+    loadChildren: './calendar.module#CalendarModules',
+    canLoad: [AuthGuard],
     data: { animation: 'Calendar' }
   },
-  {
-    path: 'activities',
-    component: ActivitiesComponent,
-    data: { animation: 'Calendar' }
-  },
-    {
-    path: 'activitycenter',
-    component: LearnerActivityCenterComponent,
-    data: { animation: 'activitycenter' }
-  },
 
   {
-
-    path: 'discussionForum',
-    component: DiscussionForumComponent,
-    data: { animation: 'Discussion Forum' }
-  },
-
-  {
-    path: 'activitycenterhomescreen',
-    component: ActivitycenterhomescreenComponent,
+    path: 'Learner/activitycenterhomescreen',
+    // component: ActivitycenterhomescreenComponent,
+    loadChildren: './activitycenter.module#ActivitycenterModule',
+    canLoad: [AuthGuard],
     data: { animation: 'activitycenterhomescreen' }
 
   },
   {
-    path: 'knowledge',
-    component: KnowledgeResourceHomeComponent,
-    data: { animation: 'activitycenterhomescreen' }
-  },
-  {
-    path: 'knowledge/preview',
-    component: KnowledgeLandingPageComponent,
+    path: 'Learner/knowledge',
+    // component: KnowledgeResourceHomeComponent,
+    loadChildren: './knowledgeresources.module#KnowledgeresourcesModule',
+    canLoad: [AuthGuard],
     data: { animation: 'activitycenterhomescreen' }
   },
   // {
@@ -220,9 +149,9 @@ const routes: Routes = [
   //   data: { title: 'Course Player' }
   // },
   {
-    path: 'viewallcourses',
+    path: 'Learner/viewallcourses',
     component: ViewAllCoursesComponent,
-    canActivate: [AuthGuard]
+    canLoad: [AuthGuard]
   },
   // {
   //   path: 'dashboard',
@@ -236,58 +165,54 @@ const routes: Routes = [
   //   data: { animation: 'Learner home' }
   // },
   {
-    path: 'forbidden',
+    path: 'Learner/forbidden',
     component: ForbiddenComponent,
     data: { title: 'Learner Change email' }
   },
   {
-    path: 'viewAllnotifications',
+    path: 'Learner/viewAllnotifications',
     component: ViewAllnotificationsComponent,
+    canLoad: [AuthGuard],
   },
-  {
-    path: 'instructorLed',
-    component: InstructorLedComponent,
-    data: { animation: 'Learner  MyCourse' }
-  }
   // { path: 'new-home', component: NewHomeComponent },
 ];
 
 @NgModule({
   declarations: [
-    LoginComponent,
+    // LoginComponent,
     // NewHomeComponent,
     LearnerHomeComponent,
-    CoursedetailsComponent,
-    RegistrationComponent,
-    OtpComponent,
-    PasswordComponent,
-    ForgotUsernameAndPasswordComponent,
-    RecoverFogotpasswordOTPComponent,
+    // CoursedetailsComponent,
+    // RegistrationComponent,
+    // OtpComponent,
+    // PasswordComponent,
+    // ForgotUsernameAndPasswordComponent,
+    // RecoverFogotpasswordOTPComponent,
     ProfileComponent,
-    LearnerMyCourseComponent,
-    LearnerMyCourseComponent,
-    ResetpasswordComponent,
+    // LearnerMyCourseComponent,
+    // LearnerMyCourseComponent,
+    // ResetpasswordComponent,
     TermsconditionsComponent,
     ScormplayerComponent,
-    MaskingPipePipe,
+    // MaskingPipePipe,
     ForbiddenComponent,
     NewHomeComponent,
     ViewAllCoursesComponent,
     // SearchPipe,
     LearnerDashboardComponent,
     LandingpageComponent,
-    LearnerCalendarComponent,
+    // LearnerCalendarComponent,
     ViewAllnotificationsComponent,
     PerformancePageMobileComponent,
     SelfLearnerAvtivityComponent,
-    ActivitiesComponent,
-    DiscussionForumComponent,
-    LearnerActivityCenterComponent,
-    ActivitycenterhomescreenComponent,
-    InstructorLedComponent,
-    KnowledgePreviewComponent,
-    KnowledgeLandingPageComponent,
-    KnowledgeResourceHomeComponent,
+    // ActivitiesComponent,
+    // DiscussionForumComponent,
+    // LearnerActivityCenterComponent,
+    // ActivitycenterhomescreenComponent,
+    // InstructorLedComponent,
+    // KnowledgePreviewComponent,
+    // KnowledgeLandingPageComponent,
+    // KnowledgeResourceHomeComponent,
     VideoPreviewModalComponent,
     ProjectMobileComponent,
     PerformVideoRecordComponent,
@@ -361,6 +286,6 @@ const routes: Routes = [
     Apollo
     // { provide: Window, useValue: window }
   ],
-  entryComponents: [CategoryComponentComponent, KnowledgePreviewComponent, VideoPreviewModalComponent]
+  entryComponents: [CategoryComponentComponent, VideoPreviewModalComponent]
 })
 export class LearnerModule { }

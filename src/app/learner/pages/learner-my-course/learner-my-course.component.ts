@@ -125,7 +125,7 @@ export class LearnerMyCourseComponent implements OnInit {
         this.getScreenSize();
         this.getCountForCategories();
         // this.getTab();
-        this.getCountForJobRole();
+        // this.getCountForJobRole();
         // this.insidengOnInit();
       } else {
         this.learnerService.getLoginUserDetail(params.email_id).subscribe((isValidEmailResult: any) => {
@@ -144,7 +144,7 @@ export class LearnerMyCourseComponent implements OnInit {
             this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
             this.getScreenSize();
             // this.getTab();
-            this.getCountForJobRole();
+            // this.getCountForJobRole();
             // this.insidengOnInit();
           } else {
             localStorage.clear();
@@ -265,7 +265,6 @@ export class LearnerMyCourseComponent implements OnInit {
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
                 this.getEnrolledCourses('', '', '', '', '', '', false);
-                this.getCountForJobRole();
                 // this.getCountForJobRole();
               }
             });
@@ -529,7 +528,7 @@ export class LearnerMyCourseComponent implements OnInit {
       tableType: 'submission',
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
-    this.router.navigateByUrl('/Learner/activitycenter', { state: { detail } });
+    this.router.navigateByUrl('/Learner/activitycenterhomescreen/activitycenter', { state: { detail } });
   }
 
   /* ---------------------------------------api for available courses------------------------------------ */
@@ -626,7 +625,6 @@ export class LearnerMyCourseComponent implements OnInit {
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
                 this.getEnrolledCourses('', '', '', '', '', '', false);
-                this.getCountForJobRole();
                 // this.getCountForJobRole();
               }
             });
@@ -646,11 +644,12 @@ export class LearnerMyCourseComponent implements OnInit {
   //   this.trigger.closeMenu();
   // }
 
-  getCountForJobRole() {
-    this.learnerService.getCountForJobroleCategories(this.userDetailes._id).subscribe((data: any) => {
-      this.jobRole = data.data.getCountForJobroleCategories.data;
-    });
-  }
+  // NOT USING ANY WHERE WHEN REQURED UNCOMMENT
+  // getCountForJobRole() {
+  //   this.learnerService.getCountForJobroleCategories(this.userDetailes._id).subscribe((data: any) => {
+  //     this.jobRole = data.data.getCountForJobroleCategories.data;
+  //   });
+  // }
 
   dropdownValueChange(selectedValue, count, jobroleId) {
     this.viewCourseClass = false;
