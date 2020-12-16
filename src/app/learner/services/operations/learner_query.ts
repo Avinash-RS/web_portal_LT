@@ -297,17 +297,17 @@ export const getmoduleData = gql`
       data {
         playerstatusData {
           success
-          playerstatus {
-            course_dtl {
-              module {
-                topic {
-                  topic_name
-                  status
-                }
-                module_name
-              }
-            }
-          }
+          # playerstatus {
+          #   course_dtl {
+          #     module {
+          #       topic {
+          #         topic_name
+          #         status
+          #       }
+          #       module_name
+          #     }
+          #   }
+          # }
         }
         courseid
         _id
@@ -315,10 +315,10 @@ export const getmoduleData = gql`
         page
         totalResourseCount
         coursename
-        coursefile
-        coursestatus
+        # coursefile
+        # coursestatus
         coursetime
-        coursecreated_on
+        # coursecreated_on
         coursedetails {
           modulename
           modulestatus
@@ -1326,10 +1326,10 @@ export const getCoursePlayerStatusForCourse = gql`
       message {
         _id
         status
-        location
-        course_id
+        # location
+        # course_id
         feedback_status
-        course_percentage
+        # course_percentage
       }
     }
   }
@@ -1389,31 +1389,31 @@ export const getReadLearnerActivity = gql`
         status
         activity_details {
           topicname
-          status
+          #status
           courseid
           coursename
-          modulename
+          #modulename
           startdate
           enddate
           activitytype
           activityname
-          resourcefile {
-            assignment
-            checked
-            doc_type
-            filename
-            path
-            size
-            type_name
-            _id
-          }
+          # resourcefile {
+          #   assignment
+          #   checked
+          #   doc_type
+          #   filename
+          #   path
+          #   size
+          #   type_name
+          #   _id
+          # }
 
-          score
+          # score
           link
-          created_on
+          # created_on
           createdby_name
-          createdby_role
-          createdby_id
+          # createdby_role
+          # createdby_id
         }
       }
     }
@@ -1642,31 +1642,31 @@ export const getReadLeanerActivity = gql`
         status
         activity_details {
           topicname
-          status
+          # status
           courseid
           coursename
-          modulename
+          # modulename
           startdate
           enddate
           activitytype
           activityname
-          resourcefile {
-            assignment
-            checked
-            doc_type
-            filename
-            path
-            size
-            type_name
-            _id
-          }
+          # resourcefile {
+          #   assignment
+          #   checked
+          #   doc_type
+          #   filename
+          #   path
+          #   size
+          #   type_name
+          #   _id
+          # }
 
-          score
+          # score
           link
-          created_on
+          # created_on
           createdby_name
-          createdby_role
-          createdby_id
+          # createdby_role
+          # createdby_id
         }
       }
     }
@@ -1786,11 +1786,11 @@ export const singleBatchInfo = gql`
       message {
         _id
         batchname
-        batchdescription
-        batchstartdate
-        batchenddate
-        isTeams
-        created_on
+        # batchdescription
+        # batchstartdate
+        # batchenddate
+        # isTeams
+        # created_on
         batchid
       }
     }
@@ -2140,6 +2140,72 @@ query getTopicAttendanceDetailsByUsername( $courseid: String!, $full_name: Strin
             }
         }
     }
+  }
+}
+`;
+
+
+
+export const   get_batchwise_learner_dashboard_data = gql`
+query   get_batchwise_learner_dashboard_data( $user_id: String!, $request_type: String!){
+  get_batchwise_learner_dashboard_data( user_id: $user_id, request_type: $request_type){
+    success
+    error_msg
+    message{
+            course_type
+            categoryName
+            course_img_url
+            isBatchCourse
+            image_instructor_lead_session_time
+            image_self_paced_learning_time
+            total_mid_course_project_count
+            internal_assesment
+            final_assesment
+            course_name
+            author_name
+            total_duration
+            credits
+            instructor_lead_session_completed_count
+            instructor_lead_session_total_count
+            completed_mid_course_project_count
+            week_completed_count
+            week_total_count
+            Self_Paced_Learning_CARD
+            self_paced_learning_progression
+            completed_module_count
+            total_module_count
+            completed_topic_count
+            total_topic_count
+            course_status
+            thread_count
+            comment_count
+            reply_count
+            assignment_submitted_count
+            assignment_total_count
+            course_id
+            course_percentage
+            wishlisted
+            wishlist_id
+            feed_back
+            batchid
+            batch_start_date
+            batch_end_date
+    }
+  }
+}
+`;
+
+
+export const   get_learner_dashboard_count = gql`
+query   get_learner_dashboard_count( $user_id: String!, $user_obj_id: String!){
+  get_learner_dashboard_count( user_id: $user_id, user_obj_id: $user_obj_id){
+    success
+        error_msg
+        message{
+            ongoing_count
+            completed_count
+            all_count
+        }
   }
 }
 `;
