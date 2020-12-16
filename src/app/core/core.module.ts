@@ -24,7 +24,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { Ng5SliderModule } from 'ng5-slider';
 // others
-import { BarRatingModule } from 'ngx-bar-rating';
+// import { BarRatingModule } from 'ngx-bar-rating';
 import { NgxMaskModule } from 'ngx-mask';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { VgBufferingModule } from 'videogular2/compiled/buffering';
@@ -81,7 +81,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     RouterModule,
     CommonModule,
     PdfViewerModule,
-    BarRatingModule,
+    // BarRatingModule,
     Ng4LoadingSpinnerModule.forRoot(),
     NgxMaskModule.forRoot(),
     // RouterModule.forChild(routes),
