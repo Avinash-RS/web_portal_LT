@@ -15,7 +15,9 @@
     }
   }
 }
-
+::ng-deep .mat-dialog-container{
+  overflow: inherit !important;
+}
 // responsiveness starts here
 
 .cameraIcon {
