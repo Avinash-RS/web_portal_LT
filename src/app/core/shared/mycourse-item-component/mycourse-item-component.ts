@@ -15,20 +15,9 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 export class MycourseItemComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
   @Input('courseItems') course: any = {};
-  @Input() completedCourse: number;
-  @Input() globalData: any = {};
-  // @Input('canNavigate') canNavigate: boolean;
-  // @Input('showCartBtn') showCartBtn: boolean;
-  // @Input('showWishlist') showWishlist: boolean;
-  // @Input('showStatus') showStatus: boolean;
-  // @Input('showPrice') showPrice: boolean;
-  // @Input('showCount') showCount: boolean;
-  // @Input('showRating') showRating: boolean;
-  // @Input('showDate') showDate: boolean;
-  // @Input('goto') goto: string;
-  // @Input('isDraft') isDraft: boolean;
-  // @Input('showEnroll') showEnroll: boolean ;
-  // @Input('btnType') btnType: string;
+  // NOT USING ANY WHERE
+  // @Input() completedCourse: number;
+  // @Input() globalData: any = {};
 
   userDetail: any;
   recordedData: any;
@@ -101,8 +90,8 @@ export class MycourseItemComponent implements OnInit {
 
   goToForum(c) {
     localStorage.setItem('Courseid', c.course_id);
-    const bt = c.activity_info?.batchid ? {
-      batchid: c.activity_info?.batchid,
+    const bt = c.batchid ? {
+      batchid: c.batchid,
       batchenddate: c.batch_end_date,
       batch_start_date: c.batch_start_date,
       batchname: c.batch_name

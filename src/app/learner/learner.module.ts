@@ -11,7 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 // others
-import { BarRatingModule } from 'ngx-bar-rating';
+// import { BarRatingModule } from 'ngx-bar-rating';
 import { NgxMaskModule } from 'ngx-mask';
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -227,7 +227,7 @@ const routes: Routes = [
     Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
     CarouselModule,
-    BarRatingModule,
+    // BarRatingModule,
     CommonModule,
     NgxMaskModule,
     MatMenuModule,

@@ -97,12 +97,12 @@ export class HeaderComponent implements OnInit {
       // console.log('inside logout result', result, 'login -', this.loginDetails, 'user - ', this.userDetailes);
       if (result.value) {
         // this.loading = true;
-        this.router.navigate(['/Learner/login']);
-        localStorage.clear();
-        sessionStorage.clear();
         this.services.getIpAddressByUrl();
         this.userDetailes = null;
         this.services.logout(this.loginDetails._id, false).subscribe((logout: any) => {
+          localStorage.clear();
+          sessionStorage.clear();
+          this.router.navigate(['/Learner/login']);
           // if (logout.data.logout && logout.data.logout.success) {
           //   this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
           //   });

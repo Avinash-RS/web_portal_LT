@@ -13,7 +13,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { MaterialModule } from '@core/material.module';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { BarRatingModule } from 'ngx-bar-rating';
+// import { BarRatingModule } from 'ngx-bar-rating';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ChartsModule } from 'ng2-charts';
 import { DragScrollModule } from 'ngx-drag-scroll';
@@ -64,7 +64,7 @@ const routes: Routes = [
     Ng4LoadingSpinnerModule.forRoot(),
     MaterialModule,
     CarouselModule,
-    BarRatingModule,
+    // BarRatingModule,
     CommonModule,
     NgxMaskModule,
     MatMenuModule,

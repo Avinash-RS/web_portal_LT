@@ -95,6 +95,7 @@ export class CoursedetailsComponent implements OnInit {
   treeCourse = false;
   // initials: any;
   selectedModuleData: any;
+  user_token;
 
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
   @ViewChild('rationPopup') rationPopup: TemplateRef<any>;
@@ -126,6 +127,7 @@ export class CoursedetailsComponent implements OnInit {
               public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
               public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
               public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
+                this.user_token = sessionStorage.getItem("token")
     const Feedbackdetail: any = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
     this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.checkDetails = Feedbackdetail;
@@ -223,7 +225,7 @@ export class CoursedetailsComponent implements OnInit {
           this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.content.url +
           '&module_status=' + 'process'
-          + '&module=' + this.getModuleandtopicInfo.modulename + '&topic=' + this.getModuleandtopicInfo.moduledetails[0].topicname + '&location=' + this.content.page);
+          + '&module=' + this.getModuleandtopicInfo.modulename + '&topic=' + this.getModuleandtopicInfo.moduledetails[0].topicname + '&token=' + this.user_token);
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
     });
@@ -233,9 +235,9 @@ export class CoursedetailsComponent implements OnInit {
   ngOnInit(): void {
     this.translate.use(localStorage.getItem('language'));
     // this.add_topic_reference(res);
-    if (this.detailData.course_status === 'completed') {
-      this.ratingPopup();
-    }
+    // if (this.detailData.course_status === 'completed') {
+    //   this.ratingPopup();
+    // }
     this.service.menuSelectedPerform.subscribe((emitedData: any) => {
       this.selectedName = emitedData.selectedName;
       this.selectedTabIndex = emitedData.selectedTabIndex;
@@ -450,18 +452,18 @@ export class CoursedetailsComponent implements OnInit {
             this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
             this.getuserid._id + '&path=' + this.gettopicLink.link +
             '&module_status=' + this.moduleSatusCheck
-            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title);
+            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title+ '&token=' + this.user_token);
       }
     }
     console.log('this.scromModuleData', this.scromModuleData, 'this.currentPage', this.currentPage);
-    this.gettopicLink = this.scromModuleData[this.currentPage - 1].children[this.topiccurrentPage];
-    const childData = this.scromModuleData[this.moduleLenth - 1].children;
-    const childlength = this.scromModuleData[this.moduleLenth - 1].children.length;
+    this.gettopicLink = this.scromModuleData[this.currentPage - 1]?.children[this.topiccurrentPage];
+    const childData = this.scromModuleData[this.moduleLenth - 1]?.children;
+    const childlength = this.scromModuleData[this.moduleLenth - 1]?.children.length;
     console.log(childData[childlength - 1].id);
     console.log('this.gettopicLink', this.gettopicLink);
-    if (this.gettopicLink.id === childData[childlength - 1].id) {
-      this.ratingPopup();
-    }
+    // if (this.gettopicLink.id === childData[childlength - 1].id) {
+    //   this.ratingPopup();
+    // }
   }
 
   topicPrve() {
@@ -489,7 +491,7 @@ export class CoursedetailsComponent implements OnInit {
             this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
             this.getuserid._id + '&path=' + this.gettopicLink.link +
             '&module_status=' + this.moduleSatusCheck
-            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title);
+            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&token=' + this.user_token);
       }
       if (this.topiccurrentlink === 0) {
         this.currentPage--;
@@ -512,6 +514,10 @@ export class CoursedetailsComponent implements OnInit {
     this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
       this.scromModuleData = this.scromApiData?.childData;
+      //on Start of the course
+      this.currentPage = 0;
+      this.topiccurrentPage = 0;
+      this.nextPrevHolder = this.topiccurrentPage;
       // tree level
       this.scromModuleData.forEach(childData => {
         // console.log(childData.children);
@@ -540,8 +546,7 @@ export class CoursedetailsComponent implements OnInit {
       (environment.scormUrl + '/scormPlayer.html?contentID=' +
         this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
         + '&module_status=' + this.moduleSatusCheck
-        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName);
-    console.log('before encodeing', this.urlSafe);
+        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&token=' + this.user_token);
 }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {
@@ -760,9 +765,12 @@ export class CoursedetailsComponent implements OnInit {
   getCoursePlayerStatus() {
     this.Lservice.getCoursePlayerStatusForCourse(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
       this.playerStatus = data.data.getCoursePlayerStatusForCourse.message;
-      if (this.checkDetails?.feed_back === 1 && this.playerStatus.feedback_status === false && this.playerStatus.status === 'completed') {
-        this.ratingPopup();
-      }
+      // if (this.checkDetails?.feed_back === 1 && this.playerStatus.feedback_status === false && this.playerStatus.status === 'completed') {
+      //   this.ratingPopup();
+      // }
+      // if (this.playerStatus.feedback_status === false && this.playerStatus.course_percentage === 100 && this.playerStatus.status === 'completed') {
+      //   this.ratingPopup();
+      //   }
     });
   }
 

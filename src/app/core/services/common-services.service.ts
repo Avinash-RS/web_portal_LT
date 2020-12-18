@@ -72,13 +72,13 @@ export class CommonServicesService {
   pauseVideo$ = new Subject<any>();
   pauseVideo = this.pauseVideo$.asObservable();
 
-  logout(userId, isAdmin) {
+  logout(user_id, is_admin) {
     // this.apollo.getClient().resetStore();
     return this.apollo.query({
       query: logout,
       variables: {
-        userId,
-        isAdmin
+        user_id,
+        is_admin
       }
     });
   }

@@ -5,11 +5,12 @@
   }
   .projHead {
     color: $color-blank;
-    position: absolute;
+    margin-left: 5px;
+    // position: absolute;
   }
   .materialCls {
     position: relative;
-    right: 13px;
+    // right: 13px;
   }
   .nomaterial {
     margin-left: 2px;
@@ -19,7 +20,45 @@
   }
   .topic {
     position: relative;
-    right: 4px;
+    // right: 4px;
+  }
+  .box-0-1{
+    margin-top: 20px;
+    width: 100%;
+    padding: 15px;
+    height: auto;
+    background-color: $color-white;
+    border : 1px solid $color-border;
+    // padding-bottom: 3%;
+  }
+  .keyboardArrow {
+    text-align: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 9;
+  }
+  .expansionarr {
+    padding: 3px;
+    font-weight: 600;
+    width: 100%;
+  }
+  .activityDescription {
+    margin-left: 25px;
+    margin-top: 10px;
+  }
+  .projGroup {
+    margin-top: 15px;
+    .groupactivity {
+      width: 40%;
+    }
+  }
+  .mobprojDate {
+    width: 59%;
+    span {
+      display: block;
+    }
   }
   .groupBtn {
     border: 1px solid #5C6873;
@@ -29,49 +68,159 @@
     width: 20px;
     height: 20px;
     position: relative;
-    top: 5px;
     cursor: default;
   }
-
   .grpIcon {
     font-size: 11px;
-    margin-top: -8px;
-    margin-left: -3px;
     cursor: default;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .teamName {
     position: relative;
-    bottom: 6px;
     color: #0000EE;
+    margin-left: 10px;
   }
-
+  .materialsActivity {
+    margin-top: 15px;
+  }
+  .work-border {
+    border: 1px solid #ccc;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 0px 6px #00000029;
+    opacity: 1;
+    padding: 15px
+  }
+  .work {
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  .input-hide {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    opacity: 0;
+    z-index: 9;
+  }
+  .materialsScrollActivity .slideLoop {
+    display: inline-block;
+    text-align: left;
+  }
+  .uploadBtn {
+    font-weight: bolder;
+    font-size: 15px;
+    margin: 10px 0;
+  }
+  .add-icon {
+    font-weight: bolder;
+  }
+  .recordBtn {
+    height: 4rem;
+    background-color: #F5F5F5;
+    font-size: 16px;
+    font-weight: bolder;
+    color: #666666;
+  }
+  .video-icon {
+    font-size: 55px;
+    color: $lxp-theme-green;
+    position: absolute;
+    left: 5rem;
+    top: 0rem;
+  }
+  .submitted-btn {
+    color: $color-white !important;
+    background-color: rgba(192, 34, 34, 0.5);
+    width: 45%;
+    // position: absolute;
+    // left: 81px;
+    cursor: not-allowed;
+  }
+  .submit-btn{
+    color: $color-white !important;
+    background-color: rgba(192, 34, 34, 0.5);
+    width: 45%;
+    // margin-top: 6%;
+  }
+  .submitBtn {
+    height: 3rem;
+    width: 80%;
+    background-color: $lxp-theme-green;
+    color: $color-white;
+    margin-left: 2.1rem;
+  }
+  .playBtn {
+    font-size: 25px;
+    position: absolute;
+    top: 1.10rem;
+    left: 0.7rem;
+    color: white;
+  }
+  .catnamenew {
+    color: #3f444a;
+    text-transform: capitalize;
+    font-size: 16px;
+    margin-left: 2rem;
+    font-weight: 900 !important;
+  }
+  // .carouselCol {
+  //   max-width: 100% !important;
+  //   height: 15rem;
+  // }
+  .carouselCol1, 
+  .carouselCol {
+    padding: 0 !important;
+    margin-left: 0;
+    width: 10em;
+    height: 6.7em;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .carouselRow1 {
+    height: 100%;
+    text-align: center;
+  }
+  .iterationCard {
+    height: 100%;
+    position: relative;
+    border: 1px solid #707070;
+  }
+  .del-pos {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .iterationicons {
+    font-size: 24px;
+    color: #898989;
+  }
+  .fileSelDet {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+  .fileSelDet, .fileSelDetHover {
+    background-color: #5C6873;
+  }
+  .fileNameCol {
+    // padding-left: 5px !important;
+    width: 100%;
+  }
+  .trendingCategoriesScrollActivity .slideLoop {
+    display: inline-block;
+    text-align: left;
+  }
   .m-r-40 {
     margin-right: 40px;
   }
-.m-rr-5 {
-  margin-right: -5px;
-}
-.ml-16 {
-  margin-left: 16px;
-}
+  .m-rr-5 {
+    margin-right: -5px;
+  }
 
-.expansionarr {
-  padding: 3px;
-  font-weight: 600;
-  position: absolute;
-  top: -4px;
-  right: 7px;
-}
-
-.box-0-1{
-  margin-top: 10px;
-  width: 100%;
-  padding: 20px;
-  padding-bottom: 3%;
-  height: auto;
-  background-color: $color-white;
-  border : 1px solid $color-border;
-}
 .m-r-13 {
   margin-right: 13px;
 }
@@ -86,10 +235,6 @@
 }
 .margin-21{
   margin-left: 21px;
-}
-.work {
-  margin-top: 5px;
-  text-align: center;
 }
 .fileData {
   background-color: #D5D5D5;
@@ -112,12 +257,6 @@
   position: relative;
   left: 10px;
   top: 5px;
-}
-.submit-btn{
-  color: $color-white !important;
-  background-color: $lxp-theme-green;
-  width: 45%;
-  margin-top: 6%;
 }
 .box-0-2{
   margin-top: 10px;
@@ -237,6 +376,14 @@
   height: 35px;
   width: 35px;
 }
+.close-button1 {
+  background: #C02222 !important;
+  float: right;
+  top: -7px;
+  position: relative;
+  height: 35px;
+  width: 35px;
+}
 .closeBtn {
   background: #C02222 !important;
   height: 35px;
@@ -321,69 +468,10 @@
   margin-left: 4rem;
 }
 
-.uploadBtn {
-  height: 3rem;
-  font-weight: bolder;
-  font-size: 15px;
-  width: 12rem !important;
-}
-
-.add-icon {
-  font-weight: bolder;
-}
-
-.recordBtn {
-  height: 4rem;
-  background-color: #F5F5F5;
-  font-size: 16px;
-  font-weight: bolder;
-  color: #666666;
-}
-
-.video-icon {
-  font-size: 55px;
-  color: $lxp-theme-green;
-  position: absolute;
-  left: 5rem;
-  top: 0rem;
-}
-
-.submitted-btn{
-  color: $color-white !important;
-  background-color: #898989;
-  width: 45%;
-  // position: absolute;
-  // left: 81px;
-  cursor: not-allowed;
-}
-
-.submitBtn {
-  height: 3rem;
-  width: 80%;
-  background-color: $lxp-theme-green;
-  color: $color-white;
-  margin-left: 2.1rem;
-}
 :host ::ng-deep .submitBtn .mat-stroked-button:not([disabled]) {
   color: #ffffff96 !important;
   background-color: #c0222299 !important;
 }
-
-.playBtn {
-  font-size: 25px;
-  position: absolute;
-  top: 1.10rem;
-  left: 0.7rem;
-  color: white;
-}
-
-.catnamenew {
-    color: #3f444a;
-    text-transform: capitalize;
-    font-size: 16px;
-    margin-left: 2rem;
-    font-weight: 900 !important;
-  }
 
   .previewTxt {
     font-size: 16px;
@@ -408,15 +496,6 @@
 
   .videoCell {
     height: 180px;
-  }
-
-  .fileSelDet {
-    background-color: #5C6873;
-    height: 40%;
-  }
-
-  .fileNameCol {
-    padding-left: 5px !important;
   }
 
   .icons {
@@ -469,39 +548,10 @@
     height: 60%;
   }
 
-  .work-border {
-    border: 0.25px solid #ccc;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 0px 6px #00000029;
-    opacity: 1
-  }
-
   .deleteIcon {
     color: #5C6873;
     font-size: 21px;
     margin-top: 4px;
-  }
-
-  .del-pos {
-    position: relative;
-    bottom: 155px;
-  }
-
-  .input-hide {
-    position: absolute;
-    left: 60px;
-    top: 29px;
-    opacity: 0;
-  }
-
-  .iterationicons {
-    font-size: 50px;
-    padding: 0.4rem 4.2rem;
-    color: #898989;
-  }
-
-  .iterationCard{
-    height: 8rem;
   }
 
   .close-buttonVideo {
@@ -590,19 +640,6 @@
   width: 15.5rem !important;
 }
 
-.carouselCol {
-  max-width: 100% !important;
-  height: 15rem;
-}
-
-.carouselCol1 {
-  max-width: 100% !important;
-  height: 11rem;
-}
-
-.carouselRow1 {
-  height: 7rem;
-}
 
 .carouselText {
   font-size: 12px;

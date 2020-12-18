@@ -524,27 +524,27 @@ button:disabled:hover {
   letter-spacing: 0.5px;
 }
 
-@keyframes fadeInUp {
-  from {
-    transform: translate3d(0, 0px, 0)
-  }
+// @keyframes fadeInUp {
+//   from {
+//     transform: translate3d(0, 0px, 0)
+//   }
 
-  to {
-    transform: translate3d(0, 0, 0);
-    opacity: 1
-  }
-}
+//   to {
+//     transform: translate3d(0, 0, 0);
+//     opacity: 1
+//   }
+// }
 
-@-webkit-keyframes fadeInUp {
-  from {
-    transform: translate3d(0, 40px, 0)
-  }
+// @-webkit-keyframes fadeInUp {
+//   from {
+//     transform: translate3d(0, 40px, 0)
+//   }
 
-  to {
-    transform: translate3d(0, 0, 0);
-    opacity: 1
-  }
-}
+//   to {
+//     transform: translate3d(0, 0, 0);
+//     opacity: 1
+//   }
+// }
 
 .animated {
   animation-duration: 1s;
@@ -553,15 +553,15 @@ button:disabled:hover {
   -webkit-animation-fill-mode: both
 }
 
-.animatedFadeInUp {
-  opacity: 0
-}
+// .animatedFadeInUp {
+//   opacity: 0
+// }
 
-.fadeInUp {
-  opacity: 0;
-  animation-name: fadeInUp;
-  -webkit-animation-name: fadeInUp;
-}
+// .fadeInUp {
+//   opacity: 0;
+//   animation-name: fadeInUp;
+//   -webkit-animation-name: fadeInUp;
+// }
 
 ::ng-deep .mat-tab-label:last-child {
   padding-left: calc(50%) !important;

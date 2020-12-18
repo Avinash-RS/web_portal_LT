@@ -316,6 +316,21 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 }
 
+playVideoMaterial(templateRef: TemplateRef<any>, videoDialog,  path, docType) {
+  let pathdata = {videourl:  path.path};
+  if (docType !== 'video/mp4') {
+    this.dialog.open(templateRef, {
+      width: '100%',
+      height: '100%',
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+    this.previewDoc = path.path;
+} else {
+  this.videoPreview(videoDialog, pathdata);
+}
+}
+
 previewDoc(templateRef: TemplateRef<any>, path) {
   this.dialog.open(templateRef, {
     width: '100%',
