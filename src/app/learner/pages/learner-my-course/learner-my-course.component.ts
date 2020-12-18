@@ -125,7 +125,7 @@ export class LearnerMyCourseComponent implements OnInit {
         this.getScreenSize();
         this.getCountForCategories();
         // this.getTab();
-        this.getCountForJobRole();
+        // this.getCountForJobRole();
         // this.insidengOnInit();
       } else {
         this.learnerService.getLoginUserDetail(params.email_id).subscribe((isValidEmailResult: any) => {
@@ -144,7 +144,7 @@ export class LearnerMyCourseComponent implements OnInit {
             this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
             this.getScreenSize();
             // this.getTab();
-            this.getCountForJobRole();
+            // this.getCountForJobRole();
             // this.insidengOnInit();
           } else {
             localStorage.clear();
@@ -165,9 +165,9 @@ export class LearnerMyCourseComponent implements OnInit {
       this.insidengOnInit();
     }
     this.getCountForCategories();
-    if(!this.runnablePlatforms.includes(navigator.platform)){
-        this.isMobile = true;
-      }
+    if (!this.runnablePlatforms.includes(navigator.platform)) {
+      this.isMobile = true;
+    }
 
     // this.triggerAvailablecourse = setInterval(() => {
     //   this.getCountForCategories();
@@ -265,7 +265,6 @@ export class LearnerMyCourseComponent implements OnInit {
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
                 this.getEnrolledCourses('', '', '', '', '', '', false);
-                this.getCountForJobRole();
                 // this.getCountForJobRole();
               }
             });
@@ -302,7 +301,7 @@ export class LearnerMyCourseComponent implements OnInit {
     if (this.catalogueDetails && catagoryId && !jobRoleCategoryId && !searchName) {
       this.selectedIndex = 0;
       // tslint:disable-next-line:only-arrow-functions
-      categoryName = this.categoryDetails.filter(function(data: any) {
+      categoryName = this.categoryDetails.filter(function (data: any) {
         return data.categoryId === catagoryId;
       });
       this.categoryNamePrint = categoryName[0].categoryName;
@@ -325,7 +324,7 @@ export class LearnerMyCourseComponent implements OnInit {
     }
 
     // this.showSkeleton = showSkelton;
-   // this.loading = !showSkelton;
+    // this.loading = !showSkelton;
     this.learnerService.get_enrolled_courses(this.userDetailes.user_id, this.userDetailes._id,
       catalougeId, catagoryId, jobRoleCategoryId, searchName).subscribe((enrolledList: any) => {
         if (enrolledList.data.getLearnerenrolledCourses && enrolledList.data.getLearnerenrolledCourses.success) {
@@ -390,15 +389,16 @@ export class LearnerMyCourseComponent implements OnInit {
     } else if (this.selectedIndex === 3) {
       requestType = 'all';
     }
-    this.learnerService.getLearnerDashboard(userId, userObjId, 'undefined', requestType, 'batch').subscribe((BcourseData: any) => {
-      BcourseData.data.get_learner_dashboard.message.batch_course_details.forEach(elem => {
+    this.learnerService.get_batchwise_learner_dashboard_data(userId, requestType).subscribe((BcourseData: any) => {
+      console.log(BcourseData, 'BcourseData');
+      BcourseData.data.get_batchwise_learner_dashboard_data.message.forEach(elem => {
         elem.isBatchCourse = true;
-        if (this.isMobile){
+        if (this.isMobile) {
           elem.progresslistExp = true;
           elem.courseInfoExp = true;
         }
       });
-      const tmpBcourseDetail = BcourseData.data.get_learner_dashboard.message.batch_course_details;
+      const tmpBcourseDetail = BcourseData.data.get_batchwise_learner_dashboard_data.message;
       this.courseDetailsList = tmpBcourseDetail && tmpBcourseDetail !== null ? tmpBcourseDetail : [];
 
       this.learnerService.getLearnerDashboard(userId, userObjId, 'undefined', requestType, 'enrolment').subscribe((EcourseData: any) => {
@@ -406,25 +406,32 @@ export class LearnerMyCourseComponent implements OnInit {
         this.enrolledCourses = EcourseDetail && EcourseDetail !== null ? EcourseDetail : [];
         this.enrolledCourses.forEach(elem => {
           elem.isBatchCourse = false;
-          if (this.isMobile){
+          if (this.isMobile) {
             elem.progresslistExp = true;
             elem.courseInfoExp = true;
           }
         });
         this.courseDetailsList.push(...this.enrolledCourses);
-        // Course batch count reset
-        this.onGoingCourseCount = 0;
-        this.completedCourseCount = 0;
-        this.allCourseCount = 0;
+
         // Course overall count
-        this.onGoingCourseCount = Number(BcourseData.data.get_learner_dashboard.message.ongoing_count) +
-         Number(EcourseData.data.get_learner_dashboard.message.ongoing_count);
-        this.completedCourseCount = Number(BcourseData.data.get_learner_dashboard.message.completed_count) +
-         Number(EcourseData.data.get_learner_dashboard.message.completed_count);
-        this.allCourseCount = Number(BcourseData.data.get_learner_dashboard.message.all_count) +
-         Number(EcourseData.data.get_learner_dashboard.message.all_count);
+        // this.onGoingCourseCount = Number(BcourseData.data.get_learner_dashboard.message.ongoing_count) +
+        //  Number(EcourseData.data.get_learner_dashboard.message.ongoing_count);
+        // this.completedCourseCount = Number(BcourseData.data.get_learner_dashboard.message.completed_count) +
+        //  Number(EcourseData.data.get_learner_dashboard.message.completed_count);
+        // this.allCourseCount = Number(BcourseData.data.get_learner_dashboard.message.all_count) +
+        //  Number(EcourseData.data.get_learner_dashboard.message.all_count);
         this.showSkeleton = false;
       });
+    });
+    // Course batch count reset
+    this.onGoingCourseCount = 0;
+    this.completedCourseCount = 0;
+    this.allCourseCount = 0;
+    this.learnerService.get_learner_dashboard_count(userId, userObjId).subscribe((result: any) => {
+      console.log(result, 'result');
+      this.onGoingCourseCount = result.data.get_learner_dashboard_count.message.ongoing_count;
+      this.completedCourseCount = result.data.get_learner_dashboard_count.message.completed_count;
+      this.allCourseCount = result.data.get_learner_dashboard_count.message.all_count;
     });
   }
 
@@ -529,7 +536,7 @@ export class LearnerMyCourseComponent implements OnInit {
       tableType: 'submission',
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
-    this.router.navigateByUrl('/Learner/activitycenter', { state: { detail } });
+    this.router.navigateByUrl('/Learner/activitycenterhomescreen/activitycenter', { state: { detail } });
   }
 
   /* ---------------------------------------api for available courses------------------------------------ */
@@ -590,8 +597,8 @@ export class LearnerMyCourseComponent implements OnInit {
         closeOnNavigation: true,
         disableClose: true,
       });
+    }
   }
-}
   closedialogbox() {
     this.dialog.closeAll();
     this.allcourses = [];
@@ -626,7 +633,6 @@ export class LearnerMyCourseComponent implements OnInit {
                 this.allcourses = course.data.getCoureBasedOnCatalog.data;
                 this.getCountForCategories();
                 this.getEnrolledCourses('', '', '', '', '', '', false);
-                this.getCountForJobRole();
                 // this.getCountForJobRole();
               }
             });
@@ -646,11 +652,12 @@ export class LearnerMyCourseComponent implements OnInit {
   //   this.trigger.closeMenu();
   // }
 
-  getCountForJobRole() {
-    this.learnerService.getCountForJobroleCategories(this.userDetailes._id).subscribe((data: any) => {
-      this.jobRole = data.data.getCountForJobroleCategories.data;
-    });
-  }
+  // NOT USING ANY WHERE WHEN REQURED UNCOMMENT
+  // getCountForJobRole() {
+  //   this.learnerService.getCountForJobroleCategories(this.userDetailes._id).subscribe((data: any) => {
+  //     this.jobRole = data.data.getCountForJobroleCategories.data;
+  //   });
+  // }
 
   dropdownValueChange(selectedValue, count, jobroleId) {
     this.viewCourseClass = false;

@@ -1,25 +1,86 @@
 @import "variable";
-.brdcrmb {
-  margin-top: -3px;
+
+.con-1 {
+    padding: 15px;
 }
-.footer {
-  padding: 15px;
-  font-size: inherit;
-  left: 0;
-  bottom: 0 !important;
-  width: 100%;
-  color: $label;
-  // position: fixed;
-  z-index: 999999;
-  font-weight: 500;
-  background-color: $profile-t-grey;
-  text-align: right;
-  border-top: 2px solid $profile-p-grey;
+.breadCrumb {
+  display: inline-block;
+  span, mat-icon {
+    display: inline-block;
+    vertical-align: middle;
+  }
 }
-.con-1{
-    padding: 12px;
+::ng-deep.materialsScrollActivity .drag-scroll-wrapper.drag-scroll-container {
+  height: auto !important;
 }
-.back{
+.carouselCol1 {
+  padding: 0 !important;
+  margin-left: 0;
+  // height: initial;
+  width: 13em;
+  height: 9.7em;
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: top;
+}
+::ng-deep.mat-expansion-panel {
+  margin-top: 20px !important;
+  border-radius: 0 !important;
+  border: 1px solid #B4B4B4;
+  // box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: none !important;
+}
+::ng-deep.mat-expansion-panel-header {
+  height: auto !important;
+  padding: 15px !important;
+  background-color: rgba(0, 0, 0, 0.03);
+}
+::ng-deep.mat-expansion-panel-header.mat-expanded:focus, ::ng-deep.mat-expansion-panel-header.mat-expanded:hover {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+  // border-bottom: 1px solid #B4B4B4 !important;
+}
+::ng-deep.mat-expansion-panel-body {
+  padding: 0 15px 15px !important;
+}
+::ng-deep.iterationAccordion .mat-expansion-panel {
+  margin-top: 10px !important;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.10) !important;
+}
+.panelTitle {
+  margin-right: 0;
+  font-weight: bold;
+  font-size: 16px;
+}
+.assignmentNameFile {
+  width: 25%;
+}
+.imageIcon {
+  margin-left: 0;
+}
+.assignmentQuestion {
+  width: 8%;
+}
+.assignmentStartDate, 
+.assignmentEndDate {
+  width: 15%;
+}
+.upload {
+  width: 7%;
+}
+.maxScore {
+  width: 8%;
+}
+.obtScore, .subStatus {
+  width: 11%;
+}
+.assignDetails {
+  margin-top: 10px;
+}
+.subStatus {
+  position: relative;
+}
+
+.back {
     font-size: 16px;
     color: $color-blank;
     cursor: pointer;
@@ -31,10 +92,10 @@
     height: 2px !important;
     background-color: $lxp-theme-green !important;
   }
-  :host /deep/  .mat-expansion-panel:not([class*='mat-elevation-z']) {
-     box-shadow: none !important;
-     border: 1px solid $color-border !important; 
-}
+// :host /deep/  .mat-expansion-panel:not([class*='mat-elevation-z']) {
+//      box-shadow: none !important;
+//      border: 1px solid $color-border !important; 
+// }
   //dot
   .dot {
     height: 10px;
@@ -44,40 +105,90 @@
     margin-right: 10px;
     display: inline-block;
   }
-.arr{
-    position: absolute;
-    top: -15px;
-    right: 0px;
-    border: 1px solid $color-border;
-    padding: 3px;
-    font-weight: 600;
+.arr {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: 1px solid $color-border;
+  padding: 3px;
+  font-weight: 600;
 }
-
+.itrCount, .itrationTxt, .itrationTxts {
+  position: relative;
+  width: 100%;
+  text-align: right;
+}
+.startEndDate {
+  span {
+    display: block;
+  }
+}
+.startDate {
+}
+.endDate {
+  margin-left: 15px;
+}
+.box-0-1 {
+  margin-top: 20px;
+  width: 100%;
+  padding: 20px;
+  overflow: hidden;
+  height: auto;
+  background-color: $color-white;
+  border : 1px solid $color-border;
+  position: relative;
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.10);
+  &:last-child {
+    box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.10);
+  }
+}
 .statusTxt {
   font-size: 15px;
-  margin-left: 52px;
+  width: 100%;
+  text-align: right;
+  display: inline-block;
 }
-
-  .box-0-1{
-      margin-top: 10px;
-      width: 100%;
-      padding: 20px;
-      padding-bottom: 3%;
-      overflow: hidden;
-      height: auto;
-      background-color: $color-white;
-      border : 1px solid $color-border;
-  }
-  .box-0-0{
-    margin-top: 10px;
-    width: 100%;
-    padding: 20px;
-    padding-bottom: 3%;
-    overflow: hidden;
-    height: 70%;
-    background-color: $color-white;
-    border : 1px solid $color-border;
-  }
+.submitstatus {
+  color: #FFA04E;
+  width: 100%;
+  text-align: right;
+  display: inline-block;
+  font-size: 15px;
+}
+.gradeStatus {
+  color: #0C781B;
+  position: relative;
+  left: 98px;
+  font-size: 15px;
+}
+.projectSubmitstatus {
+  color: #FFA04E;
+  position: relative;
+  // right: 49px;
+}
+.iterStatus {
+  position: absolute;
+  right: 62px;
+}
+.grade {
+  color: #0C781B;
+  position: relative;
+  // right: 3px;
+}
+.graded {
+  color: #0C781B;
+  position: relative;
+  // right: 42px;
+}
+.performRightContent {
+  padding-right: 30px;
+}
+.submitted-btn{
+  color: $color-white !important;
+  background-color: rgba(192, 34, 34, 0.5);
+  width: 45%;
+  cursor: not-allowed;
+}
 
   .box-0-00{
     margin-top: 10px;
@@ -243,7 +354,6 @@ margin-bottom: 9px;
   height: 35px;
   width: 35px;
 }
-
 ::ng-deep .matDialogMat .mat-dialog-container {
   overflow: hidden !important;
 }
@@ -277,7 +387,7 @@ margin-bottom: 9px;
 }
 
 ::ng-deep .mat-expansion-panel-content {
-margin-bottom: 1% !important;
+// margin-bottom: 1% !important;
 }
 
 .gradedUpload {
@@ -290,33 +400,67 @@ margin-bottom: 1% !important;
 /* Ramya's css */
 .projHead {
   // color: $lxp-theme-green;
-  position: absolute;
-  left: 73px;
+  // position: absolute;
+  // left: 73px;
 }
 .assignIcon {
   font-size: 19px;
-  margin-left: 20px;
   cursor: text;
   color: $lxp-icon;
+  // margin-left: 20px;
 }
 .group {
-  margin-right: 13px;
+  // margin-right: 13px;
 }
-.box-0-2{
+.activityFullWidth {
+  width: 100%;
+}
+.activityhalfWidth {
+  width: 80%;
+}
+.learnerList {
+  width: 19%;
+  padding-right: 35px;
+  box-sizing: border-box;
+}
+.box-0-2 {
   margin-top: 10px;
-  margin-left: 71px;
-  width: 79%;
+  width: 100%;
   padding: 20px;
-  padding-bottom: 3%;
   overflow: hidden;
   height: auto;
   background-color: $color-white;
   border : 1px solid $color-border;
+  // margin-left: 71px;
+  // padding-bottom: 3%;
 }
 .box-0-3 {
   background-color: $color-white;
   border : 1px solid $color-border;
   height: auto;
+}
+.groupData {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  // bottom: 12px;
+  // right: 10px;
+}
+.projDate, .projTotalScore, .activityStatus {
+  margin-top: 10px;
+}
+.projDate span {
+  display: block;
+}
+.activityhalfWidth .projectRightContent {
+  padding-right: 10px;
+}
+.projectRightContent {
+  padding-right: 35px;
+}
+.projEndDate {
+  margin-left: 10px;
 }
 .groupBtn {
   border: 1px solid #5C6873;
@@ -326,31 +470,10 @@ margin-bottom: 1% !important;
   width: 20px;
   height: 20px;
   position: relative;
-  right: 38px;
-  top: 5px;
+  margin-right: 10px;
   cursor: default;
-}
-.groupBtn1 {
-  border: 1px solid #5C6873;
-  opacity: 1;
-  background-color: #ffffff;
-  color: #1F1A17;
-  width: 20px;
-  height: 20px;
-  position: relative;
-  right: 9px;
-  top: 9px;
-  cursor: default;
-}
-.grpName {
-  position: relative;
-  bottom: 2px;
-  left: 1px;
-}
-.groupData {
-  position: relative;
-  bottom: 12px;
-  right: 10px;
+  // right: 38px;
+  // top: 5px;
 }
 .arrBtn {
   background-color: #ffffff;
@@ -359,41 +482,128 @@ margin-bottom: 1% !important;
   color: #1F1A17;
   width: 20px;
   height: 20px;
-  position: absolute;
-  right: 32px;
-  top: 5px;
+  position: relative;
+  margin-left: 10px;
+  // position: absolute;
+  // right: 32px;
+  // top: 5px;
 }
-.grpIcon {
+.arrBack, .grpIcon {
   font-size: 11px;
-  margin-top: -8px;
-  margin-left: -3px;
-  cursor: default;
-}
-.arrBack {
-  font-size: 11px;
-  margin-top: -8px;
-  margin-left: -3px;
   cursor: pointer;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // margin-top: -8px;
+  // margin-left: -3px;
 }
+.grpName, .teamName {
+  position: relative;
+  // bottom: 2px;
+  // left: 1px;
+}
+.totscore {
+  position: relative;
+  // right: 40px;
+}
+.trendingCategoriesScrollActivity .slideLoop {
+  display: inline-block;
+  text-align: left;
+}
+::ng-deep.groupBtn.mat-mini-fab .mat-button-wrapper, 
+::ng-deep.arrBtn.mat-mini-fab .mat-button-wrapper {
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+::ng-deep .learnerData .list-group-item{
+  background: #FBF6E1 0% 0% no-repeat padding-box !important;
+  box-shadow: 0px 1px 2px #00000029 !important;
+  border: 0.5px solid #D6D6D6 !important;
+  border-radius: 5px !important;
+  opacity: 1 !important;
+  padding: 7px 15px !important;
+}
+.box-0-3{
+  margin-top: 10px;
+  width: 100%;
+  padding: 20px;
+  overflow: hidden;
+  height: auto;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+}
+.expansionarr {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: 1px solid #ccc;
+  padding: 3px;
+  font-weight: 600;
+}
+.t-l-1 {
+  // margin-left: 25px;
+  margin-top: 5px;
+}
+.topic {
+  // margin-top: 19px;
+}
+.panel1 {
+  // margin-top: 15px;
+  // margin-left: 25px;
+}
+// .groupBtn1 {
+//   border: 1px solid #5C6873;
+//   opacity: 1;
+//   background-color: #ffffff;
+//   color: #1F1A17;
+//   width: 20px;
+//   height: 20px;
+//   position: relative;
+//   right: 9px;
+//   top: 9px;
+//   cursor: default;
+// }
+.teamName {
+  // position: relative;
+  // right: 28px;
+  // bottom: 6px;
+}
+// .grpIcon {
+//   font-size: 11px;
+//   cursor: default;
+//   // margin-top: -8px;
+//   // margin-left: -3px;
+// }
+// .arrfwd {
+//   background-color: #ffffff;
+//   border: 1px solid #5C6873;
+//   opacity: 1;
+//   color: #1F1A17;
+//   width: 20px;
+//   height: 20px;
+//   float: right;
+//   position: absolute;
+//   right: 32px;
+//   top: -3px;
+// }
 .status {
-  margin-right: 3rem;
+  // margin-right: 3rem;
 }
-
 .endDateTxt {
   margin-left: 92px;
 }
+// .itrationTxt {
+//   margin-left: 84px;
+// }
 
-.EndDate {
-  margin-left: 1.4rem;
-}
-
-.itrationTxt {
-  margin-left: 84px;
-}
-
-.itrationTxts {
-  margin-left: 14px;
-}
+// .itrationTxts {
+//   margin-left: 14px;
+// }
 
 .upload-bltn {
   width: 70%;
@@ -417,38 +627,6 @@ margin-bottom: 1% !important;
   color: #666666;
 }
 
-.submitstatus {
-  color: #FFA04E;
-  position: relative;
-  left: 69px;
-  font-size: 15px;
-}
-.gradeStatus {
-  color: #0C781B;
-  position: relative;
-  left: 98px;
-  font-size: 15px;
-}
-.projectSubmitstatus {
-  color: #FFA04E;
-  position: relative;
-  right: 49px;
-}
-.iterStatus {
-  position: absolute;
-  right: 62px;
-}
-.grade {
-  color: #0C781B;
-  position: relative;
-  right: 4px;
-  // right: 3px;
-}
-.graded {
-  color: #0C781B;
-  position: relative;
-  right: 42px;
-}
 .iterSubmit {
   color: #FFA04E;
 }
@@ -478,55 +656,11 @@ margin-bottom: 1% !important;
 .m-r-2 {
   margin-right: 37px;
 }
-.topic {
-  margin-top: 19px;
-}
-::ng-deep .learnerData .list-group-item{
-background: #FBF6E1 0% 0% no-repeat padding-box !important;
-box-shadow: 0px 1px 2px #00000029 !important;
-border: 0.5px solid #D6D6D6 !important;
-border-radius: 5px !important;
-opacity: 1 !important;
-}
 .list {
 margin-top: 8px;
 }
-.t-l-1 {
-  margin-left: 25px;
-  margin-top: 5px;
-}
-.teamName {
-  position: relative;
-  right: 28px;
-  bottom: 6px;
-}
-.expansionarr {
-  border: 1px solid $color-border;
-  padding: 3px;
-  font-weight: 600;
-  margin-top: -6px;
-  position: absolute;
-  top: -11px;
-  right: 3px;
-}
-.arrfwd {
-  background-color: #ffffff;
-  border: 1px solid #5C6873;
-  opacity: 1;
-  color: #1F1A17;
-  width: 20px;
-  height: 20px;
-  float: right;
-  position: absolute;
-  right: 32px;
-  top: -3px;
-}
 .learnerList {
-  margin-top: 8px;
-}
-.panel1 {
-  margin-top: 15px;
-  margin-left: 25px;
+  // margin-top: 8px;
 }
 .selectedfile {
   margin: 0px 10px 8px 10px;
@@ -534,10 +668,6 @@ margin-top: 8px;
 .fileIcon {
   position: relative;
     top: 7px;
-}
-.totscore {
-  position: relative;
-  right: 40px;
 }
 .submission{
   margin-left: 2px; 
@@ -553,13 +683,6 @@ margin-top: 8px;
   position: relative;
   left: 10px;
   top: 5px;
-}
-.submitted-btn{
-  color: $color-white !important;
-  background-color: #898989;
-  width: 45%;
-  // margin-top: 6%;
-  cursor: not-allowed;
 }
 .deleteIcon {
   color: #5C6873;
@@ -579,7 +702,6 @@ margin-top: 8px;
 }
 .work {
   position: relative;
-  left: 35px;
 }
 
 ::ng-deep .custom-mat-tooltip {
@@ -589,10 +711,6 @@ margin-top: 8px;
   background-color: black !important;
   opacity: 1 !important;
   font-size: 12px !important;
-}
-.itrCount {
-position: relative;
-left: 5px;
 }
 .noSessionCard {
   margin: auto;
@@ -633,18 +751,34 @@ left: 5px;
   margin-left: 12px;
 }
 /*Ramya CSS ends here*/
+
 .videoPreview {
   background-color: #D5D5D5;
   border: 0.25px solid #707070;
   width: 70%;
-  height: 2.8rem;
-  padding: 0.3rem 5px;
+  // height: 2.8rem;
+  padding: 8px 5px;
 }
-
+.videoPlay {
+    color: #898989;
+    // font-size: 25px;
+    // background-color: white;
+    // width: 2.5rem;
+    // height: 2rem;
+    // padding: 4px 5px 5px 7px;
+    // border-radius: 2px;
+    cursor: default;
+    width: 10%;
+}
+.videoName {
+  position: relative;
+  width: 80%;
+  // top: 7px;
+}
 .deleteBtn {
+  width: 10%;
   color: #5C6873;
   font-size: 20px;
-  margin-top: 3px;
 }
 .ml-13 {
   margin-left: 13px;
@@ -664,40 +798,37 @@ left: 5px;
 //   cursor: none;
 // }
 
-.videoPlay {
-    color: #898989;
-    font-size: 25px;
-    // background-color: white;
-    width: 2.5rem;
-    height: 2rem;
-    padding: 4px 5px 5px 7px;
-    border-radius: 2px;
-    cursor: default;
-}
-
 .carouselCard {
   border: 0.5px solid #707070;
   cursor: pointer;
+  height: 100%;
+  position: relative;
 }
 // .carouselCard :hover  {
 //   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 // }
 
 .carouselRow1 {
-  height: 7rem;
+  height: 100%;
+  // height: 7rem;
 }
 // .carouselRow2 {
 //   height: 50%;
 // }
 
 .carouselRow {
-  height: 3rem;
+  // height: 3rem;
   background-color: #5C6873;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 .carouselRowHover {
-  height: 4rem;
+  // height: 4rem;
   background-color: #5C6873;
+  width: 100%;
 }
 
 .playActions {
@@ -711,9 +842,9 @@ left: 5px;
 }
 
 .carouselCol1 {
-  max-width: 100% !important;
-  height: 15rem;
-  margin-left: -15px;
+  // max-width: 100% !important;
+  // height: 15rem;
+  // margin-left: -15px;
 }
 
 // .carouselHoverCol {
@@ -758,20 +889,46 @@ left: 5px;
 }
 .feedBackTxt {
   color: $label2;
+  font-size: 16px;
 }
-
-.AssignmentBtn {
-  height: 3rem;
-  font-weight: bolder;
-  font-size: 15px;
-  border: 1px solid #707070;
-}
-
 .textArea {
-  align-content: left;
-  border-block-end-width: 1px solid #BEBEBEBF;
   color: $label2;
   width: 100%;
+  padding: 5px 7px;
+  font-size: 15px;
+  border: 1px solid rgba(112, 112, 112, 0.5);
+  background-color: #ffffff;
+}
+.AssignmentBtn {
+  font-size: 15px;
+  border: 1px solid rgba(112, 112, 112, 0.5);
+  background-color: #F5F5F5;
+  border-radius: 0;
+}
+::ng-deep.scrollingData drag-scroll {
+  margin-bottom: 30px;
+  overflow: visible !important;
+}
+::ng-deep.scrollingData .drag-scroll-wrapper.drag-scroll-container, 
+::ng-deep.trendingCategoriesScrollActivity .drag-scroll-wrapper.drag-scroll-container {
+  height: auto !important;
+  overflow: visible !important;
+}
+::ng-deep.scrollingData .drag-scroll-content {
+  text-align: left;
+}
+.slideLoop {
+  display: inline-block;
+  text-align: left;
+}
+.materialCard {
+  width: 8rem;
+  height: 7rem;
+  cursor: pointer;
+  // margin-left: 1rem;
+  border: 0.5px solid #707070;
+  display: inline-block;
+  text-align: center;
 }
 
 .assignmentIcon {
@@ -879,46 +1036,23 @@ left: 5px;
   width: 10%;
   height: 38px;
 }
-.videoName {
-  position: relative;
-  top: 7px;
-}
 .errmsg {
   height: 30rem;
 }
-.subStatus {
-  position: relative;
-  left: 28px;
-}
-.assignDetails {
-  margin-right: 9px;
-}
-.box-0-3{
-margin-top: 10px;
-margin-left: 34px;
-width: 95%;
-padding: 20px;
-padding-bottom: 3%;
-overflow: hidden;
-height: auto;
-background-color: #ffffff;
-border: 1px solid #ccc;
-}
-
 .matCardIconRow {
   height: 60%;
 }
 
 .matCardIconRow1 {
-  height: 71%;
+  height: 100%;
+  position: relative;
 }
-
-.materialCard {
-  width: 8rem;
-  height: 7rem;
-  cursor: pointer;
-  margin-left: 1rem;
-  border: 0.5px solid #707070;
+.fileSelDet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
 }
 
 .icons {
@@ -927,22 +1061,23 @@ border: 1px solid #ccc;
   color: #898989;
 }
 
-.fileSelDet {
+.fileSelDet, .fileSelDetHover {
   background-color: #5C6873;
-  height: 40%;
+  // height: 40%;
 }
 .fileSelDet {
-  height: 2rem;
-  background-color: #5C6873;
+  // height: 2rem;
+  // background-color: #5C6873;
 }
 
 .fileSelDetHover {
-  height: 3rem;
-  background-color: #5C6873;
+  // height: 3rem;
+  // background-color: #5C6873;
 }
 
-.fileNameCol {
-  padding-left: 5px !important;
+.fileNameCol, .fileSelDetHover {
+  width: 100%;
+  // padding-left: 5px !important;
 }
 
 .fileColor {
@@ -980,10 +1115,6 @@ border: 1px solid #ccc;
   margin-left: 44px;
 }
 
-.startDate {
-  margin-left: -6rem;
-}
-
 @media (max-width: 767px) {
 .noSessionCard {
   width: 100% !important;
@@ -1002,16 +1133,27 @@ border: 1px solid #ccc;
 }
 
 .performCard {
+  // height: 10rem;
+  margin-top: 20px;
   width: 100%;
-  height: 10rem;
-  padding: 8px !important;
+  padding: 15px !important;
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  border-radius: 0;
 }
-
+.SEDate, 
+.iterationSubmit, 
+.performHeading {
+  width: 100%;
+}
+.SEDate, .iterationSubmit {
+  margin-top: 15px;
+}
 .subTittle {
   font-size: 14px;
   font-weight: bolder;
   color: black;
-  margin: 0 0 10px !important;
+  margin: 0 !important;
 }
 
 
@@ -1026,24 +1168,20 @@ border: 1px solid #ccc;
 .gradeStatus1 {
   color: #0C781B;
 }
-
-
 }
+
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
-  .footer {
-      text-align: center;
-  }
   :host ::ng-deep .mat-tab-label, .mat-tab-label-active {
-    min-width: 110px !important;
-    padding: 3px !important;
+    min-width: auto !important;
+    padding: 3px 22px !important;
     margin: 0px !important;
-}
+  }
 
-:host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination { 
-  display: none !important;
+  :host ::ng-deep .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination { 
+    display: none !important;
+  }
 }
-}
-::ng-deep  .tooltip-inner {
+::ng-deep.tooltip-inner {
     max-width: 250px;
 }

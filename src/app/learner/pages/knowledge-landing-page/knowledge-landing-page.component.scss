@@ -195,3 +195,21 @@ drag-scroll {
     width: 10px !important;
     margin-left: 10px !important;
 }
+
+.topic-container :hover {
+    box-shadow: 0px 3px 15px 1px rgba(136,136,136,0.5);
+ 
+        .chip-hover {
+            //  transition: transform .5s ease;
+            transform: scale(1.2);
+            // @media only screen and (min-width: 1200px) {
+            //     transform: scale(1.2);
+            // }
+        }
+    }
+
+    ::ng-deep .tooltip-show {
+        position: relative !important;
+        font-size: 18px;
+         top: -10px;
+      }

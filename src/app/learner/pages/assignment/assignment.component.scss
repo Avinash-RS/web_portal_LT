@@ -8,7 +8,6 @@
     margin-right: 10px;
     display: inline-block;
   }
-  
   .submitdot {
     background-color: #FFA04E;
     height: 10px;
@@ -17,7 +16,6 @@
     margin-right: 10px;
     display: inline-block;
   }
-
   .gradedot {
       background-color: #0C781B;
       height: 10px;
@@ -25,129 +23,120 @@
       border-radius: 50%;
       display: inline-block;
   }
-
-.textGrayColor {
-  color: $color-lightGray;
-}
-
-.submitstatus {
-  color: #FFA04E;
-}
-
-.gradeStatus {
-  color: #0C781B;
-}
-
-.performCard {
+  .moduleTopicName {
+    margin-bottom: 15px;
+  }
+  .textGrayColor {
+    color: $color-lightGray;
+  }
+  .submitstatus {
+    color: #FFA04E;
+  }
+  .gradeStatus {
+    color: #0C781B;
+  }
+  .performCard {
     width: 100%;
     height: 10rem;
     padding: 8px !important;
-}
-
-.titleCase {
+  }
+  .titleCase {
     font-size: 16px;
     font-weight: bolder;
-}
-
-.subTittle {
+  }
+  .subTittle {
     font-size: 14px;
     font-weight: bolder;
     color: black;
     margin: 0 0 10px !important;
-}
-
-.yettoSubmit {
+  }
+  .yettoSubmit {
     margin: 0px 0px 3px;
-}
-
-.activityDisc {
-  color: $label2;
-  margin: 0px 0px 3px;
-}
-
-.brickMaking {
-  font-size: 14px;
-  color: #666666;
-}
-
-.matCard {
-  padding: 16px 10px 16px 10px !important;
-}
-
-.matIcon {
+  }
+  .activityDisc {
+    color: $label2;
+    margin: 0px 0px 3px;
+  }
+  .brickMaking {
+    font-size: 14px;
+    color: #666666;
+  }
+  .matCard {
+    padding: 16px 10px 16px 10px !important;
+  }
+  .matIcon {
     position: absolute;
     top: -5px;
     right: 0px;
-}
+  }
+  .arrowPopup {
+      position: absolute;
+      top: -3px;
+  }
 
-.arrowPopup {
+  .itration {
+    margin: 0px 0px 20px;
+  }
+
+  :host ::ng-deep  .recordBtn .mat-button-wrapper {
+    margin-left: 4rem;
+  }
+  .uploadBtn {
+    // height: 3rem;
+    font-weight: bolder;
+    font-size: 15px;
+    padding: 5px 0;
+  }
+
+  .add-icon {
+    font-weight: bolder;
+  }
+
+  .recordBtn {
+    height: 4rem;
+    background-color: #F5F5F5;
+    font-size: 16px;
+    font-weight: bolder;
+    color: #666666;
+  }
+
+  .video-icon {
+    font-size: 55px;
+    color: $lxp-theme-green;
     position: absolute;
-    top: -3px;
-}
+    left: 5rem;
+    top: 0rem;
+  }
 
-.itration {
-  margin: 0px 0px 20px;
-}
+  .submitted-btn{
+    color: $color-white !important;
+    background-color: #898989;
+    width: 45%;
+    // margin-top: 6%;
+    cursor: not-allowed;
+  }
 
-:host ::ng-deep  .recordBtn .mat-button-wrapper {
-  margin-left: 4rem;
-}
+  .submitBtn {
+    height: 3rem;
+    width: 80%;
+    background-color: $lxp-theme-green;
+    color: $color-white;
+    margin-left: 2.1rem;
+  }
+  :host ::ng-deep .submitBtn .mat-stroked-button:not([disabled]) {
+    color: #ffffff96 !important;
+    background-color: #c0222299 !important;
+  }
 
-.uploadBtn {
-  height: 3rem;
-  font-weight: bolder;
-  font-size: 15px;
-}
+  .playBtn {
+    font-size: 25px;
+    position: absolute;
+    top: 1.10rem;
+    left: 0.7rem;
+    color: white;
+  }
 
-.add-icon {
-  font-weight: bolder;
-}
-
-.recordBtn {
-  height: 4rem;
-  background-color: #F5F5F5;
-  font-size: 16px;
-  font-weight: bolder;
-  color: #666666;
-}
-
-.video-icon {
-  font-size: 55px;
-  color: $lxp-theme-green;
-  position: absolute;
-  left: 5rem;
-  top: 0rem;
-}
-
-.submitted-btn{
-  color: $color-white !important;
-  background-color: #898989;
-  width: 45%;
-  // margin-top: 6%;
-  cursor: not-allowed;
-}
-
-.submitBtn {
-  height: 3rem;
-  width: 80%;
-  background-color: $lxp-theme-green;
-  color: $color-white;
-  margin-left: 2.1rem;
-}
-:host ::ng-deep .submitBtn .mat-stroked-button:not([disabled]) {
-  color: #ffffff96 !important;
-  background-color: #c0222299 !important;
-}
-
-.playBtn {
-  font-size: 25px;
-  position: absolute;
-  top: 1.10rem;
-  left: 0.7rem;
-  color: white;
-}
-
-.catnamenew {
+  .catnamenew {
     color: #3f444a;
     text-transform: capitalize;
     font-size: 16px;
@@ -227,9 +216,10 @@
     height: 60%;
   }
   #upload-file {
-    opacity: 0;
-    position: absolute;
-    left: 58px;
+    display: none;
+    // opacity: 0;
+    // position: absolute;
+    // left: 58px;
   }
   .border {
     border: 1px solid gray;
@@ -267,14 +257,27 @@
   }
   
   .expand {
-    margin: 10px;
+    // margin: 10px;
   }
-
+  .assignmentStartDate, 
+  .assignmentEndDate, 
+  .assignmentName, 
+  .assignmentQuestion, 
+  .assignmentScore, 
+  .assignmentStatus {
+    span {
+      display: block;
+    }
+  }
+  .assignmentUpload {
+    margin: 5px 0 10px 0;
+  }
   .height {
     position: relative;
-    height: 145px !important;
-    padding-left: 5px;
-    padding-right: 7px;
+    width: 100%;
+    // height: 145px !important;
+    // padding-left: 5px;
+    // padding-right: 7px;
   }
 
   .score {
@@ -389,7 +392,9 @@
   }
 
   ::ng-deep .mat-expansion-indicator {
-    position: relative;
-    bottom: 50px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    // bottom: 50px;
   }
 }

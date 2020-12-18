@@ -163,8 +163,8 @@
         <br *ngIf="!cannotEdit"> -->
 
         <!-- //////Gender part//////// -->
-        <div class="genderRow" *ngIf="!cannotEdit">
-          <div class="col-md-4 col-lg-4 col-sm-12 col-12 genderCol">
+        <div class="genderRow row" *ngIf="!cannotEdit">
+          <div class="col-12 col-sm-12 col-md-4 col-lg-4 genderCol">
             <label class="p-b-10px f_size_19">{{'Gender' | translate}} <span class="mand">*</span></label>
             <div class="form-group">
               <mat-radio-group [disabled]='cannotEdit' formControlName="gender" name="gender">
@@ -175,18 +175,17 @@
             </div>
           </div>
 
-          <div class="col-md-4 col-lg-4 col-sm-12 col-12 genderCol">
+          <div class="col-12 col-sm-12 col-md-4 col-lg-4 genderCol">
             <label class="p-b-10px f_size_19">{{'I Am a' | translate }} <span class="mand">*</span></label>
             <div class="form-group">
-              <mat-radio-group [disabled]='cannotEdit' formControlName="is_student_or_professional"
-                name="is_student_or_professional">
+              <mat-radio-group [disabled]='cannotEdit' formControlName="is_student_or_professional" name="is_student_or_professional">
                 <mat-radio-button value="student">{{'Student' | translate }}</mat-radio-button>
                 <mat-radio-button value="professional">{{'Professional' | translate }}</mat-radio-button>
               </mat-radio-group>
             </div>
           </div>
 
-          <div class="col-md-4 col-lg-4 col-sm-12 col-12 languagesKnown">
+          <div class="col-12 col-sm-12 col-md-4 col-lg-4 languagesKnown">
             <div class="form-group">
               <label class="f_size_19">{{'Languages known' | translate}}</label>
               <mat-select [disabled]='cannotEdit' multiple class="inputs"
@@ -196,18 +195,18 @@
                 </mat-option>
               </mat-select>
               <!-- <mat-select [disabled]='cannotEdit' multiple
-          [ngClass]="cannotEdit ? 'n dis inputs m-t-5px col-md-6 col-sm-12 col-12' : 'inputs m-t-5px col-md-6 col-sm-12 col-12'"
-          placeholder="Language" formControlName="languages_known" name="language">
-          <mat-option *ngFor="let item of languageList | sort: false : 'languagename'" [value]="item._id">
-            {{item.languagename}}
-          </mat-option>
-        </mat-select>
-        <ng-container *ngIf="lang">
-            <input type="text" class="inputs col-md-6 col-sm-12 col-12"
-           [ngClass]="cannotEdit ? 'dis inputs  color_blue  width_80' :
-          'inputs  color_blue  width_80'"
-           formControlName="languages_known">
-          </ng-container> -->
+              [ngClass]="cannotEdit ? 'n dis inputs m-t-5px col-md-6 col-sm-12 col-12' : 'inputs m-t-5px col-md-6 col-sm-12 col-12'"
+              placeholder="Language" formControlName="languages_known" name="language">
+              <mat-option *ngFor="let item of languageList | sort: false : 'languagename'" [value]="item._id">
+              {{item.languagename}}
+              </mat-option>
+              </mat-select>
+              <ng-container *ngIf="lang">
+              <input type="text" class="inputs col-md-6 col-sm-12 col-12"
+              [ngClass]="cannotEdit ? 'dis inputs  color_blue  width_80' :
+              'inputs  color_blue  width_80'"
+              formControlName="languages_known">
+              </ng-container> -->
             </div>
           </div>
         </div>

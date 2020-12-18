@@ -1,18 +1,23 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { IsLoggedInAuthGuard } from '@core/services/_helpers/is-logged-in-auth.guard';
+import { AuthGuard } from '@core/services/_helpers';
 
 
 const routes: Routes = [
+
   {
-    path: '',
-    loadChildren: './learner/learner.module#LearnerModule',
+    path: 'Learner',
+    loadChildren: './learner/login.module#LoginModule',
+    canActivate: [IsLoggedInAuthGuard],
      data : {title: 'Welcome to EduTech'}
   },
 
   {
-    path: 'Learner',
+    path: '',
     loadChildren: './learner/learner.module#LearnerModule',
+    canLoad: [AuthGuard],
     data : {animation: 'Learner'}
   },
   // {

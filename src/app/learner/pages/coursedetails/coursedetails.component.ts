@@ -95,6 +95,7 @@ export class CoursedetailsComponent implements OnInit {
   treeCourse = false;
   // initials: any;
   selectedModuleData: any;
+  user_token;
 
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
   @ViewChild('rationPopup') rationPopup: TemplateRef<any>;
@@ -126,6 +127,9 @@ export class CoursedetailsComponent implements OnInit {
               public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
               public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
               public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
+                this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
+                });
+                this.user_token = sessionStorage.getItem("token")
     const Feedbackdetail: any = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
     this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.checkDetails = Feedbackdetail;
@@ -155,10 +159,10 @@ export class CoursedetailsComponent implements OnInit {
       // this.autoHide();
       this.getPlayerNextPrve();
      
-      this.service.viewCurseByID(detail && detail.id || this.localStoCourseid, this.userDetail.user_id)
+      this.service.viewCurseByIDForLearner(detail && detail.id || this.localStoCourseid)
         .subscribe((viewCourse: any) => {
-          if (viewCourse.data.viewcourse && viewCourse.data.viewcourse.success) {
-            this.course = viewCourse.data.viewcourse.message;
+          if (viewCourse.data.view_course_for_learner && viewCourse.data.view_course_for_learner.success) {
+            this.course = viewCourse.data.view_course_for_learner.message;
              console.log('this.course 1', this.course);
             if (this.detailData !== undefined) {
               this.selectedName = this.detailData?.course_name;
@@ -223,7 +227,7 @@ export class CoursedetailsComponent implements OnInit {
           this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.content.url +
           '&module_status=' + 'process'
-          + '&module=' + this.getModuleandtopicInfo.modulename + '&topic=' + this.getModuleandtopicInfo.moduledetails[0].topicname + '&location=' + this.content.page);
+          + '&module=' + this.getModuleandtopicInfo.modulename + '&topic=' + this.getModuleandtopicInfo.moduledetails[0].topicname + '&token=' + this.user_token);
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
     });
@@ -286,6 +290,11 @@ export class CoursedetailsComponent implements OnInit {
     this.getCoursePlayerStatus();
   }
 
+  ngOnDestroy(){
+    this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
+    });
+    this.socketService.closeSocket();
+  }
   renameKeys(obj, newKeys) {
     const keyValues = Object.keys(obj).map(key => {
       let newKey = null;
@@ -450,13 +459,13 @@ export class CoursedetailsComponent implements OnInit {
             this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
             this.getuserid._id + '&path=' + this.gettopicLink.link +
             '&module_status=' + this.moduleSatusCheck
-            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title);
+            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title+ '&token=' + this.user_token);
       }
     }
     console.log('this.scromModuleData', this.scromModuleData, 'this.currentPage', this.currentPage);
-    this.gettopicLink = this.scromModuleData[this.currentPage - 1].children[this.topiccurrentPage];
-    const childData = this.scromModuleData[this.moduleLenth - 1].children;
-    const childlength = this.scromModuleData[this.moduleLenth - 1].children.length;
+    this.gettopicLink = this.scromModuleData[this.currentPage - 1]?.children[this.topiccurrentPage];
+    const childData = this.scromModuleData[this.moduleLenth - 1]?.children;
+    const childlength = this.scromModuleData[this.moduleLenth - 1]?.children.length;
     console.log(childData[childlength - 1].id);
     console.log('this.gettopicLink', this.gettopicLink);
     // if (this.gettopicLink.id === childData[childlength - 1].id) {
@@ -489,7 +498,7 @@ export class CoursedetailsComponent implements OnInit {
             this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
             this.getuserid._id + '&path=' + this.gettopicLink.link +
             '&module_status=' + this.moduleSatusCheck
-            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title);
+            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&token=' + this.user_token);
       }
       if (this.topiccurrentlink === 0) {
         this.currentPage--;
@@ -512,6 +521,10 @@ export class CoursedetailsComponent implements OnInit {
     this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
       this.scromModuleData = this.scromApiData?.childData;
+      //on Start of the course
+      this.currentPage = 0;
+      this.topiccurrentPage = 0;
+      this.nextPrevHolder = this.topiccurrentPage;
       // tree level
       this.scromModuleData.forEach(childData => {
         // console.log(childData.children);
@@ -540,8 +553,7 @@ export class CoursedetailsComponent implements OnInit {
       (environment.scormUrl + '/scormPlayer.html?contentID=' +
         this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
         + '&module_status=' + this.moduleSatusCheck
-        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName);
-    console.log('before encodeing', this.urlSafe);
+        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&token=' + this.user_token);
 }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {

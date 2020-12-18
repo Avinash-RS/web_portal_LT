@@ -5,7 +5,7 @@ import {
   getCourseCategorySearch, getDetailsCount, getPlayerStatus, geturl
 } from '@core/services/operations/common_mutation';
 // tslint:disable-next-line: max-line-length
-import { getAllNotifications, getCoursesByName, get_all_course_by_usergroup, list_content, logout, syllabus_of_particular_scorm, viewcourse, view_wishlist } from '@core/services/operations/common_query';
+import { getAllNotifications, getCoursesByName, get_all_course_by_usergroup, list_content, logout, syllabus_of_particular_scorm, viewcourse, view_wishlist, view_course_for_learner } from '@core/services/operations/common_query';
 import { environment } from '@env/environment';
 import { Apollo } from 'apollo-angular';
 import { Subject } from 'rxjs/Subject';
@@ -72,13 +72,13 @@ export class CommonServicesService {
   pauseVideo$ = new Subject<any>();
   pauseVideo = this.pauseVideo$.asObservable();
 
-  logout(userId, isAdmin) {
+  logout(user_id, is_admin) {
     // this.apollo.getClient().resetStore();
     return this.apollo.query({
       query: logout,
       variables: {
-        userId,
-        isAdmin
+        user_id,
+        is_admin
       }
     });
   }
@@ -89,6 +89,15 @@ export class CommonServicesService {
       variables: {
         course_id: courseId,
         user_id: userId
+      }
+    });
+  }
+
+  viewCurseByIDForLearner(courseId) {
+    return this.apollo.query({
+      query: view_course_for_learner,
+      variables: {
+        course_id: courseId
       }
     });
   }

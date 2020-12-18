@@ -20,22 +20,24 @@ import { AlertComponentComponent } from '@core/shared/alert-component/alert-comp
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { MAT_TABS_CONFIG } from '@angular/material';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { HTTP_INTERCEPTORS, HttpInterceptor } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpInterceptor, HttpClient } from '@angular/common/http';
 import { ErrorInterceptor } from '@core/services/_helpers';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { ConfigsLoaderService } from '@core/services/configs-loader.service';
 import { NotFoundComponent } from './not-found/not-found.component';
-import {IvyCarouselModule} from 'angular-responsive-carousel';
+// import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { DatePipe } from '@angular/common';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+//import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { SocketioService } from '@learner/services/socketio.service';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '@core/core.module';
 
 // import { ChartsModule } from 'ng2-charts';
 
 // import { JwtInterceptor } from './core/services/_helpers/jwt.interceptor';
 // import { HTTP_INTERCEPTORS } from '@angular/common/http';
-const config: SocketIoConfig = { url: 'http://localhost:4444', options: {} };
+//const config: SocketIoConfig = { url: 'http://localhost:4444', options: {} };
 export function getBaseHref(platformLocation: PlatformLocation): string {
   return platformLocation.getBaseHrefFromDOM();
 }
@@ -51,7 +53,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
   ],
   imports: [
     Ng4LoadingSpinnerModule.forRoot(),
-    SocketIoModule.forRoot(config),
+    //SocketIoModule.forRoot(config),
     MaterialModule,
     // ChartsModule,
     GraphqlModule,
@@ -59,7 +61,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     BrowserAnimationsModule,
     Ng5SliderModule,
     PdfJsViewerModule,
-    IvyCarouselModule,
+    // IvyCarouselModule,
     ToastrModule.forRoot({
       timeOut: 4000,
       positionClass: 'toast-top-right',
@@ -73,7 +75,15 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    GraphqlModule
+    GraphqlModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+
   ],
   providers: [AlertComponentComponent, DatePipe, SocketioService,
     {
