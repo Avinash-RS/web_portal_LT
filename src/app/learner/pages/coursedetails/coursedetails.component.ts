@@ -95,6 +95,7 @@ export class CoursedetailsComponent implements OnInit {
   treeCourse = false;
   // initials: any;
   selectedModuleData: any;
+  user_token;
 
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
   @ViewChild('rationPopup') rationPopup: TemplateRef<any>;
@@ -126,6 +127,7 @@ export class CoursedetailsComponent implements OnInit {
               public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
               public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
               public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
+                this.user_token = sessionStorage.getItem("token")
     const Feedbackdetail: any = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
     this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.checkDetails = Feedbackdetail;
@@ -223,7 +225,7 @@ export class CoursedetailsComponent implements OnInit {
           this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.content.url +
           '&module_status=' + 'process'
-          + '&module=' + this.getModuleandtopicInfo.modulename + '&topic=' + this.getModuleandtopicInfo.moduledetails[0].topicname + '&location=' + this.content.page);
+          + '&module=' + this.getModuleandtopicInfo.modulename + '&topic=' + this.getModuleandtopicInfo.moduledetails[0].topicname + '&token=' + this.user_token);
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
     });
@@ -450,7 +452,7 @@ export class CoursedetailsComponent implements OnInit {
             this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
             this.getuserid._id + '&path=' + this.gettopicLink.link +
             '&module_status=' + this.moduleSatusCheck
-            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title);
+            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title+ '&token=' + this.user_token);
       }
     }
     console.log('this.scromModuleData', this.scromModuleData, 'this.currentPage', this.currentPage);
@@ -489,7 +491,7 @@ export class CoursedetailsComponent implements OnInit {
             this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
             this.getuserid._id + '&path=' + this.gettopicLink.link +
             '&module_status=' + this.moduleSatusCheck
-            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title);
+            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&token=' + this.user_token);
       }
       if (this.topiccurrentlink === 0) {
         this.currentPage--;
@@ -544,8 +546,7 @@ export class CoursedetailsComponent implements OnInit {
       (environment.scormUrl + '/scormPlayer.html?contentID=' +
         this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
         + '&module_status=' + this.moduleSatusCheck
-        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName);
-    console.log('before encodeing', this.urlSafe);
+        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&token=' + this.user_token);
 }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {

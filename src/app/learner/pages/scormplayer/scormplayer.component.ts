@@ -37,9 +37,11 @@ export class ScormplayerComponent implements OnInit {
   getuserid: any;
   show = false;
   checkDetails: any;
+  user_token;
   constructor(private dialog: MatDialog, public sanitizer: DomSanitizer,
               public spinner: NgxSpinnerService, public activatedRoute: ActivatedRoute, private alert: AlertServiceService,
               public service: LearnerServicesService, public route: Router, public commonService: CommonServicesService, ) {
+                this.user_token = sessionStorage.getItem("token")
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
 
@@ -67,7 +69,7 @@ export class ScormplayerComponent implements OnInit {
     this.passCourseId();
     this.contentid = 'dfdfd';
     this.url = environment.scormUrl + 'scormPlayer.html?contentID=' +
-    this.contentid + '&user_id=' + this.userId + '&course_id=' + this.courseId;
+    this.contentid + '&user_id=' + this.userId + '&course_id=' + this.courseId + '&token=' + this.user_token;
     // this.getModuleData();
     this.getFeedbackQue();
     this.getCoursePlayerStatus();
