@@ -25,7 +25,7 @@ import { ErrorInterceptor } from '@core/services/_helpers';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { ConfigsLoaderService } from '@core/services/configs-loader.service';
 import { NotFoundComponent } from './not-found/not-found.component';
-import {IvyCarouselModule} from 'angular-responsive-carousel';
+// import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { DatePipe } from '@angular/common';
 //import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { SocketioService } from '@learner/services/socketio.service';
@@ -61,7 +61,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     BrowserAnimationsModule,
     Ng5SliderModule,
     PdfJsViewerModule,
-    IvyCarouselModule,
+    // IvyCarouselModule,
     ToastrModule.forRoot({
       timeOut: 4000,
       positionClass: 'toast-top-right',
