@@ -127,6 +127,8 @@ export class CoursedetailsComponent implements OnInit {
               public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
               public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
               public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
+                this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
+                });
                 this.user_token = sessionStorage.getItem("token")
     const Feedbackdetail: any = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
     this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
@@ -288,6 +290,11 @@ export class CoursedetailsComponent implements OnInit {
     this.getCoursePlayerStatus();
   }
 
+  ngOnDestroy(){
+    this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
+    });
+    this.socketService.closeSocket();
+  }
   renameKeys(obj, newKeys) {
     const keyValues = Object.keys(obj).map(key => {
       let newKey = null;

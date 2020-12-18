@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as myGlobals from '@core/globals';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { SocketioService } from '@learner/services/socketio.service';
+//import { SocketioService } from '@learner/services/socketio.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 @Component({
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   languages: any;
 
   constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder,
-              public socketService: SocketioService,
+             // public socketService: SocketioService,
               private service: LearnerServicesService, private toastr: ToastrService) {
       this.languages = [{lang: 'ta' , languagename: 'Tamil' } , { lang: 'en' , languagename: 'English'  }] ;
 
@@ -63,8 +63,8 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('token', loginresult.data.login.message.token);
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
               sessionStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
-              this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
-              });
+              // this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
+              // });
               // if false, then need to update profile
               // Afser'schanges on Profile not Mandtory change no #4 Committed condition on and added
               // page route MyCourse
@@ -85,8 +85,8 @@ export class LoginComponent implements OnInit {
               sessionStorage.setItem('user_img', loginresult.data.login.message.profile_img);
               sessionStorage.setItem('role', 'learner');
               sessionStorage.setItem('token', loginresult.data.login.message.token);
-              this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
-              });
+              // this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
+              // });
               // localStorage.setItem('token', loginresult.data.login.message.token);
               const ps = btoa(this.loginForm.value.password);
               // if false, then need to update profile

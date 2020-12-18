@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
-import { SocketioService } from '@learner/services/socketio.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -30,7 +29,7 @@ export class HeaderComponent implements OnInit {
 
   @HostBinding('class') componentCssClass;
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
-              private http: HttpClient, public overlayContainer: OverlayContainer,  public socketService: SocketioService,
+              private http: HttpClient, public overlayContainer: OverlayContainer, 
               public router: Router, private gs: GlobalServiceService) {
     // this.getScreenSize();
   }
