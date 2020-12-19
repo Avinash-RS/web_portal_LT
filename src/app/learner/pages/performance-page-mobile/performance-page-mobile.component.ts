@@ -247,8 +247,8 @@ export class PerformancePageMobileComponent implements OnInit {
   performlearnerUploadVideo() {
     const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
     const performVideo = new FormData();
-    const startDate = this.datePipe.transform(this.performActivityData.activitystartdate, 'dd-MM-yyyy');
-    const endDate = this.datePipe.transform(this.performActivityData.activityenddate, 'dd-MM-yyyy');
+    const startDate = this.datePipe.transform(this.performActivityData.activitystartdate, 'dd-MM-yyyy HH:MM aa');
+    const endDate = this.datePipe.transform(this.performActivityData.activityenddate, 'dd-MM-yyyy HH:MM aa');
     if (currentDate >= startDate && currentDate <= endDate) {
       this.submitStatus = 'ontime';
     } else {
