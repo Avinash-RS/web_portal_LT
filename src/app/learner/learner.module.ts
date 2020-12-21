@@ -57,7 +57,7 @@ import { ViewAllnotificationsComponent } from './pages/view-allnotifications/vie
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatMenuModule } from '@angular/material/menu';
-import { PerformancePageMobileComponent } from './pages/performance-page-mobile/performance-page-mobile.component';
+// import { PerformancePageMobileComponent } from './pages/performance-page-mobile/performance-page-mobile.component';
 import { SelfLearnerAvtivityComponent } from './pages/self-learner-avtivity/self-learner-avtivity.component';
 import { ActivitiesComponent } from './pages/activities/activities.component';
 import { DiscussionForumComponent } from './pages/discussion-forum/discussion-forum.component';
@@ -203,7 +203,7 @@ const routes: Routes = [
     LandingpageComponent,
     // LearnerCalendarComponent,
     ViewAllnotificationsComponent,
-    PerformancePageMobileComponent,
+    // PerformancePageMobileComponent,
     SelfLearnerAvtivityComponent,
     // ActivitiesComponent,
     // DiscussionForumComponent,

@@ -43,6 +43,7 @@ import { DiscussionForumComponent } from './pages/discussion-forum/discussion-fo
 import { ActivitiesComponent } from './pages/activities/activities.component';
 import { AssignmentComponent } from './pages/assignment/assignment.component';
 import { ProjectMobileComponent } from './pages/project-mobile/project-mobile.component';
+import { PerformancePageMobileComponent } from './pages/performance-page-mobile/performance-page-mobile.component';
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -86,7 +87,8 @@ const routes: Routes = [
     DiscussionForumComponent,
     ActivitiesComponent,
     AssignmentComponent,
-    ProjectMobileComponent
+    ProjectMobileComponent,
+    PerformancePageMobileComponent
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
