@@ -71,10 +71,10 @@ import { KnowledgePreviewComponent } from './pages/knowledge-preview/knowledge-p
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { VideoPreviewModalComponent } from './pages/video-preview-modal/video-preview-modal.component';
-import { ProjectMobileComponent } from './pages/project-mobile/project-mobile.component';
+// import { ProjectMobileComponent } from './pages/project-mobile/project-mobile.component';
 import { PerformVideoRecordComponent } from './pages/perform-video-record/perform-video-record.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { AssignmentComponent } from './pages/assignment/assignment.component';
+// import { AssignmentComponent } from './pages/assignment/assignment.component';
 
 import { DragScrollModule } from 'ngx-drag-scroll';
 // import { VideoRecorderComponent } from './pages/video-recorder/video-recorder.component';
@@ -214,9 +214,9 @@ const routes: Routes = [
     // KnowledgeLandingPageComponent,
     // KnowledgeResourceHomeComponent,
     VideoPreviewModalComponent,
-    ProjectMobileComponent,
+    // ProjectMobileComponent,
     PerformVideoRecordComponent,
-    AssignmentComponent,
+    // AssignmentComponent,
     // VideoRecorderComponent
   ],
 

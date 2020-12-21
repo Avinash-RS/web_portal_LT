@@ -41,6 +41,9 @@ import { AgGridModule } from 'ag-grid-angular';
 import { InstructorLedComponent } from './pages/instructor-led/instructor-led.component';
 import { DiscussionForumComponent } from './pages/discussion-forum/discussion-forum.component';
 import { ActivitiesComponent } from './pages/activities/activities.component';
+import { AssignmentComponent } from './pages/assignment/assignment.component';
+import { ProjectMobileComponent } from './pages/project-mobile/project-mobile.component';
+
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -81,7 +84,10 @@ const routes: Routes = [
     CoursedetailsComponent,
     InstructorLedComponent,
     DiscussionForumComponent,
-    ActivitiesComponent
+    ActivitiesComponent,
+    AssignmentComponent,
+    ProjectMobileComponent
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [
