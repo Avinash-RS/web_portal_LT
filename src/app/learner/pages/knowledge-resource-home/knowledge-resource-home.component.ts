@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { knowledgeService } from '@learner/services/knowledge-resource/knowledge-resource.service';
@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class KnowledgeResourceHomeComponent implements OnInit {
   details = [];
-  isLoadBalanced = false;
+  isLoadBalanced;
   isReloaded = false;
   fileValidations = {
     'Knowledge Check': /(\.csv)$/i,
@@ -22,6 +22,7 @@ export class KnowledgeResourceHomeComponent implements OnInit {
   dummyText = 1;
   sampleFileLink = 'https://edutechstorage.blob.core.windows.net/container1/resource/739113684616842-Sample-file.csv';
   @ViewChild('fileInput3') fileInput3;
+  @ViewChild('ResourceData') searchedData: ElementRef;
   tempDetailsList = [];
 
   constructor(public apiService: knowledgeService,
@@ -63,10 +64,17 @@ export class KnowledgeResourceHomeComponent implements OnInit {
         this.tempDetailsList.push(b);
       });
       this.details = this.tempDetailsList;
-      this.isLoadBalanced = true;
     });
   }
-
+  checkKnowledgeRec(){
+    setTimeout(() => {
+      if (this.searchedData) {
+        this.isLoadBalanced = false;
+      } else {
+        this.isLoadBalanced = true;
+      }
+    });
+  }
   onFileDropped(fileInput: any) {
     this.CommonService.loader$.next(true);
     const formData = new FormData();
