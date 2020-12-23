@@ -32,7 +32,7 @@
       <vg-fullscreen></vg-fullscreen>
   </vg-controls>
 
-  <video #media [vgMedia]="media" id="singleVideo" preload="auto" autoplay [controls]="controls">
+  <video #media [vgMedia]="media" style="height: 100vh !important" id="singleVideo" preload="auto" autoplay [controls]="controls">
       <source *ngFor="let video of sources" [src]="video.src" [type]="video.type">
           <track kind="subtitles" label="English" src="assets/subs/pale-blue-dot.vtt" srclang="en" >
           <track kind="subtitles" label="Español" src="assets/subs/pale-blue-dot-es.vtt" srclang="es">
