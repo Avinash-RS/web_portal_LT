@@ -495,10 +495,14 @@ li {
 // }
 .playerWrapper {
     position: relative;
-    padding-bottom: 55%;
+    // padding-bottom: 55%;
     padding-top: 35px;
-    height: 0;
+    height: 556px;
     overflow: hidden;
+    @media only screen and (max-width: 1199px) {
+        padding-bottom: 55%;
+        height: 0;
+    }
     @media only screen and (max-width: 576px) {
         padding-bottom: 60vh;
     }
