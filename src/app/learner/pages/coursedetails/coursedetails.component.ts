@@ -291,9 +291,12 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   ngOnDestroy(){
-    this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
+    const loginDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
+    if (loginDetails) {
+      this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
     });
     this.socketService.closeSocket();
+    }
   }
   renameKeys(obj, newKeys) {
     const keyValues = Object.keys(obj).map(key => {
