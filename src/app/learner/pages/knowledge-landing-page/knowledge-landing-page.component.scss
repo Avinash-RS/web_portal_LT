@@ -108,7 +108,7 @@
             &:hover {
                 box-shadow: 0px 3px 15px 1px rgba(136,136,136,0.5);
                 .card-img {
-                    img {
+                    .img-thumb, .thumbImg {
                         // transform: scale(1.2);
                         @media only screen and (min-width: 1200px) {
                             transform: scale(1.2);
@@ -119,12 +119,24 @@
             .card-img {
                 height: 150px;
                 overflow: hidden;
+                position: relative;
+                display: flex;
+                justify-content: center;
                 // height: 65%;
                 img {
                     transition: transform .5s ease;
-                    // width: 60px;
+                }
+                .img-thumb {
                     height: 100%;
+                    // width: 60px;
                     // margin-left: 35%;
+                }
+                .thumbImg {
+                    margin-top: -30px;
+                    // position: absolute;
+                    // left: 50%;
+                    // top: 50%;
+                    // transform: translate(-50%, -90%);
                 }
             }
             .card-name {
@@ -197,7 +209,7 @@ drag-scroll {
 }
 
 .topic-container :hover {
-    box-shadow: 0px 3px 15px 1px rgba(136,136,136,0.5);
+    // box-shadow: 0px 3px 15px 1px rgba(136,136,136,0.5);
  
         .chip-hover {
             //  transition: transform .5s ease;
