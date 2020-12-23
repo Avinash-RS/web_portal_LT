@@ -74,16 +74,16 @@ export class CoursedetailsComponent implements OnInit {
   moduleLenth: number;
   topicLenght = 0;
   // urlpath = [];
-  currentPage: number;
-  topiccurrentPage: number;
+  currentPage: number = 0;
+  topiccurrentPage: number = 0;
   getTopicLengthofModule: any;
   gettopicLink: any;
   topiccurrentlink = 0;
   moduleInfo: any;
   totTopicLenght = 0;
   playerTopicLen: any;
-  isNextEnable = false;
-  isprevEnable = false;
+  isNextEnable = true;
+  isprevEnable = true;
   selectedTabIndex: any = 0;
   detailData: any;
   batchDetails: any;
@@ -110,8 +110,8 @@ export class CoursedetailsComponent implements OnInit {
   allFeedbackQue: any;
   restdata: any;
 
-  nextPrevHolder: number;
-  moduleHolder: number;
+  nextPrevHolder: number = 0;
+  moduleHolder: number = 0;
   topicPageStatus: any;
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
@@ -272,7 +272,7 @@ export class CoursedetailsComponent implements OnInit {
             this.isNextEnable = false;
           }
           // console.log(jsonData[0].childData, 'this.scromModuleData');
-          console.log(result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status , 'module=', result.data.resumeContent);
+          console.log('Topic=', result.data.resumeSubContent, 'module=', result.data.resumeContent);
           this.scromModuleData.forEach(childData => {
             if (childData && childData.children) {
               childData.children.forEach(subChild => {
