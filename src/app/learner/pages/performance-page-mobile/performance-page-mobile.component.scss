@@ -425,16 +425,21 @@
 :host ::ng-deep .widthClass .owl-carousel.owl-drag .owl-item {
   width: 15.5rem !important;
 }
-
-.carouselCol {
-  max-width: 100% !important;
-  height: 15rem;
+::ng-deep.materialsScrollActivity .drag-scroll-content {
+  @media only screen and (max-width: 1199px) {
+    overflow: auto hidden !important;
+    height: calc(100% + 8px) !important;
+  }
 }
+// .carouselCol {
+//   max-width: 100% !important;
+//   height: 15rem;
+// }
 .slideLoop {
   display: inline-block;
   text-align: left;
 }
-.carouselCol1 {
+.carouselCol1, .carouselCol {
   // max-width: 100% !important;
   padding: 0 !important;
   margin-left: 0;
