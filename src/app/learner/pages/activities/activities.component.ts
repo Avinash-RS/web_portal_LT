@@ -707,7 +707,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   playVideo(templateRef: TemplateRef<any>, videoDialog, path, docType) {
-    if (docType === 'image/jpeg' || docType === 'application/pdf') {
+    if (docType === 'image/jpeg' || docType === 'application/pdf' || docType === 'image/png') {
       this.dialog.open(templateRef, {
         width: '100%',
         height: '100%',
@@ -721,6 +721,9 @@ export class ActivitiesComponent implements OnInit {
       }
       this.videoSource = path.path;
       this.videoPreview(videoDialog, path.path);
+    }
+    else{
+      this.toastr.warning("Invalid format")
     }
   }
 
