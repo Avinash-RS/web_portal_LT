@@ -455,6 +455,7 @@ export class CoursedetailsComponent implements OnInit {
       }
       // topic
       if (this.topiccurrentPage <= this.getTopicLengthofModule) {
+        this.moduleInfo = this.scromModuleData[this.currentPage];
         this.gettopicLink = this.scromModuleData[this.currentPage].children[this.topiccurrentPage];
         this.moduleSatusCheck = this.moduleInfo.status ? this.moduleInfo.status : 'process';
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
@@ -465,15 +466,18 @@ export class CoursedetailsComponent implements OnInit {
             + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title+ '&token=' + this.user_token);
       }
     }
-    console.log('this.scromModuleData', this.scromModuleData, 'this.currentPage', this.currentPage);
-    this.gettopicLink = this.scromModuleData[this.currentPage - 1]?.children[this.topiccurrentPage];
-    const childData = this.scromModuleData[this.moduleLenth - 1]?.children;
-    const childlength = this.scromModuleData[this.moduleLenth - 1]?.children.length;
-    console.log(childData[childlength - 1].id);
-    console.log('this.gettopicLink', this.gettopicLink);
+    // console.log('this.scromModuleData', this.scromModuleData, 'this.currentPage', this.currentPage);
+    // this.gettopicLink = this.scromModuleData[this.currentPage - 1]?.children[this.topiccurrentPage];
+    // const childData = this.scromModuleData[this.moduleLenth - 1]?.children;
+    // const childlength = this.scromModuleData[this.moduleLenth - 1]?.children.length;
+    // console.log(childData[childlength - 1].id);
+    // console.log('this.gettopicLink', this.gettopicLink);
     // if (this.gettopicLink.id === childData[childlength - 1].id) {
     //   this.ratingPopup();
     // }
+
+    console.log('&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title)
+
   }
 
   topicPrve() {
@@ -492,9 +496,9 @@ export class CoursedetailsComponent implements OnInit {
         this.topiccurrentPage = this.topiccurrentPage - 1;
         this.nextPrevHolder = this.topiccurrentPage;
       }
-      if (this.topiccurrentlink >= 0) {
-        this.gettopicLink = this.scromModuleData[this.currentPage ].children[this.topiccurrentlink];
-       // console.log( this.currentPage,'mmmmmmmmm',this.topiccurrentlink)
+      if (this.topiccurrentPage >= 0) {
+        this.moduleInfo = this.scromModuleData[this.currentPage];
+        this.gettopicLink = this.scromModuleData[this.currentPage ].children[this.topiccurrentPage];
         this.moduleSatusCheck = this.moduleInfo.status ? this.moduleInfo.status : 'process';
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
           (environment.scormUrl + '/scormPlayer.html?contentID=' +
@@ -502,20 +506,10 @@ export class CoursedetailsComponent implements OnInit {
             this.getuserid._id + '&path=' + this.gettopicLink.link +
             '&module_status=' + this.moduleSatusCheck
             + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&token=' + this.user_token);
+
+            console.log('&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title)
       }
-      if (this.topiccurrentlink === 0) {
-        this.currentPage--;
-      //  console.log( this.currentPage,';;;;;;;;;;;;;;;;;;;;;',this.topiccurrentlink)
-        if (this.currentPage !== 0) {
-          this.topiccurrentlink = this.scromModuleData[this.currentPage]?.topic_len;
-          this.topiccurrentlink--;
-        } else {
-          this.topiccurrentlink = this.scromModuleData[this.currentPage]?.topic_len;
-          this.topiccurrentlink--;
-        }
-      } else {
-        this.topiccurrentlink--;
-      }
+      
     }
   }
 
