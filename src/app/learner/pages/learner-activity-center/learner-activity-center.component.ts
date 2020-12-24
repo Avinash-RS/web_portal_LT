@@ -52,6 +52,7 @@ export class LearnerActivityCenterComponent implements OnInit {
         // this.searchColumn = 'undefined';
         const statusB = [{
           ['$or']: [{ ['files.submit_status']: { $regex: 'Graded', $options: 'i' } },
+          {'files.submit_status':{$regex:'Overdue',$options:'i'}},
           { 'files.submit_status': { $regex: 'Submitted', $options: 'i' } }]
         }];
         this.statusBased = JSON.stringify(statusB);
@@ -326,7 +327,7 @@ export class LearnerActivityCenterComponent implements OnInit {
       getRows: (params: IGetRowsParams) => {
         const userId = this.userDetails.user_id;
         const PageNumber = params.startRow / 10 || 0;
-        if (this.navDetails?.tableType === 'completed') {
+        if (this.navDetails?.tableType === 'completed') {//mangi
           const statusB = [{
             ['$or']: [{ ['files.submit_status']: { $regex: 'Graded', $options: 'i' } },
             { 'files.submit_status': { $regex: 'Submitted', $options: 'i' } }]
