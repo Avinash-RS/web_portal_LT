@@ -85,32 +85,36 @@ export class ProjectMobileComponent implements OnInit {
   ngOnInit() {
     this.projectDetails = this.projectDetailPageData;
     this.getprojectActivityData();
-    this.projectDetails.forEach(element => {
-      this.groupDetails = element.projectActivity.groupDetails;
-      element.showLearnerList = false;
-      // element.isCollapsed = false;
-      // Batch date
-      const batchEndDate = new Date(element.projectActivity.batchenddate);
-      element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:MM');
-      if (moment().format('DD-MM-YYYY HH:MM') <= element.batchEndDate) {
-        element.submitType = true;
-      } else {
-        element.submitType = false;
-      }
-      // Activity Dates
-      const startDate = new Date(element.projectActivity.activitystartdate);
-      element.activityStartDate = moment(startDate).format('ll');
-      element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
-      const endDate = new Date(element.projectActivity.activityenddate);
-      element.activityEndDate = moment(endDate).format('ll');
-      const submitDate = new Date(element.projectActivity.submitted_on);
-      element.submittedOn = moment(submitDate).format('ll');
-      if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
-        element.enableSubmit = false;
-      } else {
-        element.enableSubmit = true;
-      }
-    });
+    if(this.projectDetails){
+      this.projectDetails.forEach(element => {
+        this.groupDetails = element.projectActivity.groupDetails;
+        element.showLearnerList = false;
+        // element.isCollapsed = false;
+        // Batch date
+        const batchEndDate = new Date(element.projectActivity.batchenddate);
+        element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:MM');
+        if (moment().format('DD-MM-YYYY HH:MM') <= element.batchEndDate) {
+          element.submitType = true;
+        } else {
+          element.submitType = false;
+        }
+        // Activity Dates
+        const startDate = new Date(element.projectActivity.activitystartdate);
+        element.activityStartDate = moment(startDate).format('ll');
+        element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
+        const endDate = new Date(element.projectActivity.activityenddate);
+        element.activityEndDate = moment(endDate).format('ll');
+        const submitDate = new Date(element.projectActivity.submitted_on);
+        element.submittedOn = moment(submitDate).format('ll');
+        if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
+          element.enableSubmit = false;
+        } else {
+          element.enableSubmit = true;
+        }
+      });
+    } else{
+      this.projectDetails = []
+    }
   }
   emiteData() {
     if (this.selectedName === 'project') {
