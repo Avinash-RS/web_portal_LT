@@ -281,7 +281,6 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
   uploadDocument(event) {
-    // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < event.target.files.length; i++) {
       this.selectPerformfile.push(event.target.files[i]);
     }
@@ -291,7 +290,7 @@ export class PerformancePageMobileComponent implements OnInit {
   uploadDocuments(itration, perform) {
     this.performsData = perform;
     this.itrationData = itration;
-    this.videoInput.nativeElement.click();
+    //this.videoInput.nativeElement.click();
   }
 
 
@@ -342,7 +341,7 @@ previewDoc(templateRef: TemplateRef<any>, path) {
 }
 
 videoPreview(templateRef: TemplateRef<any>, path) {
-  this.videoSource = path.videourl;
+  this.videoSource = path.path;
   this.dialog.open(templateRef, {
     width: '100%',
     height: '100%',
