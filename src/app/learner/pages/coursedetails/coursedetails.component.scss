@@ -683,6 +683,20 @@ iframe.fullScreen {
     display: flex;
     background-color: $color-white;
 }
+.extensionFiles {
+    width: 5%;
+}
+.fileTypeName {
+    width: 80%;
+}
+.fileSize {
+    width: 10%;
+    text-align: right;
+}
+.saveFile {
+    width: 5%;
+    text-align: right;
+}
 
 :host ::ng-deep .mat-tab-label .mat-tab-label-content {
     font-size: 14px !important;
