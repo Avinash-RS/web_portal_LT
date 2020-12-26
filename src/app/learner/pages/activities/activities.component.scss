@@ -12,6 +12,9 @@
 }
 ::ng-deep.materialsScrollActivity .drag-scroll-wrapper.drag-scroll-container {
   height: auto !important;
+  @media only screen and (max-width: 767px) {
+    height: 97px !important;
+  }
 }
 ::ng-deep.materialsScrollActivity .drag-scroll-content {
   @media only screen and (max-width: 1199px) {
@@ -525,6 +528,7 @@ margin-bottom: 9px;
 .trendingCategoriesScrollActivity .slideLoop {
   display: inline-block;
   text-align: left;
+  vertical-align: top;
 }
 ::ng-deep.groupBtn.mat-mini-fab .mat-button-wrapper, 
 ::ng-deep.arrBtn.mat-mini-fab .mat-button-wrapper {
@@ -921,14 +925,16 @@ margin-top: 8px;
 ::ng-deep.trendingCategoriesScrollActivity .drag-scroll-wrapper.drag-scroll-container {
   height: auto !important;
   overflow: visible !important;
+  @media only screen and (max-width: 767px) {
+    height: 97px !important;
+  }
 }
 ::ng-deep.trendingCategoriesScrollActivity .drag-scroll-content {
   @media only screen and (max-width: 1199px) {
     overflow: auto hidden !important;
-    // height: 137px !important;
   }
   @media only screen and (max-width: 767px) {
-    // height: 96px !important;
+    //height: 96px !important;
   }
 }
 ::ng-deep.scrollingData .drag-scroll-content {
@@ -937,6 +943,7 @@ margin-top: 8px;
 .slideLoop {
   display: inline-block;
   text-align: left;
+  vertical-align: top;
 }
 .materialCard {
   width: 8rem;
