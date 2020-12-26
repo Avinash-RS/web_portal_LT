@@ -6,6 +6,7 @@
   .projHead {
     color: $color-blank;
     margin-left: 5px;
+    padding-right: 15px;
     // position: absolute;
   }
   .materialCls {
@@ -570,7 +571,12 @@
     height: 35px;
     width: 35px;
   }
-
+.material-name{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+  
   .noSessionCard {
     margin: auto;
     margin-top: 15%;

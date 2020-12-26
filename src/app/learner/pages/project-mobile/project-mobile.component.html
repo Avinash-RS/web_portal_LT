@@ -282,8 +282,8 @@
                     <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                     Add your files
                     </button> -->
-                    <input class="input-hide" type="file" accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" #uploadFile [(ngModel)]="fileName" (change)="uploadDoc($event, project, 'upload')" />
-                    <button mat-stroked-button class="uploadBtn w-100" *ngIf="project.projectActivity.submitAction !== 'submit'" [disabled]="project.enableSubmit == false" >
+                    <input class="input-hide" type="file" *ngIf="project.projectActivity.submitAction !== 'submit'" accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" #uploadFile [(ngModel)]="fileName" (change)="uploadDoc($event, project, 'upload')" />
+                    <button mat-stroked-button class="uploadBtn w-100" *ngIf="project.projectActivity.submitAction !== 'submit'" [disabled]="project.enableSubmit == false" (click)="uploadDocs($event)">
                       <mat-icon class="add-icon">add</mat-icon> Add your files
                     </button>
                     <button mat-stroked-button class="submit-btn" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')" *ngIf="project.projectActivity.submit_status == 'notsubmitted' && project.projectActivity.videodetails.length > 0"> Submit </button>
@@ -323,9 +323,8 @@
                         </div>
                       </div>
                       <div class="row ml-0 mr-0 h-40" class="fileSelDet">
-                        <div class="col-12 pr-0 fileNameCol">
-                          <span class="carouselText" *ngIf="material.filename?.length > 30">{{(material.filename| slice:0:20)+'...'}}</span>
-                          <span class="carouselText" *ngIf="material.filename?.length < 30">{{material.filename}}</span>
+                        <div class="col-12 material-name fileNameCol">
+                          <span class="carouselText">{{material.name}}</span>
                         </div>
                       </div>
                     </mat-card>
