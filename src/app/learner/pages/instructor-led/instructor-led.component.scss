@@ -389,7 +389,11 @@
     opacity: 1;
     color: white;
 }
-
+.noRecords {
+    display: flex;
+    justify-content: center;
+    padding: 0 15px;
+}
 .noData {
     text-align: left;
     font: normal normal normal 23px/29px Roboto Condensed;
@@ -397,6 +401,7 @@
     color: #333333;
     opacity: 1;
     box-shadow: none;
+    font-size: 20px;
 }
 
 .noSessionCard {
