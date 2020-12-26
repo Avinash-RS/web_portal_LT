@@ -323,9 +323,8 @@
                         </div>
                       </div>
                       <div class="row ml-0 mr-0 h-40" class="fileSelDet">
-                        <div class="col-12 pr-0 fileNameCol">
-                          <span class="carouselText" *ngIf="material.filename?.length > 30">{{(material.filename| slice:0:20)+'...'}}</span>
-                          <span class="carouselText" *ngIf="material.filename?.length < 30">{{material.filename}}</span>
+                        <div class="col-12 material-name fileNameCol">
+                          <span class="carouselText">{{material.name}}</span>
                         </div>
                       </div>
                     </mat-card>

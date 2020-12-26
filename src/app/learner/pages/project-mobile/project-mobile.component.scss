@@ -562,7 +562,12 @@
     height: 35px;
     width: 35px;
   }
-
+.material-name{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+  
   .noSessionCard {
     margin: auto;
     margin-top: 15%;
