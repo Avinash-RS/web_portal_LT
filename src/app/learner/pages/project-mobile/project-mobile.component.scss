@@ -103,6 +103,7 @@
     width: 100%;
     opacity: 0;
     z-index: 9;
+    // display: none;
   }
   .materialsScrollActivity .slideLoop {
     display: inline-block;
@@ -366,6 +367,7 @@
     right: 42px;
     height: 35px;
     width: 35px;
+    z-index: 999;
 }
 .close-button {
   background: #C02222 !important;
@@ -375,6 +377,7 @@
   right: -39px;
   height: 35px;
   width: 35px;
+  z-index: 999;
 }
 .close-button1 {
   background: #C02222 !important;
@@ -383,11 +386,16 @@
   position: relative;
   height: 35px;
   width: 35px;
+  z-index: 999;
+}
+::ng-deep.pdfViewerWrapper .ng2-pdf-viewer-container {
+  overflow-x: initial !important;
 }
 .closeBtn {
   background: #C02222 !important;
   height: 35px;
   width: 35px;
+  z-index: 999;
   // position: relative;
   // left: 37px;
   // bottom: 5px;

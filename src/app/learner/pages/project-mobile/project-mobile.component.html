@@ -283,7 +283,7 @@
                     Add your files
                     </button> -->
                     <input class="input-hide" type="file" accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" #uploadFile [(ngModel)]="fileName" (change)="uploadDoc($event, project, 'upload')" />
-                    <button mat-stroked-button class="uploadBtn w-100" *ngIf="project.projectActivity.submitAction !== 'submit'" [disabled]="project.enableSubmit == false" (click)="uploadDocs($event)">
+                    <button mat-stroked-button class="uploadBtn w-100" *ngIf="project.projectActivity.submitAction !== 'submit'" [disabled]="project.enableSubmit == false" >
                       <mat-icon class="add-icon">add</mat-icon> Add your files
                     </button>
                     <button mat-stroked-button class="submit-btn" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')" *ngIf="project.projectActivity.submit_status == 'notsubmitted' && project.projectActivity.videodetails.length > 0"> Submit </button>
@@ -423,7 +423,7 @@
         </button>
       </div>
     </div>
-    <div *ngIf="previewDoc">
+    <div class="pdfViewerWrapper" *ngIf="previewDoc">
       <app-pdfreader [url]="previewDoc"></app-pdfreader>
     </div>
   </ng-template>

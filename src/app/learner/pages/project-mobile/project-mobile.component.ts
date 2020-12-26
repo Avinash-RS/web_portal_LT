@@ -129,6 +129,7 @@ export class ProjectMobileComponent implements OnInit {
 
   uploadDoc(event, project, submitAction) {
     // tslint:disable-next-line:prefer-for-of
+    // debugger;
     for (let i = 0; i < event.target.files.length; i++) {
       this.selectfile.push(event.target.files[i]);
     }
