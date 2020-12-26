@@ -282,7 +282,7 @@
                     <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                     Add your files
                     </button> -->
-                    <input class="input-hide" type="file" accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" #uploadFile [(ngModel)]="fileName" (change)="uploadDoc($event, project, 'upload')" />
+                    <input class="input-hide" type="file" *ngIf="project.projectActivity.submitAction !== 'submit'" accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" #uploadFile [(ngModel)]="fileName" (change)="uploadDoc($event, project, 'upload')" />
                     <button mat-stroked-button class="uploadBtn w-100" *ngIf="project.projectActivity.submitAction !== 'submit'" [disabled]="project.enableSubmit == false" (click)="uploadDocs($event)">
                       <mat-icon class="add-icon">add</mat-icon> Add your files
                     </button>
