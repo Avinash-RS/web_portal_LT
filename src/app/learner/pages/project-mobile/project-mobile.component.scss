@@ -6,6 +6,7 @@
   .projHead {
     color: $color-blank;
     margin-left: 5px;
+    padding-right: 15px;
     // position: absolute;
   }
   .materialCls {
@@ -103,10 +104,12 @@
     width: 100%;
     opacity: 0;
     z-index: 9;
+    // display: none;
   }
   .materialsScrollActivity .slideLoop {
     display: inline-block;
     text-align: left;
+    vertical-align: top;
   }
   .uploadBtn {
     font-weight: bolder;
@@ -213,6 +216,7 @@
   .trendingCategoriesScrollActivity .slideLoop {
     display: inline-block;
     text-align: left;
+    vertical-align: top;
   }
   .m-r-40 {
     margin-right: 40px;
@@ -366,6 +370,7 @@
     right: 42px;
     height: 35px;
     width: 35px;
+    z-index: 999;
 }
 .close-button {
   background: #C02222 !important;
@@ -375,6 +380,7 @@
   right: -39px;
   height: 35px;
   width: 35px;
+  z-index: 999;
 }
 .close-button1 {
   background: #C02222 !important;
@@ -383,11 +389,16 @@
   position: relative;
   height: 35px;
   width: 35px;
+  z-index: 999;
+}
+::ng-deep.pdfViewerWrapper .ng2-pdf-viewer-container {
+  overflow-x: initial !important;
 }
 .closeBtn {
   background: #C02222 !important;
   height: 35px;
   width: 35px;
+  z-index: 999;
   // position: relative;
   // left: 37px;
   // bottom: 5px;
@@ -562,7 +573,12 @@
     height: 35px;
     width: 35px;
   }
-
+.material-name{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+  
   .noSessionCard {
     margin: auto;
     margin-top: 15%;

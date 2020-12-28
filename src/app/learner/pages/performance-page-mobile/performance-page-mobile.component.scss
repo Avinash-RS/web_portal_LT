@@ -217,6 +217,10 @@
     position: absolute;
     bottom: 0;
     left: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 0 10px;
+    color: #ffffff;
     // height: 40%;
     // border-radius: 0px 0px 4px 4px;
   }
@@ -438,6 +442,7 @@
 .slideLoop {
   display: inline-block;
   text-align: left;
+  vertical-align: top;
 }
 .carouselCol1, .carouselCol {
   // max-width: 100% !important;

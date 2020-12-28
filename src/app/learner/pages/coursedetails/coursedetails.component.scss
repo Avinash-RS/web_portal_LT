@@ -1688,3 +1688,11 @@ iframe.fullScreen {
         transform: translateZ(0);
     }
 }
+
+::ng-deep .course-player-menu .mat-step-icon .mat-icon{
+    display: none !important;
+}
+
+::ng-deep .course-player-menu .mat-step-icon-content span{
+    display: none !important;
+}

@@ -172,9 +172,11 @@ drag-scroll {
     height: 50px;
     width: auto;
 }
-::ng-deep.drag-scroll-content {
+::ng-deep.header-carousel .drag-scroll-content {
     display: flex !important;
     align-items: center;
+    height: calc(100% + 8px) !important;
+    overflow: auto hidden !important;
 }
 ::ng-deep .knowledge-landing-container .owl-theme .owl-nav {
     text-align: inherit !important;
