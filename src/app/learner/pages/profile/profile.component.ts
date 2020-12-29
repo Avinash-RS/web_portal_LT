@@ -518,6 +518,7 @@ export class ProfileComponent implements OnInit {
           Swal.fire(data.data.update_email_onprofile.message);
           this.getprofileDetails(this.currentUser.user_id);
           this.mailForm.reset();
+          this.dialog.closeAll();
         } else {
           Swal.fire(data.data.update_email_onprofile.message);
         }
@@ -644,16 +645,16 @@ export class ProfileComponent implements OnInit {
   onSelectFile(event) {
     this.selectfile = event.target.files[0] as File;
     if (this.selectfile && this.selectfile.type !== 'image/png' && this.selectfile.type !== 'image/jpeg') {
-      this.alert.openAlert('mage should be less than 1 MB and should be only Jpeg or png format', null);
-    } else if (this.selectfile && this.selectfile.size > 100000) {
-      this.alert.openAlert('image should be less than 1 MB and should be only Jpeg or png format', null);
+      this.alert.openAlert('image should be less than 5 MB and should be only Jpeg or png format', null);
+    } else if (this.selectfile && this.selectfile.size > 5000000) {
+      this.alert.openAlert('image should be less than 5 MB and should be only Jpeg or png format', null);
     } else {
       if (this.selectfile) {
         const fb = new FormData();
         fb.append('image', this.selectfile, this.selectfile.name);
         this.service.imageupload(fb).subscribe(data => {
-          this.profileForm.controls.profile_img.setValue(data);
-          localStorage.setItem('user_img', 'https://edutechstorage.blob.core.windows.net/' + this.profileForm.value.profile_img.path);
+          this.profileForm.controls.profile_img.setValue(data['url']);
+          localStorage.setItem('user_img', data['url']);
           this.profileForm.controls.profile_img.setValue(localStorage.getItem('user_img'));
         });
       }

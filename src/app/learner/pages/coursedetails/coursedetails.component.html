@@ -5,7 +5,7 @@
         <!-- </span> -->
         <!-- <div style="height: 2px;" (mouseover)="sider=true"></div> -->
         <div class="container007 animated fakefadeInUp bodybg">
-            <div>
+            <div class="course-player-menu">
                 <mat-drawer-container [class.drawer-opened]="drawer.opened" class="example-container">
                     <mat-drawer #drawer class="drawer" mode="side" opened="{{drawersOpen}}">
         
@@ -364,7 +364,8 @@
                                 <div [ngClass]="drawer.opened==true?'example-sidenav-content-opn':'example-sidenav-content-cls'"
                                     class="">
                                     <div class="playerWrapper">
-                                        <iframe title="player" id="myPlayer" class="player" [src]="urlSafe" allowfullscreen style="width:100%; background-repeat:no-repeat;background-size: cover; background-image:url(../../../../assets/learner/bg_Loader.gif)"></iframe>
+                                        <!-- style="width:100%; background-repeat:no-repeat;background-size: cover; background-image:url(../../../../assets/learner/bg_Loader.gif)" -->
+                                        <iframe title="player" id="myPlayer" class="player" [src]="urlSafe" allowfullscreen ></iframe>
                                     </div>
                                 </div>
         
@@ -447,67 +448,34 @@
                                                         <div class="col-12">
                                                             <mat-list *ngFor="let mod of res?.moduledetails">
                                                                 <mat-list-item *ngIf="res.resValue">
-                                                                    <div mat-line class="modTopName"
-                                                                        *ngIf="mod.resourse?.files.length">
-                                                                        {{mod?.topicname}} :</div>
+                                                                    <div mat-line class="modTopName" *ngIf="mod.resourse?.files.length">
+                                                                        {{mod?.topicname}} :
+                                                                    </div>
                                                                     <div class="content">
-                                                                        <div class="row"
-                                                                            *ngFor="let file of mod.resourse?.files">
+                                                                        <div class="row" *ngFor="let file of mod.resourse?.files">
                                                                             <div class="col-12" style="margin-top:6px">
-                                                                                <div class="row">
-                                                                                    <img *ngIf="file.doc_type == 'application/pdf'"
-                                                                                        class="size" alt=""
-                                                                                        src="assets/learner/fileicon/PDF_Icon.svg">
-                                                                                    <img *ngIf="file.doc_type == 'link'"
-                                                                                        class="size" alt=""
-                                                                                        src="assets/learner/fileicon/Link_Icon.svg">
-                                                                                    <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
-                                                                                        class="size" alt=""
-                                                                                        src="assets/learner/fileicon/Excel_Icon.svg">
-                                                                                    <img *ngIf="file.doc_type == 'image/jpeg' || file.doc_type == 'image/png' "
-                                                                                        class="size" alt=""
-                                                                                        src="assets/learner/fileicon/Image_Icon.svg">
-                                                                                    <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
-                                                                                        class="size" alt=""
-                                                                                        src="assets/learner/fileicon/PPT_Icon.svg">
-                                                                                    <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
-                                                                                        class="size" alt=""
-                                                                                        src="assets/learner/fileicon/Word_Icon.svg">
-        
-                                                                                    <img *ngIf="file.doc_type == 'application/msword'"
-                                                                                        class="size" alt=""
-                                                                                        src="assets/learner/fileicon/Word_Icon.svg">
-        
-                                                                                    <img *ngIf="file.doc_type == 'application/vnd.ms-excel'"
-                                                                                        class="size" alt=""
-                                                                                        src="assets/learner/fileicon/Excel_Icon.svg">
-        
-                                                                                    <mat-icon class="docType"
-                                                                                        *ngIf="file.doc_type == 'text/plain' ">
-                                                                                        description
-                                                                                    </mat-icon>
-                                                                                    <div class="col-7">
-                                                                                        {{file.type_name}}
+                                                                                <div class="row d-flex justify-content-between">
+                                                                                    <div class="extensionFiles">
+                                                                                        <img *ngIf="file.doc_type == 'application/pdf'" class="size" alt="" src="assets/learner/fileicon/PDF_Icon.svg">
+                                                                                        <img *ngIf="file.doc_type == 'link'" class="size" alt="" src="assets/learner/fileicon/Link_Icon.svg">
+                                                                                        <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'" class="size" alt="" src="assets/learner/fileicon/Excel_Icon.svg">
+                                                                                        <img *ngIf="file.doc_type == 'image/jpeg' || file.doc_type == 'image/png'" class="size" alt="" src="assets/learner/fileicon/Image_Icon.svg">
+                                                                                        <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'" class="size" alt="" src="assets/learner/fileicon/PPT_Icon.svg">
+                                                                                        <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'" class="size" alt="" src="assets/learner/fileicon/Word_Icon.svg">
+                                                                                        <img *ngIf="file.doc_type == 'application/msword'" class="size" alt="" src="assets/learner/fileicon/Word_Icon.svg">
+                                                                                        <img *ngIf="file.doc_type == 'application/vnd.ms-excel'" class="size" alt="" src="assets/learner/fileicon/Excel_Icon.svg">
+                                                                                        <img *ngIf="file.doc_type == 'video/mp4'" class="size" alt="" src="assets/learner/fileicon/Video_Icon.svg">
                                                                                     </div>
-                                                                                    <div class="col-2 f_size_12"
-                                                                                        *ngIf="file?.doc_type =='link'">
-                                                                                        <span class="ml-2">
-                                                                                           NA
-                                                                                        </span>
-        
-                                                                                    </div>
-                    
-                                                                                    <div class="col-2 f_size_12"
-                                                                                    *ngIf="file?.size">
-                                                                                    {{file.size}}
-                                                                                </div>
-                                                                                    <div class="col-1">
-                                                                                        <a href="{{file?.path}}"
-                                                                                            (click)="add_topic_reference(res)"
-                                                                                            download>
-                                                                                            <mat-icon
-                                                                                                style="color: #333;font-size: 20px;">
-                                                                                                save_alt </mat-icon>
+                                                                                    
+                                                                                    <mat-icon class="docType" *ngIf="file.doc_type == 'text/plain' "> description </mat-icon>
+                                                                                    <div class="fileTypeName"> {{file.type_name}} </div>
+                                                                                    <div class="f_size_12" *ngIf="file?.doc_type =='link'">
+                                                                                        <span class="ml-2"> NA </span>
+                                                                                    </div> 
+                                                                                    <div class="f_size_12 fileSize" *ngIf="file?.size"> {{file.size}} </div>
+                                                                                    <div class="saveFile">
+                                                                                        <a href="{{file?.path}}" (click)="add_topic_reference(res)" download>
+                                                                                            <mat-icon style="color: #333;font-size: 20px;"> save_alt </mat-icon>
                                                                                         </a>
                                                                                     </div>
                                                                                 </div>

@@ -12,8 +12,16 @@
 }
 ::ng-deep.materialsScrollActivity .drag-scroll-wrapper.drag-scroll-container {
   height: auto !important;
+  @media only screen and (max-width: 767px) {
+    height: 97px !important;
+  }
 }
-.carouselCol1 {
+::ng-deep.materialsScrollActivity .drag-scroll-content {
+  @media only screen and (max-width: 1199px) {
+    overflow: auto hidden !important;
+  }
+}
+.carouselCol1, .carouselCol {
   padding: 0 !important;
   margin-left: 0;
   // height: initial;
@@ -23,7 +31,16 @@
   margin-right: 10px;
   vertical-align: top;
 }
-::ng-deep.mat-expansion-panel {
+.yourSubmissions .f_size_16 {
+  margin: 15px 0 8px 0;
+}
+// .carouselCol {
+//   max-width: 73% !important;
+//   height: 15rem;
+//   margin-left: 2rem;
+// }
+::ng-deep.iterationAccordion .mat-expansion-panel, 
+::ng-deep.example-headers-align .mat-expansion-panel {
   margin-top: 20px !important;
   border-radius: 0 !important;
   border: 1px solid #B4B4B4;
@@ -190,6 +207,16 @@
   cursor: not-allowed;
 }
 
+  .box-0-00{
+    margin-top: 10px;
+    width: 100%;
+    padding: 20px;
+    padding-bottom: 3%;
+    overflow: hidden;
+    height: auto;
+    background-color: $color-white;
+    border : 1px solid $color-border;
+  }
   .t-l{
     margin-left: 29px;
     margin-top: 5px;
@@ -501,6 +528,7 @@ margin-bottom: 9px;
 .trendingCategoriesScrollActivity .slideLoop {
   display: inline-block;
   text-align: left;
+  vertical-align: top;
 }
 ::ng-deep.groupBtn.mat-mini-fab .mat-button-wrapper, 
 ::ng-deep.arrBtn.mat-mini-fab .mat-button-wrapper {
@@ -825,12 +853,6 @@ margin-top: 8px;
   margin-bottom: 10px;
 }
 
-.carouselCol {
-  max-width: 73% !important;
-  height: 15rem;
-  margin-left: 2rem;
-}
-
 .carouselCol1 {
   // max-width: 100% !important;
   // height: 15rem;
@@ -903,6 +925,17 @@ margin-top: 8px;
 ::ng-deep.trendingCategoriesScrollActivity .drag-scroll-wrapper.drag-scroll-container {
   height: auto !important;
   overflow: visible !important;
+  @media only screen and (max-width: 767px) {
+    height: 97px !important;
+  }
+}
+::ng-deep.trendingCategoriesScrollActivity .drag-scroll-content {
+  @media only screen and (max-width: 1199px) {
+    overflow: auto hidden !important;
+  }
+  @media only screen and (max-width: 767px) {
+    //height: 96px !important;
+  }
 }
 ::ng-deep.scrollingData .drag-scroll-content {
   text-align: left;
@@ -910,6 +943,7 @@ margin-top: 8px;
 .slideLoop {
   display: inline-block;
   text-align: left;
+  vertical-align: top;
 }
 .materialCard {
   width: 8rem;

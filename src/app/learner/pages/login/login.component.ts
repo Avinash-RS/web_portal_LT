@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as myGlobals from '@core/globals';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { SocketioService } from '@learner/services/socketio.service';
+//import { SocketioService } from '@learner/services/socketio.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 @Component({
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   languages: any;
 
   constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder,
-              public socketService: SocketioService,
+             // public socketService: SocketioService,
               private service: LearnerServicesService, private toastr: ToastrService) {
       this.languages = [{lang: 'ta' , languagename: 'Tamil' } , { lang: 'en' , languagename: 'English'  }] ;
 
@@ -52,55 +52,21 @@ export class LoginComponent implements OnInit {
       .subscribe((loginresult: any) => {
         if (loginresult.data.login) {
           if (loginresult.data.login.success) {
-            // this.socketService.setupSocketConnection();
+          
             localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
-            // IF ADDING SOME KEYS IN LOCAL, ADD IN ELSE ALSO - MYTHREYI
-            if (loginresult.data.login && this.loginForm.value.remember_me === true) {
-              localStorage.setItem('remember_me', 'true');
-              localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
-              localStorage.setItem('Fullname', loginresult.data.login.message.full_name);
-              localStorage.setItem('role', 'learner');
-              localStorage.setItem('token', loginresult.data.login.message.token);
-              localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
-              sessionStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
-              this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
-              });
-              // if false, then need to update profile
-              // Afser'schanges on Profile not Mandtory change no #4 Committed condition on and added
-              // page route MyCourse
-              // if (loginresult.data.login.message.is_profile_updated) {
-              //   // for june 10 added by ankit
-              //   this.router.navigate(['/Learner/MyCourse']);
-              // } else {
-              //   this.toastr.warning('Your profile is incomplete !',
-              // 'Please provide data for all mandatory fields', { closeButton: true });
-              //   this.router.navigate(['/Learner/profile']);
-              // }
-
-              this.router.navigate(['/Learner/MyCourse']);
-            } else {
-              localStorage.setItem('Fullname', loginresult.data.login.message.full_name); // Added ny Mythreyi
+            localStorage.setItem('Fullname', loginresult.data.login.message.full_name); // Added ny Mythreyi
               sessionStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
               sessionStorage.setItem('remember_me', 'false');
               sessionStorage.setItem('user_img', loginresult.data.login.message.profile_img);
               sessionStorage.setItem('role', 'learner');
               sessionStorage.setItem('token', loginresult.data.login.message.token);
-              this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
-              });
-              // localStorage.setItem('token', loginresult.data.login.message.token);
-              const ps = btoa(this.loginForm.value.password);
-              // if false, then need to update profile
-              // if (loginresult.data.login.message.is_profile_updated) {
-              //   // for june 10 added by ankit
-              //   this.router.navigate(['/Learner/MyCourse']);
-              // } else {
-              // //  this.toastr.warning('Your profile is incomplete !',
-              // 'Please provide data for all mandatory fields', { closeButton: true });
-              //  // this.router.navigate(['/Learner/profile']);
-              //  this.router.navigate(['/Learner/MyCourse']);
-              // }
               this.router.navigate(['/Learner/MyCourse']);
+            if (loginresult.data.login && this.loginForm.value.remember_me === true) {
+              localStorage.setItem('remember_me', 'true');
+            } else {
+              localStorage.setItem('remember_me', 'false');
             }
+            this.router.navigate(['/Learner/MyCourse']);
           } else {
             this.loginForm.reset();
             this.toastr.error(loginresult.data.login.error_msg, null);

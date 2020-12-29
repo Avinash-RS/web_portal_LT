@@ -495,10 +495,14 @@ li {
 // }
 .playerWrapper {
     position: relative;
-    padding-bottom: 55%;
+    // padding-bottom: 55%;
     padding-top: 35px;
-    height: 0;
+    height: 556px;
     overflow: hidden;
+    @media only screen and (max-width: 1199px) {
+        padding-bottom: 55%;
+        height: 0;
+    }
     @media only screen and (max-width: 576px) {
         padding-bottom: 60vh;
     }
@@ -678,6 +682,20 @@ iframe.fullScreen {
     min-height: 100vh;
     display: flex;
     background-color: $color-white;
+}
+.extensionFiles {
+    width: 5%;
+}
+.fileTypeName {
+    width: 80%;
+}
+.fileSize {
+    width: 10%;
+    text-align: right;
+}
+.saveFile {
+    width: 5%;
+    text-align: right;
 }
 
 :host ::ng-deep .mat-tab-label .mat-tab-label-content {
@@ -1360,6 +1378,7 @@ iframe.fullScreen {
     height: 100vh;
     width: 100%;
     border-right: 1px solid #ccc;
+    z-index: 3 !important;
     @media only screen and (min-width: 992px) {
         width: 30%;
     }
@@ -1389,7 +1408,7 @@ iframe.fullScreen {
     position: absolute;
     top: 0;
     width: 100%;
-    z-index: 2;
+    z-index: 1;
     // border-bottom: 1px solid #ccc;
 }
 
@@ -1397,7 +1416,7 @@ iframe.fullScreen {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 2;
+    z-index: 1;
     // border-bottom: 1px solid #ccc;
 }
 
@@ -1668,4 +1687,12 @@ iframe.fullScreen {
         opacity: 1;
         transform: translateZ(0);
     }
+}
+
+::ng-deep .course-player-menu .mat-step-icon .mat-icon{
+    display: none !important;
+}
+
+::ng-deep .course-player-menu .mat-step-icon-content span{
+    display: none !important;
 }

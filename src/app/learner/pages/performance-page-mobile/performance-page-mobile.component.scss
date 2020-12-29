@@ -217,6 +217,10 @@
     position: absolute;
     bottom: 0;
     left: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 0 10px;
+    color: #ffffff;
     // height: 40%;
     // border-radius: 0px 0px 4px 4px;
   }
@@ -425,16 +429,22 @@
 :host ::ng-deep .widthClass .owl-carousel.owl-drag .owl-item {
   width: 15.5rem !important;
 }
-
-.carouselCol {
-  max-width: 100% !important;
-  height: 15rem;
+::ng-deep.materialsScrollActivity .drag-scroll-content {
+  @media only screen and (max-width: 1199px) {
+    overflow: auto hidden !important;
+    height: calc(100% + 8px) !important;
+  }
 }
+// .carouselCol {
+//   max-width: 100% !important;
+//   height: 15rem;
+// }
 .slideLoop {
   display: inline-block;
   text-align: left;
+  vertical-align: top;
 }
-.carouselCol1 {
+.carouselCol1, .carouselCol {
   // max-width: 100% !important;
   padding: 0 !important;
   margin-left: 0;
@@ -532,3 +542,14 @@
   display: none !important;
 }
 
+input[type="file"] {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  z-index: 100 !important;
+  margin-top: -20px;
+  padding-top: -20px;
+  top: -20px;
+}

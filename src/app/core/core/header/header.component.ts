@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
   @HostBinding('class') componentCssClass;
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
-              private http: HttpClient, public overlayContainer: OverlayContainer,  public socketService: SocketioService,
+              private http: HttpClient, public overlayContainer: OverlayContainer, public socketService: SocketioService,
               public router: Router, private gs: GlobalServiceService) {
     // this.getScreenSize();
   }
@@ -97,6 +97,13 @@ export class HeaderComponent implements OnInit {
       // console.log('inside logout result', result, 'login -', this.loginDetails, 'user - ', this.userDetailes);
       if (result.value) {
         // this.loading = true;
+
+        //SOCKET DISCONNECTION START
+        this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
+        });
+        this.socketService.closeSocket();
+        //SOCKET DISCONNECTION COMPLETE
+        
         this.services.getIpAddressByUrl();
         this.userDetailes = null;
         this.services.logout(this.loginDetails._id, false).subscribe((logout: any) => {

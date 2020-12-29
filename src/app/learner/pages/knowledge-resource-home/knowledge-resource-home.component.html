@@ -8,10 +8,10 @@
   </div>
   <div *ngIf="details.length" style="display: flex;
     justify-content: center;">
-    <input class="search-inp" placeholder="Search..." [(ngModel)]="searchDetails">
+    <input class="search-inp" placeholder="Search..." (keyup)="checkKnowledgeRec($event)" [(ngModel)]="searchDetails">
     
     <ng-container *ngIf="searchDetails && searchDetails.length > 0; else searchIcon">
-      <mat-icon class="close-search" (click)="searchDetails = ''">close</mat-icon>
+      <mat-icon class="close-search" (click)="isLoadBalanced = false ;searchDetails = ''">close</mat-icon>
     </ng-container>
     <ng-template #searchIcon>
       <mat-icon class="close-search">search</mat-icon>
@@ -19,12 +19,12 @@
     
   </div>
 
-  <div class="no-data" *ngIf="isLoadBalanced  && !details.length">
+  <div class="no-data" *ngIf="isLoadBalanced">
     <div class="row">
       <div class="box-size w-100">
         <div class="kr-empty">
           <span class="lxp-knowledge headicon-kr"></span>
-          <p class="para">{{'You have no knowledge resource at this moment!' | translate }} </p>
+          <p class="para">{{'No resource data found' | translate }} </p>
         </div>
       </div>
     </div>
@@ -33,7 +33,7 @@
     <div class="resource-link">
       <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 resource-col"
         *ngFor="let item of details | filter:searchDetails">
-        <h1 *ngIf="item.domain !== null">{{item.domain}}</h1>
+        <h1 #ResourceData *ngIf="item.domain !== null">{{item.domain}}</h1>
         <ng-container *ngFor="let areaOfIntArr of item.areaOfInterest; let i = index">
           <ng-container *ngIf="((areaOfIntArr.toLowerCase().search(searchDetails.toLowerCase())) >= 0) || 
             searchDetails == undefined || (searchDetails && searchDetails.length == 0) ||

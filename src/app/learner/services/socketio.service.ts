@@ -12,15 +12,16 @@ export class SocketioService {
 
     constructor() {
         this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
-        this.socket = io(environment.socketio);
-        if (this.loginDetails) {
-            this.Connectsocket({type: 'connect'}).subscribe(quote => {
-            });
-        }
+       // this.socket = io(environment.socketio);
+        // if (this.loginDetails) {
+        //     this.Connectsocket({type: 'connect'}).subscribe(quote => {
+        //     });
+        // }
     }
 
 
     Connectsocket(type): Observable<number> {
+        this.socket = io(environment.socketio);
         Observable.create(observer => {
             this.observer = observer;
         });
@@ -63,5 +64,7 @@ export class SocketioService {
         });
         return observable;
     }
-
+    closeSocket(){
+        this.socket.off('disconnect', this.Connectsocket);
+    }
 }
