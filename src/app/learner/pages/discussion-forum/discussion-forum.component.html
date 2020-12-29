@@ -648,7 +648,7 @@
             </div>
             <div class="col-12 m-b-0 form-group">
               <input type="text" class="width_100 greyBor background_trans" name="thread_name"
-                formControlName="thread_name">
+                formControlName="thread_name" onpaste="return false" autocomplete="off"  (keypress)="removeChar($event)">
               <div *ngIf="f.thread_name.touched && f.thread_name.errors" class="mand">
                 <div *ngIf="f.thread_name.errors.minlength">
                   {{'Title must be minimum of 9 characters' | translate }} </div>

@@ -95,6 +95,7 @@ export class ProfileComponent implements OnInit {
   institutes: any = [];
   specValue: any = [];
   disciplines: any = [];
+  morphed: any = [];
   currentUser: any;
   userData: any = {};
   show = false;
@@ -205,7 +206,13 @@ export class ProfileComponent implements OnInit {
     this.service.view_profile(userid).subscribe((data: any) => {
       if (data.data.view_profile.success) {
         const profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].user_profile[0];
+        
         this.userData = data.data.view_profile.message[0];
+        // console.log("userData", this.userData)
+        let mobNumber = this.userData.user_mobile.mobile_number;
+        let morphed = mobNumber[0] + mobNumber[1] +"******"+ mobNumber[8] + mobNumber[9];
+        this.userData.user_mobile.mobile_number = morphed
+
         if (profileDetails) {
           if (profileDetails.qualification.length > 0) {
             profileDetails.qualification.forEach(v => delete v.__typename);
