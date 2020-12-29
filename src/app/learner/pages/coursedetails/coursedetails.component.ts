@@ -113,6 +113,8 @@ export class CoursedetailsComponent implements OnInit {
   nextPrevHolder: number;
   moduleHolder: number;
   topicPageStatus: any;
+  socketEmitReciver: any;
+  socketConnector: any;
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -127,11 +129,14 @@ export class CoursedetailsComponent implements OnInit {
               public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
               public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
               public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
-                this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
-                });
-                this.user_token = sessionStorage.getItem("token")
+
+    if (this.socketService.socketStatus()||this.socketService.socketStatus() == undefined){
+      this.socketConnector = this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
+      });
+    }
+    this.user_token = sessionStorage.getItem("token")
     const Feedbackdetail: any = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
-    this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
+      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.checkDetails = Feedbackdetail;
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
@@ -158,12 +163,12 @@ export class CoursedetailsComponent implements OnInit {
       // this.refreshData();
       // this.autoHide();
       // this.getPlayerNextPrve();
-     
+
       this.service.viewCurseByIDForLearner(detail && detail.id || this.localStoCourseid)
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.view_course_for_learner && viewCourse.data.view_course_for_learner.success) {
             this.course = viewCourse.data.view_course_for_learner.message;
-             console.log('this.course 1', this.course);
+            console.log('this.course 1', this.course);
             if (this.detailData !== undefined) {
               this.selectedName = this.detailData?.course_name;
             } else if (this.course !== undefined && this.course !== null) {
@@ -249,7 +254,8 @@ export class CoursedetailsComponent implements OnInit {
       this.performOverLay = false;
     });
     let resumeInit = true;
-    this.socketService.change.subscribe(result => {
+    this.socketService.socketReceiver()
+    this.socketEmitReciver = this.socketService.change.subscribe(result => {
       if (result && result.eventId && result.eventId.length > 0 && result.data.childData.length > 0) {
         if (result.data.course_id === this.courseid) {
           if (this.topiccurrentPage !== result.data.resumeSubContent ||
@@ -300,12 +306,20 @@ export class CoursedetailsComponent implements OnInit {
     this.getCoursePlayerStatus();
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     const loginDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
     if (loginDetails) {
-      this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
-    });
+      this.socketConnector = this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
+      });
+    }
+    if (this.socketEmitReciver) {
+      this.socketEmitReciver.unsubscribe();
+    }
+
     this.socketService.closeSocket();
+
+    if (this.socketConnector) {
+      this.socketConnector.unsubscribe();
     }
   }
   renameKeys(obj, newKeys) {
