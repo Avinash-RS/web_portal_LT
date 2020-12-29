@@ -107,7 +107,18 @@ export class LearnerServicesService {
     };
     return this.http.post(this.envApi + 'post_like', data, httpOptions);
   }
+  getEmail(input) 
+    {
+     return this.http.post(this.envApi + 'getuserRecordbasedonSecretKey', input);
+     }
 
+  // getEmail(input) {
+  //   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({ Authorization: token })
+  //   };
+  //   return this.http.post(this.envApi + 'getuserRecordbasedonSecretKey', input, httpOptions);
+  // }
 
   user_registration(email, fullName, mobileNumber, titleId, termsandconditions) {
     return this.Apollo.query({
