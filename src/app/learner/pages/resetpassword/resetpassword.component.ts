@@ -1,19 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Data } from '@angular/router';
 import * as myGlobals from '@core/globals';
 import { MustMatch } from '@core/services/_helpers/must-match.validator';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { ToastrService } from 'ngx-toastr';
-/////// decrypt
-// import 'angular-base64/angular-base64';
-// import * as crypto from 'crypto';
-// import CryptoJS from 'crypto-js';
-import SimpleCrypto from 'simple-crypto-js';
-const secretKey = 'myTotalySecretKey';
-const simpleCrypto = new SimpleCrypto(secretKey);
+import * as CryptoJS from 'crypto-js';
+
 
 @Component({
   selector: 'app-resetpassword',
@@ -36,7 +31,7 @@ export class ResetpasswordComponent implements OnInit {
   isLinkActive: boolean;
   hide = true;
   hide2 = true;
-
+  secretKey = "(!@#Passcode!@#)";
 
   constructor(
     public translate: TranslateService,
@@ -54,14 +49,19 @@ export class ResetpasswordComponent implements OnInit {
   ngOnInit() {
     this.activeroute.queryParams.subscribe(params => {
       if (params.code) {
-        // const decryptedString = simpleCrypto.decrypt(params.code);
-
-        // const decryptedString = this.decrypt(params.code);
-        // const bytes = CryptoJS.AES.decrypt(params.code, 'secret key 123');
-        // const originalText = bytes.toString(CryptoJS.enc.Utf8);
-        const decryptedString = atob(params.code);
-        this.user = decryptedString;
-        this.get_user_detail_username(this.user);
+        // const decryptedString = params.code;
+      var input = {
+          "userSecretkey" : params.code
+      }
+       // const decryptedString = atob(params.code);
+        this.service.getEmail(input).subscribe((data)=>{
+          var userValue = data['data']
+          if(userValue['email']){
+            this.user = userValue['email']
+          }
+        })
+        //this.user = decryptedString;
+       this.get_user_detail_username(this.user);
       } else {
         this.user = localStorage.getItem('Username');
         this.isLinkActive = true;
@@ -120,7 +120,13 @@ export class ResetpasswordComponent implements OnInit {
 
   resetpassword() {
     this.loader.show();
-    this.service.resetPassword(this.user, this.resetForm.value.password).subscribe((data: any) => {
+    var encryptedname = CryptoJS.AES.encrypt(this.user, this.secretKey.trim()).toString();
+    var encryptedpassword = CryptoJS.AES.encrypt(this.resetForm.value.password, this.secretKey.trim()).toString();
+    // var decryptname = CryptoJS.AES.decrypt(encryptedname, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
+    // var decryptpassword = CryptoJS.AES.decrypt(encryptedpassword, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
+    // console.log(decryptname,decryptpassword)
+    // return
+    this.service.resetPassword(encryptedname,encryptedpassword).subscribe((data: any) => {
       if (data.data.get_forgot_password_byresetpassword.success === 'true') {
         this.loader.hide();
         this.toastr.success(data.data.get_forgot_password_byresetpassword.message);
