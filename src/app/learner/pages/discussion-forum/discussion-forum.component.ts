@@ -7,6 +7,7 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { ToastrService } from 'ngx-toastr';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-discussion-forum',
@@ -127,7 +128,14 @@ export class DiscussionForumComponent implements OnInit {
         this.batchDetails = this.course.batchdetails || null;
         if (this.batchDetails?.batchenddate) {
           const batchEndDate = new Date(this.batchDetails.batchenddate);
-          this.disableThreads = batchEndDate.toISOString().slice(0, 10) < new Date().toISOString().slice(0, 10) ? true : false;
+          const todayDate = moment().startOf('day').toDate();
+          const enddateTemp = moment(batchEndDate, 'YYYY-MM-DD').endOf('day').toDate();
+          if(todayDate === enddateTemp || todayDate < enddateTemp){
+            this.disableThreads = false
+          } else{
+            this.disableThreads = true
+          }
+          //this.disableThreads = batchEndDate.toISOString().slice(0, 10) < new Date().toISOString().slice(0, 10) ? true : false;
         }
         this.viewAllThreads();
       }
