@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {TranslateService} from '@ngx-translate/core';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-registration',
@@ -26,6 +27,7 @@ export class RegistrationComponent implements OnInit {
   // is_staff: boolean;
   fullname: any;
   registerSuccess = false;
+  secretKey = "(!@#Passcode!@#)";
   constructor(
     public translate: TranslateService,
     private formBuilder: FormBuilder,
@@ -67,8 +69,11 @@ export class RegistrationComponent implements OnInit {
     this.loader.show();
     this.fullname = this.registerForm.value.fullname.trimLeft();
     // this.registerForm.value.termsandconditions
-    this.service.user_registration(this.registerForm.value.email, this.fullname,
-    this.registerForm.value.mobile ?  this.registerForm.value.mobile : '' ,
+    var encryptedmail = CryptoJS.AES.encrypt(this.registerForm.value.email, this.secretKey.trim()).toString();
+    var encryptedname = CryptoJS.AES.encrypt(this.fullname, this.secretKey.trim()).toString();
+    var encryptedmobile = CryptoJS.AES.encrypt(this.registerForm.value.mobile, this.secretKey.trim()).toString();
+    this.service.user_registration(encryptedmail, encryptedname,
+      encryptedmobile ?  encryptedmobile : '' ,
      this.registerForm.value.title , true ).subscribe((data: any) => {
     this.registerForm.reset();
     this.formRef.resetForm();
