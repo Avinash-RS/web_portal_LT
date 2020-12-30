@@ -756,7 +756,7 @@
                       </ng-template>
                     </owl-carousel-o> -->
 
-                    <drag-scroll class="trendingCategoriesScrollActivity" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
+                    <drag-scroll #nav class="trendingCategoriesScrollActivity" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
                       <span class="slideLoop" *ngFor="let video of project.projectActivity.videodetails; let i = index">
                         <div [ngClass]="project.projectActivity.videodetails.length >= 4 ? 'carouselCol': 'carouselCol1'">
                           <mat-card class="p-0 carouselCard" (mouseover)="hover = true; mouseover(i)" (mouseleave)="hover = false">
@@ -795,6 +795,8 @@
                         </div>
                       </span>
                     </drag-scroll>
+                    <button mat-raised-button (click)="moveLeft()">Left</button>
+                    <button mat-raised-button (click)="moveRight()">Right</button>
                     
                     <!-- <owl-carousel-o [options]="trendingCategorires" [ngClass]="project.projectActivity.videodetails.length >= 4 ? 'arrow': 'widthClass arrow' ">
                       <ng-template class="row ml-0 mr-0" carouselSlide *ngFor="let video of project.projectActivity.videodetails; let i = index">

@@ -177,6 +177,15 @@ drag-scroll {
     align-items: center;
     height: calc(100% + 8px) !important;
     overflow: auto hidden !important;
+    @media only screen and (min-width: 1200px) {
+        overflow: hidden !important;
+    }
+}
+::ng-deep.header-carousel .drag-scroll-wrapper.drag-scroll-container {
+    @media only screen and (min-width: 1200px) {
+        height: 43px !important;
+        overflow: initial !important;
+    }
 }
 ::ng-deep .knowledge-landing-container .owl-theme .owl-nav {
     text-align: inherit !important;

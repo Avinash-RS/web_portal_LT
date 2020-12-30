@@ -9,6 +9,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { DragScrollComponent } from 'ngx-drag-scroll';
 
 @Component({
   selector: 'app-activities',
@@ -16,6 +17,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./activities.component.scss'],
 })
 export class ActivitiesComponent implements OnInit {
+  @ViewChild('nav', {read: DragScrollComponent}) ds: DragScrollComponent;
   @ViewChild('fileInput') fileInput;
   @ViewChild('videoInput') videoInput;
   @ViewChild('uploadInput') uploadInput;
@@ -61,6 +63,13 @@ export class ActivitiesComponent implements OnInit {
   screenHeight: number;
   screenWidth: number;
   // assignmentMessage = false;
+  
+  moveLeft() {
+    this.ds.moveLeft();
+  }
+  moveRight() {
+    this.ds.moveRight();
+  }
 
   trendingItration: any = {
     loop: false, // dont make it true
