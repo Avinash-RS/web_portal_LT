@@ -8,7 +8,7 @@ export class MaskingPipePipe implements PipeTransform {
   transform(value: any, visibleDigits: number = 4): any {
     const maskedSection = value.slice(0, -visibleDigits);
     const visibleSection = value.slice(-visibleDigits);
-    return maskedSection.replace(/./g, '*') + visibleSection;
+    return value.replace(/^(.{2})[^@]+/, "$1XXX");
   }
 
 }

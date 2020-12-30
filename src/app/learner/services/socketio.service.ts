@@ -35,7 +35,13 @@ export class SocketioService {
                 this.socket.emit('info', this.loginDetails.user_id);
             }
         }
+        
+        console.log(this.socket,"before logout")
+        return this.createObservable();
+    }
+    socketReceiver(){
         this.socket.on('coursePlayerStatus', (msg: any) => {
+            console.log("####gokul####")
             if (this.loginDetails.user_id === msg.user_id) {
 
                 this.changeTrigger({
@@ -46,7 +52,6 @@ export class SocketioService {
                 this.newMessageReceived(msg);
             }
         });
-        return this.createObservable();
     }
 
     createObservable(): Observable<number> {
@@ -65,6 +70,18 @@ export class SocketioService {
         return observable;
     }
     closeSocket(){
+        this.socket.removeAllListeners('coursePlayerStatus')
+        this.socket.off('coursePlayerStatus');
         this.socket.off('disconnect', this.Connectsocket);
+        console.log(this.socket.disconnected)
+        console.log(this.socket,"after logout")
+    }
+
+    socketStatus(){
+        if (this.socket) {
+            return this.socket.disconnected;
+        } else {
+            return undefined;
+        }
     }
 }

@@ -6,6 +6,8 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 //import { SocketioService } from '@learner/services/socketio.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import * as CryptoJS from 'crypto-js';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,6 +20,7 @@ export class LoginComponent implements OnInit {
   show = false;
   loginForm: FormGroup;
   languages: any;
+  secretKey = "(!@#Passcode!@#)";
 
   constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder,
              // public socketService: SocketioService,
@@ -48,7 +51,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.service.login(this.loginForm.value.username, this.loginForm.value.password, false)
+    var encryptedname = CryptoJS.AES.encrypt(this.loginForm.value.username, this.secretKey.trim()).toString();
+    var encryptedpassword = CryptoJS.AES.encrypt(this.loginForm.value.password, this.secretKey.trim()).toString();
+    this.service.login(encryptedname, encryptedpassword, false)
       .subscribe((loginresult: any) => {
         if (loginresult.data.login) {
           if (loginresult.data.login.success) {
