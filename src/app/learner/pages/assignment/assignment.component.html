@@ -32,11 +32,11 @@
                         <div class="d-flex justify-content-between">
                           <div class="assignmentStartDate">
                             <span class="font-weight-bold">Start date: </span>
-                            <span>{{courseStartDate}}</span>
+                            <span>{{assignmentContent.courseStartDate | date :'MMM d, y h:mm a'}}</span>
                           </div>
                           <div class="assignmentEndDate">
                             <span class="font-weight-bold">End date: </span>
-                            <span class="">{{courseEndDate}}</span>
+                            <span class="">{{assignmentContent.courseEndDate | date :'MMM d, y h:mm a'}}</span>
                           </div>
                         </div>
                       </div>
@@ -49,7 +49,7 @@
                               <p class="brickMaking score">{{file.score_mark}} / {{file.score}}</p>
                             </div>
                           </div> -->
-                        <div class="width d-flex justify-content-between">
+                        <div class="width assignmentNameQuestion d-flex justify-content-between">
                           <div class="assignmentName">
                             <span class="activityDisc font-weight-bold">Assignment name</span>
                             <span class="brickMaking">{{file.type_name}}</span>

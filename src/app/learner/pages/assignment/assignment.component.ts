@@ -78,12 +78,8 @@ export class AssignmentComponent implements OnInit {
                   const date2 = JSON.parse(JSON.stringify(fileData.endDate));
                   const startDate = new Date(date1);
                   const endDate = new Date(date2);
-                  fileData.assignmentStartDate = moment(startDate).format(
-                    'DD-MM-YYYY HH:MM'
-                  );
-                  fileData.assignmentEndDate = moment(endDate).format(
-                    'DD-MM-YYYY HH:MM'
-                  );
+                  fileData.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
+                  fileData.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:MM');
                   if (
                     moment().format('DD-MM-YYYY HH:MM') >=
                     fileData.assignmentStartDate
