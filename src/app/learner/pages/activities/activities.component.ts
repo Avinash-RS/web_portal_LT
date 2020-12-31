@@ -554,14 +554,14 @@ export class ActivitiesComponent implements OnInit {
   // Submit or Delete
   learnerSumbitdeleteVideo(project, deleteItem, submitAction) {
     const startDate1 = new Date(project.projectActivity.activitystartdate);
-    project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:MM');
+    project.actstartDate = moment(startDate1);
     const endDate1 = new Date(project.projectActivity.activityenddate);
-    project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:MM');
+    project.actendDate = moment(endDate1);
     let submitStatus = '';
-    if (moment().format('DD-MM-YYYY HH:MM') >= project.actstartDate &&
-      moment().format('DD-MM-YYYY HH:MM') <= project.actendDate) {
+    if (moment() >= project.actstartDate &&
+      moment() <= project.actendDate) {
       submitStatus = 'ontime';
-    } else if (moment().format('DD-MM-YYYY HH:MM') > project.actendDate) {
+    } else if (moment() > project.actendDate) {
       submitStatus = 'late';
     }
     const submitData = {
