@@ -47,15 +47,16 @@ export class LoginComponent implements OnInit {
       if (params && params['email_id']) {
         this.learnerService.getLoginUserDetail(params.email_id).subscribe((isValidEmailResult: any) => {
           if (isValidEmailResult.data.get_login_details.success === true) {
+            sessionStorage.setItem('token', isValidEmailResult.data.get_login_details.message.token);
             localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
             localStorage.setItem('Fullname', isValidEmailResult.data.get_login_details.message.full_name);
             sessionStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
             sessionStorage.setItem('remember_me', 'true');
             sessionStorage.setItem('user_img', isValidEmailResult.data.get_login_details.message.profile_img);
             sessionStorage.setItem('role', 'learner');
-            sessionStorage.setItem('token', isValidEmailResult.data.get_login_details.message.token);
             this.router.navigate(['/Learner/MyCourse']);
           } else {
+            this.toastr.error(isValidEmailResult.data.get_login_details.error_msg, null);
             localStorage.clear();
             sessionStorage.clear();
           }
