@@ -7,7 +7,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { TranslateService } from '@ngx-translate/core';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { ToastrService } from 'ngx-toastr';
-
+import * as CryptoJS from 'crypto-js';
 @Component({
   selector: 'app-password',
   templateUrl: './password.component.html',
@@ -34,7 +34,7 @@ export class PasswordComponent implements OnInit {
   useridData: any;
   email: any;
   emailid: any;
-
+  secretKey = "(!@#Passcode!@#)";
 
   constructor(public translate: TranslateService,
               private router: Router,
@@ -46,8 +46,20 @@ export class PasswordComponent implements OnInit {
 
                 this.activeroute.queryParams.subscribe(params => {
                   this.email = params.code;
+                  var input = {
+                    "userSecretkey" : params.code
+                }
+                 // const decryptedString = atob(params.code);
+                  this.service.getEmail(input).subscribe((data)=>{
+                    var userValue = data['data']
+                    if(userValue['email']){
+                      this.emailid =  userValue['email'];
+                      this.userid = userValue['user_id'];
+                      localStorage.setItem('key', this.userid);
+                    }
+                  })
                   // localStorage.setItem('OTPFeature', this.otpFeature);
-                  this.get_user_detail(this.email);
+                  //this.get_user_detail(this.email);
                 });
                }
 
@@ -107,42 +119,28 @@ export class PasswordComponent implements OnInit {
     localStorage.removeItem('adminDetails');
     this.loader.show();
     this.userid = localStorage.getItem('key');
-    this.service.user_registration_done(this.userid, this.emailid, this.passwordForm.value.password, this.systemip ? this.systemip : '')
+    var encryptedid = CryptoJS.AES.encrypt(this.userid, this.secretKey.trim()).toString();
+    var encryptedpassword = CryptoJS.AES.encrypt(this.passwordForm.value.password, this.secretKey.trim()).toString();
+    var encryptedname = CryptoJS.AES.encrypt( this.emailid, this.secretKey.trim()).toString();
+    this.service.user_registration_done(encryptedid, encryptedname, encryptedpassword, this.systemip ? this.systemip : '')
     .subscribe((data: any) => {
       if (data.data.user_registration_done.success === 'true') {
         // Added by Mythreyi - for user story 19 first time login
-        this.service.login(this.emailid, this.passwordForm.value.password, false)
-          .subscribe((loginresult: any) => {
-            if (loginresult.data.login) {
-              if (loginresult.data.login.success) {
-                localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
-                localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
-                localStorage.setItem('Fullname', loginresult.data.login.message.full_name);
-                // localStorage.setItem('uname', this.passwordForm.value.username);
-                localStorage.setItem('role', 'learner');
-                localStorage.setItem('remember_me', 'true');
-                localStorage.setItem('token', loginresult.data.login.message.token);
-                localStorage.setItem('UserToken', JSON.stringify(data.data.user_registration_done.token));
-                sessionStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
-                const ps = btoa(this.passwordForm.value.password);
-                localStorage.setItem('ps', ps);
-                this.loader.hide();
-                // if false, then need to update profile
-                // if (loginresult.data.login.message.is_profile_updated) {
-                //   this.router.navigate(['/Learner']);
-                // } else {
-                //   this.toastr.warning('Your profile is incomplete !',
-                //   'Please provide data for all mandatory fields', { closeButton: true});
-                //   this.router.navigate(['/Learner/profile']);
-                // }
-                this.router.navigate(['/Learner/MyCourse']);
-              }
-            } else {
-              this.loader.hide();
-              this.passwordForm.reset();
-              this.toastr.error(loginresult.data.login.error_msg, null);
-            }
-          });
+        this.toastr.success("Your registration is successful")                
+        this.router.navigate(['/Learner/login']);
+        // this.service.login(this.emailid, this.passwordForm.value.password, false)
+        //   .subscribe((loginresult: any) => {
+        //     if (loginresult.data.login) {
+        //       if (loginresult.data.login.success) {
+        //         this.toastr.success("Your registration is successful")                
+        //         this.router.navigate(['/Learner/login']);
+        //       }
+        //     } else {
+        //       this.loader.hide();
+        //       this.passwordForm.reset();
+        //       this.toastr.error(loginresult.data.login.error_msg, null);
+        //     }
+        //   });
       } else {
         this.loader.hide();
         this.toastr.error(data.data.user_registration_done.message, null);
