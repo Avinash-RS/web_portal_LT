@@ -63,7 +63,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // console.error = function(){}
     // console.log = function(){}
-    // console.warn = function(){}
+    // console.warn = function(){}    
     this.loaderSubscription = this.commonService.loader.subscribe((val) => {
       this.isLoader = val;
       if (this.isLoader) {
