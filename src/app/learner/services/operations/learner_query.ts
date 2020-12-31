@@ -1464,7 +1464,7 @@ export const playerModuleAndTopic = gql`
   }
 `;
 export const ViewSingleTopicDiscussionData = gql`
-  query ViewSingleTopicDiscussionData($topic_slug: String, $uid: Int!) {
+  query ViewSingleTopicDiscussionData($topic_slug: String, $uid: String!) {
     ViewSingleTopicDiscussionData(topic_slug: $topic_slug, uid: $uid) {
       success
       message
