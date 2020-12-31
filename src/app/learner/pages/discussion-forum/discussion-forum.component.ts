@@ -8,6 +8,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-discussion-forum',
@@ -68,6 +69,7 @@ export class DiscussionForumComponent implements OnInit {
   runnablePlatforms = ['MacIntel', 'Win32', 'Linux x86_64'];
   isHideAccord: boolean = false;
   isMobile: boolean = false;
+  secretKey = "(!@#Passcode!@#)";
 
   constructor(public Lservice: LearnerServicesService, public route: Router, private formBuilder: FormBuilder,
               private gs: GlobalServiceService, private toastr: ToastrService, private dialog: MatDialog,
@@ -149,7 +151,7 @@ export class DiscussionForumComponent implements OnInit {
       .subscribe((result: any) => {
         const temp = result.data.ViewAllThreadData.data;
         if (result?.data?.ViewAllThreadData?.data !== '' && result?.data?.ViewAllThreadData !== null) {
-          result?.data?.ViewAllThreadData?.data?.topics.sort((a, b) => new Date(b.lastposttimeISO || b.timestampISO).getTime() -
+          result?.data?.ViewAllThreadData?.data?.topics?.sort((a, b) => new Date(b.lastposttimeISO || b.timestampISO).getTime() -
             new Date(a.lastposttimeISO || a.lastposttimeISO).getTime());
           this.discussionData = result.data.ViewAllThreadData.data;
           this.discussionData1 = Object.assign({}, result.data.ViewAllThreadData.data);
@@ -414,7 +416,8 @@ export class DiscussionForumComponent implements OnInit {
         // this.cS.loader$.next(true);
         this.loading = true;
         this.closedialogbox();
-        this.Lservice.createNewThread(this.userDetail.nodebb_response.uid, this.course.id, this.selectedModuleData?.title,
+        const mask = CryptoJS.AES.encrypt(this.userDetail.nodebb_response.uid.toString(), this.secretKey.trim()).toString();
+        this.Lservice.createNewThread(mask, this.course.id, this.selectedModuleData?.title,
           this.addThreadForm.value.thread_name, this.addThreadForm.value.thread_description, this.course.name,
           bid)
           .subscribe((result: any) => {
