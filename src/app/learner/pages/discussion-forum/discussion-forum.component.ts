@@ -375,9 +375,9 @@ export class DiscussionForumComponent implements OnInit {
     if (this.userDetail?.nodebb_response?.uid) {
       const mask = CryptoJS.AES.encrypt(this.userDetail?.nodebb_response?.uid.toString(), this.secretKey.trim()).toString();
       this.Lservice.viewsingletopicdiscussion(topicSlug.toString(), mask).subscribe((result: any) => {
-        this.topicDiscussionData = result.data.ViewSingleTopicDiscussionData.data;
-        this.topicDiscussionData1 = Object.assign({}, result.data.ViewSingleTopicDiscussionData.data);
-        this.topicDiscussionData1.posts1 = (this.topicDiscussionData1.posts);
+        this.topicDiscussionData = result?.data?.ViewSingleTopicDiscussionData?.data;
+        this.topicDiscussionData1 = Object.assign({}, result?.data?.ViewSingleTopicDiscussionData?.data);
+        this.topicDiscussionData1.posts1 = (this.topicDiscussionData1?.posts);
         const data = this.topicDiscussionData?.posts?.map(item => item.content = this.alterstring(item?.content));
         const data1 = this.topicDiscussionData1?.posts1?.map(item => item.content = this.alterstring(item?.content));
         // this.cS.loader$.next(false);
