@@ -18,6 +18,9 @@ import { DragScrollComponent } from 'ngx-drag-scroll';
 })
 export class ActivitiesComponent implements OnInit {
   @ViewChild('nav', {read: DragScrollComponent}) ds: DragScrollComponent;
+  @ViewChild('navWork', {read: DragScrollComponent}) dsWork: DragScrollComponent;
+  @ViewChild('navActivity', {read: DragScrollComponent}) dsActivity: DragScrollComponent;
+  @ViewChild('navSubmissions', {read: DragScrollComponent}) dsSubmissions: DragScrollComponent;
   @ViewChild('fileInput') fileInput;
   @ViewChild('videoInput') videoInput;
   @ViewChild('uploadInput') uploadInput;
@@ -63,13 +66,6 @@ export class ActivitiesComponent implements OnInit {
   screenHeight: number;
   screenWidth: number;
   // assignmentMessage = false;
-  
-  moveLeft() {
-    this.ds.moveLeft();
-  }
-  moveRight() {
-    this.ds.moveRight();
-  }
 
   trendingItration: any = {
     loop: false, // dont make it true
@@ -144,6 +140,14 @@ export class ActivitiesComponent implements OnInit {
   demo1TabIndex = 0;
   currentTab: any;
   assigmentMobileResponsive = false;
+  leftNavDisabled = false;
+  rightNavDisabled = false;
+  leftNavDisabledWork = false;
+  rightNavDisabledWork = false;
+  leftNavDisabledSubmissions = false;
+  rightNavDisabledSubmissions = false;
+  leftNavDisabledActivity = false;
+  rightNavDisabledActivity = false;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
@@ -192,6 +196,58 @@ export class ActivitiesComponent implements OnInit {
     } else {
       this.assigmentMobileResponsive = false;
     }
+  }
+
+  moveLeft() {
+    this.ds.moveLeft();
+  }
+  moveRight() {
+    this.ds.moveRight();
+  }
+  moveLeftWork() {
+    this.dsWork.moveLeft();
+  }
+  moveRightWork() {
+    this.dsWork.moveRight();
+  }
+  moveLeftSubmissions() {
+    this.dsSubmissions.moveLeft();
+  }
+  moveRightSubmissions() {
+    this.dsSubmissions.moveRight();
+  }
+  moveLeftActivity() {
+    this.dsActivity.moveLeft();
+  }
+  moveRightActivity() {
+    this.dsActivity.moveRight();
+  }
+  leftBoundStat(reachesLeftBound: boolean) {
+    this.leftNavDisabled = reachesLeftBound;
+  }
+  rightBoundStat(reachesRightBound: boolean) {
+    this.rightNavDisabled = reachesRightBound;
+  }
+  //Your Work
+  leftBoundStatWork(reachesLeftBound: boolean) {
+    this.leftNavDisabledWork = reachesLeftBound;
+  }
+  rightBoundStatWork(reachesRightBound: boolean) {
+    this.rightNavDisabledWork = reachesRightBound;
+  }
+  //Submissions
+  leftBoundStatSubmissions(reachesLeftBound: boolean) {
+    this.leftNavDisabledSubmissions = reachesLeftBound;
+  }
+  rightBoundStatSubmissions(reachesRightBound: boolean) {
+    this.rightNavDisabledSubmissions = reachesRightBound;
+  }
+  //Activity
+  leftBoundStatActivity(reachesLeftBound: boolean) {
+    this.leftNavDisabledActivity = reachesLeftBound;
+  }
+  rightBoundStatActivity(reachesRightBound: boolean) {
+    this.rightNavDisabledActivity = reachesRightBound;
   }
 
   activeTab(event) {
