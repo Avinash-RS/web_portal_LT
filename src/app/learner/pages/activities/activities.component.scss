@@ -917,6 +917,50 @@ margin-top: 8px;
   background-color: #F5F5F5;
   border-radius: 0;
 }
+.workWrapper, 
+.materialsWrapper, 
+.submissionsWrapper {
+  position: relative;
+}
+.draggable-button-container {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  .leftArrow, .rightArrow {
+      position: relative;
+      button {
+        box-shadow: -1px 0 6px rgba(0,0,0,0.2);
+      }
+  }
+  .leftArrow {
+      left: 0;
+      button {
+        border-radius: 0 36px 36px 0;
+      }
+  }
+  .rightArrow {
+      right: 0;
+      button {
+        border-radius: 36px 0 0 36px;
+      }
+  }
+  button[ng-reflect-disabled="true"] {
+      opacity: 0;
+      cursor: initial;
+  }
+  button[ng-reflect-disabled="false"] {
+      opacity: 1;
+      background-color: #faf5f7;
+      padding: 10px 0;
+      min-width: inherit;
+  }
+}
+::ng-deep.draggable-button-container .mat-icon {
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
+}
 ::ng-deep.scrollingData drag-scroll {
   margin-bottom: 30px;
   overflow: visible !important;
