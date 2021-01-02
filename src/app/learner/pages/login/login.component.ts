@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import * as myGlobals from '@core/globals';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 //import { SocketioService } from '@learner/services/socketio.service';
@@ -22,27 +22,51 @@ export class LoginComponent implements OnInit {
   languages: any;
   secretKey = "(!@#Passcode!@#)";
 
-  constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder,
+  constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder, public learnerService: LearnerServicesService,
              // public socketService: SocketioService,
-              private service: LearnerServicesService, private toastr: ToastrService) {
+              private service: LearnerServicesService, private toastr: ToastrService, private activatedRoute: ActivatedRoute) {
       this.languages = [{lang: 'ta' , languagename: 'Tamil' } , { lang: 'en' , languagename: 'English'  }] ;
-
       // translate.addLangs(['en', 'ta']);
       // translate.setDefaultLang('en');
       // const browserLang = translate.getBrowserLang();
   }
 
   ngOnInit() {
-    localStorage.removeItem('UserDetails');
-    localStorage.removeItem('role');
-    localStorage.removeItem('token');
-    localStorage.removeItem('adminDetails');
+    this.portalToIggnite();
     this.loginForm = this.formBuilder.group({
       // username: new FormControl('', myGlobals.req),
       username: ['',  myGlobals.req],
       password: new FormControl('', myGlobals.req),
       remember_me: new FormControl(false, []),
       language: new FormControl(false, [])
+    });    
+  }
+
+  portalToIggnite() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params && params['email_id']) {
+        this.learnerService.getLoginUserDetail(params.email_id).subscribe((isValidEmailResult: any) => {
+          if (isValidEmailResult.data.get_login_details.success === true) {
+            sessionStorage.setItem('token', isValidEmailResult.data.get_login_details.message.token);
+            localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
+            localStorage.setItem('Fullname', isValidEmailResult.data.get_login_details.message.full_name);
+            sessionStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
+            sessionStorage.setItem('remember_me', 'true');
+            sessionStorage.setItem('user_img', isValidEmailResult.data.get_login_details.message.profile_img);
+            sessionStorage.setItem('role', 'learner');
+            this.router.navigate(['/Learner/MyCourse']);
+          } else {
+            this.toastr.error(isValidEmailResult.data.get_login_details.error_msg, null);
+            localStorage.clear();
+            sessionStorage.clear();
+          }
+        });  
+      } else {
+        localStorage.removeItem('UserDetails');
+        localStorage.removeItem('role');
+        localStorage.removeItem('token');
+        localStorage.removeItem('adminDetails');
+      }
     });
   }
 

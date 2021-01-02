@@ -225,8 +225,8 @@ export class CoursedetailsComponent implements OnInit {
         });
         element.resValue = resourceFile;
       });
-      this.nextPrevHolder = this.topiccurrentPage = this.content.topicIndex;
-      this.moduleHolder = this.currentPage = this.content.moduleIndex;
+      this.nextPrevHolder = this.topiccurrentPage = this.content.topicIndex == null ? 0 : this.content.topicIndex;
+      this.moduleHolder = this.currentPage = this.content.moduleIndex == null ? 0 : this.content.moduleIndex;
 
       this.content.noresource = noresource;
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));

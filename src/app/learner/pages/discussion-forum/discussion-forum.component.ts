@@ -8,6 +8,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-discussion-forum',
@@ -68,6 +69,7 @@ export class DiscussionForumComponent implements OnInit {
   runnablePlatforms = ['MacIntel', 'Win32', 'Linux x86_64'];
   isHideAccord: boolean = false;
   isMobile: boolean = false;
+  secretKey = "(!@#Passcode!@#)";
 
   constructor(public Lservice: LearnerServicesService, public route: Router, private formBuilder: FormBuilder,
               private gs: GlobalServiceService, private toastr: ToastrService, private dialog: MatDialog,
@@ -149,7 +151,7 @@ export class DiscussionForumComponent implements OnInit {
       .subscribe((result: any) => {
         const temp = result.data.ViewAllThreadData.data;
         if (result?.data?.ViewAllThreadData?.data !== '' && result?.data?.ViewAllThreadData !== null) {
-          result?.data?.ViewAllThreadData?.data?.topics.sort((a, b) => new Date(b.lastposttimeISO || b.timestampISO).getTime() -
+          result?.data?.ViewAllThreadData?.data?.topics?.sort((a, b) => new Date(b.lastposttimeISO || b.timestampISO).getTime() -
             new Date(a.lastposttimeISO || a.lastposttimeISO).getTime());
           this.discussionData = result.data.ViewAllThreadData.data;
           this.discussionData1 = Object.assign({}, result.data.ViewAllThreadData.data);
@@ -218,9 +220,9 @@ export class DiscussionForumComponent implements OnInit {
         const UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails')) || null;
         const data1 = {
           content: data,
-          tid: this.selectedThreadData.tid,
-          uid: UserDetails.nodebb_response.uid,
-          toPid: pidData?.pid ? pidData.pid : 0,
+          tid: CryptoJS.AES.encrypt(this.selectedThreadData.tid.toString(), this.secretKey.trim()).toString(),
+          uid: CryptoJS.AES.encrypt(UserDetails.nodebb_response.uid.toString(), this.secretKey.trim()).toString(),
+          toPid: CryptoJS.AES.encrypt((pidData?.pid ? pidData.pid : 0).toString(), this.secretKey.trim()).toString(),
           course_id: this.course.id,
           course_name: this.course.name, // course name should come
           module_name: this.selectedModuleData.title,
@@ -371,10 +373,11 @@ export class DiscussionForumComponent implements OnInit {
     this.topicDiscussionData = [];
     const topicSlug = slug;
     if (this.userDetail?.nodebb_response?.uid) {
-      this.Lservice.viewsingletopicdiscussion(topicSlug.toString(), this.userDetail?.nodebb_response?.uid).subscribe((result: any) => {
-        this.topicDiscussionData = result.data.ViewSingleTopicDiscussionData.data;
-        this.topicDiscussionData1 = Object.assign({}, result.data.ViewSingleTopicDiscussionData.data);
-        this.topicDiscussionData1.posts1 = (this.topicDiscussionData1.posts);
+      const mask = CryptoJS.AES.encrypt(this.userDetail?.nodebb_response?.uid.toString(), this.secretKey.trim()).toString();
+      this.Lservice.viewsingletopicdiscussion(topicSlug.toString(), mask).subscribe((result: any) => {
+        this.topicDiscussionData = result?.data?.ViewSingleTopicDiscussionData?.data;
+        this.topicDiscussionData1 = Object.assign({}, result?.data?.ViewSingleTopicDiscussionData?.data);
+        this.topicDiscussionData1.posts1 = (this.topicDiscussionData1?.posts);
         const data = this.topicDiscussionData?.posts?.map(item => item.content = this.alterstring(item?.content));
         const data1 = this.topicDiscussionData1?.posts1?.map(item => item.content = this.alterstring(item?.content));
         // this.cS.loader$.next(false);
@@ -414,7 +417,8 @@ export class DiscussionForumComponent implements OnInit {
         // this.cS.loader$.next(true);
         this.loading = true;
         this.closedialogbox();
-        this.Lservice.createNewThread(this.userDetail.nodebb_response.uid, this.course.id, this.selectedModuleData?.title,
+        const mask = CryptoJS.AES.encrypt(this.userDetail?.nodebb_response?.uid.toString(), this.secretKey.trim()).toString();
+        this.Lservice.createNewThread(mask, this.course.id, this.selectedModuleData?.title,
           this.addThreadForm.value.thread_name, this.addThreadForm.value.thread_description, this.course.name,
           bid)
           .subscribe((result: any) => {
@@ -438,7 +442,7 @@ export class DiscussionForumComponent implements OnInit {
 
   likeandunlikepost(d?) {
     if (this.userDetail.nodebb_response != null || d !== undefined) {
-      const data = { uid: this.userDetail?.nodebb_response?.uid, pid: d.pid };
+      const data = { uid: CryptoJS.AES.encrypt(this.userDetail?.nodebb_response?.uid.toString(), this.secretKey.trim()).toString(), pid: CryptoJS.AES.encrypt(d?.pid.toString(), this.secretKey.trim()).toString() };
       if (d.apiCalled) {
         return false;
       } else {
