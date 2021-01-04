@@ -11,6 +11,8 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import {TranslateService} from '@ngx-translate/core';
 import * as CryptoJS from 'crypto-js';
 import { environment } from '../../../../environments/environment';
+import { RecaptchaErrorParameters } from "ng-recaptcha";
+import { CommonServicesService } from '@core/services/common-services.service';
 
 @Component({
   selector: 'app-registration',
@@ -29,13 +31,15 @@ export class RegistrationComponent implements OnInit {
   fullname: any;
   registerSuccess = false;
   secretKey = "(!@#Passcode!@#)";
-  siteKey = environment.captachaSiteKey;
+  siteKey: any = environment.captachaSiteKey;
+  resolvedCaptcha: any;
   constructor(
     public translate: TranslateService,
     private formBuilder: FormBuilder,
     private router: Router,
     private loader: Ng4LoadingSpinnerService,
     public service: LearnerServicesService,
+    private commonService: CommonServicesService,
     public dialog: MatDialog,
     private toastr: ToastrService
   ) {
@@ -64,49 +68,67 @@ export class RegistrationComponent implements OnInit {
 
     resolved(captchaResponse: string) {
       console.log(`Resolved captcha with response: ${captchaResponse}`);
+      this.commonService.verifyCaptcha(captchaResponse).subscribe((res: any)=> {
+        console.log('res', res);
+        
+        }, (err)=> {
+        console.log('err', err);
+        
+      })
+      this.resolvedCaptcha = captchaResponse;
+    }
+
+    onError(errorDetails: RecaptchaErrorParameters): void {
+      console.log(`reCAPTCHA error encountered; details:`, errorDetails);
     }
 
   get f() { return this.registerForm.controls; }
 
   Submit() {
-    localStorage.removeItem('UserDetails');
-    localStorage.removeItem('role');
-    localStorage.removeItem('token');
-    localStorage.removeItem('adminDetails');
-
-    this.loader.show();
-    this.fullname = this.registerForm.value.fullname.trimLeft();
-    // this.registerForm.value.termsandconditions
-    var encryptedmail = CryptoJS.AES.encrypt(this.registerForm.value.email, this.secretKey.trim()).toString();
-    var encryptedname = CryptoJS.AES.encrypt(this.fullname, this.secretKey.trim()).toString();
-    var encryptedmobile = CryptoJS.AES.encrypt(this.registerForm.value.mobile, this.secretKey.trim()).toString();
-    this.service.user_registration(encryptedmail, encryptedname,
-      encryptedmobile ?  encryptedmobile : '' ,
-     this.registerForm.value.title , true ).subscribe((data: any) => {
-    this.registerForm.reset();
-    this.formRef.resetForm();
-    this.registerForm.setErrors(null); // could be removed
-    this.registerForm.updateValueAndValidity();
-    if (data.data.user_registration) {
-      if (data.data.user_registration.success === 'true') {
-        this.registerSuccess = true;
-        this.toastr.success(data.data.user_registration.message, null);
-        this.loader.hide();
-        this.registerForm.setErrors(null);
-      } else {
-        this.toastr.error(data.data.user_registration.message, null);
-        this.loader.hide();
-        this.registerSuccess = false;
-      }
-     } else {
-      this.toastr.warning('Please try after sometime', null);
-     }
-    });
+    // if (this.resolvedCaptcha) {
+      localStorage.removeItem('UserDetails');
+      localStorage.removeItem('role');
+      localStorage.removeItem('token');
+      localStorage.removeItem('adminDetails');
+  
+      this.loader.show();
+      this.fullname = this.registerForm.value.fullname.trimLeft();
+      // this.registerForm.value.termsandconditions
+      var encryptedmail = CryptoJS.AES.encrypt(this.registerForm.value.email, this.secretKey.trim()).toString();
+      var encryptedname = CryptoJS.AES.encrypt(this.fullname, this.secretKey.trim()).toString();
+      var encryptedmobile = CryptoJS.AES.encrypt(this.registerForm.value.mobile, this.secretKey.trim()).toString();
+      this.service.user_registration(encryptedmail, encryptedname,
+        encryptedmobile ?  encryptedmobile : '' ,
+       this.registerForm.value.title , true ).subscribe((data: any) => {
+      this.registerForm.reset();
+      this.formRef.resetForm();
+      this.registerForm.setErrors(null); // could be removed
+      this.registerForm.updateValueAndValidity();
+      if (data.data.user_registration) {
+        if (data.data.user_registration.success === 'true') {
+          this.registerSuccess = true;
+          this.toastr.success(data.data.user_registration.message, null);
+          this.loader.hide();
+          this.registerForm.setErrors(null);
+        } else {
+          this.toastr.error(data.data.user_registration.message, null);
+          this.loader.hide();
+          this.registerSuccess = false;
+        }
+       } else {
+        this.toastr.warning('Please try after sometime', null);
+       }
+      });  
+    // } else {
+    //   this.toastr.warning('Captcha not checked in', null);
+    // }
   }
   register() {
     this.router.navigateByUrl('/Learner/login');
   }
   onSubmit() {
+    console.log(this.registerForm);
+    
     if (this.registerForm.valid) {
       this.Submit();
     }

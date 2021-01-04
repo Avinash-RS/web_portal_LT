@@ -131,11 +131,11 @@
                         </mat-form-field>
                         <br><br>
 
-                        <re-captcha (resolved)="resolved($event)"
-                        siteKey="siteKey"
-                      ></re-captcha>
-
                         <div class="">
+                          <re-captcha (resolved)="resolved($event)" (error)="onError($event)" errorMode="handled" [siteKey]="siteKey">
+                          
+                          </re-captcha>
+  
                             <!-- <label class="fromLabel">Email ID</label>
                             <input type="text" id="email" #email formControlName="email" maxlength="64"
                                 class="form-control" [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }"
