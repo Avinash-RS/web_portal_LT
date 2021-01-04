@@ -22,8 +22,9 @@
    
     <div class="header-carousel">
 
-      <drag-scroll [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
-        <span *ngFor="let value of topicList;let i = index" class="tooltip-pos">
+      <drag-scroll (reachesLeftBound)="leftBoundStat($event)"
+      (reachesRightBound)="rightBoundStat($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
+        <span drag-scroll-item *ngFor="let value of topicList;let i = index" class="tooltip-pos">
           <span class="topic-container" (click)="onTopicSelection(value)">
             <!-- <span class="{{ selectedTopic == value ? 'topic-chip active-topic' : 'topic-chip'}}" 
             [matTooltip]="value">{{value}}</span> -->
@@ -36,6 +37,14 @@
           </span>
         </span>
       </drag-scroll>
+      <div class="draggable-button-container">
+        <div class="leftArrow">
+          <button [disabled]="leftNavDisabled" mat-raised-button (click)="moveLeft()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
+        </div>
+        <div class="rightArrow">
+          <button [disabled]="rightNavDisabled" mat-raised-button (click)="moveRight()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
+        </div>
+      </div>
       
       <!-- <owl-carousel-o [options]="TopicsOptions" class="questionList">
         <ng-template *ngFor="let value of topicList;let i = index" carouselSlide>

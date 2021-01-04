@@ -374,18 +374,18 @@ export class CoursedetailsComponent implements OnInit {
                 const date2 = JSON.parse(JSON.stringify(fileData.endDate));
                 const startDate = new Date(date1);
                 const endDate = new Date(date2);
-                fileData.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
-                fileData.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:MM');
-                if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate) {
+                fileData.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:mm');
+                fileData.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:mm');
+                if (moment().format('DD-MM-YYYY HH:mm') >= fileData.assignmentStartDate) {
                   fileData.enableView = true;
                 } else {
                   fileData.enableView = false;
                 }
-                if (moment().format('DD-MM-YYYY HH:MM') >= fileData.assignmentStartDate &&
-                  moment().format('DD-MM-YYYY HH:MM') <= this.courseEndDate) {
+                if (moment().format('DD-MM-YYYY HH:mm') >= fileData.assignmentStartDate &&
+                  moment().format('DD-MM-YYYY HH:mm') <= this.courseEndDate) {
                   fileData.enableUpload = true;
-                } else if (moment().format('DD-MM-YYYY HH:MM') < fileData.assignmentStartDate ||
-                  moment().format('DD-MM-YYYY HH:MM') > this.courseEndDate) {
+                } else if (moment().format('DD-MM-YYYY HH:mm') < fileData.assignmentStartDate ||
+                  moment().format('DD-MM-YYYY HH:mm') > this.courseEndDate) {
                   fileData.enableUpload = false;
                 }
               }

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { knowledgeService } from '@learner/services/knowledge-resource/knowledge-resource.service';
 import { ToastrService } from 'ngx-toastr';
 import { KnowledgePreviewComponent } from '../knowledge-preview/knowledge-preview.component';
+import { DragScrollComponent } from 'ngx-drag-scroll';
 
 @Component({
   selector: 'app-knowledge-landing-page',
@@ -11,6 +12,7 @@ import { KnowledgePreviewComponent } from '../knowledge-preview/knowledge-previe
   styleUrls: ['./knowledge-landing-page.component.scss']
 })
 export class KnowledgeLandingPageComponent implements OnInit {
+  @ViewChild(DragScrollComponent) ds: DragScrollComponent;
   resourceParams: any;
   topicList = [
     'All'
@@ -44,6 +46,8 @@ export class KnowledgeLandingPageComponent implements OnInit {
   isPreview = false;
   preResourceFile: any;
   selectedTopic = 'All';
+  leftNavDisabled = false;
+  rightNavDisabled = false;
   constructor(public route: ActivatedRoute,
               public apiService: knowledgeService,
               public dialog: MatDialog,
@@ -57,7 +61,20 @@ export class KnowledgeLandingPageComponent implements OnInit {
       };
       this.resourceDetails(params.domain, params.area_of_interest);
     });
+  }
 
+  moveLeft() {
+    this.ds.moveLeft();
+  }
+  moveRight() {
+    this.ds.moveRight();
+  }
+  leftBoundStat(reachesLeftBound: boolean) {
+    this.leftNavDisabled = reachesLeftBound;
+  }
+
+  rightBoundStat(reachesRightBound: boolean) {
+    this.rightNavDisabled = reachesRightBound;
   }
 
   resourceDetails(domain, areaOfInterest) {
@@ -135,4 +152,5 @@ export class KnowledgeLandingPageComponent implements OnInit {
     });
     this.resourceFile = JSON.parse(JSON.stringify(data));
   }
+
 }
