@@ -130,11 +130,12 @@
                           </mat-error>
                         </mat-form-field>
                         <br><br>
-
-                        <div class="">
-                          <re-captcha (resolved)="resolved($event)" (error)="onError($event)" errorMode="handled" [siteKey]="siteKey">
+                        <div>
+                        <re-captcha formControlName="recaptchaReactive" (resolved)="resolved($event)" (error)="onError($event)" errorMode="handled" [siteKey]="siteKey">
                           
-                          </re-captcha>
+                        </re-captcha>
+                      </div>
+                        <div class="">
   
                             <!-- <label class="fromLabel">Email ID</label>
                             <input type="text" id="email" #email formControlName="email" maxlength="64"
@@ -150,7 +151,6 @@
                                     <div class="alert1"> <strong>{{'Note' | translate}}</strong> {{': Full name will be used in your certificates' | translate }}</div>
                                 </div>
                             </div>
-
 
                             <button class="btn" mat-raised-button id="btnsubmit" [disabled]="!registerForm.valid" (click)="Submit()">
                                 {{'SIGN UP' | translate}}
@@ -179,22 +179,6 @@
                 </div> -->
             </div>
 
-        </div>
-
-
-        <div class="row footer20">
-          <div class="col-8">
-            <div class="powered">
-              <!-- <img class="footericon" alt="" src="assets/learner/LnT-Full-black-logo.svg"> -->
-             
-            </div>
-            <!-- <span class="footertext">© 2020 L&T EduTech.</span> -->
-          </div>
-          <div class="col-4">
-            <!-- <span class="powered">
-              <img class="footericon" alt="" src="assets/learner/LT_small.svg">
-            </span> -->
-          </div>
         </div>
 
 
