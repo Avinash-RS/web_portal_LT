@@ -16,7 +16,7 @@ import { MaterialModule } from '@core/material.module';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
-import { RecaptchaModule } from 'ng-recaptcha';
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
 const routes: Routes = [
   {
@@ -86,6 +86,7 @@ const routes: Routes = [
     Ng4LoadingSpinnerModule.forRoot(),
     RouterModule.forChild(routes),
     RecaptchaModule,
+    RecaptchaFormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

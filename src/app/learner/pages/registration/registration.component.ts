@@ -52,6 +52,7 @@ export class RegistrationComponent implements OnInit {
   ngOnInit() {
     this.translate.use(localStorage.getItem('language') ? localStorage.getItem('language') : 'en');
     this.registerForm = this.formBuilder.group({
+      recaptchaReactive: [null, [Validators.required]],
       title: ['', [Validators.required]],
       fullname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50),
         Validators.pattern(/^[-a-zA-Z-() ]+(\s+[-a-zA-Z-()]+)*$/)]],
@@ -61,20 +62,10 @@ export class RegistrationComponent implements OnInit {
         Validators.maxLength(64), Validators.pattern(/^([A-Za-z]|[0-9])[A-Za-z0-9._-]+[A-Za-z0-9]@((?:[-a-z0-9]+\.)+[a-z]{2,})$/)]],
       termsandconditions: new FormControl('', [])
     }, {
-    });
-    console.log('coming', this.siteKey);
-    
+    });    
   }
 
     resolved(captchaResponse: string) {
-      console.log(`Resolved captcha with response: ${captchaResponse}`);
-      this.commonService.verifyCaptcha(captchaResponse).subscribe((res: any)=> {
-        console.log('res', res);
-        
-        }, (err)=> {
-        console.log('err', err);
-        
-      })
       this.resolvedCaptcha = captchaResponse;
     }
 
@@ -85,7 +76,6 @@ export class RegistrationComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   Submit() {
-    // if (this.resolvedCaptcha) {
       localStorage.removeItem('UserDetails');
       localStorage.removeItem('role');
       localStorage.removeItem('token');
@@ -118,10 +108,7 @@ export class RegistrationComponent implements OnInit {
        } else {
         this.toastr.warning('Please try after sometime', null);
        }
-      });  
-    // } else {
-    //   this.toastr.warning('Captcha not checked in', null);
-    // }
+      });
   }
   register() {
     this.router.navigateByUrl('/Learner/login');
