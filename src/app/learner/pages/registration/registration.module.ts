@@ -6,7 +6,7 @@ import { RegistrationRoutingModule } from './registration-routing.module';
   declarations: [],
   imports: [
     CommonModule,
-    RegistrationRoutingModule
+    RegistrationRoutingModule,
   ]
 })
 export class RegistrationModule { }

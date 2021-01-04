@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {TranslateService} from '@ngx-translate/core';
 import * as CryptoJS from 'crypto-js';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-registration',
@@ -28,6 +29,7 @@ export class RegistrationComponent implements OnInit {
   fullname: any;
   registerSuccess = false;
   secretKey = "(!@#Passcode!@#)";
+  siteKey = environment.captachaSiteKey;
   constructor(
     public translate: TranslateService,
     private formBuilder: FormBuilder,
@@ -56,7 +58,13 @@ export class RegistrationComponent implements OnInit {
       termsandconditions: new FormControl('', [])
     }, {
     });
+    console.log('coming', this.siteKey);
+    
   }
+
+    resolved(captchaResponse: string) {
+      console.log(`Resolved captcha with response: ${captchaResponse}`);
+    }
 
   get f() { return this.registerForm.controls; }
 

@@ -130,7 +130,11 @@
                           </mat-error>
                         </mat-form-field>
                         <br><br>
-                    
+
+                        <re-captcha (resolved)="resolved($event)"
+                        siteKey="siteKey"
+                      ></re-captcha>
+
                         <div class="">
                             <!-- <label class="fromLabel">Email ID</label>
                             <input type="text" id="email" #email formControlName="email" maxlength="64"
