@@ -246,7 +246,7 @@ export class ProjectMobileComponent implements OnInit {
     let submitStatus = '';
     if (moment().format('DD-MM-YYYY HH:mm') >= project.actstartDate &&
     moment().format('DD-MM-YYYY HH:mm') <= project.actendDate) {
-    submitStatus = 'ontime';
+      submitStatus = 'ontime';
     } else if (moment().format('DD-MM-YYYY HH:mm') > project.actendDate) {
       submitStatus = 'late';
     }
