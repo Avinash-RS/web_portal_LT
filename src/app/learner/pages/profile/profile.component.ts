@@ -154,7 +154,7 @@ export class ProfileComponent implements OnInit {
     this.profileForm = this.formBuilder.group({
       about_you: new FormControl('', [Validators.minLength(3), Validators.maxLength(1000)]),
       gender: new FormControl('', myGlobals.req),
-      is_student_or_professional: new FormControl('', myGlobals.req),
+      is_student_or_professional: new FormControl(''),
       languages_known: [''],
       country: ['', myGlobals.req],
       state: ['', myGlobals.req],
@@ -348,13 +348,13 @@ export class ProfileComponent implements OnInit {
 
   createQualItem(): FormGroup {
     return this.formBuilder.group({
-      qualification: ['', myGlobals.req],
-      institute: ['', myGlobals.req],
-      board_university: ['', myGlobals.req],
-      discipline: ['', myGlobals.req],
-      specification: ['', myGlobals.req],
-      year_of_passing: ['', myGlobals.req],
-      percentage: ['', myGlobals.req]
+      qualification: [''],
+      institute: [''],
+      board_university: [''],
+      discipline: [''],
+      specification: [''],
+      year_of_passing: [''],
+      percentage: ['']
     });
   }
 
@@ -638,11 +638,13 @@ export class ProfileComponent implements OnInit {
       this.passwordForm.value.newpassword).subscribe((password: any) => {
         if (password.data.get_change_password_updateprofile.success === 'true') {
           Swal.fire(password.data.get_change_password_updateprofile.message);
+          this.services.logout(this.currentUser.user_id, false).subscribe((logout: any) => {
           this.dialog.closeAll();
           this.router.navigate(['/Learner/login']);
           localStorage.clear();
           sessionStorage.clear();
           this.services.getIpAddressByUrl();
+          });
         } else {
           Swal.fire(password.data.get_change_password_updateprofile.message);
         }
