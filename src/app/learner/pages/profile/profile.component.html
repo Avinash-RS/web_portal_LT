@@ -114,7 +114,7 @@
 
   <div class="container-reg200 fourth">
     <div class="profile-details">
-      <form [formGroup]="profileForm">
+      <form [formGroup]="profileForm" autocomplete="off">
         <!-- ////// Info about you//////// -->
         <!-- <div class="row">
           <div class="form-group width_100">
@@ -400,7 +400,7 @@
         </span>
         <h1 class="head">{{'Change the Email ID' | translate}}</h1>
         <mat-dialog-content style="width: 300px;margin-top: 24px; height: 200px;">
-          <form [formGroup]="mailForm">
+          <form [formGroup]="mailForm" autocomplete="off">
             <div class="form-group">
               <label class="f_size_20 f_wt_400">{{'Enter new email id' }}</label>
               <input type="text" formControlName="mailid" [placeholder]="'example@mail.com' | translate" class="form-control"
@@ -427,7 +427,7 @@
         </span>
         <h1 class="head">{{'Change the Mobile No' | translate}}</h1>
         <mat-dialog-content style="width: 330px;margin-top: 24px;">
-          <form [formGroup]="otpForm">
+          <form [formGroup]="otpForm" autocomplete="off">
             <div class="form-group">
               <label class="f_size_20 f_wt_400">{{'Enter new mobile no' | translate}}</label>
               <input type="text" formControlName="mobile" placeholder="+91" maxlength="10" pattern="[1-9]{1}[0-9]{9}"
@@ -472,7 +472,7 @@
         </span>
         <h1 class="head">{{'Change the Password' | translate}}</h1>
         <mat-dialog-content style="width: 380px;margin-top: 24px;">
-          <form [formGroup]="passwordForm">
+          <form [formGroup]="passwordForm" autocomplete="off">
             <label class="f_size_16 f_wt_400">{{'Enter current password' | translate}}</label>
             <div class="form-group">
               <input [type]="show ? 'text' : 'password'" name="password" formControlName="currentpassword"

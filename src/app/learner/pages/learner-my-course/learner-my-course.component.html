@@ -9,7 +9,7 @@
     <div [ngClass]="expandSearch ? 'mobileSearchRow': 'myCourseSearch'" class="col-12">
       <mat-icon class="glyphicon" (click)="expandSearch = !expandSearch">keyboard_backspace</mat-icon>
       <!-- NEED TO WORK ON SEARCH -->
-      <input type="text" class="form-control search" [(ngModel)]="searchName" />
+      <input type="text" autocomplete="off" class="form-control search" [(ngModel)]="searchName" />
     </div>
   </div>
   <div *ngIf="!expandSearch" class="row w-100 mr-0 ml-0">
