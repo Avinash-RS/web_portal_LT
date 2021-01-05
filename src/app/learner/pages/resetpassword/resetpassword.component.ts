@@ -8,6 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { ToastrService } from 'ngx-toastr';
 import * as CryptoJS from 'crypto-js';
+import { environment } from '../../../../environments/environment';
+import { RecaptchaErrorParameters } from "ng-recaptcha";
 
 
 @Component({
@@ -32,6 +34,8 @@ export class ResetpasswordComponent implements OnInit {
   hide = true;
   hide2 = true;
   secretKey = "(!@#Passcode!@#)";
+  siteKey: any = environment.captachaSiteKey;
+  resolvedCaptcha: any;
 
   constructor(
     public translate: TranslateService,
@@ -58,10 +62,11 @@ export class ResetpasswordComponent implements OnInit {
           var userValue = data['data']
           if(userValue['email']){
             this.user = userValue['email']
+            this.get_user_detail_username(this.user);
           }
         })
         //this.user = decryptedString;
-       this.get_user_detail_username(this.user);
+       
       } else {
         this.user = localStorage.getItem('Username');
         this.isLinkActive = true;
@@ -71,6 +76,7 @@ export class ResetpasswordComponent implements OnInit {
 
 
     this.resetForm = this.formBuilder.group({
+      recaptchaReactive: [null, [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(8),  Validators.maxLength(20),
         Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
         confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8),
@@ -83,6 +89,15 @@ export class ResetpasswordComponent implements OnInit {
       validator: MustMatch('password', 'confirmpassword'),
     });
   }
+
+  resolved(captchaResponse: string) {
+    this.resolvedCaptcha = captchaResponse;
+  }
+
+  onError(errorDetails: RecaptchaErrorParameters): void {
+    console.log(`reCAPTCHA error encountered; details:`, errorDetails);
+  }
+
 
   get f() { return this.resetForm.controls; }
   showPassword() {

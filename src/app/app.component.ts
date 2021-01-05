@@ -82,7 +82,7 @@ export class AppComponent implements OnInit {
       filter(event => event instanceof NavigationEnd),
     ).subscribe((e: any) => {
       const urlIdentifier = e.url.split("/")
-      const possiblePages = ['register', 'login', 'recover']
+      const possiblePages = ['register', 'login', 'recover', 'resetpassword']
 
       const rt = this.getChild(this.activatedRoute);
       rt.data.subscribe(data => {

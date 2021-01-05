@@ -310,13 +310,13 @@ export class ActivitiesComponent implements OnInit {
     ).subscribe((data: any) => {
       if (data.data.getAssignmentmoduleData.success) {
         // this.assignmentMessage = true;
-        this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
+        this.assignmentContent = data?.data?.getAssignmentmoduleData?.data[0];
         if (
           this.assignmentContent.courseStartDate &&
           this.assignmentContent.courseEndDate
         ) {
           const batchStartDate = new Date(this.assignmentContent.courseStartDate);
-          const batchEndDate = new Date(this.assignmentContent.courseEndDate);
+          const batchEndDate = new Date(this.assignmentContent.courseEndDate);          
           this.courseStartDate = moment(batchStartDate).format('DD-MM-YYYY');
           this.courseEndDate = moment(batchEndDate).format('DD-MM-YYYY');
           this.assignmentContent.coursedetails.forEach((element) => {
@@ -328,13 +328,16 @@ export class ActivitiesComponent implements OnInit {
                   const startDate = new Date(date1);
                   const endDate = new Date(date2);
                   fileData.assignmentStartDate = moment(startDate).format(
-                    'DD-MM-YYYY HH:MM'
+                    'DD-MM-YYYY HH:mm'
                   );
                   fileData.assignmentEndDate = moment(endDate).format(
-                    'DD-MM-YYYY HH:MM'
+                    'DD-MM-YYYY HH:mm'
                   );
+                  console.log('start date', fileData.type_name, fileData.assignmentStartDate);
+                  console.log('end date', fileData.type_name, fileData.assignmentEndDate);
+                  
                   if (
-                    moment().format('DD-MM-YYYY HH:MM') >=
+                    moment().format('DD-MM-YYYY HH:mm') >=
                     fileData.assignmentStartDate
                   ) {
                     fileData.enableView = true;
@@ -342,13 +345,13 @@ export class ActivitiesComponent implements OnInit {
                     fileData.enableView = false;
                   }
                   if (
-                    moment().format('DD-MM-YYYY HH:MM') >=
+                    moment().format('DD-MM-YYYY HH:mm') >=
                     fileData.assignmentStartDate &&
                     moment().format('DD-MM-YYYY') <= this.courseEndDate
                   ) {
                     fileData.enableUpload = true;
                   } else if (
-                    moment().format('DD-MM-YYYY HH:MM') <
+                    moment().format('DD-MM-YYYY HH:mm') <
                     fileData.assignmentStartDate ||
                     moment().format('DD-MM-YYYY') > this.courseEndDate
                   ) {
@@ -485,8 +488,8 @@ export class ActivitiesComponent implements OnInit {
           // element.isCollapsed = false;
           // Batch date
           const batchEndDate = new Date(element.projectActivity.batchenddate);
-          element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:MM');
-          if (moment().format('DD-MM-YYYY HH:MM') <= element.batchEndDate) {
+          element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
+          if (moment().format('DD-MM-YYYY HH:mm') <= element.batchEndDate) {
             element.submitType = true;
           } else {
             element.submitType = false;
@@ -495,7 +498,7 @@ export class ActivitiesComponent implements OnInit {
           const crrDate = new Date();
           const startDate = new Date(element.projectActivity.activitystartdate);
           // element.activityStartDate = moment(startDate).format('ll');
-          element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
+          element.startdate = moment(startDate).format('DD-MM-YYYY HH:mm');
           const endDate = new Date(element.projectActivity.activityenddate);
           // element.activityEndDate = moment(endDate).format('ll');
           element.enableSubmit  = this.dateDiff(startDate,
@@ -678,10 +681,10 @@ export class ActivitiesComponent implements OnInit {
   }
 
   performlearnerUploadVideo() {
-    const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:MM aa');
+    const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm a');
     const performVideo = new FormData();
-    const startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy HH:MM aa');
-    const endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy HH:MM aa');
+    const startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy HH:mm a');
+    const endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy HH:mm a');
     if (currentDate >= startDate && currentDate <= endDate) {
       this.submitStatus = 'ontime';
     } else {
@@ -717,10 +720,10 @@ export class ActivitiesComponent implements OnInit {
   submitDeleteVideo(videoName, itrdata, perform) {
     let videoFile = [];
     videoFile.push(videoName);
-    const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:MM aa');
+    const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm a');
     const performVideo = new FormData();
-    const startDate = this.datePipe.transform(perform?.activitystartdate, 'dd-MM-yyyy HH:MM aa');
-    const endDate = this.datePipe.transform(perform?.activityenddate, 'dd-MM-yyyy HH:MM aa');
+    const startDate = this.datePipe.transform(perform?.activitystartdate, 'dd-MM-yyyy HH:mm a');
+    const endDate = this.datePipe.transform(perform?.activityenddate, 'dd-MM-yyyy HH:mm a');
     if (currentDate >= startDate && currentDate <= endDate) {
       this.submitStatus = 'ontime';
     } else {

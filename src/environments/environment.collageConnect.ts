@@ -9,6 +9,6 @@ export const environment = {
     analytics: 'UA-171656647-1',
     systemIp : 'http://api.ipify.org/?format=json',
     orgId: '' , // saveetha,
-    socketio : '20.44.32.238:3009'
-
+    socketio : '20.44.32.238:3009',
+    captachaSiteKey: '6Ldu8h8aAAAAAEV33ZBs-xCR4hHIzPuvfLjkG-oO'
 };

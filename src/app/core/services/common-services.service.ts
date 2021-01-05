@@ -235,4 +235,13 @@ export class CommonServicesService {
       }
     });
   }
+
+  verifyCaptcha(response) {
+    let data = {
+      'response': response,
+      'secret': '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
+    }
+    // return this.http.get(`https://www.google.com/recaptcha/api/siteverify?email=l7gokul@gmail.com&g-recaptcha-response=${response}`);
+    return this.http.post(`https://www.google.com/recaptcha/api/siteverify`, data);
+  }
 }

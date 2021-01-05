@@ -93,8 +93,8 @@ export class ProjectMobileComponent implements OnInit {
         // element.isCollapsed = false;
         // Batch date
         const batchEndDate = new Date(element.projectActivity.batchenddate);
-        element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:MM');
-        if (moment().format('DD-MM-YYYY HH:MM') <= element.batchEndDate) {
+        element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
+        if (moment().format('DD-MM-YYYY HH:mm') <= element.batchEndDate) {
           element.submitType = true;
         } else {
           element.submitType = false;
@@ -102,12 +102,12 @@ export class ProjectMobileComponent implements OnInit {
         // Activity Dates
         const startDate = new Date(element.projectActivity.activitystartdate);
         element.activityStartDate = moment(startDate).format('ll');
-        element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
+        element.startdate = moment(startDate).format('DD-MM-YYYY HH:mm');
         const endDate = new Date(element.projectActivity.activityenddate);
         element.activityEndDate = moment(endDate).format('ll');
         const submitDate = new Date(element.projectActivity.submitted_on);
         element.submittedOn = moment(submitDate).format('ll');
-        if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
+        if (moment().format('DD-MM-YYYY HH:mm') < element.startdate) {
           element.enableSubmit = false;
         } else {
           element.enableSubmit = true;
@@ -155,8 +155,8 @@ export class ProjectMobileComponent implements OnInit {
         // element.isCollapsed = false;
         // Batch date
         const batchEndDate = new Date(element.projectActivity.batchenddate);
-        element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:MM');
-        if (moment().format('DD-MM-YYYY HH:MM') <= element.batchEndDate) {
+        element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
+        if (moment().format('DD-MM-YYYY HH:mm') <= element.batchEndDate) {
           element.submitType = true;
         } else {
           element.submitType = false;
@@ -164,21 +164,21 @@ export class ProjectMobileComponent implements OnInit {
         // Activity Dates
         // const startDate = new Date(element.projectActivity.activitystartdate);
         // element.activityStartDate = moment(startDate).format('ll');
-        // element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
+        // element.startdate = moment(startDate).format('DD-MM-YYYY HH:mm');
         // const endDate = new Date(element.projectActivity.activityenddate);
         // element.activityEndDate = moment(endDate).format('ll');
 
         const crrDate = new Date();
         const startDate = new Date(element.projectActivity.activitystartdate);
         // element.activityStartDate = moment(startDate).format('ll');
-        element.startdate = moment(startDate).format('DD-MM-YYYY HH:MM');
+        element.startdate = moment(startDate).format('DD-MM-YYYY HH:mm');
         const endDate = new Date(element.projectActivity.activityenddate);
         // element.activityEndDate = moment(endDate).format('ll');
         element.enableSubmit = this.dateDiff(startDate,
           endDate, crrDate);
         const submitDate = new Date(element.projectActivity.submitted_on);
         element.submittedOn = moment(submitDate).format('ll');
-        // if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
+        // if (moment().format('DD-MM-YYYY HH:mm') < element.startdate) {
         //   element.enableSubmit = false;
         // } else {
         //   element.enableSubmit = true;
@@ -199,14 +199,14 @@ export class ProjectMobileComponent implements OnInit {
 
   learnerUploadVideo(project, submitAction) {
     const startDate1 = new Date(project.projectActivity.activitystartdate);
-    project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:MM');
+    project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:mm');
     const endDate1 = new Date(project.projectActivity.activityenddate);
-    project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:MM');
+    project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:mm');
     let submitStatus = '';
-    if (moment().format('DD-MM-YYYY HH:MM') >= project.actstartDate &&
-      moment().format('DD-MM-YYYY HH:MM') <= project.actendDate) {
+    if (moment().format('DD-MM-YYYY HH:mm') >= project.actstartDate &&
+      moment().format('DD-MM-YYYY HH:mm') <= project.actendDate) {
       submitStatus = 'ontime';
-    } else if (moment().format('DD-MM-YYYY HH:MM') > project.actendDate) {
+    } else if (moment().format('DD-MM-YYYY HH:mm') > project.actendDate) {
       submitStatus = 'late';
     }
     const payload = new FormData();
@@ -240,14 +240,14 @@ export class ProjectMobileComponent implements OnInit {
   // Submit or Delete
   learnerSumbitdeleteVideo(project, deleteItem, submitAction) {
     const startDate1 = new Date(project.projectActivity.activitystartdate);
-    project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:MM');
+    project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:mm');
     const endDate1 = new Date(project.projectActivity.activityenddate);
-    project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:MM');
+    project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:mm');
     let submitStatus = '';
-    if (moment().format('DD-MM-YYYY HH:MM') >= project.actstartDate &&
-    moment().format('DD-MM-YYYY HH:MM') <= project.actendDate) {
+    if (moment().format('DD-MM-YYYY HH:mm') >= project.actstartDate &&
+    moment().format('DD-MM-YYYY HH:mm') <= project.actendDate) {
     submitStatus = 'ontime';
-    } else if (moment().format('DD-MM-YYYY HH:MM') > project.actendDate) {
+    } else if (moment().format('DD-MM-YYYY HH:mm') > project.actendDate) {
       submitStatus = 'late';
     }
     const submitData = {

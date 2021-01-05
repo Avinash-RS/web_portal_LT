@@ -68,8 +68,8 @@ export class AssignmentComponent implements OnInit {
         ) {
           const batchStartDate = new Date(this.assignmentContent.courseStartDate);
           const batchEndDate = new Date(this.assignmentContent.courseEndDate);
-          this.courseStartDate = moment(batchStartDate).format('DD-MM-YYYY HH:MM A');
-          this.courseEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:MM A');
+          this.courseStartDate = moment(batchStartDate).format('DD-MM-YYYY HH:mm A');
+          this.courseEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm A');
           this.assignmentContent.coursedetails.forEach((element) => {
             element.moduledetails.forEach((moduleData) => {
               moduleData.resourse.files.forEach((fileData) => {
@@ -78,10 +78,14 @@ export class AssignmentComponent implements OnInit {
                   const date2 = JSON.parse(JSON.stringify(fileData.endDate));
                   const startDate = new Date(date1);
                   const endDate = new Date(date2);
-                  fileData.assignmentStartDate = moment(startDate).format('DD-MM-YYYY HH:MM');
-                  fileData.assignmentEndDate = moment(endDate).format('DD-MM-YYYY HH:MM');
+                  fileData.assignmentStartDate = moment(startDate).format(
+                    'DD-MM-YYYY HH:mm'
+                  );
+                  fileData.assignmentEndDate = moment(endDate).format(
+                    'DD-MM-YYYY HH:mm'
+                  );
                   if (
-                    moment().format('DD-MM-YYYY HH:MM') >=
+                    moment().format('DD-MM-YYYY HH:mm') >=
                     fileData.assignmentStartDate
                   ) {
                     fileData.enableView = true;
@@ -89,13 +93,13 @@ export class AssignmentComponent implements OnInit {
                     fileData.enableView = false;
                   }
                   if (
-                    moment().format('DD-MM-YYYY HH:MM') >=
+                    moment().format('DD-MM-YYYY HH:mm') >=
                     fileData.assignmentStartDate &&
                     moment().format('DD-MM-YYYY') <= this.courseEndDate
                   ) {
                     fileData.enableUpload = true;
                   } else if (
-                    moment().format('DD-MM-YYYY HH:MM') <
+                    moment().format('DD-MM-YYYY HH:mm') <
                     fileData.assignmentStartDate ||
                     moment().format('DD-MM-YYYY') > this.courseEndDate
                   ) {
