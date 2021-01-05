@@ -311,6 +311,9 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
   playVideo(templateRef: TemplateRef<any>, videoDialog,  path, docType) {
+    if (path.imageurl) {
+      path.path = path.imageurl;
+    }
      if (docType !== 'video/mp4') {
       this.dialog.open(templateRef, {
         width: '100%',
@@ -319,10 +322,10 @@ export class PerformancePageMobileComponent implements OnInit {
         disableClose: true,
       });
       this.previewDoc = path;
-  } else {
-    this.videoPreview(videoDialog, path);
+    } else {
+      this.videoPreview(videoDialog, path);
+    }
   }
-}
 
 playVideoMaterial(templateRef: TemplateRef<any>, videoDialog,  path, docType) {
   let pathdata = {videourl:  path.path};

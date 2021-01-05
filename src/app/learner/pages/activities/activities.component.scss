@@ -923,12 +923,14 @@ margin-top: 8px;
   position: relative;
 }
 .draggable-button-container {
-  position: absolute;
-  width: 100%;
-  top: 50%;
-  transform: translateY(-50%);
+  // position: absolute;
+  // width: 100%;
+  // top: 50%;
+  // transform: translateY(-50%);
   .leftArrow, .rightArrow {
-      position: relative;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
       button {
         box-shadow: -1px 0 6px rgba(0,0,0,0.2);
       }
@@ -946,11 +948,11 @@ margin-top: 8px;
       }
   }
   button[ng-reflect-disabled="true"] {
-      opacity: 0;
+      display: none;
       cursor: initial;
   }
   button[ng-reflect-disabled="false"] {
-      opacity: 1;
+      display: flex;
       background-color: #faf5f7;
       padding: 10px 0;
       min-width: inherit;
