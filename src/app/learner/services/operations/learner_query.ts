@@ -2168,8 +2168,8 @@ query   get_batchwise_learner_dashboard_data( $user_id: String!, $request_type: 
             total_duration
             credits
             course_description
-            course_long_description
-            short_description
+            course_long_description
+            short_description
             instructor_lead_session_completed_count
             instructor_lead_session_total_count
             completed_mid_course_project_count
