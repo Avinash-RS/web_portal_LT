@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import * as CryptoJS from 'crypto-js';
 @Component({
   selector: 'app-forgot-username-and-password',
   templateUrl: './forgot-username-and-password.component.html',
@@ -26,6 +27,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   isForgotPasswordEnable = false;
   isshow = true;
   isnextBtnEnable = true;
+  secretKey = "(!@#Passcode!@#)";
   constructor( public translate: TranslateService,
                private formBuilder: FormBuilder,
                private router: Router,
@@ -83,7 +85,8 @@ focusout(e) {
 forgotusername() {
     this.type = 'username';
     this.loader.show();
-    this.service.forgotUsernameandPassword(this.type, this.subtype, this.forgotUsername.value.mobile, this.forgotUsername.value.email)
+    var encrypteduser = CryptoJS.AES.encrypt(this.forgotUsername.value.username, this.secretKey.trim()).toString();
+    this.service.forgotUsernameandPassword(this.type, this.subtype, this.forgotUsername.value.mobile, encrypteduser)
       .subscribe((data: any) => {
         if (data.data.get_forgot_username_mobile_email.success === 'true') {
           this.toastr.success(data.data.get_forgot_username_mobile_email.message, null);
@@ -100,7 +103,8 @@ forgotusername() {
 getUserDetails() {
     this.loader.show();
     this.recoveryTypes = [];
-    this.service.forgotPasswordByUsername(this.forgotUsername.value.username).subscribe((data: any) => {
+    var encryptedname = CryptoJS.AES.encrypt(this.forgotUsername.value.username, this.secretKey.trim()).toString();
+    this.service.forgotPasswordByUsername(encryptedname).subscribe((data: any) => {
       if (data.data.get_forgot_password_byusername.success === 'true') {
         this.loader.hide();
         this.isnextBtnEnable = false;
@@ -142,7 +146,8 @@ forgotPassword(recovertype) {
         });
     } else {
       this.type = 'password';
-      this.service.forgotUsernameandPassword(this.type, recovertype.type, this.forgotUsername.value.mobile, recovertype.value)
+      var encryptedmail = CryptoJS.AES.encrypt(this.forgotUsername.value.username, this.secretKey.trim()).toString();
+      this.service.forgotUsernameandPassword(this.type, recovertype.type, this.forgotUsername.value.mobile, encryptedmail)
         .subscribe((data: any) => {
           this.loader.show();
           if (data.data.get_forgot_username_mobile_email.success === 'true') {

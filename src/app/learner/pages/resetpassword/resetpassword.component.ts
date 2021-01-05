@@ -62,10 +62,11 @@ export class ResetpasswordComponent implements OnInit {
           var userValue = data['data']
           if(userValue['email']){
             this.user = userValue['email']
+            this.get_user_detail_username(this.user);
           }
         })
         //this.user = decryptedString;
-       this.get_user_detail_username(this.user);
+       
       } else {
         this.user = localStorage.getItem('Username');
         this.isLinkActive = true;
