@@ -546,6 +546,7 @@ export class ProfileComponent implements OnInit {
 
   editPassword(passRef: TemplateRef<any>) {
     this.dialog.open(passRef);
+    this.dialog.open(passRef, { disableClose: true });
     this.passwordForm = this.formBuilder.group({
       currentpassword: new FormControl('', myGlobals.passwordVal),
       newpassword: new FormControl('', myGlobals.passwordVal),
