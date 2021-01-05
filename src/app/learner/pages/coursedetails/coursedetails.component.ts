@@ -125,14 +125,14 @@ export class CoursedetailsComponent implements OnInit {
   }
   // initials: any;
   constructor(public translate: TranslateService, private router: ActivatedRoute, public socketService: SocketioService,
-              public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
-              public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
-              public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
-              public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
+    public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
+    public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
+    public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
+    public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
 
     // if (this.socketService.socketStatus()||this.socketService.socketStatus() == undefined){
-      this.socketConnector = this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
-      });
+    this.socketConnector = this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
+    });
     // }
     this.user_token = sessionStorage.getItem("token")
     const Feedbackdetail: any = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
@@ -229,13 +229,7 @@ export class CoursedetailsComponent implements OnInit {
       this.moduleHolder = this.currentPage = this.content.moduleIndex == null ? 0 : this.content.moduleIndex;
 
       this.content.noresource = noresource;
-      this.getuserid = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
-      this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
-        (environment.scormUrl + '/scormPlayer.html?contentID=' +
-          this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
-          this.getuserid._id + '&path=' + this.content.url +
-          '&module_status=' + 'process'
-          + '&module=' + this.content.coursedetails[this.currentPage].modulename + '&topic=' + this.content.coursedetails[this.currentPage].moduledetails[this.topiccurrentPage].topicname + '&token=' + this.user_token);
+      
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
     });
@@ -543,6 +537,16 @@ export class CoursedetailsComponent implements OnInit {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
       this.scromModuleData = this.scromApiData?.childData;
       this.moduleLenth = this.scromApiData?.childData.length;
+      this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : this.scromApiData.topicIndex;
+      this.moduleHolder = this.currentPage = this.scromApiData.moduleIndex == null ? 0 : this.scromApiData.moduleIndex;
+
+      this.getuserid = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
+      this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+        (environment.scormUrl + '/scormPlayer.html?contentID=' +
+          this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
+          this.getuserid._id + '&path=' + this.scromApiData.url +
+          '&module_status=' + 'process'
+          + '&module=' + this.scromApiData.childData[this.currentPage].children + '&topic=' + this.scromApiData.childData[this.currentPage].children[this.topiccurrentPage].topicname + '&token=' + this.user_token);
 
       this.playerTopicLen = this.scromApiData.total_topic_len;
       // tree level
