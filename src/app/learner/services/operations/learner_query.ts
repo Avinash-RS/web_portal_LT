@@ -1430,6 +1430,8 @@ export const playerModuleAndTopic = gql`
         url
         total_topic_len
         course_id
+        moduleIndex
+        topicIndex
         childData {
           title
           _id
