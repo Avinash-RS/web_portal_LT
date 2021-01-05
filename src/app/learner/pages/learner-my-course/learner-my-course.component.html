@@ -37,7 +37,7 @@
 
           <!---------------Multi-level dropdown------------->
           <div class="inner-addon searchDiv right-addon" style="display: none;">
-            <input type="text" [ngClass]="searchExpand? 'form-control search' :'form-control searchNormal'"
+            <input type="text" autocomplete="off" [ngClass]="searchExpand? 'form-control search' :'form-control searchNormal'"
               [(ngModel)]="searchName" placeholder="Search courses..." />
               <!-- (keyup)="getDashboardMyCourse(userDetailes.user_id, userDetailes._id)" -->
             <em class="material-icons pointer iconsSearch" *ngIf="!searchExpand"
@@ -436,7 +436,7 @@
         </div>
         <div class="col-4 inner-addon right-addon" *ngIf="categoryCount > 0">
           <mat-icon class="searchIcon">search</mat-icon>
-          <input type="text" class="form-control ccSearch" [(ngModel)]="courseSearch" placeholder="Search.." />
+          <input type="text" autocomplete="off" class="form-control ccSearch" [(ngModel)]="courseSearch" placeholder="Search.." />
         </div>
       </div>
       <div class="row a-e" *ngIf="catagoryName === 'vocational'">
