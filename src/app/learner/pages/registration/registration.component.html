@@ -39,7 +39,7 @@
         <div class="loginWrapper col-xl-4 col-md-6 col-sm-12 col-12">
             <div class="wrap-reg">
                 <!-- <img class="kauhalya" alt="" src='assets/images/l&t.png'> -->
-                <form class="animated animatedFadeInUp fadeInUp" [formGroup]="registerForm">
+                <form class="animated animatedFadeInUp fadeInUp" [formGroup]="registerForm" autocomplete="off">
 
             
                   
@@ -129,12 +129,14 @@
                             {{'Mobile number is invalid' | translate }}
                           </mat-error>
                         </mat-form-field>
-                        <br><br>
-                        <div>
+                        <br>
+                        <br>
+                        <div class="d-flex justify-content-center">
                         <re-captcha formControlName="recaptchaReactive" (resolved)="resolved($event)" (error)="onError($event)" errorMode="handled" [siteKey]="siteKey">
                           
                         </re-captcha>
-                      </div>
+                        </div>
+                        <br>
                         <div class="">
   
                             <!-- <label class="fromLabel">Email ID</label>
