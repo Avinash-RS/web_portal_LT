@@ -1,19 +1,46 @@
 @import "variable";
+.notificatonRead {
+    margin: 15px 0;
+    padding: 0 15px;
+}
 .head {
-    margin-left: 26px;
-    margin-top: 4px;
-    margin-bottom: 28px;
+    margin: 0;
 }
 .tableContainer {
-    width: 80.5%;
+    width: 98%;
     margin: auto;
-    padding-bottom:55px;
+    padding-bottom: 55px;
+    @media only screen and (max-width: 767px) {
+        width: 94%;
+    }
 }
-.w-55 {
-    width: 76% !important;
+table {
+    thead {
+        tr {
+            td {
+                text-align: center;
+                @media only screen and (max-width: 767px) {
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+    tbody {
+        tr {
+            td:last-child {
+                text-align: center;
+            }
+        }
+    }
 }
-.w-50 {
+.w-60 {
+    width: 60% !important;
+}
+.w-30 {
     width: 30% !important;
+}
+.w-10 {
+    width: 10% !important;
 }
 .font {
     font-size: large;
@@ -25,8 +52,7 @@
     color: $color-blank;
 }
 .markAllbtn {
-    margin-top: -33px;
-    margin-right: 136px;
+    margin: 0;
 }
 .readIcon {
     font-size: 19px;

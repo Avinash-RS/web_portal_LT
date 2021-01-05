@@ -31,21 +31,27 @@ $prefix: 'toolbar-notification';
         margin-right: 10px;
     }
 }
-
+::ng-deep.dropdown {
+    .card {
+        border: none !important;
+    }
+    .header {
+        border-bottom: none !important;
+    }
+}
 .dropdown {
     background: $color-white;
     position: absolute;
     top: 42px;
-    right: 28px;
+    right: 0;
     min-width: 450px;
     z-index: 1000;
     transform: translateY(0) scale(0);
     transform-origin: top right;
     visibility: hidden;
     transition: transform .4s cubic-bezier(.25, .8, .25, 1), visibility .4s cubic-bezier(.25, .8, .25, 1);
-
     @media screen and (max-width: 767.98px) {
-        min-width: 95vw;
+        min-width: 90vw;
         right: -45px;
         transform: translateY(0);
         visibility: hidden;
@@ -111,6 +117,7 @@ $prefix: 'toolbar-notification';
             .time {
                 font-size: 12px;
                 color: $lxp-theme-green;
+                line-height: normal;
             }
 
             .close {
@@ -154,7 +161,7 @@ $prefix: 'toolbar-notification';
     .footer {
         min-height: 42px;
         border-top: 1px solid #EEE;
-
+        margin-top: 0;
         .action {
             cursor: pointer;
             color: #AAA;
@@ -170,7 +177,13 @@ $prefix: 'toolbar-notification';
         margin: 0 16px 0 14px;
     }
 }
-
+.notificationWrapper {
+    &:last-child {
+        .divider {
+            display: none;
+        }
+    }
+}
 .download_doc {
     margin: 10px;
 }
@@ -229,4 +242,7 @@ $prefix: 'toolbar-notification';
 }
 .wordWrap {
     white-space: break-spaces !important;
+    line-height: 22px !important;
+    margin: 8px 0;
+    display: block;
 }
