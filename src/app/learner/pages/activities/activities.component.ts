@@ -482,7 +482,7 @@ export class ActivitiesComponent implements OnInit {
   getprojectActivityData() {
     this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
-        this.projectDetails = data.data.getprojectActivityData.data;
+        this.projectDetails = data.data.getprojectActivityData.data;        
         this.projectDetails.forEach(element => {
           element.showLearnerList = false;
           // element.isCollapsed = false;
@@ -491,7 +491,7 @@ export class ActivitiesComponent implements OnInit {
           element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
           if (moment().format('DD-MM-YYYY HH:mm') <= element.batchEndDate) {
             element.submitType = true;
-          } else {
+          } else {            
             element.submitType = false;
           }
           // Activity Dates
@@ -505,7 +505,8 @@ export class ActivitiesComponent implements OnInit {
             endDate , crrDate);
           const submitDate = new Date(element.projectActivity.submitted_on);
           element.submittedOn = moment(submitDate).format('ll');
-
+            // console.log(ena);
+            
           // if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
           //   element.enableSubmit = false;
           // } else {
@@ -621,15 +622,31 @@ export class ActivitiesComponent implements OnInit {
 
   // Submit or Delete
   learnerSumbitdeleteVideo(project, deleteItem, submitAction) {
+    // const startDate1 = new Date(project.projectActivity.activitystartdate);
+    // project.actstartDate = moment(startDate1);
+    // const endDate1 = new Date(project.projectActivity.activityenddate);
+    // project.actendDate = moment(endDate1);
+    // commented by avinash
     const startDate1 = new Date(project.projectActivity.activitystartdate);
-    project.actstartDate = moment(startDate1);
+    project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:mm');
     const endDate1 = new Date(project.projectActivity.activityenddate);
-    project.actendDate = moment(endDate1);
+    project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:mm');
+
     let submitStatus = '';
-    if (moment() >= project.actstartDate &&
-      moment() <= project.actendDate) {
+    // if (moment() >= project.actstartDate &&
+    //   moment() <= project.actendDate) {
+    //   submitStatus = 'ontime';
+    //   console.log('ontime');
+      
+    // } else if (moment() > project.actendDate) {
+    //   console.log('late');
+    //   submitStatus = 'late';
+    // }
+    // commented by avinash
+    if (moment().format('DD-MM-YYYY HH:mm') >= project.actstartDate &&
+    moment().format('DD-MM-YYYY HH:mm') <= project.actendDate) {
       submitStatus = 'ontime';
-    } else if (moment() > project.actendDate) {
+    } else if (moment().format('DD-MM-YYYY HH:mm') > project.actendDate) {
       submitStatus = 'late';
     }
     const submitData = {
