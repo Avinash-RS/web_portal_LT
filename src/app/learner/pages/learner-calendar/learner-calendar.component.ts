@@ -58,9 +58,7 @@ export class LearnerCalendarComponent implements OnInit {
     this.showOngoing = '';
     this.showCompleted = '';
     this.UserDetails =
-      JSON.parse(localStorage.getItem('UserDetails')) ||
-      JSON.parse(sessionStorage.getItem('UserDetails')) ||
-      null;
+      JSON.parse(localStorage.getItem('UserDetails')) || null;
 
     this.tokenDetails = localStorage.getItem('token');
 
