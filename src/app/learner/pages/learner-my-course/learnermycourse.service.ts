@@ -14,7 +14,7 @@ userDetail: any;
   constructor(private apollo: Apollo, private gs: GlobalServiceService, public route: Router, public alert: AlertServiceService) {
 
 
-    this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails')) || null;
+    this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
    }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.userDetail !== null) {

@@ -15,7 +15,7 @@ export class InterceptorService implements HttpInterceptor {
     public toast: ToastrService, public socketService: SocketioService,
     public router: Router, public services: CommonServicesService
   ) {
-    this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
+    this.loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
