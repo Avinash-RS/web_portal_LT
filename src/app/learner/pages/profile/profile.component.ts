@@ -161,7 +161,7 @@ export class ProfileComponent implements OnInit {
       city_town: ['', myGlobals.req],
       progress: [],
       certificate: this.formBuilder.array([new FormControl('')]),
-      qualification: this.formBuilder.array([this.createQualItem()]),
+      // qualification: this.formBuilder.array([this.createQualItem()]),
       social_media: this.formBuilder.array([this.createSocialMedia()]),
       year_of_birth: '05-08-1998',
       profile_img: [],
@@ -316,7 +316,8 @@ export class ProfileComponent implements OnInit {
     //     if(element.qualification!={}) {element.qualification = element.qualification._id}
     //   });
     // }
-
+    if  (this.profileForm?.value?.qualification) {
+      delete this.profileForm.value.qualification; }
     this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
       if (data.data.update_profile.success === 'true') {
         this.loader.hide();

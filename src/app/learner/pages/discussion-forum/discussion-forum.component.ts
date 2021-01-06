@@ -217,7 +217,7 @@ export class DiscussionForumComponent implements OnInit {
       } else {
         // this.cS.loader$.next(true);
         this.loading = true;
-        const UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails')) || null;
+        const UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
         const data1 = {
           content: data,
           tid: CryptoJS.AES.encrypt(this.selectedThreadData.tid.toString(), this.secretKey.trim()).toString(),

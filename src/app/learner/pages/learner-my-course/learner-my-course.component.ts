@@ -137,7 +137,7 @@ export class LearnerMyCourseComponent implements OnInit {
             localStorage.setItem('role', 'learner');
             localStorage.setItem('token', isValidEmailResult.data.get_login_details.message.token);
             localStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
-            sessionStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
+            localStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
             this.router.navigateByUrl('/Learner/MyCourse');
             this.getCountForCategories();
             // this.getEnrolledCourses('', '', '', '', '', '', true);
@@ -148,7 +148,6 @@ export class LearnerMyCourseComponent implements OnInit {
             // this.insidengOnInit();
           } else {
             localStorage.clear();
-            sessionStorage.clear();
             this.CommonServices.getIpAddressByUrl();
             this.router.navigateByUrl('/Learner/login');
           }
