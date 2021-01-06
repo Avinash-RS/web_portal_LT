@@ -314,6 +314,9 @@ export class PerformancePageMobileComponent implements OnInit {
     if (path.imageurl) {
       path.path = path.imageurl;
     }
+    if (path.videourl) {
+      path.path = path.videourl;
+    }
      if (docType !== 'video/mp4') {
       this.dialog.open(templateRef, {
         width: '100%',
