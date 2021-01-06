@@ -41,7 +41,7 @@ export class ScormplayerComponent implements OnInit {
   constructor(private dialog: MatDialog, public sanitizer: DomSanitizer,
               public spinner: NgxSpinnerService, public activatedRoute: ActivatedRoute, private alert: AlertServiceService,
               public service: LearnerServicesService, public route: Router, public commonService: CommonServicesService, ) {
-                this.user_token = sessionStorage.getItem("token")
+                this.user_token = localStorage.getItem("token")
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
 

@@ -101,22 +101,53 @@ export class AppComponent implements OnInit {
     });
 
     this.getIPAddress();
-    // var name = localStorage.getItem('uname') ? localStorage.getItem('uname') : null;
-    // var psd = localStorage.getItem('ps') ? localStorage.getItem('ps') : null;
-    // var login = localStorage.getItem('login') ? localStorage.getItem('login') : null;
-    // var cookie = localStorage.getItem('remember_me') ? localStorage.getItem('remember_me') : 'false';
-    // var ps = atob(psd)
-    // if (login == 'true') {
-    //   if (cookie == 'true') {
-    //     if ((name || psd) == null) {
-    //       this.router.navigate(["/Learner/login"]);
-    //     }
-    //   } else {
-    //     localStorage.clear();
-    //   }
-    // }
+
+    // window.addEventListener("beforeunload", function (e) {
+    //   var confirmationMessage = "\o/";
+    //   (e || window.event).returnValue = "Do you really want to close?"; //Gecko + IE
+    //   return "Do you really want to close?";                            //Webkit, Safari, Chrome
+    // });
+    // this.myLoad();
+  }
+  // ** Browser close handler.. Dont delete **
+  /*
+ @HostListener('window:beforeunload', ['$event'])
+     public beforeunloadHandler($event) {
+       this.myUnload()
+      // open('refresh-close-detector.html', '', 'width=100,height=100');
+      // $event.returnValue = false;
+}
+
+myUnload() {
+          // flag the page as being unloading
+          window.localStorage.setItem('myUnloadEventFlag', new Date().getTime().toString());
+      // notify the server that we want to disconnect the user in a few seconds (I used 5 seconds)
+      this.askServerToDisconnectUserInAFewSeconds(); // synchronous AJAX call
   }
 
+  myLoad() {
+    if (window.localStorage.getItem('myUnloadEventFlag')) {
+        let t0 = Number(window.localStorage.getItem('myUnloadEventFlag'));
+        if (isNaN(t0)) t0=0;
+        let t1=new Date().getTime();
+        let duration=t1-t0;
+        if (duration<40*1000) {
+            // less than 40 seconds since the previous Unload event => it's a browser reload (so cancel the disconnection request)
+            this.askServerToCancelDisconnectionRequest(); // asynchronous AJAX call
+        } else {
+          localStorage.removeItem('myUnloadEventFlag');
+          localStorage.setItem('closed', 'true');
+            // last unload event was for a tab/window close => do whatever you want (I do nothing here)
+        }
+    }
+} 
+  askServerToDisconnectUserInAFewSeconds() {
+    localStorage.setItem('disReq', 'true');
+  }
+  askServerToCancelDisconnectionRequest() {
+    localStorage.setItem('disCancelRefresh', 'true');
+  }
+  */
   getChild(activatedRoute: ActivatedRoute) {
     if (activatedRoute.firstChild) {
       return this.getChild(activatedRoute.firstChild);

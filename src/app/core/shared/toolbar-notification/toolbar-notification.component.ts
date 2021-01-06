@@ -39,7 +39,7 @@ export class ToolbarNotificationComponent implements OnInit {
     this.commonservice.notificationStatus.subscribe((status: any) => {
       this.notifications = status;
 });
-    const learnerDetail = JSON.parse(sessionStorage.getItem('UserDetails'));
+    const learnerDetail = JSON.parse(localStorage.getItem('UserDetails'));
     this.userId = learnerDetail.user_id;
     this.getNotification();
   }

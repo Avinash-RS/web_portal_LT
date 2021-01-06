@@ -134,7 +134,7 @@ export class CoursedetailsComponent implements OnInit {
     this.socketConnector = this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
     });
     // }
-    this.user_token = sessionStorage.getItem("token")
+    this.user_token = localStorage.getItem("token")
     const Feedbackdetail: any = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.checkDetails = Feedbackdetail;
@@ -301,7 +301,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    const loginDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
+    const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
     if (loginDetails) {
       this.socketConnector = this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
       });
@@ -540,7 +540,7 @@ export class CoursedetailsComponent implements OnInit {
       this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : this.scromApiData.topicIndex;
       this.moduleHolder = this.currentPage = this.scromApiData.moduleIndex == null ? 0 : this.scromApiData.moduleIndex;
 
-      this.getuserid = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
+      this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
           this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
