@@ -110,7 +110,7 @@ export class AppComponent implements OnInit {
     // this.myLoad();
   }
   // ** Browser close handler.. Dont delete **
-  
+  /*
  @HostListener('window:beforeunload', ['$event'])
      public beforeunloadHandler($event) {
        this.myUnload()
@@ -147,7 +147,7 @@ myUnload() {
   askServerToCancelDisconnectionRequest() {
     localStorage.setItem('disCancelRefresh', 'true');
   }
-  
+  */
   getChild(activatedRoute: ActivatedRoute) {
     if (activatedRoute.firstChild) {
       return this.getChild(activatedRoute.firstChild);
