@@ -1,13 +1,10 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef,ViewChild, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import * as _ from 'underscore';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { VideoPreviewModalComponent } from '../video-preview-modal/video-preview-modal.component';
-
-// const courseid = 'tbiwys0m';
-// const userid = 'aj1yej';
 
 @Component({
   selector: 'app-instructor-led',
@@ -23,6 +20,9 @@ export class InstructorLedComponent implements OnInit {
   totalSessions: any;
   recordedSessions: any;
   attendedSessions: any;
+  attendedCount;
+  recordedCount;
+  @ViewChild('attended') attended: ElementRef;
 
   constructor(private router: Router,
               private learnerService: LearnerServicesService,
@@ -49,9 +49,14 @@ export class InstructorLedComponent implements OnInit {
     this.learnerService.getAttendanceByUsername(this.course.id, userDetails.full_name, userDetails.user_id).subscribe(async res => {
       // tslint:disable-next-line:no-string-literal
       const data = res.data['getTopicAttendanceDetailsByUsername']['data'];
-      console.log(data, 'asdfasdf')
       this.listOfSessions = data.Activity;
+      this.recordedCount = this.listOfSessions.filter(element => {
+        return element.activity_details.activitytype.toLowerCase() == "recorded"
+      });
       this.sessionAttendance = data.Attendance;
+      this.attendedCount = this.sessionAttendance.filter(element => {
+        return element.activity.attendencedetails.Attendence.toLowerCase() == "yes"
+      });
       for (const los of this.listOfSessions) {
         los.duration = this.getTimes(los.activity_details.enddate, los.activity_details.startdate);
       }
