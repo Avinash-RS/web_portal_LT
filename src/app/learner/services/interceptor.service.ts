@@ -24,7 +24,12 @@ export class InterceptorService implements HttpInterceptor {
     });
     return next.handle(clone).pipe(
       map((event: HttpEvent<any>) => {
-        console.log(event);        
+        // console.log('res', event); 
+        if (event && event['body'] && event['body']['data']) {
+          let bodyData = event['body']['data'];
+          let dynKey = Object.keys(bodyData)[0]
+          // console.log(bodyData[dynKey].message);
+        }
         return event;
       }),
       retry(3),

@@ -20,8 +20,9 @@ export class AuthGuard implements CanLoad {
   // Added by Avinasi
     canLoad(route: Route, segments: UrlSegment[]): any {
       const userDetailes = localStorage.getItem('role');
+      const token =  localStorage.getItem('token');
     
-      if (userDetailes == 'learner') {
+      if (userDetailes == 'learner' && token) {
         // userdetail is present // authenticated user
         // url should not start from admin - can be /Larner or anything
         // if profile updated and trying to go login/reg
@@ -46,7 +47,8 @@ export class AuthGuard implements CanLoad {
   // Added by Mythreyi
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const userDetailes = localStorage.getItem('role');
-    if (userDetailes == 'learner') {
+    const token =  localStorage.getItem('token');
+    if (userDetailes == 'learner' && token) {
       // userdetail is present // authenticated user
       // url should not start from admin - can be /Larner or anything
       // if profile updated and trying to go login/reg
