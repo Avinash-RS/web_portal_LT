@@ -10,6 +10,9 @@
     width: 98%;
     margin: auto;
     padding-bottom: 55px;
+    table {
+        width: 100%;
+    }
     @media only screen and (max-width: 767px) {
         width: 94%;
     }
