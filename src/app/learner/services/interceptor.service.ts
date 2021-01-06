@@ -24,6 +24,7 @@ export class InterceptorService implements HttpInterceptor {
     });
     return next.handle(clone).pipe(
       map((event: HttpEvent<any>) => {
+        console.log(event);        
         return event;
       }),
       retry(3),
