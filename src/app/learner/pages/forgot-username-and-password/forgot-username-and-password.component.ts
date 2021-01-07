@@ -85,7 +85,7 @@ focusout(e) {
 forgotusername() {
     this.type = 'username';
     this.loader.show();
-    var encrypteduser = CryptoJS.AES.encrypt(this.forgotUsername.value.username, this.secretKey.trim()).toString();
+    var encrypteduser = CryptoJS.AES.encrypt(this.forgotUsername.value.username.toLowe, this.secretKey.trim()).toString();
     this.service.forgotUsernameandPassword(this.type, this.subtype, this.forgotUsername.value.mobile, encrypteduser)
       .subscribe((data: any) => {
         if (data.data.get_forgot_username_mobile_email.success === 'true') {

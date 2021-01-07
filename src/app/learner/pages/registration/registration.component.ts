@@ -84,7 +84,7 @@ export class RegistrationComponent implements OnInit {
       this.loader.show();
       this.fullname = this.registerForm.value.fullname.trimLeft();
       // this.registerForm.value.termsandconditions
-      var encryptedmail = CryptoJS.AES.encrypt(this.registerForm.value.email, this.secretKey.trim()).toString();
+      var encryptedmail = CryptoJS.AES.encrypt(this.registerForm.value.email.toLowerCase(), this.secretKey.trim()).toString();
       var encryptedname = CryptoJS.AES.encrypt(this.fullname, this.secretKey.trim()).toString();
       var encryptedmobile = CryptoJS.AES.encrypt(this.registerForm.value.mobile, this.secretKey.trim()).toString();
       this.service.user_registration(encryptedmail, encryptedname,

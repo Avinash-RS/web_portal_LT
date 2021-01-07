@@ -61,7 +61,7 @@ export class ResetpasswordComponent implements OnInit {
         this.service.getEmail(input).subscribe((data)=>{
           var userValue = data['data']
           if(userValue['email']){
-            this.user = userValue['email']
+            this.user = userValue['email'].toLowerCase();
             this.get_user_detail_username(this.user);
           }
         })
@@ -135,7 +135,7 @@ export class ResetpasswordComponent implements OnInit {
 
   resetpassword() {
     this.loader.show();
-    var encryptedname = CryptoJS.AES.encrypt(this.user, this.secretKey.trim()).toString();
+    var encryptedname = CryptoJS.AES.encrypt(this.user.toLowerCase(), this.secretKey.trim()).toString();
     var encryptedpassword = CryptoJS.AES.encrypt(this.resetForm.value.password, this.secretKey.trim()).toString();
     // var decryptname = CryptoJS.AES.decrypt(encryptedname, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     // var decryptpassword = CryptoJS.AES.decrypt(encryptedpassword, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);

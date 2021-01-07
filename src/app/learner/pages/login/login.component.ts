@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
   portalToIggnite() {
     this.activatedRoute.queryParams.subscribe(params => {
       if (params && params['email_id']) {
-        this.learnerService.getLoginUserDetail(params.email_id).subscribe((isValidEmailResult: any) => {
+        this.learnerService.getLoginUserDetail(params.email_id.toLowerCase()).subscribe((isValidEmailResult: any) => {
           if (isValidEmailResult.data.get_login_details.success === true) {
             localStorage.setItem('token', isValidEmailResult.data.get_login_details.message.token);
             localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    var encryptedname = CryptoJS.AES.encrypt(this.loginForm.value.username, this.secretKey.trim()).toString();
+    var encryptedname = CryptoJS.AES.encrypt(this.loginForm.value.username.toLowerCase(), this.secretKey.trim()).toString();
     var encryptedpassword = CryptoJS.AES.encrypt(this.loginForm.value.password, this.secretKey.trim()).toString();
     this.service.login(encryptedname, encryptedpassword, false)
       .subscribe((loginresult: any) => {
