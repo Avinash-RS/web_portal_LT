@@ -158,13 +158,12 @@ export class ProjectMobileComponent implements OnInit {
         // Batch date
         const batchEndDate = new Date(element.projectActivity.batchenddate);
         element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
-        console.log(batchEndDate);
         
-        console.log('moment start', moment());
-        console.log('moment end', moment(batchEndDate));
-        
-        element.submitType = !moment().isAfter(batchEndDate);
-        console.log('ajlajdad', element.submitType);
+        element.submitType = moment().isSameOrBefore(batchEndDate);
+        if (moment().format('DD-MM-YYYY') == moment(batchEndDate).format('DD-MM-YYYY')) {
+          element.submitType = true;
+        }
+        console.log('submit', element.submitType);
         
         // if (moment().format('DD-MM-YYYY HH:mm') <= element.batchEndDate) {
         //   console.log('coming mob');
@@ -190,8 +189,10 @@ export class ProjectMobileComponent implements OnInit {
         element.startdate = moment(startDate).format('DD-MM-YYYY HH:mm');
         const endDate = new Date(element.projectActivity.activityenddate);
         // element.activityEndDate = moment(endDate).format('ll');
-        element.enableSubmit = this.dateDiff(startDate,
-          endDate, crrDate);
+        // element.enableSubmit = this.dateDiff(startDate,
+        //   endDate, crrDate);
+        element.enableSubmit = moment().isSameOrAfter(startDate);
+        console.log('enableSubmit', element.enableSubmit);
         const submitDate = new Date(element.projectActivity.submitted_on);
         element.submittedOn = moment(submitDate).format('ll');
         // if (moment().format('DD-MM-YYYY HH:mm') < element.startdate) {
