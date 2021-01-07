@@ -24,7 +24,7 @@
 <!-- *ngIf="course?.isBatch" -->
 <div class="row" >
   <div *ngIf="(isMobile?(!isHideAccord?true:false):true)" class="col-lg-4 col-xl-4 col-md-5 col-sm-12 col-12 collaborateAccordion">
-    <ng-container *ngIf="scromModuleData?.length > 0; else noModule">
+    <ng-container *ngIf="scromModuleData && scromModuleData?.length > 0; else noModule">
       <mat-accordion *ngFor="let res of scromModuleData; let i = index"
         (click)="getSelectedIndex(i);getModuleDataForForum(scromModuleData?.length, i + 1, res);isHideAccord=true">
         <mat-expansion-panel class="panel" hideToggle="true" #example [expanded]="selectedIndex === i">
@@ -94,7 +94,7 @@
     </ng-container>
     <ng-template #noModule>
       <br>
-      <span class="center_align">
+      <span *ngIf="!loading" class="center_align">
         No modules in this course
       </span>
     </ng-template>

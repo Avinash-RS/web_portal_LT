@@ -149,6 +149,8 @@ export class ProjectMobileComponent implements OnInit {
     this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
       this.projectDetails = data.data.getprojectActivityData.data;
+      console.log(this.projectDetails, 'lsadfjsadk');
+      
       this.projectDetails.forEach(element => {
         this.groupDetails = element.projectActivity.groupDetails;
         element.showLearnerList = false;
@@ -156,11 +158,25 @@ export class ProjectMobileComponent implements OnInit {
         // Batch date
         const batchEndDate = new Date(element.projectActivity.batchenddate);
         element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
-        if (moment().format('DD-MM-YYYY HH:mm') <= element.batchEndDate) {
-          element.submitType = true;
-        } else {
-          element.submitType = false;
-        }
+        console.log(batchEndDate);
+        
+        console.log('moment start', moment());
+        console.log('moment end', moment(batchEndDate));
+        
+        element.submitType = !moment().isAfter(batchEndDate);
+        console.log('ajlajdad', element.submitType);
+        
+        // if (moment().format('DD-MM-YYYY HH:mm') <= element.batchEndDate) {
+        //   console.log('coming mob');
+        //   console.log('current date', moment().format('DD-MM-YYYY HH:mm').toString());
+        //   console.log('end date', element.batchEndDate.toString());          
+        //   element.submitType = true;
+        // } else {
+        //   console.log('else mob');
+        //   console.log('current date', moment().format('DD-MM-YYYY HH:mm').toString());
+        //   console.log('end date', element.batchEndDate.toString());          
+        //   element.submitType = false;
+        // }
         // Activity Dates
         // const startDate = new Date(element.projectActivity.activitystartdate);
         // element.activityStartDate = moment(startDate).format('ll');
@@ -200,7 +216,9 @@ export class ProjectMobileComponent implements OnInit {
   learnerUploadVideo(project, submitAction) {
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:mm');
+    console.log(project.actstartDate, 'StartDate');
     const endDate1 = new Date(project.projectActivity.activityenddate);
+    console.log(endDate1, 'EndDate');
     project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:mm');
     let submitStatus = '';
     if (moment().format('DD-MM-YYYY HH:mm') >= project.actstartDate &&
