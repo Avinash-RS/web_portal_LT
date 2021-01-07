@@ -50,6 +50,12 @@ export class InstructorLedComponent implements OnInit {
       // tslint:disable-next-line:no-string-literal
       const data = res.data['getTopicAttendanceDetailsByUsername']['data'];
       this.listOfSessions = data.Activity;
+      this.listOfSessions.forEach((item,i)=>{
+        if(item.status === "On going" && item.activity_details.activitytype === "Live Classroom"){
+          this.listOfSessions.splice(i, 1);
+          this.listOfSessions.unshift(item);
+        }
+      })
       this.recordedCount = this.listOfSessions.filter(element => {
         return element.activity_details.activitytype.toLowerCase() == "recorded"
       });
