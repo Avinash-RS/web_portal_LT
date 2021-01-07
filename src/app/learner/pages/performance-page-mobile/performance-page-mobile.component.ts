@@ -7,6 +7,7 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { WcaService } from '@wca/services/wca.service';
 import { ToastrService } from 'ngx-toastr';
+import * as moment from 'moment';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class PerformancePageMobileComponent implements OnInit {
   selectedTabIndex: number;
   checkDetails: any;
   arrowUP = false;
+  performId: any;
   videoPerview = false;
   @Input() detailDataToPerform;
   @Input() courceDetails;
@@ -205,13 +207,28 @@ export class PerformancePageMobileComponent implements OnInit {
           // } else {
           //   element.itrationStarted = false;
           // }
+          
+          const batchEndDate = new Date(element.performActivity.batchenddate);
+          element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
+          
+          element.performSubmitType = moment().isSameOrBefore(batchEndDate);
+          if (moment().format('DD-MM-YYYY') == moment(batchEndDate).format('DD-MM-YYYY')) {
+            element.performSubmitType = true;
+          }
+  
           const crrDate = new Date();
           const startDate = new Date(element.performActivity.activitystartdate);
-          const endDate = new Date(element.performActivity.batchenddate);
+          element.startdate = moment(startDate).format('DD-MM-YYYY HH:mm');
+          const endDate = new Date(element.performActivity.activityenddate);
+          element.itrationStarted = moment().isSameOrAfter(startDate);
+  
+          // const crrDate = new Date();
+          // const startDate = new Date(element.performActivity.activitystartdate);
+          // const endDate = new Date(element.performActivity.batchenddate);
 
             // tslint:disable-next-line:no-string-literal
-          element['itrationStarted']  = this.dateDiff(startDate,
-            endDate , crrDate);
+          // element['itrationStarted']  = this.dateDiff(startDate,
+          //   endDate , crrDate);
         });
         const filterData = this.performDetails.filter((performData: any) => {
           return performData.performActivity.perform_id === this.performActivityData.perform_id;
