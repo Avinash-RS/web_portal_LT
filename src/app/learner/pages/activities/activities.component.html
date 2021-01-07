@@ -386,17 +386,21 @@
                       </div>
                       <input type="file" accept="video/mp4" multiple style="display: none" #videoInput
                         [(ngModel)]="fileName" (change)="uploadDocument($event)" />
-                      <button mat-stroked-button [disabled]="itrdata.submit_status !== 'notsubmitted' || !perform.itrationStarted" class="upload-bltn mt-3"
+                      <!-- <button mat-stroked-button [disabled]="itrdata.submit_status !== 'notsubmitted' || !perform.itrationStarted" class="upload-bltn mt-3"
+                        (click)="uploadDocuments($event, itrdata, perform, submitType = 'upload')">
+                        <mat-icon class="icon-color m-t-m-2 addIcon">add</mat-icon> <span>Upload video</span> </button> -->
+                        
+                                              <button *ngIf="itrdata.submit_status == 'notsubmitted'" mat-stroked-button [disabled]="perform.performSubmitType == false || perform.itrationStarted == false" class="upload-bltn mt-3"
                         (click)="uploadDocuments($event, itrdata, perform, submitType = 'upload')">
                         <mat-icon class="icon-color m-t-m-2 addIcon">add</mat-icon> <span>Upload video</span> </button>
                       <br>
                       <button mat-stroked-button class="submit-btn mt-2"
-                        *ngIf="itrdata.submit_status == 'notsubmitted' && itrdata.videodetails.length > 0"
+                        *ngIf="itrdata.submit_status == 'notsubmitted' && itrdata.videodetails.length > 0 && (perform.itrationStarted && perform.performSubmitType)"
                         (click)="submitType = 'submit'; submitDeleteVideo({}, itrdata, perform.performActivity)">
                         Submit
                       </button>
                       <button mat-stroked-button
-                      *ngIf="itrdata.submit_status == 'notsubmitted' &&  (itrdata.videodetails.length == 0 || !perform.itrationStarted)"
+                      *ngIf="itrdata.submit_status == 'notsubmitted' &&  (itrdata.videodetails.length == 0 && perform.itrationStarted) && perform.performSubmitType"
                       class="submitted-btn mt-2"> Submit </button>
                       <button mat-stroked-button *ngIf="itrdata.submitAction == 'submit'" class="submitted-btn mt-2">
                         Submitted </button>
