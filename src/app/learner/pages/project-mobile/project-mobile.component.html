@@ -50,7 +50,7 @@
             </div>
           </div>
           <div class="text-right">
-            <span class="f_wt_600 status" *ngIf="project.projectActivity.submitAction !== 'submit' || project.projectActivity.submit_status == 'notsubmitted'">
+            <span class="f_wt_600 status" *ngIf="(project.projectActivity.submitAction !== 'submit' || project.projectActivity.submit_status == 'notsubmitted') && project.projectActivity.grade_status != 'Evaluated'">
               <span class="dot"></span>Yet to submit
             </span>
             <span class="f_wt_600 projectSubmitstatus submitted" *ngIf="project.projectActivity.submitAction == 'submit' && project.projectActivity.grade_status == 'Not Evaluated'">
@@ -283,7 +283,7 @@
                     Add your files
                     </button> -->
                     <input class="input-hide" type="file" *ngIf="project.projectActivity.submitAction !== 'submit'" accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" #uploadFile [(ngModel)]="fileName" [ngClass]="project.projectActivity.submitAction ? 'class1':'class2'" (change)="uploadDoc($event, project, 'upload')" />
-                    <button mat-stroked-button class="uploadBtn w-100" *ngIf="project.projectActivity.submitAction !== 'submit'" [disabled]="project.submitType == false" (click)="uploadDocs($event)">
+                    <button mat-stroked-button class="uploadBtn w-100" *ngIf="project.projectActivity.submitAction !== 'submit'" [disabled]="project.submitType == false || project.enableSubmit == false" (click)="uploadDocs($event)">
                       <mat-icon class="add-icon">add</mat-icon> Add your files
                     </button>
                     <button mat-stroked-button class="submit-btn" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')" *ngIf="(project.projectActivity.submit_status == 'notsubmitted' || project.projectActivity.submit_status == 'late') && project.projectActivity.videodetails.length > 0 && project.submitType == true && project.projectActivity.submitAction != 'submit'"> Submit </button>

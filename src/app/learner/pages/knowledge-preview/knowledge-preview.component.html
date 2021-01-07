@@ -24,8 +24,11 @@
 
   </ng-container>
 
-  <ng-container *ngIf="fileType == 'video' || fileType == 'audio'">
-    <iframe title="image" width="100%" height="100%" [src]="file" allowfullscreen></iframe>
+  <ng-container *ngIf="fileType == 'video'">
+    <video  oncontextmenu="return false;" [src]="file" title="image" width="100%" height="100%" controls controlsList="nodownload"></video>
   </ng-container>
 
+  <ng-container *ngIf="fileType == 'audio'" controlsList="nodownload">
+    <audio oncontextmenu="return false;" class="audio-player" [src]="file" title="image" width="100%" height="100%" controls controlsList="nodownload"></audio>
+  </ng-container>
 </div>

@@ -150,6 +150,7 @@ th {
     background: #c02222 0% 0% no-repeat padding-box;
     border-radius: 18px;
     opacity: 1;
+    margin-top: 20px;
 }
 
 .noData {

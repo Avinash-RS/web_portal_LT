@@ -412,7 +412,7 @@ export class DiscussionForumComponent implements OnInit {
       desc.d.replace(/&#160;/g, '')?.trimEnd();
     if (this.addThreadForm.value.thread_name.length > 8 && desc.d.length > 8) {
       if (desc.d.length > 59950) {
-        this.toastr.warning('Content should be less than 60,000 characters');
+        this.toastr.warning('Your post content is too large. Please reduce content and try again.');
       } else {
         // this.cS.loader$.next(true);
         this.loading = true;
@@ -431,6 +431,8 @@ export class DiscussionForumComponent implements OnInit {
             } else {
               // this.cS.loader$.next(false);
               this.loading = false;
+              console.log(result.data.CreateNewThread?.message);
+              
               this.toastr.warning(result.data.CreateNewThread?.message);
             }
           });
