@@ -586,7 +586,7 @@
                     </button>
                   </div>
                   <div class="text-right activityStatus">
-                    <span class="f_wt_600 alignRight status" *ngIf="project.projectActivity.submitAction !== 'submit' || project.projectActivity.submit_status == 'notsubmitted'">
+                    <span class="f_wt_600 alignRight status" *ngIf="(project.projectActivity.submitAction !== 'submit' || project.projectActivity.submit_status == 'notsubmitted') && project.projectActivity.grade_status != 'Evaluated'">
                       <span class="dot"></span>Yet to submit
                     </span>
                     <span class="f_wt_600 alignRight projectSubmitstatus submitted" *ngIf="project.projectActivity.submitAction == 'submit' && project.projectActivity.grade_status == 'Not Evaluated'">
@@ -702,7 +702,7 @@
                       </div>
                       <div class="align-center">
                         <input type="file" style="display: none" accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" #uploadInput [(ngModel)]="fileName" (change)="uploadDoc($event, project, 'upload')" />
-                        <button mat-stroked-button class="upload-btn" (click)="uploadDocs()" [disabled]="project.submitType == false" *ngIf="project.projectActivity.submitAction !== 'submit'"> <mat-icon class="icon-color m-t-m-2">add</mat-icon> Add your files </button>
+                        <button mat-stroked-button class="upload-btn" (click)="uploadDocs()" [disabled]="project.submitType == false || project.enableSubmit == false" *ngIf="project.projectActivity.submitAction !== 'submit'"> <mat-icon class="icon-color m-t-m-2">add</mat-icon> Add your files </button>
                         <button mat-stroked-button class="submit-btn" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')" *ngIf="(project.projectActivity.submit_status == 'notsubmitted' || project.projectActivity.submit_status == 'late') && project.projectActivity.videodetails.length > 0 && project.submitType == true && project.projectActivity.submitAction !== 'submit'">Submit</button>
                         <!-- <button mat-stroked-button class="submitted-btn mt-2" *ngIf="project.projectActivity.submit_status == 'notsubmitted' && (project.projectActivity.videodetails.length == 0 || project.enableSubmit == false)"> Submit </button> -->
                         <button mat-stroked-button class="submitted-btn" [disabled]="true" *ngIf="project.projectActivity.submitAction == 'submit'">Submitted</button>
