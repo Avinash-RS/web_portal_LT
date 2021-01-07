@@ -230,46 +230,48 @@ export class ProfileComponent implements OnInit {
           }
           const qualification = this.profileForm.get('qualification') as FormArray;
           const certificate = this.profileForm.get('certificate') as FormArray;
+          if (qualification) {
           while (qualification.length) {
             qualification.removeAt(0);
-          }
+          }}
           // localStorage.setItem('user_img',this.urlImage)
+          if (certificate) {
           while (profileDetails.certificate && profileDetails.certificate.length > 0 && certificate.length) {
             certificate.removeAt(0);
-          }
+          }}
           this.profileForm.patchValue(profileDetails);
           this.getAllState();
           this.getDistrict();
-          if (profileDetails.qualification.length > 0) {
-            profileDetails.qualification.forEach((qual, index) => {
-              let unique = true;
-              this.getDiscipline(qual.qualification, index);
-              this.getBoardsUniv(qual.qualification, index);
-              this.levelValue.forEach(element => {
-                if ((element._id === qual.qualification && element.level_code === '10') ||
-                  (element._id === qual.qualification && element.level_code === '12')) {
-                  element.allowed = 'N';
-                  unique = false;
-                }
-              });
-              if (unique) {
-                qualification.push(this.formBuilder.group(qual));
-                let q;
-                q = qualification.controls[index];
-                q.insCheck = false;
-              } else {
-                qualification.push(this.formBuilder.group(qual));
-                let q;
-                q = qualification.controls[index];
-                q.insCheck = true;
-              }
-            });
+          // if (profileDetails.qualification.length > 0) {
+          //   profileDetails.qualification.forEach((qual, index) => {
+          //     let unique = true;
+          //     this.getDiscipline(qual.qualification, index);
+          //     this.getBoardsUniv(qual.qualification, index);
+          //     this.levelValue.forEach(element => {
+          //       if ((element._id === qual.qualification && element.level_code === '10') ||
+          //         (element._id === qual.qualification && element.level_code === '12')) {
+          //         element.allowed = 'N';
+          //         unique = false;
+          //       }
+          //     });
+          //     if (unique) {
+          //       qualification.push(this.formBuilder.group(qual));
+          //       let q;
+          //       q = qualification.controls[index];
+          //       q.insCheck = false;
+          //     } else {
+          //       qualification.push(this.formBuilder.group(qual));
+          //       let q;
+          //       q = qualification.controls[index];
+          //       q.insCheck = true;
+          //     }
+          //   });
 
-          }
-          if (profileDetails.certificate && profileDetails.certificate.length > 0) {
-            profileDetails.certificate.forEach(certif =>
-              certificate.push(this.formBuilder.control(certif)));
-          }
+          // }
+          // if (profileDetails.certificate && profileDetails.certificate.length > 0) {
+          //   profileDetails.certificate.forEach(certif =>
+          //     certificate.push(this.formBuilder.control(certif)));
+          // }
           this.loader.hide();
         } else {
           this.loader.hide();
