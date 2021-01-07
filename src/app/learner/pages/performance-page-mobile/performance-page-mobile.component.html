@@ -143,14 +143,15 @@
                               <div class="row ml-0 mr-0 itCarouselRow1">
                                 <div class="col-12 m-auto">
                                   <mat-icon class="closeIcon" *ngIf="itration.submit_status == 'notsubmitted'" (click)="submitType = 'delete'; submitDeleteVideo(videoData, itration, performActivityData.performActivity)">close</mat-icon>
-                                  <mat-icon class="iterationicons" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)"
+                                  <!-- itration.grade_status -->
+                                  <mat-icon class="iterationicons" [ngClass]="itration.grade_status !== 'Evaluated' ? 'cursorBlock' : ''" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)"
                                     *ngIf="videoData.doc_type =='image/jpeg'  || videoData.doc_type == 'image/png' || videoData.doc_type == 'image/jpg'">
                                     photo_size_select_actual</mat-icon>
-                                  <mat-icon class="iterationicons" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)" *ngIf="videoData.doc_type =='video/mp4'">play_circle_outline</mat-icon>
-                                  <i class="fa fa-file-pdf-o iterationicons" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)" *ngIf="videoData.doc_type =='application/pdf'" aria-hidden="true"></i>
+                                  <mat-icon class="iterationicons" [ngClass]="itration.grade_status !== 'Evaluated' ? 'cursorBlock' : ''" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)" *ngIf="videoData.doc_type =='video/mp4'">play_circle_outline</mat-icon>
+                                  <i class="fa fa-file-pdf-o iterationicons" [ngClass]="itration.grade_status !== 'Evaluated' ? 'cursorBlock' : ''" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)" *ngIf="videoData.doc_type =='application/pdf'" aria-hidden="true"></i>
                                 </div>
                               </div>
-                              <div class="row ml-0 mr-0 h-40" class="fileSelDet" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)">
+                              <div class="row ml-0 mr-0 h-40" class="fileSelDet" [ngClass]="itration.grade_status !== 'Evaluated' ? 'cursorBlock' : ''" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)">
                                 <div class="fileNameCol">
                                 <!-- <div class="col-12 text-center mt-2 mb-2 pl-0 pr-0"> -->
                                   <span class="carouselText" *ngIf="videoData.name?.length > 40">{{(videoData.name| slice:0:30)+'...'}}</span>
@@ -313,4 +314,4 @@
 </ng-template>
 </div> 
   
-<input style="display: none;" accept="video/mp4" multiple type="file" id="videoInput" type="file" #videoInput (change)="uploadDocument($event)" />
+<input style="display: none;" accept="video/mp4" multiple type="file" id="videoInput" (click)="videoInput.value = null" type="file" #videoInput (change)="uploadDocument($event)" />

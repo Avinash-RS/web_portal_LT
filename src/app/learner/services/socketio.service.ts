@@ -11,7 +11,7 @@ export class SocketioService {
     @Output() change: EventEmitter<boolean> = new EventEmitter();
 
     constructor() {
-        this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
+        this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) ;
        // this.socket = io(environment.socketio);
         // if (this.loginDetails) {
         //     this.Connectsocket({type: 'connect'}).subscribe(quote => {
@@ -25,7 +25,7 @@ export class SocketioService {
         Observable.create(observer => {
             this.observer = observer;
         });
-        this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
+        this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) ;
         if (type.type === 'disconnect') {
             this.socket.emit('logout', this.loginDetails.user_id);
         }

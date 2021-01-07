@@ -19,9 +19,10 @@ export class AuthGuard implements CanLoad {
   ) { }
   // Added by Avinasi
     canLoad(route: Route, segments: UrlSegment[]): any {
-      const userDetailes = sessionStorage.getItem('role');
+      const userDetailes = localStorage.getItem('role');
+      const token =  localStorage.getItem('token');
     
-      if (userDetailes == 'learner') {
+      if (userDetailes == 'learner' && token) {
         // userdetail is present // authenticated user
         // url should not start from admin - can be /Larner or anything
         // if profile updated and trying to go login/reg
@@ -45,8 +46,9 @@ export class AuthGuard implements CanLoad {
   
   // Added by Mythreyi
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const userDetailes = sessionStorage.getItem('role');
-    if (userDetailes == 'learner') {
+    const userDetailes = localStorage.getItem('role');
+    const token =  localStorage.getItem('token');
+    if (userDetailes == 'learner' && token) {
       // userdetail is present // authenticated user
       // url should not start from admin - can be /Larner or anything
       // if profile updated and trying to go login/reg
@@ -62,8 +64,8 @@ export class AuthGuard implements CanLoad {
       // end of url navigations for logged in learner ------> 1
     }
 
-    // const userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails')) || null;
-    // // const role = localStorage.getItem('role') || sessionStorage.getItem('role') || null;
+    // const userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
+    // // const role = localStorage.getItem('role') || localStorage.getItem('role') || null;
     // // for learner ------> 1
     // // debugger
     // const adminUrl = state.url.includes('Admin');
@@ -72,7 +74,7 @@ export class AuthGuard implements CanLoad {
     //   // userdetail is present // authenticated user
     //   // url should not start from admin - can be /Larner or anything
     //   // if profile updated and trying to go login/reg
-    //   if (sessionStorage.getItem('role') == 'learner') {
+    //   if (localStorage.getItem('role') == 'learner') {
     //     this.router.navigate(['/Learner/MyCourse']);
     //     return false;
     //   } else if (!userDetailes.is_profile_updated) {
@@ -92,7 +94,7 @@ export class AuthGuard implements CanLoad {
     //   }
     //   // end of url navigations for logged in learner ------> 1
     // } else if ((userDetailes == null)) { // user detail is not present in local storage
-    //   if (sessionStorage.getItem('role') == 'learner') {
+    //   if (localStorage.getItem('role') == 'learner') {
     //     return true;
     //   } else {
     //     this.router.navigate(['/Learner/login']);

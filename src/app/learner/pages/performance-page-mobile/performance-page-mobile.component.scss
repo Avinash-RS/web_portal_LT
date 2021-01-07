@@ -1,5 +1,8 @@
 @import "../../../../assets/variable.scss";
 
+.cursorBlock {
+  pointer-events: none;
+}
 @media (max-width: 767px) {
   .dot {
     height: 10px;

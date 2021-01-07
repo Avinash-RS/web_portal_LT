@@ -44,8 +44,8 @@ export class InstructorLedComponent implements OnInit {
     this.router.navigateByUrl('/Learner/MyCourse');
   }
 
-  getAttendance() { 
-    const userDetails = JSON.parse(sessionStorage.getItem('UserDetails'));
+  getAttendance() { // Http Call
+    const userDetails = JSON.parse(localStorage.getItem('UserDetails'));
     this.learnerService.getAttendanceByUsername(this.course.id, userDetails.full_name, userDetails.user_id).subscribe(async res => {
       // tslint:disable-next-line:no-string-literal
       const data = res.data['getTopicAttendanceDetailsByUsername']['data'];

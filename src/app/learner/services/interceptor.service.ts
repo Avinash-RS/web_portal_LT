@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SocketioService } from './socketio.service';
 import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
+import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { result } from 'underscore';
 
 @Injectable()
@@ -13,9 +14,10 @@ export class InterceptorService implements HttpInterceptor {
   loginDetails: any;
   constructor(
     public toast: ToastrService, public socketService: SocketioService,
-    public router: Router, public services: CommonServicesService
+    public router: Router, public services: CommonServicesService,
+    private alertBox: AlertServiceService,
   ) {
-    this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
+    this.loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -24,6 +26,16 @@ export class InterceptorService implements HttpInterceptor {
     });
     return next.handle(clone).pipe(
       map((event: HttpEvent<any>) => {
+        // console.log('res', event); 
+        if (event && event['body'] && event['body']['data']) {
+          let bodyData = event['body']['data'];
+          const dynKey = Object.keys(bodyData)[0]
+          if (bodyData[dynKey].error_msg && bodyData[dynKey].error_msg === 'TokenExpiredError: jwt expired') {
+            this.alertBox.openAlert("Session Expired", "Please login again.")
+            this.logout();
+          }
+          
+        }
         return event;
       }),
       retry(3),
@@ -41,27 +53,29 @@ export class InterceptorService implements HttpInterceptor {
     );
   }
   logout() {
-        // this.loading = true;
-        //SOCKET DISCONNECTION START
-        //SOCKET DISCONNECTION COMPLETE
-        if (this.loginDetails?._id) {
-          this.services.logout(this.loginDetails._id, false).subscribe((logout: any) => {
-            this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
-            });
-            this.socketService.closeSocket();  
-            localStorage.clear();
-            sessionStorage.clear();
-            this.router.navigate(['/Learner/login']);
-          }, (err)=> {
-            localStorage.clear();
-            sessionStorage.clear();
-            this.router.navigate(['/Learner/login']);
-          });  
-        } else {
-          localStorage.clear();
-          sessionStorage.clear();
-          this.router.navigate(['/Learner/login']);
-        }
+    this.loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
+    // this.loading = true;
+    //SOCKET DISCONNECTION START
+    // needs socket disconnection
+    //SOCKET DISCONNECTION COMPLETE
+    if (this.loginDetails?._id) {
+      this.services.logout(this.loginDetails._id, false).subscribe((logout: any) => {
+        this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
+        });
+        this.socketService.closeSocket();
+        localStorage.clear();
+        sessionStorage.clear();
+        this.router.navigate(['/Learner/login']);
+      }, (err) => {
+        localStorage.clear();
+        sessionStorage.clear();
+        this.router.navigate(['/Learner/login']);
+      });
+    } else {
+      localStorage.clear();
+      sessionStorage.clear();
+      this.router.navigate(['/Learner/login']);
+    }
 
   }
 

@@ -45,20 +45,20 @@ export class LoginComponent implements OnInit {
   portalToIggnite() {
     this.activatedRoute.queryParams.subscribe(params => {
       if (params && params['email_id']) {
-        this.learnerService.getLoginUserDetail(params.email_id).subscribe((isValidEmailResult: any) => {
+        this.learnerService.getLoginUserDetail(params.email_id.toLowerCase()).subscribe((isValidEmailResult: any) => {
           if (isValidEmailResult.data.get_login_details.success === true) {
-            sessionStorage.setItem('token', isValidEmailResult.data.get_login_details.message.token);
+            localStorage.setItem('token', isValidEmailResult.data.get_login_details.message.token);
             localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
             localStorage.setItem('Fullname', isValidEmailResult.data.get_login_details.message.full_name);
-            sessionStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
-            sessionStorage.setItem('remember_me', 'true');
-            sessionStorage.setItem('user_img', isValidEmailResult.data.get_login_details.message.profile_img);
-            sessionStorage.setItem('role', 'learner');
+            localStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
+            localStorage.setItem('remember_me', 'true');
+            localStorage.setItem('user_img', isValidEmailResult.data.get_login_details.message.profile_img);
+            localStorage.setItem('role', 'learner');
             this.router.navigate(['/Learner/MyCourse']);
           } else {
             this.toastr.error(isValidEmailResult.data.get_login_details.error_msg, null);
             localStorage.clear();
-            sessionStorage.clear();
+            localStorage.clear();
           }
         });  
       } else {
@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    var encryptedname = CryptoJS.AES.encrypt(this.loginForm.value.username, this.secretKey.trim()).toString();
+    var encryptedname = CryptoJS.AES.encrypt(this.loginForm.value.username.toLowerCase(), this.secretKey.trim()).toString();
     var encryptedpassword = CryptoJS.AES.encrypt(this.loginForm.value.password, this.secretKey.trim()).toString();
     this.service.login(encryptedname, encryptedpassword, false)
       .subscribe((loginresult: any) => {
@@ -84,11 +84,11 @@ export class LoginComponent implements OnInit {
           
             localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
             localStorage.setItem('Fullname', loginresult.data.login.message.full_name); // Added ny Mythreyi
-              sessionStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
-              sessionStorage.setItem('remember_me', 'false');
-              sessionStorage.setItem('user_img', loginresult.data.login.message.profile_img);
-              sessionStorage.setItem('role', 'learner');
-              sessionStorage.setItem('token', loginresult.data.login.message.token);
+              localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
+              localStorage.setItem('remember_me', 'false');
+              localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
+              localStorage.setItem('role', 'learner');
+              localStorage.setItem('token', loginresult.data.login.message.token);
               this.router.navigate(['/Learner/MyCourse']);
             if (loginresult.data.login && this.loginForm.value.remember_me === true) {
               localStorage.setItem('remember_me', 'true');
