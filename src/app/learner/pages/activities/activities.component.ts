@@ -160,13 +160,22 @@ export class ActivitiesComponent implements OnInit {
     }
     this.courseid = this.checkDetails ? this.checkDetails.courseId : localStorage.getItem('Courseid');
     this.courseName = this.checkDetails ? this.checkDetails.courseName : localStorage.getItem('CourseName');
-    this.getAssignmentmoduleData();
-    this.getprojectActivityData();
-    this.getperformActivityData();
+    
+    const index = localStorage.getItem('userTabLocation');
+    if (index) {
+      // tslint:disable-next-line:radix
+      this.demo1TabIndex = parseInt(index);
+    }
+    if (this.demo1TabIndex.toString() == '0') {
+      this.getAssignmentmoduleData();
+    } else if (this.demo1TabIndex.toString() == '1') {
+      this.getperformActivityData();
+    } else {
+      this.getprojectActivityData();
+    }
   }
 
   ngOnInit() {
-    const index = localStorage.getItem('userTabLocation');
     // this.projectDetaildata = this.projectDetails;
     this.Lservice.closeMobileResp$.subscribe((data: any) => {
       this.performdetailPageView = data;
@@ -174,10 +183,6 @@ export class ActivitiesComponent implements OnInit {
     this.Lservice.closeMobileResp$.subscribe((data: any) => {
       this.projectdetailPageView = data;
     });
-    if (index) {
-      // tslint:disable-next-line:radix
-      this.demo1TabIndex = parseInt(index);
-    }
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.currentTab === 'Perform' || this.demo1TabIndex === 1 && this.screenWidth < 800) {
@@ -255,9 +260,17 @@ export class ActivitiesComponent implements OnInit {
   }
 
   tabChanged(event) {
+    // if (this.demo1TabIndex.toString() == '0') {
+    //   this.getAssignmentmoduleData();
+    // } else if (this.demo1TabIndex.toString() == '1') {
+    //   this.getperformActivityData();
+    // } else {
+    //   this.getprojectActivityData();
+    // }
 
     this.currentTab = event.tab.textLabel;
     if (event.tab.textLabel === 'Perform') {
+      this.getperformActivityData();
       this.screenHeight = window.innerHeight;
       this.screenWidth = window.innerWidth;
       if (this.screenWidth < 800) {
@@ -266,6 +279,7 @@ export class ActivitiesComponent implements OnInit {
         this.mobileResponsive = false;
       }
     } else if (event.tab.textLabel === 'Project') {
+      this.getprojectActivityData();
       this.screenHeight = window.innerHeight;
       this.screenWidth = window.innerWidth;
       if (this.screenWidth < 800) {
@@ -275,6 +289,7 @@ export class ActivitiesComponent implements OnInit {
         this.projectMobileResponsive = false;
       }
     } else if (event.tab.textLabel === 'Assignments') {
+      this.getAssignmentmoduleData();
       this.screenHeight = window.innerHeight;
       this.screenWidth = window.innerWidth;
       if (this.screenWidth < 800) {
