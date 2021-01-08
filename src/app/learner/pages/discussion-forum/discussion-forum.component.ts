@@ -176,7 +176,7 @@ export class DiscussionForumComponent implements OnInit {
         thread_name: new FormControl('', [Validators.minLength(9), Validators.required]),
         thread_description: new FormControl('', [Validators.minLength(9), Validators.required]),
       });
-      this.dialog.open(templateRef);
+      this.dialog.open(templateRef, { disableClose: true });
     } else {
       this.toastr.warning('You are not a registered user for forum');
     }

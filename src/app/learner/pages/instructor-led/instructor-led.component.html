@@ -73,7 +73,7 @@
           <div class="moduleContent">
             
             <div flex >
-              <span class="sessionTitle">{{activityShow?.activity_details.topicname}}</span>
+              <span class="sessionTitle">{{activityShow?.activity_details.activityname}}</span>
               <div class="row">
                 <!-- <span>Held On</span> &nbsp;&nbsp; -->
                 <span class="sessionDate">Date: {{ activityShow?.activity_details.startdate | date: 'MMM d, y, h:mm a'}}</span>
@@ -141,14 +141,14 @@
           <table style="width: 100%;">
             <tr class="tblheaderFont">
               <th width="13%">Session #</th>
-              <th width="55%">Topic Name</th>
+              <th width="55%">Activity Name</th>
               <th width="22%">Date</th>
-              <th width="10%">Present?</th>
+              <th width="10%">Present</th>
             </tr>
             <tbody>
               <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
                 <td>{{i+1}}</td>
-                <td>{{atd.activity.topicname}}</td>
+                <td>{{atd.activity.activityname}}</td>
                 <td>{{atd.activity.startdate | date: 'dd/MM/yyyy hh:mm a'}}</td>
                 <td>
                   <mat-icon #attended *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'" style="color: green;">done</mat-icon>
@@ -171,13 +171,13 @@
       <table>
         <tr class="tblheaderFont">
           <th>Session #</th>
-          <th >Topic Name</th>
+          <th >Activity Name</th>
           <th>Date</th>
           <th>Present?</th>
         </tr>
         <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
           <td>{{i+1}}</td>
-          <td>{{atd.activity.topicname}}</td>
+          <td>{{atd.activity.activityname}}</td>
           <td>{{atd.activity.startdate | date: 'dd/MM/yyyy hh:mm a'}}</td>
           <td>
             <mat-icon *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'" style="color: green;">done</mat-icon>
@@ -209,7 +209,7 @@
                 <div *ngIf="los.status == 'Completed'" class="bottom-right greenColor">{{los.status}}</div>
               </div>
               <div class="content-container">
-                <h4>{{los.activity_details.topicname}}</h4>
+                <h4>{{los.activity_details.activityname}}</h4>
                 <h5><span>Date:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm a'}}</h5>
                 <h5><span>Duration:</span> {{los.duration}} </h5>
               </div>
