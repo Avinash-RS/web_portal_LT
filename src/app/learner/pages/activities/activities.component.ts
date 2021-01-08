@@ -160,13 +160,22 @@ export class ActivitiesComponent implements OnInit {
     }
     this.courseid = this.checkDetails ? this.checkDetails.courseId : localStorage.getItem('Courseid');
     this.courseName = this.checkDetails ? this.checkDetails.courseName : localStorage.getItem('CourseName');
-    this.getAssignmentmoduleData();
-    this.getprojectActivityData();
-    this.getperformActivityData();
+    
+    const index = localStorage.getItem('userTabLocation');
+    if (index) {
+      // tslint:disable-next-line:radix
+      this.demo1TabIndex = parseInt(index);
+    }
+    if (this.demo1TabIndex.toString() == '0') {
+      this.getAssignmentmoduleData();
+    } else if (this.demo1TabIndex.toString() == '1') {
+      this.getperformActivityData();
+    } else {
+      this.getprojectActivityData();
+    }
   }
 
   ngOnInit() {
-    const index = localStorage.getItem('userTabLocation');
     // this.projectDetaildata = this.projectDetails;
     this.Lservice.closeMobileResp$.subscribe((data: any) => {
       this.performdetailPageView = data;
@@ -174,10 +183,6 @@ export class ActivitiesComponent implements OnInit {
     this.Lservice.closeMobileResp$.subscribe((data: any) => {
       this.projectdetailPageView = data;
     });
-    if (index) {
-      // tslint:disable-next-line:radix
-      this.demo1TabIndex = parseInt(index);
-    }
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.currentTab === 'Perform' || this.demo1TabIndex === 1 && this.screenWidth < 800) {
@@ -255,9 +260,17 @@ export class ActivitiesComponent implements OnInit {
   }
 
   tabChanged(event) {
+    // if (this.demo1TabIndex.toString() == '0') {
+    //   this.getAssignmentmoduleData();
+    // } else if (this.demo1TabIndex.toString() == '1') {
+    //   this.getperformActivityData();
+    // } else {
+    //   this.getprojectActivityData();
+    // }
 
     this.currentTab = event.tab.textLabel;
     if (event.tab.textLabel === 'Perform') {
+      this.getperformActivityData();
       this.screenHeight = window.innerHeight;
       this.screenWidth = window.innerWidth;
       if (this.screenWidth < 800) {
@@ -266,6 +279,7 @@ export class ActivitiesComponent implements OnInit {
         this.mobileResponsive = false;
       }
     } else if (event.tab.textLabel === 'Project') {
+      this.getprojectActivityData();
       this.screenHeight = window.innerHeight;
       this.screenWidth = window.innerWidth;
       if (this.screenWidth < 800) {
@@ -275,6 +289,7 @@ export class ActivitiesComponent implements OnInit {
         this.projectMobileResponsive = false;
       }
     } else if (event.tab.textLabel === 'Assignments') {
+      this.getAssignmentmoduleData();
       this.screenHeight = window.innerHeight;
       this.screenWidth = window.innerWidth;
       if (this.screenWidth < 800) {
@@ -333,8 +348,6 @@ export class ActivitiesComponent implements OnInit {
                   fileData.assignmentEndDate = moment(endDate).format(
                     'DD-MM-YYYY HH:mm'
                   );
-                  console.log('start date', fileData.type_name, fileData.assignmentStartDate);
-                  console.log('end date', fileData.type_name, fileData.assignmentEndDate);
                   
                   if (
                     moment().format('DD-MM-YYYY HH:mm') >=
@@ -483,7 +496,6 @@ export class ActivitiesComponent implements OnInit {
     this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
         this.projectDetails = data.data.getprojectActivityData.data; 
-        console.log('project', this.projectDetails);
                
         this.projectDetails.forEach(element => {
           element.showLearnerList = false;
@@ -496,7 +508,6 @@ export class ActivitiesComponent implements OnInit {
           if (moment().format('DD-MM-YYYY') == moment(batchEndDate).format('DD-MM-YYYY')) {
             element.submitType = true;
           }
-          console.log('submit', element.submitType);
           // console.log('Final', moment().isSameOrAfter(batchEndDate));
           
           // if (moment().format('DD-MM-YYYY HH:mm') <= element.batchEndDate) {
@@ -511,7 +522,6 @@ export class ActivitiesComponent implements OnInit {
           element.startdate = moment(startDate).format('DD-MM-YYYY HH:mm');
           const endDate = new Date(element.projectActivity.activityenddate);
           element.enableSubmit = moment().isSameOrAfter(startDate);
-          console.log('enableSubmit', element.enableSubmit);
           // element.activityEndDate = moment(endDate).format('ll');
           // element.enableSubmit  = this.dateDiff(startDate,
           //   endDate , crrDate);
@@ -562,13 +572,28 @@ export class ActivitiesComponent implements OnInit {
           // console.log(endDate);
           // console.log(batchendDate);
           // console.log(crrDate);
+          
+          const batchEndDate = new Date(element.performActivity.batchenddate);
+          element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
+          
+          element.performSubmitType = moment().isSameOrBefore(batchEndDate);
+          if (moment().format('DD-MM-YYYY') == moment(batchEndDate).format('DD-MM-YYYY')) {
+            element.performSubmitType = true;
+          }
+  
           const crrDate = new Date();
           const startDate = new Date(element.performActivity.activitystartdate);
-          const endDate = new Date(element.performActivity.batchenddate);
+          element.startdate = moment(startDate).format('DD-MM-YYYY HH:mm');
+          const endDate = new Date(element.performActivity.activityenddate);
+          element.itrationStarted = moment().isSameOrAfter(startDate);
+          
+          // const crrDate = new Date();
+          // const startDate = new Date(element.performActivity.activitystartdate);
+          // const endDate = new Date(element.performActivity.batchenddate);
 
             // tslint:disable-next-line:no-string-literal
-          element['itrationStarted']  = this.dateDiff(startDate,
-            endDate , crrDate);
+          // element['itrationStarted']  = this.dateDiff(startDate,
+          //   endDate , crrDate);
           // if (startDate <= crrDate && batchendDate >= crrDate) {
           //   // tslint:disable-next-line:no-string-literal
           //   element['itrationStarted'] = true;

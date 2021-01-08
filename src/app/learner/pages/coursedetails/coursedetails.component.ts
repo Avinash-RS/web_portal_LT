@@ -129,7 +129,6 @@ export class CoursedetailsComponent implements OnInit {
     public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
     public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
     public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
-
     // if (this.socketService.socketStatus()||this.socketService.socketStatus() == undefined){
     this.socketConnector = this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
     });
@@ -252,9 +251,10 @@ export class CoursedetailsComponent implements OnInit {
     this.socketEmitReciver = this.socketService.change.subscribe(result => {
       if (result && result.eventId && result.eventId.length > 0 && result.data.childData.length > 0) {
         if (result.data.course_id === this.courseid) {
+          this.scromModuleData = result.data.childData;
           if (this.topiccurrentPage !== result.data.resumeSubContent ||
              result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status !== this.topicPageStatus) {
-          this.scromModuleData = result.data.childData;
+          
           this.currentPage = result.data.resumeContent;
           this.topiccurrentPage = result.data.resumeSubContent;
           this.topicPageStatus = result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status
@@ -539,14 +539,15 @@ export class CoursedetailsComponent implements OnInit {
       this.moduleLenth = this.scromApiData?.childData.length;
       this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : this.scromApiData.topicIndex;
       this.moduleHolder = this.currentPage = this.scromApiData.moduleIndex == null ? 0 : this.scromApiData.moduleIndex;
-
+      const moduleTitle = encodeURIComponent(this.scromApiData.childData[this.currentPage].title);
+      const topicTitle = encodeURIComponent(this.scromApiData.childData[this.currentPage].children[this.topiccurrentPage].title);
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
           this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.scromApiData.url +
           '&module_status=' + 'process'
-          + '&module=' + this.scromApiData.childData[this.currentPage].children + '&topic=' + this.scromApiData.childData[this.currentPage].children[this.topiccurrentPage].topicname + '&token=' + this.user_token);
+          + '&module=' + moduleTitle + '&topic=' + topicTitle + '&token=' + this.user_token);
 
       this.playerTopicLen = this.scromApiData.total_topic_len;
       // tree level
