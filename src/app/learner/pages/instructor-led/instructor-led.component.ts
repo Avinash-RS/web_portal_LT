@@ -50,6 +50,9 @@ export class InstructorLedComponent implements OnInit {
       // tslint:disable-next-line:no-string-literal
       const data = res.data['getTopicAttendanceDetailsByUsername']['data'];
       this.listOfSessions = data.Activity;
+      this.listOfSessions.sort((a,b)=>{
+        return +new Date(b.activity_details.startdate) - +new Date(a.activity_details.startdate);
+      })
       this.listOfSessions.forEach((item,i)=>{
         if(item.status === "On going" && item.activity_details.activitytype === "Live Classroom"){
           this.listOfSessions.splice(i, 1);
