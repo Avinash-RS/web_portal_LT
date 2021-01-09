@@ -133,6 +133,7 @@ export class CoursedetailsComponent implements OnInit {
     this.socketConnector = this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
     });
     // }
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('about:blank');
     this.user_token = localStorage.getItem("token")
     const Feedbackdetail: any = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);

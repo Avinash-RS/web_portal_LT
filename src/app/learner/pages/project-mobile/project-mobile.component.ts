@@ -84,7 +84,6 @@ export class ProjectMobileComponent implements OnInit {
 
   ngOnInit() {
     this.projectDetails = this.projectDetailPageData;
-    console.log(this.projectDetails)
     this.getprojectActivityData();
     if(this.projectDetails){
       this.projectDetails.forEach(element => {
@@ -149,7 +148,6 @@ export class ProjectMobileComponent implements OnInit {
     this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
       this.projectDetails = data.data.getprojectActivityData.data;
-      console.log(this.projectDetails, 'lsadfjsadk');
       
       this.projectDetails.forEach(element => {
         this.groupDetails = element.projectActivity.groupDetails;
@@ -163,7 +161,6 @@ export class ProjectMobileComponent implements OnInit {
         if (moment().format('DD-MM-YYYY') == moment(batchEndDate).format('DD-MM-YYYY')) {
           element.submitType = true;
         }
-        console.log('submit', element.submitType);
         
         // if (moment().format('DD-MM-YYYY HH:mm') <= element.batchEndDate) {
         //   console.log('coming mob');
@@ -192,7 +189,6 @@ export class ProjectMobileComponent implements OnInit {
         // element.enableSubmit = this.dateDiff(startDate,
         //   endDate, crrDate);
         element.enableSubmit = moment().isSameOrAfter(startDate);
-        console.log('enableSubmit', element.enableSubmit);
         const submitDate = new Date(element.projectActivity.submitted_on);
         element.submittedOn = moment(submitDate).format('ll');
         // if (moment().format('DD-MM-YYYY HH:mm') < element.startdate) {
@@ -217,9 +213,7 @@ export class ProjectMobileComponent implements OnInit {
   learnerUploadVideo(project, submitAction) {
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:mm');
-    console.log(project.actstartDate, 'StartDate');
     const endDate1 = new Date(project.projectActivity.activityenddate);
-    console.log(endDate1, 'EndDate');
     project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:mm');
     let submitStatus = '';
     if (moment().format('DD-MM-YYYY HH:mm') >= project.actstartDate &&
@@ -309,7 +303,6 @@ export class ProjectMobileComponent implements OnInit {
       }
 
       playVideo(templateRef: TemplateRef<any>, videoDialog,  path, docType) {
-        console.log('check path...', path);
         if (docType !== 'video/mp4') {
           this.dialog.open(templateRef, {
             width: '100%',
@@ -367,7 +360,6 @@ export class ProjectMobileComponent implements OnInit {
       }
     }
     downloadPdf(doc) {
-      console.log('doc', doc);
       const link = document.createElement('a');
       link.target = '_blank';
       link.style.display = 'none';

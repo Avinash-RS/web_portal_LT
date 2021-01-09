@@ -67,7 +67,7 @@ export class LearnerActivityCenterComponent implements OnInit {
         this.courseId = this.navDetails?.id;
       } else {
         this.courseId = 'undefined';
-      }
+      }      
       this.service.getCourseActivities(userId, PageNumber, this.courseId, this.sortType, this.searchValue,
         this.searchColumn, this.statusBased)
         .subscribe((result: any) => {
@@ -328,10 +328,16 @@ export class LearnerActivityCenterComponent implements OnInit {
         const userId = this.userDetails.user_id;
         const PageNumber = params.startRow / 10 || 0;
         if (this.navDetails?.tableType === 'completed') {//mangi
+          // const statusB = [{
+          //   ['$or']: [{ ['files.submit_status']: { $regex: 'Graded', $options: 'i' } },
+          //   { 'files.submit_status': { $regex: 'Submitted', $options: 'i' } }]
+          // }];
           const statusB = [{
             ['$or']: [{ ['files.submit_status']: { $regex: 'Graded', $options: 'i' } },
+            {'files.submit_status':{$regex:'Overdue',$options:'i'}},
             { 'files.submit_status': { $regex: 'Submitted', $options: 'i' } }]
           }];
+  
           this.statusBased = JSON.stringify(statusB);
         } else if (this.navDetails?.tableType === 'ongoing') {
           const statusB = [{ ['files.submit_status']: { $regex: 'Yet to submit', $options: 'i' } }];
