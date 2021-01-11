@@ -9,7 +9,6 @@
     position: relative;
     padding-left: 16px;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2) !important;
-
 }
 
 .spacer {
@@ -40,51 +39,38 @@
 .mat-toolbar-single-row {
     height: 55px !important;
 }
-
 .hearder-logo {
     height: 20px;
     cursor: pointer;
     margin-left: 3px;
-    // padding-left: 0.5%;
 }
-
 .edutech {
     display: contents;
     font-size: 22px;
     font-weight: lighter;
 }
-
 :host ::ng-deep .mat-menu-content {
     padding: 0px !important;
     margin-left: 0px !important;
 }
-
 :host ::ng-deep .mat-menu-content:not(:empty) {
     padding-top: 0px !important;
     padding-bottom: 0px !important;
 }
-
 :host ::ng-deep .mat-menu-item {
     border: none !important;
 }
-
 :host ::ng-deep .mat-menu-item:active {
     border: none !important;
 }
-
-
 :host ::ng-deep .mat-toolbar.mat-primary {
     background-color: $lxp-theme-yellow-sec !important;
     -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .1) !important;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2) !important;
-
 }
-
 :host ::ng-deep.mat-icon-button {
     line-height: 31px !important;
-
 }
-
 .mat-toolbar-row,
 .mat-toolbar-single-row {
     padding: 0 11px !important;
@@ -99,7 +85,6 @@
     background: $lxp-theme-green !important;
     cursor: pointer;
 }
-
 .btn1 {
     position: relative;
     font-size: 15px;
@@ -108,32 +93,16 @@
     background: $lxp-theme-yellow-sec !important;
     cursor: pointer;
 }
-
-:host ::ng-deep .btn1:focus {
-    // border-bottom: 2px solid $lxp-theme-green !important;
-    // border-right: none !important;
-    // outline: 0 !important;
-    // border-left: none !important;
-}
-
-.btn1:hover {
-    //color: $color-blank !important;
-    // background-color: #77777740 !important;
-    // color:$color-lightGray !important
-}
-
 :host ::ng-deep button:active {
     outline: none !important;
     border: none;
     color: $color-blank;
 }
-
 .tab {
     text-align: right;
     margin-right: 1%;
     width: 100%;
 }
-
 .headTit {
     display: contents;
     font-size: 14px;
@@ -142,7 +111,6 @@
     margin-left: 2px;
     font-weight: bold;
 }
-
 .activity-icon {
     height: 22px;
     width: 22px;
@@ -175,9 +143,7 @@
 .mat-typography h5 {
     margin: 0px 0 5px !important;
 }
-
 .colWhite {
-    // color:$color-lightGray;
     display: inline-block;
     vertical-align: middle;
     overflow: hidden;
@@ -211,14 +177,10 @@
     margin-left: 5px;
 }
 @media screen and (min-width: 200px) and (max-width: 770px) {
-//   .smNoDisp{
-//       display: none;
-//   }
-
-.p5px {
-    background-color: black;
-    padding:7px 4px !important; 
-}
+    .p5px {
+        background-color: black;
+        padding:7px 4px !important; 
+    }
     .bookIcon {
         display: none !important;
         position: relative;
@@ -246,20 +208,13 @@
     color: $lxp-theme-green;
 }
 
-.imgAdj{
-    // float: right;
-    // margin-top: 6px;
-}
-
 .p-x-15px {
     padding:12px 15px 11px 15px; 
 }
 
 .headicon {
     font-size: 18px !important;
-    // width: 30px !important;
     position: relative;
-    // top: 6px;
 }
 
 .mobMenu {
@@ -307,6 +262,17 @@
         align-items: center;
     }
 }
+
+// Desktop Menu Starts
+.desktopMenu {
+    button {
+        border: none;
+    }
+}
+
+// Desktop Ends
+
+
 .mobHamburger {
     display: none;
     @media only screen and (max-width: 767px) {
@@ -319,18 +285,12 @@
     color: rgba(0, 0, 0, 0.7);
 }
  ::ng-deep .swal2-styled.swal2-confirm {
-    // border: 1px solid #C02222 !important;
-    // background-color: #ffffff !important;
     height: 41.25px !important;
     background-color: #C02222 !important;
     color: #ffffff !important;
-    // color: #333333 !important;
 
 }
 ::ng-deep .swal2-styled.swal2-cancel:hover {
-    // border: 1px solid #C02222 !important;
-    // background-color: #ffffff !important;
-    // background-color: #C02222 !important;
     background-color: #C02222 !important;
     color: #ffffff !important;
 }
