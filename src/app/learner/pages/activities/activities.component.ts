@@ -494,6 +494,7 @@ export class ActivitiesComponent implements OnInit {
 
   getprojectActivityData() {
     this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
+      console.log('asdfsa', data)
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
         this.projectDetails = data.data.getprojectActivityData.data; 
                
@@ -818,7 +819,13 @@ export class ActivitiesComponent implements OnInit {
   }
 
   openDocument(templateRef: TemplateRef<any>, path, docType) {
+    console.log('Path', path)
+    if(path == null) {
+      this.toastr.warning("No Reports Found")
+      return false;
+    }
     path.path = path.imageurl;
+    
     this.dialog.open(templateRef, {
       width: '100%',
       height: '100%',
@@ -826,6 +833,7 @@ export class ActivitiesComponent implements OnInit {
       disableClose: true,
     });
     this.previewDoc = path;
+    console.log('this.previewDoc', this.previewDoc)
   }
 
   playVideo(templateRef: TemplateRef<any>, videoDialog, path, docType) {
