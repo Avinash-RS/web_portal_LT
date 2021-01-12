@@ -1,26 +1,26 @@
 <mat-toolbar color="primary" class="mat-elevation-z4 bg-dark">
-  <img class="hearder-logo " alt="" src="assets/learner/iGGnite_PNG.png" (click)="navigateMyCourse()">
+  <img class="hearder-logo" alt="" src="assets/learner/iGGnite_PNG.png" (click)="navigateMyCourse()">
 
   <!-- Desktop Menu Starts -->
   <div class="tab desktopMenu" *ngIf="show">
-    <button class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/MyCourse' ? 'colgreen' : 'colWhite'" md-raised-button routerLink="/Learner/MyCourse">
+    <button class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/MyCourse' ? 'colGrey' : 'colWhite'" md-raised-button routerLink="/Learner/MyCourse">
       <mat-icon fontSet="material-icons-outlined" class="headicon" inline=true> local_library </mat-icon>
       <span class="smNoDisp">My Courses</span>
     </button>
 
-    <button class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/calendar' ? 'colgreen' : 'colWhite'" md-raised-button routerLink="/Learner/calendar" routerLinkActive="active">
+    <button class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/calendar' ? 'colGrey' : 'colWhite'" md-raised-button routerLink="/Learner/calendar" routerLinkActive="active">
       <span class="headicon lxp-calendar"></span>
-      <div class="imgAdj smNoDisp">Calendar</div>
+      <span class="imgAdj smNoDisp">Calendar</span>
     </button>
 
-    <button class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/activitycenterhomescreen' ? 'colgreen' : 'colWhite'" md-raised-button routerLink="/Learner/activitycenterhomescreen">
+    <button class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/activitycenterhomescreen' ? 'colGrey' : 'colWhite'" md-raised-button routerLink="/Learner/activitycenterhomescreen">
       <mat-icon fontSet="material-icons-outlined" class="headicon" inline=true> offline_bolt </mat-icon>
       <span class="smNoDisp">Activity Center</span> 
     </button>
 
-    <button class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/knowledge' ? 'colgreen' : 'colWhite'" md-raised-button routerLink="/Learner/knowledge" routerLinkActive="active">
+    <button class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/knowledge' ? 'colGrey' : 'colWhite'" md-raised-button routerLink="/Learner/knowledge" routerLinkActive="active">
       <span class="lxp-knowledge headicon"></span>
-      <div class="imgAdj"><span class="smNoDisp">Knowledge Resources</span></div>
+      <span class="imgAdj smNoDisp">Knowledge Resources</span>
     </button>
   </div>
   <!-- End of desktopMenu -->
