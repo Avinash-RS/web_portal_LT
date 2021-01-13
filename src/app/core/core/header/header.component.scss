@@ -112,8 +112,13 @@
         align-items: center;
     }
     button {
+        position: relative;
+        overflow: hidden;
         border: none;
         padding: 12px 10px 11px 10px;
+        transform: perspective(1px) translateZ(0);
+        transition-property: color, background-color;
+        transition-duration: 0.3s;
         @media only screen and (min-width: 992px) {
             padding: 12px 15px 11px 15px;
         }
@@ -125,28 +130,6 @@
             color: #000000;
             background-color: transparent;
         }
-        // &.colWhite {
-        //     display: inline-block;
-        //     vertical-align: middle;
-        //     overflow: hidden;
-        //     transform: perspective(1px) translateZ(0);
-        //     transition-property: color, background-color;
-        //     transition-duration: 0.3s;
-        //     position: relative;
-        //     &:hover {
-        //         background-color: $lxp-gray !important;
-        //         color: white !important;
-        //         position: relative;
-        //         &::after {
-        //             content: '';
-        //             position: absolute;
-        //             bottom: 0;
-        //             left: 0;
-        //             width: 100%;
-        //             border-bottom: 2px solid $lxp-theme-green !important;
-        //         }
-        //     }
-        // }
         &.colGrey {
             color: #ffffff !important;
             background-color: #555555 !important;
