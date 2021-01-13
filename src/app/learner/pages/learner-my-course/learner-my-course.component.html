@@ -12,13 +12,12 @@
       <input type="text" autocomplete="off" class="form-control search" [(ngModel)]="searchName" />
     </div>
   </div>
-  <div *ngIf="!expandSearch" class="row w-100 mr-0 ml-0">
+  <!-- <div *ngIf="!expandSearch" class="row w-100 mr-0 ml-0">
     <div class="col-10 col-sm-10 col-md-4 col-lg-6 col-xl-7 catalogTitle align-middle">
       <div class="f_size_22" style="font-size: 22px;">
         {{'My Courses' | translate }}
       </div>
     </div>
-
 
     <div class="col-2 col-sm-2 col-md-8 col-lg-6 col-xl-5 catalogDropdownCol">
       <div class="mobileIcons">
@@ -29,16 +28,13 @@
       <div class="row ml-0 mr-0 searchWrapper">
         <div class="col-6 col-md-7 col-lg-7 col-xl-7 searchCol text-right">
 
-          <!---------------Multi-level dropdown------------->
           <div class="inner-addon searchDiv right-addon" style="display: none;">
             <input type="text" autocomplete="off" [ngClass]="searchExpand? 'form-control search' :'form-control searchNormal'"
               [(ngModel)]="searchName" placeholder="Search courses..." />
-              <!-- (keyup)="getDashboardMyCourse(userDetailes.user_id, userDetailes._id)" -->
             <em class="material-icons pointer iconsSearch" *ngIf="!searchExpand"
               (click)="searchExpand = !searchExpand">search</em>
             <em class="material-icons pointer iconsSearch" *ngIf="searchExpand"
               (click)="searchExpand = !searchExpand; searchName=''">close</em>
-            <!-- <mat-icon class="glyphicon" (click)="searchExpand = !searchExpand">search</mat-icon> -->
           </div>
         </div>
         <div class="col-6 col-md-5 col-lg-5 col-xl-5 availableCol" *ngIf="showDrpdwnBtn" style="display: none;">
@@ -51,40 +47,32 @@
 
                 <ul class="dropdown-menu first-level multi-level" role="menu" id="dropMenu" aria-labelledby="dropdownMenu">
                   <span *ngFor="let item of categories">
-                    <!-- viewCourse(item,item.categoryName,item.totalCount) -->
                     <li *ngIf="item.subCategory == null" class="dropdown-item" (click)="getCoureBasedOnCatalog(dropDownCategoryDetails,item,'',''); viewCourse(item,previewDialog, item.categoryName,item.totalCount)">
-                      <!-- <span *ngIf="item.categoryName.length > 17">{{(item?.categoryName | titlecase | slice:0:17)+'...'}}</span> -->
+                      
                       <span>{{item?.categoryName | titlecase}}</span>
                       <span class="matBadgeNew" matBadge="{{item.totalCount}}" matBadgeOverlap="false"></span>
                     </li>
   
                     <li *ngIf="item.subCategory && item.subCategory.length > 0" class="dropdown-submenu dropdown-item">
-                      <!-- tooltip="{{item?.categoryName | titlecase}}"  placement="top" -->
                       <span>{{item?.categoryName | titlecase}}</span>
                       <span class="dynamicBagde" matBadge="{{item.totalCount}}" matBadgeOverlap="false"></span>
-                      <!----------------------------Sub menu----------------------->
                       <ul class="dropdown-menu subMenu">
                         <span *ngFor="let subchild of item.subCategory">
                           <li *ngIf="subchild.superSubCategory == null" class="dropdown-item superSubMenuItem">
-                            <!-- tooltip="{{subchild.subCategoryName | titlecase}}"  placement="top" -->
                             <span class="superSubSpan" *ngIf="subchild.subCategoryName.length > 17">{{subchild.subCategoryName | titlecase}}</span>
                             <span *ngIf="subchild.subCategoryName.length <= 17">{{subchild.subCategoryName | titlecase}}</span>
                             <span class="matBadgeSubmenu" matBadge="{{subchild.totalCount}}" matBadgeOverlap="false"></span>
                           </li>
   
                           <li *ngIf="subchild.superSubCategory && subchild.superSubCategory.length > 0" class="dropdown-submenu dropdown-item">
-                              <!-- tooltip="{{subchild.subCategoryName | titlecase}}" placement="top" -->
                               <span class="superSubSpan" *ngIf="subchild.subCategoryName.length >17">{{subchild.subCategoryName | titlecase }}</span>
                               <span *ngIf="subchild.subCategoryName.length <=17">{{subchild.subCategoryName | titlecase}}</span>
                               <span class="matBadgeSubmenu" matBadge="{{subchild.totalCount}}" matBadgeOverlap="false"></span>
   
-                            <!------------------------------Super sub menu----------------------------------->
                             <ul class="dropdown-menu superSubMenu">
                               <span *ngFor="let superChild of subchild.superSubCategory">
-                                <!-- viewCourse(item,superChild.superSubCategoryName,superChild.totalCount) -->
                                 <li class="dropdown-item superSubMenuItem"
                                   (click)="menuSelect(subchild,superChild); viewCourse(item,previewDialog,superChild.superSubCategoryName,superChild.totalCount); getCoureBasedOnCatalog(dropDownCategoryDetails,item,subchild.subCategoryId, superChild.superSubCategoryId)">
-                                  <!-- tooltip="{{superChild.superSubCategoryName | titlecase}}" placement="top" -->
                                   <span class="superSubSpan" *ngIf="superChild.superSubCategoryName.length > 17">{{superChild.superSubCategoryName | titlecase }}</span>
                                   <span *ngIf="superChild.superSubCategoryName.length <= 17">{{superChild.superSubCategoryName | titlecase}}</span>
                                   <span class="matBadgesuperSub" matBadge="{{superChild.totalCount}}" matBadgeOverlap="false"></span>
@@ -105,10 +93,9 @@
       <div>
       </div>
       <div class="filterMenu">
-      
       </div>
     </div>    
-  </div>
+  </div> -->
 
   <!-- Desktop tab starts here -->
   <div class="row bodybg desktopWrapper">

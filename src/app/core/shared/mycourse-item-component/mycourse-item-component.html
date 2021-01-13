@@ -2,7 +2,7 @@
   <div class="">
     <div class="courseDetailsCol">
       <div class="row">
-        <div class="col-12 col-sm-12 col-md-4 col-lg-2">
+        <div class="col-12 col-sm-12 col-md-4 col-lg-3">
           <div class="pointhover">
             <div class="courseHover" (click)="gotoDesc(course)">
               <div>
@@ -16,86 +16,92 @@
                   <img *ngIf="course?.categoryName === 'vocational'" style="margin-left: -4px;position: absolute;" matTooltip="Vocational" alt="flag" matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" class="primerFlage" src="../../../../assets/learner/freeV.svg" />
                   <img *ngIf="course?.categoryName === 'pro certification'" matTooltip="Pro certification" style="margin-left: -4px;position: absolute;" matTooltipPosition="right" matTooltipClass="custom-mat-tooltip" alt="flag" class="primerFlage" src="../../../../assets/learner/freeP.svg" />
                 </span>
-                <div class="overlay animate__animated animate__fadeIn">
-                  <mat-icon class="text"> play_arrow </mat-icon>
-                </div>
               </div>
-              <img alt="Course Img" [src]=course.course_img_url class="courseImg" />
+              <figure>
+                <img alt="Course Img" [src]=course.course_img_url class="courseImg" />
+                <div class="overlay">
+                  <mat-icon class="playIcon"> play_circle_outline </mat-icon> <span>Resume</span>
+                </div>
+              </figure>
             </div>
-            <div class="coursePoints animate__animated animate__fadeInDown">
-              <table class="f_size_12">
-                <tr *ngIf="course.isBatchCourse">
-                  <td>Instructor led sessions</td>
-                  <td>Upto {{course.image_instructor_lead_session_time!==""?course.image_instructor_lead_session_time:0}}</td>
-                </tr>
-                <tr>
-                  <td>Self paced learning</td>
-                  <td>{{course.image_self_paced_learning_time!==""?course.image_self_paced_learning_time:0}}</td>
-                </tr>
-                <tr *ngIf="course.isBatchCourse">
-                  <td>Course project</td>
-                  <td>{{course.total_mid_course_project_count!==""?course.total_mid_course_project_count:0}}</td>
-                </tr>
-                <tr *ngIf="course.isBatchCourse">
-                  <td>Internal assessment</td>
-                  <td>{{course.internal_assesment!==""?course.internal_assesment:0}}</td>
-                </tr>
-                <tr *ngIf="course.isBatchCourse">
-                  <td>Final assessment</td>
-                  <td>{{course.final_assesment!==""?course.final_assesment:0}}</td>
-                </tr>
-              </table>
+            <div class="durationCreditTime justify-content-between" *ngIf="!course.courseInfoExp">
+              <div class="courseHours courseCommon">
+                <span class="heading">Duration</span>
+                <h6>{{course.total_duration? course.total_duration : "1" + " hour"}}</h6>
+              </div>
+              <div class="courseCredit courseCommon">
+                <span class="heading">Credits</span>
+                <h6>{{course.credits!==null?course.credits:0}}</h6>
+              </div>
+              <div class="courseDuration courseCommon">
+                <span class="heading">Course Duration</span>
+                <h6>{{course.batch_start_date ?(course.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{course.batch_end_date ?(course.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</h6>
+              </div>
+            </div>
+            <div class="coursePoints justify-content-between">
+              <div class="courseCommon">
+                <span class="heading">Self paced learning</span>
+                <h6>{{course.image_self_paced_learning_time!==""?course.image_self_paced_learning_time:0}}</h6>
+              </div>
+              <div class="courseCommon" *ngIf="course.isBatchCourse">
+                <span class="heading">Instructor led sessions</span>
+                <h6>Upto {{course.image_instructor_lead_session_time!==""?course.image_instructor_lead_session_time:0}}</h6>
+              </div>
+              <div class="courseCommon" *ngIf="course.isBatchCourse">
+                <span class="heading">Internal assessment</span>
+                <h6>{{course.internal_assesment!==""?course.internal_assesment:0}}</h6>
+              </div>
+              <div class="courseCommon" *ngIf="course.isBatchCourse">
+                <span class="heading">Course project</span>
+                <h6>{{course.total_mid_course_project_count!==""?course.total_mid_course_project_count:0}}</h6>
+              </div>
+              <!-- <div class="courseCommon" *ngIf="course.isBatchCourse">
+                <span class="heading">Final assessment</span>
+                <h6>{{course.final_assesment!==""?course.final_assesment:0}}</h6>
+              </div> -->
             </div>
           </div>
         </div>
         <div class="col-12 col-sm-12 col-md-8 col-lg-4">
-          <div class="f_size_17 f_wt_600 coursename">
-            <p  title="{{course.course_name}}" placement="top">{{course.course_name}}
-              <span class="pull-right" (click)="course.courseInfoExp?course.courseInfoExp=false:course.courseInfoExp=true"><mat-icon >{{course.courseInfoExp?'keyboard_arrow_down':'keyboard_arrow_up'}}</mat-icon></span>
-            </p>
+          <div class="coursename">
+            <h3 title="{{course.course_name}}" placement="top">
+              {{course.course_name}}
+              <span class="pull-right" (click)="course.courseInfoExp?course.courseInfoExp=false:course.courseInfoExp=true">
+                <mat-icon >{{course.courseInfoExp?'keyboard_arrow_down':'keyboard_arrow_up'}}</mat-icon>
+              </span>
+            </h3>
+            <div class="courseAuthor">
+              <p>By: <i>{{course.author_name?course.author_name:'N/A'}}</i></p>
+            </div>
           </div>
-          <div *ngIf="!course.courseInfoExp">
-            <div class="courseWrapper d-flex justify-content-between lxp_gray123">
-              <div class="courseAuthor">
-                <p> By: {{course.author_name?course.author_name:'N/A'}} </p>
-              </div>
-              <div class="courseDuration">
-                <p>Total duration: {{course.total_duration? course.total_duration : "1" + " hour"}}</p>
-              </div>
-              <div class="courseCredit">
-                Credits: {{course.credits!==null?course.credits:0}}
-              </div>
-            </div>
-            <div class="row" *ngIf="course.isBatchCourse">
-              <div class="col" style="margin-bottom:10px;">
-                <span class="lxp_gray123">Start Date:</span>
-                <span class="f_wt_500">{{course.batch_start_date ?(course.batch_start_date |date:'dd MMM yyyy'):'N/A' }}</span>
-              </div>
-              <div class="col">
-                <span class="lxp_gray123">End Date:</span>
-                <span class="f_wt_500">{{course.batch_end_date ?(course.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</span>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col color_g f_size_14 descmc f_wt_400 h-80 ">
-                {{course.course_description}}
-              </div>
-            </div>
+          <div class="courseDescription">
+            <p>{{course.course_description}}</p>
           </div>
           <div class="courseProgression" *ngIf="course.isBatchCourse">
-            <div class="row">
-              <div class="col">
-                <span class="progress_icon">
-                  <img alt="Course Img" src="..\assets\Progression.svg" class="progress_icon" />
-                </span>
-                <p class="f_size_16 f_wt_500 color_black pull-left course-progress">Course Progression</p>
-                <span class="pointer seemoreHove pull-right" (click)="course.progresslistExp?course.progresslistExp=false:course.progresslistExp=true">
-                  <p class="f_size_10 ">{{course.progresslistExp?'Show more...':'Show less...' }}</p>
-                </span>
-              </div>
+            <div class="progressionSection">
+              <img alt="Course Img" src="..\assets\Progression.svg" />
+              <h4>Course Progression</h4>
             </div>
-            <div class="row" *ngIf="!course.progresslistExp">
-              <div class="col-8">
+            <div class="d-flex justify-content-between" *ngIf="!course.progresslistExp">
+              <div class="progressionList">
+                <p><span>Instructor led session completed</span> <span>{{course.instructor_lead_session_completed_count}}/{{course.instructor_lead_session_total_count}}</span></p>
+                <p><span>Internal assessment completed</span> <span>{{course.internal_assesment?course.internal_assesment:'N/A'}}</span></p>
+              </div>
+              <div class="progressPercent">
+                <div class="m-auto c_progress">
+                  <circle-progress percent="{{((100 * (course.week_completed_count!==null?course.week_completed_count:0)) / (course.week_total_count!==null?course.week_total_count:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="3" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="4.5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="courseWeekCircle" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
+                </div>
+                <div class="m-auto" style="display:none">
+                  <div class="col">
+                    <button mat-stroked-button class="blue_clr cap  pointer m-t-05">
+                      <span class="cap f_size_12 f_wt_400 ">
+                        {{ "Course report" | translate }}
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-8">
                 <div class="row color_g">
                   <div class="col m_b3px">Instructor led session completed</div>
                   <div class="col-3 f_wt_600">
@@ -108,194 +114,179 @@
                   <div class="col m_b3px">Internal assessment completed</div>
                   <div class="col-3 f_wt_600">{{course.internal_assesment?course.internal_assesment:'N/A'}}</div>
                 </div>
-              </div>
-              <div class="col-4">
-                <div class="row m-auto c_progress">
-                  <circle-progress percent="{{((100 * (course.week_completed_count!==null?course.week_completed_count:0)) / (course.week_total_count!==null?course.week_total_count:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="3" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="4.5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="courseWeekCircle" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
-                </div>
-                <div class="row m-auto" style="display:none">
-                  <div class="col ">
-                    <button mat-stroked-button class="blue_clr cap  pointer m-t-05">
-                      <span class="cap f_size_12 f_wt_400 ">
-                        {{ "Course report" | translate }}
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
         <!-- //4quadrant Self-Paced Learning// left lines //remove discussion link -->
 
         <!-- //DESKTOP CONTENT STARTS// -->
-        <div class="col-12 col-sm-12 col-md-12 col-lg-6 desktopTab d-flex justify-content-between flex-wrap">
-          <!-- First -->
-          <div class="m-b-15px myCourseCards">
-            <div class="card-hover cardHeights grey_border1">
-              <div class="d-flex justify-content-center align-items-center titleAlign">
-                <span class="lxp-gauge lxp-theme-red title_img f_size_23"></span>
-                <p class="f_size_16 f_wt_500 color_black">Self-Paced Learning</p>
-              </div>
-
-              <div class="height_match" *ngIf="!course.progressionExp">
-                <div class="">
-                  <img alt="" class="inst_hover" [src]="instDefault">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-5">
+          <div class=" desktopTab d-flex justify-content-between flex-wrap">
+            <!-- First -->
+            <div class="myCourseCards">
+              <div class="card-hover cardHeights grey_border1">
+                <div class="d-flex justify-content-center align-items-center titleAlign">
+                  <span class="lxp-gauge lxp-theme-red title_img f_size_23"></span>
+                  <p class="f_size_16 f_wt_500 color_black">Self-Paced Learning</p>
                 </div>
-                <div class="progressBar">
-                  <h6>Progression</h6>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="pBar">
-                      <mat-progress-bar class="example-margin" [mode]="'determinate'" [value]="course.self_paced_learning_progression!==''?course.self_paced_learning_progression:0"></mat-progress-bar>
+
+                <div class="height_match" *ngIf="!course.progressionExp">
+                  <div class="">
+                    <img alt="" class="inst_hover" [src]="instDefault">
+                  </div>
+                  <div class="progressBar">
+                    <h6>Progression</h6>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="pBar">
+                        <mat-progress-bar class="example-margin" [mode]="'determinate'" [value]="course.self_paced_learning_progression!==''?course.self_paced_learning_progression:0"></mat-progress-bar>
+                      </div>
+                      <div class="c_per">
+                        {{(course.self_paced_learning_progression!==''?(course.self_paced_learning_progression>100?100:course.self_paced_learning_progression):0)| number:'1.0-0'}}%
+                      </div>
                     </div>
-                    <div class="c_per">
-                      {{(course.self_paced_learning_progression!==''?(course.self_paced_learning_progression>100?100:course.self_paced_learning_progression):0)| number:'1.0-0'}}%
+                  </div>
+                </div>
+                <div class="cardButton">
+                  <button mat-stroked-button *ngIf="course?.course_status !== 'completed'" class="videoButton" (click)="gotoDesc(course)">
+                    <i class="fa fa-play-circle mycourse-btn-img" aria-hidden="true"></i>
+                    <span class="cap f_wt_400 m-t-m-2">
+                      {{course?.course_status === "incomplete" ? "Resume" : course?.course_status === "suspend" ? "Resume" : ("Start" | translate) }}
+                    </span>
+                  </button>
+                  <button mat-stroked-button (click)="gotoDesc(course)" *ngIf="course?.course_status === 'completed'" class="videoButton">
+                    <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
+                    <span class="cap f_wt_400 m-t-m-2">
+                      {{ "Replay" | translate }}
+                    </span>
+                  </button>
+                </div>
+                <!-- SEE MORE CONTENT -->
+                <div class="hoverContent">
+                  <div class="d-flex justify-content-center hoverCenterAlign">
+                    <div>
+                      <p>Modules completed</p>
+                      <h6>{{(course.completed_module_count!=null?course.completed_module_count:0) +'/'+ (course.total_module_count!=null?course.total_module_count:0)}}</h6>
+                    </div>
+                    <div>
+                      <p>Topics completed</p>
+                      <h6>{{(course.completed_topic_count!=null?course.completed_topic_count:0) +'/'+ (course.total_topic_count!=null?course.total_topic_count:0)}}</h6>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="cardButton">
-                <button mat-stroked-button *ngIf="course?.course_status !== 'completed'" class="videoButton" (click)="gotoDesc(course)">
-                  <i class="fa fa-play-circle mycourse-btn-img" aria-hidden="true"></i>
-                  <span class="cap f_wt_400 m-t-m-2">
-                    {{course?.course_status === "incomplete" ? "Resume" : course?.course_status === "suspend" ? "Resume" : ("Start" | translate) }}
-                  </span>
-                </button>
-                <button mat-stroked-button (click)="gotoDesc(course)" *ngIf="course?.course_status === 'completed'" class="videoButton">
-                  <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
-                  <span class="cap f_wt_400 m-t-m-2">
-                    {{ "Replay" | translate }}
-                  </span>
-                </button>
+            </div>
+            <!-- Second -->
+            <div class="myCourseCards" *ngIf="course.isBatchCourse">
+              <div class="card-hover cardHeights grey_border1" (mouseover)="instDefault ='../../../../assets/learner/mycourseicons/Instructor_hover.svg'" (mouseout)="instDefault='../../../../assets/learner/mycourseicons/Instructor_default.svg'">
+                <div class="d-flex justify-content-center align-items-center titleAlign">
+                  <span class="lxp-monitor lxp-theme-red title_img f_size_23"></span>
+                  <p class="f_size_16 f_wt_500 color_black">Instructor Led</p>
+                </div>
+
+                <div class="height_match">
+                  <div class="color_g f_size_13 animate__animated animate__fadeInDown" *ngIf="!course.ledinstExp">
+                    <img alt="" class="inst_hover" [src]="instDefault">
+                  </div>
+                </div>
+                <div class="cardButton">
+                  <button mat-stroked-button class="callToAction" (click)="goInstructorLed(course)">
+                    <span class="cap f_wt_400 m-t-m-2NEW">
+                      <i class="fa fa-hand-o-up mycourse-btn-img" aria-hidden="true"></i>
+                      {{ "Join" | translate }}
+                    </span>
+                  </button>
+                </div>
               </div>
               <!-- SEE MORE CONTENT -->
               <div class="hoverContent">
                 <div class="d-flex justify-content-center hoverCenterAlign">
                   <div>
-                    <p>Modules completed</p>
-                    <h6>{{(course.completed_module_count!=null?course.completed_module_count:0) +'/'+ (course.total_module_count!=null?course.total_module_count:0)}}</h6>
+                    <p>Sessions attended</p>
+                    <h6>{{course.instructor_lead_session_completed_count+'/'+course.instructor_lead_session_total_count}}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Third -->
+            <div class="myCourseCards" *ngIf="course.isBatchCourse">
+              <div class="card-hover cardHeights grey_border1" (mouseover)="discussDefault ='../../../../assets/learner/mycourseicons/Discussion_hover.svg'" (mouseout)="discussDefault='../../../../assets/learner/mycourseicons/Discussion_default.svg'">
+                <div class="d-flex justify-content-center align-items-center titleAlign">
+                  <span class="lxp-stack lxp-theme-red title_img f_size_23"></span>
+                  <p class="f_size_16 f_wt_500 color_black">Discussion Forum</p>
+                </div>
+
+                <div class="height_match">
+                  <div class="color_g f_size_13 animate__animated animate__fadeInDown" *ngIf="!course.discussExp">
+                      <img alt="" [src]="discussDefault" />
+                  </div>
+                </div>
+
+                <div class="cardButton">
+                  <!-- <button mat-stroked-button *ngIf="userDetail.is_forum_config" class="callToAction" (click)="goToForum(course)">
+                    <i class="fa fa-handshake-o mycourse-btn-img" aria-hidden="true"></i>
+                    <span class="cap f_wt_400 m-t-m-2 span-ellip">
+                      {{ "Collaborate" | translate }}
+                    </span>
+                  </button> -->
+                  <button mat-stroked-button class="callToAction" (click)="goToForum(course)">
+                    <span class="cap f_wt_400 m-t-m-2 span-ellip">
+                      <i class="fa fa-handshake-o mycourse-btn-img" aria-hidden="true"></i> {{ "Collaborate" | translate }}
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <!-- SEE MORE CONTENT -->
+              <div class="hoverContent">
+                <div class="d-flex justify-content-center hoverCenterAlign">
+                  <div>
+                    <p>Threads</p>
+                    <h6>{{course.thread_count!==null?course.thread_count:'N/A'}}</h6>
                   </div>
                   <div>
-                    <p>Topics completed</p>
-                    <h6>{{(course.completed_topic_count!=null?course.completed_topic_count:0) +'/'+ (course.total_topic_count!=null?course.total_topic_count:0)}}</h6>
+                    <p>Comments</p>
+                    <h6>{{course.comment_count!==null?course.comment_count:'N/A'}}</h6>
+                  </div>
+                  <div>
+                    <p>Replies</p>
+                    <h6>{{course.reply_count!==null?course.reply_count:'N/A'}}</h6>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+            <!-- Fourth -->
+            <div class="myCourseCards" *ngIf="course.isBatchCourse">
+              <div class="card-hover cardHeights grey_border1" (mouseover)="activityDefault ='../../../../assets/learner/mycourseicons/Activities_hover.svg'" (mouseout)="activityDefault='../../../../assets/learner/mycourseicons/Activities_defult.svg'">
+                <div class="d-flex justify-content-center align-items-center titleAlign">
+                  <img alt="" src="../../../../assets/learner/mycourseicons/activities.svg" width="22px" height="22px" class="title_img">
+                  <p class="f_size_16 f_wt_500 color_black">Activities</p>
+                </div>
 
-          <!-- Second -->
-          <div class="m-b-15px myCourseCards" *ngIf="course.isBatchCourse">
-            <div class="card-hover cardHeights grey_border1" (mouseover)="instDefault ='../../../../assets/learner/mycourseicons/Instructor_hover.svg'" (mouseout)="instDefault='../../../../assets/learner/mycourseicons/Instructor_default.svg'">
-              <div class="d-flex justify-content-center align-items-center titleAlign">
-                <span class="lxp-monitor lxp-theme-red title_img f_size_23"></span>
-                <p class="f_size_16 f_wt_500 color_black">Instructor Led</p>
-              </div>
-
-              <div class="height_match">
-                <div class="color_g f_size_13 animate__animated animate__fadeInDown" *ngIf="!course.ledinstExp">
-                  <img alt="" class="inst_hover" [src]="instDefault">
+                <div class="height_match">
+                  <div class="color_g f_size_13 animate__animated animate__fadeInDown" *ngIf="!course.activityExp" >
+                      <img alt="" [src]="activityDefault" />
+                  </div>
+                </div>
+                <div class="cardButton">
+                  <button mat-stroked-button class="callToAction" (click)="Go(course)">
+                    <mat-icon fontSet="material-icons-outlined" class="icon-color m-t-m-2">near_me</mat-icon>
+                    <span class="cap f_wt_400 m-t-m-2">
+                      {{ "Go" | translate }}
+                    </span>
+                  </button>
                 </div>
               </div>
-              <div class="cardButton">
-                <button mat-stroked-button class="callToAction" (click)="goInstructorLed(course)">
-                  <span class="cap f_wt_400 m-t-m-2NEW">
-                    <i class="fa fa-hand-o-up mycourse-btn-img" aria-hidden="true"></i>
-                    {{ "Join" | translate }}
-                  </span>
-                </button>
-              </div>
-            </div>
-            <!-- SEE MORE CONTENT -->
-            <div class="hoverContent">
-              <div class="d-flex justify-content-center hoverCenterAlign">
-                <div>
-                  <p>Sessions attended</p>
-                  <h6>{{course.instructor_lead_session_completed_count+'/'+course.instructor_lead_session_total_count}}</h6>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Third -->
-          <div class="m-b-15px myCourseCards" *ngIf="course.isBatchCourse">
-            <div class="card-hover cardHeights grey_border1" (mouseover)="discussDefault ='../../../../assets/learner/mycourseicons/Discussion_hover.svg'" (mouseout)="discussDefault='../../../../assets/learner/mycourseicons/Discussion_default.svg'">
-              <div class="d-flex justify-content-center align-items-center titleAlign">
-                <span class="lxp-stack lxp-theme-red title_img f_size_23"></span>
-                <p class="f_size_16 f_wt_500 color_black">Discussion Forum</p>
-              </div>
-
-              <div class="height_match">
-                <div class="color_g f_size_13 animate__animated animate__fadeInDown" *ngIf="!course.discussExp">
-                    <img alt="" [src]="discussDefault" />
-                </div>
-              </div>
-
-              <div class="cardButton">
-                <button mat-stroked-button *ngIf="userDetail.is_forum_config" class="callToAction" (click)="goToForum(course)">
-                  <i class="fa fa-handshake-o mycourse-btn-img" aria-hidden="true"></i>
-                  <span class="cap f_wt_400 m-t-m-2 span-ellip">
-                    {{ "Collaborate" | translate }}
-                  </span>
-                </button>
-                <!-- <button mat-stroked-button class="callToAction" (click)="goToForum(course)">
-                  <span class="cap f_wt_400 m-t-m-2 span-ellip">
-                    <i class="fa fa-handshake-o mycourse-btn-img" aria-hidden="true"></i> {{ "Collaborate" | translate }}
-                  </span>
-                </button> -->
-              </div>
-            </div>
-            <!-- SEE MORE CONTENT -->
-            <div class="hoverContent">
-              <div class="d-flex justify-content-center hoverCenterAlign">
-                <div>
-                  <p>Threads</p>
-                  <h6>{{course.thread_count!==null?course.thread_count:'N/A'}}</h6>
-                </div>
-                <div>
-                  <p>Comments</p>
-                  <h6>{{course.comment_count!==null?course.comment_count:'N/A'}}</h6>
-                </div>
-                <div>
-                  <p>Replies</p>
-                  <h6>{{course.reply_count!==null?course.reply_count:'N/A'}}</h6>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Fourth -->
-          <div class="m-b-15px myCourseCards" *ngIf="course.isBatchCourse">
-            <div class="card-hover cardHeights grey_border1" (mouseover)="activityDefault ='../../../../assets/learner/mycourseicons/Activities_hover.svg'" (mouseout)="activityDefault='../../../../assets/learner/mycourseicons/Activities_defult.svg'">
-              <div class="d-flex justify-content-center align-items-center titleAlign">
-                <img alt="" src="../../../../assets/learner/mycourseicons/activities.svg" width="22px" height="22px" class="title_img">
-                <p class="f_size_16 f_wt_500 color_black">Activities</p>
-              </div>
-
-              <div class="height_match">
-                <div class="color_g f_size_13 animate__animated animate__fadeInDown" *ngIf="!course.activityExp" >
-                    <img alt="" [src]="activityDefault" />
-                </div>
-              </div>
-              <div class="cardButton">
-                <button mat-stroked-button class="callToAction" (click)="Go(course)">
-                  <mat-icon fontSet="material-icons-outlined" class="icon-color m-t-m-2">near_me</mat-icon>
-                  <span class="cap f_wt_400 m-t-m-2">
-                    {{ "Go" | translate }}
-                  </span>
-                </button>
-              </div>
-            </div>
-            <!-- SEE MORE CONTENT -->
-            <div class="hoverContent">
-              <div class="d-flex justify-content-center hoverCenterAlign">
-                <div>
-                  <p>Assignments completed</p>
-                  <h6>{{course.assignment_submitted_count+'/'+course.assignment_total_count}}</h6>
-                </div>
-                <div>
-                  <p>Projects completed</p>
-                  <h6>{{course.completed_mid_course_project_count+'/'+course.total_mid_course_project_count}}</h6>
+              <!-- SEE MORE CONTENT -->
+              <div class="hoverContent">
+                <div class="d-flex justify-content-center hoverCenterAlign">
+                  <div>
+                    <p>Assignments completed</p>
+                    <h6>{{course.assignment_submitted_count+'/'+course.assignment_total_count}}</h6>
+                  </div>
+                  <div>
+                    <p>Projects completed</p>
+                    <h6>{{course.completed_mid_course_project_count+'/'+course.total_mid_course_project_count}}</h6>
+                  </div>
                 </div>
               </div>
             </div>
