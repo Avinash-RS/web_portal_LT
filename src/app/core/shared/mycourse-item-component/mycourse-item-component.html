@@ -18,6 +18,7 @@
                 </span>
               </div>
               <figure>
+                <span class="bgOverlay"></span>
                 <img alt="Course Img" [src]=course.course_img_url class="courseImg" />
                 <div class="overlay">
                   <mat-icon class="playIcon"> play_circle_outline </mat-icon> <span>Resume</span>
@@ -133,7 +134,7 @@
 
                 <div class="height_match" *ngIf="!course.progressionExp">
                   <div class="">
-                    <img alt="" class="inst_hover" [src]="instDefault">
+                    <img alt="" class="inst_hover" src="../../../../assets/learner/mycourseicons/monitor-play-thin.svg">
                   </div>
                   <div class="progressBar">
                     <h6>Progression</h6>
@@ -155,7 +156,7 @@
                     </span>
                   </button>
                   <button mat-stroked-button (click)="gotoDesc(course)" *ngIf="course?.course_status === 'completed'" class="videoButton">
-                    <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
+                    <mat-icon class="icon-color m-t-m-2"> play_circle_outline </mat-icon>
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Replay" | translate }}
                     </span>
@@ -180,7 +181,7 @@
             </div>
             <!-- Second -->
             <div class="myCourseCards" *ngIf="course.isBatchCourse">
-              <div class="card-hover cardHeights grey_border1" (mouseover)="instDefault ='../../../../assets/learner/mycourseicons/Instructor_hover.svg'" (mouseout)="instDefault='../../../../assets/learner/mycourseicons/Instructor_default.svg'">
+              <div class="card-hover cardHeights grey_border1">
                 <div class="d-flex justify-content-center align-items-center titleAlign">
                   <span class="lxp-monitor lxp-theme-red title_img f_size_23"></span>
                   <p class="f_size_16 f_wt_500 color_black">Instructor Led</p>
@@ -188,13 +189,13 @@
 
                 <div class="height_match">
                   <div class="color_g f_size_13 animate__animated animate__fadeInDown" *ngIf="!course.ledinstExp">
-                    <img alt="" class="inst_hover" [src]="instDefault">
+                    <img alt="" class="inst_hover" src="../../../../assets/learner/mycourseicons/Instructor_default.svg">
                   </div>
                 </div>
                 <div class="cardButton">
                   <button mat-stroked-button class="callToAction" (click)="goInstructorLed(course)">
                     <span class="cap f_wt_400 m-t-m-2NEW">
-                      <i class="fa fa-hand-o-up mycourse-btn-img" aria-hidden="true"></i>
+                      <i class="fa fa-hand-o-up mycourse-btn-img icon-color" aria-hidden="true"></i>
                       {{ "Join" | translate }}
                     </span>
                   </button>
@@ -214,7 +215,7 @@
             </div>
             <!-- Third -->
             <div class="myCourseCards" *ngIf="course.isBatchCourse">
-              <div class="card-hover cardHeights grey_border1" (mouseover)="activityDefault ='../../../../assets/learner/mycourseicons/Activities_hover.svg'" (mouseout)="activityDefault='../../../../assets/learner/mycourseicons/Activities_defult.svg'">
+              <div class="card-hover cardHeights grey_border1">
                 <div class="d-flex justify-content-center align-items-center titleAlign">
                   <img alt="" src="../../../../assets/learner/mycourseicons/activities.svg" width="22px" height="22px" class="title_img">
                   <p class="f_size_16 f_wt_500 color_black">Activities</p>
@@ -222,7 +223,7 @@
 
                 <div class="height_match">
                   <div class="color_g f_size_13 animate__animated animate__fadeInDown" *ngIf="!course.activityExp" >
-                      <img alt="" [src]="activityDefault" />
+                      <img alt="" src="../../../../assets/learner/mycourseicons/Activities_defult.svg" />
                   </div>
                 </div>
                 <div class="cardButton">
@@ -248,14 +249,14 @@
                     </div>
                   </div>
                   <div class="activitySubmissionDetails">
-                    <span>T</span>
+                    <span data-title="View submission details" (click)="gotoSubmissionDetails(course)">T</span>
                   </div>
                 </div>
               </div>
             </div>
             <!-- Fourth -->
             <div class="myCourseCards" *ngIf="course.isBatchCourse">
-              <div class="card-hover cardHeights grey_border1" (mouseover)="discussDefault ='../../../../assets/learner/mycourseicons/Discussion_hover.svg'" (mouseout)="discussDefault='../../../../assets/learner/mycourseicons/Discussion_default.svg'">
+              <div class="card-hover cardHeights grey_border1">
                 <div class="d-flex justify-content-center align-items-center titleAlign">
                   <span class="lxp-stack lxp-theme-red title_img f_size_23"></span>
                   <p class="f_size_16 f_wt_500 color_black">Discussion Forum</p>
@@ -263,7 +264,7 @@
 
                 <div class="height_match">
                   <div class="color_g f_size_13 animate__animated animate__fadeInDown" *ngIf="!course.discussExp">
-                      <img alt="" [src]="discussDefault" />
+                      <img alt="" src="../../../../assets/learner/mycourseicons/Discussion_default.svg" />
                   </div>
                 </div>
 
@@ -276,7 +277,7 @@
                   </button> -->
                   <button mat-stroked-button class="callToAction" (click)="goToForum(course)">
                     <span class="cap f_wt_400 m-t-m-2 span-ellip">
-                      <i class="fa fa-handshake-o mycourse-btn-img" aria-hidden="true"></i> {{ "Collaborate" | translate }}
+                      <i class="fa fa-handshake-o mycourse-btn-img icon-color" aria-hidden="true"></i> {{ "Collaborate" | translate }}
                     </span>
                   </button>
                 </div>

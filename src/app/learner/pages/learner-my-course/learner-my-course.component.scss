@@ -113,7 +113,34 @@
   font-size: 14px !important;
   font-weight: 400 !important;
 }
-
+::ng-deep .myCc {
+  position: relative;
+}
+.matTabCol {
+  position: relative;
+}
+.browseCourse {
+  position: absolute;
+  top: 30px;
+  right: 15px;
+  z-index: 9;
+  button {
+    display: inline-block;
+    font-size: 15px;
+    color: #69727C;
+    font-weight: normal;
+    cursor: pointer;
+    border: 1px solid #C02222;
+    background: #fff;
+    padding: 6px 12px;
+    transition: background 0.3s ease-in-out;
+    &:hover {
+      background: #C02222;
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+}
 .m-l-4 {
   margin-left: 4%;
 }
@@ -179,22 +206,34 @@
 }
 
 :host ::ng-deep.mat-tab-label {
-  height: 38px;
-  padding: 0px 15px !important;
+  height: auto;
+  padding: 9px 15px !important;
   text-align: center;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   white-space: nowrap;
   position: relative;
+  margin: 0 20px 0 0 !important;
 }
 ::ng-deep.mat-tab-label-active {
   background-color: #f5f5f5;
 }
-
+::ng-deep.desktopWrapper .mat-tab-header {
+  margin-top: 20px;
+}
+::ng-deep.desktopWrapper .mat-tab-label {
+  opacity: 1;
+  min-width: inherit !important;
+}
+::ng-deep.desktopWrapper .mat-tab-label-active {
+  min-width: inherit !important;
+  background-color: #fff;
+}
 
 :host /deep/ .mat-ink-bar {
   height: 2px !important;
+  // left: 0 !important;
   background-color: $lxp-theme-green !important;
 }
 

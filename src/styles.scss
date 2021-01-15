@@ -140,12 +140,12 @@ body {
 .contentSetter {
   display: flex;
   flex-direction: column;
-  // min-height: 100vh;
-  height: 100%;
-  @media only screen and (max-width: 767px) {
-    min-height: 100vh;
-    height: auto;
-  }
+  min-height: 100vh;
+  // height: 100%;
+  // @media only screen and (max-width: 767px) {
+  //   min-height: 100vh;
+  //   height: auto;
+  // }
 }
 
 @keyframes rotate {

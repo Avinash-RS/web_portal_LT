@@ -112,7 +112,7 @@
         <mat-tab>
           <ng-template matTabLabel>
             <div style="display: flex !important;">
-              <span class="tabsc" matBadge="{{ jobRoleSelected === true ? 1 : onGoingCourseCount }}" matBadgeOverlap="false">{{ 'Ongoing' | translate }}</span>
+              <span class="tabsc" matBadge="{{ jobRoleSelected === true ? 1 : onGoingCourseCount }}" matBadgeOverlap="false">{{ 'OOOOOOOOOOOOOOO' | translate }}</span>
               <!-- NOT WORKING -->
             </div>
           </ng-template>
@@ -222,8 +222,6 @@
           </div>
         </mat-tab>
         <!-----------------------------------Category tabs----------------------------->
-
-
       </mat-tab-group>
       <button class="menuBtn" mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>more_vert</mat-icon>
@@ -234,6 +232,9 @@
           <span>{{ categorytab.categoryName }}</span>
         </button>
       </mat-menu>
+      <div class="browseCourse">
+        <button (click)="openWin()">Browse Course</button>
+      </div>
     </div>
   </div>
 
@@ -270,58 +271,58 @@
         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
           <div class="row">
             <div class="col-12 col-sm-12 col-md-4 col-lg-2">
-              <ngx-skeleton-loader appearance="circle" animation="pulse"
+              <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" appearance="circle" animation="pulse"
                 [theme]="{width: '190px',height: '120px','border-radius': '10px'}">
               </ngx-skeleton-loader>
             </div>
             <div class="col-12 col-sm-12 col-md-8 col-lg-4">
-              <ngx-skeleton-loader count="7" animation="pulse"></ngx-skeleton-loader>
+              <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" count="7" animation="pulse"></ngx-skeleton-loader>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-3">
               <div class="row">
-                <ngx-skeleton-loader count="1" animation="pulse"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" count="1" animation="pulse"></ngx-skeleton-loader>
                 <div class="col">
-                  <ngx-skeleton-loader appearance="circle" animation="pulse"
+                  <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" appearance="circle" animation="pulse"
                     [theme]="{width: '100px',height: '80px','border-radius': '10px'}">
                   </ngx-skeleton-loader>
                 </div>
                 <div class="col">
-                  <ngx-skeleton-loader count="4" animation="pulse"></ngx-skeleton-loader>
+                  <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" count="4" animation="pulse"></ngx-skeleton-loader>
                 </div>
               </div>
               <div class="row">
-                <ngx-skeleton-loader count="1" animation="pulse"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" count="1" animation="pulse"></ngx-skeleton-loader>
                 <div class="col">
-                  <ngx-skeleton-loader appearance="circle" animation="pulse"
+                  <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" appearance="circle" animation="pulse"
                     [theme]="{width: '100px',height: '80px','border-radius': '10px'}">
                   </ngx-skeleton-loader>
                 </div>
                 <div class="col">
-                  <ngx-skeleton-loader count="4" animation="pulse"></ngx-skeleton-loader>
+                  <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" count="4" animation="pulse"></ngx-skeleton-loader>
                 </div>
               </div>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-3">
               <div class="row">
-                <ngx-skeleton-loader count="1" animation="pulse"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" count="1" animation="pulse"></ngx-skeleton-loader>
                 <div class="col">
-                  <ngx-skeleton-loader appearance="circle" animation="pulse"
+                  <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" appearance="circle" animation="pulse"
                     [theme]="{width: '100px',height: '80px','border-radius': '10px'}">
                   </ngx-skeleton-loader>
                 </div>
                 <div class="col">
-                  <ngx-skeleton-loader count="4" animation="pulse"></ngx-skeleton-loader>
+                  <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" count="4" animation="pulse"></ngx-skeleton-loader>
                 </div>
               </div>
               <div class="row">
-                <ngx-skeleton-loader count="1" animation="pulse"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" count="1" animation="pulse"></ngx-skeleton-loader>
                 <div class="col">
-                  <ngx-skeleton-loader appearance="circle" animation="pulse"
+                  <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" appearance="circle" animation="pulse"
                     [theme]="{width: '100px',height: '80px','border-radius': '10px'}">
                   </ngx-skeleton-loader>
                 </div>
                 <div class="col">
-                  <ngx-skeleton-loader count="4" animation="pulse"></ngx-skeleton-loader>
+                  <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" count="4" animation="pulse"></ngx-skeleton-loader>
                 </div>
               </div>
             </div>
