@@ -12,6 +12,12 @@
       <input type="text" autocomplete="off" class="form-control search" [(ngModel)]="searchName" />
     </div>
   </div>
+  <div class="catalogDropdownCol">
+    <div class="mobileIcons">
+      <mat-icon class="searchIcons" (click)="expandSearch = !expandSearch">search</mat-icon>
+      <mat-icon class="filterIcon" [matMenuTriggerFor]="fMenu">filter_alt</mat-icon>
+    </div>
+  </div>
   <!-- <div *ngIf="!expandSearch" class="row w-100 mr-0 ml-0">
     <div class="col-10 col-sm-10 col-md-4 col-lg-6 col-xl-7 catalogTitle align-middle">
       <div class="f_size_22" style="font-size: 22px;">

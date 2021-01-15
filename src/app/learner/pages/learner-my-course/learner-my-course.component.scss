@@ -912,6 +912,8 @@ hr {
   // margin-top: 1rem;
   // padding-right: 0px;
   margin-top: 11px;
+  display: none;
+  width: 100%;
   @media only screen and (max-width: 768px) {
     display: flex;
     justify-content: flex-end;

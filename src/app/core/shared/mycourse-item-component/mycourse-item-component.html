@@ -66,9 +66,9 @@
           <div class="coursename">
             <h3 title="{{course.course_name}}" placement="top">
               {{course.course_name}}
-              <span class="pull-right" (click)="course.courseInfoExp?course.courseInfoExp=false:course.courseInfoExp=true">
+              <!-- <span class="pull-right" (click)="course.courseInfoExp?course.courseInfoExp=false:course.courseInfoExp=true">
                 <mat-icon >{{course.courseInfoExp?'keyboard_arrow_down':'keyboard_arrow_up'}}</mat-icon>
-              </span>
+              </span> -->
             </h3>
             <div class="courseAuthor">
               <p>By: <i>{{course.author_name?course.author_name:'N/A'}}</i></p>
@@ -163,14 +163,16 @@
                 </div>
                 <!-- SEE MORE CONTENT -->
                 <div class="hoverContent">
-                  <div class="d-flex justify-content-center hoverCenterAlign">
-                    <div>
-                      <p>Modules completed</p>
-                      <h6>{{(course.completed_module_count!=null?course.completed_module_count:0) +'/'+ (course.total_module_count!=null?course.total_module_count:0)}}</h6>
-                    </div>
-                    <div>
-                      <p>Topics completed</p>
-                      <h6>{{(course.completed_topic_count!=null?course.completed_topic_count:0) +'/'+ (course.total_topic_count!=null?course.total_topic_count:0)}}</h6>
+                  <div class="hoverWrapper">
+                    <div class="d-flex justify-content-center hoverCenterAlign">
+                      <div>
+                        <p>Modules completed</p>
+                        <h6>{{(course.completed_module_count!=null?course.completed_module_count:0) +'/'+ (course.total_module_count!=null?course.total_module_count:0)}}</h6>
+                      </div>
+                      <div>
+                        <p>Topics completed</p>
+                        <h6>{{(course.completed_topic_count!=null?course.completed_topic_count:0) +'/'+ (course.total_topic_count!=null?course.total_topic_count:0)}}</h6>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -200,15 +202,58 @@
               </div>
               <!-- SEE MORE CONTENT -->
               <div class="hoverContent">
-                <div class="d-flex justify-content-center hoverCenterAlign">
-                  <div>
-                    <p>Sessions attended</p>
-                    <h6>{{course.instructor_lead_session_completed_count+'/'+course.instructor_lead_session_total_count}}</h6>
+                <div class="hoverWrapper">
+                  <div class="d-flex justify-content-center hoverCenterAlign">
+                    <div>
+                      <p>Sessions attended</p>
+                      <h6>{{course.instructor_lead_session_completed_count+'/'+course.instructor_lead_session_total_count}}</h6>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <!-- Third -->
+            <div class="myCourseCards" *ngIf="course.isBatchCourse">
+              <div class="card-hover cardHeights grey_border1" (mouseover)="activityDefault ='../../../../assets/learner/mycourseicons/Activities_hover.svg'" (mouseout)="activityDefault='../../../../assets/learner/mycourseicons/Activities_defult.svg'">
+                <div class="d-flex justify-content-center align-items-center titleAlign">
+                  <img alt="" src="../../../../assets/learner/mycourseicons/activities.svg" width="22px" height="22px" class="title_img">
+                  <p class="f_size_16 f_wt_500 color_black">Activities</p>
+                </div>
+
+                <div class="height_match">
+                  <div class="color_g f_size_13 animate__animated animate__fadeInDown" *ngIf="!course.activityExp" >
+                      <img alt="" [src]="activityDefault" />
+                  </div>
+                </div>
+                <div class="cardButton">
+                  <button mat-stroked-button class="callToAction" (click)="Go(course)">
+                    <mat-icon fontSet="material-icons-outlined" class="icon-color m-t-m-2">near_me</mat-icon>
+                    <span class="cap f_wt_400 m-t-m-2">
+                      {{ "Go" | translate }}
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <!-- SEE MORE CONTENT -->
+              <div class="hoverContent">
+                <div class="hoverWrapper">
+                  <div class="d-flex justify-content-center hoverCenterAlign">
+                    <div>
+                      <p>Assignments completed</p>
+                      <h6>{{course.assignment_submitted_count+'/'+course.assignment_total_count}}</h6>
+                    </div>
+                    <div>
+                      <p>Projects completed</p>
+                      <h6>{{course.completed_mid_course_project_count+'/'+course.total_mid_course_project_count}}</h6>
+                    </div>
+                  </div>
+                  <div class="activitySubmissionDetails">
+                    <span>T</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Fourth -->
             <div class="myCourseCards" *ngIf="course.isBatchCourse">
               <div class="card-hover cardHeights grey_border1" (mouseover)="discussDefault ='../../../../assets/learner/mycourseicons/Discussion_hover.svg'" (mouseout)="discussDefault='../../../../assets/learner/mycourseicons/Discussion_default.svg'">
                 <div class="d-flex justify-content-center align-items-center titleAlign">
@@ -238,54 +283,20 @@
               </div>
               <!-- SEE MORE CONTENT -->
               <div class="hoverContent">
-                <div class="d-flex justify-content-center hoverCenterAlign">
-                  <div>
-                    <p>Threads</p>
-                    <h6>{{course.thread_count!==null?course.thread_count:'N/A'}}</h6>
-                  </div>
-                  <div>
-                    <p>Comments</p>
-                    <h6>{{course.comment_count!==null?course.comment_count:'N/A'}}</h6>
-                  </div>
-                  <div>
-                    <p>Replies</p>
-                    <h6>{{course.reply_count!==null?course.reply_count:'N/A'}}</h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Fourth -->
-            <div class="myCourseCards" *ngIf="course.isBatchCourse">
-              <div class="card-hover cardHeights grey_border1" (mouseover)="activityDefault ='../../../../assets/learner/mycourseicons/Activities_hover.svg'" (mouseout)="activityDefault='../../../../assets/learner/mycourseicons/Activities_defult.svg'">
-                <div class="d-flex justify-content-center align-items-center titleAlign">
-                  <img alt="" src="../../../../assets/learner/mycourseicons/activities.svg" width="22px" height="22px" class="title_img">
-                  <p class="f_size_16 f_wt_500 color_black">Activities</p>
-                </div>
-
-                <div class="height_match">
-                  <div class="color_g f_size_13 animate__animated animate__fadeInDown" *ngIf="!course.activityExp" >
-                      <img alt="" [src]="activityDefault" />
-                  </div>
-                </div>
-                <div class="cardButton">
-                  <button mat-stroked-button class="callToAction" (click)="Go(course)">
-                    <mat-icon fontSet="material-icons-outlined" class="icon-color m-t-m-2">near_me</mat-icon>
-                    <span class="cap f_wt_400 m-t-m-2">
-                      {{ "Go" | translate }}
-                    </span>
-                  </button>
-                </div>
-              </div>
-              <!-- SEE MORE CONTENT -->
-              <div class="hoverContent">
-                <div class="d-flex justify-content-center hoverCenterAlign">
-                  <div>
-                    <p>Assignments completed</p>
-                    <h6>{{course.assignment_submitted_count+'/'+course.assignment_total_count}}</h6>
-                  </div>
-                  <div>
-                    <p>Projects completed</p>
-                    <h6>{{course.completed_mid_course_project_count+'/'+course.total_mid_course_project_count}}</h6>
+                <div class="hoverWrapper">
+                  <div class="d-flex justify-content-center hoverCenterAlign">
+                    <div>
+                      <p>Threads</p>
+                      <h6>{{course.thread_count!==null?course.thread_count:'N/A'}}</h6>
+                    </div>
+                    <div>
+                      <p>Comments</p>
+                      <h6>{{course.comment_count!==null?course.comment_count:'N/A'}}</h6>
+                    </div>
+                    <div>
+                      <p>Replies</p>
+                      <h6>{{course.reply_count!==null?course.reply_count:'N/A'}}</h6>
+                    </div>
                   </div>
                 </div>
               </div>

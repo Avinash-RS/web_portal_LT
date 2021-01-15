@@ -5,14 +5,6 @@
 
 .tabHeadings {
   .tab {
-    // width: 15%;
-    // transition: width 0.5s ease-in-out;
-    // &.activetab {
-    //   width: 40%;
-    //   .title {
-    //     display: inline-block;
-    //   }
-    // }
     width: 23.5%;
     justify-content: center;
     box-sizing: border-box;
@@ -52,18 +44,26 @@
       height: 75%;
       object-fit: contain;
     }
-    // .title {
-    //   display: block;
-    //   white-space: nowrap;
-    //   overflow: hidden;
-    //   color: rgba(0, 0, 0, 0.7);
-    // }
     .tabIcon {
       position: relative;
     }
     span {
       display: inline-block;
     }
+  }
+  .title_img {
+    display: block;
+    margin: auto;
+  }
+  .circle_outline {
+    background: #fff;
+    border: 1px solid #c9c9c9;
+    height: 40px;
+    border-radius: 50%;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    transition: background .3s ease-in-out;
   }
 }
 .tabContents {
@@ -95,6 +95,44 @@
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
     background-color: #f1f1f1;
+  }
+  .cardHeights {
+    max-height: 330px!important;
+    padding: 15px;
+  }
+  .height_match {
+    height: 80px !important;
+    align-items: initial;
+  }
+  .btl-alin {
+    border: 1px solid #c02222!important;
+    position: relative;
+    z-index: 99;
+    padding: 5px 15px;
+    line-height: normal;
+    display: inline-block;
+    background: #fff;
+    transform: perspective(1px) translateZ(0);
+    transition-property: color;
+    transition-duration: .3s;
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #c02222;
+      transform: scaleX(0);
+      transform-origin: 0 50%;
+      transition-property: transform;
+      transition-duration: .3s;
+      transition-timing-function: ease-out;
+    }
+  }
+  .cap {
+    text-transform: capitalize;
   }
 }
 
@@ -2166,6 +2204,9 @@ li {
   margin-top: 50px;
   height: 100px !important;
   overflow: auto;
+  @media only screen and (max-width: 767px) {
+    margin-top: 15px;
+  }
   p {
     font-size: 14px;
     font-weight: 400;
@@ -2178,6 +2219,9 @@ li {
   }
 }
 .coursename {
+  @media only screen and (max-width: 767px) {
+    margin-top: 20px;
+  }
   h3 {
     font-size: 20px;
     font-weight: 500;
@@ -2227,6 +2271,9 @@ li {
   background-color: $color_white;
   padding: 15px !important;
   margin-top: 15px;
+  @media only screen and (max-width: 767px) {
+    padding: 15px 15px 0 15px !important;
+  }
 }
 .titleAlign {
   padding: 15px 0;
@@ -2269,13 +2316,19 @@ li {
     background: #F7F7F7;
     transition: transform 0.5s;
   }
+  .hoverWrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
   .hoverCenterAlign {
-    position: absolute;
+    align-items: center;
+    margin: 0 auto;
     width: 90%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     text-align: center;
+    position: relative;
     div {
       &:not(:last-child) {
         margin-right: 10px;
@@ -2300,6 +2353,23 @@ li {
   &:hover {
     .hoverContent {
       transform: scaleY(1);
+    }
+  }
+  .activitySubmissionDetails {
+    width: 100%;
+    text-align: right;
+    padding: 0 15px;
+    margin-top: 10px;
+    span {
+      border-radius: 50%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #EAEAEA;
+      width: 33px;
+      height: 33px;
+      font-size: 12px;
+      color: #333333;
     }
   }
 }
