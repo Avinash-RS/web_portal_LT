@@ -3,6 +3,9 @@ $prefix: 'toolbar-notification';
 ::ng-deep .icon {
     color: $color-blank !important;
 }
+.lxp-Notification {
+    font-size: 21px;
+}
 .badge {
     position: absolute;
     top: 0;

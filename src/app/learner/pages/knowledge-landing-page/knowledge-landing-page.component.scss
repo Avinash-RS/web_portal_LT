@@ -76,7 +76,7 @@
                 text-overflow: ellipsis;
                 overflow: hidden;
                 white-space: nowrap;
-                cursor: grab;
+                cursor: pointer;
                 user-select: none;
                 &:active {
                     background-color: #bbbbbb;

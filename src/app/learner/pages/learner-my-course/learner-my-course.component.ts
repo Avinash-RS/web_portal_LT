@@ -123,7 +123,7 @@ export class LearnerMyCourseComponent implements OnInit {
         this.userDetailes = this.gs.checkLogout();
         this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
         this.getScreenSize();
-        this.getCountForCategories();
+        // this.getCountForCategories(); signin performance issue fix
         // this.getTab();
         // this.getCountForJobRole();
         // this.insidengOnInit();
@@ -139,7 +139,7 @@ export class LearnerMyCourseComponent implements OnInit {
             localStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
             localStorage.setItem('UserDetails', JSON.stringify(isValidEmailResult.data.get_login_details.message));
             this.router.navigateByUrl('/Learner/MyCourse');
-            this.getCountForCategories();
+            // this.getCountForCategories(); signin issue fix
             // this.getEnrolledCourses('', '', '', '', '', '', true);
             this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
             this.getScreenSize();
@@ -163,7 +163,7 @@ export class LearnerMyCourseComponent implements OnInit {
     if (this.userDetailes) {
       this.insidengOnInit();
     }
-    this.getCountForCategories();
+    // this.getCountForCategories(); sigin performance fix by maha
     if (!this.runnablePlatforms.includes(navigator.platform)) {
       this.isMobile = true;
     }
@@ -245,7 +245,12 @@ export class LearnerMyCourseComponent implements OnInit {
     this.categoryyName = superchild;
     this.subchildData = subchild;
   }
-
+  openWin()
+  {
+    let myWindow = window.open('https://lntedutech.com/edutechportal/web/collegeconnect','BrowseCourse');
+    // if(doFocus)
+    myWindow.focus();
+  }
   claimAll() {
     this.loading = true;
     let categoryPopupName = '';

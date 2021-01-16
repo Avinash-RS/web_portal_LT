@@ -1,6 +1,6 @@
 <div class="toolbar-notification-container">
   <button mat-icon-button (click)="notificationOpen(isOpen = !isOpen)" [class.open]="isOpen">
-    <mat-icon class="icon">notifications_none</mat-icon>
+    <i class="icon lxp-Notification"></i>
     <span *ngIf="unreadCount > 0" class="badge">{{ unreadCount }}</span>
     <span *ngIf="unreadCount == 0" class="badge"></span>
   </button>
