@@ -2,8 +2,8 @@
     <app-header></app-header>
     <!-- TITLE AND BACK -->
     <div class="d-flex justify-content-start align-items-center titlebar">
-        <div class="f_size_19 pointer d-flex align-items-center redHover" (click)="goBack()">
-            <mat-icon class="material-icons">arrow_back_ios</mat-icon>  Back </div>
+        <div class=" f_size_15 pointer d-flex align-items-center backcolor redHover" (click)="goBack()">
+            <mat-icon class="material-icons f_size_15 mt-2">arrow_back_ios</mat-icon>  Back </div>
        <div class="f_size_19" style="margin-left: 10px;"> | &nbsp;&nbsp;{{this.course?.course_name}}</div>
     </div>
     <!-- COURSE TOOL BAR -->
@@ -12,12 +12,12 @@
            <div class="hamburger">
                <mat-icon class="f_size_23 mt-1" (click)="drawersOpen=drawersOpen?false:true">menu</mat-icon>
            </div>
-           <div class="navigation d-flex align-items-center">
+           <div class="navigation d-flex align-items-center" *ngIf="scromModuleData">
                <div>
                 <mat-icon class="f_size_23 mt-1" (click)="topicPrve()">skip_previous</mat-icon>
                </div>
                <div class="currentTopic">
-                <span *ngIf="scromModuleData">{{scromModuleData[moduleHolder]?.children[nextPrevHolder].title}}</span>
+                <span >{{scromModuleData[moduleHolder]?.children[nextPrevHolder].title}}</span>
                </div>
                <div>
                 <mat-icon class="f_size_23 mt-1" (click)="topicNext()">skip_next</mat-icon>
@@ -27,7 +27,7 @@
        </div>
        <div class="rightContent d-flex justify-content-end align-items-center">
         <span class="fullScr d-flex align-items-center">
-            <mat-icon (click)="makeFullScreen()">fullscreen</mat-icon>
+            <mat-icon (click)="makeFullScreen()" class="mr-2">fullscreen</mat-icon>
         </span>
            <span class="d-flex align-items-center" (click)="openResourse(resourseWindow)"><mat-icon >format_list_bulleted</mat-icon></span>
        </div>
@@ -35,7 +35,7 @@
     <!-- TOC AND PLAYER -->
     <div class="contentHeight d-flex" >
         <!-- TOC DATA -->
-        <div *ngIf="drawersOpen" style="border: 1px solid;" class="tocSize" (mouseenter)="viewScrollBar = true" (mouseleave)="viewScrollBar = false" [ngClass]="viewScrollBar ? 'afterHover': 'beforeHover'">
+        <div *ngIf="drawersOpen"  class="tocSize" (mouseenter)="viewScrollBar = true" (mouseleave)="viewScrollBar = false" [ngClass]="viewScrollBar ? 'afterHover': 'beforeHover'">
 
             <mat-card *ngFor="let res of scromModuleData; let i = index" multi displayMode=""
                 (click)="getSelectedIndex(i)" class="topicCard">
@@ -68,17 +68,16 @@
                             <mat-step
                                 [aria-labelledby]="mod?.status === 'Passed' ? 'colgreen' :  mod?.status === 'process' ? 'colYellow' : 'colWhite'">
                                 <ng-template matStepLabel>
-                                    <span class="topicnm" *ngIf="mod?.title?.length >= 65" tooltip="{{mod?.title}}"
-                                        placement="right"
+                                    <!-- <span class="topicnm" *ngIf="mod?.title?.length >= 65" tooltip="{{mod?.title}}"placement="right"
                                         (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i);!drawersOpen?drawer.close():''">
                                         <span class="titleName"
                                             [ngClass]="(j===nextPrevHolder && i===moduleHolder) ? 'titleSelected' : ''">
                                             {{mod?.title | slice:0:56}}...
                                         </span>
 
-                                    </span>
-
-                                    <span class="topicnm" *ngIf="mod?.title.length < 65"
+                                    </span> -->
+<!-- *ngIf="mod?.title.length < 65" -->
+                                    <span class="topicnm" 
                                         (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i);!drawersOpen?drawer.close():''">
 
                                         <span class="titleName"
@@ -98,7 +97,7 @@
 
         </div>
         <!-- COURSE PLAYER -->
-        <div style="width: 100%; border: 1px solid red;">
+        <div style="width: 100%; margin:0">
             <iframe title="player" id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
         </div>
     </div>
@@ -119,62 +118,59 @@
         <div>
                 <mat-tab-group #demo3Tab [(selectedIndex)]="selectedTabIndex" #tabs (selectedTabChange)="tabSelection($event)">
         
-                    <!-- about the course tab -->
-                    <mat-tab label="About the course" class="aboutCourseTab">
-                        <div>
-                            <h3><strong>{{'Details about the course' | translate}}</strong></h3>
-                            <div class="vertical"></div>
-        
-                            <div><strong>{{ 'This course includes :' | translate}}</strong></div>
-                            <div class="display_flex">
-                                <div style="max-width: 196px;">
-                                    <span ><strong>{{content?.totalResourseCount}}
-                                       {{'downloadable resources'| translate}}</strong> </span>
-                                </div>
-        
-                                <span *ngIf="course?.course_mode"> &nbsp; |&nbsp;</span>
-                                <div style="max-width: 100px;">
-                                    <span><strong>{{course?.course_mode === 'self-placed' ? 'Self paced' : course?.course_mode}}</strong></span>
-                                </div>
-        
-                                <span *ngIf="course?.course_language"> &nbsp; |&nbsp;</span>
-                                <div style="max-width: 78px;">
-                                    <span>{{course?.course_language}}</span>
-                                </div>
-                            </div>
-                            <div class="d-flex ">
-                                    <div [innerHTML]="course?.course_long_description">
-                                </div>
-                            </div>
-        
-                            <div *ngIf="course?.author_details[0].author_name != ''">
-                                <h3 class="head-h2">{{'Instructors'| translate}}</h3>
-                                <div class="vertical"></div>
-                                <div class="instr-box" *ngFor="let author of course?.author_details">
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <img class="img-inst"
-                                                [src]="author.image ? author?.image : 'assets/learner/pro2.png'" alt="">
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="authorname">{{author?.author_name | titlecase| translate}}</div>
-                                        </div>
-        
-                                        <div class="row margin-35 borderline">
-                                            <div class="col-12 bottom-border">
-                                                <p class="author-desc">{{author?.description}}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </mat-tab>
                     <!-- resource tab -->
                     <mat-tab label="Resources">
-                        <div>
-                            <!--[ngClass]="drawer.opened==true?'drawerOpnResource':'drawerClsResource'" -->
-                            <mat-accordion>
+                        <div class="d-flex rescontentHeight">
+                                <div class="resourseToc" >
+                                    <ng-container *ngIf="content?.noresource">
+                                        <ng-container  *ngFor="let res of content?.coursedetails; let i = index">
+                                            <mat-card class="resource-card" *ngIf="res.resValue">
+                                            <mat-card-title class="d-flex justify-content-between pointer" (click)="res.isOpen?res.isOpen=false:res.isOpen=true;">
+                                                <div class="f_size_15">{{res?.modulename}}</div>
+                                                <div><i class="lxp-Arrow ml-2" [ngClass]="res.isOpen?'arrowUp':'arrowDown'"></i></div>
+                                            </mat-card-title>
+                                            <div *ngIf="res.isOpen">
+                                            <ng-container *ngFor="let mod of res?.moduledetails">
+                                                <mat-card-subtitle>
+                                                    <div mat-line class="modTopName" [title]="mod?.topicname" *ngIf="mod.resourse?.files.length">
+                                                        {{mod?.topicname}}
+                                                    </div>
+                                                </mat-card-subtitle>
+                                                <mat-card-content>
+                                                    <mat-card class="resource-card d-flex justify-content-start"mat-ripple (click)=" urlBinder(file); add_topic_reference(res)" *ngFor="let file of mod.resourse?.files">
+                                                        <div class="mr-2">
+                                                            <img *ngIf="file.doc_type == 'application/pdf'" class="size" alt=""
+                                                                src="assets/learner/fileicon/PDF_Icon.svg">
+                                                            <img *ngIf="file.doc_type == 'link'" class="size" alt="" src="assets/learner/fileicon/Link_Icon.svg">
+                                                            <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+                                                                class="size" alt="" src="assets/learner/fileicon/Excel_Icon.svg">
+                                                            <img *ngIf="file.doc_type == 'image/jpeg' || file.doc_type == 'image/png'" class="size" alt=""
+                                                                src="assets/learner/fileicon/Image_Icon.svg">
+                                                            <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
+                                                                class="size" alt="" src="assets/learner/fileicon/PPT_Icon.svg">
+                                                            <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+                                                                class="size" alt="" src="assets/learner/fileicon/Word_Icon.svg">
+                                                            <img *ngIf="file.doc_type == 'application/msword'" class="size" alt=""
+                                                                src="assets/learner/fileicon/Word_Icon.svg">
+                                                            <img *ngIf="file.doc_type == 'application/vnd.ms-excel'" class="size" alt=""
+                                                                src="assets/learner/fileicon/Excel_Icon.svg">
+                                                            <img *ngIf="file.doc_type == 'video/mp4'" class="size" alt="" src="assets/learner/fileicon/Video_Icon.svg">
+                                                            <mat-icon class="docType" *ngIf="file.doc_type == 'text/plain' "> description </mat-icon>
+                                                        </div>
+                                                        <div>{{file.type_name}}</div>
+                                                    </mat-card>
+                                                </mat-card-content>
+                                            </ng-container>
+                                        </div>
+                                        </mat-card>
+                                        </ng-container>
+                                        
+                                    </ng-container>
+                                    <ng-container *ngIf="!content?.noresource">
+                                        No Resource found !!
+                                    </ng-container>
+                                    
+                                <!-- <mat-accordion>
                                 <ng-container *ngIf="content?.noresource">
                                     <ng-container *ngFor="let res of content?.coursedetails; let i = index">
                                         <mat-expansion-panel class="panel1" hideToggle="true" #example1
@@ -267,7 +263,89 @@
                                     <span style="padding: 16px;">{{'This course does not have resource files.'|
                                         translate}}</span>
                                 </ng-container>
-                            </mat-accordion>
+                            </mat-accordion> -->
+                                </div>
+                                <div class="m-2  previewContainer" >
+                                    <div style="text-align: center;"><strong>{{resourceName}}</strong></div>
+                                    <ng-container *ngIf="isCancelLoad">
+                                        <!-- <mat-icon [ngClass]="{'preview-cancel-pdf': fileType == 'pdf','preview-cancel' : (fileType == 'image' || fileType == 'video')}" (click)="onClose()">cancel</mat-icon> -->
+                                      </ng-container>
+                                      <ng-container *ngIf="fileType == 'image'">
+                                        <div class="d-flex justify-content-center align-items-center previewContainer">
+                                          <img width="50%" [src]="URIData" alt="image">
+                                        </div>
+                                      </ng-container>
+                                    
+                                      <ng-container *ngIf="fileType == 'pdf'">
+                                        <!-- <pdf-viewer [src]="this.batchdialogdata.file"
+                                         [original-size]="false"></pdf-viewer> -->
+                                         
+                                        <iframe  title="file" width="100%" height="100%" [src]="URIData" allowfullscreen></iframe>
+                                    
+                                      </ng-container>
+                                    
+                                      <ng-container *ngIf="fileType == 'video'">
+                                        <video  oncontextmenu="return false;" [src]="URIData" title="image" width="100%" height="100%" controls controlsList="nodownload"></video>
+                                      </ng-container>
+                                    
+                                      <ng-container *ngIf="fileType == 'audio'" controlsList="nodownload">
+                                        <audio oncontextmenu="return false;" class="audio-player" [src]="URIData" title="image" width="100%" height="100%" controls controlsList="nodownload"></audio>
+                                      </ng-container>
+                                </div>
+                            <!--[ngClass]="drawer.opened==true?'drawerOpnResource':'drawerClsResource'" -->
+                            
+                        </div>
+                    </mat-tab>
+
+                    <!-- about the course tab -->
+                    <mat-tab label="About the course" class="aboutCourseTab">
+                        <div>
+                            <h3><strong>{{'Details about the course' | translate}}</strong></h3>
+                            <div class="vertical"></div>
+        
+                            <div><strong>{{ 'This course includes :' | translate}}</strong></div>
+                            <div class="display_flex">
+                                <div style="max-width: 196px;">
+                                    <span ><strong>{{content?.totalResourseCount}}
+                                       {{'downloadable resources'| translate}}</strong> </span>
+                                </div>
+        
+                                <span *ngIf="course?.course_mode"> &nbsp; |&nbsp;</span>
+                                <div style="max-width: 100px;">
+                                    <span><strong>{{course?.course_mode === 'self-placed' ? 'Self paced' : course?.course_mode}}</strong></span>
+                                </div>
+        
+                                <span *ngIf="course?.course_language"> &nbsp; |&nbsp;</span>
+                                <div style="max-width: 78px;">
+                                    <span>{{course?.course_language}}</span>
+                                </div>
+                            </div>
+                            <div class="d-flex ">
+                                    <div [innerHTML]="course?.course_long_description">
+                                </div>
+                            </div>
+        
+                            <div *ngIf="course?.author_details[0].author_name != ''">
+                                <h3 class="head-h2">{{'Instructors'| translate}}</h3>
+                                <div class="vertical"></div>
+                                <div class="instr-box" *ngFor="let author of course?.author_details">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <img class="img-inst"
+                                                [src]="author.image ? author?.image : 'assets/learner/pro2.png'" alt="">
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="authorname">{{author?.author_name | titlecase| translate}}</div>
+                                        </div>
+        
+                                        <div class="row margin-35 borderline">
+                                            <div class="col-12 bottom-border">
+                                                <p class="author-desc">{{author?.description}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </mat-tab>
                 </mat-tab-group>

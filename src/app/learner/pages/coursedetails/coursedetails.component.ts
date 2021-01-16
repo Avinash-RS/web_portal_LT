@@ -116,6 +116,10 @@ export class CoursedetailsComponent implements OnInit {
   socketEmitReciver: any;
   socketConnector: any;
   oldIdx: any;
+  isCancelLoad: boolean;
+  fileType: any;
+  URIData: any;
+  resourceName: any;
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -775,6 +779,32 @@ export class CoursedetailsComponent implements OnInit {
         });
     }
   }
+  urlBinder(file){
+    console.log(file)
+    
+    this.resourceName = file.type_name;
+    this.fileType = file.doc_type;
+    if (file.doc_type.includes("image")) {
+      this.fileType = 'image'
+    }
+    if(file.doc_type.includes("video")){
+       this.fileType = 'video';
+    }
+    if(file.doc_type.includes("pdf")||file.doc_type.includes("vnd.openxmlformats")||file.doc_type.includes("vnd.ms-excel")||file.doc_type.includes("msword")){
+       this.fileType = 'pdf';
+    }
+    if(file.doc_type.includes("audio")){
+      this.fileType = 'audio';
+   }
+
+    if (this.fileType === 'pdf') {
+      file.path = "https://docs.google.com/gview?url="+file.path +"&embedded=true";
+      this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path);
+    } else {
+    this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path);
+   }
+  }
+  
 
   tabSelection(tab) {
     this.tabInd = tab.index;

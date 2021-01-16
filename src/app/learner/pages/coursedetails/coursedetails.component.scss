@@ -4,7 +4,11 @@
 }
 .player{
     width: 100%;
+        border: none;
     height: 90% !important;
+}
+.backcolor{
+    color: #999999
 }
 .contentHeight{
     height: 80vh !important;
@@ -14,9 +18,9 @@
 width: 40% !important;
 overflow: auto;
 -webkit-overflow-scrolling: touch;
-::ng-deep ::-webkit-scrollbar {
-    width: 28px !important;
 }
+div.tocSize::-webkit-scrollbar {
+    width: 5px !important;
 }
 
 .afterHover {
@@ -60,6 +64,13 @@ overflow: auto;
 }
 .topicCard{
   margin:10px;
+  padding: 10px !important;
+  border-radius: 0px;
+  border: 1px solid #cacaca;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+}
+.resource-card{
+    margin:10px;
   padding: 10px !important;
   border-radius: 0px;
   border: 1px solid #cacaca;
@@ -151,7 +162,7 @@ overflow: auto;
     // width:80%;
 }
 .navigation{
-//    padding-right: 10px;
+   padding-right: 10px;
 max-width: 65%;
 min-width: 65%;
 justify-content: space-between;
@@ -160,7 +171,7 @@ justify-content: space-between;
     margin-right:5px;
 }
 .titlebar{
-padding:10px 10px 0px 10px;
+padding:10px;
 background-color: #F0F0F0;
 
 }
@@ -184,3 +195,29 @@ background-color: #F0F0F0;
     height: 2px !important;
     background-color: $lxp-theme-green !important;
 }
+.arrowDown{
+    font-size: 10px;
+    transform: rotate(180deg);
+    display: inline-block;
+}
+.arrowUp{
+    font-size: 10px;
+    //transform: rotate(180deg);
+    display: inline-block;
+}
+.modTopName{
+    white-space: nowrap !important;
+    text-overflow: ellipsis;
+    overflow: hidden !important;
+}
+.resourseToc{
+    width: 30% !important;
+    min-width: 30%!important;
+}
+.rescontentHeight{
+    height: 370px !important;
+}
+.previewContainer{
+    width: 100% !important;
+}
+
