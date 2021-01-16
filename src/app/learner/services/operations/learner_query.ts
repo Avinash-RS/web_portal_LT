@@ -1824,6 +1824,13 @@ export const getprojectActivityData = gql`
         projectActivity {
         activitystartdate
         activityenddate
+        assessmentreport {
+          id
+          imageurl
+          name
+          size
+          doc_type
+        }
         submit_status
         course_id
         batchid

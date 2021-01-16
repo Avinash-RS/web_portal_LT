@@ -245,7 +245,12 @@ export class LearnerMyCourseComponent implements OnInit {
     this.categoryyName = superchild;
     this.subchildData = subchild;
   }
-
+  openWin()
+  {
+    let myWindow = window.open('https://lntedutech.com/edutechportal/web/collegeconnect','BrowseCourse');
+    // if(doFocus)
+    myWindow.focus();
+  }
   claimAll() {
     this.loading = true;
     let categoryPopupName = '';
