@@ -20,8 +20,12 @@
               <figure>
                 <span class="bgOverlay"></span>
                 <img alt="Course Img" [src]=course.course_img_url class="courseImg" />
-                <div class="overlay">
-                  <mat-icon class="playIcon"> play_circle_outline </mat-icon> <span>Resume</span>
+                <div *ngIf="course?.course_status !== 'completed'" class="overlay" (click)="gotoDesc(course)">
+                  <i class="lxp-PlayCircle playIcon"></i> 
+                  <span>{{course?.course_status === "incomplete" ? "Resume" : course?.course_status === "suspend" ? "Resume" : ("Start" | translate) }}</span>
+                </div>
+                <div *ngIf="course?.course_status === 'completed'" class="overlay" (click)="gotoDesc(course)">
+                  <i class="lxp-PlayCircle playIcon"></i> <span>{{ "Replay" | translate }}</span>
                 </div>
               </figure>
             </div>
@@ -40,21 +44,41 @@
               </div>
             </div>
             <div class="coursePoints justify-content-between">
-              <div class="courseCommon">
-                <span class="heading">Self paced learning</span>
-                <h6>{{course.image_self_paced_learning_time!==""?course.image_self_paced_learning_time:0}}</h6>
+              <div class="courseCommon d-flex justify-content-between">
+                <div>
+                  <i class="lxp-Graduation"></i>
+                </div>
+                <div>
+                  <span class="heading">Self paced learning</span>
+                  <h6>{{course.image_self_paced_learning_time!==""?course.image_self_paced_learning_time:0}}</h6>
+                </div>
               </div>
-              <div class="courseCommon" *ngIf="course.isBatchCourse">
-                <span class="heading">Instructor led sessions</span>
-                <h6>Upto {{course.image_instructor_lead_session_time!==""?course.image_instructor_lead_session_time:0}}</h6>
+              <div class="courseCommon d-flex justify-content-between" *ngIf="course.isBatchCourse">
+                <div>
+                  <i class="lxp-LedSession"></i>
+                </div>
+                <div>
+                  <span class="heading">Instructor led sessions</span>
+                  <h6>Upto {{course.image_instructor_lead_session_time!==""?course.image_instructor_lead_session_time:0}}</h6>
+                </div>
               </div>
-              <div class="courseCommon" *ngIf="course.isBatchCourse">
-                <span class="heading">Internal assessment</span>
-                <h6>{{course.internal_assesment!==""?course.internal_assesment:0}}</h6>
+              <div class="courseCommon d-flex justify-content-between" *ngIf="course.isBatchCourse">
+                <div>
+                  <i class="lxp-BarGraph"></i>
+                </div>
+                <div>
+                  <span class="heading">Internal assessment</span>
+                  <h6>{{course.internal_assesment!==""?course.internal_assesment:0}}</h6>
+                </div>
               </div>
-              <div class="courseCommon" *ngIf="course.isBatchCourse">
-                <span class="heading">Course project</span>
-                <h6>{{course.total_mid_course_project_count!==""?course.total_mid_course_project_count:0}}</h6>
+              <div class="courseCommon d-flex justify-content-between" *ngIf="course.isBatchCourse">
+                <div>
+                  <i class="lxp-CourseProject"></i>
+                </div>
+                <div>
+                  <span class="heading">Course project</span>
+                  <h6>{{course.total_mid_course_project_count!==""?course.total_mid_course_project_count:0}}</h6>
+                </div>
               </div>
               <!-- <div class="courseCommon" *ngIf="course.isBatchCourse">
                 <span class="heading">Final assessment</span>
@@ -67,9 +91,6 @@
           <div class="coursename">
             <h3 title="{{course.course_name}}" placement="top">
               {{course.course_name}}
-              <!-- <span class="pull-right" (click)="course.courseInfoExp?course.courseInfoExp=false:course.courseInfoExp=true">
-                <mat-icon >{{course.courseInfoExp?'keyboard_arrow_down':'keyboard_arrow_up'}}</mat-icon>
-              </span> -->
             </h3>
             <div class="courseAuthor">
               <p>By: <i>{{course.author_name?course.author_name:'N/A'}}</i></p>
@@ -80,7 +101,7 @@
           </div>
           <div class="courseProgression" *ngIf="course.isBatchCourse">
             <div class="progressionSection">
-              <img alt="Course Img" src="..\assets\Progression.svg" />
+              <i class="lxp-Progress"></i>
               <h4>Course Progression</h4>
             </div>
             <div class="d-flex justify-content-between" *ngIf="!course.progresslistExp">
@@ -150,13 +171,13 @@
                 </div>
                 <div class="cardButton">
                   <button mat-stroked-button *ngIf="course?.course_status !== 'completed'" class="videoButton" (click)="gotoDesc(course)">
-                    <i class="fa fa-play-circle mycourse-btn-img" aria-hidden="true"></i>
+                    <i class="lxp-PlayCircle mycourse-btn-img" aria-hidden="true"></i>
                     <span class="cap f_wt_400 m-t-m-2">
                       {{course?.course_status === "incomplete" ? "Resume" : course?.course_status === "suspend" ? "Resume" : ("Start" | translate) }}
                     </span>
                   </button>
                   <button mat-stroked-button (click)="gotoDesc(course)" *ngIf="course?.course_status === 'completed'" class="videoButton">
-                    <mat-icon class="icon-color m-t-m-2"> play_circle_outline </mat-icon>
+                    <i class="lxp-PlayCircle mycourse-btn-img" aria-hidden="true"></i>
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Replay" | translate }}
                     </span>
@@ -195,7 +216,7 @@
                 <div class="cardButton">
                   <button mat-stroked-button class="callToAction" (click)="goInstructorLed(course)">
                     <span class="cap f_wt_400 m-t-m-2NEW">
-                      <i class="fa fa-hand-o-up mycourse-btn-img icon-color" aria-hidden="true"></i>
+                      <i class="lxp-Join mycourse-btn-img icon-color" aria-hidden="true"></i>
                       {{ "Join" | translate }}
                     </span>
                   </button>
@@ -217,7 +238,7 @@
             <div class="myCourseCards" *ngIf="course.isBatchCourse">
               <div class="card-hover cardHeights grey_border1">
                 <div class="d-flex justify-content-center align-items-center titleAlign">
-                  <img alt="" src="../../../../assets/learner/mycourseicons/activities.svg" width="22px" height="22px" class="title_img">
+                  <span class="lxp-Activities lxp-theme-red title_img f_size_23"></span>
                   <p class="f_size_16 f_wt_500 color_black">Activities</p>
                 </div>
 
@@ -228,7 +249,8 @@
                 </div>
                 <div class="cardButton">
                   <button mat-stroked-button class="callToAction" (click)="Go(course)">
-                    <mat-icon fontSet="material-icons-outlined" class="icon-color m-t-m-2">near_me</mat-icon>
+                    <!-- <mat-icon fontSet="material-icons-outlined" class="icon-color m-t-m-2">near_me</mat-icon> -->
+                    <i class="lxp-Go icon-color"></i>
                     <span class="cap f_wt_400 m-t-m-2">
                       {{ "Go" | translate }}
                     </span>
@@ -250,9 +272,7 @@
                   </div>
                   <div class="activitySubmissionDetails">
                     <span data-title="View submission details" (click)="gotoSubmissionDetails(course)">
-                      <mat-icon class="material-icons launchIcon">
-                        launch
-                      </mat-icon>
+                      <i class="lxp-OpenNew launchIcon"></i>
                     </span>
                   </div>
                 </div>
@@ -281,7 +301,7 @@
                   </button> -->
                   <button mat-stroked-button class="callToAction" (click)="goToForum(course)">
                     <span class="cap f_wt_400 m-t-m-2 span-ellip">
-                      <i class="fa fa-handshake-o mycourse-btn-img icon-color" aria-hidden="true"></i> {{ "Collaborate" | translate }}
+                      <i class="lxp-Collaborate mycourse-btn-img icon-color" aria-hidden="true"></i> {{ "Collaborate" | translate }}
                     </span>
                   </button>
                 </div>
@@ -322,23 +342,23 @@
                   <span _ngcontent-wlb-c8="" class="circle_outline lxp-monitor lxp-theme-grey title_img f_size_23 tabIcon"></span>
                   <!-- <span class="title">Instructor <br />Led</span> -->
                 </div>
+                <div *ngIf="course.isBatchCourse" class="tab fourth d-flex align-items-end" (click)="tabselector = 3; " [ngClass]="tabselector == 3 ? 'activetab' :''">
+                  <span _ngcontent-wlb-c8="" class="circle_outline lxp-Activities lxp-theme-grey title_img f_size_23 tabIcon">
+                    <!-- <img [src]="(tabselector==3)? '../../../../assets/learner/mycourseicons/activities.svg' : '../../../../assets/learner/mycourseicons/Activities_active.svg'" alt="activity" width="22px" height="22px" class="title_img activityImg"/> -->
+                  </span>
+                  <!-- <span class="title">Activities</span> -->
+                </div>
                 <div *ngIf="course.isBatchCourse" class="tab third d-flex align-items-end" (click)="tabselector = 2; " [ngClass]="tabselector == 2 ? 'activetab' :''">
                   <span _ngcontent-wlb-c8="" class="circle_outline lxp-stack lxp-theme-grey title_img f_size_23 tabIcon"></span>
                   <!-- <span class="title">Discussion <br />Forum</span> -->
-                </div>
-                <div *ngIf="course.isBatchCourse" class="tab fourth d-flex align-items-end" (click)="tabselector = 3; " [ngClass]="tabselector == 3 ? 'activetab' :''">
-                  <span _ngcontent-wlb-c8="" class="circle_outline tabIcon">
-                    <img [src]="(tabselector==3)? '../../../../assets/learner/mycourseicons/activities.svg' : '../../../../assets/learner/mycourseicons/Activities_active.svg'" alt="activity" width="22px" height="22px" class="title_img activityImg"/>
-                  </span>
-                  <!-- <span class="title">Activities</span> -->
                 </div>
               </div>
               <div class="tabContents">
                 <div class="tabTitle d-flex justify-content-between" [ngClass]="tabselector == 1 || tabselector == 2 ? 'borderLeftRadius borderRightRadius':tabselector == 0 ? 'borderRightRadius':'borderLeftRadius'">
                   <span class="title" [ngClass]="tabselector == 0 ? 'livetab' :''">Self-Paced <br />Learning</span>
                   <span *ngIf="course.isBatchCourse" class="title" [ngClass]="tabselector == 1 ? 'livetab1' :''">Instructor <br />Led</span>
-                  <span *ngIf="course.isBatchCourse" class="title" [ngClass]="tabselector == 2 ? 'livetab2' :''">Discussion <br />Forum</span>
                   <span *ngIf="course.isBatchCourse" class="title" [ngClass]="tabselector == 3 ? 'livetab3' :''">Activities</span>
+                  <span *ngIf="course.isBatchCourse" class="title" [ngClass]="tabselector == 2 ? 'livetab2' :''">Discussion <br />Forum</span>
                 </div>
 
                 <div class="cardTabs" *ngIf="tabselector == 0" [ngClass]="tabselector == 0 ? 'activetab' :''">
@@ -394,7 +414,7 @@
                       <div class="cardButton">
                         <button mat-stroked-button *ngIf="course?.course_status !== 'completed'" class="btl-alin btn-txt-center bg_lxp_red color_white cap pointer " (click)="gotoDesc(course)">
                           <!-- <mat-icon class="icon-color m-t-m-2">play_circle_outline</mat-icon> -->
-                          <i class="fa fa-play-circle mycourse-btn-img" aria-hidden="true"></i>
+                          <i class="lxp-PlayCircle mycourse-btn-img" aria-hidden="true"></i>
                           <span class="cap f_wt_400 m-t-m-2">
                             {{
                                                               course?.course_status ===
@@ -411,7 +431,7 @@
                                                             course?.course_status === 'completed' 
                                                           " class="btl-alin btn-txt-center
                                                           bg_lxp_red color_white cap pointer m-t-05 ">
-                          <mat-icon class="icon-color m-t-m-2">replay</mat-icon>
+                          <i class="lxp-PlayCircle mycourse-btn-img" aria-hidden="true"></i>
                           <span class="cap f_wt_400 m-t-m-2">
                             {{ "Replay" | translate }}&nbsp;
                           </span>
@@ -459,12 +479,9 @@
                       </div>
                       <div class="cardButton">
                         <button mat-stroked-button class="btl-alin btn-txt-center m_3_px_top cap pointer" (click)="goInstructorLed(course)">
-                          <!-- <img class="mycourse-btn-img" alt="" src="../../../../assets/learner/mycourseicons/joinmain.svg"
-                                    width="16px" height="12.5px"> -->
-              
-              
                           <span class="cap f_wt_400 m-t-m-2NEW">
-                            <i class="fa fa-hand-o-up mycourse-btn-img" aria-hidden="true"></i>
+                            <!-- <i class="fa fa-hand-o-up mycourse-btn-img" aria-hidden="true"></i> -->
+                            <i class="lxp-Join mycourse-btn-img icon-color" aria-hidden="true"></i>
                             {{ "Join" | translate }}
                           </span>
                         </button>
@@ -473,15 +490,53 @@
                   </div>
                 </div>
                 <!-- TAB 3 -->
+                <div class="cardTabs" *ngIf="tabselector == 3" [ngClass]="tabselector == 3 ? 'activetab3' :''">
+                  <div *ngIf="course.isBatchCourse" matRipple class="card-hover cardHeights grey_border1" (mouseover)="activityDefault ='../../../../assets/learner/mycourseicons/Activities_hover.svg'" (mouseout)="activityDefault='../../../../assets/learner/mycourseicons/Activities_defult.svg'">
+                    <div class="row">
+                    </div>
+                    
+                    <div class="height_match">
+                      <div class="row color_g f_size_13 animate__animated animate__fadeInDown"  *ngIf="!course.activityExp">
+                        <div class="col-5 ">
+                          <img alt="" [src]="activityDefault" width="100px" height="80px">
+                        </div>
+                        <div class="col p-l-0px">
+                          <p>Practice the skills learnt while reading and attending classes.</p>
+                        </div>
+                      </div>
+                      <div *ngIf="course.activityExp" class="f_size_13 animate__animated animate__fadeInUp">
+                        Assignments completed {{course.assignment_submitted_count+'/'+course.assignment_total_count}}<br>
+                        Projects completed {{course.completed_mid_course_project_count+'/'+course.total_mid_course_project_count}}<br>
+                        <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;"
+                          (click)="gotoSubmissionDetails(course)">View submission details..</span>
+                      </div>
+                    </div>
+
+                    <div class="moreDetails d-flex justify-content-between align-items-center">
+                      <div class="seeMoreDetails">
+                        <div class="">
+                          <span class="pointer seemoreHove" (click)="course.activityExp?course.activityExp=false:course.activityExp=true">
+                            <span class="f_size_10">{{course.activityExp?'Hide details...':'See more details...' }}</span>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="cardButton">
+                        <button mat-stroked-button class="btl-alin cap pointer btn-txt-center "
+                          (click)="Go(course)">
+                          <!-- <mat-icon fontSet="material-icons-outlined" class="icon-color m-t-m-2">near_me</mat-icon> -->
+                          <i class="lxp-Go icon-color"></i>
+                          <span class="cap f_wt_400 m-t-m-2">
+                            {{ "Go" | translate }}
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- TAB 4 -->
                 <div class="cardTabs" *ngIf="tabselector == 2" [ngClass]="tabselector == 2 ? 'activetab2' :''">
                   <div *ngIf="course.isBatchCourse" matRipple class="card-hover cardHeights grey_border1" (mouseover)="discussDefault ='../../../../assets/learner/mycourseicons/Discussion_hover.svg'" (mouseout)="discussDefault='../../../../assets/learner/mycourseicons/Discussion_default.svg'">
                     <div class="row">
-                      <!-- <div class="col">
-                        <div class="circle_outline pull-left m-r-15px m-b-10px">
-                          <span class="lxp-stack lxp-theme-red title_img f_size_23"></span>
-                          </div>
-                        <p class="f_size_16 f_wt_500 color_black titleAlign"> Discussion Forum</p>
-                      </div> -->
                     </div>
 
                     <div class="height_match">
@@ -516,69 +571,9 @@
                       <div class="cardButton">
                         <button mat-stroked-button *ngIf="userDetail.is_forum_config" class="btl-alin btn-txt-center
                                   cap pointer  p-7-lr" (click)="goToForum(course)">
-                          <!-- <img class="mycourse-btn-img" alt="" src="../../../../assets/learner/mycourseicons/collaborate.svg"
-                                    width="16px" height="12.5px"> -->
-                          <i class="fa fa-handshake-o mycourse-btn-img" aria-hidden="true"></i>
+                          <i class="lxp-Collaborate mycourse-btn-img icon-color" aria-hidden="true"></i>
                           <span class="cap f_wt_400 m-t-m-2 span-ellip">
                             {{ "Collaborate" | translate }}
-                          </span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- TAB 4 -->
-                <div class="cardTabs" *ngIf="tabselector == 3" [ngClass]="tabselector == 3 ? 'activetab3' :''">
-                  <div *ngIf="course.isBatchCourse" matRipple class="card-hover cardHeights grey_border1" (mouseover)="activityDefault ='../../../../assets/learner/mycourseicons/Activities_hover.svg'" (mouseout)="activityDefault='../../../../assets/learner/mycourseicons/Activities_defult.svg'">
-                    <div class="row">
-                      <!-- <div class="col">
-                        <div class="circle_outline pull-left  m-r-15px m-b-10px">
-                          <img alt="" src="../../../../assets/learner/mycourseicons/activities.svg" width="22px" height="22px"
-                        class="title_img">
-                      </div>                 
-                        <p class="f_size_16 f_wt_500 color_black titleAlign"> Activities</p>
-                      </div> -->
-                    </div>
-                    
-                    <div class="height_match">
-                      <div class="row color_g f_size_13 animate__animated animate__fadeInDown"  *ngIf="!course.activityExp">
-                        <div class="col-5 ">
-                          <img alt="" [src]="activityDefault" width="100px" height="80px">
-                        </div>
-                        <div class="col p-l-0px">
-                          <p>Practice the skills learnt while reading and attending classes.</p>
-                        </div>
-                      </div>
-                      <div *ngIf="course.activityExp" class="f_size_13 animate__animated animate__fadeInUp">
-                        Assignments completed {{course.assignment_submitted_count+'/'+course.assignment_total_count}}<br>
-                        Projects completed {{course.completed_mid_course_project_count+'/'+course.total_mid_course_project_count}}<br>
-                        <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline;"
-                          (click)="gotoSubmissionDetails(course)">View submission details..</span>
-                      </div>
-                    </div>
-
-                    <!-- <div class="row pseudoheight"></div> -->
-                    <div class="moreDetails d-flex justify-content-between align-items-center">
-                      <div class="seeMoreDetails">
-                        <div class="">
-                          <span class="pointer seemoreHove" (click)="course.activityExp?course.activityExp=false:course.activityExp=true">
-                            <span class="f_size_10">{{course.activityExp?'Hide details...':'See more details...' }}</span>
-                          </span>
-                        </div>
-                        <!-- <div class="row m-auto">
-                          <div class="col justify-content-center align-self-center">
-                            <a class="" style="color: red; font-size: 10px !important;" [routerLink]="" (click)="gotoSubmissionDetails(course)">View submission details</a>
-                          </div>
-                        </div> -->
-                      </div>
-                      <div class="cardButton">
-                        <button mat-stroked-button class="btl-alin cap pointer btn-txt-center "
-                          (click)="Go(course)">
-                          <!-- <img class="mycourse-btn-img" alt="" src="../../../../assets/learner/mycourseicons/go.svg"
-                            width="16px" height="12.5px"> -->
-                          <mat-icon fontSet="material-icons-outlined" class="icon-color m-t-m-2">near_me</mat-icon>
-                          <span class="cap f_wt_400 m-t-m-2">
-                            {{ "Go" | translate }}
                           </span>
                         </button>
                       </div>

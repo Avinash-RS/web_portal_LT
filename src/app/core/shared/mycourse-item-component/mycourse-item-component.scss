@@ -26,7 +26,8 @@
     }
     .lxp-gauge, 
     .lxp-monitor, 
-    .lxp-stack {
+    .lxp-stack, 
+    .lxp-Activities {
       &::before {
         position: absolute;
         top: 50%;
@@ -645,11 +646,11 @@ hr {
   padding-left: 20px !important;
 }
 
-.icon-color {
-  font-size: 18px;
-  height: 16px;
-  width: 16px;
-}
+// .icon-color {
+//   font-size: 18px;
+//   height: 16px;
+//   width: 16px;
+// }
 
 .cap::first-letter {
   text-transform: capitalize !important;
@@ -2184,6 +2185,19 @@ li {
   display: flex;
   transition: ease-in-out all 0.5s;
   min-height: 112px;
+  .courseCredit {
+    position: relative;
+    padding-left: 8px;
+    &::before {
+      content: '';
+      position: absolute;
+      left: -10px;
+      top: 0;
+      height: 90%;
+      width: 1px;
+      background-color: #F1C300;
+    }
+  }
   .courseCommon {
     width: 49%;
     &:last-child {
@@ -2200,6 +2214,17 @@ li {
   min-height: 112px;
   .courseCommon {
     width: 49%;
+    i {
+      color: #C02222;
+    }
+    div {
+      &:first-child {
+        width: 17%;
+      }
+      &:last-child {
+        width: 81%;
+      }
+    }
   }
 }
 .courseAuthor {
@@ -2254,6 +2279,12 @@ li {
     margin: 0 0 0 10px;
     display: inline-block;
     vertical-align: middle;
+  }
+  .lxp-Progress {
+    color: #C02222;
+    font-size: 18px;
+    display: inline-block;
+    vertical-align: text-bottom;
   }
 }
 .progressionList {
@@ -2322,7 +2353,7 @@ li {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 80%;
+    height: 77%;
     transform: scaleY(0);
     transform-origin: bottom center;
     background: #F7F7F7;
@@ -2384,6 +2415,16 @@ li {
       font-size: 12px;
       color: #333333;
       position: relative;
+      .launchIcon {
+        font-size: 15px;
+        color:#C02222;
+        transition: all 0.3s ease-in-out;
+      }
+      &:hover {
+        i {
+          color:#333333;
+        }
+      }
     }
     [data-title] {
       font-size: 11px;
@@ -2412,11 +2453,6 @@ li {
           border-color: transparent transparent transparent #5C6873;
         }
       }
-    }
-    .launchIcon {
-      width: 18px;
-      height: 18px;
-      font-size: 18px;
     }
   }
 }
@@ -2453,6 +2489,9 @@ li {
 }
 .cardButton {
   margin-top: 10px;
+  @media only screen and (max-width: 767px) {
+    margin-top: 0;
+  }
   button {
     &.videoButton {
       background-color: #C02222;
@@ -2487,8 +2526,7 @@ li {
     .icon-color {
       color: #C02222;
       margin-right: 5px;
-      width: auto;
-      height: auto;
+      font-size: 15px;
     }
   }
 }
