@@ -115,6 +115,11 @@ export class CoursedetailsComponent implements OnInit {
   topicPageStatus: any;
   socketEmitReciver: any;
   socketConnector: any;
+  oldIdx: any;
+  isCancelLoad: boolean;
+  fileType: any;
+  URIData: any;
+  resourceName: any;
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -253,6 +258,7 @@ export class CoursedetailsComponent implements OnInit {
       if (result && result.eventId && result.eventId.length > 0 && result.data.childData.length > 0) {
         if (result.data.course_id === this.courseid) {
           this.scromModuleData = result.data.childData;
+          this.scromModuleData[this.moduleHolder].expanded = true;
           if (this.topiccurrentPage !== result.data.resumeSubContent ||
              result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status !== this.topicPageStatus) {
           
@@ -540,6 +546,8 @@ export class CoursedetailsComponent implements OnInit {
       this.moduleLenth = this.scromApiData?.childData.length;
       this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : this.scromApiData.topicIndex;
       this.moduleHolder = this.currentPage = this.scromApiData.moduleIndex == null ? 0 : this.scromApiData.moduleIndex;
+      this.scromModuleData[this.moduleHolder].expanded = true;
+      this.oldIdx = this.moduleHolder;
       const moduleTitle = encodeURIComponent(this.scromApiData.childData[this.currentPage].title);
       const topicTitle = encodeURIComponent(this.scromApiData.childData[this.currentPage].children[this.topiccurrentPage].title);
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
@@ -771,6 +779,32 @@ export class CoursedetailsComponent implements OnInit {
         });
     }
   }
+  urlBinder(file){
+    console.log(file)
+    
+    this.resourceName = file.type_name;
+    this.fileType = file.doc_type;
+    if (file.doc_type.includes("image")) {
+      this.fileType = 'image'
+    }
+    if(file.doc_type.includes("video")){
+       this.fileType = 'video';
+    }
+    if(file.doc_type.includes("pdf")||file.doc_type.includes("vnd.openxmlformats")||file.doc_type.includes("vnd.ms-excel")||file.doc_type.includes("msword")){
+       this.fileType = 'pdf';
+    }
+    if(file.doc_type.includes("audio")){
+      this.fileType = 'audio';
+   }
+
+    if (this.fileType === 'pdf') {
+      file.path = "https://docs.google.com/gview?url="+file.path +"&embedded=true";
+      this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path);
+    } else {
+    this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path);
+   }
+  }
+  
 
   tabSelection(tab) {
     this.tabInd = tab.index;
@@ -815,6 +849,34 @@ export class CoursedetailsComponent implements OnInit {
       disableClose: true,
     });
   }
+moduleExpand(res,index){
+  if(index !== this.oldIdx){
+  for (const element of this.scromModuleData) {
+    element.expanded = false
+  }
+  this.scromModuleData[index].expanded = true;
+  } else {
+    this.scromModuleData[index].expanded = this.scromModuleData[index].expanded ? false : true;
+  }
+this.oldIdx = index 
 }
+
+goBack() {
+  this.route.navigateByUrl('/Learner/MyCourse');
+}
+
+openResourse(templateRef){
+  this.dialog.open(templateRef, {
+    panelClass: 'resourseContainer',
+    width:"95%",
+    height:"80%",
+    closeOnNavigation: true,
+    disableClose: true,
+  });
+}
+
+}
+
+
 
 
