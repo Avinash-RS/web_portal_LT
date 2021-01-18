@@ -2493,14 +2493,6 @@ li {
     margin-top: 0;
   }
   button {
-    &.videoButton {
-      background-color: #C02222;
-      color: #ffffff;
-      &:hover {
-        background-color: #C02222;
-        color: #ffffff;
-      }
-    }
     position: relative;
     z-index: 99;
     padding: 7px 15px;
@@ -2508,12 +2500,29 @@ li {
     line-height: normal;
     border-radius: 0;
     display: inline-block;
-    background: #EAEAEA;
+    background: #cccccc;
     border: 0;
     transition: ease-in-out background 0.3s;
+    &.videoButton {
+      background-color: #C02222;
+      color: #ffffff;
+      .cap {
+        color: #ffffff;
+      }
+      &:hover {
+        background-color: #C02222;
+        color: #ffffff;
+      }
+    }
+    .cap {
+      color: #000000;
+    }
     &:hover {
       color: white;
       background: #5C6873;
+      .cap {
+        color: white;
+      }
       &::before {
         transform: scaleY(1);
       }

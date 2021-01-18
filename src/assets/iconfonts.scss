@@ -25,14 +25,32 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  .lxp-Visibility:before {
+    content: "\e925";
+  }
+  .lxp-User:before {
+    content: "\e923";
+  }
+  .lxp-Phone:before {
+    content: "\e924";
+  }
+  .lxp-Lock:before {
+    content: "\e91e";
+  }
+  .lxp-MailOutline:before {
+    content: "\e921";
+  }
+  .lxp-VisibilityOff:before {
+    content: "\e922";
+  }
+  .lxp-ActivityCenter:before {
+    content: "\e920";
+  }
   .lxp-Logout:before {
     content: "\e91f";
   }
   .lxp-AccountCircle:before {
     content: "\e903";
-  }
-  .lxp-ActivityCenter:before {
-    content: "\e91e";
   }
   .lxp-Arrow:before {
     content: "\e906";
