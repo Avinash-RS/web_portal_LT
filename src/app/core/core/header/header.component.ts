@@ -1,12 +1,13 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { HttpClient } from '@angular/common/http';
 import { Component, HostBinding, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { SocketioService } from '@learner/services/socketio.service';
 import Swal from 'sweetalert2';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -27,15 +28,38 @@ export class HeaderComponent implements OnInit {
   show = true;
   isAvailOpen = false;
   loading = false;
+  hideHeaderMenu: boolean = false;
 
   @HostBinding('class') componentCssClass;
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
               private http: HttpClient, public overlayContainer: OverlayContainer, public socketService: SocketioService,
               public router: Router, private gs: GlobalServiceService) {
     // this.getScreenSize();
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      ).subscribe((e: any) => {
+        const urlHeader= e.url.split("/")
+        console.log(urlHeader[3])
+      const headerPages = ['MyCourse', 'calendar', 'activitycenterhomescreen', 'knowledge']
+      if (!headerPages.includes(urlHeader[2]) && !headerPages.includes(urlHeader[3])) {
+        // console.log("not possible pages")
+        this.hideHeaderMenu = true;
+      }
+      else {
+        this.hideHeaderMenu = false;
+        if(urlHeader[2] == 'activities') {
+          this.hideHeaderMenu = true;
+          // console.log(urlHeader[3])
+        }
+        if(urlHeader[2] == 'knowledge' && urlHeader[3] !== undefined) {
+          this.hideHeaderMenu = true;
+        }
+      }
+      })
   }
 
   ngOnInit() {
+    
     this.services.closeAvailPopup$.subscribe((data: any) => {
       this.isAvailOpen = data;
     });
@@ -52,6 +76,7 @@ export class HeaderComponent implements OnInit {
       this.userDetailes = this.gs.checkLogout();
     }, 3000);
   }
+  
   getShortName(fullName) {
     // tslint:disable-next-line:only-arrow-functions
     const Name = fullName?.split(' ').map(function(str) {

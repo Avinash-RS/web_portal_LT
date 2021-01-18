@@ -2,7 +2,7 @@
   <img class="hearder-logo" alt="" src="assets/learner/iGGnite_PNG.png" (click)="navigateMyCourse()">
 
   <!-- Desktop Menu Starts -->
-  <div class="tab desktopMenu" *ngIf="show">
+  <div class="tab desktopMenu" *ngIf="show" [ngClass]="hideHeaderMenu ? 'notPossiblePages' : 'possiblePages'">
     <button class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/MyCourse' ? 'colGrey' : 'colWhite'" md-raised-button routerLink="/Learner/MyCourse">
       <!-- <mat-icon fontSet="material-icons-outlined" class="headicon" inline=true> local_library </mat-icon> -->
       <i class="lxp-SelfPaced headicon"></i>
