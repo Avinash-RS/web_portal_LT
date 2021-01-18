@@ -53,10 +53,12 @@ text-align: center;
 :host ::ng-deep.mat-form-field-wrapper {
   padding-bottom: .5em;
 }
-.icon-color{
-color:  #8c8c8c !important;
-position: relative;
-top: -2px;
+.icon-color {
+  color:  #8c8c8c !important;
+  position: relative;
+  top: -2px;
+  font-size: 24px;
+  margin-right: 5px;
 } 
 .error{
   margin-top: 8px;
@@ -252,6 +254,10 @@ a {
   flex-direction: column;
   form {
     flex-grow: 1;
+    .mat-select-value-text {
+      display: inline-block;
+      margin-top: -o.25em;
+    }
   }
 }
 // :host ::ng-deep.footericon{
