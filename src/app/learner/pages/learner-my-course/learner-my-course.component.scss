@@ -222,10 +222,6 @@
 ::ng-deep.desktopWrapper .mat-tab-header {
   margin-top: 20px;
 }
-::ng-deep.desktopWrapper .mat-tab-label {
-  opacity: 1;
-  min-width: inherit !important;
-}
 ::ng-deep.desktopWrapper .mat-tab-label-active {
   min-width: inherit !important;
   background-color: #fff;
@@ -589,10 +585,10 @@ hr {
     color: $color-white;
     position: relative;
     left: 0;
+    right: 0 !important;
     top: -3px !important;
     margin-left: 5px;
   }
-
 }
 
 .mat-progress-bar {
@@ -2263,6 +2259,18 @@ background :#BA2020 !important;
 
 ::ng-deep .matTabCol .mat-badge-active{
   background: #B8B8B8 ;
+}
+::ng-deep.desktopWrapper .mat-tab-label {
+  opacity: 1;
+  min-width: inherit !important;
+  &:hover {
+    background-color: #fff;
+    .tabsc {
+      .mat-badge-content {
+        background: #C02222;
+      }
+    }
+  }
 }
 // .footer {
 //   padding: 15px;
