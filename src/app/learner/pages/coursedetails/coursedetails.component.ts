@@ -118,7 +118,7 @@ export class CoursedetailsComponent implements OnInit {
   oldIdx: any;
   isCancelLoad: boolean;
   fileType: any;
-  URIData: any;
+  URIData: any =null;
   resourceName: any;
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
@@ -798,8 +798,10 @@ export class CoursedetailsComponent implements OnInit {
    }
 
     if (this.fileType === 'pdf') {
-      file.path = "https://docs.google.com/gview?url="+file.path +"&embedded=true";
-      this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path);
+     //file.path = "https://docs.google.com/gview?url="+file.path +"&embedded=true";
+      this.URIData = file;
+      //this.URIData = file.path
+      console.log(this.URIData)
     } else {
     this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path);
    }
@@ -868,8 +870,8 @@ goBack() {
 openResourse(templateRef){
   this.dialog.open(templateRef, {
     panelClass: 'resourseContainer',
-    width:"95%",
-    height:"80%",
+    width:"99%",
+    height:"90%",
     closeOnNavigation: true,
     disableClose: true,
   });

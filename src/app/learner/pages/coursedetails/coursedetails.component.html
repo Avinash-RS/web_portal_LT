@@ -3,7 +3,7 @@
     <!-- TITLE AND BACK -->
     <div class="d-flex justify-content-start align-items-center titlebar">
         <div class=" f_size_15 pointer d-flex align-items-center backcolor redHover" (click)="goBack()">
-            <mat-icon class="material-icons f_size_15 mt-2">arrow_back_ios</mat-icon>  Back </div>
+            <mat-icon class="material-icons f_size_15 mt-2 backarrow">arrow_back_ios</mat-icon>  Back </div>
        <div class="f_size_19" style="margin-left: 10px;"> | &nbsp;&nbsp;{{this.course?.course_name}}</div>
     </div>
     <!-- COURSE TOOL BAR -->
@@ -14,22 +14,21 @@
            </div>
            <div class="navigation d-flex align-items-center" *ngIf="scromModuleData">
                <div>
-                <mat-icon class="f_size_23 mt-1" (click)="topicPrve()">skip_previous</mat-icon>
+                <mat-icon title="Previous Topic" class="f_size_23 mt-1" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()">skip_previous</mat-icon>
                </div>
-               <div class="currentTopic">
+               <div class="currentTopic" title="{{scromModuleData[moduleHolder]?.children[nextPrevHolder].title}}">
                 <span >{{scromModuleData[moduleHolder]?.children[nextPrevHolder].title}}</span>
                </div>
                <div>
-                <mat-icon class="f_size_23 mt-1" (click)="topicNext()">skip_next</mat-icon>
+                <mat-icon title="Next Topic"  class="f_size_23 mt-1" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()">skip_next</mat-icon>
                </div>
-            
            </div>
        </div>
        <div class="rightContent d-flex justify-content-end align-items-center">
         <span class="fullScr d-flex align-items-center">
-            <mat-icon (click)="makeFullScreen()" class="mr-2">fullscreen</mat-icon>
+            <mat-icon title="Fullscreen" (click)="makeFullScreen()" class="mr-2">fullscreen</mat-icon>
         </span>
-           <span class="d-flex align-items-center" (click)="openResourse(resourseWindow)"><mat-icon >format_list_bulleted</mat-icon></span>
+           <span class="d-flex align-items-center" title="Resources" (click)="openResourse(resourseWindow)"><mat-icon >format_list_bulleted</mat-icon></span>
        </div>
     </div>
     <!-- TOC AND PLAYER -->
@@ -276,11 +275,17 @@
                                         </div>
                                       </ng-container>
                                     
-                                      <ng-container *ngIf="fileType == 'pdf'">
-                                        <!-- <pdf-viewer [src]="this.batchdialogdata.file"
-                                         [original-size]="false"></pdf-viewer> -->
-                                         
-                                        <iframe  title="file" width="100%" height="100%" [src]="URIData" allowfullscreen></iframe>
+                                      <ng-container *ngIf="fileType == 'pdf'&& URIData!==null">
+                                        <app-pdfreader [url]="URIData"
+                                         [original-size]="false"></app-pdfreader>
+                                        <!-- <object data="{{URIData}}" type="application/pdf" width="100%" height="100%">
+                                            <iframe src="{{URIData}}" width="100%" height="100%" style="border: none;">
+                                                <p>Your browser does not support PDFs.
+                                                    <a href="{{URIData}}">Download the PDF</a>.
+                                                </p>
+                                            </iframe>
+                                        </object> -->
+                                        <!-- <iframe  title="file" width="100%" height="100%" [src]="URIData" allowfullscreen></iframe> -->
                                     
                                       </ng-container>
                                     
