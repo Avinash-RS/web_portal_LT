@@ -9,9 +9,10 @@
     <!-- COURSE TOOL BAR -->
     <div class="d-flex toolBar">
        <div class="d-flex align-items-center leftContent">
-           <div class="hamburger">
-               <mat-icon class="f_size_23 mt-1" (click)="drawersOpen=drawersOpen?false:true">menu</mat-icon>
-           </div>
+           <!-- <div class="hamburger" [ngClass]="drawersOpen ? '' : 'isActive'">
+                <div class="hamburgerInner" (click)="drawersOpen=drawersOpen?false:true"></div>
+            </div> -->
+            <mat-icon class="f_size_23 mt-1" (click)="drawersOpen=drawersOpen?false:true">menu</mat-icon>
            <div class="navigation d-flex align-items-center" *ngIf="scromModuleData">
                <div>
                 <mat-icon title="Previous Topic" class="f_size_23 mt-1" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()">skip_previous</mat-icon>
@@ -32,9 +33,9 @@
        </div>
     </div>
     <!-- TOC AND PLAYER -->
-    <div class="contentHeight d-flex" >
+    <div class="contentHeight d-flex">
         <!-- TOC DATA -->
-        <div *ngIf="drawersOpen"  class="tocSize" (mouseenter)="viewScrollBar = true" (mouseleave)="viewScrollBar = false" [ngClass]="viewScrollBar ? 'afterHover': 'beforeHover'">
+        <div class="tocSize" [ngClass]="drawersOpen ? '': 'drawersOpen'">
 
             <mat-card *ngFor="let res of scromModuleData; let i = index" multi displayMode=""
                 (click)="getSelectedIndex(i)" class="topicCard">
@@ -96,7 +97,7 @@
 
         </div>
         <!-- COURSE PLAYER -->
-        <div style="width: 100%; margin:0">
+        <div class="videoPlayer" [ngClass]="drawersOpen ? 'halfWidth' : 'fullWidth'">
             <iframe title="player" id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
         </div>
     </div>

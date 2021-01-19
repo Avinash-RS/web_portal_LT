@@ -19,28 +19,42 @@ color:grey
 .contentHeight{
     height: 80vh !important;
     background: #F0F0F0;
+    .videoPlayer {
+        transition: all 0.3s linear;
+        width: 70%;
+        &.fullWidth {
+            width: 100%;
+        }
+    }
+    .halfWidth {
+    }
 }
 .tocSize{
-width: 40% !important;
-overflow: auto;
--webkit-overflow-scrolling: touch;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 30%;
+    margin-left: 0;
+    transition: all 0.3s linear;
+    &.drawersOpen {
+        margin-left: -30%;
+    }
 }
 div.tocSize::-webkit-scrollbar {
     width: 5px !important;
 }
 
-.afterHover {
-    overflow: y;
-    height: auto;
-}
+// .afterHover {
+//     overflow: y;
+//     height: auto;
+// }
 
-.beforeHover {
-    overflow: hidden;
-    height: auto;
-    @media only screen and (max-width: 991px) {
-        overflow: auto;
-    }
-}
+// .beforeHover {
+//     overflow: hidden;
+//     height: auto;
+//     @media only screen and (max-width: 991px) {
+//         overflow: auto;
+//     }
+// }
 
 .tocTitle{
    font-size: 17px !important;
@@ -168,14 +182,80 @@ div.tocSize::-webkit-scrollbar {
     // width:80%;
 }
 .navigation{
-   padding-right: 10px;
-max-width: 65%;
-min-width: 65%;
-justify-content: space-between;
+    padding-right: 10px;
+    max-width: 65%;
+    min-width: 65%;
+    justify-content: space-between;
 }
-.hamburger{
+.hamburger {
     margin-right:5px;
+    position: relative;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+    &.isActive {
+        &:hover {
+            opacity: .7;
+        }
+        .hamburgerInner {
+            transform: translate3d(0,10px,0) rotate(45deg);
+            &::before {
+                transform: rotate(-45deg) translate3d(-5.71429px, -6px, 0);
+                opacity: 0;
+            }
+            &::after {
+                transform: translate3d(0,-20px,0) rotate(-90deg);
+            }
+        }
+    }
+    &:hover {
+        opacity: .7;
+    }
+    .hamburgerInner {
+        display: block;
+        margin-top: -2px;
+        position: absolute;
+        top: 2px;
+        width: 40px;
+        height: 4px;
+        transition-timing-function: ease;
+        transition-duration: .15s;
+        transition-property: transform;
+        border-radius: 4px;
+        background-color: red;
+        &::before, 
+        &::after {
+            content: '';
+            display: block;
+        }
+        &::before {
+            position: absolute;
+            width: 40px;
+            height: 4px;
+            border-radius: 4px;
+            background-color: red;
+            top: 10px;
+            // transition-timing-function: ease;
+            // transition-duration: .15s;
+            transition-property: transform, opacity;
+        }
+        &::after {
+            position: absolute;
+            top: 20px;
+            bottom: -10px;
+            width: 40px;
+            height: 4px;
+            transition-timing-function: ease;
+            transition-duration: .15s;
+            transition-property: transform;
+            border-radius: 4px;
+            background-color: red;
+        }
+    }
 }
+
 .titlebar{
 padding:10px;
 background-color: #F0F0F0;
