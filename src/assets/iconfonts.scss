@@ -25,6 +25,12 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  .lxp-HamburgerMenu:before {
+    content: "\e914";
+  }
+  .lxp-SelfPaced:before {
+    content: "\e926";
+  }
   .lxp-Visibility:before {
     content: "\e925";
   }
@@ -93,9 +99,6 @@
   }
   .lxp-LedSession:before {
     content: "\e913";
-  }
-  .lxp-SelfPaced:before {
-    content: "\e914";
   }
   .lxp-Activities:before {
     content: "\e900";
