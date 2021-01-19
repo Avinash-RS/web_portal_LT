@@ -1,5 +1,9 @@
 @import "variable";
 
+.bodyWrapper {
+  background-color: #f0f0f0;
+  height: 100%;
+}
 .cateName {
   // position: relative;
   // top: 8px;
@@ -34,17 +38,6 @@
   box-shadow: none;
 }
 
-// .hovercolor {
-//   color: $color-white !important;
-//   padding: 6px;
-//   font-size: 16px;
-//   padding-left: 6px;
-//   border: none;
-//   // border-radius: 11px;
-//   border: 1px solid #898989;
-//   width: 155px;
-//   background-color: $lxp-theme-green !important;
-// }
 .cardContainer {
   height: 400px !important;
 }
@@ -70,9 +63,7 @@
 
 .primerFlage {
   height: 70px;
-  // width: 67px;
   position: absolute;
-  // margin-left: 20px;
   z-index: 1;
 }
 
@@ -101,54 +92,6 @@
   margin-left: 2%;
 }
 
-// @media screen and (min-width: 270px) and (max-width: 795px) {
-//     .descmc {
-//         max-height: 175px !important;
-//         min-height: 40px;
-//     }
-//     .courseHover {
-//       width: 100% !important;
-//       height: 200px !important;
-
-//   }
-//     @media screen and (max-width: 500px) {
-//         .statBtn {
-//             width: 60%;
-//             margin: auto !important;
-//             text-align: center !important;
-//             display: block !important;
-//         }
-//         .courseHover {
-//           width: 100% !important;
-//           height: 200px !important;
-
-//       }
-//     }
-// }
-
-// @media screen and (min-width: 500px) and (max-width: 765px) {
-//     .statBtn {
-//         width: 50%;
-//         float: right;
-//     }
-//     .courseHover {
-//       width: 100% !important;
-//       height: 200px !important;
-
-//   }
-// }
-
-// @media screen and (min-width: 765px) {
-//     .statBtn {
-//         float: right;
-//     }
-//     .courseHover {
-//       width: 100% !important;
-//       height: 200px !important;
-
-//   }
-// }
-
 .vertical {
   border-left: 160px solid $color-subhead;
   max-width: 100%;
@@ -166,16 +109,38 @@
   color: #616060;
 }
 
-// :host ::ng-deep .mat-tab-labels > .mat-tab-label:first-child {
-//   display: inherit !important;
-// }
 :host ::ng-deep .myCc .mat-tab-label .mat-tab-label-content {
   font-size: 14px !important;
   font-weight: 400 !important;
-  // margin-right: 58%;
-  // color: $lxp-gray !important;
 }
-
+::ng-deep .myCc {
+  position: relative;
+}
+.matTabCol {
+  position: relative;
+}
+.browseCourse {
+  position: absolute;
+  top: 30px;
+  right: 15px;
+  z-index: 9;
+  button {
+    display: inline-block;
+    font-size: 15px;
+    color: #69727C;
+    font-weight: normal;
+    cursor: pointer;
+    border: 1px solid #C02222;
+    background: #fff;
+    padding: 6px 12px;
+    transition: background 0.3s ease-in-out;
+    &:hover {
+      background: #C02222;
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+}
 .m-l-4 {
   margin-left: 4%;
 }
@@ -200,8 +165,6 @@
   width: 115px;
   margin-left: 3px;
   margin-top: -9%;
-  // margin-left: 24%;
-  // position: absolute;
 }
 
 .finalScore {
@@ -243,26 +206,31 @@
 }
 
 :host ::ng-deep.mat-tab-label {
-  height: 38px;
-  padding: 0px 15px !important;
-  // min-width: 130px;
+  height: auto;
+  padding: 9px 15px !important;
   text-align: center;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   white-space: nowrap;
   position: relative;
+  margin: 0 20px 0 0 !important;
 }
 ::ng-deep.mat-tab-label-active {
   background-color: #f5f5f5;
 }
-
+::ng-deep.desktopWrapper .mat-tab-header {
+  margin-top: 20px;
+}
+::ng-deep.desktopWrapper .mat-tab-label-active {
+  min-width: inherit !important;
+  background-color: #fff;
+}
 
 :host /deep/ .mat-ink-bar {
   height: 2px !important;
+  // left: 0 !important;
   background-color: $lxp-theme-green !important;
-  // left: 8px !important;
-  // width: 90px !important;
 }
 
 .m-b-2 {
@@ -275,15 +243,18 @@
 
 .bodybg {
   width: auto;
-  // padding-left: 18px;
-  // padding-right: 18px;
   padding: 0;
   margin: 0;
-  // min-height: 100vh;
   display: flex;
-  background-color: $color-white;
+  background-color: #f0f0f0;
   .container {
     margin: 0;
+    min-height: 518px;
+  }
+}
+.courseCard {
+  &:last-child {
+    margin-bottom: 15px;
   }
 }
 .desktopWrapper {
@@ -324,9 +295,6 @@
 
 .coursebg {
   background-color: $color_white;
-  // margin-left: 1%;
-  // margin-top: 1%;
-  // margin-bottom: 1%;
   box-shadow: none;
 }
 
@@ -350,46 +318,34 @@
 
 .module {
   font-size: 16px;
-  // margin-left: 4px;
   font-weight: 600;
   vertical-align: sub
 }
 
 .myC-head {
-  //margin-left: 8.5% !important;
   margin-top: 2%;
   margin-bottom: 1%;
 }
 
 .myCourses {
-  // margin-left: -3px;
 }
 
 .courseImg {
-  //border: 1px solid $profile-s-grey;
   width: 100%;
   height: 100%;
   margin: auto;
-  // margin-left: 26px;
   border-radius: 10px;
 }
 
 .courseHover {
   position: relative;
-  // width: 150px;
   height: 126px;
-  // padding-top: 15px;
-  // bottom: 1px;
-  // padding: 5px 0;
-  // padding: 15px 0;
 }
 
 .overlay {
   position: absolute;
   bottom: 1%;
-  // left: 25px;
   right: 0;
-  /* padding: 15px 0; */
   background-color: #0000001f;
   overflow: hidden;
   width: 0px;
@@ -448,12 +404,8 @@
 }
 
 .courseImgs {
-  // width: 100%;
-  // height: 100%;
   width: 90px;
   margin-top: 15%;
-  // padding: 21px;
-  // margin: auto;
 }
 
 .errorboxx {
@@ -481,7 +433,6 @@
 
 .color-grey-card-status {
   border-left: 3px solid #b5acac !important;
-  // color: #b5acac !important;
 }
 
 .color-yellow-card-status {
@@ -509,11 +460,6 @@
   margin-top: 23%;
 }
 
-// .mat-stroked-button {
-//   border: 1px solid currentColor;
-//   padding: 0px 7px;
-//   line-height: 25px;
-// }
 .color-grey {
   border-left: 3px solid #b5acac !important;
 }
@@ -523,7 +469,6 @@
 }
 
 .coursenameT {
-  // border-left: 5px solid #f3cc58;
   padding-left: 10px;
   margin-bottom: 5px;
   border-radius: 3px;
@@ -544,17 +489,13 @@
 
 .status {
   background: $lxp-theme-green;
-  // padding: 2px 6px;
-  // float: right;
   border-radius: 4px;
-  // width: 50px;
   height: 19px;
   border: none;
   font-size: 11px;
   position: relative;
   top: -8px;
   color: $color-white;
-  // margin-top: 5px;
 }
 
 .Completedstatus {
@@ -564,7 +505,6 @@
   border-radius: 4px;
   font-size: 13px;
   color: $color-white;
-  // margin-top:5px;
 }
 
 .Upcomingstatus {
@@ -604,7 +544,6 @@
 
 .m-l-4 {
   margin-left: 4%;
-  // padding-bottom: 5px;
 }
 
 hr {
@@ -646,11 +585,10 @@ hr {
     color: $color-white;
     position: relative;
     left: 0;
+    right: 0 !important;
     top: -3px !important;
     margin-left: 5px;
-  //  background: $lxp-theme-green !important;
   }
-
 }
 
 .mat-progress-bar {
@@ -683,9 +621,7 @@ hr {
 }
 
 .pad1020 {
-  // padding: 20px 0 10px 18px !important;
   padding-top: 20px !important;
-  // padding-left: 10px !important;
   padding-left: 20px !important;
 }
 
@@ -709,15 +645,11 @@ hr {
   padding-left: 8%;
 }
 
-// .upcoming{
-//   margin-left: 7.5%;
-// }
 .card12 {
   background: transparent !important;
 }
 
 .card12:hover {
-  // box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2)
 }
 
 .cap {
@@ -1021,6 +953,8 @@ hr {
   // margin-top: 1rem;
   // padding-right: 0px;
   margin-top: 11px;
+  display: none;
+  width: 100%;
   @media only screen and (max-width: 768px) {
     display: flex;
     justify-content: flex-end;
@@ -2325,6 +2259,18 @@ background :#BA2020 !important;
 
 ::ng-deep .matTabCol .mat-badge-active{
   background: #B8B8B8 ;
+}
+::ng-deep.desktopWrapper .mat-tab-label {
+  opacity: 1;
+  min-width: inherit !important;
+  &:hover {
+    background-color: #fff;
+    .tabsc {
+      .mat-badge-content {
+        background: #C02222;
+      }
+    }
+  }
 }
 // .footer {
 //   padding: 15px;

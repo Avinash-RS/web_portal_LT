@@ -3,236 +3,76 @@
 :host {
     z-index: 4;
 }
-
-.main-toolbar {
-    height: 50px !important;
-    position: relative;
-    padding-left: 16px;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2) !important;
-
-}
-
-.spacer {
-    flex: 1 1 auto;
-}
-
-.more-btn {
-    height: 100%;
-    min-width: 70px;
-}
-
 .mat-icon-button {
     margin-right: 10px;
 }
-
-.profileimg {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: $color-white;
-    color: $lxp-theme-green;
-    cursor: pointer;
-    font-size: smaller;
-    left: 9px;
-}
-
 :host ::ng-deep .mat-toolbar-row,
 .mat-toolbar-single-row {
     height: 55px !important;
 }
-
-.hearder-logo {
-    height: 20px;
-    cursor: pointer;
-    margin-left: 3px;
-    // padding-left: 0.5%;
-}
-
-.edutech {
-    display: contents;
-    font-size: 22px;
-    font-weight: lighter;
-}
-
 :host ::ng-deep .mat-menu-content {
     padding: 0px !important;
     margin-left: 0px !important;
 }
-
 :host ::ng-deep .mat-menu-content:not(:empty) {
     padding-top: 0px !important;
     padding-bottom: 0px !important;
 }
-
 :host ::ng-deep .mat-menu-item {
     border: none !important;
 }
-
 :host ::ng-deep .mat-menu-item:active {
     border: none !important;
 }
-
-
 :host ::ng-deep .mat-toolbar.mat-primary {
     background-color: $lxp-theme-yellow-sec !important;
     -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .1) !important;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2) !important;
-
 }
-
 :host ::ng-deep.mat-icon-button {
     line-height: 31px !important;
-
 }
-
 .mat-toolbar-row,
 .mat-toolbar-single-row {
     padding: 0 11px !important;
     width: 100%;
 }
-.btn2 {
-    position: relative;
-    font-size: 15px;
-    font-weight: 500;;
-    border: none;
-    color:$lxp-dark-gray;
-    background: $lxp-theme-green !important;
-    cursor: pointer;
-}
-
-.btn1 {
-    position: relative;
-    font-size: 15px;
-    border: none;
-    color:$color-lightGray;
-    background: $lxp-theme-yellow-sec !important;
-    cursor: pointer;
-}
-
-:host ::ng-deep .btn1:focus {
-    // border-bottom: 2px solid $lxp-theme-green !important;
-    // border-right: none !important;
-    // outline: 0 !important;
-    // border-left: none !important;
-}
-
-.btn1:hover {
-    //color: $color-blank !important;
-    // background-color: #77777740 !important;
-    // color:$color-lightGray !important
-}
-
 :host ::ng-deep button:active {
     outline: none !important;
     border: none;
     color: $color-blank;
 }
+.mat-h5,
+.mat-typography h5 {
+    margin: 0px 0 5px !important;
+}
+.mat-button {
+    min-width: auto;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.7);
+}
+ ::ng-deep .swal2-styled.swal2-confirm {
+    height: 41.25px !important;
+    background-color: #C02222 !important;
+    color: #ffffff !important;
+}
+::ng-deep .swal2-styled.swal2-cancel:hover {
+    background-color: #C02222 !important;
+    color: #ffffff !important;
+}
+::ng-deep .swal2-styled.swal2-cancel {
+    height: 41.25px !important;
+    border: 1px solid #C02222 !important;
+    background-color: #ffffff !important;
+    color: #333333 !important;
+}
 
+// Desktop Menu Starts
 .tab {
     text-align: right;
     margin-right: 1%;
     width: 100%;
 }
-
-.headTit {
-    display: contents;
-    font-size: 14px;
-    font-style: oblique;
-    color: $color-blank;
-    margin-left: 2px;
-    font-weight: bold;
-}
-
-.activity-icon {
-    height: 22px;
-    width: 22px;
-}
-.colgreen {
-    color: #ffffff !important;
-    background-color: $lxp-gray !important;
-    position: relative;
-    &:focus {
-        border-bottom: none;
-    }
-    &::after {
-        content: '';
-        border-bottom: 2px solid $lxp-theme-green !important;
-        position: absolute;
-        width: 100%;
-        bottom: 0;
-        left: 0;
-    }
-}
-.btn2 :hover{
-    background-color:$lxp-gray !important;
-}
-
-.iconmenu {
-    color: $color-blank !important;
-}
-
-.mat-h5,
-.mat-typography h5 {
-    margin: 0px 0 5px !important;
-}
-
-.colWhite {
-    // color:$color-lightGray;
-    display: inline-block;
-    vertical-align: middle;
-    overflow: hidden;
-    transform: perspective(1px) translateZ(0);
-    transition-property: color, background-color;
-    transition-duration: 0.3s;
-    position: relative;
-    &:hover {
-        background-color: $lxp-gray !important;
-        color: white !important;
-        position: relative;
-        &::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            border-bottom: 2px solid $lxp-theme-green !important;
-        }
-    }
-}
-
-.bookIcon {
-    display: none;
-}
-
-.btn1 {
-    display: block;
-}
-.smNoDisp {
-    margin-left: 5px;
-}
-@media screen and (min-width: 200px) and (max-width: 770px) {
-//   .smNoDisp{
-//       display: none;
-//   }
-
-.p5px {
-    background-color: black;
-    padding:7px 4px !important; 
-}
-    .bookIcon {
-        display: none !important;
-        position: relative;
-        font-size: 22px;
-        border: none;
-        height: 39px;
-        padding: 1px;
-        margin-top: 3px;
-        color: #1f1a17;
-        background: #FFCC00 !important;
-        cursor: pointer;
-    }
-}
-
 .spinner-container {
     position: absolute;
     top: 0;
@@ -245,23 +85,94 @@
     justify-content: center;
     color: $lxp-theme-green;
 }
-
-.imgAdj{
-    // float: right;
-    // margin-top: 6px;
+.hearder-logo {
+    height: 20px;
+    cursor: pointer;
+    margin-left: 3px;
 }
-
-.p-x-15px {
-    padding:12px 15px 11px 15px; 
+.profileimg {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: $color-white;
+    color: $lxp-theme-green;
+    cursor: pointer;
+    font-size: smaller;
+    left: 9px;
 }
-
 .headicon {
     font-size: 18px !important;
-    // width: 30px !important;
     position: relative;
-    // top: 6px;
 }
+.desktopMenu {
+    &.possiblePages {
+        visibility: visible;
+    }
+    &.notPossiblePages {
+        visibility: hidden;
+    }
+    display: none;
+    @media only screen and (min-width:768px) {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding-left: 50px;
+    }
+    button {
+        position: relative;
+        overflow: hidden;
+        border: none;
+        padding: 12px 10px 11px 10px;
+        transform: perspective(1px) translateZ(0);
+        transition-property: color, background-color;
+        transition-duration: 0.3s;
+        @media only screen and (min-width: 992px) {
+            padding: 12px 15px 11px 15px;
+        }
+        span {
+            font-size: 15px;
+            font-weight: 400;
+        }
+        &.colWhite {
+            color: #000000;
+            background-color: transparent;
+        }
+        &.colGrey {
+            color: #ffffff !important;
+            background-color: #555555 !important;
+            position: relative;
+            &:focus {
+                border-bottom: none;
+            }
+            &::after {
+                content: '';
+                border-bottom: 2px solid $lxp-theme-green !important;
+                position: absolute;
+                width: 100%;
+                bottom: 0;
+                left: 0;
+            }
+        }
+        &:hover {
+            color: #ffffff !important;
+            background-color: #555555 !important;
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                border-bottom: 2px solid $lxp-theme-green !important;
+            }
+        }
+    }
+}
+.smNoDisp {
+    margin-left: 5px;
+}
+// Desktop Ends
 
+//Mobile Starts
 .mobMenu {
     display: none;
     @media only screen and (max-width: 767px) {
@@ -293,50 +204,19 @@
         }
     }
 }
-.desktopMenu {
-    display: none;
-    button {
-        padding: 12px 10px 11px 10px;
-        @media only screen and (min-width: 992px) {
-            padding: 12px 15px 11px 15px;
-        }
-    }
-    @media only screen and (min-width:768px) {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-    }
-}
 .mobHamburger {
     display: none;
     @media only screen and (max-width: 767px) {
         display: block;
     }
 }
-.mat-button {
-    min-width: auto;
-    padding: 0;
-    color: rgba(0, 0, 0, 0.7);
-}
- ::ng-deep .swal2-styled.swal2-confirm {
-    // border: 1px solid #C02222 !important;
-    // background-color: #ffffff !important;
-    height: 41.25px !important;
-    background-color: #C02222 !important;
-    color: #ffffff !important;
-    // color: #333333 !important;
 
+.lxp-AccountCircle, 
+.lxp-Logout {
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.54);
+    display: inline-block;
+    margin-right: 16px;
+    vertical-align: middle;
 }
-::ng-deep .swal2-styled.swal2-cancel:hover {
-    // border: 1px solid #C02222 !important;
-    // background-color: #ffffff !important;
-    // background-color: #C02222 !important;
-    background-color: #C02222 !important;
-    color: #ffffff !important;
-}
-::ng-deep .swal2-styled.swal2-cancel {
-    height: 41.25px !important;
-    border: 1px solid #C02222 !important;
-    background-color: #ffffff !important;
-    color: #333333 !important;
-}
+//Mobile Ends

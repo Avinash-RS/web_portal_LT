@@ -4,7 +4,7 @@
   <mat-spinner diameter="40" class="mat-spinner-color"></mat-spinner>
 </div>
 
-<div (click)="closePopup()">
+<div class="bodyWrapper" (click)="closePopup()">
   <div class="row">
     <div [ngClass]="expandSearch ? 'mobileSearchRow': 'myCourseSearch'" class="col-12">
       <mat-icon class="glyphicon" (click)="expandSearch = !expandSearch">keyboard_backspace</mat-icon>
@@ -12,19 +12,18 @@
       <input type="text" autocomplete="off" class="form-control search" [(ngModel)]="searchName" />
     </div>
   </div>
-  <div *ngIf="!expandSearch" class="row w-100 mr-0 ml-0">
-    <!-- *ngIf="jobRole?.length < 1" -->
+  <div class="catalogDropdownCol">
+    <div class="mobileIcons">
+      <mat-icon class="searchIcons" (click)="expandSearch = !expandSearch">search</mat-icon>
+      <mat-icon class="filterIcon" [matMenuTriggerFor]="fMenu">filter_alt</mat-icon>
+    </div>
+  </div>
+  <!-- <div *ngIf="!expandSearch" class="row w-100 mr-0 ml-0">
     <div class="col-10 col-sm-10 col-md-4 col-lg-6 col-xl-7 catalogTitle align-middle">
       <div class="f_size_22" style="font-size: 22px;">
         {{'My Courses' | translate }}
       </div>
-      <!-- <div class="mobCourseStatus">
-        <h4><span *ngIf="selectedIndex ==1"> - Ongoing <span>({{onGoingCourseCount}})</span></span></h4>
-        <h4><span *ngIf="selectedIndex ==2"> - Completed <span>({{completedCourseCount}})</span></span></h4>
-        <h4><span *ngIf="selectedIndex ==3"> - All <span>({{allCourseCount}})</span></span></h4>
-      </div> -->
     </div>
-
 
     <div class="col-2 col-sm-2 col-md-8 col-lg-6 col-xl-5 catalogDropdownCol">
       <div class="mobileIcons">
@@ -35,16 +34,13 @@
       <div class="row ml-0 mr-0 searchWrapper">
         <div class="col-6 col-md-7 col-lg-7 col-xl-7 searchCol text-right">
 
-          <!---------------Multi-level dropdown------------->
           <div class="inner-addon searchDiv right-addon" style="display: none;">
             <input type="text" autocomplete="off" [ngClass]="searchExpand? 'form-control search' :'form-control searchNormal'"
               [(ngModel)]="searchName" placeholder="Search courses..." />
-              <!-- (keyup)="getDashboardMyCourse(userDetailes.user_id, userDetailes._id)" -->
             <em class="material-icons pointer iconsSearch" *ngIf="!searchExpand"
               (click)="searchExpand = !searchExpand">search</em>
             <em class="material-icons pointer iconsSearch" *ngIf="searchExpand"
               (click)="searchExpand = !searchExpand; searchName=''">close</em>
-            <!-- <mat-icon class="glyphicon" (click)="searchExpand = !searchExpand">search</mat-icon> -->
           </div>
         </div>
         <div class="col-6 col-md-5 col-lg-5 col-xl-5 availableCol" *ngIf="showDrpdwnBtn" style="display: none;">
@@ -57,40 +53,32 @@
 
                 <ul class="dropdown-menu first-level multi-level" role="menu" id="dropMenu" aria-labelledby="dropdownMenu">
                   <span *ngFor="let item of categories">
-                    <!-- viewCourse(item,item.categoryName,item.totalCount) -->
                     <li *ngIf="item.subCategory == null" class="dropdown-item" (click)="getCoureBasedOnCatalog(dropDownCategoryDetails,item,'',''); viewCourse(item,previewDialog, item.categoryName,item.totalCount)">
-                      <!-- <span *ngIf="item.categoryName.length > 17">{{(item?.categoryName | titlecase | slice:0:17)+'...'}}</span> -->
+                      
                       <span>{{item?.categoryName | titlecase}}</span>
                       <span class="matBadgeNew" matBadge="{{item.totalCount}}" matBadgeOverlap="false"></span>
                     </li>
   
                     <li *ngIf="item.subCategory && item.subCategory.length > 0" class="dropdown-submenu dropdown-item">
-                      <!-- tooltip="{{item?.categoryName | titlecase}}"  placement="top" -->
                       <span>{{item?.categoryName | titlecase}}</span>
                       <span class="dynamicBagde" matBadge="{{item.totalCount}}" matBadgeOverlap="false"></span>
-                      <!----------------------------Sub menu----------------------->
                       <ul class="dropdown-menu subMenu">
                         <span *ngFor="let subchild of item.subCategory">
                           <li *ngIf="subchild.superSubCategory == null" class="dropdown-item superSubMenuItem">
-                            <!-- tooltip="{{subchild.subCategoryName | titlecase}}"  placement="top" -->
                             <span class="superSubSpan" *ngIf="subchild.subCategoryName.length > 17">{{subchild.subCategoryName | titlecase}}</span>
                             <span *ngIf="subchild.subCategoryName.length <= 17">{{subchild.subCategoryName | titlecase}}</span>
                             <span class="matBadgeSubmenu" matBadge="{{subchild.totalCount}}" matBadgeOverlap="false"></span>
                           </li>
   
                           <li *ngIf="subchild.superSubCategory && subchild.superSubCategory.length > 0" class="dropdown-submenu dropdown-item">
-                              <!-- tooltip="{{subchild.subCategoryName | titlecase}}" placement="top" -->
                               <span class="superSubSpan" *ngIf="subchild.subCategoryName.length >17">{{subchild.subCategoryName | titlecase }}</span>
                               <span *ngIf="subchild.subCategoryName.length <=17">{{subchild.subCategoryName | titlecase}}</span>
                               <span class="matBadgeSubmenu" matBadge="{{subchild.totalCount}}" matBadgeOverlap="false"></span>
   
-                            <!------------------------------Super sub menu----------------------------------->
                             <ul class="dropdown-menu superSubMenu">
                               <span *ngFor="let superChild of subchild.superSubCategory">
-                                <!-- viewCourse(item,superChild.superSubCategoryName,superChild.totalCount) -->
                                 <li class="dropdown-item superSubMenuItem"
                                   (click)="menuSelect(subchild,superChild); viewCourse(item,previewDialog,superChild.superSubCategoryName,superChild.totalCount); getCoureBasedOnCatalog(dropDownCategoryDetails,item,subchild.subCategoryId, superChild.superSubCategoryId)">
-                                  <!-- tooltip="{{superChild.superSubCategoryName | titlecase}}" placement="top" -->
                                   <span class="superSubSpan" *ngIf="superChild.superSubCategoryName.length > 17">{{superChild.superSubCategoryName | titlecase }}</span>
                                   <span *ngIf="superChild.superSubCategoryName.length <= 17">{{superChild.superSubCategoryName | titlecase}}</span>
                                   <span class="matBadgesuperSub" matBadge="{{superChild.totalCount}}" matBadgeOverlap="false"></span>
@@ -102,80 +90,36 @@
                       </ul>
                     </li>
                   </span>
-                  <!-- *ngIf="!showAvailableCourse" -->
-                  <!-- <span class="availableCourseSpinner">
-                  <mat-spinner diameter="30" class="mat-spinner-color"></mat-spinner>
-                  </span> -->
                 </ul>
               </button>
             </span>
           </div>
-
-          <!-- <div class="inner-addon searchDiv right-addon">
-            <mat-icon class="glyphicon">search</mat-icon>
-            <input type="text" (click)="searchExpand = !searchExpand" class="form-control search"
-              [(ngModel)]="searchName" (keyup)="getEnrolledCourses('', '', '', '', searchName,false)"
-              placeholder="Search courses..." />
-          </div> -->
         </div>
       </div>
       <div>
-        <!-- <mat-button class="available-course-btn" [matMenuTriggerFor]="menunew" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()" >
-                <span class="lxp-text">{{catalogueDetails?.catalogueName | titlecase}} <mat-icon class="dropdownicon">expand_more</mat-icon></span>
-              </mat-button>
-                <mat-menu focusOnOpen = false  #menunew="matMenu" [overlapTrigger]="false" class="customize mouseleave">
-                  <div (mouseleave)="menuTrigger.closeMenu()">
-                    <button  *ngFor="let category of categoryDetails" mat-menu-item (click)="getCoureBasedOnCatalog(catalogueDetails,category,previewDialog)">
-                      <span>{{category.categoryName | titlecase}}</span>
-                        <span class="matBadge"   matBadge="{{category.totalCount}}"  matBadgeOverlap="false"></span>
-                    </button>
-                  </div>
-                  </mat-menu> -->
       </div>
       <div class="filterMenu">
-      
       </div>
     </div>    
-  </div>
+  </div> -->
 
   <!-- Desktop tab starts here -->
   <div class="row bodybg desktopWrapper">
     <div class="col-12 matTabCol">
-      <!-- <div class="catPost">
-            <span *ngFor="let namesss of categoryDetails" class="cathd1">
-                <button *ngIf="namesss.enrollCount"  
-                class="catnamesss" matBadge="{{namesss.enrollCount}}"
-                 matBadgeOverlap="false" 
-                 (click)="selectedIndex = 3; getEnrolledCourses(catalogueDetails.catalogueId,namesss.categoryId)"> {{namesss.categoryName | titlecase}}</button>
-            </span>
-            <span></span>
-            </div> -->
       <mat-tab-group #tabs (selectedTabChange)="courseTabChange($event,userDetailes.user_id,userDetailes._id);"
         [(selectedIndex)]="selectedIndex" mat-align-tabs="start" animationDuration="1000ms"
         class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0">
         <mat-tab>
-          <!--  <div class="row mt-3">
-          <div class="col-12 m-auto">
-            <span class="menuBtnHoriz">{{
-              categoryNamePrint | titlecase
-            }}</span>
-          </div>
-        </div> -->
-
           <ng-template matTabLabel>
             <div style="display: flex !important;">
-              <span class="tabsc" matBadge="{{
-                jobRoleSelected === true
-                  ? 1
-                  : onGoingCourseCount
-              }}" matBadgeOverlap="false">{{ 'Ongoing' | translate }}</span>
+              <span class="tabsc" matBadge="{{ jobRoleSelected === true ? 1 : onGoingCourseCount }}" matBadgeOverlap="false">{{ 'OOOOOOOOOOOOOOO' | translate }}</span>
               <!-- NOT WORKING -->
             </div>
           </ng-template>
 
           <!-- Card start -->
           <div *ngIf="!showSkeleton; else skeletonLoad">
-          <div *ngFor="let course of courseDetailsList | filter: searchName">
+          <div class="courseCard" *ngFor="let course of courseDetailsList | filter: searchName">
             <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
           </div>
           </div>
@@ -197,34 +141,19 @@
         <mat-tab>
           <ng-template matTabLabel>
             <div style="display: flex !important;">
-              <span class="tabsc" matBadge="{{
-                  jobRoleSelected === true
-                    ? jobOnGoingCourseCount
-                    : onGoingCourseCount
-                }}" matBadgeOverlap="false">{{ "Ongoing" | translate  }}</span>
+              <span class="tabsc" matBadge="{{ jobRoleSelected === true ? jobOnGoingCourseCount : onGoingCourseCount }}" matBadgeOverlap="false">{{ "Ongoing" | translate  }}</span>
             </div>
           </ng-template>
 
           <!-- Card start -->
           <div *ngIf="!showSkeleton; else skeletonLoad">
-          <div *ngFor="let course of courseDetailsList  | filter: searchName">
+          <div class="courseCard" *ngFor="let course of courseDetailsList  | filter: searchName">
             <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
           </div>
           </div>
           <!-- card end -->
 
           <div *ngIf="showSkeleton==false && onGoingCourseCount === 0">
-            <!-- <mat-card class="coursebg width_90 errorCard">
-              <div class="row width_90 no_margin">
-                <div class="col-4 col-sm-4 col-md-1 display_flex pointer no_pl mt-4" (click)="gotoDesc(course)">
-                  <img alt="Course Img" src="assets/noCourseNewImg.svg" class="courseImgs" />
-                </div>
-                <div class="col-8 col-md-11 no_pl errorboxx">
-                  <span style="font-size: medium">{{ "You have no ongoing courses at the moment." | translate }}</span>
-                </div>
-              </div>
-            </mat-card>
-            <hr class="hr-tag" /> -->
             <mat-card class="noSessionCard color-yellow-card-status">
               <div class="d-flex justify-content-between align-items-center flexStyle">
                 <div class="sessionImg">
@@ -246,8 +175,7 @@
               }}" matBadgeOverlap="false">{{ "Completed" | translate }}</span>
           </ng-template>
           <div *ngIf="!showSkeleton; else skeletonLoad">
-            <div *ngFor="let course of courseDetailsList  | filter: searchName">
-              <!-- show 100% by default for completed courses // time-being for pilot run -->
+            <div class="courseCard" *ngFor="let course of courseDetailsList  | filter: searchName">
               <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
               <div style="border-bottom: 1px solid #cccccc7a"></div>
             </div>
@@ -275,7 +203,7 @@
               }}" matBadgeOverlap="false">{{ "All" | translate }}</span>
           </ng-template>
           <div *ngIf="!showSkeleton; else skeletonLoad">
-          <div *ngFor="let course of courseDetailsList  | filter: searchName">
+          <div class="courseCard" *ngFor="let course of courseDetailsList  | filter: searchName">
             <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
           </div>
         </div>
@@ -294,8 +222,6 @@
           </div>
         </mat-tab>
         <!-----------------------------------Category tabs----------------------------->
-
-
       </mat-tab-group>
       <button class="menuBtn" mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>more_vert</mat-icon>
@@ -306,6 +232,9 @@
           <span>{{ categorytab.categoryName }}</span>
         </button>
       </mat-menu>
+      <div class="browseCourse">
+        <button (click)="openWin()">Browse Course</button>
+      </div>
     </div>
   </div>
 
@@ -342,58 +271,58 @@
         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
           <div class="row">
             <div class="col-12 col-sm-12 col-md-4 col-lg-2">
-              <ngx-skeleton-loader appearance="circle" animation="pulse"
+              <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" appearance="circle" animation="pulse"
                 [theme]="{width: '190px',height: '120px','border-radius': '10px'}">
               </ngx-skeleton-loader>
             </div>
             <div class="col-12 col-sm-12 col-md-8 col-lg-4">
-              <ngx-skeleton-loader count="7" animation="pulse"></ngx-skeleton-loader>
+              <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" count="7" animation="pulse"></ngx-skeleton-loader>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-3">
               <div class="row">
-                <ngx-skeleton-loader count="1" animation="pulse"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" count="1" animation="pulse"></ngx-skeleton-loader>
                 <div class="col">
-                  <ngx-skeleton-loader appearance="circle" animation="pulse"
+                  <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" appearance="circle" animation="pulse"
                     [theme]="{width: '100px',height: '80px','border-radius': '10px'}">
                   </ngx-skeleton-loader>
                 </div>
                 <div class="col">
-                  <ngx-skeleton-loader count="4" animation="pulse"></ngx-skeleton-loader>
+                  <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" count="4" animation="pulse"></ngx-skeleton-loader>
                 </div>
               </div>
               <div class="row">
-                <ngx-skeleton-loader count="1" animation="pulse"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" count="1" animation="pulse"></ngx-skeleton-loader>
                 <div class="col">
-                  <ngx-skeleton-loader appearance="circle" animation="pulse"
+                  <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" appearance="circle" animation="pulse"
                     [theme]="{width: '100px',height: '80px','border-radius': '10px'}">
                   </ngx-skeleton-loader>
                 </div>
                 <div class="col">
-                  <ngx-skeleton-loader count="4" animation="pulse"></ngx-skeleton-loader>
+                  <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" count="4" animation="pulse"></ngx-skeleton-loader>
                 </div>
               </div>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-3">
               <div class="row">
-                <ngx-skeleton-loader count="1" animation="pulse"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" count="1" animation="pulse"></ngx-skeleton-loader>
                 <div class="col">
-                  <ngx-skeleton-loader appearance="circle" animation="pulse"
+                  <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" appearance="circle" animation="pulse"
                     [theme]="{width: '100px',height: '80px','border-radius': '10px'}">
                   </ngx-skeleton-loader>
                 </div>
                 <div class="col">
-                  <ngx-skeleton-loader count="4" animation="pulse"></ngx-skeleton-loader>
+                  <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" count="4" animation="pulse"></ngx-skeleton-loader>
                 </div>
               </div>
               <div class="row">
-                <ngx-skeleton-loader count="1" animation="pulse"></ngx-skeleton-loader>
+                <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" count="1" animation="pulse"></ngx-skeleton-loader>
                 <div class="col">
-                  <ngx-skeleton-loader appearance="circle" animation="pulse"
+                  <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" appearance="circle" animation="pulse"
                     [theme]="{width: '100px',height: '80px','border-radius': '10px'}">
                   </ngx-skeleton-loader>
                 </div>
                 <div class="col">
-                  <ngx-skeleton-loader count="4" animation="pulse"></ngx-skeleton-loader>
+                  <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" count="4" animation="pulse"></ngx-skeleton-loader>
                 </div>
               </div>
             </div>
@@ -413,11 +342,6 @@
           <span class="f_wt_600 size catnamenew" *ngIf="!availableCource">{{ categoryPopupData  | titlecase}}
             ({{categoryCount}})</span>
         </div>
-        <!-- <div class="col-0 col-sm-0 col-md-0 col-lg-6"> -->
-        <!-- <div class="col-4">
-            <input  matInput class="form-control popupsearch" placeholder="Search" [(ngModel)]="courseSearch">
-        </div> -->
-        <!-- </div> -->
         <div class="col-4 text-right">
           <mat-icon class="arrowIcon mr-2" *ngIf="availableCource" aria-hidden="false"
             (click)="closedialogbox((availableCource = false))">clear</mat-icon>
@@ -464,7 +388,6 @@
             <div class="col-12 col-sm-12 col-md-6 col-lg-4 mt-4"
               *ngFor="let course of allcourses | search : courseSearch">
 
-              <!-- <div class="col-4 mt-4" *ngFor="let course of allcourses | search : courseSearch"> -->
               <mat-card class="box-shadow">
                 <div class="row">
                   <div class="col-12 imageover">
@@ -473,7 +396,6 @@
 
                       <div class="overlayimage">
                         <p class="shortdesc h-50">
-                          <!-- {{course.course_description}} -->
                           {{(course.course_description?.length>122)? (course.course_description | slice:0:122)+'...':(course.course_description) }}
                         </p>
                       </div>
@@ -507,55 +429,10 @@
             </span>
           </div>
         </ng-container>
-        <!-- <div class="col errorDialouge" *ngIf="categoryCount < 1 && result.length === 0">
-        <span style="font-size: medium;">
-        No courses found
-        </span>
-        </div> -->
       </div>
     </mat-dialog-content>
   </ng-template>
 
-
-
-  <!-- Model for mobile user  -->
-  <!-- data-toggle="modal" data-target="#myModal" -->
-  <!-- <div class="modal" *ngIf="show" id="myModal" role="dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span style="font-size:22px; color: red;">{{'Alert !' | translate }}</span>
-        </div>
-        <div class="modal-body">
-            <p class="f_size_16">{{'Courses works best in Laptop / Desktop.' | translate }}</p>
-            <p class="f_size_16">{{'Accessing courses via mobile is forbidden.' | translate }} </p>
-            <div class="row">
-                <div class="col-8">
-                    <p><b>{{'Recommended browsers' | translate }}</b></p>
-                </div>
-                <div class="col-1">
-                    <a class="showbtn" (click)="alterDescriptionText()"> {{ showShortDesciption ? '>>': '<<' }}</a>
-                </div>
-            </div>
-            <div [ngClass]="{'show-less': showShortDesciption}">
-                <p>{{'L&T supports the most recent versions of the following browsers.' | translate }}</p>
-                <ul>
-                    <li>{{'Google Chrome' | translate }} ({{'recommended' | translate }})</li>
-                    <li>{{'Firefox' | translate }}</li>
-                    <li>{{'Safari' | translate }}</li>
-                    <li>{{'Internet Explorer 11' | translate }}</li>
-                    <li>{{'Microsoft Edge' | translate }}</li>
-
-                </ul>
-                <p>If you're using an older browser , updating your browser can help solve problems.</p>
-            </div>
-
-
-        </div>
-        <div class="modal-footer">
-            <button class="roundbtn" data-dismiss="modal" (click)="close()">Close</button>
-        </div>
-    </div>
-</div> -->
 </div>
 <!----------------------- Overlay available cources screen -------------------------------->
 <div class="container" [ngClass]="availableCource == true ? 'availableContainer' : 'availableCont'">
@@ -574,11 +451,6 @@
         <div class="parrentAccordian">
           <div class="row w-100 h-100">
             <div class="col-12 m-auto pr-0">
-              <!-- viewCourse(
-                category,
-                category.categoryName,
-                category.totalCount
-              ) -->
               <div *ngIf="!category.subCategory" (click)="
                   getCoureBasedOnCatalog(dropdownCatDetails, category, '', '')" (click)="
                   isExpandCourseTemp &&
@@ -759,8 +631,3 @@
     </div>
   </div>
 </div>
-<!-- <div class="footer">
-  <span class="powered">
-    <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span>
-  </span>
-</div> -->

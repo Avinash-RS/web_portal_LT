@@ -3,47 +3,14 @@
 </mat-toolbar>
 <div class="limiter">
     <div class="container-reg200">
-        <!-- <div class="col-md-8 col-sm-12 col-12">
-            <img alt="" class="beforeloginimg" style="width : inherit" src="assets/learner/lapBG.jpeg">
-            <div class="row footer20">
-                <div class="col-8">
-                  <span class="footertext">© 2020 L&T EduTech.</span>
-                </div>
-                <div class="col-4">
-                  <span class="powered">Powered by:
-                    <img class="footericon" alt="" src="assets/learner/LT_small.svg">
-                  </span>
-                </div>
-              </div>
-        </div> -->
         <div class="igniteLogo col-xl-8 col-md-6 col-sm-12 col-12 border-right no_pl">
-            <!-- <img alt="" class="lnt_logo" src="assets/learner/WHITE_LNT T_LOGO.svg"> -->
             <div class="main-logo">
             <img alt="" class="beforeloginimg" style="width : inherit" src="assets/learner/iGGnite_SVG.svg">
           </div>
-            <!-- <div class="row footer20">
-              <div class="col-8">
-                <div class="powered">
-                  <img class="footericon" alt="" src="assets/learner/LnT-Full-black-logo.svg">
-                 <span class="forgot1">2020 © L&T EduTech All Rights Reserved</span> 
-                </div>
-              </div>
-              <div class="col-4">
-                <span class="powered">
-                  <img class="footericon" alt="" src="assets/learner/LT_small.svg">
-                </span>
-              </div>
-            </div> -->
-          </div>
-        
+        </div>
         <div class="loginWrapper col-xl-4 col-md-6 col-sm-12 col-12">
             <div class="wrap-reg">
-                <!-- <img class="kauhalya" alt="" src='assets/images/l&t.png'> -->
                 <form class="animated animatedFadeInUp fadeInUp" [formGroup]="registerForm" autocomplete="off">
-
-            
-                  
-                    <!-- <div class="borderbox"> -->
                         <h1 class=" animated animatedFadeInUp fadeInUp signIn">{{'Create an account' | translate}}</h1><br>
                         <mat-form-field appearance="outline">
                           <mat-label class="label-color">{{'Title' | translate}}</mat-label>
@@ -52,7 +19,8 @@
                               {{tit.title}}
                             </mat-option>
                           </mat-select>
-                          <mat-icon matPrefix class="icon-color">person_outline</mat-icon>
+                          <!-- <mat-icon matPrefix class="icon-color">person_outline</mat-icon> -->
+                          <i class="icon-color lxp-User" matPrefix></i>
                           <mat-error class="error" *ngIf="registerForm.get('title').hasError('required') && !registerSuccess">Title is required </mat-error>
                         </mat-form-field>
                      
@@ -62,14 +30,10 @@
                             <mat-label class="label-color">{{'Full name' | translate}}</mat-label>
                             <input matInput id="fullname"  #fullname [placeholder]="'Enter the full name' | translate"  formControlName="fullname" 
                               maxlength="50" required>
-                              <!-- <datalist id="title">
-                                <option value="Mr"></option>
-                                <option value="Ms"></option>
-                              </datalist> -->
-                            <mat-icon matPrefix class="icon-color">person_outline</mat-icon>
-                          
-                            <!-- <mat-error class="error" *ngIf="f.fullname.touched && f.fullname.errors">Fullname is required</mat-error>
-                            <mat-error class="error" *ngIf="f.fullname.errors.pattern">Fullname is invalid</mat-error> -->
+
+                            <!-- <mat-icon matPrefix class="icon-color">person_outline</mat-icon> -->
+                            <i class="icon-color lxp-User" matPrefix></i>
+
                             <mat-error class="error"  *ngIf="registerForm.get('fullname').hasError('required') && !registerSuccess">
                                 {{'Full name is required' | translate}}
                               </mat-error>
@@ -85,42 +49,29 @@
                                 {{'Full name is invalid' | translate}}
                               </mat-error>
                           </mat-form-field>
-                        <!-- <div class="form-group">
-                            <label class="fromLabel">Full Name</label>
-                            <input type="text" id="fullname" #fullname formControlName="fullname" minlength="3"
-                                maxlength="50" class="form-control"
-                                [ngClass]="{ 'is-invalid': f.fullname.touched && f.fullname.errors }" />
-                            <div *ngIf="f.fullname.touched && f.fullname.errors" class="invalid-feedback">
-                                <div *ngIf="f.fullname.errors.required">Full Name is required</div>
-                                <div *ngIf="f.fullname.errors.pattern">Full Name is invalid</div>
-                                <div *ngIf="f.fullname.errors.maxlength || f.fullname.errors.minlength">Full name must
-                                    be
-                                    3-50 characters long </div>
-                            </div>
-                        </div> -->
+
                         <br><br>
 
                         <mat-form-field appearance="outline">
                           <mat-label class="label-color">{{'Email' | translate}}</mat-label>
                           <input matInput  id="email" #email placeholder="Enter the email"  formControlName="email" maxlength="64"
                           required>
-                          <mat-icon matPrefix class="icon-color">mail_outline</mat-icon>
+                          <!-- <mat-icon matPrefix class="icon-color">mail_outline</mat-icon> -->
+                          <i class="icon-color lxp-MailOutline" matPrefix></i>
                           <mat-error class="error" *ngIf="registerForm.get('email').hasError('required') && !registerSuccess">{{'Email is required' | translate}}</mat-error>
-                          <!-- <mat-error class="error" *ngIf="f.email.errors.required">Email ID is required</mat-error> -->
+
                           <mat-error class="error" *ngIf="registerForm.get('email').hasError('pattern')">{{'Please enter a valid email address' | translate}}</mat-error>
                         </mat-form-field>
                         <br><br>
 
                         <mat-form-field appearance="outline">
                           <mat-label class="label-color">{{'Mobile number' | translate}}</mat-label>
-                          <input matInput  [placeholder]="'Enter mobile number without country code' "   minlength="10" pattern="[1-9]{1}[0-9]{9}"
+                          <input matInput  [placeholder]="'Enter mobile number without country code'" minlength="10" pattern="[1-9]{1}[0-9]{9}"
                            mask="0000000000"  maxlength="10"
                            formControlName="mobile"   [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors }">
-                          <mat-icon matPrefix class="icon-color" fontSet="material-icons-outlined">
-                            phone</mat-icon>
-                          <!-- <mat-error class="error"  *ngIf="registerForm.get('mobile').hasError('required')">
-                            {{'Mobile number is required' }}
-                          </mat-error> -->
+                          <!-- <mat-icon matPrefix class="icon-color" fontSet="material-icons-outlined">
+                            phone</mat-icon> -->
+                            <i class="icon-color lxp-Phone" matPrefix></i>
                           <mat-error class="error"  *ngIf="registerForm.get('mobile').hasError('minlength')">
                             {{'Mobile number must be 10 digits' | translate }}
                           </mat-error>
@@ -138,16 +89,6 @@
                         </div>
                         <br>
                         <div class="">
-  
-                            <!-- <label class="fromLabel">Email ID</label>
-                            <input type="text" id="email" #email formControlName="email" maxlength="64"
-                                class="form-control" [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }"
-                                required />
-                            <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
-                                <div *ngIf="f.email.errors.required">Email is required</div>
-                                <div *ngIf="f.email.errors.pattern">Email ID is invalid</div>
-                            </div><br> -->
-
                             <div class="row">
                                 <div class="col-12">
                                     <div class="alert1"> <strong>{{'Note' | translate}}</strong> {{': Full name will be used in your certificates' | translate }}</div>
@@ -162,23 +103,12 @@
                                 <a [routerLink]="['/Learner/login']"><span class="accsignIn"> {{'Sign in' | translate}}</span></a>
                             </div>
                         </div>
-                    <!-- </div> -->
                 </form>
                 <div class=""  id="footer">
                   <div class="col-12">
                     <span class="">2020 © L&T EduTech All Rights Reserved</span> 
                   </div>
                 </div>
-                <!-- <div class="row footer20">
-                    <div class="col-7">
-                        <span class="footertext">© 2020 L&T EduTech.</span>
-                    </div>
-                    <div class="col-5">
-                        <span class="powered">Powered by :
-                            <img class="footericon" alt="" src="assets/learner/LT_small.svg">
-                        </span>
-                    </div>
-                </div> -->
             </div>
 
         </div>

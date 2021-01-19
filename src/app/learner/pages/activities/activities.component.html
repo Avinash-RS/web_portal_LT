@@ -1,5 +1,5 @@
+<app-header></app-header>
 <app-performance-page-mobile [performDetailPageData]="perfornDetaildata" *ngIf="performdetailPageView"></app-performance-page-mobile>
-<app-header *ngIf="!performdetailPageView"></app-header>
 <div class="con-1" *ngIf="!performdetailPageView">
   <!-- <span class="back" routerLink="/Learner/MyCourse" routerLinkActive="active"> < Back</span><br><br> -->
   <span class="redHover">
@@ -688,6 +688,7 @@
                       </ng-template>
                     </owl-carousel-o> -->
                   </div>
+
                   <div class="col-md-4 col-sm-12 col-12 third" *ngIf="project.projectActivity.submit_status == 'notsubmitted' || project.projectActivity.grade_status !== 'Evaluated'">
                     <div class="f_size_16 f_wt_600 align-center work">Your work</div>
                     <div [ngClass]="project.projectActivity.showLearnerList ? 'box-0-3' : 'box-0-2'">
@@ -876,7 +877,22 @@
                         </div>
                       </ng-template>
                     </owl-carousel-o> -->
-
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 d-flex justify-content-end flex-column">
+                    <div class="">
+                      <div class="text-left">
+                        <p class="feedBackTxt">Feedback</p>
+                          <textarea disabled class="textArea" [value]='project.projectActivity.comments'></textarea>
+                      </div>
+                    </div>
+                    <div class="">
+                      <div class="">
+                        <button mat-stroked-button class="AssignmentBtn w-100" (click)="openDocument(projectPreviewDialog, project.projectActivity.assessmentreport ? project.projectActivity.assessmentreport[0] : null, project?.projectActivity?.assessmentreport)">
+                          <mat-icon class="assignmentIcon mr-2">wysiwyg</mat-icon>
+                          Assessment report
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
