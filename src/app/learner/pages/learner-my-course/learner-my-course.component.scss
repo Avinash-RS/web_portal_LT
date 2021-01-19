@@ -707,9 +707,6 @@ hr {
 }
 
 .btl-alin {
-  /* margin-top: -0.5%; */
-  // text-align: left;
-  /* justify-content: end; */
   border: 1px solid $lxp-theme-green !important;
   position: absolute;
   margin-left: -10%;
@@ -717,9 +714,6 @@ hr {
   width: 100px;
   z-index: 99;
   height: 30px;
-  // left: 268px;
-  // bottom: 5px;
-  // margin-left: 25%;
 }
 
 ::ng-deep.mat-tab-label,

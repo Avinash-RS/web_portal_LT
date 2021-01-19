@@ -2,49 +2,58 @@
     <app-header></app-header>
     <!-- TITLE AND BACK -->
     <div class="d-flex justify-content-start align-items-center titlebar">
-        <div class=" f_size_15 pointer d-flex align-items-center backcolor redHover" (click)="goBack()">
-            <mat-icon class="material-icons f_size_15 mt-2 backarrow">arrow_back_ios</mat-icon>  Back </div>
-       <div class="f_size_19" style="margin-left: 10px;"> | &nbsp;&nbsp;{{this.course?.course_name}}</div>
+        <div class="pointer d-flex align-items-center backcolor redHover" (click)="goBack()">
+            <!-- <mat-icon class="material-icons backarrow">arrow_back_ios</mat-icon>  Back  -->
+            <i class="lxp-Arrow backArrow"></i><span>Back</span>
+        </div>
+       <div class="courseTitle"> | <span>{{this.course?.course_name}}</span></div>
     </div>
     <!-- COURSE TOOL BAR -->
-    <div class="d-flex toolBar">
+    <div class="d-flex justify-content-between align-items-center toolBar">
        <div class="d-flex align-items-center leftContent">
            <!-- <div class="hamburger" [ngClass]="drawersOpen ? '' : 'isActive'">
                 <div class="hamburgerInner" (click)="drawersOpen=drawersOpen?false:true"></div>
             </div> -->
-            <mat-icon class="f_size_23 mt-1" (click)="drawersOpen=drawersOpen?false:true">menu</mat-icon>
+            <!-- <mat-icon class="f_size_23 mt-1" (click)="drawersOpen=drawersOpen?false:true">menu</mat-icon> -->
+            <i class="lxp-HamburgerMenu" (click)="drawersOpen=drawersOpen?false:true"></i>
            <div class="navigation d-flex align-items-center" *ngIf="scromModuleData">
-               <div>
-                <mat-icon title="Previous Topic" class="f_size_23 mt-1" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()">skip_previous</mat-icon>
+               <div class="leftArrow">
+                <!-- <mat-icon title="Previous Topic" class="f_size_23 mt-1" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()">skip_previous</mat-icon> -->
+                <i class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()"></i>
                </div>
                <div class="currentTopic" title="{{scromModuleData[moduleHolder]?.children[nextPrevHolder].title}}">
                 <span >{{scromModuleData[moduleHolder]?.children[nextPrevHolder].title}}</span>
                </div>
-               <div>
-                <mat-icon title="Next Topic"  class="f_size_23 mt-1" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()">skip_next</mat-icon>
+               <div class="rightArrow">
+                <!-- <mat-icon title="Next Topic"  class="f_size_23 mt-1" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()">skip_next</mat-icon> -->
+                <i class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()"></i>
                </div>
            </div>
        </div>
        <div class="rightContent d-flex justify-content-end align-items-center">
-        <span class="fullScr d-flex align-items-center">
-            <mat-icon title="Fullscreen" (click)="makeFullScreen()" class="mr-2">fullscreen</mat-icon>
-        </span>
-           <span class="d-flex align-items-center" title="Resources" (click)="openResourse(resourseWindow)"><mat-icon >format_list_bulleted</mat-icon></span>
+            <span class="fullScr d-flex align-items-center iconSize">
+                <!-- <mat-icon title="Fullscreen" (click)="makeFullScreen()" class="mr-2">fullscreen</mat-icon> -->
+                <i title="Fullscreen" (click)="makeFullScreen()" class="lxp-Fullscreen"></i>
+            </span>
+            <span class="d-flex align-items-center iconSize">
+                <i title="Resources" (click)="openResourse(resourseWindow)" class="lxp-MenuList"></i>
+               <!-- <mat-icon >format_list_bulleted</mat-icon> -->
+            </span>
        </div>
     </div>
     <!-- TOC AND PLAYER -->
     <div class="contentHeight d-flex">
         <!-- TOC DATA -->
         <div class="tocSize" [ngClass]="drawersOpen ? '': 'drawersOpen'">
-
             <mat-card *ngFor="let res of scromModuleData; let i = index" multi displayMode=""
                 (click)="getSelectedIndex(i)" class="topicCard">
-                        <mat-card-title (click)="moduleExpand(res,i)" class="d-flex justify-content-between align-items-center ">
+                        <mat-card-title (click)="moduleExpand(res,i)" class="d-flex justify-content-between align-items-center">
                             <div class="tocTitle">Week-{{i+1}}</div>
                             <div>
-                                <mat-icon  class="f_size_23 colorBlack">
+                                <i class="expandCollapse" [ngClass]="res.expanded?'lxp-Collapse':'lxp-Expand'"></i>
+                                <!-- <mat-icon  class="f_size_23 colorBlack">
                                     {{res.expanded?'remove_circle_outline':'add_circle_outline'}}
-                                </mat-icon>
+                                </mat-icon> -->
                             </div>
                         </mat-card-title>
                         <mat-card-subtitle (click)="moduleExpand(res,i)" class="d-flex justify-content-start align-items-center tocSubTitle">
@@ -114,7 +123,7 @@
           </div>
         </div>
       </mat-dialog-title>
-      <mat-dialog-content class="no_padding no_margin">
+      <mat-dialog-content class="no_padding no_margin popupTab">
         <div>
                 <mat-tab-group #demo3Tab [(selectedIndex)]="selectedTabIndex" #tabs (selectedTabChange)="tabSelection($event)">
         

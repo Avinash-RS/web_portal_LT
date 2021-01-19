@@ -25,6 +25,9 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  .lxp-HamburgerMenu:before {
+    content: "\e914";
+  }
   .lxp-SelfPaced:before {
     content: "\e926";
   }
