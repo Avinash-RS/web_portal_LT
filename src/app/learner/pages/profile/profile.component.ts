@@ -42,9 +42,9 @@ export class ProfileComponent implements OnInit {
     this.getAllLanguage();
     this.getAllcountry();
     // this.getBoardsUniv();
-    this.getInstitute();
+   // this.getInstitute();
     // this.getDiscipline();
-    this.getSpec();
+  //  this.getSpec();
   }
 
   // to get controls for validation
@@ -135,6 +135,8 @@ export class ProfileComponent implements OnInit {
   editpopup = true;
   resendLabel = false;
   enableMobileEdit: any;
+  collegename;
+  deptname;
   // Percentage
   //   public setTwoNumberDecimal($event) {
   //     $event.target.value = parseFloat($event.target.value).toFixed(2);
@@ -155,6 +157,7 @@ export class ProfileComponent implements OnInit {
       about_you: new FormControl('', [Validators.minLength(3), Validators.maxLength(1000)]),
       gender: new FormControl('', myGlobals.req),
       is_student_or_professional: new FormControl(''),
+      deptName: new FormControl(''),
       languages_known: [''],
       country: ['', myGlobals.req],
       state: ['', myGlobals.req],
@@ -214,34 +217,36 @@ export class ProfileComponent implements OnInit {
         this.userData.user_mobile.mobile_number = morphed
 
         if (profileDetails) {
-          if (profileDetails.qualification.length > 0) {
-            profileDetails.qualification.forEach(v => delete v.__typename);
-          }
-          if (profileDetails.social_media.length > 0) {
-            profileDetails.social_media.forEach(v => delete v.__typename);
-          }
-          if (profileDetails.progress.includes('%')) {
-            profileDetails.progress = Number(profileDetails.progress.slice(0, -1));
-          } else {
-            profileDetails.progress = Number(profileDetails.progress);
-          }
-          if (profileDetails.progress <= 60) {
-            this.gs.preventBackButton();
-          }
-          const qualification = this.profileForm.get('qualification') as FormArray;
-          const certificate = this.profileForm.get('certificate') as FormArray;
-          if (qualification) {
-          while (qualification.length) {
-            qualification.removeAt(0);
-          }}
+          this.collegename = this.userData.user_profile[0].collegeName == null ? '' : this.userData.user_profile[0].collegeName;
+          this.deptname = this.userData.user_profile[0].deptName == null ? '' : this.userData.user_profile[0].deptName;
+          // if (profileDetails.qualification.length > 0) {
+          //   profileDetails.qualification.forEach(v => delete v.__typename);
+          // }
+          // if (profileDetails.social_media.length > 0) {
+          //   profileDetails.social_media.forEach(v => delete v.__typename);
+          // }
+          // if (profileDetails.progress.includes('%')) {
+          //   profileDetails.progress = Number(profileDetails.progress.slice(0, -1));
+          // } else {
+          //   profileDetails.progress = Number(profileDetails.progress);
+          // }
+          // if (profileDetails.progress <= 60) {
+          //   this.gs.preventBackButton();
+          // }
+          // const qualification = this.profileForm.get('qualification') as FormArray;
+          // const certificate = this.profileForm.get('certificate') as FormArray;
+          // if (qualification) {
+          // while (qualification.length) {
+          //   qualification.removeAt(0);
+          // }}
           // localStorage.setItem('user_img',this.urlImage)
-          if (certificate) {
-          while (profileDetails.certificate && profileDetails.certificate.length > 0 && certificate.length) {
-            certificate.removeAt(0);
-          }}
+          // if (certificate) {
+          // while (profileDetails.certificate && profileDetails.certificate.length > 0 && certificate.length) {
+          //   certificate.removeAt(0);
+          // }}
           this.profileForm.patchValue(profileDetails);
           this.getAllState();
-          this.getDistrict();
+          //this.getDistrict();
           // if (profileDetails.qualification.length > 0) {
           //   profileDetails.qualification.forEach((qual, index) => {
           //     let unique = true;
@@ -300,6 +305,9 @@ export class ProfileComponent implements OnInit {
       this.profileForm.value.country && this.profileForm.value.state
       && this.profileForm.value.city_town) {
       this.profileForm.controls.progress.setValue(60);
+    }
+    if(this.deptname){
+      this.profileForm.controls.deptName.setValue(this.deptname)
     }
     if (this.profileForm.value.progress === 60 && this.profileForm.value.certificate && this.profileForm.value.languages_known
       && this.profileForm.value.social_media) {
