@@ -113,7 +113,7 @@
                         
                         <div class="scroll-bar">
                             <ng-container *ngFor="let data of learnerActivityList; let i = index">
-                                <div class="mainCard">
+                                <div class="mainCard" (click)="goToActivities(data)">
                                     <mat-card class="session-card" [ngClass]="{'color-yellow-card-status': data.status === 'On going', 'color-grey-card-status':data.status === 'Completed','color-blue-card-status':data.status === 'Up Coming' }">
                                         <div class="session-sub-card activitiesCard">
                                             <!-- <img *ngIf="data.activity_details.activitytype == 'Live Classroom'" class=float-right src="../../../../assets/images/ms_team.png" width="35" height="35"> -->
