@@ -66,7 +66,7 @@ export class ActivitiesComponent implements OnInit {
   screenHeight: number;
   screenWidth: number;
   // assignmentMessage = false;
-
+  fromCalender = false;
   trendingItration: any = {
     loop: false, // dont make it true
     mouseDrag: true,
@@ -160,8 +160,21 @@ export class ActivitiesComponent implements OnInit {
     }
     this.courseid = this.checkDetails ? this.checkDetails.courseId : localStorage.getItem('Courseid');
     this.courseName = this.checkDetails ? this.checkDetails.courseName : localStorage.getItem('CourseName');
+    var index;
+    if (this.checkDetails?.activityType) {
+      this.fromCalender = true
+      if(this.checkDetails?.activityType == 'Assignment'){
+        index = '0'
+      } else if (this.checkDetails?.activityType == 'Perform'){
+        index = '1'
+      } else {
+        index = '2'
+      }
+    }else{
+      this.fromCalender = false
+       index = localStorage.getItem('userTabLocation');
+    }
     
-    const index = localStorage.getItem('userTabLocation');
     if (index) {
       // tslint:disable-next-line:radix
       this.demo1TabIndex = parseInt(index);
@@ -301,7 +314,11 @@ export class ActivitiesComponent implements OnInit {
   }
 
   goToCourse() {
-    this.route.navigateByUrl('/Learner/MyCourse');
+    if(this.fromCalender){
+      this.route.navigateByUrl('/Learner/calendar');
+    } else {
+      this.route.navigateByUrl('/Learner/MyCourse');
+    }
   }
   getSelectedIndex(i) {
     this.selectedIndex = i;
