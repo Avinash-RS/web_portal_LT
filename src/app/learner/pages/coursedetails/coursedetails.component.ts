@@ -798,9 +798,9 @@ export class CoursedetailsComponent implements OnInit {
    }
 
     if (this.fileType === 'pdf') {
-     //file.path = "https://docs.google.com/gview?url="+file.path +"&embedded=true";
-      this.URIData = file;
-      //this.URIData = file.path
+     file.path = "https://docs.google.com/gview?url="+file.path +"&embedded=true";
+      // this.URIData = file;
+      this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path);
       console.log(this.URIData)
     } else {
     this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path);
