@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'https://devfacade.lntiggnite.com/',
-  scormUrl: 'http://scorm.southindia.cloudapp.azure.com:8089/',
+  scormUrl: 'https://devscorm.lntiggnite.com/',
   apiUrlImg: 'https://devfacade.lntiggnite.com/',
   createCourseApi: 'https://devcourses.lntiggnite.com/',
   wcaapiurl: 'https://devwca.lntiggnite.com/',
