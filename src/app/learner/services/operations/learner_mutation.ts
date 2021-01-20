@@ -148,271 +148,337 @@ export const viewProfile = gql`
     view_profile(user_id:$user_id)
     {
       success
-
+      error_msg
       message {
-
         full_name
-
-
-
         email
-
         user_id
-
-        user_dtl {
-
-          is_admin
-
-          user_id
-
-          username
-
-          password
-
-          created_by_ip
-          created_on
-
-        }
-
-        user_mobile {
-
-          mobile_number
-
-        }
-
-        user_profile {
-
-          _id
-
-          languages_known
-
-          is_student_or_professional
-
-          about_you
-
-          certificate
-
-          user_id
-
-          profile_img
-
-          year_of_birth
-
-          doj_lxp
-
-          progress
-
-          is_active
-
-          gender
-
-          country
-
-          state
-
-          city_town
-
-          student
-
-          professional {
-
-            total_experience
-
-            organization
-
-            job_role
-
-          }
-
-
-
-          social_media {
-
-            link
-
-            img
-
-          }
-
-          last_login
-
-          created_by_ip
-
-          created_by
-
-          created_on
-
-          updated_by_ip
-
-          updated_on
-
-          updated_by
-          qualification {
-
-            qualification
-
-            institute
-
-            board_university
-
-            discipline
-
-            specification
-
-            year_of_passing
-
-            percentage
-
-          }
-
-        }
-
         country_detail {
-
           _id
-
           countryname
-
           countryshortcode
-
+          created_on
+          created_by
+          created_by_ip
+          updated_on
+          updated_by
+          updated_by_ip
           is_active
-
         }
-
         state_detail {
-
           _id
-
           statename
-
           stateshortcode
-
           country
-
+          created_on
+          created_by
+          created_by_ip
+          updated_on
+          updated_by
+          updated_by_ip
           is_active
-
         }
-
         district_detail {
-
           _id
-
           districtname
-
+          created_on
+          created_by
+          created_by_ip
+          updated_on
+          updated_by
+          updated_by_ip
           is_active
-
         }
-
-        qualification {
-
-          board {
-
-            _id
-
-            Board_Id
-
-            Board_Name
-
-            is_active
-
-          }
-
-          discipline {
-
-            _id
-
-            discipline_id
-
-            discipline_name
-
-            discipline_code
-
-            is_active
-
-          }
-
-          institute_detail {
-
-            _id
-
-            institute_id
-
-            institute_name
-
-            institute_code
-
-            is_active
-
-          }
-
-          level_detail {
-
-            _id
-
-            level_id
-
-            level_name
-
-            level_code
-
-            is_active
-
-          }
-
-          specification_detail {
-
-            _id
-
-            specification_id
-
-            specification_name
-
-            specification_code
-
-            is_active
-
-          }
-
-          university {
-
-            _id
-
-            University_Id
-
-            University_Name
-
-            is_active
-
-          }
-
-          year_of_passing
-
-          percentage
-
-
-
-        }
-
         language_detail {
-
           _id
-
           is_active
-
           languagecode
-
           languagename
-
         }
-
-
-
-        progress
-                                }
-
-  }
+        user_dtl {
+          is_admin
+          user_id
+          username
+          password
+          created_by_ip
+          created_on
+        }
+        user_mobile {
+          mobile_number
+        }
+        user_profile {
+          _id
+          user_id
+          profile_img
+          is_active
+          gender
+          country
+          state
+          city_town
+          created_by_ip
+          created_by
+          created_on
+          updated_by_ip
+          updated_on
+          updated_by
+          deptName
+          collegeName
+        }
+       
+      }
+    }
 }
 `;
+
+// export const viewProfile = gql`
+//   mutation view_profile($user_id: String) {
+//     view_profile(user_id:$user_id)
+//     {
+//       success
+
+//       message {
+//         full_name
+//         email
+//         user_id
+//         user_dtl {
+//           is_admin
+//           user_id
+//           username
+//           password
+//           created_by_ip
+//           created_on
+//         }
+//         user_mobile {
+//           mobile_number
+//         }
+//         user_profile {
+//           _id
+//           languages_known
+//           is_student_or_professional
+//           about_you
+//           certificate
+
+//           user_id
+
+//           profile_img
+
+//           year_of_birth
+
+//           doj_lxp
+
+//           progress
+
+//           is_active
+
+//           gender
+
+//           country
+
+//           state
+
+//           city_town
+
+//           student
+
+//           professional {
+
+//             total_experience
+
+//             organization
+
+//             job_role
+
+//           }
+
+
+
+//           social_media {
+
+//             link
+
+//             img
+
+//           }
+
+//           last_login
+
+//           created_by_ip
+
+//           created_by
+
+//           created_on
+
+//           updated_by_ip
+
+//           updated_on
+
+//           updated_by
+//           qualification {
+
+//             qualification
+
+//             institute
+
+//             board_university
+
+//             discipline
+
+//             specification
+
+//             year_of_passing
+
+//             percentage
+
+//           }
+
+//         }
+
+//         country_detail {
+
+//           _id
+
+//           countryname
+
+//           countryshortcode
+
+//           is_active
+
+//         }
+
+//         state_detail {
+
+//           _id
+
+//           statename
+
+//           stateshortcode
+
+//           country
+
+//           is_active
+
+//         }
+
+//         district_detail {
+
+//           _id
+
+//           districtname
+
+//           is_active
+
+//         }
+
+//         qualification {
+
+//           board {
+
+//             _id
+
+//             Board_Id
+
+//             Board_Name
+
+//             is_active
+
+//           }
+
+//           discipline {
+
+//             _id
+
+//             discipline_id
+
+//             discipline_name
+
+//             discipline_code
+
+//             is_active
+
+//           }
+
+//           institute_detail {
+
+//             _id
+
+//             institute_id
+
+//             institute_name
+
+//             institute_code
+
+//             is_active
+
+//           }
+
+//           level_detail {
+
+//             _id
+
+//             level_id
+
+//             level_name
+
+//             level_code
+
+//             is_active
+
+//           }
+
+//           specification_detail {
+
+//             _id
+
+//             specification_id
+
+//             specification_name
+
+//             specification_code
+
+//             is_active
+
+//           }
+
+//           university {
+
+//             _id
+
+//             University_Id
+
+//             University_Name
+
+//             is_active
+
+//           }
+
+//           year_of_passing
+
+//           percentage
+
+
+
+//         }
+
+//         language_detail {
+
+//           _id
+
+//           is_active
+
+//           languagecode
+
+//           languagename
+
+//         }
+
+
+
+//         progress
+//                                 }
+
+//   }
+// }
+// `;
 
 
 export const getStatedetails = gql`
@@ -575,40 +641,27 @@ export const deleteQualification = gql`
   }
 `;
 
-
-
 export const updateProfile = gql`
-  mutation update_profile($user_id: String, $is_student_or_professional: String, $profile_img: String, $year_of_birth: String, $doj_lxp: String,
-    $social_media: [social_media_content], $is_active: Boolean, $progress: String, $gender: String, $languages_known: [String],
-    $country: String, $state: String, $city_town: String, $about_you: String, $certificate: [String], $student: String,
-    $professional: professional_content, $last_login: String, $created_by_ip: String, $created_by: String, $created_on: String,
-    $updated_by_ip: String, $updated_on: String, $updated_by: String,$domain:String!){
+  mutation update_profile($user_id: String, $profile_img: String,
+    $gender: String, $languages_known: [String],
+    $country: String, $state: String, $city_town: String, $created_by_ip: String, $created_by: String, $created_on: String,
+    $updated_by_ip: String, $updated_on: String, $updated_by: String,$domain:String!, $deptName:String){
     update_profile(
       user_id: $user_id,
       profile_img: $profile_img,
-      year_of_birth: $year_of_birth,
-      doj_lxp: $doj_lxp,
-      social_media: $social_media,
-      is_active: $is_active,
-      progress: $progress,
       gender: $gender,
       languages_known: $languages_known,
       country: $country,
       state: $state,
       city_town: $city_town,
-      about_you: $about_you,
-      certificate: $certificate,
-      is_student_or_professional: $is_student_or_professional,
-      student: $student,
-      professional: $professional,
-      last_login: $last_login,
       created_by_ip: $created_by_ip,
       created_by: $created_by,
       created_on: $created_on,
       updated_by_ip: $updated_by_ip,
       updated_on: $updated_on,
       updated_by: $updated_by,
-      domain:$domain
+      domain:$domain,
+      deptName : $deptName,
     ) {
       success
       message
@@ -616,6 +669,47 @@ export const updateProfile = gql`
     }
   }
 `;
+
+
+// export const updateProfile = gql`
+//   mutation update_profile($user_id: String, $is_student_or_professional: String, $profile_img: String, $year_of_birth: String, $doj_lxp: String,
+//     $social_media: [social_media_content], $is_active: Boolean, $progress: String, $gender: String, $languages_known: [String],
+//     $country: String, $state: String, $city_town: String, $about_you: String, $certificate: [String], $student: String,
+//     $professional: professional_content, $last_login: String, $created_by_ip: String, $created_by: String, $created_on: String,
+//     $updated_by_ip: String, $updated_on: String, $updated_by: String,$domain:String!){
+//     update_profile(
+//       user_id: $user_id,
+//       profile_img: $profile_img,
+//       year_of_birth: $year_of_birth,
+//       doj_lxp: $doj_lxp,
+//       social_media: $social_media,
+//       is_active: $is_active,
+//       progress: $progress,
+//       gender: $gender,
+//       languages_known: $languages_known,
+//       country: $country,
+//       state: $state,
+//       city_town: $city_town,
+//       about_you: $about_you,
+//       certificate: $certificate,
+//       is_student_or_professional: $is_student_or_professional,
+//       student: $student,
+//       professional: $professional,
+//       last_login: $last_login,
+//       created_by_ip: $created_by_ip,
+//       created_by: $created_by,
+//       created_on: $created_on,
+//       updated_by_ip: $updated_by_ip,
+//       updated_on: $updated_on,
+//       updated_by: $updated_by,
+//       domain:$domain
+//     ) {
+//       success
+//       message
+
+//     }
+//   }
+// `;
 export const updateMobileonprofile = gql`
 mutation update_mobile_onprofile($user_id: String, $mobile_number: String){
 	update_mobile_onprofile(

@@ -66,7 +66,7 @@ export class ActivitiesComponent implements OnInit {
   screenHeight: number;
   screenWidth: number;
   // assignmentMessage = false;
-
+  fromCalender = false;
   trendingItration: any = {
     loop: false, // dont make it true
     mouseDrag: true,
@@ -160,8 +160,21 @@ export class ActivitiesComponent implements OnInit {
     }
     this.courseid = this.checkDetails ? this.checkDetails.courseId : localStorage.getItem('Courseid');
     this.courseName = this.checkDetails ? this.checkDetails.courseName : localStorage.getItem('CourseName');
+    var index;
+    if (this.checkDetails?.activityType) {
+      this.fromCalender = true
+      if(this.checkDetails?.activityType == 'Assignment'){
+        index = '0'
+      } else if (this.checkDetails?.activityType == 'Perform'){
+        index = '1'
+      } else {
+        index = '2'
+      }
+    }else{
+      this.fromCalender = false
+       index = localStorage.getItem('userTabLocation');
+    }
     
-    const index = localStorage.getItem('userTabLocation');
     if (index) {
       // tslint:disable-next-line:radix
       this.demo1TabIndex = parseInt(index);
@@ -301,7 +314,11 @@ export class ActivitiesComponent implements OnInit {
   }
 
   goToCourse() {
-    this.route.navigateByUrl('/Learner/MyCourse');
+    if(this.fromCalender){
+      this.route.navigateByUrl('/Learner/calendar');
+    } else {
+      this.route.navigateByUrl('/Learner/MyCourse');
+    }
   }
   getSelectedIndex(i) {
     this.selectedIndex = i;
@@ -332,42 +349,70 @@ export class ActivitiesComponent implements OnInit {
         ) {
           const batchStartDate = new Date(this.assignmentContent.courseStartDate);
           const batchEndDate = new Date(this.assignmentContent.courseEndDate);          
-          this.courseStartDate = moment(batchStartDate).format('DD-MM-YYYY');
-          this.courseEndDate = moment(batchEndDate).format('DD-MM-YYYY');
+          // this.courseStartDate = moment(batchStartDate).format('DD-MM-YYYY');
+          // this.courseEndDate = moment(batchEndDate).format('DD-MM-YYYY');
+
+          this.courseStartDate = moment(batchStartDate);
+          this.courseEndDate = moment(batchEndDate);
+
           this.assignmentContent.coursedetails.forEach((element) => {
             element.moduledetails.forEach((moduleData) => {
               moduleData.resourse.files.forEach((fileData) => {
                 if (fileData.startDate && fileData.endDate) {
-                  const date1 = JSON.parse(JSON.stringify(fileData.startDate));
-                  const date2 = JSON.parse(JSON.stringify(fileData.endDate));
-                  const startDate = new Date(date1);
-                  const endDate = new Date(date2);
-                  fileData.assignmentStartDate = moment(startDate).format(
-                    'DD-MM-YYYY HH:mm'
-                  );
-                  fileData.assignmentEndDate = moment(endDate).format(
-                    'DD-MM-YYYY HH:mm'
-                  );
+                  //---------
+                  // const date1 = JSON.parse(JSON.stringify(fileData.startDate));
+                  // const date2 = JSON.parse(JSON.stringify(fileData.endDate));
+                  // const startDate = new Date(date1);
+                  // const endDate = new Date(date2);
+
+                  let date1 = new Date(fileData.startDate);
+                  fileData.assignmentStartDate = moment(date1);
+                  let date2 = new Date(fileData.endDate);
+                  fileData.assignmentEndDate = moment(date2);
+
+                  // fileData.assignmentStartDate = moment(startDate).format(
+                  //   'DD-MM-YYYY HH:mm'
+                  // );
+                  // fileData.assignmentEndDate = moment(endDate).format(
+                  //   'DD-MM-YYYY HH:mm'
+                  // );
+                  
+                  // if (
+                  //   moment().format('DD-MM-YYYY HH:mm') >=
+                  //   fileData.assignmentStartDate
+                  // ) {
+                  //   fileData.enableView = true;
+                  // } else {
+                  //   fileData.enableView = false;
+                  // }
+                  // if (
+                  //   moment().format('DD-MM-YYYY HH:mm') >=
+                  //   fileData.assignmentStartDate &&
+                  //   moment().format('DD-MM-YYYY') <= this.courseEndDate
+                  // ) {
+                  //   fileData.enableUpload = true;
+                  // } else if (
+                  //   moment().format('DD-MM-YYYY HH:mm') <
+                  //   fileData.assignmentStartDate ||
+                  //   moment().format('DD-MM-YYYY') > this.courseEndDate
+                  // ) {
+                  //   fileData.enableUpload = false;
+                  // }
                   
                   if (
-                    moment().format('DD-MM-YYYY HH:mm') >=
+                    moment() >=
                     fileData.assignmentStartDate
                   ) {
                     fileData.enableView = true;
                   } else {
                     fileData.enableView = false;
                   }
-                  if (
-                    moment().format('DD-MM-YYYY HH:mm') >=
-                    fileData.assignmentStartDate &&
-                    moment().format('DD-MM-YYYY') <= this.courseEndDate
-                  ) {
-                    fileData.enableUpload = true;
-                  } else if (
-                    moment().format('DD-MM-YYYY HH:mm') <
-                    fileData.assignmentStartDate ||
-                    moment().format('DD-MM-YYYY') > this.courseEndDate
-                  ) {
+
+                  if (moment() >= fileData.assignmentStartDate &&
+                    moment() <= this.courseEndDate) {
+                      fileData.enableUpload = true;
+                  } else if (moment() < fileData.assignmentStartDate || 
+                    moment() > this.courseEndDate) {
                     fileData.enableUpload = false;
                   }
                 }
