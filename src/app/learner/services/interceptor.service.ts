@@ -30,7 +30,7 @@ export class InterceptorService implements HttpInterceptor {
         if (event && event['body'] && event['body']['data']) {
           let bodyData = event['body']['data'];
           const dynKey = Object.keys(bodyData)[0]
-          if (bodyData[dynKey].error_msg && bodyData[dynKey].error_msg === 'TokenExpiredError: jwt expired') {
+          if (bodyData[dynKey] && bodyData[dynKey].error_msg && bodyData[dynKey].error_msg === 'TokenExpiredError: jwt expired') {
             this.alertBox.openAlert("Session Expired", "Please login again.")
             this.logout();
           }
