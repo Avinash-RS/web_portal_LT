@@ -158,6 +158,7 @@ export class ProfileComponent implements OnInit {
       gender: new FormControl('', myGlobals.req),
       is_student_or_professional: new FormControl(''),
       deptName: new FormControl(''),
+      collegeName :new FormControl(''),
       languages_known: [''],
       country: ['', myGlobals.req],
       state: ['', myGlobals.req],
@@ -308,6 +309,9 @@ export class ProfileComponent implements OnInit {
     }
     if(this.deptname){
       this.profileForm.controls.deptName.setValue(this.deptname)
+    }
+    if (this.collegename){
+      this.profileForm.controls.collegeName.setValue(this.collegename)
     }
     if (this.profileForm.value.progress === 60 && this.profileForm.value.certificate && this.profileForm.value.languages_known
       && this.profileForm.value.social_media) {
