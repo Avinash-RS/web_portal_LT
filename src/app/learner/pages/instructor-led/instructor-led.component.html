@@ -1,16 +1,16 @@
 <app-header></app-header>
-
-<br>
-<p>
-  <span class="redHover">
+<p class="commonBackStyle">
+  <i class="lxp-Arrow backArrow" (click)="getBack()"></i>
+  <span (click)="getBack()">Back</span>
+  <!-- <span class="redHover">
     <mat-icon class="material-icons f_size_15 backIc pointer" (click)="getBack()">arrow_back_ios
     </mat-icon>
     <span class="f_size_19 pointer" (click)="getBack()">
       Back
     </span>
-  </span>
+  </span> -->
 </p>
-<div class="row">
+<div class="">
   <div class="f_wt_600 f_size_16 display_flex col-12">
     <span class="pad-t-2">{{course?.name}}</span>
     <mat-icon class="material-icons brdcrmb f_size_25 pointer">chevron_right</mat-icon>
@@ -46,7 +46,7 @@
 </div>
 <!-- End of no records -->
 
-<div class="row" *ngIf="listOfSessions?.length">
+<div class="row marginFix" *ngIf="listOfSessions?.length">
   <!-- Left Side Panel ... -->
   <!-- <div class="col-lg-1 col-xl-1 col-md-1 col-sm-1 col-12"></div> -->
   <div class="col-lg-7 col-xl-7 col-md-12 col-sm-12 col-12">

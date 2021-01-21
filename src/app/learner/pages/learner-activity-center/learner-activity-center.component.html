@@ -1,8 +1,6 @@
 <!-- Activity center starts -->
 <app-header></app-header>
-<br/>
-
-<p>
+<!-- <p>
   <span class="redHover">
     <mat-icon class="material-icons f_size_15 backIc pointer" (click)="goBack()">arrow_back_ios
     </mat-icon>
@@ -10,8 +8,11 @@
       Back
     </span>
   </span>
+</p> -->
+<p class="commonBackStyle">
+  <i class="lxp-Arrow backArrow" (click)="goBack()"></i>
+  <span (click)="goBack()">Back</span>
 </p>
-
 <div *ngIf="showViewAllActivities">
   <div class="row">
     <div class="col vert-txt-center" *ngIf="navDetails?.tableType !== 'submission'">

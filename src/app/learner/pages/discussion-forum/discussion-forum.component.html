@@ -2,8 +2,11 @@
 <div class="spinner-container" *ngIf="loading">
   <mat-spinner diameter="30"></mat-spinner>
 </div>
-<br>
-<p>
+<p class="commonBackStyle">
+  <i class="lxp-Arrow backArrow" (click)="goBack()"></i>
+  <span (click)="goBack()">Back</span>
+</p>
+<!-- <p>
   <span class="redHover">
     <mat-icon class="material-icons f_size_15 backIc pointer" (click)="goBack()">arrow_back_ios
     </mat-icon>
@@ -11,7 +14,7 @@
       Back
     </span>
   </span>
-</p>
+</p> -->
 <div class="f_wt_600 f_size_16 m-l-13 display_flex">
   <span>
     {{course?.name}}
