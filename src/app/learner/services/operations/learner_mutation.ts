@@ -645,7 +645,7 @@ export const updateProfile = gql`
   mutation update_profile($user_id: String, $profile_img: String,
     $gender: String, $languages_known: [String],
     $country: String, $state: String, $city_town: String, $created_by_ip: String, $created_by: String, $created_on: String,
-    $updated_by_ip: String, $updated_on: String, $updated_by: String,$domain:String!, $deptName:String){
+    $updated_by_ip: String, $updated_on: String, $updated_by: String,$domain:String!, $deptName:String, $collegeName : String){
     update_profile(
       user_id: $user_id,
       profile_img: $profile_img,
@@ -662,6 +662,7 @@ export const updateProfile = gql`
       updated_by: $updated_by,
       domain:$domain,
       deptName : $deptName,
+      collegeName :$collegeName
     ) {
       success
       message
