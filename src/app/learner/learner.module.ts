@@ -173,6 +173,7 @@ const routes: Routes = [
     path: 'Learner/viewAllnotifications',
     component: ViewAllnotificationsComponent,
     canLoad: [AuthGuard],
+    data: { title: 'All Notifications' }
   },
   // { path: 'new-home', component: NewHomeComponent },
 ];
