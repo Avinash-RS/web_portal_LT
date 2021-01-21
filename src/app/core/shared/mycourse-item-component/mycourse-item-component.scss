@@ -160,6 +160,9 @@
   @media only screen and (max-width: 600px) {
     display: none !important;
   }
+  @media only screen and (max-width: 991px) {
+    margin: 15px 0;
+  }
 }
 //Tab Ends
 
@@ -2109,7 +2112,7 @@ li {
   }
   h6 {
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     color: #333333;
   }
   &:hover {
@@ -2263,7 +2266,7 @@ li {
   }
   h3 {
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 400;
     color: rgba(0, 0, 0, 1);
     line-height: normal;
   }
@@ -2275,7 +2278,7 @@ li {
   margin-top: 20px;
   h4 {
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
     color: #333333;
     line-height: normal;
     margin: 0 0 0 10px;
@@ -2386,7 +2389,7 @@ li {
     }
     h6 {
       font-size: 20px;
-      font-weight: 400;
+      font-weight: 700;
       color: #333333;
       margin: 0;
       line-height: normal;

@@ -6,13 +6,13 @@
         position: relative;
         border: none;
         margin-top: 1.5em;
-        .back-icons {
-            width: 70px;
-            &:hover {
-                border: none;
-                color: #c02222;
-            }
-        }
+        // .back-icons {
+        //     width: 70px;
+        //     &:hover {
+        //         border: none;
+        //         color: #c02222;
+        //     }
+        // }
         span {
             font-size: 20px;
             margin-left: 5px;
@@ -160,7 +160,28 @@
         }
     }
 }
-
+.commonBackStyle {
+    margin-top: 15px !important;
+    padding-left: 15px;
+    .backArrow {
+        font-size: 6px;
+        color: #231F20;
+        font-weight: bold;
+        transform: rotate(-90deg);
+        display: inline-block;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+    span {
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 18px;
+        color: #999999;
+        font-weight: lighter;
+        margin: 0 0 0 5px;
+    }
+}
 .img-thumb {
     object-fit: cover;
     width: 100% !important;

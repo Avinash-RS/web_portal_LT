@@ -302,7 +302,14 @@ input.mat-input-element {
   top: -2px;
   font-size: 24px;
   margin-right: 5px;
-} 
+}
+.loginWrapper {
+    .signIn {
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 32px;
+    }
+}
 .error{
     margin-top: 10px;
 }

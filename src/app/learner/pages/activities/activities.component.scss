@@ -954,6 +954,26 @@ margin-top: 8px;
       min-width: inherit;
   }
 }
+.commonBackStyle {
+  .backArrow {
+      font-size: 6px;
+      color: #231F20;
+      font-weight: bold;
+      transform: rotate(-90deg);
+      display: inline-block;
+      vertical-align: middle;
+      cursor: pointer;
+  }
+  span {
+      cursor: pointer;
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 18px;
+      color: #999999;
+      font-weight: lighter;
+      margin-left: 5px;
+  }
+}
 ::ng-deep.draggable-button-container .mat-icon {
   font-size: 30px;
   width: 30px;
