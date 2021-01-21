@@ -102,7 +102,7 @@ const routes: Routes = [
     path: 'Learner/profile',
     component: ProfileComponent,
     canLoad: [AuthGuard],
-    data: { animation: 'Learner  Profile' }
+    data: { animation: 'Learner  Profile', title: 'Learner  Profile' }
   },
   {
     path: 'Learner/selfLearning',
@@ -112,14 +112,14 @@ const routes: Routes = [
     //   },
     // canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    data: { animation: 'Self Learner Avtivity' }
+    data: { animation: 'Self Learner Avtivity', title: 'Self Learner Avtivity' }
   },
   {
     path: 'Learner/calendar',
     // component: LearnerCalendarComponent,
     loadChildren: './calendar.module#CalendarModules',
     canLoad: [AuthGuard],
-    data: { animation: 'Calendar' }
+    data: { animation: 'Calendar', title: 'Calendar' }
   },
 
   {
@@ -127,7 +127,7 @@ const routes: Routes = [
     // component: ActivitycenterhomescreenComponent,
     loadChildren: './activitycenter.module#ActivitycenterModule',
     canLoad: [AuthGuard],
-    data: { animation: 'activitycenterhomescreen' }
+    data: { animation: 'activitycenterhomescreen', title: 'Activity Center' }
 
   },
   {
@@ -135,7 +135,7 @@ const routes: Routes = [
     // component: KnowledgeResourceHomeComponent,
     loadChildren: './knowledgeresources.module#KnowledgeresourcesModule',
     canLoad: [AuthGuard],
-    data: { animation: 'activitycenterhomescreen' }
+    data: { animation: 'activitycenterhomescreen' , title: 'Knowledge Resources' }
   },
   // {
   //   path: 'terms',
