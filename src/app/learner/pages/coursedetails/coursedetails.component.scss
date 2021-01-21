@@ -477,10 +477,6 @@ div.tocSize::-webkit-scrollbar {
     //transform: rotate(180deg);
     display: inline-block;
 }
-.resourseToc{
-    width: 30% !important;
-    min-width: 30%!important;
-}
 .popupContainer {
     height: 100%;
 }
@@ -492,16 +488,29 @@ div.tocSize::-webkit-scrollbar {
         }
     }
 }
-.rescontentHeight{
-    // height: 370px !important;
+.rescontentHeight {
     height: 100%;
+    @media only screen and (max-width: 767px) {
+        flex-direction: column;
+    }
 }
-.previewContainer{
+.resourseToc{
+    width: 30% !important;
+    min-width: 30%!important;
+    @media only screen and (max-width: 767px) {
+        width: 100% !important;
+        min-width: 100%!important;
+    }
+}
+.previewContainer {
     width: 100% !important;
     overflow: auto;
-    // min-height: 475px;
     height: 100%;
     position: relative;
+    @media only screen and (max-width: 767px) {
+        overflow: initial;
+        // min-height: 100%;
+    }
     img {
         max-width: 100%;
     }

@@ -17,13 +17,14 @@ html {
 }
 
 body {
-  font-family: 'Roboto Condensed', sans-serif !important;
+  // font-family: 'Roboto Condensed', sans-serif !important;
+  font-family: 'RobotoCondensed' !important;
   scroll-behavior: smooth !important;
   behavior: 'smooth' !important;
 }
 
 .mat-card {
-  font-family: Roboto Condensed !important;
+  font-family: 'RobotoCondensed' !important;
 }
 
 button,
@@ -39,9 +40,14 @@ h3,
 h4,
 h5, 
 h6 {
-  font-family: Roboto Condensed !important;
+  font-family: 'RobotoCondensed' !important;
 }
-
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
 .powered {
   margin-top: 24px;
   padding-left: 15px;

@@ -324,8 +324,8 @@
                             <h6>{{ 'This course includes :' | translate}}</h6>
                             <ul class="countCourseLanguage">
                                 <li>{{content?.totalResourseCount}}</li>
-                                <li>{{course?.course_mode === 'self-placed' ? 'Self paced' : course?.course_mode}}</li>
-                                <li>{{course?.course_language}}</li>
+                                <li *ngIf="course?.course_mode">{{course?.course_mode === 'self-placed' ? 'Self paced' : course?.course_mode}}</li>
+                                <li *ngIf="course?.course_language">{{course?.course_language}}</li>
                             </ul>
                             <div class="descriptionContent">
                                 <p [innerHTML]="course?.course_long_description"></p>
