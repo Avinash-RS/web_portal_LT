@@ -16,16 +16,17 @@
 // ng build --prod replaces environment.ts with environment.prod.ts.
 // The list of file replacements can be found in angular.json.
 
+
 export const environment = {
   production: false,
-  apiUrl: 'https://facade.lntiggnite.com/',
-  scormUrl:'https://scorm.lntiggnite.com/',
-  apiUrlImg:'https://facade.lntiggnite.com/',
-  createCourseApi:'https://course.lntiggnite.com/',
-  wcaapiurl:'https://wca.lntiggnite.com/',
-  analytics: 'UA-171656647-1',
+  apiUrl: 'https://devfacade.lntiggnite.com/',
+  scormUrl: 'https://devscorm.lntiggnite.com/',
+  apiUrlImg: 'https://devfacade.lntiggnite.com/',
+  createCourseApi: 'https://devcourses.lntiggnite.com/',
+  wcaapiurl: 'https://devwca.lntiggnite.com/',
   domain : 'LXP',
-  systemIp : 'https://api.ipify.org/?format=json',
-  socketio : 'https://socketio.lntiggnite.com',
+  analytics: 'UA-171656647-1',
+  systemIp : 'http://api.ipify.org/?format=json',
+  socketio : 'https://devsocket.lntiggnite.com/',
   captachaSiteKey: '6Ldu8h8aAAAAAEV33ZBs-xCR4hHIzPuvfLjkG-oO'
 };
