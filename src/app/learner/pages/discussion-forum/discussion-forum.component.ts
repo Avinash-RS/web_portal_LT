@@ -376,10 +376,16 @@ export class DiscussionForumComponent implements OnInit {
       const mask = CryptoJS.AES.encrypt(this.userDetail?.nodebb_response?.uid.toString(), this.secretKey.trim()).toString();
       this.Lservice.viewsingletopicdiscussion(topicSlug.toString(), mask).subscribe((result: any) => {
         this.topicDiscussionData = result?.data?.ViewSingleTopicDiscussionData?.data;
+        this.topicDiscussionData.posts.forEach(element => {
+          var tmp = document.createElement("DIV");
+          tmp.innerHTML = element.content;
+          tmp.removeAttribute("rel")
+          element.content = tmp.textContent || tmp.innerText || "";
+        });
         this.topicDiscussionData1 = Object.assign({}, result?.data?.ViewSingleTopicDiscussionData?.data);
         this.topicDiscussionData1.posts1 = (this.topicDiscussionData1?.posts);
-        const data = this.topicDiscussionData?.posts?.map(item => item.content = this.alterstring(item?.content));
-        const data1 = this.topicDiscussionData1?.posts1?.map(item => item.content = this.alterstring(item?.content));
+        // const data = this.topicDiscussionData?.posts?.map(item => item.content = this.alterstring(item?.content));
+        // const data1 = this.topicDiscussionData1?.posts1?.map(item => item.content = this.alterstring(item?.content));
         // this.cS.loader$.next(false);
         this.loading = false;
       });
@@ -486,19 +492,12 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   alterstring(text) {
-    // return text.replace('↵', '').replace('</p>', '').replace(/<p>/g, '').replace(/&amp;/g, '&').
-    // replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&quot;/g, '"');
     if (text?.indexOf('rel="nofollow"') === -1) {
       return text?.replace('↵', '').replace('</p>', '').replace(/<p>/g, '').replace(/&amp;/g, '&').
         replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&quot;/g, '"');
     } else {
       text = text?.replace('↵', '').replace('</p>', '').replace(/<p>/g, '').replace(/&amp;/g, '&').
         replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&quot;/g, '"');
-      // const startIndex = text.indexOf('rel="nofollow"');
-      // const endIndex = text.indexOf('</a>" ');
-      // const replacement = '';
-      // const toBeReplaced = text.substring(startIndex + 1, endIndex);
-      // return text.replace(toBeReplaced, replacement).replace(' r</a>"', '').replace('<a href="', '');
       return text?.replace(text?.substring(text?.indexOf('rel="nofollow"') + 1, text?.indexOf('</a>" ')), '').
         replace(' r</a>"', '').replace('<a href="', '');
 
