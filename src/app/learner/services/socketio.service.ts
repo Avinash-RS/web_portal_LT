@@ -69,12 +69,12 @@ export class SocketioService {
         });
         return observable;
     }
-    closeSocket(){
+    closeSocket() {
+        if (this.socket.connected) {
         this.socket.removeAllListeners('coursePlayerStatus')
         this.socket.off('coursePlayerStatus');
         this.socket.off('disconnect', this.Connectsocket);
-        console.log(this.socket.disconnected)
-        console.log(this.socket,"after logout")
+        }
     }
 
     socketStatus(){
