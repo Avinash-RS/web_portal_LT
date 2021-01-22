@@ -22,6 +22,9 @@ color:grey
     .videoPlayer {
         transition: all 0.3s linear;
         width: 70%;
+        @media only screen and (max-width: 767px) {
+            width: 0;
+        }
         &.fullWidth {
             width: 100%;
         }
@@ -35,8 +38,14 @@ color:grey
     width: 30%;
     margin-left: 0;
     transition: all 0.3s linear;
+    @media only screen and (max-width: 767px) {
+        width: 100%;
+    }
     &.drawersOpen {
         margin-left: -30%;
+        @media only screen and (max-width: 767px) {
+            margin-left: -100%;
+        }
     }
 }
 div.tocSize::-webkit-scrollbar {
@@ -312,6 +321,9 @@ div.tocSize::-webkit-scrollbar {
     max-width: 65%;
     min-width: 65%;
     justify-content: space-between;
+    @media only screen and (max-width: 767px) {
+        max-width: 100%;
+    }
     div {
         display: inline-block;
         line-height: 14px;
@@ -452,9 +464,15 @@ div.tocSize::-webkit-scrollbar {
 }
 .toolBar .leftContent{
     width: 40%;
+    @media only screen and (max-width: 767px) {
+        width: 75%;
+    }
 }
 .toolBar .rightContent{
     width: 60%;
+    @media only screen and (max-width: 767px) {
+        width: 25%;
+    }
 }
 .resourseContainer{
     overflow-y: hidden;
