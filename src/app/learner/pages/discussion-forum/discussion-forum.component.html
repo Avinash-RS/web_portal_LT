@@ -28,72 +28,54 @@
 <div class="row" >
   <div *ngIf="(isMobile?(!isHideAccord?true:false):true)" class="col-lg-4 col-xl-4 col-md-5 col-sm-12 col-12 collaborateAccordion">
     <ng-container *ngIf="scromModuleData && scromModuleData?.length > 0; else noModule">
-      <mat-accordion *ngFor="let res of scromModuleData; let i = index"
+      <mat-card *ngFor="let res of scromModuleData; let i = index" class="topicCard"
         (click)="getSelectedIndex(i);getModuleDataForForum(scromModuleData?.length, i + 1, res);isHideAccord=true">
-        <mat-expansion-panel class="panel" hideToggle="true" #example [expanded]="selectedIndex === i">
-          <mat-expansion-panel-header class="moduleHeadHight">
-            <mat-panel-title class="module-container">
-              <div class="row titleHeight">
-                <div>
-                  <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons mar">done
-                  </mat-icon>
-                </div>
-                <div [ngClass]="res?.status == 'Passed'? 'index-number-read' : 'index-number-unread'">
-                  <span class="custom-index">{{i+1}}. &nbsp;</span>
-                </div>
-                <div>
-                  <div [ngClass]="res?.status == 'Passed'? 'moduleHeadRead' : 'moduleHeadUnread'">
-                    <div class="modhead">
-                      <p *ngIf="res?.title.length >= 67" class="moduleName" tooltip="{{res?.title}}" placement="right">
-                        {{res?.title | slice:0:71}}...</p>
-                      <p *ngIf="res?.title.length < 67" class="moduleName">
-                        {{res?.title}}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-              <!-- <div class="row">
-                <div class="moduleund">
-                  <span class="time-icon">
-                    <mat-icon class="time-icon">alarm</mat-icon>
-                    {{res?.moduletime ? res?.moduletime : '01:00:00' }}
-                  </span>
-                </div>
-              </div> -->
-            </mat-panel-title>
-            <mat-icon *ngIf="!example.expanded" class="exp-icon">add_circle_outline
-            </mat-icon>
-            <mat-icon *ngIf="example.expanded" class="exp-icon">remove_circle_outline
-            </mat-icon>
-
-          </mat-expansion-panel-header>
-          <div class="row">
-            <div class="col-12">
-              <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title.length > 39?'headerDown':''">
-                <ng-container *ngFor="let mod of res?.children; let j = index">
-                  <mat-step [aria-labelledby]="mod.status === 'Passed' ? 'colWhite' : 
-        mod.status === 'Process' ? 'colWhite' : 'colWhite'">
+        <mat-card-title (click)="moduleExpand(res,i)" class="d-flex justify-content-between align-items-center pointer">
+          <div class="tocSubTitle">
+              <span *ngIf="res?.title?.length >= 67" class="moduleName" tooltip="{{res?.title}}"
+                  placement="right">
+                  {{res?.title | slice:0:71}}...</span>
+              <span *ngIf="res?.title?.length < 67" class="moduleName">
+                  {{res?.title}}
+              </span>
+          </div>
+          <div>
+              <i class="expandCollapse" [ngClass]="res.expanded?'lxp-Collapse':'lxp-Expand'"></i>
+              <!-- <mat-icon  class="f_size_23 colorBlack">
+                  {{res.expanded?'remove_circle_outline':'add_circle_outline'}}
+              </mat-icon> -->
+          </div>
+      </mat-card-title>
+      <!-- <mat-card-subtitle (click)="moduleExpand(res,i)" class="d-flex justify-content-start align-items-center tocSubTitle">
+         
+          <div>
+              <span *ngIf="res?.title?.length >= 67" class="moduleName" tooltip="{{res?.title}}"
+                  placement="right">
+                  {{res?.title | slice:0:71}}...</span>
+              <span *ngIf="res?.title?.length < 67" class="moduleName">
+                  {{res?.title}}
+              </span>
+          </div>
+      </mat-card-subtitle> -->
+      <mat-card-content *ngIf="(res.expanded)">
+        <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title?.length > 39?'headerDown': ''">
+            <ng-container *ngFor="let mod of res?.children; let j = index">
+                <mat-step
+                    [aria-labelledby]="mod?.status === 'Passed' ? 'colgreen' :  mod?.status === 'process' ? 'colYellow' : 'colWhite'">
                     <ng-template matStepLabel>
-                      <span class="topicnm"
-                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1)">
-                        <p class="titleName" *ngIf="mod?.title.length >= 65" tooltip="{{mod?.title}}" placement="right">
-                          {{mod?.title | slice:0:69}}...
-                        </p>
-                        <p class="titleName" *ngIf="mod?.title.length < 65">
-                          {{mod?.title}}
-                        </p>
-                      </span>
+                        <span class="topicnm">
+
+                            <span class="titleName">
+                                {{mod?.title}}
+                            </span>
+                        </span>
 
                     </ng-template>
-                  </mat-step>
-                </ng-container>
-              </mat-vertical-stepper>
-            </div>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
+                </mat-step>
+            </ng-container>
+        </mat-vertical-stepper>
+    </mat-card-content>
+      </mat-card>
     </ng-container>
     <ng-template #noModule>
       <br>

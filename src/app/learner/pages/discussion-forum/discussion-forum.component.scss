@@ -475,4 +475,31 @@
 .brdcrmb {
     margin-top: -3px;
 }
+::ng-deep .mat-step-header[aria-labelledby="colWhite"] {
+    box-sizing: border-box !important;
+    height: 10px !important;
+    .mat-step-icon {
+        background-color: $color-white !important;
+        // color: $color-white !important;
+        border: 2px solid $color-border;
+        height: 13px !important;
+        width: 13px !important;
+        position: relative;
+        bottom: 1px;
+        left: 6px;
+    }
+    .mat-step-icon .mat-icon, .mat-step-icon-content {
+        color: transparent !important;
+        display: none !important;
+    }
+}
+
+.topicCard{
+    margin: 10px 10px 10px 10px;
+    padding: 10px !important;
+    border-radius: 0px;
+    border: 1px solid #cacaca;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.12);
+  //   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+  }
 
