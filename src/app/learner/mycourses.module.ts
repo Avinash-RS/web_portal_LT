@@ -55,28 +55,28 @@ const routes: Routes = [
     path: 'MyCourse',
     component: LearnerMyCourseComponent,
     // canLoad: [AuthGuard],
-    data: { animation: 'Learner  MyCourse' }
+    data: { animation: 'Learner  MyCourse' , title: 'My Course'}
   },
   {
     path: 'courseDetail',
     component: CoursedetailsComponent,
     // canLoad: [AuthGuard],
-    data: { animation: 'Course details' }
+    data: { animation: 'Course details', title: 'Course Player'}
   },
   {
     path: 'discussionForum',
     component: DiscussionForumComponent,
-    data: { animation: 'Discussion Forum' }
+    data: { animation: 'Discussion Forum', title: 'Discussion Forum'}
   },
   {
     path: 'instructorLed',
     component: InstructorLedComponent,
-    data: { animation: 'Learner  MyCourse' }
+    data: { animation: 'Learner  MyCourse', title: 'Instructor led'}
   },
   {
     path: 'activities',
     component: ActivitiesComponent,
-    data: { animation: 'Calendar' }
+    data: { animation: 'Calendar' , title: 'Activities'}
   },
 ]
 @NgModule({

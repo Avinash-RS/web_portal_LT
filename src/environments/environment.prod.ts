@@ -26,7 +26,7 @@ export const environment = {
   wcaapiurl: 'https://devwca.lntiggnite.com/',
   domain : 'LXP',
   analytics: 'UA-171656647-1',
-  systemIp : 'http://api.ipify.org/?format=json',
+  systemIp : 'https://api.ipify.org/?format=json',
   socketio : 'https://devsocket.lntiggnite.com/',
   captachaSiteKey: '6Ldu8h8aAAAAAEV33ZBs-xCR4hHIzPuvfLjkG-oO'
 };

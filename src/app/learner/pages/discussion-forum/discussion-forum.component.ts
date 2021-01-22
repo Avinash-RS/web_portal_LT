@@ -70,6 +70,7 @@ export class DiscussionForumComponent implements OnInit {
   isHideAccord: boolean = false;
   isMobile: boolean = false;
   secretKey = "(!@#Passcode!@#)";
+  oldIdx: any;
 
   constructor(public Lservice: LearnerServicesService, public route: Router, private formBuilder: FormBuilder,
               private gs: GlobalServiceService, private toastr: ToastrService, private dialog: MatDialog,
@@ -516,5 +517,17 @@ export class DiscussionForumComponent implements OnInit {
     if (!(code === 32) && !(code > 47 && code < 58) && !(code > 64 && code < 91) && !(code > 96 && code < 123)) {
       evt.preventDefault();
     }
+  }
+
+  moduleExpand(res,index){
+    if(index !== this.oldIdx){
+    for (const element of this.scromModuleData) {
+      element.expanded = false
+    }
+    this.scromModuleData[index].expanded = true;
+    } else {
+      this.scromModuleData[index].expanded = this.scromModuleData[index].expanded ? false : true;
+    }
+  this.oldIdx = index 
   }
 }

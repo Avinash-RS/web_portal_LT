@@ -87,12 +87,14 @@ export class AppComponent implements OnInit {
       const rt = this.getChild(this.activatedRoute);
       rt.data.subscribe(data => {
         this.isFooterVisible = '';
+        console.log("GOKLUDATA",data)
         this.titleService.setTitle(data.title);
         //  console.log(urlIdentifier[2], "GOKUL");
         //  console.log(possiblePages.includes(urlIdentifier[2]), e.url)
         if (!possiblePages.includes(urlIdentifier[2])) {
          /// this.isFooterVisible = false;
-         this.isFooterVisible = '<div class="footer"><span class="powered"><span class="forgot1">2020 © L&T EduTech All Rights Reserved</span></span></div>'
+         const currentYear = new Date().getFullYear()
+         this.isFooterVisible = '<div class="footer"><span class="powered"><span class="forgot1">' + currentYear + ' © L&T EduTech All Rights Reserved</span></span></div>';
         }
         if(e.url.includes("resetpassword")){
           this.isFooterVisible = '';

@@ -18,7 +18,7 @@ const routes: Routes = [
     path: '',
     loadChildren: './learner/learner.module#LearnerModule',
     canLoad: [AuthGuard],
-    data : {animation: 'Learner'}
+    data : {animation: 'Learner', title: 'My Course'}
   },
   // {
   //   path: 'Admin',
@@ -28,7 +28,7 @@ const routes: Routes = [
   {
     path: 'Player',
     loadChildren: './core/core.module#CoreModule',
-    data : {title: 'Player'}
+    data : {title: 'Course Player'}
   },
   // {
   //   path: '*',

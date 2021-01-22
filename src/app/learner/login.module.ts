@@ -34,7 +34,7 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegistrationComponent,
-    data: { animation: 'Learner  Registration' }
+    data: { animation: 'Learner  Registration', title: 'Learner  Registration'  }
   },
   {
     path: 'otp',
@@ -51,7 +51,7 @@ const routes: Routes = [
   {
     path: 'recover',
     component: ForgotUsernameAndPasswordComponent,
-    data: { animation: 'Learner Forget Password' }
+    data: { animation: 'Learner Forget Password', title: 'Learner Forget Password'}
   },
   {
     path: 'recoverotp',
