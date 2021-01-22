@@ -157,6 +157,9 @@
             color: #ffffff !important;
             background-color: #555555 !important;
             position: relative;
+            span {
+                font-weight: 700;
+            }
             &:hover {
                 color: #ffffff !important;
                 background-color: #555555 !important;

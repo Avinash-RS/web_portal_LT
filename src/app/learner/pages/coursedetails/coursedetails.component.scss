@@ -18,7 +18,8 @@ color:grey
 }
 .contentHeight{
     height: 80vh !important;
-    background: #F0F0F0;
+    background: #ffffff;
+    margin-top: 15px;
     .videoPlayer {
         transition: all 0.3s linear;
         width: 70%;
@@ -51,7 +52,9 @@ color:grey
 div.tocSize::-webkit-scrollbar {
     width: 5px !important;
 }
-
+::ng-deep.tocSize .mat-stepper-vertical {
+    background-color: #FCFCFC !important;
+}
 // .afterHover {
 //     overflow: y;
 //     height: auto;
@@ -66,7 +69,7 @@ div.tocSize::-webkit-scrollbar {
 // }
 
 .tocTitle {
-   font-size: 15px;
+   font-size: 17px;
    font-weight: normal; 
    color:#999999;
 }
@@ -100,12 +103,18 @@ div.tocSize::-webkit-scrollbar {
 .redHover:hover {
     color: $lxp-theme-green !important;
 }
-.topicCard{
-  margin: 10px 10px 10px 10px;
+.topicCard {
+  margin: 0 10px 10px 10px;
   padding: 10px !important;
+  background-color: #FCFCFC;
   border-radius: 0px;
-  border: 1px solid #cacaca;
+  border: 1px solid rgba(112, 112, 112, 0.25);
   box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.12);
+  &.collapseClass {
+      .tocSubTitle {
+          color: #333333;
+      }
+  }
 //   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
 }
 ::ng-deep.resource-card .mat-card-subtitle {
@@ -265,8 +274,9 @@ div.tocSize::-webkit-scrollbar {
     box-sizing: border-box !important;
     height: 10px !important;
     .mat-step-icon {
-        background-color: $color-yellow !important;
-        color: $color-yellow !important;
+        // background-color: $color-yellow !important;
+        background-color: #FFA04E !important;
+        color: #FFA04E !important;
         height: 15px !important;
         width: 15px !important;
         position: relative;
@@ -317,12 +327,14 @@ div.tocSize::-webkit-scrollbar {
     // width:80%;
 }
 .navigation {
+    margin-left: 10px;
     padding-right: 10px;
     max-width: 65%;
     min-width: 65%;
     justify-content: space-between;
     @media only screen and (max-width: 767px) {
         max-width: 100%;
+        margin-left: 7px;
     }
     div {
         display: inline-block;
@@ -425,7 +437,7 @@ div.tocSize::-webkit-scrollbar {
 
 .titlebar {
     padding:10px;
-    background-color: #F0F0F0;
+    background-color: #ffffff;
     .courseTitle {
         font-size: 18px;
         color: #333333;
@@ -437,6 +449,11 @@ div.tocSize::-webkit-scrollbar {
     }
 }
 .pointer {
+    &:hover {
+        i, span {
+            color: #C02222;
+        }
+    }
     i, span {
         display: inline-block;
     }
@@ -445,6 +462,7 @@ div.tocSize::-webkit-scrollbar {
         color: #999999;
         font-weight: lighter;
         margin-left: 5px;
+        
     }
     .backArrow {
         font-size: 6px;
@@ -455,6 +473,7 @@ div.tocSize::-webkit-scrollbar {
 }
 .toolBar{
     padding: 8px 10px;
+    background-color: #F0F0F0;
     .lxp-HamburgerMenu {
         cursor: pointer;
         font-size: 24px;

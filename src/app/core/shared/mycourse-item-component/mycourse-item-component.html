@@ -32,7 +32,7 @@
             <div class="durationCreditTime justify-content-between" *ngIf="!course.courseInfoExp">
               <div class="courseHours courseCommon">
                 <span class="heading">Hours</span>
-                <h6>{{course.total_duration? course.total_duration : "1" + " hour"}}</h6>
+                <h6>{{course.total_duration? course.total_duration : "1" + ""}}</h6>
               </div>
               <div class="courseCredit courseCommon">
                 <span class="heading">Credits</span>
@@ -50,7 +50,7 @@
                 </div>
                 <div>
                   <span class="heading">Self paced learning</span>
-                  <h6>{{course.image_self_paced_learning_time!==""?course.image_self_paced_learning_time:0}}</h6>
+                  <h6>{{course.image_self_paced_learning_time!==""?course.image_self_paced_learning_time:0}} hours</h6>
                 </div>
               </div>
               <div class="courseCommon d-flex justify-content-between" *ngIf="course.isBatchCourse">
