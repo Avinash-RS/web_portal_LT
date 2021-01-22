@@ -41,7 +41,6 @@ export class SocketioService {
     }
     socketReceiver(){
         this.socket.on('coursePlayerStatus', (msg: any) => {
-            console.log("####gokul####")
             if (this.loginDetails.user_id === msg.user_id) {
 
                 this.changeTrigger({
