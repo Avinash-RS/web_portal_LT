@@ -126,9 +126,12 @@ export class HeaderComponent implements OnInit {
         // this.loading = true;
 
         //SOCKET DISCONNECTION START
-        this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
-        });
-        this.socketService.closeSocket();
+        console.log(this.socketService.socket.connected,"connected")
+        if (this.socketService.socket.connected) {
+          this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
+          });
+          this.socketService.closeSocket();
+        }
         //SOCKET DISCONNECTION COMPLETE
         
         this.services.getIpAddressByUrl();
