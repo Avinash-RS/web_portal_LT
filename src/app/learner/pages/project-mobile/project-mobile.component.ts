@@ -301,7 +301,24 @@ export class ProjectMobileComponent implements OnInit {
       closedialogbox() {
         this.dialog.closeAll();
       }
-
+      openDocument(templateRef: TemplateRef<any>, path, docType) {
+        console.log('Path', path)
+        if(path == null) {
+          this.toastr.warning("No Reports Found")
+          return false;
+        }
+        path.path = path.imageurl;
+        
+        this.dialog.open(templateRef, {
+          width: '100%',
+          height: '100%',
+          closeOnNavigation: true,
+          disableClose: true,
+        });
+        this.previewDoc = path;
+        console.log('this.previewDoc', this.previewDoc)
+      }
+      
       playVideo(templateRef: TemplateRef<any>, videoDialog,  path, docType) {
         if (docType !== 'video/mp4') {
           this.dialog.open(templateRef, {

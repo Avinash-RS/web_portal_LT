@@ -307,10 +307,8 @@
               <span>Your files ({{project.projectActivity.videodetails.length}})</span>
             </div>
           </div>
-
           <div class="row ml-0 mr-0 mt-3">
             <div class="col-12 text-left pl-0 pr-0">
-
               <drag-scroll class="materialsScrollActivity" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
                 <div class="slideLoop" *ngFor="let material of project.projectActivity.videodetails; let i = index">
                   <div [ngClass]="project.projectActivity.videodetails.length >= 2 ? 'carouselCol': 'carouselCol1'">
@@ -387,6 +385,16 @@
               </a>
 
               </div> -->
+            </div>
+            <div class="projectCommentMob">
+              <div class="text-left">
+                <p class="feedBackTxt">Feedback</p>
+                  <textarea disabled class="textArea" [value]='project.projectActivity.comments'></textarea>
+              </div>
+              <button mat-stroked-button class="AssignmentBtn w-100" (click)="openDocument(projectPreviewDialog, project.projectActivity.assessmentreport ? project.projectActivity.assessmentreport[0] : null, project?.projectActivity?.assessmentreport)">
+                <mat-icon class="assignmentIcon mr-2">wysiwyg</mat-icon>
+                Assessment report
+              </button>
             </div>
           </div>
         </div>

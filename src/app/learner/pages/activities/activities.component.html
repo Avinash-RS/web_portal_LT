@@ -17,7 +17,7 @@
       <span>{{courseName}}</span> <mat-icon class="material-icons brdcrmb f_size_25 pointer">chevron_right</mat-icon> <span>Activities</span>
     </span>
   </div>
-  <mat-tab-group  animationDuration="1000ms" (selectedTabChange)="tabChanged($event); activeTab($event)"
+  <mat-tab-group class="activitiesTab" animationDuration="1000ms" (selectedTabChange)="tabChanged($event); activeTab($event)"
   [(selectedIndex)]="demo1TabIndex">
     <mat-tab label="Assignments">
       <app-assignment *ngIf="assigmentMobileResponsive"></app-assignment>
