@@ -412,7 +412,7 @@
                     </div>
                     <div class="align-center   mt-2" *ngIf="itrdata.grade_status !== 'Evaluated'">
                       <span *ngIf="itrdata.submit_status == 'notsubmitted'" class="submitedFile">Submitted files cannot be edited</span>
-                      <span class="uploadedFile" *ngIf="itrdata.submitAction == 'submit'">Submitted on : {{itrdata.submitted_on | date:'MMM dd, yyyy'}}</span>
+                      <span class="uploadedFile" *ngIf="itrdata.submitAction == 'submit'">Submitted on : {{itrdata.submitted_date | date:'MMM dd, yyyy'}}</span>
                     </div>
                     <div class="align-center mt-2 itdata scrollingData" *ngIf="itrdata.grade_status === 'Evaluated'">
                       <div class="workWrapper">
@@ -716,7 +716,7 @@
                         <!-- <button mat-stroked-button class="submitted-btn mt-2" *ngIf="project.projectActivity.submit_status == 'notsubmitted' && (project.projectActivity.videodetails.length == 0 || project.enableSubmit == false)"> Submit </button> -->
                         <button mat-stroked-button class="submitted-btn" [disabled]="true" *ngIf="project.projectActivity.submitAction == 'submit'">Submitted</button>
                         <p *ngIf="project.projectActivity.submit_status == 'notsubmitted'">Submitted files cannot be edited</p>
-                        <p *ngIf="project.projectActivity.submitAction == 'submit'">Submitted on: {{project.submittedOn}}</p>
+                        <p *ngIf="project.projectActivity.submitAction == 'submit'">Submitted on: {{project.submittedOn | date:'MMM dd, yyyy'}}</p>
                       </div>
                     </div>
                   </div>

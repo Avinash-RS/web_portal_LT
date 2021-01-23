@@ -1,7 +1,8 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { filter } from 'rxjs/operators';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class ToolbarNotificationComponent implements OnInit {
   notificationMarkRead = [];
   unreadCount: any;
   cssPrefix: any;
+  routedSubs: any;
 
   @HostListener('document:click', ['$event', '$event.target'])
   onClick(event: MouseEvent, targetElement: HTMLElement) {
@@ -30,7 +32,24 @@ export class ToolbarNotificationComponent implements OnInit {
     }
   }
   constructor(public commonservice: CommonServicesService, public Lservice: LearnerServicesService ,
-              public router: Router, private elementRef: ElementRef) { }
+              public router: Router, private elementRef: ElementRef) {
+                const learnerDetail = JSON.parse(localStorage.getItem('UserDetails'));
+                this.userId = learnerDetail.user_id;
+                this.routedSubs = this.router.events.pipe(
+                  filter(event => event instanceof NavigationEnd),
+                ).subscribe((e: any) => {
+                  
+                  const urlHeader = e.url.split("/")
+                  const headerPages = 'MyCourse';
+                  console.log(urlHeader, headerPages)
+                  if (urlHeader[2] == headerPages) {
+                    this.getNotification();
+                  }else{
+                    this.unreadCount = JSON.parse(localStorage.getItem('NotificationCount'));
+                  }
+                });
+
+               }
 
   ngOnInit() {
     this.commonservice.notificationCount.subscribe((data: any) => {
@@ -39,9 +58,8 @@ export class ToolbarNotificationComponent implements OnInit {
     this.commonservice.notificationStatus.subscribe((status: any) => {
       this.notifications = status;
 });
-    const learnerDetail = JSON.parse(localStorage.getItem('UserDetails'));
-    this.userId = learnerDetail.user_id;
-    this.getNotification();
+    
+    
   }
 
     notificationOpen(data) {
@@ -63,11 +81,15 @@ export class ToolbarNotificationComponent implements OnInit {
       if (result && result.data && result.data.getAllNotifications) {
       this.notifications = result.data.getAllNotifications.data;
       this.unreadCount = result.data.getAllNotifications.unReadCount;
+      localStorage.setItem('NotificationCount',this.unreadCount)
       }
     });
   }
   viewall() {
     this.isOpen = false;
     this.router.navigate(['/Learner/viewAllnotifications']);
+  }
+  ngOnDestroy(){
+    this.routedSubs.unsubscribe();
   }
 }
