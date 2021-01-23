@@ -11,14 +11,21 @@ $prefix: 'toolbar-notification';
     top: 0;
     left: 50%;
     font-weight: 700;
-    line-height: 13px;
-    height: 20px;
+    line-height: 1.5;
+    height: 22px;
+    width: 22px;
     padding: 4px;
-    border-radius: 26%;
-    // width: 50%;
-    background-color: #f44336;
+    border-radius: 50%;
+    background-color: #C02222;
     color: $color-white;
-    border-color: #f44336;
+    border-color: #C02222;
+    font-size: 11px;
+    span {
+        line-height: normal;
+        display: inline-block;
+        position: relative;
+        top: -1px;
+    }
 }
 
 .#{$prefix} {

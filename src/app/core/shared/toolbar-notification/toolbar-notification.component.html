@@ -1,7 +1,7 @@
 <div class="toolbar-notification-container">
   <button mat-icon-button (click)="notificationOpen(isOpen = !isOpen); getNotification()" [class.open]="isOpen">
     <i class="icon lxp-Notification"></i>
-    <span *ngIf="unreadCount > 0" class="badge">{{ unreadCount }}</span>
+    <span *ngIf="unreadCount > 0" class="badge">{{ unreadCount>=100?99:unreadCount }}<span *ngIf="unreadCount>=100">+</span></span>
     <span *ngIf="unreadCount == 0" class="badge"></span>
   </button>
 

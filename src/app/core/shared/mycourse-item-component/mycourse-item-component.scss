@@ -2089,10 +2089,13 @@ li {
 }
 .span-ellip{
   overflow: hidden;
-    white-space:nowrap;
-    text-overflow:ellipsis;
-    width:75%;
-    display:inline-block;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  width:75%;
+  display:inline-block;
+  @media only screen and (max-width: 767px) {
+    width: auto;
+  }
 }
 //
 .pointhover {
@@ -2111,9 +2114,10 @@ li {
     line-height: normal;
   }
   h6 {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
     color: #333333;
+    line-height: normal;
   }
   &:hover {
     .courseHover {
@@ -2279,7 +2283,7 @@ li {
   h4 {
     font-size: 16px;
     font-weight: 700;
-    color: #333333;
+    color: #000000;
     line-height: normal;
     margin: 0 0 0 10px;
     display: inline-block;
@@ -2297,7 +2301,7 @@ li {
   p {
     font-size: 16px;
     font-weight: 400;
-    color: #666666;
+    color: #333333;
     line-height: 24px;
     margin: 0 !important;
     display: flex;
@@ -2318,10 +2322,14 @@ li {
   box-shadow: none;
   background-color: #fcfcfc;
   padding: 15px !important;
-  margin-top: 15px;
-  -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
-  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
+  margin-top: 25px;
+  box-shadow: 0 0 7px rgba(0,0,0,0.15);
+  -moz-box-shadow: 0 0 7px rgba(0,0,0,0.15);
+  -webkit-box-shadow: 0 0 7px rgba(0,0,0,0.15);
+  -o-box-shadow: 0 0 7px rgba(0,0,0,0.15);
+  // -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
+  // -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
+  // box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
   @media only screen and (max-width: 767px) {
     padding: 15px 15px 0 15px !important;
   }
@@ -2346,7 +2354,7 @@ li {
   opacity: 1;
   box-shadow: 0 0 2px #00000040;
   width: 49%;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   transition: all 0.3s ease-in-out;
   overflow: hidden;
   min-height: 180px;
@@ -2525,7 +2533,10 @@ li {
       }
     }
     .cap {
-      color: #000000;
+      // color: #000000;
+      // @media only screen and (max-width: 767px) {
+      //   color: #fff;
+      // }
     }
     &:hover {
       color: white;

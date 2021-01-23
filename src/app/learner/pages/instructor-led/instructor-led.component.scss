@@ -406,6 +406,12 @@
 .commonBackStyle {
     margin-top: 15px !important;
     padding-left: 15px;
+    display: inline-block;
+    &:hover {
+        i, span {
+            color: #C02222;
+        }
+    }
     .backArrow {
         font-size: 6px;
         color: #231F20;
