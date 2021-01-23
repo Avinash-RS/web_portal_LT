@@ -206,7 +206,7 @@
                       <button mat-stroked-button *ngIf="itration.submitAction == 'submit'" class="submitted-btn mt-2"> Submitted </button>
                       <div class="align-center mt-2">
                         <span *ngIf="itration.videodetails.length > 0  && itration.submitAction !== 'submit'" class="submitedFile">Submitted files cannot be edited</span>
-                        <span class="uploadedFile" *ngIf="itration.submitAction == 'submit'">Submitted on: {{itration.submitted_on | date}}</span>
+                        <span class="uploadedFile" *ngIf="itration.submitAction == 'submit'">Submitted on: {{itration.submitted_date | date:'MMM dd, yyyy'}}</span>
                       </div>
                     </div>
                     <div class="pl-0 pr-0" *ngIf="itration.grade_status === 'Evaluated'">
