@@ -539,7 +539,6 @@ export class ActivitiesComponent implements OnInit {
 
   getprojectActivityData() {
     this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
-      console.log('asdfsa', data)
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
         this.projectDetails = data.data.getprojectActivityData.data; 
                
@@ -554,7 +553,6 @@ export class ActivitiesComponent implements OnInit {
           if (moment().format('DD-MM-YYYY') == moment(batchEndDate).format('DD-MM-YYYY')) {
             element.submitType = true;
           }
-          // console.log('Final', moment().isSameOrAfter(batchEndDate));
           
           // if (moment().format('DD-MM-YYYY HH:mm') <= element.batchEndDate) {
           //   element.submitType = true;
@@ -571,9 +569,11 @@ export class ActivitiesComponent implements OnInit {
           // element.activityEndDate = moment(endDate).format('ll');
           // element.enableSubmit  = this.dateDiff(startDate,
           //   endDate , crrDate);
-          const submitDate = new Date(element.projectActivity.submitted_on);
-          element.submittedOn = moment(submitDate).format('ll');
-            // console.log(ena);
+          // commented for submission date isse start
+          // const submitDate = new Date(element.projectActivity.submitted_on);
+          // element.submittedOn = moment(submitDate).format('ll');
+          // commented for submission date isse end
+          element.submittedOn = element.projectActivity.submitted_date
             
           // if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
           //   element.enableSubmit = false;
@@ -613,11 +613,6 @@ export class ActivitiesComponent implements OnInit {
           // const endDate = this.datePipe.transform(element.performActivity.activityenddate, 'dd-MM-yyyy HH:MM aa');
           // const batchendDate = this.datePipe.transform(element.performActivity.batchenddate, 'dd-MM-yyyy HH:MM aa');
           // const crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy  HH:MM  aa');
-          // console.log(moment.utc(element.performActivity.activitystartdate).format());
-          // console.log(startDate);
-          // console.log(endDate);
-          // console.log(batchendDate);
-          // console.log(crrDate);
           
           const batchEndDate = new Date(element.performActivity.batchenddate);
           element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
@@ -719,10 +714,8 @@ export class ActivitiesComponent implements OnInit {
     // if (moment() >= project.actstartDate &&
     //   moment() <= project.actendDate) {
     //   submitStatus = 'ontime';
-    //   console.log('ontime');
       
     // } else if (moment() > project.actendDate) {
-    //   console.log('late');
     //   submitStatus = 'late';
     // }
     // commented by avinash
@@ -864,7 +857,6 @@ export class ActivitiesComponent implements OnInit {
   }
 
   openDocument(templateRef: TemplateRef<any>, path, docType) {
-    console.log('Path', path)
     if(path == null) {
       this.toastr.warning("No Reports Found")
       return false;
@@ -878,7 +870,6 @@ export class ActivitiesComponent implements OnInit {
       disableClose: true,
     });
     this.previewDoc = path;
-    console.log('this.previewDoc', this.previewDoc)
   }
 
   playVideo(templateRef: TemplateRef<any>, videoDialog, path, docType) {

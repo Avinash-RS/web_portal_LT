@@ -104,8 +104,9 @@ export class ProjectMobileComponent implements OnInit {
         element.startdate = moment(startDate).format('DD-MM-YYYY HH:mm');
         const endDate = new Date(element.projectActivity.activityenddate);
         element.activityEndDate = moment(endDate).format('ll');
-        const submitDate = new Date(element.projectActivity.submitted_on);
-        element.submittedOn = moment(submitDate).format('ll');
+        // const submitDate = new Date(element.projectActivity.submitted_on);
+        // element.submittedOn = moment(submitDate).format('ll');
+        element.submittedOn = element.projectActivity.submitted_date
         if (moment().format('DD-MM-YYYY HH:mm') < element.startdate) {
           element.enableSubmit = false;
         } else {
@@ -162,15 +163,9 @@ export class ProjectMobileComponent implements OnInit {
           element.submitType = true;
         }
         
-        // if (moment().format('DD-MM-YYYY HH:mm') <= element.batchEndDate) {
-        //   console.log('coming mob');
-        //   console.log('current date', moment().format('DD-MM-YYYY HH:mm').toString());
-        //   console.log('end date', element.batchEndDate.toString());          
+        // if (moment().format('DD-MM-YYYY HH:mm') <= element.batchEndDate) {       
         //   element.submitType = true;
-        // } else {
-        //   console.log('else mob');
-        //   console.log('current date', moment().format('DD-MM-YYYY HH:mm').toString());
-        //   console.log('end date', element.batchEndDate.toString());          
+        // } else {      
         //   element.submitType = false;
         // }
         // Activity Dates
@@ -189,8 +184,9 @@ export class ProjectMobileComponent implements OnInit {
         // element.enableSubmit = this.dateDiff(startDate,
         //   endDate, crrDate);
         element.enableSubmit = moment().isSameOrAfter(startDate);
-        const submitDate = new Date(element.projectActivity.submitted_on);
-        element.submittedOn = moment(submitDate).format('ll');
+        // const submitDate = new Date(element.projectActivity.submitted_on);
+        // element.submittedOn = moment(submitDate).format('ll');
+        element.submittedOn = element.projectActivity.submitted_date
         // if (moment().format('DD-MM-YYYY HH:mm') < element.startdate) {
         //   element.enableSubmit = false;
         // } else {

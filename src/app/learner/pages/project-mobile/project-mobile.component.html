@@ -291,7 +291,7 @@
 
                     <button mat-stroked-button class="submitted-btn" [disabled]="true" *ngIf="project.projectActivity.submitAction == 'submit'"> Submitted </button>
                     <p style="margin: 0 !important;" *ngIf="project.projectActivity.submit_status == 'notsubmitted'">Submitted files cannot be edited</p>
-                    <p style="margin: 0 !important;" *ngIf="project.projectActivity.submitAction == 'submit'">Submitted on: {{project.submittedOn}}</p>
+                    <p style="margin: 0 !important;" *ngIf="project.projectActivity.submitAction == 'submit'">Submitted on: {{project.submittedOn | date:'MMM dd, yyyy'}}</p>
                   </div>
                 </div>
               </div>
