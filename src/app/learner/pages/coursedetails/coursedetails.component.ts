@@ -819,7 +819,8 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
   closedialogbox() {
-    this.tabInd = 0;
+    // this.tabInd = 0;
+    this.selectedTabIndex = 0;
     this.dialog.closeAll();
   }
 
