@@ -89,6 +89,14 @@
         }
     }
 }
+
+.rec-center{
+    position: absolute !important;
+    color: white !important;
+    font-size: 55px !important;
+    left: 37% !important;
+    top: 31% !important;
+}
 .bottom-right {
     position: absolute;
     bottom: 0px;
@@ -104,6 +112,9 @@
     }
     &.greenColor {
         background: #0C781B;
+    }
+    &.rec-col{
+        background: #4e9ce1;
     }
 }
 .course-list {
@@ -388,6 +399,7 @@
     border-radius: 18px;
     opacity: 1;
     color: white;
+    margin-top: 15px;
 }
 .noRecords {
     display: flex;
