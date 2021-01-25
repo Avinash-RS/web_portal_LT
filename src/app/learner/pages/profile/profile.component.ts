@@ -245,6 +245,13 @@ export class ProfileComponent implements OnInit {
           // while (profileDetails.certificate && profileDetails.certificate.length > 0 && certificate.length) {
           //   certificate.removeAt(0);
           // }}
+          if (this.userData.language_detail?.length > 0) {
+            var result = this.userData.language_detail.map(a => a._id);
+          }
+          else{
+            result = [];
+          }
+          this.profileForm.controls.languages_known.setValue(result)
           this.profileForm.patchValue(profileDetails);
           this.getAllState();
           //this.getDistrict();
@@ -307,7 +314,7 @@ export class ProfileComponent implements OnInit {
       && this.profileForm.value.city_town) {
       this.profileForm.controls.progress.setValue(60);
     }
-    if(this.deptname){
+    if(this.deptname || this.deptname == ''){
       this.profileForm.controls.deptName.setValue(this.deptname)
     }
     if (this.collegename){
@@ -338,7 +345,9 @@ export class ProfileComponent implements OnInit {
         this.currentUser.is_profile_updated = true;
         localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
         this.alert.openAlert(data.data.update_profile.message, null);
-        this.router.navigate(['/Learner/MyCourse']);
+        this.cannotEdit = true;
+        this.getprofileDetails(this.currentUser.user_id);
+        //this.router.navigate(['/Learner/MyCourse']);
       } else {
         this.alert.openAlert(data.data.update_profile.message, null);
       }
