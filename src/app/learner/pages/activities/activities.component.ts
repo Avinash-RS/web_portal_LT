@@ -148,6 +148,7 @@ export class ActivitiesComponent implements OnInit {
   rightNavDisabledSubmissions = false;
   leftNavDisabledActivity = false;
   rightNavDisabledActivity = false;
+  previewDoc;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
@@ -846,7 +847,7 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
-  previewDoc(templateRef: TemplateRef<any>, path) {
+  previewAssignment(templateRef: TemplateRef<any>, path) {
     this.dialog.open(templateRef, {
       width: '100%',
       height: '100%',

@@ -139,7 +139,7 @@
                                     <ng-container *ngIf="content?.noresource">
                                         <ng-container  *ngFor="let res of content?.coursedetails; let i = index">
                                             <mat-card class="resource-card" *ngIf="res.resValue" [ngClass]="res.isOpen?'activeTab':'inActiveTab'">
-                                            <mat-card-title class="d-flex justify-content-between align-items-center pointer" (click)="res.isOpen?res.isOpen=false:res.isOpen=true;">
+                                            <mat-card-title class="d-flex justify-content-between align-items-center pointer" (click)="resourseAccord(content?.coursedetails, i);">
                                                 <h4>{{res?.modulename}}</h4>
                                                 <div style="display: inline-flex;"><i class="lxp-Arrow" [ngClass]="res.isOpen?'arrowUp':'arrowDown'"></i></div>
                                             </mat-card-title>

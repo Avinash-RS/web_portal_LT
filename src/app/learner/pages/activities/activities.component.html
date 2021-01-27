@@ -85,8 +85,8 @@
                         </div>
                         <div class="">
                           <span class="ml-3">
-                            <mat-icon *ngIf="file.enableView" (click)="previewDoc(previewDialog,file)" class="viewDoc">find_in_page</mat-icon>
-                            <mat-icon *ngIf="!file.enableView" class="viewDoc">find_in_page</mat-icon>
+                            <mat-icon *ngIf="file.enableView" (click)="previewAssignment(previewDialog,file)" class="viewDoc with_action">find_in_page</mat-icon>
+                            <mat-icon *ngIf="!file.enableView" class="viewDoc without_action">find_in_page</mat-icon>
                           </span>
                         </div>
                       </div>

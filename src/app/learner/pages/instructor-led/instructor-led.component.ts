@@ -50,6 +50,7 @@ export class InstructorLedComponent implements OnInit {
       // tslint:disable-next-line:no-string-literal
       const data = res.data['getTopicAttendanceDetailsByUsername']['data'];
       this.listOfSessions = data.Activity;
+      this.listOfSessions[0].activity_details.activitytype = 'Recorded'
       this.listOfSessions.sort((a,b)=>{
         return +new Date(b.activity_details.startdate) - +new Date(a.activity_details.startdate);
       })
