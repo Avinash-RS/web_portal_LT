@@ -2,10 +2,18 @@
 <div class="spinner-container" *ngIf="loading">
   <mat-spinner diameter="30"></mat-spinner>
 </div>
-<p class="commonBackStyle">
-  <i class="lxp-Arrow backArrow" (click)="goBack()"></i>
-  <span (click)="goBack()">Back</span>
-</p>
+<div style="padding: 15px;" class="">
+  <div class="commonBackStyle">
+    <i class="lxp-Arrow backArrow" (click)="goBack()"></i>
+    <span (click)="goBack()">Back</span>
+    <div class="courseNameBreadcrum">
+      <span class="pipeLine"> | </span>
+      <span>{{course?.name}}</span>
+      <i class="lxp-Arrow"></i>
+      <span>Discussion Forum</span>
+    </div>
+  </div>
+</div>
 <!-- <p>
   <span class="redHover">
     <mat-icon class="material-icons f_size_15 backIc pointer" (click)="goBack()">arrow_back_ios
@@ -15,7 +23,7 @@
     </span>
   </span>
 </p> -->
-<div class="f_wt_600 f_size_16 m-l-13 display_flex">
+<!-- <div class="f_wt_600 f_size_16 m-l-13 display_flex">
   <span>
     {{course?.name}}
   </span>
@@ -23,7 +31,7 @@
   </mat-icon>
   <span>Discussion Forum</span>
 </div>
-<br>
+<br> -->
 <!-- *ngIf="course?.isBatch" -->
 <div class="row" >
   <div *ngIf="(isMobile?(!isHideAccord?true:false):true)" class="col-lg-4 col-xl-4 col-md-5 col-sm-12 col-12 collaborateAccordion">

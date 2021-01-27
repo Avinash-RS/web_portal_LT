@@ -155,6 +155,7 @@ div.tocSize::-webkit-scrollbar {
         margin: 9px 10px 0 10px;
         line-height: normal;
         display: inline-block;
+        width: 90%;
     }
     &.inActiveTab {
         background-color: #EAEAEA;
@@ -455,9 +456,18 @@ div.tocSize::-webkit-scrollbar {
         font-size: 18px;
         color: #333333;
         margin-left: 10px;
+        width: 100%;
         span {
+            font-weight: 400;
             margin-left: 2px;
             display: inline-block;
+            @media only screen and (max-width: 767px) {
+                width: 95%;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                vertical-align: middle;
+            }
         }
     }
 }
@@ -544,6 +554,9 @@ div.tocSize::-webkit-scrollbar {
         &.mat-tab-label-active {
             color: rgba(0, 0, 0, 1);
         }
+    }
+    .mat-tab-body-content {
+        overflow: auto !important;
     }
 }
 .rescontentHeight {

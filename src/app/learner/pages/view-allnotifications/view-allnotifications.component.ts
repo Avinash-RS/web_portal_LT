@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
@@ -28,7 +29,7 @@ export class ViewAllnotificationsComponent implements OnInit {
   unreadCount: any;
 
 
-  constructor(public commonservice: CommonServicesService, public Lservice: LearnerServicesService,
+  constructor(private router: Router, public commonservice: CommonServicesService, public Lservice: LearnerServicesService,
               private loader: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
@@ -67,5 +68,7 @@ next(e) {
   this.pagenumber = e.pageIndex + 1;
   this.viewAllnotifications();
 }
-
+goBack() {
+  this.router.navigateByUrl('/Learner/MyCourse');
+}
 }
