@@ -17,10 +17,10 @@ p {
     max-height: inherit;
 }
 
-::ng-deep .mat-dialog-container{
-    overflow-x: hidden !important;
-    overflow-y: hidden !important;
-}
+// ::ng-deep .mat-dialog-container{
+//     overflow-x: hidden !important;
+//     overflow-y: hidden !important;
+// }
 
 .mat-button,
 .mat-stroked-button,
