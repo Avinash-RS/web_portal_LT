@@ -488,7 +488,7 @@ export class CoursedetailsComponent implements OnInit {
             this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
             this.getuserid._id + '&path=' + this.gettopicLink.link +
             '&module_status=' + this.moduleSatusCheck
-            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title+ '&token=' + this.user_token);
+            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title+ '&action=Next' + this.gettopicLink.title+ '&token=' + this.user_token);
       }
     }
     // console.log('this.scromModuleData', this.scromModuleData, 'this.currentPage', this.currentPage);
@@ -530,7 +530,7 @@ export class CoursedetailsComponent implements OnInit {
             this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
             this.getuserid._id + '&path=' + this.gettopicLink.link +
             '&module_status=' + this.moduleSatusCheck
-            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&token=' + this.user_token);
+            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Prev' + '&token=' + this.user_token);
 
             console.log('&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title)
       }
@@ -587,7 +587,7 @@ export class CoursedetailsComponent implements OnInit {
       (environment.scormUrl + '/scormPlayer.html?contentID=' +
         this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
         + '&module_status=' + this.moduleSatusCheck
-        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&token=' + this.user_token);
+        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click' + '&token=' + this.user_token);
 }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {
