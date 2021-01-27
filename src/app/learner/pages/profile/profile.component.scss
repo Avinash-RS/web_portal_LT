@@ -7,6 +7,8 @@
   width: 100% !important ;
   border: white !important;
 }
+
+
 //After Restructure
 .profile {
   display: flex;
@@ -19,7 +21,7 @@
     }
   }
 }
-::ng-deep .mat-dialog-container{
+::ng-deep .custom-modalbox .mat-dialog-container{
   overflow: inherit !important;
 }
 .imgSize {
