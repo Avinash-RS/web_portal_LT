@@ -140,6 +140,7 @@ input:-webkit-autofill:active  {
     justify-content: center;
   }
 
+
   button {
     // background: $color-blue !important;
     color: $color-white;
@@ -604,4 +605,8 @@ button:disabled:hover {
   border: 0.5px solid #707070;
   border-radius: 10px;
   opacity: 1;
+}
+
+::ng-deep .custom-modalbox .mat-dialog-container{
+  overflow: hidden !important;
 }
