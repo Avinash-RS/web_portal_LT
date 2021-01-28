@@ -1,5 +1,7 @@
 <mat-toolbar color="primary" class="mat-elevation-z4 bg-dark">
-  <img class="hearder-logo" alt="" src="assets/learner/iGGnite_PNG.png" (click)="navigateMyCourse()">
+  <div class="imgContainer">
+      <img class="hearder-logo" alt="" src="assets/learner/iGGnite_PNG.png" (click)="navigateMyCourse()">
+</div>
 
   <!-- Desktop Menu Starts -->
   <div class="tab desktopMenu" *ngIf="show" [ngClass]="hideHeaderMenu ? 'notPossiblePages' : 'possiblePages'">

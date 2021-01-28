@@ -46,7 +46,8 @@
         <!-- TOC DATA -->
         <div class="tocSize" [ngClass]="drawersOpen ? '': 'drawersOpen'">
             <mat-card *ngFor="let res of scromModuleData; let i = index" [ngClass]="res.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
-                (click)="getSelectedIndex(i)" class="topicCard">
+                (click)="getSelectedIndex(i)" class="topicCard" >
+                <div *ngIf="i===moduleHolder" #focuser ></div>
                         <mat-card-title (click)="moduleExpand(res,i)" class="d-flex justify-content-between align-items-center pointer">
                             <div class="tocTitle">Week - {{i+1}}</div>
                             <div>

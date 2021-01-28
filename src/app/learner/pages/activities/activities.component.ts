@@ -547,7 +547,6 @@ export class ActivitiesComponent implements OnInit {
                
         this.projectDetails.forEach(element => {
           element.showLearnerList = false;
-          // element.isCollapsed = false;
           // Batch date
           const batchEndDate = new Date(element.projectActivity.batchenddate);
           element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
@@ -556,33 +555,12 @@ export class ActivitiesComponent implements OnInit {
           if (moment().format('DD-MM-YYYY') == moment(batchEndDate).format('DD-MM-YYYY')) {
             element.submitType = true;
           }
-          
-          // if (moment().format('DD-MM-YYYY HH:mm') <= element.batchEndDate) {
-          //   element.submitType = true;
-          // } else {            
-          //   element.submitType = false;
-          // }
           // Activity Dates
-          const crrDate = new Date();
           const startDate = new Date(element.projectActivity.activitystartdate);
-          // element.activityStartDate = moment(startDate).format('ll');
           element.startdate = moment(startDate).format('DD-MM-YYYY HH:mm');
           const endDate = new Date(element.projectActivity.activityenddate);
           element.enableSubmit = moment().isSameOrAfter(startDate);
-          // element.activityEndDate = moment(endDate).format('ll');
-          // element.enableSubmit  = this.dateDiff(startDate,
-          //   endDate , crrDate);
-          // commented for submission date isse start
-          // const submitDate = new Date(element.projectActivity.submitted_on);
-          // element.submittedOn = moment(submitDate).format('ll');
-          // commented for submission date isse end
           element.submittedOn = element.projectActivity.submitted_date
-            
-          // if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
-          //   element.enableSubmit = false;
-          // } else {
-          //   element.enableSubmit = true;
-          // }
         });
       }
     });
