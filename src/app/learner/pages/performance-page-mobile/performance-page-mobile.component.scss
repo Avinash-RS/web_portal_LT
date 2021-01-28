@@ -556,3 +556,6 @@ input[type="file"] {
   padding-top: -20px;
   top: -20px;
 }
+::ng-deep .popupModalContainer .mat-dialog-container {
+  overflow-x: hidden !important;
+}

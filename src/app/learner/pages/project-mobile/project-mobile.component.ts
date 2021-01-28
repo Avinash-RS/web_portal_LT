@@ -322,6 +322,7 @@ export class ProjectMobileComponent implements OnInit {
             height: '100%',
             closeOnNavigation: true,
             disableClose: true,
+            panelClass: 'popupModalContainer'
           });
           this.previewDoc = path;
       } else {

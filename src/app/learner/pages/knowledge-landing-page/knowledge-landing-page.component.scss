@@ -249,11 +249,11 @@ drag-scroll {
     .rightArrow {
         right: -10px;
     }
-    button[ng-reflect-disabled="true"] {
+    button.disableArrow {
         display: none;
         cursor: initial;
     }
-    button[ng-reflect-disabled="false"] {
+    button.showArrow {
         display: flex;
         background-color: transparent;
         box-shadow: none;

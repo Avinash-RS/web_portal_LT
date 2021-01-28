@@ -52,10 +52,10 @@
       </drag-scroll>
       <div class="draggable-button-container">
         <div class="leftArrow">
-          <button [disabled]="leftNavDisabled" mat-raised-button (click)="moveLeft()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
+          <button [disabled]="leftNavDisabled" [ngClass]="leftNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveLeft()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
         </div>
         <div class="rightArrow">
-          <button [disabled]="rightNavDisabled" mat-raised-button (click)="moveRight()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
+          <button [disabled]="rightNavDisabled" [ngClass]="rightNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveRight()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
         </div>
       </div>
       
