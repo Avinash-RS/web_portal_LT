@@ -1,9 +1,19 @@
 <app-header></app-header>
 <div class="knowledge-landing-container">
-  <p class="commonBackStyle">
-    <i class="lxp-Arrow backArrow" [routerLink]="['/Learner/knowledge']"></i>
-    <span [routerLink]="['/Learner/knowledge']">Back</span>
-  </p>
+  <div style="margin-bottom: 5px;" class="">
+    <div class="commonBackStyle">
+      <span [routerLink]="['/Learner/knowledge']">
+        <i class="lxp-Arrow backArrow" [routerLink]="['/Learner/knowledge']"></i> 
+        <i class="backText">Back</i>
+      </span>
+    </div>
+    <div class="courseNameBreadcrum">
+      <span class="pipeLine"> | </span>
+      <span>Knowledge Resources</span>
+      <i class="lxp-Arrow"></i>
+      <span>{{resourceFile[0]?.area_of_interest}}</span>
+    </div>
+  </div>
   <!-- <div class="back-page">
     <div class="back-icons">
       <mat-icon class="material-icons f_size_15 backIc">arrow_back_ios
@@ -14,14 +24,14 @@
 
   <div class="header-section">
 
-    <nav aria-label="breadcrumb" class="coursebreadcrumb">
+    <!-- <nav aria-label="breadcrumb" class="coursebreadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           Knowledge Resources > <span class="active">{{resourceFile[0]?.area_of_interest}}</span></li>
-        <!-- <li class="breadcrumb-item active" aria-current="page">
-          </li> -->
+        <li class="breadcrumb-item active" aria-current="page">
+          </li>
       </ol>
-    </nav>
+    </nav> -->
    
     <div class="header-carousel">
 

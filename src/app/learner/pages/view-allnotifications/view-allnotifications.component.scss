@@ -1,4 +1,53 @@
 @import "variable";
+.commonBackStyle {
+    margin: 0 !important;
+    padding-left: 0;
+    display: inline-block;
+    &:hover {
+        i, span {
+            color: #C02222;
+        }
+    }
+    .backArrow {
+        font-size: 6px;
+        color: #231F20;
+        font-weight: bold;
+        transform: rotate(-90deg);
+        display: inline-block;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+    span {
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 18px;
+        color: #999999;
+        font-weight: lighter;
+        margin: 0 0 0 5px;
+    }
+}
+.courseNameBreadcrum {
+    margin-left: 10px;
+    .pipeLine {
+        display: inline-block;
+        margin-right: 10px;
+    }
+    span {
+        color: #333333;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: normal;
+        display: inline-block;
+    }
+    i {
+        display: inline-block;
+        transform: rotate(90deg);
+        font-size: 8px;
+        color: #333333;
+        margin: 0 7px;
+    }
+}
 .notificatonRead {
     margin: 15px 0;
     padding: 0 15px;
