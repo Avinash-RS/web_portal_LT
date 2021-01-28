@@ -679,3 +679,6 @@
 :host ::ng-deep .widthClass .owl-theme .owl-nav {
   display: none !important;
 }
+::ng-deep .popupModalContainer .mat-dialog-container {
+  overflow-x: hidden !important;
+}

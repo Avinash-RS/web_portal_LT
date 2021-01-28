@@ -329,10 +329,10 @@
                   </drag-scroll>
                   <div class="draggable-button-container">
                     <div class="leftArrow">
-                      <button [disabled]="leftNavDisabled" mat-raised-button (click)="moveLeft()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
+                      <button [disabled]="leftNavDisabled" [ngClass]="leftNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveLeft()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
                     </div>
                     <div class="rightArrow">
-                      <button [disabled]="rightNavDisabled" mat-raised-button (click)="moveRight()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
+                      <button [disabled]="rightNavDisabled" [ngClass]="rightNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveRight()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
                     </div>
                   </div>
                 </div>
@@ -470,10 +470,10 @@
                         </drag-scroll>
                         <div class="draggable-button-container">
                           <div class="leftArrow">
-                            <button [disabled]="leftNavDisabledWork" mat-raised-button (click)="moveLeftWork()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
+                            <button [disabled]="leftNavDisabledWork" [ngClass]="leftNavDisabledWork ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveLeftWork()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
                           </div>
                           <div class="rightArrow">
-                            <button [disabled]="rightNavDisabledWork" mat-raised-button (click)="moveRightWork()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
+                            <button [disabled]="rightNavDisabledWork" [ngClass]="rightNavDisabledWork ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveRightWork()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
                           </div>
                         </div>
                       </div>
@@ -669,10 +669,10 @@
                       </drag-scroll>
                       <div class="draggable-button-container">
                         <div class="leftArrow">
-                          <button [disabled]="leftNavDisabledActivity" mat-raised-button (click)="moveLeftActivity()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
+                          <button [disabled]="leftNavDisabledActivity" [ngClass]="leftNavDisabledActivity ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveLeftActivity()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
                         </div>
                         <div class="rightArrow">
-                          <button [disabled]="rightNavDisabledActivity" mat-raised-button (click)="moveRightActivity()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
+                          <button [disabled]="rightNavDisabledActivity" [ngClass]="rightNavDisabledActivity ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveRightActivity()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
                         </div>
                       </div>
                     </div>
@@ -845,10 +845,10 @@
                       </drag-scroll>
                       <div class="draggable-button-container">
                         <div class="leftArrow">
-                          <button [disabled]="leftNavDisabledSubmissions" mat-raised-button (click)="moveLeftSubmissions()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
+                          <button [disabled]="leftNavDisabledSubmissions" [ngClass]="leftNavDisabledSubmissions ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveLeftSubmissions()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
                         </div>
                         <div class="rightArrow">
-                          <button [disabled]="rightNavDisabledSubmissions" mat-raised-button (click)="moveRightSubmissions()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
+                          <button [disabled]="rightNavDisabledSubmissions" [ngClass]="rightNavDisabledSubmissions ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveRightSubmissions()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
                         </div>
                       </div>
                     </div>

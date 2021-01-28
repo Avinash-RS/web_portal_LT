@@ -438,6 +438,7 @@ export class ActivitiesComponent implements OnInit {
           height: '100%',
           closeOnNavigation: true,
           disableClose: true,
+          panelClass: 'popupModalContainer'
         });
         this.previewDoc = path;
       } else {
@@ -451,6 +452,7 @@ export class ActivitiesComponent implements OnInit {
           height: '100%',
           closeOnNavigation: true,
           disableClose: true,
+          panelClass: 'popupModalContainer'
         });
         path.path = path.videourl;
         this.previewDoc = path;
@@ -853,6 +855,7 @@ export class ActivitiesComponent implements OnInit {
       height: '100%',
       closeOnNavigation: true,
       disableClose: true,
+      panelClass: 'popupModalContainer'
     });
     this.docpath = path;
   }
@@ -869,6 +872,7 @@ export class ActivitiesComponent implements OnInit {
       height: '100%',
       closeOnNavigation: true,
       disableClose: true,
+      panelClass: 'popupModalContainer'
     });
     this.previewDoc = path;
   }
@@ -880,6 +884,7 @@ export class ActivitiesComponent implements OnInit {
         height: '100%',
         closeOnNavigation: true,
         disableClose: true,
+        panelClass: 'popupModalContainer'
       });
       this.previewDoc = path;
     } else if (docType === 'video/mp4') {
