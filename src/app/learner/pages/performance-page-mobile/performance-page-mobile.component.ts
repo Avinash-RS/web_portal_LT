@@ -340,6 +340,7 @@ export class PerformancePageMobileComponent implements OnInit {
         height: '100%',
         closeOnNavigation: true,
         disableClose: true,
+        panelClass: 'popupModalContainer'
       });
       this.previewDoc = path;
     } else {
@@ -355,6 +356,7 @@ playVideoMaterial(templateRef: TemplateRef<any>, videoDialog,  path, docType) {
       height: '100%',
       closeOnNavigation: true,
       disableClose: true,
+      panelClass: 'popupModalContainer'
     });
     this.previewDoc = path.path;
 } else {
@@ -368,6 +370,7 @@ previewDoc(templateRef: TemplateRef<any>, path) {
     height: '100%',
     closeOnNavigation: true,
     disableClose: true,
+    panelClass: 'popupModalContainer'
   });
   this.docpath = path;
 }

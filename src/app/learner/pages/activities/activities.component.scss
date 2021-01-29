@@ -943,17 +943,86 @@ margin-top: 8px;
         border-radius: 36px 0 0 36px;
       }
   }
-  button[ng-reflect-disabled="true"] {
-      display: none;
-      cursor: initial;
+  button.disableArrow {
+    display: none;
+    cursor: initial;
   }
-  button[ng-reflect-disabled="false"] {
+  button.showArrow {
       display: flex;
-      background-color: #faf5f7;
-      padding: 10px 0;
+      background-color: transparent;
+      box-shadow: none;
+      padding: 0;
       min-width: inherit;
   }
 }
+.commonBackStyle {
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 0 !important;
+  &:hover {
+      i, span {
+          color: #C02222;
+      }
+      .courseNameBreadcrum {
+        span, i {
+          color: #333333;
+          cursor: auto;
+        }
+      }
+  }
+  .backArrow {
+      font-size: 6px;
+      color: #231F20;
+      font-weight: bold;
+      transform: rotate(-90deg);
+      display: inline-block;
+      vertical-align: middle;
+      cursor: pointer;
+  }
+  span {
+      cursor: pointer;
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 18px;
+      color: #999999;
+      font-weight: lighter;
+      margin-left: 5px;
+  }
+}
+.courseNameBreadcrum {
+  margin-left: 5px;
+  display: inline-block;
+  width: 81%;
+  .pipeLine {
+    display: inline-block;
+    margin-right: 5px;
+  }
+  span {
+    color: #333333;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: normal;
+    display: inline-block;
+    &:nth-child(2) {
+      min-width: 14.25%;
+      max-width: 53%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      @media only screen and (min-width: 768px) {
+        max-width: 100%;
+      }
+    }
+  }
+  i {
+      display: inline-block;
+      transform: rotate(90deg);
+      font-size: 8px;
+      color: #333333;
+      margin: 0 7px;
+  }
+}
+
 ::ng-deep.draggable-button-container .mat-icon {
   font-size: 30px;
   width: 30px;
@@ -1235,7 +1304,16 @@ margin-top: 8px;
   color: #0C781B;
 }
 }
-
+::ng-deep.activitiesTab {
+  .mat-tab-label {
+    opacity: 1;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.5);
+    &.mat-tab-label-active {
+        color: rgba(0, 0, 0, 1);
+    }
+  }
+}
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
   :host ::ng-deep .mat-tab-label, .mat-tab-label-active {
@@ -1250,4 +1328,7 @@ margin-top: 8px;
 }
 ::ng-deep.tooltip-inner {
     max-width: 250px;
+}
+::ng-deep .popupModalContainer .mat-dialog-container {
+  overflow-x: hidden !important;
 }

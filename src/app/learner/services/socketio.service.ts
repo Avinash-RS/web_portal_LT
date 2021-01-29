@@ -41,7 +41,6 @@ export class SocketioService {
     }
     socketReceiver(){
         this.socket.on('coursePlayerStatus', (msg: any) => {
-            console.log("####gokul####")
             if (this.loginDetails.user_id === msg.user_id) {
 
                 this.changeTrigger({
@@ -69,12 +68,12 @@ export class SocketioService {
         });
         return observable;
     }
-    closeSocket(){
+    closeSocket() {
+        if (this.socket.connected) {
         this.socket.removeAllListeners('coursePlayerStatus')
         this.socket.off('coursePlayerStatus');
         this.socket.off('disconnect', this.Connectsocket);
-        console.log(this.socket.disconnected)
-        console.log(this.socket,"after logout")
+        }
     }
 
     socketStatus(){

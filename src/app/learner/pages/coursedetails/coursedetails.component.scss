@@ -5,6 +5,12 @@
 .backarrow{
     color:black
 }
+.passColor{
+    color:#0E7D12
+}
+.processColor{
+    color:#FFA04E
+}
 .disableColor{
 color:grey
 }
@@ -18,10 +24,14 @@ color:grey
 }
 .contentHeight{
     height: 80vh !important;
-    background: #F0F0F0;
+    background: #ffffff;
+    margin-top: 15px;
     .videoPlayer {
         transition: all 0.3s linear;
         width: 70%;
+        @media only screen and (max-width: 767px) {
+            width: 0;
+        }
         &.fullWidth {
             width: 100%;
         }
@@ -35,14 +45,22 @@ color:grey
     width: 30%;
     margin-left: 0;
     transition: all 0.3s linear;
+    @media only screen and (max-width: 767px) {
+        width: 100%;
+    }
     &.drawersOpen {
         margin-left: -30%;
+        @media only screen and (max-width: 767px) {
+            margin-left: -100%;
+        }
     }
 }
 div.tocSize::-webkit-scrollbar {
     width: 5px !important;
 }
-
+::ng-deep.tocSize .mat-stepper-vertical {
+    background-color: #FCFCFC !important;
+}
 // .afterHover {
 //     overflow: y;
 //     height: auto;
@@ -57,7 +75,7 @@ div.tocSize::-webkit-scrollbar {
 // }
 
 .tocTitle {
-   font-size: 15px;
+   font-size: 17px;
    font-weight: normal; 
    color:#999999;
 }
@@ -69,6 +87,7 @@ div.tocSize::-webkit-scrollbar {
     font-weight: normal; 
     color: #666666;
     margin-bottom: 0px;
+    cursor: pointer;
 }
 .topicnm {
     font-size: 13px;
@@ -91,22 +110,151 @@ div.tocSize::-webkit-scrollbar {
 .redHover:hover {
     color: $lxp-theme-green !important;
 }
-.topicCard{
-  margin: 10px 10px 10px 10px;
+.topicCard {
+  margin: 0 10px 10px 10px;
   padding: 10px !important;
+  background-color: #FCFCFC;
   border-radius: 0px;
-  border: 1px solid #cacaca;
+  border: 1px solid rgba(112, 112, 112, 0.25);
   box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.12);
+  &.collapseClass {
+      .tocSubTitle {
+          color: #333333;
+      }
+  }
 //   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
 }
-.resource-card{
-    margin:10px;
-  padding: 10px !important;
-  border-radius: 0px;
-  border: 1px solid #cacaca;
-  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+::ng-deep.resource-card .mat-card-subtitle {
+    margin-bottom: 6px;
 }
-
+.resource-card {
+    margin: 0 10px 10px 10px;
+    padding: 10px !important;
+    border-radius: 0px;
+    // border: 1px solid #cacaca;
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+    .pointer {
+        &:hover {
+            i {
+                color: rgba(0, 0, 0, 0.87);
+            }
+        }
+    }
+    h4 {
+        font-size: 15px;
+        font-weight: 400;
+        margin: 0;
+        line-height: normal;
+    }
+    h5 {
+        white-space: nowrap !important;
+        text-overflow: ellipsis;
+        overflow: hidden !important;
+        font-size: 15px;
+        font-weight: 400;
+        color: #333333;
+        margin: 9px 10px 0 10px;
+        line-height: normal;
+        display: inline-block;
+        width: 90%;
+    }
+    &.inActiveTab {
+        background-color: #EAEAEA;
+        h4 {
+            color: #333333;
+        }
+    }
+    &.activeTab {
+        background-color: #ffffff;
+        h4 {
+            color: #666666;
+        }
+    }
+}
+.aboutCourseTab {
+    max-width: 1150px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 15px 0;
+    h2, h6 {
+        color: #333333;
+        line-height: normal;
+    }
+    h2 {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+    h6 {
+        margin-bottom: 10px;
+        font-size: 15px;
+        font-weight: 400;
+    }
+    .countCourseLanguage {
+        list-style-type: none;
+        margin: 0 0 15px 0;
+        padding: 0;
+        li {
+            color: #000000;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: normal;
+            display: inline-block;
+            border-right: 1px solid #333333;
+            padding-right: 7px;
+            margin-right: 7px;
+            &:last-child {
+                border-right: 0;
+            }
+        }
+    }
+    .descriptionContent {
+        p {
+            font-size: 15px;
+            color: #666666;
+            font-weight: 400;
+            line-height: normal;
+            margin-bottom: 15px;
+        }
+    }
+    .instructionBox {
+        box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+        max-width: 370px;
+        width: 100%;
+        display: inline-block;
+        margin: 0 5px 10px 5px;
+        figure {
+            width: 35%;
+            margin-bottom: 0;
+            img {
+                height: 175px;
+                width: 100%;
+                object-fit: cover;
+                object-position: top center;
+            }
+        }
+        .authorDescription {
+            width: 64%;
+            padding: 10px;
+            h5 {
+                color: #000000;
+                font-size: 15px;
+                font-weight: 700;
+                line-height: normal;
+            }
+            p {
+                color: #5E5E5E;
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 18px;
+                padding-right: 7px;
+                margin-bottom: 0 !important;
+                height: 110px;
+                overflow: auto;
+            }
+        }
+    }
+}
 :host ::ng-deep .mat-step-label {
     white-space: pre-line !important;
     position: relative;
@@ -141,8 +289,9 @@ div.tocSize::-webkit-scrollbar {
     box-sizing: border-box !important;
     height: 10px !important;
     .mat-step-icon {
-        background-color: $color-yellow !important;
-        color: $color-yellow !important;
+        // background-color: $color-yellow !important;
+        background-color: #FFA04E !important;
+        color: #FFA04E !important;
         height: 15px !important;
         width: 15px !important;
         position: relative;
@@ -193,10 +342,15 @@ div.tocSize::-webkit-scrollbar {
     // width:80%;
 }
 .navigation {
+    margin-left: 10px;
     padding-right: 10px;
     max-width: 65%;
     min-width: 65%;
     justify-content: space-between;
+    @media only screen and (max-width: 767px) {
+        max-width: 100%;
+        margin-left: 7px;
+    }
     div {
         display: inline-block;
         line-height: 14px;
@@ -298,18 +452,32 @@ div.tocSize::-webkit-scrollbar {
 
 .titlebar {
     padding:10px;
-    background-color: #F0F0F0;
+    background-color: #ffffff;
     .courseTitle {
         font-size: 18px;
         color: #333333;
         margin-left: 10px;
+        width: 100%;
         span {
+            font-weight: 400;
             margin-left: 2px;
             display: inline-block;
+            @media only screen and (max-width: 767px) {
+                width: 95%;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                vertical-align: middle;
+            }
         }
     }
 }
 .pointer {
+    &:hover {
+        i, span {
+            color: #C02222;
+        }
+    }
     i, span {
         display: inline-block;
     }
@@ -318,6 +486,7 @@ div.tocSize::-webkit-scrollbar {
         color: #999999;
         font-weight: lighter;
         margin-left: 5px;
+        
     }
     .backArrow {
         font-size: 6px;
@@ -328,6 +497,7 @@ div.tocSize::-webkit-scrollbar {
 }
 .toolBar{
     padding: 8px 10px;
+    background-color: #F0F0F0;
     .lxp-HamburgerMenu {
         cursor: pointer;
         font-size: 24px;
@@ -337,9 +507,15 @@ div.tocSize::-webkit-scrollbar {
 }
 .toolBar .leftContent{
     width: 40%;
+    @media only screen and (max-width: 767px) {
+        width: 75%;
+    }
 }
 .toolBar .rightContent{
     width: 60%;
+    @media only screen and (max-width: 767px) {
+        width: 25%;
+    }
 }
 .resourseContainer{
     overflow-y: hidden;
@@ -362,23 +538,90 @@ div.tocSize::-webkit-scrollbar {
     //transform: rotate(180deg);
     display: inline-block;
 }
-.modTopName{
-    white-space: nowrap !important;
-    text-overflow: ellipsis;
-    overflow: hidden !important;
+.popupContainer {
+    height: 100%;
 }
-.resourseToc{
+::ng-deep.popupContainer {
+    .mat-tab-group {
+        height: 100%;
+        .mat-tab-body-wrapper {
+            height: 100%;
+        }
+    }
+    .mat-tab-label {
+        opacity: 1;
+        font-weight: 400;
+        color: rgba(0, 0, 0, 0.5);
+        &.mat-tab-label-active {
+            color: rgba(0, 0, 0, 1);
+        }
+    }
+    .mat-tab-body-content {
+        overflow: auto !important;
+    }
+}
+.rescontentHeight {
+    height: 100%;
+    @media only screen and (max-width: 767px) {
+        flex-direction: column;
+    }
+}
+.resourseToc {
+    margin-top: 10px;
     width: 30% !important;
     min-width: 30%!important;
+    border-right: 1px solid rgba(112, 112, 112, 0.5);
+    @media only screen and (max-width: 767px) {
+        width: 100% !important;
+        min-width: 100%!important;
+        border-right: 0;
+    }
 }
-.rescontentHeight{
-    height: 370px !important;
-}
-.previewContainer{
+.previewContainer {
     width: 100% !important;
+    overflow: auto;
+    height: 100%;
+    position: relative;
+    @media only screen and (max-width: 767px) {
+        overflow: initial;
+        // min-height: 100%;
+    }
+    img {
+        max-width: 100%;
+    }
+    iframe {
+        position: absolute;
+        width: 100%;
+        // height: 0;
+        &::before {
+            content: '';
+            display: block;
+            padding-bottom: 50%;
+        }
+    }
+    .previewContainerTitle {
+        p {
+            text-align: center;
+            font-size: 15px;
+            padding-top: 10px;
+            margin-bottom: 5px;
+        }
+    }
 }
 .popupTab {
+    position: relative;
+    .closeSection {
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        z-index: 9;
+    }
     .mat-tab-label.mat-tab-label-active {
         opacity: 1;
     }
+}
+::ng-deep.resourseContainer .mat-dialog-content {
+    height: 100% !important;
+    max-height: inherit !important;
 }

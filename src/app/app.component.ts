@@ -54,8 +54,6 @@ export class AppComponent implements OnInit {
     // console.error = function(){}
     // console.log = function(){}
     // console.warn = function(){}
-    this.getIPAddress();
-    // this.getIPAddress();
     this.commonService.getIpAddressByUrl();
     // this.getorganizationbyiddetails();
   }
@@ -63,7 +61,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // console.error = function(){}
     // console.log = function(){}
-    // console.warn = function(){}    
+    // console.warn = function(){}
     this.loaderSubscription = this.commonService.loader.subscribe((val) => {
       this.isLoader = val;
       if (this.isLoader) {
@@ -87,27 +85,17 @@ export class AppComponent implements OnInit {
       const rt = this.getChild(this.activatedRoute);
       rt.data.subscribe(data => {
         this.isFooterVisible = '';
-        this.titleService.setTitle(data.title);
-        //  console.log(urlIdentifier[2], "GOKUL");
-        //  console.log(possiblePages.includes(urlIdentifier[2]), e.url)
+        this.titleService.setTitle(data?.title);
         if (!possiblePages.includes(urlIdentifier[2])) {
          /// this.isFooterVisible = false;
-         this.isFooterVisible = '<div class="footer"><span class="powered"><span class="forgot1">2020 © L&T EduTech All Rights Reserved</span></span></div>'
+         const currentYear = new Date().getFullYear()
+         this.isFooterVisible = '<div class="footer"><span class="powered"><span class="forgot1">' + currentYear + ' © L&T EduTech All Rights Reserved</span></span></div>';
         }
-        if(e.url.includes("resetpassword")){
+        if (e.url.includes("resetpassword")) {
           this.isFooterVisible = '';
         }
       });
     });
-
-    this.getIPAddress();
-
-    // window.addEventListener("beforeunload", function (e) {
-    //   var confirmationMessage = "\o/";
-    //   (e || window.event).returnValue = "Do you really want to close?"; //Gecko + IE
-    //   return "Do you really want to close?";                            //Webkit, Safari, Chrome
-    // });
-    // this.myLoad();
   }
   // ** Browser close handler.. Dont delete **
   /*
@@ -156,33 +144,10 @@ myUnload() {
     }
 
   }
-
-  getIPAddress() {
-    // this.http.get(this.commonService.getIpAddressByUrl()).subscribe((res: any) => {
-    //   this.ipAddress = res.ip;
-    //   localStorage.setItem('Systemip', this.ipAddress ? this.ipAddress : '' );
-    // });
-  }
-
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnDestroy(): void {
     this.loaderSubscription.unsubscribe();
   }
 
-//   getorganizationbyiddetails() {
-//     const organizationid = environment.orgId;
-//     if (organizationid === '') {
-//       // localStorage.clear();
-//       localStorage.removeItem('organizationDetails');
-//     }
 
-//     this.Lservice
-//     .get_organization_by_id(organizationid)
-//     .subscribe((result: any) => {
-//       console.log(result, 'resultdata');
-//       if (result.data?.get_organization_by_id?.success) {
-//         localStorage.setItem('organizationDetails', JSON.stringify(result.data?.get_organization_by_id?.message));
-//       }
-//     });
-// }
 }

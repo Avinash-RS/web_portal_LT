@@ -1,7 +1,8 @@
 @import "variable";
 
 .bodyWrapper {
-  background-color: #f0f0f0;
+  // background-color: #f0f0f0;
+  background-color: #ffffff;
   height: 100%;
 }
 .cateName {
@@ -110,7 +111,7 @@
 }
 
 :host ::ng-deep .myCc .mat-tab-label .mat-tab-label-content {
-  font-size: 14px !important;
+  font-size: 15px !important;
   font-weight: 400 !important;
 }
 ::ng-deep .myCc {
@@ -218,9 +219,6 @@
   white-space: nowrap;
   position: relative;
   margin: 0 0 0 0 !important;
-}
-::ng-deep.mat-tab-label-active {
-  background-color: #f5f5f5;
 }
 ::ng-deep.desktopWrapper .mat-tab-header {
   margin-top: 20px;
@@ -716,12 +714,15 @@ hr {
   height: 30px;
 }
 
-::ng-deep.mat-tab-label,
-::ng-deep.mat-tab-label-active {
-  min-width: 120px !important;
-  padding: 3px !important;
-  margin: 3px !important;
-}
+// ::ng-deep.mat-tab-label-active {
+//   background-color: #f5f5f5;
+// }
+// ::ng-deep.mat-tab-label,
+// ::ng-deep.mat-tab-label-active {
+//   min-width: 120px !important;
+//   padding: 3px !important;
+//   margin: 3px !important;
+// }
 
 .margin {
   margin-left: 2%;

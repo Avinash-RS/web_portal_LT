@@ -39,23 +39,10 @@ export class HeaderComponent implements OnInit {
       filter(event => event instanceof NavigationEnd),
       ).subscribe((e: any) => {
         const urlHeader= e.url.split("/")
-      const headerPages = ['MyCourse', 'calendar', 'activitycenterhomescreen', 'knowledge']
+      const headerPages = ['courseDetail']
       // debugger
-      if (!headerPages.includes(urlHeader[2]) && !headerPages.includes(urlHeader[3])) {
+      if (headerPages.includes(urlHeader[2])) {
         this.hideHeaderMenu = true;
-        if (urlHeader[2] == 'activities') {
-          this.hideHeaderMenu = true;
-          console.log('inside if')
-        }
-      }
-      else {
-        this.hideHeaderMenu = false;
-        if(urlHeader[3] == 'activitycenter') {
-          this.hideHeaderMenu = true;
-        }
-        if(urlHeader[2] == 'knowledge' && urlHeader[3] !== undefined) {
-          this.hideHeaderMenu = true;
-        }
       }
     })
   }
@@ -126,9 +113,12 @@ export class HeaderComponent implements OnInit {
         // this.loading = true;
 
         //SOCKET DISCONNECTION START
-        this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
-        });
-        this.socketService.closeSocket();
+        //console.log(this.socketService.socket.connected,"connected")
+        if (this.socketService?.socket?.connected) {
+          this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
+          });
+          this.socketService.closeSocket();
+        }
         //SOCKET DISCONNECTION COMPLETE
         
         this.services.getIpAddressByUrl();

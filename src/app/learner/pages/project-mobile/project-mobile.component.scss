@@ -650,7 +650,13 @@
   }
 }
 
-
+.projectCommentMob {
+  width: 100%;
+  margin-top: 15px;
+  textarea {
+    width: 100%;
+  }
+}
 
 :host ::ng-deep .widthClass .owl-carousel.owl-drag .owl-item {
   width: 15.5rem !important;
@@ -672,4 +678,7 @@
 
 :host ::ng-deep .widthClass .owl-theme .owl-nav {
   display: none !important;
+}
+::ng-deep .popupModalContainer .mat-dialog-container {
+  overflow-x: hidden !important;
 }

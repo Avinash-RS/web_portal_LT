@@ -16,27 +16,12 @@ export class AuthGuard implements CanLoad {
     private toastr: ToastrService,
     private alert: AlertServiceService,
     private router: Router,
-  ) { }
-  // Added by Avinasi
-    canLoad(route: Route, segments: UrlSegment[]): any {
-      const userDetailes = localStorage.getItem('role');
-      const token =  localStorage.getItem('token');
+  ) {
+    console.log('consruc auth');
     
-      if (userDetailes == 'learner' && token) {
-        // userdetail is present // authenticated user
-        // url should not start from admin - can be /Larner or anything
-        // if profile updated and trying to go login/reg
-        // if (userDetailes == 'learner') {
-        //   console.log('login');
-          
-        //   this.router.navigate(['/Learner/MyCourse']);
-          return true;
-        } else {
-          this.router.navigate(['/Learner/login']);
-          return false;
-        }
-        // end of url navigations for logged in learner ------> 1
-      }
+   }
+  // Added by Avinasi
+ 
     //    else {
     //     console.log('not login');
     //     this.router.navigate(['/Learner/login']);
@@ -48,7 +33,9 @@ export class AuthGuard implements CanLoad {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const userDetailes = localStorage.getItem('role');
     const token =  localStorage.getItem('token');
-    if (userDetailes == 'learner' && token) {
+    if (token) {
+      console.log('auth');
+      
       // userdetail is present // authenticated user
       // url should not start from admin - can be /Larner or anything
       // if profile updated and trying to go login/reg
@@ -58,11 +45,34 @@ export class AuthGuard implements CanLoad {
       //   this.router.navigate(['/Learner/MyCourse']);
         return true;
       } else {
+        console.log('auth1');
         this.router.navigate(['/Learner/login']);
         return false;
       }
       // end of url navigations for logged in learner ------> 1
     }
+
+    canLoad(route: Route, segments: UrlSegment[]): any {
+      const userDetailes = localStorage.getItem('role');
+      const token =  localStorage.getItem('token');
+    
+      if (token) {
+        console.log('load auth');
+        // userdetail is present // authenticated user
+        // url should not start from admin - can be /Larner or anything
+        // if profile updated and trying to go login/reg
+        // if (userDetailes == 'learner') {
+        //   console.log('login');
+          
+          // this.router.navigate(['/Learner/MyCourse']);
+          return true;
+        } else {
+          console.log('load auth1');
+          this.router.navigate(['/Learner/login']);
+          return false;
+        }
+        // end of url navigations for logged in learner ------> 1
+      }
 
     // const userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
     // // const role = localStorage.getItem('role') || localStorage.getItem('role') || null;

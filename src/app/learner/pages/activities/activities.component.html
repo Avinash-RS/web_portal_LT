@@ -2,18 +2,32 @@
 <app-performance-page-mobile [performDetailPageData]="perfornDetaildata" *ngIf="performdetailPageView"></app-performance-page-mobile>
 <div class="con-1" *ngIf="!performdetailPageView">
   <!-- <span class="back" routerLink="/Learner/MyCourse" routerLinkActive="active"> < Back</span><br><br> -->
-  <span class="redHover">
+  <!-- <span class="redHover">
     <mat-icon class="material-icons f_size_15 backIc pointer" (click)="goToCourse()">arrow_back_ios
     </mat-icon>
     <span class="f_size_19 pointer" (click)="goToCourse()">Back</span>
-  </span>
-  <!-- <p class="courseName"><b>{{courseName}}</b></p> -->
-  <div class="f_wt_600 f_size_16 m-l-13 display_flex contentTop1">
-    <span class="breadCrumb">
-      <span>{{courseName}}</span> <mat-icon class="material-icons brdcrmb f_size_25 pointer">chevron_right</mat-icon> <span>Activities</span>
-    </span>
+  </span> -->
+  <div style="margin-bottom: 5px;" class="">
+    <div class="commonBackStyle">
+      <i class="lxp-Arrow backArrow" (click)="goToCourse()"></i>
+      <span (click)="goToCourse()">Back</span>
+      <div class="courseNameBreadcrum">
+        <span class="pipeLine"> | </span>
+        <span>{{courseName}}</span>
+        <i class="lxp-Arrow"></i>
+        <span>Activities</span>
+      </div>
+    </div>
   </div>
-  <mat-tab-group  animationDuration="1000ms" (selectedTabChange)="tabChanged($event); activeTab($event)"
+  <!-- <p class="courseName"><b>{{courseName}}</b></p> -->
+  <!-- <div class="f_wt_600 f_size_16 m-l-13 display_flex contentTop1">
+    <span class="breadCrumb">
+      <span>{{courseName}}</span> 
+      <mat-icon class="material-icons brdcrmb f_size_25 pointer">chevron_right</mat-icon> 
+      <span>Activities</span>
+    </span>
+  </div> -->
+  <mat-tab-group class="activitiesTab" animationDuration="1000ms" (selectedTabChange)="tabChanged($event); activeTab($event)"
   [(selectedIndex)]="demo1TabIndex">
     <mat-tab label="Assignments">
       <app-assignment *ngIf="assigmentMobileResponsive"></app-assignment>
@@ -71,8 +85,8 @@
                         </div>
                         <div class="">
                           <span class="ml-3">
-                            <mat-icon *ngIf="file.enableView" (click)="previewDoc(previewDialog,file)" class="viewDoc">find_in_page</mat-icon>
-                            <mat-icon *ngIf="!file.enableView" class="viewDoc">find_in_page</mat-icon>
+                            <mat-icon *ngIf="file.enableView" (click)="previewAssignment(previewDialog,file)" class="viewDoc with_action">find_in_page</mat-icon>
+                            <mat-icon *ngIf="!file.enableView" class="viewDoc without_action">find_in_page</mat-icon>
                           </span>
                         </div>
                       </div>
@@ -315,10 +329,10 @@
                   </drag-scroll>
                   <div class="draggable-button-container">
                     <div class="leftArrow">
-                      <button [disabled]="leftNavDisabled" mat-raised-button (click)="moveLeft()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
+                      <button [disabled]="leftNavDisabled" [ngClass]="leftNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveLeft()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
                     </div>
                     <div class="rightArrow">
-                      <button [disabled]="rightNavDisabled" mat-raised-button (click)="moveRight()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
+                      <button [disabled]="rightNavDisabled" [ngClass]="rightNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveRight()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
                     </div>
                   </div>
                 </div>
@@ -408,7 +422,7 @@
                     </div>
                     <div class="align-center   mt-2" *ngIf="itrdata.grade_status !== 'Evaluated'">
                       <span *ngIf="itrdata.submit_status == 'notsubmitted'" class="submitedFile">Submitted files cannot be edited</span>
-                      <span class="uploadedFile" *ngIf="itrdata.submitAction == 'submit'">Submitted on : {{itrdata.submitted_on | date:'MMM dd, yyyy'}}</span>
+                      <span class="uploadedFile" *ngIf="itrdata.submitAction == 'submit'">Submitted on : {{itrdata.submitted_date | date:'MMM dd, yyyy'}}</span>
                     </div>
                     <div class="align-center mt-2 itdata scrollingData" *ngIf="itrdata.grade_status === 'Evaluated'">
                       <div class="workWrapper">
@@ -456,10 +470,10 @@
                         </drag-scroll>
                         <div class="draggable-button-container">
                           <div class="leftArrow">
-                            <button [disabled]="leftNavDisabledWork" mat-raised-button (click)="moveLeftWork()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
+                            <button [disabled]="leftNavDisabledWork" [ngClass]="leftNavDisabledWork ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveLeftWork()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
                           </div>
                           <div class="rightArrow">
-                            <button [disabled]="rightNavDisabledWork" mat-raised-button (click)="moveRightWork()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
+                            <button [disabled]="rightNavDisabledWork" [ngClass]="rightNavDisabledWork ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveRightWork()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
                           </div>
                         </div>
                       </div>
@@ -655,10 +669,10 @@
                       </drag-scroll>
                       <div class="draggable-button-container">
                         <div class="leftArrow">
-                          <button [disabled]="leftNavDisabledActivity" mat-raised-button (click)="moveLeftActivity()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
+                          <button [disabled]="leftNavDisabledActivity" [ngClass]="leftNavDisabledActivity ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveLeftActivity()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
                         </div>
                         <div class="rightArrow">
-                          <button [disabled]="rightNavDisabledActivity" mat-raised-button (click)="moveRightActivity()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
+                          <button [disabled]="rightNavDisabledActivity" [ngClass]="rightNavDisabledActivity ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveRightActivity()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
                         </div>
                       </div>
                     </div>
@@ -689,7 +703,7 @@
                     </owl-carousel-o> -->
                   </div>
 
-                  <div class="col-md-4 col-sm-12 col-12 third" *ngIf="project.projectActivity.submit_status == 'notsubmitted' || project.projectActivity.grade_status !== 'Evaluated'">
+                  <div class="col-md-4 col-sm-12 col-12 third" *ngIf="project.projectActivity.grade_status !== 'Evaluated'">
                     <div class="f_size_16 f_wt_600 align-center work">Your work</div>
                     <div [ngClass]="project.projectActivity.showLearnerList ? 'box-0-3' : 'box-0-2'">
                       <div class="fileData ml-auto mr-auto mb-3" *ngFor="let item of project.projectActivity.videodetails">
@@ -709,10 +723,10 @@
                         <input type="file" style="display: none" accept="video/mp4,image/png,image/jpeg,image/jpg,application/pdf" #uploadInput [(ngModel)]="fileName" (change)="uploadDoc($event, project, 'upload')" />
                         <button mat-stroked-button class="upload-btn" (click)="uploadDocs()" [disabled]="project.submitType == false || project.enableSubmit == false" *ngIf="project.projectActivity.submitAction !== 'submit'"> <mat-icon class="icon-color m-t-m-2">add</mat-icon> Add your files </button>
                         <button mat-stroked-button class="submit-btn" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')" *ngIf="(project.projectActivity.submit_status == 'notsubmitted' || project.projectActivity.submit_status == 'late') && project.projectActivity.videodetails.length > 0 && project.submitType == true && project.projectActivity.submitAction !== 'submit'">Submit</button>
-                        <!-- <button mat-stroked-button class="submitted-btn mt-2" *ngIf="project.projectActivity.submit_status == 'notsubmitted' && (project.projectActivity.videodetails.length == 0 || project.enableSubmit == false)"> Submit </button> -->
+                        <button mat-stroked-button class="submitted-btn mt-2" *ngIf="project.projectActivity.submit_status == 'notsubmitted' && (project.projectActivity.videodetails.length == 0 || project.enableSubmit == false)"> Submit </button>
                         <button mat-stroked-button class="submitted-btn" [disabled]="true" *ngIf="project.projectActivity.submitAction == 'submit'">Submitted</button>
                         <p *ngIf="project.projectActivity.submit_status == 'notsubmitted'">Submitted files cannot be edited</p>
-                        <p *ngIf="project.projectActivity.submitAction == 'submit'">Submitted on: {{project.submittedOn}}</p>
+                        <p *ngIf="project.projectActivity.submitAction == 'submit'">Submitted on: {{project.submittedOn | date:'MMM dd, yyyy'}}</p>
                       </div>
                     </div>
                   </div>
@@ -831,10 +845,10 @@
                       </drag-scroll>
                       <div class="draggable-button-container">
                         <div class="leftArrow">
-                          <button [disabled]="leftNavDisabledSubmissions" mat-raised-button (click)="moveLeftSubmissions()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
+                          <button [disabled]="leftNavDisabledSubmissions" [ngClass]="leftNavDisabledSubmissions ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveLeftSubmissions()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
                         </div>
                         <div class="rightArrow">
-                          <button [disabled]="rightNavDisabledSubmissions" mat-raised-button (click)="moveRightSubmissions()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
+                          <button [disabled]="rightNavDisabledSubmissions" [ngClass]="rightNavDisabledSubmissions ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveRightSubmissions()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
                         </div>
                       </div>
                     </div>

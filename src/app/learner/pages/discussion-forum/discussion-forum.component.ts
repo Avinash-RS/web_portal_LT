@@ -70,7 +70,9 @@ export class DiscussionForumComponent implements OnInit {
   isHideAccord: boolean = false;
   isMobile: boolean = false;
   secretKey = "(!@#Passcode!@#)";
-
+  oldIdx: any;
+  sortBox = false;
+  selected;
   constructor(public Lservice: LearnerServicesService, public route: Router, private formBuilder: FormBuilder,
               private gs: GlobalServiceService, private toastr: ToastrService, private dialog: MatDialog,
               public cS: CommonServicesService) {
@@ -192,6 +194,10 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   showDetail(data) {
+    this.filterValue = '';
+    this.selected = ''
+    this.searchthreadname = false;
+    this.sortBox = false;
     this.showCourseDetails = false;
     this.showCommentThread = true;
     this.selectedThreadData = data;
@@ -214,6 +220,7 @@ export class DiscussionForumComponent implements OnInit {
     if (d.length > 8) {
       if (d.length > 59950) {
         this.toastr.warning('Comment should be less than 60,000 characters');
+        return false;
       } else {
         // this.cS.loader$.next(true);
         this.loading = true;
@@ -376,10 +383,16 @@ export class DiscussionForumComponent implements OnInit {
       const mask = CryptoJS.AES.encrypt(this.userDetail?.nodebb_response?.uid.toString(), this.secretKey.trim()).toString();
       this.Lservice.viewsingletopicdiscussion(topicSlug.toString(), mask).subscribe((result: any) => {
         this.topicDiscussionData = result?.data?.ViewSingleTopicDiscussionData?.data;
+        // this.topicDiscussionData.posts.forEach(element => {
+        //   var tmp = document.createElement("DIV");
+        //   tmp.innerHTML = element.content;
+        //   tmp.removeAttribute("rel")
+        //   element.content = tmp.textContent || tmp.innerText || "";
+        // });
         this.topicDiscussionData1 = Object.assign({}, result?.data?.ViewSingleTopicDiscussionData?.data);
         this.topicDiscussionData1.posts1 = (this.topicDiscussionData1?.posts);
-        const data = this.topicDiscussionData?.posts?.map(item => item.content = this.alterstring(item?.content));
-        const data1 = this.topicDiscussionData1?.posts1?.map(item => item.content = this.alterstring(item?.content));
+        // const data = this.topicDiscussionData?.posts?.map(item => item.content = this.alterstring(item?.content));
+        // const data1 = this.topicDiscussionData1?.posts1?.map(item => item.content = this.alterstring(item?.content));
         // this.cS.loader$.next(false);
         this.loading = false;
       });
@@ -387,6 +400,10 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   getModuleDataForForum(length, ind, modData) {
+    this.filterValue = '';
+    this.selected = '';
+    this.searchthreadname = false;
+    this.sortBox = false;
     this.showCourseDetails = true;
     this.showCommentThread = false;
     this.selectedModuleData = null;
@@ -413,6 +430,7 @@ export class DiscussionForumComponent implements OnInit {
     if (this.addThreadForm.value.thread_name.length > 8 && desc.d.length > 8) {
       if (desc.d.length > 59950) {
         this.toastr.warning('Your post content is too large. Please reduce content and try again.');
+        return false;
       } else {
         // this.cS.loader$.next(true);
         this.loading = true;
@@ -486,19 +504,12 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   alterstring(text) {
-    // return text.replace('↵', '').replace('</p>', '').replace(/<p>/g, '').replace(/&amp;/g, '&').
-    // replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&quot;/g, '"');
     if (text?.indexOf('rel="nofollow"') === -1) {
       return text?.replace('↵', '').replace('</p>', '').replace(/<p>/g, '').replace(/&amp;/g, '&').
         replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&quot;/g, '"');
     } else {
       text = text?.replace('↵', '').replace('</p>', '').replace(/<p>/g, '').replace(/&amp;/g, '&').
         replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&quot;/g, '"');
-      // const startIndex = text.indexOf('rel="nofollow"');
-      // const endIndex = text.indexOf('</a>" ');
-      // const replacement = '';
-      // const toBeReplaced = text.substring(startIndex + 1, endIndex);
-      // return text.replace(toBeReplaced, replacement).replace(' r</a>"', '').replace('<a href="', '');
       return text?.replace(text?.substring(text?.indexOf('rel="nofollow"') + 1, text?.indexOf('</a>" ')), '').
         replace(' r</a>"', '').replace('<a href="', '');
 
@@ -517,5 +528,17 @@ export class DiscussionForumComponent implements OnInit {
     if (!(code === 32) && !(code > 47 && code < 58) && !(code > 64 && code < 91) && !(code > 96 && code < 123)) {
       evt.preventDefault();
     }
+  }
+
+  moduleExpand(res,index){
+    if(index !== this.oldIdx){
+    for (const element of this.scromModuleData) {
+      element.expanded = false
+    }
+    this.scromModuleData[index].expanded = true;
+    } else {
+      this.scromModuleData[index].expanded = this.scromModuleData[index].expanded ? false : true;
+    }
+  this.oldIdx = index 
   }
 }

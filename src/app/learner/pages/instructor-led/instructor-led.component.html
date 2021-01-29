@@ -1,22 +1,31 @@
 <app-header></app-header>
-
-<br>
-<p>
-  <span class="redHover">
+<div style="padding: 15px;" class="">
+  <div class="commonBackStyle">
+    <i class="lxp-Arrow backArrow" (click)="getBack()"></i>
+    <span (click)="getBack()">Back</span>
+    <div class="courseNameBreadcrum">
+      <span class="pipeLine"> | </span>
+      <span>{{course?.name}}</span>
+      <i class="lxp-Arrow"></i>
+      <span>Instructor Led</span>
+    </div>
+  </div>
+</div>
+<!-- <mat-icon class="material-icons brdcrmb f_size_25 pointer">chevron_right</mat-icon> -->
+<!-- <span class="redHover">
     <mat-icon class="material-icons f_size_15 backIc pointer" (click)="getBack()">arrow_back_ios
     </mat-icon>
     <span class="f_size_19 pointer" (click)="getBack()">
       Back
     </span>
-  </span>
-</p>
-<div class="row">
+  </span> -->
+<!-- <div class="">
   <div class="f_wt_600 f_size_16 display_flex col-12">
     <span class="pad-t-2">{{course?.name}}</span>
     <mat-icon class="material-icons brdcrmb f_size_25 pointer">chevron_right</mat-icon>
     <span class="pad-t-2">Instructor Led</span>
   </div>
-</div>
+</div> -->
 
 <div class="row" *ngIf="listOfSessions?.length > 0">
   <div class="col-lg-7 col-xl-7 col-md-7 col-sm-7 col-12">
@@ -46,7 +55,7 @@
 </div>
 <!-- End of no records -->
 
-<div class="row" *ngIf="listOfSessions?.length">
+<div class="row marginFix" *ngIf="listOfSessions?.length">
   <!-- Left Side Panel ... -->
   <!-- <div class="col-lg-1 col-xl-1 col-md-1 col-sm-1 col-12"></div> -->
   <div class="col-lg-7 col-xl-7 col-md-12 col-sm-12 col-12">
@@ -204,9 +213,11 @@
                 <img *ngIf="los.activity_details.livethumbnail" alt="image" style="width: 100%; height: 150px !important;object-fit: inherit !important;" [src]="los.activity_details.livethumbnail">
                 <img *ngIf="!los.activity_details.livethumbnail" alt="image" style="width: 100%; height: 150px !important;object-fit: inherit !important;" src="../../../../assets/learner/instructor_image.png">
                 <!-- <div class="bottom-right" [ngClass]="los.status == 'Ongoing' ? 'organge' : los.status == 'UpComing' ? 'grey' : los.status == 'Completed' ? 'greenColor':''" >{{los.status}}</div> -->
-                <div *ngIf="los.status == 'On going'" class="bottom-right orange">Ongoing</div>
-                <div *ngIf="los.status == 'Up Coming'" class="bottom-right grey">Upcoming</div>
-                <div *ngIf="los.status == 'Completed'" class="bottom-right greenColor">{{los.status}}</div>
+                <mat-icon class="rec-center" *ngIf="los.activity_details.activitytype == 'Recorded'"> play_circle</mat-icon>
+                <div *ngIf="los.status == 'On going' && los.activity_details.activitytype != 'Recorded'" class="bottom-right orange">Ongoing</div>
+                <div *ngIf="los.status == 'Up Coming' && los.activity_details.activitytype != 'Recorded'" class="bottom-right grey">Upcoming</div>
+                <div *ngIf="los.status == 'Completed' && los.activity_details.activitytype != 'Recorded'" class="bottom-right greenColor">{{los.status}}</div>
+                <div *ngIf="los.activity_details.activitytype == 'Recorded'" class="bottom-right rec-col">Recorded</div>
               </div>
               <div class="content-container">
                 <h4>{{los.activity_details.activityname}}</h4>

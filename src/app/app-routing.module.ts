@@ -8,17 +8,17 @@ import { AuthGuard } from '@core/services/_helpers';
 const routes: Routes = [
 
   {
-    path: 'Learner',
+    path: '',
     loadChildren: './learner/login.module#LoginModule',
     canActivate: [IsLoggedInAuthGuard],
      data : {title: 'Welcome to EduTech'}
   },
 
   {
-    path: '',
+    path: 'Learner',
     loadChildren: './learner/learner.module#LearnerModule',
     canLoad: [AuthGuard],
-    data : {animation: 'Learner'}
+    data : {animation: 'Learner', title: 'My Course'}
   },
   // {
   //   path: 'Admin',
@@ -28,7 +28,7 @@ const routes: Routes = [
   {
     path: 'Player',
     loadChildren: './core/core.module#CoreModule',
-    data : {title: 'Player'}
+    data : {title: 'Course Player'}
   },
   // {
   //   path: '*',
@@ -39,7 +39,6 @@ const routes: Routes = [
   // {path: '**', redirectTo: '/404'},
 
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     scrollPositionRestoration: 'enabled',

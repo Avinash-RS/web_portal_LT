@@ -1,5 +1,97 @@
 @import "variable";
-
+.commonBackStyle {
+    margin-top: 15px !important;
+    padding-left: 15px;
+    display: inline-block;
+    width: 75px;
+    &:hover {
+        i, span {
+            color: #C02222;
+        }
+    }
+    .backArrow {
+        font-size: 6px;
+        color: #231F20;
+        font-weight: bold;
+        transform: rotate(-90deg);
+        display: inline-block;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+    span {
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 18px;
+        color: #999999;
+        font-weight: lighter;
+        margin: 0 0 0 5px;
+    }
+    .backText {
+        display: inline-block;
+        font-style: initial;
+        vertical-align: middle;
+        margin-left: 6px;
+    }
+}
+.courseNameBreadcrum {
+    margin-left: 7px;
+    display: inline-block;
+    width: 74%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding-right: 10px;
+    .pipeLine {
+        display: inline-block;
+        margin-right: 10px;
+    }
+    span {
+        color: #333333;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: normal;
+        // display: inline-block;
+        vertical-align: middle;
+    }
+    i {
+        display: inline-block;
+        transform: rotate(90deg);
+        font-size: 8px;
+        color: #333333;
+        margin: 0 7px;
+    }
+}
+.learnerActivityCenterComp {
+    margin-bottom: 10px;
+    @media only screen and (max-width: 767px) {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+}
+.breadCrumActivities, 
+.search-form {
+    width: 49%;
+    display: inline-block;
+    @media only screen and (max-width: 767px) {
+        width: 100%;
+    }
+}
+.search-form {
+    text-align: right;
+    margin-top: 12px;
+    @media only screen and (max-width: 767px) {
+        text-align: left;
+    }
+}
+::ng-deep.search-form form {
+    margin: 0 15px;
+    .mat-form-field-wrapper {
+        margin: 0;
+        padding: 0;
+    }
+}
 .backIc {
     width: 10px !important;
     margin-left: 10px !important;
@@ -23,7 +115,6 @@ input:focus {
 .inputs:focus {
     border: 1.0px solid $lxp-theme-green !important;
 }
-
 /deep/.search-viewactivities .mat-form-field-appearance-outline .mat-form-field-infix {
     padding-top: 0px !important;
     padding-bottom: 5px !important;

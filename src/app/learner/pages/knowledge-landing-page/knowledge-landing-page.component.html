@@ -1,24 +1,37 @@
 <app-header></app-header>
 <div class="knowledge-landing-container">
-
-  <div class="back-page">
+  <div style="margin-bottom: 5px;" class="">
+    <div class="commonBackStyle">
+      <span [routerLink]="['/Learner/knowledge']">
+        <i class="lxp-Arrow backArrow" [routerLink]="['/Learner/knowledge']"></i> 
+        <i class="backText">Back</i>
+      </span>
+    </div>
+    <div class="courseNameBreadcrum">
+      <span class="pipeLine"> | </span>
+      <span>Knowledge Resources</span>
+      <i class="lxp-Arrow"></i>
+      <span>{{resourceFile[0]?.area_of_interest}}</span>
+    </div>
+  </div>
+  <!-- <div class="back-page">
     <div class="back-icons">
       <mat-icon class="material-icons f_size_15 backIc">arrow_back_ios
       </mat-icon>
       <span [routerLink]="['/Learner/knowledge']">Back</span>
     </div>
-  </div>
+  </div> -->
 
   <div class="header-section">
 
-    <nav aria-label="breadcrumb" class="coursebreadcrumb">
+    <!-- <nav aria-label="breadcrumb" class="coursebreadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           Knowledge Resources > <span class="active">{{resourceFile[0]?.area_of_interest}}</span></li>
-        <!-- <li class="breadcrumb-item active" aria-current="page">
-          </li> -->
+        <li class="breadcrumb-item active" aria-current="page">
+          </li>
       </ol>
-    </nav>
+    </nav> -->
    
     <div class="header-carousel">
 
@@ -39,10 +52,10 @@
       </drag-scroll>
       <div class="draggable-button-container">
         <div class="leftArrow">
-          <button [disabled]="leftNavDisabled" mat-raised-button (click)="moveLeft()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
+          <button [disabled]="leftNavDisabled" [ngClass]="leftNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveLeft()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
         </div>
         <div class="rightArrow">
-          <button [disabled]="rightNavDisabled" mat-raised-button (click)="moveRight()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
+          <button [disabled]="rightNavDisabled" [ngClass]="rightNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveRight()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
         </div>
       </div>
       

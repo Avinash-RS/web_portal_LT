@@ -26,40 +26,40 @@ const routes: Routes = [
     data: { title: 'Learner Login' }
   },
   {
-    path: 'login',
+    path: 'Learner/login',
     component: LoginComponent,
     canActivate: [IsLoggedInAuthGuard],
     data: { title: 'Learner Login' }
   },
   {
-    path: 'register',
+    path: 'Learner/register',
     component: RegistrationComponent,
-    data: { animation: 'Learner  Registration' }
+    data: { animation: 'Learner  Registration', title: 'Learner  Registration'  }
   },
   {
-    path: 'otp',
+    path: 'Learner/otp',
     component: OtpComponent,
     // canActivate: [AuthGuard],
     data: { title: 'Learner  Registration OTP' }
   },
   {
-    path: 'password',
+    path: 'Learner/password',
     component: PasswordComponent,
     // canActivate: [AuthGuard],
     data: { title: 'Learner  Registration Username/Password' }
   },
   {
-    path: 'recover',
+    path: 'Learner/recover',
     component: ForgotUsernameAndPasswordComponent,
-    data: { animation: 'Learner Forget Password' }
+    data: { animation: 'Learner Forget Password', title: 'Learner Forget Password'}
   },
   {
-    path: 'recoverotp',
+    path: 'Learner/recoverotp',
     component: RecoverFogotpasswordOTPComponent,
     data: { title: 'Learner Forget Password OTP' }
   },
   {
-    path: 'resetpassword',
+    path: 'Learner/resetpassword',
     component: ResetpasswordComponent,
     data: { title: 'Learner Reset password' }
   },

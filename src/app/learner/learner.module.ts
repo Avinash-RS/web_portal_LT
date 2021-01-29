@@ -87,55 +87,56 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 const routes: Routes = [
   {
     path: '',
-    // component: LearnerMyCourseComponent,
-    redirectTo: 'Learner',
-    pathMatch: 'full',
-    canLoad: [AuthGuard],
-  },
-  {
-    path: 'Learner',
-    // component: LearnerMyCourseComponent,
     loadChildren: './mycourses.module#MycoursesModule',
+    // component: LearnerMyCourseComponent,
+    // redirectTo: 'Learner',
+    // pathMatch: 'full',
     canLoad: [AuthGuard],
   },
+  // {
+  //   path: 'Learner',
+  //   // component: LearnerMyCourseComponent,
+  //   loadChildren: './mycourses.module#MycoursesModule',
+  //   canLoad: [AuthGuard],
+  // },
   {
-    path: 'Learner/profile',
+    path: 'profile',
     component: ProfileComponent,
     canLoad: [AuthGuard],
-    data: { animation: 'Learner  Profile' }
+    data: { animation: 'Learner  Profile', title: 'Learner  Profile' }
   },
   {
-    path: 'Learner/selfLearning',
+    path: 'selfLearning',
     component: SelfLearnerAvtivityComponent,
     // resolve: {
     //   data: LearnermycourseService
     //   },
     // canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    data: { animation: 'Self Learner Avtivity' }
+    data: { animation: 'Self Learner Avtivity', title: 'Self Learner Avtivity' }
   },
   {
-    path: 'Learner/calendar',
+    path: 'calendar',
     // component: LearnerCalendarComponent,
     loadChildren: './calendar.module#CalendarModules',
     canLoad: [AuthGuard],
-    data: { animation: 'Calendar' }
+    data: { animation: 'Calendar', title: 'Calendar' }
   },
 
   {
-    path: 'Learner/activitycenterhomescreen',
+    path: 'activitycenterhomescreen',
     // component: ActivitycenterhomescreenComponent,
     loadChildren: './activitycenter.module#ActivitycenterModule',
     canLoad: [AuthGuard],
-    data: { animation: 'activitycenterhomescreen' }
+    data: { animation: 'activitycenterhomescreen', title: 'Activity Center' }
 
   },
   {
-    path: 'Learner/knowledge',
+    path: 'knowledge',
     // component: KnowledgeResourceHomeComponent,
     loadChildren: './knowledgeresources.module#KnowledgeresourcesModule',
     canLoad: [AuthGuard],
-    data: { animation: 'activitycenterhomescreen' }
+    data: { animation: 'activitycenterhomescreen' , title: 'Knowledge Resources' }
   },
   // {
   //   path: 'terms',
@@ -149,7 +150,7 @@ const routes: Routes = [
   //   data: { title: 'Course Player' }
   // },
   {
-    path: 'Learner/viewallcourses',
+    path: 'viewallcourses',
     component: ViewAllCoursesComponent,
     canLoad: [AuthGuard]
   },
@@ -165,14 +166,15 @@ const routes: Routes = [
   //   data: { animation: 'Learner home' }
   // },
   {
-    path: 'Learner/forbidden',
+    path: 'forbidden',
     component: ForbiddenComponent,
     data: { title: 'Learner Change email' }
   },
   {
-    path: 'Learner/viewAllnotifications',
+    path: 'viewAllnotifications',
     component: ViewAllnotificationsComponent,
     canLoad: [AuthGuard],
+    data: { title: 'All Notifications' }
   },
   // { path: 'new-home', component: NewHomeComponent },
 ];

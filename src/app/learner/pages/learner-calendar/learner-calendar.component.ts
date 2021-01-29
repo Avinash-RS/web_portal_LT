@@ -156,6 +156,21 @@ export class LearnerCalendarComponent implements OnInit {
       this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
     }
   }
+  goToActivities(value){
+    if(value.activity_details.activitytype === 'Live Classroom'){
+      return false;
+    }else{
+      const data1 = {
+        courseId: value.activity_details.courseid,
+        courseName: value.activity_details.coursename,
+        activityType : value.activity_details.activitytype
+      };
+      localStorage.setItem('Courseid', data1.courseId);
+      localStorage.setItem('CourseName', data1.courseName);
+      this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
+    }
+   
+  }
   launchActivity(value, i) {
       window.open(value.activity_details.link);
       this.saveAttendees();
@@ -174,7 +189,6 @@ export class LearnerCalendarComponent implements OnInit {
     //   status:"true"
     // }
     this.service.saveAttendees().subscribe((res: any) => {
-      console.log('saveAttendees', res);
     });
   }
 

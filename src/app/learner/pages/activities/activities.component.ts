@@ -66,7 +66,7 @@ export class ActivitiesComponent implements OnInit {
   screenHeight: number;
   screenWidth: number;
   // assignmentMessage = false;
-
+  fromCalender = false;
   trendingItration: any = {
     loop: false, // dont make it true
     mouseDrag: true,
@@ -148,6 +148,7 @@ export class ActivitiesComponent implements OnInit {
   rightNavDisabledSubmissions = false;
   leftNavDisabledActivity = false;
   rightNavDisabledActivity = false;
+  previewDoc;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
@@ -160,8 +161,21 @@ export class ActivitiesComponent implements OnInit {
     }
     this.courseid = this.checkDetails ? this.checkDetails.courseId : localStorage.getItem('Courseid');
     this.courseName = this.checkDetails ? this.checkDetails.courseName : localStorage.getItem('CourseName');
+    var index;
+    if (this.checkDetails?.activityType) {
+      this.fromCalender = true
+      if(this.checkDetails?.activityType == 'Assignment'){
+        index = '0'
+      } else if (this.checkDetails?.activityType == 'Perform'){
+        index = '1'
+      } else {
+        index = '2'
+      }
+    }else{
+      this.fromCalender = false
+       index = localStorage.getItem('userTabLocation');
+    }
     
-    const index = localStorage.getItem('userTabLocation');
     if (index) {
       // tslint:disable-next-line:radix
       this.demo1TabIndex = parseInt(index);
@@ -301,7 +315,11 @@ export class ActivitiesComponent implements OnInit {
   }
 
   goToCourse() {
-    this.route.navigateByUrl('/Learner/MyCourse');
+    if(this.fromCalender){
+      this.route.navigateByUrl('/Learner/calendar');
+    } else {
+      this.route.navigateByUrl('/Learner/MyCourse');
+    }
   }
   getSelectedIndex(i) {
     this.selectedIndex = i;
@@ -420,6 +438,7 @@ export class ActivitiesComponent implements OnInit {
           height: '100%',
           closeOnNavigation: true,
           disableClose: true,
+          panelClass: 'popupModalContainer'
         });
         this.previewDoc = path;
       } else {
@@ -433,6 +452,7 @@ export class ActivitiesComponent implements OnInit {
           height: '100%',
           closeOnNavigation: true,
           disableClose: true,
+          panelClass: 'popupModalContainer'
         });
         path.path = path.videourl;
         this.previewDoc = path;
@@ -522,13 +542,11 @@ export class ActivitiesComponent implements OnInit {
 
   getprojectActivityData() {
     this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
-      console.log('asdfsa', data)
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
         this.projectDetails = data.data.getprojectActivityData.data; 
                
         this.projectDetails.forEach(element => {
           element.showLearnerList = false;
-          // element.isCollapsed = false;
           // Batch date
           const batchEndDate = new Date(element.projectActivity.batchenddate);
           element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
@@ -537,32 +555,12 @@ export class ActivitiesComponent implements OnInit {
           if (moment().format('DD-MM-YYYY') == moment(batchEndDate).format('DD-MM-YYYY')) {
             element.submitType = true;
           }
-          // console.log('Final', moment().isSameOrAfter(batchEndDate));
-          
-          // if (moment().format('DD-MM-YYYY HH:mm') <= element.batchEndDate) {
-          //   element.submitType = true;
-          // } else {            
-          //   element.submitType = false;
-          // }
           // Activity Dates
-          const crrDate = new Date();
           const startDate = new Date(element.projectActivity.activitystartdate);
-          // element.activityStartDate = moment(startDate).format('ll');
           element.startdate = moment(startDate).format('DD-MM-YYYY HH:mm');
           const endDate = new Date(element.projectActivity.activityenddate);
           element.enableSubmit = moment().isSameOrAfter(startDate);
-          // element.activityEndDate = moment(endDate).format('ll');
-          // element.enableSubmit  = this.dateDiff(startDate,
-          //   endDate , crrDate);
-          const submitDate = new Date(element.projectActivity.submitted_on);
-          element.submittedOn = moment(submitDate).format('ll');
-            // console.log(ena);
-            
-          // if (moment().format('DD-MM-YYYY HH:MM') < element.startdate) {
-          //   element.enableSubmit = false;
-          // } else {
-          //   element.enableSubmit = true;
-          // }
+          element.submittedOn = element.projectActivity.submitted_date
         });
       }
     });
@@ -596,11 +594,6 @@ export class ActivitiesComponent implements OnInit {
           // const endDate = this.datePipe.transform(element.performActivity.activityenddate, 'dd-MM-yyyy HH:MM aa');
           // const batchendDate = this.datePipe.transform(element.performActivity.batchenddate, 'dd-MM-yyyy HH:MM aa');
           // const crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy  HH:MM  aa');
-          // console.log(moment.utc(element.performActivity.activitystartdate).format());
-          // console.log(startDate);
-          // console.log(endDate);
-          // console.log(batchendDate);
-          // console.log(crrDate);
           
           const batchEndDate = new Date(element.performActivity.batchenddate);
           element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
@@ -839,18 +832,18 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
-  previewDoc(templateRef: TemplateRef<any>, path) {
+  previewAssignment(templateRef: TemplateRef<any>, path) {
     this.dialog.open(templateRef, {
       width: '100%',
       height: '100%',
       closeOnNavigation: true,
       disableClose: true,
+      panelClass: 'popupModalContainer'
     });
     this.docpath = path;
   }
 
   openDocument(templateRef: TemplateRef<any>, path, docType) {
-    console.log('Path', path)
     if(path == null) {
       this.toastr.warning("No Reports Found")
       return false;
@@ -862,9 +855,9 @@ export class ActivitiesComponent implements OnInit {
       height: '100%',
       closeOnNavigation: true,
       disableClose: true,
+      panelClass: 'popupModalContainer'
     });
     this.previewDoc = path;
-    console.log('this.previewDoc', this.previewDoc)
   }
 
   playVideo(templateRef: TemplateRef<any>, videoDialog, path, docType) {
@@ -874,6 +867,7 @@ export class ActivitiesComponent implements OnInit {
         height: '100%',
         closeOnNavigation: true,
         disableClose: true,
+        panelClass: 'popupModalContainer'
       });
       this.previewDoc = path;
     } else if (docType === 'video/mp4') {
