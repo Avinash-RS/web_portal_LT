@@ -18,7 +18,7 @@ const routes: Routes = [
     path: 'Learner',
     loadChildren: './learner/learner.module#LearnerModule',
     canLoad: [AuthGuard],
-    data : {animation: 'Learner', title: 'My Course'}
+    data : {title: 'My Course'}
   },
   // {
   //   path: 'Admin',
