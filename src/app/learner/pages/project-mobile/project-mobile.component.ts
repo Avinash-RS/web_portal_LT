@@ -249,14 +249,14 @@ export class ProjectMobileComponent implements OnInit {
   // Submit or Delete
   learnerSumbitdeleteVideo(project, deleteItem, submitAction) {
     const startDate1 = new Date(project.projectActivity.activitystartdate);
-    project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:mm');
+    project.actstartDate = moment(startDate1);
     const endDate1 = new Date(project.projectActivity.activityenddate);
-    project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:mm');
+    project.actendDate = moment(endDate1);
     let submitStatus = '';
-    if (moment().format('DD-MM-YYYY HH:mm') >= project.actstartDate &&
-    moment().format('DD-MM-YYYY HH:mm') <= project.actendDate) {
+    if (moment() >= project.actstartDate &&
+    moment() <= project.actendDate) {
       submitStatus = 'ontime';
-    } else if (moment().format('DD-MM-YYYY HH:mm') > project.actendDate) {
+    } else if (moment() > project.actendDate) {
       submitStatus = 'late';
     }
     const submitData = {
@@ -383,5 +383,20 @@ export class ProjectMobileComponent implements OnInit {
 
     downloadFile(data) {
       window.open(data);
+    }
+    resourseAccord(courseResource, index) {
+      if (courseResource) {
+        courseResource.forEach((element, i) => {
+          if (index === i) {
+            if (element.isOpen) {
+              element.isOpen = false;
+            } else {
+              element.isOpen = true;
+            }
+          } else {
+            element.isOpen = false;
+          }
+        });
+      }
     }
 }

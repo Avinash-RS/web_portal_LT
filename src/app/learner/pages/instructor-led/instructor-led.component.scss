@@ -461,7 +461,7 @@
       line-height: normal;
       display: inline-block;
       &:nth-child(2) {
-        min-width: 14.25%;
+        min-width: 12.50%;
         max-width: 40%;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -469,6 +469,9 @@
         @media only screen and (min-width: 768px) {
           max-width: 100%;
         }
+      }
+      &:last-child {
+        margin-left: 0;
       }
     }
     i {

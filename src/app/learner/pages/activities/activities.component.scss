@@ -1004,7 +1004,7 @@ margin-top: 8px;
     line-height: normal;
     display: inline-block;
     &:nth-child(2) {
-      min-width: 14.25%;
+      min-width: 12.50%;
       max-width: 53%;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -1012,6 +1012,9 @@ margin-top: 8px;
       @media only screen and (min-width: 768px) {
         max-width: 100%;
       }
+    }
+    &:last-child {
+      margin-left: 0;
     }
   }
   i {

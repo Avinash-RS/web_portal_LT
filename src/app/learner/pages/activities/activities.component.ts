@@ -273,6 +273,22 @@ export class ActivitiesComponent implements OnInit {
     localStorage.setItem('userTabLocation', event.index);
   }
 
+  resourseAccord(courseResource, index) {
+    if (courseResource) {
+      courseResource.forEach((element, i) => {
+        if (index === i) {
+          if (element.isOpen) {
+            element.isOpen = false;
+          } else {
+            element.isOpen = true;
+          }
+        } else {
+          element.isOpen = false;
+        }
+      });
+    }
+  }
+  
   tabChanged(event) {
     // if (this.demo1TabIndex.toString() == '0') {
     //   this.getAssignmentmoduleData();

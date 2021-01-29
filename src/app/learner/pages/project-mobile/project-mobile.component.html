@@ -35,10 +35,11 @@
             <p>{{project.projectActivity.activityname}}</p>
           </div>
           <div class="keyboardArrow">
-            <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="!isCollapsed || projectId !== i"
-              (click)="isCollapsed = !isCollapsed; projectId = i">keyboard_arrow_down</mat-icon>
+            <!-- <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="!isCollapsed || projectId !== i" (click)="isCollapsed = !isCollapsed; projectId = i">keyboard_arrow_down</mat-icon>
             <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="isCollapsed && projectId === i"
-              (click)="isCollapsed = !isCollapsed; projectId = i">keyboard_arrow_up</mat-icon>
+              (click)="isCollapsed = !isCollapsed; projectId = i">keyboard_arrow_up</mat-icon> -->
+
+            <mat-icon class="f_size_16 expansionarr" aria-hidden="false" (click)="resourseAccord(projectDetails, i);">{{project.isOpen?'keyboard_arrow_up':'keyboard_arrow_down'}}</mat-icon>
           </div>
         </div>
 
@@ -85,7 +86,7 @@
           </div>
         </div>
         <!-----------------------------Materials for activity--------------------->
-        <div class="materialsActivity" *ngIf="isCollapsed && projectId === i">
+        <div class="materialsActivity" *ngIf="project.isOpen">
           <div class="ml-0 mr-0">
             <div class="text-left">
               <span class="materialCls"><strong> Materials for activity ({{project.projectActivity.materialDetails.length}}) </strong></span>
@@ -301,7 +302,7 @@
         </div>
 
         <!-----------------------------------Your files----------------------------------------->
-        <div *ngIf="isCollapsed && projectId === i && project.projectActivity.grade_status == 'Evaluated'">
+        <div *ngIf="project.isOpen && project.projectActivity.grade_status == 'Evaluated'">
           <div class="ml-0 mr-0">
             <div class="text-left">
               <span>Your files ({{project.projectActivity.videodetails.length}})</span>
