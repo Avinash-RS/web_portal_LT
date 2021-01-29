@@ -71,7 +71,8 @@ export class DiscussionForumComponent implements OnInit {
   isMobile: boolean = false;
   secretKey = "(!@#Passcode!@#)";
   oldIdx: any;
-
+  sortBox = false;
+  selected;
   constructor(public Lservice: LearnerServicesService, public route: Router, private formBuilder: FormBuilder,
               private gs: GlobalServiceService, private toastr: ToastrService, private dialog: MatDialog,
               public cS: CommonServicesService) {
@@ -193,6 +194,10 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   showDetail(data) {
+    this.filterValue = '';
+    this.selected = ''
+    this.searchthreadname = false;
+    this.sortBox = false;
     this.showCourseDetails = false;
     this.showCommentThread = true;
     this.selectedThreadData = data;
@@ -215,6 +220,7 @@ export class DiscussionForumComponent implements OnInit {
     if (d.length > 8) {
       if (d.length > 59950) {
         this.toastr.warning('Comment should be less than 60,000 characters');
+        return false;
       } else {
         // this.cS.loader$.next(true);
         this.loading = true;
@@ -394,6 +400,10 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   getModuleDataForForum(length, ind, modData) {
+    this.filterValue = '';
+    this.selected = '';
+    this.searchthreadname = false;
+    this.sortBox = false;
     this.showCourseDetails = true;
     this.showCommentThread = false;
     this.selectedModuleData = null;
@@ -420,6 +430,7 @@ export class DiscussionForumComponent implements OnInit {
     if (this.addThreadForm.value.thread_name.length > 8 && desc.d.length > 8) {
       if (desc.d.length > 59950) {
         this.toastr.warning('Your post content is too large. Please reduce content and try again.');
+        return false;
       } else {
         // this.cS.loader$.next(true);
         this.loading = true;
