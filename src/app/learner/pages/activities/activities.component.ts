@@ -697,31 +697,36 @@ export class ActivitiesComponent implements OnInit {
 
   // Submit or Delete
   learnerSumbitdeleteVideo(project, deleteItem, submitAction) {
-    // const startDate1 = new Date(project.projectActivity.activitystartdate);
-    // project.actstartDate = moment(startDate1);
-    // const endDate1 = new Date(project.projectActivity.activityenddate);
-    // project.actendDate = moment(endDate1);
-    // commented by avinash
-    const startDate1 = new Date(project.projectActivity.activitystartdate);
-    project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:mm');
-    const endDate1 = new Date(project.projectActivity.activityenddate);
-    project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:mm');
 
-    let submitStatus = '';
-    // if (moment() >= project.actstartDate &&
-    //   moment() <= project.actendDate) {
-    //   submitStatus = 'ontime';
-      
-    // } else if (moment() > project.actendDate) {
-    //   submitStatus = 'late';
-    // }
+    const startDate1 = new Date(project.projectActivity.activitystartdate);
+    project.actstartDate = moment(startDate1);
+    const endDate1 = new Date(project.projectActivity.activityenddate);
+    project.actendDate = moment(endDate1);
+    //----- pradeep comment-------
+    //--------- date comparison should not do using format string or else it wont compare monthwise dates
     // commented by avinash
-    if (moment().format('DD-MM-YYYY HH:mm') >= project.actstartDate &&
-    moment().format('DD-MM-YYYY HH:mm') <= project.actendDate) {
+    // const startDate1 = new Date(project.projectActivity.activitystartdate);
+    // project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:mm');
+    // const endDate1 = new Date(project.projectActivity.activityenddate);
+    // project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:mm');
+
+    //----- pradeep comment-------
+    //--------- date comparison should not do using format string or else it wont compare monthwise dates
+    let submitStatus = '';
+    if (moment() >= project.actstartDate &&
+      moment() <= project.actendDate) {
       submitStatus = 'ontime';
-    } else if (moment().format('DD-MM-YYYY HH:mm') > project.actendDate) {
+      
+    } else if (moment() > project.actendDate) {
       submitStatus = 'late';
     }
+    // commented by avinash
+    // if (moment().format('DD-MM-YYYY HH:mm') >= project.actstartDate &&
+    // moment().format('DD-MM-YYYY HH:mm') <= project.actendDate) {
+    //   submitStatus = 'ontime';
+    // } else if (moment().format('DD-MM-YYYY HH:mm') > project.actendDate) {
+    //   submitStatus = 'late';
+    // }
     const submitData = {
       course_id: this.courseid,
       module_id: project.projectActivity.module_id,

@@ -191,7 +191,7 @@
           <div class="row">
             <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12">
               <div class="row f_size_18 titlecolor">
-                <h3> {{data?.titleRaw | titlecase}}</h3>
+                <h3> {{data?.title | titlecase}}</h3>
               </div>
               <div class="row f_size_14 date_color">
                 <p> Last post by <strong class="titlecolor">{{data?.user?.username | titlecase}}
@@ -260,9 +260,9 @@
           <div class=col-1></div>
           <div class="col-11 thread_title p-l-0">
             <p class="f_size_17 color_black f_wt_400 color_grey">
-              {{selectedThreadData?.titleRaw || 'Thread name'}}
+              {{selectedThreadData?.title || 'Thread name'}}
             </p>
-            <div *ngIf="topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]">
+            <div *ngIf="topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]" style="word-break: break-all;">
               <p class="no_margin" *ngIf="topicDiscussionData?.posts[0].deleted === false"
                 [innerHTML]="topicDiscussionData?.posts[0].content"></p>
             </div>
@@ -415,7 +415,7 @@
             <div class="row p-lr-30 m-t-20">
               <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
               </div>
-              <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
+              <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding" style="word-break: break-all;">
                 <p class="no_margin" *ngIf="post?.deleted === false" [innerHTML]="post?.content">
                 </p>
 
@@ -495,7 +495,7 @@
                   <div class="row p-lr-30 m-t-20">
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
                     </div>
-                    <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
+                    <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding" style="word-break: break-all;">
                       <p class="no_margin" *ngIf="posts?.deleted === false" [innerHTML]="posts?.content"></p>
 
                     </div>
@@ -578,7 +578,7 @@
                         <div class="row p-lr-30 m-t-20">
                           <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-3 no_padding">
                           </div>
-                          <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding">
+                          <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-9 no_padding" style="word-break: break-all;">
                             <p class="no_margin" *ngIf="postss?.deleted === false" [innerHTML]="postss?.content"></p>
 
                           </div>
