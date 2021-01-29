@@ -33,6 +33,7 @@ export class RegistrationComponent implements OnInit {
   secretKey = "(!@#Passcode!@#)";
   siteKey: any = environment.captachaSiteKey;
   resolvedCaptcha: any;
+  currentYear = new Date().getFullYear();
   constructor(
     public translate: TranslateService,
     private formBuilder: FormBuilder,
