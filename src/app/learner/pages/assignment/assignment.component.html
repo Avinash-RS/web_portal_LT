@@ -63,12 +63,12 @@
                         <div class="width assignmentUpload">
                           <div class="col-12 text-center border"> 
                             <span mat-stroked-button class="uploadBtn d-flex justify-content-center align-items-center w-100" *ngIf="file?.enableUpload">
-                              <mat-icon (click)="fileInput.click()" class="add-icon">upload</mat-icon>
+                              <mat-icon (click)="fileInput.click()" class="add-icon">upload</mat-icon> Upload
                             </span>
                             <span mat-stroked-button class="uploadBtn d-flex justify-content-center align-items-center w-100" *ngIf="!file?.enableUpload">
                               <mat-icon class="add-icon gradedUpload">upload</mat-icon> Upload
                             </span>
-                            <input type="file" id="upload-file" #fileInput multiple  (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate,file?.path)" />
+                            <input type="file" id="upload-file" #fileInput multiple (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate,file?.path)" />
                           </div>
                         </div>
                         <div class="width d-flex justify-content-between">
