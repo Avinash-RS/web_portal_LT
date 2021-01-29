@@ -62,3 +62,7 @@ p {
 .msg:first-letter {
     text-transform: capitalize !important;
 }
+
+::ng-deep .custom-modalbox .mat-dialog-container{
+    overflow: hidden !important;
+  }
