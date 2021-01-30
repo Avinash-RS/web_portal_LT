@@ -149,15 +149,26 @@ export class PerformancePageMobileComponent implements OnInit {
     submitDeleteVideo(videoName, itrdata, perform) {
       let videoFile = [];
       videoFile.push(videoName);
-      const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm a');
-      const performVideo = new FormData();
-      const startDate = this.datePipe.transform(perform?.activitystartdate, 'dd-MM-yyyy HH:mm a');
-      const endDate = this.datePipe.transform(perform?.activityenddate, 'dd-MM-yyyy HH:mm a');
-      if (currentDate >= startDate && currentDate <= endDate) {
-        this.submitStatus = 'ontime';
+      // const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm a');
+      // const startDate = this.datePipe.transform(perform?.activitystartdate, 'dd-MM-yyyy HH:mm a');
+      // const endDate = this.datePipe.transform(perform?.activityenddate, 'dd-MM-yyyy HH:mm a');
+      // if (currentDate >= startDate && currentDate <= endDate) {
+      //   this.submitStatus = 'ontime';
+      // } else {
+      //   this.submitStatus = 'late';
+      // }
+
+      const startDate1 = new Date(perform.activitystartdate);
+      const startDate = moment(startDate1);
+      const endDate1 = new Date(perform.activityenddate);
+      const endDate = moment(endDate1);
+      if (moment() >= startDate &&
+        moment() <= endDate) {
+          this.submitStatus = 'ontime';
       } else {
         this.submitStatus = 'late';
       }
+
       const data = {
         course_id: perform.course_id,
         module_id: perform.module_id,
@@ -271,15 +282,27 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
   performlearnerUploadVideo() {
-    const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
+    // const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
     const performVideo = new FormData();
-    const startDate = this.datePipe.transform(this.performActivityData.activitystartdate, 'dd-MM-yyyy HH:mm a');
-    const endDate = this.datePipe.transform(this.performActivityData.activityenddate, 'dd-MM-yyyy HH:mm a');
-    if (currentDate >= startDate && currentDate <= endDate) {
-      this.submitStatus = 'ontime';
+    // const startDate = this.datePipe.transform(this.performActivityData.activitystartdate, 'dd-MM-yyyy HH:mm a');
+    // const endDate = this.datePipe.transform(this.performActivityData.activityenddate, 'dd-MM-yyyy HH:mm a');
+    // if (currentDate >= startDate && currentDate <= endDate) {
+    //   this.submitStatus = 'ontime';
+    // } else {
+    //   this.submitStatus = 'late';
+    // }
+
+    const startDate1 = new Date(this.performActivityData.activitystartdate);
+    const startDate = moment(startDate1);
+    const endDate1 = new Date(this.performActivityData.activityenddate);
+    const endDate = moment(endDate1);
+    if (moment() >= startDate &&
+      moment() <= endDate) {
+        this.submitStatus = 'ontime';
     } else {
       this.submitStatus = 'late';
     }
+
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.selectPerformfile.length; i++) {
       performVideo.append('uploadvideo', this.selectPerformfile[i]);
