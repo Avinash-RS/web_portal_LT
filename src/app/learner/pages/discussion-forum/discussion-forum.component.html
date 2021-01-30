@@ -190,7 +190,7 @@
         <mat-card class="black_border m-bt-4 box_shadow pointer" (click)="showDetail(data)" *ngIf="!data.deleted">
           <div class="row">
             <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12">
-              <div class="row f_size_18 titlecolor">
+              <div class="row f_size_18 titlecolor" style="word-break: break-all;">
                 <h3> {{data?.title | titlecase}}</h3>
               </div>
               <div class="row f_size_14 date_color">
@@ -259,7 +259,7 @@
         <div class="row p-lr-15 m-t-20">
           <div class=col-1></div>
           <div class="col-11 thread_title p-l-0">
-            <p class="f_size_17 color_black f_wt_400 color_grey">
+            <p class="f_size_17 color_black f_wt_400 color_grey" style="word-break: break-all ;">
               {{selectedThreadData?.title || 'Thread name'}}
             </p>
             <div *ngIf="topicDiscussionData && topicDiscussionData?.posts && topicDiscussionData?.posts[0]" style="word-break: break-all;">

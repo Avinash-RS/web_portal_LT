@@ -13,6 +13,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import Swal from 'sweetalert2';
 import { environment } from '../../../../environments/environment';
 import { LearnerServicesService } from '../../services/learner-services.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -28,7 +29,8 @@ export class ProfileComponent implements OnInit {
               private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,
               private loader: Ng4LoadingSpinnerService, private formBuilder: FormBuilder,
               private router: Router, private gs: GlobalServiceService,
-              private services: CommonServicesService) {
+              private services: CommonServicesService,
+              private toastr: ToastrService) {
     if (this.gs.checkLogout()) {
       // this.urlImage = localStorage.getItem('user_img')
       this.currentUser = this.gs.checkLogout();
@@ -309,6 +311,18 @@ export class ProfileComponent implements OnInit {
     });
   }
   updateProfile() {
+    if(this.profileForm.value.gender == '0'){
+      this.toastr.warning('Gender cannot be empty');
+      return false;
+    }
+    if (this.profileForm.value.country == 'null' || this.profileForm.value.state == 'null' || this.profileForm.value.city_town == 'null') {
+      this.toastr.warning('Location details cannot be empty');
+      return false;
+    }
+    if (this.deptname?.length > 50) {
+      this.toastr.warning('Department name must not exceed 50 characters');
+      return false;
+    }
     if (this.profileForm.value.gender && this.profileForm.value.is_student_or_professional &&
       this.profileForm.value.country && this.profileForm.value.state
       && this.profileForm.value.city_town) {
