@@ -640,3 +640,18 @@ div.tocSize::-webkit-scrollbar {
     height: 100% !important;
     max-height: inherit !important;
 }
+.contentCent {
+    height: 75%
+}
+
+.contentCent {
+    display: -webkit-flexbox;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    justify-content: center;
+}

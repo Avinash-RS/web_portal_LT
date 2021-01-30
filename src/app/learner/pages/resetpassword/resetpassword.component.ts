@@ -36,6 +36,7 @@ export class ResetpasswordComponent implements OnInit {
   secretKey = "(!@#Passcode!@#)";
   siteKey: any = environment.captachaSiteKey;
   resolvedCaptcha: any;
+  currentYear = new Date().getFullYear();
 
   constructor(
     public translate: TranslateService,

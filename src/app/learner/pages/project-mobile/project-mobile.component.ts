@@ -208,14 +208,25 @@ export class ProjectMobileComponent implements OnInit {
 
   learnerUploadVideo(project, submitAction) {
     const startDate1 = new Date(project.projectActivity.activitystartdate);
-    project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:mm');
+    // project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:mm');
+    project.actstartDate = moment(startDate1);
+
     const endDate1 = new Date(project.projectActivity.activityenddate);
-    project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:mm');
+    // project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:mm');
+    project.actendDate = moment(endDate1);
+
+    // let submitStatus = '';
+    // if (moment().format('DD-MM-YYYY HH:mm') >= project.actstartDate &&
+    //   moment().format('DD-MM-YYYY HH:mm') <= project.actendDate) {
+    //   submitStatus = 'ontime';
+    // } else if (moment().format('DD-MM-YYYY HH:mm') > project.actendDate) {
+    //   submitStatus = 'late';
+    // }
     let submitStatus = '';
-    if (moment().format('DD-MM-YYYY HH:mm') >= project.actstartDate &&
-      moment().format('DD-MM-YYYY HH:mm') <= project.actendDate) {
+    if (moment() >= project.actstartDate &&
+      moment() <= project.actendDate) {
       submitStatus = 'ontime';
-    } else if (moment().format('DD-MM-YYYY HH:mm') > project.actendDate) {
+    } else if (moment() > project.actendDate) {
       submitStatus = 'late';
     }
     const payload = new FormData();

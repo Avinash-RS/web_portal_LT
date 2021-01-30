@@ -28,6 +28,7 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
   isshow = true;
   isnextBtnEnable = true;
   secretKey = "(!@#Passcode!@#)";
+  currentYear = new Date().getFullYear();
   constructor( public translate: TranslateService,
                private formBuilder: FormBuilder,
                private router: Router,
