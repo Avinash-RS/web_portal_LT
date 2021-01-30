@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, TemplateRef, ChangeDetectorRef, ViewChild, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef, ChangeDetectorRef, ViewChild, HostListener, ElementRef, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
@@ -15,7 +15,7 @@ import { SocketioService } from '@learner/services/socketio.service';
 import { TranslateService } from '@ngx-translate/core';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import * as _ from 'lodash';
-import { LegendPosition } from 'ag-grid-community';
+import { BodyDropPivotTarget, LegendPosition } from 'ag-grid-community';
 // import { debugger } from 'fusioncharts';
 
 @Component({
@@ -100,6 +100,7 @@ export class CoursedetailsComponent implements OnInit {
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
   @ViewChild('rationPopup') rationPopup: TemplateRef<any>;
   @ViewChild('focuser') inputEl: ElementRef;
+  @ViewChild('incognitoMsg') incog: TemplateRef<any>;
   getModuleandtopicInfo: any;
   moduleSatusCheck: any;
   tabInd: any;
@@ -121,6 +122,7 @@ export class CoursedetailsComponent implements OnInit {
   fileType: any;
   URIData: any = null;
   resourceName: any;
+  errDispFlag: boolean = true;
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -134,7 +136,7 @@ export class CoursedetailsComponent implements OnInit {
     public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
     public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
     public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
-    public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
+    public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService,private _renderer: Renderer2) {
     // if (this.socketService.socketStatus()||this.socketService.socketStatus() == undefined){
     this.socketConnector = this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
     });
@@ -256,6 +258,13 @@ export class CoursedetailsComponent implements OnInit {
     let resumeInit = true;
     this.socketService.socketReceiver()
     this.socketEmitReciver = this.socketService.change.subscribe(result => {
+      if(this.errDispFlag)
+      {
+        if (result.success===false){
+        this.playerErrorScreen();
+        return false;
+      }
+    }
       if (result && result.eventId && result.eventId.length > 0 && result.data.childData.length > 0) {
         if (result.data.course_id === this.courseid) {
           this.scromModuleData = result.data.childData;
@@ -654,6 +663,21 @@ export class CoursedetailsComponent implements OnInit {
       .catch((error) => {
         console.log(error.message);
       });
+  }
+
+  playerErrorScreen(){
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('about:blank');
+    this.dialog.open(this.incog, {
+      width: '50%',
+      height: '50%',
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+    this.errDispFlag = false;
+  }
+  errDialogClose(){
+    this.dialog.closeAll();
+    this.goBack();
   }
 
   // showHeader() {

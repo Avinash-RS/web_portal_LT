@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   languages: any;
   secretKey = "(!@#Passcode!@#)";
+  currentYear = new Date().getFullYear();
 
   constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder, public learnerService: LearnerServicesService,
              // public socketService: SocketioService,
