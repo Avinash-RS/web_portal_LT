@@ -288,7 +288,7 @@ export class ActivitiesComponent implements OnInit {
       });
     }
   }
-  
+
   tabChanged(event) {
     // if (this.demo1TabIndex.toString() == '0') {
     //   this.getAssignmentmoduleData();
@@ -702,7 +702,6 @@ export class ActivitiesComponent implements OnInit {
     project.actstartDate = moment(startDate1);
     const endDate1 = new Date(project.projectActivity.activityenddate);
     project.actendDate = moment(endDate1);
-    //----- pradeep comment-------
     //--------- date comparison should not do using format string or else it wont compare monthwise dates
     // commented by avinash
     // const startDate1 = new Date(project.projectActivity.activitystartdate);
@@ -710,7 +709,6 @@ export class ActivitiesComponent implements OnInit {
     // const endDate1 = new Date(project.projectActivity.activityenddate);
     // project.actendDate = moment(endDate1).format('DD-MM-YYYY HH:mm');
 
-    //----- pradeep comment-------
     //--------- date comparison should not do using format string or else it wont compare monthwise dates
     let submitStatus = '';
     if (moment() >= project.actstartDate &&
@@ -776,15 +774,27 @@ export class ActivitiesComponent implements OnInit {
   }
 
   performlearnerUploadVideo() {
-    const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm a');
+    // const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm a');
     const performVideo = new FormData();
-    const startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy HH:mm a');
-    const endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy HH:mm a');
-    if (currentDate >= startDate && currentDate <= endDate) {
-      this.submitStatus = 'ontime';
+    // const startDate = this.datePipe.transform(this.performsData.performActivity.activitystartdate, 'dd-MM-yyyy HH:mm a');
+    // const endDate = this.datePipe.transform(this.performsData.performActivity.activityenddate, 'dd-MM-yyyy HH:mm a');
+    
+    const startDate1 = new Date(this.performsData.performActivity.activitystartdate);
+    const startDate = moment(startDate1);
+    const endDate1 = new Date(this.performsData.performActivity.activityenddate);
+    const endDate = moment(endDate1);
+    if (moment() >= startDate &&
+      moment() <= endDate) {
+        this.submitStatus = 'ontime';
     } else {
       this.submitStatus = 'late';
     }
+
+    // if (currentDate >= startDate && currentDate <= endDate) {
+    //   this.submitStatus = 'ontime';
+    // } else {
+    //   this.submitStatus = 'late';
+    // }
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.selectPerformfile.length; i++) {
       performVideo.append('uploadvideo', this.selectPerformfile[i]);
@@ -815,15 +825,26 @@ export class ActivitiesComponent implements OnInit {
   submitDeleteVideo(videoName, itrdata, perform) {
     let videoFile = [];
     videoFile.push(videoName);
-    const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm a');
-    const performVideo = new FormData();
-    const startDate = this.datePipe.transform(perform?.activitystartdate, 'dd-MM-yyyy HH:mm a');
-    const endDate = this.datePipe.transform(perform?.activityenddate, 'dd-MM-yyyy HH:mm a');
-    if (currentDate >= startDate && currentDate <= endDate) {
-      this.submitStatus = 'ontime';
+    // const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm a');
+    // const startDate = this.datePipe.transform(perform?.activitystartdate, 'dd-MM-yyyy HH:mm a');
+    // const endDate = this.datePipe.transform(perform?.activityenddate, 'dd-MM-yyyy HH:mm a');
+    // if (currentDate >= startDate && currentDate <= endDate) {
+    //   this.submitStatus = 'ontime';
+    // } else {
+    //   this.submitStatus = 'late';
+    // }
+
+    const startDate1 = new Date(perform.activitystartdate);
+    const startDate = moment(startDate1);
+    const endDate1 = new Date(perform.activityenddate);
+    const endDate = moment(endDate1);
+    if (moment() >= startDate &&
+      moment() <= endDate) {
+        this.submitStatus = 'ontime';
     } else {
       this.submitStatus = 'late';
     }
+
     const data = {
       course_id: perform.course_id,
       module_id: perform.module_id,
