@@ -52,7 +52,7 @@
     <app-root class="mat-typography contentSetter">
       <div class="app-loading mat-typography">
         <div id="msgContainer" class="containerlogo">
-          <div class="logo centerlogo" >
+          <div  class="logo centerlogo" >
             <img src="assets\images\loader.gif" alt="loader" />
           </div>
         </div>
@@ -62,12 +62,16 @@
  function checkIE() {
     const isIEOrEdge = /msie\s|trident\//i.test(window.navigator.userAgent)
     if (isIEOrEdge) {
-      const redirectData ='<div style="text-align=center; font-size:24px"><strong>Browser unsupported, please open in Chrome web browser.<strong></div>'
-      document.getElementById("msgContainer").innerHTML= redirectData
+      let srcdata = 'src="assets/\IEBlocker.jpg"'
+      const redirectData ="<img "+srcdata+"  alt='Error' />"
+      let elemdata = document.getElementById("msgContainer");
+      if(elemdata){
+        elemdata.innerHTML= redirectData
+      }
     // alert("you are using IE, pls uninstall immideatly")
-     if( confirm("You will be redirected to L&T Edutech portal")){
-       location.replace('https://www.lntedutech.com');
-     }
+    //  if( confirm("You will be redirected to L&T Edutech portal")){
+    //    location.replace('https://www.lntedutech.com');
+    //  }
     } else {
     }
   } 

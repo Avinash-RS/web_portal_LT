@@ -256,6 +256,7 @@ export class CoursedetailsComponent implements OnInit {
     let resumeInit = true;
     this.socketService.socketReceiver()
     this.socketEmitReciver = this.socketService.change.subscribe(result => {
+      console.log("socket Result", result)
       if (result && result.eventId && result.eventId.length > 0 && result.data.childData.length > 0) {
         if (result.data.course_id === this.courseid) {
           this.scromModuleData = result.data.childData;
