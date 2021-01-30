@@ -1025,7 +1025,11 @@ margin-top: 8px;
       margin: 0 7px;
   }
 }
-
+.uploadMessage {
+  font-size: 13px;
+  font-weight: 400;
+  color: #666666;
+}
 ::ng-deep.draggable-button-container .mat-icon {
   font-size: 30px;
   width: 30px;

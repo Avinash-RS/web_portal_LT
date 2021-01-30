@@ -114,7 +114,7 @@
   .uploadBtn {
     font-weight: bolder;
     font-size: 15px;
-    margin: 10px 0;
+    margin: 10px 0 0 0;
   }
   .add-icon {
     font-weight: bolder;
@@ -276,6 +276,11 @@
 // .upload-btn {
 //   width: 100%;
 // }
+.uploadMessage {
+  font-size: 13px;
+  font-weight: 400;
+  color: #666666;
+}
 .closeDialog {
   float: right;
   position: absolute;
