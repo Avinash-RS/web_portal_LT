@@ -31,6 +31,7 @@ export class ProjectMobileComponent implements OnInit {
   groupName: any;
   previewDoc: any;
   videoSource: any;
+  openedIndex;
   selectedName = 'Project';
   selectedTabIndex: number;
 
@@ -150,7 +151,16 @@ export class ProjectMobileComponent implements OnInit {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
       this.projectDetails = data.data.getprojectActivityData.data;
       
-      this.projectDetails.forEach(element => {
+      this.projectDetails.forEach((element, i) => {
+        if (this.openedIndex === i) {
+          if (element.isOpen) {
+            element.isOpen = false;
+          } else {
+            element.isOpen = true;
+          }
+        } else {
+          element.isOpen = false;
+        }
         this.groupDetails = element.projectActivity.groupDetails;
         element.showLearnerList = false;
         // element.isCollapsed = false;
@@ -396,6 +406,7 @@ export class ProjectMobileComponent implements OnInit {
       window.open(data);
     }
     resourseAccord(courseResource, index) {
+      this.openedIndex = index
       if (courseResource) {
         courseResource.forEach((element, i) => {
           if (index === i) {

@@ -112,25 +112,27 @@
       <div class="ml-0 mr-0 mt-3">
         <div class="">
           <mat-card class="matCard mb-3" *ngFor="let itration of performActivityData.performActivity.iterationDetails; let i = index">
-            <div class="row ml-0 mr-0" (click)="arrowUP = !arrowUP; openItration(i)">
-              <div class="col-3 pr-0 pl-0 text-left">
-                <span>Iteration {{itration.iterationcount}}</span>
-              </div>
-              <div class="col-4 pr-0 pl-0 text-center">
-                <span>Score: <span *ngIf="itration.score_mark > 0">{{itration.score_mark}}</span>
-                <span *ngIf="itration.score_mark == 0 || itration.score_mark == null">-</span> / {{itration.total_mark}}</span>
-              </div>
-              <div class="col-5 gradeStatusCol text-right">
-                <span class="textGrayColor" *ngIf="itration.submit_status == 'notsubmitted' && itration.grade_status !== 'Evaluated'">Yet to Submit</span>
-                <span class="submitstatus" *ngIf="itration.grade_status == 'Not Evaluated' && itration.submitAction == 'submit'">
-                          Submitted</span>
-                <span class="gradeStatus" *ngIf="itration.grade_status == 'Evaluated'">Graded <span
-                  *ngIf="itration.grade_status == 'Evaluated' && itration.instructor_status !== null"
-                  [ngClass]="itration.instructor_status === 'Pass'? 'colorGreen ml-1': 'colorRed ml-1'">{{itration.instructor_status | titlecase}}</span></span>
-                <!-- <span class="text-success">Graded</span>&nbsp;&nbsp;
-                <span class="text-primary">pass</span>&nbsp;&nbsp; -->
-                <mat-icon class="matIcon" *ngIf="!arrowUP || openIndex !== i">keyboard_arrow_down</mat-icon>
-                <mat-icon class="matIcon" *ngIf="arrowUP && openIndex == i">keyboard_arrow_up</mat-icon>
+            <div>
+              <div class="row ml-0 mr-0" (click)="arrowUP = !arrowUP; openItration(i)">
+                <div class="col-3 pr-0 pl-0 text-left">
+                  <span>Iteration {{itration.iterationcount}}</span>
+                </div>
+                <div class="col-4 pr-0 pl-0 text-center">
+                  <span>Score: <span *ngIf="itration.score_mark > 0">{{itration.score_mark}}</span>
+                  <span *ngIf="itration.score_mark == 0 || itration.score_mark == null">-</span> / {{itration.total_mark}}</span>
+                </div>
+                <div class="col-5 gradeStatusCol text-right">
+                  <span class="textGrayColor" *ngIf="itration.submit_status == 'notsubmitted' && itration.grade_status !== 'Evaluated'">Yet to Submit</span>
+                  <span class="submitstatus" *ngIf="itration.grade_status == 'Not Evaluated' && itration.submitAction == 'submit'">
+                            Submitted</span>
+                  <span class="gradeStatus" *ngIf="itration.grade_status == 'Evaluated'">Graded <span
+                    *ngIf="itration.grade_status == 'Evaluated' && itration.instructor_status !== null"
+                    [ngClass]="itration.instructor_status === 'Pass'? 'colorGreen ml-1': 'colorRed ml-1'">{{itration.instructor_status | titlecase}}</span></span>
+                  <!-- <span class="text-success">Graded</span>&nbsp;&nbsp;
+                  <span class="text-primary">pass</span>&nbsp;&nbsp; -->
+                  <mat-icon class="matIcon" *ngIf="!arrowUP || openIndex !== i">keyboard_arrow_down</mat-icon>
+                  <mat-icon class="matIcon" *ngIf="arrowUP && openIndex == i">keyboard_arrow_up</mat-icon>
+                </div>
               </div>
               <div class="row ml-0 mr-0 w-100" *ngIf="arrowUP && openIndex == i">
                 <div class="col-12 pl-0 pr-0">
