@@ -35,6 +35,7 @@ export class PasswordComponent implements OnInit {
   email: any;
   emailid: any;
   secretKey = "(!@#Passcode!@#)";
+  currentYear = new Date().getFullYear();
 
   constructor(public translate: TranslateService,
               private router: Router,
