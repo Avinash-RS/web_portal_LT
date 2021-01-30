@@ -200,6 +200,7 @@
                         <mat-icon class="icon-color m-t-m-2 addIcon">add</mat-icon>
                         <span>Upload video</span>
                       </button>
+                      <p class="uploadMessage" *ngIf="itration.submit_status == 'notsubmitted'">Max File Size : 150 MB, Format : MP4</p>
                       <button mat-stroked-button class="submit-btn mt-2" *ngIf="itration.submit_status == 'notsubmitted' && itration.videodetails.length > 0 && (performActivityData.itrationStarted && performActivityData.performSubmitType)" (click)="submitType = 'submit'; submitDeleteVideo({}, itration, performActivityData.performActivity)"> Submit </button>
                       <button mat-stroked-button *ngIf="itration.submit_status == 'notsubmitted' &&  (itration.videodetails.length == 0 && performActivityData.itrationStarted) && performActivityData.performSubmitType"
                       class="submitted-btn mt-2"> Submit </button>

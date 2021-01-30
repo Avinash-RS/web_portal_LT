@@ -540,7 +540,11 @@
   top: -1.8rem;
   color: $lxp-theme-green;
 }
-
+.uploadMessage {
+  font-size: 13px;
+  font-weight: 400;
+  color: #666666;
+}
 :host ::ng-deep .widthClass .owl-theme .owl-nav {
   display: none !important;
 }
