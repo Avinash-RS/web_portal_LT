@@ -149,6 +149,7 @@ export class ActivitiesComponent implements OnInit {
   leftNavDisabledActivity = false;
   rightNavDisabledActivity = false;
   previewDoc;
+  openedIndex;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
@@ -274,6 +275,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   resourseAccord(courseResource, index) {
+    this.openedIndex = index
     if (courseResource) {
       courseResource.forEach((element, i) => {
         if (index === i) {
@@ -561,7 +563,16 @@ export class ActivitiesComponent implements OnInit {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
         this.projectDetails = data.data.getprojectActivityData.data; 
                
-        this.projectDetails.forEach(element => {
+        this.projectDetails.forEach((element, i) => {
+          if (this.openedIndex === i) {
+            if (element.isOpen) {
+              element.isOpen = false;
+            } else {
+              element.isOpen = true;
+            }
+          } else {
+            element.isOpen = false;
+          }
           element.showLearnerList = false;
           // Batch date
           const batchEndDate = new Date(element.projectActivity.batchenddate);
@@ -605,12 +616,21 @@ export class ActivitiesComponent implements OnInit {
     ).subscribe((data: any) => {
       if (data && data.data && data.data.getperformActivityData && data.data.getperformActivityData.data) {
         this.performDetails = data.data.getperformActivityData.data;
-        this.performDetails.forEach((element) => {
+        this.performDetails.forEach((element, i) => {
           // const startDate = this.datePipe.transform(element.performActivity.activitystartdate, 'dd-MM-yyyy HH:MM aa');
           // const endDate = this.datePipe.transform(element.performActivity.activityenddate, 'dd-MM-yyyy HH:MM aa');
           // const batchendDate = this.datePipe.transform(element.performActivity.batchenddate, 'dd-MM-yyyy HH:MM aa');
           // const crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy  HH:MM  aa');
-          
+          if (this.openedIndex === i) {
+            if (element.isOpen) {
+              element.isOpen = false;
+            } else {
+              element.isOpen = true;
+            }
+          } else {
+            element.isOpen = false;
+          }
+
           const batchEndDate = new Date(element.performActivity.batchenddate);
           element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
           
