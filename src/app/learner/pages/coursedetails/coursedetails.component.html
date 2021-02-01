@@ -90,7 +90,7 @@
                                     </span> -->
 <!-- *ngIf="mod?.title.length < 65" -->
                                     <span class="topicnm" 
-                                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i);!drawersOpen?drawer.close():''">
+                                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i);drawersOpen=performOverLay?(drawersOpen?false:true):true">
 
                                         <span class="titleName"
                                             [ngClass]="(j===nextPrevHolder && i===moduleHolder) ? 'titleSelected' : ''">
