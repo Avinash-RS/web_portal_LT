@@ -1339,3 +1339,15 @@ margin-top: 8px;
 ::ng-deep .popupModalContainer .mat-dialog-container {
   overflow-x: hidden !important;
 }
+.upload-scorm-container {
+  width: 100%;
+  margin-top: 10px;
+  .upload-detail {
+      font-size: 10px;
+      display: flex;
+      justify-content: space-between;
+  }
+  .scorm-upload-progress {
+      height: 10px;
+  }
+}
