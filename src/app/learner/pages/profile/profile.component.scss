@@ -30,7 +30,10 @@
 }
 // responsiveness starts here
 .m-t-9{
-  margin-top: 9% !important;
+  // margin-top: 9% !important;
+}
+.collDept {
+  align-self: flex-end;
 }
 .cameraIcon {
   z-index: 11;
@@ -189,7 +192,7 @@
   }
 
   .user-info {
-    margin-left: auto !important;
+    // margin-left: auto !important;
 
   }
   .passwordDialog {
@@ -271,7 +274,7 @@
   }
 
   .user-info {
-    margin-left: auto !important;
+    // margin-left: auto !important;
   }
 }
 
