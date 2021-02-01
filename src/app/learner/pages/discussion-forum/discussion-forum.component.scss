@@ -56,7 +56,8 @@
       line-height: normal;
       display: inline-block;
       &:nth-child(2) {
-        min-width: 12.50%;
+        min-width: 3%;
+        // min-width: 12.50%;
         max-width: 30%;
         overflow: hidden;
         text-overflow: ellipsis;
