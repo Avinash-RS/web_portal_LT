@@ -55,7 +55,7 @@ const routes: Routes = [
     path: 'MyCourse',
     component: LearnerMyCourseComponent,
     // canLoad: [AuthGuard],
-    data: { animation: 'Learner  MyCourse' , title: 'My Course'}
+    data: { animation: 'Learner  MyCourse' , title: 'My Courses'}
   },
   {
     path: 'courseDetail',
