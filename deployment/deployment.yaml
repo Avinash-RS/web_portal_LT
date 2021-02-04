@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: webportal
-          image: lxpdev.azurecr.io/webportal:$tag
+          image: lxpdevqa.azurecr.io/webportal:$tag
           imagePullPolicy: Always
           ports:
           - containerPort: 80
