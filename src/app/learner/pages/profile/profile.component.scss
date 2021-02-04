@@ -563,6 +563,8 @@ div.account {
   background: $color-white !important;
   border: 8px solid $color-white;
   width: 220px;
+  height: 220px;
+  object-fit: cover;
 }
 
 .iconImg {

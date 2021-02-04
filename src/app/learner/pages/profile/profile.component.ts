@@ -215,10 +215,11 @@ export class ProfileComponent implements OnInit {
         
         this.userData = data.data.view_profile.message[0];
         // console.log("userData", this.userData)
-        let mobNumber = this.userData.user_mobile.mobile_number;
-        let morphed = mobNumber[0] + mobNumber[1] +"******"+ mobNumber[8] + mobNumber[9];
-        this.userData.user_mobile.mobile_number = morphed
-
+        if(this.userData?.user_mobile?.mobile_number){
+          let mobNumber = this.userData.user_mobile.mobile_number;
+          let morphed = mobNumber[0] + mobNumber[1] +"******"+ mobNumber[8] + mobNumber[9];
+          this.userData.user_mobile.mobile_number = morphed
+        }
         if (profileDetails) {
           this.collegename = this.userData.user_profile[0].collegeName == null ? '' : this.userData.user_profile[0].collegeName;
           this.deptname = this.userData.user_profile[0].deptName == null ? '' : this.userData.user_profile[0].deptName;
@@ -469,9 +470,9 @@ export class ProfileComponent implements OnInit {
     this.service.get_state_details(this.profileForm.value.country).subscribe((stateDetails: any) => {
       this.stateValue = stateDetails.data.get_state_details.data;
       this.getDistrict();
-      if (this.stateValue == null) {
-        this.alert.openAlert(stateDetails.data.get_state_details.message, null);
-      }
+      // if (this.stateValue == null) {
+      //   this.alert.openAlert(stateDetails.data.get_state_details.message, null);
+      // }
     });
   }
 
