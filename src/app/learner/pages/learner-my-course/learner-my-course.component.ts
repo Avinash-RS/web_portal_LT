@@ -148,6 +148,7 @@ export class LearnerMyCourseComponent implements OnInit {
             // this.insidengOnInit();
           } else {
             localStorage.clear();
+            sessionStorage.clear();
             this.CommonServices.getIpAddressByUrl();
             this.router.navigateByUrl('/Learner/login');
           }

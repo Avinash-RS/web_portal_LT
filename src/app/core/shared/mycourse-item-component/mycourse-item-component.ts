@@ -38,7 +38,7 @@ export class MycourseItemComponent implements OnInit {
     private router: Router,
     private loader: Ng4LoadingSpinnerService, ) {
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
-    this.role = localStorage.getItem('role') || null;
+    this.role = localStorage.getItem('role') ||sessionStorage.getItem('role') || null;
   }
 
 
