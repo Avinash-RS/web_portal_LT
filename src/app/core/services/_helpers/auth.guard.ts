@@ -32,7 +32,7 @@ export class AuthGuard implements CanLoad {
   // Added by Mythreyi
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const userDetailes = localStorage.getItem('role');
-    const token =  localStorage.getItem('token');
+    const token =  localStorage.getItem('token')||sessionStorage.getItem('token');
     if (token) {
       console.log('auth');
       
@@ -54,7 +54,7 @@ export class AuthGuard implements CanLoad {
 
     canLoad(route: Route, segments: UrlSegment[]): any {
       const userDetailes = localStorage.getItem('role');
-      const token =  localStorage.getItem('token');
+      const token =  localStorage.getItem('token')||sessionStorage.getItem('token');;
     
       if (token) {
         console.log('load auth');

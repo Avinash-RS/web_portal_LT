@@ -60,7 +60,7 @@ export class LearnerCalendarComponent implements OnInit {
     this.UserDetails =
       JSON.parse(localStorage.getItem('UserDetails')) || null;
 
-    this.tokenDetails = localStorage.getItem('token');
+    this.tokenDetails = localStorage.getItem('token')||sessionStorage.getItem('token');;
 
     this.userId = this.UserDetails.user_id;
     // this.tokenid = this.tokenDetails.token;

@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/Learner/MyCourse']);
           } else {
             this.toastr.error(isValidEmailResult.data.get_login_details.error_msg, null);
-            localStorage.clear();
+            sessionStorage.clear();
             localStorage.clear();
           }
         });  
@@ -67,6 +67,7 @@ export class LoginComponent implements OnInit {
         localStorage.removeItem('role');
         localStorage.removeItem('token');
         localStorage.removeItem('adminDetails');
+        sessionStorage.removeItem('token');
       }
     });
   }
@@ -82,14 +83,17 @@ export class LoginComponent implements OnInit {
       .subscribe((loginresult: any) => {
         if (loginresult.data.login) {
           if (loginresult.data.login.success) {
-          
+            if(this.loginForm.value.remember_me === true){
+              localStorage.setItem('token', loginresult.data.login.message.token);
+            }else{
+              sessionStorage.setItem('token', loginresult.data.login.message.token);
+            }
             localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
             localStorage.setItem('Fullname', loginresult.data.login.message.full_name); // Added ny Mythreyi
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
               localStorage.setItem('remember_me', 'false');
               localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
               localStorage.setItem('role', 'learner');
-              localStorage.setItem('token', loginresult.data.login.message.token);
               this.router.navigate(['/Learner/MyCourse']);
             if (loginresult.data.login && this.loginForm.value.remember_me === true) {
               localStorage.setItem('remember_me', 'true');

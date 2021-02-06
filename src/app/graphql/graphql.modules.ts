@@ -42,7 +42,7 @@ export class GraphqlModule {
     const middleware = new ApolloLink((operation, forward) => {
 
       // Check for token
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token')||sessionStorage.getItem('token');;
       // tslint:disable-next-line:max-line-length
       // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoibHhwYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoiMTIzNGFiIiwic2VjX2tleSI6IjEyM0FhIUAjIiwiaWF0IjoxNTk4NDUwMjk3LCJleHAiOjE1OTg0NzE4OTcsImlzcyI6Imh0dHBzOi8vd3d3LmxhcnNlbnRvdWJyby5jb20vIn0.y9YcBFZc43QtAP2Wep7rSI1wHtIMkTBeseAb-n0qvpc'
       if (!token) { return forward(operation); }
@@ -66,7 +66,7 @@ export class GraphqlModule {
           if (message.includes('TokenExpiredError') || message.includes('JsonWebTokenError')) {
             console.log('inside');
             localStorage.clear();
-            localStorage.clear();
+            sessionStorage.clear();
             this.services.getIpAddressByUrl();
             this.gs.checkLogout();
           }
