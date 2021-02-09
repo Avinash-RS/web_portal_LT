@@ -2202,6 +2202,7 @@ query   get_batchwise_learner_dashboard_data( $user_id: String!, $request_type: 
             wishlist_id
             feed_back
             batchid
+            batch_name
             batch_start_date
             batch_end_date
     }
