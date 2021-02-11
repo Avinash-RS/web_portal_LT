@@ -924,6 +924,10 @@ export class CoursedetailsComponent implements OnInit {
     
   }
 
+  bookmarkClick(data){
+
+  }
+
 }
 
 
