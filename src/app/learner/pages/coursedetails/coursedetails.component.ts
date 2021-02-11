@@ -124,6 +124,7 @@ export class CoursedetailsComponent implements OnInit {
   topicStatusCheck: any;
   currentTopicTitle: any;
   currentModuleTitle: any;
+  topicInfo: any;
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -272,6 +273,7 @@ export class CoursedetailsComponent implements OnInit {
             this.topiccurrentPage = result.data.resumeSubContent;
             this.topicPageStatus = result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status
             this.moduleInfo = this.scromModuleData[this.currentPage];
+            this.topicInfo = this.scromModuleData[this.currentPage].children[this.topiccurrentPage]
             if (resumeInit) {
               this.nextPrevHolder = this.topiccurrentPage;
               this.moduleHolder = this.currentPage;
@@ -491,6 +493,7 @@ export class CoursedetailsComponent implements OnInit {
         this.moduleSatusCheck = this.moduleInfo.status ? this.moduleInfo.status : 'process';
         this.currentTopicTitle = this.gettopicLink.title;
         this.currentModuleTitle = this.moduleInfo.title;
+        this.topicPageStatus = this.gettopicLink.status
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
           (environment.scormUrl + '/scormPlayer.html?contentID=' +
             this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
@@ -535,6 +538,7 @@ export class CoursedetailsComponent implements OnInit {
         this.moduleSatusCheck = this.moduleInfo.status ? this.moduleInfo.status : 'process';
         this.currentTopicTitle = this.gettopicLink.title;
         this.currentModuleTitle = this.moduleInfo.title;
+        this.topicPageStatus = this.gettopicLink.status
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
           (environment.scormUrl + '/scormPlayer.html?contentID=' +
             this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
@@ -910,8 +914,12 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   understoodClick(ux){
-    this.Lservice.userexperience(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,ux).subscribe(()=>{
-      alert('done');
+    this.Lservice.userexperience(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,ux,this.topicInfo.status).subscribe((data:any)=>{
+      if(data?.data?.userexperience?.success){
+        this.topicInfo.user_experience = ux
+      }else{
+        this.toastr.warning(data?.data?.userexperience?.message)
+      }
     })
     
   }
