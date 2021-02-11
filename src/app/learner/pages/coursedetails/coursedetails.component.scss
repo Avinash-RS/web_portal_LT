@@ -640,3 +640,30 @@ div.tocSize::-webkit-scrollbar {
     height: 100% !important;
     max-height: inherit !important;
 }
+
+.btn-outline-success:hover {
+    color: #28a745 !important;
+     background-color: #F0F0F0; 
+    border-color: #28a745;
+}
+.btn-outline-success {
+    color: #000 !important;
+     background-color: #F0F0F0; 
+    border-color: #000;
+}
+.btn-outline-danger {
+    color: #000 !important;
+     background-color: #F0F0F0; 
+    border-color: #000;
+}
+
+.btn-outline-danger:hover {
+    color: #dc3545 !important;
+     background-color: #F0F0F0; 
+    border-color: #dc3545;
+}
+.btn-outline-light {
+    color: #000 !important;
+     background-color: #F0F0F0; 
+    border-color: #000;
+}
