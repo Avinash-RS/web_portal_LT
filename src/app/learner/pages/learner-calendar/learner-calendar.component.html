@@ -149,7 +149,7 @@
                                             <div class="m-l-4 expandLine d-flex flex-wrap">
                                                 <div class="topicSection d-flex align-items-center justify-content-between">
                                                     <span class="topic-section" [tooltip]="data.activity_details.topicname">
-                                                        {{'Topic' | translate }}: {{ data.activity_details.topicname }}
+                                                        <span *ngIf="data.activity_details.activitytype != 'Live Classroom'">{{'Topic' | translate }}:</span> <span *ngIf="data.activity_details.activitytype == 'Live Classroom'">{{'Module' | translate }}:</span> {{ data.activity_details.topicname }}
                                                     </span>
                                                     <div class="activityButton">
                                                         <button (click)="launchActivity(data,i)" *ngIf="data.activity_details.activitytype == 'Live Classroom' && data.status ==='On going'" mat-stroked-button class="blue_clr cap m-b-10 LaunchBtn pointer"><img alt="" src="../../../../assets/learner/mycourseicons/launch_icon.svg" >Launch</button>
