@@ -121,8 +121,8 @@
                     </button>
                 </div>
                 <div class="d-flex p-xy-10">
-                    <button type="button" style="margin-right: 10px;"  ngClass="btn btn-outline-light" (click)="bookmarkClick(true)">
-                        <i class="lxp-sad"></i> BookMark
+                    <button type="button" style="margin-right: 10px;"  ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
+                        <i [ngClass]="topicInfo?.bookmark?'lxp-bookmark':'lxp-bookmark-o'"></i> {{topicInfo?.bookmark?'Bookmarked':'Add to Bookmark'}}
                     </button>
                 </div>
             </div>

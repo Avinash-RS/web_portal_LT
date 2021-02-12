@@ -924,8 +924,15 @@ export class CoursedetailsComponent implements OnInit {
     
   }
 
-  bookmarkClick(data){
-
+  bookmarkClick(isbokmarked){
+    this.Lservice.bookmark(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,isbokmarked).subscribe((data:any)=>{
+      if(data?.data?.userexperience?.success){
+        //this.topicInfo.user_experience = ux
+        this.toastr.success(data?.data?.bookmark?.message)
+      }else{
+        this.toastr.warning(data?.data?.bookmark?.message)
+      }
+    })
   }
 
 }
