@@ -121,6 +121,10 @@ export class CoursedetailsComponent implements OnInit {
   fileType: any;
   URIData: any = null;
   resourceName: any;
+  topicStatusCheck: any;
+  currentTopicTitle: any;
+  currentModuleTitle: any;
+  topicInfo: any;
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -269,6 +273,7 @@ export class CoursedetailsComponent implements OnInit {
             this.topiccurrentPage = result.data.resumeSubContent;
             this.topicPageStatus = result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status
             this.moduleInfo = this.scromModuleData[this.currentPage];
+            this.topicInfo = this.scromModuleData[this.currentPage].children[this.topiccurrentPage]
             if (resumeInit) {
               this.nextPrevHolder = this.topiccurrentPage;
               this.moduleHolder = this.currentPage;
@@ -486,6 +491,9 @@ export class CoursedetailsComponent implements OnInit {
         this.moduleInfo = this.scromModuleData[this.currentPage];
         this.gettopicLink = this.scromModuleData[this.currentPage].children[this.topiccurrentPage];
         this.moduleSatusCheck = this.moduleInfo.status ? this.moduleInfo.status : 'process';
+        this.currentTopicTitle = this.gettopicLink.title;
+        this.currentModuleTitle = this.moduleInfo.title;
+        this.topicPageStatus = this.gettopicLink.status
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
           (environment.scormUrl + '/scormPlayer.html?contentID=' +
             this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
@@ -528,6 +536,9 @@ export class CoursedetailsComponent implements OnInit {
         this.moduleInfo = this.scromModuleData[this.currentPage];
         this.gettopicLink = this.scromModuleData[this.currentPage].children[this.topiccurrentPage];
         this.moduleSatusCheck = this.moduleInfo.status ? this.moduleInfo.status : 'process';
+        this.currentTopicTitle = this.gettopicLink.title;
+        this.currentModuleTitle = this.moduleInfo.title;
+        this.topicPageStatus = this.gettopicLink.status
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
           (environment.scormUrl + '/scormPlayer.html?contentID=' +
             this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
@@ -554,6 +565,8 @@ export class CoursedetailsComponent implements OnInit {
       const moduleTitle = encodeURIComponent(this.scromApiData.childData[this.currentPage].title);
       const topicTitle = encodeURIComponent(this.scromApiData.childData[this.currentPage].children[this.topiccurrentPage].title);
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
+      this.currentTopicTitle = this.scromApiData.childData[this.currentPage].title;
+      this.currentModuleTitle = this.scromApiData.childData[this.currentPage].children[this.topiccurrentPage].title;
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
           this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
@@ -579,6 +592,9 @@ export class CoursedetailsComponent implements OnInit {
     });
   }
   playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex, moduleIdx) {
+    this.currentTopicTitle = topicName;
+    this.currentModuleTitle = moduleName
+    this.topicPageStatus = topicStatus;
     this.moduleSatusCheck = moduleStatus ? moduleStatus : 'process';
     const encodedModuleName = encodeURIComponent(moduleName);
     const encodedTopicName = encodeURIComponent(topicName);
@@ -895,6 +911,21 @@ export class CoursedetailsComponent implements OnInit {
         }
       });
     }
+  }
+
+  understoodClick(ux){
+    this.Lservice.userexperience(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,ux,this.topicInfo.status).subscribe((data:any)=>{
+      if(data?.data?.userexperience?.success){
+        this.topicInfo.user_experience = ux
+      }else{
+        this.toastr.warning(data?.data?.userexperience?.message)
+      }
+    })
+    
+  }
+
+  bookmarkClick(data){
+
   }
 
 }

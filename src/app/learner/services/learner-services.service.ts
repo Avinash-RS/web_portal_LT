@@ -11,7 +11,7 @@ import { addTopicreference, bulkclaimcourse, claimcourse, createGuidanceRequest,
        playerstatusrealtime, resendOtponprofile, saveAttendies, updateEmailonprofile,
        updateMobileonprofile, updateProfile, updateVerifyotpmobileonProfile,
        userMstrdata, userRegistration, userRegistrationdone, userRegistrationmobileOtpsend,
-         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, viewProfile1 } from './operations/learner_mutation';
+         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, viewProfile1, user_experience } from './operations/learner_mutation';
 import {
 boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignmentmoduleData,
  getcalenderactivity, getCountForCategories, getCountForJobroleCategories, getCoureBasedOnCatalog,
@@ -986,6 +986,20 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       variables: {
         user_id,
         user_obj_id
+      }
+    });
+  }
+
+  userexperience(user_id,course_id,module,topic,userexperience,status) {
+    return this.Apollo.query({
+      query: user_experience,
+      variables: {
+        user_id,
+        course_id,
+        module,
+        topic,
+        userexperience,
+        status
       }
     });
   }
