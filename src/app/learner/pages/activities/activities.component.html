@@ -369,6 +369,22 @@
 
               <div class="col-5">
                 <div class="f_size_16 f_wt_600 align-center margin-b-9">Your work</div>
+                   <!--ranjan-->
+                   <div class="upload-scorm-container">
+                    <div class="upload-detail">
+                        <div>
+                            {{uploadedPercentage >= 100 ? 'Uploaded' : 'Uploading'}}
+                        </div>
+                        <div>
+                            {{uploadedPercentage == undefined ? '0%' : uploadedPercentage + '%'}}
+                        </div>
+                    </div>
+                    <ng-container>
+                        <mat-progress-bar mode="determinate" class="scorm-upload-progress" [value]="uploadedPercentage">
+                        </mat-progress-bar>
+                    </ng-container>
+                  </div>
+                  <!--ranjan-->
                 <mat-accordion class="iterationAccordion" *ngFor="let itrdata of perform.performActivity.iterationDetails; let i = index" (click)="getSelectedIndex(i);">
                   <mat-expansion-panel [expanded]="selectedIndex === i">
                     <mat-expansion-panel-header>
