@@ -52,7 +52,7 @@
                     <option [value]="'All'">All</option>
                 </select>
             </div>
-            <mat-card *ngFor="let res of scromModuleData; let i = index" [ngClass]="res.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
+            <mat-card *ngFor="let res of filterkey=='Bookmarked'?filterData:scromModuleData; let i = index" [ngClass]="res.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
                 (click)="getSelectedIndex(i)" class="topicCard" >
                 <div *ngIf="i===moduleHolder" #focuser ></div>
                         <mat-card-title (click)="moduleExpand(res,i)" class="d-flex justify-content-between align-items-center pointer">
