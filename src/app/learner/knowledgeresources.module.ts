@@ -45,12 +45,12 @@ const routes: Routes = [
   {
     path: '',
     component: KnowledgeResourceHomeComponent,
-    data: { animation: 'activitycenterhomescreen', title: 'Knowledge Resource Center'}
+    data: { animation: 'activitycenterhomescreen', title: 'Knowledge Resource'}
   },
   {
     path: 'preview',
     component: KnowledgeLandingPageComponent,
-    data: { animation: 'activitycenterhomescreen', title: 'Knowledge Resource Preview' }
+    data: { animation: 'activitycenterhomescreen', title: 'Knowledge Resource' }
   },
 ]
 @NgModule({

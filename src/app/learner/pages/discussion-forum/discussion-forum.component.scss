@@ -55,9 +55,8 @@
       font-weight: 400;
       line-height: normal;
       display: inline-block;
-      &:nth-child(2) {
+      &.forumCourseName {
         min-width: 3%;
-        // min-width: 12.50%;
         max-width: 30%;
         overflow: hidden;
         text-overflow: ellipsis;

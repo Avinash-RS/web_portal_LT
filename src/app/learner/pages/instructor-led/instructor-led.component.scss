@@ -463,10 +463,9 @@
       font-weight: 400;
       line-height: normal;
       display: inline-block;
-      &:nth-child(2) {
-        min-width: 3%;
-        // min-width: 12.50%;
+      &.ledCourseName {
         max-width: 40%;
+        min-width: 3%;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
