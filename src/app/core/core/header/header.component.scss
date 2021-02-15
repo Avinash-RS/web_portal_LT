@@ -30,6 +30,7 @@
 :host ::ng-deep .mat-toolbar.mat-primary {
     background-color: $lxp-theme-yellow-sec !important;
     position: relative;
+    z-index: 9;
     // -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .1) !important;
     // box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2) !important;
 }
