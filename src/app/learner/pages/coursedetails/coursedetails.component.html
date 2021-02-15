@@ -1,54 +1,41 @@
 <div oncontextmenu="return false" class="coursePlayerContainer">
     <app-header></app-header>
     <!-- TITLE AND BACK -->
-    <div class="d-flex justify-content-start align-items-center titlebar">
-        <div class="pointer d-flex align-items-center backcolor redHover" (click)="goBack()">
-            <!-- <mat-icon class="material-icons backarrow">arrow_back_ios</mat-icon>  Back  -->
-            <i class="lxp-Arrow backArrow"></i><span>Back</span>
+    <div class="titlebar" (mouseenter)="titleBar=true" (mouseleave)="mouseoutFn()">
+        <div class="downTitle"><i *ngIf = "titleBar==false" class="lxp-Arrow"></i></div>
+        <div [ngClass]="titleBar?'animation':''" *ngIf = "titleBar" class="d-flex justify-content-start align-items-center titleBack">
+            <div class="pointer d-flex align-items-center backcolor redHover" (click)="goBack()">
+                <i class="lxp-Arrow backArrow"></i><span>Back</span>
+            </div>
+            <div class="courseTitle"> | <span>{{this.course?.course_name}}</span></div>
         </div>
-       <div class="courseTitle"> | <span>{{this.course?.course_name}}</span></div>
     </div>
     <!-- COURSE TOOL BAR -->
-    <div class="d-flex justify-content-between align-items-center toolBar">
+    <!-- <div class="d-flex justify-content-between align-items-center toolBar">
        <div class="d-flex align-items-center leftContent">
-           <!-- <div class="hamburger" [ngClass]="drawersOpen ? '' : 'isActive'">
-                <div class="hamburgerInner" (click)="drawersOpen=drawersOpen?false:true"></div>
-            </div> -->
-            <!-- <mat-icon class="f_size_23 mt-1" (click)="drawersOpen=drawersOpen?false:true">menu</mat-icon> -->
-            <i class="lxp-HamburgerMenu" (click)="drawersOpen=drawersOpen?false:true"></i>
            <div class="navigation d-flex align-items-center" *ngIf="scromModuleData">
-               <div class="leftArrow">
-                <!-- <mat-icon title="Previous Topic" class="f_size_23 mt-1" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()">skip_previous</mat-icon> -->
+               <div class="leftArrow">                
                 <i class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()"></i>
                </div>
                <div class="currentTopic" title="{{scromModuleData[moduleHolder]?.children[nextPrevHolder].title}}">
                 <span >{{scromModuleData[moduleHolder]?.children[nextPrevHolder].title}}</span>
                </div>
-               <div class="rightArrow">
-                <!-- <mat-icon title="Next Topic"  class="f_size_23 mt-1" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()">skip_next</mat-icon> -->
+               <div class="rightArrow">                
                 <i class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()"></i>
                </div>
            </div>
        </div>
-       <div class="rightContent d-flex justify-content-end align-items-center">
-            <span class="fullScr d-flex align-items-center iconSize">
-                <!-- <mat-icon title="Fullscreen" (click)="makeFullScreen()" class="mr-2">fullscreen</mat-icon> -->
-                <i title="Fullscreen" (click)="makeFullScreen()" class="lxp-Fullscreen"></i>
-            </span>
-            <span class="d-flex align-items-center iconSize">
-                <i title="Resources" (click)="openResourse(resourseWindow)" class="lxp-MenuList"></i>
-               <!-- <mat-icon >format_list_bulleted</mat-icon> -->
-            </span>
-       </div>
-    </div>
+    </div> -->
     <!-- TOC AND PLAYER -->
     <div class="contentHeight d-flex">
-        
+        <div class="hamburgerPosition">
+            <i class="lxp-HamburgerMenu" (click)="drawersOpen=drawersOpen?false:true"></i>
+        </div>
         <!-- TOC DATA -->
         <div class="tocSize" [ngClass]="drawersOpen ? '': 'drawersOpen'">
             <div class="filterSection ">
                 Filter by: <select class="sel-pad" [(ngModel)]="filterkey" (change)="filterToc()">
-                    <option  [value]="'Bookmarked'">Bookmarks</option>
+                    <option [value]="'Bookmarked'">Bookmarks</option>
                     <option [value]="'All'">All</option>
                 </select>
             </div>
@@ -59,9 +46,6 @@
                             <div class="tocTitle">Week - {{i+1}}</div>
                             <div>
                                 <i class="expandCollapse" [ngClass]="res.expanded?'lxp-Collapse':'lxp-Expand'"></i>
-                                <!-- <mat-icon  class="f_size_23 colorBlack">
-                                    {{res.expanded?'remove_circle_outline':'add_circle_outline'}}
-                                </mat-icon> -->
                             </div>
                         </mat-card-title>
                         <mat-card-subtitle (click)="moduleExpand(res,i)" class="d-flex justify-content-start align-items-center tocSubTitle">
@@ -112,30 +96,34 @@
                     </mat-vertical-stepper>
                 </mat-card-content>
             </mat-card>
-
-
-
         </div>
         <!-- COURSE PLAYER -->
         <div class="videoPlayer" [ngClass]="drawersOpen ? 'halfWidth' : 'fullWidth'">
             <iframe title="player" id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
-            <div class="d-flex justify-content-between">
-                <div class="d-flex p-xy-10">
-                    <button type="button" [disabled]="topicPageStatus !== 'Passed'"  [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'btn btn-outline-success':'btn btn-outline-light'" (click)="understoodClick('like')">
+            <div class="d-flex justify-content-between understoodBookmark">
+                <div class="d-flex justify-content-between align-items-center understoodButton">
+                    <button type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'btn btn-outline-success':'btn btn-outline-light'" (click)="understoodClick('like')">
                         <i class="lxp-smile"></i> Understood
                     </button>
-                    <button type="button" [disabled]="topicPageStatus !== 'Passed'" style="margin-left: 10px;"  [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'btn btn-outline-danger':'btn btn-outline-light'" (click)="understoodClick('dislike')">
+                    <button type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'btn btn-outline-danger':'btn btn-outline-light'" (click)="understoodClick('dislike')">
                         <i class="lxp-sad"></i> Not Understood
                     </button>
                 </div>
-                <div class="d-flex p-xy-10">
-                    <button type="button" style="margin-right: 10px;"  ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
+                <div class="d-flex bookmarkButton">
+                    <button type="button" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
                         <i [ngClass]="topicInfo?.bookmark?'lxp-bookmark':'lxp-bookmark-o'"></i> {{topicInfo?.bookmark?'Bookmarked':'Add to Bookmark'}}
                     </button>
                 </div>
             </div>
+            <div class="rightContent">
+                <div class="fullScr d-flex align-items-center iconSize">
+                    <i title="Fullscreen" (click)="makeFullScreen()" class="lxp-Fullscreen"></i>
+                </div>
+                <div class="resourceTab d-flex align-items-center iconSize">
+                    <i title="Resources" (click)="openResourse(resourseWindow)" class="lxp-MenuList"></i>
+                </div>
+            </div>
         </div>
-        
     </div>
 </div>
 <ng-template #resourseWindow>
