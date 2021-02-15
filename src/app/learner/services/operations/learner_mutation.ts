@@ -1067,3 +1067,11 @@ export const markAsRead = gql`
     }
   }
 `;
+export const user_experience = gql`
+  mutation userexperience($user_id:String!,$course_id:String,$module:String,$topic:String,$userexperience:String!,$status:String) {
+    userexperience(user_id:$user_id,course_id:$course_id,module:$module,topic:$topic,userexperience:$userexperience,status:$status) {
+      message
+      success
+    }
+  }
+`;

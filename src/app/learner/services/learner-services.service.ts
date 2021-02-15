@@ -11,7 +11,7 @@ import { addTopicreference, bulkclaimcourse, claimcourse, createGuidanceRequest,
        playerstatusrealtime, resendOtponprofile, saveAttendies, updateEmailonprofile,
        updateMobileonprofile, updateProfile, updateVerifyotpmobileonProfile,
        userMstrdata, userRegistration, userRegistrationdone, userRegistrationmobileOtpsend,
-         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, viewProfile1 } from './operations/learner_mutation';
+         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, viewProfile1, user_experience } from './operations/learner_mutation';
 import {
 boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignmentmoduleData,
  getcalenderactivity, getCountForCategories, getCountForJobroleCategories, getCoureBasedOnCatalog,
@@ -86,7 +86,7 @@ export class LearnerServicesService {
   }
 
   postcomment(data) {
-    const token = localStorage.getItem('token') ;
+    const token = localStorage.getItem('token')||sessionStorage.getItem('token'); ;
     const httpOptions = {
       headers: new HttpHeaders({ Authorization: token })
     };
@@ -94,14 +94,14 @@ export class LearnerServicesService {
   }
 
   unlikepost(data) {
-    const token = localStorage.getItem('token') ;
+    const token = localStorage.getItem('token')||sessionStorage.getItem('token');;
     const httpOptions = {
       headers: new HttpHeaders({ Authorization: token })
     };
     return this.http.post(this.envApi + 'post_unlike', data, httpOptions);
   }
   likepost(data) {
-    const token = localStorage.getItem('token') ;
+    const token = localStorage.getItem('token')||sessionStorage.getItem('token'); ;
     const httpOptions = {
       headers: new HttpHeaders({ Authorization: token })
     };
@@ -919,9 +919,9 @@ getprojectActivityData(userId, courseId) {
       }
     });
   }
-  learnerUploadVideo(data) { return this.http.post(environment.apiUrl + 'wca/learnerUploadVideo', data); }
+  learnerUploadVideo(data) { return this.http.post(environment.apiUrl + 'globalupload', data); }
   learnerSumbitdeleteVideo(submitData) { return this.http.post(environment.apiUrl + 'wca/learnerSumbitdeleteVideo', submitData); }
-
+  insertRecord(data) { return this.http.post(environment.apiUrl + 'learnerUploadVideo', data); }
   get_active_course_count(userId) {
     return this.Apollo.query({
       query: getActivecourseCount,
@@ -986,6 +986,20 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       variables: {
         user_id,
         user_obj_id
+      }
+    });
+  }
+
+  userexperience(user_id,course_id,module,topic,userexperience,status) {
+    return this.Apollo.query({
+      query: user_experience,
+      variables: {
+        user_id,
+        course_id,
+        module,
+        topic,
+        userexperience,
+        status
       }
     });
   }

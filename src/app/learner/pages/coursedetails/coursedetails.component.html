@@ -111,7 +111,23 @@
         <!-- COURSE PLAYER -->
         <div class="videoPlayer" [ngClass]="drawersOpen ? 'halfWidth' : 'fullWidth'">
             <iframe title="player" id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
+            <div class="d-flex justify-content-between">
+                <div class="d-flex p-xy-10">
+                    <button type="button" [disabled]="topicPageStatus !== 'Passed'"  [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'btn btn-outline-success':'btn btn-outline-light'" (click)="understoodClick('like')">
+                        <i class="lxp-smile"></i> Understood
+                    </button>
+                    <button type="button" [disabled]="topicPageStatus !== 'Passed'" style="margin-left: 10px;"  [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'btn btn-outline-danger':'btn btn-outline-light'" (click)="understoodClick('dislike')">
+                        <i class="lxp-sad"></i> Not Understood
+                    </button>
+                </div>
+                <div class="d-flex p-xy-10">
+                    <button type="button" style="margin-right: 10px;"  ngClass="btn btn-outline-light" (click)="bookmarkClick(true)">
+                        <i class="lxp-sad"></i> BookMark
+                    </button>
+                </div>
+            </div>
         </div>
+        
     </div>
 </div>
 <ng-template #resourseWindow>

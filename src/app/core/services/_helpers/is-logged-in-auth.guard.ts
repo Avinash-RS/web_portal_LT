@@ -16,8 +16,10 @@ export class IsLoggedInAuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      const token =  localStorage.getItem('token');
-    if (!localStorage.getItem('role') || !token) {
+      const token =  localStorage.getItem('token')||sessionStorage.getItem('token');
+      const role = localStorage.getItem('role') || sessionStorage.getItem('role'); 
+      // !role ||
+    if (!token) {
       return true;
     } else {
       this.router.navigate(['/Learner/MyCourse']);
