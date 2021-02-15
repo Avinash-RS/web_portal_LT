@@ -589,15 +589,22 @@ div.tocSize::-webkit-scrollbar {
 }
 
 .titlebar {
-    padding:10px;
-    background-color: #ffffff;
     position: relative;
     .titleBack {
-        opacity: 0;
+        padding: 0 10px;
+        background-color: #ffffff;
         transition: all 0.3s ease-in-out;
-    }
-    .titleBack.animation {
-        opacity: 1;
+        &.animateAnimate {
+            animation-duration: 0.5s;
+            animation-fill-mode: both;
+        }
+        &.fadeInDown {
+            padding:10px;
+            animation-name: fadeInDown;
+        }
+        &.fadeOutUp {
+            animation-name: fadeOutUp;
+        }
     }
     .downTitle {
         position: absolute;
@@ -606,12 +613,18 @@ div.tocSize::-webkit-scrollbar {
         display: inline-block;
         width: 100%;
         text-align: center;
+        z-index: 999;
         i {
+            &.arrDown {
+                transform: rotate(180deg);
+            }
+            &.arrUp {
+                transform: rotate(0deg);
+            }
             cursor: pointer;
             color: rgba(0, 0, 0, 0.5);
             font-size: 10px;
             display: inline-block;
-            transform: rotate(180deg);
         }
     }
     .courseTitle {
@@ -787,4 +800,26 @@ div.tocSize::-webkit-scrollbar {
 }
 .sel-pad {
     padding:2px;
+}
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        // -webkit-transform: translate3d(0,-100%,0);
+        // transform: translate3d(0,0%,0);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+}
+@keyframes fadeOutUp {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        // -webkit-transform: translate3d(0,-100%,0);
+        // transform: translate3d(0,-100%,0);
+    }
 }
