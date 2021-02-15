@@ -919,9 +919,9 @@ getprojectActivityData(userId, courseId) {
       }
     });
   }
-  learnerUploadVideo(data) { return this.http.post(environment.apiUrl + 'wca/learnerUploadVideo', data); }
+  learnerUploadVideo(data) { return this.http.post(environment.apiUrl + 'globalupload', data); }
   learnerSumbitdeleteVideo(submitData) { return this.http.post(environment.apiUrl + 'wca/learnerSumbitdeleteVideo', submitData); }
-
+  insertRecord(data) { return this.http.post(environment.apiUrl + 'learnerUploadVideo', data); }
   get_active_course_count(userId) {
     return this.Apollo.query({
       query: getActivecourseCount,
