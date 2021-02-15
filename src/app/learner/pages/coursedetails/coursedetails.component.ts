@@ -336,12 +336,12 @@ export class CoursedetailsComponent implements OnInit {
       this.socketConnector.unsubscribe();
     }
   }
-  mouseoutFn() {
-    // this.titleBar = true;
-    setTimeout(()=>{                           //<<<---using ()=> syntax
-      this.titleBar = false;
-    }, 3000);
-  }
+  // mouseoutFn() {
+  //   this.titleBar = true;
+  //   setTimeout(()=>{                           //<<<---using ()=> syntax
+  //     this.titleBar = false;
+  //   }, 3000);
+  // }
   
   renameKeys(obj, newKeys) {
     const keyValues = Object.keys(obj).map(key => {

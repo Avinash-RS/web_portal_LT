@@ -1,9 +1,9 @@
 <div oncontextmenu="return false" class="coursePlayerContainer">
     <app-header></app-header>
     <!-- TITLE AND BACK -->
-    <div class="titlebar" (mouseenter)="titleBar=true" (mouseleave)="mouseoutFn()">
-        <div class="downTitle"><i *ngIf = "titleBar==false" class="lxp-Arrow"></i></div>
-        <div [ngClass]="titleBar?'animation':''" *ngIf = "titleBar" class="d-flex justify-content-start align-items-center titleBack">
+    <div class="titlebar">
+        <div class="downTitle"><i (click)="titleBar?titleBar=false:titleBar=true" class="lxp-Arrow"></i></div>
+        <div class="d-flex justify-content-start align-items-center titleBack animateAnimate" [ngClass]="titleBar==true?'fadeInDown':'fadeOutUp'">
             <div class="pointer d-flex align-items-center backcolor redHover" (click)="goBack()">
                 <i class="lxp-Arrow backArrow"></i><span>Back</span>
             </div>
