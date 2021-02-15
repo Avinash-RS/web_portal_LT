@@ -43,8 +43,15 @@
     </div>
     <!-- TOC AND PLAYER -->
     <div class="contentHeight d-flex">
+        
         <!-- TOC DATA -->
         <div class="tocSize" [ngClass]="drawersOpen ? '': 'drawersOpen'">
+            <div class="filterSection ">
+                Filter by: <select class="sel-pad" [(ngModel)]="filterkey" (change)="filterToc()">
+                    <option  [value]="'Bookmarked'">Bookmarks</option>
+                    <option [value]="'All'">All</option>
+                </select>
+            </div>
             <mat-card *ngFor="let res of scromModuleData; let i = index" [ngClass]="res.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
                 (click)="getSelectedIndex(i)" class="topicCard" >
                 <div *ngIf="i===moduleHolder" #focuser ></div>
@@ -96,6 +103,7 @@
                                             [ngClass]="(j===nextPrevHolder && i===moduleHolder) ? 'titleSelected' : ''">
                                             {{mod?.title}}
                                         </span>
+                                        <span *ngIf="scromModuleData[i]?.children[j]?.bookmark===true "><i class="lxp-bookmark" style="color:blue"></i></span>
                                     </span>
 
                                 </ng-template>
@@ -121,8 +129,8 @@
                     </button>
                 </div>
                 <div class="d-flex p-xy-10">
-                    <button type="button" style="margin-right: 10px;"  ngClass="btn btn-outline-light" (click)="bookmarkClick(true)">
-                        <i class="lxp-sad"></i> BookMark
+                    <button type="button" style="margin-right: 10px;"  ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
+                        <i [ngClass]="topicInfo?.bookmark?'lxp-bookmark':'lxp-bookmark-o'"></i> {{topicInfo?.bookmark?'Bookmarked':'Add to Bookmark'}}
                     </button>
                 </div>
             </div>

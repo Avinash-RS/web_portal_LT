@@ -60,6 +60,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.lxp-bookmark:before {
+  content: "\e927";
+}
+.lxp-bookmark-o:before {
+  content: "\e928";
+}
+.lxp-smile:before {
+  content: "\e9e1";
+}
+.lxp-sad:before {
+  content: "\e9e5";
+}
 .lxp-HamburgerMenu:before {
   content: "\e914";
 }
@@ -176,10 +188,4 @@
 }
 .lxp-stack:before {
   content: "\e905";
-}
-.lxp-smile:before {
-  content: "\e9e1";
-}
-.lxp-sad:before {
-  content: "\e9e5";
 }
