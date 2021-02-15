@@ -595,7 +595,7 @@ div.tocSize::-webkit-scrollbar {
         background-color: #ffffff;
         transition: all 0.3s ease-in-out;
         &.animateAnimate {
-            animation-duration: 1s;
+            animation-duration: 0.5s;
             animation-fill-mode: both;
         }
         &.fadeInDown {
@@ -615,11 +615,16 @@ div.tocSize::-webkit-scrollbar {
         text-align: center;
         z-index: 999;
         i {
+            &.arrDown {
+                transform: rotate(180deg);
+            }
+            &.arrUp {
+                transform: rotate(0deg);
+            }
             cursor: pointer;
             color: rgba(0, 0, 0, 0.5);
             font-size: 10px;
             display: inline-block;
-            transform: rotate(180deg);
         }
     }
     .courseTitle {
