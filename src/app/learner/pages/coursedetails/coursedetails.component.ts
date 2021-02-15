@@ -97,6 +97,7 @@ export class CoursedetailsComponent implements OnInit {
   filterkey:any = 'All'
   // initials: any;
   selectedModuleData: any;
+  titleBar: boolean = false;
   user_token;
 
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
@@ -335,6 +336,13 @@ export class CoursedetailsComponent implements OnInit {
       this.socketConnector.unsubscribe();
     }
   }
+  mouseoutFn() {
+    // this.titleBar = true;
+    setTimeout(()=>{                           //<<<---using ()=> syntax
+      this.titleBar = false;
+    }, 3000);
+  }
+  
   renameKeys(obj, newKeys) {
     const keyValues = Object.keys(obj).map(key => {
       let newKey = null;
@@ -933,6 +941,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   understoodClick(ux){
+    this.topicInfo.user_experience = ux
     this.Lservice.userexperience(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,ux,this.topicInfo.status).subscribe((data:any)=>{
       if(data?.data?.userexperience?.success){
         this.topicInfo.user_experience = ux
