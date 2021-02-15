@@ -93,6 +93,7 @@ export class CoursedetailsComponent implements OnInit {
   screenWidth: number;
   performOverLay = false;
   treeCourse = false;
+  filterkey:any = 'All'
   // initials: any;
   selectedModuleData: any;
   user_token;
@@ -602,6 +603,7 @@ export class CoursedetailsComponent implements OnInit {
     this.moduleHolder = moduleIdx;
     this.isprevEnable = true;
     this.isNextEnable = true;
+    this.topicInfo = this.scromApiData.childData[this.moduleHolder].children[this.nextPrevHolder]
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
       (environment.scormUrl + '/scormPlayer.html?contentID=' +
         this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
@@ -926,13 +928,17 @@ export class CoursedetailsComponent implements OnInit {
 
   bookmarkClick(isbokmarked){
     this.Lservice.bookmark(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,isbokmarked).subscribe((data:any)=>{
-      if(data?.data?.userexperience?.success){
-        //this.topicInfo.user_experience = ux
-        this.toastr.success(data?.data?.bookmark?.message)
+      if(data?.data?.bookmark?.success){
+        this.topicInfo.bookmark = isbokmarked
+        //this.toastr.success(data?.data?.bookmark?.message)
       }else{
         this.toastr.warning(data?.data?.bookmark?.message)
       }
     })
+  }
+
+  filterToc(){
+    alert("filter in progress")
   }
 
 }
