@@ -16,6 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import * as _ from 'lodash';
 import { LegendPosition } from 'ag-grid-community';
+import { filter } from 'underscore';
 // import { debugger } from 'fusioncharts';
 
 @Component({
@@ -126,6 +127,8 @@ export class CoursedetailsComponent implements OnInit {
   currentTopicTitle: any;
   currentModuleTitle: any;
   topicInfo: any;
+  bkup_Toc: any;
+  filterData: any;
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -236,8 +239,8 @@ export class CoursedetailsComponent implements OnInit {
         });
         element.resValue = resourceFile;
       });
-      this.nextPrevHolder = this.topiccurrentPage = this.content.topicIndex == null ? 0 : this.content.topicIndex;
-      this.moduleHolder = this.currentPage = this.content.moduleIndex == null ? 0 : this.content.moduleIndex;
+      // this.nextPrevHolder = this.topiccurrentPage = this.content.topicIndex == null ? 0 : this.content.topicIndex;
+      // this.moduleHolder = this.currentPage = this.content.moduleIndex == null ? 0 : this.content.moduleIndex;
 
       this.content.noresource = noresource;
 
@@ -875,15 +878,29 @@ export class CoursedetailsComponent implements OnInit {
     });
   }
   moduleExpand(res, index) {
-    if (index !== this.oldIdx) {
-      for (const element of this.scromModuleData) {
-        element.expanded = false
+    let expandMimic
+    if(this.filterkey === "All"){
+      if (index !== this.oldIdx) {
+        for (const element of this.scromModuleData) {
+          element.expanded = false
+        }
+        this.scromModuleData[index].expanded = true;
+      } else {
+        this.scromModuleData[index].expanded = this.scromModuleData[index].expanded ? false : true;
       }
-      this.scromModuleData[index].expanded = true;
-    } else {
-      this.scromModuleData[index].expanded = this.scromModuleData[index].expanded ? false : true;
+      this.oldIdx = index
+    }else{
+      if (index !== this.oldIdx) {
+        for (const element of this.filterData) {
+          element.expanded = false
+        }
+        this.filterData[index].expanded = true;
+      } else {
+        this.filterData[index].expanded = this.filterData[index].expanded ? false : true;
+      }
+      this.oldIdx = index
     }
-    this.oldIdx = index
+
   }
 
   goBack() {
@@ -927,6 +944,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   bookmarkClick(isbokmarked){
+    this.topicInfo.bookmark = isbokmarked
     this.Lservice.bookmark(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,isbokmarked).subscribe((data:any)=>{
       if(data?.data?.bookmark?.success){
         this.topicInfo.bookmark = isbokmarked
@@ -938,7 +956,26 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   filterToc(){
-    alert("filter in progress")
+    this.bkup_Toc = JSON.parse(JSON.stringify(this.scromModuleData));
+    this.filterData = []
+    if (this.filterkey === 'Bookmarked') {
+      this.bkup_Toc.forEach(module => {
+        if (module.children.length > 0) {
+          let markedTopcs;
+          markedTopcs = module.children.filter((topic) => {
+            return topic?.bookmark === true;
+          });
+          if (markedTopcs.length>0) {
+            module.children = []
+            module.children = markedTopcs;
+            this.filterData.push(module);
+          }
+        }
+      });
+    }else{
+      this.filterData =[]
+
+    }
   }
 
 }
