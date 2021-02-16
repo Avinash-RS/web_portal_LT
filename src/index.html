@@ -1,81 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>iGGnite</title>
-    <base href="/" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=0" >
-    <link href="assets/faviconIG.png" rel="icon" type="image/x-icon" />
-    
-    <!-- <link href="assets/fonts/font-awesome.min.css" rel="stylesheet" /> -->
-    <!-- <script src="assets/js/jquery-3.2.1.slim.min.js" type="text/javascript"></script>
+<head>
+  <meta charset="utf-8" />
+  <title>iGGnite</title>
+  <base href="/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=0">
+  <link href="assets/faviconIG.png" rel="icon" type="image/x-icon" />
+
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-NNF7H2N');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- <link href="assets/fonts/font-awesome.min.css" rel="stylesheet" /> -->
+  <!-- <script src="assets/js/jquery-3.2.1.slim.min.js" type="text/javascript"></script>
     <script src="assets/js/popper.min.js" type="text/javascript"></script>
     <script src="assets/js/bootstrap.min.js" type="text/javascript"></script> -->
 
-    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
-    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" /> -->
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> -->
-    <!-- <link href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css" rel="stylesheet" /> -->
-    <!-- <link href="videojs.record.css" rel="stylesheet"> -->
-    <!-- UIkit CSS -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/css/uikit.min.css" />
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" /> -->
+  <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> -->
+  <!-- <link href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css" rel="stylesheet" /> -->
+  <!-- <link href="videojs.record.css" rel="stylesheet"> -->
+  <!-- UIkit CSS -->
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/css/uikit.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
       crossorigin="anonymous" /> -->
-    <!-- UIkit JS -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit.min.js"></script>
+  <!-- UIkit JS -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit-icons.min.js"></script> -->
-    <!-- <script src="RecordRTC.js"></script>
+  <!-- <script src="RecordRTC.js"></script>
     <script src="videojs.record.js"></script> -->
 
-    <style>
-      .containerlogo { 
-        height: 200px;
-        position: relative;
-        border: 0px; 
-      }
-      .centerlogo {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-      }
-    </style>
-  
-  </head>
+  <style>
+    .containerlogo {
+      height: 200px;
+      position: relative;
+      border: 0px;
+    }
 
-  <body class="mat-typography" onload="checkIE()">
-    <app-root class="mat-typography contentSetter">
-      <div class="app-loading mat-typography">
-        <div id="msgContainer" class="containerlogo">
-          <div  class="logo centerlogo" >
-            <img src="assets\images\loader.gif" alt="loader" />
-          </div>
+    .centerlogo {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+  </style>
+
+</head>
+
+<body class="mat-typography" onload="checkIE()">
+  <app-root class="mat-typography contentSetter">
+    <div class="app-loading mat-typography">
+      <div id="msgContainer" class="containerlogo">
+        <div class="logo centerlogo">
+          <img src="assets\images\loader.gif" alt="loader" />
         </div>
       </div>
-    </app-root>
-    <script>
- function checkIE() {
-    const isIEOrEdge = /msie\s|trident\//i.test(window.navigator.userAgent)
-    if (isIEOrEdge) {
-      let srcdata = 'src="assets/\IEBlocker.jpg"'
-      const redirectData ="<img "+srcdata+"  alt='Error' />"
-      let elemdata = document.getElementById("msgContainer");
-      if(elemdata){
-        elemdata.innerHTML= redirectData
+    </div>
+  </app-root>
+  <script>
+    function checkIE() {
+      const isIEOrEdge = /msie\s|trident\//i.test(window.navigator.userAgent)
+      if (isIEOrEdge) {
+        let srcdata = 'src="assets/\IEBlocker.jpg"'
+        const redirectData = "<img " + srcdata + "  alt='Error' />"
+        let elemdata = document.getElementById("msgContainer");
+        if (elemdata) {
+          elemdata.innerHTML = redirectData
+        }
+        // alert("you are using IE, pls uninstall immideatly")
+        //  if( confirm("You will be redirected to L&T Edutech portal")){
+        //    location.replace('https://www.lntedutech.com');
+        //  }
+      } else {
       }
-    // alert("you are using IE, pls uninstall immideatly")
-    //  if( confirm("You will be redirected to L&T Edutech portal")){
-    //    location.replace('https://www.lntedutech.com');
-    //  }
-    } else {
     }
-  } 
- 
-    </script>
-  </body>
+
+  </script>
+</body>
+
 </html>
