@@ -7,6 +7,18 @@
             <div class="pointer d-flex align-items-center backcolor redHover" (click)="goBack()">
                 <i class="lxp-Arrow backArrow"></i><span>Back</span>
             </div>
+            <div class="navigation d-flex align-items-center" *ngIf="scromModuleData">
+                <span class="pipeLine">|</span> 
+                <div class="leftArrow">                
+                 <i class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()"></i>
+                </div>
+                <div class="currentTopic" title="{{scromModuleData[moduleHolder]?.children[nextPrevHolder].title}}">
+                 <span >{{scromModuleData[moduleHolder]?.children[nextPrevHolder].title}}</span>
+                </div>
+                <div class="rightArrow">                
+                 <i class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()"></i>
+                </div>
+            </div>
             <div class="courseTitle"> | <span>{{this.course?.course_name}}</span></div>
         </div>
     </div>
@@ -117,11 +129,11 @@
                 </div>
             </div>
             <div class="rightContent">
-                <div class="fullScr d-flex align-items-center iconSize">
-                    <i title="Fullscreen" (click)="makeFullScreen()" class="lxp-Fullscreen"></i>
+                <div data-title="Fullscreen" class="fullScr d-flex align-items-center iconSize">
+                    <i (click)="makeFullScreen()" class="lxp-Fullscreen"></i>
                 </div>
-                <div class="resourceTab d-flex align-items-center iconSize">
-                    <i title="Resources" (click)="openResourse(resourseWindow)" class="lxp-MenuList"></i>
+                <div data-title="Resources" class="resourceTab d-flex align-items-center iconSize">
+                    <i (click)="openResourse(resourseWindow)" class="lxp-MenuList"></i>
                 </div>
             </div>
         </div>
