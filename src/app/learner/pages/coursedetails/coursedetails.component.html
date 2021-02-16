@@ -7,7 +7,7 @@
             <div class="pointer d-flex align-items-center backcolor redHover" (click)="goBack()">
                 <i class="lxp-Arrow backArrow"></i><span>Back</span>
             </div>
-            <div class="navigation d-flex align-items-center" *ngIf="scromModuleData">
+            <div class="navigation d-flex align-items-center" *ngIf="scromModuleData&&filterkey==='All'&&drawersOpen===false">
                 <span class="pipeLine">|</span> 
                 <div class="leftArrow">                
                  <i class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()"></i>
@@ -46,10 +46,10 @@
         <!-- TOC DATA -->
         <div class="tocSize" [ngClass]="drawersOpen ? '': 'drawersOpen'">
             <div class="filterSection ">
-                Filter by: 
-                <select class="sel-pad" [(ngModel)]="filterkey" (change)="filterToc()">
-                    <option [value]="'Bookmarked'">Bookmarks</option>
+                Filter by: <select class="sel-pad" [(ngModel)]="filterkey" (change)="filterToc()">
                     <option [value]="'All'">All</option>
+                    <option [value]="'Bookmarked'">Bookmarks</option>
+                    
                 </select>
             </div>
             <mat-card *ngFor="let res of filterkey=='Bookmarked'?filterData:scromModuleData; let i = index" [ngClass]="res.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
@@ -123,17 +123,17 @@
                     </button>
                 </div>
                 <div class="d-flex bookmarkButton">
-                    <button type="button" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
+                    <button type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
                         <i [ngClass]="topicInfo?.bookmark?'lxp-bookmark':'lxp-bookmark-o'"></i> {{topicInfo?.bookmark?'Bookmarked':'Add to Bookmark'}}
                     </button>
                 </div>
             </div>
             <div class="rightContent">
-                <div data-title="Fullscreen" class="fullScr d-flex align-items-center iconSize">
-                    <i (click)="makeFullScreen()" class="lxp-Fullscreen"></i>
+                <div (click)="makeFullScreen()" data-title="Fullscreen" class="fullScr d-flex align-items-center iconSize">
+                    <i  class="lxp-Fullscreen"></i>
                 </div>
-                <div data-title="Resources" class="resourceTab d-flex align-items-center iconSize">
-                    <i (click)="openResourse(resourseWindow)" class="lxp-MenuList"></i>
+                <div (click)="openResourse(resourseWindow)" data-title="Resources" class="resourceTab d-flex align-items-center iconSize">
+                    <i  class="lxp-res-popout f_size_14"></i>
                 </div>
             </div>
         </div>
