@@ -100,7 +100,7 @@
                                             [ngClass]="(j===nextPrevHolder && i===moduleHolder) ? 'titleSelected' : ''">
                                             {{mod?.title}}
                                         </span>
-                                        <span *ngIf="scromModuleData[i]?.children[j]?.bookmark===true "><i class="lxp-bookmark" style="color:blue"></i></span>
+                                        <span *ngIf="mod.bookmark===true "><i class="lxp-bookmark" style="color:blue"></i></span>
                                     </span>
 
                                 </ng-template>
