@@ -26,14 +26,14 @@
       </div>
       <div *ngIf="navDetails?.tableType !== 'submission'" class="courseNameBreadcrum">
         <span class="pipeLine"> | </span>
-        <span>Activity center</span>
+        <span class="navDetailsName">Activity center</span>
         <i class="lxp-Arrow"></i>
         <span>{{navDetails?.tableType =='allActivities'? 'All' : navDetails?.tableType | titlecase}} activities</span>
       </div>
 
       <div *ngIf="navDetails?.tableType == 'submission'" class="courseNameBreadcrum">
         <span class="pipeLine"> | </span>
-        <span>{{navDetails?.name}}</span>
+        <span class="navDetailsName">{{navDetails?.name}}</span>
         <i class="lxp-Arrow"></i>
         <span>Submission details</span>
       </div>

@@ -37,7 +37,7 @@
 .courseNameBreadcrum {
     margin-left: 7px;
     display: inline-block;
-    width: 74%;
+    width: 90%;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -54,6 +54,12 @@
         line-height: normal;
         // display: inline-block;
         vertical-align: middle;
+        &.navDetailsName {
+            display: inline-block;
+            max-width: 75%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
     }
     i {
         display: inline-block;
@@ -70,19 +76,22 @@
         align-items: flex-start !important;
     }
 }
-.breadCrumActivities, 
-.search-form {
-    width: 49%;
-    display: inline-block;
-    @media only screen and (max-width: 767px) {
-        width: 100%;
-    }
+.breadCrumActivities {
+    width: 74%;
 }
 .search-form {
+    width: 25%;
     text-align: right;
     margin-top: 12px;
     @media only screen and (max-width: 767px) {
         text-align: left;
+    }
+}
+.breadCrumActivities, 
+.search-form {
+    display: inline-block;
+    @media only screen and (max-width: 767px) {
+        width: 100%;
     }
 }
 ::ng-deep.search-form form {

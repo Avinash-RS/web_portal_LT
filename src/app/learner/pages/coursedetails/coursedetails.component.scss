@@ -463,8 +463,14 @@ div.tocSize::-webkit-scrollbar {
     margin-left: 10px;
     padding-right: 10px;
     max-width: 65%;
-    min-width: 65%;
+    // min-width: 65%;
     justify-content: space-between;
+    .pipeLine {
+        font-size: 18px;
+        color: #333333;
+        display: inline-block;
+        margin-right: 10px;
+    }
     @media only screen and (max-width: 767px) {
         max-width: 100%;
         margin-left: 7px;
@@ -503,6 +509,36 @@ div.tocSize::-webkit-scrollbar {
         justify-content: center;
         cursor: pointer;
         margin-bottom: 15px;
+        transition: all 0.3s ease-in-out;
+        &[data-title] {
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            &:hover {
+                &::before {
+                    content: attr(data-title);
+                    position: absolute;
+                    bottom: -30px;
+                    left: -15px;
+                    line-height: normal;
+                    background: #5C6873;
+                    padding: 4px 6px;
+                    color: #fff;
+                    font-size: 11px;
+                    white-space: nowrap;
+                    z-index: 9;
+                }
+                &::after {
+                content: '';
+                position: absolute;
+                bottom: -9px;
+                left: 50%;
+                border-width: 6px;
+                border-style: solid;
+                border-color: transparent transparent #5C6873 transparent;
+                transform: translateX(-50%);
+                }
+            }
+        }
     }
     i {
         color: #000000;
@@ -608,10 +644,11 @@ div.tocSize::-webkit-scrollbar {
     }
     .downTitle {
         position: absolute;
-        left: 0;
-        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 5px;
         display: inline-block;
-        width: 100%;
+        // width: 100%;
         text-align: center;
         z-index: 999;
         i {
@@ -630,7 +667,7 @@ div.tocSize::-webkit-scrollbar {
     .courseTitle {
         font-size: 18px;
         color: #333333;
-        margin-left: 10px;
+        margin-left: 5px;
         width: 100%;
         span {
             font-weight: 400;
