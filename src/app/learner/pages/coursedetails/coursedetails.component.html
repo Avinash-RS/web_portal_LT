@@ -35,8 +35,9 @@
         <div class="tocSize" [ngClass]="drawersOpen ? '': 'drawersOpen'">
             <div class="filterSection ">
                 Filter by: <select class="sel-pad" [(ngModel)]="filterkey" (change)="filterToc()">
-                    <option [value]="'Bookmarked'">Bookmarks</option>
                     <option [value]="'All'">All</option>
+                    <option [value]="'Bookmarked'">Bookmarks</option>
+                    
                 </select>
             </div>
             <mat-card *ngFor="let res of filterkey=='Bookmarked'?filterData:scromModuleData; let i = index" [ngClass]="res.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
@@ -110,7 +111,7 @@
                     </button>
                 </div>
                 <div class="d-flex bookmarkButton">
-                    <button type="button" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
+                    <button type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
                         <i [ngClass]="topicInfo?.bookmark?'lxp-bookmark':'lxp-bookmark-o'"></i> {{topicInfo?.bookmark?'Bookmarked':'Add to Bookmark'}}
                     </button>
                 </div>

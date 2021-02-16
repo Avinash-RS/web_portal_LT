@@ -957,6 +957,8 @@ export class CoursedetailsComponent implements OnInit {
     this.Lservice.bookmark(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,isbokmarked).subscribe((data:any)=>{
       if(data?.data?.bookmark?.success){
         this.topicInfo.bookmark = isbokmarked
+        if(this.filterkey==='Bookmarked'){
+        this.filterToc()}// NOT WORKING SHOULD WAIT FOR SOCKET RESPONSE FOR REALTIME FILTER
         //this.toastr.success(data?.data?.bookmark?.message)
       }else{
         this.toastr.warning(data?.data?.bookmark?.message)
