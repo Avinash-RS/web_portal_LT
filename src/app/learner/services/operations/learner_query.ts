@@ -1433,6 +1433,7 @@ export const playerModuleAndTopic = gql`
         moduleIndex
         topicIndex
         childData {
+          week
           title
           _id
           status
