@@ -5,6 +5,7 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-mycourse-item-component',
@@ -29,6 +30,35 @@ export class MycourseItemComponent implements OnInit {
   activityDefault: any = '../../../../assets/learner/mycourseicons/Activities_defult.svg';
   discussDefault: any = '../../../../assets/learner/mycourseicons/Discussion_default.svg';
   tabselector: any = 0;
+  customOptions: OwlOptions = {
+    loop: true,
+    autoplay: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: true,
+    autoplaySpeed: 700,
+    dotsSpeed: 700,
+    autoplayHoverPause: true,
+    responsive: {
+      0: {
+        items: 1
+      },
+      350: {
+        items: 1
+      },
+      740: {
+        items: 1,
+      },
+      940: {
+        items: 1,
+      },
+      1200: {
+        items: 1,
+      }
+    },
+    nav: true
+  };
   // tabTitleVal: string = 'Self-Paced Learning';
   constructor(
     public translate: TranslateService,

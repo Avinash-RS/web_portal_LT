@@ -2,8 +2,13 @@
     <app-header></app-header>
     <!-- TITLE AND BACK -->
     <div class="titlebar">
-        <div class="downTitle"><i (click)="titleBar?titleBar=false:titleBar=true" [ngClass]="titleBar?'arrUp':'arrDown'" class="lxp-Arrow"></i></div>
-        <div class="d-flex justify-content-start align-items-center titleBack animateAnimate" [ngClass]="titleBar==true?'fadeInDown':'fadeOutUp'">
+        <!-- <div class="downTitle"><i (click)="titleBar?titleBar=false:titleBar=true" [ngClass]="titleBar?'arrUp':'arrDown'" class="lxp-Arrow"></i></div>
+        <div class="collapseFill"><i class="lxp-CollapseFill"></i></div> -->
+
+        <div class="downTitle"><i (click)="titleBar = !titleBar" [ngClass]="titleBar?'arrDown':'arrUp'" class="lxp-Arrow"></i></div>
+        <div class="collapseFill"><i (click)="!titleBar?titleBar=true:''" [ngClass]="!titleBar?'arrUp':'arrDown'" class="lxp-CollapseFill"></i></div>
+
+        <div class="d-flex justify-content-start align-items-center titleBack animateAnimate" [ngClass]="titleBar==true?'fadeOutUp':'fadeInDown'">
             <div class="pointer d-flex align-items-center backcolor redHover" (click)="goBack()">
                 <i class="lxp-Arrow backArrow"></i><span>Back</span>
             </div>
@@ -56,7 +61,7 @@
                 (click)="getSelectedIndex(i)" class="topicCard" >
                 <div *ngIf="i===moduleHolder" #focuser ></div>
                         <mat-card-title (click)="moduleExpand(res,i)" class="d-flex justify-content-between align-items-center pointer">
-                            <div class="tocTitle">Week - {{i+1}}</div>
+                            <div class="tocTitle">Week - {{res.week?res.week:i+1}}</div>
                             <div>
                                 <i class="expandCollapse" [ngClass]="res.expanded?'lxp-Collapse':'lxp-Expand'"></i>
                             </div>
@@ -79,20 +84,12 @@
                         </mat-card-subtitle>
 
                 <mat-card-content *ngIf="(res.expanded)">
+                    <!-- TOPICS LIST STARTS HERE... -->
                     <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title?.length > 39?'headerDown': ''">
                         <ng-container *ngFor="let mod of res?.children; let j = index">
                             <mat-step
                                 [aria-labelledby]="mod?.status === 'Passed' ? 'colgreen' :  mod?.status === 'process' ? 'colYellow' : 'colWhite'">
                                 <ng-template matStepLabel>
-                                    <!-- <span class="topicnm" *ngIf="mod?.title?.length >= 65" tooltip="{{mod?.title}}"placement="right"
-                                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i);!drawersOpen?drawer.close():''">
-                                        <span class="titleName"
-                                            [ngClass]="(j===nextPrevHolder && i===moduleHolder) ? 'titleSelected' : ''">
-                                            {{mod?.title | slice:0:56}}...
-                                        </span>
-
-                                    </span> -->
-<!-- *ngIf="mod?.title.length < 65" -->
                                     <span class="topicnm" 
                                         (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i);drawersOpen=performOverLay?(drawersOpen?false:true):true">
 

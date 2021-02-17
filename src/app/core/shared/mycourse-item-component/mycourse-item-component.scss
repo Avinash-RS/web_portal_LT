@@ -2187,6 +2187,7 @@ li {
   }
 }
 .durationCreditTime {
+  background-color: #ffffff;
   padding: 10px 10px 0 10px;
   flex-wrap: wrap;
   display: flex;
@@ -2234,6 +2235,39 @@ li {
         width: 81%;
       }
     }
+  }
+}
+.analyticsBtn {
+  margin-top: 15px;
+  button {
+    cursor: pointer;
+    padding: 6px 8px;
+    background-color: rgba(255, 204, 0, 1);
+    border-radius: 5px;
+    border: none;
+    color: #333333;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: normal;
+    display: inline-block;
+    &:hover {
+      box-shadow: 0px 0px 3px #00000042;
+    }
+    i {
+      color: #000000;
+      font-size: 16px;
+      display: inline-block;
+      vertical-align: text-bottom;
+      margin-right: 4px;
+    }
+  }
+}
+.movingNotification {
+  h6 {
+    color: #5C6873;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: normal;
   }
 }
 .courseAuthor {

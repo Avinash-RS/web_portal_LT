@@ -123,6 +123,39 @@
 .matTabCol {
   position: relative;
 }
+.liveClassroomNotification {
+  background-color: rgba(192, 34, 34, 0.1);
+  padding: 6px 12px;
+  position: absolute;
+  top: 30px;
+  right: 15px;
+  z-index: 9;
+  &::before {
+    content: '';
+    width: 4px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background-color: rgba(255, 160, 78, 1);
+  }
+  span {
+    font-size: 12px;
+    color: #000000;
+    font-weight: 400;
+    margin-left: 8px;
+  }
+  i {
+    color: rgba(192, 34, 34, 1);
+    font-size: 20px;
+  }
+  i, span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
 .browseCourse {
   position: absolute;
   top: 30px;
