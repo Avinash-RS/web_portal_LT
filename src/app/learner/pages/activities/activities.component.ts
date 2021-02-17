@@ -75,6 +75,7 @@ export class ActivitiesComponent implements OnInit {
   type:any;
   splitSize:any;
   fileTotalSize:any;
+  verfyingCondition:any;
   // assignmentMessage = false;
   fromCalender = false;
   trendingItration: any = {
@@ -684,7 +685,7 @@ export class ActivitiesComponent implements OnInit {
     }
   }
 
-  learnerUploadVideo(project, submitAction) {
+  async learnerUploadVideo(project, submitAction) {
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1);
     const endDate1 = new Date(project.projectActivity.activityenddate);
@@ -700,6 +701,20 @@ export class ActivitiesComponent implements OnInit {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.selectfile.length; i++) {
       payload.append('uploadvideo', this.selectfile[i]);
+      this.currentFile = this.selectfile[i];
+      this.fileSize = this.currentFile.size;
+       this.type=this.selectfile[i].type
+       var sizeData = this.currentFile.size / 1024
+       var sizeDatakb = sizeData / 1024
+       var finalSize = sizeDatakb.toFixed(2)
+       this.splitSize = finalSize.split('.');
+       if (this.splitSize[0] == 0) {
+           this.fileTotalSize = sizeData.toFixed(2) + ' KB'
+           this.verfyingCondition=sizeDatakb.toFixed(2)
+       } else {
+           this.verfyingCondition=sizeDatakb.toFixed(2)
+           this.fileTotalSize = sizeDatakb.toFixed(2) + ' MB'
+       }
     }
     // payload.append('uploadvideo', this.selectfile, this.selectfile.name);
     payload.append('course_id', this.courseid);
@@ -712,10 +727,72 @@ export class ActivitiesComponent implements OnInit {
     payload.append('submitAction', submitAction);
     payload.append('iterationid', project.projectActivity.project_id);
     payload.append('object_id', project.projectActivity.project_id);
-    this.commonServices.loader$.next(true);
-    this.Lservice.learnerUploadVideo(payload).subscribe((data: any) => {
+   // this.commonServices.loader$.next(true);
+    this.Lservice.learnerUploadVideo(payload).subscribe(async (data: any) => {
       if (data.success === true) {
+        const sas = data.data;
+        const pipeline = newPipeline(new AnonymousCredential(), {
+          retryOptions: { maxTries: 4 }, // Retry options
+          userAgentOptions: { userAgentPrefix: 'AdvancedSample V1.0.0' }, // Customized telemetry string
+          keepAliveOptions: {
+            // Keep alive is enabled by default, disable keep alive by setting false
+            enable: false
+          }
+        });
+        const blobServiceClient = new BlobServiceClient(`${sas.storageUri}?${sas.storageAccessToken}`, pipeline);
+        const containerClient = blobServiceClient.getContainerClient(sas.containerName);
+        if (!containerClient.exists()) {
+          await containerClient.create();
+        }
+        const client = containerClient.getBlockBlobClient(this.currentFile.name);
+        this.isProgress = true;
+        this.uploadedPercentage=0
+        const response = await client.uploadBrowserData(this.currentFile, {
+          blockSize: 4 * 1024 * 1024, // 4MB block size
+          concurrency: 20, // 20 concurrency
+          onProgress: (ev) => {
+            const uploaded = ev.loadedBytes;
+            const percnt = uploaded * 100 / this.fileSize;
+            this.uploadedPercentage = percnt.toFixed(2);
+            console.log(this.uploadedPercentage)
+          },
+          blobHTTPHeaders: { blobContentType: this.currentFile.type }
+        });
+        
+        if (response._response.status === 201) {
+        
+           this.jsonData = {
+            'course_id': this.courseid,
+            'module_id': project.projectActivity.module_id,
+            'topic_id':project.projectActivity.topic_id,
+            'user_id': this.userDetail.user_id,
+            'submit_status': submitStatus,
+            'total_mark':  project.projectActivity.total_mark,
+            'submitType': 'project',
+            'submitAction': submitAction,
+            'iterationid':project.projectActivity.project_id,
+            'object_id':project.projectActivity.project_id,
+            videodetails:[{
+              doc_type:this.type,
+              videourl: sas.storageUri + sas.containerName + '/' + this.currentFile.name,
+              name: this.currentFile.name,
+              size: this.fileTotalSize,
+              id:  project.projectActivity.project_id,
+              uploaded_date: new Date(),
+              is_active: true
+            }]
+            
+          }
+        let checkRes=await this.insertActivityRecord(this.jsonData)
         this.toastr.success(data.message);
+        this.flag=1
+          //console.log('uploaded successfully.',this.jsonData)
+        }
+      
+        
+        this.selectPerformfile = [];
+  
+        //this.toastr.success(data.message);
         this.showSubmittedon = true;
         this.getprojectActivityData();
         this.selectfile = [];
@@ -827,11 +904,14 @@ async performlearnerUploadVideo() {
       this.splitSize = finalSize.split('.');
       if (this.splitSize[0] == 0) {
           this.fileTotalSize = sizeData.toFixed(2) + ' KB'
+          this.verfyingCondition=sizeDatakb.toFixed(2)
       } else {
+          this.verfyingCondition=sizeDatakb.toFixed(2)
           this.fileTotalSize = sizeDatakb.toFixed(2) + ' MB'
       }
       performVideo.append('uploadvideo', this.selectPerformfile[i]);
     }
+    if(this.verfyingCondition<=150){
     // performVideo.append('uploadvideo' , this.selectPerformfile[0]);
     performVideo.append('course_id', this.performsData.performActivity.course_id);
     performVideo.append('module_id', this.performsData.performActivity.module_id);
@@ -912,6 +992,9 @@ async performlearnerUploadVideo() {
         this.toastr.warning(data.message);
       }
     });
+    }else{
+      this.toastr.warning('File size should not greater than 150 MB');
+    }
   }
   insertActivityRecord=async(performVideo)=>{
   
