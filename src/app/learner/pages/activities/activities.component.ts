@@ -784,6 +784,7 @@ export class ActivitiesComponent implements OnInit {
             
           }
         let checkRes=await this.insertActivityRecord(this.jsonData)
+        this.getprojectActivityData();
         this.toastr.success(data.message);
         this.flag=1
           //console.log('uploaded successfully.',this.jsonData)
