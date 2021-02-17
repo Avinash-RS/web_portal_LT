@@ -42,7 +42,9 @@
               "src/assets/fonts/font-awesome.min.css",
               "src/theme/theme.scss",
               "src/theme/typography.scss",
-              "src/assets/variable.scss"
+              "src/assets/variable.scss",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.slim.min.js",
@@ -139,7 +141,9 @@
               "src/assets/fonts/font-awesome.min.css",
               "src/theme/theme.scss",
               "src/theme/typography.scss",
-              "src/assets/variable.scss"
+              "src/assets/variable.scss",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.slim.min.js",

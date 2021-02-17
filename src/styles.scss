@@ -1008,3 +1008,35 @@ mat-header-cell,
     text-align: center;
   }
 }
+.movingNotification {
+  position: relative;
+  .owl-theme {
+    margin-left: 25px;
+    .owl-nav {
+      display: none;
+    }
+    .owl-dots {
+      position: absolute;
+      top: 0;
+      left: -25px;
+      .owl-dot {
+        display: block;
+        &.active {
+          span {
+            background: #C02222;
+          }
+        }
+        span {
+          width: 15px;
+          height: 2px;
+          margin: 0.26em 7px 0.28em 0;
+          background: #D6D6D6;
+          display: block;
+          -webkit-backface-visibility: visible;
+          transition: opacity .2s ease;
+          border-radius: 0;
+        }
+      }
+    }
+  }
+}

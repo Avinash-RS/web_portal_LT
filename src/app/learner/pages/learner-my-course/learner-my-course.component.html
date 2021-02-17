@@ -119,9 +119,9 @@
 
           <!-- Card start -->
           <div *ngIf="!showSkeleton; else skeletonLoad">
-          <div class="courseCard" *ngFor="let course of courseDetailsList | filter: searchName">
-            <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
-          </div>
+            <div class="courseCard" *ngFor="let course of courseDetailsList | filter: searchName">
+              <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
+            </div>
           </div>
           <!-- card end -->
 
@@ -138,6 +138,7 @@
             </mat-card> 
           </div>
         </mat-tab>
+        <div></div>
         <mat-tab>
           <ng-template matTabLabel>
             <div style="display: flex !important;">
@@ -147,9 +148,9 @@
 
           <!-- Card start -->
           <div *ngIf="!showSkeleton; else skeletonLoad">
-          <div class="courseCard" *ngFor="let course of courseDetailsList  | filter: searchName">
-            <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
-          </div>
+            <div class="courseCard" *ngFor="let course of courseDetailsList  | filter: searchName">
+              <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
+            </div>
           </div>
           <!-- card end -->
 
@@ -182,7 +183,6 @@
           </div>
 
           <div *ngIf=" showSkeleton==false && completedCourseCount === 0">
-
             <mat-card class="noSessionCard color-yellow-card-status">
               <div class="d-flex justify-content-between align-items-center flexStyle">
                 <div class="sessionImg">
@@ -203,10 +203,10 @@
               }}" matBadgeOverlap="false">{{ "All" | translate }}</span>
           </ng-template>
           <div *ngIf="!showSkeleton; else skeletonLoad">
-          <div class="courseCard" *ngFor="let course of courseDetailsList  | filter: searchName">
-            <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
+            <div class="courseCard" *ngFor="let course of courseDetailsList  | filter: searchName">
+              <app-mycourse-item-component [courseItems]="course"></app-mycourse-item-component>
+            </div>
           </div>
-        </div>
 
           <div *ngIf="showSkeleton==false && allCourseCount === 0">
             <mat-card class="noSessionCard color-yellow-card-status">
@@ -232,6 +232,9 @@
           <span>{{ categorytab.categoryName }}</span>
         </button>
       </mat-menu>
+      <!-- <div class="liveClassroomNotification">
+        <i class="lxp-QueuePlay"></i><span>Live classroom session starts at 11:30 AM</span>
+      </div> -->
       <!-- <div class="browseCourse">
         <button (click)="openWin()">Browse Courses</button>
       </div> -->
