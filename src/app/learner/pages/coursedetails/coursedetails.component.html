@@ -116,7 +116,7 @@
                 </div>
                 <div class="d-flex bookmarkButton">
                     <button type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
-                        <i [ngClass]="topicInfo?.bookmark?'lxp-bookmark':'lxp-bookmark-o'"></i> {{topicInfo?.bookmark?'Bookmarked':'Add to Bookmark'}}
+                        <i [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></i> {{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? 'Bookmarked':'Add to Bookmark'}}
                     </button>
                 </div>
             </div>
