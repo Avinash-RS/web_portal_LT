@@ -141,21 +141,39 @@ color:grey
         }
     }
 }
-.tocSize{
-    overflow: auto;
+.tocSize {
+    // overflow: auto;
     -webkit-overflow-scrolling: touch;
     width: 30%;
     margin-left: 0;
+    margin-right: 5px;
     transition: all 0.3s linear;
     position: relative;
+    z-index: 8;
     @media only screen and (max-width: 767px) {
         width: 100%;
     }
     &.drawersOpen {
         margin-left: -30%;
+        margin-right: 0;
         @media only screen and (max-width: 767px) {
             margin-left: -100%;
         }
+    }
+    .filterSection {
+        position: absolute;
+        width: 100%;
+        right: 0;
+        top: 0;
+        padding: 0 10px 10px 10px;
+        background-color: #ffffff;
+        text-align: right;
+        // margin: 0 10px 10px 10px;
+    }
+    .xyz {
+        overflow: auto;
+        height: 74.7vh;
+        margin-top: 35px;
     }
 }
 div.tocSize::-webkit-scrollbar {
@@ -845,11 +863,6 @@ div.tocSize::-webkit-scrollbar {
 ::ng-deep.resourseContainer .mat-dialog-content {
     height: 100% !important;
     max-height: inherit !important;
-}
-
-.filterSection {
-    text-align: right;
-    margin: 0 10px 10px 10px;
 }
 .sel-pad {
     padding:2px;

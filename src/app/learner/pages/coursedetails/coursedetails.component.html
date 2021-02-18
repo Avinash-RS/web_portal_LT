@@ -50,70 +50,72 @@
         </div>
         <!-- TOC DATA -->
         <div class="tocSize" [ngClass]="drawersOpen ? '': 'drawersOpen'">
-            <div class="filterSection ">
+            <div class="filterSection">
                 Filter by: <select class="sel-pad" [(ngModel)]="filterkey" (change)="filterToc()">
                     <option [value]="'All'">All</option>
                     <option [value]="'Bookmarked'">Bookmarks</option>
                     
                 </select>
             </div>
-            <mat-card *ngFor="let res of filterkey=='Bookmarked'?filterData:scromModuleData; let i = index" [ngClass]="res.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
-                (click)="getSelectedIndex(i)" class="topicCard" >
-                <div *ngIf="i===moduleHolder" #focuser ></div>
-                        <mat-card-title (click)="moduleExpand(res,i)" class="d-flex justify-content-between align-items-center pointer">
-                            <div class="tocTitle">Week - {{i+1}}</div>
-                            <div>
-                                <i class="expandCollapse" [ngClass]="res.expanded?'lxp-Collapse':'lxp-Expand'"></i>
-                            </div>
-                        </mat-card-title>
-                        <mat-card-subtitle (click)="moduleExpand(res,i)" class="d-flex justify-content-start align-items-center tocSubTitle">
-                            <div>
-                                <!-- *ngIf="res?.status == 'Passed'" -->
-                                <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons passColor" >done </mat-icon>
-                                <mat-icon *ngIf="res?.status == 'process'" class="material-icons processColor" >done </mat-icon>
-                                <mat-icon *ngIf="res?.status == null" class="material-icons mar" >done </mat-icon>
-                            </div>
-                            <div>
-                                <span *ngIf="res?.title?.length >= 67" class="moduleName" tooltip="{{res?.title}}"
-                                    placement="right">
-                                    {{res?.title | slice:0:71}}...</span>
-                                <span *ngIf="res?.title?.length < 67" class="moduleName">
-                                    {{res?.title}}
-                                </span>
-                            </div>
-                        </mat-card-subtitle>
-
-                <mat-card-content *ngIf="(res.expanded)">
-                    <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title?.length > 39?'headerDown': ''">
-                        <ng-container *ngFor="let mod of res?.children; let j = index">
-                            <mat-step
-                                [aria-labelledby]="mod?.status === 'Passed' ? 'colgreen' :  mod?.status === 'process' ? 'colYellow' : 'colWhite'">
-                                <ng-template matStepLabel>
-                                    <!-- <span class="topicnm" *ngIf="mod?.title?.length >= 65" tooltip="{{mod?.title}}"placement="right"
-                                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i);!drawersOpen?drawer.close():''">
-                                        <span class="titleName"
-                                            [ngClass]="(j===nextPrevHolder && i===moduleHolder) ? 'titleSelected' : ''">
-                                            {{mod?.title | slice:0:56}}...
-                                        </span>
-
-                                    </span> -->
-<!-- *ngIf="mod?.title.length < 65" -->
-                                    <span class="topicnm" 
-                                        (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i);drawersOpen=performOverLay?(drawersOpen?false:true):true">
-
-                                        <span class="titleName"
-                                            [ngClass]="(j===nextPrevHolder && i===moduleHolder) ? 'titleSelected' : ''">
-                                            {{mod?.title}}
-                                        </span>
-                                        <span *ngIf="mod.bookmark===true "><i class="lxp-bookmark" style="color:blue"></i></span>
+            <div class="xyz">
+                <mat-card *ngFor="let res of filterkey=='Bookmarked'?filterData:scromModuleData; let i = index" [ngClass]="res.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
+                    (click)="getSelectedIndex(i)" class="topicCard" >
+                    <div *ngIf="i===moduleHolder" #focuser ></div>
+                            <mat-card-title (click)="moduleExpand(res,i)" class="d-flex justify-content-between align-items-center pointer">
+                                <div class="tocTitle">Week - {{i+1}}</div>
+                                <div>
+                                    <i class="expandCollapse" [ngClass]="res.expanded?'lxp-Collapse':'lxp-Expand'"></i>
+                                </div>
+                            </mat-card-title>
+                            <mat-card-subtitle (click)="moduleExpand(res,i)" class="d-flex justify-content-start align-items-center tocSubTitle">
+                                <div>
+                                    <!-- *ngIf="res?.status == 'Passed'" -->
+                                    <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons passColor" >done </mat-icon>
+                                    <mat-icon *ngIf="res?.status == 'process'" class="material-icons processColor" >done </mat-icon>
+                                    <mat-icon *ngIf="res?.status == null" class="material-icons mar" >done </mat-icon>
+                                </div>
+                                <div>
+                                    <span *ngIf="res?.title?.length >= 67" class="moduleName" tooltip="{{res?.title}}"
+                                        placement="right">
+                                        {{res?.title | slice:0:71}}...</span>
+                                    <span *ngIf="res?.title?.length < 67" class="moduleName">
+                                        {{res?.title}}
                                     </span>
+                                </div>
+                            </mat-card-subtitle>
 
-                                </ng-template>
-                            </mat-step>
-                        </ng-container>
-                    </mat-vertical-stepper>
-                </mat-card-content>
-            </mat-card>
+                    <mat-card-content *ngIf="(res.expanded)">
+                        <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title?.length > 39?'headerDown': ''">
+                            <ng-container *ngFor="let mod of res?.children; let j = index">
+                                <mat-step
+                                    [aria-labelledby]="mod?.status === 'Passed' ? 'colgreen' :  mod?.status === 'process' ? 'colYellow' : 'colWhite'">
+                                    <ng-template matStepLabel>
+                                        <!-- <span class="topicnm" *ngIf="mod?.title?.length >= 65" tooltip="{{mod?.title}}"placement="right"
+                                            (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i);!drawersOpen?drawer.close():''">
+                                            <span class="titleName"
+                                                [ngClass]="(j===nextPrevHolder && i===moduleHolder) ? 'titleSelected' : ''">
+                                                {{mod?.title | slice:0:56}}...
+                                            </span>
+
+                                        </span> -->
+    <!-- *ngIf="mod?.title.length < 65" -->
+                                        <span class="topicnm" 
+                                            (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i);drawersOpen=performOverLay?(drawersOpen?false:true):true">
+
+                                            <span class="titleName"
+                                                [ngClass]="(j===nextPrevHolder && i===moduleHolder) ? 'titleSelected' : ''">
+                                                {{mod?.title}}
+                                            </span>
+                                            <span *ngIf="mod.bookmark===true "><i class="lxp-bookmark" style="color:blue"></i></span>
+                                        </span>
+
+                                    </ng-template>
+                                </mat-step>
+                            </ng-container>
+                        </mat-vertical-stepper>
+                    </mat-card-content>
+                </mat-card>
+            </div>
         </div>
         <!-- COURSE PLAYER -->
         <div class="videoPlayer" [ngClass]="drawersOpen ? 'halfWidth' : 'fullWidth'">
@@ -133,14 +135,14 @@
                     </button>
                 </div>
             </div>
-            <div class="rightContent">
+            <!-- <div class="rightContent">
                 <div (click)="makeFullScreen()" data-title="Fullscreen" class="fullScr d-flex align-items-center iconSize">
                     <i  class="lxp-Fullscreen"></i>
                 </div>
                 <div (click)="openResourse(resourseWindow)" data-title="Resources" class="resourceTab d-flex align-items-center iconSize">
                     <i  class="lxp-res-popout f_size_14"></i>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
