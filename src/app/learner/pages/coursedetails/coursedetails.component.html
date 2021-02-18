@@ -1,4 +1,4 @@
-<div oncontextmenu="return false" class="coursePlayerContainer">
+<div oncontextmenu="return false" class="coursePlayerContainer" *ngIf="scromModuleData;else skeletonLoader">
     <app-header></app-header>
     <!-- TITLE AND BACK -->
     <div class="titlebar">
@@ -387,4 +387,39 @@
                 </mat-tab-group>
             </div>
         </mat-dialog-content>
+</ng-template>
+
+<ng-template #skeletonLoader>
+<div class="item">
+    <mat-card class="courseDetailSkeleton" style="box-shadow: none !important;">
+        <div class="breadcrumbskeleton">
+            <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', height: '50px', 'background-color': '#888888', 'border-radius': '10px' }"></ngx-skeleton-loader>
+        </div>
+        <div class="d-flex justify-content-between">
+            <div class="item" style="width: 30%;">
+                <div class="d-flex justify-content-between">
+                    <ngx-skeleton-loader [theme]="{'background-color': '#888888'}" appearance="circle" animation="pulse" [theme]="{width: '190px',height: '120px','border-radius': '10px'}"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', width: '150px', height: '50px', 'background-color': '#888888', 'border-radius': '10px' }"></ngx-skeleton-loader>
+                </div>
+                <div class="item">
+                    <ngx-skeleton-loader count="5" animation="pulse" [theme]="{ 'border-radius': '0', height: '70px', 'background-color': '#888888', 'border-radius': '10px' }"></ngx-skeleton-loader>
+                </div>
+            </div>
+            
+            <div class="item" style="width: 69%;">
+                <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', height: '410px', 'background-color': '#888888', 'border-radius': '10px' }"></ngx-skeleton-loader>
+                <div class="d-flex justify-content-between" style="width: 100%;">
+                    <div class="item d-flex justify-content-between" style="width: 40%;">
+                        <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', height: '50px', width: '150px', 'background-color': '#888888', 'border-radius': '10px' }"></ngx-skeleton-loader>
+                        <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', height: '50px', width: '150px', 'background-color': '#888888', 'border-radius': '10px' }"></ngx-skeleton-loader>
+                    </div>
+                    <div class="item d-flex justify-content-between" style="width: 40%; text-align: right;">
+                        <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', height: '50px', width: '150px', 'background-color': '#888888', 'border-radius': '10px' }"></ngx-skeleton-loader>
+                        <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', height: '50px', width: '150px', 'background-color': '#888888', 'border-radius': '10px' }"></ngx-skeleton-loader>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+</div>
 </ng-template>

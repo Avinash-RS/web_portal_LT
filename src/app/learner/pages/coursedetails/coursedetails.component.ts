@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, TemplateRef, ChangeDetectorRef, ViewChild, HostListener, ElementRef } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
@@ -22,7 +23,19 @@ import { filter } from 'underscore';
 @Component({
   selector: 'app-coursedetails',
   templateUrl: './coursedetails.component.html',
-  styleUrls: ['./coursedetails.component.scss']
+  styleUrls: ['./coursedetails.component.scss'],
+  animations: [
+    trigger('EnterLeave', [
+      state('flyIn', style({ transform: 'translateX(0)' })),
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('0.5s 300ms ease-in')
+      ]),
+      transition(':leave', [
+        animate('0.3s ease-out', style({ transform: 'translateX(100%)' }))
+      ])
+    ])
+  ]
 })
 export class CoursedetailsComponent implements OnInit {
 
