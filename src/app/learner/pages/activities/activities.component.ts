@@ -25,6 +25,7 @@ export class ActivitiesComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
   @ViewChild('videoInput') videoInput;
   @ViewChild('uploadInput') uploadInput;
+
   perfornDetaildata: any;
   performdetailPageView = false;
   projectDetaildata: any;
@@ -727,7 +728,7 @@ export class ActivitiesComponent implements OnInit {
     payload.append('submitAction', submitAction);
     payload.append('iterationid', project.projectActivity.project_id);
     payload.append('object_id', project.projectActivity.project_id);
-   // this.commonServices.loader$.next(true);
+    this.commonServices.loader$.next(true);
     this.Lservice.learnerUploadVideo(payload).subscribe(async (data: any) => {
       if (data.success === true) {
         const sas = data.data;
@@ -783,7 +784,7 @@ export class ActivitiesComponent implements OnInit {
             }]
             
           }
-        let checkRes=await this.insertActivityRecord(this.jsonData)
+        let checkRes=await this.insertActivityRecordProject(this.jsonData)
         this.getprojectActivityData();
         this.toastr.success(data.message);
         this.flag=1
@@ -795,7 +796,7 @@ export class ActivitiesComponent implements OnInit {
   
         //this.toastr.success(data.message);
         this.showSubmittedon = true;
-        this.getprojectActivityData();
+        //this.getprojectActivityData();
         this.selectfile = [];
       } else {
         this.toastr.warning(data.message);
@@ -1004,6 +1005,20 @@ async performlearnerUploadVideo() {
         console.log('success')
         this.flag=1
         this.getperformActivityData();
+      }else{
+        console.log('fail')
+        this.flag=0
+      }
+      
+    })
+  }	
+  insertActivityRecordProject=async(performVideo)=>{
+  
+    this.Lservice.insertRecord(performVideo).subscribe(async (data: any) => {
+      if(data.success){
+        console.log('success')
+        this.flag=1
+        this.getprojectActivityData();
       }else{
         console.log('fail')
         this.flag=0
