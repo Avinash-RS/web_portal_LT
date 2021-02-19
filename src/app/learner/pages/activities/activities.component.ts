@@ -935,7 +935,7 @@ export class ActivitiesComponent implements OnInit {
         //    this.commonServices.loader$.next(true);
         this.Lservice.learnerUploadVideo(performVideo).subscribe(async (data: any) => {
           if (data.success === true) {
-            await this.multiFileUpload(data, this.selectPerformfile.length,( i+1))
+            await this.multiFileUpload(data,( i+1))
           } else {
             //this.ngxLoader.stop();
             this.toastr.warning(data.message);
@@ -948,7 +948,7 @@ export class ActivitiesComponent implements OnInit {
     }
 
   }
-  async multiFileUpload(data, totlen, len) {
+  async multiFileUpload(data,  len) {
     
     // this.ngxLoader.start();
     const sas = data.data;
@@ -1004,15 +1004,16 @@ export class ActivitiesComponent implements OnInit {
 
       }
       let checkRes = await this.insertActivityRecord(this.jsonData)
-      if (totlen == len) {
+      if (this.selectPerformfile.length == len) {
         this.toastr.success(data.message);
         this.ngxLoader.stop();
+        this.selectPerformfile = [];
       }
       this.flag = 1
     }
 
 
-    this.selectPerformfile = [];
+  
   }
   insertActivityRecord = async (performVideo) => {
 

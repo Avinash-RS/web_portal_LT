@@ -347,7 +347,7 @@ export class PerformancePageMobileComponent implements OnInit {
     this.Lservice.learnerUploadVideo(performVideo).subscribe(async(data: any) => {
       i=i+1
       if (data.success === true) {
-        await this.multiFileUpload(data, this.selectPerformfile.length,i)
+        await this.multiFileUpload(data, i)
         
       } else {
         this.toastr.warning(data.message);
@@ -356,7 +356,7 @@ export class PerformancePageMobileComponent implements OnInit {
     });
   }
   }
-  async multiFileUpload(data,totlen,len){
+  async multiFileUpload(data,len){
     const sas = data.data;
         const pipeline = newPipeline(new AnonymousCredential(), {
           retryOptions: { maxTries: 4 }, // Retry options
@@ -410,12 +410,13 @@ export class PerformancePageMobileComponent implements OnInit {
             
           }
         let checkRes=await this.insertActivityRecord(this.jsonData)
-        if (totlen == len) {
+        if (this.selectPerformfile.length == len) {
           this.toastr.success(data.message);
           this.ngxLoader.stop();
+          this.selectPerformfile = [];
         }
        // this.getperformActivityData();
-        this.selectPerformfile = [];
+      
         }
   }
   insertActivityRecord=async(performVideo)=>{
