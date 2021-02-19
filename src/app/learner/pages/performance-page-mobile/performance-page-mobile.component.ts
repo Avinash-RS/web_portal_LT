@@ -432,8 +432,15 @@ export class PerformancePageMobileComponent implements OnInit {
     })
   }	
   uploadDocument(event) {
+    let fileSize = 0;
     for (let i = 0; i < event.target.files.length; i++) {
+      fileSize += event.target.files[i].size;
       this.selectPerformfile.push(event.target.files[i]);
+    }
+    if(fileSize/1024/1024 > 150){
+      this.toastr.warning("The file size can not exceed 150 MB");
+      this.selectPerformfile = [];
+      return;
     }
     this.performlearnerUploadVideo();
   }

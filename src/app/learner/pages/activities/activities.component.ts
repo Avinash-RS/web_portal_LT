@@ -359,10 +359,17 @@ export class ActivitiesComponent implements OnInit {
     this.selectedIndex = i;
   }
   uploadDoc(event, project, submitAction) {
+    let fileSizeval = 0;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < event.target.files.length; i++) {
+      fileSizeval += event.target.files[i].size;
       this.selectfile.push(event.target.files[i]);
     }
+       if(fileSizeval/1024/1024 > 150){
+        this.toastr.warning("The file size can not exceed 150 MB");
+        this.selectfile = [];
+        return;
+      }
     this.learnerUploadVideo(project, submitAction);
   }
   uploadDocs() {
@@ -873,8 +880,15 @@ export class ActivitiesComponent implements OnInit {
       this.toastr.warning('Please upload video file only.');
     } else {
       // tslint:disable-next-line: prefer-for-of
+      let fileSize = 0;
       for (let i = 0; i < event.target.files.length; i++) {
+        fileSize += event.target.files[i].size;
         this.selectPerformfile.push(event.target.files[i]);
+      }
+      if(fileSize/1024/1024 > 150){
+        this.toastr.warning("The file size can not exceed 150 MB");
+        this.selectPerformfile = [];
+        return;
       }
       this.performlearnerUploadVideo();
     }
