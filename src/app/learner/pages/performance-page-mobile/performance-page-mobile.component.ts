@@ -291,7 +291,7 @@ export class PerformancePageMobileComponent implements OnInit {
     this.performActivityData = performActivity;
   }
 
-  performlearnerUploadVideo() {
+ async performlearnerUploadVideo() {
     // const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
     const performVideo = new FormData();
     // const startDate = this.datePipe.transform(this.performActivityData.activitystartdate, 'dd-MM-yyyy HH:mm a');
