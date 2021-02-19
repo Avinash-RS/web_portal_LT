@@ -7,7 +7,8 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-
+import { AnonymousCredential, BlobServiceClient, newPipeline } from '@azure/storage-blob';
+import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 @Component({
   selector: 'app-project-mobile',
   templateUrl: './project-mobile.component.html',
@@ -34,7 +35,16 @@ export class ProjectMobileComponent implements OnInit {
   openedIndex;
   selectedName = 'Project';
   selectedTabIndex: number;
-
+  currentFile: any;
+  uploadedPercentage;
+  fileSize = 0;
+  flag:any;
+  type:any;
+  splitSize:any;
+  fileTotalSize:any;
+  verfyingCondition:any;
+  isProgress = false;
+  jsonData:any;
   indexNumber: number;
   projectActivityData: any;
   trendingCategorires: any = {
@@ -72,7 +82,7 @@ export class ProjectMobileComponent implements OnInit {
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
-              public route: Router,  private commonServices: CommonServicesService) {
+              public route: Router,  private commonServices: CommonServicesService,private ngxLoader: NgxUiLoaderService) {
                 const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
                 this.checkDetails = detail;
@@ -216,7 +226,8 @@ export class ProjectMobileComponent implements OnInit {
     }
   }
 
-  learnerUploadVideo(project, submitAction) {
+ async learnerUploadVideo(project, submitAction) {
+  this.ngxLoader.start();
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     // project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:mm');
     project.actstartDate = moment(startDate1);
@@ -243,6 +254,20 @@ export class ProjectMobileComponent implements OnInit {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.selectfile.length; i++) {
       payload.append('uploadvideo', this.selectfile[i]);
+      this.currentFile = this.selectfile[i];
+      this.fileSize = this.currentFile.size;
+       this.type=this.selectfile[i].type
+       var sizeData = this.currentFile.size / 1024
+       var sizeDatakb = sizeData / 1024
+       var finalSize = sizeDatakb.toFixed(2)
+       this.splitSize = finalSize.split('.');
+       if (this.splitSize[0] == 0) {
+           this.fileTotalSize = sizeData.toFixed(2) + ' KB'
+           this.verfyingCondition=sizeDatakb.toFixed(2)
+       } else {
+           this.verfyingCondition=sizeDatakb.toFixed(2)
+           this.fileTotalSize = sizeDatakb.toFixed(2) + ' MB'
+       }
     }
     // payload.append('uploadvideo', this.selectfile, this.selectfile.name);
     payload.append('course_id', this.courseid);
@@ -255,18 +280,86 @@ export class ProjectMobileComponent implements OnInit {
     payload.append('submitAction', submitAction);
     payload.append('iterationid', project.projectActivity.project_id);
     payload.append('object_id', project.projectActivity.project_id);
-    this.Lservice.learnerUploadVideo(payload).subscribe((data: any) => {
+    this.Lservice.learnerUploadVideo(payload).subscribe(async(data: any) => {
       if (data.success === true) {
+        const sas = data.data;
+        const pipeline = newPipeline(new AnonymousCredential(), {
+          retryOptions: { maxTries: 4 }, // Retry options
+          userAgentOptions: { userAgentPrefix: 'AdvancedSample V1.0.0' }, // Customized telemetry string
+          keepAliveOptions: {
+            // Keep alive is enabled by default, disable keep alive by setting false
+            enable: false
+          }
+        });
+        const blobServiceClient = new BlobServiceClient(`${sas.storageUri}?${sas.storageAccessToken}`, pipeline);
+        const containerClient = blobServiceClient.getContainerClient(sas.containerName);
+        if (!containerClient.exists()) {
+          await containerClient.create();
+        }
+        const client = containerClient.getBlockBlobClient(this.currentFile.name);
+        this.isProgress = true;
+        this.uploadedPercentage=0
+        const response = await client.uploadBrowserData(this.currentFile, {
+          blockSize: 4 * 1024 * 1024, // 4MB block size
+          concurrency: 20, // 20 concurrency
+          onProgress: (ev) => {
+            const uploaded = ev.loadedBytes;
+            const percnt = uploaded * 100 / this.fileSize;
+            this.uploadedPercentage = percnt.toFixed(2);
+          },
+          blobHTTPHeaders: { blobContentType: this.currentFile.type }
+        });
+        
+        if (response._response.status === 201) {
+        
+           this.jsonData = {
+            'course_id': this.courseid,
+            'module_id': project.projectActivity.module_id,
+            'topic_id':project.projectActivity.topic_id,
+            'user_id': this.userDetail.user_id,
+            'submit_status': submitStatus,
+            'total_mark':  project.projectActivity.total_mark,
+            'submitType': 'project',
+            'submitAction': submitAction,
+            'iterationid':project.projectActivity.project_id,
+            'object_id':project.projectActivity.project_id,
+            videodetails:[{
+              doc_type:this.type,
+              videourl: sas.storageUri + sas.containerName + '/' + this.currentFile.name,
+              name: this.currentFile.name,
+              size: this.fileTotalSize,
+              id:  project.projectActivity.project_id,
+              uploaded_date: new Date(),
+              is_active: true
+            }]
+            
+          }
+        let checkRes=await this.insertActivityRecordProject(this.jsonData)
         this.toastr.success(data.message);
+        this.ngxLoader.stop();
         this.showSubmittedon = true;
-        this.getprojectActivityData();
+       // this.getprojectActivityData();
         this.selectfile = [];
+        this.flag=1
+        }
       } else {
+        this.ngxLoader.stop();
         this.toastr.warning(data.message);
       }
     });
   }
-
+  insertActivityRecordProject=async(performVideo)=>{
+  
+    this.Lservice.insertRecord(performVideo).subscribe(async (data: any) => {
+      if(data.success){
+        this.flag=1
+        this.getprojectActivityData();
+      }else{
+        this.flag=0
+      }
+      
+    })
+  }	
   // Submit or Delete
   learnerSumbitdeleteVideo(project, deleteItem, submitAction) {
     const startDate1 = new Date(project.projectActivity.activitystartdate);
@@ -319,7 +412,6 @@ export class ProjectMobileComponent implements OnInit {
         this.dialog.closeAll();
       }
       openDocument(templateRef: TemplateRef<any>, path, docType) {
-        console.log('Path', path)
         if(path == null) {
           this.toastr.warning("No Reports Found")
           return false;
@@ -333,7 +425,6 @@ export class ProjectMobileComponent implements OnInit {
           disableClose: true,
         });
         this.previewDoc = path;
-        console.log('this.previewDoc', this.previewDoc)
       }
       
       playVideo(templateRef: TemplateRef<any>, videoDialog,  path, docType) {

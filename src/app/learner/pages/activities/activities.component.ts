@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { DragScrollComponent } from 'ngx-drag-scroll';
 import { AnonymousCredential, BlobServiceClient, newPipeline } from '@azure/storage-blob';
+import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-activities',
@@ -162,10 +163,12 @@ export class ActivitiesComponent implements OnInit {
   rightNavDisabledActivity = false;
   previewDoc;
   openedIndex;
-
+  spinnerType = SPINNER.circle;
+  loaderText = 'Downloading...';
+  isProgressBar = false;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
-              public route: Router, public datePipe: DatePipe) {
+              public route: Router, public datePipe: DatePipe,private ngxLoader: NgxUiLoaderService) {
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
     this.checkDetails = detail;
@@ -687,6 +690,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   async learnerUploadVideo(project, submitAction) {
+    this.ngxLoader.start();
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1);
     const endDate1 = new Date(project.projectActivity.activityenddate);
@@ -728,7 +732,6 @@ export class ActivitiesComponent implements OnInit {
     payload.append('submitAction', submitAction);
     payload.append('iterationid', project.projectActivity.project_id);
     payload.append('object_id', project.projectActivity.project_id);
-    this.commonServices.loader$.next(true);
     this.Lservice.learnerUploadVideo(payload).subscribe(async (data: any) => {
       if (data.success === true) {
         const sas = data.data;
@@ -755,7 +758,6 @@ export class ActivitiesComponent implements OnInit {
             const uploaded = ev.loadedBytes;
             const percnt = uploaded * 100 / this.fileSize;
             this.uploadedPercentage = percnt.toFixed(2);
-            console.log(this.uploadedPercentage)
           },
           blobHTTPHeaders: { blobContentType: this.currentFile.type }
         });
@@ -786,9 +788,9 @@ export class ActivitiesComponent implements OnInit {
           }
         let checkRes=await this.insertActivityRecordProject(this.jsonData)
         this.getprojectActivityData();
+       this.ngxLoader.stop();
         this.toastr.success(data.message);
         this.flag=1
-          //console.log('uploaded successfully.',this.jsonData)
         }
       
         
@@ -799,6 +801,7 @@ export class ActivitiesComponent implements OnInit {
         //this.getprojectActivityData();
         this.selectfile = [];
       } else {
+        this.ngxLoader.stop();
         this.toastr.warning(data.message);
       }
     });
@@ -883,7 +886,8 @@ export class ActivitiesComponent implements OnInit {
   }
 
 async performlearnerUploadVideo() {
-    this.uploadedPercentage=0
+  this.ngxLoader.start();
+      this.uploadedPercentage=0
     this.flag=0
     const performVideo = new FormData();
     const startDate1 = new Date(this.performsData.performActivity.activitystartdate);
@@ -953,7 +957,6 @@ async performlearnerUploadVideo() {
             const uploaded = ev.loadedBytes;
             const percnt = uploaded * 100 / this.fileSize;
             this.uploadedPercentage = percnt.toFixed(2);
-            console.log(this.uploadedPercentage)
           },
           blobHTTPHeaders: { blobContentType: this.currentFile.type }
         });
@@ -984,17 +987,19 @@ async performlearnerUploadVideo() {
           }
         let checkRes=await this.insertActivityRecord(this.jsonData)
         this.toastr.success(data.message);
+        this.ngxLoader.stop();
         this.flag=1
-          console.log('uploaded successfully.',this.jsonData)
         }
       
         
         this.selectPerformfile = [];
       } else {
+        this.ngxLoader.stop();
         this.toastr.warning(data.message);
       }
     });
     }else{
+      this.ngxLoader.stop();
       this.toastr.warning('File size should not greater than 150 MB');
     }
   }
@@ -1002,11 +1007,9 @@ async performlearnerUploadVideo() {
   
     this.Lservice.insertRecord(performVideo).subscribe(async (data: any) => {
       if(data.success){
-        console.log('success')
         this.flag=1
         this.getperformActivityData();
       }else{
-        console.log('fail')
         this.flag=0
       }
       
@@ -1016,11 +1019,9 @@ async performlearnerUploadVideo() {
   
     this.Lservice.insertRecord(performVideo).subscribe(async (data: any) => {
       if(data.success){
-        console.log('success')
         this.flag=1
         this.getprojectActivityData();
       }else{
-        console.log('fail')
         this.flag=0
       }
       
