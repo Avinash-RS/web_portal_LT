@@ -285,7 +285,6 @@ export class CoursedetailsComponent implements OnInit {
           this.scromModuleData[this.moduleHolder].expanded = true;
           if (this.topiccurrentPage !== result.data.resumeSubContent ||
             result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status !== this.topicPageStatus) {
-              
             this.currentPage = result.data.resumeContent;
             this.topiccurrentPage = result.data.resumeSubContent;
             this.topicPageStatus = result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status
@@ -586,12 +585,12 @@ export class CoursedetailsComponent implements OnInit {
       this.moduleHolder = this.currentPage = this.scromApiData.moduleIndex == null ? 0 : this.scromApiData.moduleIndex;
       this.scromModuleData[this.moduleHolder].expanded = true;
       this.oldIdx = this.moduleHolder;
+      setTimeout(() => {this.inputEl.nativeElement.scrollIntoView({behavior: "smooth"})},4000);
       const moduleTitle = encodeURIComponent(this.scromApiData.childData[this.currentPage].title);
       const topicTitle = encodeURIComponent(this.scromApiData.childData[this.currentPage].children[this.topiccurrentPage].title);
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
       this.currentModuleTitle = this.scromApiData.childData[this.currentPage].title;
       this.currentTopicTitle = this.scromApiData.childData[this.currentPage].children[this.topiccurrentPage].title;
-      setTimeout(() => this.inputEl.nativeElement.scrollIntoView({behavior: "smooth"}),200);
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
           this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
