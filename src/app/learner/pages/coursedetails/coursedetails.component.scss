@@ -28,10 +28,8 @@ color:grey
     margin-top: 10px;
     position: relative;
     .hamburgerPosition {
-        position: relative;
-        // left: 10px;
-        // top: 0;
-        // z-index: 9;
+        //position: relative;
+        
         background-color: #FFCC00;
         border-radius: 50%;
         width: 25px;
@@ -44,6 +42,11 @@ color:grey
             font-size: 18px;
             display: inline-block;
         }
+    }
+    .position-fixed-burgur{
+        position:fixed;
+        left: 10px;
+        z-index: 9;
     }
     .videoPlayer {
         position: relative;
@@ -150,6 +153,7 @@ color:grey
     transition: all 0.3s linear;
     position: relative;
     z-index: 8;
+    background-color:#fff;
     @media only screen and (max-width: 767px) {
         width: 100%;
     }
@@ -263,6 +267,9 @@ color:grey
                 color: rgba(0, 0, 0, 0.87);
             }
         }
+    }
+    .handPointer {
+        cursor: pointer;
     }
     h4 {
         font-size: 15px;
@@ -476,6 +483,10 @@ color:grey
     overflow: hidden !important;
     text-align: center;
     // width:80%;
+    @media only screen and (max-width: 767px) {
+        max-width: 75%;
+        
+    }
 }
 .navigation {
     margin-left: 10px;
@@ -490,7 +501,7 @@ color:grey
         margin-right: 10px;
     }
     @media only screen and (max-width: 767px) {
-        max-width: 100%;
+        max-width: 75%;
         margin-left: 7px;
     }
     div {
@@ -708,7 +719,7 @@ color:grey
             margin-left: 5px;
             display: inline-block;
             @media only screen and (max-width: 767px) {
-                width: 95%;
+                width: 70%;
                 text-overflow: ellipsis;
                 overflow: hidden;
                 white-space: nowrap;
