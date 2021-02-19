@@ -332,7 +332,7 @@ export class PerformancePageMobileComponent implements OnInit {
            this.fileTotalSize = sizeDatakb.toFixed(2) + ' MB'
        }
        performVideo.append('uploadvideo', this.selectPerformfile[i]);
-    }
+
     performVideo.append('course_id', this.performsData.course_id);
     performVideo.append('module_id', this.performsData.module_id);
     performVideo.append('topic_id', this.performsData.topic_id);
@@ -345,9 +345,19 @@ export class PerformancePageMobileComponent implements OnInit {
     performVideo.append('object_id', this.performsData.perform_id);
     this.commonServices.loader$.next(true);
     this.Lservice.learnerUploadVideo(performVideo).subscribe(async(data: any) => {
+      i=i+1
       if (data.success === true) {
+        await this.multiFileUpload(data, this.selectPerformfile.length,i)
         
-        const sas = data.data;
+      } else {
+        this.toastr.warning(data.message);
+        this.ngxLoader.stop();
+      }
+    });
+  }
+  }
+  async multiFileUpload(data,totlen,len){
+    const sas = data.data;
         const pipeline = newPipeline(new AnonymousCredential(), {
           retryOptions: { maxTries: 4 }, // Retry options
           userAgentOptions: { userAgentPrefix: 'AdvancedSample V1.0.0' }, // Customized telemetry string
@@ -400,16 +410,13 @@ export class PerformancePageMobileComponent implements OnInit {
             
           }
         let checkRes=await this.insertActivityRecord(this.jsonData)
-        this.toastr.success(data.message);
-        this.ngxLoader.stop();
+        if (totlen == len) {
+          this.toastr.success(data.message);
+          this.ngxLoader.stop();
+        }
        // this.getperformActivityData();
         this.selectPerformfile = [];
         }
-      } else {
-        this.toastr.warning(data.message);
-        this.ngxLoader.stop();
-      }
-    });
   }
   insertActivityRecord=async(performVideo)=>{
   
