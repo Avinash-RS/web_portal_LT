@@ -758,7 +758,6 @@ export class ActivitiesComponent implements OnInit {
             const uploaded = ev.loadedBytes;
             const percnt = uploaded * 100 / this.fileSize;
             this.uploadedPercentage = percnt.toFixed(2);
-            console.log(this.uploadedPercentage)
           },
           blobHTTPHeaders: { blobContentType: this.currentFile.type }
         });
@@ -792,7 +791,6 @@ export class ActivitiesComponent implements OnInit {
        this.ngxLoader.stop();
         this.toastr.success(data.message);
         this.flag=1
-          //console.log('uploaded successfully.',this.jsonData)
         }
       
         
@@ -959,7 +957,6 @@ async performlearnerUploadVideo() {
             const uploaded = ev.loadedBytes;
             const percnt = uploaded * 100 / this.fileSize;
             this.uploadedPercentage = percnt.toFixed(2);
-            console.log(this.uploadedPercentage)
           },
           blobHTTPHeaders: { blobContentType: this.currentFile.type }
         });
@@ -992,7 +989,6 @@ async performlearnerUploadVideo() {
         this.toastr.success(data.message);
         this.ngxLoader.stop();
         this.flag=1
-          console.log('uploaded successfully.',this.jsonData)
         }
       
         
@@ -1011,11 +1007,9 @@ async performlearnerUploadVideo() {
   
     this.Lservice.insertRecord(performVideo).subscribe(async (data: any) => {
       if(data.success){
-        console.log('success')
         this.flag=1
         this.getperformActivityData();
       }else{
-        console.log('fail')
         this.flag=0
       }
       
@@ -1025,11 +1019,9 @@ async performlearnerUploadVideo() {
   
     this.Lservice.insertRecord(performVideo).subscribe(async (data: any) => {
       if(data.success){
-        console.log('success')
         this.flag=1
         this.getprojectActivityData();
       }else{
-        console.log('fail')
         this.flag=0
       }
       

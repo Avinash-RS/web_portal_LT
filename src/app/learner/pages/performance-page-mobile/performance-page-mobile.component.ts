@@ -371,7 +371,6 @@ export class PerformancePageMobileComponent implements OnInit {
             const uploaded = ev.loadedBytes;
             const percnt = uploaded * 100 / this.fileSize;
             this.uploadedPercentage = percnt.toFixed(2);
-            console.log(this.uploadedPercentage)
           },
           blobHTTPHeaders: { blobContentType: this.currentFile.type }
         });
@@ -416,11 +415,9 @@ export class PerformancePageMobileComponent implements OnInit {
   
     this.Lservice.insertRecord(performVideo).subscribe(async (data: any) => {
       if(data.success){
-        console.log('success')
         this.flag=1
         this.getperformActivityData();
       }else{
-        console.log('fail')
         this.flag=0
       }
       

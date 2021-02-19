@@ -306,7 +306,6 @@ export class ProjectMobileComponent implements OnInit {
             const uploaded = ev.loadedBytes;
             const percnt = uploaded * 100 / this.fileSize;
             this.uploadedPercentage = percnt.toFixed(2);
-            console.log(this.uploadedPercentage)
           },
           blobHTTPHeaders: { blobContentType: this.currentFile.type }
         });
@@ -353,11 +352,9 @@ export class ProjectMobileComponent implements OnInit {
   
     this.Lservice.insertRecord(performVideo).subscribe(async (data: any) => {
       if(data.success){
-        console.log('success')
         this.flag=1
         this.getprojectActivityData();
       }else{
-        console.log('fail')
         this.flag=0
       }
       
@@ -415,7 +412,6 @@ export class ProjectMobileComponent implements OnInit {
         this.dialog.closeAll();
       }
       openDocument(templateRef: TemplateRef<any>, path, docType) {
-        console.log('Path', path)
         if(path == null) {
           this.toastr.warning("No Reports Found")
           return false;
@@ -429,7 +425,6 @@ export class ProjectMobileComponent implements OnInit {
           disableClose: true,
         });
         this.previewDoc = path;
-        console.log('this.previewDoc', this.previewDoc)
       }
       
       playVideo(templateRef: TemplateRef<any>, videoDialog,  path, docType) {
