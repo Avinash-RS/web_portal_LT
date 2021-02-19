@@ -112,8 +112,8 @@
                 </mat-card>
             </div>
             <ng-template #emptyTOC>
-                <div class="xyz p-xy-10">
-                    You have not added any bookmarks!
+                <div class="xyz p-xy-10 d-flex justify-content-around align-items-center">
+                    You have not added any bokmarks!
                 </div>
             </ng-template>
         </div>
@@ -169,7 +169,7 @@
                     <!-- resource tab -->
                     <mat-tab label="Resources">
                         <div class="d-flex rescontentHeight">
-                                <div class="resourseToc" >
+                                <div class="resourseToc" [ngClass]='!content?.noresource?"d-flex justify-content-around align-items-center":""'>
                                     <ng-container *ngIf="content?.noresource">
                                         <ng-container  *ngFor="let res of content?.coursedetails; let i = index">
                                             <mat-card class="resource-card" *ngIf="res.resValue" [ngClass]="res.isOpen?'activeTab':'inActiveTab'">
