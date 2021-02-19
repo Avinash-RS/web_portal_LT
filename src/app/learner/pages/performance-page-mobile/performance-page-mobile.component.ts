@@ -9,7 +9,7 @@ import { WcaService } from '@wca/services/wca.service';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { AnonymousCredential, BlobServiceClient, newPipeline } from '@azure/storage-blob';
-
+import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 @Component({
   selector: 'app-performance-page-mobile',
   templateUrl: './performance-page-mobile.component.html',
@@ -102,7 +102,8 @@ export class PerformancePageMobileComponent implements OnInit {
     public wcaservice: WcaService,
     private toastr: ToastrService,
     public route: Router,
-    public datePipe: DatePipe
+    public datePipe: DatePipe,
+    private ngxLoader: NgxUiLoaderService
   ) {
     const detail =
       this.route.getCurrentNavigation() &&
@@ -292,6 +293,7 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
   performlearnerUploadVideo() {
+    this.ngxLoader.start();
     // const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy');
     const performVideo = new FormData();
     // const startDate = this.datePipe.transform(this.performActivityData.activitystartdate, 'dd-MM-yyyy HH:mm a');
@@ -400,11 +402,13 @@ export class PerformancePageMobileComponent implements OnInit {
           }
         let checkRes=await this.insertActivityRecord(this.jsonData)
         this.toastr.success(data.message);
+        this.ngxLoader.stop();
        // this.getperformActivityData();
         this.selectPerformfile = [];
         }
       } else {
         this.toastr.warning(data.message);
+        this.ngxLoader.stop();
       }
     });
   }

@@ -8,6 +8,7 @@ import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { AnonymousCredential, BlobServiceClient, newPipeline } from '@azure/storage-blob';
+import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 @Component({
   selector: 'app-project-mobile',
   templateUrl: './project-mobile.component.html',
@@ -81,7 +82,7 @@ export class ProjectMobileComponent implements OnInit {
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
-              public route: Router,  private commonServices: CommonServicesService) {
+              public route: Router,  private commonServices: CommonServicesService,private ngxLoader: NgxUiLoaderService) {
                 const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
                 this.checkDetails = detail;
@@ -226,6 +227,7 @@ export class ProjectMobileComponent implements OnInit {
   }
 
  async learnerUploadVideo(project, submitAction) {
+  this.ngxLoader.start();
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     // project.actstartDate = moment(startDate1).format('DD-MM-YYYY HH:mm');
     project.actstartDate = moment(startDate1);
@@ -335,12 +337,14 @@ export class ProjectMobileComponent implements OnInit {
           }
         let checkRes=await this.insertActivityRecordProject(this.jsonData)
         this.toastr.success(data.message);
+        this.ngxLoader.stop();
         this.showSubmittedon = true;
        // this.getprojectActivityData();
         this.selectfile = [];
         this.flag=1
         }
       } else {
+        this.ngxLoader.stop();
         this.toastr.warning(data.message);
       }
     });
