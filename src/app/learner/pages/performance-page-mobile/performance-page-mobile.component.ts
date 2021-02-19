@@ -8,7 +8,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { WcaService } from '@wca/services/wca.service';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
-
+import { AnonymousCredential, BlobServiceClient, newPipeline } from '@azure/storage-blob';
 
 @Component({
   selector: 'app-performance-page-mobile',
@@ -52,6 +52,16 @@ export class PerformancePageMobileComponent implements OnInit {
   performDetailsSend: any;
   itrationSend: any;
   videoDetails: any;
+  currentFile: any;
+  uploadedPercentage;
+  fileSize = 0;
+  flag:any;
+  type:any;
+  splitSize:any;
+  fileTotalSize:any;
+  verfyingCondition:any;
+  isProgress = false;
+  jsonData:any;
   trendingCategorires: any = {
     loop: false, // dont make it true
     mouseDrag: true,
@@ -305,7 +315,21 @@ export class PerformancePageMobileComponent implements OnInit {
 
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.selectPerformfile.length; i++) {
-      performVideo.append('uploadvideo', this.selectPerformfile[i]);
+      this.currentFile = this.selectPerformfile[i];
+      this.fileSize = this.currentFile.size;
+       this.type=this.selectPerformfile[i].type
+       var sizeData = this.currentFile.size / 1024
+       var sizeDatakb = sizeData / 1024
+       var finalSize = sizeDatakb.toFixed(2)
+       this.splitSize = finalSize.split('.');
+       if (this.splitSize[0] == 0) {
+           this.fileTotalSize = sizeData.toFixed(2) + ' KB'
+           this.verfyingCondition=sizeDatakb.toFixed(2)
+       } else {
+           this.verfyingCondition=sizeDatakb.toFixed(2)
+           this.fileTotalSize = sizeDatakb.toFixed(2) + ' MB'
+       }
+       performVideo.append('uploadvideo', this.selectPerformfile[i]);
     }
     performVideo.append('course_id', this.performsData.course_id);
     performVideo.append('module_id', this.performsData.module_id);
@@ -318,17 +342,86 @@ export class PerformancePageMobileComponent implements OnInit {
     performVideo.append('iterationid', this.itrationData.iterationid);
     performVideo.append('object_id', this.performsData.perform_id);
     this.commonServices.loader$.next(true);
-    this.Lservice.learnerUploadVideo(performVideo).subscribe((data: any) => {
+    this.Lservice.learnerUploadVideo(performVideo).subscribe(async(data: any) => {
       if (data.success === true) {
+        
+        const sas = data.data;
+        const pipeline = newPipeline(new AnonymousCredential(), {
+          retryOptions: { maxTries: 4 }, // Retry options
+          userAgentOptions: { userAgentPrefix: 'AdvancedSample V1.0.0' }, // Customized telemetry string
+          keepAliveOptions: {
+            // Keep alive is enabled by default, disable keep alive by setting false
+            enable: false
+          }
+        });
+        const blobServiceClient = new BlobServiceClient(`${sas.storageUri}?${sas.storageAccessToken}`, pipeline);
+        const containerClient = blobServiceClient.getContainerClient(sas.containerName);
+        if (!containerClient.exists()) {
+          await containerClient.create();
+        }
+        const client = containerClient.getBlockBlobClient(this.currentFile.name);
+        this.isProgress = true;
+        this.uploadedPercentage=0
+        const response = await client.uploadBrowserData(this.currentFile, {
+          blockSize: 4 * 1024 * 1024, // 4MB block size
+          concurrency: 20, // 20 concurrency
+          onProgress: (ev) => {
+            const uploaded = ev.loadedBytes;
+            const percnt = uploaded * 100 / this.fileSize;
+            this.uploadedPercentage = percnt.toFixed(2);
+            console.log(this.uploadedPercentage)
+          },
+          blobHTTPHeaders: { blobContentType: this.currentFile.type }
+        });
+        
+        if (response._response.status === 201) {
+        
+           this.jsonData = {
+            'course_id': this.performsData.course_id,
+            'module_id': this.performsData.module_id,
+            'topic_id': this.performsData.topic_id,
+            'user_id': this.userDetail.user_id,
+            'submit_status': this.submitStatus,
+            'total_mark': this.itrationData.total_mark,
+            'submitType': 'perform',
+            'submitAction': this.submitType,
+            'iterationid': this.itrationData.iterationid,
+            'object_id':this.performsData.perform_id,
+            videodetails:[{
+              doc_type:this.type,
+              videourl: sas.storageUri + sas.containerName + '/' + this.currentFile.name,
+              name: this.currentFile.name,
+              size: this.fileTotalSize,
+              id:  this.performsData.perform_id,
+              uploaded_date: new Date(),
+              is_active: true
+            }]
+            
+          }
+        let checkRes=await this.insertActivityRecord(this.jsonData)
         this.toastr.success(data.message);
-        this.getperformActivityData();
+       // this.getperformActivityData();
         this.selectPerformfile = [];
+        }
       } else {
         this.toastr.warning(data.message);
       }
     });
   }
-
+  insertActivityRecord=async(performVideo)=>{
+  
+    this.Lservice.insertRecord(performVideo).subscribe(async (data: any) => {
+      if(data.success){
+        console.log('success')
+        this.flag=1
+        this.getperformActivityData();
+      }else{
+        console.log('fail')
+        this.flag=0
+      }
+      
+    })
+  }	
   uploadDocument(event) {
     for (let i = 0; i < event.target.files.length; i++) {
       this.selectPerformfile.push(event.target.files[i]);

@@ -45,19 +45,22 @@
     </div> -->
     <!-- TOC AND PLAYER -->
     <div class="contentHeight d-flex">
-        <div class="hamburgerPosition">
-            <i class="lxp-HamburgerMenu" (click)="drawersOpen=drawersOpen?false:true"></i>
-        </div>
+        
         <!-- TOC DATA -->
         <div class="tocSize" [ngClass]="drawersOpen ? '': 'drawersOpen'">
-            <div class="filterSection">
+            <div class="filterSection d-flex justify-content-between">
+                <div class="hamburgerPosition">
+                    <i class="lxp-HamburgerMenu" (click)="drawersOpen=drawersOpen?false:true"></i>
+                </div>
+                <div>
                 Filter by: <select class="sel-pad" [(ngModel)]="filterkey" (change)="filterToc()">
                     <option [value]="'All'">All</option>
                     <option [value]="'Bookmarked'">Bookmarks</option>
                     
                 </select>
             </div>
-            <div class="xyz">
+            </div>
+            <div class="xyz" *ngIf="filterkey=='Bookmarked'?(filterData.length>0?true:false):(scromModuleData.length>0?true:true);else emptyTOC">
                 <mat-card *ngFor="let res of filterkey=='Bookmarked'?filterData:scromModuleData; let i = index" [ngClass]="res.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
                     (click)="getSelectedIndex(i)" class="topicCard" >
                     <div *ngIf="i===moduleHolder" #focuser ></div>
@@ -108,10 +111,16 @@
                         </mat-card-content>
                 </mat-card>
             </div>
+            <ng-template #emptyTOC>
+                <div class="xyz p-xy-10">
+                    You have not added any bookmarks!
+                </div>
+            </ng-template>
         </div>
         <!-- COURSE PLAYER -->
         <div class="videoPlayer" [ngClass]="drawersOpen ? 'halfWidth' : 'fullWidth'">
             <iframe title="player" id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
+            
             <div class="d-flex justify-content-between understoodBookmark">
                 <div class="d-flex justify-content-between align-items-center understoodButton">
                     <button type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'btn btn-outline-success':'btn btn-outline-light'" (click)="understoodClick('like')">
@@ -123,18 +132,18 @@
                 </div>
                 <div class="d-flex bookmarkButton">
                     <button type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
-                        <i [ngClass]="topicInfo?.bookmark?'lxp-bookmark':'lxp-bookmark-o'"></i> {{topicInfo?.bookmark?'Bookmarked':'Add to Bookmark'}}
+                        <i [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></i> {{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? 'Bookmarked':'Add to Bookmark'}}
                     </button>
                 </div>
             </div>
-            <!-- <div class="rightContent">
+            <div class="rightContent">
                 <div (click)="makeFullScreen()" data-title="Fullscreen" class="fullScr d-flex align-items-center iconSize">
                     <i  class="lxp-Fullscreen"></i>
                 </div>
                 <div (click)="openResourse(resourseWindow)" data-title="Resources" class="resourceTab d-flex align-items-center iconSize">
                     <i  class="lxp-res-popout f_size_14"></i>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>

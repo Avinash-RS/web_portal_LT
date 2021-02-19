@@ -283,10 +283,9 @@ export class CoursedetailsComponent implements OnInit {
         if (result.data.course_id === this.courseid) {
           this.scromModuleData = result.data.childData;
           this.scromModuleData[this.moduleHolder].expanded = true;
-          setTimeout(() => this.inputEl.nativeElement.scrollIntoView({behavior: "smooth"}),200);
           if (this.topiccurrentPage !== result.data.resumeSubContent ||
             result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status !== this.topicPageStatus) {
-
+              
             this.currentPage = result.data.resumeContent;
             this.topiccurrentPage = result.data.resumeSubContent;
             this.topicPageStatus = result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status
@@ -590,8 +589,9 @@ export class CoursedetailsComponent implements OnInit {
       const moduleTitle = encodeURIComponent(this.scromApiData.childData[this.currentPage].title);
       const topicTitle = encodeURIComponent(this.scromApiData.childData[this.currentPage].children[this.topiccurrentPage].title);
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
-      this.currentTopicTitle = this.scromApiData.childData[this.currentPage].title;
-      this.currentModuleTitle = this.scromApiData.childData[this.currentPage].children[this.topiccurrentPage].title;
+      this.currentModuleTitle = this.scromApiData.childData[this.currentPage].title;
+      this.currentTopicTitle = this.scromApiData.childData[this.currentPage].children[this.topiccurrentPage].title;
+      setTimeout(() => this.inputEl.nativeElement.scrollIntoView({behavior: "smooth"}),200);
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
           this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
@@ -925,7 +925,12 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   goBack() {
-    this.route.navigateByUrl('/Learner/MyCourse');
+    if(!this.drawersOpen){
+      this.drawersOpen=this.drawersOpen?false:true
+    }else{
+      this.route.navigateByUrl('/Learner/MyCourse');
+    }
+    
   }
 
   openResourse(templateRef) {

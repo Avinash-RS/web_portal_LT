@@ -28,10 +28,10 @@ color:grey
     margin-top: 10px;
     position: relative;
     .hamburgerPosition {
-        position: absolute;
-        left: 10px;
-        top: 0;
-        z-index: 9;
+        position: relative;
+        // left: 10px;
+        // top: 0;
+        // z-index: 9;
         background-color: #FFCC00;
         border-radius: 50%;
         width: 25px;
@@ -161,11 +161,11 @@ color:grey
         }
     }
     .filterSection {
-        position: absolute;
+        position: relative;
         width: 100%;
         right: 0;
         top: 0;
-        padding: 0 10px 10px 10px;
+        padding: 0 10px 0 10px;
         background-color: #ffffff;
         text-align: right;
         // margin: 0 10px 10px 10px;
@@ -173,10 +173,10 @@ color:grey
     .xyz {
         overflow: auto;
         height: 74.7vh;
-        margin-top: 35px;
+        margin-top: 10px;
     }
 }
-div.tocSize::-webkit-scrollbar {
+::ng-deep div.tocSize::-webkit-scrollbar {
     width: 5px !important;
 }
 ::ng-deep.tocSize .mat-stepper-vertical {
