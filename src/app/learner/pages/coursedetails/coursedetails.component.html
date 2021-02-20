@@ -89,8 +89,19 @@
                             </mat-card-subtitle>
 
                     <mat-card-content *ngIf="(res.expanded)">
+                        <div class="bs-vertical-wizard">
+                            <ul>
+                                <li class="complete" [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of res?.children; let j = index">
+                                    <span class="icov" [ngClass]="(j===nextPrevHolder && i===moduleHolder) ? 'titleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i);drawersOpen=performOverLay?(drawersOpen?false:true):true">{{mod?.title}} 
+                                        <i class="ico" [ngClass]="mod?.status === 'Passed' ? 'fa fa-check ico-green' :  mod?.status === 'process' ? 'fa fa-circle ico-yellow' : 'fa fa-circle-o ico-muted'"></i>
+                                        <!-- <span class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, cumque.</span> -->
+                                    </span>
+                                    <span *ngIf="mod.bookmark===true "><i class="lxp-bookmark" style="color:blue"></i></span>
+                                </li>
+                            </ul>
+                        </div>
                         <!-- TOPICS LIST STARTS HERE... -->
-                        <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title?.length > 39?'headerDown': ''">
+                        <!-- <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title?.length > 39?'headerDown': ''">
                             <ng-container *ngFor="let mod of res?.children; let j = index">
                                 <mat-step
                                     [aria-labelledby]="mod?.status === 'Passed' ? 'colgreen' :  mod?.status === 'process' ? 'colYellow' : 'colWhite'">
@@ -108,7 +119,7 @@
                                         </ng-template>
                                     </mat-step>
                                 </ng-container>
-                            </mat-vertical-stepper>
+                            </mat-vertical-stepper> -->
                         </mat-card-content>
                 </mat-card>
             </div>
