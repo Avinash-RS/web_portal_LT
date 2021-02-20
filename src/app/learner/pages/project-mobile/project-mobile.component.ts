@@ -144,10 +144,16 @@ export class ProjectMobileComponent implements OnInit {
   }
 
   uploadDoc(event, project, submitAction) {
+    let fileSizeval = 0;
     // tslint:disable-next-line:prefer-for-of
-    // debugger;
     for (let i = 0; i < event.target.files.length; i++) {
+      fileSizeval += event.target.files[i].size;
       this.selectfile.push(event.target.files[i]);
+    }
+    if(fileSizeval/1024/1024 > 150){
+      this.toastr.warning("The file size can not exceed 150 MB");
+      this.selectfile = [];
+      return;
     }
     this.learnerUploadVideo(project, submitAction);
   }
