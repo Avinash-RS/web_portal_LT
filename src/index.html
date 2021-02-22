@@ -9,7 +9,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=0">
   <link href="assets/faviconIG.png" rel="icon" type="image/x-icon" />
 
-  <script>dataLayer = [{'userID': 'sw11d4'}];</script>
+  <script>
+  userdata = JSON.parse( window.localStorage.getItem('UserDetails'));
+  userid = null;
+  if(userdata){
+    userid = userdata.user_id;
+  }
+  dataLayer = [{'userID': userid}];
+  </script>
   <!-- Google Tag Manager -->
   <script>(function (w, d, s, l, i) {
       w[l] = w[l] || []; w[l].push({
