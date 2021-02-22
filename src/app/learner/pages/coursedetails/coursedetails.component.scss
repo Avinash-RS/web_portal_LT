@@ -976,8 +976,8 @@ color:grey
 .bs-vertical-wizard ul>li.complete>.icov:before {
     background-color: #0e7d12;
     opacity: 1;
-    height: calc(100% - 25px);
-    bottom: -9px;
+    height: calc(100% - 12px);
+    bottom: -16px;
 }
 
 .bs-vertical-wizard ul>li.complete>.icov:after {display:none;}
