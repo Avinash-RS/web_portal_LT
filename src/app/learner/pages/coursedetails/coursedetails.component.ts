@@ -585,7 +585,9 @@ export class CoursedetailsComponent implements OnInit {
       this.moduleHolder = this.currentPage = this.scromApiData.moduleIndex == null ? 0 : this.scromApiData.moduleIndex;
       this.scromModuleData[this.moduleHolder].expanded = true;
       this.oldIdx = this.moduleHolder;
-      setTimeout(() => {this.inputEl.nativeElement.scrollIntoView({behavior: "smooth"})},4000);
+      this.topicInfo = this.scromApiData.childData[this.moduleHolder].children[this.nextPrevHolder]
+      this.topicPageStatus = this.topicInfo.status
+      setTimeout(() => {this.inputEl?this.inputEl.nativeElement.scrollIntoView({behavior: "smooth"}) : ''},4000);
       const moduleTitle = encodeURIComponent(this.scromApiData.childData[this.currentPage].title);
       const topicTitle = encodeURIComponent(this.scromApiData.childData[this.currentPage].children[this.topiccurrentPage].title);
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
