@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { Subject } from 'rxjs';
+import { Subject,Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { addTopicreference, bulkclaimcourse, claimcourse, createGuidanceRequest,
    CreateNewThread, CreateNewThreadBid, deleteQualification, getCourseCategorySearch,
@@ -59,7 +59,22 @@ export class LearnerServicesService {
 
   closeMobileResp$ = new Subject<any>();
   closeMobileResp = this.closeMobileResp$.asObservable();
+  ProgressPercentage = new Subject<any>();
 
+  sendMessage(fileCount, message: string) {
+    this.ProgressPercentage.next(
+      { 
+        text: message ,
+        count: fileCount
+      }
+      );
+  }
+clearMessage() {
+  this.ProgressPercentage.next();
+}
+getMessage(): Observable<any> {
+  return this.ProgressPercentage.asObservable();
+}
   public getData(userid, date) {
     return this.Apollo.query({
       query: getReadLeanerActivity,

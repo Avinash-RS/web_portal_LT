@@ -766,6 +766,7 @@ export class ActivitiesComponent implements OnInit {
             const uploaded = ev.loadedBytes;
             const percnt = uploaded * 100 / this.fileSize;
             this.uploadedPercentage = percnt.toFixed(2);
+            this.Lservice.sendMessage('',this.uploadedPercentage.toString());   
           },
           blobHTTPHeaders: { blobContentType: this.currentFile.type }
         });
@@ -798,6 +799,10 @@ export class ActivitiesComponent implements OnInit {
           this.getprojectActivityData();
           this.ngxLoader.stop();
           this.toastr.success(data.message);
+          setTimeout(()=>{
+            this.Lservice.sendMessage('','0.00');
+          },1000)
+          
           this.flag = 1
         }
 
@@ -811,6 +816,9 @@ export class ActivitiesComponent implements OnInit {
       } else {
         this.ngxLoader.stop();
         this.toastr.warning(data.message);
+        setTimeout(()=>{
+          this.Lservice.sendMessage('','0.00');
+        },1000)      
       }
     });
   }
@@ -951,13 +959,19 @@ export class ActivitiesComponent implements OnInit {
           if (data.success === true) {
             await this.multiFileUpload(data,( i+1))
           } else {
-            //this.ngxLoader.stop();
+            this.ngxLoader.stop();
             this.toastr.warning(data.message);
-          }
+            setTimeout(()=>{
+              this.Lservice.sendMessage('','0.00');
+            },1000)         
+           }
         });
       } else {
-        // this.ngxLoader.stop();
+        this.ngxLoader.stop();
         this.toastr.warning('File size should not greater than 150 MB');
+        setTimeout(()=>{
+          this.Lservice.sendMessage('','0.00');
+        },1000)      
       }
     }
 
@@ -989,6 +1003,13 @@ export class ActivitiesComponent implements OnInit {
         const uploaded = ev.loadedBytes;
         const percnt = uploaded * 100 / this.fileSize;
         this.uploadedPercentage = percnt.toFixed(2);
+        if (this.selectPerformfile.length > 1) {
+          this.Lservice.sendMessage(len + '/' + this.selectPerformfile.length,this.uploadedPercentage.toString()); 
+        } else {
+          this.Lservice.sendMessage('',this.uploadedPercentage.toString()); 
+
+        }
+        
       },
       blobHTTPHeaders: { blobContentType: this.currentFile.type }
     });
@@ -1021,6 +1042,9 @@ export class ActivitiesComponent implements OnInit {
       if (this.selectPerformfile.length == len) {
         this.toastr.success(data.message);
         this.ngxLoader.stop();
+        setTimeout(()=>{
+          this.Lservice.sendMessage('','0.00');
+        },1000)
         this.selectPerformfile = [];
       }
       this.flag = 1
