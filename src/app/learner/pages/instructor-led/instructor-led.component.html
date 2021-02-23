@@ -100,7 +100,7 @@
               </div>
               <div class="row" style="margin-top: 0px; color: white !important;" *ngIf="activityShow?.activity_details.activitytype == 'Recorded'">
                 <button class="actBtn" mat-raised-button 
-                  (click)="preview(activityShow.activity_details.link)">{{activityShow?.button}}</button>
+                  (click)="videoPreview(videoRecorded,activityShow.activity_details.link)">{{activityShow?.button}}</button>
               </div>
             </div>
 
@@ -233,3 +233,17 @@
 
 </div>
 
+<ng-template #videoRecorded>
+  <div class="row">
+    <div class="col-12">
+      <button mat-mini-fab class="close-buttonVideo">
+        <mat-icon class="download-icon" (click)="closeModal()">close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <app-video-player [url]="videoSource"></app-video-player>
+    </div>
+  </div>
+</ng-template>

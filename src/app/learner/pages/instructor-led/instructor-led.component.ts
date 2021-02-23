@@ -22,6 +22,7 @@ export class InstructorLedComponent implements OnInit {
   attendedSessions: any;
   attendedCount;
   recordedCount;
+  videoSource
   @ViewChild('attended') attended: ElementRef;
 
   constructor(private router: Router,
@@ -153,15 +154,14 @@ export class InstructorLedComponent implements OnInit {
     this.dialog.closeAll();
   }
 
-  preview(row) {
-    const dialogRefVideo = this.dialog.open(VideoPreviewModalComponent, {
-      data: { url: row },
-      height: '100%',
-      width: '100%',
+  videoPreview(templateRef: TemplateRef<any>, e) {
+    this.videoSource = e
+    this.dialog.open(templateRef, {
+      width: '90%',
+      height: '95%',
+      panelClass: 'matDialogMat',
       closeOnNavigation: true,
       disableClose: true,
-    });
-    dialogRefVideo.afterClosed().subscribe(res => {
     });
   }
 }
