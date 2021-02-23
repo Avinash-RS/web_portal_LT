@@ -1445,6 +1445,8 @@ export const playerModuleAndTopic = gql`
             link
             status
             isVisible
+            bookmark
+            user_experience
             children {
               _id
             title
