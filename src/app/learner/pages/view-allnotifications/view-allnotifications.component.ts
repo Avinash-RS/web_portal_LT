@@ -27,7 +27,7 @@ export class ViewAllnotificationsComponent implements OnInit {
   totalCount: any;
   notificationMarkRead = [];
   unreadCount: any;
-
+  emptynotifications = false;
 
   constructor(private router: Router, public commonservice: CommonServicesService, public Lservice: LearnerServicesService,
               private loader: Ng4LoadingSpinnerService) { }
@@ -41,6 +41,11 @@ export class ViewAllnotificationsComponent implements OnInit {
     this.loader.show();
     this.commonservice.getAllNotifications(this.userId, 'learner', this.pagenumber).subscribe((result: any) => {
     this.notifications = result.data.getAllNotifications.data;
+    if (this.notifications.length > 0) {
+      this.emptynotifications = false;
+    } else {
+      this.emptynotifications = true;
+    }
     this.totalCount = result.data.getAllNotifications.totalCount;
     this.unreadCount = result.data.getAllNotifications.unReadCount;
     this.dataSource = this.notifications;
