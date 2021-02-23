@@ -527,3 +527,14 @@
 .course-list .mat-nav-list {
     width: 100%;
 }
+::ng-deep .matDialogMat .mat-dialog-container {
+    overflow: hidden !important;
+  }
+  .close-buttonVideo {
+    background: #C02222 !important; // red color
+    float: right;
+    top: -6px;
+    position: relative;
+    height: 35px;
+    width: 35px;
+  }
