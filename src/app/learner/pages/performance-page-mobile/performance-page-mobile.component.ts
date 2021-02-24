@@ -352,6 +352,9 @@ export class PerformancePageMobileComponent implements OnInit {
       } else {
         this.toastr.warning(data.message);
         this.ngxLoader.stop();
+        setTimeout(()=>{
+          this.Lservice.sendMessage('','0.00');
+        },1000)
       }
     });
   }
@@ -381,6 +384,12 @@ export class PerformancePageMobileComponent implements OnInit {
             const uploaded = ev.loadedBytes;
             const percnt = uploaded * 100 / this.fileSize;
             this.uploadedPercentage = percnt.toFixed(2);
+            if (this.selectPerformfile.length > 1) {
+              this.Lservice.sendMessage(len + '/' + this.selectPerformfile.length,this.uploadedPercentage.toString()); 
+            } else {
+              this.Lservice.sendMessage('',this.uploadedPercentage.toString()); 
+    
+            }
           },
           blobHTTPHeaders: { blobContentType: this.currentFile.type }
         });
@@ -414,6 +423,9 @@ export class PerformancePageMobileComponent implements OnInit {
           this.toastr.success(data.message);
           this.ngxLoader.stop();
           this.selectPerformfile = [];
+          setTimeout(()=>{
+            this.Lservice.sendMessage('','0.00');
+          },1000)
         }
        // this.getperformActivityData();
       
