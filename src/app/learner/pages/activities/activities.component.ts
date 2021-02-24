@@ -925,7 +925,6 @@ export class ActivitiesComponent implements OnInit {
     }
 
     for (let i = 0; i < this.selectPerformfile.length; i++) {
-      console.log(this.selectPerformfile)
       this.currentFile = this.selectPerformfile[i];
       this.fileSize = this.currentFile.size;
       this.type = this.selectPerformfile[i].type

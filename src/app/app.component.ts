@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   platformTxt = navigator.platform;
   isProgressBar = false;
   isFooterVisible: string = '';
-  percentage = "0%"
+  percentage = "Inprogress"
   loadersubscription: Subscription;  
    // FOR DRM(Restriction for right click)
    @HostListener('document:keydown', ['$event'])
@@ -67,6 +67,9 @@ export class AppComponent implements OnInit {
           this.percentage = message.count + '  ' + message.text.slice(0,message.text.lastIndexOf('.')) + '%'; 
         } else {
           this.percentage = message.text.slice(0,message.text.lastIndexOf('.')) + '%'; 
+        }
+        if(this.percentage == '0%'){
+          this.percentage = 'Inprogress'
         }
        console.log(message.count)
         console.log(this.percentage)
