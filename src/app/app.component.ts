@@ -93,8 +93,7 @@ export class AppComponent implements OnInit {
       filter(event => event instanceof NavigationEnd),
     ).subscribe((e: any) => {
       const urlIdentifier = e.url.split("/")
-      const possiblePages = ['register', 'login', 'recover', 'resetpassword']
-
+      const possiblePages = ['register', 'login', 'recover', 'resetpassword','']
       const rt = this.getChild(this.activatedRoute);
       rt.data.subscribe(data => {
         this.isFooterVisible = '';
@@ -104,7 +103,7 @@ export class AppComponent implements OnInit {
          const currentYear = new Date().getFullYear()
          this.isFooterVisible = '<div class="footer"><span class="powered"><span class="forgot1">' + currentYear + ' © L&T EduTech All Rights Reserved</span></span></div>';
         }
-        if (e.url.includes("resetpassword")) {
+        if (e.url.includes("resetpassword")||urlIdentifier[2]==undefined) {
           this.isFooterVisible = '';
         }
       });
