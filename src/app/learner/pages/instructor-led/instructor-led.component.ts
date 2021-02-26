@@ -22,7 +22,9 @@ export class InstructorLedComponent implements OnInit {
   attendedSessions: any;
   attendedCount;
   recordedCount;
-  videoSource
+  videoSource;
+  showSkeleton;
+  showContent;
   @ViewChild('attended') attended: ElementRef;
 
   constructor(private router: Router,
@@ -46,11 +48,18 @@ export class InstructorLedComponent implements OnInit {
   }
 
   getAttendance() { // Http Call
+    this.showSkeleton = true;
     const userDetails = JSON.parse(localStorage.getItem('UserDetails'));
     this.learnerService.getAttendanceByUsername(this.course.id, userDetails.full_name, userDetails.user_id).subscribe(async res => {
       // tslint:disable-next-line:no-string-literal
+      this.showSkeleton = false;
       const data = res.data['getTopicAttendanceDetailsByUsername']['data'];
       this.listOfSessions = data.Activity;
+      if(this.listOfSessions.length > 0){
+        this.showContent = true;
+      } else {
+        this.showContent = false;
+      }
       this.listOfSessions.sort((a,b)=>{
         return +new Date(b.activity_details.startdate) - +new Date(a.activity_details.startdate);
       })
