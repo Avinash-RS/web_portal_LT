@@ -27,7 +27,8 @@ export class AppComponent implements OnInit {
   platformTxt = navigator.platform;
   isProgressBar = false;
   isFooterVisible: string = '';
-
+  percentage = "Inprogress"
+  loadersubscription: Subscription;  
    // FOR DRM(Restriction for right click)
    @HostListener('document:keydown', ['$event'])
    handleKeyboardEvent(event: KeyboardEvent) {
@@ -52,6 +53,7 @@ export class AppComponent implements OnInit {
     // console.log = function(){}
     // console.warn = function(){}
     this.commonService.getIpAddressByUrl();
+    
     // this.getorganizationbyiddetails();
   }
 
@@ -59,6 +61,20 @@ export class AppComponent implements OnInit {
     // console.error = function(){}
     // console.log = function(){}
     // console.warn = function(){}
+    this.loadersubscription = this.Lservice.getMessage().subscribe(message => 
+      { 
+        if(message.count){
+          this.percentage = message.count + '  ' + message.text.slice(0,message.text.lastIndexOf('.')) + '%'; 
+        } else {
+          this.percentage = message.text.slice(0,message.text.lastIndexOf('.')) + '%'; 
+        }
+        if(this.percentage == '0%'){
+          this.percentage = 'Inprogress'
+        }
+       console.log(message.count)
+        console.log(this.percentage)
+      });
+   
     // this.loaderSubscription = this.commonService.loader.subscribe((val) => {
     //   this.isLoader = val;
     //   if (this.isLoader) {
@@ -143,6 +159,7 @@ myUnload() {
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnDestroy(): void {
     this.loaderSubscription.unsubscribe();
+    this.loadersubscription.unsubscribe();
   }
 
 

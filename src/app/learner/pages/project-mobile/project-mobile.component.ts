@@ -312,6 +312,7 @@ export class ProjectMobileComponent implements OnInit {
             const uploaded = ev.loadedBytes;
             const percnt = uploaded * 100 / this.fileSize;
             this.uploadedPercentage = percnt.toFixed(2);
+            this.Lservice.sendMessage('',this.uploadedPercentage.toString());
           },
           blobHTTPHeaders: { blobContentType: this.currentFile.type }
         });
@@ -347,10 +348,16 @@ export class ProjectMobileComponent implements OnInit {
        // this.getprojectActivityData();
         this.selectfile = [];
         this.flag=1
+        setTimeout(()=>{
+          this.Lservice.sendMessage('','0.00');
+        },1000)
         }
       } else {
         this.ngxLoader.stop();
         this.toastr.warning(data.message);
+        setTimeout(()=>{
+          this.Lservice.sendMessage('','0.00');
+        },1000)
       }
     });
   }
