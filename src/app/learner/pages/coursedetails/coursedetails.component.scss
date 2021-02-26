@@ -936,10 +936,10 @@ color:grey
     content: '';
     position: absolute;
     width: 1px;
-    height: calc(100% - 25px);
+    height: calc(100% - 12px);
     background-color: #bdc2ce;
     left: 13px;
-    bottom: -9px;
+    bottom: -15px;
     z-index: 3;
 }
 
@@ -976,7 +976,7 @@ color:grey
 .bs-vertical-wizard ul>li.complete>.icov:before {
     background-color: #0e7d12;
     opacity: 1;
-    height: calc(100% - 12px);
+   
     bottom: -16px;
 }
 

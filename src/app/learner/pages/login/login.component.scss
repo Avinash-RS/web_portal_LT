@@ -516,6 +516,39 @@ margin-top: 5%;
 .limiter {
     height: 100%;
 }
+.info-card{
+    border: 1px solid #70707073;
+    background-color: #F5F5F5;
+    border-left: 5px solid #F88725;
+    box-shadow: 0px 0px 6px 3px #00000029;
+    margin: 10px;
+    position: absolute;
+    bottom: 15px;
+    padding:5px;
+    left: 0px;
+}
+.info-title{
+   // margin-bottom: 10px;
+}
+.info-title span{
+    color:#666666;
+    font-weight: bold;
+    margin-left:15px;
+    font-size: 17px;
+}
+.info-content li {
+    margin:5px;
+    font-size:14px;
+}
+.info-content ul {
+    margin:0px;
+    padding-left:18px;
+}
+.lxp-info-circle{
+    color:#F88725;
+    font-size:20px;
+}
+
 
 
 

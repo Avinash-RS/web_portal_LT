@@ -980,7 +980,7 @@ export class CoursedetailsComponent implements OnInit {
         this.filterToc()}// NOT WORKING SHOULD WAIT FOR SOCKET RESPONSE FOR REALTIME FILTER
         //this.toastr.success(data?.data?.bookmark?.message)
       }else{
-        this.toastr.warning(data?.data?.bookmark?.message)
+       // this.toastr.warning(data?.data?.bookmark?.message)
       }
     })
   }
