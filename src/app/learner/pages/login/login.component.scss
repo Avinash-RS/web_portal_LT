@@ -82,7 +82,7 @@ a:hover {
 }
 
 :host ::ng-deep.sign_up {
-    margin-top: 12% !important;
+    margin-top: 5% !important;
     text-align: center !important;
     margin-left: 16px;
 }
@@ -539,6 +539,7 @@ margin-top: 5%;
 .info-content li {
     margin:5px;
     font-size:14px;
+    text-align: left;
 }
 .info-content ul {
     margin:0px;
