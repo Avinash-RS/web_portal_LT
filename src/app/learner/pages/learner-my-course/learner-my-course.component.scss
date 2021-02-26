@@ -1059,10 +1059,11 @@ hr {
 
 ::ng-deep .dialogContainer {
   overflow-y: hidden !important;
-  width: 75% !important;
-  max-height: 85% !important;
+  width: 55% !important;
+  //max-height: 85% !important;
   margin: auto;
 }
+
 
 .menuBtn {
   display: none;
@@ -1192,6 +1193,9 @@ hr {
 
 // Mobile
 @media screen and (min-width: 200px) and (max-width: 770px) {
+  ::ng-deep .dialogContainer{
+    width: 85% !important;
+  }
 .availableCol{
   display: none;
 }
@@ -2310,5 +2314,18 @@ background :#C02222 !important;
   &:hover {
     background-color: transparent;
   }
+}
+.infocontent{
+  position: relative
+}
+.infoClose{
+  cursor: pointer;
+  position:absolute;
+  right: 10px;
+  top:10px;
+}
+.infoimg{
+  width: 100%;
+  height: auto;
 }
 

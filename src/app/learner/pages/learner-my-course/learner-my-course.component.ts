@@ -110,6 +110,7 @@ export class LearnerMyCourseComponent implements OnInit {
   batchCourse: any;
   isMobile = false;
   runnablePlatforms = ['MacIntel', 'Win32', 'Linux x86_64'];
+  @ViewChild('infoPopup')infoPopWindow: TemplateRef<any>;
   constructor(
     public elm: ElementRef,
     private route: ActivatedRoute,
@@ -161,6 +162,10 @@ export class LearnerMyCourseComponent implements OnInit {
   // this.translate.use(localStorage.getItem('language'));
   // }
   ngOnInit() {
+    let showAppBanner = localStorage.getItem('appBanner');
+    if(!showAppBanner){
+    this.openInfoPopup();
+    }
     if (this.userDetailes) {
       this.insidengOnInit();
     }
@@ -174,8 +179,20 @@ export class LearnerMyCourseComponent implements OnInit {
     //   console.log('triggering data');
     // }, 500);
   }
-
-  insidengOnInit() {
+openInfoPopup(){
+this.dialog.open(this.infoPopWindow, {
+  width: '55%,',
+    panelClass: 'dialogContainer',
+    closeOnNavigation: true,
+    disableClose: true,
+    
+  });
+}
+closeBannerPopup(){
+  this.dialog.closeAll()
+localStorage.setItem('appBanner','false')
+}
+insidengOnInit() {
     this.CommonServices.openAvailCourcePopup.subscribe((data: any) => {
       this.availableCource = data;
       console.log(data);
@@ -219,40 +236,40 @@ export class LearnerMyCourseComponent implements OnInit {
 
   }
 
-  clostAvailContainer(availableCource) {
+clostAvailContainer(availableCource) {
     this.CommonServices.closeAvailPopup$.next(availableCource);
   }
 
-  downArrow(event) {
+downArrow(event) {
     this.opencourceId = event.course_id;
   }
 
-  upArrow(event) {
+upArrow(event) {
     this.opencourceId = event.course_id;
   }
 
-  getScreenSize(event?) {
+getScreenSize(event ? ) {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
   }
 
-  openAvailableCource() {
+openAvailableCource() {
     this.availableCource = true;
     this.isExpandCourseTemp = this.availableCource;
   }
 
-  menuSelect(subchild, superchild) {
+menuSelect(subchild, superchild) {
     // this.categoryPopupData.categoryName1 = superchild.superSubCategoryName;
     this.categoryyName = superchild;
     this.subchildData = subchild;
   }
-  openWin()
-  {
-    let myWindow = window.open('https://lntedutech.com/edutechportal/web/collegeconnect','BrowseCourse');
+openWin()
+{
+    let myWindow = window.open('https://lntedutech.com/edutechportal/web/collegeconnect', 'BrowseCourse');
     // if(doFocus)
     myWindow.focus();
   }
-  claimAll() {
+claimAll() {
     this.loading = true;
     let categoryPopupName = '';
     if (this.categoryPopupData !== 'college connect' && this.categoryPopupData !== 'pro certification') {
@@ -276,10 +293,10 @@ export class LearnerMyCourseComponent implements OnInit {
         }
       });
   }
-  dropdownSelect() {
+dropdownSelect() {
     this.viewCourseClass = true;
   }
-  getCatName(data) {
+getCatName(data) {
     // console.log('data', data);
   }
   // getEnroementCourseName(catagoryId) {
@@ -291,7 +308,7 @@ export class LearnerMyCourseComponent implements OnInit {
   //     this.categoryNamePrint = categoryName[0].categoryName;
   // }
   // }
-  getEnrolledCourses(event, catagoryId, catalougeId, jobRoleCategoryId, searchName, jobroleCheck, showSkelton) {
+getEnrolledCourses(event, catagoryId, catalougeId, jobRoleCategoryId, searchName, jobroleCheck, showSkelton) {
     if (this.screenWidth < 800 && this.keyboardUp) {
       this.keyboardUp = false;
       this.opencourceId = '';
@@ -383,7 +400,7 @@ export class LearnerMyCourseComponent implements OnInit {
 
   // NEW API T0 GET DASHBOARD DATA
 
-  getDashboardMyCourse(userId, userObjId) {
+getDashboardMyCourse(userId, userObjId) {
     this.courseDetailsList = [];
     this.showSkeleton = true;
     let requestType = 'ongoing';
@@ -440,17 +457,17 @@ export class LearnerMyCourseComponent implements OnInit {
     });
   }
 
-  courseTabChange(event, userId, userObjId) {
+courseTabChange(event, userId, userObjId) {
     console.log(event); // event index not worked
     this.getDashboardMyCourse(userId, userObjId);
   }
-  diff_hours(dt2, dt1) {
+diff_hours(dt2, dt1) {
     let diff = (new Date(dt2).getTime() - new Date(dt1).getTime()) / 1000;
     diff /= (60 * 60);
     return Math.abs(Math.round(diff));
   }
 
-  gotoScorm(c) {
+gotoScorm(c) {
     const detail1 = {
       id: 'Scaffolding',
       user: this.userDetailes.user_id,
@@ -460,14 +477,14 @@ export class LearnerMyCourseComponent implements OnInit {
     };
     this.router.navigateByUrl('/Learner/scorm', { state: { detail: detail1 } });
   }
-  Go(course) {
+Go(course) {
     const data1 = {
       courseId: course.course_id
     };
     this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
   }
 
-  gotoDesc(c) {
+gotoDesc(c) {
     const detail = {
       id: c.course_id,
       wishlist: c.wishlisted || false,
@@ -485,15 +502,15 @@ export class LearnerMyCourseComponent implements OnInit {
     // this.show = false;
     // }
   }
-  alterDescriptionText() {
+alterDescriptionText() {
     this.showShortDesciption = !this.showShortDesciption;
   }
 
-  close() {
+close() {
     this.show = false;
   }
 
-  launchAssignment(value) {
+launchAssignment(value) {
     // if (this.screenWidth < 800) {
     // this.show = true;
     // } else {
@@ -508,10 +525,10 @@ export class LearnerMyCourseComponent implements OnInit {
     }
   }
 
-  launchActivity(value) {
+launchActivity(value) {
     window.open(value.activity_details.link);
   }
-  goToAssignment(c) {
+goToAssignment(c) {
     localStorage.setItem('Courseid', c.course_id);
     const detail = {
       id: c.course_id,
@@ -522,7 +539,7 @@ export class LearnerMyCourseComponent implements OnInit {
     };
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
   }
-  goToForum(c) {
+goToForum(c) {
     localStorage.setItem('Courseid', c.course_id);
     const detail = {
       id: c.course_id,
@@ -533,7 +550,7 @@ export class LearnerMyCourseComponent implements OnInit {
     // this.router.navigateByUrl('/Learner/MyCourse', { state: { detail } });
     this.router.navigateByUrl('/Learner/discussionForum', { state: { detail } });
   }
-  gotoSubmissionDetails(c) {
+gotoSubmissionDetails(c) {
     localStorage.setItem('Courseid', c.course_id);
     const detail = {
       id: c.course_id,
@@ -545,7 +562,7 @@ export class LearnerMyCourseComponent implements OnInit {
   }
 
   /* ---------------------------------------api for available courses------------------------------------ */
-  getCountForCategories() {
+getCountForCategories() {
     let dropDownData = [];
     this.learnerService.getCountForCategories(this.userDetailes._id).subscribe((data: any) => {
       if (data && data.data && data.data.getCountForCategories && data.data.getCountForCategories.data) {
@@ -560,7 +577,7 @@ export class LearnerMyCourseComponent implements OnInit {
     });
     // clearInterval(this.triggerAvailablecourse);
   }
-  getTab() {
+getTab() {
     let dropDownData = [];
     this.route.data.subscribe((result: any) => {
       if (result.data && result.data.data && result.data.data.getCountForCategories && result.data.data.getCountForCategories.data) {
@@ -574,7 +591,7 @@ export class LearnerMyCourseComponent implements OnInit {
     });
   }
 
-  getCoureBasedOnCatalog(catalogue, category, subchild, superChild) {
+getCoureBasedOnCatalog(catalogue, category, subchild, superChild) {
     this.categoryData = category;
     this.subCatId = subchild;
     this.superCatId = superChild;
@@ -589,7 +606,7 @@ export class LearnerMyCourseComponent implements OnInit {
         }
       });
   }
-  viewCourse(category, templateRef: TemplateRef<any>, categoryname, categorycount) {
+viewCourse(category, templateRef: TemplateRef < any > , categoryname, categorycount) {
     return false;
     this.color = false;
     // this.loading = true;
@@ -604,7 +621,7 @@ export class LearnerMyCourseComponent implements OnInit {
       });
     }
   }
-  closedialogbox() {
+closedialogbox() {
     this.dialog.closeAll();
     this.allcourses = [];
     this.availableCourses = '';
@@ -612,7 +629,7 @@ export class LearnerMyCourseComponent implements OnInit {
     this.courseSearch = '';
     this.CommonServices.closeAvailPopup$.next(false);
   }
-  claimCourse(course) {
+claimCourse(course) {
     let categoryPopupName = '';
     if (this.categoryPopupData !== 'college connect' && this.categoryPopupData !== 'pro certification') {
       categoryPopupName = 'vocational';
@@ -645,7 +662,7 @@ export class LearnerMyCourseComponent implements OnInit {
       });
   }
 
-  navToCal() {
+navToCal() {
     this.router.navigateByUrl('/Learner/calendar');
   }
   // openMyMenu() {
@@ -664,7 +681,7 @@ export class LearnerMyCourseComponent implements OnInit {
   //   });
   // }
 
-  dropdownValueChange(selectedValue, count, jobroleId) {
+dropdownValueChange(selectedValue, count, jobroleId) {
     this.viewCourseClass = false;
     this.selectedJobRole = selectedValue;
     this.jobRoleId = jobroleId;
@@ -677,7 +694,7 @@ export class LearnerMyCourseComponent implements OnInit {
   // }
 
   // -------------mobile responsive function-----------------------------
-  onexpTemp(category, id, isexps) {
+onexpTemp(category, id, isexps) {
     this.expandActivityNameTemp = isexps ? id : null;
     this.isExpandCourseTemp = false;
     if (category.subCategory) {
@@ -685,22 +702,22 @@ export class LearnerMyCourseComponent implements OnInit {
     }
   }
 
-  onCloseTab() {
+onCloseTab() {
     if (this.isExpandCourseTemp === true) {
       this.isExpChild = false;
     }
   }
 
-  onexpchildTemp(id, isexp) {
+onexpchildTemp(id, isexp) {
     this.expandActivityNameChildTemp = isexp ? id : null;
     this.isExpChild = isexp ? true : false;
   }
 
-  triggerPopup() {
+triggerPopup() {
     document.getElementById('dropMenu').style.display = 'block';
   }
 
-  triggerPopups() {
+triggerPopups() {
     this.dropdownMenu = !this.dropdownMenu;
     if (this.dropdownMenu) {
       document.getElementById('dropMenu').style.display = 'block';
@@ -709,16 +726,16 @@ export class LearnerMyCourseComponent implements OnInit {
     }
   }
 
-  closePopup() {
+closePopup() {
     document.getElementById('dropMenu').style.display = 'none';
   }
 
-  resettingJobRole() {
+resettingJobRole() {
     this.selectedJobRole = 'Job Role';
     this.jobRoleId = null;
     this.getEnrolledCourses('', '', '', '', '', false, false);
   }
-  resettingJobRoledata() {
+resettingJobRoledata() {
     this.selectedJobRole = 'Job Role';
     this.jobRoleId = null;
   }

@@ -7,6 +7,10 @@
     <div class="igniteLogo col-xl-8 col-md-6 col-sm-12 col-12 border-right no_pl">
       <div class="main-logo">
       <img alt="" class="beforeloginimg" style="width : inherit" src="assets/learner/iGGnite_SVG.svg">
+      <div>
+        <span style="font-size:18px ">Download our <span style="color:red">i</span><strong>GGnite</strong> mobile app</span><br>
+        <img src="assets/learner/gplay.png" width="150px" style="margin-top: 15px;">
+    </div>
     </div>
     </div>
     <div class="loginWrapper col-xl-4 col-md-6 col-sm-12 col-12">
@@ -63,9 +67,22 @@
 
             <div class="sign_up">
               <span class="haveacc">Don't have an account?</span>
-              <a [routerLink]="['/Learner/register']"><span class="col">{{'Sign up' | translate }}</span></a> </div><br><br>
+              <a [routerLink]="['/Learner/register']"><span class="col">{{'Sign up' | translate }}</span></a> </div><br>
           </mat-card-content>
         </form>
+        <div class="info-card">
+          <div class="info-bodyWrapper">
+          <div class="info-title d-flex align-items-center">
+            <div><i class="lxp-info-circle"></i></div><div><span  >info</span></div>
+          </div>
+          <div class="info-content">
+            <ul>
+              <li>Please clear browser cache before logging into the application.</li>
+              <li>If you need any assistance, kindly reach us at <a href="mailto:collegeconnect.support@lntedutech.com">collegeconnect.support@lntedutech.com</a>.</li>
+            </ul>
+          </div>
+        </div>
+        </div>
         <div class=""  id="footer">
           <div class="col-12">
             <span class="forgot1">{{currentYear}} © L&T EduTech All Rights Reserved</span> 
