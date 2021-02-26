@@ -27,17 +27,8 @@
   </div>
 </div> -->
 
-<div class="row" *ngIf="listOfSessions?.length > 0">
-  <div class="col-lg-7 col-xl-7 col-md-7 col-sm-7 col-12">
-    <!-- <span class="headLine">{{course?.name}}</span> -->
-  </div>
-  <div class="col-lg-5 col-xl-5 col-md-5 col-sm-5 col-12">
-    
-  </div>
-</div>
-
 <!-- If no records -->
-<div class="noRecords" *ngIf="!listOfSessions?.length">
+<div class="noRecords" *ngIf="!showContent && !showSkeleton">
   <!-- <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12"></div> -->
   <div class="">
       <mat-card class="noSessionCard color-yellow-card-status">
@@ -55,7 +46,7 @@
 </div>
 <!-- End of no records -->
 
-<div class="row marginFix" *ngIf="listOfSessions?.length">
+<div class="row marginFix" *ngIf="showContent">
   <!-- Left Side Panel ... -->
   <!-- <div class="col-lg-1 col-xl-1 col-md-1 col-sm-1 col-12"></div> -->
   <div class="col-lg-7 col-xl-7 col-md-12 col-sm-12 col-12">
@@ -247,3 +238,29 @@
     </div>
   </div>
 </ng-template>
+
+<div class="item" *ngIf="showSkeleton">
+  <mat-card class="courseDetailSkeleton" style="box-shadow: none !important;">
+      <div class="breadcrumbskeleton">
+          <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', height: '35px', 'background-color': '#888888' }"></ngx-skeleton-loader>
+      </div>
+      <div class="d-flex justify-content-between">
+          <div class="item" style="width: 58%;">
+              <div class="">
+                  <ngx-skeleton-loader [theme]="{'background-color': '#888888',height: '200px'}" animation="pulse"></ngx-skeleton-loader>
+              </div>
+              <div class="d-flex justify-content-between">
+                  <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', width: '230px', height: '108px', 'background-color': '#888888' }"></ngx-skeleton-loader>
+                  <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', width: '230px', height: '108px', 'background-color': '#888888' }"></ngx-skeleton-loader>
+                  <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', width: '230px', height: '108px', 'background-color': '#888888' }"></ngx-skeleton-loader>
+              </div>
+          </div>
+          
+          <div class="item" style="width: 38%;">
+            <div>
+              <ngx-skeleton-loader count="5" animation="pulse" [theme]="{ display: 'block', 'background-color': '#888888', width: '100%' , height: '75px'}"></ngx-skeleton-loader>
+            </div>
+          </div>
+      </div>
+  </mat-card>
+</div>
