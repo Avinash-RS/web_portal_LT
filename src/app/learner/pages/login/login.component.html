@@ -71,10 +71,11 @@
               <a [routerLink]="['/Learner/register']"><span class="col">{{'Sign up' | translate }}</span></a> </div><br>
           </mat-card-content>
         </form>
-        <div class="info-card">
+        <div class="info-card animate" *ngIf="infoClose">
           <div class="info-bodyWrapper">
-          <div class="info-title d-flex align-items-center">
-            <div><i class="lxp-info-circle"></i></div><div><span  >info</span></div>
+          <div class="info-title d-flex justify-content-between align-items-center">
+            <div><i class="lxp-info-circle"></i><span>info</span></div>
+            <div (click)="infoClose = infoClose?false:true"><i class="lxp-Close"></i></div>
           </div>
           <div class="info-content">
             <ul>

@@ -523,7 +523,7 @@ margin-top: 5%;
     box-shadow: 0px 0px 6px 3px #00000029;
     margin: 10px;
     position: absolute;
-    bottom: 15px;
+    bottom: 25px;
     padding:5px;
     left: 0px;
 }
@@ -535,6 +535,7 @@ margin-top: 5%;
     font-weight: bold;
     margin-left:15px;
     font-size: 17px;
+    vertical-align: middle;
 }
 .info-content li {
     margin:5px;
@@ -547,7 +548,7 @@ margin-top: 5%;
 }
 .app-Dnld{
     position:absolute;
-    bottom:-100px;
+    bottom:-78px;
 }
 .app-Dnld .wrapperSpan{
     font-size:14px;
@@ -557,8 +558,22 @@ margin-top: 5%;
 .lxp-info-circle{
     color:#F88725;
     font-size:20px;
+    vertical-align: middle;
 }
-
+.lxp-Close{
+    color:#666666;
+    cursor: pointer;
+}
+.animate{
+    position: absolute;
+    animation: mymove 1s ;
+    z-index: 1;
+	//animation-timing-function: ease;
+}
+@keyframes mymove {
+	0% {bottom: -100px;}
+  100%{bottom:25px;}
+  }
 
 
 
