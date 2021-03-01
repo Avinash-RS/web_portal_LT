@@ -238,6 +238,26 @@
       <!-- <div class="browseCourse">
         <button (click)="openWin()">Browse Courses</button>
       </div> -->
+      <div class="jobRole" *ngIf="userDetailes.org_type == 'vocational'">
+        <label for="jobRoles">My Job Role:</label>
+        <!-- <select (change)="onSelectionChange($event)" [(ngModel)]="jobroleCategoryId" id="jobRoles">
+          <option value='All'>All</option>
+          <option class="jobRolecustomClass" *ngFor="let selectedJobRole of selectjobRole" [value]="selectedJobRole.jobroleCategoryId">
+            {{selectedJobRole.jobroleCategoryName}}
+            <span class="jobRoleCount">{{selectedJobRole.jobroleEnrollCount}}</span>
+          </option>
+        </select> -->
+        <mat-form-field appearance="fill">
+          <mat-select (selectionChange)="onSelectionChange($event)" [(ngModel)]="jobroleCategoryId">
+            <mat-select-trigger>{{selectedJobRoleData?.jobroleCategoryName}}</mat-select-trigger>
+            <mat-option value='All'>All</mat-option>
+            <mat-option class="jobRolecustomClass" *ngFor="let selectedJobRole of selectjobRole" [value]="selectedJobRole.jobroleCategoryId" (onSelectionChange)="jobRoleSelectedFunction($event,selectedJobRole)">
+              {{selectedJobRole.jobroleCategoryName}}
+              <span class="jobRoleCount">{{selectedJobRole.jobroleEnrollCount}}</span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
   </div>
 

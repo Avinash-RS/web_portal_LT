@@ -7,7 +7,9 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { TranslateService } from '@ngx-translate/core';
 
-
+interface Assessment {
+  value: string;
+}
 @Component({
   selector: 'app-learner-my-course',
   templateUrl: './learner-my-course.component.html',
@@ -27,6 +29,10 @@ import { TranslateService } from '@ngx-translate/core';
 })
 
 export class LearnerMyCourseComponent implements OnInit {
+  
+  selectedJobRoleData = {
+    jobroleCategoryName : "All"
+  };
   viewScrollBar = false;
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   @Output() focusChange: EventEmitter<MatTabChangeEvent>;
@@ -71,6 +77,7 @@ export class LearnerMyCourseComponent implements OnInit {
   selectedIndex: number;
   viewCourseClass = true;
   jobRole: any = [];
+  selectjobRole: any;
   categoryyName: any;
   subchildData: any;
   selectedJobRole = 'Job Role';
@@ -110,6 +117,7 @@ export class LearnerMyCourseComponent implements OnInit {
   batchCourse: any;
   isMobile = false;
   runnablePlatforms = ['MacIntel', 'Win32', 'Linux x86_64'];
+  jobroleCategoryId = 'All'
   @ViewChild('infoPopup')infoPopWindow: TemplateRef<any>;
   constructor(
     public elm: ElementRef,
@@ -161,6 +169,8 @@ export class LearnerMyCourseComponent implements OnInit {
   // ngOnInit() {
   // this.translate.use(localStorage.getItem('language'));
   // }
+
+
   ngOnInit() {
     let showAppBanner = localStorage.getItem('appBanner');
     if(!showAppBanner){
@@ -178,6 +188,7 @@ export class LearnerMyCourseComponent implements OnInit {
     //   this.getCountForCategories();
     //   console.log('triggering data');
     // }, 500);
+    this.getMyJobRole();
   }
 openInfoPopup(){
 this.dialog.open(this.infoPopWindow, {
@@ -397,6 +408,16 @@ getEnrolledCourses(event, catagoryId, catalougeId, jobRoleCategoryId, searchName
         this.viewCourseClass = true;
       });
   }
+  onSelectionChange(event){
+  this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id)
+}
+
+jobRoleSelectedFunction(event,value){
+  console.log(value,"valueeeee")
+  if(event.source.selected){
+    this.selectedJobRoleData = value
+  }
+}
 
   // NEW API T0 GET DASHBOARD DATA
 
@@ -411,7 +432,9 @@ getDashboardMyCourse(userId, userObjId) {
     } else if (this.selectedIndex === 3) {
       requestType = 'all';
     }
-    this.learnerService.get_batchwise_learner_dashboard_data(userId, requestType).subscribe((BcourseData: any) => {
+    let jobRoleId = this.jobroleCategoryId;
+    if(this.jobroleCategoryId === 'All') jobRoleId = null;
+    this.learnerService.get_batchwise_learner_dashboard_data(userId, requestType, jobRoleId).subscribe((BcourseData: any) => {
       console.log(BcourseData, 'BcourseData');
       BcourseData.data.get_batchwise_learner_dashboard_data.message.forEach(elem => {
         elem.isBatchCourse = true;
@@ -449,7 +472,7 @@ getDashboardMyCourse(userId, userObjId) {
     this.onGoingCourseCount = 0;
     this.completedCourseCount = 0;
     this.allCourseCount = 0;
-    this.learnerService.get_learner_dashboard_count(userId, userObjId).subscribe((result: any) => {
+    this.learnerService.get_learner_dashboard_count(userId, userObjId, jobRoleId).subscribe((result: any) => {
       console.log(result, 'result');
       this.onGoingCourseCount = result.data.get_learner_dashboard_count.message.ongoing_count;
       this.completedCourseCount = result.data.get_learner_dashboard_count.message.completed_count;
@@ -680,6 +703,13 @@ navToCal() {
   //     this.jobRole = data.data.getCountForJobroleCategories.data;
   //   });
   // }
+
+  getMyJobRole() {
+    this.learnerService.getCountForJobroleCategories(this.userDetailes._id, this.userDetailes.user_id).subscribe((data: any) => {
+      this.selectjobRole = data.data.getCountForJobroleCategories.data
+      console.log(this.selectjobRole, 'Karthik');
+    });
+  }
 
 dropdownValueChange(selectedValue, count, jobroleId) {
     this.viewCourseClass = false;
