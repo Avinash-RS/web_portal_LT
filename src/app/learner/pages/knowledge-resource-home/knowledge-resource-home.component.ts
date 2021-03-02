@@ -31,7 +31,7 @@ export class KnowledgeResourceHomeComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    //this.getResourceFiles();
+    this.getResourceFiles();
   }
 
   getResourceFiles() {
