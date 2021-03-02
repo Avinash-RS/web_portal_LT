@@ -77,7 +77,7 @@ export class LearnerMyCourseComponent implements OnInit {
   selectedIndex: number;
   viewCourseClass = true;
   jobRole: any = [];
-  selectjobRole: any;
+  vocationalselectjobRole= [];
   categoryyName: any;
   subchildData: any;
   selectedJobRole = 'Job Role';
@@ -445,7 +445,7 @@ getDashboardMyCourse(userId, userObjId) {
       });
       const tmpBcourseDetail = BcourseData.data.get_batchwise_learner_dashboard_data.message;
       this.courseDetailsList = tmpBcourseDetail && tmpBcourseDetail !== null ? tmpBcourseDetail : [];
-
+      // this.courseDetailsList = [];
       this.learnerService.getLearnerDashboard(userId, userObjId, 'undefined', requestType, 'enrolment').subscribe((EcourseData: any) => {
         const EcourseDetail = EcourseData.data.get_learner_dashboard.message.enrolled_course_details;
         this.enrolledCourses = EcourseDetail && EcourseDetail !== null ? EcourseDetail : [];
@@ -706,8 +706,15 @@ navToCal() {
 
   getMyJobRole() {
     this.learnerService.getCountForJobroleCategories(this.userDetailes._id, this.userDetailes.user_id).subscribe((data: any) => {
-      this.selectjobRole = data.data.getCountForJobroleCategories.data
-      console.log(this.selectjobRole, 'Karthik');
+      this.vocationalselectjobRole = data.data.getCountForJobroleCategories.data
+      // this.vocationalselectjobRole = [];
+      console.log(this.vocationalselectjobRole, 'Karthik');
+      if(this.vocationalselectjobRole.length > 0) {
+        console.log("count karthik")
+      }
+      else {
+        console.log('no count')
+      }
     });
   }
 
