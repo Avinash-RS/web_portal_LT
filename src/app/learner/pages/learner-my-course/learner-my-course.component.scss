@@ -127,7 +127,10 @@
   position: absolute;
   top: 30px;
   right: 15px;
-  z-index: 9;
+  z-index: 8;
+  &.noHandIcon {
+    display: none;
+  }
   label {
     font-weight: 700;
     display: inline-block;
@@ -161,6 +164,17 @@
   .mat-select-arrow {
     color: rgba(0, 0, 0, 0.54);
   }
+  .mat-select {
+    text-transform: capitalize;
+  }
+  .noHandIcon {
+    .mat-select-trigger {
+      cursor: not-allowed;
+    }
+    .mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex {
+      cursor: not-allowed;
+    }
+  }
 }
 ::ng-deep.jobRolecustomClass {
   position: relative;
@@ -172,6 +186,9 @@
   }
   .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
     color: #333333 !important;
+  }
+  .mat-option-text {
+    text-transform: capitalize;
   }
   .jobRoleCount {
     position: absolute;
