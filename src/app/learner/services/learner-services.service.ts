@@ -882,11 +882,12 @@ getMessage(): Observable<any> {
     });
   }
 
-  getCountForJobroleCategories(userObjId) {
+  getCountForJobroleCategories(userObjId, userId) {
     return this.Apollo.query({
       query: getCountForJobroleCategories,
       variables: {
-        userObjId
+        userObjId,
+        userId
       }
     });
   }
@@ -985,22 +986,24 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
-  get_batchwise_learner_dashboard_data(user_id,request_type) {
+  get_batchwise_learner_dashboard_data(user_id,request_type,jobroleCategoryId) {
     return this.Apollo.query({
       query: get_batchwise_learner_dashboard_data,
       variables: {
         user_id,
-        request_type
+        request_type,
+        jobroleCategoryId
       }
     });
   }
 
-  get_learner_dashboard_count(user_id,user_obj_id) {
+  get_learner_dashboard_count(user_id,user_obj_id, jobroleCategoryId) {
     return this.Apollo.query({
       query: get_learner_dashboard_count,
       variables: {
         user_id,
-        user_obj_id
+        user_obj_id,
+        jobroleCategoryId
       }
     });
   }

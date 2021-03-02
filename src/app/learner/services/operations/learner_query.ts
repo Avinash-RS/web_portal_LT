@@ -1807,8 +1807,8 @@ export const singleBatchInfo = gql`
 `;
 
 export const getCountForJobroleCategories = gql`
-  query getCountForJobroleCategories($userObjId: String!) {
-    getCountForJobroleCategories(userObjId: $userObjId) {
+  query getCountForJobroleCategories($userObjId: String!, $userId: String!) {
+    getCountForJobroleCategories(userObjId: $userObjId, userId: $userId) {
       success
       message
       data {
@@ -2163,8 +2163,8 @@ query getTopicAttendanceDetailsByUsername( $courseid: String!, $full_name: Strin
 
 
 export const   get_batchwise_learner_dashboard_data = gql`
-query   get_batchwise_learner_dashboard_data( $user_id: String!, $request_type: String!){
-  get_batchwise_learner_dashboard_data( user_id: $user_id, request_type: $request_type){
+query   get_batchwise_learner_dashboard_data( $user_id: String!, $request_type: String!, $jobroleCategoryId: String){
+  get_batchwise_learner_dashboard_data( user_id: $user_id, request_type: $request_type, jobroleCategoryId: $jobroleCategoryId){
     success
     error_msg
     message{
@@ -2217,8 +2217,8 @@ query   get_batchwise_learner_dashboard_data( $user_id: String!, $request_type: 
 
 
 export const   get_learner_dashboard_count = gql`
-query   get_learner_dashboard_count( $user_id: String!, $user_obj_id: String!){
-  get_learner_dashboard_count( user_id: $user_id, user_obj_id: $user_obj_id){
+query   get_learner_dashboard_count( $user_id: String!, $user_obj_id: String!, $jobroleCategoryId: String){
+  get_learner_dashboard_count( user_id: $user_id, user_obj_id: $user_obj_id, jobroleCategoryId: $jobroleCategoryId){
     success
         error_msg
         message{
