@@ -250,7 +250,6 @@
         <mat-form-field appearance="fill">
           <mat-select (selectionChange)="onSelectionChange($event)" [(ngModel)]="jobroleCategoryId">
             <mat-select-trigger>{{selectedJobRoleData?.jobroleCategoryName}}</mat-select-trigger>
-            <mat-option value='All'>All</mat-option>
             <mat-option class="jobRolecustomClass" *ngFor="let selectedJobRole of selectjobRole" [value]="selectedJobRole.jobroleCategoryId" (onSelectionChange)="jobRoleSelectedFunction($event,selectedJobRole)">
               {{selectedJobRole.jobroleCategoryName}}
               <span class="jobRoleCount">{{selectedJobRole.jobroleEnrollCount}}</span>
