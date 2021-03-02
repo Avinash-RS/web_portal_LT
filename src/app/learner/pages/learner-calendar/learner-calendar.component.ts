@@ -65,10 +65,10 @@ export class LearnerCalendarComponent implements OnInit {
     this.userId = this.UserDetails.user_id;
     // this.tokenid = this.tokenDetails.token;
     this.selectedDate = moment().format();
-    this.getLearnerActivity(this.selectedDate);
+    // this.getLearnerActivity(this.selectedDate);
     const topicStart = new Date();
     const dateValue = moment(topicStart).format('YYYY-MM-DD');
-    this.getAllActivity(topicStart);
+    // this.getAllActivity(topicStart);
   }
 
   getDateChangedValue(event) {
@@ -94,7 +94,7 @@ export class LearnerCalendarComponent implements OnInit {
   todayActivity() {
     const topicStart = new Date();
     const dateValue = moment(topicStart).format('YYYY-MM-DD');
-    this.getLearnerActivity(dateValue);
+    // this.getLearnerActivity(dateValue);
   }
 
   getAllActivity(value?) {
