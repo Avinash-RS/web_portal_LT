@@ -29,16 +29,6 @@
                         <div class="moduleTopicName">
                           <span class="font-weight-bold">{{mod?.topicname}}</span>
                         </div>
-                        <div class="d-flex justify-content-between">
-                          <div class="assignmentStartDate">
-                            <span class="font-weight-bold">Start date: </span>
-                            <span>{{assignmentContent.courseStartDate | date :'MMM d, y h:mm a'}}</span>
-                          </div>
-                          <div class="assignmentEndDate">
-                            <span class="font-weight-bold">End date: </span>
-                            <span class="">{{assignmentContent.courseEndDate | date :'MMM d, y h:mm a'}}</span>
-                          </div>
-                        </div>
                       </div>
                       
                     </mat-expansion-panel-header>
@@ -58,6 +48,16 @@
                             <span class="activityDisc font-weight-bold">Question</span>
                             <mat-icon *ngIf="file.enableView" (click)="previewDoc(previewDialog,file)" class="viewDoc">find_in_page</mat-icon>
                             <mat-icon *ngIf="!file.enableView" class="viewDoc">find_in_page</mat-icon>
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                          <div class="assignmentStartDate">
+                            <span class="font-weight-bold">Start date: </span>
+                            <span>{{file.startDate | date :'MMM d, y h:mm a'}}</span>
+                          </div>
+                          <div class="assignmentEndDate">
+                            <span class="font-weight-bold">End date: </span>
+                            <span class="">{{file.endDate | date :'MMM d, y h:mm a'}}</span>
                           </div>
                         </div>
                         <div class="width assignmentUpload">

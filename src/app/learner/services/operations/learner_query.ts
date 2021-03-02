@@ -19,6 +19,7 @@ export const login = gql`
         is_thread_config
         is_comment_config
         is_profile_updated
+        org_type
         group_id
         message
         bb_forum
@@ -48,6 +49,7 @@ export const getLoginUserDetail = gql`
         is_forum_config
         is_comment_config
         is_thread_config
+        org_type 
         message
         profile_img
         group_id
