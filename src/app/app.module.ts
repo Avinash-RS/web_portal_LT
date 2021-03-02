@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { APP_BASE_HREF, PlatformLocation } from '@angular/common';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // others
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { Ng5SliderModule } from 'ng5-slider';
@@ -59,7 +59,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     // ChartsModule,
     GraphqlModule,
     DragDropModule,
-    // BrowserAnimationsModule,
+    BrowserAnimationsModule,
     Ng5SliderModule,
     PdfJsViewerModule,
     // IvyCarouselModule,
