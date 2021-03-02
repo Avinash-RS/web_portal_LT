@@ -1,17 +1,16 @@
 <app-header></app-header>
 
-<div class="spinner-container" *ngIf="loading">
+<!-- <div class="spinner-container" *ngIf="loading">
   <mat-spinner diameter="40" class="mat-spinner-color"></mat-spinner>
-</div>
+</div> -->
 
 <div class="bodyWrapper" (click)="closePopup()">
-  <div class="row">
+  <!-- <div class="row">
     <div [ngClass]="expandSearch ? 'mobileSearchRow': 'myCourseSearch'" class="col-12">
       <mat-icon class="glyphicon" (click)="expandSearch = !expandSearch">keyboard_backspace</mat-icon>
-      <!-- NEED TO WORK ON SEARCH -->
       <input type="text" autocomplete="off" class="form-control search" [(ngModel)]="searchName" />
     </div>
-  </div>
+  </div> -->
   <div class="catalogDropdownCol">
     <div class="mobileIcons">
       <mat-icon class="searchIcons" (click)="expandSearch = !expandSearch">search</mat-icon>
