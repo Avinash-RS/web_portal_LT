@@ -22,13 +22,13 @@ const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
-    canActivate: [IsLoggedInAuthGuard],
+    //canActivate: [IsLoggedInAuthGuard],
     data: { title: 'Learner Login' }
   },
   {
     path: 'Learner/login',
     component: LoginComponent,
-    canActivate: [IsLoggedInAuthGuard],
+    //canActivate: [IsLoggedInAuthGuard],
     data: { title: 'Learner Login' }
   },
   {

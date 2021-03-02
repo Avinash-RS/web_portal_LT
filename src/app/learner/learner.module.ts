@@ -91,7 +91,7 @@ const routes: Routes = [
     // component: LearnerMyCourseComponent,
     // redirectTo: 'Learner',
     // pathMatch: 'full',
-    canLoad: [AuthGuard],
+    // canLoad: [AuthGuard],
   },
   // {
   //   path: 'Learner',
@@ -119,7 +119,7 @@ const routes: Routes = [
     path: 'calendar',
     // component: LearnerCalendarComponent,
     loadChildren: './calendar.module#CalendarModules',
-    canLoad: [AuthGuard],
+    // canLoad: [AuthGuard],
     data: { animation: 'Calendar', title: 'Calendar' }
   },
 
@@ -127,7 +127,7 @@ const routes: Routes = [
     path: 'activitycenterhomescreen',
     // component: ActivitycenterhomescreenComponent,
     loadChildren: './activitycenter.module#ActivitycenterModule',
-    canLoad: [AuthGuard],
+    // canLoad: [AuthGuard],
     data: { animation: 'activitycenterhomescreen', title: 'Activity Center' }
 
   },
@@ -135,7 +135,7 @@ const routes: Routes = [
     path: 'knowledge',
     // component: KnowledgeResourceHomeComponent,
     loadChildren: './knowledgeresources.module#KnowledgeresourcesModule',
-    canLoad: [AuthGuard],
+    // canLoad: [AuthGuard],
     data: { animation: 'activitycenterhomescreen' , title: 'Knowledge Resources' }
   },
   // {
