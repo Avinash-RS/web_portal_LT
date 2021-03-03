@@ -24,7 +24,7 @@
 
   <ng-container matColumnDef="notificationName">
     <th class="w-60" mat-header-cell *matHeaderCellDef><strong class="font">Notifications</strong></th>
-    <td class="pointer" mat-cell *matCellDef="let element" (click)="markAsRead(element,'single')">
+    <td class="pointer" mat-cell *matCellDef="let element">
       <span class="read" *ngIf="element.notifiedStatus == true">{{element.notificationMessage}}</span>
       <span class="unread" *ngIf="element.notifiedStatus != true">{{element.notificationMessage}}</span>
     </td>
@@ -32,7 +32,7 @@
 
   <ng-container matColumnDef="date">
     <th class="w-30 text-center" mat-header-cell *matHeaderCellDef><strong class="font">Received on</strong></th>
-    <td class="pointer text-center" mat-cell *matCellDef="let element" (click)="markAsRead(element,'single')"> 
+    <td class="pointer text-center" mat-cell *matCellDef="let element"> 
       <span class="read" *ngIf="element.notifiedStatus == true">{{element.timeAgo}}</span>
       <span class="unread" *ngIf="element.notifiedStatus != true">{{element.timeAgo}}</span>
     </td>
@@ -42,12 +42,12 @@
     <th class="w-10 text-center" mat-header-cell *matHeaderCellDef> </th>
     <td mat-cell *matCellDef="let element"> 
       <mat-icon *ngIf="element.notifiedStatus == true" class="read readIcon">drafts</mat-icon>
-      <mat-icon *ngIf="element.notifiedStatus != true" class="unread readIcon" (click)="markAsRead(element,'single')" >markunread</mat-icon>
+      <mat-icon *ngIf="element.notifiedStatus != true" class="unread readIcon" >markunread</mat-icon>
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-row (click)="markAsRead(row,'single')" *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
 <div *ngIf="notifications?.length > 0" >
