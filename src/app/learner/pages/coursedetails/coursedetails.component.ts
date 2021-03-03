@@ -162,7 +162,7 @@ export class CoursedetailsComponent implements OnInit {
     this.socketConnector = this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
     });
     // }
-    debugger
+    // debugger
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('about:blank');
     const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
     const token=loginDetails.token
