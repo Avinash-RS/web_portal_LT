@@ -69,7 +69,7 @@ export class AppComponent implements OnInit {
           this.percentage = message.text.slice(0,message.text.lastIndexOf('.')) + '%'; 
         }
         if(this.percentage == '0%'){
-          this.percentage = 'Inprogress'
+          this.percentage = 'Upload in progress'
         }
        console.log(message.count)
         console.log(this.percentage)
