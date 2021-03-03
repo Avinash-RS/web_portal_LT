@@ -166,10 +166,11 @@ export class CoursedetailsComponent implements OnInit {
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('about:blank');
     const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
     const token=loginDetails.token
+  
   // const cryptoInfo = CryptoJS.AES.encrypt(JSON.stringify( {token} ), '(!@#graphql%^&facade!@#)').toString();
   // console.log({ cryptoInfo });
    this.user_token = CryptoJS.AES.decrypt(token, '(!@#graphql%^&facade!@#)').toString(CryptoJS.enc.Utf8);
-
+  // console.log(this.user_token)
   //  console.log({ info2 });
 
   //  const info3 = JSON.parse(info2);
