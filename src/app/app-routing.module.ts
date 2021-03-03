@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { IsLoggedInAuthGuard } from '@core/services/_helpers/is-logged-in-auth.guard';
 import { AuthGuard } from '@core/services/_helpers';
@@ -41,9 +41,9 @@ const routes: Routes = [
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
+    useHash:true,
     scrollPositionRestoration: 'enabled',
-    initialNavigation: 'enabled',
-    preloadingStrategy: PreloadAllModules,
+    // initialNavigation: 'enabled',
   })],
   exports: [RouterModule]
 })
