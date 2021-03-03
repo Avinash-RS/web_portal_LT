@@ -891,11 +891,12 @@ getMessage(): Observable<any> {
       }
     });
   }
-  markAsRead(notifications: any) {
+  markAsRead(notifications: any, userId) {
     return this.Apollo.query({
       query: markAsRead,
       variables: {
-        notifications
+        notifications,
+        userId
       }
     });
   }
