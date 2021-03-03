@@ -144,6 +144,12 @@ export class ProjectMobileComponent implements OnInit {
   }
 
   uploadDoc(event, project, submitAction) {
+    const filePath = event.target.files[0].name;
+    var re = /(\.jpg|\.jpeg|\.png|\.pdf|\.mp4)$/i;
+    if (!re.exec(filePath)) {
+      this.toastr.warning("Upload a valid file format");
+      return;
+    }
     let fileSizeval = 0;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < event.target.files.length; i++) {
