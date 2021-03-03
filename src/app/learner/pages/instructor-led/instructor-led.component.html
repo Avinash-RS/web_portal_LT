@@ -196,7 +196,7 @@
         <h3 class="headLine">Upcoming Sessions and Recorded Sessions</h3>
         <button class="btn btn-light attandanceShow" *ngIf="sessionAttendance?.length" (click)="showModal(attendanceDialog)">Attendance</button>
       </div>
-      <mat-nav-list class="listofSessionContainer" style="width: 100% !important;">
+      <mat-nav-list class="listofSessionContainer" style="">
         <mat-list-item *ngFor="let los of listOfSessions" class="listofSessionCards">
           <mat-card class="sessionCard" (click)="useSession(los)">
             <div class="row d-flex justify-content-start">

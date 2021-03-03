@@ -118,6 +118,9 @@
     }
 }
 .course-list {
+    // height: 500px;
+    // overflow-x: hidden;
+    // overflow-y: scroll;
     @media only screen and (max-width: 576px) {
         border-top: 1px solid #cdcdcd;
         margin-top: 15px;
@@ -267,12 +270,7 @@
         text-align: center;
     }
 }
-// .listofSessionContainer {
-//     @media only screen and (max-width: 768px) {
-//         display: flex;
-//         justify-content: space-between;
-//     }
-// }
+
 // .listofSessionCards {
 //     @media only screen and (max-width: 768px) {
 //         width: 48%;
@@ -538,3 +536,9 @@
     height: 35px;
     width: 35px;
   }
+  .listofSessionContainer {
+    width: 100% !important;
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
