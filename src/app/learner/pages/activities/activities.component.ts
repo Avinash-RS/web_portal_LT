@@ -167,6 +167,7 @@ export class ActivitiesComponent implements OnInit {
   spinnerType = SPINNER.circle;
   loaderText = 'Downloading...';
   isProgressBar = false;
+  emptyAssignment = false;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
     private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
     public route: Router, public datePipe: DatePipe, private ngxLoader: NgxUiLoaderService) {
@@ -385,6 +386,11 @@ export class ActivitiesComponent implements OnInit {
       if (data.data.getAssignmentmoduleData.success) {
         // this.assignmentMessage = true;
         this.assignmentContent = data?.data?.getAssignmentmoduleData?.data[0];
+        if (this.assignmentContent.length > 0) {
+          this.emptyAssignment = true;
+        } else {
+
+        }this.emptyAssignment = false
         if (
           this.assignmentContent.courseStartDate &&
           this.assignmentContent.courseEndDate
