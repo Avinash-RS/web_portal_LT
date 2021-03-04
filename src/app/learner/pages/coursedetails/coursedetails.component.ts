@@ -99,6 +99,7 @@ export class CoursedetailsComponent implements OnInit {
   isNextEnable = true;
   isprevEnable = true;
   selectedTabIndex: any = 0;
+  selectedQATabIndex: any = 0;
   detailData: any;
   batchDetails: any;
   disableThreads: boolean;
@@ -842,6 +843,10 @@ export class CoursedetailsComponent implements OnInit {
     if (file.doc_type.includes("audio")) {
       this.fileType = 'audio';
     }
+    if (file.doc_type.includes("link")) {
+      this.fileType = 'link';
+      this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path);
+    }
 
     if (this.fileType === 'pdf') {
       file.gdocs = '';
@@ -1007,7 +1012,16 @@ export class CoursedetailsComponent implements OnInit {
 
     }
   }
-
+  openAskQuestions(templateRef: TemplateRef<any>){
+this.dialog.open(templateRef, {
+  // scrollStrategy: new NoopScrollStrategy(),
+  width: '60%',
+  height: '80%',
+  scrollStrategy: new NoopScrollStrategy(),
+  closeOnNavigation: true,
+  //disableClose: true,
+});
+}
 }
 
 

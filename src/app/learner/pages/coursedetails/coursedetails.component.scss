@@ -1038,3 +1038,76 @@ color:grey
     border-width: 11px;
     margin-top: -11px;
 }
+.mr-10px{
+margin-right: 10px !important;
+}
+.qaClose{
+    position: absolute;
+    right:0px;
+    z-index:10;
+}
+.questionInput{
+    padding: 20px 20px 10px 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    p{
+        font-size: 16px;
+    }
+    textarea{
+        width: 100% !important;
+        height: 350px;
+    }
+}
+.btn{
+    line-height: 1 !important;
+    border-radius: 2px;
+}
+.btn-primary{
+    color:white;
+    background-color: #c02222;
+    border-color: #c02222;
+}
+.btn-primary-outline{
+    color:black !important;
+    background-color: white;
+    border-color: #c02222;
+}
+.btn-primary-outline:hover:focus{
+    color:black;
+    background-color: white;
+    border-color: #c02222;
+}
+.btn-primary:hover:focus{
+    color:white;
+    background-color: #c02222;
+    border-color: #c02222;
+}
+::ng-deep.askQuestionsContainer .mat-tab-label{
+    height: 30px !important;
+}
+
+.myQuestions{
+    padding: 20px 20px 10px 30px;
+}
+
+.qaBox{
+    padding:10px;
+    border: 1px solid grey;
+    margin:5px 0;
+}
+.qaBox:hover{
+    border: 1px solid rgb(141, 141, 252);
+}
+.QuestionMeta{
+    color:grey;
+    display: flex;
+    align-items: baseline;
+    p{
+        font-size: small;
+        margin-right: 10px !important;
+    }
+}
+.badge {
+    padding:5px !important;
+}
