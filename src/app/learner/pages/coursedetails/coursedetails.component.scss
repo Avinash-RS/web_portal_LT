@@ -2,6 +2,9 @@
 .p-xy-10{
     padding: 10px;
 }
+.m-t-10{
+    margin-top:10px;
+}
 .backarrow{
     color:black
 }
@@ -1088,19 +1091,40 @@ margin-right: 10px !important;
 }
 
 .myQuestions{
-    padding: 20px 20px 10px 30px;
+    margin: 20px 0px 0px 0px;
+    padding-right: 5px;
+    overflow-y: scroll;
+    height: 400px;
 }
 
 .qaBox{
     padding:10px;
     border: 1px solid grey;
     margin:5px 0;
+    .answer{
+        color:#333333;
+        margin-bottom: 5px !important;
+    }
+    .quesiton{
+        font-weight: bold;
+        margin-bottom: 5px !important;
+    }
 }
 .qaBox:hover{
     border: 1px solid rgb(141, 141, 252);
 }
+.qaBox .userAccount{
+    margin-bottom:10px;
+    color:#666666;
+    font-size: 12px !important;
+
+    i{
+        color:#5C6873 !important;
+        font-size: 14px;
+    }
+ }
 .QuestionMeta{
-    color:grey;
+    color:#999999;
     display: flex;
     align-items: baseline;
     p{

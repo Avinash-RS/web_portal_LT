@@ -113,6 +113,7 @@ export class CoursedetailsComponent implements OnInit {
   selectedModuleData: any;
   titleBar: boolean = false;
   user_token;
+  qaFilterKey:any="All"
 
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
   @ViewChild('rationPopup') rationPopup: TemplateRef<any>;
@@ -1011,6 +1012,11 @@ export class CoursedetailsComponent implements OnInit {
       this.filterData =[]
 
     }
+  }
+
+  filterQAList(){
+    // filterQAList
+    alert("filter coming soon")
   }
   openAskQuestions(templateRef: TemplateRef<any>){
 this.dialog.open(templateRef, {

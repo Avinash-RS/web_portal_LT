@@ -426,42 +426,39 @@
             <mat-tab label="My Q&A">
                 <div class="myQuestions">
                     <div class="qaBox">
-                        <p><strong>Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</strong></p>
+                        <p class="quesiton">Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</p>
+                        <div class="QuestionMeta">
+                            <p>Asked on 20 Jan 2020</p>
+                            <div class="badge badge-warning">Answered</div>
+                        </div>
+                        
+                    </div>
+                    <div class="qaBox">
+                        <p class="quesiton">Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</p>
+                        <div class="QuestionMeta">
+                            <p>Asked on 20 Jan 2020</p>
+                            <div class="badge badge-warning">Answered</div>
+                        </div>
+                        
+                    </div>
+                    <div class="qaBox">
+                        <p class="quesiton">Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</p>
                         <div class="QuestionMeta">
                             <p>Asked on 20 Jan 2020</p>
                             <div class="badge badge-success">Answered</div>
                         </div>
-                        <p>During the launch the preset is set and its ready to go so is must dbalk  kdia kkjdla flkajld flakdsljfl aiijla ldjflakjdlfa djlfks dlkf</p>
+                        <p class="answer">During the launch the preset is set and its ready to go so is must dbalk  kdia kkjdla flkajld flakdsljfl aiijla ldjflakjdlfa djlfks dlkf</p>
                         <div class="QuestionMeta">
                             <p>Answered on 20 Jan 2020</p>
                         </div>
                     </div>
                     <div class="qaBox">
-                        <p><strong>Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</strong></p>
-                        <div class="QuestionMeta">
-                            <p>Asked on 20 Jan 2020</p>
-                            <div class="badge badge-warning">Unanswered</div>
-                        </div>
-                    
-                    </div>
-                    <div class="qaBox">
-                        <p><strong>Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</strong></p>
+                        <p class="quesiton">Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</p>
                         <div class="QuestionMeta">
                             <p>Asked on 20 Jan 2020</p>
                             <div class="badge badge-success">Answered</div>
                         </div>
-                        <p>During the launch the preset is set and its ready to go so is must dbalk  kdia kkjdla flkajld flakdsljfl aiijla ldjflakjdlfa djlfks dlkf</p>
-                        <div class="QuestionMeta">
-                            <p>Answered on 20 Jan 2020</p>
-                        </div>
-                    </div>
-                    <div class="qaBox">
-                        <p><strong>Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</strong></p>
-                        <div class="QuestionMeta">
-                            <p>Asked on 20 Jan 2020</p>
-                            <div class="badge badge-success">Answered</div>
-                        </div>
-                        <p>During the launch the preset is set and its ready to go so is must dbalk  kdia kkjdla flkajld flakdsljfl aiijla ldjflakjdlfa djlfks dlkf</p>
+                        <p class="answer">During the launch the preset is set and its ready to go so is must dbalk  kdia kkjdla flkajld flakdsljfl aiijla ldjflakjdlfa djlfks dlkf</p>
                         <div class="QuestionMeta">
                             <p>Answered on 20 Jan 2020</p>
                         </div>
@@ -469,44 +466,59 @@
                 </div>
             </mat-tab>
             <mat-tab label="All Q&A">
+                <div class="d-flex justify-content-end">
+                    <div class="m-t-10"><span>Sort by: &nbsp;</span> 
+                        <select class="sel-pad" [(ngModel)]="qaFilterKey" (change)="filterQAList()">
+                            <option [value]="'All'">Newest</option>
+                            <option [value]="'Oldest'">Oldest</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="myQuestions">
                     <div class="qaBox">
-                        <p><strong>Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</strong></p>
+                        <div class="userAccount"><i class="lxp-AccountCircle"></i>&nbsp; User Name</div>
+                        <p class="quesiton">Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</p>
                         <div class="QuestionMeta">
                             <p>Asked on 20 Jan 2020</p>
                             <div class="badge badge-success">Answered</div>
                         </div>
-                        <p>During the launch the preset is set and its ready to go so is must dbalk  kdia kkjdla flkajld flakdsljfl aiijla ldjflakjdlfa djlfks dlkf</p>
+                        <p class="answer">During the launch the preset is set and its ready to go so is must dbalk  kdia kkjdla flkajld flakdsljfl aiijla ldjflakjdlfa djlfks dlkf</p>
                         <div class="QuestionMeta">
                             <p>Answered on 20 Jan 2020</p>
                         </div>
                     </div>
                     <div class="qaBox">
-                        <p><strong>Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</strong></p>
-                        <div class="QuestionMeta">
-                            <p>Asked on 20 Jan 2020</p>
-                            <div class="badge badge-warning">Unanswered</div>
-                        </div>
-                    
-                    </div>
-                    <div class="qaBox">
-                        <p><strong>Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</strong></p>
+                        <div class="userAccount"><i class="lxp-AccountCircle"></i>&nbsp; User Name</div>
+                        <p class="quesiton">Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</p>
                         <div class="QuestionMeta">
                             <p>Asked on 20 Jan 2020</p>
                             <div class="badge badge-success">Answered</div>
                         </div>
-                        <p>During the launch the preset is set and its ready to go so is must dbalk  kdia kkjdla flkajld flakdsljfl aiijla ldjflakjdlfa djlfks dlkf</p>
+                        <p class="answer">During the launch the preset is set and its ready to go so is must dbalk  kdia kkjdla flkajld flakdsljfl aiijla ldjflakjdlfa djlfks dlkf</p>
                         <div class="QuestionMeta">
                             <p>Answered on 20 Jan 2020</p>
                         </div>
                     </div>
                     <div class="qaBox">
-                        <p><strong>Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</strong></p>
+                        <div class="userAccount"><i class="lxp-AccountCircle"></i>&nbsp; User Name</div>
+                        <p class="quesiton">Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</p>
                         <div class="QuestionMeta">
                             <p>Asked on 20 Jan 2020</p>
                             <div class="badge badge-success">Answered</div>
                         </div>
-                        <p>During the launch the preset is set and its ready to go so is must dbalk  kdia kkjdla flkajld flakdsljfl aiijla ldjflakjdlfa djlfks dlkf</p>
+                        <p class="answer">During the launch the preset is set and its ready to go so is must dbalk  kdia kkjdla flkajld flakdsljfl aiijla ldjflakjdlfa djlfks dlkf</p>
+                        <div class="QuestionMeta">
+                            <p>Answered on 20 Jan 2020</p>
+                        </div>
+                    </div>
+                    <div class="qaBox">
+                        <div class="userAccount"><i class="lxp-AccountCircle"></i>&nbsp; User Name</div>
+                        <p class="quesiton">Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</p>
+                        <div class="QuestionMeta">
+                            <p>Asked on 20 Jan 2020</p>
+                            <div class="badge badge-success">Answered</div>
+                        </div>
+                        <p class="answer">During the launch the preset is set and its ready to go so is must dbalk  kdia kkjdla flkajld flakdsljfl aiijla ldjflakjdlfa djlfks dlkf</p>
                         <div class="QuestionMeta">
                             <p>Answered on 20 Jan 2020</p>
                         </div>
