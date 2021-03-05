@@ -114,10 +114,10 @@
                           <span><strong>{{'Upload' | translate }}</strong></span>
                         </div>
                         <div class="">
-                          <span class="uploadIcon" *ngIf="file.grade_status != 'Evaluated' && file?.enableUpload">
+                          <span class="uploadIcon" *ngIf="file.grade_status != 'Evaluated'">
                             <i (click)="fileInput.click()" class="fa fa-upload searchicon ml-3 tooltip-350 pointer" [tooltip]="popTemplate" placement="bottom" aria-hidden="true"></i>
                           </span>
-                          <span class="uploadIcon" *ngIf="file.grade_status === 'Evaluated' && !file?.enableUpload">
+                          <span class="uploadIcon" *ngIf="file.grade_status === 'Evaluated'">
                             <i  class="fa fa-upload ml-3 tooltip-350 pointer gradedUpload" aria-hidden="true"></i>
                           </span>
                           <input class="form-control border-right-0" type='file' id="upload-photo" #fileInput (change)="uploadAssignmentsFile($event,file._id,res?.modulename,mod?.topicname,file.type_name,file?.score,file?.endDate,file?.path)">
@@ -177,7 +177,7 @@
         </div>
       </div> -->
 
-      <div *ngIf="emptyAssignment && !assigmentMobileResponsive">
+      <div *ngIf="assignmentContent?.coursedetails.length < 1 && !assigmentMobileResponsive">
         <mat-card class="noSessionCard color-yellow-card-status">
           <div class="row mar-t-12">
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
@@ -370,7 +370,7 @@
               <div class="col-5">
                 <div class="f_size_16 f_wt_600 align-center margin-b-9">Your work</div>
                    <!--ranjan-->
-                   <!-- <div class="upload-scorm-container">
+                   <div class="upload-scorm-container">
                     <div class="upload-detail">
                         <div>
                             {{uploadedPercentage >= 100 ? 'Uploaded' : 'Uploading'}}
@@ -383,7 +383,7 @@
                         <mat-progress-bar mode="determinate" class="scorm-upload-progress" [value]="uploadedPercentage">
                         </mat-progress-bar>
                     </ng-container>
-                  </div> -->
+                  </div>
                   <!--ranjan-->
                 <mat-accordion class="iterationAccordion" *ngFor="let itrdata of perform.performActivity.iterationDetails; let i = index" (click)="getSelectedIndex(i);">
                   <mat-expansion-panel [expanded]="selectedIndex === i">
@@ -723,28 +723,12 @@
 
                   <div class="col-md-4 col-sm-12 col-12 third" *ngIf="project.projectActivity.grade_status !== 'Evaluated'">
                     <div class="f_size_16 f_wt_600 align-center work">Your work</div>
-                      <!--ranjan-->
-                   <!-- <div class="upload-scorm-container">
-                    <div class="upload-detail">
-                        <div>
-                            {{uploadedPercentage >= 100 ? 'Uploaded' : 'Uploading'}}
-                        </div>
-                        <div>
-                            {{uploadedPercentage == undefined ? '0%' : uploadedPercentage + '%'}}
-                        </div>
-                    </div>
-                    <ng-container>
-                        <mat-progress-bar mode="determinate" class="scorm-upload-progress" [value]="uploadedPercentage">
-                        </mat-progress-bar>
-                    </ng-container>
-                  </div> -->
-                  <!--ranjan-->
                     <div [ngClass]="project.projectActivity.showLearnerList ? 'box-0-3' : 'box-0-2'">
                       <div class="fileData ml-auto mr-auto mb-3" *ngFor="let item of project.projectActivity.videodetails">
                         <mat-icon *ngIf="item.doc_type == 'video/mp4'" class="videoPlay float-left">play_circle_outline</mat-icon>
                         <mat-icon *ngIf="item.doc_type == 'image/jpeg'|| item.doc_type == 'image/png' || item.doc_type =='image/jpg'" class="videoPlay float-left">photo</mat-icon>
                         <mat-icon *ngIf="item.doc_type == 'application/pdf' || item.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'" class="videoPlay float-left">picture_as_pdf </mat-icon>
-                        <span class="uploadfileName" *ngIf="item.name.length <= 19"> {{item.name}} </span>
+                        <span class="uploadfileName" *ngIf="item.name.length < 19"> {{item.name}} </span>
                         <!-- <span class="uploadfileName" *ngIf="item.name.length > 28" matTooltip="{{item.name}}" matTooltipClass="custom-mat-tooltip">
                           {{(item.name| slice:0:28)+'...'}}
                         </span> -->
