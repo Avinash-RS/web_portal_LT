@@ -26,7 +26,6 @@ export class InterceptorService implements HttpInterceptor {
     });
     return next.handle(clone).pipe(
       map((event: HttpEvent<any>) => {
-        // console.log('res', event); 
         if (event && event['body'] && event['body']['data']) {
           let bodyData = event['body']['data'];
           const dynKey = Object.keys(bodyData)[0]
@@ -40,7 +39,6 @@ export class InterceptorService implements HttpInterceptor {
       }),
       retry(3),
       catchError((error: HttpErrorResponse) => {
-        console.log('eror', error);
         if (error && error.status == 401) {
           this.toast.warning('Unauthorized entry..');
           this.logout();

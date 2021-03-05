@@ -55,7 +55,6 @@ export class NewHomeComponent implements OnInit {
         }
       });
     }, (error) => {
-      console.log('there was an error sending the query', error);
     });
 
   }

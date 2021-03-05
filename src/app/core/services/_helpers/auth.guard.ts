@@ -17,13 +17,11 @@ export class AuthGuard implements CanLoad {
     private alert: AlertServiceService,
     private router: Router,
   ) {
-    console.log('consruc auth');
     
    }
   // Added by Avinasi
  
     //    else {
-    //     console.log('not login');
     //     this.router.navigate(['/Learner/login']);
     //     return false;
     //   }
@@ -34,18 +32,15 @@ export class AuthGuard implements CanLoad {
     const userDetailes = localStorage.getItem('role');
     const token =  localStorage.getItem('token')||sessionStorage.getItem('token');
     if (token) {
-      console.log('auth');
       
       // userdetail is present // authenticated user
       // url should not start from admin - can be /Larner or anything
       // if profile updated and trying to go login/reg
       // if (userDetailes == 'learner') {
-      //   console.log('login');
         
       //   this.router.navigate(['/Learner/MyCourse']);
         return true;
       } else {
-        console.log('auth1');
         this.router.navigate(['/Learner/login']);
         return false;
       }
@@ -57,17 +52,14 @@ export class AuthGuard implements CanLoad {
       const token =  localStorage.getItem('token')||sessionStorage.getItem('token');;
     
       if (token) {
-        console.log('load auth');
         // userdetail is present // authenticated user
         // url should not start from admin - can be /Larner or anything
         // if profile updated and trying to go login/reg
         // if (userDetailes == 'learner') {
-        //   console.log('login');
           
           // this.router.navigate(['/Learner/MyCourse']);
           return true;
         } else {
-          console.log('load auth1');
           this.router.navigate(['/Learner/login']);
           return false;
         }

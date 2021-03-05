@@ -64,7 +64,6 @@ export class WcaService {
   createCourse(course) {
     // httpOptions.headers.append('Authorization', 'Bearer ' + this.token);
     // httpOptions.headers.append('Content-Type' , 'application/json');
-    // console.log(httpOptions)
     return this.http.post(this.envCourseApi + 'coursecreation', course, httpOptions);
   }
 

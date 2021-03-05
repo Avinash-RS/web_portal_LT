@@ -57,14 +57,9 @@ export class GraphqlModule {
     });
 
     const Errlink = onError(({ graphQLErrors, networkError, response, operation }) => {
-      // console.log(operation);
       if (graphQLErrors) {
         graphQLErrors.forEach(({ message, locations, path }) => {
-          console.log(
-            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-          );
           if (message.includes('TokenExpiredError') || message.includes('JsonWebTokenError')) {
-            console.log('inside');
             localStorage.clear();
             sessionStorage.clear();
             this.services.getIpAddressByUrl();
@@ -73,7 +68,7 @@ export class GraphqlModule {
         }
         );
       }
-      if (networkError) { console.log(`[Network error]: ${networkError}`); }
+      if (networkError) { }
     });
 
     const link = middleware.concat(http);

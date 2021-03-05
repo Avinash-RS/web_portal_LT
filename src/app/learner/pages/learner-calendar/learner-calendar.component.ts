@@ -53,6 +53,7 @@ export class LearnerCalendarComponent implements OnInit {
   constructor(public translate: TranslateService, private service: LearnerServicesService, private router: Router) {}
 
   ngOnInit() {
+    console.log("learner calendrer")
     this.translate.use(localStorage.getItem('language'));
     this.showUpcoming = '';
     this.showOngoing = '';

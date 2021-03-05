@@ -71,7 +71,6 @@ export class RegistrationComponent implements OnInit {
     }
 
     onError(errorDetails: RecaptchaErrorParameters): void {
-      console.log(`reCAPTCHA error encountered; details:`, errorDetails);
     }
 
   get f() { return this.registerForm.controls; }
@@ -115,7 +114,6 @@ export class RegistrationComponent implements OnInit {
     this.router.navigateByUrl('/Learner/login');
   }
   onSubmit() {
-    console.log(this.registerForm);
     
     if (this.registerForm.valid) {
       this.Submit();
