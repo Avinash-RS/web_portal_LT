@@ -56,6 +56,7 @@ export class ViewAllnotificationsComponent implements OnInit {
   });
 }
 markAsRead(notification, type) {
+  this.notificationMarkRead = [];
   if (type === 'single') {
   this.notificationMarkRead.push(notification._id);
   } else if (type === 'all') {
@@ -63,7 +64,7 @@ markAsRead(notification, type) {
     this.notificationMarkRead.push(element._id);
   });
 }
-  this.Lservice.markAsRead(this.notificationMarkRead).subscribe((result: any) => {
+  this.Lservice.markAsRead(this.notificationMarkRead, this.userId).subscribe((result: any) => {
     if (result.data.markAsRead.success === true) {
       this.viewAllnotifications();
     }

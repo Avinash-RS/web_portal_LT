@@ -1060,8 +1060,8 @@ export const bulkclaimcourse = gql`
 `;
 
 export const markAsRead = gql`
-  mutation markAsRead($notifications:[String]) {
-    markAsRead(notifications : $notifications) {
+  mutation markAsRead($notifications:[String], $userId: String) {
+    markAsRead(notifications : $notifications, userId : $userId) {
       message
       success
     }

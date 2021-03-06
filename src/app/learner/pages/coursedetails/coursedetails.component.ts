@@ -19,6 +19,7 @@ import * as _ from 'lodash';
 import { LegendPosition } from 'ag-grid-community';
 import { filter } from 'underscore';
 // import { debugger } from 'fusioncharts';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-coursedetails',
@@ -163,8 +164,22 @@ export class CoursedetailsComponent implements OnInit {
     this.socketConnector = this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
     });
     // }
+    // debugger
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('about:blank');
-    this.user_token = localStorage.getItem("token")
+    const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
+    const token=loginDetails.token
+  
+  // const cryptoInfo = CryptoJS.AES.encrypt(JSON.stringify( {token} ), '(!@#graphql%^&facade!@#)').toString();
+  // console.log({ cryptoInfo });
+   this.user_token = CryptoJS.AES.decrypt(token, '(!@#graphql%^&facade!@#)').toString(CryptoJS.enc.Utf8);
+  // console.log(this.user_token)
+  //  console.log({ info2 });
+
+  //  const info3 = JSON.parse(info2);
+
+  //  console.log({ str: info3.str });
+
+   //
     const Feedbackdetail: any = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.checkDetails = Feedbackdetail;

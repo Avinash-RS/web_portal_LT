@@ -69,7 +69,7 @@ export class ToolbarNotificationComponent implements OnInit {
 
   markAsRead(notification) {
     this.notificationMarkRead.push(notification._id);
-    this.Lservice.markAsRead(this.notificationMarkRead).subscribe((result: any) => {
+    this.Lservice.markAsRead(this.notificationMarkRead,this.userId).subscribe((result: any) => {
       if (result.data.markAsRead.success === true) {
         this.getNotification();
       }
