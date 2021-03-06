@@ -97,7 +97,6 @@ export class MycourseItemComponent implements OnInit {
     this.router.navigateByUrl('/Learner/selfLearning', { state: { data: data1 } });
   }
   gotoDesc(c) {
-    console.log('c', c);
     const detail = {
       id: c.course_id,
       wishlist: c.wishlisted || false,

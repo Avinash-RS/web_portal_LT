@@ -41,7 +41,6 @@ export class ToolbarNotificationComponent implements OnInit {
                   
                   const urlHeader = e.url.split("/")
                   const headerPages = 'MyCourse';
-                  console.log(urlHeader, headerPages)
                   if (urlHeader[2] == headerPages) {
                     this.getNotification();
                   }else{

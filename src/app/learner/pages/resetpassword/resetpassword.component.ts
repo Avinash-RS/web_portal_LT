@@ -96,7 +96,6 @@ export class ResetpasswordComponent implements OnInit {
   }
 
   onError(errorDetails: RecaptchaErrorParameters): void {
-    console.log(`reCAPTCHA error encountered; details:`, errorDetails);
   }
 
 
@@ -140,7 +139,6 @@ export class ResetpasswordComponent implements OnInit {
     var encryptedpassword = CryptoJS.AES.encrypt(this.resetForm.value.password, this.secretKey.trim()).toString();
     // var decryptname = CryptoJS.AES.decrypt(encryptedname, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     // var decryptpassword = CryptoJS.AES.decrypt(encryptedpassword, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
-    // console.log(decryptname,decryptpassword)
     // return
     this.service.resetPassword(encryptedname,encryptedpassword).subscribe((data: any) => {
       if (data.data.get_forgot_password_byresetpassword.success === 'true') {

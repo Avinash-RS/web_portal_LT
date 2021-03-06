@@ -148,6 +148,7 @@ export class ProfileComponent implements OnInit {
   duplicateValueCheck = [];
 
   ngOnInit() {
+    console.log("Profile component")
     this.translate.use(localStorage.getItem('language'));
     if (this.currentUser.is_profile_updated) {
       this.cannotEdit = true;
@@ -214,7 +215,6 @@ export class ProfileComponent implements OnInit {
         const profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].user_profile[0];
         
         this.userData = data.data.view_profile.message[0];
-        // console.log("userData", this.userData)
         if(this.userData?.user_mobile?.mobile_number){
           let mobNumber = this.userData.user_mobile.mobile_number;
           let morphed = mobNumber[0] + mobNumber[1] +"******"+ mobNumber[8] + mobNumber[9];

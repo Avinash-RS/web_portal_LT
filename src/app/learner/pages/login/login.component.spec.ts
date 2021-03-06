@@ -140,7 +140,6 @@ describe('LoginComponent', () => {
     expect(component.login())
     let loginresult;
     loginresult = service.login();
-    console.log(loginresult);
     if (loginresult.data.login) {
       if (loginresult.data.login.success) {
         if (loginresult.data.login && component.loginForm.value.remember_me === true) {
