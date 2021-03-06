@@ -1006,6 +1006,29 @@ export class CoursedetailsComponent implements OnInit {
     })
   }
 
+  submitMyQuestion(){
+    this.Lservice.askaquestion(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,"hello boy").subscribe((data:any)=>{
+      console.log(data)
+      if(data?.data?.bookmark?.success){
+        
+        //this.toastr.success(data?.data?.bookmark?.message)
+      }else{
+       // this.toastr.warning(data?.data?.bookmark?.message)
+      }
+    })
+  }
+
+  questionTabSelection(tab) {
+    if (tab.index === 1) {
+      this.Lservice.getMyQuestion(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle).subscribe((data:any)=>{
+        console.log(data)
+      })
+    } else if (tab.index === 2){
+      
+    }else{
+
+    }
+  }
   filterToc(){
     this.bkup_Toc = JSON.parse(JSON.stringify(this.scromModuleData));
     this.filterData = []

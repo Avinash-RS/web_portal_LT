@@ -1083,3 +1083,30 @@ export const set_bookmark = gql`
     }
   }
 `;
+export const set_askaquestion = gql`
+  mutation askaquestion($user_id:String!,$course_id:String,$module:String,$topic:String,$question:String) {
+    askaquestion(user_id:$user_id,course_id:$course_id,module:$module,topic:$topic,question:$question) {
+      message
+      success
+    }
+  }
+`;
+export const   getMyQuestion = gql`
+mutation getmyque($user_id:String,$course_id:String,$module:String,$topic:String,){
+  getmyque(user_id:$user_id,course_id:$course_id,module:$module,topic:$topic){
+success
+message{
+  filteredValue
+  {
+    question{
+      que_id
+      que
+      ans
+      askDate
+      ansDate
+    }
+  }
+}
+}
+}
+`;

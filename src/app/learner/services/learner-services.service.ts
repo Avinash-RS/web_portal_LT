@@ -11,7 +11,7 @@ import { addTopicreference, bulkclaimcourse, claimcourse, createGuidanceRequest,
        playerstatusrealtime, resendOtponprofile, saveAttendies, updateEmailonprofile,
        updateMobileonprofile, updateProfile, updateVerifyotpmobileonProfile,
        userMstrdata, userRegistration, userRegistrationdone, userRegistrationmobileOtpsend,
-         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, viewProfile1, user_experience, set_bookmark } from './operations/learner_mutation';
+         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, viewProfile1, user_experience, set_bookmark, set_askaquestion, getMyQuestion } from './operations/learner_mutation';
 import {
 boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignmentmoduleData,
  getcalenderactivity, getCountForCategories, getCountForJobroleCategories, getCoureBasedOnCatalog,
@@ -25,7 +25,7 @@ boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignm
    getModuletopic, getOrganizationbyId, getPopularCourse, getQualificationdetails,
      getSpecificationdetails, getSubCategory, getTrendingcourse, getUserdetail,
      getUserdetailUsername, listContent, login, playerModuleAndTopic, singleBatchInfo,
-     syllabusofParticularScorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData, get_batchwise_learner_dashboard_data, get_learner_dashboard_count
+     syllabusofParticularScorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData, get_batchwise_learner_dashboard_data, get_learner_dashboard_count,
 } from './operations/learner_query';
 
 
@@ -1031,6 +1031,31 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
         module,
         topic,
         bookmark
+      }
+    });
+  }
+  
+  askaquestion(user_id,course_id,module,topic,question) {
+    return this.Apollo.query({
+      query: set_askaquestion,
+      variables: {
+        user_id,
+        course_id,
+        module,
+        topic,
+        question
+      }
+    });
+  }
+
+  getMyQuestion(user_id,course_id,module,topic) {
+    return this.Apollo.query({
+      query: getMyQuestion,
+      variables: {
+        user_id,
+        course_id,
+        module,
+        topic,
       }
     });
   }
