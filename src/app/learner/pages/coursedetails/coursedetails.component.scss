@@ -2,6 +2,9 @@
 .p-xy-10{
     padding: 10px;
 }
+.m-t-10{
+    margin-top:10px;
+}
 .backarrow{
     color:black
 }
@@ -1037,4 +1040,99 @@ color:grey
     border-left-color: #eaecf1;
     border-width: 11px;
     margin-top: -11px;
+}
+.mr-10px{
+margin-right: 10px !important;
+}
+.qaClose{
+    position: absolute;
+    right:0px;
+    z-index:10;
+    cursor: pointer;
+}
+.questionInput{
+    padding: 20px 20px 10px 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    p{
+        font-size: 16px;
+    }
+    textarea{
+        width: 100% !important;
+        height: 350px;
+    }
+}
+.btn{
+    line-height: 1 !important;
+    border-radius: 2px;
+}
+.btn-primary{
+    color:white;
+    background-color: #c02222;
+    border-color: #c02222;
+}
+.btn-primary-outline{
+    color:black !important;
+    background-color: white;
+    border-color: #c02222;
+}
+.btn-primary-outline:hover:focus{
+    color:black;
+    background-color: white;
+    border-color: #c02222;
+}
+.btn-primary:hover:focus{
+    color:white;
+    background-color: #c02222;
+    border-color: #c02222;
+}
+::ng-deep.askQuestionsContainer .mat-tab-label{
+    height: 30px !important;
+}
+
+.myQuestions{
+    margin: 20px 0px 0px 0px;
+    padding-right: 5px;
+    overflow-y: auto;
+    height: 400px;
+}
+
+.qaBox{
+    padding:10px;
+    border: 1px solid grey;
+    margin:5px 0;
+    .answer{
+        color:#333333;
+        margin-bottom: 5px !important;
+    }
+    .quesiton{
+        font-weight: bold;
+        margin-bottom: 5px !important;
+    }
+}
+.qaBox:hover{
+    border: 1px solid rgb(141, 141, 252);
+}
+.qaBox .userAccount{
+    margin-bottom:10px;
+    color:#666666;
+    font-size: 12px !important;
+
+    i{
+        color:#5C6873 !important;
+        font-size: 14px;
+    }
+ }
+.QuestionMeta{
+    color:#999999;
+    display: flex;
+    align-items: baseline;
+    p{
+        font-size: small;
+        margin-right: 10px !important;
+    }
+}
+.badge {
+    padding:5px !important;
 }
