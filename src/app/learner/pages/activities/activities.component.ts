@@ -45,7 +45,7 @@ export class ActivitiesComponent implements OnInit {
   courseid: any;
   userDetail: any;
   docpath: any = null;
-  assFile: File;
+  assignmentFile: File;
   openList = false;
   @ViewChild(MatAccordion) accordion: MatAccordion;
   isCollapsed = false;
@@ -168,6 +168,7 @@ export class ActivitiesComponent implements OnInit {
   loaderText = 'Downloading...';
   isProgressBar = false;
   emptyAssignment = false;
+  assignmentpreContent;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
     private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
     public route: Router, public datePipe: DatePipe, private ngxLoader: NgxUiLoaderService) {
@@ -379,99 +380,49 @@ export class ActivitiesComponent implements OnInit {
 
   // getperformActivityData
   getAssignmentmoduleData() {
-    this.Lservice.getAssignmentmoduleData(
-      this.courseid,
-      this.userDetail.user_id
-    ).subscribe((data: any) => {
+    this.Lservice.getAssignmentmoduleData(this.userDetail.user_id,this.courseid).subscribe((data: any) => {
       if (data.data.getAssignmentmoduleData.success) {
-        // this.assignmentMessage = true;
-        this.assignmentContent = data?.data?.getAssignmentmoduleData?.data[0];
-        if (this.assignmentContent?.coursedetails?.length > 0) {
-          this.emptyAssignment = false;
-        } else {
-          this.emptyAssignment = true
-        }
+       console.log("Assignment", data)
+       this.assignmentContent = data?.data?.getAssignmentmoduleData?.data;
+       this.assignmentpreContent = data?.data?.getAssignmentmoduleData
+      //   if (this.assignmentContent?.coursedetails?.length > 0) {
+      //     this.emptyAssignment = false;
+      //   } else {
+      //     this.emptyAssignment = true
+      //   }
 
-        if (
-          this.assignmentContent.courseStartDate &&
-          this.assignmentContent.courseEndDate
-        ) {
-          const batchStartDate = new Date(this.assignmentContent.courseStartDate);
-          const batchEndDate = new Date(this.assignmentContent.courseEndDate);
-          // this.courseStartDate = moment(batchStartDate).format('DD-MM-YYYY');
-          // this.courseEndDate = moment(batchEndDate).format('DD-MM-YYYY');
-
+        if (this.assignmentpreContent.courseStartDate && this.assignmentpreContent.courseEndDate) 
+        {
+          const batchStartDate = new Date(this.assignmentpreContent.courseStartDate);
+          const batchEndDate = new Date(this.assignmentpreContent.courseEndDate);
           this.courseStartDate = moment(batchStartDate);
           this.courseEndDate = moment(batchEndDate);
 
-          this.assignmentContent.coursedetails.forEach((element) => {
-            element.moduledetails.forEach((moduleData) => {
-              moduleData.resourse.files.forEach((fileData) => {
-                if (fileData.startDate && fileData.endDate) {
-                  //---------
-                  // const date1 = JSON.parse(JSON.stringify(fileData.startDate));
-                  // const date2 = JSON.parse(JSON.stringify(fileData.endDate));
-                  // const startDate = new Date(date1);
-                  // const endDate = new Date(date2);
-
-                  let date1 = new Date(fileData.startDate);
-                  fileData.assignmentStartDate = moment(date1);
-                  let date2 = new Date(fileData.endDate);
-                  fileData.assignmentEndDate = moment(date2);
-
-                  // fileData.assignmentStartDate = moment(startDate).format(
-                  //   'DD-MM-YYYY HH:mm'
-                  // );
-                  // fileData.assignmentEndDate = moment(endDate).format(
-                  //   'DD-MM-YYYY HH:mm'
-                  // );
-
-                  // if (
-                  //   moment().format('DD-MM-YYYY HH:mm') >=
-                  //   fileData.assignmentStartDate
-                  // ) {
-                  //   fileData.enableView = true;
-                  // } else {
-                  //   fileData.enableView = false;
-                  // }
-                  // if (
-                  //   moment().format('DD-MM-YYYY HH:mm') >=
-                  //   fileData.assignmentStartDate &&
-                  //   moment().format('DD-MM-YYYY') <= this.courseEndDate
-                  // ) {
-                  //   fileData.enableUpload = true;
-                  // } else if (
-                  //   moment().format('DD-MM-YYYY HH:mm') <
-                  //   fileData.assignmentStartDate ||
-                  //   moment().format('DD-MM-YYYY') > this.courseEndDate
-                  // ) {
-                  //   fileData.enableUpload = false;
-                  // }
-
-                  if (
-                    moment() >=
-                    fileData.assignmentStartDate
-                  ) {
-                    fileData.enableView = true;
+          this.assignmentContent.forEach((fileData) => {
+                if (fileData.files.activitystartdate && fileData.files.activityenddate) {
+                  let date1 = new Date(fileData.files.activitystartdate);
+                  fileData.files.assignmentStartDate = moment(date1);
+                  let date2 = new Date(fileData.files.activityenddate);
+                  fileData.files.assignmentEndDate = moment(date2);
+                  if (moment() >= fileData.files.assignmentStartDate) {
+                    fileData.files.enableView = true;
                   } else {
-                    fileData.enableView = false;
+                    fileData.files.enableView = false;
                   }
 
-                  if (moment() >= fileData.assignmentStartDate &&
+                  if (moment() >= fileData.files.assignmentStartDate &&
                     moment() <= this.courseEndDate) {
-                    fileData.enableUpload = true;
-                  } else if (moment() < fileData.assignmentStartDate ||
+                    fileData.files.enableUpload = true;
+                  } else if (moment() < fileData.files.assignmentStartDate ||
                     moment() > this.courseEndDate) {
-                    fileData.enableUpload = false;
+                    fileData.files.enableUpload = false;
                   }
                 }
-              });
-            });
           });
+          console.log(this.assignmentContent)
         }
-
       } else {
-        // this.assignmentMessage = false;
+        
       }
     });
   }
@@ -524,37 +475,22 @@ export class ActivitiesComponent implements OnInit {
     // this.addThreadForm?.reset();
   }
 
-  uploadAssignmentsFile(
-    event,
-    fileId,
-    modulename,
-    topicname,
-    assName,
-    score,
-    endDate,
-    path
-  ) {
-    this.assFile = event.target.files[0] as File;
-    this.postAssignmentsFile(
-      fileId,
-      modulename,
-      topicname,
-      assName,
-      score,
-      endDate,
-      path
-    );
+  uploadAssignmentsFile(event,assignemnt) {
+      let fileSize = 0;
+        fileSize = event.target.files[0].size;
+      if(fileSize/1024/1024 > 10){
+        this.toastr.warning("The file size can not exceed 10 MB");
+        return;
+      }
+    else{
+      this.assignmentFile = event.target.files[0] as File;
+      this.fileInput.nativeElement.value = '';
+      this.postAssignmentsFile(assignemnt.file_id,assignemnt.module_id,assignemnt.topic_id,assignemnt.activityname,assignemnt.total_mark,assignemnt.activityenddate );
+    }
   }
 
-  postAssignmentsFile(
-    fileId,
-    modulename,
-    topicname,
-    assName,
-    score,
-    endDate,
-    path
-  ) {
+  postAssignmentsFile(fileId,modulename,topicname,assignemtname,score,endDate,) {
+    this.ngxLoader.start();
     if (!score) {
       score = 50;
     }
@@ -568,28 +504,31 @@ export class ActivitiesComponent implements OnInit {
     }
 
     const payload = new FormData();
-    payload.append('learnerdoc', this.assFile, this.assFile.name);
+    payload.append('learnerdoc', this.assignmentFile, this.assignmentFile.name);
     payload.append('user_id', this.userDetail.user_id);
     payload.append('course_id', this.courseid);
     payload.append('topic_id', topicname);
     payload.append('module_id', modulename);
     payload.append('file_id', fileId);
-    payload.append('type_name', assName);
+    payload.append('type_name', assignemtname);
     payload.append('submit_status', submitStatus);
     payload.append('total_mark', score);
-    payload.append('questionUrl', path);
     this.wcaservice.uploadAssignments(payload).subscribe((data: any) => {
       if (data.success === true) {
+        this.ngxLoader.stop();
         this.toastr.success(data.message, null);
         this.getAssignmentmoduleData();
       } else {
+        this.ngxLoader.stop();
         this.toastr.warning(data.message, null);
       }
     });
   }
 
   getprojectActivityData() {
+    
     this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
+      console.log('Project',data)
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
         this.projectDetails = data.data.getprojectActivityData.data;
 
