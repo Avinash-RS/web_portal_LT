@@ -449,7 +449,6 @@ export class DiscussionForumComponent implements OnInit {
             } else {
               // this.cS.loader$.next(false);
               this.loading = false;
-              console.log(result.data.CreateNewThread?.message);
               
               this.toastr.warning(result.data.CreateNewThread?.message);
             }

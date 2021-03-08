@@ -122,8 +122,6 @@ export class PerformVideoRecordComponent implements OnInit {
   ngOnInit() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
-    console.log('performDetailsSend', this.performDetailsSend);
-    console.log('itrationSend', this.itrationSend);
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
@@ -133,7 +131,6 @@ export class PerformVideoRecordComponent implements OnInit {
 
     // setup the player via the unique element ID
     this.player = videojs(document.getElementById(el), this.config, () => {
-      console.log('player ready! id:', el);
 
       // print version information at startup
       const msg = 'Using video.js ' + videojs.VERSION +
@@ -144,12 +141,10 @@ export class PerformVideoRecordComponent implements OnInit {
 
     // device is ready
     this.player.on('deviceReady', () => {
-      console.log('device is ready!');
     });
 
     // user clicked the record button and started recording
     this.player.on('startRecord', () => {
-      console.log('started recording!');
     });
 
     // user completed recording and stream is available
@@ -176,7 +171,6 @@ export class PerformVideoRecordComponent implements OnInit {
 
 
       // var buffer = await this.player.recordedData.arrayBuffer();
-      // console.log('buffer buffer', buffer);
     });
 
     // error handling

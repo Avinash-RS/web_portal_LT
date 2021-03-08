@@ -1048,7 +1048,7 @@ margin-top: 8px;
 }
 ::ng-deep.trendingCategoriesScrollActivity .drag-scroll-content {
   @media only screen and (max-width: 1199px) {
-    overflow: auto hidden !important;
+    //overflow: auto hidden !important;
   }
   @media only screen and (max-width: 767px) {
     //height: 96px !important;

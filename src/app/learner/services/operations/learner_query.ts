@@ -1342,41 +1342,56 @@ export const getCoursePlayerStatusForCourse = gql`
 export const getAssignmentmoduleData = gql`
   query getAssignmentmoduleData($courseid: String, $user_id: String) {
     getAssignmentmoduleData(courseid: $courseid, user_id: $user_id) {
-      success
       message
-      data {
-        courseid
-        coursedetails {
-          modulename
-          moduledetails {
-            topicname
-            topicimages
-            url
-            resourse {
-              assignment_count
-              type
-              type_name
-              doc_type
-              _id
-              files {
-                _id
-                assignment
-                path
-                type_name
-                doc_status
-                grade_status
-                score_mark
-                resubmit
-                doc_type
-                score
-                startDate
-                endDate
-              }
-            }
+      success
+      courseStartDate
+      courseEndDate
+      error_msg
+      data{
+        _id
+        files{
+          doc_status
+          _id
+          course_id
+          module_id
+          topic_id
+          doc_type
+          path
+          flag
+          filename
+          type_name
+          size
+          file_id
+          questionUrl
+          status
+          grade_status
+          submit_status
+          resubmit_count
+          total_mark
+          resubmit
+          batchid
+          batch_obj_id
+          submitted_on
+          submitted_date
+          activityId
+          activitystartdate
+          activityenddate
+          activityname
+          question_doc_type
+          score_mark
+          comments
+          materialDetails{
+            assignment
+            checked
+            doc_type
+            filename
+            fileType
+            path
+            size
+            type_name
+            _id
           }
         }
-        courseEndDate
-        courseStartDate
       }
     }
   }

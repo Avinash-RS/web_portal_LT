@@ -704,12 +704,12 @@ getMessage(): Observable<any> {
       }
     });
   }
-  getAssignmentmoduleData(courseid, userId) {
+  getAssignmentmoduleData(userId,courseid, ) {
     return this.Apollo.query({
       query: getAssignmentmoduleData,
       variables: {
+        user_id: userId,
         courseid,
-        user_id: userId
       }
     });
   }

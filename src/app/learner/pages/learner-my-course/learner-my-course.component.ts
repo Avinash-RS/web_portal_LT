@@ -187,7 +187,6 @@ export class LearnerMyCourseComponent implements OnInit {
 
     // this.triggerAvailablecourse = setInterval(() => {
     //   this.getCountForCategories();
-    //   console.log('triggering data');
     // }, 500);
     this.getMyJobRole();
   }
@@ -207,7 +206,6 @@ localStorage.setItem('appBanner','false')
 insidengOnInit() {
     this.CommonServices.openAvailCourcePopup.subscribe((data: any) => {
       this.availableCource = data;
-      console.log(data);
     });
     if (this.screenWidth < 800) {
       this.keyboardUp = false;
@@ -309,7 +307,6 @@ dropdownSelect() {
     this.viewCourseClass = true;
   }
 getCatName(data) {
-    // console.log('data', data);
   }
   // getEnroementCourseName(catagoryId) {
   //   if (this.catalogueDetails && catagoryId && !jobRoleCategoryId && !searchName) {
@@ -340,7 +337,6 @@ getEnrolledCourses(event, catagoryId, catalougeId, jobRoleCategoryId, searchName
       });
       this.categoryNamePrint = categoryName[0].categoryName;
     }
-    // console.log('this.categoryNamePrint', this.categoryNamePrint);
     if (event) {
       if (event.index === 8 && this.categoryDetails[0].enrollCount > 0) {
         catalougeId = this.catalogueDetails.catalogueId;
@@ -367,7 +363,6 @@ getEnrolledCourses(event, catagoryId, catalougeId, jobRoleCategoryId, searchName
           if (this.enrolledCourses.length > 0) {
             this.enrolledCourses.forEach(element => {
               if (element.course_duration && typeof element.course_duration === 'string') {
-                // console.log(typeof element.course_duration, element.course_duration);
                 if (Number(element.course_duration.slice(3, 5)) >= 30) {
                   element.course_duration = Number(element.course_duration.slice(0, 2)) + 1;
                 } else {
@@ -414,7 +409,6 @@ getEnrolledCourses(event, catagoryId, catalougeId, jobRoleCategoryId, searchName
 }
 
 jobRoleSelectedFunction(event,value){
-  console.log(value,"valueeeee")
   if(event.source.selected){
     this.selectedJobRoleData = value
   }
@@ -436,7 +430,6 @@ getDashboardMyCourse(userId, userObjId) {
     let jobRoleId = this.jobroleCategoryId;
     if(this.jobroleCategoryId === 'All') jobRoleId = null;
     this.learnerService.get_batchwise_learner_dashboard_data(userId, requestType, jobRoleId).subscribe((BcourseData: any) => {
-      console.log(BcourseData, 'BcourseData');
       BcourseData.data.get_batchwise_learner_dashboard_data.message.forEach(elem => {
         elem.isBatchCourse = true;
         if (this.isMobile) {
@@ -474,7 +467,6 @@ getDashboardMyCourse(userId, userObjId) {
     this.completedCourseCount = 0;
     this.allCourseCount = 0;
     this.learnerService.get_learner_dashboard_count(userId, userObjId, jobRoleId).subscribe((result: any) => {
-      console.log(result, 'result');
       this.onGoingCourseCount = result.data.get_learner_dashboard_count.message.ongoing_count;
       this.completedCourseCount = result.data.get_learner_dashboard_count.message.completed_count;
       this.allCourseCount = result.data.get_learner_dashboard_count.message.all_count;
@@ -482,7 +474,6 @@ getDashboardMyCourse(userId, userObjId) {
   }
 
 courseTabChange(event, userId, userObjId) {
-    console.log(event); // event index not worked
     this.getDashboardMyCourse(userId, userObjId);
   }
 diff_hours(dt2, dt1) {
@@ -709,12 +700,9 @@ navToCal() {
     this.learnerService.getCountForJobroleCategories(this.userDetailes._id, this.userDetailes.user_id).subscribe((data: any) => {
       this.vocationalselectjobRole = data.data.getCountForJobroleCategories.data
       // this.vocationalselectjobRole = [];
-      console.log(this.vocationalselectjobRole, 'Karthik');
       if(this.vocationalselectjobRole.length > 0) {
-        console.log("count karthik")
       }
       else {
-        console.log('no count')
       }
     });
   }
@@ -728,7 +716,6 @@ dropdownValueChange(selectedValue, count, jobroleId) {
 
   // searchTrigger() {
   //   this.searchExpand = true;
-  //   console.log('this.searchExpand', this.searchExpand);
   // }
 
   // -------------mobile responsive function-----------------------------

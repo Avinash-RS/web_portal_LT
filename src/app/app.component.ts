@@ -49,18 +49,18 @@ export class AppComponent implements OnInit {
               public Lservice: LearnerServicesService,
 
   ) {
-    // console.error = function(){}
-    // console.log = function(){}
-    // console.warn = function(){}
+    console.error = function(){}
+    console.warn = function(){}
     this.commonService.getIpAddressByUrl();
     
     // this.getorganizationbyiddetails();
   }
 
   ngOnInit() {
-    // console.error = function(){}
-    // console.log = function(){}
-    // console.warn = function(){}
+   // console.error = function(){}
+   // console.log = function(){}
+  //  console.warn = function(){}
+    console.log("App component")
     this.loadersubscription = this.Lservice.getMessage().subscribe(message => 
       { 
         if(message.count){
@@ -71,8 +71,6 @@ export class AppComponent implements OnInit {
         if(this.percentage == '0%'){
           this.percentage = 'Upload in progress'
         }
-       console.log(message.count)
-        console.log(this.percentage)
       });
    
     // this.loaderSubscription = this.commonService.loader.subscribe((val) => {

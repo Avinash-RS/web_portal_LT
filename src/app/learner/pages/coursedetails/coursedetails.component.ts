@@ -174,14 +174,10 @@ export class CoursedetailsComponent implements OnInit {
     const token=loginDetails.token
   
   // const cryptoInfo = CryptoJS.AES.encrypt(JSON.stringify( {token} ), '(!@#graphql%^&facade!@#)').toString();
-  // console.log({ cryptoInfo });
-    this.user_token = CryptoJS.AES.decrypt(token, '(!@#graphql%^&facade!@#)').toString(CryptoJS.enc.Utf8);
-  // console.log(this.user_token)
-  //  console.log({ info2 });
+   this.user_token = CryptoJS.AES.decrypt(token, '(!@#graphql%^&facade!@#)').toString(CryptoJS.enc.Utf8);
 
   //  const info3 = JSON.parse(info2);
 
-  //  console.log({ str: info3.str });
 
    //
     const Feedbackdetail: any = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
@@ -223,7 +219,6 @@ export class CoursedetailsComponent implements OnInit {
         .subscribe((viewCourse: any) => {
           if (viewCourse.data.view_course_for_learner && viewCourse.data.view_course_for_learner.success) {
             this.course = viewCourse.data.view_course_for_learner.message;
-            console.log('this.course 1', this.course);
             if (this.detailData !== undefined) {
               this.selectedName = this.detailData?.course_name;
             } else if (this.course !== undefined && this.course !== null) {
@@ -305,7 +300,6 @@ export class CoursedetailsComponent implements OnInit {
     let resumeInit = true;
     this.socketService.socketReceiver()
     this.socketEmitReciver = this.socketService.change.subscribe(result => {
-      console.log("socket Result", result)
       if (result && result.eventId && result.eventId.length > 0 && result.data.childData.length > 0) {
         if (result.data.course_id === this.courseid) {
           this.scromModuleData = result.data.childData;
@@ -332,8 +326,6 @@ export class CoursedetailsComponent implements OnInit {
             || ((this.nextPrevHolder) !== this.scromModuleData[this.scromModuleData.length - 1].children.length - 1)) {
             this.isNextEnable = false;
           }
-          // console.log(jsonData[0].childData, 'this.scromModuleData');
-          console.log('Topic=', result.data.resumeSubContent, 'module=', result.data.resumeContent, "status=", result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status);
           this.scromModuleData.forEach(childData => {
             if (childData && childData.children) {
               childData.children.forEach(subChild => {
@@ -552,17 +544,13 @@ export class CoursedetailsComponent implements OnInit {
             + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Next' + '&token=' + this.user_token);
       }
     }
-    // console.log('this.scromModuleData', this.scromModuleData, 'this.currentPage', this.currentPage);
     // this.gettopicLink = this.scromModuleData[this.currentPage - 1]?.children[this.topiccurrentPage];
     // const childData = this.scromModuleData[this.moduleLenth - 1]?.children;
     // const childlength = this.scromModuleData[this.moduleLenth - 1]?.children.length;
-    // console.log(childData[childlength - 1].id);
-    // console.log('this.gettopicLink', this.gettopicLink);
     // if (this.gettopicLink.id === childData[childlength - 1].id) {
     //   this.ratingPopup();
     // }
 
-    console.log('&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title)
 
   }
 
@@ -596,7 +584,6 @@ export class CoursedetailsComponent implements OnInit {
             '&module_status=' + this.moduleSatusCheck
             + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Prev' + '&token=' + this.user_token);
 
-        console.log('&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title)
       }
 
     }
@@ -630,7 +617,6 @@ export class CoursedetailsComponent implements OnInit {
       this.playerTopicLen = this.scromApiData.total_topic_len;
       // tree level
       this.scromModuleData.forEach(childData => {
-        // console.log(childData.children);
         if (childData && childData.children) {
           childData.children.forEach(subChild => {
             if (subChild && subChild.children && subChild.children.length > 0) {
@@ -723,7 +709,6 @@ export class CoursedetailsComponent implements OnInit {
       .then(() => {
       })
       .catch((error) => {
-        console.log(error.message);
       });
   }
 
@@ -848,12 +833,10 @@ export class CoursedetailsComponent implements OnInit {
       const createdby = this.course.created_by;
       this.Lservice.add_topic_reference(userid, batchid, courseid, moduleid, topicid, referenceid, referencestatus, createdby)
         .subscribe((result: any) => {
-          // console.log(result);
         });
     }
   }
   urlBinder(file) {
-    console.log(file)
 
     this.resourceName = file.type_name;
     this.fileType = file.doc_type;
@@ -879,7 +862,6 @@ export class CoursedetailsComponent implements OnInit {
       file.gdocs = 'https://docs.google.com/gview?url=' + file.path + '&embedded=true';
       // this.URIData = file;
       this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.gdocs);
-      console.log(this.URIData)
     } else {
       this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path);
     }
