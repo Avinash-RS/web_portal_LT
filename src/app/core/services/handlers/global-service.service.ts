@@ -38,7 +38,9 @@ export class GlobalServiceService {
       } else {
         this.alert.openAlert('Logged Out!', 'You have been logged out. Please login to continue');
         localStorage.clear()
+        sessionStorage.clear();
         this.route.navigate(['/Learner/login']);
+        return null
       }
     }
   }

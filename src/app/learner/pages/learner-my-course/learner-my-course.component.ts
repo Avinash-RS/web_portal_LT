@@ -130,8 +130,9 @@ export class LearnerMyCourseComponent implements OnInit {
       // for portal integration
       if (params.email_id === undefined) {
         this.userDetailes = this.gs.checkLogout();
+        if(this.userDetailes){
         this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
-        this.getScreenSize();
+        this.getScreenSize();}
         // this.getCountForCategories(); signin performance issue fix
         // this.getTab();
         // this.getCountForJobRole();

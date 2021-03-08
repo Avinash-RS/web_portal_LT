@@ -115,7 +115,7 @@ export class CoursedetailsComponent implements OnInit {
   selectedModuleData: any;
   titleBar: boolean = false;
   user_token;
-  qaFilterKey:any="All"
+  qaFilterKey:any="-1"
   batchId:any;
 
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
@@ -160,10 +160,10 @@ export class CoursedetailsComponent implements OnInit {
   }
   // initials: any;
   constructor(public translate: TranslateService, private router: ActivatedRoute, public socketService: SocketioService,
-    public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
-    public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
-    public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
-    public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
+              public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
+              public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
+              public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
+              public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
     // if (this.socketService.socketStatus()||this.socketService.socketStatus() == undefined){
     this.socketConnector = this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
     });
@@ -175,7 +175,7 @@ export class CoursedetailsComponent implements OnInit {
   
   // const cryptoInfo = CryptoJS.AES.encrypt(JSON.stringify( {token} ), '(!@#graphql%^&facade!@#)').toString();
   // console.log({ cryptoInfo });
-   this.user_token = CryptoJS.AES.decrypt(token, '(!@#graphql%^&facade!@#)').toString(CryptoJS.enc.Utf8);
+    this.user_token = CryptoJS.AES.decrypt(token, '(!@#graphql%^&facade!@#)').toString(CryptoJS.enc.Utf8);
   // console.log(this.user_token)
   //  console.log({ info2 });
 
@@ -198,7 +198,12 @@ export class CoursedetailsComponent implements OnInit {
     }
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-      this.batchId = detail.batch_id
+    if(detail===undefined){
+        this.batchId = localStorage.getItem('currentBatchId')
+      }else{
+        this.batchId = detail.batch_id
+      }
+
     if (this.gs.checkLogout()) {
       this.detailData = detail;
       // this.courseid = detail && detail.id || this.localStoCourseid;
@@ -1071,12 +1076,19 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   filterQAList(){
-    // filterQAList
-    alert("filter coming soon")
+    this.Lservice.getallquestion(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,this.qaFilterKey,this.batchId).subscribe((data:any)=>{
+      if(data?.data.getallquestion?.success){
+        this.allQuestionList = data.data.getallquestion?.message
+      }
+    })
+  }
+  closeAskQuestion(){
+    this.dialog.getDialogById("askQuestions").close();
+    this.selectedQATabIndex = 0;
   }
   openAskQuestions(templateRef: TemplateRef<any>){
     this.questionText="";
-this.dialog.open(templateRef, {
+    this.dialog.open(templateRef, {
   // scrollStrategy: new NoopScrollStrategy(),
   width: '60%',
   height: '80%',

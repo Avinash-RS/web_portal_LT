@@ -113,8 +113,9 @@ export class MycourseItemComponent implements OnInit {
     // } else {
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
     localStorage.setItem('Courseid', c.course_id);
+    localStorage.setItem('Courseid', c.course_id);
     localStorage.setItem('persentage', c && c.coursePlayerStatus && c.coursePlayerStatus.course_percentage ? c.coursePlayerStatus.course_percentage : '');
-    localStorage.setItem('CourseName', c.course_name);
+    localStorage.setItem('currentBatchId', c.batchid);
     // this.show = false;
     // }
   }
