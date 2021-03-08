@@ -1110,3 +1110,24 @@ message{
 }
 }
 `;
+
+export const get_allquestion = gql`
+mutation getallquestion($user_id:String,$course_id:String,$module:String,$topic:String,$sort:Int,$batchid:String){
+  getallquestion(user_id:$user_id,course_id:$course_id,module:$module,topic:$topic,sort:$sort,batchid:$batchid){
+success
+message{
+  user_id
+  filteredValue
+  {
+    question{
+      que_id
+      que
+      ans
+      askDate
+      ansDate
+    }
+  }
+}
+}
+}
+`;

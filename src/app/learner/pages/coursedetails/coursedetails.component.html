@@ -415,7 +415,7 @@
             <mat-tab label="Ask a Question">
                 <div class="questionInput align-content-center">
                     <p>Your Question:</p>
-                    <textarea></textarea>
+                    <textarea [(ngModel)]="questionText"></textarea>
                     
                 </div>
                 <div class="d-flex justify-content-center">
@@ -424,46 +424,25 @@
                 </div>
             </mat-tab>
             <mat-tab label="My Q&A">
-                <div class="myQuestions">
-                    <div class="qaBox">
-                        <p class="quesiton">Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</p>
+                <div class="myQuestions" *ngIf="myQuestionList.length;else noitems">
+                    <div class="qaBox" *ngFor="let item of myQuestionList">
+                        <p class="quesiton">{{item.filteredValue.question.que}}</p>
                         <div class="QuestionMeta">
-                            <p>Asked on 20 Jan 2020</p>
-                            <div class="badge badge-warning">Answered</div>
+                            <p>Asked on {{item.filteredValue.question.askDate}}</p>
+                            <div class="badge" [ngClass]="item.filteredValue.question.ansDate?'badge-success':'badge-warning'">{{item.filteredValue.question.ansDate?'Answered':'Unanswered'}}</div>
                         </div>
-                        
-                    </div>
-                    <div class="qaBox">
-                        <p class="quesiton">Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</p>
-                        <div class="QuestionMeta">
-                            <p>Asked on 20 Jan 2020</p>
-                            <div class="badge badge-warning">Answered</div>
-                        </div>
-                        
-                    </div>
-                    <div class="qaBox">
-                        <p class="quesiton">Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</p>
-                        <div class="QuestionMeta">
-                            <p>Asked on 20 Jan 2020</p>
-                            <div class="badge badge-success">Answered</div>
-                        </div>
-                        <p class="answer">During the launch the preset is set and its ready to go so is must dbalk  kdia kkjdla flkajld flakdsljfl aiijla ldjflakjdlfa djlfks dlkf</p>
-                        <div class="QuestionMeta">
-                            <p>Answered on 20 Jan 2020</p>
-                        </div>
-                    </div>
-                    <div class="qaBox">
-                        <p class="quesiton">Under what situation shall engineers use jacking ant one end only and from both ends in prestressing work?</p>
-                        <div class="QuestionMeta">
-                            <p>Asked on 20 Jan 2020</p>
-                            <div class="badge badge-success">Answered</div>
-                        </div>
-                        <p class="answer">During the launch the preset is set and its ready to go so is must dbalk  kdia kkjdla flkajld flakdsljfl aiijla ldjflakjdlfa djlfks dlkf</p>
-                        <div class="QuestionMeta">
-                            <p>Answered on 20 Jan 2020</p>
+                        <p class="answer" *ngIf="item.filteredValue.question.ansDate">{{item.filteredValue.question.ans}}</p>
+                        <div class="QuestionMeta" *ngIf="item.filteredValue.question.ansDate">
+                            <p>Answered on {{item.filteredValue.question.ansDate}}</p>
                         </div>
                     </div>
                 </div>
+                <ng-template #noitems>
+                    <div  class="myQuestions d-flex align-items-center justify-content-center">
+                        You have not asked any questions!
+                    </div>
+                </ng-template>
+                
             </mat-tab>
             <mat-tab label="All Q&A">
                 <div class="d-flex justify-content-end">

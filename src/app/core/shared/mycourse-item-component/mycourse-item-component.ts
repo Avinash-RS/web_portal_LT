@@ -104,7 +104,8 @@ export class MycourseItemComponent implements OnInit {
       wishlist_id: c.wishlist_id || null,
       enrollment_status: null,
       course_name: c.course_name,
-      course_status: c.course_status
+      course_status: c.course_status,
+      batch_id:c.batchid
       // persentage : c.coursePlayerStatus.course_percentage || 0
     };
     // if (this.screenWidth < 800) {
