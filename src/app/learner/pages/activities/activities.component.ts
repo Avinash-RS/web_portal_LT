@@ -385,11 +385,11 @@ export class ActivitiesComponent implements OnInit {
        console.log("Assignment", data)
        this.assignmentContent = data?.data?.getAssignmentmoduleData?.data;
        this.assignmentpreContent = data?.data?.getAssignmentmoduleData
-      //   if (this.assignmentContent?.coursedetails?.length > 0) {
-      //     this.emptyAssignment = false;
-      //   } else {
-      //     this.emptyAssignment = true
-      //   }
+        if (this.assignmentContent == null) {
+          this.emptyAssignment = true;
+        } else {
+          this.emptyAssignment = false
+        }
 
         if (this.assignmentpreContent.courseStartDate && this.assignmentpreContent.courseEndDate) 
         {
