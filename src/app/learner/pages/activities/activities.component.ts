@@ -396,7 +396,8 @@ export class ActivitiesComponent implements OnInit {
           const batchStartDate = new Date(this.assignmentpreContent.courseStartDate);
           const batchEndDate = new Date(this.assignmentpreContent.courseEndDate);
           this.courseStartDate = moment(batchStartDate);
-          this.courseEndDate = moment(batchEndDate);
+          // this.courseEndDate = moment(batchEndDate);
+          this.courseEndDate = moment(batchEndDate).endOf('day').toDate();
 
           this.assignmentContent.forEach((fileData) => {
                 if (fileData.files.activitystartdate && fileData.files.activityenddate) {
