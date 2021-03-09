@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   platformTxt = navigator.platform;
   isProgressBar = false;
   isFooterVisible: string = '';
-  percentage = "Inprogress"
+  percentage = "Upload in progress"
   loadersubscription: Subscription;  
    // FOR DRM(Restriction for right click)
    @HostListener('document:keydown', ['$event'])
