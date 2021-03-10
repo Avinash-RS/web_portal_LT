@@ -28,5 +28,6 @@ export const environment = {
   analytics: 'UA-171656647-1',
   systemIp : 'https://api.ipify.org/?format=json',
   socketio : 'https://devsocket.lntiggnite.com/',
-  captachaSiteKey: '6Ldu8h8aAAAAAEV33ZBs-xCR4hHIzPuvfLjkG-oO'
+  captachaSiteKey: '6Ldu8h8aAAAAAEV33ZBs-xCR4hHIzPuvfLjkG-oO',
+  galleryURL : 'https://lmsproductionpremium.z23.web.core.windows.net/'
 };

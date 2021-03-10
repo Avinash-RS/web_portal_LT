@@ -159,6 +159,15 @@ export class MycourseItemComponent implements OnInit {
     this.router.navigate(['/Learner/instructorLed'], { queryParams: detail }); // ['/booking'],{queryParams: {Id :id}}
   }
 
+  openGallery(c){
+    this.router.navigate(['/Learner/coursegallery'],{
+      queryParams:
+      {
+        id: c.course_id,
+        name: c.course_name
+      }
+    });
+  }
   // tabclicker(indexVal){
   //   this.tabTitleVal = ""
   //   let titlevalues = ['Self-Paced Learning', 'Instructor Led', 'Discussion Forum', 'Activities']

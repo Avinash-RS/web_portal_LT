@@ -126,10 +126,10 @@
                   <div class="col-md-4 col-sm-12 col-12 third">
                     <div class="f_size_16 f_wt_600 align-center work">Your work</div>
                     <div class="box-0-3">
-                      <div class="fileData ml-auto mr-auto mb-3" *ngIf="assignment?.files?.filename">
+                      <div class="fileData ml-auto mr-auto mb-3 d-flex" *ngIf="assignment?.files?.filename">
                         <mat-icon *ngIf="assignment.files.doc_type == 'image/jpeg'|| assignment.files.doc_type == 'image/png' || assignment.files.doc_type =='image/jpg'" class="videoPlay float-left">photo</mat-icon>
                         <mat-icon *ngIf="assignment.files.doc_type == 'application/pdf'" class="videoPlay float-left">picture_as_pdf </mat-icon>                     
-                        <span class="uploadfileName" matTooltip="{{assignment.files.filename}}" matTooltipClass="custom-mat-tooltip">
+                        <span class="uploadfileName assignementName" matTooltip="{{assignment.files.filename}}" matTooltipClass="custom-mat-tooltip">
                           {{assignment.files.filename}}
                         </span>
                       </div>
