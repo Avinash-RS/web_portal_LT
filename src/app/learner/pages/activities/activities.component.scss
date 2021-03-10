@@ -146,8 +146,9 @@
   margin-left: 15px;
 }
 .box-0-1 {
+  margin-left: 3%;
   margin-top: 20px;
-  width: 100%;
+  width: 95%;
   padding: 20px;
   overflow: hidden;
   height: auto;
@@ -1349,4 +1350,9 @@ margin-top: 8px;
   .scorm-upload-progress {
       height: 10px;
   }
+}
+.assignementName{
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

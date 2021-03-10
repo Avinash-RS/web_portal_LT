@@ -50,8 +50,8 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     AppComponent,
     AlertComponentComponent,
     // DialogComponent,
-    NotFoundComponent,
-  ],
+    NotFoundComponent
+    ],
   imports: [
     Ng4LoadingSpinnerModule.forRoot(),
     //SocketIoModule.forRoot(config),
