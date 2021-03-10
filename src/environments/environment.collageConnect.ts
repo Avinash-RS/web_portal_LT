@@ -10,5 +10,6 @@ export const environment = {
     systemIp : 'http://api.ipify.org/?format=json',
     orgId: '' , // saveetha,
     socketio : '20.44.32.238:3009',
-    captachaSiteKey: '6Ldu8h8aAAAAAEV33ZBs-xCR4hHIzPuvfLjkG-oO'
+    captachaSiteKey: '6Ldu8h8aAAAAAEV33ZBs-xCR4hHIzPuvfLjkG-oO',
+    galleryURL : 'https://lmsproductionpremium.z23.web.core.windows.net/'
 };

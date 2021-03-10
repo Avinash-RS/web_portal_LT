@@ -44,7 +44,7 @@ import { ActivitiesComponent } from './pages/activities/activities.component';
 import { AssignmentComponent } from './pages/assignment/assignment.component';
 import { ProjectMobileComponent } from './pages/project-mobile/project-mobile.component';
 import { PerformancePageMobileComponent } from './pages/performance-page-mobile/performance-page-mobile.component';
-
+import { CourseGalleryComponent } from './pages/course-gallery/course-gallery.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -78,6 +78,11 @@ const routes: Routes = [
     component: ActivitiesComponent,
     data: { animation: 'Calendar' , title: 'Activities'}
   },
+  {
+    path: 'coursegallery',
+    component: CourseGalleryComponent,
+    data: { animation: 'coursegallery' , title: 'coursegallery'}
+  },
 ]
 @NgModule({
   declarations: [
@@ -88,7 +93,9 @@ const routes: Routes = [
     ActivitiesComponent,
     AssignmentComponent,
     ProjectMobileComponent,
-    PerformancePageMobileComponent
+    PerformancePageMobileComponent,
+    CourseGalleryComponent,
+    KnowledgePreviewComponent
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -153,6 +160,8 @@ const routes: Routes = [
     Apollo
     // { provide: Window, useValue: window }
   ],
-  entryComponents: [CategoryComponentComponent]
+
+
+  entryComponents: [CategoryComponentComponent,KnowledgePreviewComponent]
 })
 export class MycoursesModule { }

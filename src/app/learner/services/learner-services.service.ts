@@ -25,7 +25,7 @@ boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignm
    getModuletopic, getOrganizationbyId, getPopularCourse, getQualificationdetails,
      getSpecificationdetails, getSubCategory, getTrendingcourse, getUserdetail,
      getUserdetailUsername, listContent, login, playerModuleAndTopic, singleBatchInfo,
-     syllabusofParticularScorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData, get_batchwise_learner_dashboard_data, get_learner_dashboard_count
+     syllabusofParticularScorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData, get_batchwise_learner_dashboard_data, get_learner_dashboard_count,search
 } from './operations/learner_query';
 
 
@@ -1031,6 +1031,15 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
         module,
         topic,
         bookmark
+      }
+    });
+  }
+
+  getcourseGallery(courseName) {
+    return this.Apollo.query({
+      query: search,
+      variables: {
+        courseName
       }
     });
   }

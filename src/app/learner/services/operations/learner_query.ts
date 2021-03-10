@@ -2244,3 +2244,32 @@ query   get_learner_dashboard_count( $user_id: String!, $user_obj_id: String!, $
   }
 }
 `;
+
+export const search = gql`
+  query search($courseName:String!) {
+    search(courseName:$courseName) {
+      success
+    message{
+      courseDetail{
+        title
+        path
+        children{
+          title
+          link
+          Image{
+            href
+          }
+          Content{
+            href
+            title
+           
+          }
+          Video{
+            href
+          }
+        }
+      }
+    }
+    }
+  }
+`;
