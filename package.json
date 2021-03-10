@@ -106,7 +106,6 @@
     "node-sass": "^4.13.1",
     "pdfjs-dist": "^2.5.207",
     "popper.js": "^1.14.3",
-    "postcss": "^8.2.8",
     "postcss-cli": "^8.3.1",
     "protractor-cucumber-framework": "^6.2.1",
     "recordrtc": "^5.6.1",
