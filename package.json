@@ -4,8 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build_old": "node --max-old-space-size=8192 node_modules/@angular/cli/bin/ng build --prod",
-    "build": "node --max-old-space-size=8192 node_modules/@angular/cli/bin/ng build --prod --aot=true --output-hashing=all --extract-css=true --build-optimizer=false",
+    "build": "node --max-old-space-size=8192 node_modules/@angular/cli/bin/ng build --prod --build-optimizer=false",
     "go": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build",
     "build:qa": "ng build --prod --configuration qa",
     "build:dev": "ng build --prod",
@@ -107,6 +106,7 @@
     "node-sass": "^4.13.1",
     "pdfjs-dist": "^2.5.207",
     "popper.js": "^1.14.3",
+    "postcss": "^8.2.8",
     "postcss-cli": "^8.3.1",
     "protractor-cucumber-framework": "^6.2.1",
     "recordrtc": "^5.6.1",
