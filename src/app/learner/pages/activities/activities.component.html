@@ -36,7 +36,7 @@
           <mat-icon class="f_size_16 expansionarr" aria-hidden="false" (click)="resourseAccord(assignmentContent, i);">{{assignment.isOpen?'keyboard_arrow_up':'keyboard_arrow_down'}}</mat-icon>
           <div class="d-flex justify-content-between">
             <div class="w-100 projectActivityDetails">
-              <div class="d-flex justify-content-between">
+              <div class="d-flex justify-content-between assignmentActivityDetails">
                 <div class="projectLeftContent">
                   <div class="topic text-left d-flex">
                     <mat-icon class="assignIcon">assignment</mat-icon>
@@ -89,7 +89,7 @@
                     <!-- New carousel -->
                     <h3 *ngIf="assignment.files.materialDetails && assignment.files.materialDetails.length == 0">No materials found for this activity</h3>
                     <div class="materialsWrapper">
-                      <drag-scroll #navActivity (reachesLeftBound)="leftBoundStatActivity($event)" (reachesRightBound)="rightBoundStatActivity($event)" class="trendingCategoriesScrollActivity" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
+                      <drag-scroll #navActivity (reachesLeftBound)="leftBoundStatActivity($event)" (reachesRightBound)="rightBoundStatActivity($event)" class="trendingCategoriesScrollActivity assignmentActivity" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
                         <span drag-scroll-item class="slideLoop" *ngFor="let material of assignment.files.materialDetails; let i = index">
                           <div [ngClass]="assignment.files.materialDetails.length >= 4 ? 'carouselCol': 'carouselCol1'">
                             <mat-card class="p-0 carouselCard" (click)="projectPreviewDoc(projectPreviewDialog, videoDialog, material, 'material')">
@@ -234,11 +234,11 @@
                 class=""> Completed iterations : <span *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} / </span>{{perform.performActivity.iterationTotal}}
               </div>
               <div class="startEndDate d-flex justify-content-end">
-                <div class="f_wt_600 startDate">
-                  <span>Start date: </span>{{perform.performActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}
+                <div class="startDate">
+                  <span class="f_wt_600">Start date: </span>{{perform.performActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}
                 </div>
-                <div class="f_wt_600 endDate">
-                  <span>End date: </span>{{perform.performActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}
+                <div class="endDate">
+                  <span class="f_wt_600">End date: </span>{{perform.performActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}
                 </div>
               </div>
             </div>
