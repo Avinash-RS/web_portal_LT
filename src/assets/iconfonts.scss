@@ -60,6 +60,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.lxp-lifebuoy:before {
+  content: "\e941";
+}
 .lxp-sad:before {
   content: "\e929";
 }
