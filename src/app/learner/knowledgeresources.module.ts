@@ -34,7 +34,6 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AgGridModule } from 'ag-grid-angular';
 import { KnowledgeLandingPageComponent } from './pages/knowledge-landing-page/knowledge-landing-page.component';
 import { KnowledgeResourceHomeComponent } from './pages/knowledge-resource-home/knowledge-resource-home.component';
-import { KnowledgePreviewComponent } from './pages/knowledge-preview/knowledge-preview.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -57,7 +56,6 @@ const routes: Routes = [
   declarations: [
     KnowledgeResourceHomeComponent,
     KnowledgeLandingPageComponent,
-    KnowledgePreviewComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [
@@ -117,7 +115,7 @@ const routes: Routes = [
     }),
     AgGridModule.withComponents([])
   ],
-  entryComponents: [KnowledgePreviewComponent],
+  entryComponents: [],
   providers: [
     Apollo
     // { provide: Window, useValue: window }

@@ -11,7 +11,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
-import { KnowledgePreviewComponent } from './pages/knowledge-preview/knowledge-preview.component';
 import { VideoPreviewModalComponent } from './pages/video-preview-modal/video-preview-modal.component';
 import { MatMenuModule, MatSidenavModule, MatExpansionModule, MatStepperModule, DateAdapter } from '@angular/material';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
@@ -94,8 +93,7 @@ const routes: Routes = [
     AssignmentComponent,
     ProjectMobileComponent,
     PerformancePageMobileComponent,
-    CourseGalleryComponent,
-    KnowledgePreviewComponent
+    CourseGalleryComponent
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
@@ -162,6 +160,6 @@ const routes: Routes = [
   ],
 
 
-  entryComponents: [CategoryComponentComponent,KnowledgePreviewComponent]
+  entryComponents: [CategoryComponentComponent]
 })
 export class MycoursesModule { }
