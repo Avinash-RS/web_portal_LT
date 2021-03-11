@@ -1,0 +1,59 @@
+<app-header></app-header>
+<!-- oncontextmenu="return false" -->
+<div class="askQuestionsContainer">
+    <!-- TITLE AND BACK -->
+    <div class="titlebar">
+        <div class="d-flex align-items-center titleBack">
+            <div class="pointer d-flex align-items-center" (click)="goBack()">
+                <i class="lxp-Arrow backArrow"></i><span>Back</span>
+            </div>
+            <div class="courseTitle"> | <span>Course Name Comes Here > All Questions and Answer</span></div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between mx-20px" *ngIf="allQuestionList.length">
+        <div class="m-t-10">
+            <div class="d-inline-block">
+                <span>Sort by: &nbsp;</span>
+                <select class="sel-pad" [(ngModel)]="qaFilterKey" (change)="filterQAList()">
+                    <option [value]="-1" selected="true">Newest</option>
+                    <option [value]="1">Oldest</option>
+                </select>
+            </div>
+            <div class="ml-30px d-inline-block">
+                <span>Filter by: &nbsp;</span>
+                <select class="sel-pad" [(ngModel)]="qaFilterKey" (change)="filterQAList()">
+                    <option [value]="-1" selected="true">Newest</option>
+                    <option [value]="1">Oldest</option>
+                </select>
+                <select class="sel-pad ml-20px" [(ngModel)]="qaFilterKey" (change)="filterQAList()">
+                    <option [value]="-1" selected="true">Newest</option>
+                    <option [value]="1">Oldest</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-primary" (click)="submitMyQuestion()">Ask Question</button>
+        </div>
+    </div>
+    <div class="myQuestions" *ngIf="allQuestionList.length;else noallitems">
+        <div class="qaBox" *ngFor="let item of allQuestionList">
+            <div class="userAccount"><i class="lxp-AccountCircle"></i>&nbsp; {{item.user_id}}</div>
+            <p class="quesiton">{{item.filteredValue.question.que}}</p>
+            <div class="QuestionMeta">
+                <p>{{item.filteredValue.question.askDate}}</p>
+                <div class="badge badge-success">Answered</div>
+            </div>
+            <p class="answer" *ngIf="item.filteredValue.question.ansDate">{{item.filteredValue.question.ans}}</p>
+            <div class="QuestionMeta">
+                <p>{{item.filteredValue.question.ansDate}}</p>
+            </div>
+        </div>
+
+    </div>
+
+    <ng-template #noallitems>
+        <div class="myQuestions d-flex align-items-center justify-content-center">
+            No questions asked on this topic.
+        </div>
+    </ng-template>
+</div>

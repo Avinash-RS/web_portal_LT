@@ -45,6 +45,7 @@ import { AssignmentComponent } from './pages/assignment/assignment.component';
 import { ProjectMobileComponent } from './pages/project-mobile/project-mobile.component';
 import { PerformancePageMobileComponent } from './pages/performance-page-mobile/performance-page-mobile.component';
 import { CourseGalleryComponent } from './pages/course-gallery/course-gallery.component'
+import { AskQuestionsComponent } from './pages/ask-questions/ask-questions.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -79,6 +80,11 @@ const routes: Routes = [
     data: { animation: 'Calendar' , title: 'Activities'}
   },
   {
+    path: 'askQuestions',
+    component: AskQuestionsComponent,
+    data: { animation: 'Calendar' , title: 'Ask Questions'}
+  },
+  {
     path: 'coursegallery',
     component: CourseGalleryComponent,
     data: { animation: 'coursegallery' , title: 'coursegallery'}
@@ -95,7 +101,8 @@ const routes: Routes = [
     ProjectMobileComponent,
     PerformancePageMobileComponent,
     CourseGalleryComponent,
-    KnowledgePreviewComponent
+    KnowledgePreviewComponent,
+    AskQuestionsComponent
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

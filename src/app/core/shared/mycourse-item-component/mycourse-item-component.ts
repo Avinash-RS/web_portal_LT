@@ -159,6 +159,10 @@ export class MycourseItemComponent implements OnInit {
     this.router.navigate(['/Learner/instructorLed'], { queryParams: detail }); // ['/booking'],{queryParams: {Id :id}}
   }
 
+  gotoAskQuestions(){
+    this.router.navigateByUrl('/Learner/askQuestions');
+  }
+
   openGallery(c){
     this.router.navigate(['/Learner/coursegallery'],{
       queryParams:
