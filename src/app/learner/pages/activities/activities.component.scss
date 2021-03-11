@@ -423,6 +423,7 @@ margin-bottom: 9px;
   font-size: 19px;
   cursor: text;
   color: $lxp-icon;
+  margin-right: 5px;
   // margin-left: 20px;
 }
 .group {
@@ -463,7 +464,10 @@ margin-bottom: 9px;
   // bottom: 12px;
   // right: 10px;
 }
-.projDate, .projTotalScore, .activityStatus {
+.projDate, .projTotalScore {
+  margin-top: 10px;
+}
+.activityStatus {
   margin-top: 10px;
 }
 .projDate span {
@@ -474,6 +478,9 @@ margin-bottom: 9px;
 }
 .projectRightContent {
   padding-right: 35px;
+  @media only screen and (max-width: 767px) {
+    padding-right: 0;
+  }
 }
 .projEndDate {
   margin-left: 10px;
@@ -1045,6 +1052,14 @@ margin-top: 8px;
   overflow: visible !important;
   @media only screen and (max-width: 767px) {
     height: 97px !important;
+    margin-bottom: 15px;
+  }
+}
+::ng-deep.assignmentActivity .drag-scroll-wrapper.drag-scroll-container {
+  height: auto !important;
+  overflow: visible !important;
+  @media only screen and (max-width: 767px) {
+    height: 135px !important;
   }
 }
 ::ng-deep.trendingCategoriesScrollActivity .drag-scroll-content {
@@ -1355,4 +1370,29 @@ margin-top: 8px;
   width: 80%;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.projectActivityDetails {
+  .assignmentActivityDetails {
+    @media only screen and (max-width: 767px) {
+      flex-direction: column;
+    }
+    .projHead {
+      @media only screen and (max-width: 767px) {
+        padding-right: 65px;
+      }
+    }
+    .projDate {
+      @media only screen and (max-width: 767px) {
+        justify-content: space-between !important;
+      }
+    }
+    .activityStatus {
+      @media only screen and (max-width: 767px) {
+        position: absolute;
+        right: 10px;
+        top: 28px;
+      }
+    }
+  }
 }
