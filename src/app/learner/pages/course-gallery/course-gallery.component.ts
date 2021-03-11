@@ -5,6 +5,7 @@ import { DragScrollComponent } from 'ngx-drag-scroll';
 import { KnowledgePreviewComponent } from '../knowledge-preview/knowledge-preview.component';
 import { environment } from '../../../../environments/environment';
 import { MatDialog } from '@angular/material';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 
 @Component({
@@ -20,10 +21,11 @@ export class CourseGalleryComponent implements OnInit {
   emptyGallery = false;
   leftNavDisabled = false;
   rightNavDisabled = true;
+  selectedIndex;
   galleryUrl: any = environment.galleryURL;
 
   constructor(private activeRoute: ActivatedRoute, private router: Router,
-    private learnerService: LearnerServicesService, public dialog: MatDialog,) {
+    private learnerService: LearnerServicesService, public dialog: MatDialog,private loader: Ng4LoadingSpinnerService) {
     this.activeRoute.queryParams.subscribe(res => {
       this.course = res;
     });
@@ -38,15 +40,18 @@ export class CourseGalleryComponent implements OnInit {
   }
 
   getGalleryData(){
-    this.learnerService.getcourseGallery(this.course.id).subscribe((data)=>{
+    this.loader.show();
+    this.learnerService.getcourseGallery('io').subscribe((data)=>{
       if(data.data['search']['message']['courseDetail']) {
         this.coursedata = data.data['search']['message']['courseDetail']
         this.coursedata.forEach(element1 => {
           element1.children[0].activeTopic = 'active'
         });
+        this.loader.hide();
         console.log(this.coursedata)
       }
       else {
+        this.loader.hide();
         this.emptyGallery = true;
       }
     })
