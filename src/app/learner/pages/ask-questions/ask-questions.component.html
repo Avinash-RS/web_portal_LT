@@ -59,7 +59,28 @@
 </div>
 
 <ng-template #questionInputModal>
-    <div>
-        Yo this is a input modal
+    <div class="askQuestionsTitle" style=" position: relative !important;">
+        <span style="font-weight: 400;">Ask a Question</span> <span class="qaClose cursor-pointer"><i
+                (click)="askqaTabs.selectedIndex = 0; closedialogbox()" class="lxp-Close"></i></span>
+    </div>
+    <div class="askQuestionsContainer mx-20px">
+        <div class="m-t-10  d-inline-block">
+            <select class="sel-pad" [(ngModel)]="qaFilterKey" (change)="filterQAList()">
+                <option [value]="-1" selected="true">Newest</option>
+                <option [value]="1">Oldest</option>
+            </select>
+            <select class="sel-pad ml-20px" [(ngModel)]="qaFilterKey" (change)="filterQAList()">
+                <option [value]="-1" selected="true">Newest</option>
+                <option [value]="1">Oldest</option>
+            </select>
+        </div>
+        <div class="questionInput align-content-center">
+                    <textarea [(ngModel)]="questionText"></textarea>
+                    
+                </div>
+                <div class="d-flex justify-content-center mt-10px">
+                    <button class="btn btn-primary-outline mr-10px" (click)="closeAskQuestion(askQuestions)">Cancel</button>
+                    <button class="btn btn-primary" (click)="submitMyQuestion()">Submit Question</button>
+                </div>
     </div>
 </ng-template>

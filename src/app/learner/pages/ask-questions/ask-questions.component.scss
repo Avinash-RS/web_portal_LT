@@ -1,158 +1,177 @@
 .titlebar {
-    position: relative;
-    .titleBack {
-        padding: 0 10px;
-        background-color: #ffffff;
-        padding:10px;
+  position: relative;
+  .titleBack {
+    padding: 0 10px;
+    background-color: #ffffff;
+    padding: 10px;
+  }
+
+  .collapseFill {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+    .arrDown {
+      display: none;
     }
-    
-    .collapseFill {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 999;
-        .arrDown {
-            display: none;
-        }
-        i {
-            cursor: pointer;
-            color: rgba(0, 0, 0, 0.5);
-            font-size: 22px;
-            display: inline-block;
-        }
+    i {
+      cursor: pointer;
+      color: rgba(0, 0, 0, 0.5);
+      font-size: 22px;
+      display: inline-block;
     }
-    .courseTitle {
-        font-size: 18px;
-        color: #333333;
-        margin-left: 5px;
-        width: 100%;
-        span {
-            font-weight: 400;
-            margin-left: 5px;
-            display: inline-block;
-            @media only screen and (max-width: 767px) {
-                width: 70%;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                white-space: nowrap;
-                vertical-align: middle;
-            }
-        }
+  }
+  .courseTitle {
+    font-size: 18px;
+    color: #333333;
+    margin-left: 5px;
+    width: 100%;
+    span {
+      font-weight: 400;
+      margin-left: 5px;
+      display: inline-block;
+      @media only screen and (max-width: 767px) {
+        width: 70%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        vertical-align: middle;
+      }
     }
+  }
 }
 .pointer {
-    &:hover {
-        i, span {
-            color: #C02222;
-        }
-    }
-    i, span {
-        display: inline-block;
-    }
+  &:hover {
+    i,
     span {
-        font-size: 18px;
-        color: #999999;
-        font-weight: lighter;
-        margin-left: 5px;
-        
+      color: #c02222;
     }
-    .backArrow {
-        font-size: 6px;
-        color: #231F20;
-        font-weight: bold;
-        transform: rotate(-90deg);
-    }
+  }
+  i,
+  span {
+    display: inline-block;
+  }
+  span {
+    font-size: 18px;
+    color: #999999;
+    font-weight: lighter;
+    margin-left: 5px;
+  }
+  .backArrow {
+    font-size: 6px;
+    color: #231f20;
+    font-weight: bold;
+    transform: rotate(-90deg);
+  }
 }
 
-.mr-10px{
+.mr-10px {
+  margin-right: 10px !important;
+}
+.mx-20px {
+  margin: 20px 20px 0px 20px;
+}
+.ml-20px {
+  margin-left: 20px;
+}
+.ml-30px {
+  margin-left: 30px;
+}
+.mt-10px {
+  margin-top: 10px;
+}
+.qaClose {
+  position: absolute;
+  right: 0px;
+  z-index: 10;
+  cursor: pointer;
+}
+.btn {
+  line-height: 1 !important;
+  border-radius: 2px;
+}
+.btn-primary {
+  color: white;
+  background-color: #c02222;
+  border-color: #c02222;
+}
+.btn-primary-outline {
+  color: black !important;
+  background-color: white;
+  border-color: #c02222;
+}
+.btn-primary-outline:hover:focus {
+  color: black;
+  background-color: white;
+  border-color: #c02222;
+}
+.btn-primary:hover:focus {
+  color: white;
+  background-color: #c02222;
+  border-color: #c02222;
+}
+
+.myQuestions {
+  margin: 20px 20px 0px 20px;
+  padding-right: 5px;
+  overflow-y: auto;
+  height: 66vh;
+}
+
+.qaBox {
+  padding: 10px;
+  border: 1px solid grey;
+  margin: 5px 0;
+  .answer {
+    color: #333333;
+    margin-bottom: 5px !important;
+  }
+  .quesiton {
+    font-weight: bold;
+    margin-bottom: 5px !important;
+  }
+}
+.qaBox:hover {
+  border: 1px solid rgb(141, 141, 252);
+}
+.qaBox .userAccount {
+  margin-bottom: 10px;
+  color: #666666;
+  font-size: 12px !important;
+
+  i {
+    color: #5c6873 !important;
+    font-size: 14px;
+  }
+}
+.QuestionMeta {
+  color: #999999;
+  display: flex;
+  align-items: baseline;
+  p {
+    font-size: small;
     margin-right: 10px !important;
-    }
-.mx-20px{
-    margin: 20px 20px 0px 20px;
+  }
 }
-.ml-20px{
-    margin-left:20px
+.badge {
+  padding: 5px !important;
 }
-.ml-30px{
-    margin-left:30px
+.sel-pad {
+  padding: 2px;
 }
-    .qaClose{
-        position: absolute;
-        right:0px;
-        z-index:10;
-        cursor: pointer;
-    }
-    .btn{
-        line-height: 1 !important;
-        border-radius: 2px;
-    }
-    .btn-primary{
-        color:white;
-        background-color: #c02222;
-        border-color: #c02222;
-    }
-    .btn-primary-outline{
-        color:black !important;
-        background-color: white;
-        border-color: #c02222;
-    }
-    .btn-primary-outline:hover:focus{
-        color:black;
-        background-color: white;
-        border-color: #c02222;
-    }
-    .btn-primary:hover:focus{
-        color:white;
-        background-color: #c02222;
-        border-color: #c02222;
-    }
-    
-    
-    .myQuestions{
-        margin: 20px 20px 0px 20px;
-        padding-right: 5px;
-        overflow-y: auto;
-        height: 66vh;
-    }
-    
-    .qaBox{
-        padding:10px;
-        border: 1px solid grey;
-        margin:5px 0;
-        .answer{
-            color:#333333;
-            margin-bottom: 5px !important;
-        }
-        .quesiton{
-            font-weight: bold;
-            margin-bottom: 5px !important;
-        }
-    }
-    .qaBox:hover{
-        border: 1px solid rgb(141, 141, 252);
-    }
-    .qaBox .userAccount{
-        margin-bottom:10px;
-        color:#666666;
-        font-size: 12px !important;
-    
-        i{
-            color:#5C6873 !important;
-            font-size: 14px;
-        }
-     }
-    .QuestionMeta{
-        color:#999999;
-        display: flex;
-        align-items: baseline;
-        p{
-            font-size: small;
-            margin-right: 10px !important;
-        }
-    }
-    .badge {
-        padding:5px !important;
-    }
-    .sel-pad {
-        padding:2px;
-    }
+.qaClose {
+  position: absolute;
+  right: 0px;
+  z-index: 10;
+  cursor: pointer;
+}
+.questionInput {
+  margin-left: auto;
+  margin-right: auto;
+  
+  textarea {
+    width: 100% !important;
+    height: 370px;
+    margin-top: 10px;
+  }
+}
