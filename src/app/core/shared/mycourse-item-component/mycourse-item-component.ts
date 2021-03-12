@@ -103,7 +103,8 @@ export class MycourseItemComponent implements OnInit {
       wishlist_id: c.wishlist_id || null,
       enrollment_status: null,
       course_name: c.course_name,
-      course_status: c.course_status
+      course_status: c.course_status,
+      batch_id:c.batchid
       // persentage : c.coursePlayerStatus.course_percentage || 0
     };
     // if (this.screenWidth < 800) {
@@ -111,8 +112,9 @@ export class MycourseItemComponent implements OnInit {
     // } else {
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
     localStorage.setItem('Courseid', c.course_id);
+    localStorage.setItem('Courseid', c.course_id);
     localStorage.setItem('persentage', c && c.coursePlayerStatus && c.coursePlayerStatus.course_percentage ? c.coursePlayerStatus.course_percentage : '');
-    localStorage.setItem('CourseName', c.course_name);
+    localStorage.setItem('currentBatchId', c.batchid);
     // this.show = false;
     // }
   }

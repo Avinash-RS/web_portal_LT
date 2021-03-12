@@ -49,8 +49,8 @@ export class AppComponent implements OnInit {
               public Lservice: LearnerServicesService,
 
   ) {
-    console.error = function(){}
-    console.warn = function(){}
+    // console.error = function(){}
+    // console.warn = function(){}
     this.commonService.getIpAddressByUrl();
     
     // this.getorganizationbyiddetails();

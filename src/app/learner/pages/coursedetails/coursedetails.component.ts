@@ -100,6 +100,7 @@ export class CoursedetailsComponent implements OnInit {
   isNextEnable = true;
   isprevEnable = true;
   selectedTabIndex: any = 0;
+  selectedQATabIndex: any = 0;
   detailData: any;
   batchDetails: any;
   disableThreads: boolean;
@@ -108,11 +109,14 @@ export class CoursedetailsComponent implements OnInit {
   screenWidth: number;
   performOverLay = false;
   treeCourse = false;
-  filterkey:any = 'All'
+  filterkey:any = 'All';
+  questionText:any = "";
   // initials: any;
   selectedModuleData: any;
   titleBar: boolean = false;
   user_token;
+  qaFilterKey:any="-1"
+  batchId:any;
 
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
   @ViewChild('rationPopup') rationPopup: TemplateRef<any>;
@@ -144,6 +148,8 @@ export class CoursedetailsComponent implements OnInit {
   topicInfo: any;
   bkup_Toc: any;
   filterData: any;
+  myQuestionList: any = [];
+  allQuestionList: any = [];
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -154,10 +160,10 @@ export class CoursedetailsComponent implements OnInit {
   }
   // initials: any;
   constructor(public translate: TranslateService, private router: ActivatedRoute, public socketService: SocketioService,
-    public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
-    public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
-    public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
-    public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
+              public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
+              public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
+              public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
+              public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
     // if (this.socketService.socketStatus()||this.socketService.socketStatus() == undefined){
     this.socketConnector = this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
     });
@@ -188,6 +194,12 @@ export class CoursedetailsComponent implements OnInit {
     }
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
+    if(detail===undefined){
+        this.batchId = localStorage.getItem('currentBatchId')
+      }else{
+        this.batchId = detail.batch_id
+      }
+
     if (this.gs.checkLogout()) {
       this.detailData = detail;
       // this.courseid = detail && detail.id || this.localStoCourseid;
@@ -840,6 +852,10 @@ export class CoursedetailsComponent implements OnInit {
     if (file.doc_type.includes("audio")) {
       this.fileType = 'audio';
     }
+    if (file.doc_type.includes("link")) {
+      this.fileType = 'link';
+      this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path);
+    }
 
     if (this.fileType === 'pdf') {
       file.gdocs = '';
@@ -982,6 +998,42 @@ export class CoursedetailsComponent implements OnInit {
     })
   }
 
+  submitMyQuestion(){
+    if(this.questionText){
+      this.Lservice.askaquestion(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,this.questionText).subscribe((data:any)=>{
+        console.log(data)
+        this.questionText="";
+        if(data?.data?.askaquestion?.success){
+          this.toastr.success(data?.data?.askaquestion?.message)
+        }else{
+         // this.toastr.warning(data?.data?.bookmark?.message)
+        }
+      })
+    }else{
+      this.toastr.warning("Please enter some text.")
+    }
+    
+  }
+
+  questionTabSelection(tab) {
+    if (tab.index === 1) {
+      this.Lservice.getMyQuestion(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle).subscribe((data:any)=>{
+        console.log(data)
+        if(data?.data.getmyque.success){
+          this.myQuestionList = data.data.getmyque.message
+        }
+      })
+    } else if (tab.index === 2){
+      this.Lservice.getallquestion(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,-1,this.batchId).subscribe((data:any)=>{
+        console.log(data)
+        if(data?.data.getallquestion?.success){
+          this.allQuestionList = data.data.getallquestion?.message
+        }
+      })
+    }else{
+
+    }
+  }
   filterToc(){
     this.bkup_Toc = JSON.parse(JSON.stringify(this.scromModuleData));
     this.filterData = []
@@ -1005,6 +1057,28 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
 
+  filterQAList(){
+    this.Lservice.getallquestion(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,this.qaFilterKey,this.batchId).subscribe((data:any)=>{
+      if(data?.data.getallquestion?.success){
+        this.allQuestionList = data.data.getallquestion?.message
+      }
+    })
+  }
+  closeAskQuestion(){
+    this.dialog.getDialogById("askQuestions").close();
+    this.selectedQATabIndex = 0;
+  }
+  openAskQuestions(templateRef: TemplateRef<any>){
+    this.questionText="";
+    this.dialog.open(templateRef, {
+  // scrollStrategy: new NoopScrollStrategy(),
+  width: '60%',
+  height: '80%',
+  scrollStrategy: new NoopScrollStrategy(),
+  closeOnNavigation: true,
+  //disableClose: true,
+});
+}
 }
 
 
