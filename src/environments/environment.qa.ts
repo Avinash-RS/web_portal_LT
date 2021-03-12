@@ -9,6 +9,6 @@ export const environment = {
   systemIp : 'http://api.ipify.org/?format=json',
   socketio : '20.40.2.200:3009',
   captachaSiteKey: '6Ldu8h8aAAAAAEV33ZBs-xCR4hHIzPuvfLjkG-oO',
-  galleryURL : 'https://lmsproductionpremium.z23.web.core.windows.net/'
+  galleryURL : 'https://lmsproductionpremium.z23.web.core.windows.net'
 
 };
