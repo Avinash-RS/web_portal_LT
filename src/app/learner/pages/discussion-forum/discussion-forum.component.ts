@@ -145,8 +145,8 @@ export class DiscussionForumComponent implements OnInit {
       }
     });
   }
-
-  viewAllThreads() {
+  threadData
+  viewAllThreads(c?) {
     // this.cS.loader$.next(true);
     this.loading = true;
     this.Lservice.ViewAllThreadData(this.selectedModuleData?.title, this.course.id, this.batchDetails?.batchid)
@@ -157,6 +157,15 @@ export class DiscussionForumComponent implements OnInit {
             new Date(a.lastposttimeISO || a.lastposttimeISO).getTime());
           this.discussionData = result.data.ViewAllThreadData.data;
           this.discussionData1 = Object.assign({}, result.data.ViewAllThreadData.data);
+          this.threadData = result.data.ViewAllThreadData.data.topics;
+          if (c === 'NewThread') {
+            if(this.threadData.length>0){
+              this.selectedThreadData = this.threadData[0];
+              this.selectedThreadData.thread_id = this.selectedThreadData.tid
+              this.showDetail(this.selectedThreadData, this.threadData.length-1)
+            }
+
+          }
           // this.cS.loader$.next(false);
           this.loading = false;
           if (this.discussionData?.topics && this.discussionData?.topics?.length > 0) {
@@ -193,7 +202,7 @@ export class DiscussionForumComponent implements OnInit {
     // this.addThreadForm?.reset();
   }
 
-  showDetail(data) {
+  showDetail(data,i?) {
     this.filterValue = '';
     this.selected = ''
     this.searchthreadname = false;
@@ -201,6 +210,9 @@ export class DiscussionForumComponent implements OnInit {
     this.showCourseDetails = false;
     this.showCommentThread = true;
     this.selectedThreadData = data;
+    // if(i){
+    //   this.selectedThreadData.indexVal = i;
+    // }
     this.viewsingletopicdiscussion(data.tid);
   }
 
@@ -445,7 +457,7 @@ export class DiscussionForumComponent implements OnInit {
             if (result.data.CreateNewThread?.success === 'true') {
               this.discussionData = this.discussionData1.topics1 = null;
               this.toastr.success('New thread created successfully');
-              this.viewAllThreads();
+              this.viewAllThreads('NewThread');
             } else {
               // this.cS.loader$.next(false);
               this.loading = false;
