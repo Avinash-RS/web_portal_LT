@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, EventEmitter, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import { MatDialog, MatMenuTrigger, MatTabChangeEvent } from '@angular/material';
+import { MatDialog, MatMenuTrigger, MatTabChangeEvent, MatTooltipModule } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';

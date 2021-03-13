@@ -2420,3 +2420,6 @@ background :#C02222 !important;
   height: auto;
 }
 
+::ng-deep.custom-mat-tooltip {
+  text-transform: capitalize;
+}

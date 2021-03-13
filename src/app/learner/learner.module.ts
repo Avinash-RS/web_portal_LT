@@ -57,6 +57,7 @@ import { ViewAllnotificationsComponent } from './pages/view-allnotifications/vie
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material';
 // import { PerformancePageMobileComponent } from './pages/performance-page-mobile/performance-page-mobile.component';
 import { SelfLearnerAvtivityComponent } from './pages/self-learner-avtivity/self-learner-avtivity.component';
 import { ActivitiesComponent } from './pages/activities/activities.component';
@@ -260,6 +261,7 @@ const routes: Routes = [
     MatSidenavModule,
     MatExpansionModule,
     MatStepperModule,
+    MatTooltipModule,
     MyDatePickerModule,
     InfiniteScrollModule,
     PdfJsViewerModule,
