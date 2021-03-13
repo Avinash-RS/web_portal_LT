@@ -11,51 +11,87 @@ import { LearnerServicesService } from "@learner/services/learner-services.servi
 })
 
 export class AskQuestionsComponent implements OnInit {
-  allQuestionList = [{"filteredValue":{"question":{"que_id":6,"que":"sdfasdfasdafsadf","ans":null,"askDate":"6th Mar, 2021","ansDate":null}}},{"filteredValue":{"question":{"que_id":5,"que":"gokul test for 123 lakdjlf","ans":null,"askDate":"6th Mar, 2021","ansDate":null}}},{"filteredValue":{"question":{"que_id":4,"que":"rekost alkul  lakjldf  laidlflakl aldifan","ans":null,"askDate":"6th Mar, 2021","ansDate":null}}},{"filteredValue":{"question":{"que_id":3,"que":"aguliar","ans":null,"askDate":"6th Mar, 2021","ansDate":null}}},{"filteredValue":{"question":{"que_id":2,"que":"hello boy","ans":null,"askDate":"6th Mar, 2021","ansDate":null}}},{"filteredValue":{"question":{"que_id":1,"que":"hello boy","ans":null,"askDate":"6th Mar, 2021","ansDate":null}}}]
+  allQuestionList = [];
   questionText: string;
   batchId: string;
   localStoCourseid: string;
   courseid: any;
   userDetail: any;
+  moduleTopicData: any;
+  mainTopic:any = null;
+  mainModule:any = null;
+  qaSortKey:any = -1;
+  mainPagenumber: any=0;
+  mainModuleName: any = null;
   constructor(private dialog: MatDialog,
     public Lservice: LearnerServicesService,
     public route: Router,
     private gs: GlobalServiceService,
-    ) { 
+  ) {
 
-      const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+    const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
-    if(detail===undefined){
-        this.batchId = localStorage.getItem('currentBatchId')
-      }else{
-        this.batchId = detail.batch_id
-      }
-      this.userDetail = this.gs.checkLogout();
-      this.localStoCourseid = localStorage.getItem('Courseid');
-      this.courseid = detail && detail.id || this.localStoCourseid;
+      console.log(detail)
+    if (detail === undefined) {
+      this.batchId = localStorage.getItem('currentBatchId');
+      this.courseid = localStorage.getItem('Courseid');
+    } else {
+      this.batchId = detail.batch_id;
+      this.courseid = detail.course_id;
+    }
+    this.userDetail = this.gs.checkLogout();
+    
+    this.getPlayerModuleTopic();
+    this.getQuestionsAnswerlists()
   }
 
   ngOnInit() {
 
   }
 
-  openQuestionInput(templateRef: TemplateRef<any>){
-    this.questionText="";
+  openQuestionInput(templateRef: TemplateRef<any>) {
+    this.questionText = "";
     this.dialog.open(templateRef, {
-  width: '60%',
-  height: '80%',
-  closeOnNavigation: true,
-  //disableClose: true,
-});
-}
+      width: '60%',
+      height: '80%',
+      closeOnNavigation: true,
+      //disableClose: true,
+    });
+  }
 
-getPlayerModuleTopic(){
-  this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
-    console.log(data)
-  })
-}
+  getPlayerModuleTopic() {
+    this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
+      if(data.data?.playerModuleAndTopic?.success=== true){
+        this.moduleTopicData = data.data?.playerModuleAndTopic?.message[0];
+        console.log(this.moduleTopicData)
+      }
+      
+    });
+  }
 
-  goBack(){
-    alert("going back in progress")
+  getQuestionsAnswerlists(){
+    this.Lservice.getQAsortsearch(this.batchId,this.courseid,this.qaSortKey,this.mainPagenumber,this.mainModuleName,this.mainTopic)
+    .subscribe((resdata:any)=>{
+      console.log(resdata);
+      if(resdata.data.sortsearch.message){
+        this.allQuestionList = resdata.data.sortsearch.message
+      }else{
+        this.allQuestionList = []
+      }
+      
+    })
+  }
+
+  mainQAFilter(call){
+    if(call==='M'){
+      this.mainModuleName = this.mainModule?this.mainModule.title:null;
+      this.mainTopic=null
+    }
+    this.getQuestionsAnswerlists()
+
+  }
+
+  goBack() {
+    this.route.navigateByUrl('/Learner/MyCourse');
   }
 }

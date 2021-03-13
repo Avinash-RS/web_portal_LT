@@ -14,20 +14,20 @@
         <div class="m-t-10 align-self-center">
             <div class="d-inline-block">
                 <span>Sort by: &nbsp;</span>
-                <select class="sel-pad" [(ngModel)]="qaFilterKey" (change)="filterQAList()">
+                <select class="sel-pad" [(ngModel)]="qaSortKey" (change)="mainQAFilter('Sort')">
                     <option [value]="-1" selected="true">Newest</option>
                     <option [value]="1">Oldest</option>
                 </select>
             </div>
-            <div class="ml-30px d-inline-block">
+            <div class="ml-30px d-inline-block" *ngIf="moduleTopicData?.childData">
                 <span>Filter by: &nbsp;</span>
-                <select class="sel-pad" [(ngModel)]="qaFilterKey" (change)="filterQAList()">
-                    <option [value]="-1" selected="true">Newest</option>
-                    <option [value]="1">Oldest</option>
+                <select class="sel-pad" [(ngModel)]="mainModule" (change)="mainQAFilter('M')">
+                    <option [ngValue]="null" [disabled]="true">Please select a module.</option>
+                    <option  *ngFor="let item of moduleTopicData.childData" [ngValue]="item">{{item.title}}</option>
                 </select>
-                <select class="sel-pad ml-20px" [(ngModel)]="qaFilterKey" (change)="filterQAList()">
-                    <option [value]="-1" selected="true">Newest</option>
-                    <option [value]="1">Oldest</option>
+                <select *ngIf="mainModule" class="sel-pad ml-20px" [(ngModel)]="mainTopic" (change)="mainQAFilter('T')">
+                    <option [ngValue]="null" [disabled]="true">Please select a topic.</option>
+                    <option  *ngFor="let item of mainModule.children" [ngValue]="item.title">{{item.title}}</option>
                 </select>
             </div>
         </div>
@@ -37,15 +37,15 @@
     </div>
     <div class="myQuestions" *ngIf="allQuestionList.length;else noallitems">
         <div class="qaBox" *ngFor="let item of allQuestionList">
-            <div class="userAccount"><i class="lxp-AccountCircle"></i>&nbsp; {{item.user_id}}</div>
-            <p class="quesiton">{{item.filteredValue.question.que}}</p>
+            <div class="userAccount"><i class="lxp-AccountCircle"></i>&nbsp; {{item.user_name}}</div>
+            <p class="quesiton">{{item.question.que}}</p>
             <div class="QuestionMeta">
-                <p>{{item.filteredValue.question.askDate}}</p>
+                <p>Asked on: &nbsp;{{item.question.askDate}}</p>
                 <div class="badge badge-success">Answered</div>
             </div>
-            <p class="answer" *ngIf="item.filteredValue.question.ansDate">{{item.filteredValue.question.ans}}</p>
+            <p class="answer" *ngIf="item.question.ansDate">{{item.question.ans}}</p>
             <div class="QuestionMeta">
-                <p>{{item.filteredValue.question.ansDate}}</p>
+                <p>Answered on: &nbsp;{{item.question.ansDate}}</p>
             </div>
         </div>
 

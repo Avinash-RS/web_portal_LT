@@ -110,11 +110,11 @@ export class MycourseItemComponent implements OnInit {
     // if (this.screenWidth < 800) {
     //   this.show = true;
     // } else {
-    this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
-    localStorage.setItem('Courseid', c.course_id);
     localStorage.setItem('Courseid', c.course_id);
     localStorage.setItem('persentage', c && c.coursePlayerStatus && c.coursePlayerStatus.course_percentage ? c.coursePlayerStatus.course_percentage : '');
     localStorage.setItem('currentBatchId', c.batchid);
+    this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+
     // this.show = false;
     // }
   }
@@ -159,8 +159,16 @@ export class MycourseItemComponent implements OnInit {
     this.router.navigate(['/Learner/instructorLed'], { queryParams: detail }); // ['/booking'],{queryParams: {Id :id}}
   }
 
-  gotoAskQuestions(){
-    this.router.navigateByUrl('/Learner/askQuestions');
+  gotoAskQuestions(c){
+    const detail = {
+      course_name: c.course_name,
+      course_id: c.course_id,
+      batch_id: c.batchid
+    }
+    localStorage.setItem('Courseid', c.course_id);
+    localStorage.setItem('currentBatchId', c.batchid);
+
+    this.router.navigateByUrl('/Learner/askQuestions', { state: { detail } });
   }
 
   openGallery(c){
