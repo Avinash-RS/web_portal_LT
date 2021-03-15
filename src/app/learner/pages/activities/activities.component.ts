@@ -362,18 +362,18 @@ export class ActivitiesComponent implements OnInit {
   }
   uploadDoc(event, project, submitAction) {
     let fileSizeval = 0;
-    if(event.target.files.length>=1){
+    if(event.target.files.length==1){
     for (let i = 0; i < event.target.files.length; i++) {
       fileSizeval += event.target.files[i].size;
       this.selectfile.push(event.target.files[i]);
     }
-       if(fileSizeval/1024/1024 > 25){
+       if(fileSizeval/1024/1024 >= 25){
         this.toastr.warning("The file size can not exceed 25 MB");
         this.selectfile = [];
         return;
       }
     this.learnerUploadVideo(project, submitAction);
-    }else{
+    }else if(event.target.files.length){
       this.toastr.warning('You cannot upload more than 1 file at a one slot.')
     }
   }
@@ -832,7 +832,7 @@ export class ActivitiesComponent implements OnInit {
 
   uploadDocument(event, perform) {
     // this.selectPerformfile.push(event.target.files[0] as File);
-    if(event.target.files.length<=1){
+    if(event.target.files.length==1){
     const filePath = event.target.files[0].name;
     const allowedExtensions = /(\.mp4)$/i;
     if (!allowedExtensions.exec(filePath)) {
@@ -851,7 +851,7 @@ export class ActivitiesComponent implements OnInit {
       }
       this.performlearnerUploadVideo();
     }
-  }else{
+  }else if(event.target.files.length){
     this.toastr.warning('You cannot upload more than 1 file at a one slot.')
   }
   }
