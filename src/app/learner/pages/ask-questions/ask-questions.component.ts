@@ -3,6 +3,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { GlobalServiceService } from "@core/services/handlers/global-service.service";
 import { LearnerServicesService } from "@learner/services/learner-services.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-ask-questions",
@@ -23,10 +24,14 @@ export class AskQuestionsComponent implements OnInit {
   qaSortKey:any = -1;
   mainPagenumber: any=0;
   mainModuleName: any = null;
+  questionTopicList = null;
+  questionTopic = null;
+  questionModule: any = null;
   constructor(private dialog: MatDialog,
     public Lservice: LearnerServicesService,
     public route: Router,
     private gs: GlobalServiceService,
+    private toastr: ToastrService,
   ) {
 
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
@@ -50,6 +55,7 @@ export class AskQuestionsComponent implements OnInit {
   }
 
   openQuestionInput(templateRef: TemplateRef<any>) {
+    console.log(this.moduleTopicData);
     this.questionText = "";
     this.dialog.open(templateRef, {
       width: '60%',
@@ -89,6 +95,34 @@ export class AskQuestionsComponent implements OnInit {
     }
     this.getQuestionsAnswerlists()
 
+  }
+
+  askQAModuleSelect(){
+    this.questionModule = this.questionTopicList.title
+    this.questionTopic=null
+  }
+
+  submitMyQuestion(){
+    if(this.questionText){
+      this.Lservice.askaquestion(this.userDetail.user_id,this.courseid,this.questionModule,this.questionTopic,this.questionText).subscribe((data:any)=>{
+        console.log(data)
+        this.questionText="";
+        if(data?.data?.askaquestion?.success){
+          this.toastr.success(data?.data?.askaquestion?.message)
+        }else{
+         // this.toastr.warning(data?.data?.bookmark?.message)
+        }
+      })
+    }else{
+      this.toastr.warning("Please enter some text.")
+    }
+    
+  }
+
+  closedialogbox(){
+    this.mainTopic=null
+    this.questionTopic=null
+    this.dialog.closeAll();
   }
 
   goBack() {
