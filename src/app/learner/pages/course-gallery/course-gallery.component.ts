@@ -5,6 +5,7 @@ import { DragScrollComponent } from 'ngx-drag-scroll';
 import { KnowledgePreviewComponent } from '../knowledge-preview/knowledge-preview.component';
 import { environment } from '../../../../environments/environment';
 import { MatDialog } from '@angular/material';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 
 @Component({
@@ -20,33 +21,45 @@ export class CourseGalleryComponent implements OnInit {
   emptyGallery = false;
   leftNavDisabled = false;
   rightNavDisabled = true;
+  selectedIndex = 0;
   galleryUrl: any = environment.galleryURL;
 
   constructor(private activeRoute: ActivatedRoute, private router: Router,
-    private learnerService: LearnerServicesService, public dialog: MatDialog,) {
+    private learnerService: LearnerServicesService, public dialog: MatDialog,private loader: Ng4LoadingSpinnerService) {
     this.activeRoute.queryParams.subscribe(res => {
       this.course = res;
     });
    }
 
   ngOnInit() {
-    this.getGalleryData()
+    this.getGalleryData(0)
   }
 
   getBack(){
     this.router.navigateByUrl('/Learner/MyCourse');
   }
 
-  getGalleryData(){
-    this.learnerService.getcourseGallery(this.course.id).subscribe((data)=>{
+  getGalleryData(content){
+    console.log(content)
+    this.loader.show();
+    this.learnerService.getcourseGallery('io').subscribe((data)=>{
       if(data.data['search']['message']['courseDetail']) {
         this.coursedata = data.data['search']['message']['courseDetail']
+        // if(content == 0){
+        // this.coursedata.forEach((data1)=>{
+        //   data1.children.forEach((data2) => {
+        //     data2.allContent = [...data2.Image,...data2.Video]
+        //   });
+        // })
+        // }
         this.coursedata.forEach(element1 => {
           element1.children[0].activeTopic = 'active'
         });
+        this.loader.hide();
         console.log(this.coursedata)
       }
       else {
+        this.loader.hide();
         this.emptyGallery = true;
       }
     })
@@ -79,8 +92,10 @@ export class CourseGalleryComponent implements OnInit {
 
   onPreviewgallery(type,path1,path2) {
     var file;
-    if(type == 'video'){
-      file = this.galleryUrl  + path1  + path2
+    if(type == 'video' || type == 'image'){
+      file = this.galleryUrl + '/'  + path1  + path2
+    } else{
+      file = this.galleryUrl + '/'  + path2
     }
     let height = '70%';
     let width = '55%';

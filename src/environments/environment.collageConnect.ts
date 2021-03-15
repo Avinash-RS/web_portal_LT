@@ -11,5 +11,5 @@ export const environment = {
     orgId: '' , // saveetha,
     socketio : '20.44.32.238:3009',
     captachaSiteKey: '6Ldu8h8aAAAAAEV33ZBs-xCR4hHIzPuvfLjkG-oO',
-    galleryURL : 'https://lmsproductionpremium.z23.web.core.windows.net/'
+    galleryURL : 'https://lmsproductionpremium.z23.web.core.windows.net'
 };

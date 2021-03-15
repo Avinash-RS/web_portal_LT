@@ -104,7 +104,9 @@ $prefix: 'toolbar-notification';
             position: relative;
             color: #666;
             cursor: pointer;
-
+            .notifiedStatus {
+                width: 12%;
+            }
             .icon {
                 height: 28px;
                 width: 28px;
@@ -135,6 +137,7 @@ $prefix: 'toolbar-notification';
                 width: 18px;
                 height: 18px;
                 line-height: 18px;
+                bottom: 0;
             }
 
             &.primary {

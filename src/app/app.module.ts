@@ -33,6 +33,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '@core/core.module';
 import { InterceptorService } from '@learner/services/interceptor.service';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { KnowledgePreviewComponent } from '@learner/pages/knowledge-preview/knowledge-preview.component';
 
 // import { ChartsModule } from 'ng2-charts';
 
@@ -50,7 +51,8 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     AppComponent,
     AlertComponentComponent,
     // DialogComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    KnowledgePreviewComponent
     ],
   imports: [
     Ng4LoadingSpinnerModule.forRoot(),
@@ -99,7 +101,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-  entryComponents: [AlertComponentComponent]
+  entryComponents: [AlertComponentComponent,KnowledgePreviewComponent]
 })
 export class AppModule { }
 export function appInitializerFactory(configsLoaderService: ConfigsLoaderService) {

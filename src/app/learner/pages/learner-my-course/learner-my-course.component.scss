@@ -1075,6 +1075,9 @@ hr {
     top: 0;
     right: 0;
     left: 15px;
+    @media only screen and (min-width: 768px) {
+      display: none;
+    }
   }
 }
 
@@ -2417,3 +2420,6 @@ background :#C02222 !important;
   height: auto;
 }
 
+::ng-deep.custom-mat-tooltip {
+  text-transform: capitalize;
+}

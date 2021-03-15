@@ -362,17 +362,20 @@ export class ActivitiesComponent implements OnInit {
   }
   uploadDoc(event, project, submitAction) {
     let fileSizeval = 0;
-    // tslint:disable-next-line:prefer-for-of
+    if(event.target.files.length==1){
     for (let i = 0; i < event.target.files.length; i++) {
       fileSizeval += event.target.files[i].size;
       this.selectfile.push(event.target.files[i]);
     }
-       if(fileSizeval/1024/1024 > 150){
-        this.toastr.warning("The file size can not exceed 150 MB");
+       if(fileSizeval/1024/1024 >= 25){
+        this.toastr.warning("The file size can not exceed 25 MB");
         this.selectfile = [];
         return;
       }
     this.learnerUploadVideo(project, submitAction);
+    }else if(event.target.files.length){
+      this.toastr.warning('You cannot upload more than 1 file at a one slot.')
+    }
   }
   uploadDocs() {
     this.uploadInput.nativeElement.click();
@@ -829,6 +832,7 @@ export class ActivitiesComponent implements OnInit {
 
   uploadDocument(event, perform) {
     // this.selectPerformfile.push(event.target.files[0] as File);
+    if(event.target.files.length==1){
     const filePath = event.target.files[0].name;
     const allowedExtensions = /(\.mp4)$/i;
     if (!allowedExtensions.exec(filePath)) {
@@ -840,13 +844,16 @@ export class ActivitiesComponent implements OnInit {
         fileSize += event.target.files[i].size;
         this.selectPerformfile.push(event.target.files[i]);
       }
-      if(fileSize/1024/1024 > 150){
-        this.toastr.warning("The file size can not exceed 150 MB");
+      if(fileSize/1024/1024 >=25){
+        this.toastr.warning("The file size can not exceed 25 MB");
         this.selectPerformfile = [];
         return;
       }
       this.performlearnerUploadVideo();
     }
+  }else if(event.target.files.length){
+    this.toastr.warning('You cannot upload more than 1 file at a one slot.')
+  }
   }
 
   uploadDocuments(e, perform, performans) {
