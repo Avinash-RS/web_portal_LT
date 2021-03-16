@@ -1131,3 +1131,21 @@ message{
 }
 }
 `;
+export const getQAsortsearch = gql`
+mutation sortsearch($batchid:String,$course_id:String,$sort:Int,$pagenumber:Int,$type:Boolean,$module:String,$topic:String){
+  sortsearch(batchid:$batchid,course_id:$course_id,sort:$sort,pagenumber:$pagenumber,type:$type,module:$module,topic:$topic){
+success
+status
+message{
+  user_name
+    question{
+      que_id
+      que
+      ans
+      askDate
+      ansDate
+    }
+}
+}
+}
+`;
