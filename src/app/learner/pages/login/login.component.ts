@@ -78,6 +78,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    if (!this.loginForm.valid) {
+      return this.validateAllFields(this.loginForm);
+    }
     var encryptedname = CryptoJS.AES.encrypt(this.loginForm.value.username.toLowerCase(), this.secretKey.trim()).toString();
     var encryptedpassword = CryptoJS.AES.encrypt(this.loginForm.value.password, this.secretKey.trim()).toString();
     this.service.login(encryptedname, encryptedpassword, false)
@@ -126,4 +129,16 @@ export class LoginComponent implements OnInit {
     this.translate.use(localStorage.getItem('language'));
   }
 
+    // To validate all fields after submit
+    validateAllFields(formGroup: FormGroup) {
+      Object.keys(formGroup.controls).forEach(field => {
+        const control = formGroup.get(field);
+        if (control instanceof FormControl) {
+          control.markAsTouched({ onlySelf: true });
+        } else if (control instanceof FormGroup) {
+          this.validateAllFields(control);
+        }
+      });
+    }
+  
 }
