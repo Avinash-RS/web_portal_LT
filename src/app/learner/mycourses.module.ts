@@ -44,6 +44,7 @@ import { AssignmentComponent } from './pages/assignment/assignment.component';
 import { ProjectMobileComponent } from './pages/project-mobile/project-mobile.component';
 import { PerformancePageMobileComponent } from './pages/performance-page-mobile/performance-page-mobile.component';
 import { CourseGalleryComponent } from './pages/course-gallery/course-gallery.component'
+import {CourseReportComponent} from './pages/course-report/course-report.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -82,6 +83,11 @@ const routes: Routes = [
     component: CourseGalleryComponent,
     data: { animation: 'coursegallery' , title: 'coursegallery'}
   },
+  {
+    path: 'coursereport',
+    component: CourseReportComponent,
+    data: { animation: 'coursereport' , title: 'coursereport'}
+  },
 ]
 @NgModule({
   declarations: [
@@ -93,7 +99,8 @@ const routes: Routes = [
     AssignmentComponent,
     ProjectMobileComponent,
     PerformancePageMobileComponent,
-    CourseGalleryComponent
+    CourseGalleryComponent,
+    CourseReportComponent
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

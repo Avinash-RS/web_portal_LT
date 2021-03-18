@@ -1,0 +1,76 @@
+.commonBackStyle {
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 0 !important;
+    &:hover {
+        i, span {
+            color: #C02222;
+        }
+        .courseNameBreadcrum {
+          span, i {
+            color: #333333;
+            cursor: auto;
+          }
+        }
+    }
+    .backArrow {
+        font-size: 6px;
+        color: #231F20;
+        font-weight: bold;
+        transform: rotate(-90deg);
+        display: inline-block;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+    span {
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 18px;
+        color: #999999;
+        font-weight: lighter;
+        margin-left: 5px;
+    }
+  }
+
+  .courseNameBreadcrum {
+    margin-left: 5px;
+    display: inline-block;
+    width: 81%;
+    .pipeLine {
+      display: inline-block;
+      margin-right: 5px;
+    }
+    span {
+      color: #333333;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: normal;
+      display: inline-block;
+      &.ledCourseName {
+        max-width: 40%;
+        min-width: 3%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        @media only screen and (min-width: 768px) {
+          max-width: 100%;
+        }
+      }
+      &:last-child {
+        margin-left: 0;
+      }
+    }
+    i {
+        display: inline-block;
+        transform: rotate(90deg);
+        font-size: 8px;
+        color: #333333;
+        margin: 0 7px;
+    }
+}
+
+.report-header{
+    padding-left: 6%;
+    font-weight: bold;
+}

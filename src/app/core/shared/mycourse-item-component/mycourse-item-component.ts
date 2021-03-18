@@ -168,6 +168,16 @@ export class MycourseItemComponent implements OnInit {
       }
     });
   }
+  openReport(c){
+    this.router.navigate(['/Learner/coursereport'],{
+      queryParams:
+      {
+        id: c.course_id,
+        name: c.course_name
+      }
+    });
+  
+  }
   // tabclicker(indexVal){
   //   this.tabTitleVal = ""
   //   let titlevalues = ['Self-Paced Learning', 'Instructor Led', 'Discussion Forum', 'Activities']
