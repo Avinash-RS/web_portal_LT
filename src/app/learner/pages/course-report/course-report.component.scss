@@ -80,6 +80,78 @@
     line-height: normal;
     color: #333333;
   }
+  .numberedList {
+    width: 9%;
+    align-self: center;
+    span {
+      font-size: 14px;
+      font-weight: 700;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      &.green {
+        background-color: #00A37D;
+        border: 1px solid #00A37D;
+        color: #ffffff;
+      }
+      &.white {
+        background-color: #ffffff;
+        border: 1px solid #666666;
+        color: #333333;
+      }
+    }
+  }
+  .courseProgressBar {
+    width: 71%;
+    align-self: center;
+    span {
+      display: block;
+      font-size: 16px;
+      font-weight: 400;
+      color: #666666;
+      margin-bottom: 5px;
+    }
+  }
+  .progressPercentage {
+    width: 16%;
+    span {
+      display: block;
+      line-height: normal;
+      &.percentageScore {
+        color: #C7316B;
+        font-size: 15px;
+        font-weight: 400;
+      }
+      &.outOfScore {
+        color: #00004E;
+        font-size: 10px;
+        font-weight: 400;
+      }
+    }
+  }
+  .finalScoreCard {
+    margin-top: 30px;
+    .progressFinal {
+      width: 50%;
+    }
+    .gradePoints {
+      width: 50%;
+      h6 {
+        font-size: 18px;
+        font-weight: 400;
+        color: #333333;
+        line-height: normal;
+        span {
+          display: inline-block;
+          color: #C02222;
+          margin-left: 3px;
+        }
+      }
+    }
+  }
 }
 .LearningPercentage {
   width: 75%;
@@ -91,57 +163,55 @@
     margin-top: 8px;
   }
   .commonClass {
-    margin-bottom: 30px;
+    // margin-bottom: 30px;
   }
   .percentageContent {
-    width: 20%;
+    width: 15%;
+    text-align: center;
   }
   .weekScoredContent {
     width: 79%;
+    margin-right: 2%;
     .weeksWise {
       padding: 5px;
       width: 23%;
       position: relative;
       div {
         padding: 5px;
+        // position: relative;
+        &::before, 
+        &::after {
+          content: '';
+          position: absolute;
+          background-color: rgba(0,0,0,0.25);
+        }
+        &::before {
+          top: 100%;
+          left: 0;
+          width: 98%;
+          height: 1px;
+        }
+        &::after {
+          top: 15%;
+          left: 105%;
+          width: 1px;
+          height: 76%;
+          bottom: 5%;
+        }
+      }
+      &:nth-child(4n) {
+        div {
+          &::after {
+            width: 0;
+          }
+        }
       }
       &:hover {
         div {
           background-color: #E3E3E3;
         }
       }
-      &:nth-child(4n) {
-        &::after {
-          width: 0;
-        }
-      }
-      &:nth-child(5), 
-      &:nth-child(6), 
-      &:nth-child(7), 
-      &:nth-child(8) {
-        &::before {
-          height: 0;
-        }
-      }
-      &::before {
-        content: '';
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 98%;
-        height: 1px;
-        background-color: rgba(0,0,0,0.25);
-      }
-      &::after {
-        content: '';
-        position: absolute;
-        top: 15%;
-        left: 105%;
-        width: 1px;
-        height: 76%;
-        background-color: rgba(0,0,0,0.25);
-        bottom: 5%;
-      }
+
       h5, h6 {
         margin: 0;
         line-height: normal;
@@ -157,7 +227,8 @@
           margin-left: 5px;
         }
         &.notStarted {
-          color: #666666;
+          color: #5C6873;
+          opacity: 0.5;
         }
       }
       h6 {
@@ -169,11 +240,18 @@
           color: #E36900;
         }
         &.notStarted {
-          color: #333333;
+          color: #5C6873;
+          opacity: 0.5;
         }
       }
     }
   }
+}
+
+.selfLearningSection,
+.instructorLedSection, 
+.collaborationSection {
+  margin-bottom: 30px;
 }
 .selfLearningSection {
   h5 {
@@ -198,4 +276,46 @@
 }
 .ScoreSection {
   width: 24%;
+  h3 {
+    font-size: 18px;
+  }
+}
+.assessmentScoreCard {
+  margin-top: 15px;
+}
+
+.course-arrow-mark {
+  text-align: right;
+  margin: 0 15px 15px 0;
+  width: 100%;
+  cursor: pointer;
+  i {
+    display: inline-block;
+    font-size: 7px;
+    color: #333333;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+  .showMore {
+    margin-top: -10px;
+  }
+  .showLess {
+    margin-top: 15px;
+  }
+}
+
+::ng-deep .ScoreSection .mat-progress-bar {
+  height: 10px !important;
+}
+
+::ng-deep .ScoreSection .mat-progress-bar-fill::after {
+  background-color: #00A37D !important;
+}
+
+::ng-deep .ScoreSection .mat-progress-bar-buffer {
+  background-color: #BBBBBB !important;
+}
+
+.mt-20 {
+  margin-top: 20px;
 }

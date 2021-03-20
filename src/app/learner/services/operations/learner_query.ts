@@ -2273,3 +2273,81 @@ export const search = gql`
     }
   }
 `;
+export const getLearnerNewCourseReport = gql`
+  query getLearnerNewCourseReport($batchid:String!,$courseid:String!$userid:String!) {
+    getLearnerNewCourseReport(batchid:$batchid,courseid:$courseid,userid:$userid) {
+      success
+    error_msg
+    message
+    data {
+      userid
+      batchid
+      courseid
+      overAllScore {
+        selflearningscore
+        VILTscore
+        collabarationscore
+      }
+      selflearning {
+        week
+        WeekStatus
+        modulestatus
+        no_of_topic
+        actualtopicduration
+        completedtopicduration
+        pendingfortheweek
+        Completedfortheweek
+        selflearningscore
+        calculation
+      }
+      VILT {
+        week
+        WeekStatus
+        modulestatus
+        VILTsessionCount
+        VILTdurationCount
+        VILTattendanceCount
+        VILTscore
+        calculation
+      }
+      collaboration {
+        week
+        WeekStatus
+        modulestatus
+        referencepointmins
+        loginactivitytime
+        referencepointpostmins
+        numberofpost
+        bonusscorebyfaculty
+        collabarationscoreweek
+        calculation
+      }
+      LPScore {
+        LPScore
+        outofLPscore
+      }
+      assessmentscore {
+        test1
+        outoftest1
+        project
+        outofproject
+        test2
+        outoftest2
+        test3
+        outoftest3
+      }
+      finalscore {
+        grade
+        gradepoint
+        rawscore
+        calculation
+        formula {
+          grade
+          gradepoint
+          rawscore
+        }
+      }
+    }
+    }
+  }
+`;

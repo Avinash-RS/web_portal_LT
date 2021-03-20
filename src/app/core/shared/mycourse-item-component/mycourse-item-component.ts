@@ -173,7 +173,8 @@ export class MycourseItemComponent implements OnInit {
       queryParams:
       {
         id: c.course_id,
-        name: c.course_name
+        name: c.course_name,
+        batchId:c.batchid
       }
     });
   
