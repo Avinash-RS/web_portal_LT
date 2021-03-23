@@ -107,7 +107,7 @@ const routes: Routes = [
     PerformancePageMobileComponent,
     CourseGalleryComponent,
     AskQuestionsComponent,
-    CourseGalleryComponent
+    CourseGalleryComponent,
     CourseReportComponent
 
   ],
