@@ -2648,3 +2648,13 @@ li {
 .cursor-pointer{
   cursor: pointer !important;
 }
+.course-report {
+  border: 1px solid red !important;
+  padding: 5px !important;
+}
+
+.course-report:hover {
+  border: 1px solid white !important;
+  background: #C02222 !important;
+  color: white !important;
+}
