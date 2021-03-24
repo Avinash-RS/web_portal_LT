@@ -58,17 +58,24 @@ export class ViewAllnotificationsComponent implements OnInit {
 markAsRead(notification, type) {
   this.notificationMarkRead = [];
   if (type === 'single') {
-  this.notificationMarkRead.push(notification._id);
+    if(!notification.notifiedStatus) {
+      this.notificationMarkRead.push(notification._id);
+    }
   } else if (type === 'all') {
   this.notifications.forEach(element => {
-    this.notificationMarkRead.push(element._id);
+    if(!element.notifiedStatus) { 
+      this.notificationMarkRead.push(element._id);
+    }
+    
   });
 }
+if (this.notificationMarkRead.length > 0) {
   this.Lservice.markAsRead(this.notificationMarkRead, this.userId).subscribe((result: any) => {
     if (result.data.markAsRead.success === true) {
       this.viewAllnotifications();
     }
   });
+}
 }
 next(e) {
   this.pagenumber = e.pageIndex + 1;
