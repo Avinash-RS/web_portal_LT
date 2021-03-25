@@ -18,7 +18,7 @@ import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 export class PerformancePageMobileComponent implements OnInit {
   // @Input() performDetailsSend: any;
   @Input() performDetailPageData: any;
-  @ViewChild('videoInput') videoInput;
+  @ViewChild('VideoInputPerform') videoInputPerform;
   selectedName = 'Perform';
   selectedTabIndex: number;
   checkDetails: any;
@@ -458,9 +458,13 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
   uploadDocuments(itration, perform) {
+    if(itration.videodetails.length == 3) {
+      this.toastr.warning("You are allowed only to upload a maxiumum of 3 files");
+      return false;
+    }
     this.performsData = perform;
     this.itrationData = itration;
-    //this.videoInput.nativeElement.click();
+    this.videoInputPerform.nativeElement.click();
   }
 
 

@@ -140,8 +140,7 @@
     display: block;
   }
 }
-.startDate {
-}
+
 .endDate {
   margin-left: 15px;
 }
@@ -402,23 +401,15 @@ margin-bottom: 9px;
     z-index: -1;
 }
 
-::ng-deep .mat-expansion-panel-content {
-// margin-bottom: 1% !important;
-}
+
 
 .gradedUpload {
   color: $lxp-icon !important;
   cursor: not-allowed !important;
 }
 
-    /* mani assignment tab css ends here */
 
-/* Ramya's css */
-.projHead {
-  // color: $lxp-theme-green;
-  // position: absolute;
-  // left: 73px;
-}
+
 .assignIcon {
   font-size: 19px;
   cursor: text;
@@ -426,9 +417,7 @@ margin-bottom: 9px;
   margin-right: 5px;
   // margin-left: 20px;
 }
-.group {
-  // margin-right: 13px;
-}
+
 .activityFullWidth {
   width: 100%;
 }
@@ -573,30 +562,8 @@ margin-bottom: 9px;
   // margin-left: 25px;
   margin-top: 5px;
 }
-.topic {
-  // margin-top: 19px;
-}
-.panel1 {
-  // margin-top: 15px;
-  // margin-left: 25px;
-}
-// .groupBtn1 {
-//   border: 1px solid #5C6873;
-//   opacity: 1;
-//   background-color: #ffffff;
-//   color: #1F1A17;
-//   width: 20px;
-//   height: 20px;
-//   position: relative;
-//   right: 9px;
-//   top: 9px;
-//   cursor: default;
-// }
-.teamName {
-  // position: relative;
-  // right: 28px;
-  // bottom: 6px;
-}
+
+
 // .grpIcon {
 //   font-size: 11px;
 //   cursor: default;
@@ -615,9 +582,7 @@ margin-bottom: 9px;
 //   right: 32px;
 //   top: -3px;
 // }
-.status {
-  // margin-right: 3rem;
-}
+
 .endDateTxt {
   margin-left: 92px;
 }
@@ -683,9 +648,7 @@ margin-bottom: 9px;
 .list {
 margin-top: 8px;
 }
-.learnerList {
-  // margin-top: 8px;
-}
+
 .selectedfile {
   margin: 0px 10px 8px 10px;
 }
@@ -863,11 +826,7 @@ margin-top: 8px;
   margin-bottom: 10px;
 }
 
-.carouselCol1 {
-  // max-width: 100% !important;
-  // height: 15rem;
-  // margin-left: -15px;
-}
+
 
 // .carouselHoverCol {
 //   max-width: 100% !important;
@@ -1226,15 +1185,7 @@ margin-top: 8px;
   background-color: #5C6873;
   // height: 40%;
 }
-.fileSelDet {
-  // height: 2rem;
-  // background-color: #5C6873;
-}
 
-.fileSelDetHover {
-  // height: 3rem;
-  // background-color: #5C6873;
-}
 
 .fileNameCol, .fileSelDetHover {
   width: 100%;

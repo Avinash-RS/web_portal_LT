@@ -321,8 +321,8 @@
                         <span class="videoName"  matTooltip="{{videoName.name}}" matTooltipClass="custom-mat-tooltip">{{(videoName.name| slice:0:18)+'...'}}</span>
                         <mat-icon class="deleteBtn" *ngIf="itrdata.submit_status == 'notsubmitted'" (click)="submitDeleteVideo(videoName, itrdata, perform.performActivity , submitType = 'delete')">close</mat-icon>
                       </div>
-                      <input type="file" accept="video/mp4" multiple style="display: none" #videoInput
-                        [(ngModel)]="fileName" (change)="uploadDocument($event)" />
+                      <input type="file" accept="video/mp4" style="display: none" #videoInput
+                        [(ngModel)]="fileName" (change)="uploadDocument($event,itrdata)" />
                         <button *ngIf="itrdata.submit_status == 'notsubmitted'" mat-stroked-button [disabled]="perform.performSubmitType == false || perform.itrationStarted == false" class="upload-bltn mt-3" (click)="uploadDocuments($event, itrdata, perform, submitType = 'upload')">
                         <mat-icon class="icon-color m-t-m-2 addIcon">add</mat-icon> <span>Upload video</span> </button>
                         <p class="uploadMessage" *ngIf="itrdata.submit_status == 'notsubmitted'">Max File Size : 25 MB, Format : MP4</p>

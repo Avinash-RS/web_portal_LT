@@ -361,6 +361,10 @@ export class ActivitiesComponent implements OnInit {
     this.selectedIndex = i;
   }
   uploadDoc(event, project, submitAction) {
+    if(project?.projectActivity.videodetails.length == 3) {
+      this.toastr.warning("You are allowed only to upload a maxiumum of 3 files");
+      return false;
+    }
     let fileSizeval = 0;
     if(event.target.files.length==1){
     for (let i = 0; i < event.target.files.length; i++) {
@@ -857,6 +861,10 @@ export class ActivitiesComponent implements OnInit {
   }
 
   uploadDocuments(e, perform, performans) {
+    if(perform.videodetails.length == 3) {
+      this.toastr.warning("You are allowed only to upload a maxiumum of 3 files");
+      return false;
+    }
     this.performsData = performans;
     this.itrationData = perform;
     this.videoInput.nativeElement.click();
