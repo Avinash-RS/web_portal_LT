@@ -150,9 +150,9 @@
                     <button type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light mr-10px" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
                         <i [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></i> {{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? 'Bookmarked':'Add to Bookmark'}}
                     </button>
-                    <button type="button"  ngClass="btn btn-outline-light" (click)="openAskQuestions(askQuestions)">
+                    <!-- <button type="button"  ngClass="btn btn-outline-light" (click)="openAskQuestions(askQuestions)">
                         <i class="lxp-lifebuoy"></i> Ask Questions
-                    </button>
+                    </button> -->
                 </div>
             </div>
             <div class="rightContent">

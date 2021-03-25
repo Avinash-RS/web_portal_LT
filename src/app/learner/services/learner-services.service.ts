@@ -11,7 +11,7 @@ import { addTopicreference, bulkclaimcourse, claimcourse, createGuidanceRequest,
        playerstatusrealtime, resendOtponprofile, saveAttendies, updateEmailonprofile,
        updateMobileonprofile, updateProfile, updateVerifyotpmobileonProfile,
        userMstrdata, userRegistration, userRegistrationdone, userRegistrationmobileOtpsend,
-         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, viewProfile1, user_experience, set_bookmark, set_askaquestion, getMyQuestion, get_allquestion } from './operations/learner_mutation';
+         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, viewProfile1, user_experience, set_bookmark, set_askaquestion, getMyQuestion, get_allquestion, getQAsortsearch } from './operations/learner_mutation';
 import {
 boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignmentmoduleData,
  getcalenderactivity, getCountForCategories, getCountForJobroleCategories, getCoureBasedOnCatalog,
@@ -1070,6 +1070,20 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
         topic,
         sort,
         batchid
+      }
+    });
+  }
+  getQAsortsearch(batchid, course_id, sort, pagenumber, module, topic) {
+    return this.Apollo.query({
+      query: getQAsortsearch,
+      variables: {
+        batchid,
+        course_id,
+        sort,
+        pagenumber,
+        type: true,
+        module,
+        topic,
       }
     });
   }

@@ -283,7 +283,7 @@ export class CoursedetailsComponent implements OnInit {
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
     });
-    this.getAssignmentmoduleData();
+    // this.getAssignmentmoduleData();
   }
 
   ngOnInit(): void {
@@ -303,6 +303,7 @@ export class CoursedetailsComponent implements OnInit {
       if (result && result.eventId && result.eventId.length > 0 && result.data.childData.length > 0) {
         if (result.data.course_id === this.courseid) {
           this.scromModuleData = result.data.childData;
+          console.log(this.scromModuleData)
           this.scromModuleData[this.moduleHolder].expanded = true;
           if (this.topiccurrentPage !== result.data.resumeSubContent ||
             result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status !== this.topicPageStatus) {
