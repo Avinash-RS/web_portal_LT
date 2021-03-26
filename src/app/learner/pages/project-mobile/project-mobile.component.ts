@@ -145,7 +145,7 @@ export class ProjectMobileComponent implements OnInit {
 
   uploadDoc(event, project, submitAction) {
     if(project?.projectActivity.videodetails.length == 3) {
-      this.toastr.warning("You are allowed only to upload a maxiumum of 3 files");
+      this.toastr.warning("You are allowed only to upload a maximum of 3 files");
       return false;
     }
     const filePath = event.target.files[0].name;
