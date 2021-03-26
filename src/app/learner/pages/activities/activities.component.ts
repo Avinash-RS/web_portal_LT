@@ -371,8 +371,8 @@ export class ActivitiesComponent implements OnInit {
       fileSizeval += event.target.files[i].size;
       this.selectfile.push(event.target.files[i]);
     }
-       if(fileSizeval/1024/1024 >= 25){
-        this.toastr.warning("The file size can not exceed 25 MB");
+       if(fileSizeval/1024/1024 > 150){
+        this.toastr.warning("The file size can not exceed 150 MB");
         this.selectfile = [];
         return;
       }
@@ -848,8 +848,8 @@ export class ActivitiesComponent implements OnInit {
         fileSize += event.target.files[i].size;
         this.selectPerformfile.push(event.target.files[i]);
       }
-      if(fileSize/1024/1024 >=25){
-        this.toastr.warning("The file size can not exceed 25 MB");
+      if(fileSize/1024/1024 > 150){
+        this.toastr.warning("The file size can not exceed 150 MB");
         this.selectPerformfile = [];
         return;
       }
