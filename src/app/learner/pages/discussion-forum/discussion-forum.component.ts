@@ -249,6 +249,7 @@ export class DiscussionForumComponent implements OnInit {
           thread_name: this.selectedThreadData.title,
           created_by: this.userDetail.username,
           a2i: this.a2iFlag || false,
+          thread_user_id : this.selectedThreadData.user.userslug
         };
         this.Lservice.postcomment(data1).subscribe((result: any) => {
           // this.cS.loader$.next(true);

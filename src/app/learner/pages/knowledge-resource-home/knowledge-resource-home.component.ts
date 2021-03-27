@@ -64,6 +64,7 @@ export class KnowledgeResourceHomeComponent implements OnInit {
         this.tempDetailsList.push(b);
       });
       this.details = this.tempDetailsList;
+      console.log(this.details)
       this.checkKnowledgeRec();
     });
   }
