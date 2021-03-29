@@ -329,8 +329,8 @@
   background: #F5F5F5;
   color: grey;
   border-radius: 50%;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   box-shadow: 2px 1px 2px #00000029;
   position: absolute;
   right: 10px;
@@ -350,11 +350,10 @@
   box-shadow: 2px 1px 2px #00000029;
 }
 
-// .popover-info:hover {
-//   background: grey;
-//   color: white;
-  
-// }
+.popover-info:hover {
+  background: grey;
+  color: white;
+}
 
 .ml-2 {
   margin-left: 2%;

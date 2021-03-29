@@ -88,12 +88,12 @@ const routes: Routes = [
   {
     path: 'coursegallery',
     component: CourseGalleryComponent,
-    data: { animation: 'coursegallery' , title: 'coursegallery'}
+    data: { animation: 'coursegallery' , title: 'Course Gallery'}
   },
   {
     path: 'coursereport',
     component: CourseReportComponent,
-    data: { animation: 'coursereport' , title: 'coursereport'}
+    data: { animation: 'coursereport' , title: 'Course Report'}
   },
 ]
 @NgModule({
