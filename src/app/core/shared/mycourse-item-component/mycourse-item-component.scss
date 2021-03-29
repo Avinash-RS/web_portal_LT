@@ -597,11 +597,11 @@ hr {
   color: $lxp-footer-text;
 }
 
-:host ::ng-deep .mat-progress-bar-buffer {
+::ng-deep .coursebg .mat-progress-bar-buffer {
   background-color: $profile-t-grey !important;
 }
 
-:host ::ng-deep .mat-progress-bar-fill::after {
+::ng-deep .coursebg .mat-progress-bar-fill::after {
   background-color: $lxp-gray !important;
 }
 
@@ -613,7 +613,7 @@ hr {
 
 }
 
-.mat-progress-bar {
+.coursebg .mat-progress-bar {
   height: 8px;
   border-radius: 15px;
 }
@@ -1978,15 +1978,15 @@ li {
 }
 
 //Lienear progress bar
-::ng-deep .mat-progress-bar-fill::after {
+::ng-deep .coursebg .mat-progress-bar-fill::after {
   background-image: linear-gradient(to right, #ED8464, #CB8758, #119A16);
 }
 
-::ng-deep .mat-progress-bar-buffer {
+::ng-deep .coursebg .mat-progress-bar-buffer {
   background: #E4E8EB;
 }
 
-::ng-deep .mat-progress-bar {
+::ng-deep .coursebg .mat-progress-bar {
   border-radius: 2px;
 }
 

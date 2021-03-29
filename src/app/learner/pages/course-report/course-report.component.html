@@ -12,7 +12,7 @@
   </div>
 </div>
 
-<div class="courseReportWrapper">
+<div *ngIf="courseReport" class="courseReportWrapper">
   <h3>Learning Process</h3>
   <div class="d-flex justify-content-between">
     <div class="LearningPercentage">
@@ -38,17 +38,48 @@
               </div> 
               </div>
         </div>
-        <div class="weekScoredContent d-flex justify-content-between flex-wrap">
+        <div class="weekScoredContent d-flex flex-wrap">
           <div class="weeksWise" *ngFor="let selfValue of courseReportData?.selflearning;let i = index">
-            <div *ngIf="i < 8">
-              <h6 [ngClass]="{'colorCompleted':selfValue.WeekStatus == 'Completed', 'colorOnGoing': selfValue.WeekStatus == 'Active', 'notStarted':selfValue.WeekStatus == 'YetToStart' || !selfValue.WeekStatus}">{{selfValue.week}}</h6>
+            <popover-content #selfPopover >
+                <div style="width: 200px;"> 
+                  <div >
+                    (A) Topics Completed - {{selfValue.Completedfortheweek}} / 
+                    {{selfValue.no_of_topic}}
+                  </div>
+                  <div>
+                    (B) Estimated Duration - {{selfValue.completedtopicduration}} mins
+                  </div>
+                  <div>
+                    (C) Actual Duration - {{selfValue.actualtopicduration}} mins
+                  </div>
+                  <div style="color: red;">
+                    calculation
+                  </div>
+                  <div style="color: #2525DE;">
+                    = {{selfValue.calculation}}
+                  </div>
+                  <div style="color: #2525DE;">
+                    = {{selfValue.selflearningscore}}
+                  </div>
+                </div> 
+              </popover-content>
+            <div class="weekWiseDescription" *ngIf="i < 8">
+              <div class="d-flex position-relative">
+                <h6 [ngClass]="{'colorCompleted':selfValue.WeekStatus == 'Completed', 'colorOnGoing': selfValue.WeekStatus == 'Active', 'notStarted':selfValue.WeekStatus == 'YetToStart' || !selfValue.WeekStatus}">{{selfValue.week}}</h6>
+                <button class="popover-info"  
+                popoverPlacement="left"
+                [popover]="selfPopover"><span>i</span></button>
+              </div>         
               <h5 [ngClass]="{'colorCompleted':selfValue.WeekStatus == 'Completed', 'colorOnGoing': selfValue.WeekStatus == 'Active', 'notStarted':selfValue.WeekStatus == 'YetToStart' || !selfValue.WeekStatus}">Scored: 
                 <span *ngIf="selfValue.selflearningscore != 0">{{selfValue.selflearningscore}}</span>
                 <span *ngIf="selfValue.selflearningscore == 0">--</span>
               </h5>
             </div>
-            <div *ngIf="courseReportData?.selflearning.isMore && i >= 8">
-              <h6 [ngClass]="{'colorCompleted':selfValue.WeekStatus == 'Completed', 'colorOnGoing': selfValue.WeekStatus == 'Active', 'notStarted':selfValue.WeekStatus == 'YetToStart' || !selfValue.WeekStatus}">{{selfValue.week}}</h6>
+            <div class="weekWiseDescription" *ngIf="courseReportData?.selflearning.isMore && i >= 8">
+              <div class="d-flex  position-relative">
+                <h6 [ngClass]="{'colorCompleted':selfValue.WeekStatus == 'Completed', 'colorOnGoing': selfValue.WeekStatus == 'Active', 'notStarted':selfValue.WeekStatus == 'YetToStart' || !selfValue.WeekStatus}">{{selfValue.week}}</h6>
+                <button class="popover-info" popoverPlacement="left" [popover]="selfPopover">i</button> 
+              </div>      
               <h5 [ngClass]="{'colorCompleted':selfValue.WeekStatus == 'Completed', 'colorOnGoing': selfValue.WeekStatus == 'Active', 'notStarted':selfValue.WeekStatus == 'YetToStart' || !selfValue.WeekStatus}">Scored: 
                 <span *ngIf="selfValue.selflearningscore != 0">{{selfValue.selflearningscore}}</span>
                 <span *ngIf="selfValue.selflearningscore == 0">--</span>
@@ -66,7 +97,7 @@
         </div>
       </div>
       
-      <div class="instructorLedSection commonClass d-flex justify-content-between flex-wrap">
+      <div class="instructorLedSection commonClass d-flex flex-wrap">
         <div class="percentageContent">
           <h4>Instructor Led</h4>
           <div>
@@ -88,17 +119,49 @@
               </div>          
            </div>
         </div>
-        <div class="weekScoredContent d-flex justify-content-between flex-wrap">
+        <div class="weekScoredContent d-flex flex-wrap">
           <div class="weeksWise" *ngFor="let liveValue of courseReportData?.VILT;let i = index">
-            <div  *ngIf="i <  8">
-              <h6 [ngClass]="{'colorCompleted':liveValue.WeekStatus == 'Completed', 'colorOnGoing': liveValue.WeekStatus == 'Active', 'notStarted':liveValue.WeekStatus == 'YetToStart' || !liveValue.WeekStatus}">{{liveValue.week}}</h6>
+            <popover-content #livePopover 
+                placement="right"
+                [animation]="true" 
+                popoverSize="large">
+                <div style="width: 200px;"> 
+                  <div>
+                    (A) Session Attended - {{liveValue.VILTattendanceCount}} / 
+                    {{liveValue.VILTsessionCount}}
+                  </div>
+                  <div>
+                    (B) Session Duration - {{liveValue.VILTdurationCount}} mins
+                  </div>
+                  <div>
+                    (C) Attended Duration - {{liveValue.VILTdurationCount}} mins
+                  </div>
+                  <div style="color: red;">
+                    calculation
+                  </div>
+                  <div style="color: #2525DE;">
+                    = {{liveValue.calculation}}
+                  </div>
+                  <div style="color: #2525DE;">
+                    = {{liveValue.VILTscore}}
+                  </div>
+                </div> 
+              </popover-content>
+            <div  class="weekWiseDescription" *ngIf="i <  8">
+              <div class="d-flex  position-relative">
+                <h6 [ngClass]="{'colorCompleted':liveValue.WeekStatus == 'Completed', 'colorOnGoing': liveValue.WeekStatus == 'Active', 'notStarted':liveValue.WeekStatus == 'YetToStart' || !liveValue.WeekStatus}">{{liveValue.week}}</h6>
+                <button class="popover-info" popoverPlacement="left" [popover]="livePopover">i</button> 
+              </div>
               <h5 [ngClass]="{'colorCompleted':liveValue.WeekStatus == 'Completed', 'colorOnGoing': liveValue.WeekStatus == 'Active', 'notStarted':liveValue.WeekStatus == 'YetToStart' || !liveValue.WeekStatus}">Scored: 
                 <span *ngIf="liveValue.VILTscore != 0">{{liveValue.VILTscore}}</span>
                 <span *ngIf="liveValue.VILTscore == 0">--</span>
               </h5>
             </div>
-            <div *ngIf="courseReportData?.VILT.isMore && i >= 8">
-              <h6 [ngClass]="{'colorCompleted':liveValue.WeekStatus == 'Completed', 'colorOnGoing': liveValue.WeekStatus == 'Active', 'notStarted':liveValue.WeekStatus == 'YetToStart' || !liveValue.WeekStatus}">{{liveValue.week}}</h6>
+            <div class="weekWiseDescription" *ngIf="courseReportData?.VILT.isMore && i >= 8">
+              <div class="d-flex  position-relative">
+                <h6 [ngClass]="{'colorCompleted':liveValue.WeekStatus == 'Completed', 'colorOnGoing': liveValue.WeekStatus == 'Active', 'notStarted':liveValue.WeekStatus == 'YetToStart' || !liveValue.WeekStatus}">{{liveValue.week}}</h6>
+                <button class="popover-info" popoverPlacement="left" [popover]="livePopover">i</button> 
+              </div>
               <h5 [ngClass]="{'colorCompleted':liveValue.WeekStatus == 'Completed', 'colorOnGoing': liveValue.WeekStatus == 'Active', 'notStarted':liveValue.WeekStatus == 'YetToStart' || !liveValue.WeekStatus}">Scored: 
                 <span *ngIf="liveValue.VILTscore != 0">{{liveValue.VILTscore}}</span>
                 <span *ngIf="liveValue.VILTscore == 0">--</span>
@@ -137,17 +200,57 @@
           ></circle-progress>  
             </div> 
         </div>
-        <div class="weekScoredContent d-flex justify-content-between flex-wrap">
+        <div class="weekScoredContent d-flex flex-wrap">
           <div class="weeksWise"  *ngFor="let collaborationValue of courseReportData?.collaboration;let i = index">
-            <div  *ngIf="i <  8">
-              <h6 [ngClass]="{'colorCompleted':collaborationValue.WeekStatus == 'Completed', 'colorOnGoing': collaborationValue.WeekStatus == 'Active', 'notStarted':collaborationValue.WeekStatus == 'YetToStart' || !collaborationValue.WeekStatus}">{{collaborationValue.week}}</h6>
+            <popover-content #collaborationPopover 
+            placement="right"
+            [animation]="true" 
+            popoverSize="large">
+            <div style="width: 200px;"> 
+              <div>
+                (A) Expected Time Spent - {{collaborationValue.referencepointmins}} 
+              </div>
+              <div>
+                (B) Actual Time Spent - {{collaborationValue.loginactivitytime}} mins
+              </div>
+              <div>
+                (C) Expected No.of Posts - {{collaborationValue.referencepointpostmins}} mins
+              </div>
+              <div>
+                (D) Actual No.of Posts - {{collaborationValue.numberofpost}} mins
+              </div>
+              <div>
+                (E) Bonus Score - {{collaborationValue.bonusscorebyfaculty}} mins
+              </div>
+              <div style="color: red;">
+                calculation
+              </div>
+              <div style="color: #2525DE;">
+                = {{collaborationValue.calculation}}
+              </div>
+              <div style="color: #2525DE;">
+                = {{collaborationValue.collabarationscoreweek}}
+              </div>
+            </div> 
+          </popover-content>
+            <div class="weekWiseDescription" *ngIf="i <  8">
+              <div class="d-flex  position-relative">
+                <h6 [ngClass]="{'colorCompleted':collaborationValue.WeekStatus == 'Completed', 'colorOnGoing': collaborationValue.WeekStatus == 'Active', 'notStarted':collaborationValue.WeekStatus == 'YetToStart' || !collaborationValue.WeekStatus}">{{collaborationValue.week}}</h6>
+                <button class="popover-info" popoverPlacement="left" [popover]="collaborationPopover">i</button> 
+              </div>
+               
+
               <h5 [ngClass]="{'colorCompleted':collaborationValue.WeekStatus == 'Completed', 'colorOnGoing': collaborationValue.WeekStatus == 'Active', 'notStarted':collaborationValue.WeekStatus == 'YetToStart' || !collaborationValue.WeekStatus}">Scored: 
                 <span  *ngIf="collaborationValue.collabarationscoreweek != 0">{{collaborationValue.collabarationscoreweek}}</span>
                 <span  *ngIf="collaborationValue.collabarationscoreweek == 0">--</span>
               </h5>
             </div>
-            <div *ngIf="courseReportData?.collaboration.isMore && i >= 8">
-              <h6 [ngClass]="{'colorCompleted':collaborationValue.WeekStatus == 'Completed', 'colorOnGoing': collaborationValue.WeekStatus == 'Active', 'notStarted':collaborationValue.WeekStatus == 'YetToStart' || !collaborationValue.WeekStatus}">{{collaborationValue.week}}</h6>
+            <div class="weekWiseDescription" *ngIf="courseReportData?.collaboration.isMore && i >= 8">
+              <div class="d-flex  position-relative">
+                <h6 [ngClass]="{'colorCompleted':collaborationValue.WeekStatus == 'Completed', 'colorOnGoing': collaborationValue.WeekStatus == 'Active', 'notStarted':collaborationValue.WeekStatus == 'YetToStart' || !collaborationValue.WeekStatus}">{{collaborationValue.week}}</h6>
+                <button class="popover-info" popoverPlacement="left" [popover]="collaborationPopover">i</button> 
+              </div> 
+
               <h5 [ngClass]="{'colorCompleted':collaborationValue.WeekStatus == 'Completed', 'colorOnGoing': collaborationValue.WeekStatus == 'Active', 'notStarted':collaborationValue.WeekStatus == 'YetToStart' || !collaborationValue.WeekStatus}">Scored: 
                 <span  *ngIf="collaborationValue.collabarationscoreweek != 0">{{collaborationValue.collabarationscoreweek}}</span>
                 <span  *ngIf="collaborationValue.collabarationscoreweek == 0">--</span>
@@ -166,16 +269,23 @@
       </div>
     </div>
     <div class="ScoreSection">
-      <h3>Learning Score</h3>
+      <h3>Learning Process Score</h3>
       <div class="d-flex justify-content-between">
         <div class="numberedList">
-          <span class="green">1</span>
+          <span [ngClass]="{'green' : courseReportData.LPScore.LPScore != 0,'white' : courseReportData.LPScore.LPScore == 0  }">1</span>
         </div>
         <div class="courseProgressBar">
           <mat-progress-bar mode="determinate" [value]="courseReportData.LPScore.LPScore"></mat-progress-bar>
         </div>
         <div class="progressPercentage">
-          <span class="percentageScore">{{courseReportData.LPScore.LPScore}}</span>
+          <span class="percentageScore">
+            <ng-container *ngIf="courseReportData.LPScore.LPScore != 0">
+              {{courseReportData.LPScore.LPScore}}
+            </ng-container>
+            <ng-container *ngIf="courseReportData.LPScore.LPScore == 0">
+              --
+            </ng-container>
+          </span>
           <span class="outOfScore">Out of {{courseReportData.LPScore.outofLPscore}}</span>
         </div>
       </div>
@@ -184,60 +294,123 @@
         <h3>Assessment Score</h3>
         <div class="d-flex justify-content-between">
           <div class="numberedList">
-            <span class="green">2</span>
+            <span [ngClass]="{'green' : courseReportData.assessmentscore.test1 != 0,'white' : courseReportData.assessmentscore.test1 == 0 }">2</span>
           </div>
           <div class="courseProgressBar">
             <span>Internal Test 1</span>
             <mat-progress-bar mode="determinate" [value]="courseReportData.assessmentscore.test1"></mat-progress-bar>
           </div>
           <div class="progressPercentage">
-            <span class="percentageScore">{{courseReportData.assessmentscore.test1}}</span>
+            <span class="percentageScore">
+              <ng-container *ngIf="courseReportData.assessmentscore.test1 != 0">
+                {{courseReportData.assessmentscore.test1}}
+              </ng-container>
+              <ng-container *ngIf="courseReportData.assessmentscore.test1 == 0">
+                --
+              </ng-container>
+            </span>
             <span class="outOfScore">Out of {{courseReportData.assessmentscore.outoftest1}}</span>
           </div>
         </div>
         <div class="d-flex justify-content-between mt-20">
           <div class="numberedList">
-            <span class="green">3</span>
+            <span [ngClass]="{'green' : courseReportData.assessmentscore.project != 0, 'white' : courseReportData.assessmentscore.project == 0}">3</span>
           </div>
           <div class="courseProgressBar">
             <span>Project</span>
             <mat-progress-bar mode="determinate" [value]="courseReportData.assessmentscore.project"></mat-progress-bar>
           </div>
           <div class="progressPercentage">
-            <span class="percentageScore">{{courseReportData.assessmentscore.project}}</span>
+            <span class="percentageScore">
+              <ng-container *ngIf="courseReportData.assessmentscore.project != 0">
+                {{courseReportData.assessmentscore.project}}
+              </ng-container>
+              <ng-container *ngIf="courseReportData.assessmentscore.project == 0">
+                --
+              </ng-container>
+            </span>
             <span class="outOfScore">Out of {{courseReportData.assessmentscore.outofproject}}</span>
           </div>
         </div>
         <div class="d-flex justify-content-between mt-20">
           <div class="numberedList">
-            <span class="green">4</span>
+            <span [ngClass]="{'green' : courseReportData.assessmentscore.test2 != 0, 'white' : courseReportData.assessmentscore.test2 == 0}">4</span>
           </div>
           <div class="courseProgressBar">
             <span>Internal Test 2</span>
             <mat-progress-bar mode="determinate" [value]="courseReportData.assessmentscore.test2"></mat-progress-bar>
           </div>
           <div class="progressPercentage">
-            <span class="percentageScore">{{courseReportData.assessmentscore.test2}}</span>
+            <span class="percentageScore">
+              <ng-container *ngIf="courseReportData.assessmentscore.test2 != 0">
+                {{courseReportData.assessmentscore.test2}}
+              </ng-container>
+              <ng-container *ngIf="courseReportData.assessmentscore.test2 == 0">
+                --
+              </ng-container>
+            </span>
             <span class="outOfScore">Out of {{courseReportData.assessmentscore.outoftest2}}</span>
           </div>
         </div>
         <div class="d-flex justify-content-between mt-20">
           <div class="numberedList">
-            <span class="green">5</span>
+            <span [ngClass]="{'green' : courseReportData.assessmentscore.test3 != 0, 'white' : courseReportData.assessmentscore.test3 == 0}">5</span>
           </div>
           <div class="courseProgressBar">
             <span>Final Test</span>
             <mat-progress-bar mode="determinate" [value]="courseReportData.assessmentscore.test3"></mat-progress-bar>
           </div>
           <div class="progressPercentage">
-            <span class="percentageScore">{{courseReportData.assessmentscore.test3}}</span>
+            <span class="percentageScore">
+              <ng-container *ngIf="courseReportData.assessmentscore.test3 != 0">
+                {{courseReportData.assessmentscore.test3}}
+              </ng-container>
+              <ng-container *ngIf="courseReportData.assessmentscore.test3 == 0">
+                --
+              </ng-container>
+            </span>
             <span class="outOfScore">Out of {{courseReportData.assessmentscore.outoftest3}}</span>
           </div>
         </div>
       </div>
 
       <div class="finalScoreCard">
-        <h3>Final Score</h3>
+        <div class="d-flex">
+          <h3>Final Score</h3>
+          <button class="popover-info-final ml-2"  popoverPlacement="right" [popover]="finalPopover">i</button>  
+        </div>
+        <popover-content #finalPopover 
+                placement="right"
+                [animation]="true" 
+                popoverSize="large">
+                <div style="width: 200px;"> 
+                  <div style="color: red;">
+                    Calculation
+                  </div>
+                  <div style="color: #2525DE;">
+                   = {{courseReportData.finalscore.calculation}}
+                  </div>
+                  <div style="color: #2525DE;">
+                   = {{courseReportData.finalscore.rawscore}}
+                  </div>
+                  <div>
+                    <table>
+                      <thead>
+                        <td>Score</td>
+                        <td>Grade Point</td>
+                        <td>Grade</td>
+                      </thead>
+                      <tbody>
+                        <tr style="color: red;text-align: center;" *ngFor="let value of courseReportData.finalscore.formula">
+                          <td>{{value.rawscore}}</td>
+                          <td>{{value.gradepoint}}</td>
+                          <td>{{value.grade}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div> 
+              </popover-content>
         <div class="d-flex justify-content-between align-items-center">
           <div class="progressFinal">
             <circle-progress [percent]='courseReportData.finalscore.rawscore' [radius]= 40 [space]= -6 [outerStrokeGradient]= true [outerStrokeWidth]= 6 [outerStrokeColor]= "'#2A4DC1'" [outerStrokeGradientStopColor]= "'#53a9ff'" [innerStrokeColor]= "'#e7e8ea'" [innerStrokeWidth]= 6 [animation]="true" [animationDuration]="300" [showSubtitle] = "false"></circle-progress>  
@@ -251,4 +424,40 @@
     </div>
   </div>
   
+</div>
+<div *ngIf="!courseReport" class="item" >
+  <mat-card class="courseDetailSkeleton" style="box-shadow: none !important;">
+      <div class="breadcrumbskeleton">
+          <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', height: '35px', 'background-color': '#d2d1d1' }"></ngx-skeleton-loader>
+      </div>
+      <div class="d-flex justify-content-between">
+        <div style="width: 70%;">
+          <div class="d-flex justify-content-between" style="width: 100%;">
+            <div  class="item" style="width: 15%;">
+              <ngx-skeleton-loader [theme]="{'background-color': '#d2d1d1', 'width': '100px','height': '100px','border-radius': '50%','margin-top': '18%'}" animation="pulse"></ngx-skeleton-loader>
+            </div>
+            <div class="item" style="width: 82%;">
+                <div>
+                  <ngx-skeleton-loader count="3" animation="pulse" [theme]="{ display: 'block', 'background-color': '#d2d1d1', width: '100%' , height: '40px'}"></ngx-skeleton-loader>
+                </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between" style="width: 100%;">
+            <div  class="item" style="width: 15%;">
+              <ngx-skeleton-loader [theme]="{'background-color': '#d2d1d1', 'width': '100px','height': '100px','border-radius': '50%','margin-top': '18%'}" animation="pulse"></ngx-skeleton-loader>
+            </div>
+            <div class="item" style="width: 82%;">
+                <div>
+                  <ngx-skeleton-loader count="3" animation="pulse" [theme]="{ display: 'block', 'background-color': '#d2d1d1', width: '100%' , height: '40px'}"></ngx-skeleton-loader>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="item" style="width: 27%;">
+          <div>
+            <ngx-skeleton-loader count="8" animation="pulse" [theme]="{ display: 'block', 'background-color': '#d2d1d1', width: '100%' , height: '30px'}"></ngx-skeleton-loader>
+          </div>
+        </div>
+      </div>
+  </mat-card>
 </div>
