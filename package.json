@@ -98,6 +98,7 @@
     "ngx-pagination": "^5.0.0",
     "ngx-pipes": "^2.7.3",
     "ngx-skeleton-loader": "^2.6.0",
+    "ngx-smart-popover": "^1.4.0",
     "ngx-socket-io": "^3.2.0",
     "ngx-spinner": "^7.2.0",
     "ngx-toastr": "^10.1.0",

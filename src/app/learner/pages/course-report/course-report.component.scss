@@ -97,6 +97,7 @@
         border: 1px solid #00A37D;
         color: #ffffff;
       }
+      
       &.white {
         background-color: #ffffff;
         border: 1px solid #666666;
@@ -117,6 +118,7 @@
   }
   .progressPercentage {
     width: 16%;
+    margin-top: 1%;
     span {
       display: block;
       line-height: normal;
@@ -172,11 +174,12 @@
   .weekScoredContent {
     width: 79%;
     margin-right: 2%;
+    justify-content: flex-start;
     .weeksWise {
       padding: 5px;
       width: 23%;
       position: relative;
-      div {
+      .weekWiseDescription {
         padding: 5px;
         // position: relative;
         &::before, 
@@ -188,27 +191,28 @@
         &::before {
           top: 100%;
           left: 0;
-          width: 98%;
+          width: 90%;
           height: 1px;
         }
         &::after {
           top: 15%;
-          left: 105%;
+          left: 95%;
           width: 1px;
           height: 76%;
           bottom: 5%;
         }
       }
       &:nth-child(4n) {
-        div {
+        .weekWiseDescription {
           &::after {
             width: 0;
           }
         }
       }
       &:hover {
-        div {
+        .weekWiseDescription {
           background-color: #E3E3E3;
+        // margin-right: 10px;
         }
       }
 
@@ -318,4 +322,47 @@
 
 .mt-20 {
   margin-top: 20px;
+}
+
+.popover-info {
+  border: none;
+  background: #F5F5F5;
+  color: grey;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  box-shadow: 2px 1px 2px #00000029;
+  position: absolute;
+  right: 10px;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popover-info-final{
+  border: none;
+  background: #F5F5F5;
+  color: grey;
+  border-radius: 20px;
+  width: 20px;
+  height: 20px;
+  box-shadow: 2px 1px 2px #00000029;
+}
+
+.popover-info:hover {
+  background: grey;
+  color: white;
+}
+
+.ml-2 {
+  margin-left: 2%;
+}
+
+::ng-deep .popover .arrow {
+  top: 67px !important;
+}
+
+::ng-deep .finalScoreCard .popover .arrow {
+  top: 170px !important;
 }
