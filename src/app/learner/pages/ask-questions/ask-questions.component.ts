@@ -27,6 +27,7 @@ export class AskQuestionsComponent implements OnInit {
   questionTopicList = null;
   questionTopic = null;
   questionModule: any = null;
+  courseName: any;
   constructor(private dialog: MatDialog,
     public Lservice: LearnerServicesService,
     public route: Router,
@@ -40,9 +41,11 @@ export class AskQuestionsComponent implements OnInit {
     if (detail === undefined) {
       this.batchId = localStorage.getItem('currentBatchId');
       this.courseid = localStorage.getItem('Courseid');
+      this.courseName = localStorage.getItem('CourseName');
     } else {
       this.batchId = detail.batch_id;
       this.courseid = detail.course_id;
+      this.courseName = detail.course_name;
     }
     this.userDetail = this.gs.checkLogout();
     
@@ -98,7 +101,7 @@ export class AskQuestionsComponent implements OnInit {
   }
 
   askQAModuleSelect(){
-    this.questionModule = this.questionTopicList.title
+    this.questionModule = this.questionTopicList?.title
     this.questionTopic=null
   }
 
@@ -108,6 +111,7 @@ export class AskQuestionsComponent implements OnInit {
         console.log(data)
         this.questionText="";
         if(data?.data?.askaquestion?.success){
+          this.closedialogbox()
           this.toastr.success(data?.data?.askaquestion?.message)
         }else{
          // this.toastr.warning(data?.data?.bookmark?.message)
@@ -121,6 +125,7 @@ export class AskQuestionsComponent implements OnInit {
 
   closedialogbox(){
     this.mainTopic=null
+    this.questionTopicList=null;
     this.questionTopic=null
     this.dialog.closeAll();
   }
