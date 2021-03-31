@@ -1005,6 +1005,7 @@ export class CoursedetailsComponent implements OnInit {
         console.log(data)
         this.questionText="";
         if(data?.data?.askaquestion?.success){
+          this.selectedQATabIndex = 1;
           this.toastr.success(data?.data?.askaquestion?.message)
         }else{
          // this.toastr.warning(data?.data?.bookmark?.message)

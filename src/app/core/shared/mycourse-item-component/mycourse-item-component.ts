@@ -167,6 +167,7 @@ export class MycourseItemComponent implements OnInit {
     }
     localStorage.setItem('Courseid', c.course_id);
     localStorage.setItem('currentBatchId', c.batchid);
+    localStorage.setItem('CourseName', c.course_name);
 
     this.router.navigateByUrl('/Learner/askQuestions', { state: { detail } });
   }

@@ -1032,19 +1032,19 @@ color:grey
     pointer-events: none;
 }
 
-.bs-vertical-wizard ul>li.current:after {
-    border-color: rgba(255,255,255,0);
-    border-left-color: #fff;
-    border-width: 10px;
-    margin-top: -10px;
-}
+// .bs-vertical-wizard ul>li.current:after {
+//     border-color: rgba(255,255,255,0);
+//     border-left-color: #0ff;
+//     border-width: 10px;
+//     margin-top: -10px;
+// }
 
-.bs-vertical-wizard ul>li.current:before {
-    border-color: rgba(234,236,241,0);
-    border-left-color: #eaecf1;
-    border-width: 11px;
-    margin-top: -11px;
-}
+// .bs-vertical-wizard ul>li.current:before {
+//     border-color: rgba(234,236,241,0);
+//     border-left-color: #eaecf1;
+//     border-width: 11px;
+//     margin-top: -11px;
+// }
 .mr-10px{
 margin-right: 10px !important;
 }

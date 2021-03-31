@@ -2508,6 +2508,63 @@ li {
     }
   }
 }
+.askaquestionDetails {
+  width: 100%;
+  text-align: right;
+  padding: 0 15px;
+  margin: 5px 0 15px 0;
+  span {
+    cursor: pointer;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #EAEAEA;
+    width: 33px;
+    height: 33px;
+    font-size: 12px;
+    color: #333333;
+    position: relative;
+    .launchIcon {
+      font-size: 15px;
+      color:#C02222;
+      transition: all 0.3s ease-in-out;
+    }
+    &:hover {
+      i {
+        color:#333333;
+      }
+    }
+  }
+  [data-title] {
+    font-size: 11px;
+    position: relative;
+    color: #C02222;
+    &:hover {
+      &::before {
+        content: attr(data-title);
+        position: absolute;
+        bottom: 5px;
+        right: 35px;
+        line-height: normal;
+        background: #5C6873;
+        padding: 4px 6px;
+        color: #fff;
+        font-size: 11px;
+        white-space: nowrap;
+      }
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 9px;
+        left: -2px;
+        border-width: 6px;
+        border-style: solid;
+        border-color: transparent transparent transparent #5C6873;
+      }
+    }
+  }
+}
 .seemoreHove :hover{
   color:#C02222
 }
