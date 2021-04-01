@@ -1860,7 +1860,6 @@ export const getprojectActivityData = gql`
         module_id
         activityname
         topic_id
-        evaluationmode
         projecttype
         total_mark
         score_mark
@@ -1925,7 +1924,6 @@ query getperformActivityData($userId: String , $courseId: String) {
         module_id
         activityname
         topic_id
-        evaluationmode
         materialDetails{
           _id
           doc_type
