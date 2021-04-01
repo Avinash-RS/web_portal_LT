@@ -60,6 +60,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.lxp-book-question:before {
+  content: "\e92c";
+  color: #626262;
+}
+.lxp-info-circle:before {
+  content: "\f05a";
+}
 .lxp-lifebuoy:before {
   content: "\e941";
 }
@@ -194,7 +201,4 @@
 }
 .lxp-stack:before {
   content: "\e905";
-}
-.lxp-info-circle:before {
-  content: "\f05a";
 }
