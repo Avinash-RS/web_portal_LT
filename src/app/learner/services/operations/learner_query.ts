@@ -2274,8 +2274,8 @@ export const search = gql`
   }
 `;
 export const getLearnerNewCourseReport = gql`
-  query getLearnerNewCourseReport($batchid:String!,$courseid:String!$userid:String!) {
-    getLearnerNewCourseReport(batchid:$batchid,courseid:$courseid,userid:$userid) {
+  query getLearnerNewCourseReport($batchid:String!,$courseid:String!,$userid:String!,$refresh:Boolean!) {
+    getLearnerNewCourseReport(batchid:$batchid,courseid:$courseid,userid:$userid,refresh:$refresh) {
       success
     error_msg
     message

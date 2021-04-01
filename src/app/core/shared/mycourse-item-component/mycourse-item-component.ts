@@ -184,9 +184,9 @@ export class MycourseItemComponent implements OnInit {
     this.router.navigate(['/Learner/coursereport'],{
       queryParams:
       {
-        id: c.course_id,
+        id: btoa(c.course_id),
         name: c.course_name,
-        batchId:c.batchid
+        batchId: btoa(c.batchid)
       }
     });
   

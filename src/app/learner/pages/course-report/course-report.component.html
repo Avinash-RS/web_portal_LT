@@ -13,7 +13,10 @@
 </div>
 
 <div *ngIf="courseReport" class="courseReportWrapper">
-  <h3>Learning Process</h3>
+  <div class="d-flex justify-content-between">
+    <h3>Learning Process</h3>
+    <button (click)="refreshReport()" class="refresh"><mat-icon style="vertical-align: middle;">refresh</mat-icon>Refresh</button>
+  </div>
   <div class="d-flex justify-content-between">
     <div class="LearningPercentage">
       <div class="selfLearningSection commonClass d-flex justify-content-between flex-wrap">
