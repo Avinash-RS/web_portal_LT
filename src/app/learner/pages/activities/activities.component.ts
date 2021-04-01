@@ -363,7 +363,10 @@ export class ActivitiesComponent implements OnInit {
   uploadDoc(event, project, submitAction) {
     if(project?.projectActivity.videodetails.length == 3) {
       this.toastr.warning("You are allowed only to upload a maximum of 3 files");
-      return false;
+      if (this.uploadInput) {
+        this.uploadInput.nativeElement.value = '';
+      }     
+       return false;
     }
     let fileSizeval = 0;
     if(event.target.files.length==1){
@@ -374,6 +377,9 @@ export class ActivitiesComponent implements OnInit {
        if(fileSizeval/1024/1024 > 150){
         this.toastr.warning("The file size can not exceed 150 MB");
         this.selectfile = [];
+        if (this.uploadInput) {
+          this.uploadInput.nativeElement.value = '';
+        } 
         return;
       }
     this.learnerUploadVideo(project, submitAction);
@@ -841,6 +847,9 @@ export class ActivitiesComponent implements OnInit {
     const allowedExtensions = /(\.mp4)$/i;
     if (!allowedExtensions.exec(filePath)) {
       this.toastr.warning('Please upload video file only.');
+      if (this.videoInput) {
+        this.videoInput.nativeElement.value = '';
+      } 
     } else {
       // tslint:disable-next-line: prefer-for-of
       let fileSize = 0;
@@ -851,6 +860,9 @@ export class ActivitiesComponent implements OnInit {
       if(fileSize/1024/1024 > 150){
         this.toastr.warning("The file size can not exceed 150 MB");
         this.selectPerformfile = [];
+        if (this.videoInput) {
+          this.videoInput.nativeElement.value = '';
+        } 
         return;
       }
       this.performlearnerUploadVideo();
@@ -863,6 +875,9 @@ export class ActivitiesComponent implements OnInit {
   uploadDocuments(e, perform, performans) {
     if(perform.videodetails.length == 3) {
       this.toastr.warning("You are allowed only to upload a maximum of 3 files");
+      if (this.videoInput) {
+        this.videoInput.nativeElement.value = '';
+      } 
       return false;
     }
     this.performsData = performans;
