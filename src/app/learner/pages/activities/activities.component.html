@@ -37,15 +37,15 @@
           <div class="d-flex justify-content-between">
             <div class="w-100 projectActivityDetails">
               <div class="d-flex justify-content-between assignmentActivityDetails">
-                <div class="projectLeftContent">
+                <div style="width: 50%;" class="projectLeftContent">
                   <div class="topic text-left d-flex">
                     <mat-icon class="assignIcon">assignment</mat-icon>
                     <span class="f_size_16 f_wt_600 projHead">{{assignment.files.module_id}}</span>
                   </div>
-                  <div class="t-l-1 ml-11">
+                  <div class="t-l-1 ml-4">
                    {{assignment.files.topic_id}}
                   </div>
-                  <div class="t-l-1 ml-11">
+                  <div class="t-l-1 ml-4">
                     Activity Description: {{assignment.files.activityname}}
                   </div>
                 </div>
@@ -61,9 +61,11 @@
                       <span class="gradedot"></span>Graded
                     </span>
                   </div>
-                  <div class="projTotalScore" *ngIf="assignment.files.grade_status == 'Evaluated'">
+                  <div class="projTotalScore">
                     <div class="text-right">
-                      <span class="totscore">Total score: {{assignment.files.score_mark}}/{{assignment.files.total_mark}}</span>
+                      <span class="totscore">
+                        Total score: <span *ngIf="!assignment.files.score_mark">-</span> <span *ngIf="assignment.files.score_mark">{{assignment.files.score_mark}}</span>
+                        /{{assignment.files.total_mark}}</span>
                     </div>
                   </div>
                   <div class="d-flex justify-content-end projDate">
@@ -126,7 +128,7 @@
                   <div class="col-md-4 col-sm-12 col-12 third">
                     <div class="f_size_16 f_wt_600 align-center work">Your work</div>
                     <div class="box-0-3">
-                      <div class="fileData ml-auto mr-auto mb-3 d-flex" *ngIf="assignment?.files?.filename">
+                      <div class="fileData ml-auto mr-auto mb-3 d-flex" (click)="previewAssignment(previewDialog,assignment.files)" *ngIf="assignment?.files?.filename">
                         <mat-icon *ngIf="assignment.files.doc_type == 'image/jpeg'|| assignment.files.doc_type == 'image/png' || assignment.files.doc_type =='image/jpg'" class="videoPlay float-left">photo</mat-icon>
                         <mat-icon *ngIf="assignment.files.doc_type == 'application/pdf'" class="videoPlay float-left">picture_as_pdf </mat-icon>                     
                         <span class="uploadfileName assignementName" matTooltip="{{assignment.files.filename}}" matTooltipClass="custom-mat-tooltip">

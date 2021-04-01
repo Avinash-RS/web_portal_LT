@@ -1860,7 +1860,6 @@ export const getprojectActivityData = gql`
         module_id
         activityname
         topic_id
-        evaluationmode
         projecttype
         total_mark
         score_mark
@@ -1925,7 +1924,6 @@ query getperformActivityData($userId: String , $courseId: String) {
         module_id
         activityname
         topic_id
-        evaluationmode
         materialDetails{
           _id
           doc_type
@@ -2274,8 +2272,8 @@ export const search = gql`
   }
 `;
 export const getLearnerNewCourseReport = gql`
-  query getLearnerNewCourseReport($batchid:String!,$courseid:String!$userid:String!) {
-    getLearnerNewCourseReport(batchid:$batchid,courseid:$courseid,userid:$userid) {
+  query getLearnerNewCourseReport($batchid:String!,$courseid:String!,$userid:String!,$refresh:Boolean!) {
+    getLearnerNewCourseReport(batchid:$batchid,courseid:$courseid,userid:$userid,refresh:$refresh) {
       success
     error_msg
     message
