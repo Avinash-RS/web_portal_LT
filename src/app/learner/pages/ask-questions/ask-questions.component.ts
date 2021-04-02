@@ -19,6 +19,7 @@ export class AskQuestionsComponent implements OnInit {
   localStoCourseid: string;
   courseid: any;
   userDetail: any;
+  scrollselector:any=".myQuestions"
   moduleTopicData: any;
   mainTopic:any = null;
   mainModule:any = null;
@@ -29,6 +30,9 @@ export class AskQuestionsComponent implements OnInit {
   questionTopic = null;
   questionModule: any = null;
   courseName: any;
+  isLoading:boolean=true;
+  loadMessage:any='Loading..';
+  emptyMessage:any='No Questions / Answers to display.';
   constructor(private dialog: MatDialog,
     public Lservice: LearnerServicesService,
     public route: Router,
@@ -66,7 +70,7 @@ export class AskQuestionsComponent implements OnInit {
       width: '60%',
       height: '80%',
       closeOnNavigation: true,
-      //disableClose: true,
+      disableClose: true,
     });
   }
 
@@ -81,19 +85,26 @@ export class AskQuestionsComponent implements OnInit {
   }
 
   getQuestionsAnswerlists(){
+    this.isLoading = true;
     this.Lservice.getQAsortsearch(this.batchId,this.courseid,this.qaSortKey,this.mainPagenumber,this.mainModuleName,this.mainTopic)
     .subscribe((resdata:any)=>{
-      // console.log(resdata);
+      this.isLoading = false;
       if(resdata.data.sortsearch.message){
-        this.allQuestionList = resdata.data.sortsearch.message
+        this.allQuestionList.push.apply(this.allQuestionList,resdata.data.sortsearch.message)
       }else{
         this.allQuestionList = []
       }
       
     })
   }
+  onScroll(){
+    this.mainPagenumber = this.mainPagenumber+1
+    this.getQuestionsAnswerlists()
+  }
 
   mainQAFilter(call){
+    this.mainPagenumber=0;
+    this.allQuestionList = []
     if(call==='M'){
       this.mainModuleName = this.mainModule?this.mainModule.title:null;
       this.mainTopic=null

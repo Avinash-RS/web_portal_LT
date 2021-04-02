@@ -1104,6 +1104,8 @@ message{
       ans
       askDate
       ansDate
+      askTime
+      ansTime
     }
   }
 }
@@ -1125,6 +1127,8 @@ message{
       ans
       askDate
       ansDate
+      askTime
+      ansTime
     }
   }
 }
@@ -1144,6 +1148,8 @@ message{
       ans
       askDate
       ansDate
+      askTime
+      ansTime
     }
 }
 }

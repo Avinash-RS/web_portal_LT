@@ -1138,5 +1138,32 @@ margin-right: 10px !important;
     }
 }
 .badge {
-    padding:5px !important;
+    padding: 5px 10px !important;
+}
+.badge-success{
+    background-color: #53bd9d !important;
+}
+.badge-warning{
+    background-color: #ffdd91 !important;
+    color: black !important;
+}
+
+::ng-deep.askQuestionsContainer {
+    .mat-tab-group {
+        height: 100%;
+        .mat-tab-body-wrapper {
+            height: 100%;
+        }
+    }
+    .mat-tab-label {
+        opacity: 1;
+        font-weight: 400;
+        color: rgba(0, 0, 0, 0.5);
+        &.mat-tab-label-active {
+            color: rgba(0, 0, 0, 1);
+        }
+    }
+    .mat-tab-body-content {
+        overflow: auto !important;
+    }
 }

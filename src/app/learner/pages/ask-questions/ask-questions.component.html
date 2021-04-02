@@ -35,25 +35,29 @@
             <button class="btn btn-primary" (click)="openQuestionInput(questionInputModal)">Ask Question</button>
         </div>
     </div>
-    <div infinite-scroll class="myQuestions" *ngIf="allQuestionList.length;else noallitems">
-        <div class="qaBox" *ngFor="let item of allQuestionList">
-            <div class="userAccount"><i class="lxp-AccountCircle"></i>&nbsp; {{item.user_name}}</div>
-            <p class="quesiton">{{item.question.que}}</p>
-            <div class="QuestionMeta">
-                <p>Asked on: &nbsp;{{item.question.askDate}}</p>
-                <div class="badge badge-success">Answered</div>
+    <div >
+        <div infiniteScroll [infiniteScrollDistance]="2" [scrollWindow]="false"
+        [infiniteScrollThrottle]="50" (scrolled)="onScroll()" class="myQuestions" *ngIf="allQuestionList.length;else noallitems">
+            <div class="qaBox" *ngFor="let item of allQuestionList">
+                <span class="userAccount"><i
+                        class="lxp-AccountCircle align-text-bottom"></i>&nbsp;<span>{{item.user_name}}</span></span>&nbsp;|&nbsp;
+                <span class="QuestionMeta d-inline-flex">
+                    <p>Asked on: &nbsp;{{item.question.askDate}},&nbsp;{{item.question.askTime}}</p>
+                </span>
+                <p class="quesiton">{{item.question.que}}</p>
+                <div class="QuestionMeta">
+                    <div class="badge badge-success">Answered</div>
+                    <p>&nbsp; {{item.question.ansDate}},&nbsp;{{item.question.ansTime}}</p>
+                </div>
+                <p class="answer" *ngIf="item.question.ansDate">{{item.question.ans}}</p>
+    
             </div>
-            <p class="answer" *ngIf="item.question.ansDate">{{item.question.ans}}</p>
-            <div class="QuestionMeta">
-                <p>Answered on: &nbsp;{{item.question.ansDate}}</p>
-            </div>
+    
         </div>
-
     </div>
-
     <ng-template #noallitems>
         <div class="myQuestions d-flex align-items-center justify-content-center">
-            No questions / answers to display.
+            {{isLoading?loadMessage:emptyMessage}}
         </div>
     </ng-template>
 </div>

@@ -150,6 +150,7 @@ export class CoursedetailsComponent implements OnInit {
   filterData: any;
   myQuestionList: any = [];
   allQuestionList: any = [];
+  isQALoading: boolean;
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -1023,8 +1024,11 @@ export class CoursedetailsComponent implements OnInit {
 
   questionTabSelection(tab) {
     if (tab.index === 1) {
+      this.isQALoading=true;
+      this.myQuestionList = [];
+      this.allQuestionList=[]
       this.Lservice.getMyQuestion(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle).subscribe((data:any)=>{
-        console.log(data)
+        this.isQALoading=false;
         if(data?.data.getmyque.success){
           this.myQuestionList = data.data.getmyque.message
         }else{
@@ -1032,8 +1036,11 @@ export class CoursedetailsComponent implements OnInit {
         }
       })
     } else if (tab.index === 2){
+      this.isQALoading=true
+      this.allQuestionList=[]
+      this.myQuestionList = [];
       this.Lservice.getallquestion(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,-1,this.batchId).subscribe((data:any)=>{
-        console.log(data)
+        this.isQALoading=false
         if(data?.data.getallquestion?.success){
           this.allQuestionList = data.data.getallquestion?.message
         }else{
@@ -1041,7 +1048,8 @@ export class CoursedetailsComponent implements OnInit {
         }
       })
     }else{
-
+      this.myQuestionList = [];
+      this.allQuestionList = [];
     }
   }
   filterToc(){
@@ -1068,18 +1076,23 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   filterQAList(){
+    this.isQALoading=true
     this.Lservice.getallquestion(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,this.qaFilterKey,this.batchId).subscribe((data:any)=>{
+      this.isQALoading=false
       if(data?.data.getallquestion?.success){
         this.allQuestionList = data.data.getallquestion?.message
       }
     })
   }
   closeAskQuestion(){
-    this.dialog.getDialogById("askQuestions").close();
+    this.dialog.closeAll();
+    this.myQuestionList = [];
+    this.allQuestionList = [];
     this.selectedQATabIndex = 0;
   }
   openAskQuestions(templateRef: TemplateRef<any>){
     this.questionText="";
+    this.allQuestionList=[]
     this.dialog.open(templateRef, {
   // scrollStrategy: new NoopScrollStrategy(),
   width: '60%',
