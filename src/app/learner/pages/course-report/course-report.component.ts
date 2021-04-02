@@ -11,7 +11,8 @@ export class CourseReportComponent implements OnInit {
   course;
   userDetail;
   courseReportData;
-  courseReport = false
+  courseReport = false;
+  refresh = false;
   constructor(private activeRoute: ActivatedRoute,private router:Router,private learnerService: LearnerServicesService) { }
 
   ngOnInit() {
@@ -21,13 +22,17 @@ export class CourseReportComponent implements OnInit {
     });
    this.getCourseReport();
   }
-
+  refreshReport(){
+    this.refresh = true;
+    this.courseReport = false;
+    this.getCourseReport();
+  }
   getBack(){
     this.router.navigateByUrl('/Learner/MyCourse');
   }
 
   getCourseReport(){
-this.learnerService.getReport(this.course.batchId,this.course.id,this.userDetail.user_id).subscribe((data)=>{
+this.learnerService.getReport(atob(this.course.batchId),atob(this.course.id),this.userDetail.user_id,this.refresh).subscribe((data)=>{
   if (data.data['getLearnerNewCourseReport'].data[0]) {
     this.courseReport = true;
     this.courseReportData = data.data['getLearnerNewCourseReport'].data[0];

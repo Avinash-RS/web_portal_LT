@@ -1097,13 +1097,14 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  getReport(batchid,courseid,userid) {
+  getReport(batchid,courseid,userid,refresh) {
     return this.Apollo.query({
       query: getLearnerNewCourseReport,
       variables: {
         batchid,
         courseid,
-        userid
+        userid,
+        refresh
       }
     });
   }
