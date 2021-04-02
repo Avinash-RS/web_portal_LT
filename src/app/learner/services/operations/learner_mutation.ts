@@ -1132,8 +1132,8 @@ message{
 }
 `;
 export const getQAsortsearch = gql`
-mutation sortsearch($batchid:String,$course_id:String,$sort:Int,$pagenumber:Int,$type:Boolean,$module:String,$topic:String){
-  sortsearch(batchid:$batchid,course_id:$course_id,sort:$sort,pagenumber:$pagenumber,type:$type,module:$module,topic:$topic){
+mutation sortsearch($batchid:String,$course_id:String,$sort:Int,$pagenumber:Int,$type:Boolean,$module:String,$topic:String,$screenType:String){
+  sortsearch(batchid:$batchid,course_id:$course_id,sort:$sort,pagenumber:$pagenumber,type:$type,module:$module,topic:$topic,screenType:$screenType){
 success
 status
 message{

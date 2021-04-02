@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { GlobalServiceService } from "@core/services/handlers/global-service.service";
 import { LearnerServicesService } from "@learner/services/learner-services.service";
 import { ToastrService } from "ngx-toastr";
+// import { NgxUiLoaderService, SPINNER } from "ngx-ui-loader";
 
 @Component({
   selector: "app-ask-questions",
@@ -33,6 +34,7 @@ export class AskQuestionsComponent implements OnInit {
     public route: Router,
     private gs: GlobalServiceService,
     private toastr: ToastrService,
+    // private ngxLoader: NgxUiLoaderService
   ) {
 
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
@@ -81,7 +83,7 @@ export class AskQuestionsComponent implements OnInit {
   getQuestionsAnswerlists(){
     this.Lservice.getQAsortsearch(this.batchId,this.courseid,this.qaSortKey,this.mainPagenumber,this.mainModuleName,this.mainTopic)
     .subscribe((resdata:any)=>{
-      console.log(resdata);
+      // console.log(resdata);
       if(resdata.data.sortsearch.message){
         this.allQuestionList = resdata.data.sortsearch.message
       }else{
@@ -106,10 +108,13 @@ export class AskQuestionsComponent implements OnInit {
   }
 
   submitMyQuestion(){
-    if(this.questionText){
+    if(this.questionModule||this.questionTopic){
+    if(this.questionText.trim().length){
+      // this.ngxLoader.start();
       this.Lservice.askaquestion(this.userDetail.user_id,this.courseid,this.questionModule,this.questionTopic,this.questionText).subscribe((data:any)=>{
-        console.log(data)
+        // console.log(data)
         this.questionText="";
+        // this.ngxLoader.stop()
         if(data?.data?.askaquestion?.success){
           this.closedialogbox()
           this.toastr.success(data?.data?.askaquestion?.message)
@@ -118,9 +123,11 @@ export class AskQuestionsComponent implements OnInit {
         }
       })
     }else{
-      this.toastr.warning("Please enter some text.")
+      this.toastr.warning("Please enter some text")
     }
-    
+    }else{
+      this.toastr.warning("Please select a module")
+    }
   }
 
   closedialogbox(){

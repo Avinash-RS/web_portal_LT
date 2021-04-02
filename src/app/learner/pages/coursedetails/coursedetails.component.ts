@@ -1000,7 +1000,8 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   submitMyQuestion(){
-    if(this.questionText){
+    if(this.currentModuleTitle||this.currentTopicTitle){
+      if(this.questionText.trim().length){
       this.Lservice.askaquestion(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,this.questionText).subscribe((data:any)=>{
         console.log(data)
         this.questionText="";
@@ -1012,7 +1013,10 @@ export class CoursedetailsComponent implements OnInit {
         }
       })
     }else{
-      this.toastr.warning("Please enter some text.")
+      this.toastr.warning("Please enter some text")
+    }
+    }else{
+      this.toastr.warning("Please select a module")
     }
     
   }
@@ -1023,6 +1027,8 @@ export class CoursedetailsComponent implements OnInit {
         console.log(data)
         if(data?.data.getmyque.success){
           this.myQuestionList = data.data.getmyque.message
+        }else{
+          this.myQuestionList = [];
         }
       })
     } else if (tab.index === 2){
@@ -1030,6 +1036,8 @@ export class CoursedetailsComponent implements OnInit {
         console.log(data)
         if(data?.data.getallquestion?.success){
           this.allQuestionList = data.data.getallquestion?.message
+        }else{
+          this.allQuestionList = [];
         }
       })
     }else{
@@ -1078,7 +1086,7 @@ export class CoursedetailsComponent implements OnInit {
   height: '80%',
   scrollStrategy: new NoopScrollStrategy(),
   closeOnNavigation: true,
-  //disableClose: true,
+  disableClose: true,
 });
 }
 }
