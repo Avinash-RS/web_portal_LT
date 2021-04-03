@@ -452,6 +452,9 @@ export class PerformancePageMobileComponent implements OnInit {
     if(fileSize/1024/1024 > 150){
       this.toastr.warning("The file size can not exceed 150 MB");
       this.selectPerformfile = [];
+      if (this.videoInputPerform) {
+        this.videoInputPerform.nativeElement.value = '';
+      }
       return;
     }
     this.performlearnerUploadVideo();
@@ -460,6 +463,9 @@ export class PerformancePageMobileComponent implements OnInit {
   uploadDocuments(itration, perform) {
     if(itration.videodetails.length == 3) {
       this.toastr.warning("You are allowed only to upload a maximum of 3 files");
+      if (this.videoInputPerform) {
+        this.videoInputPerform.nativeElement.value = '';
+      }
       return false;
     }
     this.performsData = perform;
