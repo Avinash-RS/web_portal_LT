@@ -154,7 +154,14 @@
   }
 }
 .badge {
-  padding: 5px !important;
+  padding: 5px 10px !important;
+}
+.badge-success{
+  background-color: #53bd9d !important;
+}
+.badge-warning{
+  background-color: #ffdd91 !important;
+  color: black !important;
 }
 .sel-pad {
   padding: 2px;

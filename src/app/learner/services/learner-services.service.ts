@@ -1084,6 +1084,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
         type: true,
         module,
         topic,
+        screenType: 'learner'
       }
     });
   }

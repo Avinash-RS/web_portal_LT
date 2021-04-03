@@ -218,11 +218,18 @@
                         <h6>{{(course.completed_topic_count!=null?course.completed_topic_count:0) +'/'+ (course.total_topic_count!=null?course.total_topic_count:0)}}</h6>
                       </div>
                     </div>
-                    <div class="askaquestionDetails" *ngIf="course?.course_status ==='incomplete'||course?.course_status ==='suspend'||course?.course_status ==='completed'">
-                      <span data-title="View all Q&A" (click)="gotoAskQuestions(course)">
+                    <div class="askaquestionDetails" *ngIf="course?.course_status ==='incomplete'||course?.course_status ==='suspend'||course?.course_status ==='completed';else disabledQA">
+                      <span data-title="View all Q&A"  class="pointer" (click)="gotoAskQuestions(course)">
                         <i class="lxp-book-question launchIcon"></i>
                       </span>
                     </div>
+                    <ng-template #disabledQA>
+                      <div class="askaquestionDetails" >
+                        <span data-title="View all Q&A">
+                          <i class="lxp-book-question launchIcondis"></i>
+                        </span>
+                      </div>
+                    </ng-template>
                   </div>
                 </div>
               </div>
