@@ -59,7 +59,7 @@ export class MycourseItemComponent implements OnInit {
     },
     nav: true
   };
-  currentDate = new Date();
+  currentDate = new Date().getTime();
   // tabTitleVal: string = 'Self-Paced Learning';
   constructor(
     public translate: TranslateService,
@@ -68,7 +68,6 @@ export class MycourseItemComponent implements OnInit {
     private gs: GlobalServiceService,
     private router: Router,
     private loader: Ng4LoadingSpinnerService, ) {
-      console.log(this.currentDate)
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.role = localStorage.getItem('role') ||sessionStorage.getItem('role') || null;
   }
@@ -78,6 +77,8 @@ export class MycourseItemComponent implements OnInit {
 
     this.courseWeekCircle = (this.course.week_completed_count !== null ?
        this.course.week_completed_count : 0) + '/' + (this.course.week_total_count !== null ? this.course.week_total_count : 0);
+      console.log(new Date(this.course.batch_end_date).getTime())
+      this.course.batch_end_date_Timer = new Date(this.course.batch_end_date).getTime();
   }
   Go(course) {
     localStorage.removeItem('userTabLocation');
@@ -106,7 +107,8 @@ export class MycourseItemComponent implements OnInit {
       enrollment_status: null,
       course_name: c.course_name,
       course_status: c.course_status,
-      batch_id:c.batchid
+      batch_id:c.batchid,
+      batchEndTime:c.batch_end_date_Timer,
       // persentage : c.coursePlayerStatus.course_percentage || 0
     };
     // if (this.screenWidth < 800) {

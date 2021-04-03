@@ -151,6 +151,8 @@ export class CoursedetailsComponent implements OnInit {
   myQuestionList: any = [];
   allQuestionList: any = [];
   isQALoading: boolean;
+  batchEndTime: any;
+  currentDate = new Date().getTime();
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -197,8 +199,10 @@ export class CoursedetailsComponent implements OnInit {
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     if(detail===undefined){
         this.batchId = localStorage.getItem('currentBatchId')
+        this.batchEndTime = localStorage.getItem('currentBatchEndDate')
       }else{
         this.batchId = detail.batch_id
+        this.batchEndTime = detail.batchEndTime
       }
 
     if (this.gs.checkLogout()) {
