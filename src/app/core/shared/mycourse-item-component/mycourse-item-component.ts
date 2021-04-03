@@ -59,6 +59,7 @@ export class MycourseItemComponent implements OnInit {
     },
     nav: true
   };
+  currentDate = new Date();
   // tabTitleVal: string = 'Self-Paced Learning';
   constructor(
     public translate: TranslateService,
@@ -67,6 +68,7 @@ export class MycourseItemComponent implements OnInit {
     private gs: GlobalServiceService,
     private router: Router,
     private loader: Ng4LoadingSpinnerService, ) {
+      console.log(this.currentDate)
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.role = localStorage.getItem('role') ||sessionStorage.getItem('role') || null;
   }

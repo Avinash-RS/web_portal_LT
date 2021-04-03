@@ -33,6 +33,7 @@ export class AskQuestionsComponent implements OnInit {
   isLoading:boolean=true;
   loadMessage:any='Loading..';
   emptyMessage:any='No Questions / Answers to display.';
+  screenWidth: number;
   constructor(private dialog: MatDialog,
     public Lservice: LearnerServicesService,
     public route: Router,
@@ -40,7 +41,7 @@ export class AskQuestionsComponent implements OnInit {
     private toastr: ToastrService,
     // private ngxLoader: NgxUiLoaderService
   ) {
-
+    this.screenWidth = window.innerWidth
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
       console.log(detail)
@@ -66,12 +67,22 @@ export class AskQuestionsComponent implements OnInit {
   openQuestionInput(templateRef: TemplateRef<any>) {
     console.log(this.moduleTopicData);
     this.questionText = "";
-    this.dialog.open(templateRef, {
-      width: '60%',
-      height: '80%',
-      closeOnNavigation: true,
-      disableClose: true,
-    });
+    if(this.screenWidth>650){
+      this.dialog.open(templateRef, {
+        width: '60%',
+        height: '80%',
+        closeOnNavigation: true,
+        disableClose: true,
+      });
+    }else{
+      this.dialog.open(templateRef, {
+        width: '100%',
+        height: '80%',
+        closeOnNavigation: true,
+        disableClose: true,
+      });
+    }
+    
   }
 
   getPlayerModuleTopic() {

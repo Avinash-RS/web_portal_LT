@@ -1090,18 +1090,29 @@ export class CoursedetailsComponent implements OnInit {
     this.allQuestionList = [];
     this.selectedQATabIndex = 0;
   }
-  openAskQuestions(templateRef: TemplateRef<any>){
-    this.questionText="";
-    this.allQuestionList=[]
-    this.dialog.open(templateRef, {
-  // scrollStrategy: new NoopScrollStrategy(),
-  width: '60%',
-  height: '80%',
-  scrollStrategy: new NoopScrollStrategy(),
-  closeOnNavigation: true,
-  disableClose: true,
-});
-}
+  openAskQuestions(templateRef: TemplateRef<any>) {
+    this.questionText = "";
+    this.allQuestionList = []
+    if(this.screenWidth>560){
+      this.dialog.open(templateRef, {
+      // scrollStrategy: new NoopScrollStrategy(),
+      width: '60%',
+      height: '80%',
+      scrollStrategy: new NoopScrollStrategy(),
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+    }else{
+      this.dialog.open(templateRef, {
+      // scrollStrategy: new NoopScrollStrategy(),
+      width: '98%',
+      height: '80%',
+      scrollStrategy: new NoopScrollStrategy(),
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+    }
+  }
 }
 
 
