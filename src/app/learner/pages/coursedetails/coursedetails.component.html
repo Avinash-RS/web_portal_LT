@@ -432,7 +432,7 @@
                         <p class="quesiton">{{item.filteredValue.question.que}}</p>
                         <div class="QuestionMeta">
                             <div class="badge font-weight-lighter" [ngClass]="item.filteredValue.question.ansDate?'badge-success':'badge-warning'">{{item.filteredValue.question.ansDate?'Answered':'Unanswered'}} </div>
-                            &nbsp;<p *ngIf="item.filteredValue.question.ansDate">{{item.filteredValue.question.ansDate}} &nbsp;{{item.filteredValue.question.ansTime}}</p>
+                            &nbsp;<p *ngIf="item.filteredValue.question.ansDate">{{item.filteredValue.question.ansDate}}, &nbsp;{{item.filteredValue.question.ansTime}}</p>
                             
                         </div>
                         <p class="answer" *ngIf="item.filteredValue.question.ansDate">{{item.filteredValue.question.ans}}</p>

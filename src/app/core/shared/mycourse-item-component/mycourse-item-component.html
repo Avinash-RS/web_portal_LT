@@ -431,7 +431,7 @@
                       <div *ngIf="course.progressionExp" class="f_size_12 animate__animated animate__fadeInUp">
                         Modules completed {{(course.completed_module_count!=null?course.completed_module_count:0) +'/'+ (course.total_module_count!=null?course.total_module_count:0)}}<br>
                         Topics completed {{(course.completed_topic_count!=null?course.completed_topic_count:0) +'/'+ (course.total_topic_count!=null?course.total_topic_count:0)}}<br>
-                        <span *ngIf="course?.course_status ==='incomplete'||course?.course_status ==='suspend'||course?.course_status ==='completed'" class="pointer f_size_10" style="color: #C02222; text-decoration: underline;" (click)="gotoAskQuestions(course)">
+                        <span *ngIf="(course?.course_status ==='incomplete'||course?.course_status ==='suspend'||course?.course_status ==='completed')&&(course.batch_end_date_Timer>currentDate)" class="pointer f_size_10" style="color: #C02222; text-decoration: underline;" (click)="gotoAskQuestions(course)">
                           View all Q&amp;A</span>
                       </div>
                     </div>
