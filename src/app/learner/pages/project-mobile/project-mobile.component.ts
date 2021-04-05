@@ -146,12 +146,18 @@ export class ProjectMobileComponent implements OnInit {
   uploadDoc(event, project, submitAction) {
     if(project?.projectActivity.videodetails.length == 3) {
       this.toastr.warning("You are allowed only to upload a maximum of 3 files");
+      if (this.uploadFile) {
+        this.uploadFile.nativeElement.value = '';
+      } 
       return false;
     }
     const filePath = event.target.files[0].name;
     var re = /(\.jpg|\.jpeg|\.png|\.pdf|\.mp4)$/i;
     if (!re.exec(filePath)) {
       this.toastr.warning("Upload a valid file format");
+      if (this.uploadFile) {
+        this.uploadFile.nativeElement.value = '';
+      } 
       return;
     }
     let fileSizeval = 0;
@@ -161,8 +167,11 @@ export class ProjectMobileComponent implements OnInit {
       this.selectfile.push(event.target.files[i]);
     }
     if(fileSizeval/1024/1024 > 150){
-      this.toastr.warning("The file size can not exceed 150 MB");
+      this.toastr.warning("The file size can not exceed 150 MB"); 
       this.selectfile = [];
+      if (this.uploadFile) {
+        this.uploadFile.nativeElement.value = '';
+      }
       return;
     }
     this.learnerUploadVideo(project, submitAction);
