@@ -130,7 +130,8 @@ export class AskQuestionsComponent implements OnInit {
   }
 
   submitMyQuestion(){
-    if(this.questionModule||this.questionTopic){
+    if(this.questionModule ){
+    if(this.questionTopic){
     if(this.questionText.trim().length){
       // this.ngxLoader.start();
       this.Lservice.askaquestion(this.userDetail.user_id,this.courseid,this.questionModule,this.questionTopic,this.questionText).subscribe((data:any)=>{
@@ -147,12 +148,17 @@ export class AskQuestionsComponent implements OnInit {
     }else{
       this.toastr.warning("Please enter some text")
     }
+  }else{
+    this.toastr.warning("Please select a topic")
+  }
     }else{
       this.toastr.warning("Please select a module")
     }
   }
 
   closedialogbox(){
+    this.questionModule = null;
+    this.questionTopic = null;
     this.mainTopic=null
     this.questionTopicList=null;
     this.questionTopic=null
