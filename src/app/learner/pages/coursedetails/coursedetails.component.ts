@@ -151,6 +151,8 @@ export class CoursedetailsComponent implements OnInit {
   myQuestionList: any = [];
   allQuestionList: any = [];
   isQALoading: boolean;
+  batchEndTime: any;
+  currentDate = new Date().getTime();
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -197,8 +199,10 @@ export class CoursedetailsComponent implements OnInit {
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     if(detail===undefined){
         this.batchId = localStorage.getItem('currentBatchId')
+        this.batchEndTime = localStorage.getItem('currentBatchEndDate')
       }else{
         this.batchId = detail.batch_id
+        this.batchEndTime = detail.batchEndTime
       }
 
     if (this.gs.checkLogout()) {
@@ -1090,18 +1094,29 @@ export class CoursedetailsComponent implements OnInit {
     this.allQuestionList = [];
     this.selectedQATabIndex = 0;
   }
-  openAskQuestions(templateRef: TemplateRef<any>){
-    this.questionText="";
-    this.allQuestionList=[]
-    this.dialog.open(templateRef, {
-  // scrollStrategy: new NoopScrollStrategy(),
-  width: '60%',
-  height: '80%',
-  scrollStrategy: new NoopScrollStrategy(),
-  closeOnNavigation: true,
-  disableClose: true,
-});
-}
+  openAskQuestions(templateRef: TemplateRef<any>) {
+    this.questionText = "";
+    this.allQuestionList = []
+    if(this.screenWidth>560){
+      this.dialog.open(templateRef, {
+      // scrollStrategy: new NoopScrollStrategy(),
+      width: '60%',
+      height: '80%',
+      scrollStrategy: new NoopScrollStrategy(),
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+    }else{
+      this.dialog.open(templateRef, {
+      // scrollStrategy: new NoopScrollStrategy(),
+      width: '98%',
+      height: '80%',
+      scrollStrategy: new NoopScrollStrategy(),
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+    }
+  }
 }
 
 
