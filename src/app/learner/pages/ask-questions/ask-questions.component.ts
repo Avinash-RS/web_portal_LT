@@ -34,6 +34,11 @@ export class AskQuestionsComponent implements OnInit {
   loadMessage:any='Loading..';
   emptyMessage:any='No Questions / Answers to display.';
   screenWidth: number;
+
+  dateObj = new Date()
+  currentDate = new Date(this.dateObj.getFullYear() + '-' + (this.dateObj.getMonth() + 1) + '-' + this.dateObj.getDate()).getTime();
+  batchEndTime: any;
+
   constructor(private dialog: MatDialog,
     public Lservice: LearnerServicesService,
     public route: Router,
@@ -49,10 +54,13 @@ export class AskQuestionsComponent implements OnInit {
       this.batchId = localStorage.getItem('currentBatchId');
       this.courseid = localStorage.getItem('Courseid');
       this.courseName = localStorage.getItem('CourseName');
+      this.batchEndTime = localStorage.getItem('currentBatchEndDate')
     } else {
+      this.batchId = detail.batch_id;
       this.batchId = detail.batch_id;
       this.courseid = detail.course_id;
       this.courseName = detail.course_name;
+      this.batchEndTime = detail.batchEndTime;
     }
     this.userDetail = this.gs.checkLogout();
     
