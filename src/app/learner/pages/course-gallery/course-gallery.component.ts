@@ -39,24 +39,30 @@ export class CourseGalleryComponent implements OnInit {
     this.router.navigateByUrl('/Learner/MyCourse');
   }
 
+
   getGalleryData(content){
     console.log(content)
     this.loader.show();
-    this.learnerService.getcourseGallery('io').subscribe((data)=>{
-      if(data.data['search']['message']['courseDetail']) {
-        this.coursedata = data.data['search']['message']['courseDetail']
-        // if(content == 0){
-        // this.coursedata.forEach((data1)=>{
-        //   data1.children.forEach((data2) => {
-        //     data2.allContent = [...data2.Image,...data2.Video]
-        //   });
-        // })
-        // }
-        this.coursedata.forEach(element1 => {
-          element1.children[0].activeTopic = 'active'
-        });
+    this.learnerService.getcourseGallery(this.course.id).subscribe((data)=>{
+      if(data.data['getCourseGallery']['data']['coursedetails']) {
+        this.coursedata = data.data['getCourseGallery']['data']['coursedetails']
+        if(content == 0){
+        this.coursedata.forEach((data1)=>{
+          data1.moduledetails[0].activeTopic = 'active'
+          data1.moduledetails.forEach((data2) => {
+            data2.allContent = [...data2.image,...data2.video]
+            data2.allContent.push({
+              'link' : data2.link,
+              'type' : 'kc',
+              'fileName' : data2.topicname
+             })
+          });
+        })
+        }
+        // this.coursedata.forEach(element1 => {
+        //   element1.moduledetails[0].activeTopic = 'active'
+        // });
         this.loader.hide();
-        console.log(this.coursedata)
       }
       else {
         this.loader.hide();
@@ -67,10 +73,10 @@ export class CourseGalleryComponent implements OnInit {
 
   onTopicSelection(moduleName,topicname) {
     this.coursedata.forEach((data1)=>{
-      if(data1.title == moduleName) {
-        data1.children.forEach((data2)=>{
+      if(data1.modulename == moduleName) {
+        data1.moduledetails.forEach((data2)=>{
           data2.activeTopic = ''
-          if(data2.title == topicname) {
+          if(data2.topicname == topicname) {
             data2.activeTopic = 'active'
           }
         })
@@ -93,7 +99,7 @@ export class CourseGalleryComponent implements OnInit {
   onPreviewgallery(type,path1,path2) {
     var file;
     if(type == 'video' || type == 'image'){
-      file = this.galleryUrl + '/'  + path1  + path2
+      file = this.galleryUrl + '/'  + path1
     } else{
       file = this.galleryUrl + '/'  + path2
     }

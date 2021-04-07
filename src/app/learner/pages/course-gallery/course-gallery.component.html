@@ -11,26 +11,21 @@
     </div>
   </div>
 </div>
-<mat-tab-group #tabs (selectedTabChange)="getGalleryData($event.index);"
+<mat-tab-group #tabs
 [(selectedIndex)]="selectedIndex" mat-align-tabs="center" animationDuration="1000ms"
 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-container">
-  <!-- <mat-tab label="All"> 
+  <mat-tab label="All"> 
     <ng-continer *ngIf="selectedIndex == 0">
-      All
-    </ng-continer>
-    </mat-tab> -->
-  <mat-tab label="Videos">
-    <ng-container *ngIf="selectedIndex == 0">
       <div *ngIf="!emptyGallery" class="content-container">
         <div *ngFor="let content of coursedata">
           <div class="header-content">
-            <h3>{{content.title}}</h3>
+            <h3>{{content.modulename}}</h3>
             <div class="header-carousel">
               <drag-scroll (reachesLeftBound)="leftBoundStat($event)" (reachesRightBound)="rightBoundStat($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
-                <span drag-scroll-item *ngFor="let topic of content.children;let i = index" class="tooltip-pos">
-                  <span class="topic-container" (click)="onTopicSelection(content.title,topic.title)">
-                    <span class="{{ topic.activeTopic == 'active' ? 'topic-chip active-topic chip-hover' : 'topic-chip chip-hover'}}"  matTooltip="{{topic.title}}"  matTooltipClass="tooltip-show">
-                      {{topic.title}}</span>
+                <span drag-scroll-item *ngFor="let topic of content.moduledetails;let i = index" class="tooltip-pos">
+                  <span class="topic-container" (click)="onTopicSelection(content.modulename,topic.topicname)">
+                    <span class="{{ topic.activeTopic == 'active' ? 'topic-chip active-topic chip-hover' : 'topic-chip chip-hover'}}"  matTooltip="{{topic.topicname}}"  matTooltipClass="tooltip-show">
+                      {{topic.topicname}}</span>
                   </span>
                 </span>
               </drag-scroll>
@@ -45,17 +40,80 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
             </div>
           </div>
           <div class="main-section">
-            <ng-container *ngFor="let topic of content.children;">
+            <ng-container *ngFor="let topic of content.moduledetails;">
             <ng-container *ngIf="topic.activeTopic == 'active'">
-              <ng-container *ngFor="let videoFile of topic.Video">
+              <ng-container *ngFor="let file of topic.allContent">
                 <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                  <div class="resource-card" (click)="onPreviewgallery('video',content.path,videoFile.href)">
+                  <div class="resource-card" (click)="onPreviewgallery('video',content.path,videoFile.link)">
+                    <div class="card-img">
+                          <img *ngIf="file.type == 'video'" src="../../../assets/images/video-res.svg" class="thumbImg" alt="video">
+                          <img *ngIf="file.type == 'image'" src="../../../assets/images/Image-res.svg" class="thumbImg" alt="image">
+                          <img *ngIf="file.type == 'kc'" src="../../../assets/images/knowledge.svg" class="thumbImg" alt="image">
+                    </div>
+                    <div class="card-name" matTooltip="{{file.fileName}}"  matTooltipClass="tooltip-show">
+                      <div class="file-name"  style="-webkit-box-orient: vertical;">
+                       {{file.fileName}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="emptyGallery">
+        <mat-card class="noSessionCard color-yellow-card-status">
+          <div class="row mar-t-12">
+            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+              <img class="actImg" src="assets/Assignment.svg" alt="assignment"> 
+            </div>
+            <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
+              <span class=""> You have no data at the moment!</span>
+            </div>
+          </div>
+        </mat-card> 
+      </div>
+    </ng-continer>
+    </mat-tab>
+  <mat-tab label="Videos">
+    <ng-container *ngIf="selectedIndex == 1">
+      <div *ngIf="!emptyGallery" class="content-container">
+        <div *ngFor="let content of coursedata">
+          <div class="header-content">
+            <h3>{{content.modulename}}</h3>
+            <div class="header-carousel">
+              <drag-scroll (reachesLeftBound)="leftBoundStat($event)" (reachesRightBound)="rightBoundStat($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
+                <span drag-scroll-item *ngFor="let topic of content.moduledetails;let i = index" class="tooltip-pos">
+                  <span class="topic-container" (click)="onTopicSelection(content.modulename,topic.topicname)">
+                    <span class="{{ topic.activeTopic == 'active' ? 'topic-chip active-topic chip-hover' : 'topic-chip chip-hover'}}"  matTooltip="{{topic.topicname}}"  matTooltipClass="tooltip-show">
+                      {{topic.topicname}}</span>
+                  </span>
+                </span>
+              </drag-scroll>
+              <div class="draggable-button-container">
+                <div class="leftArrow">
+                  <button [disabled]="leftNavDisabled" [ngClass]="leftNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveLeft()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
+                </div>
+                <div class="rightArrow">
+                  <button [disabled]="rightNavDisabled" [ngClass]="rightNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveRight()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="main-section">
+            <ng-container *ngFor="let topic of content.moduledetails;">
+            <ng-container *ngIf="topic.activeTopic == 'active'">
+              <ng-container *ngFor="let videoFile of topic.video">
+                <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                  <div class="resource-card" (click)="onPreviewgallery('video',videoFile.link)">
                     <div class="card-img">
                           <img src="../../../assets/images/video-res.svg" class="thumbImg" alt="video">
                     </div>
                     <div class="card-name">
-                      <div class="file-name" style="-webkit-box-orient: vertical;">
-                       MP4
+                      <div class="file-name" matTooltip="{{videoFile.fileName}}"  matTooltipClass="tooltip-show" style="-webkit-box-orient: vertical;">
+                       {{videoFile.fileName}}
                       </div>
                     </div>
                   </div>
@@ -81,17 +139,17 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
     </ng-container>
   </mat-tab>
   <mat-tab label="Images">
-    <ng-container *ngIf="selectedIndex == 1">
+    <ng-container *ngIf="selectedIndex == 2">
       <div *ngIf="!emptyGallery" class="content-container">
         <div *ngFor="let content of coursedata">
           <div class="header-content">
-            <h3>{{content.title}}</h3>
+            <h3>{{content.modulename}}</h3>
             <div class="header-carousel">
               <drag-scroll (reachesLeftBound)="leftBoundStat($event)" (reachesRightBound)="rightBoundStat($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
-                <span drag-scroll-item *ngFor="let topic of content.children;let i = index" class="tooltip-pos">
-                  <span class="topic-container" (click)="onTopicSelection(content.title,topic.title)">
-                    <span class="{{ topic.activeTopic == 'active' ? 'topic-chip active-topic chip-hover' : 'topic-chip chip-hover'}}"  matTooltip="{{topic.title}}"  matTooltipClass="tooltip-show">
-                      {{topic.title}}</span>
+                <span drag-scroll-item *ngFor="let topic of content.moduledetails;let i = index" class="tooltip-pos">
+                  <span class="topic-container" (click)="onTopicSelection(content.modulename,topic.topicname)">
+                    <span class="{{ topic.activeTopic == 'active' ? 'topic-chip active-topic chip-hover' : 'topic-chip chip-hover'}}"  matTooltip="{{topic.topicname}}"  matTooltipClass="tooltip-show">
+                      {{topic.topicname}}</span>
                   </span>
                 </span>
               </drag-scroll>
@@ -106,19 +164,19 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
             </div>
           </div>
           <div class="main-section">
-            <ng-container *ngFor="let topic of content.children;">
+            <ng-container *ngFor="let topic of content.moduledetails;">
             <ng-container *ngIf="topic.activeTopic == 'active'">
-              <ng-container *ngFor="let imageFile of topic.Image">
+              <ng-container *ngFor="let imageFile of topic.image">
                 <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                  <div class="resource-card" (click)="onPreviewgallery('image',content.path,imageFile.href)">
+                  <div class="resource-card" (click)="onPreviewgallery('image',imageFile.link)">
                     <div class="card-img">
                       <ng-container>
                         <img src="../../../assets/images/Image-res.svg" class="thumbImg" alt="image">
                       </ng-container>
                     </div>
                     <div class="card-name">
-                      <div class="file-name" style="-webkit-box-orient: vertical;">
-                       Image
+                      <div class="file-name" matTooltip="{{imageFile.fileName}}"  matTooltipClass="tooltip-show" style="-webkit-box-orient: vertical;">
+                       {{imageFile.fileName}}
                       </div>
                     </div>
                   </div>
@@ -144,17 +202,17 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
     </ng-container>
   </mat-tab>
   <mat-tab label=" Knowledge Check"> 
-    <ng-container *ngIf="selectedIndex == 2">
+    <ng-container *ngIf="selectedIndex == 3">
       <div *ngIf="!emptyGallery" class="content-container">
         <div *ngFor="let content of coursedata">
           <div class="header-content">
-            <h3>{{content.title}}</h3>
+            <h3>{{content.modulename}}</h3>
             <div class="header-carousel">
               <drag-scroll (reachesLeftBound)="leftBoundStat($event)" (reachesRightBound)="rightBoundStat($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
-                <span drag-scroll-item *ngFor="let topic of content.children;let i = index" class="tooltip-pos">
-                  <span class="topic-container" (click)="onTopicSelection(content.title,topic.title)">
-                    <span class="{{ topic.activeTopic == 'active' ? 'topic-chip active-topic chip-hover' : 'topic-chip chip-hover'}}"  matTooltip="{{topic.title}}"  matTooltipClass="tooltip-show">
-                      {{topic.title}}</span>
+                <span drag-scroll-item *ngFor="let topic of content.moduledetails;let i = index" class="tooltip-pos">
+                  <span class="topic-container" (click)="onTopicSelection(content.modulename,topic.topicname)">
+                    <span class="{{ topic.activeTopic == 'active' ? 'topic-chip active-topic chip-hover' : 'topic-chip chip-hover'}}"  matTooltip="{{topic.topicname}}"  matTooltipClass="tooltip-show">
+                      {{topic.topicname}}</span>
                   </span>
                 </span>
               </drag-scroll>
@@ -169,7 +227,7 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
             </div>
           </div>
           <div class="main-section">
-            <ng-container *ngFor="let topic of content.children;">
+            <ng-container *ngFor="let topic of content.moduledetails;">
             <ng-container *ngIf="topic.activeTopic == 'active'">
                 <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                   <div class="resource-card" (click)="onPreviewgallery('HTML','',topic.link)">
@@ -179,8 +237,8 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
                       </ng-container>
                     </div>
                     <div class="card-name">
-                      <div class="file-name" style="-webkit-box-orient: vertical;">
-                       {{topic.title}}
+                      <div class="file-name" matTooltip="{{topic.topicname}}"  matTooltipClass="tooltip-show" style="-webkit-box-orient: vertical;">
+                       {{topic.topicname}}
                       </div>
                     </div>
                   </div>
