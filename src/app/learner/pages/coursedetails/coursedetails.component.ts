@@ -152,7 +152,8 @@ export class CoursedetailsComponent implements OnInit {
   allQuestionList: any = [];
   isQALoading: boolean;
   batchEndTime: any;
-  currentDate = new Date().getTime();
+  dateObj = new Date()
+  currentDate = new Date(this.dateObj.getFullYear() + '-' + (this.dateObj.getMonth() + 1) + '-' + this.dateObj.getDate()).getTime();
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {

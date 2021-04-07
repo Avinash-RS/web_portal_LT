@@ -33,7 +33,7 @@
                 </select>
             </div>
         </div>
-        <div class="justify-content-end mt-10px">
+        <div class="justify-content-end mt-10px" *ngIf="batchEndTime>=currentDate">
             <button class="btn btn-primary" (click)="openQuestionInput(questionInputModal)">Ask Question</button>
         </div>
     </div>
