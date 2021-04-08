@@ -2243,34 +2243,75 @@ query   get_learner_dashboard_count( $user_id: String!, $user_obj_id: String!, $
 }
 `;
 
-export const search = gql`
-  query search($courseName:String!) {
-    search(courseName:$courseName) {
+export const getCourseGallery = gql`
+  query getCourseGallery($courseid:String!) {
+    getCourseGallery(courseid:$courseid) {
       success
-    message{
-      courseDetail{
-        title
-        path
-        children{
-          title
-          link
-          Image{
-            href
-          }
-          Content{
-            href
-            title
-           
-          }
-          Video{
-            href
+      message
+      data {
+        _id
+        courseid
+        coursename
+        coursedetails{
+          modulename
+          week
+          moduledetails{
+             topicname
+              link
+              image{
+                  link
+                  fileName
+                  type
+              }
+              audio {
+                  link
+                  fileName
+                  type
+              }
+              video{
+                  link
+                  fileName
+                  type
+              }
+              content{
+                  link
+                  fileName
+                  type
+              }
           }
         }
       }
     }
-    }
   }
 `;
+// export const search = gql`
+//   query search($courseName:String!) {
+//     search(courseName:$courseName) {
+//       success
+//     message{
+//       courseDetail{
+//         title
+//         path
+//         children{
+//           title
+//           link
+//           Image{
+//             href
+//           }
+//           Content{
+//             href
+//             title
+           
+//           }
+//           Video{
+//             href
+//           }
+//         }
+//       }
+//     }
+//     }
+//   }
+// `;
 export const getLearnerNewCourseReport = gql`
   query getLearnerNewCourseReport($batchid:String!,$courseid:String!,$userid:String!,$refresh:Boolean!) {
     getLearnerNewCourseReport(batchid:$batchid,courseid:$courseid,userid:$userid,refresh:$refresh) {

@@ -249,10 +249,25 @@
             .file-name {
                 overflow: hidden;
                 text-overflow: ellipsis;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
             }
         }
     }
 }
+
+::ng-deep .tooltip-show {
+  word-break: break-all !important;
+  white-space: normal !important;
+}
+
+.breadcrum-content {
+  padding: 15px 15px 0px 15px;
+}
+::ng-deep .breadcrum-content .mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0em !important;
+}
+::ng-deep .breadcrum-content .mat-form-field-wrapper {
+  padding-bottom: 0em !important; 
+}
+::ng-deep .breadcrum-content  .mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 0.5em 0 0.5em 0 !important;
+   }

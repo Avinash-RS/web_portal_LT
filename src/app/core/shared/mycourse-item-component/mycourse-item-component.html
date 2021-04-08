@@ -86,9 +86,14 @@
               </div> -->
             </div>
           </div>
-          <div style="display: none;" class="analyticsBtn">
+          <mat-button-toggle-group>
+            <mat-button-toggle (click)="openGallery(course)" matTooltip="Course Assets"><i class="lxp-SelfPaced"></i></mat-button-toggle>
+            <mat-button-toggle matTooltip="Practice Test"><i class="lxp-Collaborate"></i></mat-button-toggle>
+            <mat-button-toggle matTooltip="Analytics"><i class="lxp-Progress"></i></mat-button-toggle>
+          </mat-button-toggle-group>
+          <!-- <div class="analyticsBtn">
             <button (click)="openGallery(course)"><i class="lxp-Analytics"></i> Course Gallery</button>
-          </div>
+          </div> -->
           <!-- <div class="analyticsBtn">
             <button><i class="lxp-Analytics"></i> Analytics</button>
           </div> -->
@@ -110,7 +115,7 @@
               <i class="lxp-Progress"></i>
               <h4>Course Progression</h4>
             </div>
-            <div class="d-flex justify-content-between" *ngIf="!course.progresslistExp">
+            <div class="d-flex justify-content-between" style="height: 4em;" *ngIf="!course.progresslistExp">
               <div class="progressionList">
                 <p><span>Instructor led session completed</span> <span>{{course.instructor_lead_session_completed_count}}/{{course.instructor_lead_session_total_count}}</span></p>
                 <p><span>Internal assessment completed</span> <span>{{course.internal_assesment?course.internal_assesment:'N/A'}}</span></p>
