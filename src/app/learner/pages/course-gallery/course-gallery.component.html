@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div style="padding: 15px;" class="">
+<div class="breadcrum-content d-flex">
   <div class="commonBackStyle">
     <i class="lxp-Arrow backArrow" (click)="getBack()"></i>
     <span (click)="getBack()">Back</span>
@@ -10,6 +10,12 @@
       <span>Course Gallery</span>
     </div>
   </div>
+  <!-- <div>
+    <mat-form-field appearance="outline">
+      <input matInput placeholder="Search" name="searchbar" [(ngModel)]="searchContent" type="text">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div> -->
 </div>
 <mat-tab-group #tabs
 [(selectedIndex)]="selectedIndex" mat-align-tabs="center" animationDuration="1000ms"
@@ -40,9 +46,9 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
             </div>
           </div>
           <div class="main-section">
-            <ng-container *ngFor="let topic of content.moduledetails;">
+            <ng-container *ngFor="let topic of content.moduledetails">
             <ng-container *ngIf="topic.activeTopic == 'active'">
-              <ng-container *ngFor="let file of topic.allContent">
+              <ng-container *ngFor="let file of topic.allContent | filter:searchContent">
                 <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                   <div class="resource-card" (click)="onPreviewgallery('video',content.path,videoFile.link)">
                     <div class="card-img">
@@ -51,7 +57,7 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
                           <img *ngIf="file.type == 'kc'" src="../../../assets/images/knowledge.svg" class="thumbImg" alt="image">
                     </div>
                     <div class="card-name" matTooltip="{{file.fileName}}"  matTooltipClass="tooltip-show">
-                      <div class="file-name"  style="-webkit-box-orient: vertical;">
+                      <div class="file-name">
                        {{file.fileName}}
                       </div>
                     </div>
@@ -112,7 +118,7 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
                           <img src="../../../assets/images/video-res.svg" class="thumbImg" alt="video">
                     </div>
                     <div class="card-name">
-                      <div class="file-name" matTooltip="{{videoFile.fileName}}"  matTooltipClass="tooltip-show" style="-webkit-box-orient: vertical;">
+                      <div class="file-name" matTooltip="{{videoFile.fileName}}"  matTooltipClass="tooltip-show">
                        {{videoFile.fileName}}
                       </div>
                     </div>
@@ -175,7 +181,7 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
                       </ng-container>
                     </div>
                     <div class="card-name">
-                      <div class="file-name" matTooltip="{{imageFile.fileName}}"  matTooltipClass="tooltip-show" style="-webkit-box-orient: vertical;">
+                      <div class="file-name" matTooltip="{{imageFile.fileName}}"  matTooltipClass="tooltip-show">
                        {{imageFile.fileName}}
                       </div>
                     </div>
@@ -201,7 +207,7 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
       </div>
     </ng-container>
   </mat-tab>
-  <mat-tab label=" Knowledge Check"> 
+  <mat-tab label="Knowledge Check"> 
     <ng-container *ngIf="selectedIndex == 3">
       <div *ngIf="!emptyGallery" class="content-container">
         <div *ngFor="let content of coursedata">
@@ -237,7 +243,7 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
                       </ng-container>
                     </div>
                     <div class="card-name">
-                      <div class="file-name" matTooltip="{{topic.topicname}}"  matTooltipClass="tooltip-show" style="-webkit-box-orient: vertical;">
+                      <div class="file-name" matTooltip="{{topic.topicname}}"  matTooltipClass="tooltip-show">
                        {{topic.topicname}}
                       </div>
                     </div>

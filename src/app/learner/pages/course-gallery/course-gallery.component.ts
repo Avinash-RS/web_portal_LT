@@ -23,7 +23,8 @@ export class CourseGalleryComponent implements OnInit {
   rightNavDisabled = true;
   selectedIndex = 0;
   galleryUrl: any = environment.galleryURL;
-
+  filterValue;
+  searchDetails = '';
   constructor(private activeRoute: ActivatedRoute, private router: Router,
     private learnerService: LearnerServicesService, public dialog: MatDialog,private loader: Ng4LoadingSpinnerService) {
     this.activeRoute.queryParams.subscribe(res => {
@@ -101,8 +102,15 @@ export class CourseGalleryComponent implements OnInit {
     if(type == 'video' || type == 'image'){
       file = this.galleryUrl + '/'  + path1
     } else{
-      file = this.galleryUrl + '/'  + path2
-    }
+      file = this.galleryUrl  + path2
+    //   this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+    //       (environment.scormUrl + '/scormPlayer.html?contentID=' +
+    //         this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
+    //         this.getuserid._id + '&path=' + this.gettopicLink.link +
+    //         '&module_status=' + this.moduleSatusCheck
+    //         + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Next' + '&token=' + this.user_token);
+     }
+    console.log(file)
     let height = '70%';
     let width = '55%';
     if (type === 'pdf') {
