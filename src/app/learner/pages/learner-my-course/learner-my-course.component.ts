@@ -416,7 +416,7 @@ jobRoleSelectedFunction(event,value){
 
   // NEW API T0 GET DASHBOARD DATA
 
-getDashboardMyCourse(userId, userObjId) {
+  getDashboardMyCourse(userId, userObjId) {
     this.courseDetailsList = [];
     this.showSkeleton = true;
     let requestType = 'ongoing';
@@ -428,8 +428,13 @@ getDashboardMyCourse(userId, userObjId) {
       requestType = 'all';
     }
     let jobRoleId = this.jobroleCategoryId;
-    if(this.jobroleCategoryId === 'All') jobRoleId = null;
-    this.learnerService.get_batchwise_learner_dashboard_data(userId, requestType, jobRoleId).subscribe((BcourseData: any) => {
+    let jobRoleIdSEQ = null;
+    //condition for vocational & course Sequence
+    if (this.userDetailes.org_type === 'vocational' && this.jobroleCategoryId === 'All') {
+      jobRoleIdSEQ = 'all';
+    }
+    if (this.jobroleCategoryId === 'All') { jobRoleId = null; }
+    this.learnerService.get_batchwise_learner_dashboard_data(userId, requestType, jobRoleIdSEQ).subscribe((BcourseData: any) => {
       BcourseData.data.get_batchwise_learner_dashboard_data.message.forEach(elem => {
         elem.isBatchCourse = true;
         if (this.isMobile) {
