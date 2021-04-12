@@ -428,10 +428,14 @@ jobRoleSelectedFunction(event,value){
       requestType = 'all';
     }
     let jobRoleId = this.jobroleCategoryId;
-    let jobRoleIdSEQ = null;
+    let jobRoleIdSEQ = this.jobroleCategoryId;
     //condition for vocational & course Sequence
     if (this.userDetailes.org_type === 'vocational' && this.jobroleCategoryId === 'All') {
       jobRoleIdSEQ = 'all';
+    } else if (this.userDetailes.org_type !== 'vocational') {
+      jobRoleIdSEQ = null;
+    } else {
+      jobRoleIdSEQ = this.jobroleCategoryId;
     }
     if (this.jobroleCategoryId === 'All') { jobRoleId = null; }
     this.learnerService.get_batchwise_learner_dashboard_data(userId, requestType, jobRoleIdSEQ).subscribe((BcourseData: any) => {
