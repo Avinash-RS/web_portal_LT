@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { environment } from '@env/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { OwlOptions } from 'ngx-owl-carousel-o';
@@ -14,6 +15,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 
 export class MycourseItemComponent implements OnInit {
+  blobKey = environment.blobKey;
   // tslint:disable-next-line:no-input-rename
   @Input('courseItems') course: any = {};
   // NOT USING ANY WHERE
