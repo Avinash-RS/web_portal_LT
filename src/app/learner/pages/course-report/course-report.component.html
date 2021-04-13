@@ -75,7 +75,7 @@
               </div>         
               <h5 [ngClass]="{'colorCompleted':selfValue.WeekStatus == 'Completed', 'colorOnGoing': selfValue.WeekStatus == 'Active', 'notStarted':selfValue.WeekStatus == 'YetToStart' || !selfValue.WeekStatus}">Scored: 
                 <span *ngIf="selfValue.selflearningscore != 0">{{selfValue.selflearningscore}}</span>
-                <span *ngIf="selfValue.selflearningscore == 0">--</span>
+                <span *ngIf="selfValue.selflearningscore == 0">0</span>
               </h5>
             </div>
             <div class="weekWiseDescription" *ngIf="courseReportData?.selflearning.isMore && i >= 8">
@@ -85,7 +85,7 @@
               </div>      
               <h5 [ngClass]="{'colorCompleted':selfValue.WeekStatus == 'Completed', 'colorOnGoing': selfValue.WeekStatus == 'Active', 'notStarted':selfValue.WeekStatus == 'YetToStart' || !selfValue.WeekStatus}">Scored: 
                 <span *ngIf="selfValue.selflearningscore != 0">{{selfValue.selflearningscore}}</span>
-                <span *ngIf="selfValue.selflearningscore == 0">--</span>
+                <span *ngIf="selfValue.selflearningscore == 0">0</span>
               </h5>
             </div>
           </div>
@@ -137,7 +137,7 @@
                     (B) Session Duration - {{liveValue.VILTdurationCount}} mins
                   </div>
                   <div>
-                    (C) Attended Duration - {{liveValue.VILTdurationCount}} mins
+                    (C) Attended Duration - {{liveValue.VILTattendanceCount}} mins
                   </div>
                   <div style="color: red;">
                     calculation
@@ -157,7 +157,7 @@
               </div>
               <h5 [ngClass]="{'colorCompleted':liveValue.WeekStatus == 'Completed', 'colorOnGoing': liveValue.WeekStatus == 'Active', 'notStarted':liveValue.WeekStatus == 'YetToStart' || !liveValue.WeekStatus}">Scored: 
                 <span *ngIf="liveValue.VILTscore != 0">{{liveValue.VILTscore}}</span>
-                <span *ngIf="liveValue.VILTscore == 0">--</span>
+                <span *ngIf="liveValue.VILTscore == 0">0</span>
               </h5>
             </div>
             <div class="weekWiseDescription" *ngIf="courseReportData?.VILT.isMore && i >= 8">
@@ -167,7 +167,7 @@
               </div>
               <h5 [ngClass]="{'colorCompleted':liveValue.WeekStatus == 'Completed', 'colorOnGoing': liveValue.WeekStatus == 'Active', 'notStarted':liveValue.WeekStatus == 'YetToStart' || !liveValue.WeekStatus}">Scored: 
                 <span *ngIf="liveValue.VILTscore != 0">{{liveValue.VILTscore}}</span>
-                <span *ngIf="liveValue.VILTscore == 0">--</span>
+                <span *ngIf="liveValue.VILTscore == 0">0</span>
               </h5>
             </div>
           </div>
@@ -245,7 +245,7 @@
 
               <h5 [ngClass]="{'colorCompleted':collaborationValue.WeekStatus == 'Completed', 'colorOnGoing': collaborationValue.WeekStatus == 'Active', 'notStarted':collaborationValue.WeekStatus == 'YetToStart' || !collaborationValue.WeekStatus}">Scored: 
                 <span  *ngIf="collaborationValue.collabarationscoreweek != 0">{{collaborationValue.collabarationscoreweek}}</span>
-                <span  *ngIf="collaborationValue.collabarationscoreweek == 0">--</span>
+                <span  *ngIf="collaborationValue.collabarationscoreweek == 0">0</span>
               </h5>
             </div>
             <div class="weekWiseDescription" *ngIf="courseReportData?.collaboration.isMore && i >= 8">
@@ -256,7 +256,7 @@
 
               <h5 [ngClass]="{'colorCompleted':collaborationValue.WeekStatus == 'Completed', 'colorOnGoing': collaborationValue.WeekStatus == 'Active', 'notStarted':collaborationValue.WeekStatus == 'YetToStart' || !collaborationValue.WeekStatus}">Scored: 
                 <span  *ngIf="collaborationValue.collabarationscoreweek != 0">{{collaborationValue.collabarationscoreweek}}</span>
-                <span  *ngIf="collaborationValue.collabarationscoreweek == 0">--</span>
+                <span  *ngIf="collaborationValue.collabarationscoreweek == 0">0</span>
               </h5>
             </div>
           </div>
@@ -278,7 +278,7 @@
           <span [ngClass]="{'green' : courseReportData.LPScore.LPScore != 0,'white' : courseReportData.LPScore.LPScore == 0  }">1</span>
         </div>
         <div class="courseProgressBar">
-          <mat-progress-bar mode="determinate" [value]="courseReportData.LPScore.LPScore"></mat-progress-bar>
+          <mat-progress-bar mode="determinate" [value]="getScoreProgress(courseReportData.LPScore.LPScore, courseReportData.LPScore.outofLPscore)"></mat-progress-bar>
         </div>
         <div class="progressPercentage">
           <span class="percentageScore">
@@ -286,7 +286,7 @@
               {{courseReportData.LPScore.LPScore}}
             </ng-container>
             <ng-container *ngIf="courseReportData.LPScore.LPScore == 0">
-              --
+              0
             </ng-container>
           </span>
           <span class="outOfScore">Out of {{courseReportData.LPScore.outofLPscore}}</span>
@@ -301,7 +301,7 @@
           </div>
           <div class="courseProgressBar">
             <span>Internal Test 1</span>
-            <mat-progress-bar mode="determinate" [value]="courseReportData.assessmentscore.test1"></mat-progress-bar>
+            <mat-progress-bar mode="determinate" [value]="getScoreProgress(courseReportData.assessmentscore.test1, courseReportData.assessmentscore.outoftest1)"></mat-progress-bar>
           </div>
           <div class="progressPercentage">
             <span class="percentageScore">
@@ -309,7 +309,7 @@
                 {{courseReportData.assessmentscore.test1}}
               </ng-container>
               <ng-container *ngIf="courseReportData.assessmentscore.test1 == 0">
-                --
+                0
               </ng-container>
             </span>
             <span class="outOfScore">Out of {{courseReportData.assessmentscore.outoftest1}}</span>
@@ -321,7 +321,7 @@
           </div>
           <div class="courseProgressBar">
             <span>Project</span>
-            <mat-progress-bar mode="determinate" [value]="courseReportData.assessmentscore.project"></mat-progress-bar>
+            <mat-progress-bar mode="determinate" [value]="getScoreProgress(courseReportData.assessmentscore.project, courseReportData.assessmentscore.outofproject)"></mat-progress-bar>
           </div>
           <div class="progressPercentage">
             <span class="percentageScore">
@@ -329,7 +329,7 @@
                 {{courseReportData.assessmentscore.project}}
               </ng-container>
               <ng-container *ngIf="courseReportData.assessmentscore.project == 0">
-                --
+                0
               </ng-container>
             </span>
             <span class="outOfScore">Out of {{courseReportData.assessmentscore.outofproject}}</span>
@@ -341,7 +341,7 @@
           </div>
           <div class="courseProgressBar">
             <span>Internal Test 2</span>
-            <mat-progress-bar mode="determinate" [value]="courseReportData.assessmentscore.test2"></mat-progress-bar>
+            <mat-progress-bar mode="determinate" [value]="getScoreProgress(courseReportData.assessmentscore.test2, courseReportData.assessmentscore.outoftest2)"></mat-progress-bar>
           </div>
           <div class="progressPercentage">
             <span class="percentageScore">
@@ -349,7 +349,7 @@
                 {{courseReportData.assessmentscore.test2}}
               </ng-container>
               <ng-container *ngIf="courseReportData.assessmentscore.test2 == 0">
-                --
+                0
               </ng-container>
             </span>
             <span class="outOfScore">Out of {{courseReportData.assessmentscore.outoftest2}}</span>
@@ -361,7 +361,7 @@
           </div>
           <div class="courseProgressBar">
             <span>Final Test</span>
-            <mat-progress-bar mode="determinate" [value]="courseReportData.assessmentscore.test3"></mat-progress-bar>
+            <mat-progress-bar mode="determinate" [value]="getScoreProgress(courseReportData.assessmentscore.test3, courseReportData.assessmentscore.outoftest3)"></mat-progress-bar>
           </div>
           <div class="progressPercentage">
             <span class="percentageScore">
@@ -369,7 +369,7 @@
                 {{courseReportData.assessmentscore.test3}}
               </ng-container>
               <ng-container *ngIf="courseReportData.assessmentscore.test3 == 0">
-                --
+                0
               </ng-container>
             </span>
             <span class="outOfScore">Out of {{courseReportData.assessmentscore.outoftest3}}</span>
