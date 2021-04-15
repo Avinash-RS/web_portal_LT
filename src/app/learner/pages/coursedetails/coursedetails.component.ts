@@ -1004,7 +1004,9 @@ export class CoursedetailsComponent implements OnInit {
       }
     })
   }
-
+  contextmenu() {
+    event.preventDefault();
+  }
   submitMyQuestion(){
     if(this.currentModuleTitle||this.currentTopicTitle){
       if(this.questionText.trim().length){
