@@ -178,7 +178,7 @@
             </div>
         </div>
     </mat-dialog-title> -->
-      <mat-dialog-content class="no_padding no_margin popupTab">
+      <mat-dialog-content (contextmenu)="contextmenu()" class="no_padding no_margin popupTab">
         <div class="popupContainer">
             <div class="closeSection">
                 <i (click)="closedialogbox()" class="lxp-Close"></i>
