@@ -19,7 +19,7 @@
               </div>
               <figure>
                 <span class="bgOverlay"></span>
-                <img alt="Course Img" [src]=course.course_img_url class="courseImg" />
+                <img alt="Course Img" [src]="course.course_img_url + blobKey" class="courseImg" />
                 <div *ngIf="course?.course_status !== 'completed'" class="overlay" (click)="gotoDesc(course)">
                   <i class="lxp-PlayCircle playIcon"></i> 
                   <span>{{course?.course_status === "incomplete" ? "Resume" : course?.course_status === "suspend" ? "Resume" : ("Start" | translate) }}</span>

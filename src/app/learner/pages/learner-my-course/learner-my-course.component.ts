@@ -709,7 +709,7 @@ navToCal() {
     this.learnerService.getCountForJobroleCategories(this.userDetailes._id, this.userDetailes.user_id).subscribe((data: any) => {
       this.vocationalselectjobRole = data.data.getCountForJobroleCategories.data
       // this.vocationalselectjobRole = [];
-      if(this.vocationalselectjobRole.length > 0) {
+      if(this.vocationalselectjobRole && this.vocationalselectjobRole.length > 0) {
       }
       else {
       }

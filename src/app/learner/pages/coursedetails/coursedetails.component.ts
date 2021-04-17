@@ -39,7 +39,7 @@ import * as CryptoJS from 'crypto-js';
   ]
 })
 export class CoursedetailsComponent implements OnInit {
-
+  blobKey = environment.blobKey;
   course: any = null;
   loading: boolean;
   pagenumber: any;
@@ -861,16 +861,16 @@ export class CoursedetailsComponent implements OnInit {
     }
     if (file.doc_type.includes("link")) {
       this.fileType = 'link';
-      this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path);
+      this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path + this.blobKey);
     }
 
     if (this.fileType === 'pdf') {
       file.gdocs = '';
-      file.gdocs = 'https://docs.google.com/gview?url=' + file.path + '&embedded=true';
+      file.gdocs = 'https://docs.google.com/gview?url=' + file.path + this.blobKey + '&embedded=true';
       // this.URIData = file;
       this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.gdocs);
     } else {
-      this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path);
+      this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path + this.blobKey);
     }
   }
 
@@ -1004,7 +1004,9 @@ export class CoursedetailsComponent implements OnInit {
       }
     })
   }
-
+  contextmenu() {
+    event.preventDefault();
+  }
   submitMyQuestion(){
     if(this.currentModuleTitle||this.currentTopicTitle){
       if(this.questionText.trim().length){

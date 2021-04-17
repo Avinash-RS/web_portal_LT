@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { environment } from '@env/environment';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
@@ -13,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./assignment.component.scss']
 })
 export class AssignmentComponent implements OnInit {
-
+  blobKey = environment.blobKey;
   userDetail: any;
   checkDetails: any;
   courseid: any;
@@ -181,14 +182,14 @@ export class AssignmentComponent implements OnInit {
       closeOnNavigation: true,
       disableClose: true,
     });
-    this.docpath = path;
+    this.docpath = path + this.blobKey;
   }
 
   downloadPdf(doc) {
     const link = document.createElement('a');
     link.target = '_blank';
     link.style.display = 'none';
-    link.href = doc.path;
+    link.href = doc.path + this.blobKey;
     link.click();
   }
   closedialogbox() {
