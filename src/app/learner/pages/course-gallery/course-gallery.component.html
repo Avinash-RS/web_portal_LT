@@ -18,7 +18,7 @@
   </div> -->
 </div>
 <mat-tab-group #tabs
-[(selectedIndex)]="selectedIndex" mat-align-tabs="center" animationDuration="1000ms"
+[(selectedIndex)]="selectedIndex" (selectedTabChange)="contentChange()" mat-align-tabs="center" animationDuration="1000ms"
 class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-container">
   <mat-tab label="All"> 
     <ng-continer *ngIf="selectedIndex == 0">
@@ -50,7 +50,7 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
             <ng-container *ngIf="topic.activeTopic == 'active'">
               <ng-container *ngFor="let file of topic.allContent | filter:searchContent">
                 <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                  <div class="resource-card" (click)="onPreviewgallery('video',content.path,videoFile.link)">
+                  <div class="resource-card" (click)="onPreviewgallery(file.type,file.link,'','all')">
                     <div class="card-img">
                           <img *ngIf="file.type == 'video'" src="../../../assets/images/video-res.svg" class="thumbImg" alt="video">
                           <img *ngIf="file.type == 'image'" src="../../../assets/images/Image-res.svg" class="thumbImg" alt="image">
