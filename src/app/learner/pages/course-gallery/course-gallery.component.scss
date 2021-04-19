@@ -271,3 +271,9 @@
 ::ng-deep .breadcrum-content  .mat-form-field-appearance-outline .mat-form-field-infix {
   padding: 0.5em 0 0.5em 0 !important;
    }
+
+.content-container {
+  drag-scroll {
+  margin: 0 15px;
+  }
+}
