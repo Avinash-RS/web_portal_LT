@@ -128,12 +128,20 @@
                   <div class="col-md-4 col-sm-12 col-12 third">
                     <div class="f_size_16 f_wt_600 align-center work">Your work</div>
                     <div class="box-0-3">
-                      <div class="fileData ml-auto mr-auto mb-3 d-flex" (click)="previewAssignment(previewDialog,assignment.files)" *ngIf="assignment?.files?.filename">
+                      <div class="fileData ml-auto mr-auto mb-3 d-flex" *ngIf="assignment?.files?.filename">
                         <mat-icon *ngIf="assignment.files.doc_type == 'image/jpeg'|| assignment.files.doc_type == 'image/png' || assignment.files.doc_type =='image/jpg'" class="videoPlay float-left">photo</mat-icon>
                         <mat-icon *ngIf="assignment.files.doc_type == 'application/pdf'" class="videoPlay float-left">picture_as_pdf </mat-icon>                     
-                        <span class="uploadfileName assignementName" matTooltip="{{assignment.files.filename}}" matTooltipClass="custom-mat-tooltip">
+                        <span class="uploadfileName assignementName" style="margin-top: 4px;position: inherit;" matTooltip="{{assignment.files.filename}}" matTooltipClass="custom-mat-tooltip">
                           {{assignment.files.filename}}
                         </span>
+                        <span (click)="previewAssignment(previewDialog,assignment.files)" matTooltip="View" matTooltipClass="custom-mat-tooltip">
+                          <mat-icon matTooltipClass="custom-mat-tooltip" class="assignmentpdf"  *ngIf="assignment.files.doc_type == 'image/jpeg'|| assignment.files.doc_type == 'image/png' || assignment.files.doc_type =='image/jpg'">photo_size_select_actual</mat-icon>
+                          <i class="fa fa-file-pdf-o assignmentpdf" *ngIf="assignment.files.doc_type == 'application/pdf'" aria-hidden="true"></i>
+                        </span>
+                        <span (click)="downloadDoc(assignment.files, 'material')">
+                          <i matTooltip="Download" matTooltipClass="custom-mat-tooltip" class="fa fa-download assignmentdownload" aria-hidden="true"></i>
+                        </span>
+                        
                       </div>
                       <div class="align-center">
                         <input class="form-control border-right-0" type='file' id="upload-photo" #fileInput (change)="uploadAssignmentsFile($event,assignment.files)">
