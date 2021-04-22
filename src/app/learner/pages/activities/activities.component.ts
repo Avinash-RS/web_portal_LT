@@ -468,6 +468,7 @@ export class ActivitiesComponent implements OnInit {
           panelClass: 'popupModalContainer'
         });
         path.path = path.videourl;
+        path.path = path.path + this.blobKey;
         this.previewDoc = path;
       } else {
         path.path = path.videourl;
@@ -1125,6 +1126,7 @@ export class ActivitiesComponent implements OnInit {
       disableClose: true,
       panelClass: 'popupModalContainer'
     });
+    path.path = path.path + this.blobKey;
     this.previewDoc = path;
   }
 
