@@ -458,7 +458,10 @@ export class ProjectMobileComponent implements OnInit {
           closeOnNavigation: true,
           disableClose: true,
         });
-        path.path = path.path + this.blobKey;
+        if (path.path.includes('?sv=')) {
+        } else {
+          path.path = path.path + this.blobKey;          
+        }  
         this.previewDoc = path;
       }
       
@@ -471,7 +474,10 @@ export class ProjectMobileComponent implements OnInit {
             disableClose: true,
             panelClass: 'popupModalContainer'
           });
-          path.path = path.path + this.blobKey;
+          if (path.path.includes('?sv=')) {
+          } else {
+            path.path = path.path + this.blobKey;          
+          }    
           this.previewDoc = path;
       } else {
         this.videoPreview(videoDialog, path.path);
@@ -498,7 +504,10 @@ export class ProjectMobileComponent implements OnInit {
             closeOnNavigation: true,
             disableClose: true,
           });
-          path.path = path.path + this.blobKey;
+          if (path.path.includes('?sv=')) {
+          } else {
+            path.path = path.path + this.blobKey;          
+          }
           this.previewDoc = path;
         } else {
           this.videoSource = path.path;
@@ -514,7 +523,10 @@ export class ProjectMobileComponent implements OnInit {
             disableClose: true,
           });
           path.path = path.videourl;
-          path.path = path.path + this.blobKey;
+          if (path.path.includes('?sv=')) {
+          } else {
+            path.path = path.path + this.blobKey;          
+          }
           this.previewDoc = path;
         } else {
           path.path = path.videourl;
@@ -532,7 +544,11 @@ export class ProjectMobileComponent implements OnInit {
     }
 
     downloadFile(data) {
-      window.open(data + this.blobKey);
+      if (data.includes('?sv=')) {
+        window.open(data);
+      } else {
+        window.open(data + this.blobKey);
+      }
     }
     resourseAccord(courseResource, index) {
       this.openedIndex = index

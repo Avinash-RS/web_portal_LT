@@ -452,7 +452,10 @@ export class ActivitiesComponent implements OnInit {
           disableClose: true,
           panelClass: 'popupModalContainer'
         });
-        path.path = path.path + this.blobKey;
+        if (path.path.includes('?sv=')) {
+        } else {
+          path.path = path.path + this.blobKey;          
+        }
         this.previewDoc = path;
       } else {
         this.videoSource = path.path;
@@ -468,7 +471,10 @@ export class ActivitiesComponent implements OnInit {
           panelClass: 'popupModalContainer'
         });
         path.path = path.videourl;
-        path.path = path.path + this.blobKey;
+        if (path.path.includes('?sv=')) {
+        } else {
+          path.path = path.path + this.blobKey;          
+        }
         this.previewDoc = path;
       } else {
         path.path = path.videourl;
@@ -582,13 +588,21 @@ export class ActivitiesComponent implements OnInit {
       const link = document.createElement('a');
       link.target = '_blank';
       link.style.display = 'none';
-      link.href = doc.path + this.blobKey;
+      if (doc.path.includes('?sv=')) {
+        link.href = doc.path;
+      } else {
+        link.href = doc.path + this.blobKey;
+      }
       link.click();
     } else if (type === 'files') {
       const link = document.createElement('a');
       link.target = '_blank';
       link.style.display = 'none';
-      link.href = doc.videourl + this.blobKey;
+      if (doc.videourl.includes('?sv=')) {
+        link.href = doc.videourl;
+      } else {
+        link.href = doc.videourl + this.blobKey;
+      }
       link.click();
     }
   }
@@ -1108,7 +1122,10 @@ export class ActivitiesComponent implements OnInit {
       disableClose: true,
       panelClass: 'popupModalContainer'
     });
-    path.path = path.path + this.blobKey;
+    if (path.path.includes('?sv=')) {
+    } else {
+      path.path = path.path + this.blobKey;          
+    }
     this.docpath = path;
   }
 
@@ -1126,7 +1143,10 @@ export class ActivitiesComponent implements OnInit {
       disableClose: true,
       panelClass: 'popupModalContainer'
     });
-    path.path = path.path + this.blobKey;
+    if (path.path.includes('?sv=')) {
+    } else {
+      path.path = path.path + this.blobKey;          
+    }
     this.previewDoc = path;
   }
 
@@ -1139,7 +1159,10 @@ export class ActivitiesComponent implements OnInit {
         disableClose: true,
         panelClass: 'popupModalContainer'
       });
-      path.path = path.path + this.blobKey;
+      if (path.path.includes('?sv=')) {
+      } else {
+        path.path = path.path + this.blobKey;          
+      }
       this.previewDoc = path;
     } else if (docType === 'video/mp4') {
       if (path.videourl) {
