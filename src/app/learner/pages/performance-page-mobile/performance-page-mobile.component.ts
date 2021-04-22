@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { AnonymousCredential, BlobServiceClient, newPipeline } from '@azure/storage-blob';
 import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
+import { environment } from '@env/environment';
 @Component({
   selector: 'app-performance-page-mobile',
   templateUrl: './performance-page-mobile.component.html',
@@ -19,6 +20,7 @@ export class PerformancePageMobileComponent implements OnInit {
   // @Input() performDetailsSend: any;
   @Input() performDetailPageData: any;
   @ViewChild('VideoInputPerform') videoInputPerform;
+  blobKey = environment.blobKey;
   selectedName = 'Perform';
   selectedTabIndex: number;
   checkDetails: any;
@@ -496,6 +498,7 @@ export class PerformancePageMobileComponent implements OnInit {
         disableClose: true,
         panelClass: 'popupModalContainer'
       });
+      path.path = path.path + this.blobKey;
       this.previewDoc = path;
     } else {
       this.videoPreview(videoDialog, path);
@@ -512,6 +515,7 @@ playVideoMaterial(templateRef: TemplateRef<any>, videoDialog,  path, docType) {
       disableClose: true,
       panelClass: 'popupModalContainer'
     });
+    path.path = path.path + this.blobKey;
     this.previewDoc = path.path;
 } else {
   this.videoPreview(videoDialog, pathdata);
@@ -526,6 +530,7 @@ previewDoc(templateRef: TemplateRef<any>, path) {
     disableClose: true,
     panelClass: 'popupModalContainer'
   });
+  path.path = path.path + this.blobKey;
   this.docpath = path;
 }
 
