@@ -498,7 +498,10 @@ export class PerformancePageMobileComponent implements OnInit {
         disableClose: true,
         panelClass: 'popupModalContainer'
       });
-      path.path = path.path + this.blobKey;
+      if (path.path.includes('?sv=')) {
+      } else {
+        path.path = path.path + this.blobKey;          
+      }
       this.previewDoc = path;
     } else {
       this.videoPreview(videoDialog, path);
@@ -515,7 +518,10 @@ playVideoMaterial(templateRef: TemplateRef<any>, videoDialog,  path, docType) {
       disableClose: true,
       panelClass: 'popupModalContainer'
     });
-    path.path = path.path + this.blobKey;
+    if (path.path.includes('?sv=')) {
+    } else {
+      path.path = path.path + this.blobKey;          
+    }
     this.previewDoc = path.path;
 } else {
   this.videoPreview(videoDialog, pathdata);
@@ -530,7 +536,10 @@ previewDoc(templateRef: TemplateRef<any>, path) {
     disableClose: true,
     panelClass: 'popupModalContainer'
   });
-  path.path = path.path + this.blobKey;
+  if (path.path.includes('?sv=')) {
+  } else {
+    path.path = path.path + this.blobKey;          
+  }
   this.docpath = path;
 }
 
