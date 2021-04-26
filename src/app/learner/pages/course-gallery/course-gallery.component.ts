@@ -19,7 +19,7 @@ export class CourseGalleryComponent implements OnInit {
   coursedata;
   selectedTopic;
   emptyGallery = false;
-  leftNavDisabled = false;
+  leftNavDisabled = true;
   rightNavDisabled = true;
   selectedIndex = 0;
   galleryUrl: any = environment.galleryURL;
@@ -42,7 +42,6 @@ export class CourseGalleryComponent implements OnInit {
 
 
   getGalleryData(content){
-    console.log(content)
     this.loader.show();
     this.learnerService.getcourseGallery(this.course.id).subscribe((data)=>{
       if(data.data['getCourseGallery']['data']['coursedetails']) {
@@ -71,7 +70,14 @@ export class CourseGalleryComponent implements OnInit {
       }
     })
   }
-
+  contentChange(){
+    this.coursedata.forEach((data1)=>{
+      data1.moduledetails.forEach((data2) => {
+        data2.activeTopic = ''
+      })
+      data1.moduledetails[0].activeTopic = 'active' 
+    })
+  }
   onTopicSelection(moduleName,topicname) {
     this.coursedata.forEach((data1)=>{
       if(data1.modulename == moduleName) {
@@ -97,8 +103,11 @@ export class CourseGalleryComponent implements OnInit {
     this.rightNavDisabled = reachesRightBound;
   }
 
-  onPreviewgallery(type,path1,path2) {
+  onPreviewgallery(type,path1,path2,from) {
     var file;
+    if(from == 'all' && type == 'kc') {
+      path2 = path1
+    }
     if(type == 'video' || type == 'image'){
       file = this.galleryUrl + '/'  + path1
     } else{
@@ -110,7 +119,9 @@ export class CourseGalleryComponent implements OnInit {
     //         '&module_status=' + this.moduleSatusCheck
     //         + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Next' + '&token=' + this.user_token);
      }
-    console.log(file)
+     if(type == 'kc') {
+       type = 'HTML'
+     }
     let height = '70%';
     let width = '55%';
     if (type === 'pdf') {
