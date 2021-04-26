@@ -6,8 +6,8 @@ import { KnowledgePreviewComponent } from '../knowledge-preview/knowledge-previe
 import { environment } from '../../../../environments/environment';
 import { MatDialog } from '@angular/material';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-
-
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import * as CryptoJS from 'crypto-js';
 @Component({
   selector: 'app-course-gallery',
   templateUrl: './course-gallery.component.html',
@@ -25,14 +25,21 @@ export class CourseGalleryComponent implements OnInit {
   galleryUrl: any = environment.galleryURL;
   filterValue;
   searchDetails = '';
+  getuserid;
+  urlSafe: SafeResourceUrl;
+  user_token;
   constructor(private activeRoute: ActivatedRoute, private router: Router,
-    private learnerService: LearnerServicesService, public dialog: MatDialog,private loader: Ng4LoadingSpinnerService) {
+    private learnerService: LearnerServicesService, public dialog: MatDialog,
+    private loader: Ng4LoadingSpinnerService,public sanitizer: DomSanitizer) {
     this.activeRoute.queryParams.subscribe(res => {
       this.course = res;
     });
    }
 
   ngOnInit() {
+    this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
+  // const cryptoInfo = CryptoJS.AES.encrypt(JSON.stringify( {token} ), '(!@#graphql%^&facade!@#)').toString();
+   this.user_token = CryptoJS.AES.decrypt(this.getuserid.token, '(!@#graphql%^&facade!@#)').toString(CryptoJS.enc.Utf8);
     this.getGalleryData(0)
   }
 
@@ -103,24 +110,21 @@ export class CourseGalleryComponent implements OnInit {
     this.rightNavDisabled = reachesRightBound;
   }
 
-  onPreviewgallery(type,path1,path2,from) {
+  onPreviewgallery(type,path1,path2,from,module,topic) {
     var file;
-    if(from == 'all' && type == 'kc') {
-      path2 = path1
+    if(from == 'all') {
+      path2 = path1;
     }
     if(type == 'video' || type == 'image'){
-      file = this.galleryUrl + '/'  + path1
+      file = this.galleryUrl + '/'  + path1;
     } else{
-      file = this.galleryUrl  + path2
-    //   this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
-    //       (environment.scormUrl + '/scormPlayer.html?contentID=' +
-    //         this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
-    //         this.getuserid._id + '&path=' + this.gettopicLink.link +
-    //         '&module_status=' + this.moduleSatusCheck
-    //         + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Next' + '&token=' + this.user_token);
+      file = this.galleryUrl  + path2;
      }
-     if(type == 'kc') {
-       type = 'HTML'
+     if(type == 'HTML') {
+       this.urlSafe = environment.scormUrl + '/scormPlayer.html?contentID=' +
+       this.course.id + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
+         this.getuserid._id + '&path=' + path2 + '&module_status=' + 'process' + '&module=' + module + '&topic=' + topic + '&action=Next' + '&token=' + this.user_token ;
+         file = this.urlSafe
      }
     let height = '70%';
     let width = '55%';
