@@ -150,9 +150,9 @@
                     <button type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light mr-10px" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
                         <i [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></i> {{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? 'Bookmarked':'Add to Bookmark'}}
                     </button>
-                    <!-- <button type="button"  ngClass="btn btn-outline-light" (click)="openAskQuestions(askQuestions)">
+                    <button type="button" [disabled]="batchEndTime<currentDate" ngClass="btn btn-outline-light" (click)="openAskQuestions(askQuestions)">
                         <i class="lxp-lifebuoy"></i> Ask Questions
-                    </button> -->
+                    </button>
                 </div>
             </div>
             <div class="rightContent">
@@ -178,7 +178,7 @@
             </div>
         </div>
     </mat-dialog-title> -->
-      <mat-dialog-content class="no_padding no_margin popupTab">
+      <mat-dialog-content (contextmenu)="contextmenu()" class="no_padding no_margin popupTab">
         <div class="popupContainer">
             <div class="closeSection">
                 <i (click)="closedialogbox()" class="lxp-Close"></i>
@@ -391,7 +391,7 @@
                                     <div class="instructionBox" *ngFor="let author of course?.author_details">
                                         <div class="d-flex justify-content-between">
                                             <figure>
-                                                <img class="img-inst" [src]="author.image ? author?.image : 'assets/learner/pro2.png'" alt="" />
+                                                <img class="img-inst" [src]="author.image ? (author?.image + blobKey) : 'assets/learner/pro2.png'" alt="" />
                                             </figure>
                                             <div class="authorDescription">
                                                 <h5>{{author?.author_name | titlecase| translate}}</h5>
@@ -410,7 +410,7 @@
 
 <ng-template #askQuestions id="askQuestions">
     <div class="askQuestionsContainer" style=" position: relative !important;">
-        <div class="qaClose cursor-pointer"><i (click)="askqaTabs.selectedIndex = 0; closedialogbox()" class="lxp-Close"></i></div>
+        <div class="qaClose cursor-pointer"><i (click)="askqaTabs.selectedIndex = 0; closeAskQuestion()" class="lxp-Close"></i></div>
         <mat-tab-group #askqaTabs [(selectedIndex)]="selectedQATabIndex" (selectedTabChange)="questionTabSelection($event)">
             <mat-tab label="Ask a Question">
                 <div class="questionInput align-content-center">
@@ -419,27 +419,31 @@
                     
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-primary-outline mr-10px" (click)="closeAskQuestion(askQuestions)">Cancel</button>
+                    <button class="btn btn-primary-outline mr-10px" (click)="closeAskQuestion()">Cancel</button>
                     <button class="btn btn-primary" (click)="submitMyQuestion()">Submit Question</button>
                 </div>
             </mat-tab>
             <mat-tab label="My Q&A">
                 <div class="myQuestions" *ngIf="myQuestionList.length;else noitems">
                     <div class="qaBox" *ngFor="let item of myQuestionList">
+                        <div class="QuestionMeta">
+                            <p>Asked on {{item.filteredValue.question.askDate}},&nbsp;{{item.filteredValue.question.askTime}}</p>
+                        </div>
                         <p class="quesiton">{{item.filteredValue.question.que}}</p>
                         <div class="QuestionMeta">
-                            <p>Asked on {{item.filteredValue.question.askDate}}</p>
-                            <div class="badge" [ngClass]="item.filteredValue.question.ansDate?'badge-success':'badge-warning'">{{item.filteredValue.question.ansDate?'Answered':'Unanswered'}}</div>
+                            <div class="badge font-weight-lighter" [ngClass]="item.filteredValue.question.ansDate?'badge-success':'badge-warning'">{{item.filteredValue.question.ansDate?'Answered':'Unanswered'}} </div>
+                            &nbsp;<p *ngIf="item.filteredValue.question.ansDate">{{item.filteredValue.question.ansDate}}, &nbsp;{{item.filteredValue.question.ansTime}}</p>
+                            
                         </div>
                         <p class="answer" *ngIf="item.filteredValue.question.ansDate">{{item.filteredValue.question.ans}}</p>
-                        <div class="QuestionMeta" *ngIf="item.filteredValue.question.ansDate">
+                        <!-- <div class="QuestionMeta" *ngIf="item.filteredValue.question.ansDate">
                             <p>Answered on {{item.filteredValue.question.ansDate}}</p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <ng-template #noitems>
                     <div  class="myQuestions d-flex align-items-center justify-content-center">
-                        You have not asked any questions!
+                        {{isQALoading?'Loading...':'You have not asked any questions!'}}
                     </div>
                 </ng-template>
                 
@@ -455,23 +459,28 @@
                 </div>
                 <div class="myQuestions" *ngIf="allQuestionList.length;else noallitems">
                     <div class="qaBox" *ngFor="let item of allQuestionList">
-                        <div class="userAccount"><i class="lxp-AccountCircle"></i>&nbsp; {{item.user_id}}</div>
+                        <!-- <div class="userAccount"><i class="lxp-AccountCircle"></i>&nbsp; {{item.user_id}}</div> -->
+                        <span class="userAccount"><i
+                                class="lxp-AccountCircle align-text-bottom font-weight-bold"></i>&nbsp;<span class="font-weight-bold">{{item.user_id}}</span></span>&nbsp;|&nbsp;
+                        <span class="QuestionMeta d-inline-flex">
+                        <p>Asked on: &nbsp;{{item.filteredValue.question.askDate}},&nbsp;{{item.filteredValue.question.askTime}}</p>
+                    </span>
                         <p class="quesiton">{{item.filteredValue.question.que}}</p>
                         <div class="QuestionMeta">
-                            <p>{{item.filteredValue.question.askDate}}</p>
-                            <div class="badge badge-success">Answered</div>
+                            <div class="badge badge-success font-weight-lighter">Answered</div>
+                            <p>&nbsp; {{item.filteredValue.question.ansDate}},&nbsp;{{item.filteredValue.question.ansTime}}</p>
                         </div>
                         <p class="answer"*ngIf="item.filteredValue.question.ansDate">{{item.filteredValue.question.ans}}</p>
-                        <div class="QuestionMeta">
+                        <!-- <div class="QuestionMeta">
                             <p>{{item.filteredValue.question.ansDate}}</p>
-                        </div>
+                        </div> -->
                     </div>
                     
                 </div>
 
                 <ng-template #noallitems>
                     <div  class="myQuestions d-flex align-items-center justify-content-center">
-                        No questions asked on this topic.
+                        {{isQALoading?'Loading...':'No questions asked on this topic.'}}
                     </div>
                 </ng-template>
             </mat-tab>

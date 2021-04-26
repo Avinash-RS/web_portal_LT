@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DragScrollComponent } from 'ngx-drag-scroll';
 import { AnonymousCredential, BlobServiceClient, newPipeline } from '@azure/storage-blob';
 import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-activities',
@@ -26,7 +27,7 @@ export class ActivitiesComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
   @ViewChild('videoInput') videoInput;
   @ViewChild('uploadInput') uploadInput;
-
+  blobKey = environment.blobKey;
   perfornDetaildata: any;
   performdetailPageView = false;
   projectDetaildata: any;
@@ -395,7 +396,6 @@ export class ActivitiesComponent implements OnInit {
   getAssignmentmoduleData() {
     this.Lservice.getAssignmentmoduleData(this.userDetail.user_id,this.courseid).subscribe((data: any) => {
       if (data.data.getAssignmentmoduleData.success) {
-       console.log("Assignment", data)
        this.assignmentContent = data?.data?.getAssignmentmoduleData?.data;
        this.assignmentpreContent = data?.data?.getAssignmentmoduleData
         if (this.assignmentContent == null) {
@@ -433,7 +433,6 @@ export class ActivitiesComponent implements OnInit {
                   }
                 }
           });
-          console.log(this.assignmentContent)
         }
       } else {
         
@@ -453,6 +452,10 @@ export class ActivitiesComponent implements OnInit {
           disableClose: true,
           panelClass: 'popupModalContainer'
         });
+        if (path.path.includes('?sv=')) {
+        } else {
+          path.path = path.path + this.blobKey;          
+        }
         this.previewDoc = path;
       } else {
         this.videoSource = path.path;
@@ -468,6 +471,10 @@ export class ActivitiesComponent implements OnInit {
           panelClass: 'popupModalContainer'
         });
         path.path = path.videourl;
+        if (path.path.includes('?sv=')) {
+        } else {
+          path.path = path.path + this.blobKey;          
+        }
         this.previewDoc = path;
       } else {
         path.path = path.videourl;
@@ -542,7 +549,6 @@ export class ActivitiesComponent implements OnInit {
   getprojectActivityData() {
     
     this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
-      console.log('Project',data)
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
         this.projectDetails = data.data.getprojectActivityData.data;
 
@@ -582,13 +588,21 @@ export class ActivitiesComponent implements OnInit {
       const link = document.createElement('a');
       link.target = '_blank';
       link.style.display = 'none';
-      link.href = doc.path;
+      if (doc.path.includes('?sv=')) {
+        link.href = doc.path;
+      } else {
+        link.href = doc.path + this.blobKey;
+      }
       link.click();
     } else if (type === 'files') {
       const link = document.createElement('a');
       link.target = '_blank';
       link.style.display = 'none';
-      link.href = doc.videourl;
+      if (doc.videourl.includes('?sv=')) {
+        link.href = doc.videourl;
+      } else {
+        link.href = doc.videourl + this.blobKey;
+      }
       link.click();
     }
   }
@@ -1108,6 +1122,10 @@ export class ActivitiesComponent implements OnInit {
       disableClose: true,
       panelClass: 'popupModalContainer'
     });
+    if (path.path.includes('?sv=')) {
+    } else {
+      path.path = path.path + this.blobKey;          
+    }
     this.docpath = path;
   }
 
@@ -1125,6 +1143,10 @@ export class ActivitiesComponent implements OnInit {
       disableClose: true,
       panelClass: 'popupModalContainer'
     });
+    if (path.path.includes('?sv=')) {
+    } else {
+      path.path = path.path + this.blobKey;          
+    }
     this.previewDoc = path;
   }
 
@@ -1137,6 +1159,10 @@ export class ActivitiesComponent implements OnInit {
         disableClose: true,
         panelClass: 'popupModalContainer'
       });
+      if (path.path.includes('?sv=')) {
+      } else {
+        path.path = path.path + this.blobKey;          
+      }
       this.previewDoc = path;
     } else if (docType === 'video/mp4') {
       if (path.videourl) {

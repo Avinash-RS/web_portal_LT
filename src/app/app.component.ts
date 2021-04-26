@@ -107,6 +107,10 @@ export class AppComponent implements OnInit {
       });
     });
   }
+  @HostListener('contextmenu', ['$event'])
+  onRightClick(event) {
+  event.preventDefault();
+}
   // ** Browser close handler.. Dont delete **
   /*
  @HostListener('window:beforeunload', ['$event'])

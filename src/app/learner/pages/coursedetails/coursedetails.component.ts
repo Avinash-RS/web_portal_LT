@@ -39,7 +39,7 @@ import * as CryptoJS from 'crypto-js';
   ]
 })
 export class CoursedetailsComponent implements OnInit {
-
+  blobKey = environment.blobKey;
   course: any = null;
   loading: boolean;
   pagenumber: any;
@@ -150,6 +150,10 @@ export class CoursedetailsComponent implements OnInit {
   filterData: any;
   myQuestionList: any = [];
   allQuestionList: any = [];
+  isQALoading: boolean;
+  batchEndTime: any;
+  dateObj = new Date()
+  currentDate = new Date(this.dateObj.getFullYear() + '-' + (this.dateObj.getMonth() + 1) + '-' + this.dateObj.getDate()).getTime();
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -196,8 +200,10 @@ export class CoursedetailsComponent implements OnInit {
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     if(detail===undefined){
         this.batchId = localStorage.getItem('currentBatchId')
+        this.batchEndTime = localStorage.getItem('currentBatchEndDate')
       }else{
         this.batchId = detail.batch_id
+        this.batchEndTime = detail.batchEndTime
       }
 
     if (this.gs.checkLogout()) {
@@ -855,16 +861,16 @@ export class CoursedetailsComponent implements OnInit {
     }
     if (file.doc_type.includes("link")) {
       this.fileType = 'link';
-      this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path);
+      this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path + this.blobKey);
     }
 
     if (this.fileType === 'pdf') {
       file.gdocs = '';
-      file.gdocs = 'https://docs.google.com/gview?url=' + file.path + '&embedded=true';
+      file.gdocs = 'https://docs.google.com/gview?url=' + file.path + this.blobKey + '&embedded=true';
       // this.URIData = file;
       this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.gdocs);
     } else {
-      this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path);
+      this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path + this.blobKey);
     }
   }
 
@@ -998,41 +1004,59 @@ export class CoursedetailsComponent implements OnInit {
       }
     })
   }
-
+  contextmenu() {
+    event.preventDefault();
+  }
   submitMyQuestion(){
-    if(this.questionText){
+    if(this.currentModuleTitle||this.currentTopicTitle){
+      if(this.questionText.trim().length){
       this.Lservice.askaquestion(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,this.questionText).subscribe((data:any)=>{
         console.log(data)
         this.questionText="";
         if(data?.data?.askaquestion?.success){
+          this.selectedQATabIndex = 1;
           this.toastr.success(data?.data?.askaquestion?.message)
         }else{
          // this.toastr.warning(data?.data?.bookmark?.message)
         }
       })
     }else{
-      this.toastr.warning("Please enter some text.")
+      this.toastr.warning("Please enter some text")
+    }
+    }else{
+      this.toastr.warning("Please select a module")
     }
     
   }
 
   questionTabSelection(tab) {
     if (tab.index === 1) {
+      this.isQALoading=true;
+      this.myQuestionList = [];
+      this.allQuestionList=[]
       this.Lservice.getMyQuestion(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle).subscribe((data:any)=>{
-        console.log(data)
+        this.isQALoading=false;
         if(data?.data.getmyque.success){
           this.myQuestionList = data.data.getmyque.message
+        }else{
+          this.myQuestionList = [];
         }
       })
     } else if (tab.index === 2){
+      this.isQALoading=true
+      this.allQuestionList=[]
+      this.myQuestionList = [];
       this.Lservice.getallquestion(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,-1,this.batchId).subscribe((data:any)=>{
-        console.log(data)
+        this.isQALoading=false
         if(data?.data.getallquestion?.success){
           this.allQuestionList = data.data.getallquestion?.message
+        }else{
+          this.allQuestionList = [];
         }
       })
     }else{
-
+      this.myQuestionList = [];
+      this.allQuestionList = [];
     }
   }
   filterToc(){
@@ -1059,27 +1083,43 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   filterQAList(){
+    this.isQALoading=true
     this.Lservice.getallquestion(this.getuserid.user_id,this.courseid,this.currentModuleTitle,this.currentTopicTitle,this.qaFilterKey,this.batchId).subscribe((data:any)=>{
+      this.isQALoading=false
       if(data?.data.getallquestion?.success){
         this.allQuestionList = data.data.getallquestion?.message
       }
     })
   }
   closeAskQuestion(){
-    this.dialog.getDialogById("askQuestions").close();
+    this.dialog.closeAll();
+    this.myQuestionList = [];
+    this.allQuestionList = [];
     this.selectedQATabIndex = 0;
   }
-  openAskQuestions(templateRef: TemplateRef<any>){
-    this.questionText="";
-    this.dialog.open(templateRef, {
-  // scrollStrategy: new NoopScrollStrategy(),
-  width: '60%',
-  height: '80%',
-  scrollStrategy: new NoopScrollStrategy(),
-  closeOnNavigation: true,
-  //disableClose: true,
-});
-}
+  openAskQuestions(templateRef: TemplateRef<any>) {
+    this.questionText = "";
+    this.allQuestionList = []
+    if(this.screenWidth>560){
+      this.dialog.open(templateRef, {
+      // scrollStrategy: new NoopScrollStrategy(),
+      width: '60%',
+      height: '80%',
+      scrollStrategy: new NoopScrollStrategy(),
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+    }else{
+      this.dialog.open(templateRef, {
+      // scrollStrategy: new NoopScrollStrategy(),
+      width: '98%',
+      height: '80%',
+      scrollStrategy: new NoopScrollStrategy(),
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+    }
+  }
 }
 
 

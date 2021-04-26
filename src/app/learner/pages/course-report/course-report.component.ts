@@ -31,6 +31,10 @@ export class CourseReportComponent implements OnInit {
     this.router.navigateByUrl('/Learner/MyCourse');
   }
 
+  getScoreProgress(c, t) {
+    let progressScore = Number(c)/Number(t) *100;
+    return progressScore;
+  }
   getCourseReport(){
 this.learnerService.getReport(atob(this.course.batchId),atob(this.course.id),this.userDetail.user_id,this.refresh).subscribe((data)=>{
   if (data.data['getLearnerNewCourseReport'].data[0]) {
