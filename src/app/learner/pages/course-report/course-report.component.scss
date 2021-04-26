@@ -156,7 +156,13 @@
   }
 }
 .LearningPercentage {
-  width: 75%;
+  width: 100%;
+  @media only screen and (min-width: 992px) {
+    width: 70%;
+  }
+  @media only screen and (min-width: 1150px) {
+    width: 75%;
+  }
   h4 {
     color: #333333;
     font-size: 18px;
@@ -164,24 +170,50 @@
     line-height: normal;
     margin-top: 8px;
   }
-  .commonClass {
-    // margin-bottom: 30px;
-  }
   .percentageContent {
-    width: 15%;
+    width: 100%;
     text-align: center;
+    @media only screen and (min-width: 650px) {
+      width: 25%;
+    }
+    @media only screen and (min-width: 992px) {
+      width: 20%;
+    }
+    @media only screen and (min-width: 1150px) {
+      width: 15%;
+    }
   }
   .weekScoredContent {
-    width: 79%;
-    margin-right: 2%;
+    width: 100%;
+    margin-right: 0;
     justify-content: flex-start;
+    @media only screen and (min-width: 650px) {
+      width: 70%;
+      margin-left: 2%;
+    }
+    @media only screen and (min-width: 992px) {
+      width: 74%;
+      margin-left: 0;
+    }
+    @media only screen and (min-width: 1150px) {
+      width: 79%;
+      margin-right: 2%;
+    }
     .weeksWise {
+      width: 49%;
       padding: 5px;
-      width: 23%;
       position: relative;
+      @media only screen and (min-width: 650px) {
+        width: 32%;
+      }
+      @media only screen and (min-width: 992px) {
+        width: 33%;
+      }
+      @media only screen and (min-width: 1150px) {
+        width: 23%;
+      }
       .weekWiseDescription {
         padding: 5px;
-        // position: relative;
         &::before, 
         &::after {
           content: '';
@@ -202,10 +234,31 @@
           bottom: 5%;
         }
       }
-      &:nth-child(4n) {
-        .weekWiseDescription {
-          &::after {
-            width: 0;
+      @media only screen and (max-width: 568px) {
+        &:nth-child(2n) {
+          .weekWiseDescription {
+            &::after {
+              width: 0;
+            }
+          }
+        }
+      }
+      @media only screen and (max-width: 1149px) {
+        &:nth-child(3n) {
+          .weekWiseDescription {
+            &::after {
+              width: 0;
+            }
+          }
+        }
+      }
+      
+      @media only screen and (min-width: 1150px) {
+        &:nth-child(4n) {
+          .weekWiseDescription {
+            &::after {
+              width: 0;
+            }
           }
         }
       }
@@ -279,13 +332,27 @@
   }
 }
 .ScoreSection {
-  width: 24%;
+  width: 100%;
+  @media only screen and (min-width: 650px) {
+    width: 100%;
+  }
+  @media only screen and (min-width: 992px) {
+    width: 29%;
+  }
+  @media only screen and (min-width: 1150px) {
+    width: 24%;
+  }
   h3 {
     font-size: 18px;
   }
 }
 .assessmentScoreCard {
   margin-top: 15px;
+}
+.wrapperReport {
+  flex-wrap: wrap;
+  @media only screen and (min-width: 568px) {
+  }
 }
 
 .course-arrow-mark {

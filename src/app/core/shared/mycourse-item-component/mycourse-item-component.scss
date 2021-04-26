@@ -2716,12 +2716,20 @@ li {
   padding: 5px !important;
   padding: 5px 18px !important;
   border-radius: 5px;
+  background-color: transparent;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .course-report:hover {
   border: 1px solid white !important;
   background: #C02222 !important;
   color: white !important;
+}
+.courseIcons {
+  i {
+    color: #5C6873;
+    font-size: 1.25em;
+  }
 }
 
 ::ng-deep .coursebg .mat-button-toggle-group {
