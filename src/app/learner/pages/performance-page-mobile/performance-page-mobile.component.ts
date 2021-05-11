@@ -64,6 +64,7 @@ export class PerformancePageMobileComponent implements OnInit {
   verfyingCondition:any;
   isProgress = false;
   jsonData:any;
+  ongoingPerformTask;
   trendingCategorires: any = {
     loop: false, // dont make it true
     mouseDrag: true,
@@ -160,6 +161,10 @@ export class PerformancePageMobileComponent implements OnInit {
   }
 
     submitDeleteVideo(videoName, itrdata, perform) {
+      if (this.ongoingPerformTask) {
+        return false
+      }
+      this.ongoingPerformTask = true;
       let videoFile = [];
       videoFile.push(videoName);
       // const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm a');
@@ -196,6 +201,7 @@ export class PerformancePageMobileComponent implements OnInit {
         videodetails: this.submitType === 'delete' ? videoFile : []
     };
       this.Lservice.learnerSumbitdeleteVideo(data).subscribe((response: any) => {
+        this.ongoingPerformTask = false;
          if (response.success === true) {
           this.toastr.success(response.message);
           this.getperformActivityData();
