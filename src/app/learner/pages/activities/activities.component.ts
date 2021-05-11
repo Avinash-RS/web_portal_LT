@@ -169,6 +169,8 @@ export class ActivitiesComponent implements OnInit {
   isProgressBar = false;
   emptyAssignment = false;
   assignmentpreContent;
+  ongoingPerformTask;
+  ongoingProjectTask;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
     private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
     public route: Router, public datePipe: DatePipe, private ngxLoader: NgxUiLoaderService) {
@@ -785,7 +787,10 @@ export class ActivitiesComponent implements OnInit {
 
   // Submit or Delete
   learnerSumbitdeleteVideo(project, deleteItem, submitAction) {
-
+    if (this.ongoingProjectTask) {
+      return false
+    }
+    this.ongoingProjectTask = true;
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1);
     const endDate1 = new Date(project.projectActivity.activityenddate);
@@ -827,6 +832,7 @@ export class ActivitiesComponent implements OnInit {
       videodetails: submitAction === 'delete' ? [deleteItem] : []
     };
     this.Lservice.learnerSumbitdeleteVideo(submitData).subscribe((data: any) => {
+      this.ongoingProjectTask = false
       if (data.success === true) {
         this.toastr.success(data.message);
         this.showSubmittedon = true;
@@ -1054,7 +1060,11 @@ export class ActivitiesComponent implements OnInit {
     })
   }
   submitDeleteVideo(videoName, itrdata, perform) {
-    let videoFile = [];
+    if (this.ongoingPerformTask) {
+      return false
+    }
+    this.ongoingPerformTask = true;
+    let videoFile = [];    
     videoFile.push(videoName);
     // const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm a');
     // const startDate = this.datePipe.transform(perform?.activitystartdate, 'dd-MM-yyyy HH:mm a');
@@ -1090,6 +1100,7 @@ export class ActivitiesComponent implements OnInit {
       videodetails: this.submitType === 'delete' ? videoFile : []
     };
     this.Lservice.learnerSumbitdeleteVideo(data).subscribe((response: any) => {
+      this.ongoingPerformTask = false;
       if (response.success === true) {
         this.toastr.success(response.message);
         this.getperformActivityData();

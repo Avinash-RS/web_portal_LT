@@ -47,6 +47,7 @@ export class ProjectMobileComponent implements OnInit {
   jsonData:any;
   indexNumber: number;
   projectActivityData: any;
+  ongoingProjectTask;
   trendingCategorires: any = {
     loop: false, // dont make it true
     mouseDrag: true,
@@ -394,6 +395,10 @@ export class ProjectMobileComponent implements OnInit {
   }	
   // Submit or Delete
   learnerSumbitdeleteVideo(project, deleteItem, submitAction) {
+    if (this.ongoingProjectTask) {
+      return false
+    }
+    this.ongoingProjectTask = true;
     const startDate1 = new Date(project.projectActivity.activitystartdate);
     project.actstartDate = moment(startDate1);
     const endDate1 = new Date(project.projectActivity.activityenddate);
@@ -419,6 +424,7 @@ export class ProjectMobileComponent implements OnInit {
       videodetails : submitAction === 'delete' ? [deleteItem] : []
     };
     this.Lservice.learnerSumbitdeleteVideo(submitData).subscribe((data: any) => {
+      this.ongoingProjectTask = false
       if (data.success === true) {
         this.toastr.success(data.message);
         this.showSubmittedon = true;
