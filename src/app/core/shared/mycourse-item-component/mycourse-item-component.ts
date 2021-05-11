@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { environment } from '@env/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { OwlOptions } from 'ngx-owl-carousel-o';
@@ -14,6 +15,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 
 export class MycourseItemComponent implements OnInit {
+  blobKey = environment.blobKey;
   // tslint:disable-next-line:no-input-rename
   @Input('courseItems') course: any = {};
   // NOT USING ANY WHERE
@@ -59,6 +61,7 @@ export class MycourseItemComponent implements OnInit {
     },
     nav: true
   };
+ 
   // tabTitleVal: string = 'Self-Paced Learning';
   constructor(
     public translate: TranslateService,
@@ -68,7 +71,7 @@ export class MycourseItemComponent implements OnInit {
     private router: Router,
     private loader: Ng4LoadingSpinnerService, ) {
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
-    this.role = localStorage.getItem('role') ||sessionStorage.getItem('role') || null;
+    this.role = localStorage.getItem('role') || sessionStorage.getItem('role') || null;
   }
 
 
@@ -76,6 +79,9 @@ export class MycourseItemComponent implements OnInit {
 
     this.courseWeekCircle = (this.course.week_completed_count !== null ?
        this.course.week_completed_count : 0) + '/' + (this.course.week_total_count !== null ? this.course.week_total_count : 0);
+      // console.log(new Date(this.course.batch_end_date))
+      // console.log(this.dateObj.getFullYear() + "-" + (this.dateObj.getMonth() + 1) + "-" + this.dateObj.getDate())
+      this.course.batch_end_date_Timer = new Date(this.course.batch_end_date).getTime();
   }
   Go(course) {
     localStorage.removeItem('userTabLocation');
@@ -104,12 +110,14 @@ export class MycourseItemComponent implements OnInit {
       enrollment_status: null,
       course_name: c.course_name,
       course_status: c.course_status,
-      batch_id:c.batchid
+      batch_id: c.batchid,
+      batchEndTime: c.batch_end_date_Timer,
       // persentage : c.coursePlayerStatus.course_percentage || 0
     };
     // if (this.screenWidth < 800) {
     //   this.show = true;
     // } else {
+    localStorage.setItem('currentBatchEndDate',c.batch_end_date_Timer)
     localStorage.setItem('Courseid', c.course_id);
     localStorage.setItem('persentage', c && c.coursePlayerStatus && c.coursePlayerStatus.course_percentage ? c.coursePlayerStatus.course_percentage : '');
     localStorage.setItem('currentBatchId', c.batchid);
@@ -163,16 +171,19 @@ export class MycourseItemComponent implements OnInit {
     const detail = {
       course_name: c.course_name,
       course_id: c.course_id,
-      batch_id: c.batchid
+      batch_id: c.batchid,
+      batchEndTime: c.batch_end_date_Timer,
     }
     localStorage.setItem('Courseid', c.course_id);
     localStorage.setItem('currentBatchId', c.batchid);
+    localStorage.setItem('CourseName', c.course_name);
+    localStorage.setItem('currentBatchEndDate',c.batch_end_date_Timer)
 
     this.router.navigateByUrl('/Learner/askQuestions', { state: { detail } });
   }
 
   openGallery(c){
-    this.router.navigate(['/Learner/coursegallery'],{
+    this.router.navigate(['/Learner/coursegallery'], {
       queryParams:
       {
         id: c.course_id,
@@ -181,7 +192,7 @@ export class MycourseItemComponent implements OnInit {
     });
   }
   openReport(c){
-    this.router.navigate(['/Learner/coursereport'],{
+    this.router.navigate(['/Learner/coursereport'], {
       queryParams:
       {
         id: btoa(c.course_id),

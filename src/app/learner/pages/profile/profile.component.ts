@@ -24,6 +24,7 @@ import { ToastrService } from 'ngx-toastr';
 // AFTER restructure - Mythreyi
 
 export class ProfileComponent implements OnInit {
+  blobKey = environment.blobKey;
   constructor(public translate: TranslateService,
               private alert: AlertServiceService, public service: LearnerServicesService,
               private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,

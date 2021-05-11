@@ -77,6 +77,12 @@
 .ml-30px {
   margin-left: 30px;
 }
+.mr-20px {
+  margin-right: 20px;
+}
+.mr-30px {
+  margin-right: 30px;
+}
 .mt-10px {
   margin-top: 10px;
 }
@@ -154,9 +160,20 @@
   }
 }
 .badge {
-  padding: 5px !important;
+  padding: 5px 10px !important;
+}
+.badge-success{
+  background-color: #53bd9d !important;
+}
+.badge-warning{
+  background-color: #ffdd91 !important;
+  color: black !important;
 }
 .sel-pad {
+  padding: 2px;
+  max-width: 100% !important ;
+}
+.sel-pad-modal {
   padding: 2px;
   max-width: 45% !important ;
 }

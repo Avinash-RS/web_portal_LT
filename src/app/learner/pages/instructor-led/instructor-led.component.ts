@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef,ViewChild, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '@env/environment';
 import * as moment from 'moment';
 import * as _ from 'underscore';
 import { LearnerServicesService } from '../../services/learner-services.service';
@@ -12,7 +13,7 @@ import { VideoPreviewModalComponent } from '../video-preview-modal/video-preview
   styleUrls: ['./instructor-led.component.scss', '../coursedetails/coursedetails.component.scss']
 })
 export class InstructorLedComponent implements OnInit {
-
+  blobKey = environment.blobKey;
   sessionAttendance: any;
   listOfSessions: any;
   course: any;

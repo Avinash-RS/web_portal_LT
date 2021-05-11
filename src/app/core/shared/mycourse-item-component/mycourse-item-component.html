@@ -19,7 +19,7 @@
               </div>
               <figure>
                 <span class="bgOverlay"></span>
-                <img alt="Course Img" [src]=course.course_img_url class="courseImg" />
+                <img alt="Course Img" [src]="course.course_img_url + blobKey" class="courseImg" />
                 <div *ngIf="course?.course_status !== 'completed'" class="overlay" (click)="gotoDesc(course)">
                   <i class="lxp-PlayCircle playIcon"></i> 
                   <span>{{course?.course_status === "incomplete" ? "Resume" : course?.course_status === "suspend" ? "Resume" : ("Start" | translate) }}</span>
@@ -86,10 +86,10 @@
               </div> -->
             </div>
           </div>
-          <mat-button-toggle-group>
-            <mat-button-toggle (click)="openGallery(course)" matTooltip="Course Assets"><i class="lxp-SelfPaced"></i></mat-button-toggle>
-            <mat-button-toggle matTooltip="Practice Test"><i class="lxp-Collaborate"></i></mat-button-toggle>
-            <mat-button-toggle matTooltip="Analytics"><i class="lxp-Progress"></i></mat-button-toggle>
+          <mat-button-toggle-group class="courseIcons">
+            <mat-button-toggle (click)="openGallery(course)" matTooltip="Course Assets"><i class="lxp-Collection"></i></mat-button-toggle>
+            <mat-button-toggle matTooltip="Practice Test"><i class="lxp-Test"></i></mat-button-toggle>
+            <mat-button-toggle matTooltip="Analytics"><i class="lxp-Analytics"></i></mat-button-toggle>
           </mat-button-toggle-group>
           <!-- <div class="analyticsBtn">
             <button (click)="openGallery(course)"><i class="lxp-Analytics"></i> Course Gallery</button>
@@ -223,11 +223,18 @@
                         <h6>{{(course.completed_topic_count!=null?course.completed_topic_count:0) +'/'+ (course.total_topic_count!=null?course.total_topic_count:0)}}</h6>
                       </div>
                     </div>
-                    <!-- <div class="activitySubmissionDetails">
-                      <span data-title="Ask a question" (click)="gotoAskQuestions(course)">
-                        <i class="lxp-OpenNew launchIcon"></i>
+                    <div class="askaquestionDetails" *ngIf="(course?.course_status ==='incomplete'||course?.course_status ==='suspend'||course?.course_status ==='completed');else disabledQA">
+                      <span data-title="View all Q&A"  class="pointer" (click)="gotoAskQuestions(course)">
+                        <i class="lxp-book-question launchIcon"></i>
                       </span>
-                    </div> -->
+                    </div>
+                    <ng-template #disabledQA>
+                      <div class="askaquestionDetails" >
+                        <span data-title="View all Q&A">
+                          <i class="lxp-book-question launchIcondis"></i>
+                        </span>
+                      </div>
+                    </ng-template>
                   </div>
                 </div>
               </div>
@@ -429,8 +436,8 @@
                       <div *ngIf="course.progressionExp" class="f_size_12 animate__animated animate__fadeInUp">
                         Modules completed {{(course.completed_module_count!=null?course.completed_module_count:0) +'/'+ (course.total_module_count!=null?course.total_module_count:0)}}<br>
                         Topics completed {{(course.completed_topic_count!=null?course.completed_topic_count:0) +'/'+ (course.total_topic_count!=null?course.total_topic_count:0)}}<br>
-                        <span class="pointer f_size_10" style="color: #C02222; text-decoration: underline; display: none;">View self-learning
-                          activity details..</span>
+                        <span *ngIf="(course?.course_status ==='incomplete'||course?.course_status ==='suspend'||course?.course_status ==='completed')" class="pointer f_size_10" style="color: #C02222; text-decoration: underline;" (click)="gotoAskQuestions(course)">
+                          View all Q&amp;A</span>
                       </div>
                     </div>
       

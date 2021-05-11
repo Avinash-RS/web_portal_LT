@@ -2346,6 +2346,7 @@ export const getLearnerNewCourseReport = gql`
         VILTsessionCount
         VILTdurationCount
         VILTattendanceCount
+        VILTlearnerCount
         VILTscore
         calculation
       }

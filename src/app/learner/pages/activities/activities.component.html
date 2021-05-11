@@ -371,7 +371,7 @@
                                       <div class="row ml-0 mr-0" *ngIf="hoverfile && mouseOverIndex == i">
                                         <div class="col-12 pl-0 pr-0">
                                           <div class="row ml-0 mr-0 playActions">
-                                            <div class="col-5 text-left pr-0 colAction">
+                                            <div  (click)="playVideo(projectPreviewDialog, videoDialog, videoName, videoName.doc_type)" class="col-5 text-left pr-0 colAction">
                                               <mat-icon class="position-absolute text-white playBtnmobile" *ngIf="videoName.doc_type =='video/mp4'">play_circle_outline</mat-icon>
                                               <mat-icon class="position-absolute text-white playBtn" *ngIf="videoName.doc_type =='image/jpeg'">photo_size_select_actual</mat-icon>
                                                 <i class="fa fa-file-pdf-o position-absolute text-white playBtn" *ngIf="videoName.doc_type =='application/pdf'"
@@ -380,7 +380,7 @@
                                               <span class="text-white actionBtn" *ngIf="videoName.doc_type == 'image/jpeg' || videoName.doc_type == 'application/pdf'">Preview</span>
                                             </div>
                                             <div class="col-7 text-center pr-0 colActionDownload">
-                                              <a [href]="videoName.path" [download]="videoName.name">
+                                              <a [href]="videoName.path + blobKey" [download]="videoName.name">
                                                 <i class="fa fa-download text-white position-absolute downloadBtnMobile" aria-hidden="true"></i>
                                                 <span class="text-white actionBtn1Mobile">Download</span>
                                               </a>
@@ -835,7 +835,7 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <app-video-player [url]="videoSource"></app-video-player>
+      <app-video-player [url]="videoSource + blobKey"></app-video-player>
     </div>
   </div>
 </ng-template>

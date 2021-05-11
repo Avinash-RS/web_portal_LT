@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { AnonymousCredential, BlobServiceClient, newPipeline } from '@azure/storage-blob';
 import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
+import { environment } from '@env/environment';
 @Component({
   selector: 'app-project-mobile',
   templateUrl: './project-mobile.component.html',
@@ -18,6 +19,7 @@ export class ProjectMobileComponent implements OnInit {
 
   @ViewChild('uploadFile') uploadFile;
   @Input() projectDetailPageData: any;
+  blobKey = environment.blobKey;
   userDetail: any;
   checkDetails: any;
   courseid: any;
@@ -462,6 +464,10 @@ export class ProjectMobileComponent implements OnInit {
           closeOnNavigation: true,
           disableClose: true,
         });
+        if (path.path.includes('?sv=')) {
+        } else {
+          path.path = path.path + this.blobKey;          
+        }  
         this.previewDoc = path;
       }
       
@@ -474,6 +480,10 @@ export class ProjectMobileComponent implements OnInit {
             disableClose: true,
             panelClass: 'popupModalContainer'
           });
+          if (path.path.includes('?sv=')) {
+          } else {
+            path.path = path.path + this.blobKey;          
+          }    
           this.previewDoc = path;
       } else {
         this.videoPreview(videoDialog, path.path);
@@ -500,6 +510,10 @@ export class ProjectMobileComponent implements OnInit {
             closeOnNavigation: true,
             disableClose: true,
           });
+          if (path.path.includes('?sv=')) {
+          } else {
+            path.path = path.path + this.blobKey;          
+          }
           this.previewDoc = path;
         } else {
           this.videoSource = path.path;
@@ -515,6 +529,10 @@ export class ProjectMobileComponent implements OnInit {
             disableClose: true,
           });
           path.path = path.videourl;
+          if (path.path.includes('?sv=')) {
+          } else {
+            path.path = path.path + this.blobKey;          
+          }
           this.previewDoc = path;
         } else {
           path.path = path.videourl;
@@ -532,7 +550,11 @@ export class ProjectMobileComponent implements OnInit {
     }
 
     downloadFile(data) {
-      window.open(data);
+      if (data.includes('?sv=')) {
+        window.open(data);
+      } else {
+        window.open(data + this.blobKey);
+      }
     }
     resourseAccord(courseResource, index) {
       this.openedIndex = index
