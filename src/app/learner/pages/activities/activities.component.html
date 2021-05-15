@@ -134,6 +134,7 @@
                         <span class="uploadfileName assignementName" style="margin-top: 4px;position: inherit;" matTooltip="{{assignment.files.filename}}" matTooltipClass="custom-mat-tooltip">
                           {{assignment.files.filename}}
                         </span>
+                        <ng-container *ngIf="assignment.files.grade_status == 'Evaluated'">
                         <span (click)="previewAssignment(previewDialog,assignment.files)" matTooltip="View" matTooltipClass="custom-mat-tooltip">
                           <mat-icon matTooltipClass="custom-mat-tooltip" class="assignmentpdf"  *ngIf="assignment.files.doc_type == 'image/jpeg'|| assignment.files.doc_type == 'image/png' || assignment.files.doc_type =='image/jpg'">photo_size_select_actual</mat-icon>
                           <i class="fa fa-file-pdf-o assignmentpdf" *ngIf="assignment.files.doc_type == 'application/pdf'" aria-hidden="true"></i>
@@ -141,7 +142,7 @@
                         <span (click)="downloadDoc(assignment.files, 'material')">
                           <i matTooltip="Download" matTooltipClass="custom-mat-tooltip" class="fa fa-download assignmentdownload" aria-hidden="true"></i>
                         </span>
-                        
+                      </ng-container>
                       </div>
                       <div class="align-center">
                         <input class="form-control border-right-0" type='file' id="upload-photo" #fileInput (change)="uploadAssignmentsFile($event,assignment.files)">
