@@ -172,6 +172,7 @@ export class ActivitiesComponent implements OnInit {
   assignmentpreContent;
   ongoingPerformTask;
   ongoingProjectTask;
+  isDownloadLoader;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
     private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
     public route: Router, public datePipe: DatePipe, private ngxLoader: NgxUiLoaderService) {
@@ -1204,5 +1205,22 @@ export class ActivitiesComponent implements OnInit {
   performdetailPage(index, performData) {
     this.perfornDetaildata = { perfornData: performData, index };
   }
-
+  downloadProject(url, fileName) {
+this.isDownloadLoader = true;
+  fetch(url)
+  .then(res => res.blob()) // Gets the response and returns it as a blob
+  .then(blob => {
+    let objectURL = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    if (link.download !== undefined) {
+      link.setAttribute('href', objectURL);
+      link.setAttribute('download', fileName);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      this.isDownloadLoader = false;
+    }
+});
+  }
+  
 }

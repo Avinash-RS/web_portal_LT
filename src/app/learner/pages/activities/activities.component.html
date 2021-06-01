@@ -381,7 +381,8 @@
                                               <span class="text-white actionBtn" *ngIf="videoName.doc_type == 'image/jpeg' || videoName.doc_type == 'application/pdf'">Preview</span>
                                             </div>
                                             <div class="col-7 text-center pr-0 colActionDownload">
-                                              <a (click)="downloadDoc(videoName, 'files')">
+                                              <!-- <a (click)="downloadDoc(videoName, 'files')"> -->
+                                                <a (click)="downloadProject(videoName.videourl + blobKey, videoName.name)">
                                                 <i class="fa fa-download text-white position-absolute downloadBtnMobile" aria-hidden="true"></i>
                                                 <span class="text-white actionBtn1Mobile">Download</span>
                                               </a>
@@ -664,7 +665,7 @@
                                             <span class="text-white actionBtn" *ngIf="video.doc_type =='video/mp4'">Play</span>
                                             <span class="text-white actionBtn" *ngIf="video.doc_type == 'image/jpeg' || video.doc_type == 'application/pdf' || video.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || video.doc_type == 'image/jpg' || video.doc_type == 'image/png'">View</span>
                                           </div>
-                                          <div class="col-7 text-center pr-0 colAction" (click)="downloadDoc(video, 'files')">
+                                          <div class="col-7 text-center pr-0 colAction" (click)="downloadProject(video.videourl + blobKey, video.name)">
                                             <i class="fa fa-download text-white position-absolute downloadBtn" aria-hidden="true"></i><span class="text-white actionBtn1">Download</span>
                                           </div>
                                         </div>
@@ -850,3 +851,6 @@
 
   </span>
 </ng-template>
+<div class="spinner-container" *ngIf="isDownloadLoader">
+  <mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+</div>  
