@@ -346,16 +346,8 @@
                                       </ng-container>
                                     
                                       <ng-container *ngIf="(fileType == 'pdf'||fileType == 'link')&& URIData!==null">
-                                        <!-- <app-pdfreader [url]="URIData"
-                                         [original-size]="false"></app-pdfreader> -->
-                                        <!-- <object data="{{URIData}}" type="application/pdf" width="100%" height="100%">
-                                            <iframe src="{{URIData}}" width="100%" height="100%" style="border: none;">
-                                                <p>Your browser does not support PDFs.
-                                                    <a href="{{URIData}}">Download the PDF</a>.
-                                                </p>
-                                            </iframe>
-                                        </object> -->
-                                        <iframe title="file" width="100%" height="100%" [src]="URIData" allowfullscreen></iframe>
+                                        <pdf-viewer [src]="URIData"  [render-text]="true" style="display: block;"></pdf-viewer>
+                                        <!-- <iframe title="file" width="100%" height="100%" [src]="URIData" allowfullscreen></iframe> -->
                                     
                                       </ng-container>
                                     
