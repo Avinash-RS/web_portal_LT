@@ -844,7 +844,7 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
   urlBinder(file) {
-
+    this.disableRightClick()
     this.resourceName = file.type_name;
     this.fileType = file.doc_type;
     if (file.doc_type.includes("image")) {
@@ -865,10 +865,11 @@ export class CoursedetailsComponent implements OnInit {
     }
 
     if (this.fileType === 'pdf') {
-      file.gdocs = '';
-      file.gdocs = 'https://docs.google.com/gview?url=' + file.path + this.blobKey + '&embedded=true';
+      // file.gdocs = '';
+      // file.gdocs = 'https://docs.google.com/gview?url=' + file.path + this.blobKey + '&embedded=true';
       // this.URIData = file;
-      this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.gdocs);
+      var url = file.path + this.blobKey
+      this.URIData = url
     } else {
       this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path + this.blobKey);
     }
@@ -1119,6 +1120,12 @@ export class CoursedetailsComponent implements OnInit {
       disableClose: true,
     });
     }
+  }
+  disableRightClick() {
+    const dialoqContainer = document.getElementsByClassName('cdk-overlay-container');
+    dialoqContainer[0].addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+    });
   }
 }
 
