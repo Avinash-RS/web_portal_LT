@@ -493,6 +493,13 @@
     outline-style: auto;
     outline-width: 1px;
 }
+
+::ng-deep .cal-month-view .cal-open-day-events {
+    color: #0d0d0d;
+    border-bottom: 1px solid #b3b2b2;
+    background-color: #7d7d7d33;
+    box-shadow: none;
+}
 // ::ng-deep .mat-h5, .mat-typography h5 {
    
 //     margin: 0 0 0 16px !important;

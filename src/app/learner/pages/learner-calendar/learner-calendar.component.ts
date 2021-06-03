@@ -99,7 +99,7 @@ export class LearnerCalendarComponent implements OnInit {
   }
 
   getAllActivity(value?) {
-
+    this.activeDayIsOpen = false;
     if (!value) {
       value = new Date();
     }
