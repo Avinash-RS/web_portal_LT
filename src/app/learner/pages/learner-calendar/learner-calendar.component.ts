@@ -160,6 +160,8 @@ export class LearnerCalendarComponent implements OnInit {
   goToActivities(value){
     if(value.activity_details.activitytype === 'Live Classroom'){
       return false;
+    } else if (value.activity_details.activitytype === "Self Paced learning") {
+      this.router.navigate(['Learner/MyCourse']);
     }else{
       const data1 = {
         courseId: value.activity_details.courseid,
