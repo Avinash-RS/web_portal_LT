@@ -99,7 +99,7 @@ export class LearnerCalendarComponent implements OnInit {
   }
 
   getAllActivity(value?) {
-
+    this.activeDayIsOpen = false;
     if (!value) {
       value = new Date();
     }
@@ -123,6 +123,10 @@ export class LearnerCalendarComponent implements OnInit {
         if (res.data?.get_read_learner_activity?.message.length > 0) {
           this.showErrorCard = false;
           this.learnerActivityList = res.data?.get_read_learner_activity?.message;
+          this.learnerActivityList.sort((a, b) => {
+            return new Date(a.activity_details.startdate).getTime() - new Date(b.activity_details.startdate).getTime();
+    
+        });
         } else {
           this.errorMessage = res.data?.get_read_learner_activity?.error_msg;
           this.showErrorCard = true;
