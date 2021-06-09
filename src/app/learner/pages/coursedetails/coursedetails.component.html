@@ -139,10 +139,10 @@
             
             <div class="d-flex justify-content-between understoodBookmark">
                 <div class="d-flex justify-content-between align-items-center understoodButton">
-                    <button type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'btn btn-outline-success':'btn btn-outline-light'" (click)="understoodClick('like')">
+                    <button *ngIf="userType!=='collegeconnect'" type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'btn btn-outline-success':'btn btn-outline-light'" (click)="understoodClick('like')">
                         <i class="lxp-smile"></i> Understood
                     </button>
-                    <button type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'btn btn-outline-danger':'btn btn-outline-light'" (click)="understoodClick('dislike')">
+                    <button *ngIf="userType!=='collegeconnect'" type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'btn btn-outline-danger':'btn btn-outline-light'" (click)="understoodClick('dislike')">
                         <i class="lxp-sad"></i> Not Understood
                     </button>
                 </div>
@@ -150,7 +150,7 @@
                     <button type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light mr-10px" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
                         <i [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></i> {{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? 'Bookmarked':'Add to Bookmark'}}
                     </button>
-                    <button type="button" [disabled]="batchEndTime<currentDate" ngClass="btn btn-outline-light" (click)="openAskQuestions(askQuestions)">
+                    <button *ngIf="userType!=='collegeconnect'" type="button" [disabled]="batchEndTime<currentDate" ngClass="btn btn-outline-light" (click)="openAskQuestions(askQuestions)">
                         <i class="lxp-lifebuoy"></i> Ask Questions
                     </button>
                 </div>
@@ -365,7 +365,7 @@
                     </mat-tab>
 
                     <!-- about the course tab -->
-                    <mat-tab label="About the course">
+                    <mat-tab label="About the course" *ngIf="userType!=='collegeconnect'">
                         <div class="aboutCourseTab">
                             <h2>{{'Details about the course' | translate}}</h2>
                             <!-- <h6>{{ 'This course includes :' | translate}}</h6>
