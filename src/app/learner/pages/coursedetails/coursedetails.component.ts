@@ -154,6 +154,7 @@ export class CoursedetailsComponent implements OnInit {
   batchEndTime: any;
   dateObj = new Date()
   currentDate = new Date(this.dateObj.getFullYear() + '-' + (this.dateObj.getMonth() + 1) + '-' + this.dateObj.getDate()).getTime();
+  userType: any;
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -175,6 +176,7 @@ export class CoursedetailsComponent implements OnInit {
     // debugger
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('about:blank');
     const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
+    this.userType = loginDetails.org_type;
     const token=loginDetails.token
   
   // const cryptoInfo = CryptoJS.AES.encrypt(JSON.stringify( {token} ), '(!@#graphql%^&facade!@#)').toString();
