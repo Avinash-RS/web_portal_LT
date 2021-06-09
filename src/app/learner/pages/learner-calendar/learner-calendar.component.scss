@@ -472,6 +472,22 @@
     }
   }
 
+  .badge {
+    font-weight: 700;
+    line-height: 1.5;
+    height: 22px;
+    width: 22px;
+    padding: 4px;
+    border-radius: 50% !important;
+    background-color: #C02222;
+    color: #ffffff;
+    border-color: #C02222;
+    font-size: 11px;
+    position: relative;
+    left: -5px;
+    top: -15px;
+}
+
 
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
