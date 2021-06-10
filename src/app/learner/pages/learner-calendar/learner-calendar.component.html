@@ -59,12 +59,33 @@
                     </mat-card>
                 </div>
 
-                <div class="col-md-12 col-lg-5 col-xl-4">
-                    <h1 class="activityHeading">{{'Activities' | translate }} <span class="badge ">{{learnerActivityList.length}}</span></h1>
+                <div class="col-md-12 col-lg-5 col-xl-4 header-sort">
+                    <div class="right-header">
+                        <h1 class="activityHeading">{{'Activities' | translate }} <span class="badge ">{{learnerActivityList.length}}</span></h1>
+                        <button mat-stroked-button class="clr">
+                            Reset
+                        </button>
+                    </div>
                     <div class="row">
                         <div class="col-12 mb-2">
-                            <span>Sort By: <select class="rounded"><option>All</option></select></span>
-                            <span class="pull-right mr-3">Filter By: <select class="rounded"><option >All Activities</option></select></span>
+                            <span>Sort By: 
+                                <mat-form-field appearance="outline">
+                                <mat-select (selectionChange)="onSortChange($event)" [(ngModel)]="sortValue">
+                                  <mat-option *ngFor="let sort of sortBy" [value]="sort">
+                                      {{sort}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </span>
+                            <span class="pull-right mr-3">Filter By: 
+                                <mat-form-field appearance="outline">
+                                    <mat-select (selectionChange)="onSortChange($event)" [(ngModel)]="filterValue">
+                                      <mat-option *ngFor="let filter of filterBy" [value]="filter">
+                                          {{filter}}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </span>
                         </div>
                     
                         <div class="col-12" *ngIf="learnerActivityList.length == 0 ">
@@ -83,45 +104,6 @@
                             </div>
                         </div>
                         <div class="col-12" *ngIf="learnerActivityList.length != 0 ">
-                            <!-- <ng-template #showWithScroll>
-                                <div class="scroll-bar">
-                                    <ng-container *ngFor="let data of learnerActivityList; let i = index">
-                                        <div class="mainCard animated animatedFadeInUp fadeInUp" (click)="launchAssignment(data)">
-                                            <mat-card class="session-card">
-                                                <div class="session-sub-card">
-                                                    <img *ngIf="data.activity_details.activitytype == 'Live Classroom'" class=float-right src="../../../../assets/images/ms_team.png" width="35" height="35">
-                                                
-                                                    <div class="m-l-4">
-                                                    
-                                                        <img src="../../../../assets/learner/Calendar_black.svg">
-                                                        <span class="lxp-text f_size_14 f_wt_400"> {{data.activity_details.startdate | date :'MMM d, y h:mm a'}} - {{data.activity_details.enddate | date :'MMM d, y h:mm a'}}</span>
-                                                    
-                                                        <span class="status lxp-text f_size_14 f_wt_400" *ngIf="data.status == 'On going' ">
-                                                        {{'Ongoing' | translate }}</span>
-                                                        <span class="Upcomingstatus lxp-text f_size_14 f_" *ngIf="data.status == 'Up Coming' ">
-                                                    {{'Upcoming' | translate }}</span>
-                                                        <span class=" Completedstatus lxp-text f_size_14 f_" *ngIf="data.status == 'Completed' ">
-                                                        {{'completed' | translate }}</span>
-            
-            
-                                                    </div>
-                                                    <p class="coursenameT" [ngClass]="{'color-yellow-card-status': data.status === 'On going', 'color-grey-card-status':data.status === 'Completed','color-blue-card-status':data.status === 'Up Coming' }"> {{ data.activity_details.modulename }}</p>
-                                                    
-                                                    <h5 class="m-l-4" ><span class="f_wt_500 f_size_14" >{{'Course' | translate }} </span>:{{ data.activity_details.coursename }}
-                                                        <span class="f_wt_500 f_size_14" style="margin-left: 60px;">{{'Topic' | translate }} : {{ data.activity_details.topicname }} </span>
-                                                    </h5>
-                                                    <h5 class="m-l-4"> <span class="f_wt_500 f_size_14">{{'Type' | translate }} </span>: <span class="lxp-text f_size_14 f_wt_400">{{  data.activity_details.activitytype}} </span>
-                                                        <mat-icon fontSet="material-icons-outlined" class="person"> account_circle_outline </mat-icon>
-                                                        <span class="aligned-icon lxp-text f_size_14 f_wt_400">{{ data.activity_details.createdby_name }}</span>
-                                                        <button (click)="launchActivity(data,i)" *ngIf="data.activity_details.activitytype == 'Live Classroom' && data.status ==='On going'" mat-stroked-button class="blue_clr cap m-b-10 LaunchBtn pointer float-right">Launch</button>
-                                                    </h5>
-                                                </div>
-                                            </mat-card>
-                                        </div>
-                                    </ng-container>
-                                </div>
-                            </ng-template> -->
-                            
                             <div class="scroll-bar">
                                 <ng-container *ngFor="let data of learnerActivityList; let i = index">
                                     <div class="mainCard" (click)="goToActivities(data)">
@@ -132,9 +114,9 @@
                                                         {{data.activity_details.startdate | date :'d/M/yy h:mm a'}} - {{data.activity_details.enddate | date :'d/M/yy h:mm a'}}
                                                     </span>
                                                     <div class="activity-status">
-                                                        <span class="status lxp-text" *ngIf="data.status == 'On going'">{{'Ongoing' | translate }}</span>
-                                                        <span class="Upcomingstatus lxp-text" *ngIf="data.status == 'Up Coming'">{{'Upcoming' | translate }}</span>
-                                                        <span class="Completedstatus lxp-text" *ngIf="data.status == 'Completed'">{{'Completed' | translate }}</span>
+                                                        <span class="status" *ngIf="data.status == 'On going'">{{'Ongoing' | translate }}</span>
+                                                        <span class="Upcomingstatus" *ngIf="data.status == 'Up Coming'">{{'Upcoming' | translate }}</span>
+                                                        <span class="Completedstatus" *ngIf="data.status == 'Completed'">{{'Completed' | translate }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex align-items-center justify-content-between">
@@ -144,7 +126,7 @@
                                                     <span class="course-section" [tooltip]="data.activity_details.coursename">
                                                         {{'Course' | translate }}: {{ data.activity_details.coursename }}
                                                     </span>
-                                                    <span class="lxp-text activity_type">{{  data.activity_details.activitytype}}</span>                                            </div>
+                                                    <span class="activity_type">{{  data.activity_details.activitytype}}</span>                                            </div>
                                                 <div class="m-l-4 expandLine d-flex flex-wrap">
                                                     <div class="topicSection d-flex align-items-center justify-content-between">
                                                         <span class="topic-section" [tooltip]="data.activity_details.topicname">
@@ -152,9 +134,6 @@
                                                         </span>
                                                         <div class="activityButton">
                                                             <button (click)="launchActivity(data,i)" *ngIf="data.activity_details.activitytype == 'Live Classroom' && data.status ==='On going'" mat-stroked-button class="blue_clr cap m-b-10 LaunchBtn pointer"><img alt="" src="../../../../assets/learner/mycourseicons/launch_icon.svg" >Launch</button>
-                                                        </div>
-                                                        <div class="img-show">
-                                                            <img *ngIf="data.activity_details.activitytype == 'Live Classroom'" alt="msteam" src="../../../assets/images/ms_team.png" width="35" height="35">
                                                         </div>
                                                     </div>
                                                 </div>
