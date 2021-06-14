@@ -283,8 +283,8 @@
                     <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                     Add your files
                     </button> -->
-                    <input class="input-hide" type="file" *ngIf="project.projectActivity.submitAction !== 'submit'" #uploadFile [(ngModel)]="fileName" [ngClass]="project.projectActivity.submitAction ? 'class1':'class2'" (change)="uploadDoc($event, project, 'upload')" />
-                    <button mat-stroked-button class="uploadBtn w-100" *ngIf="project.projectActivity.submitAction !== 'submit'" [disabled]="project.submitType == false || project.enableSubmit == false" (click)="uploadDocs($event)">
+                    <input class="input-hide" type="file"  #uploadFile [(ngModel)]="fileName" [ngClass]="project.projectActivity.submitAction ? 'class1':'class2'" (change)="uploadDoc($event, project, 'upload')" />
+                    <button mat-stroked-button class="uploadBtn w-100"  [disabled]="project.submitType == false || project.enableSubmit == false" (click)="uploadDocs($event)">
                       <mat-icon class="add-icon">add</mat-icon> Add your files
                     </button>
                     <p class="uploadMessage">Max File Size : 150 MB, Format : JPEG,PNG,PDF and MP4</p>
