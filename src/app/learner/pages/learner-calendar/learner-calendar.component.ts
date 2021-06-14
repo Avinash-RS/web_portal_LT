@@ -21,8 +21,11 @@ export class LearnerCalendarComponent implements OnInit {
   refresh: Subject<any> = new Subject();
   selectedMonthViewDay: CalendarMonthViewDay;
   selectedDays: any = [];
-
-
+  sortBy = ['All','Completed','Ongoing','Upcoming']
+  filterBy = ['Self Learning','Live Classroom','Assignments','Performs','Projects','All Activities']
+  sortValue = 'All'
+  filterValue = 'Self Learning'
+  learnerActivitycontiner;
   events: CalendarEvent[];
 
   public UserDetails: any;
@@ -50,6 +53,7 @@ export class LearnerCalendarComponent implements OnInit {
   currentStartTime: any;
   currentEndTime: any;
   activeDayIsOpen = false;
+  
   constructor(public translate: TranslateService, private service: LearnerServicesService, private router: Router) {}
 
   ngOnInit() {
@@ -122,7 +126,11 @@ export class LearnerCalendarComponent implements OnInit {
       (res: any) => {
         if (res.data?.get_read_learner_activity?.message.length > 0) {
           this.showErrorCard = false;
+          res.data?.get_read_learner_activity?.message
           this.learnerActivityList = res.data?.get_read_learner_activity?.message;
+          this.learnerActivitycontiner = res.data?.get_read_learner_activity?.message;
+          this.learnerActivityList[0].activity_details.activitytype = 'Self Learning'
+          this.learnerActivitycontiner[0].activity_details.activitytype = 'Self Learning'
           this.learnerActivityList.sort((a, b) => {
             return new Date(a.activity_details.startdate).getTime() - new Date(b.activity_details.startdate).getTime();
     
@@ -164,7 +172,7 @@ export class LearnerCalendarComponent implements OnInit {
   goToActivities(value){
     if(value.activity_details.activitytype === 'Live Classroom'){
       return false;
-    } else if (value.activity_details.activitytype === "Self Paced learning") {
+    } else if (value.activity_details.activitytype == "Self Learning") {
       this.router.navigate(['Learner/MyCourse']);
     }else{
       const data1 = {
@@ -180,7 +188,7 @@ export class LearnerCalendarComponent implements OnInit {
   }
   launchActivity(value, i) {
       window.open(value.activity_details.link);
-      this.saveAttendees();
+     // this.saveAttendees();
       // this.activityName = this.learnerActivityList[i].activityname;
       // this.activityId =
   }
@@ -221,5 +229,12 @@ export class LearnerCalendarComponent implements OnInit {
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
+  }
+
+  onSortChange() {
+  console.log(this.sortValue,this.filterValue)
+  if(this.sortValue == 'All'){
+    this.learnerActivityList = this.learnerActivityList.filter(value=> value.activity_details.activitytype == 'Self Learning')
+  }
   }
 }
