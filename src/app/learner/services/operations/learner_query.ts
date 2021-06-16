@@ -1657,8 +1657,8 @@ export const ViewAllThreadData = gql`
   }
 `;
 export const getReadLeanerActivity = gql`
-  query get_read_learner_activity($userid: String!, $date: String!, $courseid: String) {
-    get_read_learner_activity(userid: $userid, date: $date, courseid: $courseid) {
+  query get_read_learner_activity($userid: String!, $date: String!, $courseid: String, $status: String, $activity: String, $datetype: String) {
+    get_read_learner_activity(userid: $userid, date: $date, courseid: $courseid, status: $status, activity: $activity, datetype: $datetype) {
       success
       error_msg
       message {

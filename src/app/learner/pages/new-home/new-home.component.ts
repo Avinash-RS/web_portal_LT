@@ -44,18 +44,18 @@ export class NewHomeComponent implements OnInit {
     // ).toISOString();
     const dateValue = new Date().toISOString();
     const empty = undefined;
-    this.learnerService.getReadLeanerActivity(this.userDetailes.user_id, dateValue, empty).subscribe((datas: any) => {
-      this.results = datas.data.get_read_learner_activity;
-      // tslint:disable-next-line:no-string-literal
-      this.results['message'].forEach((element, index) => {
-        if (index === 0) {
-          element.activity_details.ongoing = 'true';
-        } else {
-          element.activity_details.ongoing = 'false';
-        }
-      });
-    }, (error) => {
-    });
+    // this.learnerService.getReadLeanerActivity(this.userDetailes.user_id, dateValue, empty).subscribe((datas: any) => {
+    //   this.results = datas.data.get_read_learner_activity;
+    //   // tslint:disable-next-line:no-string-literal
+    //   this.results['message'].forEach((element, index) => {
+    //     if (index === 0) {
+    //       element.activity_details.ongoing = 'true';
+    //     } else {
+    //       element.activity_details.ongoing = 'false';
+    //     }
+    //   });
+    // }, (error) => {
+    // });
 
   }
 

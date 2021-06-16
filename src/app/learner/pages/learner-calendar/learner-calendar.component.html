@@ -17,14 +17,14 @@
                         <div class="row text-center d-flex justify-content-between">
                             <div class="prevNext align-self-center">
                                 <div class="btn-group d-flex align-items-center justify-content-center">
-                                    <mat-icon mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="getAllActivity($event)">
+                                    <mat-icon mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="getAllActivity($event);monthChange($event)">
                                         <!-- {{'Previous' | translate }} -->keyboard_arrow_left
                                     </mat-icon>
                                     <div class="currentMonth">
                                         <!-- {{'Today' | translate }} -->
                                         <p>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</p>
                                     </div>
-                                    <mat-icon mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="getAllActivity($event)">
+                                    <mat-icon mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="getAllActivity($event);monthChange($event)">
                                         <!-- {{'Next' | translate }} --> keyboard_arrow_right
                                     </mat-icon>
                                 </div>
@@ -48,7 +48,7 @@
                         </div>
 
                         <div [ngSwitch]="view">
-                            <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="getLearnerActivity($event.day,$event.day)" (eventClicked)="handleEvent('Clicked', $event.event)">
+                            <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="getLearnerActivity('day',$event.day,$event.day)" (eventClicked)="handleEvent('Clicked', $event.event)">
                             </mwl-calendar-month-view>
                             <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)">
                             </mwl-calendar-week-view>
@@ -62,17 +62,17 @@
                 <div class="col-md-12 col-lg-5 col-xl-4 header-sort">
                     <div class="right-header">
                         <h1 class="activityHeading">{{'Activities' | translate }} <span class="badge ">{{learnerActivityList.length}}</span></h1>
-                        <!-- <button mat-stroked-button class="clr">
+                        <button mat-stroked-button class="clr" (click)="onSortChange()">
                             Reset
-                        </button> -->
+                        </button>
                     </div>
                     <div class="row">
-                        <!-- <div class="col-12 mb-2">
+                        <div class="col-12 mb-2">
                             <span>Sort By: 
                                 <mat-form-field appearance="outline">
                                 <mat-select (selectionChange)="onSortChange($event)" [(ngModel)]="sortValue">
-                                  <mat-option *ngFor="let sort of sortBy" [value]="sort">
-                                      {{sort}}
+                                  <mat-option *ngFor="let sort of sortBy" [value]="sort.value">
+                                      {{sort.key}}
                                   </mat-option>
                                 </mat-select>
                               </mat-form-field>
@@ -80,13 +80,13 @@
                             <span class="pull-right mr-3">Filter By: 
                                 <mat-form-field appearance="outline">
                                     <mat-select (selectionChange)="onSortChange($event)" [(ngModel)]="filterValue">
-                                      <mat-option *ngFor="let filter of filterBy" [value]="filter">
-                                          {{filter}}
+                                      <mat-option *ngFor="let filter of filterBy" [value]="filter.value">
+                                          {{filter.key}}
                                       </mat-option>
                                     </mat-select>
                                   </mat-form-field>
                                 </span>
-                        </div> -->
+                        </div>
                     
                         <div class="col-12" *ngIf="learnerActivityList.length == 0 ">
                             <div class="row width_100 no_margin">
