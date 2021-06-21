@@ -52,15 +52,15 @@ export class LearnerCalendarComponent implements OnInit {
     'value': 'liveclassroom'
   },
   {
-    'key': 'Assignments',
+    'key': 'Assignment',
     'value': 'assignment'
   },
   {
-    'key': 'Performs',
+    'key': 'Perform',
     'value': 'perform'
   },
   {
-    'key': 'Projects',
+    'key': 'Project',
     'value': 'project'
   }
   ]
@@ -277,6 +277,10 @@ export class LearnerCalendarComponent implements OnInit {
   if(!value) {
     this.sortValue = 'All'
     this.filterValue = 'All'
+    view = 'month'
+    if (this.selectedDays.length > 0) {
+      delete this.selectedDays[this.selectedDays.length - 1].cssClass;
+    }
   }
 
   this.getLearnerActivity(view,this.selectedDate);
