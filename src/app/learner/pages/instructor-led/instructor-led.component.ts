@@ -165,7 +165,7 @@ export class InstructorLedComponent implements OnInit {
   }
 
   videoPreview(templateRef: TemplateRef<any>, e) {
-    this.videoSource = e
+    this.videoSource = e + this.blobKey
     this.dialog.open(templateRef, {
       width: '90%',
       height: '95%',
