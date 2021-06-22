@@ -22,6 +22,7 @@ export class LearnerCalendarComponent implements OnInit {
   selectedMonthViewDay: CalendarMonthViewDay;
   daySelected = false;
   selectedDays: any = [];
+  daySelection;
   sortBy = [{
     'key': 'All',
     'value': 'All'
@@ -155,6 +156,8 @@ export class LearnerCalendarComponent implements OnInit {
       filterValue = this.filterValue
    }
    if(selectedDate.date){
+    this.daySelected = true;
+    this.daySelection = selectedDate.date
      selectedDate = selectedDate.date
    }
     const dateValue = moment(selectedDate).format('YYYY-MM-DD');
@@ -179,7 +182,7 @@ export class LearnerCalendarComponent implements OnInit {
     );
     if (day) {
       this.selectedMonthViewDay = day;
-      this.daySelected = true;
+      
       const selectedDateTime = this.selectedMonthViewDay.date.getTime();
       const dateIndex = this.selectedDays.findIndex(
         (selectedDay) => selectedDay.date.getTime() === selectedDateTime
@@ -190,8 +193,6 @@ export class LearnerCalendarComponent implements OnInit {
       this.selectedDays.push(this.selectedMonthViewDay);
       day.cssClass = 'cal-day-selected';
       this.selectedMonthViewDay = day;
-    } else {
-      this.daySelected = false;
     }
 
   }
@@ -277,12 +278,13 @@ export class LearnerCalendarComponent implements OnInit {
   if(!value) {
     this.sortValue = 'All'
     this.filterValue = 'All'
+    this.daySelected = false;
     view = 'month'
     if (this.selectedDays.length > 0) {
       delete this.selectedDays[this.selectedDays.length - 1].cssClass;
     }
   }
 
-  this.getLearnerActivity(view,this.selectedDate);
+  this.getLearnerActivity(view,this.daySelection);
   }
 }
