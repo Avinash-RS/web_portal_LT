@@ -365,6 +365,15 @@ export class ActivitiesComponent implements OnInit {
     this.selectedIndex = i;
   }
   uploadDoc(event, project, submitAction) {
+    const filePath = event.target.files[0].name;
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.mp4|\.pdf)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+      this.toastr.warning('Please upload file a valid file');
+      if (this.uploadInput) {
+        this.uploadInput.nativeElement.value = '';
+      }
+      return false;
+    }
     if(project?.projectActivity.videodetails.length == 3) {
       this.toastr.warning("You are allowed only to upload a maximum of 3 files");
       if (this.uploadInput) {
@@ -500,6 +509,15 @@ export class ActivitiesComponent implements OnInit {
   }
 
   uploadAssignmentsFile(event,assignemnt) {
+    const filePath = event.target.files[0].name;
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+      this.toastr.warning('Please upload file a valid file');
+      if (this.fileInput) {
+        this.fileInput.nativeElement.value = '';
+      }
+      return false;
+    }
       let fileSize = 0;
         fileSize = event.target.files[0].size;
       if(fileSize/1024/1024 > 10){
@@ -871,6 +889,7 @@ export class ActivitiesComponent implements OnInit {
       if (this.videoInput) {
         this.videoInput.nativeElement.value = '';
       } 
+      return;
     } else {
       // tslint:disable-next-line: prefer-for-of
       let fileSize = 0;
