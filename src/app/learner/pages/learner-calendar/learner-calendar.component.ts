@@ -284,7 +284,10 @@ export class LearnerCalendarComponent implements OnInit {
       delete this.selectedDays[this.selectedDays.length - 1].cssClass;
     }
   }
-
+  if(!this.daySelection){
+    const topicStart = new Date();
+    this.daySelection = moment(topicStart).format('YYYY-MM-DD');
+  }
   this.getLearnerActivity(view,this.daySelection);
   }
 }
