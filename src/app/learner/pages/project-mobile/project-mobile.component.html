@@ -203,7 +203,7 @@
                                 <span class="carouselText" *ngIf="material.name?.length < 30">{{material.name}}</span>
                               </div>
                             </div>
-                            <mat-icon class="deleteIcon float-right del-pos" *ngIf="project.projectActivity.submitAction !== 'submit'" (click)="learnerSumbitdeleteVideo(project, material, 'delete')">delete</mat-icon>
+                            <mat-icon class="deleteIcon float-right del-pos" *ngIf="project.submitType == true" (click)="learnerSumbitdeleteVideo(project, material, 'delete')">delete</mat-icon>
                           </mat-card>
                         </div>
                       </span>
@@ -283,16 +283,16 @@
                     <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                     Add your files
                     </button> -->
-                    <input class="input-hide" type="file" *ngIf="project.projectActivity.submitAction !== 'submit'" #uploadFile [(ngModel)]="fileName" [ngClass]="project.projectActivity.submitAction ? 'class1':'class2'" (change)="uploadDoc($event, project, 'upload')" />
-                    <button mat-stroked-button class="uploadBtn w-100" *ngIf="project.projectActivity.submitAction !== 'submit'" [disabled]="project.submitType == false || project.enableSubmit == false" (click)="uploadDocs($event)">
+                    <input class="input-hide" type="file"  #uploadFile [(ngModel)]="fileName" [ngClass]="project.projectActivity.submitAction ? 'class1':'class2'" (change)="uploadDoc($event, project, 'upload')" />
+                    <button mat-stroked-button class="uploadBtn w-100"  [disabled]="project.submitType == false || project.enableSubmit == false" (click)="uploadDocs($event)">
                       <mat-icon class="add-icon">add</mat-icon> Add your files
                     </button>
-                    <p class="uploadMessage" *ngIf="project.projectActivity.submitAction !== 'submit'">Max File Size : 150 MB, Format : JPEG,PNG,PDF and MP4</p>
-                    <button mat-stroked-button class="submit-btn" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')" *ngIf="(project.projectActivity.submit_status == 'notsubmitted' || project.projectActivity.submit_status == 'late') && project.projectActivity.videodetails.length > 0 && project.submitType == true && project.projectActivity.submitAction != 'submit'"> Submit </button>
-                    <button mat-stroked-button class="submitted-btn" *ngIf="project.projectActivity.submit_status == 'notsubmitted' && (project.projectActivity.videodetails.length == 0 || project.enableSubmit == false)"> Submit </button>
-
-                    <button mat-stroked-button class="submitted-btn" [disabled]="true" *ngIf="project.projectActivity.submitAction == 'submit'"> Submitted </button>
-                    <p style="margin: 0 !important;" *ngIf="project.projectActivity.submit_status == 'notsubmitted'">Submitted files cannot be edited</p>
+                    <p class="uploadMessage">Max File Size : 150 MB, Format : JPEG,PNG,PDF and MP4</p>
+                    <button mat-stroked-button class="submit-btn" [disabled]="project.submitType == false || project.enableSubmit == false" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')" 
+                      *ngIf="project.projectActivity.videodetails.length > 0">Submit</button>
+                    <button mat-stroked-button class="submitted-btn mt-2" *ngIf="(project.projectActivity.videodetails.length == 0 || project.enableSubmit == false)"> Submit </button>
+                    <!-- <button mat-stroked-button class="submitted-btn" [disabled]="true" *ngIf="project.projectActivity.submitAction == 'submit'"> Submitted </button>
+                    <p style="margin: 0 !important;" *ngIf="project.projectActivity.submit_status == 'notsubmitted'">Submitted files cannot be edited</p> -->
                     <p style="margin: 0 !important;" *ngIf="project.projectActivity.submitAction == 'submit'">Submitted on: {{project.submittedOn | date:'MMM dd, yyyy'}}</p>
                   </div>
                 </div>

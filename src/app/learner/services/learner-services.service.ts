@@ -793,13 +793,16 @@ getMessage(): Observable<any> {
     }
   }
 
-  getReadLeanerActivity(userid, date, courseid) {
+  getReadLeanerActivity(userid, date, courseid,status,activity,datetype) {
     return this.Apollo.query({
       query: getReadLeanerActivity,
       variables: {
         userid,
         date,
-        courseid
+        courseid,
+        status,
+        activity,
+        datetype
       }
     });
   }

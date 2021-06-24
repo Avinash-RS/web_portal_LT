@@ -20,11 +20,55 @@ export class LearnerCalendarComponent implements OnInit {
   viewDate: Date = new Date();
   refresh: Subject<any> = new Subject();
   selectedMonthViewDay: CalendarMonthViewDay;
+  daySelected = false;
   selectedDays: any = [];
-
-
+  daySelection;
+  sortBy = [{
+    'key': 'All',
+    'value': 'All'
+  },
+  {
+    'key': 'Completed',
+    'value': 'completed'
+  },
+  {
+    'key': 'Ongoing',
+    'value': 'ongoing'
+  },
+  {
+    'key': 'Upcoming',
+    'value': 'upcoming'
+  }
+  ]
+  filterBy = [{
+    'key': 'All Activities',
+    'value': 'All'
+  },
+  {
+    'key': 'Self Learning',
+    'value': 'selfpacedlearning'
+  },
+  {
+    'key': 'Live Classroom',
+    'value': 'liveclassroom'
+  },
+  {
+    'key': 'Assignment',
+    'value': 'assignment'
+  },
+  {
+    'key': 'Perform',
+    'value': 'perform'
+  },
+  {
+    'key': 'Project',
+    'value': 'project'
+  }
+  ]
+  sortValue = 'All'
+  filterValue = 'selfpacedlearning'
+  learnerActivitycontiner;
   events: CalendarEvent[];
-
   public UserDetails: any;
   public tokenDetails: any;
   public tokenid: any;
@@ -50,10 +94,10 @@ export class LearnerCalendarComponent implements OnInit {
   currentStartTime: any;
   currentEndTime: any;
   activeDayIsOpen = false;
+  
   constructor(public translate: TranslateService, private service: LearnerServicesService, private router: Router) {}
 
   ngOnInit() {
-    console.log("learner calendrer")
     this.translate.use(localStorage.getItem('language'));
     this.showUpcoming = '';
     this.showOngoing = '';
@@ -66,36 +110,16 @@ export class LearnerCalendarComponent implements OnInit {
     this.userId = this.UserDetails.user_id;
     // this.tokenid = this.tokenDetails.token;
     this.selectedDate = moment().format();
-    this.getLearnerActivity(this.selectedDate);
+    this.getLearnerActivity('month',this.selectedDate);
     const topicStart = new Date();
     const dateValue = moment(topicStart).format('YYYY-MM-DD');
     this.getAllActivity(topicStart);
   }
 
-  getDateChangedValue(event) {
-    // var formattedDate = moment(event).format();
-    // this.selectedDate = new Date(event).toUTCString();
-    // this.selectedDate = moment.utc(event).format();
-    this.showUpcoming = '';
-    this.showOngoing = '';
-    this.showCompleted = '';
-    this.selectedDate = new Date(
-      Date.UTC(
-        event.getUTCFullYear(),
-        event.getUTCMonth(),
-        event.getUTCDate(),
-        event.getUTCHours(),
-        event.getUTCMinutes(),
-        event.getUTCSeconds()
-      )
-    ).toISOString();
-    this.getLearnerActivity(this.selectedDate);
-  }
-
   todayActivity() {
     const topicStart = new Date();
     const dateValue = moment(topicStart).format('YYYY-MM-DD');
-    this.getLearnerActivity(dateValue);
+    this.getLearnerActivity('day',dateValue);
   }
 
   getAllActivity(value?) {
@@ -113,16 +137,37 @@ export class LearnerCalendarComponent implements OnInit {
       });
       this.events = activityDetailsList;
     });
+
   }
 
-  getLearnerActivity(selectedDate, day?: CalendarMonthViewDay) {
-    const dateValue = moment(selectedDate.date).format('YYYY-MM-DD');
+  monthChange(value){
+    const topicStart = new Date(value);
+    this.getLearnerActivity('month',topicStart)
+  }
+  getLearnerActivity(view,selectedDate, day?: CalendarMonthViewDay) {
+    if(this.sortValue == 'All') {
+       var sortValue = ''
+    } else {
+        sortValue = this.sortValue
+    }
+    if(this.filterValue == 'All') {
+      var filterValue = ''
+   } else {
+      filterValue = this.filterValue
+   }
+   if(selectedDate.date){
+    this.daySelected = true;
+    this.daySelection = selectedDate.date
+     selectedDate = selectedDate.date
+   }
+    const dateValue = moment(selectedDate).format('YYYY-MM-DD');
     const empty = undefined;
-    this.service.getReadLeanerActivity(this.userId, dateValue, empty).subscribe(
+    this.service.getReadLeanerActivity(this.userId, dateValue, empty,sortValue,filterValue,view).subscribe(
       (res: any) => {
         if (res.data?.get_read_learner_activity?.message.length > 0) {
           this.showErrorCard = false;
           this.learnerActivityList = res.data?.get_read_learner_activity?.message;
+          this.learnerActivitycontiner = res.data?.get_read_learner_activity?.message;
           this.learnerActivityList.sort((a, b) => {
             return new Date(a.activity_details.startdate).getTime() - new Date(b.activity_details.startdate).getTime();
     
@@ -137,6 +182,7 @@ export class LearnerCalendarComponent implements OnInit {
     );
     if (day) {
       this.selectedMonthViewDay = day;
+      
       const selectedDateTime = this.selectedMonthViewDay.date.getTime();
       const dateIndex = this.selectedDays.findIndex(
         (selectedDay) => selectedDay.date.getTime() === selectedDateTime
@@ -164,7 +210,7 @@ export class LearnerCalendarComponent implements OnInit {
   goToActivities(value){
     if(value.activity_details.activitytype === 'Live Classroom'){
       return false;
-    } else if (value.activity_details.activitytype === "Self Paced learning") {
+    } else if (value.activity_details.activitytype == "Self Learning") {
       this.router.navigate(['Learner/MyCourse']);
     }else{
       const data1 = {
@@ -180,7 +226,7 @@ export class LearnerCalendarComponent implements OnInit {
   }
   launchActivity(value, i) {
       window.open(value.activity_details.link);
-      this.saveAttendees();
+     // this.saveAttendees();
       // this.activityName = this.learnerActivityList[i].activityname;
       // this.activityId =
   }
@@ -221,5 +267,24 @@ export class LearnerCalendarComponent implements OnInit {
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
+  }
+
+  onSortChange(value) {
+  if (this.daySelected) {
+    var view = 'day'
+  } else {
+    view = 'month'
+  }
+  if(!value) {
+    this.sortValue = 'All'
+    this.filterValue = 'All'
+    this.daySelected = false;
+    view = 'month'
+    if (this.selectedDays.length > 0) {
+      delete this.selectedDays[this.selectedDays.length - 1].cssClass;
+    }
+  }
+
+  this.getLearnerActivity(view,this.daySelection);
   }
 }

@@ -76,10 +76,10 @@
               <span class="sessionTitle">{{activityShow?.activity_details.activityname}}</span>
               <div class="row">
                 <!-- <span>Held On</span> &nbsp;&nbsp; -->
-                <span class="sessionDate">Date: {{ activityShow?.activity_details.startdate | date: 'MMM d, y, h:mm a'}}</span>
+                <span *ngIf="activityShow?.activity_details.activitytype != 'Recorded'" class="sessionDate">Date: {{ activityShow?.activity_details.startdate | date: 'MMM d, y, h:mm a'}}</span>
               </div>
               <div class="row">
-                <span class="sessionduration">Duration: {{activityShow?.duration}}</span>
+                <span *ngIf="activityShow?.activity_details.activitytype != 'Recorded'" class="sessionduration">Duration: {{activityShow?.duration}}</span>
                 <!-- <span class="sessionTitle">Duration</span> -->
               </div>
               <!-- <div class="row" style="color: white; margin-top: 10px;">
@@ -212,8 +212,8 @@
               </div>
               <div class="content-container">
                 <h4>{{los.activity_details.activityname}}</h4>
-                <h5><span>Date:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm a'}}</h5>
-                <h5><span>Duration:</span> {{los.duration}} </h5>
+                <h5 *ngIf="los.activity_details.activitytype != 'Recorded'"><span>Date:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm a'}}</h5>
+                <h5 *ngIf="los.activity_details.activitytype != 'Recorded'"><span>Duration:</span> {{los.duration}} </h5>
               </div>
             </div>
           </mat-card>
