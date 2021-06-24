@@ -145,7 +145,7 @@
                       </ng-container>
                       </div>
                       <div class="align-center">
-                        <input class="form-control border-right-0" type='file' id="upload-photo" #fileInput (change)="uploadAssignmentsFile($event,assignment.files)">
+                        <input class="form-control border-right-0" type='file' accept="image/png,image/jpeg,image/jpg,application/pdf" id="upload-photo" #fileInput (change)="uploadAssignmentsFile($event,assignment.files)">
                         <button mat-stroked-button class="upload-btn" (click)="fileInput.click()" [disabled]="assignment.files.grade_status != 'Evaluated' && !assignment.files?.enableUpload" *ngIf="assignment.files.grade_status !== 'Evaluated'"> <mat-icon class="icon-color m-t-m-2">add</mat-icon> Upload files </button>
                         <p class="uploadMessage" *ngIf="assignment.files.grade_status !== 'Evaluated'" >Max File Size : 10 MB, Format : JPEG,JPG,PNG,PDF</p>
                       </div>
