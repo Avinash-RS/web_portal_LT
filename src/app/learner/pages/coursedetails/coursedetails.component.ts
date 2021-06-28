@@ -117,6 +117,7 @@ export class CoursedetailsComponent implements OnInit {
   user_token;
   qaFilterKey:any="-1"
   batchId:any;
+  isShowDiv = false;
 
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
   @ViewChild('rationPopup') rationPopup: TemplateRef<any>;
@@ -357,6 +358,10 @@ export class CoursedetailsComponent implements OnInit {
       }
     });
     this.getCoursePlayerStatus();
+  }
+
+  toggleDisplayDiv() {
+    this.isShowDiv = !this.isShowDiv;
   }
 
   ngOnDestroy() {
