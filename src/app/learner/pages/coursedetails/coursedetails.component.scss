@@ -538,7 +538,7 @@ color:grey
     position: absolute;
     right: 20px;
     bottom: 20vh;
-    .fullScr, .resourceTab {
+    .fullScr, .resourceTab, .allTabs {
         background-color: #FFCC00;
         border-radius: 50%;
         width: 30px;
@@ -589,7 +589,103 @@ color:grey
         i{
             font-size: 10px;
         }
-
+    }
+    .allTabs {
+        i {
+            display: inline-block;
+            font-size: 13px;
+            transition: 0.2s all linear;
+            &.addIcon {
+                transform: rotate(45deg);
+            }
+            &.closeIcon {
+                transform: rotate(270deg);
+            }
+        }
+    }
+    .mixed {
+        position: relative;
+        transition: 0.3s all linear;
+        &.paddingTop {
+            padding-top: 40px;
+        }
+        &.paddingZero {
+            padding-top: 0;
+        }
+    }
+    .allIcons {
+        position: absolute;
+        right: 0;
+        top: 0;
+        animation: 0.3s fadeIn;
+        animation-fill-mode: forwards;
+        visibility: hidden;
+        transition: 0.5s animation linear;
+        > div {
+            position: absolute;
+            &.smile {
+                right: 55px;
+                top: 50px;
+            }
+            &.sad {
+                right: 47px;
+                top: 28px;
+            }
+            &.askquestion {
+                right: 31px;
+                top: 11px;
+            }
+            &.bookmark {
+                right: 10px;
+            }
+            button {
+                width: 20px;
+                height: 20px;
+                display: flex;
+                border-color: transparent;
+                padding: 0;
+                background-color: #eeeeee;
+                border-radius: 50%;
+                box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
+                text-align: center;
+                padding: 4px;
+                &:hover {
+                    background-color: #dddddd;
+                }
+                &[data-title] {
+                    transition: all 0.3s ease-in-out;
+                    position: relative;
+                    &:hover {
+                        &::before {
+                            content: attr(data-title);
+                            position: absolute;
+                            bottom: 0;
+                            right: 30px;
+                            line-height: normal;
+                            background: #5C6873;
+                            padding: 4px 6px;
+                            color: #fff;
+                            font-size: 11px;
+                            white-space: nowrap;
+                            z-index: 9;
+                        }
+                        &::after {
+                        content: '';
+                        position: absolute;
+                        right: 18px;
+                        top: 50%;
+                        border-width: 6px;
+                        border-style: solid;
+                        border-color: transparent transparent transparent #5C6873;
+                        transform: translateY(-55%);
+                        }
+                    }
+                }
+            }
+            i {
+                font-size: 11px;
+            }
+        }
     }
 }
 .hamburger {
@@ -1176,3 +1272,12 @@ margin-right: 10px !important;
     -ms-user-select: none;       /* Internet Explorer/Edge*/
      user-select: none; 
 }
+
+@keyframes fadeIn {
+    99% {
+      visibility: hidden;
+    }
+    100% {
+      visibility: visible;
+    }
+  }
