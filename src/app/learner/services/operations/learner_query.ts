@@ -1445,6 +1445,7 @@ export const playerModuleAndTopic = gql`
       message {
         _id
         url
+        toc
         total_topic_len
         course_id
         moduleIndex

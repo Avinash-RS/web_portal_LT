@@ -602,6 +602,11 @@ export class CoursedetailsComponent implements OnInit {
   playerModuleAndTopic() {
     this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
+      if(this.scromApiData?.toc != '0'){
+        this.drawersOpen = true;
+      } else {
+        this.drawersOpen = false;
+      }
       this.scromModuleData = this.scromApiData?.childData;
       this.moduleLenth = this.scromApiData?.childData.length;
       this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : this.scromApiData.topicIndex;
@@ -949,7 +954,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   goBack() {
-    if(!this.drawersOpen){
+    if(!this.drawersOpen && this.scromApiData?.toc != '0'){
       this.drawersOpen=this.drawersOpen?false:true
     }else{
       this.route.navigateByUrl('/Learner/MyCourse');
