@@ -911,7 +911,8 @@ color:grey
         }
     }
     .mat-tab-body-content {
-        overflow: auto !important;
+        // overflow: auto !important;
+        overflow: inherit !important;
     }
 }
 .rescontentHeight {
@@ -925,6 +926,7 @@ color:grey
     width: 30% !important;
     min-width: 30%!important;
     border-right: 1px solid rgba(112, 112, 112, 0.5);
+    overflow: auto;
     @media only screen and (max-width: 767px) {
         width: 100% !important;
         min-width: 100%!important;
