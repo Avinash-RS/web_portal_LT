@@ -453,7 +453,7 @@ export class PerformancePageMobileComponent implements OnInit {
   }	
   uploadDocument(event) {
     const filePath = event.target.files[0].name;
-    const allowedExtensions = /(\.mp4)$/i;
+    const allowedExtensions = /(\.mp4|\.mov|\.avi)$/i;
     if (!allowedExtensions.exec(filePath)) {
       this.toastr.warning('Please upload video file only.');
       if (this.videoInputPerform) {
@@ -505,7 +505,7 @@ export class PerformancePageMobileComponent implements OnInit {
     if (path.videourl) {
       path.path = path.videourl;
     }
-     if (docType !== 'video/mp4') {
+     if (docType !== 'video/mp4' && docType !== 'video/quicktime' && docType !== 'video/avi') {
       this.dialog.open(templateRef, {
         width: '100%',
         height: '100%',
@@ -514,18 +514,20 @@ export class PerformancePageMobileComponent implements OnInit {
         panelClass: 'popupModalContainer'
       });
       if (path.path.includes('?sv=')) {
-      } else {
+      } 
+      else {
         path.path = path.path + this.blobKey;          
       }
       this.previewDoc = path;
-    } else {
+    } 
+    else {
       this.videoPreview(videoDialog, path);
     }
   }
 
 playVideoMaterial(templateRef: TemplateRef<any>, videoDialog,  path, docType) {
   let pathdata = {videourl:  path.path};
-  if (docType !== 'video/mp4') {
+  if (docType !== 'video/mp4' || docType !== 'video/quicktime' || docType !== 'video/avi') {
     this.dialog.open(templateRef, {
       width: '100%',
       height: '100%',
@@ -584,7 +586,7 @@ learnerRecordVideo() {
     iterationid: this.itrationSend.iterationid,
     object_id: this.performDetailsSend.perform_id,
     videodetails : {
-        doc_type : 'video/mp4',
+        doc_type : 'video/mp4' || 'video/quicktime' || 'video/avi',
         videourl : this.videoDetails.videourl,
         name : this.videoDetails.fileName,
         size : this.videoDetails.size,
