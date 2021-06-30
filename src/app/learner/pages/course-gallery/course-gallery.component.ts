@@ -28,6 +28,7 @@ export class CourseGalleryComponent implements OnInit {
   getuserid;
   urlSafe: SafeResourceUrl;
   user_token;
+  searchContent;
   constructor(private activeRoute: ActivatedRoute, private router: Router,
     private learnerService: LearnerServicesService, public dialog: MatDialog,
     private loader: Ng4LoadingSpinnerService,public sanitizer: DomSanitizer) {
