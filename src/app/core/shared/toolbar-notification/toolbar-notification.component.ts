@@ -49,19 +49,27 @@ export class ToolbarNotificationComponent implements OnInit {
                 });
 
                }
-
   ngOnInit() {
     this.commonservice.notificationCount.subscribe((data: any) => {
       this.unreadCount = data;
   });
     this.commonservice.notificationStatus.subscribe((status: any) => {
       this.notifications = status;
-});
-    
-    
+}); 
   }
 
-    notificationOpen(data) {
+  getNotification() {
+    this.commonservice.getAllNotifications(this.userId, 'learner', this.pagenumber).subscribe((result: any) => {
+      if (result && result.data && result.data.getAllNotifications) {
+      this.notifications = result.data.getAllNotifications.data;
+      this.unreadCount = result.data.getAllNotifications.unReadCount;
+      localStorage.setItem('NotificationCount',this.unreadCount)
+      }
+    });
+  }
+
+
+notificationOpen(data) {
       this.isOpen = data;
       this.commonservice.openNotification$.next(this.isOpen);
     }
@@ -75,15 +83,6 @@ export class ToolbarNotificationComponent implements OnInit {
     });
   }
 
-  getNotification() {
-    this.commonservice.getAllNotifications(this.userId, 'learner', this.pagenumber).subscribe((result: any) => {
-      if (result && result.data && result.data.getAllNotifications) {
-      this.notifications = result.data.getAllNotifications.data;
-      this.unreadCount = result.data.getAllNotifications.unReadCount;
-      localStorage.setItem('NotificationCount',this.unreadCount)
-      }
-    });
-  }
   viewall() {
     this.isOpen = false;
     this.router.navigate(['/Learner/viewAllnotifications']);

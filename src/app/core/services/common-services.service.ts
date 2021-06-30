@@ -212,6 +212,16 @@ export class CommonServicesService {
       }
     });
   }
+  getAllNotifications(userId, userType, pagenumber) {
+    return this.apollo.query({
+      query: getAllNotifications,
+      variables: {
+        userId,
+        userType,
+        pagenumber
+      }
+    });
+  }
   getGuidelineSearch() {
     return this.apollo.query({
       query: getDetailsCount
@@ -224,18 +234,6 @@ export class CommonServicesService {
       localStorage.setItem('Systemip', res.ip);
     });
   }
-
-  getAllNotifications(userId, userType, pagenumber) {
-    return this.apollo.query({
-      query: getAllNotifications,
-      variables: {
-        userId,
-        userType,
-        pagenumber
-      }
-    });
-  }
-
   verifyCaptcha(response) {
     let data = {
       'response': response,

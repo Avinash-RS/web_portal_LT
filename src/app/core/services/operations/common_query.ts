@@ -14,9 +14,9 @@ export const getAllNotifications = gql`
   query getAllNotifications($userId: String!, $userType: String, $pagenumber:Int!) {
     getAllNotifications(userId: $userId, userType: $userType, pagenumber: $pagenumber) {
     message
-    success
     unReadCount
     totalCount
+    success
     data {
       _id
       userObjId
