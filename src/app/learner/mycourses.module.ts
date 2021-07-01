@@ -111,7 +111,7 @@ const routes: Routes = [
     AskQuestionsComponent,
     CourseGalleryComponent,
     CourseReportComponent,
-    LearnerNewMyCourseComponent
+    LearnerNewMyCourseComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [
