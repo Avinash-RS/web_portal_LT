@@ -11,7 +11,7 @@
         <div class="collapseFill"><i (click)="!titleBar?titleBar=true:''" [ngClass]="!titleBar?'arrUp':'arrDown'" class="lxp-CollapseFill"></i></div>
 
         <div class="d-flex align-items-center titleBack animateAnimate" [ngClass]="titleBar==true?'fadeOutUp':'fadeInDown'">
-            <div class="pointer d-flex align-items-center backcolor redHover" (click)="goBack()">
+            <div class="pointer d-flex align-items-center backcolor redHover" *ngIf="scromApiData?.toc != '0'" (click)="goBack()">
                 <i class="lxp-Arrow backArrow"></i><span>Back</span>
             </div>
             <ng-container *ngIf="scromApiData?.toc != '0'">
