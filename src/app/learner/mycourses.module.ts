@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LearnerMyCourseComponent } from './pages/learner-my-course/learner-my-course.component';
+import { LearnerNewMyCourseComponent } from './pages/learner-new-my-course/learner-new-my-course.component';
 import { CoursedetailsComponent } from './pages/coursedetails/coursedetails.component';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -55,7 +56,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 const routes: Routes = [
   {
     path: 'MyCourse',
-    component: LearnerMyCourseComponent,
+    component: LearnerNewMyCourseComponent,
     // canLoad: [AuthGuard],
     data: { animation: 'Learner  MyCourse' , title: 'My Courses'}
   },
@@ -109,8 +110,8 @@ const routes: Routes = [
     CourseGalleryComponent,
     AskQuestionsComponent,
     CourseGalleryComponent,
-    CourseReportComponent
-
+    CourseReportComponent,
+    LearnerNewMyCourseComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [
