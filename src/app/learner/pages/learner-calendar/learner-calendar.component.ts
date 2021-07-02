@@ -66,7 +66,7 @@ export class LearnerCalendarComponent implements OnInit {
   }
   ]
   sortValue = 'All'
-  filterValue = 'selfpacedlearning'
+  filterValue = 'All'
   learnerActivitycontiner;
   events: CalendarEvent[];
   public UserDetails: any;
