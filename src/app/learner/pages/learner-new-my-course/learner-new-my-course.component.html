@@ -1,30 +1,84 @@
 <app-header></app-header>
 
-<div style="position: relative;">
+<div class="sideNavWrapper">
     <div>
-        <mat-drawer-container class="example-container" autosize>
-            
-            <mat-drawer #drawer class="example-sidenav" mode="side" position="end">
-                <em type="button" mat-button (click)="drawer.toggle()">
-                    Toggle sidenav
-                </em>
+        <mat-drawer-container class="sideNavContainer" autosize>
+            <mat-drawer #drawer class="sideNav" mode="over" position="end"> 
+                <!-- Over Side Push -->
+                <span type="button" (click)="drawer.toggle()">
+                    <em class="lxp-Right_Arrow"></em>
+                </span>
               <p>Auto-resizing sidenav Auto-resizing sidenav</p>
               <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-              <!-- <button (click)="showFiller = !showFiller" mat-raised-button>
-                Toggle extra text
-              </button> -->
             </mat-drawer>
-          
-            <div class="example-sidenav-content">
-                <p>;lsadjflksajflksajflks lsadjflksajflksajflks lsadjflksajflksajflks lsadjflksajflksajflks asdfsa sdafas asdf sdafasdf sad sadfasdfsdafa sdfsd asdf asdfasdf asdf sadfa asdf sdfasdfasd fasdfasdfsdafsdaf dfd df dśdafsdf lsadj flksajfl ksajf lks</p>
-                <p>;lsadjflksajflksajflks</p>
+
+            <div class="sideNavContent">
+
+                <!-- Top 3 Things -->
+                <div class="somethingNew">
+                    <h4>Let's learn something new today!</h4>
+                    <div class="thingsContent">
+                        <p>Here are your top 3 things to do!</p>
+                        <div>
+                            <span class="green"><em class="lxp-Right"></em></span>
+                            <span class="white"><em class="lxp-Right"></em></span>
+                            <span class="white"><em class="lxp-Right"></em></span>
+                        </div>
+                        <span class="expand">Expand <em class="lxp-DownArrow"></em></span>
+                    </div>
+                </div>
+
+                <div class="top3Things d-flex justify-content-between">
+                    <div class="box">
+                        <h6>Learn from where your left</h6>
+                        <span class="type">MODULE:</span>
+                        <h2>Codes for reinforced and Pre-stress…</h2>
+                        <div class="upcoming d-flex justify-content-between">
+                            <div>
+                                <button class="d-flex align-items-center"><em class="lxp-Play"></em> <span>4m 8s</span></button>
+                            </div>
+                            <div>
+                                <span class="icons"><em class="lxp-Timer"></em></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <h6>Learn from where your left</h6>
+                        <span class="type">MODULE:</span>
+                        <h2>Codes for reinforced and Pre-stress…</h2>
+                        <div class="dueDate">Due date: 23 June 2021 12:00 AM</div>
+                        <div class="upcoming d-flex justify-content-between">
+                            <div>
+                                <button class="d-flex align-items-center"><span>GO</span></button>
+                            </div>
+                            <div>
+                                <span class="icons"><em class="lxp-Assignments"></em></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <h6>Learn from where your left</h6>
+                        <span class="type">MODULE:</span>
+                        <h2>Codes for reinforced and Pre-stress…</h2>
+                        <div class="dueDate">Due date: 23 June 2021 12:00 AM</div>
+                        <div class="upcoming d-flex justify-content-between">
+                            <div>
+                                <button class="d-flex align-items-center"><span>Join</span></button>
+                            </div>
+                            <div>
+                                <span class="icons"><em class="lxp-JoinIcon"></em></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-          
         </mat-drawer-container>
     </div>
-    <div class="bbbuon">
-        <a type="button" mat-button (click)="drawer.toggle()">
-            Toggle sidenav
-        </a>
+    <div class="taskToDo">
+        <span type="button" (click)="drawer.toggle()">
+            <em class="lxp-HamburgerMenu"></em>
+        </span>
+        <div class="arrow"></div>
     </div>
 </div>
