@@ -180,7 +180,37 @@
       }
     }
   }
+
+  //MyCourses
+  .mycoursesWrapper {
+    padding: 0 85px 20px 20px;
+    margin-top: 20px;
+    h3 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #000000;
+    }
+  }
 }
+::ng-deep.mycoursesWrapper {
+  .mat-tab-label {
+    font-size: 16px;
+    opacity: 1;
+  }
+  .mat-tab-label[aria-selected="false"] {
+    font-weight: 400;
+    color: #999999;
+  }
+  .mat-tab-label[aria-selected="true"] {
+    font-weight: 700;
+    color: #4D4D4D;
+  }
+  .mat-tab-nav-bar, .mat-tab-header {
+    border-bottom: 0;
+  }
+}
+
+//
 .sideNav {
   padding: 20px;
 }
