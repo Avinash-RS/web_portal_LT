@@ -1,0 +1,27 @@
+@import "variable";
+
+.progression-report-contianer{
+    .left-container{
+        box-shadow: 0px 0px 6px #00000059;
+        background: #F2F2F2;
+        .backArrow {
+            font-size: 6px;
+            color: #231F20;
+            font-weight: bold;
+            transform: rotate(-90deg);
+            display: inline-block;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+        .breadcrum1{
+            color : #999999;
+        }
+        .partition{
+            color: #BE2020;
+        }
+        .breadcrum2{
+            color: #333333;
+        }
+    }
+
+}
