@@ -1,26 +1,247 @@
 @import "../../../../assets/variable.scss";
 
-.example-container {
-    width: 100%;
-    min-height: calc(100vh - 106px);
-    z-index: inherit !important;
+.sideNavWrapper {
+  position: relative;
+}
+::ng-deep.sideNavWrapper {
+  .mat-drawer-backdrop.mat-drawer-shown {
+    background-color: transparent;
   }
-  
-  .example-sidenav-content {
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-  }
-  
-  .example-sidenav {
+}
+.sideNavContainer {
+  width: 100%;
+  min-height: calc(100vh - 106px);
+  z-index: inherit !important;
+}
+.sideNavContent {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  //Something New
+  .somethingNew {
+    background-color: #FFCC00;
     padding: 20px;
+    h4 {
+      font-size: 20px;
+      color: #ffffff;
+      font-weight: 500;
+      margin: 40px 0 10px 0;
+    }
+    .thingsContent {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 470px;
+      min-width: 350px;
+      p {
+        font-size: 14px;
+        color: #4D4D4D;
+        font-weight: 400;
+        margin: 0 20px 0 0 !important;
+      }
+      > div {
+        display: flex;
+        width: 30%;
+        justify-content: space-between;
+        margin-right: 20px;
+        position: relative;
+        &::after {
+          content: '';
+          position: absolute;
+          height: 1px;
+          background-color: #ffffff;
+          width: 100%;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        span {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 15px;
+          height: 15px;
+          border-radius: 50%;
+          position: relative;
+          z-index: 1;
+          &.green {
+            background-color: #32CE6A;
+            em {
+              color: #ffffff
+            }
+          }
+          &.white {
+            background-color: white;
+            em {
+              color: #B3B3B3;
+            }
+          }
+          em {
+            font-size: 5px;
+            display: inline-block;
+          }
+        }
+      }
+      .expand {
+        font-size: 14px;
+        font-weight: 400;
+        color: #5A727D;
+        em {
+          font-size: 6px;
+          display: inline-block;
+          vertical-align: middle;
+          margin-left: 3px;
+        }
+      }
+    }
   }
 
-  .bbbuon {
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 1;
-    height: 100%;
-    background-color: #fff;
+  //Top 3 Things
+  .top3Things {
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    background-color: #CCCCCC;
+    padding: 10px 85px 10px 20px;
+    flex-wrap: wrap;
+    .box {
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+      background-color: #ffffff;
+      padding: 15px 20px;
+      position: relative;
+      height: 200px;
+      width: 100%;
+      margin: 10px 0;
+      @media only screen and(min-width:600px) {
+        width: 48%;
+      }
+      @media only screen and(min-width:768px) {
+        width: 30%;
+      }
+      h6 {
+        font-size: 11px;
+        font-weight: 400;
+        color: #808080;
+        margin-bottom: 5px;
+        line-height: normal;
+      }
+      .type {
+        line-height: normal;
+        font-size: 10px;
+        font-weight: 400;
+        color: #8E8E8E;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+      h2 {
+        font-size: 20px;
+        font-weight: 400;
+        color: #000000;
+        line-height: normal;
+        display: inline-block;
+        width: 100%;
+      }
+      .dueDate {
+        color: #808080;
+        font-size: 11px;
+        font-weight: 400;
+      }
+      .upcoming {
+        margin-top: 15px;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        padding: 20px;
+        > div {
+          align-self: flex-end;
+        }
+        button {
+          padding: 5px 30px;
+          border-radius: 30px;
+          border: 1px solid #c02222;
+          background-color: transparent;
+          text-transform: uppercase;
+          em {
+            color: #c02222;
+            font-size: 16px;
+          }
+          span {
+            font-size: 12px;
+            color: #000000;
+            margin-left: 5px;
+            display: inline-flex;
+          }
+        }
+        .icons {
+          em {
+            font-size: 50px;
+            color: #B3B3B3;
+          }
+        }
+      }
+    }
   }
+
+  //MyCourses
+  .mycoursesWrapper {
+    padding: 0 85px 20px 20px;
+    margin-top: 20px;
+    h3 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #000000;
+    }
+  }
+}
+::ng-deep.mycoursesWrapper {
+  .mat-tab-label {
+    font-size: 16px;
+    opacity: 1;
+  }
+  .mat-tab-label[aria-selected="false"] {
+    font-weight: 400;
+    color: #999999;
+  }
+  .mat-tab-label[aria-selected="true"] {
+    font-weight: 700;
+    color: #4D4D4D;
+  }
+  .mat-tab-nav-bar, .mat-tab-header {
+    border-bottom: 0;
+  }
+}
+
+//
+.sideNav {
+  padding: 20px;
+}
+.taskToDo {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  height: 100%;
+  background-color: #fff;
+  padding: 15px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  .arrow {
+    position: absolute;
+    top: 16px;
+    left: -15px;
+    width: 0; 
+    height: 0; 
+    border-style: solid;
+    border-width: 15px 15px 15px 0;
+    border-color: transparent #ffffff transparent transparent;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,.2));
+    -webkit-filter: drop-shadow(0 1px 2px rgba(0,0,0,.2));
+  }
+  span {
+    em {
+      font-size: 25px;
+      display: inline-block;
+      line-height: normal;
+      border: 1px solid #c02222;
+      padding: 3px;
+    }
+  }
+}
