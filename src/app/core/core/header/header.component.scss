@@ -28,7 +28,7 @@
     border: none !important;
 }
 :host ::ng-deep .mat-toolbar.mat-primary {
-    background-color: $lxp-theme-yellow-sec !important;
+    background-color: white !important;
     position: relative;
     z-index: 9;
     // -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .1) !important;
@@ -108,7 +108,16 @@
     font-size: smaller;
     left: 9px;
 }
+.burgerspace{
+    width: 85px;
+    transition: all 2s ease-in-out;
+    font-size: 18px !important;
+    text-align: center;
+    color: #808080;
+}
 .headicon {
+    color: #808080;
+    transition: all 2s ease-in-out;
     font-size: 18px !important;
     position: relative;
     &.lxp-ActivityCenter {
@@ -125,20 +134,21 @@
     &.notPossiblePages {
         visibility: hidden;
     }
-    display: none;
+    // display: none;
     @media only screen and (min-width:768px) {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        padding-left: 30px;
+        // display: flex;
+        // justify-content: flex-start;
+        // align-items: center;
+        // padding-left: 30px;
     }
     @media only screen and (min-width:1024px) {
-        padding-left: 60px;
+        // padding-left: 60px;
     }
     @media only screen and (min-width:1200px) {
-        padding-left: 100px;
+        // padding-left: 100px;
     }
     button {
+        width: 100%;
         position: relative;
         overflow: hidden;
         border: none;
@@ -198,6 +208,79 @@
     margin-left: 7px;
 }
 // Desktop Ends
+//sidenav
+
+.sideNavStrip{
+    cursor: pointer;
+    height:100vh; 
+    min-width: 85px; 
+    position: absolute; 
+    z-index: 20; 
+    background-color: #fff;
+    box-shadow: 5px 5px 9px #0000001f;
+    .stripItem{
+        padding:10px;
+        .icoBox{
+            padding: 10px;
+            font-size: 20px;
+        }
+        .navTitle{
+            padding-left:10px;
+        }
+    }
+}
+// Navigation expand 
+.navOpen{
+transition: .2s;
+
+.stripItem{
+    text-align:left !important; 
+}
+.icoBox{
+    display: inline-block;
+}
+.navTitle{
+    display: inline-block;
+}
+
+}
+
+// Navigation collapse
+.navClose{
+ box-shadow: inset -5px 1px 9px #0000001f;
+transition: .2s;
+width: 85px;
+.stripItem{
+text-align:center !important; 
+}
+.icoBox{
+    display: inline-block;
+}
+.navTitle{
+    display: none;
+}
+
+}
+// Active nav item
+
+.activeItem{
+    .icoBox{
+        background-color: #BE2020;
+        color:#fff !important;
+        border-radius: 6px;
+    }
+    .navTitle{
+        font-weight: bold;
+    }
+}
+.normalItem{
+    .icoBox{
+       color: #808080;
+    }
+    .navTitle{
+        color:#808080;
+    }
+}
 
 //Mobile Starts
 .mobMenu {

@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit {
   isAvailOpen = false;
   loading = false;
   hideHeaderMenu: boolean = false;
+  expandTxt:boolean = false;
 
   @HostBinding('class') componentCssClass;
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
