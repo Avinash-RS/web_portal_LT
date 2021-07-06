@@ -3,9 +3,9 @@
 <div class="sideNavWrapper">
     <div>
         <mat-drawer-container class="sideNavContainer" autosize>
-            <mat-drawer #drawer class="sideNav" mode="over" position="end"> 
+            <mat-drawer #drawer class="sideNav" mode="side" position="end"> 
                 <!-- Over Side Push -->
-                <span type="button" (click)="drawer.toggle()">
+                <span type="button" (click)="drawer.toggle();show=!show">
                     <em class="lxp-Right_Arrow"></em>
                 </span>
               <p>Auto-resizing sidenav Auto-resizing sidenav</p>
@@ -108,7 +108,7 @@
                                             <span>
                                                 <em class="lxp-Duration"></em> Duration: 02 June 2021 - 30 June 2021
                                             </span>
-                                            <span>Credits : 02</span>
+                                            <span class="credits">Credits : 02</span>
                                         </div>
                                         <div class="actionItems d-flex justify-content-between">
                                             <div class="viltActivitiesQA d-flex justify-content-start">
@@ -125,7 +125,7 @@
                                                     <p>Q&A</p>
                                                 </div>
                                             </div>
-                                            <div class="courseProgression d-flex justify-content-end align-items-center">
+                                            <div class="courseProgression d-flex align-items-center">
                                                 <div class="icons">
                                                     <span><em class="lxp-Course_Progression"></em></span>
                                                     <p>Course Progression</p>
@@ -180,7 +180,7 @@
                                                     <p>Q&A</p>
                                                 </div>
                                             </div>
-                                            <div class="courseProgression d-flex justify-content-end align-items-center">
+                                            <div class="courseProgression d-flex align-items-center">
                                                 <div class="icons">
                                                     <span><em class="lxp-Course_Progression"></em></span>
                                                     <p>Course Progression</p>
@@ -326,7 +326,7 @@
         </mat-drawer-container>
     </div>
     <div class="taskToDo">
-        <span type="button" (click)="drawer.toggle()">
+        <span type="button" (click)="drawer.toggle();show=!show">
             <em class="lxp-HamburgerMenu"></em>
         </span>
         <div class="arrow"></div>
