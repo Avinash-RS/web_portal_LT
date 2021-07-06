@@ -29,8 +29,10 @@
 }
 :host ::ng-deep .mat-toolbar.mat-primary {
     background-color: white !important;
-    position: relative;
+    position: fixed;
     z-index: 9;
+    top: 0;
+    left: 0;
     // -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 2px 3px rgba(0, 0, 0, .1) !important;
     // box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2) !important;
 }
@@ -107,13 +109,6 @@
     cursor: pointer;
     font-size: smaller;
     left: 9px;
-}
-.burgerspace{
-    width: 85px;
-    transition: all 2s ease-in-out;
-    font-size: 18px !important;
-    text-align: center;
-    color: #808080;
 }
 .headicon {
     color: #808080;
@@ -211,16 +206,20 @@
 //sidenav
 
 .sideNavStrip{
-    cursor: pointer;
-    height:100vh; 
-    min-width: 85px; 
-    position: absolute; 
-    z-index: 20; 
+    height:100%; 
+    transition: 2s ease-in-out;
+    // min-width: 85px; 
+    position: fixed; 
+    top:55px;
+    left:0;
+    z-index: 4; 
     background-color: #fff;
     box-shadow: 5px 5px 9px #0000001f;
     .stripItem{
-        padding:10px;
+        transition: 2s;
+        padding: 10px 15px;
         .icoBox{
+            cursor: pointer;
             padding: 10px;
             font-size: 20px;
         }
@@ -230,9 +229,15 @@
     }
 }
 // Navigation expand 
+.burgerspace{
+    width: 85px;
+    transition: all 2s ease-in-out;
+    font-size: 18px !important;
+    padding-left: 10px;
+    color: #808080;
+}
 .navOpen{
-transition: .2s;
-
+transition: 2s;
 .stripItem{
     text-align:left !important; 
 }
@@ -248,10 +253,10 @@ transition: .2s;
 // Navigation collapse
 .navClose{
  box-shadow: inset -5px 1px 9px #0000001f;
-transition: .2s;
-width: 85px;
+    transition: 2s;
+    // width: 55px;
 .stripItem{
-text-align:center !important; 
+// text-align:center !important; 
 }
 .icoBox{
     display: inline-block;

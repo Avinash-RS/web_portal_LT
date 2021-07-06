@@ -108,27 +108,24 @@ width: 100%;">
   </mat-menu>
 </mat-toolbar>
 <div class="sideNavStrip" [ngClass]="expandTxt?'navOpen':'navClose'" >
-  <div class="stripItem" [ngClass]="activeUrl === '/Learner/MyCourse' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'"
-  routerLink="/Learner/MyCourse">
-    <div class="icoBox">
+  <div class="stripItem" [ngClass]="activeUrl === '/Learner/MyCourse' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
+    <div class="icoBox" routerLink="/Learner/MyCourse">
       <em class="lxp-SelfPaced "></em>
     </div>
     <div class="navTitle">
       My Courses
     </div>
   </div>
-  <div class="stripItem" [ngClass]="activeUrl === '/Learner/calendar' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'"
-  routerLink="/Learner/calendar">
-    <div class="icoBox">
+  <div class="stripItem" [ngClass]="activeUrl === '/Learner/calendar' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
+    <div class="icoBox" routerLink="/Learner/calendar">
       <em class="lxp-calendar "></em>
     </div>
     <div class="navTitle">
       Scheduled Activity
     </div>
   </div>
-  <div class="stripItem" [ngClass]="activeUrl === '/Learner/knowledge' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'"
-  routerLink="/Learner/knowledge">
-    <div class="icoBox">
+  <div class="stripItem" [ngClass]="activeUrl === '/Learner/knowledge' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
+    <div class="icoBox" routerLink="/Learner/knowledge">
       <em class="lxp-Knowledge "></em>
     </div>
     <div class="navTitle">
