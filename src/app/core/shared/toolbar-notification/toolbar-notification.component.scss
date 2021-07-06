@@ -1,7 +1,7 @@
 @import "variable";
 $prefix: 'toolbar-notification';
 ::ng-deep .icon {
-    color: $color-blank !important;
+    color: #999999 !important;
 }
 .lxp-Notification {
     font-size: 21px;
