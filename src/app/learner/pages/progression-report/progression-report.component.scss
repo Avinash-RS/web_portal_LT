@@ -334,6 +334,9 @@
 }
 
 ::ng-deep .expansion-container{
+    .mat-progress-bar{
+        height: 3px !important;
+    }
     .mat-progress-bar-buffer {
         background-color: white !important;
     }
