@@ -989,6 +989,10 @@ mat-header-cell,
   height: 100%;
   flex: 1;
 }
+.contentPad{
+  padding-left: 70px;
+  padding-top: 55px;
+}
 // Same copy of this footer in appcomponent.css
 .footer {
   width: 100%;

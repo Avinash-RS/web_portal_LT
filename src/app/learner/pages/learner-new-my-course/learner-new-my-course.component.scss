@@ -103,6 +103,11 @@
     background-color: #CCCCCC;
     padding: 10px 85px 10px 20px;
     flex-wrap: wrap;
+    &.noPadding {
+      @media only screen and (min-width:1200px) {
+        padding: 10px 20px 10px 20px;
+      }
+    }
     .box {
       box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
       background-color: #ffffff;
@@ -114,8 +119,11 @@
       @media only screen and(min-width:600px) {
         width: 48%;
       }
-      @media only screen and(min-width:768px) {
+      @media only screen and(min-width:720px) {
         width: 30%;
+      }
+      > div {
+        margin-bottom: 20px;
       }
       h6 {
         font-size: 11px;
@@ -146,12 +154,12 @@
         font-weight: 400;
       }
       .upcoming {
-        margin-top: 15px;
         position: absolute;
         width: 100%;
         left: 0;
         bottom: 0;
         padding: 20px;
+        margin-bottom: 0;
         > div {
           align-self: flex-end;
         }
@@ -186,6 +194,11 @@
   .mycoursesWrapper {
     padding: 0 85px 20px 20px;
     margin-top: 20px;
+    &.noPadding {
+      @media only screen and (min-width:1200px) {
+        padding: 10px 20px 10px 20px;
+      }
+    }
     h3 {
       font-size: 26px;
       font-weight: 700;
@@ -206,7 +219,7 @@
       border-radius: 5px;
       overflow: hidden;
       position: relative;
-      @media only screen and (min-width:767px) {
+      @media only screen and (min-width:720px) {
         width: 18%;
       }
       button {
@@ -227,14 +240,26 @@
       }
       img {
         width: 100%;
+        height: 150px;
         object-fit: cover;
       }
     }
     .rightCol {
       width: 100%;
-      margin-left: 2%;
-      @media only screen and (min-width:767px) {
+      @media only screen and (min-width:720px) {
+        margin-left: 2%;
         width: 80%;
+      }
+      h3 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #000000;
+        line-height: normal;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        @media only screen and (min-width:720px) {
+          margin-top: 0;
+        }
       }
       .showLessContent {
         position: relative;
@@ -271,6 +296,10 @@
       }
       .type {
         margin-bottom: 20px;
+        flex-wrap: wrap;
+        @media only screen and (min-width:720px) {
+          flex-wrap: nowrap;
+        }
         span {
           display: inline-flex;
           margin-right: 8px;
@@ -280,8 +309,15 @@
           color: #666666;
           line-height: normal;
           border-right: 1px solid #c02222;
+          margin-top: 10px;
+          &:first-child {
+            margin-top: 0;
+          }
           &:last-child {
             border-right: 0;
+          }
+          @media only screen and (min-width:720px) {
+            margin-top: 0;
           }
         }
       }
@@ -291,7 +327,7 @@
           flex-wrap: nowrap;
         }
         &.top {
-          margin-top: 20px;
+          margin-top: 10px;
         }
         &.zero {
           margin-top: 0;
@@ -305,23 +341,30 @@
             display: inline-flex;
             margin-right: 5px;
           }
-        }
-        .credits {
-          margin-top: 10px;
-          display: inline-flex;
-          @media only screen and (min-width:720px) {
-            margin-top: 0;
+          &.credits {
+            margin-top: 7px;
+            display: inline-flex;
+            @media only screen and (min-width:720px) {
+              margin-top: 0;
+            }
           }
         }
       }
     }
     .actionItems {
-      margin-top: 20px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+      @media only screen and (min-width:720px) {
+        flex-wrap: nowrap;
+      }
     }
     .viltActivitiesQA {
       .icons {
         text-align: center;
         margin-right: 30px;
+        &:last-child {
+          margin-right: 0;
+        }
         span {
           display: inline-flex;
           justify-content: center;
@@ -354,9 +397,18 @@
       }
     }
     .courseProgression {
+      justify-content: flex-start;
+      margin-top: 20px;
+      @media only screen and (min-width:720px) {
+        justify-content: flex-end;
+        margin-top: 0;
+      }
       .icons {
         text-align: center;
-        margin-right: 10px;
+        margin-right: 30px;
+        @media only screen and (min-width:720px) {
+          margin-right: 10px;
+        }
       }
       span {
         em {
@@ -364,11 +416,170 @@
         }
       }
       .percentage {
-        width: 16%;
+        width: 25%;
+        @media only screen and (min-width:720px) {
+          width: 16%;
+        }
       }
     }
   }
 }
+
+// In Progress Module
+.inprogressModule {
+  margin-top: 20px;
+  > div {
+    width: 100%;
+    flex-wrap: wrap;
+    @media only screen and (min-width: 1140px) {
+      width: 75%;
+    }
+  }
+  .modules {
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 1px solid rgba(204, 204, 204, 0.8);
+    padding: 10px 30px 10px 15px;
+    margin: 0 0 25px 0;
+    position: relative;
+    width: 100%;
+    @media only screen and (min-width:720px) {
+      width: 45%;
+      margin: 0 20px 25px 0;
+    }
+    &::before, .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    &::before {
+      content: '';
+      left: 0;
+      width: 5px;
+      background-color: #FFA04E;
+      height: 65%;
+    }
+    .arrow {
+      right: 15px;
+      em {
+        color: #B3B3B3;
+        font-size: 10px;
+      }
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      background-color: #ffffff;
+      border-radius: 5px;
+      border: 1px solid rgba(204, 204, 204, 0.6);
+      box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.05);
+      padding: 10px;
+      width: 90%;
+      left: 50%;
+      bottom: -10px;
+      transform: translateX(-50%);
+      z-index: -1;
+    }
+    h6 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #000000;
+      line-height: normal;
+      margin: 0 0 5px 0 !important;
+    }
+    span {
+      display: block;
+      color: #B3B3B3;
+      font-size: 10px;
+      font-weight: 400;
+      margin-bottom: 0;
+      line-height: normal;
+    }
+    p {
+      color: #808080;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: normal;
+      margin: 0 !important;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 90%;
+      white-space: nowrap;
+    }
+  }
+}
+
+//Missed Topics Knowledge Check
+.missedTopicsKnowledgeCheck, 
+.recentlyLearnedTopics {
+  margin-top: 20px;
+  .wrapper {
+    position: relative;
+    .leftArrow, 
+    .rightArrow {
+      border: 1px solid rgba(204, 204, 204, 0.3);
+      box-shadow: 0 5px 3px rgba(0, 0, 0, 0.2);
+      border-radius: 50%;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+      top: 50%;
+      transform: translateY(-80%);
+      background-color: #ffffff;
+      em {
+        font-size: 10px;
+        color: #808080;
+      }
+    }
+    .leftArrow {
+      left: -15px;
+      em {
+        display: inline-block;
+        transform: rotate(180deg);
+      }
+    }
+    .rightArrow {
+      right: -15px;
+    }
+  }
+}
+.missedTopics {
+  background-color: #ffffff;
+  border: 1px solid #CCCCCC;
+  border-radius: 3px;
+  padding: 15px;
+  width: 23%;
+  margin-bottom: 15px;
+  h6, span, h5, h4 {
+    font-weight: 400;
+    line-height: normal;
+  }
+  .moduleName, 
+  .topicName {
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #B3B3B3;
+    display: block;
+  }
+  h6 {
+    font-size: 15px;
+    color: #666666;
+  }
+  h5 {
+    font-size: 16px;
+    color: #333333;
+  }
+  h4 {
+    font-size: 19px;
+    color: #000000;
+    margin: 0;
+  }
+}
+
+//
 ::ng-deep.mycoursesWrapper {
   .mat-ink-bar {
     display: none;
