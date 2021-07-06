@@ -7,7 +7,7 @@
   </div> -->
   <!-- [@routeAnimations]="o && o?.activatedRouteData 
       && o?.activatedRouteData['animation']" -->
-  <div class="heightClass" >
+  <div class="heightClass" [ngClass]="isFooterVisible.length?'contentPad':''">
     <router-outlet></router-outlet>
 </div>
 <div style="background-color: #ffffff;" [innerHTML]='isFooterVisible'>
