@@ -3,7 +3,7 @@
 <div class="sideNavWrapper">
     <div>
         <mat-drawer-container class="sideNavContainer" autosize>
-            <mat-drawer #drawer class="sideNav" mode="side" position="end"> 
+            <mat-drawer #drawer class="sideNav" [mode]="innerWidth>1140?'side':'over'" position="end"> 
                 <!-- Over Side Push -->
                 <span type="button" (click)="drawer.toggle();show=!show">
                     <em class="lxp-Right_Arrow"></em>
@@ -13,7 +13,6 @@
             </mat-drawer>
 
             <div class="sideNavContent">
-
                 <!-- Top 3 Things -->
                 <div class="somethingNew">
                     <h4>Let's learn something new today!</h4>
@@ -29,11 +28,13 @@
                 </div>
 
                 <!-- Top 3 Things Contents -->
-                <div class="top3Things d-flex justify-content-between">
+                <div class="top3Things d-flex justify-content-between" [ngClass]="show ? '': 'noPadding'">
                     <div class="box">
-                        <h6>Learn from where your left</h6>
-                        <span class="type">MODULE:</span>
-                        <h2>Codes for reinforced and Pre-stress…</h2>
+                        <div>
+                            <h6>Learn from where your left</h6>
+                            <span class="type">MODULE:</span>
+                            <h2>Codes for reinforced and Pre-stress…</h2>
+                        </div>
                         <div class="upcoming d-flex justify-content-between">
                             <div>
                                 <button class="d-flex align-items-center"><em class="lxp-Play"></em> <span>4m 8s</span></button>
@@ -44,10 +45,12 @@
                         </div>
                     </div>
                     <div class="box">
-                        <h6>Learn from where your left</h6>
-                        <span class="type">MODULE:</span>
-                        <h2>Codes for reinforced and Pre-stress…</h2>
-                        <div class="dueDate">Due date: 23 June 2021 12:00 AM</div>
+                        <div>
+                            <h6>Learn from where your left</h6>
+                            <span class="type">MODULE:</span>
+                            <h2>Codes for reinforced and Pre-stress…</h2>
+                            <div class="dueDate">Due date: 23 June 2021 12:00 AM</div>
+                        </div>
                         <div class="upcoming d-flex justify-content-between">
                             <div>
                                 <button class="d-flex align-items-center"><span>GO</span></button>
@@ -58,10 +61,12 @@
                         </div>
                     </div>
                     <div class="box">
-                        <h6>Learn from where your left</h6>
-                        <span class="type">MODULE:</span>
-                        <h2>Codes for reinforced and Pre-stress…</h2>
-                        <div class="dueDate">Due date: 23 June 2021 12:00 AM</div>
+                        <div>
+                            <h6>Learn from where your left</h6>
+                            <span class="type">MODULE:</span>
+                            <h2>Codes for reinforced and Pre-stress…</h2>
+                            <div class="dueDate">Due date: 23 June 2021 12:00 AM</div>
+                        </div>
                         <div class="upcoming d-flex justify-content-between">
                             <div>
                                 <button class="d-flex align-items-center"><span>Join</span></button>
@@ -74,7 +79,7 @@
                 </div>
 
                 <!-- My Course -->
-                <div class="mycoursesWrapper">
+                <div class="mycoursesWrapper" [ngClass]="show ? '': 'noPadding'">
                     <h3>My Courses</h3>
                     <mat-tab-group>
                         <mat-tab>
@@ -321,6 +326,119 @@
                             </div>
                         </mat-tab>
                     </mat-tab-group>
+
+                    <!-- InProgressModule -->
+                    <div class="inprogressModule">
+                        <h3>Inprogress Modules</h3>
+                        <div class="d-flex justify-content-start">
+                            <div class="modules">
+                                <h6>Emerging Technologies</h6>
+                                <span>MODULE:</span>
+                                <p>Read for Deep Understanding</p>
+                                <div class="arrow">
+                                    <em class="lxp-Right_Direction_Arrow"></em>
+                                </div>
+                            </div>
+                            <div class="modules">
+                                <h6>Emerging Technologies</h6>
+                                <span>MODULE:</span>
+                                <p>Information technology and Operation</p>
+                                <div class="arrow">
+                                    <em class="lxp-Right_Direction_Arrow"></em>
+                                </div>
+                            </div>
+                            <div class="modules">
+                                <h6>Emerging Technologies</h6>
+                                <span>MODULE:</span>
+                                <p>Codes for reinforced and Pre-stress technology</p>
+                                <div class="arrow">
+                                    <em class="lxp-Right_Direction_Arrow"></em>
+                                </div>
+                            </div>
+                            <div class="modules">
+                                <h6>Emerging Technologies</h6>
+                                <span>MODULE:</span>
+                                <p>Information technology and Operation technology</p>
+                                <div class="arrow">
+                                    <em class="lxp-Right_Direction_Arrow"></em>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Missed Topics & Knowledge Check -->
+                    <div class="missedTopicsKnowledgeCheck">
+                        <h3>Missed Topics & Knowledge Check</h3>
+                        <div class="wrapper d-flex justify-content-between">
+                            <span class="leftArrow"><em class="lxp-Right_Direction_Arrow"></em></span>
+                            <span class="rightArrow"><em class="lxp-Right_Direction_Arrow"></em></span>
+                            <div class="missedTopics">
+                                <h6>Applied Industrial IoT</h6>
+                                <span class="moduleName">MODULE:</span>
+                                <h5>Introduction to Industrial IoT</h5>
+                                <span class="topicName">TOPIC:</span>
+                                <h4>Codes for reinforced and Pre-stress…</h4>
+                            </div>
+                            <div class="missedTopics">
+                                <h6>Applied Industrial IoT</h6>
+                                <span class="moduleName">MODULE:</span>
+                                <h5>Information technology and Operation</h5>
+                                <span class="topicName">TOPIC:</span>
+                                <h4>Codes for reinforced and Pre-stress…</h4>
+                            </div>
+                            <div class="missedTopics">
+                                <h6>Applied Industrial IoT</h6>
+                                <span class="moduleName">MODULE:</span>
+                                <h5>Introduction to Industrial IoT</h5>
+                                <span class="topicName">TOPIC:</span>
+                                <h4>Codes for reinforced and Pre-stress…</h4>
+                            </div>
+                            <div class="missedTopics">
+                                <h6>Applied Industrial IoT</h6>
+                                <span class="moduleName">MODULE:</span>
+                                <h5>Introduction to Industrial IoT</h5>
+                                <span class="topicName">TOPIC:</span>
+                                <h4>Codes for reinforced and Pre-stress…</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recently Learned Topics -->
+                    <div class="recentlyLearnedTopics">
+                        <h3>Recently Learned Topics</h3>
+                        <div class="wrapper d-flex justify-content-between">
+                            <span class="leftArrow"><em class="lxp-Right_Direction_Arrow"></em></span>
+                            <span class="rightArrow"><em class="lxp-Right_Direction_Arrow"></em></span>
+                            <div class="missedTopics">
+                                <h6>Applied Industrial IoT</h6>
+                                <span class="moduleName">MODULE:</span>
+                                <h5>Introduction to Industrial IoT</h5>
+                                <span class="topicName">TOPIC:</span>
+                                <h4>Codes for reinforced and Pre-stress…</h4>
+                            </div>
+                            <div class="missedTopics">
+                                <h6>Applied Industrial IoT</h6>
+                                <span class="moduleName">MODULE:</span>
+                                <h5>Information technology and Operation</h5>
+                                <span class="topicName">TOPIC:</span>
+                                <h4>Codes for reinforced and Pre-stress…</h4>
+                            </div>
+                            <div class="missedTopics">
+                                <h6>Applied Industrial IoT</h6>
+                                <span class="moduleName">MODULE:</span>
+                                <h5>Introduction to Industrial IoT</h5>
+                                <span class="topicName">TOPIC:</span>
+                                <h4>Codes for reinforced and Pre-stress…</h4>
+                            </div>
+                            <div class="missedTopics">
+                                <h6>Applied Industrial IoT</h6>
+                                <span class="moduleName">MODULE:</span>
+                                <h5>Introduction to Industrial IoT</h5>
+                                <span class="topicName">TOPIC:</span>
+                                <h4>Codes for reinforced and Pre-stress…</h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </mat-drawer-container>
