@@ -3,16 +3,24 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    @media screen and (max-width:768px) {
+        flex-direction: column;
+    }
 }
 section {
     background-color: #f0f0f0;
-    height: 91.5vh;
+    height: 100%;
     padding: 1.8em 2.5em;
     width: calc(100% - 350px);
 
-    @media screen and (max-width:480px) {
+    @media screen and (max-width:768px) {
         padding: 1.8em 1.2em;
-    }
+        width: 100% ;
+    } 
+    @media screen and (min-width:769px) and (max-width:1024px) {
+        width: calc(100% - 300px);
+    } 
 }
 .heading5 {
     font-size: 1.7em;
@@ -24,6 +32,7 @@ section {
     justify-content: space-between; 
     @media screen and (max-width:480px) { 
     flex-direction: column;
+    min-height: 70px;
     }
 }
 .leftPan {
@@ -79,10 +88,18 @@ section {
         border-radius: 0.3em;
         border: 0.1em solid #eaeaea;
         margin-bottom: 1em;
+        position: relative;
 
         @media screen and (max-width:480px) {
-            flex-direction: column;
+            flex-wrap: wrap;
             padding: 0.4em 1em;
+        }
+
+        @media screen and (max-width:768px) { 
+            padding: 0.8em 1em;
+        }
+        @media screen and (min-width:769px) and (max-width:1024px) {
+        padding: 0.8em 1.5em;
         }
 
         > div {
@@ -92,13 +109,22 @@ section {
             }
             &:first-child {
                 min-width: 40%;
+                @media screen and (max-width:425px) { 
+                    min-width: 100%;
+                }
             }
             min-width: 26%;
             &:nth-child(3), &:last-child {
-                min-width: 10%;
+                min-width: 10%; 
+            }
+            &:last-child {
+                @media screen and (max-width:1024px) { 
+                    min-width: 5%;
+                }
             }
         }
         .infotxtarea {
+           
             .htxt {
                 font-weight: 700;
                 color: red;
@@ -155,6 +181,12 @@ section {
             justify-content: center;
             align-items: center;
 
+            @media screen and (max-width:425px) { 
+                position: absolute;
+                top: 0.7em;
+                right: 1em;
+            }
+
             .icon {
                 background-color: #41d275;
                 height: 20px;
@@ -177,15 +209,19 @@ section {
     }
 }
 
-::ng-deep.calendarSlide {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
+::ng-deep.calendarSlide { 
     width: 350px;
     background-color: #fff;
     padding: 3em 1em; 
     box-shadow: 0 0 2px 0 #0000006b;
+
+    @media screen and (max-width:768px) {
+        padding: 1em 2.3em;
+        width: 100%;
+    }
+    @media screen and (min-width:769px) and (max-width:1024px) {
+        width: 300px;
+    }
 
     .cal-month-view .cal-day-cell {
         min-height: 40px;
@@ -217,7 +253,7 @@ section {
         font-weight: 400;
         opacity: 0.5;
         margin-top: 0.5em;
-        margin-right: 0.5em;
+        margin-right: 1em;
         float: right;
         margin-bottom: 0.5em;
     }
