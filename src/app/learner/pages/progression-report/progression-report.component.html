@@ -47,11 +47,899 @@
         </div>
       </div>
     </div>
+    <div class="col">
+      <div class="self-learning-container">
+        <div class="header-label">Self Learning Progression Report</div>
+        <div class="expansion-container">
+          <div class="mt-2">
+            <mat-progress-bar [mode]="mode" value="100" [bufferValue]="bufferValue"></mat-progress-bar>
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <div class="week-block">
+                      <div class="week-text">Week</div>
+                      <div class="font-weight-bold week-number">01</div>
+                    </div>
+                    <div class="pl-2">
+                      <div class="week-text">Module</div>
+                      <div class="font-weight-bold module-block">Industrial IoT Architecture – Part 1</div>
+                    </div>
+                    <div class="pl-5">
+                      <div class="week-text">Topics</div>
+                      <div class="font-weight-bold text-center">6/9</div>
+                    </div>
+                    <div class="pl-5">
+                      <div class="week-text">Knowledge Check</div>
+                      <div class="font-weight-bold text-center">16/16</div>
+                    </div>
+                    <div class="pl-5">
+                      <div class="week-text">Time Spent</div>
+                      <div class="font-weight-bold text-center">00:59:00</div>
+                    </div>
+                    <div class="pl-5">
+                      <circle-progress
+                      percent='60'
+                      [radius]= 17
+                      [space]= -3
+                      [outerStrokeGradient]= true
+                      [outerStrokeWidth]= 3
+                      [outerStrokeColor]= "'#32CE6A'"
+                      [outerStrokeGradientStopColor]= "'#32CE6A'" 
+                      [innerStrokeColor]= "'#bfbdbd'"
+                      [innerStrokeWidth]= 3
+                      [animation]="true"
+                      [animationDuration]="300"
+                      [showSubtitle] = "false"
+                      [titleFontSize] = 13
+                    ></circle-progress>
+                    </div>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+            <div class="topic-container col d-flex">
+              <div class="col-md-4">
+                <div>
+                  <div class="week-text">Topic: 1</div>
+                  <div class="font-weight-bold module-block">Phases of Industrial Revolution</div>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="d-flex first-layer">
+                  <div class="types"> Self Paced Learning</div>
+                  <div class="pl-5">
+                    <div class="week-text">Time Spent</div>
+                    <div class="font-weight-bold text-center">00:23:20</div>
+                  </div>
+                  <div class="pl-5">
+                    <div class="week-text">Completion Level</div>
+                    <div class="font-weight-bold text-center">100%</div>
+                  </div>
+                </div>
+                <div class="d-flex second-layer">
+                  <div class="types">Knowledge Check</div>
+                  <div class="pl-5">
+                    <div class="week-text">Questions</div>
+                    <div class="font-weight-bold text-center">08</div>
+                  </div>
+                  <div class="pl-5">
+                    <div class="week-text">Correct</div>
+                    <div class="font-weight-bold color-green text-center">06</div>
+                  </div>
+                  <div class="pl-5">
+                    <div class="week-text">InCorrect</div>
+                    <div class="font-weight-bold color-red text-center">02</div>
+                  </div>
+                </div>
+              </div>
+              <i class="lxp-info-circle tic-circle"></i>
+              <!-- <div class="col-md-1">
+               
+              </div> -->
+            </div>
+            <div class="topic-container col d-flex">
+              <div class="col-md-4">
+                <div>
+                  <div class="week-text">Topic: 1</div>
+                  <div class="font-weight-bold module-block">Phases of Industrial Revolution</div>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="d-flex first-layer">
+                  <div class="types"> Self Paced Learning</div>
+                  <div class="pl-5">
+                    <div class="week-text">Time Spent</div>
+                    <div class="font-weight-bold text-center">00:23:20</div>
+                  </div>
+                  <div class="pl-5">
+                    <div class="week-text">Completion Level</div>
+                    <div class="font-weight-bold text-center">100%</div>
+                  </div>
+                </div>
+                <div class="d-flex second-layer">
+                  <div class="types">Knowledge Check</div>
+                  <div class="pl-5">
+                    <div class="week-text">Questions</div>
+                    <div class="font-weight-bold text-center">08</div>
+                  </div>
+                  <div class="pl-5">
+                    <div class="week-text">Correct</div>
+                    <div class="font-weight-bold color-green text-center">06</div>
+                  </div>
+                  <div class="pl-5">
+                    <div class="week-text">InCorrect</div>
+                    <div class="font-weight-bold color-red text-center">02</div>
+                  </div>
+                </div>
+              </div>
+              <i class="lxp-info-circle tic-circle"></i>
+            </div>
+            <div class="topic-container col d-flex">
+              <div class="col-md-4">
+                <div>
+                  <div class="week-text">Topic: 1</div>
+                  <div class="font-weight-bold module-block">Phases of Industrial Revolution</div>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="d-flex first-layer">
+                  <div class="types"> Self Paced Learning</div>
+                  <div class="pl-5">
+                    <div class="week-text">Time Spent</div>
+                    <div class="font-weight-bold text-center">00:23:20</div>
+                  </div>
+                  <div class="pl-5">
+                    <div class="week-text">Completion Level</div>
+                    <div class="font-weight-bold text-center">100%</div>
+                  </div>
+                </div>
+                <div class="d-flex second-layer">
+                  <div class="types">Knowledge Check</div>
+                  <div class="pl-5">
+                    <div class="week-text">Questions</div>
+                    <div class="font-weight-bold text-center">08</div>
+                  </div>
+                  <div class="pl-5">
+                    <div class="week-text">Correct</div>
+                    <div class="font-weight-bold color-green text-center">06</div>
+                  </div>
+                  <div class="pl-5">
+                    <div class="week-text">InCorrect</div>
+                    <div class="font-weight-bold color-red text-center">02</div>
+                  </div>
+                </div>
+              </div>
+              <i class="lxp-info-circle tic-circle"></i>
+            </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+          <div class="mt-2 second">
+            <mat-progress-bar [mode]="mode" value="70" [bufferValue]="bufferValue"></mat-progress-bar>
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <div class="week-block">
+                      <div class="week-text">Week</div>
+                      <div class="font-weight-bold week-number">02</div>
+                    </div>
+                    <div class="pl-2">
+                      <div class="week-text">Module</div>
+                      <div class="font-weight-bold module-block">Industrial IoT Architecture – Part 1</div>
+                    </div>
+                    <div class="pl-5">
+                      <div class="week-text">Topics</div>
+                      <div class="font-weight-bold text-center">6/9</div>
+                    </div>
+                    <div class="pl-5">
+                      <div class="week-text">Knowledge Check</div>
+                      <div class="font-weight-bold text-center">16/16</div>
+                    </div>
+                    <div class="pl-5">
+                      <div class="week-text">Time Spent</div>
+                      <div class="font-weight-bold text-center">00:59:00</div>
+                    </div>
+                    <div class="pl-5">
+                      <circle-progress
+                      percent='60'
+                      [radius]= 17
+                      [space]= -3
+                      [outerStrokeGradient]= true
+                      [outerStrokeWidth]= 3
+                      [outerStrokeColor]= "'#32CE6A'"
+                      [outerStrokeGradientStopColor]= "'#32CE6A'" 
+                      [innerStrokeColor]= "'#bfbdbd'"
+                      [innerStrokeWidth]= 3
+                      [animation]="true"
+                      [animationDuration]="300"
+                      [showSubtitle] = "false"
+                      [titleFontSize] = 13
+                    ></circle-progress>
+                    </div>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+            <div class="topic-container col d-flex">
+              <div class="col-md-4">
+                <div>
+                  <div class="week-text">Topic: 1</div>
+                  <div class="font-weight-bold module-block">Phases of Industrial Revolution</div>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="d-flex first-layer">
+                  <div class="types"> Self Paced Learning</div>
+                  <div class="pl-5">
+                    <div class="week-text">Time Spent</div>
+                    <div class="font-weight-bold text-center">00:23:20</div>
+                  </div>
+                  <div class="pl-5">
+                    <div class="week-text">Completion Level</div>
+                    <div class="font-weight-bold text-center">100%</div>
+                  </div>
+                </div>
+                <div class="d-flex second-layer">
+                  <div class="types">Knowledge Check</div>
+                  <div class="pl-5">
+                    <div class="week-text">Questions</div>
+                    <div class="font-weight-bold text-center">08</div>
+                  </div>
+                  <div class="pl-5">
+                    <div class="week-text">Correct</div>
+                    <div class="font-weight-bold color-green text-center">06</div>
+                  </div>
+                  <div class="pl-5">
+                    <div class="week-text">InCorrect</div>
+                    <div class="font-weight-bold color-red text-center">02</div>
+                  </div>
+                </div>
+              </div>
+              <i class="lxp-info-circle tic-circle"></i>
+              <!-- <div class="col-md-1">
+               
+              </div> -->
+            </div>
+            <div class="topic-container col d-flex">
+              <div class="col-md-4">
+                <div>
+                  <div class="week-text">Topic: 1</div>
+                  <div class="font-weight-bold module-block">Phases of Industrial Revolution</div>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="d-flex first-layer">
+                  <div class="types"> Self Paced Learning</div>
+                  <div class="pl-5">
+                    <div class="week-text">Time Spent</div>
+                    <div class="font-weight-bold text-center">00:23:20</div>
+                  </div>
+                  <div class="pl-5">
+                    <div class="week-text">Completion Level</div>
+                    <div class="font-weight-bold text-center">100%</div>
+                  </div>
+                </div>
+                <div class="d-flex second-layer">
+                  <div class="types">Knowledge Check</div>
+                  <div class="pl-5">
+                    <div class="week-text">Questions</div>
+                    <div class="font-weight-bold text-center">08</div>
+                  </div>
+                  <div class="pl-5">
+                    <div class="week-text">Correct</div>
+                    <div class="font-weight-bold color-green text-center">06</div>
+                  </div>
+                  <div class="pl-5">
+                    <div class="week-text">InCorrect</div>
+                    <div class="font-weight-bold color-red text-center">02</div>
+                  </div>
+                </div>
+              </div>
+              <i class="lxp-info-circle tic-circle"></i>
+            </div>
+            <div class="topic-container col d-flex">
+              <div class="col-md-4">
+                <div>
+                  <div class="week-text">Topic: 1</div>
+                  <div class="font-weight-bold module-block">Phases of Industrial Revolution</div>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="d-flex first-layer">
+                  <div class="types"> Self Paced Learning</div>
+                  <div class="pl-5">
+                    <div class="week-text">Time Spent</div>
+                    <div class="font-weight-bold text-center">00:23:20</div>
+                  </div>
+                  <div class="pl-5">
+                    <div class="week-text">Completion Level</div>
+                    <div class="font-weight-bold text-center">100%</div>
+                  </div>
+                </div>
+                <div class="d-flex second-layer">
+                  <div class="types">Knowledge Check</div>
+                  <div class="pl-5">
+                    <div class="week-text">Questions</div>
+                    <div class="font-weight-bold text-center">08</div>
+                  </div>
+                  <div class="pl-5">
+                    <div class="week-text">Correct</div>
+                    <div class="font-weight-bold color-green text-center">06</div>
+                  </div>
+                  <div class="pl-5">
+                    <div class="week-text">InCorrect</div>
+                    <div class="font-weight-bold color-red text-center">02</div>
+                  </div>
+                </div>
+              </div>
+              <i class="lxp-info-circle tic-circle"></i>
+            </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col activity-container pr-0">
+      <div class="header-label">Actitvities Progression Report</div>
+      <div class="col mt-4 tab-container pr-0">
+        <mat-tab-group>
+          <mat-tab label="Assignment">
+            <div class="card-content d-flex">
+              <mat-card class="card-container">
+                <div class="card-topic">
+                  Applied Industrial IoT > Phase of industrail Reveloution
+                </div>
+                <div class="card-strip card-strip-green"></div>
+                <div class="card-description mt-4 font-weight-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</div>
+                <div class="d-flex">
+                  <div class="date-content mb-3">
+                    <div class="sub-header">Due on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                  <div class="date-content pl-5">
+                    <div class="sub-header">Submitted on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="date-content first-content">
+                    <div class="sub-header">Status</div>
+                    <div class="status-value-green">ONTIME</div>
+                  </div>
+                  <div class="date-content score-content">
+                    <div class="sub-header">Score</div>
+                    <div class="score-value">60/70</div>
+                  </div>
+                  <div>
+                    <i class="lxp-Assignments file-icon"></i>
+                  </div>
+                </div>
+              </mat-card>
+              <mat-card class="card-container">
+                <div class="card-topic">
+                  Applied Industrial IoT > Phase of industrail Reveloution
+                </div>
+                <div class="card-strip card-strip-green"></div>
+                <div class="card-description mt-4 font-weight-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</div>
+                <div class="d-flex">
+                  <div class="date-content mb-3">
+                    <div class="sub-header">Due on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                  <div class="date-content pl-5">
+                    <div class="sub-header">Submitted on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="date-content first-content">
+                    <div class="sub-header">Status</div>
+                    <div class="status-value-green">ONTIME</div>
+                  </div>
+                  <div class="date-content score-content">
+                    <div class="sub-header">Score</div>
+                    <div class="score-value">60/70</div>
+                  </div>
+                  <div>
+                    <i class="lxp-Assignments file-icon"></i>
+                  </div>
+                </div>
+              </mat-card>
+              <mat-card class="card-container">
+                <div class="card-topic">
+                  Applied Industrial IoT > Phase of industrail Reveloution
+                </div>
+                <div class="card-strip card-strip-red"></div>
+                <div class="card-description mt-4 font-weight-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</div>
+                <div class="d-flex">
+                  <div class="date-content mb-3">
+                    <div class="sub-header">Due on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                  <div class="date-content pl-5">
+                    <div class="sub-header">Submitted on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="date-content first-content">
+                    <div class="sub-header">Status</div>
+                    <div class="status-value-red">OVERDUE</div>
+                  </div>
+                  <div class="date-content score-content">
+                    <div class="sub-header">Score</div>
+                    <div class="score-value">60/70</div>
+                  </div>
+                  <div>
+                    <i class="lxp-Assignments file-icon"></i>
+                  </div>
+                </div>
+              </mat-card>
+              <mat-card class="card-container">
+                <div class="card-topic">
+                  Applied Industrial IoT > Phase of industrail Reveloution
+                </div>
+                <div class="card-strip card-strip-red"></div>
+                <div class="card-description mt-4 font-weight-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</div>
+                <div class="d-flex">
+                  <div class="date-content mb-3">
+                    <div class="sub-header">Due on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                  <div class="date-content pl-5">
+                    <div class="sub-header">Submitted on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="date-content first-content">
+                    <div class="sub-header">Status</div>
+                    <div class="status-value-green">ONTIME</div>
+                  </div>
+                  <div class="date-content score-content">
+                    <div class="sub-header">Score</div>
+                    <div class="score-value">60/70</div>
+                  </div>
+                  <div>
+                    <i class="lxp-Assignments file-icon"></i>
+                  </div>
+                </div>
+              </mat-card>
+              <mat-card class="card-container">
+                <div class="card-topic">
+                  Applied Industrial IoT > Phase of industrail Reveloution
+                </div>
+                <div class="card-strip card-strip-green"></div>
+                <div class="card-description mt-4 font-weight-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</div>
+                <div class="d-flex">
+                  <div class="date-content mb-3">
+                    <div class="sub-header">Due on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                  <div class="date-content pl-5">
+                    <div class="sub-header">Submitted on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="date-content first-content">
+                    <div class="sub-header">Status</div>
+                    <div class="status-value-green">ONTIME</div>
+                  </div>
+                  <div class="date-content score-content">
+                    <div class="sub-header">Score</div>
+                    <div class="score-value">60/70</div>
+                  </div>
+                  <div>
+                    <i class="lxp-Assignments file-icon"></i>
+                  </div>
+                </div>
+              </mat-card>
+              <mat-card class="card-container">
+                <div class="card-topic">
+                  Applied Industrial IoT > Phase of industrail Reveloution
+                </div>
+                <div class="card-strip card-strip-orange"></div>
+                <div class="card-description mt-4 font-weight-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</div>
+                <div class="d-flex">
+                  <div class="date-content mb-3">
+                    <div class="sub-header">Due on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                  <div class="date-content pl-5">
+                    <div class="sub-header">Submitted on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="date-content first-content">
+                    <div class="sub-header">Status</div>
+                    <div class="status-value-orange">LATE</div>
+                  </div>
+                  <div class="date-content score-content">
+                    <div class="sub-header">Score</div>
+                    <div class="score-value">60/70</div>
+                  </div>
+                  <div>
+                    <i class="lxp-Assignments file-icon"></i>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </mat-tab>
+          <mat-tab label="Project"> 
+            <div class="card-content d-flex">
+              <mat-card class="card-container">
+                <div class="card-topic">
+                  Applied Industrial IoT > Phase of industrail Reveloution
+                </div>
+                <div class="card-strip card-strip-green"></div>
+                <div class="card-description mt-4 font-weight-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</div>
+                <div class="d-flex">
+                  <div class="date-content mb-3">
+                    <div class="sub-header">Due on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                  <div class="date-content pl-5">
+                    <div class="sub-header">Submitted on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="date-content first-content">
+                    <div class="sub-header">Status</div>
+                    <div class="status-value-green">ONTIME</div>
+                  </div>
+                  <div class="date-content score-content">
+                    <div class="sub-header">Score</div>
+                    <div class="score-value">60/70</div>
+                  </div>
+                  <div>
+                    <i class="lxp-Assignments file-icon"></i>
+                  </div>
+                </div>
+              </mat-card>
+              <mat-card class="card-container">
+                <div class="card-topic">
+                  Applied Industrial IoT > Phase of industrail Reveloution
+                </div>
+                <div class="card-strip card-strip-green"></div>
+                <div class="card-description mt-4 font-weight-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</div>
+                <div class="d-flex">
+                  <div class="date-content mb-3">
+                    <div class="sub-header">Due on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                  <div class="date-content pl-5">
+                    <div class="sub-header">Submitted on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="date-content first-content">
+                    <div class="sub-header">Status</div>
+                    <div class="status-value-green">ONTIME</div>
+                  </div>
+                  <div class="date-content score-content">
+                    <div class="sub-header">Score</div>
+                    <div class="score-value">60/70</div>
+                  </div>
+                  <div>
+                    <i class="lxp-Assignments file-icon"></i>
+                  </div>
+                </div>
+              </mat-card>
+              <mat-card class="card-container">
+                <div class="card-topic">
+                  Applied Industrial IoT > Phase of industrail Reveloution
+                </div>
+                <div class="card-strip card-strip-red"></div>
+                <div class="card-description mt-4 font-weight-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</div>
+                <div class="d-flex">
+                  <div class="date-content mb-3">
+                    <div class="sub-header">Due on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                  <div class="date-content pl-5">
+                    <div class="sub-header">Submitted on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="date-content first-content">
+                    <div class="sub-header">Status</div>
+                    <div class="status-value-red">OVERDUE</div>
+                  </div>
+                  <div class="date-content score-content">
+                    <div class="sub-header">Score</div>
+                    <div class="score-value">60/70</div>
+                  </div>
+                  <div>
+                    <i class="lxp-Assignments file-icon"></i>
+                  </div>
+                </div>
+              </mat-card>
+              <mat-card class="card-container">
+                <div class="card-topic">
+                  Applied Industrial IoT > Phase of industrail Reveloution
+                </div>
+                <div class="card-strip card-strip-red"></div>
+                <div class="card-description mt-4 font-weight-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</div>
+                <div class="d-flex">
+                  <div class="date-content mb-3">
+                    <div class="sub-header">Due on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                  <div class="date-content pl-5">
+                    <div class="sub-header">Submitted on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="date-content first-content">
+                    <div class="sub-header">Status</div>
+                    <div class="status-value-green">ONTIME</div>
+                  </div>
+                  <div class="date-content score-content">
+                    <div class="sub-header">Score</div>
+                    <div class="score-value">60/70</div>
+                  </div>
+                  <div>
+                    <i class="lxp-Assignments file-icon"></i>
+                  </div>
+                </div>
+              </mat-card>
+              <mat-card class="card-container">
+                <div class="card-topic">
+                  Applied Industrial IoT > Phase of industrail Reveloution
+                </div>
+                <div class="card-strip card-strip-green"></div>
+                <div class="card-description mt-4 font-weight-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</div>
+                <div class="d-flex">
+                  <div class="date-content mb-3">
+                    <div class="sub-header">Due on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                  <div class="date-content pl-5">
+                    <div class="sub-header">Submitted on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="date-content first-content">
+                    <div class="sub-header">Status</div>
+                    <div class="status-value-green">ONTIME</div>
+                  </div>
+                  <div class="date-content score-content">
+                    <div class="sub-header">Score</div>
+                    <div class="score-value">60/70</div>
+                  </div>
+                  <div>
+                    <i class="lxp-Assignments file-icon"></i>
+                  </div>
+                </div>
+              </mat-card>
+              <mat-card class="card-container">
+                <div class="card-topic">
+                  Applied Industrial IoT > Phase of industrail Reveloution
+                </div>
+                <div class="card-strip card-strip-orange"></div>
+                <div class="card-description mt-4 font-weight-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</div>
+                <div class="d-flex">
+                  <div class="date-content mb-3">
+                    <div class="sub-header">Due on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                  <div class="date-content pl-5">
+                    <div class="sub-header">Submitted on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="date-content first-content">
+                    <div class="sub-header">Status</div>
+                    <div class="status-value-orange">LATE</div>
+                  </div>
+                  <div class="date-content score-content">
+                    <div class="sub-header">Score</div>
+                    <div class="score-value">60/70</div>
+                  </div>
+                  <div>
+                    <i class="lxp-Assignments file-icon"></i>
+                  </div>
+                </div>
+              </mat-card>
+            </div> </mat-tab>
+          <mat-tab label="Perform"> 
+            <div class="card-content d-flex">
+              <mat-card class="card-container">
+                <div class="card-topic">
+                  Applied Industrial IoT > Phase of industrail Reveloution
+                </div>
+                <div class="card-strip card-strip-green"></div>
+                <div class="card-description mt-4 font-weight-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</div>
+                <div class="d-flex">
+                  <div class="date-content mb-3">
+                    <div class="sub-header">Due on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                  <div class="date-content pl-5">
+                    <div class="sub-header">Submitted on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="date-content first-content">
+                    <div class="sub-header">Status</div>
+                    <div class="status-value-green">ONTIME</div>
+                  </div>
+                  <div class="date-content score-content">
+                    <div class="sub-header">Score</div>
+                    <div class="score-value">60/70</div>
+                  </div>
+                  <div>
+                    <i class="lxp-Assignments file-icon"></i>
+                  </div>
+                </div>
+              </mat-card>
+              <mat-card class="card-container">
+                <div class="card-topic">
+                  Applied Industrial IoT > Phase of industrail Reveloution
+                </div>
+                <div class="card-strip card-strip-green"></div>
+                <div class="card-description mt-4 font-weight-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</div>
+                <div class="d-flex">
+                  <div class="date-content mb-3">
+                    <div class="sub-header">Due on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                  <div class="date-content pl-5">
+                    <div class="sub-header">Submitted on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="date-content first-content">
+                    <div class="sub-header">Status</div>
+                    <div class="status-value-green">ONTIME</div>
+                  </div>
+                  <div class="date-content score-content">
+                    <div class="sub-header">Score</div>
+                    <div class="score-value">60/70</div>
+                  </div>
+                  <div>
+                    <i class="lxp-Assignments file-icon"></i>
+                  </div>
+                </div>
+              </mat-card>
+              <mat-card class="card-container">
+                <div class="card-topic">
+                  Applied Industrial IoT > Phase of industrail Reveloution
+                </div>
+                <div class="card-strip card-strip-red"></div>
+                <div class="card-description mt-4 font-weight-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</div>
+                <div class="d-flex">
+                  <div class="date-content mb-3">
+                    <div class="sub-header">Due on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                  <div class="date-content pl-5">
+                    <div class="sub-header">Submitted on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="date-content first-content">
+                    <div class="sub-header">Status</div>
+                    <div class="status-value-red">OVERDUE</div>
+                  </div>
+                  <div class="date-content score-content">
+                    <div class="sub-header">Score</div>
+                    <div class="score-value">60/70</div>
+                  </div>
+                  <div>
+                    <i class="lxp-Assignments file-icon"></i>
+                  </div>
+                </div>
+              </mat-card>
+              <mat-card class="card-container">
+                <div class="card-topic">
+                  Applied Industrial IoT > Phase of industrail Reveloution
+                </div>
+                <div class="card-strip card-strip-red"></div>
+                <div class="card-description mt-4 font-weight-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</div>
+                <div class="d-flex">
+                  <div class="date-content mb-3">
+                    <div class="sub-header">Due on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                  <div class="date-content pl-5">
+                    <div class="sub-header">Submitted on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="date-content first-content">
+                    <div class="sub-header">Status</div>
+                    <div class="status-value-green">ONTIME</div>
+                  </div>
+                  <div class="date-content score-content">
+                    <div class="sub-header">Score</div>
+                    <div class="score-value">60/70</div>
+                  </div>
+                  <div>
+                    <i class="lxp-Assignments file-icon"></i>
+                  </div>
+                </div>
+              </mat-card>
+              <mat-card class="card-container">
+                <div class="card-topic">
+                  Applied Industrial IoT > Phase of industrail Reveloution
+                </div>
+                <div class="card-strip card-strip-green"></div>
+                <div class="card-description mt-4 font-weight-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</div>
+                <div class="d-flex">
+                  <div class="date-content mb-3">
+                    <div class="sub-header">Due on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                  <div class="date-content pl-5">
+                    <div class="sub-header">Submitted on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="date-content first-content">
+                    <div class="sub-header">Status</div>
+                    <div class="status-value-green">ONTIME</div>
+                  </div>
+                  <div class="date-content score-content">
+                    <div class="sub-header">Score</div>
+                    <div class="score-value">60/70</div>
+                  </div>
+                  <div>
+                    <i class="lxp-Assignments file-icon"></i>
+                  </div>
+                </div>
+              </mat-card>
+              <mat-card class="card-container">
+                <div class="card-topic">
+                  Applied Industrial IoT > Phase of industrail Reveloution
+                </div>
+                <div class="card-strip card-strip-orange"></div>
+                <div class="card-description mt-4 font-weight-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</div>
+                <div class="d-flex">
+                  <div class="date-content mb-3">
+                    <div class="sub-header">Due on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                  <div class="date-content pl-5">
+                    <div class="sub-header">Submitted on</div>
+                    <div class="date-value">02/06/2021</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="date-content">
+                    <div class="sub-header">Status</div>
+                    <div class="status-value-orange">LATE</div>
+                  </div>
+                  <div class="date-content score-content">
+                    <div class="sub-header">Score</div>
+                    <div class="score-value">60/70</div>
+                  </div>
+                  <div>
+                    <i class="lxp-Assignments file-icon"></i>
+                  </div>
+                </div>
+              </mat-card>
+            </div> </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
   </div>
   <div class="col-md-4">
     <div class="right-contianer mt-5">
       <div class="progress-label">Time Spent</div>
-      <div [ngStyle]="{'width': '400px',  'height':'400px'}">
+      <div [ngStyle]="{'width': '400px'}">
         <canvas baseChart 
         [datasets]="barChartData"
         [labels]="barChartLabels"
@@ -61,7 +949,39 @@
         [chartType]="barChartType">
       </canvas>
       </div>
+      <div class="col d-flex mt-3 justify-content-center">
+        <div class="col-5 content-border">
+          <div class="d-flex left-content">
+            <div class="hours">68</div>
+            <div class="hrs">hrs</div>
+            <div class="week-percentage color-green"><i class="lxp-Up"></i><span class="percentage-text">12%</span></div>
+          </div>
+          <div class="left-week">This Week</div>
+        </div>
+        <div class="col-6">
+          <div class="d-flex right-content">
+            <div class="hours">43</div>
+            <div class="hrs">hrs</div>
+            <div class="week-percentage color-red"><i class="lxp-Down"></i><span class="percentage-text">8%</span></div>
+          </div>
+          <div class="right-week">Last Week</div>
+        </div>
+      </div>
+      <div class="d-flex growth">
+        <div>You have a </div><div class="text-green">&nbsp;12% learning growth</div>
+      </div>
+      <div class="col mt-5">
+        <div class="col">
+          <div class="statistics">Course Statistics</div>
+        </div>
+        <div class="col d-flex">
+          <div class="numbers">87%</div><div class="mr-2 numbers-text">Completeion <br/> Rate</div>
+          <div class="numbers">35</div><div class="numbers-text">Questions <br/>Asked</div>
+        </div>
+        <div class="col d-flex mt-3">
+          <div class="font-weight-bold">24&nbsp;</div><div>Students have already completed the course</div>
+        </div>
+      </div>
     </div>
-
   </div>
 </div>
