@@ -9,7 +9,6 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 
 export class LearnerNewMyCourseComponent implements OnInit {
-  showFiller = false;
   isReadMore = true;
   show = true;
   innerWidth: number;
