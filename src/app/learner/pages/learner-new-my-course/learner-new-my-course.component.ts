@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostListener } from "@angular/core";
 import { FormControl } from '@angular/forms';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: "app-learner-new-my-course",
@@ -9,13 +10,46 @@ import { FormControl } from '@angular/forms';
 
 export class LearnerNewMyCourseComponent implements OnInit {
   isReadMore = true;
-  show;
-  constructor() { 
-
+  show = true;
+  innerWidth: number;
+  //Carousel
+  missedTopicsKnowledgeCheck: OwlOptions = {
+    loop: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    autoplay: true,
+    dots: false,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 3
+      },
+      940: {
+        items: 4
+      }
+    },
+    nav: false
   }
 
-  ngOnInit() {
+  constructor() { 
+  }
+  @HostListener('window:resize', ['$event'])
 
+  ngOnInit() {
+    this.innerWidth = window.innerWidth;
+  }
+
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+    console.log(innerWidth, 'innerWidth')
   }
 
   showText() {
