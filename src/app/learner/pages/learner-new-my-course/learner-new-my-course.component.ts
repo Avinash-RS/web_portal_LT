@@ -8,7 +8,6 @@ import { FormControl } from '@angular/forms';
 })
 
 export class LearnerNewMyCourseComponent implements OnInit {
-  showFiller = false;
   isReadMore = true;
   show;
   constructor() { 

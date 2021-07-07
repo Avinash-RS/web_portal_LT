@@ -3,13 +3,36 @@
 <div class="sideNavWrapper">
     <div>
         <mat-drawer-container class="sideNavContainer" autosize>
-            <mat-drawer #drawer class="sideNav" mode="side" position="end"> 
+            <mat-drawer #drawer class="sideNav" mode="side" position="end">
                 <!-- Over Side Push -->
-                <span type="button" (click)="drawer.toggle();show=!show">
-                    <em class="lxp-Right_Arrow"></em>
-                </span>
-              <p>Auto-resizing sidenav Auto-resizing sidenav</p>
-              <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+                <div class="navBackBtn">
+                    <span type="button" (click)="drawer.toggle();show=!show">
+                        <em class="lxp-Right_Arrow"></em>
+                    </span>
+                </div>
+                <div class="sideTabsStrip">
+                    <div class="active_tabItem">
+                        To Do
+                    </div>
+                </div>
+                <div class="listItem">
+                    <div _ngcontent-cun-c2="" class="dateFlag">
+                        <div class="dateDiv">
+                            <span class="flag_day">12</span> <br>
+                            <span class="flag_month">JUNE</span>
+                        </div>
+                    </div>
+                    <div class="detailData">
+                        <span class="badgedata">Self Learning</span>
+                        <div class="text-dark titleFontSize">Applied Industrial IoT</div>
+                        <div><span class="detail_key">Module:</span> <span class="detail_val">Introduction to IoT</span></div>
+                        <div><span class="detail_key">Topic:</span> <span class="detail_val">Information Technology and operational cond</span></div>
+                    </div>
+                    <div class="timeData">
+                      <em class="lxp-Clock"></em>  10:47 PM
+                    </div>
+                </div>
+               
             </mat-drawer>
 
             <div class="sideNavContent">
@@ -36,7 +59,8 @@
                         <h2>Codes for reinforced and Pre-stress…</h2>
                         <div class="upcoming d-flex justify-content-between">
                             <div>
-                                <button class="d-flex align-items-center"><em class="lxp-Play"></em> <span>4m 8s</span></button>
+                                <button class="d-flex align-items-center"><em class="lxp-Play"></em> <span>4m
+                                        8s</span></button>
                             </div>
                             <div>
                                 <span class="icons"><em class="lxp-Timer"></em></span>
@@ -85,17 +109,22 @@
                                 <div class="courses d-flex justify-content-start">
                                     <figure class="d-flex align-items-center justify-content-center">
                                         <img src="/assets/images/Image.png" alt="" />
-                                        <button class="d-flex align-items-center"><em class="lxp-Play_Icon"></em> Resume</button>
+                                        <button class="d-flex align-items-center"><em class="lxp-Play_Icon"></em>
+                                            Resume</button>
                                     </figure>
                                     <div class="rightCol">
                                         <h3>Applied Industrial IoT</h3>
                                         <div class="showLessContent">
-                                            <button class="readMoreLess" *ngIf="info.length > 370" type="button" (click)="showText()">
+                                            <button class="readMoreLess" *ngIf="info.length > 370" type="button"
+                                                (click)="showText()">
                                                 <em *ngIf="!isReadMore" class="lxp-Arrow"></em>
                                                 <em *ngIf="isReadMore" class="lxp-DownArrow"></em>
                                             </button>
                                             <div [ngClass]="isReadMore ? '' : 'showText'">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                    aliquip ex ea commodo consequat.</p>
                                                 <div class="type d-flex justify-content-start">
                                                     <span>Self paced learning - 16 hrs</span>
                                                     <span>Instructor led session - upto 14</span>
@@ -104,7 +133,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="durationCredits d-flex justify-content-between" [ngClass]="isReadMore ? 'top' : 'zero'">
+                                        <div class="durationCredits d-flex justify-content-between"
+                                            [ngClass]="isReadMore ? 'top' : 'zero'">
                                             <span>
                                                 <em class="lxp-Duration"></em> Duration: 02 June 2021 - 30 June 2021
                                             </span>
@@ -131,7 +161,16 @@
                                                     <p>Course Progression</p>
                                                 </div>
                                                 <div class="percentage">
-                                                    <circle-progress [percent]="67" [clockwise]='true' [radius]="20" [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'" [outerStrokeGradientStopColor]="'#53a9ff'" [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3" [innerStrokeWidth]="3" [space]="-3" [titleFontSize]="12" [unitsFontSize]="12" [subtitleFontSize]="8" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [startFromZero]="false" [responsive]="true" [showSubtitle]="true" [subtitle]="'Active'" [animation]="true" [animationDuration]="10"></circle-progress>
+                                                    <circle-progress [percent]="67" [clockwise]='true' [radius]="20"
+                                                        [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'"
+                                                        [outerStrokeGradientStopColor]="'#53a9ff'"
+                                                        [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3"
+                                                        [innerStrokeWidth]="3" [space]="-3" [titleFontSize]="12"
+                                                        [unitsFontSize]="12" [subtitleFontSize]="8"
+                                                        [titleColor]="'#666666'" [subtitleColor]="'#333333'"
+                                                        [startFromZero]="false" [responsive]="true"
+                                                        [showSubtitle]="true" [subtitle]="'Active'" [animation]="true"
+                                                        [animationDuration]="10"></circle-progress>
                                                 </div>
                                             </div>
                                         </div>
@@ -140,17 +179,22 @@
                                 <div class="courses d-flex justify-content-start">
                                     <figure class="d-flex align-items-center justify-content-center">
                                         <img src="/assets/images/Image.png" alt="" />
-                                        <button class="d-flex align-items-center"><em class="lxp-Play_Icon"></em> Resume</button>
+                                        <button class="d-flex align-items-center"><em class="lxp-Play_Icon"></em>
+                                            Resume</button>
                                     </figure>
                                     <div class="rightCol">
                                         <h3>Applied Industrial IoT</h3>
                                         <div class="showLessContent">
-                                            <button class="readMoreLess" *ngIf="info.length > 370" type="button" (click)="showText()">
+                                            <button class="readMoreLess" *ngIf="info.length > 370" type="button"
+                                                (click)="showText()">
                                                 <em *ngIf="!isReadMore" class="lxp-Arrow"></em>
                                                 <em *ngIf="isReadMore" class="lxp-DownArrow"></em>
                                             </button>
                                             <div [ngClass]="isReadMore ? '' : 'showText'">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                    aliquip ex ea commodo consequat.</p>
                                                 <div class="type d-flex justify-content-start">
                                                     <span>Self paced learning - 16 hrs</span>
                                                     <span>Instructor led session - upto 14</span>
@@ -159,7 +203,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="durationCredits d-flex justify-content-between" [ngClass]="isReadMore ? 'top' : 'zero'">
+                                        <div class="durationCredits d-flex justify-content-between"
+                                            [ngClass]="isReadMore ? 'top' : 'zero'">
                                             <span>
                                                 <em class="lxp-Duration"></em> Duration: 02 June 2021 - 30 June 2021
                                             </span>
@@ -186,7 +231,16 @@
                                                     <p>Course Progression</p>
                                                 </div>
                                                 <div class="percentage">
-                                                    <circle-progress [percent]="67" [clockwise]='true' [radius]="20" [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'" [outerStrokeGradientStopColor]="'#53a9ff'" [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3" [innerStrokeWidth]="3" [space]="-3" [titleFontSize]="12" [unitsFontSize]="12" [subtitleFontSize]="8" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [startFromZero]="false" [responsive]="true" [showSubtitle]="true" [subtitle]="'Active'" [animation]="true" [animationDuration]="10"></circle-progress>
+                                                    <circle-progress [percent]="67" [clockwise]='true' [radius]="20"
+                                                        [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'"
+                                                        [outerStrokeGradientStopColor]="'#53a9ff'"
+                                                        [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3"
+                                                        [innerStrokeWidth]="3" [space]="-3" [titleFontSize]="12"
+                                                        [unitsFontSize]="12" [subtitleFontSize]="8"
+                                                        [titleColor]="'#666666'" [subtitleColor]="'#333333'"
+                                                        [startFromZero]="false" [responsive]="true"
+                                                        [showSubtitle]="true" [subtitle]="'Active'" [animation]="true"
+                                                        [animationDuration]="10"></circle-progress>
                                                 </div>
                                             </div>
                                         </div>
@@ -203,17 +257,22 @@
                                 <div class="courses d-flex justify-content-start">
                                     <figure class="d-flex align-items-center justify-content-center">
                                         <img src="/assets/images/Image.png" alt="" />
-                                        <button class="d-flex align-items-center"><em class="lxp-Play_Icon"></em> Resume</button>
+                                        <button class="d-flex align-items-center"><em class="lxp-Play_Icon"></em>
+                                            Resume</button>
                                     </figure>
                                     <div class="rightCol">
                                         <h3>Applied Industrial IoT</h3>
                                         <div class="showLessContent">
-                                            <button class="readMoreLess" *ngIf="info.length > 370" type="button" (click)="showText()">
+                                            <button class="readMoreLess" *ngIf="info.length > 370" type="button"
+                                                (click)="showText()">
                                                 <em *ngIf="!isReadMore" class="lxp-Arrow"></em>
                                                 <em *ngIf="isReadMore" class="lxp-DownArrow"></em>
                                             </button>
                                             <div [ngClass]="isReadMore ? '' : 'showText'">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                    aliquip ex ea commodo consequat.</p>
                                                 <div class="type d-flex justify-content-start">
                                                     <span>Self paced learning - 16 hrs</span>
                                                     <span>Instructor led session - upto 14</span>
@@ -222,7 +281,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="durationCredits d-flex justify-content-between" [ngClass]="isReadMore ? 'top' : 'zero'">
+                                        <div class="durationCredits d-flex justify-content-between"
+                                            [ngClass]="isReadMore ? 'top' : 'zero'">
                                             <span>
                                                 <em class="lxp-Duration"></em> Duration: 02 June 2021 - 30 June 2021
                                             </span>
@@ -243,13 +303,23 @@
                                                     <p>Q&A</p>
                                                 </div>
                                             </div>
-                                            <div class="courseProgression d-flex justify-content-end align-items-center">
+                                            <div
+                                                class="courseProgression d-flex justify-content-end align-items-center">
                                                 <div class="icons">
                                                     <span><em class="lxp-Course_Progression"></em></span>
                                                     <p>Course Progression</p>
                                                 </div>
                                                 <div class="percentage">
-                                                    <circle-progress [percent]="67" [clockwise]='true' [radius]="20" [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'" [outerStrokeGradientStopColor]="'#53a9ff'" [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3" [innerStrokeWidth]="3" [space]="-3" [titleFontSize]="12" [unitsFontSize]="12" [subtitleFontSize]="8" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [startFromZero]="false" [responsive]="true" [showSubtitle]="true" [subtitle]="'Active'" [animation]="true" [animationDuration]="10"></circle-progress>
+                                                    <circle-progress [percent]="67" [clockwise]='true' [radius]="20"
+                                                        [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'"
+                                                        [outerStrokeGradientStopColor]="'#53a9ff'"
+                                                        [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3"
+                                                        [innerStrokeWidth]="3" [space]="-3" [titleFontSize]="12"
+                                                        [unitsFontSize]="12" [subtitleFontSize]="8"
+                                                        [titleColor]="'#666666'" [subtitleColor]="'#333333'"
+                                                        [startFromZero]="false" [responsive]="true"
+                                                        [showSubtitle]="true" [subtitle]="'Active'" [animation]="true"
+                                                        [animationDuration]="10"></circle-progress>
                                                 </div>
                                             </div>
                                         </div>
@@ -266,17 +336,22 @@
                                 <div class="courses d-flex justify-content-start">
                                     <figure class="d-flex align-items-center justify-content-center">
                                         <img src="/assets/images/Image.png" alt="" />
-                                        <button class="d-flex align-items-center"><em class="lxp-Play_Icon"></em> Resume</button>
+                                        <button class="d-flex align-items-center"><em class="lxp-Play_Icon"></em>
+                                            Resume</button>
                                     </figure>
                                     <div class="rightCol">
                                         <h3>Applied Industrial IoT</h3>
                                         <div class="showLessContent">
-                                            <button class="readMoreLess" *ngIf="info.length > 370" type="button" (click)="showText()">
+                                            <button class="readMoreLess" *ngIf="info.length > 370" type="button"
+                                                (click)="showText()">
                                                 <em *ngIf="!isReadMore" class="lxp-Arrow"></em>
                                                 <em *ngIf="isReadMore" class="lxp-DownArrow"></em>
                                             </button>
                                             <div [ngClass]="isReadMore ? '' : 'showText'">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                    aliquip ex ea commodo consequat.</p>
                                                 <div class="type d-flex justify-content-start">
                                                     <span>Self paced learning - 16 hrs</span>
                                                     <span>Instructor led session - upto 14</span>
@@ -285,7 +360,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="durationCredits d-flex justify-content-between" [ngClass]="isReadMore ? 'top' : 'zero'">
+                                        <div class="durationCredits d-flex justify-content-between"
+                                            [ngClass]="isReadMore ? 'top' : 'zero'">
                                             <span>
                                                 <em class="lxp-Duration"></em> Duration: 02 June 2021 - 30 June 2021
                                             </span>
@@ -306,13 +382,23 @@
                                                     <p>Q&A</p>
                                                 </div>
                                             </div>
-                                            <div class="courseProgression d-flex justify-content-end align-items-center">
+                                            <div
+                                                class="courseProgression d-flex justify-content-end align-items-center">
                                                 <div class="icons">
                                                     <span><em class="lxp-Course_Progression"></em></span>
                                                     <p>Course Progression</p>
                                                 </div>
                                                 <div class="percentage">
-                                                    <circle-progress [percent]="67" [clockwise]='true' [radius]="20" [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'" [outerStrokeGradientStopColor]="'#53a9ff'" [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3" [innerStrokeWidth]="3" [space]="-3" [titleFontSize]="12" [unitsFontSize]="12" [subtitleFontSize]="8" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [startFromZero]="false" [responsive]="true" [showSubtitle]="true" [subtitle]="'Active'" [animation]="true" [animationDuration]="10"></circle-progress>
+                                                    <circle-progress [percent]="67" [clockwise]='true' [radius]="20"
+                                                        [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'"
+                                                        [outerStrokeGradientStopColor]="'#53a9ff'"
+                                                        [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3"
+                                                        [innerStrokeWidth]="3" [space]="-3" [titleFontSize]="12"
+                                                        [unitsFontSize]="12" [subtitleFontSize]="8"
+                                                        [titleColor]="'#666666'" [subtitleColor]="'#333333'"
+                                                        [startFromZero]="false" [responsive]="true"
+                                                        [showSubtitle]="true" [subtitle]="'Active'" [animation]="true"
+                                                        [animationDuration]="10"></circle-progress>
                                                 </div>
                                             </div>
                                         </div>

@@ -458,7 +458,101 @@
 //
 .sideNav {
   padding: 20px;
+
+//RIGHT SIDE NAV CONTENT//
+.navBackBtn{
+  text-align: right;
+  font-size: 20px;
 }
+.sideTabsStrip{
+  display: flex;
+  justify-content: flex-start;
+  .active_tabItem{
+    border-bottom:solid red 3px ;
+    border-radius:3px
+  }
+}
+
+.listItem{
+  padding:15px 0px;
+  margin:15px;
+  display: flex;
+  justify-content: space-between;
+  .dateFlag {
+    height: 60px;
+    width: 50px;
+    position: relative;
+    border-left: 1px solid tomato;
+    border-top: 1px solid tomato;
+    border-right: 1px solid tomato;
+    text-align: center;
+    /* line-height: 100px; */
+    font-size: 18px;
+    .dateDiv{
+      margin:9px 0px;
+    .flag_day{
+      font-size: 26px;
+      font-weight: bold;
+    }
+    .flag_month{
+      font-size: 9px;
+      color:#B3B3B3;
+      text-transform: uppercase;
+    }
+  }
+  }
+  .dateFlag:before {
+    content: "";
+    position: absolute;
+    height: 50%;
+    width: 52%;
+    left: -1px;
+    bottom: -10px;
+    z-index: -2;
+    transform: skewY(154deg);
+    border-bottom: 1px solid tomato;
+    border-left: 1px solid tomato;
+  }
+  .dateFlag:after {
+    content: "";
+    position: absolute;
+    height: 50%;
+    width: 52%;
+    right: -1px;
+    bottom: -10px;
+    z-index: -2;
+    transform: skewY(-154deg);
+    border-bottom: 1px solid tomato;
+    border-right: 1px solid tomato;
+  }
+  .dateFlag:hover, .dateFlag:hover:before, .dateFlag:hover:after{
+    background:lightgray;
+    }
+  .detailData{
+    .badgedata{
+      background-color: #E6E6E6;
+    border-radius: 3px;
+    text-align: center;
+    padding: 0px 10px;
+    }
+    .detail_key{
+      font-size: 11px;
+      color:#999999;
+    }.detail_val{
+      font-size: 11px;
+      color:#666666;
+    }
+    position: relative;
+    margin: 0px 10px;
+  }
+  .timeData{
+    position: relative;
+  }
+}
+}
+
+//RIGHT SIDE NAV CONTENT END//
+
 .taskToDo {
   position: absolute;
   right: 0;
