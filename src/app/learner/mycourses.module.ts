@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LearnerMyCourseComponent } from './pages/learner-my-course/learner-my-course.component';
+import { LearnerNewMyCourseComponent } from './pages/learner-new-my-course/learner-new-my-course.component';
 import { CoursedetailsComponent } from './pages/coursedetails/coursedetails.component';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -48,6 +49,7 @@ import { CourseGalleryComponent } from './pages/course-gallery/course-gallery.co
 import { AskQuestionsComponent } from './pages/ask-questions/ask-questions.component';
 import {CourseReportComponent} from './pages/course-report/course-report.component';
 import { CalendarActivityComponent } from './pages/calendar-activity/calendar-activity.component'
+import {ProgressionReportComponent} from './pages/progression-report/progression-report.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -56,7 +58,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 const routes: Routes = [
   {
     path: 'MyCourse',
-    component: LearnerMyCourseComponent,
+    component: LearnerNewMyCourseComponent,
     // canLoad: [AuthGuard],
     data: { animation: 'Learner  MyCourse' , title: 'My Courses'}
   },
@@ -100,6 +102,9 @@ const routes: Routes = [
     path: 'calendaractivity',
     component: CalendarActivityComponent,
     data: { animation: 'calendaractivity' , title: 'Calendar Activity'}
+    path: 'progressionReport',
+    component: ProgressionReportComponent,
+    data: { animation: 'progressionReport' , title: 'Progression Report'}
   },
 ]
 @NgModule({
@@ -118,6 +123,8 @@ const routes: Routes = [
     CourseReportComponent,
     CalendarActivityComponent
 
+    LearnerNewMyCourseComponent,
+    ProgressionReportComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [
