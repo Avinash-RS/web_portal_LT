@@ -102,6 +102,8 @@ const routes: Routes = [
     path: 'calendaractivity',
     component: CalendarActivityComponent,
     data: { animation: 'calendaractivity' , title: 'Calendar Activity'}
+  },
+  {
     path: 'progressionReport',
     component: ProgressionReportComponent,
     data: { animation: 'progressionReport' , title: 'Progression Report'}
@@ -121,8 +123,7 @@ const routes: Routes = [
     AskQuestionsComponent,
     CourseGalleryComponent,
     CourseReportComponent,
-    CalendarActivityComponent
-
+    CalendarActivityComponent,
     LearnerNewMyCourseComponent,
     ProgressionReportComponent
   ],
