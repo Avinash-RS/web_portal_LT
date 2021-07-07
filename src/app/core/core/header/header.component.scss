@@ -102,9 +102,10 @@
   width: 100%;
 }
 .hearder-logo {
-  height: 20px;
+  height: 26px;
   cursor: pointer;
   margin-left: 3px;
+  object-fit: cover;
 }
 .profileimg {
   width: 30px;
@@ -209,7 +210,6 @@
       }
     }
     &:hover {
-      // color: #ffffff !important;
       background-color: rgba(85, 85, 85, 0.15) !important;
       &::after {
         content: "";
@@ -226,8 +226,8 @@
   margin-left: 7px;
 }
 // Desktop Ends
-//sidenav
 
+//sidenav
 .sideNavStrip {
   height: 100%;
   transition: 2s ease-in-out;
@@ -251,10 +251,11 @@
     }
   }
 }
+
 // Navigation expand
 .burgerspace {
-  width: 85px;
-  transition: all 2s ease-in-out;
+  width: 70px;
+  // transition: all 2s ease-in-out;
   font-size: 18px !important;
   padding-left: 10px;
   color: #808080;
@@ -291,15 +292,14 @@
     white-space: nowrap;
   }
   .navTitle {
-    // display: none;
     display: inline-block;
     animation-name: textHide;
     animation-duration: 0.2s;
     animation-fill-mode: forwards;
   }
 }
-// Active nav item
 
+// Active nav item
 .activeItem {
   .icoBox {
     background-color: #be2020;
