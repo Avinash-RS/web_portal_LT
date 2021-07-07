@@ -48,6 +48,7 @@ import { PerformancePageMobileComponent } from './pages/performance-page-mobile/
 import { CourseGalleryComponent } from './pages/course-gallery/course-gallery.component'
 import { AskQuestionsComponent } from './pages/ask-questions/ask-questions.component';
 import {CourseReportComponent} from './pages/course-report/course-report.component';
+import { CalendarActivityComponent } from './pages/calendar-activity/calendar-activity.component'
 import {ProgressionReportComponent} from './pages/progression-report/progression-report.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -98,6 +99,11 @@ const routes: Routes = [
     data: { animation: 'coursereport' , title: 'Course Report'}
   },
   {
+    path: 'calendaractivity',
+    component: CalendarActivityComponent,
+    data: { animation: 'calendaractivity' , title: 'Calendar Activity'}
+  },
+  {
     path: 'progressionReport',
     component: ProgressionReportComponent,
     data: { animation: 'progressionReport' , title: 'Progression Report'}
@@ -117,6 +123,7 @@ const routes: Routes = [
     AskQuestionsComponent,
     CourseGalleryComponent,
     CourseReportComponent,
+    CalendarActivityComponent,
     LearnerNewMyCourseComponent,
     ProgressionReportComponent
   ],

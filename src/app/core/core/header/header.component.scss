@@ -241,8 +241,8 @@
   transition: ease-in width 0.3s;
   .stripItem {
     padding: 10px 15px;
+    cursor: pointer;
     .icoBox {
-      cursor: pointer;
       padding: 10px;
       font-size: 20px;
     }
@@ -292,10 +292,11 @@
     white-space: nowrap;
   }
   .navTitle {
+    opacity: 0;
     display: inline-block;
     animation-name: textHide;
     animation-duration: 0.2s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: backwards;
   }
 }
 

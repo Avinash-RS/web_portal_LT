@@ -1,0 +1,317 @@
+
+.calendarArea {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    @media screen and (max-width:768px) {
+        flex-direction: column;
+    }
+}
+section {
+    background-color: #f0f0f0;
+    height: 100%;
+    padding: 1.8em 2.5em;
+    width: calc(100% - 350px);
+
+    @media screen and (max-width:768px) {
+        padding: 1.8em 1.2em;
+        width: 100% ;
+    } 
+    @media screen and (min-width:769px) and (max-width:1024px) {
+        width: calc(100% - 300px);
+    } 
+}
+.heading5 {
+    font-size: 1.7em;
+    font-weight: 700;
+    margin: 1em 0; 
+}
+.viewInfotxt {
+    display: flex;
+    justify-content: space-between; 
+    @media screen and (max-width:480px) { 
+    flex-direction: column;
+    min-height: 70px;
+    }
+}
+.leftPan {
+    span {
+        margin-right: 1.7em;
+        font-size: 1.1em;
+        color:#808080 ;
+        display: inline-block;
+        cursor: pointer;
+        padding-bottom: 1em;
+        position: relative;
+ 
+        &.active {
+            color:#212529;
+            &:before {
+                content:' ';
+                width: 8px;
+                height: 8px;
+                background-color: #BE2020;
+                position: absolute;
+                bottom: 2px;
+                left: 30%;
+                border-radius: 10px;
+            }
+        }
+    }
+}
+.rightPan {
+    span {
+        padding: 0 1em;
+        @media screen and (max-width:480px) {
+            padding: 0;
+        }
+    }
+    select {
+        margin: 0 1em;
+        min-width: 100px;
+        padding: 0.1em 0.3em;
+        border-radius: 0.2em;
+        @media screen and (max-width:480px) {
+            margin: 0 0.5em;
+        }
+    }
+}
+.contentarea {
+    padding: 1.5em 0; 
+    .contentbox {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        background-color: #fff;
+        padding: 0.8em 2em;
+        border-radius: 0.3em;
+        border: 0.1em solid #eaeaea;
+        margin-bottom: 1em;
+        position: relative;
+
+        @media screen and (max-width:480px) {
+            flex-wrap: wrap;
+            padding: 0.4em 1em;
+        }
+
+        @media screen and (max-width:768px) { 
+            padding: 0.8em 1em;
+        }
+        @media screen and (min-width:769px) and (max-width:1024px) {
+        padding: 0.8em 1.5em;
+        }
+
+        > div {
+            flex-grow: 1;
+            @media screen and (max-width:480px) {
+            padding: 0.4em 0;
+            }
+            &:first-child {
+                min-width: 40%;
+                @media screen and (max-width:425px) { 
+                    min-width: 100%;
+                }
+            }
+            min-width: 26%;
+            &:nth-child(3), &:last-child {
+                min-width: 10%; 
+            }
+            &:last-child {
+                @media screen and (max-width:1024px) { 
+                    min-width: 5%;
+                }
+            }
+        }
+        .infotxtarea {
+           
+            .htxt {
+                font-weight: 700;
+                color: red;
+            }
+            .infotxt span {
+                color:#808080;
+                min-width: 45px;
+                display: inline-block;
+            }
+        }
+        .infotypearea, .infodatearea {
+            display: flex;
+            flex-direction: row;
+            align-items: center; 
+
+            .htxt {
+                span {
+                    display: block;
+                    font-weight: 400;
+                    color: #808080;
+                }
+                div.notifi {
+                    position: relative;
+                    padding-left: 1.2em;
+
+                    &:before {
+                        content: ' ';
+                        width: 10px;
+                        height: 10px;
+                        background-color: transparent;
+                        position: absolute;
+                        border-radius: 10px;
+                        left: 0;
+                        top: 0.3em;
+                    }
+                }
+                div.notifi.activity:before { 
+                    background-color: #D9E021;
+                }
+                div.notifi.selfplacedlearning:before {  
+                    background-color: #00A99D;
+                }
+                div.notifi.virtualinstructorled:before {  
+                    background-color: #22ACDD;
+                }
+            }
+        }
+        .infotypearea {
+            font-weight: 700;
+            color: #000;
+        }
+        .statusarea {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            @media screen and (max-width:425px) { 
+                position: absolute;
+                top: 0.7em;
+                right: 1em;
+            }
+
+            .icon {
+                background-color: #41d275;
+                height: 20px;
+                width: 20px;
+                border-radius: 25px;
+                color: #fff;
+                font-size: 0.6em;
+            }
+        }
+    }
+    .icon {
+        display: flex;
+        width: 50px;
+        align-items: center;
+        justify-content: center;
+        color: #808080;
+    }
+    .lxp-Test, .lxp-calendar {
+        font-size: 1.4em;
+    }
+}
+
+::ng-deep.calendarSlide { 
+    width: 350px;
+    background-color: #fff;
+    padding: 3em 1em; 
+    box-shadow: 0 0 2px 0 #0000006b;
+
+    @media screen and (max-width:768px) {
+        padding: 1em 2.3em;
+        width: 100%;
+    }
+    @media screen and (min-width:769px) and (max-width:1024px) {
+        width: 300px;
+    }
+
+    .cal-month-view .cal-day-cell {
+        min-height: 40px;
+    }
+
+    .cal-month-view .cal-cell-top {
+        min-height: 30px;
+        flex: 1;
+    }
+
+    .cal-month-view .cal-days .cal-cell-row {
+        border-bottom-color: transparent;
+    }
+
+    .cal-month-view .cal-day-cell:not(:last-child) {
+        border-right-color: transparent;
+        border-radius: 0.5em;
+    }
+    .cal-month-view .cal-days {
+        border-color: transparent;
+    }
+
+    .cal-month-view .cal-day-cell.cal-today {
+        background-color: #f2f2f2;
+    }
+
+    .cal-month-view .cal-day-number {
+        font-size: 1em;
+        font-weight: 400;
+        opacity: 0.5;
+        margin-top: 0.5em;
+        margin-right: 1em;
+        float: right;
+        margin-bottom: 0.5em;
+    }
+
+    .cal-month-view .cal-day-cell.cal-today .cal-day-number {
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+    .cal-month-view .cal-header {
+        text-align: center;
+        color: #9c9c9c !important;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.9em;
+    }
+
+    .calendarInfo {
+        display: flex;
+        align-content: center;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .currentMonth {
+        font-weight: 700;
+        font-size: 1.6em;
+        margin: 1em 0;
+    }
+
+    .activInfo {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        color: #9c9c9c !important;
+        font-size: 0.9em;
+        padding: 1em 0;
+        span {
+            position: relative;
+            padding-left: 1.1em;
+            &:before {
+                content:'';
+                width: 10px;
+                height: 10px;
+                background-color: transparent;
+                position: absolute;
+                top: 5px;
+                left: 0;
+                border-radius: 5px; 
+            }
+            &.self:before {
+                background-color: #00a99d;
+            }
+            &.live:before {
+                background-color: #22acdd;
+            }
+            &.Activ:before {
+                background-color: #d9e021;
+            }
+        }
+    }
+}

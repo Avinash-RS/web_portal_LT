@@ -1,8 +1,8 @@
 <app-header></app-header>
-<div class="col progression-report-contianer d-flex">
+<div class="progression-report-contianer d-flex">
   <div class="col-md-8 left-container">
     <div class="col d-flex pt-3">
-      <i class="lxp-Right_Direction_Arrow backArrow"></i>
+      <em routerLink="/Learner/MyCourse" class="lxp-Right_Direction_Arrow backArrow"></em>
       <div class="breadcrum1">Applied Industrail IOT</div>
       <div class="partition">/</div>
       <div class="breadcrum2">Progression Report</div>
@@ -18,7 +18,7 @@
     <div class="col d-flex">
       <div class="col-md-6">
         <div [ngStyle]="{'width': '300px',  'height':'300px'}">
-          <canvas id="piechart" [options]="pieChartOptions"></canvas>
+          <canvas id="piechart"></canvas>
         </div>
       </div>
       <div class="col-md-6 d-flex align-item-center mt-5">
@@ -131,7 +131,7 @@
                   </div>
                 </div>
               </div>
-              <i class="lxp-info-circle tic-circle"></i>
+              <em class="lxp-info-circle tic-circle"></em>
               <!-- <div class="col-md-1">
                
               </div> -->
@@ -171,7 +171,7 @@
                   </div>
                 </div>
               </div>
-              <i class="lxp-info-circle tic-circle"></i>
+              <em class="lxp-info-circle tic-circle"></em>
             </div>
             <div class="topic-container col d-flex">
               <div class="col-md-4">
@@ -954,7 +954,7 @@
           <div class="d-flex left-content">
             <div class="hours">68</div>
             <div class="hrs">hrs</div>
-            <div class="week-percentage color-green"><i class="lxp-Up"></i><span class="percentage-text">12%</span></div>
+            <div class="week-percentage color-green"><em class="lxp-Up"></em><span class="percentage-text">12%</span></div>
           </div>
           <div class="left-week">This Week</div>
         </div>
@@ -962,7 +962,7 @@
           <div class="d-flex right-content">
             <div class="hours">43</div>
             <div class="hrs">hrs</div>
-            <div class="week-percentage color-red"><i class="lxp-Down"></i><span class="percentage-text">8%</span></div>
+            <div class="week-percentage color-red"><em class="lxp-Down"></em><span class="percentage-text">8%</span></div>
           </div>
           <div class="right-week">Last Week</div>
         </div>
