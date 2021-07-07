@@ -456,7 +456,7 @@ export class ActivitiesComponent implements OnInit {
 
   projectPreviewDoc(templateRef: TemplateRef<any>, videoDialog, path, type) {
     if (type === 'material') {
-      if (path.doc_type !== 'video/mp4' || path.doc_type !== 'video/quicktime' || path.doc_type !== 'video/avi') {
+      if (path.doc_type !== 'video/mp4' && path.doc_type !== 'video/quicktime' && path.doc_type !== 'video/avi') {
         this.dialog.open(templateRef, {
           width: '100%',
           height: '100%',
@@ -474,7 +474,7 @@ export class ActivitiesComponent implements OnInit {
         this.videoPreview(videoDialog, path);
       }
     } else if (type === 'files') {
-      if (path.doc_type !== 'video/mp4' || path.doc_type !== 'video/quicktime' || path.doc_type !== 'video/avi') {
+      if (path.doc_type !== 'video/mp4' && path.doc_type !== 'video/quicktime' && path.doc_type !== 'video/avi') {
         this.dialog.open(templateRef, {
           width: '100%',
           height: '100%',
