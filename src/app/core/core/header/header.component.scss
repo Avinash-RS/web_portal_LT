@@ -231,15 +231,15 @@
 .sideNavStrip {
   height: 100%;
   transition: 2s ease-in-out;
-  // min-width: 85px;
+  width: 70px;
   position: fixed;
   top: 55px;
   left: 0;
   z-index: 4;
   background-color: #fff;
   box-shadow: 5px 5px 9px #0000001f;
+  transition: ease-in width 0.3s;
   .stripItem {
-    transition: 2s;
     padding: 10px 15px;
     .icoBox {
       cursor: pointer;
@@ -258,33 +258,44 @@
   font-size: 18px !important;
   padding-left: 10px;
   color: #808080;
+  em {
+    cursor: pointer;
+  }
 }
-.navOpen {
-  transition: 2s;
+.navClose {
+  width: 210px;
   .stripItem {
     text-align: left !important;
+    white-space: nowrap;
   }
   .icoBox {
     display: inline-block;
   }
   .navTitle {
+    opacity: 0;
     display: inline-block;
+    animation-name: delayspeed;
+    animation-duration: 0.5s;
+    animation-delay: 0.2s;
+    animation-fill-mode: forwards;
   }
 }
 
 // Navigation collapse
-.navClose {
-  box-shadow: inset -5px 1px 9px #0000001f;
-  transition: 2s;
-  // width: 55px;
-  .stripItem {
-    // text-align:center !important;
-  }
+.navOpen {
+  box-shadow: inset -3px 1px 4px rgba(0, 0, 0, 0.1);
   .icoBox {
     display: inline-block;
   }
+  .stripItem {
+    white-space: nowrap;
+  }
   .navTitle {
-    display: none;
+    // display: none;
+    display: inline-block;
+    animation-name: textHide;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
   }
 }
 // Active nav item
@@ -356,3 +367,20 @@
   vertical-align: middle;
 }
 //Mobile Ends
+
+@keyframes delayspeed {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes textHide {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

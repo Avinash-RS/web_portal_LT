@@ -23,6 +23,15 @@
   .somethingNew {
     background-color: #ffcc00;
     padding: 20px;
+    position: relative;
+    // &::before {
+    //   content: '';
+    //   position: absolute;
+    //   background-image: url('../../../../assets/images/Top_Banner_1.png');
+    //   background-repeat: no-repeat;
+    //   background-size: cover;
+    //   width: 100%;
+    // }
     h4 {
       font-size: 20px;
       color: #ffffff;
@@ -87,6 +96,7 @@
         font-size: 14px;
         font-weight: 400;
         color: #5a727d;
+        cursor: pointer;
         em {
           font-size: 6px;
           display: inline-block;
@@ -117,6 +127,16 @@
       height: 200px;
       width: 100%;
       margin: 10px 0;
+      position: relative;
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 20%;
+        height: 60px;
+        width: 5px;
+        background-color: #FFA04E;
+      }
       @media only screen and(min-width:600px) {
         width: 48%;
       }

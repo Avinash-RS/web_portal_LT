@@ -73,7 +73,10 @@
                             <span class="white"><em class="lxp-Right"></em></span>
                             <span class="white"><em class="lxp-Right"></em></span>
                         </div>
-                        <span class="expand" (click)="expandtoggle()">Expand <em class="lxp-DownArrow"></em></span>
+                        <span class="expand" (click)="expandtoggle()">Expand 
+                            <em *ngIf="expandcollapse" class="lxp-DownArrow"></em>
+                            <em *ngIf="!expandcollapse" class="lxp-Arrow"></em>
+                        </span>
                     </div>
                 </div>
 

@@ -64,12 +64,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
   expandtoggle() {
     this.expandcollapse = !this.expandcollapse;
   }
-  expand() {
-    this.expandcollapse = false;
-  }
-  collapse() {
-    this.expandcollapse = true;
-  }
 
   showText() {
     this.isReadMore = !this.isReadMore
