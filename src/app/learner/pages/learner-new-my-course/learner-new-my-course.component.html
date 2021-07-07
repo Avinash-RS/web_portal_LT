@@ -73,62 +73,65 @@
                             <span class="white"><em class="lxp-Right"></em></span>
                             <span class="white"><em class="lxp-Right"></em></span>
                         </div>
-                        <span class="expand" (click)="expandtoggle()">Expand <em class="lxp-DownArrow"></em></span>
+                        <span class="expand" (click)="expandtoggle()">Expand 
+                            <em *ngIf="expandcollapse" class="lxp-DownArrow"></em>
+                            <em *ngIf="!expandcollapse" class="lxp-Arrow"></em>
+                        </span>
                     </div>
                 </div>
 
                 <!-- Top 3 Things Contents -->
                 <div [@collapse]="expandcollapse">
-                        <div class="top3Things d-flex justify-content-between" [ngClass]="show ? '': 'noPadding'">
-                            <div class="box">
-                                <div>
-                                    <h6>Learn from where your left</h6>
-                                    <span class="type">MODULE:</span>
-                                    <h2>Codes for reinforced and Pre-stress…</h2>
-                                </div>
-                                <div class="upcoming d-flex justify-content-between">
-                                    <div>
-                                        <button class="d-flex align-items-center"><em class="lxp-Play"></em> <span>4m
-                                                8s</span></button>
-                                    </div>
-                                    <div>
-                                        <span class="icons"><em class="lxp-Timer"></em></span>
-                                    </div>
-                                </div>
+                    <div class="top3Things d-flex justify-content-between" [ngClass]="show ? '': 'noPadding'">
+                        <div class="box">
+                            <div>
+                                <h6>Learn from where your left</h6>
+                                <span class="type">MODULE:</span>
+                                <h2>Codes for reinforced and Pre-stress…</h2>
                             </div>
-                            <div class="box">
+                            <div class="upcoming d-flex justify-content-between">
                                 <div>
-                                    <h6>Learn from where your left</h6>
-                                    <span class="type">MODULE:</span>
-                                    <h2>Codes for reinforced and Pre-stress…</h2>
-                                    <div class="dueDate">Due date: 23 June 2021 12:00 AM</div>
+                                    <button class="d-flex align-items-center"><em class="lxp-Play"></em> <span>4m
+                                            8s</span></button>
                                 </div>
-                                <div class="upcoming d-flex justify-content-between">
-                                    <div>
-                                        <button class="d-flex align-items-center"><span>GO</span></button>
-                                    </div>
-                                    <div>
-                                        <span class="icons"><em class="lxp-Assignments"></em></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box">
                                 <div>
-                                    <h6>Learn from where your left</h6>
-                                    <span class="type">MODULE:</span>
-                                    <h2>Codes for reinforced and Pre-stress…</h2>
-                                    <div class="dueDate">Due date: 23 June 2021 12:00 AM</div>
-                                </div>
-                                <div class="upcoming d-flex justify-content-between">
-                                    <div>
-                                        <button class="d-flex align-items-center"><span>Join</span></button>
-                                    </div>
-                                    <div>
-                                        <span class="icons"><em class="lxp-JoinIcon"></em></span>
-                                    </div>
+                                    <span class="icons"><em class="lxp-Timer"></em></span>
                                 </div>
                             </div>
                         </div>
+                        <div class="box">
+                            <div>
+                                <h6>Learn from where your left</h6>
+                                <span class="type">MODULE:</span>
+                                <h2>Codes for reinforced and Pre-stress…</h2>
+                                <div class="dueDate">Due date: 23 June 2021 12:00 AM</div>
+                            </div>
+                            <div class="upcoming d-flex justify-content-between">
+                                <div>
+                                    <button class="d-flex align-items-center"><span>GO</span></button>
+                                </div>
+                                <div>
+                                    <span class="icons"><em class="lxp-Assignments"></em></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div>
+                                <h6>Learn from where your left</h6>
+                                <span class="type">MODULE:</span>
+                                <h2>Codes for reinforced and Pre-stress…</h2>
+                                <div class="dueDate">Due date: 23 June 2021 12:00 AM</div>
+                            </div>
+                            <div class="upcoming d-flex justify-content-between">
+                                <div>
+                                    <button class="d-flex align-items-center"><span>Join</span></button>
+                                </div>
+                                <div>
+                                    <span class="icons"><em class="lxp-JoinIcon"></em></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- My Course -->
@@ -190,7 +193,7 @@
                                                 </div>
                                             </div>
                                             <div class="courseProgression d-flex align-items-center">
-                                                <div class="icons">
+                                                <div class="icons" routerLink="/Learner/progressionReport">
                                                     <span><em class="lxp-Course_Progression"></em></span>
                                                     <p>Course Progression</p>
                                                 </div>
@@ -260,7 +263,7 @@
                                                 </div>
                                             </div>
                                             <div class="courseProgression d-flex align-items-center">
-                                                <div class="icons">
+                                                <div class="icons" routerLink="/Learner/progressionReport">
                                                     <span><em class="lxp-Course_Progression"></em></span>
                                                     <p>Course Progression</p>
                                                 </div>
@@ -336,7 +339,7 @@
                                             </div>
                                             <div
                                                 class="courseProgression d-flex justify-content-end align-items-center">
-                                                <div class="icons">
+                                                <div class="icons" routerLink="/Learner/progressionReport">
                                                     <span><em class="lxp-Course_Progression"></em></span>
                                                     <p>Course Progression</p>
                                                 </div>
@@ -406,7 +409,7 @@
                                             </div>
                                             <div
                                                 class="courseProgression d-flex justify-content-end align-items-center">
-                                                <div class="icons">
+                                                <div class="icons" routerLink="/Learner/progressionReport">
                                                     <span><em class="lxp-Course_Progression"></em></span>
                                                     <p>Course Progression</p>
                                                 </div>

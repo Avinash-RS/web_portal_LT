@@ -21,6 +21,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
   isReadMore = true;
   show = true;
   innerWidth: number;
+  expandcollapse = true;
+
   //Carousel
   missedTopicsKnowledgeCheck: OwlOptions = {
     loop: true,
@@ -47,10 +49,10 @@ export class LearnerNewMyCourseComponent implements OnInit {
     },
     nav: false
   }
-  expandcollapse = true;
 
   constructor() { 
   }
+  
   @HostListener('window:resize', ['$event'])
 
   ngOnInit() {
@@ -63,12 +65,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
 
   expandtoggle() {
     this.expandcollapse = !this.expandcollapse;
-  }
-  expand() {
-    this.expandcollapse = false;
-  }
-  collapse() {
-    this.expandcollapse = true;
   }
 
   showText() {
