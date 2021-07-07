@@ -60,6 +60,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.lxp-Calendar_Todo:before {
+  content: "\e952";
+}
+.lxp-Timer_Outlined:before {
+  content: "\e953";
+}
+.lxp-Todo_task:before {
+  content: "\e954";
+}
 .lxp-Bell:before {
   content: "\e930";
 }
