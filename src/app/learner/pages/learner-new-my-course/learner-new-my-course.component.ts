@@ -1,11 +1,20 @@
 import { Component, OnInit, HostListener } from "@angular/core";
-import { FormControl } from '@angular/forms';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { AUTO_STYLE, animate, state, style, transition, trigger } from '@angular/animations';
 
+const DEFAULT_DURATION = 300;
 @Component({
   selector: "app-learner-new-my-course",
   templateUrl: "./learner-new-my-course.component.html",
-  styleUrls: ["./learner-new-my-course.component.scss"]
+  styleUrls: ["./learner-new-my-course.component.scss"],
+  animations: [
+    trigger('collapse', [
+      state('false', style({ height: AUTO_STYLE, visibility: AUTO_STYLE })),
+      state('true', style({ height: '0', visibility: 'hidden' })),
+      transition('false => true', animate(DEFAULT_DURATION + 'ms ease-in')),
+      transition('true => false', animate(DEFAULT_DURATION + 'ms ease-out'))
+    ])
+  ]
 })
 
 export class LearnerNewMyCourseComponent implements OnInit {
@@ -38,6 +47,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     },
     nav: false
   }
+  expandcollapse = true;
 
   constructor() { 
   }
@@ -49,7 +59,16 @@ export class LearnerNewMyCourseComponent implements OnInit {
 
   onResize(event) {
     this.innerWidth = window.innerWidth;
-    console.log(innerWidth, 'innerWidth')
+  }
+
+  expandtoggle() {
+    this.expandcollapse = !this.expandcollapse;
+  }
+  expand() {
+    this.expandcollapse = false;
+  }
+  collapse() {
+    this.expandcollapse = true;
   }
 
   showText() {

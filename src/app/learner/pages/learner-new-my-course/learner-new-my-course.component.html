@@ -11,28 +11,55 @@
                     </span>
                 </div>
                 <div class="sideTabsStrip">
-                    <div class="active_tabItem">
+                    <div class="activeTabItem">
                         To Do
                     </div>
                 </div>
-                <div class="listItem">
-                    <div _ngcontent-cun-c2="" class="dateFlag">
+                <div class="listItem d-flex justify-content-between">
+                    <div class="dateFlag">
                         <div class="dateDiv">
-                            <span class="flag_day">12</span> <br>
-                            <span class="flag_month">JUNE</span>
+                            <span class="flagDay">12</span>
+                            <span class="flagMonth">JUNE</span>
                         </div>
                     </div>
                     <div class="detailData">
-                        <span class="badgedata">Self Learning</span>
-                        <div class="text-dark titleFontSize">Applied Industrial IoT</div>
-                        <div><span class="detail_key">Module:</span> <span class="detail_val">Introduction to IoT</span></div>
-                        <div><span class="detail_key">Topic:</span> <span class="detail_val">Information Technology and operational cond</span></div>
-                    </div>
-                    <div class="timeData">
-                      <em class="lxp-Clock"></em>  10:47 PM
+                        <div class="badgedata d-flex justify-content-between">
+                            <p class="d-flex justify-content-center align-items-center">Self Learning</p> <span><em class="lxp-Clock"></em>10:47 PM</span></div>
+                        <div class="titleFontSize">Applied Industrial IoT</div>
+                        <div class="type">Module: <span>Introduction to IoT</span></div>
+                        <div class="topic">Topic: <span>Information Technology and operational cond</span></div>
                     </div>
                 </div>
-               
+                <div class="listItem d-flex justify-content-between">
+                    <div class="dateFlag">
+                        <div class="dateDiv">
+                            <span class="flagDay">12</span>
+                            <span class="flagMonth">JUNE</span>
+                        </div>
+                    </div>
+                    <div class="detailData">
+                        <div class="badgedata d-flex justify-content-between">
+                            <p class="d-flex justify-content-center align-items-center">Self Learning</p> <span><em class="lxp-Clock"></em>10:47 PM</span></div>
+                        <div class="titleFontSize">Applied Industrial IoT</div>
+                        <div class="type">Module: <span>Introduction to IoT</span></div>
+                        <div class="topic">Topic: <span>Information Technology and operational cond</span></div>
+                    </div>
+                </div>
+                <div class="listItem d-flex justify-content-between">
+                    <div class="dateFlag">
+                        <div class="dateDiv">
+                            <span class="flagDay">12</span>
+                            <span class="flagMonth">JUNE</span>
+                        </div>
+                    </div>
+                    <div class="detailData">
+                        <div class="badgedata d-flex justify-content-between">
+                            <p class="d-flex justify-content-center align-items-center">Self Learning</p> <span><em class="lxp-Clock"></em>10:47 PM</span></div>
+                        <div class="titleFontSize">Applied Industrial IoT</div>
+                        <div class="type">Module: <span>Introduction to IoT</span></div>
+                        <div class="topic">Topic: <span>Information Technology and operational cond</span></div>
+                    </div>
+                </div>
             </mat-drawer>
 
             <div class="sideNavContent">
@@ -46,60 +73,62 @@
                             <span class="white"><em class="lxp-Right"></em></span>
                             <span class="white"><em class="lxp-Right"></em></span>
                         </div>
-                        <span class="expand">Expand <em class="lxp-DownArrow"></em></span>
+                        <span class="expand" (click)="expandtoggle()">Expand <em class="lxp-DownArrow"></em></span>
                     </div>
                 </div>
 
                 <!-- Top 3 Things Contents -->
-                <div class="top3Things d-flex justify-content-between" [ngClass]="show ? '': 'noPadding'">
-                    <div class="box">
-                        <div>
-                            <h6>Learn from where your left</h6>
-                            <span class="type">MODULE:</span>
-                            <h2>Codes for reinforced and Pre-stress…</h2>
-                        </div>
-                        <div class="upcoming d-flex justify-content-between">
-                            <div>
-                                <button class="d-flex align-items-center"><em class="lxp-Play"></em> <span>4m
-                                        8s</span></button>
+                <div [@collapse]="expandcollapse">
+                        <div class="top3Things d-flex justify-content-between" [ngClass]="show ? '': 'noPadding'">
+                            <div class="box">
+                                <div>
+                                    <h6>Learn from where your left</h6>
+                                    <span class="type">MODULE:</span>
+                                    <h2>Codes for reinforced and Pre-stress…</h2>
+                                </div>
+                                <div class="upcoming d-flex justify-content-between">
+                                    <div>
+                                        <button class="d-flex align-items-center"><em class="lxp-Play"></em> <span>4m
+                                                8s</span></button>
+                                    </div>
+                                    <div>
+                                        <span class="icons"><em class="lxp-Timer"></em></span>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <span class="icons"><em class="lxp-Timer"></em></span>
+                            <div class="box">
+                                <div>
+                                    <h6>Learn from where your left</h6>
+                                    <span class="type">MODULE:</span>
+                                    <h2>Codes for reinforced and Pre-stress…</h2>
+                                    <div class="dueDate">Due date: 23 June 2021 12:00 AM</div>
+                                </div>
+                                <div class="upcoming d-flex justify-content-between">
+                                    <div>
+                                        <button class="d-flex align-items-center"><span>GO</span></button>
+                                    </div>
+                                    <div>
+                                        <span class="icons"><em class="lxp-Assignments"></em></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box">
+                                <div>
+                                    <h6>Learn from where your left</h6>
+                                    <span class="type">MODULE:</span>
+                                    <h2>Codes for reinforced and Pre-stress…</h2>
+                                    <div class="dueDate">Due date: 23 June 2021 12:00 AM</div>
+                                </div>
+                                <div class="upcoming d-flex justify-content-between">
+                                    <div>
+                                        <button class="d-flex align-items-center"><span>Join</span></button>
+                                    </div>
+                                    <div>
+                                        <span class="icons"><em class="lxp-JoinIcon"></em></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="box">
-                        <div>
-                            <h6>Learn from where your left</h6>
-                            <span class="type">MODULE:</span>
-                            <h2>Codes for reinforced and Pre-stress…</h2>
-                            <div class="dueDate">Due date: 23 June 2021 12:00 AM</div>
-                        </div>
-                        <div class="upcoming d-flex justify-content-between">
-                            <div>
-                                <button class="d-flex align-items-center"><span>GO</span></button>
-                            </div>
-                            <div>
-                                <span class="icons"><em class="lxp-Assignments"></em></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div>
-                            <h6>Learn from where your left</h6>
-                            <span class="type">MODULE:</span>
-                            <h2>Codes for reinforced and Pre-stress…</h2>
-                            <div class="dueDate">Due date: 23 June 2021 12:00 AM</div>
-                        </div>
-                        <div class="upcoming d-flex justify-content-between">
-                            <div>
-                                <button class="d-flex align-items-center"><span>Join</span></button>
-                            </div>
-                            <div>
-                                <span class="icons"><em class="lxp-JoinIcon"></em></span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- My Course -->
@@ -274,10 +303,7 @@
                                                 <em *ngIf="isReadMore" class="lxp-DownArrow"></em>
                                             </button>
                                             <div [ngClass]="isReadMore ? '' : 'showText'">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                                    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                    aliquip ex ea commodo consequat.</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                                                 <div class="type d-flex justify-content-start">
                                                     <span>Self paced learning - 16 hrs</span>
                                                     <span>Instructor led session - upto 14</span>
@@ -315,16 +341,7 @@
                                                     <p>Course Progression</p>
                                                 </div>
                                                 <div class="percentage">
-                                                    <circle-progress [percent]="67" [clockwise]='true' [radius]="20"
-                                                        [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'"
-                                                        [outerStrokeGradientStopColor]="'#53a9ff'"
-                                                        [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3"
-                                                        [innerStrokeWidth]="3" [space]="-3" [titleFontSize]="12"
-                                                        [unitsFontSize]="12" [subtitleFontSize]="8"
-                                                        [titleColor]="'#666666'" [subtitleColor]="'#333333'"
-                                                        [startFromZero]="false" [responsive]="true"
-                                                        [showSubtitle]="true" [subtitle]="'Active'" [animation]="true"
-                                                        [animationDuration]="10"></circle-progress>
+                                                    <circle-progress [percent]="67" [clockwise]='true' [radius]="20" [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'" [outerStrokeGradientStopColor]="'#53a9ff'" [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3" [innerStrokeWidth]="3" [space]="-3" [titleFontSize]="12" [unitsFontSize]="12" [subtitleFontSize]="8" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [startFromZero]="false" [responsive]="true" [showSubtitle]="true" [subtitle]="'Active'" [animation]="true" [animationDuration]="10"></circle-progress>
                                                 </div>
                                             </div>
                                         </div>
