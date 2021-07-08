@@ -4,7 +4,7 @@
   z-index: 4;
 }
 .imgContainer {
-  width: 115px !important;
+  width: 175px !important;
 }
 .mat-icon-button {
   margin-right: 10px;
@@ -99,7 +99,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 100%;
+  width: calc(100% - 175px);
 }
 .hearder-logo {
   height: 26px;
@@ -296,6 +296,7 @@
     display: inline-block;
     animation-name: textHide;
     animation-duration: 0.2s;
+    animation-delay: 0.2s;
     animation-fill-mode: backwards;
   }
 }

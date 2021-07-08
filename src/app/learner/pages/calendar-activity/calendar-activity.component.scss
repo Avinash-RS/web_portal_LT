@@ -3,7 +3,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: calc(91.6vh - 55px);
+    height: 100%;
+    // height: calc(91.6vh - 55px);
 
     @media screen and (max-width:768px) {
         flex-direction: column; 
@@ -152,17 +153,17 @@ section {
                 }
                 div.notifi {
                     position: relative;
-                    padding-left: 1.2em;
+                    padding-left: 1em;
 
                     &:before {
                         content: ' ';
-                        width: 10px;
-                        height: 10px;
+                        width: 8px;
+                        height: 8px;
                         background-color: transparent;
                         position: absolute;
                         border-radius: 10px;
                         left: 0;
-                        top: 0.3em;
+                        top: 5px;
                     }
                 }
                 div.notifi.activity:before { 
@@ -184,7 +185,6 @@ section {
             display: flex;
             justify-content: center;
             align-items: center;
-
             @media screen and (max-width:425px) { 
                 position: absolute;
                 top: 0.7em;
@@ -198,6 +198,9 @@ section {
                 border-radius: 25px;
                 color: #fff;
                 font-size: 0.6em;
+                &::before {
+                    color: #fff;
+                }
             }
         }
     }
@@ -290,20 +293,25 @@ section {
     .activInfo {
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: flex-start;
         color: #9c9c9c !important;
         font-size: 0.9em;
         padding: 1em 0;
         span {
             position: relative;
             padding-left: 1.1em;
+            font-size: 12px;
+            color: #666666;
+            display: inline-block;
+            margin-right: 10px;
             &:before {
                 content:'';
-                width: 10px;
-                height: 10px;
+                width: 7px;
+                height: 7px;
                 background-color: transparent;
                 position: absolute;
-                top: 5px;
+                top: 50%;
+                transform: translateY(-50%);
                 left: 0;
                 border-radius: 5px; 
             }
@@ -319,8 +327,8 @@ section {
         }
     }
     .cal-month-view .cal-event {
-        width: 8px;
-        height: 8px;
+        width: 6px;
+        height: 6px;
     }
     .cal-month-view .cal-day-badge {
         margin-top: 8px;

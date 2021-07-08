@@ -46,7 +46,9 @@ export class CalendarActivityComponent implements OnInit {
   CalendarView = CalendarView;
   viewDate: Date = new Date();
   selectedMonthViewDay: CalendarMonthViewDay;
-
+  activeDayIsOpen;
+  refresh;
+  
   constructor() { }
 
   ngOnInit() {
@@ -89,5 +91,10 @@ export class CalendarActivityComponent implements OnInit {
       draggable: true,
     },
   ]; 
+
+  getAllActivity(event){}
+  monthChange(event){}
+  getLearnerActivity() {}
+  handleEvent() {}
 
 }

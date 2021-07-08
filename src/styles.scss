@@ -986,7 +986,8 @@ mat-header-cell,
   }
 }
 .heightClass {
-  height: 100%;
+  // height: 100%;
+  height: 100vh;
   flex: 1;
 }
 .contentPad{

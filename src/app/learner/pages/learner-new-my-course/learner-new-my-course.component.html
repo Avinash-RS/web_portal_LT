@@ -11,72 +11,101 @@
                     </span>
                 </div>
                 <!-- //////////// -->
-                <div class="prevNext align-self-center">
-                    <div class="btn-group d-flex align-items-center justify-content-center">
-                        <mat-icon mwlCalendarPreviousView [view]="'week'" [(viewDate)]="viewDate" >
-                            <!-- {{'Previous' | translate }} -->keyboard_arrow_left
-                        </mat-icon>
+                <div class="prevNext">
+                    <p>TASKS TO DO</p>
+                    <div class="wrapperTaskToDo d-flex align-items-center justify-content-between">
                         <div class="currentMonth">
-                            <!-- {{'Today' | translate }} -->
-                            <p>{{ viewDate | calendarDate:('month' + 'ViewTitle'):'en' }}</p>
+                            <h3>{{ viewDate | calendarDate:('month' + 'ViewTitle'):'en' }}</h3>
                         </div>
-                        <mat-icon mwlCalendarNextView [view]="'week'" [(viewDate)]="viewDate" >
-                            <!-- {{'Next' | translate }} --> keyboard_arrow_right
-                        </mat-icon>
-                    </div>
-                </div>
-                <div class="weekviewHead">
-                    <mwl-calendar-week-view [weekStartsOn]="1" [viewDate]="viewDate" [events]="events"></mwl-calendar-week-view>
-                </div>
-                <!-- //////////// -->
-                <div class="sideTabsStrip">
-                    <div class="activeTabItem">
-                        To Do
-                    </div>
-                </div>
-                <div class="listItem d-flex justify-content-between">
-                    <div class="dateFlag">
-                        <div class="dateDiv">
-                            <span class="flagDay">12</span>
-                            <span class="flagMonth">JUNE</span>
+                        <div class="arrows">
+                            <span mwlCalendarPreviousView [view]="'week'" [(viewDate)]="viewDate">
+                                <em class="lxp-Rewind_Arrow"></em>
+                            </span>
+                            <span mwlCalendarNextView [view]="'week'" [(viewDate)]="viewDate">
+                                <em class="lxp-Forward_Arrow"></em>
+                            </span>
                         </div>
                     </div>
-                    <div class="detailData">
-                        <div class="badgedata d-flex justify-content-between">
-                            <p class="d-flex justify-content-center align-items-center">Self Learning</p> <span><em class="lxp-Clock"></em>10:47 PM</span></div>
-                        <div class="titleFontSize">Applied Industrial IoT</div>
-                        <div class="type">Module: <span>Introduction to IoT</span></div>
-                        <div class="topic">Topic: <span>Information Technology and operational cond</span></div>
+                    
+                    <div class="weekviewHead">
+                        <mwl-calendar-week-view [weekStartsOn]="1" [viewDate]="viewDate" [events]="events"></mwl-calendar-week-view>
                     </div>
                 </div>
-                <div class="listItem d-flex justify-content-between">
-                    <div class="dateFlag">
-                        <div class="dateDiv">
-                            <span class="flagDay">12</span>
-                            <span class="flagMonth">JUNE</span>
+
+                <div>
+                    <div class="sideTabsStrip">
+                        <div class="activeTabItem">
+                            To Do
                         </div>
                     </div>
-                    <div class="detailData">
-                        <div class="badgedata d-flex justify-content-between">
-                            <p class="d-flex justify-content-center align-items-center">Self Learning</p> <span><em class="lxp-Clock"></em>10:47 PM</span></div>
-                        <div class="titleFontSize">Applied Industrial IoT</div>
-                        <div class="type">Module: <span>Introduction to IoT</span></div>
-                        <div class="topic">Topic: <span>Information Technology and operational cond</span></div>
-                    </div>
-                </div>
-                <div class="listItem d-flex justify-content-between">
-                    <div class="dateFlag">
-                        <div class="dateDiv">
-                            <span class="flagDay">12</span>
-                            <span class="flagMonth">JUNE</span>
+                    <div class="listItem d-flex justify-content-start">
+                        <div class="dateFlag overdue">
+                            <div class="dateDiv">
+                                <span class="flagDay">12</span>
+                                <span class="flagMonth">JUNE</span>
+                            </div>
+                        </div>
+                        <div class="detailData">
+                            <div class="badgedata d-flex justify-content-between">
+                                <p class="d-flex justify-content-center align-items-center">Self Learning</p> <span><em class="lxp-Clock"></em>10:47 PM</span></div>
+                            <div class="titleFontSize">Applied Industrial IoT</div>
+                            <div class="type">Module: <span>Introduction to IoT</span></div>
+                            <div class="topic">Topic: <span>Information Technology and operational cond</span></div>
                         </div>
                     </div>
-                    <div class="detailData">
-                        <div class="badgedata d-flex justify-content-between">
-                            <p class="d-flex justify-content-center align-items-center">Self Learning</p> <span><em class="lxp-Clock"></em>10:47 PM</span></div>
-                        <div class="titleFontSize">Applied Industrial IoT</div>
-                        <div class="type">Module: <span>Introduction to IoT</span></div>
-                        <div class="topic">Topic: <span>Information Technology and operational cond</span></div>
+                    <div class="listItem d-flex justify-content-start">
+                        <div class="dateFlag completed">
+                            <div class="dateDiv">
+                                <span class="flagDay">12</span>
+                                <span class="flagMonth">JUNE</span>
+                            </div>
+                        </div>
+                        <div class="detailData">
+                            <div class="badgedata d-flex justify-content-between">
+                                <p class="d-flex justify-content-center align-items-center">Self Learning</p> <span><em class="lxp-Clock"></em>10:47 PM</span></div>
+                            <div class="titleFontSize">Applied Industrial IoT</div>
+                            <div class="type">Module: <span>Introduction to IoT</span></div>
+                            <div class="topic">Topic: <span>Information Technology and operational cond</span></div>
+                        </div>
+                    </div>
+                    <div class="listItem d-flex justify-content-start">
+                        <div class="dateFlag ongoing">
+                            <div class="dateDiv">
+                                <span class="flagDay">12</span>
+                                <span class="flagMonth">JUNE</span>
+                            </div>
+                        </div>
+                        <div class="detailData">
+                            <div class="badgedata d-flex justify-content-between">
+                                <p class="d-flex justify-content-center align-items-center">Self Learning</p> <span><em class="lxp-Clock"></em>10:47 PM</span></div>
+                            <div class="titleFontSize">Applied Industrial IoT</div>
+                            <div class="type">Module: <span>Introduction to IoT</span></div>
+                            <div class="topic">Topic: <span>Information Technology and operational cond</span></div>
+                        </div>
+                    </div>
+                    <div class="listItem d-flex justify-content-start">
+                        <div class="dateFlag yettoStart">
+                            <div class="dateDiv">
+                                <span class="flagDay">12</span>
+                                <span class="flagMonth">JUNE</span>
+                            </div>
+                        </div>
+                        <div class="detailData">
+                            <div class="badgedata d-flex justify-content-between">
+                                <p class="d-flex justify-content-center align-items-center">Self Learning</p> <span><em class="lxp-Clock"></em>10:47 PM</span></div>
+                            <div class="titleFontSize">Applied Industrial IoT</div>
+                            <div class="type">Module: <span>Introduction to IoT</span></div>
+                            <div class="topic">Topic: <span>Information Technology and operational cond</span></div>
+                        </div>
+                    </div>
+                    <div class="status d-flex justify-content-between">
+                        <div class="d-flex justify-content-start">
+                            <span class="overdue">Overdue</span>
+                            <span class="ongoing">OnGoing</span>
+                            <span class="completed">Completed</span>
+                            <span class="yettoStart">Yet to Start</span>
+                        </div>
+                        <a>View all <em class="lxp-Right_Direction_Arrow"></em></a>
                     </div>
                 </div>
             </mat-drawer>
@@ -114,7 +143,7 @@
                                             8s</span></button>
                                 </div>
                                 <div>
-                                    <span class="icons"><em class="lxp-Timer"></em></span>
+                                    <span class="icons"><em class="lxp-Timer_Outlined"></em></span>
                                 </div>
                             </div>
                         </div>
