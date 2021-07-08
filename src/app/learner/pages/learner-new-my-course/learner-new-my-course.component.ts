@@ -1,6 +1,14 @@
 import { Component, OnInit, HostListener } from "@angular/core";
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AUTO_STYLE, animate, state, style, transition, trigger } from '@angular/animations';
+import { Subject } from "rxjs";
+import {
+  CalendarEvent,
+  CalendarEventTimesChangedEvent,
+  CalendarWeekViewComponent,
+  CalendarUtils,
+  CalendarGetWeekViewArgs,
+} from 'angular-calendar';
 
 const DEFAULT_DURATION = 300;
 @Component({
@@ -22,6 +30,9 @@ export class LearnerNewMyCourseComponent implements OnInit {
   show = true;
   innerWidth: number;
   expandcollapse = true;
+  viewDate: Date = new Date();
+  refresh: Subject<any> = new Subject();
+  events: CalendarEvent[] = [];
 
   //Carousel
   missedTopicsKnowledgeCheck: OwlOptions = {
@@ -49,6 +60,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     },
     nav: false
   }
+  weekDaysdat: any;
 
   constructor() { 
   }

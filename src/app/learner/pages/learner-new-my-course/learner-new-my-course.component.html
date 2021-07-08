@@ -10,6 +10,25 @@
                         <em class="lxp-Right_Arrow"></em>
                     </span>
                 </div>
+                <!-- //////////// -->
+                <div class="prevNext align-self-center">
+                    <div class="btn-group d-flex align-items-center justify-content-center">
+                        <mat-icon mwlCalendarPreviousView [view]="'week'" [(viewDate)]="viewDate" >
+                            <!-- {{'Previous' | translate }} -->keyboard_arrow_left
+                        </mat-icon>
+                        <div class="currentMonth">
+                            <!-- {{'Today' | translate }} -->
+                            <p>{{ viewDate | calendarDate:('month' + 'ViewTitle'):'en' }}</p>
+                        </div>
+                        <mat-icon mwlCalendarNextView [view]="'week'" [(viewDate)]="viewDate" >
+                            <!-- {{'Next' | translate }} --> keyboard_arrow_right
+                        </mat-icon>
+                    </div>
+                </div>
+                <div class="weekviewHead">
+                    <mwl-calendar-week-view [viewDate]="viewDate" [events]="events"></mwl-calendar-week-view>
+                </div>
+                <!-- //////////// -->
                 <div class="sideTabsStrip">
                     <div class="activeTabItem">
                         To Do

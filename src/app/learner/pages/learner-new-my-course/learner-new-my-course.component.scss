@@ -812,3 +812,11 @@
     }
   }
 }
+::ng-deep.weekviewHead{
+  .cal-time-events{
+    display: none !important;
+  }
+  .cal-week-view .cal-day-headers {
+    padding-left: 0px;
+  }
+}
