@@ -3,16 +3,20 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    height: calc(91.6vh - 55px);
 
     @media screen and (max-width:768px) {
-        flex-direction: column;
+        flex-direction: column; 
+    }
+    @media screen and (max-width:1024px)  {
+        height: 100%;
     }
 }
 section {
     background-color: #f0f0f0;
     height: 100%;
     padding: 1.8em 2.5em;
-    width: calc(100% - 350px);
+    width: calc(100% - 400px);
 
     @media screen and (max-width:768px) {
         padding: 1.8em 1.2em;
@@ -210,7 +214,7 @@ section {
 }
 
 ::ng-deep.calendarSlide { 
-    width: 350px;
+    width: 400px;
     background-color: #fff;
     padding: 3em 1em; 
     box-shadow: 0 0 2px 0 #0000006b;
@@ -253,7 +257,7 @@ section {
         font-weight: 400;
         opacity: 0.5;
         margin-top: 0.5em;
-        margin-right: 1em;
+        margin-right: 1.4em;
         float: right;
         margin-bottom: 0.5em;
     }
@@ -313,5 +317,17 @@ section {
                 background-color: #d9e021;
             }
         }
+    }
+    .cal-month-view .cal-event {
+        width: 8px;
+        height: 8px;
+    }
+    .cal-month-view .cal-day-badge {
+        margin-top: 8px;
+        display: none;
+    }
+    .cal-month-view .cal-events {
+        margin-top: 0;
+        justify-content: center;
     }
 }
