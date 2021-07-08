@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from "@angular/core";
+import { Component, OnInit, HostListener, Injectable } from "@angular/core";
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AUTO_STYLE, animate, state, style, transition, trigger } from '@angular/animations';
 import { Subject } from "rxjs";
@@ -8,9 +8,23 @@ import {
   CalendarWeekViewComponent,
   CalendarUtils,
   CalendarGetWeekViewArgs,
+  CalendarDateFormatter,
+  DateFormatterParams,
 } from 'angular-calendar';
+import { formatDate } from "@angular/common";
 
 const DEFAULT_DURATION = 300;
+
+@Injectable()
+export class CustomDateFormatter extends CalendarDateFormatter {
+
+
+ 
+  public weekViewColumnHeader({ date, locale }: DateFormatterParams): string {
+    console.log(formatDate(date, 'EEE', locale))
+    return formatDate(date, 'EEE', locale);
+  } 
+}
 @Component({
   selector: "app-learner-new-my-course",
   templateUrl: "./learner-new-my-course.component.html",
@@ -22,7 +36,13 @@ const DEFAULT_DURATION = 300;
       transition('false => true', animate(DEFAULT_DURATION + 'ms ease-in')),
       transition('true => false', animate(DEFAULT_DURATION + 'ms ease-out'))
     ])
-  ]
+  ],
+  providers: [
+    {
+      provide: CalendarDateFormatter,
+      useClass: CustomDateFormatter,
+    },
+  ],
 })
 
 export class LearnerNewMyCourseComponent implements OnInit {
