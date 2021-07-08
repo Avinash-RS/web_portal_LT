@@ -18,10 +18,11 @@ const DEFAULT_DURATION = 300;
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
 
-
+  weekViewColumnSubHeader({ date, locale, }: DateFormatterParams): string{
+    return formatDate(date, 'dd', locale);
+  }
  
   public weekViewColumnHeader({ date, locale }: DateFormatterParams): string {
-    console.log(formatDate(date, 'EEE', locale))
     return formatDate(date, 'EEE', locale);
   } 
 }
