@@ -34,7 +34,11 @@ export class ToolbarNotificationComponent implements OnInit {
   constructor(public commonservice: CommonServicesService, public Lservice: LearnerServicesService ,
               public router: Router, private elementRef: ElementRef) {
                 const learnerDetail = JSON.parse(localStorage.getItem('UserDetails'));
-                this.userId = learnerDetail.user_id;
+                this.userId = learnerDetail?.user_id;
+                if(!this.userId) {
+                  this.router.navigate(['/Learner/login']);
+                  return;
+                }
                 this.routedSubs = this.router.events.pipe(
                   filter(event => event instanceof NavigationEnd),
                 ).subscribe((e: any) => {
@@ -88,6 +92,8 @@ notificationOpen(data) {
     this.router.navigate(['/Learner/viewAllnotifications']);
   }
   ngOnDestroy(){
-    this.routedSubs.unsubscribe();
+    if(this.routedSubs) {
+      this.routedSubs.unsubscribe();
+    }
   }
 }
