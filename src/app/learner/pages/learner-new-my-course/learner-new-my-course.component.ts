@@ -1,30 +1,32 @@
-import { Component, OnInit, HostListener, Injectable } from "@angular/core";
+import { Component, OnInit, HostListener, Injectable, TemplateRef, ViewChild } from "@angular/core";
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AUTO_STYLE, animate, state, style, transition, trigger } from '@angular/animations';
 import { Subject } from "rxjs";
 import {
   CalendarEvent,
-  CalendarEventTimesChangedEvent,
-  CalendarWeekViewComponent,
-  CalendarUtils,
-  CalendarGetWeekViewArgs,
   CalendarDateFormatter,
   DateFormatterParams,
 } from 'angular-calendar';
+import { CommonServicesService } from '@core/services/common-services.service';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { formatDate } from "@angular/common";
+import { MatDialog } from "@angular/material";
+import { environment } from "@env/environment";
+import { Router } from "@angular/router";
 
 const DEFAULT_DURATION = 300;
 
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
 
-  weekViewColumnSubHeader({ date, locale, }: DateFormatterParams): string{
+  weekViewColumnSubHeader({ date, locale, }: DateFormatterParams): string {
     return formatDate(date, 'dd', locale);
   }
- 
+
   public weekViewColumnHeader({ date, locale }: DateFormatterParams): string {
     return formatDate(date, 'EEE', locale);
-  } 
+  }
 }
 @Component({
   selector: "app-learner-new-my-course",
@@ -54,7 +56,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
   viewDate: Date = new Date();
   refresh: Subject<any> = new Subject();
   events: CalendarEvent[] = [];
-
+  runnablePlatforms = ['MacIntel', 'Win32', 'Linux x86_64'];
+  jobroleCategoryId = 'All'
   //Carousel
   missedTopicsKnowledgeCheck: OwlOptions = {
     loop: true,
@@ -82,14 +85,82 @@ export class LearnerNewMyCourseComponent implements OnInit {
     nav: false
   }
   weekDaysdat: any;
+  userDetailes: any;
+  @ViewChild('infoPopup') infoPopWindow: TemplateRef<any>;
+  availableCource: any;
+  screenWidth: number;
+  keyboardUp: boolean = true;
+  disableDropdown: any;
+  selectedIndex: number = 0;
+  componentCssClass: string;
+  isMobile: boolean = false;
+  onGoingCourseCount: number;
+  completedCourseCount: number;
+  allCourseCount: number;
+  courseDetailsList: any[];
+  enrolledCourses: any;
+  blobKey = environment.blobKey;
 
-  constructor() { 
+  constructor(private dialog: MatDialog, private router: Router,
+    public learnerService: LearnerServicesService,
+    private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
+
+      this.userDetailes = this.gs.checkLogout();
+      if(this.userDetailes){
+        this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
+        }
   }
-  
+
   @HostListener('window:resize', ['$event'])
 
   ngOnInit() {
     this.innerWidth = window.innerWidth;
+    let showAppBanner = localStorage.getItem('appBanner');
+    if (!showAppBanner) {
+      this.openInfoPopup();
+    }
+    if (this.userDetailes) {
+      this.insidengOnInit();
+    }
+    // this.getCountForCategories(); sigin performance fix by maha
+    if (!this.runnablePlatforms.includes(navigator.platform)) {
+      this.isMobile = true;
+    }
+
+    // this.triggerAvailablecourse = setInterval(() => {
+    //   this.getCountForCategories();
+    // }, 500);
+    // this.getMyJobRole();
+  }
+  insidengOnInit() {
+    this.CommonServices.openAvailCourcePopup.subscribe((data: any) => {
+      this.availableCource = data;
+    });
+    if (this.screenWidth < 800) {
+      this.keyboardUp = false;
+    }
+    this.CommonServices.openNotification.subscribe((data: any) => {
+      this.disableDropdown = data;
+    });
+    this.selectedIndex = 0;
+    this.gs.theme.subscribe(value =>
+      this.componentCssClass = value
+    );
+
+  }
+
+  openInfoPopup() {
+    this.dialog.open(this.infoPopWindow, {
+      width: '55%,',
+      panelClass: 'dialogContainer',
+      closeOnNavigation: true,
+      disableClose: true,
+
+    });
+  }
+  closeBannerPopup() {
+    this.dialog.closeAll()
+    localStorage.setItem('appBanner', 'false')
   }
 
   onResize(event) {
@@ -105,4 +176,96 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
 
   info = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+
+
+
+    // NEW API T0 GET DASHBOARD DATA
+
+    getDashboardMyCourse(userId, userObjId) {
+      this.courseDetailsList = [];
+      let requestType = 'ongoing';
+      if (this.selectedIndex === 0) {
+        requestType = 'ongoing';
+      } else if (this.selectedIndex === 1) {
+        requestType = 'completed';
+      } else if (this.selectedIndex === 2) {
+        requestType = 'all';
+      }
+      let jobRoleId = this.jobroleCategoryId;
+      let jobRoleIdSEQ = this.jobroleCategoryId;
+      //condition for vocational & course Sequence
+      if (this.userDetailes.org_type === 'vocational' && this.jobroleCategoryId === 'All') {
+        jobRoleIdSEQ = 'all';
+      } else if (this.userDetailes.org_type !== 'vocational') {
+        jobRoleIdSEQ = null;
+      } else {
+        jobRoleIdSEQ = this.jobroleCategoryId;
+      }
+      if (this.jobroleCategoryId === 'All') { jobRoleId = null; }
+      this.learnerService.get_batchwise_learner_dashboard_data(userId, requestType, jobRoleIdSEQ).subscribe((BcourseData: any) => {
+        BcourseData.data.get_batchwise_learner_dashboard_data.message.forEach(elem => {
+          elem.isBatchCourse = true;
+          if (this.isMobile) {
+            elem.progresslistExp = true;
+            elem.courseInfoExp = true;
+          }
+        });
+        const tmpBcourseDetail = BcourseData.data.get_batchwise_learner_dashboard_data.message;
+        this.courseDetailsList = tmpBcourseDetail && tmpBcourseDetail !== null ? tmpBcourseDetail : [];
+        // this.courseDetailsList = [];
+        this.learnerService.getLearnerDashboard(userId, userObjId, 'undefined', requestType, 'enrolment').subscribe((EcourseData: any) => {
+          const EcourseDetail = EcourseData.data.get_learner_dashboard.message.enrolled_course_details;
+          this.enrolledCourses = EcourseDetail && EcourseDetail !== null ? EcourseDetail : [];
+          this.enrolledCourses.forEach(elem => {
+            elem.isBatchCourse = false;
+            if (this.isMobile) {
+              elem.progresslistExp = true;
+              elem.courseInfoExp = true;
+            }
+          });
+          this.courseDetailsList.push(...this.enrolledCourses);
+  
+          
+        });
+      });
+      // Course batch count reset
+      // this.onGoingCourseCount = 0;
+      // this.completedCourseCount = 0;
+      // this.allCourseCount = 0;
+      this.learnerService.get_learner_dashboard_count(userId, userObjId, jobRoleId).subscribe((result: any) => {
+        this.onGoingCourseCount = result.data.get_learner_dashboard_count.message.ongoing_count;
+        this.completedCourseCount = result.data.get_learner_dashboard_count.message.completed_count;
+        this.allCourseCount = result.data.get_learner_dashboard_count.message.all_count;
+      });
+    }
+
+    courseTabChange(event, userId, userObjId) {
+      this.getDashboardMyCourse(userId, userObjId);
+    }
+
+
+    gotoDesc(c) {
+      const detail = {
+        id: c.course_id,
+        wishlist: c.wishlisted || false,
+        wishlist_id: c.wishlist_id || null,
+        enrollment_status: null,
+        course_name: c.course_name,
+        course_status: c.course_status,
+        batch_id: c.batchid,
+        batchEndTime: c.batch_end_date_Timer,
+        // persentage : c.coursePlayerStatus.course_percentage || 0
+      };
+      // if (this.screenWidth < 800) {
+      //   this.show = true;
+      // } else {
+      localStorage.setItem('currentBatchEndDate',c.batch_end_date_Timer)
+      localStorage.setItem('Courseid', c.course_id);
+      localStorage.setItem('persentage', c && c.coursePlayerStatus && c.coursePlayerStatus.course_percentage ? c.coursePlayerStatus.course_percentage : '');
+      localStorage.setItem('currentBatchId', c.batchid);
+      this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+  
+      // this.show = false;
+      // }
+    }
 }

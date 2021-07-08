@@ -643,7 +643,7 @@
         background-color: #c02222;
         left: 50%;
         transform: translateX(-50%);
-        top: 100%;
+        bottom: -10px;
         border-radius: 50%;
       }
     }
@@ -820,4 +820,25 @@
   .cal-week-view .cal-day-headers {
     padding-left: 0px;
   }
+}
+
+////INFO BANNER POPUP
+::ng-deep .dialogContainer {
+  overflow-y: hidden !important;
+  width: 55% !important;
+  //max-height: 85% !important;
+  margin: auto;
+}
+.infocontent{
+  position: relative
+}
+.infoClose{
+  cursor: pointer;
+  position:absolute;
+  right: 10px;
+  top:10px;
+}
+.infoimg{
+  width: 100%;
+  height: auto;
 }
