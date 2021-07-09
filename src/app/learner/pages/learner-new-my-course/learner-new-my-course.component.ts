@@ -310,6 +310,18 @@ export class LearnerNewMyCourseComponent implements OnInit {
 
     this.router.navigateByUrl('/Learner/askQuestions', { state: { detail } });
   }
+// ACTIVITY NAVIGATION 
+  gotoSubmissionDetails(c) {
+    localStorage.setItem('Courseid', c.course_id);
+    const detail = {
+      id: c.course_id,
+      name: c.course_name,
+      tableType: 'submission',
+    };
+    localStorage.setItem('course', btoa(JSON.stringify(detail)));
+    this.router.navigateByUrl('/Learner/activitycenterhomescreen/activitycenter', { state: { detail } });
+  }
+
   getLearnerActivity(selectedDate) {
     const dateValue = moment(selectedDate).format('YYYY-MM-DD');
     const empty = undefined;
