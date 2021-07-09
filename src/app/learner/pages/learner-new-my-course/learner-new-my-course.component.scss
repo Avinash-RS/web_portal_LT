@@ -847,6 +847,40 @@
             margin-right: 3px;
           }
         }
+        .status {
+          padding: 0;
+          span {
+          font-size: 12px;
+          color: #808080;
+            em {
+              width: 7px;
+              height: 7px;
+              display: inline-block;
+              margin-right: 4px;
+              border-radius: 50%;
+            }
+            &.yettoStart {
+              em {
+                background-color: #B3B3B3;
+              }
+            }
+            &.ongoing {
+              em {
+                background-color: #FFA04E;
+              }
+            }
+            &.completed {
+              em {
+                background-color: #75D883;
+              }
+            }
+            &.overdue {
+              em {
+                background-color: #c02222;
+              }
+            }
+          }
+        }
       }
       .titleFontSize {
         font-size: 12px;

@@ -49,9 +49,14 @@
                             <div class="detailData">
                                 <div class="badgedata d-flex justify-content-between">
                                     <p class="d-flex justify-content-center align-items-center">{{data.activity_details.activitytype}}</p>
+                                    <div class="status">
+                                        <span class="ongoing" *ngIf="data.status == 'On going'"><em></em>{{'Ongoing' | translate }}</span>
+                                        <span class="yettoStart" *ngIf="data.status == 'Up Coming'"><em></em>{{'Upcoming' | translate }}</span>
+                                        <span class="completed" *ngIf="data.status == 'Completed'"><em></em>{{'Completed' | translate }}</span>
+                                    </div>
                                 </div>
                                 <div class="titleFontSize">{{data.activity_details.coursename}}</div>
-                                <div class="type">Module: <span>Introduction to IoT</span></div>
+                                <div class="type">Module: <span>{{data.activity_details.modulename}}</span></div>
                                 <div class="topic">Topic: <span>{{data.activity_details.topicname}}</span></div>
                                 <div class="date">Date: {{data.activity_details.startdate | date :'d/M/yy h:mm a'}} - {{data.activity_details.enddate | date :'d/M/yy h:mm a'}}</div>
                             </div>
@@ -79,36 +84,20 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- <div class="listItem d-flex justify-content-start">
-                        <div class="dateFlag completed">
-                            <div class="dateDiv">
-                                <span class="flagDay">12</span>
-                                <span class="flagMonth">JUNE</span>
-                            </div>
-                        </div>
-                        <div class="detailData">
-                            <div class="badgedata d-flex justify-content-between">
-                                <p class="d-flex justify-content-center align-items-center">Self Learning</p> <span><em class="lxp-Clock"></em>10:47 PM</span></div>
-                            <div class="titleFontSize">Applied Industrial IoT</div>
-                            <div class="type">Module: <span>Introduction to IoT</span></div>
-                            <div class="topic">Topic: <span>Information Technology and operational cond</span></div>
-                        </div>
-                    </div> -->
                     <ng-container *ngIf="noActivity">
                         <div class="searchNoResults">
                             You have no activities at this moment!
                          </div>
                     </ng-container>
-                    <div class="status d-flex justify-content-between">
+                    <!-- <div class="status d-flex justify-content-between">
                         <div class="d-flex justify-content-start">
                             <span class="overdue">Overdue</span>
                             <span class="ongoing">OnGoing</span>
                             <span class="completed">Completed</span>
                             <span class="yettoStart">Yet to Start</span>
                         </div>
-                        <!-- <a>View all <em class="lxp-Right_Direction_Arrow"></em></a> -->
-                    </div>
+                        <a>View all <em class="lxp-Right_Direction_Arrow"></em></a>
+                    </div> -->
                 </div>
             </mat-drawer>
 
