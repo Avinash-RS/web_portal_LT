@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener, Injectable, TemplateRef, ViewChild } f
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AUTO_STYLE, animate, state, style, transition, trigger } from '@angular/animations';
 import { Subject } from "rxjs";
+import * as moment from 'moment';
 import {
   CalendarEvent,
   CalendarDateFormatter,
@@ -57,7 +58,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
   refresh: Subject<any> = new Subject();
   events: CalendarEvent[] = [];
   runnablePlatforms = ['MacIntel', 'Win32', 'Linux x86_64'];
-  jobroleCategoryId = 'All'
+  jobroleCategoryId = 'All';
+  showSkeleton = false;
   //Carousel
   missedTopicsKnowledgeCheck: OwlOptions = {
     loop: true,
@@ -100,6 +102,17 @@ export class LearnerNewMyCourseComponent implements OnInit {
   courseDetailsList: any[];
   enrolledCourses: any;
   blobKey = environment.blobKey;
+  public UserDetails: any;
+  public selectedDate: any;
+  userId: any;
+  sortValue = 'All';
+  filterValue = 'All';
+  showErrorCard: boolean;
+  learnerActivityList: any;
+  learnerActivitycontiner: any;
+  errorMessage: any;
+  dayMonth: any;
+  noActivity: boolean;
 
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
@@ -126,7 +139,10 @@ export class LearnerNewMyCourseComponent implements OnInit {
     if (!this.runnablePlatforms.includes(navigator.platform)) {
       this.isMobile = true;
     }
-
+    this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
+    this.userId = this.UserDetails.user_id;
+    this.selectedDate = moment().format();
+    this.getLearnerActivity(this.selectedDate);
     // this.triggerAvailablecourse = setInterval(() => {
     //   this.getCountForCategories();
     // }, 500);
@@ -267,5 +283,33 @@ export class LearnerNewMyCourseComponent implements OnInit {
   
       // this.show = false;
       // }
+    }
+
+    getLearnerActivity(selectedDate) {
+      const dateValue = moment(selectedDate).format('YYYY-MM-DD');
+      const empty = undefined;
+      this.learnerActivityList = [];
+      this.showSkeleton = true;
+      this.learnerService.getReadLeanerActivity(this.userId, dateValue, empty, "", "", 'day').subscribe((res: any) => {
+        this.dayMonth = selectedDate;
+          if (res.data?.get_read_learner_activity?.message.length > 0) {
+            this.noActivity = false;
+            this.showSkeleton = false;
+            this.showErrorCard = false;
+            this.learnerActivityList = res.data?.get_read_learner_activity?.message;
+            this.learnerActivityList.sort((a, b) => {
+              return new Date(a.activity_details.startdate).getTime() - new Date(b.activity_details.startdate).getTime();
+              
+            });
+          } else {
+            this.noActivity = true;
+            this.showSkeleton = false;
+            this.errorMessage = res.data?.get_read_learner_activity?.error_msg;
+            this.showErrorCard = true;
+            this.learnerActivityList = [];
+          }
+        },
+        err => {}
+      );
     }
 }
