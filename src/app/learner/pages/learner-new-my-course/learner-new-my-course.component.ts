@@ -243,7 +243,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
       this.getDashboardMyCourse(userId, userObjId);
     }
 
-
+//PLAYER PAGE NAVIGATION
     gotoDesc(c) {
       const detail = {
         id: c.course_id,
@@ -267,5 +267,31 @@ export class LearnerNewMyCourseComponent implements OnInit {
   
       // this.show = false;
       // }
+    }
+//INSTRUCTOR LED PAGE NAVIGATION
+    goInstructorLed(c) {
+      localStorage.setItem('Courseid', c.course_id);
+      const detail = {
+        id: c.course_id,
+        name: c.course_name
+      };
+      localStorage.setItem('course', btoa(JSON.stringify(detail)));
+      // this.router.navigateByUrl('/Learner/instructorLed', { state: { detail } });
+      this.router.navigate(['/Learner/instructorLed'], { queryParams: detail }); // ['/booking'],{queryParams: {Id :id}}
+    }
+//ASK A QUESTION
+    gotoAskQuestions(c){
+      const detail = {
+        course_name: c.course_name,
+        course_id: c.course_id,
+        batch_id: c.batchid,
+        batchEndTime: c.batch_end_date_Timer,
+      }
+      localStorage.setItem('Courseid', c.course_id);
+      localStorage.setItem('currentBatchId', c.batchid);
+      localStorage.setItem('CourseName', c.course_name);
+      localStorage.setItem('currentBatchEndDate',c.batch_end_date_Timer)
+  
+      this.router.navigateByUrl('/Learner/askQuestions', { state: { detail } });
     }
 }

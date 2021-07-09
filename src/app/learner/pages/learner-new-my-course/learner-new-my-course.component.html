@@ -225,15 +225,15 @@
                                         </div>
                                         <div class="actionItems d-flex justify-content-between">
                                             <div class="viltActivitiesQA d-flex justify-content-start">
-                                                <div class="icons">
+                                                <div class="icons" (click)="goInstructorLed(item)">
                                                     <span><em class="lxp-VILT"></em></span>
                                                     <p>Virtual Instructor <br />Led Session</p>
                                                 </div>
-                                                <div class="icons">
+                                                <div class="icons" (click)="gotoSubmissionDetails(item)">
                                                     <span><em class="lxp-Activities_New"></em></span>
                                                     <p>Activities</p>
                                                 </div>
-                                                <div class="icons">
+                                                <div class="icons" (click)="gotoAskQuestions(item)">
                                                     <span><em class="lxp-QA"></em></span>
                                                     <p>Q&A</p>
                                                 </div>

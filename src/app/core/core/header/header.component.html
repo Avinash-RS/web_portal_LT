@@ -1,7 +1,7 @@
 
 
 <mat-toolbar color="primary" class="mat-elevation-z4 bg-dark">
-  <div class="burgerspace">
+  <div class="burgerspace" *ngIf="!hideHeaderMenu">
     <em [ngClass]="!expandTxt?'lxp-Nav_Hamburger':'lxp-Close'" (click)="expandTxt=!expandTxt"></em>
   </div>
   <div class="imgContainer">
@@ -110,7 +110,7 @@
     </button>
   </mat-menu>
 </mat-toolbar>
-<div class="sideNavStrip" routerLink="/Learner/MyCourse" [ngClass]="expandTxt?'navClose':'navOpen'" >
+<div class="sideNavStrip" routerLink="/Learner/MyCourse" [ngClass]="expandTxt?'navClose':'navOpen'" *ngIf="!hideHeaderMenu">
   <div class="stripItem" [ngClass]="activeUrl === '/Learner/MyCourse' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
     <div class="icoBox">
       <em class="lxp-SelfPaced "></em>
