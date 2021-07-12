@@ -705,15 +705,6 @@ getMessage(): Observable<any> {
       }
     });
   }
-  getAssignmentmoduleData(userId,courseid, ) {
-    return this.Apollo.query({
-      query: getAssignmentmoduleData,
-      variables: {
-        user_id: userId,
-        courseid,
-      }
-    });
-  }
 
   playerModuleAndTopic(contentID, userId) {
     return this.Apollo.query({
@@ -920,23 +911,40 @@ getMessage(): Observable<any> {
   }
 
 
-
-getprojectActivityData(userId, courseId) {
+  getAssignmentmoduleData(userId,courseid,pagination,page,noofItems) {
+    return this.Apollo.query({
+      query: getAssignmentmoduleData,
+      variables: {
+        user_id: userId,
+        courseid,
+        page,
+        pagination,
+        noofItems
+      }
+    });
+  }
+getprojectActivityData(userId, courseId,pagination,page,noofItems) {
   return this.Apollo.query({
     query: getprojectActivityData,
     variables: {
       userId,
-      courseId
+      courseId,
+      pagination,
+      page,
+      noofItems
     }
   });
 }
 // get perform activity details
-  getperformActivityData(userId , courseId) {
+  getperformActivityData(userId , courseId,pagination,page,noofItems) {
     return this.Apollo.query({
       query: getperformActivityData,
       variables: {
         userId,
-        courseId
+        courseId,
+        pagination,
+        page,
+        noofItems
       }
     });
   }

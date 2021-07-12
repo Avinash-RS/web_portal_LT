@@ -24,7 +24,9 @@ export class AssignmentComponent implements OnInit {
   courseName: any;
   assFile: File;
   docpath: any = null;
-
+  pagination = false;
+  page = 0;
+  noofItems = 0;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               public route: Router, public wcaservice: WcaService,
               private toastr: ToastrService, private dialog: MatDialog) {
@@ -58,7 +60,7 @@ export class AssignmentComponent implements OnInit {
   getAssignmentmoduleData() {
     this.Lservice.getAssignmentmoduleData(
       this.courseid,
-      this.userDetail.user_id
+      this.userDetail.user_id,this.pagination,this.page,this.noofItems
     ).subscribe((data: any) => {
       if (data.data.getAssignmentmoduleData.success) {
         // this.assignmentMessage = true;

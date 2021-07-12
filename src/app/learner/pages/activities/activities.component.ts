@@ -173,6 +173,9 @@ export class ActivitiesComponent implements OnInit {
   ongoingPerformTask;
   ongoingProjectTask;
   isDownloadLoader;
+  pagination = false;
+  page = 0;
+  noofItems = 0;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
     private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
     public route: Router, public datePipe: DatePipe, private ngxLoader: NgxUiLoaderService) {
@@ -406,7 +409,7 @@ export class ActivitiesComponent implements OnInit {
 
   // getperformActivityData
   getAssignmentmoduleData() {
-    this.Lservice.getAssignmentmoduleData(this.userDetail.user_id,this.courseid).subscribe((data: any) => {
+    this.Lservice.getAssignmentmoduleData(this.userDetail.user_id,this.courseid,this.pagination,this.page,this.noofItems).subscribe((data: any) => {
       if (data.data.getAssignmentmoduleData.success) {
        this.assignmentContent = data?.data?.getAssignmentmoduleData?.data;
        this.assignmentpreContent = data?.data?.getAssignmentmoduleData
@@ -569,7 +572,7 @@ export class ActivitiesComponent implements OnInit {
 
   getprojectActivityData() {
     
-    this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
+    this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid,this.pagination,this.page,this.noofItems).subscribe((data: any) => {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
         this.projectDetails = data.data.getprojectActivityData.data;
 
@@ -630,7 +633,7 @@ export class ActivitiesComponent implements OnInit {
 
   getperformActivityData() {
     this.Lservice.getperformActivityData(
-      this.userDetail.user_id, this.courseid
+      this.userDetail.user_id, this.courseid,this.pagination,this.page,this.noofItems
     ).subscribe((data: any) => {
       if (data && data.data && data.data.getperformActivityData && data.data.getperformActivityData.data) {
         this.performDetails = data.data.getperformActivityData.data;

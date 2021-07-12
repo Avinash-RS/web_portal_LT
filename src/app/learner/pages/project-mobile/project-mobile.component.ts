@@ -82,7 +82,9 @@ export class ProjectMobileComponent implements OnInit {
     nav: true
   };
   showDownload: boolean;
-
+  pagination = false;
+  page = 0;
+  noofItems = 0;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
               public route: Router,  private commonServices: CommonServicesService,private ngxLoader: NgxUiLoaderService) {
@@ -185,7 +187,7 @@ export class ProjectMobileComponent implements OnInit {
   }
 
   getprojectActivityData() {
-    this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid).subscribe((data: any) => {
+    this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid,this.pagination,this.page,this.noofItems).subscribe((data: any) => {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
       this.projectDetails = data.data.getprojectActivityData.data;
       

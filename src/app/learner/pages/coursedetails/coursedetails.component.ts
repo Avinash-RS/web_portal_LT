@@ -118,7 +118,9 @@ export class CoursedetailsComponent implements OnInit {
   qaFilterKey:any="-1"
   batchId:any;
   isShowDiv = false;
-
+  pagination = false;
+  page = 0;
+  noofItems = 0;
   @ViewChild('demo3Tab') demo3Tab: MatTabGroup;
   @ViewChild('rationPopup') rationPopup: TemplateRef<any>;
   @ViewChild('focuser') inputEl: ElementRef;
@@ -423,7 +425,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   getAssignmentmoduleData() {
-    this.Lservice.getAssignmentmoduleData(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
+    this.Lservice.getAssignmentmoduleData(this.courseid, this.userDetail.user_id,this.pagination,this.page,this.noofItems).subscribe((data: any) => {
       this.assignmentContent = data.data.getAssignmentmoduleData.data[0];
 
       if (this.assignmentContent.courseStartDate && this.assignmentContent.courseEndDate) {
