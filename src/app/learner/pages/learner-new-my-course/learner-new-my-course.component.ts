@@ -268,4 +268,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
       // this.show = false;
       // }
     }
+    dayClicked(value){
+      console.log(value)
+    }
 }

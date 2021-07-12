@@ -28,7 +28,7 @@
                     </div>
                     
                     <div class="weekviewHead">
-                        <mwl-calendar-week-view [weekStartsOn]="1" [viewDate]="viewDate" [events]="events"></mwl-calendar-week-view>
+                        <mwl-calendar-week-view [weekStartsOn]="1" [viewDate]="viewDate" (dayHeaderClicked)="dayHeaderClicked.emit($event)" [events]="events"></mwl-calendar-week-view>
                     </div>
                 </div>
 

@@ -1800,6 +1800,7 @@ export const getcalenderactivity = gql`
         start
         end
         title
+        color
       }
     }
   }
