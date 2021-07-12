@@ -59,7 +59,7 @@
                   <mat-panel-title>
                     <div class="week-block">
                       <div class="week-text">Week</div>
-                      <div class="font-weight-bold week-number">{{moduleItem.week}}</div>
+                      <div class="font-weight-bold week-number">{{getWeekNumber(moduleItem.week)}}</div>
                     </div>
                     <div class="pl-2">
                       <div class="week-text">Module</div>
@@ -119,11 +119,11 @@
                   <div class="types">{{topicItem.knowledgeDetails.name}}</div>
                   <div class="pl-5">
                     <div class="week-text">Questions</div>
-                    <div class="font-weight-bold text-center">{{topicItem.knowledgeDetails.totalQuestion}}</div>
+                    <div class="font-weight-bold text-center">{{topicItem.knowledgeDetails.totalQuestion?topicItem.knowledgeDetails.totalQuestion :'--'}}</div>
                   </div>
                   <div class="pl-5">
                     <div class="week-text">Correct</div>
-                    <div class="font-weight-bold color-green text-center">{{topicItem.knowledgeDetails.correctAns}}</div>
+                    <div class="font-weight-bold color-green text-center">{{topicItem.knowledgeDetails.correctAns?topicItem.knowledgeDetails.correctAns:'--'}}</div>
                   </div>
                   <div class="pl-5">
                     <div class="week-text">InCorrect</div>

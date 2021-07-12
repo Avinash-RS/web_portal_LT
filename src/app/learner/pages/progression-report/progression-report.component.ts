@@ -22,7 +22,7 @@ apidata = {
       "module": [
           {
               "name": "Single Line Diagram",
-              "week": 3,
+              "week": "3",
               "topicCount": {
                   "total": 10,
                   "completed": 8
@@ -31,7 +31,7 @@ apidata = {
                   "total": 10,
                   "completed": 8
               },
-              "totalDuration": 60,
+              "totalDuration": 5,
               "overAllPercentage": 100,
               "colourCode": {
                   "value": "green",
@@ -52,9 +52,9 @@ apidata = {
                       },
                       "knowledgeDetails": {
                           "name": "knowone",
-                          "totalQuestion": 10,
-                          "correctAns": 8,
-                          "incorrect": 2
+                          "totalQuestion": 0,
+                          "correctAns": 0,
+                          "incorrect": 0
                       },
                       "status": {
                           "value": "completed",
@@ -198,6 +198,12 @@ apidata = {
     })
   }
   
+  getWeekNumber(week) {
+    if (week < 10) {
+      return 0 + '' + week;
+    } 
+    return week;
+  }
   //Project Module
   getprojectActivityData() {
     this.learnerService.getprojectActivityData(this.userId, this.courseid, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
