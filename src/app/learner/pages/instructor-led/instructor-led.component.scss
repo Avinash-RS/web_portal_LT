@@ -342,6 +342,9 @@
     opacity: 1;
     margin-bottom: 15px;
     display: inline-block;
+    width: 100%;
+    text-overflow: ellipsis;
+    display: inline-block;
     /* margin-left: 2%; */
     @media only screen and (max-width: 600px) {
         color: #454545;
@@ -541,4 +544,9 @@
     height: 500px;
     overflow-x: hidden;
     overflow-y: auto;
+}
+.activity-name{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
