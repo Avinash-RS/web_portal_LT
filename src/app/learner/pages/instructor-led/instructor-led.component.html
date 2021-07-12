@@ -150,7 +150,7 @@
               <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
                 <td>{{i+1}}</td>
                 <td>{{atd.activity.activityname}}</td>
-                <td>{{atd.activity.startdate | date: 'dd/MM/yyyy hh:mm a'}}</td>
+                <td>{{atd.activity.startdate | date: 'dd/MM/yyyy , hh:mm a'}}</td>
                 <td>
                   <mat-icon #attended *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'" style="color: green;">done</mat-icon>
                   <mat-icon *ngIf="atd.activity.attendencedetails.Attendence =='no' || atd.activity.attendencedetails.Attendence == 'No'" style="color: red;">close</mat-icon>
@@ -179,7 +179,7 @@
         <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
           <td>{{i+1}}</td>
           <td>{{atd.activity.activityname}}</td>
-          <td>{{atd.activity.startdate | date: 'dd/MM/yyyy hh:mm a'}}</td>
+          <td>{{atd.activity.startdate | date: 'dd/MM/yyyy , hh:mm a'}}</td>
           <td>
             <mat-icon *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'" style="color: green;">done</mat-icon>
             <mat-icon *ngIf="atd.activity.attendencedetails.Attendence =='no' || atd.activity.attendencedetails.Attendence == 'No'" style="color: red;">close</mat-icon>
@@ -213,7 +213,7 @@
               </div>
               <div class="content-container">
                 <h4>{{los.activity_details.activityname}}</h4>
-                <h5><span>Date:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm a'}}</h5>
+                <h5><span>Date:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy, hh:mm a'}}</h5>
                 <h5 *ngIf="los.activity_details.activitytype != 'Recorded'"><span>Duration:</span> {{los.duration}} </h5>
                 <h5 *ngIf="los.activity_details.activitytype == 'Recorded'"><span>Module:</span> {{los.activity_details.modulename}} </h5>
               </div>
