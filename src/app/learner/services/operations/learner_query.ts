@@ -1667,10 +1667,10 @@ export const getReadLeanerActivity = gql`
         status
         activity_details {
           topicname
-          # status
+          status
           courseid
           coursename
-          # modulename
+          modulename
           startdate
           enddate
           activitytype
