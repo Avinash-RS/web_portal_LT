@@ -989,8 +989,11 @@ mat-header-cell,
   // height: 100%;
   height: 100vh;
   flex: 1;
+  &.hideSideMenu {
+    padding-top: 55px;
+  }
 }
-.contentPad{
+.contentPad {
   padding-left: 70px;
   padding-top: 55px;
 }
