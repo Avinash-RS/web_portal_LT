@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="progression-report-contianer d-flex">
-  <div class="col-md-8 left-container">
+  <div class="left-container">
     <div class="col d-flex pt-3">
       <em routerLink="/Learner/MyCourse" class="lxp-Right_Direction_Arrow backArrow"></em>
       <div class="breadcrum1">Applied Industrail IOT</div>
@@ -132,9 +132,6 @@
                 </div>
               </div>
               <em class="lxp-info-circle tic-circle"></em>
-              <!-- <div class="col-md-1">
-               
-              </div> -->
             </div>
             
               </mat-expansion-panel>
@@ -143,12 +140,12 @@
         </div>
       </div>
     </div>
-    <div class="col activity-container pr-0">
+    <div class="activity-container">
       <div class="header-label">Actitvities Progression Report</div>
-      <div class="col mt-4 tab-container pr-0">
-        <mat-tab-group>
+      <div class="tab-container">
+        <mat-tab-group (selectedTabChange)="tabChanged($event)" [(selectedIndex)]="selectedIndex">
           <mat-tab label="Assignment">
-            <div class="card-content d-flex">
+            <div class="card-content d-flex justify-content-between">
               <mat-card class="card-container">
                 <div class="card-topic">
                   Applied Industrial IoT > Phase of industrail Reveloution
@@ -701,51 +698,42 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4">
-    <div class="right-contianer mt-5">
-      <div class="progress-label">Time Spent</div>
-      <div [ngStyle]="{'width': '400px'}">
-        <canvas baseChart 
-        [datasets]="barChartData"
-        [labels]="barChartLabels"
-        [options]="barChartOptions"
-        [plugins]="barChartPlugins"
-        [legend]="barChartLegend"
-        [chartType]="barChartType">
-      </canvas>
+  <div class="right-container">
+    <div class="progress-label">Time Spent</div>
+    <div [ngStyle]="{'width': '400px'}">
+      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+    </div>
+    <div class="col d-flex mt-3 justify-content-center">
+      <div class="col-5 content-border">
+        <div class="d-flex left-content">
+          <div class="hours">68</div>
+          <div class="hrs">hrs</div>
+          <div class="week-percentage color-green"><em class="lxp-Up"></em><span class="percentage-text">12%</span></div>
+        </div>
+        <div class="left-week">This Week</div>
       </div>
-      <div class="col d-flex mt-3 justify-content-center">
-        <div class="col-5 content-border">
-          <div class="d-flex left-content">
-            <div class="hours">68</div>
-            <div class="hrs">hrs</div>
-            <div class="week-percentage color-green"><em class="lxp-Up"></em><span class="percentage-text">12%</span></div>
-          </div>
-          <div class="left-week">This Week</div>
+      <div class="col-6">
+        <div class="d-flex right-content">
+          <div class="hours">43</div>
+          <div class="hrs">hrs</div>
+          <div class="week-percentage color-red"><em class="lxp-Down"></em><span class="percentage-text">8%</span></div>
         </div>
-        <div class="col-6">
-          <div class="d-flex right-content">
-            <div class="hours">43</div>
-            <div class="hrs">hrs</div>
-            <div class="week-percentage color-red"><em class="lxp-Down"></em><span class="percentage-text">8%</span></div>
-          </div>
-          <div class="right-week">Last Week</div>
-        </div>
+        <div class="right-week">Last Week</div>
       </div>
-      <div class="d-flex growth">
-        <div>You have a </div><div class="text-green">&nbsp;12% learning growth</div>
+    </div>
+    <div class="d-flex growth">
+      <div>You have a </div><div class="text-green">&nbsp;12% learning growth</div>
+    </div>
+    <div class="col mt-5">
+      <div class="col">
+        <div class="statistics">Course Statistics</div>
       </div>
-      <div class="col mt-5">
-        <div class="col">
-          <div class="statistics">Course Statistics</div>
-        </div>
-        <div class="col d-flex">
-          <div class="numbers">87%</div><div class="mr-2 numbers-text">Completeion <br/> Rate</div>
-          <div class="numbers">35</div><div class="numbers-text">Questions <br/>Asked</div>
-        </div>
-        <div class="col d-flex mt-3">
-          <div class="font-weight-bold">24&nbsp;</div><div>Students have already completed the course</div>
-        </div>
+      <div class="col d-flex">
+        <div class="numbers">87%</div><div class="mr-2 numbers-text">Completeion <br/> Rate</div>
+        <div class="numbers">35</div><div class="numbers-text">Questions <br/>Asked</div>
+      </div>
+      <div class="col d-flex mt-3">
+        <div class="font-weight-bold">24&nbsp;</div><div>Students have already completed the course</div>
       </div>
     </div>
   </div>

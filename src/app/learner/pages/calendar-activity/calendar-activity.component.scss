@@ -1,3 +1,4 @@
+@import "variable";
 
 .calendarArea {
     display: flex;
@@ -338,4 +339,32 @@ section {
         margin-top: 0;
         justify-content: center;
     }
+}
+
+::ng-deep .rightPan{
+    mat-form-field {
+        width: 10em !important;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-infix {
+        padding: 0.3em 0 0.3em 0 !important;
+    }
+    .pull-right {
+        mat-form-field {
+            width: 10em !important;
+        }
+    }
+    .mat-select-arrow-wrapper {
+        vertical-align: baseline !important;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+        color: #00000063 !important;
+        opacity: 1 !important;
+    }
+}
+.reset-button{
+    background-color: $lxp-theme-green !important;
+    color: $color-white !important;
+    height: 28px;
+    width: 7em;
+    line-height: 15px;
 }

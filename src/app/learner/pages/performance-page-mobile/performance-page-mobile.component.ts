@@ -96,7 +96,9 @@ export class PerformancePageMobileComponent implements OnInit {
     },
     nav: true
   };
-
+  pagination = false;
+  page = 0;
+  noofItems = 0;
   constructor(
     private commonServices: CommonServicesService,
     public Lservice: LearnerServicesService,
@@ -216,7 +218,7 @@ export class PerformancePageMobileComponent implements OnInit {
     this.performDetails = [];
     this.Lservice.getperformActivityData(
       this.userDetail.user_id,
-      this.courseid
+      this.courseid,this.pagination,this.page,this.noofItems
       // this.courseid
     ).subscribe((data: any) => {
       if (

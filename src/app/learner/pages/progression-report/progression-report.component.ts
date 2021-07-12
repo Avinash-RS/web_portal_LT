@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { CommonServicesService } from '@core/services/common-services.service';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { LearnerServicesService } from '@learner/services/learner-services.service';
 declare const Chart;
 
 @Component({
@@ -115,6 +118,7 @@ apidata = {
   }
 };
 
+  selectedIndex: number = 0;
   public barChartOptions: ChartOptions = {
     responsive: true,
     elements:
@@ -140,15 +144,72 @@ apidata = {
       barThickness: 16,
     }
   ];
-  constructor() { }
+  currentTab: any;
+  UserDetails: any;
+  userId: any;
+  courseid: any;
+  pagination = true;
+  emptyAssignment = false;
+  page = 0;
+  noofItems = 6;
+  assignmentContent: any;
+  constructor(
+    public learnerService: LearnerServicesService, 
+    private gs: GlobalServiceService, 
+    public CommonServices: CommonServicesService) { }
 
   ngOnInit() {
     setTimeout(() => {
       this.createChart();
       this.createBarChart();
-    }, 1000)
+    },1000);
 
-    
+    this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
+    this.userId = this.UserDetails.user_id;
+    this.courseid = localStorage.getItem('Courseid');
+    this.getAssignmentmoduleData();
+  }
+
+  tabChanged(event) {
+    this.currentTab = event.index;
+    if (this.currentTab == 0) {
+      this.getAssignmentmoduleData();
+    } 
+    else if (this.currentTab == 1) {
+      this.getprojectActivityData();
+    } 
+    else if (this.currentTab == 2) {
+      this.getperformActivityData();
+    }
+  }
+
+  //Assignment Module
+  getAssignmentmoduleData() {
+    this.learnerService.getAssignmentmoduleData(this.userId, this.courseid, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
+      console.log(data, 'Assignment Module')
+      if (data.data.getAssignmentmoduleData.success) {
+        this.assignmentContent = data?.data?.getAssignmentmoduleData?.data;
+        if (this.assignmentContent == null) {
+          this.emptyAssignment = true;
+        } else {
+          this.emptyAssignment = false
+        }
+      }
+    })
+  }
+  
+  //Project Module
+  getprojectActivityData() {
+    this.learnerService.getprojectActivityData(this.userId, this.courseid, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
+      console.log(data, 'Project Module');
+    })
+  }
+  
+  //Perform Module
+  getperformActivityData() {
+    this.learnerService.getperformActivityData(this.userId, this.courseid, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
+      console.log(data, 'Perform Module');
+    })
   }
 
   createChart() {

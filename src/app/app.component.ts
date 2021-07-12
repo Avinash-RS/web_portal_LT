@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
   isFooterVisible: string = '';
   percentage = "Upload in progress"
   loadersubscription: Subscription;  
+  hideLeftMenu: boolean = false;
    // FOR DRM(Restriction for right click)
    @HostListener('document:keydown', ['$event'])
    handleKeyboardEvent(event: KeyboardEvent) {
@@ -104,6 +105,16 @@ export class AppComponent implements OnInit {
         if (e.url.includes("resetpassword")||urlIdentifier[2]==undefined) {
           this.isFooterVisible = '';
         }
+
+        //for left padding
+      
+          const headerPages = ['courseDetail']
+          if (headerPages.includes(urlIdentifier[2])) {
+            this.hideLeftMenu = true;
+          }
+          else {
+            this.hideLeftMenu = false;
+          }
       });
     });
   }

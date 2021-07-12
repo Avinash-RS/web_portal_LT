@@ -1155,3 +1155,29 @@ message{
 }
 }
 `;
+
+export const getActivityCalendar = gql`
+mutation getActivityCalendar($courseId:String,$status:String,$dateType:String!,$activityType:String,$date:String!,$userId:String!){
+  getActivityCalendar(courseId:$courseId,status:$status,dateType:$dateType,activityType:$activityType,date:$date,userId:$userId){
+success
+message
+data{
+  pendingActivityCount
+  completedActivityCount
+  allActivityCount
+  activities{
+    _id
+    activitytype
+    activityname
+    activitystartdate
+    activityenddate
+    courseid
+    coursename
+    modulename
+    topicname
+    status
+  }
+}
+}
+}
+`;

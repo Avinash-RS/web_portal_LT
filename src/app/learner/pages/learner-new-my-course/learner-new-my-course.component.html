@@ -48,11 +48,19 @@
                             </div>
                             <div class="detailData">
                                 <div class="badgedata d-flex justify-content-between">
-                                    <p class="d-flex justify-content-center align-items-center">{{data.activity_details.activitytype}}</p>
+                                    <p class="d-flex justify-content-center align-items-center">
+                                        {{data.activity_details.activitytype}}
+                                    </p>
                                     <div class="status">
-                                        <span class="ongoing" *ngIf="data.status == 'On going'"><em></em>{{'Ongoing' | translate }}</span>
-                                        <span class="yettoStart" *ngIf="data.status == 'Up Coming'"><em></em>{{'Upcoming' | translate }}</span>
-                                        <span class="completed" *ngIf="data.status == 'Completed'"><em></em>{{'Completed' | translate }}</span>
+                                        <span class="ongoing" *ngIf="data.status == 'On going'">
+                                            <em class="lxp-Timer_Outlined"></em>{{'Ongoing' | translate }}
+                                        </span>
+                                        <span class="yettoStart" *ngIf="data.status == 'Up Coming'">
+                                            <em class="lxp-Play"></em>{{'Upcoming' | translate }}
+                                        </span>
+                                        <span class="completed" *ngIf="data.status == 'Completed'">
+                                            <em class="lxp-Right"></em>{{'Completed' | translate }}
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="titleFontSize">{{data.activity_details.coursename}}</div>
