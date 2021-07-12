@@ -6,7 +6,8 @@
         font-weight: bold;
         margin-bottom: 1em;
     }
-    .left-container{
+    .left-container {
+        width: calc(100% - 400px);
         box-shadow: 0px 0px 6px #00000059;
         background: #F2F2F2;
         .backArrow {
@@ -35,12 +36,12 @@
             font-size: 14px;
             font-weight: bold;
         }
-        .header-label{
-            color: #000000;
+        .header-label {
+            color: #333333;
             font-size: 20px;
-            font-weight: bold;
-            margin-left: 1em;
-            margin-top: 0.2em
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding: 0 30px;
         }
         .flag-line{
             height: 3em;
@@ -54,19 +55,16 @@
             font-weight: bold;
         }
         .activity-container{
-            margin-top: 5em;
-            .tab-container{
-               padding-left: 1.4rem!important;
-            }
+            margin-top: 40px;
         }
         .card-content{
-            margin-top: 2em;
+            margin-top: 0;
             flex-wrap: wrap;
+            padding: 0 30px 22px 30px;
             .card-container {
-                margin-right: 1em;
-                margin-bottom: 1em;
-                width: 30%;
-                max-width: 30%;
+                margin-top: 1.5em;
+                width: 32%;
+                box-shadow: 0 0 4px rgba(0,0,0,0.25);
             }
             .card-topic{
                 color: #808080;
@@ -129,11 +127,20 @@
             }
         }
         .self-learning-container{
-            margin-top: 5em;
-
+            margin-top: 3em;
+            padding: 0 15px;
             .expansion-container{
-                margin-left: 1.6em;
                 margin-top: 2em;
+                > div {
+                    box-shadow: 0 0 5px rgba(0,0,0,0.25);
+                    overflow: hidden;
+                    position: relative;
+                    border-radius: 4px;
+                    margin-top: 15px !important;
+                }
+            }
+            .header-label {
+                padding: 0;
             }
             .week-number{
                 font-size: 16px;
@@ -189,7 +196,11 @@
             }
         }
     }
-    .right-contianer{
+    .right-container {
+        width: 400px;
+        background-color: #fff;
+        padding: 3em 1em;
+        box-shadow: 0 0 2px 0 #0000006b;
         .left-content {
             justify-content: flex-end;
         }
@@ -333,9 +344,17 @@
     }
 }
 
-::ng-deep .expansion-container{
+::ng-deep.expansion-container {
     .mat-progress-bar{
         height: 3px !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+    .mat-expansion-panel:not([class*='mat-elevation-z']) {
+        // box-shadow: 0 0 5px rgba(0,0,0,0.25);
+        box-shadow: none;
     }
     .mat-progress-bar-buffer {
         background-color: white !important;
@@ -343,7 +362,7 @@
     .mat-progress-bar-fill::after {
         background-color: #03C88D !important;
     }
-    .second{
+    .second {
         .mat-progress-bar-fill::after {
             background-color: #FFD940 !important;
         }
