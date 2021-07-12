@@ -12,12 +12,20 @@
     </div>
     <div class="rightPan">
       <span>Filter by: </span>
-      <select class="sel-pad">
-        <option [value]="-1" selected="true">All Courses</option>
-      </select>
-      <select class="sel-pad">
-        <option [value]="-1" selected="true">All Activities</option>
-      </select>
+      <mat-form-field class="mr-2" appearance="outline">
+        <mat-select (selectionChange)="onSortChange($event)" [(ngModel)]="courseValue">
+          <mat-option *ngFor="let course of courseDetailsList" [value]="course.course_id">
+              {{course.course_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-select (selectionChange)="onSortChange($event)" [(ngModel)]="activityValue">
+          <mat-option *ngFor="let filter of filterBy" [value]="filter.value">
+              {{filter.key}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </div>
   <div class="contentarea">
@@ -114,6 +122,11 @@
   </div>
 </section>
 <div class="calendarSlide">
+  <div class="d-flex justify-content-end">
+    <button mat-stroked-button class="reset-button" (click)="onSortChange('')">
+      Reset
+    </button>
+  </div>
   <div class="calender-section">
     <!-- calender html start-->
     <div class="calendarInfo">
@@ -122,11 +135,11 @@
       <div class="prevNext align-self-center">
         <div class="btn-group d-flex align-items-center justify-content-center">
           <mat-icon mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
-            (viewDateChange)="getAllActivity($event);monthChange($event)">
+            (viewDateChange)="getCalendarCount($event);monthChange($event)">
             <!-- {{'Previous' | translate }} -->keyboard_arrow_left
           </mat-icon>
           <mat-icon mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
-            (viewDateChange)="getAllActivity($event);monthChange($event)">
+            (viewDateChange)="getCalendarCount($event);monthChange($event)">
             <!-- {{'Next' | translate }} --> keyboard_arrow_right
           </mat-icon>
         </div>
