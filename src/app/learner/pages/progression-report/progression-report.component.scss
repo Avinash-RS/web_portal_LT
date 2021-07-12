@@ -335,17 +335,21 @@
 
 ::ng-deep .expansion-container{
     .mat-progress-bar{
-        height: 3px !important;
+        height: 2px !important;
     }
     .mat-progress-bar-buffer {
         background-color: white !important;
     }
-    .mat-progress-bar-fill::after {
-        background-color: #03C88D !important;
-    }
-    .second{
+    .bar-complete {
         .mat-progress-bar-fill::after {
-            background-color: #FFD940 !important;
+          background-color: #32CE6A !important;
         }
+      }
+    
+      .bar-inprogress {
+        .mat-progress-bar-fill::after {
+          background-color: #FFA800 !important;
+        }
+      
     }
 }

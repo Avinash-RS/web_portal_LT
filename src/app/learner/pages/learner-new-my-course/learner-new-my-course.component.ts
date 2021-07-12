@@ -311,15 +311,15 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.router.navigateByUrl('/Learner/askQuestions', { state: { detail } });
   }
 // ACTIVITY NAVIGATION 
-  gotoSubmissionDetails(c) {
-    localStorage.setItem('Courseid', c.course_id);
-    const detail = {
-      id: c.course_id,
-      name: c.course_name,
-      tableType: 'submission',
+  gotoSubmissionDetails(course) {
+    localStorage.removeItem('userTabLocation');
+    const data1 = {
+      courseId: course.course_id,
+      courseName: course.course_name
     };
-    localStorage.setItem('course', btoa(JSON.stringify(detail)));
-    this.router.navigateByUrl('/Learner/activitycenterhomescreen/activitycenter', { state: { detail } });
+    localStorage.setItem('Courseid', data1.courseId);
+    localStorage.setItem('CourseName', data1.courseName);
+    this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
   }
 
   getLearnerActivity(selectedDate) {
