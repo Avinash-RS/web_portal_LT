@@ -68,7 +68,9 @@ button.active:focus {
 // html {
 //   height: 100%;
 // }
-
+* {
+  box-sizing: border-box;
+}
 html {
   overflow: auto;
   height: 100%;
@@ -984,8 +986,16 @@ mat-header-cell,
   }
 }
 .heightClass {
-  height: 100%;
+  // height: 100%;
+  height: 100vh;
   flex: 1;
+  &.hideSideMenu {
+    padding-top: 55px;
+  }
+}
+.contentPad {
+  padding-left: 70px;
+  padding-top: 55px;
 }
 // Same copy of this footer in appcomponent.css
 .footer {
@@ -996,6 +1006,8 @@ mat-header-cell,
   margin-top: 0;
   font-weight: 500;
   border-top: 1px solid #cecece;
+  position: relative;
+  z-index: 4;
   span {
     color: #9e9e9e;
     font-size: 13px;

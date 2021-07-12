@@ -1,0 +1,162 @@
+<app-header></app-header>
+<div class="calendarArea">
+<section>
+  <div class="headerarea">
+    <div class="heading5">Schedule</div>
+  </div>
+  <div class="viewInfotxt">
+    <div class="leftPan">
+      <span class="active" (click)="setStatus('')">All ({{'3'}})</span>
+      <span (click)="setStatus('pending')">Pending ({{'3'}})</span>
+      <span (click)="setStatus('completed')">Completed ({{'3'}})</span>
+    </div>
+    <div class="rightPan">
+      <span>Filter by: </span>
+      <mat-form-field class="mr-2" appearance="outline">
+        <mat-select (selectionChange)="onSortChange($event)" [(ngModel)]="courseValue">
+          <mat-option *ngFor="let course of courseDetailsList" [value]="course.course_id">
+              {{course.course_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-select (selectionChange)="onSortChange($event)" [(ngModel)]="activityValue">
+          <mat-option *ngFor="let filter of filterBy" [value]="filter.value">
+              {{filter.key}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="contentarea">
+
+    <div class="contentbox">
+
+      <div class="infotxtarea">
+        <span class="htxt">Applied Industrial loT</span>
+        <div class="infotxt"> <span>Module:</span> Introduction to Industrial loT</div>
+        <div class="infotxt"> <span>Topic:</span> Phases of Industrial Revolution</div>
+      </div>
+
+      <div class="infotypearea">
+        <span class="icon lxp-Test">i</span>
+        <div class="htxt">
+          <span>Type</span>
+          <div class="notifi activity">{{'Assignments'}}</div>
+        </div>
+      </div>
+
+      <div class="infodatearea">
+        <span class="icon lxp-calendar">i</span>
+        <div class="htxt">
+          <span>03/06/2021 12.30 PM</span>
+          <span>11/06/2021 02.00 PM</span>
+        </div>
+      </div>
+
+      <div class="statusarea">
+        <span class="icon lxp-Tick">i</span>
+      </div>
+
+    </div>
+
+    <div class="contentbox">
+
+      <div class="infotxtarea">
+        <span class="htxt">Emerging Technologies : loT, 3D, Printing</span> 
+        <div class="infotxt"> <span>Topic:</span> Data Acquisition Part 1</div>
+      </div>
+
+      <div class="infotypearea">
+        <span class="icon lxp-Test">i</span>
+        <div class="htxt">
+          <span>Type</span>
+          <div class="notifi selfplacedlearning">{{'Self Learning'}}</div>
+        </div>
+      </div>
+
+      <div class="infodatearea">
+        <span class="icon lxp-calendar">i</span>
+        <div class="htxt">
+          <span>03/06/2021 12.30 PM</span>
+          <span>11/06/2021 02.00 PM</span>
+        </div>
+      </div>
+
+      <div class="statusarea">
+        <span class="icon lxp-Tick">i</span>
+      </div>
+
+    </div>
+
+    <div class="contentbox">
+
+      <div class="infotxtarea">
+        <span class="htxt">Applied Industrial loT</span>
+        <div class="infotxt"> <span>Module:</span> Industrial loT Architecture</div>
+        <div class="infotxt"> <span>Topic:</span> Edge Computing Part-1</div>
+      </div>
+
+      <div class="infotypearea">
+        <span class="icon lxp-Test">i</span>
+        <div class="htxt">
+          <span>Type</span>
+          <div class="notifi activity">{{'Project'}}</div>
+        </div>
+      </div>
+
+      <div class="infodatearea">
+        <span class="icon lxp-calendar">i</span>
+        <div class="htxt">
+          <span>03/06/2021 12.30 PM</span>
+          <span>11/06/2021 02.00 PM</span>
+        </div>
+      </div>
+
+      <div class="statusarea">
+        <span class="icon lxp-Tick">i</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<div class="calendarSlide">
+  <div class="d-flex justify-content-end">
+    <button mat-stroked-button class="reset-button" (click)="onSortChange('')">
+      Reset
+    </button>
+  </div>
+  <div class="calender-section">
+    <!-- calender html start-->
+    <div class="calendarInfo">
+      <div class="currentMonth"> {{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}
+      </div>
+      <div class="prevNext align-self-center">
+        <div class="btn-group d-flex align-items-center justify-content-center">
+          <mat-icon mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+            (viewDateChange)="getCalendarCount($event);monthChange($event)">
+            <!-- {{'Previous' | translate }} -->keyboard_arrow_left
+          </mat-icon>
+          <mat-icon mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+            (viewDateChange)="getCalendarCount($event);monthChange($event)">
+            <!-- {{'Next' | translate }} --> keyboard_arrow_right
+          </mat-icon>
+        </div>
+      </div>
+    </div>
+    <div [ngSwitch]="view">
+      <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+        [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="getLearnerActivity('day',$event.day,$event.day)"
+        (eventClicked)="handleEvent('Clicked', $event.event)">
+      </mwl-calendar-month-view>
+    </div>
+    <!-- calender html end #00a99d-->
+  </div>
+  <div class="activInfo">
+    <span class="self">Self paced Learning</span>
+    <span class="live">Virtual Instructor Led Session</span>
+    <span class="Activ">Activity</span>
+  </div>
+</div>
+</div>

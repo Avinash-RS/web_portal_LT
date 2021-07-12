@@ -1,0 +1,540 @@
+<app-header></app-header>
+
+<div class="sideNavWrapper">
+    <div>
+        <mat-drawer-container class="sideNavContainer" autosize>
+            <mat-drawer #drawer class="sideNav" [mode]="innerWidth>1140?'side':'over'" position="end"> 
+                <!-- Over Side Push -->
+                <div class="navBackBtn">
+                    <span type="button" (click)="drawer.toggle();show=!show">
+                        <em class="lxp-Right_Arrow"></em>
+                    </span>
+                </div>
+                <!-- //////////// -->
+                <div class="prevNext">
+                    <p>TASKS TO DO</p>
+                    <div class="wrapperTaskToDo d-flex align-items-center justify-content-between">
+                        <div class="currentMonth">
+                            <h3>{{ viewDate | calendarDate:('month' + 'ViewTitle'):'en' }}</h3>
+                        </div>
+                        <div class="arrows">
+                            <span mwlCalendarPreviousView [view]="'week'" [(viewDate)]="viewDate">
+                                <em class="lxp-Rewind_Arrow"></em>
+                            </span>
+                            <span mwlCalendarNextView [view]="'week'" [(viewDate)]="viewDate">
+                                <em class="lxp-Forward_Arrow"></em>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="weekviewHead">
+                        <mwl-calendar-week-view (dayHeaderClicked)="getLearnerActivity($event.day.date)" [weekStartsOn]="1" [viewDate]="viewDate" [events]="events"></mwl-calendar-week-view>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="sideTabsStrip">
+                        <div class="activeTabItem">
+                            To Do
+                        </div>
+                    </div>
+                    <ng-container *ngFor="let data of learnerActivityList;">
+                        <div class="listItem d-flex justify-content-start">
+                            <div class="dateFlag" [ngClass] = "{'ongoing': data.status === 'On going', 'completed': data.status === 'Completed', 'yettoStart': data.status === 'Up Coming'}">
+                                <div class="dateDiv">
+                                    <span class="flagDay">{{dayMonth | date :'dd'}}</span>
+                                    <span class="flagMonth">{{dayMonth | date :'MMM'}}</span>
+                                </div>
+                            </div>
+                            <div class="detailData">
+                                <div class="badgedata d-flex justify-content-between">
+                                    <p class="d-flex justify-content-center align-items-center">
+                                        {{data.activity_details.activitytype}}
+                                    </p>
+                                    <div class="status">
+                                        <span class="ongoing" *ngIf="data.status == 'On going'">
+                                            <em class="lxp-Timer_Outlined"></em>{{'Ongoing' | translate }}
+                                        </span>
+                                        <span class="yettoStart" *ngIf="data.status == 'Up Coming'">
+                                            <em class="lxp-Play"></em>{{'Upcoming' | translate }}
+                                        </span>
+                                        <span class="completed" *ngIf="data.status == 'Completed'">
+                                            <em class="lxp-Right"></em>{{'Completed' | translate }}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="titleFontSize">{{data.activity_details.coursename}}</div>
+                                <div class="type">Module: <span>{{data.activity_details.modulename}}</span></div>
+                                <div class="topic">Topic: <span>{{data.activity_details.topicname}}</span></div>
+                                <div class="date">Date: {{data.activity_details.startdate | date :'d/M/yy h:mm a'}} - {{data.activity_details.enddate | date :'d/M/yy h:mm a'}}</div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <div class="item" *ngIf="showSkeleton">
+                        <div class="d-flex justify-content-between">
+                            <div class="item1">
+                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px', height: '50px', width: '50px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                            </div>
+                            <div class="item2">
+                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div class="item1">
+                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px', height: '50px', width: '50px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                            </div>
+                            <div class="item2">
+                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-container *ngIf="noActivity">
+                        <div class="searchNoResults">
+                            You have no activities at this moment!
+                         </div>
+                    </ng-container>
+                    <!-- <div class="status d-flex justify-content-between">
+                        <div class="d-flex justify-content-start">
+                            <span class="overdue">Overdue</span>
+                            <span class="ongoing">OnGoing</span>
+                            <span class="completed">Completed</span>
+                            <span class="yettoStart">Yet to Start</span>
+                        </div>
+                        <a>View all <em class="lxp-Right_Direction_Arrow"></em></a>
+                    </div> -->
+                </div>
+            </mat-drawer>
+
+            <div class="sideNavContent">
+                <!-- Top 3 Things -->
+                <div class="somethingNew">
+                    <h4>Let's learn something new today!</h4>
+                    <div class="thingsContent">
+                        <p>Here are your top 3 things to do!</p>
+                        <div>
+                            <span class="green"><em class="lxp-Right"></em></span>
+                            <span class="white"><em class="lxp-Right"></em></span>
+                            <span class="white"><em class="lxp-Right"></em></span>
+                        </div>
+                        <span class="expand" (click)="expandtoggle()">Expand 
+                            <em *ngIf="expandcollapse" class="lxp-DownArrow"></em>
+                            <em *ngIf="!expandcollapse" class="lxp-Arrow"></em>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Top 3 Things Contents -->
+                <div [@collapse]="expandcollapse">
+                    <div class="top3Things d-flex justify-content-between" [ngClass]="show ? '': 'noPadding'">
+                        <div class="box">
+                            <div>
+                                <h6>Learn from where your left</h6>
+                                <span class="type">MODULE:</span>
+                                <h2>Codes for reinforced and Pre-stress…</h2>
+                            </div>
+                            <div class="upcoming d-flex justify-content-between">
+                                <div>
+                                    <button class="d-flex align-items-center"><em class="lxp-Play"></em> <span>4m
+                                            8s</span></button>
+                                </div>
+                                <div>
+                                    <span class="icons"><em class="lxp-Timer_Outlined"></em></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div>
+                                <h6>Learn from where your left</h6>
+                                <span class="type">MODULE:</span>
+                                <h2>Codes for reinforced and Pre-stress…</h2>
+                                <div class="dueDate">Due date: 23 June 2021 12:00 AM</div>
+                            </div>
+                            <div class="upcoming d-flex justify-content-between">
+                                <div>
+                                    <button class="d-flex align-items-center"><span>GO</span></button>
+                                </div>
+                                <div>
+                                    <span class="icons"><em class="lxp-Assignments"></em></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div>
+                                <h6>Learn from where your left</h6>
+                                <span class="type">MODULE:</span>
+                                <h2>Codes for reinforced and Pre-stress…</h2>
+                                <div class="dueDate">Due date: 23 June 2021 12:00 AM</div>
+                            </div>
+                            <div class="upcoming d-flex justify-content-between">
+                                <div>
+                                    <button class="d-flex align-items-center"><span>Join</span></button>
+                                </div>
+                                <div>
+                                    <span class="icons"><em class="lxp-JoinIcon"></em></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Course -->
+                <div class="mycoursesWrapper" [ngClass]="show ? '': 'noPadding'">
+                    <h3>My Courses</h3>
+                    <mat-tab-group #tabs (selectedTabChange)="courseTabChange($event,userDetailes.user_id,userDetailes._id);"
+                    [(selectedIndex)]="selectedIndex">
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                Ongoing ({{onGoingCourseCount}})
+                            </ng-template>
+                            <div class="mycoursesContent">
+                                <div *ngFor="let item of courseDetailsList" class="courses d-flex justify-content-start">
+                                    <figure class="d-flex align-items-center justify-content-center" (click)="gotoDesc(item)">
+                                        <img [src]="item.course_img_url + blobKey" alt="" />
+
+                                        <button class="d-flex align-items-center"><em [class]="item.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
+                                            {{item?.course_status === "incomplete" ? "Resume" : item?.course_status === "suspend" ? "Resume" : item.course_status=== 'completed'?"Replay":("Start" | translate) }}</button>
+                                    </figure>
+                                    <div class="rightCol">
+                                        <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
+                                        <div class="showLessContent">
+                                            <button class="readMoreLess" *ngIf="info.length > 370" type="button"
+                                                (click)="item.isReadMore = !item.isReadMore">
+                                                <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
+                                            </button>
+                                            <div [ngClass]="!item.isReadMore ? '' : 'showText'">
+                                                <p>{{item.course_description}}</p>
+                                                <div class="type d-flex justify-content-start">
+                                                    <span>Self paced learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
+                                                    <span>Instructor led session - upto  {{item.image_instructor_lead_session_time!==""?item.image_instructor_lead_session_time:0}}</span>
+                                                    <span>Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
+                                                    <span>Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="durationCredits d-flex justify-content-between"
+                                            [ngClass]="!item.isReadMore ? 'top' : 'zero'">
+                                            <span>
+                                                <em class="lxp-Duration"></em> Duration: {{item.total_duration? item.total_duration : "1" + ""}} {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}
+                                            </span>
+                                            <span class="credits">Credits : {{item.credits!==null?item.credits:0}}</span>
+                                        </div>
+                                        <div class="actionItems d-flex justify-content-between">
+                                            <div class="viltActivitiesQA d-flex justify-content-start">
+                                                <div class="icons" (click)="goInstructorLed(item)">
+                                                    <span><em class="lxp-VILT"></em></span>
+                                                    <p>Virtual Instructor <br />Led Session</p>
+                                                </div>
+                                                <div class="icons" (click)="gotoSubmissionDetails(item)">
+                                                    <span><em class="lxp-Activities_New"></em></span>
+                                                    <p>Activities</p>
+                                                </div>
+                                                <div class="icons" (click)="gotoAskQuestions(item)">
+                                                    <span><em class="lxp-QA"></em></span>
+                                                    <p>Q&A</p>
+                                                </div>
+                                            </div>
+                                            <div class="courseProgression d-flex align-items-center">
+                                                <div class="icons" routerLink="/Learner/progressionReport">
+                                                    <span><em class="lxp-Course_Progression"></em></span>
+                                                    <p>Course Progression</p>
+                                                </div>
+                                                <div class="percentage">
+                                                    <circle-progress [percent]="((100 * (item.week_completed_count!==null?item.week_completed_count:0)) / (item.week_total_count!==null?item.week_total_count:1))" [clockwise]='true' [radius]="20"
+                                                        [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'"
+                                                        [outerStrokeGradientStopColor]="'#53a9ff'"
+                                                        [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3"
+                                                        [innerStrokeWidth]="3" [space]="-3" [titleFontSize]="12"
+                                                        [unitsFontSize]="12" [subtitleFontSize]="8"
+                                                        [titleColor]="'#666666'" [subtitleColor]="'#333333'"
+                                                        [startFromZero]="false" [responsive]="true"
+                                                        [showSubtitle]="true" [subtitle]="'Active'" [animation]="true"
+                                                        [animationDuration]="10"></circle-progress>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                Completed ({{completedCourseCount}})
+                            </ng-template>
+                            <div class="mycoursesContent">
+                                <div *ngFor="let item of courseDetailsList" class="courses d-flex justify-content-start">
+                                    <figure class="d-flex align-items-center justify-content-center">
+                                        <img src="/assets/images/Image.png" alt="" />
+                                        <button class="d-flex align-items-center"><em class="lxp-Play_Icon"></em>
+                                            Resume</button>
+                                    </figure>
+                                    <div class="rightCol">
+                                        <h3>Applied Industrial IoT</h3>
+                                        <div class="showLessContent">
+                                            <button class="readMoreLess" *ngIf="info.length > 370" type="button"
+                                                (click)="showText()">
+                                                <em *ngIf="!isReadMore" class="lxp-Arrow"></em>
+                                                <em *ngIf="isReadMore" class="lxp-DownArrow"></em>
+                                            </button>
+                                            <div [ngClass]="isReadMore ? '' : 'showText'">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                                <div class="type d-flex justify-content-start">
+                                                    <span>Self paced learning - 16 hrs</span>
+                                                    <span>Instructor led session - upto 14</span>
+                                                    <span>Course project - 01</span>
+                                                    <span>Internal Assessment - 02</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="durationCredits d-flex justify-content-between"
+                                            [ngClass]="isReadMore ? 'top' : 'zero'">
+                                            <span>
+                                                <em class="lxp-Duration"></em> Duration: 02 June 2021 - 30 June 2021
+                                            </span>
+                                            <span>Credits : 02</span>
+                                        </div>
+                                        <div class="actionItems d-flex justify-content-between">
+                                            <div class="viltActivitiesQA d-flex justify-content-start">
+                                                <div class="icons">
+                                                    <span><em class="lxp-VILT"></em></span>
+                                                    <p>Virtual Instructor <br />Led Session</p>
+                                                </div>
+                                                <div class="icons">
+                                                    <span><em class="lxp-Activities_New"></em></span>
+                                                    <p>Activities</p>
+                                                </div>
+                                                <div class="icons">
+                                                    <span><em class="lxp-QA"></em></span>
+                                                    <p>Q&A</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="courseProgression d-flex justify-content-end align-items-center">
+                                                <div class="icons" routerLink="/Learner/progressionReport">
+                                                    <span><em class="lxp-Course_Progression"></em></span>
+                                                    <p>Course Progression</p>
+                                                </div>
+                                                <div class="percentage">
+                                                    <circle-progress [percent]="67" [clockwise]='true' [radius]="20" [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'" [outerStrokeGradientStopColor]="'#53a9ff'" [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3" [innerStrokeWidth]="3" [space]="-3" [titleFontSize]="12" [unitsFontSize]="12" [subtitleFontSize]="8" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [startFromZero]="false" [responsive]="true" [showSubtitle]="true" [subtitle]="'Active'" [animation]="true" [animationDuration]="10"></circle-progress>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                All ({{allCourseCount}})
+                            </ng-template>
+                            <div class="mycoursesContent">
+                                <div *ngFor="let item of courseDetailsList" class="courses d-flex justify-content-start">
+                                    <figure class="d-flex align-items-center justify-content-center">
+                                        <img src="/assets/images/Image.png" alt="" />
+                                        <button class="d-flex align-items-center"><em class="lxp-Play_Icon"></em>
+                                            Resume</button>
+                                    </figure>
+                                    <div class="rightCol">
+                                        <h3>Applied Industrial IoT</h3>
+                                        <div class="showLessContent">
+                                            <button class="readMoreLess" *ngIf="info.length > 370" type="button"
+                                                (click)="showText()">
+                                                <em *ngIf="!isReadMore" class="lxp-Arrow"></em>
+                                                <em *ngIf="isReadMore" class="lxp-DownArrow"></em>
+                                            </button>
+                                            <div [ngClass]="isReadMore ? '' : 'showText'">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                    aliquip ex ea commodo consequat.</p>
+                                                <div class="type d-flex justify-content-start">
+                                                    <span>Self paced learning - 16 hrs</span>
+                                                    <span>Instructor led session - upto 14</span>
+                                                    <span>Course project - 01</span>
+                                                    <span>Internal Assessment - 02</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="durationCredits d-flex justify-content-between"
+                                            [ngClass]="isReadMore ? 'top' : 'zero'">
+                                            <span>
+                                                <em class="lxp-Duration"></em> Duration: 02 June 2021 - 30 June 2021
+                                            </span>
+                                            <span>Credits : 02</span>
+                                        </div>
+                                        <div class="actionItems d-flex justify-content-between">
+                                            <div class="viltActivitiesQA d-flex justify-content-start">
+                                                <div class="icons">
+                                                    <span><em class="lxp-VILT"></em></span>
+                                                    <p>Virtual Instructor <br />Led Session</p>
+                                                </div>
+                                                <div class="icons">
+                                                    <span><em class="lxp-Activities_New"></em></span>
+                                                    <p>Activities</p>
+                                                </div>
+                                                <div class="icons">
+                                                    <span><em class="lxp-QA"></em></span>
+                                                    <p>Q&A</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="courseProgression d-flex justify-content-end align-items-center">
+                                                <div class="icons" routerLink="/Learner/progressionReport">
+                                                    <span><em class="lxp-Course_Progression"></em></span>
+                                                    <p>Course Progression</p>
+                                                </div>
+                                                <div class="percentage">
+                                                    <circle-progress [percent]="67" [clockwise]='true' [radius]="20"
+                                                        [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'"
+                                                        [outerStrokeGradientStopColor]="'#53a9ff'"
+                                                        [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3"
+                                                        [innerStrokeWidth]="3" [space]="-3" [titleFontSize]="12"
+                                                        [unitsFontSize]="12" [subtitleFontSize]="8"
+                                                        [titleColor]="'#666666'" [subtitleColor]="'#333333'"
+                                                        [startFromZero]="false" [responsive]="true"
+                                                        [showSubtitle]="true" [subtitle]="'Active'" [animation]="true"
+                                                        [animationDuration]="10"></circle-progress>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+
+                    <!-- InProgressModule -->
+                    <div class="inprogressModule">
+                        <h3>Inprogress Modules</h3>
+                        <div class="d-flex justify-content-start">
+                            <div class="modules">
+                                <h6>Emerging Technologies</h6>
+                                <span>MODULE:</span>
+                                <p>Read for Deep Understanding</p>
+                                <div class="arrow">
+                                    <em class="lxp-Right_Direction_Arrow"></em>
+                                </div>
+                            </div>
+                            <div class="modules">
+                                <h6>Emerging Technologies</h6>
+                                <span>MODULE:</span>
+                                <p>Information technology and Operation</p>
+                                <div class="arrow">
+                                    <em class="lxp-Right_Direction_Arrow"></em>
+                                </div>
+                            </div>
+                            <div class="modules">
+                                <h6>Emerging Technologies</h6>
+                                <span>MODULE:</span>
+                                <p>Codes for reinforced and Pre-stress technology</p>
+                                <div class="arrow">
+                                    <em class="lxp-Right_Direction_Arrow"></em>
+                                </div>
+                            </div>
+                            <div class="modules">
+                                <h6>Emerging Technologies</h6>
+                                <span>MODULE:</span>
+                                <p>Information technology and Operation technology</p>
+                                <div class="arrow">
+                                    <em class="lxp-Right_Direction_Arrow"></em>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Missed Topics & Knowledge Check -->
+                    <div class="missedTopicsKnowledgeCheck">
+                        <h3>Missed Topics & Knowledge Check</h3>
+                        <div class="wrapper d-flex justify-content-between">
+                            <span class="leftArrow"><em class="lxp-Right_Direction_Arrow"></em></span>
+                            <span class="rightArrow"><em class="lxp-Right_Direction_Arrow"></em></span>
+                            <div class="missedTopics">
+                                <h6>Applied Industrial IoT</h6>
+                                <span class="moduleName">MODULE:</span>
+                                <h5>Introduction to Industrial IoT</h5>
+                                <span class="topicName">TOPIC:</span>
+                                <h4>Codes for reinforced and Pre-stress…</h4>
+                            </div>
+                            <div class="missedTopics">
+                                <h6>Applied Industrial IoT</h6>
+                                <span class="moduleName">MODULE:</span>
+                                <h5>Information technology and Operation</h5>
+                                <span class="topicName">TOPIC:</span>
+                                <h4>Codes for reinforced and Pre-stress…</h4>
+                            </div>
+                            <div class="missedTopics">
+                                <h6>Applied Industrial IoT</h6>
+                                <span class="moduleName">MODULE:</span>
+                                <h5>Introduction to Industrial IoT</h5>
+                                <span class="topicName">TOPIC:</span>
+                                <h4>Codes for reinforced and Pre-stress…</h4>
+                            </div>
+                            <div class="missedTopics">
+                                <h6>Applied Industrial IoT</h6>
+                                <span class="moduleName">MODULE:</span>
+                                <h5>Introduction to Industrial IoT</h5>
+                                <span class="topicName">TOPIC:</span>
+                                <h4>Codes for reinforced and Pre-stress…</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recently Learned Topics -->
+                    <div class="recentlyLearnedTopics">
+                        <h3>Recently Learned Topics</h3>
+                        <div class="wrapper d-flex justify-content-between">
+                            <span class="leftArrow"><em class="lxp-Right_Direction_Arrow"></em></span>
+                            <span class="rightArrow"><em class="lxp-Right_Direction_Arrow"></em></span>
+                            <div class="missedTopics">
+                                <h6>Applied Industrial IoT</h6>
+                                <span class="moduleName">MODULE:</span>
+                                <h5>Introduction to Industrial IoT</h5>
+                                <span class="topicName">TOPIC:</span>
+                                <h4>Codes for reinforced and Pre-stress…</h4>
+                            </div>
+                            <div class="missedTopics">
+                                <h6>Applied Industrial IoT</h6>
+                                <span class="moduleName">MODULE:</span>
+                                <h5>Information technology and Operation</h5>
+                                <span class="topicName">TOPIC:</span>
+                                <h4>Codes for reinforced and Pre-stress…</h4>
+                            </div>
+                            <div class="missedTopics">
+                                <h6>Applied Industrial IoT</h6>
+                                <span class="moduleName">MODULE:</span>
+                                <h5>Introduction to Industrial IoT</h5>
+                                <span class="topicName">TOPIC:</span>
+                                <h4>Codes for reinforced and Pre-stress…</h4>
+                            </div>
+                            <div class="missedTopics">
+                                <h6>Applied Industrial IoT</h6>
+                                <span class="moduleName">MODULE:</span>
+                                <h5>Introduction to Industrial IoT</h5>
+                                <span class="topicName">TOPIC:</span>
+                                <h4>Codes for reinforced and Pre-stress…</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-drawer-container>
+    </div>
+    <div class="taskToDo">
+        <span type="button" (click)="drawer.toggle();show=!show">
+            <em class="lxp-Calendar_Todo"></em>
+        </span>
+        <div class="arrow"></div>
+    </div>
+</div>
+<ng-template #infoPopup>
+    <div class="d-flex align-items-center justify-content-center infocontent">
+      <img src="assets/learner/DownloadApp.png" alt="Nature" class="infoimg">
+     <div class="infoClose" (click)="closeBannerPopup()"><i  class="lxp-Close"></i></div>
+    </div>
+    
+  </ng-template>

@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LearnerMyCourseComponent } from './pages/learner-my-course/learner-my-course.component';
+import { LearnerNewMyCourseComponent } from './pages/learner-new-my-course/learner-new-my-course.component';
 import { CoursedetailsComponent } from './pages/coursedetails/coursedetails.component';
 import { AuthGuard } from '@core/services/_helpers/auth.guard';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -46,7 +47,9 @@ import { ProjectMobileComponent } from './pages/project-mobile/project-mobile.co
 import { PerformancePageMobileComponent } from './pages/performance-page-mobile/performance-page-mobile.component';
 import { CourseGalleryComponent } from './pages/course-gallery/course-gallery.component'
 import { AskQuestionsComponent } from './pages/ask-questions/ask-questions.component';
-import {CourseReportComponent} from './pages/course-report/course-report.component'
+import {CourseReportComponent} from './pages/course-report/course-report.component';
+import { CalendarActivityComponent } from './pages/calendar-activity/calendar-activity.component'
+import {ProgressionReportComponent} from './pages/progression-report/progression-report.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -55,7 +58,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 const routes: Routes = [
   {
     path: 'MyCourse',
-    component: LearnerMyCourseComponent,
+    component: LearnerNewMyCourseComponent,
     // canLoad: [AuthGuard],
     data: { animation: 'Learner  MyCourse' , title: 'My Courses'}
   },
@@ -95,6 +98,16 @@ const routes: Routes = [
     component: CourseReportComponent,
     data: { animation: 'coursereport' , title: 'Course Report'}
   },
+  {
+    path: 'calendaractivity',
+    component: CalendarActivityComponent,
+    data: { animation: 'calendaractivity' , title: 'Calendar Activity'}
+  },
+  {
+    path: 'progressionReport',
+    component: ProgressionReportComponent,
+    data: { animation: 'progressionReport' , title: 'Progression Report'}
+  },
 ]
 @NgModule({
   declarations: [
@@ -109,8 +122,10 @@ const routes: Routes = [
     CourseGalleryComponent,
     AskQuestionsComponent,
     CourseGalleryComponent,
-    CourseReportComponent
-
+    CourseReportComponent,
+    CalendarActivityComponent,
+    LearnerNewMyCourseComponent,
+    ProgressionReportComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [
