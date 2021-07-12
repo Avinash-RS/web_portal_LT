@@ -90,6 +90,7 @@ export class CalendarActivityComponent implements OnInit {
   activityValue = 'All';
   events: CalendarEvent[];
   selectedDate;
+  status;
   constructor(public learnerService: LearnerServicesService,private gs: GlobalServiceService,private router: Router) { }
 
   ngOnInit() {
@@ -170,21 +171,22 @@ export class CalendarActivityComponent implements OnInit {
       activityDetailsList.forEach(element => {
         element.start = new Date(element.start);
         element.end = new Date (element.end);
-        element.color = {primary : element.color}
+        element.color = {primary : element.color};
+        element.allDay = true;
       });
       this.events = activityDetailsList;
     });
   }
   getLearnerActivity(view,selectedDate, day?: CalendarMonthViewDay){
     if(this.courseValue == 'All') {
-      var sortValue = ''
+      var courseValue = ''
    } else {
-       sortValue = this.courseValue
+    courseValue = this.courseValue
    }
    if(this.activityValue == 'All') {
-     var filterValue = ''
+     var activityValue = ''
   } else {
-     filterValue = this.activityValue
+    activityValue = this.activityValue
   }
   if(selectedDate.date){
    this.daySelected = true;
@@ -192,7 +194,9 @@ export class CalendarActivityComponent implements OnInit {
     selectedDate = selectedDate.date
   }
    const dateValue = moment(selectedDate).format('YYYY-MM-DD');
-
+  this.learnerService.getLearnerActivity(courseValue,this.status,view,dateValue,activityValue,this.userDetails.user_id).subscribe((result)=>{
+    console.log(result)
+  })
    if (day) {
      this.selectedMonthViewDay = day;
      
@@ -207,6 +211,10 @@ export class CalendarActivityComponent implements OnInit {
      day.cssClass = 'cal-day-selected';
      this.selectedMonthViewDay = day;
    }
+  }
+  setStatus(value){
+    this.status = value;
+    this.onSortChange('value')
   }
   onSortChange(value){
     if (this.daySelected) {
