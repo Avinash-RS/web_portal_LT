@@ -11,7 +11,7 @@ import { addTopicreference, bulkclaimcourse, claimcourse, createGuidanceRequest,
        playerstatusrealtime, resendOtponprofile, saveAttendies, updateEmailonprofile,
        updateMobileonprofile, updateProfile, updateVerifyotpmobileonProfile,
        userMstrdata, userRegistration, userRegistrationdone, userRegistrationmobileOtpsend,
-         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, viewProfile1, user_experience, set_bookmark, set_askaquestion, getMyQuestion, get_allquestion, getQAsortsearch } from './operations/learner_mutation';
+         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, viewProfile1, user_experience, set_bookmark, set_askaquestion, getMyQuestion, get_allquestion, getQAsortsearch,getActivityCalendar } from './operations/learner_mutation';
 import {
 boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignmentmoduleData,
  getcalenderactivity, getCountForCategories, getCountForJobroleCategories, getCoureBasedOnCatalog,
@@ -804,6 +804,20 @@ getMessage(): Observable<any> {
       variables: {
         userid,
         date
+      }
+    });
+  }
+
+  getLearnerActivity(courseId,status,dateType,activityType,date,userId){
+    return this.Apollo.query({
+      query: getActivityCalendar,
+      variables: {
+        courseId,
+        status,
+        dateType,
+        activityType,
+        date,
+        userId
       }
     });
   }

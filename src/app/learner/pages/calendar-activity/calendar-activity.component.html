@@ -6,9 +6,9 @@
   </div>
   <div class="viewInfotxt">
     <div class="leftPan">
-      <span class="active">All ({{'3'}})</span>
-      <span>Pending ({{'3'}})</span>
-      <span>Completed ({{'3'}})</span>
+      <span class="active" (click)="setStatus('')">All ({{'3'}})</span>
+      <span (click)="setStatus('pending')">Pending ({{'3'}})</span>
+      <span (click)="setStatus('completed')">Completed ({{'3'}})</span>
     </div>
     <div class="rightPan">
       <span>Filter by: </span>
