@@ -4,11 +4,11 @@
   <div class="headerarea">
     <div class="heading5">Schedule</div>
   </div>
-  <div class="viewInfotxt" *ngIf="dataAvailable">
+  <div class="viewInfotxt">
     <div class="leftPan">
-      <span  (click)="setStatus('')" [ngClass]="status == '' ? 'active' : ''">All ({{activitData.allActivityCount}})</span>
-      <span (click)="setStatus('pending')" [ngClass]="status == 'pending' ? 'active' : ''">Pending ({{activitData.pendingActivityCount}})</span>
-      <span (click)="setStatus('completed')" [ngClass]="status == 'completed' ? 'active' : ''">Completed ({{activitData.completedActivityCount}})</span>
+      <span  (click)="setStatus('')" [ngClass]="status == '' ? 'active' : ''">All ({{activityData?.allActivityCount}})</span>
+      <span (click)="setStatus('pending')" [ngClass]="status == 'pending' ? 'active' : ''">Pending ({{activityData?.pendingActivityCount}})</span>
+      <span (click)="setStatus('completed')" [ngClass]="status == 'completed' ? 'active' : ''">Completed ({{activityData?.completedActivityCount}})</span>
     </div>
     <div class="rightPan">
       <span>Filter by: </span>
@@ -30,7 +30,7 @@
   </div>
   <div class="contentarea">
     <ng-container *ngIf="dataAvailable">
-      <ng-container *ngFor="let activity of activitData.activities">
+      <ng-container *ngFor="let activity of activityData.activities">
         <div class="contentbox" (click)="goToActivities(activity)">
           <div class="infotxtarea">
             <span class="htxt">{{activity.coursename}}</span>
@@ -68,10 +68,28 @@
         </div>
       </ng-container>
     </ng-container>
-    <ng-container  *ngIf="!dataAvailable">
-
+    <ng-container *ngIf="!dataAvailable && !showSkeleton">
+      No data found
     </ng-container>
-
+    <ng-container  *ngIf="showSkeleton">
+      <div class="skeleton-container" *ngFor="let skeleton of skeletonPart">
+        <div class="skeleton-part">
+          <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px','margin-top': '7px','margin-bottom': '0px','margin-left': '10px', height: '11px', width: '250px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+          <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px','margin-bottom': '0px','margin-left': '10px', height: '11px', width: '250px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+          <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px','margin-bottom': '0px','margin-right': '10px','margin-left': '10px', height: '11px', width: '250px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        </div>
+        <div class="skeleton-part">
+          <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px','margin-top': '7px','margin-bottom': '0px','margin-left': '10px', height: '11px', width: '250px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+          <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px','margin-bottom': '0px','margin-left': '10px', height: '11px', width: '250px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+          <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px','margin-bottom': '0px','margin-right': '10px','margin-left': '10px', height: '11px', width: '250px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        </div>
+        <div class="skeleton-part">
+          <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px','margin-top': '7px','margin-bottom': '0px','margin-left': '10px', height: '11px', width: '250px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+          <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px','margin-bottom': '0px','margin-left': '10px', height: '11px', width: '250px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+          <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px','margin-bottom': '0px','margin-right': '10px','margin-left': '10px', height: '11px', width: '250px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </section>
 <div class="calendarSlide">

@@ -19,21 +19,6 @@ export class CustomDateFormatter extends CalendarDateFormatter {
     return formatDate(date, 'EEE', locale);
   } 
 }
-const colors: any = {
-  activity: {
-    primary: '#D9E021',
-    secondary: '#eaeadc',
-  },
-  selfpaced: {
-    primary: '#00A99D',
-    secondary: '#c5eae8',
-  },
-  instructor: {
-    primary: '#22ACDD',
-    secondary: '#abd1de',
-  },
-};
-
 @Component({
   selector: 'app-calendar-activity',
   templateUrl: './calendar-activity.component.html',
@@ -91,9 +76,11 @@ export class CalendarActivityComponent implements OnInit {
   events: CalendarEvent[];
   selectedDate;
   status = '';
-  activitData;
-  dataAvailable;
+  activityData;
+  dataAvailable
   monthView;
+  showSkeleton = true;
+  skeletonPart = [1,2]
   constructor(public learnerService: LearnerServicesService,private gs: GlobalServiceService,private router: Router) { }
 
   ngOnInit() {
@@ -145,6 +132,7 @@ export class CalendarActivityComponent implements OnInit {
     });
   }
   getLearnerActivity(view,selectedDate, day?: CalendarMonthViewDay){
+    this.showSkeleton = true;
     if(this.courseValue == 'All') {
       var courseValue = ''
    } else {
@@ -161,13 +149,24 @@ export class CalendarActivityComponent implements OnInit {
     selectedDate = selectedDate.date
   }
    const dateValue = moment(selectedDate).format('YYYY-MM-DD');
+   this.activityData = [];
   this.learnerService.getLearnerActivity(courseValue,this.status,view,dateValue,activityValue,this.userDetails.user_id).subscribe((result:any)=>{
     if(result?.data?.getActivityCalendar?.success){
-      this.activitData = result?.data?.getActivityCalendar?.data;
-      this.dataAvailable = true;
+      this.activityData = result?.data?.getActivityCalendar?.data;
+      this.showSkeleton = false;
+      if(this.activityData?.activities.length > 0){
+        this.dataAvailable = true;
+      } else {
+        this.dataAvailable = false;
+      }
     } else {
+      this.showSkeleton = false;
       this.dataAvailable = false;
     }
+  },
+  err =>{
+    this.showSkeleton = false;
+    this.dataAvailable = false;
   })
    if (day) {
       this.monthView = undefined;
