@@ -159,11 +159,13 @@ apidata = {
   UserDetails: any;
   userId: any;
   course_id: any;
-  pagination = 1;
+  pagination = true;
   emptyAssignment = false;
-  page = 0;
+  page = 1;
   noofItems = 6;
   assignmentContent: any;
+  projectContent: any;
+  performContent: any;
   constructor(
     public learnerService: LearnerServicesService, 
     private gs: GlobalServiceService, 
@@ -172,7 +174,6 @@ apidata = {
       const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
       this.course_id = detail.courseId;
-      console.log(detail, 'asdfafasfasfd');
     }
 
   ngOnInit() {
@@ -202,7 +203,6 @@ apidata = {
   //Assignment Module
   getAssignmentmoduleData() {
     this.learnerService.getAssignmentmoduleData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
-      console.log(data, 'Assignment Module')
       if (data.data.getAssignmentmoduleData.success) {
         this.assignmentContent = data?.data?.getAssignmentmoduleData?.data;
         if (this.assignmentContent == null) {
@@ -217,14 +217,41 @@ apidata = {
   //Project Module
   getprojectActivityData() {
     this.learnerService.getprojectActivityData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
-      console.log(data, 'Project Module');
+      if (data.data.getprojectActivityData.success) {
+        this.projectContent = data?.data?.getprojectActivityData?.data;
+        if (this.projectContent == null) {
+          this.emptyAssignment = true;
+        } else {
+          this.emptyAssignment = false
+        }
+      }
     })
   }
   
   //Perform Module
   getperformActivityData() {
     this.learnerService.getperformActivityData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
-      console.log(data, 'Perform Module');
+      if (data.data.getperformActivityData.success) {
+        this.performContent = data?.data?.getperformActivityData?.data;
+        var performIteration = [];
+        this.performContent.forEach((value)=>{
+          value.performActivity.iterationDetails.forEach(element => {
+            element.activityenddate = value.performActivity.activityenddate
+            element.activityname = value.performActivity.activityname
+            element.module_id = value.performActivity.module_id
+            element.topic_id = value.performActivity.topic_id
+          });
+        })
+        this.performContent.forEach((value)=>{
+          performIteration.push(value.performActivity.iterationDetails)
+        })
+        console.log(performIteration)
+        if (this.performContent == null) {
+          this.emptyAssignment = true;
+        } else {
+          this.emptyAssignment = false
+        }
+      }
     })
   }
 
