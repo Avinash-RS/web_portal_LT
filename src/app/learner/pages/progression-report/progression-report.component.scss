@@ -84,6 +84,9 @@
             .card-strip-orange {
                 background: #FFA04E;
             }
+            .card-strip-grey {
+                background: #666666;
+            }
             .card-description{
                 margin-top: 2.3em;
                 margin-bottom: 1.1em;
@@ -100,8 +103,14 @@
             .date-value{
                 color: #0860a0;
             }
+            .lastRow {
+                width: 100%;
+            }
             .first-content{
-                width: 3em;
+                width: 50%;
+            }
+            .statusCaps {
+                text-transform: uppercase;
             }
             .status-value-green {
                 color:#62ca8e;
@@ -112,18 +121,23 @@
             .status-value-orange {
                 color:#FFA04E;
             }
-            .score-content{
-                padding-left: 5em;
+            .status-value-grey {
+                color: #666666;
             }
-            .score-value{
+            .score-content{
+                width: 30%;
+            }
+            .score-value {
                 color:#0A2B43;
                 font-size: 22px;
             }
             .file-icon{
                 font-size: 42px;
                 color: #B3B3B3;
-                margin-left: 0.5em;
-                vertical-align: text-top;
+            }
+            .icon-content {
+                width: 15%;
+                text-align: right;
             }
         }
         .self-learning-container{

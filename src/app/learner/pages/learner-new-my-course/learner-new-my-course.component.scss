@@ -546,6 +546,11 @@
 .missedTopicsKnowledgeCheck,
 .recentlyLearnedTopics {
   margin-top: 20px;
+  .drag-scroll-wrapper {
+    &.drag-scroll-container {
+      height: auto !important;
+    }
+  }
   .wrapper {
     position: relative;
     .leftArrow,
@@ -615,6 +620,19 @@
   }
 }
 
+//
+::ng-deep.missedTopicsKnowledgeCheck,
+::ng-deep.recentlyLearnedTopics {
+  .drag-scroll-content {
+    display: flex !important;
+    justify-content: space-between;
+  }
+  .drag-scroll-wrapper {
+    &.drag-scroll-container {
+      height: auto !important;
+    }
+  }
+}
 //
 ::ng-deep.mycoursesWrapper {
   .mat-ink-bar {
