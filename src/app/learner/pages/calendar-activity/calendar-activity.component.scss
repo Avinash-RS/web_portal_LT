@@ -193,14 +193,32 @@ section {
             }
 
             .icon {
-                background-color: #41d275;
                 height: 20px;
                 width: 20px;
                 border-radius: 25px;
-                color: #fff;
                 font-size: 0.6em;
+            }
+            .green {
+                background-color: #41d275;;
+                color: #fff;
                 &::before {
                     color: #fff;
+                }
+            }
+            .grey {
+                font-size: 1.2em !important;
+                &::before {
+                    color:grey;
+                }
+            }
+            .red {
+                font-size: 1.2em !important;
+                color: red !important;
+            }
+            .timer{
+                font-size: 1.2em !important;
+                &::before {
+                    color: #FFA800 !important;
                 }
             }
         }
@@ -346,7 +364,7 @@ section {
         width: 10em !important;
     }
     .mat-form-field-appearance-outline .mat-form-field-infix {
-        padding: 0.3em 0 0.3em 0 !important;
+        padding: 0.3em 0 0.6em 0 !important;
     }
     .pull-right {
         mat-form-field {

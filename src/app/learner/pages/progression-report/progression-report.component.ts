@@ -4,6 +4,7 @@ import { Label } from 'ng2-charts';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
+import { Router } from '@angular/router';
 declare const Chart;
 
 @Component({
@@ -137,6 +138,16 @@ apidata = {
   public barChartLegend = false;
   public barChartPlugins = [];
 
+  public pieChartOption: any = {
+    legend: {
+      // position: 'right',
+      labels: {
+        fontSize: 10,
+        usePointStyle: true
+      }
+    }
+  }
+
   public barChartData: ChartDataSets[] = [
     {
       data: [65, 59, 80, 81, 56, 55],
@@ -147,7 +158,7 @@ apidata = {
   currentTab: any;
   UserDetails: any;
   userId: any;
-  courseid: any;
+  course_id: any;
   pagination = true;
   emptyAssignment = false;
   page = 0;
@@ -156,7 +167,13 @@ apidata = {
   constructor(
     public learnerService: LearnerServicesService, 
     private gs: GlobalServiceService, 
-    public CommonServices: CommonServicesService) { }
+    public CommonServices: CommonServicesService, 
+    public route: Router) {
+      const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
+      this.course_id = detail.courseId;
+      console.log(detail, 'asdfafasfasfd');
+    }
 
   ngOnInit() {
     setTimeout(() => {
@@ -166,7 +183,6 @@ apidata = {
 
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.userId = this.UserDetails.user_id;
-    this.courseid = localStorage.getItem('Courseid');
     this.getAssignmentmoduleData();
   }
 
@@ -185,7 +201,7 @@ apidata = {
 
   //Assignment Module
   getAssignmentmoduleData() {
-    this.learnerService.getAssignmentmoduleData(this.userId, this.courseid, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
+    this.learnerService.getAssignmentmoduleData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
       console.log(data, 'Assignment Module')
       if (data.data.getAssignmentmoduleData.success) {
         this.assignmentContent = data?.data?.getAssignmentmoduleData?.data;
@@ -197,7 +213,7 @@ apidata = {
       }
     })
   }
-  
+
   numPrefix(num) {
     if (num < 10) {
       return 0 + '' + num;
@@ -206,23 +222,30 @@ apidata = {
   }
   //get progression table data
   getprogression(){
+    this.learnerService.getProgressionData()
     
   }
-
+  
   //Project Module
   getprojectActivityData() {
-    this.learnerService.getprojectActivityData(this.userId, this.courseid, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
+    this.learnerService.getprojectActivityData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
       console.log(data, 'Project Module');
     })
   }
   
   //Perform Module
   getperformActivityData() {
-    this.learnerService.getperformActivityData(this.userId, this.courseid, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
+    this.learnerService.getperformActivityData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
       console.log(data, 'Perform Module');
     })
   }
 
+  getWeekNumber(week) {
+    if (week < 10) {
+      return 0 + '' + week;
+    } 
+    return week;
+  }
   createChart() {
     new Chart('piechart', {
       type: 'doughnut',
