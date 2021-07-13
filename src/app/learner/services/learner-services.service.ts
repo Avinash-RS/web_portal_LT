@@ -808,7 +808,7 @@ getMessage(): Observable<any> {
     });
   }
 
-  getLearnerActivity(courseId,status,dateType,activityType,date,userId){
+  getLearnerActivity(courseId,status,dateType,date,activityType,userId){
     return this.Apollo.query({
       query: getActivityCalendar,
       variables: {
