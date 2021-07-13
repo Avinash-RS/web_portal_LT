@@ -15,7 +15,7 @@ declare const Chart;
 export class ProgressionReportComponent implements OnInit {
   mode = 'determinate';
   bufferValue = 100;
-
+  performContentData;
 apidata = {
   "success": true,
   "message": {
@@ -241,11 +241,10 @@ apidata = {
             element.module_id = value.performActivity.module_id
             element.topic_id = value.performActivity.topic_id
           });
+          performIteration.push(...value.performActivity.iterationDetails)
         })
-        this.performContent.forEach((value)=>{
-          performIteration.push(value.performActivity.iterationDetails)
-        })
-        console.log(performIteration)
+        this.performContentData = performIteration
+        console.log(this.performContentData);
         if (this.performContent == null) {
           this.emptyAssignment = true;
         } else {

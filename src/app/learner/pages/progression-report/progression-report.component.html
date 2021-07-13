@@ -262,7 +262,7 @@
           </mat-tab>
           <mat-tab label="Perform"> 
             <div class="card-content d-flex justify-content-between">
-              <mat-card *ngFor="let performModule of performContent" class="card-container">
+              <mat-card *ngFor="let performModule of performContentData" class="card-container">
                 <div class="card-topic">
                   {{performModule?.performActivity?.module_id}} > {{performModule?.performActivity?.topic_id}}
                 </div>
