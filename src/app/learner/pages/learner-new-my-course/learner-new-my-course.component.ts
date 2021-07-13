@@ -326,7 +326,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
     let data = {
       courseId : course.course_id,
     }
-    this.router.navigateByUrl('/Learner/progressionReport', { state: { data } });
+    localStorage.setItem('Courseid', course.courseId);
+    this.router.navigateByUrl('/Learner/progressionReport', { queryParams: { data } });
   }
 
   getLearnerActivity(selectedDate) {

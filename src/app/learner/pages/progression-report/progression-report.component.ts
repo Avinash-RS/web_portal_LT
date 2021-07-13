@@ -4,7 +4,7 @@ import { Label } from 'ng2-charts';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 declare const Chart;
 
 @Component({
@@ -16,7 +16,7 @@ export class ProgressionReportComponent implements OnInit {
   mode = 'determinate';
   bufferValue = 100;
 
-apidata:any = []; 
+  apidata: any = [];
 
   selectedIndex: number = 0;
   public barChartOptions: ChartOptions = {
@@ -65,23 +65,28 @@ apidata:any = [];
   assignmentContent: any;
   showProgReport: boolean = false;
   constructor(
-    public learnerService: LearnerServicesService, 
-    private gs: GlobalServiceService, 
-    public CommonServices: CommonServicesService, 
-    public route: Router) {
-      const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
-      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
-      this.course_id = detail.courseId;
-      console.log(detail, 'asdfafasfasfd');
-    }
+    public learnerService: LearnerServicesService,
+    private gs: GlobalServiceService,
+    public CommonServices: CommonServicesService,
+    public route: Router,private activeRoute: ActivatedRoute) {
+    // const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().query &&
+    //   this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
+    this.activeRoute.queryParams.subscribe(res => {
+      console.log(res )
+    });
+
+    this.course_id = localStorage.getItem('Courseid');
+    // console.log(detail, 'asdfafasfasfd');
+  }
 
   ngOnInit() {
     setTimeout(() => {
       this.createChart();
       this.createBarChart();
-    },1000);
+    }, 1000);
 
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
+    // localStorage.getsetItem('Courseid', course.courseId);
     this.userId = this.UserDetails.user_id;
     this.getprogression()
     this.getAssignmentmoduleData();
@@ -91,15 +96,20 @@ apidata:any = [];
     this.currentTab = event.index;
     if (this.currentTab == 0) {
       this.getAssignmentmoduleData();
-    } 
+    }
     else if (this.currentTab == 1) {
       this.getprojectActivityData();
-    } 
+    }
     else if (this.currentTab == 2) {
       this.getperformActivityData();
     }
   }
 
+  time_convert(num) {
+    var hours = Math.floor(num / 60);
+    var minutes = num % 60;
+    return hours + ":" + minutes;
+  }
   //Assignment Module
   getAssignmentmoduleData() {
     this.learnerService.getAssignmentmoduleData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
@@ -118,26 +128,26 @@ apidata:any = [];
   numPrefix(num) {
     if (num < 10) {
       return 0 + '' + num;
-    } 
+    }
     return num;
   }
   //get progression table data
-  getprogression(){
+  getprogression() {
     this.showProgReport = false
-    this.learnerService.getProgressionData(this.userId,this.course_id).subscribe((data:any)=>{
+    this.learnerService.getProgressionData(this.userId, this.course_id).subscribe((data: any) => {
       this.apidata = data.data.getCourseReportByUserid.data.module;
       this.showProgReport = true;
     });
-    
+
   }
-  
+
   //Project Module
   getprojectActivityData() {
     this.learnerService.getprojectActivityData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
       console.log(data, 'Project Module');
     })
   }
-  
+
   //Perform Module
   getperformActivityData() {
     this.learnerService.getperformActivityData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
@@ -148,7 +158,7 @@ apidata:any = [];
   getWeekNumber(week) {
     if (week < 10) {
       return 0 + '' + week;
-    } 
+    }
     return week;
   }
   createChart() {
