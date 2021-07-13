@@ -264,40 +264,40 @@
             <div class="card-content d-flex justify-content-between">
               <mat-card *ngFor="let performModule of performContentData" class="card-container">
                 <div class="card-topic">
-                  {{performModule?.performActivity?.module_id}} > {{performModule?.performActivity?.topic_id}}
+                  {{performModule?.module_id}} > {{performModule?.topic_id}}
                 </div>
-                <div class="card-strip" [ngClass] = "{'card-strip-grey': performModule?.performActivity?.submit_status === 'notsubmitted', 'card-strip-green': performModule?.performActivity?.submit_status === 'ontime', 'card-strip-red': performModule?.performActivity?.submit_status === 'late'}"></div>
-                <div class="card-description mt-4 font-weight-bold">{{performModule?.performActivity?.activityname}}</div>
+                <div class="card-strip" [ngClass] = "{'card-strip-grey': performModule?.submit_status === 'notsubmitted', 'card-strip-green': performModule?.submit_status === 'ontime', 'card-strip-red': performModule?.submit_status === 'late'}"></div>
+                <div class="card-description mt-4 font-weight-bold">{{performModule?.activityname}}</div>
                 <div class="d-flex justify-content-between align-item-center mb-3">
                   <div class="date-content">
                     <div class="sub-header">Due on</div>
-                    <div class="date-value">{{performModule?.performActivity?.activityenddate | date :'dd/MM/yyyy'}}</div>
+                    <div class="date-value">{{performModule?.activityenddate | date :'dd/MM/yyyy'}}</div>
                   </div>
                   <div class="date-content">
                     <div class="sub-header">Submitted on</div>
-                    <div class="date-value" *ngIf="performModule?.performActivity?.submitted_date">{{performModule?.performActivity?.submitted_date | date :'dd/MM/yyyy'}}</div>
-                    <div class="date-value" *ngIf="!performModule?.performActivity?.submitted_date">--</div>
+                    <div class="date-value" *ngIf="performModule?.submitted_date">{{performModule?.submitted_date | date :'dd/MM/yyyy'}}</div>
+                    <div class="date-value" *ngIf="!performModule?.submitted_date">--</div>
                   </div>
                 </div>
                 <div class="lastRow d-flex justify-content-between align-item-center">
                   <div class="date-content first-content">
                     <div class="sub-header">Status</div>
-                    <div class="statusCaps status-value-grey" *ngIf="performModule?.performActivity?.submit_status == 'notsubmitted'">
+                    <div class="statusCaps status-value-grey" *ngIf="performModule?.submit_status == 'notsubmitted'">
                       {{'Yet to Submit' | translate }}
                     </div>
-                    <div class="statusCaps status-value-green" *ngIf="performModule?.performActivity?.submit_status == 'ontime'">
+                    <div class="statusCaps status-value-green" *ngIf="performModule?.submit_status == 'ontime'">
                       {{'OnTime' | translate }}
                     </div>
-                    <div class="statusCaps status-value-green" *ngIf="performModule?.performActivity?.submit_status == 'submitted' || performModule?.performActivity?.submit_status == 'graded'">
+                    <div class="statusCaps status-value-green" *ngIf="performModule?.submit_status == 'submitted' || performModule?.submit_status == 'graded'">
                       {{'Completed' | translate }}
                     </div>
-                    <div class="statusCaps status-value-red" *ngIf="performModule?.performActivity?.submit_status == 'late'">
+                    <div class="statusCaps status-value-red" *ngIf="performModule?.submit_status == 'late'">
                       {{'Late' | translate }}
                     </div>
                   </div>
                   <div class="date-content score-content">
                     <div class="sub-header">Score</div>
-                    <div class="score-value">{{performModule?.performActivity?.score_mark ? performModule?.performActivity?.score_mark : '--'}}/{{performModule?.performActivity?.total_mark}}</div>
+                    <div class="score-value">{{performModule?.score_mark ? performModule?.score_mark : '--'}}/{{performModule?.total_mark}}</div>
                   </div>
                   <div class="icon-content">
                     <em class="lxp-Assignments file-icon"></em>
