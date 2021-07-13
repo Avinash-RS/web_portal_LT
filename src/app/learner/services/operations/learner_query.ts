@@ -1340,8 +1340,8 @@ export const getCoursePlayerStatusForCourse = gql`
 `;
 
 export const getAssignmentmoduleData = gql`
-  query getAssignmentmoduleData($courseid: String, $user_id: String) {
-    getAssignmentmoduleData(courseid: $courseid, user_id: $user_id) {
+  query getAssignmentmoduleData($courseid: String, $user_id: String, $pagination:Boolean!, $page:Int!, $noofItems:Int! ) {
+    getAssignmentmoduleData(courseid: $courseid, user_id: $user_id, pagination:$pagination, page:$page, noofItems:$noofItems) {
       message
       success
       courseStartDate
@@ -1838,8 +1838,8 @@ export const getCountForJobroleCategories = gql`
       `;
 
 export const getprojectActivityData = gql`
-      query getprojectActivityData($userId: String, $courseId: String){
-        getprojectActivityData(userId: $userId, courseId: $courseId){
+      query getprojectActivityData($userId: String, $courseId: String, $pagination:Boolean!, $page:Int!, $noofItems:Int!){
+        getprojectActivityData(userId: $userId, courseId: $courseId, pagination:$pagination, page:$page, noofItems:$noofItems){
         success
         data {
         _id
@@ -1906,8 +1906,8 @@ export const getprojectActivityData = gql`
         }
 `;
 export const getperformActivityData = gql`
-query getperformActivityData($userId: String , $courseId: String) {
-  getperformActivityData(userId: $userId , courseId: $courseId ) {
+query getperformActivityData($userId: String , $courseId: String, $pagination:Boolean!, $page:Int!, $noofItems:Int!) {
+  getperformActivityData(userId: $userId , courseId: $courseId, pagination:$pagination, page:$page, noofItems:$noofItems ) {
     success
     data {
       _id

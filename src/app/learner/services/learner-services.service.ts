@@ -950,7 +950,7 @@ getprojectActivityData(userId, courseId,pagination,page,noofItems) {
   });
 }
 // get perform activity details
-  getperformActivityData(userId , courseId,pagination,page,noofItems) {
+  getperformActivityData(userId, courseId,pagination,page,noofItems) {
     return this.Apollo.query({
       query: getperformActivityData,
       variables: {

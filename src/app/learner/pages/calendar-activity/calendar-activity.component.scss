@@ -95,7 +95,7 @@ section {
         border: 0.1em solid #eaeaea;
         margin-bottom: 1em;
         position: relative;
-
+        cursor: pointer;
         @media screen and (max-width:480px) {
             flex-wrap: wrap;
             padding: 0.4em 1em;
@@ -385,4 +385,17 @@ section {
     height: 28px;
     width: 7em;
     line-height: 15px;
+}
+
+::ng-deep .calendarArea {
+    .cal-day-selected{
+        outline: #0D05D5 auto 1px;
+        outline-color: #0D05D5;
+        outline-style: auto;
+        outline-width: 1px;
+    }
+    
+    .calendarSlide .cal-month-view .cal-day-cell.cal-today {
+        background-color: #dcdada;
+    }
 }
