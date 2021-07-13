@@ -2393,3 +2393,53 @@ export const getLearnerNewCourseReport = gql`
     }
   }
 `;
+
+export const getCourseReportByUserid = gql`
+  query getCourseReportByUserid($user_id:String!,$course_id:String!) {
+    getCourseReportByUserid(user_id : $user_id, course_id:$course_id)
+    {
+message
+success
+data{
+  _id
+  module {
+    name
+    week
+    totalDuration
+    overAllPercentage
+    knowledgeCount {
+      total
+      completed
+    }
+    topicCount {
+      total
+      completed
+    }
+    colourCode {
+      value
+      enums
+    }
+    topicDetails {
+      id
+      name
+      activityDetails {
+        name
+        totalDuration
+        completedPercentage
+      }
+      knowledgeDetails {
+        name
+        totalQuestion
+        correctAns
+        incorrect
+      }
+      status {
+        value
+        enums
+      }
+    }
+  }
+}
+}
+}
+`;

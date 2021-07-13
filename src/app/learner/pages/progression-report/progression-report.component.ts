@@ -16,108 +16,7 @@ export class ProgressionReportComponent implements OnInit {
   mode = 'determinate';
   bufferValue = 100;
 
-apidata = {
-  "success": true,
-  "message": {
-      "_id": "60829e472bf07f0011139b6b",
-      "module": [
-          {
-              "name": "Single Line Diagram",
-              "week": "3",
-              "topicCount": {
-                  "total": 10,
-                  "completed": 8
-              },
-              "knowledgeCount": {
-                  "total": 10,
-                  "completed": 8
-              },
-              "totalDuration": 5,
-              "overAllPercentage": 100,
-              "colourCode": {
-                  "value": "green",
-                  "enums": [
-                      "green",
-                      "orange",
-                      "grey"
-                  ]
-              },
-              "topicDetails": [
-                  {
-                      "id": 827570,
-                      "name": "Single Line Diagram",
-                      "activityDetails": {
-                          "name": "activityone",
-                          "totalDuration": 10,
-                          "completedPercentage": 60
-                      },
-                      "knowledgeDetails": {
-                          "name": "knowone",
-                          "totalQuestion": 0,
-                          "correctAns": 0,
-                          "incorrect": 0
-                      },
-                      "status": {
-                          "value": "completed",
-                          "enums": [
-                              "completed",
-                              "inprogress",
-                              "yetToStart"
-                          ]
-                      }
-                  }
-              ]
-          },
-          {
-            "name": "Single Line Diagram",
-            "week": 3,
-            "topicCount": {
-                "total": 10,
-                "completed": 8
-            },
-            "knowledgeCount": {
-                "total": 10,
-                "completed": 8
-            },
-            "totalDuration": 60,
-            "overAllPercentage": 60,
-            "colourCode": {
-                "value": "green",
-                "enums": [
-                    "green",
-                    "orange",
-                    "grey"
-                ]
-            },
-            "topicDetails": [
-                {
-                    "id": 827570,
-                    "name": "Single Line Diagram",
-                    "activityDetails": {
-                        "name": "activityone",
-                        "totalDuration": 10,
-                        "completedPercentage": 60
-                    },
-                    "knowledgeDetails": {
-                        "name": "knowone",
-                        "totalQuestion": 10,
-                        "correctAns": 8,
-                        "incorrect": 2
-                    },
-                    "status": {
-                        "value": "completed",
-                        "enums": [
-                            "completed",
-                            "inprogress",
-                            "yetToStart"
-                        ]
-                    }
-                }
-            ]
-        }
-      ]
-  }
-};
+apidata:any = []; 
 
   selectedIndex: number = 0;
   public barChartOptions: ChartOptions = {
@@ -164,6 +63,7 @@ apidata = {
   page = 0;
   noofItems = 6;
   assignmentContent: any;
+  showProgReport: boolean = false;
   constructor(
     public learnerService: LearnerServicesService, 
     private gs: GlobalServiceService, 
@@ -183,6 +83,7 @@ apidata = {
 
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.userId = this.UserDetails.user_id;
+    this.getprogression()
     this.getAssignmentmoduleData();
   }
 
@@ -222,7 +123,11 @@ apidata = {
   }
   //get progression table data
   getprogression(){
-    this.learnerService.getProgressionData()
+    this.showProgReport = false
+    this.learnerService.getProgressionData(this.userId,this.course_id).subscribe((data:any)=>{
+      this.apidata = data.data.getCourseReportByUserid.data.module;
+      this.showProgReport = true;
+    });
     
   }
   

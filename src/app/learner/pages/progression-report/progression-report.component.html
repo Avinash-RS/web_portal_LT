@@ -50,8 +50,11 @@
     <div class="col">
       <div class="self-learning-container">
         <div class="header-label">Self Learning Progression Report</div>
-        <div class="expansion-container">
-          <div class="mt-2"  *ngFor="let moduleItem of apidata.message.module" [ngClass]="moduleItem.overAllPercentage>0?moduleItem.overAllPercentage>99?'bar-complete':'bar-inprogress':'bar-inprogress'">
+        <div *ngIf="!showProgReport">
+          <ngx-skeleton-loader count="5" [theme]="{ 'border-radius': '0', height: '50px' }"></ngx-skeleton-loader>
+        </div>
+        <div class="expansion-container" *ngIf="showProgReport">
+          <div class="mt-2"  *ngFor="let moduleItem of apidata" [ngClass]="moduleItem.overAllPercentage>0?moduleItem.overAllPercentage>99?'bar-complete':'bar-inprogress':'bar-inprogress'">
             <mat-progress-bar [mode]="mode" [value]="moduleItem.overAllPercentage" [bufferValue]="bufferValue"></mat-progress-bar>
             <mat-accordion>
               <mat-expansion-panel>
@@ -75,7 +78,7 @@
                     </div>
                     <div class="pl-5">
                       <div class="week-text">Time Spent</div>
-                      <div class="font-weight-bold text-center">{{moduleItem.totalDuration|date : 'hh:mm:ss'}}</div>
+                      <div class="font-weight-bold text-center">{{moduleItem.totalDuration?(moduleItem.totalDuration+':00:00'):'-- : -- : --'}}</div>
                     </div>
                     <div class="pl-5">
                       <circle-progress
