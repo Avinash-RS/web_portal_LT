@@ -399,3 +399,13 @@ section {
         background-color: #dcdada;
     }
 }
+
+.skeleton-container{
+    background: white;
+    margin-top: 20px;
+    padding: 6px;
+    .skeleton-part{
+        display: flex;
+        justify-content: space-between;
+    }
+}

@@ -58,12 +58,15 @@ export class ProgressionReportComponent implements OnInit {
   UserDetails: any;
   userId: any;
   course_id: any;
-  pagination = 1;
+  pagination = true;
   emptyAssignment = false;
-  page = 0;
+  page = 1;
   noofItems = 6;
   assignmentContent: any;
   showProgReport: boolean = false;
+  projectContent: any;
+  performContent: any;
+  performContentData: any[];
   constructor(
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService,
@@ -113,7 +116,6 @@ export class ProgressionReportComponent implements OnInit {
   //Assignment Module
   getAssignmentmoduleData() {
     this.learnerService.getAssignmentmoduleData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
-      console.log(data, 'Assignment Module')
       if (data.data.getAssignmentmoduleData.success) {
         this.assignmentContent = data?.data?.getAssignmentmoduleData?.data;
         if (this.assignmentContent == null) {
@@ -144,14 +146,40 @@ export class ProgressionReportComponent implements OnInit {
   //Project Module
   getprojectActivityData() {
     this.learnerService.getprojectActivityData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
-      console.log(data, 'Project Module');
+      if (data.data.getprojectActivityData.success) {
+        this.projectContent = data?.data?.getprojectActivityData?.data;
+        if (this.projectContent == null) {
+          this.emptyAssignment = true;
+        } else {
+          this.emptyAssignment = false
+        }
+      }
     })
   }
 
   //Perform Module
   getperformActivityData() {
     this.learnerService.getperformActivityData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
-      console.log(data, 'Perform Module');
+      if (data.data.getperformActivityData.success) {
+        this.performContent = data?.data?.getperformActivityData?.data;
+        var performIteration = [];
+        this.performContent.forEach((value)=>{
+          value.performActivity.iterationDetails.forEach(element => {
+            element.activityenddate = value.performActivity.activityenddate
+            element.activityname = value.performActivity.activityname
+            element.module_id = value.performActivity.module_id
+            element.topic_id = value.performActivity.topic_id
+          });
+          performIteration.push(...value.performActivity.iterationDetails)
+        })
+        this.performContentData = performIteration
+        console.log(this.performContentData);
+        if (this.performContent == null) {
+          this.emptyAssignment = true;
+        } else {
+          this.emptyAssignment = false
+        }
+      }
     })
   }
 

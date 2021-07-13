@@ -3,11 +3,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AUTO_STYLE, animate, state, style, transition, trigger } from '@angular/animations';
 import { Subject } from "rxjs";
 import * as moment from 'moment';
-import {
-  CalendarEvent,
-  CalendarDateFormatter,
-  DateFormatterParams,
-} from 'angular-calendar';
+import { CalendarEvent, CalendarDateFormatter, DateFormatterParams, } from 'angular-calendar';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
@@ -15,6 +11,7 @@ import { formatDate } from "@angular/common";
 import { MatDialog } from "@angular/material";
 import { environment } from "@env/environment";
 import { Router } from "@angular/router";
+import { DragScrollComponent } from 'ngx-drag-scroll';
 
 const DEFAULT_DURATION = 300;
 

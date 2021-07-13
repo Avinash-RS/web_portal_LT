@@ -18,13 +18,15 @@ html {
 
 body {
   // font-family: 'Roboto Condensed', sans-serif !important;
-  font-family: 'RobotoCondensed' !important;
+  // font-family: 'RobotoCondensed' !important;
+  font-family: 'Roboto' !important;
   scroll-behavior: smooth !important;
   behavior: 'smooth' !important;
 }
 
 .mat-card {
-  font-family: 'RobotoCondensed' !important;
+  // font-family: 'RobotoCondensed' !important;
+  font-family: 'Roboto' !important;
 }
 
 button,
@@ -40,7 +42,8 @@ h3,
 h4,
 h5, 
 h6 {
-  font-family: 'RobotoCondensed' !important;
+  // font-family: 'RobotoCondensed' !important;
+  font-family: 'Roboto' !important;
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
