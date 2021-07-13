@@ -90,7 +90,9 @@ export class CalendarActivityComponent implements OnInit {
   activityValue = 'All';
   events: CalendarEvent[];
   selectedDate;
-  status;
+  status = '';
+  activitData;
+  dataAvailable;
   constructor(public learnerService: LearnerServicesService,private gs: GlobalServiceService,private router: Router) { }
 
   ngOnInit() {
@@ -117,7 +119,6 @@ export class CalendarActivityComponent implements OnInit {
         item.course_name == 'All Courses' && 
         this.courseDetailsList.unshift( 
           this.courseDetailsList.splice(idx,1)[0]))
-        console.log(this.courseDetailsList)
       });
     });
   }
@@ -194,8 +195,13 @@ export class CalendarActivityComponent implements OnInit {
     selectedDate = selectedDate.date
   }
    const dateValue = moment(selectedDate).format('YYYY-MM-DD');
-  this.learnerService.getLearnerActivity(courseValue,this.status,view,dateValue,activityValue,this.userDetails.user_id).subscribe((result)=>{
-    console.log(result)
+  this.learnerService.getLearnerActivity(courseValue,this.status,view,dateValue,activityValue,this.userDetails.user_id).subscribe((result:any)=>{
+    if(result?.data?.getActivityCalendar?.success){
+      this.activitData = result?.data?.getActivityCalendar?.data;
+      this.dataAvailable = true;
+    } else {
+      this.dataAvailable = false;
+    }
   })
    if (day) {
      this.selectedMonthViewDay = day;
