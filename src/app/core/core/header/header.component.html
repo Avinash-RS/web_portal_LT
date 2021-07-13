@@ -110,8 +110,8 @@
     </button>
   </mat-menu>
 </mat-toolbar>
-<div class="sideNavStrip" routerLink="/Learner/MyCourse" [ngClass]="expandTxt?'navClose':'navOpen'" *ngIf="!hideHeaderMenu">
-  <div class="stripItem" [ngClass]="activeUrl === '/Learner/MyCourse' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
+<div class="sideNavStrip" [ngClass]="expandTxt?'navClose':'navOpen'" *ngIf="!hideHeaderMenu">
+  <div class="stripItem" routerLink="/Learner/MyCourse" [ngClass]="activeUrl === '/Learner/MyCourse' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
     <div class="icoBox">
       <em class="lxp-SelfPaced "></em>
     </div>

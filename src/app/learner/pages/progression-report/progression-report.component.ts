@@ -159,7 +159,7 @@ apidata = {
   UserDetails: any;
   userId: any;
   course_id: any;
-  pagination = true;
+  pagination = 1;
   emptyAssignment = false;
   page = 0;
   noofItems = 6;
