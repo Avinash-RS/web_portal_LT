@@ -322,6 +322,13 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
   }
 
+  gotoProgression(course) {
+    let data = {
+      courseId : course.course_id,
+    }
+    this.router.navigateByUrl('/Learner/progressionReport', { state: { data } });
+  }
+
   getLearnerActivity(selectedDate) {
     const dateValue = moment(selectedDate).format('YYYY-MM-DD');
     const empty = undefined;
