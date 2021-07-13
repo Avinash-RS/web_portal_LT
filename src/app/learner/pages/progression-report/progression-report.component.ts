@@ -198,12 +198,17 @@ apidata = {
     })
   }
   
-  getWeekNumber(week) {
-    if (week < 10) {
-      return 0 + '' + week;
+  numPrefix(num) {
+    if (num < 10) {
+      return 0 + '' + num;
     } 
-    return week;
+    return num;
   }
+  //get progression table data
+  getprogression(){
+    
+  }
+
   //Project Module
   getprojectActivityData() {
     this.learnerService.getprojectActivityData(this.userId, this.courseid, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
