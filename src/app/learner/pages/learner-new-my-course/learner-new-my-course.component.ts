@@ -320,10 +320,11 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
 
   gotoProgression(course) {
+    // debugger
     let data = {
       courseId : course.course_id,
     }
-    localStorage.setItem('Courseid', course.courseId);
+    localStorage.setItem('Courseid', course.course_id);
     this.router.navigateByUrl('/Learner/progressionReport', { queryParams: { data } });
   }
 
