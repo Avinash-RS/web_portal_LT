@@ -712,6 +712,11 @@
   }
 
   //RIGHT SIDE NAV CONTENT//
+  .drawerWrapper {
+    margin: 0 auto;
+    width: 350px;
+    // width: 96%;
+  }
   .navBackBtn {
     text-align: right;
     font-size: 20px;
@@ -996,9 +1001,18 @@
   }
   .searchNoResults {
     padding: 15px;
-    font-size: 15px;
-    font-weight: 400;
-    color: #666666;
+    text-align: center;
+    figure {
+      margin: 20px 0 10px 0;
+      img {
+        max-width: 30%;
+      }
+    }
+    p {
+      font-size: 15px;
+      font-weight: 400;
+      color: #666666;
+    }
   }
   .item {
     padding: 15px 15px 0 15px;

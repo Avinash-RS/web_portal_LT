@@ -58,12 +58,12 @@
             margin-top: 40px;
         }
         .card-content{
-            margin-top: 0;
+            margin: 0 0 0 -2.3%;
             flex-wrap: wrap;
             padding: 0 30px 22px 30px;
             .card-container {
-                margin-top: 1.5em;
-                width: 32%;
+                margin: 1.5em 0 0 2.3%;
+                width: 31%;
                 box-shadow: 0 0 4px rgba(0,0,0,0.25);
             }
             .card-topic{
@@ -276,6 +276,9 @@
       .card-strip-orange {
         background: #ffa04e;
       }
+      .card-strip-grey {
+        background: #666666;
+      }
       .card-description {
         margin-top: 2.3em;
         margin-bottom: 1.1em;
@@ -292,8 +295,14 @@
       .date-value {
         color: #0860a0;
       }
+      .lastRow {
+        width: 100%;
+      }
       .first-content {
-        width: 3em;
+        width: 50%;
+      }
+      .statusCaps {
+        text-transform: uppercase;
       }
       .status-value-green {
         color: #62ca8e;
@@ -304,8 +313,11 @@
       .status-value-orange {
         color: #ffa04e;
       }
+      .status-value-grey {
+        color: #666666;
+      }
       .score-content {
-        padding-left: 5em;
+        width: 30%;
       }
       .score-value {
         color: #0a2b43;
@@ -314,8 +326,10 @@
       .file-icon {
         font-size: 42px;
         color: #b3b3b3;
-        margin-left: 0.5em;
-        vertical-align: text-top;
+      }
+      .icon-content {
+        width: 15%;
+        text-align: right;
       }
     }
     .self-learning-container {
@@ -496,6 +510,43 @@
     }
   }
 
+// No Card
+.noCard {
+  text-align: center;
+  figure {
+    margin: 15px 0;
+  }
+  p {
+    font-size: 14px;
+    color: #000000;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 30px ​!important;
+  }
+}
+
+//Skeleton
+.skeleton {
+  margin: 20px 30px;
+  .item {
+    border-radius: 4px;
+    padding: 5px 10px;
+    background-color: #fff;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+    width: 32%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .loaderStyle {
+      border-radius: 2px;
+      height: 20px;
+      width: 100%;
+      background-color: $skeletonColor;
+      border: 1px solid white;
+      margin: 4px 0;
+    }
+  }
+}
 
 ::ng-deep .activities-progress {
   .mat-progress-bar {
@@ -534,6 +585,9 @@
   .mat-tab-label-active {
     font-weight: bolder !important;
     color: black !important;
+  }
+  .mat-tab-body-content {
+    min-height: 195px !important;
   }
 }
 

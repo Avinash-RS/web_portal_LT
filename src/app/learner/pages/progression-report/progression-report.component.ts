@@ -63,6 +63,7 @@ export class ProgressionReportComponent implements OnInit {
   page = 1;
   noofItems = 6;
   assignmentContent: any;
+  showSkeleton = false;
   showProgReport: boolean = false;
   projectContent: any;
   performContent: any;
@@ -89,7 +90,7 @@ export class ProgressionReportComponent implements OnInit {
     }, 1000);
 
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
-    // localStorage.getsetItem('Courseid', course.courseId);
+    this.course_id = localStorage.getItem('Courseid');
     this.userId = this.UserDetails.user_id;
     this.getprogression()
     this.getAssignmentmoduleData();
@@ -115,15 +116,61 @@ export class ProgressionReportComponent implements OnInit {
   }
   //Assignment Module
   getAssignmentmoduleData() {
+    this.showSkeleton = true;
     this.learnerService.getAssignmentmoduleData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
       if (data.data.getAssignmentmoduleData.success) {
         this.assignmentContent = data?.data?.getAssignmentmoduleData?.data;
-        if (this.assignmentContent == null) {
+        if (this.assignmentContent.length == 0) {
           this.emptyAssignment = true;
         } else {
           this.emptyAssignment = false
         }
       }
+      this.showSkeleton = false;
+    })
+  }
+
+  //Project Module
+  getprojectActivityData() {
+    this.showSkeleton = true;
+    this.learnerService.getprojectActivityData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
+      if (data.data.getprojectActivityData.success) {
+        this.projectContent = data?.data?.getprojectActivityData?.data;
+        if (this.projectContent.length == 0) {
+          this.emptyAssignment = true;
+        } else {
+          this.emptyAssignment = false
+        }
+      }
+      this.showSkeleton = false;
+    })
+  }
+
+  //Perform Module
+  getperformActivityData() {
+    this.showSkeleton = true;
+    this.learnerService.getperformActivityData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
+      if (data.data.getperformActivityData.success) {
+        this.performContent = data?.data?.getperformActivityData?.data;
+        var performIteration = [];
+        this.performContent.forEach((value)=>{
+          value.performActivity.iterationDetails.forEach(element => {
+            element.activityenddate = value.performActivity.activityenddate
+            element.activityname = value.performActivity.activityname
+            element.module_id = value.performActivity.module_id
+            element.topic_id = value.performActivity.topic_id
+          });
+          performIteration.push(...value.performActivity.iterationDetails)
+        })
+        this.performContentData = performIteration
+        console.log(this.performContentData);
+        if (this.performContent.length == 0) {
+          this.emptyAssignment = true;
+        } else {
+          this.emptyAssignment = false
+        }
+      }
+      this.showSkeleton = false;
     })
   }
 
@@ -141,46 +188,6 @@ export class ProgressionReportComponent implements OnInit {
       this.showProgReport = true;
     });
 
-  }
-
-  //Project Module
-  getprojectActivityData() {
-    this.learnerService.getprojectActivityData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
-      if (data.data.getprojectActivityData.success) {
-        this.projectContent = data?.data?.getprojectActivityData?.data;
-        if (this.projectContent == null) {
-          this.emptyAssignment = true;
-        } else {
-          this.emptyAssignment = false
-        }
-      }
-    })
-  }
-
-  //Perform Module
-  getperformActivityData() {
-    this.learnerService.getperformActivityData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
-      if (data.data.getperformActivityData.success) {
-        this.performContent = data?.data?.getperformActivityData?.data;
-        var performIteration = [];
-        this.performContent.forEach((value)=>{
-          value.performActivity.iterationDetails.forEach(element => {
-            element.activityenddate = value.performActivity.activityenddate
-            element.activityname = value.performActivity.activityname
-            element.module_id = value.performActivity.module_id
-            element.topic_id = value.performActivity.topic_id
-          });
-          performIteration.push(...value.performActivity.iterationDetails)
-        })
-        this.performContentData = performIteration
-        console.log(this.performContentData);
-        if (this.performContent == null) {
-          this.emptyAssignment = true;
-        } else {
-          this.emptyAssignment = false
-        }
-      }
-    })
   }
 
   getWeekNumber(week) {

@@ -150,177 +150,165 @@
       <div class="tab-container">
         <mat-tab-group (selectedTabChange)="tabChanged($event)" [(selectedIndex)]="selectedIndex">
           <mat-tab label="Assignment">
-            <div class="card-content d-flex justify-content-between">
-              <mat-card *ngFor="let assignmentModule of assignmentContent" class="card-container">
-                <div class="card-topic">
-                  {{assignmentModule?.files?.module_id}} > {{assignmentModule?.files?.topic_id}}
-                </div>
-                <div class="card-strip" [ngClass] = "{'card-strip-grey': assignmentModule?.files?.submit_status === 'notsubmitted', 'card-strip-green': assignmentModule?.files?.submit_status === 'ontime', 'card-strip-red': assignmentModule?.files?.submit_status === 'late'}"></div>
-                <div class="card-description mt-4 font-weight-bold">{{assignmentModule?.files?.activityname}}</div>
-                <div class="d-flex justify-content-between align-item-center mb-3">
-                  <div class="date-content">
-                    <div class="sub-header">Due on</div>
-                    <div class="date-value">{{assignmentModule?.files?.activityenddate | date :'dd/MM/yyyy'}}</div>
+            <div *ngIf="!showSkeleton; else skeletonLoad">
+              <div class="card-content d-flex justify-content-start">
+                <mat-card *ngFor="let assignmentModule of assignmentContent" class="card-container">
+                  <div class="card-topic">
+                    {{assignmentModule?.files?.module_id}} > {{assignmentModule?.files?.topic_id}}
                   </div>
-                  <div class="date-content">
-                    <div class="sub-header">Submitted on</div>
-                    <div class="date-value" *ngIf="assignmentModule?.files?.submitted_date">{{assignmentModule?.files?.submitted_date | date :'dd/MM/yyyy'}}</div>
-                    <div class="date-value" *ngIf="!assignmentModule?.files?.submitted_date">--</div>
-                  </div>
-                </div>
-                <div class="lastRow d-flex justify-content-between align-item-center">
-                  <div class="date-content first-content">
-                    <div class="sub-header">Status</div>
-                    <div class="statusCaps status-value-grey" *ngIf="assignmentModule?.files?.submit_status == 'notsubmitted'">
-                      {{'Yet to Submit' | translate }}
+                  <div class="card-strip" [ngClass] = "{'card-strip-grey': assignmentModule?.files?.submit_status === 'notsubmitted', 'card-strip-green': assignmentModule?.files?.submit_status === 'ontime', 'card-strip-red': assignmentModule?.files?.submit_status === 'late'}"></div>
+                  <div class="card-description mt-4 font-weight-bold">{{assignmentModule?.files?.activityname}}</div>
+                  <div class="d-flex justify-content-between align-item-center mb-3">
+                    <div class="date-content">
+                      <div class="sub-header">Due on</div>
+                      <div class="date-value">{{assignmentModule?.files?.activityenddate | date :'dd/MM/yyyy'}}</div>
                     </div>
-                    <div class="statusCaps status-value-green" *ngIf="assignmentModule?.files?.submit_status == 'ontime'">
-                      {{'OnTime' | translate }}
-                    </div>
-                    <div class="statusCaps status-value-green" *ngIf="assignmentModule?.files?.submit_status == 'submitted' || assignmentModule?.files?.submit_status == 'graded'">
-                      {{'Completed' | translate }}
-                    </div>
-                    <div class="statusCaps status-value-red" *ngIf="assignmentModule?.files?.submit_status == 'late'">
-                      {{'Late' | translate }}
+                    <div class="date-content">
+                      <div class="sub-header">Submitted on</div>
+                      <div class="date-value" *ngIf="assignmentModule?.files?.submitted_date">{{assignmentModule?.files?.submitted_date | date :'dd/MM/yyyy'}}</div>
+                      <div class="date-value" *ngIf="!assignmentModule?.files?.submitted_date">--</div>
                     </div>
                   </div>
-                  <div class="date-content score-content">
-                    <div class="sub-header">Score</div>
-                    <div class="score-value">{{assignmentModule?.files?.score_mark ? assignmentModule?.files?.score_mark : '--'}}/{{assignmentModule?.files?.total_mark}}</div>
+                  <div class="lastRow d-flex justify-content-between align-item-center">
+                    <div class="date-content first-content">
+                      <div class="sub-header">Status</div>
+                      <div class="statusCaps status-value-grey" *ngIf="assignmentModule?.files?.submit_status == 'notsubmitted'">
+                        {{'Yet to Submit' | translate }}
+                      </div>
+                      <div class="statusCaps status-value-green" *ngIf="assignmentModule?.files?.submit_status == 'ontime'">
+                        {{'OnTime' | translate }}
+                      </div>
+                      <div class="statusCaps status-value-green" *ngIf="assignmentModule?.files?.submit_status == 'submitted' || assignmentModule?.files?.submit_status == 'graded'">
+                        {{'Completed' | translate }}
+                      </div>
+                      <div class="statusCaps status-value-red" *ngIf="assignmentModule?.files?.submit_status == 'late'">
+                        {{'Late' | translate }}
+                      </div>
+                    </div>
+                    <div class="date-content score-content">
+                      <div class="sub-header">Score</div>
+                      <div class="score-value">{{assignmentModule?.files?.score_mark ? assignmentModule?.files?.score_mark : '--'}}/{{assignmentModule?.files?.total_mark}}</div>
+                    </div>
+                    <div class="icon-content">
+                      <em class="lxp-Assignments file-icon"></em>
+                    </div>
                   </div>
-                  <div class="icon-content">
-                    <em class="lxp-Assignments file-icon"></em>
-                  </div>
-                </div>
-              </mat-card>
-            </div>
-            <div *ngIf="emptyAssignment">
-              <mat-card class="noSessionCard color-yellow-card-status">
-                <div class="row mar-t-12 noSessioncardRow">
-                  <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-                    <img class="actImg" src="assets/Assignment.svg" alt="assignment">
-                  </div>
-                  <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
-                    <span class="spanTxt"> You have no assignments at the moment!</span>
-                  </div>
-                </div>
-              </mat-card> 
+                </mat-card>
+              </div>
+              <div class="noCard" *ngIf="emptyAssignment">
+                <figure>
+                  <img src="/assets/images/noassignment.svg" alt="assignment">
+                </figure>
+                <p> You have no Assignment activity at the moment!</p>
+              </div>
             </div>
           </mat-tab>
-          <mat-tab label="Project"> 
-            <div class="card-content d-flex justify-content-between">
-              <mat-card *ngFor="let projectModule of projectContent" class="card-container">
-                <div class="card-topic">
-                  {{projectModule?.projectActivity?.module_id}} > {{projectModule?.projectActivity?.topic_id}}
-                </div>
-                <div class="card-strip" [ngClass] = "{'card-strip-grey': projectModule?.projectActivity?.submit_status === 'notsubmitted', 'card-strip-green': projectModule?.projectActivity?.submit_status === 'ontime', 'card-strip-red': projectModule?.projectActivity?.submit_status === 'late'}"></div>
-                <div class="card-description mt-4 font-weight-bold">{{projectModule?.projectActivity?.activityname}}</div>
-                <div class="d-flex justify-content-between align-item-center mb-3">
-                  <div class="date-content">
-                    <div class="sub-header">Due on</div>
-                    <div class="date-value">{{projectModule?.projectActivity?.activityenddate | date :'dd/MM/yyyy'}}</div>
+          <mat-tab label="Project">
+            <div *ngIf="!showSkeleton; else skeletonLoad">
+              <div class="card-content d-flex justify-content-start">
+                <mat-card *ngFor="let projectModule of projectContent" class="card-container">
+                  <div class="card-topic">
+                    {{projectModule?.projectActivity?.module_id}} > {{projectModule?.projectActivity?.topic_id}}
                   </div>
-                  <div class="date-content">
-                    <div class="sub-header">Submitted on</div>
-                    <div class="date-value" *ngIf="projectModule?.projectActivity?.submitted_date">{{projectModule?.projectActivity?.submitted_date | date :'dd/MM/yyyy'}}</div>
-                    <div class="date-value" *ngIf="!projectModule?.projectActivity?.submitted_date">--</div>
-                  </div>
-                </div>
-                <div class="lastRow d-flex justify-content-between align-item-center">
-                  <div class="date-content first-content">
-                    <div class="sub-header">Status</div>
-                    <div class="statusCaps status-value-grey" *ngIf="projectModule?.projectActivity?.submit_status == 'notsubmitted'">
-                      {{'Yet to Submit' | translate }}
+                  <div class="card-strip" [ngClass] = "{'card-strip-grey': projectModule?.projectActivity?.submit_status === 'notsubmitted', 'card-strip-green': projectModule?.projectActivity?.submit_status === 'ontime', 'card-strip-red': projectModule?.projectActivity?.submit_status === 'late'}"></div>
+                  <div class="card-description mt-4 font-weight-bold">{{projectModule?.projectActivity?.activityname}}</div>
+                  <div class="d-flex justify-content-between align-item-center mb-3">
+                    <div class="date-content">
+                      <div class="sub-header">Due on</div>
+                      <div class="date-value">{{projectModule?.projectActivity?.activityenddate | date :'dd/MM/yyyy'}}</div>
                     </div>
-                    <div class="statusCaps status-value-green" *ngIf="projectModule?.projectActivity?.submit_status == 'ontime'">
-                      {{'OnTime' | translate }}
-                    </div>
-                    <div class="statusCaps status-value-green" *ngIf="projectModule?.projectActivity?.submit_status == 'submitted' || projectModule?.projectActivity?.submit_status == 'graded'">
-                      {{'Completed' | translate }}
-                    </div>
-                    <div class="statusCaps status-value-red" *ngIf="projectModule?.projectActivity?.submit_status == 'late'">
-                      {{'Late' | translate }}
+                    <div class="date-content">
+                      <div class="sub-header">Submitted on</div>
+                      <div class="date-value" *ngIf="projectModule?.projectActivity?.submitted_date">{{projectModule?.projectActivity?.submitted_date | date :'dd/MM/yyyy'}}</div>
+                      <div class="date-value" *ngIf="!projectModule?.projectActivity?.submitted_date">--</div>
                     </div>
                   </div>
-                  <div class="date-content score-content">
-                    <div class="sub-header">Score</div>
-                    <div class="score-value">{{projectModule?.projectActivity?.score_mark ? projectModule?.projectActivity?.score_mark : '--'}}/{{projectModule?.projectActivity?.total_mark}}</div>
+                  <div class="lastRow d-flex justify-content-between align-item-center">
+                    <div class="date-content first-content">
+                      <div class="sub-header">Status</div>
+                      <div class="statusCaps status-value-grey" *ngIf="projectModule?.projectActivity?.submit_status == 'notsubmitted'">
+                        {{'Yet to Submit' | translate }}
+                      </div>
+                      <div class="statusCaps status-value-green" *ngIf="projectModule?.projectActivity?.submit_status == 'ontime'">
+                        {{'OnTime' | translate }}
+                      </div>
+                      <div class="statusCaps status-value-green" *ngIf="projectModule?.projectActivity?.submit_status == 'submitted' || projectModule?.projectActivity?.submit_status == 'graded'">
+                        {{'Completed' | translate }}
+                      </div>
+                      <div class="statusCaps status-value-red" *ngIf="projectModule?.projectActivity?.submit_status == 'late'">
+                        {{'Late' | translate }}
+                      </div>
+                    </div>
+                    <div class="date-content score-content">
+                      <div class="sub-header">Score</div>
+                      <div class="score-value">{{projectModule?.projectActivity?.score_mark ? projectModule?.projectActivity?.score_mark : '--'}}/{{projectModule?.projectActivity?.total_mark}}</div>
+                    </div>
+                    <div class="icon-content">
+                      <em class="lxp-Assignments file-icon"></em>
+                    </div>
                   </div>
-                  <div class="icon-content">
-                    <em class="lxp-Assignments file-icon"></em>
-                  </div>
-                </div>
-              </mat-card>
-            </div>
-            <div *ngIf="emptyAssignment">
-              <mat-card class="noSessionCard color-yellow-card-status">
-                <div class="row mar-t-12 noSessioncardRow">
-                  <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-                    <img class="actImg" src="assets/Assignment.svg" alt="assignment">
-                  </div>
-                  <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
-                    <span class="spanTxt"> You have no assignments at the moment!</span>
-                  </div>
-                </div>
-              </mat-card> 
+                </mat-card>
+              </div>
+              <div class="noCard" *ngIf="emptyAssignment">
+                <figure>
+                  <img src="/assets/images/noproject.svg" alt="assignment">
+                </figure>
+                <p>You have no Project activity at the moment!</p>
+              </div>
             </div>
           </mat-tab>
-          <mat-tab label="Perform"> 
-            <div class="card-content d-flex justify-content-between">
-              <mat-card *ngFor="let performModule of performContentData" class="card-container">
-                <div class="card-topic">
-                  {{performModule?.module_id}} > {{performModule?.topic_id}}
-                </div>
-                <div class="card-strip" [ngClass] = "{'card-strip-grey': performModule?.submit_status === 'notsubmitted', 'card-strip-green': performModule?.submit_status === 'ontime', 'card-strip-red': performModule?.submit_status === 'late'}"></div>
-                <div class="card-description mt-4 font-weight-bold">{{performModule?.activityname}}</div>
-                <div class="d-flex justify-content-between align-item-center mb-3">
-                  <div class="date-content">
-                    <div class="sub-header">Due on</div>
-                    <div class="date-value">{{performModule?.activityenddate | date :'dd/MM/yyyy'}}</div>
+          <mat-tab label="Perform">
+            <div *ngIf="!showSkeleton; else skeletonLoad">
+              <div class="card-content d-flex justify-content-start">
+                <mat-card *ngFor="let performModule of performContentData" class="card-container">
+                  <div class="card-topic">
+                    {{performModule?.module_id}} > {{performModule?.topic_id}}
                   </div>
-                  <div class="date-content">
-                    <div class="sub-header">Submitted on</div>
-                    <div class="date-value" *ngIf="performModule?.submitted_date">{{performModule?.submitted_date | date :'dd/MM/yyyy'}}</div>
-                    <div class="date-value" *ngIf="!performModule?.submitted_date">--</div>
-                  </div>
-                </div>
-                <div class="lastRow d-flex justify-content-between align-item-center">
-                  <div class="date-content first-content">
-                    <div class="sub-header">Status</div>
-                    <div class="statusCaps status-value-grey" *ngIf="performModule?.submit_status == 'notsubmitted'">
-                      {{'Yet to Submit' | translate }}
+                  <div class="card-strip" [ngClass] = "{'card-strip-grey': performModule?.submit_status === 'notsubmitted', 'card-strip-green': performModule?.submit_status === 'ontime', 'card-strip-red': performModule?.submit_status === 'late'}"></div>
+                  <div class="card-description mt-4 font-weight-bold">{{performModule?.activityname}}</div>
+                  <div class="d-flex justify-content-between align-item-center mb-3">
+                    <div class="date-content">
+                      <div class="sub-header">Due on</div>
+                      <div class="date-value">{{performModule?.activityenddate | date :'dd/MM/yyyy'}}</div>
                     </div>
-                    <div class="statusCaps status-value-green" *ngIf="performModule?.submit_status == 'ontime'">
-                      {{'OnTime' | translate }}
-                    </div>
-                    <div class="statusCaps status-value-green" *ngIf="performModule?.submit_status == 'submitted' || performModule?.submit_status == 'graded'">
-                      {{'Completed' | translate }}
-                    </div>
-                    <div class="statusCaps status-value-red" *ngIf="performModule?.submit_status == 'late'">
-                      {{'Late' | translate }}
+                    <div class="date-content">
+                      <div class="sub-header">Submitted on</div>
+                      <div class="date-value" *ngIf="performModule?.submitted_date">{{performModule?.submitted_date | date :'dd/MM/yyyy'}}</div>
+                      <div class="date-value" *ngIf="!performModule?.submitted_date">--</div>
                     </div>
                   </div>
-                  <div class="date-content score-content">
-                    <div class="sub-header">Score</div>
-                    <div class="score-value">{{performModule?.score_mark ? performModule?.score_mark : '--'}}/{{performModule?.total_mark}}</div>
+                  <div class="lastRow d-flex justify-content-between align-item-center">
+                    <div class="date-content first-content">
+                      <div class="sub-header">Status</div>
+                      <div class="statusCaps status-value-grey" *ngIf="performModule?.submit_status == 'notsubmitted'">
+                        {{'Yet to Submit' | translate }}
+                      </div>
+                      <div class="statusCaps status-value-green" *ngIf="performModule?.submit_status == 'ontime'">
+                        {{'OnTime' | translate }}
+                      </div>
+                      <div class="statusCaps status-value-green" *ngIf="performModule?.submit_status == 'submitted' || performModule?.submit_status == 'graded'">
+                        {{'Completed' | translate }}
+                      </div>
+                      <div class="statusCaps status-value-red" *ngIf="performModule?.submit_status == 'late'">
+                        {{'Late' | translate }}
+                      </div>
+                    </div>
+                    <div class="date-content score-content">
+                      <div class="sub-header">Score</div>
+                      <div class="score-value">{{performModule?.score_mark ? performModule?.score_mark : '--'}}/{{performModule?.total_mark}}</div>
+                    </div>
+                    <div class="icon-content">
+                      <em class="lxp-Assignments file-icon"></em>
+                    </div>
                   </div>
-                  <div class="icon-content">
-                    <em class="lxp-Assignments file-icon"></em>
-                  </div>
-                </div>
-              </mat-card>
-            </div>
-            <div *ngIf="emptyAssignment">
-              <mat-card class="noSessionCard color-yellow-card-status">
-                <div class="row mar-t-12 noSessioncardRow">
-                  <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-                    <img class="actImg" src="assets/Assignment.svg" alt="assignment">
-                  </div>
-                  <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
-                    <span class="spanTxt"> You have no assignments at the moment!</span>
-                  </div>
-                </div>
-              </mat-card> 
+                </mat-card>
+              </div>
+              <div class="noCard" *ngIf="emptyAssignment">
+                <figure>
+                  <img src="/assets/images/noperform.svg" alt="assignment">
+                </figure>
+                <p>You have no Perform activity at the moment!</p>
+              </div>
             </div>
           </mat-tab>
         </mat-tab-group>
@@ -367,3 +355,29 @@
     </div>
   </div>
 </div>
+
+<ng-template #skeletonLoad>
+  <div class="skeleton d-flex justify-content-between">
+    <div class="item item1">
+      <ngx-skeleton-loader class="loaderStyle" count="1" ></ngx-skeleton-loader>
+      <ngx-skeleton-loader class="loaderStyle" count="1" ></ngx-skeleton-loader>
+      <ngx-skeleton-loader class="loaderStyle" count="1" ></ngx-skeleton-loader>
+      <ngx-skeleton-loader class="loaderStyle" count="1" ></ngx-skeleton-loader>
+      <ngx-skeleton-loader class="loaderStyle" count="1" ></ngx-skeleton-loader>
+    </div>
+    <div class="item item2">
+      <ngx-skeleton-loader class="loaderStyle" count="1" ></ngx-skeleton-loader>
+      <ngx-skeleton-loader class="loaderStyle" count="1" ></ngx-skeleton-loader>
+      <ngx-skeleton-loader class="loaderStyle" count="1" ></ngx-skeleton-loader>
+      <ngx-skeleton-loader class="loaderStyle" count="1" ></ngx-skeleton-loader>
+      <ngx-skeleton-loader class="loaderStyle" count="1" ></ngx-skeleton-loader>
+    </div>
+    <div class="item item3">
+      <ngx-skeleton-loader class="loaderStyle" count="1" ></ngx-skeleton-loader>
+      <ngx-skeleton-loader class="loaderStyle" count="1" ></ngx-skeleton-loader>
+      <ngx-skeleton-loader class="loaderStyle" count="1" ></ngx-skeleton-loader>
+      <ngx-skeleton-loader class="loaderStyle" count="1" ></ngx-skeleton-loader>
+      <ngx-skeleton-loader class="loaderStyle" count="1" ></ngx-skeleton-loader>
+    </div>
+  </div>
+</ng-template>

@@ -3,109 +3,106 @@
 <div class="sideNavWrapper">
     <div>
         <mat-drawer-container class="sideNavContainer" autosize>
-            <mat-drawer #drawer class="sideNav" [mode]="innerWidth>1140?'side':'over'" position="end"> 
-                <!-- Over Side Push -->
-                <div class="navBackBtn">
-                    <span type="button" (click)="drawer.toggle();show=!show">
-                        <em class="lxp-Right_Arrow"></em>
-                    </span>
-                </div>
-                <!-- //////////// -->
-                <div class="prevNext">
-                    <p>TASKS TO DO</p>
-                    <div class="wrapperTaskToDo d-flex align-items-center justify-content-between">
-                        <div class="currentMonth">
-                            <h3>{{ viewDate | calendarDate:('month' + 'ViewTitle'):'en' }}</h3>
-                        </div>
-                        <div class="arrows">
-                            <span mwlCalendarPreviousView [view]="'week'" [(viewDate)]="viewDate">
-                                <em class="lxp-Rewind_Arrow"></em>
-                            </span>
-                            <span mwlCalendarNextView [view]="'week'" [(viewDate)]="viewDate">
-                                <em class="lxp-Forward_Arrow"></em>
-                            </span>
-                        </div>
+            <mat-drawer #drawer class="sideNav" [opened]="innerWidth>1140 ? 'true':'false'" [mode]="innerWidth>1140?'side':'over'" position="end"> 
+                <div class="drawerWrapper">
+                    <!-- Over Side Push -->
+                    <div class="navBackBtn">
+                        <span type="button" (click)="drawer.toggle();show=!show">
+                            <em class="lxp-Right_Arrow"></em>
+                        </span>
                     </div>
-                    
-                    <div class="weekviewHead">
-                        <mwl-calendar-week-view (dayHeaderClicked)="getLearnerActivity($event.day.date)" [weekStartsOn]="1" [viewDate]="viewDate" [events]="events"></mwl-calendar-week-view>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="sideTabsStrip">
-                        <div class="activeTabItem">
-                            To Do
-                        </div>
-                    </div>
-                    <ng-container *ngFor="let data of learnerActivityList;">
-                        <div class="listItem d-flex justify-content-start">
-                            <div class="dateFlag" [ngClass] = "{'ongoing': data.status === 'On going', 'completed': data.status === 'Completed', 'yettoStart': data.status === 'Up Coming'}">
-                                <div class="dateDiv">
-                                    <span class="flagDay">{{dayMonth | date :'dd'}}</span>
-                                    <span class="flagMonth">{{dayMonth | date :'MMM'}}</span>
-                                </div>
+                    <!-- //////////// -->
+                    <div class="prevNext">
+                        <p>TASKS TO DO</p>
+                        <div class="wrapperTaskToDo d-flex align-items-center justify-content-between">
+                            <div class="currentMonth">
+                                <h3>{{ viewDate | calendarDate:('month' + 'ViewTitle'):'en' }}</h3>
                             </div>
-                            <div class="detailData">
-                                <div class="badgedata d-flex justify-content-between">
-                                    <p class="d-flex justify-content-center align-items-center">
-                                        {{data.activity_details.activitytype}}
-                                    </p>
-                                    <div class="status">
-                                        <span class="ongoing" *ngIf="data.status == 'On going'">
-                                            <em class="lxp-Timer_Outlined"></em>{{'Ongoing' | translate }}
-                                        </span>
-                                        <span class="yettoStart" *ngIf="data.status == 'Up Coming'">
-                                            <em class="lxp-Play"></em>{{'Upcoming' | translate }}
-                                        </span>
-                                        <span class="completed" *ngIf="data.status == 'Completed'">
-                                            <em class="lxp-Right"></em>{{'Completed' | translate }}
-                                        </span>
+                            <div class="arrows">
+                                <span mwlCalendarPreviousView [view]="'week'" [(viewDate)]="viewDate">
+                                    <em class="lxp-Rewind_Arrow"></em>
+                                </span>
+                                <span mwlCalendarNextView [view]="'week'" [(viewDate)]="viewDate">
+                                    <em class="lxp-Forward_Arrow"></em>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="weekviewHead">
+                            <mwl-calendar-week-view (dayHeaderClicked)="getLearnerActivity($event.day.date)" [weekStartsOn]="1" [viewDate]="viewDate" [events]="events"></mwl-calendar-week-view>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sideTabsStrip">
+                            <div class="activeTabItem">
+                                To Do
+                            </div>
+                        </div>
+                        <ng-container *ngFor="let data of learnerActivityList;">
+                            <div class="listItem d-flex justify-content-start">
+                                <div class="dateFlag" [ngClass] = "{'ongoing': data.status === 'On going', 'completed': data.status === 'Completed', 'yettoStart': data.status === 'Up Coming'}">
+                                    <div class="dateDiv">
+                                        <span class="flagDay">{{dayMonth | date :'dd'}}</span>
+                                        <span class="flagMonth">{{dayMonth | date :'MMM'}}</span>
                                     </div>
                                 </div>
-                                <div class="titleFontSize">{{data.activity_details.coursename}}</div>
-                                <div class="type">Module: <span>{{data.activity_details.modulename}}</span></div>
-                                <div class="topic">Topic: <span>{{data.activity_details.topicname}}</span></div>
-                                <div class="date">Date: {{data.activity_details.startdate | date :'d/M/yy h:mm a'}} - {{data.activity_details.enddate | date :'d/M/yy h:mm a'}}</div>
+                                <div class="detailData">
+                                    <div class="badgedata d-flex justify-content-between">
+                                        <p class="d-flex justify-content-center align-items-center">
+                                            {{data.activity_details.activitytype}}
+                                        </p>
+                                        <div class="status">
+                                            <span class="ongoing" *ngIf="data.status == 'On going'">
+                                                <em class="lxp-Timer_Outlined"></em>{{'Ongoing' | translate }}
+                                            </span>
+                                            <span class="yettoStart" *ngIf="data.status == 'Up Coming'">
+                                                <em class="lxp-Play"></em>{{'Upcoming' | translate }}
+                                            </span>
+                                            <span class="completed" *ngIf="data.status == 'Completed'">
+                                                <em class="lxp-Right"></em>{{'Completed' | translate }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="titleFontSize">{{data.activity_details.coursename}}</div>
+                                    <div class="type">Module: <span>{{data.activity_details.modulename}}</span></div>
+                                    <div class="topic">Topic: <span>{{data.activity_details.topicname}}</span></div>
+                                    <div class="date">Date: {{data.activity_details.startdate | date :'d/M/yy h:mm a'}} - {{data.activity_details.enddate | date :'d/M/yy h:mm a'}}</div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <div class="item" *ngIf="showSkeleton">
+                            <div class="d-flex justify-content-between">
+                                <div class="item1">
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px', height: '50px', width: '50px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                </div>
+                                <div class="item2">
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="item1">
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px', height: '50px', width: '50px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                </div>
+                                <div class="item2">
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                </div>
                             </div>
                         </div>
-                    </ng-container>
-                    <div class="item" *ngIf="showSkeleton">
-                        <div class="d-flex justify-content-between">
-                            <div class="item1">
-                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px', height: '50px', width: '50px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                        <ng-container *ngIf="noActivity">
+                            <div class="searchNoResults">
+                                <figure>
+                                    <img src="/assets/images/nocard.svg" alt="No Card" />
+                                </figure>
+                                <p>You have no activity scheduled for the day!</p>
                             </div>
-                            <div class="item2">
-                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <div class="item1">
-                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px', height: '50px', width: '50px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                            </div>
-                            <div class="item2">
-                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                            </div>
+                        </ng-container>
+                        <div *ngIf="noActivity">
+                            <!-- <a>View all <em class="lxp-Right_Direction_Arrow"></em></a> -->
                         </div>
                     </div>
-                    <ng-container *ngIf="noActivity">
-                        <div class="searchNoResults">
-                            You have no activities at this moment!
-                         </div>
-                    </ng-container>
-                    <!-- <div class="status d-flex justify-content-between">
-                        <div class="d-flex justify-content-start">
-                            <span class="overdue">Overdue</span>
-                            <span class="ongoing">OnGoing</span>
-                            <span class="completed">Completed</span>
-                            <span class="yettoStart">Yet to Start</span>
-                        </div>
-                        <a>View all <em class="lxp-Right_Direction_Arrow"></em></a>
-                    </div> -->
                 </div>
             </mat-drawer>
 
@@ -129,7 +126,7 @@
 
                 <!-- Top 3 Things Contents -->
                 <div [@collapse]="expandcollapse">
-                    <div class="top3Things d-flex justify-content-between" [ngClass]="show ? '': 'noPadding'">
+                    <div class="top3Things d-flex justify-content-between" [ngClass]="show ? 'noPadding': ''">
                         <div class="box">
                             <div>
                                 <h6>Learn from where your left</h6>
@@ -182,7 +179,7 @@
                 </div>
 
                 <!-- My Course -->
-                <div class="mycoursesWrapper" [ngClass]="show ? '': 'noPadding'">
+                <div class="mycoursesWrapper" [ngClass]="show ? 'noPadding': ''">
                     <h3>My Courses</h3>
                     <mat-tab-group #tabs (selectedTabChange)="courseTabChange($event,userDetailes.user_id,userDetailes._id);"
                     [(selectedIndex)]="selectedIndex">
