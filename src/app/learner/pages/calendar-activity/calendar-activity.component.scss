@@ -54,12 +54,13 @@ section {
             color:#212529;
             &:before {
                 content:' ';
-                width: 8px;
-                height: 8px;
+                width: 6px;
+                height: 6px;
                 background-color: #BE2020;
                 position: absolute;
-                bottom: 2px;
-                left: 30%;
+                bottom: 6px;
+                left: 50%;
+                transform: translateX(-50%);
                 border-radius: 10px;
             }
         }
