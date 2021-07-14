@@ -484,7 +484,8 @@ td {
 // }
 
 body {
-  font-family: 'Roboto Condensed', sans-serif !important;
+  // font-family: 'Roboto Condensed', sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
   margin: 0;
 }
 
@@ -1047,4 +1048,11 @@ mat-header-cell,
       }
     }
   }
+}
+
+ngx-skeleton-loader{
+  span{
+    background-color: $skeletonColor;
+  }
+  
 }

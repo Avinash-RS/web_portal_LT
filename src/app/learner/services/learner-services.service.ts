@@ -26,7 +26,7 @@ boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignm
      getSpecificationdetails, getSubCategory, getTrendingcourse, getUserdetail,
      getUserdetailUsername, listContent, login, playerModuleAndTopic, singleBatchInfo,
      syllabusofParticularScorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData, get_batchwise_learner_dashboard_data, get_learner_dashboard_count,
-     getCourseGallery , getLearnerNewCourseReport
+     getCourseGallery , getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata
 } from './operations/learner_query';
 
 
@@ -808,7 +808,7 @@ getMessage(): Observable<any> {
     });
   }
 
-  getLearnerActivity(courseId,status,dateType,activityType,date,userId){
+  getLearnerActivity(courseId,status,dateType,date,activityType,userId){
     return this.Apollo.query({
       query: getActivityCalendar,
       variables: {
@@ -950,7 +950,7 @@ getprojectActivityData(userId, courseId,pagination,page,noofItems) {
   });
 }
 // get perform activity details
-  getperformActivityData(userId , courseId,pagination,page,noofItems) {
+  getperformActivityData(userId, courseId,pagination,page,noofItems) {
     return this.Apollo.query({
       query: getperformActivityData,
       variables: {
@@ -1130,6 +1130,26 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
         courseid,
         userid,
         refresh
+      }
+    });
+  }
+
+ getProgressionData(user_id,course_id) {
+    return this.Apollo.query({
+      query: getCourseReportByUserid,
+      variables: {
+        user_id,
+        course_id,
+      }
+    });
+  }
+
+  getProgressionActivitydata(userId,courseId) {
+    return this.Apollo.query({
+      query: getProgressionActivitydata,
+      variables: {
+        userId,
+        courseId,
       }
     });
   }

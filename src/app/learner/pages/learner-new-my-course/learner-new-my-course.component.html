@@ -3,109 +3,106 @@
 <div class="sideNavWrapper">
     <div>
         <mat-drawer-container class="sideNavContainer" autosize>
-            <mat-drawer #drawer class="sideNav" [mode]="innerWidth>1140?'side':'over'" position="end"> 
-                <!-- Over Side Push -->
-                <div class="navBackBtn">
-                    <span type="button" (click)="drawer.toggle();show=!show">
-                        <em class="lxp-Right_Arrow"></em>
-                    </span>
-                </div>
-                <!-- //////////// -->
-                <div class="prevNext">
-                    <p>TASKS TO DO</p>
-                    <div class="wrapperTaskToDo d-flex align-items-center justify-content-between">
-                        <div class="currentMonth">
-                            <h3>{{ viewDate | calendarDate:('month' + 'ViewTitle'):'en' }}</h3>
-                        </div>
-                        <div class="arrows">
-                            <span mwlCalendarPreviousView [view]="'week'" [(viewDate)]="viewDate">
-                                <em class="lxp-Rewind_Arrow"></em>
-                            </span>
-                            <span mwlCalendarNextView [view]="'week'" [(viewDate)]="viewDate">
-                                <em class="lxp-Forward_Arrow"></em>
-                            </span>
-                        </div>
+            <mat-drawer #drawer class="sideNav" [opened]="innerWidth>1140 ? 'true':'false'" [mode]="innerWidth>1140?'side':'over'" position="end"> 
+                <div class="drawerWrapper">
+                    <!-- Over Side Push -->
+                    <div class="navBackBtn">
+                        <span type="button" (click)="drawer.toggle();show=!show">
+                            <em class="lxp-Right_Arrow"></em>
+                        </span>
                     </div>
-                    
-                    <div class="weekviewHead">
-                        <mwl-calendar-week-view (dayHeaderClicked)="getLearnerActivity($event.day.date)" [weekStartsOn]="1" [viewDate]="viewDate" [events]="events"></mwl-calendar-week-view>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="sideTabsStrip">
-                        <div class="activeTabItem">
-                            To Do
-                        </div>
-                    </div>
-                    <ng-container *ngFor="let data of learnerActivityList;">
-                        <div class="listItem d-flex justify-content-start">
-                            <div class="dateFlag" [ngClass] = "{'ongoing': data.status === 'On going', 'completed': data.status === 'Completed', 'yettoStart': data.status === 'Up Coming'}">
-                                <div class="dateDiv">
-                                    <span class="flagDay">{{dayMonth | date :'dd'}}</span>
-                                    <span class="flagMonth">{{dayMonth | date :'MMM'}}</span>
-                                </div>
+                    <!-- //////////// -->
+                    <div class="prevNext">
+                        <p>TASKS TO DO</p>
+                        <div class="wrapperTaskToDo d-flex align-items-center justify-content-between">
+                            <div class="currentMonth">
+                                <h3>{{ viewDate | calendarDate:('month' + 'ViewTitle'):'en' }}</h3>
                             </div>
-                            <div class="detailData">
-                                <div class="badgedata d-flex justify-content-between">
-                                    <p class="d-flex justify-content-center align-items-center">
-                                        {{data.activity_details.activitytype}}
-                                    </p>
-                                    <div class="status">
-                                        <span class="ongoing" *ngIf="data.status == 'On going'">
-                                            <em class="lxp-Timer_Outlined"></em>{{'Ongoing' | translate }}
-                                        </span>
-                                        <span class="yettoStart" *ngIf="data.status == 'Up Coming'">
-                                            <em class="lxp-Play"></em>{{'Upcoming' | translate }}
-                                        </span>
-                                        <span class="completed" *ngIf="data.status == 'Completed'">
-                                            <em class="lxp-Right"></em>{{'Completed' | translate }}
-                                        </span>
+                            <div class="arrows">
+                                <span mwlCalendarPreviousView [view]="'week'" [(viewDate)]="viewDate">
+                                    <em class="lxp-Rewind_Arrow"></em>
+                                </span>
+                                <span mwlCalendarNextView [view]="'week'" [(viewDate)]="viewDate">
+                                    <em class="lxp-Forward_Arrow"></em>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="weekviewHead">
+                            <mwl-calendar-week-view (dayHeaderClicked)="getLearnerActivity($event.day.date)" [weekStartsOn]="1" [viewDate]="viewDate" [events]="events"></mwl-calendar-week-view>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sideTabsStrip">
+                            <div class="activeTabItem">
+                                To Do
+                            </div>
+                        </div>
+                        <ng-container *ngFor="let data of learnerActivityList;">
+                            <div class="listItem d-flex justify-content-start">
+                                <div class="dateFlag" [ngClass] = "{'ongoing': data.status === 'On going', 'completed': data.status === 'Completed', 'yettoStart': data.status === 'Up Coming'}">
+                                    <div class="dateDiv">
+                                        <span class="flagDay">{{dayMonth | date :'dd'}}</span>
+                                        <span class="flagMonth">{{dayMonth | date :'MMM'}}</span>
                                     </div>
                                 </div>
-                                <div class="titleFontSize">{{data.activity_details.coursename}}</div>
-                                <div class="type">Module: <span>{{data.activity_details.modulename}}</span></div>
-                                <div class="topic">Topic: <span>{{data.activity_details.topicname}}</span></div>
-                                <div class="date">Date: {{data.activity_details.startdate | date :'d/M/yy h:mm a'}} - {{data.activity_details.enddate | date :'d/M/yy h:mm a'}}</div>
+                                <div class="detailData">
+                                    <div class="badgedata d-flex justify-content-between">
+                                        <p class="d-flex justify-content-center align-items-center">
+                                            {{data.activity_details.activitytype}}
+                                        </p>
+                                        <div class="status">
+                                            <span class="ongoing" *ngIf="data.status == 'On going'">
+                                                <em class="lxp-Timer_Outlined"></em>{{'Ongoing' | translate }}
+                                            </span>
+                                            <span class="yettoStart" *ngIf="data.status == 'Up Coming'">
+                                                <em class="lxp-Play"></em>{{'Upcoming' | translate }}
+                                            </span>
+                                            <span class="completed" *ngIf="data.status == 'Completed'">
+                                                <em class="lxp-Right"></em>{{'Completed' | translate }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="titleFontSize">{{data.activity_details.coursename}}</div>
+                                    <div class="type">Module: <span>{{data.activity_details.modulename}}</span></div>
+                                    <div class="topic">Topic: <span>{{data.activity_details.topicname}}</span></div>
+                                    <div class="date">Date: {{data.activity_details.startdate | date :'d/M/yy h:mm a'}} - {{data.activity_details.enddate | date :'d/M/yy h:mm a'}}</div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <div class="item" *ngIf="showSkeleton">
+                            <div class="d-flex justify-content-between">
+                                <div class="item1">
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px', height: '50px', width: '50px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                </div>
+                                <div class="item2">
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="item1">
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px', height: '50px', width: '50px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                </div>
+                                <div class="item2">
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                </div>
                             </div>
                         </div>
-                    </ng-container>
-                    <div class="item" *ngIf="showSkeleton">
-                        <div class="d-flex justify-content-between">
-                            <div class="item1">
-                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px', height: '50px', width: '50px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                        <ng-container *ngIf="noActivity">
+                            <div class="searchNoResults">
+                                <figure>
+                                    <img src="/assets/images/nocard.svg" alt="No Card" />
+                                </figure>
+                                <p>You have no activity scheduled for the day!</p>
                             </div>
-                            <div class="item2">
-                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <div class="item1">
-                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px', height: '50px', width: '50px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                            </div>
-                            <div class="item2">
-                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                            </div>
+                        </ng-container>
+                        <div *ngIf="noActivity">
+                            <!-- <a>View all <em class="lxp-Right_Direction_Arrow"></em></a> -->
                         </div>
                     </div>
-                    <ng-container *ngIf="noActivity">
-                        <div class="searchNoResults">
-                            You have no activities at this moment!
-                         </div>
-                    </ng-container>
-                    <!-- <div class="status d-flex justify-content-between">
-                        <div class="d-flex justify-content-start">
-                            <span class="overdue">Overdue</span>
-                            <span class="ongoing">OnGoing</span>
-                            <span class="completed">Completed</span>
-                            <span class="yettoStart">Yet to Start</span>
-                        </div>
-                        <a>View all <em class="lxp-Right_Direction_Arrow"></em></a>
-                    </div> -->
                 </div>
             </mat-drawer>
 
@@ -129,7 +126,7 @@
 
                 <!-- Top 3 Things Contents -->
                 <div [@collapse]="expandcollapse">
-                    <div class="top3Things d-flex justify-content-between" [ngClass]="show ? '': 'noPadding'">
+                    <div class="top3Things d-flex justify-content-between" [ngClass]="show ? 'noPadding': ''">
                         <div class="box">
                             <div>
                                 <h6>Learn from where your left</h6>
@@ -182,7 +179,7 @@
                 </div>
 
                 <!-- My Course -->
-                <div class="mycoursesWrapper" [ngClass]="show ? '': 'noPadding'">
+                <div class="mycoursesWrapper" [ngClass]="show ? 'noPadding': ''">
                     <h3>My Courses</h3>
                     <mat-tab-group #tabs (selectedTabChange)="courseTabChange($event,userDetailes.user_id,userDetailes._id);"
                     [(selectedIndex)]="selectedIndex">
@@ -190,7 +187,99 @@
                             <ng-template mat-tab-label>
                                 Ongoing ({{onGoingCourseCount}})
                             </ng-template>
-                            <div class="mycoursesContent">
+                            <div *ngIf="courseSkel; else courseSkeleton">
+                            <div class="mycoursesContent" *ngIf="courseDetailsList.length;else noCourseCard">
+                                <div *ngFor="let item of courseDetailsList" class="courses d-flex justify-content-start">
+                                    <figure class="d-flex align-items-center justify-content-center" (click)="gotoDesc(item)">
+                                        <img [src]="item.course_img_url + blobKey" alt="" />
+
+                                        <button class="d-flex align-items-center"><em [class]="item.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
+                                            {{item?.course_status === "incomplete" ? "Resume" : item?.course_status === "suspend" ? "Resume" : item.course_status=== 'completed'?"Replay":("Start" | translate) }}</button>
+                                    </figure>
+                                    <div class="rightCol">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
+                                            <span class="menuIcon" [matMenuTriggerFor]="menu">
+                                                <em class="lxp-Dot_Menu"></em>
+                                            </span>
+                                            <mat-menu #menu="matMenu" xPosition="before">
+                                                <button mat-menu-item (click)="openGallery(item)">
+                                                  <span><em class="lxp-Search mr-2"></em>Search</span>
+                                                </button>
+                                                <mat-divider></mat-divider>
+                                                <button mat-menu-item (click)="openReport(item)">
+                                                  <span><em class="lxp-Edit_Document mr-2"></em>Course Assessment Report</span>
+                                                </button>
+                                              </mat-menu>
+                                        </div>
+                                        <div class="showLessContent">
+                                            <button class="readMoreLess" *ngIf="info.length > 370" type="button"
+                                                (click)="item.isReadMore = !item.isReadMore">
+                                                <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
+                                            </button>
+                                            <div [ngClass]="!item.isReadMore ? '' : 'showText'">
+                                                <p>{{item.course_description}}</p>
+                                                <div class="type d-flex justify-content-start">
+                                                    <span>Self paced learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
+                                                    <span>Instructor led session - upto  {{item.image_instructor_lead_session_time!==""?item.image_instructor_lead_session_time:0}}</span>
+                                                    <span>Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
+                                                    <span>Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="durationCredits d-flex justify-content-between"
+                                            [ngClass]="!item.isReadMore ? 'top' : 'zero'">
+                                            <span>
+                                                <em class="lxp-Duration"></em> Duration: {{item.total_duration? item.total_duration : "1" + ""}} {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}
+                                            </span>
+                                            <span class="credits">Credits : {{item.credits!==null?item.credits:0}}</span>
+                                        </div>
+                                        <div class="actionItems d-flex justify-content-between">
+                                            <div class="viltActivitiesQA d-flex justify-content-start">
+                                                <div class="icons" (click)="goInstructorLed(item)">
+                                                    <span><em class="lxp-VILT"></em></span>
+                                                    <p>Virtual Instructor <br />Led Session</p>
+                                                </div>
+                                                <div class="icons" (click)="gotoSubmissionDetails(item)">
+                                                    <span><em class="lxp-Activities_New"></em></span>
+                                                    <p>Activities</p>
+                                                </div>
+                                                <div class="icons" (click)="gotoAskQuestions(item)">
+                                                    <span><em class="lxp-QA"></em></span>
+                                                    <p>Q&A</p>
+                                                </div>
+                                            </div>
+                                            <div class="courseProgression d-flex align-items-center">
+                                                <div class="icons" (click)="gotoProgression(item)">
+                                                    <span><em class="lxp-Course_Progression"></em></span>
+                                                    <p>Course Progression</p>
+                                                </div>
+                                                <div class="percentage">
+                                                    <circle-progress [percent]="((100 * (item.week_completed_count!==null?item.week_completed_count:0)) / (item.week_total_count!==null?item.week_total_count:1))" [clockwise]='true' [radius]="20"
+                                                        [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'"
+                                                        [outerStrokeGradientStopColor]="'#53a9ff'"
+                                                        [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3"
+                                                        [innerStrokeWidth]="3" [space]="-3" [titleFontSize]="12"
+                                                        [unitsFontSize]="12" [subtitleFontSize]="8"
+                                                        [titleColor]="'#666666'" [subtitleColor]="'#333333'"
+                                                        [startFromZero]="false" [responsive]="true"
+                                                        [showSubtitle]="true" [subtitle]="'Active'" [animation]="true"
+                                                        [animationDuration]="10"></circle-progress>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab>
+                            <ng-template mat-tab-label>
+                                Completed ({{completedCourseCount}})
+                            </ng-template>
+                            <div *ngIf="courseSkel;else courseSkeleton">
+                            <div class="mycoursesContent" *ngIf="courseDetailsList.length;else noCourseCard">
                                 <div *ngFor="let item of courseDetailsList" class="courses d-flex justify-content-start">
                                     <figure class="d-flex align-items-center justify-content-center" (click)="gotoDesc(item)">
                                         <img [src]="item.course_img_url + blobKey" alt="" />
@@ -238,7 +327,7 @@
                                                 </div>
                                             </div>
                                             <div class="courseProgression d-flex align-items-center">
-                                                <div class="icons" routerLink="/Learner/progressionReport">
+                                                <div class="icons" (click)="gotoProgression(item)">
                                                     <span><em class="lxp-Course_Progression"></em></span>
                                                     <p>Course Progression</p>
                                                 </div>
@@ -259,72 +348,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </mat-tab>
-
-                        <mat-tab>
-                            <ng-template mat-tab-label>
-                                Completed ({{completedCourseCount}})
-                            </ng-template>
-                            <div class="mycoursesContent">
-                                <div *ngFor="let item of courseDetailsList" class="courses d-flex justify-content-start">
-                                    <figure class="d-flex align-items-center justify-content-center">
-                                        <img src="/assets/images/Image.png" alt="" />
-                                        <button class="d-flex align-items-center"><em class="lxp-Play_Icon"></em>
-                                            Resume</button>
-                                    </figure>
-                                    <div class="rightCol">
-                                        <h3>Applied Industrial IoT</h3>
-                                        <div class="showLessContent">
-                                            <button class="readMoreLess" *ngIf="info.length > 370" type="button"
-                                                (click)="showText()">
-                                                <em *ngIf="!isReadMore" class="lxp-Arrow"></em>
-                                                <em *ngIf="isReadMore" class="lxp-DownArrow"></em>
-                                            </button>
-                                            <div [ngClass]="isReadMore ? '' : 'showText'">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                                <div class="type d-flex justify-content-start">
-                                                    <span>Self paced learning - 16 hrs</span>
-                                                    <span>Instructor led session - upto 14</span>
-                                                    <span>Course project - 01</span>
-                                                    <span>Internal Assessment - 02</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="durationCredits d-flex justify-content-between"
-                                            [ngClass]="isReadMore ? 'top' : 'zero'">
-                                            <span>
-                                                <em class="lxp-Duration"></em> Duration: 02 June 2021 - 30 June 2021
-                                            </span>
-                                            <span>Credits : 02</span>
-                                        </div>
-                                        <div class="actionItems d-flex justify-content-between">
-                                            <div class="viltActivitiesQA d-flex justify-content-start">
-                                                <div class="icons">
-                                                    <span><em class="lxp-VILT"></em></span>
-                                                    <p>Virtual Instructor <br />Led Session</p>
-                                                </div>
-                                                <div class="icons">
-                                                    <span><em class="lxp-Activities_New"></em></span>
-                                                    <p>Activities</p>
-                                                </div>
-                                                <div class="icons">
-                                                    <span><em class="lxp-QA"></em></span>
-                                                    <p>Q&A</p>
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="courseProgression d-flex justify-content-end align-items-center">
-                                                <div class="icons" routerLink="/Learner/progressionReport">
-                                                    <span><em class="lxp-Course_Progression"></em></span>
-                                                    <p>Course Progression</p>
-                                                </div>
-                                                <div class="percentage">
-                                                    <circle-progress [percent]="67" [clockwise]='true' [radius]="20" [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'" [outerStrokeGradientStopColor]="'#53a9ff'" [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3" [innerStrokeWidth]="3" [space]="-3" [titleFontSize]="12" [unitsFontSize]="12" [subtitleFontSize]="8" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [startFromZero]="false" [responsive]="true" [showSubtitle]="true" [subtitle]="'Active'" [animation]="true" [animationDuration]="10"></circle-progress>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </mat-tab>
 
@@ -332,64 +355,61 @@
                             <ng-template mat-tab-label>
                                 All ({{allCourseCount}})
                             </ng-template>
-                            <div class="mycoursesContent">
+                            <div *ngIf="courseSkel;else courseSkeleton">
+                            <div class="mycoursesContent" *ngIf="courseDetailsList.length;else noCourseCard">
                                 <div *ngFor="let item of courseDetailsList" class="courses d-flex justify-content-start">
-                                    <figure class="d-flex align-items-center justify-content-center">
-                                        <img src="/assets/images/Image.png" alt="" />
-                                        <button class="d-flex align-items-center"><em class="lxp-Play_Icon"></em>
-                                            Resume</button>
+                                    <figure class="d-flex align-items-center justify-content-center" (click)="gotoDesc(item)">
+                                        <img [src]="item.course_img_url + blobKey" alt="" />
+
+                                        <button class="d-flex align-items-center"><em [class]="item.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
+                                            {{item?.course_status === "incomplete" ? "Resume" : item?.course_status === "suspend" ? "Resume" : item.course_status=== 'completed'?"Replay":("Start" | translate) }}</button>
                                     </figure>
                                     <div class="rightCol">
-                                        <h3>Applied Industrial IoT</h3>
+                                        <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
                                         <div class="showLessContent">
                                             <button class="readMoreLess" *ngIf="info.length > 370" type="button"
-                                                (click)="showText()">
-                                                <em *ngIf="!isReadMore" class="lxp-Arrow"></em>
-                                                <em *ngIf="isReadMore" class="lxp-DownArrow"></em>
+                                                (click)="item.isReadMore = !item.isReadMore">
+                                                <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
                                             </button>
-                                            <div [ngClass]="isReadMore ? '' : 'showText'">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                                    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                    aliquip ex ea commodo consequat.</p>
+                                            <div [ngClass]="!item.isReadMore ? '' : 'showText'">
+                                                <p>{{item.course_description}}</p>
                                                 <div class="type d-flex justify-content-start">
-                                                    <span>Self paced learning - 16 hrs</span>
-                                                    <span>Instructor led session - upto 14</span>
-                                                    <span>Course project - 01</span>
-                                                    <span>Internal Assessment - 02</span>
+                                                    <span>Self paced learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
+                                                    <span>Instructor led session - upto  {{item.image_instructor_lead_session_time!==""?item.image_instructor_lead_session_time:0}}</span>
+                                                    <span>Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
+                                                    <span>Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="durationCredits d-flex justify-content-between"
-                                            [ngClass]="isReadMore ? 'top' : 'zero'">
+                                            [ngClass]="!item.isReadMore ? 'top' : 'zero'">
                                             <span>
-                                                <em class="lxp-Duration"></em> Duration: 02 June 2021 - 30 June 2021
+                                                <em class="lxp-Duration"></em> Duration: {{item.total_duration? item.total_duration : "1" + ""}} {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}
                                             </span>
-                                            <span>Credits : 02</span>
+                                            <span class="credits">Credits : {{item.credits!==null?item.credits:0}}</span>
                                         </div>
                                         <div class="actionItems d-flex justify-content-between">
                                             <div class="viltActivitiesQA d-flex justify-content-start">
-                                                <div class="icons">
+                                                <div class="icons" (click)="goInstructorLed(item)">
                                                     <span><em class="lxp-VILT"></em></span>
                                                     <p>Virtual Instructor <br />Led Session</p>
                                                 </div>
-                                                <div class="icons">
+                                                <div class="icons" (click)="gotoSubmissionDetails(item)">
                                                     <span><em class="lxp-Activities_New"></em></span>
                                                     <p>Activities</p>
                                                 </div>
-                                                <div class="icons">
+                                                <div class="icons" (click)="gotoAskQuestions(item)">
                                                     <span><em class="lxp-QA"></em></span>
                                                     <p>Q&A</p>
                                                 </div>
                                             </div>
-                                            <div
-                                                class="courseProgression d-flex justify-content-end align-items-center">
-                                                <div class="icons" routerLink="/Learner/progressionReport">
+                                            <div class="courseProgression d-flex align-items-center">
+                                                <div class="icons" (click)="gotoProgression(item)">
                                                     <span><em class="lxp-Course_Progression"></em></span>
                                                     <p>Course Progression</p>
                                                 </div>
                                                 <div class="percentage">
-                                                    <circle-progress [percent]="67" [clockwise]='true' [radius]="20"
+                                                    <circle-progress [percent]="((100 * (item.week_completed_count!==null?item.week_completed_count:0)) / (item.week_total_count!==null?item.week_total_count:1))" [clockwise]='true' [radius]="20"
                                                         [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'"
                                                         [outerStrokeGradientStopColor]="'#53a9ff'"
                                                         [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3"
@@ -404,6 +424,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             </div>
                         </mat-tab>
                     </mat-tab-group>
@@ -537,4 +558,48 @@
      <div class="infoClose" (click)="closeBannerPopup()"><i  class="lxp-Close"></i></div>
     </div>
     
+  </ng-template>
+  <ng-template #courseSkeleton>
+    <div class="courses d-flex ">
+        <div class="leftCol">
+            <ngx-skeleton-loader class="leftSkeleton" [theme]="{height:'150px'}"></ngx-skeleton-loader>
+        </div>
+        <div class="rightCol">
+            <ngx-skeleton-loader [count]="3"></ngx-skeleton-loader>
+            <div class="actionItems d-flex justify-content-between">
+            <div class="viltActivitiesQA d-flex justify-content-start">
+                <ngx-skeleton-loader appearance="circle" [count]="3"></ngx-skeleton-loader>
+            </div>
+            <div class="courseProgression d-flex justify-content-end align-items-center">
+                <ngx-skeleton-loader appearance="circle" [count]="2"></ngx-skeleton-loader>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="courses d-flex ">
+        <div>
+            <ngx-skeleton-loader [theme]="{height:'150px', width:'200px'}"></ngx-skeleton-loader>
+        </div>
+        <div class="rightCol">
+            <ngx-skeleton-loader [count]="3"></ngx-skeleton-loader>
+        
+        <div class="actionItems d-flex justify-content-between">
+        <div class="viltActivitiesQA d-flex justify-content-start">
+            <ngx-skeleton-loader appearance="circle" [count]="3"></ngx-skeleton-loader>
+        </div>
+        <div class="courseProgression d-flex justify-content-end align-items-center">
+            <ngx-skeleton-loader appearance="circle" [count]="2"></ngx-skeleton-loader>
+        </div>
+    </div>
+    </div>
+    </div>
+  </ng-template>
+
+  <ng-template #noCourseCard>
+    <div class="noCard">
+        <div>
+          <img src="/assets/images/noproject.svg" alt="assignment">
+        </div>
+        <p>You have no Project activity at the moment!</p>
+    </div>
   </ng-template>

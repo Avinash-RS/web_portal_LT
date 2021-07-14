@@ -19,21 +19,6 @@ export class CustomDateFormatter extends CalendarDateFormatter {
     return formatDate(date, 'EEE', locale);
   } 
 }
-const colors: any = {
-  activity: {
-    primary: '#D9E021',
-    secondary: '#eaeadc',
-  },
-  selfpaced: {
-    primary: '#00A99D',
-    secondary: '#c5eae8',
-  },
-  instructor: {
-    primary: '#22ACDD',
-    secondary: '#abd1de',
-  },
-};
-
 @Component({
   selector: 'app-calendar-activity',
   templateUrl: './calendar-activity.component.html',
@@ -70,7 +55,7 @@ export class CalendarActivityComponent implements OnInit {
     'value': 'selfpacedlearning'
   },
   {
-    'key': 'Live Classroom',
+    'key': 'Virtual Instructor Led Session',
     'value': 'liveclassroom'
   },
   {
@@ -90,7 +75,12 @@ export class CalendarActivityComponent implements OnInit {
   activityValue = 'All';
   events: CalendarEvent[];
   selectedDate;
-  status;
+  status = '';
+  activityData;
+  dataAvailable
+  monthView;
+  showSkeleton = true;
+  skeletonPart = [1,2]
   constructor(public learnerService: LearnerServicesService,private gs: GlobalServiceService,private router: Router) { }
 
   ngOnInit() {
@@ -117,49 +107,13 @@ export class CalendarActivityComponent implements OnInit {
         item.course_name == 'All Courses' && 
         this.courseDetailsList.unshift( 
           this.courseDetailsList.splice(idx,1)[0]))
-        console.log(this.courseDetailsList)
       });
     });
   }
-  // events: CalendarEvent[] = [
-  //   {
-  //     start: subDays(startOfDay(new Date()), 1),
-  //     end: addDays(new Date(), 1),
-  //     title: 'A 3 day event',
-  //     color: colors.activity, 
-  //     allDay: true,
-  //     resizable: {
-  //       beforeStart: true,
-  //       afterEnd: true,
-  //     },
-  //     draggable: true,
-  //   },
-  //   {
-  //     start: startOfDay(new Date()),
-  //     title: 'An event with no end date',
-  //     color: colors.instructor, 
-  //   },
-  //   {
-  //     start: subDays(endOfMonth(new Date()), 3),
-  //     end: addDays(endOfMonth(new Date()), 3),
-  //     title: 'A long event that spans 2 months',
-  //     color: colors.selfpaced,
-  //     allDay: true,
-  //   },
-  //   {
-  //     start: addHours(startOfDay(new Date()), 2),
-  //     end: addHours(new Date(), 2),
-  //     title: 'A draggable and resizable event',
-  //     color: colors.instructor, 
-  //     resizable: {
-  //       beforeStart: true,
-  //       afterEnd: true,
-  //     },
-  //     draggable: true,
-  //   },
-  // ]; 
+  
   monthChange(value){
     const topicStart = new Date(value);
+    this.monthView = topicStart;
     this.getLearnerActivity('month',topicStart)
   }
 
@@ -178,6 +132,7 @@ export class CalendarActivityComponent implements OnInit {
     });
   }
   getLearnerActivity(view,selectedDate, day?: CalendarMonthViewDay){
+    this.showSkeleton = true;
     if(this.courseValue == 'All') {
       var courseValue = ''
    } else {
@@ -194,10 +149,27 @@ export class CalendarActivityComponent implements OnInit {
     selectedDate = selectedDate.date
   }
    const dateValue = moment(selectedDate).format('YYYY-MM-DD');
-  this.learnerService.getLearnerActivity(courseValue,this.status,view,dateValue,activityValue,this.userDetails.user_id).subscribe((result)=>{
-    console.log(result)
+   this.activityData = [];
+  this.learnerService.getLearnerActivity(courseValue,this.status,view,dateValue,activityValue,this.userDetails.user_id).subscribe((result:any)=>{
+    if(result?.data?.getActivityCalendar?.success){
+      this.activityData = result?.data?.getActivityCalendar?.data;
+      this.showSkeleton = false;
+      if(this.activityData?.activities.length > 0){
+        this.dataAvailable = true;
+      } else {
+        this.dataAvailable = false;
+      }
+    } else {
+      this.showSkeleton = false;
+      this.dataAvailable = false;
+    }
+  },
+  err =>{
+    this.showSkeleton = false;
+    this.dataAvailable = false;
   })
    if (day) {
+      this.monthView = undefined;
      this.selectedMonthViewDay = day;
      
      const selectedDateTime = this.selectedMonthViewDay.date.getTime();
@@ -225,6 +197,7 @@ export class CalendarActivityComponent implements OnInit {
     if(!value) {
       this.courseValue = 'All'
       this.activityValue = 'All'
+      this.status = '';
       this.daySelected = false;
       view = 'month'
       if (this.selectedDays.length > 0) {
@@ -234,6 +207,9 @@ export class CalendarActivityComponent implements OnInit {
     if(!this.daySelection){
       const topicStart = new Date();
       this.daySelection = moment(topicStart).format('YYYY-MM-DD');
+    }
+    if(this.monthView){
+      this.daySelection = this.monthView
     }
     this.getLearnerActivity(view,this.daySelection);
     }
@@ -250,15 +226,15 @@ export class CalendarActivityComponent implements OnInit {
       }
     }
     goToActivities(value){
-      if(value.activity_details.activitytype === 'Live Classroom'){
+      if(value.activitytype === 'Live Classroom'){
         return false;
-      } else if (value.activity_details.activitytype == "Self Learning") {
+      } else if (value.activitytype == "Self Learning") {
         this.router.navigate(['Learner/MyCourse']);
       }else{
         const data1 = {
-          courseId: value.activity_details.courseid,
-          courseName: value.activity_details.coursename,
-          activityType : value.activity_details.activitytype
+          courseId: value.courseid,
+          courseName: value.coursename,
+          activityType : value.activitytype
         };
         localStorage.setItem('Courseid', data1.courseId);
         localStorage.setItem('CourseName', data1.courseName);

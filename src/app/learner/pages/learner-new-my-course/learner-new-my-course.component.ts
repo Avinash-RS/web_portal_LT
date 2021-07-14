@@ -3,11 +3,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AUTO_STYLE, animate, state, style, transition, trigger } from '@angular/animations';
 import { Subject } from "rxjs";
 import * as moment from 'moment';
-import {
-  CalendarEvent,
-  CalendarDateFormatter,
-  DateFormatterParams,
-} from 'angular-calendar';
+import { CalendarEvent, CalendarDateFormatter, DateFormatterParams, } from 'angular-calendar';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
@@ -15,6 +11,7 @@ import { formatDate } from "@angular/common";
 import { MatDialog } from "@angular/material";
 import { environment } from "@env/environment";
 import { Router } from "@angular/router";
+import { DragScrollComponent } from 'ngx-drag-scroll';
 
 const DEFAULT_DURATION = 300;
 
@@ -113,6 +110,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   errorMessage: any;
   dayMonth: any;
   noActivity: boolean;
+  courseSkel: boolean = false;
 
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
@@ -198,6 +196,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   // NEW API T0 GET DASHBOARD DATA
 
   getDashboardMyCourse(userId, userObjId) {
+    this.courseSkel = false
     this.courseDetailsList = [];
     let requestType = 'ongoing';
     if (this.selectedIndex === 0) {
@@ -240,7 +239,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
           }
         });
         this.courseDetailsList.push(...this.enrolledCourses);
-
+        this.courseSkel = true
 
       });
     });
@@ -322,6 +321,15 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
   }
 
+  gotoProgression(course) {
+    // debugger
+    let data = {
+      courseId : course.course_id,
+    }
+    localStorage.setItem('Courseid', course.course_id);
+    this.router.navigateByUrl('/Learner/progressionReport', { queryParams: { data } });
+  }
+
   getLearnerActivity(selectedDate) {
     const dateValue = moment(selectedDate).format('YYYY-MM-DD');
     const empty = undefined;
@@ -348,5 +356,27 @@ export class LearnerNewMyCourseComponent implements OnInit {
     },
       err => { }
     );
+  }
+
+  openGallery(c){
+    this.router.navigate(['/Learner/coursegallery'], {
+      queryParams:
+      {
+        id: c.course_id,
+        name: c.course_name
+      }
+    });
+  }
+
+  openReport(c){
+    this.router.navigate(['/Learner/coursereport'], {
+      queryParams:
+      {
+        id: btoa(c.course_id),
+        name: c.course_name,
+        batchId: btoa(c.batchid)
+      }
+    });
+  
   }
 }
