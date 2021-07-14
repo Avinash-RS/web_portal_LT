@@ -197,7 +197,21 @@
                                             {{item?.course_status === "incomplete" ? "Resume" : item?.course_status === "suspend" ? "Resume" : item.course_status=== 'completed'?"Replay":("Start" | translate) }}</button>
                                     </figure>
                                     <div class="rightCol">
-                                        <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
+                                            <span class="menuIcon" [matMenuTriggerFor]="menu">
+                                                <em class="lxp-Dot_Menu"></em>
+                                            </span>
+                                            <mat-menu #menu="matMenu" xPosition="before">
+                                                <button mat-menu-item (click)="openGallery(item)">
+                                                  <span><em class="lxp-Search mr-2"></em>Search</span>
+                                                </button>
+                                                <mat-divider></mat-divider>
+                                                <button mat-menu-item (click)="openReport(item)">
+                                                  <span><em class="lxp-Edit_Document mr-2"></em>Course Assessment Report</span>
+                                                </button>
+                                              </mat-menu>
+                                        </div>
                                         <div class="showLessContent">
                                             <button class="readMoreLess" *ngIf="info.length > 370" type="button"
                                                 (click)="item.isReadMore = !item.isReadMore">

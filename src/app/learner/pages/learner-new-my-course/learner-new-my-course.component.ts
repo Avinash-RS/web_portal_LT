@@ -357,4 +357,26 @@ export class LearnerNewMyCourseComponent implements OnInit {
       err => { }
     );
   }
+
+  openGallery(c){
+    this.router.navigate(['/Learner/coursegallery'], {
+      queryParams:
+      {
+        id: c.course_id,
+        name: c.course_name
+      }
+    });
+  }
+
+  openReport(c){
+    this.router.navigate(['/Learner/coursereport'], {
+      queryParams:
+      {
+        id: btoa(c.course_id),
+        name: c.course_name,
+        batchId: btoa(c.batchid)
+      }
+    });
+  
+  }
 }
