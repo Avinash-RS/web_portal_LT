@@ -110,6 +110,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   errorMessage: any;
   dayMonth: any;
   noActivity: boolean;
+  courseSkel: boolean = false;
 
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
@@ -195,6 +196,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   // NEW API T0 GET DASHBOARD DATA
 
   getDashboardMyCourse(userId, userObjId) {
+    this.courseSkel = false
     this.courseDetailsList = [];
     let requestType = 'ongoing';
     if (this.selectedIndex === 0) {
@@ -237,7 +239,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
           }
         });
         this.courseDetailsList.push(...this.enrolledCourses);
-
+        this.courseSkel = true
 
       });
     });
