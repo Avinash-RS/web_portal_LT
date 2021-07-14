@@ -31,7 +31,7 @@
   <div class="contentarea">
     <ng-container *ngIf="dataAvailable">
       <ng-container *ngFor="let activity of activityData.activities">
-        <div class="contentbox" (click)="goToActivities(activity)">
+        <div class="contentbox d-flex justify-content-between" (click)="goToActivities(activity)">
           <div class="infotxtarea">
             <span class="htxt">{{activity.coursename}}</span>
             <div class="infotxt"> <span>Module:</span> {{activity.modulename}}</div>
@@ -59,7 +59,7 @@
             </div>
           </div>
     
-          <div class="statusarea">
+          <div class="statusarea d-flex justify-content-end align-items-center">
             <span class="icon lxp-Tick green" *ngIf="activity.status == 'Completed' || activity.status == 'Graded' || activity.status == 'Submitted'">i</span>
             <span class="icon lxp-Timelapse red" *ngIf="activity.status == 'Overdue'">i</span>
             <span class="icon lxp-Timer timer" *ngIf="activity.status == 'On going'">i</span>
@@ -69,24 +69,29 @@
       </ng-container>
     </ng-container>
     <ng-container *ngIf="!dataAvailable && !showSkeleton">
-      No data found
+      <div class="noCard">
+        <figure>
+          <img src="/assets/images/noactivityScheduled.svg" alt="assignment">
+        </figure>
+        <p>You have no activity scheduled!</p>
+      </div>
     </ng-container>
     <ng-container  *ngIf="showSkeleton">
-      <div class="skeleton-container" *ngFor="let skeleton of skeletonPart">
-        <div class="skeleton-part">
-          <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px','margin-top': '7px','margin-bottom': '0px','margin-left': '10px', height: '11px', width: '250px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-          <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px','margin-bottom': '0px','margin-left': '10px', height: '11px', width: '250px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-          <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px','margin-bottom': '0px','margin-right': '10px','margin-left': '10px', height: '11px', width: '250px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+      <div class="skeleton-container d-flex justify-content-between flex-row" *ngFor="let skeleton of skeletonPart">
+        <div class="skeleton-part d-flex justify-content-between flex-column item1">
+          <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>
+          <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>
+          <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>
         </div>
-        <div class="skeleton-part">
-          <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px','margin-top': '7px','margin-bottom': '0px','margin-left': '10px', height: '11px', width: '250px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-          <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px','margin-bottom': '0px','margin-left': '10px', height: '11px', width: '250px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-          <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px','margin-bottom': '0px','margin-right': '10px','margin-left': '10px', height: '11px', width: '250px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        <div class="skeleton-part d-flex justify-content-between flex-column item2">
+          <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>
+          <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>
+          <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>
         </div>
-        <div class="skeleton-part">
-          <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px','margin-top': '7px','margin-bottom': '0px','margin-left': '10px', height: '11px', width: '250px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-          <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px','margin-bottom': '0px','margin-left': '10px', height: '11px', width: '250px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-          <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px','margin-bottom': '0px','margin-right': '10px','margin-left': '10px', height: '11px', width: '250px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        <div class="skeleton-part d-flex justify-content-between flex-column item3">
+          <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>
+          <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>
+          <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>
         </div>
       </div>
     </ng-container>

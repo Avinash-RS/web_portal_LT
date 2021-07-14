@@ -274,7 +274,11 @@
         margin-left: 2%;
         width: 80%;
       }
+      .menuIcon{
+        cursor: pointer;
+      }
       h3 {
+        width: 100%;
         font-size: 22px;
         font-weight: 700;
         color: #000000;
@@ -454,6 +458,13 @@
         }
       }
     }
+  }
+}
+
+.leftCol {
+  width: 18%;
+  .leftSkeleton {
+    width: 100%;
   }
 }
 
@@ -1147,7 +1158,7 @@
     border-top: none;
   }
 
-  
+
 ////INFO BANNER POPUP
 ::ng-deep .dialogContainer {
   overflow-y: hidden !important;
@@ -1167,4 +1178,20 @@
 .infoimg{
   width: 100%;
   height: auto;
+}
+
+
+// No Card
+.noCard {
+  text-align: center;
+  div {
+    margin: 15px 0;
+  }
+  p {
+    font-size: 14px;
+    color: #000000;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 30px ​!important;
+  }
 }

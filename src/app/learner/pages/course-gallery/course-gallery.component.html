@@ -50,13 +50,13 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
             <ng-container *ngIf="topic.activeTopic == 'active'">
               <ng-container *ngFor="let file of topic.allContent | filter:searchContent">
                 <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                  <div class="resource-card" (click)="onPreviewgallery(file.type,file.link,'','all',content.modulename,topic.topicname)">
+                  <div class="resource-card" *ngIf="file.type != 'image'" (click)="onPreviewgallery(file.type,file.link,'','all',content.modulename,topic.topicname)">
                     <div class="card-img">
                           <img *ngIf="file.type == 'video'" src="../../../assets/images/video-res.svg" class="thumbImg" alt="video">
                           <img *ngIf="file.type == 'image'" src="../../../assets/images/Image-res.svg" class="thumbImg" alt="image">
                           <img *ngIf="file.type == 'kc'" src="../../../assets/images/knowledge.svg" class="thumbImg" alt="image">
                     </div>
-                    <div class="card-name" matTooltip="{{file.fileName}}"  matTooltipClass="tooltip-show">
+                    <div *ngIf="file.type != 'video'" class="card-name" matTooltip="{{file.fileName}}"  matTooltipClass="tooltip-show">
                       <div class="file-name">
                        {{file.fileName}}
                       </div>
@@ -117,11 +117,11 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
                     <div class="card-img">
                           <img src="../../../assets/images/video-res.svg" class="thumbImg" alt="video">
                     </div>
-                    <div class="card-name">
+                    <!-- <div class="card-name">
                       <div class="file-name" matTooltip="{{videoFile.fileName}}"  matTooltipClass="tooltip-show">
                        {{videoFile.fileName}}
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </ng-container>
@@ -144,7 +144,7 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
       </div>
     </ng-container>
   </mat-tab>
-  <mat-tab label="Images">
+  <!-- <mat-tab label="Images">
     <ng-container *ngIf="selectedIndex == 2">
       <div *ngIf="!emptyGallery" class="content-container">
         <div *ngFor="let content of coursedata">
@@ -206,7 +206,7 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
         </mat-card> 
       </div>
     </ng-container>
-  </mat-tab>
+  </mat-tab> -->
   <mat-tab label="Knowledge Check"> 
     <ng-container *ngIf="selectedIndex == 3">
       <div *ngIf="!emptyGallery" class="content-container">
