@@ -69,7 +69,12 @@
       </ng-container>
     </ng-container>
     <ng-container *ngIf="!dataAvailable && !showSkeleton">
-      No data found
+      <div class="noCard">
+        <figure>
+          <img src="/assets/images/noactivityScheduled.svg" alt="assignment">
+        </figure>
+        <p>You have no activity scheduled!</p>
+      </div>
     </ng-container>
     <ng-container  *ngIf="showSkeleton">
       <div class="skeleton-container d-flex justify-content-between flex-row" *ngFor="let skeleton of skeletonPart">

@@ -417,6 +417,21 @@ section {
     line-height: 15px;
 }
 
+// No Card
+.noCard {
+    text-align: center;
+    figure {
+        margin: 15px 0;
+    }
+    p {
+        font-size: 14px;
+        color: #000000;
+        font-weight: 500;
+        line-height: normal;
+        margin-bottom: 30px ​!important;
+    }
+}
+  
 .skeleton-container{
     background-color: white;
     box-shadow: 0 0 4px rgba(0,0,0,0.25);
