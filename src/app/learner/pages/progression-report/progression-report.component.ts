@@ -68,6 +68,7 @@ export class ProgressionReportComponent implements OnInit {
   projectContent: any;
   performContent: any;
   performContentData: any[];
+  pieData: any;
   constructor(
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService,
@@ -92,8 +93,36 @@ export class ProgressionReportComponent implements OnInit {
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.course_id = localStorage.getItem('Courseid');
     this.userId = this.UserDetails.user_id;
+    this.getPieChartData()
+
     this.getprogression()
     this.getAssignmentmoduleData();
+  }
+
+  getPieChartData(){
+    let mockData = {
+      "data": {
+        "getProgressionActivitydata": {
+          "success": true,
+          "data": [
+            {
+              "assignment_total": 2,
+              "assignment_completed": 2,
+              "project_total": 3,
+              "project_completed": 2,
+              "perform_total": 3,
+              "perform_completed": 3,
+              "liveclassroom_total": 5,
+              "liveclassroom_completed": 4
+            }
+          ]
+        }
+      }
+    };
+    this.pieData = mockData.data.getProgressionActivitydata.data[0]
+    this.learnerService.getProgressionActivitydata(this.userId, this.course_id).subscribe((data:any)=>{
+      console.log(data)
+    })
   }
 
   tabChanged(event) {
@@ -179,6 +208,9 @@ export class ProgressionReportComponent implements OnInit {
       return 0 + '' + num;
     }
     return num;
+  }
+  percentageCalc(score, total){
+    return (score/total)*100
   }
   //get progression table data
   getprogression() {

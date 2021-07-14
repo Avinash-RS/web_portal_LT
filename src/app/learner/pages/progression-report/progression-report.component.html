@@ -26,23 +26,23 @@
           <div class="progress-label">Activities</div>
           <div class="d-flex color-yellow h-10">
             <div class="type-label">Assignment</div>
-            <mat-progress-bar [mode]="mode" value="30" [bufferValue]="bufferValue"></mat-progress-bar>
-            <div class="mark-level">06/16</div>
+            <mat-progress-bar [mode]="mode" [value]="percentageCalc(pieData.assignment_completed,pieData.assignment_total)" [bufferValue]="bufferValue"></mat-progress-bar>
+            <div class="mark-level">{{pieData.assignment_completed +'/'+pieData.assignment_total}}</div>
           </div>
           <div class="d-flex color-green h-10">
             <div class="type-label">Project</div>
-            <mat-progress-bar [mode]="mode" value="60" [bufferValue]="bufferValue"></mat-progress-bar>
-            <div class="mark-level">06/16</div>
+            <mat-progress-bar [mode]="mode" [value]="percentageCalc(pieData.project_completed,pieData.project_total)" [bufferValue]="bufferValue"></mat-progress-bar>
+            <div class="mark-level">{{pieData.project_completed +'/'+pieData.project_total}}</div>
           </div>
           <div class="d-flex color-yellow h-10">
             <div class="type-label">Perform</div>
-            <mat-progress-bar [mode]="mode" value="20" [bufferValue]="bufferValue"></mat-progress-bar>
-            <div class="mark-level">06/16</div>
+            <mat-progress-bar [mode]="mode" [value]="percentageCalc(pieData.perform_completed,pieData.perform_total)" [bufferValue]="bufferValue"></mat-progress-bar>
+            <div class="mark-level">{{pieData.perform_completed +'/'+pieData.perform_total}}</div>
           </div>
           <div class="d-flex color-grey h-10">
             <div class="type-label">Virtual Instructor Led Session</div>
-            <mat-progress-bar [mode]="mode" value="10" [bufferValue]="bufferValue"></mat-progress-bar>
-            <div class="mark-level">06/16</div>
+            <mat-progress-bar [mode]="mode" [value]="percentageCalc(pieData.liveclassroom_completed,pieData.liveclassroom_total)" [bufferValue]="bufferValue"></mat-progress-bar>
+            <div class="mark-level">{{pieData.liveclassroom_completed +'/'+pieData.liveclassroom_total}}</div>
           </div>
         </div>
       </div>

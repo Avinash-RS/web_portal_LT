@@ -2443,3 +2443,21 @@ data{
 }
 }
 `;
+export const getProgressionActivitydata = gql`
+query getProgressionActivitydata($userId:String!,$courseId:String!){
+  getProgressionActivitydata(userId:$userId, courseId:$courseId){
+    success
+    data
+    {
+      assignment_total
+      assignment_completed
+      project_total
+      project_completed
+      perform_total
+      perform_completed
+      liveclassroom_total
+      liveclassroom_completed
+      }
+      }
+      }
+      `;
