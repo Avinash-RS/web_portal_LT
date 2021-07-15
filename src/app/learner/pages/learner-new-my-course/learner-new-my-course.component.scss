@@ -1254,11 +1254,33 @@
     margin-bottom: 30px ​!important;
   }
 }
-
+.progression {
+  span {
+    font-size: 10px;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: normal;
+  }
+}
+::ng-deep .progStatus {
+  position: absolute;
+  bottom: 10px;
+  width: 90%;
+ .mat-progress-bar-buffer {
+    background: #b5b6b7 !important;
+}
+.mat-progress-bar{
+  border-radius: 4px;
+  height: 4px;
+}
+}
 ::ng-deep .mycoursesContent {
   // .mat-progress-bar-fill::after {
   //   background-image: linear-gradient(to right, #F7941E);
   // }
+  .mat-progress-bar{
+    height: 2px;
+  }
   .start{
     .mat-progress-bar-fill::after {
       background: #F7941E;

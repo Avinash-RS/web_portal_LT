@@ -195,13 +195,23 @@
                             <div *ngIf="courseSkel; else courseSkeleton">
                             <div class="mycoursesContent" *ngIf="courseDetailsList.length;else noCourseCard">
                                 <ng-container *ngFor="let item of courseDetailsList">
-                                    
+                                    <div class="{{item.progressClass}}">
+                                        <mat-progress-bar [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
+                                      </div>
                                     <div class="courses d-flex justify-content-start">
                                         <figure class="d-flex align-items-center justify-content-center" (click)="gotoDesc(item)">
                                             <img [src]="item.course_img_url + blobKey" alt="" />
     
                                             <button class="d-flex align-items-center"><em [class]="item.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
-                                                {{item?.course_status === "incomplete" ? "Resume" : item?.course_status === "suspend" ? "Resume" : item.course_status=== 'completed'?"Replay":("Start" | translate) }}</button>
+                                                {{item?.course_status === "incomplete" ? "Resume" : item?.course_status === "suspend" ? "Resume" : item.course_status=== 'completed'?"Replay":("Start" | translate) }}
+                                            </button>
+                                            <div class="progStatus {{item.progressClass}}">
+                                                <div class="d-flex justify-content-between progression">
+                                                    <span>Progression</span>
+                                                    <span>{{item.self_paced_learning_progression}} %</span>
+                                                </div>
+                                                <mat-progress-bar style="height: 4px;" [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
+                                              </div>
                                         </figure>
                                         <div class="rightCol">
                                             <div class="d-flex justify-content-between align-items-center">
@@ -296,7 +306,15 @@
                                             <img [src]="item.course_img_url + blobKey" alt="" />
     
                                             <button class="d-flex align-items-center"><em [class]="item.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
-                                                {{item?.course_status === "incomplete" ? "Resume" : item?.course_status === "suspend" ? "Resume" : item.course_status=== 'completed'?"Replay":("Start" | translate) }}</button>
+                                                {{item?.course_status === "incomplete" ? "Resume" : item?.course_status === "suspend" ? "Resume" : item.course_status=== 'completed'?"Replay":("Start" | translate) }}
+                                            </button>
+                                            <div class="progStatus {{item.progressClass}}">
+                                                <div class="d-flex justify-content-between progression">
+                                                    <span>Progression</span>
+                                                    <span>{{item.self_paced_learning_progression}} %</span>
+                                                </div>
+                                                <mat-progress-bar style="height: 4px;" [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
+                                              </div>
                                         </figure>
                                         <div class="rightCol">
                                             <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
@@ -378,6 +396,13 @@
     
                                             <button class="d-flex align-items-center"><em [class]="item.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
                                                 {{item?.course_status === "incomplete" ? "Resume" : item?.course_status === "suspend" ? "Resume" : item.course_status=== 'completed'?"Replay":("Start" | translate) }}</button>
+                                                <div class="progStatus {{item.progressClass}}">
+                                                    <div class="d-flex justify-content-between progression">
+                                                        <span>Progression</span>
+                                                        <span>{{item.self_paced_learning_progression}} %</span>
+                                                    </div>
+                                                    <mat-progress-bar style="height: 4px;" [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
+                                                  </div>
                                         </figure>
                                         <div class="rightCol">
                                             <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
