@@ -240,12 +240,13 @@ export class LearnerNewMyCourseComponent implements OnInit {
           }
         });
         this.courseDetailsList.push(...this.enrolledCourses);
+        this.courseDetailsList[0].self_paced_learning_progression = '60'
         this.courseDetailsList.forEach((value)=>{
           if(value.self_paced_learning_progression){
             value.self_paced_learning_progression = parseInt(value.self_paced_learning_progression)
             if(value.self_paced_learning_progression <= 40) {
               value.progressClass="start"
-            } else if(value.self_paced_learning_progression > 40 || value.self_paced_learning_progression <= 70){
+            } else if(value.self_paced_learning_progression <= 70){
               value.progressClass="midway"
             } else {
               value.progressClass="end"
