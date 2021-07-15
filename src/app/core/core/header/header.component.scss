@@ -102,7 +102,7 @@
   width: calc(100% - 175px);
 }
 .hearder-logo {
-  height: 26px;
+  height: 38px;
   cursor: pointer;
   margin-left: 3px;
   object-fit: cover;
@@ -235,10 +235,18 @@
   position: fixed;
   top: 55px;
   left: 0;
-  z-index: 4;
+  z-index: 5;
   background-color: #fff;
   box-shadow: 5px 5px 9px #0000001f;
   transition: ease-in width 0.3s;
+  @media only screen and (max-width: 767px) {
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    top: auto;
+    bottom: -1px;
+    width: 100%;
+  }
   .stripItem {
     padding: 10px 15px;
     cursor: pointer;
@@ -255,12 +263,14 @@
 // Navigation expand
 .burgerspace {
   width: 70px;
-  // transition: all 2s ease-in-out;
   font-size: 18px !important;
   padding-left: 10px;
   color: #808080;
   em {
     cursor: pointer;
+  }
+  @media only screen and (max-width: 767px) {
+    display: none;
   }
 }
 .navClose {
@@ -285,6 +295,9 @@
 // Navigation collapse
 .navOpen {
   box-shadow: inset -3px 1px 4px rgba(0, 0, 0, 0.1);
+  @media only screen and (max-width: 767px) {
+    box-shadow: 0 -2px 5px #9B95955C;
+  }
   .icoBox {
     display: inline-block;
   }
@@ -355,9 +368,9 @@
 }
 .mobHamburger {
   display: none;
-  @media only screen and (max-width: 767px) {
-    display: block;
-  }
+  // @media only screen and (max-width: 767px) {
+  //   display: block;
+  // }
 }
 
 .lxp-AccountCircle,

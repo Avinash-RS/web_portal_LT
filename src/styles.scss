@@ -997,6 +997,9 @@ mat-header-cell,
 .contentPad {
   padding-left: 70px;
   padding-top: 55px;
+  @media only screen and (max-width: 767px) {
+    padding-left: 0;
+  }
 }
 // Same copy of this footer in appcomponent.css
 .footer {
@@ -1015,6 +1018,7 @@ mat-header-cell,
   }
   @media only screen and (max-width: 767px) {
     text-align: center;
+    display: none;
   }
 }
 .movingNotification {

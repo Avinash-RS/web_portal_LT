@@ -100,28 +100,23 @@ export class ProgressionReportComponent implements OnInit {
   }
 
   getPieChartData(){
-    let mockData = {
-      "data": {
-        "getProgressionActivitydata": {
-          "success": true,
-          "data": [
-            {
-              "assignment_total": 2,
-              "assignment_completed": 2,
-              "project_total": 3,
-              "project_completed": 2,
-              "perform_total": 3,
-              "perform_completed": 3,
-              "liveclassroom_total": 5,
-              "liveclassroom_completed": 4
-            }
-          ]
-        }
-      }
-    };
-    this.pieData = mockData.data.getProgressionActivitydata.data[0]
+
+    //activity chart data
+    let defaultData = {
+              "assignment_total": 0,
+              "assignment_completed": 0,
+              "project_total": 0,
+              "project_completed": 0,
+              "perform_total": 0,
+              "perform_completed": 0,
+              "liveclassroom_total": 0,
+              "liveclassroom_completed": 0
+            };
+    this.pieData = defaultData;
     this.learnerService.getProgressionActivitydata(this.userId, this.course_id).subscribe((data:any)=>{
-      console.log(data)
+      if(data.data.getProgressionActivitydata.data.success){
+     this.pieData = data.data.getProgressionActivitydata.data[0]
+      }
     })
   }
 
@@ -137,19 +132,13 @@ export class ProgressionReportComponent implements OnInit {
       this.getperformActivityData();
     }
   }
-
-  time_convert(num) {
-    var hours = Math.floor(num / 60);
-    var minutes = num % 60;
-    return hours + ":" + minutes;
-  }
   //Assignment Module
   getAssignmentmoduleData() {
     this.showSkeleton = true;
     this.learnerService.getAssignmentmoduleData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
       if (data.data.getAssignmentmoduleData.success) {
         this.assignmentContent = data?.data?.getAssignmentmoduleData?.data;
-        if (this.assignmentContent.length == 0) {
+        if (this.assignmentContent?.length == 0) {
           this.emptyAssignment = true;
         } else {
           this.emptyAssignment = false
@@ -208,6 +197,14 @@ export class ProgressionReportComponent implements OnInit {
       return 0 + '' + num;
     }
     return num;
+  }
+  secondsTimeConverter(secs){
+    if(isNaN(secs)){
+      return '-- : -- : --';
+    }
+    else{
+      return new Date(secs * 1000).toISOString().substr(11, 8);
+    }
   }
   percentageCalc(score, total){
     return (score/total)*100
