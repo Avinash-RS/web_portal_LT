@@ -235,7 +235,7 @@
   position: fixed;
   top: 55px;
   left: 0;
-  z-index: 4;
+  z-index: 5;
   background-color: #fff;
   box-shadow: 5px 5px 9px #0000001f;
   transition: ease-in width 0.3s;
@@ -244,7 +244,7 @@
     justify-content: space-between;
     height: auto;
     top: auto;
-    bottom: 0;
+    bottom: -1px;
     width: 100%;
   }
   .stripItem {

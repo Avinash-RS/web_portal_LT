@@ -240,7 +240,7 @@
     position: relative;
     z-index: 9;
     @media only screen and (max-width: 767px) {
-      padding: 15px;
+      padding: 15px 15px 65px 15px;
     }
     &.noPadding {
       @media only screen and (min-width: 1200px) {
@@ -431,15 +431,16 @@
     }
     .actionItems {
       margin-top: 10px;
-      flex-wrap: wrap;
-      @media only screen and (min-width: 720px) {
-        flex-wrap: nowrap;
-      }
+      align-items: center;
+      flex-wrap: nowrap;
     }
     .viltActivitiesQA {
       .icons {
         text-align: center;
         margin-right: 30px;
+        @media only screen and (max-width: 767px) {
+          margin-right: 15px;
+        }
         &:last-child {
           margin-right: 0;
         }
@@ -451,8 +452,15 @@
           width: 35px;
           height: 35px;
           border: 1px dashed rgba(128, 128, 128, 0.4);
+          @media only screen and (max-width: 767px) {
+            width: 45px;
+            height: 45px;
+          }
           em {
             color: #808080;
+            @media only screen and (max-width: 767px) {
+              font-size: 20px;
+            }
           }
           &:hover {
             em {
@@ -472,22 +480,18 @@
           color: #333333;
           margin: 3px 0 0 0 !important;
           line-height: 11px;
+          @media only screen and (max-width: 767px) {
+            display: none;
+          }
         }
       }
     }
     .courseProgression {
-      justify-content: flex-start;
-      margin-top: 20px;
-      @media only screen and (min-width: 720px) {
-        justify-content: flex-end;
-        margin-top: 0;
-      }
+      justify-content: flex-end;
+      margin-top: 0;
       .icons {
         text-align: center;
-        margin-right: 30px;
-        @media only screen and (min-width: 720px) {
-          margin-right: 10px;
-        }
+        margin-right: 15px;
         &:hover {
           span {
             em {
@@ -502,7 +506,7 @@
         }
       }
       .percentage {
-        width: 25%;
+        width: 39%;
         @media only screen and (min-width: 720px) {
           width: 16%;
         }
