@@ -232,7 +232,7 @@
       flex-wrap: wrap;
       background-color: #ffffff;
       padding: 15px;
-      margin: 15px 5px;
+      margin: 0px 0px 15px 0px;
       border-radius: 4px;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     }
@@ -1195,3 +1195,30 @@
     margin-bottom: 30px ​!important;
   }
 }
+
+::ng-deep .mycoursesContent {
+  // .mat-progress-bar-fill::after {
+  //   background-image: linear-gradient(to right, #F7941E);
+  // }
+  .start{
+    .mat-progress-bar-fill::after {
+      background: #F7941E;
+    }
+  }
+  .midway{
+    .mat-progress-bar-fill::after {
+      background-image: linear-gradient(to right, #F7941E, #F9ED32);
+    }
+  }
+  .end{
+    .mat-progress-bar-fill::after {
+      background-image: linear-gradient(to right, #F7941E, #F9ED32, #119A16);
+    }
+  }
+
+  .mat-progress-bar-buffer {
+    background: #E4E8EB;
+  }
+  
+}
+

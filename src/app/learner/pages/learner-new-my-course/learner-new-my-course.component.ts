@@ -111,7 +111,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
   dayMonth: any;
   noActivity: boolean;
   courseSkel: boolean = false;
-
+  mode = 'determinate';
+  bufferValue = 100;
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
@@ -239,6 +240,18 @@ export class LearnerNewMyCourseComponent implements OnInit {
           }
         });
         this.courseDetailsList.push(...this.enrolledCourses);
+        this.courseDetailsList.forEach((value)=>{
+          if(value.self_paced_learning_progression){
+            value.self_paced_learning_progression = parseInt(value.self_paced_learning_progression)
+            if(value.self_paced_learning_progression <= 40) {
+              value.progressClass="start"
+            } else if(value.self_paced_learning_progression > 40 || value.self_paced_learning_progression <= 70){
+              value.progressClass="midway"
+            } else {
+              value.progressClass="end"
+            }
+          }
+        })
         this.courseSkel = true
 
       });
@@ -379,4 +392,14 @@ export class LearnerNewMyCourseComponent implements OnInit {
     });
   
   }
+
+  updateColor(progress) {
+    if (parseInt(progress)<21){
+       return 'primary';
+    } else if (parseInt(progress)>80){
+       return 'accent';
+    } else {
+      return 'warn';
+    }
+ }
 }

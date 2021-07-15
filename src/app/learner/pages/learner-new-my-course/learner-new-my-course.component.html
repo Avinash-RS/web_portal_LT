@@ -189,87 +189,93 @@
                             </ng-template>
                             <div *ngIf="courseSkel; else courseSkeleton">
                             <div class="mycoursesContent" *ngIf="courseDetailsList.length;else noCourseCard">
-                                <div *ngFor="let item of courseDetailsList" class="courses d-flex justify-content-start">
-                                    <figure class="d-flex align-items-center justify-content-center" (click)="gotoDesc(item)">
-                                        <img [src]="item.course_img_url + blobKey" alt="" />
-
-                                        <button class="d-flex align-items-center"><em [class]="item.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
-                                            {{item?.course_status === "incomplete" ? "Resume" : item?.course_status === "suspend" ? "Resume" : item.course_status=== 'completed'?"Replay":("Start" | translate) }}</button>
-                                    </figure>
-                                    <div class="rightCol">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
-                                            <span class="menuIcon" [matMenuTriggerFor]="menu">
-                                                <em class="lxp-Dot_Menu"></em>
-                                            </span>
-                                            <mat-menu #menu="matMenu" xPosition="before">
-                                                <button mat-menu-item (click)="openGallery(item)">
-                                                  <span><em class="lxp-Search mr-2"></em>Search</span>
+                                <ng-container *ngFor="let item of courseDetailsList">
+                                    <div class="{{item.progressClass}}">
+                                      <mat-progress-bar [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
+                                    </div>
+                                    
+                                    <div class="courses d-flex justify-content-start">
+                                        <figure class="d-flex align-items-center justify-content-center" (click)="gotoDesc(item)">
+                                            <img [src]="item.course_img_url + blobKey" alt="" />
+    
+                                            <button class="d-flex align-items-center"><em [class]="item.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
+                                                {{item?.course_status === "incomplete" ? "Resume" : item?.course_status === "suspend" ? "Resume" : item.course_status=== 'completed'?"Replay":("Start" | translate) }}</button>
+                                        </figure>
+                                        <div class="rightCol">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
+                                                <span class="menuIcon" [matMenuTriggerFor]="menu">
+                                                    <em class="lxp-Dot_Menu"></em>
+                                                </span>
+                                                <mat-menu #menu="matMenu" xPosition="before">
+                                                    <button mat-menu-item (click)="openGallery(item)">
+                                                      <span><em class="lxp-Search mr-2"></em>Search</span>
+                                                    </button>
+                                                    <mat-divider></mat-divider>
+                                                    <button mat-menu-item (click)="openReport(item)">
+                                                      <span><em class="lxp-Edit_Document mr-2"></em>Course Assessment Report</span>
+                                                    </button>
+                                                  </mat-menu>
+                                            </div>
+                                            <div class="showLessContent">
+                                                <button class="readMoreLess" *ngIf="info.length > 370" type="button"
+                                                    (click)="item.isReadMore = !item.isReadMore">
+                                                    <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
                                                 </button>
-                                                <mat-divider></mat-divider>
-                                                <button mat-menu-item (click)="openReport(item)">
-                                                  <span><em class="lxp-Edit_Document mr-2"></em>Course Assessment Report</span>
-                                                </button>
-                                              </mat-menu>
-                                        </div>
-                                        <div class="showLessContent">
-                                            <button class="readMoreLess" *ngIf="info.length > 370" type="button"
-                                                (click)="item.isReadMore = !item.isReadMore">
-                                                <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
-                                            </button>
-                                            <div [ngClass]="!item.isReadMore ? '' : 'showText'">
-                                                <p>{{item.course_description}}</p>
-                                                <div class="type d-flex justify-content-start">
-                                                    <span>Self paced learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
-                                                    <span>Instructor led session - upto  {{item.image_instructor_lead_session_time!==""?item.image_instructor_lead_session_time:0}}</span>
-                                                    <span>Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
-                                                    <span>Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
+                                                <div [ngClass]="!item.isReadMore ? '' : 'showText'">
+                                                    <p>{{item.course_description}}</p>
+                                                    <div class="type d-flex justify-content-start">
+                                                        <span>Self paced learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
+                                                        <span>Instructor led session - upto  {{item.image_instructor_lead_session_time!==""?item.image_instructor_lead_session_time:0}}</span>
+                                                        <span>Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
+                                                        <span>Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="durationCredits d-flex justify-content-between"
-                                            [ngClass]="!item.isReadMore ? 'top' : 'zero'">
-                                            <span>
-                                                <em class="lxp-Duration"></em> Duration: {{item.total_duration? item.total_duration : "1" + ""}} {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}
-                                            </span>
-                                            <span class="credits">Credits : {{item.credits!==null?item.credits:0}}</span>
-                                        </div>
-                                        <div class="actionItems d-flex justify-content-between">
-                                            <div class="viltActivitiesQA d-flex justify-content-start">
-                                                <div class="icons" (click)="goInstructorLed(item)">
-                                                    <span><em class="lxp-VILT"></em></span>
-                                                    <p>Virtual Instructor <br />Led Session</p>
-                                                </div>
-                                                <div class="icons" (click)="gotoSubmissionDetails(item)">
-                                                    <span><em class="lxp-Activities_New"></em></span>
-                                                    <p>Activities</p>
-                                                </div>
-                                                <div class="icons" (click)="gotoAskQuestions(item)">
-                                                    <span><em class="lxp-QA"></em></span>
-                                                    <p>Q&A</p>
-                                                </div>
+                                            <div class="durationCredits d-flex justify-content-between"
+                                                [ngClass]="!item.isReadMore ? 'top' : 'zero'">
+                                                <span>
+                                                    <em class="lxp-Duration"></em> Duration: {{item.total_duration? item.total_duration : "1" + ""}} {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}
+                                                </span>
+                                                <span class="credits">Credits : {{item.credits!==null?item.credits:0}}</span>
                                             </div>
-                                            <div class="courseProgression d-flex align-items-center">
-                                                <div class="icons" (click)="gotoProgression(item)">
-                                                    <span><em class="lxp-Course_Progression"></em></span>
-                                                    <p>Course Progression</p>
+                                            <div class="actionItems d-flex justify-content-between">
+                                                <div class="viltActivitiesQA d-flex justify-content-start">
+                                                    <div class="icons" (click)="goInstructorLed(item)">
+                                                        <span><em class="lxp-VILT"></em></span>
+                                                        <p>Virtual Instructor <br />Led Session</p>
+                                                    </div>
+                                                    <div class="icons" (click)="gotoSubmissionDetails(item)">
+                                                        <span><em class="lxp-Activities_New"></em></span>
+                                                        <p>Activities</p>
+                                                    </div>
+                                                    <div class="icons" (click)="gotoAskQuestions(item)">
+                                                        <span><em class="lxp-QA"></em></span>
+                                                        <p>Q&A</p>
+                                                    </div>
                                                 </div>
-                                                <div class="percentage">
-                                                    <circle-progress [percent]="((100 * (item.week_completed_count!==null?item.week_completed_count:0)) / (item.week_total_count!==null?item.week_total_count:1))" [clockwise]='true' [radius]="20"
-                                                        [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'"
-                                                        [outerStrokeGradientStopColor]="'#53a9ff'"
-                                                        [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3"
-                                                        [innerStrokeWidth]="3" [space]="-3" [titleFontSize]="12"
-                                                        [unitsFontSize]="12" [subtitleFontSize]="8"
-                                                        [titleColor]="'#666666'" [subtitleColor]="'#333333'"
-                                                        [startFromZero]="false" [responsive]="true"
-                                                        [showSubtitle]="true" [subtitle]="'Active'" [animation]="true"
-                                                        [animationDuration]="10"></circle-progress>
+                                                <div class="courseProgression d-flex align-items-center">
+                                                    <div class="icons" (click)="gotoProgression(item)">
+                                                        <span><em class="lxp-Course_Progression"></em></span>
+                                                        <p>Course Progression</p>
+                                                    </div>
+                                                    <div class="percentage">
+                                                        <circle-progress [percent]="((100 * (item.week_completed_count!==null?item.week_completed_count:0)) / (item.week_total_count!==null?item.week_total_count:1))" [clockwise]='true' [radius]="20"
+                                                            [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'"
+                                                            [outerStrokeGradientStopColor]="'#53a9ff'"
+                                                            [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3"
+                                                            [innerStrokeWidth]="3" [space]="-3" [titleFontSize]="12"
+                                                            [unitsFontSize]="12" [subtitleFontSize]="8"
+                                                            [titleColor]="'#666666'" [subtitleColor]="'#333333'"
+                                                            [startFromZero]="false" [responsive]="true"
+                                                            [showSubtitle]="true" [subtitle]="'Active'" [animation]="true"
+                                                            [animationDuration]="10"></circle-progress>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </ng-container>
                             </div>
                             </div>
                         </mat-tab>
