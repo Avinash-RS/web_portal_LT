@@ -9,6 +9,12 @@
   .mat-drawer-backdrop.mat-drawer-shown {
     background-color: transparent;
   }
+  .mat-drawer.mat-drawer-end {
+    @media only screen and (max-width: 767px) {
+      width: 100%;
+      z-index: 9;
+    }
+  }
 }
 .sideNavContainer {
   width: 100%;
@@ -37,6 +43,9 @@
       color: #ffffff;
       font-weight: 500;
       margin: 40px 0 10px 0;
+      @media only screen and (max-width: 767px) {
+        margin: 0px 0 10px 0;
+      }
     }
     .thingsContent {
       display: flex;
@@ -44,18 +53,26 @@
       align-items: center;
       width: 470px;
       min-width: 350px;
+      @media only screen and (max-width: 767px) {
+        justify-content: flex-start;
+        width: 100%;
+      }
       p {
         font-size: 14px;
         color: #4d4d4d;
         font-weight: 400;
+        line-height: normal;
         margin: 0 20px 0 0 !important;
       }
-      > div {
+      .check {
         display: flex;
         width: 30%;
         justify-content: space-between;
         margin-right: 20px;
         position: relative;
+        @media only screen and (max-width: 567px) {
+          width: 25%;
+        }
         &::after {
           content: "";
           position: absolute;
@@ -97,6 +114,11 @@
         font-weight: 400;
         color: #5a727d;
         cursor: pointer;
+        span {
+          @media only screen and (max-width: 767px) {
+            display: none;
+          }
+        }
         em {
           font-size: 6px;
           display: inline-block;
@@ -217,9 +239,34 @@
     background-color: #f2f2f2;
     position: relative;
     z-index: 9;
+    @media only screen and (max-width: 767px) {
+      padding: 15px;
+    }
     &.noPadding {
       @media only screen and (min-width: 1200px) {
         padding: 10px 20px 10px 20px;
+      }
+    }
+    .mobileEnable {
+      position: absolute;
+      right: 15px;
+      top: 12vh;
+      z-index: 9;
+      display: none;
+      @media only screen and (max-width: 767px) {
+        display: block;
+      }
+      span {
+        border-radius: 5px;
+        background-color: #F2F2F2;
+        border: 1px solid rgba(112, 112, 112, 0.2);
+        padding: 3px 7px;
+        display: inline-block;
+        line-height: normal;
+        em {
+          color: #333333;
+          font-size: 20px;
+        }
       }
     }
     h3 {
@@ -276,16 +323,18 @@
       }
       .menuIcon{
         cursor: pointer;
+        line-height: normal;
       }
       h3 {
         width: 100%;
-        font-size: 22px;
+        font-size: 18px;
         font-weight: 700;
         color: #000000;
         line-height: normal;
         margin-bottom: 10px;
         margin-top: 10px;
         @media only screen and (min-width: 720px) {
+          font-size: 22px;
           margin-top: 0;
         }
       }
@@ -351,6 +400,7 @@
       }
       .durationCredits {
         flex-wrap: wrap;
+        align-items: center;
         @media only screen and (min-width: 720px) {
           flex-wrap: nowrap;
         }
@@ -370,7 +420,7 @@
             margin-right: 5px;
           }
           &.credits {
-            margin-top: 7px;
+            margin-top: 0;
             display: inline-flex;
             @media only screen and (min-width: 720px) {
               margin-top: 0;
@@ -726,7 +776,9 @@
   .drawerWrapper {
     margin: 0 auto;
     width: 350px;
-    // width: 96%;
+    @media only screen and (max-width: 767px) {
+      width: 96%;
+    }
   }
   .navBackBtn {
     text-align: right;
@@ -1048,6 +1100,9 @@
   background-color: #fff;
   padding: 15px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  @media only screen and (max-width: 767px) {
+    display: none;
+  }
   .arrow {
     position: absolute;
     top: 16px;
@@ -1154,10 +1209,9 @@
     padding-left: 0px;
   }
 }
-  .cal-week-view {
-    border-top: none;
-  }
-
+.cal-week-view {
+  border-top: none;
+}
 
 ////INFO BANNER POPUP
 ::ng-deep .dialogContainer {

@@ -112,15 +112,16 @@
                     <h4>Let's learn something new today!</h4>
                     <div class="thingsContent">
                         <p>Here are your top 3 things to do!</p>
-                        <div>
+                        <div class="check">
                             <span class="green"><em class="lxp-Right"></em></span>
                             <span class="white"><em class="lxp-Right"></em></span>
                             <span class="white"><em class="lxp-Right"></em></span>
                         </div>
-                        <span class="expand" (click)="expandtoggle()">Expand 
+                        <div class="expand" (click)="expandtoggle()">
+                            <span>Expand</span> 
                             <em *ngIf="expandcollapse" class="lxp-DownArrow"></em>
                             <em *ngIf="!expandcollapse" class="lxp-Arrow"></em>
-                        </span>
+                        </div>
                     </div>
                 </div>
 
@@ -181,8 +182,12 @@
                 <!-- My Course -->
                 <div class="mycoursesWrapper" [ngClass]="show ? 'noPadding': ''">
                     <h3>My Courses</h3>
-                    <mat-tab-group #tabs (selectedTabChange)="courseTabChange($event,userDetailes.user_id,userDetailes._id);"
-                    [(selectedIndex)]="selectedIndex">
+                    <div class="mobileEnable">
+                        <span type="button" (click)="drawer.toggle();show=!show">
+                            <em class="lxp-Calendar_Todo"></em>
+                        </span>
+                    </div>
+                    <mat-tab-group #tabs (selectedTabChange)="courseTabChange($event,userDetailes.user_id,userDetailes._id);" [(selectedIndex)]="selectedIndex">
                         <mat-tab>
                             <ng-template mat-tab-label>
                                 Ongoing ({{onGoingCourseCount}})
@@ -565,11 +570,12 @@
 </div>
 <ng-template #infoPopup>
     <div class="d-flex align-items-center justify-content-center infocontent">
-      <img src="assets/learner/DownloadApp.png" alt="Nature" class="infoimg">
-     <div class="infoClose" (click)="closeBannerPopup()"><i  class="lxp-Close"></i></div>
+        <img src="assets/learner/DownloadApp.png" alt="Nature" class="infoimg">
+        <div class="infoClose" (click)="closeBannerPopup()">
+            <em class="lxp-Close"></em>
+        </div>
     </div>
-    
-  </ng-template>
+</ng-template>
   <ng-template #courseSkeleton>
     <div class="courses d-flex ">
         <div class="leftCol">
