@@ -2191,6 +2191,7 @@ query   get_batchwise_learner_dashboard_data( $user_id: String!, $request_type: 
             image_self_paced_learning_time
             total_mid_course_project_count
             internal_assesment
+            internal_assesment_completed
             final_assesment
             course_name
             author_name
