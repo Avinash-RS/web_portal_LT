@@ -276,10 +276,11 @@
       margin-top: 10px;
     }
     .courses {
+      position: relative;
       flex-wrap: wrap;
       background-color: #ffffff;
       padding: 15px;
-      margin: 0px 0px 15px 0px;
+      margin: 0 0px 15px 0px;
       border-radius: 4px;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     }
@@ -511,6 +512,9 @@
         @media only screen and (min-width: 720px) {
           width: 26%;
         }
+        @media only screen and (min-width: 1140px) {
+          width: 20%;
+        }
       }
     }
   }
@@ -521,6 +525,10 @@
   .leftSkeleton {
     width: 100%;
   }
+}
+
+.skeletonTop {
+  margin-top: 15px;
 }
 
 // In Progress Module

@@ -49,8 +49,8 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
             <ng-container *ngFor="let topic of content.moduledetails | filter:searchContent">
             <ng-container *ngIf="topic.activeTopic == 'active'">
               <ng-container *ngFor="let file of topic.allContent | filter:searchContent">
-                <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                  <div class="resource-card" *ngIf="file.type != 'image'" (click)="onPreviewgallery(file.type,file.link,'','all',content.modulename,topic.topicname)">
+                <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2" *ngIf="file.type != 'image'">
+                  <div class="resource-card" (click)="onPreviewgallery(file.type,file.link,'','all',content.modulename,topic.topicname)">
                     <div class="card-img">
                           <img *ngIf="file.type == 'video'" src="../../../assets/images/video-res.svg" class="thumbImg" alt="video">
                           <img *ngIf="file.type == 'image'" src="../../../assets/images/Image-res.svg" class="thumbImg" alt="image">
