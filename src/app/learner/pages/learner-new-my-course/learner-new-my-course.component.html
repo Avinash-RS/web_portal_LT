@@ -3,13 +3,14 @@
 <div class="sideNavWrapper">
     <div>
         <mat-drawer-container class="sideNavContainer" autosize>
-            <mat-drawer #drawer class="sideNav" [opened]="innerWidth>1140 ? 'true':'false'" [mode]="innerWidth>1140?'side':'over'" position="end"> 
+            <mat-drawer #drawer class="sideNav" [opened]="innerWidth>1140 ? 'true':'false'" [mode]="innerWidth>1140?'side':'over'" [position]="innerWidth < 767 ? 'start' : 'end'">
                 <div class="drawerWrapper">
                     <!-- Over Side Push -->
                     <div class="navBackBtn">
                         <span type="button" (click)="drawer.toggle();show=!show">
                             <em class="lxp-Right_Arrow"></em>
                         </span>
+                        <p>TASKS TO DO</p>
                     </div>
                     <!-- //////////// -->
                     <div class="prevNext">

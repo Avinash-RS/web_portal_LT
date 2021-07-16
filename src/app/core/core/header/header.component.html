@@ -88,8 +88,7 @@
 
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="navigateProfile()">
-      <!-- <mat-icon fontSet="material-icons-outlined">account_circle</mat-icon> -->
-      <i class="lxp-AccountCircle"></i>
+      <em class="lxp-AccountCircle"></em>
       <span>Profile</span>
     </button>
 
@@ -104,11 +103,11 @@
     </button>
 
     <button mat-menu-item (click)="logout()">
-      <!-- <mat-icon>exit_to_app</mat-icon> -->
-      <i class="lxp-Logout"></i>
+      <em class="lxp-Logout"></em>
       <span>Logout</span>
     </button>
   </mat-menu>
+
 </mat-toolbar>
 <div class="sideNavStrip" [ngClass]="expandTxt?'navClose':'navOpen'" *ngIf="!hideHeaderMenu">
   <div class="stripItem" routerLink="/Learner/MyCourse" [ngClass]="activeUrl === '/Learner/MyCourse' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">

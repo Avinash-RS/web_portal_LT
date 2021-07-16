@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="calendarArea">
-<section>
+<section class="activiySchedule">
   <div class="headerarea">
     <div class="heading5">Schedule</div>
   </div>
@@ -44,7 +44,6 @@
             <span  *ngIf="activity.activitytype == 'Self Learning'" class="icon lxp-Self_Learning">i</span>
             <div class="htxt">
               <span>Type</span>
-              <div></div>
               <div *ngIf="activity.activitytype != 'Live Classroom' && activity.activitytype != 'Self Learning'" class="notifi activity">{{activity.activitytype}}</div>
               <div *ngIf="activity.activitytype == 'Self Learning'" class="notifi selfplacedlearning">{{activity.activitytype}}</div>
               <div *ngIf="activity.activitytype == 'Live Classroom'" class="notifi virtualinstructorled">Virtual Instructor Led Session</div>
@@ -97,6 +96,7 @@
     </ng-container>
   </div>
 </section>
+
 <div class="calendarSlide">
   <div class="d-flex justify-content-end">
     <button mat-stroked-button class="reset-button" (click)="onSortChange('')">
