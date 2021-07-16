@@ -16,16 +16,18 @@
     background-color: #f0f0f0;
     height: 100%;
     padding: 1.8em 1.5em;
-    width: calc(100% - 400px);
+    width: 100%;
     order: 1;
     @media screen and (max-width:767px) {
         padding: 0 0.85em 6em 0.85em;
-        width: 100%;
         order: 2;
     } 
-    @media screen and (min-width:769px) and (max-width:1024px) {
+    @media screen and (min-width:769px) {
         width: calc(100% - 300px);
-    } 
+    }
+    @media screen and (min-width: 1140px) {
+        width: calc(100% - 400px);
+    }
 }
 .heading5 {
     font-size: 1.7em;
