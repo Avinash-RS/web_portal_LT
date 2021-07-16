@@ -240,7 +240,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
           }
         });
         this.courseDetailsList.push(...this.enrolledCourses);
-        this.courseDetailsList[0].self_paced_learning_progression = '60'
         this.courseDetailsList.forEach((value)=>{
           if(value.self_paced_learning_progression){
             value.self_paced_learning_progression = parseInt(value.self_paced_learning_progression)
