@@ -248,7 +248,7 @@
                                             <div class="durationCredits d-flex justify-content-between"
                                                 [ngClass]="!item.isReadMore ? 'top' : 'zero'">
                                                 <span>
-                                                    <em class="lxp-Duration"></em> Duration: {{item.total_duration? item.total_duration : "1" + ""}} {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}
+                                                    <em class="lxp-Duration"></em> Duration: {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}
                                                 </span>
                                                 <span class="credits">Credits : {{item.credits!==null?item.credits:0}}</span>
                                             </div>

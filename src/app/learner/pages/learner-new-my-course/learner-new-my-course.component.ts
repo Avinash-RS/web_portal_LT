@@ -99,6 +99,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   courseDetailsList: any[];
   enrolledCourses: any;
   blobKey = environment.blobKey;
+  externalWeb = environment.teachercommunity;
   public UserDetails: any;
   public selectedDate: any;
   userId: any;
@@ -309,18 +310,23 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
   //ASK A QUESTION
   gotoAskQuestions(c) {
-    const detail = {
-      course_name: c.course_name,
-      course_id: c.course_id,
-      batch_id: c.batchid,
-      batchEndTime: c.batch_end_date_Timer,
+    if(this.userDetailes.org_type === 'vocational') {
+      const detail = {
+        course_name: c.course_name,
+        course_id: c.course_id,
+        batch_id: c.batchid,
+        batchEndTime: c.batch_end_date_Timer,
+      }
+      localStorage.setItem('Courseid', c.course_id);
+      localStorage.setItem('currentBatchId', c.batchid);
+      localStorage.setItem('CourseName', c.course_name);
+      localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer)
+  
+      this.router.navigateByUrl('/Learner/askQuestions', { state: { detail } });
+    } else{
+      window.open(this.externalWeb, "_blank");
     }
-    localStorage.setItem('Courseid', c.course_id);
-    localStorage.setItem('currentBatchId', c.batchid);
-    localStorage.setItem('CourseName', c.course_name);
-    localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer)
-
-    this.router.navigateByUrl('/Learner/askQuestions', { state: { detail } });
+    
   }
 // ACTIVITY NAVIGATION 
   gotoSubmissionDetails(course) {
