@@ -2443,6 +2443,19 @@ data{
 }
 }
 `;
+export const selfLearningdatabyUserId = gql`
+query selfLearningdatabyUserId($type:String!,$userId:String!,$courseId:String!){
+  selfLearningdatabyUserId(type:$type,userId:$userId, courseId:$courseId){
+    success
+    data
+    {
+      completed
+      yettostart
+      inprogress
+      }
+      }
+      }
+      `;
 export const getProgressionActivitydata = gql`
 query getProgressionActivitydata($userId:String!,$courseId:String!){
   getProgressionActivitydata(userId:$userId, courseId:$courseId){
