@@ -35,11 +35,10 @@
     margin: 1em 0; 
 }
 .viewInfotxt {
-    display: flex;
-    justify-content: space-between; 
-    @media screen and (max-width:480px) { 
     flex-direction: column;
-    min-height: 70px;
+    // min-height: 70px;
+    @media screen and (min-width:1140px) { 
+        flex-direction: row;
     }
 }
 .leftPan {
@@ -70,9 +69,9 @@
 }
 .rightPan {
     span {
-        padding: 0 1em;
-        @media screen and (max-width:480px) {
-            padding: 0;
+        padding: 0 1em 0 0;
+        @media screen and (min-width:1140px) {
+            padding: 0 1em;
         }
     }
     select {
@@ -149,9 +148,10 @@
         }
         .infotxtarea {
             width: 95%;
-            order: 1;
+            order: 2;
             @media only screen and (min-width: 569px) {
                 margin-bottom: 10px;
+                order: 1;
             }
             @media only screen and (min-width:1140px) {
                 width: 39%;
@@ -161,10 +161,15 @@
                 font-weight: 700;
                 color: red;
             }
-            .infotxt span {
-                color:#808080;
-                min-width: 45px;
-                display: inline-block;
+            .infotxt {
+                span {
+                    display: inline-block;
+                    color: #666666;
+                    &:first-child {
+                        color: #999999;
+                        margin-right: 5px;
+                    }
+                }
             }
         }
         .infotypearea {
@@ -172,7 +177,7 @@
             font-weight: 700;
             color: #000;
             padding: 0 1%;
-            order: 3;
+            order: 1;
             @media only screen and (min-width: 569px) {
                 width: 49%;
                 order: 2;
@@ -197,10 +202,9 @@
         }
         .infodatearea {
             width: 100%;
-            order: 2;
+            order: 3;
             @media only screen and (min-width: 569px) {
                 width: 49%;
-                order: 3;
             }
             @media only screen and (min-width:1140px) {
                 width: 26%;
@@ -208,19 +212,24 @@
             .icon {
                 width: 14%;
                 @media only screen and (max-width: 567px) {
-                    width: 10%;
+                    width: 7%;
                 }
             }
             .htxt {
                 width: 84%;
                 @media only screen and (max-width: 567px) {
-                    width: 88%;
+                    width: 91%;
                     margin: 6px 0;
                     display: flex;
                     flex-direction: row;
                 }
                 span {
-
+                    &:last-child {
+                        margin-left: 15px;
+                        @media only screen and (min-width: 569px) {
+                            margin-left: 0;
+                        }
+                    }
                 }
             }
         }
@@ -232,7 +241,7 @@
             }
             @media screen and (max-width:1139px) { 
                 position: absolute;
-                top: 0.7em;
+                top: 15px;
                 right: 1em;
             }
             .icon {
@@ -261,7 +270,7 @@
                 font-size: 1.2em !important;
                 color: red !important;
             }
-            .timer{
+            .timer {
                 font-size: 1.2em !important;
                 &::before {
                     color: #FFA800 !important;
@@ -355,11 +364,14 @@
         span {
             position: relative;
             padding-left: 1.1em;
-            font-size: 12px;
+            font-size: 11px;
             color: #666666;
             display: inline-block;
             margin-right: 10px;
             line-height: normal;
+            @media only screen and (min-width: 411px) {
+                font-size: 12px;
+            }
             &:before {
                 content:'';
                 width: 7px;

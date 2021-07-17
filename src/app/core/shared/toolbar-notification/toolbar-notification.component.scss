@@ -54,12 +54,15 @@ $prefix: 'toolbar-notification';
     position: absolute;
     top: 42px;
     right: 0;
-    min-width: 450px;
+    min-width: 400px;
     z-index: 1000;
     transform: translateY(0) scale(0);
     transform-origin: top right;
     visibility: hidden;
     transition: transform .4s cubic-bezier(.25, .8, .25, 1), visibility .4s cubic-bezier(.25, .8, .25, 1);
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
     @media screen and (max-width: 767.98px) {
         min-width: 90vw;
         right: -45px;
@@ -77,9 +80,7 @@ $prefix: 'toolbar-notification';
 
         .header {
             background: #EEEEEE;
-            min-height: 54px;
-            padding-left: 16px;
-            padding-right: 8px;
+            padding: 15px;
             color: #555;
             display: flex;
             justify-content: flex-start;
@@ -89,18 +90,20 @@ $prefix: 'toolbar-notification';
 
             .extra {
                 font-size: 12px;
-                color: #888;
+                font-weight: 400;
+                color: #898989;
+                line-height: normal;
             }
         }
     }
 
     .content {
-        max-height: 256px;
+        max-height: 300px;
         overflow: auto !important;
 
         .notification {
             min-height: 64px;
-            padding: 0 16px 0 14px;
+            padding: 0 16px 10px 14px;
             position: relative;
             color: #666;
             cursor: pointer;
@@ -121,14 +124,16 @@ $prefix: 'toolbar-notification';
             }
 
             .title {
-                font-weight: 500;
-                font-size: 14px;
-                width: 87%;
+                font-weight: 400;
+                font-size: 12px;
+                width: 86%;
+                color: #222222;
+                line-height: normal;
             }
 
             .time {
-                font-size: 12px;
-                color: $lxp-theme-green;
+                font-size: 10px;
+                color: #999999;
                 line-height: normal;
             }
 
@@ -172,14 +177,18 @@ $prefix: 'toolbar-notification';
     }
 
     .footer {
-        min-height: 42px;
+        // min-height: 42px;
         border-top: 1px solid #EEE;
+        font-weight: 400;
         margin-top: 0;
+        padding: 10px;
+        background-color: #FFCC00;
         .action {
             cursor: pointer;
-            color: #AAA;
+            color: #000000;
             text-align: center;
             font-size: 13px;
+            line-height: normal;
         }
     }
 
@@ -217,19 +226,22 @@ $prefix: 'toolbar-notification';
     // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 .message{
-    color: $color-blank;
+    color: #333333;
     // font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .readed{
-    color: $lxp-text;
+    color: #666666;
 }
 
 .name{
-	// text-decoration: underline;
+    // text-decoration: underline;
+    font-size: 18px;
+    font-weight: 500;
     cursor: pointer;
     color: $lxp-theme-green;
+    line-height: normal;
 }
 
 @media (min-width: 300px) {
@@ -255,7 +267,10 @@ $prefix: 'toolbar-notification';
 }
 .wordWrap {
     white-space: break-spaces !important;
-    line-height: 22px !important;
-    margin: 8px 0;
+    // line-height: 22px !important;
+    margin: 8px 0 4px 0;
     display: block;
+    &:hover{
+        text-decoration: none;
+    }
 }

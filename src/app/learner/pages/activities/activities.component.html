@@ -158,8 +158,12 @@
         </div>
       </ng-container>
       <!-- Content ends -->
-      <div *ngIf="emptyAssignment">
-        <mat-card class="noSessionCard color-yellow-card-status">
+      <div class="noCard" *ngIf="emptyAssignment">
+        <figure>
+          <img src="/assets/images/noassignment.svg" alt="assignment">
+        </figure>
+        <p> You have no Assignment activity at the moment!</p>
+        <!-- <mat-card class="noSessionCard color-yellow-card-status">
           <div class="row mar-t-12 noSessioncardRow">
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
               <img class="actImg" src="assets/Assignment.svg" alt="assignment">
@@ -168,7 +172,7 @@
               <span class="spanTxt"> You have no assignments at the moment!</span>
             </div>
           </div>
-        </mat-card> 
+        </mat-card>  -->
       </div>
 
     </mat-tab>
@@ -479,8 +483,12 @@
         </div>
       </div> -->
 
-      <div *ngIf="performDetails?.length < 1">
-        <mat-card class="noSessionCard color-yellow-card-status">
+      <div class="noCard" *ngIf="performDetails?.length < 1">
+        <figure>
+          <img src="/assets/images/noperform.svg" alt="assignment">
+        </figure>
+        <p>You have no Perform activity at the moment!</p>
+        <!-- <mat-card class="noSessionCard color-yellow-card-status">
           <div class="row mar-t-12 noSessioncardRow">
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
               <img class="" src="assets/noPerform.svg" alt="perform"> 
@@ -489,7 +497,7 @@
               <span class="spanTxt"> You have no perform activity at the moment!</span>
             </div>
           </div>
-        </mat-card> 
+        </mat-card>  -->
       </div>
     </mat-tab>
 
@@ -770,8 +778,12 @@
         </div>
       </ng-container>
 
-      <div *ngIf="projectDetails?.length < 1">
-        <mat-card class="noSessionCard color-yellow-card-status">
+      <div class="noCard" *ngIf="projectDetails?.length < 1">
+        <figure>
+          <img src="/assets/images/noproject.svg" alt="assignment">
+        </figure>
+        <p>You have no Project activity at the moment!</p>
+        <!-- <mat-card class="noSessionCard color-yellow-card-status">
           <div class="row mar-t-12 noSessioncardRow">
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
               <img class="actImg" src="assets/noProject.svg" alt="project"> 
@@ -780,7 +792,7 @@
               <span class="spanTxt"> You have no project activity at the moment!</span>
             </div>
           </div>
-        </mat-card> 
+        </mat-card>  -->
       </div>
     </mat-tab>
 
