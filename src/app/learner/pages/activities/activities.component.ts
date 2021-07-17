@@ -369,7 +369,7 @@ export class ActivitiesComponent implements OnInit {
   }
   uploadDoc(event, project, submitAction) {
     const filePath = event.target.files[0].name;
-    const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.mp4|\.mov|\.avi|\.pdf)$/i;
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.mp4|\.mov|\.pdf)$/i;
     if (!allowedExtensions.exec(filePath)) {
       this.toastr.warning('Please upload file a valid file');
       if (this.uploadInput) {
@@ -459,7 +459,7 @@ export class ActivitiesComponent implements OnInit {
 
   projectPreviewDoc(templateRef: TemplateRef<any>, videoDialog, path, type) {
     if (type === 'material') {
-      if (path.doc_type !== 'video/mp4' && path.doc_type !== 'video/quicktime' && path.doc_type !== 'video/avi') {
+      if (path.doc_type !== 'video/mp4' && path.doc_type !== 'video/quicktime') {
         this.dialog.open(templateRef, {
           width: '100%',
           height: '100%',
@@ -477,7 +477,7 @@ export class ActivitiesComponent implements OnInit {
         this.videoPreview(videoDialog, path);
       }
     } else if (type === 'files') {
-      if (path.doc_type !== 'video/mp4' && path.doc_type !== 'video/quicktime' && path.doc_type !== 'video/avi') {
+      if (path.doc_type !== 'video/mp4' && path.doc_type !== 'video/quicktime') {
         this.dialog.open(templateRef, {
           width: '100%',
           height: '100%',
@@ -886,7 +886,7 @@ export class ActivitiesComponent implements OnInit {
     // this.selectPerformfile.push(event.target.files[0] as File);
     if(event.target.files.length==1){
     const filePath = event.target.files[0].name;
-    const allowedExtensions = /(\.mp4|\.mov|\.avi)$/i;
+    const allowedExtensions = /(\.mp4|\.mov)$/i;
     if (!allowedExtensions.exec(filePath)) {
       this.toastr.warning('Please upload video file only.');
       if (this.videoInput) {
@@ -1198,7 +1198,7 @@ export class ActivitiesComponent implements OnInit {
         path.path = path.path + this.blobKey;          
       }
       this.previewDoc = path;
-    } else if (docType === 'video/mp4' || docType === 'video/quicktime' || docType === 'video/avi') {
+    } else if (docType === 'video/mp4' || docType === 'video/quicktime') {
       if (path.videourl) {
         path.path = path.videourl;
       }
