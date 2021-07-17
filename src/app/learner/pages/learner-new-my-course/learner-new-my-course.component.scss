@@ -9,6 +9,12 @@
   .mat-drawer-backdrop.mat-drawer-shown {
     background-color: transparent;
   }
+  .mat-drawer:not(.mat-drawer-side) {
+    @media only screen and (max-width: 767px) {
+      width: 100%;
+      z-index: 8;
+    }
+  }
   .mat-drawer.mat-drawer-end {
     @media only screen and (max-width: 767px) {
       width: 100%;
@@ -240,7 +246,7 @@
     position: relative;
     z-index: 9;
     @media only screen and (max-width: 767px) {
-      padding: 15px 15px 65px 15px;
+      padding: 15px 15px 95px 15px;
     }
     &.noPadding {
       @media only screen and (min-width: 1200px) {
@@ -250,21 +256,26 @@
     .mobileEnable {
       position: absolute;
       right: 15px;
-      top: 12vh;
+      top: 3.22vh;
       z-index: 9;
       display: none;
       @media only screen and (max-width: 767px) {
         display: block;
       }
       span {
-        border-radius: 5px;
-        background-color: #F2F2F2;
+        border-radius: 50%;
+        background-color: #ffcc00;
         border: 1px solid rgba(112, 112, 112, 0.2);
         padding: 3px 7px;
-        display: inline-block;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 35px;
+        height: 35px;
         line-height: normal;
+        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
         em {
-          color: #333333;
+          color: #000000;
           font-size: 20px;
         }
       }
@@ -292,6 +303,9 @@
       overflow: hidden;
       position: relative;
       @media only screen and (min-width: 720px) {
+        width: 24%;
+      }
+      @media only screen and (min-width: 1140px) {
         width: 18%;
       }
       button {
@@ -319,6 +333,10 @@
     .rightCol {
       width: 100%;
       @media only screen and (min-width: 720px) {
+        margin-left: 2%;
+        width: 74%;
+      }
+      @media only screen and (min-width: 1140px) {
         margin-left: 2%;
         width: 80%;
       }
@@ -482,7 +500,7 @@
           color: #333333;
           margin: 3px 0 0 0 !important;
           line-height: 11px;
-          @media only screen and (max-width: 767px) {
+          @media only screen and (max-width: 991px) {
             display: none;
           }
         }
@@ -509,7 +527,7 @@
       }
       .percentage {
         width: 39%;
-        @media only screen and (min-width: 720px) {
+        @media only screen and (min-width: 569px) {
           width: 26%;
         }
         @media only screen and (min-width: 1140px) {
@@ -521,6 +539,9 @@
 }
 
 .leftCol {
+  @media only screen and (max-width: 767px) {
+    width: 100%;
+  }
   width: 18%;
   .leftSkeleton {
     width: 100%;
@@ -759,6 +780,9 @@
       font-weight: 400;
       color: #A5A7B8;
       margin-bottom: 5px !important;
+      @media only screen and (max-width: 767px) {
+        display: none;
+      }
     }
     .wrapperTaskToDo {
       margin-bottom: 10px;
@@ -799,6 +823,28 @@
     padding: 15px 15px 10px 15px;
     span {
       color: #999999;
+      display: inline-block;
+      @media only screen and (max-width: 767px) {
+        transform: rotate(180deg);
+      }
+    }
+    p {
+      display: none;
+      @media only screen and (max-width: 767px) {
+        display: inline-flex;
+        font-size: 14px;
+        font-weight: 500;
+        color: #666666;
+        text-transform: uppercase;
+        margin: 0 0 0 10px !important;
+      }
+    }
+    @media only screen and (max-width: 767px) {
+      text-align: left;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 15px;
     }
   }
   .sideTabsStrip {

@@ -138,10 +138,10 @@ export class ProgressionReportComponent implements OnInit {
     this.learnerService.getAssignmentmoduleData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
       if (data.data.getAssignmentmoduleData.success) {
         this.assignmentContent = data?.data?.getAssignmentmoduleData?.data;
-        if (this.assignmentContent?.length == 0) {
-          this.emptyAssignment = true;
+        if (this.assignmentContent?.length > 0) {
+          this.emptyAssignment = false;
         } else {
-          this.emptyAssignment = false
+          this.emptyAssignment = true
         }
       }
       this.showSkeleton = false;
@@ -154,7 +154,7 @@ export class ProgressionReportComponent implements OnInit {
     this.learnerService.getprojectActivityData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
       if (data.data.getprojectActivityData.success) {
         this.projectContent = data?.data?.getprojectActivityData?.data;
-        if (this.projectContent.length == 0) {
+        if (this.projectContent?.length > 0) {
           this.emptyAssignment = true;
         } else {
           this.emptyAssignment = false
@@ -182,7 +182,7 @@ export class ProgressionReportComponent implements OnInit {
         })
         this.performContentData = performIteration
         console.log(this.performContentData);
-        if (this.performContent.length == 0) {
+        if (this.performContent.length > 0) {
           this.emptyAssignment = true;
         } else {
           this.emptyAssignment = false

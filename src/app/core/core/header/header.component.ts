@@ -1,6 +1,6 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { HttpClient } from '@angular/common/http';
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
@@ -32,6 +32,7 @@ export class HeaderComponent implements OnInit {
   expandTxt:boolean = false;
 
   @HostBinding('class') componentCssClass;
+  innerWidth: number;
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
               private http: HttpClient, public overlayContainer: OverlayContainer, public socketService: SocketioService,
               public router: Router, private gs: GlobalServiceService) {
@@ -47,9 +48,15 @@ export class HeaderComponent implements OnInit {
       }
     })
   }
-
+  @HostListener('window:resize', ['$event'])
   ngOnInit() {
-    
+    this.innerWidth = window.innerWidth;
+    if(this.innerWidth <= 767) {
+      this.expandTxt = true;
+    }
+    else {
+      this.expandTxt = false;
+    }
     this.services.closeAvailPopup$.subscribe((data: any) => {
       this.isAvailOpen = data;
     });
@@ -65,6 +72,17 @@ export class HeaderComponent implements OnInit {
     setTimeout(() => {
       this.userDetailes = this.gs.checkLogout();
     }, 3000);
+  }
+  
+
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+    if(this.innerWidth <= 767) {
+      this.expandTxt = true;
+    }
+    else {
+      this.expandTxt = false;
+    }
   }
   
   getShortName(fullName) {
