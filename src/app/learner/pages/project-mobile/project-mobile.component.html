@@ -105,7 +105,7 @@
                       <div class="col-12 m-auto">
                         <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
                           photo_size_select_actual</mat-icon>
-                        <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime' || material.doc_type =='video/avi'">play_circle_outline</mat-icon>
+                        <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'">play_circle_outline</mat-icon>
                         <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type =='application/pdf'" aria-hidden="true"></i>
                       </div>
                     </div>
@@ -193,7 +193,7 @@
                               <div class="col-12 m-auto">
                                 <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
                                   photo_size_select_actual</mat-icon>
-                                <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime' || material.doc_type =='video/avi'">play_circle_outline</mat-icon>
+                                <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'">play_circle_outline</mat-icon>
                                 <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type == 'application/pdf'" aria-hidden="true"></i>
                               </div>
                             </div>
@@ -283,11 +283,11 @@
                     <mat-icon class="icon-color m-t-m-2">add</mat-icon>
                     Add your files
                     </button> -->
-                    <input class="input-hide" type="file" accept="video/mp4,video/quicktime,video/avi,image/png,image/jpeg,image/jpg,application/pdf" #uploadFile [(ngModel)]="fileName" [ngClass]="project.projectActivity.submitAction ? 'class1':'class2'" (change)="uploadDoc($event, project, 'upload')" />
+                    <input class="input-hide" type="file" accept="video/mp4,video/quicktime,image/png,image/jpeg,image/jpg,application/pdf" #uploadFile [(ngModel)]="fileName" [ngClass]="project.projectActivity.submitAction ? 'class1':'class2'" (change)="uploadDoc($event, project, 'upload')" />
                     <button mat-stroked-button class="uploadBtn w-100"  [disabled]="project.submitType == false || project.enableSubmit == false" (click)="uploadDocs($event)">
                       <mat-icon class="add-icon">add</mat-icon> Add your files
                     </button>
-                    <p class="uploadMessage">Max File Size : 150 MB, Format : JPEG, PNG, PDF, MP4, MOV and AVI</p>
+                    <p class="uploadMessage">Max File Size : 150 MB, Format : JPEG, PNG, PDF, MP4, MOV</p>
                     <button mat-stroked-button class="submit-btn" [disabled]="project.submitType == false || project.enableSubmit == false" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')" 
                       *ngIf="project.projectActivity.videodetails.length > 0">Submit</button>
                     <button mat-stroked-button class="submitted-btn mt-2" *ngIf="(project.projectActivity.videodetails.length == 0 || project.enableSubmit == false)"> Submit </button>
@@ -318,7 +318,7 @@
                       <div class="row ml-0 mr-0 carouselRow1">
                         <div class="col-12 m-auto">
                           <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"> photo_size_select_actual</mat-icon>
-                          <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime' || material.doc_type =='video/avi'"> play_circle_outline </mat-icon>
+                          <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'"> play_circle_outline </mat-icon>
                           <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type == 'application/pdf'" aria-hidden="true"></i>
                         </div>
                       </div>

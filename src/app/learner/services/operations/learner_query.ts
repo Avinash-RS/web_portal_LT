@@ -1442,46 +1442,36 @@ export const getReadLearnerActivity = gql`
 export const playerModuleAndTopic = gql`
   query playerModuleAndTopic($contentID: String, $user_id: String) {
     playerModuleAndTopic(contentID: $contentID, user_id: $user_id) {
-      message {
-        _id
-        url
-        toc
-        total_topic_len
-        course_id
-        moduleIndex
-        topicIndex
-        childData {
-          week
-          title
-          _id
+      message{
+      total_topic_len
+      _id
+      url
+      toc
+      course_id
+      moduleIndex
+      topicIndex
+      childData{
+        week
+        childData{
+         title
           status
-          topic_len
           moduletime
-          children {
+          topic_len
+          parent
+          _id
+          id
+          children{
             _id
             title
             link
-            status
             isVisible
-            bookmark
+            status
             user_experience
-            children {
-              _id
-            title
-            link
-            status
-            isVisible
-            children {
-              _id
-            title
-            link
-            status
-            isVisible
-            }
-            }
+            bookmark
           }
         }
       }
+    } 
       success
     }
   }
@@ -2191,6 +2181,7 @@ query   get_batchwise_learner_dashboard_data( $user_id: String!, $request_type: 
             image_self_paced_learning_time
             total_mid_course_project_count
             internal_assesment
+            internal_assesment_completed
             final_assesment
             course_name
             author_name
@@ -2443,6 +2434,19 @@ data{
 }
 }
 `;
+export const selfLearningdatabyUserId = gql`
+query selfLearningdatabyUserId($type:String!,$userId:String!,$courseId:String!){
+  selfLearningdatabyUserId(type:$type,userId:$userId, courseId:$courseId){
+    success
+    data
+    {
+      completed
+      yettostart
+      inprogress
+      }
+      }
+      }
+      `;
 export const getProgressionActivitydata = gql`
 query getProgressionActivitydata($userId:String!,$courseId:String!){
   getProgressionActivitydata(userId:$userId, courseId:$courseId){
