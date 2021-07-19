@@ -1,4 +1,86 @@
-<div class="row" class="background-image">
+<div class="loginWrapper">
+  <mat-card class="h-100 loginContainer d-flex justify-content-start">
+    <div class="brandLogo d-lg-flex justify-content-between align-items-center flex-column">
+      <div class="topImage">
+        <figure class="logo">
+          <img alt="" src="assets/learner/EduTech_Logo.svg">
+        </figure>
+      </div>
+      <div class="middleImage">
+        <figure class="obstacles">
+          <img src="assets/learner/EntryImage.svg" alt="" />
+        </figure>
+      </div>
+      <div class="downloadApp d-flex justify-content-center align-items-center">
+        <span>Download our Mobile app</span>
+        <figure class="googlePlay">
+          <img alt="" src="assets/learner/googlePlay.png">
+        </figure>
+        <figure class="appStore">
+          <img src="assets/learner/appStore.png" alt="" />
+        </figure>
+      </div>
+    </div>
+    <div class="loginSection">
+      <div class="signInContainer d-flex justify-content-center align-items-center flex-column h-100">
+        <figure class="logo">
+          <img alt="" src="assets/learner/EduTech_Logo.svg">
+        </figure>
+        <div class="signIn">
+          <h1>Welcome <span>Back</span></h1>
+          <form [formGroup]="loginForm">
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label class="label-color">{{'Email' | translate}}</mat-label>
+                <input matInput id="username" #username [placeholder]="'Enter the email' | translate"  formControlName="username" maxlength="64"
+                required>
+                <em class="icon-color lxp-MailOutline" matPrefix></em>
+                <mat-error class="error" *ngIf="loginForm.get('username').hasError('required')">{{'Email is required' | translate}}</mat-error>
+                <mat-error class="error" *ngIf="loginForm.get('username').hasError('pattern')">{{'Please enter a valid email address' | translate}}</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="" appCapslock (capsLock)="capsOn=$event">
+              <div *ngIf="capsOn">{{'Caps lock is on !' | translate }}</div>
+                <mat-form-field appearance="outline">
+                  <mat-label  class="label-color">{{'Password' | translate }}</mat-label>
+                  <input matInput  [placeholder]="'Enter password' | translate " [type]="hide ? 'password' : 'text'" formControlName="password" [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" required>
+                  <em class="icon-color lxp-Lock" matPrefix></em>
+                  <span  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"> 
+                    <em class="icon-color" [ngClass]="hide ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
+                  </span>
+                  <mat-error class="error" *ngIf="f.password.touched && f.password.errors" >{{'Password is required' | translate }}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="forgotPswd d-flex justify-content-between">
+              <mat-checkbox class="remember_me" formControlName="remember_me">
+                {{'Keep me logged in' | translate }}
+              </mat-checkbox>
+              <span>
+                <a class="forgot"(click)="reserPassword('reserPassword')">{{'Forgot password?' | translate}}</a>
+              </span>
+            </div>
+
+            <div class="gradientBtn">
+              <button id="login" mat-raised-button (click)="login()">{{'SIGN IN' | translate}}</button>
+            </div>
+
+            <div class="dontHaveAccount">
+              <span>Don't have account yet? <a [routerLink]="['/Learner/register']"> {{'Sign-up' | translate }}</a></span>
+            </div>
+          </form>
+        </div>
+        <!-- <div class="forgotPassword"></div>
+        <div class="signUpSection"></div> -->
+
+      </div>
+    </div>
+  </mat-card>
+</div>
+
+
+<!-- <div class="row" class="background-image">
   <div class="col-md-12 h-100">
     <div class="entry-container h-100">
       <mat-card class="h-100">
@@ -25,7 +107,10 @@
       </mat-card>
     </div>
   </div>
-</div>
+</div> -->
+
+
+
 <!-- <div>
 <mat-toolbar class="headerShadow">
   <img class="hearder-logo " alt="" src="assets/learner/LNT_Logo new.svg">
