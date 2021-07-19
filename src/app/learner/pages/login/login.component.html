@@ -1,5 +1,32 @@
-<!-- <app-header></app-header> -->
-<div>
+<div class="row" class="background-image">
+  <div class="col-md-12 h-100">
+    <div class="entry-container h-100">
+      <mat-card class="h-100">
+        <div class="col-md-7">
+          <div class="logo-container">
+            <img class="brand-logo" alt="" src="assets/learner/EduTech_Logo.svg">
+          </div>
+          <div class="logo-container">
+            <img class="entry-image" alt="" src="assets/learner/EntryImage.svg">
+          </div>
+          <div class="download-contiainer d-flex justify-content-center">
+            <div class="download-label">Download our mobile app</div>
+            <div>
+              <img class="download-logo" alt="" src="assets/learner/googlePlay.png">
+            </div>
+            <div>
+              <img class="download-logo" alt="" src="assets/learner/appStore.png">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5">
+
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<!-- <div>
 <mat-toolbar class="headerShadow">
   <img class="hearder-logo " alt="" src="assets/learner/LNT_Logo new.svg">
 </mat-toolbar>
@@ -25,7 +52,6 @@
               <mat-label class="label-color">{{'Email' | translate}}</mat-label>
               <input matInput  id="username" #username [placeholder]="'Enter the email' | translate"  formControlName="username" maxlength="64"
               required>
-              <!-- <mat-icon matPrefix class="icon-color">mail_outline</mat-icon> -->
               <i class="icon-color lxp-MailOutline" matPrefix></i>
               <mat-error class="error" *ngIf="loginForm.get('username').hasError('required')">{{'Email is required' | translate}}</mat-error>
 
@@ -34,15 +60,12 @@
             <div class="space-20"></div>
 
             <div class="" appCapslock (capsLock)="capsOn=$event">
-              <!-- <label>Password</label> -->
               <div *ngIf="capsOn">{{'Caps lock is on !' | translate }}</div>
               <mat-form-field appearance="outline">
                 <mat-label  class="label-color">{{'Password' | translate }}</mat-label>
                 <input matInput  [placeholder]="'Enter password' | translate " [type]="hide ? 'password' : 'text'" formControlName="password" [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" required>
-                <!-- <mat-icon class="icon-color" matPrefix>lock_outline</mat-icon> -->
                 <i class="icon-color lxp-Lock" matPrefix></i>
                 <span  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <!-- <mat-icon class="icon-color">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
                 <i class="icon-color" [ngClass]="hide ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></i>
                 </span>
                 <mat-error class="error" *ngIf="f.password.touched && f.password.errors" >{{'Password is required' | translate }}</mat-error>
@@ -91,18 +114,10 @@
             <span class="forgot1">{{currentYear}} © L&T EduTech All Rights Reserved</span> 
           </div>
         </div>
-
       </div>
       <div class="col-4">
-        <!-- <span class="powered">
-          <img class="footericon" alt="" src="assets/learner/LT_small.svg">
-        </span> -->
       </div>
     </div>
-
-
-
   </div>
-  
 </div>
-</div>
+</div> -->
