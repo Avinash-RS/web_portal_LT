@@ -217,6 +217,10 @@
         font-size: 12px;
         font-weight: 400;
     }
+    .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, 
+    .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+        background-color: #C02222;
+    }
 }
 
 // mat-card {
