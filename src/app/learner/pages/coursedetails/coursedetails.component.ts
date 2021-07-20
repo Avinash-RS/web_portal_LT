@@ -318,13 +318,14 @@ export class CoursedetailsComponent implements OnInit {
         if (result.data.course_id === this.courseid) {
           this.scromModuleData = result.data.childData;
           console.log(result.data)
-          this.scromModuleData[this.weekHolder].childData[this.moduleHolder].expanded = true;
+          this.moduleExpand(this.weekHolder, this.moduleHolder);
           if (this.topiccurrentPage !== result.data.resumeSubContent ||
-            result.data.childData[result.data.week-1].childData[result.data.resumeContent].children[result.data.resumeSubContent].status !== this.topicPageStatus) {
+            result.data.childData[result.data.week-1].childData[result.data.resumeContent].children[result.data.resumeSubContent]?.status !== this.topicPageStatus) {
             this.currentPage = Number(result.data.resumeContent);
             this.topiccurrentPage = Number(result.data.resumeSubContent);
-            this.weekHolder = result.data.week - 1;
-            this.topicPageStatus = result.data.childData[this.weekHolder].childData[this.currentPage].children[this.topiccurrentPage].status
+            // this.weekHolder = result.data.week - 1;
+            this.topicPageStatus = result.data.childData[this.weekHolder].childData[this.currentPage].children[this.topiccurrentPage]?.status
+            this.topicPageStatus = this.topicPageStatus?this.topicPageStatus:"process";
             this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
             this.topicInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage].children[this.topiccurrentPage]
             if (resumeInit) {
@@ -509,6 +510,7 @@ export class CoursedetailsComponent implements OnInit {
           this.moduleHolder = this.scromModuleData[this.weekHolder].childData.length - 1;
           this.currentPage = this.moduleHolder;
           this.topiccurrentPage = this.scromModuleData[this.weekHolder].childData[this.currentPage].children.length - 1;
+          this.nextPrevHolder = this.topiccurrentPage;
         }else{
         this.topiccurrentPage = this.topiccurrentPage - 1;
         this.nextPrevHolder = this.topiccurrentPage;
@@ -592,7 +594,7 @@ export class CoursedetailsComponent implements OnInit {
     const encodedTopicName = encodeURIComponent(topicName);
     this.nextPrevHolder = topindex;
     this.topiccurrentPage = this.nextPrevHolder
-    this.moduleHolder = Number(moduleIdx);
+    // this.moduleHolder = Number(moduleIdx);
     this.currentPage = Number(moduleIdx);
     this.isprevEnable = true;
     this.isNextEnable = true;
