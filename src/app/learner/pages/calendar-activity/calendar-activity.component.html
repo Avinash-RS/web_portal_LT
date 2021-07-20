@@ -131,7 +131,8 @@
   </div>
   <div class="activInfo">
     <span class="self">Self paced Learning</span>
-    <span class="live">Virtual Instructor Led Session</span>
+    <span class="live" *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</span>
+    <span class="live" *ngIf="userDetailes.org_type == 'collegeconnect'">Live Interactions</span>
     <span class="Activ">Activity</span>
   </div>
 </div>

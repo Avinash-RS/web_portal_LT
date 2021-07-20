@@ -26,6 +26,7 @@ export class InstructorLedComponent implements OnInit {
   videoSource;
   showSkeleton;
   showContent;
+  userDetails;
   @ViewChild('attended') attended: ElementRef;
 
   constructor(private router: Router,
@@ -40,6 +41,7 @@ export class InstructorLedComponent implements OnInit {
   }
 
   ngOnInit() {
+     this.userDetails = JSON.parse(localStorage.getItem('UserDetails'));
     this.getAttendance();
     // this.getSessionsList();
   }
@@ -50,8 +52,7 @@ export class InstructorLedComponent implements OnInit {
 
   getAttendance() { // Http Call
     this.showSkeleton = true;
-    const userDetails = JSON.parse(localStorage.getItem('UserDetails'));
-    this.learnerService.getAttendanceByUsername(this.course.id, userDetails.full_name, userDetails.user_id).subscribe(async res => {
+    this.learnerService.getAttendanceByUsername(this.course.id, this.userDetails.full_name, this.userDetails.user_id).subscribe(async res => {
       // tslint:disable-next-line:no-string-literal
       this.showSkeleton = false;
       const data = res.data['getTopicAttendanceDetailsByUsername']['data'];

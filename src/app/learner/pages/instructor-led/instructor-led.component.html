@@ -7,7 +7,9 @@
       <span class="pipeLine"> | </span>
       <span class="ledCourseName">{{course?.name}}</span>
       <i class="lxp-Arrow"></i>
-      <span>Instructor Led</span>
+      <!-- <span>Instructor Led</span> -->
+      <span *ngIf="userDetails.org_type == 'vocational'">Virtual Instructor Led Session</span>
+      <span *ngIf="userDetails.org_type == 'collegeconnect'">Live Interactions</span>
     </div>
   </div>
 </div>
