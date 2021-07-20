@@ -202,9 +202,9 @@
                       <button mat-stroked-button *ngIf="itration.submit_status == 'notsubmitted'" class="uploadBtn mt-3" [disabled]="performActivityData.performSubmitType == false || performActivityData.itrationStarted == false"
                        (click)="uploadDocuments(itration, performActivityData.performActivity,submitType = 'upload')">
                         <mat-icon class="icon-color m-t-m-2 addIcon">add</mat-icon>
-                        <span>Upload video</span>
+                        <span>Upload</span>
                       </button>
-                      <p class="uploadMessage" *ngIf="itration.submit_status == 'notsubmitted'">Max File Size : 150 MB, Format : MP4, MOV</p>
+                      <p class="uploadMessage" *ngIf="itration.submit_status == 'notsubmitted'">Max File Size : 150 MB, Format : MP4, MOV, PDF</p>
                       <button mat-stroked-button class="submit-btn mt-2" *ngIf="itration.submit_status == 'notsubmitted' && itration.videodetails.length > 0 && (performActivityData.itrationStarted && performActivityData.performSubmitType)" (click)="submitType = 'submit'; submitDeleteVideo({}, itration, performActivityData.performActivity)"> Submit </button>
                       <button mat-stroked-button *ngIf="itration.submit_status == 'notsubmitted' &&  (itration.videodetails.length == 0 && performActivityData.itrationStarted) && performActivityData.performSubmitType"
                       class="submitted-btn mt-2"> Submit </button>
@@ -213,7 +213,7 @@
                         <span *ngIf="itration.videodetails.length > 0  && itration.submitAction !== 'submit'" class="submitedFile">Submitted files cannot be edited</span>
                         <span class="uploadedFile" *ngIf="itration.submitAction == 'submit'">Submitted on: {{itration.submitted_date | date:'MMM dd, yyyy'}}</span>
                       </div>
-                      <input style="display: none;" accept="video/mp4,video/quicktime" multiple type="file" id="videoInput" type="file" #VideoInputPerform (change)="uploadDocument($event)" />
+                      <input style="display: none;" accept="video/mp4,video/quicktime,application/pdf" multiple type="file" id="videoInput" type="file" #VideoInputPerform (change)="uploadDocument($event)" />
                     </div>
                     <div class="pl-0 pr-0" *ngIf="itration.grade_status === 'Evaluated'">
                       <div class="" *ngIf="itration.assessmentreport.length > 0">
