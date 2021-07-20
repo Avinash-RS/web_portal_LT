@@ -42,7 +42,16 @@
 
             <div class="" appCapslock (capsLock)="capsOn=$event">
               <div *ngIf="capsOn">{{'Caps lock is on !' | translate }}</div>
-                <mat-form-field appearance="outline">
+              <mat-form-field appearance="outline">
+                <mat-label  class="label-color">{{'Password' | translate }}</mat-label>
+                <input matInput  [placeholder]="'Enter password' | translate " [type]="hide ? 'password' : 'text'" formControlName="password" [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" required>
+                <i class="icon-color lxp-Lock" matPrefix></i>
+                <span  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <i class="icon-color" [ngClass]="hide ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></i>
+                </span>
+                <mat-error class="error" *ngIf="f.password.touched && f.password.errors" >{{'Password is required' | translate }}</mat-error>
+              </mat-form-field>
+                <!-- <mat-form-field appearance="outline">
                   <mat-label  class="label-color">{{'Password' | translate }}</mat-label>
                   <input matInput  [placeholder]="'Enter password' | translate " [type]="hide ? 'password' : 'text'" formControlName="password" [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" required>
                   <em class="icon-color lxp-Lock" matPrefix></em>
@@ -50,7 +59,7 @@
                     <em class="icon-color" [ngClass]="hide ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
                   </span>
                   <mat-error class="error" *ngIf="f.password.touched && f.password.errors" >{{'Password is required' | translate }}</mat-error>
-                </mat-form-field>
+                </mat-form-field> -->
             </div>
 
             <div class="forgotPswd d-flex justify-content-between">

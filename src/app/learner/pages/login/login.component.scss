@@ -166,43 +166,43 @@
 ::ng-deep.signInContainer {
     .mat-form-field {
         width: 100%;
-        margin-bottom: 20px;
+        //margin-bottom: 20px;
     }
-    .mat-form-field-wrapper {
-        padding-bottom: 0;
-    }
-    .mat-input-element {
-        line-height: normal;
-    }
-    .mat-form-field-subscript-wrapper {
-        overflow: initial;
-        margin-top: 2.1em;
-    }
-    .mat-form-field-appearance-outline .mat-form-field-subscript-wrapper {
-        padding: 0;
-    }
-    .mat-form-field-appearance-outline .mat-form-field-outline-gap {
-        border: 2px solid currentColor;
-        border-left-style: none;
-        border-right-style: none;
-    }
-    .mat-form-field-appearance-outline .mat-form-field-outline-end, 
-    .mat-form-field-appearance-outline .mat-form-field-outline-start {
-        border: 2px solid currentColor;
-    }
-    .mat-form-field-appearance-outline .mat-form-field-outline-start {
-        border-right-style: none;
-    }
-    .mat-form-field-appearance-outline .mat-form-field-outline-end {
-        border-left-style: none;
-    }
-    .mat-form-field-appearance-outline .mat-form-field-wrapper {
-        margin: 0;
-    }
-    .mat-form-field-appearance-outline .mat-form-field-prefix, 
-    .mat-form-field-appearance-outline .mat-form-field-suffix {
-        display: none;
-    }
+    // .mat-form-field-wrapper {
+    //     padding-bottom: 0;
+    // }
+    // .mat-input-element {
+    //     line-height: normal;
+    // }
+    // .mat-form-field-subscript-wrapper {
+    //     overflow: initial;
+    //     margin-top: 2.1em;
+    // }
+    // .mat-form-field-appearance-outline .mat-form-field-subscript-wrapper {
+    //     padding: 0;
+    // }
+    // .mat-form-field-appearance-outline .mat-form-field-outline-gap {
+    //     border: 2px solid currentColor;
+    //     border-left-style: none;
+    //     border-right-style: none;
+    // }
+    // .mat-form-field-appearance-outline .mat-form-field-outline-end, 
+    // .mat-form-field-appearance-outline .mat-form-field-outline-start {
+    //     border: 2px solid currentColor;
+    // }
+    // .mat-form-field-appearance-outline .mat-form-field-outline-start {
+    //     border-right-style: none;
+    // }
+    // .mat-form-field-appearance-outline .mat-form-field-outline-end {
+    //     border-left-style: none;
+    // }
+    // .mat-form-field-appearance-outline .mat-form-field-wrapper {
+    //     margin: 0;
+    // }
+    // .mat-form-field-appearance-outline .mat-form-field-prefix, 
+    // .mat-form-field-appearance-outline .mat-form-field-suffix {
+    //     display: none;
+    // }
     .mat-form-field-appearance-outline .mat-form-field-outline-thick {
         color: #C02222;
     }
