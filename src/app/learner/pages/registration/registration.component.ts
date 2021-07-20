@@ -56,7 +56,7 @@ export class RegistrationComponent implements OnInit {
       recaptchaReactive: [null, [Validators.required]],
       title: ['', [Validators.required]],
       fullname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50),
-        Validators.pattern(/^[-a-zA-Z-() ]+(\s+[-a-zA-Z-()]+)*$/)]],
+        Validators.pattern(/^[-a-zA-Z ]+(\s+[-a-zA-Z]+)*$/)]],
         mobile: ['', [ Validators.minLength(10),  Validators.maxLength(10),
           Validators.pattern(/^[6-9][0-9]{9}$/)]],
       email: ['', [ Validators.minLength(6),
