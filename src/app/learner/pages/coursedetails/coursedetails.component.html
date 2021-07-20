@@ -14,7 +14,7 @@
             <div class="pointer d-flex align-items-center backcolor redHover" *ngIf="scromApiData?.toc != '0'" (click)="goBack()">
                 <i class="lxp-Arrow backArrow"></i><span>Back</span>
             </div>
-            <!-- <ng-container *ngIf="scromApiData?.toc != '0'">
+            <ng-container *ngIf="scromApiData?.toc != '0'">
                 <div class="navigation d-flex align-items-center" *ngIf="scromModuleData&&filterkey==='All'&&drawersOpen===false">
                     <span class="pipeLine">|</span> 
                     <div class="leftArrow">                
@@ -27,7 +27,7 @@
                      <i class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?topicNext():topicNext()"></i>
                     </div>
                 </div>
-            </ng-container> -->
+            </ng-container>
             <div class="courseTitle" *ngIf="drawersOpen!==false||filterkey!=='All'"> | <span>{{this.course?.course_name}}</span></div>
         </div>
     </div>
