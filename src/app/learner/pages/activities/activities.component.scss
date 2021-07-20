@@ -1293,6 +1293,24 @@ margin-top: 8px;
     }
   }
 }
+
+
+// No Card
+.noCard {
+  text-align: center;
+  figure {
+    margin: 45px 0 15px 0;
+  }
+  p {
+    font-size: 16px;
+    color: #000000;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 30px ​!important;
+  }
+}
+
+
 // Mobile
 @media (min-width: 200px) and (max-width: 767.98px) {
   :host ::ng-deep .mat-tab-label, .mat-tab-label-active {

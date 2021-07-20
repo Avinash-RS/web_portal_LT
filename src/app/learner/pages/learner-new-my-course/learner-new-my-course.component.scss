@@ -142,7 +142,7 @@
   .top3Things {
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
     background-color: #cccccc;
-    padding: 15px;
+    padding: 5px 10px;
     flex-wrap: wrap;
     overflow: hidden;
     @media only screen and (min-width:768px) {
@@ -160,7 +160,7 @@
       position: relative;
       height: auto;
       width: 100%;
-      margin: 10px 0;
+      margin: 5px 0;
       position: relative;
       &::before {
         content: '';
@@ -175,6 +175,7 @@
         width: 48%;
       }
       @media only screen and(min-width:992px) {
+        margin: 10px 0;
         width: 31.5%;
       }
       .moduleName {
@@ -235,10 +236,6 @@
           align-self: flex-end;
         }
         @media only screen and (min-width: 1140px) {
-          // left: 0;
-          // bottom: 0;
-          // padding: 20px;
-          // position: absolute;
         }
         button {
           display: none;
@@ -583,6 +580,9 @@
         @media only screen and (min-width: 1140px) {
           width: 20%;
         }
+        @media only screen and (min-width: 1400px) {
+          width: 14%;
+        }
       }
     }
   }
@@ -862,7 +862,7 @@
   //RIGHT SIDE NAV CONTENT//
   .drawerWrapper {
     margin: 0 auto;
-    width: 350px;
+    width: 390px;
     @media only screen and (max-width: 767px) {
       width: 96%;
     }
