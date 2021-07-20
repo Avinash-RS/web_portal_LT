@@ -236,6 +236,7 @@
         .statusarea {
             width: 9%;
             text-align: right;
+            order: 4;
             @media screen and (min-width:1140px) {
                 width: 5%;
             }

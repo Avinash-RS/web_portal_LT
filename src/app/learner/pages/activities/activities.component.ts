@@ -359,7 +359,7 @@ export class ActivitiesComponent implements OnInit {
 
   goToCourse() {
     if (this.fromCalender) {
-      this.route.navigateByUrl('/Learner/calendar');
+      this.route.navigateByUrl('/Learner/calendaractivity');
     } else {
       this.route.navigateByUrl('/Learner/MyCourse');
     }
