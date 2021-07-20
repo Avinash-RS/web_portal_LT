@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   secretKey = "(!@#Passcode!@#)";
   currentYear = new Date().getFullYear();
   infoClose = true;
+  loader = false;
 
   constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder, public learnerService: LearnerServicesService,
              // public socketService: SocketioService,
@@ -81,6 +82,7 @@ export class LoginComponent implements OnInit {
     if (!this.loginForm.valid) {
       return this.validateAllFields(this.loginForm);
     }
+    this.loader = true;
     var encryptedname = CryptoJS.AES.encrypt(this.loginForm.value.username.toLowerCase(), this.secretKey.trim()).toString();
     var encryptedpassword = CryptoJS.AES.encrypt(this.loginForm.value.password, this.secretKey.trim()).toString();
     this.service.login(encryptedname, encryptedpassword, false)
@@ -105,11 +107,16 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('remember_me', 'false');
             }
             this.router.navigate(['/Learner/MyCourse']);
+            setTimeout(()=>{
+              this.loader = false;
+            },5000)
           } else {
+            this.loader = false;
             this.loginForm.reset();
             this.toastr.error(loginresult.data.login.error_msg, null);
           }
         } else {
+          this.loader = false;
           this.loginForm.reset();
           this.toastr.warning('Please try again later', null);
         }

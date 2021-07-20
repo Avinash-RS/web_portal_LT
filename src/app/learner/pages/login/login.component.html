@@ -27,7 +27,7 @@
           <img alt="" src="assets/learner/EduTech_Logo.svg">
         </figure>
         <div class="signIn">
-          <h1>Welcome <span>Back</span></h1>
+          <h1>Welcome</h1>
           <form [formGroup]="loginForm">
             <div>
               <mat-form-field appearance="outline">
@@ -72,8 +72,22 @@
             </div>
 
             <div class="gradientBtn">
-              <button id="login" mat-raised-button (click)="login()">{{'SIGN IN' | translate}}</button>
+              <button id="login" mat-raised-button (click)="login()">
+                <span *ngIf="!loader">{{'SIGN IN' | translate}}</span>
+                <div *ngIf="loader" class="snippet" data-title=".dot-falling">
+                  <div class="stage">
+                    <div class="dot-falling"></div>
+                  </div>
+                </div></button>
             </div>
+            <!-- <div class="gradientBtn">
+              <button id="login" mat-raised-button (click)="login()">
+                <div class="snippet" data-title=".dot-falling">
+                  <div class="stage">
+                    <div class="dot-falling"></div>
+                  </div>
+                </div></button>
+            </div> -->
 
             <div class="dontHaveAccount">
               <span>Don't have account yet? <a [routerLink]="['/Learner/register']"> {{'Sign-up' | translate }}</a></span>
