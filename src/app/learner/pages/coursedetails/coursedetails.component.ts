@@ -313,21 +313,20 @@ export class CoursedetailsComponent implements OnInit {
     });
     let resumeInit = true;
     this.socketService.socketReceiver()
-    this.socketEmitReciver = this.socketService.change.subscribe(result => {
-      console.log(result)
+    this.socketEmitReciver = this.socketService.change.subscribe((result:any) => {
       if (result && result.eventId && result.eventId.length > 0 && result.data.childData.length > 0) {
         if (result.data.course_id === this.courseid) {
           this.scromModuleData = result.data.childData;
-          console.log(this.scromModuleData)
-          this.scromModuleData[this.moduleHolder].expanded = true;
+          console.log(result.data)
+          this.scromModuleData[this.weekHolder].childData[this.moduleHolder].expanded = true;
           if (this.topiccurrentPage !== result.data.resumeSubContent ||
-            result.data.childData[result.data.week].childData[result.data.resumeContent].children[result.data.resumeSubContent].status !== this.topicPageStatus) {
+            result.data.childData[result.data.week-1].childData[result.data.resumeContent].children[result.data.resumeSubContent].status !== this.topicPageStatus) {
             this.currentPage = Number(result.data.resumeContent);
             this.topiccurrentPage = Number(result.data.resumeSubContent);
             this.weekHolder = result.data.week - 1;
-            this.topicPageStatus = result.data.childData[result.data.resumeContent].children[result.data.resumeSubContent].status
-            this.moduleInfo = this.scromModuleData[this.currentPage];
-            this.topicInfo = this.scromModuleData[this.currentPage].children[this.topiccurrentPage]
+            this.topicPageStatus = result.data.childData[this.weekHolder].childData[this.currentPage].children[this.topiccurrentPage].status
+            this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
+            this.topicInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage].children[this.topiccurrentPage]
             if (resumeInit) {
               this.nextPrevHolder = this.topiccurrentPage;
               this.moduleHolder = this.currentPage;
@@ -336,13 +335,13 @@ export class CoursedetailsComponent implements OnInit {
               this.isNextEnable = true;
             }
           }
-          if ((this.moduleHolder !== 0) || (this.nextPrevHolder !== 0)) {
-            this.isprevEnable = false;
-          }
-          if (((this.moduleHolder) !== this.scromModuleData.length - 1)
-            || ((this.nextPrevHolder) !== this.scromModuleData[this.scromModuleData.length - 1].children.length - 1)) {
-            this.isNextEnable = false;
-          }
+          // if ((this.moduleHolder !== 0) || (this.nextPrevHolder !== 0)) {
+          //   this.isprevEnable = false;
+          // }
+          // if (((this.moduleHolder) !== this.scromModuleData.length - 1)
+          //   || ((this.nextPrevHolder) !== this.scromModuleData[this.scromModuleData.length - 1].children.length - 1)) {
+          //   this.isNextEnable = false;
+          // }
           this.scromModuleData.forEach(childData => {
             if (childData && childData.children) {
               childData.children.forEach(subChild => {
@@ -549,7 +548,7 @@ export class CoursedetailsComponent implements OnInit {
       this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : Number(this.scromApiData.topicIndex);
       this.moduleHolder = this.currentPage = this.scromApiData.moduleIndex == null ? 0 : this.scromApiData.moduleIndex;
       this.weekHolder = this.scromApiData.week - 1;
-      this.scromModuleData[this.moduleHolder].expanded = true;
+      // this.scromModuleData[this.moduleHolder].expanded = true;
       this.oldIdx = this.moduleHolder;
       this.topicInfo = this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].children[this.nextPrevHolder]
       this.topicPageStatus = this.topicInfo.status
