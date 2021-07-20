@@ -282,16 +282,8 @@
                                                         <p>Course Progression</p>
                                                     </div>
                                                     <div class="percentage">
-                                                        <circle-progress [percent]="((100 * (item.week_completed_count!==null?item.week_completed_count:0)) / (item.week_total_count!==null?item.week_total_count:1))" [clockwise]='true' [radius]="20"
-                                                            [outerStrokeGradient]='true' [outerStrokeColor]="'#4882c2'"
-                                                            [outerStrokeGradientStopColor]="'#53a9ff'"
-                                                            [innerStrokeColor]="'#e7e8ea'" [outerStrokeWidth]="3"
-                                                            [innerStrokeWidth]="3" [space]="-3" [titleFontSize]="12"
-                                                            [unitsFontSize]="12" [subtitleFontSize]="8"
-                                                            [titleColor]="'#666666'" [subtitleColor]="'#333333'"
-                                                            [startFromZero]="false" [responsive]="true"
-                                                            [showSubtitle]="true" [subtitle]="'Active'" [animation]="true"
-                                                            [animationDuration]="10"></circle-progress>
+                                                        <circle-progress percent="{{((100 * (item.week_completed_count!==null?item.week_completed_count:0)) / (item.week_total_count!==null?item.week_total_count:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="5" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week"
+                                                         [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
                                                     </div>
                                                 </div>
                                             </div>
