@@ -886,7 +886,7 @@ export class ActivitiesComponent implements OnInit {
     // this.selectPerformfile.push(event.target.files[0] as File);
     if(event.target.files.length==1){
     const filePath = event.target.files[0].name;
-    const allowedExtensions = /(\.mp4|\.mov)$/i;
+    const allowedExtensions = /(\.mp4|\.mov|\.pdf)$/i;
     if (!allowedExtensions.exec(filePath)) {
       this.toastr.warning('Please upload video file only.');
       if (this.videoInput) {
@@ -1193,10 +1193,11 @@ export class ActivitiesComponent implements OnInit {
         disableClose: true,
         panelClass: 'popupModalContainer'
       });
-      if (path.path.includes('?sv=')) {
-      } else {
-        path.path = path.path + this.blobKey;          
-      }
+      path.path = path.videourl + this.blobKey;
+      // if (path.path.includes('?sv=')) {
+      // } else {
+                  
+      // }
       this.previewDoc = path;
     } else if (docType === 'video/mp4' || docType === 'video/quicktime') {
       if (path.videourl) {

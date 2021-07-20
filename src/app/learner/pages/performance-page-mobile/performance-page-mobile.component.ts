@@ -455,7 +455,7 @@ export class PerformancePageMobileComponent implements OnInit {
   }	
   uploadDocument(event) {
     const filePath = event.target.files[0].name;
-    const allowedExtensions = /(\.mp4|\.mov)$/i;
+    const allowedExtensions = /(\.mp4|\.mov|\.pdf)$/i;
     if (!allowedExtensions.exec(filePath)) {
       this.toastr.warning('Please upload video file only.');
       if (this.videoInputPerform) {

@@ -332,14 +332,15 @@
                     </mat-expansion-panel-header>
                     <div class="align-center" *ngIf="itrdata.grade_status !== 'Evaluated'">
                       <div class="videoPreview d-flex align-items-center mt-2 ml-auto mr-auto mb-3" *ngFor="let videoName of itrdata.videodetails">
-                        <mat-icon class="videoPlay">play_circle_outline</mat-icon>
+                        <mat-icon class="videoPlay" *ngIf="videoName.doc_type == 'application/pdf'">play_circle_outline</mat-icon>
+                        <mat-icon class="videoPlay" *ngIf="videoName.doc_type == 'video/mp4'">picture_as_pdf</mat-icon>
                         <span class="videoName"  matTooltip="{{videoName.name}}" matTooltipClass="custom-mat-tooltip">{{(videoName.name| slice:0:18)+'...'}}</span>
                         <mat-icon class="deleteBtn" *ngIf="itrdata.submit_status == 'notsubmitted'" (click)="submitDeleteVideo(videoName, itrdata, perform.performActivity , submitType = 'delete')">close</mat-icon>
                       </div>
-                      <input type="file" accept="video/mp4,video/quicktime" style="display: none" #videoInput [(ngModel)]="fileName" (change)="uploadDocument($event,itrdata)" />
+                      <input type="file" accept="video/mp4,video/quicktime,application/pdf" style="display: none" #videoInput [(ngModel)]="fileName" (change)="uploadDocument($event,itrdata)" />
                         <button *ngIf="itrdata.submit_status == 'notsubmitted'" mat-stroked-button [disabled]="perform.performSubmitType == false || perform.itrationStarted == false" class="upload-bltn mt-3" (click)="uploadDocuments($event, itrdata, perform, submitType = 'upload')">
-                        <mat-icon class="icon-color m-t-m-2 addIcon">add</mat-icon> <span>Upload video</span> </button>
-                        <p class="uploadMessage" *ngIf="itrdata.submit_status == 'notsubmitted'" >Max File Size : 150 MB, Format : MP4, MOV</p>
+                        <mat-icon class="icon-color m-t-m-2 addIcon">add</mat-icon> <span>Upload</span> </button>
+                        <p class="uploadMessage" *ngIf="itrdata.submit_status == 'notsubmitted'" >Max File Size : 150 MB, Format : MP4, MOV, PDF</p>
                       <button mat-stroked-button class="submit-btn mt-2"
                         *ngIf="itrdata.submit_status == 'notsubmitted' && itrdata.videodetails.length > 0 && (perform.itrationStarted && perform.performSubmitType)"
                         (click)="submitType = 'submit'; submitDeleteVideo({}, itrdata, perform.performActivity)">
@@ -369,19 +370,19 @@
                                     <mat-icon class="icons" *ngIf="videoName.doc_type =='video/mp4' || videoName.doc_type =='video/quicktime'">play_circle_outline</mat-icon> 
                                   </div>
                                 
-                                  <div class="row ml-0 mr-0 h-40" (mouseleave)="hoverfile = false; mouseover(i)" [ngClass]="hoverfile && mouseOverIndex == i ? 'row ml-0 mr-0 fileSelDetHover' : 'row ml-0 mr-0 fileSelDet'">
+                                  <div class="row ml-0 mr-0 h-40 fileSelDetHover" >
                                     <div class="fileNameCol">
                                       <span class="fileColor">{{(videoName.name| slice:0:18)+'...'}}</span>
-                                      <div class="row ml-0 mr-0" *ngIf="hoverfile && mouseOverIndex == i">
+                                      <div class="row ml-0 mr-0">
                                         <div class="col-12 pl-0 pr-0">
                                           <div class="row ml-0 mr-0 playActions">
                                             <div  (click)="playVideo(projectPreviewDialog, videoDialog, videoName, videoName.doc_type)" class="col-5 text-left pr-0 colAction">
                                               <mat-icon class="position-absolute text-white playBtnmobile" *ngIf="videoName.doc_type =='video/mp4' || videoName.doc_type =='video/quicktime'">play_circle_outline</mat-icon>
                                               <mat-icon class="position-absolute text-white playBtn" *ngIf="videoName.doc_type =='image/jpeg'">photo_size_select_actual</mat-icon>
-                                                <i class="fa fa-file-pdf-o position-absolute text-white playBtn" *ngIf="videoName.doc_type =='application/pdf'"
+                                                <i class="fa fa-file-pdf-o position-absolute text-white playBtnmobile" *ngIf="videoName.doc_type =='application/pdf'"
                                                 aria-hidden="true"></i>
                                               <span class="text-white actionBtnmobile" *ngIf="videoName.doc_type =='video/mp4' || videoName.doc_type =='video/quicktime'">Play</span>
-                                              <span class="text-white actionBtn" *ngIf="videoName.doc_type == 'image/jpeg' || videoName.doc_type == 'application/pdf'">Preview</span>
+                                              <span class="text-white actionBtnmobile" *ngIf="videoName.doc_type == 'image/jpeg' || videoName.doc_type == 'application/pdf'">View</span>
                                             </div>
                                             <div class="col-7 text-center pr-0 colActionDownload">
                                               <!-- <a (click)="downloadDoc(videoName, 'files')"> -->
