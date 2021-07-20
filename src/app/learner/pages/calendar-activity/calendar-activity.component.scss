@@ -5,8 +5,6 @@
     flex-direction: row;
     justify-content: space-between;
     height: 100%;
-    // height: calc(91.6vh - 55px);
-
     @media screen and (max-width:768px) {
         flex-direction: column; 
     }
@@ -14,18 +12,22 @@
         height: 100%;
     }
 }
-section {
+.activiySchedule {
     background-color: #f0f0f0;
     height: 100%;
     padding: 1.8em 1.5em;
-    width: calc(100% - 400px);
-    @media screen and (max-width:768px) {
-        padding: 1.8em 0.85em;
-        width: 100% ;
+    width: 100%;
+    order: 1;
+    @media screen and (max-width:767px) {
+        padding: 0 0.85em 6em 0.85em;
+        order: 2;
     } 
-    @media screen and (min-width:769px) and (max-width:1024px) {
+    @media screen and (min-width:769px) {
         width: calc(100% - 300px);
-    } 
+    }
+    @media screen and (min-width: 1140px) {
+        width: calc(100% - 400px);
+    }
 }
 .heading5 {
     font-size: 1.7em;
@@ -33,11 +35,10 @@ section {
     margin: 1em 0; 
 }
 .viewInfotxt {
-    display: flex;
-    justify-content: space-between; 
-    @media screen and (max-width:480px) { 
     flex-direction: column;
-    min-height: 70px;
+    // min-height: 70px;
+    @media screen and (min-width:1140px) { 
+        flex-direction: row;
     }
 }
 .leftPan {
@@ -68,9 +69,9 @@ section {
 }
 .rightPan {
     span {
-        padding: 0 1em;
-        @media screen and (max-width:480px) {
-            padding: 0;
+        padding: 0 1em 0 0;
+        @media screen and (min-width:1140px) {
+            padding: 0 1em;
         }
     }
     select {
@@ -108,27 +109,6 @@ section {
         @media only screen and (min-width:1140px) {
             flex-wrap: nowrap;
         }
-        // > div {
-        //     flex-grow: 1;
-        //     @media screen and (max-width:480px) {
-        //     padding: 0.4em 0;
-        //     }
-        //     &:first-child {
-        //         min-width: 40%;
-        //         @media screen and (max-width:425px) { 
-        //             min-width: 100%;
-        //         }
-        //     }
-        //     min-width: 26%;
-        //     &:nth-child(3), &:last-child {
-        //         min-width: 10%; 
-        //     }
-        //     &:last-child {
-        //         @media screen and (max-width:1024px) { 
-        //             min-width: 5%;
-        //         }
-        //     }
-        // }
         .infotypearea, .infodatearea {
             display: flex;
             flex-direction: row;
@@ -168,7 +148,11 @@ section {
         }
         .infotxtarea {
             width: 95%;
-            margin-bottom: 10px;
+            order: 2;
+            @media only screen and (min-width: 569px) {
+                margin-bottom: 10px;
+                order: 1;
+            }
             @media only screen and (min-width:1140px) {
                 width: 39%;
                 margin-bottom: 0;
@@ -177,48 +161,88 @@ section {
                 font-weight: 700;
                 color: red;
             }
-            .infotxt span {
-                color:#808080;
-                min-width: 45px;
-                display: inline-block;
+            .infotxt {
+                span {
+                    display: inline-block;
+                    color: #666666;
+                    &:first-child {
+                        color: #999999;
+                        margin-right: 5px;
+                    }
+                }
             }
         }
         .infotypearea {
-            width: 49%;
+            width: 100%;
             font-weight: 700;
             color: #000;
             padding: 0 1%;
+            order: 1;
+            @media only screen and (min-width: 569px) {
+                width: 49%;
+                order: 2;
+            }
             @media only screen and (min-width:1140px) {
                 width: 26%;
             }
             .icon {
                 width: 14%;
+                @media only screen and (max-width: 568px) {
+                    display: none;
+                }
             }
             .htxt {
                 width: 84%;
+                span {
+                    @media only screen and (max-width: 568px) {
+                        display: none;
+                    }
+                }
             }
         }
         .infodatearea {
-            width: 49%;
+            width: 100%;
+            order: 3;
+            @media only screen and (min-width: 569px) {
+                width: 49%;
+            }
             @media only screen and (min-width:1140px) {
                 width: 26%;
             }
             .icon {
                 width: 14%;
+                @media only screen and (max-width: 567px) {
+                    width: 7%;
+                }
             }
             .htxt {
                 width: 84%;
+                @media only screen and (max-width: 567px) {
+                    width: 91%;
+                    margin: 6px 0;
+                    display: flex;
+                    flex-direction: row;
+                }
+                span {
+                    &:last-child {
+                        margin-left: 15px;
+                        @media only screen and (min-width: 569px) {
+                            margin-left: 0;
+                        }
+                    }
+                }
             }
         }
         .statusarea {
             width: 9%;
             text-align: right;
+            order: 4;
             @media screen and (min-width:1140px) {
                 width: 5%;
             }
             @media screen and (max-width:1139px) { 
                 position: absolute;
-                top: 0.7em;
+                top: 15px;
                 right: 1em;
             }
             .icon {
@@ -226,8 +250,8 @@ section {
                 font-size: 0.6em;
             }
             .green {
-                height: 20px;
-                width: 20px;
+                height: 17px;
+                width: 17px;
                 background-color: #41d275;;
                 color: #fff;
                 display: flex;
@@ -247,7 +271,7 @@ section {
                 font-size: 1.2em !important;
                 color: red !important;
             }
-            .timer{
+            .timer {
                 font-size: 1.2em !important;
                 &::before {
                     color: #FFA800 !important;
@@ -262,8 +286,6 @@ section {
         color: #808080;
         font-size: 1.4em;
     }
-    .lxp-Test, .lxp-calendar {
-    }
 }
 
 ::ng-deep.calendarSlide { 
@@ -271,28 +293,25 @@ section {
     background-color: #fff;
     padding: 3em 1em; 
     box-shadow: 0 0 2px 0 #0000006b;
-
-    @media screen and (max-width:768px) {
-        padding: 1em 2.3em;
+    order: 2;
+    @media screen and (max-width:767px) {
+        padding: 1em;
         width: 100%;
+        order: 1;
     }
     @media screen and (min-width:769px) and (max-width:1024px) {
         width: 300px;
     }
-
     .cal-month-view .cal-day-cell {
         min-height: 40px;
     }
-
     .cal-month-view .cal-cell-top {
         min-height: 30px;
         flex: 1;
     }
-
     .cal-month-view .cal-days .cal-cell-row {
         border-bottom-color: transparent;
     }
-
     .cal-month-view .cal-day-cell:not(:last-child) {
         border-right-color: transparent;
         border-radius: 0.5em;
@@ -300,11 +319,9 @@ section {
     .cal-month-view .cal-days {
         border-color: transparent;
     }
-
     .cal-month-view .cal-day-cell.cal-today {
         background-color: #f2f2f2;
     }
-
     .cal-month-view .cal-day-number {
         font-size: 1em;
         font-weight: 400;
@@ -314,7 +331,6 @@ section {
         float: right;
         margin-bottom: 0.5em;
     }
-
     .cal-month-view .cal-day-cell.cal-today .cal-day-number {
         font-size: 1.1em;
         font-weight: bold;
@@ -326,7 +342,6 @@ section {
         text-transform: uppercase;
         font-size: 0.9em;
     }
-
     .calendarInfo {
         display: flex;
         align-content: center;
@@ -339,21 +354,25 @@ section {
         font-size: 1.6em;
         margin: 1em 0;
     }
-
     .activInfo {
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
+        align-items: center;
         color: #9c9c9c !important;
         font-size: 0.9em;
         padding: 1em 0;
         span {
             position: relative;
             padding-left: 1.1em;
-            font-size: 12px;
+            font-size: 11px;
             color: #666666;
             display: inline-block;
             margin-right: 10px;
+            line-height: normal;
+            @media only screen and (min-width: 411px) {
+                font-size: 12px;
+            }
             &:before {
                 content:'';
                 width: 7px;
@@ -374,6 +393,9 @@ section {
             &.Activ:before {
                 background-color: #d9e021;
             }
+            &:last-child {
+                margin-right: 0;
+            }
         }
     }
     .cal-month-view .cal-event {
@@ -390,9 +412,12 @@ section {
     }
 }
 
-::ng-deep .rightPan{
+::ng-deep .rightPan {
     mat-form-field {
         width: 10em !important;
+    }
+    .mat-form-field-wrapper {
+        padding-bottom: 0;
     }
     .mat-form-field-appearance-outline .mat-form-field-infix {
         padding: 0.3em 0 0.6em 0 !important;

@@ -69,6 +69,7 @@ export class ProgressionReportComponent implements OnInit {
   performContent: any;
   performContentData: any[];
   pieData: any;
+  doughnutChartData;
   constructor(
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService,
@@ -85,18 +86,17 @@ export class ProgressionReportComponent implements OnInit {
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.createChart();
-      this.createBarChart();
-    }, 1000);
 
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.course_id = localStorage.getItem('Courseid');
     this.userId = this.UserDetails.user_id;
     this.getPieChartData()
-
+    this.getDoughnutChartData();
     this.getprogression()
     this.getAssignmentmoduleData();
+    setTimeout(() => {
+      this.createBarChart();
+    }, 1000);
   }
 
   getPieChartData(){
@@ -138,10 +138,10 @@ export class ProgressionReportComponent implements OnInit {
     this.learnerService.getAssignmentmoduleData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
       if (data.data.getAssignmentmoduleData.success) {
         this.assignmentContent = data?.data?.getAssignmentmoduleData?.data;
-        if (this.assignmentContent?.length == 0) {
-          this.emptyAssignment = true;
+        if (this.assignmentContent?.length > 0) {
+          this.emptyAssignment = false;
         } else {
-          this.emptyAssignment = false
+          this.emptyAssignment = true
         }
       }
       this.showSkeleton = false;
@@ -154,7 +154,7 @@ export class ProgressionReportComponent implements OnInit {
     this.learnerService.getprojectActivityData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
       if (data.data.getprojectActivityData.success) {
         this.projectContent = data?.data?.getprojectActivityData?.data;
-        if (this.projectContent.length == 0) {
+        if (this.projectContent?.length > 0) {
           this.emptyAssignment = true;
         } else {
           this.emptyAssignment = false
@@ -182,7 +182,7 @@ export class ProgressionReportComponent implements OnInit {
         })
         this.performContentData = performIteration
         console.log(this.performContentData);
-        if (this.performContent.length == 0) {
+        if (this.performContent.length > 0) {
           this.emptyAssignment = true;
         } else {
           this.emptyAssignment = false
@@ -225,13 +225,26 @@ export class ProgressionReportComponent implements OnInit {
     }
     return week;
   }
+
+  getDoughnutChartData(){
+    this.learnerService.getSelfLearningdata('module',this.userId, this.course_id).subscribe((data:any)=>{
+      console.log(data)
+      if(data?.data?.selfLearningdatabyUserId?.success) {
+        this.doughnutChartData = data?.data?.selfLearningdatabyUserId.data[0];
+        setTimeout(()=>{
+          this.createChart();
+        })
+      }
+    })
+
+  }
   createChart() {
     new Chart('piechart', {
       type: 'doughnut',
       data: {
         labels: ['Completed', 'Inprogress', 'Yet to start'],
         datasets: [{
-          data: [30, 40, 30],
+          data: [this.doughnutChartData.completed, this.doughnutChartData.inprogress, this.doughnutChartData.yettostart],
           backgroundColor: ['#32CE6A', '#FFA800', '#CCCCCC'],
         }]
       },

@@ -1,10 +1,10 @@
 <app-header></app-header>
 <div class="calendarArea">
-<section>
+<section class="activiySchedule">
   <div class="headerarea">
     <div class="heading5">Schedule</div>
   </div>
-  <div class="viewInfotxt">
+  <div class="viewInfotxt d-flex justify-content-between">
     <div class="leftPan">
       <span  (click)="setStatus('')" [ngClass]="status == '' ? 'active' : ''">All ({{activityData?.allActivityCount}})</span>
       <span (click)="setStatus('pending')" [ngClass]="status == 'pending' ? 'active' : ''">Pending ({{activityData?.pendingActivityCount}})</span>
@@ -34,8 +34,8 @@
         <div class="contentbox d-flex justify-content-between" (click)="goToActivities(activity)">
           <div class="infotxtarea">
             <span class="htxt">{{activity.coursename}}</span>
-            <div class="infotxt"> <span>Module:</span> {{activity.modulename}}</div>
-            <div class="infotxt"> <span>Topic:</span> {{activity.topicname}}</div>
+            <div class="infotxt d-flex justify-content-start"> <span>Module:</span> <span>{{activity.modulename}}</span></div>
+            <div class="infotxt d-flex justify-content-start"> <span>Topic:</span> <span>{{activity.topicname}}</span></div>
           </div>
     
           <div class="infotypearea">
@@ -44,7 +44,6 @@
             <span  *ngIf="activity.activitytype == 'Self Learning'" class="icon lxp-Self_Learning">i</span>
             <div class="htxt">
               <span>Type</span>
-              <div></div>
               <div *ngIf="activity.activitytype != 'Live Classroom' && activity.activitytype != 'Self Learning'" class="notifi activity">{{activity.activitytype}}</div>
               <div *ngIf="activity.activitytype == 'Self Learning'" class="notifi selfplacedlearning">{{activity.activitytype}}</div>
               <div *ngIf="activity.activitytype == 'Live Classroom'" class="notifi virtualinstructorled">Virtual Instructor Led Session</div>
@@ -97,6 +96,7 @@
     </ng-container>
   </div>
 </section>
+
 <div class="calendarSlide">
   <div class="d-flex justify-content-end">
     <button mat-stroked-button class="reset-button" (click)="onSortChange('')">

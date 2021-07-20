@@ -231,13 +231,13 @@
 .sideNavStrip {
   height: 100%;
   transition: 2s ease-in-out;
-  width: 70px;
+  width: 60px;
   position: fixed;
   top: 55px;
   left: 0;
   z-index: 5;
   background-color: #fff;
-  box-shadow: 5px 5px 9px #0000001f;
+  box-shadow: 5px 5px 5px #3c3c3c1a;
   transition: ease-in width 0.3s;
   @media only screen and (max-width: 767px) {
     display: flex;
@@ -248,14 +248,21 @@
     width: 100%;
   }
   .stripItem {
-    padding: 10px 15px;
+    padding: 10px;
     cursor: pointer;
     .icoBox {
-      padding: 10px;
+      padding: 5px;
       font-size: 20px;
+      @include md {
+        padding: 10px;
+      }
     }
     .navTitle {
+      display: none;
       padding-left: 10px;
+      @include md {
+        display: inline-block;
+      }
     }
   }
 }
@@ -275,9 +282,18 @@
 }
 .navClose {
   width: 210px;
+  @media only screen and (max-width: 767px) {
+    width: 100%;
+    box-shadow: 0 -2px 5px #9B95955C;
+  }
   .stripItem {
     text-align: left !important;
     white-space: nowrap;
+    @media only screen and (max-width: 767px) {
+      white-space: normal;
+      text-align: center !important;
+      width: 30%;
+    }
   }
   .icoBox {
     display: inline-block;
@@ -289,15 +305,17 @@
     animation-duration: 0.5s;
     animation-delay: 0.2s;
     animation-fill-mode: forwards;
+    @media only screen and (max-width: 767px) {
+      line-height: 16px;
+      padding-left: 0 !important;
+      margin-top: 5px;
+    }
   }
 }
 
 // Navigation collapse
 .navOpen {
-  box-shadow: inset -3px 1px 4px rgba(0, 0, 0, 0.1);
-  @media only screen and (max-width: 767px) {
-    box-shadow: 0 -2px 5px #9B95955C;
-  }
+ /* box-shadow: inset -3px 1px 4px rgba(0, 0, 0, 0.1); */
   .icoBox {
     display: inline-block;
   }
@@ -322,12 +340,17 @@
     border-radius: 6px;
   }
   .navTitle {
-    font-weight: bold;
+    font-weight: 700;
   }
 }
 .normalItem {
   .icoBox {
     color: #808080;
+    @media only screen and (max-width: 767px) {
+      color: #000000;
+      background-color: #f1f1ff;
+      border-radius: 6px;
+    }
   }
   .navTitle {
     color: #808080;

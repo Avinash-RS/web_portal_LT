@@ -157,7 +157,7 @@ export class ProjectMobileComponent implements OnInit {
       return false;
     }
     const filePath = event.target.files[0].name;
-    var re = /(\.jpg|\.jpeg|\.png|\.pdf|\.mp4|\.mov|\.avi)$/i;
+    var re = /(\.jpg|\.jpeg|\.png|\.pdf|\.mp4|\.mov)$/i;
     if (!re.exec(filePath)) {
       this.toastr.warning("Upload a valid file format");
       if (this.uploadFile) {
@@ -474,7 +474,7 @@ export class ProjectMobileComponent implements OnInit {
       }
       
       playVideo(templateRef: TemplateRef<any>, videoDialog,  path, docType) {
-        if (docType !== 'video/mp4' || docType !== 'video/quicktime' || docType !== 'video/avi') {
+        if (docType !== 'video/mp4' || docType !== 'video/quicktime') {
           this.dialog.open(templateRef, {
             width: '100%',
             height: '100%',
@@ -505,7 +505,7 @@ export class ProjectMobileComponent implements OnInit {
     projectPreviewDoc(templateRef: TemplateRef<any>, videoDialog, path, type) {
       if (type === 'material') {
         this.showDownload = false;
-        if (path.doc_type !== 'video/mp4' || path.doc_type !== 'video/quicktime' || path.doc_type !== 'video/avi') {
+        if (path.doc_type !== 'video/mp4' || path.doc_type !== 'video/quicktime') {
           this.dialog.open(templateRef, {
             width: '100%',
             height: '100%',
@@ -523,7 +523,7 @@ export class ProjectMobileComponent implements OnInit {
         }
       } else if (type === 'files') {
         this.showDownload = true;
-        if (path.doc_type !== 'video/mp4' || path.doc_type !== 'video/quicktime' || path.doc_type !== 'video/avi') {
+        if (path.doc_type !== 'video/mp4' || path.doc_type !== 'video/quicktime') {
           this.dialog.open(templateRef, {
             width: '100%',
             height: '100%',

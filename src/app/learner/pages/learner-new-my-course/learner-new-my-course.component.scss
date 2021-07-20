@@ -9,6 +9,12 @@
   .mat-drawer-backdrop.mat-drawer-shown {
     background-color: transparent;
   }
+  .mat-drawer:not(.mat-drawer-side) {
+    @media only screen and (max-width: 767px) {
+      width: 100%;
+      z-index: 8;
+    }
+  }
   .mat-drawer.mat-drawer-end {
     @media only screen and (max-width: 767px) {
       width: 100%;
@@ -124,6 +130,9 @@
           display: inline-block;
           vertical-align: middle;
           margin-left: 3px;
+          @media only screen and (max-width: 767px) {
+            font-size: 10px;
+          }
         }
       }
     }
@@ -133,9 +142,12 @@
   .top3Things {
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
     background-color: #cccccc;
-    padding: 10px 85px 10px 20px;
+    padding: 5px 10px;
     flex-wrap: wrap;
     overflow: hidden;
+    @media only screen and (min-width:768px) {
+      padding: 10px 85px 10px 20px;
+    }
     &.noPadding {
       @media only screen and (min-width: 1200px) {
         padding: 10px 20px 10px 20px;
@@ -146,9 +158,9 @@
       background-color: #ffffff;
       padding: 15px 20px;
       position: relative;
-      height: 200px;
+      height: auto;
       width: 100%;
-      margin: 10px 0;
+      margin: 5px 0;
       position: relative;
       &::before {
         content: '';
@@ -162,11 +174,14 @@
       @media only screen and(min-width:600px) {
         width: 48%;
       }
-      @media only screen and(min-width:720px) {
-        width: 30%;
+      @media only screen and(min-width:992px) {
+        margin: 10px 0;
+        width: 31.5%;
       }
-      > div {
-        margin-bottom: 20px;
+      .moduleName {
+        @media only screen and (min-width: 568px) {
+          margin-bottom: 20px;
+        }
       }
       h6 {
         font-size: 11px;
@@ -184,50 +199,88 @@
         text-transform: uppercase;
       }
       h2 {
-        font-size: 20px;
+        font-size: 17px;
         font-weight: 400;
         color: #000000;
         line-height: normal;
         display: inline-block;
         width: 100%;
+        margin: 0;
+        @media only screen and (min-width: 568px) {
+          font-size: 20px;
+        }
       }
       .dueDate {
-        color: #808080;
-        font-size: 11px;
-        font-weight: 400;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+        @media only screen and (min-width: 568px) {
+          margin-top: 0;
+        }
+        button {
+          @media only screen and (min-width: 568px) {
+            display: none;
+          }
+        }
+        span {
+          color: #808080;
+          font-weight: 400;
+          font-size: 11px;
+        }
       }
       .upcoming {
-        position: absolute;
         width: 100%;
-        left: 0;
-        bottom: 0;
-        padding: 20px;
         margin-bottom: 0;
         > div {
           align-self: flex-end;
         }
+        @media only screen and (min-width: 1140px) {
+        }
         button {
-          padding: 5px 30px;
-          border-radius: 30px;
-          border: 1px solid #c02222;
-          background-color: transparent;
-          text-transform: uppercase;
-          em {
-            color: #c02222;
-            font-size: 16px;
-          }
-          span {
-            font-size: 12px;
-            color: #000000;
-            margin-left: 5px;
-            display: inline-flex;
+          display: none;
+          @media only screen and (min-width: 568px) {
+            display: flex;
+            align-items: center;
           }
         }
         .icons {
-          em {
-            font-size: 50px;
-            color: #b3b3b3;
+          position: absolute;
+          right: 15px;
+          top: 15px;
+          @media only screen and (min-width: 568px) {
+            position: relative;
+            top: 0;
+            right: 0;
           }
+          em {
+            font-size: 20px;
+            color: #b3b3b3;
+            @media only screen and (min-width: 568px) {
+              font-size: 50px;
+            }
+          }
+        }
+      }
+      button {
+        padding: 2px 30px;
+        border-radius: 30px;
+        border: 1px solid #c02222;
+        background-color: transparent;
+        text-transform: uppercase;
+        line-height: 18px;
+        @media only screen and (min-width: 568px) {
+          padding: 5px 30px;
+        }
+        em {
+          color: #c02222;
+          font-size: 16px;
+        }
+        span {
+          font-size: 12px;
+          color: #000000;
+          margin-left: 5px;
+          display: inline-flex;
         }
       }
     }
@@ -240,7 +293,7 @@
     position: relative;
     z-index: 9;
     @media only screen and (max-width: 767px) {
-      padding: 15px 15px 65px 15px;
+      padding: 15px 15px 95px 15px;
     }
     &.noPadding {
       @media only screen and (min-width: 1200px) {
@@ -250,21 +303,26 @@
     .mobileEnable {
       position: absolute;
       right: 15px;
-      top: 12vh;
+      top: 3.22vh;
       z-index: 9;
       display: none;
       @media only screen and (max-width: 767px) {
         display: block;
       }
       span {
-        border-radius: 5px;
-        background-color: #F2F2F2;
+        border-radius: 50%;
+        background-color: #ffcc00;
         border: 1px solid rgba(112, 112, 112, 0.2);
         padding: 3px 7px;
-        display: inline-block;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 35px;
+        height: 35px;
         line-height: normal;
+        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
         em {
-          color: #333333;
+          color: #000000;
           font-size: 20px;
         }
       }
@@ -276,10 +334,11 @@
       margin-top: 10px;
     }
     .courses {
+      position: relative;
       flex-wrap: wrap;
       background-color: #ffffff;
       padding: 15px;
-      margin: 0px 0px 15px 0px;
+      margin: 0 0px 15px 0px;
       border-radius: 4px;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     }
@@ -291,6 +350,9 @@
       overflow: hidden;
       position: relative;
       @media only screen and (min-width: 720px) {
+        width: 24%;
+      }
+      @media only screen and (min-width: 1140px) {
         width: 18%;
       }
       button {
@@ -318,6 +380,10 @@
     .rightCol {
       width: 100%;
       @media only screen and (min-width: 720px) {
+        margin-left: 2%;
+        width: 74%;
+      }
+      @media only screen and (min-width: 1140px) {
         margin-left: 2%;
         width: 80%;
       }
@@ -481,7 +547,7 @@
           color: #333333;
           margin: 3px 0 0 0 !important;
           line-height: 11px;
-          @media only screen and (max-width: 767px) {
+          @media only screen and (max-width: 991px) {
             display: none;
           }
         }
@@ -508,8 +574,14 @@
       }
       .percentage {
         width: 39%;
-        @media only screen and (min-width: 720px) {
+        @media only screen and (min-width: 569px) {
           width: 26%;
+        }
+        @media only screen and (min-width: 1140px) {
+          width: 20%;
+        }
+        @media only screen and (min-width: 1400px) {
+          width: 14%;
         }
       }
     }
@@ -517,10 +589,17 @@
 }
 
 .leftCol {
+  @media only screen and (max-width: 767px) {
+    width: 100%;
+  }
   width: 18%;
   .leftSkeleton {
     width: 100%;
   }
+}
+
+.skeletonTop {
+  margin-top: 15px;
 }
 
 // In Progress Module
@@ -751,6 +830,9 @@
       font-weight: 400;
       color: #A5A7B8;
       margin-bottom: 5px !important;
+      @media only screen and (max-width: 767px) {
+        display: none;
+      }
     }
     .wrapperTaskToDo {
       margin-bottom: 10px;
@@ -780,7 +862,7 @@
   //RIGHT SIDE NAV CONTENT//
   .drawerWrapper {
     margin: 0 auto;
-    width: 350px;
+    width: 390px;
     @media only screen and (max-width: 767px) {
       width: 96%;
     }
@@ -791,6 +873,28 @@
     padding: 15px 15px 10px 15px;
     span {
       color: #999999;
+      display: inline-block;
+      @media only screen and (max-width: 767px) {
+        transform: rotate(180deg);
+      }
+    }
+    p {
+      display: none;
+      @media only screen and (max-width: 767px) {
+        display: inline-flex;
+        font-size: 14px;
+        font-weight: 500;
+        color: #666666;
+        text-transform: uppercase;
+        margin: 0 0 0 10px !important;
+      }
+    }
+    @media only screen and (max-width: 767px) {
+      text-align: left;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 15px;
     }
   }
   .sideTabsStrip {
