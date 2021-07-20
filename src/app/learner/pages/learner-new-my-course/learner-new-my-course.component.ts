@@ -127,10 +127,10 @@ export class LearnerNewMyCourseComponent implements OnInit {
 
   ngOnInit() {
     this.innerWidth = window.innerWidth;
-    let showAppBanner = localStorage.getItem('appBanner');
-    if (!showAppBanner) {
-      this.openInfoPopup();
-    }
+    // let showAppBanner = localStorage.getItem('appBanner');
+    // if (!showAppBanner) {
+    //   this.openInfoPopup();
+    // }
     if (this.userDetailes) {
       this.insidengOnInit();
     }
