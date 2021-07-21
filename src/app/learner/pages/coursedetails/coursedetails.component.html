@@ -18,13 +18,13 @@
                 <div class="navigation d-flex align-items-center" *ngIf="scromModuleData&&filterkey==='All'&&drawersOpen===false">
                     <span class="pipeLine">|</span> 
                     <div class="leftArrow">                
-                     <i class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()"></i>
+                     <i class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?topicPrve():topicPrve()"></i>
                     </div>
-                    <div class="currentTopic" title="{{scromModuleData[moduleHolder]?.children[nextPrevHolder].title}}">
-                     <span >{{scromModuleData[moduleHolder]?.children[nextPrevHolder].title}}</span>
+                    <div class="currentTopic" >
+                     <span title="{{scromModuleData[weekHolder].childData[moduleHolder]?.children[nextPrevHolder].title}}">{{scromModuleData[weekHolder].childData[moduleHolder]?.children[nextPrevHolder].title}}</span>
                     </div>
                     <div class="rightArrow">                
-                     <i class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()"></i>
+                     <i class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?topicNext():topicNext()"></i>
                     </div>
                 </div>
             </ng-container>
@@ -65,16 +65,18 @@
             </div>
             </div>
             <div class="xyz" *ngIf="filterkey=='Bookmarked'?(filterData.length>0?true:false):(scromModuleData.length>0?true:true);else emptyTOC">
-                <mat-card *ngFor="let res of filterkey=='Bookmarked'?filterData:scromModuleData; let i = index" [ngClass]="res.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
-                    (click)="getSelectedIndex(i)" class="topicCard" >
-                    <div *ngIf="i===moduleHolder" #focuser ></div>
-                            <mat-card-title (click)="moduleExpand(res,i)" class="d-flex justify-content-between align-items-center pointer">
-                                <div class="tocTitle">Week - {{res.week?res.week:i+1}}</div>
+                <mat-card *ngFor="let resDat of filterkey=='Bookmarked'?filterData:scromModuleData; let wi = index" [ngClass]="resDat.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
+                    class="topicCard" >
+                    <div *ngIf="wi===weekHolder" #focuser ></div>
+                    <!-- (click)="moduleExpand(resDat,i)" -->
+                            <mat-card-title  class="d-flex justify-content-between align-items-center pointer">
+                                <div class="tocTitle">Week - {{resDat.week?resDat.week:wi+1}}</div>
                                 <div>
-                                    <i class="expandCollapse" [ngClass]="res.expanded?'lxp-Collapse':'lxp-Expand'"></i>
+                                    <!-- <i class="expandCollapse" [ngClass]="resDat.expanded?'lxp-Collapse':'lxp-Expand'"></i> -->
                                 </div>
                             </mat-card-title>
-                            <mat-card-subtitle (click)="moduleExpand(res,i)" class="d-flex justify-content-start align-items-center tocSubTitle">
+                            <span *ngFor="let res of resDat.childData let mi = index" (load)="mi==moduleHolder?res.expanded=true:res.expanded=false;">
+                            <mat-card-subtitle (click)="moduleExpand(wi,mi,res)" class="d-flex justify-content-start align-items-center tocSubTitle" [ngClass]="(wi===weekHolder&&mi==moduleHolder)?'titleSelected':''">
                                 <div>
                                     <!-- *ngIf="res?.status == 'Passed'" -->
                                     <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons passColor" >done </mat-icon>
@@ -89,14 +91,16 @@
                                         {{res?.title}}
                                     </span>
                                 </div>
+                                <div style="margin-left:auto">
+                                    <mat-icon class="material-icon">{{res.expanded?'expand_less':'expand_more'}}</mat-icon>
+                                </div>
                             </mat-card-subtitle>
-
                     <mat-card-content *ngIf="(res.expanded)">
                         <div class="bs-vertical-wizard">
                             <ul>
-                                <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of res?.children; let j = index">
-                                    <span class="icov" [ngClass]="(j===nextPrevHolder && i===moduleHolder) ? 'titleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i);drawersOpen=performOverLay?(drawersOpen?false:true):true">
-                                        {{mod?.title}} 
+                                <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of res?.children; let ti = index">
+                                    <span class="icov" [ngClass]="(wi==weekHolder&&ti==nextPrevHolder && mi==moduleHolder) ? 'titleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,wi,ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
+                                        {{mod?.title}}
                                         <i class="ico" [ngClass]="mod?.status === 'Passed' ? 'fa fa-check ico-green' :  mod?.status === 'process' ? 'fa fa-circle ico-yellow' : ''"></i>
                                         <!-- <span class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, cumque.</span> -->
                                         <span *ngIf="mod.bookmark===true "><i class="lxp-bookmark" style="color:blue"></i></span>
@@ -105,27 +109,8 @@
                                 </li>
                             </ul>
                         </div>
-                        <!-- TOPICS LIST STARTS HERE... -->
-                        <!-- <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title?.length > 39?'headerDown': ''">
-                            <ng-container *ngFor="let mod of res?.children; let j = index">
-                                <mat-step
-                                    [aria-labelledby]="mod?.status === 'Passed' ? 'colgreen' :  mod?.status === 'process' ? 'colYellow' : 'colWhite'">
-                                    <ng-template matStepLabel>
-                                        <span class="topicnm" 
-                                            (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,res?.topic_len,j + 1,i);drawersOpen=performOverLay?(drawersOpen?false:true):true">
-
-                                                <span class="titleName"
-                                                    [ngClass]="(j===nextPrevHolder && i===moduleHolder) ? 'titleSelected' : ''">
-                                                    {{mod?.title}}
-                                                </span>
-                                                <span *ngIf="mod.bookmark===true "><i class="lxp-bookmark" style="color:blue"></i></span>
-                                            </span>
-
-                                        </ng-template>
-                                    </mat-step>
-                                </ng-container>
-                            </mat-vertical-stepper> -->
                         </mat-card-content>
+                    </span>
                 </mat-card>
             </div>
             <ng-template #emptyTOC>
@@ -265,100 +250,7 @@
                                         No Resource found !!
                                     </ng-container>
                                     
-                                <!-- <mat-accordion>
-                                <ng-container *ngIf="content?.noresource">
-                                    <ng-container *ngFor="let res of content?.coursedetails; let i = index">
-                                        <mat-expansion-panel class="panel1" hideToggle="true" #example1
-                                            [expanded]="selectedIndex === i" *ngIf="res.resValue">
-                                            <mat-expansion-panel-header style="height: 50px !important;">
-                                                <mat-panel-title>
-                                                    <span class="sqnumner">{{i+1}}.</span>&nbsp;&nbsp;{{res?.modulename}}<br>
-                                                </mat-panel-title>
-                                                <mat-icon class="exp2" *ngIf="!example1.expanded">add_circle_outline
-                                                </mat-icon>
-                                                <mat-icon class="exp2" *ngIf="example1.expanded">remove_circle_outline
-                                                </mat-icon>
-                                            </mat-expansion-panel-header>
-        
-        
-                                            <div class="row margin-5">
-                                                <div class="col-12">
-                                                    <mat-list *ngFor="let mod of res?.moduledetails">
-                                                        <mat-list-item *ngIf="res.resValue">
-                                                            <div mat-line class="modTopName" *ngIf="mod.resourse?.files.length">
-                                                                {{mod?.topicname}} :
-                                                            </div>
-                                                            <div class="content">
-                                                                <div class="row" *ngFor="let file of mod.resourse?.files">
-                                                                    <div class="col-12" style="margin-top:6px">
-                                                                        <div class="row d-flex justify-content-between">
-                                                                            <div class="extensionFiles">
-                                                                                <img *ngIf="file.doc_type == 'application/pdf'"
-                                                                                    class="size" alt=""
-                                                                                    src="assets/learner/fileicon/PDF_Icon.svg">
-                                                                                <img *ngIf="file.doc_type == 'link'"
-                                                                                    class="size" alt=""
-                                                                                    src="assets/learner/fileicon/Link_Icon.svg">
-                                                                                <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
-                                                                                    class="size" alt=""
-                                                                                    src="assets/learner/fileicon/Excel_Icon.svg">
-                                                                                <img *ngIf="file.doc_type == 'image/jpeg' || file.doc_type == 'image/png'"
-                                                                                    class="size" alt=""
-                                                                                    src="assets/learner/fileicon/Image_Icon.svg">
-                                                                                <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
-                                                                                    class="size" alt=""
-                                                                                    src="assets/learner/fileicon/PPT_Icon.svg">
-                                                                                <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
-                                                                                    class="size" alt=""
-                                                                                    src="assets/learner/fileicon/Word_Icon.svg">
-                                                                                <img *ngIf="file.doc_type == 'application/msword'"
-                                                                                    class="size" alt=""
-                                                                                    src="assets/learner/fileicon/Word_Icon.svg">
-                                                                                <img *ngIf="file.doc_type == 'application/vnd.ms-excel'"
-                                                                                    class="size" alt=""
-                                                                                    src="assets/learner/fileicon/Excel_Icon.svg">
-                                                                                <img *ngIf="file.doc_type == 'video/mp4'"
-                                                                                    class="size" alt=""
-                                                                                    src="assets/learner/fileicon/Video_Icon.svg">
-                                                                            </div>
-        
-                                                                            <mat-icon class="docType"
-                                                                                *ngIf="file.doc_type == 'text/plain' ">
-                                                                                description
-                                                                            </mat-icon>
-                                                                            <div class="fileTypeName"> {{file.type_name}} </div>
-                                                                            <div class="f_size_12"
-                                                                                *ngIf="file?.doc_type =='link'">
-                                                                                <span class="ml-2"> NA </span>
-                                                                            </div>
-                                                                            <div class="f_size_12 fileSize" *ngIf="file?.size">
-                                                                                {{file.size}} </div>
-                                                                            <div class="saveFile">
-                                                                                <a href="{{file?.path}}"
-                                                                                    (click)="add_topic_reference(res)" download>
-                                                                                    <mat-icon
-                                                                                        style="color: #333;font-size: 20px;">
-                                                                                        save_alt </mat-icon>
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </mat-list-item>
-                                                    </mat-list>
-                                                </div>
-                                            </div>
-                                        </mat-expansion-panel>
-                                    </ng-container>
-                                </ng-container>
-        
-        
-                                <ng-container *ngIf="!content?.noresource">
-                                    <span style="padding: 16px;">{{'This course does not have resource files.'|
-                                        translate}}</span>
-                                </ng-container>
-                            </mat-accordion> -->
+                              
                                 </div>
                                 <div class="previewContainer" >
                                     <div class="previewContainerTitle">
