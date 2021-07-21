@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<div class="sideNavWrapper">
+<div class="">
     <div>
         <mat-drawer-container class="sideNavContainer" autosize>
             <mat-drawer #drawer class="sideNav" [opened]="innerWidth>1140 ? 'true':'false'" [mode]="innerWidth>1140?'side':'over'" [position]="innerWidth < 767 ? 'start' : 'end'">
@@ -493,7 +493,7 @@
                             </div>
                         </mat-tab>
                     </mat-tab-group>
-
+<div class="spacer" *ngIf="!courseDetailsList.length"></div>
                     <!-- InProgressModule -->
                     <div class="inprogressModule" *ngIf="courseDetailsList.length">
                         <h3>Inprogress Modules</h3>
