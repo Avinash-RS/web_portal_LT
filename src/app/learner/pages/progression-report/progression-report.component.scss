@@ -416,8 +416,11 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        @media only screen and (max-width: 375px) {
+        @media only screen and (max-width: 374px) {
           width: 17em;
+        }
+        @media only screen and (max-width: 374px) {
+          width: 14em;
         }
       }
       .topic-container {
