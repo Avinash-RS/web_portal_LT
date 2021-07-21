@@ -3,7 +3,7 @@
   <div class="left-container">
     <div class="col d-flex breadcrum">
       <em routerLink="/Learner/MyCourse" class="lxp-Right_Direction_Arrow backArrow"></em>
-      <div class="breadcrum1">Applied Industrail IOT</div>
+      <div class="breadcrum1">{{courseName}}</div>
       <div class="partition">/</div>
       <div class="breadcrum2">Progression Report</div>
     </div>
@@ -158,13 +158,13 @@
     </div>
    <div class="col">
     <div class="activity-container">
-      <div class="header-label">Actitvities Progression Report</div>
+      <div class="header-label">Activities Progression Report</div>
       <div class="tab-container">
         <mat-tab-group (selectedTabChange)="tabChanged($event)" [(selectedIndex)]="selectedIndex">
           <mat-tab label="Assignment">
             <div *ngIf="!showSkeleton; else skeletonLoad">
               <div class="card-content d-flex justify-content-start">
-                <mat-card *ngFor="let assignmentModule of assignmentContent" class="card-container">
+                <mat-card *ngFor="let assignmentModule of assignmentPage | async" class="card-container">
                   <div class="card-topic">
                     {{assignmentModule?.files?.module_id}} > {{assignmentModule?.files?.topic_id}}
                   </div>
@@ -215,6 +215,7 @@
                   </div>
                 </mat-card>
               </div>
+              <mat-paginator *ngIf="!emptyAssignment" #firstPaginator [pageSizeOptions]="[6]"></mat-paginator>
               <div class="noCard" *ngIf="emptyAssignment">
                 <figure>
                   <img src="/assets/images/noassignment.svg" alt="assignment">
@@ -226,7 +227,7 @@
           <mat-tab label="Project">
             <div *ngIf="!showSkeleton; else skeletonLoad">
               <div class="card-content d-flex justify-content-start">
-                <mat-card *ngFor="let projectModule of projectContent" class="card-container">
+                <mat-card *ngFor="let projectModule of projectPage | async" class="card-container">
                   <div class="card-topic">
                     {{projectModule?.projectActivity?.module_id}} > {{projectModule?.projectActivity?.topic_id}}
                   </div>
@@ -280,7 +281,8 @@
                   </div>
                 </mat-card>
               </div>
-              <div class="noCard" *ngIf="emptyAssignment">
+              <mat-paginator #secondPaginator [pageSizeOptions]="[6]"></mat-paginator>
+              <div class="noCard" *ngIf="emptyProject">
                 <figure>
                   <img src="/assets/images/noproject.svg" alt="assignment">
                 </figure>
@@ -291,7 +293,7 @@
           <mat-tab label="Perform">
             <div *ngIf="!showSkeleton; else skeletonLoad">
               <div class="card-content d-flex justify-content-start">
-                <mat-card *ngFor="let performModule of performContentData" class="card-container">
+                <mat-card *ngFor="let performModule of performPage | async" class="card-container">
                   <div class="card-topic">
                     {{performModule?.module_id}} > {{performModule?.topic_id}}
                   </div>
@@ -339,7 +341,8 @@
                   </div>
                 </mat-card>
               </div>
-              <div class="noCard" *ngIf="emptyAssignment">
+              <mat-paginator #thirdPaginator [pageSizeOptions]="[6]"></mat-paginator>
+              <div class="noCard" *ngIf="emptyPerform">
                 <figure>
                   <img src="/assets/images/noperform.svg" alt="assignment">
                 </figure>

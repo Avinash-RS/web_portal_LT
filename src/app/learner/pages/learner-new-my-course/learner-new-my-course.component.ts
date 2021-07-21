@@ -346,9 +346,17 @@ export class LearnerNewMyCourseComponent implements OnInit {
     // debugger
     let data = {
       courseId : course.course_id,
+      courseName: course.course_name
     }
-    localStorage.setItem('Courseid', course.course_id);
-    this.router.navigateByUrl('/Learner/progressionReport', { queryParams: { data } });
+    // localStorage.setItem('Courseid', course.course_id);
+    // this.router.navigate(['/Learner/progressionReport'], { queryParams: { data } });
+    this.router.navigate(['/Learner/progressionReport'], {
+      queryParams:
+      {
+        CourseId: btoa(course.course_id),
+        CourseName: btoa(course.course_name)
+      }
+    });
   }
 
   getLearnerActivity(selectedDate) {
