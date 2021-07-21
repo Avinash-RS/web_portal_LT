@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as myGlobals from '@core/globals';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
@@ -7,7 +7,6 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import * as CryptoJS from 'crypto-js';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -24,7 +23,14 @@ export class LoginComponent implements OnInit {
   currentYear = new Date().getFullYear();
   infoClose = true;
   loader = false;
-
+  username = new FormControl('', [Validators.required, Validators.email]);
+  signinPage = true;
+  forgotPage = false;
+  getErrorMessage() {
+    return this.username.hasError('required') ? 'Email is required' :
+        this.username.hasError('email') ? 'Please enter a valid email' :
+            '';
+  }
   constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder, public learnerService: LearnerServicesService,
              // public socketService: SocketioService,
               private service: LearnerServicesService, private toastr: ToastrService, private activatedRoute: ActivatedRoute) {
@@ -45,6 +51,33 @@ export class LoginComponent implements OnInit {
     });    
   }
 
+  viewChange(){
+    this.signinPage = false;
+    this.forgotPage = true;
+  }
+  backToSignin(){
+    this.forgotPage = false;
+    this.signinPage = true;
+    this.username.reset();
+  }
+  forgotPassword() {
+      var encryptedmail = CryptoJS.AES.encrypt(this.username.value, this.secretKey.trim()).toString();
+      this.service.forgotUsernameandPassword('password', 'email','', encryptedmail)
+        .subscribe((data: any) => {
+          this.loader = true;
+          if (data.data.get_forgot_username_mobile_email.success === 'true') {
+            this.toastr.success(data.data.get_forgot_username_mobile_email.message, null);
+            this.loader = false;
+            this.signinPage = false;
+            this.forgotPage = true;
+            this.username.reset();
+          } else {
+            this.toastr.error(data.data.get_forgot_username_mobile_email.message, null);
+            this.loader = false;
+            this.username.reset();
+          }
+        });
+  }
   portalToIggnite() {
     this.activatedRoute.queryParams.subscribe(params => {
       if (params && params['email_id']) {

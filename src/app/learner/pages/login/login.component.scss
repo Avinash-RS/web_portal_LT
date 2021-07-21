@@ -136,13 +136,24 @@
     }
   }
   //SignIn
-  .signIn {
+  .signIn,.forgotPassword {
     width: 100%;
+    .goBack{
+      display: flex;
+      justify-content: center;
+      color: #87898a;
+      cursor: pointer;
+    }
+    .goBack:hover{
+      color: #C02222;
+      text-decoration: underline;
+    }
   }
   .forgot {
       font-size: 12px;
       font-weight: 400;
       color: #C02222;
+      cursor: pointer;
   }
   .dontHaveAccount {
       text-align: center;
@@ -156,6 +167,7 @@
               font-weight: 500;
           }
       }
+      
   }
 
   //forgotPassword
@@ -168,7 +180,18 @@
         width: 100%;
         //margin-bottom: 20px;
     }
-    
+    .error{
+      color: red;
+    }
+    input.mat-input-element {
+      line-height: normal;
+    }
+    .mat-form-field-prefix{
+      display: none;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-suffix {
+      top: -0.25em;
+    }
     .mat-form-field-appearance-outline .mat-form-field-outline-thick {
         color: #C02222;
     }

@@ -26,7 +26,7 @@
         <figure class="logo">
           <img alt="" src="assets/learner/EduTech_Logo.svg">
         </figure>
-        <div class="signIn">
+        <div class="signIn" *ngIf="signinPage">
           <h1>Welcome</h1>
           <form [formGroup]="loginForm">
             <div>
@@ -36,14 +36,14 @@
                 required>
                 <em class="icon-color lxp-MailOutline" matPrefix></em>
                 <mat-error class="error" *ngIf="loginForm.get('username').hasError('required')">{{'Email is required' | translate}}</mat-error>
-                <mat-error class="error" *ngIf="loginForm.get('username').hasError('pattern')">{{'Please enter a valid email address' | translate}}</mat-error>
+                <mat-error class="error" *ngIf="loginForm.get('username').hasError('pattern')">{{'Please enter a valid email' | translate}}</mat-error>
               </mat-form-field>
             </div>
 
             <div class="" appCapslock (capsLock)="capsOn=$event">
-              <div *ngIf="capsOn">{{'Caps lock is on !' | translate }}</div>
+              <div class="error" *ngIf="capsOn">{{'Caps lock is on !' | translate }}</div>
               <mat-form-field appearance="outline">
-                <mat-label  class="label-color">{{'Password' | translate }}</mat-label>
+                <mat-label  class="labe l-color">{{'Password' | translate }}</mat-label>
                 <input matInput  [placeholder]="'Enter password' | translate " [type]="hide ? 'password' : 'text'" formControlName="password" [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" required>
                 <i class="icon-color lxp-Lock" matPrefix></i>
                 <span  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
@@ -51,23 +51,13 @@
                 </span>
                 <mat-error class="error" *ngIf="f.password.touched && f.password.errors" >{{'Password is required' | translate }}</mat-error>
               </mat-form-field>
-                <!-- <mat-form-field appearance="outline">
-                  <mat-label  class="label-color">{{'Password' | translate }}</mat-label>
-                  <input matInput  [placeholder]="'Enter password' | translate " [type]="hide ? 'password' : 'text'" formControlName="password" [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" required>
-                  <em class="icon-color lxp-Lock" matPrefix></em>
-                  <span  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"> 
-                    <em class="icon-color" [ngClass]="hide ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
-                  </span>
-                  <mat-error class="error" *ngIf="f.password.touched && f.password.errors" >{{'Password is required' | translate }}</mat-error>
-                </mat-form-field> -->
             </div>
-
             <div class="forgotPswd d-flex justify-content-between">
               <mat-checkbox class="remember_me" formControlName="remember_me">
                 {{'Keep me logged in' | translate }}
               </mat-checkbox>
               <span>
-                <a class="forgot"(click)="reserPassword('reserPassword')">{{'Forgot password?' | translate}}</a>
+                <a class="forgot"(click)="viewChange()">{{'Forgot password?' | translate}}</a>
               </span>
             </div>
 
@@ -80,22 +70,36 @@
                   </div>
                 </div></button>
             </div>
-            <!-- <div class="gradientBtn">
-              <button id="login" mat-raised-button (click)="login()">
-                <div class="snippet" data-title=".dot-falling">
-                  <div class="stage">
-                    <div class="dot-falling"></div>
-                  </div>
-                </div></button>
-            </div> -->
-
             <div class="dontHaveAccount">
               <span>Don't have account yet? <a [routerLink]="['/Learner/register']"> {{'Sign-up' | translate }}</a></span>
             </div>
           </form>
         </div>
-        <!-- <div class="forgotPassword"></div>
-        <div class="signUpSection"></div> -->
+         <div class="forgotPassword" *ngIf="forgotPage">
+          <h1>Forgot Password?</h1>
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label class="label-color">{{'Email' | translate}}</mat-label>
+              <input matInput [placeholder]="'Enter the email' | translate"  [formControl]="username" maxlength="64"
+              required>
+              <em class="icon-color lxp-MailOutline" matPrefix></em>
+              <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="gradientBtn">
+              <button id="login" mat-raised-button (click)="forgotPassword()">
+                <span *ngIf="!loader">{{'SUBMIT' | translate}}</span>
+                <div *ngIf="loader" class="snippet" data-title=".dot-falling">
+                  <div class="stage">
+                    <div class="dot-falling"></div>
+                  </div>
+                </div></button>
+            </div>
+            <mat-label>  
+              <div class="goBack" (click)="backToSignin(); ">{{'Go back to sign in'  | translate}}</div>
+            </mat-label>
+         </div>
+       <!-- <div class="signUpSection"></div> -->
 
       </div>
     </div>
