@@ -19,9 +19,12 @@
                             <div class="currentMonth">
                                 <h3>{{ viewDate | calendarDate:('month' + 'ViewTitle'):'en' }}</h3>
                             </div>
-                            <div class="arrows">
+                            <div class="arrows d-flex align-items-center">
                                 <span mwlCalendarPreviousView [view]="'week'" [(viewDate)]="viewDate">
                                     <em class="lxp-Rewind_Arrow"></em>
+                                </span>
+                                <span class="today" mwlCalendarToday [view]="'week'" [(viewDate)]="viewDate">
+                                    Today
                                 </span>
                                 <span mwlCalendarNextView [view]="'week'" [(viewDate)]="viewDate">
                                     <em class="lxp-Forward_Arrow"></em>
@@ -38,7 +41,7 @@
                                 To Do
                             </div>
                         </div>
-                        <ng-container *ngFor="let data of learnerActivityList;">
+                        <ng-container *ngFor="let data of learnerActivityList | slice:0:4;">
                             <div class="listItem d-flex justify-content-start">
                                 <div class="dateFlag" [ngClass] = "{'ongoing': data.status === 'On going', 'completed': data.status === 'Completed', 'yettoStart': data.status === 'Up Coming'}">
                                     <div class="dateDiv">
@@ -66,10 +69,13 @@
                                     <div class="titleFontSize">{{data.activity_details.coursename}}</div>
                                     <div class="type">Module: <span>{{data.activity_details.modulename}}</span></div>
                                     <div class="topic">Topic: <span>{{data.activity_details.topicname}}</span></div>
-                                    <div class="date">Date: {{data.activity_details.startdate | date :'d/M/yy h:mm a'}} - {{data.activity_details.enddate | date :'d/M/yy h:mm a'}}</div>
+                                    <div class="date">{{data.activity_details.startdate | date :'d/M/yy h:mm a'}} <span>-</span> {{data.activity_details.enddate | date :'d/M/yy h:mm a'}}</div>
                                 </div>
                             </div>
                         </ng-container>
+                        <div class="viewAll" *ngIf="learnerActivityList?.length > 3">
+                            <a routerLink="/Learner/calendaractivity">View all <em class="lxp-Right_Direction_Arrow"></em></a>
+                        </div>
                         <div class="item" *ngIf="showSkeleton">
                             <div class="d-flex justify-content-between">
                                 <div class="item1">
@@ -100,9 +106,6 @@
                                 <p>You have no activity scheduled for the day!</p>
                             </div>
                         </ng-container>
-                        <div *ngIf="noActivity">
-                            <!-- <a>View all <em class="lxp-Right_Direction_Arrow"></em></a> -->
-                        </div>
                     </div>
                 </div>
             </mat-drawer>
@@ -254,18 +257,20 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="durationCredits d-flex justify-content-between"
-                                                [ngClass]="!item.isReadMore ? 'top' : 'zero'">
-                                                <span>
-                                                    <em class="lxp-Duration"></em> Duration: {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}
-                                                </span>
+                                            <div class="durationCredits d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
+                                                <span class="by">By: <b>Larsen & Toubro</b></span>
                                                 <span class="credits">Credits : {{item.credits!==null?item.credits:0}}</span>
+                                                <span>
+                                                    <em class="lxp-Duration"></em> 
+                                                    Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                </span>
                                             </div>
                                             <div class="actionItems d-flex justify-content-between">
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
-                                                        <p>Virtual Instructor <br />Led Session</p>
+                                                        <ng-container *ngIf="userDetailes.org_type == 'vocational'"><p>Virtual Instructor <br />Led Session</p></ng-container>
+                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'"><p>Live Interactions</p></ng-container>
                                                     </div>
                                                     <div class="icons" (click)="gotoSubmissionDetails(item)">
                                                         <span><em class="lxp-Activities_New"></em></span>
@@ -319,7 +324,21 @@
                                               </div>
                                         </figure>
                                         <div class="rightCol">
-                                            <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
+                                                <span class="menuIcon" [matMenuTriggerFor]="menu">
+                                                    <em class="lxp-Dot_Menu"></em>
+                                                </span>
+                                                <mat-menu #menu="matMenu" xPosition="before">
+                                                    <button mat-menu-item (click)="openGallery(item)">
+                                                      <span><em class="lxp-Search mr-2"></em>Search</span>
+                                                    </button>
+                                                    <mat-divider></mat-divider>
+                                                    <button mat-menu-item (click)="openReport(item)">
+                                                      <span><em class="lxp-Edit_Document mr-2"></em>Course Assessment Report</span>
+                                                    </button>
+                                                  </mat-menu>
+                                            </div>
                                             <div class="showLessContent">
                                                 <button class="readMoreLess" *ngIf="info.length > 370" type="button"
                                                     (click)="item.isReadMore = !item.isReadMore">
@@ -335,18 +354,21 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="durationCredits d-flex justify-content-between"
-                                                [ngClass]="!item.isReadMore ? 'top' : 'zero'">
-                                                <span>
-                                                    <em class="lxp-Duration"></em> Duration: {{item.total_duration? item.total_duration : "1" + ""}} {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}
-                                                </span>
+                                            <div class="durationCredits d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
+                                                <span class="by">By: <b>Larsen & Toubro</b></span>
                                                 <span class="credits">Credits : {{item.credits!==null?item.credits:0}}</span>
+                                                <span>
+                                                    <em class="lxp-Duration"></em> 
+                                                    Duration: <b>{{item.total_duration? item.total_duration : "1" + ""}} {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                </span>
                                             </div>
                                             <div class="actionItems d-flex justify-content-between">
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
-                                                        <p>Virtual Instructor <br />Led Session</p>
+                                                        <ng-container *ngIf="userDetailes.org_type == 'vocational'"><p>Virtual Instructor <br />Led Session</p></ng-container>
+                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'"><p>Live Interactions</p></ng-container>
+                                                        
                                                     </div>
                                                     <div class="icons" (click)="gotoSubmissionDetails(item)">
                                                         <span><em class="lxp-Activities_New"></em></span>
@@ -407,7 +429,21 @@
                                                   </div>
                                         </figure>
                                         <div class="rightCol">
-                                            <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
+                                                <span class="menuIcon" [matMenuTriggerFor]="menu">
+                                                    <em class="lxp-Dot_Menu"></em>
+                                                </span>
+                                                <mat-menu #menu="matMenu" xPosition="before">
+                                                    <button mat-menu-item (click)="openGallery(item)">
+                                                      <span><em class="lxp-Search mr-2"></em>Search</span>
+                                                    </button>
+                                                    <mat-divider></mat-divider>
+                                                    <button mat-menu-item (click)="openReport(item)">
+                                                      <span><em class="lxp-Edit_Document mr-2"></em>Course Assessment Report</span>
+                                                    </button>
+                                                  </mat-menu>
+                                            </div>
                                             <div class="showLessContent">
                                                 <button class="readMoreLess" *ngIf="info.length > 370" type="button"
                                                     (click)="item.isReadMore = !item.isReadMore">
@@ -423,18 +459,20 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="durationCredits d-flex justify-content-between"
-                                                [ngClass]="!item.isReadMore ? 'top' : 'zero'">
-                                                <span>
-                                                    <em class="lxp-Duration"></em> Duration: {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}
-                                                </span>
+                                            <div class="durationCredits d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
+                                                <span class="by">By: <b>Larsen & Toubro</b></span>
                                                 <span class="credits">Credits : {{item.credits!==null?item.credits:0}}</span>
+                                                <span>
+                                                    <em class="lxp-Duration"></em> 
+                                                    Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                </span>
                                             </div>
                                             <div class="actionItems d-flex justify-content-between">
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
-                                                        <p>Virtual Instructor <br />Led Session</p>
+                                                        <ng-container *ngIf="userDetailes.org_type == 'vocational'"><p>Virtual Instructor <br />Led Session</p></ng-container>
+                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'"><p>Live Interactions</p></ng-container>
                                                     </div>
                                                     <div class="icons" (click)="gotoSubmissionDetails(item)">
                                                         <span><em class="lxp-Activities_New"></em></span>
@@ -473,7 +511,7 @@
                     </mat-tab-group>
 
                     <!-- InProgressModule -->
-                    <div class="inprogressModule">
+                    <div class="inprogressModule" *ngIf="courseDetailsList.length">
                         <h3>Inprogress Modules</h3>
                         <div class="d-flex justify-content-start">
                             <div class="modules">
@@ -512,7 +550,7 @@
                     </div>
 
                     <!-- Missed Topics & Knowledge Check -->
-                    <div class="missedTopicsKnowledgeCheck">
+                    <div class="missedTopicsKnowledgeCheck" *ngIf="courseDetailsList.length">
                         <h3>Missed Topics & Knowledge Check</h3>
                         <div class="wrapper d-flex justify-content-between">
                             <span class="leftArrow"><em class="lxp-Right_Direction_Arrow"></em></span>
@@ -549,7 +587,7 @@
                     </div>
 
                     <!-- Recently Learned Topics -->
-                    <div class="recentlyLearnedTopics">
+                    <div class="recentlyLearnedTopics" *ngIf="courseDetailsList.length">
                         <h3>Recently Learnt Topics</h3>
                         <div class="wrapper d-flex justify-content-between">
                             <span class="leftArrow"><em class="lxp-Right_Direction_Arrow"></em></span>
@@ -645,6 +683,6 @@
         <div>
           <img src="/assets/images/noproject.svg" alt="assignment">
         </div>
-        <p>You have no ongoing courses at the moment!</p>
+        <p>You have no {{dynamicTextChange}} courses at the moment!</p>
     </div>
   </ng-template>
