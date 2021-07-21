@@ -163,15 +163,15 @@
                 text-align: right;
             }
         }
-        .self-learning-container{
+        .self-learning-container {
           margin-top: 2em;
           padding: 0 5px;
           
           @include xl {
             margin-top: 3em;
-          padding: 0 15px;
+            padding: 0 15px;
           }
-            .expansion-container{
+          .expansion-container {
                 margin-top: 1em;
                 @include lg {
                   margin-top: 2em;
@@ -206,12 +206,12 @@
             .color-red{
                 color: #ED1C24;
             }
-            .module-block{
-                width: 20em;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
+            // .module-block{
+            //     width: 20em;
+            //     overflow: hidden;
+            //     text-overflow: ellipsis;
+            //     white-space: nowrap;
+            // }
             .topic-container{
                 border: 1px solid #7070706b;
                 background: #ffffff;
@@ -415,6 +415,9 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        @media only screen and (max-width: 375px) {
+          width: 17em;
+        }
       }
       .topic-container {
         border: 1px solid #7070706b;

@@ -19,9 +19,12 @@
                             <div class="currentMonth">
                                 <h3>{{ viewDate | calendarDate:('month' + 'ViewTitle'):'en' }}</h3>
                             </div>
-                            <div class="arrows">
+                            <div class="arrows d-flex align-items-center">
                                 <span mwlCalendarPreviousView [view]="'week'" [(viewDate)]="viewDate">
                                     <em class="lxp-Rewind_Arrow"></em>
+                                </span>
+                                <span class="today" mwlCalendarToday [view]="'week'" [(viewDate)]="viewDate">
+                                    Today
                                 </span>
                                 <span mwlCalendarNextView [view]="'week'" [(viewDate)]="viewDate">
                                     <em class="lxp-Forward_Arrow"></em>
@@ -38,7 +41,7 @@
                                 To Do
                             </div>
                         </div>
-                        <ng-container *ngFor="let data of learnerActivityList;">
+                        <ng-container *ngFor="let data of learnerActivityList | slice:0:4;">
                             <div class="listItem d-flex justify-content-start">
                                 <div class="dateFlag" [ngClass] = "{'ongoing': data.status === 'On going', 'completed': data.status === 'Completed', 'yettoStart': data.status === 'Up Coming'}">
                                     <div class="dateDiv">
@@ -66,10 +69,13 @@
                                     <div class="titleFontSize">{{data.activity_details.coursename}}</div>
                                     <div class="type">Module: <span>{{data.activity_details.modulename}}</span></div>
                                     <div class="topic">Topic: <span>{{data.activity_details.topicname}}</span></div>
-                                    <div class="date">Date: {{data.activity_details.startdate | date :'d/M/yy h:mm a'}} - {{data.activity_details.enddate | date :'d/M/yy h:mm a'}}</div>
+                                    <div class="date">{{data.activity_details.startdate | date :'d/M/yy h:mm a'}} <span>-</span> {{data.activity_details.enddate | date :'d/M/yy h:mm a'}}</div>
                                 </div>
                             </div>
                         </ng-container>
+                        <div class="viewAll" *ngIf="learnerActivityList?.length > 3">
+                            <a routerLink="/Learner/calendaractivity">View all <em class="lxp-Right_Direction_Arrow"></em></a>
+                        </div>
                         <div class="item" *ngIf="showSkeleton">
                             <div class="d-flex justify-content-between">
                                 <div class="item1">
@@ -100,9 +106,6 @@
                                 <p>You have no activity scheduled for the day!</p>
                             </div>
                         </ng-container>
-                        <div *ngIf="noActivity">
-                            <!-- <a>View all <em class="lxp-Right_Direction_Arrow"></em></a> -->
-                        </div>
                     </div>
                 </div>
             </mat-drawer>
@@ -505,7 +508,7 @@
                     </mat-tab-group>
 
                     <!-- InProgressModule -->
-                    <div class="inprogressModule">
+                    <div class="inprogressModule" *ngIf="courseDetailsList.length">
                         <h3>Inprogress Modules</h3>
                         <div class="d-flex justify-content-start">
                             <div class="modules">
@@ -544,7 +547,7 @@
                     </div>
 
                     <!-- Missed Topics & Knowledge Check -->
-                    <div class="missedTopicsKnowledgeCheck">
+                    <div class="missedTopicsKnowledgeCheck" *ngIf="courseDetailsList.length">
                         <h3>Missed Topics & Knowledge Check</h3>
                         <div class="wrapper d-flex justify-content-between">
                             <span class="leftArrow"><em class="lxp-Right_Direction_Arrow"></em></span>
@@ -581,7 +584,7 @@
                     </div>
 
                     <!-- Recently Learned Topics -->
-                    <div class="recentlyLearnedTopics">
+                    <div class="recentlyLearnedTopics" *ngIf="courseDetailsList.length">
                         <h3>Recently Learnt Topics</h3>
                         <div class="wrapper d-flex justify-content-between">
                             <span class="leftArrow"><em class="lxp-Right_Direction_Arrow"></em></span>
@@ -677,6 +680,6 @@
         <div>
           <img src="/assets/images/noproject.svg" alt="assignment">
         </div>
-        <p>You have no ongoing courses at the moment!</p>
+        <p>You have no {{dynamicTextChange}} courses at the moment!</p>
     </div>
   </ng-template>

@@ -39,9 +39,12 @@
           </div>
     
           <div class="infotypearea">
-            <span *ngIf="activity.activitytype == 'Perform' || activity.activitytype == 'Assignment'|| activity.activitytype == 'Project'" class="icon lxp-Test" >i</span>
+            <!-- <span *ngIf="activity.activitytype == 'Perform' || activity.activitytype == 'Assignment'|| activity.activitytype == 'Project'" class="icon lxp-Test" >i</span> -->
             <span  *ngIf="activity.activitytype == 'Live Classroom'" class="icon lxp-VILT" >i</span>
             <span  *ngIf="activity.activitytype == 'Self Learning'" class="icon lxp-Self_Learning">i</span>
+            <span  *ngIf="activity.activitytype == 'Perform'" class="icon lxp-Perform">i</span>
+            <span  *ngIf="activity.activitytype == 'Assignment'" class="icon lxp-Edit_Document">i</span>
+            <span  *ngIf="activity.activitytype == 'Project'" class="icon lxp-User_Settings">i</span>
             <div class="htxt">
               <span>Type</span>
               <div *ngIf="activity.activitytype != 'Live Classroom' && activity.activitytype != 'Self Learning'" class="notifi activity">{{activity.activitytype}}</div>
@@ -111,14 +114,12 @@
       </div>
       <div class="prevNext align-self-center">
         <div class="btn-group d-flex align-items-center justify-content-center">
-          <mat-icon mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
-            (viewDateChange)="getCalendarCount($event);monthChange($event)">
-            <!-- {{'Previous' | translate }} -->keyboard_arrow_left
-          </mat-icon>
-          <mat-icon mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
-            (viewDateChange)="getCalendarCount($event);monthChange($event)">
-            <!-- {{'Next' | translate }} --> keyboard_arrow_right
-          </mat-icon>
+          <span mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="getCalendarCount($event);monthChange($event)">
+            <em class="lxp-Rewind_Arrow"></em>
+          </span>
+          <span mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="getCalendarCount($event);monthChange($event)">
+            <em class="lxp-Forward_Arrow"></em>
+          </span>
         </div>
       </div>
     </div>
