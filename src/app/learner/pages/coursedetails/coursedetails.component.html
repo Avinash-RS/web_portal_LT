@@ -166,7 +166,7 @@
                             </button>
                         </div>
                         <div class="askquestion">
-                            <button data-title="Ask Question" *ngIf="userType!=='collegeconnect'" type="button" ngClass="btn btn-outline-light" (click)="openAskQuestions(askQuestions)">
+                            <button data-title="Ask Question" *ngIf="userType!=='collegeconnect'" type="button" [disabled]="true" ngClass="btn btn-outline-light" (click)="openAskQuestions(askQuestions)">
                                 <i class="lxp-lifebuoy"></i>
                             </button>
                         </div>
