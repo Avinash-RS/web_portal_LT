@@ -478,6 +478,7 @@
       .durationCredits {
         flex-wrap: wrap;
         align-items: center;
+        margin-bottom: 13px;
         @media only screen and (min-width: 720px) {
           flex-wrap: nowrap;
         }
@@ -492,9 +493,15 @@
           font-weight: 400;
           color: #999999;
           line-height: normal;
+          b {
+           color: #666666;
+           font-weight: 400;
+          }
           em {
             display: inline-flex;
             margin-right: 5px;
+          }
+          &.by {
           }
           &.credits {
             margin-top: 0;

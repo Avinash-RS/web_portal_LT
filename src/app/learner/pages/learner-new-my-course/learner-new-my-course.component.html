@@ -257,12 +257,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="durationCredits d-flex justify-content-between"
-                                                [ngClass]="!item.isReadMore ? 'top' : 'zero'">
-                                                <span>
-                                                    <em class="lxp-Duration"></em> Duration: {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}
-                                                </span>
+                                            <div class="durationCredits d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
+                                                <span class="by">By: <b>Larsen & Toubro</b></span>
                                                 <span class="credits">Credits : {{item.credits!==null?item.credits:0}}</span>
+                                                <span>
+                                                    <em class="lxp-Duration"></em> 
+                                                    Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                </span>
                                             </div>
                                             <div class="actionItems d-flex justify-content-between">
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
@@ -353,12 +354,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="durationCredits d-flex justify-content-between"
-                                                [ngClass]="!item.isReadMore ? 'top' : 'zero'">
-                                                <span>
-                                                    <em class="lxp-Duration"></em> Duration: {{item.total_duration? item.total_duration : "1" + ""}} {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}
-                                                </span>
+                                            <div class="durationCredits d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
+                                                <span class="by">By: <b>Larsen & Toubro</b></span>
                                                 <span class="credits">Credits : {{item.credits!==null?item.credits:0}}</span>
+                                                <span>
+                                                    <em class="lxp-Duration"></em> 
+                                                    Duration: <b>{{item.total_duration? item.total_duration : "1" + ""}} {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                </span>
                                             </div>
                                             <div class="actionItems d-flex justify-content-between">
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
@@ -457,12 +459,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="durationCredits d-flex justify-content-between"
-                                                [ngClass]="!item.isReadMore ? 'top' : 'zero'">
-                                                <span>
-                                                    <em class="lxp-Duration"></em> Duration: {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}
-                                                </span>
+                                            <div class="durationCredits d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
+                                                <span class="by">By: <b>Larsen & Toubro</b></span>
                                                 <span class="credits">Credits : {{item.credits!==null?item.credits:0}}</span>
+                                                <span>
+                                                    <em class="lxp-Duration"></em> 
+                                                    Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                </span>
                                             </div>
                                             <div class="actionItems d-flex justify-content-between">
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
