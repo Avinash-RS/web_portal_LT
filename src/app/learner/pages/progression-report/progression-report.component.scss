@@ -71,7 +71,8 @@
             }
         }
         .card-content{
-            margin: 0 0 0 -2.3%;
+            // margin: 0 0 0 -2.3%;
+            margin: 0;
             flex-wrap: wrap;
             padding: 0.5em 0.6em;
             .card-container {
@@ -732,13 +733,13 @@
   .color-yellow {
     height: 2em;
     .mat-progress-bar-fill::after {
-      background-color: #ffd940 !important;
+      background-color: #FFA800 !important;
     }
   }
   .color-green {
     height: 2em;
     .mat-progress-bar-fill::after {
-      background-color: #03c88d !important;
+      background-color: #32CE6A !important;
     }
   }
 }
@@ -878,5 +879,11 @@
     .mat-progress-bar-fill::after {
       background-color: #ffa800 !important;
     }
+  }
+}
+
+::ng-deep .progression-report-contianer{
+  .mat-paginator {
+    background: #f2f2f2;
   }
 }
