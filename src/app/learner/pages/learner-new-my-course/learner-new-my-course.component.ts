@@ -114,6 +114,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   courseSkel: boolean = false;
   mode = 'determinate';
   bufferValue = 100;
+  dynamicTextChange: string = 'ongoing';
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
@@ -202,10 +203,13 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.courseDetailsList = [];
     let requestType = 'ongoing';
     if (this.selectedIndex === 0) {
+      this.dynamicTextChange = 'ongoing';
       requestType = 'ongoing';
     } else if (this.selectedIndex === 1) {
+      this.dynamicTextChange = 'completed';
       requestType = 'completed';
     } else if (this.selectedIndex === 2) {
+      this.dynamicTextChange = '';
       requestType = 'all';
     }
     let jobRoleId = this.jobroleCategoryId;
@@ -346,9 +350,17 @@ export class LearnerNewMyCourseComponent implements OnInit {
     // debugger
     let data = {
       courseId : course.course_id,
+      courseName: course.course_name
     }
-    localStorage.setItem('Courseid', course.course_id);
-    this.router.navigateByUrl('/Learner/progressionReport', { queryParams: { data } });
+    // localStorage.setItem('Courseid', course.course_id);
+    // this.router.navigate(['/Learner/progressionReport'], { queryParams: { data } });
+    this.router.navigate(['/Learner/progressionReport'], {
+      queryParams:
+      {
+        CourseId: btoa(course.course_id),
+        CourseName: btoa(course.course_name)
+      }
+    });
   }
 
   getLearnerActivity(selectedDate) {

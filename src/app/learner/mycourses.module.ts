@@ -53,6 +53,7 @@ import {ProgressionReportComponent} from './pages/progression-report/progression
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
+  
 }
 
 const routes: Routes = [
@@ -101,7 +102,7 @@ const routes: Routes = [
   {
     path: 'calendaractivity',
     component: CalendarActivityComponent,
-    data: { animation: 'calendaractivity' , title: 'Calendar Activity'}
+    data: { animation: 'calendaractivity' , title: 'Scheduled Activity'}
   },
   {
     path: 'progressionReport',
