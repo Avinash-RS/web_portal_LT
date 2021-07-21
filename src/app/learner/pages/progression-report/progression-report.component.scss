@@ -490,6 +490,7 @@
           @include md {
             position: relative;
             right: auto;
+            justify-content: flex-end;
           }
           span {
             display: flex;
@@ -501,13 +502,21 @@
             height: 20px;
             width: 20px;
             border-radius: 25px;
-            font-size: 0.6em;
-          }
-          .green {
-            background-color: #41d275;
-            color: #fff;
-            &::before {
+            &.green {
+              background-color: #41d275;
               color: #fff;
+              font-size: 0.6em;
+              &::before {
+                color: #fff;
+              }
+            }
+            &.grey {
+              font-size: 17px;
+            }
+            &.orange {
+              background-color: #FFA800;
+              color: #fff;
+              font-size: 0.6em;
             }
           }
         }
