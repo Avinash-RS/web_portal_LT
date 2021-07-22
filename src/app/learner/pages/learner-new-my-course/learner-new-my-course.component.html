@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         <div class="weekviewHead">
-                            <mwl-calendar-week-view (dayHeaderClicked)="getLearnerActivity($event.day.date)" [weekStartsOn]="1" [viewDate]="viewDate" [events]="events"></mwl-calendar-week-view>
+                            <mwl-calendar-week-view [selected]="selectedDate" (dayHeaderClicked)="getLearnerActivity($event.day.date)" [weekStartsOn]="1" [viewDate]="viewDate" [events]="events"></mwl-calendar-week-view>
                         </div>
                     </div>
                     <div>
@@ -122,9 +122,8 @@
                             <span class="white"><em class="lxp-Right"></em></span>
                         </div>
                         <div class="expand" (click)="expandtoggle()">
-                            <span>Expand</span> 
-                            <em *ngIf="expandcollapse" class="lxp-DownArrow"></em>
-                            <em *ngIf="!expandcollapse" class="lxp-Arrow"></em>
+                            <span *ngIf="expandcollapse">Expand <em class="lxp-DownArrow"></em></span>
+                            <span *ngIf="!expandcollapse">Collapse <em class="lxp-Arrow"></em></span>
                         </div>
                     </div>
                 </div>
@@ -212,7 +211,7 @@
                                         <mat-progress-bar [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
                                     </div>
                                     <div class="courses d-flex justify-content-start">
-                                        <figure class="d-flex align-items-center justify-content-center" (click)="gotoDesc(item)">
+                                        <figure class="d-flex align-items-start justify-content-center" (click)="gotoDesc(item)">
                                             <img [src]="item.course_img_url + blobKey" alt="" />
     
                                             <button class="d-flex align-items-center"><em [class]="item.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
@@ -242,6 +241,14 @@
                                                     </button>
                                                   </mat-menu>
                                             </div>
+                                            <div class="durationCredits d-flex justify-content-between">
+                                                <span class="by">By: <b>Larsen & Toubro</b></span>
+                                                <span class="credits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
+                                                <span>
+                                                    <em class="lxp-Duration"></em> 
+                                                    Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                </span>
+                                            </div>
                                             <div class="showLessContent">
                                                 <button class="readMoreLess" *ngIf="info.length > 370" type="button"
                                                     (click)="item.isReadMore = !item.isReadMore">
@@ -250,22 +257,14 @@
                                                 <div [ngClass]="!item.isReadMore ? '' : 'showText'">
                                                     <p>{{item.course_description}}</p>
                                                     <div class="type d-flex justify-content-start">
-                                                        <span>Self paced learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
+                                                        <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
                                                         <span>Instructor led session - upto  {{item.image_instructor_lead_session_time!==""?item.image_instructor_lead_session_time:0}}</span>
                                                         <span>Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
                                                         <span>Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="durationCredits d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
-                                                <span class="by">By: <b>Larsen & Toubro</b></span>
-                                                <span class="credits">Credits : {{item.credits!==null?item.credits:0}}</span>
-                                                <span>
-                                                    <em class="lxp-Duration"></em> 
-                                                    Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
-                                                </span>
-                                            </div>
-                                            <div class="actionItems d-flex justify-content-between">
+                                            <div class="actionItems d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
@@ -340,6 +339,14 @@
                                                     </button>
                                                   </mat-menu>
                                             </div>
+                                            <div class="durationCredits d-flex justify-content-between">
+                                                <span class="by">By: <b>Larsen & Toubro</b></span>
+                                                <span class="credits">Credits: {{item.credits!==null?item.credits:0}}</span>
+                                                <span>
+                                                    <em class="lxp-Duration"></em> 
+                                                    Duration: <b>{{item.total_duration? item.total_duration : "1" + ""}} {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                </span>
+                                            </div>
                                             <div class="showLessContent">
                                                 <button class="readMoreLess" *ngIf="info.length > 370" type="button"
                                                     (click)="item.isReadMore = !item.isReadMore">
@@ -348,22 +355,14 @@
                                                 <div [ngClass]="!item.isReadMore ? '' : 'showText'">
                                                     <p>{{item.course_description}}</p>
                                                     <div class="type d-flex justify-content-start">
-                                                        <span>Self paced learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
+                                                        <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
                                                         <span>Instructor led session - upto  {{item.image_instructor_lead_session_time!==""?item.image_instructor_lead_session_time:0}}</span>
                                                         <span>Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
                                                         <span>Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="durationCredits d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
-                                                <span class="by">By: <b>Larsen & Toubro</b></span>
-                                                <span class="credits">Credits : {{item.credits!==null?item.credits:0}}</span>
-                                                <span>
-                                                    <em class="lxp-Duration"></em> 
-                                                    Duration: <b>{{item.total_duration? item.total_duration : "1" + ""}} {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
-                                                </span>
-                                            </div>
-                                            <div class="actionItems d-flex justify-content-between">
+                                            <div class="actionItems d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
@@ -437,6 +436,14 @@
                                                     </button>
                                                   </mat-menu>
                                             </div>
+                                            <div class="durationCredits d-flex justify-content-between">
+                                                <span class="by">By: <b>Larsen & Toubro</b></span>
+                                                <span class="credits">Credits: {{item.credits!==null?item.credits:0}}</span>
+                                                <span>
+                                                    <em class="lxp-Duration"></em> 
+                                                    Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                </span>
+                                            </div>
                                             <div class="showLessContent">
                                                 <button class="readMoreLess" *ngIf="info.length > 370" type="button"
                                                     (click)="item.isReadMore = !item.isReadMore">
@@ -445,22 +452,14 @@
                                                 <div [ngClass]="!item.isReadMore ? '' : 'showText'">
                                                     <p>{{item.course_description}}</p>
                                                     <div class="type d-flex justify-content-start">
-                                                        <span>Self paced learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
+                                                        <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
                                                         <span>Instructor led session - upto  {{item.image_instructor_lead_session_time!==""?item.image_instructor_lead_session_time:0}}</span>
                                                         <span>Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
                                                         <span>Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="durationCredits d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
-                                                <span class="by">By: <b>Larsen & Toubro</b></span>
-                                                <span class="credits">Credits : {{item.credits!==null?item.credits:0}}</span>
-                                                <span>
-                                                    <em class="lxp-Duration"></em> 
-                                                    Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
-                                                </span>
-                                            </div>
-                                            <div class="actionItems d-flex justify-content-between">
+                                            <div class="actionItems d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
@@ -494,7 +493,7 @@
                             </div>
                         </mat-tab>
                     </mat-tab-group>
-<div class="spacer" *ngIf="!courseDetailsList.length"></div>
+                    <div class="spacer" *ngIf="!courseDetailsList.length"></div>
                     <!-- InProgressModule -->
                     <div class="inprogressModule" *ngIf="courseDetailsList.length">
                         <h3>Inprogress Modules</h3>
