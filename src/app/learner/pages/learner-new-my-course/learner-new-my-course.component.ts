@@ -246,8 +246,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
         });
         this.courseDetailsList.push(...this.enrolledCourses);
         this.courseDetailsList.forEach((value)=>{
-            value.weekPercentage = (value.week_completed_count !== null ?
-              value.week_completed_count : 0) + '/' + (value.week_total_count !== null ? value.week_total_count : 0);
+            value.weekPercentage = (value.week_completed_total_count !== null ?
+              value.week_completed_total_count : 0) + '/' + (value.week_total_count !== null ? value.week_total_count : 0);
           if(value.self_paced_learning_progression){
             value.self_paced_learning_progression = parseInt(value.self_paced_learning_progression)
             if(value.self_paced_learning_progression <= 40) {
@@ -259,6 +259,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
             }
           }
         })
+        console.log( this.courseDetailsList)
         this.courseSkel = true
 
       });
