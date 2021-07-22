@@ -323,7 +323,7 @@ export class CoursedetailsComponent implements OnInit {
             result.data.childData[result.data.week-1].childData[result.data.resumeContent].children[result.data.resumeSubContent]?.status !== this.topicPageStatus) {
             this.currentPage = Number(result.data.resumeContent);
             this.topiccurrentPage = Number(result.data.resumeSubContent);
-            // this.weekHolder = result.data.week - 1;
+            this.weekHolder = result.data.week - 1;
             this.topicPageStatus = result.data.childData[this.weekHolder].childData[this.currentPage].children[this.topiccurrentPage]?.status
             this.topicPageStatus = this.topicPageStatus?this.topicPageStatus:"process";
             this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
@@ -336,13 +336,16 @@ export class CoursedetailsComponent implements OnInit {
               this.isNextEnable = true;
             }
           }
-          // if ((this.moduleHolder !== 0) || (this.nextPrevHolder !== 0)) {
+          // if ((this.weekHolder !==0 && this.moduleHolder !== 0) || (this.nextPrevHolder !== 0)) {
           //   this.isprevEnable = false;
           // }
-          // if (((this.moduleHolder) !== this.scromModuleData.length - 1)
-          //   || ((this.nextPrevHolder) !== this.scromModuleData[this.scromModuleData.length - 1].children.length - 1)) {
+          // if ((((this.weekHolder) !== this.scromModuleData.length - 1)||(this.moduleHolder) !== this.scromModuleData[this.weekHolder-1].childData.length - 1)
+          //   || ((this.nextPrevHolder) !== this.scromModuleData[this.weekHolder-1].childData[this.scromModuleData[this.weekHolder-1].length - 1].children.length - 1)) {
           //   this.isNextEnable = false;
           // }
+
+          this.checkLastFirstIndexReached()
+           
           this.scromModuleData.forEach(childData => {
             if (childData && childData.children) {
               childData.children.forEach(subChild => {
@@ -369,6 +372,25 @@ export class CoursedetailsComponent implements OnInit {
 
   toggleDisplayDiv() {
     this.isShowDiv = !this.isShowDiv;
+  }
+  checkLastFirstIndexReached(){
+    //check 1stweek 1stmodule 1stopic
+    if(this.weekHolder == 0 && this.moduleHolder==0 && this.nextPrevHolder==0){
+      this.isprevEnable = true;
+    }else{
+      this.isprevEnable = false;
+    }
+    let lastweekIndex  = this.scromModuleData.length - 1
+    let lastweekmoduleIndex = this.scromModuleData[lastweekIndex].childData.length -1
+    let lastweekmoduletopicIndex = this.scromModuleData[lastweekIndex].childData[lastweekmoduleIndex].children.length - 1;
+    //check last week,module,topic
+    if(
+      (this.weekHolder == lastweekIndex) && (this.moduleHolder == lastweekmoduleIndex) && (this.nextPrevHolder == lastweekmoduletopicIndex)
+    ){
+      this.isNextEnable = true;
+    }else{
+      this.isNextEnable = false;
+    }
   }
 
   ngOnDestroy() {
@@ -433,6 +455,7 @@ export class CoursedetailsComponent implements OnInit {
   topicNext() {
     console.log(this.scromModuleData)
     this.isNextEnable = true;
+    this.isprevEnable = true
     this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
     //WEEK NAVIGATION
     if (this.weekHolder < this.weekLength) {
@@ -490,7 +513,8 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   topicPrve() {
-    this.isprevEnable = true;
+    this.isNextEnable = true;
+    this.isprevEnable = true
     this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
     this.moduleLenth = this.scromModuleData[this.weekHolder].childData.length;
     if (this.currentPage < (this.moduleLenth)) {
@@ -508,7 +532,7 @@ export class CoursedetailsComponent implements OnInit {
         if (this.currentPage==0 && this.topiccurrentPage == 0) {
           this.weekHolder = this.weekHolder - 1;
           this.moduleHolder = this.scromModuleData[this.weekHolder].childData.length - 1;
-          this.currentPage = this.moduleHolder;
+          this.currentPage = Number(this.moduleHolder);
           this.topiccurrentPage = this.scromModuleData[this.weekHolder].childData[this.currentPage].children.length - 1;
           this.nextPrevHolder = this.topiccurrentPage;
         }else{
@@ -548,7 +572,7 @@ export class CoursedetailsComponent implements OnInit {
       this.weekLength = this.scromApiData.childData.length;
       // this.moduleLenth = this.scromApiData?.childData.length;
       this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : Number(this.scromApiData.topicIndex);
-      this.moduleHolder = this.currentPage = this.scromApiData.moduleIndex == null ? 0 : this.scromApiData.moduleIndex;
+      this.moduleHolder = this.currentPage = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
       this.weekHolder = this.scromApiData.week - 1;
       // this.scromModuleData[this.moduleHolder].expanded = true;
       this.oldIdx = this.moduleHolder;
@@ -582,6 +606,9 @@ export class CoursedetailsComponent implements OnInit {
           });
         }
       });
+
+      this.checkLastFirstIndexReached()
+
     });
   }
   playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, weekIndex, topindex, moduleIdx) {
@@ -594,16 +621,18 @@ export class CoursedetailsComponent implements OnInit {
     const encodedTopicName = encodeURIComponent(topicName);
     this.nextPrevHolder = topindex;
     this.topiccurrentPage = this.nextPrevHolder
-    // this.moduleHolder = Number(moduleIdx);
+    this.moduleHolder = Number(moduleIdx);
     this.currentPage = Number(moduleIdx);
     this.isprevEnable = true;
     this.isNextEnable = true;
-    this.topicInfo = this.scromApiData.childData[weekIndex].childData[this.moduleHolder].children[this.nextPrevHolder]
+    this.topicInfo = this.scromApiData.childData[weekIndex].childData[moduleIdx].children[topindex]
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
       (environment.scormUrl + '/scormPlayer.html?contentID=' +
         this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
         + '&module_status=' + this.moduleSatusCheck
         + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (this.weekHolder + 1) + '&token=' + this.user_token);
+
+    this.checkLastFirstIndexReached()
   }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {
