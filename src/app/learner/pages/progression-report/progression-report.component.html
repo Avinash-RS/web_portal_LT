@@ -282,7 +282,7 @@
                   </div>
                 </mat-card>
               </div>
-              <mat-paginator #secondPaginator [pageSizeOptions]="[6]"></mat-paginator>
+              <mat-paginator *ngIf="!emptyProject" #secondPaginator [pageSizeOptions]="[6]"></mat-paginator>
               <div class="noCard" *ngIf="emptyProject">
                 <figure>
                   <img src="/assets/images/noproject.svg" alt="assignment">
@@ -342,7 +342,7 @@
                   </div>
                 </mat-card>
               </div>
-              <mat-paginator #thirdPaginator [pageSizeOptions]="[6]"></mat-paginator>
+              <mat-paginator *ngIf="!emptyPerform" #thirdPaginator [pageSizeOptions]="[6]"></mat-paginator>
               <div class="noCard" *ngIf="emptyPerform">
                 <figure>
                   <img src="/assets/images/noperform.svg" alt="assignment">
