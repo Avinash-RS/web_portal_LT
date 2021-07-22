@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { Observable } from 'rxjs';
+
 declare const Chart;
 
 @Component({
@@ -13,6 +16,12 @@ declare const Chart;
   styleUrls: ['./progression-report.component.scss']
 })
 export class ProgressionReportComponent implements OnInit {
+  @ViewChild('firstPaginator') firstPaginator: MatPaginator;
+  @ViewChild('secondPaginator') secondPaginator: MatPaginator;
+  @ViewChild('thirdPaginator') thirdPaginator: MatPaginator;
+  assignmentPage: Observable<any>;
+  performPage: Observable<any>;
+  projectPage: Observable<any>;
   mode = 'determinate';
   bufferValue = 100;
 
@@ -57,17 +66,20 @@ export class ProgressionReportComponent implements OnInit {
   currentTab: any;
   UserDetails: any;
   userId: any;
-  course_id: any;
-  pagination = true;
+  courseId: any;
+  courseName: any;
+  pagination = false;
   emptyAssignment = false;
-  page = 1;
-  noofItems = 6;
+  emptyProject = false;
+  emptyPerform = false;
+  page = 0;
+  noofItems = 0;
   assignmentContent: any;
   showSkeleton = false;
   showProgReport: boolean = false;
   projectContent: any;
   performContent: any;
-  performContentData: any[];
+  performContentData: any;
   pieData: any;
   doughnutChartData;
   constructor(
@@ -78,25 +90,20 @@ export class ProgressionReportComponent implements OnInit {
     // const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().query &&
     //   this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
     this.activeRoute.queryParams.subscribe(res => {
-      console.log(res )
+      if(res){
+        this.courseId = atob(res.CourseId)
+        this.courseName = atob(res.CourseName)        
+      }
     });
-
-    this.course_id = localStorage.getItem('Courseid');
-    // console.log(detail, 'asdfafasfasfd');
+    this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
+    this.userId = this.UserDetails.user_id;
   }
 
   ngOnInit() {
-
-    this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null;
-    this.course_id = localStorage.getItem('Courseid');
-    this.userId = this.UserDetails.user_id;
+    this.getprogression();
+    this.getAssignmentmoduleData();
     this.getPieChartData()
     this.getDoughnutChartData();
-    this.getprogression()
-    this.getAssignmentmoduleData();
-    setTimeout(() => {
-      this.createBarChart();
-    }, 1000);
   }
 
   getPieChartData(){
@@ -113,8 +120,8 @@ export class ProgressionReportComponent implements OnInit {
               "liveclassroom_completed": 0
             };
     this.pieData = defaultData;
-    this.learnerService.getProgressionActivitydata(this.userId, this.course_id).subscribe((data:any)=>{
-      if(data.data.getProgressionActivitydata.data.success){
+    this.learnerService.getProgressionActivitydata(this.userId, this.courseId).subscribe((data:any)=>{
+      if(data?.data?.getProgressionActivitydata?.success){
      this.pieData = data.data.getProgressionActivitydata.data[0]
       }
     })
@@ -135,10 +142,14 @@ export class ProgressionReportComponent implements OnInit {
   //Assignment Module
   getAssignmentmoduleData() {
     this.showSkeleton = true;
-    this.learnerService.getAssignmentmoduleData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
+    this.learnerService.getAssignmentmoduleData(this.userId, this.courseId, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
       if (data.data.getAssignmentmoduleData.success) {
-        this.assignmentContent = data?.data?.getAssignmentmoduleData?.data;
-        if (this.assignmentContent?.length > 0) {
+        this.assignmentContent = new MatTableDataSource(data?.data?.getAssignmentmoduleData?.data);
+        setTimeout(()=>{
+          this.assignmentContent.paginator = this.firstPaginator;
+          this.assignmentPage = this.assignmentContent.connect();
+        },1000)
+        if (this.assignmentContent?.data?.length > 0) {
           this.emptyAssignment = false;
         } else {
           this.emptyAssignment = true
@@ -151,13 +162,17 @@ export class ProgressionReportComponent implements OnInit {
   //Project Module
   getprojectActivityData() {
     this.showSkeleton = true;
-    this.learnerService.getprojectActivityData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
+    this.learnerService.getprojectActivityData(this.userId, this.courseId, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
       if (data.data.getprojectActivityData.success) {
-        this.projectContent = data?.data?.getprojectActivityData?.data;
-        if (this.projectContent?.length > 0) {
-          this.emptyAssignment = true;
+        this.projectContent = new MatTableDataSource(data?.data?.getprojectActivityData?.data);
+        setTimeout(()=>{
+          this.projectContent.paginator = this.secondPaginator;
+          this.projectPage = this.projectContent.connect();
+        },1000)
+        if (this.projectContent?.data?.length > 0) {
+          this.emptyProject = false;
         } else {
-          this.emptyAssignment = false
+          this.emptyProject = true
         }
       }
       this.showSkeleton = false;
@@ -167,7 +182,7 @@ export class ProgressionReportComponent implements OnInit {
   //Perform Module
   getperformActivityData() {
     this.showSkeleton = true;
-    this.learnerService.getperformActivityData(this.userId, this.course_id, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
+    this.learnerService.getperformActivityData(this.userId, this.courseId, this.pagination, this.page, this.noofItems).subscribe((data: any) => {
       if (data.data.getperformActivityData.success) {
         this.performContent = data?.data?.getperformActivityData?.data;
         var performIteration = [];
@@ -180,12 +195,15 @@ export class ProgressionReportComponent implements OnInit {
           });
           performIteration.push(...value.performActivity.iterationDetails)
         })
-        this.performContentData = performIteration
-        console.log(this.performContentData);
-        if (this.performContent.length > 0) {
-          this.emptyAssignment = true;
+        this.performContentData = new MatTableDataSource(performIteration)
+        setTimeout(()=>{
+          this.performContentData.paginator = this.thirdPaginator;
+          this.performPage = this.performContentData.connect();
+        },1000)
+        if (this.performContentData?.data.length > 0) {
+          this.emptyPerform = false;
         } else {
-          this.emptyAssignment = false
+          this.emptyPerform = true;
         }
       }
       this.showSkeleton = false;
@@ -212,7 +230,7 @@ export class ProgressionReportComponent implements OnInit {
   //get progression table data
   getprogression() {
     this.showProgReport = false
-    this.learnerService.getProgressionData(this.userId, this.course_id).subscribe((data: any) => {
+    this.learnerService.getProgressionData(this.userId, this.courseId).subscribe((data: any) => {
       this.apidata = data.data.getCourseReportByUserid.data.module;
       this.showProgReport = true;
     });
@@ -227,7 +245,7 @@ export class ProgressionReportComponent implements OnInit {
   }
 
   getDoughnutChartData(){
-    this.learnerService.getSelfLearningdata('module',this.userId, this.course_id).subscribe((data:any)=>{
+    this.learnerService.getSelfLearningdata('module',this.userId, this.courseId).subscribe((data:any)=>{
       console.log(data)
       if(data?.data?.selfLearningdatabyUserId?.success) {
         this.doughnutChartData = data?.data?.selfLearningdatabyUserId.data[0];

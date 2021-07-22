@@ -81,13 +81,16 @@ export class CalendarActivityComponent implements OnInit {
   monthView;
   showSkeleton = true;
   skeletonPart = [1,2]
+  userDetailes:any;
   constructor(public learnerService: LearnerServicesService,private gs: GlobalServiceService,private router: Router) { }
 
   ngOnInit() {
+    this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.getCourseData();
     const topicStart = new Date();
     this.getCalendarCount(topicStart);
     this.getLearnerActivity('month',topicStart);
+    
   }
   
   getCourseData(){

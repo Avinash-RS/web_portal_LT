@@ -74,3 +74,34 @@ $label: #5c6873;
 $lxp-light-grey:#b5acac;
 // #ffcc00;
 
+//Screen Size definitions
+$screen-sm-min: 576px;
+$screen-md-min: 768px; // Small tablets (portrait view)
+$screen-lg-min: 1024px; // Tablets and small desktops
+$screen-xl-min: 1200px; // Large tablets and desktops
+
+// Small devices
+@mixin sm {
+    @media (min-width: #{$screen-sm-min}) {
+        @content;
+    }
+}
+// Medium devices
+@mixin md {
+    @media (min-width: #{$screen-md-min}) {
+        @content;
+    }
+}
+// Large devices
+@mixin lg {
+    @media (min-width: #{$screen-lg-min}) {
+        @content;
+    }
+}
+// Extra large devices
+@mixin xl {
+    @media (min-width: #{$screen-xl-min}) {
+        @content;
+    }
+}
+

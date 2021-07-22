@@ -13,7 +13,7 @@
     }
 }
 .activiySchedule {
-    background-color: #f0f0f0;
+    background-color: #f2f2f2;
     height: 100%;
     padding: 1.8em 1.5em;
     width: 100%;
@@ -236,6 +236,7 @@
         .statusarea {
             width: 9%;
             text-align: right;
+            order: 4;
             @media screen and (min-width:1140px) {
                 width: 5%;
             }
@@ -270,7 +271,7 @@
                 font-size: 1.2em !important;
                 color: red !important;
             }
-            .timer{
+            .timer {
                 font-size: 1.2em !important;
                 &::before {
                     color: #FFA800 !important;
@@ -347,6 +348,18 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        .prevNext {
+            span {
+                color: #666666;
+                font-size: 10px;
+                display: inline-block;
+                cursor: pointer;
+                line-height: normal;
+                &:first-child {
+                    margin-right: 10px;
+                }
+            }
+        }
     }
     .currentMonth {
         font-weight: 700;

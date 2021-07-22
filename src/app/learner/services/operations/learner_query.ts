@@ -1450,6 +1450,7 @@ export const playerModuleAndTopic = gql`
       course_id
       moduleIndex
       topicIndex
+      week
       childData{
         week
         childData{

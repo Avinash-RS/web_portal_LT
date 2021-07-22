@@ -114,6 +114,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   courseSkel: boolean = false;
   mode = 'determinate';
   bufferValue = 100;
+  dynamicTextChange: string = 'ongoing';
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
@@ -128,10 +129,10 @@ export class LearnerNewMyCourseComponent implements OnInit {
 
   ngOnInit() {
     this.innerWidth = window.innerWidth;
-    let showAppBanner = localStorage.getItem('appBanner');
-    if (!showAppBanner) {
-      this.openInfoPopup();
-    }
+    // let showAppBanner = localStorage.getItem('appBanner');
+    // if (!showAppBanner) {
+    //   this.openInfoPopup();
+    // }
     if (this.userDetailes) {
       this.insidengOnInit();
     }
@@ -202,10 +203,13 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.courseDetailsList = [];
     let requestType = 'ongoing';
     if (this.selectedIndex === 0) {
+      this.dynamicTextChange = 'ongoing';
       requestType = 'ongoing';
     } else if (this.selectedIndex === 1) {
+      this.dynamicTextChange = 'completed';
       requestType = 'completed';
     } else if (this.selectedIndex === 2) {
+      this.dynamicTextChange = '';
       requestType = 'all';
     }
     let jobRoleId = this.jobroleCategoryId;
@@ -242,6 +246,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
         });
         this.courseDetailsList.push(...this.enrolledCourses);
         this.courseDetailsList.forEach((value)=>{
+            value.weekPercentage = (value.week_completed_count !== null ?
+              value.week_completed_count : 0) + '/' + (value.week_total_count !== null ? value.week_total_count : 0);
           if(value.self_paced_learning_progression){
             value.self_paced_learning_progression = parseInt(value.self_paced_learning_progression)
             if(value.self_paced_learning_progression <= 40) {
@@ -344,9 +350,17 @@ export class LearnerNewMyCourseComponent implements OnInit {
     // debugger
     let data = {
       courseId : course.course_id,
+      courseName: course.course_name
     }
-    localStorage.setItem('Courseid', course.course_id);
-    this.router.navigateByUrl('/Learner/progressionReport', { queryParams: { data } });
+    // localStorage.setItem('Courseid', course.course_id);
+    // this.router.navigate(['/Learner/progressionReport'], { queryParams: { data } });
+    this.router.navigate(['/Learner/progressionReport'], {
+      queryParams:
+      {
+        CourseId: btoa(course.course_id),
+        CourseName: btoa(course.course_name)
+      }
+    });
   }
 
   getLearnerActivity(selectedDate) {
