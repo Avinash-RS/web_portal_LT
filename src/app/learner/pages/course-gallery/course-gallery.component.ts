@@ -61,7 +61,7 @@ export class CourseGalleryComponent implements OnInit {
             data2.allContent = [...data2.image,...data2.video]
             data2.allContent.push({
               'link' : data2.link,
-              'type' : 'kc',
+              'type' : 'HTML',
               'fileName' : data2.topicname
              })
           });
