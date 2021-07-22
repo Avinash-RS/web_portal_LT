@@ -3,12 +3,12 @@
 .sideNavWrapper {
   // display: flex;
   position: relative;
-  min-height: calc(100vh - 106px);
+  // stickyheight: calc(100vh - 106px);
 }
 ::ng-deep.sideNavWrapper {
   .mat-drawer-container {
     background-color: #f2f2f2;
-    height: calc(100vh - 106px);
+    // stickyheight: calc(100vh - 106px);
   }
   .mat-drawer-backdrop.mat-drawer-shown {
     background-color: transparent;
@@ -25,6 +25,9 @@
       z-index: 9;
     }
   }
+}
+.spacer{
+  height: 42.6vh ​!important;
 }
 .sideNavContainer {
   width: 100%;
