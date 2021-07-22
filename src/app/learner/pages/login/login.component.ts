@@ -7,6 +7,9 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import * as CryptoJS from 'crypto-js';
+import { RecaptchaErrorParameters } from "ng-recaptcha";
+import { environment } from '../../../../environments/environment';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -24,8 +27,16 @@ export class LoginComponent implements OnInit {
   infoClose = true;
   loader = false;
   username = new FormControl('', [Validators.required, Validators.email]);
-  signinPage = true;
+  signInPage = true;
   forgotPage = false;
+  signUpPage = false;
+  registerForm: FormGroup;
+  fullname: any;
+  resolvedCaptcha: any;
+  registerSuccess = false;
+  titleData = [];
+  siteKey: any = environment.captachaSiteKey;
+
   getErrorMessage() {
     return this.username.hasError('required') ? 'Email is required' :
         this.username.hasError('email') ? 'Please enter a valid email' :
@@ -52,12 +63,12 @@ export class LoginComponent implements OnInit {
   }
 
   viewChange(){
-    this.signinPage = false;
+    this.signInPage = false;
     this.forgotPage = true;
   }
   backToSignin(){
     this.forgotPage = false;
-    this.signinPage = true;
+    this.signInPage = true;
     this.username.reset();
   }
   forgotPassword() {
@@ -68,7 +79,7 @@ export class LoginComponent implements OnInit {
           if (data.data.get_forgot_username_mobile_email.success === 'true') {
             this.toastr.success(data.data.get_forgot_username_mobile_email.message, null);
             this.loader = false;
-            this.signinPage = false;
+            this.signInPage = false;
             this.forgotPage = true;
             this.username.reset();
           } else {
@@ -181,4 +192,87 @@ export class LoginComponent implements OnInit {
       });
     }
   
+    // Go to signin 
+    viewSignin(){
+      this.signInPage = false;
+      this.signUpPage = true;
+      this.gettitleData();
+      this.registerForm = this.formBuilder.group({
+        recaptchaReactive: [null, [Validators.required]],
+        title: ['', [Validators.required]],
+        fullname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50),
+          Validators.pattern(/^[-a-zA-Z-() ]+(\s+[-a-zA-Z-()]+)*$/)]],
+          mobile: ['', [ Validators.minLength(10),  Validators.maxLength(10),
+            Validators.pattern(/^[6-9][0-9]{9}$/)]],
+        email: ['', [ Validators.minLength(6),
+          Validators.maxLength(64), Validators.pattern(/^([A-Za-z]|[0-9])[A-Za-z0-9._-]+[A-Za-z0-9]@((?:[-a-z0-9]+\.)+[a-z]{2,})$/)]],
+        termsandconditions: new FormControl('', [])
+      }, {
+      });
+    }
+    resolved(captchaResponse: string) {
+      this.resolvedCaptcha = captchaResponse;
+    }
+
+    onError(errorDetails: RecaptchaErrorParameters): void {
+    }
+
+  // get f() { return this.registerForm.controls; }
+
+  Submit() {
+      localStorage.removeItem('UserDetails');
+      localStorage.removeItem('role');
+      localStorage.removeItem('token');
+      localStorage.removeItem('adminDetails');
+      this.loader = true;
+      this.fullname = this.registerForm.value.fullname.trimLeft();
+      // this.registerForm.value.termsandconditions
+      var encryptedmail = CryptoJS.AES.encrypt(this.registerForm.value.email.toLowerCase(), this.secretKey.trim()).toString();
+      var encryptedname = CryptoJS.AES.encrypt(this.fullname, this.secretKey.trim()).toString();
+      var encryptedmobile = CryptoJS.AES.encrypt(this.registerForm.value.mobile, this.secretKey.trim()).toString();
+      this.service.user_registration(encryptedmail, encryptedname,
+        encryptedmobile ?  encryptedmobile : '' ,
+       this.registerForm.value.title , true ).subscribe((data: any) => {
+      this.registerForm.reset();
+      this.registerForm.setErrors(null); // could be removed
+      this.registerForm.updateValueAndValidity();
+      if (data.data.user_registration) {
+        if (data.data.user_registration.success === 'true') {
+          this.registerSuccess = true;
+          this.toastr.success(data.data.user_registration.message, null);
+          this.loader = false;
+          this.registerForm.setErrors(null);
+          this.signUpPage = false;
+          this.signInPage = true;
+          this.registerForm.reset();
+        } else {
+          this.toastr.error(data.data.user_registration.message, null);
+          this.loader = false;
+          this.registerSuccess = false;
+        }
+       } else {
+        this.toastr.warning('Please try after sometime', null);
+       }
+      });
+  }
+  register() {
+    this.router.navigateByUrl('/Learner/login');
+  }
+  onSubmit() {
+    
+    if (this.registerForm.valid) {
+      this.Submit();
+    }
+  }
+
+  gettitleData() {
+    this.service.getRegisterTitle().subscribe((data: any) => {
+    this.titleData = data.data.user_mstr_data.data;
+    });
+  }
+  backToIn(){
+    this.signUpPage = false;
+    this.signInPage = true;
+    this.registerForm.reset();
+  }
 }

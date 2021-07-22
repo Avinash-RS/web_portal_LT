@@ -26,7 +26,7 @@
         <figure class="logo">
           <img alt="" src="assets/learner/EduTech_Logo.svg">
         </figure>
-        <div class="signIn" *ngIf="signinPage">
+        <div class="signIn" *ngIf="signInPage">
           <h1>Welcome</h1>
           <form [formGroup]="loginForm">
             <div>
@@ -62,7 +62,7 @@
             </div>
 
             <div class="gradientBtn">
-              <button id="login" mat-raised-button (click)="login()">
+              <button id="login" mat-raised-button (click)="login()" [disabled]="!loginForm.valid">
                 <span *ngIf="!loader">{{'SIGN IN' | translate}}</span>
                 <div *ngIf="loader" class="snippet" data-title=".dot-falling">
                   <div class="stage">
@@ -71,7 +71,7 @@
                 </div></button>
             </div>
             <div class="dontHaveAccount">
-              <span>Don't have account yet? <a [routerLink]="['/Learner/register']"> {{'Sign-up' | translate }}</a></span>
+              <span>Don't have account yet? <a class="signup" (click)="viewSignin()"> {{'Sign-up' | translate }}</a></span>
             </div>
           </form>
         </div>
@@ -87,7 +87,7 @@
             </mat-form-field>
           </div>
           <div class="gradientBtn">
-              <button id="login" mat-raised-button (click)="forgotPassword()">
+              <button id="login" mat-raised-button [disabled]="!username.valid" (click)="forgotPassword()">
                 <span *ngIf="!loader">{{'SUBMIT' | translate}}</span>
                 <div *ngIf="loader" class="snippet" data-title=".dot-falling">
                   <div class="stage">
@@ -98,6 +98,88 @@
             <mat-label>  
               <div class="goBack" (click)="backToSignin(); ">{{'Go back to sign in'  | translate}}</div>
             </mat-label>
+         </div>
+         <div class="signUp" *ngIf="signUpPage">
+          <h1>Create an account</h1>
+          <form class="animated animatedFadeInUp fadeInUp" [formGroup]="registerForm" autocomplete="off">
+            <mat-form-field appearance="outline">
+              <mat-label class="label-color">{{'Title' | translate}}</mat-label>
+              <mat-select formControlName="title" required>
+                <mat-option *ngFor="let value of titleData" [value]="value._id" >
+                  {{value.title}}
+                </mat-option>
+              </mat-select>
+              <i class="icon-color lxp-User" matPrefix></i>
+              <mat-error class="error" *ngIf="registerForm.get('title').hasError('required') && !registerSuccess">Title is required </mat-error>
+            </mat-form-field>
+            <mat-form-field  appearance="outline">
+                <mat-label class="label-color">{{'Full name' | translate}}</mat-label>
+                <input matInput id="fullname"  #fullname [placeholder]="'Enter the full name' | translate"  formControlName="fullname" 
+                  maxlength="50" required>
+                <i class="icon-color lxp-User" matPrefix></i>
+
+                <mat-error class="error"  *ngIf="registerForm.get('fullname').hasError('required') && !registerSuccess">
+                    {{'Full name is required' | translate}}
+                  </mat-error>
+                <mat-error class="error" *ngIf="registerForm.get('fullname').hasError('minlength')">
+                    {{'Full name should be atleast 3 characters long' | translate}}
+                  </mat-error>
+              
+                  <mat-error class="error" *ngIf="registerForm.get('fullname').hasError('maxlength')">
+                    {{'Full name can be atmax 50 characters long' | translate}}
+                  </mat-error>
+              
+                  <mat-error class="error" *ngIf="registerForm.get('fullname').hasError('pattern')">
+                    {{'Full name is invalid' | translate}}
+                  </mat-error>
+              </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label class="label-color">{{'Email' | translate}}</mat-label>
+              <input matInput  id="email" #email placeholder="Enter the email"  formControlName="email" maxlength="64"
+              required>
+              <i class="icon-color lxp-MailOutline" matPrefix></i>
+              <mat-error class="error" *ngIf="registerForm.get('email').hasError('required') && !registerSuccess">{{'Email is required' | translate}}</mat-error>
+
+              <mat-error class="error" *ngIf="registerForm.get('email').hasError('pattern')">{{'Please enter a valid email address' | translate}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label class="label-color">{{'Mobile number' | translate}}</mat-label>
+              <input matInput  [placeholder]="'Enter mobile number without country code'" minlength="10" pattern="[1-9]{1}[0-9]{9}"
+               mask="0000000000"  maxlength="10"
+               formControlName="mobile">
+                <i class="icon-color lxp-Phone" matPrefix></i>
+              <mat-error class="error"  *ngIf="registerForm.get('mobile').hasError('minlength')">
+                {{'Mobile number must be 10 digits' | translate }}
+              </mat-error>
+           
+              <mat-error class="error errorInvalid" *ngIf="registerForm.get('mobile').hasError('pattern')">
+                {{'Mobile number is invalid' | translate }}
+              </mat-error>
+            </mat-form-field>
+            <div class="d-flex justify-content-center mt-1">
+            <re-captcha formControlName="recaptchaReactive" (resolved)="resolved($event)" (error)="onError($event)" errorMode="handled" [siteKey]="siteKey">
+            </re-captcha>
+            </div>
+            <div class="">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="alert1 dontHaveAccount"> <strong>{{'Note' | translate}}</strong> {{': Full name will be used in your certificates' | translate }}</div>
+                    </div>
+                </div>
+                <div class="gradientBtn">
+                  <button id="login" mat-raised-button (click)="Submit()" [disabled]="!registerForm.valid">
+                    <span *ngIf="!loader">{{'SIGN UP' | translate}}</span>
+                    <div *ngIf="loader" class="snippet" data-title=".dot-falling">
+                      <div class="stage">
+                        <div class="dot-falling"></div>
+                      </div>
+                    </div></button>
+                </div>
+                <div class="dontHaveAccount">
+                  <span>Already have an account? <a class="signup" (click)="backToIn()"> {{'Sign in'}}</a></span>
+                </div>
+            </div>
+    </form>
          </div>
        <!-- <div class="signUpSection"></div> -->
 

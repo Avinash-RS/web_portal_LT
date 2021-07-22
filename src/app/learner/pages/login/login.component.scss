@@ -136,7 +136,7 @@
     }
   }
   //SignIn
-  .signIn,.forgotPassword {
+  .signIn,.forgotPassword,.signUp {
     width: 100%;
     .goBack{
       display: flex;
@@ -147,6 +147,13 @@
     .goBack:hover{
       color: #C02222;
       text-decoration: underline;
+    }
+    .signup {
+      cursor: pointer;
+    }
+    .alert1{
+      color: #87898a;
+      margin-top: 1em;
     }
   }
   .forgot {

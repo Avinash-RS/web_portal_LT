@@ -73,7 +73,7 @@ export class RegistrationComponent implements OnInit {
     onError(errorDetails: RecaptchaErrorParameters): void {
     }
 
-  get f() { return this.registerForm.controls; }
+  get s() { return this.registerForm.controls; }
 
   Submit() {
       localStorage.removeItem('UserDetails');
