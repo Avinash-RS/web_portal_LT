@@ -18,13 +18,13 @@
                 <div class="navigation d-flex align-items-center" *ngIf="scromModuleData&&filterkey==='All'&&drawersOpen===false">
                     <span class="pipeLine">|</span> 
                     <div class="leftArrow">                
-                     <i class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?topicPrve():topicPrve()"></i>
+                     <i class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()"></i>
                     </div>
                     <div class="currentTopic" >
                      <span title="{{scromModuleData[weekHolder].childData[moduleHolder]?.children[nextPrevHolder].title}}">{{scromModuleData[weekHolder].childData[moduleHolder]?.children[nextPrevHolder].title}}</span>
                     </div>
                     <div class="rightArrow">                
-                     <i class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?topicNext():topicNext()"></i>
+                     <i class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()"></i>
                     </div>
                 </div>
             </ng-container>
