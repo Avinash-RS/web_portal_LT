@@ -1,7 +1,7 @@
 import { Component, OnInit, Injectable, Input } from '@angular/core';
 import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours} from 'date-fns';
 import { formatDate } from '@angular/common';
-import { CalendarEvent, CalendarView,CalendarMonthViewDay, DateFormatterParams, CalendarDateFormatter } from 'angular-calendar'; 
+import { CalendarEvent, CalendarView,CalendarMonthViewDay, DateFormatterParams, CalendarDateFormatter,CalendarEventTitleFormatter } from 'angular-calendar'; 
 import { getmoduleData } from '@learner/services/operations/learner_query';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
@@ -21,6 +21,21 @@ export class CustomDateFormatter extends CalendarDateFormatter {
     return formatDate(date, 'EEE', locale);
   } 
 }
+export class CustomEventTitleFormatter extends CalendarEventTitleFormatter {
+  // you can override any of the methods defined in the parent class
+
+  monthTooltip(event: CalendarEvent): string {
+    return;
+  }
+
+  weekTooltip(event: CalendarEvent): string {
+    return;
+  }
+
+  dayTooltip(event: CalendarEvent): string {
+    return;
+  }
+}
 @Component({
   selector: 'app-calendar-activity',
   templateUrl: './calendar-activity.component.html',
@@ -29,6 +44,10 @@ export class CustomDateFormatter extends CalendarDateFormatter {
     {
       provide: CalendarDateFormatter,
       useClass: CustomDateFormatter,
+    },
+    {
+      provide: CalendarEventTitleFormatter,
+      useClass: CustomEventTitleFormatter,
     },
   ],
 })
@@ -84,6 +103,7 @@ export class CalendarActivityComponent implements OnInit {
   showSkeleton = true;
   skeletonPart = [1,2]
   userDetailes:any;
+  customTooltipCondition = false
   constructor(public learnerService: LearnerServicesService,private gs: GlobalServiceService,private router: Router) { }
 
   ngOnInit() {
