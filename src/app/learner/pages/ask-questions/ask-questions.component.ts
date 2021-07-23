@@ -96,7 +96,12 @@ export class AskQuestionsComponent implements OnInit {
   getPlayerModuleTopic() {
     this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       if(data.data?.playerModuleAndTopic?.success=== true){
-        this.moduleTopicData = data.data?.playerModuleAndTopic?.message[0];
+        let tmpData = data.data?.playerModuleAndTopic?.message[0].childData;
+        this.moduleTopicData = []
+        tmpData.forEach(element => {
+          this.moduleTopicData.push(... element.childData)
+        });
+
         console.log(this.moduleTopicData)
       }
       

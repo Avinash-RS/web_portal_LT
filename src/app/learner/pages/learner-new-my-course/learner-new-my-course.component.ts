@@ -281,6 +281,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
 
   //PLAYER PAGE NAVIGATION
   gotoDesc(c) {
+    c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
+
     const detail = {
       id: c.course_id,
       wishlist: c.wishlisted || false,
@@ -317,6 +319,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
   //ASK A QUESTION
   gotoAskQuestions(c) {
+    c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
     if(this.userDetailes.org_type === 'vocational') {
       const detail = {
         course_name: c.course_name,
@@ -328,8 +331,9 @@ export class LearnerNewMyCourseComponent implements OnInit {
       localStorage.setItem('currentBatchId', c.batchid);
       localStorage.setItem('CourseName', c.course_name);
       localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer)
-  
+      if(c.course_status!=='start'){
       this.router.navigateByUrl('/Learner/askQuestions', { state: { detail } });
+    }
     } else{
       window.open(this.externalWeb, "_blank");
     }
