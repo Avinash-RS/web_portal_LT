@@ -841,7 +841,6 @@ message{
         total_topic_count
         week_total_count
         week_completed_count
-        week_completed_total_count
         image_self_paced_learning_time
         total_duration
         instructor_lead_session_completed_count
@@ -2199,7 +2198,6 @@ query   get_batchwise_learner_dashboard_data( $user_id: String!, $request_type: 
       completed_mid_course_project_count
       week_completed_count
       week_total_count
-      week_completed_total_count
       Self_Paced_Learning_CARD
       self_paced_learning_progression
       completed_module_count
