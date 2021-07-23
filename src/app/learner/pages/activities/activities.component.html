@@ -332,8 +332,8 @@
                     </mat-expansion-panel-header>
                     <div class="align-center" *ngIf="itrdata.grade_status !== 'Evaluated'">
                       <div class="videoPreview d-flex align-items-center mt-2 ml-auto mr-auto mb-3" *ngFor="let videoName of itrdata.videodetails">
-                        <mat-icon class="videoPlay" *ngIf="videoName.doc_type == 'application/pdf'">play_circle_outline</mat-icon>
-                        <mat-icon class="videoPlay" *ngIf="videoName.doc_type == 'video/mp4'">picture_as_pdf</mat-icon>
+                        <mat-icon class="videoPlay" *ngIf="videoName.doc_type == 'application/pdf'">picture_as_pdf</mat-icon>
+                        <mat-icon class="videoPlay" *ngIf="videoName.doc_type == 'video/mp4' || videoName.doc_type == 'video/quicktime'">play_circle_outline</mat-icon>
                         <span class="videoName"  matTooltip="{{videoName.name}}" matTooltipClass="custom-mat-tooltip">{{(videoName.name| slice:0:18)+'...'}}</span>
                         <mat-icon class="deleteBtn" *ngIf="itrdata.submit_status == 'notsubmitted'" (click)="submitDeleteVideo(videoName, itrdata, perform.performActivity , submitType = 'delete')">close</mat-icon>
                       </div>
