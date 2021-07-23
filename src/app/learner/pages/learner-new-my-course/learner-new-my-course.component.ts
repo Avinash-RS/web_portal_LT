@@ -281,6 +281,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
 
   //PLAYER PAGE NAVIGATION
   gotoDesc(c) {
+    c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
+
     const detail = {
       id: c.course_id,
       wishlist: c.wishlisted || false,
@@ -317,6 +319,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
   //ASK A QUESTION
   gotoAskQuestions(c) {
+    c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
     if(this.userDetailes.org_type === 'vocational') {
       const detail = {
         course_name: c.course_name,
@@ -328,8 +331,9 @@ export class LearnerNewMyCourseComponent implements OnInit {
       localStorage.setItem('currentBatchId', c.batchid);
       localStorage.setItem('CourseName', c.course_name);
       localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer)
-  
+      if(c.course_status!=='start'){
       this.router.navigateByUrl('/Learner/askQuestions', { state: { detail } });
+    }
     } else{
       window.open(this.externalWeb, "_blank");
     }
@@ -434,6 +438,24 @@ export class LearnerNewMyCourseComponent implements OnInit {
     });
   
   }
+
+  goToForum(c) {
+    localStorage.setItem('Courseid', c.course_id);
+    const bt = c.batchid ? {
+      batchid: c.batchid,
+      batchenddate: c.batch_end_date,
+      batch_start_date: c.batch_start_date,
+      batchname: c.batch_name
+    } : null;
+    const detail = {
+      id: c.course_id,
+      name: c.course_name,
+      batchdetails: bt
+    };
+    localStorage.setItem('course', btoa(JSON.stringify(detail)));
+    this.router.navigateByUrl('/Learner/discussionForum', { state: { detail } });
+  }
+
 
   updateColor(progress) {
     if (parseInt(progress)<21){

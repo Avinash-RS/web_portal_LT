@@ -19,11 +19,11 @@
                     <option [value]="1">Oldest</option>
                 </select>
             </div>
-            <div class=" d-inline-block mt-10px" *ngIf="moduleTopicData?.childData">
+            <div class=" d-inline-block mt-10px" *ngIf="moduleTopicData.length">
                 <span>Filter by: &nbsp;</span>
                 <select class="sel-pad mr-20px" [(ngModel)]="mainModule" (change)="mainQAFilter('M')">
                     <option [ngValue]="null" [disabled]="false">All Modules</option>
-                    <option  *ngFor="let item of moduleTopicData.childData" [ngValue]="item">{{item.title}}</option>
+                    <option  *ngFor="let item of moduleTopicData" [ngValue]="item">{{item.title}}</option>
                 </select>
                 </div>
                 <div class=" d-inline-block mt-10px">
@@ -73,7 +73,7 @@
         <div class="mt-10px  d-inline-block">
             <select class="sel-pad-modal" [(ngModel)]="questionTopicList" (change)="askQAModuleSelect()">
                 <option [ngValue]="null" [disabled]="true">Please select a module</option>
-                <option  *ngFor="let item of moduleTopicData.childData" [ngValue]="item">{{item.title}}</option>
+                <option  *ngFor="let item of moduleTopicData" [ngValue]="item">{{item.title}}</option>
             </select>
             <select *ngIf="questionTopicList" class="sel-pad-modal ml-20px" [(ngModel)]="questionTopic" >
                 <option [ngValue]="null" [disabled]="true">Please select a topic</option>

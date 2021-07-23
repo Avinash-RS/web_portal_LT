@@ -285,10 +285,14 @@
                                                         <span><em class="lxp-Activities_New"></em></span>
                                                         <p>Activities</p>
                                                     </div>
-                                                    <!-- (click)="gotoAskQuestions(item)" -->
-                                                    <div class="icons disabledcursor" (click)="gotoquestionanswer(item)">
+                                                    <!--  -->
+                                                    <div class="icons" [ngClass]="item.course_status=='start'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
                                                         <span><em class="lxp-QA"></em></span>
                                                         <p>Q&A</p>
+                                                    </div>
+                                                    <div *ngIf="userDetailes.org_type === 'vocational'" class="icons" (click)="goToForum(item)">
+                                                        <span><em class="lxp-QA"></em></span>
+                                                        <p>Discussion Fourm</p>
                                                     </div>
                                                 </div>
                                                 <div class="courseProgression d-flex align-items-center">
@@ -296,7 +300,7 @@
                                                         <span><em class="lxp-Course_Progression"></em></span>
                                                         <p>Course Progression</p>
                                                     </div>
-                                                    <div class="percentage">
+                                                    <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
                                                         <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="5" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week"
                                                          [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
                                                     </div>
@@ -385,9 +389,13 @@
                                                         <span><em class="lxp-Activities_New"></em></span>
                                                         <p>Activities</p>
                                                     </div>
-                                                    <div class="icons" (click)="gotoAskQuestions(item)">
+                                                    <div  class="icons" [ngClass]="item.course_status=='start'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):''">
                                                         <span><em class="lxp-QA"></em></span>
                                                         <p>Q&A</p>
+                                                    </div>
+                                                    <div *ngIf="userDetailes.org_type === 'vocational'" class="icons" (click)="goToForum(item)">
+                                                        <span><em class="lxp-QA"></em></span>
+                                                        <p>Discussion Fourm</p>
                                                     </div>
                                                 </div>
                                                 <div class="courseProgression d-flex align-items-center">
@@ -482,9 +490,13 @@
                                                         <span><em class="lxp-Activities_New"></em></span>
                                                         <p>Activities</p>
                                                     </div>
-                                                    <div class="icons" (click)="gotoAskQuestions(item)">
+                                                    <div class="icons" [ngClass]="item.course_status=='start'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):''">
                                                         <span><em class="lxp-QA"></em></span>
                                                         <p>Q&A</p>
+                                                    </div>
+                                                    <div *ngIf="userDetailes.org_type === 'vocational'" class="icons" (click)="goToForum(item)">
+                                                        <span><em class="lxp-QA"></em></span>
+                                                        <p>Discussion Fourm</p>
                                                     </div>
                                                 </div>
                                                 <div class="courseProgression d-flex align-items-center">
