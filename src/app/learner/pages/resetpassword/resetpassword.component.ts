@@ -37,10 +37,9 @@ export class ResetpasswordComponent implements OnInit {
   siteKey: any = environment.captachaSiteKey;
   resolvedCaptcha: any;
   currentYear = new Date().getFullYear();
-
+  loader = false;
   constructor(
     public translate: TranslateService,
-    private loader: Ng4LoadingSpinnerService,
     private router: Router,
     private formBuilder: FormBuilder,
     private activeroute: ActivatedRoute,
@@ -134,7 +133,7 @@ export class ResetpasswordComponent implements OnInit {
 
 
   resetpassword() {
-    this.loader.show();
+    this.loader = true
     var encryptedname = CryptoJS.AES.encrypt(this.user.toLowerCase(), this.secretKey.trim()).toString();
     var encryptedpassword = CryptoJS.AES.encrypt(this.resetForm.value.password, this.secretKey.trim()).toString();
     // var decryptname = CryptoJS.AES.decrypt(encryptedname, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
@@ -142,7 +141,7 @@ export class ResetpasswordComponent implements OnInit {
     // return
     this.service.resetPassword(encryptedname,encryptedpassword).subscribe((data: any) => {
       if (data.data.get_forgot_password_byresetpassword.success === 'true') {
-        this.loader.hide();
+        this.loader = false
         this.toastr.success(data.data.get_forgot_password_byresetpassword.message);
         localStorage.removeItem('Username');
         localStorage.removeItem('Details_user');
@@ -152,7 +151,7 @@ export class ResetpasswordComponent implements OnInit {
         this.router.navigate(['/Learner/login']);
 
       } else {
-        this.loader.hide();
+        this.loader = false;
         this.toastr.error(data.data.get_forgot_password_byresetpassword.message, null);
       }
     });

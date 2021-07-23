@@ -269,7 +269,7 @@
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
                                                         <ng-container *ngIf="userDetailes.org_type == 'vocational'"><p>Virtual Instructor <br />Led Session</p></ng-container>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'"><p>Live Interactions</p></ng-container>
+                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect '"><p>Live Interactions</p></ng-container>
                                                     </div>
                                                     <div class="icons" (click)="gotoSubmissionDetails(item)">
                                                         <span><em class="lxp-Activities_New"></em></span>
@@ -287,7 +287,7 @@
                                                         <p>Course Progression</p>
                                                     </div>
                                                     <div class="percentage">
-                                                        <circle-progress percent="{{((100 * (item.week_completed_total_count!==null?item.week_completed_total_count:0)) / (item.week_total_count!==null?item.week_total_count:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="5" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week"
+                                                        <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="5" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week"
                                                          [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
                                                     </div>
                                                 </div>
@@ -385,7 +385,7 @@
                                                         <p>Course Progression</p>
                                                     </div>
                                                     <div class="percentage">
-                                                        <circle-progress percent="{{((100 * (item.week_completed_total_count!==null?item.week_completed_total_count:0)) / (item.week_total_count!==null?item.week_total_count:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="5" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week"
+                                                        <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="5" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week"
                                                          [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
                                                     </div>
                                                 </div>
@@ -481,7 +481,7 @@
                                                         <p>Course Progression</p>
                                                     </div>
                                                     <div class="percentage">
-                                                        <circle-progress percent="{{((100 * (item.week_completed_total_count!==null?item.week_completed_total_count:0)) / (item.week_total_count!==null?item.week_total_count:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="5" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week"
+                                                        <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="5" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week"
                                                          [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
                                                     </div>
                                                 </div>
