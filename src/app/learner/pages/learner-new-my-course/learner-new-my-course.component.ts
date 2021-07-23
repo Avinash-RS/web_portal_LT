@@ -368,6 +368,10 @@ export class LearnerNewMyCourseComponent implements OnInit {
     });
   }
 
+  gotoquestionanswer(course) {
+    this.router.navigate(['/Learner/questionanswer'])
+  }
+
   getLearnerActivity(selectedDate) {
     const dateValue = moment(selectedDate).format('YYYY-MM-DD');
     this.dayMonth = selectedDate;

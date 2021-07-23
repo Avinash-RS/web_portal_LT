@@ -286,7 +286,7 @@
                                                         <p>Activities</p>
                                                     </div>
                                                     <!--  -->
-                                                    <div class="icons" [ngClass]="item.course_status=='start'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):''">
+                                                    <div class="icons" [ngClass]="item.course_status=='start'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
                                                         <span><em class="lxp-QA"></em></span>
                                                         <p>Q&A</p>
                                                     </div>

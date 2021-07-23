@@ -382,7 +382,10 @@
       @media only screen and (min-width: 720px) {
         width: 24%;
       }
-      @media only screen and (min-width: 1140px) {
+      // @media only screen and (min-width: 1140px) {
+      //   width: 25%;
+      // }
+      @media only screen and (min-width: 1440px) {
         width: 18%;
       }
       button {
@@ -417,7 +420,11 @@
         width: 74%;
         position: initial;
       }
-      @media only screen and (min-width: 1140px) {
+      // @media only screen and (min-width: 1140px) {
+      //   margin-left: 2%;
+      //   width: 73%;
+      // }
+      @media only screen and (min-width: 1440px) {
         margin-left: 2%;
         width: 80%;
       }
@@ -534,7 +541,7 @@
         margin-top: 15px;
       }
       &.zero {
-        margin-top: 0;
+        margin-top: 15px;
       }
     }
     .viltActivitiesQA {
@@ -625,7 +632,7 @@
           width: 20%;
         }
         @media only screen and (min-width: 1400px) {
-          width: 14%;
+          width: 17%;
         }
       }
     }
@@ -1495,7 +1502,7 @@
   }
   
 }
-.disabledcursor{
-  cursor:not-allowed !important;
-}
+// .disabledcursor{
+//   cursor:not-allowed !important;
+// }
 
