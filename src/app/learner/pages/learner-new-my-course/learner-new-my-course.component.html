@@ -286,7 +286,7 @@
                                                         <p>Activities</p>
                                                     </div>
                                                     <!--  -->
-                                                    <div class="icons" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):''">
+                                                    <div class="icons" [ngClass]="item.course_status=='start'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):''">
                                                         <span><em class="lxp-QA"></em></span>
                                                         <p>Q&A</p>
                                                     </div>
@@ -389,7 +389,7 @@
                                                         <span><em class="lxp-Activities_New"></em></span>
                                                         <p>Activities</p>
                                                     </div>
-                                                    <div  class="icons" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):''">
+                                                    <div  class="icons" [ngClass]="item.course_status=='start'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):''">
                                                         <span><em class="lxp-QA"></em></span>
                                                         <p>Q&A</p>
                                                     </div>
@@ -490,7 +490,7 @@
                                                         <span><em class="lxp-Activities_New"></em></span>
                                                         <p>Activities</p>
                                                     </div>
-                                                    <div class="icons" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):''">
+                                                    <div class="icons" [ngClass]="item.course_status=='start'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):''">
                                                         <span><em class="lxp-QA"></em></span>
                                                         <p>Q&A</p>
                                                     </div>
