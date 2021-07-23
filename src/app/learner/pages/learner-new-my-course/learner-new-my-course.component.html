@@ -52,7 +52,11 @@
                                 <div class="detailData">
                                     <div class="badgedata d-flex justify-content-between">
                                         <p class="d-flex justify-content-center align-items-center">
-                                            {{data.activity_details.activitytype}}
+                                            <ng-container *ngIf="data.activity_details.activitytype != 'Live Classroom'">{{data.activity_details.activitytype}}</ng-container>
+                                            <ng-container  *ngIf="data.activity_details.activitytype == 'Live Classroom'">
+                                                <ng-container *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
+                                            <ng-container *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'">Live Interactions</ng-container>
+                                            </ng-container>
                                         </p>
                                         <div class="status">
                                             <span class="ongoing" *ngIf="data.status == 'On going'">
@@ -258,7 +262,8 @@
                                                     <p>{{item.course_description}}</p>
                                                     <div class="type d-flex justify-content-start">
                                                         <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
-                                                        <span>Instructor led session - upto  {{item.image_instructor_lead_session_time!==""?item.image_instructor_lead_session_time:0}}</span>
+                                                        <span><ng-container *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
+                                                            <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'|| userDetailes.org_type == 'Corporate'">Live Interactions</ng-container> - upto  {{item.image_instructor_lead_session_time!==""?item.image_instructor_lead_session_time:0}}</span>
                                                         <span>Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
                                                         <span>Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
                                                     </div>
@@ -268,8 +273,8 @@
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'vocational'"><p>Virtual Instructor <br />Led Session</p></ng-container>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect '"><p>Live Interactions</p></ng-container>
+                                                        <ng-container *ngIf="userDetailes.org_type == 'vocational'"><p>Virtual Instructor<br/>Led Session</p></ng-container>
+                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'"><p>Live Interactions</p></ng-container>
                                                     </div>
                                                     <div class="icons" (click)="gotoSubmissionDetails(item)">
                                                         <span><em class="lxp-Activities_New"></em></span>
@@ -356,7 +361,8 @@
                                                     <p>{{item.course_description}}</p>
                                                     <div class="type d-flex justify-content-start">
                                                         <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
-                                                        <span>Instructor led session - upto  {{item.image_instructor_lead_session_time!==""?item.image_instructor_lead_session_time:0}}</span>
+                                                        <span><ng-container *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
+                                                            <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'|| userDetailes.org_type == 'Corporate'">Live Interactions</ng-container> - upto  {{item.image_instructor_lead_session_time!==""?item.image_instructor_lead_session_time:0}}</span>
                                                         <span>Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
                                                         <span>Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
                                                     </div>
@@ -366,8 +372,8 @@
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'vocational'"><p>Virtual Instructor <br />Led Session</p></ng-container>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'"><p>Live Interactions</p></ng-container>
+                                                        <ng-container *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
+                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'|| userDetailes.org_type == 'Corporate'">Live Interactions</ng-container>
                                                         
                                                     </div>
                                                     <div class="icons" (click)="gotoSubmissionDetails(item)">
@@ -453,7 +459,8 @@
                                                     <p>{{item.course_description}}</p>
                                                     <div class="type d-flex justify-content-start">
                                                         <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
-                                                        <span>Instructor led session - upto  {{item.image_instructor_lead_session_time!==""?item.image_instructor_lead_session_time:0}}</span>
+                                                        <span><ng-container *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
+                                                            <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'|| userDetailes.org_type == 'Corporate'">Live Interactions</ng-container> - upto  {{item.image_instructor_lead_session_time!==""?item.image_instructor_lead_session_time:0}}</span>
                                                         <span>Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
                                                         <span>Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
                                                     </div>
@@ -463,8 +470,8 @@
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'vocational'"><p>Virtual Instructor <br />Led Session</p></ng-container>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'"><p>Live Interactions</p></ng-container>
+                                                        <ng-container *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
+                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'">Live Interactions</ng-container>
                                                     </div>
                                                     <div class="icons" (click)="gotoSubmissionDetails(item)">
                                                         <span><em class="lxp-Activities_New"></em></span>
