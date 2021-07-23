@@ -413,6 +413,24 @@ export class LearnerNewMyCourseComponent implements OnInit {
   
   }
 
+  goToForum(c) {
+    localStorage.setItem('Courseid', c.course_id);
+    const bt = c.batchid ? {
+      batchid: c.batchid,
+      batchenddate: c.batch_end_date,
+      batch_start_date: c.batch_start_date,
+      batchname: c.batch_name
+    } : null;
+    const detail = {
+      id: c.course_id,
+      name: c.course_name,
+      batchdetails: bt
+    };
+    localStorage.setItem('course', btoa(JSON.stringify(detail)));
+    this.router.navigateByUrl('/Learner/discussionForum', { state: { detail } });
+  }
+
+
   updateColor(progress) {
     if (parseInt(progress)<21){
        return 'primary';
