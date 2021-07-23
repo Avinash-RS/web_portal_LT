@@ -863,6 +863,8 @@ message{
         internal_assesment
         final_assesment
         credits
+        current_week_count
+        actual_total_week
         batch_instructor_details{
                 id
                 name
@@ -2169,56 +2171,58 @@ query getTopicAttendanceDetailsByUsername( $courseid: String!, $full_name: Strin
 
 
 
-export const   get_batchwise_learner_dashboard_data = gql`
+export const get_batchwise_learner_dashboard_data = gql`
 query   get_batchwise_learner_dashboard_data( $user_id: String!, $request_type: String!, $jobroleCategoryId: String){
   get_batchwise_learner_dashboard_data( user_id: $user_id, request_type: $request_type, jobroleCategoryId: $jobroleCategoryId){
     success
     error_msg
-    message{
-            course_type
-            categoryName
-            course_img_url
-            isBatchCourse
-            image_instructor_lead_session_time
-            image_self_paced_learning_time
-            total_mid_course_project_count
-            internal_assesment
-            internal_assesment_completed
-            final_assesment
-            course_name
-            author_name
-            total_duration
-            credits
-            course_description
-            course_long_description
-            short_description
-            instructor_lead_session_completed_count
-            instructor_lead_session_total_count
-            completed_mid_course_project_count
-            week_completed_count
-            week_total_count
-            week_completed_total_count
-            Self_Paced_Learning_CARD
-            self_paced_learning_progression
-            completed_module_count
-            total_module_count
-            completed_topic_count
-            total_topic_count
-            course_status
-            thread_count
-            comment_count
-            reply_count
-            assignment_submitted_count
-            assignment_total_count
-            course_id
-            course_percentage
-            wishlisted
-            wishlist_id
-            feed_back
-            batchid
-            batch_name
-            batch_start_date
-            batch_end_date
+    message {
+      course_type
+      categoryName
+      course_img_url
+      isBatchCourse
+      image_instructor_lead_session_time
+      image_self_paced_learning_time
+      total_mid_course_project_count
+      internal_assesment
+      internal_assesment_completed
+      final_assesment
+      course_name
+      author_name
+      total_duration
+      credits
+      course_description
+      course_long_description
+      short_description
+      instructor_lead_session_completed_count
+      instructor_lead_session_total_count
+      completed_mid_course_project_count
+      week_completed_count
+      week_total_count
+      week_completed_total_count
+      Self_Paced_Learning_CARD
+      self_paced_learning_progression
+      completed_module_count
+      total_module_count
+      completed_topic_count
+      total_topic_count
+      course_status
+      thread_count
+      comment_count
+      reply_count
+      assignment_submitted_count
+      assignment_total_count
+      course_id
+      course_percentage
+      wishlisted
+      wishlist_id
+      feed_back
+      batchid
+      batch_name
+      batch_start_date
+      batch_end_date
+      current_week_count
+      actual_total_week
     }
   }
 }
