@@ -50,7 +50,7 @@
               <div *ngIf="activity.activitytype != 'Live Classroom' && activity.activitytype != 'Self Learning'" class="notifi activity">{{activity.activitytype}}</div>
               <div *ngIf="activity.activitytype == 'Self Learning'" class="notifi selfplacedlearning">{{activity.activitytype}}</div>
               <div *ngIf="activity.activitytype == 'Live Classroom' && userDetailes.org_type == 'vocational'" class="notifi virtualinstructorled">Virtual Instructor Led Session</div>
-              <div *ngIf="activity.activitytype == 'Live Classroom' && userDetailes.org_type == 'collegeconnect'" class="notifi virtualinstructorled">Live Interactions</div>
+              <div *ngIf="activity.activitytype == 'Live Classroom' && (userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate')" class="notifi virtualinstructorled">Live Interactions</div>
             </div>
           </div>
     
@@ -76,7 +76,7 @@
         <figure>
           <img src="/assets/images/noactivityScheduled.svg" alt="assignment">
         </figure>
-        <p>You have no activity scheduled!</p>
+        <p>You have no activity</p>
       </div>
     </ng-container>
     <ng-container  *ngIf="showSkeleton">
@@ -125,15 +125,15 @@
     </div>
     <div [ngSwitch]="view">
       <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" [refresh]="refresh"
-        [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="getLearnerActivity('day',$event.day,$event.day)">
+        [activeDayIsOpen]="activeDayIsOpen" [tooltipDisabled]="customTooltipCondition" (dayClicked)="getLearnerActivity('day',$event.day,$event.day)">
       </mwl-calendar-month-view>
     </div>
     <!-- calender html end #00a99d-->
   </div>
   <div class="activInfo">
-    <span class="self">Self paced Learning</span>
+    <span class="self">Self Learning</span>
     <span class="live" *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</span>
-    <span class="live" *ngIf="userDetailes.org_type == 'collegeconnect'">Live Interactions</span>
+    <span class="live" *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'">Live Interactions</span>
     <span class="Activ">Activity</span>
   </div>
 </div>
