@@ -174,6 +174,8 @@ export class ProgressionReportComponent implements OnInit {
         } else {
           this.emptyProject = true
         }
+      } else {
+        this.emptyProject = true;
       }
       this.showSkeleton = false;
     })
@@ -205,7 +207,10 @@ export class ProgressionReportComponent implements OnInit {
         } else {
           this.emptyPerform = true;
         }
+      } else{
+        this.emptyPerform = true;
       }
+
       this.showSkeleton = false;
     })
   }
@@ -245,7 +250,7 @@ export class ProgressionReportComponent implements OnInit {
   }
 
   getDoughnutChartData(){
-    this.learnerService.getSelfLearningdata('module',this.userId, this.courseId).subscribe((data:any)=>{
+    this.learnerService.getSelfLearningdata('topic',this.userId, this.courseId).subscribe((data:any)=>{
       console.log(data)
       if(data?.data?.selfLearningdatabyUserId?.success) {
         this.doughnutChartData = data?.data?.selfLearningdatabyUserId.data[0];

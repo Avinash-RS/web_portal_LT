@@ -8,6 +8,8 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 import * as moment from 'moment';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { getWeekYearWithOptions } from 'date-fns/fp';
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
 
@@ -55,7 +57,7 @@ export class CalendarActivityComponent implements OnInit {
     'value': 'selfpacedlearning'
   },
   {
-    'key': 'Virtual Instructor Led Session',
+    'key': 'Live Interactions',
     'value': 'liveclassroom'
   },
   {
@@ -86,6 +88,9 @@ export class CalendarActivityComponent implements OnInit {
 
   ngOnInit() {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
+    if(this.userDetailes.org_type == 'vocational'){
+      this.filterBy[2].key = "Virtual Instructor Led Session";
+    } 
     this.getCourseData();
     const topicStart = new Date();
     this.getCalendarCount(topicStart);

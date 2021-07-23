@@ -15,15 +15,18 @@
 .activiySchedule {
     background-color: #f2f2f2;
     height: 100%;
-    padding: 1.8em 1.5em;
+    padding: 0 0.85em 4.5em 0.85em;
     width: 100%;
-    order: 1;
-    @media screen and (max-width:767px) {
-        padding: 0 0.85em 6em 0.85em;
-        order: 2;
+    order: 2;
+    @media screen and (min-width: 720px) {
+        padding: 0 0.85em 0 0.85em;
+    }
+    @media screen and (min-width: 992px) {
+        padding: 1.8em 1.5em 0 1.5em;
+        order: 1;
     } 
     @media screen and (min-width:769px) {
-        width: calc(100% - 300px);
+        width: calc(100% - 360px);
     }
     @media screen and (min-width: 1140px) {
         width: calc(100% - 400px);
@@ -42,17 +45,24 @@
     }
 }
 .leftPan {
+    order: 2;
+    margin-top: 10px;
+    @media only screen and (min-width:1140px) {
+        margin-top: 0;
+        order: 1;
+    }
     span {
         margin-right: 1.7em;
         font-size: 1.1em;
-        color:#808080 ;
+        color:#999999 ;
         display: inline-block;
         cursor: pointer;
         padding-bottom: 1em;
         position: relative;
- 
+        font-weight: 300;
         &.active {
-            color:#212529;
+            color:#000000;
+            font-weight: 400;
             &:before {
                 content:' ';
                 width: 6px;
@@ -68,6 +78,10 @@
     }
 }
 .rightPan {
+    order: 1;
+    @media only screen and (min-width:1140px) {
+        order: 2;
+    }
     span {
         padding: 0 1em 0 0;
         @media screen and (min-width:1140px) {
@@ -85,12 +99,15 @@
     }
 }
 .contentarea {
-    padding: 1.5em 0; 
+    padding: 0.5em 0;
+    @media only screen and (min-width:1140px) {
+        padding: 1.5em 0;
+    }
     .contentbox {
         flex-wrap: wrap;
         flex-direction: row;
         background-color: #fff;
-        padding: 0.8em 1em;
+        padding: 0.8em 2em;
         border-radius: 0.3em;
         border: 0.1em solid #eaeaea;
         margin-bottom: 1em;
@@ -159,7 +176,7 @@
             }
             .htxt {
                 font-weight: 700;
-                color: red;
+                color: #C02222;
             }
             .infotxt {
                 span {
@@ -294,13 +311,20 @@
     padding: 3em 1em; 
     box-shadow: 0 0 2px 0 #0000006b;
     order: 2;
-    @media screen and (max-width:767px) {
+    position: fixed;
+    right: 0;
+    top: 70px;
+    height: 100%;
+    @media screen and (max-width:991px) {
         padding: 1em;
         width: 100%;
         order: 1;
+        position: relative;
+        top: auto;
+        height: auto;
     }
     @media screen and (min-width:769px) and (max-width:1024px) {
-        width: 300px;
+        width: 360px;
     }
     .cal-month-view .cal-day-cell {
         min-height: 40px;
@@ -325,7 +349,7 @@
     .cal-month-view .cal-day-number {
         font-size: 1em;
         font-weight: 400;
-        opacity: 0.5;
+        opacity: 1;
         margin-top: 0.5em;
         margin-right: 1.4em;
         float: right;
@@ -431,8 +455,11 @@
     .mat-form-field-wrapper {
         padding-bottom: 0;
     }
+    .mat-form-field-appearance-outline .mat-form-field-wrapper {
+        background-color: #ffffff;
+    }
     .mat-form-field-appearance-outline .mat-form-field-infix {
-        padding: 0.3em 0 0.6em 0 !important;
+        padding: 0 0 0.6em 0 !important;
     }
     .pull-right {
         mat-form-field {
@@ -450,9 +477,19 @@
 .reset-button{
     background-color: $lxp-theme-green !important;
     color: $color-white !important;
-    height: 28px;
+    // height: 28px;
+    padding: 4px 0;
     width: 7em;
     line-height: 15px;
+    em {
+        display: inline-block;
+        transform: scaleX(-1);
+        font-size: 10px;
+        margin-right: 7px;
+    }
+    span {
+        line-height: 16px;
+    }
 }
 
 // No Card
@@ -497,7 +534,7 @@
 }
 
 ::ng-deep .calendarArea {
-    .cal-day-selected{
+    .cal-day-selected {
         outline: #0D05D5 auto 1px;
         outline-color: #0D05D5;
         outline-style: auto;

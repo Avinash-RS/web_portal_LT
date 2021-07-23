@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         <div class="weekviewHead">
-                            <mwl-calendar-week-view (dayHeaderClicked)="getLearnerActivity($event.day.date)" [weekStartsOn]="1" [viewDate]="viewDate" [events]="events"></mwl-calendar-week-view>
+                            <mwl-calendar-week-view [selected]="selectedDate" (dayHeaderClicked)="getLearnerActivity($event.day.date)" [weekStartsOn]="1" [viewDate]="viewDate" [events]="events"></mwl-calendar-week-view>
                         </div>
                     </div>
                     <div>
@@ -122,9 +122,8 @@
                             <span class="white"><em class="lxp-Right"></em></span>
                         </div>
                         <div class="expand" (click)="expandtoggle()">
-                            <span>Expand</span> 
-                            <em *ngIf="expandcollapse" class="lxp-DownArrow"></em>
-                            <em *ngIf="!expandcollapse" class="lxp-Arrow"></em>
+                            <span *ngIf="expandcollapse">Expand <em class="lxp-DownArrow"></em></span>
+                            <span *ngIf="!expandcollapse">Collapse <em class="lxp-Arrow"></em></span>
                         </div>
                     </div>
                 </div>
@@ -212,7 +211,7 @@
                                         <mat-progress-bar [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
                                     </div>
                                     <div class="courses d-flex justify-content-start">
-                                        <figure class="d-flex align-items-center justify-content-center" (click)="gotoDesc(item)">
+                                        <figure class="d-flex align-items-start justify-content-center" (click)="gotoDesc(item)">
                                             <img [src]="item.course_img_url + blobKey" alt="" />
     
                                             <button class="d-flex align-items-center"><em [class]="item.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
@@ -229,7 +228,7 @@
                                         <div class="rightCol">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
-                                                <span class="menuIcon" [matMenuTriggerFor]="menu">
+                                                <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
                                                     <em class="lxp-Dot_Menu"></em>
                                                 </span>
                                                 <mat-menu #menu="matMenu" xPosition="before">
@@ -242,7 +241,15 @@
                                                     </button>
                                                   </mat-menu>
                                             </div>
-                                            <div class="showLessContent">
+                                            <div  *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
+                                                <span class="by">By: <b>Larsen & Toubro</b></span>
+                                                <span class="credits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
+                                                <span>
+                                                    <em class="lxp-Duration"></em> 
+                                                    Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                </span>
+                                            </div>
+                                            <div *ngIf="item?.batchid" class="showLessContent">
                                                 <button class="readMoreLess" *ngIf="info.length > 370" type="button"
                                                     (click)="item.isReadMore = !item.isReadMore">
                                                     <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
@@ -250,27 +257,19 @@
                                                 <div [ngClass]="!item.isReadMore ? '' : 'showText'">
                                                     <p>{{item.course_description}}</p>
                                                     <div class="type d-flex justify-content-start">
-                                                        <span>Self paced learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
+                                                        <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
                                                         <span>Instructor led session - upto  {{item.image_instructor_lead_session_time!==""?item.image_instructor_lead_session_time:0}}</span>
                                                         <span>Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
                                                         <span>Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="durationCredits d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
-                                                <span class="by">By: <b>Larsen & Toubro</b></span>
-                                                <span class="credits">Credits : {{item.credits!==null?item.credits:0}}</span>
-                                                <span>
-                                                    <em class="lxp-Duration"></em> 
-                                                    Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
-                                                </span>
-                                            </div>
-                                            <div class="actionItems d-flex justify-content-between">
+                                            <div *ngIf="item?.batchid" class="actionItems d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
                                                         <ng-container *ngIf="userDetailes.org_type == 'vocational'"><p>Virtual Instructor <br />Led Session</p></ng-container>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'"><p>Live Interactions</p></ng-container>
+                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect '"><p>Live Interactions</p></ng-container>
                                                     </div>
                                                     <div class="icons" (click)="gotoSubmissionDetails(item)">
                                                         <span><em class="lxp-Activities_New"></em></span>
@@ -292,7 +291,7 @@
                                                         <p>Course Progression</p>
                                                     </div>
                                                     <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
-                                                        <circle-progress percent="{{((100 * (item.week_completed_count!==null?item.week_completed_count:0)) / (item.week_total_count!==null?item.week_total_count:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="5" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week"
+                                                        <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="5" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week"
                                                          [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
                                                     </div>
                                                 </div>
@@ -331,7 +330,7 @@
                                         <div class="rightCol">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
-                                                <span class="menuIcon" [matMenuTriggerFor]="menu">
+                                                <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
                                                     <em class="lxp-Dot_Menu"></em>
                                                 </span>
                                                 <mat-menu #menu="matMenu" xPosition="before">
@@ -344,7 +343,15 @@
                                                     </button>
                                                   </mat-menu>
                                             </div>
-                                            <div class="showLessContent">
+                                            <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
+                                                <span class="by">By: <b>Larsen & Toubro</b></span>
+                                                <span class="credits">Credits: {{item.credits!==null?item.credits:0}}</span>
+                                                <span>
+                                                    <em class="lxp-Duration"></em> 
+                                                    Duration: <b>{{item.total_duration? item.total_duration : "1" + ""}} {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                </span>
+                                            </div>
+                                            <div *ngIf="item?.batchid" class="showLessContent">
                                                 <button class="readMoreLess" *ngIf="info.length > 370" type="button"
                                                     (click)="item.isReadMore = !item.isReadMore">
                                                     <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
@@ -352,22 +359,14 @@
                                                 <div [ngClass]="!item.isReadMore ? '' : 'showText'">
                                                     <p>{{item.course_description}}</p>
                                                     <div class="type d-flex justify-content-start">
-                                                        <span>Self paced learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
+                                                        <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
                                                         <span>Instructor led session - upto  {{item.image_instructor_lead_session_time!==""?item.image_instructor_lead_session_time:0}}</span>
                                                         <span>Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
                                                         <span>Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="durationCredits d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
-                                                <span class="by">By: <b>Larsen & Toubro</b></span>
-                                                <span class="credits">Credits : {{item.credits!==null?item.credits:0}}</span>
-                                                <span>
-                                                    <em class="lxp-Duration"></em> 
-                                                    Duration: <b>{{item.total_duration? item.total_duration : "1" + ""}} {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
-                                                </span>
-                                            </div>
-                                            <div class="actionItems d-flex justify-content-between">
+                                            <div *ngIf="item?.batchid" class="actionItems d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
@@ -394,7 +393,7 @@
                                                         <p>Course Progression</p>
                                                     </div>
                                                     <div class="percentage">
-                                                        <circle-progress percent="{{((100 * (item.week_completed_count!==null?item.week_completed_count:0)) / (item.week_total_count!==null?item.week_total_count:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="5" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week"
+                                                        <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="5" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week"
                                                          [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
                                                     </div>
                                                 </div>
@@ -432,7 +431,7 @@
                                         <div class="rightCol">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
-                                                <span class="menuIcon" [matMenuTriggerFor]="menu">
+                                                <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
                                                     <em class="lxp-Dot_Menu"></em>
                                                 </span>
                                                 <mat-menu #menu="matMenu" xPosition="before">
@@ -445,7 +444,15 @@
                                                     </button>
                                                   </mat-menu>
                                             </div>
-                                            <div class="showLessContent">
+                                            <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
+                                                <span class="by">By: <b>Larsen & Toubro</b></span>
+                                                <span class="credits">Credits: {{item.credits!==null?item.credits:0}}</span>
+                                                <span>
+                                                    <em class="lxp-Duration"></em> 
+                                                    Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                </span>
+                                            </div>
+                                            <div *ngIf="item?.batchid" class="showLessContent">
                                                 <button class="readMoreLess" *ngIf="info.length > 370" type="button"
                                                     (click)="item.isReadMore = !item.isReadMore">
                                                     <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
@@ -453,22 +460,14 @@
                                                 <div [ngClass]="!item.isReadMore ? '' : 'showText'">
                                                     <p>{{item.course_description}}</p>
                                                     <div class="type d-flex justify-content-start">
-                                                        <span>Self paced learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
+                                                        <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
                                                         <span>Instructor led session - upto  {{item.image_instructor_lead_session_time!==""?item.image_instructor_lead_session_time:0}}</span>
                                                         <span>Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
                                                         <span>Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="durationCredits d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
-                                                <span class="by">By: <b>Larsen & Toubro</b></span>
-                                                <span class="credits">Credits : {{item.credits!==null?item.credits:0}}</span>
-                                                <span>
-                                                    <em class="lxp-Duration"></em> 
-                                                    Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
-                                                </span>
-                                            </div>
-                                            <div class="actionItems d-flex justify-content-between">
+                                            <div *ngIf="item?.batchid" class="actionItems d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
@@ -494,7 +493,7 @@
                                                         <p>Course Progression</p>
                                                     </div>
                                                     <div class="percentage">
-                                                        <circle-progress percent="{{((100 * (item.week_completed_count!==null?item.week_completed_count:0)) / (item.week_total_count!==null?item.week_total_count:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="5" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week"
+                                                        <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="5" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week"
                                                          [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
                                                     </div>
                                                 </div>
@@ -506,7 +505,7 @@
                             </div>
                         </mat-tab>
                     </mat-tab-group>
-<div class="spacer" *ngIf="!courseDetailsList.length"></div>
+                    <div class="spacer" *ngIf="!courseDetailsList.length"></div>
                     <!-- InProgressModule -->
                     <div class="inprogressModule" *ngIf="courseDetailsList.length">
                         <h3>Inprogress Modules</h3>
