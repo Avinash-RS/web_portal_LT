@@ -116,13 +116,13 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     data: { animation: 'Self Learner Avtivity', title: 'Self Learner Avtivity' }
   },
-  {
-    path: 'calendar',
-    // component: LearnerCalendarComponent,
-    loadChildren: './calendar.module#CalendarModules',
-    canLoad: [AuthGuard],
-    data: { animation: 'Calendar', title: 'Calendar' }
-  },
+  // {
+  //   path: 'calendar',
+  //   // component: LearnerCalendarComponent,
+  //   loadChildren: './calendar.module#CalendarModules',
+  //   canLoad: [AuthGuard],
+  //   data: { animation: 'Calendar', title: 'Calendar' }
+  // },
 
   {
     path: 'activitycenterhomescreen',

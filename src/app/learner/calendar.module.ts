@@ -40,11 +40,11 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 }
 
 const routes: Routes = [
-  {
-    path: '',
-    component: LearnerCalendarComponent,
-    data: { animation: 'Calendar' }
-  },
+  // {
+  //   path: '',
+  //   component: LearnerCalendarComponent,
+  //   data: { animation: 'Calendar' }
+  // },
 ]
 @NgModule({
   declarations: [

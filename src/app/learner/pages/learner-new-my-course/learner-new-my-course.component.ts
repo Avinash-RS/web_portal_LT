@@ -249,7 +249,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
             value.weekPercentage = (value.current_week_count !== null ?
               value.current_week_count : 0) + '/' + (value.actual_total_week !== null ? value.actual_total_week : 0);
           if(value.self_paced_learning_progression){
-            value.self_paced_learning_progression = parseInt(value.self_paced_learning_progression)
+            value.self_paced_learning_progression = Math.round(value.self_paced_learning_progression)
             if(value.self_paced_learning_progression <= 40) {
               value.progressClass="start"
             } else if(value.self_paced_learning_progression <= 70){
@@ -368,32 +368,53 @@ export class LearnerNewMyCourseComponent implements OnInit {
     });
   }
 
+  gotoquestionanswer(course) {
+    this.router.navigate(['/Learner/questionanswer'])
+  }
+
   getLearnerActivity(selectedDate) {
     const dateValue = moment(selectedDate).format('YYYY-MM-DD');
+    this.dayMonth = selectedDate;
     const empty = undefined;
     this.learnerActivityList = [];
     this.showSkeleton = true;
-    this.learnerService.getReadLeanerActivity(this.userId, dateValue, empty, "", "", 'day').subscribe((res: any) => {
-      this.dayMonth = selectedDate;
-      if (res.data?.get_read_learner_activity?.message.length > 0) {
+    this.learnerService.getLearnerActivity('','','day',dateValue,'',this.userId).subscribe((result:any)=>{
+      if(result?.data?.getActivityCalendar?.data?.activities?.length > 0){
         this.noActivity = false;
         this.showSkeleton = false;
         this.showErrorCard = false;
-        this.learnerActivityList = res.data?.get_read_learner_activity?.message;
-        this.learnerActivityList.sort((a, b) => {
-          return new Date(a.activity_details.startdate).getTime() - new Date(b.activity_details.startdate).getTime();
-
-        });
+        this.learnerActivityList =  result?.data?.getActivityCalendar?.data?.activities;
       } else {
         this.noActivity = true;
         this.showSkeleton = false;
-        this.errorMessage = res.data?.get_read_learner_activity?.error_msg;
+        this.errorMessage =  result?.data?.getActivityCalendar?.error_msg;
         this.showErrorCard = true;
         this.learnerActivityList = [];
       }
     },
-      err => { }
-    );
+    err =>{
+    })
+    // this.learnerService.getReadLeanerActivity(this.userId, dateValue, empty, "", "", 'day').subscribe((res: any) => {
+    //   this.dayMonth = selectedDate;
+    //   if (res.data?.get_read_learner_activity?.message.length > 0) {
+    //     this.noActivity = false;
+    //     this.showSkeleton = false;
+    //     this.showErrorCard = false;
+    //     this.learnerActivityList = res.data?.get_read_learner_activity?.message;
+    //     this.learnerActivityList.sort((a, b) => {
+    //       return new Date(a.activity_details.startdate).getTime() - new Date(b.activity_details.startdate).getTime();
+
+    //     });
+    //   } else {
+    //     this.noActivity = true;
+    //     this.showSkeleton = false;
+    //     this.errorMessage = res.data?.get_read_learner_activity?.error_msg;
+    //     this.showErrorCard = true;
+    //     this.learnerActivityList = [];
+    //   }
+    // },
+    //   err => { }
+    // );
   }
 
   openGallery(c){

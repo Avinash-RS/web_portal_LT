@@ -43,7 +43,9 @@
                         </div>
                         <ng-container *ngFor="let data of learnerActivityList | slice:0:4;">
                             <div class="listItem d-flex justify-content-start">
-                                <div class="dateFlag" [ngClass] = "{'ongoing': data.status === 'On going', 'completed': data.status === 'Completed', 'yettoStart': data.status === 'Up Coming'}">
+                                <div class="dateFlag" [ngClass] = "{'ongoing': data.status === 'On going','Overdue': data.status === 'Overdue',
+                                 'completed': data.status === 'Completed','completed': data.status === 'Graded','completed': data.status === 'Submitted', 
+                                'yettoStart': data.status === 'Up Coming','yettoStart': data.status === 'Yet to submit'}">
                                     <div class="dateDiv">
                                         <span class="flagDay">{{dayMonth | date :'dd'}}</span>
                                         <span class="flagMonth">{{dayMonth | date :'MMM'}}</span>
@@ -52,8 +54,8 @@
                                 <div class="detailData">
                                     <div class="badgedata d-flex justify-content-between">
                                         <p class="d-flex justify-content-center align-items-center">
-                                            <ng-container *ngIf="data.activity_details.activitytype != 'Live Classroom'">{{data.activity_details.activitytype}}</ng-container>
-                                            <ng-container  *ngIf="data.activity_details.activitytype == 'Live Classroom'">
+                                            <ng-container *ngIf="data.activitytype != 'Live Classroom'">{{data.activitytype}}</ng-container>
+                                            <ng-container  *ngIf="data.activitytype == 'Live Classroom'">
                                                 <ng-container *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
                                             <ng-container *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'">Live Interactions</ng-container>
                                             </ng-container>
@@ -62,18 +64,21 @@
                                             <span class="ongoing" *ngIf="data.status == 'On going'">
                                                 <em class="lxp-Timer_Outlined"></em>{{'Ongoing' | translate }}
                                             </span>
-                                            <span class="yettoStart" *ngIf="data.status == 'Up Coming'">
-                                                <em class="lxp-Play"></em>{{'Upcoming' | translate }}
+                                            <span class="ongoing" *ngIf="data.status == 'Overdue'">
+                                                <em class="lxp-Timelapse"></em>{{'Overdue' | translate }}
                                             </span>
-                                            <span class="completed" *ngIf="data.status == 'Completed'">
+                                            <span class="yettoStart"  *ngIf="data.status == 'Yet to submit' || data.status == 'Up Coming'">
+                                                <em class="lxp-Play"></em>{{'Yet to start' | translate }}
+                                            </span>
+                                            <span class="completed" *ngIf="data.status == 'Completed' || data.status == 'Graded' || data.status == 'Submitted'">
                                                 <em class="lxp-Right"></em>{{'Completed' | translate }}
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="titleFontSize">{{data.activity_details.coursename}}</div>
-                                    <div class="type">Module: <span>{{data.activity_details.modulename}}</span></div>
-                                    <div class="topic">Topic: <span>{{data.activity_details.topicname}}</span></div>
-                                    <div class="date">{{data.activity_details.startdate | date :'d/M/yy h:mm a'}} <span>-</span> {{data.activity_details.enddate | date :'d/M/yy h:mm a'}}</div>
+                                    <div class="titleFontSize">{{data.coursename}}</div>
+                                    <div class="type">Module: <span>{{data.modulename}}</span></div>
+                                    <div class="topic">Topic: <span>{{data.topicname}}</span></div>
+                                    <div class="date">{{data.activitystartdate | date :'d/M/yy h:mm a'}} <span>-</span> {{data.activityenddate | date :'d/M/yy h:mm a'}}</div>
                                 </div>
                             </div>
                         </ng-container>
@@ -281,7 +286,7 @@
                                                         <p>Activities</p>
                                                     </div>
                                                     <!--  -->
-                                                    <div class="icons" [ngClass]="item.course_status=='start'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):''">
+                                                    <div class="icons" [ngClass]="item.course_status=='start'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
                                                         <span><em class="lxp-QA"></em></span>
                                                         <p>Q&A</p>
                                                     </div>
