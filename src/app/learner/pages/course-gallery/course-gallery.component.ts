@@ -14,7 +14,7 @@ import * as CryptoJS from 'crypto-js';
   styleUrls: ['./course-gallery.component.scss']
 })
 export class CourseGalleryComponent implements OnInit {
-  @ViewChild(DragScrollComponent) ds: DragScrollComponent;
+  @ViewChild('nav') ds: DragScrollComponent;
   course: any;
   coursedata;
   selectedTopic;
