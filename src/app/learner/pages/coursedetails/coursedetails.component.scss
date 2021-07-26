@@ -1263,6 +1263,17 @@
   background-color: #ffdd91 !important;
   color: black !important;
 }
+.badge-warning, .badge-success {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+  vertical-align: baseline;
+  display: inline-block;
+  padding: 2px 7px 3px 7px !important;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
 
 ::ng-deep.askQuestionsContainer {
   .mat-tab-group {
