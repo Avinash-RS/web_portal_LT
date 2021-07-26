@@ -114,7 +114,12 @@ export class LearnerNewMyCourseComponent implements OnInit {
   courseSkel: boolean = false;
   mode = 'determinate';
   bufferValue = 100;
+  selectedJobRoleData = {
+    jobroleCategoryName : "All"
+  };
   dynamicTextChange: string = 'ongoing';
+  dateSelected: string;
+  vocationalselectjobRole= [];
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
@@ -147,7 +152,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     // this.triggerAvailablecourse = setInterval(() => {
     //   this.getCountForCategories();
     // }, 500);
-    // this.getMyJobRole();
+    this.getMyJobRole();
   }
   insidengOnInit() {
     this.CommonServices.openAvailCourcePopup.subscribe((data: any) => {
@@ -357,8 +362,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
       courseId : course.course_id,
       courseName: course.course_name
     }
-    // localStorage.setItem('Courseid', course.course_id);
-    // this.router.navigate(['/Learner/progressionReport'], { queryParams: { data } });
     this.router.navigate(['/Learner/progressionReport'], {
       queryParams:
       {
@@ -372,7 +375,16 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.router.navigate(['/Learner/questionanswer'])
   }
 
+  getTodaydate() {
+      console.log(this.viewDate);
+      this.dateSelected = moment(this.viewDate).format('YYYY-MM-DD');
+      this.getLearnerActivity(this.viewDate);
+  }
+
   getLearnerActivity(selectedDate) {
+    this.viewDate = new Date(selectedDate)
+    console.log(this.viewDate)
+    
     const dateValue = moment(selectedDate).format('YYYY-MM-DD');
     this.dayMonth = selectedDate;
     const empty = undefined;
@@ -415,6 +427,27 @@ export class LearnerNewMyCourseComponent implements OnInit {
     // },
     //   err => { }
     // );
+  }
+
+  getMyJobRole() {
+    this.learnerService.getCountForJobroleCategories(this.userDetailes._id, this.userDetailes.user_id).subscribe((data: any) => {
+      this.vocationalselectjobRole = data.data.getCountForJobroleCategories.data
+      // this.vocationalselectjobRole = [];
+      if(this.vocationalselectjobRole && this.vocationalselectjobRole.length > 0) {
+      }
+      else {
+      }
+    });
+  }
+
+  onSelectionChange(event){
+    this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id)
+  }
+
+  jobRoleSelectedFunction(event,value){
+    if(event.source.selected){
+      this.selectedJobRoleData = value
+    }
   }
 
   openGallery(c){

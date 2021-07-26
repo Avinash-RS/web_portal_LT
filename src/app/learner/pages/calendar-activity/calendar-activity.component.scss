@@ -177,15 +177,24 @@
             .htxt {
                 font-weight: 700;
                 color: #C02222;
+                display: inline-block;
+                line-height: 15px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                width: 98%;
             }
             .infotxt {
+                color: #999999;
                 span {
                     display: inline-block;
                     color: #666666;
-                    &:first-child {
-                        color: #999999;
-                        margin-right: 5px;
-                    }
+                    margin-left: 5px;
+                    line-height: 15px;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    width: 98%;
                 }
             }
         }
@@ -302,6 +311,36 @@
         justify-content: flex-start;
         color: #808080;
         font-size: 1.4em;
+    }
+}
+
+[data-md-tooltip] {
+    position: relative;
+    &::before {
+        content: attr(data-md-tooltip);
+        position: absolute;
+        bottom: -35px;
+        left: 50%;
+        padding: 8px;
+        transform: translateX(-50%) scale(0);
+        transition: transform 0.3s ease-in-out;
+        transform-origin: top;
+        background: #616161e6;
+        color: white;
+        border-radius: 2px;
+        font-size: 12px;
+        font-weight: 400;
+    }
+    &:hover {
+        &::before {
+            transform: translateX(-50%) scale(1);
+        }
+    }
+}
+::ng-deep.infotxtarea {
+    .mat-tooltip {
+        font-size: 14px;
+        line-height: normal;
     }
 }
 

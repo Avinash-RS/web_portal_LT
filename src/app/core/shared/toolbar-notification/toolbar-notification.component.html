@@ -13,9 +13,9 @@
         <div class="title" style="width: 90%;">
           <div class="name">Notifications</div>
           <div class="extra" *ngIf="unreadCount > 1">
-            You have {{ unreadCount }} new notifications</div>
+            You have {{ unreadCount }} unread notifications</div>
         <div class="extra" *ngIf="unreadCount == 1">
-          You have {{ unreadCount }} new notification</div>
+          You have {{ unreadCount }} unread notifications</div>
       </div>
     </div>
       </div>
@@ -35,7 +35,7 @@
         <div class="title" fxLayout="column" (click)="markAsRead(notification)">
           <a class="message wordWrap" *ngIf="notification.notifiedStatus != true" >{{ notification.notificationMessage }}</a>
           <a class="readed wordWrap" *ngIf="notification.notifiedStatus == true">{{ notification.notificationMessage }}</a>
-          <div class="time">{{ notification.timeAgo }}</div>
+          <div class="time">{{ notification.created_on | date: 'MMM d, y, h:mm a' }}</div>
         </div>
         <!-- <span fxFlex></span> -->
         <div class="notifiedStatus">
@@ -47,6 +47,25 @@
       <div class="divider" *ngIf="!isLast"></div>
     </div>
   </div>
+  <ng-container *ngIf="showSkeleton">
+    <div class="skeleton-container d-flex justify-content-between flex-row">
+      <div class="skeleton-part d-flex justify-content-between flex-column item1">
+        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>
+      </div>
+      <div class="skeleton-part d-flex justify-content-between flex-column item2">
+        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>
+      </div>
+      <div class="skeleton-part d-flex justify-content-between flex-column item3">
+        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" class="skeletonStyle"></ngx-skeleton-loader>
+      </div>
+    </div>
+  </ng-container>
 </ng-template>
 
 <ng-template #elseBlock>
