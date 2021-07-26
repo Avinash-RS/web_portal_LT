@@ -23,7 +23,7 @@
                                 <span mwlCalendarPreviousView [view]="'week'" [(viewDate)]="viewDate">
                                     <em class="lxp-Rewind_Arrow"></em>
                                 </span>
-                                <span (click)="getTodaydate($event)">
+                                <span (click)="getTodaydate()">
                                     <span class="today" mwlCalendarToday [(viewDate)]="viewDate">
                                         Today
                                     </span>
@@ -517,6 +517,21 @@
                             </div>
                         </mat-tab>
                     </mat-tab-group>
+
+                    <div class="desktopWrapper jobRole" *ngIf="userDetailes.org_type == 'vocational'" [ngClass]="(vocationalselectjobRole.length > 0) && show ?'handIcon':'noHandIcon'">
+                        <label for="jobRoles">My Job Role:</label>
+                        <div class="vocationalJobRole" style="display: inline-block;">
+                          <mat-form-field appearance="fill">
+                            <mat-select (selectionChange)="onSelectionChange($event)" [(ngModel)]="jobroleCategoryId">
+                              <mat-select-trigger>{{selectedJobRoleData?.jobroleCategoryName}}</mat-select-trigger>
+                              <mat-option matTooltipClass="custom-mat-tooltip" matTooltip="{{selectedJobRole.jobroleCategoryName}}" class="jobRolecustomClass" *ngFor="let selectedJobRole of vocationalselectjobRole" [value]="selectedJobRole.jobroleCategoryId" (onSelectionChange)="jobRoleSelectedFunction($event,selectedJobRole)">
+                                {{selectedJobRole.jobroleCategoryName}}
+                                <!-- <span class="jobRoleCount">{{selectedJobRole.jobroleEnrollCount}}</span> -->
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
                     <div class="spacer" *ngIf="!courseDetailsList.length"></div>
                     <!-- InProgressModule -->
                     <div class="inprogressModule" *ngIf="courseDetailsList.length">

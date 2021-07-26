@@ -114,8 +114,12 @@ export class LearnerNewMyCourseComponent implements OnInit {
   courseSkel: boolean = false;
   mode = 'determinate';
   bufferValue = 100;
+  selectedJobRoleData = {
+    jobroleCategoryName : "All"
+  };
   dynamicTextChange: string = 'ongoing';
   dateSelected: string;
+  vocationalselectjobRole= [];
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
@@ -148,7 +152,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     // this.triggerAvailablecourse = setInterval(() => {
     //   this.getCountForCategories();
     // }, 500);
-    // this.getMyJobRole();
+    this.getMyJobRole();
   }
   insidengOnInit() {
     this.CommonServices.openAvailCourcePopup.subscribe((data: any) => {
@@ -423,6 +427,27 @@ export class LearnerNewMyCourseComponent implements OnInit {
     // },
     //   err => { }
     // );
+  }
+
+  getMyJobRole() {
+    this.learnerService.getCountForJobroleCategories(this.userDetailes._id, this.userDetailes.user_id).subscribe((data: any) => {
+      this.vocationalselectjobRole = data.data.getCountForJobroleCategories.data
+      // this.vocationalselectjobRole = [];
+      if(this.vocationalselectjobRole && this.vocationalselectjobRole.length > 0) {
+      }
+      else {
+      }
+    });
+  }
+
+  onSelectionChange(event){
+    this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id)
+  }
+
+  jobRoleSelectedFunction(event,value){
+    if(event.source.selected){
+      this.selectedJobRoleData = value
+    }
   }
 
   openGallery(c){
