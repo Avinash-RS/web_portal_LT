@@ -44,7 +44,10 @@
             <div class="mark-level">{{pieData.perform_completed +'/'+pieData.perform_total}}</div>
           </div>
           <div class="d-flex color-grey h-10">
-            <div class="type-label">Virtual Instructor Led Session</div>
+            <div class="type-label">
+              <ng-container *ngIf="UserDetails.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
+              <ng-container *ngIf="UserDetails.org_type == 'collegeconnect' || UserDetails.org_type == 'Corporate'">Live Interactions</ng-container>
+            </div>
             <mat-progress-bar [mode]="mode"
               [value]="percentageCalc(pieData.liveclassroom_completed,pieData.liveclassroom_total)"
               [bufferValue]="bufferValue"></mat-progress-bar>
