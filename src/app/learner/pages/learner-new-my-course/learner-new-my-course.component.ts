@@ -115,6 +115,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   mode = 'determinate';
   bufferValue = 100;
   dynamicTextChange: string = 'ongoing';
+  dateSelected: string;
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
@@ -357,8 +358,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
       courseId : course.course_id,
       courseName: course.course_name
     }
-    // localStorage.setItem('Courseid', course.course_id);
-    // this.router.navigate(['/Learner/progressionReport'], { queryParams: { data } });
     this.router.navigate(['/Learner/progressionReport'], {
       queryParams:
       {
@@ -372,7 +371,16 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.router.navigate(['/Learner/questionanswer'])
   }
 
+  getTodaydate() {
+      console.log(this.viewDate);
+      this.dateSelected = moment(this.viewDate).format('YYYY-MM-DD');
+      this.getLearnerActivity(this.viewDate);
+  }
+
   getLearnerActivity(selectedDate) {
+    this.viewDate = new Date(selectedDate)
+    console.log(this.viewDate)
+    
     const dateValue = moment(selectedDate).format('YYYY-MM-DD');
     this.dayMonth = selectedDate;
     const empty = undefined;

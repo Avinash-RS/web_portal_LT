@@ -23,8 +23,10 @@
                                 <span mwlCalendarPreviousView [view]="'week'" [(viewDate)]="viewDate">
                                     <em class="lxp-Rewind_Arrow"></em>
                                 </span>
-                                <span class="today" mwlCalendarToday [view]="'week'" [(viewDate)]="viewDate">
-                                    Today
+                                <span (click)="getTodaydate($event)">
+                                    <span class="today" mwlCalendarToday [(viewDate)]="viewDate">
+                                        Today
+                                    </span>
                                 </span>
                                 <span mwlCalendarNextView [view]="'week'" [(viewDate)]="viewDate">
                                     <em class="lxp-Forward_Arrow"></em>
@@ -32,7 +34,7 @@
                             </div>
                         </div>
                         <div class="weekviewHead">
-                            <mwl-calendar-week-view [selected]="selectedDate" (dayHeaderClicked)="getLearnerActivity($event.day.date)" [weekStartsOn]="1" [viewDate]="viewDate" [events]="events"></mwl-calendar-week-view>
+                            <mwl-calendar-week-view [selected]="selectedDate" (dayHeaderClicked)="getLearnerActivity($event.day.date)" [weekStartsOn]="1" [(viewDate)]="viewDate" [events]="events"></mwl-calendar-week-view>
                         </div>
                     </div>
                     <div>
