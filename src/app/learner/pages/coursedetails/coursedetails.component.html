@@ -21,7 +21,7 @@
                      <i class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()"></i>
                     </div>
                     <div class="currentTopic" >
-                     <span title="{{scromModuleData[weekHolder].childData[moduleHolder]?.children[nextPrevHolder].title}}">{{scromModuleData[weekHolder].childData[moduleHolder]?.children[nextPrevHolder].title}}</span>
+                     <span title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}">{{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}</span>
                     </div>
                     <div class="rightArrow">                
                      <i class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()"></i>
@@ -67,7 +67,7 @@
             <div class="xyz" *ngIf="filterkey=='Bookmarked'?(filterData.length>0?true:false):(scromModuleData.length>0?true:true);else emptyTOC">
                 <mat-card *ngFor="let resDat of filterkey=='Bookmarked'?filterData:scromModuleData; let wi = index" [ngClass]="resDat.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
                     class="topicCard" >
-                    <div *ngIf="wi===weekHolder" #focuser ></div>
+                    <div *ngIf="wi===weekHolderUI" #focuser ></div>
                     <!-- (click)="moduleExpand(resDat,i)" -->
                             <mat-card-title  class="d-flex justify-content-between align-items-center pointer">
                                 <div class="tocTitle">Week - {{resDat.week?resDat.week:wi+1}}</div>
@@ -76,7 +76,7 @@
                                 </div>
                             </mat-card-title>
                             <span *ngFor="let res of resDat.childData let mi = index" (load)="mi==moduleHolder?res.expanded=true:res.expanded=false;">
-                            <mat-card-subtitle (click)="moduleExpand(wi,mi,res)" class="d-flex justify-content-start align-items-center tocSubTitle" [ngClass]="(wi===weekHolder&&mi==moduleHolder)?'titleSelected':''">
+                            <mat-card-subtitle (click)="moduleExpand(wi,mi,res)" class="d-flex justify-content-start align-items-center tocSubTitle" [ngClass]="(wi===weekHolderUI&&mi==moduleHolder)?'titleSelected':''">
                                 <div>
                                     <!-- *ngIf="res?.status == 'Passed'" -->
                                     <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons passColor" >done </mat-icon>
@@ -99,7 +99,7 @@
                         <div class="bs-vertical-wizard">
                             <ul>
                                 <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of res?.children; let ti = index">
-                                    <span class="icov" [ngClass]="(wi==weekHolder&&ti==nextPrevHolder && mi==moduleHolder) ? 'titleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,wi,ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
+                                    <span class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder) ? 'titleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,wi,ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                         {{mod?.title}}
                                         <i class="ico" [ngClass]="mod?.status === 'Passed' ? 'fa fa-check ico-green' :  mod?.status === 'process' ? 'fa fa-circle ico-yellow' : ''"></i>
                                         <!-- <span class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, cumque.</span> -->
@@ -348,7 +348,7 @@
                         </div>
                         <p class="quesiton">{{item.filteredValue.question.que}}</p>
                         <div class="QuestionMeta">
-                            <div class="badge font-weight-lighter" [ngClass]="item.filteredValue.question.ansDate?'badge-success':'badge-warning'">{{item.filteredValue.question.ansDate?'Answered':'Unanswered'}} </div>
+                            <div class="font-weight-lighter" [ngClass]="item.filteredValue.question.ansDate?'badge-success':'badge-warning'">{{item.filteredValue.question.ansDate?'Answered':'Unanswered'}} </div>
                             &nbsp;<p *ngIf="item.filteredValue.question.ansDate">{{item.filteredValue.question.ansDate}}, &nbsp;{{item.filteredValue.question.ansTime}}</p>
                             
                         </div>
