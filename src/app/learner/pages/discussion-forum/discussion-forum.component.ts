@@ -112,7 +112,7 @@ export class DiscussionForumComponent implements OnInit {
     this.loading = true;
     this.Lservice.playerModuleAndTopic(cid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromModuleData = data.data?.playerModuleAndTopic?.message && data.data?.playerModuleAndTopic?.message[0]?.childData || [];
-      this.selectedModuleData = this.scromModuleData[0] || null;
+      this.selectedModuleData = this.scromModuleData[0].childData[0] || null;
       this.loading = false;
       if (this.selectedModuleData) {
         this.loading = true;
