@@ -160,6 +160,7 @@ export class CoursedetailsComponent implements OnInit {
   userType: any;
   weekHolder: number;
   weekLength: any;
+  weekHolderUI: number;
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -331,6 +332,7 @@ export class CoursedetailsComponent implements OnInit {
             if (resumeInit) {
               this.nextPrevHolder = this.topiccurrentPage;
               this.moduleHolder = this.currentPage;
+              this.weekHolderUI = this.weekHolder;
               resumeInit = false;
               this.isprevEnable = true;
               this.isNextEnable = true;
@@ -468,7 +470,7 @@ export class CoursedetailsComponent implements OnInit {
         // topic to module change on previous
         if (this.topiccurrentPage === this.getTopicLengthofModule - 1) {
           if ((this.currentPage === this.moduleLenth - 1) && (this.topiccurrentPage === this.getTopicLengthofModule - 1)) {
-            this.weekHolder = Number(this.weekHolder) + 1;
+            this.weekHolder = this.weekHolderUI = Number(this.weekHolder) + 1;
             this.currentPage = 0;
             this.moduleHolder = this.currentPage;
 
@@ -530,7 +532,7 @@ export class CoursedetailsComponent implements OnInit {
         this.getTopicLengthofModule = this.scromModuleData[this.weekHolder].childData[this.currentPage]?.topic_len;
       } else {
         if (this.currentPage==0 && this.topiccurrentPage == 0) {
-          this.weekHolder = this.weekHolder - 1;
+          this.weekHolder = this.weekHolderUI = this.weekHolder - 1;
           this.moduleHolder = this.scromModuleData[this.weekHolder].childData.length - 1;
           this.currentPage = Number(this.moduleHolder);
           this.topiccurrentPage = this.scromModuleData[this.weekHolder].childData[this.currentPage].children.length - 1;
@@ -573,7 +575,7 @@ export class CoursedetailsComponent implements OnInit {
       // this.moduleLenth = this.scromApiData?.childData.length;
       this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : Number(this.scromApiData.topicIndex);
       this.moduleHolder = this.currentPage = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
-      this.weekHolder = this.scromApiData.week - 1;
+      this.weekHolder  = this.weekHolderUI = this.scromApiData.week - 1;
       // this.scromModuleData[this.moduleHolder].expanded = true;
       this.oldIdx = this.moduleHolder;
       this.topicInfo = this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].children[this.nextPrevHolder]
@@ -612,7 +614,7 @@ export class CoursedetailsComponent implements OnInit {
     });
   }
   playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, weekIndex, topindex, moduleIdx) {
-    this.weekHolder = weekIndex;
+    this.weekHolder = this.weekHolderUI = weekIndex;
     this.currentTopicTitle = topicName;
     this.currentModuleTitle = moduleName
     this.topicPageStatus = topicStatus;
