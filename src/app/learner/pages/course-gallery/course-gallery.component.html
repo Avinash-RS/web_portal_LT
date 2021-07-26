@@ -13,7 +13,7 @@
   <div>
     <mat-form-field appearance="outline">
       <input matInput placeholder="Search" name="searchbar" [(ngModel)]="searchContent" type="text">
-      <mat-icon matSuffix>search</mat-icon>
+      <mat-icon matSuffix (click)="searchContent?searchContent='':false">{{searchContent?'close':'search'}}</mat-icon>
     </mat-form-field>
   </div>
 </div>
@@ -27,8 +27,8 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
           <div class="header-content">
             <h3>{{content.modulename}}</h3>
             <div class="header-carousel">
-              <drag-scroll (reachesLeftBound)="leftBoundStat($event)" (reachesRightBound)="rightBoundStat($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
-                <span drag-scroll-item *ngFor="let topic of content.moduledetails;let i = index" class="tooltip-pos">
+              <drag-scroll #nav (reachesLeftBound)="leftBoundStat($event)" (reachesRightBound)="rightBoundStat($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
+                <span drag-scroll-item *ngFor="let topic of content.moduledetails | filter:searchContent;let i = index" class="tooltip-pos">
                   <span class="topic-container" (click)="onTopicSelection(content.modulename,topic.topicname)">
                     <span class="{{ topic.activeTopic == 'active' ? 'topic-chip active-topic chip-hover' : 'topic-chip chip-hover'}}"  matTooltip="{{topic.topicname}}"  matTooltipClass="tooltip-show">
                       {{topic.topicname}}</span>
@@ -37,10 +37,10 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
               </drag-scroll>
               <div class="draggable-button-container">
                 <div class="leftArrow">
-                  <button [disabled]="leftNavDisabled" [ngClass]="leftNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveLeft()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
+                  <button #leftA [disabled]="leftNavDisabled" [ngClass]="leftNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveLeft()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
                 </div>
                 <div class="rightArrow">
-                  <button [disabled]="rightNavDisabled" [ngClass]="rightNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveRight()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
+                  <button #rightA [disabled]="rightNavDisabled" [ngClass]="rightNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveRight()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
                 </div>
               </div>
             </div>
@@ -48,7 +48,7 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
           <div class="main-section">
             <ng-container *ngFor="let topic of content.moduledetails">
             <ng-container *ngIf="topic.activeTopic == 'active'">
-              <ng-container *ngFor="let file of topic.allContent">
+              <ng-container *ngFor="let file of topic.allContent | filter:searchContent">
                 <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2" *ngIf="file.type != 'image'">
                   <div class="resource-card" (click)="onPreviewgallery(file.type,file.link,'','all',content.modulename,topic.topicname)">
                     <div class="card-img">
