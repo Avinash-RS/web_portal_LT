@@ -43,9 +43,7 @@
                         </div>
                         <ng-container *ngFor="let data of learnerActivityList | slice:0:4;">
                             <div class="listItem d-flex justify-content-start">
-                                <div class="dateFlag" [ngClass] = "{'ongoing': data.status === 'On going','Overdue': data.status === 'Overdue',
-                                 'completed': data.status === 'Completed','completed': data.status === 'Graded','completed': data.status === 'Submitted', 
-                                'yettoStart': data.status === 'Up Coming','yettoStart': data.status === 'Yet to submit'}">
+                                <div class="dateFlag" [ngClass] = "{'ongoing': data.status === 'On going', 'Overdue': data.status === 'Overdue', 'completed': data.status === 'Completed', 'graded': data.status === 'Graded', 'submitted': data.status === 'Submitted', 'yetStart': data.status === 'Yet to submit', 'yettoStart': data.status === 'Up Coming'}">
                                     <div class="dateDiv">
                                         <span class="flagDay">{{dayMonth | date :'dd'}}</span>
                                         <span class="flagMonth">{{dayMonth | date :'MMM'}}</span>
@@ -55,9 +53,9 @@
                                     <div class="badgedata d-flex justify-content-between">
                                         <p class="d-flex justify-content-center align-items-center">
                                             <ng-container *ngIf="data.activitytype != 'Live Classroom'">{{data.activitytype}}</ng-container>
-                                            <ng-container  *ngIf="data.activitytype == 'Live Classroom'">
+                                            <ng-container *ngIf="data.activitytype == 'Live Classroom'">
                                                 <ng-container *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
-                                            <ng-container *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'">Live Interactions</ng-container>
+                                                <ng-container *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'">Live Interactions</ng-container>
                                             </ng-container>
                                         </p>
                                         <div class="status">

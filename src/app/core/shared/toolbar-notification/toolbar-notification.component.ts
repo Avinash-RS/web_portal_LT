@@ -19,6 +19,7 @@ export class ToolbarNotificationComponent implements OnInit {
   unreadCount: any;
   cssPrefix: any;
   routedSubs: any;
+  showSkeleton = true;
 
   @HostListener('document:click', ['$event', '$event.target'])
   onClick(event: MouseEvent, targetElement: HTMLElement) {
@@ -63,8 +64,10 @@ export class ToolbarNotificationComponent implements OnInit {
   }
 
   getNotification() {
+    this.showSkeleton = true;
     this.commonservice.getAllNotifications(this.userId, 'learner', this.pagenumber).subscribe((result: any) => {
       if (result && result.data && result.data.getAllNotifications) {
+      this.showSkeleton = false;
       this.notifications = result.data.getAllNotifications.data;
       this.unreadCount = result.data.getAllNotifications.unReadCount;
       localStorage.setItem('NotificationCount',this.unreadCount)

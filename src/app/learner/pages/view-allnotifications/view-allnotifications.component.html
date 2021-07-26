@@ -33,8 +33,8 @@
   <ng-container matColumnDef="date">
     <th class="w-30 text-center" mat-header-cell *matHeaderCellDef><strong class="font">Received on</strong></th>
     <td class="pointer text-center" mat-cell *matCellDef="let element"> 
-      <span class="read" *ngIf="element.notifiedStatus == true">{{element.timeAgo}}</span>
-      <span class="unread" *ngIf="element.notifiedStatus != true">{{element.timeAgo}}</span>
+      <span class="read" *ngIf="element.notifiedStatus == true">{{element.created_on | date: 'MMM d, y, h:mm a'}}</span>
+      <span class="unread" *ngIf="element.notifiedStatus != true">{{element.created_on | date: 'MMM d, y, h:mm a'}}</span>
     </td>
   </ng-container>
 
