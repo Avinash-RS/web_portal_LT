@@ -33,13 +33,12 @@
       <ng-container *ngFor="let activity of activityData.activities">
         <div class="contentbox d-flex justify-content-between" (click)="goToActivities(activity)">
           <div class="infotxtarea">
-            <span class="htxt">{{activity.coursename}}</span>
-            <div class="infotxt d-flex justify-content-start"> <span>Module:</span> <span>{{activity.modulename}}</span></div>
-            <div class="infotxt d-flex justify-content-start"> <span>Topic:</span> <span>{{activity.topicname}}</span></div>
+            <span class="htxt" matTooltipPosition="below" matTooltip="{{activity.coursename}}">{{activity.coursename}}</span>
+            <div class="infotxt d-flex justify-content-start"> Module: <span matTooltipPosition="below" matTooltip="{{activity.modulename}}">{{activity.modulename}}</span></div>
+            <div class="infotxt d-flex justify-content-start"> Topic: <span matTooltipPosition="below" matTooltip="{{activity.topicname}}">{{activity.topicname}}</span></div>
           </div>
     
           <div class="infotypearea">
-            <!-- <span *ngIf="activity.activitytype == 'Perform' || activity.activitytype == 'Assignment'|| activity.activitytype == 'Project'" class="icon lxp-Test" >i</span> -->
             <span  *ngIf="activity.activitytype == 'Live Classroom'" class="icon lxp-VILT" >i</span>
             <span  *ngIf="activity.activitytype == 'Self Learning'" class="icon lxp-Self_Learning">i</span>
             <span  *ngIf="activity.activitytype == 'Perform'" class="icon lxp-Perform">i</span>
