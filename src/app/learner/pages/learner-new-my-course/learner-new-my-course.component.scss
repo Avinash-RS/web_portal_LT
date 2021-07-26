@@ -400,6 +400,7 @@
         border-radius: 20px;
         top: 50%;
         transform: translateY(-50%);
+        z-index: 99;
         em {
           font-size: 12px;
           margin-right: 5px;
@@ -870,6 +871,12 @@
   .mat-tab-body-content {
     padding: 0 5px;
   }
+  .mat-tab-group {
+    margin-top: 60px;
+    @media only screen and (min-width: 576px) {
+      margin-top: 0;
+    }
+  }
 }
 
 //
@@ -1320,6 +1327,150 @@
       color: #666666;
       border-radius: 5px;
     }
+  }
+}
+
+.desktopWrapper {
+  // display: none;
+  display: block;
+  @media only screen and (min-width: 768px) {
+    display: block;
+  }
+}
+.jobRole {
+  position: absolute;
+  top: 70px;
+  left: 15px;
+  z-index: 8;
+  width: 80%;
+  @media only screen and (min-width:768px) {
+    padding-right: 85px;
+  }
+  &.handIcon {
+    @media only screen and (min-width: 1200px) {
+      padding-right: 20px;
+    }
+  }
+  @media only screen and (min-width: 576px) {
+    left: auto;
+    right: 0;
+    width: 45%;
+  }
+  @media only screen and (min-width: 1140px) {
+    width: 35%;
+  }
+  &.noHandIcon {
+    // display: none;
+  }
+  label {
+    font-weight: 700;
+    display: inline-block;
+    margin: 0 5px 0 0;
+    color: #333333;
+    width: 28%;
+  }
+  .vocationalJobRole {
+    width: 70%;
+    text-align: right;
+  }
+}
+::ng-deep.vocationalJobRole {
+  .mat-form-field {
+    width: 100%;
+  }
+}
+::ng-deep.jobRole {
+  .mat-form-field-underline {
+    bottom: 0;
+  }
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+  .mat-form-field-infix {
+    border-top: 0 solid transparent;
+  }
+  .mat-form-field-appearance-fill .mat-select-arrow-wrapper {
+    transform: translateY(0%);
+  }
+  .mat-form-field-ripple, 
+  .mat-form-field.mat-focused .mat-form-field-ripple, 
+  .mat-form-field-appearance-fill .mat-form-field-underline::before {
+    background-color: transparent;
+  }
+  .mat-form-field-underline {
+    border: 1px solid #cdcdcd;
+    height: 100%;
+  }
+  .mat-form-field.mat-focused.mat-primary .mat-select-arrow, 
+  .mat-select-arrow {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  .mat-select {
+    text-transform: capitalize;
+  }
+  .noHandIcon {
+    .mat-select-trigger {
+      cursor: not-allowed;
+    }
+    .mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex {
+      cursor: not-allowed;
+    }
+  }
+}
+::ng-deep.jobRolecustomClass {
+  position: relative;
+  .mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  .mat-option.mat-selected:not(.mat-option-multiple):not(.mat-option-disabled) {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: #333333 !important;
+  }
+  .mat-option-text {
+    text-transform: capitalize;
+  }
+  .jobRoleCount {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #C02222;
+    color: #ffffff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+::ng-deep.custom-mat-tooltip {
+  position: relative !important;
+  bottom: 80px !important;
+  background-color: black !important;
+  opacity: 1 !important;
+  right: 20px !important;
+  font-size: 12px !important;
+  text-transform: capitalize;
+}
+::ng-deep.desktopWrapper .mat-tab-header {
+  margin-top: 20px;
+}
+::ng-deep.desktopWrapper .mat-tab-label {
+  opacity: 0.5;
+  min-width: inherit !important;
+  &:hover {
+    background-color: #eeeeee;
+  }
+}
+::ng-deep.desktopWrapper .mat-tab-label-active {
+  min-width: inherit !important;
+  background-color: #fff;
+  opacity: 1;
+  &:hover {
+    background-color: transparent;
   }
 }
 
