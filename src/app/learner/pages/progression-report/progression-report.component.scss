@@ -923,3 +923,18 @@
     background: #f2f2f2;
   }
 }
+// No Card
+.noCard {
+  margin:100px 0;
+  text-align: center;
+  div {
+    margin: 15px 0;
+  }
+  p {
+    font-size: 14px;
+    color: #000000;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 30px ​!important;
+  }
+}

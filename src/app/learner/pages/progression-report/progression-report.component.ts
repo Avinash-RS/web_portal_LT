@@ -82,6 +82,7 @@ export class ProgressionReportComponent implements OnInit {
   performContentData: any;
   pieData: any;
   doughnutChartData;
+  isTableData: boolean;
   constructor(
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService,
@@ -237,6 +238,7 @@ export class ProgressionReportComponent implements OnInit {
     this.showProgReport = false
     this.learnerService.getProgressionData(this.userId, this.courseId).subscribe((data: any) => {
       this.apidata = data.data.getCourseReportByUserid.data.module;
+      this.isTableData = data.data.getCourseReportByUserid.success;
       this.showProgReport = true;
     });
 
@@ -277,6 +279,11 @@ export class ProgressionReportComponent implements OnInit {
     }
     if(this.doughnutChartData.yettostart){
       data_load.push(this.doughnutChartData.yettostart);
+      data_labels.push('Yet to start');
+      data_colors.push('#CCCCCC');
+    }
+    if(this.doughnutChartData.completed==0 && this.doughnutChartData.inprogress==0 && this.doughnutChartData.yettostart==0){
+      data_load.push(100);
       data_labels.push('Yet to start');
       data_colors.push('#CCCCCC');
     }
