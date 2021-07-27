@@ -8,6 +8,10 @@
         flex-direction: row;
     }
     .questionLeftCol {
+        //inner scroll
+        overflow: auto;
+        height: 80vh !important;
+        
         order: 2;
         padding: 20px 0;
         width: 100%;

@@ -280,6 +280,11 @@ export class ProgressionReportComponent implements OnInit {
       data_labels.push('Yet to start');
       data_colors.push('#CCCCCC');
     }
+    if(this.doughnutChartData.completed==0 && this.doughnutChartData.inprogress==0 && this.doughnutChartData.yettostart==0){
+      data_load.push(100);
+      data_labels.push('Yet to start');
+      data_colors.push('#CCCCCC');
+    }
     new Chart('piechart', {
       type: 'doughnut',
       data: {

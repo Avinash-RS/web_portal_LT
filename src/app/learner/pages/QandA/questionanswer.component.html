@@ -101,7 +101,7 @@
     </div>
     <div class="addQuestionRightCol">
         <div class="addQuestion">
-            <button><em class="lxp-add"></em> Add Question</button>
+            <button (click)="openQuestionDialog(questionDialog)"><em class="lxp-add"></em> Add Question</button>
         </div>
         <div class="questionResults d-flex justify-content-between">
             <div class="questions d-flex justify-content-between align-items-center">
@@ -128,3 +128,8 @@
         </div>
     </div>
 </div>
+
+<ng-template #questionDialog>
+
+    yelo boi
+</ng-template>
