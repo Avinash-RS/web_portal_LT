@@ -535,7 +535,7 @@
                       </div>
                     <div class="spacer" *ngIf="!courseDetailsList.length"></div>
                     <!-- InProgressModule -->
-                    <div class="inprogressModule" *ngIf="courseDetailsList.length">
+                    <div class="inprogressModule d-none" *ngIf="courseDetailsList.length">
                         <h3>Inprogress Modules</h3>
                         <div class="d-flex justify-content-start">
                             <div class="modules">
@@ -574,7 +574,7 @@
                     </div>
 
                     <!-- Missed Topics & Knowledge Check -->
-                    <div class="missedTopicsKnowledgeCheck" *ngIf="courseDetailsList.length">
+                    <div class="missedTopicsKnowledgeCheck d-none" *ngIf="courseDetailsList.length">
                         <h3>Missed Topics & Knowledge Check</h3>
                         <div class="wrapper d-flex justify-content-between">
                             <span class="leftArrow"><em class="lxp-Right_Direction_Arrow"></em></span>
@@ -611,7 +611,7 @@
                     </div>
 
                     <!-- Recently Learned Topics -->
-                    <div class="recentlyLearnedTopics" *ngIf="courseDetailsList.length">
+                    <div class="recentlyLearnedTopics d-none" *ngIf="courseDetailsList.length">
                         <h3>Recently Learnt Topics</h3>
                         <div class="wrapper d-flex justify-content-between">
                             <span class="leftArrow"><em class="lxp-Right_Direction_Arrow"></em></span>
