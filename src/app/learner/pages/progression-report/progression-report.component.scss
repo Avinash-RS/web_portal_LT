@@ -5,10 +5,23 @@
   @include md {
     margin-bottom: 0;
   }
-    .progress-label{
+    .progress-label, .learning-label {
         font-size: 16px;
         font-weight: bold;
-        margin-bottom: 1em;
+        text-align: center;
+      }
+    .progress-label {
+      margin-top: 1.5em;
+      margin-bottom: 3em;
+      @media only screen and (min-width: 720px) {
+        margin-top: 0;
+      }
+      @media only screen and (min-width: 1560px) {
+        margin-bottom: 2em;
+      }
+    }
+    .learning-label {
+      margin-bottom: 0;
     }
     .left-container {
         width: 100%;
@@ -57,12 +70,20 @@
             }
         }
         .type-label{
-            width: 15em;
+            width: 50%;
             color: #666666;
+            @media only screen and (min-width: 576px) {
+              width: 40%;
+            }
+            @media only screen and (min-width: 1560px) {
+              width: 22%;
+            }
         }
         .mark-level{
             margin-left: 1em;
             font-weight: bold;
+            width: 7%;
+            text-align: right;
         }
         .activity-container{
             margin-top: 40px;
@@ -736,20 +757,23 @@
   .mat-progress-bar-buffer {
     background-color: #dfdede !important;
   }
+  .color-grey, .color-yellow, .color-green {
+    height: 2.5em;
+    @media only screen and (min-width: 720px) {
+      height: 4em;
+    }
+  }
   .color-grey {
-    height: 2em;
     .mat-progress-bar-fill::after {
       background-color: #cccccc !important;
     }
   }
   .color-yellow {
-    height: 2em;
     .mat-progress-bar-fill::after {
       background-color: #FFA800 !important;
     }
   }
   .color-green {
-    height: 2em;
     .mat-progress-bar-fill::after {
       background-color: #32CE6A !important;
     }

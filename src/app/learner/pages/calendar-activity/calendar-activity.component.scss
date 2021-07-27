@@ -405,6 +405,11 @@
         text-transform: uppercase;
         font-size: 0.9em;
     }
+    .cal-month-view {
+        .cal-in-month {
+            cursor: pointer;
+        }
+    }
     .calendarInfo {
         display: flex;
         align-content: center;
