@@ -262,13 +262,31 @@ export class ProgressionReportComponent implements OnInit {
 
   }
   createChart() {
+    let data_load  = [];
+    let data_labels = [];
+    let data_colors = [];
+    if(this.doughnutChartData.completed){
+      data_load.push(this.doughnutChartData.completed);
+      data_labels.push('Completed');
+      data_colors.push('#32CE6A');
+    }
+    if(this.doughnutChartData.inprogress){
+      data_load.push(this.doughnutChartData.inprogress);
+      data_labels.push('Inprogress');
+      data_colors.push('#FFA800')
+    }
+    if(this.doughnutChartData.yettostart){
+      data_load.push(this.doughnutChartData.yettostart);
+      data_labels.push('Yet to start');
+      data_colors.push('#CCCCCC');
+    }
     new Chart('piechart', {
       type: 'doughnut',
       data: {
-        labels: ['Completed', 'Inprogress', 'Yet to start'],
+        labels: data_labels,
         datasets: [{
-          data: [this.doughnutChartData.completed, this.doughnutChartData.inprogress, this.doughnutChartData.yettostart],
-          backgroundColor: ['#32CE6A', '#FFA800', '#CCCCCC'],
+          data: data_load,
+          backgroundColor: data_colors,
         }]
       },
       options: {
