@@ -25,5 +25,8 @@ export class QuestionanswerComponent implements OnInit {
       disableClose: true,
     });
   }
+  dialogClose(){
+    this.dialog.closeAll();
+  }
   
 }

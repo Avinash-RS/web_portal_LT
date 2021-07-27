@@ -82,6 +82,7 @@ export class ProgressionReportComponent implements OnInit {
   performContentData: any;
   pieData: any;
   doughnutChartData;
+  isTableData: boolean;
   constructor(
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService,
@@ -237,6 +238,7 @@ export class ProgressionReportComponent implements OnInit {
     this.showProgReport = false
     this.learnerService.getProgressionData(this.userId, this.courseId).subscribe((data: any) => {
       this.apidata = data.data.getCourseReportByUserid.data.module;
+      this.isTableData = data.data.getCourseReportByUserid.success;
       this.showProgReport = true;
     });
 
