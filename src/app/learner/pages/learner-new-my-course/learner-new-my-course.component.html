@@ -57,7 +57,7 @@
                                             <ng-container *ngIf="data.activitytype != 'Live Classroom'">{{data.activitytype}}</ng-container>
                                             <ng-container *ngIf="data.activitytype == 'Live Classroom'">
                                                 <ng-container *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
-                                                <ng-container *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'">Live Interactions</ng-container>
+                                                <ng-container *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'"><p>Live Interactions</p></ng-container>
                                             </ng-container>
                                         </p>
                                         <div class="status">
@@ -250,7 +250,7 @@
                                                     </button>
                                                   </mat-menu>
                                             </div>
-                                            <div  *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
+                                            <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
                                                 <span class="by">By: <b>Larsen & Toubro</b></span>
                                                 <span class="credits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
                                                 <span>
@@ -278,7 +278,7 @@
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'vocational'"><p>Virtual Instructor<br/>Led Session</p></ng-container>
+                                                        <ng-container *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
                                                         <ng-container *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'"><p>Live Interactions</p></ng-container>
                                                     </div>
                                                     <div class="icons" (click)="gotoSubmissionDetails(item)">
@@ -286,7 +286,7 @@
                                                         <p>Activities</p>
                                                     </div>
                                                     <!--  -->
-                                                    <div class="icons" [ngClass]="item.course_status=='start'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
+                                                    <div class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
                                                         <span><em class="lxp-QA"></em></span>
                                                         <p>Q&A</p>
                                                     </div>
@@ -355,10 +355,10 @@
                                             </div>
                                             <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
                                                 <span class="by">By: <b>Larsen & Toubro</b></span>
-                                                <span class="credits">Credits: {{item.credits!==null?item.credits:0}}</span>
+                                                <span class="credits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
                                                 <span>
                                                     <em class="lxp-Duration"></em> 
-                                                    Duration: <b>{{item.total_duration? item.total_duration : "1" + ""}} {{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                    Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
                                                 </span>
                                             </div>
                                             <div *ngIf="item?.batchid" class="showLessContent">
@@ -382,14 +382,14 @@
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
                                                         <ng-container *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'|| userDetailes.org_type == 'Corporate'">Live Interactions</ng-container>
-                                                        
+                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'"><p>Live Interactions</p></ng-container>
                                                     </div>
                                                     <div class="icons" (click)="gotoSubmissionDetails(item)">
                                                         <span><em class="lxp-Activities_New"></em></span>
                                                         <p>Activities</p>
                                                     </div>
-                                                    <div  class="icons" [ngClass]="item.course_status=='start'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):''">
+                                                    <!--  -->
+                                                    <div class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
                                                         <span><em class="lxp-QA"></em></span>
                                                         <p>Q&A</p>
                                                     </div>
@@ -403,7 +403,7 @@
                                                         <span><em class="lxp-Course_Progression"></em></span>
                                                         <p>Course Progression</p>
                                                     </div>
-                                                    <div class="percentage">
+                                                    <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
                                                         <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="5" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week"
                                                          [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
                                                     </div>
@@ -457,7 +457,7 @@
                                             </div>
                                             <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
                                                 <span class="by">By: <b>Larsen & Toubro</b></span>
-                                                <span class="credits">Credits: {{item.credits!==null?item.credits:0}}</span>
+                                                <span class="credits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
                                                 <span>
                                                     <em class="lxp-Duration"></em> 
                                                     Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
@@ -484,13 +484,14 @@
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
                                                         <ng-container *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'">Live Interactions</ng-container>
+                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'"><p>Live Interactions</p></ng-container>
                                                     </div>
                                                     <div class="icons" (click)="gotoSubmissionDetails(item)">
                                                         <span><em class="lxp-Activities_New"></em></span>
                                                         <p>Activities</p>
                                                     </div>
-                                                    <div class="icons" [ngClass]="item.course_status=='start'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):''">
+                                                    <!--  -->
+                                                    <div class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
                                                         <span><em class="lxp-QA"></em></span>
                                                         <p>Q&A</p>
                                                     </div>
@@ -504,7 +505,7 @@
                                                         <span><em class="lxp-Course_Progression"></em></span>
                                                         <p>Course Progression</p>
                                                     </div>
-                                                    <div class="percentage">
+                                                    <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
                                                         <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="5" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week"
                                                          [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
                                                     </div>
