@@ -62,7 +62,7 @@
         <div *ngIf="!showProgReport">
           <ngx-skeleton-loader count="5" [theme]="{ 'border-radius': '0', height: '50px' }"></ngx-skeleton-loader>
         </div>
-        <div class="expansion-container" *ngIf="showProgReport && apidata.length;else noCourseCard">
+        <div class="expansion-container" *ngIf="showProgReport && isTableData;else noCourseCard">
           <div class="mt-2" *ngFor="let moduleItem of apidata"
             [ngClass]="moduleItem.overAllPercentage>0?moduleItem.overAllPercentage>99?'bar-complete':'bar-inprogress':'bar-inprogress'">
             <mat-progress-bar [mode]="mode" [value]="moduleItem.overAllPercentage" [bufferValue]="bufferValue">
