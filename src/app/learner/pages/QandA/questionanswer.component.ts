@@ -8,7 +8,7 @@ import { MatDialog } from "@angular/material";
 })
 
 export class QuestionanswerComponent implements OnInit {
-  
+
   constructor(private dialog: MatDialog) { 
 
   }
@@ -19,7 +19,7 @@ export class QuestionanswerComponent implements OnInit {
   openQuestionDialog(templateRef){
     this.dialog.open(templateRef, {
       panelClass: 'resourseContainer',
-      width: "99%",
+      width: "50%",
       height: "90%",
       closeOnNavigation: true,
       disableClose: true,
