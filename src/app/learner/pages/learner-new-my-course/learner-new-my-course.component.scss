@@ -980,7 +980,7 @@
 
   // Todo List
   .listItem {
-    padding: 20px 10px 0 20px;
+    padding: 20px 10px 0 16px;
     .dateFlag {
       // height: 60px;
       // width: 50px;
@@ -1008,7 +1008,7 @@
         right: -1px;
         transform: skewY(-150deg);
       }
-      &.overdue {
+      &.Overdue {
         border-left: 1px solid #c02222;
         border-top: 1px solid #c02222;
         border-right: 1px solid #c02222;
@@ -1126,8 +1126,7 @@
                 font-size: 15px;
               }
             }
-            &.completed, &.graded, &.submitted, 
-            &.ongoing {
+            &.completed, &.graded, &.submitted, &.ongoing, &.Overdue {
               em {
                 width: 14px;
                 height: 14px;
@@ -1151,8 +1150,9 @@
                 background-color: #75D883;
               }
             }
-            &.overdue {
+            &.Overdue {
               em {
+                font-size: 8px;
                 background-color: #c02222;
               }
             }
@@ -1226,7 +1226,7 @@
           top: 50%;
           transform: translateY(-50%);
         }
-        &.overdue {
+        &.Overdue {
           &::before {
             border: 1px solid #c02222;
           }
@@ -1500,6 +1500,7 @@
         border-radius: 4px;
         margin: 0 5px;
         padding: 5px 8px;
+        cursor: pointer;
         &:focus-visible {
           outline: #0D05D5 auto 1px;
           outline-color: #0D05D5;
