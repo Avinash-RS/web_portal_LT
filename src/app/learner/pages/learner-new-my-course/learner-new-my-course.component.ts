@@ -99,7 +99,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   courseDetailsList: any[];
   enrolledCourses: any;
   blobKey = environment.blobKey;
-  externalWeb = environment.teachercommunity;
+  // externalWeb = environment.teachercommunity;
   public UserDetails: any;
   public selectedDate: any;
   userId: any;
@@ -340,7 +340,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
       this.router.navigateByUrl('/Learner/askQuestions', { state: { detail } });
     }
     } else{
-      window.open(this.externalWeb, "_blank");
+      // window.open(this.externalWeb, "_blank");
     }
     
   }
