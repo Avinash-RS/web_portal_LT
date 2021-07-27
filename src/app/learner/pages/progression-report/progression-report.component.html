@@ -62,7 +62,7 @@
         <div *ngIf="!showProgReport">
           <ngx-skeleton-loader count="5" [theme]="{ 'border-radius': '0', height: '50px' }"></ngx-skeleton-loader>
         </div>
-        <div class="expansion-container" *ngIf="showProgReport">
+        <div class="expansion-container" *ngIf="showProgReport && apidata.length;else noCourseCard">
           <div class="mt-2" *ngFor="let moduleItem of apidata"
             [ngClass]="moduleItem.overAllPercentage>0?moduleItem.overAllPercentage>99?'bar-complete':'bar-inprogress':'bar-inprogress'">
             <mat-progress-bar [mode]="mode" [value]="moduleItem.overAllPercentage" [bufferValue]="bufferValue">
@@ -429,5 +429,14 @@
       <ngx-skeleton-loader class="loaderStyle" count="1"></ngx-skeleton-loader>
       <ngx-skeleton-loader class="loaderStyle" count="1"></ngx-skeleton-loader>
     </div>
+  </div>
+</ng-template>
+
+<ng-template #noCourseCard>
+  <div class="noCard">
+      <div>
+        <img src="/assets/images/noactivity.svg" alt="assignment">
+      </div>
+      <p>Please start the course to view your progression report!</p>
   </div>
 </ng-template>
