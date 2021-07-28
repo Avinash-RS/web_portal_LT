@@ -36,17 +36,16 @@ export class CourseReportComponent implements OnInit {
     return progressScore;
   }
   getCourseReport(){
-this.learnerService.getReport(atob(this.course.batchId),atob(this.course.id),this.userDetail.user_id,this.refresh).subscribe((data)=>{
-  if (data.data['getLearnerNewCourseReport'].data[0]) {
-    this.courseReport = true;
-    this.courseReportData = data.data['getLearnerNewCourseReport'].data[0];
-    this.courseReportData.selflearning.isMore = false
-    this.courseReportData.VILT.isMore = false
-    this.courseReportData.collaboration.isMore = false
-
-    console.log(this.courseReportData)
-  }
-  
-})
+    this.learnerService.getLearnerNewCourseReport(atob(this.course.batchId),atob(this.course.id),this.userDetail.user_id,this.refresh, 14, 16).subscribe((data)=>{
+    if (data.data['getLearnerNewCourseReport'].data[0]) {
+      this.courseReport = true;
+      this.courseReportData = data.data['getLearnerNewCourseReport'].data[0];
+      console.log(this.courseReport, 'asdasdfasf');
+      this.courseReportData.selflearning.isMore = false
+      // this.courseReportData.VILT.isMore = false
+      // this.courseReportData.collaboration.isMore = false
+      console.log(this.courseReportData)
+      }
+    })
   }
 }
