@@ -2311,8 +2311,8 @@ export const getCourseGallery = gql`
 //   }
 // `;
 export const getLearnerNewCourseReport = gql`
-  query getLearnerNewCourseReport($batchid:String!,$courseid:String!,$userid:String!,$refresh:Boolean!) {
-    getLearnerNewCourseReport(batchid:$batchid,courseid:$courseid,userid:$userid,refresh:$refresh) {
+  query getLearnerNewCourseReport($batchid:String!,$courseid:String!,$userid:String!,$refresh:Boolean!, $selflearning_totalweeks:Int!, $colloboration_totalweeks:Int!) {
+    getLearnerNewCourseReport(batchid:$batchid,courseid:$courseid,userid:$userid,refresh:$refresh,selflearning_totalweeks: $selflearning_totalweeks, colloboration_totalweeks: $colloboration_totalweeks) {
       success
     error_msg
     message
@@ -2322,8 +2322,9 @@ export const getLearnerNewCourseReport = gql`
       courseid
       overAllScore {
         selflearningscore
-        VILTscore
-        collabarationscore
+        queryQuestionscore
+        # VILTscore
+        # collabarationscore
       }
       selflearning {
         week
@@ -2337,28 +2338,13 @@ export const getLearnerNewCourseReport = gql`
         selflearningscore
         calculation
       }
-      VILT {
-        week
-        WeekStatus
-        modulestatus
-        VILTsessionCount
-        VILTdurationCount
-        VILTattendanceCount
-        VILTlearnerCount
-        VILTscore
+      queryQuestion {
+        total_no_of_question
+        question_score
         calculation
-      }
-      collaboration {
         week
-        WeekStatus
         modulestatus
-        referencepointmins
-        loginactivitytime
-        referencepointpostmins
-        numberofpost
-        bonusscorebyfaculty
-        collabarationscoreweek
-        calculation
+        WeekStatus
       }
       LPScore {
         LPScore
