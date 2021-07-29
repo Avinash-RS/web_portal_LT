@@ -34,7 +34,7 @@
                             </div>
                         </div>
                         <div class="weekviewHead">
-                            <mwl-calendar-week-view [selected]="selectedDate" (dayHeaderClicked)="getLearnerActivity($event.day.date)" [weekStartsOn]="1" [(viewDate)]="viewDate" [events]="events"></mwl-calendar-week-view>
+                            <mwl-calendar-week-view  [selected]="selectedDate" (dayHeaderClicked)="getLearnerActivity($event.day.date);highlightSelectday($event)" [weekStartsOn]="1" [(viewDate)]="viewDate" [events]="events"></mwl-calendar-week-view>
                         </div>
                     </div>
                     <div>

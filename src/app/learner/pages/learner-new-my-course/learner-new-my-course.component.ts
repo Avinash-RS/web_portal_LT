@@ -120,6 +120,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   dynamicTextChange: string = 'ongoing';
   dateSelected: string;
   vocationalselectjobRole= [];
+  testvals: any;
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
@@ -379,6 +380,17 @@ export class LearnerNewMyCourseComponent implements OnInit {
       console.log(this.viewDate);
       this.dateSelected = moment(this.viewDate).format('YYYY-MM-DD');
       this.getLearnerActivity(this.viewDate);
+  }
+
+  highlightSelectday(data){
+    console.log(data.sourceEvent.currentTarget);
+      var parentcal = document.getElementsByClassName('cal-day-headers');
+            parentcal[0].childNodes.forEach((element:any) => {
+                  if(element?.style){
+                     element.classList.remove("cal-today");
+                  }       
+            });
+      data.sourceEvent.currentTarget.classList.add("cal-today");
   }
 
   getLearnerActivity(selectedDate) {
