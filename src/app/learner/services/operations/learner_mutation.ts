@@ -1201,3 +1201,12 @@ data {
 }
 }
 `;
+export const createEngineersForumData = gql`
+mutation createEngineersForumData($userId:String!,$userName:String!,$courseId:String!,$question:String!){
+  createEngineersForumData(userId:$userId,userName:$userName,courseId:$courseId,question:$question){
+    success
+     message
+     error_msg
+}
+}
+`;
