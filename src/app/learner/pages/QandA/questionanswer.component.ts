@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material";
 import { AngularEditorConfig } from "@kolkov/angular-editor";
+import { LearnerServicesService } from "@learner/services/learner-services.service";
 @Component({
   selector: "app-questionanswer",
   templateUrl: "./questionanswer.component.html",
@@ -15,7 +16,7 @@ export class QuestionanswerComponent implements OnInit {
     spellcheck: true,
     height: '15rem',
     minHeight: '5rem',
-    placeholder: 'Enter text here...',
+    placeholder: 'Please ask your question with consice and add any other details here',
     translate: 'no',
     defaultParagraphSeparator: 'p',
     defaultFontName: 'Arial',
@@ -49,16 +50,29 @@ export class QuestionanswerComponent implements OnInit {
       },
     ]
   };
-  constructor(private dialog: MatDialog) { 
-
+  UserDetails: any;
+  courseId: string;
+  requestType: string = 'all';
+  pageNumber:number = 0;
+  constructor(private dialog: MatDialog, private learnerService: LearnerServicesService) { 
+    this.UserDetails = JSON.parse(localStorage.getItem('UserDetails'))
+    this.courseId = localStorage.getItem("Courseid")
   }
 
   ngOnInit() {
+    this.getQAData()
   }
   
   // make sure to destory the editor
   ngOnDestroy(): void {
   }
+
+  getQAData(){
+    this.learnerService.getengineersForumData(this.UserDetails.user_id,this.courseId,this.requestType,this.pageNumber).subscribe((rdata:any)=>{
+      console.log(rdata)
+    })
+  }
+
   openQuestionDialog(templateRef){
     this.dialog.open(templateRef, {
       panelClass: 'resourseContainer',
