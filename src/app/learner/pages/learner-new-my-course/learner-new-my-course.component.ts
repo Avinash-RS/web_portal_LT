@@ -378,19 +378,30 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
 
   getTodaydate() {
-      console.log(this.viewDate);
       this.dateSelected = moment(this.viewDate).format('YYYY-MM-DD');
       this.getLearnerActivity(this.viewDate);
-  }
-
-  highlightSelectday(data){
-    console.log(data.sourceEvent.currentTarget);
       var parentcal = document.getElementsByClassName('cal-day-headers');
             parentcal[0].childNodes.forEach((element:any) => {
                   if(element?.style){
-                     element.classList.remove("cal-today");
+                     var currdate =  moment(this.viewDate).format('DD');
+                     var ele = element.children[2].innerHTML;  
+                     element.classList.remove("cal-today");
+
+                     if(currdate == ele){
+                      element.classList.add("cal-today");
+                     }               
                   }       
             });
+  }
+
+
+  highlightSelectday(data){
+    var parentcal = document.getElementsByClassName('cal-day-headers');
+          parentcal[0].childNodes.forEach((element:any) => {
+                if(element?.style){                     
+                   element.classList.remove("cal-today");
+                }       
+          });
       data.sourceEvent.currentTarget.classList.add("cal-today");
   }
 
