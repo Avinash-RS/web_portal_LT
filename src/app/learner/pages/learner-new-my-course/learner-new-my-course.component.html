@@ -269,10 +269,10 @@
                                                     <div class="type d-flex justify-content-start">
                                                         <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
                                                         <span>
-                                                            <ng-container *ngIf="userDetailes.org_type == 'vocational'"><p>Virtual Instructor Led Session</p></ng-container>
+                                                            <ng-container *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
                                                             <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'|| userDetailes.org_type == 'Corporate'">Live Interactions</ng-container> - upto  {{item.instructor_lead_session_total_count!==""?item.instructor_lead_session_total_count:0}}</span>
-                                                        <span>Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
-                                                        <span>Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
+                                                        <span *ngIf="userDetailes.org_type == 'collegeconnect'">Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
+                                                        <span *ngIf="userDetailes.org_type == 'collegeconnect'">Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -372,10 +372,10 @@
                                                     <div class="type d-flex justify-content-start">
                                                         <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
                                                         <span>
-                                                            <ng-container *ngIf="userDetailes.org_type == 'vocational'"><p>Virtual Instructor Led Session</p></ng-container>
+                                                            <ng-container *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
                                                             <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'|| userDetailes.org_type == 'Corporate'">Live Interactions</ng-container> - upto  {{item.instructor_lead_session_total_count!==""?item.instructor_lead_session_total_count:0}}</span>
-                                                        <span>Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
-                                                        <span>Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
+                                                        <span *ngIf="userDetailes.org_type == 'collegeconnect'">Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
+                                                        <span *ngIf="userDetailes.org_type == 'collegeconnect'">Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -475,10 +475,10 @@
                                                     <div class="type d-flex justify-content-start">
                                                         <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
                                                         <span>
-                                                            <ng-container *ngIf="userDetailes.org_type == 'vocational'"><p>Virtual Instructor Led Session</p></ng-container>
+                                                            <ng-container *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
                                                             <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'|| userDetailes.org_type == 'Corporate'">Live Interactions</ng-container> - upto  {{item.instructor_lead_session_total_count!==""?item.instructor_lead_session_total_count:0}}</span>
-                                                        <span>Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
-                                                        <span>Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
+                                                        <span *ngIf="userDetailes.org_type == 'collegeconnect'">Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
+                                                        <span *ngIf="userDetailes.org_type == 'collegeconnect'">Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
                                                     </div>
                                                 </div>
                                             </div>
