@@ -1122,14 +1122,16 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  getReport(batchid,courseid,userid,refresh) {
+  getLearnerNewCourseReport(batchid,courseid,userid,refresh,selflearning_totalweeks,colloboration_totalweeks) {
     return this.Apollo.query({
       query: getLearnerNewCourseReport,
       variables: {
         batchid,
         courseid,
         userid,
-        refresh
+        refresh,
+        selflearning_totalweeks,
+        colloboration_totalweeks
       }
     });
   }
