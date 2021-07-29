@@ -13,7 +13,10 @@ export class CourseReportComponent implements OnInit {
   courseReportData;
   courseReport = false;
   refresh = false;
-  constructor(private activeRoute: ActivatedRoute,private router:Router,private learnerService: LearnerServicesService) { }
+  constructor(
+    private activeRoute: ActivatedRoute, 
+    private router:Router, 
+    private learnerService: LearnerServicesService) { }
 
   ngOnInit() {
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails'))
@@ -42,6 +45,7 @@ export class CourseReportComponent implements OnInit {
       this.courseReportData = data.data['getLearnerNewCourseReport'].data[0];
       console.log(this.courseReport, 'asdasdfasf');
       this.courseReportData.selflearning.isMore = false
+      this.courseReportData.queryQuestion.isMore = false
       // this.courseReportData.VILT.isMore = false
       // this.courseReportData.collaboration.isMore = false
       console.log(this.courseReportData)
