@@ -59,6 +59,7 @@ export class QuestionanswerComponent implements OnInit {
   qaDataList: any;
   showSkeleton: boolean = false;
   showNumSkeleton: boolean;
+  questionText: any;
   constructor(private dialog: MatDialog, private learnerService: LearnerServicesService) {
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails'))
     this.courseId = localStorage.getItem("Courseid")
@@ -129,6 +130,13 @@ export class QuestionanswerComponent implements OnInit {
     this.showSkeleton = false
     this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, this.requestType, this.pageNumber).subscribe((rdata: any) => {
       this.qaDataList = rdata.data.getengineersForumData.data
+      this.showSkeleton = true
+    })
+  }
+
+  createQuestion(){
+    this.learnerService.createEngineersForumData(this.UserDetails.user_id, this.UserDetails.full_name, this.courseId, this.questionText).subscribe((rdata: any) => {
+      console.log(rdata);
       this.showSkeleton = true
     })
   }
