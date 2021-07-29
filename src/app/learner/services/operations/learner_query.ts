@@ -2227,7 +2227,7 @@ query   get_batchwise_learner_dashboard_data( $user_id: String!, $request_type: 
 `;
 
 
-export const   get_learner_dashboard_count = gql`
+export const get_learner_dashboard_count = gql`
 query   get_learner_dashboard_count( $user_id: String!, $user_obj_id: String!, $jobroleCategoryId: String){
   get_learner_dashboard_count( user_id: $user_id, user_obj_id: $user_obj_id, jobroleCategoryId: $jobroleCategoryId){
     success
@@ -2299,7 +2299,7 @@ export const getCourseGallery = gql`
 //           Content{
 //             href
 //             title
-           
+
 //           }
 //           Video{
 //             href
@@ -2454,5 +2454,18 @@ query getProgressionActivitydata($userId:String!,$courseId:String!){
       liveclassroom_completed
       }
       }
+      }
+      `;
+export const getengineersForumQA_Count = gql`
+      query getengineersForumQA_Count($userId:String!,$courseId:String!){
+        getengineersForumQA_Count(userId:$userId,courseId:$courseId){
+          success
+          message
+          error_msg
+          data {
+            questionCount
+            anweredCount
+          }
+        }
       }
       `;
