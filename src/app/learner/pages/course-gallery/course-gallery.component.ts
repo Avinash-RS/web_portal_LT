@@ -51,7 +51,7 @@ export class CourseGalleryComponent implements OnInit {
 
   getGalleryData(content){
     this.loader.show();
-    this.learnerService.getcourseGallery(this.course.id).subscribe((data)=>{
+    this.learnerService.getcourseGallery(atob(this.course.id)).subscribe((data)=>{
       if(data.data['getCourseGallery']['data']['coursedetails']) {
         this.coursedata = data.data['getCourseGallery']['data']['coursedetails']
         if(content == 0){
@@ -123,7 +123,7 @@ export class CourseGalleryComponent implements OnInit {
      }
      if(type == 'HTML') {
        this.urlSafe = environment.scormUrl + '/scormPlayer.html?contentID=' +
-       this.course.id + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
+       atob(this.course.id) + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
          this.getuserid._id + '&path=' + path2 + '&module_status=' + 'process' + '&module=' + module + '&topic=' + topic + '&action=Next' + '&token=' + this.user_token ;
          file = this.urlSafe
      }
