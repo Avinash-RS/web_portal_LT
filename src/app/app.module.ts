@@ -34,6 +34,7 @@ import { HttpLoaderFactory } from '@core/core.module';
 import { InterceptorService } from '@learner/services/interceptor.service';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { KnowledgePreviewComponent } from '@learner/pages/knowledge-preview/knowledge-preview.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 // import { ChartsModule } from 'ng2-charts';
 
@@ -79,6 +80,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     ReactiveFormsModule,
     GraphqlModule,
     NgxUiLoaderModule,
+    AngularEditorModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
