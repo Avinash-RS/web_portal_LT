@@ -238,9 +238,9 @@
                                         <div class="rightCol">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
-                                                <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
+                                                <!-- <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
                                                     <em class="lxp-Dot_Menu"></em>
-                                                </span>
+                                                </span> -->
                                                 <mat-menu #menu="matMenu" xPosition="before">
                                                     <button mat-menu-item (click)="openGallery(item)">
                                                       <span><em class="lxp-Search mr-2"></em>Search</span>
@@ -288,7 +288,7 @@
                                                         <p>Activities</p>
                                                     </div>
                                                     <!--  -->
-                                                    <div class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
+                                                    <div *ngIf="userDetailes.org_type!== 'collegeconnect'" class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
                                                         <span><em class="lxp-QA"></em></span>
                                                         <p>Q&A</p>
                                                     </div>
@@ -341,9 +341,9 @@
                                         <div class="rightCol">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
-                                                <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
+                                                <!-- <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
                                                     <em class="lxp-Dot_Menu"></em>
-                                                </span>
+                                                </span> -->
                                                 <mat-menu #menu="matMenu" xPosition="before">
                                                     <button mat-menu-item (click)="openGallery(item)">
                                                       <span><em class="lxp-Search mr-2"></em>Search</span>
@@ -444,9 +444,9 @@
                                         <div class="rightCol">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
-                                                <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
+                                                <!-- <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
                                                     <em class="lxp-Dot_Menu"></em>
-                                                </span>
+                                                </span> -->
                                                 <mat-menu #menu="matMenu" xPosition="before">
                                                     <button mat-menu-item (click)="openGallery(item)">
                                                       <span><em class="lxp-Search mr-2"></em>Search</span>
