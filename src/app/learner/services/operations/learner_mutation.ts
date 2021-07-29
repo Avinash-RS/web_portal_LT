@@ -1181,3 +1181,23 @@ data{
 }
 }
 `;
+export const getengineersForumData = gql`
+mutation getengineersForumData($userId:String!,$courseId:String!,$requestType:String!,$pagenumber:Int!){
+  getengineersForumData(userId:$userId,courseId:$courseId,requestType:$requestType,pagenumber:$pagenumber){
+success
+message
+error_msg
+data {
+  answered
+  status
+  questionId
+  question
+  askedDate
+  askedBy
+  answer
+  publishedDate
+  userId
+}
+}
+}
+`;
