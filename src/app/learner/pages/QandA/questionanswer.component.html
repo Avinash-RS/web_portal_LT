@@ -119,6 +119,7 @@
         <div>
             <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
         </div>
+        <div [innerHTML]="htmlContent"></div>
         <div>
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
