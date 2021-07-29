@@ -367,6 +367,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
       queryParams:
       {
         CourseId: btoa(course.course_id),
+        CourseName: btoa(course.course_name)
       }
     });
   }

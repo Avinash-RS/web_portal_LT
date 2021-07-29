@@ -107,7 +107,7 @@
             vertical-align: text-bottom;
           }
           &::after {
-            content: "|";
+            // content: "|";
             position: absolute;
             right: -10px;
             top: auto;
@@ -138,11 +138,17 @@
         line-height: normal;
       }
       button {
-        background-color: #32ce6a;
         padding: 2px ​10px 3px 10px;
-        color: #ffffff;
         border-radius: 4px;
         border: 0;
+      }
+      .answer{
+        background-color: #32ce6a;
+        color: #ffffff;
+      }
+      .noAnswer{
+        background-color: #FFDD91;
+        color: #000000
       }
       span {
         color: #999999;
@@ -199,9 +205,9 @@
       text-align: center;
       margin-bottom: 30px;
       border-radius: 2px;
-      &:last-child {
-        margin-bottom: 0;
-      }
+      // &:last-child {
+      //   margin-bottom: 0;
+      // }
       @media only screen and (min-width: 720px) {
         width: 100%;
       }
