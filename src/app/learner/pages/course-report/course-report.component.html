@@ -26,8 +26,8 @@
           <h4>Self Learning</h4>
           <div>
             <circle-progress [percent]='courseReportData?.overAllScore.selflearningscore' [radius]=50 [space]=-6
-              [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#2A4DC1'"
-              [outerStrokeGradientStopColor]="'#2A4DC1'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6
+              [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#00A99D'"
+              [outerStrokeGradientStopColor]="'#00A99D'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6
               [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false"></circle-progress>
           </div>
         </div>
@@ -35,26 +35,14 @@
           <div class="d-flex flex-wrap">
             <div class="weeksWise" *ngFor="let selfValue of courseReportData?.selflearning;let i = index">
               <popover-content #selfPopover>
-                <div style="width: 200px;">
-                  <div>
-                    (A) Topics Completed - {{selfValue.Completedfortheweek}} /
-                    {{selfValue.no_of_topic}}
-                  </div>
-                  <div>
-                    (B) Estimated Duration - {{selfValue.actualtopicduration}} mins
-                  </div>
-                  <div>
-                    (C) Actual Duration - {{selfValue.completedtopicduration}} mins
-                  </div>
-                  <div style="color: red;">
-                    calculation
-                  </div>
-                  <div style="color: #2525DE;">
-                    = {{selfValue.calculation}}
-                  </div>
-                  <div style="color: #2525DE;">
-                    = {{selfValue.selflearningscore}}
-                  </div>
+                <div class="popoverContainer">
+                  <div class="items">(A) Estimated Duration - <span>{{selfValue.actualtopicduration}} mins</span></div>
+                  <div class="items">(B) Completed Duration - <span>{{selfValue.completedtopicduration}} mins</span></div>
+                  <div class="items">(C) No. of Topics - <span>{{selfValue.no_of_topic}}</span></div>
+                  <div class="items">(D) Completed Topics - <span>{{selfValue.Completedfortheweek}}</span></div>
+                  <div class="calculation">Calculation</div>
+                  <div class="calcFormula">= {{selfValue.calculation}}</div>
+                  <div class="calcPercentage">= {{selfValue.selflearningscore}} </div>
                 </div>
               </popover-content>
               <div class="weekWiseDescription" *ngIf="i < 8">
@@ -63,10 +51,9 @@
                     {{selfValue.week}}</h6>
                   <button class="popover-info" popoverPlacement="left" [popover]="selfPopover"><span>i</span></button>
                 </div>
-                <h5>Percentage: <span>- -</span></h5>
                 <h5 [ngClass]="{'colorCompleted':selfValue.WeekStatus == 'Completed', 'colorOnGoing': selfValue.WeekStatus == 'Active', 'notStarted':selfValue.WeekStatus == 'YetToStart' || !selfValue.WeekStatus}">
-                  Scored:
-                  <span *ngIf="selfValue.selflearningscore != 0">{{selfValue.selflearningscore}}</span>
+                  Percentage:
+                  <span *ngIf="selfValue.selflearningscore != 0">{{selfValue.selflearningscore}} %</span>
                   <span *ngIf="selfValue.selflearningscore == 0">0</span>
                 </h5>
               </div>
@@ -76,10 +63,9 @@
                     {{selfValue.week}}</h6>
                   <button class="popover-info" popoverPlacement="left" [popover]="selfPopover">i</button>
                 </div>
-                <h5>Percentage: --</h5>
                 <h5 [ngClass]="{'colorCompleted':selfValue.WeekStatus == 'Completed', 'colorOnGoing': selfValue.WeekStatus == 'Active', 'notStarted':selfValue.WeekStatus == 'YetToStart' || !selfValue.WeekStatus}">
-                  Scored:
-                  <span *ngIf="selfValue.selflearningscore != 0">{{selfValue.selflearningscore}}</span>
+                  Percentage:
+                  <span *ngIf="selfValue.selflearningscore != 0">{{selfValue.selflearningscore}} %</span>
                   <span *ngIf="selfValue.selflearningscore == 0">0</span>
                 </h5>
               </div>
@@ -94,6 +80,70 @@
           </div>
           <div class="showLess" *ngIf="courseReportData?.selflearning.length > 8 && courseReportData?.selflearning.isMore">
             <span (click)="courseReportData?.selflearning.isMore = false" class="expand-more">See Less... 
+              <em style="transform: rotate(180deg);" class="lxp-Arrow"></em>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Query Resolution -->
+      <div class="selfLearningSection commonClass d-flex justify-content-between flex-wrap align-items-center">
+        <div class="percentageContent">
+          <h4>Query Resolution</h4>
+          <div>
+            <circle-progress [percent]='courseReportData?.overAllScore?.queryQuestionscore' [radius]=50 [space]=-6
+              [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#5850E0'"
+              [outerStrokeGradientStopColor]="'#5850E0'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6
+              [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false"></circle-progress>
+          </div>
+        </div>
+        <div class="weekScoredContent">
+          <div class="d-flex flex-wrap">
+            <div class="weeksWise" *ngFor="let queryValue of courseReportData?.queryQuestion; let i = index">
+              <popover-content #selfPopover>
+                <div class="popoverContainer">
+                  <div class="items">(A) No of Questions Posted - <span>{{queryValue.total_no_of_question}}</span></div>
+                  <div class="calculation">Calculation</div>
+                  <div class="calcFormula">= {{queryValue.calculation}}</div>
+                  <div class="calcPercentage">
+                    <span *ngIf="queryValue.question_score != 0">= {{queryValue.question_score}} %</span>
+                    <span *ngIf="queryValue.question_score == 0">= 0</span>
+                  </div>
+                </div>
+              </popover-content>
+              <div class="weekWiseDescription" *ngIf="i < 8">
+                <div class="d-flex position-relative">
+                  <h6 [ngClass]="{'colorCompleted':queryValue.WeekStatus == 'Completed', 'colorOnGoing': queryValue.WeekStatus == 'Active', 'notStarted':queryValue.WeekStatus == 'YetToStart' || !queryValue.WeekStatus}">
+                    {{queryValue.week}}</h6>
+                  <button class="popover-info" popoverPlacement="left" [popover]="selfPopover"><span>i</span></button>
+                </div>
+                <h5>Percentage: 
+                  <span *ngIf="queryValue.question_score != 0">{{queryValue.question_score}} %</span>
+                  <span *ngIf="queryValue.question_score == 0">0</span>
+                </h5>
+              </div>
+              <div class="weekWiseDescription" *ngIf="courseReportData?.queryQuestion.isMore && i >= 8">
+                <div class="d-flex position-relative">
+                  <h6 [ngClass]="{'colorCompleted':queryValue.WeekStatus == 'Completed', 'colorOnGoing': queryValue.WeekStatus == 'Active', 'notStarted':queryValue.WeekStatus == 'YetToStart' || !queryValue.WeekStatus}">
+                    {{queryValue.week}}</h6>
+                  <button class="popover-info" popoverPlacement="left" [popover]="selfPopover">i</button>
+                </div>
+                <h5>Percentage: 
+                  <span *ngIf="queryValue.question_score != 0">{{queryValue.question_score}} %</span>
+                  <span *ngIf="queryValue.question_score == 0">0</span>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="course-arrow-mark">
+          <div class="showMore" *ngIf="courseReportData?.queryQuestion.length > 8 && !courseReportData?.queryQuestion.isMore">
+            <span (click)="courseReportData?.queryQuestion.isMore = true" class="expand-more">See More... 
+              <em style="transform: rotate(0deg);" class="lxp-DownArrow"></em>
+            </span>
+          </div>
+          <div class="showLess" *ngIf="courseReportData?.queryQuestion.length > 8 && courseReportData?.queryQuestion.isMore">
+            <span (click)="courseReportData?.queryQuestion.isMore = false" class="expand-more">See Less... 
               <em style="transform: rotate(180deg);" class="lxp-Arrow"></em>
             </span>
           </div>

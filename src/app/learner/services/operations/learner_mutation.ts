@@ -1181,3 +1181,32 @@ data{
 }
 }
 `;
+export const getengineersForumData = gql`
+mutation getengineersForumData($userId:String!,$courseId:String!,$requestType:String!,$pagenumber:Int!){
+  getengineersForumData(userId:$userId,courseId:$courseId,requestType:$requestType,pagenumber:$pagenumber){
+success
+message
+error_msg
+data {
+  answered
+  status
+  questionId
+  question
+  askedDate
+  askedBy
+  answer
+  publishedDate
+  userId
+}
+}
+}
+`;
+export const createEngineersForumData = gql`
+mutation createEngineersForumData($userId:String!,$userName:String!,$courseId:String!,$question:String!){
+  createEngineersForumData(userId:$userId,userName:$userName,courseId:$courseId,question:$question){
+    success
+     message
+     error_msg
+}
+}
+`;

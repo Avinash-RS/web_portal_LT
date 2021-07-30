@@ -2,99 +2,67 @@
 <div class="qandWrapper d-flex">
     <div class="questionLeftCol">
         <ul class="breadcrumb">
-            <li><em routerLink="/Learner/MyCourse" class="lxp-Right_Direction_Arrow backArrow"></em> Applied Industrial IoT</li>
+            <li><em routerLink="/Learner/MyCourse" class="lxp-Right_Direction_Arrow backArrow"></em> Applied Industrial
+                IoT</li>
             <li>Question and Answer</li>
         </ul>
         <div class="qandaSection">
             <h2>Question and Answer</h2>
-            <mat-tab-group animationDuration="0ms">
+            <mat-tab-group animationDuration="100ms" [(selectedIndex)]="selectedIndex" (selectedTabChange)="contentChange()">
                 <mat-tab>
                     <ng-template mat-tab-label>
                         My Q&A
                     </ng-template>
-                    <div class="content">
+                    <span *ngIf="showSkeleton;else skeleton">
+                    <div class="content" *ngFor="let item of qaDataList; let i = index">
                         <div class="askedDate d-flex flex-row">
-                            <span>Question : 5</span>
-                            <span>Asked on 20 Jan 2020, 07:43:23 PM</span>
+                            <span>Question : {{i+ 1}} |</span>
+                            <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                         </div>
-                        <h4>What are the problems associated with this method in terms of shrinkage of concrete?</h4>
+                        <h4>{{item.question}}</h4>
                         <div class="answeredDate">
-                            <button>Answered</button>
-                            <span>21 Jan 2020, 02:22:133 PM</span>
+                            <button class="answer">Answered</button>
+                            <span>{{item.publishedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                         </div>
-                        <p>During prestressing operation at one end, frictional losses will occur and the prestressing force decreases along the length of tendon until reaching the other end. These frictional losses include the friction induced due to a change of curvature of tendon duct and also the wobble effect due to deviation of duct alignment.</p>
+                        <p>{{item.answer}}</p>
                     </div>
-                    <div class="content">
-                        <div class="askedDate d-flex flex-row">
-                            <span>Question : 5</span>
-                            <span>Asked on 20 Jan 2020, 07:43:23 PM</span>
-                        </div>
-                        <h4>In incremental launching method of bridge construction, what are the measures adopted to enhance sufficient resistance of the superstructure during the launching, what are the measures process?</h4>
-                        <div class="answeredDate">
-                            <button>Answered</button>
-                            <span>21 Jan 2020, 02:22:133 PM</span>
-                        </div>
-                        <p>(i) During the launching process the leading edge of the superstructure is subject to a large hogging moment. In this connection, steel launching nose typically about 0.6-0.65 times span length is provided at the leading edge to reduce the cantilever moment. Sometimes, instead of using launching nose a tower and stay system are designed which serves the same purpose.</p>
-                        <p>(ii) Sometimes, instead of using launching nose a tower and stay system are designed which serves the same purpose.</p>
-                    </div>
-                    <div class="content">
-                        <div class="askedDate d-flex flex-row">
-                            <span>Question : 5</span>
-                            <span>Asked on 20 Jan 2020, 07:43:23 PM</span>
-                        </div>
-                        <h4>In incremental launching method of bridge construction, what are the measures adopted to enhance sufficient resistance of the superstructure during the launching, what are the measures process?</h4>
-                        <div class="answeredDate">
-                            <button>Answered</button>
-                            <span>21 Jan 2020, 02:22:133 PM</span>
-                        </div>
-                        <p>During prestressing operation at one end, frictional losses will occur and the prestressing force decreases along the length of tendon until reaching the other end. These frictional losses include the friction induced due to a change of curvature of tendon duct and also the wobble effect due to deviation of duct alignment.</p>
-                    </div>
+                    </span>
                 </mat-tab>
                 <mat-tab>
                     <ng-template mat-tab-label>
                         Unanswered
                     </ng-template>
-                    <div class="content">
+                    <span *ngIf="showSkeleton;else skeleton">
+                    <div class="content" *ngFor="let item of qaDataList">
                         <div class="askedDate d-flex flex-row">
-                            <span>Question : 5</span>
-                            <span>Asked on 20 Jan 2020, 07:43:23 PM</span>
+                            <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                         </div>
-                        <h4>In incremental launching method of bridge construction, what are the measures adopted to enhance sufficient resistance of the superstructure during the launching, what are the measures process?</h4>
+                        <h4>{{item.question}}</h4>
                         <div class="answeredDate">
-                            <button>Answered</button>
-                            <span>21 Jan 2020, 02:22:133 PM</span>
+                            <button class="noAnswer">Unanswered</button>
                         </div>
-                        <p>During prestressing operation at one end, frictional losses will occur and the prestressing force decreases along the length of tendon until reaching the other end. These frictional losses include the friction induced due to a change of curvature of tendon duct and also the wobble effect due to deviation of duct alignment.</p>
                     </div>
+                    </span>
                 </mat-tab>
                 <mat-tab>
                     <ng-template mat-tab-label>
                         All
                     </ng-template>
-                    <div class="content">
+                    <span *ngIf="showSkeleton;else skeleton">
+                    <div class="content" *ngFor="let item of qaDataList">
                         <div class="askedDate d-flex flex-row">
-                            <span><em class="lxp-AccountCircle"></em>Kumar Vaithiyanathan</span>
-                            <span>Asked on 20 Jan 2020, 07:43:23 PM</span>
+                            <span><em class="lxp-AccountCircle"></em>{{item.userId}}</span>
+                            <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                         </div>
-                        <h4>In incremental launching method of bridge construction, what are the measures adopted to enhance sufficient resistance of the superstructure during the launching, what are the measures process?</h4>
+                        <h4>{{item.question}}</h4>
                         <div class="answeredDate">
-                            <button>Answered</button>
-                            <span>21 Jan 2020, 02:22:133 PM</span>
+                            <button
+                                [class]="item.answered?'answer':'noAnswer'">{{item.answered?'Answered':'Unanswered'}}</button>
+                            <span *ngIf="item.answered">{{item.publishedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                         </div>
-                        <p>During prestressing operation at one end, frictional losses will occur and the prestressing force decreases along the length of tendon until reaching the other end. These frictional losses include the friction induced due to a change of curvature of tendon duct and also the wobble effect due to deviation of duct alignment.</p>
+                        <p *ngIf="item.answered">{{item.answer}}</p>
                     </div>
-                    <div class="content">
-                        <div class="askedDate d-flex flex-row">
-                            <span>Kumar Vaithiyanathan</span>
-                            <span>Asked on 20 Jan 2020, 07:43:23 PM</span>
-                        </div>
-                        <h4>In incremental launching method of bridge construction, what are the measures adopted to enhance sufficient resistance of the superstructure during the launching, what are the measures process?</h4>
-                        <div class="answeredDate">
-                            <button>Answered</button>
-                            <span>21 Jan 2020, 02:22:133 PM</span>
-                        </div>
-                        <p>During prestressing operation at one end, frictional losses will occur and the prestressing force decreases along the length of tendon until reaching the other end. These frictional losses include the friction induced due to a change of curvature of tendon duct and also the wobble effect due to deviation of duct alignment.</p>
-                    </div>
+                    </span>
                 </mat-tab>
             </mat-tab-group>
         </div>
@@ -108,30 +76,32 @@
                 <span><em class="lxp-question"></em></span>
                 <div>
                     <p>Questions</p>
-                    <h2>234</h2>
+                    <h2 id="qCount"></h2>
                 </div>
             </div>
             <div class="answeres d-flex justify-content-between align-items-center">
                 <span><em class="lxp-answers"></em></span>
                 <div>
                     <p>Answers</p>
-                    <h2>198</h2>
+                    <h2 id="aCount"></h2>
                 </div>
             </div>
-            <div class="learners d-flex justify-content-between align-items-center">
+            <!-- <div class="learners d-flex justify-content-between align-items-center">
                 <span><em class="lxp-Members"></em></span>
                 <div>
                     <p>Learners</p>
                     <h2>56</h2>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
 
 <ng-template #questionDialog>
     <div class="d-flex justify-content-between">
-        <div class="font-weight-bold"><h2>Ask A Question</h2></div>
+        <div class="font-weight-bold">
+            <h2>Ask A Question</h2>
+        </div>
         <div><i (click)="dialogClose()" class="lxp-Close"></i></div>
     </div>
     <div>
@@ -140,9 +110,10 @@
             <div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Question Title</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="What's your question?">
-                  </div>
-                  
+                    <input type="text" class="form-control" id="exampleInputPassword1"
+                        placeholder="What's your question?">
+                </div>
+
             </div>
         </div>
         <div>
@@ -152,11 +123,22 @@
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Notify by e-mail for incomming answers</label>
-              </div>
+            </div>
         </div>
         <div class="d-flex justify-content-between">
             <button class="btn btn-outline-dark btn-block">Cancel</button>
             <button class="btn btn-danger btn-block">Submit Question</button>
         </div>
+    </div>
+</ng-template>
+<ng-template #skeleton>
+    <div class="content">
+        <ngx-skeleton-loader count="5"></ngx-skeleton-loader>
+    </div>
+    <div class="content">
+        <ngx-skeleton-loader count="5"></ngx-skeleton-loader>
+    </div>
+    <div class="content">
+        <ngx-skeleton-loader count="5"></ngx-skeleton-loader>
     </div>
 </ng-template>

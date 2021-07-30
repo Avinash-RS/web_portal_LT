@@ -374,6 +374,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
 
   gotoquestionanswer(course) {
     this.router.navigate(['/Learner/questionanswer'])
+    localStorage.setItem('Courseid', course.course_id);
   }
 
   getTodaydate() {
