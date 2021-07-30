@@ -37,7 +37,7 @@
                             <mwl-calendar-week-view  [selected]="selectedDate" (dayHeaderClicked)="getLearnerActivity($event.day.date);highlightSelectday($event)" [weekStartsOn]="1" [(viewDate)]="viewDate" [events]="events"></mwl-calendar-week-view>
                         </div>
                     </div>
-                    <div>
+                    <div class="minHeight">
                         <div class="sideTabsStrip">
                             <div class="activeTabItem">
                                 To Do
@@ -60,25 +60,41 @@
                                                 <ng-container *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'"><p>Live Interactions</p></ng-container>
                                             </ng-container>
                                         </p>
-                                        <div class="status">
-                                            <span class="ongoing" *ngIf="data.status == 'On going'">
-                                                <em class="lxp-Timer_Outlined"></em>{{'Ongoing' | translate }}
-                                            </span>
-                                            <span class="Overdue" *ngIf="data.status == 'Overdue'">
-                                                <em class="lxp-Timelapse"></em>{{'Overdue' | translate }}
-                                            </span>
-                                            <span class="yettoStart"  *ngIf="data.status == 'Yet to submit' || data.status == 'Up Coming'">
-                                                <em class="lxp-Play"></em>{{'Yet to start' | translate }}
-                                            </span>
-                                            <span class="completed" *ngIf="data.status == 'Completed' || data.status == 'Graded' || data.status == 'Submitted'">
-                                                <em class="lxp-Right"></em>{{'Completed' | translate }}
-                                            </span>
-                                        </div>
+                                        <ng-container *ngIf="data.activitytype != 'Live Classroom'">
+                                            <div class="status">
+                                                <span class="ongoing" *ngIf="data.status == 'On going'">
+                                                    <em class="lxp-Timer_Outlined"></em>{{'Ongoing' | translate }}
+                                                </span>
+                                                <span class="Overdue" *ngIf="data.status == 'Overdue'">
+                                                    <em class="lxp-Timelapse"></em>{{'Overdue' | translate }}
+                                                </span>
+                                                <span class="yettoStart"  *ngIf="data.status == 'Yet to submit' || data.status == 'Up Coming'">
+                                                    <em class="lxp-Play"></em>{{'Yet to start' | translate }}
+                                                </span>
+                                                <span class="completed" *ngIf="data.status == 'Completed' || data.status == 'Graded' || data.status == 'Submitted'">
+                                                    <em class="lxp-Right"></em>{{'Completed' | translate }}
+                                                </span>
+                                            </div>
+                                        </ng-container>
+                                        <ng-container *ngIf="data.activitytype == 'Live Classroom'">
+                                            <div class="status">
+                                                <span class="yettoStart"  *ngIf="data.status == 'Yet to submit' || data.status == 'Up Coming'">
+                                                    <em class="lxp-Play"></em>{{'Yet to start' | translate }}
+                                                </span>
+                                                <span class="completed" *ngIf="data.status == 'Completed' || data.status == 'Graded' || data.status == 'Submitted'">
+                                                    <em class="lxp-Right"></em>{{'Completed' | translate }}
+                                                </span>
+                                                <span class="launch" *ngIf="data.status == 'On going'" (click)="openClassroom(data.link)">
+                                                    <em class="lxp-Launch"></em> <span>Launch</span>
+                                                </span>
+                                            </div>
+                                        </ng-container>
                                     </div>
                                     <div class="titleFontSize">{{data.coursename}}</div>
                                     <div class="type">Module: <span>{{data.modulename}}</span></div>
                                     <div class="topic">Topic: <span>{{data.topicname}}</span></div>
-                                    <div class="date">{{data.activitystartdate | date :'d/M/yy h:mm a'}} <span>-</span> {{data.activityenddate | date :'d/M/yy h:mm a'}}</div>
+                                    <div class="date"><span>{{data.activitystartdate | date :'d/M/yy h:mm a'}} <span>-</span> {{data.activityenddate | date :'d/M/yy h:mm a'}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </ng-container>
@@ -91,9 +107,9 @@
                                     <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px', height: '50px', width: '50px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
                                 </div>
                                 <div class="item2">
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between">
@@ -101,29 +117,9 @@
                                     <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px', height: '50px', width: '50px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
                                 </div>
                                 <div class="item2">
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="item1">
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px', height: '50px', width: '50px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                </div>
-                                <div class="item2">
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="item1">
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px', height: '50px', width: '50px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                </div>
-                                <div class="item2">
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
                                 </div>
                             </div>
                         </div>

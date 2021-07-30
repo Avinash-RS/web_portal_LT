@@ -285,6 +285,10 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.getDashboardMyCourse(userId, userObjId);
   }
 
+  openClassroom(value) {
+    window.open(value.link);
+  }
+
   //PLAYER PAGE NAVIGATION
   gotoDesc(c) {
     c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
