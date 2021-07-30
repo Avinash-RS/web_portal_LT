@@ -554,10 +554,10 @@
       align-items: center;
       flex-wrap: nowrap;
       &.top {
-        margin-top: 15px;
+        margin-top: 20px;
       }
       &.zero {
-        margin-top: 15px;
+        margin-top: 20px;
       }
     }
     .viltActivitiesQA {
@@ -575,8 +575,8 @@
           justify-content: center;
           align-items: center;
           border-radius: 50%;
-          width: 35px;
-          height: 35px;
+          width: 42px;
+          height: 42px;
           border: 1px dashed rgba(128, 128, 128, 0.4);
           &:hover {
             background-color: #f2f2f2;
@@ -591,6 +591,7 @@
           }
           em {
             color: #808080;
+            font-size: 18px;
             @media only screen and (max-width: 767px) {
               font-size: 20px;
             }
@@ -609,10 +610,10 @@
       .icons {
         cursor: pointer;
         p {
-          font-size: 10px;
+          font-size: 12px;
           font-weight: 400;
           color: #333333;
-          margin: 3px 0 0 0 !important;
+          margin: 6px 0 0 0 !important;
           line-height: 11px;
           @media only screen and (max-width: 991px) {
             display: none;
