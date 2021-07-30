@@ -135,7 +135,7 @@ export class QuestionanswerComponent implements OnInit {
   }
 
   createQuestion(){
-    this.learnerService.createEngineersForumData(this.UserDetails.user_id, this.UserDetails.full_name, this.courseId, this.questionText).subscribe((rdata: any) => {
+    this.learnerService.createEngineersForumData(this.UserDetails.user_id, this.UserDetails.full_name, this.courseId, this.htmlContent).subscribe((rdata: any) => {
       console.log(rdata);
       this.showSkeleton = true
     })
