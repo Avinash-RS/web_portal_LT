@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material";
 import { AngularEditorConfig } from "@kolkov/angular-editor";
 import { LearnerServicesService } from "@learner/services/learner-services.service";
+import { ToastrService } from "ngx-toastr";
 @Component({
   selector: "app-questionanswer",
   templateUrl: "./questionanswer.component.html",
@@ -16,7 +17,7 @@ export class QuestionanswerComponent implements OnInit {
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    height: '15rem',
+    height: '20rem',
     minHeight: '5rem',
     placeholder: 'Please ask your question with consice and add any other details here',
     translate: 'no',
@@ -60,7 +61,7 @@ export class QuestionanswerComponent implements OnInit {
   showSkeleton: boolean = false;
   showNumSkeleton: boolean;
   questionText: any;
-  constructor(private dialog: MatDialog, private learnerService: LearnerServicesService) {
+  constructor(private dialog: MatDialog, private learnerService: LearnerServicesService,private toastr: ToastrService,) {
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails'))
     this.courseId = localStorage.getItem("Courseid")
   }
@@ -137,6 +138,9 @@ export class QuestionanswerComponent implements OnInit {
   createQuestion(){
     this.learnerService.createEngineersForumData(this.UserDetails.user_id, this.UserDetails.full_name, this.courseId, this.htmlContent).subscribe((rdata: any) => {
       console.log(rdata);
+      if(rdata.data.createEngineersForumData.success){
+        this.toastr.success(rdata.data.createEngineersForumData.message)
+      }
       this.showSkeleton = true
     })
   }
