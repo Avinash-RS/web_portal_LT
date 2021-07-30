@@ -947,7 +947,7 @@
   //RIGHT SIDE NAV CONTENT//
   .drawerWrapper {
     margin: 0 auto;
-    width: 397px;
+    width: 410px;
     @media only screen and (max-width: 767px) {
       width: 96%;
     }
@@ -986,6 +986,7 @@
     display: flex;
     justify-content: flex-start;
     border-bottom: 1px solid #CCCCCC;
+    margin-bottom: 10px;
     .activeTabItem {
       border-bottom: solid #c02222 3px;
       border-radius: 3px;
@@ -995,7 +996,7 @@
 
   // Todo List
   .listItem {
-    padding: 20px 10px 0 16px;
+    padding: 20px 10px 10px 16px;
     .dateFlag {
       // height: 60px;
       // width: 50px;
@@ -1205,6 +1206,7 @@
   .viewAll {
     text-align: right;
     padding: 10px 10px 0 10px;
+    margin-bottom: 15px;
     a {
       font-size: 12px;
       font-weight: 400;
@@ -1296,11 +1298,15 @@
   }
   .item {
     padding: 15px 15px 0 15px;
+    > div {
+      margin-bottom: 15px;
+    }
     .item1 {
       width: 18%;
     }
     .item2 {
       width: 80%;
+      margin-right: 2%;
       display: flex;
       flex-direction: column;
     }
@@ -1628,6 +1634,11 @@
     line-height: normal;
   }
 }
+::ng-deep.sideNavContainer {
+  .mat-drawer-inner-container {
+    overflow-x: hidden !important;
+  }
+}
 ::ng-deep .progStatus {
   position: absolute;
   bottom: 10px;
@@ -1642,9 +1653,6 @@
 }
 }
 ::ng-deep .mycoursesContent {
-  // .mat-progress-bar-fill::after {
-  //   background-image: linear-gradient(to right, #F7941E);
-  // }
   margin-top: 20px;
   .mat-progress-bar{
     height: 2px;
