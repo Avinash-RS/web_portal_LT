@@ -268,6 +268,8 @@ export class CalendarActivityComponent implements OnInit {
         localStorage.setItem('CourseName', data1.courseName);
         this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
       }
-     
+    }
+    openClassroom(value) {
+      window.open(value.link);
     }
 }
