@@ -478,7 +478,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.router.navigate(['/Learner/coursegallery'], {
       queryParams:
       {
-        id: c.course_id,
+        id: btoa(c.course_id),
         name: c.course_name
       }
     });
