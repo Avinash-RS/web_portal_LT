@@ -48,8 +48,7 @@
               <!-- <span>Type</span> -->
               <div *ngIf="activity.activitytype != 'Live Classroom' && activity.activitytype != 'Self Learning'" class="notifi activity">{{activity.activitytype}}</div>
               <div *ngIf="activity.activitytype == 'Self Learning'" class="notifi selfplacedlearning">{{activity.activitytype}}</div>
-              <div *ngIf="activity.activitytype == 'Live Classroom' && userDetailes.org_type == 'vocational'" class="notifi virtualinstructorled">Virtual Instructor Led Session</div>
-              <div *ngIf="activity.activitytype == 'Live Classroom' && (userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate')" class="notifi virtualinstructorled">Live Interactions</div>
+              <div *ngIf="activity.activitytype == 'Live Classroom'" class="notifi virtualinstructorled">Live Interactions</div>
             </div>
           </div>
     
@@ -139,8 +138,7 @@
   </div>
   <div class="activInfo">
     <span class="self">Self Learning</span>
-    <span class="live" *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</span>
-    <span class="live" *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'">Live Interactions</span>
+    <span class="live">Live Interactions</span>
     <span class="Activ">Activity</span>
   </div>
 </div>
