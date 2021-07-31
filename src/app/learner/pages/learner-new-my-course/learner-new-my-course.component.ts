@@ -286,7 +286,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
 
   openClassroom(value) {
-    window.open(value.link);
+    window.open(value);
   }
 
   //PLAYER PAGE NAVIGATION
@@ -320,7 +320,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   goInstructorLed(c) {
     localStorage.setItem('Courseid', c.course_id);
     const detail = {
-      id: c.course_id,
+      id: btoa(c.course_id),
       name: c.course_name
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));

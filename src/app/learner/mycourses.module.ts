@@ -78,7 +78,7 @@ const routes: Routes = [
   {
     path: 'instructorLed',
     component: InstructorLedComponent,
-    data: { animation: 'Learner  MyCourse', title: 'Instructor led'}
+    data: { animation: 'Learner  MyCourse', title: 'Live Interactions'}
   },
   {
     path: 'activities',
