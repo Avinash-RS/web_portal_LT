@@ -324,10 +324,9 @@ export class ActivitiesComponent implements OnInit {
     // } else {
     //   this.getprojectActivityData();
     // }
-
     this.currentTab = event.tab.textLabel;
     if (event.tab.textLabel === 'Perform') {
-      this.getperformActivityData();
+      this.getperformActivityData('tab');
       this.screenHeight = window.innerHeight;
       this.screenWidth = window.innerWidth;
       if (this.screenWidth < 800) {
@@ -336,7 +335,7 @@ export class ActivitiesComponent implements OnInit {
         this.mobileResponsive = false;
       }
     } else if (event.tab.textLabel === 'Project') {
-      this.getprojectActivityData();
+      this.getprojectActivityData('tab');
       this.screenHeight = window.innerHeight;
       this.screenWidth = window.innerWidth;
       if (this.screenWidth < 800) {
@@ -346,7 +345,7 @@ export class ActivitiesComponent implements OnInit {
         this.projectMobileResponsive = false;
       }
     } else if (event.tab.textLabel === 'Assignments') {
-      this.getAssignmentmoduleData();
+      this.getAssignmentmoduleData('tab');
       this.screenHeight = window.innerHeight;
       this.screenWidth = window.innerWidth;
       if (this.screenWidth < 800) {
@@ -408,7 +407,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   // getperformActivityData
-  getAssignmentmoduleData() {
+  getAssignmentmoduleData(value?) {
     this.Lservice.getAssignmentmoduleData(this.userDetail.user_id,this.courseid,this.pagination,this.page,this.noofItems).subscribe((data: any) => {
       if (data.data.getAssignmentmoduleData.success) {
        this.assignmentContent = data?.data?.getAssignmentmoduleData?.data;
@@ -427,7 +426,16 @@ export class ActivitiesComponent implements OnInit {
           // this.courseEndDate = moment(batchEndDate);
           this.courseEndDate = moment(batchEndDate).endOf('day').toDate();
 
-          this.assignmentContent.forEach((fileData) => {
+          this.assignmentContent.forEach((fileData,i) => {
+            if (this.openedIndex === i && !value) {
+              if (fileData.isOpen) {
+                fileData.isOpen = false;
+              } else {
+                fileData.isOpen = true;
+              }
+            } else {
+              fileData.isOpen = false;
+            }
                 if (fileData.files.activitystartdate && fileData.files.activityenddate) {
                   let date1 = new Date(fileData.files.activitystartdate);
                   fileData.files.assignmentStartDate = moment(date1);
@@ -570,22 +578,20 @@ export class ActivitiesComponent implements OnInit {
     });
   }
 
-  getprojectActivityData() {
-    
+  getprojectActivityData(value?) {
     this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid,this.pagination,this.page,this.noofItems).subscribe((data: any) => {
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
         this.projectDetails = data.data.getprojectActivityData.data;
-
         this.projectDetails.forEach((element, i) => {
-          // if (this.openedIndex === i) {
-          //   if (element.isOpen) {
-          //     element.isOpen = false;
-          //   } else {
-          //     element.isOpen = true;
-          //   }
-          // } else {
-          //   element.isOpen = false;
-          // }
+          if (this.openedIndex === i && !value) {
+            if (element.isOpen) {
+              element.isOpen = false;
+            } else {
+              element.isOpen = true;
+            }
+          } else {
+            element.isOpen = false;
+          }
           element.showLearnerList = false;
           // Batch date
           const batchEndDate = new Date(element.projectActivity.batchenddate);
@@ -631,7 +637,7 @@ export class ActivitiesComponent implements OnInit {
     }
   }
 
-  getperformActivityData() {
+  getperformActivityData(value?) {
     this.Lservice.getperformActivityData(
       this.userDetail.user_id, this.courseid,this.pagination,this.page,this.noofItems
     ).subscribe((data: any) => {
@@ -642,15 +648,15 @@ export class ActivitiesComponent implements OnInit {
           // const endDate = this.datePipe.transform(element.performActivity.activityenddate, 'dd-MM-yyyy HH:MM aa');
           // const batchendDate = this.datePipe.transform(element.performActivity.batchenddate, 'dd-MM-yyyy HH:MM aa');
           // const crrDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy  HH:MM  aa');
-          // if (this.openedIndex === i) {
-          //   if (element.isOpen) {
-          //     element.isOpen = false;
-          //   } else {
-          //     element.isOpen = true;
-          //   }
-          // } else {
-          //   element.isOpen = false;
-          // }
+          if (this.openedIndex === i && !value) {
+            if (element.isOpen) {
+              element.isOpen = false;
+            } else {
+              element.isOpen = true;
+            }
+          } else {
+            element.isOpen = false;
+          }
 
           const batchEndDate = new Date(element.performActivity.batchenddate);
           element.batchEndDate = moment(batchEndDate).format('DD-MM-YYYY HH:mm');
@@ -794,7 +800,7 @@ export class ActivitiesComponent implements OnInit {
 
           }
           let checkRes = await this.insertActivityRecordProject(this.jsonData)
-          this.getprojectActivityData();
+         // this.getprojectActivityData();
           this.ngxLoader.stop();
           this.toastr.success(data.message);
           setTimeout(()=>{
@@ -809,7 +815,6 @@ export class ActivitiesComponent implements OnInit {
 
         //this.toastr.success(data.message);
         this.showSubmittedon = true;
-        //this.getprojectActivityData();
         this.selectfile = [];
       } else {
         this.ngxLoader.stop();

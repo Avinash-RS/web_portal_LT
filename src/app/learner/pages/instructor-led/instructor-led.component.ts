@@ -52,7 +52,7 @@ export class InstructorLedComponent implements OnInit {
 
   getAttendance() { // Http Call
     this.showSkeleton = true;
-    this.learnerService.getAttendanceByUsername(this.course.id, this.userDetails.full_name, this.userDetails.user_id).subscribe(async res => {
+    this.learnerService.getAttendanceByUsername(atob(this.course.id), this.userDetails.full_name, this.userDetails.user_id).subscribe(async res => {
       // tslint:disable-next-line:no-string-literal
       this.showSkeleton = false;
       const data = res.data['getTopicAttendanceDetailsByUsername']['data'];
