@@ -55,7 +55,7 @@ export class QuestionanswerComponent implements OnInit {
   };
   UserDetails: any;
   courseId: string;
-  requestType: string = 'all';
+  requestType: string = 'answered';
   pageNumber: number = 0;
   qaDataList: any;
   showSkeleton: boolean = false;
@@ -160,6 +160,8 @@ export class QuestionanswerComponent implements OnInit {
     });
   }
   dialogClose() {
+    this.getQAData();
+    this.getQACount();
     this.dialog.closeAll();
     this.htmlContent = "";
   }
