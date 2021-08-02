@@ -173,7 +173,7 @@ export class CoursedetailsComponent implements OnInit {
   constructor(public translate: TranslateService, private router: ActivatedRoute, public socketService: SocketioService,
     public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
     public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
-    public route: Router, private alert: AlertServiceService, private formBuilder: FormBuilder,
+    public route: Router, private formBuilder: FormBuilder,
     public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
     this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
     // if (this.socketService.socketStatus()||this.socketService.socketStatus() == undefined){
@@ -566,7 +566,13 @@ export class CoursedetailsComponent implements OnInit {
     this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
       if (this.scromApiData?.toc != '0') {
-        this.drawersOpen = true;
+        
+        if (this.screenWidth < 800) {
+          this.drawersOpen = false;
+        }
+        else{
+          this.drawersOpen = true;
+        }
       } else {
         this.drawersOpen = false;
       }
