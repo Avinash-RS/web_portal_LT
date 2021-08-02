@@ -370,7 +370,7 @@ export class ActivitiesComponent implements OnInit {
     const filePath = event.target.files[0].name;
     const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.mp4|\.mov|\.pdf)$/i;
     if (!allowedExtensions.exec(filePath)) {
-      this.toastr.warning('Please upload file a valid file');
+      this.toastr.warning('Please upload a valid file');
       if (this.uploadInput) {
         this.uploadInput.nativeElement.value = '';
       }
@@ -523,7 +523,7 @@ export class ActivitiesComponent implements OnInit {
     const filePath = event.target.files[0].name;
     const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
     if (!allowedExtensions.exec(filePath)) {
-      this.toastr.warning('Please upload file a valid file');
+      this.toastr.warning('Please upload a valid file');
       if (this.fileInput) {
         this.fileInput.nativeElement.value = '';
       }

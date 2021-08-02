@@ -76,9 +76,13 @@
 
   <div class="txtName"><span title="{{userDetailes.full_name}}">{{userDetailes.full_name}}</span></div>
 
-  <button class="profileimg" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+  <button *ngIf="!profilepic" class="profileimg" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
     {{initials}}
   </button>
+
+  <figure [matMenuTriggerFor]="menu" class="profPic" *ngIf="profilepic">
+    <img [src]="profilepic + blobKey" alt="" />
+  </figure>
 
   <button class="mobHamburger" mat-button [matMenuTriggerFor]="mobmenu" style="z-index: 999;">
     <mat-icon>more_vert</mat-icon>
