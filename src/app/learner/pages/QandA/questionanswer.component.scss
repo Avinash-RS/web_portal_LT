@@ -331,3 +331,15 @@
   // background-color: #343a40;
   // border-color: #343a40;
 }
+
+.dialogContent{
+  display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 91%;
+    margin: 0 25px;
+}
+.titleMargin{
+  margin: 0 25px;
+}
