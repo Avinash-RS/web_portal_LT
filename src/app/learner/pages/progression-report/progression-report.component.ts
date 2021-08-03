@@ -319,12 +319,31 @@ export class ProgressionReportComponent implements OnInit {
             render: 'percentage',
             fontColor: ['green', 'white', 'red'],
             precision: 2
+          },
+          datalabels: {
+            formatter: (value, ctx) => {
+              let sum = 0;
+              let dataArr = ctx.chart.data.datasets[0].data;
+              dataArr.map(data => {
+                  sum += data;
+              });
+              let percentage = (value*100 / sum)+"%";
+              return percentage;
+          },
+
           }
+
         },
         title: {
           display: true,
           text: ''
-        }
+        },tooltips: {
+          callbacks: {
+            label: function(tooltipItem, data) {
+              return data['labels'][tooltipItem['index']] + ': ' + data['datasets'][0]['data'][tooltipItem['index']] + '%';
+            }
+          }
+      }
       }
     });
   }
