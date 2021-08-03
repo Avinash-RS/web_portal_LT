@@ -35,7 +35,7 @@
           <div class="infotxtarea">
             <span class="htxt" matTooltipPosition="below" matTooltip="{{activity.coursename}}">{{activity.coursename}}</span>
             <div class="infotxt d-flex justify-content-start"> Module: <span matTooltipPosition="below" matTooltip="{{activity.modulename}}">{{activity.modulename}}</span></div>
-            <div class="infotxt d-flex justify-content-start"> Topic: <span matTooltipPosition="below" matTooltip="{{activity.topicname}}">{{activity.topicname}}</span></div>
+            <div *ngIf="(activity.self_paced_learning == 'topic' || activity.liveclassroom == 'topic') || (!activity.self_paced_learning && !activity.liveclassroom)" class="infotxt d-flex justify-content-start"> Topic: <span matTooltipPosition="below" matTooltip="{{activity.topicname}}">{{activity.topicname}}</span></div>
           </div>
     
           <div class="infotypearea">

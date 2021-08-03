@@ -1177,6 +1177,8 @@ data{
     topicname
     status
     link
+    self_paced_learning
+    liveclassroom
   }
 }
 }
