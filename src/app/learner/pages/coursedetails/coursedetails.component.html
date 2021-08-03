@@ -124,14 +124,14 @@
             <iframe title="player" id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
             
            <div class="d-flex justify-content-between understoodBookmark">
-                <div class="d-flex justify-content-between align-items-center understoodButton">
+                <!-- <div class="d-flex justify-content-between align-items-center understoodButton">
                     <button *ngIf="userType!=='collegeconnect'&&userType!=='Corporate'" type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'btn btn-outline-success':'btn btn-outline-light'" (click)="understoodClick('like')">
                         <i class="lxp-smile"></i> Understood
                     </button>
                     <button *ngIf="userType!=='collegeconnect'&&userType!=='Corporate'" type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'btn btn-outline-danger':'btn btn-outline-light'" (click)="understoodClick('dislike')">
                         <i class="lxp-sad"></i> Not Understood
                     </button>
-                </div>
+                </div> -->
                <!-- <div class="d-flex bookmarkButton">
                     <button type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light mr-10px" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
                         <i [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></i> {{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? 'Bookmarked':'Add to Bookmark'}}
@@ -145,12 +145,18 @@
                 <div (click)="makeFullScreen()" data-title="Fullscreen" class="fullScr d-flex align-items-center iconSize">
                     <i  class="lxp-Fullscreen"></i>
                 </div>
+                <div *ngIf="userType!=='collegeconnect'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')"data-title="Understood" class="fullScr d-flex align-items-center iconSize" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
+                    <i  class="lxp-ThumbsUp"></i>
+                </div>
+                <div *ngIf="userType!=='collegeconnect'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="fullScr d-flex align-items-center iconSize" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
+                    <i  class="lxp-ThumbsDown"></i>
+                </div>
                 <!-- <div (click)="openResourse(resourseWindow)" data-title="Resources" class="resourceTab d-flex align-items-center iconSize">
                     <i  class="lxp-res-popout f_size_14"></i>
                 </div> -->
                 <div class="mixed" [ngClass]="isShowDiv ? 'paddingTop' : 'paddingZero'">
                     <div *ngIf="isShowDiv" class="allIcons">
-                        <div class="smile">
+                        <!-- <div class="smile">
                             <button data-title="Understood" *ngIf="userType=='Corporate'" type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'btn btn-outline-success':'btn btn-outline-light'" (click)="understoodClick('like')">
                                 <i class="lxp-smile"></i>
                             </button>
@@ -159,7 +165,7 @@
                             <button data-title="Not Understood" *ngIf="userType=='Corporate'" type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'btn btn-outline-danger':'btn btn-outline-light'" (click)="understoodClick('dislike')">
                                 <i class="lxp-sad"></i>
                             </button>
-                        </div>
+                        </div> -->
                         <div class="resource">
                             <button data-title="Resources"  type="button" ngClass="btn btn-outline-light" (click)="openResourse(resourseWindow)">
                                 <i class="lxp-res-popout"></i>

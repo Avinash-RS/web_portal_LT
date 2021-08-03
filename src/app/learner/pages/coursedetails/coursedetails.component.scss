@@ -560,8 +560,8 @@
         &::before {
           content: attr(data-title);
           position: absolute;
-          bottom: -30px;
-          left: -15px;
+          bottom: 5px;
+          right: 40px;
           line-height: normal;
           background: #5c6873;
           padding: 4px 6px;
@@ -573,11 +573,11 @@
         &::after {
           content: "";
           position: absolute;
-          bottom: -9px;
-          left: 50%;
+          bottom: 9px;
+          right: 22px;
           border-width: 6px;
           border-style: solid;
-          border-color: transparent transparent #5c6873 transparent;
+          border-color: transparent transparent transparent #5c6873;
           transform: translateX(-50%);
         }
       }
@@ -1311,4 +1311,16 @@
   100% {
     visibility: visible;
   }
+}
+.fillcol{
+  i{
+    color:blue !important
+  }
+
+}
+.nofill{
+  i{
+    color:#707070 !important
+  }
+
 }
