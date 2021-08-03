@@ -91,7 +91,7 @@
                                     </div>
                                     <div class="titleFontSize">{{data.coursename}}</div>
                                     <div class="type">Module: <span>{{data.modulename}}</span></div>
-                                    <div class="topic">Topic: <span>{{data.topicname}}</span></div>
+                                    <div class="topic" *ngIf="(data.self_paced_learning == 'topic' || data.liveclassroom == 'topic') || (!data.self_paced_learning && !data.liveclassroom)">Topic: <span>{{data.topicname}}</span></div>
                                     <div class="date"><span>{{data.activitystartdate | date :'d/M/yy h:mm a'}} <span>-</span> {{data.activityenddate | date :'d/M/yy h:mm a'}}</span>
                                     </div>
                                 </div>
