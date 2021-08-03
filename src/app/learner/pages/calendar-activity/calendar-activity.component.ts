@@ -108,9 +108,6 @@ export class CalendarActivityComponent implements OnInit {
 
   ngOnInit() {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
-    if(this.userDetailes.org_type == 'vocational'){
-      this.filterBy[2].key = "Virtual Instructor Led Session";
-    } 
     this.getCourseData();
     const topicStart = new Date();
     this.getCalendarCount(topicStart);
@@ -268,6 +265,8 @@ export class CalendarActivityComponent implements OnInit {
         localStorage.setItem('CourseName', data1.courseName);
         this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
       }
-     
+    }
+    openClassroom(value) {
+      window.open(value);
     }
 }

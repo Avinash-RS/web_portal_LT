@@ -2,30 +2,31 @@
 <div class="qandWrapper d-flex">
     <div class="questionLeftCol">
         <ul class="breadcrumb">
-            <li><em routerLink="/Learner/MyCourse" class="lxp-Right_Direction_Arrow backArrow"></em> Applied Industrial
-                IoT</li>
+            <li><em routerLink="/Learner/MyCourse" class="lxp-Right_Direction_Arrow backArrow"></em>{{courseName}}</li>
             <li>Question and Answer</li>
         </ul>
         <div class="qandaSection">
-            <h2>Question and Answer</h2>
+            <!-- <h2>Question and Answer</h2> -->
             <mat-tab-group animationDuration="100ms" [(selectedIndex)]="selectedIndex" (selectedTabChange)="contentChange()">
                 <mat-tab>
                     <ng-template mat-tab-label>
-                        My Q&A
+                        Answers
                     </ng-template>
                     <span *ngIf="showSkeleton;else skeleton">
+                        <span *ngIf="qaDataList.length;else noquescard">
                     <div class="content" *ngFor="let item of qaDataList; let i = index">
                         <div class="askedDate d-flex flex-row">
                             <span>Question : {{i+ 1}} |</span>
                             <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                         </div>
-                        <h4>{{item.question}}</h4>
+                        <h4 [innerHTML]="item.question"></h4>
                         <div class="answeredDate">
                             <button class="answer">Answered</button>
                             <span>{{item.publishedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                         </div>
-                        <p>{{item.answer}}</p>
+                        <p [innerHTML]="item.answer"></p>
                     </div>
+                    </span>
                     </span>
                 </mat-tab>
                 <mat-tab>
@@ -37,7 +38,7 @@
                         <div class="askedDate d-flex flex-row">
                             <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                         </div>
-                        <h4>{{item.question}}</h4>
+                        <h4 [innerHTML]="item.question"></h4>
                         <div class="answeredDate">
                             <button class="noAnswer">Unanswered</button>
                         </div>
@@ -54,13 +55,13 @@
                             <span><em class="lxp-AccountCircle"></em>{{item.userId}}</span>
                             <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                         </div>
-                        <h4>{{item.question}}</h4>
+                        <h4 [innerHTML]="item.answer"></h4>
                         <div class="answeredDate">
                             <button
                                 [class]="item.answered?'answer':'noAnswer'">{{item.answered?'Answered':'Unanswered'}}</button>
                             <span *ngIf="item.answered">{{item.publishedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                         </div>
-                        <p *ngIf="item.answered">{{item.answer}}</p>
+                        <p *ngIf="item.answered" [innerHTML]="item.answer"></p>
                     </div>
                     </span>
                 </mat-tab>
@@ -98,36 +99,27 @@
 </div>
 
 <ng-template #questionDialog>
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between titleMargin">
         <div class="font-weight-bold">
             <h2>Ask A Question</h2>
         </div>
         <div><i (click)="dialogClose()" class="lxp-Close"></i></div>
     </div>
-    <div>
-        <div>
-            <!-- <div>Question Title</div> -->
-            <div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Question Title</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1"
-                        placeholder="What's your question?">
-                </div>
-
-            </div>
-        </div>
+    <div class="dialogContent">
+        
         <div>
             <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
         </div>
+        <!-- <div [innerHTML]="htmlContent"></div> -->
         <div>
-            <div class="form-check">
+            <!-- <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Notify by e-mail for incomming answers</label>
-            </div>
+            </div> -->
         </div>
         <div class="d-flex justify-content-between">
-            <button class="btn btn-outline-dark btn-block">Cancel</button>
-            <button class="btn btn-danger btn-block">Submit Question</button>
+            <button class="btn btn-outline-dark btn-block" (click)="dialogClose()">Cancel</button>
+            <button class="btn btn-danger btn-block" (click)="createQuestion()">Submit Question</button>
         </div>
     </div>
 </ng-template>
@@ -140,5 +132,10 @@
     </div>
     <div class="content">
         <ngx-skeleton-loader count="5"></ngx-skeleton-loader>
+    </div>
+</ng-template >
+<ng-template #noquescard>
+    <div class="d-flex align-items-center justify-content-center">
+        No question card coming soon
     </div>
 </ng-template>

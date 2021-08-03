@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material";
 import { AngularEditorConfig } from "@kolkov/angular-editor";
 import { LearnerServicesService } from "@learner/services/learner-services.service";
+import { ToastrService } from "ngx-toastr";
 @Component({
   selector: "app-questionanswer",
   templateUrl: "./questionanswer.component.html",
@@ -16,7 +17,7 @@ export class QuestionanswerComponent implements OnInit {
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    height: '15rem',
+    height: '20rem',
     minHeight: '5rem',
     placeholder: 'Please ask your question with consice and add any other details here',
     translate: 'no',
@@ -54,15 +55,17 @@ export class QuestionanswerComponent implements OnInit {
   };
   UserDetails: any;
   courseId: string;
-  requestType: string = 'all';
+  requestType: string = 'answered';
   pageNumber: number = 0;
   qaDataList: any;
   showSkeleton: boolean = false;
   showNumSkeleton: boolean;
   questionText: any;
-  constructor(private dialog: MatDialog, private learnerService: LearnerServicesService) {
+  courseName: string;
+  constructor(private dialog: MatDialog, private learnerService: LearnerServicesService,private toastr: ToastrService,) {
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails'))
     this.courseId = localStorage.getItem("Courseid")
+    this.courseName = localStorage.getItem("CourseName")
   }
 
   ngOnInit() {
@@ -99,8 +102,8 @@ export class QuestionanswerComponent implements OnInit {
       console.log(rdata)
       let qcountData = rdata.data.getengineersForumQA_Count.data.questionCount
       let acountData = rdata.data.getengineersForumQA_Count.data.anweredCount
-      this.animateValue('qCount', 0, qcountData?qcountData:0, 2000)
-      this.animateValue('aCount', 0,acountData?acountData:0 , 2000)
+      this.animateValue('qCount', 0, qcountData?qcountData:0, 1000)
+      this.animateValue('aCount', 0,acountData?acountData:0 , 1000)
       this.showNumSkeleton = true
     })
   }
@@ -135,8 +138,14 @@ export class QuestionanswerComponent implements OnInit {
   }
 
   createQuestion(){
-    this.learnerService.createEngineersForumData(this.UserDetails.user_id, this.UserDetails.full_name, this.courseId, this.questionText).subscribe((rdata: any) => {
+    this.learnerService.createEngineersForumData(this.UserDetails.user_id, this.UserDetails.full_name, this.courseId, this.htmlContent, this.courseName).subscribe((rdata: any) => {
       console.log(rdata);
+      if(rdata.data.createEngineersForumData.success){
+        this.dialogClose();
+        this.toastr.success(rdata.data.createEngineersForumData.message)
+      }else{
+        this.toastr.warning(rdata.data.createEngineersForumData.message)
+      }
       this.showSkeleton = true
     })
   }
@@ -151,7 +160,10 @@ export class QuestionanswerComponent implements OnInit {
     });
   }
   dialogClose() {
+    this.getQAData();
+    this.getQACount();
     this.dialog.closeAll();
+    this.htmlContent = "";
   }
 
 }

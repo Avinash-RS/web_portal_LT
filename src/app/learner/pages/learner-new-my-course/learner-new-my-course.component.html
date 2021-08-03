@@ -3,7 +3,7 @@
 <div class="sideNavWrapper">
     <div>
         <mat-drawer-container class="sideNavContainer" autosize>
-            <mat-drawer #drawer class="sideNav" [opened]="innerWidth>1140 ? 'true':'false'" [mode]="innerWidth>1140?'side':'over'" [position]="innerWidth < 767 ? 'start' : 'end'">
+            <mat-drawer #drawer class="sideNav" [opened]="innerWidth>1140 ? 'true':'false'" [mode]="innerWidth>1140?'side':'over'" position='end'>
                 <div class="drawerWrapper">
                     <!-- Over Side Push -->
                     <div class="navBackBtn">
@@ -37,7 +37,7 @@
                             <mwl-calendar-week-view  [selected]="selectedDate" (dayHeaderClicked)="getLearnerActivity($event.day.date);highlightSelectday($event)" [weekStartsOn]="1" [(viewDate)]="viewDate" [events]="events"></mwl-calendar-week-view>
                         </div>
                     </div>
-                    <div>
+                    <div class="minHeight">
                         <div class="sideTabsStrip">
                             <div class="activeTabItem">
                                 To Do
@@ -56,29 +56,44 @@
                                         <p class="d-flex justify-content-center align-items-center">
                                             <ng-container *ngIf="data.activitytype != 'Live Classroom'">{{data.activitytype}}</ng-container>
                                             <ng-container *ngIf="data.activitytype == 'Live Classroom'">
-                                                <ng-container *ngIf="userDetailes.org_type == 'vocational'"><p>Virtual Instructor Led Session</p></ng-container>
-                                                <ng-container *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'"><p>Live Interactions</p></ng-container>
+                                                <ng-container><p>Live Interactions</p></ng-container>
                                             </ng-container>
                                         </p>
-                                        <div class="status">
-                                            <span class="ongoing" *ngIf="data.status == 'On going'">
-                                                <em class="lxp-Timer_Outlined"></em>{{'Ongoing' | translate }}
-                                            </span>
-                                            <span class="Overdue" *ngIf="data.status == 'Overdue'">
-                                                <em class="lxp-Timelapse"></em>{{'Overdue' | translate }}
-                                            </span>
-                                            <span class="yettoStart"  *ngIf="data.status == 'Yet to submit' || data.status == 'Up Coming'">
-                                                <em class="lxp-Play"></em>{{'Yet to start' | translate }}
-                                            </span>
-                                            <span class="completed" *ngIf="data.status == 'Completed' || data.status == 'Graded' || data.status == 'Submitted'">
-                                                <em class="lxp-Right"></em>{{'Completed' | translate }}
-                                            </span>
-                                        </div>
+                                        <ng-container *ngIf="data.activitytype != 'Live Classroom'">
+                                            <div class="status">
+                                                <span class="ongoing" *ngIf="data.status == 'On going'">
+                                                    <em class="lxp-Timer_Outlined"></em>{{'Ongoing' | translate }}
+                                                </span>
+                                                <span class="Overdue" *ngIf="data.status == 'Overdue'">
+                                                    <em class="lxp-Timelapse"></em>{{'Overdue' | translate }}
+                                                </span>
+                                                <span class="yettoStart"  *ngIf="data.status == 'Yet to submit' || data.status == 'Up Coming'">
+                                                    <em class="lxp-Play"></em>{{'Yet to start' | translate }}
+                                                </span>
+                                                <span class="completed" *ngIf="data.status == 'Completed' || data.status == 'Graded' || data.status == 'Submitted'">
+                                                    <em class="lxp-Right"></em>{{'Completed' | translate }}
+                                                </span>
+                                            </div>
+                                        </ng-container>
+                                        <ng-container *ngIf="data.activitytype == 'Live Classroom'">
+                                            <div class="status">
+                                                <span class="yettoStart"  *ngIf="data.status == 'Yet to submit' || data.status == 'Up Coming'">
+                                                    <em class="lxp-Play"></em>{{'Yet to start' | translate }}
+                                                </span>
+                                                <span class="completed" *ngIf="data.status == 'Completed' || data.status == 'Graded' || data.status == 'Submitted'">
+                                                    <em class="lxp-Right"></em>{{'Completed' | translate }}
+                                                </span>
+                                                <span class="launch" *ngIf="data.status == 'On going'" (click)="openClassroom(data.link)">
+                                                    <em class="lxp-Launch"></em> <span>Launch</span>
+                                                </span>
+                                            </div>
+                                        </ng-container>
                                     </div>
                                     <div class="titleFontSize">{{data.coursename}}</div>
                                     <div class="type">Module: <span>{{data.modulename}}</span></div>
                                     <div class="topic">Topic: <span>{{data.topicname}}</span></div>
-                                    <div class="date">{{data.activitystartdate | date :'d/M/yy h:mm a'}} <span>-</span> {{data.activityenddate | date :'d/M/yy h:mm a'}}</div>
+                                    <div class="date"><span>{{data.activitystartdate | date :'d/M/yy h:mm a'}} <span>-</span> {{data.activityenddate | date :'d/M/yy h:mm a'}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </ng-container>
@@ -91,9 +106,9 @@
                                     <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px', height: '50px', width: '50px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
                                 </div>
                                 <div class="item2">
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between">
@@ -101,9 +116,9 @@
                                     <ngx-skeleton-loader count="1" [theme]="{'border-radius': '5px', height: '50px', width: '50px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
                                 </div>
                                 <div class="item2">
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '2px', height: '10px', width: '220px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+                                    <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '10px', 'margin-bottom':'0', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +137,7 @@
             <div class="sideNavContent">
                 <!-- Top 3 Things -->
                 <div class="somethingNew">
-                    <h3>Welcome !</h3>
+                    <h3>Welcome!</h3>
                     <h4>Let's learn something new today!</h4>
                     <!-- <div class="thingsContent">
                         <p>Here are your top 3 things to do!</p>
@@ -202,6 +217,7 @@
                 </div>
 
                 <!-- My Course -->
+                <div [ngClass]="userDetailes.org_type == 'vocational' ? 'yes':'no'">
                 <div class="mycoursesWrapper" [ngClass]="show ? 'noPadding': ''">
                     <h3>My Courses</h3>
                     <div class="mobileEnable">
@@ -269,8 +285,7 @@
                                                     <div class="type d-flex justify-content-start">
                                                         <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
                                                         <span>
-                                                            <ng-container *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
-                                                            <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'|| userDetailes.org_type == 'Corporate'">Live Interactions</ng-container> - upto  {{item.instructor_lead_session_total_count!==""?item.instructor_lead_session_total_count:0}}</span>
+                                                            <ng-container>Live Interactions</ng-container> - upto  {{item.instructor_lead_session_total_count!==""?item.instructor_lead_session_total_count:0}}</span>
                                                         <span *ngIf="userDetailes.org_type == 'collegeconnect'">Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
                                                         <span *ngIf="userDetailes.org_type == 'collegeconnect'">Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
                                                     </div>
@@ -280,15 +295,14 @@
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'vocational'"><p>Virtual Instructor Led Session</p></ng-container>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'"><p>Live Interactions</p></ng-container>
+                                                        <ng-container><p>Live Interactions</p></ng-container>
                                                     </div>
                                                     <div class="icons" (click)="gotoSubmissionDetails(item)">
                                                         <span><em class="lxp-Activities_New"></em></span>
                                                         <p>Activities</p>
                                                     </div>
                                                     <!--  -->
-                                                    <div *ngIf="userDetailes.org_type!== 'collegeconnect'" class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
+                                                    <div  class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
                                                         <span><em class="lxp-QA"></em></span>
                                                         <p>Q&A</p>
                                                     </div>
@@ -372,8 +386,7 @@
                                                     <div class="type d-flex justify-content-start">
                                                         <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
                                                         <span>
-                                                            <ng-container *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
-                                                            <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'|| userDetailes.org_type == 'Corporate'">Live Interactions</ng-container> - upto  {{item.instructor_lead_session_total_count!==""?item.instructor_lead_session_total_count:0}}</span>
+                                                            <ng-container>Live Interactions</ng-container> - upto  {{item.instructor_lead_session_total_count!==""?item.instructor_lead_session_total_count:0}}</span>
                                                         <span *ngIf="userDetailes.org_type == 'collegeconnect'">Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
                                                         <span *ngIf="userDetailes.org_type == 'collegeconnect'">Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
                                                     </div>
@@ -383,8 +396,7 @@
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'vocational'"><p>Virtual Instructor Led Session</p></ng-container>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'"><p>Live Interactions</p></ng-container>
+                                                        <ng-container><p>Live Interactions</p></ng-container>
                                                     </div>
                                                     <div class="icons" (click)="gotoSubmissionDetails(item)">
                                                         <span><em class="lxp-Activities_New"></em></span>
@@ -406,8 +418,7 @@
                                                         <p>Course Progression</p>
                                                     </div>
                                                     <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
-                                                        <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="5" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week"
-                                                         [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
+                                                        <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#00b0ed'" [innerStrokeColor]="'#e7e8ea'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4" [subtitleFontSize]="5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
                                                     </div>
                                                 </div>
                                             </div>
@@ -475,8 +486,7 @@
                                                     <div class="type d-flex justify-content-start">
                                                         <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
                                                         <span>
-                                                            <ng-container *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</ng-container>
-                                                            <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'|| userDetailes.org_type == 'Corporate'">Live Interactions</ng-container> - upto  {{item.instructor_lead_session_total_count!==""?item.instructor_lead_session_total_count:0}}</span>
+                                                            <ng-container>Live Interactions</ng-container> - upto  {{item.instructor_lead_session_total_count!==""?item.instructor_lead_session_total_count:0}}</span>
                                                         <span *ngIf="userDetailes.org_type == 'collegeconnect'">Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
                                                         <span *ngIf="userDetailes.org_type == 'collegeconnect'">Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
                                                     </div>
@@ -486,8 +496,7 @@
                                                 <div class="viltActivitiesQA d-flex justify-content-start">
                                                     <div class="icons" (click)="goInstructorLed(item)">
                                                         <span><em class="lxp-VILT"></em></span>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'vocational'"><p>Virtual Instructor Led Session</p></ng-container>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'"><p>Live Interactions</p></ng-container>
+                                                        <ng-container><p>Live Interactions</p></ng-container>
                                                     </div>
                                                     <div class="icons" (click)="gotoSubmissionDetails(item)">
                                                         <span><em class="lxp-Activities_New"></em></span>
@@ -509,8 +518,7 @@
                                                         <p>Course Progression</p>
                                                     </div>
                                                     <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
-                                                        <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#0DA207'" [innerStrokeColor]="'#e7e8ea'" [titleFontSize]="5" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week"
-                                                         [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
+                                                        <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#00b0ed'" [innerStrokeColor]="'#e7e8ea'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4" [subtitleFontSize]="5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
                                                     </div>
                                                 </div>
                                             </div>
@@ -649,6 +657,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </mat-drawer-container>

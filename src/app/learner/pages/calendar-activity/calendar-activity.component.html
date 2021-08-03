@@ -45,11 +45,10 @@
             <span  *ngIf="activity.activitytype == 'Assignment'" class="icon lxp-Edit_Document">i</span>
             <span  *ngIf="activity.activitytype == 'Project'" class="icon lxp-User_Settings">i</span>
             <div class="htxt">
-              <span>Type</span>
+              <!-- <span>Type</span> -->
               <div *ngIf="activity.activitytype != 'Live Classroom' && activity.activitytype != 'Self Learning'" class="notifi activity">{{activity.activitytype}}</div>
               <div *ngIf="activity.activitytype == 'Self Learning'" class="notifi selfplacedlearning">{{activity.activitytype}}</div>
-              <div *ngIf="activity.activitytype == 'Live Classroom' && userDetailes.org_type == 'vocational'" class="notifi virtualinstructorled">Virtual Instructor Led Session</div>
-              <div *ngIf="activity.activitytype == 'Live Classroom' && (userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate')" class="notifi virtualinstructorled">Live Interactions</div>
+              <div *ngIf="activity.activitytype == 'Live Classroom'" class="notifi virtualinstructorled">Live Interactions</div>
             </div>
           </div>
     
@@ -60,12 +59,20 @@
               <span>{{activity.activityenddate | date: 'MMM d, y, h:mm a'}}</span>
             </div>
           </div>
+
+          <div class="launch">
+            <ng-container *ngIf="activity.activitytype == 'Live Classroom'">
+              <div *ngIf="activity.status == 'On going'" (click)="openClassroom(activity.link)">
+                <em class="lxp-Launch"></em> <span>Launch</span>
+              </div>
+            </ng-container>
+          </div>
     
           <div class="statusarea d-flex justify-content-end align-items-center">
-            <span class="icon lxp-Tick green" *ngIf="activity.status == 'Completed' || activity.status == 'Graded' || activity.status == 'Submitted'">i</span>
-            <span class="icon lxp-Timelapse red" *ngIf="activity.status == 'Overdue'">i</span>
-            <span class="icon lxp-Timer timer" *ngIf="activity.status == 'On going'">i</span>
-            <span class="icon lxp-Play grey" *ngIf="activity.status == 'Yet to submit' || activity.status == 'Up Coming'">i</span>
+              <span class="icon lxp-Tick green" *ngIf="activity.status == 'Completed' || activity.status == 'Graded' || activity.status == 'Submitted'">i</span>
+              <span class="icon lxp-Timelapse red" *ngIf="activity.status == 'Overdue'">i</span>
+              <span class="icon lxp-Timer timer" *ngIf="activity.status == 'On going'">i</span>
+              <span class="icon lxp-Play grey" *ngIf="activity.status == 'Yet to submit' || activity.status == 'Up Coming'">i</span>
           </div>
         </div>
       </ng-container>
@@ -131,8 +138,7 @@
   </div>
   <div class="activInfo">
     <span class="self">Self Learning</span>
-    <span class="live" *ngIf="userDetailes.org_type == 'vocational'">Virtual Instructor Led Session</span>
-    <span class="live" *ngIf="userDetailes.org_type == 'collegeconnect' || userDetailes.org_type == 'Corporate'">Live Interactions</span>
+    <span class="live">Live Interactions</span>
     <span class="Activ">Activity</span>
   </div>
 </div>

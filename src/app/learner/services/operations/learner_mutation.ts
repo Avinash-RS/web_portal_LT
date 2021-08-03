@@ -1176,6 +1176,7 @@ data{
     modulename
     topicname
     status
+    link
   }
 }
 }
@@ -1198,12 +1199,13 @@ data {
   publishedDate
   userId
 }
+totalcount
 }
 }
 `;
 export const createEngineersForumData = gql`
-mutation createEngineersForumData($userId:String!,$userName:String!,$courseId:String!,$question:String!){
-  createEngineersForumData(userId:$userId,userName:$userName,courseId:$courseId,question:$question){
+mutation createEngineersForumData($userId:String!,$userName:String!,$courseId:String!,$question:String!,$courseName:String!){
+  createEngineersForumData(userId:$userId,userName:$userName,courseId:$courseId,question:$question,courseName:$courseName){
     success
      message
      error_msg

@@ -285,6 +285,10 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.getDashboardMyCourse(userId, userObjId);
   }
 
+  openClassroom(value) {
+    window.open(value);
+  }
+
   //PLAYER PAGE NAVIGATION
   gotoDesc(c) {
     c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
@@ -316,7 +320,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   goInstructorLed(c) {
     localStorage.setItem('Courseid', c.course_id);
     const detail = {
-      id: c.course_id,
+      id: btoa(c.course_id),
       name: c.course_name
     };
     localStorage.setItem('course', btoa(JSON.stringify(detail)));
@@ -375,6 +379,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
   gotoquestionanswer(course) {
     this.router.navigate(['/Learner/questionanswer'])
     localStorage.setItem('Courseid', course.course_id);
+    localStorage.setItem('CourseName', course.course_name);
+
   }
 
   getTodaydate() {
