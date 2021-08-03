@@ -137,7 +137,7 @@
             <div class="sideNavContent">
                 <!-- Top 3 Things -->
                 <div class="somethingNew">
-                    <h3>Welcome !</h3>
+                    <h3>Welcome!</h3>
                     <h4>Let's learn something new today!</h4>
                     <!-- <div class="thingsContent">
                         <p>Here are your top 3 things to do!</p>
@@ -217,6 +217,7 @@
                 </div>
 
                 <!-- My Course -->
+                <div [ngClass]="userDetailes.org_type == 'vocational' ? 'yes':'no'">
                 <div class="mycoursesWrapper" [ngClass]="show ? 'noPadding': ''">
                     <h3>My Courses</h3>
                     <div class="mobileEnable">
@@ -656,6 +657,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </mat-drawer-container>
