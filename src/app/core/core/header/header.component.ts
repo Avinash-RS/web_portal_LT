@@ -8,6 +8,7 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 import { SocketioService } from '@learner/services/socketio.service';
 import Swal from 'sweetalert2';
 import { filter } from 'rxjs/operators';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-header',
@@ -33,6 +34,8 @@ export class HeaderComponent implements OnInit {
 
   @HostBinding('class') componentCssClass;
   innerWidth: number;
+  profilepic: any;
+  blobKey = environment.blobKey;
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
               private http: HttpClient, public overlayContainer: OverlayContainer, public socketService: SocketioService,
               public router: Router, private gs: GlobalServiceService) {
@@ -65,6 +68,8 @@ export class HeaderComponent implements OnInit {
     this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
     // this.userDetailes = this.gs.checkLogout();
+    this.profilepic = this.userDetailes.profile_img;
+    console.log(this.profilepic, 'asdfasdf');
     this.role = localStorage.getItem('role') || sessionStorage.getItem('role');
     this.userimage = localStorage.getItem('user_img') || sessionStorage.getItem('user_img');
     this.fullName = localStorage.getItem('Fullname');

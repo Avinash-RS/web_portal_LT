@@ -310,7 +310,7 @@
     position: relative;
     z-index: 9;
     @media only screen and (max-width: 767px) {
-      padding: 15px 15px 95px 15px;
+      padding: 15px;
     }
     &.noPadding {
       @media only screen and (min-width: 1200px) {
@@ -847,6 +847,13 @@
   }
 }
 //
+::ng-deep.no {
+  .mycoursesWrapper {
+    .mat-tab-group {
+      margin-top: 0;
+    }
+  }
+}
 ::ng-deep.mycoursesWrapper {
   .mat-ink-bar {
     display: none;
