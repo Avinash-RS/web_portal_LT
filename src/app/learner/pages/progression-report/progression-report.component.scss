@@ -927,6 +927,10 @@
   .mat-paginator {
     background: #f2f2f2;
   }
+  .mat-expansion-panel-header:not([aria-disabled='true']):hover {
+    background: inherit !important;
+    /* color: black; */
+  }
 }
 // No Card
 .noCard {

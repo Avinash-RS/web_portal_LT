@@ -254,7 +254,27 @@ export class CalendarActivityComponent implements OnInit {
       if(value.activitytype === 'Live Classroom'){
         return false;
       } else if (value.activitytype == "Self Learning") {
-        this.router.navigate(['Learner/MyCourse']);
+
+        value.batch_end_date_Timer = new Date(value.batch_end_date).getTime();//need
+
+        const detail = {
+          id: value.courseid,
+          wishlist: false,
+          wishlist_id: null,
+          enrollment_status: null,
+          course_name: value.coursename,
+          course_status: value.status,
+          batch_id: value.batch_id,
+          batchEndTime: value.batch_end_date_Timer,
+        };
+
+        localStorage.setItem('currentBatchEndDate', value.batch_end_date_Timer)
+        localStorage.setItem('Courseid', value.courseid);
+        localStorage.setItem('persentage', null);
+        localStorage.setItem('currentBatchId', value.batch_id);
+        this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+
+        // this.router.navigate(['Learner/MyCourse']);
       }else{
         const data1 = {
           courseId: value.courseid,
