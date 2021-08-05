@@ -17,3 +17,12 @@
 
 <ngx-ui-loader [hasProgressBar] = 'isProgressBar' [text]="percentage"></ngx-ui-loader>
 
+
+<ng-container *ngIf="isFooterVisible">
+<figure class="chatBotIcon" (click)="toggleChatbot()">
+  <img src="/assets/learner/chatBot.svg" alt="" />
+</figure>
+  <div class="chatBot" *ngIf="chatbotShow">
+      <iframe allow="microphone;" width="350" height="430" src="https://console.dialogflow.com/api-client/demo/embedded/ead5e5f5-1fe8-43d3-b485-5d137f63a14f"></iframe>    
+  </div>
+</ng-container>

@@ -45,7 +45,15 @@ export class CourseGalleryComponent implements OnInit {
   getBack(){
     this.router.navigateByUrl('/Learner/MyCourse');
   }
-
+  clearact(){
+    debugger;
+    if(this.searchContent == ""){
+      this.clearactivity();
+    }
+  }
+  clearactivity(){
+    this.getGalleryData(0);
+  }
 
   getGalleryData(content){
     this.learnerService.getcourseGallery(atob(this.course.id)).subscribe((data)=>{

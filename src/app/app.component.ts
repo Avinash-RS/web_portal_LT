@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
   percentage = "Upload in progress"
   loadersubscription: Subscription;  
   hideLeftMenu: boolean = false;
+  chatbotShow: boolean = false;
    // FOR DRM(Restriction for right click)
    @HostListener('document:keydown', ['$event'])
    handleKeyboardEvent(event: KeyboardEvent) {
@@ -173,5 +174,8 @@ myUnload() {
     this.loadersubscription.unsubscribe();
   }
 
+  toggleChatbot() {
+    this.chatbotShow = !this.chatbotShow;
+  }
 
 }

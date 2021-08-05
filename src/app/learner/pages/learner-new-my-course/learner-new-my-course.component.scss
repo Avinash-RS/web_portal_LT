@@ -1010,9 +1010,9 @@
     border-bottom: 1px solid #CCCCCC;
     margin-bottom: 10px;
     .activeTabItem {
-      border-bottom: solid #c02222 3px;
-      border-radius: 3px;
-      padding: 0 20px;
+      border-bottom: solid #c02222 2px;
+      border-radius: 0;
+      padding: 0 15px;
     }
   }
 
@@ -1435,10 +1435,10 @@
     width: 45%;
   }
   @media only screen and (min-width: 1140px) {
-    width: 35%;
+    width: 42%;
   }
   &.noHandIcon {
-    
+    display: none;
   }
   label {
     font-weight: 700;
@@ -1452,6 +1452,7 @@
     text-align: right;
   }
 }
+
 ::ng-deep.vocationalJobRole {
   .mat-form-field {
     width: 100%;

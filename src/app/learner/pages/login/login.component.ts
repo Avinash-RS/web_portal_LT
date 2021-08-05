@@ -39,8 +39,8 @@ export class LoginComponent implements OnInit {
   siteKey: any = environment.captachaSiteKey;
 
   getErrorMessage() {
-    return this.username.hasError('required') ? 'Email is required' :
-        this.username.hasError('email') ? 'Please enter a valid email' :
+    return this.username.hasError('required') ? 'Email or Username is required' :
+        this.username.hasError('email') ? 'Please enter a valid email address' :
             '';
   }
   constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder, public learnerService: LearnerServicesService,

@@ -33,12 +33,12 @@
           <form [formGroup]="loginForm">
             <div>
               <mat-form-field appearance="outline">
-                <mat-label class="label-color">{{'Email' | translate}}</mat-label>
-                <input matInput id="username" #username [placeholder]="'Enter the email' | translate" formControlName="username" maxlength="64" required>
+                <mat-label class="label-color">{{'Email or Username' | translate}}</mat-label>
+                <input matInput id="username" #username [placeholder]="'Enter the Email or Username' | translate" formControlName="username" maxlength="64" required>
                 <em class="icon-color lxp-MailOutline" matPrefix></em>
                 
                 <mat-error class="error" *ngIf="loginForm.get('username').hasError('required')">
-                  {{'Email is required' | translate}}</mat-error>
+                  {{'Email or Username is required' | translate}}</mat-error>
                 <mat-error class="error" *ngIf="loginForm.get('username').hasError('pattern')">
                   {{'Please enter a valid email' | translate}}</mat-error>
               </mat-form-field>
@@ -90,8 +90,8 @@
           <h1>Forgot Password?</h1>
           <div>
             <mat-form-field appearance="outline">
-              <mat-label class="label-color">{{'Email' | translate}}</mat-label>
-              <input matInput [placeholder]="'Enter the email' | translate" [formControl]="username" maxlength="64" required>
+              <mat-label class="label-color">{{'Email or Username' | translate}}</mat-label>
+              <input matInput [placeholder]="'Enter the Email or Username' | translate" [formControl]="username" maxlength="64" required>
               <em class="icon-color lxp-MailOutline" matPrefix></em>
 
               <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
@@ -159,16 +159,25 @@
 
             <mat-form-field appearance="outline">
               <mat-label class="label-color">{{'Mobile number' | translate}}</mat-label>
-              <input matInput [placeholder]="'Enter mobile number without country code'" minlength="10" pattern="[1-9]{1}[0-9]{9}" mask="0000000000" maxlength="10" formControlName="mobile">
+              <input matInput type="tel" [placeholder]="'Enter mobile number without country code'" minlength="10" pattern="[0-9]{1}[1-9]{9}" mask="0000000000" maxlength="10" formControlName="mobile">
               <em class="icon-color lxp-Phone" matPrefix></em>
 
-              <mat-error class="error" *ngIf="registerForm.get('mobile').hasError('minlength')">
-                {{'Mobile number must be 10 digits' | translate }}
+              <mat-error class="error" *ngIf="registerForm.get('mobile').hasError('minlength') || registerForm.get('mobile').hasError('pattern')">
+                {{'Mobile number is invalid or must be 10 digits' | translate }}
               </mat-error>
-              <mat-error class="error errorInvalid" *ngIf="registerForm.get('mobile').hasError('pattern')">
+              <!-- <mat-error class="error" *ngIf="registerForm.get('mobile').hasError('pattern')">
                 {{'Mobile number is invalid' | translate }}
-              </mat-error>
+              </mat-error> -->
             </mat-form-field>
+
+            <div class="row">
+              <div class="col-12">
+                <div class="alert1 dontHaveAccount"> 
+                  <strong>{{'Note' | translate}}</strong>
+                  {{': Full name will be used in your certificates' | translate }}
+                </div>
+              </div>
+            </div>
 
             <div class="d-flex justify-content-center mt-1">
               <re-captcha formControlName="recaptchaReactive" (resolved)="resolved($event)" (error)="onError($event)"
@@ -176,14 +185,6 @@
               </re-captcha>
             </div>
             <div class="">
-              <div class="row">
-                <div class="col-12">
-                  <div class="alert1 dontHaveAccount"> 
-                    <strong>{{'Note' | translate}}</strong>
-                    {{': Full name will be used in your certificates' | translate }}
-                  </div>
-                </div>
-              </div>
               <div class="gradientBtn">
                 <button id="login" mat-raised-button (click)="Submit()" [disabled]="!registerForm.valid">
                   <span *ngIf="!loader">{{'SIGN UP' | translate}}</span>
