@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { DragScrollComponent } from 'ngx-drag-scroll';
@@ -177,7 +176,7 @@ export class ActivitiesComponent implements OnInit {
   page = 0;
   noofItems = 0;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
-    private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
+    private dialog: MatDialog, private toastr: ToastrService,
     public route: Router, public datePipe: DatePipe, private ngxLoader: NgxUiLoaderService) {
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
@@ -566,7 +565,7 @@ export class ActivitiesComponent implements OnInit {
     payload.append('type_name', assignemtname);
     payload.append('submit_status', submitStatus);
     payload.append('total_mark', score);
-    this.wcaservice.uploadAssignments(payload).subscribe((data: any) => {
+    this.Lservice.uploadAssignments(payload).subscribe((data: any) => {
       if (data.success === true) {
         this.ngxLoader.stop();
         this.toastr.success(data.message, null);

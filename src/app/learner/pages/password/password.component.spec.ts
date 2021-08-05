@@ -5,7 +5,6 @@ import { MatAutocompleteModule, MatSelectModule, MatDialogModule } from '@angula
 import { ActivatedRoute } from '@angular/router';
 import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 describe('PasswordComponent', () => {
   let component: PasswordComponent;
@@ -29,7 +28,7 @@ describe('PasswordComponent', () => {
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA
       ],
-      providers: [Ng4LoadingSpinnerService,
+      providers: [
         {provide: ActivatedRoute, useValue: fakeActivatedRoute} ],
     })
     .compileComponents();

@@ -10,13 +10,11 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatSidenav, MatTabGroup } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
-import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
 import { SocketioService } from '@learner/services/socketio.service';
 import { TranslateService } from '@ngx-translate/core';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import * as _ from 'lodash';
-import { LegendPosition } from 'ag-grid-community';
 import { filter } from 'underscore';
 // import { debugger } from 'fusioncharts';
 import * as CryptoJS from 'crypto-js';
@@ -174,7 +172,7 @@ export class CoursedetailsComponent implements OnInit {
     public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
     public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
     public route: Router, private formBuilder: FormBuilder,
-    public sanitizer: DomSanitizer, private toastr: ToastrService, public wcaservice: WcaService) {
+    public sanitizer: DomSanitizer, private toastr: ToastrService) {
     this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
     // if (this.socketService.socketStatus()||this.socketService.socketStatus() == undefined){
     this.socketConnector = this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {

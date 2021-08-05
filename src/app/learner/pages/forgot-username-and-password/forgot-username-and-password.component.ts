@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import * as myGlobals from '@core/globals';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { TranslateService } from '@ngx-translate/core';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import * as CryptoJS from 'crypto-js';
@@ -33,7 +32,6 @@ export class ForgotUsernameAndPasswordComponent implements OnInit {
                private formBuilder: FormBuilder,
                private router: Router,
                private toastr: ToastrService,
-               private loader: Ng4LoadingSpinnerService,
                public service: LearnerServicesService) {
 
     this.type = (this.router.getCurrentNavigation() && this.router.getCurrentNavigation().extras &&
@@ -85,29 +83,24 @@ focusout(e) {
 
 forgotusername() {
     this.type = 'username';
-    this.loader.show();
     var encrypteduser = CryptoJS.AES.encrypt(this.forgotUsername.value.username.toLowe, this.secretKey.trim()).toString();
     this.service.forgotUsernameandPassword(this.type, this.subtype, this.forgotUsername.value.mobile, encrypteduser)
       .subscribe((data: any) => {
         if (data.data.get_forgot_username_mobile_email.success === 'true') {
           this.toastr.success(data.data.get_forgot_username_mobile_email.message, null);
           this.router.navigate(['Learner/login']);
-          this.loader.hide();
 
         } else {
           this.toastr.error(data.data.get_forgot_username_mobile_email.message, null);
-          this.loader.hide();
         }
       });
   }
 
 getUserDetails() {
-    this.loader.show();
     this.recoveryTypes = [];
     var encryptedname = CryptoJS.AES.encrypt(this.forgotUsername.value.username, this.secretKey.trim()).toString();
     this.service.forgotPasswordByUsername(encryptedname).subscribe((data: any) => {
       if (data.data.get_forgot_password_byusername.success === 'true') {
-        this.loader.hide();
         this.isnextBtnEnable = false;
         this.recoveryTypes = data.data.get_forgot_password_byusername.data;
         this.currentUser = data.data.get_forgot_password_byusername.user_id;
@@ -120,7 +113,6 @@ getUserDetails() {
         this.isenable = true;
       } else {
         this.forgotUsername.reset();
-        this.loader.hide();
         this.toastr.error(data.data.get_forgot_password_byusername.message, null);
       }
     });
@@ -136,11 +128,9 @@ change(event) {
 
 forgotPassword(recovertype) {
     if (recovertype?.type === 'mobile') {
-      this.loader.show();
       this.service.submit_otp(this.currentUser, 'this.currentUser._id', recovertype.value, this.forgotUsername.value.email)
         .subscribe((data: any) => {
           if (data.data.user_registration_mobile_otp_send.success === 'true') {
-            this.loader.hide();
             Swal.fire(data.data.user_registration_mobile_otp_send.message, null);
             this.router.navigate(['Learner/recoverotp', { mobile: recovertype.value }]);
           }
@@ -150,14 +140,11 @@ forgotPassword(recovertype) {
       var encryptedmail = CryptoJS.AES.encrypt(this.forgotUsername.value.username, this.secretKey.trim()).toString();
       this.service.forgotUsernameandPassword(this.type, recovertype.type, this.forgotUsername.value.mobile, encryptedmail)
         .subscribe((data: any) => {
-          this.loader.show();
           if (data.data.get_forgot_username_mobile_email.success === 'true') {
             this.toastr.success(data.data.get_forgot_username_mobile_email.message, null);
-            this.loader.hide();
             this.router.navigate(['Learner/login']);
           } else {
             this.toastr.error(data.data.get_forgot_username_mobile_email.message, null);
-            this.loader.hide();
           }
         });
     }

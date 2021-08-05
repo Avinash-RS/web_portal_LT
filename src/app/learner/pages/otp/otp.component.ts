@@ -4,7 +4,6 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { TranslateService } from '@ngx-translate/core';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 
@@ -46,7 +45,6 @@ export class OtpComponent implements OnInit {
               private router: Router,
               private formBuilder: FormBuilder,
               private toastr: ToastrService,
-              private loader: Ng4LoadingSpinnerService,
               public service: LearnerServicesService,
               private activeroute: ActivatedRoute) {
     this.activeroute.queryParams.subscribe(params => {
@@ -88,11 +86,10 @@ export class OtpComponent implements OnInit {
   otpverification() {
     this.resendLabel = true;
     this.get_user_detail(this.email);
-    this.loader.show();
     this.service.submit_otp(this.userid, this.currentUser._id, this.otpForm.value.mobile, this.email).subscribe((data: any) => {
       if (this.otpFeature === 'true') {
         if (data.data.user_registration_mobile_otp_send.success === 'true') {
-          this.loader.hide();
+          
           Swal.fire(data.data.user_registration_mobile_otp_send.message, null);
           this.isenable = false;
           this.showotp = true;
@@ -140,11 +137,10 @@ export class OtpComponent implements OnInit {
 
   }
   Resendcode() {
-    this.loader.show();
     this.service.submit_otp(this.userid, 'this.currentUser._id', this.otpForm.value.mobile, this.email).subscribe((data: any) => {
       this.otp = '';
       if (data.data.user_registration_mobile_otp_send.success === 'true') {
-        this.loader.hide();
+        
         Swal.fire(data.data.user_registration_mobile_otp_send.message, null);
         if (data.data.user_registration_mobile_otp_send.data.status === true) {
           this.showotp = true;

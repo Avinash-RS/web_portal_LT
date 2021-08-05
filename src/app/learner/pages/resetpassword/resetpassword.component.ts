@@ -5,7 +5,6 @@ import * as myGlobals from '@core/globals';
 import { MustMatch } from '@core/services/_helpers/must-match.validator';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { TranslateService } from '@ngx-translate/core';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { ToastrService } from 'ngx-toastr';
 import * as CryptoJS from 'crypto-js';
 import { environment } from '../../../../environments/environment';

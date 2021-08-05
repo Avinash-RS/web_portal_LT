@@ -49,6 +49,7 @@ export class LearnerServicesService {
   // tslint:disable-next-line:no-shadowed-variable
   constructor(private Apollo: Apollo, private http: HttpClient) { }
 
+  
   closeRecoderdData$ = new Subject<any>();
   closeRecoderdData = this.closeRecoderdData$.asObservable();
 
@@ -70,6 +71,9 @@ export class LearnerServicesService {
       }
       );
   }
+
+uploadAssignments(fromdata) { return this.http.post(this.envApi + 'wca/learnerscorefile', fromdata); }
+
 clearMessage() {
   this.ProgressPercentage.next();
 }

@@ -18,7 +18,6 @@ import { HttpLinkModule } from 'apollo-angular-link-http';
 import { AlertComponentComponent } from '@core/shared/alert-component/alert-component.component';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 describe('LearnerMyCourseComponent', () => {
   let component: LearnerMyCourseComponent;
@@ -70,7 +69,6 @@ describe('LearnerMyCourseComponent', () => {
         CUSTOM_ELEMENTS_SCHEMA,
         NO_ERRORS_SCHEMA
       ],
-      providers: [Ng4LoadingSpinnerService],
       declarations: [ LearnerMyCourseComponent ]
     })
     .compileComponents();

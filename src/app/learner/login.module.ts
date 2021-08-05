@@ -13,7 +13,6 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory, CoreModule } from '@core/core.module';
 import { HttpClient } from '@angular/common/http';
 import { MaterialModule } from '@core/material.module';
-import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
@@ -83,7 +82,6 @@ const routes: Routes = [
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    Ng4LoadingSpinnerModule.forRoot(),
     RouterModule.forChild(routes),
     RecaptchaModule,
     RecaptchaFormsModule,
