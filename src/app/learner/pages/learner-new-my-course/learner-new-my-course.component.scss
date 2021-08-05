@@ -560,6 +560,17 @@
         margin-top: 20px;
       }
     }
+    .vocational {
+      .viltActivitiesQA {
+        width: 75%;
+      }
+      .courseProgression {
+        width: 25%;
+        .icons {
+          margin-right: 0;
+        }
+      }
+    }
     .viltActivitiesQA {
       .icons {
         text-align: center;
@@ -577,7 +588,8 @@
           border-radius: 50%;
           width: 42px;
           height: 42px;
-          border: 1px dashed rgba(128, 128, 128, 0.4);
+          // border: 1px dashed rgba(128, 128, 128, 0.4);
+          border: 1px dashed #C02222;
           &:hover {
             background-color: #f2f2f2;
             border: none;
@@ -998,9 +1010,9 @@
     border-bottom: 1px solid #CCCCCC;
     margin-bottom: 10px;
     .activeTabItem {
-      border-bottom: solid #c02222 3px;
-      border-radius: 3px;
-      padding: 0 20px;
+      border-bottom: solid #c02222 2px;
+      border-radius: 0;
+      padding: 0 15px;
     }
   }
 

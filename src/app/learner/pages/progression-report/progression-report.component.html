@@ -63,17 +63,22 @@
           <ngx-skeleton-loader count="5" [theme]="{ 'border-radius': '0', height: '50px' }"></ngx-skeleton-loader>
         </div>
         <div class="expansion-container" *ngIf="showProgReport && isTableData;else noCourseCard">
-          <div class="mt-2" *ngFor="let moduleItem of apidata"
-            [ngClass]="moduleItem.overAllPercentage>0?moduleItem.overAllPercentage>99?'bar-complete':'bar-inprogress':'bar-inprogress'">
+          <ng-container  *ngFor="let moduleItem of apidata let i = index">
+          <div *ngIf="moduleItem.week !== apidata[i-1]?.week" [ngClass]="moduleItem.overAllPercentage>0?moduleItem.overAllPercentage>99?'bar-complete':'bar-inprogress':'bar-inprogress'">
+            <div class="mt-2">
             <mat-progress-bar [mode]="mode" [value]="moduleItem.overAllPercentage" [bufferValue]="bufferValue">
             </mat-progress-bar>
+              <div *ngFor="let moduleItem of apidata;let number = index">
+                <div class="mt-2" *ngIf="moduleItem.week === apidata[i]?.week">
             <mat-accordion>
               <mat-expansion-panel>
                 <mat-expansion-panel-header>
                   <mat-panel-title>
                     <div class="week-block">
-                      <div class="week-text">Week</div>
-                      <div class="week-number">{{numPrefix(moduleItem.week)}}</div>
+                      <span>
+                      <div [ngStyle]="moduleItem.week!==apidata[number-1]?.week? {'color': 'inherit'} : {'color': 'white'}" class="week-text">Week</div>
+                      <div [ngStyle]="moduleItem.week!==apidata[number-1]?.week? {'color': 'inherit'} : {'color': 'white'}" class="week-number">{{numPrefix(moduleItem.week)}}</div>
+                    </span>
                     </div>
                     <div>
                       <div class="week-text">Module</div>
@@ -156,7 +161,11 @@
 
               </mat-expansion-panel>
             </mat-accordion>
+            </div>
           </div>
+            </div>
+          </div>
+        </ng-container>
         </div>
       </div>
     </div>
