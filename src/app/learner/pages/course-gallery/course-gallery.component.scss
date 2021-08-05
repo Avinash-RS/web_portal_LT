@@ -209,14 +209,15 @@
         border-radius: 5px;
         margin: 20px 0;
         cursor: pointer;
-        transition: 0.5s all ease-in-out;
+        transition: 0.3s all ease-in-out;
         position: relative;
         &:hover {
-            box-shadow: 0px 3px 15px 1px rgba(136,136,136,0.5);
+            // box-shadow: 0px 3px 15px 1px rgba(136,136,136,0.5);
+            background-color: rgba(0,0,0,0.03);
             .card-img {
                 .img-thumb, .thumbImg {
                     @media only screen and (min-width: 1200px) {
-                        transform: scale(1.2);
+                        // transform: scale(1.2);
                     }
                 }
             }
@@ -234,8 +235,8 @@
                 height: 100%;
             }
             .thumbImg {
-              max-width: 25%;
-                margin-top: -30px;
+              max-width: 15%;
+              margin-top: 0;
             }
         }
         .card-name {
