@@ -269,7 +269,7 @@ drag-scroll {
 ::ng-deep.header-carousel .drag-scroll-content {
     display: flex !important;
     align-items: center;
-    height: calc(100% + 8px) !important;
+    height: calc(100% + 3px) !important;
     overflow: auto hidden !important;
     @media only screen and (min-width: 991px) {
         overflow: hidden !important;
