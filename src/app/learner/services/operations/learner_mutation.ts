@@ -1177,6 +1177,10 @@ data{
     topicname
     status
     link
+    self_paced_learning
+    liveclassroom
+    batch_id
+    batch_end_date
   }
 }
 }

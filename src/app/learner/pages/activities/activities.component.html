@@ -631,7 +631,8 @@
                         <p class="uploadMessage" >Max File Size : 150 MB, Format : JPEG,PNG,PDF,MP4,MOV</p>
                         <button mat-stroked-button class="submit-btn" [disabled]="project.submitType == false || project.enableSubmit == false" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')" 
                         *ngIf="project.projectActivity.videodetails.length > 0">Submit</button>
-                        <button mat-stroked-button class="submitted-btn mt-2" *ngIf="(project.projectActivity.videodetails.length == 0 || project.enableSubmit == false)"> Submit </button>
+                        <!-- <button mat-stroked-button class="submitted-btn mt-2" *ngIf="(project.projectActivity.videodetails.length == 0 || project.enableSubmit == false)"> Submit </button> -->
+                      
                         <!-- <button mat-stroked-button class="submitted-btn" [disabled]="true" *ngIf="project.projectActivity.submitAction == 'submit'">Submitted</button>
                         <p *ngIf="project.projectActivity.submit_status == 'notsubmitted'">Submitted files cannot be edited</p> -->
                         <p *ngIf="project.projectActivity.submitAction == 'submit'">Submitted on: {{project.submittedOn | date:'MMM dd, yyyy'}}</p>
