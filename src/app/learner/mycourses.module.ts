@@ -10,7 +10,6 @@ import { CoreModule } from '@core/core.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
 import { MatMenuModule, MatSidenavModule, MatExpansionModule, MatStepperModule, DateAdapter } from '@angular/material';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { NgxMaskModule } from 'ngx-mask';
@@ -175,6 +174,6 @@ const routes: Routes = [
   ],
 
 
-  entryComponents: [CategoryComponentComponent]
+  entryComponents: []
 })
 export class MycoursesModule { }

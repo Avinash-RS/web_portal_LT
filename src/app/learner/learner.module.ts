@@ -31,7 +31,6 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-dashboard.component';
-import { CategoryComponentComponent } from '@core/shared/category-component/category-component.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
@@ -41,7 +40,6 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material';
-import { SelfLearnerAvtivityComponent } from './pages/self-learner-avtivity/self-learner-avtivity.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { VideoPreviewModalComponent } from './pages/video-preview-modal/video-preview-modal.component';
@@ -63,12 +61,6 @@ const routes: Routes = [
     component: ProfileComponent,
     canLoad: [AuthGuard],
     data: { animation: 'Learner  Profile', title: 'Learner  Profile' }
-  },
-  {
-    path: 'selfLearning',
-    component: SelfLearnerAvtivityComponent,
-    canLoad: [AuthGuard],
-    data: { animation: 'Self Learner Avtivity', title: 'Self Learner Avtivity' }
   },
   {
     path: 'activitycenterhomescreen',
@@ -105,7 +97,6 @@ const routes: Routes = [
     NewHomeComponent,
     LearnerDashboardComponent,
     ViewAllnotificationsComponent,
-    SelfLearnerAvtivityComponent,
     VideoPreviewModalComponent,
 
   ],
@@ -162,6 +153,6 @@ const routes: Routes = [
     Apollo
     // { provide: Window, useValue: window }
   ],
-  entryComponents: [CategoryComponentComponent, VideoPreviewModalComponent]
+  entryComponents: [VideoPreviewModalComponent]
 })
 export class LearnerModule { }
