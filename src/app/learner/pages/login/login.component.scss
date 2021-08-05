@@ -1,7 +1,7 @@
 @import "variable";
 
 .loginWrapper {
-  background-image: url("../../../../assets/learner/EntryBackground.png");
+  background-image: url("../../../../assets/learner/EntryBackground.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
@@ -105,7 +105,7 @@
       }
     }
     h1 {
-      font-size: 30px;
+      font-size: 29px;
       font-weight: 700;
       color: #000000;
       line-height: normal;
@@ -136,7 +136,10 @@
     }
   }
   //SignIn
-  .signIn,.forgotPassword,.signUp,.resetpassword {
+  .signUp {
+    padding: 30px 0;
+  }
+  .signIn, .forgotPassword, .signUp, .resetpassword {
     width: 100%;
     .goBack{
       display: flex;
@@ -153,7 +156,7 @@
     }
     .alert1{
       color: #87898a;
-      margin-top: 1em;
+      margin-bottom: 1em;
     }
   }
   .forgot {
@@ -183,40 +186,44 @@
 }
 
 ::ng-deep.signInContainer {
-    .mat-form-field {
-        width: 100%;
-        //margin-bottom: 20px;
-    }
-    .error{
-      color: red;
-    }
-    input.mat-input-element {
-      line-height: normal;
-    }
-    .mat-form-field-prefix{
-      display: none;
-    }
-    .mat-form-field-appearance-outline .mat-form-field-suffix {
-      top: -0.25em;
-    }
-    .mat-form-field-appearance-outline .mat-form-field-outline-thick {
-        color: #C02222;
-    }
-    .mat-checkbox-frame {
-        border-color: #cdcdcd;
-    }
-    .mat-checkbox-background, .mat-checkbox-frame {
-        border-radius: 4px;
-    }
-    .mat-checkbox-layout .mat-checkbox-label {
-        color: #000000;
-        font-size: 12px;
-        font-weight: 400;
-    }
-    .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, 
-    .mat-checkbox-checked.mat-accent .mat-checkbox-background {
-        background-color: #C02222;
-    }
+  .mat-form-field {
+    width: 100%;
+  }
+  .mat-warn .mat-input-element, .mat-form-field-invalid .mat-input-element {
+    caret-color: #C02222;
+  }
+  .error, 
+  .mat-form-field.mat-form-field-invalid .mat-form-field-label, 
+  .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
+    color: #C02222;
+  }
+  input.mat-input-element {
+    line-height: normal;
+  }
+  .mat-form-field-prefix{
+    display: none;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-suffix {
+    top: -0.25em;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+      color: #cdcdcd;
+  }
+  .mat-checkbox-frame {
+      border-color: #cdcdcd;
+  }
+  .mat-checkbox-background, .mat-checkbox-frame {
+      border-radius: 4px;
+  }
+  .mat-checkbox-layout .mat-checkbox-label {
+      color: #000000;
+      font-size: 12px;
+      font-weight: 400;
+  }
+  .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, 
+  .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+      background-color: #C02222;
+  }
 }
 
 // dots css start
