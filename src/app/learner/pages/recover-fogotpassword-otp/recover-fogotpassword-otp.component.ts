@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { TranslateService } from '@ngx-translate/core';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 
@@ -25,7 +24,7 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
   email: string;
   details: any;
   constructor(  private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute,
-                private loader: Ng4LoadingSpinnerService, public translate: TranslateService,
+                public translate: TranslateService,
                 private router: Router,
                 private toastr: ToastrService,
                 public service: LearnerServicesService, ) {
@@ -59,16 +58,15 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
     this.otp = otp;
   }
   VerifyOTP() {
-    this.loader.show();
     this.service.user_registration_verify(this.otp, this.mobile).subscribe((data: any) => {
       if (data.data.user_registration_mobile_otp_verify.success === 'true') {
-        this.loader.hide();
+        
         Swal.fire(data.data.user_registration_mobile_otp_verify.message, null);
         localStorage.setItem('UserDetails', JSON.stringify(data.data.user_registration_mobile_otp_verify.data[0]));
         localStorage.setItem('role', 'learner');
         this.router.navigate(['Learner/resetpassword']);
       } else {
-        this.loader.hide();
+        
         this.toastr.error(data.data.user_registration_mobile_otp_verify.message, null);
 
       }
@@ -89,11 +87,10 @@ export class RecoverFogotpasswordOTPComponent implements OnInit {
   }
 
   resendcode() {
-    this.loader.show();
     this.service.submit_otp(this.details.user_id, 'this.details._id', this.mobile, this.details.data[0].value).subscribe((data: any) => {
       clearTimeout(this.interval);
       this.timer();
-      this.loader.hide();
+      
       Swal.fire(data.data.user_registration_mobile_otp_send.message, null);
   });
         }

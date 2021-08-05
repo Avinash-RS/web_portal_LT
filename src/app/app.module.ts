@@ -4,10 +4,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/cor
 import { APP_BASE_HREF, PlatformLocation } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // others
-import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
-import { Ng5SliderModule } from 'ng5-slider';
 import { ToastrModule } from 'ngx-toastr';
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 // local
@@ -22,7 +19,6 @@ import { MAT_TABS_CONFIG } from '@angular/material';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HTTP_INTERCEPTORS, HttpInterceptor, HttpClient } from '@angular/common/http';
 import { ErrorInterceptor } from '@core/services/_helpers';
-import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { ConfigsLoaderService } from '@core/services/configs-loader.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 // import {IvyCarouselModule} from 'angular-responsive-carousel';
@@ -56,16 +52,10 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     KnowledgePreviewComponent
     ],
   imports: [
-    Ng4LoadingSpinnerModule.forRoot(),
-    //SocketIoModule.forRoot(config),
     MaterialModule,
-    // ChartsModule,
     GraphqlModule,
     DragDropModule,
     BrowserAnimationsModule,
-    Ng5SliderModule,
-    PdfJsViewerModule,
-    // IvyCarouselModule,
     ToastrModule.forRoot({
       timeOut: 4000,
       positionClass: 'toast-top-right',
@@ -73,7 +63,6 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
       preventDuplicates: true,
       autoDismiss: true
     }),
-    NgxSpinnerModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

@@ -18,15 +18,11 @@ import { VideoPlayerComponent } from '@core/shared/video-player/video-player.com
 import { WishlistCoursesComponent } from '@core/shared/wishlist-courses/wishlist-courses.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { MyDatePickerModule } from 'mydatepicker';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
-import { Ng5SliderModule } from 'ng5-slider';
 // others
 // import { BarRatingModule } from 'ngx-bar-rating';
 import { NgxMaskModule } from 'ngx-mask';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { VgBufferingModule } from 'videogular2/compiled/buffering';
 import { VgControlsModule } from 'videogular2/compiled/controls';
 
@@ -40,7 +36,6 @@ import { LandingHeaderComponent } from './core/landing-header/landing-header.com
 import { DragDropImageDirective } from './services/directives/drag-drop-image.directive';
 import { CategoryComponentComponent } from './shared/category-component/category-component.component';
 import { DataTableComponent } from './shared/data-table/data-table.component';
-import { GuidelineSearchComponent } from './shared/guideline-search/guideline-search.component';
 import { PdfreaderComponent } from './shared/pdfreader/pdfreader.component';
 import { SearchComponent } from './shared/search/search.component';
 import { ToolbarNotificationComponent } from './shared/toolbar-notification/toolbar-notification.component';
@@ -69,7 +64,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ListViewCourseComponentComponent,
     SearchComponent,
     DragDropImageDirective,
-    GuidelineSearchComponent,
     PdfreaderComponent,
     LandingHeaderComponent,
     CategoryComponentComponent,
@@ -84,7 +78,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CommonModule,
     PdfViewerModule,
     // BarRatingModule,
-    Ng4LoadingSpinnerModule.forRoot(),
     NgxMaskModule.forRoot(),
     // RouterModule.forChild(routes),
     VgCoreModule,
@@ -94,9 +87,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     VgBufferingModule,
     ReactiveFormsModule,
     FormsModule,
-    Ng5SliderModule,
-    NgxPaginationModule,
-    MyDatePickerModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -126,7 +116,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ListViewCourseComponentComponent,
     CategoryComponentComponent,
     PdfreaderComponent,
-    GuidelineSearchComponent,
     MycourseItemComponent,
     SearchPipe]
 })

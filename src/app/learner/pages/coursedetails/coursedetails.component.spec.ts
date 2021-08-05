@@ -12,7 +12,6 @@ import { RouterModule } from '@angular/router';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 
 describe('CoursedetailsComponent', () => {
@@ -54,7 +53,6 @@ describe('CoursedetailsComponent', () => {
         CUSTOM_ELEMENTS_SCHEMA,
         NO_ERRORS_SCHEMA
       ],
-      providers: [Ng4LoadingSpinnerService],
     })
     .compileComponents();
   }));
@@ -75,12 +73,10 @@ describe('CoursedetailsComponent', () => {
   });
 
   it('Check get course module', () => {
-    component.playerModuleAndTopic(true);
     expect(component.scromModuleData).toBe(coursedetails.data1.playerModuleAndTopic.message[0].childData);
   });
 
   it('Check get assignments files', () => {
-    component.getAssignmentmoduleData();
     expect(component.assignmentContent).toBe(coursedetails.data2.getAssignmentmoduleData.data[0]);
   });
 });

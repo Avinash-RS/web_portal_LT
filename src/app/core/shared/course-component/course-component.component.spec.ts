@@ -11,7 +11,6 @@ import { ApolloModule } from 'apollo-angular';
 import { RouterModule } from '@angular/router';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 describe('CourseComponentComponent', () => {
   let component: CourseComponentComponent;
@@ -32,7 +31,7 @@ describe('CourseComponentComponent', () => {
         NO_ERRORS_SCHEMA,
       ],
       providers: [
-        { provide: Ng4LoadingSpinnerService }
+       
       ]
 
     })

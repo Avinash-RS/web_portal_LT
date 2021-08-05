@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import * as myGlobals from '@core/globals';
 import { TermsconditionsComponent } from '../termsconditions/termsconditions.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -38,7 +37,6 @@ export class RegistrationComponent implements OnInit {
     public translate: TranslateService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private loader: Ng4LoadingSpinnerService,
     public service: LearnerServicesService,
     private commonService: CommonServicesService,
     public dialog: MatDialog,
@@ -80,8 +78,6 @@ export class RegistrationComponent implements OnInit {
       localStorage.removeItem('role');
       localStorage.removeItem('token');
       localStorage.removeItem('adminDetails');
-  
-      this.loader.show();
       this.fullname = this.registerForm.value.fullname.trimLeft();
       // this.registerForm.value.termsandconditions
       var encryptedmail = CryptoJS.AES.encrypt(this.registerForm.value.email.toLowerCase(), this.secretKey.trim()).toString();
@@ -98,11 +94,11 @@ export class RegistrationComponent implements OnInit {
         if (data.data.user_registration.success === 'true') {
           this.registerSuccess = true;
           this.toastr.success(data.data.user_registration.message, null);
-          this.loader.hide();
+          
           this.registerForm.setErrors(null);
         } else {
           this.toastr.error(data.data.user_registration.message, null);
-          this.loader.hide();
+          
           this.registerSuccess = false;
         }
        } else {

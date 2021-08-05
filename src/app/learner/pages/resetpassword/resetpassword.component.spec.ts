@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ResetpasswordComponent } from './resetpassword.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import {  MatDialogModule } from '@angular/material';
@@ -25,7 +24,7 @@ describe('ResetpasswordComponent', () => {
         ApolloTestingModule,
         RouterTestingModule
    ],
-   providers: [Ng4LoadingSpinnerService, {provide: ActivatedRoute, useValue: fakeActivatedRoute} ],
+   providers: [ {provide: ActivatedRoute, useValue: fakeActivatedRoute} ],
       declarations: [ ResetpasswordComponent ],
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA

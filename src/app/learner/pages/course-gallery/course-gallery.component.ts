@@ -5,7 +5,6 @@ import { DragScrollComponent } from 'ngx-drag-scroll';
 import { KnowledgePreviewComponent } from '../knowledge-preview/knowledge-preview.component';
 import { environment } from '../../../../environments/environment';
 import { MatDialog } from '@angular/material';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import * as CryptoJS from 'crypto-js';
 @Component({
@@ -30,8 +29,7 @@ export class CourseGalleryComponent implements OnInit {
   user_token;
   searchContent;
   constructor(private activeRoute: ActivatedRoute, private router: Router,
-    private learnerService: LearnerServicesService, public dialog: MatDialog,
-    private loader: Ng4LoadingSpinnerService,public sanitizer: DomSanitizer) {
+    private learnerService: LearnerServicesService, public dialog: MatDialog,public sanitizer: DomSanitizer) {
     this.activeRoute.queryParams.subscribe(res => {
       this.course = res;
     });
@@ -50,7 +48,6 @@ export class CourseGalleryComponent implements OnInit {
 
 
   getGalleryData(content){
-    this.loader.show();
     this.learnerService.getcourseGallery(atob(this.course.id)).subscribe((data)=>{
       if(data.data['getCourseGallery']['data']['coursedetails']) {
         this.coursedata = data.data['getCourseGallery']['data']['coursedetails']
@@ -70,10 +67,8 @@ export class CourseGalleryComponent implements OnInit {
         // this.coursedata.forEach(element1 => {
         //   element1.moduledetails[0].activeTopic = 'active'
         // });
-        this.loader.hide();
       }
       else {
-        this.loader.hide();
         this.emptyGallery = true;
       }
     })

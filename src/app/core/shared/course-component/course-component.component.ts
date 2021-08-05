@@ -4,7 +4,6 @@ import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import * as _ from 'lodash';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -48,7 +47,7 @@ export class CourseComponentComponent implements OnInit {
 
   constructor(public service: CommonServicesService, private alert: AlertServiceService, private gs: GlobalServiceService,
     // tslint:disable-next-line:align
-    private router: Router, private loader: Ng4LoadingSpinnerService, ) {
+    private router: Router ) {
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('adminDetails')) || null;
     this.role = localStorage.getItem('role') || null;
   }
@@ -70,7 +69,6 @@ export class CourseComponentComponent implements OnInit {
   }
 
   selectWishlist(course) {
-    this.loader.show();
     if (this.userDetail) {
       if (this.course.wishlisted === false) {
         this.service.addWishlist(course.course_id, this.userDetail._id).subscribe((addWishlist: any) => {
@@ -79,7 +77,6 @@ export class CourseComponentComponent implements OnInit {
             this.course.wishlist_id = addWishlist.data.add_to_wishlist.wishlist_id;
             // this.alert.openAlert("Success !", "Added to wishlist")
             this.gs.canCallWishlist(true);
-            this.loader.hide();
           }
         });
       } else {
@@ -89,7 +86,6 @@ export class CourseComponentComponent implements OnInit {
             course.wishlist_id = null;
             // this.alert.openAlert("Success !", "Removed from wishlist")
             this.gs.canCallWishlist(true);
-            this.loader.hide();
           }
         });
       }
