@@ -89,6 +89,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   availableCource: any;
   screenWidth: number;
   keyboardUp: boolean = true;
+  chatbotShow: boolean = false;
   disableDropdown: any;
   selectedIndex: number = 0;
   componentCssClass: string;
@@ -171,7 +172,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
     );
 
   }
-
   openInfoPopup() {
     this.dialog.open(this.infoPopWindow, {
       width: '55%,',

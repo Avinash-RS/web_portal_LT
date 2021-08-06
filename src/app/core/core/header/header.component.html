@@ -8,42 +8,12 @@
      <img class="hearder-logo" alt="" src="assets/learner/EduTech_Logo.svg" (click)="navigateMyCourse()">
   </div>
 
-  <!-- Desktop Menu Starts -->
-  <!-- <div class="tab desktopMenu" *ngIf="show" [ngClass]="hideHeaderMenu ? 'notPossiblePages' : 'possiblePages'">
-    <button class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/MyCourse' ? 'colGrey' : 'colWhite'"
-      md-raised-button routerLink="/Learner/MyCourse">
-      <i class="lxp-SelfPaced headicon"></i>
-      <span class="smNoDisp">My Courses</span>
-    </button>
-
-    <button class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/calendar' ? 'colGrey' : 'colWhite'"
-      md-raised-button routerLink="/Learner/calendar" routerLinkActive="active">
-      <span class="headicon lxp-calendar"></span>
-      <span class="imgAdj smNoDisp">Calendar</span>
-    </button>
-
-    <button class="d-flex align-items-center"
-      [ngClass]="activeUrl === '/Learner/activitycenterhomescreen' ? 'colGrey' : 'colWhite'" md-raised-button
-      routerLink="/Learner/activitycenterhomescreen">
-      <i class="lxp-ActivityCenter headicon"></i>
-      <span class="smNoDisp">Activity Center</span>
-    </button>
-
-    <button class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/knowledge' ? 'colGrey' : 'colWhite'"
-      md-raised-button routerLink="/Learner/knowledge" routerLinkActive="active">
-      <span class="lxp-Knowledge headicon"></span>
-      <span class="imgAdj smNoDisp">Knowledge Resources</span>
-    </button>
-  </div> -->
-  <!-- End of desktopMenu -->
-
   <!-- Mobile Menu Starts -->
   <div class="tab mobMenu">
     <mat-menu [hasBackdrop]="true" #mobmenu="matMenu">
       <ul class="mobileMenu">
         <li class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/MyCourse' ? 'redColor' : 'greyColor'"
           md-raised-button routerLink="/Learner/MyCourse">
-          <!-- <mat-icon fontSet="material-icons-outlined" class="headicon" inline=true>local_library</mat-icon> -->
           <i class="lxp-SelfPaced headicon"></i>
           <span class="mobContent">My Courses</span>
         </li>
@@ -55,7 +25,6 @@
         <li class="d-flex align-items-center"
           [ngClass]="activeUrl === '/Learner/activitycenterhomescreen' ? 'redColor' : 'greyColor'" md-raised-button
           routerLink="/Learner/activitycenterhomescreen">
-          <!-- <mat-icon fontSet="material-icons-outlined" class="headicon" inline=true> offline_bolt </mat-icon> -->
           <i class="lxp-ActivityCenter headicon"></i>
           <span class="mobContent">Activity Center</span>
         </li>

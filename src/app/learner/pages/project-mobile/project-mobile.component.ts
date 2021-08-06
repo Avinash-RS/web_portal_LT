@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { AnonymousCredential, BlobServiceClient, newPipeline } from '@azure/storage-blob';
@@ -86,7 +85,7 @@ export class ProjectMobileComponent implements OnInit {
   page = 0;
   noofItems = 0;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
-              private dialog: MatDialog, public wcaservice: WcaService, private toastr: ToastrService,
+              private dialog: MatDialog, private toastr: ToastrService,
               public route: Router,  private commonServices: CommonServicesService,private ngxLoader: NgxUiLoaderService) {
                 const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);

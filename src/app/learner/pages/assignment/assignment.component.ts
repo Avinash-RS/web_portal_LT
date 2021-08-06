@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { environment } from '@env/environment';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { WcaService } from '@wca/services/wca.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 
@@ -28,7 +27,7 @@ export class AssignmentComponent implements OnInit {
   page = 0;
   noofItems = 0;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
-              public route: Router, public wcaservice: WcaService,
+              public route: Router,
               private toastr: ToastrService, private dialog: MatDialog) {
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
@@ -167,7 +166,7 @@ export class AssignmentComponent implements OnInit {
     payload.append('submit_status', submitStatus);
     payload.append('total_mark', score);
     payload.append('questionUrl', path);
-    this.wcaservice.uploadAssignments(payload).subscribe((data: any) => {
+    this.Lservice.uploadAssignments(payload).subscribe((data: any) => {
       if (data.success === true) {
         this.toastr.success(data.message, null);
         this.getAssignmentmoduleData();

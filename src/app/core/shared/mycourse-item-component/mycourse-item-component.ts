@@ -5,7 +5,6 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { environment } from '@env/environment';
 import { TranslateService } from '@ngx-translate/core';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
@@ -68,8 +67,7 @@ export class MycourseItemComponent implements OnInit {
     public service: CommonServicesService,
     private alert: AlertServiceService,
     private gs: GlobalServiceService,
-    private router: Router,
-    private loader: Ng4LoadingSpinnerService, ) {
+    private router: Router) {
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.role = localStorage.getItem('role') || sessionStorage.getItem('role') || null;
   }
