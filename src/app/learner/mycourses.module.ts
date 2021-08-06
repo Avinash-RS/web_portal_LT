@@ -40,6 +40,7 @@ import { CourseReportComponent } from './pages/course-report/course-report.compo
 import { CalendarActivityComponent } from './pages/calendar-activity/calendar-activity.component';
 import { ProgressionReportComponent } from './pages/progression-report/progression-report.component';
 import { QuestionanswerComponent } from './pages/QandA/questionanswer.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -157,6 +158,7 @@ const routes: Routes = [
     Ng2SearchPipeModule,
     PdfViewerModule,
     NgxSkeletonLoaderModule,
+    NgxPaginationModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
