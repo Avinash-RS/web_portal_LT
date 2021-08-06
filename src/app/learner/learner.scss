@@ -1,6 +1,4 @@
 @import "variable";
-@import '~video.js/dist/video-js.css';
-@import '~videojs-record/dist/css/videojs.record.css';
 // gobal css 
 
 :host p:last-child {
@@ -519,11 +517,11 @@ button:disabled:hover {
 // Animation class
 // common css don't remove : Ankit
 .mat-form-field-appearance-outline .mat-form-field-outline-thick {
-  color: $lxp-theme-green !important;
+  // color: $lxp-theme-green !important;
 }
 
 .mat-form-field-appearance-outline .mat-form-field-outline-thick {
-  color: $lxp-theme-green !important;
+  // color: $lxp-theme-green !important;
 }
 
 // .signIn {

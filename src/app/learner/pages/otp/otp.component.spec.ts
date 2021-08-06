@@ -5,7 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { MatDialogModule } from '@angular/material';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 describe('OtpComponent', () => {
@@ -24,7 +23,7 @@ describe('OtpComponent', () => {
         RouterTestingModule,
         MatDialogModule
    ],
-   providers: [Ng4LoadingSpinnerService,
+   providers: [
     {provide: ActivatedRoute, useValue: fakeActivatedRoute} ],
       declarations: [ OtpComponent ],
       schemas: [

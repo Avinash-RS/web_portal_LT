@@ -5,7 +5,6 @@ import * as myGlobals from '@core/globals';
 import { MustMatch } from '@core/services/_helpers/must-match.validator';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { TranslateService } from '@ngx-translate/core';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { ToastrService } from 'ngx-toastr';
 import * as CryptoJS from 'crypto-js';
 @Component({
@@ -39,7 +38,6 @@ export class PasswordComponent implements OnInit {
 
   constructor(public translate: TranslateService,
               private router: Router,
-              private loader: Ng4LoadingSpinnerService,
               private formBuilder: FormBuilder,
               private toastr: ToastrService,
               private activeroute: ActivatedRoute,
@@ -118,7 +116,6 @@ export class PasswordComponent implements OnInit {
     localStorage.removeItem('userDetails');
     localStorage.removeItem('token');
     localStorage.removeItem('adminDetails');
-    this.loader.show();
     this.userid = localStorage.getItem('key');
     var encryptedid = CryptoJS.AES.encrypt(this.userid, this.secretKey.trim()).toString();
     var encryptedpassword = CryptoJS.AES.encrypt(this.passwordForm.value.password, this.secretKey.trim()).toString();
@@ -137,13 +134,12 @@ export class PasswordComponent implements OnInit {
         //         this.router.navigate(['/Learner/login']);
         //       }
         //     } else {
-        //       this.loader.hide();
+        //       
         //       this.passwordForm.reset();
         //       this.toastr.error(loginresult.data.login.error_msg, null);
         //     }
         //   });
       } else {
-        this.loader.hide();
         this.toastr.error(data.data.user_registration_done.message, null);
       }
     });

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { AlertServiceService } from '@core/services/handlers/alert-service.service';
 import { result } from 'underscore';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
@@ -15,7 +16,7 @@ export class InterceptorService implements HttpInterceptor {
   constructor(
     public toast: ToastrService, public socketService: SocketioService,
     public router: Router, public services: CommonServicesService,
-    private alertBox: AlertServiceService,
+    private alertBox: AlertServiceService,private dialog: MatDialog
   ) {
     this.loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
   }
@@ -30,6 +31,7 @@ export class InterceptorService implements HttpInterceptor {
           let bodyData = event['body']['data'];
           const dynKey = Object.keys(bodyData)[0]
           if (bodyData[dynKey] && bodyData[dynKey].error_msg && bodyData[dynKey].error_msg === 'TokenExpiredError: jwt expired') {
+            this.dialog.closeAll();
             this.alertBox.openAlert("Session Expired", "Please login again.")
             this.logout();
           }
@@ -39,6 +41,7 @@ export class InterceptorService implements HttpInterceptor {
       }),
       retry(3),
       catchError((error: HttpErrorResponse) => {
+        this.dialog.closeAll();
         if (error && error.status == 401) {
           this.toast.warning('Unauthorized entry..');
           this.logout();

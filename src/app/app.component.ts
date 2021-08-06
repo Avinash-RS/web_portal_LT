@@ -2,7 +2,6 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { GlobalServiceService } from '././core/services/handlers/global-service.service';
-import { WcaService } from '../app/wca/services/wca.service';
 import { Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
 import { CommonServicesService } from '@core/services/common-services.service';
@@ -30,6 +29,7 @@ export class AppComponent implements OnInit {
   percentage = "Upload in progress"
   loadersubscription: Subscription;  
   hideLeftMenu: boolean = false;
+  chatbotShow: boolean = false;
    // FOR DRM(Restriction for right click)
    @HostListener('document:keydown', ['$event'])
    handleKeyboardEvent(event: KeyboardEvent) {
@@ -44,7 +44,6 @@ export class AppComponent implements OnInit {
               private gs: GlobalServiceService,
               private http: HttpClient,
               private activatedRoute: ActivatedRoute,
-              private APIService: WcaService,
               private titleService: Title,
               private commonService: CommonServicesService,
               public Lservice: LearnerServicesService,
@@ -175,5 +174,8 @@ myUnload() {
     this.loadersubscription.unsubscribe();
   }
 
+  toggleChatbot() {
+    this.chatbotShow = !this.chatbotShow;
+  }
 
 }

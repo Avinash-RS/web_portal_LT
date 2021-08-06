@@ -6,7 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { MatDialogModule } from '@angular/material';
 describe('RegistrationComponent', () => {
   let component: RegistrationComponent;
@@ -26,7 +25,7 @@ describe('RegistrationComponent', () => {
         RouterTestingModule
    ],
 
-  providers: [Ng4LoadingSpinnerService, {provide: ActivatedRoute, useValue: fakeActivatedRoute} ],
+  providers: [ {provide: ActivatedRoute, useValue: fakeActivatedRoute} ],
       declarations: [ RegistrationComponent],
       schemas: [
         CUSTOM_ELEMENTS_SCHEMA

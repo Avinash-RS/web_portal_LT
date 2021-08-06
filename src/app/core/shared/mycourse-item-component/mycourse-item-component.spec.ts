@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CourseComponentComponent } from './mycourse-item-component';
+import { MycourseItemComponent } from './mycourse-item-component';
 import {
   MatButtonModule, MatMenuModule, MatInputModule, MatToolbarModule, MatCheckboxModule,
   MatFormFieldModule, MatIconModule, MatCardModule, MatGridListModule, MatSelectModule, MatRadioModule,
@@ -11,15 +11,14 @@ import { ApolloModule } from 'apollo-angular';
 import { RouterModule } from '@angular/router';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 describe('CourseComponentComponent', () => {
-  let component: CourseComponentComponent;
-  let fixture: ComponentFixture<CourseComponentComponent>;
+  let component: MycourseItemComponent;
+  let fixture: ComponentFixture<MycourseItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseComponentComponent],
+      declarations: [MycourseItemComponent],
       imports: [MatButtonModule, MatMenuModule, MatInputModule, MatToolbarModule, MatCheckboxModule,
         MatFormFieldModule, MatIconModule, MatCardModule, MatGridListModule, MatSelectModule, MatRadioModule,
         MatDialogModule, MatTooltipModule, MatTableModule, HttpClientModule,
@@ -32,7 +31,6 @@ describe('CourseComponentComponent', () => {
         NO_ERRORS_SCHEMA,
       ],
       providers: [
-        { provide: Ng4LoadingSpinnerService }
       ]
 
     })
@@ -40,7 +38,7 @@ describe('CourseComponentComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CourseComponentComponent);
+    fixture = TestBed.createComponent(MycourseItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

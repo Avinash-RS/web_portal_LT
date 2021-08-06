@@ -23,6 +23,31 @@
     height: 100%;
   }
 
+  .chatBotIcon {
+    position: fixed;
+    right: 0;
+    bottom: 40px;
+    z-index: 9;
+    margin: 0;
+    cursor: pointer;
+    img {
+      display: inline-flex;
+      width: 100px;
+      height: auto;
+    }
+  }
+  .chatBot {
+    position: fixed;
+    right: 20px;
+    bottom: 110px;
+    z-index: 99;
+    iframe {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
   // .footer {
   //   width: 100%;
   //   padding: 15px;

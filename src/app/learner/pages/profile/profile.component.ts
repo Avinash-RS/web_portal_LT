@@ -9,7 +9,6 @@ import { AlertServiceService } from '@core/services/handlers/alert-service.servi
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { MustMatch } from '@core/services/_helpers/must-match.validator';
 import { TranslateService } from '@ngx-translate/core';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import Swal from 'sweetalert2';
 import { environment } from '../../../../environments/environment';
 import { LearnerServicesService } from '../../services/learner-services.service';
@@ -27,8 +26,7 @@ export class ProfileComponent implements OnInit {
   blobKey = environment.blobKey;
   constructor(public translate: TranslateService,
               private alert: AlertServiceService, public service: LearnerServicesService,
-              private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient,
-              private loader: Ng4LoadingSpinnerService, private formBuilder: FormBuilder,
+              private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient, private formBuilder: FormBuilder,
               private router: Router, private gs: GlobalServiceService,
               private services: CommonServicesService,
               private toastr: ToastrService) {
@@ -210,7 +208,6 @@ export class ProfileComponent implements OnInit {
   // }
 
   getprofileDetails(userid) {
-    this.loader.show();
     this.service.view_profile(userid).subscribe((data: any) => {
       if (data.data.view_profile.success) {
         const profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].user_profile[0];
@@ -289,9 +286,7 @@ export class ProfileComponent implements OnInit {
           //   profileDetails.certificate.forEach(certif =>
           //     certificate.push(this.formBuilder.control(certif)));
           // }
-          this.loader.hide();
         } else {
-          this.loader.hide();
         }
       }
     });
@@ -357,7 +352,6 @@ export class ProfileComponent implements OnInit {
       delete this.profileForm.value.qualification; }
     this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
       if (data.data.update_profile.success === 'true') {
-        this.loader.hide();
         this.currentUser.is_profile_updated = true;
         localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));
         this.alert.openAlert(data.data.update_profile.message, null);
@@ -601,11 +595,10 @@ export class ProfileComponent implements OnInit {
   }
 
   otpverification() {
-    this.loader.show();
     this.resendLabel = true;
     this.service.update_mobile_onprofile(this.currentUser.user_id, this.otpForm.value.mobile).subscribe((data: any) => {
       if (data.data.update_mobile_onprofile.success === 'true') {
-        this.loader.hide();
+        
         // this.alert.openAlert(data.data['update_mobile_onprofile'].message, null)
         Swal.fire(data.data.update_mobile_onprofile.message);
         this.isenable = false;

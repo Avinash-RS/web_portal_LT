@@ -1,7 +1,4 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<!-- <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-climbing-dot">
-    <p style="font-size: 20px; color: white">Loading...</p> -->
-  <!-- </ngx-spinner> -->
   <!-- <div *ngIf="isMobile" style="text-align: center; position: absolute; left: 50%; top: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%);border: 3px solid #C02222 !important; padding: 10px;">
     This version of the application is being constructed for mobile device.<br> We will keep you notified. <br> <strong>Please use from desktop / laptop.</strong><br><br><span style="font-size: 6px;">--Your browser running on {{platformTxt}} --</span>
   </div> -->
@@ -20,3 +17,12 @@
 
 <ngx-ui-loader [hasProgressBar] = 'isProgressBar' [text]="percentage"></ngx-ui-loader>
 
+
+<ng-container *ngIf="isFooterVisible">
+<figure class="chatBotIcon" (click)="toggleChatbot()">
+  <img src="/assets/learner/chatBot.svg" alt="" />
+</figure>
+  <div class="chatBot" *ngIf="chatbotShow">
+      <iframe allow="microphone;" width="350" height="430" src="https://console.dialogflow.com/api-client/demo/embedded/ead5e5f5-1fe8-43d3-b485-5d137f63a14f"></iframe>    
+  </div>
+</ng-container>

@@ -138,6 +138,7 @@ export class QuestionanswerComponent implements OnInit {
   }
 
   createQuestion(){
+    if(this.htmlContent){
     this.learnerService.createEngineersForumData(this.UserDetails.user_id, this.UserDetails.full_name, this.courseId, this.htmlContent, this.courseName).subscribe((rdata: any) => {
       console.log(rdata);
       if(rdata.data.createEngineersForumData.success){
@@ -148,6 +149,9 @@ export class QuestionanswerComponent implements OnInit {
       }
       this.showSkeleton = true
     })
+  }else{
+    this.toastr.warning("Answer cannot be empty")
+  }
   }
 
   openQuestionDialog(templateRef) {
@@ -164,6 +168,14 @@ export class QuestionanswerComponent implements OnInit {
     this.getQACount();
     this.dialog.closeAll();
     this.htmlContent = "";
+  }
+
+  
+  //Pagination
+  onpagination(event){
+    this.pageNumber = event - 1;
+    this.getQAData();
+    this.getQACount();
   }
 
 }

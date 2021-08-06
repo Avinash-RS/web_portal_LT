@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-import { WcaService } from '@wca/services/wca.service';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { AnonymousCredential, BlobServiceClient, newPipeline } from '@azure/storage-blob';
@@ -104,7 +103,6 @@ export class PerformancePageMobileComponent implements OnInit {
     public Lservice: LearnerServicesService,
     private gs: GlobalServiceService,
     private dialog: MatDialog,
-    public wcaservice: WcaService,
     private toastr: ToastrService,
     public route: Router,
     public datePipe: DatePipe,
