@@ -7,7 +7,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { ActivatedRoute, Router } from '@angular/router';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import { Observable } from 'rxjs';
-
+import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 declare const Chart;
 
 @Component({
@@ -26,7 +26,7 @@ export class ProgressionReportComponent implements OnInit {
   bufferValue = 100;
 
   apidata: any = [];
-
+  public chartPlugins = [pluginDataLabels];
   selectedIndex: number = 0;
   public barChartOptions: ChartOptions = {
     responsive: true,

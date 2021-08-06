@@ -19,7 +19,7 @@
       <div class="col-md-6">
         <div class="learning-label">Self Learning</div>
         <div class="pieChart" [ngStyle]="{'width': '300px',  'height':'300px'}">
-          <canvas id="piechart"></canvas>
+          <canvas id="piechart" [plugins]="chartPlugins"></canvas>
         </div>
       </div>
       <div class="col-md-6 d-flex align-item-center">
