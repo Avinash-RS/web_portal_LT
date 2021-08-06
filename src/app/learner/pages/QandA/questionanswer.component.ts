@@ -142,6 +142,7 @@ export class QuestionanswerComponent implements OnInit {
     this.learnerService.createEngineersForumData(this.UserDetails.user_id, this.UserDetails.full_name, this.courseId, this.htmlContent, this.courseName).subscribe((rdata: any) => {
       console.log(rdata);
       if(rdata.data.createEngineersForumData.success){
+        this.selectedIndex = 1
         this.dialogClose();
         this.toastr.success(rdata.data.createEngineersForumData.message)
       }else{
