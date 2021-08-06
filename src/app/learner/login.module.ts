@@ -8,7 +8,10 @@ import { MaskingPipePipe } from '@core/core/masking-pipe.pipe';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory, CoreModule } from '@core/core.module';
 import { HttpClient } from '@angular/common/http';
-import { MaterialModule } from '@core/material.module';
+
+//import { MaterialModule } from '@core/material.module';
+//Materials import 
+import { MatButtonModule,MatInputModule,MatCheckboxModule,MatFormFieldModule,MatIconModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
@@ -49,7 +52,12 @@ const routes: Routes = [
   imports: [
     CommonModule,
     CoreModule,
-    MaterialModule,
+  //  MaterialModule,
+    MatButtonModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
@@ -62,6 +70,13 @@ const routes: Routes = [
         deps: [HttpClient]
       }
     }),
+  ],
+  exports: [
+    MatButtonModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule
   ]
 })
 export class LoginModule { }
