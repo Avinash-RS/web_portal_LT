@@ -27,7 +27,7 @@
                         <p [innerHTML]="item.answer"></p>
                     </div>
                     </span>
-                    <pagination-controls *ngIf="qaDataList" class="gradingPagination"  style="text-align: center;" (pageChange)="onpagination($event)"></pagination-controls>
+                    <pagination-controls *ngIf="qaDataList.length" class="gradingPagination"  style="text-align: center;" (pageChange)="onpagination($event)"></pagination-controls>
                     </span>
                 </mat-tab>
                 <mat-tab>
