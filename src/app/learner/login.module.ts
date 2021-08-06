@@ -3,11 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { IsLoggedInAuthGuard } from '@core/services/_helpers/is-logged-in-auth.guard';
-import { RegistrationComponent } from './pages/registration/registration.component';
-import { OtpComponent } from './pages/otp/otp.component';
 import { PasswordComponent } from './pages/password/password.component';
-import { ForgotUsernameAndPasswordComponent } from './pages/forgot-username-and-password/forgot-username-and-password.component';
-import { RecoverFogotpasswordOTPComponent } from './pages/recover-fogotpassword-otp/recover-fogotpassword-otp.component';
 import { MaskingPipePipe } from '@core/core/masking-pipe.pipe';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory, CoreModule } from '@core/core.module';
@@ -31,31 +27,9 @@ const routes: Routes = [
     data: { title: 'Learner Login' }
   },
   {
-    path: 'Learner/register',
-    component: RegistrationComponent,
-    data: { animation: 'Learner  Registration', title: 'Learner  Registration'  }
-  },
-  {
-    path: 'Learner/otp',
-    component: OtpComponent,
-    // canActivate: [AuthGuard],
-    data: { title: 'Learner  Registration OTP' }
-  },
-  {
     path: 'Learner/password',
     component: PasswordComponent,
-    // canActivate: [AuthGuard],
     data: { title: 'Learner  Registration Username/Password' }
-  },
-  {
-    path: 'Learner/recover',
-    component: ForgotUsernameAndPasswordComponent,
-    data: { animation: 'Learner Forget Password', title: 'Learner Forget Password'}
-  },
-  {
-    path: 'Learner/recoverotp',
-    component: RecoverFogotpasswordOTPComponent,
-    data: { title: 'Learner Forget Password OTP' }
   },
   {
     path: 'Learner/resetpassword',
@@ -67,11 +41,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     LoginComponent,
-    RegistrationComponent,
-    OtpComponent,
     PasswordComponent,
-    ForgotUsernameAndPasswordComponent,
-    RecoverFogotpasswordOTPComponent,
     ResetpasswordComponent,
     MaskingPipePipe,
   ],

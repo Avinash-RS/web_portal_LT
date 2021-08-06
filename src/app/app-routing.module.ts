@@ -20,23 +20,15 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     data : {title: 'My Course'}
   },
-  // {
-  //   path: 'Admin',
-  //   loadChildren: './admin/admin.module#AdminModule',
-  //   data : {title: 'Admin '}
-  // },
+
   {
     path: 'Player',
     loadChildren: './core/core.module#CoreModule',
     data : {title: 'Course Player'}
   },
-  // {
-  //   path: '*',
-  //   // loadChildren: './wca/wca.module#WcaModule',
-  //   data : {title: 'Web Content Authoring'}
-  // },
+
   {path: '**', component: NotFoundComponent},
-  // {path: '**', redirectTo: '/404'},
+  
 
 ];
 @NgModule({
