@@ -56,7 +56,7 @@
                             <span><em class="lxp-AccountCircle"></em>{{item.userId}}</span>
                             <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                         </div>
-                        <h4 [innerHTML]="item.answer"></h4>
+                        <h4 [innerHTML]="item.question"></h4>
                         <div class="answeredDate">
                             <button
                                 [class]="item.answered?'answer':'noAnswer'">{{item.answered?'Answered':'Unanswered'}}</button>
