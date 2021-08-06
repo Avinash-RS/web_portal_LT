@@ -21,7 +21,7 @@ export class QuestionanswerComponent implements OnInit {
     minHeight: '5rem',
     placeholder: 'Please ask your question with consice and add any other details here',
     translate: 'no',
-    defaultParagraphSeparator: 'p',
+    defaultParagraphSeparator: '',
     defaultFontName: 'Arial',
     toolbarHiddenButtons: [
       ['undo', 'redo', 'strikeThrough', 'subscript', 'superscript', 'heading', 'fontName'],
@@ -62,6 +62,7 @@ export class QuestionanswerComponent implements OnInit {
   showNumSkeleton: boolean;
   questionText: any;
   courseName: string;
+  totalCount: any;
   constructor(private dialog: MatDialog, private learnerService: LearnerServicesService,private toastr: ToastrService,) {
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails'))
     this.courseId = localStorage.getItem("Courseid")
@@ -78,6 +79,7 @@ export class QuestionanswerComponent implements OnInit {
   }
 
   contentChange() {
+    this.pageNumber = 0;
     switch (this.selectedIndex) {
       case 0:
         this.requestType = 'answered'
@@ -133,6 +135,7 @@ export class QuestionanswerComponent implements OnInit {
     this.showSkeleton = false
     this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, this.requestType, this.pageNumber).subscribe((rdata: any) => {
       this.qaDataList = rdata.data.getengineersForumData.data
+      this.totalCount = rdata.data.getengineersForumData.totalcount;
       this.showSkeleton = true
     })
   }
@@ -141,15 +144,22 @@ export class QuestionanswerComponent implements OnInit {
     if(this.htmlContent){
     this.learnerService.createEngineersForumData(this.UserDetails.user_id, this.UserDetails.full_name, this.courseId, this.htmlContent, this.courseName).subscribe((rdata: any) => {
       console.log(rdata);
-      if(rdata.data.createEngineersForumData.success){
-        this.selectedIndex = 1
-        this.dialogClose();
-        this.toastr.success(rdata.data.createEngineersForumData.message)
+      if(rdata?.errors && rdata?.errors[0]?.message==="Request failed with status code 413")
+      {
+        this.toastr.warning("Content limit exceeded!!")
+        
       }else{
-        this.toastr.warning(rdata.data.createEngineersForumData.message)
+        if(rdata.data.createEngineersForumData.success){
+          this.selectedIndex = 1
+          this.dialogClose();
+          this.toastr.success(rdata.data.createEngineersForumData.message)
+        }else{
+          this.toastr.warning(rdata.data.createEngineersForumData.message)
+        }
       }
       this.showSkeleton = true
     })
+
   }else{
     this.toastr.warning("Answer cannot be empty")
   }
