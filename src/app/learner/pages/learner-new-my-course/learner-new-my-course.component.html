@@ -268,8 +268,8 @@
                                                   </mat-menu>
                                             </div>
                                             <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
-                                                <span class="by">By: <b>Larsen & Toubro</b></span>
-                                                <span class="credits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
+                                                <span class="by">By: <b>{{item.courseBy}}</b></span>
+                                                <span class="credits" *ngIf ="item.enableCredits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
                                                 <span>
                                                     <em class="lxp-Duration"></em> 
                                                     Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
@@ -371,8 +371,8 @@
                                                   </mat-menu>
                                             </div>
                                             <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
-                                                <span class="by">By: <b>Larsen & Toubro</b></span>
-                                                <span class="credits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
+                                                <span class="by">By: <b>{{item.courseBy}}</b></span>
+                                                <span class="credits" *ngIf ="item.enableCredits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
                                                 <span>
                                                     <em class="lxp-Duration"></em> 
                                                     Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
@@ -471,8 +471,8 @@
                                                   </mat-menu>
                                             </div>
                                             <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
-                                                <span class="by">By: <b>Larsen & Toubro</b></span>
-                                                <span class="credits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
+                                                <span class="by">By: <b>{{item.courseBy}}</b></span>
+                                                <span class="credits" *ngIf ="item.enableCredits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
                                                 <span>
                                                     <em class="lxp-Duration"></em> 
                                                     Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
