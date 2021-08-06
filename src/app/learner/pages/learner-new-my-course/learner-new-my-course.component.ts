@@ -122,6 +122,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   dateSelected: string;
   vocationalselectjobRole= [];
   testvals: any;
+  shotDotSearch:boolean = true;
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
@@ -155,6 +156,10 @@ export class LearnerNewMyCourseComponent implements OnInit {
     //   this.getCountForCategories();
     // }, 500);
     this.getMyJobRole();
+    if(this.userDetailes.org_type != "collegeconnect"){
+      this.shotDotSearch = false;
+    }
+
   }
   insidengOnInit() {
     this.CommonServices.openAvailCourcePopup.subscribe((data: any) => {
