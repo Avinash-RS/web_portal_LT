@@ -7,27 +7,29 @@
         </ul>
         <div class="qandaSection">
             <!-- <h2>Question and Answer</h2> -->
-            <mat-tab-group animationDuration="100ms" [(selectedIndex)]="selectedIndex" (selectedTabChange)="contentChange()">
+            <mat-tab-group animationDuration="100ms" [(selectedIndex)]="selectedIndex"
+                (selectedTabChange)="contentChange()">
                 <mat-tab>
                     <ng-template mat-tab-label>
                         Answers
                     </ng-template>
                     <span *ngIf="showSkeleton;else skeleton">
                         <span *ngIf="qaDataList.length;else noquescard">
-                    <div class="content" *ngFor="let item of qaDataList; let i = index">
-                        <div class="askedDate d-flex flex-row">
-                            <span>Question : {{i+ 1}} |</span>
-                            <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
-                        </div>
-                        <h4 [innerHTML]="item.question"></h4>
-                        <div class="answeredDate">
-                            <button class="answer">Answered</button>
-                            <span>{{item.publishedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
-                        </div>
-                        <p [innerHTML]="item.answer"></p>
-                    </div>
-                    </span>
-                    <pagination-controls *ngIf="qaDataList.length" class="gradingPagination"  style="text-align: center;" (pageChange)="onpagination($event)"></pagination-controls>
+                            <div class="content" *ngFor="let item of qaDataList; let i = index">
+                                <div class="askedDate d-flex flex-row">
+                                    <span>Question : {{i+ 1}} |</span>
+                                    <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
+                                </div>
+                                <h4 [innerHTML]="item.question"></h4>
+                                <div class="answeredDate">
+                                    <button class="answer">Answered</button>
+                                    <span>{{item.publishedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
+                                </div>
+                                <p [innerHTML]="item.answer"></p>
+                            </div>
+                        </span>
+                        <pagination-controls *ngIf="qaDataList.length" class="gradingPagination"
+                            style="text-align: center;" (pageChange)="onpagination($event)"></pagination-controls>
                     </span>
                 </mat-tab>
                 <mat-tab>
@@ -35,15 +37,17 @@
                         Unanswered
                     </ng-template>
                     <span *ngIf="showSkeleton;else skeleton">
-                    <div class="content" *ngFor="let item of qaDataList">
-                        <div class="askedDate d-flex flex-row">
-                            <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
-                        </div>
-                        <h4 [innerHTML]="item.question"></h4>
-                        <div class="answeredDate">
-                            <button class="noAnswer">Unanswered</button>
-                        </div>
-                    </div>
+                        <span *ngIf="qaDataList.length;else noquescard">
+                            <div class="content" *ngFor="let item of qaDataList">
+                                <div class="askedDate d-flex flex-row">
+                                    <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
+                                </div>
+                                <h4 [innerHTML]="item.question"></h4>
+                                <div class="answeredDate">
+                                    <button class="noAnswer">Unanswered</button>
+                                </div>
+                            </div>
+                        </span>
                     </span>
                 </mat-tab>
                 <mat-tab>
@@ -51,19 +55,22 @@
                         All
                     </ng-template>
                     <span *ngIf="showSkeleton;else skeleton">
-                    <div class="content" *ngFor="let item of qaDataList">
-                        <div class="askedDate d-flex flex-row">
-                            <span><em class="lxp-AccountCircle"></em>{{item.userId}}</span>
-                            <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
-                        </div>
-                        <h4 [innerHTML]="item.answer"></h4>
-                        <div class="answeredDate">
-                            <button
-                                [class]="item.answered?'answer':'noAnswer'">{{item.answered?'Answered':'Unanswered'}}</button>
-                            <span *ngIf="item.answered">{{item.publishedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
-                        </div>
-                        <p *ngIf="item.answered" [innerHTML]="item.answer"></p>
-                    </div>
+                        <span *ngIf="qaDataList.length;else noquescard">
+                            <div class="content" *ngFor="let item of qaDataList">
+                                <div class="askedDate d-flex flex-row">
+                                    <span><em class="lxp-AccountCircle"></em>{{item.userId}}</span>
+                                    <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
+                                </div>
+                                <h4 [innerHTML]="item.answer"></h4>
+                                <div class="answeredDate">
+                                    <button
+                                        [class]="item.answered?'answer':'noAnswer'">{{item.answered?'Answered':'Unanswered'}}</button>
+                                    <span *ngIf="item.answered">{{item.publishedDate|date:'dd MMM yyyy, hh:mm:ss
+                                        a'}}</span>
+                                </div>
+                                <p *ngIf="item.answered" [innerHTML]="item.answer"></p>
+                            </div>
+                        </span>
                     </span>
                 </mat-tab>
             </mat-tab-group>
@@ -107,7 +114,7 @@
         <div><i (click)="dialogClose()" class="lxp-Close"></i></div>
     </div>
     <div class="dialogContent">
-        
+
         <div>
             <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
         </div>
@@ -134,9 +141,9 @@
     <div class="content">
         <ngx-skeleton-loader count="5"></ngx-skeleton-loader>
     </div>
-</ng-template >
+</ng-template>
 <ng-template #noquescard>
     <div class="d-flex align-items-center justify-content-center">
-        No question card coming soon
+        No questions / answers to display!
     </div>
 </ng-template>
