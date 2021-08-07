@@ -7,6 +7,7 @@
         </ul>
         <div class="qandaSection">
             <!-- <h2>Question and Answer</h2> -->
+            <!-- <input type="text" [(ngModel)]="searchKey"> -->
             <mat-tab-group animationDuration="100ms" [(selectedIndex)]="selectedIndex"
                 (selectedTabChange)="contentChange()">
                 <mat-tab>
@@ -22,7 +23,7 @@
                                 </div>
                                 <h4 [innerHTML]="item.question"></h4>
                                 <div class="answeredDate">
-                                    <button class="answer">Answered</button>
+                                    <button class="answer" style="cursor:default;">Answered</button>
                                     <span>{{item.publishedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                                 </div>
                                 <p [innerHTML]="item.answer"></p>
@@ -44,7 +45,7 @@
                                 </div>
                                 <h4 [innerHTML]="item.question"></h4>
                                 <div class="answeredDate">
-                                    <button class="noAnswer">Unanswered</button>
+                                    <button class="noAnswer" style="cursor:default;" >Unanswered</button>
                                 </div>
                             </div>
                         </span>
@@ -63,7 +64,7 @@
                                     <span><em class="lxp-AccountCircle"></em>{{item.userId}}</span>
                                     <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                                 </div>
-                                <h4 [innerHTML]="item.answer"></h4>
+                                <h4 [innerHTML]="item.question"></h4>
                                 <div class="answeredDate">
                                     <button
                                         [class]="item.answered?'answer':'noAnswer'">{{item.answered?'Answered':'Unanswered'}}</button>
