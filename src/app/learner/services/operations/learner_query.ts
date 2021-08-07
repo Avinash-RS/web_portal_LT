@@ -2221,6 +2221,8 @@ query   get_batchwise_learner_dashboard_data( $user_id: String!, $request_type: 
       batch_end_date
       current_week_count
       actual_total_week
+      courseBy
+      enableCredits
     }
   }
 }
