@@ -61,7 +61,7 @@
                         <span *ngIf="qaDataList.length;else noquescard">
                             <div class="content" *ngFor="let item of qaDataList | paginate: { totalItems: totalCount, itemsPerPage: 10, currentPage: pageNumber + 1}">
                                 <div class="askedDate d-flex flex-row">
-                                    <span><em class="lxp-AccountCircle"></em>{{item.userId}}</span>
+                                    <span><em class="lxp-AccountCircle"></em>{{item.askedBy}}</span>
                                     <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                                 </div>
                                 <h4 [innerHTML]="item.question"></h4>
