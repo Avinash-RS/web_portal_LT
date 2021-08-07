@@ -35,7 +35,7 @@ export class PasswordComponent implements OnInit {
   emailid: any;
   secretKey = "(!@#Passcode!@#)";
   currentYear = new Date().getFullYear();
-
+  loader = false;
   constructor(public translate: TranslateService,
               private router: Router,
               private formBuilder: FormBuilder,
@@ -113,6 +113,7 @@ export class PasswordComponent implements OnInit {
 
   }
   submit() {
+    this.loader = true;
     localStorage.removeItem('userDetails');
     localStorage.removeItem('token');
     localStorage.removeItem('adminDetails');
@@ -122,6 +123,7 @@ export class PasswordComponent implements OnInit {
     var encryptedname = CryptoJS.AES.encrypt( this.emailid, this.secretKey.trim()).toString();
     this.service.user_registration_done(encryptedid, encryptedname, encryptedpassword, this.systemip ? this.systemip : '')
     .subscribe((data: any) => {
+      this.loader = false;
       if (data.data.user_registration_done.success === 'true') {
         // Added by Mythreyi - for user story 19 first time login
         this.toastr.success("Your registration is successful")                
@@ -142,6 +144,9 @@ export class PasswordComponent implements OnInit {
       } else {
         this.toastr.error(data.data.user_registration_done.message, null);
       }
+    },
+    err =>{
+      this.loader = false;
     });
   }
  // new flow removed

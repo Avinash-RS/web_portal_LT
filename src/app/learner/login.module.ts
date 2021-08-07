@@ -3,16 +3,15 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { IsLoggedInAuthGuard } from '@core/services/_helpers/is-logged-in-auth.guard';
-import { RegistrationComponent } from './pages/registration/registration.component';
-import { OtpComponent } from './pages/otp/otp.component';
 import { PasswordComponent } from './pages/password/password.component';
-import { ForgotUsernameAndPasswordComponent } from './pages/forgot-username-and-password/forgot-username-and-password.component';
-import { RecoverFogotpasswordOTPComponent } from './pages/recover-fogotpassword-otp/recover-fogotpassword-otp.component';
 import { MaskingPipePipe } from '@core/core/masking-pipe.pipe';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory, CoreModule } from '@core/core.module';
 import { HttpClient } from '@angular/common/http';
-import { MaterialModule } from '@core/material.module';
+
+//import { MaterialModule } from '@core/material.module';
+//Materials import 
+import { MatButtonModule,MatInputModule,MatCheckboxModule,MatFormFieldModule,MatIconModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
@@ -31,31 +30,9 @@ const routes: Routes = [
     data: { title: 'Learner Login' }
   },
   {
-    path: 'Learner/register',
-    component: RegistrationComponent,
-    data: { animation: 'Learner  Registration', title: 'Learner  Registration'  }
-  },
-  {
-    path: 'Learner/otp',
-    component: OtpComponent,
-    // canActivate: [AuthGuard],
-    data: { title: 'Learner  Registration OTP' }
-  },
-  {
     path: 'Learner/password',
     component: PasswordComponent,
-    // canActivate: [AuthGuard],
     data: { title: 'Learner  Registration Username/Password' }
-  },
-  {
-    path: 'Learner/recover',
-    component: ForgotUsernameAndPasswordComponent,
-    data: { animation: 'Learner Forget Password', title: 'Learner Forget Password'}
-  },
-  {
-    path: 'Learner/recoverotp',
-    component: RecoverFogotpasswordOTPComponent,
-    data: { title: 'Learner Forget Password OTP' }
   },
   {
     path: 'Learner/resetpassword',
@@ -67,11 +44,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     LoginComponent,
-    RegistrationComponent,
-    OtpComponent,
     PasswordComponent,
-    ForgotUsernameAndPasswordComponent,
-    RecoverFogotpasswordOTPComponent,
     ResetpasswordComponent,
     MaskingPipePipe,
   ],
@@ -79,7 +52,12 @@ const routes: Routes = [
   imports: [
     CommonModule,
     CoreModule,
-    MaterialModule,
+  //  MaterialModule,
+    MatButtonModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
@@ -92,6 +70,13 @@ const routes: Routes = [
         deps: [HttpClient]
       }
     }),
+  ],
+  exports: [
+    MatButtonModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule
   ]
 })
 export class LoginModule { }

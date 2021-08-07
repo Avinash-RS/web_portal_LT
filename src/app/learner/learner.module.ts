@@ -63,13 +63,6 @@ const routes: Routes = [
     data: { animation: 'Learner  Profile', title: 'Learner  Profile' }
   },
   {
-    path: 'activitycenterhomescreen',
-    loadChildren: './activitycenter.module#ActivitycenterModule',
-    canLoad: [AuthGuard],
-    data: { animation: 'activitycenterhomescreen', title: 'Activity Center' }
-
-  },
-  {
     path: 'knowledge',
     loadChildren: './knowledgeresources.module#KnowledgeresourcesModule',
     canLoad: [AuthGuard],
