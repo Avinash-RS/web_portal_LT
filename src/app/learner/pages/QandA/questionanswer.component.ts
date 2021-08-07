@@ -14,6 +14,7 @@ export class QuestionanswerComponent implements OnInit {
   selectedIndex = 0;
   questionCount = 0;
   answerCount = 0;
+  searchKey = '';
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -142,6 +143,12 @@ export class QuestionanswerComponent implements OnInit {
 
   createQuestion(){
     if(this.htmlContent){
+      let regexKey = /[&<>#]/gi;
+      if(this.htmlContent.search(regexKey) == -1 ){
+        this.toastr.warning("spl key")
+        return false
+      }
+
     this.learnerService.createEngineersForumData(this.UserDetails.user_id, this.UserDetails.full_name, this.courseId, this.htmlContent, this.courseName).subscribe((rdata: any) => {
       console.log(rdata);
       if(rdata?.errors && rdata?.errors[0]?.message==="Request failed with status code 413")
