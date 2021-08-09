@@ -203,7 +203,7 @@ export class LoginComponent implements OnInit {
         fullname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50),
           Validators.pattern(/^[-a-zA-Z-() ]+(\s+[-a-zA-Z-()]+)*$/)]],
           mobile: ['', [ Validators.minLength(10),  Validators.maxLength(10),
-            Validators.pattern(/^[6-9][0-9]{9}$/)]],
+            Validators.pattern(/^[6-9]\d{9}$/)]],
         email: ['', [ Validators.minLength(6),
           Validators.maxLength(64), Validators.pattern(/^([A-Za-z]|[0-9])[A-Za-z0-9._-]+[A-Za-z0-9]@((?:[-a-z0-9]+\.)+[a-z]{2,})$/)]],
         termsandconditions: new FormControl('', [])

@@ -159,7 +159,7 @@
 
             <mat-form-field appearance="outline">
               <mat-label class="label-color">{{'Mobile number' | translate}}</mat-label>
-              <input matInput type="tel" [placeholder]="'Enter mobile number without country code'" minlength="10" pattern="[0-9]{1}[1-9]{9}" mask="0000000000" maxlength="10" formControlName="mobile">
+              <input matInput type="tel" [placeholder]="'Enter mobile number without country code'" minlength="10" mask="0000000000" maxlength="10" formControlName="mobile">
               <em class="icon-color lxp-Phone" matPrefix></em>
 
               <mat-error class="error" *ngIf="registerForm.get('mobile').hasError('minlength') || registerForm.get('mobile').hasError('pattern')">
