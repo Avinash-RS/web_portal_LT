@@ -304,7 +304,7 @@
                                                         </div>
                                                         <!--  -->
                                                         <div  class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
-                                                            <span><em class="lxp-QA"></em></span>
+                                                            <span><em class="lxp-book-question"></em></span>
                                                             <p>Q&A</p>
                                                         </div>
                                                         <div *ngIf="userDetailes.org_type === 'vocational'" class="icons" (click)="goToForum(item)">
@@ -406,7 +406,7 @@
                                                     </div>
                                                     <!--  -->
                                                     <div *ngIf="userDetailes.org_type!== 'collegeconnect'" class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
-                                                        <span><em class="lxp-QA"></em></span>
+                                                        <span><em class="lxp-book-question"></em></span>
                                                         <p>Q&A</p>
                                                     </div>
                                                     <div *ngIf="userDetailes.org_type === 'vocational'" class="icons" (click)="goToForum(item)">
@@ -506,7 +506,7 @@
                                                     </div>
                                                     <!--  -->
                                                     <div *ngIf="userDetailes.org_type!== 'collegeconnect'" class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
-                                                        <span><em class="lxp-QA"></em></span>
+                                                        <span><em class="lxp-book-question"></em></span>
                                                         <p>Q&A</p>
                                                     </div>
                                                     <div *ngIf="userDetailes.org_type === 'vocational'" class="icons" (click)="goToForum(item)">
