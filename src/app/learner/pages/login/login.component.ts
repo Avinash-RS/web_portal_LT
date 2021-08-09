@@ -10,7 +10,6 @@ import * as CryptoJS from 'crypto-js';
 import { RecaptchaErrorParameters } from "ng-recaptcha";
 import { environment } from '../../../../environments/environment';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

@@ -34,13 +34,15 @@
             <div>
               <mat-form-field appearance="outline">
                 <mat-label class="label-color">{{'Email or Username' | translate}}</mat-label>
-                <input matInput id="username" #username [placeholder]="'Enter the Email or Username' | translate" formControlName="username" maxlength="64" required>
+                <input matInput id="username" #username [placeholder]="'Enter the Email or Username' | translate" formControlName="username" minlength="3" maxlength="250" required>
                 <em class="icon-color lxp-MailOutline" matPrefix></em>
                 
                 <mat-error class="error" *ngIf="loginForm.get('username').hasError('required')">
                   {{'Email or Username is required' | translate}}</mat-error>
                 <mat-error class="error" *ngIf="loginForm.get('username').hasError('pattern')">
                   {{'Please enter a valid email' | translate}}</mat-error>
+                <mat-error class="error" *ngIf="loginForm.get('username').hasError('minlength')">
+                  {{'Email or Username should be atleast 3 characters long' | translate}}</mat-error>
               </mat-form-field>
             </div>
 
@@ -50,8 +52,7 @@
                 <mat-label class="labe l-color">{{'Password' | translate }}</mat-label>
                 <input onpaste="return false" matInput [placeholder]="'Enter password' | translate" [type]="hide ? 'password' : 'text'" formControlName="password" [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" required>
                 <em class="icon-color lxp-Lock" matPrefix></em>
-                <span mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                  [attr.aria-pressed]="hide">
+                <span mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                   <em class="icon-color" [ngClass]="hide ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
                 </span>
 
@@ -91,7 +92,7 @@
           <div>
             <mat-form-field appearance="outline">
               <mat-label class="label-color">{{'Email or Username' | translate}}</mat-label>
-              <input matInput [placeholder]="'Enter the Email or Username' | translate" [formControl]="username" maxlength="64" required>
+              <input matInput [placeholder]="'Enter the Email or Username' | translate" [formControl]="username" minlength="3" maxlength="250" required>
               <em class="icon-color lxp-MailOutline" matPrefix></em>
 
               <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
@@ -129,7 +130,7 @@
 
             <mat-form-field appearance="outline">
               <mat-label class="label-color">{{'Full name' | translate}}</mat-label>
-              <input matInput id="fullname" #fullname [placeholder]="'Enter the full name' | translate" formControlName="fullname" maxlength="50" required>
+              <input matInput id="fullname" #fullname [placeholder]="'Enter the full name' | translate" formControlName="fullname" minlength="3" maxlength="70" required>
               <em class="icon-color lxp-User" matPrefix></em>
 
               <mat-error class="error" *ngIf="registerForm.get('fullname').hasError('required') && !registerSuccess">
@@ -139,7 +140,7 @@
                 {{'Full name should be atleast 3 characters long' | translate}}
               </mat-error>
               <mat-error class="error" *ngIf="registerForm.get('fullname').hasError('maxlength')">
-                {{'Full name can be atmax 50 characters long' | translate}}
+                {{'Full name can be at max 70 characters long' | translate}}
               </mat-error>
               <mat-error class="error" *ngIf="registerForm.get('fullname').hasError('pattern')">
                 {{'Full name is invalid' | translate}}
@@ -148,8 +149,7 @@
 
             <mat-form-field appearance="outline">
               <mat-label class="label-color">{{'Email' | translate}}</mat-label>
-              <input matInput id="email" #email placeholder="Enter the email" formControlName="email" maxlength="64"
-                required>
+              <input matInput id="email" #email placeholder="Enter the email" formControlName="email" maxlength="250" required>
               <em class="icon-color lxp-MailOutline" matPrefix></em>
               <mat-error class="error" *ngIf="registerForm.get('email').hasError('required') && !registerSuccess">
                 {{'Email is required' | translate}}</mat-error>
