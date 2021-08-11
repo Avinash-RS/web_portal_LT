@@ -4,13 +4,13 @@
 <div oncontextmenu="return false" class="coursePlayerContainer" *ngIf="scromModuleData;else skeletonLoader">
     <!-- TITLE AND BACK -->
     <div class="titlebar">
-        <!-- <div class="downTitle"><i (click)="titleBar?titleBar=false:titleBar=true" [ngClass]="titleBar?'arrUp':'arrDown'" class="lxp-Arrow"></i></div>
+        <!-- <div class="downTitle"><em (click)="titleBar?titleBar=false:titleBar=true" [ngClass]="titleBar?'arrUp':'arrDown'" class="lxp-Arrow"></em></div>
         <div class="collapseFill"><i class="lxp-CollapseFill"></i></div> -->
 
-        <div class="downTitle"><i (click)="titleBar = !titleBar" [ngClass]="titleBar?'arrDown':'arrUp'" class="lxp-Arrow"></i></div>
-        <div class="collapseFill"><i (click)="!titleBar?titleBar=true:''" [ngClass]="!titleBar?'arrUp':'arrDown'" class="lxp-CollapseFill"></i></div>
+        <!-- <div class="collapseFill"><em (click)="titleBar = !titleBar" [ngClass]="titleBar?'arrDown lxp-Arrow':'arrUp lxp-CollapseFill'"></em></div> -->
+        <!-- <div class="collapseFill"><em (click)="!titleBar ? titleBar = true : ''" [ngClass]="!titleBar?'arrUp':'arrDown'" class="lxp-CollapseFill"></em></div> -->
 
-        <div class="d-flex align-items-center titleBack animateAnimate" [ngClass]="titleBar==true?'fadeOutUp':'fadeInDown'">
+        <!-- <div class="d-flex align-items-center titleBack animateAnimate" [ngClass]="titleBar==true?'fadeOutUp':'fadeInDown'">
             <div class="pointer d-flex align-items-center backcolor redHover" *ngIf="scromApiData?.toc != '0'" (click)="goBack()">
                 <i class="lxp-Arrow backArrow"></i><span>Back</span>
             </div>
@@ -29,6 +29,26 @@
                 </div>
             </ng-container>
             <div class="courseTitle" *ngIf="drawersOpen!==false||filterkey!=='All'"> | <span>{{this.course?.course_name}}</span></div>
+        </div> -->
+        <div class="titleBack animateAnimate" [ngClass]="titleBar==true?'fadeOutUp':'fadeInDown'">
+            <ul class="breadcrumb">
+                <li><em *ngIf="scromApiData?.toc != '0'" (click)="goBack()" class="lxp-Right_Direction_Arrow backArrow"></em></li>
+                <ng-container *ngIf="scromApiData?.toc != '0'">
+                    <div class="navigation d-flex align-items-center" *ngIf="scromModuleData && filterkey==='All' && drawersOpen===false">
+                        <!-- <span class="pipeLine">|</span>  -->
+                        <div class="leftArrow">                
+                            <em class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()"></em>
+                        </div>
+                        <div class="currentTopic" >
+                            <span title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}">{{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}</span>
+                        </div>
+                        <div class="rightArrow">                
+                            <em class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()"></em>
+                        </div>
+                    </div>
+                </ng-container>
+                <li><div class="courseTitle" *ngIf="drawersOpen!==false||filterkey!=='All'"><span>{{this.course?.course_name}}</span></div></li>
+            </ul>
         </div>
     </div>
     <!-- COURSE TOOL BAR -->

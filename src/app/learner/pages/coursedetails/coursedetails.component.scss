@@ -20,19 +20,23 @@
 .player {
   width: 100%;
   border: none;
-  height: 90% !important;
+  // height: 90% !important;
+  height: 100% !important;
 }
 .backcolor {
   color: #999999;
 }
 .contentHeight {
-  height: 80vh !important;
+  // height: 80vh !important;
+  height: calc(100vh - 171px);
   background: #ffffff;
   margin-top: 10px;
   position: relative;
+  @media only screen and (max-width: 767px) {
+    height: calc(100vh - 120px);
+  }
   .hamburgerPosition {
     //position: relative;
-
     background-color: #ffcc00;
     border-radius: 50%;
     width: 25px;
@@ -54,7 +58,7 @@
   .videoPlayer {
     position: relative;
     transition: all 0.3s linear;
-    width: 70%;
+    width: 69.5%;
     @media only screen and (max-width: 767px) {
       width: 0;
     }
@@ -184,8 +188,12 @@
   }
   .xyz {
     overflow: auto;
-    height: 74.7vh;
+    // height: 74.7vh;
+    height: calc(100vh - 215px);
     margin-top: 10px;
+    @media only screen and (max-width: 767px) {
+      height: calc(100vh - 160px);
+    }
   }
 }
 ::ng-deep div.tocSize::-webkit-scrollbar {
@@ -494,6 +502,8 @@
   text-overflow: ellipsis;
   overflow: hidden !important;
   text-align: center;
+  position: relative;
+  top: -2px;
   // width:80%;
   @media only screen and (max-width: 767px) {
     max-width: 75%;
@@ -517,12 +527,13 @@
   }
   div {
     display: inline-block;
-    line-height: 14px;
+    // line-height: 14px;
   }
   .leftArrow,
   .rightArrow {
     cursor: pointer;
     color: #707070;
+    line-height: normal;
   }
   .leftArrow {
     margin-right: 10px;
@@ -769,6 +780,37 @@
 
 .titlebar {
   position: relative;
+  .breadcrumb {
+    margin: 0;
+    padding: 0 20px !important;
+    background-color: transparent !important;
+    li {
+      color: #333333;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: normal;
+      position: relative;
+      margin-right: 15px;
+      em {
+        display: inline-block;
+        transform: scale(-1);
+        color: #666666;
+        margin-right: 8px;
+        cursor: pointer;
+      }
+      &:first-child {
+        color: #999999;
+        &::after {
+          content: "/";
+          position: absolute;
+          right: -10px;
+          top: auto;
+          bottom: auto;
+          color: #c02222;
+        }
+      }
+    }
+  }
   .titleBack {
     padding: 0 10px;
     background-color: #ffffff;
@@ -824,8 +866,8 @@
     }
   }
   .courseTitle {
-    font-size: 18px;
-    color: #333333;
+    // font-size: 18px;
+    // color: #333333;
     margin-left: 5px;
     width: 100%;
     span {

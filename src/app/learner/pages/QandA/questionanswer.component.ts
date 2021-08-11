@@ -64,7 +64,8 @@ export class QuestionanswerComponent implements OnInit {
   questionText: any;
   courseName: string;
   totalCount: any;
-  constructor(private dialog: MatDialog, private learnerService: LearnerServicesService, private toastr: ToastrService,) {
+  unAnsCheck: any;
+  constructor(private dialog: MatDialog, private learnerService: LearnerServicesService,private toastr: ToastrService,) {
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails'))
     this.courseId = localStorage.getItem("Courseid")
     this.courseName = localStorage.getItem("CourseName")
@@ -139,6 +140,14 @@ export class QuestionanswerComponent implements OnInit {
     this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, this.requestType, this.pageNumber).subscribe((rdata: any) => {
       this.qaDataList = rdata.data.getengineersForumData.data
       this.totalCount = rdata.data.getengineersForumData.totalcount;
+      if(this.selectedIndex==0 && this.requestType=='answered'&& (this.totalCount==0||this.totalCount==null)){
+        this.showSkeleton = false
+        this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, 'un_answered', this.pageNumber).subscribe((check: any) => {
+          this.unAnsCheck = check.data.getengineersForumData.totalcount
+          this.showSkeleton = true
+        });
+
+      }
       this.showSkeleton = true
     })
   }
@@ -177,7 +186,7 @@ export class QuestionanswerComponent implements OnInit {
     this.dialog.open(templateRef, {
       panelClass: 'resourseContainer',
       width: "50%",
-      height: "90%",
+      height: "55%",
       closeOnNavigation: true,
       disableClose: true,
     });

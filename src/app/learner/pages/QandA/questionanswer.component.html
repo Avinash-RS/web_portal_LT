@@ -115,7 +115,7 @@
         <div class="font-weight-bold">
             <h2>Ask A Question</h2>
         </div>
-        <div><i (click)="dialogClose()" class="lxp-Close"></i></div>
+        <div><em (click)="dialogClose()" class="lxp-Close pointer"></em></div>
     </div>
     <div class="dialogContent">
 
@@ -129,7 +129,7 @@
                 <label class="form-check-label" for="exampleCheck1">Notify by e-mail for incomming answers</label>
             </div> -->
         </div>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between cancelSubmit">
             <button class="btn btn-outline-dark btn-block" (click)="dialogClose()">Cancel</button>
             <button class="btn btn-danger btn-block" (click)="createQuestion()">Submit Question</button>
         </div>
@@ -147,7 +147,12 @@
     </div>
 </ng-template>
 <ng-template #noquescard>
-    <div class="d-flex align-items-center justify-content-center">
-        No questions / answers to display!
+    <div class="d-flex align-items-center justify-content-center flex-column">
+        <figure>
+            <img src="/assets/learner/QandA.svg" alt="QandA">
+        </figure>
+        <p *ngIf="selectedIndex == 0">{{unAnsCheck?'Your question will be answered soon':'You have not asked any questions yet'}}</p>
+        <p *ngIf="selectedIndex == 1">{{'You have not asked any questions yet'}}</p>
+        <p *ngIf="selectedIndex == 2">{{'No Q&As to display at the moment'}}</p>
     </div>
 </ng-template>
