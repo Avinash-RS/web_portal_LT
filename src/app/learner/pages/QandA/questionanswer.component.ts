@@ -20,7 +20,7 @@ export class QuestionanswerComponent implements OnInit {
     spellcheck: true,
     height: '20rem',
     minHeight: '5rem',
-    placeholder: 'Please ask your question with consice and add any other details here',
+    placeholder: 'Please ask your question with concise and add any other details here',
     translate: 'no',
     defaultParagraphSeparator: '',
     defaultFontName: 'Arial',
@@ -169,7 +169,7 @@ export class QuestionanswerComponent implements OnInit {
       })
 
     } else {
-      this.toastr.warning("Answer cannot be empty")
+      this.toastr.warning("Question cannot be empty")
     }
   }
 
