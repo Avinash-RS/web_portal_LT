@@ -64,7 +64,7 @@ export class QuestionanswerComponent implements OnInit {
   questionText: any;
   courseName: string;
   totalCount: any;
-  constructor(private dialog: MatDialog, private learnerService: LearnerServicesService,private toastr: ToastrService,) {
+  constructor(private dialog: MatDialog, private learnerService: LearnerServicesService, private toastr: ToastrService,) {
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails'))
     this.courseId = localStorage.getItem("Courseid")
     this.courseName = localStorage.getItem("CourseName")
@@ -84,14 +84,17 @@ export class QuestionanswerComponent implements OnInit {
     switch (this.selectedIndex) {
       case 0:
         this.requestType = 'answered'
+        this.getQACount()
         this.getQAData();
         break;
       case 1:
         this.requestType = 'un_answered'
+        this.getQACount()
         this.getQAData();
         break;
       case 2:
         this.requestType = 'all'
+        this.getQACount()
         this.getQAData();
         break;
 
@@ -99,38 +102,37 @@ export class QuestionanswerComponent implements OnInit {
         break;
     }
   }
-  getQACount(){
+  getQACount() {
     this.showNumSkeleton = false
     this.learnerService.getengineersForumQA_Count(this.UserDetails.user_id, this.courseId).subscribe((rdata: any) => {
       console.log(rdata)
       let qcountData = rdata.data.getengineersForumQA_Count.data.questionCount
       let acountData = rdata.data.getengineersForumQA_Count.data.anweredCount
-      this.animateValue('qCount', 0, qcountData?qcountData:0, 1000)
-      this.animateValue('aCount', 0,acountData?acountData:0 , 1000)
+      this.animateValue('qCount', 0, qcountData ? qcountData : 0, 1000)
+      this.animateValue('aCount', 0, acountData ? acountData : 0, 1000)
       this.showNumSkeleton = true
     })
   }
   animateValue(id, start, end, duration) {
     var obj = document.getElementById(id);
-    if (start === end)
-    {
+    if (start === end) {
       obj.innerHTML = end;
     }
-    else{
-    var range = end - start;
-    var current = start;
-    var increment = end > start? 1 : -1;
-    var stepTime = Math.abs(Math.floor(duration / range));
-    
-    var timer = setInterval(function() {
+    else {
+      var range = end - start;
+      var current = start;
+      var increment = end > start ? 1 : -1;
+      var stepTime = Math.abs(Math.floor(duration / range));
+
+      var timer = setInterval(function () {
         current += increment;
         obj.innerHTML = current;
         if (current == end) {
-            clearInterval(timer);
+          clearInterval(timer);
         }
-    }, stepTime);
+      }, stepTime);
+    }
   }
-}
 
   getQAData() {
     this.showSkeleton = false
@@ -141,35 +143,34 @@ export class QuestionanswerComponent implements OnInit {
     })
   }
 
-  createQuestion(){
-    if(this.htmlContent){
+  createQuestion() {
+    if (this.htmlContent) {
       let regexKey = /[&<>#]/gi;
-      if(this.htmlContent.search(regexKey) == -1 ){
+      if (this.htmlContent.search(regexKey) == -1) {
         this.toastr.warning("spl key")
         return false
       }
 
-    this.learnerService.createEngineersForumData(this.UserDetails.user_id, this.UserDetails.full_name, this.courseId, this.htmlContent, this.courseName).subscribe((rdata: any) => {
-      console.log(rdata);
-      if(rdata?.errors && rdata?.errors[0]?.message==="Request failed with status code 413")
-      {
-        this.toastr.warning("Content limit exceeded!!")
-        
-      }else{
-        if(rdata.data.createEngineersForumData.success){
-          this.selectedIndex = 1
-          this.dialogClose();
-          this.toastr.success(rdata.data.createEngineersForumData.message)
-        }else{
-          this.toastr.warning(rdata.data.createEngineersForumData.message)
-        }
-      }
-      this.showSkeleton = true
-    })
+      this.learnerService.createEngineersForumData(this.UserDetails.user_id, this.UserDetails.full_name, this.courseId, this.htmlContent, this.courseName).subscribe((rdata: any) => {
+        console.log(rdata);
+        if (rdata?.errors && rdata?.errors[0]?.message === "Request failed with status code 413") {
+          this.toastr.warning("Content limit exceeded!!")
 
-  }else{
-    this.toastr.warning("Answer cannot be empty")
-  }
+        } else {
+          if (rdata.data.createEngineersForumData.success) {
+            this.selectedIndex = 1
+            this.dialogClose();
+            this.toastr.success(rdata.data.createEngineersForumData.message);
+          } else {
+            this.toastr.warning(rdata.data.createEngineersForumData.message)
+          }
+        }
+        this.showSkeleton = true
+      })
+
+    } else {
+      this.toastr.warning("Answer cannot be empty")
+    }
   }
 
   openQuestionDialog(templateRef) {
@@ -188,9 +189,9 @@ export class QuestionanswerComponent implements OnInit {
     this.htmlContent = "";
   }
 
-  
+
   //Pagination
-  onpagination(event){
+  onpagination(event) {
     this.pageNumber = event - 1;
     this.getQAData();
     this.getQACount();
