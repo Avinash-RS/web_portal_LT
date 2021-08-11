@@ -12,9 +12,13 @@ import { MatDialog } from "@angular/material";
 import { environment } from "@env/environment";
 import { Router } from "@angular/router";
 import { DragScrollComponent } from 'ngx-drag-scroll';
+import { Pipe } from '@angular/core';
 
 const DEFAULT_DURATION = 300;
 
+@Pipe({
+  name: 'limitTo'
+})
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
 

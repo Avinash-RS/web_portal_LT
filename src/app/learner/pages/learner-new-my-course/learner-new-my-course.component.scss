@@ -859,13 +859,13 @@
   }
 }
 //
-::ng-deep.no {
-  .mycoursesWrapper {
-    .mat-tab-group {
-      margin-top: 0;
-    }
-  }
-}
+// ::ng-deep.no {
+//   .mycoursesWrapper {
+//     .mat-tab-group {
+//       margin-top: 0;
+//     }
+//   }
+// }
 ::ng-deep.mycoursesWrapper {
   .mat-ink-bar {
     display: none;
@@ -1418,34 +1418,36 @@
   top: 70px;
   left: 15px;
   z-index: 8;
-  width: 80%;
+  width: 90%;
   &.handIcon {
+    text-align: left;
+    @media only screen and (min-width: 992px) {
+      text-align: right;
+    }
     @media only screen and (min-width: 1200px) {
       padding-right: 20px;
     }
-  }
-  @media only screen and (min-width: 576px) {
-    
   }
   @media only screen and (min-width:768px) {
     padding-right: 85px;
     top: 20px;
     left: auto;
     right: 0;
-    width: 45%;
+    width: 55%;
+    text-align: right;
   }
   @media only screen and (min-width: 1140px) {
     width: 42%;
   }
   &.noHandIcon {
-    display: none;
+    // display: none;
   }
   label {
     font-weight: 700;
     display: inline-block;
-    margin: 0 5px 0 0;
+    margin: 0 10px 0 0;
     color: #333333;
-    width: 28%;
+    // width: 28%;
   }
   .vocationalJobRole {
     width: 70%;
