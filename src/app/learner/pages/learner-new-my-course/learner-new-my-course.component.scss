@@ -327,9 +327,10 @@
         display: block;
       }
       span {
-        border-radius: 50%;
-        background-color: #ffcc00;
-        border: 1px solid rgba(112, 112, 112, 0.2);
+        // border-radius: 50%;
+        border-radius: 5px;
+        background-color: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.15);
         padding: 3px 7px;
         display: inline-flex;
         justify-content: center;
@@ -337,7 +338,7 @@
         width: 35px;
         height: 35px;
         line-height: normal;
-        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
         em {
           color: #000000;
           font-size: 20px;
@@ -463,6 +464,11 @@
           color: #808080;
           padding-right: 20px;
           margin: 0 !important;
+          &.addEllipsis {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
         }
         .readMoreLess {
           border: 0;
@@ -473,7 +479,7 @@
           top: 0;
           z-index: 9;
           em {
-            font-size: 8px;
+            font-size: 7px;
             color: #999999;
           }
         }
@@ -636,6 +642,7 @@
     .courseProgression {
       justify-content: flex-end;
       margin-top: 0;
+      margin-right: -15px;
       .icons {
         text-align: center;
         margin-right: 15px;

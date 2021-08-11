@@ -1,12 +1,16 @@
 <app-header></app-header>
 <div class="progression-report-contianer d-flex">
   <div class="left-container">
-    <div class="col d-flex breadcrum">
+    <!-- <div class="col d-flex breadcrum">
       <em routerLink="/Learner/MyCourse" class="lxp-Right_Direction_Arrow backArrow"></em>
       <div class="breadcrum1">{{courseName}}</div>
       <div class="partition">/</div>
       <div class="breadcrum2">Course Progression</div>
-    </div>
+    </div> -->
+    <ul class="breadcrumb">
+      <li><em routerLink="/Learner/MyCourse" class="lxp-Right_Direction_Arrow backArrow"></em>{{courseName}}</li>
+      <li>Question and Answer</li>
+    </ul>
     <!-- <div class="col mt-2">
       <div class="header-label">Progression Report</div>
     </div> -->
@@ -131,6 +135,7 @@
                         <div class="font-weight-bold">{{topicItem.activityDetails.completedPercentage}}%
                         </div>
                       </div>
+                      <div></div>
                     </div>
                     <div class="layb">
                       <div class="types">Knowledge Check</div>
@@ -142,12 +147,12 @@
                       </div>
                       <div>
                         <div class="week-text">Correct</div>
-                        <div class="font-weight-bold color-green text-center">
+                        <div class="font-weight-bold color-green">
                           {{topicItem.knowledgeDetails.correctAns?topicItem.knowledgeDetails.correctAns:'--'}}</div>
                       </div>
                       <div>
                         <div class="week-text">InCorrect</div>
-                        <div class="font-weight-bold color-red text-center">
+                        <div class="font-weight-bold color-red">
                           {{topicItem.knowledgeDetails.incorrect?topicItem.knowledgeDetails.incorrect:'--'}}</div>
                       </div>
                     </div>

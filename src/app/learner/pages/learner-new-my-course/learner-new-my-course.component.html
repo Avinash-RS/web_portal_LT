@@ -276,12 +276,11 @@
                                                 </span>
                                             </div>
                                             <div *ngIf="item?.batchid" class="showLessContent">
-                                                <button class="readMoreLess" *ngIf="info.length > 370" type="button"
-                                                    (click)="item.isReadMore = !item.isReadMore">
+                                                <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
                                                     <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
                                                 </button>
                                                 <div [ngClass]="!item.isReadMore ? '' : 'showText'">
-                                                    <p>{{item.course_description}}</p>
+                                                    <p [ngClass]="!item.isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
                                                     <div class="type d-flex justify-content-start">
                                                         <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
                                                         <span>
@@ -379,12 +378,11 @@
                                                 </span>
                                             </div>
                                             <div *ngIf="item?.batchid" class="showLessContent">
-                                                <button class="readMoreLess" *ngIf="info.length > 370" type="button"
-                                                    (click)="item.isReadMore = !item.isReadMore">
+                                                <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
                                                     <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
                                                 </button>
                                                 <div [ngClass]="!item.isReadMore ? '' : 'showText'">
-                                                    <p>{{item.course_description}}</p>
+                                                    <p [ngClass]="isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
                                                     <div class="type d-flex justify-content-start">
                                                         <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
                                                         <span>
@@ -479,12 +477,11 @@
                                                 </span>
                                             </div>
                                             <div *ngIf="item?.batchid" class="showLessContent">
-                                                <button class="readMoreLess" *ngIf="info.length > 370" type="button"
-                                                    (click)="item.isReadMore = !item.isReadMore">
+                                                <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
                                                     <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
                                                 </button>
                                                 <div [ngClass]="!item.isReadMore ? '' : 'showText'">
-                                                    <p>{{item.course_description}}</p>
+                                                    <p [ngClass]="isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
                                                     <div class="type d-flex justify-content-start">
                                                         <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
                                                         <span>

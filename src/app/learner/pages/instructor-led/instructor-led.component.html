@@ -1,32 +1,12 @@
 <app-header></app-header>
-<div style="padding: 15px;" class="">
-  <div class="commonBackStyle">
-    <i class="lxp-Arrow backArrow" (click)="getBack()"></i>
-    <span (click)="getBack()">Back</span>
-    <div class="courseNameBreadcrum">
-      <span class="pipeLine"> | </span>
-      <span class="ledCourseName">{{course?.name}}</span>
-      <i class="lxp-Arrow"></i>
-      <!-- <span>Instructor Led</span> -->
-      <span>Live Interactions</span>
-    </div>
-  </div>
+
+<div class="breadcrumbPading">
+  <ul class="breadcrumb">
+    <li><em (click)="getBack()" class="lxp-Right_Direction_Arrow backArrow"></em></li>
+    <li>{{course?.name}}</li>
+    <li>Live Interactions</li>
+  </ul>
 </div>
-<!-- <mat-icon class="material-icons brdcrmb f_size_25 pointer">chevron_right</mat-icon> -->
-<!-- <span class="redHover">
-    <mat-icon class="material-icons f_size_15 backIc pointer" (click)="getBack()">arrow_back_ios
-    </mat-icon>
-    <span class="f_size_19 pointer" (click)="getBack()">
-      Back
-    </span>
-  </span> -->
-<!-- <div class="">
-  <div class="f_wt_600 f_size_16 display_flex col-12">
-    <span class="pad-t-2">{{course?.name}}</span>
-    <mat-icon class="material-icons brdcrmb f_size_25 pointer">chevron_right</mat-icon>
-    <span class="pad-t-2">Instructor Led</span>
-  </div>
-</div> -->
 
 <!-- If no records -->
 <div class="noRecords" *ngIf="!showContent && !showSkeleton">

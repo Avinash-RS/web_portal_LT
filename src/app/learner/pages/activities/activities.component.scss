@@ -3,13 +3,44 @@
 .con-1 {
     padding: 15px;
 }
-.breadCrumb {
-  display: inline-block;
-  span, mat-icon {
-    display: inline-block;
-    vertical-align: middle;
+
+.breadcrumb {
+  margin: 0;
+  padding: 0 20px !important;
+  background-color: transparent !important;
+  li {
+    color: #333333;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    position: relative;
+    margin-right: 15px;
+    em {
+      display: inline-block;
+      transform: scale(-1);
+      color: #666666;
+      margin-right: 8px;
+      cursor: pointer;
+    }
+    &::after {
+      content: "/";
+      position: absolute;
+      right: -10px;
+      top: auto;
+      bottom: auto;
+      color: #c02222;
+    }
+    &:nth-child(2) {
+      color: #999999;
+    }
+    &:last-child {
+        &::after {
+            content: '';
+        }
+    }
   }
 }
+
 ::ng-deep.materialsScrollActivity .drag-scroll-wrapper.drag-scroll-container {
   height: auto !important;
   @media only screen and (max-width: 767px) {
@@ -960,6 +991,7 @@ margin-top: 8px;
       margin-left: 5px;
   }
 }
+
 .courseNameBreadcrum {
   margin-left: 5px;
   display: inline-block;
@@ -1150,10 +1182,7 @@ margin-top: 8px;
   width: 10px !important;
   margin-left: 10px !important;
 }
-.courseName {
-  margin-left: 10px;
-  margin-top: 12px;
-}
+
 .assignImg {
   width: 10%;
   height: 38px;
