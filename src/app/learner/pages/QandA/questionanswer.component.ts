@@ -183,8 +183,8 @@ export class QuestionanswerComponent implements OnInit {
     });
   }
   dialogClose() {
-    this.getQAData();
-    this.getQACount();
+    // this.getQAData();
+    // this.getQACount();
     this.dialog.closeAll();
     this.htmlContent = "";
   }
