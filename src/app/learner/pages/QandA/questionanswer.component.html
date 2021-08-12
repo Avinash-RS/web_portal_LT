@@ -111,13 +111,13 @@
 </div>
 
 <ng-template #questionDialog>
-    <div class="d-flex justify-content-between titleMargin">
+    <div class="d-flex justify-content-between titleMargin" (contextmenu)="contextmenu()">
         <div class="font-weight-bold">
             <h2>Ask A Question</h2>
         </div>
         <div><em (click)="dialogClose()" class="lxp-Close pointer"></em></div>
     </div>
-    <div class="dialogContent">
+    <div class="dialogContent" (contextmenu)="contextmenu()">
 
         <div>
             <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>

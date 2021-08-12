@@ -181,4 +181,7 @@ export class AskQuestionsComponent implements OnInit {
   goBack() {
     this.route.navigateByUrl('/Learner/MyCourse');
   }
+  contextmenu() {
+    event.preventDefault();
+  }
 }
