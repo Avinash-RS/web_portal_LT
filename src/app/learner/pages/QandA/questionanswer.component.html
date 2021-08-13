@@ -111,13 +111,13 @@
 </div>
 
 <ng-template #questionDialog>
-    <div class="d-flex justify-content-between titleMargin">
+    <div class="d-flex justify-content-between titleMargin" (contextmenu)="contextmenu()">
         <div class="font-weight-bold">
             <h2>Ask A Question</h2>
         </div>
         <div><em (click)="dialogClose()" class="lxp-Close pointer"></em></div>
     </div>
-    <div class="dialogContent">
+    <div class="dialogContent" (contextmenu)="contextmenu()">
 
         <div>
             <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
@@ -151,8 +151,8 @@
         <figure>
             <img src="/assets/learner/QandA.svg" alt="QandA">
         </figure>
-        <p *ngIf="selectedIndex == 0">{{unAnsCheck?'Your question will be answered soon':'You have not asked any questions yet'}}</p>
-        <p *ngIf="selectedIndex == 1">{{'You have not asked any questions yet'}}</p>
+        <p *ngIf="selectedIndex == 0">{{unAnsCheck?'Your question will be answered soon':'You have not asked any questions'}}</p>
+        <p *ngIf="selectedIndex == 1">{{'You have not asked any questions'}}</p>
         <p *ngIf="selectedIndex == 2">{{'No Q&As to display at the moment'}}</p>
     </div>
 </ng-template>

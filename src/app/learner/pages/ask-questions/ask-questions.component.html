@@ -65,11 +65,11 @@
 </div>
 
 <ng-template #questionInputModal>
-    <div class="askQuestionsTitle" style=" position: relative !important;">
+    <div class="askQuestionsTitle" style=" position: relative !important;" (contextmenu)="contextmenu()">
         <span style="font-weight: 400;">Ask a Question</span> <span class="qaClose cursor-pointer"><i
                 (click)="closedialogbox()" class="lxp-Close"></i></span>
     </div>
-    <div class="askQuestionsContainer mx-20px">
+    <div class="askQuestionsContainer mx-20px"(contextmenu)="contextmenu()">
         <div class="mt-10px  d-inline-block">
             <select class="sel-pad-modal" [(ngModel)]="questionTopicList" (change)="askQAModuleSelect()">
                 <option [ngValue]="null" [disabled]="true">Please select a module</option>
