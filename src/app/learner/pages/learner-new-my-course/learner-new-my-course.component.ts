@@ -225,16 +225,14 @@ export class LearnerNewMyCourseComponent implements OnInit {
     let jobRoleId = this.jobroleCategoryId;
     let jobRoleIdSEQ = this.jobroleCategoryId;
     //condition for vocational & course Sequence
-    if (this.userDetailes.org_type === 'vocational' && this.jobroleCategoryId === 'All') {
+    if (this.jobroleCategoryId === 'All') {
       jobRoleIdSEQ = 'all';
-    } else if (this.userDetailes.org_type !== 'vocational') {
-      jobRoleIdSEQ = null;
     } else {
       jobRoleIdSEQ = this.jobroleCategoryId;
     }
     if (this.jobroleCategoryId === 'All') { jobRoleId = null; }
     this.learnerService.get_batchwise_learner_dashboard_data(userId, requestType, jobRoleIdSEQ).subscribe((BcourseData: any) => {
-      BcourseData.data.get_batchwise_learner_dashboard_data.message.forEach(elem => {
+      BcourseData?.data?.get_batchwise_learner_dashboard_data?.message?.forEach(elem => {
         elem.isBatchCourse = true;
         if (this.isMobile) {
           elem.progresslistExp = true;
