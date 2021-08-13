@@ -77,8 +77,17 @@ export class HeaderComponent implements OnInit {
     setTimeout(() => {
       this.userDetailes = this.gs.checkLogout();
     }, 3000);
+    if(this.profilepic == "" || this.profilepic == null){
+      this.profilepic = this.userimage;
+    }
+    this.updateProfilePic();
   }
   
+  updateProfilePic(){
+    this.services.updateProfilePic.subscribe((data:any)=>{
+      this.profilepic = localStorage.getItem('user_img') || sessionStorage.getItem('user_img');
+    })
+  }
 
   onResize(event) {
     this.innerWidth = window.innerWidth;
