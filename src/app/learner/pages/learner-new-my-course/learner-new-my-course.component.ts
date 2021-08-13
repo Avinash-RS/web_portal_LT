@@ -47,6 +47,7 @@ export class CustomDateFormatter extends CalendarDateFormatter {
 })
 
 export class LearnerNewMyCourseComponent implements OnInit {
+  showJobRole = false;
   isReadMore = true;
   show = true;
   innerWidth: number;
@@ -308,7 +309,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
       // persentage : c.coursePlayerStatus.course_percentage || 0
     };
     // if (this.screenWidth < 800) {
-    //   this.show = true;
     // } else {
     localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer)
     localStorage.setItem('Courseid', c.course_id);
@@ -316,7 +316,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
     localStorage.setItem('currentBatchId', c.batchid);
     this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
 
-    // this.show = false;
     // }
   }
   //INSTRUCTOR LED PAGE NAVIGATION
@@ -466,9 +465,11 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.learnerService.getCountForJobroleCategories(this.userDetailes._id, this.userDetailes.user_id).subscribe((data: any) => {
       this.vocationalselectjobRole = data.data.getCountForJobroleCategories.data
       // this.vocationalselectjobRole = [];
-      if(this.vocationalselectjobRole && this.vocationalselectjobRole.length > 0) {
+      if(this.vocationalselectjobRole?.length > 0) {
+        this.showJobRole = true;
       }
       else {
+        this.showJobRole = false;
       }
     });
   }
