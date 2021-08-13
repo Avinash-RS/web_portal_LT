@@ -528,7 +528,7 @@
                             </div>
                         </mat-tab>
                     </mat-tab-group>
-                    <ng-container *ngIf="">
+                    <ng-container *ngIf="showJobRole">
                         <div class="desktopWrapper jobRole" [ngClass]="vocationalselectjobRole.length > 0 ?'handIcon':'noHandIcon'">
                             <label for="jobRoles" *ngIf="userDetailes.org_type == 'vocational'">My Job Role:</label>
                             <label for="jobRoles" *ngIf="userDetailes.org_type != 'vocational'">Courses For:</label>
