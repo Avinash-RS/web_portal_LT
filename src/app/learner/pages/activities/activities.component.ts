@@ -892,7 +892,7 @@ export class ActivitiesComponent implements OnInit {
     const filePath = event.target.files[0].name;
     const allowedExtensions = /(\.mp4|\.mov|\.pdf)$/i;
     if (!allowedExtensions.exec(filePath)) {
-      this.toastr.warning('Please upload video file only.');
+      this.toastr.warning('Please upload a valid file.');
       if (this.videoInput) {
         this.videoInput.nativeElement.value = '';
       } 

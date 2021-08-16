@@ -23,7 +23,7 @@
 
   <mat-tab-group class="activitiesTab" animationDuration="1000ms" (selectedTabChange)="tabChanged($event); activeTab($event)"
   [(selectedIndex)]="demo1TabIndex">
-    <mat-tab label="Assignments">
+    <mat-tab label="Assignment">
       <!-- Content starts -->
       <ng-container *ngIf="assignmentContent?.length > 0">
         <div class="box-0-1" *ngFor="let assignment of assignmentContent; let i = index">
