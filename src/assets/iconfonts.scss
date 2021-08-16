@@ -59,7 +59,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.lxp-download:before {
+  content: "\e95c";
+}
 .lxp-ThumbsDown:before {
   content: "\e95a";
 }

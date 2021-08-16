@@ -171,6 +171,9 @@
                 <div *ngIf="userType!=='collegeconnect'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="fullScr d-flex align-items-center iconSize" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
                     <i  class="lxp-ThumbsDown"></i>
                 </div>
+                <div *ngIf="scromApiData.resourceUrl"  (click)="downloadResource();" data-title="Download" class="fullScr d-flex align-items-center iconSize">
+                    <i  class="lxp-download"></i>
+                </div>
                 <!-- <div (click)="openResourse(resourseWindow)" data-title="Resources" class="resourceTab d-flex align-items-center iconSize">
                     <i  class="lxp-res-popout f_size_14"></i>
                 </div> -->
