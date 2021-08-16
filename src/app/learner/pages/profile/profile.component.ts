@@ -357,6 +357,7 @@ export class ProfileComponent implements OnInit {
         this.alert.openAlert(data.data.update_profile.message, null);
         this.cannotEdit = true;
         this.getprofileDetails(this.currentUser.user_id);
+        this.services.updateProfilePic.next("updated");
         //this.router.navigate(['/Learner/MyCourse']);
       } else {
         this.alert.openAlert(data.data.update_profile.message, null);
