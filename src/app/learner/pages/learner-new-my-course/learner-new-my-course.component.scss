@@ -462,7 +462,7 @@
           font-size: 14px;
           font-weight: 400;
           color: #808080;
-          padding-right: 20px;
+          padding-right: 40px;
           margin: 0 !important;
           &.addEllipsis {
             text-overflow: ellipsis;
@@ -475,7 +475,7 @@
           background-color: transparent;
           padding: 0;
           position: absolute;
-          right: 0;
+          right: 15px;
           top: 0;
           z-index: 9;
           em {
@@ -595,18 +595,18 @@
           height: 42px;
           background: #DBE9FC;
           transition: 0.3s ease-in background;
-          &:hover {
-            background: #1B4E9B;
-            border: none;
-            em {
-              color: #ffffff;
-            }
-          }
           em {
             color: #4B4B4B;
             font-size: 18px;
             @media only screen and (max-width: 767px) {
               font-size: 20px;
+            }
+          }
+          &:hover {
+            background: #1B4E9B;
+            border: none;
+            em {
+              color: #ffffff;
             }
           }
           @media only screen and (max-width: 767px) {
@@ -649,6 +649,7 @@
     .searchProgression {
       .percentage {
         width: 39%;
+        margin-right: -11px;
         @media only screen and (min-width: 569px) {
           width: 26%;
         }
@@ -1441,7 +1442,7 @@
       text-align: right;
     }
     @media only screen and (min-width: 1200px) {
-      padding-right: 20px;
+      padding-right: 25px;
     }
   }
   @media only screen and (min-width:768px) {

@@ -14,7 +14,7 @@
                     </div>
                     <!-- //////////// -->
                     <div class="prevNext">
-                        <p>TASKS TO DO</p>
+                        <!-- <p>TASKS TO DO</p> -->
                         <div class="wrapperTaskToDo d-flex align-items-center justify-content-between">
                             <div class="currentMonth">
                                 <h3>{{ viewDate | calendarDate:('month' + 'ViewTitle'):'en' }}</h3>
@@ -34,7 +34,7 @@
                             </div>
                         </div>
                         <div class="weekviewHead">
-                            <mwl-calendar-week-view  [selected]="selectedDate" (dayHeaderClicked)="getLearnerActivity($event.day.date);highlightSelectday($event)" [weekStartsOn]="1" [(viewDate)]="viewDate" [events]="events"></mwl-calendar-week-view>
+                            <mwl-calendar-week-view [selected]="selectedDate" (dayHeaderClicked)="getLearnerActivity($event.day.date);highlightSelectday($event)" [weekStartsOn]="1" [(viewDate)]="viewDate" [events]="events"></mwl-calendar-week-view>
                         </div>
                     </div>
                     <div class="minHeight">
@@ -309,7 +309,7 @@
                                                             <p>Activities</p>
                                                         </div>
                                                         <!--  -->
-                                                        <div  class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
+                                                        <div class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
                                                             <span><em class="lxp-book-question"></em></span>
                                                             <p>Q&A</p>
                                                         </div>
@@ -319,13 +319,13 @@
                                                         </div>
                                                     </div>
                                                     <div class="courseProgression d-flex align-items-center">
-                                                        <div class="icons" (click)="openReport(item)">
-                                                            <span><em class="lxp-Course_Progression"></em></span>
+                                                        <!-- <div class="icons" (click)="openReport(item)">
+                                                            <span><em class="lxp-Assessment_Report"></em></span>
                                                             <p>Assessment Report</p>
-                                                        </div>
+                                                        </div> -->
                                                         <div class="icons" (click)="gotoProgression(item)">
-                                                            <span><em class="lxp-Course_Progression"></em></span>
-                                                            <p>Course Progression</p>
+                                                            <span><em class="lxp-Analytics"></em></span>
+                                                            <p>Learning Progression</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -417,7 +417,7 @@
                                                         <p>Activities</p>
                                                     </div>
                                                     <!--  -->
-                                                    <div *ngIf="userDetailes.org_type!== 'collegeconnect'" class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
+                                                    <div class="icons" *ngIf="userDetailes.org_type!== 'collegeconnect'" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
                                                         <span><em class="lxp-book-question"></em></span>
                                                         <p>Q&A</p>
                                                     </div>
@@ -427,13 +427,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="courseProgression d-flex align-items-center">
-                                                    <div class="icons" (click)="openReport(item)">
-                                                        <span><em class="lxp-Course_Progression"></em></span>
+                                                    <!-- <div class="icons" (click)="openReport(item)">
+                                                        <span><em class="lxp-Assessment_Report"></em></span>
                                                         <p>Assessment Report</p>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="icons" (click)="gotoProgression(item)">
-                                                        <span><em class="lxp-Course_Progression"></em></span>
-                                                        <p>Course Progression</p>
+                                                        <span><em class="lxp-Analytics"></em></span>
+                                                        <p>Learning Progression</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -523,7 +523,7 @@
                                                         <p>Activities</p>
                                                     </div>
                                                     <!--  -->
-                                                    <div *ngIf="userDetailes.org_type!== 'collegeconnect'" class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
+                                                    <div class="icons" *ngIf="userDetailes.org_type!== 'collegeconnect'" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
                                                         <span><em class="lxp-book-question"></em></span>
                                                         <p>Q&A</p>
                                                     </div>
@@ -533,13 +533,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="courseProgression d-flex align-items-center">
-                                                    <div class="icons" (click)="openReport(item)">
-                                                        <span><em class="lxp-Course_Progression"></em></span>
+                                                    <!-- <div class="icons" (click)="openReport(item)">
+                                                        <span><em class="lxp-Assessment_Report"></em></span>
                                                         <p>Assessment Report</p>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="icons" (click)="gotoProgression(item)">
-                                                        <span><em class="lxp-Course_Progression"></em></span>
-                                                        <p>Course Progression</p>
+                                                        <span><em class="lxp-Analytics"></em></span>
+                                                        <p>Learning Progression</p>
                                                     </div>
                                                 </div>
                                             </div>
