@@ -68,6 +68,8 @@ export class CommonServicesService {
   openNotification$ = new Subject<any>();
   openNotification = this.openNotification$.asObservable();
 
+  updateProfilePic = new Subject<any>();
+  
   // While closing video palyer, pause video in course preview page
   pauseVideo$ = new Subject<any>();
   pauseVideo = this.pauseVideo$.asObservable();
