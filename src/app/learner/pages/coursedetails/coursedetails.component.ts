@@ -833,6 +833,16 @@ export class CoursedetailsComponent implements OnInit {
       closeOnNavigation: true,
       disableClose: true,
     });
+    const backdrop = document.getElementsByClassName('cdk-overlay-backdrop')[0];
+    const containerarea = document.getElementsByClassName('mat-dialog-container')[0];
+    rclickctrl(backdrop)
+    rclickctrl(containerarea)
+    function rclickctrl(element){
+      element.addEventListener("contextmenu", ( e )=> {
+        e.preventDefault();
+        return false;
+      } );
+    }
   }
   resourseAccord(courseResource, index) {
     if (courseResource) {
