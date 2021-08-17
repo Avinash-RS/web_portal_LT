@@ -65,6 +65,7 @@ export class QuestionanswerComponent implements OnInit {
   courseName: string;
   totalCount: any;
   unAnsCheck: any;
+  timeoutval: NodeJS.Timeout;
   constructor(private dialog: MatDialog, private learnerService: LearnerServicesService,private toastr: ToastrService,) {
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails'))
     this.courseId = localStorage.getItem("Courseid")
@@ -141,12 +142,13 @@ export class QuestionanswerComponent implements OnInit {
 
   getQAData() {
     this.showSkeleton = false
-    this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, this.requestType, this.pageNumber).subscribe((rdata: any) => {
+    this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, this.requestType, this.pageNumber, this.searchKey).subscribe((rdata: any) => {
       this.qaDataList = rdata.data.getengineersForumData.data
       this.totalCount = rdata.data.getengineersForumData.totalcount;
-      if(this.selectedIndex==0 && this.requestType=='answered'&& (this.totalCount==0||this.totalCount==null)){
+
+      if(this.searchKey===''&&this.selectedIndex==0 && this.requestType=='answered'&& (this.totalCount==0||this.totalCount==null)){
         this.showSkeleton = false
-        this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, 'un_answered', this.pageNumber).subscribe((check: any) => {
+        this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, 'un_answered', this.pageNumber,'').subscribe((check: any) => {
           this.unAnsCheck = check.data.getengineersForumData.totalcount
           this.showSkeleton = true
         });
@@ -194,6 +196,16 @@ export class QuestionanswerComponent implements OnInit {
       closeOnNavigation: true,
       disableClose: true,
     });
+    const backdrop = document.getElementsByClassName('cdk-overlay-backdrop')[0];
+    const containerarea = document.getElementsByClassName('mat-dialog-container')[0];
+    rclickctrl(backdrop)
+    rclickctrl(containerarea)
+    function rclickctrl(element){
+      element.addEventListener("contextmenu", ( e )=> {
+        e.preventDefault();
+        return false;
+      } );
+    }
   }
   dialogClose() {
     this.getQAData();
@@ -208,6 +220,14 @@ export class QuestionanswerComponent implements OnInit {
     this.pageNumber = event - 1;
     this.getQAData();
     this.getQACount();
+  }
+
+  searchcaller(){
+    this.timeoutval = setTimeout(()=>{
+      clearTimeout(this.timeoutval)
+      this.getQAData();
+      // this.getQACount();
+    },500)
   }
 
 }
