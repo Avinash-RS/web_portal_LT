@@ -30,9 +30,9 @@
             </ng-container>
             <div class="courseTitle" *ngIf="drawersOpen!==false||filterkey!=='All'"> | <span>{{this.course?.course_name}}</span></div>
         </div> -->
-        <div class="titleBack animateAnimate" [ngClass]="titleBar==true?'fadeOutUp':'fadeInDown'">
+        <div *ngIf="scromApiData?.toc != '0'" class="titleBack animateAnimate" [ngClass]="titleBar==true?'fadeOutUp':'fadeInDown'">
             <ul class="breadcrumb">
-                <li><em *ngIf="scromApiData?.toc != '0'" (click)="goBack()" class="lxp-Right_Direction_Arrow backArrow"></em></li>
+                <li [ngClass]="drawersOpen ? 'no':'yes'"><em *ngIf="scromApiData?.toc != '0'" (click)="goBack()" class="lxp-Right_Direction_Arrow backArrow"></em></li>
                 <ng-container *ngIf="scromApiData?.toc != '0'">
                     <div class="navigation d-flex align-items-center" *ngIf="scromModuleData && filterkey==='All' && drawersOpen===false">
                         <!-- <span class="pipeLine">|</span>  -->

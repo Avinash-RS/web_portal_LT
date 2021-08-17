@@ -360,7 +360,7 @@
       border-radius: 4px;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
       @media only screen and (min-width: 720px) {
-        padding: 15px 60px 15px 15px;
+        padding: 15px 25px 15px 15px;
       }
     }
     .menuIcon {
@@ -462,7 +462,7 @@
           font-size: 14px;
           font-weight: 400;
           color: #808080;
-          padding-right: 20px;
+          padding-right: 40px;
           margin: 0 !important;
           &.addEllipsis {
             text-overflow: ellipsis;
@@ -475,7 +475,7 @@
           background-color: transparent;
           padding: 0;
           position: absolute;
-          right: 0;
+          right: 15px;
           top: 0;
           z-index: 9;
           em {
@@ -526,7 +526,7 @@
       .durationCredits {
         flex-wrap: wrap;
         align-items: center;
-        margin-bottom: 13px;
+        margin: 15px 0;
         @media only screen and (min-width: 720px) {
           flex-wrap: nowrap;
         }
@@ -556,7 +556,6 @@
       }
     }
     .actionItems {
-      // margin-top: 19px;
       align-items: center;
       flex-wrap: nowrap;
       &.top {
@@ -594,30 +593,25 @@
           border-radius: 50%;
           width: 42px;
           height: 42px;
-          // border: 1px dashed rgba(128, 128, 128, 0.4);
-          border: 1px dashed #C02222;
-          &:hover {
-            background-color: #f2f2f2;
-            border: none;
-            em {
-              font-weight: bold;
-            }
-          }
-          @media only screen and (max-width: 767px) {
-            width: 45px;
-            height: 45px;
-          }
+          background: #DBE9FC;
+          transition: 0.3s ease-in background;
           em {
-            color: #808080;
+            color: #4B4B4B;
             font-size: 18px;
             @media only screen and (max-width: 767px) {
               font-size: 20px;
             }
           }
           &:hover {
+            background: #1B4E9B;
+            border: none;
             em {
-              color: #c02222;
+              color: #ffffff;
             }
+          }
+          @media only screen and (max-width: 767px) {
+            width: 45px;
+            height: 45px;
           }
         }
       }
@@ -628,14 +622,42 @@
       .icons {
         cursor: pointer;
         p {
-          font-size: 12px;
+          font-size: 11px;
           font-weight: 400;
           color: #333333;
           margin: 6px 0 0 0 !important;
-          line-height: 11px;
+          line-height: normal;
           @media only screen and (max-width: 991px) {
             display: none;
           }
+        }
+      }
+    }
+    .searchGallery {
+      background-color: #f2f2f2;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 5px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+      em {
+        color: #808080;
+      }
+    }
+    .searchProgression {
+      .percentage {
+        width: 39%;
+        margin-right: -11px;
+        @media only screen and (min-width: 569px) {
+          width: 26%;
+        }
+        @media only screen and (min-width: 1140px) {
+          width: 30%;
+        }
+        @media only screen and (min-width: 1560px) {
+          width: 30%;
         }
       }
     }
@@ -649,7 +671,7 @@
         &:hover {
           span {
             em {
-              color: #c02222;
+              color: #1B4E9B;
             }
           }
         }
@@ -657,18 +679,6 @@
       span {
         em {
           font-size: 20px;
-        }
-      }
-      .percentage {
-        width: 39%;
-        @media only screen and (min-width: 569px) {
-          width: 26%;
-        }
-        @media only screen and (min-width: 1140px) {
-          width: 25%;
-        }
-        @media only screen and (min-width: 1560px) {
-          width: 15%;
         }
       }
     }
@@ -1432,7 +1442,7 @@
       text-align: right;
     }
     @media only screen and (min-width: 1200px) {
-      padding-right: 20px;
+      padding-right: 25px;
     }
   }
   @media only screen and (min-width:768px) {
@@ -1446,11 +1456,14 @@
   @media only screen and (min-width: 1140px) {
     width: 42%;
   }
+  @media only screen and (min-width: 1540px) {
+    width: 30%;
+  }
   &.noHandIcon {
-    // display: none;
+    display: none;
   }
   label {
-    font-weight: 700;
+    font-weight: 500;
     display: inline-block;
     margin: 0 10px 0 0;
     color: #333333;
@@ -1465,6 +1478,10 @@
 ::ng-deep.vocationalJobRole {
   .mat-form-field {
     width: 100%;
+  }
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: #ffffff;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
   }
 }
 ::ng-deep.jobRole {

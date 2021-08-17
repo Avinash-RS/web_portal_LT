@@ -59,14 +59,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.lxp-download:before {
-  content: "\e95c";
-}
-.lxp-ThumbsDown:before {
-  content: "\e95a";
-}
-.lxp-ThumbsUp:before {
-  content: "\e95b";
+.lxp-Assessment_Report:before {
+  content: "\e95d";
 }
 .lxp-Launch:before {
   content: "\e959";
@@ -316,6 +310,15 @@
 }
 .lxp-stack:before {
   content: "\e905";
+}
+.lxp-download:before {
+  content: "\e95c";
+}
+.lxp-ThumbsDown:before {
+  content: "\e95a";
+}
+.lxp-ThumbsUp:before {
+  content: "\e95b";
 }
 .lxp-Reset:before {
   content: "\e984";

@@ -800,6 +800,12 @@
       }
       &:first-child {
         color: #999999;
+        &.no {
+          margin-right: 0;
+          &::after {
+            content: '';
+          }
+        }
         &::after {
           content: "/";
           position: absolute;
