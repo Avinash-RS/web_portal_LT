@@ -188,7 +188,7 @@ export class QuestionanswerComponent implements OnInit {
 
   openQuestionDialog(templateRef) {
     this.dialog.open(templateRef, {
-      panelClass: 'resourseContainer',
+      panelClass: 'QAContainer',
       width: "50%",
       height: "55%",
       closeOnNavigation: true,

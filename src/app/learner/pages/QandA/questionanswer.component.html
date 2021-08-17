@@ -5,6 +5,7 @@
             <li><em routerLink="/Learner/MyCourse" class="lxp-Right_Direction_Arrow backArrow"></em>{{courseName}}</li>
             <li>Question and Answer</li>
         </ul>
+       
         <div class="qandaSection">
             <!-- <h2>Question and Answer</h2> -->
             <!-- <input type="text" [(ngModel)]="searchKey"> -->
@@ -16,6 +17,13 @@
                     </ng-template>
                     <span *ngIf="showSkeleton;else skeleton">
                         <span *ngIf="qaDataList.length;else noquescard">
+                            <div class="searchFilter">
+                                <mat-form-field appearance="outline">
+                                    <input matInput [(ngModel)]="searchKey" placeholder="Search...">
+                                    <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
+                                    <mat-icon matSuffix *ngIf="searchKey"(click)="searchKey=''">close</mat-icon>
+                                </mat-form-field>
+                            </div>
                             <div class="content" *ngFor="let item of qaDataList | paginate: { totalItems: totalCount, itemsPerPage: 10, currentPage: pageNumber + 1}; let i = index ">
                                 <div class="askedDate d-flex flex-row">
                                     <span>Question : {{i+ 1}} |</span>
@@ -39,6 +47,13 @@
                     </ng-template>
                     <span *ngIf="showSkeleton;else skeleton">
                         <span *ngIf="qaDataList.length;else noquescard">
+                            <div class="searchFilter">
+                                <mat-form-field appearance="outline">
+                                    <input matInput [(ngModel)]="searchKey" placeholder="Search...">
+                                    <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
+                                    <mat-icon matSuffix *ngIf="searchKey"(click)="searchKey=''">close</mat-icon>
+                                </mat-form-field>
+                            </div>
                             <div class="content" *ngFor="let item of qaDataList | paginate: { totalItems: totalCount, itemsPerPage: 10, currentPage: pageNumber + 1}">
                                 <div class="askedDate d-flex flex-row">
                                     <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
@@ -59,6 +74,13 @@
                     </ng-template>
                     <span *ngIf="showSkeleton;else skeleton">
                         <span *ngIf="qaDataList.length;else noquescard">
+                            <div class="searchFilter">
+                                <mat-form-field appearance="outline">
+                                    <input matInput [(ngModel)]="searchKey" placeholder="Search...">
+                                    <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
+                                    <mat-icon matSuffix *ngIf="searchKey"(click)="searchKey=''">close</mat-icon>
+                                </mat-form-field>
+                            </div>
                             <div class="content" *ngFor="let item of qaDataList | paginate: { totalItems: totalCount, itemsPerPage: 10, currentPage: pageNumber + 1}">
                                 <div class="askedDate d-flex flex-row">
                                     <span><em class="lxp-AccountCircle"></em>{{item.askedBy}}</span>
