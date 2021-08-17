@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   currentYear = new Date().getFullYear();
   infoClose = true;
   loader = false;
-  username = new FormControl('', [Validators.required, Validators.email]);
+  username = new FormControl('', [Validators.required]);
   signInPage = true;
   forgotPage = false;
   signUpPage = false;
@@ -76,17 +76,20 @@ export class LoginComponent implements OnInit {
       this.service.forgotUsernameandPassword('password', 'email','', encryptedmail)
         .subscribe((data: any) => {
           this.loader = true;
-          if (data.data.get_forgot_username_mobile_email.success === 'true') {
+          if (data?.data?.get_forgot_username_mobile_email?.success === 'true') {
             this.toastr.success(data.data.get_forgot_username_mobile_email.message, null);
             this.loader = false;
             this.signInPage = false;
             this.forgotPage = true;
             this.username.reset();
           } else {
-            this.toastr.error(data.data.get_forgot_username_mobile_email.message, null);
+            this.toastr.error(data?.data?.get_forgot_username_mobile_email?.message, null);
             this.loader = false;
             this.username.reset();
           }
+        },
+        err =>{
+          this.toastr.error('Email or Username not found');
         });
   }
   portalToIggnite() {
