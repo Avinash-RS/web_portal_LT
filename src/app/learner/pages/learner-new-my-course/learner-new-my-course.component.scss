@@ -647,16 +647,18 @@
       }
     }
     .searchProgression {
+      &.no {
+        @media only screen and (min-width: 569px) {
+          min-height: 58px;
+        }
+        @media only screen and (min-width: 1560px) {
+          min-height: 68px;
+        }
+      }
       .percentage {
         width: 39%;
         margin-right: -11px;
         @media only screen and (min-width: 569px) {
-          width: 26%;
-        }
-        @media only screen and (min-width: 1140px) {
-          width: 30%;
-        }
-        @media only screen and (min-width: 1560px) {
           width: 30%;
         }
       }
@@ -1450,14 +1452,14 @@
     top: 20px;
     left: auto;
     right: 0;
-    width: 55%;
+    width: 42%;
     text-align: right;
   }
   @media only screen and (min-width: 1140px) {
-    width: 42%;
+    width: 37%;
   }
   @media only screen and (min-width: 1540px) {
-    width: 30%;
+    width: 25%;
   }
   &.noHandIcon {
     display: none;

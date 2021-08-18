@@ -18,7 +18,7 @@
 <ngx-ui-loader [hasProgressBar] = 'isProgressBar' [text]="percentage"></ngx-ui-loader>
 
 
-<ng-container *ngIf="isFooterVisible">
+<ng-container *ngIf="isFooterVisible && !hideLeftMenu">
 <figure class="chatBotIcon" (click)="toggleChatbot()">
   <img src="/assets/learner/chatBot.svg" alt="" />
 </figure>
