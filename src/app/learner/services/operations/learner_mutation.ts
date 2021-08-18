@@ -1187,8 +1187,8 @@ data{
 }
 `;
 export const getengineersForumData = gql`
-mutation getengineersForumData($userId:String!,$courseId:String!,$requestType:String!,$pagenumber:Int!){
-  getengineersForumData(userId:$userId,courseId:$courseId,requestType:$requestType,pagenumber:$pagenumber){
+mutation getengineersForumData($userId:String!,$courseId:String!,$requestType:String!,$pagenumber:Int!,$searchString:String){
+  getengineersForumData(userId:$userId,courseId:$courseId,requestType:$requestType,pagenumber:$pagenumber,searchString:$searchString){
 success
 message
 error_msg
