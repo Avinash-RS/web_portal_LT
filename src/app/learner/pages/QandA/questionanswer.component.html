@@ -2,7 +2,7 @@
 <div class="qandWrapper d-flex">
     <div class="questionLeftCol">
         <ul class="breadcrumb">
-            <li><em routerLink="/Learner/MyCourse" class="lxp-Right_Direction_Arrow backArrow"></em>{{courseName}}</li>
+            <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em>{{courseName}}</li>
             <li>Q&A</li>
         </ul>
         <div class="qandaSection">
@@ -18,7 +18,7 @@
                         <span *ngIf="qaDataList.length;else noquescard">
                             <div class="content" *ngFor="let item of qaDataList | paginate: { totalItems: totalCount, itemsPerPage: 10, currentPage: pageNumber + 1}; let i = index ">
                                 <div class="askedDate d-flex flex-row">
-                                    <span>Question : {{i+ 1}} |</span>
+                                    <span>Question : {{i+ 1}}</span>
                                     <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                                 </div>
                                 <h4 [innerHTML]="item.question"></h4>

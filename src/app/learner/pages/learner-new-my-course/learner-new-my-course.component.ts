@@ -330,7 +330,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
   //ASK A QUESTION
   gotoAskQuestions(c) {
     c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
-    if(this.userDetailes.org_type === 'vocational') {
       const detail = {
         course_name: c.course_name,
         course_id: c.course_id,
@@ -344,10 +343,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
       if(c.course_status!=='start'){
       this.router.navigateByUrl('/Learner/askQuestions', { state: { detail } });
     }
-    } else{
-      // window.open(this.externalWeb, "_blank");
-    }
-    
   }
 // ACTIVITY NAVIGATION 
   gotoSubmissionDetails(course) {
