@@ -30,8 +30,10 @@
       bottom: auto;
       color: #c02222;
     }
-    &:nth-child(2) {
-      color: #999999;
+    &:first-child {
+      span {
+        color: #999999;
+      }
     }
     &:last-child {
         &::after {
@@ -1061,10 +1063,11 @@ margin-top: 8px;
 }
 ::ng-deep.trendingCategoriesScrollActivity .drag-scroll-content {
   @media only screen and (max-width: 1199px) {
-    //overflow: auto hidden !important;
+    overflow: auto !important;
   }
   @media only screen and (max-width: 767px) {
     //height: 96px !important;
+    height: calc(100% + 32px) !important;
   }
 }
 ::ng-deep.scrollingData .drag-scroll-content {

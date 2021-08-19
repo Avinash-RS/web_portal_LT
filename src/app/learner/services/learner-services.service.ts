@@ -1170,14 +1170,15 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  getengineersForumData(userId,courseId,requestType,pagenumber) {
+  getengineersForumData(userId,courseId,requestType,pagenumber,searchString) {
     return this.Apollo.query({
       query: getengineersForumData,
       variables: {
         userId,
         courseId,
         requestType,
-        pagenumber
+        pagenumber,
+        searchString
       }
     });
   }

@@ -558,7 +558,15 @@ export class CoursedetailsComponent implements OnInit {
 
     }
   }
-
+  downloadResource(){
+    const a = document.createElement('a')
+    a.target= '_blank';
+    a.href = this.scromApiData.resourceUrl;
+    a.download = this.scromApiData.resourceUrl.split('/').pop()
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+  }
   // get Scrom module and topic
   playerModuleAndTopic() {
     this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
@@ -825,6 +833,16 @@ export class CoursedetailsComponent implements OnInit {
       closeOnNavigation: true,
       disableClose: true,
     });
+    const backdrop = document.getElementsByClassName('cdk-overlay-backdrop')[0];
+    const containerarea = document.getElementsByClassName('mat-dialog-container')[0];
+    rclickctrl(backdrop)
+    rclickctrl(containerarea)
+    function rclickctrl(element){
+      element.addEventListener("contextmenu", ( e )=> {
+        e.preventDefault();
+        return false;
+      } );
+    }
   }
   resourseAccord(courseResource, index) {
     if (courseResource) {

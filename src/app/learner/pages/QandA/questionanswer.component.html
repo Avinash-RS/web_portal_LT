@@ -2,12 +2,12 @@
 <div class="qandWrapper d-flex">
     <div class="questionLeftCol">
         <ul class="breadcrumb">
-            <li><em routerLink="/Learner/MyCourse" class="lxp-Right_Direction_Arrow backArrow"></em>{{courseName}}</li>
-            <li>Question and Answer</li>
+            <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em>{{courseName}}</li>
+            <li>Q&A</li>
         </ul>
+       
         <div class="qandaSection">
-            <!-- <h2>Question and Answer</h2> -->
-            <!-- <input type="text" [(ngModel)]="searchKey"> -->
+           
             <mat-tab-group animationDuration="100ms" [(selectedIndex)]="selectedIndex"
                 (selectedTabChange)="contentChange()">
                 <mat-tab>
@@ -15,10 +15,18 @@
                         Answered
                     </ng-template>
                     <span *ngIf="showSkeleton;else skeleton">
+                        <!-- <div class="searchFilter">
+                            <mat-form-field appearance="outline">
+                                <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller()' placeholder="Search...">
+                                <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
+                                <mat-icon matSuffix *ngIf="searchKey"(click)="searchKey='';this.getQAData();">close</mat-icon>
+                            </mat-form-field>
+                        </div> -->
                         <span *ngIf="qaDataList.length;else noquescard">
+                            
                             <div class="content" *ngFor="let item of qaDataList | paginate: { totalItems: totalCount, itemsPerPage: 10, currentPage: pageNumber + 1}; let i = index ">
                                 <div class="askedDate d-flex flex-row">
-                                    <span>Question : {{i+ 1}} |</span>
+                                    <span>Question : {{i+ 1}}</span>
                                     <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                                 </div>
                                 <h4 [innerHTML]="item.question"></h4>
@@ -38,7 +46,15 @@
                         Unanswered
                     </ng-template>
                     <span *ngIf="showSkeleton;else skeleton">
+                        <!-- <div class="searchFilter">
+                            <mat-form-field appearance="outline">
+                                <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller()' placeholder="Search...">
+                                <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
+                                <mat-icon matSuffix *ngIf="searchKey"(click)="searchKey='';this.getQAData();">close</mat-icon>
+                            </mat-form-field>
+                        </div> -->
                         <span *ngIf="qaDataList.length;else noquescard">
+                            
                             <div class="content" *ngFor="let item of qaDataList | paginate: { totalItems: totalCount, itemsPerPage: 10, currentPage: pageNumber + 1}">
                                 <div class="askedDate d-flex flex-row">
                                     <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
@@ -58,7 +74,15 @@
                         All
                     </ng-template>
                     <span *ngIf="showSkeleton;else skeleton">
+                        <!-- <div class="searchFilter">
+                            <mat-form-field appearance="outline">
+                                <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller()' placeholder="Search...">
+                                <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
+                                <mat-icon matSuffix *ngIf="searchKey"(click)="searchKey='';this.getQAData();">close</mat-icon>
+                            </mat-form-field>
+                        </div> -->
                         <span *ngIf="qaDataList.length;else noquescard">
+                           
                             <div class="content" *ngFor="let item of qaDataList | paginate: { totalItems: totalCount, itemsPerPage: 10, currentPage: pageNumber + 1}">
                                 <div class="askedDate d-flex flex-row">
                                     <span><em class="lxp-AccountCircle"></em>{{item.askedBy}}</span>
@@ -111,13 +135,13 @@
 </div>
 
 <ng-template #questionDialog>
-    <div class="d-flex justify-content-between titleMargin">
+    <div class="d-flex justify-content-between titleMargin" (contextmenu)="contextmenu()">
         <div class="font-weight-bold">
             <h2>Ask A Question</h2>
         </div>
         <div><em (click)="dialogClose()" class="lxp-Close pointer"></em></div>
     </div>
-    <div class="dialogContent">
+    <div class="dialogContent" (contextmenu)="contextmenu()">
 
         <div>
             <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
@@ -151,8 +175,8 @@
         <figure>
             <img src="/assets/learner/QandA.svg" alt="QandA">
         </figure>
-        <p *ngIf="selectedIndex == 0">{{unAnsCheck?'Your question will be answered soon':'You have not asked any questions yet'}}</p>
-        <p *ngIf="selectedIndex == 1">{{'You have not asked any questions yet'}}</p>
+        <p *ngIf="selectedIndex == 0">{{unAnsCheck?'Your question will be answered soon':'You have not asked any questions'}}</p>
+        <p *ngIf="selectedIndex == 1">{{'You have not asked any questions'}}</p>
         <p *ngIf="selectedIndex == 2">{{'No Q&As to display at the moment'}}</p>
     </div>
 </ng-template>

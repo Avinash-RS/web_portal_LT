@@ -14,7 +14,7 @@
                     </div>
                     <!-- //////////// -->
                     <div class="prevNext">
-                        <p>TASKS TO DO</p>
+                        <!-- <p>TASKS TO DO</p> -->
                         <div class="wrapperTaskToDo d-flex align-items-center justify-content-between">
                             <div class="currentMonth">
                                 <h3>{{ viewDate | calendarDate:('month' + 'ViewTitle'):'en' }}</h3>
@@ -34,7 +34,7 @@
                             </div>
                         </div>
                         <div class="weekviewHead">
-                            <mwl-calendar-week-view  [selected]="selectedDate" (dayHeaderClicked)="getLearnerActivity($event.day.date);highlightSelectday($event)" [weekStartsOn]="1" [(viewDate)]="viewDate" [events]="events"></mwl-calendar-week-view>
+                            <mwl-calendar-week-view [selected]="selectedDate" (dayHeaderClicked)="getLearnerActivity($event.day.date);highlightSelectday($event)" [weekStartsOn]="1" [(viewDate)]="viewDate" [events]="events"></mwl-calendar-week-view>
                         </div>
                     </div>
                     <div class="minHeight">
@@ -139,6 +139,7 @@
                 <div class="somethingNew">
                     <h3>Welcome!</h3>
                     <h4>Let's learn something new today!</h4>
+                    <!-- Don't Delete below commented-->
                     <!-- <div class="thingsContent">
                         <p>Here are your top 3 things to do!</p>
                         <div class="check">
@@ -254,7 +255,13 @@
                                         <div class="rightCol">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
-                                                <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
+                                                <div class="searchProgression d-flex justify-content-end align-items-center" [ngClass]="userDetailes.org_type === 'collegeconnect' ? 'yes':'no'">
+                                                    <!-- <span class="searchGallery" *ngIf ="shotDotSearch" (click)="openGallery(item)"><em class="lxp-Search"></em></span> -->
+                                                    <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
+                                                        <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#00b0ed'" [innerStrokeColor]="'#e7e8ea'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4" [subtitleFontSize]="5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
+                                                    </div>
+                                                </div>
+                                                <!-- <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
                                                     <em class="lxp-Dot_Menu"></em>
                                                 </span>
                                                 <mat-menu #menu="matMenu" xPosition="before">
@@ -265,15 +272,7 @@
                                                     <button mat-menu-item (click)="openReport(item)">
                                                       <span><em class="lxp-Edit_Document mr-2"></em>Course Assessment Report</span>
                                                     </button>
-                                                  </mat-menu>
-                                            </div>
-                                            <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
-                                                <span class="by">By: <b>{{item.courseBy}}</b></span>
-                                                <span class="credits" *ngIf ="item.enableCredits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
-                                                <span>
-                                                    <em class="lxp-Duration"></em> 
-                                                    Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
-                                                </span>
+                                                </mat-menu> -->
                                             </div>
                                             <div *ngIf="item?.batchid" class="showLessContent">
                                                 <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
@@ -281,6 +280,14 @@
                                                 </button>
                                                 <div [ngClass]="!item.isReadMore ? '' : 'showText'">
                                                     <p [ngClass]="!item.isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
+                                                    <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
+                                                        <span class="by">By: <b>{{item.courseBy}}</b></span>
+                                                        <span class="credits" *ngIf ="item.enableCredits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
+                                                        <span>
+                                                            <em class="lxp-Duration"></em> 
+                                                            Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                        </span>
+                                                    </div>
                                                     <div class="type d-flex justify-content-start">
                                                         <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
                                                         <span>
@@ -302,7 +309,7 @@
                                                             <p>Activities</p>
                                                         </div>
                                                         <!--  -->
-                                                        <div  class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
+                                                        <div class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
                                                             <span><em class="lxp-book-question"></em></span>
                                                             <p>Q&A</p>
                                                         </div>
@@ -312,12 +319,13 @@
                                                         </div>
                                                     </div>
                                                     <div class="courseProgression d-flex align-items-center">
+                                                        <!-- <div class="icons" (click)="openReport(item)">
+                                                            <span><em class="lxp-Assessment_Report"></em></span>
+                                                            <p>Assessment Report</p>
+                                                        </div> -->
                                                         <div class="icons" (click)="gotoProgression(item)">
-                                                            <span><em class="lxp-Course_Progression"></em></span>
-                                                            <p>Course Progression</p>
-                                                        </div>
-                                                        <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
-                                                            <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#00b0ed'" [innerStrokeColor]="'#e7e8ea'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4" [subtitleFontSize]="5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
+                                                            <span><em class="lxp-Analytics"></em></span>
+                                                            <p>Learning Progression</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -356,10 +364,16 @@
                                         <div class="rightCol">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
+                                                <div class="searchProgression d-flex justify-content-end align-items-center">
+                                                    <!-- <span class="searchGallery" *ngIf ="shotDotSearch" (click)="openGallery(item)"><em class="lxp-Search"></em></span> -->
+                                                    <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
+                                                        <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#00b0ed'" [innerStrokeColor]="'#e7e8ea'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4" [subtitleFontSize]="5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
+                                                    </div>
+                                                </div>
                                                 <!-- <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
                                                     <em class="lxp-Dot_Menu"></em>
                                                 </span> -->
-                                                <mat-menu #menu="matMenu" xPosition="before">
+                                                <!-- <mat-menu #menu="matMenu" xPosition="before">
                                                     <button mat-menu-item (click)="openGallery(item)">
                                                       <span><em class="lxp-Search mr-2"></em>Search</span>
                                                     </button>
@@ -367,15 +381,7 @@
                                                     <button mat-menu-item (click)="openReport(item)">
                                                       <span><em class="lxp-Edit_Document mr-2"></em>Course Assessment Report</span>
                                                     </button>
-                                                  </mat-menu>
-                                            </div>
-                                            <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
-                                                <span class="by">By: <b>{{item.courseBy}}</b></span>
-                                                <span class="credits" *ngIf ="item.enableCredits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
-                                                <span>
-                                                    <em class="lxp-Duration"></em> 
-                                                    Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
-                                                </span>
+                                                  </mat-menu> -->
                                             </div>
                                             <div *ngIf="item?.batchid" class="showLessContent">
                                                 <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
@@ -383,6 +389,14 @@
                                                 </button>
                                                 <div [ngClass]="!item.isReadMore ? '' : 'showText'">
                                                     <p [ngClass]="isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
+                                                    <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
+                                                        <span class="by">By: <b>{{item.courseBy}}</b></span>
+                                                        <span class="credits" *ngIf ="item.enableCredits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
+                                                        <span>
+                                                            <em class="lxp-Duration"></em> 
+                                                            Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                        </span>
+                                                    </div>
                                                     <div class="type d-flex justify-content-start">
                                                         <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
                                                         <span>
@@ -403,7 +417,7 @@
                                                         <p>Activities</p>
                                                     </div>
                                                     <!--  -->
-                                                    <div *ngIf="userDetailes.org_type!== 'collegeconnect'" class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
+                                                    <div class="icons" *ngIf="userDetailes.org_type!== 'collegeconnect'" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
                                                         <span><em class="lxp-book-question"></em></span>
                                                         <p>Q&A</p>
                                                     </div>
@@ -413,12 +427,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="courseProgression d-flex align-items-center">
+                                                    <!-- <div class="icons" (click)="openReport(item)">
+                                                        <span><em class="lxp-Assessment_Report"></em></span>
+                                                        <p>Assessment Report</p>
+                                                    </div> -->
                                                     <div class="icons" (click)="gotoProgression(item)">
-                                                        <span><em class="lxp-Course_Progression"></em></span>
-                                                        <p>Course Progression</p>
-                                                    </div>
-                                                    <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
-                                                        <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#00b0ed'" [innerStrokeColor]="'#e7e8ea'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4" [subtitleFontSize]="5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
+                                                        <span><em class="lxp-Analytics"></em></span>
+                                                        <p>Learning Progression</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -455,10 +470,16 @@
                                         <div class="rightCol">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
+                                                <div class="searchProgression d-flex justify-content-end align-items-center">
+                                                    <!-- <span class="searchGallery" *ngIf ="shotDotSearch" (click)="openGallery(item)"><em class="lxp-Search"></em></span> -->
+                                                    <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
+                                                        <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#00b0ed'" [innerStrokeColor]="'#e7e8ea'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4" [subtitleFontSize]="5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
+                                                    </div>
+                                                </div>
                                                 <!-- <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
                                                     <em class="lxp-Dot_Menu"></em>
                                                 </span> -->
-                                                <mat-menu #menu="matMenu" xPosition="before">
+                                                <!-- <mat-menu #menu="matMenu" xPosition="before">
                                                     <button mat-menu-item (click)="openGallery(item)">
                                                       <span><em class="lxp-Search mr-2"></em>Search</span>
                                                     </button>
@@ -466,15 +487,7 @@
                                                     <button mat-menu-item (click)="openReport(item)">
                                                       <span><em class="lxp-Edit_Document mr-2"></em>Course Assessment Report</span>
                                                     </button>
-                                                  </mat-menu>
-                                            </div>
-                                            <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
-                                                <span class="by">By: <b>{{item.courseBy}}</b></span>
-                                                <span class="credits" *ngIf ="item.enableCredits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
-                                                <span>
-                                                    <em class="lxp-Duration"></em> 
-                                                    Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
-                                                </span>
+                                                </mat-menu> -->
                                             </div>
                                             <div *ngIf="item?.batchid" class="showLessContent">
                                                 <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
@@ -482,6 +495,14 @@
                                                 </button>
                                                 <div [ngClass]="!item.isReadMore ? '' : 'showText'">
                                                     <p [ngClass]="isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
+                                                    <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
+                                                        <span class="by">By: <b>{{item.courseBy}}</b></span>
+                                                        <span class="credits" *ngIf ="item.enableCredits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
+                                                        <span>
+                                                            <em class="lxp-Duration"></em> 
+                                                            Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                        </span>
+                                                    </div>
                                                     <div class="type d-flex justify-content-start">
                                                         <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
                                                         <span>
@@ -502,7 +523,7 @@
                                                         <p>Activities</p>
                                                     </div>
                                                     <!--  -->
-                                                    <div *ngIf="userDetailes.org_type!== 'collegeconnect'" class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
+                                                    <div class="icons" *ngIf="userDetailes.org_type!== 'collegeconnect'" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
                                                         <span><em class="lxp-book-question"></em></span>
                                                         <p>Q&A</p>
                                                     </div>
@@ -512,12 +533,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="courseProgression d-flex align-items-center">
+                                                    <!-- <div class="icons" (click)="openReport(item)">
+                                                        <span><em class="lxp-Assessment_Report"></em></span>
+                                                        <p>Assessment Report</p>
+                                                    </div> -->
                                                     <div class="icons" (click)="gotoProgression(item)">
-                                                        <span><em class="lxp-Course_Progression"></em></span>
-                                                        <p>Course Progression</p>
-                                                    </div>
-                                                    <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
-                                                        <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#00b0ed'" [innerStrokeColor]="'#e7e8ea'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4" [subtitleFontSize]="5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
+                                                        <span><em class="lxp-Analytics"></em></span>
+                                                        <p>Learning Progression</p>
                                                     </div>
                                                 </div>
                                             </div>

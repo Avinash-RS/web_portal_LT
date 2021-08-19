@@ -60,11 +60,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.lxp-ThumbsDown:before {
-  content: "\e95a";
+.lxp-Activities_New:before {
+  content: "\e93f";
 }
-.lxp-ThumbsUp:before {
-  content: "\e95b";
+.lxp-book-question:before {
+  content: "\e92c";
+}
+.lxp-Play:before {
+  content: "\e935";
+}
+.lxp-Assessment_Report:before {
+  content: "\e95d";
 }
 .lxp-Launch:before {
   content: "\e959";
@@ -105,9 +111,6 @@
 .lxp-Duration:before {
   content: "\e934";
 }
-.lxp-Activities_New:before {
-  content: "\e935";
-}
 .lxp-QA:before {
   content: "\e936";
 }
@@ -134,9 +137,6 @@
 }
 .lxp-Timer:before {
   content: "\e93e";
-}
-.lxp-Play:before {
-  content: "\e93f";
 }
 .lxp-Edit_Document:before {
   content: "\e940";
@@ -315,6 +315,15 @@
 .lxp-stack:before {
   content: "\e905";
 }
+.lxp-download:before {
+  content: "\e95c";
+}
+.lxp-ThumbsDown:before {
+  content: "\e95a";
+}
+.lxp-ThumbsUp:before {
+  content: "\e95b";
+}
 .lxp-Reset:before {
   content: "\e984";
 }
@@ -335,9 +344,6 @@
 }
 .lxp-bookmark-o:before {
   content: "\e928";
-}
-.lxp-book-question:before {
-  content: "\e92c";
 }
 .lxp-info-circle:before {
   content: "\f05a";

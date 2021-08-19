@@ -790,7 +790,8 @@
       font-weight: 400;
       line-height: normal;
       position: relative;
-      margin-right: 15px;
+      margin-right: 10px;
+      padding-right: 5px;
       em {
         display: inline-block;
         transform: scale(-1);
@@ -800,6 +801,12 @@
       }
       &:first-child {
         color: #999999;
+        &.no {
+          margin-right: 0;
+          &::after {
+            content: '';
+          }
+        }
         &::after {
           content: "/";
           position: absolute;
