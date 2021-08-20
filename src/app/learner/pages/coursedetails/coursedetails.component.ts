@@ -820,7 +820,7 @@ export class CoursedetailsComponent implements OnInit {
     if (!this.drawersOpen && this.scromApiData?.toc != '0') {
       this.drawersOpen = this.drawersOpen ? false : true
     } else {
-      this.route.navigateByUrl('/Learner/MyCourse');
+      this.route.navigateByUrl('/Learner/calendaractivity');
     }
 
   }

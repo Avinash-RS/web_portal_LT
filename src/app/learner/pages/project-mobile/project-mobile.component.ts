@@ -31,6 +31,8 @@ export class ProjectMobileComponent implements OnInit {
   fileName: any;
   groupDetails = [];
   groupName: any;
+  groupCount:any;
+  learnerGroupDetails =[];
   previewDoc: any;
   videoSource: any;
   openedIndex;
@@ -440,6 +442,8 @@ export class ProjectMobileComponent implements OnInit {
   }
   learnerView(templateRef: TemplateRef<any>, project) {
     this.groupName = project.projectActivity.groupname;
+    this.groupCount = project.projectActivity.groupDetails.length;
+    this.learnerGroupDetails = project.projectActivity.groupDetails;
     this.dialog.open(templateRef, {
           width: '50%',
           height: '30%',
