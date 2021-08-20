@@ -1,6 +1,6 @@
 <app-header></app-header>
 <app-performance-page-mobile [performDetailPageData]="perfornDetaildata" *ngIf="performdetailPageView"></app-performance-page-mobile>
-<div class="con-1" *ngIf="!performdetailPageView">
+<div class="activitiesWrapper" *ngIf="!performdetailPageView">
 
   <!-- <div style="margin-bottom: 5px;" class="">
     <div class="commonBackStyle">
@@ -509,9 +509,12 @@
                 <div class="projectLeftContent">
                   <div class="topic text-left d-flex">
                     <mat-icon class="assignIcon">assignment</mat-icon>
-                    <span class="f_size_16 f_wt_600 projHead">{{project.projectActivity.topic_id}}</span>
+                    <span class="f_size_16 f_wt_600 projHead">{{project.projectActivity.module_id}}</span>
                   </div>
-                  <div class="t-l-1 ml-11">
+                  <div class="t-l-1 ml-4">
+                    {{project.projectActivity.topic_id}}
+                   </div>
+                  <div class="t-l-1 ml-4">
                     Activity Description: {{project.projectActivity.activityname}}
                   </div>
                 </div>

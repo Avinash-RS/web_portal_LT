@@ -112,7 +112,12 @@ export class CalendarActivityComponent implements OnInit {
     const topicStart = new Date();
     this.getCalendarCount(topicStart);
     this.getLearnerActivity('month',topicStart);
-    
+    if(this.userDetailes.org_type == 'collegeconnect'){
+      this.filterBy[2].key = "Industry Talk";
+    }
+    if(this.userDetailes.org_type !== 'collegeconnect'){
+      this.filterBy[2].key = "Live Interactions";
+    }
   }
   
   getCourseData(){

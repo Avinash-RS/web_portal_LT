@@ -1,7 +1,9 @@
 @import "variable";
 
-.con-1 {
+.activitiesWrapper {
     padding: 15px;
+    height: 100%;
+    background-color: #f2f2f2;
 }
 
 .breadcrumb {
@@ -599,8 +601,9 @@ margin-bottom: 9px;
   // margin-left: 25px;
   margin-top: 5px;
 }
-
-
+.grpIcon {
+  cursor: default;
+}
 // .grpIcon {
 //   font-size: 11px;
 //   cursor: default;
