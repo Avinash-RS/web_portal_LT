@@ -76,13 +76,13 @@
               <div *ngFor="let moduleItem of apidata;let number = index">
                 <div class="mt-2" *ngIf="moduleItem.week === apidata[i]?.week">
             <mat-accordion>
-              <mat-expansion-panel>
+              <mat-expansion-panel (opened)="handleOpened(moduleItem)" (closed)="handleClosed(moduleItem)">
                 <mat-expansion-panel-header>
                   <mat-panel-title>
                     <div class="week-block">
                       <span>
-                      <div [ngStyle]="moduleItem.week!==apidata[number-1]?.week? {'color': 'inherit'} : {'color': 'white'}" class="week-text">Week</div>
-                      <div [ngStyle]="moduleItem.week!==apidata[number-1]?.week? {'color': 'inherit'} : {'color': 'white'}" class="week-number">{{numPrefix(moduleItem.week)}}</div>
+                      <div [ngStyle]="(moduleItem.week!==apidata[number-1]?.week || moduleItem.isOpened) ? {'color': 'inherit'} : {'color': 'white'}" class="week-text">Week</div>
+                      <div [ngStyle]="(moduleItem.week!==apidata[number-1]?.week || moduleItem.isOpened) ? {'color': 'inherit'} : {'color': 'white'}" class="week-number">{{numPrefix(moduleItem.week)}}</div>
                     </span>
                     </div>
                     <div>
