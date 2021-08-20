@@ -151,14 +151,19 @@ export class CalendarActivityComponent implements OnInit {
     const monthValue = moment(value).format('YYYY-MM');
     this.learnerService.getAllActivity(this.userDetails.user_id, monthValue).subscribe((result: any) => {
       const activityDetailsList = result.data.getcalenderactivity.message;
-
       activityDetailsList.forEach(element => {
         element.start = new Date(element.start);
         element.end = new Date (element.end);
         element.color = {primary : element.color};
         element.allDay = true;
       });
-      this.events = activityDetailsList;
+      this.events = activityDetailsList;​
+      // setTimeout(()=>{
+      //   var eventsParent = document.querySelectorAll('cal-events');
+      //   eventsParent.forEach((element:any) => {
+      //     console.log(element)
+      //   })
+      // },1000)
     });
   }
   getLearnerActivity(view,selectedDate, day?: CalendarMonthViewDay){
