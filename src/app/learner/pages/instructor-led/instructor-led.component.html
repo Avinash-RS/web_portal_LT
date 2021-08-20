@@ -1,9 +1,11 @@
 <app-header></app-header>
 
+<div class="instructorLedWrapper">
 <div class="breadcrumbPading">
   <ul class="breadcrumb">
     <li><em (click)="getBack()" class="lxp-Go backArrow"></em> <span>{{course?.name}}</span></li>
-    <li>Live Interactions</li>
+    <li *ngIf="userDetails.org_type !== 'collegeconnect'">Live Interactions</li>
+    <li *ngIf="userDetails.org_type == 'collegeconnect'">Industry Talk</li>
   </ul>
 </div>
 
@@ -204,6 +206,7 @@
     </div>
   </div>
 
+</div>
 </div>
 
 <ng-template #videoRecorded>

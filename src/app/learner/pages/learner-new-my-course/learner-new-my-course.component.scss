@@ -586,6 +586,13 @@
         &:last-child {
           margin-right: 0;
         }
+        &:nth-child(2) {
+          span {
+            em {
+              font-size: 23px;
+            }
+          }
+        }
         span {
           display: inline-flex;
           justify-content: center;
@@ -593,17 +600,18 @@
           border-radius: 50%;
           width: 42px;
           height: 42px;
-          background: #DBE9FC;
+          background: rgba(39, 187, 238, 0.4);
           transition: 0.3s ease-in background;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
           em {
-            color: #4B4B4B;
+            color: #1B4E9B;
             font-size: 18px;
             @media only screen and (max-width: 767px) {
               font-size: 20px;
             }
           }
           &:hover {
-            background: #1B4E9B;
+            background: rgba(39, 187, 238, 1);
             border: none;
             em {
               color: #ffffff;
@@ -622,10 +630,10 @@
       .icons {
         cursor: pointer;
         p {
-          font-size: 11px;
+          font-size: 13px;
           font-weight: 400;
-          color: #333333;
-          margin: 6px 0 0 0 !important;
+          color: #000000;
+          margin: 10px 0 0 0 !important;
           line-height: normal;
           @media only screen and (max-width: 991px) {
             display: none;
@@ -1153,7 +1161,7 @@
           border-radius: 3px;
           text-align: center;
           padding: 2px 8px;
-          font-size: 10px;
+          font-size: 11px;
           font-weight: 400;
           line-height: normal;
           color: #333333;
@@ -1235,14 +1243,14 @@
         }
       }
       .titleFontSize {
-        font-size: 12px;
-        font-weight: 500;
+        font-size: 14px;
+        font-weight: 400;
         color: #c02222;
         line-height: 15px;
         margin-top: 3px;
       }
       .type, .topic, .date {
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 400;
         color: #999999;
         line-height: normal;

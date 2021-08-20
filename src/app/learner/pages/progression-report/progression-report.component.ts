@@ -365,4 +365,10 @@ export class ProgressionReportComponent implements OnInit {
     });
   }
 
+  handleOpened(moduleItem){
+    moduleItem.isOpened = true;
+  }
+  handleClosed(moduleItem){
+    moduleItem.isOpened = false;
+  }
 }
