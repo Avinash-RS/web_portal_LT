@@ -981,6 +981,12 @@
     background: inherit !important;
     /* color: black; */
   }
+  .mat-content{
+    margin-bottom: 1em !important;
+  }
+  .mat-expansion-panel-header{
+    border-bottom: 1px solid #c5c5c5 !important;
+  }
 }
 // No Card
 .noCard {

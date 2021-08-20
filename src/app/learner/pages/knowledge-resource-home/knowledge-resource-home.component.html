@@ -6,17 +6,16 @@
       margin-left: 11px;
       margin-bottom: 20px;" class="animated animatedFadeInUp fadeInUp ">Knowledge Resources</div>
   </div>
-  <div *ngIf="details.length" style="display: flex;
-    justify-content: center;">
-    <input class="search-inp" placeholder="Search..." (keyup)="checkKnowledgeRec($event)" [(ngModel)]="searchDetails">
-    
-    <ng-container *ngIf="searchDetails && searchDetails.length > 0; else searchIcon">
-      <mat-icon class="close-search" (click)="isLoadBalanced = false ;searchDetails = ''">close</mat-icon>
-    </ng-container>
-    <ng-template #searchIcon>
-      <mat-icon class="close-search">search</mat-icon>
-    </ng-template>
-    
+  <div class="searchWrapper" *ngIf="details.length">
+    <div>
+      <input class="search-inp" placeholder="Search..." (keyup)="checkKnowledgeRec($event)" [(ngModel)]="searchDetails">
+      <ng-container *ngIf="searchDetails && searchDetails.length > 0; else searchIcon">
+        <mat-icon class="close-search" (click)="isLoadBalanced = false ;searchDetails = ''">close</mat-icon>
+      </ng-container>
+      <ng-template #searchIcon>
+        <mat-icon class="close-search">search</mat-icon>
+      </ng-template>
+    </div>
   </div>
 
   <div class="no-data" *ngIf="isLoadBalanced">

@@ -405,11 +405,11 @@
     </div>
     <ng-template #learnerDialog>
       <div>
-        <span class="grpName"><strong>{{groupName}} ({{groupDetails.length}})</strong></span>
+        <span class="grpName"><strong>{{groupName}} ({{groupCount}})</strong></span>
         <mat-icon class="closeDialog" (click)="closedialogbox()">close</mat-icon>
       </div>
       <div class="learner">
-        <ul class="list-group" *ngFor="let learner of groupDetails">
+        <ul class="list-group" *ngFor="let learner of learnerGroupDetails">
           <li class="list-group-item">{{learner.name}}</li>
         </ul>
       </div>

@@ -2,6 +2,8 @@
 .knowledge-landing-container {
     overflow: hidden;
     padding: 20px 0;
+    height: 100%;
+    background-color: #f2f2f2;
     .header-section {
         border-bottom: 1px solid lightgray;
         // height: 9em;
@@ -36,14 +38,10 @@
         display: flex;
         flex-wrap: wrap;
         min-height: 25.8em;
-        // margin-bottom:50px;//for footer temp fix CAN REMOVE
         .resource-card {
-            // height: 170px;
-            // width: 220px;
-            border: 1px solid #707070;
+            border: 1px solid #cdcdcd;
             border-radius: 5px;
             margin: 20px 0;
-            // margin: 20px 20px 0 30px;
             cursor: pointer;
             transition: 0.5s all ease-in-out;
             position: relative;
@@ -140,43 +138,7 @@
       }
     }
   }
-// .commonBackStyle {
-//     margin-top: 15px !important;
-//     padding-left: 15px;
-//     display: inline-block;
-//     width: 75px;
-//     &:hover {
-//         i, span {
-//             color: #C02222;
-//         }
-//     }
-//     .backArrow {
-//         font-size: 6px;
-//         color: #231F20;
-//         font-weight: bold;
-//         transform: rotate(-90deg);
-//         display: inline-block;
-//         vertical-align: middle;
-//         cursor: pointer;
-//     }
-//     span {
-//         cursor: pointer;
-//         display: inline-block;
-//         vertical-align: middle;
-//         font-size: 18px;
-//         color: #999999;
-//         font-weight: lighter;
-//         margin: 0 0 0 5px;
-//     }
-//     .backText {
-//         display: inline-block;
-//         font-style: initial;
-//         vertical-align: middle;
-//         margin-left: 6px;
-//     }
-// }
-
-
+  
 .courseNameBreadcrum {
     margin-left: 7px;
     display: inline-block;
