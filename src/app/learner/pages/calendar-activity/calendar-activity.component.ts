@@ -158,12 +158,25 @@ export class CalendarActivityComponent implements OnInit {
         element.allDay = true;
       });
       this.events = activityDetailsList;​
-      // setTimeout(()=>{
-      //   var eventsParent = document.querySelectorAll('cal-events');
-      //   eventsParent.forEach((element:any) => {
-      //     console.log(element)
-      //   })
-      // },1000)
+      setTimeout(()=>{
+        var eventsParent = document.querySelectorAll('.cal-events');
+        eventsParent.forEach((element:any) => {
+          var children = Array.from(element.children)
+          var duplicateColor = []
+            children = children.filter((dayEvent,index,self)=>{
+            var style = window.getComputedStyle(dayEvent as HTMLElement);
+            var color = style.getPropertyValue('background-color');
+            var found = duplicateColor.find((element)=>{
+              return element == color
+            })
+            if(found){
+              dayEvent['style'].display = 'none'
+            } else {
+              duplicateColor.push(color);
+            }            
+          })
+        })
+      },1000)
     });
   }
   getLearnerActivity(view,selectedDate, day?: CalendarMonthViewDay){

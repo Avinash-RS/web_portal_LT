@@ -160,7 +160,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     if(this.userDetailes.org_type != "collegeconnect"){
       this.shotDotSearch = false;
     }
-
+    this.getModuleStatus();
   }
   insidengOnInit() {
     this.CommonServices.openAvailCourcePopup.subscribe((data: any) => {
@@ -267,7 +267,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
             }
           }
         })
-        console.log( this.courseDetailsList)
         this.courseSkel = true
 
       });
@@ -407,9 +406,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
 
   getLearnerActivity(selectedDate) {
-    this.viewDate = new Date(selectedDate)
-    console.log(this.viewDate)
-    
+    this.viewDate = new Date(selectedDate)    
     const dateValue = moment(selectedDate).format('YYYY-MM-DD');
     this.dayMonth = selectedDate;
     const empty = undefined;
@@ -431,33 +428,11 @@ export class LearnerNewMyCourseComponent implements OnInit {
     },
     err =>{
     })
-    // this.learnerService.getReadLeanerActivity(this.userId, dateValue, empty, "", "", 'day').subscribe((res: any) => {
-    //   this.dayMonth = selectedDate;
-    //   if (res.data?.get_read_learner_activity?.message.length > 0) {
-    //     this.noActivity = false;
-    //     this.showSkeleton = false;
-    //     this.showErrorCard = false;
-    //     this.learnerActivityList = res.data?.get_read_learner_activity?.message;
-    //     this.learnerActivityList.sort((a, b) => {
-    //       return new Date(a.activity_details.startdate).getTime() - new Date(b.activity_details.startdate).getTime();
-
-    //     });
-    //   } else {
-    //     this.noActivity = true;
-    //     this.showSkeleton = false;
-    //     this.errorMessage = res.data?.get_read_learner_activity?.error_msg;
-    //     this.showErrorCard = true;
-    //     this.learnerActivityList = [];
-    //   }
-    // },
-    //   err => { }
-    // );
   }
 
   getMyJobRole() {
     this.learnerService.getCountForJobroleCategories(this.userDetailes._id, this.userDetailes.user_id).subscribe((data: any) => {
       this.vocationalselectjobRole = data.data.getCountForJobroleCategories.data
-      // this.vocationalselectjobRole = [];
       if(this.vocationalselectjobRole?.length > 0) {
         this.showJobRole = true;
       }
@@ -525,5 +500,11 @@ export class LearnerNewMyCourseComponent implements OnInit {
     } else {
       return 'warn';
     }
+ }
+
+ getModuleStatus(){
+   this.learnerService.recentlycourse(this.userDetailes.user_id).subscribe((data)=>{
+     console.log(data)
+   })
  }
 }
