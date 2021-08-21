@@ -26,7 +26,7 @@ boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignm
      getSpecificationdetails, getSubCategory, getTrendingcourse, getUserdetail,
      getUserdetailUsername, listContent, login, playerModuleAndTopic, singleBatchInfo,
      syllabusofParticularScorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData, get_batchwise_learner_dashboard_data, get_learner_dashboard_count,
-     getCourseGallery , getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata,selfLearningdatabyUserId, getengineersForumQA_Count
+     getCourseGallery , getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata,selfLearningdatabyUserId, getengineersForumQA_Count,recentlycourse
 } from './operations/learner_query';
 
 
@@ -1200,6 +1200,15 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
         courseId,
         question,
         courseName
+      }
+    });
+  }
+
+  recentlycourse(user_id) {
+    return this.Apollo.query({
+      query: recentlycourse,
+      variables: {
+        user_id
       }
     });
   }

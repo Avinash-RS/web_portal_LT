@@ -159,9 +159,14 @@ export class CalendarActivityComponent implements OnInit {
       });
       this.events = activityDetailsList;​
       // setTimeout(()=>{
-      //   var eventsParent = document.querySelectorAll('cal-events');
+      //   var eventsParent = document.querySelectorAll('.cal-events');
       //   eventsParent.forEach((element:any) => {
-      //     console.log(element)
+      //     var children = Array.from(element.children)
+      //     children.forEach((dayEvent)=>{
+      //        var style = window.getComputedStyle(dayEvent);
+      //         var top = style.getPropertyValue('background-color');
+      //      console.log(top)
+      //     })
       //   })
       // },1000)
     });

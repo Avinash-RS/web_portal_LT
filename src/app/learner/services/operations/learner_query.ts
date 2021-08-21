@@ -2459,6 +2459,7 @@ query getProgressionActivitydata($userId:String!,$courseId:String!){
       }
       }
       `;
+
 export const getengineersForumQA_Count = gql`
       query getengineersForumQA_Count($userId:String!,$courseId:String!){
         getengineersForumQA_Count(userId:$userId,courseId:$courseId){
@@ -2468,6 +2469,27 @@ export const getengineersForumQA_Count = gql`
           data {
             questionCount
             anweredCount
+          }
+        }
+      }
+      `;
+
+export const recentlycourse = gql`
+      query recentlycourse($user_id:String!){
+        recentlycourse(user_id:$user_id){
+          success
+          message
+          data {
+            inProgressModule
+            {
+            course_name
+              module
+            }
+            completedTopic{
+              course_name
+              module
+              topic
+              }
           }
         }
       }
