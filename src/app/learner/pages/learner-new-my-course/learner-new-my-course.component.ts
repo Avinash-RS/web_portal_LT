@@ -17,7 +17,6 @@ const DEFAULT_DURATION = 300;
 
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
-
   weekViewColumnSubHeader({ date, locale, }: DateFormatterParams): string {
     return formatDate(date, 'dd', locale);
   }
@@ -47,6 +46,7 @@ export class CustomDateFormatter extends CalendarDateFormatter {
 })
 
 export class LearnerNewMyCourseComponent implements OnInit {
+  @ViewChild(DragScrollComponent) ds: DragScrollComponent;
   showJobRole = false;
   isReadMore = true;
   show = true;
@@ -58,6 +58,34 @@ export class LearnerNewMyCourseComponent implements OnInit {
   runnablePlatforms = ['MacIntel', 'Win32', 'Linux x86_64'];
   jobroleCategoryId = 'All';
   showSkeleton = false;
+  leftNavDisabled = false;
+  rightNavDisabled = false;
+
+  TopicsOptions: OwlOptions = {
+    loop: false,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    slideBy: 7,
+    navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right p-t-2"></i>'],
+    responsive: {
+      0: {
+        items: 4
+      },
+      400: {
+        items: 4
+      },
+      740: {
+        items: 4
+      },
+      940: {
+        items: 4
+      }
+    },
+    nav: true,
+    margin: 20,
+  };
   //Carousel
   missedTopicsKnowledgeCheck: OwlOptions = {
     loop: true,
@@ -124,6 +152,9 @@ export class LearnerNewMyCourseComponent implements OnInit {
   vocationalselectjobRole= [];
   testvals: any;
   shotDotSearch:boolean = true;
+  inProgressModule: any;
+  completedTopic: any;
+  displaySlides = false;
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
@@ -162,6 +193,21 @@ export class LearnerNewMyCourseComponent implements OnInit {
     }
     this.getModuleStatus();
   }
+  
+  moveLeft() {
+    this.ds.moveLeft();
+  }
+  moveRight() {
+    this.ds.moveRight();
+  }
+  leftBoundStat(reachesLeftBound: boolean) {
+    this.leftNavDisabled = reachesLeftBound;
+  }
+
+  rightBoundStat(reachesRightBound: boolean) {
+    this.rightNavDisabled = reachesRightBound;
+  }
+
   insidengOnInit() {
     this.CommonServices.openAvailCourcePopup.subscribe((data: any) => {
       this.availableCource = data;
@@ -503,8 +549,15 @@ export class LearnerNewMyCourseComponent implements OnInit {
  }
 
  getModuleStatus(){
-   this.learnerService.recentlycourse(this.userDetailes.user_id).subscribe((data)=>{
-     console.log(data)
+   this.learnerService.recentlycourse(this.userDetailes.user_id).subscribe((data: any)=>{
+    //  console.log(data);
+     this.inProgressModule = data?.data?.recentlycourse?.data?.inProgressModule;
+     this.completedTopic = data?.data?.recentlycourse?.data?.completedTopic;
+    //  console.log(this.inProgressModule, 'InProgress');
+    setTimeout(()=>{
+      this.displaySlides = true;
+    },1000)
    })
  }
+
 }
