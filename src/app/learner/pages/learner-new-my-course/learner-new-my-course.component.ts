@@ -60,32 +60,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
   showSkeleton = false;
   leftNavDisabled = false;
   rightNavDisabled = false;
-
-  TopicsOptions: OwlOptions = {
-    loop: false,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
-    slideBy: 7,
-    navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right p-t-2"></i>'],
-    responsive: {
-      0: {
-        items: 4
-      },
-      400: {
-        items: 4
-      },
-      740: {
-        items: 4
-      },
-      940: {
-        items: 4
-      }
-    },
-    nav: true,
-    margin: 20,
-  };
   //Carousel
   missedTopicsKnowledgeCheck: OwlOptions = {
     loop: true,
@@ -142,6 +116,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   dayMonth: any;
   noActivity: boolean;
   courseSkel: boolean = false;
+  inProgressRecently: boolean = false;
   mode = 'determinate';
   bufferValue = 100;
   selectedJobRoleData = {
@@ -549,11 +524,25 @@ export class LearnerNewMyCourseComponent implements OnInit {
  }
 
  getModuleStatus(){
+  // this.inProgressRecently = true;
    this.learnerService.recentlycourse(this.userDetailes.user_id).subscribe((data: any)=>{
-    //  console.log(data);
      this.inProgressModule = data?.data?.recentlycourse?.data?.inProgressModule;
+    //  this.inProgressModule = null
      this.completedTopic = data?.data?.recentlycourse?.data?.completedTopic;
-    //  console.log(this.inProgressModule, 'InProgress');
+     ///
+     if(this.inProgressModule?.length > 0) {
+      this.inProgressRecently = true;
+     }
+     else {
+       this.inProgressRecently = false;
+     }
+    ///
+     if(this.completedTopic?.length > 0) {
+      this.inProgressRecently = true;
+     }
+     else {
+       this.inProgressRecently = false;
+     }
     setTimeout(()=>{
       this.displaySlides = true;
     },1000)
