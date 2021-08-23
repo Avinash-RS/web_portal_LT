@@ -17,7 +17,6 @@ const DEFAULT_DURATION = 300;
 
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
-
   weekViewColumnSubHeader({ date, locale, }: DateFormatterParams): string {
     return formatDate(date, 'dd', locale);
   }
@@ -47,6 +46,7 @@ export class CustomDateFormatter extends CalendarDateFormatter {
 })
 
 export class LearnerNewMyCourseComponent implements OnInit {
+  @ViewChild(DragScrollComponent) ds: DragScrollComponent;
   showJobRole = false;
   isReadMore = true;
   show = true;
@@ -58,6 +58,34 @@ export class LearnerNewMyCourseComponent implements OnInit {
   runnablePlatforms = ['MacIntel', 'Win32', 'Linux x86_64'];
   jobroleCategoryId = 'All';
   showSkeleton = false;
+  leftNavDisabled = false;
+  rightNavDisabled = false;
+
+  TopicsOptions: OwlOptions = {
+    loop: false,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    slideBy: 7,
+    navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right p-t-2"></i>'],
+    responsive: {
+      0: {
+        items: 4
+      },
+      400: {
+        items: 4
+      },
+      740: {
+        items: 4
+      },
+      940: {
+        items: 4
+      }
+    },
+    nav: true,
+    margin: 20,
+  };
   //Carousel
   missedTopicsKnowledgeCheck: OwlOptions = {
     loop: true,
@@ -124,6 +152,9 @@ export class LearnerNewMyCourseComponent implements OnInit {
   vocationalselectjobRole= [];
   testvals: any;
   shotDotSearch:boolean = true;
+  inProgressModule: any;
+  completedTopic: any;
+  displaySlides = false;
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
@@ -160,8 +191,23 @@ export class LearnerNewMyCourseComponent implements OnInit {
     if(this.userDetailes.org_type != "collegeconnect"){
       this.shotDotSearch = false;
     }
-
+    this.getModuleStatus();
   }
+  
+  moveLeft() {
+    this.ds.moveLeft();
+  }
+  moveRight() {
+    this.ds.moveRight();
+  }
+  leftBoundStat(reachesLeftBound: boolean) {
+    this.leftNavDisabled = reachesLeftBound;
+  }
+
+  rightBoundStat(reachesRightBound: boolean) {
+    this.rightNavDisabled = reachesRightBound;
+  }
+
   insidengOnInit() {
     this.CommonServices.openAvailCourcePopup.subscribe((data: any) => {
       this.availableCource = data;
@@ -267,7 +313,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
             }
           }
         })
-        console.log( this.courseDetailsList)
         this.courseSkel = true
 
       });
@@ -407,9 +452,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
 
   getLearnerActivity(selectedDate) {
-    this.viewDate = new Date(selectedDate)
-    console.log(this.viewDate)
-    
+    this.viewDate = new Date(selectedDate)    
     const dateValue = moment(selectedDate).format('YYYY-MM-DD');
     this.dayMonth = selectedDate;
     const empty = undefined;
@@ -431,33 +474,11 @@ export class LearnerNewMyCourseComponent implements OnInit {
     },
     err =>{
     })
-    // this.learnerService.getReadLeanerActivity(this.userId, dateValue, empty, "", "", 'day').subscribe((res: any) => {
-    //   this.dayMonth = selectedDate;
-    //   if (res.data?.get_read_learner_activity?.message.length > 0) {
-    //     this.noActivity = false;
-    //     this.showSkeleton = false;
-    //     this.showErrorCard = false;
-    //     this.learnerActivityList = res.data?.get_read_learner_activity?.message;
-    //     this.learnerActivityList.sort((a, b) => {
-    //       return new Date(a.activity_details.startdate).getTime() - new Date(b.activity_details.startdate).getTime();
-
-    //     });
-    //   } else {
-    //     this.noActivity = true;
-    //     this.showSkeleton = false;
-    //     this.errorMessage = res.data?.get_read_learner_activity?.error_msg;
-    //     this.showErrorCard = true;
-    //     this.learnerActivityList = [];
-    //   }
-    // },
-    //   err => { }
-    // );
   }
 
   getMyJobRole() {
     this.learnerService.getCountForJobroleCategories(this.userDetailes._id, this.userDetailes.user_id).subscribe((data: any) => {
       this.vocationalselectjobRole = data.data.getCountForJobroleCategories.data
-      // this.vocationalselectjobRole = [];
       if(this.vocationalselectjobRole?.length > 0) {
         this.showJobRole = true;
       }
@@ -526,4 +547,17 @@ export class LearnerNewMyCourseComponent implements OnInit {
       return 'warn';
     }
  }
+
+ getModuleStatus(){
+   this.learnerService.recentlycourse(this.userDetailes.user_id).subscribe((data: any)=>{
+    //  console.log(data);
+     this.inProgressModule = data?.data?.recentlycourse?.data?.inProgressModule;
+     this.completedTopic = data?.data?.recentlycourse?.data?.completedTopic;
+    //  console.log(this.inProgressModule, 'InProgress');
+    setTimeout(()=>{
+      this.displaySlides = true;
+    },1000)
+   })
+ }
+
 }

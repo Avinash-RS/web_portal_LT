@@ -218,7 +218,6 @@
         .self-learning-container {
           margin-top: 2em;
           padding: 0 5px;
-          
           @include xl {
             margin-top: 3em;
             padding: 0 15px;
@@ -235,7 +234,6 @@
                     border-radius: 4px;
                     margin-top: 15px !important;
                     background-color: #ffffff;
-                    
                     &:first-child {
                       margin-top: 0 !important;
                     }
@@ -267,6 +265,7 @@
               display: flex;
               padding: 0.5em 1.2em;
               border-radius: 0;
+              justify-content: space-between;
               &:last-child {
                 border-bottom: 1px solid #7070706b;
               }
@@ -424,13 +423,24 @@
     .self-learning-container {
       margin-top: 2em;
       padding: 0 5px;
-      
       @include xl {
       margin-top: 3em;
       padding: 0 15px;
       }
       .expansion-container {
         margin-top: 1em;
+        .innerLoop {
+          &:last-child {
+            .rightSec {
+              border-bottom: 0;
+            }
+          }
+          .mat-expansion-panel-header[aria-expanded=true] {
+            .rightSec {
+              border-bottom: 0;
+            }
+          }
+        }
         @include lg {
           margin-top: 2em;
         }
@@ -463,18 +473,16 @@
       .color-red {
         color: #ed1c24;
       }
-      .module-block {
-        width: 20em;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        @media only screen and (max-width: 374px) {
-          width: 17em;
-        }
-        @media only screen and (max-width: 374px) {
-          width: 14em;
-        }
-      }
+      // .module-block {
+      //   width: 20em;
+        
+      //   @media only screen and (max-width: 374px) {
+      //     width: 17em;
+      //   }
+      //   @media only screen and (max-width: 374px) {
+      //     width: 14em;
+      //   }
+      // }
       .topic-container {
         border-top: 1px solid #7070706b;
         border-right: 1px solid #7070706b;
@@ -482,10 +490,14 @@
         background: #F7F7FF;
         font-size: 13px;
         display: flex;
-        padding: 0.5em 0.9em;
         flex-direction: column;
+        justify-content: space-between;
+        padding: 0.5em 0.9em;
         position: relative;
         border-radius: 0;
+        @media only screen and (min-width: 720px) {
+          flex-direction: row;
+        }
         &:last-child {
           border-bottom: 1px solid #7070706b;
         }
@@ -497,20 +509,32 @@
           display: flex;
           flex-direction: column;
           justify-content: center; 
-          flex-grow: 2;
+          width: 95%;
+          @media only screen and (min-width: 720px) {
+            width: 38%;
+          }
+          .module-block {
+            width: 99%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+          // flex-grow: 2;
         }
         .rightpan {
-          flex-grow: 10;
+          // flex-grow: 10;
           padding: 0;
           padding-top: 10px;
+          width: 100%;
+          @media only screen and (min-width: 720px) {
+            width: 53%;
+          }
           @include md {
             padding: 0 10px;
           }
           .laya {
             display: flex;
             justify-content: space-between;
-            padding-bottom: 3px;
-            border-bottom: 1px solid #bebec3;
             flex-wrap: wrap;
             > div {
               width: 33%;
@@ -537,6 +561,11 @@
               text-align: left;
             } 
           }
+          .layb {
+            border-top: 1px solid #bebec3;
+            padding-top: 3px;
+            display: none;
+          }
           .layb .types + div {
             text-align: left;
             .font-weight-bold {
@@ -551,10 +580,11 @@
         .statusarea {
           display: flex;
           align-items: center; 
-          flex-grow: 0.5;
-          min-width: 20px;
+          // flex-grow: 0.5;
+          // min-width: 20px;
           position: absolute;
           right: 7px;
+          width: 5%;
           @include md {
             position: relative;
             right: auto;
@@ -600,15 +630,16 @@
       display: flex;
       padding: 0.5em 1.5em;
       border-radius: 0;
+      justify-content: space-between;
       &:last-child {
         border-bottom: 1px solid #7070706b;
       }
       .leftpan {
         border-bottom: 1px solid #d4d2d2;
-        flex-grow: 3;
+        // flex-grow: 3;
       }
       .rightpan {
-        flex-grow: 5;
+        // flex-grow: 5;
       }
       .statusarea {
         display: flex;
@@ -851,26 +882,26 @@
 ::ng-deep .self-learning-container {
   .mat-expansion-panel-header {   
     font-size: 13px;
-    padding: 0 0.5em;
-    padding-top: 7px;
+    padding: 0 15px;
     height: auto !important;
     @include xl {
-      height: 60px !important;
+      // height: 60px !important;
     }
     .mat-content {
       display: block;
       width: 100%;  
       .mat-expansion-panel-header-title {
         display: flex;
-        flex-direction: column;
+        // flex-direction: column;
         margin: 0;
-        padding-left: 50px;
+        // padding-left: 50px;
         @include md {
           padding-left: 0;
           flex-direction: row;
+          align-items: center;
         }
         &> div {
-          flex-grow: 1;
+          // flex-grow: 1;
           text-align: center;
           &.week-block + div {
             text-align: left;
@@ -878,47 +909,84 @@
           }
           &.week-block {
             font-size: 12px;
-            position: absolute;
-            left: 0;
-            bottom: 5px;
-            top: 0;
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             padding: 0 9px;
-            padding-top: 30px;
-            @include md {
-              position: initial;
-              padding-top: 0;
+            width: 50px;
+            @media only screen and (min-width: 720px) {
+              width: 100px;
             }
           }
           .subinfo {
             display: flex;
             justify-content: space-around;
-            padding: 10px 0 10px 0.8em;
-
+            padding: 10px 0;
             > div {
-              flex-grow: 1;
-              min-width: 75px;
+              // flex-grow: 1;
+              // min-width: 75px;
               text-align: left;
             }
           }
+        }
+        .rightSec {
+          width: calc(100% - 50px);
+          border-bottom: 1px solid #c5c5c5;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          position: relative;
+          @media only screen and (min-width: 720px) {
+            flex-wrap: nowrap;
+            width: calc(100% - 100px);
           }
+          .weekModuleName {
+            width: 100%;
+            padding-top: 10px;
+            @media only screen and (min-width: 720px) {
+              width: 38%;
+            }
+            .module-block {
+              width: 80%;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              @media only screen and (min-width: 720px) {
+                width: 99%;
+              }
+            }
+          }
+          .infos {
+            width: 100%;
+            @media only screen and (min-width: 720px) {
+              width: 48%;
+            }
+          }
+          .statusProgression {
+            width: auto;
+            @media only screen and (min-width: 720px) {
+              width: 8%;
+            }
+          }
+        }
           div:nth-child(2) {
             font-weight: 700;
           }
           .statusring {
             position: absolute;
-            right: 5px;
-            top: 5px;
-            @include md {
-              position: initial;
+            right: 0;
+            top: 0;
+            @media only screen and (min-width: 720px) {
+              position: relative;
             }
           } 
           .subinfo {    
             display: flex;
-            justify-content: space-around;
-            flex-grow: 3;
+            justify-content: space-between;
+            // flex-grow: 3;
             padding: 10px 0;
             padding-left: 10px;
             @include md {
@@ -929,14 +997,6 @@
               text-align: left;
             }
           }
-      }
-    }
-    span:last-child {
-      min-width: 20px;
-      text-align: center;
-      margin-top: 50px;
-      @include md {
-        margin-top: 0;
       }
     }
   }
@@ -982,10 +1042,10 @@
     /* color: black; */
   }
   .mat-content{
-    margin-bottom: 1em !important;
+    // margin-bottom: 1em !important;
   }
   .mat-expansion-panel-header{
-    border-bottom: 1px solid #c5c5c5 !important;
+    // border-bottom: 1px solid #c5c5c5 !important;
   }
 }
 // No Card
