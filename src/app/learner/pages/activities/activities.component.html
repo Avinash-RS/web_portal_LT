@@ -121,7 +121,7 @@
                   <div class="col-md-4 col-sm-12 col-12 third">
                     <div class="f_size_16 f_wt_600 align-center work">Your work</div>
                     <div class="box-0-3">
-                      <div class="fileData ml-auto mr-auto mb-3 d-flex" *ngIf="assignment?.files?.filename">
+                      <div class="fileData ml-auto mr-auto mb-3 d-flex" *ngIf="assignment?.files?.filename && !assignment?.files?.showPreview">
                         <mat-icon *ngIf="assignment.files.doc_type == 'image/jpeg'|| assignment.files.doc_type == 'image/png' || assignment.files.doc_type =='image/jpg'" class="videoPlay float-left">photo</mat-icon>
                         <mat-icon *ngIf="assignment.files.doc_type == 'application/pdf'" class="videoPlay float-left">picture_as_pdf </mat-icon>                     
                         <span class="uploadfileName assignementName" style="margin-top: 4px;position: inherit;" matTooltip="{{assignment.files.filename}}" matTooltipClass="custom-mat-tooltip">
@@ -137,10 +137,26 @@
                         </span>
                       </ng-container>
                       </div>
+                      
+                      <div class="fileData ml-auto mr-auto mb-3 d-flex" *ngIf="assignment?.files?.showPreview">
+                        <mat-icon *ngIf="assignmentFile.type == 'image/jpeg'|| assignment.files.doc_type == 'image/png' || assignment.files.doc_type =='image/jpg'" class="videoPlay float-left">photo</mat-icon>
+                        <mat-icon *ngIf="assignmentFile.type == 'application/pdf'" class="videoPlay float-left">picture_as_pdf </mat-icon>
+                        <span class="uploadfileName assignementName" style="margin-top: 4px;position: inherit;" matTooltip="{{assignmentFile.name}}}" matTooltipClass="custom-mat-tooltip">
+                          {{assignmentFile.name}}
+                        </span>
+                      </div>
+
                       <div class="align-center">
                         <input class="form-control border-right-0" type='file' accept="image/png,image/jpeg,image/jpg,application/pdf" id="upload-photo" #fileInput (change)="uploadAssignmentsFile($event,assignment.files)">
                         <button mat-stroked-button class="upload-btn" (click)="fileInput.click()" [disabled]="assignment.files.grade_status != 'Evaluated' && !assignment.files?.enableUpload" *ngIf="assignment.files.grade_status !== 'Evaluated'"> <mat-icon class="icon-color m-t-m-2">add</mat-icon> Upload files </button>
                         <p class="uploadMessage" *ngIf="assignment.files.grade_status !== 'Evaluated'" >Max File Size : 10 MB, Format : JPEG,JPG,PNG,PDF</p>
+                        <div>
+                          <button *ngIf="assignment?.files?.disablesubmitbtn" mat-stroked-button class="submitted-btn mt-2">
+                            <span *ngIf="!assignment?.files.filename">Submit</span> 
+                            <span *ngIf="assignment?.files.filename">Submited</span>  
+                          </button>
+                          <button *ngIf="!assignment?.files?.disablesubmitbtn" mat-stroked-button class="submit-btn mt-2"(click)="submitAssigmnemtData(assignment.files)">Submit</button>
+                        </div>
                       </div>
                     </div>
                   </div>
