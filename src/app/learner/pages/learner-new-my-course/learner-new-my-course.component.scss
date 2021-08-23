@@ -448,12 +448,15 @@
         font-size: 18px;
         font-weight: 400;
         color: #000000;
-        line-height: 19px;
+        line-height: 21px;
         margin-bottom: 10px;
         margin-top: 10px;
         @media only screen and (min-width: 720px) {
           font-size: 21px;
           margin-top: 0;
+        }
+        @media only screen and (min-width: 1140px) {
+          line-height: 19px;
         }
       }
       .showLessContent {
@@ -804,6 +807,14 @@
 .recentlyLearnedTopics {
   .wrapper {
     width: 98%;
+    margin: 0 auto;
+  }
+  .topicsContainer {
+    &:last-child {
+      .missedTopics {
+        margin-right: 0;
+      }
+    }
   }
 }
 .missedTopicsKnowledgeCheck,
@@ -818,32 +829,43 @@
     position: relative;
     .leftArrow,
     .rightArrow {
-      border: 1px solid rgba(204, 204, 204, 0.3);
-      box-shadow: 0 5px 3px rgba(0, 0, 0, 0.2);
-      border-radius: 50%;
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 30px;
-      height: 30px;
-      top: 50%;
-      transform: translateY(-80%);
-      background-color: #ffffff;
-      em {
-        font-size: 10px;
-        color: #808080;
+      button {
+        border: 1px solid rgba(204, 204, 204, 0.3);
+        box-shadow: 0 5px 3px rgba(0, 0, 0, 0.2);
+        border-radius: 50%;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        top: 50%;
+        min-width: auto;
+        padding: 0;
+        transform: translateY(-80%);
+        background-color: #ffffff;
+        em {
+          font-size: 10px;
+          color: #808080;
+        }
+        &.disableArrow {
+          opacity: 0.5;
+        }
       }
     }
     .leftArrow {
-      left: -15px;
-      em {
-        display: inline-block;
-        transform: rotate(180deg);
+      button {
+        left: -15px;
+        em {
+          display: inline-block;
+          transform: rotate(180deg);
+        }
       }
     }
     .rightArrow {
-      right: -15px;
+      button {
+        right: -15px;
+      }
     }
   }
 }
@@ -852,15 +874,30 @@
   border: 1px solid #cccccc;
   border-radius: 3px;
   padding: 15px;
-  width: 335px;
+  width: 363px;
   margin-bottom: 15px;
   margin-right: 15px;
+  @media only screen and (min-width: 720px){
+    width: 285px;
+  }
+  @media only screen and (min-width: 992px){
+    width: 265px;
+  }
+  @media only screen and (min-width: 1140px){
+    width: 270px;
+  }
+  @media only screen and (min-width: 1540px){
+    width: 335px;
+  }
   h6,
   span,
   h5,
   h4 {
     font-weight: 400;
     line-height: normal;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
   .moduleName,
   .topicName {
@@ -871,7 +908,8 @@
   }
   h6 {
     font-size: 15px;
-    color: #666666;
+    color: #C02222;
+    font-weight: 700;
   }
   h5 {
     font-size: 16px;
@@ -1472,12 +1510,12 @@
       padding-right: 25px;
     }
   }
-  @media only screen and (min-width:768px) {
+  @media only screen and (min-width:720px) {
     padding-right: 85px;
     top: 20px;
     left: auto;
     right: 0;
-    width: 42%;
+    width: 52%;
     text-align: right;
   }
   @media only screen and (min-width: 1140px) {
