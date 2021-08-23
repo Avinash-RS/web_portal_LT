@@ -66,7 +66,6 @@ export class HeaderComponent implements OnInit {
     this.activeUrl = this.router.url;
     this.orgDetails = JSON.parse(localStorage.getItem('organizationDetails')) || null;
     this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
-    this.profilepic = this.userDetailes.profile_img;
     this.role = localStorage.getItem('role') || sessionStorage.getItem('role');
     this.userimage = localStorage.getItem('user_img') || sessionStorage.getItem('user_img');
     this.fullName = localStorage.getItem('Fullname');
@@ -74,6 +73,7 @@ export class HeaderComponent implements OnInit {
     setTimeout(() => {
       this.userDetailes = this.gs.checkLogout();
       this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
+      this.profilepic = this.userDetailes.profile_img;
     }, 3000);
     if(this.profilepic == "" || this.profilepic == null){
       this.profilepic = this.userimage;
