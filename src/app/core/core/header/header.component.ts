@@ -66,16 +66,14 @@ export class HeaderComponent implements OnInit {
     this.activeUrl = this.router.url;
     this.orgDetails = JSON.parse(localStorage.getItem('organizationDetails')) || null;
     this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
-    this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
-    // this.userDetailes = this.gs.checkLogout();
     this.profilepic = this.userDetailes.profile_img;
-    console.log(this.profilepic, 'asdfasdf');
     this.role = localStorage.getItem('role') || sessionStorage.getItem('role');
     this.userimage = localStorage.getItem('user_img') || sessionStorage.getItem('user_img');
     this.fullName = localStorage.getItem('Fullname');
     this.getShortName(this.fullName);
     setTimeout(() => {
       this.userDetailes = this.gs.checkLogout();
+      this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
     }, 3000);
     if(this.profilepic == "" || this.profilepic == null){
       this.profilepic = this.userimage;
