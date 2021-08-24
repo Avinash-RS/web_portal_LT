@@ -65,14 +65,14 @@ export class HeaderComponent implements OnInit {
     });
     this.activeUrl = this.router.url;
     this.orgDetails = JSON.parse(localStorage.getItem('organizationDetails')) || null;
-    this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(sessionStorage.getItem('UserDetails'));
+    this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
+    this.profilepic = this.userDetailes.profile_img;
     this.role = localStorage.getItem('role') || sessionStorage.getItem('role');
     this.userimage = localStorage.getItem('user_img') || sessionStorage.getItem('user_img');
     this.fullName = localStorage.getItem('Fullname');
     this.getShortName(this.fullName);
     setTimeout(() => {
       this.userDetailes = this.gs.checkLogout();
-      this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
       this.profilepic = this.userDetailes.profile_img;
     }, 3000);
     if(this.profilepic == "" || this.profilepic == null){
@@ -154,7 +154,7 @@ export class HeaderComponent implements OnInit {
         
         this.services.getIpAddressByUrl();
         this.userDetailes = null;
-        this.services.logout(this.loginDetails._id, false).subscribe((logout: any) => {
+        this.services.logout(this.userDetailes._id, false).subscribe((logout: any) => {
           localStorage.clear();
           sessionStorage.clear();
           this.router.navigate(['/Learner/login']);

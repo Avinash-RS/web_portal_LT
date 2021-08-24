@@ -175,8 +175,11 @@
         <figure>
             <img src="/assets/learner/QandA.svg" alt="QandA">
         </figure>
+        <div *ngIf="!searchKey">
         <p *ngIf="selectedIndex == 0">{{unAnsCheck?'Your question will be answered soon':'You have not asked any questions'}}</p>
         <p *ngIf="selectedIndex == 1">{{'You have not asked any questions'}}</p>
         <p *ngIf="selectedIndex == 2">{{'No Q&As to display at the moment'}}</p>
+        </div>
+        <p *ngIf="searchKey">{{'No results found'}}</p>
     </div>
 </ng-template>
