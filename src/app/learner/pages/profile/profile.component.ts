@@ -702,6 +702,12 @@ export class ProfileComponent implements OnInit {
         this.service.imageupload(fb).subscribe(data => {
           this.profileForm.controls.profile_img.setValue(data['url']);
           localStorage.setItem('user_img', data['url']);
+          this.currentUser.profile_img = data['url'];
+          var profileDetails = JSON.parse(localStorage.getItem('UserDetails'));
+          if(profileDetails){
+            profileDetails.profile_img = data['url']
+          }
+          localStorage.setItem('UserDetails', JSON.stringify(profileDetails));
           this.profileForm.controls.profile_img.setValue(localStorage.getItem('user_img'));
         });
       }
