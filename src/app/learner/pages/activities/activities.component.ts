@@ -175,6 +175,8 @@ export class ActivitiesComponent implements OnInit {
   pagination = false;
   page = 0;
   noofItems = 0;
+  AssigmnemtPayload :FormData;
+
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
     private dialog: MatDialog, private toastr: ToastrService,
     public route: Router, public datePipe: DatePipe, private ngxLoader: NgxUiLoaderService) {
@@ -426,6 +428,8 @@ export class ActivitiesComponent implements OnInit {
           this.courseEndDate = moment(batchEndDate).endOf('day').toDate();
 
           this.assignmentContent.forEach((fileData,i) => {
+            fileData.files.disablesubmitbtn = true;
+            fileData.files.showPreview = false;
             if (this.openedIndex === i && !value) {
               if (fileData.isOpen) {
                 fileData.isOpen = false;
@@ -537,12 +541,15 @@ export class ActivitiesComponent implements OnInit {
     else{
       this.assignmentFile = event.target.files[0] as File;
       this.fileInput.nativeElement.value = '';
-      this.postAssignmentsFile(assignemnt.file_id,assignemnt.module_id,assignemnt.topic_id,assignemnt.activityname,assignemnt.total_mark,assignemnt.activityenddate );
+      assignemnt.disablesubmitbtn = false;
+      assignemnt.showPreview = true;
+      this.postAssignmentsFile(assignemnt.file_id,assignemnt.module_id,assignemnt.topic_id,assignemnt.activityname,assignemnt.total_mark,assignemnt.activityenddate);
     }
   }
 
-  postAssignmentsFile(fileId,modulename,topicname,assignemtname,score,endDate,) {
+  postAssignmentsFile(fileId,modulename,topicname,assignemtname,score,endDate) {
     this.ngxLoader.start();
+    this.AssigmnemtPayload = null;
     if (!score) {
       score = 50;
     }
@@ -565,10 +572,17 @@ export class ActivitiesComponent implements OnInit {
     payload.append('type_name', assignemtname);
     payload.append('submit_status', submitStatus);
     payload.append('total_mark', score);
-    this.Lservice.uploadAssignments(payload).subscribe((data: any) => {
+    this.AssigmnemtPayload = payload;
+    this.ngxLoader.stop();
+    this.toastr.success("File uploaded Successfully");
+  }
+  submitAssigmnemtData(assignemnt){
+    this.ngxLoader.start();
+    this.Lservice.uploadAssignments(this.AssigmnemtPayload).subscribe((data: any) => {
       if (data.success === true) {
         this.ngxLoader.stop();
         this.toastr.success(data.message, null);
+        this.AssigmnemtPayload = null;
         this.getAssignmentmoduleData();
       } else {
         this.ngxLoader.stop();

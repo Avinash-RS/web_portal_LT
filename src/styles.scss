@@ -4,7 +4,8 @@
 @import "assets/iconfonts";
 @import "assets/font";
 @import "~animate.css/animate.min";
-
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
 
 button:disabled:hover {
   cursor: not-allowed;

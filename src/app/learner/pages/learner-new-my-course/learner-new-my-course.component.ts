@@ -17,7 +17,6 @@ const DEFAULT_DURATION = 300;
 
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
-
   weekViewColumnSubHeader({ date, locale, }: DateFormatterParams): string {
     return formatDate(date, 'dd', locale);
   }
@@ -47,6 +46,7 @@ export class CustomDateFormatter extends CalendarDateFormatter {
 })
 
 export class LearnerNewMyCourseComponent implements OnInit {
+  @ViewChild(DragScrollComponent) ds: DragScrollComponent;
   showJobRole = false;
   isReadMore = true;
   show = true;
@@ -58,6 +58,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
   runnablePlatforms = ['MacIntel', 'Win32', 'Linux x86_64'];
   jobroleCategoryId = 'All';
   showSkeleton = false;
+  leftNavDisabled = false;
+  rightNavDisabled = false;
   //Carousel
   missedTopicsKnowledgeCheck: OwlOptions = {
     loop: true,
@@ -114,6 +116,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   dayMonth: any;
   noActivity: boolean;
   courseSkel: boolean = false;
+  inProgressRecently: boolean = false;
   mode = 'determinate';
   bufferValue = 100;
   selectedJobRoleData = {
@@ -124,6 +127,9 @@ export class LearnerNewMyCourseComponent implements OnInit {
   vocationalselectjobRole= [];
   testvals: any;
   shotDotSearch:boolean = true;
+  inProgressModule: any;
+  completedTopic: any;
+  displaySlides = false;
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
@@ -162,6 +168,21 @@ export class LearnerNewMyCourseComponent implements OnInit {
     }
     this.getModuleStatus();
   }
+  
+  moveLeft() {
+    this.ds.moveLeft();
+  }
+  moveRight() {
+    this.ds.moveRight();
+  }
+  leftBoundStat(reachesLeftBound: boolean) {
+    this.leftNavDisabled = reachesLeftBound;
+  }
+
+  rightBoundStat(reachesRightBound: boolean) {
+    this.rightNavDisabled = reachesRightBound;
+  }
+
   insidengOnInit() {
     this.CommonServices.openAvailCourcePopup.subscribe((data: any) => {
       this.availableCource = data;
@@ -503,8 +524,29 @@ export class LearnerNewMyCourseComponent implements OnInit {
  }
 
  getModuleStatus(){
-   this.learnerService.recentlycourse(this.userDetailes.user_id).subscribe((data)=>{
-     console.log(data)
+  // this.inProgressRecently = true;
+   this.learnerService.recentlycourse(this.userDetailes.user_id).subscribe((data: any)=>{
+     this.inProgressModule = data?.data?.recentlycourse?.data?.inProgressModule;
+    //  this.inProgressModule = null
+     this.completedTopic = data?.data?.recentlycourse?.data?.completedTopic;
+     ///
+     if(this.inProgressModule?.length > 0) {
+      this.inProgressRecently = true;
+     }
+     else {
+       this.inProgressRecently = false;
+     }
+    ///
+     if(this.completedTopic?.length > 0) {
+      this.inProgressRecently = true;
+     }
+     else {
+       this.inProgressRecently = false;
+     }
+    setTimeout(()=>{
+      this.displaySlides = true;
+    },1000)
    })
  }
+
 }

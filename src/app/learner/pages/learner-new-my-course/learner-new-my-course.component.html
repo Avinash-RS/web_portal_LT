@@ -571,39 +571,16 @@
                             </div>
                           </div>
                     </ng-container>
-                    <div class="spacer" *ngIf="!courseDetailsList.length"></div>
+                    <!-- <div class="spacer" *ngIf="!courseDetailsList.length"></div> -->
+
                     <!-- InProgressModule -->
-                    <div class="inprogressModule d-none" *ngIf="courseDetailsList.length">
+                    <div class="inprogressModule" *ngIf="inProgressRecently">
                         <h3>Inprogress Modules</h3>
                         <div class="d-flex justify-content-start">
-                            <div class="modules">
-                                <h6>Emerging Technologies</h6>
+                            <div class="modules" *ngFor="let progressModule of inProgressModule | slice:0:4">
+                                <h6>{{progressModule.course_name}}</h6>
                                 <span>MODULE:</span>
-                                <p>Read for Deep Understanding</p>
-                                <div class="arrow">
-                                    <em class="lxp-Right_Direction_Arrow"></em>
-                                </div>
-                            </div>
-                            <div class="modules">
-                                <h6>Emerging Technologies</h6>
-                                <span>MODULE:</span>
-                                <p>Information technology and Operation</p>
-                                <div class="arrow">
-                                    <em class="lxp-Right_Direction_Arrow"></em>
-                                </div>
-                            </div>
-                            <div class="modules">
-                                <h6>Emerging Technologies</h6>
-                                <span>MODULE:</span>
-                                <p>Codes for reinforced and Pre-stress technology</p>
-                                <div class="arrow">
-                                    <em class="lxp-Right_Direction_Arrow"></em>
-                                </div>
-                            </div>
-                            <div class="modules">
-                                <h6>Emerging Technologies</h6>
-                                <span>MODULE:</span>
-                                <p>Information technology and Operation technology</p>
+                                <p>{{progressModule.module}}</p>
                                 <div class="arrow">
                                     <em class="lxp-Right_Direction_Arrow"></em>
                                 </div>
@@ -649,39 +626,36 @@
                     </div>
 
                     <!-- Recently Learned Topics -->
-                    <div class="recentlyLearnedTopics d-none" *ngIf="courseDetailsList.length">
+                    <div class="recentlyLearnedTopics" *ngIf="inProgressRecently">
                         <h3>Recently Learnt Topics</h3>
-                        <div class="wrapper d-flex justify-content-between">
-                            <span class="leftArrow"><em class="lxp-Right_Direction_Arrow"></em></span>
-                            <span class="rightArrow"><em class="lxp-Right_Direction_Arrow"></em></span>
-                            <div class="missedTopics">
-                                <h6>Applied Industrial IoT</h6>
-                                <span class="moduleName">MODULE:</span>
-                                <h5>Introduction to Industrial IoT</h5>
-                                <span class="topicName">TOPIC:</span>
-                                <h4>Codes for reinforced and Pre-stress…</h4>
+                        <div class="wrapper">
+                            <drag-scroll snap-duration="200" (reachesLeftBound)="leftBoundStat($event)" (reachesRightBound)="rightBoundStat($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
+                                <div class="topicsContainer" drag-scroll-item *ngFor="let complete of completedTopic">
+                                    <div class="missedTopics">
+                                        <h6>{{complete.course_name}}</h6>
+                                        <span class="moduleName">MODULE:</span>
+                                        <h5>{{complete.module}}</h5>
+                                        <span class="topicName">TOPIC:</span>
+                                        <h4>{{complete.topic}}</h4>
+                                    </div>
+                                </div>
+                            </drag-scroll>
+                            <div class="draggable-button-container">
+                                <div class="leftArrow">
+                                    <button [disabled]="leftNavDisabled" [ngClass]="leftNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveLeft()" class="draggable-button float-left"> <em class="lxp-Right_Direction_Arrow"></em> </button>
+                                </div>
+                                <div class="rightArrow">
+                                    <button [disabled]="rightNavDisabled" [ngClass]="rightNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveRight()" class="draggable-button float-right"> <em class="lxp-Right_Direction_Arrow"></em> </button>
+                                </div>
                             </div>
-                            <div class="missedTopics">
-                                <h6>Applied Industrial IoT</h6>
+
+                            <!-- <div class="missedTopics" *ngFor="let complete of completedTopic">
+                                <h6>{{complete.course_name}}</h6>
                                 <span class="moduleName">MODULE:</span>
-                                <h5>Information technology and Operation</h5>
+                                <h5>{{complete.module}}</h5>
                                 <span class="topicName">TOPIC:</span>
-                                <h4>Codes for reinforced and Pre-stress…</h4>
-                            </div>
-                            <div class="missedTopics">
-                                <h6>Applied Industrial IoT</h6>
-                                <span class="moduleName">MODULE:</span>
-                                <h5>Introduction to Industrial IoT</h5>
-                                <span class="topicName">TOPIC:</span>
-                                <h4>Codes for reinforced and Pre-stress…</h4>
-                            </div>
-                            <div class="missedTopics">
-                                <h6>Applied Industrial IoT</h6>
-                                <span class="moduleName">MODULE:</span>
-                                <h5>Introduction to Industrial IoT</h5>
-                                <span class="topicName">TOPIC:</span>
-                                <h4>Codes for reinforced and Pre-stress…</h4>
-                            </div>
+                                <h4>{{complete.topic}}</h4>
+                            </div> -->
                         </div>
                     </div>
                 </div>
