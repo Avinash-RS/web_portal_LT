@@ -574,7 +574,7 @@
                     <!-- <div class="spacer" *ngIf="!courseDetailsList.length"></div> -->
 
                     <!-- InProgressModule -->
-                    <div class="inprogressModule">
+                    <div class="inprogressModule" *ngIf="inProgressRecently">
                         <h3>Inprogress Modules</h3>
                         <div class="d-flex justify-content-start">
                             <div class="modules" *ngFor="let progressModule of inProgressModule | slice:0:4">
@@ -626,11 +626,11 @@
                     </div>
 
                     <!-- Recently Learned Topics -->
-                    <div class="recentlyLearnedTopics">
+                    <div class="recentlyLearnedTopics" *ngIf="inProgressRecently">
                         <h3>Recently Learnt Topics</h3>
                         <div class="wrapper">
-                            <drag-scroll (reachesLeftBound)="leftBoundStat($event)" (reachesRightBound)="rightBoundStat($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
-                                <div drag-scroll-item *ngFor="let complete of completedTopic">
+                            <drag-scroll snap-duration="200" (reachesLeftBound)="leftBoundStat($event)" (reachesRightBound)="rightBoundStat($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
+                                <div class="topicsContainer" drag-scroll-item *ngFor="let complete of completedTopic">
                                     <div class="missedTopics">
                                         <h6>{{complete.course_name}}</h6>
                                         <span class="moduleName">MODULE:</span>
