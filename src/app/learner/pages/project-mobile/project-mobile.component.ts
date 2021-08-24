@@ -508,7 +508,7 @@ export class ProjectMobileComponent implements OnInit {
     projectPreviewDoc(templateRef: TemplateRef<any>, videoDialog, path, type) {
       if (type === 'material') {
         this.showDownload = false;
-        if (path.doc_type !== 'video/mp4' || path.doc_type !== 'video/quicktime') {
+        if (path.doc_type !== 'video/mp4' && path.doc_type !== 'video/quicktime') {
           this.dialog.open(templateRef, {
             width: '100%',
             height: '100%',
@@ -526,7 +526,7 @@ export class ProjectMobileComponent implements OnInit {
         }
       } else if (type === 'files') {
         this.showDownload = true;
-        if (path.doc_type !== 'video/mp4' || path.doc_type !== 'video/quicktime') {
+        if (path.doc_type !== 'video/mp4' && path.doc_type !== 'video/quicktime') {
           this.dialog.open(templateRef, {
             width: '100%',
             height: '100%',

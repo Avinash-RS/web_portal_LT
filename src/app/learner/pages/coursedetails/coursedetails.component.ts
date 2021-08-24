@@ -159,6 +159,7 @@ export class CoursedetailsComponent implements OnInit {
   weekHolder: number;
   weekLength: any;
   weekHolderUI: number;
+  fromCalendar :boolean = false;
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -209,6 +210,9 @@ export class CoursedetailsComponent implements OnInit {
       this.batchId = localStorage.getItem('currentBatchId')
       this.batchEndTime = localStorage.getItem('currentBatchEndDate')
     } else {
+      if(detail.fromCalendar){
+        this.fromCalendar = true;
+      }
       this.batchId = detail.batch_id
       this.batchEndTime = detail.batchEndTime
     }
@@ -820,7 +824,12 @@ export class CoursedetailsComponent implements OnInit {
     if (!this.drawersOpen && this.scromApiData?.toc != '0') {
       this.drawersOpen = this.drawersOpen ? false : true
     } else {
-      this.route.navigateByUrl('/Learner/calendaractivity');
+      if(this.fromCalendar){
+        this.route.navigateByUrl('/Learner/calendaractivity');
+      }
+      else{
+        this.route.navigateByUrl('/Learner/MyCourse');
+      }  
     }
 
   }
@@ -844,7 +853,7 @@ export class CoursedetailsComponent implements OnInit {
       } );
     }
   }
-  resourseAccord(courseResource, index) {
+  resourseAccord(courseResource, index) { 
     if (courseResource) {
       courseResource.forEach((element, i) => {
         if (index === i) {
