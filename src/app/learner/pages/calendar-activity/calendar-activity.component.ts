@@ -155,7 +155,7 @@ export class CalendarActivityComponent implements OnInit {
         element.start = new Date(element.start);
         element.end = new Date (element.end);
         element.color = {primary : element.color};
-        element.allDay = true;
+      //  element.allDay = true;
       });
       this.events = activityDetailsList;​
       setTimeout(()=>{
@@ -273,7 +273,7 @@ export class CalendarActivityComponent implements OnInit {
         this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
       }
     }
-    goToActivities(value){
+    goToActivities(value){   
       if(value.activitytype === 'Live Classroom'){
         return false;
       } else if (value.activitytype == "Self Learning") {
@@ -289,6 +289,7 @@ export class CalendarActivityComponent implements OnInit {
           course_status: value.status,
           batch_id: value.batch_id,
           batchEndTime: value.batch_end_date_Timer,
+          fromCalendar : true
         };
 
         localStorage.setItem('currentBatchEndDate', value.batch_end_date_Timer)

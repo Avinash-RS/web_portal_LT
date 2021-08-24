@@ -991,6 +991,7 @@
     width: 100% !important;
     min-width: 100% !important;
     border-right: 0;
+    height: 250px!important;
   }
 }
 .previewContainer {
@@ -999,7 +1000,7 @@
   height: 100%;
   position: relative;
   @media only screen and (max-width: 767px) {
-    overflow: initial;
+    overflow: auto;
     // min-height: 100%;
   }
   img {
