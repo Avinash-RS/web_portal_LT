@@ -66,6 +66,8 @@ body {
   font-family: 'Roboto', sans-serif !important;
   scroll-behavior: smooth !important;
   behavior: 'smooth' !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Scrollbar Styling */
