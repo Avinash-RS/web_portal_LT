@@ -10,7 +10,7 @@
            
             <mat-tab-group animationDuration="100ms" [(selectedIndex)]="selectedIndex"
                 (selectedTabChange)="contentChange()">
-                <mat-tab>
+                <!-- <mat-tab>
                     <ng-template mat-tab-label>
                         Answered
                     </ng-template>
@@ -40,29 +40,52 @@
                         <pagination-controls *ngIf="qaDataList.length" class="gradingPagination"
                             style="text-align: center;" (pageChange)="onpagination($event)"></pagination-controls>
                     </span>
-                </mat-tab>
+                </mat-tab> -->
                 <mat-tab>
                     <ng-template mat-tab-label>
-                        Unanswered
+                        Questions I asked
                     </ng-template>
                     <span *ngIf="showSkeleton;else skeleton">
-                        <div class="searchFilter">
-                            <mat-form-field appearance="outline">
-                                <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller()' placeholder="Search...">
-                                <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
-                                <mat-icon matSuffix *ngIf="searchKey"(click)="searchKey='';this.getQAData();">close</mat-icon>
-                            </mat-form-field>
+                        <div class="allsearchFilter">
+                            <div>
+                                <span class="filterby">Filter by :</span>
+                                <mat-form-field appearance="outline" style="width: 130px;">
+                                    <mat-select [(ngModel)]='selectedtype' (selectionChange)=getQAtype()>
+                                        <mat-option *ngFor="let item of filterBy" [value]="item.value">
+                                            {{item.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller()' placeholder="Search...">
+                                    <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
+                                    <mat-icon matSuffix *ngIf="searchKey"(click)="searchKey='';this.getQAData();">close</mat-icon>
+                                </mat-form-field>
+                            </div>
                         </div>
                         <span *ngIf="qaDataList.length;else noquescard">
                             
-                            <div class="content" *ngFor="let item of qaDataList | paginate: { totalItems: totalCount, itemsPerPage: 10, currentPage: pageNumber + 1}">
+                            <div class="content" *ngFor="let item of qaDataList | paginate: { totalItems: totalCount, itemsPerPage: 10, currentPage: pageNumber + 1} ;let i = index">
                                 <div class="askedDate d-flex flex-row">
+                                    <span>Question : {{i+ 1}}</span>
                                     <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                                 </div>
                                 <h4 [innerHTML]="item.question"></h4>
-                                <div class="answeredDate">
-                                    <button class="noAnswer" style="cursor:default;" >Unanswered</button>
-                                </div>
+
+                                    <div *ngIf="item?.answer;else unans">
+                                    <div class="answeredDate">
+                                        <button class="answer" style="cursor:default;">Answered</button>
+                                        <span>{{item.publishedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
+                                    </div>
+                                        <p [innerHTML]="item?.answer"></p>
+                                    </div>
+                                    <ng-template #unans>
+                                        <div class="answeredDate">
+                                            <button class="noAnswer" style="cursor:default;">Unanswered</button>
+                                        </div>
+                                    </ng-template>
                             </div>
                         </span>
                         <pagination-controls *ngIf="qaDataList.length" class="gradingPagination"
@@ -71,7 +94,7 @@
                 </mat-tab>
                 <mat-tab>
                     <ng-template mat-tab-label>
-                        All
+                        All Q&As in this course
                     </ng-template>
                     <span *ngIf="showSkeleton;else skeleton">
                         <div class="searchFilter">
@@ -176,9 +199,16 @@
             <img src="/assets/learner/QandA.svg" alt="QandA">
         </figure>
         <div *ngIf="!searchKey">
-        <p *ngIf="selectedIndex == 0">{{unAnsCheck?'Your question will be answered soon':'You have not asked any questions'}}</p>
-        <p *ngIf="selectedIndex == 1">{{'You have not asked any questions'}}</p>
-        <p *ngIf="selectedIndex == 2">{{'No Q&As to display at the moment'}}</p>
+        <!-- <p *ngIf="selectedIndex == 0">{{unAnsCheck?'Your question will be answered soon':'You have not asked any questions'}}</p> -->
+        <p *ngIf="selectedIndex == 0">
+            <span *ngIf="selectedtype=='un_answered&answered' || selectedtype=='un_answered'">
+                {{'You have not asked any questions'}}
+            </span>
+            <span *ngIf="selectedtype=='answered'">
+                {{'You have not asked any questions'}}
+            </span>
+        </p>
+        <p *ngIf="selectedIndex == 1">{{'No Q&As to display at the moment'}}</p>
         </div>
         <p *ngIf="searchKey">{{'No results found'}}</p>
     </div>

@@ -26,11 +26,39 @@
 .backcolor {
   color: #999999;
 }
+.coursePlayerContainer {
+  &.ITcourses {
+    position: relative;
+    .titlebar  {
+      position: absolute;
+      top: 25px;
+      left: -15px;
+      z-index: 9;
+      .titleBack {
+        padding: 0;
+        background-color: transparent;
+      }
+      .breadcrumb {
+        li {
+          em {
+            color: #ffffff;
+          }
+          span {
+            display: none;
+          }
+        }
+      }
+    }
+    .contentHeight {
+      height: calc(100vh - 111px);
+    }
+  }
+}
 .contentHeight {
   // height: 80vh !important;
-  height: calc(100vh - 171px);
+  height: calc(100vh - 152px);
   background: #ffffff;
-  margin-top: 10px;
+  // margin-top: 10px;
   position: relative;
   @media only screen and (max-width: 767px) {
     height: calc(100vh - 120px);
@@ -784,6 +812,13 @@
     margin: 0;
     padding: 0 20px !important;
     background-color: transparent !important;
+    &.yes {
+      li {
+        &::after {
+          display: none;
+        }
+      }
+    }
     li {
       color: #333333;
       font-size: 14px;

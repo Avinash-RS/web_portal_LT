@@ -255,7 +255,7 @@
                                         </figure>
                                         <div class="rightCol">
                                             <div class="d-flex justify-content-between align-items-center">
-                                                <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
+                                                <h3 class="titleClass" title="{{item.course_name}}">{{item.course_name}}</h3>
                                                 <div class="searchProgression d-flex justify-content-end align-items-center" [ngClass]="userDetailes.org_type === 'collegeconnect' ? 'yes':'no'">
                                                     <!-- <span class="searchGallery" *ngIf ="shotDotSearch" (click)="openGallery(item)"><em class="lxp-Search"></em></span> -->
                                                     <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
@@ -276,11 +276,13 @@
                                                 </mat-menu> -->
                                             </div>
                                             <div *ngIf="item?.batchid" class="showLessContent">
-                                                <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
-                                                    <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
-                                                </button>
                                                 <div [ngClass]="!item.isReadMore ? '' : 'showText'">
-                                                    <p [ngClass]="!item.isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
+                                                    <div class="arrowWrapper d-flex">
+                                                        <p [ngClass]="!item.isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
+                                                        <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
+                                                            <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
+                                                        </button>
+                                                    </div>
                                                     <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
                                                         <span class="by">By: <b>{{item.courseBy}}</b></span>
                                                         <span class="credits" *ngIf ="item.enableCredits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>

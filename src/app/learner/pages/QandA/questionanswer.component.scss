@@ -379,7 +379,20 @@
   display: flex;
   justify-content: flex-end;
 }
-::ng-deep.searchFilter {
+
+.allsearchFilter {
+  margin-top:10px;
+  margin-bottom:10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .filterby{
+    margin-right:10px;
+  }
+}
+
+::ng-deep.searchFilter,
+::ng-deep.allsearchFilter{
   .mat-form-field-wrapper {
     padding-bottom: 0;
   }
