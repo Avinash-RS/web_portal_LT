@@ -8,7 +8,7 @@
 ::ng-deep.sideNavWrapper {
   .mat-drawer-container {
     background-color: #f2f2f2;
-    height: calc(100vh - 121px);
+    height: calc(100vh - 111px);
   }
   .mat-drawer-backdrop.mat-drawer-shown {
     background-color: transparent;
@@ -320,7 +320,13 @@
         padding: 10px 20px 10px 20px;
       }
       .jobRole {
-        padding-right: 25px;
+        padding-right: 1px;
+        @media only screen and (min-width: 568px) {
+          padding-right: 85px;
+        }
+        @media only screen and (min-width: 1140px) {
+          padding-right: 25px;
+        }
       }
     }
     .mobileEnable {
@@ -1086,6 +1092,11 @@
         transform: rotate(180deg);
       }
     }
+    &:hover {
+      span {
+        transform: rotate(360deg);
+      }
+    }
     p {
       display: none;
       @media only screen and (max-width: 767px) {
@@ -1503,6 +1514,15 @@
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
       color: #666666;
       border-radius: 5px;
+      background-color: #ffffff;
+      transition: all 0.3s ease-in-out;
+    }
+    &:hover {
+      em {
+        border: 1px solid #27bbee;
+        background-color: #27bbee;
+        color: #ffffff;
+      }
     }
   }
 }
@@ -1794,6 +1814,7 @@
   }
 }
 .progression {
+  margin-bottom: 5px;
   span {
     font-size: 10px;
     font-weight: 400;
