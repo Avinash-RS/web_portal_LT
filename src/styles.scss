@@ -63,9 +63,11 @@ html {
 }
 
 body {
-  font-family: 'Roboto Condensed', sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
   scroll-behavior: smooth !important;
   behavior: 'smooth' !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Scrollbar Styling */
@@ -466,8 +468,7 @@ td {
 // }
 
 body {
-  font-family: 'RobotoCondensed', sans-serif !important;
-  // font-family: 'Roboto', sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
   margin: 0;
 }
 

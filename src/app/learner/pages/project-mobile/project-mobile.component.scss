@@ -637,7 +637,7 @@
   }
 
   .noData {
-    font: normal normal normal 18px/22px Roboto Condensed;
+    font: normal normal normal 18px/22px Roboto;
     letter-spacing: 0px;
     color: #333333;
     opacity: 1;
@@ -645,12 +645,12 @@
     text-align: center;
     margin-top: 7px;
     @media only screen and (min-width: 576px) {
-      font: normal normal normal 19px/29px Roboto Condensed;
+      font: normal normal normal 19px/29px Roboto;
     }
     @media only screen and (min-width: 768px) {
       text-align: left;
       width: 78%;
-      font: normal normal normal 23px/29px Roboto Condensed;
+      font: normal normal normal 23px/29px Roboto;
     }
   }
 }
