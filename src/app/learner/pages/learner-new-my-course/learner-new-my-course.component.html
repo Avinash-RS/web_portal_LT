@@ -574,20 +574,21 @@
                     <!-- <div class="spacer" *ngIf="!courseDetailsList.length"></div> -->
 
                     <!-- InProgressModule -->
-                    <div class="inprogressModule" *ngIf="inProgressRecently">
-                        <h3>Inprogress Modules</h3>
-                        <div class="d-flex justify-content-start">
-                            <div class="modules" *ngFor="let progressModule of inProgressModule | slice:0:4">
-                                <h6>{{progressModule.course_name}}</h6>
-                                <span>MODULE:</span>
-                                <p>{{progressModule.module}}</p>
-                                <div class="arrow">
-                                    <em class="lxp-Right_Direction_Arrow"></em>
+                    <ng-contaniner *ngIf="userDetailes.org_type == 'collegeconnect'">
+                        <div class="inprogressModule" *ngIf="inProgressRecently">
+                            <h3>Inprogress Modules</h3>
+                            <div class="d-flex justify-content-start">
+                                <div class="modules" *ngFor="let progressModule of inProgressModule | slice:0:4">
+                                    <h6>{{progressModule.course_name}}</h6>
+                                    <span>MODULE:</span>
+                                    <p>{{progressModule.module}}</p>
+                                    <div class="arrow">
+                                        <em class="lxp-Right_Direction_Arrow"></em>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                    </ng-contaniner>
                     <!-- Missed Topics & Knowledge Check -->
                     <div class="missedTopicsKnowledgeCheck d-none" *ngIf="courseDetailsList.length">
                         <h3>Missed Topics & Knowledge Check</h3>
@@ -626,38 +627,32 @@
                     </div>
 
                     <!-- Recently Learned Topics -->
-                    <div class="recentlyLearnedTopics" *ngIf="inProgressRecently">
-                        <h3>Recently Learnt Topics</h3>
-                        <div class="wrapper">
-                            <drag-scroll snap-duration="200" (reachesLeftBound)="leftBoundStat($event)" (reachesRightBound)="rightBoundStat($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
-                                <div class="topicsContainer" drag-scroll-item *ngFor="let complete of completedTopic">
-                                    <div class="missedTopics">
-                                        <h6>{{complete.course_name}}</h6>
-                                        <span class="moduleName">MODULE:</span>
-                                        <h5>{{complete.module}}</h5>
-                                        <span class="topicName">TOPIC:</span>
-                                        <h4>{{complete.topic}}</h4>
+                    <ng-contaniner *ngIf="userDetailes.org_type == 'collegeconnect'">
+                        <div class="recentlyLearnedTopics" *ngIf="inProgressRecently">
+                            <h3>Recently Learnt Topics</h3>
+                            <div class="wrapper">
+                                <drag-scroll snap-duration="200" (reachesLeftBound)="leftBoundStat($event)" (reachesRightBound)="rightBoundStat($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
+                                    <div class="topicsContainer" drag-scroll-item *ngFor="let complete of completedTopic">
+                                        <div class="missedTopics">
+                                            <h6>{{complete.course_name}}</h6>
+                                            <span class="moduleName">MODULE:</span>
+                                            <h5>{{complete.module}}</h5>
+                                            <span class="topicName">TOPIC:</span>
+                                            <h4>{{complete.topic}}</h4>
+                                        </div>
+                                    </div>
+                                </drag-scroll>
+                                <div class="draggable-button-container">
+                                    <div class="leftArrow">
+                                        <button [disabled]="leftNavDisabled" [ngClass]="leftNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveLeft()" class="draggable-button float-left"> <em class="lxp-Right_Direction_Arrow"></em> </button>
+                                    </div>
+                                    <div class="rightArrow">
+                                        <button [disabled]="rightNavDisabled" [ngClass]="rightNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveRight()" class="draggable-button float-right"> <em class="lxp-Right_Direction_Arrow"></em> </button>
                                     </div>
                                 </div>
-                            </drag-scroll>
-                            <div class="draggable-button-container">
-                                <div class="leftArrow">
-                                    <button [disabled]="leftNavDisabled" [ngClass]="leftNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveLeft()" class="draggable-button float-left"> <em class="lxp-Right_Direction_Arrow"></em> </button>
-                                </div>
-                                <div class="rightArrow">
-                                    <button [disabled]="rightNavDisabled" [ngClass]="rightNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveRight()" class="draggable-button float-right"> <em class="lxp-Right_Direction_Arrow"></em> </button>
-                                </div>
                             </div>
-
-                            <!-- <div class="missedTopics" *ngFor="let complete of completedTopic">
-                                <h6>{{complete.course_name}}</h6>
-                                <span class="moduleName">MODULE:</span>
-                                <h5>{{complete.module}}</h5>
-                                <span class="topicName">TOPIC:</span>
-                                <h4>{{complete.topic}}</h4>
-                            </div> -->
                         </div>
-                    </div>
+                    </ng-contaniner>
                 </div>
                 </div>
             </div>
