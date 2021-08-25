@@ -917,7 +917,7 @@
             padding: 0 9px;
             width: 50px;
             @media only screen and (min-width: 720px) {
-              width: 100px;
+              width: 60px;
             }
           }
           .subinfo {
@@ -941,7 +941,7 @@
           position: relative;
           @media only screen and (min-width: 720px) {
             flex-wrap: nowrap;
-            width: calc(100% - 100px);
+            width: calc(100% - 60px);
           }
           .weekModuleName {
             width: 100%;

@@ -66,7 +66,7 @@ export class HeaderComponent implements OnInit {
     this.activeUrl = this.router.url;
     this.orgDetails = JSON.parse(localStorage.getItem('organizationDetails')) || null;
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
-    this.profilepic = this.userDetailes.profile_img;
+    //this.profilepic = this.userDetailes.profile_img;
     this.role = localStorage.getItem('role') || sessionStorage.getItem('role');
     this.userimage = localStorage.getItem('user_img') || sessionStorage.getItem('user_img');
     this.fullName = localStorage.getItem('Fullname');
@@ -74,7 +74,7 @@ export class HeaderComponent implements OnInit {
     setTimeout(() => {
       this.userDetailes = this.gs.checkLogout();
       this.profilepic = this.userDetailes.profile_img;
-    }, 3000);
+    }, 1000);
     if(this.profilepic == "" || this.profilepic == null){
       this.profilepic = this.userimage;
     }
@@ -153,8 +153,8 @@ export class HeaderComponent implements OnInit {
         //SOCKET DISCONNECTION COMPLETE
         
         this.services.getIpAddressByUrl();
-        this.userDetailes = null;
         this.services.logout(this.userDetailes._id, false).subscribe((logout: any) => {
+          this.userDetailes = null;
           localStorage.clear();
           sessionStorage.clear();
           this.router.navigate(['/Learner/login']);
