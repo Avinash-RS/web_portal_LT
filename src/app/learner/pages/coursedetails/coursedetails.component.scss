@@ -812,6 +812,7 @@
     margin: 0;
     padding: 0 20px !important;
     background-color: transparent !important;
+    height: auto !important;
     &.yes {
       li {
         &::after {

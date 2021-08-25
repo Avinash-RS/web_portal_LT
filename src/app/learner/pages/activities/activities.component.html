@@ -141,7 +141,7 @@
                       <div class="fileData ml-auto mr-auto mb-3 d-flex" *ngIf="assignment?.files?.showPreview">
                         <mat-icon *ngIf="assignmentFile.type == 'image/jpeg'|| assignment.files.doc_type == 'image/png' || assignment.files.doc_type =='image/jpg'" class="videoPlay float-left">photo</mat-icon>
                         <mat-icon *ngIf="assignmentFile.type == 'application/pdf'" class="videoPlay float-left">picture_as_pdf </mat-icon>
-                        <span class="uploadfileName assignementName" style="margin-top: 4px;position: inherit;" matTooltip="{{assignmentFile.name}}}" matTooltipClass="custom-mat-tooltip">
+                        <span class="uploadfileName assignementName" style="margin-top: 4px;position: inherit;" matTooltip="{{assignmentFile.name}}" matTooltipClass="custom-mat-tooltip">
                           {{assignmentFile.name}}
                         </span>
                       </div>
@@ -153,7 +153,7 @@
                         <div>
                           <button *ngIf="assignment?.files?.disablesubmitbtn" mat-stroked-button class="submitted-btn mt-2">
                             <span *ngIf="!assignment?.files.filename">Submit</span> 
-                            <span *ngIf="assignment?.files.filename">Submited</span>  
+                            <span *ngIf="assignment?.files.filename">Submitted</span>  
                           </button>
                           <button *ngIf="!assignment?.files?.disablesubmitbtn" mat-stroked-button class="submit-btn mt-2"(click)="submitAssigmnemtData(assignment.files)">Submit</button>
                         </div>
