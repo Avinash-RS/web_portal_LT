@@ -604,13 +604,13 @@
         &:last-child {
           margin-right: 0;
         }
-        &:nth-child(2) {
-          span {
-            em {
-              font-size: 23px;
-            }
-          }
-        }
+        // &:nth-child(2) {
+        //   span {
+        //     em {
+        //       font-size: 23px;
+        //     }
+        //   }
+        // }
         span {
           display: inline-flex;
           justify-content: center;
