@@ -10,7 +10,7 @@
   .questionLeftCol {
     //inner scroll
     overflow: auto;
-    height: 80vh !important;
+    height: calc(100vh - 111px);
 
     order: 2;
     padding: 20px 0;
