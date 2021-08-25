@@ -63,9 +63,11 @@ html {
 }
 
 body {
-  font-family: 'Roboto Condensed', sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
   scroll-behavior: smooth !important;
   behavior: 'smooth' !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Scrollbar Styling */
@@ -466,8 +468,7 @@ td {
 // }
 
 body {
-  font-family: 'RobotoCondensed', sans-serif !important;
-  // font-family: 'Roboto', sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
   margin: 0;
 }
 
@@ -987,11 +988,11 @@ mat-header-cell,
 // Same copy of this footer in appcomponent.css
 .footer {
   width: 100%;
-  padding: 15px;
+  padding: 10px 15px;
   background-color: #f0f0f0;
   text-align: right;
   margin-top: 0;
-  font-weight: 500;
+  font-weight: 400;
   border-top: 1px solid #cecece;
   position: relative;
   z-index: 9;

@@ -46,7 +46,7 @@
     background-size: cover;
     background-position: right center;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-    padding: 40px 20px 40px 40px;
+    padding: 20px;
     position: relative;
     z-index: 99;
     @media only screen and (max-width: 767px) {
@@ -312,9 +312,15 @@
     @media only screen and (max-width: 767px) {
       padding: 15px;
     }
+    .jobRole {
+      padding-right: 85px;
+    }
     &.noPadding {
       @media only screen and (min-width: 1200px) {
         padding: 10px 20px 10px 20px;
+      }
+      .jobRole {
+        padding-right: 25px;
       }
     }
     .mobileEnable {
@@ -444,7 +450,7 @@
         width: 80%;
       }
       h3 {
-        width: 100%;
+        width: 80%;
         font-size: 18px;
         font-weight: 400;
         color: #000000;
@@ -456,16 +462,19 @@
           margin-top: 0;
         }
         @media only screen and (min-width: 1140px) {
-          line-height: 19px;
+          line-height: 24px;
         }
       }
       .showLessContent {
         position: relative;
+        .arrowWrapper {
+          position: relative;
+        }
         p {
           font-size: 14px;
           font-weight: 400;
           color: #808080;
-          padding-right: 40px;
+          padding-right: 20px;
           margin: 0 !important;
           &.addEllipsis {
             text-overflow: ellipsis;
@@ -477,8 +486,8 @@
           border: 0;
           background-color: transparent;
           padding: 0;
-          position: absolute;
-          right: 15px;
+          position: relative;
+          right: 10px;
           top: 0;
           z-index: 9;
           em {
@@ -603,9 +612,9 @@
           border-radius: 50%;
           width: 42px;
           height: 42px;
-          background: rgba(39, 187, 238, 0.4);
+          background: rgba(39, 187, 238, 0.25);
           transition: 0.3s ease-in background;
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+          // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
           em {
             color: #1B4E9B;
             font-size: 18px;
@@ -658,6 +667,7 @@
       }
     }
     .searchProgression {
+      width: 20%;
       &.no {
         @media only screen and (min-width: 569px) {
           min-height: 58px;
@@ -670,6 +680,15 @@
         width: 39%;
         margin-right: -11px;
         @media only screen and (min-width: 569px) {
+          width: 55%;
+        }
+        @media only screen and (min-width: 720px) {
+          width: 70%;
+        }
+        @media only screen and (min-width: 992px) {
+          width: 55%;
+        }
+        @media only screen and (min-width: 1540px) {
           width: 30%;
         }
       }
@@ -1507,15 +1526,15 @@
       text-align: right;
     }
     @media only screen and (min-width: 1200px) {
-      padding-right: 25px;
+      // padding-right: 25px;
     }
   }
   @media only screen and (min-width:720px) {
-    padding-right: 85px;
+    // padding-right: 85px;
     top: 20px;
     left: auto;
     right: 0;
-    width: 52%;
+    width: 55%;
     text-align: right;
   }
   @media only screen and (min-width: 1140px) {

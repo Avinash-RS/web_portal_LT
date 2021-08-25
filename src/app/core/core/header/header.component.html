@@ -5,7 +5,7 @@
     <em [ngClass]="!expandTxt?'lxp-Nav_Hamburger':'lxp-Close'" (click)="expandTxt=!expandTxt"></em>
   </div>
   <div class="imgContainer">
-     <img class="hearder-logo" alt="" src="assets/learner/EduTech_Logo.svg" (click)="navigateMyCourse()">
+     <img class="hearder-logo" alt="" src="https://assets.lntedutech.com/edutech_logo.svg" (click)="navigateMyCourse()">
   </div>
 
   <!-- Mobile Menu Starts -->
@@ -43,7 +43,7 @@
   </div> -->
   <app-toolbar-notification></app-toolbar-notification>
 
-  <div class="txtName"><span title="{{userDetailes.full_name}}">{{userDetailes.full_name}}</span></div>
+  <div class="txtName"><span title="{{userDetailes?.full_name}}">{{userDetailes?.full_name}}</span></div>
 
   <button *ngIf="!profilepic" class="profileimg" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
     {{initials}}

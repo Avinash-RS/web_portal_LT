@@ -15,16 +15,17 @@ html {
 }
 
 body {
-  // font-family: 'Roboto Condensed', sans-serif !important;
-  font-family: 'RobotoCondensed', sans-serif !important;
-  // font-family: 'Roboto' !important;
+  font-family: 'Roboto', sans-serif !important;
   scroll-behavior: smooth !important;
   behavior: 'smooth' !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .mat-card {
-  font-family: 'RobotoCondensed', sans-serif !important;
-  // font-family: 'Roboto' !important;
+  font-family: 'Roboto', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 button,
@@ -40,8 +41,9 @@ h3,
 h4,
 h5, 
 h6 {
-  font-family: 'RobotoCondensed', sans-serif !important;
-  // font-family: 'Roboto' !important;
+  font-family: 'Roboto', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
