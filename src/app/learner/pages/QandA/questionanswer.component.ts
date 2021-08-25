@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,ViewChild,ElementRef} from "@angular/core";
 import { MatDialog } from "@angular/material";
 import { AngularEditorConfig } from "@kolkov/angular-editor";
 import { LearnerServicesService } from "@learner/services/learner-services.service";
@@ -10,6 +10,8 @@ import { ToastrService } from "ngx-toastr";
 })
 
 export class QuestionanswerComponent implements OnInit {
+  @ViewChild('leftContainer') leftContainer: ElementRef;
+
   htmlContent = '';
   selectedIndex = 0;
   questionCount = 0;
@@ -147,19 +149,30 @@ export class QuestionanswerComponent implements OnInit {
     }
   }
 
+  onScrollDown() {
+    this.pageNumber = this.pageNumber + 1;
+    this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, this.requestType, this.pageNumber, this.searchKey).subscribe((result: any) => {
+      const resultdata = result.data.getengineersForumData.data;
+      this.totalCount = result.data.getengineersForumData.totalcount;
+      if (resultdata.length) {
+        let array: any;
+        array = resultdata;
+        this.qaDataList.push(...array);
+      }
+    });
+  }
   getQAData() {
     this.showSkeleton = false
     this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, this.requestType, this.pageNumber, this.searchKey).subscribe((rdata: any) => {
       this.qaDataList = rdata.data.getengineersForumData.data
       this.totalCount = rdata.data.getengineersForumData.totalcount;
-
-      // if(this.searchKey===''&&this.selectedIndex==0 && this.requestType=='answered'&& (this.totalCount==0||this.totalCount==null)){
-      //   this.showSkeleton = false
-      //   this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, 'un_answered', this.pageNumber,'').subscribe((check: any) => {
-      //     this.unAnsCheck = check.data.getengineersForumData.totalcount
-      //     this.showSkeleton = true
-      //   });
-      // }
+      if(this.searchKey===''&&this.selectedIndex==0 && this.requestType=='answered'&& (this.totalCount==0||this.totalCount==null)){
+        this.showSkeleton = false
+        this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, 'un_answered', this.pageNumber,'').subscribe((check: any) => {
+          this.unAnsCheck = check.data.getengineersForumData.totalcount
+          this.showSkeleton = true
+        });
+      }
       this.showSkeleton = true
     })
   }
@@ -179,7 +192,7 @@ export class QuestionanswerComponent implements OnInit {
         } else {
           if (rdata.data.createEngineersForumData.success) {
             // this.selectedIndex = 1
-            this.dialogClose();
+            this.dialogClose('confirm');
             this.toastr.success(rdata.data.createEngineersForumData.message);
           } else {
             this.toastr.warning(rdata.data.createEngineersForumData.message)
@@ -212,9 +225,16 @@ export class QuestionanswerComponent implements OnInit {
       } );
     }
   }
-  dialogClose() {
-    this.getQAData();
-    this.getQACount();
+  dialogClose(value?) {
+    if(value){
+      this.pageNumber = 0;
+      this.getQAData();
+      this.getQACount();
+      setTimeout(()=>{
+        this.leftContainer.nativeElement.scrollTop = 0
+        this.leftContainer.nativeElement.scrollIntoView({ behavior: 'smooth' }); 
+      },1000)  
+     }
     this.dialog.closeAll();
     this.htmlContent = "";
   }
