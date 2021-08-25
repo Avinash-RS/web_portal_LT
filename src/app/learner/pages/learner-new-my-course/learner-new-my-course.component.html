@@ -315,7 +315,7 @@
                                                             <span><em class="lxp-book-question"></em></span>
                                                             <p>Q&A</p>
                                                         </div>
-                                                        <div *ngIf="userDetailes.org_type === 'vocational'" class="icons" (click)="goToForum(item)">
+                                                        <div *ngIf="userDetailes.org_type === 'vocational' || userDetailes.org_type ==='Corporate'" class="icons" (click)="goToForum(item)">
                                                             <span><em class="lxp-QA"></em></span>
                                                             <p>Discussion Fourm</p>
                                                         </div>
@@ -420,11 +420,11 @@
                                                         <p>Activities</p>
                                                     </div>
                                                     <!--  -->
-                                                    <div class="icons" *ngIf="userDetailes.org_type!== 'collegeconnect'" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
+                                                    <div class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
                                                         <span><em class="lxp-book-question"></em></span>
                                                         <p>Q&A</p>
                                                     </div>
-                                                    <div *ngIf="userDetailes.org_type === 'vocational'" class="icons" (click)="goToForum(item)">
+                                                    <div *ngIf="userDetailes.org_type === 'vocational' || userDetailes.org_type ==='Corporate'"class="icons" (click)="goToForum(item)">
                                                         <span><em class="lxp-QA"></em></span>
                                                         <p>Discussion Fourm</p>
                                                     </div>
@@ -527,11 +527,11 @@
                                                         <p>Activities</p>
                                                     </div>
                                                     <!--  -->
-                                                    <div class="icons" *ngIf="userDetailes.org_type!== 'collegeconnect'" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
+                                                    <div class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
                                                         <span><em class="lxp-book-question"></em></span>
                                                         <p>Q&A</p>
                                                     </div>
-                                                    <div *ngIf="userDetailes.org_type === 'vocational'" class="icons" (click)="goToForum(item)">
+                                                    <div *ngIf="userDetailes.org_type === 'vocational' || userDetailes.org_type ==='Corporate'" class="icons" (click)="goToForum(item)">
                                                         <span><em class="lxp-QA"></em></span>
                                                         <p>Discussion Fourm</p>
                                                     </div>
