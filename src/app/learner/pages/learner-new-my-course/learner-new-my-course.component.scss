@@ -3,7 +3,7 @@
 .sideNavWrapper {
   // display: flex;
   position: relative;
-  height: calc(100vh - 121px);
+  height: calc(100vh - 111px);
 }
 ::ng-deep.sideNavWrapper {
   .mat-drawer-container {
@@ -460,7 +460,7 @@
         font-size: 18px;
         font-weight: 400;
         color: #000000;
-        line-height: 21px;
+        line-height: 23px;
         margin-bottom: 10px;
         margin-top: 10px;
         @media only screen and (min-width: 720px) {
@@ -625,7 +625,7 @@
             color: #1B4E9B;
             font-size: 18px;
             @media only screen and (max-width: 767px) {
-              font-size: 20px;
+              font-size: 15px;
             }
           }
           &:hover {
@@ -636,8 +636,8 @@
             }
           }
           @media only screen and (max-width: 767px) {
-            width: 45px;
-            height: 45px;
+            width: 35px;
+            height: 35px;
           }
         }
       }
@@ -702,7 +702,10 @@
     .courseProgression {
       justify-content: flex-end;
       margin-top: 0;
-      margin-right: -15px;
+      margin-right: 0;
+      @media only screen and (min-width: 1540px) {
+        margin-right: -15px;
+      }
       .icons {
         text-align: center;
         margin-right: 15px;
@@ -1554,7 +1557,7 @@
     top: 20px;
     left: auto;
     right: 0;
-    width: 55%;
+    width: 56%;
     text-align: right;
   }
   @media only screen and (min-width: 1140px) {
