@@ -43,7 +43,7 @@
   </div> -->
   <app-toolbar-notification></app-toolbar-notification>
 
-  <div class="txtName"><span title="{{userDetailes.full_name}}">{{userDetailes.full_name}}</span></div>
+  <div class="txtName"><span title="{{userDetailes?.full_name}}">{{userDetailes?.full_name}}</span></div>
 
   <button *ngIf="!profilepic" class="profileimg" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
     {{initials}}

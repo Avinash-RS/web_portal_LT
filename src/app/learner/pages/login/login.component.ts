@@ -142,7 +142,7 @@ export class LoginComponent implements OnInit {
               sessionStorage.setItem('token', loginresult.data.login.message.token);
             }
             localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
-            localStorage.setItem('Fullname', loginresult.data.login.message.full_name); // Added ny Mythreyi
+            localStorage.setItem('Fullname', loginresult.data.login.message.full_name);
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
               localStorage.setItem('remember_me', 'false');
               localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
