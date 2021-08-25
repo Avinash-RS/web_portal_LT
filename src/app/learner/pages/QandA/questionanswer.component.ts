@@ -56,7 +56,7 @@ export class QuestionanswerComponent implements OnInit {
   };
   UserDetails: any;
   courseId: string;
-  requestType: string = 'answered';
+  requestType: string = 'un_answered&answered';
   pageNumber: number = 0;
   qaDataList: any;
   showSkeleton: boolean = false;
@@ -66,6 +66,12 @@ export class QuestionanswerComponent implements OnInit {
   totalCount: any;
   unAnsCheck: any;
   timeoutval: NodeJS.Timeout;
+  filterBy : any[] =[
+    { value: "un_answered&answered", viewValue: "All" },
+    { value: "answered", viewValue: "Answered" },
+    { value: "un_answered", viewValue: "Unanswered" },
+  ];
+  selectedtype = 'un_answered&answered'
   constructor(private dialog: MatDialog, private learnerService: LearnerServicesService,private toastr: ToastrService,) {
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails'))
     this.courseId = localStorage.getItem("Courseid")
@@ -88,17 +94,18 @@ export class QuestionanswerComponent implements OnInit {
   contentChange() {
     this.pageNumber = 0;
     switch (this.selectedIndex) {
+      // case 0:
+      //   this.requestType = 'answered'
+      //   this.getQACount()
+      //   this.getQAData();
+      //   break;
       case 0:
-        this.requestType = 'answered'
+        this.requestType = 'un_answered&answered';
+        this.selectedtype = 'un_answered&answered';
         this.getQACount()
         this.getQAData();
         break;
       case 1:
-        this.requestType = 'un_answered'
-        this.getQACount()
-        this.getQAData();
-        break;
-      case 2:
         this.requestType = 'all'
         this.getQACount()
         this.getQAData();
@@ -146,14 +153,13 @@ export class QuestionanswerComponent implements OnInit {
       this.qaDataList = rdata.data.getengineersForumData.data
       this.totalCount = rdata.data.getengineersForumData.totalcount;
 
-      if(this.searchKey===''&&this.selectedIndex==0 && this.requestType=='answered'&& (this.totalCount==0||this.totalCount==null)){
-        this.showSkeleton = false
-        this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, 'un_answered', this.pageNumber,'').subscribe((check: any) => {
-          this.unAnsCheck = check.data.getengineersForumData.totalcount
-          this.showSkeleton = true
-        });
-
-      }
+      // if(this.searchKey===''&&this.selectedIndex==0 && this.requestType=='answered'&& (this.totalCount==0||this.totalCount==null)){
+      //   this.showSkeleton = false
+      //   this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, 'un_answered', this.pageNumber,'').subscribe((check: any) => {
+      //     this.unAnsCheck = check.data.getengineersForumData.totalcount
+      //     this.showSkeleton = true
+      //   });
+      // }
       this.showSkeleton = true
     })
   }
@@ -167,13 +173,12 @@ export class QuestionanswerComponent implements OnInit {
       }
 
       this.learnerService.createEngineersForumData(this.UserDetails.user_id, this.UserDetails.full_name, this.courseId, this.htmlContent, this.courseName).subscribe((rdata: any) => {
-        console.log(rdata);
         if (rdata?.errors && rdata?.errors[0]?.message === "Request failed with status code 413") {
           this.toastr.warning("Content limit exceeded!!")
 
         } else {
           if (rdata.data.createEngineersForumData.success) {
-            this.selectedIndex = 1
+            // this.selectedIndex = 1
             this.dialogClose();
             this.toastr.success(rdata.data.createEngineersForumData.message);
           } else {
@@ -228,6 +233,10 @@ export class QuestionanswerComponent implements OnInit {
       this.getQAData();
       // this.getQACount();
     },500)
+  }
+  getQAtype(){
+    this.requestType = this.selectedtype;
+    this.getQAData();
   }
 
 }
