@@ -1,6 +1,7 @@
 <app-header></app-header>
 <div class="qandWrapper d-flex">
-    <div class="questionLeftCol">
+    <div class="questionLeftCol" #leftContainer infiniteScroll [infiniteScrollDistance]="2"
+    [scrollWindow]="false" [infiniteScrollThrottle]="500" (scrolled)="onScrollDown()">
         <ul class="breadcrumb">
             <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em>{{courseName}}</li>
             <li>Q&A</li>
@@ -67,7 +68,7 @@
                         </div>
                         <span *ngIf="qaDataList.length;else noquescard">
                             
-                            <div class="content" *ngFor="let item of qaDataList | paginate: { totalItems: totalCount, itemsPerPage: 10, currentPage: pageNumber + 1} ;let i = index">
+                            <div class="content" *ngFor="let item of qaDataList;let i = index">
                                 <div class="askedDate d-flex flex-row">
                                     <span>Question : {{i+ 1}}</span>
                                     <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
@@ -88,8 +89,6 @@
                                     </ng-template>
                             </div>
                         </span>
-                        <pagination-controls *ngIf="qaDataList.length" class="gradingPagination"
-                            style="text-align: center;" (pageChange)="onpagination($event)"></pagination-controls>
                     </span>
                 </mat-tab>
                 <mat-tab>
@@ -106,7 +105,7 @@
                         </div>
                         <span *ngIf="qaDataList.length;else noquescard">
                            
-                            <div class="content" *ngFor="let item of qaDataList | paginate: { totalItems: totalCount, itemsPerPage: 10, currentPage: pageNumber + 1}">
+                            <div class="content" *ngFor="let item of qaDataList">
                                 <div class="askedDate d-flex flex-row">
                                     <span><em class="lxp-AccountCircle"></em>{{item.askedBy}}</span>
                                     <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
@@ -120,8 +119,6 @@
                                 <p *ngIf="item.answered" [innerHTML]="item.answer"></p>
                             </div>
                         </span>
-                        <pagination-controls *ngIf="qaDataList.length" class="gradingPagination"
-                            style="text-align: center;" (pageChange)="onpagination($event)"></pagination-controls>
                     </span>
                 </mat-tab>
             </mat-tab-group>
@@ -199,13 +196,12 @@
             <img src="/assets/learner/QandA.svg" alt="QandA">
         </figure>
         <div *ngIf="!searchKey">
-        <!-- <p *ngIf="selectedIndex == 0">{{unAnsCheck?'Your question will be answered soon':'You have not asked any questions'}}</p> -->
         <p *ngIf="selectedIndex == 0">
             <span *ngIf="selectedtype=='un_answered&answered' || selectedtype=='un_answered'">
                 {{'You have not asked any questions'}}
             </span>
             <span *ngIf="selectedtype=='answered'">
-                {{'You have not asked any questions'}}
+                {{unAnsCheck?'Your question will be answered soon':'You have not asked any questions'}}
             </span>
         </p>
         <p *ngIf="selectedIndex == 1">{{'No Q&As to display at the moment'}}</p>
