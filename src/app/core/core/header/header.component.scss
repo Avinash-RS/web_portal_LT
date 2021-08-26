@@ -75,18 +75,23 @@
 }
 ::ng-deep .swal2-styled.swal2-confirm {
   height: 41.25px !important;
-  background-color: #c02222 !important;
+  background-color: #1B4E9B !important;
   color: #ffffff !important;
 }
 ::ng-deep .swal2-styled.swal2-cancel:hover {
-  background-color: #c02222 !important;
+  background-color: #1B4E9B !important;
   color: #ffffff !important;
 }
 ::ng-deep .swal2-styled.swal2-cancel {
   height: 41.25px !important;
-  border: 1px solid #c02222 !important;
+  border: 1px solid #1B4E9B !important;
   background-color: #ffffff !important;
   color: #333333 !important;
+}
+::ng-deep .swal2-styled {
+  &:focus {
+    box-shadow: none;
+  }
 }
 
 // Desktop Menu Starts
