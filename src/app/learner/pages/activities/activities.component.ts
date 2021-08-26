@@ -391,7 +391,7 @@ export class ActivitiesComponent implements OnInit {
       this.selectfile.push(event.target.files[i]);
     }
        if(fileSizeval/1024/1024 > 150){
-        this.toastr.warning("The file size Cannot exceed 150 MB");
+        this.toastr.warning("The file size cannot exceed 150 MB");
         this.selectfile = [];
         if (this.uploadInput) {
           this.uploadInput.nativeElement.value = '';
@@ -535,7 +535,7 @@ export class ActivitiesComponent implements OnInit {
       let fileSize = 0;
         fileSize = event.target.files[0].size;
       if(fileSize/1024/1024 > 10){
-        this.toastr.warning("The file size Cannot exceed 10 MB");
+        this.toastr.warning("The file size cannot exceed 10 MB");
         return;
       }
     else{
@@ -916,7 +916,7 @@ export class ActivitiesComponent implements OnInit {
         this.selectPerformfile.push(event.target.files[i]);
       }
       if(fileSize/1024/1024 > 150){
-        this.toastr.warning("The file size Cannot exceed 150 MB");
+        this.toastr.warning("The file size cannot exceed 150 MB");
         this.selectPerformfile = [];
         if (this.videoInput) {
           this.videoInput.nativeElement.value = '';
