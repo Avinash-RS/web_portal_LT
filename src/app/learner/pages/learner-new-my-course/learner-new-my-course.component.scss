@@ -993,6 +993,11 @@
     margin-right: 0 !important;
   }
 }
+::ng-deep.inprogressModule {
+  .drag-scroll-content {
+    padding-bottom: 20px;
+  }
+}
 //
 // ::ng-deep.no {
 //   .mycoursesWrapper {
