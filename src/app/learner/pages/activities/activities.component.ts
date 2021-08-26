@@ -574,12 +574,12 @@ export class ActivitiesComponent implements OnInit {
     payload.append('total_mark', score);
     this.AssigmnemtPayload = payload;
     this.ngxLoader.stop();
-    this.toastr.success("File uploaded Successfully");
+    this.toastr.success("File uploaded successfully");
   }
   submitAssigmnemtData(assignemnt){
     this.Lservice.uploadAssignments(this.AssigmnemtPayload).subscribe((data: any) => {
       if (data.success === true) {
-        this.toastr.success(data.message, null);
+        this.toastr.success("Assignment submitted successfully", null);
         this.AssigmnemtPayload = null;
         this.getAssignmentmoduleData();
       } else {
