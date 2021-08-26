@@ -10,7 +10,7 @@
 </div>
 
 <!-- If No Records -->
-<div class="noCard">
+<div class="noCard" *ngIf="!showContent && !showSkeleton">
   <figure>
     <img alt="assignment" src="/assets/images/no-session.svg">
   </figure>
