@@ -7,8 +7,14 @@
   background-size: cover;
   height: 100%;
   padding: 1em;
+  @media only screen and (min-width: 568px) {
+    padding: 2em;
+  }
   @media only screen and (min-width: 720px) {
-    padding: 2em 4em;
+    padding: 3em;
+  }
+  @media only screen and (min-width: 1140px) {
+    padding: 4em;
   }
   .loginContainer {
     padding: 0;
@@ -85,7 +91,7 @@
     width: 45%;
     background-color: #ffffff;
     @media only screen and (max-width: 992px) {
-        width: 90%;
+        width: 100%;
         margin: 0 auto;
     }
     .signInContainer {
@@ -93,17 +99,21 @@
       width: 90%;
       margin: 0 auto;
       @media only screen and (max-width: 992px) {
-          max-width: initial;
+        max-width: initial;
+      }
+      .logo {
+        width: 50%;
+        text-align: center;
+        margin: 2em 0 4em 0;
+        img {
+          max-width: 100%;
         }
-        .logo {
-            text-align: center;
-            margin: 0 0 4em 0;
-            img {
-                max-width: 70%;
-            }
-            @media only screen and (min-width: 992px) {
-                display: none;
-            }
+        @media only screen and (min-width: 568px) {
+          width: 35%;
+        }
+        @media only screen and (min-width: 992px) {
+            display: none;
+        }
       }
     }
     h1 {
@@ -139,7 +149,10 @@
   }
   //SignIn
   .signUp {
-    padding: 30px 0;
+    padding: 0 0 30px 0;
+  }
+  .signIn {
+    padding-bottom: 30px;
   }
   .signIn, .forgotPassword, .signUp, .resetpassword {
     width: 100%;
@@ -148,6 +161,7 @@
       justify-content: center;
       color: #87898a;
       cursor: pointer;
+      padding-bottom: 30px;
     }
     .goBack:hover{
       color: #1B4E9B;
