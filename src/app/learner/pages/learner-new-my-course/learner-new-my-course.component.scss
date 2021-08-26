@@ -742,15 +742,12 @@
 
 // In Progress Module
 .inprogressModule {
-  margin-top: 20px;
+  margin: 20px 0;
   > div {
     width: 100%;
     flex-wrap: wrap;
     @media only screen and (min-width: 720px) {
       margin-left: -20px;
-    }
-    @media only screen and (min-width: 1140px) {
-      width: 75%;
     }
   }
   .modules {
@@ -758,16 +755,8 @@
     border-radius: 5px;
     border: 1px solid rgba(204, 204, 204, 0.8);
     padding: 10px 30px 10px 15px;
-    margin: 0 0 25px 0;
+    margin: 0 15px 0 0;
     position: relative;
-    width: 100%;
-    @media only screen and (min-width: 720px) {
-      width: 46%;
-      margin: 0 0 25px 20px;
-    }
-    @media only screen and (min-width: 1140px) {
-      width: 45%;
-    }
     &::before,
     .arrow {
       position: absolute;
@@ -832,10 +821,24 @@
 }
 
 //Missed Topics Knowledge Check
-.recentlyLearnedTopics {
+.recentlyLearnedTopics, 
+.inprogressModule {
   .wrapper {
     width: 98%;
     margin: 0 auto;
+    @media only screen and (min-width: 992px) {
+      width: 98.5%;
+    }
+    @media only screen and (min-width: 1540px) {
+      width: 98%;
+    }
+  }
+  .progressContainer {
+    &:last-child {
+      .modules {
+        margin-right: 0;
+      }
+    }
   }
   .topicsContainer {
     &:last-child {
@@ -846,7 +849,8 @@
   }
 }
 .missedTopicsKnowledgeCheck,
-.recentlyLearnedTopics {
+.recentlyLearnedTopics, 
+.inprogressModule {
   margin-top: 20px;
   .drag-scroll-wrapper {
     &.drag-scroll-container {
@@ -877,7 +881,8 @@
           color: #808080;
         }
         &.disableArrow {
-          opacity: 0.5;
+          // opacity: 0;
+          display: none;
         }
       }
     }
@@ -896,27 +901,42 @@
       }
     }
   }
+  .modules, .missedTopics {
+    width: 330px;
+    @media only screen and (min-width: 411px){
+      width: 363px;
+    }
+    @media only screen and (min-width: 720px){
+      width: 285px;
+    }
+    @media only screen and (min-width: 992px){
+      width: 270px;
+    }
+    @media only screen and (min-width: 1140px){
+      width: 269px;
+    }
+    @media only screen and (min-width: 1540px){
+      width: 335px;
+    }
+  }
+}
+.inprogressModule {
+  .wrapper {
+    .leftArrow,
+    .rightArrow {
+      button {
+        transform: translateY(-50%);
+      }
+    }
+  }
 }
 .missedTopics {
   background-color: #ffffff;
   border: 1px solid #cccccc;
   border-radius: 3px;
   padding: 15px;
-  width: 363px;
   margin-bottom: 15px;
   margin-right: 15px;
-  @media only screen and (min-width: 720px){
-    width: 285px;
-  }
-  @media only screen and (min-width: 992px){
-    width: 265px;
-  }
-  @media only screen and (min-width: 1140px){
-    width: 270px;
-  }
-  @media only screen and (min-width: 1540px){
-    width: 335px;
-  }
   h6,
   span,
   h5,
@@ -937,7 +957,7 @@
   h6 {
     font-size: 15px;
     color: #C02222;
-    font-weight: 700;
+    font-weight: 500;
   }
   h5 {
     font-size: 16px;
@@ -952,10 +972,11 @@
 
 //
 ::ng-deep.missedTopicsKnowledgeCheck,
-::ng-deep.recentlyLearnedTopics {
+::ng-deep.recentlyLearnedTopics, 
+::ng-deep.inprogressModule {
   .drag-scroll-content {
     display: flex !important;
-    justify-content: space-between;
+    // justify-content: space-between;
   }
   .drag-scroll-wrapper {
     &.drag-scroll-container {
@@ -963,9 +984,13 @@
     }
   }
 }
-::ng-deep.recentlyLearnedTopics {
+::ng-deep.recentlyLearnedTopics, 
+::ng-deep.inprogressModule {
   .drag-scroll-content {
     white-space: initial !important;
+  }
+  .topicsContainer {
+    margin-right: 0 !important;
   }
 }
 //

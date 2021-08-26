@@ -46,7 +46,8 @@ export class CustomDateFormatter extends CalendarDateFormatter {
 })
 
 export class LearnerNewMyCourseComponent implements OnInit {
-  @ViewChild(DragScrollComponent) ds: DragScrollComponent;
+  @ViewChild('completedTopics', { read: DragScrollComponent }) ds: DragScrollComponent;
+  @ViewChild('inProgress', { read: DragScrollComponent }) dsInProgress: DragScrollComponent;
   showJobRole = false;
   isReadMore = true;
   show = true;
@@ -60,6 +61,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
   showSkeleton = false;
   leftNavDisabled = false;
   rightNavDisabled = false;
+  leftNavDisabledInProgress = false;
+  rightNavDisabledInProgress = false;
   //Carousel
   missedTopicsKnowledgeCheck: OwlOptions = {
     loop: true,
@@ -168,7 +171,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
     }
     this.getModuleStatus();
   }
-  
+
+  //Recently completed topics
   moveLeft() {
     this.ds.moveLeft();
   }
@@ -178,10 +182,24 @@ export class LearnerNewMyCourseComponent implements OnInit {
   leftBoundStat(reachesLeftBound: boolean) {
     this.leftNavDisabled = reachesLeftBound;
   }
-
   rightBoundStat(reachesRightBound: boolean) {
     this.rightNavDisabled = reachesRightBound;
   }
+
+  //InProgress Module
+  moveLeftInProgress() {
+    this.dsInProgress.moveLeft();
+  }
+  moveRightInProgress() {
+    this.dsInProgress.moveRight();
+  }
+  leftBoundStatInProgress(reachesLeftBound: boolean) {
+    this.leftNavDisabledInProgress = reachesLeftBound;
+  }
+  rightBoundStatInProgress(reachesRightBound: boolean) {
+    this.rightNavDisabledInProgress = reachesRightBound;
+  }
+  //
 
   insidengOnInit() {
     this.CommonServices.openAvailCourcePopup.subscribe((data: any) => {
