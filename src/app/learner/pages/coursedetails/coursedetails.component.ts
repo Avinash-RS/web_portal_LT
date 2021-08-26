@@ -758,7 +758,7 @@ export class CoursedetailsComponent implements OnInit {
     }
     if (file.doc_type.includes("link")) {
       this.fileType = 'link';
-      this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path + this.blobKey);
+      this.URIData = this.sanitizer.bypassSecurityTrustResourceUrl(file.path);
     }
 
     if (this.fileType === 'pdf') {
