@@ -567,7 +567,7 @@
                             <label for="jobRoles" *ngIf="userDetailes.org_type != 'vocational'">Courses For:</label>
                             <div class="vocationalJobRole" style="display: inline-block;">
                               <mat-form-field appearance="fill">
-                                <mat-select (selectionChange)="onSelectionChange($event)" [(ngModel)]="jobroleCategoryId">
+                                <mat-select (selectionChange)="onSelectionChange($event)" matTooltip="{{tooltipJobRole}}" [(ngModel)]="jobroleCategoryId">
                                   <mat-select-trigger>{{selectedJobRoleData?.jobroleCategoryName}}</mat-select-trigger>
                                   <mat-option matTooltipClass="custom-mat-tooltip" matTooltip="{{selectedJobRole.jobroleCategoryName}}" class="jobRolecustomClass" *ngFor="let selectedJobRole of vocationalselectjobRole" [value]="selectedJobRole.jobroleCategoryId" (onSelectionChange)="jobRoleSelectedFunction($event,selectedJobRole)">
                                     {{selectedJobRole.jobroleCategoryName}}

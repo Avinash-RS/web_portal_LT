@@ -13,7 +13,7 @@
     <div class="rightPan">
       <span>Filter by: </span>
       <mat-form-field class="mr-2" appearance="outline">
-        <mat-select (selectionChange)="onSortChange($event)" [(ngModel)]="courseValue">
+        <mat-select (selectionChange)="onSortChange($event)" matTooltip="{{CourseName}}" [(ngModel)]="courseValue">
           <mat-option *ngFor="let course of courseDetailsList" [value]="course.course_id">
               {{course.course_name}}
           </mat-option>
