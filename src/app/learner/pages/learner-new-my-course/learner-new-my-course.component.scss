@@ -920,16 +920,6 @@
     }
   }
 }
-.inprogressModule {
-  .wrapper {
-    .leftArrow,
-    .rightArrow {
-      button {
-        transform: translateY(-50%);
-      }
-    }
-  }
-}
 .missedTopics {
   background-color: #ffffff;
   border: 1px solid #cccccc;
@@ -991,6 +981,11 @@
   }
   .topicsContainer {
     margin-right: 0 !important;
+  }
+}
+::ng-deep.inprogressModule {
+  .drag-scroll-content {
+    padding-bottom: 20px;
   }
 }
 //

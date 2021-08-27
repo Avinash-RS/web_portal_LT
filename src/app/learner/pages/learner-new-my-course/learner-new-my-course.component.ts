@@ -119,7 +119,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
   dayMonth: any;
   noActivity: boolean;
   courseSkel: boolean = false;
-  inProgressRecently: boolean = false;
+  inProgress: boolean = false;
+  recentlyCompleted: boolean = false;
   mode = 'determinate';
   bufferValue = 100;
   selectedJobRoleData = {
@@ -549,17 +550,17 @@ export class LearnerNewMyCourseComponent implements OnInit {
      this.completedTopic = data?.data?.recentlycourse?.data?.completedTopic;
      ///
      if(this.inProgressModule?.length > 0) {
-      this.inProgressRecently = true;
+      this.inProgress = true;
      }
      else {
-       this.inProgressRecently = false;
+       this.inProgress = false;
      }
     ///
      if(this.completedTopic?.length > 0) {
-      this.inProgressRecently = true;
+      this.recentlyCompleted = true;
      }
      else {
-       this.inProgressRecently = false;
+       this.recentlyCompleted = false;
      }
     setTimeout(()=>{
       this.displaySlides = true;
