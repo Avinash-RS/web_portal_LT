@@ -797,6 +797,10 @@
       color: #000000;
       line-height: normal;
       margin: 0 0 5px 0 !important;
+      width: 99%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
     span {
       display: block;
@@ -1825,6 +1829,7 @@
 // No Card
 .noCard {
   text-align: center;
+  margin: 40px 0;
   div {
     margin: 15px 0;
   }
