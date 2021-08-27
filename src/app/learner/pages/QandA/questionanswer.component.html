@@ -112,11 +112,10 @@
                                 </div>
                                 <h4 [innerHTML]="item.question"></h4>
                                 <div class="answeredDate">
-                                    <button
-                                        [class]="item.answered?'answer':'noAnswer'">{{item.answered?'Answered':'Unanswered'}}</button>
-                                    <span *ngIf="item.answered">{{item.publishedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
+                                    <button  class="answer">Answered</button>
+                                    <span>{{item.publishedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                                 </div>
-                                <p *ngIf="item.answered" [innerHTML]="item.answer"></p>
+                                <p [innerHTML]="item.answer"></p>
                             </div>
                         </span>
                     </span>
