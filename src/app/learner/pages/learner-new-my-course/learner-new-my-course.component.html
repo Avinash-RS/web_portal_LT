@@ -578,7 +578,7 @@
 
                     <!-- InProgressModule -->
                     <ng-contaniner *ngIf="userDetailes.org_type == 'collegeconnect'">
-                        <div class="inprogressModule" *ngIf="inProgressRecently">
+                        <div class="inprogressModule" *ngIf="inProgress">
                             <h3>Inprogress Modules</h3>
                             <div class="wrapper">
                                 <drag-scroll #inProgress snap-duration="200" (reachesLeftBound)="leftBoundStatInProgress($event)" (reachesRightBound)="rightBoundStatInProgress($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
@@ -643,7 +643,7 @@
 
                     <!-- Recently Learned Topics -->
                     <ng-contaniner *ngIf="userDetailes.org_type == 'collegeconnect'">
-                        <div class="recentlyLearnedTopics" *ngIf="inProgressRecently">
+                        <div class="recentlyLearnedTopics" *ngIf="recentlyCompleted">
                             <h3>Recently Completed Topics</h3>
                             <div class="wrapper">
                                 <drag-scroll #completedTopics snap-duration="200" (reachesLeftBound)="leftBoundStat($event)" (reachesRightBound)="rightBoundStat($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
