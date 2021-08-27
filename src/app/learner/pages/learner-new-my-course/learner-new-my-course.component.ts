@@ -134,6 +134,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   inProgressModule: any;
   completedTopic: any;
   displaySlides = false;
+  tooltipJobRole: any;
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
@@ -484,6 +485,15 @@ export class LearnerNewMyCourseComponent implements OnInit {
 
   onSelectionChange(event){
     this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id)
+    // console.log(event, 'fadsfasdfasdf')
+    if(this.vocationalselectjobRole?.length > 0) {
+      this.vocationalselectjobRole.forEach((jobRole) => {
+        // console.log(jobRole, '349258324098520');
+        if(jobRole.jobroleCategoryId == event.value) {
+          this.tooltipJobRole = jobRole.jobroleCategoryName;
+        }
+      })
+    }
   }
 
   jobRoleSelectedFunction(event,value){
