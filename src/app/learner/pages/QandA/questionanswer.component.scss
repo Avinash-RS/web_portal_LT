@@ -54,7 +54,12 @@
       font-weight: 400;
       line-height: normal;
       position: relative;
-      margin-right: 15px;
+      margin-right: 0;
+      .bar {
+        color: #c02222 !important;
+        display: inline-block;
+        margin: 0 10px;
+      }
       em {
         display: inline-block;
         transform: scale(-1);
@@ -64,14 +69,14 @@
       }
       &:first-child {
         color: #999999;
-        &::after {
-          content: "/";
-          position: absolute;
-          right: -10px;
-          top: auto;
-          bottom: auto;
-          color: #c02222;
-        }
+        // &::after {
+        //   content: "/";
+        //   position: absolute;
+        //   right: -10px;
+        //   top: auto;
+        //   bottom: auto;
+        //   color: #c02222;
+        // }
       }
     }
   }
@@ -386,8 +391,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media only screen and (max-width: 568px) {
+    align-items: flex-end;
+  }
   .filterby{
     margin-right:10px;
+  }
+  > div {
+    @media only screen and (max-width: 568px) {
+      width: 45%;
+    }
   }
 }
 
@@ -400,6 +413,9 @@
       box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.1);
       border-radius: 6px;
       background-color: #ffffff;
+      @media only screen and (max-width: 568px) {
+        width: 100%;
+      }
   }
   .mat-form-field-prefix .mat-icon, .mat-form-field-suffix .mat-icon {
       color: #A5A5A5;
