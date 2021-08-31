@@ -319,11 +319,12 @@ export class CoursedetailsComponent implements OnInit {
     this.socketEmitReciver = this.socketService.change.subscribe((result:any) => {
       if (result && result.eventId && result.eventId.length > 0 && result.data.childData.length > 0) {
         if (result.data.course_id === this.courseid) {
-          this.scromModuleData = result.data.childData;
           console.log(result.data)
-          this.moduleExpand(this.weekHolder, this.moduleHolder);
+         
           if (this.topiccurrentPage !== result.data.resumeSubContent ||
             result.data.childData[result.data.week-1].childData[result.data.resumeContent].children[result.data.resumeSubContent]?.status !== this.topicPageStatus) {
+              this.scromModuleData = result.data.childData;
+              this.moduleExpand(this.weekHolder, this.moduleHolder);
             this.currentPage = Number(result.data.resumeContent);
             this.topiccurrentPage = Number(result.data.resumeSubContent);
             this.weekHolder = result.data.week - 1;
@@ -332,6 +333,7 @@ export class CoursedetailsComponent implements OnInit {
             this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
             this.topicInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage].children[this.topiccurrentPage]
             if (resumeInit) {
+              
               this.nextPrevHolder = this.topiccurrentPage;
               this.moduleHolder = this.currentPage;
               this.weekHolderUI = this.weekHolder;
@@ -339,7 +341,9 @@ export class CoursedetailsComponent implements OnInit {
               this.isprevEnable = true;
               this.isNextEnable = true;
             }
+            
           }
+          this.moduleExpand(this.weekHolderUI, Number(this.moduleHolder));
           // if ((this.weekHolder !==0 && this.moduleHolder !== 0) || (this.nextPrevHolder !== 0)) {
           //   this.isprevEnable = false;
           // }
@@ -630,7 +634,8 @@ export class CoursedetailsComponent implements OnInit {
     });
   }
   playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, weekIndex, topindex, moduleIdx) {
-    this.weekHolder = this.weekHolderUI = weekIndex;
+    this.weekHolder = weekIndex;
+    this.weekHolderUI = weekIndex;
     this.currentTopicTitle = topicName;
     this.currentModuleTitle = moduleName
     this.topicPageStatus = topicStatus;
@@ -796,7 +801,7 @@ export class CoursedetailsComponent implements OnInit {
     }else{
       this.scromModuleData[Windex].childData[mindex].expanded = true;
     }
-    // if(this.filterkey === "All"){
+    // if(this.filterkey === "All"){ 
     //   if (mindex !== this.oldIdx) {
     //     for (const element of this.scromModuleData) {
     //       element.expanded = false
