@@ -2224,6 +2224,8 @@ query   get_batchwise_learner_dashboard_data( $user_id: String!, $request_type: 
       actual_total_week
       courseBy
       enableCredits
+      selflearning_totalweeks
+      QA_totalweeks
     }
   }
 }
