@@ -73,7 +73,7 @@
                                     <span>Question : {{i+ 1}}</span>
                                     <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                                 </div>
-                                <h4 [innerHTML]="item.question"></h4>
+                                <div [innerHTML]="item.question"></div>
 
                                     <div *ngIf="item?.answer;else unans">
                                     <div class="answeredDate">
