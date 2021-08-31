@@ -104,6 +104,7 @@ export class CalendarActivityComponent implements OnInit {
   skeletonPart = [1,2]
   userDetailes:any;
   customTooltipCondition = false
+  CourseName: string;
   constructor(public learnerService: LearnerServicesService,private gs: GlobalServiceService,private router: Router) { }
 
   ngOnInit() {
@@ -237,6 +238,13 @@ export class CalendarActivityComponent implements OnInit {
     this.onSortChange('value')
   }
   onSortChange(value){
+    if(this.courseDetailsList?.length > 0){
+      this.courseDetailsList.forEach((course)=>{
+        if(course.course_id == value.value){
+          this.CourseName = course.course_name;
+        }
+      })
+    }
     if (this.daySelected) {
       var view = 'day'
     } else {

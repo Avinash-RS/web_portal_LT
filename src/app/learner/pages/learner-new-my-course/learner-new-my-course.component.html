@@ -389,11 +389,13 @@
                                                   </mat-menu> -->
                                             </div>
                                             <div *ngIf="item?.batchid" class="showLessContent">
-                                                <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
-                                                    <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
-                                                </button>
                                                 <div [ngClass]="!item.isReadMore ? '' : 'showText'">
-                                                    <p [ngClass]="isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
+                                                    <div class="arrowWrapper d-flex">
+                                                        <p [ngClass]="isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
+                                                        <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
+                                                            <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
+                                                        </button>
+                                                    </div>
                                                     <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
                                                         <span class="by">By: <b>{{item.courseBy}}</b></span>
                                                         <span class="credits" *ngIf ="item.enableCredits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
@@ -496,11 +498,13 @@
                                                 </mat-menu> -->
                                             </div>
                                             <div *ngIf="item?.batchid" class="showLessContent">
-                                                <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
-                                                    <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
-                                                </button>
                                                 <div [ngClass]="!item.isReadMore ? '' : 'showText'">
-                                                    <p [ngClass]="isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
+                                                    <div class="arrowWrapper d-flex">
+                                                        <p [ngClass]="isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
+                                                        <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
+                                                            <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
+                                                        </button>
+                                                    </div>
                                                     <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
                                                         <span class="by">By: <b>{{item.courseBy}}</b></span>
                                                         <span class="credits" *ngIf ="item.enableCredits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
@@ -563,7 +567,7 @@
                             <label for="jobRoles" *ngIf="userDetailes.org_type != 'vocational'">Courses For:</label>
                             <div class="vocationalJobRole" style="display: inline-block;">
                               <mat-form-field appearance="fill">
-                                <mat-select (selectionChange)="onSelectionChange($event)" [(ngModel)]="jobroleCategoryId">
+                                <mat-select (selectionChange)="onSelectionChange($event)" matTooltip="{{tooltipJobRole}}" [(ngModel)]="jobroleCategoryId">
                                   <mat-select-trigger>{{selectedJobRoleData?.jobroleCategoryName}}</mat-select-trigger>
                                   <mat-option matTooltipClass="custom-mat-tooltip" matTooltip="{{selectedJobRole.jobroleCategoryName}}" class="jobRolecustomClass" *ngFor="let selectedJobRole of vocationalselectjobRole" [value]="selectedJobRole.jobroleCategoryId" (onSelectionChange)="jobRoleSelectedFunction($event,selectedJobRole)">
                                     {{selectedJobRole.jobroleCategoryName}}
