@@ -310,7 +310,7 @@
     position: relative;
     z-index: 9;
     @media only screen and (max-width: 767px) {
-      padding: 15px;
+      padding: 15px 15px 50px 15px;
     }
     .jobRole {
       padding-right: 85px;
@@ -456,13 +456,16 @@
         width: 80%;
       }
       h3 {
-        width: 80%;
+        width: 75%;
         font-size: 18px;
         font-weight: 400;
         color: #000000;
         line-height: 23px;
         margin-bottom: 10px;
         margin-top: 10px;
+        @media only screen and (min-width: 568px) {
+          width: 80%;
+        }
         @media only screen and (min-width: 720px) {
           font-size: 21px;
           margin-top: 0;
@@ -604,13 +607,13 @@
         &:last-child {
           margin-right: 0;
         }
-        // &:nth-child(2) {
-        //   span {
-        //     em {
-        //       font-size: 23px;
-        //     }
-        //   }
-        // }
+        &:nth-child(2) {
+          span {
+            em {
+              font-size: 21px;
+            }
+          }
+        }
         span {
           display: inline-flex;
           justify-content: center;
@@ -673,7 +676,10 @@
       }
     }
     .searchProgression {
-      width: 20%;
+      width: 25%;
+      @media only screen and (min-width: 568px) {
+        width: 20%;
+      }
       &.no {
         @media only screen and (min-width: 569px) {
           min-height: 58px;
@@ -683,7 +689,7 @@
         }
       }
       .percentage {
-        width: 39%;
+        width: 70%;
         margin-right: -11px;
         @media only screen and (min-width: 569px) {
           width: 55%;

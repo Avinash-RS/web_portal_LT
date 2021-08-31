@@ -1,6 +1,12 @@
 <app-header></app-header>
 <div class="notificatonRead d-flex justify-content-between align-items-center">
-  <div class="d-flex align-items-center justify-content-start">
+
+  <ul class="breadcrumb">
+    <li><em (click)="goBack()" class="lxp-Go backArrow"></em> All notifications </li>
+    <!-- <li>Activities</li> -->
+  </ul>
+
+  <!-- <div class="d-flex align-items-center justify-content-start">
     <p class="commonBackStyle">
       <i class="lxp-Arrow backArrow" (click)="goBack()"></i>
       <span (click)="goBack()">Back</span>
@@ -9,7 +15,7 @@
       <span class="pipeLine"> | </span>
       <span>All notifications</span>
     </div>
-  </div>
+  </div> -->
   <!-- <h2 class="head"><strong>All notifications</strong></h2> -->
   <div class="markAllbtn" *ngIf="notifications?.length > 0">
     <button class="markBtn" (click)="markAsRead(notifications,'all')" [disabled]="unreadCount == 0">
