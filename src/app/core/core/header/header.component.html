@@ -49,9 +49,11 @@
     {{initials}}
   </button>
 
-  <figure [matMenuTriggerFor]="menu" class="profPic" *ngIf="profilepic">
-    <img [src]="profilepic + blobKey" alt="" />
-  </figure>
+  <div class="">
+    <figure [matMenuTriggerFor]="menu" class="profPic" *ngIf="profilepic">
+      <img [src]="profilepic + blobKey" alt="" />
+    </figure>
+  </div>
 
   <button class="mobHamburger" mat-button [matMenuTriggerFor]="mobmenu" style="z-index: 999;">
     <mat-icon>more_vert</mat-icon>
