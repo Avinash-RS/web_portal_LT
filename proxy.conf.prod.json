@@ -1,6 +1,6 @@
 {
     "/gateway/*": {
-      "target": "",
+      "target": "https://devfacade.lntiggnite.com/gateway",
       "pathRewrite": { "^/gateway": "" },
       "secure": false,
       "changeOrigin": true,
