@@ -21,7 +21,7 @@
       </ul>
       <h3>Learning Process</h3>
       <!-- Self Learning -->
-      <div class="selfLearningSection commonClass d-flex justify-content-between flex-wrap align-items-center">
+      <!-- <div class="selfLearningSection commonClass d-flex justify-content-between flex-wrap align-items-center"> 
         <div class="percentageContent">
           <h4>Self Learning</h4>
           <div>
@@ -84,10 +84,10 @@
             </span>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Query Resolution -->
-      <div class="selfLearningSection commonClass d-flex justify-content-between flex-wrap align-items-center">
+      <!-- <div class="selfLearningSection commonClass d-flex justify-content-between flex-wrap align-items-center">
         <div class="percentageContent">
           <h4>Query Resolution</h4>
           <div>
@@ -148,8 +148,125 @@
             </span>
           </div>
         </div>
+      </div> -->
+
+      <div class="overallsection d-flex justify-content-between align-items-center">
+        <mat-card class="selflearningCard">
+                 <div class="card-head d-flex align-items-center justify-content-center">Self Learning</div>
+                  <div class="card-content d-flex align-items-center">
+                    <div class="graph-content">
+                      <circle-progress [percent]='courseReportData?.overAllScore.selflearningscore' [radius]=25  [space]=-6
+                      [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#00A99D'"
+                      [outerStrokeGradientStopColor]="'#00A99D'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6
+                      [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false"></circle-progress>
+                    </div>
+
+                    <div class="text-content">
+                      <ul>
+                        <li class="d-flex">
+                          <label>No. of weeks elapsed</label><span>5/16</span>
+                        </li>
+                        <li class="d-flex">
+                          <label> No. of topics completed </label><span>31/38</span>
+                        </li>
+                        <li class="d-flex">
+                          <label>Total duration spent </label> <span>127 mins</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                  </div>
+                  <div class="card-foot">
+                    You nearly reached your monthlytarget. Keep going! (5 days to go)
+                  </div>
+                 </mat-card>
+              <mat-card class="selflearningCard">
+                <div class="card-head d-flex align-items-center justify-content-center">Q&A</div>
+                  <div class="card-content d-flex align-items-center">
+                  <div class="graph-content">
+                    <circle-progress [percent]='courseReportData?.overAllScore.selflearningscore' [radius]=25  [space]=-6
+                    [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#5850E0'"
+                    [outerStrokeGradientStopColor]="'#5850E0'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6
+                    [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false"></circle-progress>
+                  </div>
+
+                  <div class="text-content">
+                    <ul>
+                      <li>
+                       <label>No. of questions asked </label> <span>31</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                </div>
+
+                <div class="card-foot">
+                  You nearly reached your monthlytarget. Keep going! (5 days to go)
+                </div>
+              </mat-card>
       </div>
+
+      <div class="weeklyreport">
+          <div class="weekly-head d-flex justify-content-between align-items-center">
+                <div class="week-head-text">Self Learning weekly report</div>
+                <div class="week-head-action">
+                  <mat-button-toggle-group appearance="legacy" value="article" #group="matButtonToggleGroup">
+                    <mat-button-toggle value="article"><mat-icon>article</mat-icon></mat-button-toggle>
+                    <mat-button-toggle value="chart"><mat-icon>bar_chart</mat-icon></mat-button-toggle>
+                  </mat-button-toggle-group>
+                </div>
+          </div>
+          <div class="weekly-content">            
+            <div *ngIf="group.value == 'article'">
+
+              <div class="d-flex flex-wrap justify-content-between align-items-center">
+                  <mat-card class="week-card" *ngFor = "let week of weekCard">
+                    <div class="week-card-head d-flex">
+                      <popover-content #selfPopover>
+                        <div class="popoverContainer">
+                          <div class="items">(A) Estimated Duration - <span>{{'90'}} mins</span></div>
+                          <div class="items">(B) Completed Duration - <span>{{'90'}} mins</span></div>
+                          <div class="items">(C) No. of Topics - <span>{{'7'}}</span></div>
+                          <div class="items">(D) Completed Topics - <span>{{'5'}}</span></div>
+                          <div class="calculation">Calculation formula</div>
+                          <div class="calcFormula">={{'SUM(D/C*0.5,IF((B/A*0.5)>0.5,0.5,(B/A*0.5)))'}}</div>
+                          <div class="calcPercentage">= {{'90%'}} </div>
+                        </div>
+                      </popover-content>
+                      <label>Week {{week}}</label>
+                      <button class="popover-info" popoverPlacement="right" [popover]="selfPopover"><span>
+                        <img  src="../../../../assets/images/Group 14025.svg" />
+                      </span></button>
+                    </div>
+                      <ul>
+                        <li class="d-flex"><label>Percentage</label><span>77 %</span></li>
+                        <li class="d-flex"><label>Score</label><span>0.55</span></li>
+                      </ul>
+                  </mat-card>
+              </div>
+
+            </div>
+            <div *ngIf="group.value == 'chart'">
+              <mat-card>
+                <div style="display: block;">
+                  <canvas baseChart 
+                    [datasets]="barChartData"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [plugins]="barChartPlugins"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType">
+                  </canvas>
+                </div>
+              </mat-card>
+          </div>
+          </div>
+      </div>
+
     </div>
+
+
+
     <div class="reportRightCol">
       <div class="refresh">
         <button (click)="refreshReport()"><em class="lxp-Reset"></em> Refresh</button>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LearnerServicesService } from '../../services/learner-services.service';
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-course-report',
@@ -13,6 +15,40 @@ export class CourseReportComponent implements OnInit {
   courseReportData;
   courseReport = false;
   refresh = false;
+  weekCard = [
+    1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
+  ]
+  public barChartOptions: ChartOptions = {
+    responsive: true, 
+    scales:{
+      xAxes:[{
+        gridLines:{
+          display:false
+        }
+      }],
+      yAxes:[{
+        gridLines:{
+          borderDash: [1, 3],
+          color: "#00A99D"
+        }
+      }]
+    }
+  };
+
+  public barChartLabels: Label[] = ['week 1', 'week 2', 'week 3', 'week 4', 'week 5', 'week 6', 'week 7','week 8'];
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+  public barChartPlugins = [];
+
+  public barChartData: ChartDataSets[] = [
+    { data: [0, 59, 80, 81, 56, 55, 40,100], 
+      label: 'Series A' ,
+      backgroundColor: '#00A99D',
+      barThickness: 18,
+      barPercentage: 0.5,
+    },
+  ];
+
   constructor(
     private activeRoute: ActivatedRoute, 
     private router:Router, 
