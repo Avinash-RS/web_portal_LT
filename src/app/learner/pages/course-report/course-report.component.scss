@@ -107,6 +107,90 @@
       }
     }
   }
+  .overallsection{
+    margin-top: 10px;
+    padding: 0 20px;
+    .selflearningCard{
+      width: 49%;
+      .card-head{
+        font-size: 18px;
+        font-weight: 500;
+      }.card-content{
+        .graph-content{
+          width: 40%;
+        }
+        .text-content {
+          width: 63%;
+        }
+        ul{
+          list-style: none;
+          padding-left: 0;
+          line-height: 16px;
+          margin-bottom: 0px; 
+          label{
+            font-size:13px;
+            width:73%;
+          }
+          span{
+            font-size:13px;
+            font-weight: 600;
+           
+          }
+        }
+      }
+      .card-foot{
+        color:#809FB8;
+        font-size: 10px;
+      }
+    }
+  }
+  .weeklyreport{
+    margin-top: 40px;
+    .weekly-head{
+      .week-head-text{
+        padding-left:20px;
+        width:83%;
+        font-size: 15px;
+      }
+      .week-head-action{
+        width:17%;
+        .mat-button-toggle-checked {
+          background-color: white;
+          color: #c02222;
+        }
+      }
+    }
+    .weekly-content{
+      padding:0 20px;
+      margin-top: 10px;
+      .week-card{
+        width:24%;
+        margin-bottom: 10px;
+        .week-card-head{
+          margin-bottom: 10px;
+          label{
+            font-size:16px;
+            font-weight: 600;
+            width:90%;
+          }
+        }
+        ul{
+          list-style: none;
+          padding-left: 0;
+          line-height: 16px;
+          margin-bottom: 0px; 
+          label {
+            font-size: 15px;
+            width:80%;
+          }
+          span{
+            color:#00A99D;
+            font-weight:500;
+          }
+        }
+      }
+    }
+  }
   h4 {
     color: #333333;
     font-size: 18px;
@@ -509,9 +593,9 @@
   width: 20px;
   height: 20px;
   box-shadow: 2px 1px 2px #00000029;
-  position: absolute;
+  //position: absolute;
   right: 10px;
-  top: 0;
+  //top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
