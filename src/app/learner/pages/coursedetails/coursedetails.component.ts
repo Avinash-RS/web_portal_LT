@@ -317,7 +317,7 @@ export class CoursedetailsComponent implements OnInit {
     let resumeInit = true;
     this.socketService.socketReceiver()
     this.socketEmitReciver = this.socketService.change.subscribe((result:any) => {
-      if (result && result.eventId && result.eventId.length > 0 && result.data.childData.length > 0) {
+      if (result && result.eventId && result.eventId.length && result.data.childData.length > 0) {
         if (result.data.course_id === this.courseid) {
           console.log(result.data)
          
@@ -332,15 +332,15 @@ export class CoursedetailsComponent implements OnInit {
             this.topicPageStatus = this.topicPageStatus?this.topicPageStatus:"process";
             this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
             this.topicInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage].children[this.topiccurrentPage]
-            if (resumeInit) {
+            // if (resumeInit) {
               
-              this.nextPrevHolder = this.topiccurrentPage;
-              this.moduleHolder = this.currentPage;
-              this.weekHolderUI = this.weekHolder;
-              resumeInit = false;
-              this.isprevEnable = true;
-              this.isNextEnable = true;
-            }
+            //   this.nextPrevHolder = this.topiccurrentPage;
+            //   this.moduleHolder = this.currentPage;
+            //   this.weekHolderUI = this.weekHolder;
+            //   resumeInit = false;
+            //   this.isprevEnable = true;
+            //   this.isNextEnable = true;
+            // }
             
           }
           this.moduleExpand(this.weekHolderUI, Number(this.moduleHolder));
