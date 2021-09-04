@@ -1,9 +1,0 @@
-{
-    "/gateway/*": {
-      "target": "",
-      "pathRewrite": { "^/gateway": "" },
-      "secure": false,
-      "changeOrigin": true,
-      "logLevel": "debug"
-    }
-  }
