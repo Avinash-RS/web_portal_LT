@@ -98,13 +98,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "lxpfrontend:build",
-            "proxyConfig": "./proxy.conf.dev.json"
+            "browserTarget": "lxpfrontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "lxpfrontend:build:production",
-              "proxyConfig": "./proxy.conf.prod.json"
+              "browserTarget": "lxpfrontend:build:production"
             }
           }
         },
