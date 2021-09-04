@@ -60,14 +60,19 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.lxp-Lab_Practice:before {
+  content: "\e95e";
+}
 .lxp-Activities_New:before {
   content: "\e93f";
 }
 .lxp-book-question:before {
   content: "\e92c";
+  color: #4b4b4b;
 }
 .lxp-Play:before {
   content: "\e935";
+  color: #b3b3b3;
 }
 .lxp-Assessment_Report:before {
   content: "\e95d";

@@ -510,7 +510,48 @@
         </mat-card>  -->
       </div>
     </mat-tab>
-
+    <mat-tab label="Lab Practical">
+      <ng-container *ngIf="labpracticeData">
+        <div class="box-0-1">
+          <div class="d-flex justify-content-between">
+            <div class="w-100 projectActivityDetails">
+              <div class="d-flex justify-content-between assignmentActivityDetails align-items-center">
+                <!-- <div class="iconcontent">
+                  <em class="lxp-Lab_Practice"></em>
+                </div> -->
+                <div class="labLeftContent">
+                  <div class="topic text-left d-flex">
+                    <mat-icon class="assignIcon">assignment</mat-icon>
+                    <span class="f_size_16 f_wt_600 projHead">{{labpracticeData.courseName}}</span>
+                  </div>
+                  <div class="t-l-1 ml-4">
+                    Activity Description: {{labpracticeData.desc}}
+                  </div>
+                  <div class="t-l-1 ml-4">
+                    Score : {{labpracticeData.score}}
+                   </div>
+                </div>
+                <div class="labmiddleContent">
+                  <div class="d-flex justify-content-end projDate">
+                    <div class="projstartdate">
+                      <span class="font-weight-bold">Start date:</span>
+                      <span class="textGrayColor1"> {{labpracticeData.start | date:'MMM dd, yyyy hh:mm a'}}</span>
+                    </div>
+                    <div class="projEndDate">
+                      <span class="font-weight-bold">End date:</span>
+                      <span class="textGrayColor1"> {{labpracticeData.end | date:'MMM dd, yyyy hh:mm a'}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="practicesaction">
+                  <button mat-stroked-button class="practice-btn mt-2" (click)="redirectLabpractice()">Practices</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </mat-tab>
     <mat-tab label="Project">
       <app-project-mobile [projectDetailPageData]="projectDetaildata" *ngIf="projectMobileResponsive"></app-project-mobile>
 
