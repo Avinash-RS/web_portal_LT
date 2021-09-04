@@ -1076,6 +1076,25 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
   //------------------------------------------------------------------//
+  redirectLabpractice(){
+    var labactivitydetails ={
+      username:this.userDetail.username,
+      course_id:this.courseid
+    }
+    this.Lservice.labactivity(labactivitydetails).subscribe((result:any)=>{
+      if(result.data.labactivity.success == false){
+        this.toastr.warning(result.data.labactivity.message);
+      }
+      else if(result.data.labactivity.success == null){
+        if(result.data.labactivity.Status == 0){
+            window.open(result.data.labactivity.url);
+        }
+        else{
+          this.toastr.warning(result.data.labactivity.Message);
+        }
+      }
+    });
+  }
 }
 
 
