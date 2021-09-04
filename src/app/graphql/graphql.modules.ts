@@ -38,7 +38,7 @@ export class GraphqlModule {
   envCourseApi: any = environment.createCourseApi;
   constructor(apollo: Apollo, httpLink: HttpLink, private gs: GlobalServiceService, private httpC: HttpClient,
               private services: CommonServicesService) {
-    const http = httpLink.create({ uri: this.envApi});
+    const http = httpLink.create({ uri: this.envApi + 'gateway'});
     const middleware = new ApolloLink((operation, forward) => {
 
       // Check for token
