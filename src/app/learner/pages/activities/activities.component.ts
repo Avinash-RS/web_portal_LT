@@ -177,6 +177,7 @@ export class ActivitiesComponent implements OnInit {
   noofItems = 0;
   AssigmnemtPayload :FormData;
   labpracticeData : any;
+  labNoCard = false;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
     private dialog: MatDialog, private toastr: ToastrService,
@@ -434,8 +435,10 @@ export class ActivitiesComponent implements OnInit {
     this.Lservice.getlabactivity(labdata).subscribe((result:any)=>{
       if(result.data.getlabactivity.success){
         this.labpracticeData = result.data.getlabactivity.data;
+        this.labNoCard = false;
       }
       else{
+        this.labNoCard = true;
         this.toastr.warning(result.data.getlabactivity.message);
       }
     })
