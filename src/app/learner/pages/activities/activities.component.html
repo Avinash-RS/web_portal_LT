@@ -551,6 +551,12 @@
           </div>
         </div>
       </ng-container>
+      <div class="noCard" *ngIf="labNoCard">
+        <figure>
+          <img src="/assets/images/noperform.svg" alt="assignment">
+        </figure>
+        <p>You have no Lab practicals at the moment!</p>
+      </div>
     </mat-tab>
     <mat-tab label="Project">
       <app-project-mobile [projectDetailPageData]="projectDetaildata" *ngIf="projectMobileResponsive"></app-project-mobile>
