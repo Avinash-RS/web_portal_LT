@@ -37,6 +37,7 @@ export class ResetpasswordComponent implements OnInit {
   resolvedCaptcha: any;
   currentYear = new Date().getFullYear();
   loader = false;
+  resetCode;
   constructor(
     public translate: TranslateService,
     private router: Router,
@@ -52,6 +53,7 @@ export class ResetpasswordComponent implements OnInit {
   ngOnInit() {
     this.activeroute.queryParams.subscribe(params => {
       if (params.code) {
+        this.resetCode = params.code
         // const decryptedString = params.code;
       var input = {
           "userSecretkey" : params.code
@@ -138,7 +140,7 @@ export class ResetpasswordComponent implements OnInit {
     // var decryptname = CryptoJS.AES.decrypt(encryptedname, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     // var decryptpassword = CryptoJS.AES.decrypt(encryptedpassword, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     // return
-    this.service.resetPassword(encryptedname,encryptedpassword).subscribe((data: any) => {
+    this.service.resetPassword(encryptedname,encryptedpassword,this.resetCode).subscribe((data: any) => {
       if (data.data.get_forgot_password_byresetpassword.success === 'true') {
         this.loader = false
         this.toastr.success(data.data.get_forgot_password_byresetpassword.message);

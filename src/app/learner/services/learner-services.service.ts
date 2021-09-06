@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Subject,Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import * as CryptoJS from 'crypto-js';
+
 import { addTopicreference, bulkclaimcourse, claimcourse, createGuidanceRequest,
    CreateNewThread, CreateNewThreadBid, deleteQualification, getCourseCategorySearch,
     getLevelSubCategoryData, gettopicdetail, getChangePasswordupdateprofile,
@@ -34,7 +36,7 @@ boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignm
   providedIn: 'root'
 })
 export class LearnerServicesService {
-
+  secretKey = "(!@#Passcode!@#)";
   httpOptions;
   envWcaApi: any = environment.wcaapiurl;
   envApi: any = environment.apiUrl;
@@ -50,7 +52,8 @@ export class LearnerServicesService {
     var userDetails = JSON.parse(localStorage.getItem('UserDetails'))
     this.httpOptions = {
       headers: new HttpHeaders({ 
-        Authorization: token
+        Authorization: token,
+        //requestId: CryptoJS.AES.encrypt(userDetails['user_id'], this.secretKey.trim()).toString()
        })
     };
   }
@@ -294,12 +297,13 @@ getMessage(): Observable<any> {
       }
     });
   }
-  resetPassword(username, password) {
+  resetPassword(username, password,resetCode) {
     return this.Apollo.query({
       query: getForgotpasswordbyResetpassword,
       variables: {
         username,
-        password
+        password,
+        resetCode
       }
     });
   }
