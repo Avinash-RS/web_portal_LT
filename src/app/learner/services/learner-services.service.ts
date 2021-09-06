@@ -50,8 +50,7 @@ export class LearnerServicesService {
     var userDetails = JSON.parse(localStorage.getItem('UserDetails'))
     this.httpOptions = {
       headers: new HttpHeaders({ 
-        Authorization: token,
-        _id: btoa(userDetails['user_id'])
+        Authorization: token
        })
     };
   }
