@@ -136,6 +136,7 @@ export class LoginComponent implements OnInit {
       .subscribe((loginresult: any) => {
         if (loginresult.data.login) {
           if (loginresult.data.login.success) {
+            this.router.navigate(['/Learner/MyCourse']);
             if(this.loginForm.value.remember_me === true){
               localStorage.setItem('token', loginresult.data.login.message.token);
             }else{
@@ -147,13 +148,12 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('remember_me', 'false');
               localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
               localStorage.setItem('role', 'learner');
-              this.router.navigate(['/Learner/MyCourse']);
+              // this.router.navigate(['/Learner/MyCourse']);
             if (loginresult.data.login && this.loginForm.value.remember_me === true) {
               localStorage.setItem('remember_me', 'true');
             } else {
               localStorage.setItem('remember_me', 'false');
             }
-            this.router.navigate(['/Learner/MyCourse']);
             setTimeout(()=>{
               this.loader = false;
             },5000)

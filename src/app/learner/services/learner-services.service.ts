@@ -35,11 +35,7 @@ boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignm
 })
 export class LearnerServicesService {
 
-  private httpOptions = {
-    // tslint:disable-next-line:object-literal-key-quotes
-    headers: new HttpHeaders({ 'Content-type': 'application/json', 'authorization': 'Bearer 104150f8e66cae68b40203e1dbba7b4529231970' })
-  };
-
+  httpOptions;
   envWcaApi: any = environment.wcaapiurl;
   envApi: any = environment.apiUrl;
   envApiImg: any = environment.apiUrlImg;
@@ -49,6 +45,16 @@ export class LearnerServicesService {
   // tslint:disable-next-line:no-shadowed-variable
   constructor(private Apollo: Apollo, private http: HttpClient) { }
 
+  getToken(){
+    const token = localStorage.getItem('token')||sessionStorage.getItem('token'); 
+    var userDetails = JSON.parse(localStorage.getItem('UserDetails'))
+    this.httpOptions = {
+      headers: new HttpHeaders({ 
+        Authorization: token,
+        _id: btoa(userDetails['user_id'])
+       })
+    };
+  }
   
   closeRecoderdData$ = new Subject<any>();
   closeRecoderdData = this.closeRecoderdData$.asObservable();
@@ -72,7 +78,56 @@ export class LearnerServicesService {
       );
   }
 
-uploadAssignments(fromdata) { return this.http.post(this.envApi + 'wca/learnerscorefile', fromdata); }
+uploadAssignments(fromdata) { 
+  this.getToken();
+  return this.http.post(this.envApi + 'wca/learnerscorefile', fromdata, this.httpOptions); 
+}
+
+imageupload(fb) {
+  this.getToken();
+  return this.http.post<any[]>(this.envApiImg + `upload/image`, fb,this.httpOptions);
+}
+
+postcomment(data) {
+  this.getToken();
+  return this.http.post(this.envApi + 'postcomment', data, this.httpOptions);
+}
+
+unlikepost(data) {
+  this.getToken();
+  return this.http.post(this.envApi + 'post_unlike', data, this.httpOptions);
+}
+likepost(data) {
+  this.getToken();
+  return this.http.post(this.envApi + 'post_like', data, this.httpOptions);
+}
+getEmail(input) 
+  {
+    this.getToken();
+   return this.http.post(this.envApi + 'getuserRecordbasedonSecretKey', input,this.httpOptions);
+   }
+
+   learnerUploadVideo(data) { 
+    this.getToken();
+    return this.http.post(environment.apiUrl + 'globalupload', data,this.httpOptions);
+   }
+  learnerSumbitdeleteVideo(submitData) { 
+    this.getToken();
+    return this.http.post(environment.apiUrl + 'wca/learnerSumbitdeleteVideo', submitData,this.httpOptions); 
+  }
+  insertRecord(data) { 
+    this.getToken();
+    return this.http.post(environment.apiUrl + 'learnerUploadVideo', data,this.httpOptions); }
+  learnerRecordVideo(data) { 
+    this.getToken();
+    return this.http.post(environment.apiUrl + 'wca/learnerRecordVideo', data,this.httpOptions); }
+
+
+  uploadVideo(image) {
+    this.getToken();
+    return this.http.post(environment.wcaapiurl + 'api/upload/uploadimagefile', image,this.httpOptions);
+  }
+
 
 clearMessage() {
   this.ProgressPercentage.next();
@@ -101,36 +156,6 @@ getMessage(): Observable<any> {
     });
   }
 
-  imageupload(fb) {
-    return this.http.post<any[]>(this.envApiImg + `upload/image`, fb);
-  }
-
-  postcomment(data) {
-    const token = localStorage.getItem('token')||sessionStorage.getItem('token'); ;
-    const httpOptions = {
-      headers: new HttpHeaders({ Authorization: token })
-    };
-    return this.http.post(this.envApi + 'postcomment', data, httpOptions);
-  }
-
-  unlikepost(data) {
-    const token = localStorage.getItem('token')||sessionStorage.getItem('token');;
-    const httpOptions = {
-      headers: new HttpHeaders({ Authorization: token })
-    };
-    return this.http.post(this.envApi + 'post_unlike', data, httpOptions);
-  }
-  likepost(data) {
-    const token = localStorage.getItem('token')||sessionStorage.getItem('token'); ;
-    const httpOptions = {
-      headers: new HttpHeaders({ Authorization: token })
-    };
-    return this.http.post(this.envApi + 'post_like', data, httpOptions);
-  }
-  getEmail(input) 
-    {
-     return this.http.post(this.envApi + 'getuserRecordbasedonSecretKey', input);
-     }
 
   // getEmail(input) {
   //   const token = localStorage.getItem('token') ;
@@ -880,20 +905,6 @@ getMessage(): Observable<any> {
       }
     });
   }
-  saveAttendees() {
-    return this.Apollo.query({
-      query: saveAttendies,
-      variables: {
-        userid: 'fsdfsdfsd',
-        activityid: '432142314',
-        activitynamne: 'test',
-        username: 'testing',
-        mobile: '9876543234',
-        email: 'test@gmail.com',
-        status: 'true'
-      }
-    });
-  }
 
   getCountForJobroleCategories(userObjId, userId) {
     return this.Apollo.query({
@@ -984,9 +995,7 @@ getprojectActivityData(userId, courseId,pagination,page,noofItems) {
       }
     });
   }
-  learnerUploadVideo(data) { return this.http.post(environment.apiUrl + 'globalupload', data); }
-  learnerSumbitdeleteVideo(submitData) { return this.http.post(environment.apiUrl + 'wca/learnerSumbitdeleteVideo', submitData); }
-  insertRecord(data) { return this.http.post(environment.apiUrl + 'learnerUploadVideo', data); }
+
   get_active_course_count(userId) {
     return this.Apollo.query({
       query: getActivecourseCount,
@@ -994,13 +1003,6 @@ getprojectActivityData(userId, courseId,pagination,page,noofItems) {
         user_id: userId,
       }
     });
-  }
-
-  learnerRecordVideo(data) { return this.http.post(environment.apiUrl + 'wca/learnerRecordVideo', data); }
-
-
-  uploadVideo(image) {
-    return this.http.post(environment.wcaapiurl + 'api/upload/uploadimagefile', image);
   }
 
   boarddetail(userId, courseId) {
