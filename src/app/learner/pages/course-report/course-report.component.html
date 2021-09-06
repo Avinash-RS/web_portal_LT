@@ -150,17 +150,16 @@
         </div>
       </div> -->
 
-      <div class="overallsection d-flex justify-content-between align-items-center">
+      <div class="overallsection d-flex justify-content-between align-items-center flex-wrap">
         <mat-card class="selflearningCard">
                  <div class="card-head d-flex align-items-center justify-content-center">Self Learning</div>
                   <div class="card-content d-flex align-items-center">
                     <div class="graph-content">
-                      <circle-progress [percent]='courseReportData?.overAllScore.selflearningscore' [radius]=25  [space]=-6
-                      [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#00A99D'"
+                      <circle-progress [titleFontSize] = "15" [titleFontWeight] = "500" [showUnits]= "false" [percent]='courseReportData?.overAllScore.selflearningscore' 
+                      [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#00A99D'" 
                       [outerStrokeGradientStopColor]="'#00A99D'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6
-                      [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false"></circle-progress>
+                      [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" ></circle-progress>
                     </div>
-
                     <div class="text-content">
                       <ul>
                         <li class="d-flex">
@@ -174,7 +173,6 @@
                         </li>
                       </ul>
                     </div>
-
                   </div>
                   <div class="card-foot">
                     You nearly reached your monthlytarget. Keep going! (5 days to go)
@@ -184,12 +182,12 @@
                 <div class="card-head d-flex align-items-center justify-content-center">Q&A</div>
                   <div class="card-content d-flex align-items-center">
                   <div class="graph-content">
-                    <circle-progress [percent]='courseReportData?.overAllScore.selflearningscore' [radius]=25  [space]=-6
+                    <circle-progress [titleFontSize] = "15" [titleFontWeight] = "500" [showUnits]= "false" 
+                    [percent]='courseReportData?.overAllScore.selflearningscore' [radius]=25  [space]=-6
                     [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#5850E0'"
                     [outerStrokeGradientStopColor]="'#5850E0'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6
                     [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false"></circle-progress>
                   </div>
-
                   <div class="text-content">
                     <ul>
                       <li>
@@ -197,9 +195,7 @@
                       </li>
                     </ul>
                   </div>
-
                 </div>
-
                 <div class="card-foot">
                   You nearly reached your monthlytarget. Keep going! (5 days to go)
                 </div>

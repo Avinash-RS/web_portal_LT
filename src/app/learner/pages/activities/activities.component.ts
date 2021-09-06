@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { MatAccordion } from '@angular/material/expansion';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
@@ -176,13 +176,21 @@ export class ActivitiesComponent implements OnInit {
   page = 0;
   noofItems = 0;
   AssigmnemtPayload :FormData;
+  labpracticeData : any;
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
     private dialog: MatDialog, private toastr: ToastrService,
-    public route: Router, public datePipe: DatePipe, private ngxLoader: NgxUiLoaderService) {
-    const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
-      this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
-    this.checkDetails = detail;
+    public route: Router, public datePipe: DatePipe, private ngxLoader: NgxUiLoaderService,public activateroute:ActivatedRoute) {
+    // const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
+    //   this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
+      this.activateroute.queryParams.subscribe((result)=>{
+        const detail ={
+          courseId: atob(result.courseId),
+          courseName : atob(result.courseName),
+          batchId : atob(result.batchId)
+        }
+        this.checkDetails = detail;
+      })  
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout();
     }
@@ -195,8 +203,12 @@ export class ActivitiesComponent implements OnInit {
         index = '0'
       } else if (this.checkDetails?.activityType == 'Perform') {
         index = '1'
-      } else {
+      } 
+      else if (this.checkDetails?.activityType == 'Lab Practical') {
         index = '2'
+      } 
+      else {
+        index = '3'
       }
     } else {
       this.fromCalender = false
@@ -211,7 +223,11 @@ export class ActivitiesComponent implements OnInit {
       this.getAssignmentmoduleData();
     } else if (this.demo1TabIndex.toString() == '1') {
       this.getperformActivityData();
-    } else {
+    } 
+    else if (this.demo1TabIndex.toString() == '2') {
+      this.getLabPracticeData();
+    }
+    else {
       this.getprojectActivityData();
     }
   }
@@ -355,6 +371,9 @@ export class ActivitiesComponent implements OnInit {
         this.assigmentMobileResponsive = false;
       }
     }
+    else if(event.tab.textLabel === 'Lab Practical'){
+      this.getLabPracticeData();
+    }
   }
 
   goToCourse() {
@@ -381,7 +400,7 @@ export class ActivitiesComponent implements OnInit {
       this.toastr.warning("You are allowed only to upload a maximum of 3 files");
       if (this.uploadInput) {
         this.uploadInput.nativeElement.value = '';
-      }     
+      }
        return false;
     }
     let fileSizeval = 0;
@@ -395,7 +414,7 @@ export class ActivitiesComponent implements OnInit {
         this.selectfile = [];
         if (this.uploadInput) {
           this.uploadInput.nativeElement.value = '';
-        } 
+        }
         return;
       }
     this.learnerUploadVideo(project, submitAction);
@@ -406,9 +425,43 @@ export class ActivitiesComponent implements OnInit {
   uploadDocs() {
     this.uploadInput.nativeElement.click();
   }
+  //getLabPracticeData
+  getLabPracticeData(){
+    var labdata ={
+      batchid: this.checkDetails.batchId,
+      course_id:this.courseid
+    }
+    this.Lservice.getlabactivity(labdata).subscribe((result:any)=>{
+      if(result.data.getlabactivity.success){
+        this.labpracticeData = result.data.getlabactivity.data;
+      }
+      else{
+        this.toastr.warning(result.data.getlabactivity.message);
+      }
+    })
+  }
+  redirectLabpractice(){
+    var labactivitydetails ={
+      username:this.userDetail.username,
+      course_id:this.courseid
+    }
+    this.Lservice.labactivity(labactivitydetails).subscribe((result:any)=>{
+      if(result.data.labactivity.success == false){
+        this.toastr.warning(result.data.labactivity.message);
+      }
+      else if(result.data.labactivity.success == null){
+        if(result.data.labactivity.Status == 0){
+            window.open(result.data.labactivity.url);
+        }
+        else{
+          this.toastr.warning(result.data.labactivity.Message);
+        }
+      }
+    });
+  }
 
-  // getperformActivityData
   getAssignmentmoduleData(value?) {
+  // getperformActivityData
     this.Lservice.getAssignmentmoduleData(this.userDetail.user_id,this.courseid,this.pagination,this.page,this.noofItems).subscribe((data: any) => {
       if (data.data.getAssignmentmoduleData.success) {
        this.assignmentContent = data?.data?.getAssignmentmoduleData?.data;
@@ -419,7 +472,7 @@ export class ActivitiesComponent implements OnInit {
           this.emptyAssignment = false
         }
 
-        if (this.assignmentpreContent.courseStartDate && this.assignmentpreContent.courseEndDate) 
+        if (this.assignmentpreContent.courseStartDate && this.assignmentpreContent.courseEndDate)
         {
           const batchStartDate = new Date(this.assignmentpreContent.courseStartDate);
           const batchEndDate = new Date(this.assignmentpreContent.courseEndDate);
@@ -461,7 +514,7 @@ export class ActivitiesComponent implements OnInit {
           });
         }
       } else {
-        
+
       }
     });
   }
@@ -480,7 +533,7 @@ export class ActivitiesComponent implements OnInit {
         });
         if (path.path.includes('?sv=')) {
         } else {
-          path.path = path.path + this.blobKey;          
+          path.path = path.path + this.blobKey;
         }
         this.previewDoc = path;
       } else {
@@ -499,7 +552,7 @@ export class ActivitiesComponent implements OnInit {
         path.path = path.videourl;
         if (path.path.includes('?sv=')) {
         } else {
-          path.path = path.path + this.blobKey;          
+          path.path = path.path + this.blobKey;
         }
         this.previewDoc = path;
       } else {
@@ -780,7 +833,7 @@ export class ActivitiesComponent implements OnInit {
             const uploaded = ev.loadedBytes;
             const percnt = uploaded * 100 / this.fileSize;
             this.uploadedPercentage = percnt.toFixed(2);
-            this.Lservice.sendMessage('',this.uploadedPercentage.toString());   
+            this.Lservice.sendMessage('',this.uploadedPercentage.toString());
           },
           blobHTTPHeaders: { blobContentType: this.currentFile.type }
         });
@@ -816,7 +869,7 @@ export class ActivitiesComponent implements OnInit {
           setTimeout(()=>{
             this.Lservice.sendMessage('','0.00');
           },1000)
-          
+
           this.flag = 1
         }
 
@@ -831,7 +884,7 @@ export class ActivitiesComponent implements OnInit {
         this.toastr.warning(data.message);
         setTimeout(()=>{
           this.Lservice.sendMessage('','0.00');
-        },1000)      
+        },1000)
       }
     });
   }
@@ -906,7 +959,7 @@ export class ActivitiesComponent implements OnInit {
       this.toastr.warning('Please upload a valid file.');
       if (this.videoInput) {
         this.videoInput.nativeElement.value = '';
-      } 
+      }
       return;
     } else {
       // tslint:disable-next-line: prefer-for-of
@@ -920,7 +973,7 @@ export class ActivitiesComponent implements OnInit {
         this.selectPerformfile = [];
         if (this.videoInput) {
           this.videoInput.nativeElement.value = '';
-        } 
+        }
         return;
       }
       this.performlearnerUploadVideo();
@@ -935,7 +988,7 @@ export class ActivitiesComponent implements OnInit {
       this.toastr.warning("You are allowed only to upload a maximum of 3 files");
       if (this.videoInput) {
         this.videoInput.nativeElement.value = '';
-      } 
+      }
       return false;
     }
     this.performsData = performans;
@@ -997,7 +1050,7 @@ export class ActivitiesComponent implements OnInit {
             this.toastr.warning(data.message);
             setTimeout(()=>{
               this.Lservice.sendMessage('','0.00');
-            },1000)         
+            },1000)
            }
         });
       } else {
@@ -1005,13 +1058,13 @@ export class ActivitiesComponent implements OnInit {
         this.toastr.warning('File size should not greater than 150 MB');
         setTimeout(()=>{
           this.Lservice.sendMessage('','0.00');
-        },1000)      
+        },1000)
       }
     }
 
   }
   async multiFileUpload(data,  len) {
-    
+
     // this.ngxLoader.start();
     const sas = data.data;
     const pipeline = newPipeline(new AnonymousCredential(), {
@@ -1038,12 +1091,12 @@ export class ActivitiesComponent implements OnInit {
         const percnt = uploaded * 100 / this.fileSize;
         this.uploadedPercentage = percnt.toFixed(2);
         if (this.selectPerformfile.length > 1) {
-          this.Lservice.sendMessage(len + '/' + this.selectPerformfile.length,this.uploadedPercentage.toString()); 
+          this.Lservice.sendMessage(len + '/' + this.selectPerformfile.length,this.uploadedPercentage.toString());
         } else {
-          this.Lservice.sendMessage('',this.uploadedPercentage.toString()); 
+          this.Lservice.sendMessage('',this.uploadedPercentage.toString());
 
         }
-        
+
       },
       blobHTTPHeaders: { blobContentType: this.currentFile.type }
     });
@@ -1085,7 +1138,7 @@ export class ActivitiesComponent implements OnInit {
     }
 
 
-  
+
   }
   insertActivityRecord = async (performVideo) => {
 
@@ -1116,7 +1169,7 @@ export class ActivitiesComponent implements OnInit {
       return false
     }
     this.ongoingPerformTask = true;
-    let videoFile = [];    
+    let videoFile = [];
     videoFile.push(videoName);
     // const currentDate = this.datePipe.transform(new Date(), 'dd-MM-yyyy HH:mm a');
     // const startDate = this.datePipe.transform(perform?.activitystartdate, 'dd-MM-yyyy HH:mm a');
@@ -1173,7 +1226,7 @@ export class ActivitiesComponent implements OnInit {
     });
     if (path.path.includes('?sv=')) {
     } else {
-      path.path = path.path + this.blobKey;          
+      path.path = path.path + this.blobKey;
     }
     this.docpath = path;
   }
@@ -1194,7 +1247,7 @@ export class ActivitiesComponent implements OnInit {
     });
     if (path.path.includes('?sv=')) {
     } else {
-      path.path = path.path + this.blobKey;          
+      path.path = path.path + this.blobKey;
     }
     this.previewDoc = path;
   }
@@ -1211,7 +1264,7 @@ export class ActivitiesComponent implements OnInit {
       path.path = path.videourl + this.blobKey;
       // if (path.path.includes('?sv=')) {
       // } else {
-                  
+
       // }
       this.previewDoc = path;
     } else if (docType === 'video/mp4' || docType === 'video/quicktime') {
@@ -1260,5 +1313,5 @@ this.isDownloadLoader = true;
     }
 });
   }
-  
+
 }

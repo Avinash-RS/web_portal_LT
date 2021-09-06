@@ -30,25 +30,32 @@
             </ng-container>
             <div class="courseTitle" *ngIf="drawersOpen!==false||filterkey!=='All'"> | <span>{{this.course?.course_name}}</span></div>
         </div> -->
-        <div class="titleBack animateAnimate" [ngClass]="titleBar==true?'fadeOutUp':'fadeInDown'">
-            <ul class="breadcrumb" [ngClass]="scromApiData?.toc != '0' ? 'no':'yes'">
-                <li [ngClass]="drawersOpen ? 'no':'yes'"><em (click)="goBack()" class="lxp-Go backArrow"></em> <span>{{this.course?.course_name}}</span></li>
-                <ng-container *ngIf="scromApiData?.toc != '0'">
-                    <div class="navigation d-flex align-items-center" *ngIf="scromModuleData && filterkey==='All' && drawersOpen===false">
-                        <!-- <span class="pipeLine">|</span>  -->
-                        <div class="leftArrow">                
-                            <em class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()"></em>
+        <div class="titleBack animateAnimate d-flex justify-content-between align-items-center" [ngClass]="titleBar==true?'fadeOutUp':'fadeInDown'">
+            <div class="">
+                <ul class="breadcrumb" [ngClass]="scromApiData?.toc != '0' ? 'no':'yes'">
+                    <li [ngClass]="drawersOpen ? 'no':'yes'"><em (click)="goBack()" class="lxp-Go backArrow"></em> <span>{{this.course?.course_name}}</span></li>
+                    <ng-container *ngIf="scromApiData?.toc != '0'">
+                        <div class="navigation d-flex align-items-center" *ngIf="scromModuleData && filterkey==='All' && drawersOpen===false">
+                            <!-- <span class="pipeLine">|</span>  -->
+                            <div class="leftArrow">                
+                                <em class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()"></em>
+                            </div>
+                            <div class="currentTopic" >
+                                <span title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}">{{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}</span>
+                            </div>
+                            <div class="rightArrow">                
+                                <em class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()"></em>
+                            </div>
                         </div>
-                        <div class="currentTopic" >
-                            <span title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}">{{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}</span>
-                        </div>
-                        <div class="rightArrow">                
-                            <em class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()"></em>
-                        </div>
-                    </div>
-                </ng-container>
-                <!-- <li><div class="courseTitle" *ngIf="drawersOpen!==false||filterkey!=='All'"><span>{{this.course?.course_name}}</span></div></li> -->
-            </ul>
+                    </ng-container>
+                    <!-- <li><div class="courseTitle" *ngIf="drawersOpen!==false||filterkey!=='All'"><span>{{this.course?.course_name}}</span></div></li> -->
+                </ul>
+            </div>
+            <div>
+                <button mat-stroked-button class="practice-btn mt-2" (click)="redirectLabpractice()">
+                    <em class="lxp-Lab_Practice"></em> Lab Practices
+                </button>
+            </div>
         </div>
     </div>
     <!-- COURSE TOOL BAR -->
@@ -87,7 +94,6 @@
             <div class="xyz" *ngIf="filterkey=='Bookmarked'?(filterData.length>0?true:false):(scromModuleData.length>0?true:true);else emptyTOC">
                 <mat-card *ngFor="let resDat of filterkey=='Bookmarked'?filterData:scromModuleData; let wi = index" [ngClass]="resDat.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
                     class="topicCard" >
-                    <div *ngIf="wi===weekHolderUI" #focuser ></div>
                     <!-- (click)="moduleExpand(resDat,i)" -->
                             <mat-card-title  class="d-flex justify-content-between align-items-center pointer">
                                 <div class="tocTitle">Week - {{resDat.week?resDat.week:wi+1}}</div>
@@ -119,6 +125,7 @@
                         <div class="bs-vertical-wizard">
                             <ul>
                                 <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of res?.children; let ti = index">
+                                    <div *ngIf="wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder" #focuser ></div>
                                     <span class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder) ? 'titleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,wi,ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                         {{mod?.title}}
                                         <i class="ico" [ngClass]="mod?.status === 'Passed' ? 'fa fa-check ico-green' :  mod?.status === 'process' ? 'fa fa-circle ico-yellow' : ''"></i>
