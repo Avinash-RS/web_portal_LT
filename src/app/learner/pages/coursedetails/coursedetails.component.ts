@@ -160,6 +160,8 @@ export class CoursedetailsComponent implements OnInit {
   weekLength: any;
   weekHolderUI: number;
   fromCalendar :boolean = false;
+  eboxUrl :any;
+  showlab:boolean = false;
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -376,6 +378,7 @@ export class CoursedetailsComponent implements OnInit {
       }
     });
     this.getCoursePlayerStatus();
+    this.getEboxURL();
   }
 
   toggleDisplayDiv() {
@@ -1076,24 +1079,30 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
   //------------------------------------------------------------------//
-  redirectLabpractice(){
+  getEboxURL(){
     var labactivitydetails ={
       username:this.userDetail.username,
       course_id:this.courseid
     }
     this.Lservice.labactivity(labactivitydetails).subscribe((result:any)=>{
       if(result.data.labactivity.success == false){
-        this.toastr.warning(result.data.labactivity.message);
+        this.eboxUrl = "";
+        this.showlab = false;
       }
       else if(result.data.labactivity.success == null){
         if(result.data.labactivity.Status == 0){
-            window.open(result.data.labactivity.url);
+          this.eboxUrl = result.data.labactivity.url;
+          this.showlab = true;
         }
         else{
-          this.toastr.warning(result.data.labactivity.Message);
+          this.eboxUrl = "";
+          this.showlab = false;
         }
       }
     });
+  }
+  navigatePractice(){
+    window.open(this.eboxUrl);
   }
 }
 
