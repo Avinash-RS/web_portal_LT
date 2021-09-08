@@ -52,8 +52,8 @@ export class LearnerServicesService {
     var userDetails = JSON.parse(localStorage.getItem('UserDetails'))
     this.httpOptions = {
       headers: new HttpHeaders({ 
-        Authorization: token,
-        //requestId: CryptoJS.AES.encrypt(userDetails['user_id'], this.secretKey.trim()).toString()
+        Authorization: 'Bearer '+ token,
+        requestId: CryptoJS.AES.encrypt(userDetails['user_id'], this.secretKey.trim()).toString()
        })
     };
   }
