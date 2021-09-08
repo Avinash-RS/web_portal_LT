@@ -40,7 +40,7 @@ export class GraphqlModule {
   envCourseApi: any = environment.createCourseApi;
   constructor(apollo: Apollo, httpLink: HttpLink, private gs: GlobalServiceService, private httpC: HttpClient,
               private services: CommonServicesService) {
-    const http = httpLink.create({ uri: this.envApi + 'gateway'});
+    const http = httpLink.create({ uri: 'https://devfacade.lntiggnite.com/gateway/'});
     const middleware = new ApolloLink((operation, forward) => {
 
       // Check for token
@@ -52,8 +52,8 @@ export class GraphqlModule {
 
       operation.setContext({
         headers: new HttpHeaders({ 
-          Authorization: 'Bearer '+token,
-          requestId: CryptoJS.AES.encrypt(userDetails['user_id'], this.secretKey.trim()).toString()
+          Authorization: token,
+          //requestId: CryptoJS.AES.encrypt(userDetails['user_id'], this.secretKey.trim()).toString()
          }),
       });
       

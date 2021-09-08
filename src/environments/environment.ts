@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://devfacade.lntiggnite.com/',
+  apiUrl: 'https://devfacade.lntiggnite.com/api/',
   scormUrl: 'https://devscorm.lntiggnite.com/',
-  apiUrlImg: 'https://devfacade.lntiggnite.com/',
+  apiUrlImg: 'https://devfacade.lntiggnite.com/api/',
   createCourseApi: 'https://devcourses.lntiggnite.com/',
   wcaapiurl: 'https://devwca.lntiggnite.com/',
   domain : 'LXP',
