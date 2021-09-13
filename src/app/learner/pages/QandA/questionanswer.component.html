@@ -62,7 +62,7 @@
                                 <mat-form-field appearance="outline">
                                     <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller()' placeholder="Search...">
                                     <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
-                                    <mat-icon matSuffix *ngIf="searchKey"(click)="searchKey='';this.getQAData();">close</mat-icon>
+                                    <mat-icon matSuffix *ngIf="searchKey"(click)="resetSearch()">close</mat-icon>
                                 </mat-form-field>
                             </div>
                         </div>
