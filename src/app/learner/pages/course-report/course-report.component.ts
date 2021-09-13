@@ -71,8 +71,8 @@ export class CourseReportComponent implements OnInit {
   weekwisedata :any = [];
   showArrow:boolean = false;
   disableArrow:boolean = true;
-
-  week:any = [1,2,3,4,5,6,7,8,9]
+  selfscore:string ="0";
+  QAscore:string ="0";
 
   constructor(
     private activeRoute: ActivatedRoute, 
@@ -104,17 +104,13 @@ export class CourseReportComponent implements OnInit {
     if (data.data['getLearnerNewCourseReport'].data[0]) {
       this.courseReport = true;
       this.courseReportData = data.data['getLearnerNewCourseReport'].data[0];
-      this.courseReportData.selflearning.isMore = false
-      this.courseReportData.queryQuestion.isMore = false
+      this.selfscore = String(this.courseReportData.selfLearning_Card.selflearning_points_score)+'/'+String(this.courseReportData.selfLearning_Card.selflearning_out_of_points);
+      this.QAscore= String(this.courseReportData.QA_Card.QA_points_score)+'/'+String(this.courseReportData.QA_Card.QA_out_of_points);
+      
       this.courseReportData.selflearning.forEach(element => {
-        // this.weeklabelData.push([element.week,'90']);
-        // this.weekpercent.push(element.selflearningscore);
+        this.weeklabelData.push([element.week,element.selflearningscore]);
+        this.weekpercent.push(element.selflearningpercentage);
       });
-      this.weeklabelData =[['Week 1','10'],['Week 2','20'],['Week 3','30'],['Week 4','40'],['Week 5','50'],['Week 6','60'],
-      ['Week 7','70'],['Week 8','80'],['Week 9','90'],['Week 10','99.2'],['Week 11','11.2'],['Week 12','12.4'],
-      ['Week 13','88'],['Week 14','66'],['Week 15','55'],['Week 16','66']];
-      this.weekpercent =['10','20','30','40','50','60','70','80',
-      '90','10','11','22','33','44','55','66'];
 
       if(this.weeklabelData.length > 7){
         this.showArrow = true;
