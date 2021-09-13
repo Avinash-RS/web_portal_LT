@@ -122,7 +122,7 @@ getEmail(input)
     return this.http.post(environment.apiUrl + 'learnerUploadVideo', data,this.httpOptions); }
   learnerRecordVideo(data) { 
     this.getToken();
-    return this.http.post(environment.apiUrl + 'wca/learnerRecordVideo', data,this.httpOptions); }
+    return this.http.post(environment.apiUrl + 'learnerRecordVideo', data,this.httpOptions); }
 
 
   uploadVideo(image) {

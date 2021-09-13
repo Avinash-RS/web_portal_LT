@@ -120,7 +120,6 @@ export class QuestionanswerComponent implements OnInit {
   getQACount() {
     this.showNumSkeleton = false
     this.learnerService.getengineersForumQA_Count(this.UserDetails.user_id, this.courseId).subscribe((rdata: any) => {
-      console.log(rdata)
       let qcountData = rdata.data.getengineersForumQA_Count.data.questionCount
       let acountData = rdata.data.getengineersForumQA_Count.data.anweredCount
       this.animateValue('qCount', 0, qcountData ? qcountData : 0, 1000)
@@ -255,6 +254,7 @@ export class QuestionanswerComponent implements OnInit {
     },500)
   }
   getQAtype(){
+    this.pageNumber = 0;
     this.requestType = this.selectedtype;
     this.getQAData();
   }
