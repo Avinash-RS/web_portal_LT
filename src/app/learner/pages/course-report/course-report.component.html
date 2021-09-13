@@ -149,40 +149,49 @@
           </div>
         </div>
       </div> -->
+     
       <div class="overallsection d-flex justify-content-between align-items-center flex-wrap">
         <mat-card class="selflearningCard">
-                 <div class="card-head d-flex align-items-center justify-content-center">Self Learning</div>
-                  <div class="card-content d-flex align-items-center">
-                    <div class="graph-content">
-                      <circle-progress title="6.7 / 10" [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "false" 
-                      percent="{{((100 * (6.7)) / (10))}}"
-                      [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#00A99D'" 
-                      [outerStrokeGradientStopColor]="'#00A99D'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 
-                      [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" ></circle-progress>
-                    </div>
-                    <div class="text-content">
-                      <ul>
-                        <li class="d-flex">
-                          <label>No. of weeks elapsed</label><span>5/16</span>
-                        </li>
-                        <li class="d-flex">
-                          <label> No. of topics completed </label><span>31/38</span>
-                        </li>
-                        <li class="d-flex">
-                          <label>Total duration spent </label> <span>127 mins</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="card-foot">
-                    You nearly reached your monthly target. Keep going! (5 days to go)
-                  </div>
-                 </mat-card>
+          <div class="card-head d-flex align-items-center justify-content-center">Self Learning</div>
+           <div class="card-content d-flex align-items-center">
+             <div class="graph-content">
+               <circle-progress [title]= "selfscore"
+               [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "false" 
+               percent="{{((100 * (6.7)) / (10))}}"
+               [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#00A99D'" 
+               [outerStrokeGradientStopColor]="'#00A99D'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 
+               [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" ></circle-progress>
+             </div>
+             <div class="text-content">
+               <ul>
+                 <li class="d-flex">
+                   <label>No. of weeks elapsed</label>
+                   <span>
+                       {{courseReportData.selfLearning_Card.total_no_of_weeks_completed}}/{{courseReportData.selfLearning_Card.total_no_of_weeks_actual}}
+                   </span>
+                 </li>
+                 <li class="d-flex">
+                   <label> No. of topics completed </label>
+                   <span>
+                     {{courseReportData.selfLearning_Card.total_no_of_topics_completed}}/{{courseReportData.selfLearning_Card.total_no_of_topics_actual}}
+                   </span>
+                 </li>
+                 <li class="d-flex">
+                   <label>Total duration spent </label> 
+                   <span>{{courseReportData.selfLearning_Card.total_no_of_duration}} mins</span>
+                 </li>
+               </ul>
+             </div>
+           </div>
+           <div class="card-foot">
+             You nearly reached your monthly target. Keep going! (5 days to go)
+           </div>
+       </mat-card>
               <mat-card class="selflearningCard">
                 <div class="card-head d-flex align-items-center justify-content-center">Q&A</div>
                   <div class="card-content d-flex align-items-center">
                   <div class="graph-content">
-                    <circle-progress title="2.5 / 5" [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "false" 
+                    <circle-progress [title]="QAscore" [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "false" 
                     percent="{{((100 * (2.5 )) / (5))}}" [radius]=25  [space]=-6
                     [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#5850E0'"
                     [outerStrokeGradientStopColor]="'#5850E0'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6
@@ -191,7 +200,7 @@
                   <div class="text-content">
                     <ul>
                       <li>
-                       <label>No. of questions asked </label> <span>31</span>
+                       <label>No. of questions asked </label> <span>{{courseReportData.QA_Card.QA_total_no_of_quetions}}</span>
                       </li>
                     </ul>
                   </div>
@@ -225,7 +234,7 @@
                           <div class="items">(D) Completed Topics - <span>{{selfValue.Completedfortheweek}}</span></div>
                           <div class="calculation">Calculation formula</div>
                           <div class="calcFormula">={{selfValue.calculation}}</div>
-                          <div class="calcPercentage">= {{selfValue.selflearningscore}} </div>
+                          <div class="calcPercentage">= {{selfValue.selflearningscore}}</div>
                         </div>
                       </popover-content>
                       <label>{{selfValue.week}}</label>
@@ -236,13 +245,14 @@
                       <ul>
                         <li class="d-flex">
                           <label>Percentage</label>
-                          <span *ngIf="selfValue.selflearningscore != 0">{{selfValue.selflearningscore}} %</span>
+                          <span *ngIf="selfValue.selflearningscore != 0">{{selfValue.selflearningpercentage}}%</span>
                           <span *ngIf="selfValue.selflearningscore == 0">0</span>
                         </li>
-                        <li class="d-flex"><label>Score</label><span>0.55</span></li>
+                        <li class="d-flex">
+                          <label>Score</label>
+                          <span>{{selfValue.selflearningscore}}</span></li>
                       </ul>
                   </mat-card>
-
               </div>
             </div>
             <div *ngIf="group.value == 'chart'">
@@ -270,6 +280,7 @@
           </div>
           </div>
       </div>
+
     </div>
     <div class="reportRightCol">
       <div class="refresh">
@@ -398,7 +409,9 @@
         <div class="finalScoreCard">
           <div class="d-flex">
             <h3>Final Score</h3>
-            <button class="popoverInfoFinal" popoverPlacement="right" [popover]="finalPopover"><em>i</em></button>
+            <button class="popoverInfoFinal" popoverPlacement="right" [popover]="finalPopover"><span>
+              <img  src="../../../../assets/images/Group 14025.svg" />
+            </span></button>
           </div>
           <popover-content #finalPopover placement="right" [animation]="true" popoverSize="large">
             <div style="width: 200px;">
@@ -759,7 +772,6 @@
       </div>
     </div> -->
 </div>
-
 
 <div *ngIf="!courseReport" class="item" >
   <mat-card class="courseDetailSkeleton" style="box-shadow: none !important;">
