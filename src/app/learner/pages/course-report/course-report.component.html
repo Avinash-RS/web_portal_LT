@@ -157,7 +157,7 @@
              <div class="graph-content">
                <circle-progress [title]= "selfscore"
                [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "false" 
-               percent="{{((100 * (6.7)) / (10))}}"
+               [percent]="courseReportData.selfLearning_Card.selflearning_points_percentage"
                [radius]=25  [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#00A99D'" 
                [outerStrokeGradientStopColor]="'#00A99D'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 
                [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false" ></circle-progress>
@@ -184,15 +184,15 @@
              </div>
            </div>
            <div class="card-foot">
-             You nearly reached your monthly target. Keep going! (5 days to go)
+             Complete all topics and spend enough time to improve your Self Learning score
            </div>
        </mat-card>
-              <mat-card class="selflearningCard">
+        <mat-card class="selflearningCard">
                 <div class="card-head d-flex align-items-center justify-content-center">Q&A</div>
                   <div class="card-content d-flex align-items-center">
                   <div class="graph-content">
                     <circle-progress [title]="QAscore" [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "false" 
-                    percent="{{((100 * (2.5 )) / (5))}}" [radius]=25  [space]=-6
+                    [percent]="courseReportData.QA_Card.QA_points_percentage" [radius]=25  [space]=-6
                     [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#5850E0'"
                     [outerStrokeGradientStopColor]="'#5850E0'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6
                     [animation]="true" [animationDuration]="300" [responsive]="true" [showSubtitle]="false"></circle-progress>
@@ -206,9 +206,9 @@
                   </div>
                 </div>
                 <div class="card-foot">
-                  You nearly reached your monthly target. Keep going! (5 days to go)
+                  The more relevant questions you ask , your Q&A score will improve 
                 </div>
-              </mat-card>
+        </mat-card>
       </div>
 
       <div class="weeklyreport">

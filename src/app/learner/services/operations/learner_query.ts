@@ -2359,6 +2359,7 @@ export const getLearnerNewCourseReport = gql`
         total_no_of_topics_completed
         total_no_of_duration
         selflearning_points_score
+        selflearning_points_percentage
         selflearning_out_of_points
       }
       QA_Card {
