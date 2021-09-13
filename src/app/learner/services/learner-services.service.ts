@@ -52,8 +52,8 @@ export class LearnerServicesService {
     var userDetails = JSON.parse(localStorage.getItem('UserDetails'))
     this.httpOptions = {
       headers: new HttpHeaders({ 
-        Authorization: token,
-        //requestId: CryptoJS.AES.encrypt(userDetails['user_id'], this.secretKey.trim()).toString()
+        Authorization: 'Bearer '+token,
+        requestId: CryptoJS.AES.encrypt(userDetails['user_id'], this.secretKey.trim()).toString()
        })
     };
   }
@@ -82,7 +82,7 @@ export class LearnerServicesService {
 
 uploadAssignments(fromdata) { 
   this.getToken();
-  return this.http.post(this.envApi + 'wca/learnerscorefile', fromdata, this.httpOptions); 
+  return this.http.post(this.envApi + 'learnerscorefile', fromdata, this.httpOptions); 
 }
 
 imageupload(fb) {
@@ -115,7 +115,7 @@ getEmail(input)
    }
   learnerSumbitdeleteVideo(submitData) { 
     this.getToken();
-    return this.http.post(environment.apiUrl + 'wca/learnerSumbitdeleteVideo', submitData,this.httpOptions); 
+    return this.http.post(environment.apiUrl + 'learnerSumbitdeleteVideo', submitData,this.httpOptions); 
   }
   insertRecord(data) { 
     this.getToken();
