@@ -633,7 +633,7 @@ export class CoursedetailsComponent implements OnInit {
       });
 
       this.checkLastFirstIndexReached()
-
+      this.filterToc();
     });
   }
   playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, weekIndex, topindex, moduleIdx) {
@@ -956,6 +956,17 @@ export class CoursedetailsComponent implements OnInit {
     } else {
       this.myQuestionList = [];
       this.allQuestionList = [];
+    }
+  }
+
+  tabClick(tab) {
+    console.log(tab, 'tabs');
+    if(tab.index == 1) {
+      this.filterkey = 'Bookmarked';
+      this.filterToc();
+    }
+    else {
+      this.filterkey = 'All';
     }
   }
   filterToc() {

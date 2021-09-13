@@ -63,26 +63,26 @@
   @media only screen and (max-width: 767px) {
     height: calc(100vh - 120px);
   }
-  .hamburgerPosition {
-    //position: relative;
-    background-color: #ffcc00;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .lxp-HamburgerMenu {
-      cursor: pointer;
-      font-size: 18px;
-      display: inline-block;
-    }
-  }
-  .position-fixed-burgur {
-    position: fixed;
-    left: 10px;
-    z-index: 9;
-  }
+  // .hamburgerPosition {
+  //   //position: relative;
+  //   background-color: #ffcc00;
+  //   border-radius: 50%;
+  //   width: 25px;
+  //   height: 25px;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   .lxp-HamburgerMenu {
+  //     cursor: pointer;
+  //     font-size: 18px;
+  //     display: inline-block;
+  //   }
+  // }
+  // .position-fixed-burgur {
+  //   position: fixed;
+  //   left: 10px;
+  //   z-index: 9;
+  // }
   .videoPlayer {
     position: relative;
     transition: all 0.3s linear;
@@ -244,9 +244,13 @@
 // }
 
 .tocTitle {
-  font-size: 17px;
-  font-weight: normal;
-  color: #999999;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: normal;
+  padding: 4px 6px 3px 6px;
+  color: #6b6b6b;
+  background-color: #DDDDDD;
+  border-radius: 2px;
 }
 .colorBlack {
   color: #666666;
@@ -288,10 +292,11 @@
 .topicCard {
   margin: 0 10px 10px 10px;
   padding: 10px !important;
-  background-color: #fcfcfc;
-  border-radius: 0px;
-  border: 1px solid rgba(112, 112, 112, 0.25);
-  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.12);
+  box-shadow: none;
+  // background-color: #fcfcfc;
+  // border-radius: 0px;
+  // border: 1px solid rgba(112, 112, 112, 0.25);
+  // box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.12);
   &.collapseClass {
     .tocSubTitle {
       color: #333333;
@@ -975,8 +980,8 @@
   background: #f0f0f0;
 }
 ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
-  height: 2px !important;
-  background-color: $lxp-theme-green !important;
+  // height: 2px !important;
+  // background-color: $lxp-theme-green !important;
 }
 .arrowDown {
   font-size: 10px;
@@ -1107,7 +1112,7 @@
 
 //TARANTULLA
 .bs-vertical-wizard {
-  border-right: 1px solid #eaecf1;
+  // border-right: 1px solid #eaecf1;
   margin-left: 15px;
 }
 
@@ -1360,6 +1365,71 @@
   padding: 2px 7px 3px 7px !important;
   border-radius: .25rem;
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+//Left TOC
+.leftToc {
+  position: relative;
+  .showHide {
+    position: absolute;
+    right: -40px;
+    top: 5px;
+    background-color: white;
+    padding: 10px 10px 10px 0;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    &.No {
+      right: -35px;
+    }
+    em {
+      font-size: 20px;
+      color: #888888;
+    }
+  }
+  .tabLabel  {
+    line-height: normal;
+  }
+  .labelcount {
+    background-color: #DDDDDD;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #919191;
+    font-size: 9px;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 5px;
+  }
+}
+::ng-deep.leftToc {
+  .mat-tab-label-container {
+    padding: 0 20px;
+  }
+  .mat-tab-label {
+    opacity: 1;
+    padding: 0 15px;
+    min-width: auto;
+    color: #6B6B6B;
+    &.mat-tab-label-active {
+      color: #000000;
+    }
+  }
+  .mat-tab-labels {
+    justify-content: space-between;
+  }
+  .mat-tab-group.mat-primary .mat-ink-bar {
+    height: 4px;
+    background-color: #08558C;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+  .mat-tab-label-content {
+    display: flex;
+    align-items: center;
+  }
 }
 
 ::ng-deep.askQuestionsContainer {
