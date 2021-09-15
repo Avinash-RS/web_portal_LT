@@ -281,7 +281,7 @@ export class CalendarActivityComponent implements OnInit {
         this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
       }
     }
-    goToActivities(value){   
+    goToActivities(value){  
       if(value.activitytype === 'Live Classroom'){
         return false;
       } else if (value.activitytype == "Self Learning") {
@@ -311,11 +311,20 @@ export class CalendarActivityComponent implements OnInit {
         const data1 = {
           courseId: value.courseid,
           courseName: value.coursename,
-          activityType : value.activitytype
+          activityType : value.activitytype,
         };
         localStorage.setItem('Courseid', data1.courseId);
         localStorage.setItem('CourseName', data1.courseName);
-        this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
+        //this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
+        this.router.navigate(['/Learner/activities'], {
+          queryParams:
+          {
+            courseId: btoa(value.courseid),
+            courseName: btoa(value.coursename),
+            activityType : value.activitytype,
+            batchId :btoa(value.batch_id)
+          }
+        });
       }
     }
     openClassroom(value) {
