@@ -188,7 +188,8 @@ export class ActivitiesComponent implements OnInit {
         const detail ={
           courseId: atob(result.courseId),
           courseName : atob(result.courseName),
-          batchId : atob(result.batchId)
+          batchId : atob(result?.batchId),
+          activityType :result.activityType
         }
         this.checkDetails = detail;
       })  
