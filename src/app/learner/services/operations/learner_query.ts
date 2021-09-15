@@ -2532,3 +2532,18 @@ mutation labactivity(
   }
 }
 `;
+export const weekWiseCourseChart = gql`
+  query weekWiseCourseChart($courseId:String,$userId:String,$startDate:String){
+    weekWiseCourseChart(courseId:$courseId,userId:$userId,startDate:$startDate){
+    message
+    success
+    data {
+      totalhoursSpend
+      chartdata {
+        day
+        minutes
+      }
+    } 
+    } 
+  }
+`;

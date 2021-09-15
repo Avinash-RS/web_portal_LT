@@ -29,7 +29,36 @@ export class ProgressionReportComponent implements OnInit {
   public chartPlugins = [pluginDataLabels];
   selectedIndex: number = 0;
   public barChartOptions: ChartOptions = {
-    responsive: true,
+    responsive: true, 
+    tooltips:{
+      enabled: false,
+    },
+    plugins: {
+      datalabels: {
+        display: false
+      }
+    },
+    scales:{
+      xAxes:[{
+        gridLines:{
+          display:false
+        },
+      }],
+      yAxes:[{
+        gridLines:{
+          borderDash: [1, 3],
+          color: "#2280C1"
+        },
+        ticks: {
+          min: 0,
+          max: 180,
+          stepSize:30,
+          callback: function(value) {
+            return value + '  '
+          }
+        }
+      }],
+    },
     elements:
     {
       point:
@@ -41,11 +70,10 @@ export class ProgressionReportComponent implements OnInit {
       }
     }
   };
-  public barChartLabels: Label[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
   public barChartLegend = false;
   public barChartPlugins = [];
-
   public pieChartOption: any = {
     legend: {
       // position: 'right',
@@ -55,12 +83,12 @@ export class ProgressionReportComponent implements OnInit {
       }
     }
   }
-
   public barChartData: ChartDataSets[] = [
     {
-      data: [65, 59, 80, 81, 56, 55],
+      data: [],
       backgroundColor: '#2280C1',
-      barThickness: 16,
+      hoverBackgroundColor:'#2280C1',
+      barThickness: 12,
     }
   ];
   currentTab: any;
@@ -83,6 +111,12 @@ export class ProgressionReportComponent implements OnInit {
   pieData: any;
   doughnutChartData;
   isTableData: boolean;
+  weekWiseChartDatalabel:any = [];
+  weekWiseChartData:any = [];
+  totalhoursSpend:string = "0 mins";
+  weekWiseDate;
+  today = new Date();
+
   constructor(
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService,
@@ -105,8 +139,47 @@ export class ProgressionReportComponent implements OnInit {
     this.getAssignmentmoduleData();
     this.getPieChartData()
     this.getDoughnutChartData();
-  }
+    this.getWeekCourseData();
+    this.setStartdate();
 
+  }
+  setStartdate(){
+    var curr = new Date;
+    var first = curr.getDate() - curr.getDay();
+    var firstday = new Date(curr.setDate(first)).toUTCString();
+    this.weekWiseDate = new Date(firstday,);
+  }
+  getWeekCourseData(){
+    this.learnerService.getweekWiseCourseChart(this.courseId,this.userId,this.weekWiseDate).subscribe((result:any)=>{
+      if(result.data.weekWiseCourseChart.success){
+        this.totalhoursSpend = result.data.weekWiseCourseChart.data.totalhoursSpend;
+        result.data.weekWiseCourseChart.data.chartdata.forEach((data:any)=>{
+          this.weekWiseChartDatalabel.push(data.day);
+          this.weekWiseChartData.push(parseInt(data.minutes));
+        });
+        this.generateWeekwiseChart();
+      }
+      else{
+        this.weekWiseChartDatalabel = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+        this.weekWiseChartData = [0,0,0,0,0,0,0,0];
+        this.generateWeekwiseChart();
+      }
+    });
+  }
+  changeWeekDate(){
+    this.getWeekCourseData();
+  }
+  generateWeekwiseChart(){
+    this.barChartLabels = this.weekWiseChartDatalabel;
+    this.barChartData = [
+      {
+        data: this.weekWiseChartData,
+        backgroundColor: '#2280C1',
+        hoverBackgroundColor:'#2280C1',
+        barThickness: 12,
+      }
+    ];
+  }
   getPieChartData(){
 
     //activity chart data
