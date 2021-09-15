@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import { Observable } from 'rxjs';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import { DatePipe } from '@angular/common';
 declare const Chart;
 
 @Component({
@@ -116,7 +117,7 @@ export class ProgressionReportComponent implements OnInit {
   totalhoursSpend:string = "0 mins";
   weekWiseDate;
   today = new Date();
-
+  pipe = new DatePipe('en-US');
   constructor(
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService,
@@ -139,9 +140,8 @@ export class ProgressionReportComponent implements OnInit {
     this.getAssignmentmoduleData();
     this.getPieChartData()
     this.getDoughnutChartData();
-    this.getWeekCourseData();
     this.setStartdate();
-
+    this.getWeekCourseData();
   }
   setStartdate(){
     var curr = new Date;
@@ -150,7 +150,8 @@ export class ProgressionReportComponent implements OnInit {
     this.weekWiseDate = new Date(firstday,);
   }
   getWeekCourseData(){
-    this.learnerService.getweekWiseCourseChart(this.courseId,this.userId,this.weekWiseDate).subscribe((result:any)=>{
+    var myFormattedDate = this.pipe.transform(this.weekWiseDate, 'yyyy-MM-dd');
+    this.learnerService.getweekWiseCourseChart(this.courseId,this.userId,myFormattedDate).subscribe((result:any)=>{
       if(result.data.weekWiseCourseChart.success){
         this.totalhoursSpend = result.data.weekWiseCourseChart.data.totalhoursSpend;
         result.data.weekWiseCourseChart.data.chartdata.forEach((data:any)=>{
