@@ -13,7 +13,7 @@ import { addTopicreference, bulkclaimcourse, claimcourse, createGuidanceRequest,
        playerstatusrealtime, resendOtponprofile, saveAttendies, updateEmailonprofile,
        updateMobileonprofile, updateProfile, updateVerifyotpmobileonProfile,
        userMstrdata, userRegistration, userRegistrationdone, userRegistrationmobileOtpsend,
-         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, viewProfile1, user_experience, set_bookmark, set_askaquestion, getMyQuestion, get_allquestion, getQAsortsearch,getActivityCalendar, getengineersForumData, createEngineersForumData} from './operations/learner_mutation';
+         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, viewProfile1, user_experience, set_bookmark, set_askaquestion, getMyQuestion, get_allquestion, getQAsortsearch,getActivityCalendar, getengineersForumData, createEngineersForumData,getuserRecordbasedonSecretKey} from './operations/learner_mutation';
 import {
 boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignmentmoduleData,
  getcalenderactivity, getCountForCategories, getCountForJobroleCategories, getCoureBasedOnCatalog,
@@ -105,8 +105,7 @@ likepost(data) {
 }
 getEmail(input) 
   {
-    this.getToken();
-   return this.http.post(this.envApi + 'getuserRecordbasedonSecretKey', input,this.httpOptions);
+   return this.http.post(this.envApi + '/getuserRecord/getuserRecordbasedonSecretKey', input,this.httpOptions);
    }
 
    learnerUploadVideo(data) { 
@@ -304,6 +303,15 @@ getMessage(): Observable<any> {
         username,
         password,
         resetCode
+      }
+    });
+  }
+  
+  getUser(userSecretkey){
+    return this.Apollo.query({
+      query: getuserRecordbasedonSecretKey,
+      variables: {
+        userSecretkey,
       }
     });
   }
