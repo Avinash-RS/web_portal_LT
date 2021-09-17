@@ -389,11 +389,19 @@ export class LearnerNewMyCourseComponent implements OnInit {
     localStorage.removeItem('userTabLocation');
     const data1 = {
       courseId: course.course_id,
-      courseName: course.course_name
+      courseName: course.course_name,
     };
     localStorage.setItem('Courseid', data1.courseId);
     localStorage.setItem('CourseName', data1.courseName);
-    this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
+    //this.router.navigateByUrl('/Learner/activities', { state: { data: data1 } });
+    this.router.navigate(['/Learner/activities'],{
+      queryParams: 
+      { 
+        courseId: btoa(course.course_id),
+        courseName: btoa(course.course_name),
+        batchId: btoa(course.batchid)
+      }
+    });
   }
 
   gotoProgression(course) {

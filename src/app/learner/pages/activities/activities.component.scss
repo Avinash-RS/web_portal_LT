@@ -1391,6 +1391,43 @@ margin-top: 8px;
 }
 .projectActivityDetails {
   .assignmentActivityDetails {
+    .iconcontent{
+      width: 7%;
+      em{
+        font-size: 70px;
+        color: #5c6873;
+      }
+    }
+      .labLeftContent{
+        width: 45%;
+        @media only screen and (max-width: 767px) {
+          width:100%;
+        }
+      }
+      .labmiddleContent{
+        width: 35%;
+        .projstartdate{
+          padding-right: 15px;
+        }
+        @media only screen and (max-width: 767px) {
+          margin-top:10px;
+          width:100%;
+        }
+      }
+      .practicesaction{
+        width: 15%;
+        text-align: right;
+        .practice-btn{
+          color: $color-white !important;
+          background-color: #1A4E9B;
+          margin-top:0 !important;
+      }
+      @media only screen and (max-width: 767px) {
+        width:100%;
+        margin-top:10px;
+        text-align: center;
+      }
+      }
     @media only screen and (max-width: 767px) {
       flex-direction: column;
     }

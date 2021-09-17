@@ -2496,3 +2496,36 @@ export const recentlycourse = gql`
         }
       }
       `;
+export const getlabactivity = gql `
+      mutation getlabactivity($batchid:String,$course_id:String){
+        getlabactivity(batchid:$batchid,course_id:$course_id){
+          success
+          message
+          data{
+            courseName
+            course_id
+            desc
+            start
+            end
+            score
+          }
+        }
+      }
+`;
+export const labactivity = gql`
+mutation labactivity(
+  $username:String,
+  $course_id:String
+){
+  labactivity(
+    username:$username,
+    course_id:$course_id
+  ){
+    success
+    message
+    Message
+    Status
+    url
+  }
+}
+`;
