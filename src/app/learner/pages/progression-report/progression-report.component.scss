@@ -5,20 +5,57 @@
   @include md {
     margin-bottom: 0;
   }
-    .progress-label, .learning-label {
+    .learning-label {
         font-size: 16px;
         font-weight: bold;
         text-align: center;
       }
+      .progress-label{
+        font-size: 22px;
+        font-weight: bold;
+        text-align: left;
+      }
     .progress-label {
       margin-top: 1.5em;
-      margin-bottom: 3em;
+      margin-bottom: 1em;
       @media only screen and (min-width: 720px) {
         margin-top: 0;
       }
       @media only screen and (min-width: 1560px) {
         margin-bottom: 2em;
       }
+    }
+    .chart-container{
+      position: relative;
+      h6 {
+        font-size: 12px;
+        position: absolute;
+        left: -46px;
+        top: 50%;
+        transform: translateY(-50%) rotate(-90deg);
+        color: #999999;
+      }
+    }
+    .progress-date{
+      margin-bottom: 1em;
+      .progress-hours-container{
+        width:60%;
+        display: inline-block;
+        .progress-hours{
+          font-size: 18px;
+          font-weight: 600;
+          color:#2280C1;
+          margin-bottom: 0;
+        }
+        .hours-spent-label{
+          display: block;
+          font-size:10px;
+          color:#969696;
+        }
+      }
+      // .progress-date-input{
+      //   width:40%;
+      // }
     }
     .learning-label {
       margin-bottom: 0;
@@ -777,12 +814,13 @@
       margin-bottom: 1em;
     }
     .numbers {
-      font-size: 36px;
+      font-size: 42px;
       padding-right: 0.3em;
       padding-top: 0.3em;
+      color:#32CE6A;
     }
     .numbers-text {
-      font-size: 13px;
+      font-size: 16px;
     }
   }
 

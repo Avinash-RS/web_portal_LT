@@ -369,18 +369,35 @@
     </div>
   </div>
   </div>
-  <div class="right-container">
-    <div class="comingSoon">
+  <div class="right-container"> 
+    <!-- <div class="comingSoon">
       <div style="margin-bottom: 40px; text-align: center;">Your weekly time spent report will be displayed here!</div>
       <img class="d-flex m-auto" src="/assets/images/timeSpentHolder.png">
-    </div>
-
-    <!-- <div class="progress-label">Time Spent</div>
-    <div [ngStyle]="{'width': '400px'}">
+    </div> -->
+    <div>
+   <div class="progress-label">Week wise time spent</div>
+   <div class="progress-date d-flex">
+     <div class="progress-hours-container">
+      <h4 class="progress-hours">{{totalhoursSpend}}</h4>
+      <span class="hours-spent-label">Hours Spent</span>
+     </div>
+     <div class="progress-date-input">
+      <mat-form-field style="width:150px;">
+        <input matInput [matDatepicker]="weekWiseDatepicker" placeholder="Choose a date" [(ngModel)]="weekWiseDate" 
+        (dateChange)="changeWeekDate()" [max]="today">
+        <mat-datepicker-toggle matSuffix [for]="weekWiseDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #weekWiseDatepicker></mat-datepicker>
+      </mat-form-field>
+     </div>
+   </div>
+   <div class="chart-container">
+   <h6>Time in minutes</h6>
+    <div [ngStyle]="{'width': '380px'}">
       <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
         [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
     </div>
-    <div class="col d-flex mt-3 justify-content-center">
+  </div>
+    <!-- <div class="col d-flex mt-3 justify-content-center">
       <div class="col-5 content-border">
         <div class="d-flex left-content">
           <div class="hours">68</div>
@@ -398,27 +415,28 @@
         </div>
         <div class="right-week">Last Week</div>
       </div>
-    </div>
-    <div class="d-flex growth">
+    </div> -->
+    <!-- <div class="d-flex growth">
       <div>You have a </div>
       <div class="text-green">&nbsp;12% learning growth</div>
-    </div>
-    <div class="col mt-5">
-      <div class="col">
+    </div> -->
+    <div class="col mt-4">
+      <!-- <div class="col">
         <div class="statistics">Course Statistics</div>
-      </div>
+      </div> -->
       <div class="col d-flex">
         <div class="numbers">87%</div>
         <div class="mr-2 numbers-text">Completeion <br /> Rate</div>
-        <div class="numbers">35</div>
-        <div class="numbers-text">Questions <br />Asked</div>
+        <!-- <div class="numbers">35</div>
+        <div class="numbers-text">Questions <br />Asked</div> -->
       </div>
       <div class="col d-flex mt-3">
         <div class="font-weight-bold">24&nbsp;</div>
         <div>Students have already completed the course</div>
       </div>
-    </div> -->
+    </div>
   </div>
+</div>
 </div>
 
 <ng-template #skeletonLoad>

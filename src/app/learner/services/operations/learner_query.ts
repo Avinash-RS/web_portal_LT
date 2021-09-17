@@ -2325,12 +2325,6 @@ export const getLearnerNewCourseReport = gql`
       userid
       batchid
       courseid
-      overAllScore {
-        selflearningscore
-        queryQuestionscore
-        # VILTscore
-        # collabarationscore
-      }
       selflearning {
         week
         WeekStatus
@@ -2341,15 +2335,8 @@ export const getLearnerNewCourseReport = gql`
         pendingfortheweek
         Completedfortheweek
         selflearningscore
+        selflearningpercentage
         calculation
-      }
-      queryQuestion {
-        total_no_of_question
-        question_score
-        calculation
-        week
-        modulestatus
-        WeekStatus
       }
       LPScore {
         LPScore
@@ -2364,6 +2351,22 @@ export const getLearnerNewCourseReport = gql`
         outoftest2
         test3
         outoftest3
+      }
+      selfLearning_Card {
+        total_no_of_weeks_actual
+        total_no_of_weeks_completed
+        total_no_of_topics_actual
+        total_no_of_topics_completed
+        total_no_of_duration
+        selflearning_points_score
+        selflearning_points_percentage
+        selflearning_out_of_points
+      }
+      QA_Card {
+        QA_total_no_of_quetions
+        QA_points_score
+        QA_points_percentage
+        QA_out_of_points
       }
       finalscore {
         grade
@@ -2528,4 +2531,19 @@ mutation labactivity(
     url
   }
 }
+`;
+export const weekWiseCourseChart = gql`
+  query weekWiseCourseChart($courseId:String,$userId:String,$startDate:String){
+    weekWiseCourseChart(courseId:$courseId,userId:$userId,startDate:$startDate){
+    message
+    success
+    data {
+      totalhoursSpend
+      chartdata {
+        day
+        minutes
+      }
+    } 
+    } 
+  }
 `;

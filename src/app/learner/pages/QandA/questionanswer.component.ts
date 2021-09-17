@@ -120,7 +120,6 @@ export class QuestionanswerComponent implements OnInit {
   getQACount() {
     this.showNumSkeleton = false
     this.learnerService.getengineersForumQA_Count(this.UserDetails.user_id, this.courseId).subscribe((rdata: any) => {
-      console.log(rdata)
       let qcountData = rdata.data.getengineersForumQA_Count.data.questionCount
       let acountData = rdata.data.getengineersForumQA_Count.data.anweredCount
       this.animateValue('qCount', 0, qcountData ? qcountData : 0, 1000)
@@ -150,6 +149,7 @@ export class QuestionanswerComponent implements OnInit {
   }
 
   onScrollDown() {
+
     this.pageNumber = this.pageNumber + 1;
     this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, this.requestType, this.pageNumber, this.searchKey).subscribe((result: any) => {
       const resultdata = result.data.getengineersForumData.data;
@@ -250,12 +250,19 @@ export class QuestionanswerComponent implements OnInit {
   searchcaller(){
     this.timeoutval = setTimeout(()=>{
       clearTimeout(this.timeoutval)
+      this.pageNumber = 0;
       this.getQAData();
       // this.getQACount();
     },500)
   }
   getQAtype(){
+    this.pageNumber = 0;
     this.requestType = this.selectedtype;
+    this.getQAData();
+  }
+  resetSearch(){
+    this.searchKey='';
+    this.pageNumber = 0;
     this.getQAData();
   }
 

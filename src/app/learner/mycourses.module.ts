@@ -10,7 +10,7 @@ import { CoreModule } from '@core/core.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { MatMenuModule, MatSidenavModule, MatExpansionModule, MatStepperModule, DateAdapter } from '@angular/material';
+import { MatMenuModule, MatSidenavModule, MatExpansionModule, MatStepperModule} from '@angular/material';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { NgxMaskModule } from 'ngx-mask';
 import { MaterialModule } from '@core/material.module';
@@ -41,6 +41,7 @@ import { CalendarActivityComponent } from './pages/calendar-activity/calendar-ac
 import { ProgressionReportComponent } from './pages/progression-report/progression-report.component';
 import { QuestionanswerComponent } from './pages/QandA/questionanswer.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { DateAdapter as AngularCalendarDateAdapter } from 'angular-calendar';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -128,7 +129,6 @@ const routes: Routes = [
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [
     CoreModule,
-    MaterialModule,
     CarouselModule,
     CommonModule,
     NgxMaskModule,
@@ -167,9 +167,10 @@ const routes: Routes = [
       }
     }),
     CalendarModule.forRoot({
-      provide: DateAdapter,
+      provide: AngularCalendarDateAdapter,
       useFactory: adapterFactory,
     }),
+    MaterialModule,
   ],
   providers: [
     Apollo

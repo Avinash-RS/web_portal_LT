@@ -132,10 +132,11 @@ export const userRegistrationUsernamesuggestion = gql`
 
 
 export const getForgotpasswordbyResetpassword = gql`
-  mutation get_forgot_password_byresetpassword($username: String!,$password:String!) {
+  mutation get_forgot_password_byresetpassword($username: String!,$password:String!,$resetCode:String!) {
     get_forgot_password_byresetpassword(
       username:$username,
-      password:$password
+      password:$password,
+      resetCode:$resetCode
     ) {
       message
       success
