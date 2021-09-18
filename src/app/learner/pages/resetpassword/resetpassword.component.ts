@@ -30,6 +30,7 @@ export class ResetpasswordComponent implements OnInit {
   showconpassbutton = false;
   showconpsseye = false;
   isLinkActive: boolean;
+  isLink = false;
   hide = true;
   hide2 = true;
   secretKey = "(!@#Passcode!@#)";
@@ -168,6 +169,9 @@ export class ResetpasswordComponent implements OnInit {
       this.service.get_user_detail_username(name).subscribe((data: any) => {
         this.isLinkActive = data.data.get_user_detail_username && data.data.get_user_detail_username.message === 'Link not expired' ?
           true : false;
+          if(!this.isLinkActive){
+            this.isLink = true
+          }
       });
     } catch (error) {
       throw error;

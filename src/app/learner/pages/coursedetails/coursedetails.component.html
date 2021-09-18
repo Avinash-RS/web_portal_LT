@@ -31,7 +31,7 @@
             <div class="courseTitle" *ngIf="drawersOpen!==false||filterkey!=='All'"> | <span>{{this.course?.course_name}}</span></div>
         </div> -->
         <div class="titleBack animateAnimate d-flex justify-content-between align-items-center" [ngClass]="titleBar==true?'fadeOutUp':'fadeInDown'">
-            <div class="">
+            <div class="breadCrumbWrapper">
                 <ul class="breadcrumb" [ngClass]="scromApiData?.toc != '0' ? 'no':'yes'">
                     <li [ngClass]="drawersOpen ? 'no':'yes'"><em (click)="goBack()" class="lxp-Go backArrow"></em> <span>{{this.course?.course_name}}</span></li>
                     <ng-container *ngIf="scromApiData?.toc != '0'">
@@ -206,7 +206,7 @@
                                 <i class="lxp-lifebuoy"></i>
                             </button>
                         </div>
-                        <div class="bookmark">
+                        <div class="bookmark" *ngIf="userType == 'collegeconnect'">
                             <button data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
                                 <i [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></i>
                             </button>
