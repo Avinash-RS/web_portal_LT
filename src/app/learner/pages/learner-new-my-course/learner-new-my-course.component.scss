@@ -303,12 +303,122 @@
     }
   }
 
+  .tabsWrapper {
+    position: relative;
+    .courseCompletion {
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      top: 15px;
+      color: #BE2020;
+      z-index: 2;
+      h4 {
+        margin: 0;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      span {
+        margin-right: 8px;
+        font-size: 18px;
+      }
+    }
+  }
   //MyCourses
   .mycoursesWrapper {
     padding: 20px 85px 20px 20px;
     background-color: #f2f2f2;
     position: relative;
     z-index: 9;
+    .course-progress{
+      margin-top: 10px;
+      .course-progress-header{
+        .course-progress-header-text{
+          width: 90%;
+          font-size: 16px;
+          font-weight:500;
+        }
+        .course-progress-header-action{
+          cursor: pointer;
+          width:10%;
+          font-size: 13px;
+          color: #BE2020;
+          mat-icon{
+            margin-right: 10px;
+          }
+        }
+      }
+      .course-progress-content{
+        margin-top: 20px;
+        margin-bottom: 30px;
+        .cousrse-wise-card{
+          width:54.2%;
+          padding-top: 0;
+          .cousrse-wise-card-header{
+            .cousrse-wise-card-header-text{
+              font-size:14px;
+              font-weight: 500;
+            }
+          }
+          .cousrse-chart-content{
+            position: relative;
+            margin-top: 10px;
+            h6 {
+              font-size: 12px;
+              position: absolute;
+              left: -39px;
+              top: 50%;
+              transform: translateY(-50%) rotate(-90deg);
+              color: #999999;
+            }
+          }
+          .course-chart-footer{
+            text-align: center;
+            font-size: 12px;
+          }
+        }
+        .week-wise-card{
+          width:44.2%;
+          .week-wise-card-header{
+            margin-bottom: 0.5em;
+            .weekwise-card-header-text{
+              font-size:14px;
+              font-weight: 500;
+            }
+          }
+          .progress-date{
+            margin-bottom: 0.5em;
+            .progress-hours-container{
+              width:60%;
+              display: inline-block;
+              .progress-hours{
+                font-size: 16px;
+                font-weight: 600;
+                color:#2280C1;
+                margin-bottom: 0;
+              }
+              .hours-spent-label{
+                display: block;
+                font-size:10px;
+                color:#969696;
+              }
+            }
+          }
+          .Week-chart-content{
+          position: relative;
+          h6 {
+            font-size: 12px;
+            position: absolute;
+            left: -43px;
+            top: 40%;
+            transform: translateY(-50%) rotate(-90deg);
+            color: #999999;
+          }
+          }
+        }
+      }
+    }
     @media only screen and (max-width: 767px) {
       padding: 15px 15px 50px 15px;
     }

@@ -228,85 +228,260 @@
                             <em class="lxp-Calendar_Todo"></em>
                         </span>
                     </div>
-                    <mat-tab-group #tabs (selectedTabChange)="courseTabChange($event,userDetailes.user_id,userDetailes._id);" [(selectedIndex)]="selectedIndex">
-                        <mat-tab>
-                            <ng-template mat-tab-label>
-                                Ongoing ({{onGoingCourseCount}})
-                            </ng-template>
-                            <div *ngIf="courseSkel; else courseSkeleton">
-                            <div class="mycoursesContent" *ngIf="courseDetailsList.length; else noCourseCard">
-                                <ng-container *ngFor="let item of courseDetailsList">
-                                    <div class="{{item.progressClass}}">
-                                        <mat-progress-bar [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
+                    <div class="course-progress" *ngIf="showProgressChart" [@collapseprogress]>
+                        <div class="d-flex justify-content-between align-items-center course-progress-header">
+                            <div class="course-progress-header-text">Course Completion Progress</div>
+                            <div class="d-flex align-items-center course-progress-header-action" (click)="showProgressChart = false;">
+                                <mat-icon>close</mat-icon>
+                                <span>Close</span>
+                            </div>
+                        </div>  
+                        <div class="d-flex justify-content-between align-items-center flex-wrap course-progress-content">
+                            <mat-card class="cousrse-wise-card">
+                                <div class="d-flex justify-content-between align-items-center cousrse-wise-card-header">
+                                    <div class="cousrse-wise-card-header-text">Course Wise Completion</div>
+                                    <div>
+                                        <mat-form-field style="width:150px;">
+                                            <input matInput [matDatepicker]="CourseDatepicker" placeholder="Choose a date" [(ngModel)]="courseDate" 
+                                             [max]="today">
+                                            <mat-datepicker-toggle matSuffix [for]="CourseDatepicker"></mat-datepicker-toggle>
+                                            <mat-datepicker #CourseDatepicker></mat-datepicker>
+                                         </mat-form-field>
                                     </div>
-                                    <div class="courses d-flex justify-content-start">
-                                        <figure class="d-flex align-items-start justify-content-center" (click)="gotoDesc(item)">
-                                            <img [src]="item.course_img_url + blobKey" alt="" />
-    
-                                            <button class="d-flex align-items-center"><em [class]="item.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
-                                                {{item?.course_status === "incomplete" ? "Resume" : item?.course_status === "suspend" ? "Resume" : item.course_status=== 'completed'?"Replay":("Start" | translate) }}
-                                            </button>
-                                            <div class="progStatus {{item.progressClass}}">
-                                                <div class="d-flex justify-content-between progression">
-                                                    <span>Progression</span>
-                                                    <span>{{item.self_paced_learning_progression}} %</span>
-                                                </div>
-                                                <mat-progress-bar style="height: 4px;" [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
-                                              </div>
-                                        </figure>
-                                        <div class="rightCol">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <h3 class="titleClass" title="{{item.course_name}}">{{item.course_name}}</h3>
-                                                <div class="searchProgression d-flex justify-content-end align-items-center" [ngClass]="userDetailes.org_type === 'collegeconnect' ? 'yes':'no'">
-                                                    <!-- <span class="searchGallery" *ngIf ="shotDotSearch" (click)="openGallery(item)"><em class="lxp-Search"></em></span> -->
-                                                    <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
-                                                        <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#88bd2f'" [innerStrokeColor]="'#e7e8ea'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4" [subtitleFontSize]="5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
+                                </div>
+                                <div class="cousrse-chart-content">
+                                    <h6>Completion %</h6>
+                                    <canvas baseChart [datasets]="coursebarChartData" [labels]="coursebarChartLabels" [options]="courseChartOptions"
+                                    [plugins]="courseChartPlugins" [legend]="coursebarChartLegend" [chartType]="coursebarChartType"></canvas>
+                            </div>
+                                <div class="d-flex justify-content-center align-items-center course-chart-footer">
+                                    Courses
+                                </div>
+                            </mat-card>
+                            <mat-card class="week-wise-card">
+                                <div class="week-wise-card-header">
+                                  <div class="weekwise-card-header-text">Week wise time spent</div>
+                                </div>
+                                <div class="progress-date d-flex">
+                                    <div class="progress-hours-container">
+                                     <h4 class="progress-hours">{{totalhoursSpend}}</h4>
+                                     <span class="hours-spent-label">Hours Spent</span>
+                                    </div>
+                                    <div class="progress-date-input">
+                                     <mat-form-field style="width:150px;">
+                                       <input matInput [matDatepicker]="weekWiseDatepicker" placeholder="Choose a date" [(ngModel)]="weekWiseDate" 
+                                        [max]="today">
+                                       <mat-datepicker-toggle matSuffix [for]="weekWiseDatepicker"></mat-datepicker-toggle>
+                                       <mat-datepicker #weekWiseDatepicker></mat-datepicker>
+                                     </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="Week-chart-content">
+                                    <h6>Time in hours</h6>
+                                    <div>
+                                        <canvas baseChart height="174px" [datasets]="WeekbarChartData" [labels]="WeekbarChartLabels" [options]="WeekbarChartOptions"
+                                        [plugins]="WeekbarChartPlugins" [legend]="WeekbarChartLegend" [chartType]="WeekbarChartType"></canvas>
+                                    </div>
+                                </div>
+                            </mat-card>
+                        </div>  
+                    </div>
+
+                    <div class="tabsWrapper">
+                        <div class="courseCompletion" (click)="showProgressChart = true;" *ngIf="!showProgressChart">
+                            <h4><span><em class="lxp-Analytics"></em></span>Course Completion Progress</h4>
+                        </div>
+
+                        <mat-tab-group #tabs (selectedTabChange)="courseTabChange($event,userDetailes.user_id,userDetailes._id);" [(selectedIndex)]="selectedIndex">
+                            <mat-tab>
+                                <ng-template mat-tab-label>
+                                    Ongoing ({{onGoingCourseCount}})
+                                </ng-template>
+                                <div *ngIf="courseSkel; else courseSkeleton">
+                                <div class="mycoursesContent" *ngIf="courseDetailsList.length; else noCourseCard">
+                                    <ng-container *ngFor="let item of courseDetailsList">
+                                        <div class="{{item.progressClass}}">
+                                            <mat-progress-bar [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
+                                        </div>
+                                        <div class="courses d-flex justify-content-start">
+                                            <figure class="d-flex align-items-start justify-content-center" (click)="gotoDesc(item)">
+                                                <img [src]="item.course_img_url + blobKey" alt="" />
+        
+                                                <button class="d-flex align-items-center"><em [class]="item.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
+                                                    {{item?.course_status === "incomplete" ? "Resume" : item?.course_status === "suspend" ? "Resume" : item.course_status=== 'completed'?"Replay":("Start" | translate) }}
+                                                </button>
+                                                <div class="progStatus {{item.progressClass}}">
+                                                    <div class="d-flex justify-content-between progression">
+                                                        <span>Progression</span>
+                                                        <span>{{item.self_paced_learning_progression}} %</span>
                                                     </div>
-                                                </div>
-                                                <!-- <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
-                                                    <em class="lxp-Dot_Menu"></em>
-                                                </span>
-                                                <mat-menu #menu="matMenu" xPosition="before">
-                                                    <button *ngIf ="shotDotSearch" mat-menu-item (click)="openGallery(item)">
-                                                      <span><em class="lxp-Search mr-2"></em>Search</span>
-                                                    </button>
-                                                    <mat-divider *ngIf ="shotDotSearch"></mat-divider>
-                                                    <button mat-menu-item (click)="openReport(item)">
-                                                      <span><em class="lxp-Edit_Document mr-2"></em>Course Assessment Report</span>
-                                                    </button>
-                                                </mat-menu> -->
-                                            </div>
-                                            <div *ngIf="item?.batchid" class="showLessContent">
-                                                <div [ngClass]="!item.isReadMore ? '' : 'showText'">
-                                                    <div class="arrowWrapper d-flex">
-                                                        <p [ngClass]="!item.isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
-                                                        <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
-                                                            <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
+                                                    <mat-progress-bar style="height: 4px;" [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
+                                                  </div>
+                                            </figure>
+                                            <div class="rightCol">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h3 class="titleClass" title="{{item.course_name}}">{{item.course_name}}</h3>
+                                                    <div class="searchProgression d-flex justify-content-end align-items-center" [ngClass]="userDetailes.org_type === 'collegeconnect' ? 'yes':'no'">
+                                                        <!-- <span class="searchGallery" *ngIf ="shotDotSearch" (click)="openGallery(item)"><em class="lxp-Search"></em></span> -->
+                                                        <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
+                                                            <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#88bd2f'" [innerStrokeColor]="'#e7e8ea'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4" [subtitleFontSize]="5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
+                                                        <em class="lxp-Dot_Menu"></em>
+                                                    </span>
+                                                    <mat-menu #menu="matMenu" xPosition="before">
+                                                        <button *ngIf ="shotDotSearch" mat-menu-item (click)="openGallery(item)">
+                                                          <span><em class="lxp-Search mr-2"></em>Search</span>
                                                         </button>
+                                                        <mat-divider *ngIf ="shotDotSearch"></mat-divider>
+                                                        <button mat-menu-item (click)="openReport(item)">
+                                                          <span><em class="lxp-Edit_Document mr-2"></em>Course Assessment Report</span>
+                                                        </button>
+                                                    </mat-menu> -->
+                                                </div>
+                                                <div *ngIf="item?.batchid" class="showLessContent">
+                                                    <div [ngClass]="!item.isReadMore ? '' : 'showText'">
+                                                        <div class="arrowWrapper d-flex">
+                                                            <p [ngClass]="!item.isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
+                                                            <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
+                                                                <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
+                                                            </button>
+                                                        </div>
+                                                        <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
+                                                            <span class="by">By: <b>{{item.courseBy}}</b></span>
+                                                            <span class="credits" *ngIf ="item.enableCredits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
+                                                            <span>
+                                                                <em class="lxp-Duration"></em> 
+                                                                Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                            </span>
+                                                        </div>
+                                                        <div class="type d-flex justify-content-start">
+                                                            <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
+                                                            <span>
+                                                                <ng-container *ngIf="userDetailes.org_type !== 'collegeconnect'">Live Interactions</ng-container><ng-container *ngIf="userDetailes.org_type == 'collegeconnect'">Industry Talk</ng-container> - upto  {{item.instructor_lead_session_total_count!==""?item.instructor_lead_session_total_count:0}}</span>
+                                                            <span *ngIf="userDetailes.org_type == 'collegeconnect'">Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
+                                                            <span *ngIf="userDetailes.org_type == 'collegeconnect'">Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
+                                                        </div>
                                                     </div>
-                                                    <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
-                                                        <span class="by">By: <b>{{item.courseBy}}</b></span>
-                                                        <span class="credits" *ngIf ="item.enableCredits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
-                                                        <span>
-                                                            <em class="lxp-Duration"></em> 
-                                                            Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
-                                                        </span>
-                                                    </div>
-                                                    <div class="type d-flex justify-content-start">
-                                                        <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
-                                                        <span>
-                                                            <ng-container *ngIf="userDetailes.org_type !== 'collegeconnect'">Live Interactions</ng-container><ng-container *ngIf="userDetailes.org_type == 'collegeconnect'">Industry Talk</ng-container> - upto  {{item.instructor_lead_session_total_count!==""?item.instructor_lead_session_total_count:0}}</span>
-                                                        <span *ngIf="userDetailes.org_type == 'collegeconnect'">Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
-                                                        <span *ngIf="userDetailes.org_type == 'collegeconnect'">Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
+                                                </div>
+                                                <div [ngClass]="userDetailes.org_type === 'vocational' ? 'vocational':'notVocational'">
+                                                    <div *ngIf="item?.batchid" class="actionItems d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
+                                                        <div class="viltActivitiesQA d-flex justify-content-start">
+                                                            <div class="icons" (click)="goInstructorLed(item)">
+                                                                <span><em class="lxp-VILT"></em></span>
+                                                                <ng-container *ngIf="userDetailes.org_type !== 'collegeconnect'"><p>Live Interactions</p></ng-container>
+                                                                <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'"><p>Industry Talk</p></ng-container>
+                                                            </div>
+                                                            <div class="icons" (click)="gotoSubmissionDetails(item)">
+                                                                <span><em class="lxp-Activities_New"></em></span>
+                                                                <p>Activities</p>
+                                                            </div>
+                                                            <!--  -->
+                                                            <div class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
+                                                                <span><em class="lxp-book-question"></em></span>
+                                                                <p>Q&A</p>
+                                                            </div>
+                                                            <div *ngIf="userDetailes.org_type === 'vocational' || userDetailes.org_type ==='Corporate'" class="icons" (click)="goToForum(item)">
+                                                                <span><em class="lxp-QA"></em></span>
+                                                                <p>Discussion Fourm</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="courseProgression d-flex align-items-center">
+                                                            <div class="icons" *ngIf="userDetailes.org_type === 'collegeconnect'" (click)="openReport(item)">
+                                                                <span><em class="lxp-Assessment_Report"></em></span>
+                                                                <p>Assessment Report</p>
+                                                            </div>
+                                                            <div class="icons" (click)="gotoProgression(item)">
+                                                                <span><em class="lxp-Analytics"></em></span>
+                                                                <p>Learning Progression</p>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div [ngClass]="userDetailes.org_type === 'vocational' ? 'vocational':'notVocational'">
+                                        </div>
+                                    </ng-container>
+                                </div>
+                                </div>
+                            </mat-tab>
+                            <mat-tab>
+                                <ng-template mat-tab-label>
+                                    Completed ({{completedCourseCount}})
+                                </ng-template>
+                                <div *ngIf="courseSkel;else courseSkeleton">
+                                <div class="mycoursesContent" *ngIf="courseDetailsList.length;else noCourseCard">
+                                    <ng-container *ngFor="let item of courseDetailsList">
+                                        <div class="{{item.progressClass}}">
+                                            <mat-progress-bar [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
+                                          </div>
+                                        <div class="courses d-flex justify-content-start">
+                                            <figure class="d-flex align-items-center justify-content-center" (click)="gotoDesc(item)">
+                                                <img [src]="item.course_img_url + blobKey" alt="" />
+        
+                                                <button class="d-flex align-items-center"><em [class]="item.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
+                                                    {{item?.course_status === "incomplete" ? "Resume" : item?.course_status === "suspend" ? "Resume" : item.course_status=== 'completed'?"Replay":("Start" | translate) }}
+                                                </button>
+                                                <div class="progStatus {{item.progressClass}}">
+                                                    <div class="d-flex justify-content-between progression">
+                                                        <span>Progression</span>
+                                                        <span>{{item.self_paced_learning_progression}} %</span>
+                                                    </div>
+                                                    <mat-progress-bar style="height: 4px;" [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
+                                                  </div>
+                                            </figure>
+                                            <div class="rightCol">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
+                                                    <div class="searchProgression d-flex justify-content-end align-items-center">
+                                                        <!-- <span class="searchGallery" *ngIf ="shotDotSearch" (click)="openGallery(item)"><em class="lxp-Search"></em></span> -->
+                                                        <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
+                                                            <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#88bd2f'" [innerStrokeColor]="'#e7e8ea'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4" [subtitleFontSize]="5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
+                                                        <em class="lxp-Dot_Menu"></em>
+                                                    </span> -->
+                                                    <!-- <mat-menu #menu="matMenu" xPosition="before">
+                                                        <button mat-menu-item (click)="openGallery(item)">
+                                                          <span><em class="lxp-Search mr-2"></em>Search</span>
+                                                        </button>
+                                                        <mat-divider></mat-divider>
+                                                        <button mat-menu-item (click)="openReport(item)">
+                                                          <span><em class="lxp-Edit_Document mr-2"></em>Course Assessment Report</span>
+                                                        </button>
+                                                      </mat-menu> -->
+                                                </div>
+                                                <div *ngIf="item?.batchid" class="showLessContent">
+                                                    <div [ngClass]="!item.isReadMore ? '' : 'showText'">
+                                                        <div class="arrowWrapper d-flex">
+                                                            <p [ngClass]="isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
+                                                            <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
+                                                                <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
+                                                            </button>
+                                                        </div>
+                                                        <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
+                                                            <span class="by">By: <b>{{item.courseBy}}</b></span>
+                                                            <span class="credits" *ngIf ="item.enableCredits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
+                                                            <span>
+                                                                <em class="lxp-Duration"></em> 
+                                                                Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                            </span>
+                                                        </div>
+                                                        <div class="type d-flex justify-content-start">
+                                                            <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
+                                                            <span>
+                                                                <ng-container *ngIf="userDetailes.org_type!== 'collegeconnect'">Live Interactions</ng-container><ng-container *ngIf="userDetailes.org_type == 'collegeconnect'">Industry Talk</ng-container> - upto  {{item.instructor_lead_session_total_count!==""?item.instructor_lead_session_total_count:0}}</span>
+                                                            <span *ngIf="userDetailes.org_type == 'collegeconnect'">Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
+                                                            <span *ngIf="userDetailes.org_type == 'collegeconnect'">Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div *ngIf="item?.batchid" class="actionItems d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
                                                     <div class="viltActivitiesQA d-flex justify-content-start">
                                                         <div class="icons" (click)="goInstructorLed(item)">
                                                             <span><em class="lxp-VILT"></em></span>
-                                                            <ng-container *ngIf="userDetailes.org_type !== 'collegeconnect'"><p>Live Interactions</p></ng-container>
+                                                            <ng-container *ngIf="userDetailes.org_type!== 'collegeconnect'"><p>Live Interactions</p></ng-container>
                                                             <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'"><p>Industry Talk</p></ng-container>
                                                         </div>
                                                         <div class="icons" (click)="gotoSubmissionDetails(item)">
@@ -318,7 +493,7 @@
                                                             <span><em class="lxp-book-question"></em></span>
                                                             <p>Q&A</p>
                                                         </div>
-                                                        <div *ngIf="userDetailes.org_type === 'vocational' || userDetailes.org_type ==='Corporate'" class="icons" (click)="goToForum(item)">
+                                                        <div *ngIf="userDetailes.org_type === 'vocational' || userDetailes.org_type ==='Corporate'"class="icons" (click)="goToForum(item)">
                                                             <span><em class="lxp-QA"></em></span>
                                                             <p>Discussion Fourm</p>
                                                         </div>
@@ -336,231 +511,122 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </ng-container>
-                            </div>
-                            </div>
-                        </mat-tab>
-                        <mat-tab>
-                            <ng-template mat-tab-label>
-                                Completed ({{completedCourseCount}})
-                            </ng-template>
-                            <div *ngIf="courseSkel;else courseSkeleton">
-                            <div class="mycoursesContent" *ngIf="courseDetailsList.length;else noCourseCard">
-                                <ng-container *ngFor="let item of courseDetailsList">
-                                    <div class="{{item.progressClass}}">
-                                        <mat-progress-bar [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
-                                      </div>
-                                    <div class="courses d-flex justify-content-start">
-                                        <figure class="d-flex align-items-center justify-content-center" (click)="gotoDesc(item)">
-                                            <img [src]="item.course_img_url + blobKey" alt="" />
-    
-                                            <button class="d-flex align-items-center"><em [class]="item.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
-                                                {{item?.course_status === "incomplete" ? "Resume" : item?.course_status === "suspend" ? "Resume" : item.course_status=== 'completed'?"Replay":("Start" | translate) }}
-                                            </button>
-                                            <div class="progStatus {{item.progressClass}}">
-                                                <div class="d-flex justify-content-between progression">
-                                                    <span>Progression</span>
-                                                    <span>{{item.self_paced_learning_progression}} %</span>
-                                                </div>
-                                                <mat-progress-bar style="height: 4px;" [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
-                                              </div>
-                                        </figure>
-                                        <div class="rightCol">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
-                                                <div class="searchProgression d-flex justify-content-end align-items-center">
-                                                    <!-- <span class="searchGallery" *ngIf ="shotDotSearch" (click)="openGallery(item)"><em class="lxp-Search"></em></span> -->
-                                                    <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
-                                                        <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#88bd2f'" [innerStrokeColor]="'#e7e8ea'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4" [subtitleFontSize]="5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
+                                    </ng-container>
+                                </div>
+                                </div>
+                            </mat-tab>
+                            <mat-tab>
+                                <ng-template mat-tab-label>
+                                    All ({{allCourseCount}})
+                                </ng-template>
+                                <div *ngIf="courseSkel;else courseSkeleton">
+                                <div class="mycoursesContent" *ngIf="courseDetailsList.length;else noCourseCard">
+                                    <ng-container *ngFor="let item of courseDetailsList">
+                                        <div class="{{item.progressClass}}">
+                                            <mat-progress-bar [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
+                                          </div>
+                                        <div class="courses d-flex justify-content-start">
+                                            <figure class="d-flex align-items-center justify-content-center" (click)="gotoDesc(item)">
+                                                <img [src]="item.course_img_url + blobKey" alt="" />
+        
+                                                <button class="d-flex align-items-center"><em [class]="item.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
+                                                    {{item?.course_status === "incomplete" ? "Resume" : item?.course_status === "suspend" ? "Resume" : item.course_status=== 'completed'?"Replay":("Start" | translate) }}</button>
+                                                    <div class="progStatus {{item.progressClass}}">
+                                                        <div class="d-flex justify-content-between progression">
+                                                            <span>Progression</span>
+                                                            <span>{{item.self_paced_learning_progression}} %</span>
+                                                        </div>
+                                                        <mat-progress-bar style="height: 4px;" [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
+                                                      </div>
+                                            </figure>
+                                            <div class="rightCol">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
+                                                    <div class="searchProgression d-flex justify-content-end align-items-center">
+                                                        <!-- <span class="searchGallery" *ngIf ="shotDotSearch" (click)="openGallery(item)"><em class="lxp-Search"></em></span> -->
+                                                        <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
+                                                            <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#88bd2f'" [innerStrokeColor]="'#e7e8ea'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4" [subtitleFontSize]="5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <!-- <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
-                                                    <em class="lxp-Dot_Menu"></em>
-                                                </span> -->
-                                                <!-- <mat-menu #menu="matMenu" xPosition="before">
-                                                    <button mat-menu-item (click)="openGallery(item)">
-                                                      <span><em class="lxp-Search mr-2"></em>Search</span>
-                                                    </button>
-                                                    <mat-divider></mat-divider>
-                                                    <button mat-menu-item (click)="openReport(item)">
-                                                      <span><em class="lxp-Edit_Document mr-2"></em>Course Assessment Report</span>
-                                                    </button>
-                                                  </mat-menu> -->
-                                            </div>
-                                            <div *ngIf="item?.batchid" class="showLessContent">
-                                                <div [ngClass]="!item.isReadMore ? '' : 'showText'">
-                                                    <div class="arrowWrapper d-flex">
-                                                        <p [ngClass]="isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
-                                                        <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
-                                                            <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
+                                                    <!-- <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
+                                                        <em class="lxp-Dot_Menu"></em>
+                                                    </span> -->
+                                                    <!-- <mat-menu #menu="matMenu" xPosition="before">
+                                                        <button mat-menu-item (click)="openGallery(item)">
+                                                          <span><em class="lxp-Search mr-2"></em>Search</span>
                                                         </button>
-                                                    </div>
-                                                    <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
-                                                        <span class="by">By: <b>{{item.courseBy}}</b></span>
-                                                        <span class="credits" *ngIf ="item.enableCredits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
-                                                        <span>
-                                                            <em class="lxp-Duration"></em> 
-                                                            Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
-                                                        </span>
-                                                    </div>
-                                                    <div class="type d-flex justify-content-start">
-                                                        <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
-                                                        <span>
-                                                            <ng-container *ngIf="userDetailes.org_type!== 'collegeconnect'">Live Interactions</ng-container><ng-container *ngIf="userDetailes.org_type == 'collegeconnect'">Industry Talk</ng-container> - upto  {{item.instructor_lead_session_total_count!==""?item.instructor_lead_session_total_count:0}}</span>
-                                                        <span *ngIf="userDetailes.org_type == 'collegeconnect'">Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
-                                                        <span *ngIf="userDetailes.org_type == 'collegeconnect'">Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
+                                                        <mat-divider></mat-divider>
+                                                        <button mat-menu-item (click)="openReport(item)">
+                                                          <span><em class="lxp-Edit_Document mr-2"></em>Course Assessment Report</span>
+                                                        </button>
+                                                    </mat-menu> -->
+                                                </div>
+                                                <div *ngIf="item?.batchid" class="showLessContent">
+                                                    <div [ngClass]="!item.isReadMore ? '' : 'showText'">
+                                                        <div class="arrowWrapper d-flex">
+                                                            <p [ngClass]="isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
+                                                            <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
+                                                                <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
+                                                            </button>
+                                                        </div>
+                                                        <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
+                                                            <span class="by">By: <b>{{item.courseBy}}</b></span>
+                                                            <span class="credits" *ngIf ="item.enableCredits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
+                                                            <span>
+                                                                <em class="lxp-Duration"></em> 
+                                                                Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                                                            </span>
+                                                        </div>
+                                                        <div class="type d-flex justify-content-start">
+                                                            <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
+                                                            <span>
+                                                                <ng-container *ngIf="userDetailes.org_type!== 'collegeconnect'">Live Interactions</ng-container><ng-container *ngIf="userDetailes.org_type == 'collegeconnect'">Industry Talk</ng-container> - upto  {{item.instructor_lead_session_total_count!==""?item.instructor_lead_session_total_count:0}}</span>
+                                                            <span *ngIf="userDetailes.org_type == 'collegeconnect'">Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
+                                                            <span *ngIf="userDetailes.org_type == 'collegeconnect'">Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div *ngIf="item?.batchid" class="actionItems d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
-                                                <div class="viltActivitiesQA d-flex justify-content-start">
-                                                    <div class="icons" (click)="goInstructorLed(item)">
-                                                        <span><em class="lxp-VILT"></em></span>
-                                                        <ng-container *ngIf="userDetailes.org_type!== 'collegeconnect'"><p>Live Interactions</p></ng-container>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'"><p>Industry Talk</p></ng-container>
+                                                <div *ngIf="item?.batchid" class="actionItems d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
+                                                    <div class="viltActivitiesQA d-flex justify-content-start">
+                                                        <div class="icons" (click)="goInstructorLed(item)">
+                                                            <span><em class="lxp-VILT"></em></span>
+                                                            <ng-container *ngIf="userDetailes.org_type!== 'collegeconnect'"><p>Live Interactions</p></ng-container>
+                                                            <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'"><p>Industry Talk</p></ng-container>
+                                                        </div>
+                                                        <div class="icons" (click)="gotoSubmissionDetails(item)">
+                                                            <span><em class="lxp-Activities_New"></em></span>
+                                                            <p>Activities</p>
+                                                        </div>
+                                                        <!--  -->
+                                                        <div class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
+                                                            <span><em class="lxp-book-question"></em></span>
+                                                            <p>Q&A</p>
+                                                        </div>
+                                                        <div *ngIf="userDetailes.org_type === 'vocational' || userDetailes.org_type ==='Corporate'" class="icons" (click)="goToForum(item)">
+                                                            <span><em class="lxp-QA"></em></span>
+                                                            <p>Discussion Fourm</p>
+                                                        </div>
                                                     </div>
-                                                    <div class="icons" (click)="gotoSubmissionDetails(item)">
-                                                        <span><em class="lxp-Activities_New"></em></span>
-                                                        <p>Activities</p>
-                                                    </div>
-                                                    <!--  -->
-                                                    <div class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
-                                                        <span><em class="lxp-book-question"></em></span>
-                                                        <p>Q&A</p>
-                                                    </div>
-                                                    <div *ngIf="userDetailes.org_type === 'vocational' || userDetailes.org_type ==='Corporate'"class="icons" (click)="goToForum(item)">
-                                                        <span><em class="lxp-QA"></em></span>
-                                                        <p>Discussion Fourm</p>
-                                                    </div>
-                                                </div>
-                                                <div class="courseProgression d-flex align-items-center">
-                                                    <div class="icons" *ngIf="userDetailes.org_type === 'collegeconnect'" (click)="openReport(item)">
-                                                        <span><em class="lxp-Assessment_Report"></em></span>
-                                                        <p>Assessment Report</p>
-                                                    </div>
-                                                    <div class="icons" (click)="gotoProgression(item)">
-                                                        <span><em class="lxp-Analytics"></em></span>
-                                                        <p>Learning Progression</p>
+                                                    <div class="courseProgression d-flex align-items-center">
+                                                        <div *ngIf="userDetailes.org_type === 'collegeconnect'" class="icons" (click)="openReport(item)">
+                                                            <span><em class="lxp-Assessment_Report"></em></span>
+                                                            <p>Assessment Report</p>
+                                                        </div>
+                                                        <div class="icons" (click)="gotoProgression(item)">
+                                                            <span><em class="lxp-Analytics"></em></span>
+                                                            <p>Learning Progression</p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </ng-container>
-                            </div>
-                            </div>
-                        </mat-tab>
-                        <mat-tab>
-                            <ng-template mat-tab-label>
-                                All ({{allCourseCount}})
-                            </ng-template>
-                            <div *ngIf="courseSkel;else courseSkeleton">
-                            <div class="mycoursesContent" *ngIf="courseDetailsList.length;else noCourseCard">
-                                <ng-container *ngFor="let item of courseDetailsList">
-                                    <div class="{{item.progressClass}}">
-                                        <mat-progress-bar [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
-                                      </div>
-                                    <div class="courses d-flex justify-content-start">
-                                        <figure class="d-flex align-items-center justify-content-center" (click)="gotoDesc(item)">
-                                            <img [src]="item.course_img_url + blobKey" alt="" />
-    
-                                            <button class="d-flex align-items-center"><em [class]="item.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
-                                                {{item?.course_status === "incomplete" ? "Resume" : item?.course_status === "suspend" ? "Resume" : item.course_status=== 'completed'?"Replay":("Start" | translate) }}</button>
-                                                <div class="progStatus {{item.progressClass}}">
-                                                    <div class="d-flex justify-content-between progression">
-                                                        <span>Progression</span>
-                                                        <span>{{item.self_paced_learning_progression}} %</span>
-                                                    </div>
-                                                    <mat-progress-bar style="height: 4px;" [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
-                                                  </div>
-                                        </figure>
-                                        <div class="rightCol">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <h3 title="{{item.course_name}}">{{item.course_name}}</h3>
-                                                <div class="searchProgression d-flex justify-content-end align-items-center">
-                                                    <!-- <span class="searchGallery" *ngIf ="shotDotSearch" (click)="openGallery(item)"><em class="lxp-Search"></em></span> -->
-                                                    <div class="percentage" *ngIf="userDetailes.org_type === 'collegeconnect'">
-                                                        <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#88bd2f'" [innerStrokeColor]="'#e7e8ea'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4" [subtitleFontSize]="5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=600> </circle-progress>
-                                                    </div>
-                                                </div>
-                                                <!-- <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
-                                                    <em class="lxp-Dot_Menu"></em>
-                                                </span> -->
-                                                <!-- <mat-menu #menu="matMenu" xPosition="before">
-                                                    <button mat-menu-item (click)="openGallery(item)">
-                                                      <span><em class="lxp-Search mr-2"></em>Search</span>
-                                                    </button>
-                                                    <mat-divider></mat-divider>
-                                                    <button mat-menu-item (click)="openReport(item)">
-                                                      <span><em class="lxp-Edit_Document mr-2"></em>Course Assessment Report</span>
-                                                    </button>
-                                                </mat-menu> -->
-                                            </div>
-                                            <div *ngIf="item?.batchid" class="showLessContent">
-                                                <div [ngClass]="!item.isReadMore ? '' : 'showText'">
-                                                    <div class="arrowWrapper d-flex">
-                                                        <p [ngClass]="isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
-                                                        <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
-                                                            <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
-                                                        </button>
-                                                    </div>
-                                                    <div *ngIf="item?.batchid" class="durationCredits d-flex justify-content-between">
-                                                        <span class="by">By: <b>{{item.courseBy}}</b></span>
-                                                        <span class="credits" *ngIf ="item.enableCredits">Credits: <b>{{item.credits!==null?item.credits:0}}</b></span>
-                                                        <span>
-                                                            <em class="lxp-Duration"></em> 
-                                                            Duration: <b>{{item.batch_start_date ?(item.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{item.batch_end_date ?(item.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
-                                                        </span>
-                                                    </div>
-                                                    <div class="type d-flex justify-content-start">
-                                                        <span>Self learning - {{item.image_self_paced_learning_time!==""?item.image_self_paced_learning_time:0}} hrs</span>
-                                                        <span>
-                                                            <ng-container *ngIf="userDetailes.org_type!== 'collegeconnect'">Live Interactions</ng-container><ng-container *ngIf="userDetailes.org_type == 'collegeconnect'">Industry Talk</ng-container> - upto  {{item.instructor_lead_session_total_count!==""?item.instructor_lead_session_total_count:0}}</span>
-                                                        <span *ngIf="userDetailes.org_type == 'collegeconnect'">Course project - {{item.total_mid_course_project_count!==""?item.total_mid_course_project_count:0}}</span>
-                                                        <span *ngIf="userDetailes.org_type == 'collegeconnect'">Internal Assessment - {{item.internal_assesment!==""?item.internal_assesment:0}}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div *ngIf="item?.batchid" class="actionItems d-flex justify-content-between" [ngClass]="!item.isReadMore ? 'top' : 'zero'">
-                                                <div class="viltActivitiesQA d-flex justify-content-start">
-                                                    <div class="icons" (click)="goInstructorLed(item)">
-                                                        <span><em class="lxp-VILT"></em></span>
-                                                        <ng-container *ngIf="userDetailes.org_type!== 'collegeconnect'"><p>Live Interactions</p></ng-container>
-                                                        <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'"><p>Industry Talk</p></ng-container>
-                                                    </div>
-                                                    <div class="icons" (click)="gotoSubmissionDetails(item)">
-                                                        <span><em class="lxp-Activities_New"></em></span>
-                                                        <p>Activities</p>
-                                                    </div>
-                                                    <!--  -->
-                                                    <div class="icons" [ngClass]="item.course_status=='start' && userDetailes.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="item.course_status=='start'" (click)="userDetailes.org_type !== 'collegeconnect'?gotoAskQuestions(item):gotoquestionanswer(item)">
-                                                        <span><em class="lxp-book-question"></em></span>
-                                                        <p>Q&A</p>
-                                                    </div>
-                                                    <div *ngIf="userDetailes.org_type === 'vocational' || userDetailes.org_type ==='Corporate'" class="icons" (click)="goToForum(item)">
-                                                        <span><em class="lxp-QA"></em></span>
-                                                        <p>Discussion Fourm</p>
-                                                    </div>
-                                                </div>
-                                                <div class="courseProgression d-flex align-items-center">
-                                                    <div *ngIf="userDetailes.org_type === 'collegeconnect'" class="icons" (click)="openReport(item)">
-                                                        <span><em class="lxp-Assessment_Report"></em></span>
-                                                        <p>Assessment Report</p>
-                                                    </div>
-                                                    <div class="icons" (click)="gotoProgression(item)">
-                                                        <span><em class="lxp-Analytics"></em></span>
-                                                        <p>Learning Progression</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </ng-container>
-                            </div>
-                            </div>
-                        </mat-tab>
-                    </mat-tab-group>
+                                    </ng-container>
+                                </div>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </div>
+
                     <ng-container *ngIf="showJobRole">
                         <div class="desktopWrapper jobRole" [ngClass]="vocationalselectjobRole.length > 0 ?'handIcon':'noHandIcon'">
                             <label for="jobRoles" *ngIf="userDetailes.org_type == 'vocational'">My Job Role:</label>
