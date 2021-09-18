@@ -327,6 +327,10 @@ export class CoursedetailsComponent implements OnInit {
             result.data.childData[result.data.week-1].childData[result.data.resumeContent].children[result.data.resumeSubContent]?.status !== this.topicPageStatus) {
               this.scromModuleData = result.data.childData;
               this.moduleExpand(this.weekHolder, this.moduleHolder);
+              if((this.scromApiData.topicIndex == null||this.scromApiData.topicIndex == "0") && (this.scromApiData.moduleIndex == null||this.scromApiData.moduleIndex == "0") && this.scromModuleData[0].childData[0].status == null && this.scromModuleData[0].childData[0].children[0].status == null){
+                this.scromModuleData[0].childData[0].status = 'process'
+                this.scromModuleData[0].childData[0].children[0].status = 'process'
+              }
             this.currentPage = Number(result.data.resumeContent);
             this.topiccurrentPage = Number(result.data.resumeSubContent);
             this.weekHolder = result.data.week - 1;
@@ -610,6 +614,11 @@ export class CoursedetailsComponent implements OnInit {
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
       this.currentModuleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].title;
       this.currentTopicTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].children[this.topiccurrentPage].title;
+
+      // if((this.scromApiData.topicIndex == null||this.scromApiData.topicIndex == "0") && (this.scromApiData.moduleIndex == null||this.scromApiData.moduleIndex == "0") && this.scromApiData.childData[0].childData[0].status == null && this.scromApiData.childData[0].childData[0].children[0].status == null){
+      //   this.scromModuleData[0].childData[0].status = 'process'
+      //   this.scromModuleData[0].childData[0].children[0].status = 'process'
+      // }
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
           this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +

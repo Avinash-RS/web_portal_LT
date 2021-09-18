@@ -286,7 +286,7 @@
                                 <em class="lxp-lifebuoy"></em>
                             </button>
                         </div>
-                        <div class="bookmark">
+                        <div class="bookmark" *ngIf="userType == 'collegeconnect'">
                             <button data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
                                 <em [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></em>
                             </button>

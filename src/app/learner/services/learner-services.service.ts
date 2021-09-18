@@ -13,7 +13,7 @@ import { addTopicreference, bulkclaimcourse, claimcourse, createGuidanceRequest,
        playerstatusrealtime, resendOtponprofile, saveAttendies, updateEmailonprofile,
        updateMobileonprofile, updateProfile, updateVerifyotpmobileonProfile,
        userMstrdata, userRegistration, userRegistrationdone, userRegistrationmobileOtpsend,
-         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, viewProfile1, user_experience, set_bookmark, set_askaquestion, getMyQuestion, get_allquestion, getQAsortsearch,getActivityCalendar, getengineersForumData, createEngineersForumData} from './operations/learner_mutation';
+         userRegistrationmobileOtpverify, userRegistrationUsernamesuggestion, viewProfile, viewProfile1, user_experience, set_bookmark, set_askaquestion, getMyQuestion, get_allquestion, getQAsortsearch,getActivityCalendar, getengineersForumData, createEngineersForumData,getuserRecordbasedonSecretKey} from './operations/learner_mutation';
 import {
 boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignmentmoduleData,
  getcalenderactivity, getCountForCategories, getCountForJobroleCategories, getCoureBasedOnCatalog,
@@ -28,7 +28,7 @@ boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignm
      getSpecificationdetails, getSubCategory, getTrendingcourse, getUserdetail,
      getUserdetailUsername, listContent, login, playerModuleAndTopic, singleBatchInfo,
      syllabusofParticularScorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData, get_batchwise_learner_dashboard_data, get_learner_dashboard_count,
-     getCourseGallery , getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata,selfLearningdatabyUserId, getengineersForumQA_Count,recentlycourse,getlabactivity,labactivity
+     getCourseGallery , getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata,selfLearningdatabyUserId, getengineersForumQA_Count,recentlycourse,getlabactivity,labactivity,weekWiseCourseChart
 } from './operations/learner_query';
 
 
@@ -82,7 +82,7 @@ export class LearnerServicesService {
 
 uploadAssignments(fromdata) { 
   this.getToken();
-  return this.http.post(this.envApi + 'learnerscorefile', fromdata, this.httpOptions); 
+  return this.http.post(this.envApi + 'wca/learnerscorefile', fromdata, this.httpOptions); 
 }
 
 imageupload(fb) {
@@ -105,8 +105,7 @@ likepost(data) {
 }
 getEmail(input) 
   {
-    this.getToken();
-   return this.http.post(this.envApi + 'getuserRecordbasedonSecretKey', input,this.httpOptions);
+   return this.http.post(this.envApi + '/getuserRecord/getuserRecordbasedonSecretKey', input,this.httpOptions);
    }
 
    learnerUploadVideo(data) { 
@@ -115,14 +114,14 @@ getEmail(input)
    }
   learnerSumbitdeleteVideo(submitData) { 
     this.getToken();
-    return this.http.post(environment.apiUrl + 'learnerSumbitdeleteVideo', submitData,this.httpOptions); 
+    return this.http.post(environment.apiUrl + 'wca/learnerSumbitdeleteVideo', submitData,this.httpOptions); 
   }
   insertRecord(data) { 
     this.getToken();
     return this.http.post(environment.apiUrl + 'learnerUploadVideo', data,this.httpOptions); }
   learnerRecordVideo(data) { 
     this.getToken();
-    return this.http.post(environment.apiUrl + 'learnerRecordVideo', data,this.httpOptions); }
+    return this.http.post(environment.apiUrl + 'wca/learnerRecordVideo', data,this.httpOptions); }
 
 
   uploadVideo(image) {
@@ -304,6 +303,15 @@ getMessage(): Observable<any> {
         username,
         password,
         resetCode
+      }
+    });
+  }
+  
+  getUser(userSecretkey){
+    return this.Apollo.query({
+      query: getuserRecordbasedonSecretKey,
+      variables: {
+        userSecretkey,
       }
     });
   }
@@ -1232,6 +1240,17 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       query: recentlycourse,
       variables: {
         user_id
+      }
+    });
+  }
+
+  getweekWiseCourseChart(courseId,userId,startDate){
+    return this.Apollo.query({
+      query:weekWiseCourseChart,
+      variables:{
+        courseId:courseId,
+        userId:userId,
+        startDate:startDate
       }
     });
   }

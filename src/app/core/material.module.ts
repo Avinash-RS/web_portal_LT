@@ -29,7 +29,8 @@ import {
   MatDatepickerModule,
   MatRippleModule,
   MatBadgeModule,
-  MatButtonToggleModule
+  MatButtonToggleModule,
+  MatNativeDateModule
 } from '@angular/material';
 
 import { CommonModule } from '@angular/common';
@@ -64,6 +65,7 @@ import { CommonModule } from '@angular/common';
     MatDatepickerModule,
     MatRippleModule,
     MatBadgeModule,
+    MatNativeDateModule,
     MatButtonToggleModule
   ],
   exports: [
@@ -94,7 +96,8 @@ import { CommonModule } from '@angular/common';
     MatDatepickerModule,
     MatRippleModule,
     MatBadgeModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatNativeDateModule
   ],
   providers: [
     {

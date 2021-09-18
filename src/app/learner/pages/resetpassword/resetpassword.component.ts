@@ -30,6 +30,7 @@ export class ResetpasswordComponent implements OnInit {
   showconpassbutton = false;
   showconpsseye = false;
   isLinkActive: boolean;
+  isLink = false;
   hide = true;
   hide2 = true;
   secretKey = "(!@#Passcode!@#)";
@@ -54,19 +55,24 @@ export class ResetpasswordComponent implements OnInit {
     this.activeroute.queryParams.subscribe(params => {
       if (params.code) {
         this.resetCode = params.code
-        // const decryptedString = params.code;
-      var input = {
-          "userSecretkey" : params.code
-      }
-       // const decryptedString = atob(params.code);
-        this.service.getEmail(input).subscribe((data)=>{
-          var userValue = data['data']
+      // var input = {
+      //     "userSecretkey" : params.code
+      // }
+      this.service.getUser(this.resetCode).subscribe((data:any)=>{
+        console.log(data)
+          var userValue = data?.data?.getuserRecordbasedonSecretKey?.data
           if(userValue['email']){
             this.user = userValue['email'].toLowerCase();
             this.get_user_detail_username(this.user);
           }
-        })
-        //this.user = decryptedString;
+      })
+        // this.service.getEmail(input).subscribe((data)=>{
+        //   var userValue = data['data']
+        //   if(userValue['email']){
+        //     this.user = userValue['email'].toLowerCase();
+        //     this.get_user_detail_username(this.user);
+        //   }
+        // })
        
       } else {
         this.user = localStorage.getItem('Username');
@@ -163,6 +169,9 @@ export class ResetpasswordComponent implements OnInit {
       this.service.get_user_detail_username(name).subscribe((data: any) => {
         this.isLinkActive = data.data.get_user_detail_username && data.data.get_user_detail_username.message === 'Link not expired' ?
           true : false;
+          if(!this.isLinkActive){
+            this.isLink = true
+          }
       });
     } catch (error) {
       throw error;
