@@ -283,7 +283,11 @@
   line-height: normal;
 }
 .titleSelected {
-  font-weight: bold;
+  font-weight: 700;
+  // background-color: #e5e5e5;
+}
+.topicTitleSelected {
+  font-weight: 700;
   background-color: #e5e5e5;
 }
 .redHover:hover {
@@ -1114,18 +1118,32 @@
 .bs-vertical-wizard {
   // border-right: 1px solid #eaecf1;
   margin-left: 15px;
-}
-
-.bs-vertical-wizard ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.bs-vertical-wizard ul > li {
-  display: block;
-  position: relative;
-  cursor: pointer;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+      display: block;
+      position: relative;
+      cursor: pointer;
+      &:hover {
+        background-color: #f1f1f1;
+      }
+    }
+  }
+  .icov {
+    position: relative;
+    .bgGreen {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 50%;
+      width: 13px;
+      height: 13px;
+      background-image: linear-gradient(to right top, #39b54a, #53ba46, #68be43, #7bc241, #8dc63f);
+    }
+  }
 }
 
 .bs-vertical-wizard ul > li > .icov {
@@ -1137,13 +1155,13 @@
   // letter-spacing: .8px;
 }
 .bs-vertical-wizard ul > li > :hover {
-  background-color: #f1f1f1;
+  
 }
 
 .bs-vertical-wizard ul > li > .icov:before {
   content: "";
   position: absolute;
-  width: 1px;
+  // width: 1px;
   height: calc(100% - 12px);
   background-color: #bdc2ce;
   left: 13px;
