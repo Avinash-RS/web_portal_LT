@@ -3,9 +3,9 @@
 <div class="instructorLedWrapper">
 <div class="breadcrumbPading">
   <ul class="breadcrumb">
-    <li><em (click)="getBack()" class="lxp-Go backArrow"></em> <span>{{course?.name}}</span></li>
-    <li *ngIf="userDetails.org_type !== 'collegeconnect'">Live Interactions</li>
-    <li *ngIf="userDetails.org_type == 'collegeconnect'">Industry Talk</li>
+    <li><em (click)="getBack()" class="lxp-Go backArrow"></em> <span class="name">{{course?.name}}</span> <span class="bar">/</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type !== 'collegeconnect'">Live Interactions</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type == 'collegeconnect'">Industry Talk</span> </li>
+    <!-- <li *ngIf="userDetails.org_type !== 'collegeconnect'">Live Interactions</li>
+    <li *ngIf="userDetails.org_type == 'collegeconnect'">Industry Talk</li> -->
   </ul>
 </div>
 
