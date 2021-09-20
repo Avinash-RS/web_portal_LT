@@ -22,7 +22,12 @@
       font-weight: 400;
       line-height: normal;
       position: relative;
-      margin-right: 15px;
+      margin-right: 0;
+      .bar {
+        color: #c02222 !important;
+        display: inline-block;
+        margin: 0 10px;
+      }
       em {
         display: inline-block;
         transform: scale(-1);
@@ -30,19 +35,17 @@
         margin-right: 8px;
         cursor: pointer;
       }
-      &::after {
-        content: "/";
-        position: absolute;
-        right: -10px;
-        top: auto;
-        bottom: auto;
-        color: #c02222;
-      }
-      &:first-child {
-        span {
-          color: #999999;
-        }
-      }
+    //   &::after {
+    //     content: "/";
+    //     position: absolute;
+    //     right: -10px;
+    //     top: auto;
+    //     bottom: auto;
+    //     color: #c02222;
+    //   }
+    .name {
+        color: #999999;
+    }
       &:last-child {
           &::after {
               content: '';
