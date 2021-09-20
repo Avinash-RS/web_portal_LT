@@ -229,6 +229,7 @@
                         </span>
                     </div>
                     <div class="course-progress" *ngIf="showProgressChart" [@collapseprogress]>
+                    <div class="course-progress-wrapper">
                         <div class="d-flex justify-content-between align-items-center course-progress-header">
                             <div class="course-progress-header-text">Course Completion Progress</div>
                             <div class="d-flex align-items-center course-progress-header-action" (click)="showProgressChart = false;">
@@ -236,7 +237,7 @@
                                 <span>Close</span>
                             </div>
                         </div>  
-                        <div class="d-flex justify-content-between align-items-center flex-wrap course-progress-content">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap course-progress-content" *ngIf="true;else courseChartSkeleton">
                             <mat-card class="cousrse-wise-card">
                                 <div class="d-flex justify-content-between align-items-center cousrse-wise-card-header">
                                     <div class="cousrse-wise-card-header-text">Course Wise Completion</div>
@@ -286,10 +287,14 @@
                             </mat-card>
                         </div>  
                     </div>
+                    </div>
 
                     <div class="tabsWrapper">
-                        <div class="courseCompletion" (click)="showProgressChart = true;" *ngIf="!showProgressChart">
-                            <h4><span><em class="lxp-Analytics"></em></span>Course Completion Progress</h4>
+                        <div class="courseCompletion-btn" (click)="showProgressChart = true;" *ngIf="!showProgressChart">
+                            <h4>
+                                <em class="lxp-Analytics"></em>
+                                <span>Course Completion Progress</span> 
+                            </h4>
                         </div>
 
                         <mat-tab-group #tabs (selectedTabChange)="courseTabChange($event,userDetailes.user_id,userDetailes._id);" [(selectedIndex)]="selectedIndex">
@@ -791,6 +796,29 @@
             </div>
         </div>
       </div>
+  </ng-template>
+
+  <ng-template #courseChartSkeleton>
+        <div class="d-flex justify-content-between flex-wrap courseChartSkeleton">
+           <mat-card class="skel-card">
+                <div class="skeleton-header">
+                    <ngx-skeleton-loader class="leftSkeleton" [theme]="{height:'40px'}"></ngx-skeleton-loader>
+                </div>
+                    <div class="d-flex justify-content-between skeleton-content">
+                        <div><ngx-skeleton-loader  [theme]="{width:'260px' ,height:'130px'}"></ngx-skeleton-loader></div>
+                        <div><ngx-skeleton-loader class="bar-skeleton"  [theme]="{width:'100px' ,height:'130px'}"></ngx-skeleton-loader></div>
+                </div>
+           </mat-card>
+           <mat-card class="skel-card2">
+                <div class="skeleton-header">
+                    <ngx-skeleton-loader class="leftSkeleton" [theme]="{height:'40px'}"></ngx-skeleton-loader>
+                </div>
+                <div class="d-flex justify-content-between skeleton-content">
+                    <div><ngx-skeleton-loader  [theme]="{width:'260px' ,height:'130px'}"></ngx-skeleton-loader></div>
+                    <div><ngx-skeleton-loader class="bar-skeleton"  [theme]="{width:'100px' ,height:'130px'}"></ngx-skeleton-loader></div>
+                </div>
+           </mat-card>
+        </div>
   </ng-template>
 
   <ng-template #noCourseCard>
