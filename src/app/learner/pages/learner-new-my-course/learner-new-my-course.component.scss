@@ -793,6 +793,10 @@
           background: rgba(39, 187, 238, 0.25);
           transition: 0.3s ease-in background;
           // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+          @media only screen and (max-width: 767px) {
+            width: 35px;
+            height: 35px;
+          }
           em {
             color: #1B4E9B;
             font-size: 18px;
@@ -806,10 +810,6 @@
             em {
               color: #ffffff;
             }
-          }
-          @media only screen and (max-width: 767px) {
-            width: 35px;
-            height: 35px;
           }
         }
       }
@@ -1447,10 +1447,10 @@
         }
         .flagMonth {
           font-size: 12px;
-          color: #b3b3b3;
+          color: #004684;
           text-transform: uppercase;
           position: relative;
-          top: -5px;
+          top: -1px;
         }
       }
     }
@@ -1460,7 +1460,7 @@
       width: 81%;
       .badgedata {
         p {
-          background-color: #E6E6E6;
+          background-color: #EDEDED;
           border-radius: 3px;
           text-align: center;
           padding: 2px 8px;
@@ -1485,7 +1485,7 @@
           padding: 0;
           span {
           font-size: 12px;
-          color: #808080;
+          color: #333333;
           display: inline-flex;
           align-items: center;
             &.yettoStart, &.yetStart {
@@ -1547,7 +1547,7 @@
       }
       .titleFontSize {
         font-size: 14px;
-        font-weight: 400;
+        font-weight: 500;
         color: #c02222;
         line-height: 15px;
         margin-top: 3px;
@@ -1559,7 +1559,7 @@
         line-height: normal;
         margin: 3px 0;
         span {
-          color: #666666;
+          color: #333333;
         }
       }
       .date {
@@ -1724,11 +1724,11 @@
   }
   span {
     em {
-      font-size: 25px;
+      font-size: 21px;
       display: inline-block;
       line-height: normal;
       border: 1px solid rgba(0,0,0,0.15);
-      padding: 4px;
+      padding: 7px;
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
       color: #666666;
       border-radius: 5px;
@@ -1913,8 +1913,8 @@
       border: 0;
       span {
         font-size: 15px;
-        font-weight: 400;
-        color: #666666;
+        font-weight: 500;
+        color: #004684;
         opacity: 1;
         display: block;
         margin-bottom: 3px;
@@ -1936,7 +1936,7 @@
         b {
           font-size: 9px;
           font-weight: 400;
-          color: #999999;
+          color: #333333;
           text-transform: uppercase;
           display: block;
           margin: 3px 0;
@@ -1955,12 +1955,12 @@
     }
     .cal-header {
       &.cal-today {
-        background-color: #F2F2F2;
+        background-color: #27bbee;
         b {
-          color: #3E3E3E;
+          color: #ffffff;
         }
         span {
-          color: #3E3E3E;
+          color: #ffffff;
           font-weight: 700;
           position: relative;
           &:after {
