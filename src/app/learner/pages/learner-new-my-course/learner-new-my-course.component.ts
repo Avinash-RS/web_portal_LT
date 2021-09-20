@@ -47,7 +47,7 @@ export class CustomDateFormatter extends CalendarDateFormatter {
         ]),
         transition(':leave', [
           style({opacity: 1}),
-          animate('300ms ease-out', style({opacity: 0}))
+          animate('100ms ease-out', style({opacity: 0}))
         ])
       ]
     )
@@ -280,7 +280,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
   showProgressChart:boolean = false;
   today = Date.now();
   weekWiseDate;
-  courseDate
+  courseDate;
+  nochartdata:boolean = true;
 
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,

@@ -305,23 +305,37 @@
 
   .tabsWrapper {
     position: relative;
-    .courseCompletion {
+    .courseCompletion-btn {
       cursor: pointer;
       position: absolute;
       right: 0;
+      margin-right: 10px;
       top: 15px;
       color: #BE2020;
       z-index: 2;
       h4 {
         margin: 0;
-        font-size: 13px;
         display: flex;
-        align-items: center;
         justify-content: center;
-      }
-      span {
-        margin-right: 8px;
-        font-size: 18px;
+        span{
+          font-size: 0px;
+          @media only screen and (min-width: 576px) {
+            font-size: 13px;
+          }
+          @media only screen and (min-width: 720px) {
+            font-size: 13px;
+          }
+          @media only screen and (min-width: 992px) {
+            font-size: 13px;
+          }
+          @media only screen and (min-width: 1140px) {
+            font-size: 13px;
+          }
+        }
+        em {
+          margin-right: 6px;
+          font-size: 18px;
+        }
       }
     }
   }
@@ -332,7 +346,20 @@
     position: relative;
     z-index: 9;
     .course-progress{
-      margin-top: 10px;
+      .course-progress-wrapper{
+        margin-top: 5.5em;
+        @media only screen and (min-width: 576px) {
+          margin-top: 2.5em;
+        }
+        @media only screen and (min-width: 720px) {
+          margin-top: 2.5em;
+        }
+        @media only screen and (min-width: 992px) {
+          margin-top: 2.5em;
+        }
+        @media only screen and (min-width: 1140px) {
+          margin-top: 2.5em;
+        }
       .course-progress-header{
         .course-progress-header-text{
           width: 90%;
@@ -342,19 +369,38 @@
         .course-progress-header-action{
           cursor: pointer;
           width:10%;
+          justify-content: flex-end;
           font-size: 13px;
           color: #BE2020;
+          margin-right:7px;
           mat-icon{
-            margin-right: 10px;
+            margin-right: 5px;
           }
         }
       }
       .course-progress-content{
-        margin-top: 20px;
-        margin-bottom: 30px;
+        margin-top: 2em;
+        margin-bottom: 2em;
         .cousrse-wise-card{
-          width:54.2%;
+          width:100%;
           padding-top: 0;
+          margin-bottom: 10px;
+          @media only screen and (min-width: 576px) {
+            width:54.2%;
+            margin-bottom: 0px;
+          }
+          @media only screen and (min-width: 720px) {
+            width:54.2%;
+            margin-bottom: 0px;
+          }
+          @media only screen and (min-width: 992px) {
+            width:54.2%;
+            margin-bottom: 0px;
+          }
+          @media only screen and (min-width: 1140px) {
+            width:54.2%;
+            margin-bottom: 0px;
+          }
           .cousrse-wise-card-header{
             .cousrse-wise-card-header-text{
               font-size:14px;
@@ -379,7 +425,19 @@
           }
         }
         .week-wise-card{
-          width:44.2%;
+          width:100%;
+          @media only screen and (min-width: 576px) {
+            width:44.2%;
+          }
+          @media only screen and (min-width: 720px) {
+            width:44.2%;
+          }
+          @media only screen and (min-width: 992px) {
+            width:44.2%;
+          }
+          @media only screen and (min-width: 1140px) {
+            width:44.2%;
+          }
           .week-wise-card-header{
             margin-bottom: 0.5em;
             .weekwise-card-header-text{
@@ -390,7 +448,7 @@
           .progress-date{
             margin-bottom: 0.5em;
             .progress-hours-container{
-              width:60%;
+              width:70%;
               display: inline-block;
               .progress-hours{
                 font-size: 16px;
@@ -418,6 +476,7 @@
           }
         }
       }
+    }
     }
     @media only screen and (max-width: 767px) {
       padding: 15px 15px 50px 15px;
@@ -1121,11 +1180,27 @@
     display: none;
   }
   .mat-tab-label {
-    font-size: 16px;
+    font-size: 14px;
     opacity: 1;
     justify-content: flex-start;
     padding: 0 25px 0 0;
     min-width: auto;
+    @media only screen and (min-width: 576px) {
+      font-size: 16px;
+      padding: 0 20px 0 0;
+    }
+    @media only screen and (min-width: 720px) {
+      font-size: 16px;
+      padding: 0 20px 0 0;
+    }
+    @media only screen and (min-width: 992px) {
+      font-size: 16px;
+      padding: 0 20px 0 0;
+    }
+    @media only screen and (min-width: 1140px) {
+      font-size: 16px;
+      padding: 0 20px 0 0;
+    }
   }
   .mat-tab-label[aria-selected="false"] {
     font-weight: 300;
@@ -2014,3 +2089,48 @@
   cursor:not-allowed !important;
 }
 
+.courseChartSkeleton{
+  margin-top: 2em;
+  margin-bottom: 2em;
+  .skel-card{
+    margin-bottom: 10px;
+  }
+  .skel-card,.skel-card2{
+    width: 100%;
+    min-height: 250px;
+    @media only screen and (min-width: 576px) {
+      width: 49.5%;
+      margin-bottom: 0px;
+    }
+    @media only screen and (min-width: 720px) {
+      width: 49.5%;
+      margin-bottom: 0px;
+    }
+    @media only screen and (min-width: 992px) {
+      width: 49.5%;
+      margin-bottom: 0px;
+    }
+    @media only screen and (min-width: 1140px) {
+      width: 49.5%;
+      margin-bottom: 0px;
+    }
+  }
+  .skeleton-content{
+    .bar-skeleton{
+      display: none;
+      @media only screen and (min-width: 576px) {
+        display: block;
+      }
+      @media only screen and (min-width: 720px) {
+        display: block;
+      }
+      @media only screen and (min-width: 992px) {
+        display: block;
+      }
+      @media only screen and (min-width: 1140px) {
+        display: block;
+      }
+    }
+  }
+
+}
