@@ -768,6 +768,7 @@ setdateForprogress(){
  this.weekWiseDate = new Date(firstday,);
  //Course Start & End date
  this.courseStartDate  = this.UserDetails.created_on;
+ this.minCourseDate = this.courseStartDate;
  this.courseEndDate = new Date();
 }
 
