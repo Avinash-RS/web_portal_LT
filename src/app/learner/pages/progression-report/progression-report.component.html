@@ -1,13 +1,10 @@
 <app-header></app-header>
-<div class="progression-report-contianer d-flex">
+<div class="progression-report-contianer d-flex justify-content-between">
   <div class="left-container">
     <ul class="breadcrumb">
       <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> {{courseName}}</li>
       <li>Learning Progression</li>
     </ul>
-    <!-- <div class="col mt-2">
-      <div class="header-label">Progression Report</div>
-    </div> -->
     <div class="col">
       <div class="flag-line">
 
@@ -174,7 +171,7 @@
     <div class="activity-container">
       <div class="header-label">Activities Progression Report</div>
       <div class="tab-container">
-        <mat-tab-group (selectedTabChange)="tabChanged($event)" [(selectedIndex)]="selectedIndex">
+        <mat-tab-group (selectedTabChange)="tabChanged($event)">
           <mat-tab label="Assignment">
             <div *ngIf="!showSkeleton; else skeletonLoad">
               <div class="card-content d-flex justify-content-start">
@@ -370,6 +367,10 @@
   </div>
   </div>
   <div class="right-container"> 
+    <ul class="breadcrumb">
+      <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> {{courseName}}</li>
+      <li>Learning Progression</li>
+    </ul>
     <!-- <div class="comingSoon">
       <div style="margin-bottom: 40px; text-align: center;">Your weekly time spent report will be displayed here!</div>
       <img class="d-flex m-auto" src="/assets/images/timeSpentHolder.png">
@@ -392,9 +393,8 @@
    </div>
    <div class="chart-container">
    <h6>Time in minutes</h6>
-    <div [ngStyle]="{'width': '380px'}">
-      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-        [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+    <div>
+      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
     </div>
   </div>
     <!-- <div class="col d-flex mt-3 justify-content-center">

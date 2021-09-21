@@ -3,8 +3,8 @@
     <div class="questionLeftCol" #leftContainer infiniteScroll [infiniteScrollDistance]="2"
     [scrollWindow]="false" [infiniteScrollThrottle]="500" (scrolled)="onScrollDown()">
         <ul class="breadcrumb">
-            <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> <span>{{courseName}}</span> <span class="bar">/</span> </li>
-            <li>Q&A</li>
+            <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> <span class="name">{{courseName}}</span> <span class="bar">/</span> <span class="breadCrumbTopic">Q&A</span></li>
+            <!-- <li>Q&A</li> -->
         </ul>
        
         <div class="qandaSection">

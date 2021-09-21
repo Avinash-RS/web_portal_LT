@@ -1454,6 +1454,7 @@ export const playerModuleAndTopic = gql`
       moduleIndex
       topicIndex
       week
+      lastLogIndex
       childData{
         week
         childData{

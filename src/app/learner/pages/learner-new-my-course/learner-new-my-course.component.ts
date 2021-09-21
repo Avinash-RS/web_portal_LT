@@ -47,7 +47,7 @@ export class CustomDateFormatter extends CalendarDateFormatter {
         ]),
         transition(':leave', [
           style({opacity: 1}),
-          animate('300ms ease-out', style({opacity: 0}))
+          animate('100ms ease-out', style({opacity: 0}))
         ])
       ]
     )
@@ -215,7 +215,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   public courseChartOptions: ChartOptions = {
     responsive: true, 
     tooltips:{
-      enabled: false,
+      enabled : false,
     },
     plugins: {
       datalabels: {
@@ -280,7 +280,9 @@ export class LearnerNewMyCourseComponent implements OnInit {
   showProgressChart:boolean = false;
   today = Date.now();
   weekWiseDate;
-  courseDate
+  courseDate;
+  nochartdata:boolean = true;
+  currentYear: number;
 
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
@@ -319,6 +321,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
       this.shotDotSearch = false;
     }
     this.getModuleStatus();
+    this.currentYear = new Date().getFullYear()
   }
 
   //Recently completed topics
