@@ -28,7 +28,7 @@ boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignm
      getSpecificationdetails, getSubCategory, getTrendingcourse, getUserdetail,
      getUserdetailUsername, listContent, login, playerModuleAndTopic, singleBatchInfo,
      syllabusofParticularScorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData, get_batchwise_learner_dashboard_data, get_learner_dashboard_count,
-     getCourseGallery , getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata,selfLearningdatabyUserId, getengineersForumQA_Count,recentlycourse,getlabactivity,labactivity,weekWiseCourseChart
+     getCourseGallery , getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata,selfLearningdatabyUserId, getengineersForumQA_Count,recentlycourse,getlabactivity,labactivity,weekWiseCourseChart,overAllCourseProgressByUserId
 } from './operations/learner_query';
 
 
@@ -1244,13 +1244,24 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
-  getweekWiseCourseChart(courseId,userId,startDate){
+  getweekWiseCourseChart(courseId,userId,startDate,type){
     return this.Apollo.query({
       query:weekWiseCourseChart,
       variables:{
         courseId:courseId,
         userId:userId,
-        startDate:startDate
+        startDate:startDate,
+        type:type
+      }
+    });
+  }
+  getoverAllCourseProgressByUserId(userId,startDate,endDate){
+    return this.Apollo.query({
+      query:overAllCourseProgressByUserId,
+      variables:{
+        userId:userId,
+        startDate:startDate,
+        endDate:endDate,
       }
     });
   }
