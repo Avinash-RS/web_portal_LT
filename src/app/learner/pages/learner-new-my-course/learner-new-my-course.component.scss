@@ -3,12 +3,12 @@
 .sideNavWrapper {
   // display: flex;
   position: relative;
-  height: calc(100vh - 111px);
+  height: calc(100vh - 70px);
 }
 ::ng-deep.sideNavWrapper {
   .mat-drawer-container {
     background-color: #f2f2f2;
-    height: calc(100vh - 111px);
+    height: calc(100vh - 70px);
   }
   .mat-drawer-backdrop.mat-drawer-shown {
     background-color: transparent;
@@ -303,12 +303,181 @@
     }
   }
 
+  .tabsWrapper {
+    position: relative;
+    .courseCompletion-btn {
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      margin-right: 10px;
+      top: 15px;
+      color: #BE2020;
+      z-index: 2;
+      h4 {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        span{
+          font-size: 0px;
+          @media only screen and (min-width: 576px) {
+            font-size: 13px;
+          }
+          @media only screen and (min-width: 720px) {
+            font-size: 13px;
+          }
+          @media only screen and (min-width: 992px) {
+            font-size: 13px;
+          }
+          @media only screen and (min-width: 1140px) {
+            font-size: 13px;
+          }
+        }
+        em {
+          margin-right: 6px;
+          font-size: 18px;
+        }
+      }
+    }
+  }
   //MyCourses
   .mycoursesWrapper {
     padding: 20px 85px 20px 20px;
     background-color: #f2f2f2;
     position: relative;
     z-index: 9;
+    .course-progress{
+      .course-progress-wrapper{
+        margin-top: 5.5em;
+        @media only screen and (min-width: 576px) {
+          margin-top: 2.5em;
+        }
+        @media only screen and (min-width: 720px) {
+          margin-top: 2.5em;
+        }
+        @media only screen and (min-width: 992px) {
+          margin-top: 2.5em;
+        }
+        @media only screen and (min-width: 1140px) {
+          margin-top: 2.5em;
+        }
+      .course-progress-header{
+        .course-progress-header-text{
+          width: 90%;
+          font-size: 16px;
+          font-weight:500;
+        }
+        .course-progress-header-action{
+          cursor: pointer;
+          width:10%;
+          justify-content: flex-end;
+          font-size: 13px;
+          color: #BE2020;
+          margin-right:7px;
+          mat-icon{
+            margin-right: 5px;
+          }
+        }
+      }
+      .course-progress-content{
+        margin-top: 2em;
+        margin-bottom: 2em;
+        .cousrse-wise-card{
+          width:100%;
+          padding-top: 0;
+          margin-bottom: 10px;
+          @media only screen and (min-width: 576px) {
+            width:54.2%;
+            margin-bottom: 0px;
+          }
+          @media only screen and (min-width: 720px) {
+            width:54.2%;
+            margin-bottom: 0px;
+          }
+          @media only screen and (min-width: 992px) {
+            width:54.2%;
+            margin-bottom: 0px;
+          }
+          @media only screen and (min-width: 1140px) {
+            width:54.2%;
+            margin-bottom: 0px;
+          }
+          .cousrse-wise-card-header{
+            .cousrse-wise-card-header-text{
+              font-size:14px;
+              font-weight: 500;
+            }
+          }
+          .cousrse-chart-content{
+            position: relative;
+            margin-top: 10px;
+            h6 {
+              font-size: 12px;
+              position: absolute;
+              left: -39px;
+              top: 50%;
+              transform: translateY(-50%) rotate(-90deg);
+              color: #000000;
+            }
+          }
+          .course-chart-footer{
+            text-align: center;
+            font-size: 12px;
+          }
+        }
+        .week-wise-card{
+          width:100%;
+          @media only screen and (min-width: 576px) {
+            width:44.2%;
+          }
+          @media only screen and (min-width: 720px) {
+            width:44.2%;
+          }
+          @media only screen and (min-width: 992px) {
+            width:44.2%;
+          }
+          @media only screen and (min-width: 1140px) {
+            width:44.2%;
+          }
+          .week-wise-card-header{
+            margin-bottom: 0.5em;
+            .weekwise-card-header-text{
+              font-size:14px;
+              font-weight: 500;
+            }
+          }
+          .progress-date{
+            margin-bottom: 0.5em;
+            .progress-hours-container{
+              width:70%;
+              display: inline-block;
+              .progress-hours{
+                font-size: 16px;
+                font-weight: 600;
+                color:#2280C1;
+                margin-bottom: 0;
+              }
+              .hours-spent-label{
+                display: block;
+                font-size:10px;
+                color:#969696;
+              }
+            }
+          }
+          .Week-chart-content{
+          position: relative;
+          h6 {
+            font-size: 12px;
+            position: absolute;
+            left: -43px;
+            top: 40%;
+            transform: translateY(-50%) rotate(-90deg);
+            color: #000000;
+          }
+          }
+        }
+      }
+    }
+    }
     @media only screen and (max-width: 767px) {
       padding: 15px 15px 50px 15px;
     }
@@ -533,9 +702,9 @@
           line-height: normal;
           border-right: 1px solid #c02222;
           margin-top: 10px;
-          &:first-child {
-            margin-top: 0;
-          }
+          // &:first-child {
+          //   margin-top: 0;
+          // }
           &:last-child {
             border-right: 0;
           }
@@ -624,6 +793,10 @@
           background: rgba(39, 187, 238, 0.25);
           transition: 0.3s ease-in background;
           // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+          @media only screen and (max-width: 767px) {
+            width: 35px;
+            height: 35px;
+          }
           em {
             color: #1B4E9B;
             font-size: 18px;
@@ -637,10 +810,6 @@
             em {
               color: #ffffff;
             }
-          }
-          @media only screen and (max-width: 767px) {
-            width: 35px;
-            height: 35px;
           }
         }
       }
@@ -1011,11 +1180,27 @@
     display: none;
   }
   .mat-tab-label {
-    font-size: 16px;
+    font-size: 14px;
     opacity: 1;
     justify-content: flex-start;
     padding: 0 25px 0 0;
     min-width: auto;
+    @media only screen and (min-width: 576px) {
+      font-size: 16px;
+      padding: 0 20px 0 0;
+    }
+    @media only screen and (min-width: 720px) {
+      font-size: 16px;
+      padding: 0 20px 0 0;
+    }
+    @media only screen and (min-width: 992px) {
+      font-size: 16px;
+      padding: 0 20px 0 0;
+    }
+    @media only screen and (min-width: 1140px) {
+      font-size: 16px;
+      padding: 0 20px 0 0;
+    }
   }
   .mat-tab-label[aria-selected="false"] {
     font-weight: 300;
@@ -1262,10 +1447,10 @@
         }
         .flagMonth {
           font-size: 12px;
-          color: #b3b3b3;
+          color: #004684;
           text-transform: uppercase;
           position: relative;
-          top: -5px;
+          top: -1px;
         }
       }
     }
@@ -1275,7 +1460,7 @@
       width: 81%;
       .badgedata {
         p {
-          background-color: #E6E6E6;
+          background-color: #EDEDED;
           border-radius: 3px;
           text-align: center;
           padding: 2px 8px;
@@ -1300,7 +1485,7 @@
           padding: 0;
           span {
           font-size: 12px;
-          color: #808080;
+          color: #333333;
           display: inline-flex;
           align-items: center;
             &.yettoStart, &.yetStart {
@@ -1362,7 +1547,7 @@
       }
       .titleFontSize {
         font-size: 14px;
-        font-weight: 400;
+        font-weight: 500;
         color: #c02222;
         line-height: 15px;
         margin-top: 3px;
@@ -1374,7 +1559,7 @@
         line-height: normal;
         margin: 3px 0;
         span {
-          color: #666666;
+          color: #333333;
         }
       }
       .date {
@@ -1539,11 +1724,11 @@
   }
   span {
     em {
-      font-size: 25px;
+      font-size: 21px;
       display: inline-block;
       line-height: normal;
       border: 1px solid rgba(0,0,0,0.15);
-      padding: 4px;
+      padding: 7px;
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
       color: #666666;
       border-radius: 5px;
@@ -1728,8 +1913,8 @@
       border: 0;
       span {
         font-size: 15px;
-        font-weight: 400;
-        color: #666666;
+        font-weight: 500;
+        color: #004684;
         opacity: 1;
         display: block;
         margin-bottom: 3px;
@@ -1751,7 +1936,7 @@
         b {
           font-size: 9px;
           font-weight: 400;
-          color: #999999;
+          color: #333333;
           text-transform: uppercase;
           display: block;
           margin: 3px 0;
@@ -1770,12 +1955,12 @@
     }
     .cal-header {
       &.cal-today {
-        background-color: #F2F2F2;
+        background-color: #27bbee;
         b {
-          color: #3E3E3E;
+          color: #ffffff;
         }
         span {
-          color: #3E3E3E;
+          color: #ffffff;
           font-weight: 700;
           position: relative;
           &:after {
@@ -1904,3 +2089,48 @@
   cursor:not-allowed !important;
 }
 
+.courseChartSkeleton{
+  margin-top: 2em;
+  margin-bottom: 2em;
+  .skel-card{
+    margin-bottom: 10px;
+  }
+  .skel-card,.skel-card2{
+    width: 100%;
+    min-height: 250px;
+    @media only screen and (min-width: 576px) {
+      width: 49.5%;
+      margin-bottom: 0px;
+    }
+    @media only screen and (min-width: 720px) {
+      width: 49.5%;
+      margin-bottom: 0px;
+    }
+    @media only screen and (min-width: 992px) {
+      width: 49.5%;
+      margin-bottom: 0px;
+    }
+    @media only screen and (min-width: 1140px) {
+      width: 49.5%;
+      margin-bottom: 0px;
+    }
+  }
+  .skeleton-content{
+    .bar-skeleton{
+      display: none;
+      @media only screen and (min-width: 576px) {
+        display: block;
+      }
+      @media only screen and (min-width: 720px) {
+        display: block;
+      }
+      @media only screen and (min-width: 992px) {
+        display: block;
+      }
+      @media only screen and (min-width: 1140px) {
+        display: block;
+      }
+    }
+  }
+
+}

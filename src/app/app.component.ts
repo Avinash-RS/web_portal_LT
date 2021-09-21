@@ -101,8 +101,11 @@ export class AppComponent implements OnInit {
          const currentYear = new Date().getFullYear()
          this.isFooterVisible = '<div class="footer"><span class="powered"><span class="forgot1">' + '© ' + currentYear + ' L&T EduTech. All Rights Reserved.</span></span></div>';
         }
-        if (e.url.includes("resetpassword")|| e.url.includes("password") || urlIdentifier[2]==undefined) {
+        if (e.url.includes("resetpassword")|| e.url.includes("password") || e.url.includes("MyCourse") || urlIdentifier[2]==undefined) {
           this.isFooterVisible = '';
+        }
+        if (e.url.includes("MyCourse")) {
+          this.isFooterVisible = ' ';
         }
 
         //for left padding

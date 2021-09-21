@@ -67,16 +67,8 @@
         margin-right: 8px;
         cursor: pointer;
       }
-      &:first-child {
+      .name {
         color: #999999;
-        // &::after {
-        //   content: "/";
-        //   position: absolute;
-        //   right: -10px;
-        //   top: auto;
-        //   bottom: auto;
-        //   color: #c02222;
-        // }
       }
     }
   }

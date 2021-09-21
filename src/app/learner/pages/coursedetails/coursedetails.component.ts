@@ -162,6 +162,7 @@ export class CoursedetailsComponent implements OnInit {
   fromCalendar :boolean = false;
   eboxUrl :any;
   showlab:boolean = false;
+  lastLogIndex:number = 0;
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -321,7 +322,7 @@ export class CoursedetailsComponent implements OnInit {
     this.socketEmitReciver = this.socketService.change.subscribe((result:any) => {
       if (result && result.eventId && result.eventId.length && result.data.childData.length > 0) {
         if (result.data.course_id === this.courseid) {
-          console.log(result.data)
+          // console.log(result.data)
          
           if (this.topiccurrentPage !== result.data.resumeSubContent ||
             result.data.childData[result.data.week-1].childData[result.data.resumeContent].children[result.data.resumeSubContent]?.status !== this.topicPageStatus) {
@@ -468,7 +469,7 @@ export class CoursedetailsComponent implements OnInit {
 
 
   topicNext() {
-    console.log(this.scromModuleData)
+    // console.log(this.scromModuleData)
     this.isNextEnable = true;
     this.isprevEnable = true
     this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
@@ -512,7 +513,7 @@ export class CoursedetailsComponent implements OnInit {
               this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
               this.getuserid._id + '&path=' + this.gettopicLink.link +
               '&module_status=' + this.moduleSatusCheck
-              + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Next&week=' + (this.weekHolder + 1) + '&token=' + this.user_token);
+              + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Next&week=' + (this.weekHolder + 1) + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
         }
       }
 
@@ -567,7 +568,7 @@ export class CoursedetailsComponent implements OnInit {
             this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
             this.getuserid._id + '&path=' + this.gettopicLink.link +
             '&module_status=' + this.moduleSatusCheck
-            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Prev&week=' +(this.weekHolder+1)+ '&token=' + this.user_token);
+            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Prev&week=' +(this.weekHolder+1)+ '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
 
       }
 
@@ -586,8 +587,11 @@ export class CoursedetailsComponent implements OnInit {
   playerModuleAndTopic() {
     this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
+      if(this.scromApiData?.lastLogIndex && this.scromApiData?.lastLogIndex != "undefined"){
+        this.lastLogIndex  = parseInt(this.scromApiData.lastLogIndex) + 1;
+      }
       if (this.scromApiData?.toc != '0') {
-        
+
         if (this.screenWidth < 800) {
           this.drawersOpen = false;
         }
@@ -624,7 +628,7 @@ export class CoursedetailsComponent implements OnInit {
           this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.scromApiData.url +
           '&module_status=' + 'process&week='+ (this.weekHolder + 1)
-          + '&module=' + moduleTitle + '&topic=' + topicTitle + '&token=' + this.user_token);
+          + '&module=' + moduleTitle + '&topic=' + topicTitle + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
 
       this.playerTopicLen = this.scromApiData.total_topic_len;
       // tree level
@@ -646,6 +650,7 @@ export class CoursedetailsComponent implements OnInit {
     });
   }
   playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, weekIndex, topindex, moduleIdx) {
+    debugger;
     this.weekHolder = weekIndex;
     this.weekHolderUI = weekIndex;
     this.currentTopicTitle = topicName;
@@ -665,8 +670,7 @@ export class CoursedetailsComponent implements OnInit {
       (environment.scormUrl + '/scormPlayer.html?contentID=' +
         this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
         + '&module_status=' + this.moduleSatusCheck
-        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (this.weekHolder + 1) + '&token=' + this.user_token);
-
+        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (this.weekHolder + 1) + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
     this.checkLastFirstIndexReached()
   }
 
@@ -919,7 +923,7 @@ export class CoursedetailsComponent implements OnInit {
     if (this.currentModuleTitle || this.currentTopicTitle) {
       if (this.questionText.trim().length) {
         this.Lservice.askaquestion(this.getuserid.user_id, this.courseid, this.currentModuleTitle, this.currentTopicTitle, this.questionText).subscribe((data: any) => {
-          console.log(data)
+          // console.log(data)
           this.questionText = "";
           if (data?.data?.askaquestion?.success) {
             this.selectedQATabIndex = 1;

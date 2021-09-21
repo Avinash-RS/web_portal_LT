@@ -12,7 +12,10 @@ import { MatDialog } from "@angular/material";
 import { environment } from "@env/environment";
 import { Router } from "@angular/router";
 import { DragScrollComponent } from 'ngx-drag-scroll';
-
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { Label } from 'ng2-charts';
+import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+declare const Chart;
 const DEFAULT_DURATION = 300;
 
 @Injectable()
@@ -35,7 +38,19 @@ export class CustomDateFormatter extends CalendarDateFormatter {
       state('true', style({ height: '0', visibility: 'hidden' })),
       transition('false => true', animate(DEFAULT_DURATION + 'ms ease-in')),
       transition('true => false', animate(DEFAULT_DURATION + 'ms ease-out'))
-    ])
+    ]),
+    trigger(
+      'collapseprogress', [
+        transition(':enter', [
+          style({opacity: 0}),
+          animate('900ms ease-in', style({opacity: 1}))
+        ]),
+        transition(':leave', [
+          style({opacity: 1}),
+          animate('100ms ease-out', style({opacity: 0}))
+        ])
+      ]
+    )
   ],
   providers: [
     {
@@ -135,6 +150,140 @@ export class LearnerNewMyCourseComponent implements OnInit {
   completedTopic: any;
   displaySlides = false;
   tooltipJobRole: any;
+  //Week wise chart
+  weekWiseChartDatalabel:any = [];
+  weekWiseChartData:any = [];
+  totalhoursSpend:string = "0 mins";
+  public chartPlugins = [pluginDataLabels];
+  public WeekbarChartOptions: ChartOptions = {
+    responsive: true, 
+    tooltips:{
+      enabled: false,
+    },
+    plugins: {
+      datalabels: {
+        display: false
+      }
+    },
+    scales:{
+      xAxes:[{
+        gridLines:{
+          display:false
+        },
+      }],
+      yAxes:[{
+        gridLines:{
+          borderDash: [1, 3],
+          color: "#2280C1"
+        },
+        ticks: {
+          min: 0,
+          max: 4,
+          stepSize:1,
+          callback: function(value) {
+            return value + '  '
+          }
+        }
+      }],
+    },
+    elements:
+    {
+      point:
+      {
+        radius: 1,
+        hitRadius: 5,
+        hoverRadius: 10,
+        hoverBorderWidth: 2
+      }
+    }
+  };
+  public WeekbarChartLabels: Label[] = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  public WeekbarChartType: ChartType = 'bar';
+  public WeekbarChartLegend = false;
+  public WeekbarChartPlugins = [];
+  public WeekbarChartData: ChartDataSets[] = [
+    {
+      data: [0,1,2,3,4,3,2],
+      backgroundColor: '#2280C1',
+      hoverBackgroundColor:'#2280C1',
+      barThickness: 12,
+    }
+  ];
+  //Course Wise Chart
+  courseWiseChartDatalabel:any = [];
+  courseChartData:any = [];
+  public courseChartOptions: ChartOptions = {
+    responsive: true, 
+    tooltips:{
+      enabled : false,
+    },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+        font: {
+          size: 12,
+        },
+        formatter: (value, ctx) => {
+          let percentage = value + "%";
+          return percentage;
+      },
+      }
+    },
+    scales:{
+      xAxes:[{
+        ticks: {
+          display: false,
+      },
+        gridLines:{
+          display:false
+        },
+      }],
+      yAxes:[{
+        gridLines:{
+          borderDash: [1, 3],
+          color: "#2280C1"
+        },
+        ticks: {
+          min: 0,
+          max: 100,
+          stepSize:25,
+          callback: function(value) {
+            return value + '  '
+          }
+        }
+      }],
+    },
+    elements:
+    {
+      point:
+      {
+        radius: 1,
+        hitRadius: 5,
+        hoverRadius: 10,
+        hoverBorderWidth: 2
+      }
+    }
+  };
+  public coursebarChartLabels: Label[] = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  public coursebarChartType: ChartType = 'bar';
+  public coursebarChartLegend = false;
+  public courseChartPlugins = [];
+  public coursebarChartData: ChartDataSets[] = [
+    {
+      data: [0,25,30,50,75,60,100],
+      backgroundColor: ['#FFB74D','#FFB74D','#FFB74D','#FFB74D','#FFB74D','#56B35A','#56B35A'],
+      hoverBackgroundColor:'#2280C1',
+      barThickness: 12,
+    }
+  ];
+  showProgressChart:boolean = false;
+  today = Date.now();
+  weekWiseDate;
+  courseDate;
+  nochartdata:boolean = true;
+  currentYear: number;
+
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
@@ -172,6 +321,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
       this.shotDotSearch = false;
     }
     this.getModuleStatus();
+    this.currentYear = new Date().getFullYear()
   }
 
   //Recently completed topics
@@ -585,5 +735,4 @@ export class LearnerNewMyCourseComponent implements OnInit {
     },1000)
    })
  }
-
 }
