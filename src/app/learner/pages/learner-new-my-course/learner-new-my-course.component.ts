@@ -17,6 +17,7 @@ import { Label } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 declare const Chart;
 const DEFAULT_DURATION = 300;
+import { DatePipe } from '@angular/common';
 
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
@@ -158,7 +159,13 @@ export class LearnerNewMyCourseComponent implements OnInit {
   public WeekbarChartOptions: ChartOptions = {
     responsive: true, 
     tooltips:{
-      enabled: false,
+      enabled: true,
+      displayColors: false,
+      callbacks: {
+        label: function(tooltipItem, data) {
+          return  data['datasets'][0]['data'][tooltipItem['index']] + ' hrs';
+        }
+      }
     },
     plugins: {
       datalabels: {
@@ -197,25 +204,32 @@ export class LearnerNewMyCourseComponent implements OnInit {
       }
     }
   };
-  public WeekbarChartLabels: Label[] = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  public WeekbarChartLabels: Label[] = [];
   public WeekbarChartType: ChartType = 'bar';
   public WeekbarChartLegend = false;
   public WeekbarChartPlugins = [];
-  public WeekbarChartData: ChartDataSets[] = [
+  public WeekbarChartData: ChartDataSets[] = [ 
     {
-      data: [0,1,2,3,4,3,2],
+      data: [],
       backgroundColor: '#2280C1',
       hoverBackgroundColor:'#2280C1',
       barThickness: 12,
     }
-  ];
+   ];
   //Course Wise Chart
   courseWiseChartDatalabel:any = [];
   courseChartData:any = [];
+  courseChartBackGround:any =[];
   public courseChartOptions: ChartOptions = {
     responsive: true, 
     tooltips:{
-      enabled : false,
+      enabled : true,
+      displayColors: false,
+      callbacks: {
+        label: function(tooltipItem, data) {
+          return  data['datasets'][0]['data'][tooltipItem['index']] + '%';
+        }
+      }
     },
     plugins: {
       datalabels: {
@@ -265,24 +279,27 @@ export class LearnerNewMyCourseComponent implements OnInit {
       }
     }
   };
-  public coursebarChartLabels: Label[] = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  public coursebarChartLabels: Label[] = [];
   public coursebarChartType: ChartType = 'bar';
   public coursebarChartLegend = false;
   public courseChartPlugins = [];
   public coursebarChartData: ChartDataSets[] = [
     {
-      data: [0,25,30,50,75,60,100],
-      backgroundColor: ['#FFB74D','#FFB74D','#FFB74D','#FFB74D','#FFB74D','#56B35A','#56B35A'],
+      data: [],
+      backgroundColor: [],
       hoverBackgroundColor:'#2280C1',
       barThickness: 12,
     }
   ];
   showProgressChart:boolean = false;
-  today = Date.now();
+  today = new Date();
   weekWiseDate;
-  courseDate;
+  courseStartDate;
+  courseEndDate;
+  minCourseDate;
   nochartdata:boolean = true;
   currentYear: number;
+  pipe = new DatePipe('en-US');
 
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
@@ -735,4 +752,96 @@ export class LearnerNewMyCourseComponent implements OnInit {
     },1000)
    })
  }
+
+ getCourseProgress(){
+  this.setdateForprogress();
+  this.getoverAllCourseProgressData()
+  this.getWeekCourseData();
+  this.showProgressChart = true;
+}
+//Date initialize
+setdateForprogress(){
+  //week wise date
+ var curr = new Date;
+ var first = curr.getDate() - curr.getDay();
+ var firstday = new Date(curr.setDate(first)).toUTCString();
+ this.weekWiseDate = new Date(firstday,);
+ //Course Start & End date
+ this.courseStartDate  = this.UserDetails.created_on;
+ this.minCourseDate = this.courseStartDate;
+ this.courseEndDate = new Date();
+}
+
+//Overll course chart data
+getoverAllCourseProgressData(){
+  this.courseWiseChartDatalabel = [];
+  this.courseChartData = [];
+  this.courseChartBackGround = [];
+  this.learnerService.getoverAllCourseProgressByUserId(this.userId,this.courseStartDate,this.courseEndDate).subscribe((result:any)=>{
+    if(result.data.overAllCourseProgressByUserId.success){
+      result.data.overAllCourseProgressByUserId.data.forEach((data:any)=>{
+        this.courseWiseChartDatalabel.push(data.courseName);
+        this.courseChartData.push(data.coursePercentage)
+        this.courseChartBackGround.push(data.colourCode);
+      });
+    }
+    else{
+      this.courseWiseChartDatalabel = [];
+      this.courseChartData = [];
+      this.courseChartBackGround = [];
+    }
+    this.generateCourseChart();
+  });
+}
+generateCourseChart(){
+  this.coursebarChartLabels = this.courseWiseChartDatalabel;
+  this.coursebarChartData = [
+    {
+      data: this.courseChartData,
+      backgroundColor: this.courseChartBackGround,
+      hoverBackgroundColor:this.courseChartBackGround,
+      barThickness: 12,
+    }
+  ];
+}
+
+changeCourseDate(){
+  this.minCourseDate = this.courseStartDate;
+  this.getoverAllCourseProgressData();
+}
+
+getWeekCourseData(){
+  this.weekWiseChartDatalabel = [];
+  this.weekWiseChartData = [];
+  var myFormattedDate = this.pipe.transform(this.weekWiseDate, 'yyyy-MM-dd');
+  this.learnerService.getweekWiseCourseChart("",this.userId,myFormattedDate,"allcourse").subscribe((result:any)=>{
+
+    if(result.data.weekWiseCourseChart.success){
+      this.totalhoursSpend = result.data.weekWiseCourseChart.data.totalhoursSpend;
+      result.data.weekWiseCourseChart.data.chartdata.forEach((data:any)=>{
+        this.weekWiseChartDatalabel.push(data.day);
+        this.weekWiseChartData.push(data.hours);
+      });
+    }
+    else{
+      this.weekWiseChartDatalabel = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      this.weekWiseChartData = [0,0,0,0,0,0,0,0];
+    }
+    this.generateWeekwiseChart();
+  });
+}
+generateWeekwiseChart(){
+  this.WeekbarChartLabels = this.weekWiseChartDatalabel;
+  this.WeekbarChartData = [
+    {
+      data: this.weekWiseChartData,
+      backgroundColor: '#2280C1',
+      hoverBackgroundColor:'#2280C1',
+      barThickness: 12,
+    }
+  ];
+}
+changeWeekDate(){
+  this.getWeekCourseData();
+}
 }
