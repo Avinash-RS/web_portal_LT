@@ -23,6 +23,7 @@ export const login = gql`
         group_id
         message
         bb_forum
+        created_on
         nodebb_response {
           uid
         }
@@ -2534,8 +2535,8 @@ mutation labactivity(
 }
 `;
 export const weekWiseCourseChart = gql`
-  query weekWiseCourseChart($courseId:String,$userId:String,$startDate:String){
-    weekWiseCourseChart(courseId:$courseId,userId:$userId,startDate:$startDate){
+  query weekWiseCourseChart($courseId:String,$userId:String,$startDate:String,$type:String){
+    weekWiseCourseChart(courseId:$courseId,userId:$userId,startDate:$startDate,type:$type){
     message
     success
     data {
@@ -2543,8 +2544,49 @@ export const weekWiseCourseChart = gql`
       chartdata {
         day
         minutes
+        hours
       }
     } 
     } 
+  }
+`;
+
+export const overAllCourseProgressByUserId = gql`
+query overAllCourseProgressByUserId($userId:String!,$startDate:String!,$endDate:String!){
+  overAllCourseProgressByUserId(userId:$userId,startDate:$startDate,endDate:$endDate){
+    data {
+      courseName
+      courseId
+      colourCode
+      coursePercentage
+      status
+      module {
+        totalCount
+        completedCount
+      }
+      topic {
+        totalCount
+        completedCount
+      }
+      perform {
+        totalCount
+        completedCount
+      }
+      project {
+        totalCount
+        completedCount
+      }
+      liveclassroom {
+        totalCount
+        completedCount
+      }
+      assignment {
+        totalCount
+        completedCount
+      }
+    }
+  success
+  message
+  }
   }
 `;
