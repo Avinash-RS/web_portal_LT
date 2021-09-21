@@ -255,6 +255,19 @@
 .colorBlack {
   color: #666666;
 }
+::ng-deep.progressBar {
+  .mat-progress-bar {
+    height: 5px;
+    border-radius: 5px;
+    width: 90%;
+  }
+  .mat-progress-bar-buffer {
+    background-color: #C9C9C9;
+  }
+  .mat-progress-bar-fill::after {
+    background-color: #39B54A;
+  }
+}
 .tocSubTitle {
   font-size: 15px;
   font-weight: normal;
@@ -263,6 +276,73 @@
   cursor: pointer;
   padding: 5px;
   margin: 3px;
+  position: relative;
+  flex-wrap: wrap;
+  .statusColor {
+    width: 5%;
+  }
+  &.titleSelected {
+    .topicName {
+      h4 {
+        font-weight: 700;
+      }
+    }
+  }
+  .topicName {
+    width: 73%;
+    h4 {
+      color: #5B5B5B;
+      font-size: 15px;
+      font-weight: 400;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 95%;
+      display: inline-block;
+    }
+  }
+  .progressBar {
+    width: 18%;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    span {
+      display: inline-block;
+      margin-left: 5px;
+      color: #999999;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+  .arrowExpandCollapse {
+    border-bottom: 1px solid #D8D8D8;
+    width: 100%;
+    position: relative;
+    margin-top: 7px;
+    > div {
+      position: absolute;
+      left: 50%;
+      transform: translateY(-50%);
+      background-color: #fff;
+      bottom: -17px;
+      width: 28px;
+      text-align: center;
+      .rotate {
+        color: #D8D8D8;
+        font-size: 7px;
+        display: inline-block;
+        transition: all 0.2s ease-in-out;
+        &.expand_more {
+          transform: rotate(0deg);
+        }
+        &.expand_less {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
 }
 .topicnm {
   font-size: 13px;
@@ -1133,6 +1213,13 @@
       }
     }
   }
+  h3 {
+    color: #494949;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+  }
   .icov {
     position: relative;
     .bgGreen {
@@ -1141,9 +1228,18 @@
       top: 50%;
       transform: translateY(-50%);
       border-radius: 50%;
-      width: 13px;
-      height: 13px;
+      width: 15px;
+      height: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: normal;
       background-image: linear-gradient(to right top, #39b54a, #53ba46, #68be43, #7bc241, #8dc63f);
+      em {
+        color: #ffffff;
+        font-size: 5px;
+        line-height: normal;
+      }
     }
   }
 }
