@@ -129,22 +129,23 @@
         ul{
           list-style: none;
           padding-left: 0;
-          line-height: 16px;
+          line-height: 20px;
           margin-bottom: 0px; 
           label{
-            font-size:13px;
+            font-size:14px;
             width:73%;
           }
           span{
-            font-size:13px;
+            font-size:14px;
             font-weight: 600;
            
           }
         }
       }
       .card-foot{
-        color:#809FB8;
-        font-size: 9px;
+        color:#004684;
+        font-size: 12px;
+        margin-left: 20px;
       }
 
     }
@@ -154,27 +155,39 @@
     .weekly-head{
       .week-head-text{
         margin-left: 20px;
-        width:83%;
         font-size: 15px;
-        @media only screen and (min-width: 360px) {
-          width: 80%;
+        width:65%;
+        @media only screen and (min-width: 576px) {
+          width:86%;
+        }
+        @media only screen and (min-width: 720px) {
+          width:65%;
         }
         @media only screen and (min-width: 992px) {
-          width:83%;
+          width:80%;
+        }
+        @media only screen and (min-width: 1140px) {
+          width:86%;
         }
 
       }
       .week-head-action{
-        width:17%;
+        width: 35%;
+        @media only screen and (min-width: 576px) {
+          width:14%;
+        }
+        @media only screen and (min-width: 720px) {
+          width:35%;
+        }
+        @media only screen and (min-width: 992px) {
+          width:20%;
+        }
+        @media only screen and (min-width: 1140px) {
+          width:14%;
+        }
         .mat-button-toggle-checked {
           background-color: white;
           color: #c02222;
-        }
-        @media only screen and (min-width: 360px) {
-          width: 50%;
-        }
-          @media only screen and (min-width: 992px) {
-          width:17%;
         }
       }
     }

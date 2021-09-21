@@ -55,7 +55,7 @@ export class CourseReportComponent implements OnInit {
           max: 100,
           stepSize:10,
           callback: function(value) {
-            return value + '%'
+            return value + '%  '
           }
         }
       }],

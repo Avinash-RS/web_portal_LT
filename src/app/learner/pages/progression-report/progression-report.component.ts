@@ -28,11 +28,16 @@ export class ProgressionReportComponent implements OnInit {
 
   apidata: any = [];
   public chartPlugins = [pluginDataLabels];
-  selectedIndex: number = 0;
   public barChartOptions: ChartOptions = {
     responsive: true, 
     tooltips:{
-      enabled: false,
+      enabled: true,
+      displayColors: false,
+      callbacks: {
+        label: function(tooltipItem, data) {
+          return  data['datasets'][0]['data'][tooltipItem['index']] + ' mins';
+        }
+      }
     },
     plugins: {
       datalabels: {
