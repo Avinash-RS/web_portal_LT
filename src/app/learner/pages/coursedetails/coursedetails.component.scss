@@ -299,6 +299,7 @@
       overflow: hidden;
       width: 95%;
       display: inline-block;
+      margin: 0;
     }
   }
   .progressBar {
@@ -1213,15 +1214,34 @@
       }
     }
   }
-  h3 {
-    color: #494949;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: normal;
-    margin: 0;
-  }
   .icov {
     position: relative;
+    .modTitle {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      h3 {
+        color: #494949;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: normal;
+        margin: 0 0 7px 0;
+        width: 100%;
+      }
+      span {
+
+        color: #7F7F7F;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: normal;
+        min-width: 70px;
+        em {
+          margin-right: 3px;
+        }
+      }
+    }
+    .playVideo {}
+    .videoDuration {}
     .bgGreen {
       position: absolute;
       right: 15px;
