@@ -241,9 +241,19 @@
                             <mat-card class="cousrse-wise-card">
                                 <div class="d-flex justify-content-between align-items-center cousrse-wise-card-header">
                                     <div class="cousrse-wise-card-header-text">Course Wise Completion</div>
+
                                     <div>
                                         <mat-form-field style="width:150px;">
-                                            <input matInput [matDatepicker]="CourseDatepicker" placeholder="Choose a date" [(ngModel)]="courseDate" 
+                                            <input matInput [matDatepicker]="CourseFromDatepicker" placeholder="From date" [(ngModel)]="courseDate" 
+                                             [max]="today">
+                                            <mat-datepicker-toggle matSuffix [for]="CourseFromDatepicker"></mat-datepicker-toggle>
+                                            <mat-datepicker #CourseFromDatepicker></mat-datepicker>
+                                         </mat-form-field>
+                                    </div>
+
+                                    <div>
+                                        <mat-form-field style="width:150px;">
+                                            <input matInput [matDatepicker]="CourseDatepicker" placeholder="To date" [(ngModel)]="courseDate" 
                                              [max]="today">
                                             <mat-datepicker-toggle matSuffix [for]="CourseDatepicker"></mat-datepicker-toggle>
                                             <mat-datepicker #CourseDatepicker></mat-datepicker>

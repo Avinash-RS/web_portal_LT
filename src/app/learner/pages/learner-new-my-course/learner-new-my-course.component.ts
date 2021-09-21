@@ -215,7 +215,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   public courseChartOptions: ChartOptions = {
     responsive: true, 
     tooltips:{
-      enabled: false,
+      enabled : false,
     },
     plugins: {
       datalabels: {
