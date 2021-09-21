@@ -650,7 +650,6 @@ export class CoursedetailsComponent implements OnInit {
     });
   }
   playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, weekIndex, topindex, moduleIdx) {
-    debugger;
     this.weekHolder = weekIndex;
     this.weekHolderUI = weekIndex;
     this.currentTopicTitle = topicName;

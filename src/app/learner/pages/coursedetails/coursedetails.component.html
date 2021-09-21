@@ -81,7 +81,8 @@
 
             <div class="leftToc">
                 <div class="showHide" [ngClass]="drawersOpen?'Yes':'No'">
-                    <em class="lxp-TOC_Collapse" (click)="drawersOpen=drawersOpen?false:true"></em>
+                    <em *ngIf="drawersOpen" class="lxp-TOC_Collapse" (click)="drawersOpen=drawersOpen?false:true"></em>
+                    <em *ngIf="!drawersOpen" class="lxp-TOC_Expand" (click)="drawersOpen=drawersOpen?false:true"></em>
                 </div>
                 <mat-tab-group (selectedTabChange)="tabClick($event)">
                     <mat-tab>
@@ -185,9 +186,13 @@
                         <span *ngFor="let res of resDat.childData let mi = index" (load)="mi==moduleHolder?res.expanded=true:res.expanded=false;">
                             <mat-card-subtitle (click)="moduleExpand(wi,mi,res)" class="d-flex justify-content-start align-items-center tocSubTitle" [ngClass]="(wi===weekHolderUI&&mi==moduleHolder)?'titleSelected':''">
                                 <div class="statusColor">
-                                    <mat-icon *ngIf="res?.status == 'Passed'" class="material-icons passColor" >done </mat-icon>
+                                    <span *ngIf="res?.status == 'Passed'" class="passColor"><em class="lxp-Right"></em></span>
+                                    <span *ngIf="res?.status == 'process'" class="processColor"></span>
+                                    <span *ngIf="res?.status == null" class="greyColor"></span>
+
+                                    <!-- <mat-icon class="material-icons " >done </mat-icon>
                                     <mat-icon *ngIf="res?.status == 'process'" class="material-icons processColor" >done </mat-icon>
-                                    <mat-icon *ngIf="res?.status == null" class="material-icons mar" >done</mat-icon>
+                                    <mat-icon *ngIf="res?.status == null" class="material-icons mar" >done</mat-icon> -->
                                 </div>
                                 <div class="topicName">
                                     <h4 *ngIf="res?.title?.length >= 67" class="moduleName" tooltip="{{res?.title}}" placement="right">
@@ -224,9 +229,8 @@
                                                 </span>
                                                 <!-- <em class="ico" [ngClass]="mod?.status === 'Passed' ? 'fa fa-check ico-green' :  mod?.status === 'process' ? 'fa fa-circle ico-yellow' : ''"></em> -->
                                                 <!-- <span class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, cumque.</span> -->
-                                                <span *ngIf="mod.bookmark===true "><em class="lxp-bookmark" style="color:blue"></em></span>
+                                                <span class="bookmarkTopic d-flex justify-content-center align-items-center" *ngIf="mod.bookmark===true "><em class="lxp-bookmark"></em></span>
                                             </div>
-                                            
                                         </li>
                                     </ul>
                                 </div>
