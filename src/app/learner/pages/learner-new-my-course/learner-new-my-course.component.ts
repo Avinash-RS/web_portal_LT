@@ -282,6 +282,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   weekWiseDate;
   courseDate;
   nochartdata:boolean = true;
+  currentYear: number;
 
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
@@ -320,6 +321,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
       this.shotDotSearch = false;
     }
     this.getModuleStatus();
+    this.currentYear = new Date().getFullYear()
   }
 
   //Recently completed topics

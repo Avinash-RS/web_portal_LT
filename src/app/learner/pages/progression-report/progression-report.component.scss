@@ -2,6 +2,10 @@
 
 .progression-report-contianer {
   // margin-bottom: 4em;
+  flex-direction: column;
+  @media only screen and (min-width: 992px) {
+    flex-direction: row;
+  }
   @include md {
     margin-bottom: 0;
   }
@@ -16,7 +20,7 @@
         text-align: left;
       }
     .progress-label {
-      margin-top: 1.5em;
+      margin-top: 0;
       margin-bottom: 1em;
       @media only screen and (min-width: 720px) {
         margin-top: 0;
@@ -34,6 +38,9 @@
         top: 50%;
         transform: translateY(-50%) rotate(-90deg);
         color: #999999;
+      }
+      > div {
+        width: 100%;
       }
     }
     .progress-date{
@@ -60,44 +67,57 @@
     .learning-label {
       margin-bottom: 0;
     }
+    
+    .breadcrumb {
+      margin: 0;
+      padding: 0 20px !important;
+      background-color: transparent !important;
+      li {
+        color: #333333;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: normal;
+        position: relative;
+        margin-right: 15px;
+        display: inline-block;
+        em {
+          display: inline-block;
+          transform: scale(-1);
+          color: #666666;
+          margin-right: 8px;
+          cursor: pointer;
+        }
+        &:first-child {
+          color: #999999;
+          &::after {
+            content: "/";
+            position: absolute;
+            right: -10px;
+            top: auto;
+            bottom: auto;
+            color: #c02222;
+          }
+        }
+      }
+    }
     .left-container {
         width: 100%;
         box-shadow: 0px 0px 6px #00000059;
         background: #F2F2F2;
         padding: 20px 0;
-        @include xl {
-          width: calc(100% - 400px);
-        }
+        order: 2;
         .breadcrumb {
-          margin: 0;
-          padding: 0 20px !important;
-          background-color: transparent !important;
-          li {
-            color: #333333;
-            font-size: 14px;
-            font-weight: 400;
-            line-height: normal;
-            position: relative;
-            margin-right: 15px;
-            em {
-              display: inline-block;
-              transform: scale(-1);
-              color: #666666;
-              margin-right: 8px;
-              cursor: pointer;
-            }
-            &:first-child {
-              color: #999999;
-              &::after {
-                content: "/";
-                position: absolute;
-                right: -10px;
-                top: auto;
-                bottom: auto;
-                color: #c02222;
-              }
-            }
+          display: none;
+          @media only screen and (min-width: 992px) {
+            display: block;
           }
+        }
+        @media only screen and (min-width: 992px) {
+          order: 1;
+          width: calc(100% - 360px);
+        }
+        @media only screen and (min-width: 1140px) {
+          width: calc(100% - 400px);
         }
         // .backArrow {
         //     font-size: 10px;
@@ -718,19 +738,39 @@
     }
   }
   .right-container {
-    width: 0;
-    display: none;
+    width: 100%;
+    // display: none;
     background-color: #fff;
-    padding: 3em 1em;
+    padding: 1.5em;
     box-shadow: 0 0 2px 0 #0000006b;
+    position: relative;
+    right: 0;
+    top: 0;
+    height: 100%;
+    order: 1;
+    .breadcrumb {
+      padding: 0 0 20px 0 !important;
+      @media only screen and (min-width: 992px) {
+        display: none;
+      }
+    }
     .comingSoon {
       margin-top:60px;
       @media only screen and (min-width: 1560px) {
         margin-top: 100px;
       }
     }
-    @include xl {
-      display: inline-block;
+    @media only screen and (min-width: 720px) {
+      padding: 1em 2em 3em 2em;
+    }
+    @media only screen and (min-width: 992px) {
+      width: 360px;
+      order: 2;
+      position: fixed;
+      top: 72px;
+      padding: 3em 1em;
+    }
+    @media only screen and (min-width: 1140px) {
       width: 400px;
     }
 
