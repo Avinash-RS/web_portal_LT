@@ -130,7 +130,6 @@ export class HeaderComponent implements OnInit {
     this.gs.getThemeName(selectedValue);
   }
   logout() {
-    console.log('inside logout');
     Swal.fire({
       title: 'Are you sure you want to logout?',
       // icon: 'warning',
@@ -144,55 +143,18 @@ export class HeaderComponent implements OnInit {
         // this.loading = true;
 
         //SOCKET DISCONNECTION START
-        //console.log(this.socketService.socket.connected,"connected")
+
         if (this.socketService?.socket?.connected) {
           this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
           });
           this.socketService.closeSocket();
         }
-        //SOCKET DISCONNECTION COMPLETE
-        
         this.services.getIpAddressByUrl();
         this.services.logout(this.userDetailes._id, false).subscribe((logout: any) => {
           this.userDetailes = null;
           localStorage.clear();
           sessionStorage.clear();
           this.router.navigate(['/Learner/login']);
-          // if (logout.data.logout && logout.data.logout.success) {
-          //   this.socketService.Connectsocket({ type: 'disconnect' }).subscribe(quote => {
-          //   });
-
-          //   this.router.navigate(['/Learner/login']);
-          //   localStorage.clear();
-          //   sessionStorage.clear();
-          //   this.services.getIpAddressByUrl();
-          //   this.userDetailes = null;
-          //   this.loading = false;
-          //   // june 10 added by ankit
-          // } else if (logout.data.logout && !logout.data.logout.success) {
-          //   if (logout.data.logout.error_msg === 'Authentication error. Token required.') {
-          //     this.router.navigate(['/Learner/login']);
-          //     localStorage.clear();
-          //     sessionStorage.clear();
-          //     this.services.getIpAddressByUrl();
-          //     this.userDetailes = null;
-          //     this.loading = false;
-          //     // june 10 added by ankit
-          //   } else {
-          //     this.alert.openAlert(logout.data.logout.message, null);
-          //   }
-          // } else {
-          //   logout.errors.forEach(element => {
-          //     if (element.message.includes('TokenExpiredError') || element.message.includes('JsonWebTokenError')) {
-          //       localStorage.clear();
-          //       sessionStorage.clear();
-          //       this.services.getIpAddressByUrl();
-          //       // this.gs.checkLogout();
-          //       this.loading = false;
-          //     }
-          //   });
-          //   this.alert.openAlert('Please try again later', null);
-          // }
         });
       }
     });
