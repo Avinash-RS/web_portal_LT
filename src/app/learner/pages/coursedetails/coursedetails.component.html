@@ -96,7 +96,7 @@
                     class="topicCard" >
                     <!-- (click)="moduleExpand(resDat,i)" -->
                             <mat-card-title  class="d-flex justify-content-between align-items-center pointer">
-                                <div class="tocTitle">Week - {{resDat.week?resDat.week:wi+1}}</div>
+                                <div *ngIf="userType == 'collegeconnect'" class="tocTitle">Week - {{resDat.week?resDat.week:wi+1}}</div>
                                 <div>
                                     <!-- <i class="expandCollapse" [ngClass]="resDat.expanded?'lxp-Collapse':'lxp-Expand'"></i> -->
                                 </div>
@@ -172,10 +172,10 @@
                 <div (click)="makeFullScreen()" data-title="Fullscreen" class="fullScr d-flex align-items-center iconSize">
                     <i  class="lxp-Fullscreen"></i>
                 </div>
-                <div *ngIf="userType!=='collegeconnect'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')"data-title="Understood" class="fullScr d-flex align-items-center iconSize" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
+                <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')"data-title="Understood" class="fullScr d-flex align-items-center iconSize" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
                     <i  class="lxp-ThumbsUp"></i>
                 </div>
-                <div *ngIf="userType!=='collegeconnect'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="fullScr d-flex align-items-center iconSize" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
+                <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="fullScr d-flex align-items-center iconSize" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
                     <i  class="lxp-ThumbsDown"></i>
                 </div>
                 <div *ngIf="scromApiData.resourceUrl"  (click)="downloadResource();" data-title="Download" class="fullScr d-flex align-items-center iconSize">

@@ -541,7 +541,7 @@
       border-radius: 4px;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
       @media only screen and (min-width: 720px) {
-        padding: 15px 25px 15px 15px;
+        padding: 15px 15px 15px 15px;
       }
     }
     .menuIcon {
@@ -790,7 +790,7 @@
           border-radius: 50%;
           width: 42px;
           height: 42px;
-          background: rgba(39, 187, 238, 0.25);
+          background: #dedede;
           transition: 0.3s ease-in background;
           // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
           @media only screen and (max-width: 767px) {
@@ -884,13 +884,13 @@
       .icons {
         text-align: center;
         margin-right: 15px;
-        &:hover {
-          span {
-            em {
-              color: #1B4E9B;
-            }
-          }
-        }
+        // &:hover {
+        //   span {
+        //     em {
+        //       color: #1B4E9B;
+        //     }
+        //   }
+        // }
       }
       span {
         em {
@@ -952,20 +952,20 @@
         font-size: 10px;
       }
     }
-    &::after {
-      content: "";
-      position: absolute;
-      background-color: #ffffff;
-      border-radius: 5px;
-      border: 1px solid rgba(204, 204, 204, 0.6);
-      box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.05);
-      padding: 10px;
-      width: 90%;
-      left: 50%;
-      bottom: -10px;
-      transform: translateX(-50%);
-      z-index: -1;
-    }
+    // &::after {
+    //   content: "";
+    //   position: absolute;
+    //   background-color: #ffffff;
+    //   border-radius: 5px;
+    //   border: 1px solid rgba(204, 204, 204, 0.6);
+    //   box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.05);
+    //   padding: 10px;
+    //   width: 90%;
+    //   left: 50%;
+    //   bottom: -10px;
+    //   transform: translateX(-50%);
+    //   z-index: -1;
+    // }
     h6 {
       font-size: 14px;
       font-weight: 700;
@@ -1129,11 +1129,11 @@
     font-weight: 500;
   }
   h5 {
-    font-size: 16px;
+    font-size: 15px;
     color: #333333;
   }
   h4 {
-    font-size: 19px;
+    font-size: 13px;
     color: #000000;
     margin: 0;
   }
