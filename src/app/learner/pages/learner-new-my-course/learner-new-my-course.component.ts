@@ -238,15 +238,12 @@ export class LearnerNewMyCourseComponent implements OnInit {
       footerSpacing:8,
       callbacks: {
         label: function(tooltipItem, data) {
-          console.log(tooltipItem);
           var text  = [];
           text.push('Self Paced Learning :    ' + data['datasets'][0]['data'][tooltipItem['index']]['y'] + '%');
           return  text;
         },
         footer:function(tooltipItem, data) {
-          console.log(tooltipItem[0].index);
-          data.datasets[0].data
-          var subtext =[];
+        var subtext =[];
          subtext.push('Modules                        ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['module']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['module']['totalCount']);
          subtext.push('Topics                           ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['topic']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['topic']['totalCount']);
          subtext.push('Other Activities:   ');
