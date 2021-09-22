@@ -10,9 +10,9 @@
     margin-bottom: 0;
   }
     .learning-label {
-        font-size: 16px;
+        font-size: 22px;
         font-weight: bold;
-        text-align: center;
+        text-align: left;
       }
       .progress-label{
         font-size: 22px;
@@ -21,7 +21,7 @@
       }
     .progress-label {
       margin-top: 0;
-      margin-bottom: 1em;
+      margin-bottom: 2em;
       @media only screen and (min-width: 720px) {
         margin-top: 0;
       }
@@ -734,7 +734,7 @@
       }
     }
     .pieChart {
-      margin: 0 auto;
+     // margin: 0 auto;
     }
   }
   .right-container {
