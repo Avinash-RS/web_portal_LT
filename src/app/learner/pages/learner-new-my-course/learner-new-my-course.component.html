@@ -244,8 +244,8 @@
 
                                     <div>
                                         <mat-form-field style="width:150px;">
-                                            <input matInput [matDatepicker]="CourseFromDatepicker" placeholder="From date" [(ngModel)]="courseDate" 
-                                             [max]="today">
+                                            <input matInput [matDatepicker]="CourseFromDatepicker" placeholder="From date" [(ngModel)]="courseStartDate" 
+                                             [max]="today" (dateChange)="changeCourseDate()">
                                             <mat-datepicker-toggle matSuffix [for]="CourseFromDatepicker"></mat-datepicker-toggle>
                                             <mat-datepicker #CourseFromDatepicker></mat-datepicker>
                                          </mat-form-field>
@@ -253,8 +253,8 @@
 
                                     <div>
                                         <mat-form-field style="width:150px;">
-                                            <input matInput [matDatepicker]="CourseDatepicker" placeholder="To date" [(ngModel)]="courseDate" 
-                                             [max]="today">
+                                            <input matInput [matDatepicker]="CourseDatepicker" placeholder="To date" [(ngModel)]="courseEndDate" [min] = "minCourseDate"
+                                             [max]="today" (dateChange)="changeCourseDate()">
                                             <mat-datepicker-toggle matSuffix [for]="CourseDatepicker"></mat-datepicker-toggle>
                                             <mat-datepicker #CourseDatepicker></mat-datepicker>
                                          </mat-form-field>
@@ -281,7 +281,7 @@
                                     <div class="progress-date-input">
                                      <mat-form-field style="width:150px;">
                                        <input matInput [matDatepicker]="weekWiseDatepicker" placeholder="Choose a date" [(ngModel)]="weekWiseDate" 
-                                        [max]="today">
+                                        [max]="today" (dateChange)="changeWeekDate()">
                                        <mat-datepicker-toggle matSuffix [for]="weekWiseDatepicker"></mat-datepicker-toggle>
                                        <mat-datepicker #weekWiseDatepicker></mat-datepicker>
                                      </mat-form-field>
@@ -300,7 +300,7 @@
                     </div>
 
                     <div class="tabsWrapper">
-                        <div class="courseCompletion-btn" (click)="showProgressChart = true;" *ngIf="!showProgressChart">
+                        <div class="courseCompletion-btn" (click)="getCourseProgress()" *ngIf="!showProgressChart">
                             <h4>
                                 <em class="lxp-Analytics"></em>
                                 <span>Course Completion Progress</span> 
