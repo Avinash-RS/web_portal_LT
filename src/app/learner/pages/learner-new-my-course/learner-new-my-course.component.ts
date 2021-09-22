@@ -225,10 +225,22 @@ export class LearnerNewMyCourseComponent implements OnInit {
     tooltips:{
       enabled : true,
       displayColors: false,
+      backgroundColor: 'white',
+      mode: 'index',
+      position: 'nearest',
+      titleFontColor: 'red',
+      bodyFontColor: 'green',
+      borderColor: '#999',
+      borderWidth: 1,
+      xPadding: 15,
+      yPadding: 15,
       callbacks: {
         label: function(tooltipItem, data) {
-          return  data['datasets'][0]['data'][tooltipItem['index']] + '%';
-        }
+          var text  = [];
+          text.push('Self Paced Learning');
+          text.push(data['datasets'][0]['data'][tooltipItem['index']] + '%');
+          return  text;
+        },
       }
     },
     plugins: {
