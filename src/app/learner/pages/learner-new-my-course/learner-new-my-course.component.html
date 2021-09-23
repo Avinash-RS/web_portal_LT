@@ -244,7 +244,7 @@
 
                                     <div>
                                         <mat-form-field style="width:150px;">
-                                            <input matInput [matDatepicker]="CourseFromDatepicker" placeholder="From date" [(ngModel)]="courseStartDate" 
+                                            <input matInput [matDatepicker]="CourseFromDatepicker" placeholder="From date" [(ngModel)]="courseStartDate" [min] = "UserDetails.created_on"
                                              [max]="today" (dateChange)="changeCourseDate()">
                                             <mat-datepicker-toggle matSuffix [for]="CourseFromDatepicker"></mat-datepicker-toggle>
                                             <mat-datepicker #CourseFromDatepicker></mat-datepicker>
