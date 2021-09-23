@@ -248,12 +248,16 @@ export class QuestionanswerComponent implements OnInit {
   }
 
   searchcaller(){
-    this.timeoutval = setTimeout(()=>{
-      clearTimeout(this.timeoutval)
+    // this.timeoutval = setTimeout(()=>{
+    //   clearTimeout(this.timeoutval)
+    //   this.pageNumber = 0;
+    //   this.getQAData();
+    //   // this.getQACount();
+    // },500)
+    if(this.searchKey.length >= 3){
       this.pageNumber = 0;
       this.getQAData();
-      // this.getQACount();
-    },500)
+    }
   }
   getQAtype(){
     this.pageNumber = 0;
