@@ -173,10 +173,10 @@
                     <i  class="lxp-Fullscreen"></i>
                 </div>
                 <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')"data-title="Understood" class="fullScr d-flex align-items-center iconSize" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
-                    <i  class="lxp-ThumbsUp"></i>
+                    <i  class="lxp-smile"></i>
                 </div>
                 <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="fullScr d-flex align-items-center iconSize" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
-                    <i  class="lxp-ThumbsDown"></i>
+                    <i  class="lxp-sad"></i>
                 </div>
                 <div *ngIf="scromApiData.resourceUrl"  (click)="downloadResource();" data-title="Download" class="fullScr d-flex align-items-center iconSize">
                     <i  class="lxp-download"></i>
