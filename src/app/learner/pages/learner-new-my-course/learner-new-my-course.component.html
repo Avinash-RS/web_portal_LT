@@ -357,7 +357,7 @@
                                                 </div>
                                                 <div *ngIf="item?.batchid" class="showLessContent">
                                                     <div [ngClass]="!item.isReadMore ? '' : 'showText'">
-                                                        <div class="arrowWrapper d-flex">
+                                                        <div class="arrowWrapper d-flex align-items-start">
                                                             <p [ngClass]="!item.isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
                                                             <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
                                                                 <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
@@ -399,7 +399,7 @@
                                                             </div>
                                                             <div *ngIf="userDetailes.org_type === 'vocational' || userDetailes.org_type ==='Corporate'" class="icons" (click)="goToForum(item)">
                                                                 <span><em class="lxp-QA"></em></span>
-                                                                <p>Discussion Fourm</p>
+                                                                <p>Discussion Forum</p>
                                                             </div>
                                                         </div>
                                                         <div class="courseProgression viltActivitiesQA  d-flex align-items-center">
@@ -469,7 +469,7 @@
                                                 </div>
                                                 <div *ngIf="item?.batchid" class="showLessContent">
                                                     <div [ngClass]="!item.isReadMore ? '' : 'showText'">
-                                                        <div class="arrowWrapper d-flex">
+                                                        <div class="arrowWrapper d-flex align-items-start">
                                                             <p [ngClass]="isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
                                                             <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
                                                                 <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
@@ -510,7 +510,7 @@
                                                         </div>
                                                         <div *ngIf="userDetailes.org_type === 'vocational' || userDetailes.org_type ==='Corporate'"class="icons" (click)="goToForum(item)">
                                                             <span><em class="lxp-QA"></em></span>
-                                                            <p>Discussion Fourm</p>
+                                                            <p>Discussion Forum</p>
                                                         </div>
                                                     </div>
                                                     <div class="courseProgression viltActivitiesQA  d-flex align-items-center">
@@ -578,7 +578,7 @@
                                                 </div>
                                                 <div *ngIf="item?.batchid" class="showLessContent">
                                                     <div [ngClass]="!item.isReadMore ? '' : 'showText'">
-                                                        <div class="arrowWrapper d-flex">
+                                                        <div class="arrowWrapper d-flex align-items-start">
                                                             <p [ngClass]="isReadMore ? 'addEllipsis': ''">{{item.course_description}}</p>
                                                             <button class="readMoreLess" type="button" (click)="item.isReadMore = !item.isReadMore">
                                                                 <em [class]="item.isReadMore?'lxp-Arrow':'lxp-DownArrow'"></em>
@@ -619,7 +619,7 @@
                                                         </div>
                                                         <div *ngIf="userDetailes.org_type === 'vocational' || userDetailes.org_type ==='Corporate'" class="icons" (click)="goToForum(item)">
                                                             <span><em class="lxp-QA"></em></span>
-                                                            <p>Discussion Fourm</p>
+                                                            <p>Discussion Forum</p>
                                                         </div>
                                                     </div>
                                                     <div class="courseProgression viltActivitiesQA  d-flex align-items-center">
