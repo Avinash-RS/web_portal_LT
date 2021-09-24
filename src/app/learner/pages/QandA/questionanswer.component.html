@@ -59,7 +59,7 @@
                         </div>
                         <div>
                             <mat-form-field appearance="outline">
-                                <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller()' placeholder="Search...">
+                                <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller($event)' placeholder="Search...">
                                 <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
                                 <mat-icon matSuffix *ngIf="searchKey"(click)="resetSearch()">close</mat-icon>
                             </mat-form-field>
