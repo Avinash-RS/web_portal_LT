@@ -266,11 +266,11 @@
                 <div (click)="makeFullScreen()" data-title="Fullscreen" class="fullScr d-flex align-items-center iconSize">
                     <em class="lxp-Fullscreen"></em>
                 </div>
-                <div *ngIf="userType!=='collegeconnect'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')"data-title="Understood" class="fullScr d-flex align-items-center iconSize" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
-                    <em class="lxp-ThumbsUp"></em>
+                <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')"data-title="Understood" class="fullScr d-flex align-items-center iconSize" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
+                    <i  class="lxp-smile"></i>
                 </div>
-                <div *ngIf="userType!=='collegeconnect'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="fullScr d-flex align-items-center iconSize" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
-                    <em class="lxp-ThumbsDown"></em>
+                <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="fullScr d-flex align-items-center iconSize" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
+                    <i  class="lxp-sad"></i>
                 </div>
                 <div *ngIf="scromApiData.resourceUrl"  (click)="downloadResource();" data-title="Download" class="fullScr d-flex align-items-center iconSize">
                     <em class="lxp-download"></em>

@@ -225,9 +225,33 @@ export class LearnerNewMyCourseComponent implements OnInit {
     tooltips:{
       enabled : true,
       displayColors: false,
+      backgroundColor: 'white',
+      mode: 'index',
+      titleFontColor: '#c02222',
+      bodyFontColor: '#49ae31',
+      borderColor: '#999',
+      borderWidth: 1,
+      // xPadding: 15,
+      // yPadding: 15,
+      footerFontColor:'#333333',
+      footerMarginTop:8,
+      footerSpacing:8,
       callbacks: {
         label: function(tooltipItem, data) {
-          return  data['datasets'][0]['data'][tooltipItem['index']] + '%';
+          var text  = [];
+          text.push('Self Paced Learning :    ' + data['datasets'][0]['data'][tooltipItem['index']]['y'] + '%');
+          return  text;
+        },
+        footer:function(tooltipItem, data) {
+        var subtext =[];
+         subtext.push('Modules                        ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['module']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['module']['totalCount']);
+         subtext.push('Topics                           ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['topic']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['topic']['totalCount']);
+         subtext.push('Other Activities:   ');
+         subtext.push('Live Interactions         ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['liveclassroom']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['liveclassroom']['totalCount']);
+         subtext.push('Assignment                 ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['assignment']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['assignment']['totalCount']);
+         subtext.push('Perform                        ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['perform']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['perform']['totalCount']);
+         subtext.push('Project                         ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['project']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['project']['totalCount']);
+          return subtext;
         }
       }
     },
@@ -239,7 +263,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
           size: 12,
         },
         formatter: (value, ctx) => {
-          let percentage = value + "%";
+          let percentage = value.y + "%";
           return percentage;
       },
       }
@@ -781,7 +805,7 @@ getoverAllCourseProgressData(){
     if(result.data.overAllCourseProgressByUserId.success){
       result.data.overAllCourseProgressByUserId.data.forEach((data:any)=>{
         this.courseWiseChartDatalabel.push(data.courseName);
-        this.courseChartData.push(data.coursePercentage)
+        this.courseChartData.push({"y":data.coursePercentage,"myprop":data})
         this.courseChartBackGround.push(data.colourCode);
       });
     }

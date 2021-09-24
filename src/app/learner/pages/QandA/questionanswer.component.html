@@ -46,26 +46,26 @@
                     <ng-template mat-tab-label>
                         Questions I asked
                     </ng-template>
-                    <span *ngIf="showSkeleton;else skeleton">
-                        <div class="allsearchFilter">
-                            <div>
-                                <span class="filterby">Filter by :</span>
-                                <mat-form-field appearance="outline" style="width: 130px;">
-                                    <mat-select [(ngModel)]='selectedtype' (selectionChange)=getQAtype()>
-                                        <mat-option *ngFor="let item of filterBy" [value]="item.value">
-                                            {{item.viewValue}}
-                                        </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-                            <div>
-                                <mat-form-field appearance="outline">
-                                    <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller()' placeholder="Search...">
-                                    <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
-                                    <mat-icon matSuffix *ngIf="searchKey"(click)="resetSearch()">close</mat-icon>
-                                </mat-form-field>
-                            </div>
+                    <div class="allsearchFilter">
+                        <div>
+                            <span class="filterby">Filter by :</span>
+                            <mat-form-field appearance="outline" style="width: 130px;">
+                                <mat-select [(ngModel)]='selectedtype' (selectionChange)=getQAtype()>
+                                    <mat-option *ngFor="let item of filterBy" [value]="item.value">
+                                        {{item.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
                         </div>
+                        <div>
+                            <mat-form-field appearance="outline">
+                                <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller()' placeholder="Search...">
+                                <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
+                                <mat-icon matSuffix *ngIf="searchKey"(click)="resetSearch()">close</mat-icon>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <span *ngIf="showSkeleton;else skeleton">
                         <span *ngIf="qaDataList.length;else noquescard">
                             
                             <div class="content" *ngFor="let item of qaDataList;let i = index">
@@ -95,14 +95,14 @@
                     <ng-template mat-tab-label>
                         All Q&A's in this course
                     </ng-template>
+                    <div class="searchFilter">
+                        <mat-form-field appearance="outline">
+                            <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller()' placeholder="Search...">
+                            <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
+                            <mat-icon matSuffix *ngIf="searchKey"(click)="searchKey='';this.getQAData();">close</mat-icon>
+                        </mat-form-field>
+                    </div>
                     <span *ngIf="showSkeleton;else skeleton">
-                        <div class="searchFilter">
-                            <mat-form-field appearance="outline">
-                                <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller()' placeholder="Search...">
-                                <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
-                                <mat-icon matSuffix *ngIf="searchKey"(click)="searchKey='';this.getQAData();">close</mat-icon>
-                            </mat-form-field>
-                        </div>
                         <span *ngIf="qaDataList.length;else noquescard">
                            
                             <div class="content" *ngFor="let item of qaDataList">
