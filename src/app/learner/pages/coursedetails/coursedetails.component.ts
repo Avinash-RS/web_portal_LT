@@ -857,6 +857,26 @@ export class CoursedetailsComponent implements OnInit {
   openResourse(templateRef) {
     this.dialog.open(templateRef, {
       panelClass: 'resourseContainer',
+      width: "75%",
+      height: "75%",
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+    const backdrop = document.getElementsByClassName('cdk-overlay-backdrop')[0];
+    const containerarea = document.getElementsByClassName('mat-dialog-container')[0];
+    rclickctrl(backdrop)
+    rclickctrl(containerarea)
+    function rclickctrl(element){
+      element.addEventListener("contextmenu", ( e )=> {
+        e.preventDefault();
+        return false;
+      } );
+    }
+  }
+
+  aboutCourse(templateRef) {
+    this.dialog.open(templateRef, {
+      panelClass: 'aboutCourseContainer',
       width: "99%",
       height: "90%",
       closeOnNavigation: true,
@@ -873,6 +893,7 @@ export class CoursedetailsComponent implements OnInit {
       } );
     }
   }
+
   resourseAccord(courseResource, index) { 
     if (courseResource) {
       courseResource.forEach((element, i) => {

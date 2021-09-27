@@ -245,6 +245,20 @@
             <iframe title="player" id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
             
            <div class="d-flex justify-content-between understoodBookmark">
+               <div class="popupContent d-flex align-items-center">
+                   <span class="abtCourse" (click)="aboutCourse(aboutCourseWindow)"><em class="lxp-Info"></em></span>
+                   <span class="resourcesTab" (click)="openResourse(resourseWindow)"><em class="lxp-Image_Folder"></em></span>
+                   <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')"data-title="Understood" class="smile" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
+                        Understood
+                    </div>
+                    <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
+                        Not Understood
+                    </div>
+               </div>
+               <div class="notesBookmarks">
+                   <button class="notesBtn"><em class="lxp-Notes"></em> <span>Notes</span></button>
+                   <button class="bookmarkBtn"><em class="lxp-bookmark-o"></em> <span>Bookmark</span></button>
+               </div>
                 <!-- <div class="d-flex justify-content-between align-items-center understoodButton">
                     <button *ngIf="userType!=='collegeconnect'&&userType!=='Corporate'" type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'btn btn-outline-success':'btn btn-outline-light'" (click)="understoodClick('like')">
                         <i class="lxp-smile"></i> Understood
@@ -315,144 +329,133 @@
     </div>
 </div>
 <ng-template #resourseWindow>
-    <!-- <mat-dialog-title>
-        <div class="d-flex justify-content-between rowMargin p-xy-10">
-            <div class="d-flex justify-content-start align-items-center">
-            <span class="f_wt_600 ">{{this.course?.course_name}}</span>
-            </div>
-            
-            <div class="d-flex justify-content-start align-items-center text-right">
-                <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
-            </div>
-        </div>
-    </mat-dialog-title> -->
       <mat-dialog-content (contextmenu)="contextmenu()" class="no_padding no_margin popupTab">
         <div class="popupContainer">
             <div class="closeSection">
                 <em (click)="closedialogbox()" class="lxp-Close"></em>
             </div>
-                <mat-tab-group #demo3Tab [(selectedIndex)]="selectedTabIndex" #tabs (selectedTabChange)="tabSelection($event)">
-        
-                    <!-- resource tab -->
-                    <mat-tab label="Resources">
-                        <div class="d-flex rescontentHeight">
-                                <div class="resourseToc" [ngClass]='!content?.noresource?"d-flex justify-content-around align-items-center":""'>
-                                    <ng-container *ngIf="content?.noresource">
-                                        <ng-container  *ngFor="let res of content?.coursedetails; let i = index">
-                                            <mat-card class="resource-card" *ngIf="res.resValue" [ngClass]="res.isOpen?'activeTab':'inActiveTab'">
-                                            <mat-card-title class="d-flex justify-content-between align-items-center pointer" (click)="resourseAccord(content?.coursedetails, i);">
-                                                <h4>{{res?.modulename}}</h4>
-                                                <div style="display: inline-flex;"><em class="lxp-Arrow" [ngClass]="res.isOpen?'arrowUp':'arrowDown'"></em></div>
-                                            </mat-card-title>
-                                            <div *ngIf="res.isOpen">
-                                            <ng-container *ngFor="let mod of res?.moduledetails">
-                                                <mat-card-subtitle>
-                                                    <h5 mat-line class="modTopName" [title]="mod?.topicname" *ngIf="mod.resourse?.files.length">
-                                                        {{mod?.topicname}}
-                                                    </h5>
-                                                </mat-card-subtitle>
-                                                <mat-card-content>
-                                                    <mat-card class="resource-card handPointer d-flex justify-content-start" mat-ripple (click)="urlBinder(file); add_topic_reference(res)" *ngFor="let file of mod.resourse?.files">
-                                                        <div class="mr-2">
-                                                            <img *ngIf="file.doc_type == 'application/pdf'" class="size" alt=""
-                                                                src="assets/learner/fileicon/PDF_Icon.svg">
-                                                            <img *ngIf="file.doc_type == 'link'" class="size" alt="" src="assets/learner/fileicon/Link_Icon.svg">
-                                                            <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
-                                                                class="size" alt="" src="assets/learner/fileicon/Excel_Icon.svg">
-                                                            <img *ngIf="file.doc_type == 'image/jpeg' || file.doc_type == 'image/png'" class="size" alt=""
-                                                                src="assets/learner/fileicon/Image_Icon.svg">
-                                                            <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
-                                                                class="size" alt="" src="assets/learner/fileicon/PPT_Icon.svg">
-                                                            <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
-                                                                class="size" alt="" src="assets/learner/fileicon/Word_Icon.svg">
-                                                            <img *ngIf="file.doc_type == 'application/msword'" class="size" alt=""
-                                                                src="assets/learner/fileicon/Word_Icon.svg">
-                                                            <img *ngIf="file.doc_type == 'application/vnd.ms-excel'" class="size" alt=""
-                                                                src="assets/learner/fileicon/Excel_Icon.svg">
-                                                            <img *ngIf="file.doc_type == 'video/mp4'" class="size" style="width: 16px;" alt="" src="assets/learner/fileicon/Video_Icon.svg">
-                                                            <mat-icon class="docType" *ngIf="file.doc_type == 'text/plain' "> description </mat-icon>
-                                                        </div>
-                                                        <div>{{file.type_name}}</div>
-                                                    </mat-card>
-                                                </mat-card-content>
-                                            </ng-container>
-                                        </div>
-                                        </mat-card>
-                                        </ng-container>
-                                        
-                                    </ng-container>
-                                    <ng-container *ngIf="!content?.noresource">
-                                        No Resource found !!
-                                    </ng-container>
-                                    
-                              
-                                </div>
-                                <div class="previewContainer" >
-                                    <div class="previewContainerTitle">
-                                        <p>{{resourceName}}</p>
+            <div class="d-flex rescontentHeight">
+                <div class="resourseToc" [ngClass]='!content?.noresource?"d-flex justify-content-start flex-column":""'>
+                    <h4>Resources</h4>
+                    <ng-container *ngIf="content?.noresource">
+                        <ng-container  *ngFor="let res of content?.coursedetails; let i = index">
+                            <mat-card class="resource-card" *ngIf="res.resValue" [ngClass]="res.isOpen?'activeTab':'inActiveTab'">
+                                <mat-card-title class="d-flex justify-content-start align-items-center pointer" (click)="resourseAccord(content?.coursedetails, i);">
+                                    <div class="arrow">
+                                        <em class="lxp-Arrow" [ngClass]="res.isOpen?'arrowUp':'arrowDown'"></em>
                                     </div>
-                                    <ng-container *ngIf="isCancelLoad">
-                                        <!-- <mat-icon [ngClass]="{'preview-cancel-pdf': fileType == 'pdf','preview-cancel' : (fileType == 'image' || fileType == 'video')}" (click)="onClose()">cancel</mat-icon> -->
-                                      </ng-container>
-                                      <ng-container *ngIf="fileType == 'image'">
-                                        <div class="d-flex justify-content-center align-items-center">
-                                          <img [src]="URIData" alt="image">
-                                        </div>
-                                      </ng-container>
-                                    
-                                      <ng-container *ngIf="(fileType == 'pdf'||fileType == 'link')&& URIData!==null">
-                                        <pdf-viewer [src]="URIData"  [render-text]="true" style="display: block;"></pdf-viewer>
-                                        <!-- <iframe title="file" width="100%" height="100%" [src]="URIData" allowfullscreen></iframe> -->
-                                    
-                                      </ng-container>
-                                    
-                                      <ng-container *ngIf="fileType == 'video'">
-                                        <video  oncontextmenu="return false;" [src]="URIData" title="image" width="100%" height="100%" controls controlsList="nodownload"></video>
-                                      </ng-container>
-                                    
-                                      <ng-container *ngIf="fileType == 'audio'" controlsList="nodownload">
-                                        <audio oncontextmenu="return false;" class="audio-player" [src]="URIData" title="image" width="100%" height="100%" controls controlsList="nodownload"></audio>
-                                      </ng-container>
+                                    <div class="module">
+                                        <span>Module</span>
+                                        <h4>{{res?.modulename}}</h4>
+                                    </div>
+                                </mat-card-title>
+                                <div *ngIf="res.isOpen">
+                                    <ng-container *ngFor="let mod of res?.moduledetails">
+                                        <mat-card-subtitle>
+                                            <h5 mat-line class="modTopName" [title]="mod?.topicname" *ngIf="mod.resourse?.files.length">
+                                                {{mod?.topicname}}
+                                            </h5>
+                                        </mat-card-subtitle>
+                                        <mat-card-content>
+                                            <mat-card class="handPointer d-flex justify-content-start" mat-ripple (click)="urlBinder(file); add_topic_reference(res)" *ngFor="let file of mod.resourse?.files">
+                                                <div class="mr-2">
+                                                    <img *ngIf="file.doc_type == 'application/pdf'" class="size" alt=""
+                                                        src="assets/learner/fileicon/PDF_Icon.svg">
+                                                    <img *ngIf="file.doc_type == 'link'" class="size" alt="" src="assets/learner/fileicon/Link_Icon.svg">
+                                                    <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+                                                        class="size" alt="" src="assets/learner/fileicon/Excel_Icon.svg">
+                                                    <img *ngIf="file.doc_type == 'image/jpeg' || file.doc_type == 'image/png'" class="size" alt=""
+                                                        src="assets/learner/fileicon/Image_Icon.svg">
+                                                    <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'"
+                                                        class="size" alt="" src="assets/learner/fileicon/PPT_Icon.svg">
+                                                    <img *ngIf="file.doc_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"
+                                                        class="size" alt="" src="assets/learner/fileicon/Word_Icon.svg">
+                                                    <img *ngIf="file.doc_type == 'application/msword'" class="size" alt=""
+                                                        src="assets/learner/fileicon/Word_Icon.svg">
+                                                    <img *ngIf="file.doc_type == 'application/vnd.ms-excel'" class="size" alt=""
+                                                        src="assets/learner/fileicon/Excel_Icon.svg">
+                                                    <img *ngIf="file.doc_type == 'video/mp4'" class="size" style="width: 16px;" alt="" src="assets/learner/fileicon/Video_Icon.svg">
+                                                    <mat-icon class="docType" *ngIf="file.doc_type == 'text/plain' "> description </mat-icon>
+                                                </div>
+                                                <div>{{file.type_name}}</div>
+                                            </mat-card>
+                                        </mat-card-content>
+                                    </ng-container>
                                 </div>
-                            <!--[ngClass]="drawer.opened==true?'drawerOpnResource':'drawerClsResource'" -->
-                            
+                            </mat-card>
+                        </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="!content?.noresource">
+                        <div class="noResources">
+                            <p>No Resource found !!</p>
                         </div>
-                    </mat-tab>
+                    </ng-container>
+                </div>
 
-                    <!-- about the course tab -->
-                    <mat-tab label="About the course" *ngIf="userType!=='collegeconnect'">
-                        <div class="aboutCourseTab">
-                            <h2>{{'Details about the course' | translate}}</h2>
-                            <!-- <h6>{{ 'This course includes :' | translate}}</h6>
-                            <ul class="countCourseLanguage">
-                                <li>{{content?.totalResourseCount}} Resource File(s)</li>
-                                <li *ngIf="course?.course_mode">{{course?.course_mode === 'self-placed' ? 'Self paced' : course?.course_mode}}</li>
-                                <li *ngIf="course?.course_language">{{course?.course_language}}</li>
-                            </ul> -->
-                            <div class="descriptionContent">
-                                <p [innerHTML]="course?.course_long_description"></p>
-                            </div>
-                            <div *ngIf="course?.author_details[0].author_name != ''">
-                                <h2>{{'Instructors'| translate}}</h2>
-                                <div class="">
-                                    <div class="instructionBox" *ngFor="let author of course?.author_details">
-                                        <div class="d-flex justify-content-between">
-                                            <figure>
-                                                <img class="img-inst" [src]="author.image ? (author?.image + blobKey) : 'assets/learner/pro2.png'" alt="" />
-                                            </figure>
-                                            <div class="authorDescription">
-                                                <h5>{{author?.author_name | titlecase| translate}}</h5>
-                                                <p>{{author?.description}}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="previewContainer">
+                    <div class="previewContainerTitle">
+                        <p>{{resourceName}}</p>
+                    </div>
+                    <ng-container *ngIf="isCancelLoad"></ng-container>
+                    <ng-container *ngIf="fileType == 'image'">
+                        <div class="imageContainer d-flex justify-content-center align-items-center">
+                            <img [src]="URIData" alt="image">
                         </div>
-                    </mat-tab>
-                </mat-tab-group>
+                    </ng-container>
+                
+                    <ng-container *ngIf="(fileType == 'pdf'||fileType == 'link')&& URIData!==null">
+                        <div class="pdfContainer">
+                            <pdf-viewer [src]="URIData" [fit-to-page]="true" [render-text]="true" style="display: block;"></pdf-viewer>
+                        </div>
+                    </ng-container>
+                
+                    <ng-container *ngIf="fileType == 'video'">
+                        <div class="videoContainer">
+                            <video  oncontextmenu="return false;" [src]="URIData" title="image" controls controlsList="nodownload"></video>
+                        </div>
+                    </ng-container>
+                
+                    <ng-container *ngIf="fileType == 'audio'" controlsList="nodownload">
+                        <div class="audioContainer">
+                            <audio oncontextmenu="return false;" class="audio-player" [src]="URIData" title="image" width="100%" height="100%" controls controlsList="nodownload"></audio>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
             </div>
         </mat-dialog-content>
+</ng-template>
+
+<ng-template #aboutCourseWindow>
+    <mat-dialog-content (contextmenu)="contextmenu()" class="no_padding no_margin popupTab">
+        <div class="aboutCourseContainer">
+            <div class="closeSection">
+                <em (click)="closedialogbox()" class="lxp-Close"></em>
+            </div>
+            <div class="aboutCourseTab">
+                <h2>{{'Details about the course' | translate}}</h2>
+                <div class="descriptionContent">
+                    <p [innerHTML]="course?.course_long_description"></p>
+                </div>
+                <div *ngIf="course?.author_details[0].author_name != ''">
+                    <h2>{{'Instructors'| translate}}</h2>
+                    <div class="">
+                        <div class="instructionBox" *ngFor="let author of course?.author_details">
+                            <div class="d-flex justify-content-between">
+                                <figure>
+                                    <img class="img-inst" [src]="author.image ? (author?.image + blobKey) : 'assets/learner/pro2.png'" alt="" />
+                                </figure>
+                                <div class="authorDescription">
+                                    <h5>{{author?.author_name | titlecase| translate}}</h5>
+                                    <p>{{author?.description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
 </ng-template>
 
 <ng-template #askQuestions id="askQuestions">
