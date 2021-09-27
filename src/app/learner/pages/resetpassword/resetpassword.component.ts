@@ -59,7 +59,6 @@ export class ResetpasswordComponent implements OnInit {
       //     "userSecretkey" : params.code
       // }
       this.service.getUser(this.resetCode).subscribe((data:any)=>{
-        console.log(data)
           var userValue = data?.data?.getuserRecordbasedonSecretKey?.data
           if(userValue['email']){
             this.user = userValue['email'].toLowerCase();
