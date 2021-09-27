@@ -1890,7 +1890,6 @@ export const getprojectActivityData = gql`
           checked
       }
         groupDetails{
-        id
         name
         username
         email
