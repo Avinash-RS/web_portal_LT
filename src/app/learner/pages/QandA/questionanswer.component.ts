@@ -247,7 +247,7 @@ export class QuestionanswerComponent implements OnInit {
     this.getQACount();
   }
 
-  searchcaller(){
+  searchcaller(e){
     // this.timeoutval = setTimeout(()=>{
     //   clearTimeout(this.timeoutval)
     //   this.pageNumber = 0;
@@ -257,6 +257,9 @@ export class QuestionanswerComponent implements OnInit {
     if(this.searchKey.length >= 3){
       this.pageNumber = 0;
       this.getQAData();
+    }
+    if(e.key == 'Backspace' && this.searchKey.length == 0){
+      this.resetSearch();
     }
   }
   getQAtype(){
