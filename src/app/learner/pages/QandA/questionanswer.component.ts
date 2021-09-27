@@ -258,7 +258,7 @@ export class QuestionanswerComponent implements OnInit {
       this.pageNumber = 0;
       this.getQAData();
     }
-    if(e.key == 'Backspace' && this.searchKey.length == 0){
+    if(e.keyCode == 8 && this.searchKey.length == 0){
       this.resetSearch();
     }
   }
