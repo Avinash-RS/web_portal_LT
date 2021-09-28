@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, TemplateRef, ChangeDetectorRef, ViewChild, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef, ChangeDetectorRef, ViewChild, HostListener, ElementRef, ViewContainerRef } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
@@ -14,6 +14,7 @@ import * as moment from 'moment';
 import { SocketioService } from '@learner/services/socketio.service';
 import { TranslateService } from '@ngx-translate/core';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 import * as _ from 'lodash';
 import { filter } from 'underscore';
 // import { debugger } from 'fusioncharts';
@@ -37,6 +38,8 @@ import * as CryptoJS from 'crypto-js';
   ]
 })
 export class CoursedetailsComponent implements OnInit {
+  @ViewChild('clonePreviewContainer') template;
+  @ViewChild('mobContainer', {read: ViewContainerRef}) mobContainer;
   blobKey = environment.blobKey;
   course: any = null;
   loading: boolean;
@@ -163,6 +166,33 @@ export class CoursedetailsComponent implements OnInit {
   eboxUrl :any;
   showlab:boolean = false;
   lastLogIndex:number = 0;
+  isReadMore = false;
+  TopicsOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    autoplay: false,
+    margin: 20,
+    dots: false,
+    navSpeed: 700,
+    navText: ['<em class="lxp-Rewind_Arrow"></em>', '<em class="lxp-Forward_Arrow"></em>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 1
+      },
+      740: {
+        items: 1
+      },
+      940: {
+        items: 1
+      }
+    },
+    nav: true
+  };
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -305,7 +335,12 @@ export class CoursedetailsComponent implements OnInit {
     });
     // this.getAssignmentmoduleData();
   }
-
+  showText() {
+    this.isReadMore = !this.isReadMore
+  }
+  cloneTemplate(){
+    this.mobContainer.createEmbeddedView(this.template);
+  }
   ngOnInit(): void {
     this.translate.use(localStorage.getItem('language'));
     // this.add_topic_reference(res);
@@ -876,7 +911,7 @@ export class CoursedetailsComponent implements OnInit {
 
   aboutCourse(templateRef) {
     this.dialog.open(templateRef, {
-      panelClass: 'aboutCourseContainer',
+      panelClass: 'aboutCourseWrapper',
       width: "99%",
       height: "90%",
       closeOnNavigation: true,
