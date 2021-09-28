@@ -36,6 +36,14 @@ export class CourseReportComponent implements OnInit {
       },
       }
     },
+    layout:{
+      padding: {
+        left: 0,
+        right: 0,
+        top: 30,
+        bottom: 0
+    }
+    },
     legend: {
       display: false
     },

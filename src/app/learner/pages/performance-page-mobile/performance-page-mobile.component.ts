@@ -377,7 +377,7 @@ export class PerformancePageMobileComponent implements OnInit {
             enable: false
           }
         });
-        const blobServiceClient = new BlobServiceClient(`${sas.storageUri}?${sas.storageAccessToken}`, pipeline);
+        const blobServiceClient = new BlobServiceClient(`${sas.storageUri}?${this.blobKey}`, pipeline);
         const containerClient = blobServiceClient.getContainerClient(sas.containerName);
         if (!containerClient.exists()) {
           await containerClient.create();

@@ -52,6 +52,24 @@
         </div>
       </div>
     </div>
+    <div class="d-flex justify-content-center align-items-center legend-area">
+
+      <div  class="d-flex justify-content-between align-items-center dot-area">
+        <div class="legend-dots completed-dot"></div>
+        <div class="status">Completed</div>
+      </div>
+      
+      <div  class="d-flex justify-content-between align-items-center dot-area">
+        <div class="legend-dots inprogress-dot"></div>
+        <div class="status">Inprogress</div>
+      </div>
+
+      <div  class="d-flex justify-content-between align-items-center dot-area">
+        <div class="legend-dots not-dot"></div>
+        <div class="status">Not Started</div>
+      </div>
+      
+    </div>
     <div class="col">
       <div class="self-learning-container">
         <div class="header-label">Self Learning Progression Report</div>
@@ -384,7 +402,7 @@
      </div>
      <div class="progress-date-input">
       <mat-form-field style="width:150px;">
-        <input matInput [matDatepicker]="weekWiseDatepicker" placeholder="Choose a date" [(ngModel)]="weekWiseDate" 
+        <input matInput [matDatepicker]="weekWiseDatepicker" placeholder="Choose a date" [(ngModel)]="weekWiseDate" [min] = "UserDetails.created_on"
         (dateChange)="changeWeekDate()" [max]="today">
         <mat-datepicker-toggle matSuffix [for]="weekWiseDatepicker"></mat-datepicker-toggle>
         <mat-datepicker #weekWiseDatepicker></mat-datepicker>
