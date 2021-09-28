@@ -386,8 +386,9 @@ export class ProgressionReportComponent implements OnInit {
           }
         },
         legend: {
-          display: true,
+          display: false,
           position: 'bottom',
+          align:'center'
 
         },
         maintainAspectRatio: false,
@@ -402,19 +403,25 @@ export class ProgressionReportComponent implements OnInit {
             precision: 2
           },
           datalabels: {
+            // anchor: 'end',
+            // align: 'end',
+            font: {
+              size: 12,
+              weight:'bold'
+            },
             formatter: (value, ctx) => {
-              // let sum = 0;
-              // let dataArr = ctx.chart.data.datasets[0].data;
-              // dataArr.map(data => {
-              //     sum += data;
-              // });
-              // let percentage = (value*100 / sum)+"%";
-              let percentage = value + "%";
+              let percentage = value + "%  ";
               return percentage;
           },
-
           }
-
+        },
+        layout:{
+          padding: {
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 40
+        }
         },
         title: {
           display: true,

@@ -172,6 +172,14 @@ export class LearnerNewMyCourseComponent implements OnInit {
         display: false
       }
     },
+    layout:{
+      padding: {
+        left: 0,
+        right: 0,
+        top: 30,
+        bottom: 0
+    }
+    },
     scales:{
       xAxes:[{
         gridLines:{
@@ -185,7 +193,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
         },
         ticks: {
           min: 0,
-          max: 4,
+          max: 8,
           stepSize:1,
           callback: function(value) {
             return value + '  '
@@ -239,7 +247,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
       callbacks: {
         label: function(tooltipItem, data) {
           var text  = [];
-          text.push('Self Paced Learning :    ' + data['datasets'][0]['data'][tooltipItem['index']]['y'] + '%');
+          text.push('Self Learning :    ' + data['datasets'][0]['data'][tooltipItem['index']]['y'] + '%');
           return  text;
         },
         footer:function(tooltipItem, data) {
@@ -267,6 +275,14 @@ export class LearnerNewMyCourseComponent implements OnInit {
           return percentage;
       },
       }
+    },
+    layout:{
+      padding: {
+        left: 0,
+        right: 0,
+        top: 30,
+        bottom: 0
+    }
     },
     scales:{
       xAxes:[{
