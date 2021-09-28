@@ -280,7 +280,7 @@
                                     </div>
                                     <div class="progress-date-input">
                                      <mat-form-field style="width:150px;">
-                                       <input matInput [matDatepicker]="weekWiseDatepicker" placeholder="Choose a date" [(ngModel)]="weekWiseDate" 
+                                       <input matInput [matDatepicker]="weekWiseDatepicker" placeholder="Choose a date" [(ngModel)]="weekWiseDate"  [min] = "UserDetails.created_on"
                                         [max]="today" (dateChange)="changeWeekDate()">
                                        <mat-datepicker-toggle matSuffix [for]="weekWiseDatepicker"></mat-datepicker-toggle>
                                        <mat-datepicker #weekWiseDatepicker></mat-datepicker>

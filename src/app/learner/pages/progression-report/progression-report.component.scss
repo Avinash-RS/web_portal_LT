@@ -119,6 +119,32 @@
         @media only screen and (min-width: 1140px) {
           width: calc(100% - 400px);
         }
+        .legend-area{
+          .dot-area{
+            margin-right: 10px;
+            .status {
+              font-size: 13px;
+              font-weight: 400;
+              line-height: normal;
+              color: #808080;
+            }
+          }
+          .legend-dots{
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            margin-right: 6px;
+            &.completed-dot{
+              background: #32CE6A;
+            }
+            &.inprogress-dot{
+              background: #FFA800;
+            }
+            &.not-dot{
+              background: #CCCCCC;
+            }
+          }
+        }
         // .backArrow {
         //     font-size: 10px;
         //     color: #231F20;
