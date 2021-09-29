@@ -255,7 +255,8 @@
                </div>
                <div class="notesBookmarks">
                    <!-- <button class="notesBtn"><em class="lxp-Notes"></em> <span>Notes</span></button> -->
-                   <button class="bookmarkBtn"><em class="lxp-bookmark-o"></em> <span>Bookmark</span></button>
+                   <button class="bookmarkBtn" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
+                       <em class="lxp-bookmark-o"></em> <span>Bookmark</span></button>
                </div>
                 <!-- <div class="d-flex justify-content-between align-items-center understoodButton">
                     <button *ngIf="userType!=='collegeconnect'&&userType!=='Corporate'" type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'btn btn-outline-success':'btn btn-outline-light'" (click)="understoodClick('like')">
@@ -278,12 +279,12 @@
                 <div (click)="makeFullScreen()" data-title="Fullscreen" class="fullScr d-flex align-items-center iconSize">
                     <em class="lxp-Fullscreen"></em>
                 </div>
-                <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')"data-title="Understood" class="fullScr d-flex align-items-center iconSize" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
+                <!-- <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')"data-title="Understood" class="fullScr d-flex align-items-center iconSize" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
                     <i  class="lxp-smile"></i>
                 </div>
                 <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="fullScr d-flex align-items-center iconSize" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
                     <i  class="lxp-sad"></i>
-                </div>
+                </div> -->
                 <div *ngIf="scromApiData.resourceUrl"  (click)="downloadResource();" data-title="Download" class="fullScr d-flex align-items-center iconSize">
                     <em class="lxp-download"></em>
                 </div>
@@ -378,8 +379,8 @@
                                                 <div>{{file.type_name}}</div>
                                             </mat-card>
                                         </mat-card-content>
-                                        <ng-container *ngIf="mod.showPreview">
-                                            <div (click)="closeTemplate()">Close</div>
+                                        <div class="onMobileDevices" *ngIf="mod.showPreview">
+                                            <div class="closeTemp" (click)="closeTemplate()"><em class="lxp-Close"></em></div>
                                             <div class="innerWrapper">
                                                 <div class="previewContainerTitle">
                                                     <p>{{resourceName}}</p>
@@ -409,7 +410,7 @@
                                                     </div>
                                                 </ng-container>
                                             </div>
-                                        </ng-container>
+                                        </div>
                                     </ng-container>
                                 </div>
                             </mat-card>
