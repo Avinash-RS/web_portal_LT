@@ -432,6 +432,8 @@
 </ng-template>
 
 <ng-template #clonePreviewContainer>
+    <div *ngIf="closeTemp" id="clonedTemplate">
+    <div (click)="closeTemplate()">Close</div>
     <div class="innerWrapper">
         <div class="previewContainerTitle">
             <p>{{resourceName}}</p>
@@ -461,6 +463,7 @@
             </div>
         </ng-container>
     </div>
+</div>
 </ng-template>
 
 <ng-template #aboutCourseWindow>

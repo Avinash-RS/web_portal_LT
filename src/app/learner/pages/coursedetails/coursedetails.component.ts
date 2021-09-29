@@ -167,6 +167,7 @@ export class CoursedetailsComponent implements OnInit {
   showlab:boolean = false;
   lastLogIndex:number = 0;
   isReadMore = false;
+  closeTemp = false;
   TopicsOptions: OwlOptions = {
     loop: true,
     mouseDrag: false,
@@ -339,7 +340,12 @@ export class CoursedetailsComponent implements OnInit {
     this.isReadMore = !this.isReadMore
   }
   cloneTemplate(){
+    this.closeTemp = true;
     this.mobContainer.createEmbeddedView(this.template);
+  }
+  closeTemplate(){
+    this.closeTemp = false;
+    //  var a = document.getElementById('clonedTemplate')
   }
   ngOnInit(): void {
     this.translate.use(localStorage.getItem('language'));
