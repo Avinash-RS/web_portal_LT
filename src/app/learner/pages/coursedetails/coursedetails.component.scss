@@ -196,14 +196,7 @@
         }
       }
 
-
       button {
-        // background-color: #eeeeee;
-        // border: 1px solid rgba(112, 112, 112, 0.25);
-        // box-shadow: 0px 2px 2px #00000029;
-        // font-size: 12px;
-        // font-weight: 400;
-        // color: #333333 !important;
         &.btn-outline-success:hover {
           color: #0e7d12 !important;
           background-color: #f0f0f0;
@@ -254,23 +247,29 @@
             color: #c20303;
           }
         }
-        // &.btn-outline-light {
-        //     color: #000 !important;
-        //     background-color: #F0F0F0;
-        //     font-weight: bold;
-        // }
-        // &.btn-outline-light:active:focus {
-        //     color: #000 !important;
-        //     background-color: #F0F0F0;
-        //     border-color: #bebebe;
-        //     font-weight: bold;
-        // }
         i {
           font-size: 15px;
           color: #000000;
           display: inline-block;
           vertical-align: text-bottom;
           margin-right: 3px;
+        }
+      }
+      .understoodText {
+        .fillcol {
+          color:#56B35A !important;
+          font-weight: 500;
+        }
+      }
+      .notUnderstoodText {
+        .fillcol {
+          color:#FF5722 !important;
+        }
+      }
+      .understoodText, .notUnderstoodText {
+        .nofill {
+          color:#757575 !important;
+          font-weight: 500;
         }
       }
     }
@@ -2071,18 +2070,6 @@
   100% {
     visibility: visible;
   }
-}
-.fillcol{
-  i{
-    color:blue !important
-  }
-
-}
-.nofill{
-  i{
-    color:#707070 !important
-  }
-
 }
 .practice-btn{
   color: $color-white !important;
