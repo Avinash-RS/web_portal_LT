@@ -2544,6 +2544,7 @@ export const weekWiseCourseChart = gql`
         day
         minutes
         hours
+        hourString
       }
     } 
     } 

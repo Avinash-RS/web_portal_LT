@@ -163,7 +163,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
       displayColors: false,
       callbacks: {
         label: function(tooltipItem, data) {
-          return  data['datasets'][0]['data'][tooltipItem['index']] + ' hrs';
+          return  data['datasets'][0]['data'][tooltipItem['index']]['hourString'];
         }
       }
     },
@@ -860,7 +860,7 @@ getWeekCourseData(){
       this.totalhoursSpend = result.data.weekWiseCourseChart.data.totalhoursSpend;
       result.data.weekWiseCourseChart.data.chartdata.forEach((data:any)=>{
         this.weekWiseChartDatalabel.push(data.day);
-        this.weekWiseChartData.push(data.hours);
+        this.weekWiseChartData.push({y:data.hours,hourString:data.hourString});
       });
     }
     else{
