@@ -314,6 +314,7 @@ export class CoursedetailsComponent implements OnInit {
       this.content.coursedetails.forEach(element => {
         let resourceFile = false;
         element.moduledetails.forEach(value => {
+          element.moduledetails.showPreview = false;
           if (value.resourse && value.resourse.files && value.resourse.files.length) {
             this.fileRef = value.resourse.files.filter(type =>
               type.fileType === 'Reference'
@@ -339,13 +340,25 @@ export class CoursedetailsComponent implements OnInit {
   showText() {
     this.isReadMore = !this.isReadMore
   }
-  cloneTemplate(){
-    this.closeTemp = true;
-    this.mobContainer.createEmbeddedView(this.template);
+  cloneTemplate(topicName,moduleName){
+    this.content.coursedetails.forEach((course)=>{
+      course.moduledetails.forEach((module)=>{
+        if(module.topicname == topicName && course.modulename == moduleName){
+          module.showPreview = true
+        } else {
+          module.showPreview = false
+        }
+      })
+    })
   }
   closeTemplate(){
-    this.closeTemp = false;
-    //  var a = document.getElementById('clonedTemplate')
+    this.content.coursedetails.forEach((course)=>{
+      course.moduledetails.forEach((module)=>{
+        if(module.showPreview){
+          module.showPreview = false
+        } 
+      })
+    })
   }
   ngOnInit(): void {
     this.translate.use(localStorage.getItem('language'));

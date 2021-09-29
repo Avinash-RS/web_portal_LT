@@ -355,7 +355,7 @@
                                             </h5>
                                         </mat-card-subtitle>
                                         <mat-card-content>
-                                            <mat-card class="handPointer d-flex justify-content-start" mat-ripple (click)="urlBinder(file); add_topic_reference(res); cloneTemplate()" *ngFor="let file of mod.resourse?.files">
+                                            <mat-card class="handPointer d-flex justify-content-start" mat-ripple (click)="urlBinder(file); add_topic_reference(res); cloneTemplate(mod.topicname,res?.modulename)" *ngFor="let file of mod.resourse?.files">
                                                 <div class="mr-2">
                                                     <img *ngIf="file.doc_type == 'application/pdf'" class="size" alt=""
                                                         src="assets/learner/fileicon/PDF_Icon.svg">
@@ -378,7 +378,38 @@
                                                 <div>{{file.type_name}}</div>
                                             </mat-card>
                                         </mat-card-content>
-                                        <div #mobContainer></div>
+                                        <ng-container *ngIf="mod.showPreview">
+                                            <div (click)="closeTemplate()">Close</div>
+                                            <div class="innerWrapper">
+                                                <div class="previewContainerTitle">
+                                                    <p>{{resourceName}}</p>
+                                                </div>
+                                                <ng-container *ngIf="isCancelLoad"></ng-container>
+                                                <ng-container *ngIf="fileType == 'image'">
+                                                    <div class="imageContainer d-flex justify-content-center align-items-center">
+                                                        <img [src]="URIData" alt="image">
+                                                    </div>
+                                                </ng-container>
+                                            
+                                                <ng-container *ngIf="(fileType == 'pdf'||fileType == 'link')&& URIData!==null">
+                                                    <div class="pdfContainer">
+                                                        <pdf-viewer [src]="URIData" [fit-to-page]="true" [render-text]="true" style="display: block;"></pdf-viewer>
+                                                    </div>
+                                                </ng-container>
+                                            
+                                                <ng-container *ngIf="fileType == 'video'">
+                                                    <div class="videoContainer">
+                                                        <video  oncontextmenu="return false;" [src]="URIData" title="image" controls controlsList="nodownload"></video>
+                                                    </div>
+                                                </ng-container>
+                                            
+                                                <ng-container *ngIf="fileType == 'audio'" controlsList="nodownload">
+                                                    <div class="audioContainer">
+                                                        <audio oncontextmenu="return false;" class="audio-player" [src]="URIData" title="image" width="100%" height="100%" controls controlsList="nodownload"></audio>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </ng-container>
                                     </ng-container>
                                 </div>
                             </mat-card>
@@ -424,46 +455,10 @@
                             </div>
                         </ng-container>
                     </div>
-                    <!-- <div #mobContainer></div> -->
                 </div>
             </div>
         </div>
     </mat-dialog-content>
-</ng-template>
-
-<ng-template #clonePreviewContainer>
-    <div *ngIf="closeTemp" id="clonedTemplate">
-    <div (click)="closeTemplate()">Close</div>
-    <div class="innerWrapper">
-        <div class="previewContainerTitle">
-            <p>{{resourceName}}</p>
-        </div>
-        <ng-container *ngIf="isCancelLoad"></ng-container>
-        <ng-container *ngIf="fileType == 'image'">
-            <div class="imageContainer d-flex justify-content-center align-items-center">
-                <img [src]="URIData" alt="image">
-            </div>
-        </ng-container>
-    
-        <ng-container *ngIf="(fileType == 'pdf'||fileType == 'link')&& URIData!==null">
-            <div class="pdfContainer">
-                <pdf-viewer [src]="URIData" [fit-to-page]="true" [render-text]="true" style="display: block;"></pdf-viewer>
-            </div>
-        </ng-container>
-    
-        <ng-container *ngIf="fileType == 'video'">
-            <div class="videoContainer">
-                <video  oncontextmenu="return false;" [src]="URIData" title="image" controls controlsList="nodownload"></video>
-            </div>
-        </ng-container>
-    
-        <ng-container *ngIf="fileType == 'audio'" controlsList="nodownload">
-            <div class="audioContainer">
-                <audio oncontextmenu="return false;" class="audio-player" [src]="URIData" title="image" width="100%" height="100%" controls controlsList="nodownload"></audio>
-            </div>
-        </ng-container>
-    </div>
-</div>
 </ng-template>
 
 <ng-template #aboutCourseWindow>
