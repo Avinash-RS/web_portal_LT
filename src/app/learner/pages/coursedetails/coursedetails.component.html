@@ -239,24 +239,35 @@
         <!-- COURSE PLAYER -->
         <div class="videoPlayer" [ngClass]="drawersOpen ? 'halfWidth' : 'fullWidth'">
             <iframe title="player" id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
-            <div class="toccollapsed">
-                <em *ngIf="!drawersOpen" class="lxp-TOC_Collapse" (click)="drawersOpen=drawersOpen?false:true"></em>
+            <div class="toccollapsed" *ngIf="!drawersOpen">
+                <em class="lxp-TOC_Collapse" (click)="drawersOpen=drawersOpen?false:true"></em>
             </div>
-           <div class="d-flex justify-content-between understoodBookmark">
+           <div class="d-flex justify-content-between understoodBookmark" [ngClass]="!drawersOpen ? 'Yes':'No'">
+
                <div class="popupContent d-flex align-items-center">
+                   <div *ngIf="!drawersOpen" class="currentModuleTopic">
+                       <div class="curentVideoWeek">Week <span>{{weekHolderUI+1}}</span></div>
+                       <div class="currentVideoModuleTopic">
+                           <h5>{{scromModuleData[weekHolderUI].childData[moduleHolder].title}}</h5>
+                           <h4 title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}">
+                               {{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}
+                           </h4>
+                       </div>
+                   </div>
                    <span class="abtCourse" (click)="aboutCourse(aboutCourseWindow)"><em class="lxp-Info"></em></span>
                    <span class="resourcesTab" (click)="openResourse(resourseWindow)"><em class="lxp-Image_Folder"></em></span>
-                   <div class="understoodText" *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')"data-title="Understood" class="smile" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
+                   <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')"data-title="Understood" class="smile" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
                         Understood
                     </div>
-                    <div class="notUnderstoodText" *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
+                    <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
                         Not Understood
                     </div>
                </div>
                <div class="notesBookmarks">
                    <!-- <button class="notesBtn"><em class="lxp-Notes"></em> <span>Notes</span></button> -->
-                   <button class="bookmarkBtn" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
-                       <em class="lxp-bookmark-o"></em> <span>Bookmark</span></button>
+                    <button class="bookmarkBtn" *ngIf="userType == 'collegeconnect'" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
+                        <em [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></em> <span>{{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? 'Bookmarked':'Bookmark'}}</span>
+                    </button>
                </div>
                 <!-- <div class="d-flex justify-content-between align-items-center understoodButton">
                     <button *ngIf="userType!=='collegeconnect'&&userType!=='Corporate'" type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'btn btn-outline-success':'btn btn-outline-light'" (click)="understoodClick('like')">
@@ -288,6 +299,11 @@
                 <div *ngIf="scromApiData.resourceUrl"  (click)="downloadResource();" data-title="Download" class="fullScr d-flex align-items-center iconSize">
                     <em class="lxp-download"></em>
                 </div>
+                <div class="askquestion">
+                    <button data-title="Ask Question" *ngIf="userType!=='collegeconnect'" type="button" class="fullScr d-flex align-items-center iconSize" (click)="openAskQuestions(askQuestions)">
+                        <em class="lxp-lifebuoy"></em>
+                    </button>
+                </div>
                 <!-- <div (click)="openResourse(resourseWindow)" data-title="Resources" class="resourceTab d-flex align-items-center iconSize">
                     <i  class="lxp-res-popout f_size_14"></i>
                 </div> -->
@@ -303,7 +319,7 @@
                                 <i class="lxp-sad"></i>
                             </button>
                         </div> -->
-                        <div class="resource">
+                        <!-- <div class="resource">
                             <button data-title="Resources"  type="button" ngClass="btn btn-outline-light" (click)="openResourse(resourseWindow)">
                                 <em class="lxp-res-popout"></em>
                             </button>
@@ -312,16 +328,16 @@
                             <button data-title="Ask Question" *ngIf="userType!=='collegeconnect'" type="button" ngClass="btn btn-outline-light" (click)="openAskQuestions(askQuestions)">
                                 <em class="lxp-lifebuoy"></em>
                             </button>
-                        </div>
-                        <div class="bookmark" *ngIf="userType == 'collegeconnect'">
+                        </div> -->
+                        <!-- <div class="bookmark" *ngIf="userType == 'collegeconnect'">
                             <button data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
                                 <em [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></em>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
-                    <div (click)="toggleDisplayDiv()" class="d-flex align-items-center iconSize allTabs">
+                    <!-- <div (click)="toggleDisplayDiv()" class="d-flex align-items-center iconSize allTabs">
                         <em [ngClass]="isShowDiv ? 'closeIcon' : 'addIcon'" class="lxp-Close f_size_14"></em>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -388,7 +404,7 @@
                                                 <ng-container *ngIf="isCancelLoad"></ng-container>
                                                 <ng-container *ngIf="fileType == 'image'">
                                                     <div class="imageContainer d-flex justify-content-center align-items-center">
-                                                        <img [src]="URIData" alt="image">
+                                                        <img [src]="URIData" alt="image" />
                                                     </div>
                                                 </ng-container>
                                             
@@ -400,13 +416,13 @@
                                             
                                                 <ng-container *ngIf="fileType == 'video'">
                                                     <div class="videoContainer">
-                                                        <video  oncontextmenu="return false;" [src]="URIData" title="image" controls controlsList="nodownload"></video>
+                                                        <video  oncontextmenu="return false;" [src]="URIData" title="" controls controlsList="nodownload"></video>
                                                     </div>
                                                 </ng-container>
                                             
                                                 <ng-container *ngIf="fileType == 'audio'" controlsList="nodownload">
                                                     <div class="audioContainer">
-                                                        <audio oncontextmenu="return false;" class="audio-player" [src]="URIData" title="image" width="100%" height="100%" controls controlsList="nodownload"></audio>
+                                                        <audio oncontextmenu="return false;" class="audio-player" [src]="URIData" title="" width="100%" height="100%" controls controlsList="nodownload"></audio>
                                                     </div>
                                                 </ng-container>
                                             </div>
