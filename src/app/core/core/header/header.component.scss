@@ -131,8 +131,8 @@
   width: 36px;
   height: 35px;
   border-radius: 8px;
-  background-color: rgb(211, 208, 208);
-  color: $lxp-theme-green;
+  background-color: #EDEDED;
+  color: #004684;
   cursor: pointer;
   font-size: smaller;
   left: 9px;
@@ -141,15 +141,20 @@
   align-items: center;
   padding: 5px;
   font-size: 16px;
+  transition: background-color 0.2s ease-in-out;
+  &:hover {
+    background-color: #1b4e9b;
+    color: #FFFFFF;
+  }
 }
 .txtName {
   color: #808080;
   font-size: 14px;
-  margin: 0 10px;
-  width: 150px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  margin: 0 10px 0 30px;
+  // width: 150px;
+  // overflow: hidden;
+  // white-space: nowrap;
+  // text-overflow: ellipsis;
   cursor:default;
   text-align: right;
 }
@@ -279,6 +284,12 @@
     cursor: pointer;
     &:hover {
       background-color: #f2f2f2;
+      .icoBox {
+        color: #373331;
+      }
+      .navTitle {
+        color: #373331;
+      }
     }
     .icoBox {
       padding: 5px;
@@ -300,11 +311,29 @@
 // Navigation expand
 .burgerspace {
   width: 70px;
-  font-size: 18px !important;
   padding-left: 10px;
-  color: #808080;
-  em {
+  span {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 167ms;
+    transition-property: background-color,color;
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
     cursor: pointer;
+    em {
+      font-size: 16px;
+      color: #848484;
+    }
+    &:hover {
+      background-color: #EDEDED;
+      em {
+        color: #373331;
+      }
+    }
   }
   @media only screen and (max-width: 767px) {
     display: none;
@@ -376,7 +405,7 @@
 }
 .normalItem {
   .icoBox {
-    color: #808080;
+    color: #848484;
     @media only screen and (max-width: 767px) {
       color: #000000;
       background-color: #f1f1ff;
@@ -384,7 +413,7 @@
     }
   }
   .navTitle {
-    color: #808080;
+    color: #848484;
   }
 }
 

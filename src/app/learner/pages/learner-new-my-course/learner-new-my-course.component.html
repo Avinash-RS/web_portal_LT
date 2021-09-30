@@ -233,7 +233,7 @@
                         <div class="d-flex justify-content-between align-items-center course-progress-header">
                             <div class="course-progress-header-text">Course Completion Progress</div>
                             <div class="d-flex align-items-center course-progress-header-action" (click)="showProgressChart = false;">
-                                <mat-icon>close</mat-icon>
+                                <em class="lxp-Close"></em>
                                 <span>Close</span>
                             </div>
                         </div>  
@@ -315,10 +315,10 @@
                                 <div *ngIf="courseSkel; else courseSkeleton">
                                 <div class="mycoursesContent" *ngIf="courseDetailsList.length; else noCourseCard">
                                     <ng-container *ngFor="let item of courseDetailsList">
-                                        <div class="{{item.progressClass}}">
-                                            <mat-progress-bar [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
-                                        </div>
                                         <div class="courses d-flex justify-content-start">
+                                            <div class="{{item.progressClass}} progBar">
+                                                <mat-progress-bar [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
+                                            </div>
                                             <figure class="d-flex align-items-start justify-content-center" (click)="gotoDesc(item)">
                                                 <img [src]="item.course_img_url + blobKey" alt="" />
         

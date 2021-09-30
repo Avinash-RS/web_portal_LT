@@ -19,14 +19,20 @@
   </div>
 
   <div class="no-data" *ngIf="isLoadBalanced">
-    <div class="">
+    <div class="noCard">
+      <figure>
+        <img src="/assets/images/nocardKnowledge.svg" alt="Knowledge">
+      </figure>
+      <p>There are no resources added at the moment!</p>
+    </div>
+    <!-- <div class="">
       <div class="box-size w-100">
         <div class="kr-empty">
           <span class="lxp-Knowledge headicon-kr"></span>
           <p class="para">{{'No resource data found' | translate }} </p>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
     <div class="resource-link">

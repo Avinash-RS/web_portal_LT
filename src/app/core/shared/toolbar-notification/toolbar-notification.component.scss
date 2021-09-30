@@ -1,8 +1,5 @@
 @import "variable";
 $prefix: 'toolbar-notification';
-::ng-deep .icon {
-    color: #999999 !important;
-}
 .lxp-Notification {
     font-size: 21px;
 }
@@ -41,19 +38,36 @@ $prefix: 'toolbar-notification';
         margin-right: 10px;
     }
 }
+.toolbar-notification-container {
+    .notificationBtn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        transition-duration: 167ms;
+        transition-property: background-color,color;
+        transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+        em {
+            color: #848484;
+        }
+        &:hover {
+            background-color: #EDEDED;
+            em {
+                color: #373331;
+            }
+        }
+    }
+}
 ::ng-deep.dropdown {
     .card {
         border: none !important;
-    }
-    .header {
-        border-bottom: none !important;
     }
 }
 .dropdown {
     background: $color-white;
     position: absolute;
     top: 42px;
-    right: -200px;
+    right: 0;
     min-width: 400px;
     z-index: 1000;
     transform: translateY(0) scale(0);
@@ -65,18 +79,18 @@ $prefix: 'toolbar-notification';
     overflow: hidden;
     @media screen and (max-width: 568px) {
         min-width: 380px;
-        right: -169px;
+        right: -110px;
         transform: translateY(0);
         visibility: hidden;
         transition: transform .4s cubic-bezier(.25, .8, .25, 1), visibility .4s cubic-bezier(.25, .8, .25, 1);
     }
     @media screen and (max-width: 380px) {
         min-width: 350px;
-        right: -135px;
+        right: -115px;
     }
     @media screen and (max-width: 360px) {
         min-width: 300px;
-        right: -84px;
+        right: -117px;
     }
 
     &.open {
@@ -87,15 +101,22 @@ $prefix: 'toolbar-notification';
     .card {
 
         .header {
-            background: #EEEEEE;
+            background: #EDEDED;
             padding: 10px 15px;
             color: #555;
             display: flex;
             justify-content: flex-start;
             align-items: center;
             align-content: center;
-            border-bottom: 1px solid #e0e0e0;
-
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            .name{
+                // text-decoration: underline;
+                font-size: 18px;
+                font-weight: 500;
+                cursor: pointer;
+                color: $lxp-theme-green;
+                line-height: normal;
+            }            
             .extra {
                 font-size: 12px;
                 font-weight: 400;
@@ -106,7 +127,8 @@ $prefix: 'toolbar-notification';
     }
 
     .content {
-        max-height: 325px;
+        // max-height: 325px;
+        max-height: 380px;
         overflow: auto !important;
 
         .notification {
@@ -115,8 +137,17 @@ $prefix: 'toolbar-notification';
             position: relative;
             color: #666;
             cursor: pointer;
+            background-color: transparent;
+            transition: background-color 0.2s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+            &:hover {
+                background-color: #f0f0f0;
+            }
             .notifiedStatus {
                 width: 12%;
+                text-align: right;
+                em {
+                    color: #848484;
+                }
             }
             .icon {
                 height: 28px;
@@ -143,14 +174,6 @@ $prefix: 'toolbar-notification';
                 font-size: 10px;
                 color: #999999;
                 line-height: normal;
-            }
-
-            .close {
-                font-size: 18px;
-                width: 18px;
-                height: 18px;
-                line-height: 18px;
-                bottom: 0;
             }
 
             &.primary {
@@ -185,16 +208,15 @@ $prefix: 'toolbar-notification';
     }
 
     .footer {
-        // min-height: 42px;
-        border-top: 1px solid #EEE;
+        border: 1px solid #848484;
         font-weight: 400;
         margin-top: 0;
         padding: 10px;
-        background-color: #FFCC00;
+        background-color: #848484;
         display: block;
         .action {
             cursor: pointer;
-            color: #000000;
+            color: #ffffff;
             text-align: center;
             font-size: 13px;
             line-height: normal;
@@ -244,15 +266,6 @@ $prefix: 'toolbar-notification';
     color: #666666;
 }
 
-.name{
-    // text-decoration: underline;
-    font-size: 18px;
-    font-weight: 500;
-    cursor: pointer;
-    color: $lxp-theme-green;
-    line-height: normal;
-}
-
 @media (min-width: 300px) {
 
   .col-md-12,
@@ -269,10 +282,6 @@ $prefix: 'toolbar-notification';
   .col-md-1 {
     padding: 0px !important;
   }
-}
-.closeBtn{
-    position: relative;
-    bottom: 57px;
 }
 .wordWrap {
     white-space: break-spaces !important;

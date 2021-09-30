@@ -60,6 +60,24 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.lxp-Mail_Read:before {
+  content: "\e964";
+}
+.lxp-Mail_UnRead:before {
+  content: "\e965";
+}
+.lxp-Image_Folder:before {
+  content: "\e95f";
+}
+.lxp-Notes:before {
+  content: "\e960";
+}
+.lxp-TOC_Expand:before {
+  content: "\e961";
+}
+.lxp-TOC_Collapse:before {
+  content: "\e962";
+}
 .lxp-Lab_Practice:before {
   content: "\e95e";
 }
@@ -317,6 +335,9 @@
 }
 .lxp-stack:before {
   content: "\e905";
+}
+.lxp-Info:before {
+  content: "\e963";
 }
 .lxp-download:before {
   content: "\e95c";
