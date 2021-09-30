@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, TemplateRef, ChangeDetectorRef, ViewChild, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef, ChangeDetectorRef, ViewChild, HostListener, ElementRef, ViewContainerRef } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
@@ -14,6 +14,7 @@ import * as moment from 'moment';
 import { SocketioService } from '@learner/services/socketio.service';
 import { TranslateService } from '@ngx-translate/core';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 import * as _ from 'lodash';
 import { filter } from 'underscore';
 // import { debugger } from 'fusioncharts';
@@ -37,6 +38,8 @@ import * as CryptoJS from 'crypto-js';
   ]
 })
 export class CoursedetailsComponent implements OnInit {
+  @ViewChild('clonePreviewContainer') template;
+  @ViewChild('mobContainer', {read: ViewContainerRef}) mobContainer;
   blobKey = environment.blobKey;
   course: any = null;
   loading: boolean;
@@ -163,6 +166,34 @@ export class CoursedetailsComponent implements OnInit {
   eboxUrl :any;
   showlab:boolean = false;
   lastLogIndex:number = 0;
+  isReadMore = false;
+  closeTemp = false;
+  TopicsOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    autoplay: false,
+    margin: 20,
+    dots: false,
+    navSpeed: 700,
+    navText: ['<em class="lxp-Rewind_Arrow"></em>', '<em class="lxp-Forward_Arrow"></em>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 1
+      },
+      740: {
+        items: 1
+      },
+      940: {
+        items: 1
+      }
+    },
+    nav: true
+  };
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -283,6 +314,7 @@ export class CoursedetailsComponent implements OnInit {
       this.content.coursedetails.forEach(element => {
         let resourceFile = false;
         element.moduledetails.forEach(value => {
+          element.moduledetails.showPreview = false;
           if (value.resourse && value.resourse.files && value.resourse.files.length) {
             this.fileRef = value.resourse.files.filter(type =>
               type.fileType === 'Reference'
@@ -305,7 +337,29 @@ export class CoursedetailsComponent implements OnInit {
     });
     // this.getAssignmentmoduleData();
   }
-
+  showText() {
+    this.isReadMore = !this.isReadMore
+  }
+  cloneTemplate(topicName,moduleName){
+    this.content.coursedetails.forEach((course)=>{
+      course.moduledetails.forEach((module)=>{
+        if(module.topicname == topicName && course.modulename == moduleName){
+          module.showPreview = true
+        } else {
+          module.showPreview = false
+        }
+      })
+    })
+  }
+  closeTemplate(){
+    this.content.coursedetails.forEach((course)=>{
+      course.moduledetails.forEach((module)=>{
+        if(module.showPreview){
+          module.showPreview = false
+        } 
+      })
+    })
+  }
   ngOnInit(): void {
     this.translate.use(localStorage.getItem('language'));
     // this.add_topic_reference(res);
@@ -646,11 +700,10 @@ export class CoursedetailsComponent implements OnInit {
       });
 
       this.checkLastFirstIndexReached()
-
+      this.filterToc();
     });
   }
   playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, weekIndex, topindex, moduleIdx) {
-    debugger;
     this.weekHolder = weekIndex;
     this.weekHolderUI = weekIndex;
     this.currentTopicTitle = topicName;
@@ -858,6 +911,26 @@ export class CoursedetailsComponent implements OnInit {
   openResourse(templateRef) {
     this.dialog.open(templateRef, {
       panelClass: 'resourseContainer',
+      width: "75%",
+      height: "75%",
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+    const backdrop = document.getElementsByClassName('cdk-overlay-backdrop')[0];
+    const containerarea = document.getElementsByClassName('mat-dialog-container')[0];
+    rclickctrl(backdrop)
+    rclickctrl(containerarea)
+    function rclickctrl(element){
+      element.addEventListener("contextmenu", ( e )=> {
+        e.preventDefault();
+        return false;
+      } );
+    }
+  }
+
+  aboutCourse(templateRef) {
+    this.dialog.open(templateRef, {
+      panelClass: 'aboutCourseWrapper',
       width: "99%",
       height: "90%",
       closeOnNavigation: true,
@@ -874,6 +947,7 @@ export class CoursedetailsComponent implements OnInit {
       } );
     }
   }
+
   resourseAccord(courseResource, index) { 
     if (courseResource) {
       courseResource.forEach((element, i) => {
@@ -969,6 +1043,17 @@ export class CoursedetailsComponent implements OnInit {
     } else {
       this.myQuestionList = [];
       this.allQuestionList = [];
+    }
+  }
+
+  tabClick(tab) {
+    console.log(tab, 'tabs');
+    if(tab.index == 1) {
+      this.filterkey = 'Bookmarked';
+      this.filterToc();
+    }
+    else {
+      this.filterkey = 'All';
     }
   }
   filterToc() {

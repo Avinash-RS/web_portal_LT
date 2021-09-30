@@ -37,8 +37,7 @@ export class KnowledgeResourceHomeComponent implements OnInit {
   getResourceFiles() {
     this.tempDetailsList = [];
     this.apiService.getResourceDetails().subscribe((result: any) => {
-      const resultData = result.data.get_all_resources_details.message &&
-        result.data.get_all_resources_details.message.length > 0 ? result.data.get_all_resources_details.message : [];
+      const resultData = result.data.get_all_resources_details.message && result.data.get_all_resources_details.message.length > 0 ? result.data.get_all_resources_details.message : [];
       let tempDetails = resultData.reduce((r, a) => {
         r[a.domain] = [...r[a.domain] || [], a];
         return r;

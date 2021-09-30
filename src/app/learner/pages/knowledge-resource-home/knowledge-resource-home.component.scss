@@ -28,7 +28,20 @@
     }
   }
 }
-
+// No Card
+.noCard {
+  text-align: center;
+  figure {
+      margin: 15px 0;
+  }
+  p {
+      font-size: 14px;
+      color: #000000;
+      font-weight: 500;
+      line-height: normal;
+      margin-bottom: 30px ​!important;
+  }
+}
 .searchWrapper {
   > div {
     position: relative;
