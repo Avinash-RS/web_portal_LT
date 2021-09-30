@@ -243,7 +243,6 @@
                 <em class="lxp-TOC_Collapse" (click)="drawersOpen=drawersOpen?false:true"></em>
             </div>
            <div class="d-flex justify-content-between understoodBookmark" [ngClass]="!drawersOpen ? 'Yes':'No'">
-
                <div class="popupContent d-flex align-items-center">
                    <div *ngIf="!drawersOpen" class="currentModuleTopic">
                        <div class="curentVideoWeek">Week <span>{{weekHolderUI+1}}</span></div>
@@ -255,8 +254,8 @@
                        </div>
                    </div>
                    <div class="wrapper d-flex align-items-center">
-                       <span class="abtCourse" (click)="aboutCourse(aboutCourseWindow)"><em class="lxp-Info"></em></span>
-                       <span class="resourcesTab" (click)="openResourse(resourseWindow)"><em class="lxp-Image_Folder"></em></span>
+                       <span class="abtCourse" data-title="About the Courses" (click)="aboutCourse(aboutCourseWindow)"><em class="lxp-Info"></em></span>
+                       <span class="resourcesTab" data-title="Resources" (click)="openResourse(resourseWindow)"><em class="lxp-Image_Folder"></em></span>
                        <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')"data-title="Understood" class="smile" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
                             Understood
                         </div>

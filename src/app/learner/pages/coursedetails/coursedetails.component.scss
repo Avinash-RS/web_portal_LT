@@ -170,6 +170,35 @@
           em {
             line-height: 27px;
           }
+          &[data-title] {
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            &:hover {
+              &::before {
+                content: attr(data-title);
+                position: absolute;
+                bottom: 40px;
+                left: 0;
+                line-height: normal;
+                background: #5c6873;
+                padding: 4px 6px;
+                color: #fff;
+                font-size: 11px;
+                white-space: nowrap;
+                z-index: 9;
+              }
+              &::after {
+                content: "";
+                position: absolute;
+                bottom: 28px;
+                left: 29px;
+                border-width: 6px;
+                border-style: solid;
+                border-color: #5c6873 transparent transparent transparent;
+                transform: translateX(-50%);
+              }
+            }
+          }
         }
         .abtCourse {
           em {
@@ -2099,7 +2128,7 @@
   }
   .mat-tab-label {
     opacity: 1;
-    padding: 0 15px;
+    padding: 0 25px;
     min-width: auto;
     color: #6B6B6B;
     &.mat-tab-label-active {
@@ -2107,7 +2136,7 @@
     }
   }
   .mat-tab-labels {
-    justify-content: space-between;
+    justify-content: flex-start;
   }
   .mat-tab-group.mat-primary .mat-ink-bar {
     height: 4px;
