@@ -191,7 +191,7 @@
           }
           .curentVideoWeek {
             background-color: #DDDDDD;
-            border-radius: 2px;
+            border-radius: 3px;
             padding: 5px;
             color: #6B6B6B;
             font-size: 11px;
@@ -202,6 +202,7 @@
             justify-content: center;
             align-items: center;
             position: relative;
+            overflow: hidden;
             &::before {
               content: '';
               position: absolute;
