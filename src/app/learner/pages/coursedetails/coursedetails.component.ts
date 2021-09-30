@@ -666,7 +666,10 @@ export class CoursedetailsComponent implements OnInit {
       this.topicInfo = this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].children[this.nextPrevHolder]
       this.topicPageStatus = this.topicInfo.status
       this.moduleExpand(this.weekHolder, this.moduleHolder);
-      setTimeout(() => { this.inputEl ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" }) : '' }, 4000);
+      setTimeout(() => { 
+        if(this.weekHolder>0 )
+        this.inputEl ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" }) : '' 
+      }, 4000);
       const moduleTitle = encodeURIComponent(this.scromApiData.childData[this.weekHolder].childData[this.currentPage].title);
       const topicTitle = encodeURIComponent(this.scromApiData.childData[this.weekHolder].childData[this.currentPage].children[this.topiccurrentPage].title);
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
