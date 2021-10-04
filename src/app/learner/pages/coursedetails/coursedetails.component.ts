@@ -564,8 +564,8 @@ export class CoursedetailsComponent implements OnInit {
           this.currentTopicTitle = this.gettopicLink.title;
           this.currentModuleTitle = this.moduleInfo.title;
           this.topicPageStatus = this.gettopicLink.status;
+          let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
           this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
-          let id = CryptoJS.AES.encrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
             (environment.scormUrl + '/scormPlayer.html?contentID=' +
               this.courseid + '&user_id=' + id + '&user_obj_id=' +
               this.getuserid._id + '&path=' + this.gettopicLink.link +
@@ -620,8 +620,8 @@ export class CoursedetailsComponent implements OnInit {
         this.currentTopicTitle = this.gettopicLink.title;
         this.currentModuleTitle = this.moduleInfo.title;
         this.topicPageStatus = this.gettopicLink.status
-        this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl;
-        let id = CryptoJS.AES.encrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
+        let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
+        this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
           (environment.scormUrl + '/scormPlayer.html?contentID=' +
             this.courseid + '&user_id=' + id + '&user_obj_id=' +
             this.getuserid._id + '&path=' + this.gettopicLink.link +
@@ -684,8 +684,8 @@ export class CoursedetailsComponent implements OnInit {
       //   this.scromModuleData[0].childData[0].status = 'process'
       //   this.scromModuleData[0].childData[0].children[0].status = 'process'
       // }
-      this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl;
-      let id = CryptoJS.AES.encrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
+      let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
+      this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
           this.courseid + '&user_id=' + id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.scromApiData.url +
@@ -727,8 +727,8 @@ export class CoursedetailsComponent implements OnInit {
     this.isprevEnable = true;
     this.isNextEnable = true;
     this.topicInfo = this.scromApiData.childData[weekIndex].childData[moduleIdx].children[topindex]
-    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl;
-    let id = CryptoJS.AES.encrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
+    let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
       (environment.scormUrl + '/scormPlayer.html?contentID=' +
         this.courseid + '&user_id=' + id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
         + '&module_status=' + this.moduleSatusCheck
