@@ -427,9 +427,9 @@
                                 <div *ngIf="courseSkel;else courseSkeleton">
                                 <div class="mycoursesContent" *ngIf="courseDetailsList.length;else noCourseCard">
                                     <ng-container *ngFor="let item of courseDetailsList">
-                                        <div class="{{item.progressClass}}">
+                                        <div class="{{item.progressClass}} progBar">
                                             <mat-progress-bar [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
-                                          </div>
+                                        </div>
                                         <div class="courses d-flex justify-content-start">
                                             <figure class="d-flex align-items-center justify-content-center" (click)="gotoDesc(item)">
                                                 <img [src]="item.course_img_url + blobKey" alt="" />
@@ -537,9 +537,9 @@
                                 <div *ngIf="courseSkel;else courseSkeleton">
                                 <div class="mycoursesContent" *ngIf="courseDetailsList.length;else noCourseCard">
                                     <ng-container *ngFor="let item of courseDetailsList">
-                                        <div class="{{item.progressClass}}">
+                                        <div class="{{item.progressClass}} progBar">
                                             <mat-progress-bar [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
-                                          </div>
+                                        </div>
                                         <div class="courses d-flex justify-content-start">
                                             <figure class="d-flex align-items-center justify-content-center" (click)="gotoDesc(item)">
                                                 <img [src]="item.course_img_url + blobKey" alt="" />
