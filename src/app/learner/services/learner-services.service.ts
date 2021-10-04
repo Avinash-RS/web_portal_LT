@@ -53,7 +53,7 @@ export class LearnerServicesService {
     this.httpOptions = {
       headers: new HttpHeaders({ 
         Authorization: 'Bearer '+token,
-        requestId: CryptoJS.AES.encrypt(userDetails['user_id'], this.secretKey.trim()).toString()
+        requestId: userDetails['user_id']
        })
     };
   }
@@ -119,16 +119,6 @@ getEmail(input)
   insertRecord(data) { 
     this.getToken();
     return this.http.post(environment.apiUrl + 'learnerUploadVideo', data,this.httpOptions); }
-  learnerRecordVideo(data) { 
-    this.getToken();
-    return this.http.post(environment.apiUrl + 'wca/learnerRecordVideo', data,this.httpOptions); }
-
-
-  uploadVideo(image) {
-    this.getToken();
-    return this.http.post(environment.wcaapiurl + 'api/upload/uploadimagefile', image,this.httpOptions);
-  }
-
 
 clearMessage() {
   this.ProgressPercentage.next();

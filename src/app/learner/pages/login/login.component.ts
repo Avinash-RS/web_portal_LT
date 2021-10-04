@@ -144,6 +144,8 @@ export class LoginComponent implements OnInit {
             }
             localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
             localStorage.setItem('Fullname', loginresult.data.login.message.full_name);
+            var id = CryptoJS.AES.encrypt(loginresult.data.login.message.user_id, this.secretKey.trim()).toString(); 
+            loginresult.data.login.message.user_id = id
               localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
               localStorage.setItem('remember_me', 'false');
               localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
