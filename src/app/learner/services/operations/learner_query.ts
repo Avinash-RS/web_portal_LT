@@ -247,7 +247,7 @@ export const getUserdetail = gql`
 
 
 export const getUserdetailUsername = gql`
-  query get_user_detail_username($username: String) {
+  mutation get_user_detail_username($username: String) {
     get_user_detail_username(username: $username) {
       message
       success

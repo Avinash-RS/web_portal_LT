@@ -53,7 +53,7 @@ export class GraphqlModule {
       operation.setContext({
         headers: new HttpHeaders({ 
           Authorization: 'Bearer '+token,
-          requestId: CryptoJS.AES.encrypt(userDetails['user_id'], this.secretKey.trim()).toString()
+          requestId: userDetails['user_id']
          }),
       });
       

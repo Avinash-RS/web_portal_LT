@@ -571,44 +571,6 @@ videoPreview(templateRef: TemplateRef<any>, path) {
   });
 }
 
-// upload recorded video
-learnerRecordVideo() {
-  const performVideo = {
-    course_id : this.performDetailsSend.course_id,
-    module_id : this.performDetailsSend.module_id,
-    topic_id : this.performDetailsSend.topic_id,
-    user_id: this.userDetail.user_id,
-    submit_status: 'ontime',
-    total_mark: this.itrationSend.total_mark,
-    submitType: 'perform',
-    submitAction: 'upload',
-    recordvideo : true,
-    iterationid: this.itrationSend.iterationid,
-    object_id: this.performDetailsSend.perform_id,
-    videodetails : {
-        doc_type : 'video/mp4' || 'video/quicktime',
-        videourl : this.videoDetails.videourl,
-        name : this.videoDetails.fileName,
-        size : this.videoDetails.size,
-        id : this.performDetailsSend.perform_id,
-        uploaded_date : new Date(),
-        is_active : true
-    }
-  };
-  this.Lservice.learnerRecordVideo(performVideo).subscribe((data: any) => {
-    if (data.success === true) {
-      this.toastr.success(data.message);
-      this.videoStart = false;
-      this.performDetailsSend = {};
-      this.videoDetails = {};
-      this.itrationSend = {};
-      this.closeDialog();
-      this.getperformActivityData();
-    } else {
-      this.toastr.warning(data.message);
-    }
-  });
-}
 
 mobileResponsive() {
   this.Lservice.closeMobileResp$.next(false);

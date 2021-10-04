@@ -194,6 +194,8 @@ export class CoursedetailsComponent implements OnInit {
     },
     nav: true
   };
+  secretKey = "(!@#Passcode!@#)";
+
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -563,8 +565,9 @@ export class CoursedetailsComponent implements OnInit {
           this.currentModuleTitle = this.moduleInfo.title;
           this.topicPageStatus = this.gettopicLink.status;
           this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+          let id = CryptoJS.AES.encrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
             (environment.scormUrl + '/scormPlayer.html?contentID=' +
-              this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
+              this.courseid + '&user_id=' + id + '&user_obj_id=' +
               this.getuserid._id + '&path=' + this.gettopicLink.link +
               '&module_status=' + this.moduleSatusCheck
               + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Next&week=' + (this.weekHolder + 1) + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
@@ -617,9 +620,10 @@ export class CoursedetailsComponent implements OnInit {
         this.currentTopicTitle = this.gettopicLink.title;
         this.currentModuleTitle = this.moduleInfo.title;
         this.topicPageStatus = this.gettopicLink.status
-        this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+        this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl;
+        let id = CryptoJS.AES.encrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
           (environment.scormUrl + '/scormPlayer.html?contentID=' +
-            this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
+            this.courseid + '&user_id=' + id + '&user_obj_id=' +
             this.getuserid._id + '&path=' + this.gettopicLink.link +
             '&module_status=' + this.moduleSatusCheck
             + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Prev&week=' +(this.weekHolder+1)+ '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
@@ -680,9 +684,10 @@ export class CoursedetailsComponent implements OnInit {
       //   this.scromModuleData[0].childData[0].status = 'process'
       //   this.scromModuleData[0].childData[0].children[0].status = 'process'
       // }
-      this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+      this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl;
+      let id = CryptoJS.AES.encrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
-          this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' +
+          this.courseid + '&user_id=' + id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.scromApiData.url +
           '&module_status=' + 'process&week='+ (this.weekHolder + 1)
           + '&module=' + moduleTitle + '&topic=' + topicTitle + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
@@ -722,9 +727,10 @@ export class CoursedetailsComponent implements OnInit {
     this.isprevEnable = true;
     this.isNextEnable = true;
     this.topicInfo = this.scromApiData.childData[weekIndex].childData[moduleIdx].children[topindex]
-    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl;
+    let id = CryptoJS.AES.encrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
       (environment.scormUrl + '/scormPlayer.html?contentID=' +
-        this.courseid + '&user_id=' + this.getuserid.user_id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
+        this.courseid + '&user_id=' + id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
         + '&module_status=' + this.moduleSatusCheck
         + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (this.weekHolder + 1) + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
     this.checkLastFirstIndexReached()
