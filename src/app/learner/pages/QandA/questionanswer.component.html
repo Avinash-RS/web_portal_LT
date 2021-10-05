@@ -50,7 +50,7 @@
                         <div>
                             <span class="filterby">Filter by :</span>
                             <mat-form-field appearance="outline" style="width: 130px;">
-                                <mat-select [(ngModel)]='selectedtype' (selectionChange)=getQAtype()>
+                                <mat-select [(ngModel)]='selectedtype' (selectionChange)="getQAtype()">
                                     <mat-option *ngFor="let item of filterBy" [value]="item.value">
                                         {{item.viewValue}}
                                     </mat-option>
@@ -62,7 +62,7 @@
                                 <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller($event)' placeholder="Search...">
                                 <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
                                 <mat-icon matSuffix *ngIf="searchKey"(click)="resetSearch()">close</mat-icon>
-                            </mat-form-field>
+                             </mat-form-field>
                         </div>
                     </div>
                     <span *ngIf="showSkeleton;else skeleton">
@@ -93,14 +93,26 @@
                 </mat-tab>
                 <mat-tab>
                     <ng-template mat-tab-label>
-                        All questions answered in this course
+                        All questions in this course
                     </ng-template>
-                    <div class="searchFilter">
+                    <div class="allsearchFilter">
+                    <div>
+                        <span class="filterby">Filter by :</span>
+                        <mat-form-field appearance="outline" style="width: 130px;">
+                            <mat-select [(ngModel)]='selectedtype' (selectionChange)="getQAtype()">
+                                <mat-option *ngFor="let item of filterBy" [value]="item.value">
+                                    {{item.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>   
+                    <div>
                         <mat-form-field appearance="outline">
                             <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller($event)' placeholder="Search...">
                             <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
                             <mat-icon matSuffix *ngIf="searchKey"(click)="searchKey='';this.getQAData();">close</mat-icon>
                         </mat-form-field>
+                    </div>
                     </div>
                     <span *ngIf="showSkeleton;else skeleton">
                         <span *ngIf="qaDataList.length;else noquescard">
@@ -111,11 +123,18 @@
                                     <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                                 </div>
                                 <h4 [innerHTML]="item.question"></h4>
-                                <div class="answeredDate">
-                                    <button  class="answer">Answered</button>
-                                    <span>{{item.publishedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
-                                </div>
-                                <p [innerHTML]="item.answer"></p>
+                                <div *ngIf="item?.answer;else unans">
+                                    <div class="answeredDate">
+                                        <button class="answer" style="cursor:default;">Answered</button>
+                                        <span>{{item.publishedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
+                                    </div>
+                                        <p [innerHTML]="item?.answer"></p>
+                                    </div>
+                                    <ng-template #unans>
+                                        <div class="answeredDate">
+                                            <button class="noAnswer" style="cursor:default;">Unanswered</button>
+                                        </div>
+                                    </ng-template>
                             </div>
                         </span>
                     </span>
@@ -128,14 +147,14 @@
             <button (click)="openQuestionDialog(questionDialog)"><em class="lxp-add"></em> Ask A Question</button>
         </div>
         <div class="questionResults d-flex justify-content-between">
-            <div class="questions d-flex justify-content-start align-items-center">
+            <div class="questions d-flex justify-content-start align-items-center" (click)="navigateAllQA('un_answered')">
                 <span><em class="lxp-question"></em></span>
                 <div>
                     <p>Total questions asked in this course</p>
                     <h2 id="qCount"></h2>
                 </div>
             </div>
-            <div class="answeres d-flex justify-content-start align-items-center">
+            <div class="answeres d-flex justify-content-start align-items-center" (click)="navigateAllQA('answered')">
                 <span><em class="lxp-answers"></em></span>
                 <div>
                     <p>Total questions answered</p>
