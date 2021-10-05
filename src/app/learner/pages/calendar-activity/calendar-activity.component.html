@@ -6,9 +6,9 @@
   </div>
   <div class="viewInfotxt d-flex justify-content-between">
     <div class="leftPan">
-      <span  (click)="setStatus('')" [ngClass]="status == '' ? 'active' : ''">All ({{activityData?.allActivityCount}})</span>
-      <span (click)="setStatus('pending')" [ngClass]="status == 'pending' ? 'active' : ''">Pending ({{activityData?.pendingActivityCount}})</span>
-      <span (click)="setStatus('completed')" [ngClass]="status == 'completed' ? 'active' : ''">Completed ({{activityData?.completedActivityCount}})</span>
+      <span mat-ripple (click)="setStatus('')" [ngClass]="status == '' ? 'active' : ''">All ({{activityData?.allActivityCount}})</span>
+      <span mat-ripple (click)="setStatus('pending')" [ngClass]="status == 'pending' ? 'active' : ''">Pending ({{activityData?.pendingActivityCount}})</span>
+      <span mat-ripple (click)="setStatus('completed')" [ngClass]="status == 'completed' ? 'active' : ''">Completed ({{activityData?.completedActivityCount}})</span>
     </div>
     <div class="rightPan">
       <span>Filter by: </span>

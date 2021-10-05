@@ -17,6 +17,7 @@ $prefix: 'toolbar-notification';
     color: $color-white;
     border-color: #C02222;
     font-size: 11px;
+    z-index: 9;
     span {
         line-height: normal;
         display: inline-block;
@@ -44,14 +45,34 @@ $prefix: 'toolbar-notification';
         justify-content: center;
         align-items: center;
         background-color: transparent;
-        transition-duration: 167ms;
-        transition-property: background-color,color;
-        transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+        position: relative;
+        &::before, 
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          transition: all 0.25s ease;
+          border-radius: 50%;
+        }
+        &::after {
+          box-shadow: inset 0 0 0 1px #ffffff;
+        }
+        &::before {
+          background: #EDEDED;
+          box-shadow: inset 0 0 0 40px #ffffff;
+        }
         em {
             color: #848484;
+            position: relative;
+            z-index: 9;
         }
         &:hover {
-            background-color: #EDEDED;
+            &::before {
+                box-shadow: inset 0 0 0 1px #ffffff;
+            }
             em {
                 color: #373331;
             }

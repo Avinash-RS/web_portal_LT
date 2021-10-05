@@ -170,7 +170,7 @@ export class InstructorLedComponent implements OnInit {
     this.dialog.open(templateRef, {
       width: '90%',
       height: '95%',
-      panelClass: 'matDialogMat',
+      panelClass: 'videoPopupContainer',
       closeOnNavigation: true,
       disableClose: true,
     });

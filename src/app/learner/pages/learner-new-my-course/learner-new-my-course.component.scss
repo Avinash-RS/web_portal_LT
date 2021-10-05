@@ -313,14 +313,17 @@
       top: 15px;
       z-index: 2;
       h4 {
-        font-weight: 400;
-        color: #BE2020;
         margin: 0;
         display: flex;
         justify-content: center;
+        font-weight: 400;
+        color: #BE2020;
         position: relative;
         transition: color 0.2s ease-in-out;
-        span{
+        &:hover {
+          color: #004684;
+        }
+        span {
           font-size: 0px;
           @media only screen and (min-width: 576px) {
             font-size: 13px;
@@ -338,9 +341,6 @@
         em {
           margin-right: 6px;
           font-size: 18px;
-        }
-        &:hover {
-          color: #004684;
         }
       }
     }
@@ -373,13 +373,13 @@
           font-weight:500;
         }
         .course-progress-header-action {
-          position: relative;
           cursor: pointer;
-          width:10%;
+          width: 10%;
           justify-content: flex-end;
           font-size: 13px;
           color: #BE2020;
           margin-right:7px;
+          position: relative;
           transition: color 0.2s ease-in-out;
           &:hover {
             color: #004684;
@@ -551,12 +551,7 @@
       margin: 0 0px 15px 0px;
       border-radius: 4px;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-      transition: transform 0.25s ease-in-out;
-      transform: translateY(0);
       &:hover {
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        transform: translateY(-5px);
-        // background: #f5fdff;
         figure {
           img {
             transform: scale(1.1);
@@ -618,7 +613,7 @@
       }
       button {
         position: absolute;
-        background-color: #c02222;
+        background: #c02222;
         padding: 5px 20px;
         text-align: center;
         border: 0;
@@ -627,8 +622,30 @@
         font-size: 13px;
         border-radius: 20px;
         top: 50%;
-        transform: translateY(-50%);
+        overflow: hidden;
+        transform: translateY(-50%) perspective(1px) translateZ(0);
+        transition-property: color;
+        transition-duration: 0.2s;
         z-index: 99;
+        &::before {
+          content: "";
+          position: absolute;
+          z-index: -1;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: #004684;
+          transform: scale(0);
+          transition-property: transform;
+          transition-duration: 0.2s;
+          transition-timing-function: ease-out;
+        }
+        &:hover {
+          &::before {
+            transform: scale(1);
+          }
+        }
         em {
           font-size: 12px;
           margin-right: 5px;
@@ -1173,7 +1190,17 @@
 ::ng-deep.inprogressModule {
   .drag-scroll-content {
     display: flex !important;
-    // justify-content: space-between;
+    &:hover {
+      .progressContainer, .topicsContainer {
+        opacity: 0.3;
+      }
+    }
+    .progressContainer, .topicsContainer {
+      transition: opacity .3s ease-in-out;
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
   .drag-scroll-wrapper {
     &.drag-scroll-container {
@@ -1211,27 +1238,36 @@
     font-size: 14px;
     opacity: 1;
     justify-content: flex-start;
-    padding: 0 25px 0 0;
+    padding: 0 10px;
     min-width: auto;
     @media only screen and (min-width: 576px) {
       font-size: 16px;
-      padding: 0 20px 0 0;
+      // padding: 0 20px 0 0;
     }
-    @media only screen and (min-width: 720px) {
-      font-size: 16px;
-      padding: 0 20px 0 0;
+    // @media only screen and (min-width: 720px) {
+    //   font-size: 16px;
+    //   padding: 0 20px 0 0;
+    // }
+    // @media only screen and (min-width: 992px) {
+    //   font-size: 16px;
+    //   padding: 0 20px 0 0;
+    // }
+    // @media only screen and (min-width: 1140px) {
+    //   font-size: 16px;
+    //   padding: 0 20px 0 0;
+    // }
+    .mat-tab-label-content {
+      transition: all 0.3s ease-in-out;
     }
-    @media only screen and (min-width: 992px) {
-      font-size: 16px;
-      padding: 0 20px 0 0;
-    }
-    @media only screen and (min-width: 1140px) {
-      font-size: 16px;
-      padding: 0 20px 0 0;
+    &:hover {
+      .mat-tab-label-content {
+        color: #000000;
+        font-weight: 400;
+      }
     }
   }
   .mat-tab-label[aria-selected="false"] {
-    font-weight: 300;
+    font-weight: 400;
     color: #999999;
   }
   .mat-tab-label[aria-selected="true"] {
@@ -1332,7 +1368,7 @@
     font-size: 20px;
     padding: 15px 15px 10px 15px;
     span {
-      color: #999999;
+      color: #848484;
       display: inline-block;
       @media only screen and (max-width: 767px) {
         transform: rotate(180deg);
@@ -1370,13 +1406,27 @@
     .activeTabItem {
       border-bottom: solid #c02222 2px;
       border-radius: 0;
-      padding: 0 15px;
+      padding: 0 5px;
+      margin: 0 15px;
     }
   }
 
   // Todo List
   .listItem {
-    padding: 20px 10px 10px 16px;
+    padding: 10px 10px 10px 16px;
+    background: transparent;
+    transition: background 0.3s ease-in-out;
+    &:hover {
+      background: #f0f0f0;
+      .detailData {
+        .badgedata {
+          p {
+            background: rgba(0, 0, 0, 0.1);
+            color: #373331;
+          }
+        }
+      }
+    }
     .dateFlag {
       // height: 60px;
       // width: 50px;
@@ -1392,7 +1442,7 @@
         height: 50%;
         // width: 52%;
         bottom: 0;
-        z-index: -2;
+        z-index: 2;
       }
       &::before {
         width: 56%;
@@ -1488,15 +1538,16 @@
       width: 81%;
       .badgedata {
         p {
-          background-color: #EDEDED;
+          background: #EDEDED;
+          color: #333333;
           border-radius: 3px;
           text-align: center;
           padding: 2px 8px;
           font-size: 11px;
           font-weight: 400;
           line-height: normal;
-          color: #333333;
           margin: 0 !important;
+          transition: background, color 0.3s ease-in-out;
         }
         span {
           font-size: 10px;
@@ -1610,13 +1661,21 @@
       font-weight: 400;
       line-height: normal;
       color: #c02222;
+      transform: perspective(1px) translateZ(0);
       &:hover {
         text-decoration: none;
+        em {
+          animation-name: hvr-icon-buzz;
+          animation-duration: 0.6s;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+        }
       }
-    }
-    em {
-      display: inline-flex;
-      margin-left: 5px;
+      em {
+        display: inline-flex;
+        margin-left: 5px;
+        transform: translateZ(0);
+      }
     }
   }
   .status {
@@ -2162,9 +2221,14 @@
   }
 
 }
-@keyframes hvr-icon-push {
+@keyframes hvr-icon-buzz {
+  0% {
+    transform: translateX(0);
+  }
   50% {
-    -webkit-transform: scale(0.5);
-    transform: scale(0.5);
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
