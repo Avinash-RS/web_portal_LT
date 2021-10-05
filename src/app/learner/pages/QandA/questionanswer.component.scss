@@ -193,6 +193,9 @@
     @media only screen and (min-width: 720px) {
       margin-top: 40px;
     }
+    > div:hover{
+      background-color:#ededed;
+    }
     > div {
       background-color: #f9f9f9;
       padding: 10px;
@@ -240,6 +243,7 @@
         margin: 0;
       }
       &.questions {
+        cursor: pointer;
         &::before {
           background-color: #ffa04e;
         }
@@ -248,6 +252,7 @@
         }
       }
       &.answeres {
+        cursor: pointer;
         &::before {
           background-color: #32ce6a;
         }
@@ -395,6 +400,9 @@
 ::ng-deep.allsearchFilter{
   .mat-form-field-wrapper {
     padding-bottom: 0;
+  }
+  .mat-form-field-appearance-outline .mat-select-arrow-wrapper{
+    transform: translateY(0%);
   }
   .mat-form-field {
       box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.1);

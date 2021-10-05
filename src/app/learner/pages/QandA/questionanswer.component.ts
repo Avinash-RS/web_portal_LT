@@ -73,7 +73,9 @@ export class QuestionanswerComponent implements OnInit {
     { value: "answered", viewValue: "Answered" },
     { value: "un_answered", viewValue: "Unanswered" },
   ];
-  selectedtype = 'un_answered&answered'
+  selectedtype = 'un_answered&answered';
+  tabType ='user';
+  fromSideBtn:boolean = false;
   constructor(private dialog: MatDialog, private learnerService: LearnerServicesService,private toastr: ToastrService,) {
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails'))
     this.courseId = localStorage.getItem("Courseid")
@@ -96,23 +98,23 @@ export class QuestionanswerComponent implements OnInit {
   contentChange() {
     this.pageNumber = 0;
     switch (this.selectedIndex) {
-      // case 0:
-      //   this.requestType = 'answered'
-      //   this.getQACount()
-      //   this.getQAData();
-      //   break;
       case 0:
+        this.tabType = 'user';
         this.requestType = 'un_answered&answered';
         this.selectedtype = 'un_answered&answered';
         this.getQACount()
         this.getQAData();
         break;
       case 1:
-        this.requestType = 'all'
+        this.tabType = 'course';
+        if(!this.fromSideBtn){
+        this.requestType = 'un_answered&answered'
+        this.selectedtype = 'un_answered&answered';
         this.getQACount()
         this.getQAData();
+        }
+        this.fromSideBtn = false;
         break;
-
       default:
         break;
     }
@@ -151,7 +153,7 @@ export class QuestionanswerComponent implements OnInit {
   onScrollDown() {
 
     this.pageNumber = this.pageNumber + 1;
-    this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, this.requestType, this.pageNumber, this.searchKey).subscribe((result: any) => {
+    this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, this.requestType, this.pageNumber, this.searchKey,this.tabType).subscribe((result: any) => {
       const resultdata = result.data.getengineersForumData.data;
       this.totalCount = result.data.getengineersForumData.totalcount;
       if (resultdata.length) {
@@ -163,12 +165,12 @@ export class QuestionanswerComponent implements OnInit {
   }
   getQAData() {
     this.showSkeleton = false
-    this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, this.requestType, this.pageNumber, this.searchKey).subscribe((rdata: any) => {
+    this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, this.requestType, this.pageNumber, this.searchKey,this.tabType).subscribe((rdata: any) => {
       this.qaDataList = rdata.data.getengineersForumData.data
       this.totalCount = rdata.data.getengineersForumData.totalcount;
       if(this.searchKey===''&&this.selectedIndex==0 && this.requestType=='answered'&& (this.totalCount==0||this.totalCount==null)){
         this.showSkeleton = false
-        this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, 'un_answered', this.pageNumber,'').subscribe((check: any) => {
+        this.learnerService.getengineersForumData(this.UserDetails.user_id, this.courseId, 'un_answered', this.pageNumber,'',this.tabType).subscribe((check: any) => {
           this.unAnsCheck = check.data.getengineersForumData.totalcount
           this.showSkeleton = true
         });
@@ -272,5 +274,12 @@ export class QuestionanswerComponent implements OnInit {
     this.pageNumber = 0;
     this.getQAData();
   }
-
+  navigateAllQA(type){
+    this.fromSideBtn = true;
+    this.selectedtype = type;
+    this.requestType = type;
+    this.selectedIndex = 1;
+    this.getQACount()
+    this.getQAData();
+  }
 }
