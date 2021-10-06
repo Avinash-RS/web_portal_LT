@@ -310,7 +310,7 @@
       position: absolute;
       right: 0;
       margin-right: 10px;
-      top: 15px;
+      top: 20px;
       z-index: 2;
       h4 {
         margin: 0;
@@ -1859,14 +1859,17 @@
     top: 20px;
     left: auto;
     right: 0;
-    width: 56%;
+    width: 41%;
     text-align: right;
   }
+  @media only screen and (min-width: 992px) {
+    width: 30%;
+  }
   @media only screen and (min-width: 1140px) {
-    width: 37%;
+    width: 25%;
   }
   @media only screen and (min-width: 1540px) {
-    width: 25%;
+    width: 15.5%;
   }
   &.noHandIcon {
     display: none;
@@ -1879,7 +1882,7 @@
     // width: 28%;
   }
   .vocationalJobRole {
-    width: 70%;
+    width: 100%;
     text-align: right;
   }
 }
@@ -1890,18 +1893,28 @@
   }
   .mat-form-field-appearance-fill .mat-form-field-flex {
     background-color: #ffffff;
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
+    // box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
+    // }
   }
 }
 ::ng-deep.jobRole {
-  .mat-form-field-underline {
-    bottom: 0;
-  }
   .mat-form-field-wrapper {
     padding-bottom: 0;
   }
   .mat-form-field-infix {
     border-top: 0 solid transparent;
+  }
+  .mat-form-field-label-wrapper {
+    top: -0.99375em;
+  }
+  .mat-select-value {
+    color: #000000;
+    font-weight: 500;
+  }
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    padding: 1.5em .75em 0 .75em;
+    border-radius: 6px 6px 6px 6px;
   }
   .mat-form-field-appearance-fill .mat-select-arrow-wrapper {
     transform: translateY(0%);
@@ -1912,8 +1925,12 @@
     background-color: transparent;
   }
   .mat-form-field-underline {
-    border: 1px solid #cdcdcd;
+    // border: 1px solid #cdcdcd;
     height: 100%;
+    bottom: 0;
+  }
+  .mat-form-field.mat-focused .mat-form-field-label, .mat-form-field-label {
+    color: #666666;
   }
   .mat-form-field.mat-focused.mat-primary .mat-select-arrow, 
   .mat-select-arrow {

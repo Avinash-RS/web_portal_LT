@@ -644,10 +644,12 @@
 
                     <ng-container *ngIf="showJobRole">
                         <div class="desktopWrapper jobRole" [ngClass]="vocationalselectjobRole.length > 0 ?'handIcon':'noHandIcon'">
-                            <label for="jobRoles" *ngIf="userDetailes.org_type == 'vocational'">My Job Role:</label>
-                            <label for="jobRoles" *ngIf="userDetailes.org_type != 'vocational'">Courses For:</label>
+                            <!-- <label for="jobRoles" *ngIf="userDetailes.org_type == 'vocational'">My Job Role:</label>
+                            <label for="jobRoles" *ngIf="userDetailes.org_type != 'vocational'">Courses For:</label> -->
                             <div class="vocationalJobRole" style="display: inline-block;">
                               <mat-form-field appearance="fill">
+                                <mat-label *ngIf="userDetailes.org_type == 'vocational'">My Job Role:</mat-label>
+                                <mat-label *ngIf="userDetailes.org_type != 'vocational'">Courses For:</mat-label>
                                 <mat-select (selectionChange)="onSelectionChange($event)" matTooltip="{{tooltipJobRole}}" [(ngModel)]="jobroleCategoryId">
                                   <mat-select-trigger>{{selectedJobRoleData?.jobroleCategoryName}}</mat-select-trigger>
                                   <mat-option matTooltipClass="custom-mat-tooltip" matTooltip="{{selectedJobRole.jobroleCategoryName}}" class="jobRolecustomClass" *ngFor="let selectedJobRole of vocationalselectjobRole" [value]="selectedJobRole.jobroleCategoryId" (onSelectionChange)="jobRoleSelectedFunction($event,selectedJobRole)">
@@ -752,7 +754,7 @@
                     </ng-contaniner>
                 </div>
                 </div>
-                <div class="footer"><span class="powered"><span class="forgot1">©{{currentYear}} L&T EduTech. All Rights Reserved.</span></span></div>
+                <div class="footer" [ngClass]="show ? 'noPadding': 'padd'"><span class="powered"><span class="forgot1">©{{currentYear}} L&T EduTech. All Rights Reserved.</span></span></div>
             </div>
         </mat-drawer-container>
     </div>
