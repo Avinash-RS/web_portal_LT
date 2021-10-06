@@ -1,4 +1,4 @@
-<vg-player (onPlayerReady)="onPlayerReady($event)">
+<!-- <vg-player (onPlayerReady)="onPlayerReady($event)">
   <vg-overlay-play></vg-overlay-play>
   <vg-buffering></vg-buffering>
   <vg-controls  *ngIf="!controls" [vgAutohide]="true" [vgAutohideTime]="1.5">
@@ -38,4 +38,8 @@
           <track kind="subtitles" label="Español" src="assets/subs/pale-blue-dot-es.vtt" srclang="es">
             
   </video>
-</vg-player> 
+</vg-player> -->
+
+<div class="videoWrapper">
+  <video oncontextmenu="return false" [src]="url" id="singleVideo" preload="auto" autoplay controls controlsList="nodownload" ></video>
+</div>

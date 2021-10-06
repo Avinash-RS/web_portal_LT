@@ -511,17 +511,48 @@
 .course-list .mat-nav-list {
     width: 100%;
 }
-::ng-deep .matDialogMat .mat-dialog-container {
-    overflow: hidden !important;
-  }
-  .close-buttonVideo {
-    background: #C02222 !important; // red color
-    float: right;
-    top: -6px;
-    position: relative;
-    height: 35px;
-    width: 35px;
-  }
+::ng-deep.videoPopupContainer {
+    height: auto !important;
+    @media only screen and (min-width: 1140px) {
+        height: 90% !important;
+    }
+    @media only screen and (min-width: 1540px) {
+        height: auto !important;
+    }
+    .mat-dialog-container {
+        position: relative;
+        padding: 20px !important;
+    }
+    .videoContainer {
+        width: 100%;
+        height: 100%;
+        .closeBtn {
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 35px;
+            height: 35px;
+            z-index: 9;
+            background: #c02222;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            em {
+                color: #ffffff;
+            }
+        }
+    }
+}
+//   .close-buttonVideo {
+//     background: #C02222 !important;
+//     float: right;
+//     top: -6px;
+//     position: relative;
+//     height: 35px;
+//     width: 35px;
+//   }
   .listofSessionContainer {
     width: 100% !important;
     height: 500px;

@@ -8,7 +8,7 @@
 
 .breadcrumb {
   margin: 0;
-  padding: 0 20px !important;
+  padding: 0 20px 0 10px !important;
   background-color: transparent !important;
   @media only screen and (max-width: 568px) {
     padding: 0 !important;
@@ -146,10 +146,10 @@
 .back :hover{
     color: $lxp-theme-green !important;
 }
-:host /deep/ .mat-ink-bar {
-    height: 2px !important;
-    background-color: $lxp-theme-green !important;
-  }
+// :host /deep/ .mat-ink-bar {
+//     height: 2px !important;
+//     background-color: $lxp-theme-green !important;
+//   }
 // :host /deep/  .mat-expansion-panel:not([class*='mat-elevation-z']) {
 //      box-shadow: none !important;
 //      border: 1px solid $color-border !important; 
@@ -186,9 +186,8 @@
   margin-left: 15px;
 }
 .box-0-1 {
-  margin-left: 3%;
-  margin-top: 20px;
-  width: 95%;
+  width: 99%;
+  margin: 20px auto 0 auto;
   padding: 20px;
   overflow: hidden;
   height: auto;
@@ -1324,10 +1323,51 @@ margin-top: 8px;
 }
 }
 ::ng-deep.activitiesTab {
+  margin-top: 20px;
+  .mat-ink-bar {
+    background-color: transparent !important;
+  }
+  .mat-tab-group {
+    margin-top: 0;
+  }
+  .mat-tab-header, .mat-tab-nav-bar {
+    border-bottom: 0;
+  }
+  .mat-tab-label[aria-selected=true] {
+    color: #000;
+    .mat-tab-label-content {
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background-color: #c02222;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -10px;
+        border-radius: 50%;
+      }
+    }
+  }
+  .mat-tab-label[aria-selected=false] {
+    color: #999999;
+  }
   .mat-tab-label {
-    opacity: 1;
+    font-size: 16px;
     font-weight: 400;
-    color: rgba(0, 0, 0, 0.5);
+    padding: 0 10px;
+    justify-content: flex-start;
+    min-width: auto;
+    opacity: 1;
+    .mat-tab-label-content {
+      transition: all 0.3s ease-in-out;
+    }
+    &:hover {
+      .mat-tab-label-content {
+        color: #000000;
+      }
+    }
     &.mat-tab-label-active {
         color: rgba(0, 0, 0, 1);
     }

@@ -200,17 +200,17 @@
 </div>
 
 <ng-template #videoRecorded>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-12">
       <button mat-mini-fab class="close-buttonVideo">
-        <mat-icon class="download-icon" (click)="closeModal()">close</mat-icon>
       </button>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <app-video-player [url]="videoSource"></app-video-player>
+  </div> -->
+  <div class="videoContainer">
+    <div class="closeBtn" (click)="closeModal()">
+      <em class="lxp-Close download-icon"></em>
     </div>
+    <app-video-player [url]="videoSource"></app-video-player>
   </div>
 </ng-template>
 

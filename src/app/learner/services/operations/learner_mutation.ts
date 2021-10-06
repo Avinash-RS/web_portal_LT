@@ -1188,8 +1188,8 @@ data{
 }
 `;
 export const getengineersForumData = gql`
-mutation getengineersForumData($userId:String!,$courseId:String!,$requestType:String!,$pagenumber:Int!,$searchString:String){
-  getengineersForumData(userId:$userId,courseId:$courseId,requestType:$requestType,pagenumber:$pagenumber,searchString:$searchString){
+mutation getengineersForumData($userId:String!,$courseId:String!,$requestType:String!,$pagenumber:Int!,$searchString:String,$tabType:String!){
+  getengineersForumData(userId:$userId,courseId:$courseId,requestType:$requestType,pagenumber:$pagenumber,searchString:$searchString,tabType:$tabType){
 success
 message
 error_msg

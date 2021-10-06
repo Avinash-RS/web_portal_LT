@@ -8,7 +8,7 @@
                     <!-- Over Side Push -->
                     <div class="navBackBtn">
                         <span type="button" (click)="drawer.toggle();show=!show">
-                            <em class="lxp-Right_Arrow"></em>
+                            <em class="lxp-TOC_Expand"></em>
                         </span>
                         <p>TASKS TO DO</p>
                     </div>
@@ -56,8 +56,8 @@
                                         <p class="d-flex justify-content-center align-items-center">
                                             <ng-container *ngIf="data.activitytype != 'Live Classroom'">{{data.activitytype}}</ng-container>
                                             <ng-container *ngIf="data.activitytype == 'Live Classroom'">
-                                                <ng-container *ngIf="userDetailes.org_type!== 'collegeconnect'"><p>Live Interactions</p></ng-container>
-                                                <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'"><p>Industry Talk</p></ng-container>
+                                                <ng-container *ngIf="userDetailes.org_type!== 'collegeconnect'">Live Interactions</ng-container>
+                                                <ng-container *ngIf="userDetailes.org_type == 'collegeconnect'">Industry Talk</ng-container>
                                             </ng-container>
                                         </p>
                                         <ng-container *ngIf="data.activitytype != 'Live Classroom'">
