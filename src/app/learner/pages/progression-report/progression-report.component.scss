@@ -311,12 +311,21 @@
                   margin-top: 2em;
                 }
                 > div {
-                    box-shadow: 0 0 5px rgba(0,0,0,0.25);
+                    // box-shadow: 0 0 5px rgba(0,0,0,0.25);
+                    border: 0.1em solid #eaeaea;
                     overflow: hidden;
                     position: relative;
                     border-radius: 4px;
                     margin-top: 15px !important;
                     background-color: #ffffff;
+                    transform: perspective(1px) translateZ(0) translateY(0);
+                    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+                    transition-property: box-shadow, transform;
+                    transition-duration: 0.3s;
+                    &:hover {
+                      box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+                      transform: translateY(-3px);
+                    }
                     &:first-child {
                       margin-top: 0 !important;
                     }
@@ -898,21 +907,6 @@
     padding: 0;
   }
 
-// No Card
-.noCard {
-  text-align: center;
-  figure {
-    margin: 15px 0;
-  }
-  p {
-    font-size: 14px;
-    color: #000000;
-    font-weight: 500;
-    line-height: normal;
-    margin-bottom: 30px ​!important;
-  }
-}
-
 //Skeleton
 .skeleton {
   margin: 20px 30px;
@@ -1153,9 +1147,9 @@
 }
 // No Card
 .noCard {
-  // margin:100px 0;
+  margin: 20px 0;
   text-align: center;
-  div {
+  div, figure {
     margin: 15px 0;
   }
   p {

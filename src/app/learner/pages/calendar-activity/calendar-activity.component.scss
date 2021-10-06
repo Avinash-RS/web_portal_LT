@@ -52,14 +52,20 @@
         order: 1;
     }
     span {
-        margin-right: 1.7em;
+        // margin-right: 1.7em;
         font-size: 1.1em;
         color:#999999 ;
         display: inline-block;
         cursor: pointer;
-        padding-bottom: 1em;
+        // padding-bottom: 1em;
+        padding: 14px 10px;
         position: relative;
-        font-weight: 300;
+        font-weight: 400;
+        height: 48px;
+        transition: color 0.3s ease-in-out;
+        &:hover {
+            color: #000000;
+        }
         &.active {
             color:#000000;
             font-weight: 400;
@@ -113,6 +119,14 @@
         margin-bottom: 1em;
         position: relative;
         cursor: pointer;
+        transform: perspective(1px) translateZ(0) translateY(0);
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+        transition-property: box-shadow, transform;
+        transition-duration: 0.3s;
+        &:hover {
+            box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+            transform: translateY(-3px);
+        }
         @media screen and (max-width:480px) {
             flex-wrap: wrap;
             padding: 0.4em 1em;
@@ -623,15 +637,44 @@
 .reset-button{
     background-color: $lxp-theme-green !important;
     color: $color-white !important;
-    // height: 28px;
-    padding: 4px 0;
-    width: 7em;
-    line-height: 15px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: normal;
+    padding: 5px 15px;
+    line-height: normal;
+    border: none;
+    box-shadow: none;
+    border-color: transparent;
+    overflow: hidden;
+    transform: translateY(-50%) perspective(1px) translateZ(0);
+    transition-property: color;
+    transition-duration: 0.2s;
+    z-index: 99;
     em {
         display: inline-block;
         transform: scaleX(-1);
         font-size: 10px;
         margin-right: 7px;
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #004684;
+        transform: scaleX(0);
+        transform-origin: 0 50%;
+        transition-property: transform;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-out;
+    }
+    &:hover {
+        &::before {
+            transform: scale(1);
+        }
     }
     span {
         line-height: 16px;
