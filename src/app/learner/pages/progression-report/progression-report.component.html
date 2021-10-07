@@ -401,7 +401,7 @@
       <span class="hours-spent-label">Hours Spent</span>
      </div>
      <div class="progress-date-input">
-      <mat-form-field style="width:150px;">
+      <mat-form-field style="width:110px;">
         <input matInput [matDatepicker]="weekWiseDatepicker" placeholder="Choose a date" [(ngModel)]="weekWiseDate" [min] = "UserDetails.created_on"
         (dateChange)="changeWeekDate()" [max]="today">
         <mat-datepicker-toggle matSuffix [for]="weekWiseDatepicker"></mat-datepicker-toggle>

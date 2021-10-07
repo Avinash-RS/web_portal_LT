@@ -17,8 +17,21 @@ import { Label } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 declare const Chart;
 const DEFAULT_DURATION = 300;
-import { DatePipe } from '@angular/common';
+import {MomentDateAdapter} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
   weekViewColumnSubHeader({ date, locale, }: DateFormatterParams): string {
@@ -58,6 +71,9 @@ export class CustomDateFormatter extends CalendarDateFormatter {
       provide: CalendarDateFormatter,
       useClass: CustomDateFormatter,
     },
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+
   ],
 })
 
@@ -339,7 +355,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   minCourseDate;
   nochartdata:boolean = true;
   currentYear: number;
-  pipe = new DatePipe('en-US');
+
 
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
@@ -817,7 +833,7 @@ getoverAllCourseProgressData(){
   this.courseWiseChartDatalabel = [];
   this.courseChartData = [];
   this.courseChartBackGround = [];
-  this.learnerService.getoverAllCourseProgressByUserId(this.userId,this.courseStartDate,this.courseEndDate).subscribe((result:any)=>{
+  this.learnerService.getoverAllCourseProgressByUserId(this.userId,moment(this.courseStartDate).startOf('day').toISOString(),moment(this.courseEndDate).endOf('day').toISOString()).subscribe((result:any)=>{
     if(result.data.overAllCourseProgressByUserId.success){
       result.data.overAllCourseProgressByUserId.data.forEach((data:any)=>{
         this.courseWiseChartDatalabel.push(data.courseName);
@@ -853,7 +869,7 @@ changeCourseDate(){
 getWeekCourseData(){
   this.weekWiseChartDatalabel = [];
   this.weekWiseChartData = [];
-  var myFormattedDate = this.pipe.transform(this.weekWiseDate, 'yyyy-MM-dd');
+  var myFormattedDate = moment(this.weekWiseDate, 'yyyy-MM-dd');
   this.learnerService.getweekWiseCourseChart("",this.userId,myFormattedDate,"allcourse").subscribe((result:any)=>{
 
     if(result.data.weekWiseCourseChart.success){
