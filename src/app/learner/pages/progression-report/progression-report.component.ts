@@ -10,11 +10,31 @@ import { Observable } from 'rxjs';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { DatePipe } from '@angular/common';
 declare const Chart;
+import * as moment from 'moment';
+import {MomentDateAdapter} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @Component({
   selector: 'app-progression-report',
   templateUrl: './progression-report.component.html',
-  styleUrls: ['./progression-report.component.scss']
+  styleUrls: ['./progression-report.component.scss'],
+  providers :[
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ]
 })
 export class ProgressionReportComponent implements OnInit {
   @ViewChild('firstPaginator') firstPaginator: MatPaginator;
@@ -157,7 +177,7 @@ export class ProgressionReportComponent implements OnInit {
   getWeekCourseData(){
     this.weekWiseChartDatalabel = [];
     this.weekWiseChartData = [];
-    var myFormattedDate = this.pipe.transform(this.weekWiseDate, 'yyyy-MM-dd');
+    var myFormattedDate = moment(this.weekWiseDate, 'yyyy-MM-dd');
     this.learnerService.getweekWiseCourseChart(this.courseId,this.userId,myFormattedDate,"").subscribe((result:any)=>{
       if(result.data.weekWiseCourseChart.success){
         this.totalhoursSpend = result.data.weekWiseCourseChart.data.totalhoursSpend;

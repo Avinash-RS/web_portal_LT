@@ -86,17 +86,20 @@
           </form>
           <div class="info-card animate" *ngIf="infoClose">
             <div class="info-bodyWrapper">
-            <div class="info-title d-flex justify-content-between align-items-center">
-              <div><em class="lxp-info-circle"></em><span>info</span></div>
-              <div class="closeBtn" (click)="infoClose = infoClose?false:true"><em class="lxp-Close"></em></div>
+              <div class="info-title d-flex justify-content-between align-items-center">
+                <div class="information d-flex align-items-center">
+                  <em class="lxp-info-circle"></em>
+                  <span>Info</span>
+                </div>
+                <div class="closeBtn" (click)="infoClose = infoClose?false:true"><em class="lxp-Close"></em></div>
+              </div>
+              <div class="info-content">
+                <ul>
+                  <li>Please clear browser cache before logging into the application.</li>
+                  <li>If you need any assistance, kindly reach us at <a href="mailto:collegeconnect.support@lntedutech.com">collegeconnect.support@lntedutech.com</a>.</li>
+                </ul>
+              </div>
             </div>
-            <div class="info-content">
-              <ul>
-                <li>Please clear browser cache before logging into the application.</li>
-                <!-- <li>If you need any assistance, kindly reach us at <a href="mailto:collegeconnect.support@lntedutech.com">collegeconnect.support@lntedutech.com</a>.</li> -->
-              </ul>
-            </div>
-          </div>
           </div>
         </div>
 

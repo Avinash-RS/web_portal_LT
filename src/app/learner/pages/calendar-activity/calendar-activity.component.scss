@@ -35,7 +35,13 @@
 .heading5 {
     font-size: 1.7em;
     font-weight: 700;
-    margin: 1em 0; 
+    margin: 1em 0;
+    span {
+        font-size: 13px;
+        font-weight: 400;
+        color: #333333;
+        line-height: normal;
+    }
 }
 .viewInfotxt {
     flex-direction: column;

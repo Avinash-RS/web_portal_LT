@@ -46,7 +46,7 @@
     .progress-date{
       margin-bottom: 1em;
       .progress-hours-container{
-        width:60%;
+        width:70%;
         display: inline-block;
         .progress-hours{
           font-size: 18px;
@@ -60,9 +60,9 @@
           color:#969696;
         }
       }
-      // .progress-date-input{
-      //   width:40%;
-      // }
+      .progress-date-input{
+        width:30%;
+      }
     }
     .learning-label {
       margin-bottom: 0;
