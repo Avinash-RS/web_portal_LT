@@ -351,6 +351,10 @@
     background-color: #f2f2f2;
     position: relative;
     z-index: 9;
+    min-height: 407px;
+    @media only screen and (min-width: 1540px) {
+      min-height: 719px;
+    }
     .course-progress{
       .course-progress-wrapper{
         margin-top: 5.5em;

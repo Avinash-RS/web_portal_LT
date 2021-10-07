@@ -1,49 +1,79 @@
 @import "variable";
 
 .info-card {
-  border: 1px solid #7070705b;
-  background-color: #F5F5F5;
-  border-left: 5px solid #F88725;
-  // box-shadow: 0px 0px 1px 2px #00000029;
+  border-radius: 5px;
+  background-color: #F0F0F0;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
   margin: 0;
   position: absolute;
-  bottom: 25px;
-  padding: 5px;
+  bottom: 15px;
+  padding: 10px 10px 10px 15px;
   right: 1em;
+  overflow: hidden;
+  width: 94%;
   @media only screen and (min-width: 568px) {
     right: 2em;
   }
   @media only screen and (min-width: 720px) {
     right: 3em;
+    bottom: 40px;
+    width: auto;
+  }
+  @media only screen and (min-width: 992px) {
+    width: 51%;
   }
   @media only screen and (min-width: 1140px) {
+    width: auto;
     right: 4em;
+    bottom: 55px;
   }
   .closeBtn {
     cursor: pointer;
+    em {
+      font-size: 12px;
+      color: #373331;
+    }
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    background-color: #ff5722;
   }
 }
-.info-title{
+.info-title {
+  margin-bottom: 5px;
 }
 .info-title span {
-  color:#666666;
-  font-weight: bold;
-  margin-left:15px;
-  font-size: 17px;
-  vertical-align: middle;
-}
-.info-content li {
-  margin:5px;
-  font-size:14px;
-  text-align: left;
+  color:#373331;
+  font-weight: 500;
+  margin-left: 10px;
+  font-size: 15px;
 }
 .info-content ul {
-  margin:0px;
-  padding-left:18px;
+  margin: 0px;
+  padding-left: 13px;
+  li {
+    margin: 0 5px;
+    font-size: 14px;
+    text-align: left;
+    color: #000000;
+    font-weight: 400;
+    font-size: 14px;
+    a {
+      color: #1b4e9b;
+      text-decoration: none;
+      font-weight: 500;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }
 .animate {
-  position: absolute;
   animation: mymove 1s ;
   z-index: 1;
 }
@@ -52,7 +82,7 @@
     bottom: -100px;
   }
   100%{
-    bottom:25px;
+    bottom: 55px;
   }
 }
 .loginWrapper {
