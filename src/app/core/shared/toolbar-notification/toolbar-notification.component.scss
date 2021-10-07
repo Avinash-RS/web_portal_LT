@@ -79,6 +79,20 @@ $prefix: 'toolbar-notification';
         }
     }
 }
+// No Card
+.noCard {
+    text-align: center;
+    figure {
+      margin: 15px 0;
+    }
+    p {
+      font-size: 15px;
+      color: #000000;
+      font-weight: 400;
+      line-height: normal;
+      margin-bottom: 30px ​!important;
+    }
+}
 ::ng-deep.dropdown {
     .card {
         border: none !important;
