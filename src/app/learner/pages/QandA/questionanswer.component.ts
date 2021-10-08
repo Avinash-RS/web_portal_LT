@@ -275,6 +275,7 @@ export class QuestionanswerComponent implements OnInit {
     this.getQAData();
   }
   navigateAllQA(type){
+    this.tabType = 'course';
     this.fromSideBtn = true;
     this.selectedtype = type;
     this.requestType = type;
