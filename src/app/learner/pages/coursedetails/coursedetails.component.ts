@@ -195,6 +195,7 @@ export class CoursedetailsComponent implements OnInit {
     nav: true
   };
   secretKey = "(!@#Passcode!@#)";
+  bookmarkedCount: any;
 
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
@@ -989,11 +990,8 @@ export class CoursedetailsComponent implements OnInit {
     this.topicInfo.bookmark = isbokmarked
     this.Lservice.bookmark(this.getuserid.user_id, this.courseid, this.currentModuleTitle, this.currentTopicTitle, isbokmarked).subscribe((data: any) => {
       if (data?.data?.bookmark?.success) {
-        this.topicInfo.bookmark = isbokmarked
-        if (this.filterkey === 'Bookmarked') {
-          this.filterToc()
-        }// NOT WORKING SHOULD WAIT FOR SOCKET RESPONSE FOR REALTIME FILTER
-        //this.toastr.success(data?.data?.bookmark?.message)
+        this.topicInfo.bookmark = isbokmarked;
+        this.filterToc()
       } else {
         // this.toastr.warning(data?.data?.bookmark?.message)
       }
@@ -1066,9 +1064,10 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
   filterToc() {
+    this.bookmarkedCount = 0;
     this.bkup_Toc = JSON.parse(JSON.stringify(this.scromModuleData));
     this.filterData = []
-    if (this.filterkey === 'Bookmarked') {
+    // if (this.filterkey === 'Bookmarked') {
       this.bkup_Toc.forEach((week,wi) => {
         let modulefilter = [];
         week.childData.forEach((module,mi) => {
@@ -1078,6 +1077,7 @@ export class CoursedetailsComponent implements OnInit {
             return topic?.bookmark === true;
           });
           if (markedTopcs.length > 0) {
+            this.bookmarkedCount += markedTopcs.length;
             module.children = []
             module.children = markedTopcs;
             modulefilter.push(module);
@@ -1089,10 +1089,11 @@ export class CoursedetailsComponent implements OnInit {
       this.filterData.push(week);}
 
       });
-    } else {
-      this.filterData = []
+    // } 
+    // else {
+    //   this.filterData = []
 
-    }
+    // }
   }
 
   filterQAList() {
