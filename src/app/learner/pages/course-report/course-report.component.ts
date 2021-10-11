@@ -108,6 +108,8 @@ export class CourseReportComponent implements OnInit {
     return progressScore;
   }
   getCourseReport(){
+    this.weeklabelData =[];
+    this.weekpercent = [];
     this.learnerService.getLearnerNewCourseReport(atob(this.course.batchId),atob(this.course.id),this.userDetail.user_id,this.refresh, 14, 16).subscribe((data)=>{
     if (data.data['getLearnerNewCourseReport'].data[0]) {
       this.courseReport = true;
