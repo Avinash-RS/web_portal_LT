@@ -676,6 +676,7 @@ export class ProfileComponent implements OnInit {
       this.passwordForm.value.newpassword).subscribe((password: any) => {
         if (password.data.get_change_password_updateprofile.success === 'true') {
           Swal.fire(password.data.get_change_password_updateprofile.message);
+          this.toastr.warning("Kindy login again to continue")
           this.services.logout(this.currentUser.user_id, false).subscribe((logout: any) => {
           this.dialog.closeAll();
           this.router.navigate(['/Learner/login']);
