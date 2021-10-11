@@ -895,17 +895,14 @@
 
 <!---------------------- video play --------------------------------->
 <ng-template #videoDialog>
-  <div class="row">
-    <div class="col-12">
-      <button mat-mini-fab class="close-buttonVideo">
-        <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
-      </button>
-    </div>
+  <div class="closeButton" (click)="closedialogbox()">
+      <em class="lxp-Close"></em>
+    <!-- <button mat-mini-fab class="close-buttonVideo">
+      <mat-icon class="download-icon" (click)="closedialogbox()">close</mat-icon>
+    </button> -->
   </div>
-  <div class="row">
-    <div class="col-12">
-      <app-video-player [url]="videoSource + blobKey"></app-video-player>
-    </div>
+  <div class="playerWrapper">
+    <app-video-player [url]="videoSource + blobKey"></app-video-player>
   </div>
 </ng-template>
 
