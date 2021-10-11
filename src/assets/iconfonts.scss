@@ -60,6 +60,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.lxp-Process:before {
+  content: "\e966";
+}
 .lxp-Mail_Read:before {
   content: "\e964";
 }
