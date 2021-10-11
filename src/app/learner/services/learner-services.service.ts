@@ -330,11 +330,11 @@ getMessage(): Observable<any> {
   }
 
 
-  get_change_password_updateprofile(username, oldPassword, password) {
+  get_change_password_updateprofile(user_id, oldPassword, password) {
     return this.Apollo.query({
       query: getChangePasswordupdateprofile,
       variables: {
-        username,
+        user_id,
         old_password: oldPassword,
         password
       }

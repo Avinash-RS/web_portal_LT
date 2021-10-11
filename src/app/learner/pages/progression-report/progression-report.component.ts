@@ -55,7 +55,7 @@ export class ProgressionReportComponent implements OnInit {
       displayColors: false,
       callbacks: {
         label: function(tooltipItem, data) {
-          return  data['datasets'][0]['data'][tooltipItem['index']] + ' mins';
+          return  data['datasets'][0]['data'][tooltipItem['index']]['mins'] + ' mins';
         }
       }
     },
@@ -77,8 +77,8 @@ export class ProgressionReportComponent implements OnInit {
         },
         ticks: {
           min: 0,
-          max: 180,
-          stepSize:30,
+          //max: 180,
+          stepSize:1,
           callback: function(value) {
             return value + '  '
           }
@@ -183,7 +183,7 @@ export class ProgressionReportComponent implements OnInit {
         this.totalhoursSpend = result.data.weekWiseCourseChart.data.totalhoursSpend;
         result.data.weekWiseCourseChart.data.chartdata.forEach((data:any)=>{
           this.weekWiseChartDatalabel.push(data.day);
-          this.weekWiseChartData.push(parseInt(data.minutes));
+          this.weekWiseChartData.push({y:parseInt(data.minutes)/60,mins:data.minutes});
         });
         this.generateWeekwiseChart();
       }
