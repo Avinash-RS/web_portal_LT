@@ -530,9 +530,9 @@ mutation get_district_details($country: String,$state: String){
 `;
 
 export const getChangePasswordupdateprofile = gql`
-mutation get_change_password_updateprofile($username: String, $old_password: String $password: String){
+mutation get_change_password_updateprofile($user_id: String, $old_password: String $password: String){
   get_change_password_updateprofile(
-    username: $username,
+    user_id: $user_id,
     old_password: $old_password,
     password: $password
   ) {
