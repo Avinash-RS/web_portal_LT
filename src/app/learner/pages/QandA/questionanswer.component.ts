@@ -280,6 +280,7 @@ export class QuestionanswerComponent implements OnInit {
     this.selectedtype = type;
     this.requestType = type;
     this.selectedIndex = 1;
+    this.pageNumber = 0;
     this.getQACount()
     this.getQAData();
   }
