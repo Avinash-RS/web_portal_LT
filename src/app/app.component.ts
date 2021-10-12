@@ -3,12 +3,15 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { GlobalServiceService } from '././core/services/handlers/global-service.service';
 import { Title } from '@angular/platform-browser';
-import { filter } from 'rxjs/operators';
+import { filter, switchMap, take, takeUntil, tap, window } from 'rxjs/operators';
 import { CommonServicesService } from '@core/services/common-services.service';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, timer } from 'rxjs';
 import { slideInAnimation } from './router.animation';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-
+import { environment } from '@env/environment';
+import { GoogleAnalyticsService } from '@learner/services/google-analytics.service';
+import { has } from 'underscore';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-root',
@@ -30,6 +33,8 @@ export class AppComponent implements OnInit {
   loadersubscription: Subscription;  
   hideLeftMenu: boolean = false;
   chatbotShow: boolean = false;
+  UserDetails: any;
+  secretKey = "(!@#Passcode!@#)";
    // FOR DRM(Restriction for right click)
    @HostListener('document:keydown', ['$event'])
    handleKeyboardEvent(event: KeyboardEvent) {
@@ -39,9 +44,10 @@ export class AppComponent implements OnInit {
        event.preventDefault();
      }
  }
-
+ private destroy$ = new Subject<void>();
   constructor(private router: Router,
               private gs: GlobalServiceService,
+              private ga_service: GoogleAnalyticsService,
               private http: HttpClient,
               private activatedRoute: ActivatedRoute,
               private titleService: Title,
@@ -52,11 +58,56 @@ export class AppComponent implements OnInit {
     // console.error = function(){}
     // console.warn = function(){}
     this.commonService.getIpAddressByUrl();
-    
     // this.getorganizationbyiddetails();
+
+    //GOOGLE ANALYTICS INIT
+     if (environment.gaTrackingId) {
+    // register google tag manager
+    const gTagManagerScript = document.createElement('script');
+    gTagManagerScript.async = true;
+    gTagManagerScript.src = `https://www.googletagmanager.com/gtag/js?id=${environment.gaTrackingId}`;
+    document.head.appendChild(gTagManagerScript);
+
+    // register google analytics
+    const gaScript = document.createElement('script');
+    gaScript.innerHTML = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', '${environment.gaTrackingId}');
+    `;
+    document.head.appendChild(gaScript);
+  }
   }
 
   ngOnInit() {
+
+
+//GOOGLE ANALYTICS
+this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null
+timer(500)
+     .pipe(
+       filter(() => has.call(window, 'ga')),
+       take(1),
+       switchMap(() => {
+         return this.router.events.pipe(
+           filter((e) => e instanceof NavigationEnd),
+           tap((e: NavigationEnd) => {
+            var user_id = null
+             if(this.UserDetails.user_id){
+              user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(); 
+             }
+             this.ga_service.logPageView(e.url,user_id);
+            
+           })
+         );
+       }),
+       takeUntil(this.destroy$)
+     )
+     .subscribe();
+
+
+
    // console.error = function(){}
    // console.log = function(){}
   //  console.warn = function(){}
@@ -90,6 +141,9 @@ export class AppComponent implements OnInit {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
     ).subscribe((e: any) => {
+      // setTimeout(() => {
+      //   this.ga_service.logPageView(e.url);
+      // }, 500);
       const urlIdentifier = e.url.split("/")
       const possiblePages = ['register', 'login', 'recover', 'resetpassword','password','']
       const rt = this.getChild(this.activatedRoute);
@@ -177,6 +231,7 @@ myUnload() {
   ngOnDestroy(): void {
     this.loaderSubscription.unsubscribe();
     this.loadersubscription.unsubscribe();
+    this.destroy$.next();
   }
 
   toggleChatbot() {
