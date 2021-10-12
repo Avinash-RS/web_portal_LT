@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import * as CryptoJS from 'crypto-js';
 import { RecaptchaErrorParameters } from "ng-recaptcha";
 import { environment } from '../../../../environments/environment';
-
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
   }
   constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder, public learnerService: LearnerServicesService,
              // public socketService: SocketioService,
-              private service: LearnerServicesService, private toastr: ToastrService, private activatedRoute: ActivatedRoute) {
+              private service: LearnerServicesService, private toastr: ToastrService, private activatedRoute: ActivatedRoute,private titleService: Title) {
       this.languages = [{lang: 'ta' , languagename: 'Tamil' } , { lang: 'en' , languagename: 'English'  }] ;
       // translate.addLangs(['en', 'ta']);
       // translate.setDefaultLang('en');
@@ -65,10 +65,12 @@ export class LoginComponent implements OnInit {
   viewChange(){
     this.signInPage = false;
     this.forgotPage = true;
+    this.titleService.setTitle('Forgot Password');
   }
   backToSignin(){
     this.forgotPage = false;
     this.signInPage = true;
+    this.titleService.setTitle('Learner Login');
     this.username.reset();
   }
   forgotPassword() {
