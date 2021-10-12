@@ -49,14 +49,22 @@ export class PasswordComponent implements OnInit {
                     "userSecretkey" : params.code
                 }
                  // const decryptedString = atob(params.code);
-                  this.service.getEmail(input).subscribe((data)=>{
-                    var userValue = data['data']
+                  // this.service.getEmail(input).subscribe((data)=>{
+                  //   var userValue = data['data']
+                  //   if(userValue['email']){
+                  //     this.emailid =  userValue['email'];
+                  //     this.userid = userValue['user_id'];
+                  //     localStorage.setItem('key', this.userid);
+                  //   }
+                  // })
+                  this.service.getUser(this.email).subscribe((data:any)=>{
+                    var userValue = data?.data?.getuserRecordbasedonSecretKey?.data;
                     if(userValue['email']){
                       this.emailid =  userValue['email'];
                       this.userid = userValue['user_id'];
                       localStorage.setItem('key', this.userid);
                     }
-                  })
+                })
                   // localStorage.setItem('OTPFeature', this.otpFeature);
                   //this.get_user_detail(this.email);
                 });
