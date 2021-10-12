@@ -79,7 +79,7 @@
         <!-- TOC DATA -->
         <div class="tocSize" [ngClass]="drawersOpen ? '': 'drawersOpen'">
 
-            <div class="leftToc">
+            <div class="leftToc" *ngIf="scromApiData?.toc != '0'">
                 <div class="showHide" (click)="drawersOpen=drawersOpen?false:true" [ngClass]="drawersOpen?'Yes':'No'">
                     <em *ngIf="drawersOpen" class="lxp-TOC_Collapse"></em>
                     <em *ngIf="!drawersOpen" class="lxp-TOC_Expand"></em>
@@ -247,13 +247,15 @@
             <div class="toccollapsed" *ngIf="!drawersOpen">
                 <em class="lxp-TOC_Collapse" (click)="drawersOpen=drawersOpen?false:true"></em>
             </div>
-            <div *ngIf="!drawersOpen" class="currentModuleTopic">
-                <div class="curentVideoWeek">Week <span>{{weekHolderUI+1}}</span></div>
-                <div class="currentVideoModuleTopic">
-                    <h5>{{scromModuleData[weekHolderUI].childData[moduleHolder].title}}</h5>
-                    <h4 title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}">
-                        {{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}
-                    </h4>
+            <div *ngIf="scromApiData?.toc != '0'">
+                <div *ngIf="!drawersOpen" class="currentModuleTopic">
+                    <div class="curentVideoWeek">Week <span>{{weekHolderUI+1}}</span></div>
+                    <div class="currentVideoModuleTopic">
+                        <h5>{{scromModuleData[weekHolderUI].childData[moduleHolder].title}}</h5>
+                        <h4 title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}">
+                            {{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}
+                        </h4>
+                    </div>
                 </div>
             </div>
             <div class="rightContent">
@@ -438,7 +440,7 @@
                 </div>
 
                 <div class="previewContainer">
-                    <div class="previewRibbon">
+                    <div [ngClass]="!content?.noresource ? 'no':'yes'" class="previewRibbon">
                         <span>Preview</span>
                     </div>
                     <div class="innerWrapper">
@@ -483,10 +485,21 @@
                 <em (click)="closedialogbox()" class="lxp-Close"></em>
             </div>
             <div class="aboutCourseTab">
-                <h2>{{'About the Courses' | translate}}</h2>
+                <h2>{{'About the Course' | translate}}</h2>
                 <div class="descriptionContent">
-                    <!-- <p [innerHTML]="course?.course_long_description"></p> -->
-                    <p>{{(isReadMore) ? course?.course_long_description : course?.course_long_description | slice:0:250}} <span *ngIf="!isReadMore && course?.course_long_description?.length>250">...</span> <a href="javascript:;" *ngIf="!isReadMore && course?.course_long_description?.length>250" (click)="showText()"> More</a> <a href="javascript:;" *ngIf="isReadMore" (click)="showText()"> Less</a></p>
+                    <!-- <p id="courseDesc" [innerHTML]="course?.course_long_description">
+                        <a href="javascript:;" *ngIf="!isReadMore && longDesc?.length>250" (click)="showText()"> More</a>
+                        <a href="javascript:;" *ngIf="isReadMore" (click)="showText()"> Less</a>
+                    </p> -->
+                    <p>
+                        <span id="courseDesc" class="hideDesc" [innerHTML]="course?.course_long_description"></span>
+
+                        <span *ngIf="isReadMore" [innerHTML]="course?.course_long_description"></span>
+                        <span *ngIf="!isReadMore" [innerHTML]="course?.course_long_description.slice(0,250)"></span>
+                        <span *ngIf="!isReadMore && longDesc?.length>250">...</span> 
+                        <a href="javascript:;" *ngIf="!isReadMore && longDesc?.length>250" (click)="showText()"> More</a> 
+                        <a href="javascript:;" *ngIf="isReadMore && longDesc?.length>250" (click)="showText()"> Less</a>
+                    </p>
                 </div>
                 <div class="instructorsWrapper" *ngIf="course?.author_details[0].author_name != ''">
                     <h2>{{'Instructors'| translate}}</h2>

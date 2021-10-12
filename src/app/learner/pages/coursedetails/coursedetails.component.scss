@@ -1558,11 +1558,20 @@
     }
   }
 }
+.hideDesc {
+  display: inline-flex;
+  position: absolute;
+  opacity: 0;
+  z-index: -9;
+}
 .previewRibbon {
   position: absolute;
   top: 10px;
   left: -15px;
   z-index: 9;
+  &.no {
+    display: none;
+  }
   span {
     background-color: #16BEF0;
     padding: 6px 12px 6px 24px;

@@ -166,7 +166,7 @@ export class CoursedetailsComponent implements OnInit {
   eboxUrl :any;
   showlab:boolean = false;
   lastLogIndex:number = 0;
-  isReadMore = false;
+  isReadMore:boolean;
   closeTemp = false;
   TopicsOptions: OwlOptions = {
     loop: true,
@@ -196,6 +196,7 @@ export class CoursedetailsComponent implements OnInit {
   };
   secretKey = "(!@#Passcode!@#)";
   bookmarkedCount: any;
+  longDesc: string;
 
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
@@ -285,7 +286,6 @@ export class CoursedetailsComponent implements OnInit {
                 this.batchDetails = null;
               }
             });
-
             // all post in one thread
             this.loading = false;
             // if (this.course.topicData && this.course.topicData.length) {
@@ -379,10 +379,11 @@ export class CoursedetailsComponent implements OnInit {
     this.socketEmitReciver = this.socketService.change.subscribe((result:any) => {
       if (result && result.eventId && result.eventId.length && result.data.childData.length > 0) {
         if (result.data.course_id === this.courseid) {
-          // console.log(result.data)
+          console.log(result.data, 'asdfasdjfaklsjdfkl');
          
           if (this.topiccurrentPage !== result.data.resumeSubContent ||
             result.data.childData[result.data.week-1].childData[result.data.resumeContent].children[result.data.resumeSubContent]?.status !== this.topicPageStatus) {
+              console.log(result.data, 'helllllllllllllo');
               this.scromModuleData = result.data.childData;
               this.moduleExpand(this.weekHolder, this.moduleHolder);
               if((this.scromApiData.topicIndex == null||this.scromApiData.topicIndex == "0") && (this.scromApiData.moduleIndex == null||this.scromApiData.moduleIndex == "0") && this.scromModuleData[0].childData[0].status == null && this.scromModuleData[0].childData[0].children[0].status == null){
@@ -948,6 +949,15 @@ export class CoursedetailsComponent implements OnInit {
     });
     const backdrop = document.getElementsByClassName('cdk-overlay-backdrop')[0];
     const containerarea = document.getElementsByClassName('mat-dialog-container')[0];
+    setTimeout(()=>{
+      this.longDesc  = document.getElementById('courseDesc').innerHTML;
+      if(this.longDesc.length > 250){
+        this.isReadMore = false;
+      } else {
+        this.isReadMore = true;
+      }
+      console.log(this.longDesc.length, 'desc')
+    },500)
     rclickctrl(backdrop)
     rclickctrl(containerarea)
     function rclickctrl(element){

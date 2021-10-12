@@ -409,8 +409,33 @@ margin-bottom: 9px;
   height: 35px;
   width: 35px;
 }
-::ng-deep .matDialogMat .mat-dialog-container {
-  overflow: hidden !important;
+
+::ng-deep.matDialogMat {
+  .mat-dialog-container {
+    position: relative;
+    .closeButton {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      background-color: #c02222;
+      border-radius: 50%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+      z-index: 9;
+      cursor: pointer;
+      em {
+        color: #ffffff;
+        font-size: 15px;
+      }
+    }
+  }
+}
+.playerWrapper {
+  width: 100%;
+  height: 100%;
 }
 ::ng-deep .cdk-global-scrollblock{
   overflow-y: auto !important;
