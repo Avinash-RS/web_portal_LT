@@ -3,11 +3,12 @@ import { Output, EventEmitter } from '@angular/core';
 import * as io from 'socket.io-client';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
-
+import * as CryptoJS from 'crypto-js';
 export class SocketioService {
     socket: any;
     loginDetails: any;
     observer: any;
+    secretKey = "(!@#Passcode!@#)";
     @Output() change: EventEmitter<boolean> = new EventEmitter();
 
     constructor() {
@@ -26,6 +27,7 @@ export class SocketioService {
             this.observer = observer;
         });
         this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) ;
+        this.loginDetails.user_id = CryptoJS.AES.decrypt( this.loginDetails.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
         if (type.type === 'disconnect') {
             this.socket.emit('logout', this.loginDetails.user_id);
         }
