@@ -378,8 +378,9 @@ export class CoursedetailsComponent implements OnInit {
     this.socketService.socketReceiver()
     this.socketEmitReciver = this.socketService.change.subscribe((result:any) => {
       if (result && result.eventId && result.eventId.length && result.data.childData.length > 0) {
+        console.log(result.data, 'asdfasdjfaklsjdfkl');
+        debugger;
         if (result.data.course_id === this.courseid) {
-          console.log(result.data, 'asdfasdjfaklsjdfkl');
          
           if (this.topiccurrentPage !== result.data.resumeSubContent ||
             result.data.childData[result.data.week-1].childData[result.data.resumeContent].children[result.data.resumeSubContent]?.status !== this.topicPageStatus) {
