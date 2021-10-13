@@ -1648,6 +1648,7 @@
 ::ng-deep.aboutCourseWrapper {
   width: 96% !important;
   height: 75% !important;
+  position: relative !important;
   @media only screen and (min-width: 720px) {
     width: 70% !important;
     height: 55% !important;
@@ -1663,7 +1664,6 @@
     width: 30% !important;
   }
   .mat-dialog-container {
-    position: relative;
     padding: 20px !important;
   }
 }
