@@ -869,7 +869,7 @@ changeCourseDate(){
 getWeekCourseData(){
   this.weekWiseChartDatalabel = [];
   this.weekWiseChartData = [];
-  var myFormattedDate = moment(this.weekWiseDate, 'yyyy-MM-dd');
+  var myFormattedDate = moment(this.weekWiseDate).format('yyyy-MM-DD');
   this.learnerService.getweekWiseCourseChart("",this.userId,myFormattedDate,"allcourse").subscribe((result:any)=>{
 
     if(result.data.weekWiseCourseChart.success){
