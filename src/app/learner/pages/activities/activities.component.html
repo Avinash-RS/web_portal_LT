@@ -605,9 +605,11 @@
                       <span class="gradedot"></span>Graded
                     </span>
                   </div>
-                  <div class="projTotalScore" *ngIf="project.projectActivity.grade_status == 'Evaluated'">
+                  <div class="projTotalScore">
                     <div class="text-right">
-                      <span class="totscore">Total score: {{project.projectActivity.score_mark}}/{{project.projectActivity.total_mark}}</span>
+                      <span class="totscore">
+                        Total score: <span *ngIf="!project.projectActivity.score_mark">-</span> <span *ngIf="project.projectActivity.score_mark">{{project.projectActivity.score_mark}}</span>
+                        /{{project.projectActivity.total_mark}}</span>
                     </div>
                   </div>
                   <div class="d-flex justify-content-end projDate">

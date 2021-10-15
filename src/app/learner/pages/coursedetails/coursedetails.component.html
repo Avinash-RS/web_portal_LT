@@ -262,14 +262,6 @@
                 <div (click)="makeFullScreen()" data-title="Fullscreen" class="fullScr d-flex align-items-center iconSize">
                     <em class="lxp-Fullscreen"></em>
                 </div>
-                <div *ngIf="scromApiData.resourceUrl"  (click)="downloadResource();" data-title="Download" class="fullScr d-flex align-items-center iconSize">
-                    <em class="lxp-download"></em>
-                </div>
-                <div class="askquestion">
-                    <button data-title="Ask A Question" *ngIf="userType!=='collegeconnect'" type="button" class="fullScr d-flex align-items-center iconSize" (click)="openAskQuestions(askQuestions)">
-                        <em class="lxp-question"></em>
-                    </button>
-                </div>
                 <!-- <div class="mixed" [ngClass]="isShowDiv ? 'paddingTop' : 'paddingZero'">
                     <div *ngIf="isShowDiv" class="allIcons">
                         <div class="smile">
@@ -310,16 +302,20 @@
                 <div class="wrapper d-flex align-items-center">
                     <span class="abtCourse" (click)="aboutCourse(aboutCourseWindow)"><em class="lxp-Info"></em> <span>About the Course</span></span>
                     <span class="resourcesTab" (click)="openResourse(resourseWindow)"><em class="lxp-Image_Folder"></em> <span>Course Resources</span></span>
-                    <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')"data-title="Understood" class="smile" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
-                         Understood
-                     </div>
-                     <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
-                         Not Understood
-                     </div>
+                    <span class="downloadCode" (click)="downloadResource();" *ngIf="scromApiData.resourceUrl"><em class="lxp-Download_Code"></em> <span>Download Code exercises</span></span>
                 </div>
             </div>
             <div class="notesBookmarks">
                 <!-- <button class="notesBtn"><em class="lxp-Notes"></em> <span>Notes</span></button> -->
+                <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')" data-title="Understood" class="smile" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
+                    <em class="lxp-smile"></em> <span>Understood</span>
+                </div>
+                <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
+                    <em class="lxp-sad"></em> <span>Not Understood</span>
+                </div>
+                <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType!=='collegeconnect'" type="button" (click)="openAskQuestions(askQuestions)">
+                    <em class="lxp-question"></em> <span>Ask A Question</span>
+                </button>
                  <button class="bookmarkBtn" *ngIf="userType == 'collegeconnect'" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
                      <em [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></em> <span [ngClass]="topicInfo?.bookmark?'bold':'normal'">{{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? 'Bookmarked':'Bookmark'}}</span>
                  </button>
@@ -533,7 +529,7 @@
                     </div> -->
                 </div>
                 <div class="poweredBy">
-                    <h2>Courses offered by: <span><img src="/assets/images/lNTlogo.svg" alt="" /></span></h2>
+                    <h2>Course offered by: <span><img src="/assets/images/lNTlogo.svg" alt="" /></span></h2>
                 </div>
             </div>
         </div>

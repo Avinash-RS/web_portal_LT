@@ -1198,15 +1198,17 @@
 ::ng-deep.inprogressModule {
   .drag-scroll-content {
     display: flex !important;
-    &:hover {
-      .progressContainer, .topicsContainer {
-        opacity: 0.3;
-      }
-    }
-    .progressContainer, .topicsContainer {
-      transition: opacity .3s ease-in-out;
+    .contWrap {
       &:hover {
-        opacity: 1;
+        .progressContainer, .topicsContainer {
+          opacity: 0.3;
+        }
+      }
+      .progressContainer, .topicsContainer {
+        transition: opacity .3s ease-in-out;
+        &:hover {
+          opacity: 1;
+        }
       }
     }
   }

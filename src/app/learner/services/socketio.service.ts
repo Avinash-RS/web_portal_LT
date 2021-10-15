@@ -3,13 +3,13 @@ import { Output, EventEmitter } from '@angular/core';
 import * as io from 'socket.io-client';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
-
+import * as CryptoJS from 'crypto-js';
 export class SocketioService {
     socket: any;
     loginDetails: any;
     observer: any;
     @Output() change: EventEmitter<boolean> = new EventEmitter();
-
+    secretKey = "(!@#Passcode!@#)";
     constructor() {
         this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) ;
        // this.socket = io(environment.socketio);
@@ -26,6 +26,8 @@ export class SocketioService {
             this.observer = observer;
         });
         this.loginDetails = JSON.parse(localStorage.getItem('UserDetails')) ;
+        this.loginDetails.user_id = CryptoJS.AES.decrypt( this.loginDetails.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
+        
         if (type.type === 'disconnect') {
             this.socket.emit('logout', this.loginDetails.user_id);
         }
@@ -38,7 +40,9 @@ export class SocketioService {
         return this.createObservable();
     }
     socketReceiver(){
+       // console.log(this.loginDetails.user_id,"inside serveive")
         this.socket.on('coursePlayerStatus', (msg: any) => {
+            console.log(msg,"inside serveive")
             if (this.loginDetails.user_id === msg.user_id) {
 
                 this.changeTrigger({
