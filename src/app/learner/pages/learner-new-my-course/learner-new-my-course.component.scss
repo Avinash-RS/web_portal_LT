@@ -1197,8 +1197,8 @@
 ::ng-deep.recentlyLearnedTopics, 
 ::ng-deep.inprogressModule {
   .drag-scroll-content {
-    display: flex !important;
     .contWrap {
+      display: flex !important;
       &:hover {
         .progressContainer, .topicsContainer {
           opacity: 0.3;
