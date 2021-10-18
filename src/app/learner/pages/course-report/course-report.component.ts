@@ -110,7 +110,9 @@ export class CourseReportComponent implements OnInit {
   getCourseReport(){
     this.weeklabelData =[];
     this.weekpercent = [];
-    this.learnerService.getLearnerNewCourseReport(atob(this.course.batchId),atob(this.course.id),this.userDetail.user_id,this.refresh, 14, 16).subscribe((data)=>{
+    var QA_totalweeks = this.course.QA_totalweeks ? parseInt(this.course.QA_totalweeks):16;
+    var selflearning_totalweeks= this.course.selflearning_totalweeks ? parseInt(this.course.selflearning_totalweeks):14;
+    this.learnerService.getLearnerNewCourseReport(atob(this.course.batchId),atob(this.course.id),this.userDetail.user_id,this.refresh, selflearning_totalweeks, QA_totalweeks).subscribe((data)=>{
     if (data.data['getLearnerNewCourseReport'].data[0]) {
       this.courseReport = true;
       this.courseReportData = data.data['getLearnerNewCourseReport'].data[0];
