@@ -373,7 +373,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.innerWidth = window.innerWidth;
     // let showAppBanner = localStorage.getItem('appBanner');
     // if (!showAppBanner) {
-    //   this.openInfoPopup();
+      this.openInfoPopup();
     // }
     if (this.userDetailes) {
       this.insidengOnInit();
@@ -448,7 +448,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
       panelClass: 'dialogContainer',
       closeOnNavigation: true,
       disableClose: true,
-
     });
   }
   closeBannerPopup() {
