@@ -1265,7 +1265,7 @@ export class ActivitiesComponent implements OnInit {
         disableClose: true,
         panelClass: 'popupModalContainer'
       });
-      path.path = path.videourl + this.blobKey;
+      path.path = path.path + this.blobKey;
       // if (path.path.includes('?sv=')) {
       // } else {
 
