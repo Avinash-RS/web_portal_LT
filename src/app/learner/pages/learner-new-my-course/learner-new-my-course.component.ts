@@ -903,23 +903,23 @@ changeWeekDate(){
   this.getWeekCourseData();
 }
 
-goToCourse(value){
-  const detail = {
-    id: value.courseid,
-    wishlist: false,
-    wishlist_id: null,
-    enrollment_status: null,
-    course_name: value.coursename,
-    course_status: value.status,
-    batch_id: value.batch_id,
-    batchEndTime: value.batch_end_date_Timer,
-    fromCalendar : true
-  };
+// goToCourse(value){
+//   const detail = {
+//     id: value.courseid,
+//     wishlist: false,
+//     wishlist_id: null,
+//     enrollment_status: null,
+//     course_name: value.coursename,
+//     course_status: value.status,
+//     batch_id: value.batch_id,
+//     batchEndTime: value.batch_end_date_Timer,
+//     fromCalendar : true
+//   };
 
-  localStorage.setItem('currentBatchEndDate', value.batch_end_date_Timer)
-  localStorage.setItem('Courseid', value.courseid);
-  localStorage.setItem('persentage', null);
-  localStorage.setItem('currentBatchId', value.batch_id);
-  this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
-}
+//   localStorage.setItem('currentBatchEndDate', value.batch_end_date_Timer)
+//   localStorage.setItem('Courseid', value.courseid);
+//   localStorage.setItem('persentage', null);
+//   localStorage.setItem('currentBatchId', value.batch_id);
+//   this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
+// }
 }
