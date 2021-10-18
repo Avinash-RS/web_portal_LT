@@ -672,8 +672,7 @@
                                 <drag-scroll #inProgress snap-duration="200" (reachesLeftBound)="leftBoundStatInProgress($event)" (reachesRightBound)="rightBoundStatInProgress($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
                                     <div class="contWrap">
                                         <div class="progressContainer" drag-scroll-item *ngFor="let progressModule of inProgressModule">
-                                            <div class="modules">
-                                                <!-- <div class="modules" (click)="goToCourse(progressModule)"> -->
+                                                <div class="modules" (click)="goToCourse(progressModule)">
                                                 <h6 data-title="{{progressModule.course_name}}">{{progressModule.course_name}}</h6>
                                                 <span>MODULE:</span>
                                                 <p data-title="{{progressModule.module}}">{{progressModule.module}}</p>
@@ -737,8 +736,7 @@
                                 <drag-scroll #completedTopics snap-duration="200" (reachesLeftBound)="leftBoundStat($event)" (reachesRightBound)="rightBoundStat($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
                                     <div class="contWrap">
                                         <div class="topicsContainer" drag-scroll-item *ngFor="let complete of completedTopic">
-                                            <!-- <div class="missedTopics" (click)="goToCourse(complete)"> -->
-                                                <div class="missedTopics">
+                                            <div class="missedTopics" (click)="goToCourse(complete)">
                                                 <h6 data-title="{{complete.course_name}}">{{complete.course_name}}</h6>
                                                 <span class="moduleName">MODULE:</span>
                                                 <h5 data-title="{{complete.module}}">{{complete.module}}</h5>
