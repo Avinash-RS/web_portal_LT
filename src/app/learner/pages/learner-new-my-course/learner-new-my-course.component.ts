@@ -749,7 +749,9 @@ export class LearnerNewMyCourseComponent implements OnInit {
       {
         id: btoa(c.course_id),
         name: c.course_name,
-        batchId: btoa(c.batchid)
+        batchId: btoa(c.batchid),
+        QA_totalweeks : c.QA_totalweeks,
+        selflearning_totalweeks : c.selflearning_totalweeks
       }
     });
   
