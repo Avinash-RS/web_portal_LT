@@ -1946,9 +1946,15 @@
     }
     .bgYellow {
       em {
-        display: inline-block;
-        color: #999999;
-        animation: rotating 5s linear infinite;
+        width: 20px;
+        height: 20px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        color: #ffffff;
+        background: #ffb229;
+        font-size: 12px;
       }
     }
     .bookmarkTopic {
