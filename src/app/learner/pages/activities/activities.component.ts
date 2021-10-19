@@ -884,6 +884,7 @@ export class ActivitiesComponent implements OnInit {
         this.showSubmittedon = true;
         this.selectfile = [];
       } else {
+        this.selectfile = [];
         this.ngxLoader.stop();
         this.toastr.warning(data.message);
         setTimeout(()=>{
@@ -1050,6 +1051,7 @@ export class ActivitiesComponent implements OnInit {
           if (data.success === true) {
             await this.multiFileUpload(data,( i+1))
           } else {
+            this.selectPerformfile = [];
             this.ngxLoader.stop();
             this.toastr.warning(data.message);
             setTimeout(()=>{
@@ -1265,7 +1267,7 @@ export class ActivitiesComponent implements OnInit {
         disableClose: true,
         panelClass: 'popupModalContainer'
       });
-      path.path = path.videourl + this.blobKey;
+      path.path = path.path + this.blobKey;
       // if (path.path.includes('?sv=')) {
       // } else {
 

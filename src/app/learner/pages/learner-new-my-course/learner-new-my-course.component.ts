@@ -371,10 +371,10 @@ export class LearnerNewMyCourseComponent implements OnInit {
 
   ngOnInit() {
     this.innerWidth = window.innerWidth;
-    // let showAppBanner = localStorage.getItem('appBanner');
-    // if (!showAppBanner) {
-    //   this.openInfoPopup();
-    // }
+    let showAppBanner = localStorage.getItem('appBanner');
+    if (!showAppBanner) {
+      this.openInfoPopup();
+    }
     if (this.userDetailes) {
       this.insidengOnInit();
     }
@@ -448,7 +448,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
       panelClass: 'dialogContainer',
       closeOnNavigation: true,
       disableClose: true,
-
     });
   }
   closeBannerPopup() {
@@ -902,5 +901,25 @@ generateWeekwiseChart(){
 }
 changeWeekDate(){
   this.getWeekCourseData();
+}
+
+goToCourse(value){
+  const detail = {
+    id: value.course_id,
+    wishlist: false,
+    wishlist_id: null,
+    enrollment_status: null,
+    course_name: value.coursename,
+    course_status: null,
+    batch_id: value.batchid,
+    batchEndTime: null,
+    fromCalendar : false
+  };
+
+  localStorage.setItem('currentBatchEndDate', value.batch_end_date_Timer)
+  localStorage.setItem('Courseid', value.courseid);
+  localStorage.setItem('persentage', null);
+  localStorage.setItem('currentBatchId', value.batch_id);
+  this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
 }
 }
