@@ -397,33 +397,33 @@
         margin-top: 2em;
         margin-bottom: 2em;
         .cousrse-wise-card{
-          width:100%;
+          width: 100%;
           padding-top: 11px;
           margin-bottom: 10px;
           @media only screen and (min-width: 576px) {
-            width:54.2%;
+            width: 54.2%;
             margin-bottom: 0px;
           }
-          @media only screen and (min-width: 720px) {
-            width:54.2%;
-            margin-bottom: 0px;
-          }
-          @media only screen and (min-width: 992px) {
-            width:54.2%;
-            margin-bottom: 0px;
-          }
-          @media only screen and (min-width: 1140px) {
-            width:54.2%;
-            margin-bottom: 0px;
-          }
-          .cousrse-wise-card-header{
-            .cousrse-wise-card-header-text{
+          .cousrse-wise-card-header {
+            flex-wrap: wrap;
+            @media only screen and (min-width: 576px) {
+              flex-wrap: nowrap;
+            }
+            .cousrse-wise-card-header-text {
               font-size:14px;
               font-weight: 500;
-              width: 50%;
+              width: 100%;
+              @media only screen and (min-width: 576px) {
+                width: 50%;
+              }
             }
-            .cousrse-wise-card-date{
-              width: 50%;
+            .cousrse-wise-card-date {
+              width: 100%;
+              margin-top: 10px;
+              @media only screen and (min-width: 576px) {
+                width: 50%;
+                margin-top: 0;
+              }
             }
           }
           .cousrse-chart-content{
@@ -1198,7 +1198,7 @@
 ::ng-deep.inprogressModule {
   .drag-scroll-content {
     .contWrap {
-      display: flex !important;
+      display: inline-flex !important;
       &:hover {
         .progressContainer, .topicsContainer {
           opacity: 0.3;
