@@ -177,7 +177,7 @@ export class ProgressionReportComponent implements OnInit {
   getWeekCourseData(){
     this.weekWiseChartDatalabel = [];
     this.weekWiseChartData = [];
-    var myFormattedDate = moment(this.weekWiseDate, 'yyyy-MM-dd');
+    var myFormattedDate = moment(this.weekWiseDate).format('yyyy-MM-DD');
     this.learnerService.getweekWiseCourseChart(this.courseId,this.userId,myFormattedDate,"").subscribe((result:any)=>{
       if(result.data.weekWiseCourseChart.success){
         this.totalhoursSpend = result.data.weekWiseCourseChart.data.totalhoursSpend;

@@ -10,7 +10,8 @@
 
 
   <div class="bg-img">
-    <span (click)="cannotEdit = !cannotEdit;" class="editText" [tooltip]="'Click here to change profile details' | translate" placement="right">
+    <!-- [tooltip]="'Click here to change profile details' | translate" placement="right" -->
+    <span (click)="cannotEdit = !cannotEdit;" class="editText">
       <span *ngIf="cannotEdit">
         <mat-icon  class="editIcon">create
         </mat-icon> {{'Edit' | translate}}
@@ -550,11 +551,6 @@
         </mat-dialog-actions>
       </ng-template>
     </div>
-
-
-
-
-
   </div>
 </div>
 

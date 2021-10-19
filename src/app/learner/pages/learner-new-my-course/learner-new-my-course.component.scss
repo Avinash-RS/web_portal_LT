@@ -397,33 +397,33 @@
         margin-top: 2em;
         margin-bottom: 2em;
         .cousrse-wise-card{
-          width:100%;
+          width: 100%;
           padding-top: 11px;
           margin-bottom: 10px;
           @media only screen and (min-width: 576px) {
-            width:54.2%;
+            width: 54.2%;
             margin-bottom: 0px;
           }
-          @media only screen and (min-width: 720px) {
-            width:54.2%;
-            margin-bottom: 0px;
-          }
-          @media only screen and (min-width: 992px) {
-            width:54.2%;
-            margin-bottom: 0px;
-          }
-          @media only screen and (min-width: 1140px) {
-            width:54.2%;
-            margin-bottom: 0px;
-          }
-          .cousrse-wise-card-header{
-            .cousrse-wise-card-header-text{
+          .cousrse-wise-card-header {
+            flex-wrap: wrap;
+            @media only screen and (min-width: 576px) {
+              flex-wrap: nowrap;
+            }
+            .cousrse-wise-card-header-text {
               font-size:14px;
               font-weight: 500;
-              width: 50%;
+              width: 100%;
+              @media only screen and (min-width: 576px) {
+                width: 50%;
+              }
             }
-            .cousrse-wise-card-date{
-              width: 50%;
+            .cousrse-wise-card-date {
+              width: 100%;
+              margin-top: 10px;
+              @media only screen and (min-width: 576px) {
+                width: 50%;
+                margin-top: 0;
+              }
             }
           }
           .cousrse-chart-content{
@@ -1197,16 +1197,19 @@
 ::ng-deep.recentlyLearnedTopics, 
 ::ng-deep.inprogressModule {
   .drag-scroll-content {
-    display: flex !important;
-    &:hover {
-      .progressContainer, .topicsContainer {
-        opacity: 0.3;
-      }
-    }
-    .progressContainer, .topicsContainer {
-      transition: opacity .3s ease-in-out;
+    .contWrap {
+      display: inline-flex !important;
       &:hover {
-        opacity: 1;
+        .progressContainer, .topicsContainer {
+          opacity: 0.3;
+        }
+      }
+      .progressContainer, .topicsContainer {
+        transition: opacity .3s ease-in-out;
+        cursor: pointer;
+        &:hover {
+          opacity: 1;
+        }
       }
     }
   }
@@ -2109,21 +2112,38 @@
 
 ////INFO BANNER POPUP
 ::ng-deep .dialogContainer {
-  overflow-y: hidden !important;
   width: 55% !important;
-  //max-height: 85% !important;
   margin: auto;
+  // overflow-y: hidden !important;
+  //max-height: 85% !important;
+  .mat-dialog-container {
+    border-radius: 0;
+    padding: 0 !important;
+    position: relative;
+    overflow: inherit;
+  }
 }
 .infocontent{
-  position: relative
+  // position: relative
 }
 .infoClose{
   cursor: pointer;
   position:absolute;
-  right: 10px;
-  top:10px;
+  right: -21px;
+  top: -21px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  width: 21px;
+  height: 21px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  em {
+    font-size: 11px;
+  }
 }
-.infoimg{
+.infoimg {
   width: 100%;
   height: auto;
 }

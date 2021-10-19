@@ -2490,11 +2490,17 @@ export const recentlycourse = gql`
             {
             course_name
               module
+              link
+              course_id
+              batchid
             }
             completedTopic{
               course_name
               module
               topic
+              link
+              course_id
+              batchid
               }
           }
         }

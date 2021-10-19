@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       // username: new FormControl('', myGlobals.req),
       username: ['',  myGlobals.req],
+      signInrecaptchaReactive: [null ,myGlobals.req],
       password: new FormControl('', myGlobals.req),
       remember_me: new FormControl(false, []),
       language: new FormControl(false, [])

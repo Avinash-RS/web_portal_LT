@@ -44,7 +44,17 @@
       }
     }
     .contentHeight {
-      height: calc(100vh - 111px);
+      height: calc(100vh - 71px);
+      .tocSize {
+        .leftTocContent {
+          height: calc(100vh - 149px);
+        }
+      }
+      .videoPlayer {
+        .toccollapsed {
+          display: none;
+        }
+      }
     }
   }
 }
@@ -62,6 +72,7 @@
   @media only screen and (min-width: 1140px) {
     height: calc(100vh - 111px);
   }
+
   // .hamburgerPosition {
   //   //position: relative;
   //   background-color: #ffcc00;
@@ -114,11 +125,11 @@
     }
     .leftTocContent {
       overflow: auto;
-      height: calc(100vh - 310px);
+      height: calc(100vh - 219px);
       margin: 10px 0;
-      @media only screen and (min-width: 568px) {
-        height: calc(100vh - 219px);
-      }
+      // @media only screen and (min-width: 568px) {
+      //   height: calc(100vh - 219px);
+      // }
       @media only screen and (min-width: 720px) {
         height: calc(100vh - 189px);
       }
@@ -233,6 +244,12 @@
     position: relative;
     z-index: 9;
     background-color: #ffffff;
+    &.No {
+      display: none !important;
+      @media only screen and (min-width:720px) {
+        display: flex !important;
+      }
+    }
     // &.Yes {
     //   position: relative;
     //   top: -6px;
@@ -261,8 +278,12 @@
           content: '';
         }
       }
+      &.widthChange {
+        width: 40%;
+      }
       @media only screen and (min-width: 720px) {
-        width: 30%;
+        // width: 30%;
+        width: auto;
       }
       .wrapper {
         width: 100%;
@@ -271,11 +292,11 @@
           width: auto;
         }
       }
-      .abtCourse, .resourcesTab {
+      .abtCourse, .resourcesTab, .downloadCode {
         display: inline-flex;
         align-items: center;
         font-size: 18px;
-        padding: 0 20px;
+        padding: 0 10px;
         cursor: pointer;
         @media only screen and (min-width: 720px) {
           padding: 0 20px 0 10px;
@@ -293,35 +314,35 @@
         em {
           line-height: 27px;
         }
-        &[data-title] {
-          transition: all 0.3s ease-in-out;
-          position: relative;
-          &:hover {
-            &::before {
-              content: attr(data-title);
-              position: absolute;
-              bottom: 40px;
-              left: 0;
-              line-height: normal;
-              background: #5c6873;
-              padding: 4px 6px;
-              color: #fff;
-              font-size: 11px;
-              white-space: nowrap;
-              z-index: 9;
-            }
-            &::after {
-              content: "";
-              position: absolute;
-              bottom: 28px;
-              left: 29px;
-              border-width: 6px;
-              border-style: solid;
-              border-color: #5c6873 transparent transparent transparent;
-              transform: translateX(-50%);
-            }
-          }
-        }
+        // &[data-title] {
+        //   transition: all 0.3s ease-in-out;
+        //   position: relative;
+        //   &:hover {
+        //     &::before {
+        //       content: attr(data-title);
+        //       position: absolute;
+        //       bottom: 40px;
+        //       left: 0;
+        //       line-height: normal;
+        //       background: #5c6873;
+        //       padding: 4px 6px;
+        //       color: #fff;
+        //       font-size: 11px;
+        //       white-space: nowrap;
+        //       z-index: 9;
+        //     }
+        //     &::after {
+        //       content: "";
+        //       position: absolute;
+        //       bottom: 28px;
+        //       left: 29px;
+        //       border-width: 6px;
+        //       border-style: solid;
+        //       border-color: #5c6873 transparent transparent transparent;
+        //       transform: translateX(-50%);
+        //     }
+        //   }
+        // }
       }
       .abtCourse {
         em {
@@ -333,34 +354,41 @@
           color: #DA1467;
         }
       }
-      .smile, .sad {
-        color: #757575;
-        font-size: 13px;
-        font-weight: 400;
-        line-height: normal;
-        margin: 0 20px;
-        cursor: pointer;
+      .downloadCode {
+        em {
+          color: #004684;
+          font-size: 15px;
+        }
       }
     }
     .notesBookmarks {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
       width: 100%;
       text-align: right;
       margin: 10px 0 0 0;
+      &.widthChange {
+        width: 60%;
+      }
       @media only screen and (min-width: 720px) {
         margin: 0;
-        width: 70%;
+        // width: 70%;
+        width: auto;
       }
-      // @media only screen and (min-width: 576px) {
-      // }
       button {
         border: 1px solid #08558C;
         border-radius: 4px;
-        padding: 6px 12px;
-        margin-left: 15px;
+        padding: 6px 9px;
+        margin-left: 10px;
         display: inline-flex;
         align-items: center;
         background-color: #f9f9f9;
         transition: background-color 0.3s ease-in-out;
+        @media only screen and (min-width: 720px) {
+          padding: 6px 12px;
+          margin-left: 15px;
+        }
         &:hover {
           background-color: #f0f0f0;
         }
@@ -379,6 +407,46 @@
             font-weight: 700;
             color: #000000;
           }
+        }
+      }
+      .askAQuestion {
+        em {
+          color: #ffb74d;
+        }
+      }
+      .smile, .sad {
+        font-size: 13px;
+        font-weight: 400;
+        line-height: normal;
+        margin: 0 0 0 10px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        @media only screen and (min-width: 720px) {
+          margin: 0 0 0 20px;
+        }
+        &.nofill {
+          color:#666666;
+          font-weight: 400;
+          &:hover {
+            color: #000000;
+          }
+        }
+        em {
+          padding-right: 7px;
+          font-size: 15px;
+        }
+      }
+      .smile {
+        &.fillcol {
+          color: #49AE31 !important;
+          font-weight: 500;
+        }
+      }
+      .sad {
+        &.fillcol {
+          color:#FF5722 !important;
+          font-weight: 500;
         }
       }
     }
@@ -440,23 +508,6 @@
         display: inline-block;
         vertical-align: text-bottom;
         margin-right: 3px;
-      }
-    }
-    .smile {
-      &.fillcol {
-        color:#56B35A !important;
-        font-weight: 500;
-      }
-    }
-    .sad {
-      &.fillcol {
-        color:#FF5722 !important;
-      }
-    }
-    .understoodText, .notUnderstoodText {
-      &.nofill {
-        color:#757575 !important;
-        font-weight: 500;
       }
     }
   }
@@ -819,14 +870,14 @@
   position: relative;
   top: -2px;
   // width:80%;
-  @media only screen and (max-width: 767px) {
+  @media only screen and (max-width: 719px) {
     max-width: 75%;
   }
 }
 .navigation {
-  margin-left: 10px;
   padding-right: 10px;
-  max-width: 65%;
+  max-width: 100%;
+  margin-left: 0;
   // min-width: 65%;
   justify-content: space-between;
   .pipeLine {
@@ -835,9 +886,9 @@
     display: inline-block;
     margin-right: 10px;
   }
-  @media only screen and (max-width: 767px) {
-    max-width: 100%;
-    margin-left: 7px;
+  @media only screen and (min-width: 720px) {
+    margin-left: 10px;
+    max-width: 65%;
   }
   div {
     display: inline-block;
@@ -1597,6 +1648,7 @@
 ::ng-deep.aboutCourseWrapper {
   width: 96% !important;
   height: 75% !important;
+  position: relative !important;
   @media only screen and (min-width: 720px) {
     width: 70% !important;
     height: 55% !important;
@@ -1612,7 +1664,6 @@
     width: 30% !important;
   }
   .mat-dialog-container {
-    position: relative;
     padding: 20px !important;
   }
 }
@@ -1895,9 +1946,16 @@
     }
     .bgYellow {
       em {
-        display: inline-block;
-        color: #999999;
-        animation: rotating 5s linear infinite;
+        width: 17px;
+        height: 17px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        color: #ffffff;
+        background: #ffb229;
+        font-size: 7px;
+        font-weight: bold;
       }
     }
     .bookmarkTopic {

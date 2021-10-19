@@ -72,7 +72,7 @@
     function checkIE() {
       const isIEOrEdge = /msie\s|trident\//i.test(window.navigator.userAgent)
       if (isIEOrEdge) {
-        let srcdata = 'src="assets/\IEBlocker.jpg"'
+        let srcdata = 'src="assets/\IEBlocker.png"'
         const redirectData = "<img " + srcdata + "  alt='Error' />"
         let elemdata = document.getElementById("msgContainer");
         if (elemdata) {
