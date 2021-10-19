@@ -1213,7 +1213,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  createEngineersForumData(userId,userName,courseId,question,courseName) {
+  createEngineersForumData(userId,userName,courseId,question,courseName,batchId) {
     return this.Apollo.query({
       query: createEngineersForumData,
       variables: {
@@ -1221,7 +1221,8 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
         userName,
         courseId,
         question,
-        courseName
+        courseName,
+        batchId
       }
     });
   }
