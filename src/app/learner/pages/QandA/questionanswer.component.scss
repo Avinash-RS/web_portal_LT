@@ -9,13 +9,13 @@
   }
   .questionLeftCol {
     //inner scroll
+    height: auto;
     overflow: auto;
-    height: calc(100vh - 111px);
-
     order: 2;
     padding: 20px 0;
     width: 100%;
     @media only screen and (min-width: 720px) {
+      height: calc(100vh - 111px);
       width: calc(100% - 300px);
       order: 1;
     }
