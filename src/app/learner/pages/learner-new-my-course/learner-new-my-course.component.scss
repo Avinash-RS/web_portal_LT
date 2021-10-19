@@ -1198,7 +1198,7 @@
 ::ng-deep.inprogressModule {
   .drag-scroll-content {
     .contWrap {
-      display: flex !important;
+      display: inline-flex !important;
       &:hover {
         .progressContainer, .topicsContainer {
           opacity: 0.3;

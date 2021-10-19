@@ -68,7 +68,11 @@
                 <a class="forgot" (click)="viewChange()">{{'Forgot password?' | translate}}</a>
               </span>
             </div>
-
+            <div class="d-flex justify-content-center mt-1">
+              <re-captcha formControlName="signInrecaptchaReactive" (resolved)="resolved($event)" (error)="onError($event)"
+                errorMode="handled" [siteKey]="siteKey">
+              </re-captcha>
+            </div>
             <div class="gradientBtn">
               <button id="login" mat-raised-button (click)="login()" [disabled]="!loginForm.valid">
                 <span *ngIf="!loader">{{'SIGN IN' | translate}}</span>
@@ -114,6 +118,9 @@
 
               <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
+          </div>
+          <div class="d-flex justify-content-center mt-1">
+            <re-captcha (resolved)="resolved($event)" (error)="onError($event)" errorMode="handled" [siteKey]="siteKey"></re-captcha>
           </div>
           <div class="gradientBtn">
             <button id="login" mat-raised-button [disabled]="!username.valid" (click)="forgotPassword()">
