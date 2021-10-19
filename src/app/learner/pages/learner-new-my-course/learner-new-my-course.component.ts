@@ -591,7 +591,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
   //ASK A QUESTION
   gotoAskQuestions(c) {
-    debugger;
     c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
       const detail = {
         course_name: c.course_name,
@@ -628,7 +627,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
 
   gotoProgression(course) {
-    // debugger
     let data = {
       courseId : course.course_id,
       courseName: course.course_name
