@@ -1,42 +1,29 @@
-import { Injectable } from "@angular/core";
+import { Injectable} from '@angular/core';
+import { Router } from '@angular/router';
+import { Gtag } from 'angular-gtag';
 
-type Tracker = {
-  send: (
-    hitType: string,
-    category: string,
-    action: string,
-    label?: string
-  ) => void;
-};
 
-declare const ga: {
-  (...args: any[]): () => void;
-  getAll: () => Tracker[];
-};
 
-const has = Object.prototype.hasOwnProperty;
 
-@Injectable({ providedIn: "root" })
-export class GoogleAnalyticsService {
 
-  logCustomEvent(
-    eventCategory: string,
-    eventAction: string,
-    eventLabel?: string
-  ) {
-    ga(() => {
-      if (has.call(window, "ga")) {
-        const tracker = ga.getAll();
-        if (tracker?.length > 0) {
-          tracker[0]?.send("event", eventCategory, eventAction, eventLabel);
-        }
-      }
-    });
-  }
+@Injectable({
 
-  logPageView(url: string,user_id) {
-    ga("set", "page", url);
-    ga("set", "userID", user_id)
-    ga("send", "pageview");
-  }
+providedIn: 'root'
+
+})
+
+export class GoogleAnalyticsService{
+
+
+
+constructor(private gtag: Gtag,
+    private router: Router) { }
+
+setInnerPage(title:string){
+this.gtag.pageview({
+    page_title: title,
+    page_path: this.router.url,
+    page_location: window.location.href
+  });
+}
 }
