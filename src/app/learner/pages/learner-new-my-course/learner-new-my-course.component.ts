@@ -592,6 +592,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
   //ASK A QUESTION
   gotoAskQuestions(c) {
+    debugger;
     c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
       const detail = {
         course_name: c.course_name,
@@ -646,7 +647,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.router.navigate(['/Learner/questionanswer'])
     localStorage.setItem('Courseid', course.course_id);
     localStorage.setItem('CourseName', course.course_name);
-
+    localStorage.setItem('currentBatchId', course.batchid);
   }
 
   getTodaydate() {
