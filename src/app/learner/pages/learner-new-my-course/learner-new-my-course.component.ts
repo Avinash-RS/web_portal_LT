@@ -627,7 +627,6 @@ export class LearnerNewMyCourseComponent implements OnInit {
   }
 
   gotoProgression(course) {
-    // debugger
     let data = {
       courseId : course.course_id,
       courseName: course.course_name
@@ -645,7 +644,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.router.navigate(['/Learner/questionanswer'])
     localStorage.setItem('Courseid', course.course_id);
     localStorage.setItem('CourseName', course.course_name);
-
+    localStorage.setItem('currentBatchId', course.batchid);
   }
 
   getTodaydate() {
