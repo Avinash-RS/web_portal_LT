@@ -26,14 +26,20 @@
   .chatBotIcon {
     position: fixed;
     right: 0;
-    bottom: 5px;
+    bottom: 35px;
     z-index: 9;
     margin: 0;
     cursor: pointer;
+    @media only screen and (min-width: 720px) {
+      bottom: 5px;
+    }
     img {
       display: inline-flex;
-      width: 90px;
+      width: 70px;
       height: auto;
+      @media only screen and (min-width: 720px) {
+        width: 90px;
+      }
     }
     &:hover {
       animation: up-down 5s infinite ease-in-out;
