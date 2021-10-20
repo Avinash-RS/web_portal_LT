@@ -2506,6 +2506,39 @@ export const recentlycourse = gql`
         }
       }
       `;
+      export const getlabActivityData = gql `
+      query getlabActivityData($userId:String,$courseId:String,$pagination:Boolean,$page:Int,$noofItems:Int){
+        getlabActivityData(userId:$userId,courseId:$courseId,pagination:$pagination,page:$page,noofItems:$noofItems){
+          success
+          error_msg
+          data{
+              _id
+              labActivity{
+              project_id
+              activitystartdate
+              activityenddate
+              submit_status
+              course_id
+              batchid
+              batchstartdate
+              batchenddate
+              activityId
+              iterationTotal
+              module_id
+              activityname
+              topic_id
+              projecttype
+              groupDetails{
+              id
+              username
+              name
+              email
+              }
+              }
+              }
+          }
+        }
+`;
 export const getlabactivity = gql `
       mutation getlabactivity($batchid:String,$course_id:String){
         getlabactivity(batchid:$batchid,course_id:$course_id){
