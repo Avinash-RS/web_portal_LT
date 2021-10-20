@@ -38,6 +38,7 @@
     "@types/jquery": "^3.3.35",
     "@types/video.js": "^7.3.11",
     "angular-calendar": "^0.28.20",
+    "angular-gtag": "^1.0.4",
     "angular-svg-round-progressbar": "^2.0.0",
     "animate.css": "^4.1.1",
     "apollo": "^2.31.0",

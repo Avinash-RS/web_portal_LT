@@ -10,6 +10,7 @@ import * as CryptoJS from 'crypto-js';
 import { RecaptchaErrorParameters } from "ng-recaptcha";
 import { environment } from '../../../../environments/environment';
 import { Title } from '@angular/platform-browser';
+import { GoogleAnalyticsService } from '@learner/services/google-analytics.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
         this.username.hasError('email') ? 'Please enter a valid email address' :
             '';
   }
-  constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder, public learnerService: LearnerServicesService,
+  constructor(public translate: TranslateService, private router: Router, private formBuilder: FormBuilder, public learnerService: LearnerServicesService,public gaService:GoogleAnalyticsService,
              // public socketService: SocketioService,
               private service: LearnerServicesService, private toastr: ToastrService, private activatedRoute: ActivatedRoute,private titleService: Title) {
       this.languages = [{lang: 'ta' , languagename: 'Tamil' } , { lang: 'en' , languagename: 'English'  }] ;
@@ -67,11 +68,13 @@ export class LoginComponent implements OnInit {
     this.signInPage = false;
     this.forgotPage = true;
     this.titleService.setTitle('Forgot Password');
+    this.gaService.setInnerPage('Forgot Password')
   }
   backToSignin(){
     this.forgotPage = false;
     this.signInPage = true;
     this.titleService.setTitle('Learner Login');
+    this.gaService.setInnerPage('Learner Login')
     this.username.reset();
   }
   forgotPassword() {
@@ -204,6 +207,8 @@ export class LoginComponent implements OnInit {
     viewSignin(){
       this.signInPage = false;
       this.signUpPage = true;
+      this.titleService.setTitle('Sign up')
+      this.gaService.setInnerPage('Sign up')
       this.gettitleData();
       this.registerForm = this.formBuilder.group({
         recaptchaReactive: [null, [Validators.required]],

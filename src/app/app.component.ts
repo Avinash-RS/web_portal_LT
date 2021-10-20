@@ -3,13 +3,18 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { GlobalServiceService } from '././core/services/handlers/global-service.service';
 import { Title } from '@angular/platform-browser';
-import { filter } from 'rxjs/operators';
+import { filter, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { CommonServicesService } from '@core/services/common-services.service';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, timer } from 'rxjs';
 import { slideInAnimation } from './router.animation';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-
-
+import { environment } from '@env/environment';
+import { GoogleAnalyticsService } from '@learner/services/google-analytics.service';
+import { has } from 'underscore';
+import * as CryptoJS from 'crypto-js';
+import { Gtag } from 'angular-gtag';
+declare var window;
+declare var dataLayer
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -30,6 +35,8 @@ export class AppComponent implements OnInit {
   loadersubscription: Subscription;  
   hideLeftMenu: boolean = false;
   chatbotShow: boolean = false;
+  UserDetails: any;
+  secretKey = "(!@#Passcode!@#)";
    // FOR DRM(Restriction for right click)
    @HostListener('document:keydown', ['$event'])
    handleKeyboardEvent(event: KeyboardEvent) {
@@ -39,24 +46,73 @@ export class AppComponent implements OnInit {
        event.preventDefault();
      }
  }
-
+ private destroy$ = new Subject<void>();
   constructor(private router: Router,
               private gs: GlobalServiceService,
+              private ga_service: GoogleAnalyticsService,
               private http: HttpClient,
               private activatedRoute: ActivatedRoute,
               private titleService: Title,
               private commonService: CommonServicesService,
               public Lservice: LearnerServicesService,
+              private gtag: Gtag
 
   ) {
     // console.error = function(){}
     // console.warn = function(){}
     this.commonService.getIpAddressByUrl();
-    
     // this.getorganizationbyiddetails();
+
+    //GOOGLE ANALYTICS INIT
+     if (environment.gaTrackingId) {
+    // register google tag manager
+    // const gTagManagerScript = document.createElement('script');
+    // gTagManagerScript.async = true;
+    // gTagManagerScript.src = `https://www.googletagmanager.com/gtag/js?id=${environment.gaTrackingId}`;
+    // document.head.appendChild(gTagManagerScript);
+
+    // register google analytics
+    // const gaScript = document.createElement('script');
+    // gaScript.innerHTML = `
+    //   window.dataLayer = window.dataLayer || [];
+    //   function gtag() { dataLayer.push(arguments); }
+    //   gtag('js', new Date());
+      
+    // `;
+    // document.head.appendChild(gaScript);
+  }
   }
 
   ngOnInit() {
+
+//GOOGLE ANALYTICS
+// this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null
+// timer(500)
+//      .pipe(
+//        filter(() => has.call(window, 'ga')),
+//        take(1),
+//        switchMap(() => {
+//          return this.router.events.pipe(
+//            filter((e) => e instanceof NavigationEnd),
+//            tap((e: NavigationEnd) => {
+//             var user_id = null
+//              if(this.UserDetails.user_id){
+//               user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(); 
+//               dataLayer = [{'userID': user_id}];
+//               console.log(window['dataLayer'])
+//             }
+//             gtag('config', '${environment.gaTrackingId}');
+//              this.ga_service.logPageView(e.url,user_id);
+            
+//            })
+//          );
+//        }),
+//        takeUntil(this.destroy$)
+//      )
+//      .subscribe();
+
+
+
    // console.error = function(){}
    // console.log = function(){}
   //  console.warn = function(){}
@@ -87,9 +143,33 @@ export class AppComponent implements OnInit {
     // if(!this.runnablePlatforms.includes(navigator.platform)){
     //   this.isMobile = true;
     // }
+    this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
     ).subscribe((e: any) => {
+console.log(e)
+        const titledat = this.getChild(this.activatedRoute);
+      titledat.data.subscribe(data => {
+        this.gtag.pageview({
+          page_title: data?.title? data.title : "L&T Edutech",
+          page_path: this.router.url,
+          page_location: window.location.href
+        });
+      })
+        
+        if(this.UserDetails){
+          let user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(); 
+          if(dataLayer)
+          {
+            dataLayer[0]={'userID': user_id};
+            
+                    
+        }else{
+          dataLayer[0]={'userID': user_id};
+        }
+        }
+                      // this.ga_service.logPageView(e.url,user_id);
+        // this.ga_service.logPageView(e.url);
       const urlIdentifier = e.url.split("/")
       const possiblePages = ['register', 'login', 'recover', 'resetpassword','password','']
       const rt = this.getChild(this.activatedRoute);
@@ -177,6 +257,7 @@ myUnload() {
   ngOnDestroy(): void {
     this.loaderSubscription.unsubscribe();
     this.loadersubscription.unsubscribe();
+    this.destroy$.next();
   }
 
   toggleChatbot() {
