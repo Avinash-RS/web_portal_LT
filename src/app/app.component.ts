@@ -169,12 +169,12 @@ export class AppComponent implements OnInit {
         
         if(this.UserDetails){
           let user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(); 
-          if(window.dataLayer)
+          if(dataLayer)
           {
-            window.dataLayer[0]={'userID': user_id};
+            dataLayer[0]={'userID': user_id};
             
         }else{
-          window.dataLayer[0]={'userID': user_id};
+          dataLayer[0]={'userID': user_id};
         }
         }
         // this.ga_service.logPageView(e.url,user_id);
