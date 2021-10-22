@@ -578,10 +578,10 @@ margin-bottom: 9px;
 }
 .grpName, .teamName {
   position: relative;
-  width: 10em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  width: 11em;
+  // white-space: nowrap;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
   // bottom: 2px;
   // left: 1px;
 }
