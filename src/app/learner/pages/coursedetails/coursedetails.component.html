@@ -319,7 +319,7 @@
                 <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType=='collegeconnect'" type="button" (click)="openQuestionDialog(questionDialog)">
                     <em class="lxp-question"></em> <span>Ask A Question</span>
                 </button>
-                 <button class="bookmarkBtn" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
+                 <button class="bookmarkBtn" *ngIf="userType!='Corporate'" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
                      <em [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></em> <span [ngClass]="topicInfo?.bookmark?'bold':'normal'">{{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? 'Bookmarked':'Bookmark'}}</span>
                  </button>
             </div>
