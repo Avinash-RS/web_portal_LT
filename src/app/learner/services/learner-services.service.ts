@@ -28,7 +28,7 @@ boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignm
      getSpecificationdetails, getSubCategory, getTrendingcourse, getUserdetail,
      getUserdetailUsername, listContent, login, playerModuleAndTopic, singleBatchInfo,
      syllabusofParticularScorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData, get_batchwise_learner_dashboard_data, get_learner_dashboard_count,
-     getCourseGallery , getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata,selfLearningdatabyUserId, getengineersForumQA_Count,recentlycourse,getlabactivity,labactivity,weekWiseCourseChart,overAllCourseProgressByUserId
+     getCourseGallery , getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata,selfLearningdatabyUserId, getengineersForumQA_Count,recentlycourse,getlabactivity,labactivity,weekWiseCourseChart,overAllCourseProgressByUserId,getlabActivityData
 } from './operations/learner_query';
 
 
@@ -941,10 +941,13 @@ getMessage(): Observable<any> {
   }
   getlabactivity(labdata){
     return this.Apollo.query({
-      query:getlabactivity,
+      query:getlabActivityData,
       variables:{
-        batchid: labdata.batchid,
-        course_id:labdata.course_id
+        userId:labdata.userId,
+        courseId:labdata.courseId,
+        pagination:labdata.pagination,
+        page:labdata.page,
+        noofItems:labdata.noofItems,
       }
     })
   }

@@ -31,6 +31,9 @@ import { InterceptorService } from '@learner/services/interceptor.service';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { KnowledgePreviewComponent } from '@learner/pages/knowledge-preview/knowledge-preview.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { GoogleAnalyticsService } from '@learner/services/google-analytics.service';
+import {GtagModule} from "angular-gtag";
+
 
 // import { ChartsModule } from 'ng2-charts';
 
@@ -70,6 +73,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     GraphqlModule,
     NgxUiLoaderModule,
     AngularEditorModule,
+    GtagModule.forRoot({ trackingId: 'UA-189802508-1', trackPageviews: false }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -79,7 +83,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     }),
 
   ],
-  providers: [AlertComponentComponent, DatePipe, SocketioService, InterceptorService,
+  providers: [AlertComponentComponent, DatePipe, SocketioService,GoogleAnalyticsService, InterceptorService,
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
     {
       provide: APP_BASE_HREF,
