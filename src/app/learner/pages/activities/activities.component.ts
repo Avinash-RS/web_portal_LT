@@ -430,17 +430,20 @@ export class ActivitiesComponent implements OnInit {
   //getLabPracticeData
   getLabPracticeData(){
     var labdata ={
-      batchid: this.checkDetails.batchId,
-      course_id:this.courseid
+      userId: this.userDetail.user_id,
+      courseId:this.courseid,
+      pagination:false,
+      page:0,
+      noofItems:0
     }
     this.Lservice.getlabactivity(labdata).subscribe((result:any)=>{
-      if(result.data.getlabactivity.success){
-        this.labpracticeData = result.data.getlabactivity.data;
+      if(result.data.getlabActivityData.success){
+        this.labpracticeData = result.data.getlabActivityData.data;
         this.labNoCard = false;
       }
       else{
         this.labNoCard = true;
-        this.toastr.warning(result.data.getlabactivity.message);
+        this.toastr.warning(result.data.getlabActivityData.message);
       }
     })
   }
@@ -1267,6 +1270,9 @@ export class ActivitiesComponent implements OnInit {
         disableClose: true,
         panelClass: 'popupModalContainer'
       });
+      if (path.videourl) {
+        path.path = path.videourl;
+      }
       path.path = path.path + this.blobKey;
       // if (path.path.includes('?sv=')) {
       // } else {

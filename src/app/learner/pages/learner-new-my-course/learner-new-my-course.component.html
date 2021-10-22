@@ -343,18 +343,18 @@
                                                             <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#dedede'" [innerStrokeColor]="'#ededed'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="4.5" [subtitleFontSize]="5.5" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=800> </circle-progress>
                                                         </div>
                                                     </div>
-                                                    <!-- <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
+                                                    <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
                                                         <em class="lxp-Dot_Menu"></em>
                                                     </span>
                                                     <mat-menu #menu="matMenu" xPosition="before">
-                                                        <button *ngIf ="shotDotSearch" mat-menu-item (click)="openGallery(item)">
+                                                        <!-- <button *ngIf ="shotDotSearch" mat-menu-item (click)="openGallery(item)">
                                                           <span><em class="lxp-Search mr-2"></em>Search</span>
                                                         </button>
-                                                        <mat-divider *ngIf ="shotDotSearch"></mat-divider>
+                                                        <mat-divider *ngIf ="shotDotSearch"></mat-divider> -->
                                                         <button mat-menu-item (click)="openReport(item)">
                                                           <span><em class="lxp-Edit_Document mr-2"></em>Course Assessment Report</span>
                                                         </button>
-                                                    </mat-menu> -->
+                                                    </mat-menu>
                                                 </div>
                                                 <div *ngIf="item?.batchid" class="showLessContent">
                                                     <div [ngClass]="!item.isReadMore ? '' : 'showText'">
@@ -455,18 +455,18 @@
                                                             <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#dedede'" [innerStrokeColor]="'#ededed'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="5" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=800> </circle-progress>
                                                         </div>
                                                     </div>
-                                                    <!-- <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
+                                                    <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
                                                         <em class="lxp-Dot_Menu"></em>
-                                                    </span> -->
-                                                    <!-- <mat-menu #menu="matMenu" xPosition="before">
-                                                        <button mat-menu-item (click)="openGallery(item)">
+                                                    </span>
+                                                    <mat-menu #menu="matMenu" xPosition="before">
+                                                        <!-- <button mat-menu-item (click)="openGallery(item)">
                                                           <span><em class="lxp-Search mr-2"></em>Search</span>
                                                         </button>
-                                                        <mat-divider></mat-divider>
+                                                        <mat-divider></mat-divider> -->
                                                         <button mat-menu-item (click)="openReport(item)">
                                                           <span><em class="lxp-Edit_Document mr-2"></em>Course Assessment Report</span>
                                                         </button>
-                                                      </mat-menu> -->
+                                                      </mat-menu>
                                                 </div>
                                                 <div *ngIf="item?.batchid" class="showLessContent">
                                                     <div [ngClass]="!item.isReadMore ? '' : 'showText'">
@@ -564,18 +564,18 @@
                                                             <circle-progress percent="{{((100 * (item.current_week_count!==null?item.current_week_count:0)) / (item.actual_total_week!==null?item.actual_total_week:1))}}" [radius]="10" [outerStrokeWidth]="2" [innerStrokeWidth]="2" [space]="-2" [outerStrokeColor]="'#dedede'" [innerStrokeColor]="'#ededed'" [titleColor]="'#666666'" [subtitleColor]="'#333333'" [titleFontSize]="5" [subtitleFontSize]="6" [animation]="true" [animationDuration]="10" [startFromZero]="false" [responsive]="true" title="Week" [subtitle]="item.weekPercentage" [showUnits]="false" [showSubtitle]="true" subtitleFontWeight=800> </circle-progress>
                                                         </div>
                                                     </div>
-                                                    <!-- <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
+                                                    <span *ngIf="item?.batchid" class="menuIcon" [matMenuTriggerFor]="menu">
                                                         <em class="lxp-Dot_Menu"></em>
-                                                    </span> -->
-                                                    <!-- <mat-menu #menu="matMenu" xPosition="before">
-                                                        <button mat-menu-item (click)="openGallery(item)">
+                                                    </span>
+                                                    <mat-menu #menu="matMenu" xPosition="before">
+                                                        <!-- <button mat-menu-item (click)="openGallery(item)">
                                                           <span><em class="lxp-Search mr-2"></em>Search</span>
                                                         </button>
-                                                        <mat-divider></mat-divider>
+                                                        <mat-divider></mat-divider> -->
                                                         <button mat-menu-item (click)="openReport(item)">
                                                           <span><em class="lxp-Edit_Document mr-2"></em>Course Assessment Report</span>
                                                         </button>
-                                                    </mat-menu> -->
+                                                    </mat-menu>
                                                 </div>
                                                 <div *ngIf="item?.batchid" class="showLessContent">
                                                     <div [ngClass]="!item.isReadMore ? '' : 'showText'">
@@ -653,7 +653,7 @@
                                 <mat-label *ngIf="userDetailes.org_type != 'vocational'">Courses For:</mat-label>
                                 <mat-select (selectionChange)="onSelectionChange($event)" matTooltip="{{tooltipJobRole}}" [(ngModel)]="jobroleCategoryId">
                                   <mat-select-trigger>{{selectedJobRoleData?.jobroleCategoryName}}</mat-select-trigger>
-                                  <mat-option matTooltipClass="custom-mat-tooltip" matTooltip="{{selectedJobRole.jobroleCategoryName}}" class="jobRolecustomClass" *ngFor="let selectedJobRole of vocationalselectjobRole" [value]="selectedJobRole.jobroleCategoryId" (onSelectionChange)="jobRoleSelectedFunction($event,selectedJobRole)">
+                                  <mat-option matTooltipClass="custom-mat-tooltip" class="jobRolecustomClass" *ngFor="let selectedJobRole of vocationalselectjobRole" [value]="selectedJobRole.jobroleCategoryId" (onSelectionChange)="jobRoleSelectedFunction($event,selectedJobRole)">
                                     {{selectedJobRole.jobroleCategoryName}}
                                     <!-- <span class="jobRoleCount">{{selectedJobRole.jobroleEnrollCount}}</span> -->
                                   </mat-option>
