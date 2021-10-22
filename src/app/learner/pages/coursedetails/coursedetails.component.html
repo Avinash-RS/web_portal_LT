@@ -316,6 +316,9 @@
                 <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType!=='collegeconnect'" type="button" (click)="openAskQuestions(askQuestions)">
                     <em class="lxp-question"></em> <span>Ask A Question</span>
                 </button>
+                <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType=='collegeconnect'" type="button" (click)="openQuestionDialog(questionDialog)">
+                    <em class="lxp-question"></em> <span>Ask A Question</span>
+                </button>
                  <button class="bookmarkBtn" *ngIf="userType == 'collegeconnect'" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
                      <em [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></em> <span [ngClass]="topicInfo?.bookmark?'bold':'normal'">{{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? 'Bookmarked':'Bookmark'}}</span>
                  </button>
@@ -648,4 +651,31 @@
         </div>
     </mat-card>
 </div>
+</ng-template>
+
+
+<ng-template #questionDialog>
+    <div class="d-flex justify-content-between titleMargin" (contextmenu)="contextmenu()">
+        <div class="font-weight-bold">
+            <h2>Ask A Question</h2>
+        </div>
+        <div><em (click)="dialogClose()" class="lxp-Close pointer"></em></div>
+    </div>
+    <div class="dialogContent" (contextmenu)="contextmenu()">
+
+        <div>
+            <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
+        </div>
+        <!-- <div [innerHTML]="htmlContent"></div> -->
+        <div>
+            <!-- <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Notify by e-mail for incomming answers</label>
+            </div> -->
+        </div>
+        <div class="d-flex justify-content-between cancelSubmit">
+            <button class="btn btn-outline-dark btn-block" (click)="dialogClose()">Cancel</button>
+            <button class="btn btn-danger btn-block" (click)="createQuestion()">Submit Question</button>
+        </div>
+    </div>
 </ng-template>

@@ -15,6 +15,7 @@ import { SocketioService } from '@learner/services/socketio.service';
 import { TranslateService } from '@ngx-translate/core';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { AngularEditorConfig } from "@kolkov/angular-editor";
 import * as _ from 'lodash';
 import { filter } from 'underscore';
 // import { debugger } from 'fusioncharts';
@@ -40,6 +41,47 @@ import * as CryptoJS from 'crypto-js';
 export class CoursedetailsComponent implements OnInit {
   @ViewChild('clonePreviewContainer') template;
   @ViewChild('mobContainer', {read: ViewContainerRef}) mobContainer;
+  htmlContent = '';
+  showSkeleton: boolean = false;
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '20rem',
+    minHeight: '5rem',
+    placeholder: 'Please ask your question with concise and add any other details here',
+    translate: 'no',
+    defaultParagraphSeparator: '',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['undo', 'redo', 'strikeThrough', 'subscript', 'superscript', 'heading', 'fontName'],
+      [
+        'fontSize',
+        'textColor',
+        'backgroundColor',
+        'customClasses',
+        'unlink',
+        'insertVideo',
+        // 'insertHorizontalRule',
+        'removeFormat',
+        'toggleEditorMode'
+      ]
+    ],
+    customClasses: [
+      {
+        name: "quote",
+        class: "quote",
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: "titleText",
+        class: "titleText",
+        tag: "h1",
+      },
+    ]
+  };
   blobKey = environment.blobKey;
   course: any = null;
   loading: boolean;
@@ -1222,6 +1264,61 @@ export class CoursedetailsComponent implements OnInit {
   navigatePractice(){
     window.open(this.eboxUrl);
   }
+
+  openQuestionDialog(templateRef) {
+    this.dialog.open(templateRef, {
+      panelClass: 'QAContainer',
+      width: "50%",
+      height: "55%",
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+    const backdrop = document.getElementsByClassName('cdk-overlay-backdrop')[0];
+    const containerarea = document.getElementsByClassName('mat-dialog-container')[0];
+    rclickctrl(backdrop)
+    rclickctrl(containerarea)
+    function rclickctrl(element){
+      element.addEventListener("contextmenu", ( e )=> {
+        e.preventDefault();
+        return false;
+      } );
+    }
+  }
+
+  dialogClose(value?) {
+    this.dialog.closeAll();
+    this.htmlContent = "";
+  }
+
+  createQuestion() {
+    if (this.htmlContent) {
+      let regexKey = /[&<>#]/gi;
+      if (this.htmlContent.search(regexKey) == -1) {
+        this.toastr.warning("spl key")
+        return false
+      }
+
+      this.Lservice.createEngineersForumData(this.userDetail.user_id, this.userDetail.full_name, this.courseid, this.htmlContent, this.course?.course_name, this.batchId).subscribe((rdata: any) => {
+        if (rdata?.errors && rdata?.errors[0]?.message === "Request failed with status code 413") {
+          this.toastr.warning("Content limit exceeded!!")
+
+        } else {
+          if (rdata.data.createEngineersForumData.success) {
+            // this.selectedIndex = 1
+            this.dialogClose('confirm');
+            this.toastr.success(rdata.data.createEngineersForumData.message);
+          } else {
+            this.toastr.warning(rdata.data.createEngineersForumData.message)
+          }
+        }
+        this.showSkeleton = true
+      })
+
+    } else {
+      this.toastr.warning("Question cannot be empty")
+    }
+  }
+
 }
 
 
