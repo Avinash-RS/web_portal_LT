@@ -64,23 +64,23 @@ export class AppComponent implements OnInit {
     // this.getorganizationbyiddetails();
 
     //GOOGLE ANALYTICS INIT
-     if (environment.gaTrackingId) {
+  //    if (environment.gaTrackingId) {
     // register google tag manager
-    // const gTagManagerScript = document.createElement('script');
-    // gTagManagerScript.async = true;
-    // gTagManagerScript.src = `https://www.googletagmanager.com/gtag/js?id=${environment.gaTrackingId}`;
-    // document.head.appendChild(gTagManagerScript);
+    const gTagManagerScript = document.createElement('script');
+    gTagManagerScript.async = true;
+    gTagManagerScript.src = `https://www.googletagmanager.com/gtag/js?id=${environment.gaTrackingId}`;
+    document.head.appendChild(gTagManagerScript);
 
-    // register google analytics
-    // const gaScript = document.createElement('script');
-    // gaScript.innerHTML = `
-    //   window.dataLayer = window.dataLayer || [];
-    //   function gtag() { dataLayer.push(arguments); }
-    //   gtag('js', new Date());
-      
-    // `;
-    // document.head.appendChild(gaScript);
-  }
+  //   // register google analytics
+    const gaScript = document.createElement('script');
+    gaScript.innerHTML = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', '${environment.gaTrackingId}',{ 'send_page_view': false });
+      `;
+    document.head.appendChild(gaScript);
+  // }
   }
 
   ngOnInit() {
@@ -147,7 +147,17 @@ export class AppComponent implements OnInit {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
     ).subscribe((e: any) => {
-console.log(e)
+
+    //adding USERID to datalayer
+    //   var user_id = null
+    //   if(this.UserDetails.user_id){
+    //    user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(); 
+    //    window.dataLayer = [{'userID': user_id}];
+    //    console.log(window['dataLayer'])
+    //  }else{
+    //    window.dataLayer = [{'userID': null}];
+    //  }   
+    //  send pageview 
         const titledat = this.getChild(this.activatedRoute);
       titledat.data.subscribe(data => {
         this.gtag.pageview({
@@ -159,16 +169,15 @@ console.log(e)
         
         if(this.UserDetails){
           let user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(); 
-          if(dataLayer)
+          if(window.dataLayer)
           {
-            dataLayer[0]={'userID': user_id};
+            window.dataLayer[0]={'userID': user_id};
             
-                    
         }else{
-          dataLayer[0]={'userID': user_id};
+          window.dataLayer[0]={'userID': user_id};
         }
         }
-                      // this.ga_service.logPageView(e.url,user_id);
+        // this.ga_service.logPageView(e.url,user_id);
         // this.ga_service.logPageView(e.url);
       const urlIdentifier = e.url.split("/")
       const possiblePages = ['register', 'login', 'recover', 'resetpassword','password','']
