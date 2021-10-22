@@ -12,5 +12,5 @@ export const environment = {
   galleryURL : 'https://lxpdevstorage.z29.web.core.windows.net',
   blobKey: '?sv=2018-03-28&ss=b&srt=sco&sp=racwdl&st=2021-04-16T11%3A32%3A54Z&se=2171-04-16T11%3A37%3A54Z&spr=https%2Chttp&sig=9m73poSUv3%2FE%2BsrRJEOjA8dmL50w4073u%2B3VgsN%2FaDI%3D',
   teachercommunity: 'https://engineers.lntiggnite.com/teachercommunity/',
-  gaTrackingId: 'UA-189802508-1'
+  gaTrackingId: 'G-6N6X7SQTXH'
 };
