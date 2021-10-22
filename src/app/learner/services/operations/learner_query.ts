@@ -2490,9 +2490,17 @@ export const recentlycourse = gql`
             {
             course_name
               module
+              topic_name
               link
               course_id
               batchid
+              lastModule
+              week
+              topicIndex
+              moduleIndex
+              lastTopic
+              topic_status
+              module_status
             }
             completedTopic{
               course_name
@@ -2501,6 +2509,11 @@ export const recentlycourse = gql`
               link
               course_id
               batchid
+              week
+              topicIndex
+              moduleIndex
+              topic_status
+              module_status
               }
           }
         }

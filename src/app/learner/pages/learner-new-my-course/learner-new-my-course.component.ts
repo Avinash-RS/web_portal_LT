@@ -911,7 +911,14 @@ goToCourse(value){
     course_status: null,
     batch_id: value.batchid,
     batchEndTime: null,
-    fromCalendar : false
+    fromCalendar : false,
+    fromSuggestion: true,
+    url:value.link,
+    week:value.week,
+    moduleNane:value.module,
+    moduleIndex:value.moduleIndex,
+    topicName:value.topic_name,
+    topicIndex:value.topicIndex
   };
 
   localStorage.setItem('currentBatchEndDate', value.batch_end_date_Timer)

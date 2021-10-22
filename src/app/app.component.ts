@@ -178,6 +178,7 @@ export class AppComponent implements OnInit {
           page_location: window.location.href,
           userID:user_id
         });
+        this.gtag.set({ 'userID' : user_id });
       })
         
        

@@ -664,9 +664,15 @@ export class CoursedetailsComponent implements OnInit {
       this.scromModuleData = this.scromApiData?.childData;
       this.weekLength = this.scromApiData.childData.length;
       // this.moduleLenth = this.scromApiData?.childData.length;
-      this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : Number(this.scromApiData.topicIndex);
+      if(!this.checkDetails?.fromSuggestion)
+      {this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : Number(this.scromApiData.topicIndex);
       this.moduleHolder = this.currentPage = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
+      this.weekHolder  = this.weekHolderUI = this.checkDetails.week - 1;}
+      else{
+        this.nextPrevHolder = this.topiccurrentPage = Number(this.checkDetails.topicIndex);
+      this.moduleHolder = this.currentPage = Number(this.checkDetails.moduleIndex);
       this.weekHolder  = this.weekHolderUI = this.scromApiData.week - 1;
+      }
       // this.scromModuleData[this.moduleHolder].expanded = true;
       this.oldIdx = this.moduleHolder;
       this.topicInfo = this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].children[this.nextPrevHolder]
@@ -687,13 +693,22 @@ export class CoursedetailsComponent implements OnInit {
       //   this.scromModuleData[0].childData[0].children[0].status = 'process'
       // }
       let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
-      this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+      if(this.checkDetails.fromSuggestion){
+        this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+        (environment.scormUrl + '/scormPlayer.html?contentID=' +
+          this.courseid + '&user_id=' + id + '&user_obj_id=' +
+          this.getuserid._id + '&path=' + this.checkDetails.url +
+          '&module_status=' + 'process&week='+ (this.checkDetails.week + 1)
+          + '&module=' + this.checkDetails.moduleName + '&topic=' + this.checkDetails.topicName + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
+      }
+      else
+      {this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?contentID=' +
           this.courseid + '&user_id=' + id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.scromApiData.url +
           '&module_status=' + 'process&week='+ (this.weekHolder + 1)
           + '&module=' + moduleTitle + '&topic=' + topicTitle + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
-
+}
       this.playerTopicLen = this.scromApiData.total_topic_len;
       // tree level
       this.scromModuleData.forEach(childData => {
