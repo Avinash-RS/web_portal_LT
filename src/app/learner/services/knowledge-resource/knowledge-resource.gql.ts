@@ -19,6 +19,7 @@ get_all_resources_details{
             createdby_role
             createdby_name
             createdby_id
+            internal
     }
  }
 }
@@ -46,6 +47,7 @@ query get_all_resources_details($domain: String,$area_of_interest: String) {
                     createdby_role
                     createdby_name
                     createdby_id
+                    internal
             }
         }
     }`;

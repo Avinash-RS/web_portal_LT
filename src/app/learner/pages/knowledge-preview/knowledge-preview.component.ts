@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-knowledge-preview',
@@ -8,7 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./knowledge-preview.component.scss']
 })
 export class KnowledgePreviewComponent implements OnInit {
-
+  blobKey = environment.blobKey;
   fileType;
   file: any;
   isCancelLoad = false;
@@ -23,9 +24,19 @@ export class KnowledgePreviewComponent implements OnInit {
     this.fileType = this.batchdialogdata.fileType;
     if (this.fileType === 'pdf') {
       this.batchdialogdata.file = this.batchdialogdata.file + '#toolbar=0';
-      this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file);
+      if(this.batchdialogdata?.internal == 'yes' || this.batchdialogdata?.internal == 'Yes') {
+        this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file + this.blobKey);
+      }
+      else {
+        this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file);
+      }
     } else {
-    this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file);
+      if(this.batchdialogdata?.internal == 'yes' || this.batchdialogdata?.internal == 'Yes') {
+        this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file + this.blobKey);
+      }
+      else {
+        this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file);
+      }
    }
   }
 

@@ -66,7 +66,9 @@
         <div class="resource-card" (click)="onPreview(resData)">
           <div class="card-img">
             <ng-container *ngIf="resData.thumbnail && resData.thumbnail.length > 0">
-              <img [src]="resData.thumbnail" alt="" class="img-thumb">
+              <!-- <img [src]="resData.thumbnail" alt="" class="img-thumb"> -->
+              <img alt="" *ngIf="resData?.internal == 'yes' || resData?.internal == 'Yes'" [src]="resData?.thumbnail + blobKey" alt="" class="img-thumb">
+              <img alt="" *ngIf="!resData?.internal || resData?.internal == 'no' || resData?.internal == 'No'" [src]="resData?.thumbnail" alt="" class="img-thumb">
             </ng-container>
             <ng-container *ngIf="!resData.thumbnail || resData.thumbnail.length == 0">
               <ng-container *ngIf="resData.fileType == 'pdf'">
