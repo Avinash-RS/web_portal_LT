@@ -136,13 +136,14 @@ getMessage(): Observable<any> {
     });
   }
 
-  login(username, password, isAdmin) {
+  login(username, password, isAdmin,badgeRequest) {
     return this.Apollo.query({
       query: login,
       variables: {
         username,
         password,
-        is_admin: isAdmin
+        is_admin: isAdmin,
+        badgeRequest
       }
     });
   }
@@ -156,7 +157,7 @@ getMessage(): Observable<any> {
   //   return this.http.post(this.envApi + 'getuserRecordbasedonSecretKey', input, httpOptions);
   // }
 
-  user_registration(email, fullName, mobileNumber, titleId, termsandconditions) {
+  user_registration(email, fullName, mobileNumber, titleId, termsandconditions,badgeRequest) {
     return this.Apollo.query({
       query: userRegistration,
       variables: {
@@ -165,7 +166,8 @@ getMessage(): Observable<any> {
         title_id: titleId,
         email,
         term_condition: termsandconditions,
-        domain: this.envDomain
+        domain: this.envDomain,
+        badgeRequest
       }
     });
   }
@@ -266,7 +268,7 @@ getMessage(): Observable<any> {
   }
 
 
-  forgotUsernameandPassword(type, subtype, mobileNumber, email) {
+  forgotUsernameandPassword(type, subtype, mobileNumber, email,badgeRequest) {
     return this.Apollo.query({
       query: getForgotUsernamemobileEmail,
       variables: {
@@ -274,7 +276,8 @@ getMessage(): Observable<any> {
         subtype,
         mobile_number: mobileNumber,
         email,
-        domain: this.envDomain
+        domain: this.envDomain,
+        badgeRequest
       }
     });
   }

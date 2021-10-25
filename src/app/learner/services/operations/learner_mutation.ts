@@ -3,14 +3,15 @@ import gql from 'graphql-tag';
 
 export const userRegistration = gql`
   mutation user_registration($full_name: String!, $mobile_number: String, $title_id: String,
-   $email: String!,$term_condition:Boolean,$domain:String!) {
+   $email: String!,$term_condition:Boolean,$domain:String!,$badgeRequest:String!) {
     user_registration(
       full_name: $full_name,
       mobile_number:$mobile_number,
       title_id :$title_id ,
       email: $email,
       term_condition: $term_condition,
-      domain:$domain
+      domain:$domain,
+      badgeRequest:$badgeRequest
     ) {
       message
       success
@@ -82,13 +83,14 @@ export const userRegistrationdone = gql`
 
 
 export const getForgotUsernamemobileEmail = gql`
-  mutation get_forgot_username_mobile_email($type: String,$subtype:String!, $mobile_number: String,$email: String ,$domain:String!) {
+  mutation get_forgot_username_mobile_email($type: String,$subtype:String!, $mobile_number: String,$email: String ,$domain:String!,$badgeRequest:String!) {
     get_forgot_username_mobile_email(
       type:$type,
       subtype:$subtype,
       mobile_number:$mobile_number,
       email:$email,
-      domain:$domain
+      domain:$domain,
+      badgeRequest:$badgeRequest
     ) {
       success
       message

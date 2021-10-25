@@ -37,7 +37,9 @@ export class LoginComponent implements OnInit {
   registerSuccess = false;
   titleData = [];
   siteKey: any = environment.captachaSiteKey;
-
+  recaptchaStr = '';
+  recaptchaForgetStr = '';
+  recaptchaSignInStr = '';
   getErrorMessage() {
     return this.username.hasError('required') ? 'Email or Username is required' :
         this.username.hasError('email') ? 'Please enter a valid email address' :
@@ -57,7 +59,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       // username: new FormControl('', myGlobals.req),
       username: ['',  myGlobals.req],
-      signInrecaptchaReactive: [null ,myGlobals.req],
+      signInrecaptchaReactive: [null],
       password: new FormControl('', myGlobals.req),
       remember_me: new FormControl(false, []),
       language: new FormControl(false, [])
@@ -79,7 +81,7 @@ export class LoginComponent implements OnInit {
   }
   forgotPassword() {
       var encryptedmail = CryptoJS.AES.encrypt(this.username.value, this.secretKey.trim()).toString();
-      this.service.forgotUsernameandPassword('password', 'email','', encryptedmail)
+      this.service.forgotUsernameandPassword('password', 'email','', encryptedmail,this.recaptchaForgetStr)
         .subscribe((data: any) => {
           this.loader = true;
           if (data?.data?.get_forgot_username_mobile_email?.success === 'true') {
@@ -130,7 +132,43 @@ export class LoginComponent implements OnInit {
   get f() {
     return this.loginForm.controls;
   }
+  checkCaptchaLogin(captchaRef){
+    if (this.recaptchaStr) {
+      captchaRef.reset();
+  }
+  captchaRef.execute();
+  }
 
+  checkCaptchaForget(captchaForget){
+    if (this.recaptchaForgetStr) {
+      captchaForget.reset();
+  }
+  captchaForget.execute();
+  }
+  checkCaptchaSignIn(captchaSignIn){
+    if (this.recaptchaSignInStr) {
+      captchaSignIn.reset();
+  }
+  captchaSignIn.execute();
+  }
+  resolvedLogin(captchaResponse: string) {
+    this.recaptchaStr = captchaResponse;
+        if (this.recaptchaStr) {
+            this.login();
+        }
+  }
+  resolvedForget(captchaForgetResponse: string){
+    this.recaptchaForgetStr = captchaForgetResponse;
+    if (this.recaptchaForgetStr) {
+        this.forgotPassword();
+    }
+  }
+  resolvedSignIn(captchaSignInResponse: string){
+    this.recaptchaSignInStr = captchaSignInResponse;
+    if (this.recaptchaSignInStr) {
+        this.Submit();
+    }
+  }
   login() {
     if (!this.loginForm.valid) {
       return this.validateAllFields(this.loginForm);
@@ -138,7 +176,7 @@ export class LoginComponent implements OnInit {
     this.loader = true;
     var encryptedname = CryptoJS.AES.encrypt(this.loginForm.value.username.toLowerCase(), this.secretKey.trim()).toString();
     var encryptedpassword = CryptoJS.AES.encrypt(this.loginForm.value.password, this.secretKey.trim()).toString();
-    this.service.login(encryptedname, encryptedpassword, false)
+    this.service.login(encryptedname, encryptedpassword, false,this.recaptchaStr)
       .subscribe((loginresult: any) => {
         if (loginresult.data.login) {
           if (loginresult.data.login.success) {
@@ -223,9 +261,6 @@ export class LoginComponent implements OnInit {
       }, {
       });
     }
-    resolved(captchaResponse: string) {
-      this.resolvedCaptcha = captchaResponse;
-    }
 
     onError(errorDetails: RecaptchaErrorParameters): void {
     }
@@ -245,7 +280,7 @@ export class LoginComponent implements OnInit {
       var encryptedmobile = CryptoJS.AES.encrypt(this.registerForm.value.mobile, this.secretKey.trim()).toString();
       this.service.user_registration(encryptedmail, encryptedname,
         encryptedmobile ?  encryptedmobile : '' ,
-       this.registerForm.value.title , true ).subscribe((data: any) => {
+       this.registerForm.value.title , true, this.recaptchaSignInStr).subscribe((data: any) => {
       this.registerForm.reset();
       this.registerForm.setErrors(null); // could be removed
       this.registerForm.updateValueAndValidity();
