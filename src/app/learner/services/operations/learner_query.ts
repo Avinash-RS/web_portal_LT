@@ -2541,12 +2541,7 @@ export const recentlycourse = gql`
               activityname
               topic_id
               projecttype
-              groupDetails{
-              id
-              username
-              name
-              email
-              }
+              url
               }
               }
           }
