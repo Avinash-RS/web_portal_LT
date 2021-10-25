@@ -69,12 +69,12 @@
               </span>
             </div>
             <div class="d-flex justify-content-center mt-1">
-              <re-captcha formControlName="signInrecaptchaReactive" (resolved)="resolved($event)" (error)="onError($event)"
-                errorMode="handled" [siteKey]="siteKey">
+              <re-captcha #captchaRef="reCaptcha" formControlName="signInrecaptchaReactive" (resolved)="resolvedLogin($event)" (error)="onError($event)"
+                errorMode="handled" [siteKey]="siteKey" size='invisible'>
               </re-captcha>
             </div>
             <div class="gradientBtn">
-              <button id="login" mat-raised-button (click)="login()" [disabled]="!loginForm.valid">
+              <button id="login" mat-raised-button (click)="checkCaptchaLogin(captchaRef)" [disabled]="!loginForm.valid">
                 <span *ngIf="!loader">{{'SIGN IN' | translate}}</span>
                 <div *ngIf="loader" class="snippet" data-title=".dot-falling">
                   <div class="stage">
@@ -120,10 +120,10 @@
             </mat-form-field>
           </div>
           <div class="d-flex justify-content-center mt-1">
-            <re-captcha (resolved)="resolved($event)" (error)="onError($event)" errorMode="handled" [siteKey]="siteKey"></re-captcha>
+            <re-captcha #captchaRef="reCaptcha" (resolved)="resolvedForget($event)" (error)="onError($event)" errorMode="handled" [siteKey]="siteKey" size='invisible'></re-captcha>
           </div>
           <div class="gradientBtn">
-            <button id="login" mat-raised-button [disabled]="!username.valid" (click)="forgotPassword()">
+            <button id="login" mat-raised-button [disabled]="!username.valid" (click)="checkCaptchaForget(captchaRef)">
               <span *ngIf="!loader">{{'SUBMIT' | translate}}</span>
               <div *ngIf="loader" class="snippet" data-title=".dot-falling">
                 <div class="stage">
@@ -204,13 +204,13 @@
             </div>
 
             <div class="d-flex justify-content-center mt-1">
-              <re-captcha formControlName="recaptchaReactive" (resolved)="resolved($event)" (error)="onError($event)"
+              <re-captcha #captchaRef="reCaptcha" formControlName="recaptchaReactive" (resolved)="resolvedSignIn($event)" size='invisible' (error)="onError($event)"
                 errorMode="handled" [siteKey]="siteKey">
               </re-captcha>
             </div>
             <div class="">
               <div class="gradientBtn">
-                <button id="login" mat-raised-button (click)="Submit()" [disabled]="!registerForm.valid">
+                <button id="login" mat-raised-button (click)="checkCaptchaSignIn(captchaRef)" [disabled]="!registerForm.valid">
                   <span *ngIf="!loader">{{'SIGN UP' | translate}}</span>
                   <div *ngIf="loader" class="snippet" data-title=".dot-falling">
                     <div class="stage">

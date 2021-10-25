@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const login = gql`
-  query login($username: String, $password: String, $is_admin: Boolean) {
-    login(username: $username, password: $password, is_admin: $is_admin) {
+  query login($username: String, $password: String, $is_admin: Boolean,$badgeRequest:String!) {
+    login(username: $username, password: $password, is_admin: $is_admin,badgeRequest:$badgeRequest) {
       success
       error_msg
       message {
