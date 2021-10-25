@@ -2313,6 +2313,49 @@
   user-select: none;
 }
 
+// QA
+.cancelSubmit {
+  margin-top: 30px;
+  button {
+    margin-top: 0;
+    font-size: 14px;
+  }
+  //Button overrides
+  .btn-outline-dark {
+    color: #343a40 !important;
+    border-color: #343a40 !important;
+    margin: 0 10px 0 0 !important;
+  }
+  .btn-outline-dark:hover {
+    color: #343a40 !important;
+    border-color: #343a40 !important;
+    background-color: #fff !important;
+  }
+
+}
+::ng-deep.QAContainer {
+  width: 90% !important;
+  height: 78% !important;
+  @media only screen and (min-width: 720px) {
+    height: 53% !important;
+  }
+  @media only screen and (min-width: 992px) {
+    height: 70% !important;
+  }
+  @media only screen and (min-width: 1140px) {
+    width: 50% !important;
+    height: 86% !important;
+  }
+  @media only screen and (min-width: 1540px) {
+    width: 40% !important;
+    height: 57% !important;
+  }
+  .mat-dialog-container {
+    padding: 25px !important;
+  }
+}
+//
+
 @keyframes fadeIn {
   99% {
     visibility: hidden;
