@@ -2488,7 +2488,7 @@ export const recentlycourse = gql`
           data {
             inProgressModule
             {
-            course_name
+              course_name
               module
               topic_name
               link
@@ -2501,7 +2501,7 @@ export const recentlycourse = gql`
               lastTopic
               topic_status
               module_status
-            }
+              }
             completedTopic{
               course_name
               module
@@ -2512,7 +2512,6 @@ export const recentlycourse = gql`
               week
               topicIndex
               moduleIndex
-              lastTopic
               topic_status
               module_status
               }
