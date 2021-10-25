@@ -39,6 +39,7 @@ export class ResetpasswordComponent implements OnInit {
   currentYear = new Date().getFullYear();
   loader = false;
   resetCode;
+  recaptchaResetStr = '';
   constructor(
     public translate: TranslateService,
     private router: Router,
@@ -95,9 +96,17 @@ export class ResetpasswordComponent implements OnInit {
       validator: MustMatch('password', 'confirmpassword'),
     });
   }
-
-  resolved(captchaResponse: string) {
-    this.resolvedCaptcha = captchaResponse;
+  checkCaptchaReset(captchaRefReset){
+    if (this.recaptchaResetStr) {
+      captchaRefReset.reset();
+  }
+  captchaRefReset.execute();
+  }
+  resolvedReset(captchaResponse: string) {
+    this.recaptchaResetStr = captchaResponse;
+        if (this.recaptchaResetStr) {
+            this.resetpassword();
+        }
   }
 
   onError(errorDetails: RecaptchaErrorParameters): void {

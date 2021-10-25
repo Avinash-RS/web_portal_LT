@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const login = gql`
-  query login($username: String, $password: String, $is_admin: Boolean) {
-    login(username: $username, password: $password, is_admin: $is_admin) {
+  query login($username: String, $password: String, $is_admin: Boolean,$badgeRequest:String!) {
+    login(username: $username, password: $password, is_admin: $is_admin,badgeRequest:$badgeRequest) {
       success
       error_msg
       message {
@@ -2493,6 +2493,13 @@ export const recentlycourse = gql`
               link
               course_id
               batchid
+              lastModule
+              week
+              topicIndex
+              moduleIndex
+              lastTopic
+              topic_status
+              module_status
             }
             completedTopic{
               course_name
@@ -2501,6 +2508,12 @@ export const recentlycourse = gql`
               link
               course_id
               batchid
+              week
+              topicIndex
+              moduleIndex
+              lastTopic
+              topic_status
+              module_status
               }
           }
         }
