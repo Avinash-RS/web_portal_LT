@@ -5,6 +5,7 @@ import { knowledgeService } from '@learner/services/knowledge-resource/knowledge
 import { ToastrService } from 'ngx-toastr';
 import { KnowledgePreviewComponent } from '../knowledge-preview/knowledge-preview.component';
 import { DragScrollComponent } from 'ngx-drag-scroll';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-knowledge-landing-page',
@@ -17,7 +18,7 @@ export class KnowledgeLandingPageComponent implements OnInit {
   topicList = [
     'All'
   ];
-
+  blobKey = environment.blobKey;
   TopicsOptions: any = {
     loop: false,
     mouseDrag: true,
@@ -127,7 +128,8 @@ export class KnowledgeLandingPageComponent implements OnInit {
         file,
         fileType,
         fileTypePrew: resData.fileType,
-        filename: resData.filename
+        filename: resData.filename,
+        internal:resData.internal
       },
       height,
       width,

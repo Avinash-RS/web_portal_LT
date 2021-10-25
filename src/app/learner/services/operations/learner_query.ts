@@ -2512,6 +2512,7 @@ export const recentlycourse = gql`
               week
               topicIndex
               moduleIndex
+              lastTopic
               topic_status
               module_status
               }
