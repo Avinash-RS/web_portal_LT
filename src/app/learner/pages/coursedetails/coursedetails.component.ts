@@ -419,9 +419,15 @@ export class CoursedetailsComponent implements OnInit {
     let resumeInit = true;
     this.socketService.socketReceiver()
     this.socketEmitReciver = this.socketService.change.subscribe((result:any) => {
+      console.log(result.data)
       if (result && result.eventId && result.eventId.length && result.data.childData.length > 0) {
         console.log(result.data, 'asdfasdjfaklsjdfkl');
         if (result.data.course_id === this.courseid) {
+
+          // if(this.userType=="Corporate"){
+            this.eboxUrl = result.data.url
+            this.showlab = result.data.labActivity
+          // }
          
           if (this.topiccurrentPage !== result.data.resumeSubContent ||
             result.data.childData[result.data.week-1].childData[result.data.resumeContent].children[result.data.resumeSubContent]?.status !== this.topicPageStatus) {
@@ -483,7 +489,7 @@ export class CoursedetailsComponent implements OnInit {
       }
     });
     this.getCoursePlayerStatus();
-    this.getEboxURL();
+    // this.getEboxURL();
   }
 
   toggleDisplayDiv() {
@@ -610,7 +616,7 @@ export class CoursedetailsComponent implements OnInit {
           this.topicPageStatus = this.gettopicLink.status;
           let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
           this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
-            (environment.scormUrl + '/scormPlayer.html?contentID=' +
+            (environment.scormUrl + '/scormPlayer.html?content_id=' +
               this.courseid + '&user_id=' + id + '&user_obj_id=' +
               this.getuserid._id + '&path=' + this.gettopicLink.link +
               '&module_status=' + this.moduleSatusCheck
@@ -666,7 +672,7 @@ export class CoursedetailsComponent implements OnInit {
         this.topicPageStatus = this.gettopicLink.status
         let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
-          (environment.scormUrl + '/scormPlayer.html?contentID=' +
+          (environment.scormUrl + '/scormPlayer.html?content_id=' +
             this.courseid + '&user_id=' + id + '&user_obj_id=' +
             this.getuserid._id + '&path=' + this.gettopicLink.link +
             '&module_status=' + this.moduleSatusCheck
@@ -706,9 +712,15 @@ export class CoursedetailsComponent implements OnInit {
       this.scromModuleData = this.scromApiData?.childData;
       this.weekLength = this.scromApiData.childData.length;
       // this.moduleLenth = this.scromApiData?.childData.length;
-      this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : Number(this.scromApiData.topicIndex);
+      if(!this.checkDetails?.fromSuggestion)
+      {this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : Number(this.scromApiData.topicIndex);
       this.moduleHolder = this.currentPage = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
-      this.weekHolder  = this.weekHolderUI = this.scromApiData.week - 1;
+      this.weekHolder  = this.weekHolderUI = this.scromApiData.week - 1;}
+      else{
+        this.nextPrevHolder = this.topiccurrentPage = Number(this.checkDetails.topicIndex);
+      this.moduleHolder = this.currentPage = Number(this.checkDetails.moduleIndex);
+      this.weekHolder  = this.weekHolderUI = this.checkDetails.week - 1;
+      }
       // this.scromModuleData[this.moduleHolder].expanded = true;
       this.oldIdx = this.moduleHolder;
       this.topicInfo = this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].children[this.nextPrevHolder]
@@ -729,13 +741,22 @@ export class CoursedetailsComponent implements OnInit {
       //   this.scromModuleData[0].childData[0].children[0].status = 'process'
       // }
       let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
-      this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
-        (environment.scormUrl + '/scormPlayer.html?contentID=' +
+      if(this.checkDetails?.fromSuggestion){
+        this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+        (environment.scormUrl + '/scormPlayer.html?content_id=' +
+          this.courseid + '&user_id=' + id + '&user_obj_id=' +
+          this.getuserid._id + '&path=' + this.checkDetails.url +
+          '&module_status=' + 'process&week='+ (this.checkDetails.week + 1)
+          + '&module=' + this.checkDetails.moduleName + '&topic=' + this.checkDetails.topicName + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
+      }
+      else
+      {this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+        (environment.scormUrl + '/scormPlayer.html?content_id=' +
           this.courseid + '&user_id=' + id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.scromApiData.url +
           '&module_status=' + 'process&week='+ (this.weekHolder + 1)
           + '&module=' + moduleTitle + '&topic=' + topicTitle + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
-
+}
       this.playerTopicLen = this.scromApiData.total_topic_len;
       // tree level
       this.scromModuleData.forEach(childData => {
@@ -773,7 +794,7 @@ export class CoursedetailsComponent implements OnInit {
     this.topicInfo = this.scromApiData.childData[weekIndex].childData[moduleIdx].children[topindex]
     let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
-      (environment.scormUrl + '/scormPlayer.html?contentID=' +
+      (environment.scormUrl + '/scormPlayer.html?content_id=' +
         this.courseid + '&user_id=' + id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
         + '&module_status=' + this.moduleSatusCheck
         + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (this.weekHolder + 1) + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
@@ -1239,28 +1260,28 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
   //------------------------------------------------------------------//
-  getEboxURL(){
-    var labactivitydetails ={
-      username:this.userDetail.username,
-      course_id:this.courseid
-    }
-    this.Lservice.labactivity(labactivitydetails).subscribe((result:any)=>{
-      if(result.data.labactivity.success == false){
-        this.eboxUrl = "";
-        this.showlab = false;
-      }
-      else if(result.data.labactivity.success == null){
-        if(result.data.labactivity.Status == 0){
-          this.eboxUrl = result.data.labactivity.url;
-          this.showlab = true;
-        }
-        else{
-          this.eboxUrl = "";
-          this.showlab = false;
-        }
-      }
-    });
-  }
+  // getEboxURL(){
+  //   var labactivitydetails ={
+  //     username:this.userDetail.username,
+  //     course_id:this.courseid
+  //   }
+  //   this.Lservice.labactivity(labactivitydetails).subscribe((result:any)=>{
+  //     if(result.data.labactivity.success == false){
+  //       this.eboxUrl = "";
+  //       this.showlab = false;
+  //     }
+  //     else if(result.data.labactivity.success == null){
+  //       if(result.data.labactivity.Status == 0){
+  //         this.eboxUrl = result.data.labactivity.url;
+  //         this.showlab = true;
+  //       }
+  //       else{
+  //         this.eboxUrl = "";
+  //         this.showlab = false;
+  //       }
+  //     }
+  //   });
+  // }
   navigatePractice(){
     window.open(this.eboxUrl);
   }
