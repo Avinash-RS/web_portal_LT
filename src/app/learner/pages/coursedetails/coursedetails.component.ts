@@ -205,7 +205,7 @@ export class CoursedetailsComponent implements OnInit {
   weekLength: any;
   weekHolderUI: number;
   fromCalendar :boolean = false;
-  eboxUrl :any;
+  eboxUrl :any="";
   showlab:boolean = false;
   lastLogIndex:number = 0;
   isReadMore:boolean;
@@ -425,8 +425,17 @@ export class CoursedetailsComponent implements OnInit {
         if (result.data.course_id === this.courseid) {
 
           // if(this.userType=="Corporate"){
-            this.eboxUrl = result.data.url
-            this.showlab = result.data.labActivity
+            console.log("before if")
+            if(result?.data?.url!==""&&result.data.labActivity==true)
+            {
+              console.log("inside if","Lab",result.data.labActivity)
+              this.eboxUrl = result.data.url
+              this.showlab = result.data.labActivity
+            }
+            else{
+              this.showlab = result.data.labActivity
+            }
+            
           // }
          
           if (this.topiccurrentPage !== result.data.resumeSubContent ||
