@@ -426,7 +426,7 @@ export class CoursedetailsComponent implements OnInit {
 
           // if(this.userType=="Corporate"){
             this.eboxUrl = result.data.url
-            this.showlab = true//result.data.labActivity
+            this.showlab = result.data.labActivity
           // }
          
           if (this.topiccurrentPage !== result.data.resumeSubContent ||
