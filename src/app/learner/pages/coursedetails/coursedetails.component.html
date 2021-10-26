@@ -187,9 +187,9 @@
                                     <span *ngIf="res?.status == null" class="greyColor"></span>
                                 </div>
                                 <div class="topicName">
-                                    <h4 *ngIf="res?.title?.length >= 67" class="moduleName" tooltip="{{res?.title}}" placement="right">
+                                    <h4 *ngIf="res?.title?.length >= 67" class="moduleName" tooltip="{{res?.title}}">
                                         {{res?.title | slice:0:71}}...</h4>
-                                    <h4 *ngIf="res?.title?.length < 67" class="moduleName">
+                                    <h4 *ngIf="res?.title?.length < 67" class="moduleName" tooltip="{{res?.title}}">
                                         {{res?.title}}
                                     </h4>
                                 </div>
@@ -212,7 +212,7 @@
                                             <div *ngIf="wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder" #focuser ></div>
                                             <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,wi,ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                 <div class="modTitle">
-                                                    <h3>{{mod?.title}}</h3>
+                                                    <h3 tooltip="{{mod?.title}}">{{mod?.title}}</h3>
                                                     <!-- <span class="playVideo"><em class="lxp-PlayCircle"></em> Video</span>
                                                     <span class="videoDuration"><em class="lxp-Clock"></em> 30:00 min</span> -->
                                                 </div>
@@ -532,7 +532,8 @@
                     </div> -->
                 </div>
                 <div class="poweredBy">
-                    <h2>Course offered by: <span><img src="/assets/images/lNTlogo.svg" alt="" /></span></h2>
+                    <!-- <h2>Course offered by: <span><img src="/assets/images/lNTlogo.svg" alt="" /></span></h2> -->
+                    <h2>Course offered by: <span><img src="https://assets.lntedutech.com/edutech_logo.svg" alt="" /></span></h2>
                 </div>
             </div>
         </div>
