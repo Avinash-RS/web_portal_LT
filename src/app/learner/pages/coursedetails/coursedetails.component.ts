@@ -500,6 +500,10 @@ export class CoursedetailsComponent implements OnInit {
     // this.getEboxURL();
   }
 
+  onResize(event) {
+    this.screenWidth = window.innerWidth;
+  }
+  
   toggleDisplayDiv() {
     this.isShowDiv = !this.isShowDiv;
   }
