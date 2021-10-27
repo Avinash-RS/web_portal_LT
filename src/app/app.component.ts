@@ -15,6 +15,7 @@ import * as CryptoJS from 'crypto-js';
 import { Gtag } from 'angular-gtag';
 declare var window;
 declare var dataLayer
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -37,6 +38,8 @@ export class AppComponent implements OnInit {
   chatbotShow: boolean = false;
   UserDetails: any;
   secretKey = "(!@#Passcode!@#)";
+  botUrl;
+  urlSafe: SafeResourceUrl;
    // FOR DRM(Restriction for right click)
    @HostListener('document:keydown', ['$event'])
    handleKeyboardEvent(event: KeyboardEvent) {
@@ -55,7 +58,8 @@ export class AppComponent implements OnInit {
               private titleService: Title,
               private commonService: CommonServicesService,
               public Lservice: LearnerServicesService,
-              private gtag: Gtag
+              private gtag: Gtag,
+              public sanitizer: DomSanitizer,
 
   ) {
     // console.error = function(){}
@@ -84,7 +88,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.UserDetails = JSON.parse( window.localStorage.getItem('UserDetails'));
+     this.botUrl = "https://devfaqbot.lntiggnite.com/?userName=" + this.UserDetails.full_name + "&userID=" + this.UserDetails.user_id + "&token=" + this.UserDetails.token;
+     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.botUrl)
 //GOOGLE ANALYTICS
 // this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null
 // timer(500)
