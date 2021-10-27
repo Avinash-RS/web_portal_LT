@@ -160,23 +160,28 @@ export class AppComponent implements OnInit {
     //  send pageview 
         const titledat = this.getChild(this.activatedRoute);
       titledat.data.subscribe(data => {
+        let user_id = null
+        if(this.UserDetails){
+           user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(); 
+          if(dataLayer)
+          {
+            dataLayer[0]={'userID': user_id};
+            
+        }else{
+          dataLayer[0]={'userID': user_id};
+        }
+        }
+        console.log("USERID"+user_id)
         this.gtag.pageview({
           page_title: data?.title? data.title : "L&T Edutech",
           page_path: this.router.url,
-          page_location: window.location.href
+          page_location: window.location.href,
+          userID:user_id
         });
+        this.gtag.set({ 'userID' : user_id });
       })
         
-        if(this.UserDetails){
-          let user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(); 
-          if(window.dataLayer)
-          {
-            window.dataLayer[0]={'userID': user_id};
-            
-        }else{
-          window.dataLayer[0]={'userID': user_id};
-        }
-        }
+       
         // this.ga_service.logPageView(e.url,user_id);
         // this.ga_service.logPageView(e.url);
       const urlIdentifier = e.url.split("/")

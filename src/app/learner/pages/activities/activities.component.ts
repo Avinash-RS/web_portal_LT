@@ -447,6 +447,21 @@ export class ActivitiesComponent implements OnInit {
       }
     })
   }
+
+  getEboxURL(){
+      var labactivitydetails ={
+        username:this.userDetail.username,
+        course_id:this.courseid
+      }
+      this.Lservice.labactivity(labactivitydetails).subscribe((result:any)=>{
+        console.log(result)
+        if(result.data.labactivity.data.url !== ""){
+          this.redirectLabpractice(result.data.labactivity.data.url)
+        }else{
+          this.toastr.warning(result.data.labactivity.data.message);
+        }
+      });
+    }
   redirectLabpractice(url){
     window.open(url);
   }

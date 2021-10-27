@@ -60,6 +60,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.lxp-Online_Code_Editor:before {
+  content: "\e968";
+}
 .lxp-Download_Code:before {
   content: "\e967";
 }
