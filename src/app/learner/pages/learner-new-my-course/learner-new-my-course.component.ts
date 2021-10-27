@@ -907,7 +907,7 @@ goToCourse(value){
     wishlist: false,
     wishlist_id: null,
     enrollment_status: null,
-    course_name: value.coursename,
+    course_name: value.course_name,
     course_status: null,
     batch_id: value.batchid,
     batchEndTime: null,
@@ -915,12 +915,12 @@ goToCourse(value){
     fromSuggestion: true,
     url:value.link,
     week:value.week,
-    moduleNane:value.module,
+    moduleName:value.module,
     moduleIndex:value.moduleIndex,
     topicName:value.topic_name,
     topicIndex:value.topicIndex
   };
-
+console.log(detail)
   localStorage.setItem('currentBatchEndDate', value.batch_end_date_Timer)
   localStorage.setItem('Courseid', value.courseid);
   localStorage.setItem('persentage', null);

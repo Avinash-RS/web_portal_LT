@@ -754,7 +754,7 @@ export class CoursedetailsComponent implements OnInit {
         (environment.scormUrl + '/scormPlayer.html?content_id=' +
           this.courseid + '&user_id=' + id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.checkDetails.url +
-          '&module_status=' + 'process&week='+ (this.checkDetails.week + 1)
+          '&module_status=' + 'process&week='+ (Number(this.checkDetails.week) + 1)
           + '&module=' + this.checkDetails.moduleName + '&topic=' + this.checkDetails.topicName + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
       }
       else
@@ -762,7 +762,7 @@ export class CoursedetailsComponent implements OnInit {
         (environment.scormUrl + '/scormPlayer.html?content_id=' +
           this.courseid + '&user_id=' + id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.scromApiData.url +
-          '&module_status=' + 'process&week='+ (this.weekHolder + 1)
+          '&module_status=' + 'process&week='+ (Number(this.weekHolder) + 1)
           + '&module=' + moduleTitle + '&topic=' + topicTitle + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
 }
       this.playerTopicLen = this.scromApiData.total_topic_len;
@@ -805,7 +805,7 @@ export class CoursedetailsComponent implements OnInit {
       (environment.scormUrl + '/scormPlayer.html?content_id=' +
         this.courseid + '&user_id=' + id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
         + '&module_status=' + this.moduleSatusCheck
-        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (this.weekHolder + 1) + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
+        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (Number(this.weekHolder) + 1) + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
     this.checkLastFirstIndexReached()
   }
 
