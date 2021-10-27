@@ -2572,11 +2572,11 @@ mutation labactivity(
     username:$username,
     course_id:$course_id
   ){
-    success
-    message
-    Message
-    Status
-    url
+    data{
+      url
+      message
+      errorCode
+    }
   }
 }
 `;
