@@ -124,7 +124,7 @@
           width: 40%;
         }
         .text-content {
-          width: 63%;
+          width: 60%;
         }
         ul{
           list-style: none;
@@ -133,11 +133,12 @@
           margin-bottom: 0px; 
           label{
             font-size:14px;
-            width:73%;
+            width:70%;
           }
           span{
             font-size:14px;
             font-weight: 600;
+            width:30%;
            
           }
         }
@@ -669,7 +670,7 @@
   align-items: center;
 }
 .popover-info:hover {
-  background: grey;
+  //background: grey;
   color: white;
 }
 
