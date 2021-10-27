@@ -97,6 +97,7 @@ export class CourseReportComponent implements OnInit {
   refreshReport(){
     this.refresh = true;
     this.courseReport = false;
+    this.disableArrow = !this.disableArrow;
     this.getCourseReport();
   }
   getBack(){
