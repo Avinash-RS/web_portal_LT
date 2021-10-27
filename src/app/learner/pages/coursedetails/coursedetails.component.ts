@@ -428,7 +428,6 @@ export class CoursedetailsComponent implements OnInit {
             console.log("before if")
             if(result?.data?.url!==""&&result.data.labActivity==true)
             {
-              console.log("inside if","Lab",result.data.labActivity)
               this.eboxUrl = result.data.url
               this.showlab = result.data.labActivity
             }
