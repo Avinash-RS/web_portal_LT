@@ -1823,7 +1823,10 @@
     span {
       display: inline-flex;
       margin-left: 10px;
-      width: 20%;
+      width: 23%;
+      @media only screen and (min-width: 576px) {
+        width: 15%;
+      }
       img {
         max-width: 100%;
       }
@@ -1898,11 +1901,11 @@
         font-size: 14px;
         font-weight: 400;
         line-height: normal;
-        margin: 0 0 7px 0;
+        margin: 0 0 0 0;
         width: 95%;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
+        // text-overflow: ellipsis;
+        // white-space: nowrap;
+        // overflow: hidden;
       }
       span {
 
