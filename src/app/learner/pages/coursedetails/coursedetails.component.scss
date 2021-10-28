@@ -255,6 +255,11 @@
         font-size: 18px;
         padding: 0 10px;
         cursor: pointer;
+        &:hover {
+          span {
+            color: #000000;
+          }
+        }
         @media only screen and (min-width: 720px) {
           padding: 0 20px 0 10px;
         }
@@ -998,7 +1003,7 @@
 .rightContent {
   position: absolute;
   right: 20px;
-  bottom: 20vh;
+  bottom: 5vh;
   .fullScr,
   .resourceTab,
   .allTabs {
