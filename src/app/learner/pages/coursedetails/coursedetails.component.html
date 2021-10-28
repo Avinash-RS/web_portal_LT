@@ -287,7 +287,7 @@
         
         <div class="d-flex justify-content-between understoodBookmark" [ngClass]="!drawersOpen ? 'Yes':'No'">
             <div class="popupContent d-flex align-items-center">
-                <div class="wrapper d-flex align-items-center" *ngIf="drawersOpen">
+                <div class="wrapper d-flex align-items-center" *ngIf="drawersOpen || scromApiData?.toc == '0'">
                     <span class="abtCourse" (click)="aboutCourse(aboutCourseWindow)"><em class="lxp-Info"></em> <span>About the Course</span></span>
                     <span class="resourcesTab" (click)="openResourse(resourseWindow)"><em class="lxp-Image_Folder"></em> <span>Course Resources</span></span>
                     <span class="downloadCode" (click)="downloadResource();" *ngIf="scromApiData.resourceUrl"><em class="lxp-Download_Code"></em> <span>Download Code exercises</span></span>
