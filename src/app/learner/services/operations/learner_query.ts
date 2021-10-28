@@ -2490,7 +2490,7 @@ export const recentlycourse = gql`
             {
               course_name
               module
-              topic_name
+              topic
               link
               course_id
               batchid

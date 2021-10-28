@@ -917,7 +917,7 @@ goToCourse(value){
     week:value.week,
     moduleName:value.module,
     moduleIndex:value.moduleIndex,
-    topicName:value.topic_name,
+    topicName:value.topic,
     topicIndex:value.topicIndex
   };
 console.log(detail)
