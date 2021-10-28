@@ -20,14 +20,14 @@
 
 <ng-container *ngIf="isFooterVisible && !hideLeftMenu">
 
-<figure class="chatBotIcon" (click)="toggleChatbot()" *ngIf="!chatbotShow">
+<figure class="chatBotIcon" (click)="openChatbot()" *ngIf="!chatbotShow">
   <img src="/assets/learner/chatBot_v.2.svg" alt="" />
 </figure>
-<figure class="chatBotIcon" (click)="toggleChatbot()" *ngIf="chatbotShow">
+<figure class="chatBotIcon" (click)="chatbotShow = false" *ngIf="chatbotShow">
   <img src="/assets/learner/chatBot_Close.svg" alt="" />
 </figure>
 
   <div class="chatBot" *ngIf="chatbotShow">
-      <iframe allow="microphone;" width="350" height="530" src="https://devfaqbot.lntiggnite.com/"></iframe>    
+      <iframe allow="microphone;" width="350" height="530" [src]="urlSafe"></iframe>    
   </div>
 </ng-container>
