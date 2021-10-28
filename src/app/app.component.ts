@@ -166,6 +166,7 @@ export class AppComponent implements OnInit {
         let user_id = null
         if(this.UserDetails){
            user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(); 
+           console.log(user_id)
           if(dataLayer)
           {
             dataLayer[0]={'userID': user_id};
