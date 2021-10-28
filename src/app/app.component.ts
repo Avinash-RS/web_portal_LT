@@ -74,13 +74,17 @@ export class AppComponent implements OnInit {
     gTagManagerScript.async = true;
     gTagManagerScript.src = `https://www.googletagmanager.com/gtag/js?id=${environment.gaTrackingId}`;
     document.head.appendChild(gTagManagerScript);
-
+    let user_id = null
+    if(this.UserDetails){
+       user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8); 
+    }
   //   // register google analytics
     const gaScript = document.createElement('script');
     gaScript.innerHTML = `
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
+      gtag('set', 'user_properties', { 'userID' : '${user_id}' });
       gtag('config', '${environment.gaTrackingId}',{ 'send_page_view': false });
       `;
     document.head.appendChild(gaScript);
@@ -165,8 +169,7 @@ export class AppComponent implements OnInit {
       titledat.data.subscribe(data => {
         let user_id = null
         if(this.UserDetails){
-           user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(); 
-           console.log(user_id)
+           user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8); 
           if(dataLayer)
           {
             dataLayer[0]={'userID': user_id};
@@ -175,6 +178,7 @@ export class AppComponent implements OnInit {
           dataLayer[0]={'userID': user_id};
         }
         }
+        console.log("USERID"+this.UserDetails.user_id)
         console.log("USERID"+user_id)
         this.gtag.pageview({
           page_title: data?.title? data.title : "L&T Edutech",

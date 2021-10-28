@@ -448,10 +448,10 @@ export class ActivitiesComponent implements OnInit {
     })
   }
 
-  getEboxURL(){
+  getEboxURL(eAttemptId){
       var labactivitydetails ={
         username:this.userDetail.username,
-        course_id:this.courseid
+        attempt_id:eAttemptId
       }
       this.Lservice.labactivity(labactivitydetails).subscribe((result:any)=>{
         console.log(result)
