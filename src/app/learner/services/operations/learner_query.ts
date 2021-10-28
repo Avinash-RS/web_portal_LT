@@ -2490,7 +2490,7 @@ export const recentlycourse = gql`
             {
               course_name
               module
-              topic_name
+              topic
               link
               course_id
               batchid
@@ -2528,6 +2528,7 @@ export const recentlycourse = gql`
               _id
               labActivity{
               project_id
+              ebox_attempt_id
               activitystartdate
               activityenddate
               submit_status
@@ -2566,11 +2567,11 @@ export const getlabactivity = gql `
 export const labactivity = gql`
 mutation labactivity(
   $username:String,
-  $course_id:String
+  $attempt_id:String,
 ){
   labactivity(
     username:$username,
-    course_id:$course_id
+    attempt_id:$attempt_id
   ){
     data{
       url
