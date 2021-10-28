@@ -960,7 +960,7 @@ getMessage(): Observable<any> {
       query: labactivity,
       variables:{
         username:labdetails.username,
-        course_id:labdetails.course_id
+        attempt_id:labdetails.attempt_id
       }
     });
   }
