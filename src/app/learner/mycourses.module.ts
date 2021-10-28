@@ -89,7 +89,7 @@ const routes: Routes = [
   {
     path: 'coursereport',
     component: CourseReportComponent,
-    data: { animation: 'coursereport' , title: 'Course Report'}
+    data: { animation: 'coursereport' , title: 'Assessment Report'}
   },
   {
     path: 'calendaractivity',
