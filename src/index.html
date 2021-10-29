@@ -7,7 +7,14 @@
   <base href="/" />
  <!-- user-scalable=0 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0,">
-  <!-- <meta http-equiv="Content-Security-Policy" content="default-src * unsafe-inline"> -->
+  <meta http-equiv="Content-Security-Policy" 
+content="default-src 'none';
+  frame-src 'self' 'unsafe-inline';
+  script-src * 'nonce-rAnd0m';
+  style-src * 'unsafe-inline';
+  font-src 'self';
+  img-src * ;
+  connect-src *">
   <link href="assets/favicon.png" rel="icon" type="image/x-icon" />
 
   <!-- <script>
@@ -69,7 +76,7 @@
       </div>
     </div>
   </app-root>
-  <script>
+  <script nonce="rAnd0m">
     function checkIE() {
       const isIEOrEdge = /msie\s|trident\//i.test(window.navigator.userAgent)
       if (isIEOrEdge) {
