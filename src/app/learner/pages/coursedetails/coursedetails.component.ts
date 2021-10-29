@@ -758,7 +758,7 @@ export class CoursedetailsComponent implements OnInit {
         (environment.scormUrl + '/scormPlayer.html?content_id=' +
           this.courseid + '&user_id=' + id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.checkDetails.url +
-          '&module_status=' + 'process&week='+ (Number(this.checkDetails.week) + 1)
+          '&module_status=' + 'process&week='+ (Number(this.checkDetails.week))
           + '&module=' + this.checkDetails.moduleName + '&topic=' + this.checkDetails.topicName + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
       }
       else
