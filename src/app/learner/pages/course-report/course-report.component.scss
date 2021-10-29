@@ -207,11 +207,19 @@
         }
         h6 {
           font-size: 13px;
+          font-weight: 500;
           position: absolute;
-          left: 0;
+          left: -11px;
           top: 50%;
           transform: translateY(-50%);
           -webkit-transform: rotate(-90deg);
+        }
+        label{
+          font-size: 13px;
+          font-weight: 500;
+          position: absolute;
+          left: 40px;
+          bottom :25px;
         }
         .graph{
           margin-left: 10px;

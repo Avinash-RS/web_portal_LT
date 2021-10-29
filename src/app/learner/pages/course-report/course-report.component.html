@@ -257,7 +257,7 @@
             </div>
             <div *ngIf="group.value == 'chart'">
               <mat-card class="barGraphCard">
-                <h6>Score</h6>
+                <h6>Percentage</h6>
                 <span *ngIf="showArrow">
                   <button [disabled] = "disableArrow" mat-icon-button (click)="graphleft()">
                     <mat-icon>chevron_left</mat-icon>
@@ -276,6 +276,7 @@
                     [chartType]="barChartType">
                   </canvas>
                 </div>
+                <label>Score</label>
               </mat-card>
           </div>
           </div>
