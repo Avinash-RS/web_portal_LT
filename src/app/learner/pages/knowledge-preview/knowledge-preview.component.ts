@@ -9,7 +9,7 @@ import { environment } from '@env/environment';
   styleUrls: ['./knowledge-preview.component.scss']
 })
 export class KnowledgePreviewComponent implements OnInit {
-  blobKey = environment.blobKey;
+  blobToken = environment.blobKey;
   fileType;
   file: any;
   isCancelLoad = false;
@@ -23,16 +23,17 @@ export class KnowledgePreviewComponent implements OnInit {
     }, 500);
     this.fileType = this.batchdialogdata.fileType;
     if (this.fileType === 'pdf') {
-      this.batchdialogdata.file = this.batchdialogdata.file + '#toolbar=0';
+      this.batchdialogdata.file = this.batchdialogdata.file;
       if(this.batchdialogdata?.internal == 'yes' || this.batchdialogdata?.internal == 'Yes') {
-        this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file + this.blobKey);
+        this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file + this.blobToken + '#toolbar=0');
+        console.log(this.file, 'asdfasdfasdfsad');
       }
       else {
-        this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file);
+        this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file + '#toolbar=0');
       }
     } else {
       if(this.batchdialogdata?.internal == 'yes' || this.batchdialogdata?.internal == 'Yes') {
-        this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file + this.blobKey);
+        this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file + this.blobToken);
       }
       else {
         this.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file);
