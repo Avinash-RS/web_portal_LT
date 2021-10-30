@@ -289,13 +289,14 @@ getMessage(): Observable<any> {
       }
     });
   }
-  resetPassword(username, password,resetCode) {
+  resetPassword(username, password,resetCode,badgeRequest) {
     return this.Apollo.query({
       query: getForgotpasswordbyResetpassword,
       variables: {
         username,
         password,
-        resetCode
+        resetCode,
+        badgeRequest
       }
     });
   }
