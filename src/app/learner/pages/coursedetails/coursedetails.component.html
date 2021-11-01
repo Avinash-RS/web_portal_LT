@@ -315,32 +315,34 @@
                 </div>
             </div>
 
-            <div class="upSkill" *ngIf="showlab">
-                <button data-title="Practice online" class="practiceOnline" type="button" (click)="navigatePractice()">
-                    <em class="lxp-Lab_Practice"></em> <span>Practice Online</span>
-                </button>
-                <!-- <button data-title="Practice online" (click)="showlab = showlab?false:true" class="onlineEditor" type="button">
-                    <em class="lxp-Online_Code_Editor"></em> <span>Online Code Editor</span>
-                </button> -->
-            </div>
-
-            <div class="notesBookmarks">
-                <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')" data-title="Understood" class="smile" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
-                    <em class="lxp-smile"></em> <span>Understood</span>
+            <div class="wrapppper d-flex align-items-center">
+                <!-- <div class="upSkill" *ngIf="showlab"> -->
+                <div class="upSkill">
+                    <button data-title="Practice online" class="practiceOnline" type="button" (click)="navigatePractice()">
+                        <em class="lxp-Lab_Practice"></em> <span>Practice Online</span>
+                    </button>
+                    <!-- <button data-title="Practice online" (click)="showlab = showlab?false:true" class="onlineEditor" type="button">
+                        <em class="lxp-Online_Code_Editor"></em> <span>Online Code Editor</span>
+                    </button> -->
                 </div>
-                <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
-                    <em class="lxp-sad"></em> <span>Not Understood</span>
+                <div class="notesBookmarks">
+                    <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')" data-title="Understood" class="smile" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
+                        <em class="lxp-smile"></em> <span>Understood</span>
+                    </div>
+                    <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
+                        <em class="lxp-sad"></em> <span>Not Understood</span>
+                    </div>
+                    <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType!=='collegeconnect'" type="button" (click)="openAskQuestions(askQuestions)">
+                        <em class="lxp-question"></em> <span>Ask A Question</span>
+                    </button>
+                    <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType=='collegeconnect'" type="button" (click)="openQuestionDialog(questionDialog)">
+                        <em class="lxp-question"></em> <span>Ask A Question</span>
+                    </button>
+                    <!-- <button class="notesBtn"><em class="lxp-Notes"></em> <span>Notes</span></button> -->
+                     <button class="bookmarkBtn" *ngIf="userType!='Corporate'" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
+                         <em [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></em> <span [ngClass]="topicInfo?.bookmark?'bold':'normal'">{{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? 'Bookmarked':'Bookmark'}}</span>
+                     </button>
                 </div>
-                <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType!=='collegeconnect'" type="button" (click)="openAskQuestions(askQuestions)">
-                    <em class="lxp-question"></em> <span>Ask A Question</span>
-                </button>
-                <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType=='collegeconnect'" type="button" (click)="openQuestionDialog(questionDialog)">
-                    <em class="lxp-question"></em> <span>Ask A Question</span>
-                </button>
-                <!-- <button class="notesBtn"><em class="lxp-Notes"></em> <span>Notes</span></button> -->
-                 <button class="bookmarkBtn" *ngIf="userType!='Corporate'" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
-                     <em [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></em> <span [ngClass]="topicInfo?.bookmark?'bold':'normal'">{{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? 'Bookmarked':'Bookmark'}}</span>
-                 </button>
             </div>
              <!-- <div class="d-flex justify-content-between align-items-center understoodButton">
                  <button *ngIf="userType!=='collegeconnect'&&userType!=='Corporate'" type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'btn btn-outline-success':'btn btn-outline-light'" (click)="understoodClick('like')">

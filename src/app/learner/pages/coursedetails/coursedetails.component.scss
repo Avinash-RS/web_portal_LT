@@ -416,13 +416,29 @@
         }
       }
     }
+    .wrapppper {
+      flex-wrap: wrap;
+      margin-top: 20px;
+      justify-content: center;
+      width: 100%;
+      @media only screen and (min-width: 720px) {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        margin-top: 0;
+      }
+      @media only screen and (min-width: 992px) {
+        width: auto;
+      }
+      @media only screen and (min-width: 1140px) {
+        justify-content: flex-end;
+      }
+    }
     .notesBookmarks {
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      width: 100%;
       text-align: right;
-      margin: 10px 0 10px 0;
+      margin: 10px 0 10px 20px;
       position: relative;
       flex-wrap: wrap;
       &::before {
@@ -445,9 +461,9 @@
         flex-wrap: nowrap;
       }
       @media only screen and (min-width: 992px) {
-        width: 60%;
+        width: auto;
         justify-content: flex-end;
-        margin: 0;
+        margin: 0 0 0 20px;
       }
       @media only screen and (min-width: 1140px) {
         width: auto;
