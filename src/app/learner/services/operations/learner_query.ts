@@ -2488,8 +2488,9 @@ export const recentlycourse = gql`
           data {
             inProgressModule
             {
-            course_name
+              course_name
               module
+              topic
               link
               course_id
               batchid
@@ -2500,7 +2501,7 @@ export const recentlycourse = gql`
               lastTopic
               topic_status
               module_status
-            }
+              }
             completedTopic{
               course_name
               module
@@ -2511,7 +2512,6 @@ export const recentlycourse = gql`
               week
               topicIndex
               moduleIndex
-              lastTopic
               topic_status
               module_status
               }
@@ -2528,6 +2528,7 @@ export const recentlycourse = gql`
               _id
               labActivity{
               project_id
+              ebox_attempt_id
               activitystartdate
               activityenddate
               submit_status
@@ -2541,12 +2542,7 @@ export const recentlycourse = gql`
               activityname
               topic_id
               projecttype
-              groupDetails{
-              id
-              username
-              name
-              email
-              }
+              url
               }
               }
           }
@@ -2571,17 +2567,17 @@ export const getlabactivity = gql `
 export const labactivity = gql`
 mutation labactivity(
   $username:String,
-  $course_id:String
+  $attempt_id:String,
 ){
   labactivity(
     username:$username,
-    course_id:$course_id
+    attempt_id:$attempt_id
   ){
-    success
-    message
-    Message
-    Status
-    url
+    data{
+      url
+      message
+      errorCode
+    }
   }
 }
 `;

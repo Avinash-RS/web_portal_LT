@@ -17,7 +17,7 @@
     <div class="reportLeftCol">
       <ul class="breadcrumb">
         <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> {{course?.name}}</li>
-        <li>Course Report</li>
+        <li>Assessment Report</li>
       </ul>
       <h3>Learning Process</h3>
       <!-- Self Learning -->
@@ -178,13 +178,13 @@
                  </li>
                  <li class="d-flex">
                    <label>Total duration spent </label> 
-                   <span>{{courseReportData.selfLearning_Card.total_no_of_duration}} mins</span>
+                   <span>{{courseReportData.selfLearning_Card.total_no_of_duration}} min</span>
                  </li>
                </ul>
              </div>
            </div>
            <div class="card-foot">
-             Complete all topics and spend enough time to improve your score
+            Learn all topics completely to improve your Self Learning score
            </div>
        </mat-card>
         <mat-card class="selflearningCard">
@@ -206,7 +206,7 @@
                   </div>
                 </div>
                 <div class="card-foot">
-                  The more relevant questions you ask , your Q&A score will improve 
+                  Q&A score is based on the number of relevant questions you ask
                 </div>
         </mat-card>
       </div>
@@ -257,7 +257,7 @@
             </div>
             <div *ngIf="group.value == 'chart'">
               <mat-card class="barGraphCard">
-                <h6>Score</h6>
+                <h6>Percentage</h6>
                 <span *ngIf="showArrow">
                   <button [disabled] = "disableArrow" mat-icon-button (click)="graphleft()">
                     <mat-icon>chevron_left</mat-icon>
@@ -276,6 +276,7 @@
                     [chartType]="barChartType">
                   </canvas>
                 </div>
+                <label>Score</label>
               </mat-card>
           </div>
           </div>

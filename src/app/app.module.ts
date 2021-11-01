@@ -33,6 +33,7 @@ import { KnowledgePreviewComponent } from '@learner/pages/knowledge-preview/know
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { GoogleAnalyticsService } from '@learner/services/google-analytics.service';
 import {GtagModule} from "angular-gtag";
+import { environment } from '@env/environment';
 
 
 // import { ChartsModule } from 'ng2-charts';
@@ -73,7 +74,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     GraphqlModule,
     NgxUiLoaderModule,
     AngularEditorModule,
-    GtagModule.forRoot({ trackingId: 'UA-189802508-1', trackPageviews: false }),
+    GtagModule.forRoot({ trackingId: environment.gaTrackingId, trackPageviews: false }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

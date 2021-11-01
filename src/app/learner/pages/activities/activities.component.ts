@@ -207,10 +207,10 @@ export class ActivitiesComponent implements OnInit {
         index = '1'
       } 
       else if (this.checkDetails?.activityType == 'Lab Practical') {
-        index = '2'
+        index = '3'
       } 
       else {
-        index = '3'
+        index = '2'
       }
     } else {
       this.fromCalender = false
@@ -226,7 +226,7 @@ export class ActivitiesComponent implements OnInit {
     } else if (this.demo1TabIndex.toString() == '1') {
       this.getperformActivityData();
     } 
-    else if (this.demo1TabIndex.toString() == '2') {
+    else if (this.demo1TabIndex.toString() == '3') {
       this.getLabPracticeData();
     }
     else {
@@ -373,7 +373,7 @@ export class ActivitiesComponent implements OnInit {
         this.assigmentMobileResponsive = false;
       }
     }
-    else if(event.tab.textLabel === 'Lab Practical'){
+    else if(event.tab.textLabel === 'Practice Online'){
       this.getLabPracticeData();
     }
   }
@@ -447,24 +447,23 @@ export class ActivitiesComponent implements OnInit {
       }
     })
   }
-  redirectLabpractice(){
-    var labactivitydetails ={
-      username:this.userDetail.username,
-      course_id:this.courseid
+
+  getEboxURL(eAttemptId){
+      var labactivitydetails ={
+        username:this.userDetail.username,
+        attempt_id:eAttemptId
+      }
+      this.Lservice.labactivity(labactivitydetails).subscribe((result:any)=>{
+        console.log(result)
+        if(result.data.labactivity.data.url !== ""){
+          this.redirectLabpractice(result.data.labactivity.data.url)
+        }else{
+          this.toastr.warning(result.data.labactivity.data.message);
+        }
+      });
     }
-    this.Lservice.labactivity(labactivitydetails).subscribe((result:any)=>{
-      if(result.data.labactivity.success == false){
-        this.toastr.warning(result.data.labactivity.message);
-      }
-      else if(result.data.labactivity.success == null){
-        if(result.data.labactivity.Status == 0){
-            window.open(result.data.labactivity.url);
-        }
-        else{
-          this.toastr.warning(result.data.labactivity.Message);
-        }
-      }
-    });
+  redirectLabpractice(url){
+    window.open(url);
   }
 
   getAssignmentmoduleData(value?) {

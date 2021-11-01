@@ -15,6 +15,7 @@ import * as CryptoJS from 'crypto-js';
 import { Gtag } from 'angular-gtag';
 declare var window;
 declare var dataLayer
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -37,6 +38,8 @@ export class AppComponent implements OnInit {
   chatbotShow: boolean = false;
   UserDetails: any;
   secretKey = "(!@#Passcode!@#)";
+  botUrl;
+  urlSafe: SafeResourceUrl;
    // FOR DRM(Restriction for right click)
    @HostListener('document:keydown', ['$event'])
    handleKeyboardEvent(event: KeyboardEvent) {
@@ -55,7 +58,8 @@ export class AppComponent implements OnInit {
               private titleService: Title,
               private commonService: CommonServicesService,
               public Lservice: LearnerServicesService,
-              private gtag: Gtag
+              private gtag: Gtag,
+              public sanitizer: DomSanitizer,
 
   ) {
     // console.error = function(){}
@@ -70,13 +74,17 @@ export class AppComponent implements OnInit {
     gTagManagerScript.async = true;
     gTagManagerScript.src = `https://www.googletagmanager.com/gtag/js?id=${environment.gaTrackingId}`;
     document.head.appendChild(gTagManagerScript);
-
+    let user_id = null
+    if(this.UserDetails){
+       user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8); 
+    }
   //   // register google analytics
     const gaScript = document.createElement('script');
     gaScript.innerHTML = `
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
+      gtag('set', 'user_properties', { 'userID' : '${user_id}' });
       gtag('config', '${environment.gaTrackingId}',{ 'send_page_view': false });
       `;
     document.head.appendChild(gaScript);
@@ -84,7 +92,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
 //GOOGLE ANALYTICS
 // this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || null
 // timer(500)
@@ -160,23 +167,29 @@ export class AppComponent implements OnInit {
     //  send pageview 
         const titledat = this.getChild(this.activatedRoute);
       titledat.data.subscribe(data => {
+        let user_id = null
+        if(this.UserDetails){
+           user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8); 
+          if(dataLayer)
+          {
+            dataLayer[0]={'userID': user_id};
+            
+        }else{
+          dataLayer[0]={'userID': user_id};
+        }
+        }
+        console.log("USERID"+this.UserDetails.user_id)
+        console.log("USERID"+user_id)
         this.gtag.pageview({
           page_title: data?.title? data.title : "L&T Edutech",
           page_path: this.router.url,
-          page_location: window.location.href
+          page_location: window.location.href,
+          userID:user_id
         });
+        this.gtag.set({ 'userID' : user_id });
       })
         
-        if(this.UserDetails){
-          let user_id = CryptoJS.AES.decrypt(this.UserDetails.user_id, this.secretKey.trim()).toString(); 
-          if(window.dataLayer)
-          {
-            window.dataLayer[0]={'userID': user_id};
-            
-        }else{
-          window.dataLayer[0]={'userID': user_id};
-        }
-        }
+       
         // this.ga_service.logPageView(e.url,user_id);
         // this.ga_service.logPageView(e.url);
       const urlIdentifier = e.url.split("/")
@@ -269,8 +282,11 @@ myUnload() {
     this.destroy$.next();
   }
 
-  toggleChatbot() {
-    this.chatbotShow = !this.chatbotShow;
+  openChatbot() {
+      this.UserDetails = JSON.parse( window.localStorage.getItem('UserDetails'));
+      this.botUrl = "https://devfaqbot.lntiggnite.com/?userName=" + this.UserDetails.full_name + "&userID=" + this.UserDetails.user_id + "&token=" + this.UserDetails.token;
+      this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.botUrl)
+      this.chatbotShow = true;
   }
 
 }

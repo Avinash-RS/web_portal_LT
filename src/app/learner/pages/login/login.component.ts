@@ -264,7 +264,7 @@ export class LoginComponent implements OnInit {
       this.gaService.setInnerPage('Sign up')
       this.gettitleData();
       this.registerForm = this.formBuilder.group({
-        recaptchaReactive: [null, [Validators.required]],
+        recaptchaReactive: [null],
         title: ['', [Validators.required]],
         fullname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50),
           Validators.pattern(/^[-a-zA-Z-() ]+(\s+[-a-zA-Z-()]+)*$/)]],

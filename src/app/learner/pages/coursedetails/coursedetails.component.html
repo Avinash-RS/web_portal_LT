@@ -33,7 +33,10 @@
         <div class="titleBack animateAnimate d-flex justify-content-between align-items-center" [ngClass]="titleBar==true?'fadeOutUp':'fadeInDown'">
             <div class="breadCrumbWrapper">
                 <ul class="breadcrumb" [ngClass]="scromApiData?.toc != '0' ? 'no':'yes'">
-                    <li [ngClass]="drawersOpen ? 'no':'yes'"><em (click)="goBack()" class="lxp-Go backArrow"></em> <span>{{this.course?.course_name}}</span></li>
+                    <li [ngClass]="drawersOpen ? 'no':'yes'">
+                        <!-- <em (click)="goBack()" class="lxp-Go backArrow"></em> -->
+                        <span>{{course?.course_name}}</span>
+                    </li>
                     <ng-container *ngIf="scromApiData?.toc != '0'">
                         <div class="navigation d-flex align-items-center" *ngIf="scromModuleData && filterkey==='All' && drawersOpen===false">
                             <!-- <span class="pipeLine">|</span>  -->
@@ -51,11 +54,7 @@
                     <!-- <li><div class="courseTitle" *ngIf="drawersOpen!==false||filterkey!=='All'"><span>{{this.course?.course_name}}</span></div></li> -->
                 </ul>
             </div>
-            <div *ngIf="showlab">
-                <button mat-stroked-button class="practice-btn mt-2" (click)="navigatePractice()">
-                    <em class="lxp-Lab_Practice"></em> Lab Practices
-                </button>
-            </div>
+           
         </div>
     </div>
     <!-- COURSE TOOL BAR -->
@@ -191,9 +190,9 @@
                                     <span *ngIf="res?.status == null" class="greyColor"></span>
                                 </div>
                                 <div class="topicName">
-                                    <h4 *ngIf="res?.title?.length >= 67" class="moduleName" tooltip="{{res?.title}}" placement="right">
+                                    <h4 *ngIf="res?.title?.length >= 67" class="moduleName" tooltip="{{res?.title}}">
                                         {{res?.title | slice:0:71}}...</h4>
-                                    <h4 *ngIf="res?.title?.length < 67" class="moduleName">
+                                    <h4 *ngIf="res?.title?.length < 67" class="moduleName" tooltip="{{res?.title}}">
                                         {{res?.title}}
                                     </h4>
                                 </div>
@@ -216,7 +215,7 @@
                                             <div *ngIf="wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder" #focuser ></div>
                                             <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,wi,ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                 <div class="modTitle">
-                                                    <h3>{{mod?.title}}</h3>
+                                                    <h3 tooltip="{{mod?.title}}">{{mod?.title}}</h3>
                                                     <!-- <span class="playVideo"><em class="lxp-PlayCircle"></em> Video</span>
                                                     <span class="videoDuration"><em class="lxp-Clock"></em> 30:00 min</span> -->
                                                 </div>
@@ -246,17 +245,6 @@
             <iframe title="player" id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
             <div class="toccollapsed" *ngIf="!drawersOpen">
                 <em class="lxp-TOC_Collapse" (click)="drawersOpen=drawersOpen?false:true"></em>
-            </div>
-            <div *ngIf="scromApiData?.toc != '0'">
-                <div *ngIf="!drawersOpen" class="currentModuleTopic">
-                    <div class="curentVideoWeek">Week <span>{{weekHolderUI+1}}</span></div>
-                    <div class="currentVideoModuleTopic">
-                        <h5>{{scromModuleData[weekHolderUI].childData[moduleHolder].title}}</h5>
-                        <h4 title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}">
-                            {{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}
-                        </h4>
-                    </div>
-                </div>
             </div>
             <div class="rightContent">
                 <div (click)="makeFullScreen()" data-title="Fullscreen" class="fullScr d-flex align-items-center iconSize">
@@ -299,29 +287,62 @@
         
         <div class="d-flex justify-content-between understoodBookmark" [ngClass]="!drawersOpen ? 'Yes':'No'">
             <div class="popupContent d-flex align-items-center">
-                <div class="wrapper d-flex align-items-center">
+                <div class="wrapper d-flex align-items-center" *ngIf="drawersOpen || scromApiData?.toc == '0'">
                     <span class="abtCourse" (click)="aboutCourse(aboutCourseWindow)"><em class="lxp-Info"></em> <span>About the Course</span></span>
                     <span class="resourcesTab" (click)="openResourse(resourseWindow)"><em class="lxp-Image_Folder"></em> <span>Course Resources</span></span>
                     <span class="downloadCode" (click)="downloadResource();" *ngIf="scromApiData.resourceUrl"><em class="lxp-Download_Code"></em> <span>Download Code exercises</span></span>
                 </div>
+                <div *ngIf="scromApiData?.toc != '0'" class="d-flex align-items-center moduleTopicWrapper">
+                    <div *ngIf="!drawersOpen" class="currentModuleTopic">
+                        <div class="curentVideoWeek">Week <span>{{weekHolderUI+1}}</span></div>
+                        <div class="currentVideoModuleTopic">
+                            <h5>{{scromModuleData[weekHolderUI].childData[moduleHolder].title}}</h5>
+                            <h4 title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}">
+                                {{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="dotMenu" *ngIf="!drawersOpen">
+                        <button [matMenuTriggerFor]="menu">
+                            <em class="lxp-Dot_Menu"></em>
+                        </button>
+                        <mat-menu #menu="matMenu" yPosition="above" class="onPopup">
+                            <span class="abtCourse" (click)="aboutCourse(aboutCourseWindow)"><em class="lxp-Info"></em> <span>About the Course</span></span>
+                            <span class="resourcesTab" (click)="openResourse(resourseWindow)"><em class="lxp-Image_Folder"></em> <span>Course Resources</span></span>
+                            <span class="downloadCode" (click)="downloadResource();" *ngIf="scromApiData.resourceUrl"><em class="lxp-Download_Code"></em> <span>Download Code exercises</span></span>
+                        </mat-menu>
+                    </div>
+                </div>
             </div>
-            <div class="notesBookmarks">
-                <!-- <button class="notesBtn"><em class="lxp-Notes"></em> <span>Notes</span></button> -->
-                <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')" data-title="Understood" class="smile" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
-                    <em class="lxp-smile"></em> <span>Understood</span>
+
+            <div class="wrapppper d-flex align-items-center">
+                <!-- <div class="upSkill" *ngIf="showlab"> -->
+                <div class="upSkill">
+                    <button data-title="Practice online" class="practiceOnline" type="button" (click)="navigatePractice()">
+                        <em class="lxp-Lab_Practice"></em> <span>Practice Online</span>
+                    </button>
+                    <!-- <button data-title="Practice online" (click)="showlab = showlab?false:true" class="onlineEditor" type="button">
+                        <em class="lxp-Online_Code_Editor"></em> <span>Online Code Editor</span>
+                    </button> -->
                 </div>
-                <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
-                    <em class="lxp-sad"></em> <span>Not Understood</span>
+                <div class="notesBookmarks">
+                    <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')" data-title="Understood" class="smile" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
+                        <em class="lxp-smile"></em> <span>Understood</span>
+                    </div>
+                    <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
+                        <em class="lxp-sad"></em> <span>Not Understood</span>
+                    </div>
+                    <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType!=='collegeconnect'" type="button" (click)="openAskQuestions(askQuestions)">
+                        <em class="lxp-question"></em> <span>Ask A Question</span>
+                    </button>
+                    <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType=='collegeconnect'" type="button" (click)="openQuestionDialog(questionDialog)">
+                        <em class="lxp-question"></em> <span>Ask A Question</span>
+                    </button>
+                    <!-- <button class="notesBtn"><em class="lxp-Notes"></em> <span>Notes</span></button> -->
+                     <button class="bookmarkBtn" *ngIf="userType!='Corporate'" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
+                         <em [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></em> <span [ngClass]="topicInfo?.bookmark?'bold':'normal'">{{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? 'Bookmarked':'Bookmark'}}</span>
+                     </button>
                 </div>
-                <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType!=='collegeconnect'" type="button" (click)="openAskQuestions(askQuestions)">
-                    <em class="lxp-question"></em> <span>Ask A Question</span>
-                </button>
-                <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType=='collegeconnect'" type="button" (click)="openQuestionDialog(questionDialog)">
-                    <em class="lxp-question"></em> <span>Ask A Question</span>
-                </button>
-                 <button class="bookmarkBtn" *ngIf="userType!='Corporate'" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
-                     <em [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></em> <span [ngClass]="topicInfo?.bookmark?'bold':'normal'">{{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? 'Bookmarked':'Bookmark'}}</span>
-                 </button>
             </div>
              <!-- <div class="d-flex justify-content-between align-items-center understoodButton">
                  <button *ngIf="userType!=='collegeconnect'&&userType!=='Corporate'" type="button" [disabled]="topicPageStatus !== 'Passed'" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'btn btn-outline-success':'btn btn-outline-light'" (click)="understoodClick('like')">
@@ -532,7 +553,8 @@
                     </div> -->
                 </div>
                 <div class="poweredBy">
-                    <h2>Course offered by: <span><img src="/assets/images/lNTlogo.svg" alt="" /></span></h2>
+                    <!-- <h2>Course offered by: <span><img src="/assets/images/lNTlogo.svg" alt="" /></span></h2> -->
+                    <h2>Course offered by: <span><img src="https://assets.lntedutech.com/edutech_logo.svg" alt="" /></span></h2>
                 </div>
             </div>
         </div>
@@ -652,7 +674,6 @@
     </mat-card>
 </div>
 </ng-template>
-
 
 <ng-template #questionDialog>
     <div class="d-flex justify-content-between titleMargin" (contextmenu)="contextmenu()">
