@@ -27,6 +27,11 @@ export const login = gql`
         nodebb_response {
           uid
         }
+        TFAsetup{
+          main_config_TFA
+          dataURL
+          user_config_TFA
+        }
       }
     }
   }
