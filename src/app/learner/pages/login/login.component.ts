@@ -178,42 +178,53 @@ export class LoginComponent implements OnInit {
     var encryptedpassword = CryptoJS.AES.encrypt(this.loginForm.value.password, this.secretKey.trim()).toString();
     this.service.login(encryptedname, encryptedpassword, false,this.recaptchaStr)
       .subscribe((loginresult: any) => {
-        if (loginresult.data.login) {
+        loginresult.data.login['main_config_TFA'] = true
+        if(loginresult.data.login){
           if (loginresult.data.login.success) {
-            this.router.navigate(['/Learner/MyCourse']);
-            if(this.loginForm.value.remember_me === true){
-              localStorage.setItem('token', loginresult.data.login.message.token);
-            }else{
-              sessionStorage.setItem('token', loginresult.data.login.message.token);
-            }
-            localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
-            localStorage.setItem('Fullname', loginresult.data.login.message.full_name);
-            var id = CryptoJS.AES.encrypt(loginresult.data.login.message.user_id, this.secretKey.trim()).toString(); 
-            loginresult.data.login.message.user_id = id
-              localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
-              localStorage.setItem('remember_me', 'false');
-              localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
-              localStorage.setItem('role', 'learner');
-              // this.router.navigate(['/Learner/MyCourse']);
-            if (loginresult.data.login && this.loginForm.value.remember_me === true) {
-              localStorage.setItem('remember_me', 'true');
+            if(loginresult.data.login.main_config_TFA){
+              this.router.navigate(['/Learner/authentication']);
+             
             } else {
-              localStorage.setItem('remember_me', 'false');
+              this.router.navigate(['/Learner/MyCourse']);
             }
-            setTimeout(()=>{
-              this.loader = false;
-            },5000)
+            this.loginMovement(loginresult)
           } else {
             this.loader = false;
             this.loginForm.reset();
             this.toastr.error(loginresult.data.login.error_msg, null);
           }
-        } else {
+        }
+        else {
           this.loader = false;
           this.loginForm.reset();
           this.toastr.warning('Please try again later', null);
         }
+        
       });
+  }
+
+  loginMovement(loginresult){
+        if(this.loginForm.value.remember_me === true){
+          localStorage.setItem('token', loginresult.data.login.message.token);
+        }else{
+          sessionStorage.setItem('token', loginresult.data.login.message.token);
+        }
+        localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
+        localStorage.setItem('Fullname', loginresult.data.login.message.full_name);
+        var id = CryptoJS.AES.encrypt(loginresult.data.login.message.user_id, this.secretKey.trim()).toString(); 
+        loginresult.data.login.message.user_id = id
+          localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
+          localStorage.setItem('remember_me', 'false');
+          localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
+          localStorage.setItem('role', 'learner');
+        if (loginresult.data.login && this.loginForm.value.remember_me === true) {
+          localStorage.setItem('remember_me', 'true');
+        } else {
+          localStorage.setItem('remember_me', 'false');
+        }
+        setTimeout(()=>{
+          this.loader = false;
+        },5000)
   }
   forgotusername(type) {
     this.router.navigateByUrl('/Learner/recover', { state: { type } });
