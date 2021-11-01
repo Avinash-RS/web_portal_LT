@@ -178,10 +178,14 @@ export class LoginComponent implements OnInit {
     var encryptedpassword = CryptoJS.AES.encrypt(this.loginForm.value.password, this.secretKey.trim()).toString();
     this.service.login(encryptedname, encryptedpassword, false,this.recaptchaStr)
       .subscribe((loginresult: any) => {
-        loginresult.data.login['main_config_TFA'] = true
+        loginresult.data.login.message['TFAsetup'] = {
+          'main_config_TFA':true,
+          'dataURL': '',
+          'user_config_TFA': true
+        }
         if(loginresult.data.login){
           if (loginresult.data.login.success) {
-            if(loginresult.data.login.main_config_TFA){
+            if(loginresult.data.login?.message?.TFAsetup?.main_config_TFA){
               this.router.navigate(['/Learner/authentication']);
              
             } else {
