@@ -26,16 +26,19 @@
           </figure>
           <!-- Auth Verification -->
           <div class="authVerification">
-            <h2 class="d-flex justify-content-center">Scan QR Code</h2>
-            <div class="d-flex justify-content-center">
-                <img [src]="qrCode" alt="" />
-            </div>
-            <h2 class="d-flex justify-content-center">Enter Authentication Code</h2>
+              <div *ngIf="qrCode">
+                <h2 class="d-flex justify-content-center">Scan QR Code</h2>
+                <div class="d-flex justify-content-center">
+                    <img [src]="qrCode" alt="" />
+                </div>
+              </div>
+            <h2 class="d-flex justify-content-center" *ngIf="qrCode">Enter Authentication Code</h2>
+            <h2 class="d-flex justify-content-center" *ngIf="!qrCode">Enter OTP</h2>
             <div class="d-flex justify-content-center">
                 <ng-otp-input #authInput (onInputChange)="onAuthChange($event)"  [config]="{length:6,allowNumbersOnly: true}"></ng-otp-input>
             </div>
             <div class="gradientBtn">
-              <button id="login" mat-raised-button>
+              <button id="login" mat-raised-button (click)="verifyAuth()">
                 <span *ngIf="!loader">{{'Verify' | translate}}</span>
                 <div *ngIf="loader" class="snippet" data-title=".dot-falling">
                   <div class="stage">

@@ -1231,3 +1231,12 @@ mutation getuserRecordbasedonSecretKey($userSecretkey:String!){
 }
 }
 `;
+
+export const verify_tfa_setup = gql`
+mutation verify_tfa_setup($user_id:String!,$token:String!){
+  verify_tfa_setup(user_id:$user_id,token:$token){
+    message
+    success
+}
+}
+`;
