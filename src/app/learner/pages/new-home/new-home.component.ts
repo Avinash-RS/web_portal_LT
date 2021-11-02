@@ -41,15 +41,19 @@ export class NewHomeComponent implements OnInit {
   }
 
   verifyAuth(){
+    this.loader = true;
     if(this.authCode && this.authCode.length === 6) {
       this.learnerService.verifyAuth(this.authCode,this.userDetail.user_id).subscribe((response:any)=>{
         if(response?.data?.verify_tfa_setup?.success){
           this.router.navigate(['/Learner/MyCourse']);
+          this.loader = false;
         } else {
+          this.loader = false;
           this.toastr.warning(response?.data?.verify_tfa_setup?.message);
         }
       })
     } else {
+      this.loader = false;
       this.toastr.warning('Enter OTP')
     }
   }
