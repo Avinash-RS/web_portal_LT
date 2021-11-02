@@ -538,6 +538,9 @@ margin-bottom: 9px;
 }
 .projEndDate {
   margin-left: 10px;
+  @media only screen and (max-width: 767px) {
+    margin-left: 0;
+  }
 }
 .groupBtn {
   border: 1px solid #5C6873;
@@ -1455,23 +1458,30 @@ margin-top: 8px;
 }
 .projectActivityDetails {
   .assignmentActivityDetails {
+    flex-wrap: wrap;
+    @media only screen and (min-width: 720px) {
+      flex-wrap: nowrap;
+    }
     .iconcontent{
-      width: 7%;
+      width: 3%;
+      @media only screen and (max-width: 767px) {
+        width: 15%;
+      }
       em{
-        font-size: 70px;
+        font-size: 40px;
         color: #5c6873;
       }
     }
       .labLeftContent{
-        width: 45%;
+        width: 46%;
         @media only screen and (max-width: 767px) {
-          width:100%;
+          width: 83%;
         }
       }
       .labmiddleContent{
-        width: 35%;
+        width: 34%;
         .projstartdate{
-          padding-right: 15px;
+          padding-right: 5px;
         }
         @media only screen and (max-width: 767px) {
           margin-top:10px;
@@ -1479,7 +1489,7 @@ margin-top: 8px;
         }
       }
       .practicesaction{
-        width: 15%;
+        width: 14%;
         text-align: right;
         .practice-btn{
           color: $color-white !important;
@@ -1493,11 +1503,11 @@ margin-top: 8px;
       }
       }
     @media only screen and (max-width: 767px) {
-      flex-direction: column;
+      // flex-direction: column;
     }
     .projHead {
       @media only screen and (max-width: 767px) {
-        padding-right: 65px;
+        // padding-right: 65px;
       }
     }
     .projDate {

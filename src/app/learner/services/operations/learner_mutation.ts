@@ -134,11 +134,12 @@ export const userRegistrationUsernamesuggestion = gql`
 
 
 export const getForgotpasswordbyResetpassword = gql`
-  mutation get_forgot_password_byresetpassword($username: String!,$password:String!,$resetCode:String!) {
+  mutation get_forgot_password_byresetpassword($username: String!,$password:String!,$resetCode:String!,$badgeRequest:String!) {
     get_forgot_password_byresetpassword(
       username:$username,
       password:$password,
-      resetCode:$resetCode
+      resetCode:$resetCode,
+      badgeRequest:$badgeRequest
     ) {
       message
       success
@@ -1227,6 +1228,15 @@ mutation getuserRecordbasedonSecretKey($userSecretkey:String!){
     }
     success
     message
+}
+}
+`;
+
+export const verify_tfa_setup = gql`
+mutation verify_tfa_setup($user_id:String!,$token:String!){
+  verify_tfa_setup(user_id:$user_id,token:$token){
+    message
+    success
 }
 }
 `;
