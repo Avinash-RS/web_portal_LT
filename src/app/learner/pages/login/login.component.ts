@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as myGlobals from '@core/globals';
@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
   recaptchaStr = '';
   recaptchaForgetStr = '';
   recaptchaSignInStr = '';
+  @ViewChild('captchaRef') captchaRef;
   getErrorMessage() {
     return this.username.hasError('required') ? 'Email or Username is required' :
         this.username.hasError('email') ? 'Please enter a valid email address' :
@@ -59,7 +60,6 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       // username: new FormControl('', myGlobals.req),
       username: ['',  myGlobals.req],
-      signInrecaptchaReactive: [null],
       password: new FormControl('', myGlobals.req),
       remember_me: new FormControl(false, []),
       language: new FormControl(false, [])
@@ -71,6 +71,9 @@ export class LoginComponent implements OnInit {
     this.forgotPage = true;
     this.titleService.setTitle('Forgot Password');
     this.gaService.setInnerPage('Forgot Password')
+    setTimeout(()=>{
+      this.captchaRef.reset();
+    },1000)
   }
   backToSignin(){
     this.forgotPage = false;
@@ -78,6 +81,9 @@ export class LoginComponent implements OnInit {
     this.titleService.setTitle('Learner Login');
     this.gaService.setInnerPage('Learner Login')
     this.username.reset();
+    setTimeout(()=>{
+      this.captchaRef.reset();
+    },1000)
   }
   forgotPassword() {
       var encryptedmail = CryptoJS.AES.encrypt(this.username.value, this.secretKey.trim()).toString();
