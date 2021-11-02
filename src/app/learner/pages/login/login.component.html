@@ -69,7 +69,7 @@
               </span>
             </div>
             <div class="d-flex justify-content-center mt-1">
-              <re-captcha #captchaRef="reCaptcha" formControlName="signInrecaptchaReactive" (resolved)="resolvedLogin($event)" (error)="onError($event)"
+              <re-captcha #captchaRef="reCaptcha"  (resolved)="resolvedLogin($event)" (error)="onError($event)"
                 errorMode="handled" [siteKey]="siteKey" size='invisible'>
               </re-captcha>
             </div>
@@ -83,7 +83,7 @@
                 </div>
               </button>
             </div>
-            <div class="dontHaveAccount">
+            <div class="dontHaveAccount" style="display: none;">
               <span>Don't have an account yet? <a class="signup" (click)="viewSignin()">
                   {{'Sign up' | translate }}</a></span>
             </div>
@@ -119,7 +119,7 @@
             </mat-form-field>
           </div>
           <div class="d-flex justify-content-center mt-1">
-            <re-captcha #captchaRef="reCaptcha" (resolved)="resolvedForget($event)" (error)="onError($event)" errorMode="handled" [siteKey]="siteKey" size='invisible'></re-captcha>
+            <re-captcha  #captchaRef="reCaptcha" (resolved)="resolvedForget($event)" (error)="onError($event)" errorMode="handled" [siteKey]="siteKey" size='invisible'></re-captcha>
           </div>
           <div class="gradientBtn">
             <button id="login" mat-raised-button [disabled]="!username.valid" (click)="checkCaptchaForget(captchaRef)">
