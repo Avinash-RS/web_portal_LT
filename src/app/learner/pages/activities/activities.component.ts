@@ -207,10 +207,10 @@ export class ActivitiesComponent implements OnInit {
         index = '1'
       } 
       else if (this.checkDetails?.activityType == 'Lab Practical') {
-        index = '2'
+        index = '3'
       } 
       else {
-        index = '3'
+        index = '2'
       }
     } else {
       this.fromCalender = false
@@ -226,7 +226,7 @@ export class ActivitiesComponent implements OnInit {
     } else if (this.demo1TabIndex.toString() == '1') {
       this.getperformActivityData();
     } 
-    else if (this.demo1TabIndex.toString() == '2') {
+    else if (this.demo1TabIndex.toString() == '3') {
       this.getLabPracticeData();
     }
     else {
@@ -373,7 +373,7 @@ export class ActivitiesComponent implements OnInit {
         this.assigmentMobileResponsive = false;
       }
     }
-    else if(event.tab.textLabel === 'Lab Practical'){
+    else if(event.tab.textLabel === 'Practice Online'){
       this.getLabPracticeData();
     }
   }
@@ -1272,11 +1272,11 @@ export class ActivitiesComponent implements OnInit {
       if (path.videourl) {
         path.path = path.videourl;
       }
-      path.path = path.path + this.blobKey;
-      // if (path.path.includes('?sv=')) {
-      // } else {
-
-      // }
+      if (path.path.includes('?sv=')) {
+        path.path = path.path
+      } else {
+        path.path = path.path + this.blobKey;
+      }
       this.previewDoc = path;
     } else if (docType === 'video/mp4' || docType === 'video/quicktime') {
       if (path.videourl) {

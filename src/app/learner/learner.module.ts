@@ -34,7 +34,6 @@ import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-das
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
-import { NewHomeComponent } from './pages/new-home/new-home.component';
 import { ViewAllnotificationsComponent } from './pages/view-allnotifications/view-allnotifications.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -87,7 +86,6 @@ const routes: Routes = [
     ProfileComponent,
     TermsconditionsComponent,
     ForbiddenComponent,
-    NewHomeComponent,
     LearnerDashboardComponent,
     ViewAllnotificationsComponent,
     VideoPreviewModalComponent,

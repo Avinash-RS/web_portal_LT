@@ -83,7 +83,7 @@ export class ResetpasswordComponent implements OnInit {
 
 
     this.resetForm = this.formBuilder.group({
-      recaptchaReactive: [null, [Validators.required]],
+      recaptchaReactive: [null],
       password: ['', [Validators.required, ,
         Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/),Validators.minLength(8),  Validators.maxLength(20)]],
         confirmpassword: new FormControl('', [Validators.required, Validators.minLength(8),
@@ -154,7 +154,7 @@ export class ResetpasswordComponent implements OnInit {
     // var decryptname = CryptoJS.AES.decrypt(encryptedname, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     // var decryptpassword = CryptoJS.AES.decrypt(encryptedpassword, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     // return
-    this.service.resetPassword(encryptedname,encryptedpassword,this.resetCode).subscribe((data: any) => {
+    this.service.resetPassword(encryptedname,encryptedpassword,this.resetCode,this.recaptchaResetStr).subscribe((data: any) => {
       if (data.data.get_forgot_password_byresetpassword.success === 'true') {
         this.loader = false
         this.toastr.success(data.data.get_forgot_password_byresetpassword.message);
