@@ -1272,11 +1272,11 @@ export class ActivitiesComponent implements OnInit {
       if (path.videourl) {
         path.path = path.videourl;
       }
-      path.path = path.path + this.blobKey;
-      // if (path.path.includes('?sv=')) {
-      // } else {
-
-      // }
+      if (path.path.includes('?sv=')) {
+        path.path = path.path
+      } else {
+        path.path = path.path + this.blobKey;
+      }
       this.previewDoc = path;
     } else if (docType === 'video/mp4' || docType === 'video/quicktime') {
       if (path.videourl) {
