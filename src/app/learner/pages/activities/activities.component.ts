@@ -463,7 +463,7 @@ export class ActivitiesComponent implements OnInit {
       });
     }
   redirectLabpractice(url){
-    window.open(url);
+    window.open(url,"Practice");
   }
 
   getAssignmentmoduleData(value?) {

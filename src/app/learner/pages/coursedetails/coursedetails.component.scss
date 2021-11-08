@@ -410,7 +410,13 @@
           }
         }
         &.practiceOnline {
+          color: white !important;
+          background-color: #08558c !important;
+          span{
+            color: white !important;
+          }
           em {
+            color: white !important;
             font-size: 15px;
           }
         }
@@ -2536,4 +2542,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.btn-transp{
+  opacity: 0.5;
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
 }
