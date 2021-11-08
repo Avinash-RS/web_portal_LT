@@ -224,35 +224,49 @@
           <div class="weekly-content">            
             <div *ngIf="group.value == 'article'">
               <div class="week-card-container d-flex flex-wrap align-items-center" style= "justify-content: flex-start;">
-                   <mat-card class="week-card" *ngFor="let selfValue of courseReportData?.selflearning;let i = index">
-                    <div class="week-card-head d-flex">
-                      <popover-content #selfPopover>
-                        <div class="popoverContainer">
-                          <div class="items">(A) Estimated Duration - <span>{{selfValue.actualtopicduration}} mins</span></div>
-                          <div class="items">(B) Completed Duration - <span>{{selfValue.completedtopicduration}} mins</span></div>
-                          <div class="items">(C) No. of Topics - <span>{{selfValue.no_of_topic}}</span></div>
-                          <div class="items">(D) Completed Topics - <span>{{selfValue.Completedfortheweek}}</span></div>
-                          <div class="calculation">Calculation formula</div>
-                          <div class="calcFormula">={{selfValue.calculation}}</div>
-                          <div class="calcPercentage">= {{selfValue.selflearningscore}}</div>
-                        </div>
-                      </popover-content>
-                      <label>{{selfValue.week}}</label>
-                      <button class="popover-info" popoverPlacement="right" [popover]="selfPopover"><span>
-                        <img  src="../../../../assets/images/Group 14025.svg" />
-                      </span></button>
-                    </div>
+
+                
+                   <mat-card class="week-card" *ngFor="let selfValue of courseReportData?.selflearning;let i = index" [ngClass]="selfValue.week == 'Week 8' || selfValue.week == 'Week 16' ? 'disable-card' : ''">
+
+                    <ng-container *ngIf ="selfValue.week != 'Week 8' && selfValue.week != 'Week 16'">
+                      <div class="week-card-head d-flex">
+                        <popover-content #selfPopover>
+                          <div class="popoverContainer">
+                            <div class="items">(A) Estimated Duration - <span>{{selfValue.actualtopicduration}} mins</span></div>
+                            <div class="items">(B) Completed Duration - <span>{{selfValue.completedtopicduration}} mins</span></div>
+                            <div class="items">(C) No. of Topics - <span>{{selfValue.no_of_topic}}</span></div>
+                            <div class="items">(D) Completed Topics - <span>{{selfValue.Completedfortheweek}}</span></div>
+                            <div class="calculation">Calculation formula</div>
+                            <div class="calcFormula">={{selfValue.calculation}}</div>
+                            <div class="calcPercentage">= {{selfValue.selflearningscore}}</div>
+                          </div>
+                        </popover-content>
+                        <label>{{selfValue.week}}</label>
+                        <button class="popover-info" popoverPlacement="right" [popover]="selfPopover"><span>
+                          <img  src="../../../../assets/images/Group 14025.svg" />
+                        </span></button>
+                      </div>
                       <ul>
-                        <li class="d-flex">
-                          <label>Percentage</label>
-                          <span *ngIf="selfValue.selflearningscore != 0">{{selfValue.selflearningpercentage}}%</span>
-                          <span *ngIf="selfValue.selflearningscore == 0">0</span>
-                        </li>
-                        <li class="d-flex">
-                          <label>Score</label>
-                          <span>{{selfValue.selflearningscore}}</span></li>
+                          <li class="d-flex">
+                            <label>Percentage</label>
+                            <span *ngIf="selfValue.selflearningscore != 0">{{selfValue.selflearningpercentage}}%</span>
+                            <span *ngIf="selfValue.selflearningscore == 0">0</span>
+                          </li>
+                          <li class="d-flex">
+                            <label>Score</label>
+                            <span>{{selfValue.selflearningscore}}</span></li>
                       </ul>
+                  </ng-container>
+
+                  <ng-container *ngIf ="selfValue.week == 'Week 8' || selfValue.week == 'Week 16'">
+                    <div class="week-card-head d-flex">
+                      <label>{{selfValue.week}}</label>
+                    </div>
+                    <div class="disabledTXT">Project</div>
+                  </ng-container>
+
                   </mat-card>
+
               </div>
             </div>
             <div *ngIf="group.value == 'chart'">
@@ -447,7 +461,7 @@
             <div class="progressFinal">
               <circle-progress [percent]='courseReportData.finalscore.rawscore' [radius]=40 [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#2A4DC1'" [outerStrokeGradientStopColor]="'#0FD3D3'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 [animation]="true" [animationDuration]="300" [showSubtitle]="false"></circle-progress>
             </div>
-            <div class="gradePoints d-flex justify-content-between align-items-center">
+            <!-- <div class="gradePoints d-flex justify-content-between align-items-center">
               <div>
                 <figure>
                   <img src="/assets/images/grade.svg" alt="" />
@@ -460,7 +474,7 @@
                 </figure>
                 <h6>Points <span>{{courseReportData.finalscore.gradepoint}}</span></h6>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
