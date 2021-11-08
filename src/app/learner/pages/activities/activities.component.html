@@ -57,7 +57,7 @@
                   <div class="projTotalScore">
                     <div class="text-right">
                       <span class="totscore">
-                        Total score: <span *ngIf="!assignment.files.score_mark">-</span> <span *ngIf="assignment.files.score_mark">{{assignment.files.score_mark}}</span>
+                        Total score: <span *ngIf="assignment.files.score_mark == 0">0</span> <span *ngIf="!assignment.files.score_mark && assignment.files.score_mark != 0">-</span> <span *ngIf="assignment.files.score_mark">{{assignment.files.score_mark}}</span>
                         /{{assignment.files.total_mark}}</span>
                     </div>
                   </div>
