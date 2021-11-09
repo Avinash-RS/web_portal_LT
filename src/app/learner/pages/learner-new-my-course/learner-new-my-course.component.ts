@@ -922,7 +922,7 @@ goToCourse(value){
   };
 console.log(detail)
   localStorage.setItem('currentBatchEndDate', value.batch_end_date_Timer)
-  localStorage.setItem('Courseid', value.courseid);
+  localStorage.setItem('Courseid', value.course_id);
   localStorage.setItem('persentage', null);
   localStorage.setItem('currentBatchId', value.batch_id);
   this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
