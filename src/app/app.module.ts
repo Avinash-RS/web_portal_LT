@@ -34,7 +34,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { GoogleAnalyticsService } from '@learner/services/google-analytics.service';
 import {GtagModule} from "angular-gtag";
 import { environment } from '@env/environment';
-
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 // import { ChartsModule } from 'ng2-charts';
 
@@ -74,6 +74,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     GraphqlModule,
     NgxUiLoaderModule,
     AngularEditorModule,
+    PdfViewerModule,
     GtagModule.forRoot({ trackingId: environment.gaTrackingId, trackPageviews: false }),
     TranslateModule.forRoot({
       loader: {

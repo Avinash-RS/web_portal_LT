@@ -18,8 +18,8 @@
   </ng-container>
 
   <ng-container *ngIf="fileType == 'pdf'">
-    <!-- <pdf-viewer [src]="this.batchdialogdata.file" [original-size]="false"></pdf-viewer> -->
-    <iframe title="file" width="100%" height="100%" [src]="file" allowfullscreen></iframe>
+    <pdf-viewer [src]="file" [original-size]="false"  [render-text]="true" style="display: block;"></pdf-viewer>
+    <!-- <iframe title="file" width="100%" height="100%" [src]="file" allowfullscreen></iframe> -->
 
   </ng-container>
   <ng-container *ngIf="fileType == 'HTML'">
