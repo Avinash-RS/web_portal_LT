@@ -29,41 +29,63 @@ export class AuthGuard implements CanLoad {
   
   // Added by Mythreyi
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const userDetailes = localStorage.getItem('role');
+    const userDetails =JSON.parse(localStorage.getItem('UserDetails'));
     const token =  localStorage.getItem('token')||sessionStorage.getItem('token');
-    if (token) {
-      
-      // userdetail is present // authenticated user
-      // url should not start from admin - can be /Larner or anything
-      // if profile updated and trying to go login/reg
-      // if (userDetailes == 'learner') {
-        
-      //   this.router.navigate(['/Learner/MyCourse']);
-        return true;
+    if(userDetails?.TFAsetup?.main_config_TFA) {
+      if(userDetails?.TFAsetup?.user_config_TFA) {
+        if (token && userDetails?.specific_report_value) {
+            return true;
+          } else {
+            this.router.navigate(['/Learner/login']);
+            return false;
+          }
       } else {
-        this.router.navigate(['/Learner/login']);
-        return false;
+        if (token && userDetails?.specific_report_value) {
+            return true;
+          } else {
+            this.router.navigate(['/Learner/login']);
+            return false;
+          }
       }
-      // end of url navigations for logged in learner ------> 1
-    }
-
-    canLoad(route: Route, segments: UrlSegment[]): any {
-      const userDetailes = localStorage.getItem('role');
-      const token =  localStorage.getItem('token')||sessionStorage.getItem('token');;
-    
+    } else {
       if (token) {
-        // userdetail is present // authenticated user
-        // url should not start from admin - can be /Larner or anything
-        // if profile updated and trying to go login/reg
-        // if (userDetailes == 'learner') {
-          
-          // this.router.navigate(['/Learner/MyCourse']);
           return true;
         } else {
           this.router.navigate(['/Learner/login']);
           return false;
         }
-        // end of url navigations for logged in learner ------> 1
+    }
+    
+      // end of url navigations for logged in learner ------> 1
+    }
+
+    canLoad(route: Route, segments: UrlSegment[]): any {
+      const userDetails =JSON.parse(localStorage.getItem('UserDetails'));
+      const token =  localStorage.getItem('token')||sessionStorage.getItem('token');
+      if(userDetails?.TFAsetup?.main_config_TFA) {
+        if(userDetails?.TFAsetup?.user_config_TFA) {
+          if (token && userDetails?.specific_report_value) {
+              return true;
+            } else {
+              this.router.navigate(['/Learner/login']);
+              return false;
+            }
+        } else {
+          if (token && userDetails?.specific_report_value) {
+              return true;
+            } else {
+              this.router.navigate(['/Learner/login']);
+              return false;
+            }
+        }
+      } else {
+        if (token) {
+            return true;
+          } else {
+            this.router.navigate(['/Learner/login']);
+            return false;
+          }
+      }
       }
 
     // const userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;

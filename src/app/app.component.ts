@@ -193,7 +193,7 @@ export class AppComponent implements OnInit {
         // this.ga_service.logPageView(e.url,user_id);
         // this.ga_service.logPageView(e.url);
       const urlIdentifier = e.url.split("/")
-      const possiblePages = ['register', 'login', 'recover', 'resetpassword','password','']
+      const possiblePages = ['register', 'login', 'recover', 'resetpassword','password','authentication','']
       const rt = this.getChild(this.activatedRoute);
       rt.data.subscribe(data => {
         this.isFooterVisible = '';

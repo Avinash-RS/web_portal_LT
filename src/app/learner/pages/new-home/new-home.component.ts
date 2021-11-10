@@ -14,7 +14,8 @@ export class NewHomeComponent implements OnInit {
   loader;
   authCode;
   qrCode;
-  userDetail
+  userDetail;
+  secondStep = false;
   @ViewChild('authInput') authInput;
   constructor(public translate: TranslateService, public learnerService: LearnerServicesService,
               private gs: GlobalServiceService, private router: Router,private toastr: ToastrService) {
@@ -22,11 +23,13 @@ export class NewHomeComponent implements OnInit {
   }
   @HostListener('window:resize', ['$event'])
   ngOnInit() {
-    this.userDetail = this.gs.checkLogout();
+    this.userDetail =JSON.parse(localStorage.getItem('UserDetails'))
     if(this.userDetail?.TFAsetup?.dataURL) {
       this.qrCode = this.userDetail?.TFAsetup?.dataURL;
+      this.secondStep = false;
     } else {
       this.qrCode = null;
+      this.secondStep = true
     }
   }
 
@@ -45,16 +48,19 @@ export class NewHomeComponent implements OnInit {
     if(this.authCode && this.authCode.length === 6) {
       this.learnerService.verifyAuth(this.authCode,this.userDetail.user_id).subscribe((response:any)=>{
         if(response?.data?.verify_tfa_setup?.success){
+          this.userDetail['specific_report_value'] = Math.floor(Math.random() * 1000000000).toString()
+          localStorage.setItem('UserDetails', JSON.stringify(this.userDetail));
           this.router.navigate(['/Learner/MyCourse']);
           this.loader = false;
         } else {
           this.loader = false;
+          this.authInput.setValue('')
           this.toastr.warning(response?.data?.verify_tfa_setup?.message);
         }
       })
     } else {
       this.loader = false;
-      this.toastr.warning('Enter OTP')
+      this.toastr.warning('Enter the code')
     }
   }
 }
