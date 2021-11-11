@@ -4,7 +4,7 @@ import { GlobalServiceService } from '@core/services/handlers/global-service.ser
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-
+import { PlatformLocation } from '@angular/common' 
 @Component({
   selector: 'app-new-home',
   templateUrl: './new-home.component.html',
@@ -18,12 +18,19 @@ export class NewHomeComponent implements OnInit {
   secondStep = false;
   @ViewChild('authInput') authInput;
   constructor(public translate: TranslateService, public learnerService: LearnerServicesService,
-              private gs: GlobalServiceService, private router: Router,private toastr: ToastrService) {
-
+              private gs: GlobalServiceService, private router: Router,private toastr: ToastrService,location: PlatformLocation) {
+                location.onPopState(() => {
+                  localStorage.clear();
+                  sessionStorage.clear();
+                })
+                this.userDetail =JSON.parse(localStorage.getItem('UserDetails'))
+                const token =  localStorage.getItem('token')||sessionStorage.getItem('token');
+                if(!token){
+                  this.router.navigateByUrl('/Learner/login');
+                }
   }
   @HostListener('window:resize', ['$event'])
   ngOnInit() {
-    this.userDetail =JSON.parse(localStorage.getItem('UserDetails'))
     if(this.userDetail?.TFAsetup?.dataURL) {
       this.qrCode = this.userDetail?.TFAsetup?.dataURL;
       this.secondStep = false;

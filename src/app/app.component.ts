@@ -62,6 +62,11 @@ export class AppComponent implements OnInit {
               public sanitizer: DomSanitizer,
 
   ) {
+    let userDetail =JSON.parse(localStorage.getItem('UserDetails'))
+    if(!userDetail?.specific_report_value){
+      localStorage.clear();
+      sessionStorage.clear();
+    }
     // console.error = function(){}
     // console.warn = function(){}
     this.commonService.getIpAddressByUrl();

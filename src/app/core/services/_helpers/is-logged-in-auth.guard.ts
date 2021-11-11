@@ -19,15 +19,6 @@ export class IsLoggedInAuthGuard implements CanActivate {
       const token =  localStorage.getItem('token')||sessionStorage.getItem('token');
       const role = localStorage.getItem('role') || sessionStorage.getItem('role'); 
       // !role ||
-      if(state.url == '/Learner/authentication') {
-        if(token){
-          return true;
-        }
-        else {
-          this.router.navigate(['/Learner/login']);
-          return false;
-        }
-      } 
     if (!token) {
       return true;
     } else {
