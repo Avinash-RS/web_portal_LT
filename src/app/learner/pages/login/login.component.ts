@@ -186,21 +186,23 @@ export class LoginComponent implements OnInit {
       .subscribe((loginresult: any) => {
         // loginresult.data.login.message['TFAsetup'] = {
         //   'main_config_TFA':true,
-        //   'dataURL': "data:image/png;base64,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",
+        //   'dataURL': "",
         //   'user_config_TFA': true
         // }
         if(loginresult.data.login){
           if (loginresult.data.login.success) {
+            this.loginMovement(loginresult)
             if(loginresult.data.login?.message?.TFAsetup?.main_config_TFA){
               if(loginresult.data.login?.message?.TFAsetup?.user_config_TFA){
                 this.router.navigate(['/Learner/authentication']);
               } else{
+                this.setAuthentication();
                 this.router.navigate(['/Learner/MyCourse']);
               }
             } else {
+              this.setAuthentication();
               this.router.navigate(['/Learner/MyCourse']);
             }
-            this.loginMovement(loginresult)
           } else {
             this.loader = false;
             this.loginForm.reset();
@@ -216,6 +218,11 @@ export class LoginComponent implements OnInit {
       });
   }
 
+  setAuthentication(){
+    let userDetail =JSON.parse(localStorage.getItem('UserDetails'))
+    userDetail['specific_report_value'] = Math.floor(Math.random() * 1000000000).toString()
+    localStorage.setItem('UserDetails', JSON.stringify(userDetail));
+  }
   loginMovement(loginresult){
         if(this.loginForm.value.remember_me === true){
           localStorage.setItem('token', loginresult.data.login.message.token);
