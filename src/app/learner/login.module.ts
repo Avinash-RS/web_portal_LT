@@ -36,7 +36,6 @@ const routes: Routes = [
   {
     path: 'Learner/authentication',
     component: NewHomeComponent,
-    canActivate: [IsLoggedInAuthGuard],
     data: { title: 'Learner Login' }
   },
   {
