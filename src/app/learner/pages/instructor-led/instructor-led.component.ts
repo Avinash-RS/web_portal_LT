@@ -111,7 +111,7 @@ export class InstructorLedComponent implements OnInit {
     if (los.status === 'On going') {
       this.activityShow.button = 'Join Now';
     } else if (los.status !== 'Up Coming') {
-      this.activityShow.button = 'Play Now';
+      this.activityShow.button = 'Play';
     }
   }
 

@@ -1,29 +1,34 @@
 <app-header></app-header>
 
 <div class="instructorLedWrapper">
-<div class="breadcrumbPading">
-  <ul class="breadcrumb">
-    <li><em (click)="getBack()" class="lxp-Go backArrow"></em> <span class="name">{{course?.name}}</span> <span class="bar">/</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type !== 'collegeconnect'">Live Interactions</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type == 'collegeconnect'">Industry Talk</span> </li>
-    <!-- <li *ngIf="userDetails.org_type !== 'collegeconnect'">Live Interactions</li>
+  <div class="liveInstructorLed">
+    <div class="breadcrumbPading">
+      <ul class="breadcrumb">
+        <li><em (click)="getBack()" class="lxp-Go backArrow"></em> <span class="name">{{course?.name}}</span> <span
+            class="bar">/</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type !== 'collegeconnect'">Live
+            Interactions</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type == 'collegeconnect'">Industry
+            Talk</span> </li>
+        <!-- <li *ngIf="userDetails.org_type !== 'collegeconnect'">Live Interactions</li>
     <li *ngIf="userDetails.org_type == 'collegeconnect'">Industry Talk</li> -->
-  </ul>
-</div>
+      </ul>
+    </div>
 
-<!-- If No Records -->
-<div class="noCard" *ngIf="!showContent && !showSkeleton">
-  <figure>
-    <img alt="assignment" src="/assets/images/no-session.svg">
-  </figure>
-  <p> You have no sessions at the moment!</p>
-</div>
-<!-- End of no records -->
+    <!-- If No Records -->
+    <div class="noCard" *ngIf="!showContent && !showSkeleton">
+      <figure>
+        <img alt="assignment" src="/assets/images/no-session.svg">
+      </figure>
+      <p> You have no sessions at the moment!</p>
+    </div>
+    <!-- End of no records -->
 
-<div class="row marginFix" *ngIf="showContent">
-  <!-- Left Side Panel ... -->
-  <!-- <div class="col-lg-1 col-xl-1 col-md-1 col-sm-1 col-12"></div> -->
-  <div class="col-lg-7 col-xl-7 col-md-12 col-sm-12 col-12">
-    <div flex>
-      <!-- <div class="f_wt_600 f_size_16 display_flex">
+    <!-- <div class="row marginFix" *ngIf="showContent"> -->
+    <!-- Left Side Panel ... -->
+    <!-- <div class="col-lg-1 col-xl-1 col-md-1 col-sm-1 col-12"></div> -->
+    <!-- <div class="col-lg-7 col-xl-7 col-md-12 col-sm-12 col-12">
+    <div flex> -->
+
+    <!--    <div class="f_wt_600 f_size_16 display_flex">
         <span class="pad-t-2">
           {{course?.name}}
         </span>
@@ -31,49 +36,73 @@
         </mat-icon>
         <span class="pad-t-2">Instructor Led</span>
       </div> -->
-      <mat-card class="imgLayout">
-        <!-- <div *ngIf='!listOfSessions?.length'>
-          <span class="sessionTitle"> No Activities Found..</span>
-        </div> -->
-        <div class="row d-flex justify-content-start" *ngIf='activityShow !== undefined'>
-          <div class="moduleImage">
-            <div flex >
-              <img style="height: 200px !important;width: 100%;" *ngIf="!activityShow?.activity_details.livethumbnail" alt="instructor" src="../../../../assets/learner/instructor_image.png" />
-              <img style="height: 200px !important;width: 100% !important;" *ngIf="activityShow?.activity_details.livethumbnail" alt="instructor" [src]="activityShow?.activity_details.livethumbnail + blobKey" />
-            </div>
-          </div>
-          <div class="moduleContent">
-            
-            <div flex >
-              <span class="sessionTitle activity-name" matTooltip="{{activityShow?.activity_details.activityname}}">{{activityShow?.activity_details.activityname}}</span>
-              <div class="row">
-                <!-- <span>Held On</span> &nbsp;&nbsp; -->
-                <span class="sessionDate">Date: {{ activityShow?.activity_details.startdate | date: 'MMM d, y'}}</span>
-              </div>
-              <div class="row">
-                <span *ngIf="activityShow?.activity_details.activitytype != 'Recorded'" class="sessionduration">Duration: {{activityShow?.duration}}</span>
-                <span *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" class="sessionduration">Module: {{activityShow?.activity_details.modulename}}</span>
-                <!-- <span class="sessionTitle">Duration</span> -->
-              </div>
-              <!-- <div class="row" style="color: white; margin-top: 10px;">
-                
-              </div> -->
-              <div class="row" style="margin-top: 0px;">
-                <button class="actBtn" mat-raised-button *ngIf="activityShow?.status === 'On going' && activityShow?.activity_details.activitytype != 'Recorded'"
-                  (click)="getAction(activityShow.activity_details.link)">{{activityShow?.button}}</button>
-              </div>
-              <div class="row" style="margin-top: 0px; color: white !important;" *ngIf="activityShow?.activity_details.activitytype == 'Recorded'">
-                <button class="actBtn" mat-raised-button 
-                  (click)="videoPreview(videoRecorded,activityShow.activity_details.link)">{{activityShow?.button}}</button>
-              </div>
-            </div>
 
+    <!-- <mat-card class="imgLayout"> -->
+
+    <!-- <div *ngIf='!listOfSessions?.length'>
+          <span class="sessionTitle"> No Activities Found..</span>
+        </div>  -->
+
+
+    <div class="moduleImage">
+     <div class="liveSession">
+      <figure><img class="sessionImage" style="width: 100% !important;"
+        *ngIf="!activityShow?.activity_details.livethumbnail" alt="instructor"
+        src="../../../../assets/learner/instructor_image.png" /></figure>
+      <figure><img class="sessionImage"  style="width: 100% !important;"
+        *ngIf="activityShow?.activity_details.livethumbnail" alt="instructor"
+        [src]="activityShow?.activity_details.livethumbnail + blobKey" /></figure>
+
+          <!-- <div class="row" style="margin-top: 0px;"> -->
+            <button class="actBtn" mat-raised-button
+              *ngIf="activityShow?.status === 'On going' && activityShow?.activity_details.activitytype != 'Recorded'"
+              (click)="getAction(activityShow.activity_details.link)">{{activityShow?.button}}</button>
+          <!-- </div> -->
+          <div class="row" style="margin-top: 0px; color: white !important;"
+            *ngIf="activityShow?.activity_details.activitytype == 'Recorded'">
+            <button class="actBtn" mat-raised-button
+              (click)="videoPreview(videoRecorded,activityShow.activity_details.link)">{{activityShow?.button}}</button>
           </div>
+     </div>
+
+        <div class="sessionDetails">
+          <span class="sessionTitle activity-name"
+            matTooltip="{{activityShow?.activity_details.activityname}}">{{activityShow?.activity_details.activityname}}</span>
+          <div class="row">
+  
+            <!-- <span>Held On</span> &nbsp;&nbsp; -->
+  
+            <span class="sessionDate">Date: {{ activityShow?.activity_details.startdate | date: 'MMM d, y'}}</span>
+          </div>
+          <div class="row">
+            <span *ngIf="activityShow?.activity_details.activitytype != 'Recorded'" class="sessionduration">Duration:
+              {{activityShow?.duration}}</span>
+            <span *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" class="sessionduration">Module:
+              {{activityShow?.activity_details.modulename}}</span>
+            <!-- <span class="sessionTitle">Duration</span> -->
+  
+          </div>
+        
+  
+          <!-- <div class="row" style="color: white; margin-top: 10px;"> -->
+  
         </div>
-      </mat-card>
+  
+        
+
+    </div>
+
+    <!-- <div class="moduleContent">
+
       
-      <div class="row smallContainers">
-        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
+    </div> -->
+
+
+  </div>
+  <!-- </mat-card>  -->
+
+  <!--<div class="row smallContainers">
+         <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
           <mat-card class="smallContainer1">
             <mat-card-subtitle class="smallHeadline">Total Sessions</mat-card-subtitle>
             <div class="row d-flex justify-content-between align-items-center p-t-10">
@@ -86,9 +115,12 @@
         <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
           <mat-card class="smallContainer2">
             <mat-card-subtitle class="smallHeadline">Attended Sessions</mat-card-subtitle>
-            <div class="row d-flex justify-content-between align-items-center p-t-10">
-              <!-- <span class="number" *ngIf="attendedSessions !== undefined">{{attendedSessions?.true}}</span> -->
-              <span class="number">{{attendedCount.length}}</span>
+            <div class="row d-flex justify-content-between align-items-center p-t-10"> -->
+
+  <!--Already Commented-->
+  <!-- <span class="number" *ngIf="attendedSessions !== undefined">{{attendedSessions?.true}}</span> -->
+
+  <!-- <span class="number">{{attendedCount.length}}</span>
               <img mat-card-image src="../../../../assets/learner/students.svg" alt="student">
             </div>
           </mat-card>
@@ -102,7 +134,7 @@
               <img mat-card-image src="../../../../assets/learner/video-tutorial.svg" alt="video">
             </div>              
           </mat-card>
-        </div>
+        </div> 
       </div>
 
       <div class="attendanceWrapper">
@@ -160,44 +192,60 @@
       </table>
     </div>
     </div>
-  </ng-template>
-  
+  </ng-template> -->
+
+
+
   <!-- Right Side Panel ...  -->
-  <div class="col-lg-5 col-xl-5 col-md-12 col-sm-12 col-12">
+  <div class="rightContainer">
+    <!-- <div class="col-lg-5 col-xl-5 col-md-12 col-sm-12 col-12"> -->
     <div class="row course-list">
       <div class="headingWrapper d-flex justify-content-between align-items-center">
-        <h3 class="headLine">Upcoming Sessions and Recorded Sessions</h3>
-        <button class="btn btn-light attandanceShow" *ngIf="sessionAttendance?.length" (click)="showModal(attendanceDialog)">Attendance</button>
+        <!-- <h3 class="headLine">Upcoming Sessions and Recorded Sessions</h3> -->
+        <h3 class="headLine">Industry Talk Sessions</h3>
+        <!-- <button class="btn btn-light attandanceShow" *ngIf="sessionAttendance?.length" (click)="showModal(attendanceDialog)">Attendance</button> -->
       </div>
-      <mat-nav-list class="listofSessionContainer" style="">
+      <mat-nav-list class="listofSessionContainer">
         <mat-list-item *ngFor="let los of listOfSessions" class="listofSessionCards">
           <mat-card class="sessionCard" (click)="useSession(los)">
             <div class="row d-flex justify-content-start">
               <div class="image-container">
-                <img *ngIf="los.activity_details.livethumbnail" alt="image" style="width: 100%; height: 150px !important;object-fit: inherit !important;" [src]="los.activity_details.livethumbnail + blobKey">
-                <img *ngIf="!los.activity_details.livethumbnail" alt="image" style="width: 100%; height: 150px !important;object-fit: inherit !important;" src="../../../../assets/learner/instructor_image.png">
+                <img *ngIf="los.activity_details.livethumbnail" alt="image"
+                  style="width: 100%; height: 150px !important;object-fit: inherit!important;"
+                  [src]="los.activity_details.livethumbnail + blobKey">
+                <img *ngIf="!los.activity_details.livethumbnail" alt="image"
+                  style="width: 100%; height: 150px !important;object-fit: cover !important;"
+                  src="../../../../assets/learner/instructor_image.png">
                 <!-- <div class="bottom-right" [ngClass]="los.status == 'Ongoing' ? 'organge' : los.status == 'UpComing' ? 'grey' : los.status == 'Completed' ? 'greenColor':''" >{{los.status}}</div> -->
-                <mat-icon class="rec-center" *ngIf="los.activity_details.activitytype == 'Recorded'"> play_circle</mat-icon>
-                <div *ngIf="los.status == 'On going' && los.activity_details.activitytype != 'Recorded'" class="bottom-right orange">Ongoing</div>
-                <div *ngIf="los.status == 'Up Coming' && los.activity_details.activitytype != 'Recorded'" class="bottom-right grey">Upcoming</div>
-                <div *ngIf="los.status == 'Completed' && los.activity_details.activitytype != 'Recorded'" class="bottom-right greenColor">{{los.status}}</div>
-                <div *ngIf="los.activity_details.activitytype == 'Recorded'" class="bottom-right rec-col">Recorded</div>
+                <mat-icon class="rec-center" *ngIf="los.activity_details.activitytype == 'Recorded'"> play_circle
+                </mat-icon>
+                <div *ngIf="los.status == 'On going' && los.activity_details.activitytype != 'Recorded'"
+                  class="bottom-right orange">Ongoing</div>
+                <div *ngIf="los.status == 'Up Coming' && los.activity_details.activitytype != 'Recorded'"
+                  class="bottom-right grey">Upcoming</div>
+                <div *ngIf="los.status == 'Completed' && los.activity_details.activitytype != 'Recorded'"
+                  class="bottom-right greenColor">{{los.status}}</div>
+                <div *ngIf="los.activity_details.activitytype == 'Recorded'" class="bottom-right rec-col">Recorded
+                </div>
               </div>
               <div class="content-container">
-                <h4 class="activity-name" matTooltip="{{los.activity_details.activityname}}">{{los.activity_details.activityname}}</h4>
+                <h4 class="activity-name" matTooltip="{{los.activity_details.activityname}}">
+                  {{los.activity_details.activityname}}</h4>
                 <h5><span>Date:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy'}}</h5>
-                <h5 *ngIf="los.activity_details.activitytype != 'Recorded'"><span>Duration:</span> {{los.duration}} </h5>
-                <h5 *ngIf="los.activity_details.activitytype == 'Recorded'"><span>Module:</span> {{los.activity_details.modulename}} </h5>
+                <h5 *ngIf="los.activity_details.activitytype != 'Recorded'"><span>Duration:</span> {{los.duration}}
+                </h5>
+                <h5 *ngIf="los.activity_details.activitytype == 'Recorded'"><span>Module:</span>
+                  {{los.activity_details.modulename}} </h5>
               </div>
             </div>
           </mat-card>
         </mat-list-item>
       </mat-nav-list>
     </div>
+    <!-- </div> -->
   </div>
+</div>
 
-</div>
-</div>
 
 <ng-template #videoRecorded>
   <!-- <div class="row">
@@ -216,26 +264,36 @@
 
 <div class="item" *ngIf="showSkeleton">
   <mat-card class="courseDetailSkeleton" style="box-shadow: none !important;">
-      <div class="breadcrumbskeleton">
-          <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', height: '35px', 'background-color': '#d2d1d1' }"></ngx-skeleton-loader>
+    <div class="breadcrumbskeleton">
+      <ngx-skeleton-loader count="1" animation="pulse"
+        [theme]="{ 'border-radius': '0', height: '35px', 'background-color': '#d2d1d1' }"></ngx-skeleton-loader>
+    </div>
+    <div class="d-flex justify-content-between">
+      <div class="item" style="width: 58%;">
+        <div class="">
+          <ngx-skeleton-loader [theme]="{'background-color': '#d2d1d1',height: '200px'}" animation="pulse">
+          </ngx-skeleton-loader>
+        </div>
+        <div class="d-flex justify-content-between">
+          <ngx-skeleton-loader count="1" animation="pulse"
+            [theme]="{ 'border-radius': '0', width: '230px', height: '108px', 'background-color': '#d2d1d1' }">
+          </ngx-skeleton-loader>
+          <ngx-skeleton-loader count="1" animation="pulse"
+            [theme]="{ 'border-radius': '0', width: '230px', height: '108px', 'background-color': '#d2d1d1' }">
+          </ngx-skeleton-loader>
+          <ngx-skeleton-loader count="1" animation="pulse"
+            [theme]="{ 'border-radius': '0', width: '230px', height: '108px', 'background-color': '#d2d1d1' }">
+          </ngx-skeleton-loader>
+        </div>
       </div>
-      <div class="d-flex justify-content-between">
-          <div class="item" style="width: 58%;">
-              <div class="">
-                  <ngx-skeleton-loader [theme]="{'background-color': '#d2d1d1',height: '200px'}" animation="pulse"></ngx-skeleton-loader>
-              </div>
-              <div class="d-flex justify-content-between">
-                  <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', width: '230px', height: '108px', 'background-color': '#d2d1d1' }"></ngx-skeleton-loader>
-                  <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', width: '230px', height: '108px', 'background-color': '#d2d1d1' }"></ngx-skeleton-loader>
-                  <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', width: '230px', height: '108px', 'background-color': '#d2d1d1' }"></ngx-skeleton-loader>
-              </div>
-          </div>
-          
-          <div class="item" style="width: 38%;">
-            <div>
-              <ngx-skeleton-loader count="5" animation="pulse" [theme]="{ display: 'block', 'background-color': '#d2d1d1', width: '100%' , height: '75px'}"></ngx-skeleton-loader>
-            </div>
-          </div>
+
+      <div class="item" style="width: 38%;">
+        <div>
+          <ngx-skeleton-loader count="5" animation="pulse"
+            [theme]="{ display: 'block', 'background-color': '#d2d1d1', width: '100%' , height: '75px'}">
+          </ngx-skeleton-loader>
+        </div>
       </div>
+    </div>
   </mat-card>
 </div>
