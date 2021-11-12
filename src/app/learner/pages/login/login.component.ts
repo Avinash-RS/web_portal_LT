@@ -233,6 +233,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('Fullname', loginresult.data.login.message.full_name);
         var id = CryptoJS.AES.encrypt(loginresult.data.login.message.user_id, this.secretKey.trim()).toString(); 
         loginresult.data.login.message.user_id = id
+        loginresult.data.login.message.specific_report_value = '';
           localStorage.setItem('UserDetails', JSON.stringify(loginresult.data.login.message));
           localStorage.setItem('remember_me', 'false');
           localStorage.setItem('user_img', loginresult.data.login.message.profile_img);
