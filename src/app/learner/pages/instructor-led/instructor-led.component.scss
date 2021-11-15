@@ -3,25 +3,40 @@
   padding: 0;
   height: 100%;
   display: flex;
-//   @media only screen and (min-width: 2020px) {
-//         width: 50%;
-//     }
+  background-color: #f2f2f2;
+  @media only screen and (max-width: 425px) {
+   flex-direction: column;
+   .leftContainer {
+     width: 100%;
+     padding: 10px 0;
+   }
+   .rightContainer {
+     width: 100%;
+     padding: 0 10px;
+   }
+  }
+  @media only screen and (max-width: 990px) {
+    flex-direction: column;
+    .leftContainer {
+      width: 100%;
+      padding: 10px 0;
+    }
+    .rightContainer {
+      width: 100%;
+      padding: 0 10px;
+    }
+   }
 }
-.liveInstructorLed {
+
+.leftContainer {
   background-color: #f2f2f2;
   width: 65%;
   box-shadow: 0px 0px 6px #00000059;
-//   @media only screen and (min-width: 990px) {
-//       width: 100%;
-//   }
 }
 
 .rightContainer {
   background-color: white;
   width: 35%;
-//   @media only screen and (min-width: 990px) {
-//       width: 100%;
-//   }
 }
 
 .container {
@@ -65,6 +80,7 @@
 }
 .breadcrumbPading {
   padding: 25px 0;
+  width: 100%;
 }
 .breadcrumb {
   margin: 0;
@@ -122,14 +138,14 @@
 //     }
 .moduleImage {
   padding: 0 75px;
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 700px) {
     width: 100%;
-    padding: 15px;
+    padding: 0 15px;
   }
   .liveSession {
     width: 100%;
     position: relative;
-    .actBtn {
+    .playButton {
       background: #be2020 0% 0% no-repeat padding-box;
       border-radius: 20px;
       opacity: 1;
@@ -143,6 +159,12 @@
       justify-content: center;
       align-items: center;
       padding: 0 4%;
+      @media only screen and (max-width: 425px) {
+        padding: 0 10%;
+      }
+      .lxp-Play_Icon {
+        margin-right: 30%;
+      }
     }
   }
   .sessionDetails {
@@ -179,8 +201,8 @@
   position: relative;
   text-align: center;
   width: 40%;
-  @media only screen and (max-width: 576px) {
-    width: 50%;
+  @media only screen and (max-width: 700px) {
+    width: 40%;
   }
   img {
     width: 100%;
@@ -601,10 +623,8 @@
   @media only screen and (min-width: 1140px) {
     height: 90% !important;
   }
-  @media only screen and (min-width: 1540px) {
-    // height: auto !important;
-    width: 65%;
-    width: 50%;
+  @media only screen and (max-width: 750px) {
+   
   }
   .mat-dialog-container {
     position: relative;

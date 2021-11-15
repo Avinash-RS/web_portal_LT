@@ -1,7 +1,30 @@
 <app-header></app-header>
 
+
 <div class="instructorLedWrapper">
-  <div class="liveInstructorLed">
+
+  <ng-container *ngIf="!showContent && !showSkeleton">
+    <div class="breadcrumbPading">
+      <ul class="breadcrumb">
+        <li><em (click)="getBack()" class="lxp-Go backArrow"></em> <span class="name">{{course?.name}}</span> <span
+            class="bar">/</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type !== 'collegeconnect'">Live
+            Interactions</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type == 'collegeconnect'">Industry
+            Talk</span> </li>
+        <!-- <li *ngIf="userDetails.org_type !== 'collegeconnect'">Live Interactions</li>
+            <li *ngIf="userDetails.org_type == 'collegeconnect'">Industry Talk</li> -->
+      </ul>
+      <div class="noCard" *ngIf="!showContent && !showSkeleton">
+        <figure>
+          <img alt="assignment" src="/assets/images/no-session.svg">
+        </figure>
+        <p> You have no sessions at the moment!</p>
+      </div>
+    </div>
+
+
+  </ng-container>
+
+  <div class="leftContainer" *ngIf="showContent">
     <div class="breadcrumbPading">
       <ul class="breadcrumb">
         <li><em (click)="getBack()" class="lxp-Go backArrow"></em> <span class="name">{{course?.name}}</span> <span
@@ -14,65 +37,63 @@
     </div>
 
     <!-- If No Records -->
-    <div class="noCard" *ngIf="!showContent && !showSkeleton">
-      <figure>
-        <img alt="assignment" src="/assets/images/no-session.svg">
-      </figure>
-      <p> You have no sessions at the moment!</p>
-    </div>
     <!-- End of no records -->
 
-    <!-- <div class="row marginFix" *ngIf="showContent"> -->
+
+
+
+
+
     <!-- Left Side Panel ... -->
     <!-- <div class="col-lg-1 col-xl-1 col-md-1 col-sm-1 col-12"></div> -->
     <!-- <div class="col-lg-7 col-xl-7 col-md-12 col-sm-12 col-12">
-    <div flex> -->
+        <div flex> -->
 
     <!--    <div class="f_wt_600 f_size_16 display_flex">
-        <span class="pad-t-2">
-          {{course?.name}}
-        </span>
-        <mat-icon class="material-icons brdcrmb f_size_25 pointer" (click)="goBack()">chevron_right
-        </mat-icon>
-        <span class="pad-t-2">Instructor Led</span>
-      </div> -->
+            <span class="pad-t-2">
+              {{course?.name}}
+            </span>
+            <mat-icon class="material-icons brdcrmb f_size_25 pointer" (click)="goBack()">chevron_right
+            </mat-icon>
+            <span class="pad-t-2">Instructor Led</span>
+          </div> -->
 
     <!-- <mat-card class="imgLayout"> -->
 
     <!-- <div *ngIf='!listOfSessions?.length'>
-          <span class="sessionTitle"> No Activities Found..</span>
-        </div>  -->
-
-
-    <div class="moduleImage">
-     <div class="liveSession">
-      <figure><img class="sessionImage" style="width: 100% !important;"
-        *ngIf="!activityShow?.activity_details.livethumbnail" alt="instructor"
-        src="../../../../assets/learner/instructor_image.png" /></figure>
-      <figure><img class="sessionImage"  style="width: 100% !important;"
-        *ngIf="activityShow?.activity_details.livethumbnail" alt="instructor"
-        [src]="activityShow?.activity_details.livethumbnail + blobKey" /></figure>
+              <span class="sessionTitle"> No Activities Found..</span>
+            </div>  -->
+    <div class="row d-flex justify-content-start" *ngIf='activityShow !== undefined'>
+      <div class="moduleImage">
+        <div class="liveSession">
+          <figure><img class="sessionImage" style="height: 500px !important; width: 100% !important;" *ngIf="!activityShow?.activity_details.livethumbnail" alt="instructor"
+              src="../../../../assets/learner/instructor_image.png" /></figure>
+          <figure><img class="sessionImage" style="height: 500px !important; width: 100% !important;" *ngIf="activityShow?.activity_details.livethumbnail" alt="instructor"
+              [src]="activityShow?.activity_details.livethumbnail + blobKey" /></figure>
 
           <!-- <div class="row" style="margin-top: 0px;"> -->
-            <button class="actBtn" mat-raised-button
-              *ngIf="activityShow?.status === 'On going' && activityShow?.activity_details.activitytype != 'Recorded'"
-              (click)="getAction(activityShow.activity_details.link)">{{activityShow?.button}}</button>
+          <button class="playButton" mat-raised-button
+            *ngIf="activityShow?.status === 'On going' && activityShow?.activity_details.activitytype != 'Recorded'"
+            (click)="getAction(activityShow.activity_details.link)"><em _ngcontent-jjc-c10=""
+              class="lxp-Play_Icon"></em>
+            {{activityShow?.button}}</button>
           <!-- </div> -->
           <div class="row" style="margin-top: 0px; color: white !important;"
             *ngIf="activityShow?.activity_details.activitytype == 'Recorded'">
-            <button class="actBtn" mat-raised-button
-              (click)="videoPreview(videoRecorded,activityShow.activity_details.link)">{{activityShow?.button}}</button>
+            <button class="playButton" mat-raised-button
+              (click)="videoPreview(videoRecorded,activityShow.activity_details.link)"><em _ngcontent-jjc-c10=""
+                class="lxp-Play_Icon"></em> {{activityShow?.button}}</button>
           </div>
-     </div>
+        </div>
 
         <div class="sessionDetails">
           <span class="sessionTitle activity-name"
             matTooltip="{{activityShow?.activity_details.activityname}}">{{activityShow?.activity_details.activityname}}</span>
           <div class="row">
-  
+
             <!-- <span>Held On</span> &nbsp;&nbsp; -->
-  
-            <span class="sessionDate">Date: {{ activityShow?.activity_details.startdate | date: 'MMM d, y'}}</span>
+
+            <span class="sessionDate">Date: {{ activityShow?.activity_details.startdate | date: 'dd/MM/yyyy'}}</span>
           </div>
           <div class="row">
             <span *ngIf="activityShow?.activity_details.activitytype != 'Recorded'" class="sessionduration">Duration:
@@ -80,25 +101,29 @@
             <span *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" class="sessionduration">Module:
               {{activityShow?.activity_details.modulename}}</span>
             <!-- <span class="sessionTitle">Duration</span> -->
-  
+
           </div>
-        
-  
-          <!-- <div class="row" style="color: white; margin-top: 10px;"> -->
-  
+
         </div>
-  
-        
-
+      </div>
     </div>
-
-    <!-- <div class="moduleContent">
-
-      
-    </div> -->
-
-
   </div>
+
+
+
+  <!-- <div class="row" style="color: white; margin-top: 10px;"> -->
+
+
+
+
+
+
+  <!-- <div class="moduleContent">
+    
+          
+        </div> -->
+
+
   <!-- </mat-card>  -->
 
   <!--<div class="row smallContainers">
@@ -163,16 +188,16 @@
             </tbody>
           </table>
         </div>
-      </div>
+      </div> -->
 
-    </div>
-  </div>
+  <!-- </div>
+        </div> -->
 
-  <ng-template #attendanceDialog>
-    <div class="">
-    <mat-icon class="closeModal-icon" (click)="closeModal()">close</mat-icon>
-    <h2 >My Attendance</h2>
-    <div class="row attendance-table">
+  <!-- <ng-template #attendanceDialog>
+      <div class="">
+      <mat-icon class="closeModal-icon" (click)="closeModal()">close</mat-icon>
+      <h2 >My Attendance</h2>
+      <div class="row attendance-table">
       <table>
         <tr class="tblheaderFont">
           <th>Session #</th>
@@ -190,14 +215,14 @@
           </td>
         </tr>
       </table>
-    </div>
-    </div>
-  </ng-template> -->
+      </div>
+      </div>
+      </ng-template> -->
 
 
 
   <!-- Right Side Panel ...  -->
-  <div class="rightContainer">
+  <div class="rightContainer" *ngIf="showContent">
     <!-- <div class="col-lg-5 col-xl-5 col-md-12 col-sm-12 col-12"> -->
     <div class="row course-list">
       <div class="headingWrapper d-flex justify-content-between align-items-center">
@@ -245,6 +270,7 @@
     <!-- </div> -->
   </div>
 </div>
+
 
 
 <ng-template #videoRecorded>
