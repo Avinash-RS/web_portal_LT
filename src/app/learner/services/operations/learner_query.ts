@@ -2343,6 +2343,7 @@ export const getLearnerNewCourseReport = gql`
         selflearningscore
         selflearningpercentage
         calculation
+        weekwiseTask
       }
       LPScore {
         LPScore

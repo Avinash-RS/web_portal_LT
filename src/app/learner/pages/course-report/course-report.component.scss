@@ -252,7 +252,7 @@
         }
         .disabledTXT{
           color: #999999;
-          font-size: 18px;
+          font-size: 16px;
         }
         ul{
           list-style: none;
@@ -700,5 +700,7 @@
 }
 .disable-card{
   background-color: #ededed;
-  color: #999999;
+  label{
+    color: #000000;
+  }
 }

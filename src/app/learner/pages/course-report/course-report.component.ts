@@ -81,7 +81,7 @@ export class CourseReportComponent implements OnInit {
   disableArrow:boolean = true;
   selfscore:string ="0";
   QAscore:string ="0";
-
+  lastWeekSatus:any ="";
   constructor(
     private activeRoute: ActivatedRoute, 
     private router:Router, 
@@ -119,7 +119,7 @@ export class CourseReportComponent implements OnInit {
       this.courseReportData = data.data['getLearnerNewCourseReport'].data[0];
       this.selfscore = String(this.courseReportData.selfLearning_Card.selflearning_points_score)+'/'+String(this.courseReportData.selfLearning_Card.selflearning_out_of_points);
       this.QAscore= String(this.courseReportData.QA_Card.QA_points_score)+'/'+String(this.courseReportData.QA_Card.QA_out_of_points);
-      
+      this.lastWeekSatus = this.courseReportData.selflearning[this.courseReportData.selflearning.length - 1].WeekStatus;
       this.courseReportData.selflearning.forEach(element => {
         this.weeklabelData.push([element.week,element.selflearningscore]);
         this.weekpercent.push(element.selflearningpercentage);
