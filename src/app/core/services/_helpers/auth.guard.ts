@@ -67,7 +67,6 @@ export class AuthGuard implements CanLoad {
           if (token && userDetails?.specific_report_value) {
               return true;
             } else {
-              console.log('3')
               this.router.navigate(['/Learner/login']);
               return false;
             }
@@ -75,7 +74,6 @@ export class AuthGuard implements CanLoad {
           if (token && userDetails?.specific_report_value) {
               return true;
             } else {
-              console.log('4')
               this.router.navigate(['/Learner/login']);
               return false;
             }
@@ -84,7 +82,6 @@ export class AuthGuard implements CanLoad {
         if (token) {
             return true;
           } else {
-            console.log('5')
             this.router.navigate(['/Learner/login']);
             return false;
           }

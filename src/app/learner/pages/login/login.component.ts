@@ -197,11 +197,10 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(['/Learner/authentication']);
               } else{
                 this.setAuthentication();
-                this.router.navigate(['/Learner/MyCourse']);
+                
               }
             } else {
               this.setAuthentication();
-              this.router.navigate(['/Learner/MyCourse']);
             }
           } else {
             this.loader = false;
@@ -222,6 +221,11 @@ export class LoginComponent implements OnInit {
     let userDetail =JSON.parse(localStorage.getItem('UserDetails'))
     userDetail['specific_report_value'] = Math.floor(Math.random() * 1000000000).toString()
     localStorage.setItem('UserDetails', JSON.stringify(userDetail));
+    if(userDetail.is_password_updated){
+      this.router.navigate(['/Learner/MyCourse']);
+    } else {
+      this.router.navigate(['/Learner/profile']);
+    }
   }
   loginMovement(loginresult){
         if(this.loginForm.value.remember_me === true){
