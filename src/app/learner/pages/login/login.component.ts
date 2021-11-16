@@ -11,6 +11,7 @@ import { RecaptchaErrorParameters } from "ng-recaptcha";
 import { environment } from '../../../../environments/environment';
 import { Title } from '@angular/platform-browser';
 import { GoogleAnalyticsService } from '@learner/services/google-analytics.service';
+declare var gtag;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -191,12 +192,15 @@ export class LoginComponent implements OnInit {
         // }
         if(loginresult.data.login){
           if (loginresult.data.login.success) {
+            let userId = loginresult.data.login.message.user_id
             this.loginMovement(loginresult)
             if(loginresult.data.login?.message?.TFAsetup?.main_config_TFA){
               if(loginresult.data.login?.message?.TFAsetup?.user_config_TFA){
                 this.router.navigate(['/Learner/authentication']);
               } else{
                 this.setAuthentication();
+                gtag('config', environment.gaTrackingId, {'user_id': userId});
+                gtag('set', 'user_properties', { 'crm_id' : userId });
                 this.router.navigate(['/Learner/MyCourse']);
               }
             } else {

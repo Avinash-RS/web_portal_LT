@@ -20,6 +20,7 @@ import * as _ from 'lodash';
 import { filter } from 'underscore';
 // import { debugger } from 'fusioncharts';
 import * as CryptoJS from 'crypto-js';
+declare var gtag
 
 @Component({
   selector: 'app-coursedetails',
@@ -306,6 +307,7 @@ export class CoursedetailsComponent implements OnInit {
       this.lastpersentage = localStorage.getItem('persentage');
       // this.lastpersentage = detail  && detail.persentage || this.localper ;
       this.loading = true;
+      gtag('event','coursePlayerCID', {"courseID":this.courseid});
       this.playerModuleAndTopic();
       this.getFeedbackQue();
       // this.refreshData();
