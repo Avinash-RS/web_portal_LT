@@ -4,26 +4,25 @@
   height: 100%;
   display: flex;
   background-color: #f2f2f2;
-  @media only screen and (max-width: 425px) {
+  @media only screen and (max-width: 760px) {
    flex-direction: column;
    .leftContainer {
      width: 100%;
-     padding: 20px 0;
+     padding: 10px 0;
    }
    .rightContainer {
      width: 100%;
-     padding: 0 30px;
+     padding: 0 10px;
    }
   }
   @media only screen and (max-width: 990px) {
-    flex-direction: column;
     .leftContainer {
       width: 100%;
-      padding: 20px 0;
+      padding: 10px 0;
     }
     .rightContainer {
       width: 100%;
-      padding: 0 30px;
+      padding: 0 10px;
     }
    }
 }
@@ -138,14 +137,20 @@
 //         box-shadow: none;
 //     }
 .moduleImage {
-  padding: 0 75px;
+  padding: 0 30px;
   @media only screen and (max-width: 700px) {
     width: 100%;
     padding: 0 15px;
   }
-  .liveSession {
+  @media only screen and (max-width: 700px) {
     width: 100%;
-    position: relative;
+    height: 100%;
+  }
+  // .liveSession {
+  //   position: relative;
+  //   @media only screen and (max-width: 700px) {
+  //     width: 100%;
+  //   }
     .playButton {
       background: #be2020 0% 0% no-repeat padding-box;
       border-radius: 20px;
@@ -167,7 +172,6 @@
         margin-right: 30%;
       }
     }
-  }
   .sessionDetails {
     padding-top: 20px;
   }
@@ -294,8 +298,14 @@
 }
 .course-list {
   height: 840px;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  overflow: scroll;
+  @media only screen and (max-width: 767px) {
+    height: 100%;
+    overflow: scroll;
+  }
+
+  // overflow-x: hidden;
+  // overflow-y: scroll;
   @media only screen and (max-width: 576px) {
     border-top: 1px solid #cdcdcd;
     // margin-top: 15px;
@@ -730,8 +740,8 @@
 //   }
 .listofSessionContainer {
   width: 100% !important;
-  overflow-x: hidden;
-  overflow-y: auto;
+  // overflow-x: hidden;
+  // overflow-y: auto;
 }
 .activity-name {
   white-space: nowrap;
