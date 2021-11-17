@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { LocationStrategy } from '@angular/common';
+import { Component, OnInit, TemplateRef,ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,21 +24,28 @@ import { ToastrService } from 'ngx-toastr';
 // AFTER restructure - Mythreyi
 
 export class ProfileComponent implements OnInit {
+  @ViewChild('passwordDialog') passwordDialog: TemplateRef<any>;
   blobKey = environment.blobKey;
   constructor(public translate: TranslateService,
               private alert: AlertServiceService, public service: LearnerServicesService,
               private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient, private formBuilder: FormBuilder,
               private router: Router, private gs: GlobalServiceService,
               private services: CommonServicesService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private location: LocationStrategy) {
     if (this.gs.checkLogout()) {
       // this.urlImage = localStorage.getItem('user_img')
       this.currentUser = this.gs.checkLogout();
       this.getAllLevels();
       this.getprofileDetails(this.currentUser.user_id);
-      if (!this.currentUser.is_profile_updated) {
-        this.gs.preventBackButton();
-      }
+      this.location.onPopState(() => {
+        if (!this.currentUser.is_password_updated) {
+      history.pushState(null, null, window.location.href)
+     } 
+      });  
+      // if (this.currentUser.is_password_updated) {
+      //   this.gs.preventBackButton();
+      // }
     }
 
     this.getAllLanguage();
@@ -46,6 +54,13 @@ export class ProfileComponent implements OnInit {
    // this.getInstitute();
     // this.getDiscipline();
   //  this.getSpec();
+  setTimeout(()=>{
+    if(!this.currentUser.is_password_updated){
+      this.toastr.warning("Please change the password")
+      this.editPassword(this.passwordDialog)
+    }
+  },1000)
+  
   }
 
   // to get controls for validation
@@ -541,6 +556,10 @@ export class ProfileComponent implements OnInit {
 
   // All dialogs
   closedialogbox() {
+    if(!this.currentUser.is_password_updated){
+      this.toastr.warning('Please change the password');
+      return false;
+    }
     this.dialog.closeAll();
   }
 
@@ -581,7 +600,8 @@ export class ProfileComponent implements OnInit {
 
   editPassword(passRef: TemplateRef<any>) {
     this.dialog.open(passRef ,{
-      panelClass: 'custom-modalbox' 
+      panelClass: 'custom-modalbox',
+      disableClose: true
     });
     // this.dialog.open(passRef, { disableClose: true,
     //  });
