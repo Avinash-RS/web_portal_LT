@@ -2527,13 +2527,14 @@ export const recentlycourse = gql`
       }
       `;
       export const getlabActivityData = gql `
-      query getlabActivityData($userId:String,$courseId:String,$pagination:Boolean,$page:Int,$noofItems:Int){
-        getlabActivityData(userId:$userId,courseId:$courseId,pagination:$pagination,page:$page,noofItems:$noofItems){
+      query getlabActivityData($userId:String,$courseId:String,$pagination:Boolean,$page:Int,$noofItems:Int,$username:String){
+        getlabActivityData(userId:$userId,courseId:$courseId,pagination:$pagination,page:$page,noofItems:$noofItems,username:$username){
           success
           error_msg
           data{
               _id
               labActivity{
+              status
               project_id
               ebox_attempt_id
               activitystartdate

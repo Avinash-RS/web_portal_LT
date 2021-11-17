@@ -434,7 +434,8 @@ export class ActivitiesComponent implements OnInit {
       courseId:this.courseid,
       pagination:false,
       page:0,
-      noofItems:0
+      noofItems:0,
+      username:this.userDetail.username
     }
     this.Lservice.getlabactivity(labdata).subscribe((result:any)=>{
       if(result.data.getlabActivityData.success){
