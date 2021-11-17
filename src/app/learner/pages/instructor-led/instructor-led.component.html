@@ -66,9 +66,13 @@
     <div class="row d-flex justify-content-start" *ngIf='activityShow !== undefined'>
       <div class="moduleImage">
         <div class="liveSession">
-          <figure><img class="sessionImage" style="height: 500px !important; width: 100% !important;" *ngIf="!activityShow?.activity_details.livethumbnail" alt="instructor"
+          <figure><img class="sessionImage"
+              style="height: 500px !important; width: 100% !important; object-fit: cover !important;"
+              *ngIf="!activityShow?.activity_details.livethumbnail" alt="instructor"
               src="../../../../assets/learner/instructor_image.png" /></figure>
-          <figure><img class="sessionImage" style="height: 500px !important; width: 100% !important;" *ngIf="activityShow?.activity_details.livethumbnail" alt="instructor"
+          <figure><img class="sessionImage"
+              style="height: 500px !important; width: 100% !important; object-fit: cover !important;"
+              *ngIf="activityShow?.activity_details.livethumbnail" alt="instructor"
               [src]="activityShow?.activity_details.livethumbnail + blobKey" /></figure>
 
           <!-- <div class="row" style="margin-top: 0px;"> -->
@@ -89,16 +93,19 @@
         <div class="sessionDetails">
           <span class="sessionTitle activity-name"
             matTooltip="{{activityShow?.activity_details.activityname}}">{{activityShow?.activity_details.activityname}}</span>
-          <div class="row">
+          <div class="timingDetails">
 
             <!-- <span>Held On</span> &nbsp;&nbsp; -->
 
-            <span class="sessionDate">Date: {{ activityShow?.activity_details.startdate | date: 'dd/MM/yyyy'}}</span>
+            <span class="sessionDate"><em class="lxp-Duration"></em><span class="dateTitle">Date:</span> {{
+              activityShow?.activity_details.startdate | date: 'dd/MM/yyyy'}}</span>
           </div>
-          <div class="row">
-            <span *ngIf="activityShow?.activity_details.activitytype != 'Recorded'" class="sessionduration">Duration:
+          <div class="timingDetails">
+            <span *ngIf="activityShow?.activity_details.activitytype != 'Recorded'" class="sessionDuration">
+              <em class="lxp-Clock"></em><span class="durationTitle">Duration:</span>
               {{activityShow?.duration}}</span>
-            <span *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" class="sessionduration">Module:
+            <span *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" class="sessionModule">
+              <em class="lxp-Todo_task"></em><span class="moduleTitle">Module:</span>
               {{activityShow?.activity_details.modulename}}</span>
             <!-- <span class="sessionTitle">Duration</span> -->
 
@@ -236,7 +243,7 @@
             <div class="row d-flex justify-content-start">
               <div class="image-container">
                 <img *ngIf="los.activity_details.livethumbnail" alt="image"
-                  style="width: 100%; height: 150px !important;object-fit: inherit!important;"
+                  style="width: 100%; height: 150px !important;object-fit: cover !important;"
                   [src]="los.activity_details.livethumbnail + blobKey">
                 <img *ngIf="!los.activity_details.livethumbnail" alt="image"
                   style="width: 100%; height: 150px !important;object-fit: cover !important;"
@@ -256,10 +263,10 @@
               <div class="content-container">
                 <h4 class="activity-name" matTooltip="{{los.activity_details.activityname}}">
                   {{los.activity_details.activityname}}</h4>
-                <h5><span>Date:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy'}}</h5>
-                <h5 *ngIf="los.activity_details.activitytype != 'Recorded'"><span>Duration:</span> {{los.duration}}
+                <h5><span class="hover-content">Date:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy'}}</h5>
+                <h5 *ngIf="los.activity_details.activitytype != 'Recorded'"><span class="hover-content">Duration:</span> {{los.duration}}
                 </h5>
-                <h5 *ngIf="los.activity_details.activitytype == 'Recorded'"><span>Module:</span>
+                <h5 *ngIf="los.activity_details.activitytype == 'Recorded'"><span class="hover-content">Module:</span>
                   {{los.activity_details.modulename}} </h5>
               </div>
             </div>

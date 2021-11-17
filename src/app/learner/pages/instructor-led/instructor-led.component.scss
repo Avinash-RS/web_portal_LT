@@ -8,22 +8,22 @@
    flex-direction: column;
    .leftContainer {
      width: 100%;
-     padding: 10px 0;
+     padding: 20px 0;
    }
    .rightContainer {
      width: 100%;
-     padding: 0 10px;
+     padding: 0 30px;
    }
   }
   @media only screen and (max-width: 990px) {
     flex-direction: column;
     .leftContainer {
       width: 100%;
-      padding: 10px 0;
+      padding: 20px 0;
     }
     .rightContainer {
       width: 100%;
-      padding: 0 10px;
+      padding: 0 30px;
     }
    }
 }
@@ -31,16 +31,17 @@
 .leftContainer {
   background-color: #f2f2f2;
   width: 65%;
-  box-shadow: 0px 0px 6px #00000059;
+  z-index: 1;
+  box-shadow: 0px 0px 9px 0px #00000059;
 }
 
 .rightContainer {
   background-color: white;
   width: 35%;
+  z-index: 0;
 }
 
 .container {
-  position: relative;
   padding-top: 20px;
   padding-left: 40px;
   width: 100%;
@@ -211,7 +212,7 @@
   }
 }
 .content-container {
-  width: 50%;
+  width: 60%;
   // margin-left: 3%;
   padding: 30px 10px 30px 10px;
   @media only screen and (max-width: 576px) {
@@ -239,6 +240,25 @@
     }
   }
 }
+
+.content-container:hover {
+  color: white;
+  background-color: #607D8B;
+  border: 0.5px solid #848484;
+  transition: 0.2s ease;
+}
+
+.content-container:hover .activity-name {
+  color: white;
+  transition: 0.2s ease;
+}
+
+.content-container:hover .hover-content {
+  color: white;
+  transition: 0.2s ease;
+}
+
+
 
 .rightWrapper {
   width: 100%;
@@ -273,9 +293,9 @@
   }
 }
 .course-list {
-  // height: 500px;
-  // overflow-x: hidden;
-  // overflow-y: scroll;
+  height: 840px;
+  overflow-x: hidden;
+  overflow-y: scroll;
   @media only screen and (max-width: 576px) {
     border-top: 1px solid #cdcdcd;
     // margin-top: 15px;
@@ -493,7 +513,7 @@
   text-align: left;
   letter-spacing: 0px;
   font-size: 15px;
-  color: black5;
+  color: black;
   opacity: 1;
   margin-bottom: 10px;
   display: inline-block;
@@ -502,17 +522,65 @@
   display: inline-block;
   /* margin-left: 2%; */
   @media only screen and (max-width: 600px) {
-    color: #454545;
+    color: black;
     margin-bottom: 0;
   }
 }
-.sessionDate,
-.sessionduration {
-  line-height: 24px;
-  color: black;
-  @media only screen and (max-width: 600px) {
-    color: black;
-    margin-top: 10px;
+
+.timingDetails {
+  margin-left: 0;
+  margin-right: 0;
+  font-size: 12px;
+  .sessionDate {
+    line-height: 24px;
+    color: #333333;
+    @media only screen and (max-width: 600px) {
+      color: #333333;
+      margin-top: 10px;
+    }
+    .lxp-Duration {
+      color: #848484;
+      margin-right: 5px;
+    } 
+    .dateTitle {
+      color: #666666;
+    } 
+  } 
+}
+
+.timingDetails {
+  margin-left: 0;
+  margin-right: 0;
+  font-size: 12px;
+  .sessionDuration {
+    line-height: 24px;
+    color: #333333;
+    @media only screen and (max-width: 600px) {
+      color: #333333;
+      margin-top: 10px;
+    }
+    .lxp-Clock {
+      color: #848484;
+      margin-right: 5px;
+    } 
+    .durationTitle {
+      color: #666666;
+    } 
+  } 
+  .sessionModule {
+    line-height: 24px;
+    color: #333333;
+    @media only screen and (max-width: 600px) {
+      color: #333333;
+      margin-top: 10px;
+    }
+    .lxp-Todo_task {
+      color: #848484;
+      margin-right: 5px;
+    } 
+    .ModuleTitle {
+      color: #666666;
+    } 
   }
 }
 
