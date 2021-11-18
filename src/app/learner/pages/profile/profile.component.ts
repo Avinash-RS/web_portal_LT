@@ -38,14 +38,6 @@ export class ProfileComponent implements OnInit {
       this.currentUser = this.gs.checkLogout();
       this.getAllLevels();
       this.getprofileDetails(this.currentUser.user_id);
-      this.location.onPopState(() => {
-        if (!this.currentUser.is_password_updated) {
-      history.pushState(null, null, window.location.href)
-     } 
-      });  
-      // if (this.currentUser.is_password_updated) {
-      //   this.gs.preventBackButton();
-      // }
     }
 
     this.getAllLanguage();
@@ -160,9 +152,10 @@ export class ProfileComponent implements OnInit {
 
 
   duplicateValueCheck = [];
-
+  ngOnDestroy(){
+  this.dialog.closeAll();
+  }
   ngOnInit() {
-    console.log("Profile component")
     this.translate.use(localStorage.getItem('language'));
     if (this.currentUser.is_profile_updated) {
       this.cannotEdit = true;
