@@ -29,7 +29,6 @@ export class NewHomeComponent implements OnInit {
                   this.router.navigateByUrl('/Learner/login');
                 }
   }
-  @HostListener('window:resize', ['$event'])
   ngOnInit() {
     if(this.userDetail?.TFAsetup?.dataURL) {
       this.qrCode = this.userDetail?.TFAsetup?.dataURL;

@@ -84,7 +84,10 @@ uploadAssignments(fromdata) {
   this.getToken();
   return this.http.post(this.envApi + 'wca/learnerscorefile', fromdata, this.httpOptions); 
 }
-
+assignmentAction(data){
+  this.getToken();
+  return this.http.post(this.envApi + 'wca/submitDeleteAssignmentData',data,this.httpOptions);
+}
 imageupload(fb) {
   this.getToken();
   return this.http.post<any[]>(this.envApiImg + `upload/image`, fb,this.httpOptions);
