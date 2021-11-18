@@ -487,8 +487,6 @@ export class ActivitiesComponent implements OnInit {
           this.courseEndDate = moment(batchEndDate).endOf('day').toDate();
 
           this.assignmentContent.forEach((fileData,i) => {
-            fileData.files.disablesubmitbtn = true;
-            fileData.files.showPreview = false;
             if (this.openedIndex === i && !value) {
               if (fileData.isOpen) {
                 fileData.isOpen = false;
@@ -600,8 +598,6 @@ export class ActivitiesComponent implements OnInit {
     else{
       this.assignmentFile = event.target.files[0] as File;
       this.fileInput.nativeElement.value = '';
-      assignemnt.disablesubmitbtn = false;
-      assignemnt.showPreview = true;
       this.postAssignmentsFile(assignemnt.file_id,assignemnt.module_id,assignemnt.topic_id,assignemnt.activityname,assignemnt.total_mark,assignemnt.activityenddate);
     }
   }
@@ -612,15 +608,6 @@ export class ActivitiesComponent implements OnInit {
     if (!score) {
       score = 50;
     }
-    let submitStatus = 'ontime';
-    const todayDate = moment().toDate();
-    const startDate = moment(endDate).toDate();
-    if (todayDate > startDate) {
-      submitStatus = 'late';
-    } else {
-      submitStatus = 'ontime';
-    }
-
     const payload = new FormData();
     payload.append('learnerdoc', this.assignmentFile, this.assignmentFile.name);
     payload.append('user_id', this.userDetail.user_id);
@@ -629,17 +616,58 @@ export class ActivitiesComponent implements OnInit {
     payload.append('module_id', modulename);
     payload.append('file_id', fileId);
     payload.append('type_name', assignemtname);
-    payload.append('submit_status', submitStatus);
+    payload.append('submit_status', 'notsubmitted');
     payload.append('total_mark', score);
+    payload.append('assignmentAction','upload');
     this.AssigmnemtPayload = payload;
-    this.ngxLoader.stop();
-    this.toastr.success("File uploaded successfully");
-  }
-  submitAssigmnemtData(assignemnt){
     this.Lservice.uploadAssignments(this.AssigmnemtPayload).subscribe((data: any) => {
       if (data.success === true) {
-        this.toastr.success("Assignment submitted successfully", null);
+        this.ngxLoader.stop();
+        this.toastr.success(data.message, null);
         this.AssigmnemtPayload = null;
+        this.getAssignmentmoduleData();
+      } else {
+        this.ngxLoader.stop();
+        this.toastr.warning(data.message, null);
+      }
+    });
+  }
+  submitAssigmnemtData(assignemnt){
+    let submitStatus = 'ontime';
+    const todayDate = moment().toDate();
+    const startDate = moment(assignemnt.activityenddate).toDate();
+    if (todayDate > startDate) {
+      submitStatus = 'late';
+    } else {
+      submitStatus = 'ontime';
+    }
+    const apidata= {
+      'course_id': assignemnt.course_id,
+      'file_id': assignemnt.file_id,
+      'user_id': this.userDetail.user_id,
+      'assignmentAction': "submit",
+      'submit_status' : submitStatus
+  }
+    this.Lservice.assignmentAction(apidata).subscribe((data: any) => {
+      if (data.success === true) {
+        this.toastr.success(data.message, null);
+        this.getAssignmentmoduleData();
+      } else {
+        this.toastr.warning(data.message, null);
+      }
+    });
+  }
+  deleteAssigmnemtData(assignemnt){
+    const apidata= {
+      'course_id': assignemnt.course_id,
+      'file_id': assignemnt.file_id,
+      'user_id': this.userDetail.user_id,
+      'assignmentAction': "delete",
+      'submit_status' : "notsubmitted"
+  }
+   this.Lservice.assignmentAction(apidata).subscribe((data: any) => {
+      if (data.success === true) {
+        this.toastr.success(data.message, null);
         this.getAssignmentmoduleData();
       } else {
         this.toastr.warning(data.message, null);
