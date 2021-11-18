@@ -138,6 +138,7 @@
 //     }
 .moduleImage {
   padding: 0 30px;
+  position: relative;
   @media only screen and (max-width: 700px) {
     width: 100%;
     padding: 0 15px;
@@ -146,11 +147,8 @@
     width: 100%;
     height: 100%;
   }
-  // .liveSession {
-  //   position: relative;
-  //   @media only screen and (max-width: 700px) {
-  //     width: 100%;
-  //   }
+  .liveSession {
+    position: relative;
     .playButton {
       background: #be2020 0% 0% no-repeat padding-box;
       border-radius: 20px;
@@ -172,6 +170,7 @@
         margin-right: 30%;
       }
     }
+  }
   .sessionDetails {
     padding-top: 20px;
   }
