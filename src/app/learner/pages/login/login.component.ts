@@ -11,6 +11,7 @@ import { RecaptchaErrorParameters } from "ng-recaptcha";
 import { environment } from '../../../../environments/environment';
 import { Title } from '@angular/platform-browser';
 import { GoogleAnalyticsService } from '@learner/services/google-analytics.service';
+declare var gtag;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -191,17 +192,18 @@ export class LoginComponent implements OnInit {
         // }
         if(loginresult.data.login){
           if (loginresult.data.login.success) {
+            let userId = loginresult.data.login.message.user_id
+            gtag('config', environment.gaTrackingId, {'user_id': userId});
+            gtag('set', 'user_properties', { 'crm_id' : userId });
             this.loginMovement(loginresult)
             if(loginresult.data.login?.message?.TFAsetup?.main_config_TFA){
               if(loginresult.data.login?.message?.TFAsetup?.user_config_TFA){
                 this.router.navigate(['/Learner/authentication']);
               } else{
                 this.setAuthentication();
-                this.router.navigate(['/Learner/MyCourse']);
               }
             } else {
               this.setAuthentication();
-              this.router.navigate(['/Learner/MyCourse']);
             }
           } else {
             this.loader = false;
@@ -222,6 +224,11 @@ export class LoginComponent implements OnInit {
     let userDetail =JSON.parse(localStorage.getItem('UserDetails'))
     userDetail['specific_report_value'] = Math.floor(Math.random() * 1000000000).toString()
     localStorage.setItem('UserDetails', JSON.stringify(userDetail));
+    if(userDetail.is_password_updated){
+      this.router.navigate(['/Learner/MyCourse']);
+    } else {
+      this.router.navigate(['/Learner/profile']);
+    }
   }
   loginMovement(loginresult){
         if(this.loginForm.value.remember_me === true){

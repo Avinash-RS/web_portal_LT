@@ -19,6 +19,7 @@ export const login = gql`
         is_thread_config
         is_comment_config
         is_profile_updated
+        is_password_updated
         org_type
         group_id
         message
