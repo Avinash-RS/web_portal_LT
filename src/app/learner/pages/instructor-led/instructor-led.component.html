@@ -37,11 +37,6 @@
     <!-- If No Records -->
     <!-- End of no records -->
 
-
-
-
-
-
     <!-- Left Side Panel ... -->
     <!-- <div class="col-lg-1 col-xl-1 col-md-1 col-sm-1 col-12"></div> -->
     <!-- <div class="col-lg-7 col-xl-7 col-md-12 col-sm-12 col-12">
@@ -118,10 +113,6 @@
 
 
   <!-- <div class="row" style="color: white; margin-top: 10px;"> -->
-
-
-
-
 
 
   <!-- <div class="moduleContent">
@@ -231,11 +222,11 @@
   <div class="rightContainer" *ngIf="showContent">
     <!-- <div class="col-lg-5 col-xl-5 col-md-12 col-sm-12 col-12"> -->
     <div class="row course-list">
-      <div class="headingWrapper d-flex justify-content-between align-items-center">
+      <h3 class="headLine">Industry Talk Sessions</h3>
+      <!-- <div class="headingWrapper d-flex justify-content-between align-items-center"> -->
         <!-- <h3 class="headLine">Upcoming Sessions and Recorded Sessions</h3> -->
-        <h3 class="headLine">Industry Talk Sessions</h3>
         <!-- <button class="btn btn-light attandanceShow" *ngIf="sessionAttendance?.length" (click)="showModal(attendanceDialog)">Attendance</button> -->
-      </div>
+      <!-- </div> -->
       <mat-nav-list class="listofSessionContainer">
         <mat-list-item *ngFor="let los of listOfSessions" class="listofSessionCards">
           <mat-card class="sessionCard" (click)="useSession(los)">

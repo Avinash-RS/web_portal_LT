@@ -4,24 +4,24 @@
   height: 100%;
   display: flex;
   background-color: #f2f2f2;
-  @media only screen and (max-width: 760px) {
-   flex-direction: column;
-   .leftContainer {
-     width: 100%;
-     padding: 10px 0;
-   }
-   .rightContainer {
-     width: 100%;
-     padding: 0 10px;
-   }
-  }
-  @media only screen and (max-width: 990px) {
+  flex-direction: column;
+  // @media only screen and (max-width: 1140px) {
+  //  .leftContainer {
+  //    width: 100%;
+  //    padding: 10px 0;
+  //  }
+  //  .rightContainer {
+  //    width: 100%;
+  //    padding: 0 15px;
+  //  }
+  // }
+  @media only screen and (min-width: 720px) {
+    flex-direction: row;
     .leftContainer {
-      width: 100%;
-      padding: 10px 0;
+      width: calc(100% - 500px);
     }
     .rightContainer {
-      width: 100%;
+      width: 500px;
       padding: 0 10px;
     }
    }
@@ -29,15 +29,17 @@
 
 .leftContainer {
   background-color: #f2f2f2;
-  width: 65%;
+  width: 100%;
   z-index: 1;
   box-shadow: 0px 0px 9px 0px #00000059;
+  padding: 10px 0;
 }
 
 .rightContainer {
   background-color: white;
-  width: 35%;
+  width: 100%;
   z-index: 0;
+  padding: 0 15px;
 }
 
 .container {
@@ -137,18 +139,18 @@
 //         box-shadow: none;
 //     }
 .moduleImage {
-  padding: 0 30px;
+  padding: 0 15px;
   position: relative;
-  @media only screen and (max-width: 700px) {
+  @media only screen and (min-width: 720px) {
+    padding: 0 30px;
     width: 100%;
-    padding: 0 15px;
-  }
-  @media only screen and (max-width: 700px) {
-    width: 100%;
-    height: 100%;
   }
   .liveSession {
     position: relative;
+    width: 100%;
+    .sessionImage {
+      width: 100%;
+    }
     .playButton {
       background: #be2020 0% 0% no-repeat padding-box;
       border-radius: 20px;
@@ -474,7 +476,6 @@
   text-align: left;
   letter-spacing: 0px;
   color: black;
-  opacity: 1;
   // margin: 0 0 15px 0;
   padding-top: 28px;
   font-size: 15px;
