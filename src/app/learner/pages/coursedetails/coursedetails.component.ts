@@ -255,6 +255,11 @@ export class CoursedetailsComponent implements OnInit {
     public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
     public route: Router, private formBuilder: FormBuilder,
     public sanitizer: DomSanitizer, private toastr: ToastrService) {
+      const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
+      if(!loginDetails?.is_password_updated){
+        this.route.navigate(['/Learner/profile']);
+        return
+      }
     this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
     // if (this.socketService.socketStatus()||this.socketService.socketStatus() == undefined){
     this.socketConnector = this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
@@ -262,7 +267,6 @@ export class CoursedetailsComponent implements OnInit {
     // }
     // debugger
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('about:blank');
-    const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
     this.userType = loginDetails.org_type;
     const token = loginDetails.token
 

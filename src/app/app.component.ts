@@ -129,7 +129,6 @@ export class AppComponent implements OnInit {
    // console.error = function(){}
    // console.log = function(){}
   //  console.warn = function(){}
-    console.log("App component")
     this.loadersubscription = this.Lservice.getMessage().subscribe(message => 
       { 
         if(message.count){
@@ -183,9 +182,7 @@ export class AppComponent implements OnInit {
         }else{
           dataLayer[0]={'userID': user_id};
         }
-        }
-        console.log("USERID"+this.UserDetails.user_id)
-        console.log("USERID"+user_id)
+        }        
         this.gtag.pageview({
           page_title: data?.title? data.title : "L&T Edutech",
           page_path: this.router.url,

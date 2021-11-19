@@ -184,7 +184,14 @@ export class ActivitiesComponent implements OnInit {
     public route: Router, public datePipe: DatePipe, private ngxLoader: NgxUiLoaderService,public activateroute:ActivatedRoute) {
     // const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
     //   this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
-      this.activateroute.queryParams.subscribe((result)=>{
+    if (this.gs.checkLogout()) {
+      this.userDetail = this.gs.checkLogout();
+    }
+    if(!this.userDetail?.is_password_updated){
+      this.route.navigate(['/Learner/profile']);
+      return
+    } 
+    this.activateroute.queryParams.subscribe((result)=>{
         const detail ={
           courseId: atob(result.courseId),
           courseName : atob(result.courseName),
@@ -193,9 +200,6 @@ export class ActivitiesComponent implements OnInit {
         }
         this.checkDetails = detail;
       })  
-    if (this.gs.checkLogout()) {
-      this.userDetail = this.gs.checkLogout();
-    }
     this.courseid = this.checkDetails ? this.checkDetails.courseId : localStorage.getItem('Courseid');
     this.courseName = this.checkDetails ? this.checkDetails.courseName : localStorage.getItem('CourseName');
     var index;

@@ -28,38 +28,10 @@ export class AuthGuard implements CanLoad {
     // }
   
   // Added by Mythreyi
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const userDetails =JSON.parse(localStorage.getItem('UserDetails'));
-    const token =  localStorage.getItem('token')||sessionStorage.getItem('token');
-    if(userDetails?.TFAsetup?.main_config_TFA) {
-      if(userDetails?.TFAsetup?.user_config_TFA) {
-        if (token && userDetails?.specific_report_value) {
-            return true;
-          } else {
-            this.router.navigate(['/Learner/login']);
-            return false;
-          }
-      } else {
-        if (token && userDetails?.specific_report_value) {
-            return true;
-          } else {
-            this.router.navigate(['/Learner/login']);
-            return false;
-          }
-      }
-    } else {
-      if (token) {
-          return true;
-        } else {
-          this.router.navigate(['/Learner/login']);
-          return false;
-        }
-    }
-    
-      // end of url navigations for logged in learner ------> 1
-    }
 
     canLoad(route: Route, segments: UrlSegment[]): any {
+      console.log(route)
+      console.log(segments)
       const userDetails =JSON.parse(localStorage.getItem('UserDetails'));
       const token =  localStorage.getItem('token')||sessionStorage.getItem('token');
       if(userDetails?.TFAsetup?.main_config_TFA) {
