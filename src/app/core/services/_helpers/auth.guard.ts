@@ -30,8 +30,6 @@ export class AuthGuard implements CanLoad {
   // Added by Mythreyi
 
     canLoad(route: Route, segments: UrlSegment[]): any {
-      console.log(route)
-      console.log(segments)
       const userDetails =JSON.parse(localStorage.getItem('UserDetails'));
       const token =  localStorage.getItem('token')||sessionStorage.getItem('token');
       if(userDetails?.TFAsetup?.main_config_TFA) {
