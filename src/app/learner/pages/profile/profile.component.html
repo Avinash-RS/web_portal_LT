@@ -510,7 +510,6 @@
               <mat-label class="labe l-color">Enter New password</mat-label>
               <input onpaste="return false" matInput placeholder="Enter password" [type]="showNew ? 'password' : 'text'" formControlName="newpassword" 
               onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"[ngClass]="{ 'is-invalid': c.newpassword.touched && c.newpassword.errors }" (keyup)="change($event)">
-              <!-- <em class="icon-color lxp-Lock" matPrefix></em> -->
               <span mat-icon-button matSuffix (click)="showNew = !showNew" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showNew">
                 <em class="icon-color" [ngClass]="showNew ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
               </span>
