@@ -362,6 +362,10 @@ export class LearnerNewMyCourseComponent implements OnInit {
     private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
 
     this.userDetailes = this.gs.checkLogout();
+    if(!this.userDetailes?.is_password_updated){
+      this.router.navigate(['/Learner/profile']);
+      return
+    }
     if (this.userDetailes) {
       this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
     }
