@@ -152,7 +152,7 @@
      
       <div class="overallsection d-flex justify-content-between align-items-center flex-wrap">
         <mat-card class="selflearningCard">
-          <div class="card-head d-flex align-items-center justify-content-center">Self Learning</div>
+          <div class="card-head d-flex align-items-center justify-content-center">Self Learning Score</div>
            <div class="card-content d-flex align-items-center">
              <div class="graph-content">
                <circle-progress [title]= "selfscore"
@@ -188,7 +188,7 @@
            </div>
        </mat-card>
         <mat-card class="selflearningCard">
-                <div class="card-head d-flex align-items-center justify-content-center">Q&A</div>
+                <div class="card-head d-flex align-items-center justify-content-center">Q&A Score</div>
                   <div class="card-content d-flex align-items-center">
                   <div class="graph-content">
                     <circle-progress [title]="QAscore" [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "false" 
@@ -213,7 +213,7 @@
 
       <div class="weeklyreport">
           <div class="weekly-head d-flex justify-content-between align-items-center">
-                <div class="week-head-text">Self Learning Weekly Report</div>
+                <div class="week-head-text">Weekly Score - Self Learning</div>
                 <div class="week-head-action">
                   <mat-button-toggle-group appearance="legacy" value="article" #group="matButtonToggleGroup">
                     <mat-button-toggle value="article"><mat-icon>article</mat-icon></mat-button-toggle>
@@ -224,11 +224,8 @@
           <div class="weekly-content">            
             <div *ngIf="group.value == 'article'">
               <div class="week-card-container d-flex flex-wrap align-items-center" style= "justify-content: flex-start;">
-
-                
-                   <mat-card class="week-card" *ngFor="let selfValue of courseReportData?.selflearning;let i = index" [ngClass]="selfValue.week == 'Week 8' || selfValue.week == 'Week 16' ? 'disable-card' : ''">
-
-                    <ng-container *ngIf ="selfValue.week != 'Week 8' && selfValue.week != 'Week 16'">
+                <mat-card class="week-card" *ngFor="let selfValue of courseReportData?.selflearning;let i = index" [ngClass]="selfValue.week == 'Week 8' || selfValue.week == 'Week 16' ? 'disable-card' : ''">
+                  <ng-container *ngIf ="selfValue.weekwiseTask == '' ">
                       <div class="week-card-head d-flex">
                         <popover-content #selfPopover>
                           <div class="popoverContainer">
@@ -258,15 +255,13 @@
                       </ul>
                   </ng-container>
 
-                  <ng-container *ngIf ="selfValue.week == 'Week 8' || selfValue.week == 'Week 16'">
+                  <ng-container *ngIf ="selfValue.weekwiseTask == 'Project' || selfValue.weekwiseTask == 'Final Test'">
                     <div class="week-card-head d-flex">
                       <label>{{selfValue.week}}</label>
                     </div>
-                    <div class="disabledTXT">Project</div>
+                    <div class="disabledTXT">{{selfValue.weekwiseTask}}</div>
                   </ng-container>
-
-                  </mat-card>
-
+                </mat-card>
               </div>
             </div>
             <div *ngIf="group.value == 'chart'">
@@ -459,9 +454,9 @@
           </popover-content>
           <div class="finalScore d-flex justify-content-between align-items-center">
             <div class="progressFinal">
-              <circle-progress [percent]='courseReportData.finalscore.rawscore' [radius]=40 [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#2A4DC1'" [outerStrokeGradientStopColor]="'#0FD3D3'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 [animation]="true" [animationDuration]="300" [showSubtitle]="false"></circle-progress>
+              <circle-progress [showUnits]= "false"  [percent]='courseReportData.finalscore.rawscore' [radius]=40 [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#2A4DC1'" [outerStrokeGradientStopColor]="'#0FD3D3'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 [animation]="true" [animationDuration]="300" [showSubtitle]="false"></circle-progress>
             </div>
-            <!-- <div class="gradePoints d-flex justify-content-between align-items-center">
+            <div class="gradePoints d-flex justify-content-between align-items-center" *ngIf="lastWeekSatus == 'Completed'">
               <div>
                 <figure>
                   <img src="/assets/images/grade.svg" alt="" />
@@ -474,7 +469,7 @@
                 </figure>
                 <h6>Points <span>{{courseReportData.finalscore.gradepoint}}</span></h6>
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>

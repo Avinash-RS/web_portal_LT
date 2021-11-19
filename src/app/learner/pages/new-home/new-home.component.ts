@@ -29,7 +29,6 @@ export class NewHomeComponent implements OnInit {
                   this.router.navigateByUrl('/Learner/login');
                 }
   }
-  @HostListener('window:resize', ['$event'])
   ngOnInit() {
     if(this.userDetail?.TFAsetup?.dataURL) {
       this.qrCode = this.userDetail?.TFAsetup?.dataURL;
@@ -57,8 +56,14 @@ export class NewHomeComponent implements OnInit {
         if(response?.data?.verify_tfa_setup?.success){
           this.userDetail['specific_report_value'] = Math.floor(Math.random() * 1000000000).toString()
           localStorage.setItem('UserDetails', JSON.stringify(this.userDetail));
-          this.router.navigate(['/Learner/MyCourse']);
-          this.loader = false;
+          if(this.userDetail.is_password_updated){
+            this.router.navigate(['/Learner/MyCourse']);
+          } else {
+            this.router.navigate(['/Learner/profile']);
+          }
+          setTimeout(()=>{
+            this.loader = false;
+          },1000)
         } else {
           this.loader = false;
           this.authInput.setValue('')

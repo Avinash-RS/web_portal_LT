@@ -20,6 +20,7 @@ import * as _ from 'lodash';
 import { filter } from 'underscore';
 // import { debugger } from 'fusioncharts';
 import * as CryptoJS from 'crypto-js';
+declare var gtag
 
 @Component({
   selector: 'app-coursedetails',
@@ -254,6 +255,11 @@ export class CoursedetailsComponent implements OnInit {
     public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
     public route: Router, private formBuilder: FormBuilder,
     public sanitizer: DomSanitizer, private toastr: ToastrService) {
+      const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
+      if(!loginDetails?.is_password_updated){
+        this.route.navigate(['/Learner/profile']);
+        return
+      }
     this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
     // if (this.socketService.socketStatus()||this.socketService.socketStatus() == undefined){
     this.socketConnector = this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
@@ -261,7 +267,6 @@ export class CoursedetailsComponent implements OnInit {
     // }
     // debugger
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl('about:blank');
-    const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
     this.userType = loginDetails.org_type;
     const token = loginDetails.token
 
@@ -306,6 +311,7 @@ export class CoursedetailsComponent implements OnInit {
       this.lastpersentage = localStorage.getItem('persentage');
       // this.lastpersentage = detail  && detail.persentage || this.localper ;
       this.loading = true;
+      gtag('event','coursePlayerCID', {"courseID":this.courseid});
       this.playerModuleAndTopic();
       this.getFeedbackQue();
       // this.refreshData();

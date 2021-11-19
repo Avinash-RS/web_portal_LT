@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { knowledgeService } from '@learner/services/knowledge-resource/knowledge-resource.service';
 import { ToastrService } from 'ngx-toastr';
+import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class KnowledgeResourceHomeComponent implements OnInit {
   imageView: File;
   searchDetails = '';
   dummyText = 1;
+  userDetailes;
   sampleFileLink = 'https://edutechstorage.blob.core.windows.net/container1/resource/739113684616842-Sample-file.csv';
   @ViewChild('fileInput3') fileInput3;
   @ViewChild('ResourceData') searchedData: ElementRef;
@@ -28,7 +30,13 @@ export class KnowledgeResourceHomeComponent implements OnInit {
   constructor(public apiService: knowledgeService,
               public toast: ToastrService,
               private CommonService: CommonServicesService,
-              private router: Router) { }
+              private router: Router, private gs: GlobalServiceService) { 
+                this.userDetailes = this.gs.checkLogout();
+                if(!this.userDetailes?.is_password_updated){
+                  this.router.navigate(['/Learner/profile']);
+                  return
+                }
+              }
 
   ngOnInit() {
     this.getResourceFiles();
