@@ -475,119 +475,6 @@
         </mat-dialog-actions>
       </ng-template>
       <!---------------------------------Password Dialog--------------------------------->
-      <ng-template #passwordDialog>
-        <div class="passwordPopup">
-        <span class="f_size_18 color_blue float_right">
-          <i class="lxp-Close" aria-hidden="true" (click)="closedialogbox()"></i>
-        </span>
-        <h1 class="head">{{'Change your Password' | translate}}</h1>
-        <mat-dialog-content style="width: 500px; margin: 0px; ">
-          <form [formGroup]="passwordForm" autocomplete="off">
-            <!-- <label class="f_size_16 f_wt_400">{{'Enter current password' | translate}}</label>
-            <div class="form-group">
-              <input [type]="show ? 'text' : 'password'" name="password" formControlName="currentpassword"
-                onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
-                class="form-control"
-                [ngClass]="{ 'is-invalid': c.currentpassword.touched && c.currentpassword.errors }" />
-                <i [class]="show ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="show = !show"
-                aria-hidden="true"></i>
-            </div> -->
-            <mat-form-field class="w-100" appearance="outline">
-              <mat-label class="labe l-color">Enter current password</mat-label>
-              <input onpaste="return false" matInput placeholder="Enter password" [type]="hide ? 'password' : 'text'" formControlName="currentpassword" [ngClass]="{ 'is-invalid': c.currentpassword.touched && c.currentpassword.errors }" required>
-              <!-- <em class="icon-color lxp-Lock" matPrefix></em> -->
-              <span mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <em class="icon-color" [ngClass]="hide ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
-              </span>
-              <mat-error class="error" *ngIf="c.currentpassword.touched && c.currentpassword.errors">
-                {{'Password is required' | translate }}</mat-error>
-                <!-- </div> -->
-            </mat-form-field>
-            <br>
-            
-            <p class=" f_size_14">{{'The password should not be last password' | translate}}</p>
-            <mat-form-field class="w-100" appearance="outline">
-              <mat-label class="labe l-color">Enter New password</mat-label>
-              <input onpaste="return false" matInput placeholder="Enter password" [type]="showNew ? 'password' : 'text'" formControlName="newpassword" 
-              onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"[ngClass]="{ 'is-invalid': c.newpassword.touched && c.newpassword.errors }" (keyup)="change($event)">
-              <span mat-icon-button matSuffix (click)="showNew = !showNew" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showNew">
-                <em class="icon-color" [ngClass]="showNew ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
-              </span>
-            </mat-form-field>
-            
-            <div *ngIf="c.newpassword.touched && c.newpassword.errors" class="invalid-feedback">
-              <div *ngIf="c.newpassword.errors.minlength">{{'New Password must be at least 8 characters' | translate}}</div>
-              <div *ngIf="c.newpassword.errors.pattern">{{'Your password must contain at least one number and have a mixture of Special characters, uppercase and lowercase letters.' | translate}}</div>
-              <div *ngIf="c.newpassword.errors.mustMatch"> {{'Passwords must be same' | translate}}</div>
-            </div>
-            
-            <!-- <label class="f_size_16 f_wt_400">{{'Enter new password' | translate}}</label>
-            <div class="form-group">
-              <input [type]="showNew ? 'text' : 'password'" name="password" formControlName="newpassword"
-                onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
-                class="form-control "
-                [ngClass]="{ 'is-invalid': c.newpassword.touched && c.newpassword.errors }" (keyup)="change($event)" />
-               
-              <i [class]="showNew ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="showNew = !showNew"
-                aria-hidden="true"></i> -->
-              <!-- <div *ngIf="c.newpassword.touched && c.newpassword.errors" class="invalid-feedback">
-                
-                <div *ngIf="c.newpassword.errors.minlength">{{'New Password must be at least 8 characters' | translate}}</div>
-                <div *ngIf="c.newpassword.errors.pattern">{{'Your password must contain at least one number and have a mixture of Special characters, uppercase and lowercase letters.' | translate}}</div>
-                <div *ngIf="c.newpassword.errors.mustMatch"> {{'Passwords must be same' | translate}}</div>
-              </div> -->
-            <!-- </div><br>  -->
-            <div class="box" id="message">
-              <div class="row">
-                <div class="col">
-                  <p *ngIf="uppercase" id="uppercase" class="valid"><i class="fa fa-check" aria-hidden="true"></i>
-                    {{'Uppercase' }}</p>
-                  <p *ngIf="lowercase" id="lowercase" class="valid"><i class="fa fa-check" aria-hidden="true"></i>
-                    {{'Lowercase' }}</p>
-                </div>
-                <div class="col">
-                  <p *ngIf="spicalcharacter" id="specialcharacter" class="valid"><i class="fa fa-check"
-                      aria-hidden="true"></i> {{'Special character' | translate}}</p>
-                  <p *ngIf="number" id="number" class="valid"><i class="fa fa-check" aria-hidden="true"></i> {{'Number' | translate}}
-                  </p>
-                </div>
-              </div>
-            </div>
-           
-            <!-- <label class="f_size_16 f_wt_400">{{'Confirm new password' | translate}}</label> -->
-            <!-- <div class="form-group">
-              <input [type]="showConNew ? 'text' : 'password'" name="password" formControlName="confirmpassword"
-                onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
-                class="form-control"
-                [ngClass]="{ 'is-invalid': c.confirmpassword.touched && c.confirmpassword.errors }" />
-                <input onpaste="return false" matInput placeholder="Enter password" [type]="hide ? 'confirmpassword' : 'text'" formControlName="confirmpassword" [ngClass]="{ 'is-invalid': c.confirmpassword.touched && c.confirmpassword.errors }" required>
-              <i [class]="showConNew ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'"
-                (click)="showConNew = !showConNew" aria-hidden="true"></i>
-              <div *ngIf="c.confirmpassword.touched && c.confirmpassword.errors" class="invalid-feedback">
-                <div *ngIf="c.confirmpassword.errors.mustMatch">{{'Should be same as password' | translate}}</div>
-              </div>
-            </div> -->
-            <mat-form-field class="w-100" appearance="outline">
-              <mat-label class="labe l-color">Confirm New password</mat-label>
-            
-              <input  onCopy="return false" onDrag="return false" onDrop="return false" matInput placeholder="Enter password" [type]="hideConfirm ? 'password' : 'text'" formControlName="confirmpassword" [ngClass]="{ 'is-invalid': c.confirmpassword.touched && c.confirmpassword.errors }" required>
-              <!-- <em class="icon-color lxp-Lock" matPrefix ></em> -->
-              <span mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'hideConfirm password'" [attr.aria-pressed]="hideConfirm">
-                <em class="icon-color" [ngClass]="hideConfirm ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
-              </span>
-            </mat-form-field>
-            <div *ngIf="c.confirmpassword.touched && c.confirmpassword.errors">
-              <div class="error">{{'Should be same as password' | translate}}</div>
-            </div>
-          </form>
-        </mat-dialog-content><br>
-        <mat-dialog-actions>
-          <button class="popupbtns" [disabled]="passwordForm.invalid" (click)="updatePassword()">
-            {{'Submit' | translate}}
-          </button><br><br>
-        </mat-dialog-actions>
-      </div>
-      </ng-template>
     </div>
   </div>
 </div>
@@ -626,43 +513,67 @@
 
 <!-- {{profileForm.value | json}} -->
 <ng-template #passwordDialog>
+  <div class="passwordPopup">
   <span class="f_size_18 color_blue float_right">
-    <i class="fa fa-times-circle-o" aria-hidden="true" (click)="closedialogbox()"></i>
+    <i class="lxp-Close" aria-hidden="true" (click)="closedialogbox()"></i>
   </span>
-  <h1 class="head">{{'Change the Password' | translate}}</h1>
-  <mat-dialog-content style="width: 380px;margin-top: 24px;">
+  <h1 class="head">{{'Change your Password' | translate}}</h1>
+  <mat-dialog-content style="width: 500px; margin: 0px; ">
     <form [formGroup]="passwordForm" autocomplete="off">
-      <label class="f_size_16 f_wt_400">{{'Enter current password' | translate}}</label>
+      <!-- <label class="f_size_16 f_wt_400">{{'Enter current password' | translate}}</label>
       <div class="form-group">
         <input [type]="show ? 'text' : 'password'" name="password" formControlName="currentpassword"
           onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
           class="form-control"
           [ngClass]="{ 'is-invalid': c.currentpassword.touched && c.currentpassword.errors }" />
-        <i [class]="show ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="show = !show"
+          <i [class]="show ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="show = !show"
           aria-hidden="true"></i>
-        <!-- <div *ngIf="c.currentpassword.touched && c.currentpassword.errors" class="invalid-feedback">
-          <div *ngIf="c.currentpassword.errors.required">{{'Current Password is required' | translate}}</div>
-          <div *ngIf="c.currentpassword.errors.minlength">{{'Current Password must be at least 8 characters' | translate }}</div>
-          <div *ngIf="c.currentpassword.errors.pattern">{{'Your password must contain at least one number and have a mixture of Special characters, uppercase and lowercase letters.' | translate}}</div>
-        </div> -->
-      </div><br>
-
-
-      <label class="f_size_16 f_wt_400">{{'Enter new password' | translate}}</label>
+      </div> -->
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label class="labe l-color">Enter current password</mat-label>
+        <input onpaste="return false" matInput placeholder="Enter password" [type]="hide ? 'password' : 'text'" formControlName="currentpassword" [ngClass]="{ 'is-invalid': c.currentpassword.touched && c.currentpassword.errors }" required>
+        <!-- <em class="icon-color lxp-Lock" matPrefix></em> -->
+        <span mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <em class="icon-color" [ngClass]="hide ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
+        </span>
+        <mat-error class="error" *ngIf="c.currentpassword.touched && c.currentpassword.errors">
+          {{'Password is required' | translate }}</mat-error>
+          <!-- </div> -->
+      </mat-form-field>
+      <br>
+      
+      <p class=" f_size_14">{{'The password should not be last password' | translate}}</p>
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label class="labe l-color">Enter New password</mat-label>
+        <input onpaste="return false" matInput placeholder="Enter password" [type]="showNew ? 'password' : 'text'" formControlName="newpassword" 
+        onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"[ngClass]="{ 'is-invalid': c.newpassword.touched && c.newpassword.errors }" (keyup)="change($event)">
+        <span mat-icon-button matSuffix (click)="showNew = !showNew" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showNew">
+          <em class="icon-color" [ngClass]="showNew ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
+        </span>
+      </mat-form-field>
+      
+      <div *ngIf="c.newpassword.touched && c.newpassword.errors" class="invalid-feedback">
+        <div *ngIf="c.newpassword.errors.minlength">{{'New Password must be at least 8 characters' | translate}}</div>
+        <div *ngIf="c.newpassword.errors.pattern">{{'Your password must contain at least one number and have a mixture of Special characters, uppercase and lowercase letters.' | translate}}</div>
+        <div *ngIf="c.newpassword.errors.mustMatch"> {{'Passwords must be same' | translate}}</div>
+      </div>
+      
+      <!-- <label class="f_size_16 f_wt_400">{{'Enter new password' | translate}}</label>
       <div class="form-group">
         <input [type]="showNew ? 'text' : 'password'" name="password" formControlName="newpassword"
           onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
           class="form-control "
           [ngClass]="{ 'is-invalid': c.newpassword.touched && c.newpassword.errors }" (keyup)="change($event)" />
+         
         <i [class]="showNew ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'" (click)="showNew = !showNew"
-          aria-hidden="true"></i>
-        <div *ngIf="c.newpassword.touched && c.newpassword.errors" class="invalid-feedback">
-          <div *ngIf="c.newpassword.errors.required">{{'New Password is required' | translate}}</div>
+          aria-hidden="true"></i> -->
+        <!-- <div *ngIf="c.newpassword.touched && c.newpassword.errors" class="invalid-feedback">
+          
           <div *ngIf="c.newpassword.errors.minlength">{{'New Password must be at least 8 characters' | translate}}</div>
           <div *ngIf="c.newpassword.errors.pattern">{{'Your password must contain at least one number and have a mixture of Special characters, uppercase and lowercase letters.' | translate}}</div>
           <div *ngIf="c.newpassword.errors.mustMatch"> {{'Passwords must be same' | translate}}</div>
-        </div>
-      </div><br>
+        </div> -->
+      <!-- </div><br>  -->
       <div class="box" id="message">
         <div class="row">
           <div class="col">
@@ -679,18 +590,31 @@
           </div>
         </div>
       </div>
-      <p class=" f_size_14">{{'The password should not be last password' | translate}}</p>
-      <label class="f_size_16 f_wt_400">{{'Confirm new password' | translate}}</label>
-      <div class="form-group">
+     
+      <!-- <label class="f_size_16 f_wt_400">{{'Confirm new password' | translate}}</label> -->
+      <!-- <div class="form-group">
         <input [type]="showConNew ? 'text' : 'password'" name="password" formControlName="confirmpassword"
           onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"
           class="form-control"
           [ngClass]="{ 'is-invalid': c.confirmpassword.touched && c.confirmpassword.errors }" />
+          <input onpaste="return false" matInput placeholder="Enter password" [type]="hide ? 'confirmpassword' : 'text'" formControlName="confirmpassword" [ngClass]="{ 'is-invalid': c.confirmpassword.touched && c.confirmpassword.errors }" required>
         <i [class]="showConNew ? 'fa fa-eye errspan' : 'fa fa-eye-slash errspan'"
           (click)="showConNew = !showConNew" aria-hidden="true"></i>
         <div *ngIf="c.confirmpassword.touched && c.confirmpassword.errors" class="invalid-feedback">
           <div *ngIf="c.confirmpassword.errors.mustMatch">{{'Should be same as password' | translate}}</div>
         </div>
+      </div> -->
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label class="labe l-color">Confirm New password</mat-label>
+      
+        <input  onCopy="return false" onDrag="return false" onDrop="return false" matInput placeholder="Enter password" [type]="hideConfirm ? 'password' : 'text'" formControlName="confirmpassword" [ngClass]="{ 'is-invalid': c.confirmpassword.touched && c.confirmpassword.errors }" required>
+        <!-- <em class="icon-color lxp-Lock" matPrefix ></em> -->
+        <span mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'hideConfirm password'" [attr.aria-pressed]="hideConfirm">
+          <em class="icon-color" [ngClass]="hideConfirm ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
+        </span>
+      </mat-form-field>
+      <div *ngIf="c.confirmpassword.touched && c.confirmpassword.errors">
+        <div class="error">{{'Should be same as password' | translate}}</div>
       </div>
     </form>
   </mat-dialog-content><br>
@@ -699,4 +623,5 @@
       {{'Submit' | translate}}
     </button><br><br>
   </mat-dialog-actions>
+</div>
 </ng-template>
