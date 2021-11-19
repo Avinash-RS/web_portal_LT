@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { LocationStrategy } from '@angular/common';
 import { Component, OnInit, TemplateRef,ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTreeFlatDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as myGlobals from '@core/globals';
 import { CommonServicesService } from '@core/services/common-services.service';
@@ -106,8 +106,6 @@ export class ProfileComponent implements OnInit {
   morphed: any = [];
   currentUser: any;
   userData: any = {};
-  show = false;
-  showNew = false;
   showConNew = false;
   lowercase: boolean;
   uppercase: boolean;
@@ -149,8 +147,9 @@ export class ProfileComponent implements OnInit {
   //   public setTwoNumberDecimal($event) {
   //     $event.target.value = parseFloat($event.target.value).toFixed(2);
   // }
-
-
+hide = true;
+hideConfirm = true;
+showNew = true;
   duplicateValueCheck = [];
   ngOnDestroy(){
   this.dialog.closeAll();
@@ -601,7 +600,7 @@ export class ProfileComponent implements OnInit {
     this.passwordForm = this.formBuilder.group({
       currentpassword: new FormControl('', myGlobals.passwordVal),
       newpassword: new FormControl('', myGlobals.passwordVal),
-      confirmpassword: new FormControl('', myGlobals.passwordVal),
+      confirmpassword: new FormControl('', myGlobals.passwordVal,),
     }, {
       validator: MustMatch('newpassword', 'confirmpassword'),
     });

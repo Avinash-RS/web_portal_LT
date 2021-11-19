@@ -843,7 +843,7 @@
           border-radius: 50%;
           width: 42px;
           height: 42px;
-          background: #dedede;
+          background: #A8E3F8;
           transition: 0.3s ease-in background;
           // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
           @media only screen and (max-width: 767px) {
@@ -858,7 +858,7 @@
             }
           }
           &:hover {
-            background: rgba(39, 187, 238, 1);
+            background:#27BBEE;
             border: none;
             em {
               color: #ffffff;
