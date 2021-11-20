@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
   //  this.getSpec();
   setTimeout(()=>{
     if(!this.currentUser.is_password_updated){
-      this.toastr.warning("Please change the password")
+      this.toastr.warning("Please change your password to continue")
       this.editPassword(this.passwordDialog)
     }
   },1000)
@@ -688,7 +688,6 @@ showNew = true;
       this.passwordForm.value.newpassword).subscribe((password: any) => {
         if (password.data.get_change_password_updateprofile.success === 'true') {
           Swal.fire(password.data.get_change_password_updateprofile.message);
-          this.toastr.warning("Kindly login again to continue")
           this.services.logout(this.currentUser.user_id, false).subscribe((logout: any) => {
           this.dialog.closeAll();
           this.router.navigate(['/Learner/login']);
