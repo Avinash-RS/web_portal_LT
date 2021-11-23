@@ -82,6 +82,14 @@ export class CourseReportComponent implements OnInit {
   selfscore:string ="0";
   QAscore:string ="0";
   lastWeekSatus:any ="";
+  QAPopoverContent :any = [
+    {ques:"0",score:"0",percentage:"0%"},
+    {ques:"1 to 10",score:"1.25",percentage:"25%"},
+    {ques:"11 to 20",score:"2.5",percentage:"50%"},
+    {ques:"21 to 31",score:"3.75",percentage:"75%"},
+    {ques:">=32",score:"5",percentage:"100%"},
+  ];
+
   constructor(
     private activeRoute: ActivatedRoute, 
     private router:Router, 

@@ -206,7 +206,29 @@
                   </div>
                 </div>
                 <div class="card-foot d-flex align-items-center">
-                   Q&A score is based on the number of relevant questions you ask
+                  <popover-content #QAPopover>
+                    <div class="popoverContainer">
+                      <div class="calculation">Calculation formula</div>
+                      <div>
+                        <table>
+                          <tr>
+                            <th>No. of questions</th>
+                            <th>Score</th>
+                            <th>Percentage</th>
+                          </tr>
+                          <tr *ngFor = "let row of QAPopoverContent">
+                            <td>{{row.ques}}</td>
+                            <td>{{row.score}}</td>
+                            <td>{{row.percentage}}</td>
+                          </tr>
+                        </table> 
+                      </div>
+                    </div>
+                  </popover-content>
+                 <div>
+                  <button class="popover-info" popoverPlacement="right" [popover]="QAPopover"><span><img  src="../../../../assets/images/Group 14025.svg" /></span></button>
+                 </div>
+                   <div>Q&A score is based on the number of relevant questions you ask</div>
                 </div>
         </mat-card>
       </div>
