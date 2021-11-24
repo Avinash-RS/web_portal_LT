@@ -2371,6 +2371,12 @@ export const getLearnerNewCourseReport = gql`
         outoftest2
         test3
         outoftest3
+        test1ObtainedScore
+        test2ObtainedScore
+        test3ObtainedScore
+        test1OutOfScore
+        test2OutOfScore
+        test3OutOfScore
       }
       selfLearning_Card {
         total_no_of_weeks_actual
