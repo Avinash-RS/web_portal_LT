@@ -2112,10 +2112,22 @@
 
 ////INFO BANNER POPUP
 ::ng-deep .dialogContainer {
-  width: 55% !important;
+  width: 82% !important;
   margin: auto;
   // overflow-y: hidden !important;
   //max-height: 85% !important;
+  @media only screen and (min-width: 576px) {
+    width: 50% !important;
+  }
+  @media only screen and (min-width: 720px) {
+    width: 60% !important;
+  }
+  @media only screen and (min-width: 992px) {
+    width: 70% !important;
+  }
+  @media only screen and (min-width: 1140px) {
+    width: 55% !important;
+  }
   .mat-dialog-container {
     border-radius: 0;
     padding: 0 !important;

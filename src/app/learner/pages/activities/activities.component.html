@@ -841,7 +841,7 @@
                   </div>
                 </div>
                 <div class="practicesaction">
-                  <button mat-stroked-button class="practice-btn mt-2" (click)="getEboxURL(lab.labActivity.ebox_attempt_id)">Launch</button>
+                  <button mat-stroked-button [ngClass]="lab.labActivity.status=='In Progress'?'practice-inProg-btn':lab.labActivity.status=='Completed'?'practice-Compl-btn':'practice-btn'" class="mt-2" (click)="getEboxURL(lab.labActivity.ebox_attempt_id)"><em *ngIf="lab.status=='Completed'" class="lxp-reset"></em>Launch</button>
                 </div>
               </div>
             </div>
