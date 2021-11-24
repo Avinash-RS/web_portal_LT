@@ -183,7 +183,7 @@
                             </div>
                         </mat-card-title>
                         <span *ngFor="let res of resDat.childData let mi = index" (load)="mi==moduleHolder?res.expanded=true:res.expanded=false;">
-                            <mat-card-subtitle (click)="moduleExpand(wi,mi,res)" class="d-flex justify-content-start align-items-center tocSubTitle" [ngClass]="(wi===weekHolderUI&&mi==moduleHolder)?'titleSelected':''">
+                            <mat-card-subtitle (click)="moduleExpand(wi,mi,null,res)" class="d-flex justify-content-start align-items-center tocSubTitle" [ngClass]="(wi===weekHolderUI&&mi==moduleHolder)?'titleSelected':''">
                                 <div class="statusColor">
                                     <span *ngIf="res?.status == 'Passed'" class="passColor"><em class="lxp-Right"></em></span>
                                     <span *ngIf="res?.status == 'process'" class="processColor"></span>
@@ -208,6 +208,63 @@
                                     </div>
                                 </div>
                             </mat-card-subtitle>
+                            <div *ngIf="scromApiData.checkLevel">
+                                <span *ngFor="let subData of res.childData let smi = index" (load)="smi==subModuleHolder?subData.expanded=true:subData.expanded=false;">
+                                    <mat-card-subtitle style="margin-left: 20px;" (click)="moduleExpand(wi,mi,smi,subData)" class="d-flex justify-content-start align-items-center tocSubTitle" [ngClass]="(wi===weekHolderUI&&mi==moduleHolder&&smi==subModuleHolder)?'titleSelected':''">
+                                        <div class="statusColor">
+                                            <span *ngIf="subData?.status == 'Passed'" class="passColor"><em class="lxp-Right"></em></span>
+                                            <span *ngIf="subData?.status == 'process'" class="processColor"></span>
+                                            <span *ngIf="subData?.status == null" class="greyColor"></span>
+                                        </div>
+                                        <div class="topicName">
+                                            <h4 *ngIf="subData?.title?.length >= 67" class="moduleName" tooltip="{{subData?.title}}">
+                                                {{subData?.title | slice:0:71}}...</h4>
+                                            <h4 *ngIf="subData?.title?.length < 67" class="moduleName" tooltip="{{subData?.title}}">
+                                                {{subData?.title}}
+                                            </h4>
+                                        </div>
+                                        <!-- <div class="progressBar">
+                                            <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+                                            <span>3/5</span>
+                                        </div> -->
+                                        <div class="arrowExpandCollapse">
+                                            <div>
+                                                <em class="rotate lxp-DownArrow" [ngClass]="subData.expanded?'expand_less':'expand_more'"></em>
+                                                <!-- <em *ngIf="res.expanded" class="lxp-Arrow"></em> -->
+                                                <!-- <mat-icon class="material-icon">{{res.expanded?'expand_less':'expand_more'}}</mat-icon> -->
+                                            </div>
+                                        </div>
+                                    </mat-card-subtitle>
+                                    <mat-card-content *ngIf="(subData.expanded)">
+                                        <div class="bs-vertical-wizard">
+                                            <ul>
+                                                <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of subData?.children; let ti = index">
+                                                    <div *ngIf="wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder" #focuser ></div>
+                                                    <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,wi,ti,mi,smi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
+                                                        <div class="modTitle">
+                                                            <h3 tooltip="{{mod?.title}}">{{mod?.title}}</h3>
+                                                            <!-- <span class="playVideo"><em class="lxp-PlayCircle"></em> Video</span>
+                                                            <span class="videoDuration"><em class="lxp-Clock"></em> 30:00 min</span> -->
+                                                        </div>
+                                                        <span *ngIf="mod?.status === 'Passed'" [ngClass]="mod?.status === 'Passed' ? 'bgGreen' : ''">
+                                                            <em *ngIf="mod?.status === 'Passed'" class="lxp-Right"></em>
+                                                        </span>
+                                                        <span *ngIf="mod?.status === 'process'" [ngClass]="mod?.status === 'process' ? 'bgYellow' : ''">
+                                                            <em *ngIf="mod?.status === 'process'" class="lxp-Timer_Outlined"></em>
+                                                        </span>
+                                                        <span *ngIf="mod?.status === null" [ngClass]="mod?.status === null ? 'bgGrey' : ''"></span>
+                                                        <!-- <em class="ico" [ngClass]="mod?.status === 'Passed' ? 'fa fa-check ico-green' :  mod?.status === 'process' ? 'fa fa-circle ico-yellow' : ''"></em> -->
+                                                        <!-- <span class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, cumque.</span> -->
+                                                        <span class="bookmarkTopic d-flex justify-content-center align-items-center" *ngIf="mod.bookmark===true ">
+                                                            <em class="lxp-bookmark"></em></span>
+                                                    </div>
+                                    </li>
+                                </ul>
+                            </div>
+                                    </mat-card-content>
+                                    </span>
+                            </div>
+                            <div *ngIf="!scromApiData.checkLevel">
                             <mat-card-content *ngIf="(res.expanded)">
                                 <div class="bs-vertical-wizard">
                                     <ul>
@@ -231,13 +288,20 @@
                                                 <span class="bookmarkTopic d-flex justify-content-center align-items-center" *ngIf="mod.bookmark===true ">
                                                     <em class="lxp-bookmark"></em></span>
                                             </div>
-                                        </li>
-                                    </ul>
-                                </div>
+                            </li>
+                        </ul>
+                    </div>
                             </mat-card-content>
+                        </div>
                         </span>
                     </mat-card>
                 </div>
+            </ng-template>
+
+            <ng-template #topiclist [ngIf]="true">
+                bee
+                            
+                        
             </ng-template>
         </div>
         <!-- COURSE PLAYER -->

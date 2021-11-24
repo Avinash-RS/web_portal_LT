@@ -1461,11 +1461,21 @@ export const playerModuleAndTopic = gql`
       moduleIndex
       topicIndex
       week
+      checkLevel
       lastLogIndex
       childData{
         week
         childData{
          title
+          status
+          moduletime
+          topic_len
+          parent
+          _id
+          id
+          module
+          childData{
+            title
           status
           moduletime
           topic_len
@@ -1481,6 +1491,8 @@ export const playerModuleAndTopic = gql`
             user_experience
             bookmark
           }
+          }
+          
         }
       }
     } 
