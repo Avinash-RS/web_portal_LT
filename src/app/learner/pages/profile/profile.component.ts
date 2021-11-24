@@ -596,7 +596,10 @@ showNew = true;
       disableClose: true
     });
     // this.dialog.open(passRef, { disableClose: true,
-    //  });
+    //  }); 
+    if(!this.currentUser.is_password_updated){
+    document.querySelector(".cdk-overlay-backdrop").classList.add("blurBackground");
+    }
     this.passwordForm = this.formBuilder.group({
       currentpassword: new FormControl('', myGlobals.passwordVal),
       newpassword: new FormControl('', myGlobals.passwordVal),
