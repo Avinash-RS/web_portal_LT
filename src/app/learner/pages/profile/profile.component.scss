@@ -1090,3 +1090,8 @@ hr {
     font-size: 15px;
   }
 }
+
+ ::ng-deep .blurBackground {
+  backdrop-filter:blur(10px) !important;
+  background-color:#b5b5b580 !important;
+}
