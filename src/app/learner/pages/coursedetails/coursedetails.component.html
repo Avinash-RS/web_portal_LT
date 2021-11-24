@@ -21,7 +21,7 @@
                      <i class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()"></i>
                     </div>
                     <div class="currentTopic" >
-                     <span title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}">{{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}</span>
+                     <span title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.childData[nextPrevHolder].title}}">{{scromModuleData[weekHolderUI].childData[moduleHolder]?.childData[nextPrevHolder].title}}</span>
                     </div>
                     <div class="rightArrow">                
                      <i class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()"></i>
@@ -44,7 +44,7 @@
                                 <em class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()"></em>
                             </div>
                             <div class="currentTopic" >
-                                <span title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}">{{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}</span>
+                                <span title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.childData[nextPrevHolder].title}}">{{scromModuleData[weekHolderUI].childData[moduleHolder]?.childData[nextPrevHolder].title}}</span>
                             </div>
                             <div class="rightArrow">                
                                 <em class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()"></em>
@@ -64,8 +64,8 @@
                <div class="leftArrow">                
                 <i class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()"></i>
                </div>
-               <div class="currentTopic" title="{{scromModuleData[moduleHolder]?.children[nextPrevHolder].title}}">
-                <span >{{scromModuleData[moduleHolder]?.children[nextPrevHolder].title}}</span>
+               <div class="currentTopic" title="{{scromModuleData[moduleHolder]?.childData[nextPrevHolder].title}}">
+                <span >{{scromModuleData[moduleHolder]?.childData[nextPrevHolder].title}}</span>
                </div>
                <div class="rightArrow">                
                 <i class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()"></i>
@@ -151,7 +151,7 @@
                     <mat-card-content *ngIf="(res.expanded)">
                         <div class="bs-vertical-wizard">
                             <ul>
-                                <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of res?.children; let ti = index">
+                                <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of res?.childData; let ti = index">
                                     <div *ngIf="wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder" #focuser ></div>
                                     <span class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder) ? 'titleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,wi,ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                         {{mod?.title}}
@@ -238,7 +238,7 @@
                                     <mat-card-content *ngIf="(subData.expanded)">
                                         <div class="bs-vertical-wizard">
                                             <ul>
-                                                <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of subData?.children; let ti = index">
+                                                <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of subData?.childData; let ti = index">
                                                     <div *ngIf="wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder" #focuser ></div>
                                                     <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,wi,ti,mi,smi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                         <div class="modTitle">
@@ -268,7 +268,7 @@
                             <mat-card-content *ngIf="(res.expanded)">
                                 <div class="bs-vertical-wizard">
                                     <ul>
-                                        <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of res?.children; let ti = index">
+                                        <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of res?.childData; let ti = index">
                                             <div *ngIf="wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder" #focuser ></div>
                                             <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,wi,ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                 <div class="modTitle">
@@ -298,11 +298,6 @@
                 </div>
             </ng-template>
 
-            <ng-template #topiclist [ngIf]="true">
-                bee
-                            
-                        
-            </ng-template>
         </div>
         <!-- COURSE PLAYER -->
         <div class="videoPlayer" [ngClass]="drawersOpen ? 'halfWidth' : 'fullWidth'">
@@ -361,8 +356,8 @@
                         <div class="curentVideoWeek">Week <span>{{weekHolderUI+1}}</span></div>
                         <div class="currentVideoModuleTopic">
                             <h5>{{scromModuleData[weekHolderUI].childData[moduleHolder].title}}</h5>
-                            <h4 title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}">
-                                {{scromModuleData[weekHolderUI].childData[moduleHolder]?.children[nextPrevHolder].title}}
+                            <h4 title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.childData[nextPrevHolder].title}}">
+                                {{scromModuleData[weekHolderUI].childData[moduleHolder]?.childData[nextPrevHolder].title}}
                             </h4>
                         </div>
                     </div>

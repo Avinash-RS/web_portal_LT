@@ -1482,7 +1482,7 @@ export const playerModuleAndTopic = gql`
           parent
           _id
           id
-          children{
+          childData{
             _id
             title
             link
