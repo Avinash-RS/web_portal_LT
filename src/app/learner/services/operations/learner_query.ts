@@ -1482,6 +1482,9 @@ export const playerModuleAndTopic = gql`
           parent
           _id
           id
+          user_experience
+          bookmark
+          link
           childData{
             _id
             title
