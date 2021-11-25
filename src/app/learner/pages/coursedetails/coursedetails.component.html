@@ -88,14 +88,14 @@
                         <ng-template mat-tab-label>
                             <span class="tabLabel">Course Contents</span>
                         </ng-template>
-                       <div *ngIf="tocContent"></div>
+                       <ng-template [ngTemplateOutlet]="tocContent"></ng-template>
                     </mat-tab>
                   
                     <mat-tab [ngClass]="filterkey == 'Bookmarked' ? 'yes':'no'">
                         <ng-template mat-tab-label>
                             <span class="tabLabel">Bookmarks</span> <span class="labelcount">{{bookmarkedCount}}</span>
                         </ng-template>
-                        <div *ngIf="tocContent"> </div>
+                        <ng-template [ngTemplateOutlet]="tocContent"></ng-template>
                     </mat-tab>
                   
                     <!-- <mat-tab>
@@ -171,7 +171,7 @@
                 </div>
             </ng-template>
 
-            <ng-template #tocContent [ngIf]="true">
+            <ng-template #tocContent>
                 <div class="leftTocContent" *ngIf="filterkey=='Bookmarked'?(filterData.length>0?true:false):(scromModuleData.length>0?true:true);else emptyTOC">
                     <mat-card *ngFor="let resDat of filterkey=='Bookmarked'?filterData:scromModuleData; let wi = index" [ngClass]="resDat.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
                         class="topicCard" >
