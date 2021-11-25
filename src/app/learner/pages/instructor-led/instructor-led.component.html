@@ -92,7 +92,7 @@
             <!-- <span>Held On</span> &nbsp;&nbsp; -->
 
             <span class="sessionDate"><em class="lxp-Duration"></em><span class="dateTitle">Date:</span> {{
-              activityShow?.activity_details.startdate | date: 'dd/MM/yyyy'}}</span>
+              activityShow?.activity_details.startdate | date: 'dd/MM/yyyy hh a'}}</span>
           </div>
           <div class="timingDetails">
             <span *ngIf="activityShow?.activity_details.activitytype != 'Recorded'" class="sessionDuration">
@@ -253,7 +253,7 @@
               <div class="content-container">
                 <h4 class="activity-name" matTooltip="{{los.activity_details.activityname}}">
                   {{los.activity_details.activityname}}</h4>
-                <h5><span class="hover-content">Date:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy'}}</h5>
+                <h5><span class="hover-content">Date:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy hh a'}}</h5>
                 <h5 *ngIf="los.activity_details.activitytype != 'Recorded'"><span class="hover-content">Duration:</span> {{los.duration}}
                 </h5>
                 <h5 *ngIf="los.activity_details.activitytype == 'Recorded'"><span class="hover-content">Module:</span>
