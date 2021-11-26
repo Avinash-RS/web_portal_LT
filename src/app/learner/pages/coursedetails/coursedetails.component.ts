@@ -1089,7 +1089,7 @@ export class CoursedetailsComponent implements OnInit {
 
   bookmarkClick(isbokmarked) {
     this.topicInfo.bookmark = isbokmarked
-    this.Lservice.bookmark(this.getuserid.user_id, this.courseid, this.currentModuleTitle, this.currentTopicTitle, isbokmarked).subscribe((data: any) => {
+    this.Lservice.bookmark(this.getuserid.user_id, this.courseid, this.currentModuleTitle, this.currentTopicTitle, isbokmarked,Number(this.weekHolderUI)+1,this.lastLogIndex).subscribe((data: any) => {
       if (data?.data?.bookmark?.success) {
         this.topicInfo.bookmark = isbokmarked;
         this.filterToc()
