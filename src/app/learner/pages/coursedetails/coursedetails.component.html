@@ -37,7 +37,7 @@
                         <!-- <em (click)="goBack()" class="lxp-Go backArrow"></em> -->
                         <span>{{course?.course_name}}</span>
                     </li>
-                    <ng-container *ngIf="scromApiData?.toc != '0'">
+                    <ng-container *ngIf="scromApiData?.toc != '0' && !scromApiData.checkLevel">
                         <div class="navigation d-flex align-items-center" *ngIf="scromModuleData && filterkey==='All' && drawersOpen===false">
                             <!-- <span class="pipeLine">|</span>  -->
                             <div class="leftArrow">                
