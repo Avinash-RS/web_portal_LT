@@ -597,6 +597,17 @@ showNew = true;
     });
     // this.dialog.open(passRef, { disableClose: true,
     //  }); 
+
+      // Disabling right click
+      const dialogContainer = document.getElementsByClassName('mat-dialog-container');
+      dialogContainer[0].addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+      });
+      const cdkoverlay  =  document.querySelector(".cdk-overlay-backdrop")
+      cdkoverlay.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+      });
+
     if(!this.currentUser.is_password_updated){
     document.querySelector(".cdk-overlay-backdrop").classList.add("blurBackground");
     }
