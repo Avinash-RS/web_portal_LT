@@ -692,14 +692,15 @@
       }
       .passColor, .processColor, .greyColor {
         border-radius: 50%;
-        width: 15px;
-        height: 15px;
+        width: 13px;
+        height: 13px;
         display: flex;
         justify-content: center;
         align-items: center;
         line-height: normal;
         position: relative;
-        top: -3px;
+        left: 1px;
+        top: -4px;
         background-color: white;
       }
       .passColor {
@@ -2140,14 +2141,14 @@
     }
     .bookmarkTopic {
       position: absolute;
-      left: -10px;
+      left: -8px;
       top: 50%;
       transform: translateY(-50%);
       background-color: #ffffff;
       border: 1px solid #CCCCCC;
       border-radius: 50%;
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       em {
         color: #004684;
         font-size: 9px;
