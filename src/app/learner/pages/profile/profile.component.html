@@ -613,8 +613,12 @@
           <em class="icon-color" [ngClass]="hideConfirm ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
         </span>
       </mat-form-field>
-      <div *ngIf="c.confirmpassword.touched && c.confirmpassword.errors">
-        <div class="error">{{'Should be same as password' | translate}}</div>
+      <div *ngIf="c.newpassword.touched && c.newpassword.errors">
+        <div *ngIf="c.newpassword.errors.minlength" class="error">{{'New Password must be atleast 8 characters' | translate}}</div>
+      </div>
+      
+      <div *ngIf="c.confirmpassword.touched && c.confirmpassword.errors && !c.newpassword.errors">
+        <div class="error">{{'Confirm password should be same as new password' | translate}}</div>
       </div>
     </form>
   </mat-dialog-content><br>
