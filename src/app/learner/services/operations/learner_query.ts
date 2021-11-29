@@ -1452,39 +1452,55 @@ export const playerModuleAndTopic = gql`
   query playerModuleAndTopic($contentID: String, $user_id: String) {
     playerModuleAndTopic(contentID: $contentID, user_id: $user_id) {
       message{
-      total_topic_len
-      _id
-      url
-      resourceUrl
-      toc
-      course_id
-      moduleIndex
-      topicIndex
-      week
-      lastLogIndex
-      childData{
+        total_topic_len
+        _id
+        url
+        resourceUrl
+        toc
+        course_id
+        moduleIndex
+        topicIndex
         week
+        checkLevel
+        lastLogIndex
         childData{
-         title
-          status
-          moduletime
-          topic_len
-          parent
-          _id
-          id
-          children{
-            _id
-            title
-            link
-            isVisible
+          week
+          childData{
+           title
             status
+            moduletime
+            topic_len
+            parent
+            _id
+            id
             user_experience
             bookmark
+            module
+            childData{
+              title
+            status
+            moduletime
+            topic_len
+            parent
+            _id
+            id
+            user_experience
+              bookmark
+              link
+            childData{
+              _id
+              title
+              link
+              isVisible
+              status
+              user_experience
+              bookmark
+            }
+            }
           }
         }
       }
-    } 
-      success
+        success  
     }
   }
 `;

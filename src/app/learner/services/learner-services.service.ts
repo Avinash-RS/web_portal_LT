@@ -1093,7 +1093,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  bookmark(user_id,course_id,module,topic,bookmark) {
+  bookmark(user_id,course_id,module,topic,bookmark,week,lastLogIndex) {
     return this.Apollo.query({
       query: set_bookmark,
       variables: {
@@ -1101,7 +1101,9 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
         course_id,
         module,
         topic,
-        bookmark
+        bookmark,
+        week,
+        lastLogIndex
       }
     });
   }

@@ -240,6 +240,7 @@ export class CoursedetailsComponent implements OnInit {
   secretKey = "(!@#Passcode!@#)";
   bookmarkedCount: any;
   longDesc: string;
+  subModuleHolder: number = null;
 
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
@@ -423,7 +424,8 @@ export class CoursedetailsComponent implements OnInit {
       this.performOverLay = false;
     });
     let resumeInit = true;
-    this.socketService.socketReceiver()
+    if(!resumeInit)
+    {this.socketService.socketReceiver()
     this.socketEmitReciver = this.socketService.change.subscribe((result:any) => {
       console.log(result.data)
       if (result && result.eventId && result.eventId.length && result.data.childData.length > 0) {
@@ -444,21 +446,21 @@ export class CoursedetailsComponent implements OnInit {
           // }
          
           if (this.topiccurrentPage !== result.data.resumeSubContent ||
-            result.data.childData[result.data.week-1].childData[result.data.resumeContent].children[result.data.resumeSubContent]?.status !== this.topicPageStatus) {
+            result.data.childData[result.data.week-1].childData[result.data.resumeContent].childData[result.data.resumeSubContent]?.status !== this.topicPageStatus) {
               console.log(result.data, 'helllllllllllllo');
               this.scromModuleData = result.data.childData;
-              this.moduleExpand(this.weekHolder, this.moduleHolder);
-              if((this.scromApiData.topicIndex == null||this.scromApiData.topicIndex == "0") && (this.scromApiData.moduleIndex == null||this.scromApiData.moduleIndex == "0") && this.scromModuleData[0].childData[0].status == null && this.scromModuleData[0].childData[0].children[0].status == null){
+              this.moduleExpand(this.weekHolder, this.moduleHolder,this.scromApiData.checkLevel?this.subModuleHolder:null);
+              if((this.scromApiData.topicIndex == null||this.scromApiData.topicIndex == "0") && (this.scromApiData.moduleIndex == null||this.scromApiData.moduleIndex == "0") && this.scromModuleData[0].childData[0].status == null && this.scromModuleData[0].childData[0].childData[0].status == null){
                 this.scromModuleData[0].childData[0].status = 'process'
-                this.scromModuleData[0].childData[0].children[0].status = 'process'
+                this.scromModuleData[0].childData[0].childData[0].status = 'process'
               }
             this.currentPage = Number(result.data.resumeContent);
             this.topiccurrentPage = Number(result.data.resumeSubContent);
             this.weekHolder = result.data.week - 1;
-            this.topicPageStatus = result.data.childData[this.weekHolder].childData[this.currentPage].children[this.topiccurrentPage]?.status
+            this.topicPageStatus = result.data.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]?.status
             this.topicPageStatus = this.topicPageStatus?this.topicPageStatus:"process";
             this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
-            this.topicInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage].children[this.topiccurrentPage]
+            this.topicInfo = this.scromApiData.checkLevel?this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage]:this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]
             // if (resumeInit) {
               
             //   this.nextPrevHolder = this.topiccurrentPage;
@@ -470,21 +472,21 @@ export class CoursedetailsComponent implements OnInit {
             // }
             
           }
-          this.moduleExpand(this.weekHolderUI, Number(this.moduleHolder));
+          this.moduleExpand(this.weekHolderUI, Number(this.moduleHolder),this.scromApiData.checkLevel?this.subModuleHolder:null);
           // if ((this.weekHolder !==0 && this.moduleHolder !== 0) || (this.nextPrevHolder !== 0)) {
           //   this.isprevEnable = false;
           // }
           // if ((((this.weekHolder) !== this.scromModuleData.length - 1)||(this.moduleHolder) !== this.scromModuleData[this.weekHolder-1].childData.length - 1)
-          //   || ((this.nextPrevHolder) !== this.scromModuleData[this.weekHolder-1].childData[this.scromModuleData[this.weekHolder-1].length - 1].children.length - 1)) {
+          //   || ((this.nextPrevHolder) !== this.scromModuleData[this.weekHolder-1].childData[this.scromModuleData[this.weekHolder-1].length - 1].childData.length - 1)) {
           //   this.isNextEnable = false;
           // }
 
           this.checkLastFirstIndexReached()
            
           this.scromModuleData.forEach(childData => {
-            if (childData && childData.children) {
-              childData.children.forEach(subChild => {
-                if (subChild && subChild.children && subChild.children.length > 0) {
+            if (childData && childData.childData) {
+              childData.childData.forEach(subChild => {
+                if (subChild && subChild.childData && subChild.childData.length > 0) {
                   this.treeCourse = true;
                 } else {
                   this.treeCourse = false;
@@ -501,7 +503,7 @@ export class CoursedetailsComponent implements OnInit {
         this.isprevEnable = true;
         this.isNextEnable = false;
       }
-    });
+    });}
     this.getCoursePlayerStatus();
     // this.getEboxURL();
   }
@@ -522,7 +524,7 @@ export class CoursedetailsComponent implements OnInit {
     }
     let lastweekIndex  = this.scromModuleData.length - 1
     let lastweekmoduleIndex = this.scromModuleData[lastweekIndex].childData.length -1
-    let lastweekmoduletopicIndex = this.scromModuleData[lastweekIndex].childData[lastweekmoduleIndex].children.length - 1;
+    let lastweekmoduletopicIndex = this.scromModuleData[lastweekIndex].childData[lastweekmoduleIndex].childData.length - 1;
     //check last week,module,topic
     if(
       (this.weekHolder == lastweekIndex) && (this.moduleHolder == lastweekmoduleIndex) && (this.nextPrevHolder == lastweekmoduletopicIndex)
@@ -627,7 +629,7 @@ export class CoursedetailsComponent implements OnInit {
         if (this.topiccurrentPage <= this.getTopicLengthofModule) {
 
           this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
-          this.gettopicLink = this.scromModuleData[this.weekHolder].childData[this.currentPage].children[this.topiccurrentPage];
+          this.gettopicLink = this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage];
           this.moduleSatusCheck = this.moduleInfo.status ? this.moduleInfo.status : 'process';
           this.currentTopicTitle = this.gettopicLink.title;
           this.currentModuleTitle = this.moduleInfo.title;
@@ -643,9 +645,9 @@ export class CoursedetailsComponent implements OnInit {
       }
 
     }
-    // this.gettopicLink = this.scromModuleData[this.currentPage - 1]?.children[this.topiccurrentPage];
-    // const childData = this.scromModuleData[this.moduleLenth - 1]?.children;
-    // const childlength = this.scromModuleData[this.moduleLenth - 1]?.children.length;
+    // this.gettopicLink = this.scromModuleData[this.currentPage - 1]?.childData[this.topiccurrentPage];
+    // const childData = this.scromModuleData[this.moduleLenth - 1]?.childData;
+    // const childlength = this.scromModuleData[this.moduleLenth - 1]?.childData.length;
     // if (this.gettopicLink.id === childData[childlength - 1].id) {
     //   this.ratingPopup();
     // }
@@ -666,7 +668,7 @@ export class CoursedetailsComponent implements OnInit {
       if (this.currentPage - 1 >= 0 && this.topiccurrentPage === 0) {
         this.currentPage = this.currentPage - 1;
         this.moduleHolder = this.currentPage;
-        this.topiccurrentPage = this.scromModuleData[this.weekHolder].childData[this.currentPage].children.length - 1;
+        this.topiccurrentPage = this.scromModuleData[this.weekHolder].childData[this.currentPage].childData.length - 1;
         this.nextPrevHolder = this.topiccurrentPage;
         this.getTopicLengthofModule = this.scromModuleData[this.weekHolder].childData[this.currentPage]?.topic_len;
       } else {
@@ -674,7 +676,7 @@ export class CoursedetailsComponent implements OnInit {
           this.weekHolder = this.weekHolderUI = this.weekHolder - 1;
           this.moduleHolder = this.scromModuleData[this.weekHolder].childData.length - 1;
           this.currentPage = Number(this.moduleHolder);
-          this.topiccurrentPage = this.scromModuleData[this.weekHolder].childData[this.currentPage].children.length - 1;
+          this.topiccurrentPage = this.scromModuleData[this.weekHolder].childData[this.currentPage].childData.length - 1;
           this.nextPrevHolder = this.topiccurrentPage;
         }else{
         this.topiccurrentPage = this.topiccurrentPage - 1;
@@ -683,7 +685,7 @@ export class CoursedetailsComponent implements OnInit {
       }
       if (this.topiccurrentPage >= 0) {
         this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
-        this.gettopicLink = this.scromModuleData[this.weekHolder].childData[this.currentPage].children[this.topiccurrentPage];
+        this.gettopicLink = this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage];
         this.moduleSatusCheck = this.moduleInfo.status ? this.moduleInfo.status : 'process';
         this.currentTopicTitle = this.gettopicLink.title;
         this.currentModuleTitle = this.moduleInfo.title;
@@ -733,6 +735,8 @@ export class CoursedetailsComponent implements OnInit {
       if(!this.checkDetails?.fromSuggestion)
       {this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : Number(this.scromApiData.topicIndex);
       this.moduleHolder = this.currentPage = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
+      if(this.scromApiData.checkLevel)
+      {this.subModuleHolder = this.scromApiData.moduleIndex == null ? 0 : 0}//Number(this.scromApiData.submoduleIndex);}
       this.weekHolder  = this.weekHolderUI = this.scromApiData.week - 1;}
       else{
         this.nextPrevHolder = this.topiccurrentPage = Number(this.checkDetails.topicIndex);
@@ -741,22 +745,22 @@ export class CoursedetailsComponent implements OnInit {
       }
       // this.scromModuleData[this.moduleHolder].expanded = true;
       this.oldIdx = this.moduleHolder;
-      this.topicInfo = this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].children[this.nextPrevHolder]
+      this.topicInfo = this.scromApiData.checkLevel?this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].childData[this.nextPrevHolder]:this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].childData[this.nextPrevHolder]
       this.topicPageStatus = this.topicInfo.status
-      this.moduleExpand(this.weekHolder, this.moduleHolder);
+      this.moduleExpand(this.weekHolder, this.moduleHolder,this.scromApiData.checkLevel?this.subModuleHolder:null);
       setTimeout(() => { 
         if(this.weekHolder>0 )
         this.inputEl ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" }) : '' 
       }, 4000);
       const moduleTitle = encodeURIComponent(this.scromApiData.childData[this.weekHolder].childData[this.currentPage].title);
-      const topicTitle = encodeURIComponent(this.scromApiData.childData[this.weekHolder].childData[this.currentPage].children[this.topiccurrentPage].title);
+      const topicTitle = encodeURIComponent(this.scromApiData.checkLevel?this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage].title:this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage].title);
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
       this.currentModuleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].title;
-      this.currentTopicTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].children[this.topiccurrentPage].title;
+      this.currentTopicTitle = this.topicInfo.title//this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage].title;
 
-      // if((this.scromApiData.topicIndex == null||this.scromApiData.topicIndex == "0") && (this.scromApiData.moduleIndex == null||this.scromApiData.moduleIndex == "0") && this.scromApiData.childData[0].childData[0].status == null && this.scromApiData.childData[0].childData[0].children[0].status == null){
+      // if((this.scromApiData.topicIndex == null||this.scromApiData.topicIndex == "0") && (this.scromApiData.moduleIndex == null||this.scromApiData.moduleIndex == "0") && this.scromApiData.childData[0].childData[0].status == null && this.scromApiData.childData[0].childData[0].childData[0].status == null){
       //   this.scromModuleData[0].childData[0].status = 'process'
-      //   this.scromModuleData[0].childData[0].children[0].status = 'process'
+      //   this.scromModuleData[0].childData[0].childData[0].status = 'process'
       // }
       let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
       if(this.checkDetails?.fromSuggestion){
@@ -765,7 +769,7 @@ export class CoursedetailsComponent implements OnInit {
           this.courseid + '&user_id=' + id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.checkDetails.url +
           '&module_status=' + 'process&week='+ (Number(this.checkDetails.week))
-          + '&module=' + this.checkDetails.moduleName + '&topic=' + this.checkDetails.topicName + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
+          + '&module=' + this.checkDetails.moduleName + '&topic=' + this.checkDetails.topicName + '&subModuleIndex=' + this.subModuleHolder + '&lastLogIndex=' + this.lastLogIndex);
       }
       else
       {this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
@@ -773,14 +777,14 @@ export class CoursedetailsComponent implements OnInit {
           this.courseid + '&user_id=' + id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.scromApiData.url +
           '&module_status=' + 'process&week='+ (Number(this.weekHolder) + 1)
-          + '&module=' + moduleTitle + '&topic=' + topicTitle + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
+          + '&module=' + moduleTitle + '&topic=' + topicTitle + '&subModuleIndex=' + this.subModuleHolder + '&lastLogIndex=' + this.lastLogIndex);
 }
       this.playerTopicLen = this.scromApiData.total_topic_len;
       // tree level
       this.scromModuleData.forEach(childData => {
-        if (childData && childData.children) {
-          childData.children.forEach(subChild => {
-            if (subChild && subChild.children && subChild.children.length > 0) {
+        if (childData && childData.childData) {
+          childData.childData.forEach(subChild => {
+            if (subChild && subChild.childData && subChild.childData.length > 0) {
               // Check TOC Weekwise or module topic wise
               this.treeCourse = true;
             } else {
@@ -789,12 +793,13 @@ export class CoursedetailsComponent implements OnInit {
           });
         }
       });
-
+      if(!this.scromApiData.checkLevel){
       this.checkLastFirstIndexReached()
+      }
       this.filterToc();
     });
   }
-  playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, weekIndex, topindex, moduleIdx) {
+  playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, weekIndex, topindex, moduleIdx, smi?) {
     this.weekHolder = weekIndex;
     this.weekHolderUI = weekIndex;
     this.currentTopicTitle = topicName;
@@ -809,13 +814,13 @@ export class CoursedetailsComponent implements OnInit {
     this.currentPage = Number(moduleIdx);
     this.isprevEnable = true;
     this.isNextEnable = true;
-    this.topicInfo = this.scromApiData.childData[weekIndex].childData[moduleIdx].children[topindex]
+    this.topicInfo = smi>=0?this.scromApiData.childData[weekIndex].childData[moduleIdx].childData[smi].childData[topindex]:this.scromApiData.childData[weekIndex].childData[moduleIdx].childData[topindex]
     let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
       (environment.scormUrl + '/scormPlayer.html?content_id=' +
         this.courseid + '&user_id=' + id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
         + '&module_status=' + this.moduleSatusCheck
-        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (Number(this.weekHolder) + 1) + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
+        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (Number(this.weekHolder) + 1) + '&subModuleIndex=' + this.subModuleHolder + '&lastLogIndex=' + this.lastLogIndex);
     this.checkLastFirstIndexReached()
   }
 
@@ -955,12 +960,17 @@ export class CoursedetailsComponent implements OnInit {
   }
 
 
-  moduleExpand(Windex, mindex, spotval?) {
+  moduleExpand(Windex, mindex, smindex, spotval?) {
     // console.log(spotval)
     if(spotval){
     spotval.expanded = spotval.expanded ? false : true;
     }else{
-      this.scromModuleData[Windex].childData[mindex].expanded = true;
+      if(this.scromApiData.checkLevel){
+        this.scromModuleData[Windex].childData[mindex].childData[smindex].expanded = true;
+      }else{
+        this.scromModuleData[Windex].childData[mindex].expanded = true;
+      }
+      
     }
     // if(this.filterkey === "All"){ 
     //   if (mindex !== this.oldIdx) {
@@ -1079,7 +1089,7 @@ export class CoursedetailsComponent implements OnInit {
 
   bookmarkClick(isbokmarked) {
     this.topicInfo.bookmark = isbokmarked
-    this.Lservice.bookmark(this.getuserid.user_id, this.courseid, this.currentModuleTitle, this.currentTopicTitle, isbokmarked).subscribe((data: any) => {
+    this.Lservice.bookmark(this.getuserid.user_id, this.courseid, this.currentModuleTitle, this.currentTopicTitle, isbokmarked,Number(this.weekHolderUI)+1,this.lastLogIndex).subscribe((data: any) => {
       if (data?.data?.bookmark?.success) {
         this.topicInfo.bookmark = isbokmarked;
         this.filterToc()
@@ -1155,6 +1165,7 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
   filterToc() {
+    if(this.scromApiData.checkLevel){return false}
     this.bookmarkedCount = 0;
     this.bkup_Toc = JSON.parse(JSON.stringify(this.scromModuleData));
     this.filterData = []
@@ -1162,15 +1173,15 @@ export class CoursedetailsComponent implements OnInit {
       this.bkup_Toc.forEach((week,wi) => {
         let modulefilter = [];
         week.childData.forEach((module,mi) => {
-        if (module.children.length > 0) {
+        if (module.childData.length > 0) {
           let markedTopcs;
-          markedTopcs = module.children.filter((topic) => {
+          markedTopcs = module.childData.filter((topic) => {
             return topic?.bookmark === true;
           });
           if (markedTopcs.length > 0) {
             this.bookmarkedCount += markedTopcs.length;
-            module.children = []
-            module.children = markedTopcs;
+            module.childData = []
+            module.childData = markedTopcs;
             modulefilter.push(module);
           }
         }

@@ -679,6 +679,73 @@
   margin: 0;
   position: relative;
   flex-wrap: wrap;
+  &.tocSubSubtitle {
+    flex-wrap: nowrap;
+    .statusColor {
+      width: 5%;
+      position: relative;
+      @media only screen and (min-width: 720px) {
+        width: 8%;
+      }
+      @media only screen and (min-width: 992px) {
+        width: 5%;
+      }
+      .passColor, .processColor, .greyColor {
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: normal;
+        position: relative;
+        top: -3px;
+        background-color: white;
+      }
+      .passColor {
+        border: 1px solid #39b54a;
+        em {
+          color: #39b54a;
+          font-size: 5px;
+          line-height: normal;
+        }
+      }
+      .processColor {
+        border: 1px solid #f7941e;
+      }
+      .greyColor {
+        border: 1px solid #C9C9C9;
+      }
+    }
+    .subModuleExpandCollapse {
+      width: 5%;
+      @media only screen and (min-width: 720px) {
+        width: 8%;
+      }
+      @media only screen and (min-width: 992px) {
+        width: 5%;
+      }
+      em {
+        color: #5E5E5E;
+      }
+    }
+    .topicName {
+      width: 88%;
+      margin-left: 2%;
+      @media only screen and (min-width: 720px) {
+        width: 82%;
+      }
+      @media only screen and (min-width: 992px) {
+        width: 88%;
+      }
+      @media only screen and (min-width: 1540px) {
+        margin-left: 0;
+      }
+      h4 {
+        font-weight: 500;
+      }
+    }
+  }
   .statusColor {
     width: 5%;
     position: relative;
