@@ -1080,8 +1080,8 @@ export const user_experience = gql`
   }
 `;
 export const set_bookmark = gql`
-  mutation bookmark($user_id:String!,$course_id:String,$module:String,$topic:String,$bookmark:Boolean) {
-    bookmark(user_id:$user_id,course_id:$course_id,module:$module,topic:$topic,bookmark:$bookmark) {
+  mutation bookmark($user_id:String!,$course_id:String,$module:String,$topic:String,$bookmark:Boolean,$week:String,$lastLogIndex:String,$ModuleIndex:String,$submoduleIndex:String,$topicIndex:String) {
+    bookmark(user_id:$user_id,course_id:$course_id,module:$module,topic:$topic,bookmark:$bookmark,week:$week,lastLogIndex:$lastLogIndex,ModuleIndex:$ModuleIndex,submoduleIndex:$submoduleIndex,topicIndex:$topicIndex) {
       message
       success
     }

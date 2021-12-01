@@ -68,7 +68,7 @@
       </mat-card-subtitle> -->
       <mat-card-content *ngIf="(res.expanded)">
         <mat-vertical-stepper [linear]="isLeaner" [ngClass]="res?.title?.length > 39?'headerDown': ''">
-            <ng-container *ngFor="let mod of res?.children; let j = index">
+            <ng-container *ngFor="let mod of res?.childData; let j = index">
                 <mat-step
                     [aria-labelledby]="mod?.status === 'Passed' ? 'colgreen' :  mod?.status === 'process' ? 'colYellow' : 'colWhite'">
                     <ng-template matStepLabel>

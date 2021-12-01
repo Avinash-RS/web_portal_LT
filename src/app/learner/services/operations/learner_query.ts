@@ -1455,6 +1455,7 @@ export const playerModuleAndTopic = gql`
         total_topic_len
         _id
         url
+        module
         resourceUrl
         toc
         course_id
