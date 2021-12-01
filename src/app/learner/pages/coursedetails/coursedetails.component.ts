@@ -423,9 +423,10 @@ export class CoursedetailsComponent implements OnInit {
       this.selectedTabIndex = emitedData.selectedTabIndex;
       this.performOverLay = false;
     });
-    let resumeInit = true;
+    let resumeInit = false;
     if(!resumeInit)
-    {this.socketService.socketReceiver()
+    {console.log("een");
+    this.socketService.socketReceiver()
     this.socketEmitReciver = this.socketService.change.subscribe((result:any) => {
       console.log(result.data)
       if (result && result.eventId && result.eventId.length && result.data.childData.length > 0) {
@@ -456,11 +457,12 @@ export class CoursedetailsComponent implements OnInit {
               }
             this.currentPage = Number(result.data.resumeContent);
             this.topiccurrentPage = Number(result.data.resumeSubContent);
+            this.subModuleHolder = Number(result.data.module);
             this.weekHolder = result.data.week - 1;
             this.topicPageStatus = result.data.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]?.status
             this.topicPageStatus = this.topicPageStatus?this.topicPageStatus:"process";
             this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
-            this.topicInfo = this.scromApiData.checkLevel?this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage]:this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]
+            this.topicInfo = this.scromApiData.checkLevel?this.scromModuleData[this.weekHolder].childData[this.subModuleHolder].childData[this.currentPage].childData[this.topiccurrentPage]:this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]
             // if (resumeInit) {
               
             //   this.nextPrevHolder = this.topiccurrentPage;
@@ -472,7 +474,7 @@ export class CoursedetailsComponent implements OnInit {
             // }
             
           }
-          this.moduleExpand(this.weekHolderUI, Number(this.moduleHolder),this.scromApiData.checkLevel?this.subModuleHolder:null);
+          // this.moduleExpand(this.weekHolderUI, Number(this.moduleHolder),this.scromApiData.checkLevel?this.subModuleHolder:null);
           // if ((this.weekHolder !==0 && this.moduleHolder !== 0) || (this.nextPrevHolder !== 0)) {
           //   this.isprevEnable = false;
           // }
@@ -640,7 +642,7 @@ export class CoursedetailsComponent implements OnInit {
               this.courseid + '&user_id=' + id + '&user_obj_id=' +
               this.getuserid._id + '&path=' + this.gettopicLink.link +
               '&module_status=' + this.moduleSatusCheck
-              + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Next&week=' + (this.weekHolder + 1) + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
+              + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Next&week=' + (this.weekHolder + 1) + '&submoduleIndex=' +null+'&moduleIndex=' + this.topiccurrentPage + '&topicIndex=' + this.nextPrevHolder+ '&lastLogIndex=' + this.lastLogIndex);
         }
       }
 
@@ -696,7 +698,7 @@ export class CoursedetailsComponent implements OnInit {
             this.courseid + '&user_id=' + id + '&user_obj_id=' +
             this.getuserid._id + '&path=' + this.gettopicLink.link +
             '&module_status=' + this.moduleSatusCheck
-            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Prev&week=' +(this.weekHolder+1)+ '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
+            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Prev&week=' +(this.weekHolder+1)+ '&submoduleIndex=' +null+ '&moduleIndex=' + this.topiccurrentPage + '&topicIndex=' + this.nextPrevHolder+'&lastLogIndex=' + this.lastLogIndex);
 
       }
 
@@ -736,7 +738,7 @@ export class CoursedetailsComponent implements OnInit {
       {this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : Number(this.scromApiData.topicIndex);
       this.moduleHolder = this.currentPage = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
       if(this.scromApiData.checkLevel)
-      {this.subModuleHolder = this.scromApiData.moduleIndex == null ? 0 : 0}//Number(this.scromApiData.submoduleIndex);}
+      {this.subModuleHolder = this.scromApiData.module == null ? 0 : Number(this.scromApiData.module);}
       this.weekHolder  = this.weekHolderUI = this.scromApiData.week - 1;}
       else{
         this.nextPrevHolder = this.topiccurrentPage = Number(this.checkDetails.topicIndex);
@@ -745,15 +747,15 @@ export class CoursedetailsComponent implements OnInit {
       }
       // this.scromModuleData[this.moduleHolder].expanded = true;
       this.oldIdx = this.moduleHolder;
-      this.topicInfo = this.scromApiData.checkLevel?this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].childData[this.nextPrevHolder]:this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].childData[this.nextPrevHolder]
+      this.topicInfo = this.scromApiData.checkLevel?this.scromApiData.childData[this.weekHolder].childData[this.subModuleHolder].childData[this.moduleHolder].childData[this.nextPrevHolder]:this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].childData[this.nextPrevHolder]
       this.topicPageStatus = this.topicInfo.status
       this.moduleExpand(this.weekHolder, this.moduleHolder,this.scromApiData.checkLevel?this.subModuleHolder:null);
       setTimeout(() => { 
         if(this.weekHolder>0 )
         this.inputEl ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" }) : '' 
       }, 4000);
-      const moduleTitle = encodeURIComponent(this.scromApiData.childData[this.weekHolder].childData[this.currentPage].title);
-      const topicTitle = encodeURIComponent(this.scromApiData.checkLevel?this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage].title:this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage].title);
+      const moduleTitle = this.scromApiData.checkLevel?encodeURIComponent(this.scromApiData.childData[this.weekHolder].childData[this.subModuleHolder].childData[this.currentPage].title):encodeURIComponent(this.scromApiData.childData[this.weekHolder].childData[this.currentPage].title);
+      const topicTitle = encodeURIComponent(this.scromApiData.checkLevel?this.scromApiData.childData[this.weekHolder].childData[this.subModuleHolder].childData[this.currentPage].childData[this.topiccurrentPage].title:this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage].title);
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
       this.currentModuleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].title;
       this.currentTopicTitle = this.topicInfo.title//this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage].title;
@@ -768,16 +770,16 @@ export class CoursedetailsComponent implements OnInit {
         (environment.scormUrl + '/scormPlayer.html?content_id=' +
           this.courseid + '&user_id=' + id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.checkDetails.url +
-          '&module_status=' + 'process&week='+ (Number(this.checkDetails.week))
-          + '&module=' + this.checkDetails.moduleName + '&topic=' + this.checkDetails.topicName + '&subModuleIndex=' + this.subModuleHolder + '&lastLogIndex=' + this.lastLogIndex);
+          '&module_status=' + 'process&week='+ (Number(this.checkDetails.week)).toString()
+          + '&module=' + this.checkDetails.moduleName + '&topic=' + this.checkDetails.topicName + '&ModuleIndex=' + this.moduleHolder + '&submoduleIndex=' + (this.scromApiData.checkLevel?this.subModuleHolder.toString():'null').toString() + '&topicIndex=' + this.nextPrevHolder+ '&lastLogIndex=' + this.lastLogIndex);
       }
       else
       {this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
         (environment.scormUrl + '/scormPlayer.html?content_id=' +
           this.courseid + '&user_id=' + id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.scromApiData.url +
-          '&module_status=' + 'process&week='+ (Number(this.weekHolder) + 1)
-          + '&module=' + moduleTitle + '&topic=' + topicTitle + '&subModuleIndex=' + this.subModuleHolder + '&lastLogIndex=' + this.lastLogIndex);
+          '&module_status=' + 'process&week='+ (Number(this.weekHolder) + 1).toString()
+          + '&module=' + moduleTitle + '&topic=' + topicTitle + '&ModuleIndex=' + this.moduleHolder + ('&submoduleIndex=' + this.scromApiData.checkLevel?this.subModuleHolder.toString():'null').toString() + '&topicIndex=' + this.nextPrevHolder+ '&lastLogIndex=' + this.lastLogIndex);
 }
       this.playerTopicLen = this.scromApiData.total_topic_len;
       // tree level
@@ -806,7 +808,9 @@ export class CoursedetailsComponent implements OnInit {
     this.currentModuleTitle = moduleName
     this.topicPageStatus = topicStatus;
     this.moduleSatusCheck = moduleStatus ? moduleStatus : 'process';
-    const encodedModuleName = encodeURIComponent(moduleName);
+    if(smi>=0)
+    {this.subModuleHolder = smi}
+    const encodedModuleName = smi>=0?encodeURIComponent(this.scromApiData.childData[weekIndex].childData[moduleIdx].childData[smi].title):encodeURIComponent(moduleName);
     const encodedTopicName = encodeURIComponent(topicName);
     this.nextPrevHolder = topindex;
     this.topiccurrentPage = this.nextPrevHolder
@@ -814,14 +818,18 @@ export class CoursedetailsComponent implements OnInit {
     this.currentPage = Number(moduleIdx);
     this.isprevEnable = true;
     this.isNextEnable = true;
-    this.topicInfo = smi>=0?this.scromApiData.childData[weekIndex].childData[moduleIdx].childData[smi].childData[topindex]:this.scromApiData.childData[weekIndex].childData[moduleIdx].childData[topindex]
+    this.topicInfo = smi>=0?this.scromApiData.childData[weekIndex].childData[smi].childData[moduleIdx].childData[topindex]:this.scromApiData.childData[weekIndex].childData[moduleIdx].childData[topindex]
     let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
       (environment.scormUrl + '/scormPlayer.html?content_id=' +
         this.courseid + '&user_id=' + id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
         + '&module_status=' + this.moduleSatusCheck
-        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (Number(this.weekHolder) + 1) + '&subModuleIndex=' + this.subModuleHolder + '&lastLogIndex=' + this.lastLogIndex);
+        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (Number(this.weekHolder) + 1) +  '&ModuleIndex=' + this.moduleHolder + '&submoduleIndex=' + (this.scromApiData.checkLevel?this.subModuleHolder.toString():'null').toString() + '&topicIndex=' + this.nextPrevHolder+  '&lastLogIndex=' + this.lastLogIndex);
     this.checkLastFirstIndexReached()
+    console.log(environment.scormUrl + '/scormPlayer.html?content_id=' +
+    this.courseid + '&user_id=' + id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
+    + '&module_status=' + this.moduleSatusCheck
+    + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (Number(this.weekHolder) + 1) +  '&ModuleIndex=' + this.moduleHolder + '&submoduleIndex=' + (this.scromApiData.checkLevel?this.subModuleHolder.toString():'null').toString() + '&topicIndex=' + this.nextPrevHolder+  '&lastLogIndex=' + this.lastLogIndex)
   }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {
@@ -961,11 +969,14 @@ export class CoursedetailsComponent implements OnInit {
 
 
   moduleExpand(Windex, mindex, smindex, spotval?) {
-    // console.log(spotval)
+    console.log(spotval)
+    
     if(spotval){
     spotval.expanded = spotval.expanded ? false : true;
     }else{
       if(this.scromApiData.checkLevel){
+        this.scromModuleData[Windex].expanded = true;
+        this.scromModuleData[Windex].childData[mindex].expanded = true;
         this.scromModuleData[Windex].childData[mindex].childData[smindex].expanded = true;
       }else{
         this.scromModuleData[Windex].childData[mindex].expanded = true;
@@ -1089,7 +1100,7 @@ export class CoursedetailsComponent implements OnInit {
 
   bookmarkClick(isbokmarked) {
     this.topicInfo.bookmark = isbokmarked
-    this.Lservice.bookmark(this.getuserid.user_id, this.courseid, this.currentModuleTitle, this.currentTopicTitle, isbokmarked,Number(this.weekHolderUI)+1,this.lastLogIndex).subscribe((data: any) => {
+    this.Lservice.bookmark(this.getuserid.user_id, this.courseid, this.currentModuleTitle, this.currentTopicTitle, isbokmarked,Number(this.weekHolderUI)+1,this.lastLogIndex,this.moduleHolder,this.subModuleHolder,this.nextPrevHolder).subscribe((data: any) => {
       if (data?.data?.bookmark?.success) {
         this.topicInfo.bookmark = isbokmarked;
         this.filterToc()
