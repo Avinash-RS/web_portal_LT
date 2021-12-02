@@ -55,8 +55,6 @@ setAuthentication(){
   let userDetail =JSON.parse(localStorage.getItem('UserDetails'))
   userDetail['specific_report_value'] = Math.floor(Math.random() * 1000000000).toString()
   localStorage.setItem('UserDetails', JSON.stringify(userDetail));
-  setTimeout(()=>{
     this.router.navigate(['/Learner/MyCourse']);
-  },1000)
 }
 }
