@@ -35,6 +35,7 @@ import { GoogleAnalyticsService } from '@learner/services/google-analytics.servi
 import {GtagModule} from "angular-gtag";
 import { environment } from '@env/environment';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { RedirectionComponent } from './redirection/redirection.component';
 
 // import { ChartsModule } from 'ng2-charts';
 
@@ -53,7 +54,8 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     AlertComponentComponent,
     // DialogComponent,
     NotFoundComponent,
-    KnowledgePreviewComponent
+    KnowledgePreviewComponent,
+    RedirectionComponent
     ],
   imports: [
     MaterialModule,
