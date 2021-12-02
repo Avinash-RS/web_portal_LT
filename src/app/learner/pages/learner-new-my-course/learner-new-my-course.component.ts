@@ -360,7 +360,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
-
+      debugger;
     this.userDetailes = this.gs.checkLogout();
     if(!this.userDetailes?.is_password_updated){
       this.router.navigate(['/Learner/profile']);
