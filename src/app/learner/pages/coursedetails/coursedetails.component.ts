@@ -241,6 +241,7 @@ export class CoursedetailsComponent implements OnInit {
   bookmarkedCount: any;
   longDesc: string;
   subModuleHolder: number = null;
+  submoduleTitle: any;
 
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
@@ -457,8 +458,12 @@ export class CoursedetailsComponent implements OnInit {
               }
             this.currentPage = Number(result.data.resumeContent);
             this.topiccurrentPage = Number(result.data.resumeSubContent);
-            this.subModuleHolder = Number(result.data.module);
             this.weekHolder = result.data.week - 1;
+            if(this.scromApiData.checkLevel)
+            {
+              this.subModuleHolder = Number(result.data.module);
+              this.submoduleTitle = this.scromApiData.childData[this.weekHolder].childData[this.subModuleHolder].childData[this.currentPage].title
+            }
             this.topicPageStatus = result.data.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]?.status
             this.topicPageStatus = this.topicPageStatus?this.topicPageStatus:"process";
             this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
@@ -737,9 +742,13 @@ export class CoursedetailsComponent implements OnInit {
       if(!this.checkDetails?.fromSuggestion)
       {this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : Number(this.scromApiData.topicIndex);
       this.moduleHolder = this.currentPage = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
+      this.weekHolder  = this.weekHolderUI = this.scromApiData.week - 1;
       if(this.scromApiData.checkLevel)
-      {this.subModuleHolder = this.scromApiData.module == null ? 0 : Number(this.scromApiData.module);}
-      this.weekHolder  = this.weekHolderUI = this.scromApiData.week - 1;}
+      {
+        this.subModuleHolder = this.scromApiData.module == null ? 0 : Number(this.scromApiData.module);
+        this.submoduleTitle = this.scromApiData.childData[this.weekHolder].childData[this.subModuleHolder].childData[this.currentPage].title
+      }
+      }
       else{
         this.nextPrevHolder = this.topiccurrentPage = Number(this.checkDetails.topicIndex);
       this.moduleHolder = this.currentPage = Number(this.checkDetails.moduleIndex);
@@ -809,7 +818,10 @@ export class CoursedetailsComponent implements OnInit {
     this.topicPageStatus = topicStatus;
     this.moduleSatusCheck = moduleStatus ? moduleStatus : 'process';
     if(smi>=0)
-    {this.subModuleHolder = smi}
+    {
+      this.subModuleHolder = smi
+      this.submoduleTitle = this.scromApiData.childData[weekIndex].childData[smi].childData[moduleIdx].title
+    }
     const encodedModuleName = smi>=0?encodeURIComponent(this.scromApiData.childData[weekIndex].childData[moduleIdx].childData[smi].title):encodeURIComponent(moduleName);
     const encodedTopicName = encodeURIComponent(topicName);
     this.nextPrevHolder = topindex;
@@ -1088,7 +1100,7 @@ export class CoursedetailsComponent implements OnInit {
 
   understoodClick(ux) {
     this.topicInfo.user_experience = ux
-    this.Lservice.userexperience(this.getuserid.user_id, this.courseid, this.currentModuleTitle, this.currentTopicTitle, ux, this.topicInfo.status).subscribe((data: any) => {
+    this.Lservice.userexperience(this.getuserid.user_id, this.courseid, this.scromApiData.checkLevel?this.submoduleTitle:this.currentModuleTitle, this.currentTopicTitle, ux, this.topicInfo.status).subscribe((data: any) => {
       if (data?.data?.userexperience?.success) {
         this.topicInfo.user_experience = ux
       } else {
@@ -1100,7 +1112,7 @@ export class CoursedetailsComponent implements OnInit {
 
   bookmarkClick(isbokmarked) {
     this.topicInfo.bookmark = isbokmarked
-    this.Lservice.bookmark(this.getuserid.user_id, this.courseid, this.currentModuleTitle, this.currentTopicTitle, isbokmarked,Number(this.weekHolderUI)+1,this.lastLogIndex,this.moduleHolder,this.subModuleHolder,this.nextPrevHolder).subscribe((data: any) => {
+    this.Lservice.bookmark(this.getuserid.user_id, this.courseid, this.scromApiData.checkLevel?this.submoduleTitle:this.currentModuleTitle, this.currentTopicTitle, isbokmarked,Number(this.weekHolderUI)+1,this.lastLogIndex,this.moduleHolder,this.subModuleHolder,this.nextPrevHolder).subscribe((data: any) => {
       if (data?.data?.bookmark?.success) {
         this.topicInfo.bookmark = isbokmarked;
         this.filterToc()
@@ -1115,7 +1127,7 @@ export class CoursedetailsComponent implements OnInit {
   submitMyQuestion() {
     if (this.currentModuleTitle || this.currentTopicTitle) {
       if (this.questionText.trim().length) {
-        this.Lservice.askaquestion(this.getuserid.user_id, this.courseid, this.currentModuleTitle, this.currentTopicTitle, this.questionText).subscribe((data: any) => {
+        this.Lservice.askaquestion(this.getuserid.user_id, this.courseid, this.scromApiData.checkLevel?this.submoduleTitle:this.currentModuleTitle, this.currentTopicTitle, this.questionText).subscribe((data: any) => {
           // console.log(data)
           this.questionText = "";
           if (data?.data?.askaquestion?.success) {
@@ -1139,7 +1151,7 @@ export class CoursedetailsComponent implements OnInit {
       this.isQALoading = true;
       this.myQuestionList = [];
       this.allQuestionList = []
-      this.Lservice.getMyQuestion(this.getuserid.user_id, this.courseid, this.currentModuleTitle, this.currentTopicTitle).subscribe((data: any) => {
+      this.Lservice.getMyQuestion(this.getuserid.user_id, this.courseid, this.scromApiData.checkLevel?this.submoduleTitle:this.currentModuleTitle, this.currentTopicTitle).subscribe((data: any) => {
         this.isQALoading = false;
         if (data?.data.getmyque.success) {
           this.myQuestionList = data.data.getmyque.message
@@ -1151,7 +1163,7 @@ export class CoursedetailsComponent implements OnInit {
       this.isQALoading = true
       this.allQuestionList = []
       this.myQuestionList = [];
-      this.Lservice.getallquestion(this.getuserid.user_id, this.courseid, this.currentModuleTitle, this.currentTopicTitle, -1, this.batchId).subscribe((data: any) => {
+      this.Lservice.getallquestion(this.getuserid.user_id, this.courseid, this.scromApiData.checkLevel?this.submoduleTitle:this.currentModuleTitle, this.currentTopicTitle, -1, this.batchId).subscribe((data: any) => {
         this.isQALoading = false
         if (data?.data.getallquestion?.success) {
           this.allQuestionList = data.data.getallquestion?.message
