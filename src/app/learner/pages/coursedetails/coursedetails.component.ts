@@ -771,7 +771,7 @@ export class CoursedetailsComponent implements OnInit {
           this.courseid + '&user_id=' + id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.checkDetails.url +
           '&module_status=' + 'process&week='+ (Number(this.checkDetails.week)).toString()
-          + '&module=' + this.checkDetails.moduleName + '&topic=' + this.checkDetails.topicName + '&ModuleIndex=' + this.moduleHolder + '&submoduleIndex=' + (this.scromApiData.checkLevel?this.subModuleHolder.toString():'null').toString() + '&topicIndex=' + this.nextPrevHolder+ '&lastLogIndex=' + this.lastLogIndex);
+          + '&module=' + this.checkDetails.moduleName + '&topic=' + this.checkDetails.topicName + '&ModuleIndex=' + this.moduleHolder + '&submoduleIndex=' + (this.scromApiData.checkLevel?this.subModuleHolder.toString():'null') + '&topicIndex=' + this.nextPrevHolder+ '&lastLogIndex=' + this.lastLogIndex);
       }
       else
       {this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
@@ -779,7 +779,7 @@ export class CoursedetailsComponent implements OnInit {
           this.courseid + '&user_id=' + id + '&user_obj_id=' +
           this.getuserid._id + '&path=' + this.scromApiData.url +
           '&module_status=' + 'process&week='+ (Number(this.weekHolder) + 1).toString()
-          + '&module=' + moduleTitle + '&topic=' + topicTitle + '&ModuleIndex=' + this.moduleHolder + ('&submoduleIndex=' + this.scromApiData.checkLevel?this.subModuleHolder.toString():'null').toString() + '&topicIndex=' + this.nextPrevHolder+ '&lastLogIndex=' + this.lastLogIndex);
+          + '&module=' + moduleTitle + '&topic=' + topicTitle + '&ModuleIndex=' + this.moduleHolder + ('&submoduleIndex=' + this.scromApiData.checkLevel?this.subModuleHolder.toString():'null') + '&topicIndex=' + this.nextPrevHolder+ '&lastLogIndex=' + this.lastLogIndex);
 }
       this.playerTopicLen = this.scromApiData.total_topic_len;
       // tree level
@@ -824,12 +824,12 @@ export class CoursedetailsComponent implements OnInit {
       (environment.scormUrl + '/scormPlayer.html?content_id=' +
         this.courseid + '&user_id=' + id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
         + '&module_status=' + this.moduleSatusCheck
-        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (Number(this.weekHolder) + 1) +  '&ModuleIndex=' + this.moduleHolder + '&submoduleIndex=' + (this.scromApiData.checkLevel?this.subModuleHolder.toString():'null').toString() + '&topicIndex=' + this.nextPrevHolder+  '&lastLogIndex=' + this.lastLogIndex);
+        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (Number(this.weekHolder) + 1) +  '&ModuleIndex=' + this.moduleHolder + '&submoduleIndex=' + (this.scromApiData.checkLevel?this.subModuleHolder.toString():'null')+ '&topicIndex=' + this.nextPrevHolder+  '&lastLogIndex=' + this.lastLogIndex);
     this.checkLastFirstIndexReached()
     console.log(environment.scormUrl + '/scormPlayer.html?content_id=' +
     this.courseid + '&user_id=' + id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
     + '&module_status=' + this.moduleSatusCheck
-    + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (Number(this.weekHolder) + 1) +  '&ModuleIndex=' + this.moduleHolder + '&submoduleIndex=' + (this.scromApiData.checkLevel?this.subModuleHolder.toString():'null').toString() + '&topicIndex=' + this.nextPrevHolder+  '&lastLogIndex=' + this.lastLogIndex)
+    + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (Number(this.weekHolder) + 1) +  '&ModuleIndex=' + this.moduleHolder + '&submoduleIndex=' + (this.scromApiData.checkLevel?this.subModuleHolder.toString():'null')+ '&topicIndex=' + this.nextPrevHolder+  '&lastLogIndex=' + this.lastLogIndex)
   }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {
@@ -1176,7 +1176,7 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
   filterToc() {
-    if(this.scromApiData.checkLevel){return false}
+    // if(this.scromApiData.checkLevel){return false}
     this.bookmarkedCount = 0;
     this.bkup_Toc = JSON.parse(JSON.stringify(this.scromModuleData));
     this.filterData = []
