@@ -90,16 +90,31 @@
                 (click)="closedialogbox()" class="lxp-Close"></i></span>
     </div>
     <div class="askQuestionsContainer mx-20px"(contextmenu)="contextmenu()">
-        <div class="mt-10px  d-inline-block">
+        <span *ngIf="checkLevel;else qinputlist"></span>
+        <div class="mt-10px  d-inline-block" >
             <select class="sel-pad-modal" [(ngModel)]="questionTopicList" (change)="askQAModuleSelect()">
                 <option [ngValue]="null" [disabled]="true">Please select a module</option>
-                <option  *ngFor="let item of moduleTopicData" [ngValue]="item">{{item.title}}</option>
+                <ng-container *ngFor="let skipper of moduleTopicData">
+                <option  *ngFor="let item of skipper.childData" [ngValue]="item">{{item.title}}</option>
+                </ng-container>
             </select>
             <select *ngIf="questionTopicList" class="sel-pad-modal ml-20px" [(ngModel)]="questionTopic" >
                 <option [ngValue]="null" [disabled]="true">Please select a topic</option>
                 <option  *ngFor="let item of questionTopicList.childData" [ngValue]="item.title">{{item.title}}</option>
             </select>
         </div>
+        <ng-template #qinputlist>
+            <div class="mt-10px  d-inline-block" >
+                <select class="sel-pad-modal" [(ngModel)]="questionTopicList" (change)="askQAModuleSelect()">
+                    <option [ngValue]="null" [disabled]="true">Please select a module</option>
+                    <option  *ngFor="let item of moduleTopicData" [ngValue]="item">{{item.title}}</option>
+                </select>
+                <select *ngIf="questionTopicList" class="sel-pad-modal ml-20px" [(ngModel)]="questionTopic" >
+                    <option [ngValue]="null" [disabled]="true">Please select a topic</option>
+                    <option  *ngFor="let item of questionTopicList.childData" [ngValue]="item.title">{{item.title}}</option>
+                </select>
+            </div>
+        </ng-template>
         <div class="questionInput align-content-center">
                     <textarea [(ngModel)]="questionText"></textarea>
                     

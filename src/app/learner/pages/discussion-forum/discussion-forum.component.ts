@@ -157,7 +157,7 @@ export class DiscussionForumComponent implements OnInit {
             new Date(a.lastposttimeISO || a.lastposttimeISO).getTime());
           this.discussionData = result.data.ViewAllThreadData.data;
           this.discussionData1 = Object.assign({}, result.data.ViewAllThreadData.data);
-          this.threadData = result.data.ViewAllThreadData.data.topics;
+          this.threadData = result.data.ViewAllThreadData?.data?.topics;
           if (c === 'NewThread') {
             if(this.threadData.length>0){
               this.selectedThreadData = this.threadData[0];
