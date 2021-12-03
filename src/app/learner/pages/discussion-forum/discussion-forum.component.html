@@ -41,6 +41,7 @@
     <ng-container
       *ngIf="scromModuleData && scromModuleData?.length > 0; else noModule"
     >
+    <ng-container *ngIf="checkLevel;else normalList">
       <span *ngFor="let skipper of scromModuleData">
         <ng-container *ngFor="let des of skipper.childData">
           <mat-card
@@ -119,6 +120,85 @@
           </mat-card>
         </ng-container>
       </span>
+    </ng-container>
+    <ng-template #normalList>
+        <ng-container *ngFor="let des of scromModuleData">
+          <mat-card
+            *ngFor="let res of des.childData; let i = index"
+            class="topicCard"
+            (click)="
+              getSelectedIndex(i);
+              getModuleDataForForum(scromModuleData?.length, i + 1, res);
+              isHideAccord = true
+            "
+          >
+            <mat-card-title
+              (click)="moduleExpand(res, i)"
+              class="d-flex justify-content-between align-items-center pointer"
+            >
+              <div class="tocSubTitle">
+                <span
+                  *ngIf="res?.title?.length >= 67"
+                  class="moduleName"
+                  tooltip="{{ res?.title }}"
+                  placement="right"
+                >
+                  {{ res?.title | slice: 0:71 }}...</span
+                >
+                <span *ngIf="res?.title?.length < 67" class="moduleName">
+                  {{ res?.title }}
+                </span>
+              </div>
+              <div>
+                <i
+                  class="expandCollapse"
+                  [ngClass]="res.expanded ? 'lxp-Collapse' : 'lxp-Expand'"
+                ></i>
+                <!-- <mat-icon  class="f_size_23 colorBlack">
+                  {{res.expanded?'remove_circle_outline':'add_circle_outline'}}
+              </mat-icon> -->
+              </div>
+            </mat-card-title>
+            <!-- <mat-card-subtitle (click)="moduleExpand(res,i)" class="d-flex justify-content-start align-items-center tocSubTitle">
+         
+          <div>
+              <span *ngIf="res?.title?.length >= 67" class="moduleName" tooltip="{{res?.title}}"
+                  placement="right">
+                  {{res?.title | slice:0:71}}...</span>
+              <span *ngIf="res?.title?.length < 67" class="moduleName">
+                  {{res?.title}}
+              </span>
+          </div>
+      </mat-card-subtitle> -->
+            <mat-card-content *ngIf="res.expanded">
+              <mat-vertical-stepper
+                [linear]="isLeaner"
+                [ngClass]="res?.title?.length > 39 ? 'headerDown' : ''"
+              >
+                <ng-container *ngFor="let mod of res?.childData; let j = index">
+                  <mat-step
+                    [aria-labelledby]="
+                      mod?.status === 'Passed'
+                        ? 'colgreen'
+                        : mod?.status === 'process'
+                        ? 'colYellow'
+                        : 'colWhite'
+                    "
+                  >
+                    <ng-template matStepLabel>
+                      <span class="topicnm">
+                        <span class="titleName">
+                          {{ mod?.title }}
+                        </span>
+                      </span>
+                    </ng-template>
+                  </mat-step>
+                </ng-container>
+              </mat-vertical-stepper>
+            </mat-card-content>
+          </mat-card>
+        </ng-container>
+    </ng-template>
     </ng-container>
     <ng-template #noModule>
       <br />
