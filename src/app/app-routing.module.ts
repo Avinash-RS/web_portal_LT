@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { IsLoggedInAuthGuard } from '@core/services/_helpers/is-logged-in-auth.guard';
 import { AuthGuard } from '@core/services/_helpers';
-
+import { RedirectionComponent} from '../app/redirection/redirection.component'
 
 const routes: Routes = [
 
@@ -26,7 +26,21 @@ const routes: Routes = [
     loadChildren: './core/core.module#CoreModule',
     data : {title: 'Course Player'}
   },
-
+  {
+    path: 'Player',
+    loadChildren: './core/core.module#CoreModule',
+    data : {title: 'Course Player'}
+  },
+  {
+    path: 'profile',
+    component: RedirectionComponent,
+    data: { animation: 'Redirection', title: 'Redirection' }
+  },
+  {
+    path: 'redirection',
+    component: RedirectionComponent,
+    data: { animation: 'Redirecting', title: 'Redirecting' }
+  },
   {path: '**', component: NotFoundComponent},
   
 
