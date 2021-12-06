@@ -426,7 +426,6 @@ export class CoursedetailsComponent implements OnInit {
     });
     let resumeInit = false;
     if (!resumeInit) {
-      console.log("een");
       this.socketService.socketReceiver()
       this.socketEmitReciver = this.socketService.change.subscribe((result: any) => {
         console.log(result.data)
@@ -450,7 +449,7 @@ export class CoursedetailsComponent implements OnInit {
               result.data.childData[result.data.week - 1].childData[result.data.resumeContent].childData[result.data.resumeSubContent]?.status !== this.topicPageStatus) {
               console.log(result.data, 'helllllllllllllo');
               this.scromModuleData = result.data.childData;
-              this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
+              // this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
               if ((this.scromApiData.topicIndex == null || this.scromApiData.topicIndex == "0") && (this.scromApiData.moduleIndex == null || this.scromApiData.moduleIndex == "0") && this.scromModuleData[0].childData[0].status == null && this.scromModuleData[0].childData[0].childData[0].status == null) {
                 this.scromModuleData[0].childData[0].status = 'process'
                 this.scromModuleData[0].childData[0].childData[0].status = 'process'
@@ -462,7 +461,7 @@ export class CoursedetailsComponent implements OnInit {
                 this.subModuleHolder = Number(result.data.module);
                 this.submoduleTitle = this.scromApiData.childData[this.weekHolder].childData[this.subModuleHolder].childData[this.currentPage].title
               }
-              this.topicPageStatus = result.data.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]?.status
+              this.topicPageStatus = this.scromApiData.checkLevel ?result.data.childData[this.weekHolder].childData[this.subModuleHolder].childData[this.currentPage].childData[this.topiccurrentPage]?.status: result.data.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]?.status
               this.topicPageStatus = this.topicPageStatus ? this.topicPageStatus : "process";
               this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
               this.topicInfo = this.scromApiData.checkLevel ? this.scromModuleData[this.weekHolder].childData[this.subModuleHolder].childData[this.currentPage].childData[this.topiccurrentPage] : this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]
@@ -477,7 +476,7 @@ export class CoursedetailsComponent implements OnInit {
               // }
 
             }
-            // this.moduleExpand(this.weekHolderUI, Number(this.moduleHolder),this.scromApiData.checkLevel?this.subModuleHolder:null);
+            this.moduleExpand(this.weekHolderUI, Number(this.moduleHolder),this.scromApiData.checkLevel?this.subModuleHolder:null);
             // if ((this.weekHolder !==0 && this.moduleHolder !== 0) || (this.nextPrevHolder !== 0)) {
             //   this.isprevEnable = false;
             // }
@@ -740,11 +739,11 @@ export class CoursedetailsComponent implements OnInit {
       // this.moduleLenth = this.scromApiData?.childData.length;
       if (!this.checkDetails?.fromSuggestion) {
         this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : Number(this.scromApiData.topicIndex);
-        this.moduleHolder = this.currentPage = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
+        this.moduleHolder = this.currentPage =  this.scromApiData.checkLevel ? (this.scromApiData.module == null ? 0 : Number(this.scromApiData.module)) :this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
         this.weekHolder = this.weekHolderUI = this.scromApiData.week - 1;
         if (this.scromApiData.checkLevel) {
-          this.subModuleHolder = this.scromApiData.module == null ? 0 : Number(this.scromApiData.module);
-          this.submoduleTitle = this.scromApiData.childData[this.weekHolder].childData[this.subModuleHolder].childData[this.currentPage].title
+          this.subModuleHolder = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
+          this.submoduleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].title
         }
       }
       else {
@@ -754,15 +753,15 @@ export class CoursedetailsComponent implements OnInit {
       }
       // this.scromModuleData[this.moduleHolder].expanded = true;
       this.oldIdx = this.moduleHolder;
-      this.topicInfo = this.scromApiData.checkLevel ? this.scromApiData.childData[this.weekHolder].childData[this.subModuleHolder].childData[this.moduleHolder].childData[this.nextPrevHolder] : this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].childData[this.nextPrevHolder]
+      this.topicInfo = this.scromApiData.checkLevel ? this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].childData[this.nextPrevHolder] : this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].childData[this.nextPrevHolder]
       this.topicPageStatus = this.topicInfo.status
       this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
       setTimeout(() => {
         if (this.weekHolder > 0)
           this.inputEl ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" }) : ''
       }, 4000);
-      const moduleTitle = this.scromApiData.checkLevel ? encodeURIComponent(this.scromApiData.childData[this.weekHolder].childData[this.subModuleHolder].childData[this.currentPage].title) : encodeURIComponent(this.scromApiData.childData[this.weekHolder].childData[this.currentPage].title);
-      const topicTitle = encodeURIComponent(this.scromApiData.checkLevel ? this.scromApiData.childData[this.weekHolder].childData[this.subModuleHolder].childData[this.currentPage].childData[this.topiccurrentPage].title : this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage].title);
+      const moduleTitle = this.scromApiData.checkLevel ? encodeURIComponent(this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].title) : encodeURIComponent(this.scromApiData.childData[this.weekHolder].childData[this.currentPage].title);
+      const topicTitle = encodeURIComponent(this.scromApiData.checkLevel ? this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage].title : this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage].title);
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
       this.currentModuleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].title;
       this.currentTopicTitle = this.topicInfo.title//this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage].title;
@@ -808,26 +807,26 @@ export class CoursedetailsComponent implements OnInit {
       this.filterToc();
     });
   }
-  playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, weekIndex, topindex, moduleIdx, smi?) {
+  playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, weekIndex, topindex, smi, moduleIdx?) {
     this.weekHolder = weekIndex;
     this.weekHolderUI = weekIndex;
     this.currentTopicTitle = topicName;
     this.currentModuleTitle = moduleName
     this.topicPageStatus = topicStatus;
     this.moduleSatusCheck = moduleStatus ? moduleStatus : 'process';
-    if (smi >= 0) {
-      this.subModuleHolder = smi
+    if (moduleIdx >= 0) {
+      this.subModuleHolder = moduleIdx
       this.submoduleTitle = this.scromApiData.childData[weekIndex].childData[smi].childData[moduleIdx].title
     }
-    const encodedModuleName = smi >= 0 ? encodeURIComponent(this.scromApiData.childData[weekIndex].childData[smi].childData[moduleIdx].title) : encodeURIComponent(moduleName);
+    const encodedModuleName = moduleIdx >= 0 ? encodeURIComponent(this.scromApiData.childData[weekIndex].childData[smi].childData[moduleIdx].title) : encodeURIComponent(moduleName);
     const encodedTopicName = encodeURIComponent(topicName);
     this.nextPrevHolder = topindex;
     this.topiccurrentPage = this.nextPrevHolder
-    this.moduleHolder = Number(moduleIdx);
-    this.currentPage = Number(moduleIdx);
+    this.moduleHolder = Number(smi);
+    this.currentPage = Number(smi);
     this.isprevEnable = true;
     this.isNextEnable = true;
-    this.topicInfo = smi >= 0 ? this.scromApiData.childData[weekIndex].childData[smi].childData[moduleIdx].childData[topindex] : this.scromApiData.childData[weekIndex].childData[moduleIdx].childData[topindex]
+    this.topicInfo = moduleIdx >= 0 ? this.scromApiData.childData[weekIndex].childData[smi].childData[moduleIdx].childData[topindex] : this.scromApiData.childData[weekIndex].childData[smi].childData[topindex]
     let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
       (environment.scormUrl + '/scormPlayer.html?content_id=' +
