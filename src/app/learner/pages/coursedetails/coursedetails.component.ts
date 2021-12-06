@@ -786,7 +786,7 @@ export class CoursedetailsComponent implements OnInit {
             this.courseid + '&user_id=' + id + '&user_obj_id=' +
             this.getuserid._id + '&path=' + this.scromApiData.url +
             '&module_status=' + 'process&week=' + (Number(this.weekHolder) + 1).toString()
-            + '&module=' + moduleTitle + '&topic=' + topicTitle + '&ModuleIndex=' + this.moduleHolder + ('&submoduleIndex=' + this.scromApiData.checkLevel ? this.subModuleHolder?.toString() : 'null') + '&topicIndex=' + this.nextPrevHolder + '&lastLogIndex=' + this.lastLogIndex);
+            + '&module=' + moduleTitle + '&topic=' + topicTitle + '&ModuleIndex=' + this.moduleHolder + (this.scromApiData.checkLevel ?'&submoduleIndex=' +  this.subModuleHolder?.toString() : '&submoduleIndex=null') + '&topicIndex=' + this.nextPrevHolder + '&lastLogIndex=' + this.lastLogIndex);
       }
       this.playerTopicLen = this.scromApiData.total_topic_len;
       // tree level
