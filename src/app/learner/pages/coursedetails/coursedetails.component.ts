@@ -819,7 +819,7 @@ export class CoursedetailsComponent implements OnInit {
       this.subModuleHolder = smi
       this.submoduleTitle = this.scromApiData.childData[weekIndex].childData[smi].childData[moduleIdx].title
     }
-    const encodedModuleName = smi >= 0 ? encodeURIComponent(this.scromApiData.childData[weekIndex].childData[moduleIdx].childData[smi].title) : encodeURIComponent(moduleName);
+    const encodedModuleName = smi >= 0 ? encodeURIComponent(this.scromApiData.childData[weekIndex].childData[smi].childData[moduleIdx].title) : encodeURIComponent(moduleName);
     const encodedTopicName = encodeURIComponent(topicName);
     this.nextPrevHolder = topindex;
     this.topiccurrentPage = this.nextPrevHolder
@@ -835,10 +835,7 @@ export class CoursedetailsComponent implements OnInit {
         + '&module_status=' + this.moduleSatusCheck
         + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (Number(this.weekHolder) + 1) + '&ModuleIndex=' + this.moduleHolder + '&submoduleIndex=' + (this.scromApiData.checkLevel ? this.subModuleHolder.toString() : 'null') + '&topicIndex=' + this.nextPrevHolder + '&lastLogIndex=' + this.lastLogIndex);
     this.checkLastFirstIndexReached()
-    console.log(environment.scormUrl + '/scormPlayer.html?content_id=' +
-      this.courseid + '&user_id=' + id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
-      + '&module_status=' + this.moduleSatusCheck
-      + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (Number(this.weekHolder) + 1) + '&ModuleIndex=' + this.moduleHolder + '&submoduleIndex=' + (this.scromApiData.checkLevel ? this.subModuleHolder.toString() : 'null') + '&topicIndex=' + this.nextPrevHolder + '&lastLogIndex=' + this.lastLogIndex)
+    
   }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {
