@@ -458,13 +458,14 @@ export class CoursedetailsComponent implements OnInit {
               this.topiccurrentPage = Number(result.data.resumeSubContent);
               this.weekHolder = result.data.week - 1;
               if (this.scromApiData.checkLevel) {
-                this.subModuleHolder = Number(result.data.module);
-                this.submoduleTitle = this.scromApiData.childData[this.weekHolder].childData[this.subModuleHolder].childData[this.currentPage].title
+                this.currentPage = Number(result.data.module);
+                this.subModuleHolder = Number(result.data.resumeContent);
+                this.submoduleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].title
               }
-              this.topicPageStatus = this.scromApiData.checkLevel ?result.data.childData[this.weekHolder].childData[this.subModuleHolder].childData[this.currentPage].childData[this.topiccurrentPage]?.status: result.data.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]?.status
+              this.topicPageStatus = this.scromApiData.checkLevel ?result.data.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage]?.status: result.data.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]?.status
               this.topicPageStatus = this.topicPageStatus ? this.topicPageStatus : "process";
               this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
-              this.topicInfo = this.scromApiData.checkLevel ? this.scromModuleData[this.weekHolder].childData[this.subModuleHolder].childData[this.currentPage].childData[this.topiccurrentPage] : this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]
+              this.topicInfo = this.scromApiData.checkLevel ? this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage] : this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]
               // if (resumeInit) {
 
               //   this.nextPrevHolder = this.topiccurrentPage;
@@ -476,7 +477,7 @@ export class CoursedetailsComponent implements OnInit {
               // }
 
             }
-            this.moduleExpand(this.weekHolderUI, Number(this.currentPage),this.scromApiData.checkLevel?this.subModuleHolder:null);
+            this.moduleExpand(this.weekHolderUI, Number(this.subModuleHolder),this.scromApiData.checkLevel?this.currentPage:null);
             // if ((this.weekHolder !==0 && this.moduleHolder !== 0) || (this.nextPrevHolder !== 0)) {
             //   this.isprevEnable = false;
             // }
