@@ -476,7 +476,7 @@ export class CoursedetailsComponent implements OnInit {
               // }
 
             }
-            this.moduleExpand(this.weekHolderUI, Number(this.moduleHolder),this.scromApiData.checkLevel?this.subModuleHolder:null);
+            this.moduleExpand(this.weekHolderUI, Number(this.currentPage),this.scromApiData.checkLevel?this.subModuleHolder:null);
             // if ((this.weekHolder !==0 && this.moduleHolder !== 0) || (this.nextPrevHolder !== 0)) {
             //   this.isprevEnable = false;
             // }
@@ -755,7 +755,13 @@ export class CoursedetailsComponent implements OnInit {
       this.oldIdx = this.moduleHolder;
       this.topicInfo = this.scromApiData.checkLevel ? this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].childData[this.nextPrevHolder] : this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].childData[this.nextPrevHolder]
       this.topicPageStatus = this.topicInfo.status
-      this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
+      if(this.scromApiData.checkLevel){
+        this.moduleExpand(this.weekHolder, this.subModuleHolder,this.moduleHolder);
+      }
+      else{
+        this.moduleExpand(this.weekHolder, this.moduleHolder,null);
+      }
+      
       setTimeout(() => {
         if (this.weekHolder > 0)
           this.inputEl ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" }) : ''
@@ -788,6 +794,7 @@ export class CoursedetailsComponent implements OnInit {
             + '&module=' + moduleTitle + '&topic=' + topicTitle + '&ModuleIndex=' + this.moduleHolder + (this.scromApiData.checkLevel ?'&submoduleIndex=' +  this.subModuleHolder?.toString() : '&submoduleIndex=null') + '&topicIndex=' + this.nextPrevHolder + '&lastLogIndex=' + this.lastLogIndex);
       }
       this.playerTopicLen = this.scromApiData.total_topic_len;
+      console.log(this.urlSafe,"playermoduletopicAPI")
       // tree level
       this.scromModuleData.forEach(childData => {
         if (childData && childData.childData) {
@@ -834,7 +841,7 @@ export class CoursedetailsComponent implements OnInit {
         + '&module_status=' + this.moduleSatusCheck
         + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (Number(this.weekHolder) + 1) + '&ModuleIndex=' + this.moduleHolder + '&submoduleIndex=' + (this.scromApiData.checkLevel ? this.subModuleHolder.toString() : 'null') + '&topicIndex=' + this.nextPrevHolder + '&lastLogIndex=' + this.lastLogIndex);
     this.checkLastFirstIndexReached()
-    
+    console.log(this.urlSafe,"click link")
   }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {
@@ -981,8 +988,8 @@ export class CoursedetailsComponent implements OnInit {
     } else {
       if (this.scromApiData.checkLevel) {
         this.scromModuleData[Windex].expanded = true;
-        this.scromModuleData[Windex].childData[mindex].expanded = true;
-        this.scromModuleData[Windex].childData[mindex].childData[smindex].expanded = true;
+        this.scromModuleData[Windex].childData[smindex].expanded = true;
+        this.scromModuleData[Windex].childData[smindex].childData[mindex].expanded = true;
       } else {
         this.scromModuleData[Windex].childData[mindex].expanded = true;
       }
