@@ -242,6 +242,7 @@ export class CoursedetailsComponent implements OnInit {
   longDesc: string;
   subModuleHolder: number = null;
   submoduleTitle: any;
+  subModuleHolderUI: number;
 
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
@@ -466,6 +467,8 @@ export class CoursedetailsComponent implements OnInit {
               this.topicPageStatus = this.topicPageStatus ? this.topicPageStatus : "process";
               this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
               this.topicInfo = this.scromApiData.checkLevel ? this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage] : this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]
+              this.moduleExpand(this.weekHolderUI, Number(this.subModuleHolderUI),this.scromApiData.checkLevel?this.currentPage:null);
+
               // if (resumeInit) {
 
               //   this.nextPrevHolder = this.topiccurrentPage;
@@ -477,7 +480,7 @@ export class CoursedetailsComponent implements OnInit {
               // }
 
             }
-            this.moduleExpand(this.weekHolderUI, Number(this.subModuleHolder),this.scromApiData.checkLevel?this.currentPage:null);
+            // this.moduleExpand(this.weekHolderUI, Number(this.subModuleHolder),this.scromApiData.checkLevel?this.currentPage:null);
             // if ((this.weekHolder !==0 && this.moduleHolder !== 0) || (this.nextPrevHolder !== 0)) {
             //   this.isprevEnable = false;
             // }
@@ -744,6 +747,8 @@ export class CoursedetailsComponent implements OnInit {
         this.weekHolder = this.weekHolderUI = this.scromApiData.week - 1;
         if (this.scromApiData.checkLevel) {
           this.subModuleHolder = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
+          this.subModuleHolderUI = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
+          
           this.submoduleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].title
         }
       }
@@ -824,6 +829,7 @@ export class CoursedetailsComponent implements OnInit {
     this.moduleSatusCheck = moduleStatus ? moduleStatus : 'process';
     if (moduleIdx >= 0) {
       this.subModuleHolder = moduleIdx
+      this.subModuleHolderUI = moduleIdx
       this.submoduleTitle = this.scromApiData.childData[weekIndex].childData[smi].childData[moduleIdx].title
     }
     const encodedModuleName = moduleIdx >= 0 ? encodeURIComponent(this.scromApiData.childData[weekIndex].childData[smi].childData[moduleIdx].title) : encodeURIComponent(moduleName);
