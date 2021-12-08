@@ -462,12 +462,14 @@ export class CoursedetailsComponent implements OnInit {
                 this.currentPage = Number(result.data.module);
                 this.subModuleHolder = Number(result.data.resumeContent);
                 this.submoduleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].title
+                this.moduleExpand(this.weekHolderUI, Number(this.subModuleHolderUI),this.scromApiData.checkLevel?this.currentPage:null);
+              }else{
+                this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
               }
               this.topicPageStatus = this.scromApiData.checkLevel ?result.data.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage]?.status: result.data.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]?.status
               this.topicPageStatus = this.topicPageStatus ? this.topicPageStatus : "process";
               this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
               this.topicInfo = this.scromApiData.checkLevel ? this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage] : this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]
-              this.moduleExpand(this.weekHolderUI, Number(this.subModuleHolderUI),this.scromApiData.checkLevel?this.currentPage:null);
 
               // if (resumeInit) {
 
