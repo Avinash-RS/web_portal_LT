@@ -73,6 +73,7 @@ export class DiscussionForumComponent implements OnInit {
   oldIdx: any;
   sortBox = false;
   selected;
+  checkLevel: any;
   constructor(public Lservice: LearnerServicesService, public route: Router, private formBuilder: FormBuilder,
               private gs: GlobalServiceService, private toastr: ToastrService, private dialog: MatDialog,
               public cS: CommonServicesService) {
@@ -111,6 +112,7 @@ export class DiscussionForumComponent implements OnInit {
     // this.cS.loader$.next(true);
     this.loading = true;
     this.Lservice.playerModuleAndTopic(cid, this.userDetail.user_id).subscribe((data: any) => {
+      this.checkLevel = data.data?.playerModuleAndTopic?.message && data.data?.playerModuleAndTopic?.message[0].checkLevel;
       this.scromModuleData = data.data?.playerModuleAndTopic?.message && data.data?.playerModuleAndTopic?.message[0]?.childData || [];
       this.selectedModuleData = this.scromModuleData[0].childData[0] || null;
       this.loading = false;
@@ -157,7 +159,7 @@ export class DiscussionForumComponent implements OnInit {
             new Date(a.lastposttimeISO || a.lastposttimeISO).getTime());
           this.discussionData = result.data.ViewAllThreadData.data;
           this.discussionData1 = Object.assign({}, result.data.ViewAllThreadData.data);
-          this.threadData = result.data.ViewAllThreadData.data.topics;
+          this.threadData = result.data.ViewAllThreadData?.data?.topics;
           if (c === 'NewThread') {
             if(this.threadData.length>0){
               this.selectedThreadData = this.threadData[0];

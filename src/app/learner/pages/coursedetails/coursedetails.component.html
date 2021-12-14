@@ -210,7 +210,7 @@
                             </mat-card-subtitle>
                             <div *ngIf="scromApiData.checkLevel">
                                 <span *ngFor="let subData of res.childData let smi = index" (load)="smi==subModuleHolder?subData.expanded=true:subData.expanded=false;">
-                                    <mat-card-subtitle *ngIf="res.expanded" (click)="moduleExpand(wi,mi,smi,subData)" class="d-flex justify-content-start align-items-center tocSubTitle tocSubSubtitle" [ngClass]="(wi===weekHolderUI&&mi==moduleHolder&&smi==subModuleHolder)?'titleSelected':''">
+                                    <mat-card-subtitle *ngIf="res.expanded" (click)="moduleExpand(wi,mi,smi,subData)" class="d-flex justify-content-start align-items-center tocSubTitle tocSubSubtitle" [ngClass]="(wi===weekHolderUI&&smi==moduleHolder&&mi==subModuleHolder)?'titleSelected':''">
                                         <div class="statusColor">
                                             <span *ngIf="subData?.status == 'Passed'" class="passColor"><em class="lxp-Right"></em></span>
                                             <span *ngIf="subData?.status == 'process'" class="processColor"></span>

@@ -38,6 +38,7 @@ export class AskQuestionsComponent implements OnInit {
   dateObj = new Date()
   currentDate = new Date(this.dateObj.getFullYear() + '-' + (this.dateObj.getMonth() + 1) + '-' + this.dateObj.getDate()).getTime();
   batchEndTime: any;
+  checkLevel: boolean = false;
 
   constructor(private dialog: MatDialog,
     public Lservice: LearnerServicesService,
@@ -96,6 +97,7 @@ export class AskQuestionsComponent implements OnInit {
   getPlayerModuleTopic() {
     this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       if(data.data?.playerModuleAndTopic?.success=== true){
+        this.checkLevel = data.data?.playerModuleAndTopic?.message[0].checkLevel;
         let tmpData = data.data?.playerModuleAndTopic?.message[0].childData;
         this.moduleTopicData = []
         tmpData.forEach(element => {

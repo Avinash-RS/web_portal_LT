@@ -41,7 +41,7 @@ declare var gtag
 })
 export class CoursedetailsComponent implements OnInit {
   @ViewChild('clonePreviewContainer') template;
-  @ViewChild('mobContainer', {read: ViewContainerRef}) mobContainer;
+  @ViewChild('mobContainer', { read: ViewContainerRef }) mobContainer;
   htmlContent = '';
   showSkeleton: boolean = false;
   config: AngularEditorConfig = {
@@ -205,11 +205,11 @@ export class CoursedetailsComponent implements OnInit {
   weekHolder: number;
   weekLength: any;
   weekHolderUI: number;
-  fromCalendar :boolean = false;
-  eboxUrl :any="";
-  showlab:boolean = false;
-  lastLogIndex:number = 0;
-  isReadMore:boolean;
+  fromCalendar: boolean = false;
+  eboxUrl: any = "";
+  showlab: boolean = false;
+  lastLogIndex: number = 0;
+  isReadMore: boolean;
   closeTemp = false;
   TopicsOptions: OwlOptions = {
     loop: true,
@@ -241,6 +241,8 @@ export class CoursedetailsComponent implements OnInit {
   bookmarkedCount: any;
   longDesc: string;
   subModuleHolder: number = null;
+  submoduleTitle: any;
+  subModuleHolderUI: number;
 
   // FOR DRM(Restriction for right click)
   @HostListener('document:keydown', ['$event'])
@@ -256,11 +258,11 @@ export class CoursedetailsComponent implements OnInit {
     public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
     public route: Router, private formBuilder: FormBuilder,
     public sanitizer: DomSanitizer, private toastr: ToastrService) {
-      const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
-      if(!loginDetails?.is_password_updated){
-        this.route.navigate(['/Learner/profile']);
-        return
-      }
+    const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
+    if (!loginDetails?.is_password_updated) {
+      this.route.navigate(['/Learner/profile']);
+      return
+    }
     this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
     // if (this.socketService.socketStatus()||this.socketService.socketStatus() == undefined){
     this.socketConnector = this.socketService.Connectsocket({ type: 'connect' }).subscribe(quote => {
@@ -296,7 +298,7 @@ export class CoursedetailsComponent implements OnInit {
       this.batchId = localStorage.getItem('currentBatchId')
       this.batchEndTime = localStorage.getItem('currentBatchEndDate')
     } else {
-      if(detail.fromCalendar){
+      if (detail.fromCalendar) {
         this.fromCalendar = true;
       }
       this.batchId = detail.batch_id
@@ -312,7 +314,7 @@ export class CoursedetailsComponent implements OnInit {
       this.lastpersentage = localStorage.getItem('persentage');
       // this.lastpersentage = detail  && detail.persentage || this.localper ;
       this.loading = true;
-      gtag('event','coursePlayerCID', {"courseID":this.courseid});
+      gtag('event', 'coursePlayerCID', { "courseID": this.courseid });
       this.playerModuleAndTopic();
       this.getFeedbackQue();
       // this.refreshData();
@@ -392,10 +394,10 @@ export class CoursedetailsComponent implements OnInit {
   showText() {
     this.isReadMore = !this.isReadMore
   }
-  cloneTemplate(topicName,moduleName){
-    this.content.coursedetails.forEach((course)=>{
-      course.moduledetails.forEach((module)=>{
-        if(module.topicname == topicName && course.modulename == moduleName){
+  cloneTemplate(topicName, moduleName) {
+    this.content.coursedetails.forEach((course) => {
+      course.moduledetails.forEach((module) => {
+        if (module.topicname == topicName && course.modulename == moduleName) {
           module.showPreview = true
         } else {
           module.showPreview = false
@@ -403,12 +405,12 @@ export class CoursedetailsComponent implements OnInit {
       })
     })
   }
-  closeTemplate(){
-    this.content.coursedetails.forEach((course)=>{
-      course.moduledetails.forEach((module)=>{
-        if(module.showPreview){
+  closeTemplate() {
+    this.content.coursedetails.forEach((course) => {
+      course.moduledetails.forEach((module) => {
+        if (module.showPreview) {
           module.showPreview = false
-        } 
+        }
       })
     })
   }
@@ -423,87 +425,96 @@ export class CoursedetailsComponent implements OnInit {
       this.selectedTabIndex = emitedData.selectedTabIndex;
       this.performOverLay = false;
     });
-    let resumeInit = true;
-    if(!resumeInit)
-    {this.socketService.socketReceiver()
-    this.socketEmitReciver = this.socketService.change.subscribe((result:any) => {
-      console.log(result.data)
-      if (result && result.eventId && result.eventId.length && result.data.childData.length > 0) {
-        console.log(result.data, 'asdfasdjfaklsjdfkl');
-        if (result.data.course_id === this.courseid) {
+    let resumeInit = false;
+    if (!resumeInit) {
+      this.socketService.socketReceiver()
+      this.socketEmitReciver = this.socketService.change.subscribe((result: any) => {
+        console.log(result.data)
+        if (result && result.eventId && result.eventId.length && result.data.childData.length > 0) {
+          console.log(result.data, 'asdfasdjfaklsjdfkl');
+          if (result.data.course_id === this.courseid) {
 
-          // if(this.userType=="Corporate"){
+            // if(this.userType=="Corporate"){
             console.log("before if")
-            if(result?.data?.url!==""&&result.data.labActivity==true)
-            {
+            if (result?.data?.url !== "" && result.data.labActivity == true) {
               this.eboxUrl = result.data.url
               this.showlab = result.data.labActivity
             }
-            else{
+            else {
               this.showlab = result.data.labActivity
             }
-            
-          // }
-         
-          if (this.topiccurrentPage !== result.data.resumeSubContent ||
-            result.data.childData[result.data.week-1].childData[result.data.resumeContent].childData[result.data.resumeSubContent]?.status !== this.topicPageStatus) {
+
+            // }
+
+            if (this.topiccurrentPage !== result.data.resumeSubContent ||
+              result.data.childData[result.data.week - 1].childData[result.data.resumeContent].childData[result.data.resumeSubContent]?.status !== this.topicPageStatus) {
               console.log(result.data, 'helllllllllllllo');
               this.scromModuleData = result.data.childData;
-              this.moduleExpand(this.weekHolder, this.moduleHolder,this.scromApiData.checkLevel?this.subModuleHolder:null);
-              if((this.scromApiData.topicIndex == null||this.scromApiData.topicIndex == "0") && (this.scromApiData.moduleIndex == null||this.scromApiData.moduleIndex == "0") && this.scromModuleData[0].childData[0].status == null && this.scromModuleData[0].childData[0].childData[0].status == null){
+              // this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
+              if ((this.scromApiData.topicIndex == null || this.scromApiData.topicIndex == "0") && (this.scromApiData.moduleIndex == null || this.scromApiData.moduleIndex == "0") && this.scromModuleData[0].childData[0].status == null && this.scromModuleData[0].childData[0].childData[0].status == null) {
                 this.scromModuleData[0].childData[0].status = 'process'
                 this.scromModuleData[0].childData[0].childData[0].status = 'process'
               }
-            this.currentPage = Number(result.data.resumeContent);
-            this.topiccurrentPage = Number(result.data.resumeSubContent);
-            this.weekHolder = result.data.week - 1;
-            this.topicPageStatus = result.data.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]?.status
-            this.topicPageStatus = this.topicPageStatus?this.topicPageStatus:"process";
-            this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
-            this.topicInfo = this.scromApiData.checkLevel?this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage]:this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]
-            // if (resumeInit) {
-              
-            //   this.nextPrevHolder = this.topiccurrentPage;
-            //   this.moduleHolder = this.currentPage;
-            //   this.weekHolderUI = this.weekHolder;
-            //   resumeInit = false;
-            //   this.isprevEnable = true;
-            //   this.isNextEnable = true;
-            // }
-            
-          }
-          this.moduleExpand(this.weekHolderUI, Number(this.moduleHolder),this.scromApiData.checkLevel?this.subModuleHolder:null);
-          // if ((this.weekHolder !==0 && this.moduleHolder !== 0) || (this.nextPrevHolder !== 0)) {
-          //   this.isprevEnable = false;
-          // }
-          // if ((((this.weekHolder) !== this.scromModuleData.length - 1)||(this.moduleHolder) !== this.scromModuleData[this.weekHolder-1].childData.length - 1)
-          //   || ((this.nextPrevHolder) !== this.scromModuleData[this.weekHolder-1].childData[this.scromModuleData[this.weekHolder-1].length - 1].childData.length - 1)) {
-          //   this.isNextEnable = false;
-          // }
+              this.currentPage = Number(result.data.resumeContent);
+              this.topiccurrentPage = Number(result.data.resumeSubContent);
+              this.weekHolder = result.data.week - 1;
+              if (this.scromApiData.checkLevel) {
+                this.currentPage = Number(result.data.module);
+                this.subModuleHolder = Number(result.data.resumeContent);
+                this.submoduleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].title
+                this.moduleExpand(this.weekHolderUI, Number(this.subModuleHolderUI),this.scromApiData.checkLevel?this.currentPage:null);
+              }else{
+                this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
+              }
+              this.topicPageStatus = this.scromApiData.checkLevel ?result.data.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage]?.status: result.data.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]?.status
+              this.topicPageStatus = this.topicPageStatus ? this.topicPageStatus : "process";
+              this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
+              this.topicInfo = this.scromApiData.checkLevel ? this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage] : this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]
 
-          this.checkLastFirstIndexReached()
-           
-          this.scromModuleData.forEach(childData => {
-            if (childData && childData.childData) {
-              childData.childData.forEach(subChild => {
-                if (subChild && subChild.childData && subChild.childData.length > 0) {
-                  this.treeCourse = true;
-                } else {
-                  this.treeCourse = false;
-                }
-              });
+              // if (resumeInit) {
+
+              //   this.nextPrevHolder = this.topiccurrentPage;
+              //   this.moduleHolder = this.currentPage;
+              //   this.weekHolderUI = this.weekHolder;
+              //   resumeInit = false;
+              //   this.isprevEnable = true;
+              //   this.isNextEnable = true;
+              // }
+
             }
-          });
-        }
-      } else {
-        //INDEX ON COURSE START
-        this.nextPrevHolder = this.topiccurrentPage = 0;
-        this.moduleHolder = this.currentPage = 0;
+            // this.moduleExpand(this.weekHolderUI, Number(this.subModuleHolder),this.scromApiData.checkLevel?this.currentPage:null);
+            // if ((this.weekHolder !==0 && this.moduleHolder !== 0) || (this.nextPrevHolder !== 0)) {
+            //   this.isprevEnable = false;
+            // }
+            // if ((((this.weekHolder) !== this.scromModuleData.length - 1)||(this.moduleHolder) !== this.scromModuleData[this.weekHolder-1].childData.length - 1)
+            //   || ((this.nextPrevHolder) !== this.scromModuleData[this.weekHolder-1].childData[this.scromModuleData[this.weekHolder-1].length - 1].childData.length - 1)) {
+            //   this.isNextEnable = false;
+            // }
 
-        this.isprevEnable = true;
-        this.isNextEnable = false;
-      }
-    });}
+            this.checkLastFirstIndexReached()
+
+            this.scromModuleData.forEach(childData => {
+              if (childData && childData.childData) {
+                childData.childData.forEach(subChild => {
+                  if (subChild && subChild.childData && subChild.childData.length > 0) {
+                    this.treeCourse = true;
+                  } else {
+                    this.treeCourse = false;
+                  }
+                });
+              }
+            });
+          }
+        } else {
+          //INDEX ON COURSE START
+          this.nextPrevHolder = this.topiccurrentPage = 0;
+          this.moduleHolder = this.currentPage = 0;
+
+          this.isprevEnable = true;
+          this.isNextEnable = false;
+        }
+      });
+    }
     this.getCoursePlayerStatus();
     // this.getEboxURL();
   }
@@ -511,26 +522,26 @@ export class CoursedetailsComponent implements OnInit {
   onResize(event) {
     this.screenWidth = window.innerWidth;
   }
-  
+
   toggleDisplayDiv() {
     this.isShowDiv = !this.isShowDiv;
   }
-  checkLastFirstIndexReached(){
+  checkLastFirstIndexReached() {
     //check 1stweek 1stmodule 1stopic
-    if(this.weekHolder == 0 && this.moduleHolder==0 && this.nextPrevHolder==0){
+    if (this.weekHolder == 0 && this.moduleHolder == 0 && this.nextPrevHolder == 0) {
       this.isprevEnable = true;
-    }else{
+    } else {
       this.isprevEnable = false;
     }
-    let lastweekIndex  = this.scromModuleData.length - 1
-    let lastweekmoduleIndex = this.scromModuleData[lastweekIndex].childData.length -1
+    let lastweekIndex = this.scromModuleData.length - 1
+    let lastweekmoduleIndex = this.scromModuleData[lastweekIndex].childData.length - 1
     let lastweekmoduletopicIndex = this.scromModuleData[lastweekIndex].childData[lastweekmoduleIndex].childData.length - 1;
     //check last week,module,topic
-    if(
+    if (
       (this.weekHolder == lastweekIndex) && (this.moduleHolder == lastweekmoduleIndex) && (this.nextPrevHolder == lastweekmoduletopicIndex)
-    ){
+    ) {
       this.isNextEnable = true;
-    }else{
+    } else {
       this.isNextEnable = false;
     }
   }
@@ -640,7 +651,7 @@ export class CoursedetailsComponent implements OnInit {
               this.courseid + '&user_id=' + id + '&user_obj_id=' +
               this.getuserid._id + '&path=' + this.gettopicLink.link +
               '&module_status=' + this.moduleSatusCheck
-              + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Next&week=' + (this.weekHolder + 1) + '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
+              + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Next&week=' + (this.weekHolder + 1) + '&submoduleIndex=' + null + '&moduleIndex=' + this.topiccurrentPage + '&topicIndex=' + this.nextPrevHolder + '&lastLogIndex=' + this.lastLogIndex);
         }
       }
 
@@ -664,7 +675,7 @@ export class CoursedetailsComponent implements OnInit {
       this.getTopicLengthofModule = this.scromModuleData[this.weekHolder].childData[this.currentPage]?.topic_len;
       // topic to module change on previous
 
-      
+
       if (this.currentPage - 1 >= 0 && this.topiccurrentPage === 0) {
         this.currentPage = this.currentPage - 1;
         this.moduleHolder = this.currentPage;
@@ -672,15 +683,15 @@ export class CoursedetailsComponent implements OnInit {
         this.nextPrevHolder = this.topiccurrentPage;
         this.getTopicLengthofModule = this.scromModuleData[this.weekHolder].childData[this.currentPage]?.topic_len;
       } else {
-        if (this.currentPage==0 && this.topiccurrentPage == 0) {
+        if (this.currentPage == 0 && this.topiccurrentPage == 0) {
           this.weekHolder = this.weekHolderUI = this.weekHolder - 1;
           this.moduleHolder = this.scromModuleData[this.weekHolder].childData.length - 1;
           this.currentPage = Number(this.moduleHolder);
           this.topiccurrentPage = this.scromModuleData[this.weekHolder].childData[this.currentPage].childData.length - 1;
           this.nextPrevHolder = this.topiccurrentPage;
-        }else{
-        this.topiccurrentPage = this.topiccurrentPage - 1;
-        this.nextPrevHolder = this.topiccurrentPage;
+        } else {
+          this.topiccurrentPage = this.topiccurrentPage - 1;
+          this.nextPrevHolder = this.topiccurrentPage;
         }
       }
       if (this.topiccurrentPage >= 0) {
@@ -696,15 +707,15 @@ export class CoursedetailsComponent implements OnInit {
             this.courseid + '&user_id=' + id + '&user_obj_id=' +
             this.getuserid._id + '&path=' + this.gettopicLink.link +
             '&module_status=' + this.moduleSatusCheck
-            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Prev&week=' +(this.weekHolder+1)+ '&token=' + this.user_token + '&lastLogIndex=' + this.lastLogIndex);
+            + '&module=' + this.moduleInfo.title + '&topic=' + this.gettopicLink.title + '&action=Prev&week=' + (this.weekHolder + 1) + '&submoduleIndex=' + null + '&moduleIndex=' + this.topiccurrentPage + '&topicIndex=' + this.nextPrevHolder + '&lastLogIndex=' + this.lastLogIndex);
 
       }
 
     }
   }
-  downloadResource(){
+  downloadResource() {
     const a = document.createElement('a')
-    a.target= '_blank';
+    a.target = '_blank';
     a.href = this.scromApiData.resourceUrl;
     a.download = this.scromApiData.resourceUrl.split('/').pop()
     document.body.appendChild(a)
@@ -715,15 +726,15 @@ export class CoursedetailsComponent implements OnInit {
   playerModuleAndTopic() {
     this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
       this.scromApiData = data.data?.playerModuleAndTopic?.message[0];
-      if(this.scromApiData?.lastLogIndex && this.scromApiData?.lastLogIndex != "undefined"){
-        this.lastLogIndex  = parseInt(this.scromApiData.lastLogIndex) + 1;
+      if (this.scromApiData?.lastLogIndex && this.scromApiData?.lastLogIndex != "undefined") {
+        this.lastLogIndex = parseInt(this.scromApiData.lastLogIndex) + 1;
       }
       if (this.scromApiData?.toc != '0') {
 
         if (this.screenWidth < 800) {
           this.drawersOpen = false;
         }
-        else{
+        else {
           this.drawersOpen = true;
         }
       } else {
@@ -732,28 +743,39 @@ export class CoursedetailsComponent implements OnInit {
       this.scromModuleData = this.scromApiData?.childData;
       this.weekLength = this.scromApiData.childData.length;
       // this.moduleLenth = this.scromApiData?.childData.length;
-      if(!this.checkDetails?.fromSuggestion)
-      {this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : Number(this.scromApiData.topicIndex);
-      this.moduleHolder = this.currentPage = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
-      if(this.scromApiData.checkLevel)
-      {this.subModuleHolder = this.scromApiData.moduleIndex == null ? 0 : 0}//Number(this.scromApiData.submoduleIndex);}
-      this.weekHolder  = this.weekHolderUI = this.scromApiData.week - 1;}
-      else{
+      if (!this.checkDetails?.fromSuggestion) {
+        this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : Number(this.scromApiData.topicIndex);
+        this.moduleHolder = this.currentPage =  this.scromApiData.checkLevel ? (this.scromApiData.module == null ? 0 : Number(this.scromApiData.module)) :this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
+        this.weekHolder = this.weekHolderUI = this.scromApiData.week - 1;
+        if (this.scromApiData.checkLevel) {
+          this.subModuleHolder = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
+          this.subModuleHolderUI = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
+          
+          this.submoduleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].title
+        }
+      }
+      else {
         this.nextPrevHolder = this.topiccurrentPage = Number(this.checkDetails.topicIndex);
-      this.moduleHolder = this.currentPage = Number(this.checkDetails.moduleIndex);
-      this.weekHolder  = this.weekHolderUI = this.checkDetails.week - 1;
+        this.moduleHolder = this.currentPage = Number(this.checkDetails.moduleIndex);
+        this.weekHolder = this.weekHolderUI = this.checkDetails.week - 1;
       }
       // this.scromModuleData[this.moduleHolder].expanded = true;
       this.oldIdx = this.moduleHolder;
-      this.topicInfo = this.scromApiData.checkLevel?this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].childData[this.nextPrevHolder]:this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].childData[this.nextPrevHolder]
+      this.topicInfo = this.scromApiData.checkLevel ? this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].childData[this.nextPrevHolder] : this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].childData[this.nextPrevHolder]
       this.topicPageStatus = this.topicInfo.status
-      this.moduleExpand(this.weekHolder, this.moduleHolder,this.scromApiData.checkLevel?this.subModuleHolder:null);
-      setTimeout(() => { 
-        if(this.weekHolder>0 )
-        this.inputEl ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" }) : '' 
+      if(this.scromApiData.checkLevel){
+        this.moduleExpand(this.weekHolder, this.subModuleHolder,this.moduleHolder);
+      }
+      else{
+        this.moduleExpand(this.weekHolder, this.moduleHolder,null);
+      }
+      
+      setTimeout(() => {
+        if (this.weekHolder > 0)
+          this.inputEl ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" }) : ''
       }, 4000);
-      const moduleTitle = encodeURIComponent(this.scromApiData.childData[this.weekHolder].childData[this.currentPage].title);
-      const topicTitle = encodeURIComponent(this.scromApiData.checkLevel?this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage].title:this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage].title);
+      const moduleTitle = this.scromApiData.checkLevel ? encodeURIComponent(this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].title) : encodeURIComponent(this.scromApiData.childData[this.weekHolder].childData[this.currentPage].title);
+      const topicTitle = encodeURIComponent(this.scromApiData.checkLevel ? this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage].title : this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage].title);
       this.getuserid = JSON.parse(localStorage.getItem('UserDetails'));
       this.currentModuleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].title;
       this.currentTopicTitle = this.topicInfo.title//this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage].title;
@@ -763,23 +785,24 @@ export class CoursedetailsComponent implements OnInit {
       //   this.scromModuleData[0].childData[0].childData[0].status = 'process'
       // }
       let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
-      if(this.checkDetails?.fromSuggestion){
+      if (this.checkDetails?.fromSuggestion) {
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
-        (environment.scormUrl + '/scormPlayer.html?content_id=' +
-          this.courseid + '&user_id=' + id + '&user_obj_id=' +
-          this.getuserid._id + '&path=' + this.checkDetails.url +
-          '&module_status=' + 'process&week='+ (Number(this.checkDetails.week))
-          + '&module=' + this.checkDetails.moduleName + '&topic=' + this.checkDetails.topicName + '&subModuleIndex=' + this.subModuleHolder + '&lastLogIndex=' + this.lastLogIndex);
+          (environment.scormUrl + '/scormPlayer.html?content_id=' +
+            this.courseid + '&user_id=' + id + '&user_obj_id=' +
+            this.getuserid._id + '&path=' + this.checkDetails.url +
+            '&module_status=' + 'process&week=' + (Number(this.checkDetails.week)).toString()
+            + '&module=' + this.checkDetails.moduleName + '&topic=' + this.checkDetails.topicName + '&ModuleIndex=' + this.moduleHolder + '&submoduleIndex=' + (this.scromApiData.checkLevel ? this.subModuleHolder?.toString() : 'null') + '&topicIndex=' + this.nextPrevHolder + '&lastLogIndex=' + this.lastLogIndex);
       }
-      else
-      {this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
-        (environment.scormUrl + '/scormPlayer.html?content_id=' +
-          this.courseid + '&user_id=' + id + '&user_obj_id=' +
-          this.getuserid._id + '&path=' + this.scromApiData.url +
-          '&module_status=' + 'process&week='+ (Number(this.weekHolder) + 1)
-          + '&module=' + moduleTitle + '&topic=' + topicTitle + '&subModuleIndex=' + this.subModuleHolder + '&lastLogIndex=' + this.lastLogIndex);
-}
+      else {
+        this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+          (environment.scormUrl + '/scormPlayer.html?content_id=' +
+            this.courseid + '&user_id=' + id + '&user_obj_id=' +
+            this.getuserid._id + '&path=' + this.scromApiData.url +
+            '&module_status=' + 'process&week=' + (Number(this.weekHolder) + 1).toString()
+            + '&module=' + moduleTitle + '&topic=' + topicTitle + '&ModuleIndex=' + this.moduleHolder + (this.scromApiData.checkLevel ?'&submoduleIndex=' +  this.subModuleHolder?.toString() : '&submoduleIndex=null') + '&topicIndex=' + this.nextPrevHolder + '&lastLogIndex=' + this.lastLogIndex);
+      }
       this.playerTopicLen = this.scromApiData.total_topic_len;
+      console.log(this.urlSafe,"playermoduletopicAPI")
       // tree level
       this.scromModuleData.forEach(childData => {
         if (childData && childData.childData) {
@@ -793,35 +816,41 @@ export class CoursedetailsComponent implements OnInit {
           });
         }
       });
-      if(!this.scromApiData.checkLevel){
-      this.checkLastFirstIndexReached()
+      if (!this.scromApiData.checkLevel) {
+        this.checkLastFirstIndexReached()
       }
       this.filterToc();
     });
   }
-  playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, weekIndex, topindex, moduleIdx, smi?) {
+  playTopic(url, topicName, topicStatus, moduleName, moduleStatus, moduleLegth, weekIndex, topindex, smi, moduleIdx?) {
     this.weekHolder = weekIndex;
     this.weekHolderUI = weekIndex;
     this.currentTopicTitle = topicName;
     this.currentModuleTitle = moduleName
     this.topicPageStatus = topicStatus;
     this.moduleSatusCheck = moduleStatus ? moduleStatus : 'process';
-    const encodedModuleName = encodeURIComponent(moduleName);
+    if (moduleIdx >= 0) {
+      this.subModuleHolder = moduleIdx
+      this.subModuleHolderUI = moduleIdx
+      this.submoduleTitle = this.scromApiData.childData[weekIndex].childData[smi].childData[moduleIdx].title
+    }
+    const encodedModuleName = moduleIdx >= 0 ? encodeURIComponent(this.scromApiData.childData[weekIndex].childData[smi].childData[moduleIdx].title) : encodeURIComponent(moduleName);
     const encodedTopicName = encodeURIComponent(topicName);
     this.nextPrevHolder = topindex;
     this.topiccurrentPage = this.nextPrevHolder
-    this.moduleHolder = Number(moduleIdx);
-    this.currentPage = Number(moduleIdx);
+    this.moduleHolder = Number(smi);
+    this.currentPage = Number(smi);
     this.isprevEnable = true;
     this.isNextEnable = true;
-    this.topicInfo = smi>=0?this.scromApiData.childData[weekIndex].childData[moduleIdx].childData[smi].childData[topindex]:this.scromApiData.childData[weekIndex].childData[moduleIdx].childData[topindex]
+    this.topicInfo = moduleIdx >= 0 ? this.scromApiData.childData[weekIndex].childData[smi].childData[moduleIdx].childData[topindex] : this.scromApiData.childData[weekIndex].childData[smi].childData[topindex]
     let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
       (environment.scormUrl + '/scormPlayer.html?content_id=' +
         this.courseid + '&user_id=' + id + '&user_obj_id=' + this.getuserid._id + '&path=' + url
         + '&module_status=' + this.moduleSatusCheck
-        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (Number(this.weekHolder) + 1) + '&subModuleIndex=' + this.subModuleHolder + '&lastLogIndex=' + this.lastLogIndex);
+        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (Number(this.weekHolder) + 1) + '&ModuleIndex=' + this.moduleHolder + '&submoduleIndex=' + (this.scromApiData.checkLevel ? this.subModuleHolder.toString() : 'null') + '&topicIndex=' + this.nextPrevHolder + '&lastLogIndex=' + this.lastLogIndex);
     this.checkLastFirstIndexReached()
+    console.log(this.urlSafe,"click link")
   }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {
@@ -961,16 +990,19 @@ export class CoursedetailsComponent implements OnInit {
 
 
   moduleExpand(Windex, mindex, smindex, spotval?) {
-    // console.log(spotval)
-    if(spotval){
-    spotval.expanded = spotval.expanded ? false : true;
-    }else{
-      if(this.scromApiData.checkLevel){
-        this.scromModuleData[Windex].childData[mindex].childData[smindex].expanded = true;
-      }else{
+    console.log(spotval)
+
+    if (spotval) {
+      spotval.expanded = spotval.expanded ? false : true;
+    } else {
+      if (this.scromApiData.checkLevel) {
+        this.scromModuleData[Windex].expanded = true;
+        this.scromModuleData[Windex].childData[smindex].expanded = true;
+        this.scromModuleData[Windex].childData[smindex].childData[mindex].expanded = true;
+      } else {
         this.scromModuleData[Windex].childData[mindex].expanded = true;
       }
-      
+
     }
     // if(this.filterkey === "All"){ 
     //   if (mindex !== this.oldIdx) {
@@ -1000,12 +1032,12 @@ export class CoursedetailsComponent implements OnInit {
     if (!this.drawersOpen && this.scromApiData?.toc != '0') {
       this.drawersOpen = this.drawersOpen ? false : true
     } else {
-      if(this.fromCalendar){
+      if (this.fromCalendar) {
         this.route.navigateByUrl('/Learner/calendaractivity');
       }
-      else{
+      else {
         this.route.navigateByUrl('/Learner/MyCourse');
-      }  
+      }
     }
 
   }
@@ -1022,11 +1054,11 @@ export class CoursedetailsComponent implements OnInit {
     const containerarea = document.getElementsByClassName('mat-dialog-container')[0];
     rclickctrl(backdrop)
     rclickctrl(containerarea)
-    function rclickctrl(element){
-      element.addEventListener("contextmenu", ( e )=> {
+    function rclickctrl(element) {
+      element.addEventListener("contextmenu", (e) => {
         e.preventDefault();
         return false;
-      } );
+      });
     }
   }
 
@@ -1040,26 +1072,26 @@ export class CoursedetailsComponent implements OnInit {
     });
     const backdrop = document.getElementsByClassName('cdk-overlay-backdrop')[0];
     const containerarea = document.getElementsByClassName('mat-dialog-container')[0];
-    setTimeout(()=>{
-      this.longDesc  = document.getElementById('courseDesc').innerHTML;
-      if(this.longDesc.length > 250){
+    setTimeout(() => {
+      this.longDesc = document.getElementById('courseDesc').innerHTML;
+      if (this.longDesc.length > 250) {
         this.isReadMore = false;
       } else {
         this.isReadMore = true;
       }
       console.log(this.longDesc.length, 'desc')
-    },500)
+    }, 500)
     rclickctrl(backdrop)
     rclickctrl(containerarea)
-    function rclickctrl(element){
-      element.addEventListener("contextmenu", ( e )=> {
+    function rclickctrl(element) {
+      element.addEventListener("contextmenu", (e) => {
         e.preventDefault();
         return false;
-      } );
+      });
     }
   }
 
-  resourseAccord(courseResource, index) { 
+  resourseAccord(courseResource, index) {
     if (courseResource) {
       courseResource.forEach((element, i) => {
         if (index === i) {
@@ -1077,7 +1109,7 @@ export class CoursedetailsComponent implements OnInit {
 
   understoodClick(ux) {
     this.topicInfo.user_experience = ux
-    this.Lservice.userexperience(this.getuserid.user_id, this.courseid, this.currentModuleTitle, this.currentTopicTitle, ux, this.topicInfo.status).subscribe((data: any) => {
+    this.Lservice.userexperience(this.getuserid.user_id, this.courseid, this.scromApiData.checkLevel ? this.submoduleTitle : this.currentModuleTitle, this.currentTopicTitle, ux, this.topicInfo.status).subscribe((data: any) => {
       if (data?.data?.userexperience?.success) {
         this.topicInfo.user_experience = ux
       } else {
@@ -1089,7 +1121,7 @@ export class CoursedetailsComponent implements OnInit {
 
   bookmarkClick(isbokmarked) {
     this.topicInfo.bookmark = isbokmarked
-    this.Lservice.bookmark(this.getuserid.user_id, this.courseid, this.currentModuleTitle, this.currentTopicTitle, isbokmarked,Number(this.weekHolderUI)+1,this.lastLogIndex).subscribe((data: any) => {
+    this.Lservice.bookmark(this.getuserid.user_id, this.courseid, this.scromApiData.checkLevel ? this.submoduleTitle : this.currentModuleTitle, this.currentTopicTitle, isbokmarked, Number(this.weekHolderUI) + 1, this.lastLogIndex, this.moduleHolder, this.subModuleHolder, this.nextPrevHolder).subscribe((data: any) => {
       if (data?.data?.bookmark?.success) {
         this.topicInfo.bookmark = isbokmarked;
         this.filterToc()
@@ -1104,7 +1136,7 @@ export class CoursedetailsComponent implements OnInit {
   submitMyQuestion() {
     if (this.currentModuleTitle || this.currentTopicTitle) {
       if (this.questionText.trim().length) {
-        this.Lservice.askaquestion(this.getuserid.user_id, this.courseid, this.currentModuleTitle, this.currentTopicTitle, this.questionText).subscribe((data: any) => {
+        this.Lservice.askaquestion(this.getuserid.user_id, this.courseid, this.scromApiData.checkLevel ? this.submoduleTitle : this.currentModuleTitle, this.currentTopicTitle, this.questionText).subscribe((data: any) => {
           // console.log(data)
           this.questionText = "";
           if (data?.data?.askaquestion?.success) {
@@ -1128,7 +1160,7 @@ export class CoursedetailsComponent implements OnInit {
       this.isQALoading = true;
       this.myQuestionList = [];
       this.allQuestionList = []
-      this.Lservice.getMyQuestion(this.getuserid.user_id, this.courseid, this.currentModuleTitle, this.currentTopicTitle).subscribe((data: any) => {
+      this.Lservice.getMyQuestion(this.getuserid.user_id, this.courseid, this.scromApiData.checkLevel ? this.submoduleTitle : this.currentModuleTitle, this.currentTopicTitle).subscribe((data: any) => {
         this.isQALoading = false;
         if (data?.data.getmyque.success) {
           this.myQuestionList = data.data.getmyque.message
@@ -1140,7 +1172,7 @@ export class CoursedetailsComponent implements OnInit {
       this.isQALoading = true
       this.allQuestionList = []
       this.myQuestionList = [];
-      this.Lservice.getallquestion(this.getuserid.user_id, this.courseid, this.currentModuleTitle, this.currentTopicTitle, -1, this.batchId).subscribe((data: any) => {
+      this.Lservice.getallquestion(this.getuserid.user_id, this.courseid, this.scromApiData.checkLevel ? this.submoduleTitle : this.currentModuleTitle, this.currentTopicTitle, -1, this.batchId).subscribe((data: any) => {
         this.isQALoading = false
         if (data?.data.getallquestion?.success) {
           this.allQuestionList = data.data.getallquestion?.message
@@ -1156,7 +1188,7 @@ export class CoursedetailsComponent implements OnInit {
 
   tabClick(tab) {
     console.log(tab, 'tabs');
-    if(tab.index == 1) {
+    if (tab.index == 1) {
       this.filterkey = 'Bookmarked';
       this.filterToc();
     }
@@ -1165,32 +1197,68 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
   filterToc() {
-    if(this.scromApiData.checkLevel){return false}
+    // if(this.scromApiData.checkLevel){return false}
     this.bookmarkedCount = 0;
     this.bkup_Toc = JSON.parse(JSON.stringify(this.scromModuleData));
     this.filterData = []
     // if (this.filterkey === 'Bookmarked') {
-      this.bkup_Toc.forEach((week,wi) => {
-        let modulefilter = [];
-        week.childData.forEach((module,mi) => {
-        if (module.childData.length > 0) {
-          let markedTopcs;
-          markedTopcs = module.childData.filter((topic) => {
-            return topic?.bookmark === true;
+    if (this.scromApiData.checkLevel) {
+      this.bkup_Toc.forEach((week, wi) => {
+        
+        let smifilter = [];
+        week.childData.forEach((sm, smi) => {
+          let modulefilter = [];
+          sm.childData.forEach((module, mi) => {
+            if (module.childData.length > 0) {
+              let markedTopcs;
+              markedTopcs = module.childData.filter((topic) => {
+                return topic?.bookmark === true;
+              });
+              if (markedTopcs.length > 0) {
+                this.bookmarkedCount += markedTopcs.length;
+                module.childData = []
+                module.childData = markedTopcs;
+                modulefilter.push(module);
+              }
+            }
           });
-          if (markedTopcs.length > 0) {
-            this.bookmarkedCount += markedTopcs.length;
-            module.childData = []
-            module.childData = markedTopcs;
-            modulefilter.push(module);
+          if (modulefilter.length) {
+
+            sm.childData = modulefilter
+            smifilter.push(sm)
           }
+        });
+
+        if (smifilter.length) {
+          week.childData = smifilter
+          this.filterData.push(week);
         }
-      });
-      if(modulefilter.length){
-        week.childData = modulefilter
-      this.filterData.push(week);}
 
       });
+    } else {
+      this.bkup_Toc.forEach((week, wi) => {
+        let modulefilter = [];
+        week.childData.forEach((module, mi) => {
+          if (module.childData.length > 0) {
+            let markedTopcs;
+            markedTopcs = module.childData.filter((topic) => {
+              return topic?.bookmark === true;
+            });
+            if (markedTopcs.length > 0) {
+              this.bookmarkedCount += markedTopcs.length;
+              module.childData = []
+              module.childData = markedTopcs;
+              modulefilter.push(module);
+            }
+          }
+        });
+        if (modulefilter.length) {
+          week.childData = modulefilter
+          this.filterData.push(week);
+        }
+
+      });
+    }
     // } 
     // else {
     //   this.filterData = []
@@ -1311,7 +1379,7 @@ export class CoursedetailsComponent implements OnInit {
   //     }
   //   });
   // }
-  navigatePractice(){
+  navigatePractice() {
     window.open(this.eboxUrl);
   }
 
@@ -1327,11 +1395,11 @@ export class CoursedetailsComponent implements OnInit {
     const containerarea = document.getElementsByClassName('mat-dialog-container')[0];
     rclickctrl(backdrop)
     rclickctrl(containerarea)
-    function rclickctrl(element){
-      element.addEventListener("contextmenu", ( e )=> {
+    function rclickctrl(element) {
+      element.addEventListener("contextmenu", (e) => {
         e.preventDefault();
         return false;
-      } );
+      });
     }
   }
 
