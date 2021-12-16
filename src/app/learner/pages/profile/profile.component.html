@@ -75,8 +75,8 @@
           {{(userData.user_dtl && (userData.user_dtl.created_on | date)) || ' __  __  __'}}
         </div>
         <div class="width_100 center_align stateDet">
-          {{userData.state_detail && userData.state_detail[0].statename + ', '|| 'State'}}
-          {{userData.country_detail && userData.country_detail[0].countryname || '& Country' }}
+          {{userData.state_detail && userData.state_detail.length > 0 && userData.state_detail[0].statename + ', '|| 'State'}}
+          {{userData.country_detail && userData.country_detail.length > 0 && userData.country_detail[0].countryname || '& Country' }}
         </div>
         <div class="f_wt_400 uID">
           <!-- <span class="f_size_16"> {{userData.user_dtl && userData.user_dtl.username || 'User Name'}} &nbsp;&nbsp;</span> -->
