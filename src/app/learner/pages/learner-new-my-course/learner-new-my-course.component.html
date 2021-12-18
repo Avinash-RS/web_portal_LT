@@ -228,6 +228,22 @@
                             <em class="lxp-Calendar_Todo"></em>
                         </span>
                     </div>
+                    <br>
+                    <div class="stepIntegrationSection">
+                        <figure>
+                             <img src="assets/images/step1.jpeg" alt="">
+                         </figure>
+                         <div class="text">
+                             <div class="topic">
+                                 <h1>Learn to speak English</h1>
+                             </div>
+                             <div class="middle">
+                                 <button>
+                                     <em class="lxp-Play_Icon"></em> <span>Resume</span>
+                                 </button>
+                             </div>
+                         </div>
+                     </div>
                     <div class="course-progress" *ngIf="showProgressChart" [@collapseprogress]>
                     <div class="course-progress-wrapper">
                         <div class="d-flex justify-content-between align-items-start course-progress-header">
@@ -307,6 +323,7 @@
                                 <span>Course Completion Progress</span> 
                             </h4>
                         </div>
+                        
 
                         <mat-tab-group #tabs (selectedTabChange)="courseTabChange($event,userDetailes.user_id,userDetailes._id);" [(selectedIndex)]="selectedIndex">
                             <mat-tab>
@@ -315,6 +332,8 @@
                                 </ng-template>
                                 <div *ngIf="courseSkel; else courseSkeleton">
                                 <div class="mycoursesContent" *ngIf="courseDetailsList.length; else noCourseCard">
+                                   
+                                   
                                     <ng-container *ngFor="let item of courseDetailsList">
                                         <div class="courses d-flex justify-content-start">
                                             <div class="{{item.progressClass}} progBar">
