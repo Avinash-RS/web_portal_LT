@@ -86,146 +86,172 @@
 
         <div class="sessionDetails">
           <span class="sessionTitle activity-name"
-            matTooltip="{{activityShow?.activity_details.activityname}}">{{activityShow?.activity_details.activityname}}</span>
-          <div class="timingDetails">
-
-            <!-- <span>Held On</span> &nbsp;&nbsp; -->
-
-            <span class="sessionDate"><em class="lxp-Duration"></em><span class="dateTitle">Date:</span> {{
-              activityShow?.activity_details.startdate | date: 'dd/MM/yyyy hh a'}}</span>
+            matTooltip="{{activityShow?.activity_details.activityname}}">{{activityShow?.activity_details.activityname}}
+          </span>
+          <!-- <div class="flexStart d-flex justify-flex-start justify-content-between align-items-center"> -->
+          <div class="d-flex date-duration flexStart justify-flex-start justify-content-start">
+            <div class="timingDetails">
+              <span *ngIf="activityShow?.activity_details.activitytype != 'Recorded'" class="sessionDuration">
+                <em class="lxp-Clock"></em><span class="durationTitle">Duration:</span>
+                {{activityShow?.duration}}</span>
+              <span *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" class="sessionModule">
+                <em class="lxp-Todo_task"></em><span class="moduleTitle">Module:</span>
+                {{activityShow?.activity_details.modulename}}</span>
+              <!-- <span class="sessionTitle">Duration</span> -->
+            </div>
+            <div class="timingDetails">
+              <!-- <span>Held On</span> &nbsp;&nbsp; -->
+              <span class="sessionDate"><em class="lxp-Duration"></em><span class="dateTitle">Date:</span> {{
+                activityShow?.activity_details.startdate | date: 'dd/MM/yyyy hha'}}</span>
+            </div>
           </div>
-          <div class="timingDetails">
-            <span *ngIf="activityShow?.activity_details.activitytype != 'Recorded'" class="sessionDuration">
-              <em class="lxp-Clock"></em><span class="durationTitle">Duration:</span>
-              {{activityShow?.duration}}</span>
-            <span *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" class="sessionModule">
-              <em class="lxp-Todo_task"></em><span class="moduleTitle">Module:</span>
-              {{activityShow?.activity_details.modulename}}</span>
-            <!-- <span class="sessionTitle">Duration</span> -->
-
-          </div>
-
+          <!-- </div> -->
         </div>
+
+        <div class="row smallContainers d-flex justify-content-between align-items-center">
+          <!-- <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4"> -->
+          <!-- <div class="tabContainers"> -->
+            <div class="smallContainer d-flex flexStart justify-flex-start justify-content-start align-items-center">
+                <div class="LightBlueCircle">
+                  <em class="lxp-video-tutorial-1"></em>
+                </div>
+                <div class="count">
+                  <span class="number">{{listOfSessions?.length}}</span>
+                  <p class="smallHeadline">Total Sessions</p>
+                </div>
+            </div>
+          <!-- </div> -->
+
+          <!-- <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4"> -->
+            <div class="smallContainer d-flex flexStart justify-flex-start justify-content-start align-items-center">
+                <div class="YellowGreenCircle">
+                  <em class="lxp-students"></em>           
+                </div>
+                <div class="count">
+                  <span class="number">{{attendedCount.length}}</span>
+                  <p class="smallHeadline">Attended Sessions</p>
+                </div>
+            </div>
+          <!-- </div> -->
+
+          <!-- <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4"> -->
+            <div class="smallContainer d-flex flexStart justify-flex-start justify-content-start align-items-centerr">
+                <div class="FunBlueCircle">
+                  <em class="lxp-recorded_videos"></em>         
+                </div>
+                <div class="count">
+                  <span class="number">{{recordedCount.length}}</span>
+                  <p class="smallHeadline">Recorded Videos</p>
+                </div>
+            </div>
+          <!-- </div> -->
+        </div>
+
+          <!-- <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
+            <mat-card class="smallContainer">
+              <mat-card-subtitle class="smallHeadline">Attended Sessions</mat-card-subtitle>
+              <div class="row d-flex justify-content-between align-items-center p-t-10"> -->
+
+                <!--Already Commented-->
+                <!-- <span class="number" *ngIf="attendedSessions !== undefined">{{attendedSessions?.true}}</span> -->
+
+                <!-- <span class="number">{{attendedCount.length}}</span>
+                <img mat-card-image src="../../../../assets/learner/students.svg" alt="student">
+              </div>
+            </mat-card>
+          </div> -->
+
+          <!-- <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
+            <mat-card class="smallContainer">
+              <mat-card-subtitle class="smallHeadline">Recorded Sessions</mat-card-subtitle>
+              <div class="row d-flex justify-content-between align-items-center p-t-10">
+                <span class="number">{{recordedCount.length}}</span>
+                <img mat-card-image src="../../../../assets/learner/video-tutorial.svg" alt="video">
+              </div>
+            </mat-card>
+          </div> -->
+        
+
+        <div class="attendanceWrapper">
+          <!-- <div class="row sessionAttendance" *ngIf="sessionAttendance?.length">
+            <span class="tableHeadline">My Attendance</span>
+          </div> -->
+
+          <div class="row attendance-table" *ngIf="sessionAttendance?.length">
+            <table style="width: 100%;">
+              <tr class="tblheaderFont">
+                <th width="7%">Session #</th>
+                <th width="55%">Topic Name</th>
+                <th width="22%">Date</th>
+                <th width="6%">Attendance</th>
+              </tr>
+              <tbody>
+                <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
+                  <td class="tableCol">{{i+1}}</td>
+                  <td>{{atd.activity.activityname}}</td>
+                  <td>{{atd.activity.startdate | date: 'dd/MM/yyyy hh:mm a'}}</td>
+                  <td class="tableCol">
+                    <mat-icon #attended
+                      *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'"
+                      style="color: green;">check_circle_outline</mat-icon>
+                    <mat-icon
+                      *ngIf="atd.activity.attendencedetails.Attendence =='no' || atd.activity.attendencedetails.Attendence == 'No'"
+                      style="color: red;">highlight_off</mat-icon>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
       </div>
     </div>
   </div>
 
 
-
-  <!-- <div class="row" style="color: white; margin-top: 10px;"> -->
-
-
-  <!-- <div class="moduleContent">
-    
-          
-        </div> -->
-
-
-  <!-- </mat-card>  -->
-
-  <!--<div class="row smallContainers">
-         <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
-          <mat-card class="smallContainer1">
-            <mat-card-subtitle class="smallHeadline">Total Sessions</mat-card-subtitle>
-            <div class="row d-flex justify-content-between align-items-center p-t-10">
-              <span class="number">{{listOfSessions?.length}}</span>
-              <img mat-card-image src="../../../../assets/learner/elearning.svg" alt="elearning">
-            </div>
-          </mat-card>
-        </div>
-        
-        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
-          <mat-card class="smallContainer2">
-            <mat-card-subtitle class="smallHeadline">Attended Sessions</mat-card-subtitle>
-            <div class="row d-flex justify-content-between align-items-center p-t-10"> -->
-
-  <!--Already Commented-->
-  <!-- <span class="number" *ngIf="attendedSessions !== undefined">{{attendedSessions?.true}}</span> -->
-
-  <!-- <span class="number">{{attendedCount.length}}</span>
-              <img mat-card-image src="../../../../assets/learner/students.svg" alt="student">
-            </div>
-          </mat-card>
-        </div>
-
-        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
-          <mat-card class="smallContainer3">
-            <mat-card-subtitle class="smallHeadline">Recorded Sessions</mat-card-subtitle>
-            <div class="row d-flex justify-content-between align-items-center p-t-10">
-              <span class="number">{{recordedCount.length}}</span>
-              <img mat-card-image src="../../../../assets/learner/video-tutorial.svg" alt="video">
-            </div>              
-          </mat-card>
-        </div> 
-      </div>
-
-      <div class="attendanceWrapper">
-        <div class="row sessionAttendance" *ngIf="sessionAttendance?.length">
-          <span class="tableHeadline">My Attendance</span>
-        </div>
-
-        <div class="row attendance-table" *ngIf="sessionAttendance?.length">
-          <table style="width: 100%;">
-            <tr class="tblheaderFont">
-              <th width="13%">Session #</th>
-              <th width="55%">Activity Name</th>
-              <th width="22%">Date</th>
-              <th width="10%">Present</th>
-            </tr>
-            <tbody>
-              <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
-                <td>{{i+1}}</td>
-                <td>{{atd.activity.activityname}}</td>
-                <td>{{atd.activity.startdate | date: 'dd/MM/yyyy , hh:mm a'}}</td>
-                <td>
-                  <mat-icon #attended *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'" style="color: green;">done</mat-icon>
-                  <mat-icon *ngIf="atd.activity.attendencedetails.Attendence =='no' || atd.activity.attendencedetails.Attendence == 'No'" style="color: red;">close</mat-icon>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div> -->
-
-  <!-- </div>
-        </div> -->
-
-  <!-- <ng-template #attendanceDialog>
-      <div class="">
+  <ng-template #attendanceDialog>
+    <div class="">
       <mat-icon class="closeModal-icon" (click)="closeModal()">close</mat-icon>
-      <h2 >My Attendance</h2>
+      <h2>My Attendance</h2>
       <div class="row attendance-table">
-      <table>
-        <tr class="tblheaderFont">
-          <th>Session #</th>
-          <th >Activity Name</th>
-          <th>Date</th>
-          <th>Present?</th>
-        </tr>
-        <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
-          <td>{{i+1}}</td>
-          <td>{{atd.activity.activityname}}</td>
-          <td>{{atd.activity.startdate | date: 'dd/MM/yyyy , hh:mm a'}}</td>
-          <td>
-            <mat-icon *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'" style="color: green;">done</mat-icon>
-            <mat-icon *ngIf="atd.activity.attendencedetails.Attendence =='no' || atd.activity.attendencedetails.Attendence == 'No'" style="color: red;">close</mat-icon>
-          </td>
-        </tr>
-      </table>
+        <table>
+          <tr class="tblheaderFont">
+            <th>Session #</th>
+            <th>Topic Name</th>
+            <th>Date</th>
+            <th>Attendance</th>
+          </tr>
+          <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
+            <td class="tableCol">{{i+1}}</td>
+            <td>{{atd.activity.activityname}}</td>
+            <td>{{atd.activity.startdate | date: 'dd/MM/yyyy hh:mm a'}}</td>
+            <td class="tableCol">
+              <mat-icon
+                *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'"
+                style="color: green;">check_circle_outline</mat-icon>
+              <mat-icon
+                *ngIf="atd.activity.attendencedetails.Attendence =='no' || atd.activity.attendencedetails.Attendence == 'No'"
+                style="color: red;">highlight_off</mat-icon>
+            </td>
+          </tr>
+        </table>
       </div>
-      </div>
-      </ng-template> -->
+    </div>
+  </ng-template>
 
 
 
   <!-- Right Side Panel ...  -->
   <div class="rightContainer" *ngIf="showContent">
     <!-- <div class="col-lg-5 col-xl-5 col-md-12 col-sm-12 col-12"> -->
-    <div class="row course-list">
-      <h3 class="headLine">Industry Talk Sessions</h3>
-      <!-- <div class="headingWrapper d-flex justify-content-between align-items-center"> -->
+    <!-- <div class="row course-list"> -->
+      <div class="headingWrapper">
+        <!-- <div class="headingWrapper d-flex justify-content-between align-items-center"> -->
         <!-- <h3 class="headLine">Upcoming Sessions and Recorded Sessions</h3> -->
-        <!-- <button class="btn btn-light attandanceShow" *ngIf="sessionAttendance?.length" (click)="showModal(attendanceDialog)">Attendance</button> -->
+        <h3 class="headLine">Industry Talk Sessions</h3>
+        <button class="btn btn-light attandanceShow" *ngIf="sessionAttendance?.length"
+          (click)="showModal(attendanceDialog)">Attendance</button>
+      </div>
       <!-- </div> -->
       <mat-nav-list class="listofSessionContainer">
         <mat-list-item *ngFor="let los of listOfSessions" class="listofSessionCards">
@@ -253,8 +279,10 @@
               <div class="content-container">
                 <h4 class="activity-name" matTooltip="{{los.activity_details.activityname}}">
                   {{los.activity_details.activityname}}</h4>
-                <h5><span class="hover-content">Date:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy hh a'}}</h5>
-                <h5 *ngIf="los.activity_details.activitytype != 'Recorded'"><span class="hover-content">Duration:</span> {{los.duration}}
+                <h5><span class="hover-content">Date:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy hha'}}
+                </h5>
+                <h5 *ngIf="los.activity_details.activitytype != 'Recorded'"><span class="hover-content">Duration:</span>
+                  {{los.duration}}
                 </h5>
                 <h5 *ngIf="los.activity_details.activitytype == 'Recorded'"><span class="hover-content">Module:</span>
                   {{los.activity_details.modulename}} </h5>
@@ -263,7 +291,7 @@
           </mat-card>
         </mat-list-item>
       </mat-nav-list>
-    </div>
+    <!-- </div> -->
     <!-- </div> -->
   </div>
 </div>

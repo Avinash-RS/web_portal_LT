@@ -5,26 +5,16 @@
   display: flex;
   background-color: #f2f2f2;
   flex-direction: column;
-  // @media only screen and (max-width: 1140px) {
-  //  .leftContainer {
-  //    width: 100%;
-  //    padding: 10px 0;
-  //  }
-  //  .rightContainer {
-  //    width: 100%;
-  //    padding: 0 15px;
-  //  }
-  // }
-  @media only screen and (min-width: 720px) {
+  @media only screen and (min-width: 1024px) {
     flex-direction: row;
     .leftContainer {
       width: calc(100% - 500px);
     }
     .rightContainer {
       width: 500px;
-      padding: 0 10px;
+      padding: 0 20px;
     }
-   }
+  }
 }
 
 .leftContainer {
@@ -32,14 +22,17 @@
   width: 100%;
   z-index: 1;
   box-shadow: 0px 0px 9px 0px #00000059;
-  padding: 10px 0;
+  padding: 10px 0 20px 0;
+  // @media only screen and (max-width: 1023px) {
+  //   padding: 10px 0 20px 0;
+  // }
 }
 
 .rightContainer {
   background-color: white;
   width: 100%;
   z-index: 0;
-  padding: 0 15px;
+  padding: 15px;
 }
 
 .container {
@@ -81,7 +74,7 @@
   margin-right: 3%;
 }
 .breadcrumbPading {
-  padding: 25px 0;
+  padding: 15px 0;
   width: 100%;
 }
 .breadcrumb {
@@ -141,7 +134,7 @@
 .moduleImage {
   padding: 0 15px;
   position: relative;
-  @media only screen and (min-width: 720px) {
+  @media only screen and (min-width: 768px) {
     padding: 0 30px;
     width: 100%;
   }
@@ -175,8 +168,98 @@
   }
   .sessionDetails {
     padding-top: 20px;
+    .sessionTitle {
+      text-align: left;
+      letter-spacing: 0px;
+      font-size: 15px;
+      color: black;
+      opacity: 1;
+      margin-bottom: 10px;
+      display: inline-block;
+      width: 100%;
+      text-overflow: ellipsis;
+      display: inline-block;
+      /* margin-left: 2%; */
+      @media only screen and (max-width: 600px) {
+        color: black;
+        margin-bottom: 0;
+      }
+    }
+
+    .timingDetails {
+      font-size: 12px;
+      position: relative;
+      margin: 0 10px 0 0;
+      padding-right: 10px;
+      &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 5px;
+        background-color: #707070;
+        width: 1px;
+        height: 60%;
+        display: flex;
+        justify-content: center;
+        align-items:center;
+        @media only screen and (max-width: 1515px) {
+          display: none;
+        }
+      }
+      &:last-child {
+        &::after {
+          display: none;
+        }
+      }
+      .sessionDate {
+        line-height: 24px;
+        color: #333333;
+        // @media only screen and (max-width: 600px) {
+        //   color: #333333;
+        //   margin-top: 10px;
+        // }
+        .lxp-Duration {
+          color: #607d8b;
+          margin-right: 5px;
+        }
+        .dateTitle {
+          color: #666666;
+        }
+      }
+      .sessionDuration {
+        line-height: 24px;
+        color: #333333;
+        // @media only screen and (max-width: 600px) {
+        //   color: #333333;
+        //   margin-top: 10px;
+        // }
+        .lxp-Clock {
+          color: #607d8b;
+          margin-right: 5px;
+        }
+        .durationTitle {
+          color: #666666;
+        }
+      }
+      .sessionModule {
+        line-height: 24px;
+        color: #333333;
+        // @media only screen and (max-width: 600px) {
+        //   color: #333333;
+        //   margin-top: 10px;
+        // }
+        .lxp-Todo_task {
+          color: #607d8b;
+          margin-right: 5px;
+        }
+        .ModuleTitle {
+          color: #666666;
+        }
+      }
+    }
   }
 }
+
 // .moduleContent {
 //     margin-left: 10%;
 //     padding-left: 60px;
@@ -195,9 +278,14 @@
   padding-top: 20px !important;
 }
 .smallContainers {
-  margin: 25px -15px 0 -15px !important;
-  @media only screen and (max-width: 600px) {
-    margin: 15px -15px 0 -15px !important;
+  // margin: 25px -15px 0 -15px !important;
+  margin: 20px 0 !important;
+  row-gap: 20px;
+  @media only screen and (max-width: 768px) {
+    // margin: 15px -15px 0 -15px !important;
+    margin: 15px 0 !important;
+    // display: flex;
+    flex-wrap: wrap;
   }
 }
 .sessionAttendance {
@@ -248,7 +336,7 @@
 
 .content-container:hover {
   color: white;
-  background-color: #607D8B;
+  background-color: #607d8b;
   border: 0.5px solid #848484;
   transition: 0.2s ease;
 }
@@ -262,8 +350,6 @@
   color: white;
   transition: 0.2s ease;
 }
-
-
 
 .rightWrapper {
   width: 100%;
@@ -308,7 +394,7 @@
   // overflow-x: hidden;
   // overflow-y: scroll;
   @media only screen and (max-width: 576px) {
-    border-top: 1px solid #cdcdcd;
+    // border-top: 1px solid #cdcdcd;
     // margin-top: 15px;
   }
   @media only screen and (min-width: 992px) {
@@ -316,6 +402,7 @@
   }
 }
 .attendanceWrapper {
+  margin-top: 30px;
   @media only screen and (max-width: 576px) {
     display: none;
   }
@@ -340,10 +427,13 @@
   }
 }
 .headingWrapper {
-  width: 100%;
+  // width: 100%;
   // margin: 10px 0 15px 0;
   @media only screen and (max-width: 576px) {
     margin: 10px 0 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 .sessionCard {
@@ -362,6 +452,85 @@
   @media only screen and (max-width: 991px) {
     box-shadow: none;
     margin-bottom: 15px;
+  }
+}
+
+.smallContainer {
+  border-radius: 5px;
+  background: #f9f9f9 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  font-size: 20px;
+  padding: 10px 20px;
+  width: 30%;
+  align-items: center;
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+  }
+  @media only screen and (min-width: 1024px) and (max-width: 1515px) {
+     padding: 10px;
+  }
+}
+
+.LightBlueCircle {
+  border-radius: 50%;
+  background: #27bbee;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media only screen and (min-width: 769px) and (max-width: 1515px) {
+    width: 60px;
+    height: 60px;
+  }
+  .lxp-video-tutorial-1 {
+    font-size: 45px;
+    color: #ffffff;
+    @media only screen and (min-width: 769px) and  (max-width: 1515px) {
+      font-size: 30px;
+    }
+  }
+}
+
+.YellowGreenCircle {
+  border-radius: 50%;
+  background: #88bd2f;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media only screen and (min-width: 1024px) and (max-width: 1515px) {
+    width: 60px;
+    height: 60px;
+  }
+  .lxp-students {
+    font-size: 45px;
+    color: #ffffff;
+    @media only screen and (min-width: 1024px) and  (max-width: 1515px) {
+      font-size: 30px;
+    }
+  }
+}
+
+.FunBlueCircle {
+  border-radius: 50%;
+  background: #1b4e9b;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media only screen and (min-width: 1024px) and (max-width: 1515px) {
+    width: 60px;
+    height: 60px;
+  }
+  .lxp-recorded_videos {
+    font-size: 40px;
+    color: #ffffff;
+    @media only screen and (min-width: 1024px) and  (max-width: 1515px) {
+      font-size: 30px;
+    }
   }
 }
 
@@ -402,6 +571,16 @@
   }
 }
 
+.tableCol {
+  text-align: center !important;
+}
+
+// .tableHeader1 {
+//   @media screen and (max-width: 1268px) {
+//     width: 16%;
+//   }
+// }
+
 .mat-card-subtitle {
   color: white;
 }
@@ -418,9 +597,10 @@
     width: 100%;
     tr {
       th {
-        padding: 10px;
-        background-color: #346f83;
-        color: #ffffff;
+        padding: 10px 20px;
+        background-color: #e5e5e5;
+        color: #333333;
+        text-align: left;
         &:first-child {
           @media only screen and (max-width: 576px) {
             display: none;
@@ -434,14 +614,16 @@
           background-color: #ffffff;
         }
         &:nth-child(odd) {
-          background-color: #eef4f6;
+          background-color: #ffffff;
         }
       }
     }
     tr {
       td {
-        padding: 7px;
+        padding: 10px 20px;
         line-height: normal;
+        text-align: left;
+        font-size: 14px;
         &:first-child {
           @media only screen and (max-width: 576px) {
             display: none;
@@ -453,7 +635,7 @@
   td,
   th {
     // background: #ffffff 0% 0% no-repeat padding-box;
-    border: 0.5px solid #898989;
+    // border: 0.5px solid #898989;
     opacity: 1;
     text-align: center;
   }
@@ -481,11 +663,24 @@
   font-size: 15px;
   font-weight: bold;
   @media only screen and (max-width: 992px) {
-    margin: 30px 0 15px 0;
+    margin: 0 0 15px 0;
   }
-  @media only screen and (max-width: 576px) {
+  @media only screen and (max-width: 573px) {
     margin: 0;
+    padding: 0;
   }
+}
+
+.date-duration {
+  align-items: center;
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  // width: 355px;
+  // @media only screen and (max-width: 1024px) {
+  //   width: 300px;
+  // }
 }
 
 .headLine1 {
@@ -511,93 +706,20 @@
 .smallHeadline {
   text-align: left;
   letter-spacing: 0px;
-  color: black;
+  color: #333333;
   opacity: 1;
-  margin-bottom: 15px;
-  @media only screen and (max-width: 576px) {
-    margin-bottom: 8px;
-  }
-}
-
-.sessionTitle {
-  text-align: left;
-  letter-spacing: 0px;
+  margin: 0 !important;
+  // margin-bottom: 15px;
   font-size: 15px;
-  color: black;
-  opacity: 1;
-  margin-bottom: 10px;
-  display: inline-block;
-  width: 100%;
-  text-overflow: ellipsis;
-  display: inline-block;
-  /* margin-left: 2%; */
-  @media only screen and (max-width: 600px) {
-    color: black;
-    margin-bottom: 0;
-  }
-}
-
-.timingDetails {
-  margin-left: 0;
-  margin-right: 0;
-  font-size: 12px;
-  .sessionDate {
-    line-height: 24px;
-    color: #333333;
-    @media only screen and (max-width: 600px) {
-      color: #333333;
-      margin-top: 10px;
-    }
-    .lxp-Duration {
-      color: #848484;
-      margin-right: 5px;
-    } 
-    .dateTitle {
-      color: #666666;
-    } 
-  } 
-}
-
-.timingDetails {
-  margin-left: 0;
-  margin-right: 0;
-  font-size: 12px;
-  .sessionDuration {
-    line-height: 24px;
-    color: #333333;
-    @media only screen and (max-width: 600px) {
-      color: #333333;
-      margin-top: 10px;
-    }
-    .lxp-Clock {
-      color: #848484;
-      margin-right: 5px;
-    } 
-    .durationTitle {
-      color: #666666;
-    } 
-  } 
-  .sessionModule {
-    line-height: 24px;
-    color: #333333;
-    @media only screen and (max-width: 600px) {
-      color: #333333;
-      margin-top: 10px;
-    }
-    .lxp-Todo_task {
-      color: #848484;
-      margin-right: 5px;
-    } 
-    .ModuleTitle {
-      color: #666666;
-    } 
-  }
+  // @media only screen and (max-width: 576px) {
+  //   margin-bottom: 8px;
+  // }
 }
 
 .tblheaderFont {
   text-align: left;
   letter-spacing: 0px;
-  color: black;
+  color: #333333;
   opacity: 1;
 }
 
@@ -627,14 +749,27 @@
   }
 }
 
+.count {
+  margin-left: 40px;
+  line-height: 1.6;
+  // @media only screen and (max-width: 1023px) {
+  //   margin-left: 30px;
+  // }
+  @media only screen and (min-width: 1024px) and (max-width: 1515px) {
+   margin: 5px;
+  }
+}
+
 .number {
   /* margin-left: 2px;
     margin-top: -20px; */
   // margin-top: -12%;
   text-align: left;
   letter-spacing: 0px;
-  color: #ffffff;
+  color: black;
   opacity: 1;
+  font-size: 30px;
+  font-weight: bolder;
   @media only screen and (max-width: 576px) {
   }
 }
@@ -702,7 +837,6 @@
     height: 90% !important;
   }
   @media only screen and (max-width: 750px) {
-   
   }
   .mat-dialog-container {
     position: relative;
