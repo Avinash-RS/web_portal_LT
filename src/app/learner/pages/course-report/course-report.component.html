@@ -315,6 +315,10 @@
 
     </div>
     <div class="reportRightCol">
+      <ul class="breadcrumb">
+        <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> {{course?.name}}</li>
+        <li>Assessment Report</li>
+      </ul>
       <div class="refresh">
         <button (click)="refreshReport()"><em class="lxp-Reset"></em> Refresh</button>
       </div>
