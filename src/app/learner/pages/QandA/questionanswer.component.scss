@@ -48,6 +48,10 @@
     margin: 0;
     padding: 0 20px !important;
     background-color: transparent !important;
+    display: block;
+    @media only screen and (max-width: 720px) {
+      display: none;
+    }
     li {
       color: #333333;
       font-size: 14px;
@@ -55,6 +59,7 @@
       line-height: normal;
       position: relative;
       margin-right: 0;
+      display: inline-block;
       .bar {
         color: #c02222 !important;
         display: inline-block;
@@ -164,6 +169,40 @@
 }
 
 .addQuestionRightCol {
+  .breadcrumb {
+    margin: 0;
+    padding: 0 !important;
+    background-color: transparent !important;
+    margin-bottom: 15px;
+    display: none;
+    @media only screen and (max-width: 720px) {
+      display: block;
+    }
+    li {
+      color: #333333;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: normal;
+      position: relative;
+      margin-right: 0;
+      display: inline-block;
+      .bar {
+        color: #c02222 !important;
+        display: inline-block;
+        margin: 0 10px;
+      }
+      em {
+        display: inline-block;
+        transform: scale(-1);
+        color: #666666;
+        margin-right: 8px;
+        cursor: pointer;
+      }
+      .name {
+        color: #999999;
+      }
+    }
+  }
   .addQuestion {
     text-align: center;
     margin-top: 0px;
