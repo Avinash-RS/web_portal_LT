@@ -147,92 +147,92 @@ export const getForgotpasswordbyResetpassword = gql`
   }
 `;
 
-export const viewProfile = gql`
-  mutation view_profile($user_id: String) {
-    view_profile(user_id:$user_id)
-    {
-      success
-      error_msg
-      message {
-        full_name
-        email
-        user_id
-        country_detail {
-          _id
-          countryname
-          countryshortcode
-          created_on
-          created_by
-          created_by_ip
-          updated_on
-          updated_by
-          updated_by_ip
-          is_active
-        }
-        state_detail {
-          _id
-          statename
-          stateshortcode
-          country
-          created_on
-          created_by
-          created_by_ip
-          updated_on
-          updated_by
-          updated_by_ip
-          is_active
-        }
-        district_detail {
-          _id
-          districtname
-          created_on
-          created_by
-          created_by_ip
-          updated_on
-          updated_by
-          updated_by_ip
-          is_active
-        }
-        language_detail {
-          _id
-          is_active
-          languagecode
-          languagename
-        }
-        user_dtl {
-          is_admin
-          user_id
-          username
-          password
-          created_by_ip
-          created_on
-        }
-        user_mobile {
-          mobile_number
-        }
-        user_profile {
-          _id
-          user_id
-          profile_img
-          is_active
-          gender
-          country
-          state
-          city_town
-          created_by_ip
-          created_by
-          created_on
-          updated_by_ip
-          updated_on
-          updated_by
-          deptName
-          collegeName
-        }
+// export const viewProfile = gql`
+//   mutation view_profile($user_id: String) {
+//     view_profile(user_id:$user_id)
+//     {
+//       success
+//       error_msg
+//       message {
+//         full_name
+//         email
+//         user_id
+//         country_detail {
+//           _id
+//           countryname
+//           countryshortcode
+//           created_on
+//           created_by
+//           created_by_ip
+//           updated_on
+//           updated_by
+//           updated_by_ip
+//           is_active
+//         }
+//         state_detail {
+//           _id
+//           statename
+//           stateshortcode
+//           country
+//           created_on
+//           created_by
+//           created_by_ip
+//           updated_on
+//           updated_by
+//           updated_by_ip
+//           is_active
+//         }
+//         district_detail {
+//           _id
+//           districtname
+//           created_on
+//           created_by
+//           created_by_ip
+//           updated_on
+//           updated_by
+//           updated_by_ip
+//           is_active
+//         }
+//         language_detail {
+//           _id
+//           is_active
+//           languagecode
+//           languagename
+//         }
+//         user_dtl {
+//           is_admin
+//           user_id
+//           username
+//           password
+//           created_by_ip
+//           created_on
+//         }
+//         user_mobile {
+//           mobile_number
+//         }
+//         user_profile {
+//           _id
+//           user_id
+//           profile_img
+//           is_active
+//           gender
+//           country
+//           state
+//           city_town
+//           created_by_ip
+//           created_by
+//           created_on
+//           updated_by_ip
+//           updated_on
+//           updated_by
+//           deptName
+//           collegeName
+//         }
        
-      }
-    }
-}
-`;
+//       }
+//     }
+// }
+// `;
 
 // export const viewProfile = gql`
 //   mutation view_profile($user_id: String) {
@@ -484,7 +484,45 @@ export const viewProfile = gql`
 // }
 // `;
 
+export const viewProfile = gql`
+mutation view_profile($user_id: String){
+  view_profile(user_id : $user_id){
+    success
+    error_msg
+    message{
+      user_id
+      full_name
+      username
+      created_on
+      email
+      mobile_no
+      language_detail{
+        id
+        name
+      }
+      profileObject{
+        profile_img
+        gender
+        department
+        college_name
+        city_town{
+          id
+          name 
+        }
+        state{
+          id
+          name
+        }
+        country{
+          id
+          name
+        }
+      }
 
+    }
+  }
+}
+`;
 export const getStatedetails = gql`
     mutation   get_state_details($_id: String){
       get_state_details(
@@ -646,75 +684,36 @@ export const deleteQualification = gql`
 `;
 
 export const updateProfile = gql`
-  mutation update_profile($user_id: String, $profile_img: String,
-    $gender: String, $languages_known: [String],
-    $country: String, $state: String, $city_town: String, $created_by_ip: String, $created_by: String, $created_on: String,
-    $updated_by_ip: String, $updated_on: String, $updated_by: String,$domain:String!, $deptName:String, $collegeName : String){
+  mutation update_profile(
+    $user_id: String
+    $profile_img: String
+    $gender: String
+    $languages_known: [pro_lang]
+    $country: pro_country
+    $state: pro_state
+    $city_town: pro_city_town
+    $domain: String!
+    $deptName: String
+    $collegeName: String
+  ) {
     update_profile(
-      user_id: $user_id,
-      profile_img: $profile_img,
-      gender: $gender,
-      languages_known: $languages_known,
-      country: $country,
-      state: $state,
-      city_town: $city_town,
-      created_by_ip: $created_by_ip,
-      created_by: $created_by,
-      created_on: $created_on,
-      updated_by_ip: $updated_by_ip,
-      updated_on: $updated_on,
-      updated_by: $updated_by,
-      domain:$domain,
-      deptName : $deptName,
-      collegeName :$collegeName
+      user_id: $user_id
+      profile_img: $profile_img
+      gender: $gender
+      languages_known: $languages_known
+      country: $country
+      state: $state
+      city_town: $city_town
+      domain: $domain
+      deptName: $deptName
+      collegeName: $collegeName
     ) {
       success
       message
-
     }
   }
 `;
 
-
-// export const updateProfile = gql`
-//   mutation update_profile($user_id: String, $is_student_or_professional: String, $profile_img: String, $year_of_birth: String, $doj_lxp: String,
-//     $social_media: [social_media_content], $is_active: Boolean, $progress: String, $gender: String, $languages_known: [String],
-//     $country: String, $state: String, $city_town: String, $about_you: String, $certificate: [String], $student: String,
-//     $professional: professional_content, $last_login: String, $created_by_ip: String, $created_by: String, $created_on: String,
-//     $updated_by_ip: String, $updated_on: String, $updated_by: String,$domain:String!){
-//     update_profile(
-//       user_id: $user_id,
-//       profile_img: $profile_img,
-//       year_of_birth: $year_of_birth,
-//       doj_lxp: $doj_lxp,
-//       social_media: $social_media,
-//       is_active: $is_active,
-//       progress: $progress,
-//       gender: $gender,
-//       languages_known: $languages_known,
-//       country: $country,
-//       state: $state,
-//       city_town: $city_town,
-//       about_you: $about_you,
-//       certificate: $certificate,
-//       is_student_or_professional: $is_student_or_professional,
-//       student: $student,
-//       professional: $professional,
-//       last_login: $last_login,
-//       created_by_ip: $created_by_ip,
-//       created_by: $created_by,
-//       created_on: $created_on,
-//       updated_by_ip: $updated_by_ip,
-//       updated_on: $updated_on,
-//       updated_by: $updated_by,
-//       domain:$domain
-//     ) {
-//       success
-//       message
-
-//     }
-//   }
-// `;
 export const updateMobileonprofile = gql`
 mutation update_mobile_onprofile($user_id: String, $mobile_number: String){
 	update_mobile_onprofile(
