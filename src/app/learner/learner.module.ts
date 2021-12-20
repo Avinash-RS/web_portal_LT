@@ -30,7 +30,6 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { LearnerDashboardComponent } from './pages/learner-dashboard/learner-dashboard.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ForbiddenComponent } from './pages/forbidden/forbidden.component';
@@ -86,7 +85,6 @@ const routes: Routes = [
     ProfileComponent,
     TermsconditionsComponent,
     ForbiddenComponent,
-    LearnerDashboardComponent,
     ViewAllnotificationsComponent,
     VideoPreviewModalComponent,
 
