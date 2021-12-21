@@ -15,7 +15,6 @@ import { AlertComponentComponent } from '@core/shared/alert-component/alert-comp
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import { MockServiceService } from '@learner/services/mockService/mock-service.service';
 import { RouterTestingModule } from '@angular/router/testing';
-import { LearnerMyCourseComponent } from '../learner-my-course/learner-my-course.component';
 
 
 

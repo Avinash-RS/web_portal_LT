@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
 
     this.getAllLanguage();
     this.getAllcountry();
-    // this.getBoardsUniv();
+        // this.getBoardsUniv();
    // this.getInstitute();
     // this.getDiscipline();
   //  this.getSpec();
@@ -143,6 +143,7 @@ export class ProfileComponent implements OnInit {
   enableMobileEdit: any;
   collegename;
   deptname;
+  UserDetails;
   // Percentage
   //   public setTwoNumberDecimal($event) {
   //     $event.target.value = parseFloat($event.target.value).toFixed(2);
@@ -151,10 +152,13 @@ hide = true;
 hideConfirm = true;
 showNew = true;
   duplicateValueCheck = [];
+  college_name;
+  profileDetails;
   ngOnDestroy(){
   this.dialog.closeAll();
   }
   ngOnInit() {
+    this.UserDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.translate.use(localStorage.getItem('language'));
     if (this.currentUser.is_profile_updated) {
       this.cannotEdit = true;
@@ -172,19 +176,19 @@ showNew = true;
       country: ['', myGlobals.req],
       state: ['', myGlobals.req],
       city_town: ['', myGlobals.req],
-      progress: [],
-      certificate: this.formBuilder.array([new FormControl('')]),
+      progress: [''],
+      // certificate: this.formBuilder.array([new FormControl('')]),
       // qualification: this.formBuilder.array([this.createQualItem()]),
-      social_media: this.formBuilder.array([this.createSocialMedia()]),
-      year_of_birth: '05-08-1998',
-      profile_img: [],
+      // social_media: this.formBuilder.array([this.createSocialMedia()]),
+      //year_of_birth: '05-08-1998',
+      profile_img: [''],
       user_id: [],
-      created_by_ip: [],
-      professional: this.formBuilder.group({
-        job_role: new FormControl(''),
-        organization: new FormControl(''),
-        total_experience: new FormControl('')
-      }),
+      //created_by_ip: [],
+      // professional: this.formBuilder.group({
+      //   job_role: new FormControl(''),
+      //   organization: new FormControl(''),
+      //   total_experience: new FormControl('')
+      // }),
       domain: environment.domain
     });
 
@@ -217,17 +221,35 @@ showNew = true;
   getprofileDetails(userid) {
     this.service.view_profile(userid).subscribe((data: any) => {
       if (data.data.view_profile.success) {
-        const profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].user_profile[0];
-        
+        this.profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].profileObject;
         this.userData = data.data.view_profile.message[0];
-        if(this.userData?.user_mobile?.mobile_number){
-          let mobNumber = this.userData.user_mobile.mobile_number;
+        if(this.userData?.mobile_no){
+          let mobNumber = this.userData.mobile_no;
           let morphed = mobNumber[0] + mobNumber[1] +"******"+ mobNumber[8] + mobNumber[9];
-          this.userData.user_mobile.mobile_number = morphed
+          this.userData.mobile_no = morphed
         }
-        if (profileDetails) {
-          this.collegename = this.userData.user_profile[0].collegeName == null ? '' : this.userData.user_profile[0].collegeName;
-          this.deptname = this.userData.user_profile[0].deptName == null ? '' : this.userData.user_profile[0].deptName;
+        if (this.profileDetails) {
+          this.profileForm.patchValue({
+            profile_img :this.profileDetails?.profile_img ? this.profileDetails?.profile_img :'',
+            deptName : this.profileDetails?.department ? this.profileDetails?.department :'',
+            country : this.profileDetails?.country?.id ? this.profileDetails.country.id : '',
+            state : this.profileDetails?.state?.id ? this.profileDetails.state?.id : {id:'',name:''},
+            city_town :this.profileDetails?.city_town?.id ? this.profileDetails.city_town?.id : {id:'',name:''},
+            gender : this.profileDetails?.gender ? this.profileDetails?.gender :'',
+            collegeName :this.profileDetails?.college_name ? this.profileDetails?.college_name: ''
+          });
+          this.getAllState();
+          this.getDistrict();
+          this.deptname = this.profileDetails?.department ? this.profileDetails?.department :'';
+          if (this.userData.language_detail?.length > 0) {
+                      var result = this.userData.language_detail.map(a => a.name);
+                    }
+                    else{
+                      result = [];
+          }
+          this.profileForm.controls.languages_known.setValue(result)
+          // this.collegename = this.userData.user_profile[0].collegeName == null ? '' : this.userData.user_profile[0].collegeName;
+          // this.deptname = this.userData.user_profile[0].deptName == null ? '' : this.userData.user_profile[0].deptName;
           // if (profileDetails.qualification.length > 0) {
           //   profileDetails.qualification.forEach(v => delete v.__typename);
           // }
@@ -253,15 +275,15 @@ showNew = true;
           // while (profileDetails.certificate && profileDetails.certificate.length > 0 && certificate.length) {
           //   certificate.removeAt(0);
           // }}
-          if (this.userData.language_detail?.length > 0) {
-            var result = this.userData.language_detail.map(a => a._id);
-          }
-          else{
-            result = [];
-          }
-          this.profileForm.controls.languages_known.setValue(result)
-          this.profileForm.patchValue(profileDetails);
-          this.getAllState();
+                  // if (this.userData.language_detail?.length > 0) {
+                  //   var result = this.userData.language_detail.map(a => a._id);
+                  // }
+                  // else{
+                  //   result = [];
+                  // }
+                  // this.profileForm.controls.languages_known.setValue(result)
+                  // this.profileForm.patchValue(this.profileDetails);
+                  // this.getAllState();
           //this.getDistrict();
           // if (profileDetails.qualification.length > 0) {
           //   profileDetails.qualification.forEach((qual, index) => {
@@ -335,19 +357,19 @@ showNew = true;
     if(this.deptname || this.deptname == ''){
       this.profileForm.controls.deptName.setValue(this.deptname)
     }
-    if (this.collegename){
-      this.profileForm.controls.collegeName.setValue(this.collegename)
-    }
-    if (this.profileForm.value.progress === 60 && this.profileForm.value.certificate && this.profileForm.value.languages_known
-      && this.profileForm.value.social_media) {
-      this.profileForm.controls.progress.setValue(90);
-    }
-    if (this.profileForm.value.progress === 90 && this.profileForm.value.profile_img) {
-      this.profileForm.controls.progress.setValue(100);
-    }
+    // if (this.collegename){
+    //   this.profileForm.controls.collegeName.setValue(this.collegename)
+    // }
+    // if (this.profileForm.value.progress === 60 && this.profileForm.value.certificate && this.profileForm.value.languages_known
+    //   && this.profileForm.value.social_media) {
+    //   this.profileForm.controls.progress.setValue(90);
+    // }
+    // if (this.profileForm.value.progress === 90 && this.profileForm.value.profile_img) {
+    //   this.profileForm.controls.progress.setValue(100);
+    // }
 
     const ip = localStorage.getItem('Systemip');
-    this.profileForm.controls.created_by_ip.setValue(ip);
+    //this.profileForm.controls.created_by_ip.setValue(ip);
     this.profileForm.controls.user_id.setValue(this.currentUser.user_id);
 
     // if(this.profileForm.value && this.profileForm.value.qualification) {
@@ -357,7 +379,37 @@ showNew = true;
     // }
     if  (this.profileForm?.value?.qualification) {
       delete this.profileForm.value.qualification; }
-    this.service.update_profile(this.profileForm.value).subscribe((data: any) => {
+
+      if  (this.profileForm?.value?.country) {
+       var countryName = this.countryValue.filter(e => e._id == this.profileForm?.value?.country);
+      }
+      if  (this.profileForm?.value?.state) {
+        var statename = this.stateValue.filter(e => e._id == this.profileForm?.value?.state);
+       }
+       if  (this.profileForm?.value?.city_town) {
+        var cityname = this.cityValue.filter(e => e._id == this.profileForm?.value?.city_town);
+       }
+       if(this.profileForm?.value?.languages_known && this.profileForm.value.languages_known.length > 0){
+        var langARR = [];
+        this.profileForm.value.languages_known.forEach(element => {
+         langARR.push({name:element})
+        });
+       }
+
+       const apidata = {
+        gender: this.profileForm?.value.gender,
+        deptName: this.profileForm?.value.deptName,
+        collegeName :this.profileForm?.value.collegeName,
+        languages_known: langARR,
+        country:{id:this.profileForm?.value.country,name:countryName[0].countryname ? countryName[0].countryname : ''},
+        state: {id:this.profileForm?.value.state,name:statename[0].statename ? statename[0].statename : ''},
+        city_town: {id:this.profileForm?.value.city_town,name:cityname[0].districtname ? cityname[0].districtname : ''},
+        profile_img: this.profileForm?.value.profile_img,
+        user_id: this.profileForm?.value.user_id,
+        domain: environment.domain
+       }
+
+    this.service.update_profile(apidata).subscribe((data: any) => {
       if (data.data.update_profile.success === 'true') {
         this.currentUser.is_profile_updated = true;
         localStorage.setItem('UserDetails', JSON.stringify(this.currentUser));

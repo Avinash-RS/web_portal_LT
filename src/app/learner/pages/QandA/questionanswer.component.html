@@ -143,6 +143,9 @@
         </div>
     </div>
     <div class="addQuestionRightCol">
+        <ul class="breadcrumb">
+            <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> <span class="name">{{courseName}}</span> <span class="bar">/</span> <span class="breadCrumbTopic">Q&A</span></li>
+        </ul>
         <div class="addQuestion">
             <button (click)="openQuestionDialog(questionDialog)"><em class="lxp-add"></em> Ask A Question</button>
         </div>
