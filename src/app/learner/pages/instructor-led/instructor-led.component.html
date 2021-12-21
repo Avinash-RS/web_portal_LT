@@ -12,7 +12,7 @@
 <!-- If No Records -->
 <div class="noCard" *ngIf="!showContent && !showSkeleton">
   <figure>
-    <img alt="assignment" src="/assets/images/no-session.svg">
+    <img alt="assignment" src="https://assets.lntedutech.com/application_images/no-session.svg">
   </figure>
   <p> You have no sessions at the moment!</p>
 </div>
@@ -38,7 +38,7 @@
         <div class="row d-flex justify-content-start" *ngIf='activityShow !== undefined'>
           <div class="moduleImage">
             <div flex >
-              <img style="height: 200px !important;width: 100%;" *ngIf="!activityShow?.activity_details.livethumbnail" alt="instructor" src="../../../../assets/learner/instructor_image.png" />
+              <img style="height: 200px !important;width: 100%;" *ngIf="!activityShow?.activity_details.livethumbnail" alt="instructor" src="https://assets.lntedutech.com/application_images/instructor_image.png" />
               <img style="height: 200px !important;width: 100% !important;" *ngIf="activityShow?.activity_details.livethumbnail" alt="instructor" [src]="activityShow?.activity_details.livethumbnail + blobKey" />
             </div>
           </div>
@@ -78,7 +78,7 @@
             <mat-card-subtitle class="smallHeadline">Total Sessions</mat-card-subtitle>
             <div class="row d-flex justify-content-between align-items-center p-t-10">
               <span class="number">{{listOfSessions?.length}}</span>
-              <img mat-card-image src="../../../../assets/learner/elearning.svg" alt="elearning">
+              <img mat-card-image src="https://assets.lntedutech.com/application_images/elearning.svg" alt="elearning">
             </div>
           </mat-card>
         </div>
@@ -89,7 +89,7 @@
             <div class="row d-flex justify-content-between align-items-center p-t-10">
               <!-- <span class="number" *ngIf="attendedSessions !== undefined">{{attendedSessions?.true}}</span> -->
               <span class="number">{{attendedCount.length}}</span>
-              <img mat-card-image src="../../../../assets/learner/students.svg" alt="student">
+              <img mat-card-image src="https://assets.lntedutech.com/application_images/students.svg" alt="student">
             </div>
           </mat-card>
         </div>
@@ -99,7 +99,7 @@
             <mat-card-subtitle class="smallHeadline">Recorded Sessions</mat-card-subtitle>
             <div class="row d-flex justify-content-between align-items-center p-t-10">
               <span class="number">{{recordedCount.length}}</span>
-              <img mat-card-image src="../../../../assets/learner/video-tutorial.svg" alt="video">
+              <img mat-card-image src="https://assets.lntedutech.com/application_images/video-tutorial.svg" alt="video">
             </div>              
           </mat-card>
         </div>
@@ -175,7 +175,7 @@
             <div class="row d-flex justify-content-start">
               <div class="image-container">
                 <img *ngIf="los.activity_details.livethumbnail" alt="image" style="width: 100%; height: 150px !important;object-fit: inherit !important;" [src]="los.activity_details.livethumbnail + blobKey">
-                <img *ngIf="!los.activity_details.livethumbnail" alt="image" style="width: 100%; height: 150px !important;object-fit: inherit !important;" src="../../../../assets/learner/instructor_image.png">
+                <img *ngIf="!los.activity_details.livethumbnail" alt="image" style="width: 100%; height: 150px !important;object-fit: inherit !important;" src="https://assets.lntedutech.com/application_images/instructor_image.png">
                 <!-- <div class="bottom-right" [ngClass]="los.status == 'Ongoing' ? 'organge' : los.status == 'UpComing' ? 'grey' : los.status == 'Completed' ? 'greenColor':''" >{{los.status}}</div> -->
                 <mat-icon class="rec-center" *ngIf="los.activity_details.activitytype == 'Recorded'"> play_circle</mat-icon>
                 <div *ngIf="los.status == 'On going' && los.activity_details.activitytype != 'Recorded'" class="bottom-right orange">Ongoing</div>

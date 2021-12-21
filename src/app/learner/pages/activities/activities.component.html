@@ -167,19 +167,9 @@
       <!-- Content ends -->
       <div class="noCard" *ngIf="emptyAssignment">
         <figure>
-          <img src="/assets/images/noassignment.svg" alt="assignment">
+          <img src="https://assets.lntedutech.com/application_images/noassignment.svg" alt="assignment">
         </figure>
         <p> You have no Assignment activity at the moment!</p>
-        <!-- <mat-card class="noSessionCard color-yellow-card-status">
-          <div class="row mar-t-12 noSessioncardRow">
-            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-              <img class="actImg" src="assets/Assignment.svg" alt="assignment">
-            </div>
-            <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
-              <span class="spanTxt"> You have no assignments at the moment!</span>
-            </div>
-          </div>
-        </mat-card>  -->
       </div>
 
     </mat-tab>
@@ -191,7 +181,7 @@
           <mat-card class="performCard" (click)="performdetailPage(i+1, perform);performdetailPageView = true" *ngFor="let perform of performDetails; let i = index">
             <div class="d-flex flex-column">
               <div class="performHeading">
-                <p class="subTittle"><img class="perfimg" src="assets/Perform1.svg" alt="perform">&nbsp; {{perform.performActivity.module_id}}</p>
+                <p class="subTittle"><img class="perfimg" src="https://assets.lntedutech.com/application_images/Perform1.svg" alt="perform">&nbsp; {{perform.performActivity.module_id}}</p>
                 <span>{{perform.performActivity.topic_id}}
                 </span>
               </div>
@@ -227,7 +217,7 @@
         <div class="box-0-1" *ngFor="let perform of performDetails; let i = index">
           <div class="d-flex justify-content-between">
             <div class="performLeftContent">
-              <div class="f_size_16 f_wt_600"><img class="perfimg" src="assets/Perform1.svg" alt="perform"> 
+              <div class="f_size_16 f_wt_600"><img class="perfimg" src="https://assets.lntedutech.com/application_images/Perform1.svg" alt="perform"> 
                 <span class="ml-13">{{perform.performActivity.module_id}}</span>
               </div>
               <div class="t-l">{{perform.performActivity.topic_id}}</div>
@@ -482,30 +472,13 @@
           </div>
         </div>
       </ng-container>
-      <!-- <div class="row ml-0 mr-0 errmsg" *ngIf="performDetails?.length < 1">
-        <div class="col-12 m-auto text-center">
-          <span class="errormsg">
-            <img class="assignImg" alt="" src="assets/book.svg">
-            <span>You have no perform activity at the moment!</span>
-          </span>
-        </div>
-      </div> -->
 
       <div class="noCard" *ngIf="performDetails?.length < 1">
         <figure>
-          <img src="/assets/images/noperform.svg" alt="assignment">
+          <img src="https://assets.lntedutech.com/application_images/noPerform.svg" alt="assignment">
         </figure>
         <p>You have no Perform activity at the moment!</p>
-        <!-- <mat-card class="noSessionCard color-yellow-card-status">
-          <div class="row mar-t-12 noSessioncardRow">
-            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-              <img class="" src="assets/noPerform.svg" alt="perform"> 
-            </div>
-            <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
-              <span class="spanTxt"> You have no perform activity at the moment!</span>
-            </div>
-          </div>
-        </mat-card>  -->
+       
       </div>
     </mat-tab>
    
@@ -794,19 +767,10 @@
 
       <div class="noCard" *ngIf="projectDetails?.length < 1">
         <figure>
-          <img src="/assets/images/noproject.svg" alt="assignment">
+          <img src="https://assets.lntedutech.com/application_images/noProject.svg" alt="assignment">
         </figure>
         <p>You have no Project activity at the moment!</p>
-        <!-- <mat-card class="noSessionCard color-yellow-card-status">
-          <div class="row mar-t-12 noSessioncardRow">
-            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-              <img class="actImg" src="assets/noProject.svg" alt="project"> 
-            </div>
-            <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
-              <span class="spanTxt"> You have no project activity at the moment!</span>
-            </div>
-          </div>
-        </mat-card>  -->
+      
       </div>
     </mat-tab>
  
@@ -850,7 +814,7 @@
       </ng-container>
       <div class="noCard" *ngIf="labNoCard">
         <figure>
-          <img src="/assets/images/noperform.svg" alt="assignment">
+          <img src="https://assets.lntedutech.com/application_images/noPerform.svg" alt="assignment">
         </figure>
         <p>You have no practices at the moment!</p>
       </div>
