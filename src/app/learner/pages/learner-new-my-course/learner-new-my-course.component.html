@@ -127,7 +127,7 @@
                         <ng-container *ngIf="noActivity">
                             <div class="searchNoResults">
                                 <figure>
-                                    <img src="/assets/images/nocard.svg" alt="No Card" />
+                                    <img src="https://assets.lntedutech.com/application_images/nocard.svg" alt="No Card" />
                                 </figure>
                                 <p>You have no activity scheduled for the day!</p>
                             </div>
@@ -228,6 +228,19 @@
                             <em class="lxp-Calendar_Todo"></em>
                         </span>
                     </div>
+                    <div class="stepIntegrationSection">
+                        <figure>
+                            <img src="assets/images/step1.jpeg" alt="">
+                        </figure>
+                        <div class="text">
+                            <h1>Learn to speak English</h1>
+                            <div class="resumeBtn">
+                                <button (click)="redirect()">
+                                    <em class="lxp-Play_Icon"></em> <span>Resume</span>
+                                </button>
+                            </div>
+                        </div>
+                     </div>
                     <div class="course-progress" *ngIf="showProgressChart" [@collapseprogress]>
                     <div class="course-progress-wrapper">
                         <div class="d-flex justify-content-between align-items-start course-progress-header">
@@ -307,6 +320,7 @@
                                 <span>Course Completion Progress</span> 
                             </h4>
                         </div>
+                        
 
                         <mat-tab-group #tabs (selectedTabChange)="courseTabChange($event,userDetailes.user_id,userDetailes._id);" [(selectedIndex)]="selectedIndex">
                             <mat-tab>
@@ -315,6 +329,8 @@
                                 </ng-template>
                                 <div *ngIf="courseSkel; else courseSkeleton">
                                 <div class="mycoursesContent" *ngIf="courseDetailsList.length; else noCourseCard">
+                                   
+                                   
                                     <ng-container *ngFor="let item of courseDetailsList">
                                         <div class="courses d-flex justify-content-start">
                                             <div class="{{item.progressClass}} progBar">
@@ -764,7 +780,7 @@
 
 <ng-template #infoPopup>
     <div class="d-flex align-items-center justify-content-center infocontent">
-        <img src="assets/learner/DownloadApp.png" alt="Nature" class="infoimg">
+        <img src="https://assets.lntedutech.com/application_images/DownloadApp.png" alt="Nature" class="infoimg">
         <div class="infoClose" (click)="closeBannerPopup()">
             <em class="lxp-Close"></em>
         </div>
@@ -834,7 +850,7 @@
   <ng-template #noCourseCard>
     <div class="noCard">
         <div>
-          <img src="/assets/images/noproject.svg" alt="assignment">
+          <img src="https://assets.lntedutech.com/application_images/noProject.svg" alt="assignment">
         </div>
         <p>You have no {{dynamicTextChange}} courses at the moment!</p>
     </div>
