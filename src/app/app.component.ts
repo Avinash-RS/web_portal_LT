@@ -288,7 +288,7 @@ myUnload() {
 
   openChatbot() {
       this.UserDetails = JSON.parse( window.localStorage.getItem('UserDetails'));
-      this.botUrl = "https://devfaqbot.lntiggnite.com/?userName=" + this.UserDetails.full_name + "&userID=" + this.UserDetails.user_id + "&token=" + this.UserDetails.token;
+      this.botUrl = environment.botUrl + "?userName=" + this.UserDetails.full_name + "&userID=" + this.UserDetails.user_id + "&token=" + this.UserDetails.token;
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.botUrl)
       this.chatbotShow = true;
   }
