@@ -38,7 +38,7 @@
 
       <div class="row m-t-25px">
         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-10 bb user-info">
-          <span class="f_size_15 f_wt_500">{{'Mobile :' | translate}} {{userData.user_mobile?.mobile_number || 'XXXXXXXXXX'}}</span>
+          <span class="f_size_15 f_wt_500">{{'Mobile :' | translate}} {{userData?.mobile_no ? userData?.mobile_no: 'XXXXXXXXXX'}}</span>
         </div>
         <div class="col-md-2 col-sm-2 col-2">
           <mat-icon [ngClass]="cannotEdit ? 'm-n f_size_17 bb' : 'f_size_17 bb'" *ngIf="editpopup && enableMobileEdit" style="width: 17px;" class="tooltip-350" [tooltip]="'Click here to change Mobile number'| translate" placement="bottom" (click)="editmobno(mobDialog)"> create</mat-icon>
@@ -72,19 +72,20 @@
         <div class="uname width_100 center_align">{{userData?.full_name || 'Full name'}} </div>
         <div class="width_100 center_align m-b-10 color_blue f_wt_500 f_size_16 m-t-5px">
           {{'Member since' | translate}} &nbsp;
-          {{(userData.user_dtl && (userData.user_dtl.created_on | date)) || ' __  __  __'}}
+          {{(userData?.created_on && (userData?.created_on | date)) || ' __  __  __'}}
         </div>
         <div class="width_100 center_align stateDet">
-          {{userData.state_detail && userData.state_detail.length > 0 && userData.state_detail[0].statename + ', '|| 'State'}}
-          {{userData.country_detail && userData.country_detail.length > 0 && userData.country_detail[0].countryname || '& Country' }}
+          {{profileDetails?.state?.name ? profileDetails?.state?.name + ',' :'State'}}
+          {{profileDetails?.country?.name ? profileDetails?.country?.name :'& Country'}}
         </div>
         <div class="f_wt_400 uID">
           <!-- <span class="f_size_16"> {{userData.user_dtl && userData.user_dtl.username || 'User Name'}} &nbsp;&nbsp;</span> -->
           <span class="f_size_16"> &nbsp;&nbsp;
-            {{userData && userData.user_profile && userData.user_profile.length > 0 ? (userData.user_profile[0] && userData.user_profile[0]?.gender && userData.user_profile[0]?.gender =='M' ? 'Male' : userData.user_profile[0].gender =='F' ? 'Female' : userData.user_profile[0].gender =='O' ? 'Rather Not Say' : 'Gender') : 'Gender' }} &nbsp;&nbsp;
+            {{profileDetails?.gender ? (profileDetails?.gender == 'M' ? 'Male' : profileDetails?.gender == 'F' ? 'Female' : profileDetails?.gender == 'O' ? 'Rather Not Say' : 'Gender'):'Gender'}}
+            &nbsp;&nbsp;
           </span>
-          <span class="f_size_16"> | &nbsp;&nbsp;
-            <span *ngFor="let l of userData?.language_detail;let i = index"> {{l.languagename && i != 0 ? ', ' + l.languagename : l.languagename || null}}
+          <span class="f_size_16" *ngIf = "userData?.language_detail && userData?.language_detail.length > 0"> | &nbsp;&nbsp;
+            <span *ngFor="let l of userData?.language_detail;let i = index"> {{l.name && i != 0 ? ', ' + l.name : l.name || null}}
             </span>
           </span>
         </div>
@@ -106,12 +107,12 @@
     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 order-3 order-sm-3 order-lg-3 second collDept m-t-9">
       <div class="row m-t-25px" *ngIf="userData">
         <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 bb user-info">
-          <span class="f_size_15 f_wt_500 ">{{'College :' | translate}} {{collegename | translate }}</span>
+          <span class="f_size_15 f_wt_500 ">{{'College :' | translate}} {{profileDetails?.college_name ? profileDetails?.college_name: ''  | translate }}</span>
         </div>
       </div>
       <div class="row m-t-25px" *ngIf="cannotEdit">
         <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 bb user-info">
-          <span class="f_size_15 f_wt_500">{{'Dept :' | translate}} {{deptname | translate}}</span>
+          <span class="f_size_15 f_wt_500">{{'Dept :' | translate}} {{profileDetails?.department ? profileDetails?.department: ''  | translate }}</span>
         </div>
         </div>
         <div class="row m-t-25px" *ngIf="!cannotEdit">
@@ -185,7 +186,7 @@
               <label class="f_size_19">{{'Languages known' | translate}}</label>
               <mat-select [disabled]='cannotEdit' multiple class="inputs"
                 [placeholder]="'Language' | translate" formControlName="languages_known" name="language">
-                <mat-option *ngFor="let item of languageList" [value]="item._id">
+                <mat-option *ngFor="let item of languageList" [value]="item.languagename">
                   {{item.languagename}}
                 </mat-option>
               </mat-select>
@@ -282,7 +283,7 @@
         <div class="row p-b-10px locationFields">
           <div class="col-md-4 col-lg-4 col-xl-3 col-sm-12 col-12">
             <div class="form-group width_100 p-b-10px">
-              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'" [placeholder]="'Country' | translate" formControlName="country" name="country" (selectionChange)="getAllState()">
+              <mat-select [disabled]='cannotEdit' [ngClass]="cannotEdit ? 'n dis inputs lap_s95' : 'inputs lap_s95'"  [placeholder]="'Country' | translate" formControlName="country" name="country" (selectionChange)="getAllState()">
                 <mat-option [value]="country._id" *ngFor="let country of countryValue">
                   {{country.countryname}}
                 </mat-option>
