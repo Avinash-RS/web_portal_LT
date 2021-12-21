@@ -3,6 +3,7 @@
 // The list of file replacements can be found in angular.json.
 
 export const environment = {
+  appVersion: require('../../package.json').version + '-dev',
   production: false,
   apiUrl: 'https://devfacade.lntiggnite.com/',
   scormUrl: 'https://devscorm.lntiggnite.com/',

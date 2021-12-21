@@ -19,6 +19,7 @@
 
 export const environment = {
   production: false,
+  appVersion: require('../../package.json').version + '-prod',
   apiUrl: 'https://devfacade.lntiggnite.com/',
   scormUrl: 'https://devscorm.lntiggnite.com/',
   apiUrlImg: 'https://devfacade.lntiggnite.com/',

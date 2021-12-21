@@ -1,5 +1,6 @@
 export const environment = {
     production: false,
+    appVersion: require('../../package.json').version + '-CC',
     apiUrl: 'http://facade.southindia.cloudapp.azure.com:3000/',
     scormUrl: 'http://scorm.southindia.cloudapp.azure.com:8089/',
     apiUrlImg: 'http://facade.southindia.cloudapp.azure.com:3000/',
