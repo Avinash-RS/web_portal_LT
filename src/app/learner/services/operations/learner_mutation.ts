@@ -1224,6 +1224,7 @@ mutation getuserRecordbasedonSecretKey($userSecretkey:String!){
   getuserRecordbasedonSecretKey(userSecretkey:$userSecretkey){
     data {
       email
+      user_id
     }
     success
     message
