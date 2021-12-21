@@ -52,9 +52,9 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
                 <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2" *ngIf="file.type != 'image'">
                   <div class="resource-card" (click)="onPreviewgallery(file.type,file.link,'','all',content.modulename,topic.topicname)">
                     <div class="card-img">
-                          <img *ngIf="file.type == 'video'" src="../../../assets/images/video-res.svg" class="thumbImg" alt="video">
-                          <img *ngIf="file.type == 'image'" src="../../../assets/images/Image-res.svg" class="thumbImg" alt="image">
-                          <img *ngIf="file.type == 'HTML'" src="../../../assets/images/knowledge.svg" class="thumbImg" alt="image">
+                          <img *ngIf="file.type == 'video'" src="https://assets.lntedutech.com/application_images/video-res.svg" class="thumbImg" alt="video">
+                          <img *ngIf="file.type == 'image'" src="https://assets.lntedutech.com/application_images/Image-res.svg" class="thumbImg" alt="image">
+                          <img *ngIf="file.type == 'HTML'" src="https://assets.lntedutech.com/application_images/knowledge.svg" class="thumbImg" alt="image">
                     </div>
                     <div *ngIf="file.type != 'video'" class="card-name" matTooltip="{{file.fileName}}"  matTooltipClass="tooltip-show">
                       <div class="file-name">
@@ -73,7 +73,7 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
         <mat-card class="noSessionCard color-yellow-card-status">
           <div class="row mar-t-12">
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-              <img class="actImg" src="assets/Assignment.svg" alt="assignment"> 
+              <img class="actImg" src="https://assets.lntedutech.com/application_images/Assignment.svg" alt="assignment"> 
             </div>
             <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
               <span class=""> You have no data at the moment!</span>
@@ -115,7 +115,7 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
                 <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                   <div class="resource-card" (click)="onPreviewgallery('video',videoFile.link)">
                     <div class="card-img">
-                          <img src="../../../assets/images/video-res.svg" class="thumbImg" alt="video">
+                          <img src="https://assets.lntedutech.com/application_images/video-res.svg" class="thumbImg" alt="video">
                     </div>
                     <!-- <div class="card-name">
                       <div class="file-name" matTooltip="{{videoFile.fileName}}"  matTooltipClass="tooltip-show">
@@ -134,7 +134,7 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
         <mat-card class="noSessionCard color-yellow-card-status">
           <div class="row mar-t-12">
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-              <img class="actImg" src="assets/Assignment.svg" alt="assignment"> 
+              <img class="actImg" src="https://assets.lntedutech.com/application_images/Assignment.svg" alt="assignment"> 
             </div>
             <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
               <span class=""> You have no data at the moment!</span>
@@ -144,69 +144,7 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
       </div>
     </ng-container>
   </mat-tab>
-  <!-- <mat-tab label="Images">
-    <ng-container *ngIf="selectedIndex == 2">
-      <div *ngIf="!emptyGallery" class="content-container">
-        <div *ngFor="let content of coursedata">
-          <div class="header-content">
-            <h3>{{content.modulename}}</h3>
-            <div class="header-carousel">
-              <drag-scroll (reachesLeftBound)="leftBoundStat($event)" (reachesRightBound)="rightBoundStat($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
-                <span drag-scroll-item *ngFor="let topic of content.moduledetails;let i = index" class="tooltip-pos">
-                  <span class="topic-container" (click)="onTopicSelection(content.modulename,topic.topicname)">
-                    <span class="{{ topic.activeTopic == 'active' ? 'topic-chip active-topic chip-hover' : 'topic-chip chip-hover'}}"  matTooltip="{{topic.topicname}}"  matTooltipClass="tooltip-show">
-                      {{topic.topicname}}</span>
-                  </span>
-                </span>
-              </drag-scroll>
-              <div class="draggable-button-container">
-                <div class="leftArrow">
-                  <button [disabled]="leftNavDisabled" [ngClass]="leftNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveLeft()" class="draggable-button float-left"> <mat-icon> chevron_left </mat-icon> </button>
-                </div>
-                <div class="rightArrow">
-                  <button [disabled]="rightNavDisabled" [ngClass]="rightNavDisabled ? 'disableArrow' : 'showArrow'" mat-raised-button (click)="moveRight()" class="draggable-button float-right"> <mat-icon> chevron_right </mat-icon> </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="main-section">
-            <ng-container *ngFor="let topic of content.moduledetails;">
-            <ng-container *ngIf="topic.activeTopic == 'active'">
-              <ng-container *ngFor="let imageFile of topic.image">
-                <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                  <div class="resource-card" (click)="onPreviewgallery('image',imageFile.link)">
-                    <div class="card-img">
-                      <ng-container>
-                        <img src="../../../assets/images/Image-res.svg" class="thumbImg" alt="image">
-                      </ng-container>
-                    </div>
-                    <div class="card-name">
-                      <div class="file-name" matTooltip="{{imageFile.fileName}}"  matTooltipClass="tooltip-show">
-                       {{imageFile.fileName}}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </ng-container>
-            </ng-container>
-          </ng-container>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="emptyGallery">
-        <mat-card class="noSessionCard color-yellow-card-status">
-          <div class="row mar-t-12">
-            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-              <img class="actImg" src="assets/Assignment.svg" alt="assignment"> 
-            </div>
-            <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
-              <span class=""> You have no data at the moment!</span>
-            </div>
-          </div>
-        </mat-card> 
-      </div>
-    </ng-container>
-  </mat-tab> -->
+  
   <mat-tab label="Knowledge Check"> 
     <ng-container *ngIf="selectedIndex == 2">
       <div *ngIf="!emptyGallery" class="content-container">
@@ -239,7 +177,7 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
                   <div class="resource-card" (click)="onPreviewgallery('HTML','',topic.link,'',content.modulename,topic.topicname)">
                     <div class="card-img">
                       <ng-container>
-                        <img src="../../../assets/images/knowledge.svg" class="thumbImg" alt="image">
+                        <img src="https://assets.lntedutech.com/application_images/knowledge.svg" class="thumbImg" alt="image">
                       </ng-container>
                     </div>
                     <div class="card-name">
@@ -258,7 +196,7 @@ class="col-xl-12 col-lg-12 col-md-12 col-sm-12 myCc container p-0 gallery-contai
         <mat-card class="noSessionCard color-yellow-card-status">
           <div class="row mar-t-12">
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-              <img class="actImg" src="assets/Assignment.svg" alt="assignment"> 
+              <img class="actImg" src="https://assets.lntedutech.com/application_images/Assignment.svg" alt="assignment"> 
             </div>
             <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
               <span class=""> You have no data at the moment!</span>
