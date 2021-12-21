@@ -228,21 +228,18 @@
                             <em class="lxp-Calendar_Todo"></em>
                         </span>
                     </div>
-                    <br>
                     <div class="stepIntegrationSection">
                         <figure>
-                             <img src="assets/images/step1.jpeg" alt="">
-                         </figure>
-                         <div class="text">
-                             <div class="topic">
-                                 <h1>Learn to speak English</h1>
-                             </div>
-                             <div class="middle">
-                                 <button>
-                                     <em class="lxp-Play_Icon"></em> <span>Resume</span>
-                                 </button>
-                             </div>
-                         </div>
+                            <img src="assets/images/step1.jpeg" alt="">
+                        </figure>
+                        <div class="text">
+                            <h1>Learn to speak English</h1>
+                            <div class="resumeBtn">
+                                <button (click)="redirect()">
+                                    <em class="lxp-Play_Icon"></em> <span>Resume</span>
+                                </button>
+                            </div>
+                        </div>
                      </div>
                     <div class="course-progress" *ngIf="showProgressChart" [@collapseprogress]>
                     <div class="course-progress-wrapper">
