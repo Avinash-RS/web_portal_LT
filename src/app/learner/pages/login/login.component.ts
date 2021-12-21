@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
   registerSuccess = false;
   titleData = [];
   siteKey: any = environment.captachaSiteKey;
+  env_Version = environment.appVersion;
   recaptchaStr = '';
   recaptchaForgetStr = '';
   recaptchaSignInStr = '';

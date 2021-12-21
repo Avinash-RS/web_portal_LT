@@ -1,5 +1,6 @@
 export const environment = {
   production: false,
+  appVersion: require('../../package.json').version + '-qa',
   apiUrl: 'http://20.44.35.112:3000/',
   scormUrl: 'http://52.140.12.78:8089/',
   apiUrlImg: 'http://20.44.35.112:3000/',
