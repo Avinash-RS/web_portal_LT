@@ -1380,7 +1380,7 @@ export class CoursedetailsComponent implements OnInit {
   //   });
   // }
   navigatePractice() {
-    window.open(this.eboxUrl);
+    window.open(this.eboxUrl,"Practice");
   }
 
   openQuestionDialog(templateRef) {

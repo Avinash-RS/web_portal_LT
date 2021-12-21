@@ -1,7 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { LearnerMyCourseComponent } from './pages/learner-my-course/learner-my-course.component';
 import { LearnerNewMyCourseComponent } from './pages/learner-new-my-course/learner-new-my-course.component';
 import { CoursedetailsComponent } from './pages/coursedetails/coursedetails.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -109,7 +108,6 @@ const routes: Routes = [
 ]
 @NgModule({
   declarations: [
-    LearnerMyCourseComponent,
     CoursedetailsComponent,
     InstructorLedComponent,
     DiscussionForumComponent,

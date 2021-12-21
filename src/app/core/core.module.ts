@@ -9,7 +9,6 @@ import { MaterialModule } from '@core/material.module';
 import { CapslockDirective } from '@core/services/directives/capslock.directive';
 import { StickyHeaderDirective } from '@core/services/directives/sticky-header.directive';
 import { AudioPlayerComponent } from '@core/shared/audio-player/audio-player.component';
-import { MycourseItemComponent } from '@core/shared/mycourse-item-component/mycourse-item-component';
 import { VideoPlayerComponent } from '@core/shared/video-player/video-player.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -53,7 +52,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     LandingHeaderComponent,
     SearchPipe,
     ToolbarNotificationComponent,
-    MycourseItemComponent
   ],
 
   imports: [
@@ -93,7 +91,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     StickyHeaderDirective,
     VideoPlayerComponent,
     PdfreaderComponent,
-    MycourseItemComponent,
     SearchPipe]
 })
 export class CoreModule { }
