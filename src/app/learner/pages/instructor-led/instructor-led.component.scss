@@ -8,10 +8,10 @@
   @media only screen and (min-width: 1024px) {
     flex-direction: row;
     .leftContainer {
-      width: calc(100% - 500px);
+      width: calc(100% - 400px);
     }
     .rightContainer {
-      width: 500px;
+      width: 400px;
       padding: 0 20px;
     }
   }
@@ -19,7 +19,7 @@
 
 .leftContainer {
   background-color: #f2f2f2;
-  width: 100%;
+  // width: 100%;
   z-index: 1;
   box-shadow: 0px 0px 9px 0px #00000059;
   padding: 10px 0 20px 0;
@@ -30,7 +30,7 @@
 
 .rightContainer {
   background-color: white;
-  width: 100%;
+  // width: 100%;
   z-index: 0;
   padding: 15px;
 }
@@ -147,7 +147,7 @@
     position: relative;
     width: 100%;
     .sessionImage {
-      height: 500px;
+      height: 300px;
       width: 100% !important;
       object-fit: cover !important;
       // @media only screen and (min-width: 768px) {
@@ -214,7 +214,7 @@
         height: 60%;
         display: flex;
         justify-content: center;
-        align-items:center;
+        align-items: center;
         @media only screen and (max-width: 768px) {
           display: none;
         }
@@ -325,8 +325,8 @@
     width: 58%;
     margin-left: 2%;
   }
-  @media only screen and (max-width:426px) {
-    padding: 10px;
+  @media only screen and (max-width: 426px) {
+    padding: 30px 0 0 10px;
   }
   h4 {
     font-weight: bold;
@@ -483,28 +483,65 @@
     width: 100%;
   }
   @media only screen and (min-width: 426px) and (max-width: 768px) {
-     padding: 10px;
-     width: 47%;
+    padding: 10px;
+    width: 47%;
   }
+}
+
+.iconWrap {
+  width: 10%;
+}
+
+.countWrap {
+  width: 85%;
+  margin-left: 5%;
 }
 
 .LightBlueCircle {
   border-radius: 50%;
   background: #27bbee;
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
+  // font-size: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  @media only screen and (min-width: 769px) and (max-width: 1515px) {
+  @media (min-width: 576px) {
+    width: 50px;
+    height: 50px;
+  }
+
+  @media (min-width: 768px) {
+    width: 50px;
+    height: 50px;
+  }
+
+  @media (min-width: 992px) {
     width: 60px;
     height: 60px;
   }
+
+  @media (min-width: 1200px) {
+    width: 70px;
+    height: 70px;
+  }
   .lxp-video-tutorial-1 {
-    font-size: 45px;
+    font-size: 25px;
     color: #ffffff;
-    @media only screen and (min-width: 769px) and  (max-width: 1515px) {
+    @media (min-width: 576px) {
+      font-size: 25px;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 25px;
+    }
+
+    @media (min-width: 992px) {
       font-size: 30px;
+    }
+
+    @media (min-width: 1200px) {
+      font-size: 40px;
     }
   }
 }
@@ -512,20 +549,48 @@
 .YellowGreenCircle {
   border-radius: 50%;
   background: #88bd2f;
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
+  // font-size: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  @media only screen and (min-width: 1024px) and (max-width: 1515px) {
+  @media (min-width: 576px) {
+    width: 50px;
+    height: 50px;
+  }
+
+  @media (min-width: 768px) {
+    width: 50px;
+    height: 50px;
+  }
+
+  @media (min-width: 992px) {
     width: 60px;
     height: 60px;
   }
+
+  @media (min-width: 1200px) {
+    width: 70px;
+    height: 70px;
+  }
   .lxp-students {
-    font-size: 45px;
+    font-size: 25px;
     color: #ffffff;
-    @media only screen and (min-width: 1024px) and  (max-width: 1515px) {
+    @media (min-width: 576px) {
+      font-size: 25px;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 25px;
+    }
+
+    @media (min-width: 992px) {
       font-size: 30px;
+    }
+
+    @media (min-width: 1200px) {
+      font-size: 40px;
     }
   }
 }
@@ -533,20 +598,48 @@
 .FunBlueCircle {
   border-radius: 50%;
   background: #1b4e9b;
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
+  // font-size: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  @media only screen and (min-width: 1024px) and (max-width: 1515px) {
+  @media (min-width: 576px) {
+    width: 50px;
+    height: 50px;
+  }
+
+  @media (min-width: 768px) {
+    width: 50px;
+    height: 50px;
+  }
+
+  @media (min-width: 992px) {
     width: 60px;
     height: 60px;
   }
+
+  @media (min-width: 1200px) {
+    width: 70px;
+    height: 70px;
+  }
   .lxp-recorded_videos {
-    font-size: 40px;
+    font-size: 25px;
     color: #ffffff;
-    @media only screen and (min-width: 1024px) and  (max-width: 1515px) {
+    @media (min-width: 576px) {
+      font-size: 25px;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 25px;
+    }
+
+    @media (min-width: 992px) {
       font-size: 30px;
+    }
+
+    @media (min-width: 1200px) {
+      font-size: 33px;
     }
   }
 }
@@ -618,6 +711,7 @@
         background-color: #e5e5e5;
         color: #333333;
         text-align: left;
+        font-size: 13px;
         &:first-child {
           @media only screen and (max-width: 576px) {
             display: none;
@@ -726,11 +820,29 @@
   color: #333333;
   opacity: 1;
   margin: 0 !important;
+  font-size: 12px;
+  line-height: 1.3;
   // margin-bottom: 15px;
   font-size: 15px;
-  // @media only screen and (max-width: 576px) {
-  //   margin-bottom: 8px;
-  // }
+  @media (min-width: 576px) {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 15px;
+    line-height: 1.3;
+  }
+
+  @media (min-width: 992px) {
+    font-size: 15px;
+    line-height: 1.3;
+  }
+
+  @media (min-width: 1200px) {
+    font-size: 16px;
+    line-height: 2;
+  }
 }
 
 .tblheaderFont {
@@ -767,14 +879,23 @@
 }
 
 .count {
-  margin-left: 40px;
-  line-height: 1.6;
+  margin-left: 45px;
+  // line-height: 1.6;
+  // font-size: 30px;
+  // font-size: 2em;
   // @media only screen and (max-width: 1023px) {
   //   margin-left: 30px;
   // }
-  @media only screen and (min-width: 426px) and (max-width: 767px) {
-   margin: 20px;
-  }
+  // @media (min-width: 576px) { font-size: 12px; }
+
+  // @media (min-width: 768px) { font-size: 16px; }
+
+  // @media (min-width: 992px) { font-size: 20px; }
+
+  // @media (min-width: 1200px) { font-size: 24px; }
+  // @media only screen and (min-width: 1024px) and  (max-width: 1515px) {
+  //   font-size: 1em;
+  // }
 }
 
 .number {
@@ -785,9 +906,22 @@
   letter-spacing: 0px;
   color: black;
   opacity: 1;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bolder;
-  @media only screen and (max-width: 576px) {
+  @media (min-width: 576px) {
+    font-size: 20px;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 20px;
+  }
+
+  @media (min-width: 992px) {
+    font-size: 20px;
+  }
+
+  @media (min-width: 1200px) {
+    font-size: 22px;
   }
 }
 

@@ -109,39 +109,51 @@
         <div class="row smallContainers d-flex justify-content-between align-items-center">
           <!-- <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4"> -->
           <!-- <div class="tabContainers"> -->
-            <div class="smallContainer d-flex flexStart justify-flex-start justify-content-start align-items-center">
-                <div class="LightBlueCircle">
-                  <em class="lxp-video-tutorial-1"></em>
-                </div>
-                <div class="count">
-                  <span class="number">{{listOfSessions?.length}}</span>
-                  <p class="smallHeadline">Total Sessions</p>
-                </div>
+          <div class="smallContainer d-flex flexStart justify-flex-start justify-content-start align-items-center">
+            <div class="iconWrap">
+              <div class="LightBlueCircle">
+                <em class="lxp-video-tutorial-1"></em>
+              </div>
             </div>
+            <div class="countWrap">
+              <div class="count">
+                <span class="number">{{listOfSessions?.length}}</span>
+                <p class="smallHeadline">Total Sessions</p>
+              </div>
+            </div>
+          </div>
           <!-- </div> -->
-
+        
           <!-- <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4"> -->
-            <div class="smallContainer d-flex flexStart justify-flex-start justify-content-start align-items-center">
-                <div class="YellowGreenCircle">
-                  <em class="lxp-students"></em>           
-                </div>
-                <div class="count">
-                  <span class="number">{{attendedCount.length}}</span>
-                  <p class="smallHeadline">Attended Sessions</p>
-                </div>
+          <div class="smallContainer d-flex flexStart justify-flex-start justify-content-start align-items-center">
+            <div class="iconWrap">
+              <div class="YellowGreenCircle">
+                <em class="lxp-students"></em>
+              </div>
             </div>
+            <div class="countWrap">
+              <div class="count">
+                <span class="number">{{attendedCount.length}}</span>
+                <p class="smallHeadline">Attended Sessions</p>
+              </div>
+            </div>
+          </div>
           <!-- </div> -->
-
+        
           <!-- <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4"> -->
-            <div class="smallContainer d-flex flexStart justify-flex-start justify-content-start align-items-centerr">
-                <div class="FunBlueCircle">
-                  <em class="lxp-recorded_videos"></em>         
-                </div>
-                <div class="count">
-                  <span class="number">{{recordedCount.length}}</span>
-                  <p class="smallHeadline">Recorded Videos</p>
-                </div>
+          <div class="smallContainer d-flex flexStart justify-flex-start justify-content-start align-items-center">
+            <div class="iconWrap">
+              <div class="FunBlueCircle">
+                <em class="lxp-recorded_videos"></em>
+              </div>
             </div>
+            <div class="countWrap">
+              <div class="count">
+                <span class="number">{{recordedCount.length}}</span>
+                <p class="smallHeadline">Recorded Videos</p>
+              </div>
+            </div>
+          </div>
           <!-- </div> -->
         </div>
 
@@ -178,17 +190,17 @@
           <div class="row attendance-table" *ngIf="sessionAttendance?.length">
             <table style="width: 100%;">
               <tr class="tblheaderFont">
-                <th width="7%">Session #</th>
-                <th width="55%">Topic Name</th>
+                <th width="11%">Session #</th>
+                <th width="50%">Topic Name</th>
                 <th width="22%">Date</th>
                 <th width="6%">Attendance</th>
               </tr>
               <tbody>
                 <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
-                  <td class="tableCol">{{i+1}}</td>
+                  <td>{{i+1}}</td>
                   <td>{{atd.activity.activityname}}</td>
                   <td>{{atd.activity.startdate | date: 'dd/MM/yyyy hh:mm a'}}</td>
-                  <td class="tableCol">
+                  <td>
                     <mat-icon #attended
                       *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'"
                       style="color: green;">check_circle_outline</mat-icon>
@@ -257,10 +269,10 @@
             <div class="row d-flex justify-content-start">
               <div class="image-container">
                 <img *ngIf="los.activity_details.livethumbnail" alt="image"
-                  style="width: 100%; height: 150px !important;object-fit: cover !important;"
+                  style="width: 100%; height: 130px !important;object-fit: cover !important;"
                   [src]="los.activity_details.livethumbnail + blobKey">
                 <img *ngIf="!los.activity_details.livethumbnail" alt="image"
-                  style="width: 100%; height: 150px !important;object-fit: cover !important;"
+                  style="width: 100%; height: 130px !important;object-fit: cover !important;"
                   src="../../../../assets/learner/instructor_image.png">
                 <!-- <div class="bottom-right" [ngClass]="los.status == 'Ongoing' ? 'organge' : los.status == 'UpComing' ? 'grey' : los.status == 'Completed' ? 'greenColor':''" >{{los.status}}</div> -->
                 <mat-icon class="rec-center" *ngIf="los.activity_details.activitytype == 'Recorded'"> play_circle
