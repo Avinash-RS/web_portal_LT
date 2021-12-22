@@ -44,7 +44,7 @@
       }
     }
     .contentHeight {
-      height: calc(100vh - 71px);
+      height: calc(100vh - 119px);
       .tocSize {
         .leftTocContent {
           height: calc(100vh - 149px);
@@ -71,6 +71,9 @@
   }
   @media only screen and (min-width: 1140px) {
     height: calc(100vh - 111px);
+  }
+  @media only screen and (min-width: 1440px) {
+    // height: calc(100vh - 119px);
   }
 
   // .hamburgerPosition {
@@ -144,6 +147,7 @@
     }
     &.fullWidth {
       width: 100%;
+      height: 100%;
     }
     &.halfWidth {
       @media only screen and (max-width: 767px) {
@@ -190,7 +194,7 @@
       }
     }
     &.Yes {
-      padding: 0 10px 0 0px;
+      padding: 10px 10px 10px 0px;
       .popupContent {
         &::before {
           display: none;
@@ -679,6 +683,75 @@
   margin: 0;
   position: relative;
   flex-wrap: wrap;
+  &.tocSubSubtitle {
+    flex-wrap: nowrap;
+    .statusColor {
+      width: 5%;
+      position: relative;
+      @media only screen and (min-width: 720px) {
+        width: 8%;
+      }
+      @media only screen and (min-width: 992px) {
+        width: 5%;
+      }
+      .passColor, .processColor, .greyColor {
+        border-radius: 50%;
+        width: 13px;
+        height: 13px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: normal;
+        position: relative;
+        left: 1px;
+        top: -4px;
+        background-color: white;
+        background-image: none;
+      }
+      .passColor {
+        border: 1px solid #39b54a;
+        em {
+          color: #39b54a;
+          font-size: 5px;
+          line-height: normal;
+        }
+      }
+      .processColor {
+        border: 1px solid #f7941e;
+      }
+      .greyColor {
+        border: 1px solid #C9C9C9;
+      }
+    }
+    .subModuleExpandCollapse {
+      width: 5%;
+      @media only screen and (min-width: 720px) {
+        width: 8%;
+      }
+      @media only screen and (min-width: 992px) {
+        width: 5%;
+      }
+      em {
+        color: #5E5E5E;
+      }
+    }
+    .topicName {
+      width: 88%;
+      margin-left: 2%;
+      @media only screen and (min-width: 720px) {
+        width: 82%;
+      }
+      @media only screen and (min-width: 992px) {
+        width: 88%;
+      }
+      @media only screen and (min-width: 1540px) {
+        margin-left: 0;
+      }
+      h4 {
+        font-weight: 500;
+      }
+    }
+  }
   .statusColor {
     width: 5%;
     position: relative;
@@ -2073,14 +2146,14 @@
     }
     .bookmarkTopic {
       position: absolute;
-      left: -10px;
+      left: -8px;
       top: 50%;
       transform: translateY(-50%);
       background-color: #ffffff;
       border: 1px solid #CCCCCC;
       border-radius: 50%;
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       em {
         color: #004684;
         font-size: 9px;

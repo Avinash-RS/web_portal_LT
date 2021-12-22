@@ -28,6 +28,9 @@
         "src/environments/*"
       ],
     },
+    "types": [
+      "node"
+    ],
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,

@@ -108,7 +108,7 @@
   .brandLogo {
     width: 55%;
     background-color: #fcfcfc;
-    background-image: url("../../../../assets/learner/obstacles.svg");
+    background-image: url("https://assets.lntedutech.com/application_images/obstacles.svg");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: 100%;
@@ -239,30 +239,137 @@
   .signIn {
     padding-bottom: 30px;
   }
-  .authVerification{
+  .authVerification {
     width: 100%;
-    h2 {
-        font-size: 22px;
-        font-weight: 500;
-        color: #333333;
-        line-height: normal;
-        margin: 0;
+    text-align: center;
+    .download {
+      display: inline-flex;
+      background-color: #F9F9F9;
+      border: 1px solid rgba(96, 125, 139, 0.5);
+      border-radius: 3px;
+      padding: 7px 15px;
+      font-size: 12px;
+      font-weight: 400;
+      color: #000000;
+      margin: 0 0 20px 0;
+      line-height: normal;
+      span {
+        color: #1B4E9B;
+        font-weight: bold;
+      }
     }
-    .goBack{
+    .qrCode {
+      margin: 20px 0 30px 0;
+      span {
+        display: inline-flex;
+        position: relative;
+        width: 39%;
+        i {
+          position: absolute;
+          &:first-child {
+            left: 0;
+            top: 0;
+            &::before, &::after {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 0;
+              background-color: black;
+            }
+            &::before {
+              width: 2px;
+              height: 20px;
+            }
+            &::after {
+              height: 2px;
+              width: 20px;
+            }
+          }
+          &:nth-child(2) {
+            right: 0;
+            top: 0;
+            &::before, &::after {
+              content: '';
+              position: absolute;
+              right: 0;
+              top: 0;
+              background-color: black;
+            }
+            &::before {
+              width: 2px;
+              height: 20px;
+            }
+            &::after {
+              height: 2px;
+              width: 20px;
+            }
+          }
+          &:nth-child(3) {
+            left: 0;
+            bottom: 0;
+            &::before, &::after {
+              content: '';
+              position: absolute;
+              left: 0;
+              bottom: 0;
+              background-color: black;
+            }
+            &::before {
+              width: 2px;
+              height: 20px;
+            }
+            &::after {
+              height: 2px;
+              width: 20px;
+            }
+          }
+          &:nth-child(4) {
+            right: 0;
+            bottom: 0;
+            &::before, &::after {
+              content: '';
+              position: absolute;
+              right: 0;
+              bottom: 0;
+              background-color: black;
+            }
+            &::before {
+              width: 2px;
+              height: 20px;
+            }
+            &::after {
+              height: 2px;
+              width: 20px;
+            }
+          }
+        }
+      }
+      img {
+        max-width: 100%;
+      }
+    }
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 1);
+      line-height: normal;
+      margin: 0;
+    }
+    .goBack {
       display: flex;
       justify-content: center;
       color: #87898a;
       cursor: pointer;
       padding-bottom: 30px;
-    }
-    .goBack:hover{
-      color: #1B4E9B;
-      text-decoration: underline;
+      &:hover {
+        color: #1B4E9B;
+        text-decoration: underline;
+      }
     }
     .signup {
       cursor: pointer;
     }
-    .alert1{
+    .alert1 {
       color: #87898a;
       margin-bottom: 1em;
     }
@@ -422,5 +529,18 @@
   }
   100% {
     box-shadow: 10014px 15px 0 0 rgba(152, 128, 255, 0);
+  }
+}
+
+::ng-deep .otp-input:focus-visible{
+  outline: 1px solid #27bbee !important;
+}
+::ng-deep .otp-input:visited{
+  border: 1px solid #27bbee !important;
+}
+
+.secondStep {
+  h2 {
+    font-weight: 500 !important;
   }
 }

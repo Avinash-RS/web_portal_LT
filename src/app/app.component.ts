@@ -15,6 +15,7 @@ import * as CryptoJS from 'crypto-js';
 import { Gtag } from 'angular-gtag';
 declare var window;
 declare var dataLayer
+declare var gtag;
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-root',
@@ -62,6 +63,11 @@ export class AppComponent implements OnInit {
               public sanitizer: DomSanitizer,
 
   ) {
+    let userDetail =JSON.parse(localStorage.getItem('UserDetails'))
+    if(!userDetail?.specific_report_value){
+      localStorage.clear();
+      sessionStorage.clear();
+    }
     // console.error = function(){}
     // console.warn = function(){}
     this.commonService.getIpAddressByUrl();
@@ -123,7 +129,6 @@ export class AppComponent implements OnInit {
    // console.error = function(){}
    // console.log = function(){}
   //  console.warn = function(){}
-    console.log("App component")
     this.loadersubscription = this.Lservice.getMessage().subscribe(message => 
       { 
         if(message.count){
@@ -177,9 +182,7 @@ export class AppComponent implements OnInit {
         }else{
           dataLayer[0]={'userID': user_id};
         }
-        }
-        console.log("USERID"+this.UserDetails.user_id)
-        console.log("USERID"+user_id)
+        }        
         this.gtag.pageview({
           page_title: data?.title? data.title : "L&T Edutech",
           page_path: this.router.url,
@@ -187,13 +190,14 @@ export class AppComponent implements OnInit {
           userID:user_id
         });
         this.gtag.set({ 'userID' : user_id });
+        gtag('set', 'user_properties', { 'userID' : user_id });
       })
         
        
         // this.ga_service.logPageView(e.url,user_id);
         // this.ga_service.logPageView(e.url);
       const urlIdentifier = e.url.split("/")
-      const possiblePages = ['register', 'login', 'recover', 'resetpassword','password','']
+      const possiblePages = ['register', 'login', 'recover', 'resetpassword','password','authentication','']
       const rt = this.getChild(this.activatedRoute);
       rt.data.subscribe(data => {
         this.isFooterVisible = '';
@@ -284,7 +288,7 @@ myUnload() {
 
   openChatbot() {
       this.UserDetails = JSON.parse( window.localStorage.getItem('UserDetails'));
-      this.botUrl = "https://devfaqbot.lntiggnite.com/?userName=" + this.UserDetails.full_name + "&userID=" + this.UserDetails.user_id + "&token=" + this.UserDetails.token;
+      this.botUrl = environment.botUrl + "?userName=" + this.UserDetails.full_name + "&userID=" + this.UserDetails.user_id + "&token=" + this.UserDetails.token;
       this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.botUrl)
       this.chatbotShow = true;
   }

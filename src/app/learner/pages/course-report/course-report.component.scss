@@ -36,6 +36,43 @@
     background-color: #ffffff;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
     padding: 20px;
+    .breadcrumb {
+      margin: 0;
+      padding: 0 20px !important;
+      background-color: transparent !important;
+      margin-bottom: 15px;
+      display: none;
+      @media only screen and (max-width: 720px) {
+        display: block;
+      }
+      li {
+        color: #333333;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: normal;
+        position: relative;
+        margin-right: 15px;
+        display: inline-block;
+        em {
+          display: inline-block;
+          transform: scale(-1);
+          color: #666666;
+          margin-right: 8px;
+          cursor: pointer;
+        }
+        &:first-child {
+          color: #999999;
+          &::after {
+            content: "/";
+            position: absolute;
+            right: -10px;
+            top: auto;
+            bottom: auto;
+            color: #c02222;
+          }
+        }
+      }
+    }
     @media only screen and (min-width: 720px) {
       padding: 20px 15px;
       order: 2;
@@ -43,7 +80,7 @@
       height: 100%;
     }
     @media only screen and (min-width: 1140px) {
-      padding: 20px 30px;
+      padding: 20px 20px;
       width: 400px;
     }
   }
@@ -54,6 +91,10 @@
     margin: 0;
     padding: 0 20px !important;
     background-color: transparent !important;
+    display: block;
+    @media only screen and (max-width: 720px) {
+      display: none;
+    }
     li {
       color: #333333;
       font-size: 14px;
@@ -61,6 +102,7 @@
       line-height: normal;
       position: relative;
       margin-right: 15px;
+      display: inline-block;
       em {
         display: inline-block;
         transform: scale(-1);
@@ -146,7 +188,10 @@
       .card-foot{
         color:#004684;
         font-size: 12px;
-        margin-left: 20px;
+        //margin-left: 20px;
+        button{
+          margin-right: 10px;
+        }
       }
 
     }
@@ -252,7 +297,7 @@
         }
         .disabledTXT{
           color: #999999;
-          font-size: 18px;
+          font-size: 16px;
         }
         ul{
           list-style: none;
@@ -426,17 +471,23 @@
     text-align: right;
     margin-bottom: 30px;
     button {
-      background-color: #c02222;
+      background-color: #ffffff;
       border-radius: 5px;
-      border: 0;
-      padding: 5px 10px;
-      color: #ffffff;
+      border: 1px solid #004684;
+      padding: 10px 15px;
+      color: #004684;
       font-size: 12px;
-      font-weight: 400;
+      font-weight: 600;
       line-height: normal;
+      transition: all 0.3s ease-in-out;
+      &:hover{
+        background: #004684;
+        color: #ffff;
+      }
       em {
         display: inline-block;
         transform: scaleX(-1);
+        margin-right: 5px;
       }
     }
   }
@@ -471,33 +522,44 @@
       }
     }
   }
-  .courseProgressBar {
-    width: 71%;
-    align-self: center;
-    span {
-      display: block;
-      font-size: 16px;
-      font-weight: 400;
-      color: #666666;
-      margin-bottom: 5px;
+  .progress-text{
+    width: 64%;
+    h3{
+      margin-bottom: 0px;
     }
   }
+  // .courseProgressBar {
+  //   width: 71%;
+  //   align-self: center;
+  //   span {
+  //     display: block;
+  //     font-size: 16px;
+  //     font-weight: 400;
+  //     color: #666666;
+  //     margin-bottom: 5px;
+  //   }
+  // }
   .progressPercentage {
-    width: 16%;
-    margin-top: 1%;
-    span {
-      display: block;
-      line-height: normal;
-      &.percentageScore {
-        color: #2A4DC1;
-        font-size: 13px;
-        font-weight: 500;
-      }
-      &.outOfScore {
-        color: #00004E;
-        font-size: 10px;
-        font-weight: 400;
-      }
+    width: 24%;
+    //margin-top: 1%;
+    // span {
+    //   display: block;
+    //   line-height: normal;
+    //   &.percentageScore {
+    //     color: #2A4DC1;
+    //     font-size: 13px;
+    //     font-weight: 500;
+    //   }
+    //   &.outOfScore {
+    //     color: #00004E;
+    //     font-size: 10px;
+    //     font-weight: 400;
+    //   }
+    // }
+    span{
+      color: #49AE31;
+      font-size: 18px;
+      font-weight: 600;
     }
   }
   .finalScoreCard {
@@ -584,7 +646,45 @@
 // New UI Ends
 
 .assessmentScoreCard {
-  margin-top: 15px;
+  margin-top: 25px;
+  .assessment-hd-txt{
+    color: #004684;
+  }
+  .assessment-progress-text{
+    width: 39%;
+    h3{
+      margin-bottom: 0px;
+    }
+  }
+  .raw-score{
+    width: 24%;
+    span{
+      color: #004684;
+      font-size: 17px;
+      font-weight: 600;
+    }
+    p{
+      font-size: 12px;
+      color: #666666;
+      font-weight: 500;
+      line-height: normal;
+    }
+  }
+  .assessment-progressPercentage{
+    width: 24%;
+    span{
+      color: #49AE31;
+      font-size: 17px;
+      font-weight: 600;
+    }
+    p{
+      font-size: 12px;
+      color: #666666;
+      font-weight: 500;
+      line-height: normal;
+    }
+  }
+
 }
 .wrapperReport {
   flex-wrap: wrap;
@@ -647,6 +747,14 @@
         color: #002581;
         font-size: 10px;
       }
+      table{
+        width: 100%;
+        font-size: 12px;
+        font-weight: 400;
+        td{
+          color: #002581;
+        }
+      }
     }
   }
 }
@@ -700,5 +808,7 @@
 }
 .disable-card{
   background-color: #ededed;
-  color: #999999;
+  label{
+    color: #000000;
+  }
 }

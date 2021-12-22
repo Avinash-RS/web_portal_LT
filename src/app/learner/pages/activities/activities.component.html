@@ -30,7 +30,7 @@
           <div class="d-flex justify-content-between">
             <div class="w-100 projectActivityDetails">
               <div class="d-flex justify-content-between assignmentActivityDetails">
-                <div style="width: 86%;" class="projectLeftContent">
+                <div class="projectLeftContent">
                   <div class="topic text-left d-flex">
                     <mat-icon class="assignIcon">assignment</mat-icon>
                     <span class="f_size_16 f_wt_600 projHead">{{assignment.files.module_id}}</span>
@@ -44,10 +44,10 @@
                 </div>
                 <div class="projectRightContent">
                   <div class="text-right activityStatus">
-                    <span class="f_wt_600 alignRight status" *ngIf="assignment.files.doc_status && assignment.files.grade_status != 'Evaluated'">
+                    <span class="f_wt_600 alignRight status" *ngIf="assignment.files.submit_status === 'notsubmitted' && assignment.files.grade_status != 'Evaluated'">
                       <span class="dot"></span>Yet to submit
                     </span>
-                    <span class="f_wt_600 alignRight projectSubmitstatus submitted"*ngIf="assignment.files.doc_status === false && assignment.files.grade_status === 'Not Evaluated'">
+                    <span class="f_wt_600 alignRight projectSubmitstatus submitted"*ngIf="assignment.files.submit_status !== 'notsubmitted' && assignment.files.grade_status === 'Not Evaluated'">
                       <span class="submitdot"></span>Submitted
                     </span>
                     <span class="f_wt_600 alignRight graded" *ngIf="assignment.files.grade_status === 'Evaluated'">
@@ -121,12 +121,16 @@
                   <div class="col-md-4 col-sm-12 col-12 third">
                     <div class="f_size_16 f_wt_600 align-center work">Your work</div>
                     <div class="box-0-3">
-                      <div class="fileData ml-auto mr-auto mb-3 d-flex" *ngIf="assignment?.files?.filename && !assignment?.files?.showPreview">
+
+                      <div class="fileData ml-auto mr-auto mb-3 d-flex" *ngIf="assignment?.files?.filename">
+
                         <mat-icon *ngIf="assignment.files.doc_type == 'image/jpeg'|| assignment.files.doc_type == 'image/png' || assignment.files.doc_type =='image/jpg'" class="videoPlay float-left">photo</mat-icon>
                         <mat-icon *ngIf="assignment.files.doc_type == 'application/pdf'" class="videoPlay float-left">picture_as_pdf </mat-icon>                     
                         <span class="uploadfileName assignementName" style="margin-top: 4px;position: inherit;" matTooltip="{{assignment.files.filename}}" matTooltipClass="custom-mat-tooltip">
                           {{assignment.files.filename}}
                         </span>
+                        <mat-icon class="deleteIcon float-right" *ngIf="assignment.files.grade_status !== 'Evaluated'" (click)="deleteAssigmnemtData(assignment.files)">delete</mat-icon>
+
                         <ng-container *ngIf="assignment.files.grade_status == 'Evaluated'">
                         <span (click)="previewAssignment(previewDialog,assignment.files)" matTooltip="View" matTooltipClass="custom-mat-tooltip">
                           <mat-icon matTooltipClass="custom-mat-tooltip" class="assignmentpdf"  *ngIf="assignment.files.doc_type == 'image/jpeg'|| assignment.files.doc_type == 'image/png' || assignment.files.doc_type =='image/jpg'">photo_size_select_actual</mat-icon>
@@ -136,14 +140,7 @@
                           <i matTooltip="Download" matTooltipClass="custom-mat-tooltip" class="fa fa-download assignmentdownload" aria-hidden="true"></i>
                         </span>
                       </ng-container>
-                      </div>
-                      
-                      <div class="fileData ml-auto mr-auto mb-3 d-flex" *ngIf="assignment?.files?.showPreview">
-                        <mat-icon *ngIf="assignmentFile.type == 'image/jpeg'|| assignment.files.doc_type == 'image/png' || assignment.files.doc_type =='image/jpg'" class="videoPlay float-left">photo</mat-icon>
-                        <mat-icon *ngIf="assignmentFile.type == 'application/pdf'" class="videoPlay float-left">picture_as_pdf </mat-icon>
-                        <span class="uploadfileName assignementName" style="margin-top: 4px;position: inherit;" matTooltip="{{assignmentFile.name}}" matTooltipClass="custom-mat-tooltip">
-                          {{assignmentFile.name}}
-                        </span>
+
                       </div>
 
                       <div class="align-center">
@@ -151,11 +148,12 @@
                         <button mat-stroked-button class="upload-btn" (click)="fileInput.click()" [disabled]="assignment.files.grade_status != 'Evaluated' && !assignment.files?.enableUpload" *ngIf="assignment.files.grade_status !== 'Evaluated'"> <mat-icon class="icon-color m-t-m-2">add</mat-icon> Upload files </button>
                         <p class="uploadMessage" *ngIf="assignment.files.grade_status !== 'Evaluated'" >Max File Size : 10 MB, Format : JPEG,JPG,PNG,PDF</p>
                         <div>
-                          <button *ngIf="assignment?.files?.disablesubmitbtn" mat-stroked-button class="submitted-btn mt-2">
-                            <span *ngIf="!assignment?.files.filename">Submit</span> 
-                            <span *ngIf="assignment?.files.filename">Submitted</span>  
-                          </button>
-                          <button *ngIf="!assignment?.files?.disablesubmitbtn" mat-stroked-button class="submit-btn mt-2"(click)="submitAssigmnemtData(assignment.files)">Submit</button>
+
+                          <ng-container *ngIf="assignment?.files?.filename">
+                            <button *ngIf="assignment?.files.submit_status == 'notsubmitted'" mat-stroked-button class="submit-btn mt-2"(click)="submitAssigmnemtData(assignment.files)">Submit</button>
+                            <button *ngIf="assignment?.files.submit_status == 'ontime' || assignment?.files.submit_status == 'late'" mat-stroked-button class="submitted-btn mt-2">Submitted</button>
+                            <div class="uploadedFile"  *ngIf="assignment?.files.submit_status == 'ontime' || assignment?.files.submit_status == 'late'">Submitted on : {{assignment?.files.submitted_on | date:'MMM dd, yyyy'}}</div>
+                          </ng-container>
                         </div>
                       </div>
                     </div>
@@ -169,19 +167,9 @@
       <!-- Content ends -->
       <div class="noCard" *ngIf="emptyAssignment">
         <figure>
-          <img src="/assets/images/noassignment.svg" alt="assignment">
+          <img src="https://assets.lntedutech.com/application_images/noassignment.svg" alt="assignment">
         </figure>
         <p> You have no Assignment activity at the moment!</p>
-        <!-- <mat-card class="noSessionCard color-yellow-card-status">
-          <div class="row mar-t-12 noSessioncardRow">
-            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-              <img class="actImg" src="assets/Assignment.svg" alt="assignment">
-            </div>
-            <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
-              <span class="spanTxt"> You have no assignments at the moment!</span>
-            </div>
-          </div>
-        </mat-card>  -->
       </div>
 
     </mat-tab>
@@ -193,7 +181,7 @@
           <mat-card class="performCard" (click)="performdetailPage(i+1, perform);performdetailPageView = true" *ngFor="let perform of performDetails; let i = index">
             <div class="d-flex flex-column">
               <div class="performHeading">
-                <p class="subTittle"><img class="perfimg" src="assets/Perform1.svg" alt="perform">&nbsp; {{perform.performActivity.module_id}}</p>
+                <p class="subTittle"><img class="perfimg" src="https://assets.lntedutech.com/application_images/Perform1.svg" alt="perform">&nbsp; {{perform.performActivity.module_id}}</p>
                 <span>{{perform.performActivity.topic_id}}
                 </span>
               </div>
@@ -229,7 +217,7 @@
         <div class="box-0-1" *ngFor="let perform of performDetails; let i = index">
           <div class="d-flex justify-content-between">
             <div class="performLeftContent">
-              <div class="f_size_16 f_wt_600"><img class="perfimg" src="assets/Perform1.svg" alt="perform"> 
+              <div class="f_size_16 f_wt_600"><img class="perfimg" src="https://assets.lntedutech.com/application_images/Perform1.svg" alt="perform"> 
                 <span class="ml-13">{{perform.performActivity.module_id}}</span>
               </div>
               <div class="t-l">{{perform.performActivity.topic_id}}</div>
@@ -484,30 +472,13 @@
           </div>
         </div>
       </ng-container>
-      <!-- <div class="row ml-0 mr-0 errmsg" *ngIf="performDetails?.length < 1">
-        <div class="col-12 m-auto text-center">
-          <span class="errormsg">
-            <img class="assignImg" alt="" src="assets/book.svg">
-            <span>You have no perform activity at the moment!</span>
-          </span>
-        </div>
-      </div> -->
 
       <div class="noCard" *ngIf="performDetails?.length < 1">
         <figure>
-          <img src="/assets/images/noperform.svg" alt="assignment">
+          <img src="https://assets.lntedutech.com/application_images/noPerform.svg" alt="assignment">
         </figure>
         <p>You have no Perform activity at the moment!</p>
-        <!-- <mat-card class="noSessionCard color-yellow-card-status">
-          <div class="row mar-t-12 noSessioncardRow">
-            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-              <img class="" src="assets/noPerform.svg" alt="perform"> 
-            </div>
-            <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
-              <span class="spanTxt"> You have no perform activity at the moment!</span>
-            </div>
-          </div>
-        </mat-card>  -->
+       
       </div>
     </mat-tab>
    
@@ -796,19 +767,10 @@
 
       <div class="noCard" *ngIf="projectDetails?.length < 1">
         <figure>
-          <img src="/assets/images/noproject.svg" alt="assignment">
+          <img src="https://assets.lntedutech.com/application_images/noProject.svg" alt="assignment">
         </figure>
         <p>You have no Project activity at the moment!</p>
-        <!-- <mat-card class="noSessionCard color-yellow-card-status">
-          <div class="row mar-t-12 noSessioncardRow">
-            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-              <img class="actImg" src="assets/noProject.svg" alt="project"> 
-            </div>
-            <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12 noData">
-              <span class="spanTxt"> You have no project activity at the moment!</span>
-            </div>
-          </div>
-        </mat-card>  -->
+      
       </div>
     </mat-tab>
  
@@ -843,7 +805,7 @@
                   </div>
                 </div>
                 <div class="practicesaction">
-                  <button mat-stroked-button class="practice-btn mt-2" (click)="getEboxURL(lab.labActivity.ebox_attempt_id)">Launch</button>
+                  <button mat-stroked-button [ngClass]="lab.labActivity.status=='In Progress'?'practice-inProg-btn':lab.labActivity.status=='Completed'?'practice-Compl-btn':'practice-btn'" class="mt-2" (click)="getEboxURL(lab.labActivity.ebox_attempt_id)"><em *ngIf="lab.status=='Completed'" class="lxp-reset"></em>{{lab.labActivity.status=='In Progress'?'In Progress':lab.labActivity.status=='Completed'?'Completed':'Launch'}}</button>
                 </div>
               </div>
             </div>
@@ -852,7 +814,7 @@
       </ng-container>
       <div class="noCard" *ngIf="labNoCard">
         <figure>
-          <img src="/assets/images/noperform.svg" alt="assignment">
+          <img src="https://assets.lntedutech.com/application_images/noPerform.svg" alt="assignment">
         </figure>
         <p>You have no practices at the moment!</p>
       </div>

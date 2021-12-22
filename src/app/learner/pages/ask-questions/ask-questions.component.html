@@ -19,6 +19,24 @@
                     <option [value]="1">Oldest</option>
                 </select>
             </div>
+            <span *ngIf="checkLevel;else normaltopics">
+            <div class=" d-inline-block mt-10px" *ngIf="moduleTopicData?.length">
+                <span>Filter by: &nbsp;</span>
+                <select class="sel-pad mr-20px" [(ngModel)]="mainModule" (change)="mainQAFilter('M')">
+                    <option [ngValue]="null" [disabled]="false">All Modules</option>
+                    <ng-container *ngFor="let skipper of moduleTopicData">
+                        <option  *ngFor="let item of skipper.childData" [ngValue]="item">{{item.title}}</option>
+                    </ng-container>
+                </select>
+                </div>
+                <div class=" d-inline-block mt-10px">
+                <select *ngIf="mainModule" class="sel-pad " [(ngModel)]="mainTopic" (change)="mainQAFilter('T')">
+                    <option [ngValue]="null" [disabled]="false">All Topics</option>
+                    <option  *ngFor="let item of mainModule.childData" [ngValue]="item.title">{{item.title}}</option>
+                </select>
+            </div>
+            </span>
+            <ng-template #normaltopics>
             <div class=" d-inline-block mt-10px" *ngIf="moduleTopicData?.length">
                 <span>Filter by: &nbsp;</span>
                 <select class="sel-pad mr-20px" [(ngModel)]="mainModule" (change)="mainQAFilter('M')">
@@ -29,9 +47,11 @@
                 <div class=" d-inline-block mt-10px">
                 <select *ngIf="mainModule" class="sel-pad " [(ngModel)]="mainTopic" (change)="mainQAFilter('T')">
                     <option [ngValue]="null" [disabled]="false">All Topics</option>
-                    <option  *ngFor="let item of mainModule.children" [ngValue]="item.title">{{item.title}}</option>
+                    <option  *ngFor="let item of mainModule.childData" [ngValue]="item.title">{{item.title}}</option>
                 </select>
             </div>
+        </ng-template>
+            
         </div>
         <div class="justify-content-end mt-10px" *ngIf="batchEndTime>=currentDate">
             <button class="btn btn-primary" (click)="openQuestionInput(questionInputModal)">Ask Question</button>
@@ -70,16 +90,31 @@
                 (click)="closedialogbox()" class="lxp-Close"></i></span>
     </div>
     <div class="askQuestionsContainer mx-20px"(contextmenu)="contextmenu()">
-        <div class="mt-10px  d-inline-block">
+        <span *ngIf="checkLevel;else qinputlist"></span>
+        <div class="mt-10px  d-inline-block" >
             <select class="sel-pad-modal" [(ngModel)]="questionTopicList" (change)="askQAModuleSelect()">
                 <option [ngValue]="null" [disabled]="true">Please select a module</option>
-                <option  *ngFor="let item of moduleTopicData" [ngValue]="item">{{item.title}}</option>
+                <ng-container *ngFor="let skipper of moduleTopicData">
+                <option  *ngFor="let item of skipper.childData" [ngValue]="item">{{item.title}}</option>
+                </ng-container>
             </select>
             <select *ngIf="questionTopicList" class="sel-pad-modal ml-20px" [(ngModel)]="questionTopic" >
                 <option [ngValue]="null" [disabled]="true">Please select a topic</option>
-                <option  *ngFor="let item of questionTopicList.children" [ngValue]="item.title">{{item.title}}</option>
+                <option  *ngFor="let item of questionTopicList.childData" [ngValue]="item.title">{{item.title}}</option>
             </select>
         </div>
+        <ng-template #qinputlist>
+            <div class="mt-10px  d-inline-block" >
+                <select class="sel-pad-modal" [(ngModel)]="questionTopicList" (change)="askQAModuleSelect()">
+                    <option [ngValue]="null" [disabled]="true">Please select a module</option>
+                    <option  *ngFor="let item of moduleTopicData" [ngValue]="item">{{item.title}}</option>
+                </select>
+                <select *ngIf="questionTopicList" class="sel-pad-modal ml-20px" [(ngModel)]="questionTopic" >
+                    <option [ngValue]="null" [disabled]="true">Please select a topic</option>
+                    <option  *ngFor="let item of questionTopicList.childData" [ngValue]="item.title">{{item.title}}</option>
+                </select>
+            </div>
+        </ng-template>
         <div class="questionInput align-content-center">
                     <textarea [(ngModel)]="questionText"></textarea>
                     

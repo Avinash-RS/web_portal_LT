@@ -18,6 +18,7 @@ import { MatButtonModule, MatInputModule, MatCheckboxModule, MatFormFieldModule,
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+import { AuthGuard } from '@core/services/_helpers/auth.guard';
 
 const routes: Routes = [
   {

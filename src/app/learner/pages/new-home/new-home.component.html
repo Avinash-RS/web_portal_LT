@@ -26,27 +26,42 @@
           </figure>
           <!-- Auth Verification -->
           <div class="authVerification">
-              <div *ngIf="qrCode">
-                <h2 class="d-flex justify-content-center">Scan QR Code</h2>
-                <div class="d-flex justify-content-center">
-                    <img [src]="qrCode" alt="" />
+              <div *ngIf="!secondStep">
+                <h2>Scan this QR Code</h2>
+                <div class="qrCode">
+                  <span>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <img [src]="qrCode" alt="QR Code" />
+                  </span>
+                </div>
+                <span class="download">
+                  Download <span>&nbsp;Google authenticator&nbsp;</span> App in your mobile to scan this code
+                </span>
+                <div class="gradientBtn">
+                  <button id="login" mat-raised-button (click)="secondStep=true;">
+                    <span>{{'Next' | translate}}</span>
+                  </button>
                 </div>
               </div>
-            <h2 class="d-flex justify-content-center" *ngIf="qrCode">Enter Authentication Code</h2>
-            <h2 class="d-flex justify-content-center" *ngIf="!qrCode">Enter OTP</h2>
-            <div class="d-flex justify-content-center">
-                <ng-otp-input #authInput (onInputChange)="onAuthChange($event)"  [config]="{length:6,allowNumbersOnly: true}"></ng-otp-input>
-            </div>
-            <div class="gradientBtn">
-              <button id="login" mat-raised-button (click)="verifyAuth()">
-                <span *ngIf="!loader">{{'Verify' | translate}}</span>
-                <div *ngIf="loader" class="snippet" data-title=".dot-falling">
-                  <div class="stage">
-                    <div class="dot-falling"></div>
-                  </div>
+              <div class="secondStep" *ngIf="secondStep">
+                <h2 class="d-flex justify-content-center">Enter the code generated in your Google Authenticator App</h2>
+                <div class="d-flex justify-content-center mt-5 mb-5">
+                    <ng-otp-input #authInput (onInputChange)="onAuthChange($event)" (keydown.enter)="verifyAuth()"  [config]="{length:6,allowNumbersOnly: true}"></ng-otp-input>
                 </div>
-              </button>
-            </div>
+                <div class="gradientBtn">
+                  <button id="login" mat-raised-button (click)="verifyAuth()">
+                    <span *ngIf="!loader">{{'Verify' | translate}}</span>
+                    <div *ngIf="loader" class="snippet" data-title=".dot-falling">
+                      <div class="stage">
+                        <div class="dot-falling"></div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
             <div class="dontHaveAccount">
                 <span>Go back to <a class="signup" (click)="backToIn()"> {{'Sign in'}}</a></span>
               </div>

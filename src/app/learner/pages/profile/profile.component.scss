@@ -225,6 +225,9 @@
 .locationFields .form-group {
   margin-bottom: 0;
 }
+.form-group{
+  width: 465px;
+}
 
 @media screen and (min-width:768px) and (max-width:991px) {
 
@@ -530,6 +533,13 @@ div.account {
 
 .head {
   font-weight: lighter !important;
+  margin: 0 0 20px 20px;
+}
+.lxp-Close{
+  color:#626262;
+  cursor: pointer;
+  font-size: 12px;
+  
 }
 
 .title {
@@ -684,16 +694,19 @@ div.account {
   }
 }
 
-input[type=text] {
-  // width: 100%;
-  padding: 12px 20px;
-  // margin: 1px 0;
-  // background: none !important;
-  display: inline-block;
-  border: 1px solid $color-border;
-  box-sizing: border-box;
+// input[type=text] {
+//   // width: 100%;
+//   padding: 12px 20px;
+//   // margin: 1px 0;
+//   // background: none !important;
+//   display: inline-block;
+//   width: 465px;
+//   border: 1px solid $color-border;
+//   box-sizing: border-box;
+// }
+.error{
+  color: red;
 }
-
 textarea:focus,
 input:focus {
   outline: none;
@@ -779,7 +792,7 @@ hr {
 }
 
 .bg-img {
-  background-image: url('../../../../assets/learner/p-bg-5.png');
+  background-image: url('https://assets.lntedutech.com/application_images/p-bg-5.png');
   // height: 210px;
   width: 100%;
   background-size: cover;
@@ -1070,3 +1083,15 @@ hr {
   opacity: 1 !important;
 }
 
+
+::ng-deep .passwordPopup {
+  .mat-form-field-suffix {
+    top: -0.21em !important;
+    font-size: 15px;
+  }
+}
+
+ ::ng-deep .blurBackground {
+  backdrop-filter:blur(10px) !important;
+  background-color:#b5b5b580 !important;
+}

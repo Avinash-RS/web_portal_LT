@@ -143,6 +143,9 @@
         </div>
     </div>
     <div class="addQuestionRightCol">
+        <ul class="breadcrumb">
+            <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> <span class="name">{{courseName}}</span> <span class="bar">/</span> <span class="breadCrumbTopic">Q&A</span></li>
+        </ul>
         <div class="addQuestion">
             <button (click)="openQuestionDialog(questionDialog)"><em class="lxp-add"></em> Ask A Question</button>
         </div>
@@ -211,7 +214,7 @@
 <ng-template #noquescard>
     <div class="d-flex align-items-center justify-content-center flex-column">
         <figure>
-            <img src="/assets/learner/QandA.svg" alt="QandA">
+            <img src="https://assets.lntedutech.com/application_images/QandA.svg" alt="QandA">
         </figure>
         <div *ngIf="!searchKey">
         <p *ngIf="selectedIndex == 0">

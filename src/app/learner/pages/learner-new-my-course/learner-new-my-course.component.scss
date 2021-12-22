@@ -41,7 +41,7 @@
   //Something New
   .somethingNew {
     // background-color: #ffcc00;
-    background-image: url(../../../../assets/learner/Yellow_band_Length.png);
+    background-image: url(https://assets.lntedutech.com/application_images/Header_band.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: right center;
@@ -843,6 +843,7 @@
           border-radius: 50%;
           width: 42px;
           height: 42px;
+          // background: #A8E3F8;
           background: #dedede;
           transition: 0.3s ease-in background;
           // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -858,7 +859,7 @@
             }
           }
           &:hover {
-            background: rgba(39, 187, 238, 1);
+            background:#27BBEE;
             border: none;
             em {
               color: #ffffff;
@@ -1307,7 +1308,7 @@
     padding: 0 5px;
   }
   .mat-tab-group {
-    margin-top: 60px;
+    margin-top: 10px;
     @media only screen and (min-width: 768px) {
       margin-top: 0;
     }
@@ -2112,10 +2113,22 @@
 
 ////INFO BANNER POPUP
 ::ng-deep .dialogContainer {
-  width: 55% !important;
+  width: 82% !important;
   margin: auto;
   // overflow-y: hidden !important;
   //max-height: 85% !important;
+  @media only screen and (min-width: 576px) {
+    width: 50% !important;
+  }
+  @media only screen and (min-width: 720px) {
+    width: 60% !important;
+  }
+  @media only screen and (min-width: 992px) {
+    width: 70% !important;
+  }
+  @media only screen and (min-width: 1140px) {
+    width: 55% !important;
+  }
   .mat-dialog-container {
     border-radius: 0;
     padding: 0 !important;
@@ -2277,3 +2290,70 @@
     transform: translateX(0);
   }
 }
+
+// step integration 
+
+.stepIntegrationSection {
+  position: relative;
+  background-color: #FFFFFF;
+  width: 100%;
+  margin: 45px 0px 15px 0px;
+  padding: 7px;
+  border-radius: 4px;
+  @media screen and (max-width: 720px) {
+    margin: 55px 0px 15px 0px;
+  }
+ figure {
+    width: 100% !important;
+    height: 110px !important;
+    @media screen and (max-width: 720px) {
+    height: 150px !important;
+   
+    } 
+    img {
+      width: 100%;
+     
+    }
+  }
+  .text {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    h1 {
+      width: 48%;
+      font-size: 22px;
+      color: #FFFFFF;
+      font-weight: 600;
+      margin: 0 !important;
+      line-height: 24px;
+    }
+    .resumeBtn {
+      width: 48%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: end;
+      button {
+        border-radius: 18px;
+        background-color: #1B4E9B;
+        display: flex;
+        align-items: center;
+        color: white;
+        border: none;
+        padding: 9px 18px;
+        transition: background-color 0.3s ease-in-out;
+        &:hover {
+          background-color: #004684;
+        }
+        span {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}
+

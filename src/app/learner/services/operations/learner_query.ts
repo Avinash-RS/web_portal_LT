@@ -19,6 +19,7 @@ export const login = gql`
         is_thread_config
         is_comment_config
         is_profile_updated
+        is_password_updated
         org_type
         group_id
         message
@@ -1451,39 +1452,56 @@ export const playerModuleAndTopic = gql`
   query playerModuleAndTopic($contentID: String, $user_id: String) {
     playerModuleAndTopic(contentID: $contentID, user_id: $user_id) {
       message{
-      total_topic_len
-      _id
-      url
-      resourceUrl
-      toc
-      course_id
-      moduleIndex
-      topicIndex
-      week
-      lastLogIndex
-      childData{
+        total_topic_len
+        _id
+        url
+        module
+        resourceUrl
+        toc
+        course_id
+        moduleIndex
+        topicIndex
         week
+        checkLevel
+        lastLogIndex
         childData{
-         title
-          status
-          moduletime
-          topic_len
-          parent
-          _id
-          id
-          children{
-            _id
-            title
-            link
-            isVisible
+          week
+          childData{
+           title
             status
+            moduletime
+            topic_len
+            parent
+            _id
+            id
             user_experience
             bookmark
+            module
+            childData{
+              title
+            status
+            moduletime
+            topic_len
+            parent
+            _id
+            id
+            user_experience
+              bookmark
+              link
+            childData{
+              _id
+              title
+              link
+              isVisible
+              status
+              user_experience
+              bookmark
+            }
+            }
           }
         }
       }
-    } 
-      success
+        success  
     }
   }
 `;
@@ -2343,6 +2361,7 @@ export const getLearnerNewCourseReport = gql`
         selflearningscore
         selflearningpercentage
         calculation
+        weekwiseTask
       }
       LPScore {
         LPScore
@@ -2357,6 +2376,12 @@ export const getLearnerNewCourseReport = gql`
         outoftest2
         test3
         outoftest3
+        test1ObtainedScore
+        test2ObtainedScore
+        test3ObtainedScore
+        test1OutOfScore
+        test2OutOfScore
+        test3OutOfScore
       }
       selfLearning_Card {
         total_no_of_weeks_actual
@@ -2525,13 +2550,14 @@ export const recentlycourse = gql`
       }
       `;
       export const getlabActivityData = gql `
-      query getlabActivityData($userId:String,$courseId:String,$pagination:Boolean,$page:Int,$noofItems:Int){
-        getlabActivityData(userId:$userId,courseId:$courseId,pagination:$pagination,page:$page,noofItems:$noofItems){
+      query getlabActivityData($userId:String,$courseId:String,$pagination:Boolean,$page:Int,$noofItems:Int,$username:String){
+        getlabActivityData(userId:$userId,courseId:$courseId,pagination:$pagination,page:$page,noofItems:$noofItems,username:$username){
           success
           error_msg
           data{
               _id
               labActivity{
+              status
               project_id
               ebox_attempt_id
               activitystartdate

@@ -81,6 +81,14 @@ export class CourseReportComponent implements OnInit {
   disableArrow:boolean = true;
   selfscore:string ="0";
   QAscore:string ="0";
+  lastWeekSatus:any ="";
+  QAPopoverContent :any = [
+    {ques:"0",score:"0",percentage:"0%"},
+    {ques:"1 to 10",score:"1.25",percentage:"25%"},
+    {ques:"11 to 20",score:"2.5",percentage:"50%"},
+    {ques:"21 to 31",score:"3.75",percentage:"75%"},
+    {ques:">=32",score:"5",percentage:"100%"},
+  ];
 
   constructor(
     private activeRoute: ActivatedRoute, 
@@ -119,7 +127,7 @@ export class CourseReportComponent implements OnInit {
       this.courseReportData = data.data['getLearnerNewCourseReport'].data[0];
       this.selfscore = String(this.courseReportData.selfLearning_Card.selflearning_points_score)+'/'+String(this.courseReportData.selfLearning_Card.selflearning_out_of_points);
       this.QAscore= String(this.courseReportData.QA_Card.QA_points_score)+'/'+String(this.courseReportData.QA_Card.QA_out_of_points);
-      
+      this.lastWeekSatus = this.courseReportData.selflearning[this.courseReportData.selflearning.length - 1].WeekStatus;
       this.courseReportData.selflearning.forEach(element => {
         this.weeklabelData.push([element.week,element.selflearningscore]);
         this.weekpercent.push(element.selflearningpercentage);

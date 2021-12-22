@@ -152,7 +152,7 @@
      
       <div class="overallsection d-flex justify-content-between align-items-center flex-wrap">
         <mat-card class="selflearningCard">
-          <div class="card-head d-flex align-items-center justify-content-center">Self Learning</div>
+          <div class="card-head d-flex align-items-center justify-content-center">Self Learning Score</div>
            <div class="card-content d-flex align-items-center">
              <div class="graph-content">
                <circle-progress [title]= "selfscore"
@@ -188,7 +188,7 @@
            </div>
        </mat-card>
         <mat-card class="selflearningCard">
-                <div class="card-head d-flex align-items-center justify-content-center">Q&A</div>
+                <div class="card-head d-flex align-items-center justify-content-center">Q&A Score</div>
                   <div class="card-content d-flex align-items-center">
                   <div class="graph-content">
                     <circle-progress [title]="QAscore" [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "false" 
@@ -205,15 +205,37 @@
                     </ul>
                   </div>
                 </div>
-                <div class="card-foot">
-                  Q&A score is based on the number of relevant questions you ask
+                <div class="card-foot d-flex align-items-center">
+                  <popover-content #QAPopover>
+                    <div class="popoverContainer">
+                      <div class="calculation">Calculation formula</div>
+                      <div>
+                        <table>
+                          <tr>
+                            <th>No. of questions</th>
+                            <th>Score</th>
+                            <th>Percentage</th>
+                          </tr>
+                          <tr *ngFor = "let row of QAPopoverContent">
+                            <td>{{row.ques}}</td>
+                            <td>{{row.score}}</td>
+                            <td>{{row.percentage}}</td>
+                          </tr>
+                        </table> 
+                      </div>
+                    </div>
+                  </popover-content>
+                 <div>
+                  <button class="popover-info" popoverPlacement="right" [popover]="QAPopover"><span><img  src="https://assets.lntedutech.com/application_images/Group 14025.svg" /></span></button>
+                 </div>
+                   <div>Q&A score is based on the number of relevant questions you ask</div>
                 </div>
         </mat-card>
       </div>
 
       <div class="weeklyreport">
           <div class="weekly-head d-flex justify-content-between align-items-center">
-                <div class="week-head-text">Self Learning Weekly Report</div>
+                <div class="week-head-text">Weekly Score - Self Learning</div>
                 <div class="week-head-action">
                   <mat-button-toggle-group appearance="legacy" value="article" #group="matButtonToggleGroup">
                     <mat-button-toggle value="article"><mat-icon>article</mat-icon></mat-button-toggle>
@@ -224,11 +246,8 @@
           <div class="weekly-content">            
             <div *ngIf="group.value == 'article'">
               <div class="week-card-container d-flex flex-wrap align-items-center" style= "justify-content: flex-start;">
-
-                
-                   <mat-card class="week-card" *ngFor="let selfValue of courseReportData?.selflearning;let i = index" [ngClass]="selfValue.week == 'Week 8' || selfValue.week == 'Week 16' ? 'disable-card' : ''">
-
-                    <ng-container *ngIf ="selfValue.week != 'Week 8' && selfValue.week != 'Week 16'">
+                <mat-card class="week-card" *ngFor="let selfValue of courseReportData?.selflearning;let i = index" [ngClass]="selfValue.week == 'Week 8' || selfValue.week == 'Week 16' ? 'disable-card' : ''">
+                  <ng-container *ngIf ="selfValue.weekwiseTask == '' ">
                       <div class="week-card-head d-flex">
                         <popover-content #selfPopover>
                           <div class="popoverContainer">
@@ -243,7 +262,7 @@
                         </popover-content>
                         <label>{{selfValue.week}}</label>
                         <button class="popover-info" popoverPlacement="right" [popover]="selfPopover"><span>
-                          <img  src="../../../../assets/images/Group 14025.svg" />
+                          <img  src="https://assets.lntedutech.com/application_images/Group 14025.svg" />
                         </span></button>
                       </div>
                       <ul>
@@ -258,15 +277,13 @@
                       </ul>
                   </ng-container>
 
-                  <ng-container *ngIf ="selfValue.week == 'Week 8' || selfValue.week == 'Week 16'">
+                  <ng-container *ngIf ="selfValue.weekwiseTask == 'Project' || selfValue.weekwiseTask == 'Final Test'">
                     <div class="week-card-head d-flex">
                       <label>{{selfValue.week}}</label>
                     </div>
-                    <div class="disabledTXT">Project</div>
+                    <div class="disabledTXT">{{selfValue.weekwiseTask}}</div>
                   </ng-container>
-
-                  </mat-card>
-
+                </mat-card>
               </div>
             </div>
             <div *ngIf="group.value == 'chart'">
@@ -298,22 +315,34 @@
 
     </div>
     <div class="reportRightCol">
+      <ul class="breadcrumb">
+        <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> {{course?.name}}</li>
+        <li>Assessment Report</li>
+      </ul>
       <div class="refresh">
         <button (click)="refreshReport()"><em class="lxp-Reset"></em> Refresh</button>
       </div>
       <div class="ScoreSection">
-        <h3>Learning Process Score</h3>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between align-items-center">
           <div class="numberedList">
             <span
               [ngClass]="{'green' : courseReportData.LPScore.LPScore != 0,'white' : courseReportData.LPScore.LPScore == 0  }">1</span>
           </div>
-          <div class="courseProgressBar">
+          <div class="progress-text">
+            <h3>Learning Process Score</h3>
+          </div>
+          <div class="progressPercentage">
+            <span>
+                  {{courseReportData.LPScore.LPScore ? courseReportData.LPScore.LPScore : 0}} /{{courseReportData.LPScore.outofLPscore ? courseReportData.LPScore.outofLPscore : 0}}
+            </span>
+          </div>
+
+        <!-- <div class="courseProgressBar">
             <mat-progress-bar mode="determinate"
               [value]="getScoreProgress(courseReportData.LPScore.LPScore, courseReportData.LPScore.outofLPscore)">
             </mat-progress-bar>
-          </div>
-          <div class="progressPercentage">
+          </div> -->
+          <!-- <div class="progressPercentage">
             <span class="percentageScore">
               <ng-container *ngIf="courseReportData.LPScore.LPScore != 0">
                 {{courseReportData.LPScore.LPScore}}
@@ -323,23 +352,67 @@
               </ng-container>
             </span>
             <span class="outOfScore">Out of {{courseReportData.LPScore.outofLPscore}}</span>
-          </div>
+          </div> -->
+
         </div>
-      
+        <div class="d-flex justify-content-between mt-20 align-items-center">
+          <div class="numberedList">
+            <span
+              [ngClass]="{'green' : courseReportData.assessmentscore.project != 0, 'white' : courseReportData.assessmentscore.project == 0}">2</span>
+          </div>
+          <div class="progress-text">
+            <h3>Project Score</h3>
+          </div>
+          <div class="progressPercentage">
+            <span>
+                  {{courseReportData.assessmentscore.project ? courseReportData.assessmentscore.project : 0}} /{{courseReportData.assessmentscore.outofproject ? courseReportData.assessmentscore.outofproject : 0}}
+            </span>
+          </div>
+          <!-- <div class="courseProgressBar">
+            <span>Project</span>
+            <mat-progress-bar mode="determinate"
+              [value]="getScoreProgress(courseReportData.assessmentscore.project, courseReportData.assessmentscore.outofproject)">
+            </mat-progress-bar>
+          </div> -->
+          <!-- <div class="progressPercentage">
+            <span class="percentageScore">
+              <ng-container *ngIf="courseReportData.assessmentscore.project != 0">
+                {{courseReportData.assessmentscore.project}}
+              </ng-container>
+              <ng-container *ngIf="courseReportData.assessmentscore.project == 0">
+                0
+              </ng-container>
+            </span>
+            <span class="outOfScore">Out of {{courseReportData.assessmentscore.outofproject}}</span>
+          </div> -->
+        </div>
         <div class="assessmentScoreCard">
-          <h3>Assessment Score</h3>
-          <div class="d-flex justify-content-between">
+          <h3 class="assessment-hd-txt">Assessment Score</h3>
+          <div class="d-flex justify-content-between align-items-center">
             <div class="numberedList">
               <span
-                [ngClass]="{'green' : courseReportData.assessmentscore.test1 != 0,'white' : courseReportData.assessmentscore.test1 == 0 }">2</span>
+                [ngClass]="{'green' : courseReportData.assessmentscore.test1 != 0,'white' : courseReportData.assessmentscore.test1 == 0 }">3</span>
             </div>
-            <div class="courseProgressBar">
+            <div class="assessment-progress-text">
+              <h3>Internal Test 1</h3>
+            </div>
+            <div class="raw-score">
+              <span>{{courseReportData.assessmentscore.test1ObtainedScore ? courseReportData.assessmentscore.test1ObtainedScore : '-'}}/{{courseReportData.assessmentscore.test1OutOfScore ? courseReportData.assessmentscore.test1OutOfScore : '-'}}</span>
+              <p>Raw Score</p>
+            </div>
+            <div class="assessment-progressPercentage">
+              <span>
+                    {{courseReportData.assessmentscore.test1 ? courseReportData.assessmentscore.test1 : 0}} /{{courseReportData.assessmentscore.outoftest1 ? courseReportData.assessmentscore.outoftest1 : 0}}
+              </span>
+              <p>Weighted Score</p>
+            </div>
+            <!-- <div class="courseProgressBar">
               <span>Internal Test 1</span>
               <mat-progress-bar mode="determinate"
                 [value]="getScoreProgress(courseReportData.assessmentscore.test1, courseReportData.assessmentscore.outoftest1)">
               </mat-progress-bar>
-            </div>
-            <div class="progressPercentage">
+            </div> -->
+            <!-- <div class="progressPercentage">
               <span class="percentageScore">
                 <ng-container *ngIf="courseReportData.assessmentscore.test1 != 0">
                   {{courseReportData.assessmentscore.test1}}
@@ -349,43 +422,35 @@
                 </ng-container>
               </span>
               <span class="outOfScore">Out of {{courseReportData.assessmentscore.outoftest1}}</span>
-            </div>
+            </div> -->
+
           </div>
-          <div class="d-flex justify-content-between mt-20">
-            <div class="numberedList">
-              <span
-                [ngClass]="{'green' : courseReportData.assessmentscore.project != 0, 'white' : courseReportData.assessmentscore.project == 0}">3</span>
-            </div>
-            <div class="courseProgressBar">
-              <span>Project</span>
-              <mat-progress-bar mode="determinate"
-                [value]="getScoreProgress(courseReportData.assessmentscore.project, courseReportData.assessmentscore.outofproject)">
-              </mat-progress-bar>
-            </div>
-            <div class="progressPercentage">
-              <span class="percentageScore">
-                <ng-container *ngIf="courseReportData.assessmentscore.project != 0">
-                  {{courseReportData.assessmentscore.project}}
-                </ng-container>
-                <ng-container *ngIf="courseReportData.assessmentscore.project == 0">
-                  0
-                </ng-container>
-              </span>
-              <span class="outOfScore">Out of {{courseReportData.assessmentscore.outofproject}}</span>
-            </div>
-          </div>
-          <div class="d-flex justify-content-between mt-20">
+
+          <div class="d-flex justify-content-between mt-20 align-items-center">
             <div class="numberedList">
               <span
                 [ngClass]="{'green' : courseReportData.assessmentscore.test2 != 0, 'white' : courseReportData.assessmentscore.test2 == 0}">4</span>
             </div>
-            <div class="courseProgressBar">
+            <div class="assessment-progress-text">
+              <h3>Internal Test 2</h3>
+            </div>
+            <div class="raw-score">
+              <span>{{courseReportData.assessmentscore.test2ObtainedScore ? courseReportData.assessmentscore.test2ObtainedScore : '-'}}/{{courseReportData.assessmentscore.test2OutOfScore ? courseReportData.assessmentscore.test2OutOfScore : '-'}}</span>
+              <p>Raw Score</p>
+            </div>
+            <div class="assessment-progressPercentage">
+              <span>
+                    {{courseReportData.assessmentscore.test2 ? courseReportData.assessmentscore.test2 : 0}} /{{courseReportData.assessmentscore.outoftest2 ? courseReportData.assessmentscore.outoftest2 : 0}}
+              </span>
+              <p>Weighted Score</p>
+            </div>
+            <!-- <div class="courseProgressBar">
               <span>Internal Test 2</span>
               <mat-progress-bar mode="determinate"
                 [value]="getScoreProgress(courseReportData.assessmentscore.test2, courseReportData.assessmentscore.outoftest2)">
               </mat-progress-bar>
-            </div>
-            <div class="progressPercentage">
+            </div> -->
+            <!-- <div class="progressPercentage">
               <span class="percentageScore">
                 <ng-container *ngIf="courseReportData.assessmentscore.test2 != 0">
                   {{courseReportData.assessmentscore.test2}}
@@ -395,20 +460,33 @@
                 </ng-container>
               </span>
               <span class="outOfScore">Out of {{courseReportData.assessmentscore.outoftest2}}</span>
-            </div>
+            </div> -->
           </div>
-          <div class="d-flex justify-content-between mt-20">
+          <div class="d-flex justify-content-between mt-20 align-items-center">
             <div class="numberedList">
               <span
                 [ngClass]="{'green' : courseReportData.assessmentscore.test3 != 0, 'white' : courseReportData.assessmentscore.test3 == 0}">5</span>
             </div>
-            <div class="courseProgressBar">
+            <div class="assessment-progress-text">
+              <h3>Final Test</h3>
+            </div>
+            <div class="raw-score">
+              <span>{{courseReportData.assessmentscore.test3ObtainedScore ? courseReportData.assessmentscore.test3ObtainedScore : '-'}}/{{courseReportData.assessmentscore.test3OutOfScore ? courseReportData.assessmentscore.test3OutOfScore : '-'}}</span>
+              <p>Raw Score</p>
+            </div>
+            <div class="assessment-progressPercentage">
+              <span>
+                    {{courseReportData.assessmentscore.test3 ? courseReportData.assessmentscore.test3 : 0}} /{{courseReportData.assessmentscore.outoftest3 ? courseReportData.assessmentscore.outoftest3 : 0}}
+              </span>
+              <p>Weighted Score</p>
+            </div>
+            <!-- <div class="courseProgressBar">
               <span>Final Test</span>
               <mat-progress-bar mode="determinate"
                 [value]="getScoreProgress(courseReportData.assessmentscore.test3, courseReportData.assessmentscore.outoftest3)">
               </mat-progress-bar>
-            </div>
-            <div class="progressPercentage">
+            </div> -->
+            <!-- <div class="progressPercentage">
               <span class="percentageScore">
                 <ng-container *ngIf="courseReportData.assessmentscore.test3 != 0">
                   {{courseReportData.assessmentscore.test3}}
@@ -418,14 +496,14 @@
                 </ng-container>
               </span>
               <span class="outOfScore">Out of {{courseReportData.assessmentscore.outoftest3}}</span>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="finalScoreCard">
           <div class="d-flex">
             <h3>Final Score</h3>
             <button class="popoverInfoFinal" popoverPlacement="right" [popover]="finalPopover"><span>
-              <img  src="../../../../assets/images/Group 14025.svg" />
+              <img  src="https://assets.lntedutech.com/application_images/Group 14025.svg" />
             </span></button>
           </div>
           <popover-content #finalPopover placement="right" [animation]="true" popoverSize="large">
@@ -433,10 +511,10 @@
               <div style="color: red;">
                 Calculation
               </div>
-              <div style="color: #2525DE;">
+              <div style="color: #49AE31;">
                 = {{courseReportData.finalscore.calculation}}
               </div>
-              <div style="color: #2525DE;">
+              <div style="color: #49AE31;">
                 = {{courseReportData.finalscore.rawscore}}
               </div>
               <div>
@@ -459,22 +537,22 @@
           </popover-content>
           <div class="finalScore d-flex justify-content-between align-items-center">
             <div class="progressFinal">
-              <circle-progress [percent]='courseReportData.finalscore.rawscore' [radius]=40 [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#2A4DC1'" [outerStrokeGradientStopColor]="'#0FD3D3'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 [animation]="true" [animationDuration]="300" [showSubtitle]="false"></circle-progress>
+              <circle-progress [showUnits]= "false"  [percent]='courseReportData.finalscore.rawscore' [radius]=40 [space]=-6 [outerStrokeGradient]=true [outerStrokeWidth]=6 [outerStrokeColor]="'#2A4DC1'" [outerStrokeGradientStopColor]="'#0FD3D3'" [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]=6 [animation]="true" [animationDuration]="300" [showSubtitle]="false"></circle-progress>
             </div>
-            <!-- <div class="gradePoints d-flex justify-content-between align-items-center">
+            <div class="gradePoints d-flex justify-content-between align-items-center" *ngIf="lastWeekSatus == 'Completed'">
               <div>
                 <figure>
-                  <img src="/assets/images/grade.svg" alt="" />
+                  <img src="https://assets.lntedutech.com/application_images/grade.svg" alt="" />
                 </figure>
                 <h6>Grade <span>{{courseReportData.finalscore.grade}}</span></h6>
               </div>
               <div>
                 <figure>
-                  <img src="/assets/images/points.svg" alt="" />
+                  <img src="https://assets.lntedutech.com/application_images/points.svg" alt="" />
                 </figure>
                 <h6>Points <span>{{courseReportData.finalscore.gradepoint}}</span></h6>
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>

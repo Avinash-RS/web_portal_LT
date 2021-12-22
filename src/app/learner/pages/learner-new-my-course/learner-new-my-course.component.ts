@@ -360,8 +360,11 @@ export class LearnerNewMyCourseComponent implements OnInit {
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
-
     this.userDetailes = this.gs.checkLogout();
+    if(!this.userDetailes?.is_password_updated){
+      this.router.navigate(['/Learner/profile']);
+      return
+    }
     if (this.userDetailes) {
       this.getDashboardMyCourse(this.userDetailes.user_id, this.userDetailes._id);
     }
@@ -425,6 +428,10 @@ export class LearnerNewMyCourseComponent implements OnInit {
     this.rightNavDisabledInProgress = reachesRightBound;
   }
   //
+
+  redirect() {
+    window.open('https://stepui-lmsdev.lntiggnite.com/sso?site=ltlmsedutech&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMDY2MCwiZXhwIjoxOTU1MTgzOTIyfQ.G4JRPi5dHYknmWJrv2dWVd5Hf4FW5r635rzZj-_tVEE&new_user=False&referer=lms&is_subscription=0&is_proctor=false&callbackurl=callbackurl&return_path=/mycourse%3fcourse_id%3d488', 'stepURL');
+  }
 
   insidengOnInit() {
     this.CommonServices.openAvailCourcePopup.subscribe((data: any) => {

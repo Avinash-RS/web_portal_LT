@@ -84,7 +84,10 @@ uploadAssignments(fromdata) {
   this.getToken();
   return this.http.post(this.envApi + 'wca/learnerscorefile', fromdata, this.httpOptions); 
 }
-
+assignmentAction(data){
+  this.getToken();
+  return this.http.post(this.envApi + 'wca/submitDeleteAssignmentData',data,this.httpOptions);
+}
 imageupload(fb) {
   this.getToken();
   return this.http.post<any[]>(this.envApiImg + `upload/image`, fb,this.httpOptions);
@@ -961,6 +964,7 @@ getMessage(): Observable<any> {
         pagination:labdata.pagination,
         page:labdata.page,
         noofItems:labdata.noofItems,
+        username:labdata.username
       }
     })
   }
@@ -1089,7 +1093,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  bookmark(user_id,course_id,module,topic,bookmark) {
+  bookmark(user_id,course_id,module,topic,bookmark,week,lastLogIndex,ModuleIndex,submoduleIndex,topicIndex) {
     return this.Apollo.query({
       query: set_bookmark,
       variables: {
@@ -1097,7 +1101,12 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
         course_id,
         module,
         topic,
-        bookmark
+        bookmark,
+        week,
+        lastLogIndex,
+        ModuleIndex,
+        submoduleIndex,
+        topicIndex
       }
     });
   }

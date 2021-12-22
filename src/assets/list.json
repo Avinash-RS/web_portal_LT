@@ -37,7 +37,7 @@
     ],
     "group": "promotions",
     "type": "sent",
-    "attachments": ["assets/profile.jpg"]
+    "attachments": ["https://assets.lntedutech.com/application_images/profile.jpg"]
   },
   {
     "from": {
@@ -77,6 +77,6 @@
     ],
     "group": "promotions",
     "type": "sent",
-    "attachments": ["assets/noavatar.png"]
+    "attachments": ["https://assets.lntedutech.com/application_images/noavatar.png"]
   }
 ]

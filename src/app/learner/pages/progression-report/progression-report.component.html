@@ -39,7 +39,7 @@
               [bufferValue]="bufferValue"></mat-progress-bar>
             <div class="mark-level">{{pieData.perform_completed +'/'+pieData.perform_total}}</div>
           </div>
-          <div class="d-flex h-10" [ngClass]="pieData.liveclassroom_total==pieData.liveclassroom_completed?'color-green':'color-yellow'">
+          <div class="d-flex h-10 ml-4" [ngClass]="pieData.liveclassroom_total==pieData.liveclassroom_completed?'color-green':'color-yellow'">
             <div class="type-label">
               <ng-container *ngIf="UserDetails.org_type !== 'collegeconnect'">Live Interactions</ng-container>
               <ng-container *ngIf="UserDetails.org_type == 'collegeconnect'">Industry Talk</ng-container>
@@ -61,12 +61,12 @@
       
       <div  class="d-flex justify-content-between align-items-center dot-area">
         <div class="legend-dots inprogress-dot"></div>
-        <div class="status">Inprogress</div>
+        <div class="status">Ongoing</div>
       </div>
 
       <div  class="d-flex justify-content-between align-items-center dot-area">
         <div class="legend-dots not-dot"></div>
-        <div class="status">Not Started</div>
+        <div class="status">Yet to Start</div>
       </div>
       
     </div>
@@ -247,7 +247,7 @@
               <mat-paginator *ngIf="!emptyAssignment" #firstPaginator [pageSizeOptions]="[6]"></mat-paginator>
               <div class="noCard" *ngIf="emptyAssignment">
                 <figure>
-                  <img src="/assets/images/noassignment.svg" alt="assignment">
+                  <img src="https://assets.lntedutech.com/application_images/noassignment.svg" alt="assignment">
                 </figure>
                 <p> You have no Assignment activity at the moment!</p>
               </div>
@@ -313,7 +313,7 @@
               <mat-paginator *ngIf="!emptyProject" #secondPaginator [pageSizeOptions]="[6]"></mat-paginator>
               <div class="noCard" *ngIf="emptyProject">
                 <figure>
-                  <img src="/assets/images/noproject.svg" alt="assignment">
+                  <img src="https://assets.lntedutech.com/application_images/noProject.svg" alt="assignment">
                 </figure>
                 <p>You have no Project activity at the moment!</p>
               </div>
@@ -373,7 +373,7 @@
               <mat-paginator *ngIf="!emptyPerform" #thirdPaginator [pageSizeOptions]="[6]"></mat-paginator>
               <div class="noCard" *ngIf="emptyPerform">
                 <figure>
-                  <img src="/assets/images/noperform.svg" alt="assignment">
+                  <img src="https://assets.lntedutech.com/application_images/noPerform.svg" alt="assignment">
                 </figure>
                 <p>You have no Perform activity at the moment!</p>
               </div>
@@ -389,10 +389,6 @@
       <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> {{courseName}}</li>
       <li>Learning Progression</li>
     </ul>
-    <!-- <div class="comingSoon">
-      <div style="margin-bottom: 40px; text-align: center;">Your weekly time spent report will be displayed here!</div>
-      <img class="d-flex m-auto" src="/assets/images/timeSpentHolder.png">
-    </div> -->
     <div>
    <div class="progress-label">Week wise time spent</div>
    <div class="progress-date d-flex">
@@ -486,7 +482,7 @@
 <ng-template #noCourseCard>
   <div class="noCard">
       <div>
-        <img src="/assets/images/noactivity.svg" alt="assignment">
+        <img src="https://assets.lntedutech.com/application_images/noactivity.svg" alt="assignment">
       </div>
       <p>Please start the course to view your progression report!</p>
   </div>
