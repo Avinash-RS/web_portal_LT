@@ -61,11 +61,9 @@
       <div class="moduleImage">
         <div class="liveSession">
           <figure><img class="sessionImage"
-              style="height: 500px !important; width: 100% !important; object-fit: cover !important;"
               *ngIf="!activityShow?.activity_details.livethumbnail" alt="instructor"
               src="../../../../assets/learner/instructor_image.png" /></figure>
           <figure><img class="sessionImage"
-              style="height: 500px !important; width: 100% !important; object-fit: cover !important;"
               *ngIf="activityShow?.activity_details.livethumbnail" alt="instructor"
               [src]="activityShow?.activity_details.livethumbnail + blobKey" /></figure>
 
