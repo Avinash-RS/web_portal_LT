@@ -134,8 +134,9 @@
 .moduleImage {
   padding: 0 15px;
   position: relative;
+  width: 100% !important;
   @media only screen and (min-width: 768px) {
-    padding: 0 30px;
+    padding: 0 20px;
     width: 100%;
   }
   @media only screen and (max-width: 425px) {
@@ -147,15 +148,24 @@
     position: relative;
     width: 100%;
     .sessionImage {
-      height: 300px;
+      height: 250px;
       width: 100% !important;
       object-fit: cover !important;
-      // @media only screen and (min-width: 768px) {
-      //   height: 500px;
-      // }
-      @media only screen and (max-width: 1023px) {
-        height: 100%;
+      @media (min-width: 992px) {
+        height: 300px;
       }
+      // @media (min-width: 576px) {
+      //   height: 250px;
+      // }
+    
+      // @media (min-width: 768px) {
+      //   height: 300px;
+      // }
+    
+    
+      // @media (min-width: 1200px) {
+      //   height: 350px;
+      // }
     }
     .playButton {
       background: #be2020 0% 0% no-repeat padding-box;
@@ -294,10 +304,9 @@
   // margin: 25px -15px 0 -15px !important;
   margin: 20px 0 !important;
   row-gap: 20px;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (min-width: 521px) and (max-width: 768px) {
     // margin: 15px -15px 0 -15px !important;
     margin: 15px 0 !important;
-    // display: flex;
     flex-wrap: wrap;
   }
 }
@@ -475,14 +484,18 @@
   border-radius: 5px;
   background: #f9f9f9 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 6px #00000029;
-  font-size: 20px;
+  // font-size: 20px;
   padding: 10px 20px;
-  width: 30%;
+  width: 31%;
   align-items: center;
-  @media only screen and (max-width: 425px) {
+  // @media (min-width: 521px) {
+  //   padding: 10px;
+  //   width: 31%;
+  // }
+  @media only screen and (max-width: 520px) {
     width: 100%;
   }
-  @media only screen and (min-width: 426px) and (max-width: 768px) {
+  @media only screen and (min-width: 521px) and (max-width: 768px) {
     padding: 10px;
     width: 47%;
   }
@@ -517,8 +530,8 @@
   }
 
   @media (min-width: 992px) {
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
   }
 
   @media (min-width: 1200px) {
@@ -537,7 +550,7 @@
     }
 
     @media (min-width: 992px) {
-      font-size: 30px;
+      font-size: 27px;
     }
 
     @media (min-width: 1200px) {
@@ -566,8 +579,8 @@
   }
 
   @media (min-width: 992px) {
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
   }
 
   @media (min-width: 1200px) {
@@ -586,7 +599,7 @@
     }
 
     @media (min-width: 992px) {
-      font-size: 30px;
+      font-size: 27px;
     }
 
     @media (min-width: 1200px) {
@@ -615,8 +628,8 @@
   }
 
   @media (min-width: 992px) {
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
   }
 
   @media (min-width: 1200px) {
@@ -635,7 +648,7 @@
     }
 
     @media (min-width: 992px) {
-      font-size: 30px;
+      font-size: 23px;
     }
 
     @media (min-width: 1200px) {
@@ -821,22 +834,22 @@
   opacity: 1;
   margin: 0 !important;
   font-size: 12px;
-  line-height: 1.3;
+  line-height: 2;
   // margin-bottom: 15px;
   font-size: 15px;
   @media (min-width: 576px) {
     font-size: 12px;
-    line-height: 1.3;
+    line-height: 2;
   }
 
   @media (min-width: 768px) {
-    font-size: 15px;
-    line-height: 1.3;
+    font-size: 14px;
+    line-height: normal;
   }
 
   @media (min-width: 992px) {
-    font-size: 15px;
-    line-height: 1.3;
+    font-size: 10px;
+    line-height: 1.7;
   }
 
   @media (min-width: 1200px) {
@@ -880,6 +893,8 @@
 
 .count {
   margin-left: 45px;
+  @media (min-width: 992px) { margin-left: 38px; }
+  @media (min-width: 1200px) { margin-left: 63px; }
   // line-height: 1.6;
   // font-size: 30px;
   // font-size: 2em;
@@ -890,9 +905,7 @@
 
   // @media (min-width: 768px) { font-size: 16px; }
 
-  // @media (min-width: 992px) { font-size: 20px; }
 
-  // @media (min-width: 1200px) { font-size: 24px; }
   // @media only screen and (min-width: 1024px) and  (max-width: 1515px) {
   //   font-size: 1em;
   // }
@@ -917,7 +930,7 @@
   }
 
   @media (min-width: 992px) {
-    font-size: 20px;
+    font-size: 17px;
   }
 
   @media (min-width: 1200px) {
@@ -987,8 +1000,8 @@
   @media only screen and (min-width: 1140px) {
     height: 90% !important;
   }
-  @media only screen and (max-width: 750px) {
-  }
+  // @media only screen and (max-width: 750px) {
+  // }
   .mat-dialog-container {
     position: relative;
     padding: 20px !important;
@@ -996,6 +1009,9 @@
   .videoContainer {
     width: 100%;
     height: 100%;
+    @media only screen and (min-width: 390px) and (max-width: 1140px) {
+      height: 500px;
+    }
     .closeBtn {
       cursor: pointer;
       position: absolute;
@@ -1033,4 +1049,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: bold;
+}
+
+.tblrow {
+  border: 0.4399999976158142px solid #AAAAAA;
+  border-left: none;
+  border-right: none;
+  opacity: 1;
+  box-shadow: 0px 3px 6px #00000029;
+  // border-radius: 2px;
 }

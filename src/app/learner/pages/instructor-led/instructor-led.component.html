@@ -22,6 +22,7 @@
     </div>
   </ng-container>
 
+   <!-- Left Side Panel ...  -->
   <div class="leftContainer" *ngIf="showContent">
     <div class="breadcrumbPading">
       <ul class="breadcrumb">
@@ -190,23 +191,23 @@
           <div class="row attendance-table" *ngIf="sessionAttendance?.length">
             <table style="width: 100%;">
               <tr class="tblheaderFont">
-                <th width="11%">Session #</th>
+                <th width="12%">Session #</th>
                 <th width="50%">Topic Name</th>
                 <th width="22%">Date</th>
                 <th width="6%">Attendance</th>
               </tr>
               <tbody>
-                <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
+                <tr class="tblrow" *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
                   <td>{{i+1}}</td>
                   <td>{{atd.activity.activityname}}</td>
                   <td>{{atd.activity.startdate | date: 'dd/MM/yyyy hh:mm a'}}</td>
                   <td>
                     <mat-icon #attended
                       *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'"
-                      style="color: green;">check_circle_outline</mat-icon>
+                      style="color: #52AE31;">check_circle_outline</mat-icon>
                     <mat-icon
                       *ngIf="atd.activity.attendencedetails.Attendence =='no' || atd.activity.attendencedetails.Attendence == 'No'"
-                      style="color: red;">highlight_off</mat-icon>
+                      style="color: #E8542B;">highlight_off</mat-icon>
                   </td>
                 </tr>
               </tbody>
@@ -238,10 +239,10 @@
             <td class="tableCol">
               <mat-icon
                 *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'"
-                style="color: green;">check_circle_outline</mat-icon>
+                style="color: #52AE31;">check_circle_outline</mat-icon>
               <mat-icon
                 *ngIf="atd.activity.attendencedetails.Attendence =='no' || atd.activity.attendencedetails.Attendence == 'No'"
-                style="color: red;">highlight_off</mat-icon>
+                style="color: #E8542B;">highlight_off</mat-icon>
             </td>
           </tr>
         </table>
