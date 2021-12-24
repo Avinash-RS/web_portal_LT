@@ -134,7 +134,7 @@
 .moduleImage {
   padding: 0 15px;
   position: relative;
-  width: 100% !important;
+  width: 85% !important;
   @media only screen and (min-width: 768px) {
     padding: 0 20px;
     width: 100%;
@@ -144,48 +144,47 @@
     width: 100%;
     // height: 300px;
   }
+  @media (min-width: 1200px) {
+    margin: 0 auto !important;
+  }
   .liveSession {
     position: relative;
     width: 100%;
     .sessionImage {
-      height: 250px;
+      // height: 375px;
       width: 100% !important;
       object-fit: cover !important;
+      @media (min-width: 576px) {
+        height: 365px;
+      } 
+      @media (min-width: 768px) {
+        height: 340px;
+      }  
       @media (min-width: 992px) {
-        height: 300px;
+        height: 350px;
       }
-      // @media (min-width: 576px) {
-      //   height: 250px;
-      // }
-    
-      // @media (min-width: 768px) {
-      //   height: 300px;
-      // }
-    
-    
-      // @media (min-width: 1200px) {
-      //   height: 350px;
-      // }
+      @media (min-width: 1200px) {
+        height: 360px;
+      }
     }
     .playButton {
-      background: #be2020 0% 0% no-repeat padding-box;
-      border-radius: 20px;
-      opacity: 1;
-      color: white;
-      // margin-top: 15px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0 4%;
-      @media only screen and (max-width: 425px) {
-        padding: 0 10%;
-      }
-      .lxp-Play_Icon {
-        margin-right: 30%;
+      button {
+        background: #be2020 0% 0% no-repeat padding-box;
+        border-radius: 20px;
+        opacity: 1;
+        color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px;
+        min-width: auto;
+        .lxp-Play_Icon {
+          margin-right: 4px;
+        }
       }
     }
   }
@@ -485,7 +484,7 @@
   background: #f9f9f9 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 6px #00000029;
   // font-size: 20px;
-  padding: 10px 20px;
+  padding: 10px;
   width: 31%;
   align-items: center;
   // @media (min-width: 521px) {
@@ -834,17 +833,17 @@
   opacity: 1;
   margin: 0 !important;
   font-size: 12px;
-  line-height: 2;
+  line-height: 1.7;
   // margin-bottom: 15px;
   font-size: 15px;
   @media (min-width: 576px) {
     font-size: 12px;
-    line-height: 2;
+    line-height: 1.7;
   }
 
   @media (min-width: 768px) {
     font-size: 14px;
-    line-height: normal;
+    line-height: 1.7;
   }
 
   @media (min-width: 992px) {
@@ -853,8 +852,8 @@
   }
 
   @media (min-width: 1200px) {
-    font-size: 16px;
-    line-height: 2;
+    font-size: 12px;
+    line-height: 1.7;
   }
 }
 

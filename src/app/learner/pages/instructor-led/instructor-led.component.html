@@ -61,25 +61,15 @@
     <div class="row d-flex justify-content-start" *ngIf='activityShow !== undefined'>
       <div class="moduleImage">
         <div class="liveSession">
-          <figure><img class="sessionImage"
-              *ngIf="!activityShow?.activity_details.livethumbnail" alt="instructor"
-              src="../../../../assets/learner/instructor_image.png" /></figure>
-          <figure><img class="sessionImage"
-              *ngIf="activityShow?.activity_details.livethumbnail" alt="instructor"
-              [src]="activityShow?.activity_details.livethumbnail + blobKey" /></figure>
-
-          <!-- <div class="row" style="margin-top: 0px;"> -->
-          <button class="playButton" mat-raised-button
-            *ngIf="activityShow?.status === 'On going' && activityShow?.activity_details.activitytype != 'Recorded'"
-            (click)="getAction(activityShow.activity_details.link)"><em _ngcontent-jjc-c10=""
-              class="lxp-Play_Icon"></em>
-            {{activityShow?.button}}</button>
-          <!-- </div> -->
-          <div class="row" style="margin-top: 0px; color: white !important;"
-            *ngIf="activityShow?.activity_details.activitytype == 'Recorded'">
-            <button class="playButton" mat-raised-button
-              (click)="videoPreview(videoRecorded,activityShow.activity_details.link)"><em _ngcontent-jjc-c10=""
-                class="lxp-Play_Icon"></em> {{activityShow?.button}}</button>
+          <figure>
+            <img class="sessionImage" *ngIf="!activityShow?.activity_details.livethumbnail" alt="instructor" src="../../../../assets/learner/instructor_image.png" />
+          </figure>
+          <figure>
+            <img class="sessionImage" *ngIf="activityShow?.activity_details.livethumbnail" alt="instructor" [src]="activityShow?.activity_details.livethumbnail + blobKey" />
+          </figure>
+          <div class="playButton">
+            <button mat-raised-button *ngIf="activityShow?.status === 'On going' && activityShow?.activity_details.activitytype != 'Recorded'" (click)="getAction(activityShow.activity_details.link)"><em _ngcontent-jjc-c10="" class="lxp-Play_Icon"></em> {{activityShow?.button}}</button>
+            <button mat-raised-button *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" (click)="videoPreview(videoRecorded,activityShow.activity_details.link)"><em _ngcontent-jjc-c10="" class="lxp-Play_Icon"></em> {{activityShow?.button}}</button>
           </div>
         </div>
 
@@ -101,7 +91,7 @@
             <div class="timingDetails">
               <!-- <span>Held On</span> &nbsp;&nbsp; -->
               <span class="sessionDate"><em class="lxp-Duration"></em><span class="dateTitle">Date:</span> {{
-                activityShow?.activity_details.startdate | date: 'dd/MM/yyyy hha'}}</span>
+                activityShow?.activity_details.startdate | date: 'dd/MM/yyyy hh:mm a'}}</span>
             </div>
           </div>
           <!-- </div> -->
@@ -151,7 +141,7 @@
             <div class="countWrap">
               <div class="count">
                 <span class="number">{{recordedCount.length}}</span>
-                <p class="smallHeadline">Recorded Videos</p>
+                <p class="smallHeadline">Recorded Video</p>
               </div>
             </div>
           </div>
@@ -259,7 +249,9 @@
       <div class="headingWrapper">
         <!-- <div class="headingWrapper d-flex justify-content-between align-items-center"> -->
         <!-- <h3 class="headLine">Upcoming Sessions and Recorded Sessions</h3> -->
-        <h3 class="headLine">Industry Talk Sessions</h3>
+        <!-- <h3 class="headLine">Industry Talk Sessions</h3> -->
+        <span *ngIf="userDetails.org_type !== 'collegeconnect'"><h3 class="headLine">Live Interactions</h3></span> 
+        <span *ngIf="userDetails.org_type == 'collegeconnect'"><h3 class="headLine">IndustryTalk</h3></span>
         <button class="btn btn-light attandanceShow" *ngIf="sessionAttendance?.length"
           (click)="showModal(attendanceDialog)">Attendance</button>
       </div>
@@ -290,7 +282,7 @@
               <div class="content-container">
                 <h4 class="activity-name" matTooltip="{{los.activity_details.activityname}}">
                   {{los.activity_details.activityname}}</h4>
-                <h5><span class="hover-content">Date:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy hha'}}
+                <h5><span class="hover-content">Date:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm a'}}
                 </h5>
                 <h5 *ngIf="los.activity_details.activitytype != 'Recorded'"><span class="hover-content">Duration:</span>
                   {{los.duration}}
