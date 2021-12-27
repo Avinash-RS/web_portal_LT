@@ -36,7 +36,6 @@ import {GtagModule} from "angular-gtag";
 import { environment } from '@env/environment';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { RedirectionComponent } from './redirection/redirection.component';
-
 // import { ChartsModule } from 'ng2-charts';
 
 // import { JwtInterceptor } from './core/services/_helpers/jwt.interceptor';
@@ -76,7 +75,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     GraphqlModule,
     NgxUiLoaderModule,
     AngularEditorModule,
-    PdfViewerModule,
+    PdfViewerModule,    
     GtagModule.forRoot({ trackingId: environment.gaTrackingId, trackPageviews: false }),
     TranslateModule.forRoot({
       loader: {
