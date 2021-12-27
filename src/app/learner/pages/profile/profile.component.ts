@@ -26,6 +26,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ProfileComponent implements OnInit {
   @ViewChild('passwordDialog') passwordDialog: TemplateRef<any>;
   blobKey = environment.blobKey;
+  loader:boolean = false;
   constructor(public translate: TranslateService,
               private alert: AlertServiceService, public service: LearnerServicesService,
               private activeroute: ActivatedRoute, private dialog: MatDialog, private httpC: HttpClient, private formBuilder: FormBuilder,
@@ -750,9 +751,11 @@ showNew = true;
   }
 
   updatePassword() {
+    this.loader = true;
     this.service.get_change_password_updateprofile(this.currentUser.user_id, this.passwordForm.value.currentpassword,
       this.passwordForm.value.newpassword).subscribe((password: any) => {
         if (password.data.get_change_password_updateprofile.success === 'true') {
+          this.loader = false;
           Swal.fire(password.data.get_change_password_updateprofile.message);
           this.services.logout(this.currentUser.user_id, false).subscribe((logout: any) => {
           this.dialog.closeAll();
@@ -762,6 +765,7 @@ showNew = true;
           this.services.getIpAddressByUrl();
           });
         } else {
+          this.loader = false;
           Swal.fire(password.data.get_change_password_updateprofile.message);
         }
       });
