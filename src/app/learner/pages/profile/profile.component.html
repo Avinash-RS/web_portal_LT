@@ -625,7 +625,12 @@
   </mat-dialog-content><br>
   <mat-dialog-actions>
     <button class="popupbtns" [disabled]="passwordForm.invalid" (click)="updatePassword()">
-      {{'Submit' | translate}}
+      {{!loader? 'Submit':'' | translate}}
+      <div *ngIf="loader" class="snippet" data-title=".dot-falling">
+        <div class="stage">
+          <div class="dot-falling"></div>
+        </div>
+      </div>
     </button><br><br>
   </mat-dialog-actions>
 </div>
