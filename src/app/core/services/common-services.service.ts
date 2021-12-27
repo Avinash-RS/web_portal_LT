@@ -9,12 +9,11 @@ import { getAllNotifications, getCoursesByName, get_all_course_by_usergroup, lis
 import { environment } from '@env/environment';
 import { Apollo } from 'apollo-angular';
 import { Subject } from 'rxjs/Subject';
-
+import * as publicIp from 'public-ip';
 @Injectable({
   providedIn: 'root'
 })
 export class CommonServicesService {
-
   constructor(private apollo: Apollo, private http: HttpClient, ) { }
   // Search Component for search all courses
   globalSearch$ = new Subject<any>();
@@ -230,10 +229,8 @@ export class CommonServicesService {
     });
   }
   getIpAddressByUrl() {
-    // return 'http://api.ipify.org/?format=json';
-    this.http.get(environment.systemIp).subscribe((res: any) => {
-      // this.ipAddress = res.ip;
-      localStorage.setItem('Systemip', res.ip);
+    publicIp.v4().then((ip) => {
+      localStorage.setItem('Systemip', ip);
     });
   }
   verifyCaptcha(response) {
