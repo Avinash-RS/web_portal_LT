@@ -251,7 +251,7 @@
         <!-- <h3 class="headLine">Upcoming Sessions and Recorded Sessions</h3> -->
         <!-- <h3 class="headLine">Industry Talk Sessions</h3> -->
         <span *ngIf="userDetails.org_type !== 'collegeconnect'"><h3 class="headLine">Live Interactions</h3></span> 
-        <span *ngIf="userDetails.org_type == 'collegeconnect'"><h3 class="headLine">IndustryTalk</h3></span>
+        <span *ngIf="userDetails.org_type == 'collegeconnect'"><h3 class="headLine">Industry Talk</h3></span>
         <button class="btn btn-light attandanceShow" *ngIf="sessionAttendance?.length"
           (click)="showModal(attendanceDialog)">Attendance</button>
       </div>
@@ -279,7 +279,7 @@
                 <div *ngIf="los.activity_details.activitytype == 'Recorded'" class="bottom-right rec-col">Recorded
                 </div>
               </div>
-              <div class="content-container">
+              <div [ngClass]="los.isactive?'active':''" class="content-container">
                 <h4 class="activity-name" matTooltip="{{los.activity_details.activityname}}">
                   {{los.activity_details.activityname}}</h4>
                 <h5><span class="hover-content">Date:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm a'}}

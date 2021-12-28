@@ -1,4 +1,5 @@
 import { Component, OnInit, TemplateRef,ViewChild, ElementRef } from '@angular/core';
+import { element } from '@angular/core/src/render3';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '@env/environment';
@@ -107,7 +108,11 @@ export class InstructorLedComponent implements OnInit {
   // }
 
   useSession(los) {
+    for (let los of this.listOfSessions) {
+      los.isactive = false;
+    }
     this.activityShow = los;
+    los.isactive = true;
     if (los.status === 'On going') {
       this.activityShow.button = 'Join Now';
     } else if (los.status !== 'Up Coming') {
