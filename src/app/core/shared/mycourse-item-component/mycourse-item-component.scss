@@ -1,1 +1,364 @@
 @import "variable";
+
+//
+.courses {
+  position: relative;
+  flex-wrap: wrap;
+  background: #ffffff;
+  padding: 15px;
+  margin: 0 0px 15px 0px;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  &:hover {
+    figure {
+      img {
+        transform: scale(1.1);
+      }
+    }
+  }
+  .progBar {
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 100%;
+  }
+  @media only screen and (min-width: 720px) {
+    padding: 15px 15px 15px 15px;
+  }
+  .leftColImage {
+    width: 100%;
+    margin: 0;
+    height: 180px;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      bottom: 0;
+      background: white;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, black 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#000000",GradientType=1);
+    }
+    @media only screen and (min-width: 720px) {
+      width: 24%;
+    }
+    @media only screen and (min-width: 1440px) {
+      width: 18%;
+    }
+    img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      transform: scale(1);
+      transition: transform 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    }
+    button {
+      position: absolute;
+      background: #c02222;
+      padding: 5px 20px;
+      text-align: center;
+      border: 0;
+      text-transform: uppercase;
+      color: #ffffff;
+      font-size: 13px;
+      border-radius: 20px;
+      top: 50%;
+      overflow: hidden;
+      transform: translateY(-50%) perspective(1px) translateZ(0);
+      transition-property: color;
+      transition-duration: 0.2s;
+      z-index: 99;
+      &::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #004684;
+        transform: scale(0);
+        transition-property: transform;
+        transition-duration: 0.2s;
+        transition-timing-function: ease-out;
+      }
+      &:hover {
+        &::before {
+          transform: scale(1);
+        }
+      }
+      em {
+        font-size: 12px;
+        margin-right: 5px;
+        display: inline-flex;
+      }
+    }
+  }
+  .rightCol {
+    width: 100%;
+    position: relative;
+    @media only screen and (min-width: 720px) {
+      margin-left: 2%;
+      width: 74%;
+      position: initial;
+    }
+    @media only screen and (min-width: 1440px) {
+      margin-left: 2%;
+      width: 80%;
+    }
+    h3 {
+      width: 75%;
+      font-size: 18px;
+      font-weight: 400;
+      color: #000000;
+      line-height: 23px;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      @media only screen and (min-width: 568px) {
+        width: 80%;
+      }
+      @media only screen and (min-width: 720px) {
+        font-size: 21px;
+        margin-top: 0;
+      }
+      @media only screen and (min-width: 1140px) {
+        line-height: 24px;
+      }
+    }
+    .showLessContent {
+      position: relative;
+      .arrowWrapper {
+        position: relative;
+      }
+      p {
+        font-size: 14px;
+        font-weight: 400;
+        color: #808080;
+        padding-right: 20px;
+        margin: 0 !important;
+        &.addEllipsis {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+      .readMoreLess {
+        border: 0;
+        background-color: transparent;
+        padding: 0;
+        position: relative;
+        right: 10px;
+        top: 0;
+        z-index: 9;
+        em {
+          font-size: 7px;
+          color: #999999;
+        }
+      }
+      > div {
+        text-overflow: ellipsis;
+        height: 20px;
+        position: relative;
+        overflow: hidden;
+        transition: height 1s ease-in-out;
+        &.showText {
+          height: auto;
+          transition: height 1s ease-in-out;
+        }
+      }
+    }
+    .type {
+      margin-bottom: 0;
+      margin-top: 10px;
+      flex-wrap: wrap;
+      @media only screen and (min-width: 720px) {
+        flex-wrap: nowrap;
+      }
+      span {
+        display: inline-flex;
+        margin-right: 8px;
+        padding-right: 8px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #666666;
+        line-height: normal;
+        border-right: 1px solid #c02222;
+        margin-top: 10px;
+        &:last-child {
+          border-right: 0;
+        }
+        @media only screen and (min-width: 720px) {
+          margin-top: 0;
+        }
+      }
+    }
+    .durationCredits {
+      flex-wrap: wrap;
+      align-items: center;
+      margin: 15px 0;
+      @media only screen and (min-width: 720px) {
+        flex-wrap: nowrap;
+      }
+      span {
+        font-size: 11px;
+        font-weight: 400;
+        color: #999999;
+        line-height: normal;
+        b {
+        color: #666666;
+        font-weight: 400;
+        }
+        em {
+          display: inline-flex;
+          margin-right: 5px;
+        }
+        &.by {
+        }
+        &.credits {
+          margin-top: 0;
+          display: inline-flex;
+          @media only screen and (min-width: 720px) {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+    .actionItems {
+      align-items: center;
+      flex-wrap: nowrap;
+      &.top {
+        margin-top: 20px;
+      }
+      &.zero {
+        margin-top: 20px;
+      }
+    }
+    .vocational {
+      .viltActivitiesQA {
+        width: 75%;
+      }
+      .courseProgression {
+        width: 25%;
+        .icons {
+          margin-right: 0;
+        }
+      }
+    }
+    .viltActivitiesQA {
+      .icons {
+        text-align: center;
+        margin-right: 30px;
+        @media only screen and (max-width: 767px) {
+          margin-right: 15px;
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+        &:nth-child(2) {
+          span {
+            em {
+              font-size: 21px;
+            }
+          }
+        }
+        span {
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+          width: 42px;
+          height: 42px;
+          background: #dedede;
+          transition: 0.3s ease-in background;
+          @media only screen and (max-width: 767px) {
+            width: 35px;
+            height: 35px;
+          }
+          em {
+            color: #1B4E9B;
+            font-size: 18px;
+            @media only screen and (max-width: 767px) {
+              font-size: 15px;
+            }
+          }
+          &:hover {
+            background:#27BBEE;
+            border: none;
+            em {
+              color: #ffffff;
+            }
+          }
+        }
+      }
+    }
+    .viltActivitiesQA,
+    .courseProgression {
+      width: 50%;
+      .icons {
+        cursor: pointer;
+        p {
+          font-size: 13px;
+          font-weight: 400;
+          color: #000000;
+          margin: 10px 0 0 0 !important;
+          line-height: normal;
+          @media only screen and (max-width: 991px) {
+            display: none;
+          }
+        }
+      }
+    }
+    .courseProgression {
+      justify-content: flex-end;
+      margin-top: 0;
+      margin-right: 0;
+      @media only screen and (min-width: 1540px) {
+      }
+      .icons {
+        text-align: center;
+        margin-right: 15px;
+      }
+      span {
+        em {
+          font-size: 20px;
+        }
+      }
+    }
+    .searchProgression {
+      width: 25%;
+      @media only screen and (min-width: 568px) {
+        width: 20%;
+      }
+      &.no {
+        @media only screen and (min-width: 569px) {
+          min-height: 58px;
+        }
+        @media only screen and (min-width: 1560px) {
+          min-height: 68px;
+        }
+      }
+      .percentage {
+        width: 70%;
+        margin-right: -11px;
+        @media only screen and (min-width: 569px) {
+          width: 55%;
+        }
+        @media only screen and (min-width: 720px) {
+          width: 70%;
+        }
+        @media only screen and (min-width: 992px) {
+          width: 55%;
+        }
+        @media only screen and (min-width: 1540px) {
+          width: 30%;
+        }
+      }
+    }
+  }
+}
+//
