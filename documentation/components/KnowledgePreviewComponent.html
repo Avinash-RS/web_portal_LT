@@ -1,0 +1,761 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>lxpfrontend documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">lxpfrontend documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  KnowledgePreviewComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/learner/pages/knowledge-preview/knowledge-preview.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-knowledge-preview</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./knowledge-preview.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./knowledge-preview.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#batchdialogdata" >batchdialogdata</a>
+                            </li>
+                            <li>
+                                <a href="#blobToken" >blobToken</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#dialogRef" >dialogRef</a>
+                            </li>
+                            <li>
+                                <a href="#file" >file</a>
+                            </li>
+                            <li>
+                                <a href="#fileType" >fileType</a>
+                            </li>
+                            <li>
+                                <a href="#isCancelLoad" >isCancelLoad</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onClose" >onClose</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(dialogRef: <a href="../components/KnowledgePreviewComponent.html" target="_self">MatDialogRef&lt;KnowledgePreviewComponent&gt;</a>, batchdialogdata, sanitizer: <a href="https://angular.io/api/platform-browser/DomSanitizer" target="_blank">DomSanitizer</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/learner/pages/knowledge-preview/knowledge-preview.component.ts:15</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>dialogRef</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../components/KnowledgePreviewComponent.html" target="_self" >MatDialogRef&lt;KnowledgePreviewComponent&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>batchdialogdata</td>
+                                                  
+                                                        <td>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>sanitizer</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/platform-browser/DomSanitizer" target="_blank" >DomSanitizer</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="20"
+                            class="link-to-prism">src/app/learner/pages/knowledge-preview/knowledge-preview.component.ts:20</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onClose"></a>
+                    <span class="name">
+                        <span ><b>onClose</b></span>
+                        <a href="#onClose"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onClose()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">src/app/learner/pages/knowledge-preview/knowledge-preview.component.ts:43</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="batchdialogdata"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>batchdialogdata</b></span>
+                        <a href="#batchdialogdata"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Optional()<br />@Inject(MAT_DIALOG_DATA)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/learner/pages/knowledge-preview/knowledge-preview.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="blobToken"></a>
+                    <span class="name">
+                        <span ><b>blobToken</b></span>
+                        <a href="#blobToken"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>environment.blobKey</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/learner/pages/knowledge-preview/knowledge-preview.component.ts:12</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dialogRef"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>dialogRef</b></span>
+                        <a href="#dialogRef"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../components/KnowledgePreviewComponent.html" target="_self" >MatDialogRef&lt;KnowledgePreviewComponent&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Optional()<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/learner/pages/knowledge-preview/knowledge-preview.component.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="file"></a>
+                    <span class="name">
+                        <span ><b>file</b></span>
+                        <a href="#file"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/learner/pages/knowledge-preview/knowledge-preview.component.ts:14</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fileType"></a>
+                    <span class="name">
+                        <span ><b>fileType</b></span>
+                        <a href="#fileType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/learner/pages/knowledge-preview/knowledge-preview.component.ts:13</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isCancelLoad"></a>
+                    <span class="name">
+                        <span ><b>isCancelLoad</b></span>
+                        <a href="#isCancelLoad"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/learner/pages/knowledge-preview/knowledge-preview.component.ts:15</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, OnInit, Optional } from &#x27;@angular/core&#x27;;
+import { MatDialogRef, MAT_DIALOG_DATA } from &#x27;@angular/material&#x27;;
+import { DomSanitizer } from &#x27;@angular/platform-browser&#x27;;
+import { environment } from &#x27;@env/environment&#x27;;
+
+@Component({
+  selector: &#x27;app-knowledge-preview&#x27;,
+  templateUrl: &#x27;./knowledge-preview.component.html&#x27;,
+  styleUrls: [&#x27;./knowledge-preview.component.scss&#x27;]
+})
+export class KnowledgePreviewComponent implements OnInit {
+  blobToken &#x3D; environment.blobKey;
+  fileType;
+  file: any;
+  isCancelLoad &#x3D; false;
+  constructor(@Optional() public dialogRef: MatDialogRef&lt;KnowledgePreviewComponent&gt;,
+              @Optional() @Inject(MAT_DIALOG_DATA) public batchdialogdata,
+              private sanitizer: DomSanitizer) { }
+
+  ngOnInit() {
+    setTimeout(() &#x3D;&gt; {
+      this.isCancelLoad &#x3D; true;
+    }, 500);
+    this.fileType &#x3D; this.batchdialogdata.fileType;
+    if (this.fileType &#x3D;&#x3D;&#x3D; &#x27;pdf&#x27;) {
+      this.batchdialogdata.file &#x3D; this.batchdialogdata.file;
+      if(this.batchdialogdata?.internal &#x3D;&#x3D; &#x27;yes&#x27; || this.batchdialogdata?.internal &#x3D;&#x3D; &#x27;Yes&#x27;) {
+        this.file &#x3D; this.batchdialogdata.file + this.blobToken
+      }
+      else {
+        this.file &#x3D; this.batchdialogdata.file
+      }
+    } else {
+      if(this.batchdialogdata?.internal &#x3D;&#x3D; &#x27;yes&#x27; || this.batchdialogdata?.internal &#x3D;&#x3D; &#x27;Yes&#x27;) {
+        this.file &#x3D; this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file + this.blobToken);
+      }
+      else {
+        this.file &#x3D; this.sanitizer.bypassSecurityTrustResourceUrl(this.batchdialogdata.file);
+      }
+   }
+  }
+
+  onClose() {
+    this.dialogRef.close();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;knowledge-preview-container&quot;&gt;
+  &lt;div class&#x3D;&quot;prev-cancel&quot; (click)&#x3D;&quot;onClose()&quot; *ngIf&#x3D;&quot;isCancelLoad&quot;&gt;
+    &lt;mat-icon&gt;arrow_back&lt;/mat-icon&gt;
+    &lt;span style&#x3D;&quot;position: absolute;
+    top: 3px;
+    left: 30px;
+    font-size: 16px;&quot;&gt;
+      {{batchdialogdata.filename}}
+    &lt;/span&gt;
+  &lt;/div&gt;
+  &lt;ng-container *ngIf&#x3D;&quot;isCancelLoad&quot;&gt;
+    &lt;!-- &lt;mat-icon [ngClass]&#x3D;&quot;{&#x27;preview-cancel-pdf&#x27;: fileType &#x3D;&#x3D; &#x27;pdf&#x27;,&#x27;preview-cancel&#x27; : (fileType &#x3D;&#x3D; &#x27;image&#x27; || fileType &#x3D;&#x3D; &#x27;video&#x27;)}&quot; (click)&#x3D;&quot;onClose()&quot;&gt;cancel&lt;/mat-icon&gt; --&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container *ngIf&#x3D;&quot;fileType &#x3D;&#x3D; &#x27;image&#x27;&quot;&gt;
+    &lt;div class&#x3D;&quot;image-container&quot;&gt;
+      &lt;img [src]&#x3D;&quot;file&quot; alt&#x3D;&quot;image&quot;&gt;
+    &lt;/div&gt;
+  &lt;/ng-container&gt;
+
+  &lt;ng-container *ngIf&#x3D;&quot;fileType &#x3D;&#x3D; &#x27;pdf&#x27;&quot;&gt;
+    &lt;pdf-viewer [src]&#x3D;&quot;file&quot; [original-size]&#x3D;&quot;false&quot;  [render-text]&#x3D;&quot;true&quot; style&#x3D;&quot;display: block;&quot;&gt;&lt;/pdf-viewer&gt;
+    &lt;!-- &lt;iframe title&#x3D;&quot;file&quot; width&#x3D;&quot;100%&quot; height&#x3D;&quot;100%&quot; [src]&#x3D;&quot;file&quot; allowfullscreen&gt;&lt;/iframe&gt; --&gt;
+
+  &lt;/ng-container&gt;
+  &lt;ng-container *ngIf&#x3D;&quot;fileType &#x3D;&#x3D; &#x27;HTML&#x27;&quot;&gt;
+    &lt;!-- &lt;pdf-viewer [src]&#x3D;&quot;this.batchdialogdata.file&quot;
+     [original-size]&#x3D;&quot;false&quot;&gt;&lt;/pdf-viewer&gt; --&gt;
+    &lt;iframe title&#x3D;&quot;file&quot; width&#x3D;&quot;100%&quot; height&#x3D;&quot;100%&quot; [src]&#x3D;&quot;file&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+  &lt;/ng-container&gt;
+
+  &lt;ng-container *ngIf&#x3D;&quot;fileType &#x3D;&#x3D; &#x27;video&#x27;&quot;&gt;
+    &lt;video  oncontextmenu&#x3D;&quot;return false;&quot; [src]&#x3D;&quot;file&quot; width&#x3D;&quot;100%&quot; height&#x3D;&quot;100%&quot; controls controlsList&#x3D;&quot;nodownload&quot;&gt;&lt;/video&gt;
+  &lt;/ng-container&gt;
+
+  &lt;ng-container *ngIf&#x3D;&quot;fileType &#x3D;&#x3D; &#x27;audio&#x27;&quot; controlsList&#x3D;&quot;nodownload&quot;&gt;
+    &lt;audio oncontextmenu&#x3D;&quot;return false;&quot; class&#x3D;&quot;audio-player&quot; [src]&#x3D;&quot;file&quot; title&#x3D;&quot;image&quot; width&#x3D;&quot;100%&quot; height&#x3D;&quot;100%&quot; controls controlsList&#x3D;&quot;nodownload&quot;&gt;&lt;/audio&gt;
+  &lt;/ng-container&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./knowledge-preview.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.knowledge-preview-container {
+    height: 100%;
+    width: 100%;
+    background: black;
+    .image-container {
+        width: 100%;
+        height: 100%;
+        img {
+           // object-fit: cover;
+            height: 100%;
+            width: 100%;
+        }
+    }
+    .preview-cancel {
+        position: absolute;
+        right: 22.7%;
+        top: 15.5%;
+        color: grey;
+        cursor: pointer;
+        z-index: 1000;
+    }
+    .prev-cancel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: white;
+        margin: 10px;
+        width: 50%;
+        cursor: pointer;
+    }
+    .preview-cancel-pdf {
+        z-index: 100;
+        position: absolute;
+        right: 16.5%;
+        top: 6.7%;
+        color: grey;
+        cursor: pointer;
+    }
+
+    .audio-player{
+        margin-top: 25% !important;
+        margin-left: 30% !important;
+    }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="knowledge-preview-container">  <div class="prev-cancel" (click)="onClose()" *ngIf="isCancelLoad">    <mat-icon>arrow_back</mat-icon>    <span style="position: absolute;    top: 3px;    left: 30px;    font-size: 16px;">      {{batchdialogdata.filename}}    </span>  </div>  <ng-container *ngIf="isCancelLoad">    <!-- <mat-icon [ngClass]="{\'preview-cancel-pdf\': fileType == \'pdf\',\'preview-cancel\' : (fileType == \'image\' || fileType == \'video\')}" (click)="onClose()">cancel</mat-icon> -->  </ng-container>  <ng-container *ngIf="fileType == \'image\'">    <div class="image-container">      <img [src]="file" alt="image">    </div>  </ng-container>  <ng-container *ngIf="fileType == \'pdf\'">    <pdf-viewer [src]="file" [original-size]="false"  [render-text]="true" style="display: block;"></pdf-viewer>    <!-- <iframe title="file" width="100%" height="100%" [src]="file" allowfullscreen></iframe> -->  </ng-container>  <ng-container *ngIf="fileType == \'HTML\'">    <!-- <pdf-viewer [src]="this.batchdialogdata.file"     [original-size]="false"></pdf-viewer> -->    <iframe title="file" width="100%" height="100%" [src]="file" allowfullscreen></iframe>  </ng-container>  <ng-container *ngIf="fileType == \'video\'">    <video  oncontextmenu="return false;" [src]="file" width="100%" height="100%" controls controlsList="nodownload"></video>  </ng-container>  <ng-container *ngIf="fileType == \'audio\'" controlsList="nodownload">    <audio oncontextmenu="return false;" class="audio-player" [src]="file" title="image" width="100%" height="100%" controls controlsList="nodownload"></audio>  </ng-container></div></div>'
+    var COMPONENTS = [{'name': 'ActivitiesComponent', 'selector': 'app-activities'},{'name': 'AlertComponentComponent', 'selector': 'app-alert-component'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AskQuestionsComponent', 'selector': 'app-ask-questions'},{'name': 'AssignmentComponent', 'selector': 'app-assignment'},{'name': 'AudioPlayerComponent', 'selector': 'app-audio-player'},{'name': 'CalendarActivityComponent', 'selector': 'app-calendar-activity'},{'name': 'CoursedetailsComponent', 'selector': 'app-coursedetails'},{'name': 'CourseGalleryComponent', 'selector': 'app-course-gallery'},{'name': 'CourseReportComponent', 'selector': 'app-course-report'},{'name': 'DiscussionForumComponent', 'selector': 'app-discussion-forum'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'InstructorLedComponent', 'selector': 'app-instructor-led'},{'name': 'KnowledgeLandingPageComponent', 'selector': 'app-knowledge-landing-page'},{'name': 'KnowledgePreviewComponent', 'selector': 'app-knowledge-preview'},{'name': 'KnowledgeResourceHomeComponent', 'selector': 'app-knowledge-resource-home'},{'name': 'LandingHeaderComponent', 'selector': 'app-landing-header'},{'name': 'LearnerNewMyCourseComponent', 'selector': 'app-learner-new-my-course'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NewHomeComponent', 'selector': 'app-new-home'},{'name': 'NotFoundComponent', 'selector': 'not-found'},{'name': 'PasswordComponent', 'selector': 'app-password'},{'name': 'PdfreaderComponent', 'selector': 'app-pdfreader'},{'name': 'PerformancePageMobileComponent', 'selector': 'app-performance-page-mobile'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProgressionReportComponent', 'selector': 'app-progression-report'},{'name': 'ProjectMobileComponent', 'selector': 'app-project-mobile'},{'name': 'QuestionanswerComponent', 'selector': 'app-questionanswer'},{'name': 'RedirectionComponent', 'selector': 'app-redirection'},{'name': 'ResetpasswordComponent', 'selector': 'app-resetpassword'},{'name': 'TermsconditionsComponent', 'selector': 'app-termsconditions'},{'name': 'ToolbarNotificationComponent', 'selector': 'app-toolbar-notification'},{'name': 'VideoPlayerComponent', 'selector': 'app-video-player'},{'name': 'VideoPreviewModalComponent', 'selector': 'app-video-preview-modal'},{'name': 'ViewAllnotificationsComponent', 'selector': 'app-view-allnotifications'}];
+    var DIRECTIVES = [{'name': 'CapslockDirective', 'selector': '[appCapslock]'},{'name': 'DragDropImageDirective', 'selector': '[appDragDropImage]'},{'name': 'StickyHeaderDirective', 'selector': '[stickyHeaderDirective]'}];
+    var ACTUAL_COMPONENT = {'name': 'KnowledgePreviewComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'KnowledgePreviewComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
