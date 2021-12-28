@@ -12,7 +12,8 @@
     "test": "ng test --browsers=ChromeHeadless --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "webdriver-update": "node_modules/bin/webdriver-manager update"
+    "webdriver-update": "node_modules/bin/webdriver-manager update",
+    "compodoc": "npx compodoc -p tsconfig.json src"
   },
   "private": true,
   "dependencies": {
@@ -31,6 +32,7 @@
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
     "@azure/storage-blob": "^12.4.1",
+    "@compodoc/compodoc": "^1.1.16",
     "@kolkov/angular-editor": "^1.1.5",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
