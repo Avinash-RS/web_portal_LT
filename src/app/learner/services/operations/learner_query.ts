@@ -2669,3 +2669,11 @@ query overAllCourseProgressByUserId($userId:String!,$startDate:String!,$endDate:
   }
   }
 `;
+export const getStepCourseByLearner = gql`
+  query getStepCourseByLearner($user_id:String!){
+    getStepCourseByLearner(user_id:$user_id){
+    success
+    stepRedirectUrl
+    } 
+  }
+`;
