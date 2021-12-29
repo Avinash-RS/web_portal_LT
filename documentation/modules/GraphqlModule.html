@@ -1,0 +1,240 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>lxpfrontend documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">lxpfrontend documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content module">
+                   <div class="content-data">
+
+
+
+<ol class="breadcrumb">
+    <li>Modules</li>
+    <li >GraphqlModule</li>
+</ol>
+
+
+<ul class="nav nav-tabs" role="tablist">
+    <li  class="active" >
+        <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+    </li>
+    <li >
+        <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/graphql/graphql.modules.ts</code>
+        </p>
+
+
+
+
+
+        <div class="container-fluid module">
+            <div class="row">
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule, isDevMode } from &#x27;@angular/core&#x27;;
+import { HttpClientModule, HttpHeaders, HttpClient } from &#x27;@angular/common/http&#x27;;
+import { ApolloModule, Apollo, APOLLO_OPTIONS } from &#x27;apollo-angular&#x27;;
+import { ApolloLink } from &#x27;apollo-link&#x27;;
+import { HttpLinkModule, HttpLink } from &#x27;apollo-angular-link-http&#x27;;
+import { InMemoryCache } from &#x27;apollo-cache-inmemory&#x27;;
+import { DefaultOptions } from &#x27;apollo-client&#x27;;
+import { CommonServicesService } from &#x27;@core/services/common-services.service&#x27;;
+// import { environment } from &#x27;../../environments/environment&#x27;;
+import * as CryptoJS from &#x27;crypto-js&#x27;;
+
+import { environment } from &#x27;@env/environment&#x27;;
+import { GlobalServiceService } from &#x27;@core/services/handlers/global-service.service&#x27;;
+import { onError } from &#x27;apollo-link-error&#x27;;
+
+const defaultOptions: DefaultOptions &#x3D; {
+  watchQuery: {
+    fetchPolicy: &#x27;no-cache&#x27;,
+    errorPolicy: &#x27;ignore&#x27;,
+  },
+  query: {
+    fetchPolicy: &#x27;no-cache&#x27;,
+    errorPolicy: &#x27;all&#x27;,
+  },
+};
+
+@NgModule({
+  exports: [
+    HttpClientModule,
+    ApolloModule,
+    HttpLinkModule
+  ]
+})
+
+export class GraphqlModule {
+  secretKey &#x3D; &quot;(!@#Passcode!@#)&quot;;
+  envWcaApi: any &#x3D; environment.wcaapiurl;
+  envApi: any &#x3D; environment.apiUrl;
+  envApiImg: any &#x3D; environment.apiUrlImg;
+  envCourseApi: any &#x3D; environment.createCourseApi;
+  constructor(apollo: Apollo, httpLink: HttpLink, private gs: GlobalServiceService, private httpC: HttpClient,
+              private services: CommonServicesService) {
+    const http &#x3D; httpLink.create({ uri: this.envApi + &#x27;gateway&#x27;});
+    const middleware &#x3D; new ApolloLink((operation, forward) &#x3D;&gt; {
+
+      // Check for token
+      const token &#x3D; localStorage.getItem(&#x27;token&#x27;)||sessionStorage.getItem(&#x27;token&#x27;);
+      var userDetails &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;))
+      // tslint:disable-next-line:max-line-length
+      // const token &#x3D; &#x27;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoibHhwYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoiMTIzNGFiIiwic2VjX2tleSI6IjEyM0FhIUAjIiwiaWF0IjoxNTk4NDUwMjk3LCJleHAiOjE1OTg0NzE4OTcsImlzcyI6Imh0dHBzOi8vd3d3LmxhcnNlbnRvdWJyby5jb20vIn0.y9YcBFZc43QtAP2Wep7rSI1wHtIMkTBeseAb-n0qvpc&#x27;
+      if (!token) { return forward(operation); }
+
+      operation.setContext({
+        headers: new HttpHeaders({ 
+          Authorization: &#x27;Bearer &#x27;+token,
+          requestId: userDetails[&#x27;user_id&#x27;]
+         }),
+      });
+      
+      return forward(operation);
+    });
+
+    const Errlink &#x3D; onError(({ graphQLErrors, networkError, response, operation }) &#x3D;&gt; {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(({ message, locations, path }) &#x3D;&gt; {
+          if (message.includes(&#x27;TokenExpiredError&#x27;) || message.includes(&#x27;JsonWebTokenError&#x27;)) {
+            localStorage.clear();
+            sessionStorage.clear();
+            this.services.getIpAddressByUrl();
+            this.gs.checkLogout();
+          }
+        }
+        );
+      }
+      if (networkError) { }
+    });
+
+    const link &#x3D; middleware.concat(http);
+
+    apollo.create({
+      link: Errlink.concat(link),
+      cache: new InMemoryCache({
+        addTypename: false
+      }),
+      defaultOptions,
+    });
+  }
+}
+
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
+            var COMPODOC_CURRENT_PAGE_URL = 'GraphqlModule.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
