@@ -76,7 +76,7 @@ export class MycourseItemComponent implements OnInit {
 
 
   ngOnInit() {
-
+    // this.translate.use('ta');
     this.courseWeekCircle = (this.course.week_completed_count !== null ?
        this.course.week_completed_count : 0) + '/' + (this.course.week_total_count !== null ? this.course.week_total_count : 0);
       // console.log(new Date(this.course.batch_end_date))

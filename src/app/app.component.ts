@@ -17,6 +17,7 @@ declare var window;
 declare var dataLayer
 declare var gtag;
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -54,6 +55,7 @@ export class AppComponent implements OnInit {
   constructor(private router: Router,
               private gs: GlobalServiceService,
               private ga_service: GoogleAnalyticsService,
+              public translate: TranslateService,
               private http: HttpClient,
               private activatedRoute: ActivatedRoute,
               private titleService: Title,
@@ -68,6 +70,8 @@ export class AppComponent implements OnInit {
       localStorage.clear();
       sessionStorage.clear();
     }
+    if(localStorage.getItem('language'))
+    {this.translate.use(localStorage.getItem('language'));}
     // console.error = function(){}
     // console.warn = function(){}
     this.commonService.getIpAddressByUrl();
@@ -159,7 +163,8 @@ export class AppComponent implements OnInit {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
     ).subscribe((e: any) => {
-
+      if(localStorage.getItem('language'))
+    {this.translate.use(localStorage.getItem('language'));}
     //adding USERID to datalayer
     //   var user_id = null
     //   if(this.UserDetails.user_id){
