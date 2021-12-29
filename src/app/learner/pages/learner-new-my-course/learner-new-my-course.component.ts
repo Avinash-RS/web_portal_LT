@@ -925,7 +925,8 @@ goToCourse(value){
     moduleName:value.module,
     moduleIndex:value.moduleIndex,
     topicName:value.topic,
-    topicIndex:value.topicIndex
+    topicIndex:value.topicIndex,
+    newmodule:value.newmodule
   };
 console.log(detail)
   localStorage.setItem('currentBatchEndDate', value.batch_end_date_Timer)

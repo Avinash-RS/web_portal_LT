@@ -748,6 +748,7 @@ export class CoursedetailsComponent implements OnInit {
         this.moduleHolder = this.currentPage =  this.scromApiData.checkLevel ? (this.scromApiData.module == null ? 0 : Number(this.scromApiData.module)) :this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
         this.weekHolder = this.weekHolderUI = this.scromApiData.week - 1;
         if (this.scromApiData.checkLevel) {
+
           this.subModuleHolder = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
           this.subModuleHolderUI = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
           
@@ -758,6 +759,14 @@ export class CoursedetailsComponent implements OnInit {
         this.nextPrevHolder = this.topiccurrentPage = Number(this.checkDetails.topicIndex);
         this.moduleHolder = this.currentPage = Number(this.checkDetails.moduleIndex);
         this.weekHolder = this.weekHolderUI = this.checkDetails.week - 1;
+
+        if (this.scromApiData.checkLevel) {
+          this.moduleHolder = this.currentPage = Number(this.checkDetails.newmodule);
+          this.subModuleHolder = this.checkDetails.moduleIndex == null ? 0 : Number(this.checkDetails.moduleIndex);
+          this.subModuleHolderUI = this.checkDetails.moduleIndex == null ? 0 : Number(this.checkDetails.moduleIndex);
+          
+         this.submoduleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].title
+        }
       }
       // this.scromModuleData[this.moduleHolder].expanded = true;
       this.oldIdx = this.moduleHolder;
