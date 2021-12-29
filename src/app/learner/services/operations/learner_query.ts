@@ -2531,6 +2531,7 @@ export const recentlycourse = gql`
               lastTopic
               topic_status
               module_status
+              newmodule
               }
             completedTopic{
               course_name
@@ -2544,6 +2545,7 @@ export const recentlycourse = gql`
               moduleIndex
               topic_status
               module_status
+              newmodule
               }
           }
         }
