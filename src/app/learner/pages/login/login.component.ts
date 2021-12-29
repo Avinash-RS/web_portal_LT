@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
   recaptchaForgetStr = '';
   recaptchaSignInStr = '';
   @ViewChild('captchaRef') captchaRef;
+  selectedLanguage: any = 'en';
   getErrorMessage() {
     return this.username.hasError('required') ? 'Email or Username is required' :
         this.username.hasError('email') ? 'Please enter a valid email address' :
@@ -52,9 +53,9 @@ export class LoginComponent implements OnInit {
              // public socketService: SocketioService,
               private service: LearnerServicesService, private toastr: ToastrService, private activatedRoute: ActivatedRoute,private titleService: Title) {
       this.languages = [{lang: 'ta' , languagename: 'Tamil' } , { lang: 'en' , languagename: 'English'  }] ;
-      // translate.addLangs(['en', 'ta']);
-      // translate.setDefaultLang('en');
-      // const browserLang = translate.getBrowserLang();
+      translate.addLangs(['en', 'ta']);
+      translate.setDefaultLang('en');
+      const browserLang = translate.getBrowserLang();
   }
 
   ngOnInit() {
@@ -258,8 +259,8 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl('/Learner/recover', { state: { type } });
   }
 
-  onSelection(lang) {
-    const selectedLanguage = lang.value;
+  onSelection() {
+    const selectedLanguage = this.selectedLanguage;
     localStorage.setItem('language', selectedLanguage);
     this.translate.use(localStorage.getItem('language'));
   }
