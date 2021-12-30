@@ -1,4 +1,5 @@
 import { Component, OnInit, TemplateRef,ViewChild, ElementRef } from '@angular/core';
+import { element } from '@angular/core/src/render3';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '@env/environment';
@@ -107,11 +108,15 @@ export class InstructorLedComponent implements OnInit {
   // }
 
   useSession(los) {
+    this.listOfSessions.forEach(los => {
+      los.isactive = false;
+    });
     this.activityShow = los;
+    los.isactive = true;
     if (los.status === 'On going') {
       this.activityShow.button = 'Join Now';
     } else if (los.status !== 'Up Coming') {
-      this.activityShow.button = 'Play Now';
+      this.activityShow.button = 'Play';
     }
   }
 
@@ -142,12 +147,12 @@ export class InstructorLedComponent implements OnInit {
     const ms = moment(end, 'DD/MM/YYYY HH:mm:ss').diff(moment(start, 'DD/MM/YYYY HH:mm:ss'));
     const d = moment.duration(ms);
     let time;
-    if (d.hours() === 0 && d.minutes() !== 0) {
-      time = d.minutes() + ' minutes';
+    if (d.hours() === 0 && d.minutes() !== 0 && d.seconds() !== 0) {
+      time = d.minutes() + ' mins' + d.seconds() + ' Sec ';
     } else if (d.hours() !== 0 && d.minutes() === 0) {
       time = d.hours() + ' hour ';
     } else {
-      time = d.hours() + ' hour ' + d.minutes() + ' minutes';
+      time = d.hours() + 'hr ' + d.minutes() + ' min';
     }
     return time;
   }

@@ -17,7 +17,7 @@
         </mat-icon> {{'Edit' | translate}}
       </span>
       <span *ngIf="!cannotEdit">
-        Cancel
+        {{'Cancel' | translate}}
       </span>
     </span>
   </div>
@@ -412,7 +412,7 @@
         <mat-dialog-content style="width: 300px;margin-top: 24px; height: 200px;">
           <form [formGroup]="mailForm" autocomplete="off">
             <div class="form-group">
-              <label class="f_size_20 f_wt_400">{{'Enter new email id' }}</label>
+              <label class="f_size_20 f_wt_400">{{'Enter new email id' | translate}}</label>
               <input type="text" formControlName="mailid" [placeholder]="'example@mail.com' | translate" class="form-control"
                 [ngClass]="{ 'is-invalid': c.mailid.touched && c.mailid.errors }" required>
               <div *ngIf="c.mailid.touched && c.mailid.errors" class="invalid-feedback">
@@ -458,14 +458,14 @@
                 </ng-otp-input>
               </div><br>
               <div>
-                <p>{{minutes}}:{{seconds}}</p>
+                <p>{{'minutes' | translate}}:{{'seconds' | translate}}</p>
               </div>
               <br><br>
             </div>
             <div *ngIf="showotp">
               <button  class="popupbtns" [disabled]="verifybutton" (click)="otpverify()">{{'Verify' | translate}}</button>
             </div><br>
-            <div *ngIf="showotp" class="account color_blue center_align pointer">Didn't get OTP?<button
+            <div *ngIf="showotp" class="account color_blue center_align pointer">{{'Didn't get OTP?' | translate}}<button
                 class="no_border f_wt_500 background_trans color_blue" (click)="Resendcode()">{{'Resend OTP' | translate}}</button></div>
           </form>
         </mat-dialog-content>
@@ -531,8 +531,8 @@
           aria-hidden="true"></i>
       </div> -->
       <mat-form-field class="w-100" appearance="outline">
-        <mat-label class="labe l-color">Enter current password</mat-label>
-        <input onpaste="return false" matInput placeholder="Enter password" [type]="hide ? 'password' : 'text'" formControlName="currentpassword" [ngClass]="{ 'is-invalid': c.currentpassword.touched && c.currentpassword.errors }" required>
+        <mat-label class="labe l-color">{{'Enter current password' | translate}}</mat-label>
+        <input onpaste="return false" matInput placeholder="'Enter password' | translate" [type]="hide ? 'password' : 'text'" formControlName="currentpassword" [ngClass]="{ 'is-invalid': c.currentpassword.touched && c.currentpassword.errors }" required>
         <!-- <em class="icon-color lxp-Lock" matPrefix></em> -->
         <span mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <em class="icon-color" [ngClass]="hide ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
@@ -545,8 +545,8 @@
       
       <p class=" f_size_14">{{'The password should not be last password' | translate}}</p>
       <mat-form-field class="w-100" appearance="outline">
-        <mat-label class="labe l-color">Enter New password</mat-label>
-        <input onpaste="return false" matInput placeholder="Enter password" [type]="showNew ? 'password' : 'text'" formControlName="newpassword" 
+        <mat-label class="labe l-color">{{'Enter New password' | translate}}</mat-label>
+        <input onpaste="return false" matInput placeholder="'Enter password' | translate" [type]="showNew ? 'password' : 'text'" formControlName="newpassword" 
         onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false"[ngClass]="{ 'is-invalid': c.newpassword.touched && c.newpassword.errors }" (keyup)="change($event)">
         <span mat-icon-button matSuffix (click)="showNew = !showNew" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showNew">
           <em class="icon-color" [ngClass]="showNew ? 'lxp-VisibilityOff' : 'lxp-Visibility'"></em>
