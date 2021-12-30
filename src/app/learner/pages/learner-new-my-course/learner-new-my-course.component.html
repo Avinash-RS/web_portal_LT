@@ -228,7 +228,7 @@
                             <em class="lxp-Calendar_Todo"></em>
                         </span>
                     </div>
-                    <div class="stepIntegrationSection">
+                    <div *ngIf="stepUrl" class="stepIntegrationSection">
                         <figure class="stepFigure">
                             <img src="assets/images/step1.jpeg" alt="">
                         </figure>
@@ -236,7 +236,7 @@
                             <h1>Learn to speak English</h1>
                             <div class="resumeBtn">
                                 <button (click)="redirect()">
-                                    <em class="lxp-Play_Icon"></em> <span>Resume</span>
+                                    <em class="lxp-Play_Icon"></em> <span>Start Learning</span>
                                 </button>
                             </div>
                         </div>

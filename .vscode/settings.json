@@ -1,0 +1,6 @@
+{
+    "search.exclude": {
+        "**/documentation": true,
+        "**/e2e": true
+    }
+}

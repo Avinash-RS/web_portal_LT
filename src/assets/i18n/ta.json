@@ -1,5 +1,5 @@
 {     
-  "forgot password" : "Forgot password",
+  "forgot password" : "கடவுச்சொல்லை மறந்துவிட்டீர்களா",
   "Forgot username" : "Forgot username",
   "enter the username":"Enter the username",
   "Newsletters" : "Newsletters",
@@ -161,7 +161,7 @@
   "Mobile :" : "Mobile :",
   "Email :" : "Email :",
   "Max size: 5 mb, upload format: jpg & png" : "Max size: 5 mb, upload format: jpg & png",
-  "Member since" : "Member since",
+  "Member since" : "Member sincessss",
   "Profile progress" : "Profile progress",
   "Male" : "Male",
   "Female" : "Female",
@@ -730,7 +730,7 @@
   "Post is required" : "Post is required",
   "File size : 10mb, Format : jpg, png, jpeg, pdf" : "File size : 10mb, Format : jpg, png, jpeg, pdf",
   
-  "Forgot password?" : "Forgot password?",
+  "Forgot Password?" : "கடவுச்சொல்லை மறந்துவிட்டீர்களா?",
   "NEXT" : "NEXT",
   "SUBMIT" : "SUBMIT",
   "Email ID is invalid" : "Email ID is invalid",
@@ -768,7 +768,7 @@
   "SIGN IN" : "SIGN IN",
   
   "Course Duration:" : "Course Duration:",
-  "Resume" : "Resume",
+  "Resume" : "தொடர்",
   "You have no enrolled courses at the moment" : "You have no enrolled courses at the moment",
   "On-going" : "On-going",
   "L&T Kaushalya supports the most recent versions of the following browsers." : "L&T Kaushalya supports the most recent versions of the following browsers.",
