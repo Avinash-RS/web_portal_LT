@@ -108,9 +108,9 @@ export class InstructorLedComponent implements OnInit {
   // }
 
   useSession(los) {
-    for (let los of this.listOfSessions) {
+    this.listOfSessions.forEach(los => {
       los.isactive = false;
-    }
+    });
     this.activityShow = los;
     los.isactive = true;
     if (los.status === 'On going') {
