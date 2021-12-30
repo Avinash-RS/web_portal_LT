@@ -107,10 +107,10 @@
               </div>
             </div>
             <div class="countWrap">
-              <div class="count">
-                <span class="number">{{listOfSessions?.length}}</span>
-                <p class="smallHeadline">Total Sessions</p>
-              </div>
+              <!-- <div class="count"> -->
+                <span class="number">{{listOfSessions?.length}} </span> 
+                <p class="smallHeadline">{{listOfSessions?.length > 1 ? 'Total Sessions':'Total Session'}}</p>
+              <!-- </div> -->
             </div>
           </div>
           <!-- </div> -->
@@ -123,10 +123,10 @@
               </div>
             </div>
             <div class="countWrap">
-              <div class="count">
+              <!-- <div class="count"> -->
                 <span class="number">{{attendedCount.length}}</span>
-                <p class="smallHeadline">Attended Sessions</p>
-              </div>
+                <p class="smallHeadline">{{attendedCount?.length > 1 ? 'Attended Sessions':'Attended Session'}}</p>
+              <!-- </div> -->
             </div>
           </div>
           <!-- </div> -->
@@ -139,10 +139,10 @@
               </div>
             </div>
             <div class="countWrap">
-              <div class="count">
+              <!-- <div class="count"> -->
                 <span class="number">{{recordedCount.length}}</span>
-                <p class="smallHeadline">Recorded Video</p>
-              </div>
+                <p class="smallHeadline">{{recordedCount?.length > 1 ? 'Recorded Videos':'Recorded Video'}}</p>
+              <!-- </div> -->
             </div>
           </div>
           <!-- </div> -->
