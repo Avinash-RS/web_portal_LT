@@ -1,203 +1,305 @@
 <app-header></app-header>
 
+
 <div class="instructorLedWrapper">
-<div class="breadcrumbPading">
-  <ul class="breadcrumb">
-    <li><em (click)="getBack()" class="lxp-Go backArrow"></em> <span class="name">{{course?.name}}</span> <span class="bar">/</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type !== 'collegeconnect'">Live Interactions</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type == 'collegeconnect'">Industry Talk</span> </li>
-    <!-- <li *ngIf="userDetails.org_type !== 'collegeconnect'">Live Interactions</li>
+
+  <ng-container *ngIf="!showContent && !showSkeleton">
+    <div class="breadcrumbPading">
+      <ul class="breadcrumb">
+        <li><em (click)="getBack()" class="lxp-Go backArrow"></em> <span class="name">{{course?.name}}</span> <span
+            class="bar">/</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type !== 'collegeconnect'">Live
+            Interactions</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type == 'collegeconnect'">Industry
+            Talk</span> </li>
+        <!-- <li *ngIf="userDetails.org_type !== 'collegeconnect'">Live Interactions</li>
+            <li *ngIf="userDetails.org_type == 'collegeconnect'">Industry Talk</li> -->
+      </ul>
+      <div class="noCard" *ngIf="!showContent && !showSkeleton">
+        <figure>
+          <img alt="assignment" src="/assets/images/no-session.svg">
+        </figure>
+        <p> You have no sessions at the moment!</p>
+      </div>
+    </div>
+  </ng-container>
+
+   <!-- Left Side Panel ...  -->
+  <div class="leftContainer" *ngIf="showContent">
+    <div class="breadcrumbPading">
+      <ul class="breadcrumb">
+        <li><em (click)="getBack()" class="lxp-Go backArrow"></em> <span class="name">{{course?.name}}</span> <span
+            class="bar">/</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type !== 'collegeconnect'">Live
+            Interactions</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type == 'collegeconnect'">Industry
+            Talk</span> </li>
+        <!-- <li *ngIf="userDetails.org_type !== 'collegeconnect'">Live Interactions</li>
     <li *ngIf="userDetails.org_type == 'collegeconnect'">Industry Talk</li> -->
-  </ul>
-</div>
+      </ul>
+    </div>
 
-<!-- If No Records -->
-<div class="noCard" *ngIf="!showContent && !showSkeleton">
-  <figure>
-    <img alt="assignment" src="https://assets.lntedutech.com/application_images/no-session.svg">
-  </figure>
-  <p> You have no sessions at the moment!</p>
-</div>
-<!-- End of no records -->
+    <!-- If No Records -->
+    <!-- End of no records -->
 
-<div class="row marginFix" *ngIf="showContent">
-  <!-- Left Side Panel ... -->
-  <!-- <div class="col-lg-1 col-xl-1 col-md-1 col-sm-1 col-12"></div> -->
-  <div class="col-lg-7 col-xl-7 col-md-12 col-sm-12 col-12">
-    <div flex>
-      <!-- <div class="f_wt_600 f_size_16 display_flex">
-        <span class="pad-t-2">
-          {{course?.name}}
-        </span>
-        <mat-icon class="material-icons brdcrmb f_size_25 pointer" (click)="goBack()">chevron_right
-        </mat-icon>
-        <span class="pad-t-2">Instructor Led</span>
-      </div> -->
-      <mat-card class="imgLayout">
-        <!-- <div *ngIf='!listOfSessions?.length'>
-          <span class="sessionTitle"> No Activities Found..</span>
-        </div> -->
-        <div class="row d-flex justify-content-start" *ngIf='activityShow !== undefined'>
-          <div class="moduleImage">
-            <div flex >
-              <img style="height: 200px !important;width: 100%;" *ngIf="!activityShow?.activity_details.livethumbnail" alt="instructor" src="https://assets.lntedutech.com/application_images/instructor_image.png" />
-              <img style="height: 200px !important;width: 100% !important;" *ngIf="activityShow?.activity_details.livethumbnail" alt="instructor" [src]="activityShow?.activity_details.livethumbnail + blobKey" />
-            </div>
-          </div>
-          <div class="moduleContent">
-            
-            <div flex >
-              <span class="sessionTitle activity-name" matTooltip="{{activityShow?.activity_details.activityname}}">{{activityShow?.activity_details.activityname}}</span>
-              <div class="row">
-                <!-- <span>Held On</span> &nbsp;&nbsp; -->
-                <span class="sessionDate">Date: {{ activityShow?.activity_details.startdate | date: 'MMM d, y'}}</span>
-              </div>
-              <div class="row">
-                <span *ngIf="activityShow?.activity_details.activitytype != 'Recorded'" class="sessionduration">Duration: {{activityShow?.duration}}</span>
-                <span *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" class="sessionduration">Module: {{activityShow?.activity_details.modulename}}</span>
-                <!-- <span class="sessionTitle">Duration</span> -->
-              </div>
-              <!-- <div class="row" style="color: white; margin-top: 10px;">
-                
-              </div> -->
-              <div class="row" style="margin-top: 0px;">
-                <button class="actBtn" mat-raised-button *ngIf="activityShow?.status === 'On going' && activityShow?.activity_details.activitytype != 'Recorded'"
-                  (click)="getAction(activityShow.activity_details.link)">{{activityShow?.button}}</button>
-              </div>
-              <div class="row" style="margin-top: 0px; color: white !important;" *ngIf="activityShow?.activity_details.activitytype == 'Recorded'">
-                <button class="actBtn" mat-raised-button 
-                  (click)="videoPreview(videoRecorded,activityShow.activity_details.link)">{{activityShow?.button}}</button>
-              </div>
-            </div>
+    <!-- Left Side Panel ... -->
+    <!-- <div class="col-lg-1 col-xl-1 col-md-1 col-sm-1 col-12"></div> -->
+    <!-- <div class="col-lg-7 col-xl-7 col-md-12 col-sm-12 col-12">
+        <div flex> -->
 
+    <!--    <div class="f_wt_600 f_size_16 display_flex">
+            <span class="pad-t-2">
+              {{course?.name}}
+            </span>
+            <mat-icon class="material-icons brdcrmb f_size_25 pointer" (click)="goBack()">chevron_right
+            </mat-icon>
+            <span class="pad-t-2">Instructor Led</span>
+          </div> -->
+
+    <!-- <mat-card class="imgLayout"> -->
+
+    <!-- <div *ngIf='!listOfSessions?.length'>
+              <span class="sessionTitle"> No Activities Found..</span>
+            </div>  -->
+
+    <div class="row d-flex justify-content-start" *ngIf='activityShow !== undefined'>
+      <div class="moduleImage">
+        <div class="liveSession">
+          <figure>
+            <img class="sessionImage" *ngIf="!activityShow?.activity_details.livethumbnail" alt="instructor" src="../../../../assets/learner/instructor_image.png" />
+          </figure>
+          <figure>
+            <img class="sessionImage" *ngIf="activityShow?.activity_details.livethumbnail" alt="instructor" [src]="activityShow?.activity_details.livethumbnail + blobKey" />
+          </figure>
+          <div class="playButton">
+            <button mat-raised-button *ngIf="activityShow?.status === 'On going' && activityShow?.activity_details.activitytype != 'Recorded'" (click)="getAction(activityShow.activity_details.link)"><em _ngcontent-jjc-c10="" class="lxp-Play_Icon"></em> {{activityShow?.button}}</button>
+            <button mat-raised-button *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" (click)="videoPreview(videoRecorded,activityShow.activity_details.link)"><em _ngcontent-jjc-c10="" class="lxp-Play_Icon"></em> {{activityShow?.button}}</button>
           </div>
         </div>
-      </mat-card>
-      
-      <div class="row smallContainers">
-        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
-          <mat-card class="smallContainer1">
-            <mat-card-subtitle class="smallHeadline">Total Sessions</mat-card-subtitle>
-            <div class="row d-flex justify-content-between align-items-center p-t-10">
-              <span class="number">{{listOfSessions?.length}}</span>
-              <img mat-card-image src="https://assets.lntedutech.com/application_images/elearning.svg" alt="elearning">
+
+        <div class="sessionDetails">
+          <span class="sessionTitle activity-name"
+            matTooltip="{{activityShow?.activity_details.activityname}}">{{activityShow?.activity_details.activityname}}
+          </span>
+          <!-- <div class="flexStart d-flex justify-flex-start justify-content-between align-items-center"> -->
+          <div class="d-flex date-duration flexStart justify-flex-start justify-content-start">
+            <div class="timingDetails">
+              <span *ngIf="activityShow?.activity_details.activitytype != 'Recorded'" class="sessionDuration">
+                <em class="lxp-Clock"></em><span class="durationTitle">Duration:</span>
+                {{activityShow?.duration}}</span>
+              <span *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" class="sessionModule">
+                <em class="lxp-Todo_task"></em><span class="moduleTitle">Module:</span>
+                {{activityShow?.activity_details.modulename}}</span>
+              <!-- <span class="sessionTitle">Duration</span> -->
             </div>
-          </mat-card>
+            <div class="timingDetails">
+              <!-- <span>Held On</span> &nbsp;&nbsp; -->
+              <span class="sessionDate"><em class="lxp-Duration"></em><span class="dateTitle">Date:</span> {{
+                activityShow?.activity_details.startdate | date: 'dd/MM/yyyy hh:mm a'}}</span>
+            </div>
+          </div>
+          <!-- </div> -->
+        </div>
+
+        <div class="row smallContainers d-flex justify-content-between align-items-center">
+          <!-- <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4"> -->
+          <!-- <div class="tabContainers"> -->
+          <div class="smallContainer d-flex flexStart justify-flex-start justify-content-start align-items-center">
+            <div class="iconWrap">
+              <div class="LightBlueCircle">
+                <em class="lxp-video-tutorial-1"></em>
+              </div>
+            </div>
+            <div class="countWrap">
+              <!-- <div class="count"> -->
+                <span class="number">{{listOfSessions?.length}} </span> 
+                <p class="smallHeadline">{{listOfSessions?.length > 1 ? 'Total Sessions':'Total Session'}}</p>
+              <!-- </div> -->
+            </div>
+          </div>
+          <!-- </div> -->
+        
+          <!-- <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4"> -->
+          <div class="smallContainer d-flex flexStart justify-flex-start justify-content-start align-items-center">
+            <div class="iconWrap">
+              <div class="YellowGreenCircle">
+                <em class="lxp-students"></em>
+              </div>
+            </div>
+            <div class="countWrap">
+              <!-- <div class="count"> -->
+                <span class="number">{{attendedCount.length}}</span>
+                <p class="smallHeadline">{{attendedCount?.length > 1 ? 'Attended Sessions':'Attended Session'}}</p>
+              <!-- </div> -->
+            </div>
+          </div>
+          <!-- </div> -->
+        
+          <!-- <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4"> -->
+          <div class="smallContainer d-flex flexStart justify-flex-start justify-content-start align-items-center">
+            <div class="iconWrap">
+              <div class="FunBlueCircle">
+                <em class="lxp-recorded_videos"></em>
+              </div>
+            </div>
+            <div class="countWrap">
+              <!-- <div class="count"> -->
+                <span class="number">{{recordedCount.length}}</span>
+                <p class="smallHeadline">{{recordedCount?.length > 1 ? 'Recorded Videos':'Recorded Video'}}</p>
+              <!-- </div> -->
+            </div>
+          </div>
+          <!-- </div> -->
+        </div>
+
+          <!-- <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
+            <mat-card class="smallContainer">
+              <mat-card-subtitle class="smallHeadline">Attended Sessions</mat-card-subtitle>
+              <div class="row d-flex justify-content-between align-items-center p-t-10"> -->
+
+                <!--Already Commented-->
+                <!-- <span class="number" *ngIf="attendedSessions !== undefined">{{attendedSessions?.true}}</span> -->
+
+                <!-- <span class="number">{{attendedCount.length}}</span>
+                <img mat-card-image src="../../../../assets/learner/students.svg" alt="student">
+              </div>
+            </mat-card>
+          </div> -->
+
+          <!-- <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
+            <mat-card class="smallContainer">
+              <mat-card-subtitle class="smallHeadline">Recorded Sessions</mat-card-subtitle>
+              <div class="row d-flex justify-content-between align-items-center p-t-10">
+                <span class="number">{{recordedCount.length}}</span>
+                <img mat-card-image src="../../../../assets/learner/video-tutorial.svg" alt="video">
+              </div>
+            </mat-card>
+          </div> -->
+        
+
+        <div class="attendanceWrapper">
+          <!-- <div class="row sessionAttendance" *ngIf="sessionAttendance?.length">
+            <span class="tableHeadline">My Attendance</span>
+          </div> -->
+
+          <div class="row attendance-table" *ngIf="sessionAttendance?.length">
+            <table style="width: 100%;">
+              <tr class="tblheaderFont">
+                <th width="12%">Session #</th>
+                <th width="50%">Topic Name</th>
+                <th width="22%">Date</th>
+                <th width="6%">Attendance</th>
+              </tr>
+              <tbody>
+                <tr class="tblrow" *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
+                  <td>{{i+1}}</td>
+                  <td>{{atd.activity.activityname}}</td>
+                  <td>{{atd.activity.startdate | date: 'dd/MM/yyyy hh:mm a'}}</td>
+                  <td>
+                    <mat-icon #attended
+                      *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'"
+                      style="color: #52AE31;">check_circle_outline</mat-icon>
+                    <mat-icon
+                      *ngIf="atd.activity.attendencedetails.Attendence =='no' || atd.activity.attendencedetails.Attendence == 'No'"
+                      style="color: #E8542B;">highlight_off</mat-icon>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         
-        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
-          <mat-card class="smallContainer2">
-            <mat-card-subtitle class="smallHeadline">Attended Sessions</mat-card-subtitle>
-            <div class="row d-flex justify-content-between align-items-center p-t-10">
-              <!-- <span class="number" *ngIf="attendedSessions !== undefined">{{attendedSessions?.true}}</span> -->
-              <span class="number">{{attendedCount.length}}</span>
-              <img mat-card-image src="https://assets.lntedutech.com/application_images/students.svg" alt="student">
-            </div>
-          </mat-card>
-        </div>
-
-        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">
-          <mat-card class="smallContainer3">
-            <mat-card-subtitle class="smallHeadline">Recorded Sessions</mat-card-subtitle>
-            <div class="row d-flex justify-content-between align-items-center p-t-10">
-              <span class="number">{{recordedCount.length}}</span>
-              <img mat-card-image src="https://assets.lntedutech.com/application_images/video-tutorial.svg" alt="video">
-            </div>              
-          </mat-card>
-        </div>
       </div>
-
-      <div class="attendanceWrapper">
-        <div class="row sessionAttendance" *ngIf="sessionAttendance?.length">
-          <span class="tableHeadline">My Attendance</span>
-        </div>
-
-        <div class="row attendance-table" *ngIf="sessionAttendance?.length">
-          <table style="width: 100%;">
-            <tr class="tblheaderFont">
-              <th width="13%">Session #</th>
-              <th width="55%">Activity Name</th>
-              <th width="22%">Date</th>
-              <th width="10%">Present</th>
-            </tr>
-            <tbody>
-              <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
-                <td>{{i+1}}</td>
-                <td>{{atd.activity.activityname}}</td>
-                <td>{{atd.activity.startdate | date: 'dd/MM/yyyy , hh:mm a'}}</td>
-                <td>
-                  <mat-icon #attended *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'" style="color: green;">done</mat-icon>
-                  <mat-icon *ngIf="atd.activity.attendencedetails.Attendence =='no' || atd.activity.attendencedetails.Attendence == 'No'" style="color: red;">close</mat-icon>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
     </div>
   </div>
 
+
   <ng-template #attendanceDialog>
     <div class="">
-    <mat-icon class="closeModal-icon" (click)="closeModal()">close</mat-icon>
-    <h2 >My Attendance</h2>
-    <div class="row attendance-table">
-      <table>
-        <tr class="tblheaderFont">
-          <th>Session #</th>
-          <th >Activity Name</th>
-          <th>Date</th>
-          <th>Present?</th>
-        </tr>
-        <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
-          <td>{{i+1}}</td>
-          <td>{{atd.activity.activityname}}</td>
-          <td>{{atd.activity.startdate | date: 'dd/MM/yyyy , hh:mm a'}}</td>
-          <td>
-            <mat-icon *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'" style="color: green;">done</mat-icon>
-            <mat-icon *ngIf="atd.activity.attendencedetails.Attendence =='no' || atd.activity.attendencedetails.Attendence == 'No'" style="color: red;">close</mat-icon>
-          </td>
-        </tr>
-      </table>
-    </div>
+      <mat-icon class="closeModal-icon" (click)="closeModal()">close</mat-icon>
+      <h2>My Attendance</h2>
+      <div class="row attendance-table">
+        <table>
+          <tr class="tblheaderFont">
+            <th>Session #</th>
+            <th>Topic Name</th>
+            <th>Date</th>
+            <th>Attendance</th>
+          </tr>
+          <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
+            <td class="tableCol">{{i+1}}</td>
+            <td>{{atd.activity.activityname}}</td>
+            <td>{{atd.activity.startdate | date: 'dd/MM/yyyy hh:mm a'}}</td>
+            <td class="tableCol">
+              <mat-icon
+                *ngIf="atd.activity.attendencedetails.Attendence == 'yes' || atd.activity.attendencedetails.Attendence == 'Yes'"
+                style="color: #52AE31;">check_circle_outline</mat-icon>
+              <mat-icon
+                *ngIf="atd.activity.attendencedetails.Attendence =='no' || atd.activity.attendencedetails.Attendence == 'No'"
+                style="color: #E8542B;">highlight_off</mat-icon>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
   </ng-template>
-  
+
+
+
   <!-- Right Side Panel ...  -->
-  <div class="col-lg-5 col-xl-5 col-md-12 col-sm-12 col-12">
-    <div class="row course-list">
-      <div class="headingWrapper d-flex justify-content-between align-items-center">
-        <h3 class="headLine">Upcoming Sessions and Recorded Sessions</h3>
-        <button class="btn btn-light attandanceShow" *ngIf="sessionAttendance?.length" (click)="showModal(attendanceDialog)">Attendance</button>
+  <div class="rightContainer" *ngIf="showContent">
+    <!-- <div class="col-lg-5 col-xl-5 col-md-12 col-sm-12 col-12"> -->
+    <!-- <div class="row course-list"> -->
+      <div class="headingWrapper">
+        <!-- <div class="headingWrapper d-flex justify-content-between align-items-center"> -->
+        <!-- <h3 class="headLine">Upcoming Sessions and Recorded Sessions</h3> -->
+        <!-- <h3 class="headLine">Industry Talk Sessions</h3> -->
+        <span *ngIf="userDetails.org_type !== 'collegeconnect'"><h3 class="headLine">Live Interactions</h3></span> 
+        <span *ngIf="userDetails.org_type == 'collegeconnect'"><h3 class="headLine">Industry Talk</h3></span>
+        <button class="btn btn-light attandanceShow" *ngIf="sessionAttendance?.length"
+          (click)="showModal(attendanceDialog)">Attendance</button>
       </div>
-      <mat-nav-list class="listofSessionContainer" style="">
+      <!-- </div> -->
+      <mat-nav-list class="listofSessionContainer">
         <mat-list-item *ngFor="let los of listOfSessions" class="listofSessionCards">
           <mat-card class="sessionCard" (click)="useSession(los)">
             <div class="row d-flex justify-content-start">
               <div class="image-container">
-                <img *ngIf="los.activity_details.livethumbnail" alt="image" style="width: 100%; height: 150px !important;object-fit: inherit !important;" [src]="los.activity_details.livethumbnail + blobKey">
-                <img *ngIf="!los.activity_details.livethumbnail" alt="image" style="width: 100%; height: 150px !important;object-fit: inherit !important;" src="https://assets.lntedutech.com/application_images/instructor_image.png">
+                <img *ngIf="los.activity_details.livethumbnail" alt="image"
+                  style="width: 100%; height: 130px !important;object-fit: cover !important;"
+                  [src]="los.activity_details.livethumbnail + blobKey">
+                <img *ngIf="!los.activity_details.livethumbnail" alt="image"
+                  style="width: 100%; height: 130px !important;object-fit: cover !important;"
+                  src="../../../../assets/learner/instructor_image.png">
                 <!-- <div class="bottom-right" [ngClass]="los.status == 'Ongoing' ? 'organge' : los.status == 'UpComing' ? 'grey' : los.status == 'Completed' ? 'greenColor':''" >{{los.status}}</div> -->
-                <mat-icon class="rec-center" *ngIf="los.activity_details.activitytype == 'Recorded'"> play_circle</mat-icon>
-                <div *ngIf="los.status == 'On going' && los.activity_details.activitytype != 'Recorded'" class="bottom-right orange">Ongoing</div>
-                <div *ngIf="los.status == 'Up Coming' && los.activity_details.activitytype != 'Recorded'" class="bottom-right grey">Upcoming</div>
-                <div *ngIf="los.status == 'Completed' && los.activity_details.activitytype != 'Recorded'" class="bottom-right greenColor">{{los.status}}</div>
-                <div *ngIf="los.activity_details.activitytype == 'Recorded'" class="bottom-right rec-col">Recorded</div>
+                <mat-icon class="rec-center" *ngIf="los.activity_details.activitytype == 'Recorded'"> play_circle
+                </mat-icon>
+                <div *ngIf="los.status == 'On going' && los.activity_details.activitytype != 'Recorded'"
+                  class="bottom-right orange">Ongoing</div>
+                <div *ngIf="los.status == 'Up Coming' && los.activity_details.activitytype != 'Recorded'"
+                  class="bottom-right grey">Upcoming</div>
+                <div *ngIf="los.status == 'Completed' && los.activity_details.activitytype != 'Recorded'"
+                  class="bottom-right greenColor">{{los.status}}</div>
+                <div *ngIf="los.activity_details.activitytype == 'Recorded'" class="bottom-right rec-col">Recorded
+                </div>
               </div>
-              <div class="content-container">
-                <h4 class="activity-name" matTooltip="{{los.activity_details.activityname}}">{{los.activity_details.activityname}}</h4>
-                <h5><span>Date:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy'}}</h5>
-                <h5 *ngIf="los.activity_details.activitytype != 'Recorded'"><span>Duration:</span> {{los.duration}} </h5>
-                <h5 *ngIf="los.activity_details.activitytype == 'Recorded'"><span>Module:</span> {{los.activity_details.modulename}} </h5>
+              <div [ngClass]="los.isactive?'active':''" class="content-container">
+                <h4 class="activity-name" matTooltip="{{los.activity_details.activityname}}">
+                  {{los.activity_details.activityname}}</h4>
+                <h5><span class="hover-content">Date:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm a'}}
+                </h5>
+                <h5 *ngIf="los.activity_details.activitytype != 'Recorded'"><span class="hover-content">Duration:</span>
+                  {{los.duration}}
+                </h5>
+                <h5 *ngIf="los.activity_details.activitytype == 'Recorded'"><span class="hover-content">Module:</span>
+                  {{los.activity_details.modulename}} </h5>
               </div>
             </div>
           </mat-card>
         </mat-list-item>
       </mat-nav-list>
-    </div>
+    <!-- </div> -->
+    <!-- </div> -->
   </div>
+</div>
 
-</div>
-</div>
+
 
 <ng-template #videoRecorded>
   <!-- <div class="row">
@@ -216,26 +318,36 @@
 
 <div class="item" *ngIf="showSkeleton">
   <mat-card class="courseDetailSkeleton" style="box-shadow: none !important;">
-      <div class="breadcrumbskeleton">
-          <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', height: '35px', 'background-color': '#d2d1d1' }"></ngx-skeleton-loader>
+    <div class="breadcrumbskeleton">
+      <ngx-skeleton-loader count="1" animation="pulse"
+        [theme]="{ 'border-radius': '0', height: '35px', 'background-color': '#d2d1d1' }"></ngx-skeleton-loader>
+    </div>
+    <div class="d-flex justify-content-between">
+      <div class="item" style="width: 58%;">
+        <div class="">
+          <ngx-skeleton-loader [theme]="{'background-color': '#d2d1d1',height: '200px'}" animation="pulse">
+          </ngx-skeleton-loader>
+        </div>
+        <div class="d-flex justify-content-between">
+          <ngx-skeleton-loader count="1" animation="pulse"
+            [theme]="{ 'border-radius': '0', width: '230px', height: '108px', 'background-color': '#d2d1d1' }">
+          </ngx-skeleton-loader>
+          <ngx-skeleton-loader count="1" animation="pulse"
+            [theme]="{ 'border-radius': '0', width: '230px', height: '108px', 'background-color': '#d2d1d1' }">
+          </ngx-skeleton-loader>
+          <ngx-skeleton-loader count="1" animation="pulse"
+            [theme]="{ 'border-radius': '0', width: '230px', height: '108px', 'background-color': '#d2d1d1' }">
+          </ngx-skeleton-loader>
+        </div>
       </div>
-      <div class="d-flex justify-content-between">
-          <div class="item" style="width: 58%;">
-              <div class="">
-                  <ngx-skeleton-loader [theme]="{'background-color': '#d2d1d1',height: '200px'}" animation="pulse"></ngx-skeleton-loader>
-              </div>
-              <div class="d-flex justify-content-between">
-                  <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', width: '230px', height: '108px', 'background-color': '#d2d1d1' }"></ngx-skeleton-loader>
-                  <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', width: '230px', height: '108px', 'background-color': '#d2d1d1' }"></ngx-skeleton-loader>
-                  <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ 'border-radius': '0', width: '230px', height: '108px', 'background-color': '#d2d1d1' }"></ngx-skeleton-loader>
-              </div>
-          </div>
-          
-          <div class="item" style="width: 38%;">
-            <div>
-              <ngx-skeleton-loader count="5" animation="pulse" [theme]="{ display: 'block', 'background-color': '#d2d1d1', width: '100%' , height: '75px'}"></ngx-skeleton-loader>
-            </div>
-          </div>
+
+      <div class="item" style="width: 38%;">
+        <div>
+          <ngx-skeleton-loader count="5" animation="pulse"
+            [theme]="{ display: 'block', 'background-color': '#d2d1d1', width: '100%' , height: '75px'}">
+          </ngx-skeleton-loader>
+        </div>
       </div>
+    </div>
   </mat-card>
 </div>
