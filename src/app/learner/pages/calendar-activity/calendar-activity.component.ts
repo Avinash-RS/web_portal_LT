@@ -105,6 +105,7 @@ export class CalendarActivityComponent implements OnInit {
   userDetailes:any;
   customTooltipCondition = false
   CourseName: string;
+  calendarSkele: boolean =false;
   constructor(public learnerService: LearnerServicesService,private gs: GlobalServiceService,private router: Router) {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
                 if(!this.userDetailes?.is_password_updated){
@@ -155,6 +156,7 @@ export class CalendarActivityComponent implements OnInit {
 
   getCalendarCount(value?) {
     const monthValue = moment(value).format('YYYY-MM');
+    this.calendarSkele=true
     this.learnerService.getAllActivity(this.userDetails.user_id, monthValue).subscribe((result: any) => {
       const activityDetailsList = result.data.getcalenderactivity.message;
       activityDetailsList.forEach(element => {
@@ -182,7 +184,8 @@ export class CalendarActivityComponent implements OnInit {
             }            
           })
         })
-      },1000)
+        this.calendarSkele=false
+      },100)
     });
   }
   getLearnerActivity(view,selectedDate, day?: CalendarMonthViewDay){

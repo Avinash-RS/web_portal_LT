@@ -36,6 +36,7 @@ export class PasswordComponent implements OnInit {
   secretKey = "(!@#Passcode!@#)";
   currentYear = new Date().getFullYear();
   loader = false;
+  expiryMessage = "";
   constructor(public translate: TranslateService,
               private router: Router,
               private formBuilder: FormBuilder,
@@ -58,6 +59,7 @@ export class PasswordComponent implements OnInit {
                   //   }
                   // })
                   this.service.getUser(this.email).subscribe((data:any)=>{
+                    this.expiryMessage = data?.data?.getuserRecordbasedonSecretKey?.message ? data?.data?.getuserRecordbasedonSecretKey?.message :'';
                     var userValue = data?.data?.getuserRecordbasedonSecretKey?.data;
                     if(userValue['email']){
                       this.emailid =  userValue['email'];

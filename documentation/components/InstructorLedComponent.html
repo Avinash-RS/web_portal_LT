@@ -1,0 +1,4970 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>lxpfrontend documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">lxpfrontend documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  InstructorLedComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/learner/pages/instructor-led/instructor-led.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-instructor-led</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./instructor-led.component.scss,<br>../coursedetails/coursedetails.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./instructor-led.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#activityShow" >activityShow</a>
+                            </li>
+                            <li>
+                                <a href="#attended" >attended</a>
+                            </li>
+                            <li>
+                                <a href="#attendedCount" >attendedCount</a>
+                            </li>
+                            <li>
+                                <a href="#attendedSessions" >attendedSessions</a>
+                            </li>
+                            <li>
+                                <a href="#blobKey" >blobKey</a>
+                            </li>
+                            <li>
+                                <a href="#course" >course</a>
+                            </li>
+                            <li>
+                                <a href="#listOfSessions" >listOfSessions</a>
+                            </li>
+                            <li>
+                                <a href="#recordedCount" >recordedCount</a>
+                            </li>
+                            <li>
+                                <a href="#recordedSessions" >recordedSessions</a>
+                            </li>
+                            <li>
+                                <a href="#sessionAttendance" >sessionAttendance</a>
+                            </li>
+                            <li>
+                                <a href="#showContent" >showContent</a>
+                            </li>
+                            <li>
+                                <a href="#showSkeleton" >showSkeleton</a>
+                            </li>
+                            <li>
+                                <a href="#totalSessions" >totalSessions</a>
+                            </li>
+                            <li>
+                                <a href="#userDetails" >userDetails</a>
+                            </li>
+                            <li>
+                                <a href="#videoSource" >videoSource</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#closeModal" >closeModal</a>
+                            </li>
+                            <li>
+                                <a href="#getAction" >getAction</a>
+                            </li>
+                            <li>
+                                <a href="#getAttendance" >getAttendance</a>
+                            </li>
+                            <li>
+                                <a href="#getBack" >getBack</a>
+                            </li>
+                            <li>
+                                <a href="#getTimes" >getTimes</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onGoingSession" >onGoingSession</a>
+                            </li>
+                            <li>
+                                <a href="#showModal" >showModal</a>
+                            </li>
+                            <li>
+                                <a href="#useSession" >useSession</a>
+                            </li>
+                            <li>
+                                <a href="#videoPreview" >videoPreview</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, learnerService: <a href="../injectables/LearnerServicesService.html" target="_self">LearnerServicesService</a>, dialog: MatDialog, activeRoute: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>learnerService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/LearnerServicesService.html" target="_self" >LearnerServicesService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>dialog</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatDialog</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>activeRoute</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeModal"></a>
+                    <span class="name">
+                        <span ><b>closeModal</b></span>
+                        <a href="#closeModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeModal()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="164"
+                            class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:164</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAction"></a>
+                    <span class="name">
+                        <span ><b>getAction</b></span>
+                        <a href="#getAction"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAction(link)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="135"
+                            class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:135</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>link</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAttendance"></a>
+                    <span class="name">
+                        <span ><b>getAttendance</b></span>
+                        <a href="#getAttendance"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAttendance()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:53</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getBack"></a>
+                    <span class="name">
+                        <span ><b>getBack</b></span>
+                        <a href="#getBack"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getBack()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:49</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTimes"></a>
+                    <span class="name">
+                        <span ><b>getTimes</b></span>
+                        <a href="#getTimes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getTimes(endDate, startDate)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="139"
+                            class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:139</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>endDate</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>startDate</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:43</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onGoingSession"></a>
+                    <span class="name">
+                        <span ><b>onGoingSession</b></span>
+                        <a href="#onGoingSession"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onGoingSession()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="118"
+                            class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:118</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showModal"></a>
+                    <span class="name">
+                        <span ><b>showModal</b></span>
+                        <a href="#showModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showModal(attendanceDialog: TemplateRef<any>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="155"
+                            class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:155</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>attendanceDialog</td>
+                                    <td>
+                                            <code>TemplateRef&lt;any&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="useSession"></a>
+                    <span class="name">
+                        <span ><b>useSession</b></span>
+                        <a href="#useSession"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>useSession(los)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="109"
+                            class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:109</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>los</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="videoPreview"></a>
+                    <span class="name">
+                        <span ><b>videoPreview</b></span>
+                        <a href="#videoPreview"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>videoPreview(templateRef: TemplateRef<any>, e)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="168"
+                            class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:168</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>templateRef</td>
+                                    <td>
+                                            <code>TemplateRef&lt;any&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>e</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityShow"></a>
+                    <span class="name">
+                        <span ><b>activityShow</b></span>
+                        <a href="#activityShow"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="attended"></a>
+                    <span class="name">
+                        <span ><b>attended</b></span>
+                        <a href="#attended"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;attended&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="attendedCount"></a>
+                    <span class="name">
+                        <span ><b>attendedCount</b></span>
+                        <a href="#attendedCount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="attendedSessions"></a>
+                    <span class="name">
+                        <span ><b>attendedSessions</b></span>
+                        <a href="#attendedSessions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="blobKey"></a>
+                    <span class="name">
+                        <span ><b>blobKey</b></span>
+                        <a href="#blobKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>environment.blobKey</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="course"></a>
+                    <span class="name">
+                        <span ><b>course</b></span>
+                        <a href="#course"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="listOfSessions"></a>
+                    <span class="name">
+                        <span ><b>listOfSessions</b></span>
+                        <a href="#listOfSessions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="recordedCount"></a>
+                    <span class="name">
+                        <span ><b>recordedCount</b></span>
+                        <a href="#recordedCount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="recordedSessions"></a>
+                    <span class="name">
+                        <span ><b>recordedSessions</b></span>
+                        <a href="#recordedSessions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sessionAttendance"></a>
+                    <span class="name">
+                        <span ><b>sessionAttendance</b></span>
+                        <a href="#sessionAttendance"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showContent"></a>
+                    <span class="name">
+                        <span ><b>showContent</b></span>
+                        <a href="#showContent"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showSkeleton"></a>
+                    <span class="name">
+                        <span ><b>showSkeleton</b></span>
+                        <a href="#showSkeleton"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalSessions"></a>
+                    <span class="name">
+                        <span ><b>totalSessions</b></span>
+                        <a href="#totalSessions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:21</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userDetails"></a>
+                    <span class="name">
+                        <span ><b>userDetails</b></span>
+                        <a href="#userDetails"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="videoSource"></a>
+                    <span class="name">
+                        <span ><b>videoSource</b></span>
+                        <a href="#videoSource"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/learner/pages/instructor-led/instructor-led.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, TemplateRef,ViewChild, ElementRef } from &#x27;@angular/core&#x27;;
+import { MatDialog } from &#x27;@angular/material&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import { environment } from &#x27;@env/environment&#x27;;
+import * as moment from &#x27;moment&#x27;;
+import * as _ from &#x27;underscore&#x27;;
+import { LearnerServicesService } from &#x27;../../services/learner-services.service&#x27;;
+import { VideoPreviewModalComponent } from &#x27;../video-preview-modal/video-preview-modal.component&#x27;;
+
+@Component({
+  selector: &#x27;app-instructor-led&#x27;,
+  templateUrl: &#x27;./instructor-led.component.html&#x27;,
+  styleUrls: [&#x27;./instructor-led.component.scss&#x27;, &#x27;../coursedetails/coursedetails.component.scss&#x27;]
+})
+export class InstructorLedComponent implements OnInit {
+  blobKey &#x3D; environment.blobKey;
+  sessionAttendance: any;
+  listOfSessions: any;
+  course: any;
+  activityShow: any;
+  totalSessions: any;
+  recordedSessions: any;
+  attendedSessions: any;
+  attendedCount;
+  recordedCount;
+  videoSource;
+  showSkeleton;
+  showContent;
+  userDetails;
+  @ViewChild(&#x27;attended&#x27;) attended: ElementRef;
+
+  constructor(private router: Router,
+              private learnerService: LearnerServicesService,
+              private dialog: MatDialog,
+              private activeRoute: ActivatedRoute) {
+              // this.course &#x3D; (this.router.getCurrentNavigation() &amp;&amp; this.router.getCurrentNavigation().extras &amp;&amp;
+              //   this.router.getCurrentNavigation().extras.state &amp;&amp; this.router.getCurrentNavigation().extras.state.detail);
+                this.activeRoute.queryParams.subscribe(res &#x3D;&gt; {
+                  this.course &#x3D; res;
+                });
+  }
+
+  ngOnInit() {
+     this.userDetails &#x3D; JSON.parse(localStorage.getItem(&#x27;UserDetails&#x27;));
+    this.getAttendance();
+    // this.getSessionsList();
+  }
+
+  getBack() {
+    this.router.navigateByUrl(&#x27;/Learner/MyCourse&#x27;);
+  }
+
+  getAttendance() { // Http Call
+    this.showSkeleton &#x3D; true;
+    this.learnerService.getAttendanceByUsername(atob(this.course.id), this.userDetails.full_name, this.userDetails.user_id).subscribe(async res &#x3D;&gt; {
+      // tslint:disable-next-line:no-string-literal
+      this.showSkeleton &#x3D; false;
+      const data &#x3D; res.data[&#x27;getTopicAttendanceDetailsByUsername&#x27;][&#x27;data&#x27;];
+      this.listOfSessions &#x3D; data.Activity;
+      if(this.listOfSessions.length &gt; 0){
+        this.showContent &#x3D; true;
+      } else {
+        this.showContent &#x3D; false;
+      }
+      this.listOfSessions.sort((a,b)&#x3D;&gt;{
+        return +new Date(b.activity_details.startdate) - +new Date(a.activity_details.startdate);
+      })
+      this.listOfSessions.forEach((item,i)&#x3D;&gt;{
+        if(item.status &#x3D;&#x3D;&#x3D; &quot;On going&quot; &amp;&amp; item.activity_details.activitytype &#x3D;&#x3D;&#x3D; &quot;Live Classroom&quot;){
+          this.listOfSessions.splice(i, 1);
+          this.listOfSessions.unshift(item);
+        }
+      })
+      this.recordedCount &#x3D; this.listOfSessions.filter(element &#x3D;&gt; {
+        return element.activity_details.activitytype.toLowerCase() &#x3D;&#x3D; &quot;recorded&quot;
+      });
+      this.sessionAttendance &#x3D; data.Attendance;
+      this.attendedCount &#x3D; this.sessionAttendance.filter(element &#x3D;&gt; {
+        return element.activity.attendencedetails.Attendence.toLowerCase() &#x3D;&#x3D; &quot;yes&quot;
+      });
+      for (const los of this.listOfSessions) {
+        los.duration &#x3D; this.getTimes(los.activity_details.enddate, los.activity_details.startdate);
+      }
+      if (this.listOfSessions.length) {
+        this.onGoingSession();
+      }
+      this.attendedSessions &#x3D; _.countBy(this.sessionAttendance, x &#x3D;&gt; x.activity.attendencedetails.Attendence &#x3D;&#x3D;&#x3D; &#x27;yes&#x27;);
+      this.useSession(this.listOfSessions[0]);
+    });
+  }
+
+  // getSessionsList() { // Http Call
+  //   const date &#x3D; &#x27;2020-10-27&#x27;; // new Date();
+  //   this.learnerService.getReadLeanerActivity(userid, date, courseid).subscribe(async res &#x3D;&gt; {
+  //   const date &#x3D; new Date();
+  //   this.learnerService.getReadLeanerActivity(userDetails.user_id, date, this.course.course_id).subscribe(async res &#x3D;&gt; {
+  //     this.listOfSessions &#x3D; res.data[&#x27;get_read_learner_activity&#x27;][&#x27;message&#x27;];
+  //     this.totalSessions &#x3D; this.listOfSessions.length;
+  //     this.recordedSessions &#x3D; this.listOfSessions.length;s
+  //     for (const los of this.listOfSessions) {
+  //       los.duration &#x3D; await this.getTimes(los.activity_details.enddate, los.activity_details.startdate);
+  //     }
+  //     if (this.listOfSessions.length) {
+  //       this.onGoingSession();
+  //     }
+  //   });
+  // }
+
+  useSession(los) {
+    this.activityShow &#x3D; los;
+    if (los.status &#x3D;&#x3D;&#x3D; &#x27;On going&#x27;) {
+      this.activityShow.button &#x3D; &#x27;Join Now&#x27;;
+    } else if (los.status !&#x3D;&#x3D; &#x27;Up Coming&#x27;) {
+      this.activityShow.button &#x3D; &#x27;Play Now&#x27;;
+    }
+  }
+
+  onGoingSession() {
+    const ongoing &#x3D; this.listOfSessions.find(x &#x3D;&gt; x.status &#x3D;&#x3D;&#x3D; &#x27;Ongoing&#x27;);
+    if (ongoing &#x3D;&#x3D;&#x3D; undefined) {
+      const upcoming &#x3D; this.listOfSessions.find(x &#x3D;&gt; x.status &#x3D;&#x3D;&#x3D; &#x27;UpComing&#x27;);
+      if (upcoming &#x3D;&#x3D;&#x3D; undefined) {
+        this.activityShow &#x3D; this.listOfSessions[0];
+        this.activityShow.button &#x3D; &#x27;&#x27;;
+      } else {
+        this.activityShow &#x3D; upcoming;
+        // this.activityShow.button &#x3D; &#x27;&#x27;;
+      }
+    } else {
+      this.activityShow &#x3D; ongoing;
+      this.activityShow.button &#x3D; &#x27;Join Now&#x27;;
+    }
+  }
+
+  getAction(link) {
+    window.open(link, &#x27;_blank&#x27;);
+  }
+
+  getTimes(endDate, startDate) {
+    const start &#x3D; new Date(startDate);
+    const end &#x3D; new Date(endDate);
+    const ms &#x3D; moment(end, &#x27;DD/MM/YYYY HH:mm:ss&#x27;).diff(moment(start, &#x27;DD/MM/YYYY HH:mm:ss&#x27;));
+    const d &#x3D; moment.duration(ms);
+    let time;
+    if (d.hours() &#x3D;&#x3D;&#x3D; 0 &amp;&amp; d.minutes() !&#x3D;&#x3D; 0) {
+      time &#x3D; d.minutes() + &#x27; minutes&#x27;;
+    } else if (d.hours() !&#x3D;&#x3D; 0 &amp;&amp; d.minutes() &#x3D;&#x3D;&#x3D; 0) {
+      time &#x3D; d.hours() + &#x27; hour &#x27;;
+    } else {
+      time &#x3D; d.hours() + &#x27; hour &#x27; + d.minutes() + &#x27; minutes&#x27;;
+    }
+    return time;
+  }
+
+  showModal(attendanceDialog: TemplateRef&lt;any&gt;){
+    this.dialog.open(attendanceDialog, {
+      width: &#x27;90%&#x27;,
+      height: &#x27;50%&#x27;,
+      panelClass: &#x27;popupContainer&#x27;,
+      closeOnNavigation: true,
+      disableClose: false,
+    });
+  }
+  closeModal(){
+    this.dialog.closeAll();
+  }
+
+  videoPreview(templateRef: TemplateRef&lt;any&gt;, e) {
+    this.videoSource &#x3D; e + this.blobKey
+    this.dialog.open(templateRef, {
+      width: &#x27;90%&#x27;,
+      height: &#x27;95%&#x27;,
+      panelClass: &#x27;videoPopupContainer&#x27;,
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;app-header&gt;&lt;/app-header&gt;
+
+&lt;div class&#x3D;&quot;instructorLedWrapper&quot;&gt;
+&lt;div class&#x3D;&quot;breadcrumbPading&quot;&gt;
+  &lt;ul class&#x3D;&quot;breadcrumb&quot;&gt;
+    &lt;li&gt;&lt;em (click)&#x3D;&quot;getBack()&quot; class&#x3D;&quot;lxp-Go backArrow&quot;&gt;&lt;/em&gt; &lt;span class&#x3D;&quot;name&quot;&gt;{{course?.name}}&lt;/span&gt; &lt;span class&#x3D;&quot;bar&quot;&gt;/&lt;/span&gt; &lt;span class&#x3D;&quot;breadCrumbTopic&quot; *ngIf&#x3D;&quot;userDetails.org_type !&#x3D;&#x3D; &#x27;collegeconnect&#x27;&quot;&gt;Live Interactions&lt;/span&gt; &lt;span class&#x3D;&quot;breadCrumbTopic&quot; *ngIf&#x3D;&quot;userDetails.org_type &#x3D;&#x3D; &#x27;collegeconnect&#x27;&quot;&gt;Industry Talk&lt;/span&gt; &lt;/li&gt;
+    &lt;!-- &lt;li *ngIf&#x3D;&quot;userDetails.org_type !&#x3D;&#x3D; &#x27;collegeconnect&#x27;&quot;&gt;Live Interactions&lt;/li&gt;
+    &lt;li *ngIf&#x3D;&quot;userDetails.org_type &#x3D;&#x3D; &#x27;collegeconnect&#x27;&quot;&gt;Industry Talk&lt;/li&gt; --&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;!-- If No Records --&gt;
+&lt;div class&#x3D;&quot;noCard&quot; *ngIf&#x3D;&quot;!showContent &amp;&amp; !showSkeleton&quot;&gt;
+  &lt;figure&gt;
+    &lt;img alt&#x3D;&quot;assignment&quot; src&#x3D;&quot;https://assets.lntedutech.com/application_images/no-session.svg&quot;&gt;
+  &lt;/figure&gt;
+  &lt;p&gt; You have no sessions at the moment!&lt;/p&gt;
+&lt;/div&gt;
+&lt;!-- End of no records --&gt;
+
+&lt;div class&#x3D;&quot;row marginFix&quot; *ngIf&#x3D;&quot;showContent&quot;&gt;
+  &lt;!-- Left Side Panel ... --&gt;
+  &lt;!-- &lt;div class&#x3D;&quot;col-lg-1 col-xl-1 col-md-1 col-sm-1 col-12&quot;&gt;&lt;/div&gt; --&gt;
+  &lt;div class&#x3D;&quot;col-lg-7 col-xl-7 col-md-12 col-sm-12 col-12&quot;&gt;
+    &lt;div flex&gt;
+      &lt;!-- &lt;div class&#x3D;&quot;f_wt_600 f_size_16 display_flex&quot;&gt;
+        &lt;span class&#x3D;&quot;pad-t-2&quot;&gt;
+          {{course?.name}}
+        &lt;/span&gt;
+        &lt;mat-icon class&#x3D;&quot;material-icons brdcrmb f_size_25 pointer&quot; (click)&#x3D;&quot;goBack()&quot;&gt;chevron_right
+        &lt;/mat-icon&gt;
+        &lt;span class&#x3D;&quot;pad-t-2&quot;&gt;Instructor Led&lt;/span&gt;
+      &lt;/div&gt; --&gt;
+      &lt;mat-card class&#x3D;&quot;imgLayout&quot;&gt;
+        &lt;!-- &lt;div *ngIf&#x3D;&#x27;!listOfSessions?.length&#x27;&gt;
+          &lt;span class&#x3D;&quot;sessionTitle&quot;&gt; No Activities Found..&lt;/span&gt;
+        &lt;/div&gt; --&gt;
+        &lt;div class&#x3D;&quot;row d-flex justify-content-start&quot; *ngIf&#x3D;&#x27;activityShow !&#x3D;&#x3D; undefined&#x27;&gt;
+          &lt;div class&#x3D;&quot;moduleImage&quot;&gt;
+            &lt;div flex &gt;
+              &lt;img style&#x3D;&quot;height: 200px !important;width: 100%;&quot; *ngIf&#x3D;&quot;!activityShow?.activity_details.livethumbnail&quot; alt&#x3D;&quot;instructor&quot; src&#x3D;&quot;https://assets.lntedutech.com/application_images/instructor_image.png&quot; /&gt;
+              &lt;img style&#x3D;&quot;height: 200px !important;width: 100% !important;&quot; *ngIf&#x3D;&quot;activityShow?.activity_details.livethumbnail&quot; alt&#x3D;&quot;instructor&quot; [src]&#x3D;&quot;activityShow?.activity_details.livethumbnail + blobKey&quot; /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;moduleContent&quot;&gt;
+            
+            &lt;div flex &gt;
+              &lt;span class&#x3D;&quot;sessionTitle activity-name&quot; matTooltip&#x3D;&quot;{{activityShow?.activity_details.activityname}}&quot;&gt;{{activityShow?.activity_details.activityname}}&lt;/span&gt;
+              &lt;div class&#x3D;&quot;row&quot;&gt;
+                &lt;!-- &lt;span&gt;Held On&lt;/span&gt; &amp;nbsp;&amp;nbsp; --&gt;
+                &lt;span class&#x3D;&quot;sessionDate&quot;&gt;Date: {{ activityShow?.activity_details.startdate | date: &#x27;MMM d, y&#x27;}}&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;row&quot;&gt;
+                &lt;span *ngIf&#x3D;&quot;activityShow?.activity_details.activitytype !&#x3D; &#x27;Recorded&#x27;&quot; class&#x3D;&quot;sessionduration&quot;&gt;Duration: {{activityShow?.duration}}&lt;/span&gt;
+                &lt;span *ngIf&#x3D;&quot;activityShow?.activity_details.activitytype &#x3D;&#x3D; &#x27;Recorded&#x27;&quot; class&#x3D;&quot;sessionduration&quot;&gt;Module: {{activityShow?.activity_details.modulename}}&lt;/span&gt;
+                &lt;!-- &lt;span class&#x3D;&quot;sessionTitle&quot;&gt;Duration&lt;/span&gt; --&gt;
+              &lt;/div&gt;
+              &lt;!-- &lt;div class&#x3D;&quot;row&quot; style&#x3D;&quot;color: white; margin-top: 10px;&quot;&gt;
+                
+              &lt;/div&gt; --&gt;
+              &lt;div class&#x3D;&quot;row&quot; style&#x3D;&quot;margin-top: 0px;&quot;&gt;
+                &lt;button class&#x3D;&quot;actBtn&quot; mat-raised-button *ngIf&#x3D;&quot;activityShow?.status &#x3D;&#x3D;&#x3D; &#x27;On going&#x27; &amp;&amp; activityShow?.activity_details.activitytype !&#x3D; &#x27;Recorded&#x27;&quot;
+                  (click)&#x3D;&quot;getAction(activityShow.activity_details.link)&quot;&gt;{{activityShow?.button}}&lt;/button&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;row&quot; style&#x3D;&quot;margin-top: 0px; color: white !important;&quot; *ngIf&#x3D;&quot;activityShow?.activity_details.activitytype &#x3D;&#x3D; &#x27;Recorded&#x27;&quot;&gt;
+                &lt;button class&#x3D;&quot;actBtn&quot; mat-raised-button 
+                  (click)&#x3D;&quot;videoPreview(videoRecorded,activityShow.activity_details.link)&quot;&gt;{{activityShow?.button}}&lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/mat-card&gt;
+      
+      &lt;div class&#x3D;&quot;row smallContainers&quot;&gt;
+        &lt;div class&#x3D;&quot;col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4&quot;&gt;
+          &lt;mat-card class&#x3D;&quot;smallContainer1&quot;&gt;
+            &lt;mat-card-subtitle class&#x3D;&quot;smallHeadline&quot;&gt;Total Sessions&lt;/mat-card-subtitle&gt;
+            &lt;div class&#x3D;&quot;row d-flex justify-content-between align-items-center p-t-10&quot;&gt;
+              &lt;span class&#x3D;&quot;number&quot;&gt;{{listOfSessions?.length}}&lt;/span&gt;
+              &lt;img mat-card-image src&#x3D;&quot;https://assets.lntedutech.com/application_images/elearning.svg&quot; alt&#x3D;&quot;elearning&quot;&gt;
+            &lt;/div&gt;
+          &lt;/mat-card&gt;
+        &lt;/div&gt;
+        
+        &lt;div class&#x3D;&quot;col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4&quot;&gt;
+          &lt;mat-card class&#x3D;&quot;smallContainer2&quot;&gt;
+            &lt;mat-card-subtitle class&#x3D;&quot;smallHeadline&quot;&gt;Attended Sessions&lt;/mat-card-subtitle&gt;
+            &lt;div class&#x3D;&quot;row d-flex justify-content-between align-items-center p-t-10&quot;&gt;
+              &lt;!-- &lt;span class&#x3D;&quot;number&quot; *ngIf&#x3D;&quot;attendedSessions !&#x3D;&#x3D; undefined&quot;&gt;{{attendedSessions?.true}}&lt;/span&gt; --&gt;
+              &lt;span class&#x3D;&quot;number&quot;&gt;{{attendedCount.length}}&lt;/span&gt;
+              &lt;img mat-card-image src&#x3D;&quot;https://assets.lntedutech.com/application_images/students.svg&quot; alt&#x3D;&quot;student&quot;&gt;
+            &lt;/div&gt;
+          &lt;/mat-card&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4&quot;&gt;
+          &lt;mat-card class&#x3D;&quot;smallContainer3&quot;&gt;
+            &lt;mat-card-subtitle class&#x3D;&quot;smallHeadline&quot;&gt;Recorded Sessions&lt;/mat-card-subtitle&gt;
+            &lt;div class&#x3D;&quot;row d-flex justify-content-between align-items-center p-t-10&quot;&gt;
+              &lt;span class&#x3D;&quot;number&quot;&gt;{{recordedCount.length}}&lt;/span&gt;
+              &lt;img mat-card-image src&#x3D;&quot;https://assets.lntedutech.com/application_images/video-tutorial.svg&quot; alt&#x3D;&quot;video&quot;&gt;
+            &lt;/div&gt;              
+          &lt;/mat-card&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;attendanceWrapper&quot;&gt;
+        &lt;div class&#x3D;&quot;row sessionAttendance&quot; *ngIf&#x3D;&quot;sessionAttendance?.length&quot;&gt;
+          &lt;span class&#x3D;&quot;tableHeadline&quot;&gt;My Attendance&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;row attendance-table&quot; *ngIf&#x3D;&quot;sessionAttendance?.length&quot;&gt;
+          &lt;table style&#x3D;&quot;width: 100%;&quot;&gt;
+            &lt;tr class&#x3D;&quot;tblheaderFont&quot;&gt;
+              &lt;th width&#x3D;&quot;13%&quot;&gt;Session #&lt;/th&gt;
+              &lt;th width&#x3D;&quot;55%&quot;&gt;Activity Name&lt;/th&gt;
+              &lt;th width&#x3D;&quot;22%&quot;&gt;Date&lt;/th&gt;
+              &lt;th width&#x3D;&quot;10%&quot;&gt;Present&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;tbody&gt;
+              &lt;tr *ngFor&#x3D;&quot;let atd of sessionAttendance; let i &#x3D; index&quot; [attr.data-index]&#x3D;&quot;i&quot;&gt;
+                &lt;td&gt;{{i+1}}&lt;/td&gt;
+                &lt;td&gt;{{atd.activity.activityname}}&lt;/td&gt;
+                &lt;td&gt;{{atd.activity.startdate | date: &#x27;dd/MM/yyyy , hh:mm a&#x27;}}&lt;/td&gt;
+                &lt;td&gt;
+                  &lt;mat-icon #attended *ngIf&#x3D;&quot;atd.activity.attendencedetails.Attendence &#x3D;&#x3D; &#x27;yes&#x27; || atd.activity.attendencedetails.Attendence &#x3D;&#x3D; &#x27;Yes&#x27;&quot; style&#x3D;&quot;color: green;&quot;&gt;done&lt;/mat-icon&gt;
+                  &lt;mat-icon *ngIf&#x3D;&quot;atd.activity.attendencedetails.Attendence &#x3D;&#x3D;&#x27;no&#x27; || atd.activity.attendencedetails.Attendence &#x3D;&#x3D; &#x27;No&#x27;&quot; style&#x3D;&quot;color: red;&quot;&gt;close&lt;/mat-icon&gt;
+                &lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/tbody&gt;
+          &lt;/table&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;ng-template #attendanceDialog&gt;
+    &lt;div class&#x3D;&quot;&quot;&gt;
+    &lt;mat-icon class&#x3D;&quot;closeModal-icon&quot; (click)&#x3D;&quot;closeModal()&quot;&gt;close&lt;/mat-icon&gt;
+    &lt;h2 &gt;My Attendance&lt;/h2&gt;
+    &lt;div class&#x3D;&quot;row attendance-table&quot;&gt;
+      &lt;table&gt;
+        &lt;tr class&#x3D;&quot;tblheaderFont&quot;&gt;
+          &lt;th&gt;Session #&lt;/th&gt;
+          &lt;th &gt;Activity Name&lt;/th&gt;
+          &lt;th&gt;Date&lt;/th&gt;
+          &lt;th&gt;Present?&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr *ngFor&#x3D;&quot;let atd of sessionAttendance; let i &#x3D; index&quot; [attr.data-index]&#x3D;&quot;i&quot;&gt;
+          &lt;td&gt;{{i+1}}&lt;/td&gt;
+          &lt;td&gt;{{atd.activity.activityname}}&lt;/td&gt;
+          &lt;td&gt;{{atd.activity.startdate | date: &#x27;dd/MM/yyyy , hh:mm a&#x27;}}&lt;/td&gt;
+          &lt;td&gt;
+            &lt;mat-icon *ngIf&#x3D;&quot;atd.activity.attendencedetails.Attendence &#x3D;&#x3D; &#x27;yes&#x27; || atd.activity.attendencedetails.Attendence &#x3D;&#x3D; &#x27;Yes&#x27;&quot; style&#x3D;&quot;color: green;&quot;&gt;done&lt;/mat-icon&gt;
+            &lt;mat-icon *ngIf&#x3D;&quot;atd.activity.attendencedetails.Attendence &#x3D;&#x3D;&#x27;no&#x27; || atd.activity.attendencedetails.Attendence &#x3D;&#x3D; &#x27;No&#x27;&quot; style&#x3D;&quot;color: red;&quot;&gt;close&lt;/mat-icon&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/ng-template&gt;
+  
+  &lt;!-- Right Side Panel ...  --&gt;
+  &lt;div class&#x3D;&quot;col-lg-5 col-xl-5 col-md-12 col-sm-12 col-12&quot;&gt;
+    &lt;div class&#x3D;&quot;row course-list&quot;&gt;
+      &lt;div class&#x3D;&quot;headingWrapper d-flex justify-content-between align-items-center&quot;&gt;
+        &lt;h3 class&#x3D;&quot;headLine&quot;&gt;Upcoming Sessions and Recorded Sessions&lt;/h3&gt;
+        &lt;button class&#x3D;&quot;btn btn-light attandanceShow&quot; *ngIf&#x3D;&quot;sessionAttendance?.length&quot; (click)&#x3D;&quot;showModal(attendanceDialog)&quot;&gt;Attendance&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;mat-nav-list class&#x3D;&quot;listofSessionContainer&quot; style&#x3D;&quot;&quot;&gt;
+        &lt;mat-list-item *ngFor&#x3D;&quot;let los of listOfSessions&quot; class&#x3D;&quot;listofSessionCards&quot;&gt;
+          &lt;mat-card class&#x3D;&quot;sessionCard&quot; (click)&#x3D;&quot;useSession(los)&quot;&gt;
+            &lt;div class&#x3D;&quot;row d-flex justify-content-start&quot;&gt;
+              &lt;div class&#x3D;&quot;image-container&quot;&gt;
+                &lt;img *ngIf&#x3D;&quot;los.activity_details.livethumbnail&quot; alt&#x3D;&quot;image&quot; style&#x3D;&quot;width: 100%; height: 150px !important;object-fit: inherit !important;&quot; [src]&#x3D;&quot;los.activity_details.livethumbnail + blobKey&quot;&gt;
+                &lt;img *ngIf&#x3D;&quot;!los.activity_details.livethumbnail&quot; alt&#x3D;&quot;image&quot; style&#x3D;&quot;width: 100%; height: 150px !important;object-fit: inherit !important;&quot; src&#x3D;&quot;https://assets.lntedutech.com/application_images/instructor_image.png&quot;&gt;
+                &lt;!-- &lt;div class&#x3D;&quot;bottom-right&quot; [ngClass]&#x3D;&quot;los.status &#x3D;&#x3D; &#x27;Ongoing&#x27; ? &#x27;organge&#x27; : los.status &#x3D;&#x3D; &#x27;UpComing&#x27; ? &#x27;grey&#x27; : los.status &#x3D;&#x3D; &#x27;Completed&#x27; ? &#x27;greenColor&#x27;:&#x27;&#x27;&quot; &gt;{{los.status}}&lt;/div&gt; --&gt;
+                &lt;mat-icon class&#x3D;&quot;rec-center&quot; *ngIf&#x3D;&quot;los.activity_details.activitytype &#x3D;&#x3D; &#x27;Recorded&#x27;&quot;&gt; play_circle&lt;/mat-icon&gt;
+                &lt;div *ngIf&#x3D;&quot;los.status &#x3D;&#x3D; &#x27;On going&#x27; &amp;&amp; los.activity_details.activitytype !&#x3D; &#x27;Recorded&#x27;&quot; class&#x3D;&quot;bottom-right orange&quot;&gt;Ongoing&lt;/div&gt;
+                &lt;div *ngIf&#x3D;&quot;los.status &#x3D;&#x3D; &#x27;Up Coming&#x27; &amp;&amp; los.activity_details.activitytype !&#x3D; &#x27;Recorded&#x27;&quot; class&#x3D;&quot;bottom-right grey&quot;&gt;Upcoming&lt;/div&gt;
+                &lt;div *ngIf&#x3D;&quot;los.status &#x3D;&#x3D; &#x27;Completed&#x27; &amp;&amp; los.activity_details.activitytype !&#x3D; &#x27;Recorded&#x27;&quot; class&#x3D;&quot;bottom-right greenColor&quot;&gt;{{los.status}}&lt;/div&gt;
+                &lt;div *ngIf&#x3D;&quot;los.activity_details.activitytype &#x3D;&#x3D; &#x27;Recorded&#x27;&quot; class&#x3D;&quot;bottom-right rec-col&quot;&gt;Recorded&lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;content-container&quot;&gt;
+                &lt;h4 class&#x3D;&quot;activity-name&quot; matTooltip&#x3D;&quot;{{los.activity_details.activityname}}&quot;&gt;{{los.activity_details.activityname}}&lt;/h4&gt;
+                &lt;h5&gt;&lt;span&gt;Date:&lt;/span&gt; {{los.activity_details.startdate | date: &#x27;dd/MM/yyyy&#x27;}}&lt;/h5&gt;
+                &lt;h5 *ngIf&#x3D;&quot;los.activity_details.activitytype !&#x3D; &#x27;Recorded&#x27;&quot;&gt;&lt;span&gt;Duration:&lt;/span&gt; {{los.duration}} &lt;/h5&gt;
+                &lt;h5 *ngIf&#x3D;&quot;los.activity_details.activitytype &#x3D;&#x3D; &#x27;Recorded&#x27;&quot;&gt;&lt;span&gt;Module:&lt;/span&gt; {{los.activity_details.modulename}} &lt;/h5&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/mat-card&gt;
+        &lt;/mat-list-item&gt;
+      &lt;/mat-nav-list&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;ng-template #videoRecorded&gt;
+  &lt;!-- &lt;div class&#x3D;&quot;row&quot;&gt;
+    &lt;div class&#x3D;&quot;col-12&quot;&gt;
+      &lt;button mat-mini-fab class&#x3D;&quot;close-buttonVideo&quot;&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt; --&gt;
+  &lt;div class&#x3D;&quot;videoContainer&quot;&gt;
+    &lt;div class&#x3D;&quot;closeBtn&quot; (click)&#x3D;&quot;closeModal()&quot;&gt;
+      &lt;em class&#x3D;&quot;lxp-Close download-icon&quot;&gt;&lt;/em&gt;
+    &lt;/div&gt;
+    &lt;app-video-player [url]&#x3D;&quot;videoSource&quot;&gt;&lt;/app-video-player&gt;
+  &lt;/div&gt;
+&lt;/ng-template&gt;
+
+&lt;div class&#x3D;&quot;item&quot; *ngIf&#x3D;&quot;showSkeleton&quot;&gt;
+  &lt;mat-card class&#x3D;&quot;courseDetailSkeleton&quot; style&#x3D;&quot;box-shadow: none !important;&quot;&gt;
+      &lt;div class&#x3D;&quot;breadcrumbskeleton&quot;&gt;
+          &lt;ngx-skeleton-loader count&#x3D;&quot;1&quot; animation&#x3D;&quot;pulse&quot; [theme]&#x3D;&quot;{ &#x27;border-radius&#x27;: &#x27;0&#x27;, height: &#x27;35px&#x27;, &#x27;background-color&#x27;: &#x27;#d2d1d1&#x27; }&quot;&gt;&lt;/ngx-skeleton-loader&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;d-flex justify-content-between&quot;&gt;
+          &lt;div class&#x3D;&quot;item&quot; style&#x3D;&quot;width: 58%;&quot;&gt;
+              &lt;div class&#x3D;&quot;&quot;&gt;
+                  &lt;ngx-skeleton-loader [theme]&#x3D;&quot;{&#x27;background-color&#x27;: &#x27;#d2d1d1&#x27;,height: &#x27;200px&#x27;}&quot; animation&#x3D;&quot;pulse&quot;&gt;&lt;/ngx-skeleton-loader&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;d-flex justify-content-between&quot;&gt;
+                  &lt;ngx-skeleton-loader count&#x3D;&quot;1&quot; animation&#x3D;&quot;pulse&quot; [theme]&#x3D;&quot;{ &#x27;border-radius&#x27;: &#x27;0&#x27;, width: &#x27;230px&#x27;, height: &#x27;108px&#x27;, &#x27;background-color&#x27;: &#x27;#d2d1d1&#x27; }&quot;&gt;&lt;/ngx-skeleton-loader&gt;
+                  &lt;ngx-skeleton-loader count&#x3D;&quot;1&quot; animation&#x3D;&quot;pulse&quot; [theme]&#x3D;&quot;{ &#x27;border-radius&#x27;: &#x27;0&#x27;, width: &#x27;230px&#x27;, height: &#x27;108px&#x27;, &#x27;background-color&#x27;: &#x27;#d2d1d1&#x27; }&quot;&gt;&lt;/ngx-skeleton-loader&gt;
+                  &lt;ngx-skeleton-loader count&#x3D;&quot;1&quot; animation&#x3D;&quot;pulse&quot; [theme]&#x3D;&quot;{ &#x27;border-radius&#x27;: &#x27;0&#x27;, width: &#x27;230px&#x27;, height: &#x27;108px&#x27;, &#x27;background-color&#x27;: &#x27;#d2d1d1&#x27; }&quot;&gt;&lt;/ngx-skeleton-loader&gt;
+              &lt;/div&gt;
+          &lt;/div&gt;
+          
+          &lt;div class&#x3D;&quot;item&quot; style&#x3D;&quot;width: 38%;&quot;&gt;
+            &lt;div&gt;
+              &lt;ngx-skeleton-loader count&#x3D;&quot;5&quot; animation&#x3D;&quot;pulse&quot; [theme]&#x3D;&quot;{ display: &#x27;block&#x27;, &#x27;background-color&#x27;: &#x27;#d2d1d1&#x27;, width: &#x27;100%&#x27; , height: &#x27;75px&#x27;}&quot;&gt;&lt;/ngx-skeleton-loader&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+      &lt;/div&gt;
+  &lt;/mat-card&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./instructor-led.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &quot;variable&quot;;
+.instructorLedWrapper {
+    padding: 0;
+    height: 100%;
+    background-color: #f2f2f2;
+}
+.formLayout {
+    margin-top: 3%;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+.breadcrumbPading {
+    padding: 20px 0;
+}
+.breadcrumb {
+    margin: 0;
+    padding: 0 20px !important;
+    background-color: transparent !important;
+    li {
+      color: #333333;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: normal;
+      position: relative;
+      margin-right: 0;
+      .bar {
+        color: #c02222 !important;
+        display: inline-block;
+        margin: 0 10px;
+      }
+      em {
+        display: inline-block;
+        transform: scale(-1);
+        color: #666666;
+        margin-right: 8px;
+        cursor: pointer;
+      }
+    //   &amp;::after {
+    //     content: &quot;/&quot;;
+    //     position: absolute;
+    //     right: -10px;
+    //     top: auto;
+    //     bottom: auto;
+    //     color: #c02222;
+    //   }
+    .name {
+        color: #999999;
+    }
+      &amp;:last-child {
+          &amp;::after {
+              content: &#x27;&#x27;;
+          }
+      }
+    }
+  }
+.imgLayout {
+    background-color: #346f83;
+    // height: 288px;
+    border-radius: unset;
+    padding: 0;
+    @media only screen and (max-width: 600px) {
+        box-shadow: none;
+    }
+    .moduleImage {
+        width: 50%;
+        padding: 15px 0 15px 15px;
+        @media only screen and (max-width: 600px) {
+            width: 100%;
+            padding: 15px;
+        }
+    }
+    .moduleContent {
+        background-color: #346f83;
+        width: 47%;
+        margin-left: 3%;
+        padding: 15px 15px 15px 0;
+        @media only screen and (max-width: 600px) {
+            width: 100%;
+            padding: 10px;
+            background-color: #ffffff;
+            margin-left: 0;
+            border: 1px solid #cdcdcd;
+        }
+    }
+}
+.p-t-20{
+    padding-top: 20px !important;
+}
+.smallContainers {
+    margin: 25px -15px 0 -15px !important;
+    @media only screen and (max-width: 600px) {
+        margin: 15px -15px 0 -15px !important;
+    }
+}
+.sessionAttendance {
+    margin-top: 25px;
+}
+.image-container{
+    position: relative;
+    text-align: center;
+    width: 50%;
+    @media only screen and (max-width: 576px) {
+        width: 40%;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+.content-container {
+    width: 47%;
+    margin-left: 3%;
+    padding: 10px 10px 10px 0;
+    @media only screen and (max-width: 576px) {
+        width: 58%;
+        margin-left: 2%;
+    }
+    h4 {
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #454545;
+        line-height: normal;
+        @media only screen and (max-width: 576px) {
+            margin-top: 10px;
+        }
+    }
+    h5 {
+        line-height: 24px;
+        margin: 0;
+    }
+    h5 {
+        line-height: 20px;
+        font-size: 14px;
+        span {
+            color: #666666;
+        }
+    }
+}
+
+.rec-center{
+    position: absolute !important;
+    color: white !important;
+    font-size: 55px !important;
+    left: 37% !important;
+    top: 31% !important;
+}
+.bottom-right {
+    position: absolute;
+    bottom: 0px;
+    color: white;
+    right: 0;
+    padding: 4px;
+    &amp;.orange {
+        background: #FFA04E;
+    }
+    &amp;.grey {
+        background: #6A6A6A;
+        color: white !important;
+    }
+    &amp;.greenColor {
+        background: #0C781B;
+    }
+    &amp;.rec-col{
+        background: #4e9ce1;
+    }
+}
+.course-list {
+    // height: 500px;
+    // overflow-x: hidden;
+    // overflow-y: scroll;
+    @media only screen and (max-width: 576px) {
+        border-top: 1px solid #cdcdcd;
+        margin-top: 15px;
+    }
+    @media only screen and (min-width: 992px) {
+        margin-left: 5% !important;
+    }
+}
+.attendanceWrapper {
+    @media only screen and (max-width: 576px) {
+        display: none;
+    }
+}
+.attandanceShow {
+    display: block;
+    background-color: transparent;
+    border-color: #C02222 !important;
+    border-radius: initial;
+    border-width: 2px;
+    padding: 2px 10px;
+    color: black !important;
+    font-size: 14px;
+    &amp;:active {
+        background-color: transparent !important;
+    }
+    &amp;:focus {
+        box-shadow: none;
+    }
+    @media only screen and (min-width: 577px) {
+        display: none;
+    }
+}
+.headingWrapper {
+    width: 100%;
+    @media only screen and (max-width: 576px) {
+        margin: 10px 0 15px 0;
+    }
+}
+.sessionCard {
+    border: 1px solid #dddddd;
+    // height: 170px;
+    width: -webkit-fill-available;
+    /* background-color: #388E3C; */
+    /* margin-left: 20%; */
+    border-radius: unset;
+    color: black;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 4px;
+    box-shadow: 0px 2px 5px 0px rgba(50, 50, 50, 0.25);
+    @media only screen and (max-width: 991px) {
+        box-shadow: none;
+        margin-bottom: 15px;
+    }
+}
+
+.smallContainer1 {
+    // height: 96px;
+    /* width: 223px; */
+    /* background-color: orangered; */
+    /* margin-left: 15px; */
+    border-radius: unset;
+    background: #e2663d 0% 0% no-repeat padding-box;
+    font-size: 20px;
+    @media only screen and (max-width: 576px) {
+        padding: 10px;
+    }
+}
+
+.smallContainer2 {
+    // height: 96px;
+    /* width: 223px; */
+    background: #0c781b 0% 0% no-repeat padding-box;
+    /* margin-left: 9.5%; */
+    border-radius: unset;
+    font-size: 20px;
+    @media only screen and (max-width: 576px) {
+        padding: 10px;
+    }
+}
+
+.smallContainer3 {
+    // height: 96px;
+    /* width: 223px; */
+    background: #399ce0 0% 0% no-repeat padding-box;
+    /* margin-left: 9.5%; */
+    border-radius: unset;
+    font-size: 20px;
+    @media only screen and (max-width: 576px) {
+        padding: 10px;
+    }
+}
+
+.mat-card-subtitle {
+    color: white;
+}
+.attendance-table{
+    overflow: auto;
+    table {
+        /* background: #ffffff 0% 0% no-repeat padding-box;
+        border: 0.5px solid #898989;
+        opacity: 1; */
+        /* margin-left: 15px; */
+        /* padding-right: 10px;
+        padding-left: 15px; */
+        // min-width: 320px;
+        width: 100%;
+        tr {
+            th {
+                padding: 10px;
+                background-color: #346f83;
+                color: #ffffff;
+                &amp;:first-child {
+                    @media only screen and (max-width: 576px) {
+                        display: none;
+                    }
+                }
+            }
+        }
+        tbody {
+            tr {
+                &amp;:nth-child(even) {
+                    background-color: #ffffff;
+                }
+                &amp;:nth-child(odd) {
+                    background-color: #eef4f6;
+                }
+            }
+        }
+        tr {
+            td {
+                padding: 7px;
+                line-height: normal;
+                &amp;:first-child {
+                    @media only screen and (max-width: 576px) {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+    td,
+    th {
+        // background: #ffffff 0% 0% no-repeat padding-box;
+        border: 0.5px solid #898989;
+        opacity: 1;
+        text-align: center;
+    }
+}
+
+// .listofSessionCards {
+//     @media only screen and (max-width: 768px) {
+//         width: 48%;
+//     }
+// }
+.redHover:hover {
+    color: $lxp-theme-green !important;
+}
+
+.backIc {
+    width: 10px !important;
+    margin-left: 10px !important;
+}
+.headLine {
+    text-align: left;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+    margin: 0 0 15px 0;
+    @media only screen and (max-width: 992px) {
+        margin: 30px 0 15px 0;
+    }
+    @media only screen and (max-width: 576px) {
+        margin: 0;
+    }
+}
+
+.headLine1 {
+    text-align: left;
+    letter-spacing: 0px;
+    color: #f5f5f5;
+    opacity: 1;
+}
+
+.gap {
+    margin-right: 10.6%;
+}
+
+.tableHeadline {
+    text-align: left;
+    letter-spacing: 0px;
+    color: #5c6873;
+    opacity: 1;
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.smallHeadline {
+    text-align: left;
+    letter-spacing: 0px;
+    color: #ffffff;
+    opacity: 1;
+    margin-bottom: 15px;
+    @media only screen and (max-width: 576px)  {
+        margin-bottom: 8px;
+    }
+}
+
+.sessionTitle {
+    text-align: left;
+    letter-spacing: 0px;
+    color: #f5f5f5;
+    opacity: 1;
+    margin-bottom: 15px;
+    display: inline-block;
+    width: 100%;
+    text-overflow: ellipsis;
+    display: inline-block;
+    /* margin-left: 2%; */
+    @media only screen and (max-width: 600px) {
+        color: #454545;
+        margin-bottom: 0;
+    }
+}
+.sessionDate, 
+.sessionduration {
+    line-height: 24px;
+    color: #ffffff;
+    @media only screen and (max-width: 600px) {
+        color: #454545;
+        margin-top: 10px;
+    }
+}
+
+.tblheaderFont {
+    text-align: left;
+    letter-spacing: 0px;
+    color: #5c6873;
+    opacity: 1;
+}
+
+// No Card
+.noCard {
+    text-align: center;
+    figure {
+      margin: 45px 0 15px 0;
+    }
+    p {
+      font-size: 16px;
+      color: #000000;
+      font-weight: 400;
+      line-height: normal;
+      margin-bottom: 30px ​!important;
+    }
+  }
+.mat-card-image {
+    width: 45px;
+    height: 31px;
+    margin: 0;
+    // margin-left: 80%;
+    // margin-top: -30px;
+    @media only screen and (max-width: 576px)  {
+        width: 25px;
+        height: 24px;
+    }
+}
+
+.number {
+    /* margin-left: 2px;
+    margin-top: -20px; */
+    // margin-top: -12%;
+    text-align: left;
+    letter-spacing: 0px;
+    color: #ffffff;
+    opacity: 1;
+    @media only screen and (max-width: 576px)  {
+    }
+}
+
+.actBtn {
+    background: #c02222 0% 0% no-repeat padding-box;
+    border-radius: 18px;
+    opacity: 1;
+    color: white;
+    margin-top: 15px;
+}
+.noRecords {
+    display: flex;
+    justify-content: center;
+    padding: 0 15px;
+}
+.noData {
+    text-align: left;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+    box-shadow: none;
+    font-size: 20px;
+}
+
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+.noSessionCard {
+    margin-top: 13%;
+    // background: #F7FBFF 0% 0% no-repeat padding-box;
+    // box-shadow: 0px 3px 6px #00000029;
+    // border: 0.5px solid #707070;
+    border-radius: 0;
+    opacity: 1;
+    text-align: center;
+    padding-bottom: 8px !important;
+    padding-right: 0px !important;
+
+    background: #F5F5F5 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 4px #00000029;
+    opacity: 1;
+    border-left: 3px solid #ffc107bf !important;
+    width: fit-content;
+}
+
+.noSessionImg {
+    width: 45px;
+    margin-left: 0%;
+}
+
+.mar-t-12{
+    margin-top: 12px !important;
+    margin-bottom: 12px !important;
+}
+.pad-t-2{
+    padding-top: 2px !important;
+}
+
+.noSessionCard .mat-card-image:first-child {
+    margin-top: 0px;
+}
+
+.course-list .mat-nav-list {
+    width: 100%;
+}
+::ng-deep.videoPopupContainer {
+    height: auto !important;
+    @media only screen and (min-width: 1140px) {
+        height: 90% !important;
+    }
+    @media only screen and (min-width: 1540px) {
+        height: auto !important;
+    }
+    .mat-dialog-container {
+        position: relative;
+        padding: 20px !important;
+    }
+    .videoContainer {
+        width: 100%;
+        height: 100%;
+        .closeBtn {
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 35px;
+            height: 35px;
+            z-index: 9;
+            background: #c02222;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            em {
+                color: #ffffff;
+            }
+        }
+    }
+}
+//   .close-buttonVideo {
+//     background: #C02222 !important;
+//     float: right;
+//     top: -6px;
+//     position: relative;
+//     height: 35px;
+//     width: 35px;
+//   }
+  .listofSessionContainer {
+    width: 100% !important;
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.activity-name{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}</code></pre>
+                <p class="comment">
+                    <code>../coursedetails/coursedetails.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &quot;variable&quot;;
+.p-xy-10 {
+  padding: 10px;
+}
+.m-t-10 {
+  margin-top: 10px;
+}
+.backarrow {
+  color: black;
+}
+.passColor {
+  color: #0e7d12;
+}
+.processColor {
+  color: #ffa04e;
+}
+.disableColor {
+  color: rgba(128, 128, 128, 0.575);
+}
+.backcolor {
+  color: #999999;
+}
+.coursePlayerContainer {
+  &amp;.ITcourses {
+    position: relative;
+    .titlebar  {
+      position: absolute;
+      top: 25px;
+      left: -15px;
+      z-index: 9;
+      .titleBack {
+        padding: 0;
+        background-color: transparent;
+      }
+      .breadcrumb {
+        li {
+          em {
+            color: #ffffff;
+          }
+          span {
+            display: none;
+          }
+        }
+      }
+    }
+    .contentHeight {
+      height: calc(100vh - 119px);
+      .tocSize {
+        .leftTocContent {
+          height: calc(100vh - 149px);
+        }
+      }
+      .videoPlayer {
+        .toccollapsed {
+          display: none;
+        }
+      }
+    }
+  }
+}
+.contentHeight {
+  background: #ffffff;
+  position: relative;
+  height: calc(100vh - 111px);
+  flex-wrap: wrap;
+  @media only screen and (min-width: 720px) {
+    height: calc(100vh - 111px);
+  }
+  @media only screen and (min-width: 992px) {
+    height: calc(100vh - 124px);
+  }
+  @media only screen and (min-width: 1140px) {
+    height: calc(100vh - 111px);
+  }
+  @media only screen and (min-width: 1440px) {
+    // height: calc(100vh - 119px);
+  }
+
+  // .hamburgerPosition {
+  //   //position: relative;
+  //   background-color: #ffcc00;
+  //   border-radius: 50%;
+  //   width: 25px;
+  //   height: 25px;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   .lxp-HamburgerMenu {
+  //     cursor: pointer;
+  //     font-size: 18px;
+  //     display: inline-block;
+  //   }
+  // }
+  // .position-fixed-burgur {
+  //   position: fixed;
+  //   left: 10px;
+  //   z-index: 9;
+  // }
+  .tocSize {
+    // overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 30%;
+    margin-left: 0;
+    margin-right: 0;
+    transition: all 0.3s linear;
+    position: relative;
+    z-index: 8;
+    background-color: #fff;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+    @media only screen and (max-width: 767px) {
+      width: 100%;
+    }
+    &amp;.drawersOpen {
+      margin-left: -30%;
+      margin-right: 0;
+      @media only screen and (max-width: 767px) {
+        margin-left: -100%;
+      }
+    }
+    .filterSection {
+      position: relative;
+      width: 100%;
+      right: 0;
+      top: 0;
+      padding: 0 10px 0 10px;
+      background-color: #ffffff;
+      text-align: right;
+    }
+    .leftTocContent {
+      overflow: auto;
+      height: calc(100vh - 219px);
+      margin: 10px 0;
+      // @media only screen and (min-width: 568px) {
+      //   height: calc(100vh - 219px);
+      // }
+      @media only screen and (min-width: 720px) {
+        height: calc(100vh - 191px);
+      }
+    }
+  }
+  .videoPlayer {
+    position: relative;
+    transition: all 0.3s linear;
+    width: 69.7%;
+    @media only screen and (max-width: 767px) {
+      width: 0;
+    }
+    &amp;.fullWidth {
+      width: 100%;
+      height: 100%;
+    }
+    &amp;.halfWidth {
+      @media only screen and (max-width: 767px) {
+        display: none;
+      }
+    }
+    .toccollapsed {
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: white;
+      padding: 10px 10px 10px 0;
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+      z-index: 9;
+      em {
+        font-size: 20px;
+        color: #888888;
+      }
+      @media only screen and (min-width: 720px) {
+        display: none;
+      }
+    }
+    .player {
+      width: 100%;
+      border: none;
+      height: 100% !important;
+    }
+  }
+  
+  .understoodBookmark {
+    padding: 10px 10px 10px 5px;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.10);
+    position: relative;
+    z-index: 9;
+    background-color: #ffffff;
+    &amp;.No {
+      display: none !important;
+      @media only screen and (min-width:720px) {
+        display: flex !important;
+      }
+    }
+    &amp;.Yes {
+      padding: 10px 10px 10px 0px;
+      .popupContent {
+        &amp;::before {
+          display: none;
+        }
+      }
+    }
+    .popupContent {
+      width: 100%;
+      flex-wrap: wrap;
+      position: relative;
+      &amp;::before {
+        position: absolute;
+        width: 1px;
+        background-color: #bebebe;
+        height: 90%;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+        @media only screen and (min-width: 720px) {
+          content: &#x27;&#x27;;
+        }
+      }
+      &amp;.widthChange {
+        width: 40%;
+      }
+      .moduleTopicWrapper {
+        width: 100%;
+        @media only screen and (min-width: 720px) {
+          width: auto;
+        }
+        .currentModuleTopic {
+          width: 90%;
+          @media only screen and (min-width: 720px) {
+            width: auto;
+          }
+        }
+        .dotMenu {
+          width: 10%;
+          @media only screen and (min-width: 720px) {
+            width: auto;
+          }
+        }
+      }
+      @media only screen and (min-width: 992px) {
+        width: 40%;
+      }
+      @media only screen and (min-width: 1140px) {
+        // width: 30%;
+        width: auto;
+      }
+      .wrapper {
+        width: 100%;
+        margin-top: 0;
+        @media only screen and (min-width: 720px) {
+          width: auto;
+        }
+      }
+      .abtCourse, .resourcesTab, .downloadCode {
+        display: inline-flex;
+        align-items: center;
+        font-size: 18px;
+        padding: 0 10px;
+        cursor: pointer;
+        &amp;:hover {
+          span {
+            color: #000000;
+          }
+        }
+        @media only screen and (min-width: 720px) {
+          padding: 0 20px 0 10px;
+        }
+        @media only screen and (min-width: 992px) {
+          padding: 0 20px;
+        }
+        span {
+          font-size: 12px;
+          font-weight: 400;
+          color: #666666;
+          line-height: normal;
+          margin-left: 7px;
+        }
+        em {
+          line-height: 27px;
+        }
+      }
+      .abtCourse {
+        em {
+          color: #00BCEF;
+        }
+      }
+      .resourcesTab {
+        em {
+          color: #DA1467;
+        }
+      }
+      .downloadCode {
+        em {
+          color: #004684;
+          font-size: 15px;
+        }
+      }
+      .dotMenu {
+        margin-left: 10px;
+        display: inline-flex;
+        button {
+          background-color: transparent;
+          border: 0;
+          cursor: pointer;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: transparent;
+          transition: background 0.3s linear;
+          &amp;:hover {
+            background: #f0f0f0;
+          }
+          em {
+            font-size: 18px;
+            color: #848484;
+          }
+        }
+      }
+      .currentModuleTopic {
+        // position: absolute;
+        // left: 0;
+        // bottom: 50px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: #F9F9F9;
+        padding: 7px 15px 7px 10px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.25);
+        .curentVideoWeek {
+          background-color: #DDDDDD;
+          border-radius: 3px;
+          padding: 5px 7px;
+          color: #6B6B6B;
+          font-size: 11px;
+          font-weight: 400;
+          line-height: normal;
+          display: inline-flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          overflow: hidden;
+          &amp;::before {
+            content: &#x27;&#x27;;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background-image: linear-gradient(to top, #00bcef, #00c0db, #00c1b6, #00be83, #4eb749);
+          }
+          span {
+            color: #181919;
+            font-weight: 700;
+            display: block;
+            margin-top: 2px;
+          }
+        }
+        .currentVideoModuleTopic {
+          margin-left: 10px;
+          h5, h4 {
+            margin: 0;
+            line-height: normal;
+          }
+          h5 {
+            color: #333333;
+            font-size: 10px;
+            font-weight: 400;
+          }
+          h4 {
+            color: #000000;
+            font-size: 11px;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+    .upSkill {
+      button {
+        border: 1px solid #08558C;
+        border-radius: 4px;
+        padding: 6px 9px;
+        margin-left: 10px;
+        display: inline-flex;
+        align-items: center;
+        background-color: #f9f9f9;
+        transition: background-color 0.3s ease-in-out;
+        @media only screen and (min-width: 720px) {
+          padding: 6px 12px;
+          margin-left: 15px;
+        }
+        &amp;:hover {
+          background-color: #f0f0f0;
+        }
+        em {
+          color: #004684;
+          font-weight: normal;
+          font-size: 13px;
+        }
+        span {
+          color: #565656;
+          font-size: 13px;
+          font-weight: 400;
+          margin-left: 5px;
+          line-height: normal;
+          &amp;.bold {
+            font-weight: 700;
+            color: #000000;
+          }
+        }
+        &amp;.practiceOnline {
+          color: white !important;
+          background-color: #08558c !important;
+          span{
+            color: white !important;
+          }
+          em {
+            color: white !important;
+            font-size: 15px;
+          }
+        }
+      }
+    }
+    .wrapppper {
+      flex-wrap: wrap;
+      margin-top: 20px;
+      justify-content: center;
+      width: 100%;
+      @media only screen and (min-width: 720px) {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        margin-top: 0;
+      }
+      @media only screen and (min-width: 992px) {
+        width: auto;
+      }
+      @media only screen and (min-width: 1140px) {
+        justify-content: flex-end;
+      }
+    }
+    .notesBookmarks {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: right;
+      margin: 10px 0 10px 20px;
+      position: relative;
+      flex-wrap: wrap;
+      &amp;::before {
+        position: absolute;
+        width: 1px;
+        background-color: #bebebe;
+        height: 90%;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+        @media only screen and (min-width: 720px) {
+          content: &#x27;&#x27;;
+        }
+      }
+      &amp;.widthChange {
+        width: 60%;
+      }
+      @media only screen and (min-width: 720px) {
+        flex-wrap: nowrap;
+      }
+      @media only screen and (min-width: 992px) {
+        width: auto;
+        justify-content: flex-end;
+        margin: 0 0 0 20px;
+      }
+      @media only screen and (min-width: 1140px) {
+        width: auto;
+      }
+      button {
+        border: 1px solid #08558C;
+        border-radius: 4px;
+        padding: 6px 9px;
+        margin-left: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f9f9f9;
+        transition: background-color 0.3s ease-in-out;
+        @media only screen and (min-width: 720px) {
+          padding: 6px 12px;
+          margin-left: 15px;
+        }
+        &amp;:hover {
+          background-color: #f0f0f0;
+        }
+        em {
+          color: #004684;
+          font-weight: normal;
+          font-size: 13px;
+        }
+        span {
+          color: #565656;
+          font-size: 13px;
+          font-weight: 400;
+          margin-left: 5px;
+          line-height: normal;
+          &amp;.bold {
+            font-weight: 700;
+            color: #000000;
+          }
+        }
+      }
+      .askAQuestion, .bookmarkBtn {
+        width: 45%;
+        @media only screen and (min-width: 720px) {
+          width: auto;
+        }
+      }
+      .askAQuestion {
+        em {
+          color: #ffb74d;
+        }
+      }
+      .smile, .sad {
+        font-size: 13px;
+        font-weight: 400;
+        line-height: normal;
+        margin: 0 0 10px 10px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 45%;
+        @media only screen and (min-width: 720px) {
+          margin: 0 0 0 20px;
+          width: auto;
+        }
+        &amp;.nofill {
+          color:#666666;
+          font-weight: 400;
+          &amp;:hover {
+            color: #000000;
+          }
+        }
+        em {
+          padding-right: 7px;
+          font-size: 15px;
+        }
+      }
+      .smile {
+        &amp;.fillcol {
+          color: #49AE31 !important;
+          font-weight: 500;
+        }
+      }
+      .sad {
+        &amp;.fillcol {
+          color:#FF5722 !important;
+          font-weight: 500;
+        }
+      }
+    }
+
+    button {
+      &amp;.btn-outline-success:hover {
+        color: #0e7d12 !important;
+        background-color: #f0f0f0;
+        border: 1px solid #0e7d12;
+        i {
+          color: #0e7d12;
+        }
+      }
+      &amp;.btn-outline-success:active:focus {
+        color: #0e7d12 !important;
+        background-color: #f0f0f0;
+        border: 1px solid #0e7d12;
+        i {
+          color: #0e7d12;
+        }
+      }
+      &amp;.btn-outline-success {
+        color: #0e7d12 !important;
+        background-color: #f0f0f0;
+        border: 1px solid #0e7d12;
+        font-weight: 700;
+        i {
+          color: #0e7d12;
+        }
+      }
+      &amp;.btn-outline-danger {
+        color: #c20303 !important;
+        background-color: #f0f0f0;
+        border: 1px solid #c20303;
+        font-weight: 700;
+        i {
+          color: #c20303;
+        }
+      }
+      &amp;.btn-outline-danger:hover {
+        color: #c20303;
+        background-color: #f0f0f0;
+        border: 1px solid #c20303;
+        i {
+          color: #c20303;
+        }
+      }
+      &amp;.btn-outline-danger:active:focus {
+        color: #c20303;
+        background-color: #f0f0f0;
+        border: 1px solid #c20303;
+        i {
+          color: #c20303;
+        }
+      }
+      i {
+        font-size: 15px;
+        color: #000000;
+        display: inline-block;
+        vertical-align: text-bottom;
+        margin-right: 3px;
+      }
+    }
+  }
+  .understoodButton {
+    button {
+      margin-right: 10px;
+    }
+  }
+}
+::ng-deep div.tocSize::-webkit-scrollbar {
+  width: 5px !important;
+}
+::ng-deep.tocSize .mat-stepper-vertical {
+  background-color: #fcfcfc !important;
+}
+// .afterHover {
+//     overflow: y;
+//     height: auto;
+// }
+
+// .beforeHover {
+//     overflow: hidden;
+//     height: auto;
+//     @media only screen and (max-width: 991px) {
+//         overflow: auto;
+//     }
+// }
+
+.tocTitle {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: normal;
+  padding: 4px 6px 3px 6px;
+  color: #6b6b6b;
+  background-color: #DDDDDD;
+  border-radius: 2px;
+}
+.colorBlack {
+  color: #666666;
+}
+::ng-deep.progressBar {
+  .mat-progress-bar {
+    height: 5px;
+    border-radius: 5px;
+    width: 90%;
+  }
+  .mat-progress-bar-buffer {
+    background-color: #C9C9C9;
+  }
+  .mat-progress-bar-fill::after {
+    background-color: #39B54A;
+  }
+}
+.tocSubTitle {
+  font-size: 15px;
+  font-weight: normal;
+  color: #666666;
+  margin-bottom: 0px;
+  cursor: pointer;
+  padding: 5px 0 5px 5px;
+  margin: 0;
+  position: relative;
+  flex-wrap: wrap;
+  &amp;.tocSubSubtitle {
+    flex-wrap: nowrap;
+    .statusColor {
+      width: 5%;
+      position: relative;
+      @media only screen and (min-width: 720px) {
+        width: 8%;
+      }
+      @media only screen and (min-width: 992px) {
+        width: 5%;
+      }
+      .passColor, .processColor, .greyColor {
+        border-radius: 50%;
+        width: 13px;
+        height: 13px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: normal;
+        position: relative;
+        left: 1px;
+        top: -4px;
+        background-color: white;
+        background-image: none;
+      }
+      .passColor {
+        border: 1px solid #39b54a;
+        em {
+          color: #39b54a;
+          font-size: 5px;
+          line-height: normal;
+        }
+      }
+      .processColor {
+        border: 1px solid #f7941e;
+      }
+      .greyColor {
+        border: 1px solid #C9C9C9;
+      }
+    }
+    .subModuleExpandCollapse {
+      width: 5%;
+      @media only screen and (min-width: 720px) {
+        width: 8%;
+      }
+      @media only screen and (min-width: 992px) {
+        width: 5%;
+      }
+      em {
+        color: #5E5E5E;
+      }
+    }
+    .topicName {
+      width: 88%;
+      margin-left: 2%;
+      @media only screen and (min-width: 720px) {
+        width: 82%;
+      }
+      @media only screen and (min-width: 992px) {
+        width: 88%;
+      }
+      @media only screen and (min-width: 1540px) {
+        margin-left: 0;
+      }
+      h4 {
+        font-weight: 500;
+      }
+    }
+  }
+  .statusColor {
+    width: 5%;
+    position: relative;
+    @media only screen and (min-width: 720px) {
+      width: 8%;
+    }
+    @media only screen and (min-width: 992px) {
+      width: 5%;
+    }
+    .passColor, .processColor, .greyColor {
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: normal;
+      position: relative;
+      top: -3px;
+      em {
+        color: #ffffff;
+        font-size: 5px;
+        line-height: normal;
+      }
+    }
+    .passColor {
+      background-image: linear-gradient(to right top, #39b54a, #53ba46, #68be43, #7bc241, #8dc63f);
+    }
+    .processColor {
+      background-image: linear-gradient(to top, #f7941e, #fbaa19, #fdc01a, #fcd723, #f9ed32);
+    }
+    .greyColor {
+      background-color: #C9C9C9;
+    }
+  }
+  &amp;.titleSelected {
+    .topicName {
+      h4 {
+        font-weight: 700;
+      }
+    }
+  }
+  .topicName {
+    width: 73%;
+    margin-left: 2%;
+    @media only screen and (min-width: 720px) {
+      width: 70%;
+    }
+    @media only screen and (min-width: 992px) {
+      width: 73%;
+    }
+    @media only screen and (min-width: 1540px) {
+      margin-left: 0;
+    }
+    h4 {
+      color: #5B5B5B;
+      font-size: 15px;
+      font-weight: 700;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 95%;
+      display: inline-block;
+      margin: 0;
+      line-height: normal;
+    }
+  }
+  .progressBar {
+    width: 18%;
+    margin-left: 2%;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    span {
+      display: inline-block;
+      margin-left: 5px;
+      color: #999999;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+  .arrowExpandCollapse {
+    border-bottom: 1px solid #D8D8D8;
+    width: 95%;
+    position: relative;
+    margin: 7px 0 0 5%;
+    &gt; div {
+      position: absolute;
+      left: 50%;
+      transform: translateY(-50%);
+      background-color: #fff;
+      bottom: -17px;
+      width: 28px;
+      text-align: center;
+      .rotate {
+        color: #D8D8D8;
+        font-size: 7px;
+        display: inline-block;
+        transition: all 0.2s ease-in-out;
+        &amp;.expand_more {
+          transform: rotate(0deg);
+        }
+        &amp;.expand_less {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}
+.topicnm {
+  font-size: 13px;
+  font-weight: normal;
+  color: #000000;
+  line-height: normal;
+  width: 100%;
+  display: inline-block;
+  padding: 15px 15px 15px 0;
+}
+.resizer {
+  resize: both;
+  overflow: auto;
+}
+.expandCollapse {
+  font-size: 20px;
+  color: #666666;
+  line-height: normal;
+}
+.titleSelected {
+  font-weight: 700;
+  // background-color: #e5e5e5;
+}
+.topicTitleSelected {
+  font-weight: 700;
+  background-color: #e5e5e5;
+}
+.redHover:hover {
+  color: $lxp-theme-green !important;
+}
+::ng-deep.topicCard {
+  .mat-card-content {
+    margin-bottom: 0;
+  }
+}
+.topicCard {
+  margin: 0 1px 0 10px;
+  padding: 10px 5px 0 10px !important;
+  box-shadow: none;
+  position: relative;
+  @media only screen and (min-width: 720px) {
+    margin: 0 1px 0 5px;
+    padding: 10px 5px 0 5px !important;
+  }
+  @media only screen and (min-width: 992px) {
+    margin: 0 1px 0 10px;
+    padding: 10px 5px 0 10px !important;
+  }
+  .pointer {
+    margin-left: 32px;
+    margin-bottom: 0;
+    @media only screen and (min-width: 1540px) {
+      margin-left: 33px;
+    }
+  }
+  &amp;:last-child {
+    overflow: hidden;
+  }
+  &amp;::before {
+    content: &#x27;&#x27;;
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background-color: #CCCCCC;
+    left: 22px;
+    top: 0;
+    @media only screen and (min-width: 720px) {
+      left: 17px;
+    }
+    @media only screen and (min-width: 992px) {
+      left: 22px;
+    }
+  }
+  &amp;:first-child {
+    &amp;::before {
+      top: 50px;
+    }
+  }
+  // background-color: #fcfcfc;
+  // border-radius: 0px;
+  // border: 1px solid rgba(112, 112, 112, 0.25);
+  // box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.12);
+  &amp;.collapseClass {
+    .tocSubTitle {
+      color: #333333;
+    }
+  }
+  //   box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+:host ::ng-deep .mat-step-label {
+  white-space: pre-line !important;
+  position: relative;
+  overflow: visible !important;
+  color: #000000;
+  line-height: normal;
+}
+
+::ng-deep .mat-vertical-content {
+  padding: 0 !important;
+}
+
+::ng-deep .mat-step-header[aria-labelledby&#x3D;&quot;colgreen&quot;] {
+  box-sizing: border-box !important;
+  height: auto !important;
+  padding: 0 0 0 24px;
+  .mat-step-icon {
+    background-color: #0e7d12 !important;
+    // color: #0e7d12 !important;
+    height: 15px !important;
+    width: 15px !important;
+    position: relative;
+    bottom: 1px;
+    left: 6px;
+  }
+  .mat-step-label {
+    width: 100%;
+  }
+  .mat-step-icon .mat-icon,
+  .mat-step-icon-content {
+    color: transparent !important;
+    display: none !important;
+  }
+}
+
+::ng-deep .mat-step-header[aria-labelledby&#x3D;&quot;colYellow&quot;] {
+  box-sizing: border-box !important;
+  height: auto !important;
+  padding: 0 0 0 24px;
+  .mat-step-icon {
+    // background-color: $color-yellow !important;
+    background-color: #ffa04e !important;
+    color: #ffa04e !important;
+    height: 15px !important;
+    width: 15px !important;
+    position: relative;
+    bottom: 1px;
+    left: 6px;
+  }
+  .mat-step-label {
+    width: 100%;
+  }
+}
+
+::ng-deep .mat-step-header[aria-labelledby&#x3D;&quot;colWhite&quot;] {
+  box-sizing: border-box !important;
+  height: auto !important;
+  padding: 0 0 0 24px;
+  .mat-step-icon {
+    background-color: $color-white !important;
+    // color: $color-white !important;
+    border: 2px solid $color-border;
+    height: 13px !important;
+    width: 13px !important;
+    position: relative;
+    bottom: 1px;
+    left: 6px;
+  }
+  .mat-step-label {
+    width: 100%;
+  }
+  .mat-step-icon .mat-icon,
+  .mat-step-icon-content {
+    color: transparent !important;
+    display: none !important;
+  }
+}
+
+// :host ::ng-deep .mat-step-icon .mat-icon,
+// .mat-step-icon-content {
+//     color: $color-white !important;
+// }
+
+::ng-deep .course-player-menu .mat-step-icon .mat-icon {
+  display: none !important;
+}
+
+::ng-deep .course-player-menu .mat-step-icon-content span {
+  display: none !important;
+}
+
+.currentTopic {
+  white-space: nowrap !important;
+  text-overflow: ellipsis;
+  overflow: hidden !important;
+  text-align: center;
+  position: relative;
+  top: -2px;
+  // width:80%;
+  @media only screen and (max-width: 719px) {
+    max-width: 75%;
+  }
+}
+.navigation {
+  padding-right: 10px;
+  max-width: 100%;
+  margin-left: 0;
+  // min-width: 65%;
+  justify-content: space-between;
+  .pipeLine {
+    font-size: 18px;
+    color: #333333;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  @media only screen and (min-width: 720px) {
+    margin-left: 10px;
+    max-width: 65%;
+  }
+  div {
+    display: inline-block;
+    // line-height: 14px;
+  }
+  .leftArrow,
+  .rightArrow {
+    cursor: pointer;
+    color: #707070;
+    line-height: normal;
+  }
+  .leftArrow {
+    margin-right: 10px;
+  }
+  .rightArrow {
+    margin-left: 10px;
+  }
+  .lxp-Next-Previous {
+    font-size: 17px;
+    display: inline-flex;
+    &amp;.previousTopic {
+      transform: rotate(180deg);
+    }
+  }
+}
+.rightContent {
+  position: absolute;
+  right: 20px;
+  bottom: 5vh;
+  .fullScr,
+  .resourceTab,
+  .allTabs {
+    // background-color: #ffcc00;
+    background-image: linear-gradient(to right, #00b0ed, #00b5d9, #00b6af, #00b376, #53aa34);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: all 0.3s ease-in-out;
+    border: 0;
+    &amp;[data-title] {
+      transition: all 0.3s ease-in-out;
+      position: relative;
+      &amp;:hover {
+        &amp;::before {
+          content: attr(data-title);
+          position: absolute;
+          bottom: 5px;
+          right: 40px;
+          line-height: normal;
+          background: #5c6873;
+          padding: 4px 6px;
+          color: #fff;
+          font-size: 11px;
+          white-space: nowrap;
+          z-index: 9;
+        }
+        &amp;::after {
+          content: &quot;&quot;;
+          position: absolute;
+          bottom: 9px;
+          right: 22px;
+          border-width: 6px;
+          border-style: solid;
+          border-color: transparent transparent transparent #5c6873;
+          transform: translateX(-50%);
+        }
+      }
+    }
+  }
+  em {
+    color: #000000;
+  }
+  .fullScr {
+    em {
+      font-size: 13px;
+      color: #ffffff;
+    }
+  }
+  .resourceTab {
+    em {
+      font-size: 10px;
+    }
+  }
+  .allTabs {
+    em {
+      display: inline-block;
+      font-size: 13px;
+      transition: 0.2s all linear;
+      &amp;.addIcon {
+        transform: rotate(45deg);
+      }
+      &amp;.closeIcon {
+        transform: rotate(270deg);
+      }
+    }
+  }
+  .mixed {
+    position: relative;
+    transition: 0.3s all linear;
+    &amp;.paddingTop {
+      padding-top: 40px;
+    }
+    &amp;.paddingZero {
+      padding-top: 0;
+    }
+  }
+  .allIcons {
+    position: absolute;
+    right: 0;
+    top: 0;
+    animation: 0.3s fadeIn;
+    animation-fill-mode: forwards;
+    visibility: hidden;
+    transition: 0.5s animation linear;
+    &gt; div {
+      position: absolute;
+      &amp;.smile {
+        right: 37px;
+        top: 66px;
+      }
+      &amp;.sad {
+        right: 15px;
+        top: 80px;
+      }
+      &amp;.askquestion {
+        right: 34px;
+        top: 15px;
+      }
+      &amp;.bookmark {
+        right: 10px;
+      }
+      &amp;.resource {
+        right: 45px;
+        top: 40px;
+      }
+      button {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        border-color: transparent;
+        padding: 0;
+        background-color: #eeeeee;
+        border-radius: 50%;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
+        text-align: center;
+        padding: 4px;
+        &amp;:hover {
+          background-color: #dddddd;
+        }
+        &amp;[data-title] {
+          transition: all 0.3s ease-in-out;
+          position: relative;
+          &amp;:hover {
+            &amp;::before {
+              content: attr(data-title);
+              position: absolute;
+              bottom: 0;
+              right: 30px;
+              line-height: normal;
+              background: #5c6873;
+              padding: 4px 6px;
+              color: #fff;
+              font-size: 11px;
+              white-space: nowrap;
+              z-index: 9;
+            }
+            &amp;::after {
+              content: &quot;&quot;;
+              position: absolute;
+              right: 18px;
+              top: 50%;
+              border-width: 6px;
+              border-style: solid;
+              border-color: transparent transparent transparent #5c6873;
+              transform: translateY(-55%);
+            }
+          }
+        }
+      }
+      i {
+        font-size: 11px;
+      }
+    }
+  }
+}
+.hamburger {
+  margin-right: 5px;
+  position: relative;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 24px;
+  &amp;.isActive {
+    &amp;:hover {
+      opacity: 0.7;
+    }
+    .hamburgerInner {
+      transform: translate3d(0, 10px, 0) rotate(45deg);
+      &amp;::before {
+        transform: rotate(-45deg) translate3d(-5.71429px, -6px, 0);
+        opacity: 0;
+      }
+      &amp;::after {
+        transform: translate3d(0, -20px, 0) rotate(-90deg);
+      }
+    }
+  }
+  &amp;:hover {
+    opacity: 0.7;
+  }
+  .hamburgerInner {
+    display: block;
+    margin-top: -2px;
+    position: absolute;
+    top: 2px;
+    width: 40px;
+    height: 4px;
+    transition-timing-function: ease;
+    transition-duration: 0.15s;
+    transition-property: transform;
+    border-radius: 4px;
+    background-color: red;
+    &amp;::before,
+    &amp;::after {
+      content: &quot;&quot;;
+      display: block;
+    }
+    &amp;::before {
+      position: absolute;
+      width: 40px;
+      height: 4px;
+      border-radius: 4px;
+      background-color: red;
+      top: 10px;
+      // transition-timing-function: ease;
+      // transition-duration: .15s;
+      transition-property: transform, opacity;
+    }
+    &amp;::after {
+      position: absolute;
+      top: 20px;
+      bottom: -10px;
+      width: 40px;
+      height: 4px;
+      transition-timing-function: ease;
+      transition-duration: 0.15s;
+      transition-property: transform;
+      border-radius: 4px;
+      background-color: red;
+    }
+  }
+}
+.breadCrumbWrapper {
+  width: 100%;
+}
+.titlebar {
+  position: relative;
+  .breadcrumb {
+    margin: 0;
+    padding: 0 20px !important;
+    background-color: transparent !important;
+    height: auto !important;
+    &amp;.yes {
+      li {
+        &amp;::after {
+          display: none;
+        }
+      }
+    }
+    li {
+      color: #333333;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: normal;
+      position: relative;
+      margin-right: 10px;
+      padding-right: 5px;
+      em {
+        display: inline-block;
+        transform: scale(-1);
+        color: #666666;
+        margin-right: 8px;
+        cursor: pointer;
+      }
+      &amp;:first-child {
+        color: #999999;
+        &amp;.no {
+          margin-right: 0;
+          &amp;::after {
+            content: &#x27;&#x27;;
+          }
+        }
+        &amp;::after {
+          content: &quot;/&quot;;
+          position: absolute;
+          right: -10px;
+          top: auto;
+          bottom: auto;
+          color: #c02222;
+        }
+      }
+    }
+  }
+  .titleBack {
+    padding: 0 10px;
+    background-color: transparent;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    @media only screen and (min-width: 1140px) {
+      z-index: 999;
+      position: absolute;
+      left: 120px;
+      top: -50px;
+    }
+    &amp;.animateAnimate {
+      animation-duration: 0.5s;
+      animation-fill-mode: both;
+    }
+    &amp;.fadeInDown {
+      padding: 10px;
+      animation-name: fadeInDown;
+    }
+    &amp;.fadeOutUp {
+      animation-name: fadeOutUp;
+    }
+  }
+  .downTitle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 5px;
+    display: inline-block;
+    // width: 100%;
+    text-align: center;
+    z-index: 999;
+    i {
+      &amp;.arrDown {
+        transform: rotate(180deg);
+      }
+      &amp;.arrUp {
+        transform: rotate(0deg);
+        display: none;
+      }
+      cursor: pointer;
+      color: rgba(0, 0, 0, 0.5);
+      font-size: 10px;
+      display: inline-block;
+    }
+  }
+  .collapseFill {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+    .arrDown {
+      display: none;
+    }
+    i {
+      cursor: pointer;
+      color: rgba(0, 0, 0, 0.5);
+      font-size: 22px;
+      display: inline-block;
+    }
+  }
+  .courseTitle {
+    // font-size: 18px;
+    // color: #333333;
+    margin-left: 5px;
+    width: 100%;
+    span {
+      font-weight: 400;
+      margin-left: 5px;
+      display: inline-block;
+      @media only screen and (max-width: 767px) {
+        width: 70%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+.pointer {
+  &amp;:hover {
+    i,
+    span {
+      color: #c02222;
+    }
+  }
+  i,
+  span {
+    display: inline-block;
+  }
+  span {
+    font-size: 18px;
+    color: #999999;
+    font-weight: lighter;
+    margin-left: 5px;
+  }
+  .backArrow {
+    font-size: 6px;
+    color: #231f20;
+    font-weight: bold;
+    transform: rotate(-90deg);
+  }
+}
+.toolBar {
+  padding: 8px 10px;
+  background-color: #f0f0f0;
+}
+.toolBar .leftContent {
+  width: 40%;
+  @media only screen and (max-width: 767px) {
+    width: 75%;
+  }
+}
+.toolBar .rightContent {
+  width: 60%;
+  @media only screen and (max-width: 767px) {
+    width: 25%;
+  }
+}
+.rowMargin {
+  margin: -10px -10px 0 -10px;
+  background: #f0f0f0;
+}
+
+
+// Resource Container Starts
+::ng-deep.resourseContainer {
+  width: 96% !important;
+  height: 75% !important;
+  @media only screen and (min-width: 720px) {
+    width: 95% !important;
+  }
+  @media only screen and (min-width: 992px) {
+    width: 90% !important;
+  }
+  @media only screen and (min-width: 1140px) {
+    width: 75% !important;
+    height: 85% !important;
+  }
+  @media only screen and (min-width: 1540px) {
+    width: 65% !important;
+    height: 75% !important;
+  }
+  .mat-dialog-content {
+    height: 100% !important;
+    max-height: inherit !important;
+  }
+  .mat-dialog-container {
+    padding: 0 !important;
+  }
+}
+::ng-deep.resource-card {
+  &amp;.activeTab {
+    padding: 0 0 10px 0;
+    .mat-card-title {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+  .mat-card-subtitle {
+    margin-bottom: 0;
+    padding: 0 10px;
+  }
+  .mat-card-content {
+    padding: 0 10px;
+  }
+  .mat-card-title {
+    margin-bottom: 0;
+    padding: 10px;
+    font-size: inherit;
+  }
+}
+.resourseContainer {
+  overflow-y: hidden;
+}
+.noResources {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.imageContainer, 
+.videoContainer, 
+.pdfContainer, 
+.audioContainer {
+  padding: 10px;
+}
+.videoContainer {
+  video {
+    height: auto;
+    width: 100%;
+  }
+}
+.resourseToc {
+  background-color: #F4F4F4;
+  padding: 20px;
+  width: 30%;
+  min-width: 30% !important;
+  overflow: auto;
+  @media only screen and (min-width: 720px) {
+    width: 40%;
+  }
+  @media only screen and (min-width: 1540px) {
+    width: 30%;
+  }
+  h4 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000000;
+    line-height: normal;
+    margin-bottom: 15px;
+  }
+  @media only screen and (max-width: 719px) {
+    width: 100% !important;
+    min-width: 100% !important;
+    border-right: 0;
+    height: 100%;
+    // height: 250px !important;
+  }
+}
+.resource-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  margin: 0 0 15px 0;
+  padding: 0;
+  border-radius: 3px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  .pointer {
+    &amp;:hover {
+      i {
+        color: rgba(0, 0, 0, 0.87);
+      }
+    }
+  }
+  .arrow {
+    width: 5%;
+    em {
+      color: #5A727D;
+      font-size: 7px;
+      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .arrowDown {
+      transform: rotate(90deg);
+      display: inline-block;
+    }
+    .arrowUp {
+      transform: rotate(180deg);
+      display: inline-block;
+    }
+  }
+  .module {
+    width: 93%;
+    margin-left: 2%;
+    span {
+      color: #939393;
+      font-size: 10px;
+      font-weight: 400;
+      line-height: normal;
+      margin: 0;
+    }
+    h4 {
+      color: #353535;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: normal;
+      margin: 0;
+    }
+  }
+  .handPointer {
+    cursor: pointer;
+    background-color: #EDEDED;
+    box-shadow: none;
+    border-radius: 2px;
+    margin-bottom: 5px;
+    padding: 10px;
+  }
+  h4 {
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0;
+    line-height: normal;
+  }
+  h5 {
+    white-space: nowrap !important;
+    text-overflow: ellipsis;
+    overflow: hidden !important;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000000;
+    margin: 10px 0 3px 0;
+    line-height: normal;
+    width: 95%;
+  }
+  &amp;.inActiveTab {
+    h4 {
+      color: #333333;
+    }
+  }
+  &amp;.activeTab {
+    h4 {
+      color: #666666;
+    }
+  }
+}
+.popupContainer {
+  height: 100%;
+}
+::ng-deep.popupContainer {
+  .mat-tab-group {
+    height: 100%;
+    .mat-tab-body-wrapper {
+      height: 100%;
+    }
+  }
+  .mat-tab-label {
+    opacity: 1;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.5);
+    &amp;.mat-tab-label-active {
+      color: rgba(0, 0, 0, 1);
+    }
+  }
+  .mat-tab-body-content {
+    overflow: inherit !important;
+  }
+}
+.rescontentHeight {
+  height: 100%;
+  @media only screen and (max-width: 767px) {
+    flex-direction: column;
+  }
+}
+
+.popupTab {
+  position: relative;
+  .closeSection {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 9;
+  }
+  .mat-tab-label.mat-tab-label-active {
+    opacity: 1;
+  }
+}
+.onMobileDevices {
+  position: relative;
+  @media only screen and (min-width: 720px) {
+    display: none;
+  }
+  .closeTemp {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    z-index: 9;
+    em {
+      color: #565656;
+      font-size: 14px;
+    }
+  }
+  .previewContainerTitle {
+    text-align: center;
+  }
+  .imageContainer {
+    img {
+      max-width: 100%;
+    }
+  }
+}
+.previewContainer {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  display: none;
+  @media only screen and (min-width: 720px) {
+    display: block;
+    width: 60%;
+    height: auto;
+  }
+  @media only screen and (min-width: 1540px) {
+    width: 70%;
+  }
+  .innerWrapper {
+    width: 100% !important;
+    overflow: auto;
+    height: 100%;
+    position: relative;
+    @media only screen and (max-width: 720px) {
+      overflow: auto;
+      height:100%;
+    }
+  }
+  img {
+    max-width: 100%;
+  }
+  iframe {
+    position: absolute;
+    width: 100%;
+    &amp;::before {
+      content: &quot;&quot;;
+      display: block;
+      padding-bottom: 50%;
+    }
+  }
+  .previewContainerTitle {
+    p {
+      text-align: center;
+      font-size: 15px;
+      padding-top: 10px;
+      margin-bottom: 5px;
+    }
+  }
+}
+.hideDesc {
+  display: inline-flex;
+  position: absolute;
+  opacity: 0;
+  z-index: -9;
+}
+.previewRibbon {
+  position: absolute;
+  top: 10px;
+  left: -15px;
+  z-index: 9;
+  &amp;.no {
+    display: none;
+  }
+  span {
+    background-color: #16BEF0;
+    padding: 6px 12px 6px 24px;
+    font-size: 12px;
+    color: #ffffff;
+    position: relative;
+    &amp;::before {
+      content: &#x27;&#x27;;
+      position: absolute;
+      left: 0;
+      bottom: -14px;
+      border-bottom: solid 7px #0B7CA8;
+      border-left: solid 7px #0B7CA8;
+      border-right: solid 7px transparent;
+      border-top: solid 7px transparent;
+      transform: rotate(180deg);
+    }
+  }
+}
+//// Resource Ends
+
+//About the Course Tab
+::ng-deep.aboutCourseWrapper {
+  width: 96% !important;
+  height: 75% !important;
+  position: relative !important;
+  @media only screen and (min-width: 720px) {
+    width: 70% !important;
+    height: 55% !important;
+  }
+  @media only screen and (min-width: 992px) {
+    width: 60% !important;
+    height: 65% !important;
+  }
+  @media only screen and (min-width: 1140px) {
+    width: 40% !important;
+  }
+  @media only screen and (min-width: 1540px) {
+    width: 30% !important;
+  }
+  .mat-dialog-container {
+    padding: 20px !important;
+  }
+}
+.aboutpopupTab {
+  overflow: initial;
+  .closeSection {
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 20px;
+    z-index: 9;
+    em {
+      color: #A8A8A8;
+      font-size: 12px;
+      font-weight: lighter;
+    }
+  }
+  .mat-tab-label.mat-tab-label-active {
+    opacity: 1;
+  }
+}
+.aboutCourseTab {
+  width: 100%;
+  margin: 0 auto;
+  h2,
+  h6 {
+    color: #333333;
+    line-height: normal;
+  }
+  h2 {
+    color: #000000;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 15px;
+  }
+  h6 {
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 400;
+  }
+  .countCourseLanguage {
+    list-style-type: none;
+    margin: 0 0 15px 0;
+    padding: 0;
+    li {
+      color: #000000;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: normal;
+      display: inline-block;
+      border-right: 1px solid #333333;
+      padding-right: 7px;
+      margin-right: 7px;
+      &amp;:last-child {
+        border-right: 0;
+      }
+    }
+  }
+  .descriptionContent {
+    p {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 22px;
+      color: #565656;
+      margin-bottom: 15px;
+      a {
+        color: #FFA800;
+        &amp;:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .instructionBox {
+    width: 100%;
+    figure {
+      width: 35%;
+      margin-bottom: 0;
+      padding: 0 0 0 1%;
+      img {
+        height: 135px;
+        width: 100%;
+        object-fit: cover;
+        object-position: top center;
+        @media only screen and (min-width: 720px) {
+          height: 175px;
+        }
+      }
+    }
+    .authorDescription {
+      width: 64%;
+      padding: 0 10px 10px 10px;
+      h5 {
+        color: #000000;
+        font-size: 15px;
+        font-weight: 700;
+        line-height: normal;
+        margin-bottom: 5px;
+      }
+      p {
+        color: #565656;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 18px;
+        padding-right: 7px;
+        margin-bottom: 0 !important;
+        height: 110px;
+        overflow: auto;
+        word-break: break-word;
+      }
+    }
+  }
+}
+.instructorsWrapper {
+  position: relative;
+  padding-bottom: 20px;
+  width: 100%;
+}
+::ng-deep.instructorsWrapper {
+  .owl-theme {
+    .owl-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      margin: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      &amp;.disabled {
+        .owl-prev, .owl-next {
+          display: none;
+        }
+      }
+      .owl-prev, .owl-next {
+        position: relative;
+        background: transparent;
+        color: #cdcdcd;
+        padding: 4px;
+        margin: 0;
+      }
+      .owl-prev {
+        margin-left: -15px;
+      }
+      .owl-next {
+        margin-right: -15px;
+      }
+    }
+  }
+}
+.poweredBy {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 25px 0;
+  h2 {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    span {
+      display: inline-flex;
+      margin-left: 10px;
+      width: 23%;
+      @media only screen and (min-width: 576px) {
+        width: 15%;
+      }
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+}
+//Ends
+
+.sel-pad {
+  padding: 2px;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+@keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    // -webkit-transform: translate3d(0,-100%,0);
+    // transform: translate3d(0,-100%,0);
+  }
+}
+
+//TARANTULLA
+.bs-vertical-wizard {
+  ul {
+    margin: 0 0 0 13px;
+    padding: 0;
+    list-style: none;
+    li {
+      display: block;
+      position: relative;
+      cursor: pointer;
+      &amp;:hover {
+        background-color: #f1f1f1;
+      }
+      &amp;:last-child {
+        .icov {
+          margin-bottom: 0;
+        }
+      }
+      .icov {
+        display: block;
+        // padding: 5px 20px 5px 10px;
+        padding: 5px 20px 5px 20px;
+        color: #333c4e;
+        font-size: 14px;
+        margin-bottom: 8px;
+        @media only screen and (min-width: 1540px) {
+        }
+      }
+    }
+  }
+  .icov {
+    position: relative;
+    .modTitle {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      h3 {
+        color: #494949;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: normal;
+        margin: 0 0 0 0;
+        width: 95%;
+        // text-overflow: ellipsis;
+        // white-space: nowrap;
+        // overflow: hidden;
+      }
+      span {
+
+        color: #7F7F7F;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: normal;
+        min-width: 70px;
+        em {
+          margin-right: 3px;
+        }
+      }
+    }
+    &amp;.topicTitleSelected {
+      .modTitle {
+        h3 {
+          font-weight: 700;
+        }
+      }
+    }
+    .bgGreen {
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: normal;
+      background-image: linear-gradient(to right top, #39b54a, #53ba46, #68be43, #7bc241, #8dc63f);
+      em {
+        color: #ffffff;
+        font-size: 5px;
+        line-height: normal;
+      }
+    }
+    .bgGreen, .bgYellow {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .bgYellow {
+      em {
+        width: 17px;
+        height: 17px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        color: #ffffff;
+        background: #ffb229;
+        font-size: 7px;
+        font-weight: bold;
+      }
+    }
+    .bookmarkTopic {
+      position: absolute;
+      left: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #ffffff;
+      border: 1px solid #CCCCCC;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      em {
+        color: #004684;
+        font-size: 9px;
+      }
+    }
+  }
+}
+
+.bs-vertical-wizard ul &gt; li &gt; .icov {
+}
+.bs-vertical-wizard ul &gt; li &gt; :hover {
+}
+
+.bs-vertical-wizard ul &gt; li &gt; .icov:before {
+  content: &quot;&quot;;
+  position: absolute;
+  // width: 1px;
+  height: calc(100% - 12px);
+  background-color: #bdc2ce;
+  left: 13px;
+  bottom: -15px;
+  z-index: 3;
+}
+
+.bs-vertical-wizard ul &gt; li &gt; .icov .ico {
+  pointer-events: none;
+  font-size: 14px;
+  position: absolute;
+  left: 10px;
+  top: 15px;
+  z-index: 2;
+}
+
+.bs-vertical-wizard ul &gt; li &gt; .icov:after {
+  // content: &quot;&quot;;
+  position: absolute;
+  border: 2px solid #bdc2ce;
+  border-radius: 50%;
+  top: 14px;
+  left: 6px;
+  width: 16px;
+  height: 16px;
+  z-index: 3;
+}
+
+.bs-vertical-wizard ul &gt; li &gt; .icov .desc {
+  display: block;
+  color: #bdc2ce;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0.8px;
+}
+
+.bs-vertical-wizard ul &gt; li.complete &gt; .icov:before {
+  background-color: #0e7d12;
+  opacity: 1;
+
+  bottom: -16px;
+}
+
+.bs-vertical-wizard ul &gt; li.complete &gt; .icov:after {
+  display: none;
+}
+.bs-vertical-wizard ul &gt; li.locked &gt; .icov:after {
+  display: none;
+}
+.bs-vertical-wizard ul &gt; li:last-child &gt; .icov:before {
+  display: none;
+}
+
+.bs-vertical-wizard ul &gt; li.complete &gt; .icov .ico {
+  left: 8px;
+}
+
+.bs-vertical-wizard ul &gt; li &gt; .icov .ico.ico-green {
+  color: #0e7d12;
+}
+
+.bs-vertical-wizard ul &gt; li &gt; .icov .ico.ico-muted {
+  color: #bdc2ce;
+}
+
+.bs-vertical-wizard ul &gt; li.current {
+  background-color: #fff;
+}
+
+.bs-vertical-wizard ul &gt; li.current &gt; .icov:before {
+  background-color: #ffa04e;
+  opacity: 1;
+}
+
+.bs-vertical-wizard ul &gt; li.current &gt; .icov:after {
+  border-color: #ffa04e;
+  background-color: #ffa04e;
+  opacity: 1;
+}
+.ico-yellow {
+  color: #ffa04e;
+}
+
+.bs-vertical-wizard ul &gt; li.current:after,
+.bs-vertical-wizard ul &gt; li.current:before {
+  left: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: &quot; &quot;;
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+// .bs-vertical-wizard ul&gt;li.current:after {
+//     border-color: rgba(255,255,255,0);
+//     border-left-color: #0ff;
+//     border-width: 10px;
+//     margin-top: -10px;
+// }
+
+// .bs-vertical-wizard ul&gt;li.current:before {
+//     border-color: rgba(234,236,241,0);
+//     border-left-color: #eaecf1;
+//     border-width: 11px;
+//     margin-top: -11px;
+// }
+.mr-10px {
+  margin-right: 10px !important;
+}
+.qaClose {
+  position: absolute;
+  right: 0px;
+  z-index: 10;
+  cursor: pointer;
+}
+.questionInput {
+  padding: 20px 20px 10px 30px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  p {
+    font-size: 16px;
+  }
+  textarea {
+    width: 100% !important;
+    height: 350px;
+  }
+}
+.btn {
+  line-height: 1 !important;
+  border-radius: 2px;
+}
+.btn-primary {
+  color: white;
+  background-color: #c02222;
+  border-color: #c02222;
+}
+.btn-primary-outline {
+  color: black !important;
+  background-color: white;
+  border-color: #c02222;
+}
+.btn-primary-outline:hover:focus {
+  color: black;
+  background-color: white;
+  border-color: #c02222;
+}
+.btn-primary:hover:focus {
+  color: white;
+  background-color: #c02222;
+  border-color: #c02222;
+}
+::ng-deep.askQuestionsContainer .mat-tab-label {
+  height: 30px !important;
+}
+
+.myQuestions {
+  margin: 20px 0px 0px 0px;
+  padding-right: 5px;
+  overflow-y: auto;
+  height: 400px;
+}
+
+.qaBox {
+  padding: 10px;
+  border: 1px solid grey;
+  margin: 5px 0;
+  .answer {
+    color: #333333;
+    margin-bottom: 5px !important;
+  }
+  .quesiton {
+    font-weight: bold;
+    margin-bottom: 5px !important;
+  }
+}
+.qaBox:hover {
+  border: 1px solid rgb(141, 141, 252);
+}
+.qaBox .userAccount {
+  margin-bottom: 10px;
+  color: #666666;
+  font-size: 12px !important;
+
+  i {
+    color: #5c6873 !important;
+    font-size: 14px;
+  }
+}
+.QuestionMeta {
+  color: #999999;
+  display: flex;
+  align-items: baseline;
+  p {
+    font-size: small;
+    margin-right: 10px !important;
+  }
+}
+.badge {
+  padding: 5px 10px !important;
+}
+.badge-success {
+  background-color: #53bd9d !important;
+}
+.badge-warning {
+  background-color: #ffdd91 !important;
+  color: black !important;
+}
+.badge-warning, .badge-success {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+  vertical-align: baseline;
+  display: inline-block;
+  padding: 2px 7px 3px 7px !important;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+//Left TOC
+.leftToc {
+  position: relative;
+  .showHide {
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    left: 0;
+    top: 0;
+    background-color: white;
+    padding: 10px 10px 10px 0;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+    // box-shadow: none;
+    @media only screen and (min-width: 720px) {
+      top: 48px;
+      position: absolute;
+      right: -35px;
+      left: auto;
+    }
+    &amp;.No {
+      @media only screen and (min-width: 720px) {
+        right: -35px;
+      }
+    }
+    em {
+      font-size: 20px;
+      color: #888888;
+    }
+  }
+  .tabLabel  {
+    line-height: normal;
+  }
+  .labelcount {
+    background-color: #DDDDDD;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #919191;
+    font-size: 9px;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 5px;
+  }
+}
+::ng-deep.leftToc {
+  .mat-tab-label-container {
+    padding: 0 20px;
+  }
+  .mat-tab-label {
+    opacity: 1;
+    padding: 0 25px;
+    min-width: auto;
+    color: #6B6B6B;
+    &amp;.mat-tab-label-active {
+      color: #000000;
+    }
+  }
+  .mat-tab-labels {
+    justify-content: flex-start;
+  }
+  .mat-tab-group.mat-primary .mat-ink-bar {
+    height: 4px;
+    background-color: #08558C;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+  .mat-tab-label-content {
+    display: flex;
+    align-items: center;
+  }
+}
+
+::ng-deep.askQuestionsContainer {
+  .mat-tab-group {
+    height: 100%;
+    .mat-tab-body-wrapper {
+      height: 100%;
+    }
+  }
+  .mat-tab-label {
+    opacity: 1;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.5);
+    &amp;.mat-tab-label-active {
+      color: rgba(0, 0, 0, 1);
+    }
+  }
+  .mat-tab-body-content {
+    overflow: auto !important;
+  }
+}
+
+::ng-deep .cdk-overlay-container {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge*/
+  user-select: none;
+}
+
+// QA
+.cancelSubmit {
+  margin-top: 30px;
+  button {
+    margin-top: 0;
+    font-size: 14px;
+  }
+  //Button overrides
+  .btn-outline-dark {
+    color: #343a40 !important;
+    border-color: #343a40 !important;
+    margin: 0 10px 0 0 !important;
+  }
+  .btn-outline-dark:hover {
+    color: #343a40 !important;
+    border-color: #343a40 !important;
+    background-color: #fff !important;
+  }
+
+}
+::ng-deep.QAContainer {
+  width: 90% !important;
+  height: 78% !important;
+  @media only screen and (min-width: 720px) {
+    height: 53% !important;
+  }
+  @media only screen and (min-width: 992px) {
+    height: 70% !important;
+  }
+  @media only screen and (min-width: 1140px) {
+    width: 50% !important;
+    height: 86% !important;
+  }
+  @media only screen and (min-width: 1540px) {
+    width: 40% !important;
+    height: 57% !important;
+  }
+  .mat-dialog-container {
+    padding: 25px !important;
+  }
+}
+//
+
+::ng-deep.onPopup {
+  &amp;.mat-menu-panel {
+    @media only screen and (max-width: 720px) {
+      // width: 250px;
+    }
+  }
+  .abtCourse, .resourcesTab, .downloadCode {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    padding: 5px 15px;
+    cursor: pointer;
+    &amp;:hover {
+      background-color: #F0F0F0;
+      span {
+        color: #000000;
+      }
+    }
+    span {
+      font-size: 12px;
+      font-weight: 400;
+      color: #666666;
+      line-height: normal;
+      margin-left: 7px;
+    }
+    em {
+      line-height: 27px;
+    }
+  }
+  .abtCourse {
+    em {
+      color: #00BCEF;
+    }
+  }
+  .resourcesTab {
+    em {
+      color: #DA1467;
+    }
+  }
+  .downloadCode {
+    em {
+      color: #004684;
+      font-size: 15px;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  99% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+.practice-btn{
+  color: $color-white !important;
+  background-color: #1A4E9B;
+  margin-top:0 !important;
+  font-size:13px;
+  em{
+    font-size:22px;
+  }
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-transp{
+  opacity: 0.5;
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><app-header></app-header><div class="instructorLedWrapper"><div class="breadcrumbPading">  <ul class="breadcrumb">    <li><em (click)="getBack()" class="lxp-Go backArrow"></em> <span class="name">{{course?.name}}</span> <span class="bar">/</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type !== \'collegeconnect\'">Live Interactions</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type == \'collegeconnect\'">Industry Talk</span> </li>    <!-- <li *ngIf="userDetails.org_type !== \'collegeconnect\'">Live Interactions</li>    <li *ngIf="userDetails.org_type == \'collegeconnect\'">Industry Talk</li> -->  </ul></div><!-- If No Records --><div class="noCard" *ngIf="!showContent && !showSkeleton">  <figure>    <img alt="assignment" src="https://assets.lntedutech.com/application_images/no-session.svg">  </figure>  <p> You have no sessions at the moment!</p></div><!-- End of no records --><div class="row marginFix" *ngIf="showContent">  <!-- Left Side Panel ... -->  <!-- <div class="col-lg-1 col-xl-1 col-md-1 col-sm-1 col-12"></div> -->  <div class="col-lg-7 col-xl-7 col-md-12 col-sm-12 col-12">    <div flex>      <!-- <div class="f_wt_600 f_size_16 display_flex">        <span class="pad-t-2">          {{course?.name}}        </span>        <mat-icon class="material-icons brdcrmb f_size_25 pointer" (click)="goBack()">chevron_right        </mat-icon>        <span class="pad-t-2">Instructor Led</span>      </div> -->      <mat-card class="imgLayout">        <!-- <div *ngIf=\'!listOfSessions?.length\'>          <span class="sessionTitle"> No Activities Found..</span>        </div> -->        <div class="row d-flex justify-content-start" *ngIf=\'activityShow !== undefined\'>          <div class="moduleImage">            <div flex >              <img style="height: 200px !important;width: 100%;" *ngIf="!activityShow?.activity_details.livethumbnail" alt="instructor" src="https://assets.lntedutech.com/application_images/instructor_image.png" />              <img style="height: 200px !important;width: 100% !important;" *ngIf="activityShow?.activity_details.livethumbnail" alt="instructor" [src]="activityShow?.activity_details.livethumbnail + blobKey" />            </div>          </div>          <div class="moduleContent">                        <div flex >              <span class="sessionTitle activity-name" matTooltip="{{activityShow?.activity_details.activityname}}">{{activityShow?.activity_details.activityname}}</span>              <div class="row">                <!-- <span>Held On</span> &nbsp;&nbsp; -->                <span class="sessionDate">Date: {{ activityShow?.activity_details.startdate | date: \'MMM d, y\'}}</span>              </div>              <div class="row">                <span *ngIf="activityShow?.activity_details.activitytype != \'Recorded\'" class="sessionduration">Duration: {{activityShow?.duration}}</span>                <span *ngIf="activityShow?.activity_details.activitytype == \'Recorded\'" class="sessionduration">Module: {{activityShow?.activity_details.modulename}}</span>                <!-- <span class="sessionTitle">Duration</span> -->              </div>              <!-- <div class="row" style="color: white; margin-top: 10px;">                              </div> -->              <div class="row" style="margin-top: 0px;">                <button class="actBtn" mat-raised-button *ngIf="activityShow?.status === \'On going\' && activityShow?.activity_details.activitytype != \'Recorded\'"                  (click)="getAction(activityShow.activity_details.link)">{{activityShow?.button}}</button>              </div>              <div class="row" style="margin-top: 0px; color: white !important;" *ngIf="activityShow?.activity_details.activitytype == \'Recorded\'">                <button class="actBtn" mat-raised-button                   (click)="videoPreview(videoRecorded,activityShow.activity_details.link)">{{activityShow?.button}}</button>              </div>            </div>          </div>        </div>      </mat-card>            <div class="row smallContainers">        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">          <mat-card class="smallContainer1">            <mat-card-subtitle class="smallHeadline">Total Sessions</mat-card-subtitle>            <div class="row d-flex justify-content-between align-items-center p-t-10">              <span class="number">{{listOfSessions?.length}}</span>              <img mat-card-image src="https://assets.lntedutech.com/application_images/elearning.svg" alt="elearning">            </div>          </mat-card>        </div>                <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">          <mat-card class="smallContainer2">            <mat-card-subtitle class="smallHeadline">Attended Sessions</mat-card-subtitle>            <div class="row d-flex justify-content-between align-items-center p-t-10">              <!-- <span class="number" *ngIf="attendedSessions !== undefined">{{attendedSessions?.true}}</span> -->              <span class="number">{{attendedCount.length}}</span>              <img mat-card-image src="https://assets.lntedutech.com/application_images/students.svg" alt="student">            </div>          </mat-card>        </div>        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-4">          <mat-card class="smallContainer3">            <mat-card-subtitle class="smallHeadline">Recorded Sessions</mat-card-subtitle>            <div class="row d-flex justify-content-between align-items-center p-t-10">              <span class="number">{{recordedCount.length}}</span>              <img mat-card-image src="https://assets.lntedutech.com/application_images/video-tutorial.svg" alt="video">            </div>                        </mat-card>        </div>      </div>      <div class="attendanceWrapper">        <div class="row sessionAttendance" *ngIf="sessionAttendance?.length">          <span class="tableHeadline">My Attendance</span>        </div>        <div class="row attendance-table" *ngIf="sessionAttendance?.length">          <table style="width: 100%;">            <tr class="tblheaderFont">              <th width="13%">Session #</th>              <th width="55%">Activity Name</th>              <th width="22%">Date</th>              <th width="10%">Present</th>            </tr>            <tbody>              <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">                <td>{{i+1}}</td>                <td>{{atd.activity.activityname}}</td>                <td>{{atd.activity.startdate | date: \'dd/MM/yyyy , hh:mm a\'}}</td>                <td>                  <mat-icon #attended *ngIf="atd.activity.attendencedetails.Attendence == \'yes\' || atd.activity.attendencedetails.Attendence == \'Yes\'" style="color: green;">done</mat-icon>                  <mat-icon *ngIf="atd.activity.attendencedetails.Attendence ==\'no\' || atd.activity.attendencedetails.Attendence == \'No\'" style="color: red;">close</mat-icon>                </td>              </tr>            </tbody>          </table>        </div>      </div>    </div>  </div>  <ng-template #attendanceDialog>    <div class="">    <mat-icon class="closeModal-icon" (click)="closeModal()">close</mat-icon>    <h2 >My Attendance</h2>    <div class="row attendance-table">      <table>        <tr class="tblheaderFont">          <th>Session #</th>          <th >Activity Name</th>          <th>Date</th>          <th>Present?</th>        </tr>        <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">          <td>{{i+1}}</td>          <td>{{atd.activity.activityname}}</td>          <td>{{atd.activity.startdate | date: \'dd/MM/yyyy , hh:mm a\'}}</td>          <td>            <mat-icon *ngIf="atd.activity.attendencedetails.Attendence == \'yes\' || atd.activity.attendencedetails.Attendence == \'Yes\'" style="color: green;">done</mat-icon>            <mat-icon *ngIf="atd.activity.attendencedetails.Attendence ==\'no\' || atd.activity.attendencedetails.Attendence == \'No\'" style="color: red;">close</mat-icon>          </td>        </tr>      </table>    </div>    </div>  </ng-template>    <!-- Right Side Panel ...  -->  <div class="col-lg-5 col-xl-5 col-md-12 col-sm-12 col-12">    <div class="row course-list">      <div class="headingWrapper d-flex justify-content-between align-items-center">        <h3 class="headLine">Upcoming Sessions and Recorded Sessions</h3>        <button class="btn btn-light attandanceShow" *ngIf="sessionAttendance?.length" (click)="showModal(attendanceDialog)">Attendance</button>      </div>      <mat-nav-list class="listofSessionContainer" style="">        <mat-list-item *ngFor="let los of listOfSessions" class="listofSessionCards">          <mat-card class="sessionCard" (click)="useSession(los)">            <div class="row d-flex justify-content-start">              <div class="image-container">                <img *ngIf="los.activity_details.livethumbnail" alt="image" style="width: 100%; height: 150px !important;object-fit: inherit !important;" [src]="los.activity_details.livethumbnail + blobKey">                <img *ngIf="!los.activity_details.livethumbnail" alt="image" style="width: 100%; height: 150px !important;object-fit: inherit !important;" src="https://assets.lntedutech.com/application_images/instructor_image.png">                <!-- <div class="bottom-right" [ngClass]="los.status == \'Ongoing\' ? \'organge\' : los.status == \'UpComing\' ? \'grey\' : los.status == \'Completed\' ? \'greenColor\':\'\'" >{{los.status}}</div> -->                <mat-icon class="rec-center" *ngIf="los.activity_details.activitytype == \'Recorded\'"> play_circle</mat-icon>                <div *ngIf="los.status == \'On going\' && los.activity_details.activitytype != \'Recorded\'" class="bottom-right orange">Ongoing</div>                <div *ngIf="los.status == \'Up Coming\' && los.activity_details.activitytype != \'Recorded\'" class="bottom-right grey">Upcoming</div>                <div *ngIf="los.status == \'Completed\' && los.activity_details.activitytype != \'Recorded\'" class="bottom-right greenColor">{{los.status}}</div>                <div *ngIf="los.activity_details.activitytype == \'Recorded\'" class="bottom-right rec-col">Recorded</div>              </div>              <div class="content-container">                <h4 class="activity-name" matTooltip="{{los.activity_details.activityname}}">{{los.activity_details.activityname}}</h4>                <h5><span>Date:</span> {{los.activity_details.startdate | date: \'dd/MM/yyyy\'}}</h5>                <h5 *ngIf="los.activity_details.activitytype != \'Recorded\'"><span>Duration:</span> {{los.duration}} </h5>                <h5 *ngIf="los.activity_details.activitytype == \'Recorded\'"><span>Module:</span> {{los.activity_details.modulename}} </h5>              </div>            </div>          </mat-card>        </mat-list-item>      </mat-nav-list>    </div>  </div></div></div><ng-template #videoRecorded>  <!-- <div class="row">    <div class="col-12">      <button mat-mini-fab class="close-buttonVideo">      </button>    </div>  </div> -->  <div class="videoContainer">    <div class="closeBtn" (click)="closeModal()">      <em class="lxp-Close download-icon"></em>    </div>    <app-video-player [url]="videoSource"></app-video-player>  </div></ng-template><div class="item" *ngIf="showSkeleton">  <mat-card class="courseDetailSkeleton" style="box-shadow: none !important;">      <div class="breadcrumbskeleton">          <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ \'border-radius\': \'0\', height: \'35px\', \'background-color\': \'#d2d1d1\' }"></ngx-skeleton-loader>      </div>      <div class="d-flex justify-content-between">          <div class="item" style="width: 58%;">              <div class="">                  <ngx-skeleton-loader [theme]="{\'background-color\': \'#d2d1d1\',height: \'200px\'}" animation="pulse"></ngx-skeleton-loader>              </div>              <div class="d-flex justify-content-between">                  <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ \'border-radius\': \'0\', width: \'230px\', height: \'108px\', \'background-color\': \'#d2d1d1\' }"></ngx-skeleton-loader>                  <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ \'border-radius\': \'0\', width: \'230px\', height: \'108px\', \'background-color\': \'#d2d1d1\' }"></ngx-skeleton-loader>                  <ngx-skeleton-loader count="1" animation="pulse" [theme]="{ \'border-radius\': \'0\', width: \'230px\', height: \'108px\', \'background-color\': \'#d2d1d1\' }"></ngx-skeleton-loader>              </div>          </div>                    <div class="item" style="width: 38%;">            <div>              <ngx-skeleton-loader count="5" animation="pulse" [theme]="{ display: \'block\', \'background-color\': \'#d2d1d1\', width: \'100%\' , height: \'75px\'}"></ngx-skeleton-loader>            </div>          </div>      </div>  </mat-card></div></div>'
+    var COMPONENTS = [{'name': 'ActivitiesComponent', 'selector': 'app-activities'},{'name': 'AlertComponentComponent', 'selector': 'app-alert-component'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AskQuestionsComponent', 'selector': 'app-ask-questions'},{'name': 'AssignmentComponent', 'selector': 'app-assignment'},{'name': 'AudioPlayerComponent', 'selector': 'app-audio-player'},{'name': 'CalendarActivityComponent', 'selector': 'app-calendar-activity'},{'name': 'CoursedetailsComponent', 'selector': 'app-coursedetails'},{'name': 'CourseGalleryComponent', 'selector': 'app-course-gallery'},{'name': 'CourseReportComponent', 'selector': 'app-course-report'},{'name': 'DiscussionForumComponent', 'selector': 'app-discussion-forum'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForbiddenComponent', 'selector': 'app-forbidden'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'InstructorLedComponent', 'selector': 'app-instructor-led'},{'name': 'KnowledgeLandingPageComponent', 'selector': 'app-knowledge-landing-page'},{'name': 'KnowledgePreviewComponent', 'selector': 'app-knowledge-preview'},{'name': 'KnowledgeResourceHomeComponent', 'selector': 'app-knowledge-resource-home'},{'name': 'LandingHeaderComponent', 'selector': 'app-landing-header'},{'name': 'LearnerNewMyCourseComponent', 'selector': 'app-learner-new-my-course'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NewHomeComponent', 'selector': 'app-new-home'},{'name': 'NotFoundComponent', 'selector': 'not-found'},{'name': 'PasswordComponent', 'selector': 'app-password'},{'name': 'PdfreaderComponent', 'selector': 'app-pdfreader'},{'name': 'PerformancePageMobileComponent', 'selector': 'app-performance-page-mobile'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProgressionReportComponent', 'selector': 'app-progression-report'},{'name': 'ProjectMobileComponent', 'selector': 'app-project-mobile'},{'name': 'QuestionanswerComponent', 'selector': 'app-questionanswer'},{'name': 'RedirectionComponent', 'selector': 'app-redirection'},{'name': 'ResetpasswordComponent', 'selector': 'app-resetpassword'},{'name': 'TermsconditionsComponent', 'selector': 'app-termsconditions'},{'name': 'ToolbarNotificationComponent', 'selector': 'app-toolbar-notification'},{'name': 'VideoPlayerComponent', 'selector': 'app-video-player'},{'name': 'VideoPreviewModalComponent', 'selector': 'app-video-preview-modal'},{'name': 'ViewAllnotificationsComponent', 'selector': 'app-view-allnotifications'}];
+    var DIRECTIVES = [{'name': 'CapslockDirective', 'selector': '[appCapslock]'},{'name': 'DragDropImageDirective', 'selector': '[appDragDropImage]'},{'name': 'StickyHeaderDirective', 'selector': '[stickyHeaderDirective]'}];
+    var ACTUAL_COMPONENT = {'name': 'InstructorLedComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'InstructorLedComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

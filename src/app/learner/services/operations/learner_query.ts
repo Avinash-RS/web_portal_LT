@@ -2531,6 +2531,7 @@ export const recentlycourse = gql`
               lastTopic
               topic_status
               module_status
+              newmodule
               }
             completedTopic{
               course_name
@@ -2544,6 +2545,7 @@ export const recentlycourse = gql`
               moduleIndex
               topic_status
               module_status
+              newmodule
               }
           }
         }
@@ -2667,5 +2669,13 @@ query overAllCourseProgressByUserId($userId:String!,$startDate:String!,$endDate:
   success
   message
   }
+  }
+`;
+export const getStepCourseByLearner = gql`
+  query getStepCourseByLearner($user_id:String!){
+    getStepCourseByLearner(user_id:$user_id){
+    success
+    stepRedirectUrl
+    } 
   }
 `;
