@@ -2,7 +2,7 @@
 <div class="notificatonRead d-flex justify-content-between align-items-center">
 
   <ul class="breadcrumb">
-    <li><em (click)="goBack()" class="lxp-Go backArrow"></em> All notifications </li>
+    <li><em (click)="goBack()" class="lxp-Go backArrow"></em> {{'All notifications' | translate}} </li>
     <!-- <li>Activities</li> -->
   </ul>
 
@@ -19,7 +19,7 @@
   <!-- <h2 class="head"><strong>All notifications</strong></h2> -->
   <div class="markAllbtn" *ngIf="notifications?.length > 0">
     <button class="markBtn" (click)="markAsRead(notifications,'all')" [disabled]="unreadCount == 0">
-      <u><strong>Mark all as read</strong></u>
+      <u><strong>{{'Mark all as read' | translate}}</strong></u>
     </button>
   </div>
 </div>
@@ -29,7 +29,7 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 " *ngIf="notifications?.length">
 
   <ng-container matColumnDef="notificationName">
-    <th class="w-60" mat-header-cell *matHeaderCellDef><strong class="font">Notifications</strong></th>
+    <th class="w-60" mat-header-cell *matHeaderCellDef><strong class="font">{{'Notifications' | translate}}</strong></th>
     <td class="pointer" mat-cell *matCellDef="let element">
       <span class="read" *ngIf="element.notifiedStatus == true">{{element.notificationMessage}}</span>
       <span class="unread" *ngIf="element.notifiedStatus != true">{{element.notificationMessage}}</span>
@@ -37,7 +37,7 @@
   </ng-container>
 
   <ng-container matColumnDef="date">
-    <th class="w-30 text-center" mat-header-cell *matHeaderCellDef><strong class="font">Received on</strong></th>
+    <th class="w-30 text-center" mat-header-cell *matHeaderCellDef><strong class="font">{{'Received on' | translate}}</strong></th>
     <td class="pointer text-center" mat-cell *matCellDef="let element"> 
       <span class="read" *ngIf="element.notifiedStatus == true">{{element.created_on | date: 'MMM d, y, h:mm a'}}</span>
       <span class="unread" *ngIf="element.notifiedStatus != true">{{element.created_on | date: 'MMM d, y, h:mm a'}}</span>
@@ -64,5 +64,5 @@
 </div>
 
 <div class="nonotifictaion" *ngIf="emptynotifications">
-  No new notifications
+  {{'No new notifications' | translate}}
 </div>

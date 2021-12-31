@@ -25,7 +25,7 @@
                                 </span>
                                 <span (click)="getTodaydate()">
                                     <span class="today" mwlCalendarToday [(viewDate)]="viewDate">
-                                        Today
+                                        {{'Today' | translate}}
                                     </span>
                                 </span>
                                 <span mwlCalendarNextView [view]="'week'" [(viewDate)]="viewDate">
@@ -40,7 +40,7 @@
                     <div class="minHeight">
                         <div class="sideTabsStrip">
                             <div class="activeTabItem">
-                                To Do
+                                {{'To Do' | translate}}
                             </div>
                         </div>
                         <ng-container *ngFor="let data of learnerActivityList | slice:0:4;">
@@ -85,14 +85,14 @@
                                                     <em class="lxp-Right"></em>{{'Completed' | translate }}
                                                 </span>
                                                 <span class="launch" *ngIf="data.status == 'On going'" (click)="openClassroom(data.link)">
-                                                    <em class="lxp-Launch"></em> <span>Launch</span>
+                                                    <em class="lxp-Launch"></em> <span>{{'Launch' | translate}}</span>
                                                 </span>
                                             </div>
                                         </ng-container>
                                     </div>
                                     <div class="titleFontSize">{{data.coursename}}</div>
-                                    <div class="type">Module: <span>{{data.modulename}}</span></div>
-                                    <div class="topic" *ngIf="(data.self_paced_learning == 'topic' || data.liveclassroom == 'topic') || (!data.self_paced_learning && !data.liveclassroom)">Topic: <span>{{data.topicname}}</span></div>
+                                    <div class="type">{{'Module: ' | translate}}<span>{{data.modulename}}</span></div>
+                                    <div class="topic" *ngIf="(data.self_paced_learning == 'topic' || data.liveclassroom == 'topic') || (!data.self_paced_learning && !data.liveclassroom)">{{'Topic: ' | translate}}<span>{{data.topicname}}</span></div>
                                     <div class="date">
                                         <span>{{data.activitystartdate | date :'d/M/yy h:mm a'}} <span>-</span> {{data.activityenddate | date :'d/M/yy h:mm a'}}</span>
                                     </div>
@@ -100,7 +100,7 @@
                             </div>
                         </ng-container>
                         <div class="viewAll" *ngIf="learnerActivityList?.length > 3">
-                            <a routerLink="/Learner/calendaractivity">View all <em class="lxp-Right_Direction_Arrow"></em></a>
+                            <a routerLink="/Learner/calendaractivity">{{'View all' | translate}} <em class="lxp-Right_Direction_Arrow"></em></a>
                         </div>
                         <div class="item" *ngIf="showSkeleton">
                             <div class="d-flex justify-content-between">
@@ -129,7 +129,7 @@
                                 <figure>
                                     <img src="https://assets.lntedutech.com/application_images/nocard.svg" alt="No Card" />
                                 </figure>
-                                <p>You have no activity scheduled for the day!</p>
+                                <p>{{'You have no activity scheduled for the day!' | translate}}</p>
                             </div>
                         </ng-container>
                     </div>
@@ -139,8 +139,8 @@
             <div class="sideNavContent">
                 <!-- Top 3 Things -->
                 <div class="somethingNew">
-                    <h3>Welcome!</h3>
-                    <h4>Let's learn something new today!</h4>
+                    <h3>{{'Welcome!' | translate}}</h3>
+                    <h4>{{'Let's learn something new today!' | translate}}</h4>
                     <!-- Don't Delete below commented-->
                     <!-- <div class="thingsContent">
                         <p>Here are your top 3 things to do!</p>
@@ -161,9 +161,9 @@
                     <div class="top3Things d-flex justify-content-between" [ngClass]="show ? 'noPadding': ''">
                         <div class="box">
                             <div class="moduleName">
-                                <h6>Learn from where your left</h6>
-                                <span class="type">MODULE:</span>
-                                <h2>Codes for reinforced and Pre-stress…</h2>
+                                <h6>{{'Learn from where your left' | translate}}</h6>
+                                <span class="type">{{'MODULE:' | translate}}</span>
+                                <h2>{{'Codes for reinforced and Pre-stress…' | translate}}</h2>
                                 <div class="dueDate">
                                     <div></div>
                                     <button><em class="lxp-Play"></em> <span>4m 8s</span></button>
@@ -180,17 +180,17 @@
                         </div>
                         <div class="box">
                             <div>
-                                <h6>Learn from where your left</h6>
-                                <span class="type">MODULE:</span>
-                                <h2>Codes for reinforced and Pre-stress…</h2>
+                                <h6>{{'Learn from where your left' | translate}}</h6>
+                                <span class="type">{{'MODULE:' | translate}}</span>
+                                <h2>{{'Codes for reinforced and Pre-stress…' | translate}}</h2>
                                 <div class="dueDate">
-                                    <span>Due date: 23 June 2021 12:00 AM</span>
-                                    <button><span>GO</span></button>
+                                    <span>{{'Due date: 23 June 2021 12:00 AM' | translate}}</span>
+                                    <button><span>{{'GO' | translate}}</span></button>
                                 </div>
                             </div>
                             <div class="upcoming d-flex justify-content-between">
                                 <div>
-                                    <button><span>GO</span></button>
+                                    <button><span>{{'GO' | translate}}</span></button>
                                 </div>
                                 <div>
                                     <span class="icons"><em class="lxp-Assignments"></em></span>
@@ -199,17 +199,17 @@
                         </div>
                         <div class="box">
                             <div>
-                                <h6>Learn from where your left</h6>
-                                <span class="type">MODULE:</span>
-                                <h2>Codes for reinforced and Pre-stress…</h2>
+                                <h6>{{'Learn from where your left' | translate}}</h6>
+                                <span class="type">{{'MODULE:' | translate}}</span>
+                                <h2>{{'Codes for reinforced and Pre-stress…' | translate}}</h2>
                                 <div class="dueDate">
-                                    <span>Due date: 23 June 2021 12:00 AM</span>
-                                    <button><span>Join</span></button>
+                                    <span>{{'Due date: 23 June 2021 12:00 AM' | translate}}</span>
+                                    <button><span>{{'Join' | translate}}</span></button>
                                 </div>
                             </div>
                             <div class="upcoming d-flex justify-content-between">
                                 <div>
-                                    <button><span>Join</span></button>
+                                    <button><span>{{'Join' | translate}}</span></button>
                                 </div>
                                 <div>
                                     <span class="icons"><em class="lxp-JoinIcon"></em></span>
@@ -222,7 +222,7 @@
                 <!-- My Course -->
                 <div [ngClass]="userDetailes.org_type == 'vocational' ? 'yes':'no'">
                 <div class="mycoursesWrapper" [ngClass]="show ? 'noPadding': ''">
-                    <h3>My Courses</h3>
+                    <h3>{{'My Courses' | translate}}</h3>
                     <div class="mobileEnable">
                         <span type="button" (click)="drawer.toggle();show=!show">
                             <em class="lxp-Calendar_Todo"></em>
@@ -233,10 +233,10 @@
                             <img src="assets/images/step1.jpeg" alt="">
                         </figure>
                         <div class="text">
-                            <h1>Learn to speak English</h1>
+                            <h1>{{'Learn to speak English' | translate}}</h1>
                             <div class="resumeBtn">
                                 <button (click)="redirect()">
-                                    <em class="lxp-Play_Icon"></em> <span>Start Learning</span>
+                                    <em class="lxp-Play_Icon"></em> <span>{{'Start Learning' | translate}}</span>
                                 </button>
                             </div>
                         </div>
@@ -244,20 +244,20 @@
                     <div class="course-progress" *ngIf="showProgressChart" [@collapseprogress]>
                     <div class="course-progress-wrapper">
                         <div class="d-flex justify-content-between align-items-start course-progress-header">
-                            <div class="course-progress-header-text">Course Completion Progress</div>
+                            <div class="course-progress-header-text">{{'Course Completion Progress' | translate}}</div>
                             <div class="d-flex align-items-center course-progress-header-action" (click)="showProgressChart = false;">
                                 <em class="lxp-Close"></em>
-                                <span>Close</span>
+                                <span>{{'Close' | translate}}</span>
                             </div>
                         </div>  
                         <div class="d-flex justify-content-between align-items-center flex-wrap course-progress-content" *ngIf="true;else courseChartSkeleton">
                             <mat-card class="cousrse-wise-card">
                                 <div class="d-flex justify-content-between align-items-center cousrse-wise-card-header">
-                                    <div class="cousrse-wise-card-header-text">Course Wise Completion</div>
+                                    <div class="cousrse-wise-card-header-text">{{'Course Wise Completion' | translate}}</div>
                                 <div class="d-flex justify-content-between align-items-center cousrse-wise-card-date">
                                     <div class="start-date">
                                         <mat-form-field style="width:105px;">
-                                            <input matInput [matDatepicker]="CourseFromDatepicker" placeholder="From date" [(ngModel)]="courseStartDate" [min] = "UserDetails.created_on"
+                                            <input matInput [matDatepicker]="CourseFromDatepicker" placeholder="'From date' | translate" [(ngModel)]="courseStartDate" [min] = "UserDetails.created_on"
                                              [max]="today" (dateChange)="changeCourseDate()">
                                             <mat-datepicker-toggle matSuffix [for]="CourseFromDatepicker"></mat-datepicker-toggle>
                                             <mat-datepicker #CourseFromDatepicker></mat-datepicker>
@@ -266,7 +266,7 @@
 
                                     <div class="end-date">
                                         <mat-form-field style="width:105px;">
-                                            <input matInput [matDatepicker]="CourseDatepicker" placeholder="To date" [(ngModel)]="courseEndDate" [min] = "minCourseDate"
+                                            <input matInput [matDatepicker]="CourseDatepicker" placeholder="'To date' | translate" [(ngModel)]="courseEndDate" [min] = "minCourseDate"
                                              [max]="today" (dateChange)="changeCourseDate()">
                                             <mat-datepicker-toggle matSuffix [for]="CourseDatepicker"></mat-datepicker-toggle>
                                             <mat-datepicker #CourseDatepicker></mat-datepicker>
@@ -275,26 +275,26 @@
                                 </div>
                                 </div>
                                 <div class="cousrse-chart-content">
-                                    <h6>Completion %</h6>
+                                    <h6>{{'Completion %' | translate}}</h6>
                                     <canvas baseChart [datasets]="coursebarChartData" [labels]="coursebarChartLabels" [options]="courseChartOptions"
                                     [plugins]="courseChartPlugins" [legend]="coursebarChartLegend" [chartType]="coursebarChartType"></canvas>
                             </div>
                                 <div class="d-flex justify-content-center align-items-center course-chart-footer">
-                                    Courses
+                                    {{'Courses' | translate}}
                                 </div>
                             </mat-card>
                             <mat-card class="week-wise-card">
                                 <div class="week-wise-card-header">
-                                  <div class="weekwise-card-header-text">Week wise time spent</div>
+                                  <div class="weekwise-card-header-text">{{'Week wise time spent' | translate}}</div>
                                 </div>
                                 <div class="progress-date d-flex">
                                     <div class="progress-hours-container">
                                      <h4 class="progress-hours">{{totalhoursSpend}}</h4>
-                                     <span class="hours-spent-label">Hours Spent</span>
+                                     <span class="hours-spent-label">{{'Hours Spent' | translate}}</span>
                                     </div>
                                     <div class="progress-date-input">
                                      <mat-form-field style="width:110px;">
-                                       <input matInput [matDatepicker]="weekWiseDatepicker" placeholder="Choose a date" [(ngModel)]="weekWiseDate"  [min] = "UserDetails.created_on"
+                                       <input matInput [matDatepicker]="weekWiseDatepicker" placeholder="'Choose a date' | translate" [(ngModel)]="weekWiseDate"  [min] = "UserDetails.created_on"
                                         [max]="today" (dateChange)="changeWeekDate()">
                                        <mat-datepicker-toggle matSuffix [for]="weekWiseDatepicker"></mat-datepicker-toggle>
                                        <mat-datepicker #weekWiseDatepicker></mat-datepicker>
@@ -302,7 +302,7 @@
                                     </div>
                                 </div>
                                 <div class="Week-chart-content">
-                                    <h6>Time in hours</h6>
+                                    <h6>{{'Time in hours' | translate}}</h6>
                                     <div>
                                         <canvas baseChart height="174px" [datasets]="WeekbarChartData" [labels]="WeekbarChartLabels" [options]="WeekbarChartOptions"
                                         [plugins]="WeekbarChartPlugins" [legend]="WeekbarChartLegend" [chartType]="WeekbarChartType"></canvas>
@@ -317,7 +317,7 @@
                         <div class="courseCompletion-btn" (click)="getCourseProgress()" *ngIf="!showProgressChart">
                             <h4>
                                 <em class="lxp-Analytics"></em>
-                                <span>Course Completion Progress</span> 
+                                <span>{{'Course Completion Progress' | translate}}</span> 
                             </h4>
                         </div>
                         
@@ -325,7 +325,7 @@
                         <mat-tab-group #tabs (selectedTabChange)="courseTabChange($event,userDetailes.user_id,userDetailes._id);" [(selectedIndex)]="selectedIndex">
                             <mat-tab>
                                 <ng-template mat-tab-label>
-                                    Ongoing ({{onGoingCourseCount}})
+                                    {{'Ongoing' | translate}} ({{onGoingCourseCount}})
                                 </ng-template>
                                 <div *ngIf="courseSkel; else courseSkeleton">
                                 <div class="mycoursesContent" *ngIf="courseDetailsList.length; else noCourseCard">
@@ -426,7 +426,7 @@
                             </mat-tab>
                             <mat-tab>
                                 <ng-template mat-tab-label>
-                                    Completed ({{completedCourseCount}})
+                                    {{'Completed' | translate}} ({{completedCourseCount}})
                                 </ng-template>
                                 <div *ngIf="courseSkel;else courseSkeleton">
                                 <div class="mycoursesContent" *ngIf="courseDetailsList.length;else noCourseCard">
@@ -523,7 +523,7 @@
                             </mat-tab>
                             <mat-tab>
                                 <ng-template mat-tab-label>
-                                    All ({{allCourseCount}})
+                                    {{'All' | translate}} ({{allCourseCount}})
                                 </ng-template>
                                 <div *ngIf="courseSkel;else courseSkeleton">
                                 <div class="mycoursesContent" *ngIf="courseDetailsList.length;else noCourseCard">
@@ -627,8 +627,8 @@
                             <label for="jobRoles" *ngIf="userDetailes.org_type != 'vocational'">Courses For:</label> -->
                             <div class="vocationalJobRole" style="display: inline-block;">
                               <mat-form-field appearance="fill">
-                                <mat-label *ngIf="userDetailes.org_type == 'vocational'">My Job Role:</mat-label>
-                                <mat-label *ngIf="userDetailes.org_type != 'vocational'">Courses For:</mat-label>
+                                <mat-label *ngIf="userDetailes.org_type == 'vocational'">{{'My Job Role:' | translate}}</mat-label>
+                                <mat-label *ngIf="userDetailes.org_type != 'vocational'">{{'Courses For:' | translate}}</mat-label>
                                 <mat-select (selectionChange)="onSelectionChange($event)" matTooltip="{{tooltipJobRole}}" [(ngModel)]="jobroleCategoryId">
                                   <mat-select-trigger>{{selectedJobRoleData?.jobroleCategoryName}}</mat-select-trigger>
                                   <mat-option matTooltipClass="custom-mat-tooltip" class="jobRolecustomClass" *ngFor="let selectedJobRole of vocationalselectjobRole" [value]="selectedJobRole.jobroleCategoryId" (onSelectionChange)="jobRoleSelectedFunction($event,selectedJobRole)">
@@ -645,14 +645,14 @@
                     <!-- InProgressModule -->
                     <ng-contaniner *ngIf="userDetailes.org_type == 'collegeconnect'">
                         <div class="inprogressModule" *ngIf="inProgress">
-                            <h3>Inprogress Modules</h3>
+                            <h3>{{'Inprogress Modules' | translate}}</h3>
                             <div class="wrapper">
                                 <drag-scroll #inProgress snap-duration="200" (reachesLeftBound)="leftBoundStatInProgress($event)" (reachesRightBound)="rightBoundStatInProgress($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
                                     <div class="contWrap">
                                         <div class="progressContainer" drag-scroll-item *ngFor="let progressModule of inProgressModule">
                                                 <div class="modules" (click)="goToCourse(progressModule)">
                                                 <h6 data-title="{{progressModule.course_name}}">{{progressModule.course_name}}</h6>
-                                                <span>MODULE:</span>
+                                                <span>{{'MODULE:' | translate}}</span>
                                                 <p data-title="{{progressModule.module}}">{{progressModule.module}}</p>
                                             </div>
                                         </div>
@@ -671,37 +671,37 @@
                     </ng-contaniner>
                     <!-- Missed Topics & Knowledge Check -->
                     <div class="missedTopicsKnowledgeCheck d-none" *ngIf="courseDetailsList.length">
-                        <h3>Missed Topics & Knowledge Check</h3>
+                        <h3>{{'Missed Topics & Knowledge Check' | translate}}</h3>
                         <div class="wrapper d-flex justify-content-between">
                             <span class="leftArrow"><em class="lxp-Right_Direction_Arrow"></em></span>
                             <span class="rightArrow"><em class="lxp-Right_Direction_Arrow"></em></span>
                             <div class="missedTopics">
-                                <h6>Applied Industrial IoT</h6>
-                                <span class="moduleName">MODULE:</span>
-                                <h5>Introduction to Industrial IoT</h5>
-                                <span class="topicName">TOPIC:</span>
-                                <h4>Codes for reinforced and Pre-stress…</h4>
+                                <h6>{{'Applied Industrial IoT' | translate}}</h6>
+                                <span class="moduleName">{{'MODULE:' | translate}}</span>
+                                <h5>{{'Introduction to Industrial IoT' | translate}}</h5>
+                                <span class="topicName">{{'TOPIC:' | translate}}</span>
+                                <h4>{{'Codes for reinforced and Pre-stress…' | translate}}</h4>
                             </div>
                             <div class="missedTopics">
-                                <h6>Applied Industrial IoT</h6>
-                                <span class="moduleName">MODULE:</span>
-                                <h5>Information technology and Operation</h5>
-                                <span class="topicName">TOPIC:</span>
-                                <h4>Codes for reinforced and Pre-stress…</h4>
+                                <h6>{{'Applied Industrial IoT' | translate}}</h6>
+                                <span class="moduleName">{{'MODULE:' | translate}}</span>
+                                <h5>{{'Information technology and Operation' | translate}}</h5>
+                                <span class="topicName">{{'TOPIC:' | translate}}</span>
+                                <h4>{{'Codes for reinforced and Pre-stress…' | translate}}</h4>
                             </div>
                             <div class="missedTopics">
-                                <h6>Applied Industrial IoT</h6>
-                                <span class="moduleName">MODULE:</span>
-                                <h5>Introduction to Industrial IoT</h5>
-                                <span class="topicName">TOPIC:</span>
-                                <h4>Codes for reinforced and Pre-stress…</h4>
+                                <h6>{{'Applied Industrial IoT' | translate}}</h6>
+                                <span class="moduleName">{{'MODULE:' | translate}}</span>
+                                <h5>{{'Introduction to Industrial IoT' | translate}}</h5>
+                                <span class="topicName">{{'TOPIC:' | translate}}</span>
+                                <h4>{{'Codes for reinforced and Pre-stress…' | translate}}</h4>
                             </div>
                             <div class="missedTopics">
-                                <h6>Applied Industrial IoT</h6>
-                                <span class="moduleName">MODULE:</span>
-                                <h5>Introduction to Industrial IoT</h5>
-                                <span class="topicName">TOPIC:</span>
-                                <h4>Codes for reinforced and Pre-stress…</h4>
+                                <h6>{{'Applied Industrial IoT' | translate}}</h6>
+                                <span class="moduleName">{{'MODULE:' | translate}}</span>
+                                <h5>{{'Introduction to Industrial IoT' | translate}}</h5>
+                                <span class="topicName">{{'TOPIC:' | translate}}</span>
+                                <h4>{{'Codes for reinforced and Pre-stress…' | translate}}</h4>
                             </div>
                         </div>
                     </div>
@@ -709,16 +709,16 @@
                     <!-- Recently Learned Topics -->
                     <ng-contaniner *ngIf="userDetailes.org_type == 'collegeconnect'">
                         <div class="recentlyLearnedTopics" *ngIf="recentlyCompleted">
-                            <h3>Recently Completed Topics</h3>
+                            <h3>{{'Recently Completed Topics' | translate}}</h3>
                             <div class="wrapper">
                                 <drag-scroll #completedTopics snap-duration="200" (reachesLeftBound)="leftBoundStat($event)" (reachesRightBound)="rightBoundStat($event)" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
                                     <div class="contWrap">
                                         <div class="topicsContainer" drag-scroll-item *ngFor="let complete of completedTopic">
                                             <div class="missedTopics" (click)="goToCourse(complete)">
                                                 <h6 data-title="{{complete.course_name}}">{{complete.course_name}}</h6>
-                                                <span class="moduleName">MODULE:</span>
+                                                <span class="moduleName">{{'MODULE:' | translate}}</span>
                                                 <h5 data-title="{{complete.module}}">{{complete.module}}</h5>
-                                                <span class="topicName">TOPIC:</span>
+                                                <span class="topicName">{{'TOPIC:' | translate}}</span>
                                                 <h4 data-title="{{complete.topic}}">{{complete.topic}}</h4>
                                             </div>
                                         </div>
@@ -737,7 +737,7 @@
                     </ng-contaniner>
                 </div>
                 </div>
-                <div class="footer" [ngClass]="show ? 'noPadding': 'padd'"><span class="powered"><span class="forgot1">©{{currentYear}} L&T EduTech. All Rights Reserved.</span></span></div>
+                <div class="footer" [ngClass]="show ? 'noPadding': 'padd'"><span class="powered"><span class="forgot1">©{{currentYear}} {{'L&T EduTech. All Rights Reserved.' | translate}}</span></span></div>
             </div>
         </mat-drawer-container>
     </div>
@@ -823,6 +823,6 @@
         <div>
           <img src="https://assets.lntedutech.com/application_images/noProject.svg" alt="assignment">
         </div>
-        <p>You have no {{dynamicTextChange}} courses at the moment!</p>
+        <p>{{'You have no' | translate}} {{dynamicTextChange}} {{'courses at the moment!' | translate}}</p>
     </div>
   </ng-template>

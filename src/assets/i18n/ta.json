@@ -45,9 +45,6 @@
   "Already have an account?":"ஏற்கனவே ஒரு கணக்கு உள்ளதா?",
   "Sign in":"உள்நுழையவும்",
 
-  "Welcome!":"வரவேற்பு!",
-  "Let's learn something new today!":"இன்று புதிதாக ஒன்றைக் கற்றுக்கொள்வோம்!",
-
   "Edit":"தொகு",
   "Cancel":"ரத்து செய்",
   "Password : ********":"கடவுச்சொல் : ********",
@@ -93,7 +90,85 @@
   "Enter current password":"தற்போதைய கடவுச்சொல்லை உள்ளிடவும்",
   "The password should not be last password":"கடவுச்சொல் கடைசி கடவுச்சொல்லாக இருக்கக்கூடாது",
   "Enter New password":"புதிய கடவுச்சொல்லை உள்ளிடவும்",
-  "New Password must be at least 8 characters":"புதிய கடவுச்சொல் குறைந்தது 8 எழுத்துக்கள் இருக்க வேண்டும்"
+  "New Password must be at least 8 characters":"புதிய கடவுச்சொல் குறைந்தது 8 எழுத்துக்கள் இருக்க வேண்டும்",
+  "Confirm password should be same as new password":"கடவுச்சொல் புதிய கடவுச்சொல்லைப் போலவே இருக்க வேண்டும் என்பதை உறுதிப்படுத்தவும்",
 
+  "Today":"இன்று",
+  "To Do":"செய்ய",
+  "Ongoing":"நடந்து கொண்டிருக்கிறது",
+  "Overdue":"காலாவதியானது",
+  "Yet to start":"இன்னும் தொடங்கவில்லை",
+  "Completed":"நிறைவு",
+  "Launch":"துவக்கவும்",
+  "Module: ":"தொகுதி:",
+  "Topic: ":"தலைப்பு:",
+  "View all":"அனைத்தையும் காட்டு",
+  "You have no activity scheduled for the day!":"உங்களுக்கு அன்றைய தினம் எந்தச் செயல்பாடும் திட்டமிடப்படவில்லை!",
 
+  "Welcome!":"வரவேற்பு!",
+  "Let's learn something new today!":"இன்று புதிதாக ஒன்றைக் கற்றுக்கொள்வோம்!",
+
+  "Learn from where your left":"நீங்கள் விட்டுச்சென்ற இடத்திலிருந்து கற்றுக்கொள்ளுங்கள்",
+  "MODULE:":"தொகுதி:",
+  "Codes for reinforced and Pre-stress…":"வலுவூட்டப்பட்ட மற்றும் முன்-அழுத்தத்திற்கான குறியீடுகள்...",
+  "Due date: 23 June 2021 12:00 AM":"கடைசி தேதி: 23 ஜூன் 2021 12:00 AM",
+  "GO":"போ",
+  "Join":"சேருங்கள்",
+
+  "My Courses":"எனது படிப்புகள்",
+  "Learn to speak English":"ஆங்கிலம் பேச கற்றுக்கொள்ளுங்கள்",
+  "Start Learning":"கற்கத் தொடங்குங்கள்",
+
+  "Course Completion Progress":"பாடநெறி நிறைவு முன்னேற்றம்",
+  "Close":"நெருக்கமான",
+  "Course Wise Completion":"பாடவாரியாக முடித்தல்",
+  "From date":"தேதியிலிருந்து",
+  "To date":"இன்றுவரை",
+  "Completion %":"நிறைவு %",
+  "Courses":"படிப்புகள்",
+  "Week wise time spent":"வாரம் வாரியாக நேரம் செலவிடப்பட்டது",
+  "Hours Spent":"செலவழித்த மணிநேரங்கள்",
+  "Choose a date":"தேதியைத் தேர்ந்தெடுக்கவும்",
+  "Time in hours":"மணிநேரங்களில் நேரம்",
+
+  "All":"அனைத்து",
+  "My Job Role:":"எனது பணி பங்கு:",
+  "Courses For:":"இதற்கான படிப்புகள்:",
+
+  "Inprogress Modules":"முன்னேற்ற தொகுதிகள்",
+  "Missed Topics & Knowledge Check":"தவறவிட்ட தலைப்புகள் & அறிவுச் சரிபார்ப்பு",
+  "Applied Industrial IoT":"பயன்பாட்டு தொழில்துறை IoT",
+  "Introduction to Industrial IoT":"தொழில்துறை IoT அறிமுகம்",
+  "TOPIC:":"தலைப்பு:",
+  "Information technology and Operation":"தகவல் தொழில்நுட்பம் மற்றும் செயல்பாடு",
+  "Recently Completed Topics":"சமீபத்தில் முடிக்கப்பட்ட தலைப்புகள்",
+  "L&T EduTech. All Rights Reserved.":"எல்&டி எடுடெக். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
+  "You have no":"உங்களிடம் இல்லை",
+  "courses at the moment!":"இந்த நேரத்தில் படிப்புகள்!",
+
+  "Download":"பதிவிறக்க",
+  "Google authenticator":"Google அங்கீகரிப்பான்",
+  "App in your mobile to scan this code":"இந்தக் குறியீட்டை ஸ்கேன் செய்ய உங்கள் மொபைலில் உள்ள ஆப்",
+  "Next":"அடுத்தது",
+  "Enter the code generated in your Google Authenticator App":"உங்கள் Google அங்கீகரிப்பு பயன்பாட்டில் உருவாக்கப்பட்ட குறியீட்டை உள்ளிடவும்",
+  "Go back to ":"திரும்பிச் செல்லவும் ",
+
+  "Set Password":"கடவுச்சொல்லை அமைக்கவும்",
+  "Email ID":"மின்னஞ்சல் முகவரி",
+  "Password must be at least 8 characters, one uppercase, number and special character":"கடவுச்சொல்லில் குறைந்தது 8 எழுத்துகள், ஒரு பெரிய எழுத்து, எண் மற்றும் சிறப்பு எழுத்து இருக்க வேண்டும்",
+  "Confirm password":"கடவுச்சொல்லை உறுதிப்படுத்தவும்",
+  "Enter confirm password":"உறுதிப்படுத்தல் கடவுச்சொல்லை உள்ளிடவும்",
+  "Should be same as password":"கடவுச்சொல் போலவே இருக்க வேண்டும்",
+  "Link Expired..":"இணைப்பு காலாவதியானது..",
+
+  "Reset the password":"கடவுச்சொல்லை மீட்டமைக்கவும்",
+  "Enter email id":"மின்னஞ்சல் ஐடியை உள்ளிடவும்",
+
+  "What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Why do we use it? It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).":"லோரெம் இப்சம் என்றால் என்ன? லோரெம் இப்சம் என்பது அச்சிடும் மற்றும் தட்டச்சுத் துறையின் போலி உரை. லோரெம் இப்சம் என்பது 1500களில் இருந்து தொழில்துறையின் நிலையான போலி உரையாக இருந்து வருகிறது, அப்போது தெரியாத அச்சுப்பொறி ஒரு வகையின் கேலியை எடுத்து ஒரு வகை மாதிரிப் புத்தகத்தை உருவாக்கியது. இது ஐந்து நூற்றாண்டுகள் மட்டுமல்ல, மின்னணு தட்டச்சு அமைப்பில் பாய்ச்சியது, அடிப்படையில் மாறாமல் உள்ளது. இது 1960 களில் லோரெம் இப்சம் பத்திகளைக் கொண்ட லெட்ராசெட் தாள்களின் வெளியீட்டில் பிரபலமடைந்தது, மேலும் சமீபத்தில் லோரெம் இப்சம் பதிப்புகள் உட்பட ஆல்டஸ் பேஜ்மேக்கர் போன்ற டெஸ்க்டாப் பப்ளிஷிங் மென்பொருளுடன். நாம் ஏன் அதைப் பயன்படுத்துகிறோம்? ஒரு பக்கத்தின் தளவமைப்பைப் பார்க்கும்போது அதன் படிக்கக்கூடிய உள்ளடக்கத்தால் வாசகர் திசைதிருப்பப்படுவார் என்பது நீண்டகாலமாக நிறுவப்பட்ட உண்மை. Lorem Ipsum ஐப் பயன்படுத்துவதன் முக்கிய அம்சம் என்னவென்றால், இது 'உள்ளடக்கம் இங்கே, உள்ளடக்கம் இங்கே' என்பதைப் பயன்படுத்துவதற்கு மாறாக, அதிகமாகவோ அல்லது குறைவாகவோ இயல்பான எழுத்துப் பரவலைக் கொண்டுள்ளது, இது படிக்கக்கூடிய ஆங்கிலத்தைப் போல தோற்றமளிக்கிறது. பல டெஸ்க்டாப் பப்ளிஷிங் பேக்கேஜ்கள் மற்றும் இணையப் பக்க எடிட்டர்கள் இப்போது லோரெம் இப்சம் அவர்களின் இயல்புநிலை மாதிரி உரையாகப் பயன்படுத்துகின்றனர், மேலும் 'லோரெம் இப்சம்' என்ற தேடலின் போது பல இணையதளங்கள் இன்னும் ஆரம்ப நிலையில் இருக்கும். பல்வேறு பதிப்புகள் பல ஆண்டுகளாக உருவாகியுள்ளன, சில நேரங்களில் தற்செயலாக, சில நேரங்களில் நோக்கத்திற்காக (நகைச்சுவை மற்றும் போன்றவை).",
+
+  "All notifications":"அனைத்து அறிவிப்புகளும்",
+  "Mark all as read":"அனைத்தையும் வாசிக்கப்பட்டதாக அடையாளமிடு",
+  "Notifications":"அறிவிப்புகள்",
+  "Received on":"அன்று பெறப்பட்டது",
+  "No new notifications":"புதிய அறிவிப்புகள் இல்லை"
 }
