@@ -60,6 +60,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.lxp-video-tutorial-1:before {
+  content: "\e969";
+}
+.lxp-students:before {
+  content: "\e96a";
+}
+.lxp-recorded_videos:before {
+  content: "\e96b";
+}
 .lxp-Online_Code_Editor:before {
   content: "\e968";
 }
