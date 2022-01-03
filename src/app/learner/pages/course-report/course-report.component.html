@@ -17,9 +17,9 @@
     <div class="reportLeftCol">
       <ul class="breadcrumb">
         <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> {{course?.name}}</li>
-        <li>Assessment Report</li>
+        <li>{{'Assessment Report' | translate}}</li>
       </ul>
-      <h3>Learning Process</h3>
+      <h3>{{'Learning Process' | translate}}</h3>
       <!-- Self Learning -->
       <!-- <div class="selfLearningSection commonClass d-flex justify-content-between flex-wrap align-items-center"> 
         <div class="percentageContent">
@@ -152,7 +152,7 @@
      
       <div class="overallsection d-flex justify-content-between align-items-center flex-wrap">
         <mat-card class="selflearningCard">
-          <div class="card-head d-flex align-items-center justify-content-center">Self Learning Score</div>
+          <div class="card-head d-flex align-items-center justify-content-center">{{'Self Learning Score' | translate}}</div>
            <div class="card-content d-flex align-items-center">
              <div class="graph-content">
                <circle-progress [title]= "selfscore"
@@ -165,30 +165,30 @@
              <div class="text-content">
                <ul>
                  <li class="d-flex">
-                   <label>No. of weeks elapsed</label>
+                   <label>{{'No. of weeks elapsed' | translate}}</label>
                    <span>
                        {{courseReportData.selfLearning_Card.total_no_of_weeks_completed}}/{{courseReportData.selfLearning_Card.total_no_of_weeks_actual}}
                    </span>
                  </li>
                  <li class="d-flex">
-                   <label> No. of topics completed </label>
+                   <label> {{'No. of topics completed' | translate}} </label>
                    <span>
                      {{courseReportData.selfLearning_Card.total_no_of_topics_completed}}/{{courseReportData.selfLearning_Card.total_no_of_topics_actual}}
                    </span>
                  </li>
                  <li class="d-flex">
-                   <label>Total duration spent </label> 
-                   <span>{{courseReportData.selfLearning_Card.total_no_of_duration}} min</span>
+                   <label>{{'Total duration spent' | translate}} </label> 
+                   <span>{{courseReportData.selfLearning_Card.total_no_of_duration}} {{'min' | translate}}</span>
                  </li>
                </ul>
              </div>
            </div>
            <div class="card-foot">
-            Learn all topics completely to improve your Self Learning score
+            {{Learn all topics completely to improve your Self Learning score'' | translate}}
            </div>
        </mat-card>
         <mat-card class="selflearningCard">
-                <div class="card-head d-flex align-items-center justify-content-center">Q&A Score</div>
+                <div class="card-head d-flex align-items-center justify-content-center">{{'Q&A Score' | translate}}</div>
                   <div class="card-content d-flex align-items-center">
                   <div class="graph-content">
                     <circle-progress [title]="QAscore" [titleFontSize] = "10" [titleFontWeight] = "600" [showUnits]= "false" 
@@ -200,7 +200,7 @@
                   <div class="text-content">
                     <ul>
                       <li>
-                       <label>No. of questions asked </label> <span>{{courseReportData.QA_Card.QA_total_no_of_quetions}}</span>
+                       <label>{{'No. of questions asked' | translate}} </label> <span>{{courseReportData.QA_Card.QA_total_no_of_quetions}}</span>
                       </li>
                     </ul>
                   </div>
@@ -208,13 +208,13 @@
                 <div class="card-foot d-flex align-items-center">
                   <popover-content #QAPopover>
                     <div class="popoverContainer">
-                      <div class="calculation">Calculation formula</div>
+                      <div class="calculation">{{'Calculation formula' | translate}}</div>
                       <div>
                         <table>
                           <tr>
-                            <th>No. of questions</th>
-                            <th>Score</th>
-                            <th>Percentage</th>
+                            <th>{{'No. of questions' | translate}}</th>
+                            <th>{{'Score' | translate}}</th>
+                            <th>{{'Percentage' | translate}}</th>
                           </tr>
                           <tr *ngFor = "let row of QAPopoverContent">
                             <td>{{row.ques}}</td>
@@ -228,14 +228,14 @@
                  <div>
                   <button class="popover-info" popoverPlacement="right" [popover]="QAPopover"><span><img  src="https://assets.lntedutech.com/application_images/Group 14025.svg" /></span></button>
                  </div>
-                   <div>Q&A score is based on the number of relevant questions you ask</div>
+                   <div>{{'Q&A score is based on the number of relevant questions you ask' | translate}}</div>
                 </div>
         </mat-card>
       </div>
 
       <div class="weeklyreport">
           <div class="weekly-head d-flex justify-content-between align-items-center">
-                <div class="week-head-text">Weekly Score - Self Learning</div>
+                <div class="week-head-text">{{'Weekly Score - Self Learning' | translate}}</div>
                 <div class="week-head-action">
                   <mat-button-toggle-group appearance="legacy" value="article" #group="matButtonToggleGroup">
                     <mat-button-toggle value="article"><mat-icon>article</mat-icon></mat-button-toggle>
@@ -251,11 +251,11 @@
                       <div class="week-card-head d-flex">
                         <popover-content #selfPopover>
                           <div class="popoverContainer">
-                            <div class="items">(A) Estimated Duration - <span>{{selfValue.actualtopicduration}} mins</span></div>
-                            <div class="items">(B) Completed Duration - <span>{{selfValue.completedtopicduration}} mins</span></div>
-                            <div class="items">(C) No. of Topics - <span>{{selfValue.no_of_topic}}</span></div>
-                            <div class="items">(D) Completed Topics - <span>{{selfValue.Completedfortheweek}}</span></div>
-                            <div class="calculation">Calculation formula</div>
+                            <div class="items">{{'(A) Estimated Duration - ' | translate}}<span>{{selfValue.actualtopicduration}} {{'mins' | translate}}</span></div>
+                            <div class="items">{{'(B) Completed Duration - ' | translate}}<span>{{selfValue.completedtopicduration}} {{'mins' | translate}}</span></div>
+                            <div class="items">{{'(C) No. of Topics - ' | translate}}<span>{{selfValue.no_of_topic}}</span></div>
+                            <div class="items">{{'(D) Completed Topics - ' | translate}}<span>{{selfValue.Completedfortheweek}}</span></div>
+                            <div class="calculation">{{'Calculation formula' | translate}}</div>
                             <div class="calcFormula">={{selfValue.calculation}}</div>
                             <div class="calcPercentage">= {{selfValue.selflearningscore}}</div>
                           </div>
@@ -267,12 +267,12 @@
                       </div>
                       <ul>
                           <li class="d-flex">
-                            <label>Percentage</label>
+                            <label>{{'Percentage' | translate}}</label>
                             <span *ngIf="selfValue.selflearningscore != 0">{{selfValue.selflearningpercentage}}%</span>
                             <span *ngIf="selfValue.selflearningscore == 0">0</span>
                           </li>
                           <li class="d-flex">
-                            <label>Score</label>
+                            <label>{{'Score' | translate}}</label>
                             <span>{{selfValue.selflearningscore}}</span></li>
                       </ul>
                   </ng-container>
@@ -288,7 +288,7 @@
             </div>
             <div *ngIf="group.value == 'chart'">
               <mat-card class="barGraphCard">
-                <h6>Percentage</h6>
+                <h6>{{'Percentage' | translate}}</h6>
                 <span *ngIf="showArrow">
                   <button [disabled] = "disableArrow" mat-icon-button (click)="graphleft()">
                     <mat-icon>chevron_left</mat-icon>
@@ -307,7 +307,7 @@
                     [chartType]="barChartType">
                   </canvas>
                 </div>
-                <label>Score</label>
+                <label>{{'Score' | translate}}</label>
               </mat-card>
           </div>
           </div>
@@ -317,10 +317,10 @@
     <div class="reportRightCol">
       <ul class="breadcrumb">
         <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> {{course?.name}}</li>
-        <li>Assessment Report</li>
+        <li>{{'Assessment Report' | translate}}</li>
       </ul>
       <div class="refresh">
-        <button (click)="refreshReport()"><em class="lxp-Reset"></em> Refresh</button>
+        <button (click)="refreshReport()"><em class="lxp-Reset"></em> {{'Refresh' | translate}}</button>
       </div>
       <div class="ScoreSection">
         <div class="d-flex justify-content-between align-items-center">
@@ -329,7 +329,7 @@
               [ngClass]="{'green' : courseReportData.LPScore.LPScore != 0,'white' : courseReportData.LPScore.LPScore == 0  }">1</span>
           </div>
           <div class="progress-text">
-            <h3>Learning Process Score</h3>
+            <h3>{{'Learning Process Score' | translate}}</h3>
           </div>
           <div class="progressPercentage">
             <span>
@@ -361,7 +361,7 @@
               [ngClass]="{'green' : courseReportData.assessmentscore.project != 0, 'white' : courseReportData.assessmentscore.project == 0}">2</span>
           </div>
           <div class="progress-text">
-            <h3>Project Score</h3>
+            <h3>{{'Project Score' | translate}}</h3>
           </div>
           <div class="progressPercentage">
             <span>
@@ -387,24 +387,24 @@
           </div> -->
         </div>
         <div class="assessmentScoreCard">
-          <h3 class="assessment-hd-txt">Assessment Score</h3>
+          <h3 class="assessment-hd-txt">{{'Assessment Score' | translate}}</h3>
           <div class="d-flex justify-content-between align-items-center">
             <div class="numberedList">
               <span
                 [ngClass]="{'green' : courseReportData.assessmentscore.test1 != 0,'white' : courseReportData.assessmentscore.test1 == 0 }">3</span>
             </div>
             <div class="assessment-progress-text">
-              <h3>Internal Test 1</h3>
+              <h3>{{'Internal Test 1' | translate}}</h3>
             </div>
             <div class="raw-score">
               <span>{{courseReportData.assessmentscore.test1ObtainedScore ? courseReportData.assessmentscore.test1ObtainedScore : '-'}}/{{courseReportData.assessmentscore.test1OutOfScore ? courseReportData.assessmentscore.test1OutOfScore : '-'}}</span>
-              <p>Raw Score</p>
+              <p>{{'Raw Score' | translate}}</p>
             </div>
             <div class="assessment-progressPercentage">
               <span>
                     {{courseReportData.assessmentscore.test1 ? courseReportData.assessmentscore.test1 : 0}} /{{courseReportData.assessmentscore.outoftest1 ? courseReportData.assessmentscore.outoftest1 : 0}}
               </span>
-              <p>Weighted Score</p>
+              <p>{{'Weighted Score' | translate}}</p>
             </div>
             <!-- <div class="courseProgressBar">
               <span>Internal Test 1</span>
@@ -432,17 +432,17 @@
                 [ngClass]="{'green' : courseReportData.assessmentscore.test2 != 0, 'white' : courseReportData.assessmentscore.test2 == 0}">4</span>
             </div>
             <div class="assessment-progress-text">
-              <h3>Internal Test 2</h3>
+              <h3>{{'Internal Test 2' | translate}}</h3>
             </div>
             <div class="raw-score">
               <span>{{courseReportData.assessmentscore.test2ObtainedScore ? courseReportData.assessmentscore.test2ObtainedScore : '-'}}/{{courseReportData.assessmentscore.test2OutOfScore ? courseReportData.assessmentscore.test2OutOfScore : '-'}}</span>
-              <p>Raw Score</p>
+              <p>{{'Raw Score' | translate}}</p>
             </div>
             <div class="assessment-progressPercentage">
               <span>
                     {{courseReportData.assessmentscore.test2 ? courseReportData.assessmentscore.test2 : 0}} /{{courseReportData.assessmentscore.outoftest2 ? courseReportData.assessmentscore.outoftest2 : 0}}
               </span>
-              <p>Weighted Score</p>
+              <p>{{'Weighted Score' | translate}}</p>
             </div>
             <!-- <div class="courseProgressBar">
               <span>Internal Test 2</span>
@@ -468,17 +468,17 @@
                 [ngClass]="{'green' : courseReportData.assessmentscore.test3 != 0, 'white' : courseReportData.assessmentscore.test3 == 0}">5</span>
             </div>
             <div class="assessment-progress-text">
-              <h3>Final Test</h3>
+              <h3>{{'Final Test' | translate}}</h3>
             </div>
             <div class="raw-score">
               <span>{{courseReportData.assessmentscore.test3ObtainedScore ? courseReportData.assessmentscore.test3ObtainedScore : '-'}}/{{courseReportData.assessmentscore.test3OutOfScore ? courseReportData.assessmentscore.test3OutOfScore : '-'}}</span>
-              <p>Raw Score</p>
+              <p>{{'Raw Score' | translate}}</p>
             </div>
             <div class="assessment-progressPercentage">
               <span>
                     {{courseReportData.assessmentscore.test3 ? courseReportData.assessmentscore.test3 : 0}} /{{courseReportData.assessmentscore.outoftest3 ? courseReportData.assessmentscore.outoftest3 : 0}}
               </span>
-              <p>Weighted Score</p>
+              <p>{{'Weighted Score' | translate}}</p>
             </div>
             <!-- <div class="courseProgressBar">
               <span>Final Test</span>
@@ -501,7 +501,7 @@
         </div>
         <div class="finalScoreCard">
           <div class="d-flex">
-            <h3>Final Score</h3>
+            <h3>{{'Final Score' | translate}}</h3>
             <button class="popoverInfoFinal" popoverPlacement="right" [popover]="finalPopover"><span>
               <img  src="https://assets.lntedutech.com/application_images/Group 14025.svg" />
             </span></button>
@@ -509,7 +509,7 @@
           <popover-content #finalPopover placement="right" [animation]="true" popoverSize="large">
             <div style="width: 200px;">
               <div style="color: red;">
-                Calculation
+                {{'Calculation' | translate}}
               </div>
               <div style="color: #49AE31;">
                 = {{courseReportData.finalscore.calculation}}
@@ -520,9 +520,9 @@
               <div>
                 <table>
                   <thead>
-                    <td>Score</td>
-                    <td>Grade Point</td>
-                    <td>Grade</td>
+                    <td>{{'Score' | translate}}</td>
+                    <td>{{'Grade Point' | translate}}</td>
+                    <td>{{'Grade' | translate}}</td>
                   </thead>
                   <tbody>
                     <tr style="color: red;text-align: center;" *ngFor="let value of courseReportData.finalscore.formula">
@@ -544,13 +544,13 @@
                 <figure>
                   <img src="https://assets.lntedutech.com/application_images/grade.svg" alt="" />
                 </figure>
-                <h6>Grade <span>{{courseReportData.finalscore.grade}}</span></h6>
+                <h6>{{'Grade' | translate}} <span>{{courseReportData.finalscore.grade}}</span></h6>
               </div>
               <div>
                 <figure>
                   <img src="https://assets.lntedutech.com/application_images/points.svg" alt="" />
                 </figure>
-                <h6>Points <span>{{courseReportData.finalscore.gradepoint}}</span></h6>
+                <h6>{{'Points' | translate}} <span>{{courseReportData.finalscore.gradepoint}}</span></h6>
               </div>
             </div>
           </div>

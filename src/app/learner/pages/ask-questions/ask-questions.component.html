@@ -5,25 +5,25 @@
     <div class="titlebar">
         <div class="d-flex align-items-center titleBack">
             <div class="pointer d-flex align-items-center" (click)="goBack()">
-                <i class="lxp-Arrow backArrow"></i><span>Back</span>
+                <i class="lxp-Arrow backArrow"></i><span>{{'Back' | translate}}</span>
             </div>
-            <div class="courseTitle text-truncate"> | <span>{{courseName}} > All Questions and Answer</span></div>
+            <div class="courseTitle text-truncate"> | <span>{{courseName}} > {{'All Questions and Answer' | translate}}</span></div>
         </div>
     </div>
     <div class="d-flex justify-content-between flex-wrap mx-20px" *ngIf="moduleTopicData?.length">
         <div class=" align-self-center">
             <div class="d-inline-block mt-10px mr-30px">
-                <span>Sort by: &nbsp;</span>
+                <span>{{'Sort by: ' | translate}}&nbsp;</span>
                 <select class="sel-pad" [(ngModel)]="qaSortKey" (change)="mainQAFilter('Sort')">
-                    <option [value]="-1" selected="true">Newest</option>
-                    <option [value]="1">Oldest</option>
+                    <option [value]="-1" selected="true">{{'Newest' | translate}}</option>
+                    <option [value]="1">{{'Oldest' | translate}}</option>
                 </select>
             </div>
             <span *ngIf="checkLevel;else normaltopics">
             <div class=" d-inline-block mt-10px" *ngIf="moduleTopicData?.length">
-                <span>Filter by: &nbsp;</span>
+                <span>{{'Filter by: ' | translate}}&nbsp;</span>
                 <select class="sel-pad mr-20px" [(ngModel)]="mainModule" (change)="mainQAFilter('M')">
-                    <option [ngValue]="null" [disabled]="false">All Modules</option>
+                    <option [ngValue]="null" [disabled]="false">{{'All Modules' | translate}}</option>
                     <ng-container *ngFor="let skipper of moduleTopicData">
                         <option  *ngFor="let item of skipper.childData" [ngValue]="item">{{item.title}}</option>
                     </ng-container>
@@ -31,22 +31,22 @@
                 </div>
                 <div class=" d-inline-block mt-10px">
                 <select *ngIf="mainModule" class="sel-pad " [(ngModel)]="mainTopic" (change)="mainQAFilter('T')">
-                    <option [ngValue]="null" [disabled]="false">All Topics</option>
+                    <option [ngValue]="null" [disabled]="false">{{'All Topics' | translate}}</option>
                     <option  *ngFor="let item of mainModule.childData" [ngValue]="item.title">{{item.title}}</option>
                 </select>
             </div>
             </span>
             <ng-template #normaltopics>
             <div class=" d-inline-block mt-10px" *ngIf="moduleTopicData?.length">
-                <span>Filter by: &nbsp;</span>
+                <span>{{'Filter by: ' | translate}}&nbsp;</span>
                 <select class="sel-pad mr-20px" [(ngModel)]="mainModule" (change)="mainQAFilter('M')">
-                    <option [ngValue]="null" [disabled]="false">All Modules</option>
+                    <option [ngValue]="null" [disabled]="false">{{'All Modules' | translate}}</option>
                     <option  *ngFor="let item of moduleTopicData" [ngValue]="item">{{item.title}}</option>
                 </select>
                 </div>
                 <div class=" d-inline-block mt-10px">
                 <select *ngIf="mainModule" class="sel-pad " [(ngModel)]="mainTopic" (change)="mainQAFilter('T')">
-                    <option [ngValue]="null" [disabled]="false">All Topics</option>
+                    <option [ngValue]="null" [disabled]="false">{{'All Topics' | translate}}</option>
                     <option  *ngFor="let item of mainModule.childData" [ngValue]="item.title">{{item.title}}</option>
                 </select>
             </div>
@@ -54,7 +54,7 @@
             
         </div>
         <div class="justify-content-end mt-10px" *ngIf="batchEndTime>=currentDate">
-            <button class="btn btn-primary" (click)="openQuestionInput(questionInputModal)">Ask Question</button>
+            <button class="btn btn-primary" (click)="openQuestionInput(questionInputModal)">{{'Ask Question' | translate}}</button>
         </div>
     </div>
     <div >
@@ -64,11 +64,11 @@
                 <span class="userAccount"><i
                         class="lxp-AccountCircle align-text-bottom"></i>&nbsp;<span>{{item.user_name}}</span></span>&nbsp;|&nbsp;
                 <span class="QuestionMeta d-inline-flex">
-                    <p>Asked on: &nbsp;{{item.question.askDate}},&nbsp;{{item.question.askTime}}</p>
+                    <p>{{'Asked on:' | translate}} &nbsp;{{item.question.askDate}},&nbsp;{{item.question.askTime}}</p>
                 </span>
                 <p class="quesiton">{{item.question.que}}</p>
                 <div class="QuestionMeta">
-                    <div class="badge badge-success">Answered</div>
+                    <div class="badge badge-success">{{'Answered' | translate}}</div>
                     <p>&nbsp; {{item.question.ansDate}},&nbsp;{{item.question.ansTime}}</p>
                 </div>
                 <p class="answer" *ngIf="item.question.ansDate">{{item.question.ans}}</p>
@@ -86,31 +86,31 @@
 
 <ng-template #questionInputModal>
     <div class="askQuestionsTitle" style=" position: relative !important;" (contextmenu)="contextmenu()">
-        <span style="font-weight: 400;">Ask a Question</span> <span class="qaClose cursor-pointer"><i
+        <span style="font-weight: 400;">{{'Ask a Question' | translate}}</span> <span class="qaClose cursor-pointer"><i
                 (click)="closedialogbox()" class="lxp-Close"></i></span>
     </div>
     <div class="askQuestionsContainer mx-20px"(contextmenu)="contextmenu()">
         <span *ngIf="checkLevel;else qinputlist"></span>
         <div class="mt-10px  d-inline-block" >
             <select class="sel-pad-modal" [(ngModel)]="questionTopicList" (change)="askQAModuleSelect()">
-                <option [ngValue]="null" [disabled]="true">Please select a module</option>
+                <option [ngValue]="null" [disabled]="true">{{'Please select a module' | translate}}</option>
                 <ng-container *ngFor="let skipper of moduleTopicData">
                 <option  *ngFor="let item of skipper.childData" [ngValue]="item">{{item.title}}</option>
                 </ng-container>
             </select>
             <select *ngIf="questionTopicList" class="sel-pad-modal ml-20px" [(ngModel)]="questionTopic" >
-                <option [ngValue]="null" [disabled]="true">Please select a topic</option>
+                <option [ngValue]="null" [disabled]="true">{{'Please select a topic' | translate}}</option>
                 <option  *ngFor="let item of questionTopicList.childData" [ngValue]="item.title">{{item.title}}</option>
             </select>
         </div>
         <ng-template #qinputlist>
             <div class="mt-10px  d-inline-block" >
                 <select class="sel-pad-modal" [(ngModel)]="questionTopicList" (change)="askQAModuleSelect()">
-                    <option [ngValue]="null" [disabled]="true">Please select a module</option>
+                    <option [ngValue]="null" [disabled]="true">{{'Please select a module' | translate}}</option>
                     <option  *ngFor="let item of moduleTopicData" [ngValue]="item">{{item.title}}</option>
                 </select>
                 <select *ngIf="questionTopicList" class="sel-pad-modal ml-20px" [(ngModel)]="questionTopic" >
-                    <option [ngValue]="null" [disabled]="true">Please select a topic</option>
+                    <option [ngValue]="null" [disabled]="true">{{'Please select a topic' | translate}}</option>
                     <option  *ngFor="let item of questionTopicList.childData" [ngValue]="item.title">{{item.title}}</option>
                 </select>
             </div>
@@ -120,8 +120,8 @@
                     
                 </div>
                 <div class="d-flex justify-content-center mt-10px">
-                    <button class="btn btn-primary-outline mr-10px" (click)="closedialogbox()">Cancel</button>
-                    <button class="btn btn-primary" (click)="submitMyQuestion()">Submit Question</button>
+                    <button class="btn btn-primary-outline mr-10px" (click)="closedialogbox()">{{'Cancel' | translate}}</button>
+                    <button class="btn btn-primary" (click)="submitMyQuestion()">{{'Submit Question' | translate}}</button>
                 </div>
     </div>
 </ng-template>
