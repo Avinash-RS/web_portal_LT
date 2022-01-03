@@ -2,16 +2,16 @@
 <div class="calendarArea">
 <section class="activiySchedule">
   <div class="headerarea">
-    <div class="heading5">Schedule <span>(Activities for the month)</span></div>
+    <div class="heading5">{{'Schedule' | translate}} <span>{{'(Activities for the month)' | translate}}</span></div>
   </div>
   <div class="viewInfotxt d-flex justify-content-between">
     <div class="leftPan">
-      <span mat-ripple (click)="setStatus('')" [ngClass]="status == '' ? 'active' : ''">All ({{activityData?.allActivityCount}})</span>
-      <span mat-ripple (click)="setStatus('pending')" [ngClass]="status == 'pending' ? 'active' : ''">Pending ({{activityData?.pendingActivityCount}})</span>
-      <span mat-ripple (click)="setStatus('completed')" [ngClass]="status == 'completed' ? 'active' : ''">Completed ({{activityData?.completedActivityCount}})</span>
+      <span mat-ripple (click)="setStatus('')" [ngClass]="status == '' ? 'active' : ''">{{'All' | translate}} ({{activityData?.allActivityCount}})</span>
+      <span mat-ripple (click)="setStatus('pending')" [ngClass]="status == 'pending' ? 'active' : ''">{{'Pending' | translate}} ({{activityData?.pendingActivityCount}})</span>
+      <span mat-ripple (click)="setStatus('completed')" [ngClass]="status == 'completed' ? 'active' : ''">{{'Completed' | translate}} ({{activityData?.completedActivityCount}})</span>
     </div>
     <div class="rightPan">
-      <span>Filter by: </span>
+      <span>{{'Filter by:' | translate}} </span>
       <mat-form-field class="mr-2" appearance="outline">
         <mat-select (selectionChange)="onSortChange($event)" matTooltip="{{CourseName}}" [(ngModel)]="courseValue">
           <mat-option *ngFor="let course of courseDetailsList" [value]="course.course_id">
@@ -34,8 +34,8 @@
         <div class="contentbox d-flex justify-content-between" (click)="goToActivities(activity)">
           <div class="infotxtarea">
             <span class="htxt" matTooltipPosition="below" matTooltip="{{activity.coursename}}">{{activity.coursename}}</span>
-            <div class="infotxt d-flex justify-content-start align-items-center"> <span>Module:</span> <span class="moduleTopic" matTooltipPosition="below" matTooltip="{{activity.modulename}}">{{activity.modulename}}</span></div>
-            <div *ngIf="(activity.self_paced_learning == 'topic' || activity.liveclassroom == 'topic') || (!activity.self_paced_learning && !activity.liveclassroom)" class="infotxt d-flex justify-content-start align-items-center"> <span>Topic:</span> <span class="moduleTopic" matTooltipPosition="below" matTooltip="{{activity.topicname}}">{{activity.topicname}}</span></div>
+            <div class="infotxt d-flex justify-content-start align-items-center"> <span>{{'Module:' | translate}}</span> <span class="moduleTopic" matTooltipPosition="below" matTooltip="{{activity.modulename}}">{{activity.modulename}}</span></div>
+            <div *ngIf="(activity.self_paced_learning == 'topic' || activity.liveclassroom == 'topic') || (!activity.self_paced_learning && !activity.liveclassroom)" class="infotxt d-flex justify-content-start align-items-center"> <span>{{'Topic:' | translate}}</span> <span class="moduleTopic" matTooltipPosition="below" matTooltip="{{activity.topicname}}">{{activity.topicname}}</span></div>
           </div>
     
           <div class="infotypearea">
@@ -49,8 +49,8 @@
               <div *ngIf="activity.activitytype != 'Live Classroom' && activity.activitytype != 'Self Learning'" class="notifi activity">{{activity.activitytype}}</div>
               <div *ngIf="activity.activitytype == 'Self Learning'" class="notifi selfplacedlearning">{{activity.activitytype}}</div>
               <div *ngIf="activity.activitytype == 'Live Classroom'" class="notifi virtualinstructorled">
-                <ng-container *ngIf="userDetails.org_type !== 'collegeconnect'">Live Interactions</ng-container>
-                <ng-container *ngIf="userDetails.org_type == 'collegeconnect'">Industry Talk</ng-container>
+                <ng-container *ngIf="userDetails.org_type !== 'collegeconnect'">{{'Live Interactions' | translate}}</ng-container>
+                <ng-container *ngIf="userDetails.org_type == 'collegeconnect'">{{'Industry Talk' | translate}}</ng-container>
               </div>
             </div>
           </div>
@@ -66,7 +66,7 @@
           <div class="launch">
             <ng-container *ngIf="activity.activitytype == 'Live Classroom'">
               <div *ngIf="activity.status == 'On going'" (click)="openClassroom(activity.link)">
-                <em class="lxp-Launch"></em> <span>Launch</span>
+                <em class="lxp-Launch"></em> <span>{{'Launch' | translate}}</span>
               </div>
             </ng-container>
           </div>
@@ -85,7 +85,7 @@
         <figure>
           <img src="https://assets.lntedutech.com/application_images/noactivityScheduled.svg" alt="assignment">
         </figure>
-        <p>You have no activity scheduled</p>
+        <p>{{'You have no activity scheduled' | translate}}</p>
       </div>
     </ng-container>
     <ng-container  *ngIf="showSkeleton">
@@ -113,7 +113,7 @@
 <div class="calendarSlide">
   <div class="d-flex justify-content-end">
     <button mat-stroked-button class="reset-button" (click)="onSortChange('')">
-      <em class="lxp-Reset"></em> <span>Reset</span>
+      <em class="lxp-Reset"></em> <span>{{'Reset' | translate}}</span>
     </button>
   </div>
   <div class="calender-section">
@@ -142,10 +142,10 @@
     <!-- calender html end #00a99d-->
   </div>
   <div class="activInfo">
-    <span class="self">Self Learning</span>
-    <span class="live" *ngIf="userDetailes.org_type !== 'collegeconnect'">Live Interactions</span>
-    <span class="live" *ngIf="userDetailes.org_type == 'collegeconnect'">Industry Talk</span>
-    <span class="Activ">Activity</span>
+    <span class="self">{{'Self Learning' | translate}}</span>
+    <span class="live" *ngIf="userDetailes.org_type !== 'collegeconnect'">{{'Live Interactions' | translate}}</span>
+    <span class="live" *ngIf="userDetailes.org_type == 'collegeconnect'">{{'Industry Talk' | translate}}</span>
+    <span class="Activ">{{'Activity' | translate}}</span>
   </div>
 </div>
 </div>
