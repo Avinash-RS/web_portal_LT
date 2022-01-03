@@ -190,7 +190,7 @@
       <div class="header-label">{{'Activities Progression Report' | translate}}</div>
       <div class="tab-container">
         <mat-tab-group (selectedTabChange)="tabChanged($event)">
-          <mat-tab [label]="{{'Assignment' | translate}}">
+          <mat-tab label="{{'Assignment' | translate}}">
             <div *ngIf="!showSkeleton; else skeletonLoad">
               <div class="card-content d-flex justify-content-start">
                 <mat-card *ngFor="let assignmentModule of assignmentPage | async" class="card-container">
@@ -253,7 +253,7 @@
               </div>
             </div>
           </mat-tab>
-          <mat-tab [label]="{{'Project' | translate}}">
+          <mat-tab label="{{'Project' | translate}}">
             <div *ngIf="!showSkeleton; else skeletonLoad">
               <div class="card-content d-flex justify-content-start">
                 <mat-card *ngFor="let projectModule of projectPage | async" class="card-container">
@@ -319,7 +319,7 @@
               </div>
             </div>
           </mat-tab>
-          <mat-tab [label]="{{'Perform' | translate}}">
+          <mat-tab label="{{'Perform' | translate}}">
             <div *ngIf="!showSkeleton; else skeletonLoad">
               <div class="card-content d-flex justify-content-start">
                 <mat-card *ngFor="let performModule of performPage | async" class="card-container">

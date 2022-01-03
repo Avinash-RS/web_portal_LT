@@ -8,7 +8,7 @@
   </div>
   <div class="searchWrapper" *ngIf="details.length">
     <div>
-      <input class="search-inp" placeholder="'Search...' | translate" (keyup)="checkKnowledgeRec($event)" [(ngModel)]="searchDetails">
+      <input class="search-inp" [placeholder]="'Search...' | translate" (keyup)="checkKnowledgeRec($event)" [(ngModel)]="searchDetails">
       <ng-container *ngIf="searchDetails && searchDetails.length > 0; else searchIcon">
         <mat-icon class="close-search" (click)="isLoadBalanced = false ;searchDetails = ''">close</mat-icon>
       </ng-container>
