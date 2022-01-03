@@ -59,7 +59,7 @@
                         </div>
                         <div>
                             <mat-form-field appearance="outline">
-                                <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller($event)' placeholder="'Search...' | translate">
+                                <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller($event)' [placeholder]="'Search...' | translate">
                                 <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
                                 <mat-icon matSuffix *ngIf="searchKey"(click)="resetSearch()">close</mat-icon>
                              </mat-form-field>
@@ -108,7 +108,7 @@
                     </div>   
                     <div>
                         <mat-form-field appearance="outline">
-                            <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller($event)' placeholder="'Search...' | translate">
+                            <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller($event)' [placeholder]="'Search...' | translate">
                             <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
                             <mat-icon matSuffix *ngIf="searchKey"(click)="searchKey='';this.getQAData();">close</mat-icon>
                         </mat-form-field>
@@ -222,7 +222,7 @@
                 {{'You have not asked any questions' | translate}}
             </span>
             <span *ngIf="selectedtype=='answered'">
-                {{unAnsCheck?'{{'Your question will be answered soon' | translate}}':'You have not asked any questions'}}
+                {{unAnsCheck?('Your question will be answered soon' | translate):'You have not asked any questions'}}
             </span>
         </p>
         <p *ngIf="selectedIndex == 1">{{'No Q&A\'s to display at the moment' | translate}}</p>
