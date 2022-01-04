@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import * as _ from 'underscore';
 import { LearnerServicesService } from '../../services/learner-services.service';
 import { VideoPreviewModalComponent } from '../video-preview-modal/video-preview-modal.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-instructor-led',
@@ -33,7 +34,10 @@ export class InstructorLedComponent implements OnInit {
   constructor(private router: Router,
               private learnerService: LearnerServicesService,
               private dialog: MatDialog,
-              private activeRoute: ActivatedRoute) {
+              private activeRoute: ActivatedRoute,
+              public translate: TranslateService) {
+              let lang = localStorage.getItem('language')
+              this.translate.use(lang?lang:'en') 
               // this.course = (this.router.getCurrentNavigation() && this.router.getCurrentNavigation().extras &&
               //   this.router.getCurrentNavigation().extras.state && this.router.getCurrentNavigation().extras.state.detail);
                 this.activeRoute.queryParams.subscribe(res => {

@@ -9,6 +9,7 @@ import { SocketioService } from '@learner/services/socketio.service';
 import Swal from 'sweetalert2';
 import { filter } from 'rxjs/operators';
 import { environment } from '@env/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -38,7 +39,9 @@ export class HeaderComponent implements OnInit {
   blobKey = environment.blobKey;
   constructor(public services: CommonServicesService, private alert: AlertServiceService,
               private http: HttpClient, public overlayContainer: OverlayContainer, public socketService: SocketioService,
-              public router: Router, private gs: GlobalServiceService) {
+              public router: Router, private gs: GlobalServiceService, public translate: TranslateService) {
+    let lang = localStorage.getItem('language')
+    this.translate.use(lang ? lang : 'en') 
     // this.getScreenSize();
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),

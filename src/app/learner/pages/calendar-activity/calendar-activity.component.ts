@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { getWeekYearWithOptions } from 'date-fns/fp';
+import { TranslateService } from '@ngx-translate/core';
 @Injectable()
 export class CustomDateFormatter extends CalendarDateFormatter {
 

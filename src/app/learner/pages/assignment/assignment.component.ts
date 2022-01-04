@@ -6,6 +6,7 @@ import { environment } from '@env/environment';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-assignment',
@@ -28,7 +29,9 @@ export class AssignmentComponent implements OnInit {
   noofItems = 0;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               public route: Router,
-              private toastr: ToastrService, private dialog: MatDialog) {
+              private toastr: ToastrService, private dialog: MatDialog, public translate: TranslateService,) {
+    let lang = localStorage.getItem('language')
+      this.translate.use(lang?lang:'en')
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
     this.checkDetails = detail;

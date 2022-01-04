@@ -4,6 +4,7 @@ import { LearnerServicesService } from '../../services/learner-services.service'
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -93,7 +94,11 @@ export class CourseReportComponent implements OnInit {
   constructor(
     private activeRoute: ActivatedRoute, 
     private router:Router, 
-    private learnerService: LearnerServicesService) { }
+    private learnerService: LearnerServicesService,
+    public translate: TranslateService) {
+    let lang = localStorage.getItem('language')
+      this.translate.use(lang?lang:'en') 
+     }
 
   ngOnInit() {
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails'))

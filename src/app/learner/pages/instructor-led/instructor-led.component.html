@@ -6,10 +6,10 @@
   <ng-container *ngIf="!showContent && !showSkeleton">
     <div class="breadcrumbPading">
       <ul class="breadcrumb">
-        <li><em (click)="getBack()" class="lxp-Go backArrow"></em> <span class="name">{{course?.name}}</span> <span
-            class="bar">/</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type !== 'collegeconnect'">Live
-            Interactions</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type == 'collegeconnect'">Industry
-            Talk</span> </li>
+        <li><em (click)="getBack()" class="lxp-Go backArrow"></em> 
+          <span class="name">{{course?.name}}</span> 
+          <span class="bar">/</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type !== 'collegeconnect'">{{'Live Interactions' | translate}}</span> 
+            <span class="breadCrumbTopic" *ngIf="userDetails.org_type == 'collegeconnect'">{{'Industry Talk' | translate}}</span> </li>
         <!-- <li *ngIf="userDetails.org_type !== 'collegeconnect'">Live Interactions</li>
             <li *ngIf="userDetails.org_type == 'collegeconnect'">Industry Talk</li> -->
       </ul>
@@ -17,7 +17,7 @@
         <figure>
           <img alt="assignment" src="/assets/images/no-session.svg">
         </figure>
-        <p> You have no sessions at the moment!</p>
+        <p> {{'You have no sessions at the moment!' | translate}}</p>
       </div>
     </div>
   </ng-container>
@@ -26,10 +26,11 @@
   <div class="leftContainer" *ngIf="showContent">
     <div class="breadcrumbPading">
       <ul class="breadcrumb">
-        <li><em (click)="getBack()" class="lxp-Go backArrow"></em> <span class="name">{{course?.name}}</span> <span
-            class="bar">/</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type !== 'collegeconnect'">Live
-            Interactions</span> <span class="breadCrumbTopic" *ngIf="userDetails.org_type == 'collegeconnect'">Industry
-            Talk</span> </li>
+        <li><em (click)="getBack()" class="lxp-Go backArrow"></em> 
+          <span class="name">{{course?.name}}</span> <span
+            class="bar">/</span> 
+            <span class="breadCrumbTopic" *ngIf="userDetails.org_type !== 'collegeconnect'">{{'Live Interactions' | translate}}</span> 
+              <span class="breadCrumbTopic" *ngIf="userDetails.org_type == 'collegeconnect'">{{'Industry Talk' | translate}}</span> </li>
         <!-- <li *ngIf="userDetails.org_type !== 'collegeconnect'">Live Interactions</li>
     <li *ngIf="userDetails.org_type == 'collegeconnect'">Industry Talk</li> -->
       </ul>
@@ -81,16 +82,16 @@
           <div class="d-flex date-duration flexStart justify-flex-start justify-content-start">
             <div class="timingDetails">
               <span *ngIf="activityShow?.activity_details.activitytype != 'Recorded'" class="sessionDuration">
-                <em class="lxp-Clock"></em><span class="durationTitle">Duration:</span>
+                <em class="lxp-Clock"></em><span class="durationTitle">{{'Duration:' | translate}}</span>
                 {{activityShow?.duration}}</span>
               <span *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" class="sessionModule">
-                <em class="lxp-Todo_task"></em><span class="moduleTitle">Module:</span>
+                <em class="lxp-Todo_task"></em><span class="moduleTitle">{{'Module:' | translate}}</span>
                 {{activityShow?.activity_details.modulename}}</span>
               <!-- <span class="sessionTitle">Duration</span> -->
             </div>
             <div class="timingDetails">
               <!-- <span>Held On</span> &nbsp;&nbsp; -->
-              <span class="sessionDate"><em class="lxp-Duration"></em><span class="dateTitle">Date:</span> {{
+              <span class="sessionDate"><em class="lxp-Duration"></em><span class="dateTitle">{{'Date:' | translate}}</span> {{
                 activityShow?.activity_details.startdate | date: 'dd/MM/yyyy hh:mm a'}}</span>
             </div>
           </div>
@@ -181,10 +182,10 @@
           <div class="row attendance-table" *ngIf="sessionAttendance?.length">
             <table style="width: 100%;">
               <tr class="tblheaderFont">
-                <th width="12%">Session #</th>
-                <th width="50%">Topic Name</th>
-                <th width="22%">Date</th>
-                <th width="6%">Attendance</th>
+                <th width="12%">{{'Session #' | translate}}</th>
+                <th width="50%">{{'Topic Name' | translate}}</th>
+                <th width="22%">{{'Date' | translate}}</th>
+                <th width="6%">{{'Attendance' | translate}}</th>
               </tr>
               <tbody>
                 <tr class="tblrow" *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
@@ -213,14 +214,14 @@
   <ng-template #attendanceDialog>
     <div class="">
       <mat-icon class="closeModal-icon" (click)="closeModal()">close</mat-icon>
-      <h2>My Attendance</h2>
+      <h2>{{'My Attendance' | translate}}</h2>
       <div class="row attendance-table">
         <table>
           <tr class="tblheaderFont">
-            <th>Session #</th>
-            <th>Topic Name</th>
-            <th>Date</th>
-            <th>Attendance</th>
+            <th>{{'Session #' | translate}}</th>
+            <th>{{'Topic Name' | translate}}</th>
+            <th>{{'Date' | translate}}</th>
+            <th>{{'Attendance' | translate}}</th>
           </tr>
           <tr *ngFor="let atd of sessionAttendance; let i = index" [attr.data-index]="i">
             <td class="tableCol">{{i+1}}</td>
@@ -250,10 +251,10 @@
         <!-- <div class="headingWrapper d-flex justify-content-between align-items-center"> -->
         <!-- <h3 class="headLine">Upcoming Sessions and Recorded Sessions</h3> -->
         <!-- <h3 class="headLine">Industry Talk Sessions</h3> -->
-        <span *ngIf="userDetails.org_type !== 'collegeconnect'"><h3 class="headLine">Live Interactions</h3></span> 
-        <span *ngIf="userDetails.org_type == 'collegeconnect'"><h3 class="headLine">Industry Talk</h3></span>
+        <span *ngIf="userDetails.org_type !== 'collegeconnect'"><h3 class="headLine">{{'Live Interactions' | translate}}</h3></span> 
+        <span *ngIf="userDetails.org_type == 'collegeconnect'"><h3 class="headLine">{{'Industry Talk' | translate}}</h3></span>
         <button class="btn btn-light attandanceShow" *ngIf="sessionAttendance?.length"
-          (click)="showModal(attendanceDialog)">Attendance</button>
+          (click)="showModal(attendanceDialog)">{{'Attendance' | translate}}</button>
       </div>
       <!-- </div> -->
       <mat-nav-list class="listofSessionContainer">
@@ -271,23 +272,23 @@
                 <mat-icon class="rec-center" *ngIf="los.activity_details.activitytype == 'Recorded'"> play_circle
                 </mat-icon>
                 <div *ngIf="los.status == 'On going' && los.activity_details.activitytype != 'Recorded'"
-                  class="bottom-right orange">Ongoing</div>
+                  class="bottom-right orange">{{'Ongoing' | translate}}</div>
                 <div *ngIf="los.status == 'Up Coming' && los.activity_details.activitytype != 'Recorded'"
-                  class="bottom-right grey">Upcoming</div>
+                  class="bottom-right grey">{{'Upcoming' | translate}}</div>
                 <div *ngIf="los.status == 'Completed' && los.activity_details.activitytype != 'Recorded'"
                   class="bottom-right greenColor">{{los.status}}</div>
-                <div *ngIf="los.activity_details.activitytype == 'Recorded'" class="bottom-right rec-col">Recorded
+                <div *ngIf="los.activity_details.activitytype == 'Recorded'" class="bottom-right rec-col">{{'Recorded' | translate}}
                 </div>
               </div>
               <div [ngClass]="los.isactive?'active':''" class="content-container">
                 <h4 class="activity-name" matTooltip="{{los.activity_details.activityname}}">
                   {{los.activity_details.activityname}}</h4>
-                <h5><span class="hover-content">Date:</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm a'}}
+                <h5><span class="hover-content">{{'Date:' | translate}}</span> {{los.activity_details.startdate | date: 'dd/MM/yyyy hh:mm a'}}
                 </h5>
-                <h5 *ngIf="los.activity_details.activitytype != 'Recorded'"><span class="hover-content">Duration:</span>
+                <h5 *ngIf="los.activity_details.activitytype != 'Recorded'"><span class="hover-content">{{'Duration:' | translate}}</span>
                   {{los.duration}}
                 </h5>
-                <h5 *ngIf="los.activity_details.activitytype == 'Recorded'"><span class="hover-content">Module:</span>
+                <h5 *ngIf="los.activity_details.activitytype == 'Recorded'"><span class="hover-content">{{'Module:' | translate}}</span>
                   {{los.activity_details.modulename}} </h5>
               </div>
             </div>

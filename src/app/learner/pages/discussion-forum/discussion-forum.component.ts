@@ -9,6 +9,7 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import * as CryptoJS from 'crypto-js';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-discussion-forum',
@@ -76,7 +77,9 @@ export class DiscussionForumComponent implements OnInit {
   checkLevel: any;
   constructor(public Lservice: LearnerServicesService, public route: Router, private formBuilder: FormBuilder,
               private gs: GlobalServiceService, private toastr: ToastrService, private dialog: MatDialog,
-              public cS: CommonServicesService) {
+              public cS: CommonServicesService,public translate: TranslateService) {
+                let lang = localStorage.getItem('language')
+                   this.translate.use(lang?lang:'en')             
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);
     this.course = detail || JSON.parse(atob(localStorage.getItem('course')));

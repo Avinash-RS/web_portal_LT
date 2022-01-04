@@ -5,12 +5,12 @@
 <div style="padding: 15px" class="">
   <div class="commonBackStyle">
     <i class="lxp-Arrow backArrow" (click)="goBack()"></i>
-    <span (click)="goBack()">Back</span>
+    <span (click)="goBack()">{{'Back' | translate}}</span>
     <div class="courseNameBreadcrum">
       <span class="pipeLine"> | </span>
       <span class="forumCourseName">{{ course?.name }}</span>
       <i class="lxp-Arrow"></i>
-      <span>Discussion Forum</span>
+      <span>{{'Discussion Forum' | translate}}</span>
     </div>
   </div>
 </div>
@@ -203,7 +203,7 @@
     <ng-template #noModule>
       <br />
       <span *ngIf="!loading" class="center_align">
-        No modules in this course
+        {{'No modules in this course' | translate}}
       </span>
     </ng-template>
   </div>
@@ -396,7 +396,7 @@
               </div>
               <div class="row f_size_14 date_color">
                 <p>
-                  Last post by
+                  {{'Last post by' | translate}}
                   <strong class="titlecolor"
                     >{{ data?.user?.username | titlecase }} &nbsp;</strong
                   >
@@ -1392,7 +1392,7 @@
           (click)="addThreadForm?.reset()"
           [disabled]="addThreadForm.untouched"
         >
-          Reset
+        {{'Reset' | translate}}
         </button>
         <button
           mat-stroked-button

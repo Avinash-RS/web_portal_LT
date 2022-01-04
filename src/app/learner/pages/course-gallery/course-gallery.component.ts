@@ -7,6 +7,7 @@ import { environment } from '../../../../environments/environment';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import * as CryptoJS from 'crypto-js';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-course-gallery',
   templateUrl: './course-gallery.component.html',
@@ -29,7 +30,9 @@ export class CourseGalleryComponent implements OnInit {
   user_token;
   searchContent;
   constructor(private activeRoute: ActivatedRoute, private router: Router,
-    private learnerService: LearnerServicesService, public dialog: MatDialog,public sanitizer: DomSanitizer) {
+    private learnerService: LearnerServicesService, public dialog: MatDialog,public sanitizer: DomSanitizer,public translate: TranslateService) {
+  let lang = localStorage.getItem('language')
+     this.translate.use(lang?lang:'en')
     this.activeRoute.queryParams.subscribe(res => {
       this.course = res;
     });
