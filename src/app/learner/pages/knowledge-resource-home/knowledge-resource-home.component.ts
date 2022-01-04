@@ -4,6 +4,7 @@ import { CommonServicesService } from '@core/services/common-services.service';
 import { knowledgeService } from '@learner/services/knowledge-resource/knowledge-resource.service';
 import { ToastrService } from 'ngx-toastr';
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -30,7 +31,10 @@ export class KnowledgeResourceHomeComponent implements OnInit {
   constructor(public apiService: knowledgeService,
               public toast: ToastrService,
               private CommonService: CommonServicesService,
-              private router: Router, private gs: GlobalServiceService) { 
+              private router: Router, private gs: GlobalServiceService,
+              public translate: TranslateService) { 
+                let lang = localStorage.getItem('language')
+                this.translate.use(lang?lang:'en')
                 this.userDetailes = this.gs.checkLogout();
                 if(!this.userDetailes?.is_password_updated){
                   this.router.navigate(['/Learner/profile']);

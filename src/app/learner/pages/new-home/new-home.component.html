@@ -12,7 +12,7 @@
           </figure>
         </div>
         <div class="downloadApp d-flex justify-content-center align-items-center">
-          <span>Download our Mobile app</span>
+          <span>{{'Download our Mobile app' | translate}}</span>
           <figure class="googlePlay">
             <img alt="" src="https://assets.lntedutech.com/googlePlay.png">
           </figure>
@@ -27,7 +27,7 @@
           <!-- Auth Verification -->
           <div class="authVerification">
               <div *ngIf="!secondStep">
-                <h2>Scan this QR Code</h2>
+                <h2>{{'' | translate}}Scan this QR Code</h2>
                 <div class="qrCode">
                   <span>
                     <i></i>
@@ -38,7 +38,7 @@
                   </span>
                 </div>
                 <span class="download">
-                  Download <span>&nbsp;Google authenticator&nbsp;</span> App in your mobile to scan this code
+                  {{'Download' | translate}} <span>&nbsp;{{'Google authenticator' | translate}}&nbsp;</span> {{'App in your mobile to scan this code' | translate}}
                 </span>
                 <div class="gradientBtn">
                   <button id="login" mat-raised-button (click)="secondStep=true;">
@@ -47,7 +47,7 @@
                 </div>
               </div>
               <div class="secondStep" *ngIf="secondStep">
-                <h2 class="d-flex justify-content-center">Enter the code generated in your Google Authenticator App</h2>
+                <h2 class="d-flex justify-content-center">{{'Enter the code generated in your Google Authenticator App' | translate}}</h2>
                 <div class="d-flex justify-content-center mt-5 mb-5">
                     <ng-otp-input #authInput (onInputChange)="onAuthChange($event)" (keydown.enter)="verifyAuth()"  [config]="{length:6,allowNumbersOnly: true}"></ng-otp-input>
                 </div>
@@ -63,7 +63,7 @@
                 </div>
               </div>
             <div class="dontHaveAccount">
-                <span>Go back to <a class="signup" (click)="backToIn()"> {{'Sign in'}}</a></span>
+                <span>{{'Go back to ' | translate}}<a class="signup" (click)="backToIn()"> {{'Sign in' | translate}}</a></span>
               </div>
           </div>
         </div>

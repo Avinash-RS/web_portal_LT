@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonServicesService } from '@core/services/common-services.service';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
-
+import { TranslateService } from '@ngx-translate/core';
 export interface PeriodicElement {
   notificationName: string;
   date: string;
@@ -28,8 +28,11 @@ export class ViewAllnotificationsComponent implements OnInit {
   unreadCount: any;
   emptynotifications = false;
 
-  constructor(private router: Router, public commonservice: CommonServicesService, public Lservice: LearnerServicesService,
-              ) { }
+  constructor(private router: Router, public commonservice: CommonServicesService, public Lservice: LearnerServicesService,public translate: TranslateService
+              ) { 
+                let lang = localStorage.getItem('language')
+                this.translate.use(lang ? lang : 'en')
+               }
 
   ngOnInit() {
     const learnerDetail = JSON.parse(localStorage.getItem('UserDetails'));

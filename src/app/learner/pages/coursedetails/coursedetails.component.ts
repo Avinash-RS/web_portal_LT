@@ -258,6 +258,8 @@ export class CoursedetailsComponent implements OnInit {
     public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
     public route: Router, private formBuilder: FormBuilder,
     public sanitizer: DomSanitizer, private toastr: ToastrService) {
+    let lang = localStorage.getItem('language')
+    this.translate.use(lang ? lang : 'en')
     const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
     if (!loginDetails?.is_password_updated) {
       this.route.navigate(['/Learner/profile']);
@@ -462,11 +464,11 @@ export class CoursedetailsComponent implements OnInit {
                 this.currentPage = Number(result.data.module);
                 this.subModuleHolder = Number(result.data.resumeContent);
                 this.submoduleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].title
-                this.moduleExpand(this.weekHolderUI, Number(this.subModuleHolderUI),this.scromApiData.checkLevel?this.currentPage:null);
-              }else{
+                this.moduleExpand(this.weekHolderUI, Number(this.subModuleHolderUI), this.scromApiData.checkLevel ? this.currentPage : null);
+              } else {
                 this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
               }
-              this.topicPageStatus = this.scromApiData.checkLevel ?result.data.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage]?.status: result.data.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]?.status
+              this.topicPageStatus = this.scromApiData.checkLevel ? result.data.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage]?.status : result.data.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]?.status
               this.topicPageStatus = this.topicPageStatus ? this.topicPageStatus : "process";
               this.moduleInfo = this.scromModuleData[this.weekHolder].childData[this.currentPage];
               this.topicInfo = this.scromApiData.checkLevel ? this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage] : this.scromModuleData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage]
@@ -745,13 +747,13 @@ export class CoursedetailsComponent implements OnInit {
       // this.moduleLenth = this.scromApiData?.childData.length;
       if (!this.checkDetails?.fromSuggestion) {
         this.nextPrevHolder = this.topiccurrentPage = this.scromApiData.topicIndex == null ? 0 : Number(this.scromApiData.topicIndex);
-        this.moduleHolder = this.currentPage =  this.scromApiData.checkLevel ? (this.scromApiData.module == null ? 0 : Number(this.scromApiData.module)) :this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
+        this.moduleHolder = this.currentPage = this.scromApiData.checkLevel ? (this.scromApiData.module == null ? 0 : Number(this.scromApiData.module)) : this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
         this.weekHolder = this.weekHolderUI = this.scromApiData.week - 1;
         if (this.scromApiData.checkLevel) {
 
           this.subModuleHolder = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
           this.subModuleHolderUI = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
-          
+
           this.submoduleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].title
         }
       }
@@ -764,21 +766,21 @@ export class CoursedetailsComponent implements OnInit {
           this.moduleHolder = this.currentPage = Number(this.checkDetails.newmodule);
           this.subModuleHolder = this.checkDetails.moduleIndex == null ? 0 : Number(this.checkDetails.moduleIndex);
           this.subModuleHolderUI = this.checkDetails.moduleIndex == null ? 0 : Number(this.checkDetails.moduleIndex);
-          
-         this.submoduleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].title
+
+          this.submoduleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].title
         }
       }
       // this.scromModuleData[this.moduleHolder].expanded = true;
       this.oldIdx = this.moduleHolder;
       this.topicInfo = this.scromApiData.checkLevel ? this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].childData[this.nextPrevHolder] : this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].childData[this.nextPrevHolder]
       this.topicPageStatus = this.topicInfo.status
-      if(this.scromApiData.checkLevel){
-        this.moduleExpand(this.weekHolder, this.subModuleHolder,this.moduleHolder);
+      if (this.scromApiData.checkLevel) {
+        this.moduleExpand(this.weekHolder, this.subModuleHolder, this.moduleHolder);
       }
-      else{
-        this.moduleExpand(this.weekHolder, this.moduleHolder,null);
+      else {
+        this.moduleExpand(this.weekHolder, this.moduleHolder, null);
       }
-      
+
       setTimeout(() => {
         if (this.weekHolder > 0)
           this.inputEl ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" }) : ''
@@ -808,10 +810,10 @@ export class CoursedetailsComponent implements OnInit {
             this.courseid + '&user_id=' + id + '&user_obj_id=' +
             this.getuserid._id + '&path=' + this.scromApiData.url +
             '&module_status=' + 'process&week=' + (Number(this.weekHolder) + 1).toString()
-            + '&module=' + moduleTitle + '&topic=' + topicTitle + '&ModuleIndex=' + this.moduleHolder + (this.scromApiData.checkLevel ?'&submoduleIndex=' +  this.subModuleHolder?.toString() : '&submoduleIndex=null') + '&topicIndex=' + this.nextPrevHolder + '&lastLogIndex=' + this.lastLogIndex);
+            + '&module=' + moduleTitle + '&topic=' + topicTitle + '&ModuleIndex=' + this.moduleHolder + (this.scromApiData.checkLevel ? '&submoduleIndex=' + this.subModuleHolder?.toString() : '&submoduleIndex=null') + '&topicIndex=' + this.nextPrevHolder + '&lastLogIndex=' + this.lastLogIndex);
       }
       this.playerTopicLen = this.scromApiData.total_topic_len;
-      console.log(this.urlSafe,"playermoduletopicAPI")
+      console.log(this.urlSafe, "playermoduletopicAPI")
       // tree level
       this.scromModuleData.forEach(childData => {
         if (childData && childData.childData) {
@@ -859,7 +861,7 @@ export class CoursedetailsComponent implements OnInit {
         + '&module_status=' + this.moduleSatusCheck
         + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (Number(this.weekHolder) + 1) + '&ModuleIndex=' + this.moduleHolder + '&submoduleIndex=' + (this.scromApiData.checkLevel ? this.subModuleHolder.toString() : 'null') + '&topicIndex=' + this.nextPrevHolder + '&lastLogIndex=' + this.lastLogIndex);
     this.checkLastFirstIndexReached()
-    console.log(this.urlSafe,"click link")
+    console.log(this.urlSafe, "click link")
   }
 
   playerstatusrealtime(topicName, topicStatus, moduleName, moduleStatus, moduleLegth, topicLenght, topindex) {
@@ -1213,7 +1215,7 @@ export class CoursedetailsComponent implements OnInit {
     // if (this.filterkey === 'Bookmarked') {
     if (this.scromApiData.checkLevel) {
       this.bkup_Toc.forEach((week, wi) => {
-        
+
         let smifilter = [];
         week.childData.forEach((sm, smi) => {
           let modulefilter = [];
@@ -1389,7 +1391,7 @@ export class CoursedetailsComponent implements OnInit {
   //   });
   // }
   navigatePractice() {
-    window.open(this.eboxUrl,"Practice");
+    window.open(this.eboxUrl, "Practice");
   }
 
   openQuestionDialog(templateRef) {

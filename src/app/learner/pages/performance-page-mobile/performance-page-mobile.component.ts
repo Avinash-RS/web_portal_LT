@@ -10,6 +10,7 @@ import * as moment from 'moment';
 import { AnonymousCredential, BlobServiceClient, newPipeline } from '@azure/storage-blob';
 import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 import { environment } from '@env/environment';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-performance-page-mobile',
   templateUrl: './performance-page-mobile.component.html',
@@ -106,8 +107,12 @@ export class PerformancePageMobileComponent implements OnInit {
     private toastr: ToastrService,
     public route: Router,
     public datePipe: DatePipe,
-    private ngxLoader: NgxUiLoaderService
+    private ngxLoader: NgxUiLoaderService,
+    public translate: TranslateService
   ) {
+    let lang = localStorage.getItem('language')
+    this.translate.use(lang ? lang : 'en') 
+
     const detail =
       this.route.getCurrentNavigation() &&
       this.route.getCurrentNavigation().extras &&

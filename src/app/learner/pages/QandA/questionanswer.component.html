@@ -44,11 +44,11 @@
                 </mat-tab> -->
                 <mat-tab>
                     <ng-template mat-tab-label>
-                        Questions I asked
+                        {{'Questions I asked' | translate}}
                     </ng-template>
                     <div class="allsearchFilter">
                         <div>
-                            <span class="filterby">Filter by :</span>
+                            <span class="filterby">{{'Filter by :' | translate}}</span>
                             <mat-form-field appearance="outline" style="width: 130px;">
                                 <mat-select [(ngModel)]='selectedtype' (selectionChange)="getQAtype()">
                                     <mat-option *ngFor="let item of filterBy" [value]="item.value">
@@ -59,7 +59,7 @@
                         </div>
                         <div>
                             <mat-form-field appearance="outline">
-                                <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller($event)' placeholder="Search...">
+                                <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller($event)' [placeholder]="'Search...' | translate">
                                 <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
                                 <mat-icon matSuffix *ngIf="searchKey"(click)="resetSearch()">close</mat-icon>
                              </mat-form-field>
@@ -70,21 +70,21 @@
                             
                             <div class="content" *ngFor="let item of qaDataList;let i = index">
                                 <div class="askedDate d-flex flex-row">
-                                    <span>Question : {{i+ 1}}</span>
-                                    <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
+                                    <span>{{'Question :' | translate}} {{i+ 1}}</span>
+                                    <span>{{'Asked on ' | translate}} {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                                 </div>
                                 <div [innerHTML]="item.question"></div>
 
                                     <div *ngIf="item?.answer;else unans">
                                     <div class="answeredDate">
-                                        <button class="answer" style="cursor:default;">Answered</button>
+                                        <button class="answer" style="cursor:default;">{{'Answered' | translate}}</button>
                                         <span>{{item.publishedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                                     </div>
                                         <p [innerHTML]="item?.answer"></p>
                                     </div>
                                     <ng-template #unans>
                                         <div class="answeredDate">
-                                            <button class="noAnswer" style="cursor:default;">Unanswered</button>
+                                            <button class="noAnswer" style="cursor:default;">{{'Unanswered' | translate}}</button>
                                         </div>
                                     </ng-template>
                             </div>
@@ -93,11 +93,11 @@
                 </mat-tab>
                 <mat-tab>
                     <ng-template mat-tab-label>
-                        All questions answered in this course
+                        {{'All questions answered in this course' | translate}}
                     </ng-template>
                     <div class="allsearchFilter">
                     <div>
-                        <span class="filterby">Filter by :</span>
+                        <span class="filterby">{{'Filter by :' | translate}}</span>
                         <mat-form-field appearance="outline" style="width: 130px;">
                             <mat-select [(ngModel)]='selectedtype' (selectionChange)="getQAtype()">
                                 <mat-option *ngFor="let item of filterBy" [value]="item.value">
@@ -108,7 +108,7 @@
                     </div>   
                     <div>
                         <mat-form-field appearance="outline">
-                            <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller($event)' placeholder="Search...">
+                            <input matInput [(ngModel)]="searchKey" (keyup)='searchcaller($event)' [placeholder]="'Search...' | translate">
                             <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
                             <mat-icon matSuffix *ngIf="searchKey"(click)="searchKey='';this.getQAData();">close</mat-icon>
                         </mat-form-field>
@@ -120,19 +120,19 @@
                             <div class="content" *ngFor="let item of qaDataList">
                                 <div class="askedDate d-flex flex-row">
                                     <span><em class="lxp-AccountCircle"></em>{{item.askedBy}}</span>
-                                    <span>Asked on {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
+                                    <span>{{'Asked on ' | translate}} {{item.askedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                                 </div>
                                 <h4 [innerHTML]="item.question"></h4>
                                 <div *ngIf="item?.answer;else unans">
                                     <div class="answeredDate">
-                                        <button class="answer" style="cursor:default;">Answered</button>
+                                        <button class="answer" style="cursor:default;">{{'Answered' | translate}}</button>
                                         <span>{{item.publishedDate|date:'dd MMM yyyy, hh:mm:ss a'}}</span>
                                     </div>
                                         <p [innerHTML]="item?.answer"></p>
                                     </div>
                                     <ng-template #unans>
                                         <div class="answeredDate">
-                                            <button class="noAnswer" style="cursor:default;">Unanswered</button>
+                                            <button class="noAnswer" style="cursor:default;">{{'Unanswered' | translate}}</button>
                                         </div>
                                     </ng-template>
                             </div>
@@ -147,20 +147,20 @@
             <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> <span class="name">{{courseName}}</span> <span class="bar">/</span> <span class="breadCrumbTopic">Q&A</span></li>
         </ul>
         <div class="addQuestion">
-            <button (click)="openQuestionDialog(questionDialog)"><em class="lxp-add"></em> Ask A Question</button>
+            <button (click)="openQuestionDialog(questionDialog)"><em class="lxp-add"></em> {{'Ask A Question' | translate}}</button>
         </div>
         <div class="questionResults d-flex justify-content-between">
             <div class="questions d-flex justify-content-start align-items-center" (click)="navigateAllQA('un_answered&answered')">
                 <span><em class="lxp-question"></em></span>
                 <div>
-                    <p>Total questions asked in this course</p>
+                    <p>{{'Total questions asked in this course' | translate}}</p>
                     <h2 id="qCount"></h2>
                 </div>
             </div>
             <div class="answeres d-flex justify-content-start align-items-center" (click)="navigateAllQA('answered')">
                 <span><em class="lxp-answers"></em></span>
                 <div>
-                    <p>Total questions answered</p>
+                    <p>{{'Total questions answered' | translate}}</p>
                     <h2 id="aCount"></h2>
                 </div>
             </div>
@@ -178,7 +178,7 @@
 <ng-template #questionDialog>
     <div class="d-flex justify-content-between titleMargin" (contextmenu)="contextmenu()">
         <div class="font-weight-bold">
-            <h2>Ask A Question</h2>
+            <h2>{{'Ask A Question' | translate}}</h2>
         </div>
         <div><em (click)="dialogClose()" class="lxp-Close pointer"></em></div>
     </div>
@@ -195,8 +195,8 @@
             </div> -->
         </div>
         <div class="d-flex justify-content-between cancelSubmit">
-            <button class="btn btn-outline-dark btn-block" (click)="dialogClose()">Cancel</button>
-            <button class="btn btn-danger btn-block" (click)="createQuestion()">Submit Question</button>
+            <button class="btn btn-outline-dark btn-block" (click)="dialogClose()">{{'Cancel' | translate}}</button>
+            <button class="btn btn-danger btn-block" (click)="createQuestion()">{{'Submit Question' | translate}}</button>
         </div>
     </div>
 </ng-template>
@@ -219,14 +219,14 @@
         <div *ngIf="!searchKey">
         <p *ngIf="selectedIndex == 0">
             <span *ngIf="selectedtype=='un_answered&answered' || selectedtype=='un_answered'">
-                {{'You have not asked any questions'}}
+                {{'You have not asked any questions' | translate}}
             </span>
             <span *ngIf="selectedtype=='answered'">
-                {{unAnsCheck?'Your question will be answered soon':'You have not asked any questions'}}
+                {{unAnsCheck?('Your question will be answered soon' | translate):'You have not asked any questions'}}
             </span>
         </p>
-        <p *ngIf="selectedIndex == 1">No Q&A's to display at the moment</p>
+        <p *ngIf="selectedIndex == 1">{{'No Q&A\'s to display at the moment' | translate}}</p>
         </div>
-        <p *ngIf="searchKey">{{'No results found'}}</p>
+        <p *ngIf="searchKey">{{'No results found' | translate}}</p>
     </div>
 </ng-template>

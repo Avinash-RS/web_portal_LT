@@ -3,6 +3,7 @@ import { MatDialog } from "@angular/material";
 import { AngularEditorConfig } from "@kolkov/angular-editor";
 import { LearnerServicesService } from "@learner/services/learner-services.service";
 import { ToastrService } from "ngx-toastr";
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: "app-questionanswer",
   templateUrl: "./questionanswer.component.html",
@@ -77,7 +78,9 @@ export class QuestionanswerComponent implements OnInit {
   tabType ='user';
   fromSideBtn:boolean = false;
   batchId ="";
-  constructor(private dialog: MatDialog, private learnerService: LearnerServicesService,private toastr: ToastrService) {
+  constructor(private dialog: MatDialog, private learnerService: LearnerServicesService,private toastr: ToastrService,public translate: TranslateService) {
+    let lang = localStorage.getItem('language')
+    this.translate.use(lang ? lang : 'en') 
     this.UserDetails = JSON.parse(localStorage.getItem('UserDetails'))
     this.courseId = localStorage.getItem("Courseid");
     this.courseName = localStorage.getItem("CourseName");

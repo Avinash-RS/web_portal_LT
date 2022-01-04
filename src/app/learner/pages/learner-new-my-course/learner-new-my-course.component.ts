@@ -19,6 +19,7 @@ declare const Chart;
 const DEFAULT_DURATION = 300;
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { TranslateService } from '@ngx-translate/core';
 
 
 export const MY_FORMATS = {
@@ -359,7 +360,10 @@ export class LearnerNewMyCourseComponent implements OnInit {
 
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
-    private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
+    private gs: GlobalServiceService, public CommonServices: CommonServicesService,
+    public translate: TranslateService) {
+    let lang = localStorage.getItem('language')
+    this.translate.use(lang ? lang : 'en') 
     this.userDetailes = this.gs.checkLogout();
     if(!this.userDetailes?.is_password_updated){
       this.router.navigate(['/Learner/profile']);

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { environment } from '@env/environment';
-
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-knowledge-preview',
   templateUrl: './knowledge-preview.component.html',
@@ -15,7 +15,11 @@ export class KnowledgePreviewComponent implements OnInit {
   isCancelLoad = false;
   constructor(@Optional() public dialogRef: MatDialogRef<KnowledgePreviewComponent>,
               @Optional() @Inject(MAT_DIALOG_DATA) public batchdialogdata,
-              private sanitizer: DomSanitizer) { }
+              private sanitizer: DomSanitizer,
+              public translate: TranslateService) {
+                let lang = localStorage.getItem('language')
+                this.translate.use(lang?lang:'en') 
+               }
 
   ngOnInit() {
     setTimeout(() => {

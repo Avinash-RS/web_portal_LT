@@ -13,6 +13,7 @@ declare const Chart;
 import * as moment from 'moment';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { TranslateService } from '@ngx-translate/core';
 
 
 export const MY_FORMATS = {
@@ -147,7 +148,10 @@ export class ProgressionReportComponent implements OnInit {
     public learnerService: LearnerServicesService,
     private gs: GlobalServiceService,
     public CommonServices: CommonServicesService,
-    public route: Router,private activeRoute: ActivatedRoute) {
+    public route: Router,private activeRoute: ActivatedRoute,
+    public translate: TranslateService) {
+      let lang = localStorage.getItem('language')
+    this.translate.use(lang ? lang : 'en') 
     // const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().query &&
     //   this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
     this.activeRoute.queryParams.subscribe(res => {

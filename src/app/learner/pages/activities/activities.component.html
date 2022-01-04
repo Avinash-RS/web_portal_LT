@@ -17,12 +17,12 @@
 
   <ul class="breadcrumb">
     <li><em (click)="goToCourse()" class="lxp-Go backArrow"></em> <span class="name">{{courseName}}</span> <span class="bar">/</span> </li>
-    <li>Activities</li>
+    <li>{{'Activities' | translate}}</li>
   </ul>
 
   <mat-tab-group class="activitiesTab" animationDuration="1000ms" (selectedTabChange)="tabChanged($event); activeTab($event)"
   [(selectedIndex)]="demo1TabIndex">
-    <mat-tab label="Assignment">
+    <mat-tab label="{{'Assignment' | translate}}">
       <!-- Content starts -->
       <ng-container *ngIf="assignmentContent?.length > 0">
         <div class="box-0-1" *ngFor="let assignment of assignmentContent; let i = index">
@@ -39,35 +39,35 @@
                    {{assignment.files.topic_id}}
                   </div>
                   <div class="t-l-1 ml-4">
-                    Activity Description: {{assignment.files.activityname}}
+                    {{'Activity Description:' | translate}} {{assignment.files.activityname}}
                   </div>
                 </div>
                 <div class="projectRightContent">
                   <div class="text-right activityStatus">
                     <span class="f_wt_600 alignRight status" *ngIf="assignment.files.submit_status === 'notsubmitted' && assignment.files.grade_status != 'Evaluated'">
-                      <span class="dot"></span>Yet to submit
+                      <span class="dot"></span>{{'Yet to submit' | translate}}
                     </span>
                     <span class="f_wt_600 alignRight projectSubmitstatus submitted"*ngIf="assignment.files.submit_status !== 'notsubmitted' && assignment.files.grade_status === 'Not Evaluated'">
-                      <span class="submitdot"></span>Submitted
+                      <span class="submitdot"></span>{{'Submitted' | translate}}
                     </span>
                     <span class="f_wt_600 alignRight graded" *ngIf="assignment.files.grade_status === 'Evaluated'">
-                      <span class="gradedot"></span>Graded
+                      <span class="gradedot"></span>{{'Graded' | translate}}
                     </span>
                   </div>
                   <div class="projTotalScore">
                     <div class="text-right">
                       <span class="totscore">
-                        Total score: <span *ngIf="assignment.files.score_mark == 0">0</span> <span *ngIf="!assignment.files.score_mark && assignment.files.score_mark != 0">-</span> <span *ngIf="assignment.files.score_mark">{{assignment.files.score_mark}}</span>
+                        {{'Total score:' | translate}} <span *ngIf="assignment.files.score_mark == 0">0</span> <span *ngIf="!assignment.files.score_mark && assignment.files.score_mark != 0">-</span> <span *ngIf="assignment.files.score_mark">{{assignment.files.score_mark}}</span>
                         /{{assignment.files.total_mark}}</span>
                     </div>
                   </div>
                   <div class="d-flex justify-content-end projDate">
                     <div class="">
-                      <span class="font-weight-bold">Start date:</span>
+                      <span class="font-weight-bold">{{'Start date:' | translate}}</span>
                       <span class="textGrayColor1"> {{assignment.files.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}</span>
                     </div>
                     <div class="projEndDate">
-                      <span class="font-weight-bold">End date:</span>
+                      <span class="font-weight-bold">{{'End date:' | translate}}</span>
                       <span class="textGrayColor1"> {{assignment.files.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</span>
                     </div>
                   </div>
@@ -79,10 +79,10 @@
                   <div class="col-md-8 col-sm-12 col-12 second">
                     <!-- Materials for activity -->
                     <div style="margin-bottom: 10px;" class="f_size_16 f_wt_600">
-                      Materials for activity ({{assignment.files.materialDetails.length}})
+                      {{'Materials for activity' | translate}} ({{assignment.files.materialDetails.length}})
                     </div>
                     <!-- New carousel -->
-                    <h3 *ngIf="assignment.files.materialDetails && assignment.files.materialDetails.length == 0">No materials found for this activity</h3>
+                    <h3 *ngIf="assignment.files.materialDetails && assignment.files.materialDetails.length == 0">{{'No materials found for this activity' | translate}}</h3>
                     <div class="materialsWrapper">
                       <drag-scroll #navActivity (reachesLeftBound)="leftBoundStatActivity($event)" (reachesRightBound)="rightBoundStatActivity($event)" class="trendingCategoriesScrollActivity assignmentActivity" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
                         <span drag-scroll-item class="slideLoop" *ngFor="let material of assignment.files.materialDetails; let i = index">
@@ -119,7 +119,7 @@
                     </div>
                   </div>
                   <div class="col-md-4 col-sm-12 col-12 third">
-                    <div class="f_size_16 f_wt_600 align-center work">Your work</div>
+                    <div class="f_size_16 f_wt_600 align-center work">{{'Your work' | translate}}</div>
                     <div class="box-0-3">
 
                       <div class="fileData ml-auto mr-auto mb-3 d-flex" *ngIf="assignment?.files?.filename">
@@ -145,14 +145,14 @@
 
                       <div class="align-center">
                         <input class="form-control border-right-0" type='file' accept="image/png,image/jpeg,image/jpg,application/pdf" id="upload-photo" #fileInput (change)="uploadAssignmentsFile($event,assignment.files)">
-                        <button mat-stroked-button class="upload-btn" (click)="fileInput.click()" [disabled]="assignment.files.grade_status != 'Evaluated' && !assignment.files?.enableUpload" *ngIf="assignment.files.grade_status !== 'Evaluated'"> <mat-icon class="icon-color m-t-m-2">add</mat-icon> Upload files </button>
-                        <p class="uploadMessage" *ngIf="assignment.files.grade_status !== 'Evaluated'" >Max File Size : 10 MB, Format : JPEG,JPG,PNG,PDF</p>
+                        <button mat-stroked-button class="upload-btn" (click)="fileInput.click()" [disabled]="assignment.files.grade_status != 'Evaluated' && !assignment.files?.enableUpload" *ngIf="assignment.files.grade_status !== 'Evaluated'"> <mat-icon class="icon-color m-t-m-2">add</mat-icon> {{'Upload files' | translate}} </button>
+                        <p class="uploadMessage" *ngIf="assignment.files.grade_status !== 'Evaluated'" >{{'Max File Size : 10 MB, Format : JPEG,JPG,PNG,PDF' | translate}}</p>
                         <div>
 
                           <ng-container *ngIf="assignment?.files?.filename">
-                            <button *ngIf="assignment?.files.submit_status == 'notsubmitted'" mat-stroked-button class="submit-btn mt-2"(click)="submitAssigmnemtData(assignment.files)">Submit</button>
-                            <button *ngIf="assignment?.files.submit_status == 'ontime' || assignment?.files.submit_status == 'late'" mat-stroked-button class="submitted-btn mt-2">Submitted</button>
-                            <div class="uploadedFile"  *ngIf="assignment?.files.submit_status == 'ontime' || assignment?.files.submit_status == 'late'">Submitted on : {{assignment?.files.submitted_on | date:'MMM dd, yyyy'}}</div>
+                            <button *ngIf="assignment?.files.submit_status == 'notsubmitted'" mat-stroked-button class="submit-btn mt-2"(click)="submitAssigmnemtData(assignment.files)">{{'Submit' | translate}}</button>
+                            <button *ngIf="assignment?.files.submit_status == 'ontime' || assignment?.files.submit_status == 'late'" mat-stroked-button class="submitted-btn mt-2">{{'Submitted' | translate}}</button>
+                            <div class="uploadedFile"  *ngIf="assignment?.files.submit_status == 'ontime' || assignment?.files.submit_status == 'late'">{{'Submitted on :' | translate}} {{assignment?.files.submitted_on | date:'MMM dd, yyyy'}}</div>
                           </ng-container>
                         </div>
                       </div>
@@ -169,12 +169,12 @@
         <figure>
           <img src="https://assets.lntedutech.com/application_images/noassignment.svg" alt="assignment">
         </figure>
-        <p> You have no Assignment activity at the moment!</p>
+        <p> {{'You have no Assignment activity at the moment!' | translate}}</p>
       </div>
 
     </mat-tab>
 
-    <mat-tab label="Perform">
+    <mat-tab label="{{'Perform' | translate}}">
       <!-- mobile starts -->
       <div class="mr-0 ml-0" *ngIf="performDetails?.length > 0 && mobileResponsive">
         <div class="">
@@ -187,24 +187,24 @@
               </div>
               <div class="d-flex justify-content-between iterationSubmit">
                 <div class="">
-                  <span class="textGrayColor1">Iterations: <span class="textGrayColor1" *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} / </span>{{perform.performActivity.iterationTotal}}</span>
+                  <span class="textGrayColor1">{{'Iterations:' | translate}} <span class="textGrayColor1" *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} / </span>{{perform.performActivity.iterationTotal}}</span>
                 </div>
                 <div class="">
                   <span class="textGrayColor1" *ngIf="perform.performActivity.submit_status == 'notsubmitted'">
-                    <span class="dot"></span>Yet to Submit</span>
+                    <span class="dot"></span>{{'Yet to Submit' | translate}}</span>
                   <span class="submitstatus1" *ngIf=" perform.performActivity.submit_status == 'submitted'">
-                    <span class="submitdot"></span>Submitted</span>
+                    <span class="submitdot"></span>{{'Submitted' | translate}}</span>
                   <span class="gradeStatus1" *ngIf="perform.performActivity.submit_status == 'graded'">
-                    <span class="gradedot"></span>Graded</span>
+                    <span class="gradedot"></span>{{'Graded' | translate}}</span>
                 </div>
               </div>
               <div class="d-flex justify-content-between SEDate">
                 <div class="">
-                  <span class="font-weight-bold">Start date:</span><br />
+                  <span class="font-weight-bold">{{'Start date:' | translate}}</span><br />
                   <span class="textGrayColor1"> {{perform.performActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}</span>
                 </div>
                 <div class="">
-                  <span class="font-weight-bold">End date:</span><br />
+                  <span class="font-weight-bold">{{'End date:' | translate}}</span><br />
                   <span class="textGrayColor1"> {{perform.performActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</span>
                 </div>
               </div>
@@ -221,36 +221,36 @@
                 <span class="ml-13">{{perform.performActivity.module_id}}</span>
               </div>
               <div class="t-l">{{perform.performActivity.topic_id}}</div>
-              <div class="t-l">Activity description : {{perform.performActivity.activityname}}</div>
+              <div class="t-l">{{'Activity description:' | translate}} {{perform.performActivity.activityname}}</div>
             </div>
 
             <div class="performRightContent">
               <span class="f_wt_600 statusTxt" *ngIf="perform.performActivity.submit_status == 'notsubmitted'">
-                <span class="dot"></span><!-- 'notsubmitted' --> Yet to submit</span>
+                <span class="dot"></span><!-- 'notsubmitted' --> {{'Yet to submit' | translate}}</span>
 
               <span class="f_wt_600 submitstatus" *ngIf=" perform.performActivity.submit_status == 'submitted'">
-                <span class="submitdot"></span>Submitted</span>
+                <span class="submitdot"></span>{{'Submitted' | translate}}</span>
 
               <span class="f_wt_600 gradeStatus" *ngIf="perform.performActivity.submit_status == 'graded'">
-                <span class="gradedot"></span>Graded</span>
+                <span class="gradedot"></span>{{'Graded' | translate}}</span>
               
               <mat-icon class="f_size_16 arr" aria-hidden="false" (click)="resourseAccord(performDetails, i);">{{perform.isOpen?'keyboard_arrow_up':'keyboard_arrow_down'}}</mat-icon>
               <!-- <mat-icon class="f_size_16 arr" aria-hidden="false" *ngIf="!isperformColaps || performId !== i" (click)="resourseAccord(performDetails, i)">keyboard_arrow_down</mat-icon>
               <mat-icon class="f_size_16 arr" aria-hidden="false" *ngIf="isperformColaps && performId === i" (click)="isperformColaps = !isperformColaps; performId = i; selectedIndex = null">keyboard_arrow_up</mat-icon> -->
 
               <div *ngIf="perform.performActivity.submittedTotal == 0" [ngClass]="perform.performActivity.submittedTotal > 0 ? 'mt-2 mb-2 itrationTxts' : 'mt-2 mb-2 itrationTxt'"
-                class=""> Iterations : <span *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} / </span>{{perform.performActivity.iterationTotal}}
+                class=""> {{'Iterations :' | translate}} <span *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} / </span>{{perform.performActivity.iterationTotal}}
               </div>
 
               <div *ngIf="perform.performActivity.submittedTotal > 0" [ngClass]="perform.performActivity.submittedTotal > 0 ? 'mt-2 mb-2 itrCount' : 'mt-2 mb-2 itrationTxt'"
-                class=""> Completed iterations : <span *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} / </span>{{perform.performActivity.iterationTotal}}
+                class=""> {{'Completed iterations :' | translate}} <span *ngIf="perform.performActivity.submittedTotal > 0">{{perform.performActivity.submittedTotal}} / </span>{{perform.performActivity.iterationTotal}}
               </div>
               <div class="startEndDate d-flex justify-content-end">
                 <div class="startDate">
-                  <span class="f_wt_600">Start date: </span>{{perform.performActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}
+                  <span class="f_wt_600">{{'Start date' | translate}}: </span>{{perform.performActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}
                 </div>
                 <div class="endDate">
-                  <span class="f_wt_600">End date: </span>{{perform.performActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}
+                  <span class="f_wt_600">{{'End date:' | translate}} </span>{{perform.performActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}
                 </div>
               </div>
             </div>
@@ -260,8 +260,8 @@
             <hr>
             <div class="row">
               <div class="col-7">
-                <div class="f_size_16 f_wt_600 mb-3">Materials for activity ({{perform.performActivity.materialDetails.length}})</div>
-                <h3 *ngIf="perform.performActivity.materialDetails && perform.performActivity.materialDetails.length == 0"> No materials found for this activity </h3>
+                <div class="f_size_16 f_wt_600 mb-3">{{'Materials for activity' | translate}} ({{perform.performActivity.materialDetails.length}})</div>
+                <h3 *ngIf="perform.performActivity.materialDetails && perform.performActivity.materialDetails.length == 0"> {{'No materials found for this activity' | translate}} </h3>
                 <div class="materialsWrapper">
                   <drag-scroll #nav (reachesLeftBound)="leftBoundStat($event)" (reachesRightBound)="rightBoundStat($event)" class="materialsScrollActivity" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
                     <span drag-scroll-item class="slideLoop row ml-0 mr-0" *ngFor="let material of perform.performActivity.materialDetails; let i = index">
@@ -302,25 +302,25 @@
               </div>
 
               <div class="col-5">
-                <div class="f_size_16 f_wt_600 align-center margin-b-9">Your work</div>
+                <div class="f_size_16 f_wt_600 align-center margin-b-9">{{'Your work' | translate}}</div>
                 <mat-accordion class="iterationAccordion" *ngFor="let itrdata of perform.performActivity.iterationDetails; let i = index" (click)="getSelectedIndex(i);">
                   <mat-expansion-panel [expanded]="selectedIndex === i">
                     <mat-expansion-panel-header>
-                      <mat-panel-title class="mr-0"> Iteration {{itrdata.iterationcount}} </mat-panel-title>
+                      <mat-panel-title class="mr-0"> {{'Iteration' | translate}} {{itrdata.iterationcount}} </mat-panel-title>
                       <mat-panel-description>
                         <div class="row ml-0 mr-0 w-100">
                           <div class="col-6 pl-0 text-center w-100">
-                            <span>Score: {{itrdata.score_mark}} / {{itrdata.total_mark}}</span>
+                            <span>{{'Score:' | translate}} {{itrdata.score_mark}} / {{itrdata.total_mark}}</span>
                           </div>
                           <div class="col-6 pr-0 pl-0 text-right w-100">
                             <span class="f_wt_600" *ngIf="itrdata.submit_status == 'notsubmitted' && itrdata.grade_status !== 'Evaluated'"> 
-                              <span class="dot"></span>Yet to submit
+                              <span class="dot"></span>{{'Yet to submit' | translate}}
                             </span>
                             <span class="f_wt_600 iterSubmit" *ngIf="itrdata.grade_status == 'Not Evaluated' && itrdata.submitAction == 'submit'"> 
-                              <span class="submitdot"></span> Submitted
+                              <span class="submitdot"></span> {{'Submitted' | translate}}
                             </span>
                             <span class="f_wt_600 iterGrade" *ngIf="itrdata.grade_status == 'Evaluated'"> 
-                              <span class="gradedot"></span> Graded 
+                              <span class="gradedot"></span> {{'Graded' | translate}} 
                               <span *ngIf="itrdata.grade_status == 'Evaluated' && itrdata.instructor_status !== null" [ngClass]="itrdata.instructor_status == 'Pass'?'colorGreen ml-1': 'colorRed ml-1'">{{itrdata.instructor_status | titlecase}}</span>
                             </span>
                           </div>
@@ -336,23 +336,23 @@
                       </div>
                       <input type="file" accept="video/mp4,video/quicktime,application/pdf" style="display: none" #videoInput [(ngModel)]="fileName" (change)="uploadDocument($event,itrdata)" />
                         <button *ngIf="itrdata.submit_status == 'notsubmitted'" mat-stroked-button [disabled]="perform.performSubmitType == false || perform.itrationStarted == false" class="upload-bltn mt-3" (click)="uploadDocuments($event, itrdata, perform, submitType = 'upload')">
-                        <mat-icon class="icon-color m-t-m-2 addIcon">add</mat-icon> <span>Upload</span> </button>
-                        <p class="uploadMessage" *ngIf="itrdata.submit_status == 'notsubmitted'" >Max File Size : 150 MB, Format : MP4, MOV, PDF</p>
+                        <mat-icon class="icon-color m-t-m-2 addIcon">add</mat-icon> <span>{{'Upload' | translate}}</span> </button>
+                        <p class="uploadMessage" *ngIf="itrdata.submit_status == 'notsubmitted'" >{{'Max File Size : 150 MB, Format : MP4, MOV, PDF' | translate}}</p>
                       <button mat-stroked-button class="submit-btn mt-2"
                         *ngIf="itrdata.submit_status == 'notsubmitted' && itrdata.videodetails.length > 0 && (perform.itrationStarted && perform.performSubmitType)"
                         (click)="submitType = 'submit'; submitDeleteVideo({}, itrdata, perform.performActivity)">
-                        Submit
+                        {{'Submit' | translate}}
                       </button>
                       <button mat-stroked-button
                       *ngIf="itrdata.submit_status == 'notsubmitted' &&  (itrdata.videodetails.length == 0 && perform.itrationStarted) && perform.performSubmitType"
-                      class="submitted-btn mt-2"> Submit </button>
+                      class="submitted-btn mt-2"> {{'Submit' | translate}} </button>
                       <button mat-stroked-button *ngIf="itrdata.submitAction == 'submit'" class="submitted-btn mt-2">
-                        Submitted </button>
+                        {{'Submitted' | translate}} </button>
                     
                     </div>
                     <div class="align-center   mt-2" *ngIf="itrdata.grade_status !== 'Evaluated'">
-                      <span *ngIf="itrdata.submit_status == 'notsubmitted'" class="submitedFile">Submitted files cannot be edited</span>
-                      <span class="uploadedFile" *ngIf="itrdata.submitAction == 'submit'">Submitted on : {{itrdata.submitted_date | date:'MMM dd, yyyy'}}</span>
+                      <span *ngIf="itrdata.submit_status == 'notsubmitted'" class="submitedFile">{{'Submitted files cannot be edited' | translate}}</span>
+                      <span class="uploadedFile" *ngIf="itrdata.submitAction == 'submit'">{{'Submitted on :' | translate}} {{itrdata.submitted_date | date:'MMM dd, yyyy'}}</span>
                     </div>
                     <div class="align-center mt-2 itdata scrollingData" *ngIf="itrdata.grade_status === 'Evaluated'">
                       <div class="workWrapper">
@@ -378,14 +378,14 @@
                                               <mat-icon class="position-absolute text-white playBtn" *ngIf="videoName.doc_type =='image/jpeg'">photo_size_select_actual</mat-icon>
                                                 <i class="fa fa-file-pdf-o position-absolute text-white playBtnmobile" *ngIf="videoName.doc_type =='application/pdf'"
                                                 aria-hidden="true"></i>
-                                              <span class="text-white actionBtnmobile" *ngIf="videoName.doc_type =='video/mp4' || videoName.doc_type =='video/quicktime'">Play</span>
-                                              <span class="text-white actionBtnmobile" *ngIf="videoName.doc_type == 'image/jpeg' || videoName.doc_type == 'application/pdf'">View</span>
+                                              <span class="text-white actionBtnmobile" *ngIf="videoName.doc_type =='video/mp4' || videoName.doc_type =='video/quicktime'">{{'Play' | translate}}</span>
+                                              <span class="text-white actionBtnmobile" *ngIf="videoName.doc_type == 'image/jpeg' || videoName.doc_type == 'application/pdf'">{{'View' | translate}}</span>
                                             </div>
                                             <div class="col-7 text-center pr-0 colActionDownload">
                                               <!-- <a (click)="downloadDoc(videoName, 'files')"> -->
                                                 <a (click)="downloadProject(videoName.videourl + blobKey, videoName.name)">
                                                 <i class="fa fa-download text-white position-absolute downloadBtnMobile" aria-hidden="true"></i>
-                                                <span class="text-white actionBtn1Mobile">Download</span>
+                                                <span class="text-white actionBtn1Mobile">{{'Download' | translate}}</span>
                                               </a>
                                             </div>
                                           </div>
@@ -449,7 +449,7 @@
                       </owl-carousel-o> -->
                       <div class="">
                         <div class="text-left">
-                          <p class="feedBackTxt">Feedback</p>
+                          <p class="feedBackTxt">{{'Feedback' | translate}}</p>
                           <!-- <textarea disabled rows="4" cols="50" class="textArea">
                             {{itrdata.comments}}
                             </textarea> -->
@@ -459,7 +459,7 @@
 
                       <div class="" *ngIf="itrdata.assessmentreport.length > 0">
                         <div class="">
-                          <button mat-stroked-button (click)="openDocument(projectPreviewDialog, itrdata.assessmentreport[0], itrdata.assessmentreport[0].doc_type)" class="AssignmentBtn mt-3 w-100"><mat-icon class="assignmentIcon mr-2">wysiwyg</mat-icon>Assessment report</button>
+                          <button mat-stroked-button (click)="openDocument(projectPreviewDialog, itrdata.assessmentreport[0], itrdata.assessmentreport[0].doc_type)" class="AssignmentBtn mt-3 w-100"><mat-icon class="assignmentIcon mr-2">wysiwyg</mat-icon>{{'Assessment report' | translate}}</button>
                         </div>
                       </div>
                     </div>
@@ -477,12 +477,12 @@
         <figure>
           <img src="https://assets.lntedutech.com/application_images/noPerform.svg" alt="assignment">
         </figure>
-        <p>You have no Perform activity at the moment!</p>
+        <p>{{'You have no Perform activity at the moment!' | translate}}</p>
        
       </div>
     </mat-tab>
    
-    <mat-tab label="Project">
+    <mat-tab label="{{'Project' | translate}}">
       <app-project-mobile [projectDetailPageData]="projectDetaildata" *ngIf="projectMobileResponsive"></app-project-mobile>
 
       <ng-container *ngIf="projectDetails?.length > 0 && !projectMobileResponsive">
@@ -502,7 +502,7 @@
                     {{project.projectActivity.topic_id}}
                    </div>
                   <div class="t-l-1 ml-4">
-                    Activity Description: {{project.projectActivity.activityname}}
+                    {{'Activity Description:' | translate}} {{project.projectActivity.activityname}}
                   </div>
                 </div>
                 <div class="projectRightContent">
@@ -520,29 +520,29 @@
                   </div>
                   <div class="text-right activityStatus">
                     <span class="f_wt_600 alignRight status" *ngIf="(project.projectActivity.submitAction !== 'submit' || project.projectActivity.submit_status == 'notsubmitted') && project.projectActivity.grade_status != 'Evaluated'">
-                      <span class="dot"></span>Yet to submit
+                      <span class="dot"></span>{{'Yet to submit' | translate}}
                     </span>
                     <span class="f_wt_600 alignRight projectSubmitstatus submitted" *ngIf="project.projectActivity.submitAction == 'submit' && project.projectActivity.grade_status == 'Not Evaluated'">
-                      <span class="submitdot"></span>Submitted
+                      <span class="submitdot"></span>{{'Submitted' | translate}}
                     </span>
                     <span class="f_wt_600 alignRight graded" *ngIf="project.projectActivity.grade_status == 'Evaluated'">
-                      <span class="gradedot"></span>Graded
+                      <span class="gradedot"></span>{{'Graded' | translate}}
                     </span>
                   </div>
                   <div class="projTotalScore">
                     <div class="text-right">
                       <span class="totscore">
-                        Total score: <span *ngIf="!project.projectActivity.score_mark">-</span> <span *ngIf="project.projectActivity.score_mark">{{project.projectActivity.score_mark}}</span>
+                        {{'Total score:' | translate}} <span *ngIf="!project.projectActivity.score_mark">-</span> <span *ngIf="project.projectActivity.score_mark">{{project.projectActivity.score_mark}}</span>
                         /{{project.projectActivity.total_mark}}</span>
                     </div>
                   </div>
                   <div class="d-flex justify-content-end projDate">
                     <div class="">
-                      <span class="font-weight-bold">Start date:</span>
+                      <span class="font-weight-bold">{{'Start date:' | translate}}</span>
                       <span class="textGrayColor1"> {{project.projectActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}</span>
                     </div>
                     <div class="projEndDate">
-                      <span class="font-weight-bold">End date:</span>
+                      <span class="font-weight-bold">{{'End date:' | translate}}</span>
                       <span class="textGrayColor1"> {{project.projectActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</span>
                     </div>
                   </div>
@@ -555,9 +555,9 @@
                 <div class="row">
                   <div class="col-md-8 col-sm-12 col-12 second">
                     <div style="margin-bottom: 10px;" class="f_size_16 f_wt_600">
-                      Materials for activity ({{project.projectActivity.materialDetails.length}})
+                      {{'Materials for activity' | translate}} ({{project.projectActivity.materialDetails.length}})
                     </div>
-                    <h3 *ngIf="project.projectActivity.materialDetails && project.projectActivity.materialDetails.length == 0">No materials found for this activity</h3>
+                    <h3 *ngIf="project.projectActivity.materialDetails && project.projectActivity.materialDetails.length == 0">{{'No materials found for this activity' | translate}}</h3>
                     <!--------------------------------New carousel------------------------>
                     <div class="materialsWrapper">
                       <drag-scroll #navActivity (reachesLeftBound)="leftBoundStatActivity($event)" (reachesRightBound)="rightBoundStatActivity($event)" class="trendingCategoriesScrollActivity" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
@@ -596,7 +596,7 @@
                   </div>
 
                   <div class="col-md-4 col-sm-12 col-12 third" *ngIf="project.projectActivity.grade_status !== 'Evaluated'">
-                    <div class="f_size_16 f_wt_600 align-center work">Your work</div>
+                    <div class="f_size_16 f_wt_600 align-center work">{{'Your work' | translate}}</div>
                     <div [ngClass]="project.projectActivity.showLearnerList ? 'box-0-3' : 'box-0-2'">
                       <div class="fileData ml-auto mr-auto mb-3" *ngFor="let item of project.projectActivity.videodetails">
                         <mat-icon *ngIf="item.doc_type == 'video/mp4' || item.doc_type == 'video/quicktime'" class="videoPlay float-left">play_circle_outline</mat-icon>
@@ -611,16 +611,16 @@
                       <div class="align-center">
                         <input type="file" style="display: none" accept="video/mp4,video/quicktime,image/png,image/jpeg,image/jpg,application/pdf" #uploadInput [(ngModel)]="fileName" (change)="uploadDoc($event, project, 'upload')" />
                         <button mat-stroked-button class="upload-btn" (click)="uploadDocs()" [disabled]="project.submitType == false || project.enableSubmit == false"> 
-                          <mat-icon class="icon-color m-t-m-2">add</mat-icon> Add your files 
+                          <mat-icon class="icon-color m-t-m-2">add</mat-icon> {{'Add your files' | translate}} 
                         </button>
-                        <p class="uploadMessage" >Max File Size : 150 MB, Format : JPEG,PNG,PDF,MP4,MOV</p>
+                        <p class="uploadMessage" >{{'Max File Size : 150 MB, Format : JPEG,PNG,PDF,MP4,MOV' | translate}}</p>
                         <button mat-stroked-button class="submit-btn" [disabled]="project.submitType == false || project.enableSubmit == false" (click)="learnerSumbitdeleteVideo(project, '' ,'submit')" 
-                        *ngIf="project.projectActivity.videodetails.length > 0">Submit</button>
+                        *ngIf="project.projectActivity.videodetails.length > 0">{{'Submit' | translate}}</button>
                         <!-- <button mat-stroked-button class="submitted-btn mt-2" *ngIf="(project.projectActivity.videodetails.length == 0 || project.enableSubmit == false)"> Submit </button> -->
                       
                         <!-- <button mat-stroked-button class="submitted-btn" [disabled]="true" *ngIf="project.projectActivity.submitAction == 'submit'">Submitted</button>
                         <p *ngIf="project.projectActivity.submit_status == 'notsubmitted'">Submitted files cannot be edited</p> -->
-                        <p *ngIf="project.projectActivity.submitAction == 'submit'">Submitted on: {{project.submittedOn | date:'MMM dd, yyyy'}}</p>
+                        <p *ngIf="project.projectActivity.submitAction == 'submit'">{{'Submitted on:' | translate}} {{project.submittedOn | date:'MMM dd, yyyy'}}</p>
                       </div>
                     </div>
                   </div>
@@ -630,7 +630,7 @@
               <div class="panel1 yourSubmissions" *ngIf="project.isOpen && project.projectActivity.grade_status == 'Evaluated'">
                 <div class="row">
                   <div [ngClass]="project.projectActivity.showLearnerList ? 'col-xl-7 col-lg-7 col-md-7 col-sm-12 col-12' : 'col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12'">
-                    <div class="f_size_16 f_wt_600">Your submissions ({{project.projectActivity.videodetails.length}})</div>
+                    <div class="f_size_16 f_wt_600">{{'Your submissions' | translate}} ({{project.projectActivity.videodetails.length}})</div>
                     <div class="submissionsWrapper">
                       <drag-scroll #navSubmissions (reachesLeftBound)="leftBoundStatSubmissions($event)" (reachesRightBound)="rightBoundStatSubmissions($event)" class="trendingCategoriesScrollActivity" [scrollbar-hidden] = true [drag-scroll-y-disabled] = true>
                         <span drag-scroll-item class="slideLoop" *ngFor="let video of project.projectActivity.videodetails; let i = index">
@@ -655,11 +655,11 @@
                                             <mat-icon class="position-absolute text-white playBtn" *ngIf="video.doc_type =='image/jpeg' || video.doc_type == 'image/jpg' || video.doc_type == 'image/png'">photo_size_select_actual</mat-icon>
                                               <i class="fa fa-file-pdf-o position-absolute text-white playBtn" *ngIf="video.doc_type =='application/pdf'"
                                               aria-hidden="true"></i>
-                                            <span class="text-white actionBtn" *ngIf="video.doc_type =='video/mp4' || video.doc_type =='video/quicktime'">Play</span>
-                                            <span class="text-white actionBtn" *ngIf="video.doc_type == 'image/jpeg' || video.doc_type == 'application/pdf' || video.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || video.doc_type == 'image/jpg' || video.doc_type == 'image/png'">View</span>
+                                            <span class="text-white actionBtn" *ngIf="video.doc_type =='video/mp4' || video.doc_type =='video/quicktime'">{{'Play' | translate}}</span>
+                                            <span class="text-white actionBtn" *ngIf="video.doc_type == 'image/jpeg' || video.doc_type == 'application/pdf' || video.doc_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || video.doc_type == 'image/jpg' || video.doc_type == 'image/png'">{{'View' | translate}}</span>
                                           </div>
                                           <div class="col-7 text-center pr-0 colAction" (click)="downloadProject(video.videourl + blobKey, video.name)">
-                                            <i class="fa fa-download text-white position-absolute downloadBtn" aria-hidden="true"></i><span class="text-white actionBtn1">Download</span>
+                                            <i class="fa fa-download text-white position-absolute downloadBtn" aria-hidden="true"></i><span class="text-white actionBtn1">{{'}Download' | translate}</span>
                                           </div>
                                         </div>
                                       </div>
@@ -723,7 +723,7 @@
                   <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 d-flex justify-content-end flex-column">
                     <div class="">
                       <div class="text-left">
-                        <p class="feedBackTxt">Feedback</p>
+                        <p class="feedBackTxt">{{'Feedback' | translate}}</p>
                           <textarea disabled class="textArea" [value]='project.projectActivity.comments'></textarea>
                       </div>
                     </div>
@@ -731,7 +731,7 @@
                       <div class="">
                         <button mat-stroked-button class="AssignmentBtn w-100" (click)="openDocument(projectPreviewDialog, project.projectActivity.assessmentreport ? project.projectActivity.assessmentreport[0] : null, project?.projectActivity?.assessmentreport)">
                           <mat-icon class="assignmentIcon mr-2">wysiwyg</mat-icon>
-                          Assessment report
+                          {{'Assessment report' | translate}}
                         </button>
                       </div>
                     </div>
@@ -769,12 +769,12 @@
         <figure>
           <img src="https://assets.lntedutech.com/application_images/noProject.svg" alt="assignment">
         </figure>
-        <p>You have no Project activity at the moment!</p>
+        <p>{{'You have no Project activity at the moment!' | translate}}</p>
       
       </div>
     </mat-tab>
  
-    <mat-tab label="Practice Online">
+    <mat-tab label="{{'Practice Online' | translate}}">
       <ng-container *ngFor="let lab of labpracticeData">
         <div class="box-0-1">
           <div class="d-flex justify-content-between">
@@ -789,17 +789,17 @@
                     <span class="f_size_16 f_wt_600 projHead">{{lab.labActivity.topic_id}}</span>
                   </div>
                   <div class="t-l-1">
-                    Activity Description: {{lab.labActivity.activityname}}
+                    {{'Activity Description:' | translate}} {{lab.labActivity.activityname}}
                   </div>
                 </div>
                 <div class="labmiddleContent">
                   <div class="d-flex justify-content-end projDate">
                     <div class="projstartdate">
-                      <span class="font-weight-bold">Start date:</span>
+                      <span class="font-weight-bold">{{'Start date:' | translate}}</span>
                       <span class="textGrayColor1"> {{lab.labActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}</span>
                     </div>
                     <div class="projEndDate">
-                      <span class="font-weight-bold">End date:</span>
+                      <span class="font-weight-bold">{{'End date:' | translate}}</span>
                       <span class="textGrayColor1"> {{lab.labActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</span>
                     </div>
                   </div>
@@ -816,7 +816,7 @@
         <figure>
           <img src="https://assets.lntedutech.com/application_images/noPerform.svg" alt="assignment">
         </figure>
-        <p>You have no practices at the moment!</p>
+        <p>{{'You have no practices at the moment!' | translate}}</p>
       </div>
     </mat-tab>
 

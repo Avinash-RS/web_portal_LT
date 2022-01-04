@@ -3,7 +3,7 @@
   <div class="left-container">
     <ul class="breadcrumb">
       <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> {{courseName}}</li>
-      <li>Learning Progression</li>
+      <li>{{'Learning Progression' | translate}}</li>
     </ul>
     <div class="col">
       <div class="flag-line">
@@ -12,37 +12,37 @@
     </div>
     <div class="col secPie">
       <div class="col-md-6">
-        <div class="learning-label">Self Learning</div>
+        <div class="learning-label">{{'Self Learning' | translate}}</div>
         <div class="pieChart" [ngStyle]="{'width': '300px',  'height':'300px'}">
           <canvas id="piechart" [plugins]="chartPlugins"></canvas>
         </div>
       </div>
       <div class="col-md-6 d-flex align-item-center">
         <div class="activities-progress w-100">
-          <div class="progress-label">Activities</div>
+          <div class="progress-label">{{'Activities' | translate}}</div>
           <div class="d-flex  h-10 ml-4" [ngClass]="pieData.assignment_total==pieData.assignment_completed?'color-green':'color-yellow'">
-            <div class="type-label">Assignment</div>
+            <div class="type-label">{{'Assignment' | translate}}</div>
             <mat-progress-bar [mode]="mode"
               [value]="percentageCalc(pieData.assignment_completed,pieData.assignment_total)"
               [bufferValue]="bufferValue"></mat-progress-bar>
             <div class="mark-level">{{pieData.assignment_completed +'/'+pieData.assignment_total}}</div>
           </div>
           <div class="d-flex h-10 ml-4" [ngClass]="pieData.project_total==pieData.project_completed?'color-green':'color-yellow'">
-            <div class="type-label">Project</div>
+            <div class="type-label">{{'Project' | translate}}</div>
             <mat-progress-bar [mode]="mode" [value]="percentageCalc(pieData.project_completed,pieData.project_total)"
               [bufferValue]="bufferValue"></mat-progress-bar>
             <div class="mark-level">{{pieData.project_completed +'/'+pieData.project_total}}</div>
           </div>
           <div class="d-flex h-10 ml-4" [ngClass]="pieData.perform_total==pieData.perform_completed?'color-green':'color-yellow'">
-            <div class="type-label">Perform</div>
+            <div class="type-label">{{'Perform' | translate}}</div>
             <mat-progress-bar [mode]="mode" [value]="percentageCalc(pieData.perform_completed,pieData.perform_total)"
               [bufferValue]="bufferValue"></mat-progress-bar>
             <div class="mark-level">{{pieData.perform_completed +'/'+pieData.perform_total}}</div>
           </div>
           <div class="d-flex h-10 ml-4" [ngClass]="pieData.liveclassroom_total==pieData.liveclassroom_completed?'color-green':'color-yellow'">
             <div class="type-label">
-              <ng-container *ngIf="UserDetails.org_type !== 'collegeconnect'">Live Interactions</ng-container>
-              <ng-container *ngIf="UserDetails.org_type == 'collegeconnect'">Industry Talk</ng-container>
+              <ng-container *ngIf="UserDetails.org_type !== 'collegeconnect'">{{'Live Interactions' | translate}}</ng-container>
+              <ng-container *ngIf="UserDetails.org_type == 'collegeconnect'">{{'Industry Talk' | translate}}</ng-container>
             </div>
             <mat-progress-bar [mode]="mode"
               [value]="percentageCalc(pieData.liveclassroom_completed,pieData.liveclassroom_total)"
@@ -56,23 +56,23 @@
 
       <div  class="d-flex justify-content-between align-items-center dot-area">
         <div class="legend-dots completed-dot"></div>
-        <div class="status">Completed</div>
+        <div class="status">{{'Completed' | translate}}</div>
       </div>
       
       <div  class="d-flex justify-content-between align-items-center dot-area">
         <div class="legend-dots inprogress-dot"></div>
-        <div class="status">Ongoing</div>
+        <div class="status">{{'Ongoing' | translate}}</div>
       </div>
 
       <div  class="d-flex justify-content-between align-items-center dot-area">
         <div class="legend-dots not-dot"></div>
-        <div class="status">Yet to Start</div>
+        <div class="status">{{'Yet to Start' | translate}}</div>
       </div>
       
     </div>
     <div class="col">
       <div class="self-learning-container">
-        <div class="header-label">Self Learning Progression Report</div>
+        <div class="header-label">{{'Self Learning Progression Report' | translate}}</div>
         <div *ngIf="!showProgReport">
           <ngx-skeleton-loader count="5" [theme]="{ 'border-radius': '0', height: '50px' }"></ngx-skeleton-loader>
         </div>
@@ -90,28 +90,28 @@
                   <mat-panel-title>
                     <div class="week-block">
                       <span>
-                        <div [ngStyle]="(moduleItem.week!==apidata[number-1]?.week || moduleItem.isOpened) ? {'color': 'inherit'} : {'color': 'white'}" class="week-text">Week</div>
+                        <div [ngStyle]="(moduleItem.week!==apidata[number-1]?.week || moduleItem.isOpened) ? {'color': 'inherit'} : {'color': 'white'}" class="week-text">{{'Week' | translate}}</div>
                         <div [ngStyle]="(moduleItem.week!==apidata[number-1]?.week || moduleItem.isOpened) ? {'color': 'inherit'} : {'color': 'white'}" class="week-number">{{numPrefix(moduleItem.week)}}</div>
                       </span>
                     </div>
 
                     <div class="rightSec">
                       <div class="weekModuleName">
-                        <div class="week-text">Module</div>
+                        <div class="week-text">{{'Module' | translate}}</div>
                         <div class="module-block">{{moduleItem.name}}</div>
                       </div>
                       <div class="subinfo infos">
                         <div>
-                          <div class="week-text">Topics</div>
+                          <div class="week-text">{{'Topics' | translate}}</div>
                           <div>{{moduleItem.topicCount.completed+'/'+moduleItem.topicCount.total}}</div>
                         </div>
                         <div>
-                          <div class="week-text">Knowledge Check</div>
+                          <div class="week-text">{{'Knowledge Check' | translate}}</div>
                           <!-- <div>{{moduleItem.knowledgeCount.completed+'/'+moduleItem.knowledgeCount.total}}</div> -->
                           <div>-- / --</div>
                         </div>
                         <div>
-                          <div class="week-text">Time Spent</div>
+                          <div class="week-text">{{'Time Spent' | translate}}</div>
                           <div>{{moduleItem.totalDuration?(secondsTimeConverter(moduleItem.totalDuration)):'-- : -- : --'}}
                           </div>
                         </div>
@@ -130,39 +130,39 @@
                 <div class="topic-container"
                   *ngFor="let topicItem of moduleItem.topicDetails; let topicIndex = index">
                   <div class="leftPan"> 
-                      <div class="week-text">Topic: {{topicIndex+1}}</div>
+                      <div class="week-text">{{'Topic:' | translate}} {{topicIndex+1}}</div>
                       <div class="font-weight-bold module-block">{{topicItem.name}}</div> 
                   </div>
                   <div class="rightpan">
                     <div class="laya">
-                      <div class="types">Self Learning</div>
+                      <div class="types">{{'Self Learning' | translate}}</div>
                       <div>
-                        <div class="week-text">Time Spent</div>
+                        <div class="week-text">{{'Time Spent' | translate}}</div>
                         <div class="font-weight-bold">
                           {{topicItem.activityDetails.totalDuration?secondsTimeConverter(topicItem.activityDetails.totalDuration):'-- : -- : --'}}</div>
                       </div>
                       <div>
-                        <div class="week-text">Completion Level</div>
+                        <div class="week-text">{{'Completion Level' | translate}}</div>
                         <div class="font-weight-bold">{{topicItem.activityDetails.completedPercentage}}%
                         </div>
                       </div>
                       <div></div>
                     </div>
                     <div class="layb">
-                      <div class="types">Knowledge Check</div>
+                      <div class="types">{{'Knowledge Check' | translate}}</div>
                       <div>
-                        <div class="week-text">Attempted</div>
+                        <div class="week-text">{{'Attempted' | translate}}</div>
                         <div class="font-weight-bold">
                           {{topicItem.knowledgeDetails.totalQuestion?topicItem.knowledgeDetails.totalQuestion :'--'}}
                         </div>
                       </div>
                       <div>
-                        <div class="week-text">Correct</div>
+                        <div class="week-text">{{'Correct' | translate}}</div>
                         <div class="font-weight-bold color-green">
                           {{topicItem.knowledgeDetails.correctAns?topicItem.knowledgeDetails.correctAns:'--'}}</div>
                       </div>
                       <div>
-                        <div class="week-text">Incorrect</div>
+                        <div class="week-text">{{'Incorrect' | translate}}</div>
                         <div class="font-weight-bold color-red">
                           {{topicItem.knowledgeDetails.incorrect?topicItem.knowledgeDetails.incorrect:'--'}}</div>
                       </div>
@@ -187,10 +187,10 @@
     </div>
    <div class="col">
     <div class="activity-container">
-      <div class="header-label">Activities Progression Report</div>
+      <div class="header-label">{{'Activities Progression Report' | translate}}</div>
       <div class="tab-container">
         <mat-tab-group (selectedTabChange)="tabChanged($event)">
-          <mat-tab label="Assignment">
+          <mat-tab label="{{'Assignment' | translate}}">
             <div *ngIf="!showSkeleton; else skeletonLoad">
               <div class="card-content d-flex justify-content-start">
                 <mat-card *ngFor="let assignmentModule of assignmentPage | async" class="card-container">
@@ -203,11 +203,11 @@
                   <div class="card-description mt-4 font-weight-bold">{{assignmentModule?.files?.activityname}}</div>
                   <div class="d-flex justify-content-between align-item-center mb-3">
                     <div class="date-content">
-                      <div class="sub-header">Due on</div>
+                      <div class="sub-header">{{'Due on' | translate}}</div>
                       <div class="date-value">{{assignmentModule?.files?.activityenddate | date :'dd/MM/yyyy'}}</div>
                     </div>
                     <div class="date-content">
-                      <div class="sub-header">Submitted on</div>
+                      <div class="sub-header">{{'Submitted on' | translate}}</div>
                       <div class="date-value" *ngIf="assignmentModule?.files?.submitted_date">
                         {{assignmentModule?.files?.submitted_date | date :'dd/MM/yyyy'}}</div>
                       <div class="date-value" *ngIf="!assignmentModule?.files?.submitted_date">--</div>
@@ -215,7 +215,7 @@
                   </div>
                   <div class="lastRow d-flex justify-content-between align-item-center">
                     <div class="date-content first-content">
-                      <div class="sub-header">Status</div>
+                      <div class="sub-header">{{'Status' | translate}}</div>
                       <div class="statusCaps status-value-grey"
                         *ngIf="assignmentModule?.files?.submit_status == 'notsubmitted'">
                         {{'Yet to Submit' | translate }}
@@ -235,7 +235,7 @@
                     
                     <div class="icon-content">
                       <div class="date-content score-content">
-                        <div class="sub-header">Score</div>
+                        <div class="sub-header">{{'Score' | translate}}</div>
                         <div class="score-value">{{assignmentModule?.files?.score_mark ?
                           assignmentModule?.files?.score_mark : '--'}}/{{assignmentModule?.files?.total_mark}}</div>
                       </div>
@@ -249,11 +249,11 @@
                 <figure>
                   <img src="https://assets.lntedutech.com/application_images/noassignment.svg" alt="assignment">
                 </figure>
-                <p> You have no Assignment activity at the moment!</p>
+                <p> {{'You have no Assignment activity at the moment!' | translate}}</p>
               </div>
             </div>
           </mat-tab>
-          <mat-tab label="Project">
+          <mat-tab label="{{'Project' | translate}}">
             <div *ngIf="!showSkeleton; else skeletonLoad">
               <div class="card-content d-flex justify-content-start">
                 <mat-card *ngFor="let projectModule of projectPage | async" class="card-container">
@@ -267,12 +267,12 @@
                   </div>
                   <div class="d-flex justify-content-between align-item-center mb-3">
                     <div class="date-content">
-                      <div class="sub-header">Due on</div>
+                      <div class="sub-header">{{'Due on' | translate}}</div>
                       <div class="date-value">{{projectModule?.projectActivity?.activityenddate | date :'dd/MM/yyyy'}}
                       </div>
                     </div>
                     <div class="date-content">
-                      <div class="sub-header">Submitted on</div>
+                      <div class="sub-header">{{'Submitted on' | translate}}</div>
                       <div class="date-value" *ngIf="projectModule?.projectActivity?.submitted_date">
                         {{projectModule?.projectActivity?.submitted_date | date :'dd/MM/yyyy'}}</div>
                       <div class="date-value" *ngIf="!projectModule?.projectActivity?.submitted_date">--</div>
@@ -280,7 +280,7 @@
                   </div>
                   <div class="lastRow d-flex justify-content-between align-item-center">
                     <div class="date-content first-content">
-                      <div class="sub-header">Status</div>
+                      <div class="sub-header">{{'' | translate}}Status</div>
                       <div class="statusCaps status-value-grey"
                         *ngIf="projectModule?.projectActivity?.submit_status == 'notsubmitted'">
                         {{'Yet to Submit' | translate }}
@@ -299,7 +299,7 @@
                       </div>
                     </div>
                     <div class="date-content score-content">
-                      <div class="sub-header">Score</div>
+                      <div class="sub-header">{{'' | translate}}Score</div>
                       <div class="score-value">{{projectModule?.projectActivity?.score_mark ?
                         projectModule?.projectActivity?.score_mark :
                         '--'}}/{{projectModule?.projectActivity?.total_mark}}</div>
@@ -315,11 +315,11 @@
                 <figure>
                   <img src="https://assets.lntedutech.com/application_images/noProject.svg" alt="assignment">
                 </figure>
-                <p>You have no Project activity at the moment!</p>
+                <p>{{'You have no Project activity at the moment!' | translate}}</p>
               </div>
             </div>
           </mat-tab>
-          <mat-tab label="Perform">
+          <mat-tab label="{{'Perform' | translate}}">
             <div *ngIf="!showSkeleton; else skeletonLoad">
               <div class="card-content d-flex justify-content-start">
                 <mat-card *ngFor="let performModule of performPage | async" class="card-container">
@@ -332,11 +332,11 @@
                   <div class="card-description mt-4 font-weight-bold">{{performModule?.activityname}}</div>
                   <div class="d-flex justify-content-between align-item-center mb-3">
                     <div class="date-content">
-                      <div class="sub-header">Due on</div>
+                      <div class="sub-header">{{'Due on' | translate}}</div>
                       <div class="date-value">{{performModule?.activityenddate | date :'dd/MM/yyyy'}}</div>
                     </div>
                     <div class="date-content">
-                      <div class="sub-header">Submitted on</div>
+                      <div class="sub-header">{{'Submitted on' | translate}}</div>
                       <div class="date-value" *ngIf="performModule?.submitted_date">{{performModule?.submitted_date |
                         date :'dd/MM/yyyy'}}</div>
                       <div class="date-value" *ngIf="!performModule?.submitted_date">--</div>
@@ -344,7 +344,7 @@
                   </div>
                   <div class="lastRow d-flex justify-content-between align-item-center">
                     <div class="date-content first-content">
-                      <div class="sub-header">Status</div>
+                      <div class="sub-header">{{'Status' | translate}}</div>
                       <div class="statusCaps status-value-grey" *ngIf="performModule?.submit_status == 'notsubmitted'">
                         {{'Yet to Submit' | translate }}
                       </div>
@@ -360,7 +360,7 @@
                       </div>
                     </div>
                     <div class="date-content score-content">
-                      <div class="sub-header">Score</div>
+                      <div class="sub-header">{{'Score' | translate}}</div>
                       <div class="score-value">{{performModule?.score_mark ? performModule?.score_mark :
                         '--'}}/{{performModule?.total_mark}}</div>
                     </div>
@@ -375,7 +375,7 @@
                 <figure>
                   <img src="https://assets.lntedutech.com/application_images/noPerform.svg" alt="assignment">
                 </figure>
-                <p>You have no Perform activity at the moment!</p>
+                <p>{{'You have no Perform activity at the moment!' | translate}}</p>
               </div>
             </div>
           </mat-tab>
@@ -387,14 +387,14 @@
   <div class="right-container"> 
     <ul class="breadcrumb">
       <li><em routerLink="/Learner/MyCourse" class="lxp-Go backArrow"></em> {{courseName}}</li>
-      <li>Learning Progression</li>
+      <li>{{'Learning Progression' | translate}}</li>
     </ul>
     <div>
-   <div class="progress-label">Week wise time spent</div>
+   <div class="progress-label">{{'Week wise time spent' | translate}}</div>
    <div class="progress-date d-flex">
      <div class="progress-hours-container">
       <h4 class="progress-hours">{{totalhoursSpend}}</h4>
-      <span class="hours-spent-label">Hours Spent</span>
+      <span class="hours-spent-label">{{'Hours Spent' | translate}}</span>
      </div>
      <div class="progress-date-input">
       <mat-form-field style="width:110px;">
@@ -406,7 +406,7 @@
      </div>
    </div>
    <div class="chart-container">
-   <h6>Time in hours</h6>
+   <h6>{{'Time in hours' | translate}}</h6>
     <div>
       <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
     </div>
@@ -440,13 +440,13 @@
       </div> -->
       <div class="col d-flex">
         <div class="numbers">87%</div>
-        <div class="mr-2 numbers-text">completion <br /> Rate</div>
+        <div class="mr-2 numbers-text">{{'completion' | translate}} <br /> {{'Rate' | translate}}</div>
         <!-- <div class="numbers">35</div>
         <div class="numbers-text">Questions <br />Asked</div> -->
       </div>
       <div class="col d-flex mt-3">
         <div class="font-weight-bold">24&nbsp;</div>
-        <div>Students have already completed the course</div>
+        <div>{{'Students have already completed the course' | translate}}</div>
       </div>
     </div>
   </div>
@@ -484,6 +484,6 @@
       <div>
         <img src="https://assets.lntedutech.com/application_images/noactivity.svg" alt="assignment">
       </div>
-      <p>Please start the course to view your progression report!</p>
+      <p>{{'Please start the course to view your progression report!' | translate}}</p>
   </div>
 </ng-template>

@@ -19,6 +19,8 @@ export class NewHomeComponent implements OnInit {
   @ViewChild('authInput') authInput;
   constructor(public translate: TranslateService, public learnerService: LearnerServicesService,
               private gs: GlobalServiceService, private router: Router,private toastr: ToastrService,location: PlatformLocation) {
+    let lang = localStorage.getItem('language')
+    this.translate.use(lang ? lang : 'en') 
                 location.onPopState(() => {
                   localStorage.clear();
                   sessionStorage.clear();

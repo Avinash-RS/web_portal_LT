@@ -10,7 +10,7 @@
       </button>
       <div class="progStatus {{course.progressClass}}">
           <div class="d-flex justify-content-between progression">
-              <span>Progression</span>
+              <span>{{'Progression' | translate}}</span>
               <span>{{course.self_paced_learning_progression}} %</span>
           </div>
           <mat-progress-bar style="height: 4px;" [mode]="mode" [value]="course.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
@@ -44,19 +44,19 @@
                   </button>
               </div>
               <div *ngIf="course?.batchid" class="durationCredits d-flex justify-content-between">
-                  <span class="by">By: <b>{{course.courseBy}}</b></span>
-                  <span class="credits" *ngIf ="course.enableCredits">Credits: <b>{{course.credits!==null?course.credits:0}}</b></span>
+                  <span class="by">{{'By:' | translate}} <b>{{course.courseBy}}</b></span>
+                  <span class="credits" *ngIf ="course.enableCredits">{{'Credits:' | translate}} <b>{{course.credits!==null?course.credits:0}}</b></span>
                   <span>
                       <em class="lxp-Duration"></em> 
-                      Duration: <b>{{course.batch_start_date ?(course.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{course.batch_end_date ?(course.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
+                      {{'Duration:' | translate}} <b>{{course.batch_start_date ?(course.batch_start_date |date:'dd MMM yyyy'):'N/A' }} - {{course.batch_end_date ?(course.batch_end_date |date:'dd MMM yyyy'):'N/A' }}</b>
                   </span>
               </div>
               <div class="type d-flex justify-content-start">
-                  <span>Self learning - {{course.image_self_paced_learning_time!==""?course.image_self_paced_learning_time:0}} hrs</span>
+                  <span>{{'Self learning -' | translate}} {{course.image_self_paced_learning_time!==""?course.image_self_paced_learning_time:0}} hrs</span>
                   <span>
-                      <ng-container *ngIf="userDetail.org_type !== 'collegeconnect'">Live Interactions</ng-container><ng-container *ngIf="userDetail.org_type == 'collegeconnect'">Industry Talk</ng-container> - upto  {{course.instructor_lead_session_total_count!==""?course.instructor_lead_session_total_count:0}}</span>
-                  <span *ngIf="userDetail.org_type == 'collegeconnect'">Course project - {{course.total_mid_course_project_count!==""?course.total_mid_course_project_count:0}}</span>
-                  <span *ngIf="userDetail.org_type == 'collegeconnect'">Internal Assessment - {{course.internal_assesment!==""?course.internal_assesment:0}}</span>
+                      <ng-container *ngIf="userDetail.org_type !== 'collegeconnect'">{{'Live Interactions' | translate}}</ng-container><ng-container *ngIf="userDetail.org_type == 'collegeconnect'">{{'Industry Talk' | translate}}</ng-container> - {{'upto' | translate}}  {{course.instructor_lead_session_total_count!==""?course.instructor_lead_session_total_count:0}}</span>
+                  <span *ngIf="userDetail.org_type == 'collegeconnect'">{{'Course project -' | translate}} {{course.total_mid_course_project_count!==""?course.total_mid_course_project_count:0}}</span>
+                  <span *ngIf="userDetail.org_type == 'collegeconnect'">{{'Internal Assessment -' | translate}} {{course.internal_assesment!==""?course.internal_assesment:0}}</span>
               </div>
           </div>
       </div>
@@ -65,31 +65,31 @@
               <div class="viltActivitiesQA d-flex justify-content-start">
                   <div class="icons" (click)="goInstructorLed(course)">
                       <span><em class="lxp-VILT"></em></span>
-                      <ng-container *ngIf="userDetail.org_type !== 'collegeconnect'"><p>Live Interactions</p></ng-container>
-                      <ng-container *ngIf="userDetail.org_type == 'collegeconnect'"><p>Industry Talk</p></ng-container>
+                      <ng-container *ngIf="userDetail.org_type !== 'collegeconnect'"><p>{{'Live Interactions' | translate}}</p></ng-container>
+                      <ng-container *ngIf="userDetail.org_type == 'collegeconnect'"><p>{{'Industry Talk' | translate}}</p></ng-container>
                   </div>
                   <div class="icons" (click)="gotoSubmissionDetails(course)">
                       <span><em class="lxp-Activities_New"></em></span>
-                      <p>Activities</p>
+                      <p>{{'Activities' | translate}}</p>
                   </div>
                   <!--  -->
                   <div class="icons" [ngClass]="course.course_status=='start' && userDetail.org_type !== 'collegeconnect'?'disabledcursor':''" [disabled]="course.course_status=='start'" (click)="userDetail.org_type !== 'collegeconnect'?gotoAskQuestions(course):gotoquestionanswer(course)">
                       <span><em class="lxp-book-question"></em></span>
-                      <p>Q&A</p>
+                      <p>{{'Q&A' | translate}}</p>
                   </div>
                   <div *ngIf="userDetail.org_type === 'vocational' || userDetail.org_type ==='Corporate'" class="icons" (click)="goToForum(course)">
                       <span><em class="lxp-QA"></em></span>
-                      <p>Discussion Forum</p>
+                      <p>{{'Discussion Forum' | translate}}</p>
                   </div>
               </div>
               <div class="courseProgression viltActivitiesQA  d-flex align-items-center">
                   <div class="icons" *ngIf="userDetail.org_type === 'collegeconnect'" (click)="openReport(course)">
                       <span><em class="lxp-Assessment_Report"></em></span>
-                      <p>Assessment Report</p>
+                      <p>{{'Assessment Report' | translate}}</p>
                   </div>
                   <div class="icons" (click)="gotoProgression(course)">
                       <span><em class="lxp-Analytics"></em></span>
-                      <p>Learning Progression</p>
+                      <p>{{'Learning Progression' | translate}}</p>
                   </div>
               </div>
           </div>

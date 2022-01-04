@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { GlobalServiceService } from "@core/services/handlers/global-service.service";
 import { LearnerServicesService } from "@learner/services/learner-services.service";
 import { ToastrService } from "ngx-toastr";
+import { TranslateService } from '@ngx-translate/core';
 // import { NgxUiLoaderService, SPINNER } from "ngx-ui-loader";
 
 @Component({
@@ -45,8 +46,11 @@ export class AskQuestionsComponent implements OnInit {
     public route: Router,
     private gs: GlobalServiceService,
     private toastr: ToastrService,
+    public translate: TranslateService,
     // private ngxLoader: NgxUiLoaderService
   ) {
+    let lang = localStorage.getItem('language')
+      this.translate.use(lang?lang:'en')
     this.screenWidth = window.innerWidth
     const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.detail);

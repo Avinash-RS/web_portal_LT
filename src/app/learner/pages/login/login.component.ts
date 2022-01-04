@@ -56,6 +56,8 @@ export class LoginComponent implements OnInit {
       translate.addLangs(['en', 'ta']);
       translate.setDefaultLang('en');
       const browserLang = translate.getBrowserLang();
+      let lang = localStorage.getItem('language')
+      this.translate.use(lang?lang:'en') 
   }
 
   ngOnInit() {
@@ -233,7 +235,7 @@ export class LoginComponent implements OnInit {
         }else{
           sessionStorage.setItem('token', loginresult.data.login.message.token);
         }
-        localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
+        // localStorage.setItem('language', this.loginForm?.value?.language || 'en'  );
         localStorage.setItem('Fullname', loginresult.data.login.message.full_name);
         var id = CryptoJS.AES.encrypt(loginresult.data.login.message.user_id, this.secretKey.trim()).toString(); 
         loginresult.data.login.message.user_id = id

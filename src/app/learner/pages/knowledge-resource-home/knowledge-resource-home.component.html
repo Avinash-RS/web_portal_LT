@@ -4,11 +4,11 @@
   <div class="header-div">
     <div style="font-size: 22px;
       margin-left: 11px;
-      margin-bottom: 20px;" class="animated animatedFadeInUp fadeInUp ">Knowledge Resources</div>
+      margin-bottom: 20px;" class="animated animatedFadeInUp fadeInUp ">{{'Knowledge Resources' | translate}}</div>
   </div>
   <div class="searchWrapper" *ngIf="details.length">
     <div>
-      <input class="search-inp" placeholder="Search..." (keyup)="checkKnowledgeRec($event)" [(ngModel)]="searchDetails">
+      <input class="search-inp" [placeholder]="'Search...' | translate" (keyup)="checkKnowledgeRec($event)" [(ngModel)]="searchDetails">
       <ng-container *ngIf="searchDetails && searchDetails.length > 0; else searchIcon">
         <mat-icon class="close-search" (click)="isLoadBalanced = false ;searchDetails = ''">close</mat-icon>
       </ng-container>
@@ -23,7 +23,7 @@
       <figure>
         <img src="https://assets.lntedutech.com/application_images/nocardKnowledge.svg" alt="Knowledge">
       </figure>
-      <p>There are no resources added at the moment!</p>
+      <p>{{'There are no resources added at the moment!' | translate}}</p>
     </div>
     <!-- <div class="">
       <div class="box-size w-100">
@@ -59,10 +59,10 @@
         </ng-container>
         <ng-container *ngIf="!(searchDetails && searchDetails.length > 0)">
           <ng-container *ngIf="item.areaOfInterest.length > 12 && !item.isMore">
-            <span (click)="item.isMore = true" class="expand-more">More...</span>
+            <span (click)="item.isMore = true" class="expand-more">{{'More...' | translate}}</span>
           </ng-container>
           <ng-container *ngIf="item.areaOfInterest.length > 12 && item.isMore">
-            <span (click)="item.isMore = false" class="expand-more">Less...</span>
+            <span (click)="item.isMore = false" class="expand-more">{{'Less...' | translate}}</span>
           </ng-container>
         </ng-container>
       </div>

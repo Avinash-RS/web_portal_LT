@@ -12,6 +12,7 @@ import { DragScrollComponent } from 'ngx-drag-scroll';
 import { AnonymousCredential, BlobServiceClient, newPipeline } from '@azure/storage-blob';
 import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 import { environment } from '@env/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-activities',
@@ -181,9 +182,11 @@ export class ActivitiesComponent implements OnInit {
 
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
     private dialog: MatDialog, private toastr: ToastrService,
-    public route: Router, public datePipe: DatePipe, private ngxLoader: NgxUiLoaderService,public activateroute:ActivatedRoute) {
+    public route: Router, public datePipe: DatePipe, private ngxLoader: NgxUiLoaderService,public activateroute:ActivatedRoute,public translate: TranslateService,) {
     // const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
     //   this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
+    let lang = localStorage.getItem('language')
+      this.translate.use(lang?lang:'en') 
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout();
     }
