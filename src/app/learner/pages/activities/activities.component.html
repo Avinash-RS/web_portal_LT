@@ -22,7 +22,7 @@
 
   <mat-tab-group class="activitiesTab" animationDuration="1000ms" (selectedTabChange)="tabChanged($event); activeTab($event)"
   [(selectedIndex)]="demo1TabIndex">
-    <mat-tab label="Assignment">
+    <mat-tab label="{{'Assignment' | translate}}">
       <!-- Content starts -->
       <ng-container *ngIf="assignmentContent?.length > 0">
         <div class="box-0-1" *ngFor="let assignment of assignmentContent; let i = index">
@@ -174,7 +174,7 @@
 
     </mat-tab>
 
-    <mat-tab label="Perform">
+    <mat-tab label="{{'Perform' | translate}}">
       <!-- mobile starts -->
       <div class="mr-0 ml-0" *ngIf="performDetails?.length > 0 && mobileResponsive">
         <div class="">
@@ -221,7 +221,7 @@
                 <span class="ml-13">{{perform.performActivity.module_id}}</span>
               </div>
               <div class="t-l">{{perform.performActivity.topic_id}}</div>
-              <div class="t-l">{{'Activity description :' | translate}} {{perform.performActivity.activityname}}</div>
+              <div class="t-l">{{'Activity description:' | translate}} {{perform.performActivity.activityname}}</div>
             </div>
 
             <div class="performRightContent">
@@ -482,7 +482,7 @@
       </div>
     </mat-tab>
    
-    <mat-tab label="Project">
+    <mat-tab label="{{'Project' | translate}}">
       <app-project-mobile [projectDetailPageData]="projectDetaildata" *ngIf="projectMobileResponsive"></app-project-mobile>
 
       <ng-container *ngIf="projectDetails?.length > 0 && !projectMobileResponsive">
@@ -502,7 +502,7 @@
                     {{project.projectActivity.topic_id}}
                    </div>
                   <div class="t-l-1 ml-4">
-                    Activity Description: {{project.projectActivity.activityname}}
+                    {{'Activity Description:' | translate}} {{project.projectActivity.activityname}}
                   </div>
                 </div>
                 <div class="projectRightContent">
@@ -520,29 +520,29 @@
                   </div>
                   <div class="text-right activityStatus">
                     <span class="f_wt_600 alignRight status" *ngIf="(project.projectActivity.submitAction !== 'submit' || project.projectActivity.submit_status == 'notsubmitted') && project.projectActivity.grade_status != 'Evaluated'">
-                      <span class="dot"></span>{{'' | translate}}Yet to submit
+                      <span class="dot"></span>{{'Yet to submit' | translate}}
                     </span>
                     <span class="f_wt_600 alignRight projectSubmitstatus submitted" *ngIf="project.projectActivity.submitAction == 'submit' && project.projectActivity.grade_status == 'Not Evaluated'">
-                      <span class="submitdot"></span>{{'' | translate}}Submitted
+                      <span class="submitdot"></span>{{'Submitted' | translate}}
                     </span>
                     <span class="f_wt_600 alignRight graded" *ngIf="project.projectActivity.grade_status == 'Evaluated'">
-                      <span class="gradedot"></span>{{'' | translate}}Graded
+                      <span class="gradedot"></span>{{'Graded' | translate}}
                     </span>
                   </div>
                   <div class="projTotalScore">
                     <div class="text-right">
                       <span class="totscore">
-                        {{'' | translate}}Total score: <span *ngIf="!project.projectActivity.score_mark">-</span> <span *ngIf="project.projectActivity.score_mark">{{project.projectActivity.score_mark}}</span>
+                        {{'Total score:' | translate}} <span *ngIf="!project.projectActivity.score_mark">-</span> <span *ngIf="project.projectActivity.score_mark">{{project.projectActivity.score_mark}}</span>
                         /{{project.projectActivity.total_mark}}</span>
                     </div>
                   </div>
                   <div class="d-flex justify-content-end projDate">
                     <div class="">
-                      <span class="font-weight-bold">{{'' | translate}}Start date:</span>
+                      <span class="font-weight-bold">{{'Start date:' | translate}}</span>
                       <span class="textGrayColor1"> {{project.projectActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}</span>
                     </div>
                     <div class="projEndDate">
-                      <span class="font-weight-bold">{{'' | translate}}End date:</span>
+                      <span class="font-weight-bold">{{'End date:' | translate}}</span>
                       <span class="textGrayColor1"> {{project.projectActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</span>
                     </div>
                   </div>
@@ -774,7 +774,7 @@
       </div>
     </mat-tab>
  
-    <mat-tab label="Practice Online">
+    <mat-tab label="{{'Practice Online' | translate}}">
       <ng-container *ngFor="let lab of labpracticeData">
         <div class="box-0-1">
           <div class="d-flex justify-content-between">
@@ -789,17 +789,17 @@
                     <span class="f_size_16 f_wt_600 projHead">{{lab.labActivity.topic_id}}</span>
                   </div>
                   <div class="t-l-1">
-                    {{'' | translate}}Activity Description: {{lab.labActivity.activityname}}
+                    {{'Activity Description:' | translate}} {{lab.labActivity.activityname}}
                   </div>
                 </div>
                 <div class="labmiddleContent">
                   <div class="d-flex justify-content-end projDate">
                     <div class="projstartdate">
-                      <span class="font-weight-bold">{{'' | translate}}Start date:</span>
+                      <span class="font-weight-bold">{{'Start date:' | translate}}</span>
                       <span class="textGrayColor1"> {{lab.labActivity.activitystartdate | date:'MMM dd, yyyy hh:mm a'}}</span>
                     </div>
                     <div class="projEndDate">
-                      <span class="font-weight-bold">{{'' | translate}}End date:</span>
+                      <span class="font-weight-bold">{{'End date:' | translate}}</span>
                       <span class="textGrayColor1"> {{lab.labActivity.activityenddate | date:'MMM dd, yyyy hh:mm a'}}</span>
                     </div>
                   </div>
