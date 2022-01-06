@@ -252,7 +252,7 @@
         <!-- <h3 class="headLine">Upcoming Sessions and Recorded Sessions</h3> -->
         <!-- <h3 class="headLine">Industry Talk Sessions</h3> -->
         <span *ngIf="userDetails.org_type !== 'collegeconnect'"><h3 class="headLine">{{'Live Interactions' | translate}}</h3></span> 
-        <span *ngIf="userDetails.org_type == 'collegeconnect'"><h3 class="headLine">{{'Industry Talk' | translate}}</h3></span>
+        <span *ngIf="userDetails.org_type == 'collegeconnect'"><h3 class="headLine">{{'Industry Talk Videos' | translate}}</h3></span>
         <button class="btn btn-light attandanceShow" *ngIf="sessionAttendance?.length"
           (click)="showModal(attendanceDialog)">{{'Attendance' | translate}}</button>
       </div>
