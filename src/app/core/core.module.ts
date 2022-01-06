@@ -31,7 +31,7 @@ import { DragDropImageDirective } from './services/directives/drag-drop-image.di
 import { PdfreaderComponent } from './shared/pdfreader/pdfreader.component';
 import { ToolbarNotificationComponent } from './shared/toolbar-notification/toolbar-notification.component';
 import { MycourseItemComponent } from './shared/mycourse-item-component/mycourse-item-component';
-
+import { DeferLoadModule } from '@trademe/ng-defer-load';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -72,6 +72,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    DeferLoadModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
