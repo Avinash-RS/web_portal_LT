@@ -3,7 +3,7 @@
       <mat-progress-bar [mode]="mode" [value]="course.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
   </div>
   <figure class="d-flex align-items-start justify-content-center leftColImage" (click)="gotoDesc(course)">
-      <img [src]="course.course_img_url + blobKey" alt="" />
+      <img loading="lazy" [src]="course.course_img_url + blobKey" alt="" />
 
       <button class="d-flex align-items-center"><em [class]="course.course_status === 'completed'?'lxp-PlayCircle':'lxp-Play_Icon'"></em>
           {{course?.course_status === "incomplete" ? ("Resume"| translate) : course?.course_status === "suspend" ? ("Resume"| translate) : course.course_status=== 'completed'?("Replay"| translate):("Start" | translate) }}
