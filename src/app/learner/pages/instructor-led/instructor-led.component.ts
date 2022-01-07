@@ -152,7 +152,7 @@ export class InstructorLedComponent implements OnInit {
     const d = moment.duration(ms);
     let time;
     if (d.hours() === 0 && d.minutes() !== 0 && d.seconds() !== 0) {
-      time = d.minutes() + ' mins' + d.seconds() + ' Sec ';
+      time = d.minutes() + ' mins ' + d.seconds() + ' Sec ';
     } else if (d.hours() !== 0 && d.minutes() === 0) {
       time = d.hours() + ' hour ';
     } else {
