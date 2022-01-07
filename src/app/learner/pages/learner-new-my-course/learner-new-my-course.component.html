@@ -331,7 +331,7 @@
                                 <div class="mycoursesContent" *ngIf="courseDetailsList.length; else noCourseCard">
                                    
                                    
-                                    <ng-container *ngFor="let item of courseDetailsList">
+                                    <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
                                         <!-- <div class="courses d-flex justify-content-start">
                                             <div class="{{item.progressClass}} progBar">
                                                 <mat-progress-bar [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
@@ -419,7 +419,7 @@
                                                 </div>
                                             </div>
                                         </div> -->
-                                        <app-mycourse-item-component [courseItems]="item"></app-mycourse-item-component>
+                                        <app-mycourse-item-component *ngIf="item.show" [courseItems]="item"></app-mycourse-item-component>
                                     </ng-container>
                                 </div>
                                 </div>
@@ -430,7 +430,7 @@
                                 </ng-template>
                                 <div *ngIf="courseSkel;else courseSkeleton">
                                 <div class="mycoursesContent" *ngIf="courseDetailsList.length;else noCourseCard">
-                                    <ng-container *ngFor="let item of courseDetailsList">
+                                    <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
                                         <!-- <div class="courses d-flex justify-content-start">
                                             <div class="{{item.progressClass}} progBar">
                                                 <mat-progress-bar [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
@@ -516,7 +516,7 @@
                                                 </div>
                                             </div>
                                         </div> -->
-                                        <app-mycourse-item-component [courseItems]="item"></app-mycourse-item-component>
+                                        <app-mycourse-item-component *ngIf="item.show" [courseItems]="item"></app-mycourse-item-component>
                                     </ng-container>
                                 </div>
                                 </div>
@@ -527,7 +527,7 @@
                                 </ng-template>
                                 <div *ngIf="courseSkel;else courseSkeleton">
                                 <div class="mycoursesContent" *ngIf="courseDetailsList.length;else noCourseCard">
-                                    <ng-container *ngFor="let item of courseDetailsList">
+                                    <ng-container *ngFor="let item of courseDetailsList" (deferLoad)="item.show = true">
                                         <!-- <div class="courses d-flex justify-content-start">
                                             <div class="{{item.progressClass}} progBar">
                                                 <mat-progress-bar [mode]="mode" [value]="item.self_paced_learning_progression" [bufferValue]="bufferValue"></mat-progress-bar>
@@ -613,7 +613,7 @@
                                                 </div>
                                             </div>
                                         </div> -->
-                                        <app-mycourse-item-component [courseItems]="item"></app-mycourse-item-component>
+                                        <app-mycourse-item-component *ngIf="item.show" [courseItems]="item"></app-mycourse-item-component>
                                     </ng-container>
                                 </div>
                                 </div>

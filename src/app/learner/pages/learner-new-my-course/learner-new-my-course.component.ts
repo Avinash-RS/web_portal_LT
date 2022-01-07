@@ -537,6 +537,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
         });
         this.courseDetailsList.push(...this.enrolledCourses);
         this.courseDetailsList.forEach((value)=>{
+          value.show = true;
             value.weekPercentage = (value.current_week_count !== null ?
               value.current_week_count : 0) + '/' + (value.actual_total_week !== null ? value.actual_total_week : 0);
           if(value.self_paced_learning_progression){
