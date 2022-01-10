@@ -271,11 +271,11 @@ export class LearnerNewMyCourseComponent implements OnInit {
         var subtext =[];
          subtext.push('Modules                        ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['module']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['module']['totalCount']);
          subtext.push('Topics                           ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['topic']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['topic']['totalCount']);
-         subtext.push('Other Activities:   ');
+        // subtext.push('Other Activities:   ');
         //  subtext.push('Live Interactions         ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['liveclassroom']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['liveclassroom']['totalCount']);
         //  subtext.push('Assignment                 ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['assignment']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['assignment']['totalCount']);
         //  subtext.push('Perform                        ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['perform']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['perform']['totalCount']);
-         subtext.push('Project                         ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['project']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['project']['totalCount']);
+        // subtext.push('Project                         ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['project']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['project']['totalCount']);
           return subtext;
         }
       }
