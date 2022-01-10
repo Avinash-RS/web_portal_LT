@@ -291,21 +291,14 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
   // initials: any;
-  constructor(
-    public translate: TranslateService,
-    private router: ActivatedRoute,
-    public socketService: SocketioService,
-    public Lservice: LearnerServicesService,
-    private cdr: ChangeDetectorRef,
-    public service: CommonServicesService,
-    private gs: GlobalServiceService,
-    private dialog: MatDialog,
-    public route: Router,
-    private formBuilder: FormBuilder,
-    public sanitizer: DomSanitizer,
-    private toastr: ToastrService
-  ) {
-    const loginDetails = JSON.parse(localStorage.getItem("UserDetails"));
+  constructor(public translate: TranslateService, private router: ActivatedRoute, public socketService: SocketioService,
+    public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
+    public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
+    public route: Router, private formBuilder: FormBuilder,
+    public sanitizer: DomSanitizer, private toastr: ToastrService) {
+    let lang = localStorage.getItem('language')
+    this.translate.use(lang ? lang : 'en')
+    const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
     if (!loginDetails?.is_password_updated) {
       this.route.navigate(["/Learner/profile"]);
       return;

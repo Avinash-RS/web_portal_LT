@@ -17,23 +17,23 @@
         <li class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/MyCourse' ? 'redColor' : 'greyColor'"
           md-raised-button routerLink="/Learner/MyCourse">
           <i class="lxp-SelfPaced headicon"></i>
-          <span class="mobContent">My Courses</span>
+          <span class="mobContent">{{'My Courses' | translate}}</span>
         </li>
         <li class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/calendar' ? 'redColor' : 'greyColor'"
           md-raised-button routerLink="/Learner/calendar" routerLinkActive="active">
           <i class="headicon lxp-calendar"></i>
-          <span class="mobContent">Calendar</span>
+          <span class="mobContent">{{'Calendar' | translate}}</span>
         </li>
         <li class="d-flex align-items-center"
           [ngClass]="activeUrl === '/Learner/activitycenterhomescreen' ? 'redColor' : 'greyColor'" md-raised-button
           routerLink="/Learner/activitycenterhomescreen">
           <i class="lxp-ActivityCenter headicon"></i>
-          <span class="mobContent">Activity Center</span>
+          <span class="mobContent">{{'Activity Center' | translate}}</span>
         </li>
         <li class="d-flex align-items-center" [ngClass]="activeUrl === '/Learner/knowledge' ? 'redColor' : 'greyColor'"
           md-raised-button routerLink="/Learner/knowledge" routerLinkActive="active">
           <i class="lxp-Knowledge headicon"></i>
-          <span class="mobContent">Knowledge Resources</span>
+          <span class="mobContent">{{'Knowledge Resources' | translate}}</span>
         </li>
       </ul>
     </mat-menu>
@@ -66,22 +66,22 @@
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="navigateProfile()">
       <em class="lxp-AccountCircle"></em>
-      <span>Profile</span>
+      <span>{{'Profile' | translate}}</span>
     </button>
 
     <button mat-menu-item routerLink="/Learner/MyCourse" routerLinkActive="active" *ngIf="!show">
       <mat-icon fontSet="material-icons-outlined">local_library</mat-icon>
-      <span>My Courses</span>
+      <span>{{'My Courses' | translate}}</span>
     </button>
 
     <button mat-menu-item routerLink="/Learner/calendar" routerLinkActive="active" *ngIf="!show">
       <span class="lxp-Calender"></span>
-      <span>Calendar</span>
+      <span>{{'Calendar' | translate}}</span>
     </button>
 
     <button mat-menu-item (click)="logout()">
       <em class="lxp-Logout"></em>
-      <span>Logout</span>
+      <span>{{'Logout' | translate}}</span>
     </button>
   </mat-menu>
 
@@ -92,7 +92,7 @@
       <em class="lxp-SelfPaced "></em>
     </div>
     <div *ngIf="expandTxt" class="navTitle">
-      My Courses
+      {{'My Courses' | translate}}
     </div>
   </div>
   <div class="stripItem" routerLink="/Learner/calendaractivity" [ngClass]="activeUrl === '/Learner/calendaractivity' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
@@ -100,7 +100,7 @@
       <em class="lxp-Calendar_Outlined"></em>
     </div>
     <div *ngIf="expandTxt" class="navTitle">
-      Schedule
+      {{'Schedule' | translate}}
     </div>
   </div>
   <div class="stripItem" routerLink="/Learner/knowledge" [ngClass]="activeUrl === '/Learner/knowledge' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
@@ -108,7 +108,7 @@
       <em class="lxp-Knowledge "></em>
     </div>
     <div *ngIf="expandTxt" class="navTitle">
-      Knowledge Resources
+      {{'Knowledge Resources' | translate}}
     </div>
   </div>
     <!-- <button  [ngClass]="activeUrl === '/Learner/MyCourse' ? 'colGrey' : 'colWhite'" [ngClass]="expandTxt?'navOpen':'navClose'"

@@ -59,7 +59,15 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.lxp-photo:before {
+  content: "\e96e";
+}
+.lxp-filedownload:before {
+  content: "\e96d";
+}
+.lxp-pdf:before {
+  content: "\e96c";
+}
 .lxp-video-tutorial-1:before {
   content: "\e969";
 }

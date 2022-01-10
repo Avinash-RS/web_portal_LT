@@ -72,6 +72,8 @@ export class MycourseItemComponent implements OnInit {
     private router: Router) {
     this.userDetail = JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.role = localStorage.getItem('role') || sessionStorage.getItem('role') || null;
+    let lang = localStorage.getItem('language')
+      this.translate.use(lang?lang:'en') 
   }
 
 

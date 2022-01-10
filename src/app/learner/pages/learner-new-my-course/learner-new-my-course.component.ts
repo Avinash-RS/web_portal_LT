@@ -19,6 +19,7 @@ declare const Chart;
 const DEFAULT_DURATION = 300;
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { TranslateService } from '@ngx-translate/core';
 
 
 export const MY_FORMATS = {
@@ -270,11 +271,11 @@ export class LearnerNewMyCourseComponent implements OnInit {
         var subtext =[];
          subtext.push('Modules                        ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['module']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['module']['totalCount']);
          subtext.push('Topics                           ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['topic']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['topic']['totalCount']);
-         subtext.push('Other Activities:   ');
+        // subtext.push('Other Activities:   ');
         //  subtext.push('Live Interactions         ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['liveclassroom']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['liveclassroom']['totalCount']);
         //  subtext.push('Assignment                 ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['assignment']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['assignment']['totalCount']);
         //  subtext.push('Perform                        ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['perform']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['perform']['totalCount']);
-         subtext.push('Project                         ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['project']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['project']['totalCount']);
+        // subtext.push('Project                         ' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['project']['completedCount'] + '/' + data['datasets'][0]['data'][tooltipItem[0].index]['myprop']['project']['totalCount']);
           return subtext;
         }
       }
@@ -359,7 +360,10 @@ export class LearnerNewMyCourseComponent implements OnInit {
 
   constructor(private dialog: MatDialog, private router: Router,
     public learnerService: LearnerServicesService,
-    private gs: GlobalServiceService, public CommonServices: CommonServicesService) {
+    private gs: GlobalServiceService, public CommonServices: CommonServicesService,
+    public translate: TranslateService) {
+    let lang = localStorage.getItem('language')
+    this.translate.use(lang ? lang : 'en') 
     this.userDetailes = this.gs.checkLogout();
     if(!this.userDetailes?.is_password_updated){
       this.router.navigate(['/Learner/profile']);
@@ -533,6 +537,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
         });
         this.courseDetailsList.push(...this.enrolledCourses);
         this.courseDetailsList.forEach((value)=>{
+          value.show = true;
             value.weekPercentage = (value.current_week_count !== null ?
               value.current_week_count : 0) + '/' + (value.actual_total_week !== null ? value.actual_total_week : 0);
           if(value.self_paced_learning_progression){

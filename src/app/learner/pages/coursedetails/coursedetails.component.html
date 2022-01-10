@@ -86,14 +86,14 @@
                 <mat-tab-group (selectedTabChange)="tabClick($event)">
                     <mat-tab>
                         <ng-template mat-tab-label>
-                            <span class="tabLabel">Course Contents</span>
+                            <span class="tabLabel">{{'Course Contents' | translate}}</span>
                         </ng-template>
                        <ng-template [ngTemplateOutlet]="tocContent"></ng-template>
                     </mat-tab>
                   
                     <mat-tab [ngClass]="filterkey == 'Bookmarked' ? 'yes':'no'">
                         <ng-template mat-tab-label>
-                            <span class="tabLabel">Bookmarks</span> <span class="labelcount">{{bookmarkedCount}}</span>
+                            <span class="tabLabel">{{'Bookmarks' | translate}}</span> <span class="labelcount">{{bookmarkedCount}}</span>
                         </ng-template>
                         <ng-template [ngTemplateOutlet]="tocContent"></ng-template>
                     </mat-tab>
@@ -167,7 +167,7 @@
             </div> -->
             <ng-template #emptyTOC>
                 <div class="leftTocContent p-xy-10 d-flex justify-content-around align-items-center">
-                    You have not added any bookmarks!
+                    {{'You have not added any bookmarks!' | translate}}
                 </div>
             </ng-template>
 
@@ -177,7 +177,7 @@
                         class="topicCard" >
                         <!-- (click)="moduleExpand(resDat,i)" -->
                         <mat-card-title  class="d-flex justify-content-between align-items-center pointer">
-                            <div class="tocTitle" >Week - {{resDat.week?resDat.week:wi+1}}</div>
+                            <div class="tocTitle" >{{'Week -' | translate}} {{resDat.week?resDat.week:wi+1}}</div>
                             <div>
                                 <!-- <i class="expandCollapse" [ngClass]="resDat.expanded?'lxp-Collapse':'lxp-Expand'"></i> -->
                             </div>
@@ -348,13 +348,13 @@
         <div class="d-flex justify-content-between understoodBookmark" [ngClass]="!drawersOpen ? 'Yes':'No'">
             <div class="popupContent d-flex align-items-center">
                 <div class="wrapper d-flex align-items-center" *ngIf="drawersOpen || scromApiData?.toc == '0'">
-                    <span class="abtCourse" (click)="aboutCourse(aboutCourseWindow)"><em class="lxp-Info"></em> <span>About the Course</span></span>
-                    <span class="resourcesTab" (click)="openResourse(resourseWindow)"><em class="lxp-Image_Folder"></em> <span>Course Resources</span></span>
-                    <span class="downloadCode" (click)="downloadResource();" *ngIf="scromApiData.resourceUrl"><em class="lxp-Download_Code"></em> <span>Download Code exercises</span></span>
+                    <span class="abtCourse" (click)="aboutCourse(aboutCourseWindow)"><em class="lxp-Info"></em> <span>{{'About the Course' | translate}}</span></span>
+                    <span class="resourcesTab" (click)="openResourse(resourseWindow)"><em class="lxp-Image_Folder"></em> <span>{{'Course Resources' | translate}}</span></span>
+                    <span class="downloadCode" (click)="downloadResource();" *ngIf="scromApiData.resourceUrl"><em class="lxp-Download_Code"></em> <span>{{'Download Code exercises' | translate}}</span></span>
                 </div>
                 <div *ngIf="scromApiData?.toc != '0'" class="d-flex align-items-center moduleTopicWrapper">
                     <div *ngIf="!drawersOpen" class="currentModuleTopic">
-                        <div class="curentVideoWeek">Week <span>{{weekHolderUI+1}}</span></div>
+                        <div class="curentVideoWeek">{{'Week' | translate}} <span>{{weekHolderUI+1}}</span></div>
                         <div class="currentVideoModuleTopic">
                             <h5>{{scromModuleData[weekHolderUI].childData[moduleHolder].title}}</h5>
                             <h4 title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.childData[nextPrevHolder].title}}">
@@ -367,9 +367,9 @@
                             <em class="lxp-Dot_Menu"></em>
                         </button>
                         <mat-menu #menu="matMenu" yPosition="above" class="onPopup">
-                            <span class="abtCourse" (click)="aboutCourse(aboutCourseWindow)"><em class="lxp-Info"></em> <span>About the Course</span></span>
-                            <span class="resourcesTab" (click)="openResourse(resourseWindow)"><em class="lxp-Image_Folder"></em> <span>Course Resources</span></span>
-                            <span class="downloadCode" (click)="downloadResource();" *ngIf="scromApiData.resourceUrl"><em class="lxp-Download_Code"></em> <span>Download Code exercises</span></span>
+                            <span class="abtCourse" (click)="aboutCourse(aboutCourseWindow)"><em class="lxp-Info"></em> <span>{{'About the Course' | translate}}</span></span>
+                            <span class="resourcesTab" (click)="openResourse(resourseWindow)"><em class="lxp-Image_Folder"></em> <span>{{'Course Resources' | translate}}</span></span>
+                            <span class="downloadCode" (click)="downloadResource();" *ngIf="scromApiData.resourceUrl"><em class="lxp-Download_Code"></em> <span>{{'Download Code exercises' | translate}}</span></span>
                         </mat-menu>
                     </div>
                 </div>
@@ -379,7 +379,7 @@
                 <!-- <div class="upSkill" *ngIf="showlab"> "*ngIf="showlab"-->
                 <div class="upSkill" >
                     <button data-title="Practice online" *ngIf="userType!=='vocational'" class="practiceOnline" [ngClass]="!showlab?'btn-transp':''" [disabled]="!showlab" type="button" (click)="navigatePractice()">
-                        <em class="lxp-Lab_Practice"></em> <span>Practice Online</span>
+                        <em class="lxp-Lab_Practice"></em> <span>{{'Practice Online' | translate}}</span>
                     </button>
                     <!-- <button data-title="Practice online" (click)="showlab = showlab?false:true" class="onlineEditor" type="button">
                         <em class="lxp-Online_Code_Editor"></em> <span>Online Code Editor</span>
@@ -387,16 +387,16 @@
                 </div>
                 <div class="notesBookmarks">
                     <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')" data-title="Understood" class="smile" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
-                        <em class="lxp-smile"></em> <span>Understood</span>
+                        <em class="lxp-smile"></em> <span>{{'Understood' | translate}}</span>
                     </div>
                     <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
-                        <em class="lxp-sad"></em> <span>Not Understood</span>
+                        <em class="lxp-sad"></em> <span>{{'Not Understood' | translate}}</span>
                     </div>
                     <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType!=='collegeconnect'" type="button" (click)="openAskQuestions(askQuestions)">
-                        <em class="lxp-question"></em> <span>Ask A Question</span>
+                        <em class="lxp-question"></em> <span>{{'Ask A Question' | translate}}</span>
                     </button>
                     <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType=='collegeconnect'" type="button" (click)="openQuestionDialog(questionDialog)">
-                        <em class="lxp-question"></em> <span>Ask A Question</span>
+                        <em class="lxp-question"></em> <span>{{'Ask A Question' | translate}}</span>
                     </button>
                     <!-- <button class="notesBtn"><em class="lxp-Notes"></em> <span>Notes</span></button> -->
                      <button class="bookmarkBtn" *ngIf="userType!='Corporate'" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
@@ -431,7 +431,7 @@
             </div>
             <div class="d-flex rescontentHeight">
                 <div class="resourseToc" [ngClass]='!content?.noresource?"d-flex justify-content-start flex-column":""'>
-                    <h4>Resources</h4>
+                    <h4>{{'Resources' | translate}}</h4>
                     <ng-container *ngIf="content?.noresource">
                         <ng-container  *ngFor="let res of content?.coursedetails; let i = index">
                             <mat-card class="resource-card" *ngIf="res.resValue" [ngClass]="res.isOpen?'activeTab':'inActiveTab'">
@@ -440,7 +440,7 @@
                                         <em class="lxp-Arrow" [ngClass]="res.isOpen?'arrowUp':'arrowDown'"></em>
                                     </div>
                                     <div class="module">
-                                        <span>Module</span>
+                                        <span>{{'Module' | translate}}</span>
                                         <h4>{{res?.modulename}}</h4>
                                     </div>
                                 </mat-card-title>
@@ -470,7 +470,7 @@
                                                     <img *ngIf="file.doc_type == 'application/vnd.ms-excel'" class="size" alt=""
                                                         src="https://assets.lntedutech.com/application_images/Excel_Icon.svg">
                                                     <img *ngIf="file.doc_type == 'video/mp4'" class="size" style="width: 16px;" alt="" src="https://assets.lntedutech.com/application_images/Video_Icon.svg">
-                                                    <mat-icon class="docType" *ngIf="file.doc_type == 'text/plain' "> description </mat-icon>
+                                                    <mat-icon class="docType" *ngIf="file.doc_type == 'text/plain' "> {{'description' | translate}} </mat-icon>
                                                 </div>
                                                 <div>{{file.type_name}}</div>
                                             </mat-card>
@@ -514,14 +514,14 @@
                     </ng-container>
                     <ng-container *ngIf="!content?.noresource">
                         <div class="noResources">
-                            <p>No Resource found !!</p>
+                            <p>{{'No Resource found !!' | translate}}</p>
                         </div>
                     </ng-container>
                 </div>
 
                 <div class="previewContainer">
                     <div [ngClass]="!content?.noresource ? 'no':'yes'" class="previewRibbon">
-                        <span>Preview</span>
+                        <span>{{'Preview' | translate}}</span>
                     </div>
                     <div class="innerWrapper">
                         <div class="previewContainerTitle">
@@ -577,8 +577,8 @@
                         <span *ngIf="isReadMore" [innerHTML]="course?.course_long_description"></span>
                         <span *ngIf="!isReadMore" [innerHTML]="course?.course_long_description.slice(0,250)"></span>
                         <span *ngIf="!isReadMore && longDesc?.length>250">...</span> 
-                        <a href="javascript:;" *ngIf="!isReadMore && longDesc?.length>250" (click)="showText()"> More</a> 
-                        <a href="javascript:;" *ngIf="isReadMore && longDesc?.length>250" (click)="showText()"> Less</a>
+                        <a href="javascript:;" *ngIf="!isReadMore && longDesc?.length>250" (click)="showText()"> {{'More' | translate}}</a> 
+                        <a href="javascript:;" *ngIf="isReadMore && longDesc?.length>250" (click)="showText()"> {{'Less' | translate}}</a>
                     </p>
                 </div>
                 <div class="instructorsWrapper" *ngIf="course?.author_details[0].author_name != ''">
@@ -602,7 +602,7 @@
                 </div>
                 <div class="poweredBy">
                     <!-- <h2>Course offered by: <span><img src="/assets/images/lNTlogo.svg" alt="" /></span></h2> -->
-                    <h2>Course offered by: <span><img src="https://assets.lntedutech.com/edutech_logo.svg" alt="" /></span></h2>
+                    <h2>{{'Course offered by:' | translate}} <span><img src="https://assets.lntedutech.com/edutech_logo.svg" alt="" /></span></h2>
                 </div>
             </div>
         </div>
@@ -615,20 +615,20 @@
         <mat-tab-group #askqaTabs [(selectedIndex)]="selectedQATabIndex" (selectedTabChange)="questionTabSelection($event)">
             <mat-tab label="Ask A Question">
                 <div class="questionInput align-content-center">
-                    <p>Your Question:</p>
+                    <p>{{'Your Question:' | translate}}</p>
                     <textarea [(ngModel)]="questionText"></textarea>
                     
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-primary-outline mr-10px" (click)="closeAskQuestion()">Cancel</button>
-                    <button class="btn btn-primary" (click)="submitMyQuestion()">Submit Question</button>
+                    <button class="btn btn-primary-outline mr-10px" (click)="closeAskQuestion()">{{'Cancel' | translate}}</button>
+                    <button class="btn btn-primary" (click)="submitMyQuestion()">{{'Submit Question' | translate}}</button>
                 </div>
             </mat-tab>
             <mat-tab label="My Q&A">
                 <div class="myQuestions" *ngIf="myQuestionList.length;else noitems">
                     <div class="qaBox" *ngFor="let item of myQuestionList">
                         <div class="QuestionMeta">
-                            <p>Asked on {{item.filteredValue.question.askDate}},&nbsp;{{item.filteredValue.question.askTime}}</p>
+                            <p>{{'Asked on' | translate}} {{item.filteredValue.question.askDate}},&nbsp;{{item.filteredValue.question.askTime}}</p>
                         </div>
                         <p class="quesiton">{{item.filteredValue.question.que}}</p>
                         <div class="QuestionMeta">
@@ -651,10 +651,10 @@
             </mat-tab>
             <mat-tab label="All Q&A">
                 <div class="d-flex justify-content-end" *ngIf="allQuestionList.length">
-                    <div class="m-t-10"><span>Sort by: &nbsp;</span> 
+                    <div class="m-t-10"><span>{{'Sort by:' | translate}} &nbsp;</span> 
                         <select class="sel-pad" [(ngModel)]="qaFilterKey" (change)="filterQAList()">
-                            <option [value]="-1" selected="true">Newest</option>
-                            <option [value]="1">Oldest</option>
+                            <option [value]="-1" selected="true">{{'Newest' | translate}}</option>
+                            <option [value]="1">{{'Oldest' | translate}}</option>
                         </select>
                     </div>
                 </div>
@@ -663,7 +663,7 @@
                         <!-- <div class="userAccount"><i class="lxp-AccountCircle"></i>&nbsp; {{item.user_id}}</div> -->
                         <span class="userAccount"><em class="lxp-AccountCircle align-text-bottom font-weight-bold"></em>&nbsp;<span class="font-weight-bold">{{item.user_id}}</span></span>&nbsp;|&nbsp;
                         <span class="QuestionMeta d-inline-flex">
-                        <p>Asked on: &nbsp;{{item.filteredValue.question.askDate}},&nbsp;{{item.filteredValue.question.askTime}}</p>
+                        <p>{{'Asked on:' | translate}} &nbsp;{{item.filteredValue.question.askDate}},&nbsp;{{item.filteredValue.question.askTime}}</p>
                     </span>
                         <p class="quesiton">{{item.filteredValue.question.que}}</p>
                         <div class="QuestionMeta">
@@ -726,7 +726,7 @@
 <ng-template #questionDialog>
     <div class="d-flex justify-content-between titleMargin" (contextmenu)="contextmenu()">
         <div class="font-weight-bold">
-            <h2>Ask A Question</h2>
+            <h2>{{'Ask A Question' | translate}}</h2>
         </div>
         <div><em (click)="dialogClose()" class="lxp-Close pointer"></em></div>
     </div>
@@ -743,8 +743,8 @@
             </div> -->
         </div>
         <div class="d-flex justify-content-between cancelSubmit">
-            <button class="btn btn-outline-dark btn-block" (click)="dialogClose()">Cancel</button>
-            <button class="btn btn-danger btn-block" (click)="createQuestion()">Submit Question</button>
+            <button class="btn btn-outline-dark btn-block" (click)="dialogClose()">{{'Cancel' | translate}}</button>
+            <button class="btn btn-danger btn-block" (click)="createQuestion()">{{'Submit Question' | translate}}</button>
         </div>
     </div>
 </ng-template>

@@ -222,7 +222,7 @@ export class AppComponent implements OnInit {
         if (!possiblePages.includes(urlIdentifier[2])) {
          /// this.isFooterVisible = false;
          const currentYear = new Date().getFullYear()
-         this.isFooterVisible = '<div class="footer"><span class="powered"><span class="forgot1">' + '© ' + currentYear+ ' L&T EduTech. All Rights Reserved.</span></span></div>';
+         this.isFooterVisible = '<div class="footer"><span class="powered"><span class="forgot1">' + '© ' + currentYear + this.translate.instant(' L&T EduTech. All Rights Reserved.') + '</span></span></div>';
         }
         if (e.url.includes("resetpassword")|| e.url.includes("password") || e.url.includes("MyCourse") || e.url.includes("courseDetail") || urlIdentifier[2]==undefined) {
           this.isFooterVisible = '';

@@ -47,6 +47,8 @@ export class ResetpasswordComponent implements OnInit {
     private activeroute: ActivatedRoute,
     private toastr: ToastrService,
     public service: LearnerServicesService) {
+      let lang = localStorage.getItem('language')
+      this.translate.use(lang ? lang : 'en') 
       const language = localStorage.getItem('language') || 'en';
       this.translate.setDefaultLang(language);
       this.translate.use(language);

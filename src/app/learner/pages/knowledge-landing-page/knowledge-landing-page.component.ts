@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { KnowledgePreviewComponent } from '../knowledge-preview/knowledge-preview.component';
 import { DragScrollComponent } from 'ngx-drag-scroll';
 import { environment } from '@env/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-knowledge-landing-page',
@@ -52,7 +53,11 @@ export class KnowledgeLandingPageComponent implements OnInit {
   constructor(public route: ActivatedRoute,
               public apiService: knowledgeService,
               public dialog: MatDialog,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              public translate: TranslateService) { 
+                let lang = localStorage.getItem('language')
+                this.translate.use(lang?lang:'en') 
+              }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {

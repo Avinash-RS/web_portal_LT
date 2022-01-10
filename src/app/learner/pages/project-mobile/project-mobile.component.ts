@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AnonymousCredential, BlobServiceClient, newPipeline } from '@azure/storage-blob';
 import { NgxUiLoaderService, SPINNER } from 'ngx-ui-loader';
 import { environment } from '@env/environment';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-project-mobile',
   templateUrl: './project-mobile.component.html',
@@ -88,7 +89,9 @@ export class ProjectMobileComponent implements OnInit {
   noofItems = 0;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService,
               private dialog: MatDialog, private toastr: ToastrService,
-              public route: Router,  private commonServices: CommonServicesService,private ngxLoader: NgxUiLoaderService) {
+              public route: Router,  private commonServices: CommonServicesService,private ngxLoader: NgxUiLoaderService,public translate: TranslateService) {
+                let lang = localStorage.getItem('language')
+                this.translate.use(lang ? lang : 'en') 
                 const detail = (this.route.getCurrentNavigation() && this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
                 this.checkDetails = detail;

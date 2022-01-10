@@ -34,6 +34,8 @@ export class ProfileComponent implements OnInit {
               private services: CommonServicesService,
               private toastr: ToastrService,
               private location: LocationStrategy) {
+    let lang = localStorage.getItem('language')
+    this.translate.use(lang ? lang : 'en') 
     if (this.gs.checkLogout()) {
       // this.urlImage = localStorage.getItem('user_img')
       this.currentUser = this.gs.checkLogout();

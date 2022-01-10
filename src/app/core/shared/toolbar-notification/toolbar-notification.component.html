@@ -11,11 +11,11 @@
     <div class="card ">
       <div class="header" fxLayout="row" fxLayoutAlign="space-between center">
         <div class="title" style="width: 90%;">
-          <div class="name">Notifications</div>
+          <div class="name">{{'Notifications' | translate}}</div>
           <div class="extra" *ngIf="unreadCount > 1">
-            You have {{ unreadCount }} unread notifications</div>
+            {{'You have' | translate}} {{ unreadCount }} {{'unread notifications' | translate}}</div>
           <div class="extra" *ngIf="unreadCount == 1">
-            You have {{ unreadCount }} unread notifications</div>
+            {{'You have' | translate}} {{ unreadCount }} {{'unread notifications' | translate}}</div>
         </div>
       </div>
     </div>
@@ -23,7 +23,7 @@
     </div>
     <div *ngIf="notifications?.length !== 0;" class="footer" fxLayout="row" (click)="viewall()"
       fxLayoutAlign="center center">
-      <div class="action">View all</div>
+      <div class="action">{{'View all' | translate}}</div>
     </div>
   </div>
 </div>
@@ -78,6 +78,6 @@
     <figure>
       <img alt="assignment" src="https://assets.lntedutech.com/application_images/nocardNotification.svg" />
     </figure>
-    <p> No new notifications</p>
+    <p> {{'No new notifications' | translate}}</p>
   </div>
 </ng-template>
