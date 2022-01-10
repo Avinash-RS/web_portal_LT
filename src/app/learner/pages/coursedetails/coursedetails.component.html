@@ -182,8 +182,9 @@
                                 <!-- <i class="expandCollapse" [ngClass]="resDat.expanded?'lxp-Collapse':'lxp-Expand'"></i> -->
                             </div>
                         </mat-card-title>
+                        <!-- moduleExpand(wi,mi,null,res) -->
                         <span *ngFor="let res of resDat.childData let mi = index" (load)="mi==moduleHolder?res.expanded=true:res.expanded=false;">
-                            <mat-card-subtitle (click)="moduleExpand(wi,mi,null,res)" class="d-flex justify-content-start align-items-center tocSubTitle" [ngClass]="(wi===weekHolderUI&&mi==moduleHolder)?'titleSelected':''">
+                            <mat-card-subtitle (click)="moduleExpand(wi,mi,null,res);gettopicOnModule(wi+1,scromApiData.checkLevel?res?.title:null,scromApiData.checkLevel?null:res?.id,res)" class="d-flex justify-content-start align-items-center tocSubTitle" [ngClass]="(wi===weekHolderUI&&mi==moduleHolder)?'titleSelected':''">
                                 <div class="statusColor">
                                     <span *ngIf="res?.status == 'Passed'" class="passColor"><em class="lxp-Right"></em></span>
                                     <span *ngIf="res?.status == 'process'" class="processColor"></span>
@@ -209,8 +210,8 @@
                                 </div>
                             </mat-card-subtitle>
                             <div *ngIf="scromApiData.checkLevel">
-                                <span *ngFor="let subData of res.childData let smi = index" (load)="smi==subModuleHolder?subData.expanded=true:subData.expanded=false;">
-                                    <mat-card-subtitle *ngIf="res.expanded" (click)="moduleExpand(wi,mi,smi,subData)" class="d-flex justify-content-start align-items-center tocSubTitle tocSubSubtitle" [ngClass]="(wi===weekHolderUI&&smi==moduleHolder&&mi==subModuleHolder)?'titleSelected':''">
+                                <span *ngFor="let subData of (res.childData) let smi = index" (load)="smi==subModuleHolder?subData.expanded=true:subData.expanded=false;">
+                                    <mat-card-subtitle *ngIf="res.expanded" (click)="gettopicOnModule(wi+1,null,subData?.id,subData);moduleExpand(wi,mi,smi,subData)" class="d-flex justify-content-start align-items-center tocSubTitle tocSubSubtitle" [ngClass]="(wi===weekHolderUI&&smi==moduleHolder&&mi==subModuleHolder)?'titleSelected':''">
                                         <div class="statusColor">
                                             <span *ngIf="subData?.status == 'Passed'" class="passColor"><em class="lxp-Right"></em></span>
                                             <span *ngIf="subData?.status == 'process'" class="processColor"></span>
@@ -239,7 +240,7 @@
                                             <ul>
                                                 <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of subData?.childData; let ti = index">
                                                     <div *ngIf="wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder" #focuser ></div>
-                                                    <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && smi==subModuleHolder && mi==moduleHolder) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,wi,ti,mi,smi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
+                                                    <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && smi==subModuleHolder && mi==moduleHolder) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,subData?.title,res?.status,mod,wi,ti,mi,smi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                         <div class="modTitle">
                                                             <h3 tooltip="{{mod?.title}}">{{mod?.title}}</h3>
                                                             <!-- <span class="playVideo"><em class="lxp-PlayCircle"></em> Video</span>
@@ -267,9 +268,10 @@
                             <mat-card-content *ngIf="(res.expanded)">
                                 <div class="bs-vertical-wizard">
                                     <ul>
-                                        <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of res?.childData; let ti = index">
+                                        <!-- <ng-container *ngIf="(topicData$|async).data.playerstatus.message"></ng-container> -->
+                                        <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of( res.childData) let ti = index">
                                             <div *ngIf="wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder" #focuser ></div>
-                                            <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,scromModuleData?.length,wi,ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
+                                            <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,mod,wi,ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                 <div class="modTitle">
                                                     <h3 tooltip="{{mod?.title}}">{{mod?.title}}</h3>
                                                     <!-- <span class="playVideo"><em class="lxp-PlayCircle"></em> Video</span>
