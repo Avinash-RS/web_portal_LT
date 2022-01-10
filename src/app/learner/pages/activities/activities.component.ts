@@ -179,7 +179,7 @@ export class ActivitiesComponent implements OnInit {
   AssigmnemtPayload :FormData;
   labpracticeData : any;
   labNoCard = false;
-
+  praticalsLoader = false;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
     private dialog: MatDialog, private toastr: ToastrService,
     public route: Router, public datePipe: DatePipe, private ngxLoader: NgxUiLoaderService,public activateroute:ActivatedRoute,public translate: TranslateService,) {
@@ -436,6 +436,7 @@ export class ActivitiesComponent implements OnInit {
   }
   //getLabPracticeData
   getLabPracticeData(){
+    this.praticalsLoader = true;
     var labdata ={
       userId: this.userDetail.user_id,
       courseId:this.courseid,
@@ -445,6 +446,7 @@ export class ActivitiesComponent implements OnInit {
       username:this.userDetail.username
     }
     this.Lservice.getlabactivity(labdata).subscribe((result:any)=>{
+      this.praticalsLoader = false;
       if(result.data.getlabActivityData.success){
         this.labpracticeData = result.data.getlabActivityData.data;
         this.labNoCard = false;
