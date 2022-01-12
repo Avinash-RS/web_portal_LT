@@ -162,10 +162,10 @@
                           </ng-container>
                         </div>
                         <!-- Feed Back -->
-                        <div class="" *ngIf="false">
+                        <div class="" *ngIf ="assignment?.files?.comments">
                           <div class="text-left">
                             <p class="feedBackTxt">{{'Feedback' | translate}}</p>
-                              <textarea disabled class="textArea"></textarea>
+                              <textarea disabled class="textArea">{{assignment?.files?.comments}}</textarea>
                           </div>
                         </div>
                       </div>
