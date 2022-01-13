@@ -1503,6 +1503,7 @@ export const playerstatus = gql`
       success
       message {
         id
+        parent
         status
         title
         link
