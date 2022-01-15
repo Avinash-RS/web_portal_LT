@@ -276,7 +276,7 @@
                 <div *ngIf="los.status == 'Up Coming' && los.activity_details.activitytype != 'Recorded'"
                   class="bottom-right grey">{{'Upcoming' | translate}}</div>
                 <div *ngIf="los.status == 'Completed' && los.activity_details.activitytype != 'Recorded'"
-                  class="bottom-right greenColor">{{los.status}}</div>
+                  class="bottom-right greenColor">{{'Completed' | translate}}</div>
                 <div *ngIf="los.activity_details.activitytype == 'Recorded'" class="bottom-right rec-col">{{'Recorded' | translate}}
                 </div>
               </div>

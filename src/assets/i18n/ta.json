@@ -16,7 +16,7 @@
   "Sign up":"பதிவு செய்யவும்",
   "Info":"தகவல்",
   "Please clear browser cache before logging into the application.":"பயன்பாட்டில் உள்நுழைவதற்கு முன் உலாவி தற்காலிக சேமிப்பை அழிக்கவும்.",
-  "If you need any assistance, kindly reach us at":"உங்களுக்கு ஏதேனும் உதவி தேவைப்பட்டால், தயவுசெய்து எங்களை தொடர்பு கொள்ளவும்",
+  "If you need any assistance, kindly reach us at ":"உங்களுக்கு ஏதேனும் உதவி தேவைப்பட்டால், தயவுசெய்து எங்களை தொடர்பு கொள்ளவும்",
   "Download our Mobile app":"எங்கள் மொபைல் பயன்பாட்டைப் பதிவிறக்கவும்",
 
   "Forgot Password?":"கடவுச்சொல்லை மறந்துவிட்டீர்களா?",
@@ -42,7 +42,7 @@
   "Note":"குறிப்பு",
   ": Full name will be used in your certificates":": உங்கள் சான்றிதழ்களில் முழுப் பெயர் பயன்படுத்தப்படும்",
   "SIGN UP":"பதிவு செய்யவும்",
-  "Already have an account?":"ஏற்கனவே ஒரு கணக்கு உள்ளதா?",
+  "Already have an account? ":"ஏற்கனவே ஒரு கணக்கு உள்ளதா?",
   "Sign in":"உள்நுழையவும்",
 
   "Edit":"தொகு",
@@ -147,6 +147,7 @@
   "You have no":"உங்களிடம் இல்லை",
   "courses at the moment!":"இந்த நேரத்தில் படிப்புகள்!",
 
+  "Scan this QR Code":"இந்த QR குறியீட்டை ஸ்கேன் செய்யவும்",
   "Download":"பதிவிறக்க",
   "Google authenticator":"Google அங்கீகரிப்பான்",
   "App in your mobile to scan this code":"இந்தக் குறியீட்டை ஸ்கேன் செய்ய உங்கள் மொபைலில் உள்ள ஆப்",
@@ -359,6 +360,8 @@
 
   "Course Contents":"பாடத்தின் உள்ளடக்கம்",
   "Bookmarks":"புக்மார்க்குகள்",
+  "Bookmark":"புத்தககுறி",
+  "Bookmarked":"புக்மார்க் செய்யப்பட்டது",
   "You have not added any bookmarks!":"நீங்கள் எந்த புக்மார்க்குகளையும் சேர்க்கவில்லை!",
   "Week -":"வாரம் -",
   "About the Course":"பாடநெறி பற்றி",
