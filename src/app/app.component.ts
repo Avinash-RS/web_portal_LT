@@ -42,6 +42,7 @@ export class AppComponent implements OnInit {
   secretKey = "(!@#Passcode!@#)";
   botUrl;
   urlSafe: SafeResourceUrl;
+  languages: { lang: string; languagename: string; }[];
    // FOR DRM(Restriction for right click)
    @HostListener('document:keydown', ['$event'])
    handleKeyboardEvent(event: KeyboardEvent) {
@@ -65,6 +66,14 @@ export class AppComponent implements OnInit {
               public sanitizer: DomSanitizer,
 
   ) {
+    this.languages = [{lang: 'ta' , languagename: 'Tamil' } , { lang: 'en' , languagename: 'English'  }] ;
+      translate.addLangs(['en', 'ta']);
+      if(localStorage.getItem('language'))
+      {this.translate.use(localStorage.getItem('language'));}
+      else{
+        this.translate.setDefaultLang('en');
+      }
+
     let userDetail =JSON.parse(localStorage.getItem('UserDetails'))
     if(!userDetail?.specific_report_value){
       localStorage.clear();
@@ -165,6 +174,9 @@ export class AppComponent implements OnInit {
     ).subscribe((e: any) => {
       if(localStorage.getItem('language'))
     {this.translate.use(localStorage.getItem('language'));}
+    else{
+      this.translate.setDefaultLang('en');
+    }
     //adding USERID to datalayer
     //   var user_id = null
     //   if(this.UserDetails.user_id){

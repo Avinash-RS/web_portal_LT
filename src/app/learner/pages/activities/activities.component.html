@@ -162,10 +162,10 @@
                           </ng-container>
                         </div>
                         <!-- Feed Back -->
-                        <div class="" *ngIf="false">
+                        <div class="" *ngIf ="assignment?.files?.comments">
                           <div class="text-left">
                             <p class="feedBackTxt">{{'Feedback' | translate}}</p>
-                              <textarea disabled class="textArea"></textarea>
+                              <textarea disabled class="textArea">{{assignment?.files?.comments}}</textarea>
                           </div>
                         </div>
                       </div>
@@ -847,6 +847,12 @@
           </div>
         </div>
       </ng-container>
+      <div class="item2 mt-4" *ngIf="praticalsLoader">
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '80px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '80px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '80px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '80px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+    </div>
       <div class="noCard" *ngIf="labNoCard">
         <figure>
           <img src="https://assets.lntedutech.com/application_images/noPerform.svg" alt="assignment">

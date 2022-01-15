@@ -29,7 +29,7 @@ boarddetail, checkExistingUser, getActivityDetailsByBatchAndCourseID, getAssignm
      getUserdetailUsername, listContent, login, playerModuleAndTopic, singleBatchInfo,
      syllabusofParticularScorm, ViewAllThreadData, ViewAllThreadDataBid, ViewSingleTopicDiscussionData, get_batchwise_learner_dashboard_data, get_learner_dashboard_count,
      getCourseGallery , getLearnerNewCourseReport, getCourseReportByUserid, getProgressionActivitydata,selfLearningdatabyUserId, getengineersForumQA_Count,recentlycourse,
-     getlabactivity,labactivity,weekWiseCourseChart,overAllCourseProgressByUserId,getlabActivityData,getStepCourseByLearner
+     getlabactivity,labactivity,weekWiseCourseChart,overAllCourseProgressByUserId,getlabActivityData,getStepCourseByLearner, playerstatus
 } from './operations/learner_query';
 
 
@@ -763,6 +763,20 @@ getMessage(): Observable<any> {
     });
   }
 
+  playerstatus(course_id, user_id, batchid, week, module, parent) {
+    return this.Apollo.query({
+      query: playerstatus,
+      variables: {
+        course_id,
+        user_id,
+        batchid,
+        week,
+        module,
+        parent
+      }
+    });
+  }
+
   playerstatusrealtime(userId, contentID, module: any, percentage) {
     return this.Apollo.query({
       query: playerstatusrealtime,
@@ -1081,14 +1095,15 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
-  userexperience(user_id,course_id,module,topic,userexperience,status) {
+  userexperience(user_id,course_id,batchid,id,parent,userexperience,status) {
     return this.Apollo.query({
       query: user_experience,
       variables: {
         user_id,
         course_id,
-        module,
-        topic,
+        batchid,
+        id,
+        parent,
         userexperience,
         status
       }
