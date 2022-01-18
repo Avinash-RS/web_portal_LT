@@ -145,7 +145,7 @@
           display: inline-block;
           vertical-align: middle;
           margin-left: 6px;
-          color: $box-shadow;
+          color:$grey2;
           font-weight: bold;
           @media only screen and (max-width: 767px) {
             font-size: 10px;
@@ -158,7 +158,7 @@
   //Top 3 Things
   .top3Things {
     box-shadow: 0 0 6px $blackshade;
-    background-color: $lineColor;
+    background-color: $shadedgrey;
     padding: 5px 10px;
     flex-wrap: wrap;
     overflow: hidden;
@@ -203,7 +203,7 @@
       h6 {
         font-size: 11px;
         font-weight: 400;
-        color: $box-shadow;
+        color: $grey2;
         margin-bottom: 5px;
         line-height: normal;
       }
@@ -211,7 +211,7 @@
         line-height: normal;
         font-size: 10px;
         font-weight: 400;
-        color: $lxp-gray;
+        color:$lightgrey1;
         margin-bottom: 10px;
         text-transform: uppercase;
       }
@@ -241,7 +241,7 @@
           }
         }
         span {
-          color: $box-shadow;
+          color: $grey2;
           font-weight: 400;
           font-size: 11px;
         }
@@ -317,11 +317,11 @@
         display: flex;
         justify-content: center;
         font-weight: 400;
-        color: $color-maroon;
+        color: $lightred;
         position: relative;
         transition: color 0.2s ease-in-out;
         &:hover {
-          color: $color-maroon;
+          color: $darkblue1;
         }
         span {
           font-size: 0px;
@@ -381,12 +381,12 @@
           width: 10%;
           justify-content: flex-end;
           font-size: 13px;
-          color: $color-maroon;
+          color: $lightred;
           margin-right:7px;
           position: relative;
           transition: color 0.2s ease-in-out;
           &:hover {
-            color: $color-maroon;
+            color: $darkblue1;
           }
           em {
             margin-right: 5px;
@@ -564,7 +564,7 @@
       }
     }
     .searchGallery {
-      background-color: $color-white;
+      background-color: $grey1;
       display: inline-flex;
       justify-content: center;
       align-items: center;
@@ -573,7 +573,7 @@
       border-radius: 5px;
       box-shadow: 0 1px 2px $blackshade;
       em {
-        color: $box-shadow;
+        color: $grey2;
       }
     }
   }
