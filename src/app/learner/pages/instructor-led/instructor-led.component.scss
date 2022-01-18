@@ -3,7 +3,7 @@
   padding: 0;
   height: 100%;
   display: flex;
-  background-color: #f2f2f2;
+  background-color: $grey1;
   flex-direction: column;
   @media only screen and (min-width: 1024px) {
     flex-direction: row;
@@ -18,10 +18,10 @@
 }
 
 .leftContainer {
-  background-color: #f2f2f2;
+  background-color: $grey1;
   // width: 100%;
   z-index: 1;
-  box-shadow: 0px 0px 9px 0px #00000059;
+  box-shadow: 0px 0px 9px 0px $icon-color;
   padding: 10px 0 20px 0;
   // @media only screen and (max-width: 1023px) {
   //   padding: 10px 0 20px 0;
@@ -29,7 +29,7 @@
 }
 
 .rightContainer {
-  background-color: white;
+  background-color: $color-white;
   // width: 100%;
   z-index: 0;
   padding: 15px;
@@ -49,8 +49,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
-    background-color: rgb(180, 0, 0);
-    color: white;
+    background-color: $lxp-theme-green;
+    color: $color-white;
     font-size: 16px;
     padding: 12px 24px;
     border: none;
@@ -82,21 +82,21 @@
   padding: 0 20px !important;
   background-color: transparent !important;
   li {
-    color: #333333;
+    color: $label2;
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
     position: relative;
     margin-right: 0;
     .bar {
-      color: #be2020 !important;
+      color: $lxp-theme-green !important;
       display: inline-block;
       margin: 0 10px;
     }
     em {
       display: inline-block;
       transform: scale(-1);
-      color: #666666;
+      color: $color-lightGray;
       margin-right: 8px;
       cursor: pointer;
     }
@@ -106,10 +106,10 @@
     //     right: -10px;
     //     top: auto;
     //     bottom: auto;
-    //     color: #c02222;
+    //     color: $lxp-theme-green;
     //   }
     .name {
-      color: #999999;
+      color: $lxp-text;
       font-size: 14px;
     }
     .breadCrumbTopic {
@@ -172,10 +172,10 @@
     }
     .playButton {
       button {
-        background: #be2020 0% 0% no-repeat padding-box;
+        background: $color-maroon 0% 0% no-repeat padding-box;
         border-radius: 20px;
         opacity: 1;
-        color: white;
+        color: $color-white;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -197,7 +197,7 @@
       text-align: left;
       letter-spacing: 0px;
       font-size: 15px;
-      color: black;
+      color: $blackcolor;
       opacity: 1;
       margin-bottom: 10px;
       display: inline-block;
@@ -206,7 +206,7 @@
       display: inline-block;
       /* margin-left: 2%; */
       @media only screen and (max-width: 600px) {
-        color: black;
+        color: $blackcolor;
         margin-bottom: 0;
       }
     }
@@ -221,7 +221,7 @@
         position: absolute;
         right: 0;
         top: 5px;
-        background-color: #707070;
+        background-color: $greycolorshade;
         width: 1px;
         height: 60%;
         display: flex;
@@ -238,47 +238,47 @@
       }
       .sessionDate {
         line-height: 24px;
-        color: #333333;
+        color: $label2;
         // @media only screen and (max-width: 600px) {
-        //   color: #333333;
+        //   color: $label2;
         //   margin-top: 10px;
         // }
         .lxp-Duration {
-          color: #607d8b;
+          color: $blueshadecolor;
           margin-right: 5px;
         }
         .dateTitle {
-          color: #666666;
+          color: $color-lightGray;
         }
       }
       .sessionDuration {
         line-height: 24px;
-        color: #333333;
+        color: $label2;
         // @media only screen and (max-width: 600px) {
-        //   color: #333333;
+        //   color: $label2;
         //   margin-top: 10px;
         // }
         .lxp-Clock {
-          color: #607d8b;
+          color: $blueshadecolor;
           margin-right: 5px;
         }
         .durationTitle {
-          color: #666666;
+          color: $color-lightGray;
         }
       }
       .sessionModule {
         line-height: 24px;
-        color: #333333;
+        color: $label2;
         // @media only screen and (max-width: 600px) {
-        //   color: #333333;
+        //   color: $label2;
         //   margin-top: 10px;
         // }
         .lxp-Todo_task {
-          color: #607d8b;
+          color: $blueshadecolor;
           margin-right: 5px;
         }
         .ModuleTitle {
-          color: #666666;
+          color: $color-lightGray;
         }
       }
     }
@@ -292,7 +292,7 @@
 //     @media only screen and (max-width: 600px) {
 //         width: 100%;
 //         padding: 10px;
-//         background-color: #ffffff;
+//         background-color: $color-white;
 //         margin-left: 0;
 //         border: 1px solid #cdcdcd;
 //     }
@@ -342,7 +342,7 @@
   h4 {
     font-weight: bold;
     margin-bottom: 10px;
-    color: #454545;
+    color: $gerycolor;
     line-height: normal;
     @media only screen and (max-width: 576px) {
       margin-top: 10px;
@@ -356,18 +356,18 @@
     line-height: 20px;
     font-size: 14px;
     span {
-      color: #666666;
+      color: $color-lightGray;
     }
   }
   &.active {
-    background-color: #607d8b;
-    color: #ffffff;
+    background-color: $blueshadecolor;
+    color: $color-white;
     h4 {
-      color: #ffffff;
+      color: $color-white;
     }
     h5 {
       span {
-        color: #ffffff;
+        color: $color-white;
       }
     }
   }
@@ -375,14 +375,14 @@
 
 // .content-container:hover {
 //   color: white;
-//   background-color: #607d8b;
+//   background-color: $blueshadecolor;
 //   border: 0.5px solid #848484;
 //   transition: 0.2s ease;
 // }
 
 // .active {
 //   color: white !important;
-//   background-color: #607d8b;
+//   background-color: $blueshadecolor;
 //   border: 0.5px solid #848484;
 // }
 
@@ -412,7 +412,7 @@
 
 .rec-center {
   position: absolute !important;
-  color: white !important;
+  color: $color-white !important;
   font-size: 40px !important;
   left: 50% !important;
   top: 50% !important;
@@ -423,22 +423,22 @@
 .bottom-right {
   position: absolute;
   bottom: 0;
-  color: white;
+  color: $color-white;
   right: 0;
   padding: 3px 20px;
   font-size: 13px;
   &.orange {
-    background: #ffa800;
+    background: $status-orange;
   }
   &.grey {
-    background: #6a6a6a;
-    color: white !important;
+    background: $color-lightGray;
+    color: $color-white !important;
   }
   &.greenColor {
-    background: #0c781b;
+    background: $color-text-success;
   }
   &.rec-col {
-    background: #4e9ce1;
+    background: $lightblue;
   }
 }
 .course-list {
@@ -468,11 +468,11 @@
 .attandanceShow {
   display: block;
   background-color: transparent;
-  border-color: #c02222 !important;
+  border-color: $lxp-theme-green !important;
   border-radius: initial;
   border-width: 2px;
   padding: 2px 10px;
-  color: black !important;
+  color: $blackcolor !important;
   font-size: 14px;
   &:active {
     background-color: transparent !important;
@@ -495,17 +495,17 @@
   }
 }
 .sessionCard {
-  border: 1px solid #ededed;
+  border: 1px solid $profile-t-grey;
   // height: 170px;
   width: -webkit-fill-available;
   /* background-color: #388E3C; */
   /* margin-left: 20%; */
   border-radius: unset;
-  color: black;
+  color: $blackcolor;
   box-shadow: none;
   padding: 0;
   margin-bottom: 12px;
-  box-shadow: 0px 1px 5px #00000029;
+  box-shadow: 0px 1px 5px $blackshade;
   // box-shadow: 0px 2px 5px 0px rgba(50, 50, 50, 0.25);
   @media only screen and (max-width: 991px) {
     box-shadow: none;
@@ -515,8 +515,8 @@
 
 .smallContainer {
   border-radius: 5px;
-  background: #f9f9f9 0% 0% no-repeat padding-box;
-  box-shadow: 0px 3px 6px #00000029;
+  background: $light-grey 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px $blackshade;
   // font-size: 20px;
   padding: 10px;
   width: 31%;
@@ -583,7 +583,7 @@
 
 .LightBlueCircle {
   border-radius: 50%;
-  background: #27bbee;
+  background: $lightshadeblue;
   width: 50px;
   height: 50px;
   // font-size: 1rem;
@@ -611,7 +611,7 @@
   }
   .lxp-video-tutorial-1 {
     font-size: 25px;
-    color: #ffffff;
+    color: $color-white;
     @media (min-width: 576px) {
       font-size: 25px;
     }
@@ -632,7 +632,7 @@
 
 .YellowGreenCircle {
   border-radius: 50%;
-  background: #88bd2f;
+  background: $greenshade;
   width: 50px;
   height: 50px;
   // font-size: 2rem;
@@ -660,7 +660,7 @@
   }
   .lxp-students {
     font-size: 25px;
-    color: #ffffff;
+    color: $color-white;
     @media (min-width: 576px) {
       font-size: 25px;
     }
@@ -681,7 +681,7 @@
 
 .FunBlueCircle {
   border-radius: 50%;
-  background: #1b4e9b;
+  background: $blue;
   width: 50px;
   height: 50px;
   // font-size: 2rem;
@@ -709,7 +709,7 @@
   }
   .lxp-recorded_videos {
     font-size: 25px;
-    color: #ffffff;
+    color: $color-white;
     @media (min-width: 576px) {
       font-size: 25px;
     }
@@ -734,7 +734,7 @@
   /* background-color: orangered; */
   /* margin-left: 15px; */
   border-radius: unset;
-  background: #e2663d 0% 0% no-repeat padding-box;
+  background: $orangecolor1 0% 0% no-repeat padding-box;
   font-size: 20px;
   @media only screen and (max-width: 576px) {
     padding: 10px;
@@ -744,7 +744,7 @@
 .smallContainer2 {
   // height: 96px;
   /* width: 223px; */
-  background: #0c781b 0% 0% no-repeat padding-box;
+  background: $color-text-success 0% 0% no-repeat padding-box;
   /* margin-left: 9.5%; */
   border-radius: unset;
   font-size: 20px;
@@ -756,7 +756,7 @@
 .smallContainer3 {
   // height: 96px;
   /* width: 223px; */
-  background: #399ce0 0% 0% no-repeat padding-box;
+  background: $lightblue 0% 0% no-repeat padding-box;
   /* margin-left: 9.5%; */
   border-radius: unset;
   font-size: 20px;
@@ -776,12 +776,12 @@
 // }
 
 .mat-card-subtitle {
-  color: white;
+  color: $color-white;
 }
 .attendance-table {
   overflow: auto;
   table {
-    /* background: #ffffff 0% 0% no-repeat padding-box;
+    /* background: $color-white 0% 0% no-repeat padding-box;
         border: 0.5px solid #898989;
         opacity: 1; */
     /* margin-left: 15px; */
@@ -792,8 +792,8 @@
     tr {
       th {
         padding: 10px 20px;
-        background-color: #e5e5e5;
-        color: #333333;
+        background-color: $bread-crumb-bg ;
+        color: $label2;
         text-align: left;
         font-size: 13px;
         &:first-child {
@@ -806,10 +806,10 @@
     tbody {
       tr {
         &:nth-child(even) {
-          background-color: #ffffff;
+          background-color: $color-white;
         }
         &:nth-child(odd) {
-          background-color: #ffffff;
+          background-color: $color-white;
         }
       }
     }
@@ -829,7 +829,7 @@
   }
   td,
   th {
-    // background: #ffffff 0% 0% no-repeat padding-box;
+    // background: $color-white 0% 0% no-repeat padding-box;
     // border: 0.5px solid #898989;
     opacity: 1;
     text-align: center;
@@ -852,7 +852,7 @@
 .headLine {
   text-align: left;
   letter-spacing: 0px;
-  color: black;
+  color: $blackcolor;
   // margin: 0 0 15px 0;
   padding-top: 28px;
   font-size: 15px;
@@ -881,7 +881,7 @@
 .headLine1 {
   text-align: left;
   letter-spacing: 0px;
-  color: #f5f5f5;
+  color: $light-grey;
   opacity: 1;
 }
 
@@ -892,7 +892,7 @@
 .tableHeadline {
   text-align: left;
   letter-spacing: 0px;
-  color: #5c6873;
+  color: $lxp-icon;
   opacity: 1;
   font-size: 17px;
   margin-bottom: 10px;
@@ -901,7 +901,7 @@
 .smallHeadline {
   text-align: left;
   letter-spacing: 0px;
-  color: #333333;
+  color: $label2;
   opacity: 1;
   margin: 0 !important;
   font-size: 12px;
@@ -932,7 +932,7 @@
 .tblheaderFont {
   text-align: left;
   letter-spacing: 0px;
-  color: #333333;
+  color: $label2;
   opacity: 1;
 }
 
@@ -944,7 +944,7 @@
   }
   p {
     font-size: 16px;
-    color: #000000;
+    color: $blackcolor;
     font-weight: 400;
     line-height: normal;
     margin-bottom: 30px ​ !important;
@@ -988,7 +988,7 @@
   // margin-top: -12%;
   text-align: left;
   letter-spacing: 0px;
-  color: black;
+  color: $blackcolor;
   opacity: 1;
   font-size: 20px;
   font-weight: bolder;
@@ -1017,7 +1017,7 @@
 .noData {
   text-align: left;
   letter-spacing: 0px;
-  color: #333333;
+  color: $label2;
   opacity: 1;
   box-shadow: none;
   font-size: 20px;
@@ -1031,18 +1031,18 @@
 .noSessionCard {
   margin-top: 13%;
   // background: #F7FBFF 0% 0% no-repeat padding-box;
-  // box-shadow: 0px 3px 6px #00000029;
-  // border: 0.5px solid #707070;
+  // box-shadow: 0px 3px 6px $blackshade;
+  // border: 0.5px solid $greycolorshade;
   border-radius: 0;
   opacity: 1;
   text-align: center;
   padding-bottom: 8px !important;
   padding-right: 0px !important;
 
-  background: #f5f5f5 0% 0% no-repeat padding-box;
-  box-shadow: 0px 2px 4px #00000029;
+  background: $light-grey  0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 4px $blackshade;
   opacity: 1;
-  border-left: 3px solid #ffc107bf !important;
+  border-left: 3px solid $lxp-status-yellow !important;
   width: fit-content;
 }
 
@@ -1091,19 +1091,19 @@
       width: 35px;
       height: 35px;
       z-index: 9;
-      background: #c02222;
+      background: $lxp-theme-green;
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
       em {
-        color: #ffffff;
+        color: $color-white;
       }
     }
   }
 }
 //   .close-buttonVideo {
-//     background: #C02222 !important;
+//     background: $lxp-theme-green !important;
 //     float: right;
 //     top: -6px;
 //     position: relative;
@@ -1123,10 +1123,10 @@
 }
 
 .tblrow {
-  border: 0.4399999976158142px solid #AAAAAA;
+  border: 0.4399999976158142px solid $colorgrey;
   border-left: none;
   border-right: none;
   opacity: 1;
-  box-shadow: 0px 3px 6px #00000029;
+  box-shadow: 0px 3px 6px $blackshade;
   // border-radius: 2px;
 }

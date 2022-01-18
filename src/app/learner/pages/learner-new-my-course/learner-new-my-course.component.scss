@@ -7,7 +7,7 @@
 }
 ::ng-deep.sideNavWrapper {
   .mat-drawer-container {
-    background-color: #f2f2f2;
+    background-color: $grey1;
     height: calc(100vh - 70px);
   }
   .mat-drawer-backdrop.mat-drawer-shown {
@@ -45,7 +45,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: right center;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 2px $icon-color;
     padding: 20px;
     position: relative;
     z-index: 99;
@@ -55,12 +55,12 @@
     h3 {
       font-size: 22px;
       font-weight: 500;
-      color: #ffffff;
+      color: $color-white;
       line-height: normal;
     }
     h4 {
       font-size: 18px;
-      color: #666666;
+      color: $color-lightGray;
       font-weight: 300;
       margin: 0;
       // @media only screen and (max-width: 767px) {
@@ -79,7 +79,7 @@
       }
       p {
         font-size: 14px;
-        color: #4d4d4d;
+        color: $gerycolor;
         font-weight: 400;
         line-height: normal;
         margin: 0 20px 0 0 !important;
@@ -98,7 +98,7 @@
           content: "";
           position: absolute;
           height: 1px;
-          background-color: #ffffff;
+          background-color: $color-white;
           width: 100%;
           top: 50%;
           transform: translateY(-50%);
@@ -113,15 +113,15 @@
           position: relative;
           z-index: 1;
           &.green {
-            background-color: #32ce6a;
+            background-color: $greencolor;
             em {
-              color: #ffffff;
+              color: $color-white;
             }
           }
           &.white {
-            background-color: white;
+            background-color: $color-white;
             em {
-              color: #b3b3b3;
+              color: $greyshade;
             }
           }
           em {
@@ -133,7 +133,7 @@
       .expand {
         font-size: 14px;
         font-weight: 400;
-        color: #666666;
+        color: $color-lightGray;
         cursor: pointer;
         span {
           @media only screen and (max-width: 767px) {
@@ -145,7 +145,7 @@
           display: inline-block;
           vertical-align: middle;
           margin-left: 6px;
-          color: #808080;
+          color: $box-shadow;
           font-weight: bold;
           @media only screen and (max-width: 767px) {
             font-size: 10px;
@@ -157,8 +157,8 @@
 
   //Top 3 Things
   .top3Things {
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
-    background-color: #cccccc;
+    box-shadow: 0 0 6px $blackshade;
+    background-color: $lineColor;
     padding: 5px 10px;
     flex-wrap: wrap;
     overflow: hidden;
@@ -171,8 +171,8 @@
       }
     }
     .box {
-      box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-      background-color: #ffffff;
+      box-shadow: 0 0 3px $blackshade;
+      background-color: $color-white;
       padding: 15px 20px;
       position: relative;
       height: auto;
@@ -186,7 +186,7 @@
         top: 20%;
         height: 60px;
         width: 5px;
-        background-color: #FFA04E;
+        background-color: $status-orange;
       }
       @media only screen and(min-width:600px) {
         width: 48%;
@@ -203,7 +203,7 @@
       h6 {
         font-size: 11px;
         font-weight: 400;
-        color: #808080;
+        color: $box-shadow;
         margin-bottom: 5px;
         line-height: normal;
       }
@@ -211,14 +211,14 @@
         line-height: normal;
         font-size: 10px;
         font-weight: 400;
-        color: #8e8e8e;
+        color: $lxp-gray;
         margin-bottom: 10px;
         text-transform: uppercase;
       }
       h2 {
         font-size: 17px;
         font-weight: 400;
-        color: #000000;
+        color: $blackcolor;
         line-height: normal;
         display: inline-block;
         width: 100%;
@@ -241,7 +241,7 @@
           }
         }
         span {
-          color: #808080;
+          color: $box-shadow;
           font-weight: 400;
           font-size: 11px;
         }
@@ -272,7 +272,7 @@
           }
           em {
             font-size: 20px;
-            color: #b3b3b3;
+            color: $greyshade;
             @media only screen and (min-width: 568px) {
               font-size: 50px;
             }
@@ -282,7 +282,7 @@
       button {
         padding: 2px 30px;
         border-radius: 30px;
-        border: 1px solid #c02222;
+        border: 1px solid $lxp-theme-green;
         background-color: transparent;
         text-transform: uppercase;
         line-height: 18px;
@@ -290,12 +290,12 @@
           padding: 5px 30px;
         }
         em {
-          color: #c02222;
+          color: $lxp-theme-green;
           font-size: 16px;
         }
         span {
           font-size: 12px;
-          color: #000000;
+          color: $blackcolor;
           margin-left: 5px;
           display: inline-flex;
         }
@@ -317,11 +317,11 @@
         display: flex;
         justify-content: center;
         font-weight: 400;
-        color: #BE2020;
+        color: $color-maroon;
         position: relative;
         transition: color 0.2s ease-in-out;
         &:hover {
-          color: #004684;
+          color: $color-maroon;
         }
         span {
           font-size: 0px;
@@ -348,7 +348,7 @@
   //MyCourses
   .mycoursesWrapper {
     padding: 20px 85px 20px 20px;
-    background-color: #f2f2f2;
+    background-color: $grey1;
     position: relative;
     z-index: 9;
     min-height: 407px;
@@ -381,12 +381,12 @@
           width: 10%;
           justify-content: flex-end;
           font-size: 13px;
-          color: #BE2020;
+          color: $color-maroon;
           margin-right:7px;
           position: relative;
           transition: color 0.2s ease-in-out;
           &:hover {
-            color: #004684;
+            color: $color-maroon;
           }
           em {
             margin-right: 5px;
@@ -435,7 +435,7 @@
               left: -39px;
               top: 50%;
               transform: translateY(-50%) rotate(-90deg);
-              color: #000000;
+              color: $blackcolor;
             }
           }
           .course-chart-footer{
@@ -472,13 +472,13 @@
               .progress-hours{
                 font-size: 16px;
                 font-weight: 600;
-                color:#2280C1;
+                color:$lightblue;
                 margin-bottom: 0;
               }
               .hours-spent-label{
                 display: block;
                 font-size:10px;
-                color:#969696;
+                color:$lxp-text;
               }
             }
           }
@@ -490,7 +490,7 @@
             left: -43px;
             top: 40%;
             transform: translateY(-50%) rotate(-90deg);
-            color: #000000;
+            color: $blackcolor;
           }
           }
         }
@@ -529,8 +529,8 @@
       span {
         // border-radius: 50%;
         border-radius: 5px;
-        background-color: #ffffff;
-        border: 1px solid rgba(0, 0, 0, 0.15);
+        background-color: $color-white;
+        border: 1px solid $blackshade;
         padding: 3px 7px;
         display: inline-flex;
         justify-content: center;
@@ -538,9 +538,9 @@
         width: 35px;
         height: 35px;
         line-height: normal;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 3px 6px $blackshade;
         em {
-          color: #000000;
+          color: $blackcolor;
           font-size: 20px;
         }
       }
@@ -548,7 +548,7 @@
     h3 {
       font-size: 26px;
       font-weight: 700;
-      color: #000000;
+      color: $blackcolor;
       margin-top: 10px;
     }
 
@@ -564,16 +564,16 @@
       }
     }
     .searchGallery {
-      background-color: #f2f2f2;
+      background-color: $color-white;
       display: inline-flex;
       justify-content: center;
       align-items: center;
       width: 26px;
       height: 26px;
       border-radius: 5px;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 1px 2px $blackshade;
       em {
-        color: #808080;
+        color: $box-shadow;
       }
     }
   }
@@ -582,11 +582,11 @@
 .courses {
   position: relative;
   flex-wrap: wrap;
-  background: #fff;
+  background: $color-white;
   padding: 15px;
   margin: 0 0 15px;
   border-radius: 4px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 5px $blackshade;
   .leftCol {
     width: 100%;
     @media only screen and (min-width: 720px) {
@@ -641,9 +641,9 @@
     }
   }
   .modules {
-    background-color: #ffffff;
+    background-color: $color-white;
     border-radius: 5px;
-    border: 1px solid rgba(204, 204, 204, 0.8);
+    border: 1px solid $lineColor;
     padding: 10px 30px 10px 15px;
     margin: 0 15px 0 0;
     position: relative;
@@ -657,20 +657,20 @@
       content: "";
       left: 0;
       width: 5px;
-      background-color: #ffa04e;
+      background-color: $status-orange;
       height: 65%;
     }
     .arrow {
       right: 15px;
       em {
-        color: #b3b3b3;
+        color: $greyshade;
         font-size: 10px;
       }
     }
     // &::after {
     //   content: "";
     //   position: absolute;
-    //   background-color: #ffffff;
+    //   background-color: $color-white;
     //   border-radius: 5px;
     //   border: 1px solid rgba(204, 204, 204, 0.6);
     //   box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.05);
@@ -684,7 +684,7 @@
     h6 {
       font-size: 14px;
       font-weight: 700;
-      color: #000000;
+      color: $blackcolor;
       line-height: normal;
       margin: 0 0 5px 0 !important;
       width: 99%;
@@ -694,14 +694,14 @@
     }
     span {
       display: block;
-      color: #b3b3b3;
+      color: $greyshade;
       font-size: 10px;
       font-weight: 400;
       margin-bottom: 0;
       line-height: normal;
     }
     p {
-      color: #808080;
+      color: $box-shadow;
       font-size: 16px;
       font-weight: 400;
       line-height: normal;
@@ -756,8 +756,8 @@
     .leftArrow,
     .rightArrow {
       button {
-        border: 1px solid rgba(204, 204, 204, 0.3);
-        box-shadow: 0 5px 3px rgba(0, 0, 0, 0.2);
+        border: 1px solid $lineColor;
+        box-shadow: 0 5px 3px $blackshade;
         border-radius: 50%;
         position: absolute;
         display: flex;
@@ -769,10 +769,10 @@
         min-width: auto;
         padding: 0;
         transform: translateY(-80%);
-        background-color: #ffffff;
+        background-color: $color-white;
         em {
           font-size: 10px;
-          color: #808080;
+          color: $box-shadow;
         }
         &.disableArrow {
           // opacity: 0;
@@ -815,8 +815,8 @@
   }
 }
 .missedTopics {
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
+  background-color: $color-white;
+  border: 1px solid $lineColor;
   border-radius: 3px;
   padding: 15px;
   margin-bottom: 15px;
@@ -835,21 +835,21 @@
   .topicName {
     text-transform: uppercase;
     font-size: 12px;
-    color: #b3b3b3;
+    color: $greyshade;
     display: block;
   }
   h6 {
     font-size: 15px;
-    color: #C02222;
+    color: $lxp-theme-green;
     font-weight: 500;
   }
   h5 {
     font-size: 15px;
-    color: #333333;
+    color: $label2;
   }
   h4 {
     font-size: 13px;
-    color: #000000;
+    color: $blackcolor;
     margin: 0;
   }
 }
@@ -934,18 +934,18 @@
     }
     &:hover {
       .mat-tab-label-content {
-        color: #000000;
+        color: $blackcolor;
         font-weight: 400;
       }
     }
   }
   .mat-tab-label[aria-selected="false"] {
     font-weight: 400;
-    color: #999999;
+    color: $lxp-text;
   }
   .mat-tab-label[aria-selected="true"] {
     font-weight: 400;
-    color: #000000;
+    color: $blackcolor;
     .mat-tab-label-content {
       position: relative;
       &::after {
@@ -953,7 +953,7 @@
         position: absolute;
         width: 6px;
         height: 6px;
-        background-color: #c02222;
+        background-color: $lxp-theme-green;
         left: 50%;
         transform: translateX(-50%);
         bottom: -10px;
@@ -986,7 +986,7 @@
       margin: 0 !important;
       font-size: 14px;
       font-weight: 400;
-      color: #A5A7B8;
+      color: $lightgreyblue;
       margin-bottom: 5px !important;
       @media only screen and (max-width: 767px) {
         display: none;
@@ -997,7 +997,7 @@
     }
     .currentMonth {
       h3 {
-        color: #000000;
+        color: $blackcolor;
         font-size: 24px;
         font-weight: 700;
         line-height: normal;
@@ -1006,19 +1006,19 @@
     }
     .arrows {
       span {
-        color: #333333;
+        color: $label2;
         font-size: 10px;
         display: inline-block;
         cursor: pointer;
         line-height: normal;
         &.today {
           margin: 0 10px;
-          color: #999999;
+          color: $lxp-text;
           font-size: 14px;
           font-weight: 400;
           line-height: 18px;
           &:hover {
-            color: #c02222;
+            color: $lxp-theme-green;
           }
         }
       }
@@ -1041,7 +1041,7 @@
     font-size: 20px;
     padding: 15px 15px 10px 15px;
     span {
-      color: #848484;
+      color: $lxp-gray;
       display: inline-block;
       @media only screen and (max-width: 767px) {
         transform: rotate(180deg);
@@ -1058,7 +1058,7 @@
         display: inline-flex;
         font-size: 14px;
         font-weight: 500;
-        color: #666666;
+        color: $color-lightGray;
         text-transform: uppercase;
         margin: 0 0 0 10px !important;
       }
@@ -1074,10 +1074,10 @@
   .sideTabsStrip {
     display: flex;
     justify-content: flex-start;
-    border-bottom: 1px solid #CCCCCC;
+    border-bottom: 1px solid $lineColor;
     margin-bottom: 10px;
     .activeTabItem {
-      border-bottom: solid #c02222 2px;
+      border-bottom: solid $lxp-theme-green 2px;
       border-radius: 0;
       padding: 0 5px;
       margin: 0 15px;
@@ -1090,12 +1090,12 @@
     background: transparent;
     transition: background 0.3s ease-in-out;
     &:hover {
-      background: #f0f0f0;
+      background: $light-grey;
       .detailData {
         .badgedata {
           p {
-            background: rgba(0, 0, 0, 0.1);
-            color: #373331;
+            background: $blackshade;
+            color: $darkorange;
           }
         }
       }
@@ -1128,63 +1128,63 @@
         transform: skewY(-150deg);
       }
       &.Overdue {
-        border-left: 1px solid #c02222;
-        border-top: 1px solid #c02222;
-        border-right: 1px solid #c02222;
+        border-left: 1px solid $lxp-theme-green;
+        border-top: 1px solid $lxp-theme-green;
+        border-right: 1px solid $lxp-theme-green;
         &::before, 
         &::after {
-          border-bottom: 1px solid #c02222;
+          border-bottom: 1px solid $lxp-theme-green;
         }
         &::before {
-          border-left: 1px solid #c02222;
+          border-left: 1px solid $lxp-theme-green;
         }
         &::after {
-          border-right: 1px solid #c02222;
+          border-right: 1px solid $lxp-theme-green;
         }
       }
       &.ongoing {
-        border-left: 1px solid #FFA04E;
-        border-top: 1px solid #FFA04E;
-        border-right: 1px solid #FFA04E;
+        border-left: 1px solid $status-orange;
+        border-top: 1px solid $status-orange;
+        border-right: 1px solid $status-orange;
         &::before, 
         &::after {
-          border-bottom: 1px solid #FFA04E;
+          border-bottom: 1px solid $status-orange;
         }
         &::before {
-          border-left: 1px solid #FFA04E;
+          border-left: 1px solid $status-orange;
         }
         &::after {
-          border-right: 1px solid #FFA04E;
+          border-right: 1px solid $status-orange;
         }
       }
       &.completed, &.graded, &.submitted {
-        border-left: 1px solid #75D883;
-        border-top: 1px solid #75D883;
-        border-right: 1px solid #75D883;
+        border-left: 1px solid $lightgreen;
+        border-top: 1px solid $lightgreen;
+        border-right: 1px solid $lightgreen;
         &::before, 
         &::after {
-          border-bottom: 1px solid #75D883;
+          border-bottom: 1px solid $lightgreen;
         }
         &::before {
-          border-left: 1px solid #75D883;
+          border-left: 1px solid $lightgreen;
         }
         &::after {
-          border-right: 1px solid #75D883;
+          border-right: 1px solid $lightgreen;
         }
       }
       &.yettoStart, &.yetStart {
-        border-left: 1px solid #B3B3B3;
-        border-top: 1px solid #B3B3B3;
-        border-right: 1px solid #B3B3B3;
+        border-left: 1px solid $greyshade;
+        border-top: 1px solid $greyshade;
+        border-right: 1px solid $greyshade;
         &::before, 
         &::after {
-          border-bottom: 1px solid #B3B3B3;
+          border-bottom: 1px solid $greyshade;
         }
         &::before {
-          border-left: 1px solid #B3B3B3;
+          border-left: 1px solid $greyshade;
         }
         &::after {
-          border-right: 1px solid #B3B3B3;
+          border-right: 1px solid $greyshade;
         }
       }
       .dateDiv {
@@ -1192,13 +1192,13 @@
         .flagDay {
           font-size: 17px;
           font-weight: 700;
-          color: #000000;
+          color: $blackcolor;
           line-height: normal;
           display: block;
         }
         .flagMonth {
           font-size: 12px;
-          color: #004684;
+          color: $color-maroon;
           text-transform: uppercase;
           position: relative;
           top: -1px;
@@ -1211,8 +1211,8 @@
       width: 81%;
       .badgedata {
         p {
-          background: #EDEDED;
-          color: #333333;
+          background: $bread-crumb-bg ;
+          color: $label2;
           border-radius: 3px;
           text-align: center;
           padding: 2px 8px;
@@ -1225,7 +1225,7 @@
         span {
           font-size: 10px;
           font-weight: 400;
-          color: #898989;
+          color: $lxp-gray;
           line-height: normal;
           em {
             font-size: 10px;
@@ -1237,12 +1237,12 @@
           padding: 0;
           span {
           font-size: 12px;
-          color: #333333;
+          color: $label2;
           display: inline-flex;
           align-items: center;
             &.yettoStart, &.yetStart {
               em {
-                color: #B3B3B3;
+                color: $greyshade;
                 font-size: 15px;
               }
             }
@@ -1255,44 +1255,44 @@
                 align-items: center;
                 margin-right: 6px;
                 border-radius: 50%;
-                color: #ffffff;
+                color: $color-white;
               }
             }
             &.ongoing {
               em {
                 font-size: 7px;
-                background-color: #FFA04E;
+                background-color: $status-orange;
               }
             }
             &.completed, &.graded, &.submitted {
               em {
                 font-size: 5px;
-                background-color: #75D883;
+                background-color: $lightgreen;
               }
             }
             &.Overdue {
               em {
                 font-size: 8px;
-                background-color: #c02222;
+                background-color: $lxp-theme-green;
               }
             }
           }
           .launch {
-            background-color: #c02222;
+            background-color: $lxp-theme-green;
             border-radius: 5px;
             display: inline-flex;
             align-items: center;
             padding: 3px 8px 4px 8px;
             cursor: pointer;
             em {
-              color: #fff;
+              color: $color-white;
               font-size: 10px;
               margin-right: 8px;
             }
             span {
               font-size: 11px;
               font-weight: 400;
-              color: #ffffff;
+              color: $color-white;
             }
           }
         }
@@ -1300,18 +1300,18 @@
       .titleFontSize {
         font-size: 14px;
         font-weight: 500;
-        color: #c02222;
+        color: $lxp-theme-green;
         line-height: 15px;
         margin-top: 3px;
       }
       .type, .topic, .date {
         font-size: 12px;
         font-weight: 400;
-        color: #999999;
+        color: $lxp-text;
         line-height: normal;
         margin: 3px 0;
         span {
-          color: #333333;
+          color: $label2;
         }
       }
       .date {
@@ -1333,7 +1333,7 @@
       font-size: 12px;
       font-weight: 400;
       line-height: normal;
-      color: #c02222;
+      color: $lxp-theme-green;
       transform: perspective(1px) translateZ(0);
       &:hover {
         text-decoration: none;
@@ -1356,7 +1356,7 @@
     > div {
       span {
         display: inline-flex;
-        color: #808080;
+        color: $box-shadow;
         font-size: 10px;
         font-weight: 400;
         line-height: normal;
@@ -1375,28 +1375,28 @@
         }
         &.Overdue {
           &::before {
-            border: 1px solid #c02222;
+            border: 1px solid $lxp-theme-green;
           }
         }
         &.ongoing {
           &::before {
-            border: 1px solid #FFA04E;
+            border: 1px solid $status-orange;
           }
         }
         &.completed, &.graded, &.submitted {
           &::before {
-            border: 1px solid #75D883;
+            border: 1px solid $lightgreen;
           }
         }
         &.yettoStart, &.yetStart {
           &::before {
-            border: 1px solid #B3B3B3;
+            border: 1px solid $greyshade;
           }
         }
       }
     }
     a {
-      color: #c02222;
+      color: $lxp-theme-green;
       font-size: 12px;
       font-weight: 400;
       line-height: normal;
@@ -1423,7 +1423,7 @@
     p {
       font-size: 15px;
       font-weight: 400;
-      color: #666666;
+      color: $color-lightGray;
     }
   }
   .item {
@@ -1446,8 +1446,8 @@
         border-radius: 4px;
         height: 10px;
         margin-bottom: 9px;
-        background-color: #d8d9dd;
-        border: 1px solid #ffffff;
+        background-color: $skeletonColor;
+        border: 1px solid $color-white;
       }
     }
   }
@@ -1464,9 +1464,9 @@
   top: 0;
   z-index: 1;
   height: 100%;
-  background-color: #fff;
+  background-color: $color-white;
   padding: 15px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 6px $blackshade;
   @media only screen and (max-width: 767px) {
     display: none;
   }
@@ -1478,28 +1478,28 @@
     height: 0;
     border-style: solid;
     border-width: 15px 15px 15px 0;
-    border-color: transparent #ffffff transparent transparent;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
-    -webkit-filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+    border-color: transparent $color-white transparent transparent;
+    filter: drop-shadow(0 1px 2px $blackshade);
+    -webkit-filter: drop-shadow(0 1px 2px $blackshade);
   }
   span {
     em {
       font-size: 21px;
       display: inline-block;
       line-height: normal;
-      border: 1px solid rgba(0,0,0,0.15);
+      border: 1px solid $blackshade;
       padding: 7px;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-      color: #666666;
+      box-shadow: 0 3px 6px $blackshade;
+      color: $color-lightGray;
       border-radius: 5px;
-      background-color: #ffffff;
+      background-color: $color-white;
       transition: all 0.3s ease-in-out;
     }
     &:hover {
       em {
-        border: 1px solid #27bbee;
-        background-color: #27bbee;
-        color: #ffffff;
+        border: 1px solid $lightshadeblue;
+        background-color: $lightshadeblue;
+        color: $color-white;
       }
     }
   }
@@ -1551,7 +1551,7 @@
     font-weight: 500;
     display: inline-block;
     margin: 0 10px 0 0;
-    color: #333333;
+    color: $label2;
     // width: 28%;
   }
   .vocationalJobRole {
@@ -1565,9 +1565,9 @@
     width: 100%;
   }
   .mat-form-field-appearance-fill .mat-form-field-flex {
-    background-color: #ffffff;
+    background-color: $color-white;
     // box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 6px $blackshade;
     // }
   }
 }
@@ -1582,7 +1582,7 @@
     top: -0.99375em;
   }
   .mat-select-value {
-    color: #000000;
+    color: $blackcolor;
     font-weight: 500;
   }
   .mat-form-field-appearance-fill .mat-form-field-flex {
@@ -1603,11 +1603,11 @@
     bottom: 0;
   }
   .mat-form-field.mat-focused .mat-form-field-label, .mat-form-field-label {
-    color: #666666;
+    color: $color-lightGray;
   }
   .mat-form-field.mat-focused.mat-primary .mat-select-arrow, 
   .mat-select-arrow {
-    color: rgba(0, 0, 0, 0.54);
+    color: $blackshade;
   }
   .mat-select {
     text-transform: capitalize;
@@ -1624,13 +1624,13 @@
 ::ng-deep.jobRolecustomClass {
   position: relative;
   .mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
-    background-color: rgba(0, 0, 0, 0.04);
+    background-color:$blackshade;
   }
   .mat-option.mat-selected:not(.mat-option-multiple):not(.mat-option-disabled) {
-    background-color: rgba(0, 0, 0, 0.04);
+    background-color: $blackshade;
   }
   .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
-    color: #333333 !important;
+    color: $label2 !important;
   }
   .mat-option-text {
     text-transform: capitalize;
@@ -1640,8 +1640,8 @@
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    background-color: #C02222;
-    color: #ffffff;
+    background-color: $lxp-theme-green;
+    color: $color-white;
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -1653,7 +1653,7 @@
 ::ng-deep.custom-mat-tooltip {
   position: relative !important;
   bottom: 80px !important;
-  background-color: black !important;
+  background-color:$blackcolor !important;
   opacity: 1 !important;
   right: 20px !important;
   font-size: 12px !important;
@@ -1666,12 +1666,12 @@
   opacity: 0.5;
   min-width: inherit !important;
   &:hover {
-    background-color: #eeeeee;
+    background-color: $profile-t-grey;
   }
 }
 ::ng-deep.desktopWrapper .mat-tab-label-active {
   min-width: inherit !important;
-  background-color: #fff;
+  background-color: $color-white;
   opacity: 1;
   &:hover {
     background-color: transparent;
@@ -1691,29 +1691,29 @@
       span {
         font-size: 15px;
         font-weight: 500;
-        color: #004684;
+        color: $color-maroon;
         opacity: 1;
         display: block;
         margin-bottom: 3px;
         line-height: normal;
       }
       .cal-header {
-        border: 1px solid rgba(149, 152, 154, 0.2);
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+        border: 1px solid $geryshadecolor;
+        box-shadow: 0 1px 2px $blackshade;
         border-radius: 4px;
         margin: 0 5px;
         padding: 5px 8px;
         cursor: pointer;
         &:focus-visible {
-          outline: #0D05D5 auto 1px;
-          outline-color: #0D05D5;
+          outline: $darkbluecolor auto 1px;
+          outline-color: $darkbluecolor;
           outline-style: auto;
           outline-width: 1px;
         }
         b {
           font-size: 9px;
           font-weight: 400;
-          color: #333333;
+          color: $label2;
           text-transform: uppercase;
           display: block;
           margin: 3px 0;
@@ -1732,12 +1732,12 @@
     }
     .cal-header {
       &.cal-today {
-        background-color: #27bbee;
+        background-color: $lightshadeblue;
         b {
-          color: #ffffff;
+          color: $color-white;
         }
         span {
-          color: #ffffff;
+          color: $color-white;
           font-weight: 700;
           position: relative;
           &:after {
@@ -1746,7 +1746,7 @@
             width: 4px;
             height: 5px;
             border-radius: 50%;
-            background-color: #c02222;
+            background-color: $lxp-theme-green;
             left: 50%;
             transform: translateX(-50%);
             bottom: -5px;
@@ -1765,7 +1765,7 @@
     padding-left: 0px;
   }
   .cal-week-view .cal-day-headers .cal-header:hover, .cal-week-view .cal-day-headers .cal-drag-over {
-    // border: 1px solid #c02222;
+    // border: 1px solid $lxp-theme-green;
   }
 }
 .cal-week-view {
@@ -1805,7 +1805,7 @@
   position:absolute;
   right: -21px;
   top: -21px;
-  background-color: #ffffff;
+  background-color: $color-white;
   border-radius: 50%;
   width: 21px;
   height: 21px;
@@ -1832,7 +1832,7 @@
   }
   p {
     font-size: 14px;
-    color: #000000;
+    color: $blackcolor;
     font-weight: 500;
     line-height: normal;
     margin-bottom: 30px ​!important;
@@ -1843,7 +1843,7 @@
   span {
     font-size: 10px;
     font-weight: 400;
-    color: #ffffff;
+    color: $color-white;
     line-height: normal;
   }
 }
@@ -1858,7 +1858,7 @@
   width: 90%;
   z-index: 2;
  .mat-progress-bar-buffer {
-    background: #b5b6b7 !important;
+    background: $greyshade!important;
 }
 .mat-progress-bar{
   border-radius: 4px;
@@ -1872,7 +1872,7 @@
   }
   .start{
     .mat-progress-bar-fill::after {
-      background: #F7941E;
+      background: $status-orange;
     }
   }
   .midway{
@@ -1887,7 +1887,7 @@
   }
 
   .mat-progress-bar-buffer {
-    background: #E4E8EB;
+    background: $bread-crumb-bg;
   }
   
 }
@@ -1955,7 +1955,7 @@
 // step integration 
 .stepIntegrationSection {
   position: relative;
-  background-color: #FFFFFF;
+  background-color: $color-white;
   width: 100%;
   margin: 45px 0px 15px 0px;
   padding: 7px;
@@ -1992,7 +1992,7 @@
     h1 {
       width: 48%;
       font-size: 22px;
-      color: #FFFFFF;
+      color: $color-white;
       font-weight: 600;
       margin: 0 !important;
       line-height: 24px;
@@ -2004,15 +2004,15 @@
       justify-content: end;
       button {
         border-radius: 18px;
-        background-color: #1B4E9B;
+        background-color: $blue;
         display: flex;
         align-items: center;
-        color: white;
+        color: $color-white;
         border: none;
         padding: 9px 18px;
         transition: background-color 0.3s ease-in-out;
         &:hover {
-          background-color: #004684;
+          background-color: $color-maroon;
         }
         span {
           margin-left: 10px;

@@ -4,11 +4,11 @@
 .courses {
   position: relative;
   flex-wrap: wrap;
-  background: #ffffff;
+  background: $color-white;
   padding: 15px;
   margin: 0 0px 15px 0px;
   border-radius: 4px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 5px $blackshade;
   &:hover {
     figure {
       img {
@@ -40,9 +40,9 @@
       height: 100%;
       left: 0;
       bottom: 0;
-      background: white;
+      background: $color-white;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, black 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#000000",GradientType=1);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="$color-white",endColorstr="#000000",GradientType=1);
     }
     @media only screen and (min-width: 720px) {
       width: 24%;
@@ -59,12 +59,12 @@
     }
     button {
       position: absolute;
-      background: #c02222;
+      background: $lxp-theme-green;
       padding: 5px 20px;
       text-align: center;
       border: 0;
       text-transform: uppercase;
-      color: #ffffff;
+      color: $color-white;
       font-size: 13px;
       border-radius: 20px;
       top: 50%;
@@ -81,7 +81,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: #004684;
+        background: $colordarkblue;
         transform: scale(0);
         transition-property: transform;
         transition-duration: 0.2s;
@@ -115,7 +115,7 @@
       width: 75%;
       font-size: 18px;
       font-weight: 400;
-      color: #000000;
+      color: $blackcolor;
       line-height: 23px;
       margin-bottom: 10px;
       margin-top: 10px;
@@ -138,7 +138,7 @@
       p {
         font-size: 14px;
         font-weight: 400;
-        color: #808080;
+        color: $box-shadow;
         padding-right: 20px;
         margin: 0 !important;
         &.addEllipsis {
@@ -157,7 +157,7 @@
         z-index: 9;
         em {
           font-size: 7px;
-          color: #999999;
+          color: $lxp-text;
         }
       }
       > div {
@@ -185,9 +185,9 @@
         padding-right: 8px;
         font-size: 12px;
         font-weight: 400;
-        color: #666666;
+        color: $color-lightGray;
         line-height: normal;
-        border-right: 1px solid #c02222;
+        border-right: 1px solid $lxp-theme-green;
         margin-top: 10px;
         &:last-child {
           border-right: 0;
@@ -207,10 +207,10 @@
       span {
         font-size: 11px;
         font-weight: 400;
-        color: #999999;
+        color: $lxp-text;
         line-height: normal;
         b {
-        color: #666666;
+        color: $color-lightGray;
         font-weight: 400;
         }
         em {
@@ -273,24 +273,24 @@
           border-radius: 50%;
           width: 42px;
           height: 42px;
-          background: #dedede;
+          background: $profile-s-grey;
           transition: 0.3s ease-in background;
           @media only screen and (max-width: 767px) {
             width: 35px;
             height: 35px;
           }
           em {
-            color: #1B4E9B;
+            color: $blue;
             font-size: 18px;
             @media only screen and (max-width: 767px) {
               font-size: 15px;
             }
           }
           &:hover {
-            background:#27BBEE;
+            background:$lightshadeblue;
             border: none;
             em {
-              color: #ffffff;
+              color: $color-white;
             }
           }
         }
@@ -304,7 +304,7 @@
         p {
           font-size: 13px;
           font-weight: 400;
-          color: #000000;
+          color: $blackcolor;
           margin: 10px 0 0 0 !important;
           line-height: normal;
           @media only screen and (max-width: 991px) {
@@ -366,7 +366,7 @@
   span {
     font-size: 10px;
     font-weight: 400;
-    color: #ffffff;
+    color: $color-white;
     line-height: normal;
   }
 }
