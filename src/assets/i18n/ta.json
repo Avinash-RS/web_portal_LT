@@ -143,7 +143,7 @@
   "TOPIC:":"தலைப்பு:",
   "Information technology and Operation":"தகவல் தொழில்நுட்பம் மற்றும் செயல்பாடு",
   "Recently Completed Topics":"சமீபத்தில் முடிக்கப்பட்ட தலைப்புகள்",
-  "L&T EduTech. All Rights Reserved.":"எல்&டி எடுடெக். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
+  " L&T EduTech. All Rights Reserved.":" எல்&டி எடுடெக். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
   "You have no":"உங்களிடம் இல்லை",
   "courses at the moment!":"இந்த நேரத்தில் படிப்புகள்!",
 
@@ -190,9 +190,12 @@
   "Your question will be answered soon":"உங்கள் கேள்விக்கு விரைவில் பதில் கிடைக்கும்",
   "No Q&A's to display at the moment":"தற்போது எந்த கேள்விபதில்களும் காட்டப்படவில்லை",
   "No results found":"முடிவுகள் எதுவும் இல்லை",
+  "Please ask your question with concise and add any other details here":"தயவு செய்து உங்கள் கேள்வியை சுருக்கமாக கேட்டு மற்ற விவரங்களை இங்கே சேர்க்கவும்",
 
   "Back":"மீண்டும்",
   "All Questions and Answer":"அனைத்து கேள்விகளும் பதில்களும்",
+  "Loading...":"ஏற்றுகிறது...",
+  "You have not asked any questions!":"நீங்கள் எந்த கேள்வியும் கேட்கவில்லை!",
   "Sort by:":"இதன்படி வரிசைப்படுத்தவும்:",
   "Newest":"புதியது",
   "Oldest":"பழமையான",
@@ -223,6 +226,7 @@
 
   "assignment":"பணி நியமனம்",
   "Activity description:":"செயல் விளக்கம்:",
+  "Activity Description:":"செயல் விளக்கம்:",
   "Total Score:":"மொத்த மதிப்பெண்:",
   "Total score:":"மொத்த மதிப்பெண்:",
   "Yet to submit":"இன்னும் சமர்ப்பிக்க வேண்டும்",
@@ -347,6 +351,7 @@
   "Resume":"மீண்டும் தொடர்",
   "Start":"தொடங்கு",
   "Replay":"மறு",
+  "Join Now":"இப்போது சேரவும்",
   "Progression":"முன்னேற்றம்",
   "By:":"மூலம்:",
   "Credits:":"கடன்:",
@@ -410,5 +415,9 @@
   "Attended Session":"அமர்வில் கலந்து கொண்டார்",
   "Attended Sessions":"அமர்வுகளில் கலந்துகொண்டார்",
   "Recorded Video":"பதிவு செய்யப்பட்ட வீடியோ",
-  "Recorded Videos":"பதிவு செய்யப்பட்ட வீடியோக்கள்"
+  "Recorded Videos":"பதிவு செய்யப்பட்ட வீடியோக்கள்",
+
+  "OK":"சரி",
+  "Yes":"ஆம்",
+  "No":"இல்லை"
 }

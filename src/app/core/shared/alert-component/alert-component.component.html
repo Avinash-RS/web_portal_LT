@@ -7,13 +7,13 @@
 
 <mat-dialog-actions *ngIf="data.type=='showClose'">
     <button mat-stroked-button class="border-light-grey color_black background-darkGrey" (click)="close()"
-        cdkFocusInitial>OK</button>
+        cdkFocusInitial>{{'OK' | translate}}</button>
 </mat-dialog-actions>
 
 <mat-dialog-actions *ngIf="data.type=='confirmAlert'">
     <button mat-stroked-button [mat-dialog-close]="true" class="border-light-grey color_black background-darkGrey"
         cdkFocusInitial>
-        {{data.confirmText ?data.confirmText :  'Yes'}}</button>
+        {{data.confirmText ?data.confirmText :  translate.instant('Yes')}}</button>
     <button mat-flat-button [mat-dialog-close]="false" class="background-maroon">
-        {{data.cancelText ?data.cancelText :  'No'}}</button>
+        {{data.cancelText ?data.cancelText :  translate.instant('No')}}</button>
 </mat-dialog-actions>
