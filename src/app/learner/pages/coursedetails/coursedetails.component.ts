@@ -716,25 +716,44 @@ export class CoursedetailsComponent implements OnInit {
       // this.filterToc();
     });
   }
-  gettopicOnModule(week,modul,parent,body){
+  gettopicOnModule(week, modul, parent, body) {
     // this.topicData$ = this.gettopicapi(week,module,parent);
- this.Lservice.playerstatus(
-      this.courseid,
-      this.userDetail.user_id,
-      this.batchId,
-      week,
-      modul,
-      parent
-    ) .subscribe((data: any) => {
-      let moduletopicApiData = data.data.playerstatus.message
-      if (moduletopicApiData[0].link==null&&this.scromApiData.checkLevel){
-        
-        this.subModuleData = moduletopicApiData
-      }else{
-        this.topicData$ = moduletopicApiData
-      }
-      body.childData = [...moduletopicApiData]
-    }) 
+    if (!body.expanded) {
+      this.Lservice.playerstatus(
+        this.courseid,
+        this.userDetail.user_id,
+        this.batchId,
+        week,
+        modul,
+        parent
+      ).subscribe((data: any) => {
+        let moduletopicApiData = data.data.playerstatus.message
+        if (moduletopicApiData[0].link == null && this.scromApiData.checkLevel) {
+
+          this.subModuleData = moduletopicApiData
+        } else {
+          this.topicData$ = moduletopicApiData
+        }
+        body.childData = [...moduletopicApiData]
+      })
+    }
+  }
+
+  playURLConstructor(url,moduleName,topicName){
+    const encodedModuleName = encodeURIComponent(moduleName);
+    const encodedTopicName = this.scromApiData.checkLevel ? encodeURIComponent(topicName):null;
+    let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
+      (environment.scormUrl + '/scormPlayer.html?content_id=' +this.courseid + 
+      '&user_id=' + id + 
+      '&batchid=' + this.batchId + 
+      '&id=' + this.topicInfo.id + 
+      '&parent=' + this.topicInfo.parent + 
+      '&path=' + url+ 
+      '&module=' + encodedModuleName + 
+      '&topic=' + encodedTopicName +
+      '&action=Click&week=' + (Number(this.weekHolder) + 1) + 
+      '&lastLogIndex=' + this.lastLogIndex);
   }
 
   playTopic(
@@ -760,8 +779,7 @@ export class CoursedetailsComponent implements OnInit {
       this.subModuleHolderUI = moduleIdx
       this.submoduleTitle = moduleName
     }
-    const encodedModuleName = encodeURIComponent(moduleName);
-    const encodedTopicName = encodeURIComponent(topicName);
+    
     this.nextPrevHolder = topindex;
     this.topiccurrentPage = this.nextPrevHolder
     this.moduleHolder = Number(smi);
@@ -769,13 +787,7 @@ export class CoursedetailsComponent implements OnInit {
     // this.isprevEnable = true;
     // this.isNextEnable = true;
     this.topicInfo = topicDetail
-    let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
-    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
-      (environment.scormUrl + '/scormPlayer.html?content_id=' +
-        this.courseid + '&user_id=' + id + '&path=' + url
-        + '&module_status=' + this.moduleSatusCheck
-        + '&module=' + encodedModuleName + '&topic=' + encodedTopicName + '&action=Click&week=' + (Number(this.weekHolder) + 1) + '&ModuleIndex=' + this.moduleHolder + '&submoduleIndex=' + (this.scromApiData.checkLevel ? this.subModuleHolder.toString() : 'null') + '&topicIndex=' + this.nextPrevHolder + '&lastLogIndex=' + this.lastLogIndex);
-    // this.checkLastFirstIndexReached()
+    this.playURLConstructor(url,moduleName,topicName)
     console.log(this.urlSafe,"click link")
   }
 
@@ -958,37 +970,8 @@ export class CoursedetailsComponent implements OnInit {
           this.currentTopicTitle = this.gettopicLink.title;
           this.currentModuleTitle = this.moduleInfo.title;
           this.topicPageStatus = this.gettopicLink.status;
-          let id = CryptoJS.AES.decrypt(
-            this.getuserid.user_id,
-            this.secretKey.trim()
-          ).toString(CryptoJS.enc.Utf8);
-          this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(
-            environment.scormUrl +
-              "/scormPlayer.html?content_id=" +
-              this.courseid +
-              "&user_id=" +
-              id +
-              "&user_obj_id=" +
-              this.getuserid._id +
-              "&path=" +
-              this.gettopicLink.link +
-              "&module_status=" +
-              this.moduleSatusCheck +
-              "&module=" +
-              this.moduleInfo.title +
-              "&topic=" +
-              this.gettopicLink.title +
-              "&action=Next&week=" +
-              (this.weekHolder + 1) +
-              "&submoduleIndex=" +
-              null +
-              "&moduleIndex=" +
-              this.topiccurrentPage +
-              "&topicIndex=" +
-              this.nextPrevHolder +
-              "&lastLogIndex=" +
-              this.lastLogIndex
-          );
+          this.playURLConstructor( this.gettopicLink.link,this.currentModuleTitle,this.currentTopicTitle)
+          
         }
       }
     }
@@ -1052,37 +1035,7 @@ export class CoursedetailsComponent implements OnInit {
         this.currentTopicTitle = this.gettopicLink.title;
         this.currentModuleTitle = this.moduleInfo.title;
         this.topicPageStatus = this.gettopicLink.status;
-        let id = CryptoJS.AES.decrypt(
-          this.getuserid.user_id,
-          this.secretKey.trim()
-        ).toString(CryptoJS.enc.Utf8);
-        this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(
-          environment.scormUrl +
-            "/scormPlayer.html?content_id=" +
-            this.courseid +
-            "&user_id=" +
-            id +
-            "&user_obj_id=" +
-            this.getuserid._id +
-            "&path=" +
-            this.gettopicLink.link +
-            "&module_status=" +
-            this.moduleSatusCheck +
-            "&module=" +
-            this.moduleInfo.title +
-            "&topic=" +
-            this.gettopicLink.title +
-            "&action=Prev&week=" +
-            (this.weekHolder + 1) +
-            "&submoduleIndex=" +
-            null +
-            "&moduleIndex=" +
-            this.topiccurrentPage +
-            "&topicIndex=" +
-            this.nextPrevHolder +
-            "&lastLogIndex=" +
-            this.lastLogIndex
-        );
+        this.playURLConstructor( this.gettopicLink.link,this.currentModuleTitle,this.currentTopicTitle)
       }
     }
   }
@@ -1247,10 +1200,9 @@ export class CoursedetailsComponent implements OnInit {
     this.Lservice.userexperience(
       this.getuserid.user_id,
       this.courseid,
-      this.scromApiData.checkLevel
-        ? this.submoduleTitle
-        : this.currentModuleTitle,
-      this.currentTopicTitle,
+      this.batchId,
+      this.topicInfo.id,
+      this.topicInfo.parent_id,
       ux,
       this.topicInfo.status
     ).subscribe((data: any) => {
