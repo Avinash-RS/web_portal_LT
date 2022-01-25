@@ -115,6 +115,10 @@ export class InstructorLedComponent implements OnInit {
     this.listOfSessions.forEach(los => {
       los.isactive = false;
     });
+    
+    if(los.activity_details.activitytype == "Recorded"){
+      this.videoSource = los.activity_details.link + this.blobKey;
+    }
     this.activityShow = los;
     los.isactive = true;
     if (los.status === 'On going') {
@@ -174,14 +178,14 @@ export class InstructorLedComponent implements OnInit {
     this.dialog.closeAll();
   }
 
-  videoPreview(templateRef: TemplateRef<any>, e) {
-    this.videoSource = e + this.blobKey
-    this.dialog.open(templateRef, {
-      width: '90%',
-      height: '95%',
-      panelClass: 'videoPopupContainer',
-      closeOnNavigation: true,
-      disableClose: true,
-    });
-  }
+  // videoPreview(templateRef: TemplateRef<any>, e) {
+  //   this.videoSource = e + this.blobKey
+  //   // this.dialog.open(templateRef, {
+  //   //   width: '90%',
+  //   //   height: '95%',
+  //   //   // panelClass: 'videoPopupContainer',
+  //   //   closeOnNavigation: true,
+  //   //   disableClose: true,
+  //   // });
+  // }
 }
