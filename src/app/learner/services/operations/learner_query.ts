@@ -1503,6 +1503,7 @@ export const playerstatus = gql`
       success
       message {
         id
+        parent
         status
         title
         link
@@ -2689,6 +2690,7 @@ export const getlabActivityData = gql`
           status
           project_id
           ebox_attempt_id
+          ebox_attempt_title
           activitystartdate
           activityenddate
           submit_status
