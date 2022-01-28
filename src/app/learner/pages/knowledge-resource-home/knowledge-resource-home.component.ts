@@ -22,6 +22,7 @@ export class KnowledgeResourceHomeComponent implements OnInit {
   imageView: File;
   searchDetails = '';
   dummyText = 1;
+  showSkeleton = true;
   userDetailes;
   sampleFileLink = 'https://edutechstorage.blob.core.windows.net/container1/resource/739113684616842-Sample-file.csv';
   @ViewChild('fileInput3') fileInput3;
@@ -47,6 +48,7 @@ export class KnowledgeResourceHomeComponent implements OnInit {
   }
 
   getResourceFiles() {
+    this.showSkeleton = true;
     this.tempDetailsList = [];
     this.apiService.getResourceDetails().subscribe((result: any) => {
       const resultData = result.data.get_all_resources_details.message && result.data.get_all_resources_details.message.length > 0 ? result.data.get_all_resources_details.message : [];
@@ -75,6 +77,7 @@ export class KnowledgeResourceHomeComponent implements OnInit {
         this.tempDetailsList.push(b);
       });
       this.details = this.tempDetailsList;
+      this.showSkeleton = false;
       console.log(this.details)
       this.checkKnowledgeRec();
     });
@@ -82,8 +85,10 @@ export class KnowledgeResourceHomeComponent implements OnInit {
   checkKnowledgeRec(){
     setTimeout(() => {
       if (this.searchedData) {
+        
         this.isLoadBalanced = false;
       } else {
+        
         this.isLoadBalanced = true;
       }
     });
