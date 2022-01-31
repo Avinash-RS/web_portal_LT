@@ -61,6 +61,20 @@
     </div>
 
   <div class="main-section">
+    <div class="item" *ngIf="showSkeleton">
+      <div class="d-flex justify-content-between">
+          <div class="item1">
+              <ngx-skeleton-loader count="9" [theme]="{'border-radius': '5px', 'margin':'20px', height: '160px', width: '230px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+          </div>
+          
+      </div>
+      <div class="d-flex justify-content-between">
+          <div class="item1">
+              <ngx-skeleton-loader count="9" [theme]="{'border-radius': '5px','margin': '20px', height: '160px', width: '230px', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+          </div>
+          
+      </div>
+  </div>
     <ng-container *ngFor="let resData of resourceFile">
       <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
         <div class="resource-card" (click)="onPreview(resData)">

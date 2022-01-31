@@ -2690,6 +2690,7 @@ export const getlabActivityData = gql`
           status
           project_id
           ebox_attempt_id
+          ebox_attempt_title
           activitystartdate
           activityenddate
           submit_status
