@@ -153,7 +153,7 @@ export class HeaderComponent implements OnInit {
           this.socketService.closeSocket();
         }
         this.services.getIpAddressByUrl();
-        this.services.logout(this.userDetailes._id, false).subscribe((logout: any) => {
+        this.services.logout(this.userDetailes.user_id, false).subscribe((logout: any) => {
           this.userDetailes = null;
           localStorage.clear();
           sessionStorage.clear();
