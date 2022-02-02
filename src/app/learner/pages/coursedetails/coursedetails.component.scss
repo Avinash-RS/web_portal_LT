@@ -892,12 +892,12 @@
 .redHover:hover {
   color: $lxp-theme-green !important;
 }
-::ng-deep.topicCard {
+::ng-deep.topicCardLevel {
   .mat-card-content {
     margin-bottom: 0;
   }
 }
-.topicCard {
+.topicCardLevel {
   margin: 0 1px 0 10px;
   padding: 10px 5px 0 10px !important;
   box-shadow: none;
@@ -1461,7 +1461,7 @@
   &:hover {
     i,
     span {
-      color: #c02222;
+      color: $color-blue;
     }
   }
   i,

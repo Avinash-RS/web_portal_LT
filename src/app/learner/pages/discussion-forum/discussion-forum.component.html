@@ -93,7 +93,6 @@
       </mat-card-subtitle> -->
             <mat-card-content *ngIf="res.expanded">
               <mat-vertical-stepper
-                [linear]="isLeaner"
                 [ngClass]="res?.title?.length > 39 ? 'headerDown' : ''"
               >
                 <ng-container *ngFor="let mod of res?.childData; let j = index">
@@ -172,7 +171,6 @@
       </mat-card-subtitle> -->
             <mat-card-content *ngIf="res.expanded">
               <mat-vertical-stepper
-                [linear]="isLeaner"
                 [ngClass]="res?.title?.length > 39 ? 'headerDown' : ''"
               >
                 <ng-container *ngFor="let mod of res?.childData; let j = index">
