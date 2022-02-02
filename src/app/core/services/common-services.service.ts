@@ -244,4 +244,8 @@ export class CommonServicesService {
     // return this.http.get(`https://www.google.com/recaptcha/api/siteverify?email=l7gokul@gmail.com&g-recaptcha-response=${response}`);
     return this.http.post(`https://www.google.com/recaptcha/api/siteverify`, data);
   }
+
+  getTOC(postParam){
+    return this.http.post(environment.scormUrl+'navTreeV2',postParam);
+  }
 }
