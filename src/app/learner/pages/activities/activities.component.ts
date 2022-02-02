@@ -179,6 +179,9 @@ export class ActivitiesComponent implements OnInit {
   AssigmnemtPayload :FormData;
   labpracticeData : any;
   labNoCard = false;
+  assignmentLoader = false;
+  performLoader = false;
+  projectLoader = false;
   praticalsLoader = false;
   constructor(public Lservice: LearnerServicesService, private gs: GlobalServiceService, private commonServices: CommonServicesService,
     private dialog: MatDialog, private toastr: ToastrService,
@@ -478,7 +481,9 @@ export class ActivitiesComponent implements OnInit {
 
   getAssignmentmoduleData(value?) {
   // getperformActivityData
+  this.assignmentLoader = true;
     this.Lservice.getAssignmentmoduleData(this.userDetail.user_id,this.courseid,this.pagination,this.page,this.noofItems).subscribe((data: any) => {
+      this.assignmentLoader = false;
       if (data.data.getAssignmentmoduleData.success) {
        this.assignmentContent = data?.data?.getAssignmentmoduleData?.data;
        this.assignmentpreContent = data?.data?.getAssignmentmoduleData
@@ -686,7 +691,9 @@ export class ActivitiesComponent implements OnInit {
   }
 
   getprojectActivityData(value?) {
+    this.projectLoader = true;
     this.Lservice.getprojectActivityData(this.userDetail.user_id, this.courseid,this.pagination,this.page,this.noofItems).subscribe((data: any) => {
+      this.projectLoader = false;
       if (data && data.data && data.data.getprojectActivityData && data.data.getprojectActivityData.data) {
         this.projectDetails = data.data.getprojectActivityData.data;
         this.projectDetails.forEach((element, i) => {
@@ -745,9 +752,11 @@ export class ActivitiesComponent implements OnInit {
   }
 
   getperformActivityData(value?) {
+    this.performLoader = true;
     this.Lservice.getperformActivityData(
       this.userDetail.user_id, this.courseid,this.pagination,this.page,this.noofItems
     ).subscribe((data: any) => {
+      this.performLoader = false;
       if (data && data.data && data.data.getperformActivityData && data.data.getperformActivityData.data) {
         this.performDetails = data.data.getperformActivityData.data;
         this.performDetails.forEach((element, i) => {

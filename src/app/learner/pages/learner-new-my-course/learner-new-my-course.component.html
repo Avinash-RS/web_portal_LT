@@ -629,9 +629,9 @@
                               <mat-form-field appearance="fill">
                                 <mat-label *ngIf="userDetailes.org_type == 'vocational'">{{'My Job Role:' | translate}}</mat-label>
                                 <mat-label *ngIf="userDetailes.org_type != 'vocational'">{{'Courses For:' | translate}}</mat-label>
-                                <mat-select (selectionChange)="onSelectionChange($event)" matTooltip="{{tooltipJobRole}}" [(ngModel)]="jobroleCategoryId">
+                                <mat-select (selectionChange)="onSelectionChange($event)"  [(ngModel)]="jobroleCategoryId">
                                   <mat-select-trigger>{{selectedJobRoleData?.jobroleCategoryName}}</mat-select-trigger>
-                                  <mat-option matTooltipClass="custom-mat-tooltip" class="jobRolecustomClass" *ngFor="let selectedJobRole of vocationalselectjobRole" [value]="selectedJobRole.jobroleCategoryId" (onSelectionChange)="jobRoleSelectedFunction($event,selectedJobRole)">
+                                  <mat-option  class="jobRolecustomClass" *ngFor="let selectedJobRole of vocationalselectjobRole" [value]="selectedJobRole.jobroleCategoryId" (onSelectionChange)="jobRoleSelectedFunction($event,selectedJobRole)">
                                     {{selectedJobRole.jobroleCategoryName}}
                                     <!-- <span class="jobRoleCount">{{selectedJobRole.jobroleEnrollCount}}</span> -->
                                   </mat-option>
