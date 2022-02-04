@@ -449,8 +449,11 @@ export class CoursedetailsComponent implements OnInit {
      
       this.socketEmitReciver = this.socketService.change.subscribe(
         (result: any) => {
-          console.log(result.data);
-          if (result) {
+          console.log(result);
+          if (result && !Number.isNaN(this.weekHolder)) {
+
+            // this.scromModuleData = result.message;
+
             if (result.data.course_id === this.courseid) {
               // if(this.userType=="Corporate"){
               //Lab URL and btn display
@@ -463,10 +466,26 @@ export class CoursedetailsComponent implements OnInit {
 
               // }
                 console.log(result.data, "helllllllllllllo");
-                this.scromModuleData = result.data.childData;
+                // this.scromModuleData = result.data.childData;
                 // this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
 
             }
+            //expanding
+            if (this.checkDetails.checklevel) {
+              
+              this.moduleExpand(this.weekHolder, Number(this.subModuleHolderUI),this.scromApiData.checkLevel?this.moduleHolder:null);
+            }else{
+              console.log(this.scromModuleData)
+              this.scromModuleData[this.weekHolder].childData[this.moduleHolder].status= result.data.status;
+              this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData = result.data.message;
+              this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
+            }
+
+            //replace data
+            // this.weekHolderUI
+            // this.subModuleHolderUI
+            // this.nextPrevHolder
+            // this.moduleHolder
           } else {
             //INDEX ON COURSE START
             this.nextPrevHolder = this.topiccurrentPage = 0;
@@ -506,8 +525,6 @@ export class CoursedetailsComponent implements OnInit {
 
     this.service.getTOC(param).subscribe((data: any) => {
       this.scromApiData = data;
-      
-
 
       this.scromModuleData = this.scromApiData?.message;
       this.weekLength = this.scromApiData.message.length;
@@ -593,7 +610,7 @@ export class CoursedetailsComponent implements OnInit {
   playURLConstructor(url,moduleName,topicName,moduleId,topicId){
     console.log(moduleName)
     const encodedModuleName = encodeURIComponent(moduleName);
-    const encodedTopicName = this.checkDetails.checklevel? encodeURIComponent(topicName):null;
+    const encodedTopicName = encodeURIComponent(topicName);
     let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
       (environment.scormUrl + '/scormPlayer.html?content_id=' +this.courseid + 

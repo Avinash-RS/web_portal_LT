@@ -184,7 +184,7 @@
                         </mat-card-title>
                         <!-- moduleExpand(wi,mi,null,res) -->
                         <span *ngFor="let res of resDat.childData let mi = index" (load)="mi==moduleHolder?res.expanded=true:res.expanded=false;">
-                            <mat-card-subtitle (click)="gettopicOnModule(wi+1,scromApiData.checkLevel?res?.title:null,scromApiData.checkLevel?null:res?.id,res);moduleExpand(wi,mi,null,res)" class="d-flex justify-content-start align-items-center tocSubTitle" [ngClass]="(wi===weekHolderUI&&mi==moduleHolder)?'titleSelected':''">
+                            <mat-card-subtitle (click)="scromApiData.checkLevel?'':gettopicOnModule(wi+1,checkDetails.checkLevel?res?.module_name:null,checkDetails.checkLevel?null:res?.id,res);moduleExpand(wi,mi,null,res)" class="d-flex justify-content-start align-items-center tocSubTitle" [ngClass]="(wi===weekHolderUI&&mi==moduleHolder)?'titleSelected':''">
                                 <div class="statusColor">
                                     <span *ngIf="res?.status == 'Passed'" class="passColor"><em class="lxp-Right"></em></span>
                                     <span *ngIf="res?.status == 'process'" class="processColor"></span>
@@ -218,10 +218,10 @@
                                             <span *ngIf="subData?.status == null" class="greyColor"></span>
                                         </div>
                                         <div class="topicName">
-                                            <h4 *ngIf="subData?.module_name?.length >= 67" class="moduleName" tooltip="{{subData?.module_name}}">
-                                                {{subData?.module_name | slice:0:71}}...</h4>
-                                            <h4 *ngIf="subData?.module_name?.length < 67" class="moduleName" tooltip="{{subData?.module_name}}">
-                                                {{subData?.module_name}}
+                                            <h4 *ngIf="subData?.module?.length >= 67" class="moduleName" tooltip="{{subData?.moduleHolder}}">
+                                                {{subData?.module | slice:0:71}}...</h4>
+                                            <h4 *ngIf="subData?.module?.length < 67" class="moduleName" tooltip="{{subData?.module}}">
+                                                {{subData?.module}}
                                             </h4>
                                         </div>
                                         <!-- <div class="progressBar">

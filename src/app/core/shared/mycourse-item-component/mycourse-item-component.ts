@@ -124,6 +124,7 @@ export class MycourseItemComponent implements OnInit {
     };
     // if (this.screenWidth < 800) {
     // } else {
+      console.log(detail)
     localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer)
     localStorage.setItem('Courseid', c.course_id);
     localStorage.setItem('persentage', c && c.coursePlayerStatus && c.coursePlayerStatus.course_percentage ? c.coursePlayerStatus.course_percentage : '');
