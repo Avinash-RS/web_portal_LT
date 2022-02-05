@@ -112,6 +112,14 @@ export class MycourseItemComponent implements OnInit {
       course_status: c.course_status,
       batch_id: c.batchid,
       batchEndTime: c.batch_end_date_Timer,
+      link:c.link,
+      toc:c.toc,
+      lastLogIndex:c.lastLogIndex,
+      lastModule:c.lastModule,
+      lastTopic:c.lastTopic,
+      checklevel:c.checklevel,
+      module_id:c.module_id,
+      topic_id:c.topic_id
       // persentage : c.coursePlayerStatus.course_percentage || 0
     };
     // if (this.screenWidth < 800) {

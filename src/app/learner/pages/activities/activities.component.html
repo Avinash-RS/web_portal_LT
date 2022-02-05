@@ -177,8 +177,14 @@
           </div>
         </div>
       </ng-container>
+      <div class="item2 mt-4" *ngIf="assignmentLoader">
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '60px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '60px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '60px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '60px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+    </div>
       <!-- Content ends -->
-      <div class="noCard" *ngIf="emptyAssignment">
+      <div class="noCard" *ngIf="emptyAssignment && !assignmentLoader">
         <figure>
           <img src="https://assets.lntedutech.com/application_images/noassignment.svg" alt="assignment">
         </figure>
@@ -496,8 +502,13 @@
           </div>
         </div>
       </ng-container>
-
-      <div class="noCard" *ngIf="performDetails?.length < 1">
+      <div class="item2 mt-4" *ngIf="performLoader">
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '60px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '60px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '60px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '60px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+    </div>
+      <div class="noCard" *ngIf="performDetails?.length < 1 && !performLoader">
         <figure>
           <img src="https://assets.lntedutech.com/application_images/noPerform.svg" alt="assignment">
         </figure>
@@ -799,8 +810,13 @@
           </div>
         </div>
       </ng-container>
-
-      <div class="noCard" *ngIf="projectDetails?.length < 1">
+      <div class="item2 mt-4" *ngIf="projectLoader">
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '60px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '60px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '60px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '60px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+    </div>
+      <div class="noCard" *ngIf="projectDetails?.length < 1 && !projectLoader">
         <figure>
           <img src="https://assets.lntedutech.com/application_images/noProject.svg" alt="assignment">
         </figure>
@@ -821,7 +837,7 @@
                 <div class="labLeftContent">
                   <div class="topic text-left d-flex">
                     <!-- <mat-icon class="assignIcon">assignment</mat-icon> -->
-                    <span class="f_size_16 f_wt_600 projHead">{{lab.labActivity.topic_id}}</span>
+                    <span class="f_size_16 f_wt_600 projHead">{{lab.labActivity.ebox_attempt_title}}</span>
                   </div>
                   <div class="t-l-1">
                     {{'Activity Description:' | translate}} {{lab.labActivity.activityname}}
@@ -848,12 +864,12 @@
         </div>
       </ng-container>
       <div class="item2 mt-4" *ngIf="praticalsLoader">
-        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '80px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '80px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '80px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
-        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '80px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '60px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '60px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '60px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
+        <ngx-skeleton-loader count="1" [theme]="{'border-radius': '4px', height: '60px', 'margin-bottom':'10', 'background-color': '#d8d9dd', border: '1px solid white'}"></ngx-skeleton-loader>
     </div>
-      <div class="noCard" *ngIf="labNoCard">
+      <div class="noCard" *ngIf="labNoCard ">
         <figure>
           <img src="https://assets.lntedutech.com/application_images/noPerform.svg" alt="assignment">
         </figure>

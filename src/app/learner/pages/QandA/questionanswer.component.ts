@@ -88,8 +88,8 @@ export class QuestionanswerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getQAData();
-    this.getQACount()
+    this.selectedIndex = 1;
+    this.contentChange();
   }
 
   contextmenu() {

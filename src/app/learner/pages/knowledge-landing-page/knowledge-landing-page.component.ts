@@ -16,6 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class KnowledgeLandingPageComponent implements OnInit {
   @ViewChild(DragScrollComponent) ds: DragScrollComponent;
   resourceParams: any;
+  showSkeleton = true;
   topicList = [
     'All'
   ];
@@ -84,20 +85,24 @@ export class KnowledgeLandingPageComponent implements OnInit {
   }
 
   resourceDetails(domain, areaOfInterest) {
+    this.showSkeleton = true;
     const topics = [];
     this.apiService.getParticularResourceDetails(domain, areaOfInterest).subscribe((data: any) => {
       const tempDetails = data.data.get_all_resources_details.message.reduce((r, a) => {
         r[a.domain] = [...r[a.domain] || [], a];
         return r;
       }, {});
+      this.showSkeleton = false;
       this.resourceFile = Object.entries(tempDetails);
       this.resourceFile[0][1].forEach((d, i) => {
         const extIdx = d.url.search(/\.pdf|.mp4|.jpg|.mp3|.png|.jpeg/);
         if (extIdx >= 0) {
           d.fileType = d.url.substring(extIdx + 1, extIdx + 4);
+          
         }
         if (d.fileType === 'jpe') {
           d.fileType = 'jpeg';
+          
         }
         // let idx = d.file.search(/\d[-]/g) + 2;
         // d.fileName = idx > 0 ? d.file.substring(idx) : "";

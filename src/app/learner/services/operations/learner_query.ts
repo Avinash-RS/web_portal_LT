@@ -2339,6 +2339,14 @@ export const get_batchwise_learner_dashboard_data = gql`
         enableCredits
         selflearning_totalweeks
         QA_totalweeks
+        link
+        toc
+        lastLogIndex
+        lastModule
+        lastTopic
+        module_id
+        checklevel
+        topic_id
       }
     }
   }
@@ -2690,6 +2698,7 @@ export const getlabActivityData = gql`
           status
           project_id
           ebox_attempt_id
+          ebox_attempt_title
           activitystartdate
           activityenddate
           submit_status

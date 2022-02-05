@@ -36,8 +36,6 @@ import * as _ from "lodash";
 import { filter } from "underscore";
 // import { debugger } from 'fusioncharts';
 import * as CryptoJS from "crypto-js";
-import { containsElement } from "@angular/animations/browser/src/render/shared";
-import { interceptingHandler } from "@angular/common/http/src/module";
 import { InteropObservable, Observable } from "rxjs";
 declare var gtag;
 
@@ -143,9 +141,6 @@ export class CoursedetailsComponent implements OnInit {
   finalper2: number;
   localper: string;
   selectedIndex = 0;
-  selectedIndex1 = 0;
-  selectedIndex2 = 0;
-  selectedIndex3 = 0;
   assignmentVal = false;
   docpath: any = null;
   assFile: File;
@@ -319,12 +314,12 @@ export class CoursedetailsComponent implements OnInit {
       "(!@#graphql%^&facade!@#)"
     ).toString(CryptoJS.enc.Utf8);
 
-    const Feedbackdetail: any =
+    const Navdetail: any =
       this.route.getCurrentNavigation() &&
       this.route.getCurrentNavigation().extras &&
       this.route.getCurrentNavigation().extras.state &&
       this.route.getCurrentNavigation().extras.state.detail;
-    this.checkDetails = Feedbackdetail;
+    this.checkDetails = Navdetail;
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.screenWidth < 800) {
@@ -383,11 +378,33 @@ export class CoursedetailsComponent implements OnInit {
             
           }
         });
+
+        // TOC handling
+      if (this.checkDetails?.toc != "0") {
+        if (this.screenWidth < 800) {
+          this.drawersOpen = false;
+        } else {
+          this.drawersOpen = true;
+        }
+      } else {
+        this.drawersOpen = false;
+      }
+
+        //play initial/resume topic
+        if (
+        this.checkDetails?.lastLogIndex &&
+        this.checkDetails?.lastLogIndex != "undefined"
+      ) {
+        this.lastLogIndex = parseInt(this.checkDetails.lastLogIndex) + 1;
+      }
+        this.playURLConstructor(this.checkDetails.link,this.checkDetails.lastModule,this.checkDetails.lastTopic,this.checkDetails.module_id,this.checkDetails.topic_id);
     }
+
     this.Lservice.getModuleData(
       (this.checkDetails && this.checkDetails.id) || this.localStoCourseid,
       this.userDetail.user_id
     ).subscribe((data: any) => {
+      if(data.data.getmoduleData.success){
       this.content = data.data.getmoduleData.data[0];
       this.assignmentVal = false;
       let noresource = false;
@@ -419,37 +436,24 @@ export class CoursedetailsComponent implements OnInit {
 
       this.modulength = this.content.coursedetails.length;
       this.courseTime = this.content.coursetime;
+    }
     });
     // this.getAssignmentmoduleData();
   }
   
   ngOnInit(): void {
     this.translate.use(localStorage.getItem("language"));
-    // this.add_topic_reference(res);
-    // if (this.detailData.course_status === 'completed') {
-    //   this.ratingPopup();
-    // }
-    this.service.menuSelectedPerform.subscribe((emitedData: any) => {
-      this.selectedName = emitedData.selectedName;
-      this.selectedTabIndex = emitedData.selectedTabIndex;
-      this.performOverLay = false;
-    });
-    let resumeInit = true;
-    if (!resumeInit) {
+   
+    // if (!resumeInit) {
       this.socketService.socketReceiver();
+     
       this.socketEmitReciver = this.socketService.change.subscribe(
         (result: any) => {
           console.log(result.data);
-          if (
-            result &&
-            result.eventId &&
-            result.eventId.length &&
-            result.data.childData.length > 0
-          ) {
-            console.log(result.data, "asdfasdjfaklsjdfkl");
+          if (result) {
             if (result.data.course_id === this.courseid) {
               // if(this.userType=="Corporate"){
-              console.log("before if");
+              //Lab URL and btn display
               if (result?.data?.url !== "" && result.data.labActivity == true) {
                 this.eboxUrl = result.data.url;
                 this.showlab = result.data.labActivity;
@@ -458,114 +462,10 @@ export class CoursedetailsComponent implements OnInit {
               }
 
               // }
-
-              if (
-                this.topiccurrentPage !== result.data.resumeSubContent ||
-                result.data.childData[result.data.week - 1].childData[
-                  result.data.resumeContent
-                ].childData[result.data.resumeSubContent]?.status !==
-                  this.topicPageStatus
-              ) {
                 console.log(result.data, "helllllllllllllo");
                 this.scromModuleData = result.data.childData;
                 // this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
-                if (
-                  (this.scromApiData.topicIndex == null ||
-                    this.scromApiData.topicIndex == "0") &&
-                  (this.scromApiData.moduleIndex == null ||
-                    this.scromApiData.moduleIndex == "0") &&
-                  this.scromModuleData[0].childData[0].status == null &&
-                  this.scromModuleData[0].childData[0].childData[0].status ==
-                    null
-                ) {
-                  this.scromModuleData[0].childData[0].status = "process";
-                  this.scromModuleData[0].childData[0].childData[0].status =
-                    "process";
-                }
-                this.currentPage = Number(result.data.resumeContent);
-                this.topiccurrentPage = Number(result.data.resumeSubContent);
-                this.weekHolder = result.data.week - 1;
-                if (this.scromApiData.checkLevel) {
-                  this.currentPage = Number(result.data.module);
-                  this.subModuleHolder = Number(result.data.resumeContent);
-                  this.submoduleTitle =
-                    this.scromApiData.childData[this.weekHolder].childData[
-                      this.currentPage
-                    ].childData[this.subModuleHolder].title;
-                  this.moduleExpand(
-                    this.weekHolderUI,
-                    Number(this.subModuleHolderUI),
-                    this.scromApiData.checkLevel ? this.currentPage : null
-                  );
-                } else {
-                  this.moduleExpand(
-                    this.weekHolder,
-                    this.moduleHolder,
-                    this.scromApiData.checkLevel ? this.subModuleHolder : null
-                  );
-                }
-                this.topicPageStatus = this.scromApiData.checkLevel
-                  ? result.data.childData[this.weekHolder].childData[
-                      this.currentPage
-                    ].childData[this.subModuleHolder].childData[
-                      this.topiccurrentPage
-                    ]?.status
-                  : result.data.childData[this.weekHolder].childData[
-                      this.currentPage
-                    ].childData[this.topiccurrentPage]?.status;
-                this.topicPageStatus = this.topicPageStatus
-                  ? this.topicPageStatus
-                  : "process";
-                this.moduleInfo =
-                  this.scromModuleData[this.weekHolder].childData[
-                    this.currentPage
-                  ];
-                this.topicInfo = this.scromApiData.checkLevel
-                  ? this.scromModuleData[this.weekHolder].childData[
-                      this.currentPage
-                    ].childData[this.subModuleHolder].childData[
-                      this.topiccurrentPage
-                    ]
-                  : this.scromModuleData[this.weekHolder].childData[
-                      this.currentPage
-                    ].childData[this.topiccurrentPage];
 
-                // if (resumeInit) {
-
-                //   this.nextPrevHolder = this.topiccurrentPage;
-                //   this.moduleHolder = this.currentPage;
-                //   this.weekHolderUI = this.weekHolder;
-                //   resumeInit = false;
-                //   this.isprevEnable = true;
-                //   this.isNextEnable = true;
-                // }
-              }
-              // this.moduleExpand(this.weekHolderUI, Number(this.subModuleHolder),this.scromApiData.checkLevel?this.currentPage:null);
-              // if ((this.weekHolder !==0 && this.moduleHolder !== 0) || (this.nextPrevHolder !== 0)) {
-              //   this.isprevEnable = false;
-              // }
-              // if ((((this.weekHolder) !== this.scromModuleData.length - 1)||(this.moduleHolder) !== this.scromModuleData[this.weekHolder-1].childData.length - 1)
-              //   || ((this.nextPrevHolder) !== this.scromModuleData[this.weekHolder-1].childData[this.scromModuleData[this.weekHolder-1].length - 1].childData.length - 1)) {
-              //   this.isNextEnable = false;
-              // }
-
-              this.checkLastFirstIndexReached();
-
-              this.scromModuleData.forEach((childData) => {
-                if (childData && childData.childData) {
-                  childData.childData.forEach((subChild) => {
-                    if (
-                      subChild &&
-                      subChild.childData &&
-                      subChild.childData.length > 0
-                    ) {
-                      this.treeCourse = true;
-                    } else {
-                      this.treeCourse = false;
-                    }
-                  });
-                }
-              });
             }
           } else {
             //INDEX ON COURSE START
@@ -577,36 +477,41 @@ export class CoursedetailsComponent implements OnInit {
           }
         }
       );
-    }
+    // }
     // this.getCoursePlayerStatus();
     // this.getEboxURL();
   }
-
+//Trigger socket for TOC
+// triggerSocket(){
+//     //call socket playerToC
+//     let param:any = {}
+//     param.parent=null
+//     param.contentID = this.courseid
+//     let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8)
+//     param.user_id = id
+//     param.batchid = this.batchId
+    
+//     this.service.getTOC(param).subscribe((dat)=>{
+//       console.log(dat)
+//     })
+// }
   // get Scrom module and topic
   playerModuleAndTopic() {
-    this.Lservice.playerModuleAndTopic(
-      this.courseid,
-      this.userDetail.user_id
-    ).subscribe((data: any) => {
-      this.scromApiData = data.data?.playerModuleAndTopic;
-      if (
-        this.scromApiData?.lastLogIndex &&
-        this.scromApiData?.lastLogIndex != "undefined"
-      ) {
-        this.lastLogIndex = parseInt(this.scromApiData.lastLogIndex) + 1;
-      }
-      if (this.scromApiData?.toc != "0") {
-        if (this.screenWidth < 800) {
-          this.drawersOpen = false;
-        } else {
-          this.drawersOpen = true;
-        }
-      } else {
-        this.drawersOpen = false;
-      }
+    let param:any = {}
+    param.parent=null
+    param.contentID = this.courseid
+    let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8)
+    param.user_id = id
+    param.batchid = this.batchId
+
+    this.service.getTOC(param).subscribe((data: any) => {
+      this.scromApiData = data;
+      
+
+
       this.scromModuleData = this.scromApiData?.message;
       this.weekLength = this.scromApiData.message.length;
-      // this.moduleLenth = this.scromApiData?.childData.length;
+
       if (!this.checkDetails?.fromSuggestion) {
         this.nextPrevHolder = this.topiccurrentPage =
           this.scromApiData.topicIndex == null
@@ -620,13 +525,7 @@ export class CoursedetailsComponent implements OnInit {
           ? 0
           : Number(this.scromApiData.moduleIndex);
         this.weekHolder = this.weekHolderUI = this.scromApiData.week - 1;
-        // if (this.scromApiData.checkLevel) {
-
-        //   this.subModuleHolder = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
-        //   this.subModuleHolderUI = this.scromApiData.moduleIndex == null ? 0 : Number(this.scromApiData.moduleIndex);
-
-        //   this.submoduleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].title
-        // }
+       
       } else {
         this.nextPrevHolder = this.topiccurrentPage = Number(
           this.checkDetails.topicIndex
@@ -636,64 +535,17 @@ export class CoursedetailsComponent implements OnInit {
         );
         this.weekHolder = this.weekHolderUI = this.checkDetails.week - 1;
 
-        // if (this.scromApiData.checkLevel) {
-        //   this.moduleHolder = this.currentPage = Number(this.checkDetails.newmodule);
-        //   this.subModuleHolder = this.checkDetails.moduleIndex == null ? 0 : Number(this.checkDetails.moduleIndex);
-        //   this.subModuleHolderUI = this.checkDetails.moduleIndex == null ? 0 : Number(this.checkDetails.moduleIndex);
-
-        //  this.submoduleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].title
-        // }
       }
-      // this.scromModuleData[this.moduleHolder].expanded = true;
-      // this.oldIdx = this.moduleHolder;
-      // this.topicInfo = this.scromApiData.checkLevel ? this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].childData[this.nextPrevHolder] : this.scromApiData.childData[this.weekHolder].childData[this.moduleHolder].childData[this.nextPrevHolder]
-      // this.topicPageStatus = this.topicInfo.status
-      // if (this.scromApiData.checkLevel) {
-      //   this.moduleExpand(
-      //     this.weekHolder,
-      //     this.subModuleHolder,
-      //     this.moduleHolder
-      //   );
-      // } else {
-      //   this.moduleExpand(this.weekHolder, this.moduleHolder, null);
-      // }
-
+    
       setTimeout(() => {
         if (this.weekHolder > 0)
           this.inputEl
             ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" })
             : "";
       }, 4000);
-      // const moduleTitle = this.scromApiData.checkLevel ? encodeURIComponent(this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].title) : encodeURIComponent(this.scromApiData.childData[this.weekHolder].childData[this.currentPage].title);
-      // const topicTitle = encodeURIComponent(this.scromApiData.checkLevel ? this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.subModuleHolder].childData[this.topiccurrentPage].title : this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage].title);
+      
       this.getuserid = JSON.parse(localStorage.getItem("UserDetails"));
-      // this.currentModuleTitle = this.scromApiData.childData[this.weekHolder].childData[this.currentPage].title;
-      // this.currentTopicTitle = this.topicInfo.title//this.scromApiData.childData[this.weekHolder].childData[this.currentPage].childData[this.topiccurrentPage].title;
-
-      // if((this.scromApiData.topicIndex == null||this.scromApiData.topicIndex == "0") && (this.scromApiData.moduleIndex == null||this.scromApiData.moduleIndex == "0") && this.scromApiData.childData[0].childData[0].status == null && this.scromApiData.childData[0].childData[0].childData[0].status == null){
-      //   this.scromModuleData[0].childData[0].status = 'process'
-      //   this.scromModuleData[0].childData[0].childData[0].status = 'process'
-      // }
-      // let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
-      // if (this.checkDetails?.fromSuggestion) {
-      //   this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
-      //     (environment.scormUrl + '/scormPlayer.html?content_id=' +
-      //       this.courseid + '&user_id=' + id + '&user_obj_id=' +
-      //       this.getuserid._id + '&path=' + this.checkDetails.url +
-      //       '&module_status=' + 'process&week=' + (Number(this.checkDetails.week)).toString()
-      //       + '&module=' + this.checkDetails.moduleName + '&topic=' + this.checkDetails.topicName + '&ModuleIndex=' + this.moduleHolder + '&submoduleIndex=' + (this.scromApiData.checkLevel ? this.subModuleHolder?.toString() : 'null') + '&topicIndex=' + this.nextPrevHolder + '&lastLogIndex=' + this.lastLogIndex);
-      // }
-      // else {
-      //   this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
-      //     (environment.scormUrl + '/scormPlayer.html?content_id=' +
-      //       this.courseid + '&user_id=' + id + '&user_obj_id=' +
-      //       this.getuserid._id + '&path=' + this.scromApiData.url +
-      //       '&module_status=' + 'process&week=' + (Number(this.weekHolder) + 1).toString()
-      //       + '&module=' + moduleTitle + '&topic=' + topicTitle + '&ModuleIndex=' + this.moduleHolder + (this.scromApiData.checkLevel ?'&submoduleIndex=' +  this.subModuleHolder?.toString() : '&submoduleIndex=null') + '&topicIndex=' + this.nextPrevHolder + '&lastLogIndex=' + this.lastLogIndex);
-      // }
-      // this.playerTopicLen = this.scromApiData.total_topic_len;
-      // console.log(this.urlSafe,"playermoduletopicAPI")
-      // tree level
+      
       this.scromModuleData.forEach((childData) => {
         if (childData && childData.childData) {
           childData.childData.forEach((subChild) => {
@@ -713,22 +565,21 @@ export class CoursedetailsComponent implements OnInit {
       if (!this.scromApiData.checkLevel) {
         this.checkLastFirstIndexReached();
       }
-      // this.filterToc();
     });
   }
+  
   gettopicOnModule(week, modul, parent, body) {
     // this.topicData$ = this.gettopicapi(week,module,parent);
+    let param:any = {}
+    param.parent=parent
+    param.contentID = this.courseid
+    let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8)
+    param.user_id = id
+    param.batchid = this.batchId
     if (!body.expanded) {
-      this.Lservice.playerstatus(
-        this.courseid,
-        this.userDetail.user_id,
-        this.batchId,
-        week,
-        modul,
-        parent
-      ).subscribe((data: any) => {
-        let moduletopicApiData = data.data.playerstatus.message
-        if (moduletopicApiData[0].link == null && this.scromApiData.checkLevel) {
+    this.service.getTOC(param).subscribe((data: any) => {
+        let moduletopicApiData = data.message
+        if (moduletopicApiData[0].link == null && this.checkDetails.checkLevel) {
 
           this.subModuleData = moduletopicApiData
         } else {
@@ -739,20 +590,21 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
 
-  playURLConstructor(url,moduleName,topicName){
+  playURLConstructor(url,moduleName,topicName,moduleId,topicId){
+    console.log(moduleName)
     const encodedModuleName = encodeURIComponent(moduleName);
-    const encodedTopicName = this.scromApiData.checkLevel ? encodeURIComponent(topicName):null;
+    const encodedTopicName = this.checkDetails.checklevel? encodeURIComponent(topicName):null;
     let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
     this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
       (environment.scormUrl + '/scormPlayer.html?content_id=' +this.courseid + 
       '&user_id=' + id + 
       '&batchid=' + this.batchId + 
-      '&id=' + this.topicInfo.id + 
-      '&parent=' + this.topicInfo.parent + 
+      '&id=' +topicId+ 
+      '&parent=' +moduleId+ 
       '&path=' + url+ 
       '&module=' + encodedModuleName + 
       '&topic=' + encodedTopicName +
-      '&action=Click&week=' + (Number(this.weekHolder) + 1) + 
+      '&action=Click&week=' + 1 + 
       '&lastLogIndex=' + this.lastLogIndex);
   }
 
@@ -768,6 +620,7 @@ export class CoursedetailsComponent implements OnInit {
     smi,
     moduleIdx?
   ) {
+    console.log(moduleName)
     this.weekHolder = weekIndex;
     this.weekHolderUI = weekIndex;
     this.currentTopicTitle = topicName;
@@ -787,7 +640,7 @@ export class CoursedetailsComponent implements OnInit {
     // this.isprevEnable = true;
     // this.isNextEnable = true;
     this.topicInfo = topicDetail
-    this.playURLConstructor(url,moduleName,topicName)
+    this.playURLConstructor(url,moduleName,topicName,this.topicInfo.parent,this.topicInfo.id)
     console.log(this.urlSafe,"click link")
   }
 
@@ -970,7 +823,7 @@ export class CoursedetailsComponent implements OnInit {
           this.currentTopicTitle = this.gettopicLink.title;
           this.currentModuleTitle = this.moduleInfo.title;
           this.topicPageStatus = this.gettopicLink.status;
-          this.playURLConstructor( this.gettopicLink.link,this.currentModuleTitle,this.currentTopicTitle)
+          this.playURLConstructor( this.gettopicLink.link,this.currentModuleTitle,this.currentTopicTitle,this.topicInfo.parent_id,this.topicInfo.id)
           
         }
       }
@@ -1035,7 +888,7 @@ export class CoursedetailsComponent implements OnInit {
         this.currentTopicTitle = this.gettopicLink.title;
         this.currentModuleTitle = this.moduleInfo.title;
         this.topicPageStatus = this.gettopicLink.status;
-        this.playURLConstructor( this.gettopicLink.link,this.currentModuleTitle,this.currentTopicTitle)
+        this.playURLConstructor( this.gettopicLink.link,this.currentModuleTitle,this.currentTopicTitle,this.topicInfo.parent_id,this.topicInfo.id)
       }
     }
   }

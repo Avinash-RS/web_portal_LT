@@ -61,17 +61,20 @@
 
     <div class="row d-flex justify-content-start" *ngIf='activityShow !== undefined'>
       <div class="moduleImage">
-        <div class="liveSession">
+        <div class="liveSession"> 
+          <div class="video1Container">
+          <app-video-player  [url]="videoSource" *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" ></app-video-player>
+          </div>
           <figure>
-            <img class="sessionImage" *ngIf="!activityShow?.activity_details.livethumbnail" alt="instructor" src="https://assets.lntedutech.com/lxpicons/instructor_image.png" />
+            <img class="sessionImage" *ngIf="!activityShow?.activity_details.livethumbnail && activityShow?.activity_details.activitytype != 'Recorded'" alt="instructor" src="https://assets.lntedutech.com/lxpicons/instructor_image.png" />
           </figure>
           <figure>
-            <img class="sessionImage" *ngIf="activityShow?.activity_details.livethumbnail" alt="instructor" [src]="activityShow?.activity_details.livethumbnail + blobKey" />
+            <img class="sessionImage" *ngIf="activityShow?.activity_details.livethumbnail && activityShow?.activity_details.activitytype != 'Recorded'" alt="instructor" [src]="activityShow?.activity_details.livethumbnail + blobKey" />
           </figure>
-          <div class="playButton">
+          <!-- <div class="playButton">
             <button mat-raised-button *ngIf="activityShow?.status === 'On going' && activityShow?.activity_details.activitytype != 'Recorded'" (click)="getAction(activityShow.activity_details.link)"><em _ngcontent-jjc-c10="" class="lxp-Play_Icon"></em> {{activityShow?.button}}</button>
             <button mat-raised-button *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" (click)="videoPreview(videoRecorded,activityShow.activity_details.link)"><em _ngcontent-jjc-c10="" class="lxp-Play_Icon"></em> {{activityShow?.button}}</button>
-          </div>
+          </div> -->
         </div>
 
         <div class="sessionDetails">
@@ -302,20 +305,20 @@
 
 
 
-<ng-template #videoRecorded>
+<!-- <ng-template #videoRecorded> -->
   <!-- <div class="row">
     <div class="col-12">
       <button mat-mini-fab class="close-buttonVideo">
       </button>
     </div>
   </div> -->
-  <div class="videoContainer">
+  <!-- <div class="videoContainer">
     <div class="closeBtn" (click)="closeModal()">
       <em class="lxp-Close download-icon"></em>
     </div>
-    <app-video-player [url]="videoSource"></app-video-player>
-  </div>
-</ng-template>
+    
+  </div> -->
+<!-- </ng-template> -->
 
 <div class="item" *ngIf="showSkeleton">
   <mat-card class="courseDetailSkeleton" style="box-shadow: none !important;">

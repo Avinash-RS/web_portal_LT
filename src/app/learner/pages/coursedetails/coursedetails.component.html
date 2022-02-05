@@ -1,7 +1,7 @@
 
 <app-header></app-header>
 
-<div oncontextmenu="return false" class="coursePlayerContainer" [ngClass]="scromApiData?.toc != '0' ? 'nonITCourses':'ITcourses'" *ngIf="scromModuleData;else skeletonLoader">
+<div oncontextmenu="return false" class="coursePlayerContainer" [ngClass]="checkDetails?.toc != '0' ? 'nonITCourses':'ITcourses'" *ngIf="scromModuleData;else skeletonLoader">
     <!-- TITLE AND BACK -->
     <div class="titlebar">
         <!-- <div class="downTitle"><em (click)="titleBar?titleBar=false:titleBar=true" [ngClass]="titleBar?'arrUp':'arrDown'" class="lxp-Arrow"></em></div>
@@ -32,12 +32,12 @@
         </div> -->
         <div class="titleBack animateAnimate d-flex justify-content-between align-items-center" [ngClass]="titleBar==true?'fadeOutUp':'fadeInDown'">
             <div class="breadCrumbWrapper">
-                <ul class="breadcrumb" [ngClass]="scromApiData?.toc != '0' ? 'no':'yes'">
+                <ul class="breadcrumb" [ngClass]="checkDetails?.toc != '0' ? 'no':'yes'">
                     <li [ngClass]="drawersOpen ? 'no':'yes'">
                         <!-- <em (click)="goBack()" class="lxp-Go backArrow"></em> -->
                         <span>{{course?.course_name}}</span>
                     </li>
-                    <ng-container *ngIf="scromApiData?.toc != '0' && !scromApiData.checkLevel">
+                    <ng-container *ngIf="checkDetails?.toc != '0' && !checkDetails.checkLevel">
                         <div class="navigation d-flex align-items-center" *ngIf="scromModuleData && filterkey==='All' && drawersOpen===false">
                             <!-- <span class="pipeLine">|</span>  -->
                             <div class="leftArrow">                
@@ -78,7 +78,7 @@
         <!-- TOC DATA -->
         <div class="tocSize" [ngClass]="drawersOpen ? '': 'drawersOpen'">
 
-            <div class="leftToc" *ngIf="scromApiData?.toc != '0'">
+            <div class="leftToc" *ngIf="checkDetails?.toc != '0'">
                 <div class="showHide" (click)="drawersOpen=drawersOpen?false:true" [ngClass]="drawersOpen?'Yes':'No'">
                     <em *ngIf="drawersOpen" class="lxp-TOC_Collapse"></em>
                     <em *ngIf="!drawersOpen" class="lxp-TOC_Expand"></em>
@@ -174,7 +174,7 @@
             <ng-template #tocContent>
                 <div class="leftTocContent" *ngIf="filterkey=='Bookmarked'?(filterData.length>0?true:false):(scromModuleData.length>0?true:true);else emptyTOC">
                     <mat-card *ngFor="let resDat of filterkey=='Bookmarked'?filterData:scromModuleData; let wi = index" [ngClass]="resDat.expanded ? 'expandClass':'collapseClass'" multi displayMode=""
-                        class="topicCard" >
+                        class="topicCardLevel" >
                         <!-- (click)="moduleExpand(resDat,i)" -->
                         <mat-card-title  class="d-flex justify-content-between align-items-center pointer">
                             <div class="tocTitle" >{{'Week -' | translate}} {{resDat.week?resDat.week:wi+1}}</div>
@@ -191,10 +191,10 @@
                                     <span *ngIf="res?.status == null" class="greyColor"></span>
                                 </div>
                                 <div class="topicName">
-                                    <h4 *ngIf="res?.title?.length >= 67" class="moduleName" tooltip="{{res?.title}}">
-                                        {{res?.title | slice:0:71}}...</h4>
-                                    <h4 *ngIf="res?.title?.length < 67" class="moduleName" tooltip="{{res?.title}}">
-                                        {{res?.title}}
+                                    <h4 *ngIf="res?.module_name?.length >= 67" class="moduleName" tooltip="{{res?.module_name}}">
+                                        {{res?.module_name | slice:0:71}}...</h4>
+                                    <h4 *ngIf="res?.module_name?.length < 67" class="moduleName" tooltip="{{res?.module_name}}">
+                                        {{res?.module_name}}
                                     </h4>
                                 </div>
                                 <!-- <div class="progressBar">
@@ -218,10 +218,10 @@
                                             <span *ngIf="subData?.status == null" class="greyColor"></span>
                                         </div>
                                         <div class="topicName">
-                                            <h4 *ngIf="subData?.title?.length >= 67" class="moduleName" tooltip="{{subData?.title}}">
-                                                {{subData?.title | slice:0:71}}...</h4>
-                                            <h4 *ngIf="subData?.title?.length < 67" class="moduleName" tooltip="{{subData?.title}}">
-                                                {{subData?.title}}
+                                            <h4 *ngIf="subData?.module_name?.length >= 67" class="moduleName" tooltip="{{subData?.module_name}}">
+                                                {{subData?.module_name | slice:0:71}}...</h4>
+                                            <h4 *ngIf="subData?.module_name?.length < 67" class="moduleName" tooltip="{{subData?.module_name}}">
+                                                {{subData?.module_name}}
                                             </h4>
                                         </div>
                                         <!-- <div class="progressBar">
@@ -240,9 +240,9 @@
                                             <ul>
                                                 <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of subData?.childData; let ti = index">
                                                     <div *ngIf="wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder" #focuser ></div>
-                                                    <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && smi==subModuleHolder && mi==moduleHolder) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,subData?.title,res?.status,mod,wi,ti,mi,smi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
+                                                    <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && smi==subModuleHolder && mi==moduleHolder) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod?.topic_name,mod.status,subData?.module_name,res?.status,mod,wi,ti,mi,smi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                         <div class="modTitle">
-                                                            <h3 tooltip="{{mod?.title}}">{{mod?.title}}</h3>
+                                                            <h3 tooltip="{{mod?.topic_name}}">{{mod?.topic_name}}</h3>
                                                             <!-- <span class="playVideo"><em class="lxp-PlayCircle"></em> Video</span>
                                                             <span class="videoDuration"><em class="lxp-Clock"></em> 30:00 min</span> -->
                                                         </div>
@@ -271,9 +271,9 @@
                                         <!-- <ng-container *ngIf="(topicData$|async).data.playerstatus.message"></ng-container> -->
                                         <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of( res.childData) let ti = index">
                                             <div *ngIf="wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder" #focuser ></div>
-                                            <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.title,mod.status,res?.title,res?.status,mod,wi,ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
+                                            <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.topic_name,mod.status,res?.module_name,res?.status,mod,wi,ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                 <div class="modTitle">
-                                                    <h3 tooltip="{{mod?.title}}">{{mod?.title}}</h3>
+                                                    <h3 tooltip="{{mod?.topic_name}}">{{mod?.topic_name}}</h3>
                                                     <!-- <span class="playVideo"><em class="lxp-PlayCircle"></em> Video</span>
                                                     <span class="videoDuration"><em class="lxp-Clock"></em> 30:00 min</span> -->
                                                 </div>
@@ -347,12 +347,12 @@
         
         <div class="d-flex justify-content-between understoodBookmark" [ngClass]="!drawersOpen ? 'Yes':'No'">
             <div class="popupContent d-flex align-items-center">
-                <div class="wrapper d-flex align-items-center" *ngIf="drawersOpen || scromApiData?.toc == '0'">
+                <div class="wrapper d-flex align-items-center" *ngIf="drawersOpen || checkDetails?.toc == '0'">
                     <span class="abtCourse" (click)="aboutCourse(aboutCourseWindow)"><em class="lxp-Info"></em> <span>{{'About the Course' | translate}}</span></span>
                     <span class="resourcesTab" (click)="openResourse(resourseWindow)"><em class="lxp-Image_Folder"></em> <span>{{'Course Resources' | translate}}</span></span>
                     <span class="downloadCode" (click)="downloadResource();" *ngIf="scromApiData.resourceUrl"><em class="lxp-Download_Code"></em> <span>{{'Download Code exercises' | translate}}</span></span>
                 </div>
-                <div *ngIf="scromApiData?.toc != '0'" class="d-flex align-items-center moduleTopicWrapper">
+                <div *ngIf="checkDetails?.toc != '0'" class="d-flex align-items-center moduleTopicWrapper">
                     <div *ngIf="!drawersOpen" class="currentModuleTopic">
                         <div class="curentVideoWeek">{{'Week' | translate}} <span>{{weekHolderUI+1}}</span></div>
                         <div class="currentVideoModuleTopic">
