@@ -333,6 +333,7 @@ export class CoursedetailsComponent implements OnInit {
     if (this.checkDetails === undefined) {
       this.batchId = localStorage.getItem("currentBatchId");
       this.batchEndTime = localStorage.getItem("currentBatchEndDate");
+      this.checkDetails = JSON.parse(localStorage.getItem("resumeData"));//it receives only partial data
     } else {
       if (this.checkDetails.fromCalendar) {
         this.fromCalendar = true;
@@ -472,10 +473,12 @@ export class CoursedetailsComponent implements OnInit {
             }
             //expanding
             if (this.checkDetails.checklevel) {
-              
+              console.log(this.scromModuleData)
+              this.scromModuleData[this.weekHolder].childData[this.moduleHolder].status= result.data.status;
+              this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].childData = result.data.message;
               this.moduleExpand(this.weekHolder, Number(this.subModuleHolderUI),this.scromApiData.checkLevel?this.moduleHolder:null);
             }else{
-              console.log(this.scromModuleData)
+            
               this.scromModuleData[this.weekHolder].childData[this.moduleHolder].status= result.data.status;
               this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData = result.data.message;
               this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
@@ -1071,9 +1074,9 @@ export class CoursedetailsComponent implements OnInit {
       this.getuserid.user_id,
       this.courseid,
       this.batchId,
-      this.topicInfo.id,
-      this.topicInfo.parent_id,
+      this.topicInfo.parent,
       ux,
+      this.topicInfo?.id?.toString(),
       this.topicInfo.status
     ).subscribe((data: any) => {
       if (data?.data?.userexperience?.success) {
@@ -1083,26 +1086,25 @@ export class CoursedetailsComponent implements OnInit {
       }
     });
   }
-
   bookmarkClick(isbokmarked) {
+    console.log(this.topicInfo)
     this.topicInfo.bookmark = isbokmarked;
     this.Lservice.bookmark(
       this.getuserid.user_id,
       this.courseid,
-      this.scromApiData.checkLevel
-        ? this.submoduleTitle
-        : this.currentModuleTitle,
-      this.currentTopicTitle,
+      this.batchId,
+      this.topicInfo.parent,
       isbokmarked,
-      Number(this.weekHolderUI) + 1,
-      this.lastLogIndex,
-      this.moduleHolder,
-      this.subModuleHolder,
-      this.nextPrevHolder
+      this.lastLogIndex?.toString(),
+      this.topicInfo?.id?.toString(),
+      // this.checkDetails.checkLevel
+      //   ? this.submoduleTitle
+      //   : this.currentModuleTitle,
+      ""
     ).subscribe((data: any) => {
       if (data?.data?.bookmark?.success) {
         this.topicInfo.bookmark = isbokmarked;
-        this.filterToc();
+        // this.filterToc();
       } else {
         // this.toastr.warning(data?.data?.bookmark?.message)
       }
