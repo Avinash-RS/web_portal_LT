@@ -1070,18 +1070,16 @@ export const markAsRead = gql`
     }
   }
 `;
-export const user_experience = gql`
-  mutation userexperience($user_id:String!,$course_id:String,$batchid:String,$id:float,$parent:float,$userexperience:String!,$status:String) {
-    userexperience(user_id:$user_id,course_id:$course_id,batchid:$batchid,id:$id,parent:$parent,userexperience:$userexperience,status:$status) {
-      message
+export const userexperienceQry = gql`
+mutation userexperience($user_id:String!,$course_id:String,$batchid:String!,$parent:String,$user_experience:String!,$id:String,$status:String) {
+    userexperience(user_id:$user_id,course_id:$course_id,batchid:$batchid,parent:$parent,user_experience:$user_experience,id:$id,status:$status) {
       success
     }
   }
 `;
 export const set_bookmark = gql`
-  mutation bookmark($user_id:String!,$course_id:String,$module:String,$topic:String,$bookmark:Boolean,$week:String,$lastLogIndex:String,$ModuleIndex:String,$submoduleIndex:String,$topicIndex:String) {
-    bookmark(user_id:$user_id,course_id:$course_id,module:$module,topic:$topic,bookmark:$bookmark,week:$week,lastLogIndex:$lastLogIndex,ModuleIndex:$ModuleIndex,submoduleIndex:$submoduleIndex,topicIndex:$topicIndex) {
-      message
+  mutation bookmark($user_id:String!,$course_id:String,$batchid:String,$parent:String,$bookmark:Boolean,$lastLogIndex:String,$id:String,$moduleName:String) {
+    bookmark(user_id:$user_id,course_id:$course_id,batchid:$batchid,parent:$parent,bookmark:$bookmark,lastLogIndex:$lastLogIndex,id:$id,moduleName:$moduleName) {
       success
     }
   }
