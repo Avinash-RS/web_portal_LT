@@ -400,7 +400,7 @@
                     </button>
                     <!-- <button class="notesBtn"><em class="lxp-Notes"></em> <span>Notes</span></button> -->
                      <button class="bookmarkBtn" *ngIf="userType!='Corporate'" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
-                         <em [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></em> <span [ngClass]="topicInfo?.bookmark?'bold':'normal'">{{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? 'Bookmarked':'Bookmark'}}</span>
+                         <em [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></em> <span [ngClass]="topicInfo?.bookmark?'bold':'normal'">{{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? translate.instant('Bookmarked'): translate.instant('Bookmark')}}</span>
                      </button>
                 </div>
             </div>
@@ -644,7 +644,7 @@
                 </div>
                 <ng-template #noitems>
                     <div  class="myQuestions d-flex align-items-center justify-content-center">
-                        {{isQALoading?'Loading...':'You have not asked any questions!'}}
+                        {{isQALoading? translate.instant('Loading...') : translate.instant('You have not asked any questions!')}}
                     </div>
                 </ng-template>
                 
@@ -667,7 +667,7 @@
                     </span>
                         <p class="quesiton">{{item.filteredValue.question.que}}</p>
                         <div class="QuestionMeta">
-                            <div class=" badge-success font-weight-lighter">Answered</div>
+                            <div class=" badge-success font-weight-lighter">{{'Answered' | translate}}</div>
                             <p>&nbsp; {{item.filteredValue.question.ansDate}},&nbsp;{{item.filteredValue.question.ansTime}}</p>
                         </div>
                         <p class="answer"*ngIf="item.filteredValue.question.ansDate">{{item.filteredValue.question.ans}}</p>

@@ -24,7 +24,7 @@ export class QuestionanswerComponent implements OnInit {
     height: '20rem',
     minHeight: '5rem',
     placeholder: 'Please ask your question with concise and add any other details here',
-    translate: 'no',
+    translate: 'yes',
     defaultParagraphSeparator: '',
     defaultFontName: 'Arial',
     toolbarHiddenButtons: [
