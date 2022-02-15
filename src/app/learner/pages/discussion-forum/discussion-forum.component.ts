@@ -114,11 +114,19 @@ export class DiscussionForumComponent implements OnInit {
   playerModuleAndTopic(cid) {
     // this.cS.loader$.next(true);
     this.loading = true;
-    this.Lservice.playerModuleAndTopic(cid, this.userDetail.user_id).subscribe((data: any) => {
-      this.checkLevel = data.data?.playerModuleAndTopic?.message && data.data?.playerModuleAndTopic?.message[0].checkLevel;
-      this.scromModuleData = data.data?.playerModuleAndTopic?.message && data.data?.playerModuleAndTopic?.message[0]?.childData || [];
-      this.selectedModuleData = this.scromModuleData[0].childData[0] || null;
+    let param:any = {}
+    param.parent=""
+    param.contentID = cid
+    let id = CryptoJS.AES.decrypt(this.userDetail.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8)
+    param.user_id = id
+    param.batchid = this.course.batchdetails?.batchid
+    console.log(param)
+    this.cS.getTOC(param).subscribe((data: any) => {
+      this.checkLevel = data.message && data.checkLevel;
+      this.scromModuleData = data?.message && data?.message || [];
+      this.selectedModuleData = this.scromModuleData[0]?.childData[0] || null;
       this.loading = false;
+      console.log(this.scromModuleData)
       if (this.selectedModuleData) {
         this.loading = true;
         this.selectedModuleData.indexValue = 1;
@@ -154,7 +162,7 @@ export class DiscussionForumComponent implements OnInit {
   viewAllThreads(c?) {
     // this.cS.loader$.next(true);
     this.loading = true;
-    this.Lservice.ViewAllThreadData(this.selectedModuleData?.title, this.course.id, this.batchDetails?.batchid)
+    this.Lservice.ViewAllThreadData(this.selectedModuleData?.module_name, this.course.id, this.batchDetails?.batchid)
       .subscribe((result: any) => {
         const temp = result.data.ViewAllThreadData.data;
         if (result?.data?.ViewAllThreadData?.data !== '' && result?.data?.ViewAllThreadData !== null) {
@@ -249,7 +257,7 @@ export class DiscussionForumComponent implements OnInit {
           toPid: CryptoJS.AES.encrypt((pidData?.pid ? pidData.pid : 0).toString(), this.secretKey.trim()).toString(),
           course_id: this.course.id,
           course_name: this.course.name, // course name should come
-          module_name: this.selectedModuleData.title,
+          module_name: this.selectedModuleData.module_name,
           thread_id: (this.selectedThreadData.tid).toString(),
           thread_name: this.selectedThreadData.title,
           created_by: this.userDetail.username,
@@ -454,7 +462,7 @@ export class DiscussionForumComponent implements OnInit {
         this.loading = true;
         this.closedialogbox();
         const mask = CryptoJS.AES.encrypt(this.userDetail?.nodebb_response?.uid.toString(), this.secretKey.trim()).toString();
-        this.Lservice.createNewThread(mask, this.course.id, this.selectedModuleData?.title,
+        this.Lservice.createNewThread(mask, this.course.id, this.selectedModuleData?.module_name,
           this.addThreadForm.value.thread_name, this.addThreadForm.value.thread_description, this.course.name,
           bid)
           .subscribe((result: any) => {

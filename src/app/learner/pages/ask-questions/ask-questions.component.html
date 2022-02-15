@@ -10,7 +10,7 @@
             <div class="courseTitle text-truncate"> | <span>{{courseName}} > {{'All Questions and Answer' | translate}}</span></div>
         </div>
     </div>
-    <div class="d-flex justify-content-between flex-wrap mx-20px" *ngIf="moduleTopicData?.length">
+    <div class="d-flex justify-content-between flex-wrap mx-20px"  *ngIf="moduleTopicData?.length">
         <div class=" align-self-center">
             <div class="d-inline-block mt-10px mr-30px">
                 <span>{{'Sort by: ' | translate}}&nbsp;</span>
@@ -25,14 +25,14 @@
                 <select class="sel-pad mr-20px" [(ngModel)]="mainModule" (change)="mainQAFilter('M')">
                     <option [ngValue]="null" [disabled]="false">{{'All Modules' | translate}}</option>
                     <ng-container *ngFor="let skipper of moduleTopicData">
-                        <option  *ngFor="let item of skipper.childData" [ngValue]="item">{{item.title}}</option>
+                        <option  *ngFor="let item of skipper.childData" [title]="item.module_name" [ngValue]="item">{{item?.module_name?.length<41?item?.module_name:(item?.module_name| slice:0:40)+'...'}}</option>
                     </ng-container>
                 </select>
                 </div>
                 <div class=" d-inline-block mt-10px">
                 <select *ngIf="mainModule" class="sel-pad " [(ngModel)]="mainTopic" (change)="mainQAFilter('T')">
                     <option [ngValue]="null" [disabled]="false">{{'All Topics' | translate}}</option>
-                    <option  *ngFor="let item of mainModule.childData" [ngValue]="item.title">{{item.title}}</option>
+                    <option  *ngFor="let item of mainModule.childData" [title]="item.topic_name" [ngValue]="item.topic_name">{{item?.topic_name?.length<41?item?.topic_name:(item?.topic_name| slice:0:40)+'...'}}</option>
                 </select>
             </div>
             </span>
@@ -41,13 +41,13 @@
                 <span>{{'Filter by: ' | translate}}&nbsp;</span>
                 <select class="sel-pad mr-20px" [(ngModel)]="mainModule" (change)="mainQAFilter('M')">
                     <option [ngValue]="null" [disabled]="false">{{'All Modules' | translate}}</option>
-                    <option  *ngFor="let item of moduleTopicData" [ngValue]="item">{{item.title}}</option>
+                    <option  *ngFor="let item of moduleTopicData" [ngValue]="item">{{item?.module_name?.length<41?item?.module_name:(item?.module_name| slice:0:40)+'...'}}</option>
                 </select>
                 </div>
                 <div class=" d-inline-block mt-10px">
                 <select *ngIf="mainModule" class="sel-pad " [(ngModel)]="mainTopic" (change)="mainQAFilter('T')">
                     <option [ngValue]="null" [disabled]="false">{{'All Topics' | translate}}</option>
-                    <option  *ngFor="let item of mainModule.childData" [ngValue]="item.title">{{item.title}}</option>
+                    <option  *ngFor="let item of mainModule.childData" [ngValue]="item.topic_name">{{item?.topic_name?.length<41?item?.topic_name:(item?.topic_name| slice:0:40)+'...'}}</option>
                 </select>
             </div>
         </ng-template>
@@ -90,28 +90,29 @@
                 (click)="closedialogbox()" class="lxp-Close"></i></span>
     </div>
     <div class="askQuestionsContainer mx-20px"(contextmenu)="contextmenu()">
-        <span *ngIf="checkLevel;else qinputlist"></span>
+        <span *ngIf="checkLevel;else qinputlist">
         <div class="mt-10px  d-inline-block" >
             <select class="sel-pad-modal" [(ngModel)]="questionTopicList" (change)="askQAModuleSelect()">
                 <option [ngValue]="null" [disabled]="true">{{'Please select a module' | translate}}</option>
                 <ng-container *ngFor="let skipper of moduleTopicData">
-                <option  *ngFor="let item of skipper.childData" [ngValue]="item">{{item.title}}</option>
+                <option  *ngFor="let item of skipper.childData" [title]="item.module_name" [ngValue]="item">{{item?.module_name?.length<41?item?.module_name:(item?.module_name| slice:0:40)+'...'}}</option>
                 </ng-container>
             </select>
             <select *ngIf="questionTopicList" class="sel-pad-modal ml-20px" [(ngModel)]="questionTopic" >
                 <option [ngValue]="null" [disabled]="true">{{'Please select a topic' | translate}}</option>
-                <option  *ngFor="let item of questionTopicList.childData" [ngValue]="item.title">{{item.title}}</option>
+                <option  *ngFor="let item of questionTopicList.childData"  [title]="item.topic_name" [ngValue]="item.topic_name">{{item?.topic_name?.length<41?item?.topic_name:(item?.topic_name| slice:0:40)+'...'}}</option>
             </select>
         </div>
+        </span>
         <ng-template #qinputlist>
             <div class="mt-10px  d-inline-block" >
                 <select class="sel-pad-modal" [(ngModel)]="questionTopicList" (change)="askQAModuleSelect()">
                     <option [ngValue]="null" [disabled]="true">{{'Please select a module' | translate}}</option>
-                    <option  *ngFor="let item of moduleTopicData" [ngValue]="item">{{item.title}}</option>
+                    <option  *ngFor="let item of moduleTopicData"  [title]="item.module_name" [ngValue]="item">{{item?.module_name?.length<41?item?.module_name:(item?.module_name| slice:0:40)+'...'}}</option>
                 </select>
                 <select *ngIf="questionTopicList" class="sel-pad-modal ml-20px" [(ngModel)]="questionTopic" >
                     <option [ngValue]="null" [disabled]="true">{{'Please select a topic' | translate}}</option>
-                    <option  *ngFor="let item of questionTopicList.childData" [ngValue]="item.title">{{item.title}}</option>
+                    <option  *ngFor="let item of questionTopicList.childData"  [title]="item.topic_name" [ngValue]="item.topic_name">{{item?.topic_name?.length<41?item?.topic_name:(item?.topic_name| slice:0:40)+'...'}}</option>
                 </select>
             </div>
         </ng-template>

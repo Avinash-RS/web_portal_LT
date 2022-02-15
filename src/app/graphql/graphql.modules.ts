@@ -63,7 +63,7 @@ export class GraphqlModule {
     const Errlink = onError(({ graphQLErrors, networkError, response, operation }) => {
       if (graphQLErrors) {
         graphQLErrors.forEach(({ message, locations, path }) => {
-          if (message.includes('TokenExpiredError') || message.includes('JsonWebTokenError')) {
+          if (message.toString().includes('TokenExpiredError') || message.toString().includes('JsonWebTokenError')) {
             localStorage.clear();
             sessionStorage.clear();
             this.services.getIpAddressByUrl();

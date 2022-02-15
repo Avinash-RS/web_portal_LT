@@ -399,6 +399,7 @@ export class CoursedetailsComponent implements OnInit {
         this.lastLogIndex = parseInt(this.checkDetails.lastLogIndex) + 1;
       }
         this.playURLConstructor(this.checkDetails.link,this.checkDetails.lastModule,this.checkDetails.lastTopic,this.checkDetails.module_id,this.checkDetails.topic_id);
+        
     }
 
     this.Lservice.getModuleData(
@@ -556,7 +557,9 @@ export class CoursedetailsComponent implements OnInit {
         this.weekHolder = this.weekHolderUI = this.checkDetails.week - 1;
 
       }
-    
+    // if(this.checkDetails.course_status == "start"){
+      this.moduleExpand(0, 0, 0,)
+      // }
       setTimeout(() => {
         if (this.weekHolder > 0)
           this.inputEl
@@ -1114,14 +1117,12 @@ export class CoursedetailsComponent implements OnInit {
     event.preventDefault();
   }
   submitMyQuestion() {
-    if (this.currentModuleTitle || this.currentTopicTitle) {
+    if (this.topicInfo || this.currentTopicTitle) {
       if (this.questionText.trim().length) {
         this.Lservice.askaquestion(
           this.getuserid.user_id,
           this.courseid,
-          this.scromApiData.checkLevel
-            ? this.submoduleTitle
-            : this.currentModuleTitle,
+          this.topicInfo.parent,
           this.currentTopicTitle,
           this.questionText
         ).subscribe((data: any) => {
@@ -1138,7 +1139,7 @@ export class CoursedetailsComponent implements OnInit {
         this.toastr.warning("Please enter some text");
       }
     } else {
-      this.toastr.warning("Please select a module");
+      this.toastr.warning("Please select a topic");
     }
   }
 
@@ -1150,9 +1151,7 @@ export class CoursedetailsComponent implements OnInit {
       this.Lservice.getMyQuestion(
         this.getuserid.user_id,
         this.courseid,
-        this.scromApiData.checkLevel
-          ? this.submoduleTitle
-          : this.currentModuleTitle,
+        this.topicInfo.parent,
         this.currentTopicTitle
       ).subscribe((data: any) => {
         this.isQALoading = false;
@@ -1169,9 +1168,7 @@ export class CoursedetailsComponent implements OnInit {
       this.Lservice.getallquestion(
         this.getuserid.user_id,
         this.courseid,
-        this.scromApiData.checkLevel
-          ? this.submoduleTitle
-          : this.currentModuleTitle,
+        this.topicInfo.parent,
         this.currentTopicTitle,
         -1,
         this.batchId
@@ -1204,9 +1201,9 @@ export class CoursedetailsComponent implements OnInit {
     this.Lservice.getallquestion(
       this.getuserid.user_id,
       this.courseid,
-      this.currentModuleTitle,
+      this.topicInfo.parent,
       this.currentTopicTitle,
-      this.qaFilterKey,
+     parseInt(this.qaFilterKey),
       this.batchId
     ).subscribe((data: any) => {
       this.isQALoading = false;
