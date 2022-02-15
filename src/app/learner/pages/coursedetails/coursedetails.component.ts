@@ -66,7 +66,7 @@ export class CoursedetailsComponent implements OnInit {
     minHeight: "5rem",
     placeholder:
       "Please ask your question with concise and add any other details here",
-    translate: "no",
+    translate: "yes",
     defaultParagraphSeparator: "",
     defaultFontName: "Arial",
     toolbarHiddenButtons: [

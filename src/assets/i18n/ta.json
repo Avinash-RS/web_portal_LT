@@ -16,7 +16,7 @@
   "Sign up":"பதிவு செய்யவும்",
   "Info":"தகவல்",
   "Please clear browser cache before logging into the application.":"பயன்பாட்டில் உள்நுழைவதற்கு முன் உலாவி தற்காலிக சேமிப்பை அழிக்கவும்.",
-  "If you need any assistance, kindly reach us at":"உங்களுக்கு ஏதேனும் உதவி தேவைப்பட்டால், தயவுசெய்து எங்களை தொடர்பு கொள்ளவும்",
+  "If you need any assistance, kindly reach us at ":"உங்களுக்கு ஏதேனும் உதவி தேவைப்பட்டால், தயவுசெய்து எங்களை தொடர்பு கொள்ளவும்",
   "Download our Mobile app":"எங்கள் மொபைல் பயன்பாட்டைப் பதிவிறக்கவும்",
 
   "Forgot Password?":"கடவுச்சொல்லை மறந்துவிட்டீர்களா?",
@@ -42,7 +42,7 @@
   "Note":"குறிப்பு",
   ": Full name will be used in your certificates":": உங்கள் சான்றிதழ்களில் முழுப் பெயர் பயன்படுத்தப்படும்",
   "SIGN UP":"பதிவு செய்யவும்",
-  "Already have an account?":"ஏற்கனவே ஒரு கணக்கு உள்ளதா?",
+  "Already have an account? ":"ஏற்கனவே ஒரு கணக்கு உள்ளதா?",
   "Sign in":"உள்நுழையவும்",
 
   "Edit":"தொகு",
@@ -143,10 +143,11 @@
   "TOPIC:":"தலைப்பு:",
   "Information technology and Operation":"தகவல் தொழில்நுட்பம் மற்றும் செயல்பாடு",
   "Recently Completed Topics":"சமீபத்தில் முடிக்கப்பட்ட தலைப்புகள்",
-  "L&T EduTech. All Rights Reserved.":"எல்&டி எடுடெக். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
+  " L&T EduTech. All Rights Reserved.":" எல்&டி எடுடெக். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
   "You have no":"உங்களிடம் இல்லை",
   "courses at the moment!":"இந்த நேரத்தில் படிப்புகள்!",
 
+  "Scan this QR Code":"இந்த QR குறியீட்டை ஸ்கேன் செய்யவும்",
   "Download":"பதிவிறக்க",
   "Google authenticator":"Google அங்கீகரிப்பான்",
   "App in your mobile to scan this code":"இந்தக் குறியீட்டை ஸ்கேன் செய்ய உங்கள் மொபைலில் உள்ள ஆப்",
@@ -189,9 +190,12 @@
   "Your question will be answered soon":"உங்கள் கேள்விக்கு விரைவில் பதில் கிடைக்கும்",
   "No Q&A's to display at the moment":"தற்போது எந்த கேள்விபதில்களும் காட்டப்படவில்லை",
   "No results found":"முடிவுகள் எதுவும் இல்லை",
+  "Please ask your question with concise and add any other details here":"தயவு செய்து உங்கள் கேள்வியை சுருக்கமாக கேட்டு மற்ற விவரங்களை இங்கே சேர்க்கவும்",
 
   "Back":"மீண்டும்",
   "All Questions and Answer":"அனைத்து கேள்விகளும் பதில்களும்",
+  "Loading...":"ஏற்றுகிறது...",
+  "You have not asked any questions!":"நீங்கள் எந்த கேள்வியும் கேட்கவில்லை!",
   "Sort by:":"இதன்படி வரிசைப்படுத்தவும்:",
   "Newest":"புதியது",
   "Oldest":"பழமையான",
@@ -222,6 +226,7 @@
 
   "assignment":"பணி நியமனம்",
   "Activity description:":"செயல் விளக்கம்:",
+  "Activity Description:":"செயல் விளக்கம்:",
   "Total Score:":"மொத்த மதிப்பெண்:",
   "Total score:":"மொத்த மதிப்பெண்:",
   "Yet to submit":"இன்னும் சமர்ப்பிக்க வேண்டும்",
@@ -346,6 +351,7 @@
   "Resume":"மீண்டும் தொடர்",
   "Start":"தொடங்கு",
   "Replay":"மறு",
+  "Join Now":"இப்போது சேரவும்",
   "Progression":"முன்னேற்றம்",
   "By:":"மூலம்:",
   "Credits:":"கடன்:",
@@ -359,6 +365,8 @@
 
   "Course Contents":"பாடத்தின் உள்ளடக்கம்",
   "Bookmarks":"புக்மார்க்குகள்",
+  "Bookmark":"புத்தககுறி",
+  "Bookmarked":"புக்மார்க் செய்யப்பட்டது",
   "You have not added any bookmarks!":"நீங்கள் எந்த புக்மார்க்குகளையும் சேர்க்கவில்லை!",
   "Week -":"வாரம் -",
   "About the Course":"பாடநெறி பற்றி",
@@ -407,5 +415,9 @@
   "Attended Session":"அமர்வில் கலந்து கொண்டார்",
   "Attended Sessions":"அமர்வுகளில் கலந்துகொண்டார்",
   "Recorded Video":"பதிவு செய்யப்பட்ட வீடியோ",
-  "Recorded Videos":"பதிவு செய்யப்பட்ட வீடியோக்கள்"
+  "Recorded Videos":"பதிவு செய்யப்பட்ட வீடியோக்கள்",
+
+  "OK":"சரி",
+  "Yes":"ஆம்",
+  "No":"இல்லை"
 }
