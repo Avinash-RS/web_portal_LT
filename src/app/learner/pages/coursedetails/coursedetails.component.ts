@@ -533,7 +533,7 @@ export class CoursedetailsComponent implements OnInit {
       this.scromModuleData = this.scromApiData?.message;
       this.weekLength = this.scromApiData.message.length;
 
-      if (!this.checkDetails?.fromSuggestion) {
+            if (!this.checkDetails?.fromSuggestion) {
         this.nextPrevHolder = this.topiccurrentPage =
           this.scromApiData.topicIndex == null
             ? 0
@@ -557,9 +557,7 @@ export class CoursedetailsComponent implements OnInit {
         this.weekHolder = this.weekHolderUI = this.checkDetails.week - 1;
 
       }
-    // if(this.checkDetails.course_status == "start"){
-      this.moduleExpand(0, 0, 0,)
-      // }
+    
       setTimeout(() => {
         if (this.weekHolder > 0)
           this.inputEl
@@ -569,22 +567,23 @@ export class CoursedetailsComponent implements OnInit {
       
       this.getuserid = JSON.parse(localStorage.getItem("UserDetails"));
       
-      this.scromModuleData.forEach((childData) => {
-        if (childData && childData.childData) {
-          childData.childData.forEach((subChild) => {
-            if (
-              subChild &&
-              subChild.childData &&
-              subChild.childData.length > 0
-            ) {
-              // Check TOC Weekwise or module topic wise
-              this.treeCourse = true;
-            } else {
-              this.treeCourse = false;
-            }
-          });
+      //start course
+      if(this.checkDetails.course_status == "start"){
+        let bodyData
+        if(this.checkDetails.checklevel){
+          bodyData = this.scromModuleData[0].childData[0].childData[0]
+        }else{
+          bodyData = this.scromModuleData[0].childData[0]
         }
-      });
+        this.gettopicOnModule(0, 0, bodyData.id, bodyData);
+        this.moduleExpand(0, 0, 0,);
+        this.weekHolder = this.weekHolderUI = 0
+        this.nextPrevHolder = this.topiccurrentPage = 0;
+        this.moduleHolder = this.currentPage = 0;
+        this.subModuleHolder = 0;
+
+        }
+
       if (!this.scromApiData.checkLevel) {
         this.checkLastFirstIndexReached();
       }
