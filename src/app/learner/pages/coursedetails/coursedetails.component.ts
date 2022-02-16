@@ -575,8 +575,8 @@ export class CoursedetailsComponent implements OnInit {
         }else{
           bodyData = this.scromModuleData[0].childData[0]
         }
-        this.gettopicOnModule(0, 0, bodyData.id, bodyData);
-        this.moduleExpand(0, 0, 0,);
+        this.gettopicOnModule(0, "start", bodyData.id, bodyData);
+        this.moduleExpand(0,0,0);
         this.weekHolder = this.weekHolderUI = 0
         this.nextPrevHolder = this.topiccurrentPage = 0;
         this.moduleHolder = this.currentPage = 0;
@@ -601,19 +601,16 @@ export class CoursedetailsComponent implements OnInit {
     if (!body.expanded) {
     this.service.getTOC(param).subscribe((data: any) => {
         let moduletopicApiData = data.message
-        if (moduletopicApiData[0].link == null && this.checkDetails.checkLevel) {
-
-          this.subModuleData = moduletopicApiData
-        } else {
-          this.topicData$ = moduletopicApiData
-        }
         body.childData = [...moduletopicApiData]
+        if(modul==='start'){
+          this.topicInfo = moduletopicApiData[0]
+        }
       })
     }
   }
 
   playURLConstructor(url,moduleName,topicName,moduleId,topicId){
-    console.log(moduleName)
+    console.log(moduleId,topicId)
     const encodedModuleName = encodeURIComponent(moduleName);
     const encodedTopicName = encodeURIComponent(topicName);
     let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
