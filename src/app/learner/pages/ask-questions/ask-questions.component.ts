@@ -5,6 +5,9 @@ import { GlobalServiceService } from "@core/services/handlers/global-service.ser
 import { LearnerServicesService } from "@learner/services/learner-services.service";
 import { ToastrService } from "ngx-toastr";
 import { TranslateService } from '@ngx-translate/core';
+import { CommonServicesService } from "@core/services/common-services.service";
+import * as CryptoJS from 'crypto-js';
+
 // import { NgxUiLoaderService, SPINNER } from "ngx-ui-loader";
 
 @Component({
@@ -35,6 +38,7 @@ export class AskQuestionsComponent implements OnInit {
   loadMessage:any='Loading..';
   emptyMessage:any='No Questions / Answers to display.';
   screenWidth: number;
+  secretKey = "(!@#Passcode!@#)";
 
   dateObj = new Date()
   currentDate = new Date(this.dateObj.getFullYear() + '-' + (this.dateObj.getMonth() + 1) + '-' + this.dateObj.getDate()).getTime();
@@ -47,6 +51,7 @@ export class AskQuestionsComponent implements OnInit {
     private gs: GlobalServiceService,
     private toastr: ToastrService,
     public translate: TranslateService,
+    public commonService: CommonServicesService
     // private ngxLoader: NgxUiLoaderService
   ) {
     let lang = localStorage.getItem('language')
@@ -99,10 +104,17 @@ export class AskQuestionsComponent implements OnInit {
   }
 
   getPlayerModuleTopic() {
-    this.Lservice.playerModuleAndTopic(this.courseid, this.userDetail.user_id).subscribe((data: any) => {
-      if(data.data?.playerModuleAndTopic?.success=== true){
-        this.checkLevel = data.data?.playerModuleAndTopic?.message[0].checkLevel;
-        let tmpData = data.data?.playerModuleAndTopic?.message[0].childData;
+    let param:any = {}
+    param.parent=""
+    param.contentID = this.courseid
+    let id = CryptoJS.AES.decrypt(this.userDetail.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8)
+    param.user_id = id
+    param.batchid = this.batchId
+    console.log(param)
+    this.commonService.getTOC(param).subscribe((data: any) => {
+      if(data.success=== true){
+        this.checkLevel = data.checkLevel;
+        let tmpData = data?.message;
         this.moduleTopicData = []
         tmpData.forEach(element => {
           this.moduleTopicData.push(... element.childData)
@@ -136,15 +148,34 @@ export class AskQuestionsComponent implements OnInit {
     this.mainPagenumber=0;
     this.allQuestionList = []
     if(call==='M'){
+      this.getTopicV2(this.mainModule.id,'filter');
       this.mainModuleName = this.mainModule?this.mainModule.title:null;
       this.mainTopic=null
     }
     this.getQuestionsAnswerlists()
 
   }
+  getTopicV2(parent,call){
+    let param:any = {}
+    param.parent=parent
+    param.contentID = this.courseid
+    let id = CryptoJS.AES.decrypt(this.userDetail.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8)
+    param.user_id = id
+    param.batchid = this.batchId
+    console.log(param)
+    this.commonService.getTOC(param).subscribe((data: any) => {
+      if(call==='filter'){
+        this.mainModule.childData = data.message
+      }
+      if(call==='selector'){
+        this.questionTopicList.childData = data.message
+      }
+    })
+  }
 
   askQAModuleSelect(){
-    this.questionModule = this.questionTopicList?.title
+    this.getTopicV2(this.questionTopicList.id,'selector')
+    this.questionModule = this.questionTopicList?.id
     this.questionTopic=null
   }
 

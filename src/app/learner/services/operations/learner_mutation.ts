@@ -1097,9 +1097,7 @@ mutation getmyque($user_id:String,$course_id:String,$module:String,$topic:String
   getmyque(user_id:$user_id,course_id:$course_id,module:$module,topic:$topic){
 success
 message{
-  filteredValue
-  {
-    question{
+      user_id
       que_id
       que
       ans
@@ -1107,8 +1105,7 @@ message{
       ansDate
       askTime
       ansTime
-    }
-  }
+      replyBy
 }
 }
 }
@@ -1120,9 +1117,6 @@ mutation getallquestion($user_id:String,$course_id:String,$module:String,$topic:
 success
 message{
   user_id
-  filteredValue
-  {
-    question{
       que_id
       que
       ans
@@ -1130,8 +1124,6 @@ message{
       ansDate
       askTime
       ansTime
-    }
-  }
 }
 }
 }

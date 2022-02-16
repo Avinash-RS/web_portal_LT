@@ -628,17 +628,17 @@
                 <div class="myQuestions" *ngIf="myQuestionList.length;else noitems">
                     <div class="qaBox" *ngFor="let item of myQuestionList">
                         <div class="QuestionMeta">
-                            <p>{{'Asked on' | translate}} {{item.filteredValue.question.askDate}},&nbsp;{{item.filteredValue.question.askTime}}</p>
+                            <p>{{'Asked on' | translate}} {{item.askDate}},&nbsp;{{item.askTime}}</p>
                         </div>
-                        <p class="quesiton">{{item.filteredValue.question.que}}</p>
+                        <p class="quesiton">{{item.que}}</p>
                         <div class="QuestionMeta">
-                            <div class="font-weight-lighter" [ngClass]="item.filteredValue.question.ansDate?'badge-success':'badge-warning'">{{item.filteredValue.question.ansDate?'Answered':'Unanswered'}} </div>
-                            &nbsp;<p *ngIf="item.filteredValue.question.ansDate">{{item.filteredValue.question.ansDate}}, &nbsp;{{item.filteredValue.question.ansTime}}</p>
+                            <div class="font-weight-lighter" [ngClass]="item.ansDate?'badge-success':'badge-warning'">{{item.ansDate?'Answered':'Unanswered'}} </div>
+                            &nbsp;<p *ngIf="item.ansDate">{{item.ansDate}}, &nbsp;{{item.ansTime}}</p>
                             
                         </div>
-                        <p class="answer" *ngIf="item.filteredValue.question.ansDate">{{item.filteredValue.question.ans}}</p>
-                        <!-- <div class="QuestionMeta" *ngIf="item.filteredValue.question.ansDate">
-                            <p>Answered on {{item.filteredValue.question.ansDate}}</p>
+                        <p class="answer" *ngIf="item.ansDate">{{item.ans}}</p>
+                        <!-- <div class="QuestionMeta" *ngIf="item.ansDate">
+                            <p>Answered on {{item.ansDate}}</p>
                         </div> -->
                     </div>
                 </div>
@@ -663,16 +663,16 @@
                         <!-- <div class="userAccount"><i class="lxp-AccountCircle"></i>&nbsp; {{item.user_id}}</div> -->
                         <span class="userAccount"><em class="lxp-AccountCircle align-text-bottom font-weight-bold"></em>&nbsp;<span class="font-weight-bold">{{item.user_id}}</span></span>&nbsp;|&nbsp;
                         <span class="QuestionMeta d-inline-flex">
-                        <p>{{'Asked on:' | translate}} &nbsp;{{item.filteredValue.question.askDate}},&nbsp;{{item.filteredValue.question.askTime}}</p>
+                        <p>{{'Asked on:' | translate}} &nbsp;{{item.askDate}},&nbsp;{{item.askTime}}</p>
                     </span>
-                        <p class="quesiton">{{item.filteredValue.question.que}}</p>
+                        <p class="quesiton">{{item.que}}</p>
                         <div class="QuestionMeta">
-                            <div class=" badge-success font-weight-lighter">{{'Answered' | translate}}</div>
-                            <p>&nbsp; {{item.filteredValue.question.ansDate}},&nbsp;{{item.filteredValue.question.ansTime}}</p>
+                            <div class=" badge-success font-weight-lighter">Answered</div>
+                            <p>&nbsp; {{item.ansDate}},&nbsp;{{item.ansTime}}</p>
                         </div>
-                        <p class="answer"*ngIf="item.filteredValue.question.ansDate">{{item.filteredValue.question.ans}}</p>
+                        <p class="answer"*ngIf="item.ansDate">{{item.ans}}</p>
                         <!-- <div class="QuestionMeta">
-                            <p>{{item.filteredValue.question.ansDate}}</p>
+                            <p>{{item.ansDate}}</p>
                         </div> -->
                     </div>
                     
