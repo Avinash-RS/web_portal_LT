@@ -25,6 +25,7 @@ import { ToastrService } from 'ngx-toastr';
 
 export class ProfileComponent implements OnInit {
   @ViewChild('passwordDialog') passwordDialog: TemplateRef<any>;
+  @ViewChild('fileInput') fileInput;
   blobKey = environment.blobKey;
   loader:boolean = false;
   constructor(public translate: TranslateService,
@@ -398,7 +399,9 @@ showNew = true;
          langARR.push({name:element})
         });
        }
-
+       if(this.profileForm?.value.profile_img && this.profileForm?.value.profile_img !=''){
+        localStorage.setItem('user_img', this.profileForm?.value.profile_img);
+       }
        const apidata = {
         gender: this.profileForm?.value.gender,
         deptName: this.profileForm?.value.deptName,
@@ -785,16 +788,24 @@ showNew = true;
         fb.append('image', this.selectfile, this.selectfile.name);
         this.service.imageupload(fb).subscribe(data => {
           this.profileForm.controls.profile_img.setValue(data['url']);
-          localStorage.setItem('user_img', data['url']);
           this.currentUser.profile_img = data['url'];
-          var profileDetails = JSON.parse(localStorage.getItem('UserDetails'));
-          if(profileDetails){
-            profileDetails.profile_img = data['url']
-          }
-          localStorage.setItem('UserDetails', JSON.stringify(profileDetails));
-          this.profileForm.controls.profile_img.setValue(localStorage.getItem('user_img'));
+          // localStorage.setItem('user_img', data['url']);
+          // var profileDetails = JSON.parse(localStorage.getItem('UserDetails'));
+          // if(profileDetails){
+          //   profileDetails.profile_img = data['url']
+          // }
+          // localStorage.setItem('UserDetails', JSON.stringify(profileDetails));
         });
       }
+    }
+  }
+  onEdit(){
+    if (this.fileInput) {
+      this.fileInput.nativeElement.value = '';
+    }
+    this.cannotEdit = !this.cannotEdit;
+    if(this.cannotEdit){
+      this.profileForm.controls.profile_img.setValue(localStorage.getItem('user_img'));
     }
   }
 
