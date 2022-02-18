@@ -398,7 +398,7 @@ export class CoursedetailsComponent implements OnInit {
       ) {
         this.lastLogIndex = parseInt(this.checkDetails.lastLogIndex) + 1;
       }
-        this.playURLConstructor(this.checkDetails.link,this.checkDetails.lastModule,this.checkDetails.lastTopic,this.checkDetails.module_id,this.checkDetails.topic_id);
+        this.playURLConstructor(this.checkDetails.link,this.checkDetails.lastModule,this.checkDetails.lastTopic,this.checkDetails.module_id,this.checkDetails.topic_id,"entry");
         
     }
 
@@ -452,6 +452,27 @@ export class CoursedetailsComponent implements OnInit {
       this.socketEmitReciver = this.socketService.change.subscribe(
         (result: any) => {
           console.log(result);
+
+          if(result.data.resume){
+            // this.scromModuleData = []
+            this.scromModuleData = result.data.message;
+          }else{
+            if (this.checkDetails.checklevel) {
+                console.log(this.scromModuleData)
+                this.scromModuleData[this.weekHolder].childData[this.moduleHolder].status= result.data.status;
+                this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].childData = result.data.message;
+                this.moduleExpand(this.weekHolder, Number(this.subModuleHolderUI),this.scromApiData.checkLevel?this.moduleHolder:null);
+              }else{
+              
+                this.scromModuleData[this.weekHolder].childData[this.moduleHolder].status= result.data.status;
+                this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData = result.data.message;
+                this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
+              }
+          }
+
+         
+          console.log(this.scromModuleData)
+
           if (result && !Number.isNaN(this.weekHolder)) {
 
             // this.scromModuleData = result.message;
@@ -472,18 +493,9 @@ export class CoursedetailsComponent implements OnInit {
                 // this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
 
             }
+
             //expanding
-            if (this.checkDetails.checklevel) {
-              console.log(this.scromModuleData)
-              this.scromModuleData[this.weekHolder].childData[this.moduleHolder].status= result.data.status;
-              this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].childData = result.data.message;
-              this.moduleExpand(this.weekHolder, Number(this.subModuleHolderUI),this.scromApiData.checkLevel?this.moduleHolder:null);
-            }else{
-            
-              this.scromModuleData[this.weekHolder].childData[this.moduleHolder].status= result.data.status;
-              this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData = result.data.message;
-              this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
-            }
+           
 
             //replace data
             // this.weekHolderUI
@@ -494,7 +506,6 @@ export class CoursedetailsComponent implements OnInit {
             //INDEX ON COURSE START
             this.nextPrevHolder = this.topiccurrentPage = 0;
             this.moduleHolder = this.currentPage = 0;
-
             this.isprevEnable = true;
             this.isNextEnable = false;
           }
@@ -559,7 +570,7 @@ export class CoursedetailsComponent implements OnInit {
       }
     
       setTimeout(() => {
-        if (this.weekHolder > 0)
+        // if (this.weekHolder > 0)
           this.inputEl
             ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" })
             : "";
@@ -609,7 +620,7 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
 
-  playURLConstructor(url,moduleName,topicName,moduleId,topicId){
+  playURLConstructor(url,moduleName,topicName,moduleId,topicId,actiondat?){
     console.log(moduleId,topicId)
     const encodedModuleName = encodeURIComponent(moduleName);
     const encodedTopicName = encodeURIComponent(topicName);
@@ -623,7 +634,8 @@ export class CoursedetailsComponent implements OnInit {
       '&path=' + url+ 
       '&module=' + encodedModuleName + 
       '&topic=' + encodedTopicName +
-      '&action=Click&week=' + 1 + 
+      '&action=' + (actiondat=='entry'?'resume':'Click')+
+      // '&week=' + (this.weekHolder+1) + 
       '&lastLogIndex=' + this.lastLogIndex);
   }
 
