@@ -459,14 +459,19 @@ export class CoursedetailsComponent implements OnInit {
           }else{
             if (this.checkDetails.checklevel) {
                 console.log(this.scromModuleData)
-                this.scromModuleData[this.weekHolder].childData[this.moduleHolder].status= result.data.status;
-                this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].childData = result.data.message;
-                this.moduleExpand(this.weekHolder, Number(this.subModuleHolderUI),this.scromApiData.checkLevel?this.moduleHolder:null);
+                if(this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].id == result.data.message[0].parent)
+                {
+                  this.scromModuleData[this.weekHolder].childData[this.moduleHolder].status= result.data.status;
+                  this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].childData = result.data.message;
+                  this.moduleExpand(this.weekHolder, Number(this.subModuleHolderUI),this.scromApiData.checkLevel?this.moduleHolder:null);
+                }
               }else{
-              
-                this.scromModuleData[this.weekHolder].childData[this.moduleHolder].status= result.data.status;
-                this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData = result.data.message;
-                this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
+                if(this.scromModuleData[this.weekHolder].childData[this.moduleHolder].id == result.data.message[0].parent)
+                {
+                  this.scromModuleData[this.weekHolder].childData[this.moduleHolder].status= result.data.status;
+                  this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData = result.data.message;
+                  this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
+                }
               }
           }
 
