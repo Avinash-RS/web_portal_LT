@@ -37,9 +37,8 @@
                         <!-- <em (click)="goBack()" class="lxp-Go backArrow"></em> -->
                         <span>{{course?.course_name}}</span>
                     </li>
-                    <ng-container *ngIf="checkDetails?.toc != '0' && !checkDetails.checkLevel">
-                        <div class="navigation d-flex align-items-center" *ngIf="scromModuleData && filterkey==='All' && drawersOpen===false">
-                            <!-- <span class="pipeLine">|</span>  -->
+                    <!-- <ng-container  *ngIf="checkDetails?.toc != '0' && !checkDetails.checkLevel">
+                        <div class="navigation d-flex align-items-center" style="display: none;" *ngIf="scromModuleData && filterkey==='All' && drawersOpen===false">
                             <div class="leftArrow">                
                                 <em class="lxp-Next-Previous previousTopic" title="Previous Topic" [ngClass]="isprevEnable?'disableColor':''" (click)="isprevEnable?false:topicPrve()"></em>
                             </div>
@@ -50,7 +49,7 @@
                                 <em class="lxp-Next-Previous" title="Next Topic" [ngClass]="isNextEnable?'disableColor':''" (click)="isNextEnable?false:topicNext()"></em>
                             </div>
                         </div>
-                    </ng-container>
+                    </ng-container> -->
                     <!-- <li><div class="courseTitle" *ngIf="drawersOpen!==false||filterkey!=='All'"><span>{{this.course?.course_name}}</span></div></li> -->
                 </ul>
             </div>
