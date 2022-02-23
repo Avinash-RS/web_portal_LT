@@ -575,10 +575,11 @@ export class CoursedetailsComponent implements OnInit {
       }
     
       setTimeout(() => {
-        // if (this.weekHolder > 0)
-          this.inputEl
+        if (this.weekHolder > 0)
+         { this.inputEl
             ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" })
             : "";
+         }
       }, 4000);
       
       this.getuserid = JSON.parse(localStorage.getItem("UserDetails"));
