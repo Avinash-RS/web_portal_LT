@@ -345,6 +345,16 @@
       }
     }
   }
+
+  .orgType.yes {
+    .tabsWrapper {
+      top: 60px;
+      @media only screen and (min-width: 576px) {
+        top: 0;
+      }
+    }
+  }
+
   //MyCourses
   .mycoursesWrapper {
     padding: 20px 85px 20px 20px;
@@ -1518,6 +1528,9 @@
   left: 15px;
   z-index: 8;
   width: 90%;
+  @media only screen and (min-width:576px) {
+    width: 70%;
+  }
   &.handIcon {
     text-align: left;
     @media only screen and (min-width: 992px) {

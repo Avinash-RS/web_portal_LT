@@ -220,7 +220,7 @@
                 </div>
 
                 <!-- My Course -->
-                <div [ngClass]="userDetailes.org_type == 'vocational' ? 'yes':'no'">
+                <div class="orgType" [ngClass]="userDetailes.org_type == 'vocational' ? 'yes':'no'">
                 <div class="mycoursesWrapper" [ngClass]="show ? 'noPadding': ''">
                     <h3>{{'My Courses' | translate}}</h3>
                     <div class="mobileEnable">
