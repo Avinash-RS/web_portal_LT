@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
   fullname: any;
   resolvedCaptcha: any;
   registerSuccess = false;
-  titleData = [];
+  titleData = [{'title':'Mr'},{'title':'Ms'},];
   siteKey: any = environment.captachaSiteKey;
   env_Version = environment.appVersion;
   recaptchaStr = '';
@@ -285,7 +285,7 @@ export class LoginComponent implements OnInit {
       this.signUpPage = true;
       this.titleService.setTitle('Sign up')
       this.gaService.setInnerPage('Sign up')
-      this.gettitleData();
+      // this.gettitleData();
       this.registerForm = this.formBuilder.group({
         recaptchaReactive: [null],
         title: ['', [Validators.required]],
@@ -352,9 +352,9 @@ export class LoginComponent implements OnInit {
   }
 
   gettitleData() {
-    this.service.getRegisterTitle().subscribe((data: any) => {
-    this.titleData = data.data.user_mstr_data.data;
-    });
+    // this.service.getRegisterTitle().subscribe((data: any) => {
+    // this.titleData = data.data.user_mstr_data.data;
+    // });
   }
   backToIn(){
     this.signUpPage = false;
