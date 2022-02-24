@@ -585,7 +585,7 @@ export class CoursedetailsComponent implements OnInit {
       this.getuserid = JSON.parse(localStorage.getItem("UserDetails"));
       
       //start course
-      if(this.checkDetails.course_status == "start"){
+      if(this.checkDetails.course_status == "start"||this.checkDetails.course_status == null){
         let bodyData
         if(this.checkDetails.checklevel){
           bodyData = this.scromModuleData[0].childData[0].childData[0]
