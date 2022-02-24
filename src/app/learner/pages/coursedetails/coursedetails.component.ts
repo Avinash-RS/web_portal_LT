@@ -1372,7 +1372,8 @@ export class CoursedetailsComponent implements OnInit {
         this.courseid,
         this.htmlContent,
         this.course?.course_name,
-        this.batchId
+        this.batchId,
+        this.userDetail.orgId
       ).subscribe((rdata: any) => {
         if (
           rdata?.errors &&

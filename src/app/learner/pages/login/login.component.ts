@@ -189,7 +189,6 @@ export class LoginComponent implements OnInit {
     var encryptedpassword = CryptoJS.AES.encrypt(this.loginForm.value.password, this.secretKey.trim()).toString();
     this.service.login(encryptedname, encryptedpassword, false,this.recaptchaStr)
       .subscribe((loginresult: any) => {
-        debugger;
         if(loginresult.data.login){
           if (loginresult.data.login.success) {
             let userId = loginresult.data.login.message.user_id
