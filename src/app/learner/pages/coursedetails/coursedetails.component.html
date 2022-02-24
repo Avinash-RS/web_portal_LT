@@ -217,10 +217,10 @@
                                             <span *ngIf="subData?.status == null" class="greyColor"></span>
                                         </div>
                                         <div class="topicName">
-                                            <h4 *ngIf="subData?.module?.length >= 67" class="moduleName" tooltip="{{subData?.module}}">
-                                                {{subData?.module | slice:0:71}}...</h4>
-                                            <h4 *ngIf="subData?.module?.length < 67" class="moduleName" tooltip="{{subData?.module}}">
-                                                {{subData?.module}}
+                                            <h4 *ngIf="subData?.module_name?.length >= 67" class="moduleName" tooltip="{{subData?.module_name}}">
+                                                {{subData?.module_name | slice:0:71}}...</h4>
+                                            <h4 *ngIf="subData?.module_name?.length < 67" class="moduleName" tooltip="{{subData?.module_name}}">
+                                                {{subData?.module_name}}
                                             </h4>
                                         </div>
                                         <!-- <div class="progressBar">
