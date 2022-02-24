@@ -62,19 +62,19 @@
     <div class="row d-flex justify-content-start" *ngIf='activityShow !== undefined'>
       <div class="moduleImage">
         <div class="liveSession"> 
-          <div class="video1Container">
-          <app-video-player  [url]="videoSource" *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" ></app-video-player>
+          <div class="video1Container" *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" >
+          <app-video-player  [url]="videoSource"></app-video-player>
           </div>
-          <figure>
-            <img class="sessionImage" *ngIf="!activityShow?.activity_details.livethumbnail && activityShow?.activity_details.activitytype != 'Recorded'" alt="instructor" src="https://assets.lntedutech.com/lxpicons/instructor_image.png" />
+          <figure *ngIf="!activityShow?.activity_details.livethumbnail && activityShow?.activity_details.activitytype != 'Recorded'">
+            <img class="sessionImage" alt="instructor" src="https://assets.lntedutech.com/lxpicons/instructor_image.png" />
           </figure>
-          <figure>
-            <img class="sessionImage" *ngIf="activityShow?.activity_details.livethumbnail && activityShow?.activity_details.activitytype != 'Recorded'" alt="instructor" [src]="activityShow?.activity_details.livethumbnail + blobKey" />
+          <figure *ngIf="activityShow?.activity_details.livethumbnail && activityShow?.activity_details.activitytype != 'Recorded'">
+            <img class="sessionImage" alt="instructor" [src]="activityShow?.activity_details.livethumbnail + blobKey" />
           </figure>
-          <!-- <div class="playButton">
+          <div class="playButton">
             <button mat-raised-button *ngIf="activityShow?.status === 'On going' && activityShow?.activity_details.activitytype != 'Recorded'" (click)="getAction(activityShow.activity_details.link)"><em _ngcontent-jjc-c10="" class="lxp-Play_Icon"></em> {{activityShow?.button}}</button>
-            <button mat-raised-button *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" (click)="videoPreview(videoRecorded,activityShow.activity_details.link)"><em _ngcontent-jjc-c10="" class="lxp-Play_Icon"></em> {{activityShow?.button}}</button>
-          </div> -->
+            <!-- <button mat-raised-button *ngIf="activityShow?.activity_details.activitytype == 'Recorded'" (click)="videoPreview(videoRecorded,activityShow.activity_details.link)"> {{activityShow?.button}}</button> -->
+          </div>
         </div>
 
         <div class="sessionDetails">
@@ -272,8 +272,8 @@
                   style="width: 100%; height: 130px !important;object-fit: cover !important;"
                   src="https://assets.lntedutech.com/lxpicons/instructor_image.png">
                 <!-- <div class="bottom-right" [ngClass]="los.status == 'Ongoing' ? 'organge' : los.status == 'UpComing' ? 'grey' : los.status == 'Completed' ? 'greenColor':''" >{{los.status}}</div> -->
-                <mat-icon class="rec-center" *ngIf="los.activity_details.activitytype == 'Recorded'"> play_circle
-                </mat-icon>
+                <!-- <mat-icon class="rec-center" *ngIf="los.activity_details.activitytype == 'Recorded'"> play_circle
+                </mat-icon> -->
                 <div *ngIf="los.status == 'On going' && los.activity_details.activitytype != 'Recorded'"
                   class="bottom-right orange">{{'Ongoing' | translate}}</div>
                 <div *ngIf="los.status == 'Up Coming' && los.activity_details.activitytype != 'Recorded'"

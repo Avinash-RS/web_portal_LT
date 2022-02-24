@@ -122,10 +122,11 @@ export class InstructorLedComponent implements OnInit {
     this.activityShow = los;
     los.isactive = true;
     if (los.status === 'On going') {
-      this.activityShow.button = this.translate.instant('Join Now');
-    } else if (los.status !== 'Up Coming') {
-      this.activityShow.button = this.translate.instant('Play');
-    }
+      this.activityShow.button = 'Join Now';
+    } 
+    // else if (los.status !== 'Up Coming') {
+    //   this.activityShow.button = 'Play';
+    // }
   }
 
   onGoingSession() {
