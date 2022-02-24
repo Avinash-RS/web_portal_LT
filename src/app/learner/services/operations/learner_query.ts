@@ -35,6 +35,7 @@ export const login = gql`
         message
         bb_forum
         created_on
+        orgId
         nodebb_response {
           uid
         }

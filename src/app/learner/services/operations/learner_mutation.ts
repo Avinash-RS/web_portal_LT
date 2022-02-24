@@ -1211,8 +1211,8 @@ totalcount
 }
 `;
 export const createEngineersForumData = gql`
-mutation createEngineersForumData($userId:String!,$userName:String!,$courseId:String!,$question:String!,$courseName:String!,$batchId:String!){
-  createEngineersForumData(userId:$userId,userName:$userName,courseId:$courseId,question:$question,courseName:$courseName,batchId:$batchId){
+mutation createEngineersForumData($userId:String!,$userName:String!,$courseId:String!,$question:String!,$courseName:String!,$batchId:String!,$orgId:String!){
+  createEngineersForumData(userId:$userId,userName:$userName,courseId:$courseId,question:$question,courseName:$courseName,batchId:$batchId,orgId:$orgId){
     success
      message
      error_msg
