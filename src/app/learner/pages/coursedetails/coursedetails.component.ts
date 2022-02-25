@@ -452,7 +452,9 @@ export class CoursedetailsComponent implements OnInit {
       this.socketEmitReciver = this.socketService.change.subscribe(
         (result: any) => {
           console.log(result);
-
+          if(result.data.course_id!==this.checkDetails.id){
+            this.terminateUser()
+          }
           if(result.data.resume){
             // this.scromModuleData = []
             this.scromModuleData = [... result.data.message];
@@ -1414,5 +1416,24 @@ export class CoursedetailsComponent implements OnInit {
     if (this.socketConnector) {
       this.socketConnector.unsubscribe();
     }
+  }
+
+  terminateUser(){
+    this.route.navigateByUrl('/Learner/MyCourse');
+    alert("Another instance of this user is running another course!!!")
+  }
+
+  goBack() {
+    if (!this.drawersOpen && this.scromApiData?.toc != '0') {
+      this.drawersOpen = this.drawersOpen ? false : true
+    } else {
+      if (this.fromCalendar) {
+        this.route.navigateByUrl('/Learner/calendaractivity');
+      }
+      else {
+        this.route.navigateByUrl('/Learner/MyCourse');
+      }
+    }
+
   }
 }
