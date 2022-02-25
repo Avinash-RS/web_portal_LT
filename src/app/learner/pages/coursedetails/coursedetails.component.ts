@@ -547,7 +547,7 @@ export class CoursedetailsComponent implements OnInit {
 
     this.service.getTOC(param).subscribe((data: any) => {
       this.scromApiData = data;
-
+      this.checkDetails.checklevel = this.scromApiData.checkLevel;
       this.scromModuleData = this.scromApiData?.message;
       this.weekLength = this.scromApiData.message.length;
 
@@ -589,7 +589,7 @@ export class CoursedetailsComponent implements OnInit {
       //start course
       if(this.checkDetails.course_status == "start"||this.checkDetails.course_status == null){
         let bodyData
-        if(this.checkDetails.checklevel){
+        if(this.scromApiData.checkLevel){
           bodyData = this.scromModuleData[0].childData[0].childData[0]
         }else{
           bodyData = this.scromModuleData[0].childData[0]
