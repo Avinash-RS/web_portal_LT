@@ -457,7 +457,13 @@ export class CoursedetailsComponent implements OnInit {
           }
           if(result.data.resume){
             // this.scromModuleData = []
-            this.scromModuleData = [... result.data.message];
+            
+            if (result && !Number.isNaN(this.weekHolder)) {
+              
+            }else{
+              this.scromModuleData = [... result.data.message];
+            }
+            
           }else{
             if (this.checkDetails.checklevel) {
                 console.log(this.scromModuleData)
@@ -471,7 +477,6 @@ export class CoursedetailsComponent implements OnInit {
               }else{
                 if(this.scromModuleData[this.weekHolder]?.childData[this.moduleHolder]?.id == result.data.message[0].parent)
                 {
-                  // this.scromModuleData[this.weekHolder].status = result.data.moduleStatus
                   this.scromModuleData[this.weekHolder].childData[this.moduleHolder].status= result.data.status;
                   this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData = result.data.message;
                   this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
@@ -578,13 +583,6 @@ export class CoursedetailsComponent implements OnInit {
 
       }
     
-      setTimeout(() => {
-        if (this.weekHolder > 0)
-         { this.inputEl
-            ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" })
-            : "";
-         }
-      }, 4000);
       
       this.getuserid = JSON.parse(localStorage.getItem("UserDetails"));
       
@@ -608,6 +606,17 @@ export class CoursedetailsComponent implements OnInit {
       if (!this.scromApiData.checkLevel) {
         this.checkLastFirstIndexReached();
       }
+
+      setTimeout(() => {
+         this.checkDetails.course_status = this.checkDetails.course_status == null ? 'start' : this.checkDetails.course_status;
+        if (
+          this.checkDetails.course_status !== "start") {
+            this.inputEl
+            ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" })
+            : "";
+        } 
+      }, 4000);
+  
     });
   }
   
@@ -1420,7 +1429,7 @@ export class CoursedetailsComponent implements OnInit {
 
   terminateUser(){
     this.route.navigateByUrl('/Learner/MyCourse');
-    alert("Another instance of this user is running another course!!!")
+    // alert("Another instance of this user is running another course!!!")
   }
 
   goBack() {
