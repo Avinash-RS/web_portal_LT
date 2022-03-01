@@ -80,7 +80,10 @@ export class LearnerServicesService {
       }
       );
   }
-
+getBookmarkFilter(postParam){
+  this.getToken();
+  return this.http.post(environment.apiUrl+'getbookmark',postParam,this.httpOptions);
+}
 uploadAssignments(fromdata) { 
   this.getToken();
   return this.http.post(this.envApi + 'wca/learnerscorefile', fromdata, this.httpOptions); 
@@ -1306,4 +1309,6 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
+
+  
 }
