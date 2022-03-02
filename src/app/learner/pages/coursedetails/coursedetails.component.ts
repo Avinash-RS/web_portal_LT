@@ -1164,7 +1164,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   understoodClick(ux) {
-    let current_Status = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].status
+    // let current_Status = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].status
     this.topicInfo.user_experience = ux;
     this.Lservice.userexperience(
       this.getuserid.user_id,
@@ -1173,7 +1173,7 @@ export class CoursedetailsComponent implements OnInit {
       this.topicInfo.parent,
       ux,
       this.topicInfo?.id?.toString(),
-      current_Status
+      this.topicInfo.status
     ).subscribe((data: any) => {
       console.log();
       if (data?.data?.userexperience?.success) {
