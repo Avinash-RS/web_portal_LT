@@ -855,12 +855,17 @@ export class CoursedetailsComponent implements OnInit {
     //get bookmark count
     let BK_param={
       batchid:this.batchId,
+     
       user_id:this.getuserid.user_id,
       course_id:this.courseid
   }
-    this.Lservice.getBookmarkFilter(BK_param).subscribe((dat)=>{
-            console.log(dat)
-            // this.filterData = dat.
+    this.Lservice.getBookmarkFilter(BK_param).subscribe((dat:any)=>{
+      if(dat.success)
+        {    
+          this.filterData = dat.message;
+        }else{
+          this.filterData = []
+        }
     })
   }
 
