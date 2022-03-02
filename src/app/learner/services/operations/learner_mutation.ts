@@ -1074,6 +1074,7 @@ export const userexperienceQry = gql`
 mutation userexperience($user_id:String!,$course_id:String,$batchid:String!,$parent:String,$user_experience:String!,$id:String,$status:String) {
     userexperience(user_id:$user_id,course_id:$course_id,batchid:$batchid,parent:$parent,user_experience:$user_experience,id:$id,status:$status) {
       success
+      message
     }
   }
 `;
