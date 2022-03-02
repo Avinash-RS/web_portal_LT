@@ -524,6 +524,7 @@ export class CoursedetailsComponent implements OnInit {
               this.scromModuleData[this.weekHolder].childData[
                 this.moduleHolder
               ].childData[this.subModuleHolder].childData = result.data.message;
+              this.topicInfo = result.data.message;
               this.moduleExpand(
                 this.weekHolder,
                 Number(this.subModuleHolderUI),
@@ -542,6 +543,7 @@ export class CoursedetailsComponent implements OnInit {
               this.scromModuleData[this.weekHolder].childData[
                 this.moduleHolder
               ].childData = result.data.message;
+              this.topicInfo = result.data.message;
               this.moduleExpand(
                 this.weekHolder,
                 this.moduleHolder,
@@ -1162,6 +1164,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   understoodClick(ux) {
+    let current_Status = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].status
     this.topicInfo.user_experience = ux;
     this.Lservice.userexperience(
       this.getuserid.user_id,
@@ -1170,8 +1173,9 @@ export class CoursedetailsComponent implements OnInit {
       this.topicInfo.parent,
       ux,
       this.topicInfo?.id?.toString(),
-      this.topicInfo.status
+      current_Status
     ).subscribe((data: any) => {
+      console.log();
       if (data?.data?.userexperience?.success) {
         this.topicInfo.user_experience = ux;
       } else {
