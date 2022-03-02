@@ -688,6 +688,9 @@ export class CoursedetailsComponent implements OnInit {
 
   gettopicOnModule(week, modul, parent, body) {
     // this.topicData$ = this.gettopicapi(week,module,parent);
+    if(this.filterkey == "Bookmarked"){
+      return false
+    }
     let param: any = {};
     param.parent = parent;
     param.contentID = this.courseid;
