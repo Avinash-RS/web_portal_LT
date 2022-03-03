@@ -473,10 +473,7 @@ export class CoursedetailsComponent implements OnInit {
           this.terminateUser();
         }
         if (result.data.resume) {
-   
-          if (result && !Number.isNaN(this.weekHolder)) {
-            //blunder condition above 
-          } else {
+          if (result && this.weekHolder) {}else{
             // replace resume data from socket for TOC
             this.scromModuleData = [...result.data.message];
             // get current resume topic (from expanded socket data)
@@ -495,6 +492,7 @@ export class CoursedetailsComponent implements OnInit {
                 } else {
                   if (e.link && e.expanded == true) {
                     resultData = e;
+
                   }
                 }
               }
@@ -626,28 +624,19 @@ export class CoursedetailsComponent implements OnInit {
       this.scromModuleData = this.scromApiData?.message;
       this.weekLength = this.scromApiData.message.length;
 
-      if (!this.checkDetails?.fromSuggestion) {
-        this.nextPrevHolder = this.topiccurrentPage =
-          this.scromApiData.topicIndex == null
-            ? 0
-            : Number(this.scromApiData.topicIndex);
-        this.moduleHolder = this.currentPage = this.scromApiData.checkLevel
-          ? this.scromApiData.module == null
-            ? 0
-            : Number(this.scromApiData.module)
-          : this.scromApiData.moduleIndex == null
-          ? 0
-          : Number(this.scromApiData.moduleIndex);
-        this.weekHolder = this.weekHolderUI = this.scromApiData.week - 1;
-      } else {
-        this.nextPrevHolder = this.topiccurrentPage = Number(
-          this.checkDetails.topicIndex
-        );
-        this.moduleHolder = this.currentPage = Number(
-          this.checkDetails.moduleIndex
-        );
-        this.weekHolder = this.weekHolderUI = this.checkDetails.week - 1;
-      }
+      // if (!this.checkDetails?.fromSuggestion) {
+        // this.nextPrevHolder = this.topiccurrentPage =0
+        // this.moduleHolder = this.currentPage = 0
+        // this.weekHolder = this.weekHolderUI = 0;
+      // } else {
+      //   this.nextPrevHolder = this.topiccurrentPage = Number(
+      //     this.checkDetails.topicIndex
+      //   );
+      //   this.moduleHolder = this.currentPage = Number(
+      //     this.checkDetails.moduleIndex
+      //   );
+      //   this.weekHolder = this.weekHolderUI = this.checkDetails.week - 1;
+      // }
 
       this.getuserid = JSON.parse(localStorage.getItem("UserDetails"));
 
