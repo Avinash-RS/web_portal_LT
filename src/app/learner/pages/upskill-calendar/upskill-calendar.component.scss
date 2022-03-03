@@ -1,11 +1,89 @@
 @import "variable";
 
-.upskillActivity {
-    background-color: $color-white;
+.Rightcontainer{
+    width: 60%;
+}
     .calendar {
-
+        display: flex;
+        padding: 10px 30px;
+        align-items: center;
+        justify-content: space-between;
+        h1 {
+            color: #222222;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0px !important;
+            text-align: center;
+        }
+        .btn {
+            .resetbtn {
+                border: 0.5px solid #004684;
+                padding: 5px 8px;
+                background: none;
+                border-radius: 5px;
+                color: #607D8B;
+                font-size: 12px;
+                em {
+                    display: inline-block;
+                    transform: scaleX(-1);
+                    font-size: 10px;
+                    margin-right: 7px;
+                }
+            }
+       }
     }
+    .calendarside {
+        padding: 10px;
+        .calender-section {
+            height: 700px;
+            overflow-y: auto;
+        }
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .monthview {
+                display: flex;
+                font-size: 15px;
+                padding: 10px;
+                span {
+                    padding: 10px;
+                    cursor: pointer;
+                }
+                h3 {
+                    padding: 4px;
+                    color: #303134;
+                    opacity: 1;
+                    font-weight: 600;
+                    margin: 0px!important;
+                }
+            }
+            .selectview{
+                .btn-group{
+                    padding: 1px 15px;
+                    background: #EDF1FB;
+                    color: #717579;
+                    font-size: 15px;
+                    border-radius: 30px;
+                }
+                .btn1{
+                    padding: 10px 22px;
+                    cursor: pointer;
+                    &.active {
+                        background: #FFFFFF;
+                        color: #303134;
+                        border-radius: 30px;
+                        box-shadow: 0px 6px 20px #B5B5B56B;
+                        padding: 10px 22px;
+                    }
+                }
+                
+            }
+     
+        }
+        
+    }
+  
     .activities {
         
     }
-}
