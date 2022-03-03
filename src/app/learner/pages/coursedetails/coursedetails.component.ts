@@ -1164,7 +1164,6 @@ export class CoursedetailsComponent implements OnInit {
       this.topicInfo?.id?.toString(),
       this.topicInfo.status
     ).subscribe((data: any) => {
-      console.log();
       if (data?.data?.userexperience?.success) {
         this.topicInfo.user_experience = ux;
       } else {
@@ -1432,7 +1431,7 @@ export class CoursedetailsComponent implements OnInit {
     if (this.htmlContent) {
       let regexKey = /[&<>#]/gi;
       if (this.htmlContent.search(regexKey) == -1) {
-        this.toastr.warning("spl key");
+        this.toastr.warning("Please dont use special characters");
         return false;
       }
 
