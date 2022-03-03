@@ -97,6 +97,11 @@ const routes: Routes = [
     data: { animation: 'calendaractivity' , title: 'Scheduled Activity'}
   },
   {
+    path: 'upskillcalendar',
+    component: UpskillCalendarComponent,
+    data: { animation: 'calendaractivity' , title: 'Upskill Calendar'}
+  },
+  {
     path: 'progressionReport',
     component: ProgressionReportComponent,
     data: { animation: 'progressionReport' , title: 'Progression Report'}
