@@ -344,13 +344,6 @@ export class ProgressionReportComponent implements OnInit {
     this.showProgReport = false
     this.learnerService.getProgressionData(this.userId, this.courseId).subscribe((data: any) => {
       this.apidata = data.data.getCourseReportByUserid.data.module;
-      var week = [];
-      this.apidata.forEach((element,i) => {
-        if(element.week === this.apidata[i]?.week){
-          week.push(element.week)
-        }
-      });
-      console.log(week)
       if(this.apidata[0]?.moduleName){
         this.showWeek = false;
       } else {
