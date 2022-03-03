@@ -21,8 +21,11 @@
     }
   }
 }
-::ng-deep .custom-modalbox .mat-dialog-container{
-  overflow: inherit !important;
+::ng-deep .custom-modalbox {
+  width: 400px;
+  .mat-dialog-container{
+    overflow: inherit !important;
+  }
 }
 .imgSize {
   color: #333;
@@ -507,7 +510,12 @@ label {
   // font-size: 19px;
   font-weight: 500;
 }
-
+.valid {
+  em {
+    margin-right: 10px;
+    color:$color-dark-green;
+  }
+}
 .invalid-feedback {
   font-size: 90%;
   margin-left: 5px;

@@ -192,7 +192,7 @@ export class QuestionanswerComponent implements OnInit {
         return false
       }
 
-      this.learnerService.createEngineersForumData(this.UserDetails.user_id, this.UserDetails.full_name, this.courseId, this.htmlContent, this.courseName, this.batchId).subscribe((rdata: any) => {
+      this.learnerService.createEngineersForumData(this.UserDetails.user_id, this.UserDetails.full_name, this.courseId, this.htmlContent, this.courseName, this.batchId,this.UserDetails.orgId).subscribe((rdata: any) => {
         if (rdata?.errors && rdata?.errors[0]?.message === "Request failed with status code 413") {
           this.toastr.warning("Content limit exceeded!!")
 

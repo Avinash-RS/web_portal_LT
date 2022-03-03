@@ -61,7 +61,7 @@ content="default-src 'none';
 
 </head>
 
-<body class="mat-typography" onload="checkIE()">
+<body class="mat-typography" onload="checkIE()" oncontextmenu="return false">
 <!-- Google Tag Manager (noscript) -->
 <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NNF7H2N"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
@@ -80,7 +80,7 @@ content="default-src 'none';
     function checkIE() {
       const isIEOrEdge = /msie\s|trident\//i.test(window.navigator.userAgent)
       if (isIEOrEdge) {
-        let srcdata = 'src="https://assets.lntedutech.com/application_images/IEBlocker.png"'
+        let srcdata = 'src="https://assets.lntedutech.com/application_images/BlockerIE.png"'
         const redirectData = "<img " + srcdata + "  alt='Error' />"
         let elemdata = document.getElementById("msgContainer");
         if (elemdata) {

@@ -80,7 +80,10 @@ export class LearnerServicesService {
       }
       );
   }
-
+getBookmarkFilter(postParam){
+  this.getToken();
+  return this.http.post(environment.apiUrl+'getbookmark',postParam,this.httpOptions);
+}
 uploadAssignments(fromdata) { 
   this.getToken();
   return this.http.post(this.envApi + 'wca/learnerscorefile', fromdata, this.httpOptions); 
@@ -1252,7 +1255,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
-  createEngineersForumData(userId,userName,courseId,question,courseName,batchId) {
+  createEngineersForumData(userId,userName,courseId,question,courseName,batchId,orgId) {
     return this.Apollo.query({
       query: createEngineersForumData,
       variables: {
@@ -1261,7 +1264,8 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
         courseId,
         question,
         courseName,
-        batchId
+        batchId,
+        orgId
       }
     });
   }
@@ -1305,4 +1309,6 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
+
+  
 }
