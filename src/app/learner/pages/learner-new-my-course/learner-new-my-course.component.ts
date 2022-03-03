@@ -922,31 +922,39 @@ changeWeekDate(){
   this.getWeekCourseData();
 }
 
-goToCourse(value){
+goToCourse(c){
+
+  c.batch_end_date_Timer = new Date(c.batch_end_date).getTime();
+
   const detail = {
-    id: value.course_id,
-    wishlist: false,
-    wishlist_id: null,
+    id: c.course_id,
+    wishlist: c.wishlisted || false,
+    wishlist_id: c.wishlist_id || null,
     enrollment_status: null,
-    course_name: value.course_name,
-    course_status: null,
-    batch_id: value.batchid,
-    batchEndTime: null,
-    fromCalendar : false,
-    fromSuggestion: true,
-    url:value.link,
-    week:value.week,
-    moduleName:value.module,
-    moduleIndex:value.moduleIndex,
-    topicName:value.topic,
-    topicIndex:value.topicIndex,
-    newmodule:value.newmodule
+    course_name: c.course_name,
+    course_status:"incomplete",// c.course_status,
+    batch_id: c.batchid,
+    batchEndTime: c.batch_end_date_Timer,
+    link:c.link,
+    toc:c.toc,
+    lastLogIndex:c.lastLogIndex,
+    lastModule:c.lastModule,
+    lastTopic:c.lastTopic,
+    checklevel:c.checklevel,
+    module_id:c.module_id,
+    topic_id:c.topic_id
+    // persentage : c.coursePlayerStatus.course_percentage || 0
   };
-console.log(detail)
-  localStorage.setItem('currentBatchEndDate', value.batch_end_date_Timer)
-  localStorage.setItem('Courseid', value.course_id);
-  localStorage.setItem('persentage', null);
-  localStorage.setItem('currentBatchId', value.batch_id);
+  // if (this.screenWidth < 800) {
+  // } else {
+    console.log(detail)
+  localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer)
+  localStorage.setItem('Courseid', c.course_id);
+  localStorage.setItem('persentage', c && c.coursePlayerStatus && c.coursePlayerStatus.course_percentage ? c.coursePlayerStatus.course_percentage : '');
+  localStorage.setItem('currentBatchId', c.batchid);
+
+  localStorage.setItem('resumeData', JSON.stringify({'link':c.link,'lastModule':c.lastModule,'lastTopic':c.lastTopic,'module_id':c.module_id,'topic_id':c.topic_id,'checklevel':c.checklevel}));
+
   this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
 }
 }
