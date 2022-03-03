@@ -1,20 +1,17 @@
 @import "variable";
-
 .upskillActivity {
     background-color: $color-white;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     height: 100%;
-    @media screen and (max-width:768px) {
-        flex-direction: column; 
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
     }
-    @media screen and (max-width:1024px)  {
+    @media screen and (max-width:1024px) {
         height: 100%;
     }
-    .calendar {
-
-    }
+    .calendar {}
     .activities {
         background-color: $color-white;
         box-shadow: 0 0 2px 0 #0000006b;
@@ -28,7 +25,7 @@
         @media screen and (min-width: 992px) {
             padding: 1.8em 1.5em 0 1.5em;
             order: 1;
-        } 
+        }
         @media screen and (min-width:769px) {
             width: calc(100% - 860px);
         }
@@ -38,13 +35,13 @@
         .viewInfotxt {
             flex-direction: column;
             // min-height: 70px;
-            @media screen and (min-width:1140px) { 
+            @media screen and (min-width: 1140px) {
                 // flex-direction: row;
             }
             .header {
                 // order: 2;
                 margin-top: 10px;
-                @media only screen and (min-width:1140px) {
+                @media only screen and (min-width: 1140px) {
                     margin-top: 0;
                     order: 1;
                 }
@@ -52,7 +49,7 @@
                     span {
                         // margin-right: 1.7em;
                         font-size: 1.1em;
-                        color:#999999 ;
+                        color: #999999;
                         display: inline-block;
                         cursor: pointer;
                         // padding-bottom: 1em;
@@ -65,7 +62,7 @@
                             color: #000000;
                         }
                         &.active {
-                            color:#000000;
+                            color: #000000;
                             font-weight: 400;
                             // &:before {
                             //     content:' ';
@@ -86,7 +83,7 @@
                         span {
                             // padding: 0 1em 0 0;
                             padding: 14px 10px;
-                            @media screen and (min-width:1140px) {
+                            @media screen and (min-width: 1140px) {
                                 padding: 0 1em;
                             }
                         }
@@ -96,7 +93,7 @@
         }
         .contentarea {
             padding: 0.5em 0;
-            @media only screen and (min-width:1140px) {
+            @media only screen and (min-width: 1140px) {
                 padding: 1.5em 0;
             }
             .contentbox {
@@ -121,7 +118,7 @@
                     flex-wrap: wrap;
                     padding: 0.4em 1em;
                 }
-                @media screen and (max-width:768px) { 
+                @media screen and (max-width:768px) {
                     padding: 0.8em 1em;
                 }
                 @media screen and (min-width:769px) and (max-width:1024px) {
@@ -155,13 +152,13 @@
                                 @media only screen and (max-width: 568px) {
                                     display: none;
                                 }
-                               .icon {
-                               display: flex;
-                               align-items: center;
-                               justify-content: flex-start;
-                                 //    color: #808080;
-                               font-size: 1.4em;
-                               }
+                                .icon {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: flex-start;
+                                    //    color: #808080;
+                                    font-size: 1.4em;
+                                }
                             }
                             div.notifi {
                                 position: relative;
@@ -183,122 +180,124 @@
                             }
                         }
                         .statusarea {
-                        width: 9%;
-                        text-align: right;
-                        // order: 5;
-                        @media screen and (min-width:1140px) {
-                            width: 5%;
-                        }
-                        @media screen and (max-width:1139px) { 
-                            position: absolute;
-                            top: 15px;
-                            right: 1em;
-                        }
-                        .icon {
-                            border-radius: 50%;
-                            font-size: 0.6em;
-                            padding: 0 0.3em;
-                        }
-                        .green {
-                            height: 17px;
-                            width: 17px;
-                            background-color: #41d275;;
-                            color: #fff;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            &::before {
+                            width: 9%;
+                            text-align: right;
+                            // order: 5;
+                            @media screen and (min-width: 1140px) {
+                                width: 5%;
+                            }
+                            @media screen and (max-width:1139px) {
+                                position: absolute;
+                                top: 15px;
+                                right: 1em;
+                            }
+                            .icon {
+                                border-radius: 50%;
+                                font-size: 0.6em;
+                                padding: 0 0.3em;
+                            }
+                            .green {
+                                height: 17px;
+                                width: 17px;
+                                background-color: #41d275;
+                                ;
                                 color: #fff;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                &::before {
+                                    color: #fff;
+                                }
+                            }
+                            .grey {
+                                font-size: 1.2em !important;
+                                &::before {
+                                    color: grey;
+                                }
+                            }
+                            .red {
+                                font-size: 1.2em !important;
+                                color: #c02222 !important;
+                            }
+                            .timer {
+                                font-size: 1.2em !important;
+                                &::before {
+                                    color: #FFA800 !important;
+                                }
                             }
                         }
-                        .grey {
-                            font-size: 1.2em !important;
-                            &::before {
-                                color:grey;
-                            }
-                        }
-                        .red {
-                            font-size: 1.2em !important;
-                            color: #c02222 !important;
-                        }
-                        .timer {
-                            font-size: 1.2em !important;
-                            &::before {
-                                color: #FFA800 !important;
-                            }
-                        }
-                        }
-                }
-                .txtnddate {
-                    order: 2;
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    justify-content: space-between;
-                    .infotxtarea {
-                        width: 95%;
+                    }
+                    .txtnddate {
                         // order: 2;
-                        @media only screen and (min-width: 569px) {
-                            margin-bottom: 10px;
-                            // order: 1;
-                        }
-                        @media only screen and (min-width:1140px) {
-                            width: 35%;
-                            margin-bottom: 0;
-                        }
-                        .htxt {
-                            font-weight: 700;
-                            color: #004684;
-                            display: inline-block;
-                            line-height: 15px;
-                            text-overflow: ellipsis;
-                            overflow: hidden;
-                            white-space: nowrap;
-                            width: 98%;
-                        }
-                        .infotxt {
-                            color: #999999;
-                            .moduleTopic {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: space-between;
+                        .infotxtarea {
+                            width: 95%;
+                            // order: 2;
+                            @media only screen and (min-width: 569px) {
+                                margin-bottom: 10px;
+                                // order: 1;
+                            }
+                            @media only screen and (min-width:1140px) {
+                                width: 35%;
+                                margin-bottom: 0;
+                            }
+                            .htxt {
+                                font-weight: 700;
+                                color: #004684;
                                 display: inline-block;
-                                color: #666666;
-                                margin-left: 5px;
                                 line-height: 15px;
                                 text-overflow: ellipsis;
                                 overflow: hidden;
                                 white-space: nowrap;
                                 width: 98%;
                             }
-                        }
-                    }
-                    .infodatearea {
-                        width: 100%;
-                        // order: 3;
-                        display: flex;
-                        @media only screen and (min-width: 569px) {
-                            width: 49%;
-                        }
-                        @media only screen and (min-width:1140px) {
-                            width: 23%;
-                        }
-                        .icon {
-                            width: 14%;
-                            @media only screen and (max-width: 567px) {
-                                width: 7%;
+                            .infotxt {
+                                color: #999999;
+                                .moduleTopic {
+                                    display: inline-block;
+                                    color: #666666;
+                                    margin-left: 5px;
+                                    line-height: 15px;
+                                    text-overflow: ellipsis;
+                                    overflow: hidden;
+                                    white-space: nowrap;
+                                    width: 98%;
+                                }
                             }
                         }
-                        .htxt {
-                            width: 84%;
-                            @media only screen and (max-width: 567px) {
-                                width: 91%;
-                                margin: 6px 0;
-                                display: flex;
-                                flex-direction: row;
+                        .infodatearea {
+                            width: 100%;
+                            // order: 3;
+                            display: flex;
+                            @media only screen and (min-width: 569px) {
+                                width: 49%;
                             }
-                            span {
-                                &:last-child {
-                                    margin-left: 15px;
-                                    @media only screen and (min-width: 569px) {
-                                        margin-left: 0;
+                            @media only screen and (min-width:1140px) {
+                                width: 23%;
+                            }
+                            .icon {
+                                width: 14%;
+                                @media only screen and (max-width: 567px) {
+                                    width: 7%;
+                                }
+                            }
+                            .htxt {
+                                width: 84%;
+                                @media only screen and (max-width: 567px) {
+                                    width: 91%;
+                                    margin: 6px 0;
+                                    display: flex;
+                                    flex-direction: row;
+                                }
+                                span {
+                                    &:last-child {
+                                        margin-left: 15px;
+                                        @media only screen and (min-width: 569px) {
+                                            margin-left: 0;
+                                        }
                                     }
                                 }
                             }
@@ -306,48 +305,41 @@
                     }
                 }
             }
-        }
-        
-
-        ::ng-deep.infotxtarea {
-            .mat-tooltip {
+             ::ng-deep.infotxtarea {
+                .mat-tooltip {
+                    font-size: 14px;
+                    line-height: normal;
+                }
+            }
+            .filterBtn {
+                background: #FFFFFF;
+                color: #1F1A17 !important;
+                font-weight: 400;
                 font-size: 14px;
                 line-height: normal;
+                padding: 5px 15px;
+                line-height: normal;
+                // border: none;
+                // box-shadow: none;
+                // border-color: transparent;
+                box-shadow: 0px 3px 6px #00000029;
+                border: 0.5px solid #004684;
+                opacity: 1;
+                overflow: hidden;
+                // transform: translateY(-50%) perspective(1px) translateZ(0);
+                // transition-property: color;
+                // transition-duration: 0.2s;
+                z-index: 99;
+                em {
+                    display: inline-block;
+                    transform: scaleX(-1);
+                    font-size: 10px;
+                    margin-right: 7px;
+                }
+                span {
+                    line-height: 16px;
+                }
             }
         }
-        
-        .filterBtn{
-            background: #FFFFFF;
-            color: #1F1A17 !important;
-            font-weight: 400;
-            font-size: 14px;
-            line-height: normal;
-            padding: 5px 15px;
-            line-height: normal;
-            // border: none;
-            // box-shadow: none;
-            // border-color: transparent;
-            box-shadow: 0px 3px 6px #00000029;
-            border: 0.5px solid #004684;
-            opacity: 1;
-            overflow: hidden;
-            // transform: translateY(-50%) perspective(1px) translateZ(0);
-            // transition-property: color;
-            // transition-duration: 0.2s;
-            z-index: 99;
-            em {
-                display: inline-block;
-                transform: scaleX(-1);
-                font-size: 10px;
-                margin-right: 7px;
-            }
-            span {
-                line-height: 16px;
-            }
-        }
-                 
     }
-}
-
-
 }
