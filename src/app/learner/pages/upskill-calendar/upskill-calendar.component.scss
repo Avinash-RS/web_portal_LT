@@ -12,9 +12,13 @@
             // height: 100%;
         }
         .Leftcontainer {
-            width: 60%;
+            width: 100%;
+            order: 1;
+            @media screen and (min-width: 769px) {
+                width: 50%;
+            }
             .calendar {
-                order: 1;
+                // order: 1;
                 display: flex;
                 padding: 10px 40px;
                 align-items: center;
@@ -98,31 +102,28 @@
             }
         }
         .activities {
-            width: 40%;
+            width: 100%;
+            order: 2;
             // background-color: $color-white;
-            // box-shadow: 0 0 2px 0 #0000006b;
+            box-shadow: 0 0 2px 0 #0000006b;
             // height: 100%;
             padding: 0 0.85em 4.5em 0.85em;
-            width: 100%;
-            // order: 2;
             @media screen and (min-width: 720px) {
                 padding: 0 0.85em 0 0.85em;
             }
             @media screen and (min-width: 992px) {
                 padding: 1.8em 1.5em 0 1.5em;
-                order: 2;
+                // order: 2;
             }
             @media screen and (min-width:769px) {
-                width: calc(100% - 0px);
-            }
-            @media screen and (min-width: 1140px) {
-                width: calc(100% - 1000px);
+                width: 50%;
             }
             .viewInfotxt {
                 // flex-direction: column;
                 // min-height: 70px;
                 @media screen and (min-width: 1140px) {
                     // flex-direction: row;
+                    display: flex;
                 }
                 .leftPan {
                     // order: 2;
@@ -266,15 +267,15 @@
                                 position: relative;
                                 padding-left: 1em;
                                 // color: #B8BF00;
-                                .notifi.activity:before {
-                                    background-color: #D9E021;
-                                }
-                                .notifi.selfplacedlearning:before {
-                                    background-color: #00A99D;
-                                }
-                                .notifi.virtualinstructorled:before {
-                                    background-color: #ca77f7;
-                                }
+                            }
+                            .notifi.activity {
+                                olor: #D9E021;
+                            }
+                            .notifi.selfplacedlearning {
+                                color: #00A99D;
+                            }
+                            .notifi.virtualinstructorled {
+                                color: #ca77f7;
                             }
                             // .icon {
                             //     width: 14%;
@@ -295,6 +296,26 @@
                                 top: 15px;
                                 right: 1em;
                             }
+                            .comp {
+                                font-size: 12px;
+                                color: #808080;
+                                padding-left: 5px;
+                            }
+                            // .due {
+                            //     font-size: 12px;
+                            //     color: #808080;
+                            //     padding-left: 5px;
+                            // }
+                            // .ongoing {
+                            //     font-size: 12px;
+                            //     color: #808080;
+                            //     padding-left: 5px;
+                            // }
+                            // .upcoming {
+                            //     font-size: 12px;
+                            //     color: #808080;
+                            //     padding-left: 5px;
+                            // }
                             .icon {
                                 border-radius: 50%;
                                 font-size: 0.6em;
@@ -337,21 +358,18 @@
                         flex-direction: row;
                         align-items: center;
                         justify-content: space-between;
+                        @media only screen and (max-width: 569px) {
+                            flex-direction: column;
+                        }
                         .infotxtarea {
-                            width: 95%;
+                            width: 100%;
                             // order: 2;
-                             ::ng-deep.infotxtarea {
-                                .mat-tooltip {
-                                    font-size: 14px;
-                                    line-height: normal;
-                                }
-                            }
                             @media only screen and (min-width: 569px) {
                                 margin-bottom: 10px;
                                 // order: 1;
                             }
                             @media only screen and (min-width:1140px) {
-                                width: 35%;
+                                width: 79%;
                                 margin-bottom: 0;
                             }
                             .htxt {
@@ -362,7 +380,7 @@
                                 text-overflow: ellipsis;
                                 overflow: hidden;
                                 white-space: nowrap;
-                                width: 98%;
+                                // width: 98%;
                             }
                             .infotxt {
                                 color: #999999;
@@ -386,12 +404,12 @@
                                 width: 49%;
                             }
                             @media only screen and (min-width:1140px) {
-                                width: 23%;
+                                width: 21%;
                             }
                             .icon {
                                 width: 14%;
                                 @media only screen and (max-width: 567px) {
-                                    width: 7%;
+                                    width: 5%;
                                 }
                             }
                             .htxt {
@@ -402,7 +420,7 @@
                                     display: flex;
                                     flex-direction: row;
                                 }
-                                span {
+                                .date {
                                     &:last-child {
                                         margin-left: 15px;
                                         @media only screen and (min-width: 569px) {
@@ -454,5 +472,89 @@
                     }
                 }
             }
+        }
+    }
+    
+     ::ng-deep .rightPan {
+        .mat-form-field {
+            width: 40%;
+        }
+        .mat-form-field-appearance-outline {
+            .mat-form-field-outline {
+                top: 0;
+            }
+            .mat-form-field-wrapper {
+                margin: 0;
+            }
+            .mat-select-arrow-wrapper {
+                transform: translateY(0%);
+            }
+            .mat-form-field-flex {
+                margin-top: 0;
+                background-color: #ffffff;
+                box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
+            }
+            .mat-form-field-outline-start {
+                border-radius: 0;
+            }
+            .mat-form-field-outline-end {
+                border-radius: 0;
+            }
+            .mat-form-field-outline-thick {
+                .mat-form-field-outline-end,
+                .mat-form-field-outline-gap,
+                .mat-form-field-outline-start {
+                    border-width: 1px;
+                }
+            }
+        }
+        .mat-form-field-appearance-outline:not(.mat-form-field-disabled) .mat-form-field-flex:hover .mat-form-field-outline-thick {
+            opacity: 0.15;
+        }
+        .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+            color: rgba(0, 0, 0, 0.15);
+        }
+        .mat-form-field-underline {
+            bottom: 0;
+        }
+        .mat-form-field-wrapper {
+            padding-bottom: 0;
+        }
+        .mat-form-field-infix {
+            border-top: 0 solid transparent;
+        }
+        .mat-form-field-appearance-fill .mat-select-arrow-wrapper {
+            transform: translateY(0%);
+        }
+        .mat-form-field-ripple,
+        .mat-form-field.mat-focused .mat-form-field-ripple,
+        .mat-form-field-appearance-fill .mat-form-field-underline::before {
+            background-color: transparent;
+        }
+        .mat-form-field-underline {
+            border: 1px solid #cdcdcd;
+            height: 100%;
+        }
+        .mat-form-field.mat-focused.mat-primary .mat-select-arrow,
+        .mat-select-arrow {
+            color: rgba(0, 0, 0, 0.54);
+        }
+        .mat-select {
+            text-transform: capitalize;
+        }
+        .noHandIcon {
+            .mat-select-trigger {
+                cursor: not-allowed;
+            }
+            .mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex {
+                cursor: not-allowed;
+            }
+        }
+    }
+    
+     ::ng-deep.infotxtarea {
+        .mat-tooltip {
+            font-size: 14px;
+            line-height: normal;
         }
     }
