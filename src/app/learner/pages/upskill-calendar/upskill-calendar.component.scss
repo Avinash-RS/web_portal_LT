@@ -1,17 +1,17 @@
 @import "variable";
 
-.Rightcontainer{
+.Leftcontainer{
     width: 60%;
 }
     .calendar {
         display: flex;
-        padding: 10px 30px;
+        padding: 10px 40px;
         align-items: center;
         justify-content: space-between;
         h1 {
             color: #222222;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
             margin: 0px !important;
             text-align: center;
         }
@@ -33,7 +33,7 @@
        }
     }
     .calendarside {
-        padding: 10px;
+        padding: 10px 20px;
         .calender-section {
             height: 700px;
             overflow-y: auto;
@@ -49,12 +49,14 @@
                 span {
                     padding: 10px;
                     cursor: pointer;
+                    font-size: 6px;
+                    transform: rotate(90deg);
                 }
                 h3 {
-                    padding: 4px;
+                    padding: 6px;
                     color: #303134;
                     opacity: 1;
-                    font-weight: 600;
+                    font-weight: 700;
                     margin: 0px!important;
                 }
             }
@@ -63,7 +65,7 @@
                     padding: 1px 15px;
                     background: #EDF1FB;
                     color: #717579;
-                    font-size: 15px;
+                    font-size: 12px;
                     border-radius: 30px;
                 }
                 .btn1{
@@ -83,7 +85,9 @@
         }
         
     }
-  
+    .rotate-90{
+        transform: rotate(-90deg) !important;
+    }
     .activities {
         
     }
