@@ -118,6 +118,12 @@ export class UpskillCalendarComponent implements OnInit {
     this.getLearnerActivity('month',topicStart)
   }
 
+
+  setView(view: CalendarView) {
+    this.view = view;
+  }
+
+
   getCalendarCount(value?) {
     const monthValue = moment(value).format('YYYY-MM');
     this.calendarSkele=true
