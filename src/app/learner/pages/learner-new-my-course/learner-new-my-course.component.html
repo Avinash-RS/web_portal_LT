@@ -257,7 +257,7 @@
                                 <div class="d-flex justify-content-between align-items-center cousrse-wise-card-date">
                                     <div class="start-date">
                                         <mat-form-field style="width:105px;">
-                                            <input matInput [matDatepicker]="CourseFromDatepicker" placeholder="'From date' | translate" [(ngModel)]="courseStartDate" [min] = "UserDetails.created_on"
+                                            <input matInput [matDatepicker]="CourseFromDatepicker" [placeholder]="'From date' | translate" [(ngModel)]="courseStartDate" [min] = "UserDetails.created_on"
                                              [max]="today" (dateChange)="changeCourseDate()">
                                             <mat-datepicker-toggle matSuffix [for]="CourseFromDatepicker"></mat-datepicker-toggle>
                                             <mat-datepicker #CourseFromDatepicker></mat-datepicker>
@@ -266,7 +266,7 @@
 
                                     <div class="end-date">
                                         <mat-form-field style="width:105px;">
-                                            <input matInput [matDatepicker]="CourseDatepicker" placeholder="'To date' | translate" [(ngModel)]="courseEndDate" [min] = "minCourseDate"
+                                            <input matInput [matDatepicker]="CourseDatepicker" [placeholder]="'To date' | translate" [(ngModel)]="courseEndDate" [min] = "minCourseDate"
                                              [max]="today" (dateChange)="changeCourseDate()">
                                             <mat-datepicker-toggle matSuffix [for]="CourseDatepicker"></mat-datepicker-toggle>
                                             <mat-datepicker #CourseDatepicker></mat-datepicker>
@@ -294,7 +294,7 @@
                                     </div>
                                     <div class="progress-date-input">
                                      <mat-form-field style="width:110px;">
-                                       <input matInput [matDatepicker]="weekWiseDatepicker" placeholder="'Choose a date' | translate" [(ngModel)]="weekWiseDate"  [min] = "UserDetails.created_on"
+                                       <input matInput [matDatepicker]="weekWiseDatepicker" [placeholder]="'Choose a date' | translate" [(ngModel)]="weekWiseDate"  [min] = "UserDetails.created_on"
                                         [max]="today" (dateChange)="changeWeekDate()">
                                        <mat-datepicker-toggle matSuffix [for]="weekWiseDatepicker"></mat-datepicker-toggle>
                                        <mat-datepicker #weekWiseDatepicker></mat-datepicker>
