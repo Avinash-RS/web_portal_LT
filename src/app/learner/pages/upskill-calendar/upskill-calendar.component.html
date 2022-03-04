@@ -1,9 +1,54 @@
 <app-header></app-header>
 <div class="upskillActivity">
-    <div class="calendar">
-
+    <div class="Leftcontainer">
+        <div class="calendar">
+            <h1>Calendar</h1>
+            <div class="btn">
+                <button class="resetbtn">
+          <em class="lxp-Reset"></em> <span>{{'Reset' | translate}}</span>
+        </button>
+            </div>
+        </div>
+        <div class="calendarside">
+            <mat-card class="calender-section">
+                <!-- calender html start-->
+                <div class="tabs">
+                    <div class="monthview">
+                        <span mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="getCalendarCount($event);monthChange($event)">
+                <em class="lxp-Dropdown "></em>
+              </span>
+                        <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+                        <span mwlCalendarNextView class="rotate-90" [view]="view" [(viewDate)]="viewDate" (viewDateChange)="getCalendarCount($event);monthChange($event)">
+                <em class="lxp-Dropdown  "></em>
+              </span>
+                    </div>
+                    <div class="selectview">
+                        <div class="btn-group">
+                            <div class="btn1" (click)="setView(CalendarView.Month,viewDate)" [class.active]="view === CalendarView.Month">
+                                Daily
+                            </div>
+                            <div class="btn1" (click)="setView(CalendarView.Week,viewDate)" [class.active]="view === CalendarView.Week">
+                                Weekly
+                            </div>
+                            <div class="btn1" (click)="setView(CalendarView.Day,viewDate)" [class.active]="view === CalendarView.Day">
+                                Monthly
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div [ngSwitch]="view">
+                    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="getActivity($event.day,$event.day)" (eventClicked)="handleEvent('Clicked', $event.event)">
+                    </mwl-calendar-month-view>
+                    <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)">
+                    </mwl-calendar-week-view>
+                    <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)">
+                    </mwl-calendar-day-view>
+                </div>
+                <!-- calender html end -->
+            </mat-card>
+        </div>
     </div>
-
     <div class="activities">
 
         <div class="viewInfotxt d-flex justify-content-between align-items-center">
