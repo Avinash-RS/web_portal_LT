@@ -342,6 +342,16 @@
                 color: #808080;
                 font-size: 12px;
             }
+            .module-name{
+              /* autoprefixer: ignore next */
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              font-weight: bold;
+          
+            }
             .color-green{
                 color: #02AF66;
             }
@@ -1016,6 +1026,9 @@
             @media only screen and (min-width: 720px) {
               width: 60px;
             }
+          }
+          &.parent-module{
+            width: 120px;
           }
           .subinfo {
             display: flex;

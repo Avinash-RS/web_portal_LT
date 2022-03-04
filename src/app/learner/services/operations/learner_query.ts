@@ -2542,6 +2542,7 @@ export const getCourseReportByUserid = gql`
       data {
         _id
         module {
+          moduleName
           name
           week
           totalDuration
