@@ -1,91 +1,114 @@
 @import "variable";
 .upskillActivity {
-    background-color: $color-white;
+    // background-color: $color-white;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 100%;
+    // height: 100%;
     @media screen and (max-width: 768px) {
         flex-direction: column;
     }
     @media screen and (max-width:1024px) {
-        height: 100%;
+        // height: 100%;
     }
-    .calendar {}
+    .calendar {
+        order: 1;
+    }
     .activities {
-        background-color: $color-white;
-        box-shadow: 0 0 2px 0 #0000006b;
-        height: 100%;
+        width: 40%;
+        // background-color: $color-white;
+        // box-shadow: 0 0 2px 0 #0000006b;
+        // height: 100%;
         padding: 0 0.85em 4.5em 0.85em;
         width: 100%;
-        order: 2;
+        // order: 2;
         @media screen and (min-width: 720px) {
             padding: 0 0.85em 0 0.85em;
         }
         @media screen and (min-width: 992px) {
             padding: 1.8em 1.5em 0 1.5em;
-            order: 1;
+            order: 2;
         }
         @media screen and (min-width:769px) {
-            width: calc(100% - 860px);
+            width: calc(100% - 0px);
         }
         @media screen and (min-width: 1140px) {
             width: calc(100% - 1000px);
         }
         .viewInfotxt {
-            flex-direction: column;
+            // flex-direction: column;
             // min-height: 70px;
             @media screen and (min-width: 1140px) {
                 // flex-direction: row;
             }
-            .header {
+            .leftPan {
                 // order: 2;
                 margin-top: 10px;
                 @media only screen and (min-width: 1140px) {
                     margin-top: 0;
                     order: 1;
                 }
-                .leftPan {
-                    span {
-                        // margin-right: 1.7em;
-                        font-size: 1.1em;
-                        color: #999999;
-                        display: inline-block;
-                        cursor: pointer;
-                        // padding-bottom: 1em;
-                        padding: 14px 10px;
-                        position: relative;
+                span {
+                    // margin-right: 1.7em;
+                    font-size: 1.1em;
+                    color: #999999;
+                    display: inline-block;
+                    cursor: pointer;
+                    // padding-bottom: 1em;
+                    padding: 14px 10px;
+                    position: relative;
+                    font-weight: 400;
+                    height: 48px;
+                    transition: color 0.3s ease-in-out;
+                    &:hover {
+                        color: #000000;
+                    }
+                    &.active {
+                        color: #000000;
                         font-weight: 400;
-                        height: 48px;
-                        transition: color 0.3s ease-in-out;
-                        &:hover {
-                            color: #000000;
-                        }
-                        &.active {
-                            color: #000000;
-                            font-weight: 400;
-                            // &:before {
-                            //     content:' ';
-                            //     width: 6px;
-                            //     height: 6px;
-                            //     background-color: #BE2020;
-                            //     position: absolute;
-                            //     bottom: 6px;
-                            //     left: 50%;
-                            //     transform: translateX(-50%);
-                            //     border-radius: 10px;
-                            // }
-                        }
                     }
                 }
-                .rightPan {
-                    .filterBtn {
-                        span {
-                            // padding: 0 1em 0 0;
-                            padding: 14px 10px;
-                            @media screen and (min-width: 1140px) {
-                                padding: 0 1em;
-                            }
+            }
+            .rightPan {
+                order: 1;
+                @media only screen and (min-width: 1140px) {
+                    order: 2;
+                }
+                .filterBtn {
+                    background: #FFFFFF;
+                    color: #1F1A17;
+                    font-weight: 400;
+                    // font-size: 14px;
+                    line-height: normal;
+                    padding: 5px 7px;
+                    line-height: normal;
+                    // border: none;
+                    box-shadow: none;
+                    // border-color: transparent;
+                    box-shadow: 0px 3px 6px #00000029;
+                    border: 0.5px solid #004684;
+                    opacity: 1;
+                    overflow: hidden;
+                    transition: ease-in;
+                    // transform: translateY(-50%) perspective(1px) translateZ(0);
+                    // transition-property: color;
+                    transition-duration: 0.2s;
+                    z-index: 99;
+                    &:hover {
+                        color: #FFFFFF;
+                        background-color: #004684;
+                    }
+                    em {
+                        display: inline-block;
+                        transform: scaleX(-1);
+                        font-size: 12px;
+                        margin-right: 7px;
+                    }
+                    span {
+                        line-height: 16px;
+                        @media screen and (min-width: 1140px) {
+                            padding: 0 0.3em;
+                            font-size: 15px;
                         }
                     }
                 }
@@ -136,168 +159,171 @@
                     margin-bottom: 15px;
                     .infotypearea {
                         display: flex;
-                        flex-direction: row;
+                        // flex-direction: row;
                         align-items: center;
-                        // justify-content: space-between;
-                        width: 100%;
+                        justify-content: space-between;
+                        width: 50%;
                         font-weight: 700;
                         color: #000;
+                        em {
+                            font-size: 0.935em;
+                            width: 5%;
+                        }
                         .htxt {
-                            width: 84%;
-                            span {
-                                display: block;
-                                font-weight: 400;
-                                font-size: 15px;
-                                color: #004684;
-                                @media only screen and (max-width: 568px) {
-                                    display: none;
-                                }
-                                .icon {
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: flex-start;
-                                    //    color: #808080;
-                                    font-size: 1.4em;
-                                }
+                            width: 95%;
+                            // @media only screen and (min-width: 569px) {
+                            //     width: 49%;
+                            //     // order: 2;
+                            // }
+                            // @media only screen and (min-width:1140px) {
+                            //     width: 24%;
+                            // }
+                        }
+                        .notifi {
+                            position: relative;
+                            padding-left: 1em;
+                            // color: #B8BF00;
+                            .notifi.activity:before {
+                                background-color: #D9E021;
                             }
-                            div.notifi {
-                                position: relative;
-                                padding-left: 1em;
-                                color: #B8BF00;
+                            .notifi.selfplacedlearning:before {
+                                background-color: #00A99D;
                             }
-                            @media only screen and (min-width: 569px) {
-                                width: 49%;
-                                // order: 2;
-                            }
-                            @media only screen and (min-width:1140px) {
-                                width: 24%;
-                            }
-                            .icon {
-                                width: 14%;
-                                @media only screen and (max-width: 568px) {
-                                    display: none;
-                                }
+                            .notifi.virtualinstructorled:before {
+                                background-color: #ca77f7;
                             }
                         }
-                        .statusarea {
-                            width: 9%;
-                            text-align: right;
-                            // order: 5;
-                            @media screen and (min-width: 1140px) {
-                                width: 5%;
-                            }
-                            @media screen and (max-width:1139px) {
-                                position: absolute;
-                                top: 15px;
-                                right: 1em;
-                            }
-                            .icon {
-                                border-radius: 50%;
-                                font-size: 0.6em;
-                                padding: 0 0.3em;
-                            }
-                            .green {
-                                height: 17px;
-                                width: 17px;
-                                background-color: #41d275;
-                                ;
+                        // .icon {
+                        //     width: 14%;
+                        //     @media only screen and (max-width: 568px) {
+                        //         display: none;
+                        //     }
+                        // }
+                    }
+                    .statusarea {
+                        width: 9%;
+                        text-align: right;
+                        // order: 5;
+                        @media screen and (min-width: 1140px) {
+                            width: 30%;
+                        }
+                        @media screen and (max-width:1139px) {
+                            position: absolute;
+                            top: 15px;
+                            right: 1em;
+                        }
+                        .icon {
+                            border-radius: 50%;
+                            font-size: 0.6em;
+                            padding: 0 0.3em;
+                        }
+                        .green {
+                            height: 17px;
+                            width: 17px;
+                            background-color: #41d275;
+                            ;
+                            color: #fff;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            &::before {
                                 color: #fff;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                &::before {
-                                    color: #fff;
-                                }
                             }
-                            .grey {
-                                font-size: 1.2em !important;
-                                &::before {
-                                    color: grey;
-                                }
+                        }
+                        .grey {
+                            font-size: 1.2em !important;
+                            &::before {
+                                color: grey;
                             }
-                            .red {
-                                font-size: 1.2em !important;
-                                color: #c02222 !important;
-                            }
-                            .timer {
-                                font-size: 1.2em !important;
-                                &::before {
-                                    color: #FFA800 !important;
-                                }
+                        }
+                        .red {
+                            font-size: 1.2em !important;
+                            color: #c02222 !important;
+                        }
+                        .timer {
+                            font-size: 1.2em !important;
+                            &::before {
+                                color: #FFA800 !important;
                             }
                         }
                     }
-                    .txtnddate {
+                }
+                .txtnddate {
+                    order: 2;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+                    .infotxtarea {
+                        width: 95%;
                         // order: 2;
-                        display: flex;
-                        flex-direction: row;
-                        align-items: center;
-                        justify-content: space-between;
-                        .infotxtarea {
-                            width: 95%;
-                            // order: 2;
-                            @media only screen and (min-width: 569px) {
-                                margin-bottom: 10px;
-                                // order: 1;
+                         ::ng-deep.infotxtarea {
+                            .mat-tooltip {
+                                font-size: 14px;
+                                line-height: normal;
                             }
-                            @media only screen and (min-width:1140px) {
-                                width: 35%;
-                                margin-bottom: 0;
-                            }
-                            .htxt {
-                                font-weight: 700;
-                                color: #004684;
+                        }
+                        @media only screen and (min-width: 569px) {
+                            margin-bottom: 10px;
+                            // order: 1;
+                        }
+                        @media only screen and (min-width:1140px) {
+                            width: 35%;
+                            margin-bottom: 0;
+                        }
+                        .htxt {
+                            font-weight: 700;
+                            color: #004684;
+                            display: inline-block;
+                            line-height: 15px;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            width: 98%;
+                        }
+                        .infotxt {
+                            color: #999999;
+                            .moduleTopic {
                                 display: inline-block;
+                                color: #666666;
+                                margin-left: 5px;
                                 line-height: 15px;
                                 text-overflow: ellipsis;
                                 overflow: hidden;
                                 white-space: nowrap;
                                 width: 98%;
                             }
-                            .infotxt {
-                                color: #999999;
-                                .moduleTopic {
-                                    display: inline-block;
-                                    color: #666666;
-                                    margin-left: 5px;
-                                    line-height: 15px;
-                                    text-overflow: ellipsis;
-                                    overflow: hidden;
-                                    white-space: nowrap;
-                                    width: 98%;
-                                }
+                        }
+                    }
+                    .infodatearea {
+                        width: 100%;
+                        // order: 3;
+                        display: flex;
+                        @media only screen and (min-width: 569px) {
+                            width: 49%;
+                        }
+                        @media only screen and (min-width:1140px) {
+                            width: 23%;
+                        }
+                        .icon {
+                            width: 14%;
+                            @media only screen and (max-width: 567px) {
+                                width: 7%;
                             }
                         }
-                        .infodatearea {
-                            width: 100%;
-                            // order: 3;
-                            display: flex;
-                            @media only screen and (min-width: 569px) {
-                                width: 49%;
+                        .htxt {
+                            width: 84%;
+                            @media only screen and (max-width: 567px) {
+                                width: 91%;
+                                margin: 6px 0;
+                                display: flex;
+                                flex-direction: row;
                             }
-                            @media only screen and (min-width:1140px) {
-                                width: 23%;
-                            }
-                            .icon {
-                                width: 14%;
-                                @media only screen and (max-width: 567px) {
-                                    width: 7%;
-                                }
-                            }
-                            .htxt {
-                                width: 84%;
-                                @media only screen and (max-width: 567px) {
-                                    width: 91%;
-                                    margin: 6px 0;
-                                    display: flex;
-                                    flex-direction: row;
-                                }
-                                span {
-                                    &:last-child {
-                                        margin-left: 15px;
-                                        @media only screen and (min-width: 569px) {
-                                            margin-left: 0;
-                                        }
+                            span {
+                                &:last-child {
+                                    margin-left: 15px;
+                                    @media only screen and (min-width: 569px) {
+                                        margin-left: 0;
                                     }
                                 }
                             }
@@ -305,39 +331,43 @@
                     }
                 }
             }
-             ::ng-deep.infotxtarea {
-                .mat-tooltip {
+            // No Card
+            .noCard {
+                text-align: center;
+                figure {
+                    margin: 15px 0;
+                }
+                p {
                     font-size: 14px;
+                    color: #000000;
+                    font-weight: 500;
                     line-height: normal;
+                    margin-bottom: 30px ​!important;
                 }
             }
-            .filterBtn {
-                background: #FFFFFF;
-                color: #1F1A17 !important;
-                font-weight: 400;
-                font-size: 14px;
-                line-height: normal;
-                padding: 5px 15px;
-                line-height: normal;
-                // border: none;
-                // box-shadow: none;
-                // border-color: transparent;
-                box-shadow: 0px 3px 6px #00000029;
-                border: 0.5px solid #004684;
-                opacity: 1;
-                overflow: hidden;
-                // transform: translateY(-50%) perspective(1px) translateZ(0);
-                // transition-property: color;
-                // transition-duration: 0.2s;
-                z-index: 99;
-                em {
-                    display: inline-block;
-                    transform: scaleX(-1);
-                    font-size: 10px;
-                    margin-right: 7px;
+            .skeleton-container {
+                background-color: white;
+                box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+                margin-top: 20px;
+                padding: 6px;
+                .skeleton-part {
+                    width: 30%;
+                    @media only screen and (max-width: 1139px) {
+                        width: 48%;
+                    }
+                    &.item3 {
+                        @media only screen and (max-width: 1139px) {
+                            display: none;
+                        }
+                    }
                 }
-                span {
-                    line-height: 16px;
+                .skeletonStyle {
+                    border-radius: 5px;
+                    margin: 8px 0;
+                    height: 15px;
+                    width: 100%;
+                    background-color: $skeletonColor;
+                    border: 1px solid #fff;
                 }
             }
         }
