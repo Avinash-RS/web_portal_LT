@@ -11,7 +11,7 @@
     @media screen and (max-width:1024px) {
         // height: 100%;
     }
-        .Leftcontainer {
+    .Leftcontainer {
             width: 100%;
             order: 1;
             @media screen and (min-width: 769px) {
@@ -47,11 +47,18 @@
                     }
                 }
             }
+            .calendarside {
+                padding: 10px 20px;
+                .calender-section {
+                    height: 700px;
+                    overflow-y: auto;
+                }
+                }
         .rotate-90 {
             transform: rotate(-90deg) !important;
         }
-        }
-        .activities {
+    }
+    .activities {
             width: 100%;
             order: 2;
             // background-color: $color-white;
@@ -175,7 +182,7 @@
                 }
             
             }
-        .contentarea {
+            .contentarea {
             padding: 15px 0;
             @media only screen and (min-width: 1140px) {
                 padding: 10px 0;
@@ -446,6 +453,24 @@
                 text-align: center;
                 figure {
                     margin: 15px 0;
+                    font-size: 6px;
+                    transform: rotate(90deg);
+                }
+                h3 {
+                    padding: 6px;
+                    color: #303134;
+                    opacity: 1;
+                    font-weight: 700;
+                    margin: 0px!important;
+                }
+            }
+            .selectview{
+                .btn-group{
+                    padding: 1px 15px;
+                    background: #EDF1FB;
+                    color: #717579;
+                    font-size: 12px;
+                    border-radius: 30px;
                 }
                 p {
                     font-size: 14px;
@@ -472,7 +497,7 @@
                     }
                 }
             }
-        }
+        
     }
 
 }
