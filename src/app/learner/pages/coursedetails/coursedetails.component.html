@@ -90,7 +90,7 @@
                        <ng-template [ngTemplateOutlet]="tocContent"></ng-template>
                     </mat-tab>
                   
-                    <mat-tab [ngClass]="filterkey == 'Bookmarked' ? 'yes':'no'">
+                    <mat-tab *ngIf="userType!=='vocational'" [ngClass]="filterkey == 'Bookmarked' ? 'yes':'no'">
                         <ng-template mat-tab-label>
                             <span class="tabLabel">{{'Bookmarks' | translate}}</span> <span class="labelcount">{{bookmarkedCount}}</span>
                         </ng-template>
@@ -398,7 +398,7 @@
                         <em class="lxp-question"></em> <span>{{'Ask A Question' | translate}}</span>
                     </button>
                     <!-- <button class="notesBtn"><em class="lxp-Notes"></em> <span>Notes</span></button> -->
-                     <button class="bookmarkBtn" *ngIf="userType!=='Corporate'" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
+                     <button class="bookmarkBtn" *ngIf="userType!=='Corporate' && userType!=='vocational'" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
                          <em [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></em> <span [ngClass]="topicInfo?.bookmark?'bold':'normal'">{{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? translate.instant('Bookmarked'): translate.instant('Bookmark')}}</span>
                      </button>
                 </div>

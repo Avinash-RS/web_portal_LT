@@ -1079,8 +1079,8 @@ mutation userexperience($user_id:String!,$course_id:String,$batchid:String!,$par
   }
 `;
 export const set_bookmark = gql`
-  mutation bookmark($user_id:String!,$course_id:String,$batchid:String,$parent:String,$bookmark:Boolean,$lastLogIndex:String,$id:String,$moduleName:String) {
-    bookmark(user_id:$user_id,course_id:$course_id,batchid:$batchid,parent:$parent,bookmark:$bookmark,lastLogIndex:$lastLogIndex,id:$id,moduleName:$moduleName) {
+  mutation bookmark($user_id:String!,$course_id:String,$batchid:String,$parent:String,$bookmark:Boolean,$lastLogIndex:String,$id:String,$module:String,$topic:String) {
+    bookmark(user_id:$user_id,course_id:$course_id,batchid:$batchid,parent:$parent,bookmark:$bookmark,lastLogIndex:$lastLogIndex,id:$id,module:$module,topic:$topic) {
       success
     }
   }
