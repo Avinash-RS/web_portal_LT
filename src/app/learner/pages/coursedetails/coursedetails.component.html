@@ -385,10 +385,10 @@
                     </button> -->
                 </div>
                 <div class="notesBookmarks">
-                    <div *ngIf="userType=='vocational'" [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')" data-title="Understood" class="smile" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
+                    <div *ngIf="userType=='vocational'" [disabled]="topicInfo.status !== 'Passed'" (click)="understoodClick('like')" data-title="Understood" class="smile" [ngClass]="topicInfo.status==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
                         <em class="lxp-smile"></em> <span>{{'Understood' | translate}}</span>
                     </div>
-                    <div *ngIf="userType=='vocational'"  [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
+                    <div *ngIf="userType=='vocational'"  [disabled]="topicInfo.status !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicInfo.status==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
                         <em class="lxp-sad"></em> <span>{{'Not Understood' | translate}}</span>
                     </div>
                     <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType!=='collegeconnect'" type="button" (click)="openAskQuestions(askQuestions)">

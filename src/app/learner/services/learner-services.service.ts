@@ -1098,7 +1098,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
-  userexperience(user_id,course_id,batchid,parent,user_experience,id,status) {
+  userexperience(user_id,course_id,batchid,parent,user_experience,id,status,module,topic) {
     return this.Apollo.query({
       query: userexperienceQry,
       variables: {
@@ -1108,7 +1108,9 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
         batchid,
         parent,
         id,
-        status
+        status,
+        module,
+        topic
       }
     });
   }

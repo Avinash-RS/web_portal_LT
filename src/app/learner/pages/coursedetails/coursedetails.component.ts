@@ -637,11 +637,11 @@ export class CoursedetailsComponent implements OnInit {
       // }
 
       this.getuserid = JSON.parse(localStorage.getItem("UserDetails"));
-
+      //single
       //start course
       if (
         this.checkDetails.course_status == "start" ||
-        this.checkDetails.course_status == null
+        this.checkDetails.course_status == null || this.userType==='vocational'
       ) {
         let bodyData;
         if (this.scromApiData.checkLevel) {
@@ -666,7 +666,7 @@ export class CoursedetailsComponent implements OnInit {
           this.checkDetails.course_status == null
             ? "start"
             : this.checkDetails.course_status;
-        if (this.checkDetails.course_status !== "start") {
+        if (this.checkDetails.course_status !== "start" && this.userType !== "vocational") {
           this.inputEl
             ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" })
             : "";
@@ -1160,7 +1160,9 @@ export class CoursedetailsComponent implements OnInit {
       this.topicInfo.parent,
       ux,
       this.topicInfo?.id?.toString(),
-      this.topicInfo.status
+      this.topicInfo.status,
+      "",
+      this.topicInfo.topic_name
     ).subscribe((data: any) => {
       if (data?.data?.userexperience?.success) {
         this.topicInfo.user_experience = ux;
