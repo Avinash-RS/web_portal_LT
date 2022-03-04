@@ -100,10 +100,22 @@
                             </div>
 
                             <div class="statusarea d-flex justify-content-end align-items-center ">
-                                <em class="icon lxp-Tick green " *ngIf="activity.status=='Completed' || activity.status=='Graded' || activity.status=='Submitted' ">{{activity.status}}</em>
-                                <em class="icon lxp-Timelapse red " *ngIf="activity.status=='Overdue' ">{{activity.status}}</em>
-                                <em class="icon lxp-Timer timer " *ngIf="activity.status=='On going' ">{{activity.status}}</em>
-                                <em class="icon lxp-Play grey " *ngIf="activity.status=='Yet to submit' || activity.status=='Up Coming' ">{{activity.status}}</em>
+                                <ng-container *ngIf="activity.status=='Completed' || activity.status=='Graded' || activity.status=='Submitted' ">
+                                    <em class="icon lxp-Tick green"></em>
+                                    <span>{{activity.status}}</span>
+                                </ng-container>
+                                <ng-container *ngIf="activity.status=='Overdue' ">
+                                    <em class="icon lxp-Timelapse red "></em>
+                                    <span>{{activity.status}}</span>
+                                </ng-container>
+                                <ng-container *ngIf="activity.status=='On going' ">
+                                    <em class="icon lxp-Timer timer "></em>
+                                    <span>{{activity.status}}</span>
+                                </ng-container>
+                                <ng-container *ngIf="activity.status=='Yet to submit' || activity.status=='Up Coming' ">
+                                    <em class="icon lxp-Play grey "></em>
+                                    <span>{{activity.status}}</span>
+                                </ng-container>
                             </div>
                         </div>
 
