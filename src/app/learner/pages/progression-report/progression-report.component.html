@@ -80,16 +80,19 @@
           <ng-container  *ngFor="let moduleItem of apidata let i = index">
           <div *ngIf="moduleItem.week !== apidata[i-1]?.week" [ngClass]="moduleItem.overAllPercentage>0?moduleItem.overAllPercentage>99?'bar-complete':'bar-inprogress':'bar-inprogress'">
             <div class="loopClass">
-            <mat-progress-bar [mode]="mode" [value]="moduleItem.overAllPercentage" [bufferValue]="bufferValue">
-            </mat-progress-bar>
+            <!-- <mat-progress-bar [mode]="mode" [value]="moduleItem.overAllPercentage" [bufferValue]="bufferValue">
+            </mat-progress-bar> -->
               <ng-container *ngFor="let moduleItem of apidata;let number = index">
                 <div class="innerLoop" *ngIf="moduleItem.week === apidata[i]?.week">
             <mat-accordion>
               <mat-expansion-panel (opened)="handleOpened(moduleItem)" (closed)="handleClosed(moduleItem)">
                 <mat-expansion-panel-header>
                   <mat-panel-title>
-                    <div class="week-block">
-                      <span>
+                    <div class="week-block parent-module">
+                      <span *ngIf="!showWeek">
+                        <div  matTooltip="{{moduleItem.moduleName}}" matTooltipClass="custom-mat-tooltip" [ngStyle]="(moduleItem.week!==apidata[number-1]?.week || moduleItem.isOpened) ? {'color': 'inherit'} : {'color': 'white'}" class="week-text module-name">{{moduleItem.moduleName}}</div>
+                      </span>
+                      <span *ngIf="showWeek">
                         <div [ngStyle]="(moduleItem.week!==apidata[number-1]?.week || moduleItem.isOpened) ? {'color': 'inherit'} : {'color': 'white'}" class="week-text">{{'Week' | translate}}</div>
                         <div [ngStyle]="(moduleItem.week!==apidata[number-1]?.week || moduleItem.isOpened) ? {'color': 'inherit'} : {'color': 'white'}" class="week-number">{{numPrefix(moduleItem.week)}}</div>
                       </span>

@@ -469,9 +469,7 @@ export class CoursedetailsComponent implements OnInit {
     this.socketEmitReciver = this.socketService.change.subscribe(
       (result: any) => {
         console.log(result);
-        if (result.data.course_id !== this.checkDetails.id) {
-          this.terminateUser();
-        }
+       
         if (result.data.resume) {
           if (result && this.weekHolder) {}else{
             // replace resume data from socket for TOC
@@ -522,7 +520,7 @@ export class CoursedetailsComponent implements OnInit {
               this.scromModuleData[this.weekHolder].childData[
                 this.moduleHolder
               ].childData[this.subModuleHolder].childData = result.data.message;
-              this.topicInfo = result.data.message;
+              // this.topicInfo = result.data.message;
               this.moduleExpand(
                 this.weekHolder,
                 Number(this.subModuleHolderUI),
@@ -541,7 +539,7 @@ export class CoursedetailsComponent implements OnInit {
               this.scromModuleData[this.weekHolder].childData[
                 this.moduleHolder
               ].childData = result.data.message;
-              this.topicInfo = result.data.message;
+              // this.topicInfo = result.data.message;
               this.moduleExpand(
                 this.weekHolder,
                 this.moduleHolder,
@@ -639,11 +637,11 @@ export class CoursedetailsComponent implements OnInit {
       // }
 
       this.getuserid = JSON.parse(localStorage.getItem("UserDetails"));
-
+      //single
       //start course
       if (
         this.checkDetails.course_status == "start" ||
-        this.checkDetails.course_status == null
+        this.checkDetails.course_status == null || this.userType==='vocational'
       ) {
         let bodyData;
         if (this.scromApiData.checkLevel) {
@@ -668,7 +666,7 @@ export class CoursedetailsComponent implements OnInit {
           this.checkDetails.course_status == null
             ? "start"
             : this.checkDetails.course_status;
-        if (this.checkDetails.course_status !== "start") {
+        if (this.checkDetails.course_status !== "start" && this.userType !== "vocational") {
           this.inputEl
             ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" })
             : "";
@@ -1162,7 +1160,9 @@ export class CoursedetailsComponent implements OnInit {
       this.topicInfo.parent,
       ux,
       this.topicInfo?.id?.toString(),
-      this.topicInfo.status
+      this.topicInfo.status,
+      "",
+      this.topicInfo.topic_name
     ).subscribe((data: any) => {
       if (data?.data?.userexperience?.success) {
         this.topicInfo.user_experience = ux;
@@ -1185,7 +1185,8 @@ export class CoursedetailsComponent implements OnInit {
       // this.checkDetails.checkLevel
       //   ? this.submoduleTitle
       //   : this.currentModuleTitle,
-      ""
+      "",
+      this.topicInfo.topic_name
     ).subscribe((data: any) => {
       if (data?.data?.bookmark?.success) {
         this.topicInfo.bookmark = isbokmarked;
@@ -1481,11 +1482,6 @@ export class CoursedetailsComponent implements OnInit {
     if (this.socketConnector) {
       this.socketConnector.unsubscribe();
     }
-  }
-
-  terminateUser() {
-    this.route.navigateByUrl("/Learner/MyCourse");
-    // alert("Another instance of this user is running another course!!!")
   }
 
   goBack() {
