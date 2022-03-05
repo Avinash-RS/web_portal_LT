@@ -271,7 +271,7 @@ export class CoursedetailsComponent implements OnInit {
   subModuleHolder: number = null;
   submoduleTitle: any;
   subModuleHolderUI: number;
-  subModuleData:  Observable<any>;
+  subModuleData: Observable<any>;
   topicData$: Observable<any>;
 
   // FOR DRM(Restriction for right click)
@@ -286,14 +286,23 @@ export class CoursedetailsComponent implements OnInit {
     }
   }
   // initials: any;
-  constructor(public translate: TranslateService, private router: ActivatedRoute, public socketService: SocketioService,
-    public Lservice: LearnerServicesService, private cdr: ChangeDetectorRef,
-    public service: CommonServicesService, private gs: GlobalServiceService, private dialog: MatDialog,
-    public route: Router, private formBuilder: FormBuilder,
-    public sanitizer: DomSanitizer, private toastr: ToastrService) {
-    let lang = localStorage.getItem('language')
-    this.translate.use(lang ? lang : 'en')
-    const loginDetails = JSON.parse(localStorage.getItem('UserDetails'));
+  constructor(
+    public translate: TranslateService,
+    private router: ActivatedRoute,
+    public socketService: SocketioService,
+    public Lservice: LearnerServicesService,
+    private cdr: ChangeDetectorRef,
+    public service: CommonServicesService,
+    private gs: GlobalServiceService,
+    private dialog: MatDialog,
+    public route: Router,
+    private formBuilder: FormBuilder,
+    public sanitizer: DomSanitizer,
+    private toastr: ToastrService
+  ) {
+    let lang = localStorage.getItem("language");
+    this.translate.use(lang ? lang : "en");
+    const loginDetails = JSON.parse(localStorage.getItem("UserDetails"));
     if (!loginDetails?.is_password_updated) {
       this.route.navigate(["/Learner/profile"]);
       return;
@@ -329,11 +338,11 @@ export class CoursedetailsComponent implements OnInit {
       this.drawersOpen = true;
       this.performOverLay = false;
     }
-  
+
     if (this.checkDetails === undefined) {
       this.batchId = localStorage.getItem("currentBatchId");
       this.batchEndTime = localStorage.getItem("currentBatchEndDate");
-      this.checkDetails = JSON.parse(localStorage.getItem("resumeData"));//it receives only partial data
+      this.checkDetails = JSON.parse(localStorage.getItem("resumeData")); //it receives only partial data
     } else {
       if (this.checkDetails.fromCalendar) {
         this.fromCalendar = true;
@@ -347,14 +356,17 @@ export class CoursedetailsComponent implements OnInit {
       // this.courseid = detail && detail.id || this.localStoCourseid;
       this.userDetail = this.gs.checkLogout();
       this.localStoCourseid = localStorage.getItem("Courseid");
-      this.courseid = (this.checkDetails && this.checkDetails.id) || this.localStoCourseid;
+      this.courseid =
+        (this.checkDetails && this.checkDetails.id) || this.localStoCourseid;
       this.lastpersentage = localStorage.getItem("persentage");
       // this.lastpersentage = detail  && detail.persentage || this.localper ;
       gtag("event", "coursePlayerCID", { courseID: this.courseid });
       this.playerModuleAndTopic();
 
       this.service
-        .viewCurseByIDForLearner((this.checkDetails && this.checkDetails.id) || this.localStoCourseid)
+        .viewCurseByIDForLearner(
+          (this.checkDetails && this.checkDetails.id) || this.localStoCourseid
+        )
         .subscribe((viewCourse: any) => {
           if (
             viewCourse.data.view_course_for_learner &&
@@ -376,11 +388,10 @@ export class CoursedetailsComponent implements OnInit {
                 this.batchDetails = null;
               }
             });
-            
           }
         });
 
-        // TOC handling
+      // TOC handling
       if (this.checkDetails?.toc != "0") {
         if (this.screenWidth < 800) {
           this.drawersOpen = false;
@@ -391,258 +402,348 @@ export class CoursedetailsComponent implements OnInit {
         this.drawersOpen = false;
       }
 
-        //play initial/resume topic
-        if (
+      //play initial/resume topic
+      if (
         this.checkDetails?.lastLogIndex &&
         this.checkDetails?.lastLogIndex != "undefined"
       ) {
         this.lastLogIndex = parseInt(this.checkDetails.lastLogIndex) + 1;
+      }else{
+        this.lastLogIndex = 1;
       }
-        this.playURLConstructor(this.checkDetails.link,this.checkDetails.lastModule,this.checkDetails.lastTopic,this.checkDetails.module_id,this.checkDetails.topic_id,"entry");
-        
+      this.playURLConstructor(
+        this.checkDetails.link,
+        this.checkDetails.lastModule,
+        this.checkDetails.lastTopic,
+        this.checkDetails.module_id,
+        this.checkDetails.topic_id,
+        "entry"
+      );
     }
 
     this.Lservice.getModuleData(
       (this.checkDetails && this.checkDetails.id) || this.localStoCourseid,
       this.userDetail.user_id
     ).subscribe((data: any) => {
-      if(data.data.getmoduleData.success){
-      this.content = data.data.getmoduleData.data[0];
-      this.assignmentVal = false;
-      let noresource = false;
-      //this.getModuleandtopicInfo = this.content.coursedetails[0];
-      this.content.coursedetails.forEach((element) => {
-        let resourceFile = false;
-        element.moduledetails.forEach((value) => {
-          element.moduledetails.showPreview = false;
-          if (
-            value.resourse &&
-            value.resourse.files &&
-            value.resourse.files.length
-          ) {
-            this.fileRef = value.resourse.files.filter(
-              (type) => type.fileType === "Reference"
-            );
-            if (this.fileRef && this.fileRef.length) {
-              resourceFile = true;
-              noresource = true;
+      if (data.data.getmoduleData.success) {
+        this.content = data.data.getmoduleData.data[0];
+        this.assignmentVal = false;
+        let noresource = false;
+        //this.getModuleandtopicInfo = this.content.coursedetails[0];
+        this.content.coursedetails.forEach((element) => {
+          let resourceFile = false;
+          element.moduledetails.forEach((value) => {
+            element.moduledetails.showPreview = false;
+            if (
+              value.resourse &&
+              value.resourse.files &&
+              value.resourse.files.length
+            ) {
+              this.fileRef = value.resourse.files.filter(
+                (type) => type.fileType === "Reference"
+              );
+              if (this.fileRef && this.fileRef.length) {
+                resourceFile = true;
+                noresource = true;
+              }
             }
-          }
+          });
+          element.resValue = resourceFile;
         });
-        element.resValue = resourceFile;
-      });
-      // this.nextPrevHolder = this.topiccurrentPage = this.content.topicIndex == null ? 0 : this.content.topicIndex;
-      // this.moduleHolder = this.currentPage = this.content.moduleIndex == null ? 0 : this.content.moduleIndex;
+        // this.nextPrevHolder = this.topiccurrentPage = this.content.topicIndex == null ? 0 : this.content.topicIndex;
+        // this.moduleHolder = this.currentPage = this.content.moduleIndex == null ? 0 : this.content.moduleIndex;
 
-      this.content.noresource = noresource;
+        this.content.noresource = noresource;
 
-      this.modulength = this.content.coursedetails.length;
-      this.courseTime = this.content.coursetime;
-    }
+        this.modulength = this.content.coursedetails.length;
+        this.courseTime = this.content.coursetime;
+      }
     });
     // this.getAssignmentmoduleData();
   }
-  
+
   ngOnInit(): void {
     this.translate.use(localStorage.getItem("language"));
-   
+
     // if (!resumeInit) {
-      this.socketService.socketReceiver();
-     
-      this.socketEmitReciver = this.socketService.change.subscribe(
-        (result: any) => {
-          console.log(result);
+    this.socketService.socketReceiver();
 
-          if(result.data.resume){
-            // this.scromModuleData = []
-            this.scromModuleData = result.data.message;
-          }else{
-            if (this.checkDetails.checklevel) {
-                console.log(this.scromModuleData)
-                if(this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].id == result.data.message[0].parent)
-                {
-                  this.scromModuleData[this.weekHolder].childData[this.moduleHolder].status= result.data.status;
-                  this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].childData = result.data.message;
-                  this.moduleExpand(this.weekHolder, Number(this.subModuleHolderUI),this.scromApiData.checkLevel?this.moduleHolder:null);
-                }
-              }else{
-                if(this.scromModuleData[this.weekHolder].childData[this.moduleHolder].id == result.data.message[0].parent)
-                {
-                  this.scromModuleData[this.weekHolder].childData[this.moduleHolder].status= result.data.status;
-                  this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData = result.data.message;
-                  this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
-                }
-              }
-          }
+    this.socketEmitReciver = this.socketService.change.subscribe(
+      (result: any) => {
+        console.log(result);
 
-         
-          console.log(this.scromModuleData)
-
-          if (result && !Number.isNaN(this.weekHolder)) {
-
-            // this.scromModuleData = result.message;
-
-            if (result.data.course_id === this.courseid) {
-              // if(this.userType=="Corporate"){
-              //Lab URL and btn display
-              if (result?.data?.url !== "" && result.data.labActivity == true) {
-                this.eboxUrl = result.data.url;
-                this.showlab = result.data.labActivity;
-              } else {
-                this.showlab = result.data.labActivity;
-              }
-
-              // }
-                console.log(result.data, "helllllllllllllo");
-                // this.scromModuleData = result.data.childData;
-                // this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
-
-            }
-
-            //expanding
-           
-
-            //replace data
-            // this.weekHolderUI
-            // this.subModuleHolderUI
-            // this.nextPrevHolder
-            // this.moduleHolder
+        if (result.data.resume) {
+          if (result && this.weekHolder) {
           } else {
-            //INDEX ON COURSE START
-            this.nextPrevHolder = this.topiccurrentPage = 0;
-            this.moduleHolder = this.currentPage = 0;
-            this.isprevEnable = true;
-            this.isNextEnable = false;
+            // replace resume data from socket for TOC
+            this.scromModuleData = [...result.data.message];
+            // get current resume topic (from expanded socket data)
+            var resultData;
+            var getResumeTopic = function (data) {
+              for (let i = 0; i < data.length; i++) {
+                const e = data[i];
+                if (e.childData) {
+                  if (
+                    _.find(e.childData, {
+                      expanded: true,
+                    })
+                  ) {
+                    getResumeTopic(e.childData);
+                  }
+                } else {
+                  if (e.link && e.expanded == true) {
+                    resultData = e;
+                  }
+                }
+              }
+              return resultData;
+            };
+
+            this.topicInfo = getResumeTopic(this.scromModuleData);
+            this.currentTopicTitle = this.topicInfo.topic_name;
+            this.bookmarkedCount = result.data.bookmarkCount;
+          }
+        } else {
+          this.bookmarkedCount = result.data.bookmarkCount;
+          if (this.checkDetails.checklevel) {
+            console.log(this.scromModuleData);
+            if (
+              this.scromModuleData[this.weekHolder]?.childData[this.moduleHolder]?.childData[this.subModuleHolder]?.id == result.data.message[0].parent
+            ) {
+              this.scromModuleData[this.weekHolder].childData[
+                this.moduleHolder
+              ].status = result.data.moduleStatus;
+              this.scromModuleData[this.weekHolder].childData[
+                this.moduleHolder
+              ].childData[this.subModuleHolder].status = result.data.status;
+              this.scromModuleData[this.weekHolder].childData[
+                this.moduleHolder
+              ].childData[this.subModuleHolder].childData = result.data.message;
+              // this.topicInfo = result.data.message;
+              this.moduleExpand(
+                this.weekHolder,
+                Number(this.subModuleHolderUI),
+                this.scromApiData.checkLevel ? this.moduleHolder : null
+              );
+            }
+          } else {
+            if (
+              this.scromModuleData[this.weekHolder]?.childData[
+                this.moduleHolder
+              ]?.id == result.data.message[0].parent
+            ) {
+              this.scromModuleData[this.weekHolder].childData[
+                this.moduleHolder
+              ].status = result.data.status;
+              this.scromModuleData[this.weekHolder].childData[
+                this.moduleHolder
+              ].childData = result.data.message;
+              // this.topicInfo = result.data.message;
+              this.moduleExpand(
+                this.weekHolder,
+                this.moduleHolder,
+                this.scromApiData.checkLevel ? this.subModuleHolder : null
+              );
+            }
           }
         }
-      );
+
+        console.log(this.scromModuleData);
+
+        if (result && !Number.isNaN(this.weekHolder)) {
+          // this.scromModuleData = result.message;
+
+          if (result.data.course_id === this.courseid) {
+            // if(this.userType=="Corporate"){
+            //Lab URL and btn display
+            if (result?.data?.url !== "" && result.data.labActivity == true) {
+              this.eboxUrl = result.data.url;
+              this.showlab = result.data.labActivity;
+            } else {
+              this.showlab = result.data.labActivity;
+            }
+
+            // }
+            console.log(result.data, "helllllllllllllo");
+            // this.scromModuleData = result.data.childData;
+            // this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
+          }
+
+          //expanding
+
+          //replace data
+          // this.weekHolderUI
+          // this.subModuleHolderUI
+          // this.nextPrevHolder
+          // this.moduleHolder
+        } else {
+          //INDEX ON COURSE START
+          this.nextPrevHolder = this.topiccurrentPage = 0;
+          this.moduleHolder = this.currentPage = 0;
+          this.isprevEnable = true;
+          this.isNextEnable = false;
+        }
+      }
+    );
     // }
     // this.getCoursePlayerStatus();
     // this.getEboxURL();
   }
-//Trigger socket for TOC
-// triggerSocket(){
-//     //call socket playerToC
-//     let param:any = {}
-//     param.parent=null
-//     param.contentID = this.courseid
-//     let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8)
-//     param.user_id = id
-//     param.batchid = this.batchId
-    
-//     this.service.getTOC(param).subscribe((dat)=>{
-//       console.log(dat)
-//     })
-// }
+  //Trigger socket for TOC
+  // triggerSocket(){
+  //     //call socket playerToC
+  //     let param:any = {}
+  //     param.parent=null
+  //     param.contentID = this.courseid
+  //     let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8)
+  //     param.user_id = id
+  //     param.batchid = this.batchId
+
+  //     this.service.getBookmarkFilter(param).subscribe((dat)=>{
+  //       console.log(dat)
+  //     })
+  // }
   // get Scrom module and topic
   playerModuleAndTopic() {
-    let param:any = {}
-    param.parent=null
-    param.contentID = this.courseid
-    let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8)
-    param.user_id = id
-    param.batchid = this.batchId
+    let param: any = {};
+    param.parent = null;
+    param.contentID = this.courseid;
+    let id = CryptoJS.AES.decrypt(
+      this.getuserid.user_id,
+      this.secretKey.trim()
+    ).toString(CryptoJS.enc.Utf8);
+    param.user_id = id;
+    param.batchid = this.batchId;
 
     this.service.getTOC(param).subscribe((data: any) => {
       this.scromApiData = data;
-
+      this.checkDetails.checklevel = this.scromApiData.checkLevel;
       this.scromModuleData = this.scromApiData?.message;
       this.weekLength = this.scromApiData.message.length;
 
-            if (!this.checkDetails?.fromSuggestion) {
-        this.nextPrevHolder = this.topiccurrentPage =
-          this.scromApiData.topicIndex == null
-            ? 0
-            : Number(this.scromApiData.topicIndex);
-        this.moduleHolder = this.currentPage = this.scromApiData.checkLevel
-          ? this.scromApiData.module == null
-            ? 0
-            : Number(this.scromApiData.module)
-          : this.scromApiData.moduleIndex == null
-          ? 0
-          : Number(this.scromApiData.moduleIndex);
-        this.weekHolder = this.weekHolderUI = this.scromApiData.week - 1;
-       
-      } else {
-        this.nextPrevHolder = this.topiccurrentPage = Number(
-          this.checkDetails.topicIndex
-        );
-        this.moduleHolder = this.currentPage = Number(
-          this.checkDetails.moduleIndex
-        );
-        this.weekHolder = this.weekHolderUI = this.checkDetails.week - 1;
+      // if (!this.checkDetails?.fromSuggestion) {
+      // this.nextPrevHolder = this.topiccurrentPage =0
+      // this.moduleHolder = this.currentPage = 0
+      // this.weekHolder = this.weekHolderUI = 0;
+      // } else {
+      //   this.nextPrevHolder = this.topiccurrentPage = Number(
+      //     this.checkDetails.topicIndex
+      //   );
+      //   this.moduleHolder = this.currentPage = Number(
+      //     this.checkDetails.moduleIndex
+      //   );
+      //   this.weekHolder = this.weekHolderUI = this.checkDetails.week - 1;
+      // }
 
-      }
-    
-      setTimeout(() => {
-        if (this.weekHolder > 0)
-         { this.inputEl
-            ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" })
-            : "";
-         }
-      }, 4000);
-      
       this.getuserid = JSON.parse(localStorage.getItem("UserDetails"));
-      
+      //single
       //start course
-      if(this.checkDetails.course_status == "start"||this.checkDetails.course_status == null){
-        let bodyData
-        if(this.checkDetails.checklevel){
-          bodyData = this.scromModuleData[0].childData[0].childData[0]
-        }else{
-          bodyData = this.scromModuleData[0].childData[0]
+      if (
+        this.checkDetails.course_status == "start" ||
+        this.checkDetails.course_status == null ||
+        this.userType === "vocational"
+      ) {
+        let bodyData;
+        if (this.scromApiData.checkLevel) {
+          bodyData = this.scromModuleData[0].childData[0].childData[0];
+        } else {
+          bodyData = this.scromModuleData[0].childData[0];
         }
         this.gettopicOnModule(0, "start", bodyData.id, bodyData);
-        this.moduleExpand(0,0,0);
-        this.weekHolder = this.weekHolderUI = 0
+        this.moduleExpand(0, 0, 0);
+        this.weekHolder = this.weekHolderUI = 0;
         this.nextPrevHolder = this.topiccurrentPage = 0;
         this.moduleHolder = this.currentPage = 0;
         this.subModuleHolder = 0;
-
-        }
+      }
 
       if (!this.scromApiData.checkLevel) {
         this.checkLastFirstIndexReached();
       }
+
+      setTimeout(() => {
+        this.checkDetails.course_status =
+          this.checkDetails.course_status == null
+            ? "start"
+            : this.checkDetails.course_status;
+        if (
+          this.checkDetails.course_status !== "start" &&
+          this.userType !== "vocational"
+        ) {
+          this.inputEl
+            ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" })
+            : "";
+        }
+      }, 4000);
     });
   }
-  
+
   gettopicOnModule(week, modul, parent, body) {
     // this.topicData$ = this.gettopicapi(week,module,parent);
-    let param:any = {}
-    param.parent=parent
-    param.contentID = this.courseid
-    let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8)
-    param.user_id = id
-    param.batchid = this.batchId
+    if (this.filterkey == "Bookmarked") {
+      return false;
+    }
+    let param: any = {};
+    param.parent = parent;
+    param.contentID = this.courseid;
+    let id = CryptoJS.AES.decrypt(
+      this.getuserid.user_id,
+      this.secretKey.trim()
+    ).toString(CryptoJS.enc.Utf8);
+    param.user_id = id;
+    param.batchid = this.batchId;
     if (!body.expanded) {
-    this.service.getTOC(param).subscribe((data: any) => {
-        let moduletopicApiData = data.message
-        body.childData = [...moduletopicApiData]
-        if(modul==='start'){
-          this.topicInfo = moduletopicApiData[0]
+      this.service.getTOC(param).subscribe((data: any) => {
+        let moduletopicApiData = data.message;
+        body.childData = [...moduletopicApiData];
+        if (modul === "start") {
+          this.topicInfo = moduletopicApiData[0];
         }
-      })
+      });
     }
   }
 
-  playURLConstructor(url,moduleName,topicName,moduleId,topicId,actiondat?){
-    console.log(moduleId,topicId)
+  playURLConstructor(
+    url,
+    moduleName,
+    topicName,
+    moduleId,
+    topicId,
+    actiondat?
+  ) {
+    console.log(moduleId, topicId);
     const encodedModuleName = encodeURIComponent(moduleName);
     const encodedTopicName = encodeURIComponent(topicName);
-    let id = CryptoJS.AES.decrypt(this.getuserid.user_id, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
-    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl
-      (environment.scormUrl + '/scormPlayer.html?content_id=' +this.courseid + 
-      '&user_id=' + id + 
-      '&batchid=' + this.batchId + 
-      '&id=' +topicId+ 
-      '&parent=' +moduleId+ 
-      '&path=' + url+ 
-      '&module=' + encodedModuleName + 
-      '&topic=' + encodedTopicName +
-      '&action=' + (actiondat=='entry'?'resume':'Click')+
-      // '&week=' + (this.weekHolder+1) + 
-      '&lastLogIndex=' + this.lastLogIndex);
+    let id = CryptoJS.AES.decrypt(
+      this.getuserid.user_id,
+      this.secretKey.trim()
+    ).toString(CryptoJS.enc.Utf8);
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(
+      environment.scormUrl +
+        "/scormPlayer.html?content_id=" +
+        this.courseid +
+        "&user_id=" +
+        id +
+        "&batchid=" +
+        this.batchId +
+        "&id=" +
+        topicId +
+        "&parent=" +
+        moduleId +
+        "&path=" +
+        url +
+        "&module=" +
+        encodedModuleName +
+        "&topic=" +
+        encodedTopicName +
+        "&action=" +
+        (actiondat == "entry" ? "resume" : "Click") +
+        // '&week=' + (this.weekHolder+1) +
+        "&lastLogIndex=" +
+        this.lastLogIndex +
+        "&orgType=" +
+        this.userType
+    );
   }
 
   playTopic(
@@ -657,28 +758,34 @@ export class CoursedetailsComponent implements OnInit {
     smi,
     moduleIdx?
   ) {
-    console.log(moduleName)
+    console.log(moduleName);
     this.weekHolder = weekIndex;
     this.weekHolderUI = weekIndex;
     this.currentTopicTitle = topicName;
-    this.currentModuleTitle = moduleName
+    this.currentModuleTitle = moduleName;
     this.topicPageStatus = topicStatus;
-    this.moduleSatusCheck = moduleStatus ? moduleStatus : 'process';
+    this.moduleSatusCheck = moduleStatus ? moduleStatus : "process";
     if (moduleIdx >= 0) {
-      this.subModuleHolder = moduleIdx
-      this.subModuleHolderUI = moduleIdx
-      this.submoduleTitle = moduleName
+      this.subModuleHolder = moduleIdx;
+      this.subModuleHolderUI = moduleIdx;
+      this.submoduleTitle = moduleName;
     }
-    
+
     this.nextPrevHolder = topindex;
-    this.topiccurrentPage = this.nextPrevHolder
+    this.topiccurrentPage = this.nextPrevHolder;
     this.moduleHolder = Number(smi);
     this.currentPage = Number(smi);
     // this.isprevEnable = true;
     // this.isNextEnable = true;
-    this.topicInfo = topicDetail
-    this.playURLConstructor(url,moduleName,topicName,this.topicInfo.parent,this.topicInfo.id)
-    console.log(this.urlSafe,"click link")
+    this.topicInfo = topicDetail;
+    this.playURLConstructor(
+      url,
+      moduleName,
+      topicName,
+      this.topicInfo.parent,
+      this.topicInfo.id
+    );
+    console.log(this.urlSafe, "click link");
   }
 
   onResize(event) {
@@ -742,69 +849,20 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   filterToc() {
-    // if(this.scromApiData.checkLevel){return false}
-    this.bookmarkedCount = 0;
-    this.bkup_Toc = JSON.parse(JSON.stringify(this.scromModuleData));
-    this.filterData = [];
-    // if (this.filterkey === 'Bookmarked') {
-    if (this.scromApiData.checkLevel) {
-      this.bkup_Toc.forEach((week, wi) => {
-        let smifilter = [];
-        week.childData.forEach((sm, smi) => {
-          let modulefilter = [];
-          sm.childData.forEach((module, mi) => {
-            if (module.childData.length > 0) {
-              let markedTopcs;
-              markedTopcs = module.childData.filter((topic) => {
-                return topic?.bookmark === true;
-              });
-              if (markedTopcs.length > 0) {
-                this.bookmarkedCount += markedTopcs.length;
-                module.childData = [];
-                module.childData = markedTopcs;
-                modulefilter.push(module);
-              }
-            }
-          });
-          if (modulefilter.length) {
-            sm.childData = modulefilter;
-            smifilter.push(sm);
-          }
-        });
+    //get bookmark count
+    let BK_param = {
+      batchid: this.batchId,
 
-        if (smifilter.length) {
-          week.childData = smifilter;
-          this.filterData.push(week);
-        }
-      });
-    } else {
-      this.bkup_Toc.forEach((week, wi) => {
-        let modulefilter = [];
-        week.childData.forEach((module, mi) => {
-          if (module.childData.length > 0) {
-            let markedTopcs;
-            markedTopcs = module.childData.filter((topic) => {
-              return topic?.bookmark === true;
-            });
-            if (markedTopcs.length > 0) {
-              this.bookmarkedCount += markedTopcs.length;
-              module.childData = [];
-              module.childData = markedTopcs;
-              modulefilter.push(module);
-            }
-          }
-        });
-        if (modulefilter.length) {
-          week.childData = modulefilter;
-          this.filterData.push(week);
-        }
-      });
-    }
-    // }
-    // else {
-    //   this.filterData = []
-
-    // }
+      user_id: this.getuserid.user_id,
+      course_id: this.courseid,
+    };
+    this.Lservice.getBookmarkFilter(BK_param).subscribe((dat: any) => {
+      if (dat.success) {
+        this.filterData = dat.message;
+      } else {
+        this.filterData = [];
+      }
+    });
   }
 
   topicNext() {
@@ -860,8 +918,13 @@ export class CoursedetailsComponent implements OnInit {
           this.currentTopicTitle = this.gettopicLink.title;
           this.currentModuleTitle = this.moduleInfo.title;
           this.topicPageStatus = this.gettopicLink.status;
-          this.playURLConstructor( this.gettopicLink.link,this.currentModuleTitle,this.currentTopicTitle,this.topicInfo.parent_id,this.topicInfo.id)
-          
+          this.playURLConstructor(
+            this.gettopicLink.link,
+            this.currentModuleTitle,
+            this.currentTopicTitle,
+            this.topicInfo.parent_id,
+            this.topicInfo.id
+          );
         }
       }
     }
@@ -925,7 +988,13 @@ export class CoursedetailsComponent implements OnInit {
         this.currentTopicTitle = this.gettopicLink.title;
         this.currentModuleTitle = this.moduleInfo.title;
         this.topicPageStatus = this.gettopicLink.status;
-        this.playURLConstructor( this.gettopicLink.link,this.currentModuleTitle,this.currentTopicTitle,this.topicInfo.parent_id,this.topicInfo.id)
+        this.playURLConstructor(
+          this.gettopicLink.link,
+          this.currentModuleTitle,
+          this.currentTopicTitle,
+          this.topicInfo.parent_id,
+          this.topicInfo.id
+        );
       }
     }
   }
@@ -1086,6 +1155,7 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   understoodClick(ux) {
+    // let current_Status = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].status
     this.topicInfo.user_experience = ux;
     this.Lservice.userexperience(
       this.getuserid.user_id,
@@ -1094,7 +1164,9 @@ export class CoursedetailsComponent implements OnInit {
       this.topicInfo.parent,
       ux,
       this.topicInfo?.id?.toString(),
-      this.topicInfo.status
+      this.topicInfo.status,
+      "",
+      this.topicInfo.topic_name
     ).subscribe((data: any) => {
       if (data?.data?.userexperience?.success) {
         this.topicInfo.user_experience = ux;
@@ -1104,7 +1176,7 @@ export class CoursedetailsComponent implements OnInit {
     });
   }
   bookmarkClick(isbokmarked) {
-    console.log(this.topicInfo)
+    console.log(this.topicInfo);
     this.topicInfo.bookmark = isbokmarked;
     this.Lservice.bookmark(
       this.getuserid.user_id,
@@ -1117,7 +1189,8 @@ export class CoursedetailsComponent implements OnInit {
       // this.checkDetails.checkLevel
       //   ? this.submoduleTitle
       //   : this.currentModuleTitle,
-      ""
+      "",
+      this.topicInfo.topic_name
     ).subscribe((data: any) => {
       if (data?.data?.bookmark?.success) {
         this.topicInfo.bookmark = isbokmarked;
@@ -1131,6 +1204,7 @@ export class CoursedetailsComponent implements OnInit {
     event.preventDefault();
   }
   submitMyQuestion() {
+    console.log(this.topicInfo, this.currentTopicTitle);
     if (this.topicInfo || this.currentTopicTitle) {
       if (this.questionText.trim().length) {
         this.Lservice.askaquestion(
@@ -1209,7 +1283,7 @@ export class CoursedetailsComponent implements OnInit {
       this.filterkey = "All";
     }
   }
- 
+
   filterQAList() {
     this.isQALoading = true;
     this.Lservice.getallquestion(
@@ -1217,7 +1291,7 @@ export class CoursedetailsComponent implements OnInit {
       this.courseid,
       this.topicInfo.parent,
       this.currentTopicTitle,
-     parseInt(this.qaFilterKey),
+      parseInt(this.qaFilterKey),
       this.batchId
     ).subscribe((data: any) => {
       this.isQALoading = false;
@@ -1362,7 +1436,7 @@ export class CoursedetailsComponent implements OnInit {
     if (this.htmlContent) {
       let regexKey = /[&<>#]/gi;
       if (this.htmlContent.search(regexKey) == -1) {
-        this.toastr.warning("spl key");
+        this.toastr.warning("Please dont use special characters");
         return false;
       }
 
@@ -1395,7 +1469,7 @@ export class CoursedetailsComponent implements OnInit {
       this.toastr.warning("Question cannot be empty");
     }
   }
-  
+
   ngOnDestroy() {
     const loginDetails = JSON.parse(localStorage.getItem("UserDetails"));
     if (loginDetails) {
@@ -1411,6 +1485,18 @@ export class CoursedetailsComponent implements OnInit {
 
     if (this.socketConnector) {
       this.socketConnector.unsubscribe();
+    }
+  }
+
+  goBack() {
+    if (!this.drawersOpen && this.scromApiData?.toc != "0") {
+      this.drawersOpen = this.drawersOpen ? false : true;
+    } else {
+      if (this.fromCalendar) {
+        this.route.navigateByUrl("/Learner/calendaractivity");
+      } else {
+        this.route.navigateByUrl("/Learner/MyCourse");
+      }
     }
   }
 }

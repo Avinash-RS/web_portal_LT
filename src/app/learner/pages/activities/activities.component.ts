@@ -81,6 +81,7 @@ export class ActivitiesComponent implements OnInit {
   verfyingCondition: any;
   // assignmentMessage = false;
   fromCalender = false;
+  fromupskill;
   multiArray = [];
   trendingItration: any = {
     loop: false, // dont make it true
@@ -190,6 +191,7 @@ export class ActivitiesComponent implements OnInit {
     //   this.route.getCurrentNavigation().extras.state && this.route.getCurrentNavigation().extras.state.data);
     let lang = localStorage.getItem('language')
       this.translate.use(lang?lang:'en') 
+      console.log(route);
     if (this.gs.checkLogout()) {
       this.userDetail = this.gs.checkLogout();
     }
@@ -245,6 +247,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.fromupskill = true;
     // this.projectDetaildata = this.projectDetails;
     this.Lservice.closeMobileResp$.subscribe((data: any) => {
       this.performdetailPageView = data;
@@ -390,7 +393,12 @@ export class ActivitiesComponent implements OnInit {
 
   goToCourse() {
     if (this.fromCalender) {
-      this.route.navigateByUrl('/Learner/calendaractivity');
+      if(this.fromupskill){
+        this.route.navigateByUrl('/Learner/upskillcalendar');
+      }else{
+        this.route.navigateByUrl('/Learner/calendaractivity');
+      }
+      
     } else {
       this.route.navigateByUrl('/Learner/MyCourse');
     }

@@ -80,7 +80,10 @@ export class LearnerServicesService {
       }
       );
   }
-
+getBookmarkFilter(postParam){
+  this.getToken();
+  return this.http.post(environment.apiUrl+'getbookmark',postParam,this.httpOptions);
+}
 uploadAssignments(fromdata) { 
   this.getToken();
   return this.http.post(this.envApi + 'wca/learnerscorefile', fromdata, this.httpOptions); 
@@ -1095,7 +1098,7 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
     });
   }
 
-  userexperience(user_id,course_id,batchid,parent,user_experience,id,status) {
+  userexperience(user_id,course_id,batchid,parent,user_experience,id,status,module,topic) {
     return this.Apollo.query({
       query: userexperienceQry,
       variables: {
@@ -1105,22 +1108,25 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
         batchid,
         parent,
         id,
-        status
+        status,
+        module,
+        topic
       }
     });
   }
-  bookmark(user_id,course_id,batchid,parent,bookmark,lastLogIndex,id,moduleName) {
+  bookmark(user_id,course_id,batchid,parent,bookmark,lastLogIndex,id,module,topic) {
     return this.Apollo.query({
       query: set_bookmark,
       variables: {
         user_id,
         course_id,
-        moduleName,
+        module,
         bookmark,
         batchid,
         lastLogIndex,
         parent,
-        id
+        id,
+        topic
       }
     });
   }
@@ -1306,4 +1312,6 @@ getActivityDetailsByCourseAndBatchID(batchid, courseid) {
       }
     });
   }
+
+  
 }

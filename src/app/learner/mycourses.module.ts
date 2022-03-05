@@ -41,6 +41,7 @@ import { ProgressionReportComponent } from './pages/progression-report/progressi
 import { QuestionanswerComponent } from './pages/QandA/questionanswer.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DateAdapter as AngularCalendarDateAdapter } from 'angular-calendar';
+import { UpskillCalendarComponent } from './pages/upskill-calendar/upskill-calendar.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -96,6 +97,11 @@ const routes: Routes = [
     data: { animation: 'calendaractivity' , title: 'Scheduled Activity'}
   },
   {
+    path: 'upskillcalendar',
+    component: UpskillCalendarComponent,
+    data: { animation: 'calendaractivity' , title: 'Upskill Calendar'}
+  },
+  {
     path: 'progressionReport',
     component: ProgressionReportComponent,
     data: { animation: 'progressionReport' , title: 'Progression Report'}
@@ -122,7 +128,8 @@ const routes: Routes = [
     CalendarActivityComponent,
     LearnerNewMyCourseComponent,
     ProgressionReportComponent,
-    QuestionanswerComponent
+    QuestionanswerComponent,
+    UpskillCalendarComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [
