@@ -52,22 +52,22 @@
     </div>
     <div class="activities ">
 
-        <div class="viewInfotxt  justify-content-between align-items-center ">
+        <div class="viewInfotxt d-flex justify-content-between align-items-center ">
             <div class="leftPan ">
                 <span mat-ripple (click)="setStatus( '') " [ngClass]="status=='' ? 'active' : '' ">{{'All' | translate}} ({{activityData?.allActivityCount}})</span>
                 <span mat-ripple (click)="setStatus( 'pending') " [ngClass]="status=='pending' ? 'active' : '' ">{{'Pending' | translate}} ({{activityData?.pendingActivityCount}})</span>
                 <span mat-ripple (click)="setStatus( 'completed') " [ngClass]="status=='completed' ? 'active' : '' ">{{'Completed' | translate}} ({{activityData?.completedActivityCount}})</span>
             </div>
-            <div class="rightPan ">
+            <div class="rightPan">
                 <span>{{'Filter:' | translate}} </span>
-                <mat-form-field class="mr-2 " appearance="outline ">
+                <mat-form-field class="mr-2" appearance="outline">
                     <mat-select (selectionChange)="onSortChange($event) " matTooltip="{{CourseName}} " [(ngModel)]="courseValue ">
                         <mat-option *ngFor="let course of courseDetailsList " [value]="course.course_id ">
                             {{course.course_name}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field appearance="outline ">
+                <mat-form-field appearance="outline">
                     <mat-select (selectionChange)="onSortChange($event) " [(ngModel)]="activityValue ">
                         <mat-option *ngFor="let filter of filterBy " [value]="filter.value ">
                             {{filter.key}}
@@ -119,16 +119,17 @@
                             </div>
                         </div>
 
-                        <div class="txtnddate ">
-                            <div class="infotxtarea ">
-                                <span class="htxt coursename " matTooltipPosition="below " matTooltip="{{activity.coursename}} ">{{activity.coursename}}</span>
-                                <div class="infotxt d-flex justify-content-start align-items-center "> <span>Module: </span> <span class="moduleTopic " matTooltipPosition="below " matTooltip="{{activity.modulename}} ">Introduction to Industrial IoT</span></div>
-                                <div *ngIf="(activity.self_paced_learning=='topic' || activity.liveclassroom=='topic' ) || (!activity.self_paced_learning && !activity.liveclassroom) " class="infotxt d-flex justify-content-start align-items-center
-                    "> <span>Topic: </span> <span class="moduleTopic " matTooltipPosition="below " matTooltip="{{activity.topicname}} ">Phases of Industrial Revolution</span></div>
+                        <div class="txtnddate">
+                            <div class="infotxtarea">
+                                <span class="htxt" matTooltipPosition="below" matTooltip="{{activity.coursename}}">{{activity.coursename}}</span>
+                                <div class="infotxt d-flex justify-content-start align-items-center"> <span>{{'Module:' | translate}}</span> <span class="moduleTopic" matTooltipPosition="below" matTooltip="{{activity.modulename}}">{{activity.modulename}}</span></div>
+                                <div *ngIf="(activity.self_paced_learning=='topic' || activity.liveclassroom=='topic' ) || (!activity.self_paced_learning && !activity.liveclassroom) " class="infotxt d-flex justify-content-start align-items-center"> <span>{{'Topic:' | translate}}</span> <span class="moduleTopic" matTooltipPosition="below" matTooltip="{{activity.topicname}}">{{activity.topicname}}</span></div>
                             </div>
 
                             <div class="infodatearea align-items-center ">
-                                <em class="icon lxp-Calendar_Outlined "></em>
+                                <div class="icon">
+                                    <em class="lxp-Calendar_Outlined"></em>
+                                </div>
                                 <div class="htxt ">
                                     <div class="date">{{activity.activitystartdate | date: 'MMM d, y, h:mm a'}}</div>
                                     <div class="date">{{activity.activityenddate | date: 'MMM d, y, h:mm a'}}</div>
