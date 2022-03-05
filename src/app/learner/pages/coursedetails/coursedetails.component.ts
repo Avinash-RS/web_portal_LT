@@ -738,7 +738,9 @@ export class CoursedetailsComponent implements OnInit {
         (actiondat == "entry" ? "resume" : "Click") +
         // '&week=' + (this.weekHolder+1) +
         "&lastLogIndex=" +
-        this.lastLogIndex
+        this.lastLogIndex +
+        "&orgType=" +
+        this.userType
     );
   }
 
