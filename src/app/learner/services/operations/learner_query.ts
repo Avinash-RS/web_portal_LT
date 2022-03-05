@@ -2655,6 +2655,11 @@ export const recentlycourse = gql`
           topic_status
           module_status
           newmodule
+          toc
+          module_id
+          topic_id
+          checklevel
+          course_status
         }
         completedTopic {
           course_name
@@ -2669,6 +2674,11 @@ export const recentlycourse = gql`
           topic_status
           module_status
           newmodule
+          toc
+          module_id
+          topic_id
+          checklevel
+          course_status
         }
       }
     }

@@ -188,7 +188,7 @@ export class QuestionanswerComponent implements OnInit {
     if (this.htmlContent) {
       let regexKey = /[&<>#]/gi;
       if (this.htmlContent.search(regexKey) == -1) {
-        this.toastr.warning("spl key")
+        this.toastr.warning("Please dont use special characters")
         return false
       }
 

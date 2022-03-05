@@ -248,4 +248,5 @@ export class CommonServicesService {
   getTOC(postParam){
     return this.http.post(environment.scormUrl+'navTreeV2',postParam);
   }
+  
 }
