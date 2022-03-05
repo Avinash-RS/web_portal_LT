@@ -408,6 +408,8 @@ export class CoursedetailsComponent implements OnInit {
         this.checkDetails?.lastLogIndex != "undefined"
       ) {
         this.lastLogIndex = parseInt(this.checkDetails.lastLogIndex) + 1;
+      }else{
+        this.lastLogIndex = 1;
       }
       this.playURLConstructor(
         this.checkDetails.link,
