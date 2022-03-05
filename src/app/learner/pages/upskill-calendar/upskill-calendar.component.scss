@@ -558,3 +558,6 @@
         box-shadow: none;
     }
 }
+::ng-deep.cal-month-view .cal-day-badge {
+    display: none;
+}
