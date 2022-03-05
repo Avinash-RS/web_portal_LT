@@ -25,7 +25,7 @@ export class UpskillCalendarComponent implements OnInit {
   refresh: Subject<any> = new Subject();
   daySelected = false;
   selectedDays: any = [];
-  activeDayIsOpen;
+  activeDayIsOpen = false;
   daySelection;
   courseDetailsList = [{
     'course_name': 'All Courses',
@@ -124,6 +124,19 @@ export class UpskillCalendarComponent implements OnInit {
     this.view = view;
   }
 
+  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    if (isSameMonth(date, this.viewDate)) {
+      if (
+        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+        events.length === 0
+      ) {
+        this.activeDayIsOpen = false;
+      } else {
+        this.activeDayIsOpen = true;
+      }
+      this.viewDate = date;
+    }
+  }
 
   getCalendarCount(value?) {
     const monthValue = moment(value).format('YYYY-MM');
