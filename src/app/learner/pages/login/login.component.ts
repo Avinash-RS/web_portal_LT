@@ -224,7 +224,11 @@ export class LoginComponent implements OnInit {
     userDetail['specific_report_value'] = Math.floor(Math.random() * 1000000000).toString()
     localStorage.setItem('UserDetails', JSON.stringify(userDetail));
     if(userDetail.is_password_updated){
-      this.router.navigate(['/Learner/MyCourse']);
+      if(userDetail.org_type == 'Corporate'){
+        this.router.navigate(['/Learner/upskillcalendar']);
+      } else {
+        this.router.navigate(['/Learner/MyCourse']);
+      }
     } else {
       this.router.navigate(['/Learner/profile']);
     }
