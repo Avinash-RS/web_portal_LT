@@ -2560,7 +2560,6 @@ export const getCourseReportByUserid = gql`
             enums
           }
           topicDetails {
-            id
             name
             activityDetails {
               name
