@@ -5,8 +5,8 @@
             <h1>Calendar</h1>
             <div class="btn">
                 <button class="resetbtn" (click)="onSortChange('')">
-          <em class=" lxp-Reset "></em> <span>{{'Reset' | translate}}</span>
-        </button>
+                    <em class=" lxp-Reset "></em> <span>{{'Reset' | translate}}</span>
+                </button>
             </div>
         </div>
         <div class="calendarside ">
@@ -14,23 +14,28 @@
                 <!-- calender html start-->
                 <div class="tabs ">
                     <div class="monthview ">
-                        <span mwlCalendarPreviousView [view]="view " [(viewDate)]="viewDate " (viewDateChange)="getCalendarCount($event);monthChange($event) ">
-                <em class="lxp-Dropdown "></em>
-              </span>
+                        <span mwlCalendarPreviousView [view]="view " [(viewDate)]="viewDate "
+                            (viewDateChange)="getCalendarCount($event);monthChange($event) ">
+                            <em class="lxp-Dropdown "></em>
+                        </span>
                         <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
-                        <span mwlCalendarNextView class="rotate-90 " [view]="view " [(viewDate)]="viewDate " (viewDateChange)="getCalendarCount($event);monthChange($event) ">
-                <em class="lxp-Dropdown "></em>
-              </span>
+                        <span mwlCalendarNextView class="rotate-90 " [view]="view " [(viewDate)]="viewDate "
+                            (viewDateChange)="getCalendarCount($event);monthChange($event) ">
+                            <em class="lxp-Dropdown "></em>
+                        </span>
                     </div>
                     <div class="selectview ">
                         <div class="btn-group ">
-                            <div class="btn1 " (click)="setView(CalendarView.Month,viewDate) " [class.active]="view===CalendarView.Month ">
+                            <div class="btn1 " (click)="setView(CalendarView.Month,viewDate) "
+                                [class.active]="view===CalendarView.Month ">
                                 Daily
                             </div>
-                            <div class="btn1 " (click)="setView(CalendarView.Week,viewDate) " [class.active]="view===CalendarView.Week ">
+                            <div class="btn1 " (click)="setView(CalendarView.Week,viewDate) "
+                                [class.active]="view===CalendarView.Week ">
                                 Weekly
                             </div>
-                            <div class="btn1 " (click)="setView(CalendarView.Day,viewDate) " [class.active]="view===CalendarView.Day ">
+                            <div class="btn1 " (click)="setView(CalendarView.Day,viewDate) "
+                                [class.active]="view===CalendarView.Day ">
                                 Monthly
                             </div>
                         </div>
@@ -38,12 +43,16 @@
                 </div>
                 <br />
                 <div [ngSwitch]="view ">
-                    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month " [viewDate]="viewDate " [events]="events " [refresh]="refresh " [activeDayIsOpen]="activeDayIsOpen " (dayClicked)="getActivity($event.day,$event.day) " (eventClicked)="handleEvent(
+                    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month " [viewDate]="viewDate "
+                        [events]="events " [refresh]="refresh " [activeDayIsOpen]="activeDayIsOpen "
+                        (dayClicked)="getActivity($event.day,$event.day) " (eventClicked)="handleEvent(
                     'Clicked', $event.event) ">
                     </mwl-calendar-month-view>
-                    <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week " [viewDate]="viewDate " [events]="events " [refresh]="refresh " (eventClicked)="handleEvent( 'Clicked', $event.event) ">
+                    <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week " [viewDate]="viewDate " [events]="events "
+                        [refresh]="refresh " (eventClicked)="handleEvent( 'Clicked', $event.event) ">
                     </mwl-calendar-week-view>
-                    <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day " [viewDate]="viewDate " [events]="events " [refresh]="refresh " (eventClicked)="handleEvent( 'Clicked', $event.event) ">
+                    <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day " [viewDate]="viewDate " [events]="events "
+                        [refresh]="refresh " (eventClicked)="handleEvent( 'Clicked', $event.event) ">
                     </mwl-calendar-day-view>
                 </div>
                 <!-- calender html end -->
@@ -54,14 +63,20 @@
 
         <div class="viewInfotxt d-flex justify-content-between align-items-center ">
             <div class="leftPan ">
-                <span mat-ripple (click)="setStatus( '') " [ngClass]="status=='' ? 'active' : '' ">{{'All' | translate}} ({{activityData?.allActivityCount}})</span>
-                <span mat-ripple (click)="setStatus( 'pending') " [ngClass]="status=='pending' ? 'active' : '' ">{{'Pending' | translate}} ({{activityData?.pendingActivityCount}})</span>
-                <span mat-ripple (click)="setStatus( 'completed') " [ngClass]="status=='completed' ? 'active' : '' ">{{'Completed' | translate}} ({{activityData?.completedActivityCount}})</span>
+                <span mat-ripple (click)="setStatus( '') " [ngClass]="status=='' ? 'active' : '' ">{{'All' | translate}}
+                    ({{activityData?.allActivityCount}})</span>
+                <span mat-ripple (click)="setStatus( 'pending') "
+                    [ngClass]="status=='pending' ? 'active' : '' ">{{'Pending' | translate}}
+                    ({{activityData?.pendingActivityCount}})</span>
+                <span mat-ripple (click)="setStatus( 'completed') "
+                    [ngClass]="status=='completed' ? 'active' : '' ">{{'Completed' | translate}}
+                    ({{activityData?.completedActivityCount}})</span>
             </div>
             <div class="rightPan">
                 <span>{{'Filter:' | translate}} </span>
                 <mat-form-field class="mr-2" appearance="outline">
-                    <mat-select (selectionChange)="onSortChange($event) " matTooltip="{{CourseName}} " [(ngModel)]="courseValue ">
+                    <mat-select (selectionChange)="onSortChange($event) " matTooltip="{{CourseName}} "
+                        [(ngModel)]="courseValue ">
                         <mat-option *ngFor="let course of courseDetailsList " [value]="course.course_id ">
                             {{course.course_name}}
                         </mat-option>
@@ -87,20 +102,27 @@
                         <div class="typendStatus ">
                             <div class="infotypearea ">
                                 <em *ngIf="activity.activitytype=='Live Classroom' " class="icon lxp-VILT "></em>
-                                <em *ngIf="activity.activitytype=='Self Learning' " class="icon lxp-Self_Learning "></em>
+                                <em *ngIf="activity.activitytype=='Self Learning' "
+                                    class="icon lxp-Self_Learning "></em>
                                 <em *ngIf="activity.activitytype=='Perform' " class="icon lxp-Perform "></em>
                                 <em *ngIf="activity.activitytype=='Assignment' " class="icon lxp-Edit_Document "></em>
                                 <em *ngIf="activity.activitytype=='Project' " class="icon lxp-User_Settings "></em>
-                                <div *ngIf="activity.activitytype !='Live Classroom' && activity.activitytype !='Self Learning' " class="htxt notifi activity ">{{activity.activitytype}}</div>
-                                <div *ngIf="activity.activitytype=='Self Learning' " class="htxt notifi selfplacedlearning ">{{activity.activitytype}}</div>
-                                <div *ngIf="activity.activitytype=='Live Classroom' " class="htxt notifi virtualinstructorled ">
-                                    <ng-container *ngIf="userDetails.org_type !=='collegeconnect' ">{{'Live Interactions' | translate}}</ng-container>
-                                    <ng-container *ngIf="userDetails.org_type=='collegeconnect' ">{{'Industry Talk' | translate}}</ng-container>
+                                <div *ngIf="activity.activitytype !='Live Classroom' && activity.activitytype !='Self Learning' "
+                                    class="htxt notifi activity ">{{activity.activitytype}}</div>
+                                <div *ngIf="activity.activitytype=='Self Learning' "
+                                    class="htxt notifi selfplacedlearning ">{{activity.activitytype}}</div>
+                                <div *ngIf="activity.activitytype=='Live Classroom' "
+                                    class="htxt notifi virtualinstructorled ">
+                                    <ng-container *ngIf="userDetails.org_type !=='collegeconnect' ">{{'Live
+                                        Interactions' | translate}}</ng-container>
+                                    <ng-container *ngIf="userDetails.org_type=='collegeconnect' ">{{'Industry Talk' |
+                                        translate}}</ng-container>
                                 </div>
                             </div>
 
                             <div class="statusarea d-flex justify-content-end align-items-center ">
-                                <ng-container *ngIf="activity.status=='Completed' || activity.status=='Graded' || activity.status=='Submitted' ">
+                                <ng-container
+                                    *ngIf="activity.status=='Completed' || activity.status=='Graded' || activity.status=='Submitted' ">
                                     <em class="icon lxp-Tick green"></em>
                                     <span>{{activity.status}}</span>
                                 </ng-container>
@@ -121,9 +143,15 @@
 
                         <div class="txtnddate">
                             <div class="infotxtarea">
-                                <span class="htxt" matTooltipPosition="below" matTooltip="{{activity.coursename}}">{{activity.coursename}}</span>
-                                <div class="infotxt d-flex justify-content-start align-items-center"> <span>{{'Module:' | translate}}</span> <span class="moduleTopic" matTooltipPosition="below" matTooltip="{{activity.modulename}}">{{activity.modulename}}</span></div>
-                                <div *ngIf="(activity.self_paced_learning=='topic' || activity.liveclassroom=='topic' ) || (!activity.self_paced_learning && !activity.liveclassroom) " class="infotxt d-flex justify-content-start align-items-center"> <span>{{'Topic:' | translate}}</span> <span class="moduleTopic" matTooltipPosition="below" matTooltip="{{activity.topicname}}">{{activity.topicname}}</span></div>
+                                <span class="htxt" matTooltipPosition="below"
+                                    matTooltip="{{activity.coursename}}">{{activity.coursename}}</span>
+                                <div class="infotxt d-flex justify-content-start align-items-center"> <span>{{'Module:'
+                                        | translate}}</span> <span class="moduleTopic" matTooltipPosition="below"
+                                        matTooltip="{{activity.modulename}}">{{activity.modulename}}</span></div>
+                                <div *ngIf="(activity.self_paced_learning=='topic' || activity.liveclassroom=='topic' ) || (!activity.self_paced_learning && !activity.liveclassroom) "
+                                    class="infotxt d-flex justify-content-start align-items-center"> <span>{{'Topic:' |
+                                        translate}}</span> <span class="moduleTopic" matTooltipPosition="below"
+                                        matTooltip="{{activity.topicname}}">{{activity.topicname}}</span></div>
                             </div>
 
                             <div class="infodatearea align-items-center ">
@@ -143,14 +171,16 @@
             <ng-container *ngIf="!dataAvailable && !showSkeleton ">
                 <div class="noCard">
                     <figure>
-                        <img src="https://assets.lntedutech.com/application_images/noactivityScheduled.svg " alt="assignment ">
+                        <img src="https://assets.lntedutech.com/application_images/noactivityScheduled.svg "
+                            alt="assignment ">
                     </figure>
                     <p>{{'You have no activity scheduled' | translate}}</p>
                 </div>
             </ng-container>
 
             <ng-container *ngIf="showSkeleton ">
-                <div class="skeleton-container d-flex justify-content-between flex-row " *ngFor="let skeleton of skeletonPart ">
+                <div class="skeleton-container d-flex justify-content-between flex-row "
+                    *ngFor="let skeleton of skeletonPart ">
                     <div class="skeleton-part d-flex justify-content-between flex-column item1 ">
                         <ngx-skeleton-loader count="1 " class="skeletonStyle "></ngx-skeleton-loader>
                         <ngx-skeleton-loader count="1 " class="skeletonStyle "></ngx-skeleton-loader>
@@ -168,111 +198,6 @@
                     </div>
                 </div>
             </ng-container>
-
-            <!-- <ng-container>
-                <ng-container>
-                    <div class="contentbox justify-content-between ">
-                        <div class="typendStatus ">
-                            <div class="infotypearea ">
-                                <em class="icon lxp-VILT "></em>
-                                <div class="htxt notify virtualinstructorled ">Live Interactions</div>
-                            </div>
-
-                            <div class="statusarea d-flex justify-content-end align-items-center ">
-                                <em class="icon lxp-Tick green "></em>
-                                <span>Completed</span>
-                            </div>
-                        </div>
-
-                        <div class="txtnddate ">
-                            <div class="infotxtarea ">
-                                <span class="htxt ">Core Java Programming Course</span>
-                                <div class="infotxt d-flex justify-content-start align-items-center "> <span>Module:</span> <span class="moduleTopic ">Introduction to Industrial IoT</span></div>
-                                <div class="infotxt d-flex justify-content-start align-items-center "> <span>Topic:</span> <span class="moduleTopic ">Phases of Industrial Revolution</span></div>
-                            </div>
-
-                            <div class="infodatearea align-items-center ">
-                                <em class="icon lxp-Calendar_Outlined "></em>
-                                <div class="htxt ">
-                                    <div>03/06/2021 12:30 PM</div>
-                                    <div>11/06/2021 02:00 PM</div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </ng-container>
-            </ng-container>
-
-            <ng-container>
-                <ng-container>
-                    <div class="contentbox justify-content-between ">
-                        <div class="typendStatus ">
-                            <div class="infotypearea ">
-                                <em class="icon lxp-Self_Learning "></em>
-                                <div class="htxt notify selfplacedlearning ">Self Learning</div>
-                            </div>
-
-                            <div class="statusarea d-flex justify-content-end align-items-center ">
-                                <em class="icon lxp-Play grey "></em>
-                                <span>Yet to start</span>
-                            </div>
-                        </div>
-
-                        <div class="txtnddate ">
-                            <div class="infotxtarea ">
-                                <span class="htxt ">Core Java Programming Course</span>
-                                <div class="infotxt d-flex justify-content-start align-items-center "> <span>Module:</span> <span class="moduleTopic ">Introduction to Industrial IoT</span></div>
-                                <div class="infotxt d-flex justify-content-start align-items-center "> <span>Topic:</span> <span class="moduleTopic ">Phases of Industrial Revolution</span></div>
-                            </div>
-
-                            <div class="infodatearea align-items-center ">
-                                <em class="icon lxp-Calendar_Outlined "></em>
-                                <div class="htxt ">
-                                    <div>03/06/2021 12:30 PM</div>
-                                    <div>11/06/2021 02:00 PM</div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </ng-container>
-            </ng-container>
-
-            <ng-container>
-                <ng-container>
-                    <div class="contentbox justify-content-between ">
-                        <div class="typendStatus ">
-                            <div class="infotypearea ">
-                                <em class="icon lxp-Perform "></em>
-                                <div class="htxt notify activity ">Perform</div>
-                            </div>
-
-                            <div class="statusarea d-flex justify-content-end align-items-center ">
-                                <em class="icon lxp-Timer timer "></em>
-                                <span>Ongoing</span>
-                            </div>
-                        </div>
-
-                        <div class="txtnddate ">
-                            <div class="infotxtarea ">
-                                <span class="htxt ">Core Java Programming Course</span>
-                                <div class="infotxt d-flex justify-content-start align-items-center "> <span>Module: </span> <span class="moduleTopic ">Introduction to Industrial IoT</span></div>
-                                <div class="infotxt d-flex justify-content-start align-items-center "> <span>Topic: </span> <span class="moduleTopic ">Phases of Industrial Revolution</span></div>
-                            </div>
-
-                            <div class="infodatearea align-items-cediv ">
-                                <em class="icon lxp-Calendar_Outlined "></em>
-                                <div class="htxt ">
-                                    <div>03/06/2021 12:30 PM</div>
-                                    <div>11/06/2021 02:00 PM</div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </ng-container>
-            </ng-container> -->
 
         </div>
 
