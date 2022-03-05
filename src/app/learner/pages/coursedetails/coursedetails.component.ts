@@ -362,7 +362,7 @@ export class CoursedetailsComponent implements OnInit {
       // this.lastpersentage = detail  && detail.persentage || this.localper ;
       gtag("event", "coursePlayerCID", { courseID: this.courseid });
       this.playerModuleAndTopic();
-      
+
       this.service
         .viewCurseByIDForLearner(
           (this.checkDetails && this.checkDetails.id) || this.localStoCourseid
@@ -408,6 +408,8 @@ export class CoursedetailsComponent implements OnInit {
         this.checkDetails?.lastLogIndex != "undefined"
       ) {
         this.lastLogIndex = parseInt(this.checkDetails.lastLogIndex) + 1;
+      }else{
+        this.lastLogIndex = 1;
       }
       this.playURLConstructor(
         this.checkDetails.link,
@@ -469,9 +471,10 @@ export class CoursedetailsComponent implements OnInit {
     this.socketEmitReciver = this.socketService.change.subscribe(
       (result: any) => {
         console.log(result);
-       
+
         if (result.data.resume) {
-          if (result && this.weekHolder) {}else{
+          if (result && this.weekHolder) {
+          } else {
             // replace resume data from socket for TOC
             this.scromModuleData = [...result.data.message];
             // get current resume topic (from expanded socket data)
@@ -490,7 +493,6 @@ export class CoursedetailsComponent implements OnInit {
                 } else {
                   if (e.link && e.expanded == true) {
                     resultData = e;
-
                   }
                 }
               }
@@ -506,10 +508,7 @@ export class CoursedetailsComponent implements OnInit {
           if (this.checkDetails.checklevel) {
             console.log(this.scromModuleData);
             if (
-              this.scromModuleData[this.weekHolder]?.childData[
-                this.moduleHolder
-              ]?.childData[this.subModuleHolder]?.id ==
-              result.data.message[0].parent
+              this.scromModuleData[this.weekHolder]?.childData[this.moduleHolder]?.childData[this.subModuleHolder]?.id == result.data.message[0].parent
             ) {
               this.scromModuleData[this.weekHolder].childData[
                 this.moduleHolder
@@ -623,9 +622,9 @@ export class CoursedetailsComponent implements OnInit {
       this.weekLength = this.scromApiData.message.length;
 
       // if (!this.checkDetails?.fromSuggestion) {
-        // this.nextPrevHolder = this.topiccurrentPage =0
-        // this.moduleHolder = this.currentPage = 0
-        // this.weekHolder = this.weekHolderUI = 0;
+      // this.nextPrevHolder = this.topiccurrentPage =0
+      // this.moduleHolder = this.currentPage = 0
+      // this.weekHolder = this.weekHolderUI = 0;
       // } else {
       //   this.nextPrevHolder = this.topiccurrentPage = Number(
       //     this.checkDetails.topicIndex
@@ -641,7 +640,8 @@ export class CoursedetailsComponent implements OnInit {
       //start course
       if (
         this.checkDetails.course_status == "start" ||
-        this.checkDetails.course_status == null || this.userType==='vocational'
+        this.checkDetails.course_status == null ||
+        this.userType === "vocational"
       ) {
         let bodyData;
         if (this.scromApiData.checkLevel) {
@@ -666,7 +666,10 @@ export class CoursedetailsComponent implements OnInit {
           this.checkDetails.course_status == null
             ? "start"
             : this.checkDetails.course_status;
-        if (this.checkDetails.course_status !== "start" && this.userType !== "vocational") {
+        if (
+          this.checkDetails.course_status !== "start" &&
+          this.userType !== "vocational"
+        ) {
           this.inputEl
             ? this.inputEl.nativeElement.scrollIntoView({ behavior: "smooth" })
             : "";
@@ -677,8 +680,8 @@ export class CoursedetailsComponent implements OnInit {
 
   gettopicOnModule(week, modul, parent, body) {
     // this.topicData$ = this.gettopicapi(week,module,parent);
-    if(this.filterkey == "Bookmarked"){
-      return false
+    if (this.filterkey == "Bookmarked") {
+      return false;
     }
     let param: any = {};
     param.parent = parent;
@@ -737,7 +740,9 @@ export class CoursedetailsComponent implements OnInit {
         (actiondat == "entry" ? "resume" : "Click") +
         // '&week=' + (this.weekHolder+1) +
         "&lastLogIndex=" +
-        this.lastLogIndex
+        this.lastLogIndex +
+        "&orgType=" +
+        this.userType
     );
   }
 
@@ -845,20 +850,19 @@ export class CoursedetailsComponent implements OnInit {
 
   filterToc() {
     //get bookmark count
-    let BK_param={
-      batchid:this.batchId,
-     
-      user_id:this.getuserid.user_id,
-      course_id:this.courseid
-  }
-    this.Lservice.getBookmarkFilter(BK_param).subscribe((dat:any)=>{
-      if(dat.success)
-        {    
-          this.filterData = dat.message;
-        }else{
-          this.filterData = []
-        }
-    })
+    let BK_param = {
+      batchid: this.batchId,
+
+      user_id: this.getuserid.user_id,
+      course_id: this.courseid,
+    };
+    this.Lservice.getBookmarkFilter(BK_param).subscribe((dat: any) => {
+      if (dat.success) {
+        this.filterData = dat.message;
+      } else {
+        this.filterData = [];
+      }
+    });
   }
 
   topicNext() {
