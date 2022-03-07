@@ -81,7 +81,6 @@ export class ActivitiesComponent implements OnInit {
   verfyingCondition: any;
   // assignmentMessage = false;
   fromCalender = false;
-  fromupskill;
   multiArray = [];
   trendingItration: any = {
     loop: false, // dont make it true
@@ -247,7 +246,6 @@ export class ActivitiesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fromupskill = true;
     // this.projectDetaildata = this.projectDetails;
     this.Lservice.closeMobileResp$.subscribe((data: any) => {
       this.performdetailPageView = data;
@@ -393,10 +391,10 @@ export class ActivitiesComponent implements OnInit {
 
   goToCourse() {
     if (this.fromCalender) {
-      if(this.fromupskill){
-        this.route.navigateByUrl('/Learner/upskillcalendar');
-      }else{
-        this.route.navigateByUrl('/Learner/calendaractivity');
+      if(this.userDetail.org_type == 'Corporate'){
+        this.route.navigate(['/Learner/upskillcalendar']);
+      } else {
+        this.route.navigate(['/Learner/calendaractivity']);
       }
       
     } else {

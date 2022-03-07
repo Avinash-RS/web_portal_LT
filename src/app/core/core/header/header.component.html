@@ -95,7 +95,7 @@
       {{'My Courses' | translate}}
     </div>
   </div>
-  <div class="stripItem" routerLink="/Learner/upskillcalendar" [ngClass]="activeUrl === '/Learner/upskillcalendar' ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
+  <div class="stripItem" (click)="openCalendar()" [ngClass]="calendarActive ? 'activeItem' : 'normalItem'" [ngClass]="expandTxt?'navOpen':'navClose'">
     <div class="icoBox">
       <em class="lxp-Calendar_Outlined"></em>
     </div>

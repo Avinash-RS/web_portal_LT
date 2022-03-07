@@ -118,6 +118,7 @@ export class UpskillCalendarComponent implements OnInit {
   }
   
   monthChange(value){
+    this.activeDayIsOpen = false;
     const topicStart = new Date(value);
     this.monthView = topicStart;
     this.getLearnerActivity('month',topicStart)
@@ -129,6 +130,17 @@ export class UpskillCalendarComponent implements OnInit {
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    var description = [];
+    if(events.length > 0){
+      events.forEach((value:any)=>{
+        if(value.description.length > 0){
+          description.push(value.description)
+        }
+      })
+    }
+    if(description.length == 0){
+      return;
+    }
     if (isSameMonth(date, this.viewDate)) {
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -151,9 +163,20 @@ export class UpskillCalendarComponent implements OnInit {
         element.start = new Date(element.start);
         element.end = new Date (element.end);
         element.color = {primary : element.color};
+        element.title = element.description;
       //  element.allDay = true;
       });
       this.events = activityDetailsList;​
+      if(activityDetailsList.length > 0){
+        var descriptionAvailable = [];
+        var today = new Date();
+        activityDetailsList.forEach((value)=>{
+          var dateAvailable = moment(today).isBetween(value.start, value.end);
+          if(dateAvailable){
+            this.activeDayIsOpen = true;
+          }
+        })
+      }
       setTimeout(()=>{
         var eventsParent = document.querySelectorAll('.cal-events');
         eventsParent.forEach((element:any) => {

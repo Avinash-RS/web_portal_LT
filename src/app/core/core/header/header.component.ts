@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
   loading = false;
   hideHeaderMenu: boolean = false;
   expandTxt:boolean = false;
-
+  calendarActive;
   @HostBinding('class') componentCssClass;
   innerWidth: number;
   profilepic: any;
@@ -67,6 +67,11 @@ export class HeaderComponent implements OnInit {
       this.isAvailOpen = data;
     });
     this.activeUrl = this.router.url;
+    if(this.activeUrl == '/Learner/upskillcalendar' || this.activeUrl == '/Learner/calendaractivity'){
+      this.calendarActive = true;
+    } else {
+      this.calendarActive = false
+    }
     this.orgDetails = JSON.parse(localStorage.getItem('organizationDetails')) || null;
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
     //this.profilepic = this.userDetailes.profile_img;
@@ -167,6 +172,13 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/Learner/MyCourse']);
   }
 
+  openCalendar(){
+    if(this.userDetailes.org_type == 'Corporate'){
+      this.router.navigate(['/Learner/upskillcalendar']);
+    } else {
+      this.router.navigate(['/Learner/calendaractivity']);
+    } 
+  }
   openAvailableCources(isAvailOpen) {
     this.services.openAvailCourcePopup$.next(isAvailOpen);
   }
