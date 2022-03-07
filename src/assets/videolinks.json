@@ -1,0 +1,35 @@
+[
+    {
+        "course":"Core Java",
+        "topic":[
+            {
+                "topicname":"Inner Class",
+                "link":"https://www.youtube.com/watch?v=okruEgWGVGU"    
+            },
+            {
+                "topicname":"Inner Member Class In Java",
+                "link":"https://www.youtube.com/watch?v=LyAMUSKBBuo"
+            },
+            {
+                "topicname":"Inner Nested and Anonymous Class",
+                "link":"https://www.youtube.com/watch?v=PYMKk4XothI"
+            },
+            {
+                "topicname":"Java 8 Streams | Exception Handling Mechanism | lambda",
+                "link":"https://www.youtube.com/watch?v=CdsgPL_5yes&t=147s"
+            },
+            {
+                "topicname":"Exception Handling in Java Practical Part 4.1 Try with Resources",
+                "link":"https://www.youtube.com/watch?v=V3X6uV4Xg34"
+            },
+            {
+                "topicname":"Java IO Streams Tutorial | File Handling in Java | Java Tutorial",
+                "link":"https://www.youtube.com/watch?v=glMbAExYJ28"
+            },
+            {
+                "topicname":"Java Source Code Analysis using SonarQube",
+                "link":"https://www.youtube.com/watch?v=hyBznKcoKEg"
+            }
+        ]
+    }
+]

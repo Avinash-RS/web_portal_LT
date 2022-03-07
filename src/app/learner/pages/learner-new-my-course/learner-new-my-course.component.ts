@@ -20,7 +20,7 @@ const DEFAULT_DURATION = 300;
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { TranslateService } from '@ngx-translate/core';
-
+var link = require('../../../../assets/videolinks.json');
 
 export const MY_FORMATS = {
   parse: {
@@ -377,6 +377,7 @@ export class LearnerNewMyCourseComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
 
   ngOnInit() {
+    // console.log('json', link );
     this.innerWidth = window.innerWidth;
     let showAppBanner = localStorage.getItem('appBanner');
     if (!showAppBanner) {
@@ -836,6 +837,11 @@ export class LearnerNewMyCourseComponent implements OnInit {
   this.getWeekCourseData();
   this.showProgressChart = true;
 }
+
+getVideoLink() {
+    window.open("https://upskillresourcefiles.lntedutech.com/", 'blank').focus();
+}
+
 //Date initialize
 setdateForprogress(){
   //week wise date
