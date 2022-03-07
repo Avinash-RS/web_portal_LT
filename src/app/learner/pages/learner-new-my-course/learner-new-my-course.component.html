@@ -320,6 +320,28 @@
                                 <span>{{'Course Completion Progress' | translate}}</span> 
                             </h4>
                         </div>
+
+                        <div class="videolinks-btn">
+                            <h4>
+                                <em class="lxp-video_links"></em>
+                                <span>{{'Reference video links' | translate}}</span> 
+                            </h4>
+                        </div>
+
+                        <!-- <ng-container *ngFor="let link of links">
+                            <div class="videolinks">
+                                <div class="header">
+                                    <div class="playericon">
+                                        <em class="lxp-video_links"></em>
+                                        <h1>Reference video links</h1>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 resource-col">
+                                  <h1 *ngIf = "let course of links">{{link.course}}</h1>
+                                </div>
+                            </div>
+
+                        </ng-container> -->
                         
 
                         <mat-tab-group #tabs (selectedTabChange)="courseTabChange($event,userDetailes.user_id,userDetailes._id);" [(selectedIndex)]="selectedIndex">
