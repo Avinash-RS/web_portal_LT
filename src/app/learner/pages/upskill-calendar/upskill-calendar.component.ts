@@ -71,6 +71,7 @@ export class UpskillCalendarComponent implements OnInit {
   customTooltipCondition = false
   CourseName: string;
   calendarSkele: boolean =false;
+  countMonth;
   constructor(public learnerService: LearnerServicesService,private gs: GlobalServiceService,private router: Router) {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
                 if(!this.userDetailes?.is_password_updated){
@@ -122,6 +123,7 @@ export class UpskillCalendarComponent implements OnInit {
 
 
   setView(view: CalendarView) {
+    this.activeDayIsOpen = false;
     this.view = view;
   }
 
@@ -151,6 +153,7 @@ export class UpskillCalendarComponent implements OnInit {
   }
 
   getCalendarCount(value?) {
+    this.countMonth = value;
     const monthValue = moment(value).format('YYYY-MM');
     this.calendarSkele=true
     this.learnerService.getAllActivity(this.userDetails.user_id, monthValue).subscribe((result: any) => {
@@ -253,6 +256,7 @@ export class UpskillCalendarComponent implements OnInit {
     this.onSortChange('value')
   }
   onSortChange(value){
+    this.activeDayIsOpen = false;
     if(this.courseDetailsList?.length > 0){
       this.courseDetailsList.forEach((course)=>{
         if(course.course_id == value.value){
@@ -283,6 +287,7 @@ export class UpskillCalendarComponent implements OnInit {
       this.daySelection = this.monthView
     }
     this.getLearnerActivity(view,this.daySelection);
+    this.getCalendarCount(this.countMonth)
     }
 
     launchAssignment(value) {
