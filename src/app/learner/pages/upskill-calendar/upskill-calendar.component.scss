@@ -1,9 +1,10 @@
 @import "variable";
+
     .upskillActivity {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        height: calc(100vh - 120px);
+        // height: calc(100vh - 120px);
         overflow: hidden;
         @media screen and (max-width: 768px) {
             flex-direction: column;
@@ -11,8 +12,14 @@
         .Leftcontainer {
             width: 100%;
             order: 1;
-            @media screen and (min-width: 769px) {
-                width: 70%;
+            @media screen and (min-width: 992px) {
+                width: calc(100% - 400px);
+            }
+            @media screen and (min-width: 1200px) {
+                width: calc(100% - 450px);
+            }
+            @media screen and (min-width: 1540px) {
+                width: calc(100% - 550px);
             }
             .calendar {
                 display: flex;
@@ -58,6 +65,15 @@
                     border:  1px solid rgba(112, 112, 112, 0.25);
                     box-shadow: 0px 4px 4px #0000000A;
                     border-radius: 15px 0px 0px 15px;
+                    @media only screen and (min-width: 992px) {
+                        height: calc(100vh - 195px);
+                    }
+                    @media only screen and (min-width: 1200px) {
+                        height: calc(100vh - 195px);
+                    }
+                    @media only screen and (min-width: 1540px) {
+                        height: calc(100vh - 215px);
+                    }
                 }
                 .tabs {
                     display: flex;
@@ -120,19 +136,23 @@
         .activities {
             width: 100%;
             order: 2;
-            // background-color: $color-white;
             box-shadow: 0 0 2px 0 #0000006b;
-            // height: 100%;
-            padding: 5px 15px;
-            @media screen and (min-width: 720px) {
-                padding: 0 0.85em 0 0.85em;
-            }
+            height: 100%;
+            padding: 15px;
+            position: relative;
+            padding: 2em 0.85em 1.5 0.85em;
             @media screen and (min-width: 992px) {
                 padding: 1.8em 1.5em 0 1.5em;
-                // order: 2;
+                position: fixed;
+                right: 0;
+                top: 70px;
+                width: 400px
             }
-            @media screen and (min-width:769px) {
-                width: 40%;
+            @media screen and (min-width: 1200px) {
+                width: 450px
+            }
+            @media screen and (min-width: 1540px) {
+                width: 550px
             }
             .viewInfotxt {
                 flex-direction: column;
@@ -240,11 +260,18 @@
                 }
             }
             .contentarea {
-                padding: 15px 10px;
-                height: calc(100% - 100px);
-                    overflow-y: auto; 
-                @media only screen and (min-width: 1140px) {
-                    padding: 10px 10px;
+                padding: 15px 0;
+                overflow-y: auto;
+                @media only screen and (min-width: 992px) {
+                    height: calc(100vh - 220px);
+                    padding: 10px 0;
+                }
+                @media only screen and (min-width: 1200px) {
+                    height: calc(100vh - 210px);
+                    padding: 10px 10px 10px 0;
+                }
+                @media only screen and (min-width: 1540px) {
+                    height: calc(100vh - 215px);
                 }
                 .contentbox {
                     flex-wrap: wrap;
@@ -329,7 +356,7 @@
                             // }
                         }
                         .statusarea {
-                            width: 9%;
+                            width: auto;
                             text-align: right;
                             order: 2;
                             // order: 5;
@@ -656,7 +683,7 @@
             min-height: 55px;
         }
         @media only screen and (min-width: 1540px) {
-            min-height: 100px;
+            min-height: 90px;
         }
     }
     .cal-month-view .cal-cell-top {
@@ -671,7 +698,7 @@
             min-height: 55px;
         }
         @media only screen and (min-width: 1540px) {
-            min-height: 100px;
+            min-height: 90px;
         }
     }
     .cal-month-view .cal-events{
