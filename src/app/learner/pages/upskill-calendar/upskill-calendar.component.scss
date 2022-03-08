@@ -466,7 +466,32 @@
                                 }
                             }
                             .htxt {
-                                width: 84%;
+                                width: 64%;
+                                @media only screen and (min-width:1140px) {
+                                    width: 85%;
+                                }
+                            }
+                            .launch {        
+                                position: absolute;
+                                top: 10px;      
+                                div {
+                                    background-color: #004684;
+                                    border-radius: 5px;
+                                    display: inline-flex;
+                                    align-items: center;
+                                    padding: 3px 8px 4px 8px;
+                                    line-height: normal;
+                                    em {
+                                      color: #fff;
+                                      font-size: 10px;
+                                      margin-right: 5px;
+                                    }
+                                    span {
+                                      font-size: 11px;
+                                      font-weight: 400;
+                                      color: #ffffff;
+                                    }
+                                }
                             }
                         }
                     }
