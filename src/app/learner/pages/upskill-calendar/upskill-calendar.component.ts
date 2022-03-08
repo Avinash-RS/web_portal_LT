@@ -168,7 +168,7 @@ export class UpskillCalendarComponent implements OnInit {
         var today = new Date();
         activityDetailsList.forEach((value)=>{
           var dateAvailable = moment(today).isBetween(value.start, value.end);
-          if(dateAvailable){
+          if(dateAvailable && value.description){
             this.activeDayIsOpen = true;
           }
         })
