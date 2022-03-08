@@ -122,6 +122,7 @@ export class UpskillCalendarComponent implements OnInit {
 
 
   setView(view: CalendarView) {
+    this.activeDayIsOpen = false;
     this.view = view;
   }
 
@@ -253,6 +254,7 @@ export class UpskillCalendarComponent implements OnInit {
     this.onSortChange('value')
   }
   onSortChange(value){
+    this.activeDayIsOpen = false;
     if(this.courseDetailsList?.length > 0){
       this.courseDetailsList.forEach((course)=>{
         if(course.course_id == value.value){
