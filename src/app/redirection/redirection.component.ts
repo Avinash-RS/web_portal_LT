@@ -55,6 +55,9 @@ setAuthentication(){
   let userDetail =JSON.parse(localStorage.getItem('UserDetails'))
   userDetail['specific_report_value'] = Math.floor(Math.random() * 1000000000).toString()
   localStorage.setItem('UserDetails', JSON.stringify(userDetail));
+  if(userDetail.org_type == 'Corporate'){
+    this.router.navigate(['/Learner/upskillcalendar']);
+  } else {
     this.router.navigate(['/Learner/MyCourse']);
-}
+  }}
 }

@@ -59,8 +59,11 @@ export class NewHomeComponent implements OnInit {
           this.userDetail['specific_report_value'] = Math.floor(Math.random() * 1000000000).toString()
           localStorage.setItem('UserDetails', JSON.stringify(this.userDetail));
           if(this.userDetail.is_password_updated){
-            this.router.navigate(['/Learner/MyCourse']);
-          } else {
+            if(this.userDetail.org_type == 'Corporate'){
+              this.router.navigate(['/Learner/upskillcalendar']);
+            } else {
+              this.router.navigate(['/Learner/MyCourse']);
+            }          } else {
             this.router.navigate(['/Learner/profile']);
           }
           setTimeout(()=>{
