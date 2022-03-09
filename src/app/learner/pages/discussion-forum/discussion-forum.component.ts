@@ -426,6 +426,7 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   getModuleDataForForum(length, ind, modData) {
+    console.log(modData)
     this.filterValue = '';
     this.selected = '';
     this.searchthreadname = false;
