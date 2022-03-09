@@ -1,8 +1,4 @@
-
-
-    
-
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours} from 'date-fns';
 import { formatDate } from '@angular/common';
 import { CalendarEvent, CalendarView,CalendarMonthViewDay, DateFormatterParams, CalendarDateFormatter,CalendarEventTitleFormatter } from 'angular-calendar'; 
@@ -77,6 +73,7 @@ export class UpskillCalendarComponent implements OnInit {
   customTooltipCondition = false
   CourseName: string;
   calendarSkele: boolean =false;
+  countMonth;
   constructor(public learnerService: LearnerServicesService,private gs: GlobalServiceService,private router: Router, public dialog: MatDialog, ) {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
                 if(!this.userDetailes?.is_password_updated){
@@ -128,6 +125,7 @@ export class UpskillCalendarComponent implements OnInit {
 
 
   setView(view: CalendarView) {
+    this.activeDayIsOpen = false;
     this.view = view;
   }
 
@@ -157,6 +155,7 @@ export class UpskillCalendarComponent implements OnInit {
   }
 
   getCalendarCount(value?) {
+    this.countMonth = value;
     const monthValue = moment(value).format('YYYY-MM');
     this.calendarSkele=true
     this.learnerService.getAllActivity(this.userDetails.user_id, monthValue).subscribe((result: any) => {
@@ -174,7 +173,7 @@ export class UpskillCalendarComponent implements OnInit {
         var today = new Date();
         activityDetailsList.forEach((value)=>{
           var dateAvailable = moment(today).isBetween(value.start, value.end);
-          if(dateAvailable){
+          if(dateAvailable && value.description){
             this.activeDayIsOpen = true;
           }
         })
@@ -259,6 +258,7 @@ export class UpskillCalendarComponent implements OnInit {
     this.onSortChange('value')
   }
   onSortChange(value){
+    this.activeDayIsOpen = false;
     if(this.courseDetailsList?.length > 0){
       this.courseDetailsList.forEach((course)=>{
         if(course.course_id == value.value){
@@ -289,6 +289,7 @@ export class UpskillCalendarComponent implements OnInit {
       this.daySelection = this.monthView
     }
     this.getLearnerActivity(view,this.daySelection);
+    this.getCalendarCount(this.countMonth)
     }
 
     launchAssignment(value) {

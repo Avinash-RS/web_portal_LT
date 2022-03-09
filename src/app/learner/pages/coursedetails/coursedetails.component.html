@@ -90,7 +90,7 @@
                        <ng-template [ngTemplateOutlet]="tocContent"></ng-template>
                     </mat-tab>
                   
-                    <mat-tab [ngClass]="filterkey == 'Bookmarked' ? 'yes':'no'">
+                    <mat-tab *ngIf="userType!=='vocational'" [ngClass]="filterkey == 'Bookmarked' ? 'yes':'no'">
                         <ng-template mat-tab-label>
                             <span class="tabLabel">{{'Bookmarks' | translate}}</span> <span class="labelcount">{{bookmarkedCount}}</span>
                         </ng-template>
@@ -238,8 +238,8 @@
                                         <div class="bs-vertical-wizard">
                                             <ul>
                                                 <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of subData?.childData; let ti = index">
-                                                    <div *ngIf="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder)||mod.expanded" #focuser ></div>
-                                                    <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && smi==subModuleHolder && mi==moduleHolder)||mod.expanded ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod?.topic_name,mod.status,subData?.module_name,res?.status,mod,wi,ti,mi,smi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
+                                                    <div *ngIf="(wi==weekHolderUI&&ti==nextPrevHolder && smi==subModuleHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded)" #focuser ></div>
+                                                    <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && smi==subModuleHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod?.topic_name,mod.status,subData?.module_name,res?.status,mod,wi,ti,mi,smi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                         <div class="modTitle">
                                                             <h3 tooltip="{{mod?.topic_name}}">{{mod?.topic_name}}</h3>
                                                             <!-- <span class="playVideo"><em class="lxp-PlayCircle"></em> Video</span>
@@ -269,8 +269,8 @@
                                     <ul>
                                         <!-- <ng-container *ngIf="(topicData$|async).data.playerstatus.message"></ng-container> -->
                                         <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of( res.childData) let ti = index">
-                                            <div *ngIf="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder)||mod.expanded" #focuser ></div>
-                                            <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder)||mod.expanded ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.topic_name,mod.status,res?.module_name,res?.status,mod,wi,ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
+                                            <div *ngIf="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded)" #focuser ></div>
+                                            <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.topic_name,mod.status,res?.module_name,res?.status,mod,wi,ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                 <div class="modTitle">
                                                     <h3 tooltip="{{mod?.topic_name}}">{{mod?.topic_name}}</h3>
                                                     <!-- <span class="playVideo"><em class="lxp-PlayCircle"></em> Video</span>
@@ -376,8 +376,8 @@
 
             <div class="wrapppper d-flex align-items-center">
                 <!-- <div class="upSkill" *ngIf="showlab"> "*ngIf="showlab"-->
-                <div class="upSkill" >
-                    <button data-title="Practice online" *ngIf="userType!=='vocational'" class="practiceOnline" [ngClass]="!showlab?'btn-transp':''" [disabled]="!showlab" type="button" (click)="navigatePractice()">
+                <div class="upSkill" *ngIf="userType==='Corporate'">
+                    <button data-title="Practice online" *ngIf="userType==='Corporate'" class="practiceOnline" [ngClass]="!showlab?'btn-transp':''" [disabled]="!showlab" type="button" (click)="navigatePractice()">
                         <em class="lxp-Lab_Practice"></em> <span>{{'Practice Online' | translate}}</span>
                     </button>
                     <!-- <button data-title="Practice online" (click)="showlab = showlab?false:true" class="onlineEditor" type="button">
@@ -385,10 +385,10 @@
                     </button> -->
                 </div>
                 <div class="notesBookmarks">
-                    <div  [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('like')" data-title="Understood" class="smile" [ngClass]="topicPageStatus==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
+                    <div *ngIf="userType=='vocational'" [disabled]="topicInfo.status !== 'Passed'" (click)="understoodClick('like')" data-title="Understood" class="smile" [ngClass]="topicInfo.status==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
                         <em class="lxp-smile"></em> <span>{{'Understood' | translate}}</span>
                     </div>
-                    <div  [disabled]="topicPageStatus !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicPageStatus==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
+                    <div *ngIf="userType=='vocational'"  [disabled]="topicInfo.status !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicInfo.status==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
                         <em class="lxp-sad"></em> <span>{{'Not Understood' | translate}}</span>
                     </div>
                     <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType!=='collegeconnect'" type="button" (click)="openAskQuestions(askQuestions)">
@@ -398,7 +398,7 @@
                         <em class="lxp-question"></em> <span>{{'Ask A Question' | translate}}</span>
                     </button>
                     <!-- <button class="notesBtn"><em class="lxp-Notes"></em> <span>Notes</span></button> -->
-                     <button class="bookmarkBtn" *ngIf="userType=='Corporate'" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
+                     <button class="bookmarkBtn" *ngIf="userType!=='Corporate' && userType!=='vocational'" data-title="Bookmark" type="button" [disabled]="filterkey==='Bookmarked'" ngClass="btn btn-outline-light" (click)="bookmarkClick(topicInfo?.bookmark?false:true)">
                          <em [ngClass]="topicInfo?.bookmark?'lxp-bookmark':filterkey==='Bookmarked'? 'lxp-bookmark':'lxp-bookmark-o'"></em> <span [ngClass]="topicInfo?.bookmark?'bold':'normal'">{{topicInfo?.bookmark?'Bookmarked': filterkey==='Bookmarked'? translate.instant('Bookmarked'): translate.instant('Bookmark')}}</span>
                      </button>
                 </div>

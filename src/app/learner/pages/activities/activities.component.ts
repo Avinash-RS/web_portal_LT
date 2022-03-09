@@ -81,6 +81,7 @@ export class ActivitiesComponent implements OnInit {
   verfyingCondition: any;
   // assignmentMessage = false;
   fromCalender = false;
+  fromupskill;
   multiArray = [];
   trendingItration: any = {
     loop: false, // dont make it true
@@ -246,6 +247,7 @@ export class ActivitiesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.fromupskill = true;
     // this.projectDetaildata = this.projectDetails;
     this.Lservice.closeMobileResp$.subscribe((data: any) => {
       this.performdetailPageView = data;
