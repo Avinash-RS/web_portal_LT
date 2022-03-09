@@ -324,17 +324,7 @@
           color: $darkblue1;
         }
         span {
-          font-size: 0px;
           @media only screen and (min-width: 576px) {
-            font-size: 13px;
-          }
-          @media only screen and (min-width: 720px) {
-            font-size: 13px;
-          }
-          @media only screen and (min-width: 992px) {
-            font-size: 13px;
-          }
-          @media only screen and (min-width: 1140px) {
             font-size: 13px;
           }
         }
@@ -363,20 +353,10 @@
           color: $darkblue1;
         }
         span {
-          font-size: 0px;
           &:hover {
             text-decoration: underline;
           }
           @media only screen and (min-width: 576px) {
-            font-size: 13px;
-          }
-          @media only screen and (min-width: 720px) {
-            font-size: 13px;
-          }
-          @media only screen and (min-width: 992px) {
-            font-size: 13px;
-          }
-          @media only screen and (min-width: 1140px) {
             font-size: 13px;
           }
         }
