@@ -42,7 +42,7 @@ import { QuestionanswerComponent } from './pages/QandA/questionanswer.component'
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DateAdapter as AngularCalendarDateAdapter } from 'angular-calendar';
 import { UpskillCalendarComponent } from './pages/upskill-calendar/upskill-calendar.component';
-
+import { CalendarFilterComponent } from './pages/calendar-filter/calendar-filter.component';
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
   
@@ -129,7 +129,8 @@ const routes: Routes = [
     LearnerNewMyCourseComponent,
     ProgressionReportComponent,
     QuestionanswerComponent,
-    UpskillCalendarComponent
+    UpskillCalendarComponent,
+    CalendarFilterComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [
@@ -182,6 +183,6 @@ const routes: Routes = [
   ],
 
 
-  entryComponents: []
+  entryComponents: [CalendarFilterComponent]
 })
 export class MycoursesModule { }
