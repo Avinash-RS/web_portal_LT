@@ -20,7 +20,6 @@ const DEFAULT_DURATION = 300;
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { TranslateService } from '@ngx-translate/core';
-var link = require('../../../../assets/videolinks.json');
 
 export const MY_FORMATS = {
   parse: {
@@ -838,8 +837,8 @@ export class LearnerNewMyCourseComponent implements OnInit {
   this.showProgressChart = true;
 }
 
-getVideoLink() {
-    window.open("https://upskillresourcefiles.lntedutech.com/", 'blank').focus();
+getVideoLink(course) {
+    window.open(environment.resourcelinkurl +"?course=" + course, 'blank').focus();
 }
 
 //Date initialize
