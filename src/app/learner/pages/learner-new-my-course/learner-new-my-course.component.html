@@ -313,7 +313,7 @@
                     </div>
                     </div>
 
-                    <div class="tabsWrapper">
+                    <div class="tabsWrapper" [ngClass]="userDetailes.org_type == 'Corporate' ? 'Yes' : 'No'">
                         <div class="courseCompletion-btn" (click)="getCourseProgress()" *ngIf="!showProgressChart">
                             <h4>
                                 <em class="lxp-Analytics"></em>
