@@ -1859,6 +1859,7 @@ export const getcalenderactivity = gql`
         end
         title
         color
+        description
       }
     }
   }

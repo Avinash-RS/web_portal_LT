@@ -273,6 +273,7 @@ export class CoursedetailsComponent implements OnInit {
   subModuleHolderUI: number;
   subModuleData: Observable<any>;
   topicData$: Observable<any>;
+  courseType: string;
 
   // FOR DRM(Restriction for right click)
   @HostListener("document:keydown", ["$event"])
@@ -329,6 +330,7 @@ export class CoursedetailsComponent implements OnInit {
       this.route.getCurrentNavigation().extras.state &&
       this.route.getCurrentNavigation().extras.state.detail;
     this.checkDetails = Navdetail;
+    this.courseType = this.checkDetails.course_type;
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.screenWidth < 800) {
@@ -342,6 +344,7 @@ export class CoursedetailsComponent implements OnInit {
     if (this.checkDetails === undefined) {
       this.batchId = localStorage.getItem("currentBatchId");
       this.batchEndTime = localStorage.getItem("currentBatchEndDate");
+      this.courseType = localStorage.getItem("CourseType");
       this.checkDetails = JSON.parse(localStorage.getItem("resumeData")); //it receives only partial data
     } else {
       if (this.checkDetails.fromCalendar) {
@@ -741,8 +744,8 @@ export class CoursedetailsComponent implements OnInit {
         // '&week=' + (this.weekHolder+1) +
         "&lastLogIndex=" +
         this.lastLogIndex +
-        "&orgType=" +
-        this.userType
+        "&courseType=" +
+        this.courseType
     );
   }
 
