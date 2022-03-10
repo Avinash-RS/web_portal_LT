@@ -477,7 +477,7 @@
                           </div>
                         </ng-template>
                       </owl-carousel-o> -->
-                      <div class="">
+                      <div class="" *ngIf="itrdata?.comments && itrdata.comments!= ''">
                         <div class="text-left">
                           <p class="feedBackTxt">{{'Feedback' | translate}}</p>
                           <!-- <textarea disabled rows="4" cols="50" class="textArea">
@@ -767,7 +767,7 @@
                     </owl-carousel-o> -->
                   </div>
                   <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 d-flex justify-content-end flex-column">
-                    <div class="">
+                    <div class="" *ngIf="project?.projectActivity?.comments && project.projectActivity.comments!=''">
                       <div class="text-left">
                         <p class="feedBackTxt">{{'Feedback' | translate}}</p>
                           <textarea disabled class="textArea" [value]='project.projectActivity.comments'></textarea>

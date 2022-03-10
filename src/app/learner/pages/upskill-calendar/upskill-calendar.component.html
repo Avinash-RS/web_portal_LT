@@ -26,31 +26,30 @@
                     </div>
                     <div class="selectview ">
                         <div class="btn-group ">
-                            <div class="btn1 " (click)="setView(CalendarView.Month,viewDate) "
+                            <div class="btn1 " (click)="setView(CalendarView.Month) "
                                 [class.active]="view===CalendarView.Month ">
-                                Daily
+                                Monthly
                             </div>
-                            <div class="btn1 " (click)="setView(CalendarView.Week,viewDate) "
+                            <div class="btn1 " (click)="setView(CalendarView.Week) "
                                 [class.active]="view===CalendarView.Week ">
                                 Weekly
                             </div>
-                            <div class="btn1 " (click)="setView(CalendarView.Day,viewDate) "
+                            <div class="btn1 " (click)="setView(CalendarView.Day) "
                                 [class.active]="view===CalendarView.Day ">
-                                Monthly
+                                Daily
                             </div>
                         </div>
                     </div>
                 </div>
                 <br />
                 <div [ngSwitch]="view ">
-                    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month " [viewDate]="viewDate " [events]="events " [refresh]="refresh " [activeDayIsOpen]="activeDayIsOpen " (dayClicked)="dayClicked($event.day) " (eventClicked)="handleEvent(
-                    'Clicked', $event.event) ">
+                    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month " [viewDate]="viewDate " [events]="events " [refresh]="refresh " [activeDayIsOpen]="activeDayIsOpen " (dayClicked)="dayClicked($event.day)">
                     </mwl-calendar-month-view>
                     <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week " [viewDate]="viewDate " [events]="events "
-                        [refresh]="refresh " (eventClicked)="handleEvent( 'Clicked', $event.event) ">
+                        [refresh]="refresh ">
                     </mwl-calendar-week-view>
                     <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day " [viewDate]="viewDate " [events]="events "
-                        [refresh]="refresh " (eventClicked)="handleEvent( 'Clicked', $event.event) ">
+                        [refresh]="refresh ">
                     </mwl-calendar-day-view>
                 </div>
                 <!-- calender html end -->
@@ -59,7 +58,7 @@
     </div>
     <div class="activities ">
 
-        <div class="viewInfotxt d-flex justify-content-between align-items-center ">
+        <div class="viewInfotxt">
             <div class="leftPan ">
                 <span mat-ripple (click)="setStatus( '') " [ngClass]="status=='' ? 'active' : '' ">{{'All' | translate}}
                     ({{activityData?.allActivityCount}})</span>
@@ -71,7 +70,7 @@
                     ({{activityData?.completedActivityCount}})</span>
             </div>
             <div class="rightPan">
-                <span>{{'Filter:' | translate}} </span>
+                <!-- <span>{{'Filter:' | translate}} </span>
                 <mat-form-field class="mr-2" appearance="outline">
                     <mat-select (selectionChange)="onSortChange($event) " matTooltip="{{CourseName}} "
                         [(ngModel)]="courseValue ">
@@ -86,10 +85,10 @@
                             {{filter.key}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field>
-                <!-- <button mat-stroked-button class="filterBtn ">
-              <em class="lxp-Filter "></em> <span>{{'Filter' | translate}}</span> 
-               </button> -->
+                </mat-form-field> -->
+                <button mat-stroked-button class="filterBtn " (click)="openFilterDialog()">
+                    <em class="lxp-Filter "></em> <span>{{'Filter' | translate}}</span> 
+               </button>
             </div>
         </div>
 
@@ -111,8 +110,7 @@
                                     class="htxt notifi selfplacedlearning ">{{activity.activitytype}}</div>
                                 <div *ngIf="activity.activitytype=='Live Classroom' "
                                     class="htxt notifi virtualinstructorled ">
-                                    <ng-container *ngIf="userDetails.org_type !=='collegeconnect' ">{{'Live
-                                        Interactions' | translate}}</ng-container>
+                                    <ng-container *ngIf="userDetails.org_type !=='collegeconnect' ">{{'Live Interactions' | translate}}</ng-container>
                                     <ng-container *ngIf="userDetails.org_type=='collegeconnect' ">{{'Industry Talk' |
                                         translate}}</ng-container>
                                 </div>
@@ -122,19 +120,19 @@
                                 <ng-container
                                     *ngIf="activity.status=='Completed' || activity.status=='Graded' || activity.status=='Submitted' ">
                                     <em class="icon lxp-Tick green"></em>
-                                    <span>{{activity.status}}</span>
+                                    <span>Completed</span>
                                 </ng-container>
                                 <ng-container *ngIf="activity.status=='Overdue' ">
                                     <em class="icon lxp-Timelapse red "></em>
-                                    <span>{{activity.status}}</span>
+                                    <span>Overdue</span>
                                 </ng-container>
                                 <ng-container *ngIf="activity.status=='On going' ">
                                     <em class="icon lxp-Timer timer "></em>
-                                    <span>{{activity.status}}</span>
+                                    <span>Ongoing</span>
                                 </ng-container>
                                 <ng-container *ngIf="activity.status=='Yet to submit' || activity.status=='Up Coming' ">
                                     <em class="icon lxp-Play grey "></em>
-                                    <span>{{activity.status}}</span>
+                                    <span>Yet to start</span>
                                 </ng-container>
                             </div>
                         </div>
@@ -160,6 +158,13 @@
                                     <div class="date">{{activity.activitystartdate | date: 'MMM d, y, h:mm a'}}</div>
                                     <div class="date">{{activity.activityenddate | date: 'MMM d, y, h:mm a'}}</div>
                                 </div>
+                                <div class="launch">
+                                    <ng-container *ngIf="activity.activitytype == 'Live Classroom'">
+                                      <div *ngIf="activity.status == 'On going'" (click)="openClassroom(activity.link)">
+                                        <em class="lxp-Launch"></em> <span>{{'Launch' | translate}}</span>
+                                      </div>
+                                    </ng-container>
+                                  </div>
                             </div>
                         </div>
                     </div>

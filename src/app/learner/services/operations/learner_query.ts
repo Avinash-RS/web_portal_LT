@@ -1859,6 +1859,7 @@ export const getcalenderactivity = gql`
         end
         title
         color
+        description
       }
     }
   }
@@ -2560,7 +2561,6 @@ export const getCourseReportByUserid = gql`
             enums
           }
           topicDetails {
-            id
             name
             activityDetails {
               name

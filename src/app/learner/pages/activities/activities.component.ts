@@ -393,10 +393,10 @@ export class ActivitiesComponent implements OnInit {
 
   goToCourse() {
     if (this.fromCalender) {
-      if(this.fromupskill){
-        this.route.navigateByUrl('/Learner/upskillcalendar');
-      }else{
-        this.route.navigateByUrl('/Learner/calendaractivity');
+      if(this.userDetail.org_type == 'Corporate'){
+        this.route.navigate(['/Learner/upskillcalendar']);
+      } else {
+        this.route.navigate(['/Learner/calendaractivity']);
       }
       
     } else {

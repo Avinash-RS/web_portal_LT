@@ -7,10 +7,12 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import * as moment from 'moment';
 import { Subject } from 'rxjs';
+import { MatDialog, MatDialogRef } from  '@angular/material';
 import { Router } from '@angular/router';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { getWeekYearWithOptions } from 'date-fns/fp';
 import { TranslateService } from '@ngx-translate/core';
+import {CalendarFilterComponent} from '../calendar-filter/calendar-filter.component'
 @Component({
   selector: 'app-upskill-calendar',
   templateUrl: './upskill-calendar.component.html',
@@ -71,7 +73,12 @@ export class UpskillCalendarComponent implements OnInit {
   customTooltipCondition = false
   CourseName: string;
   calendarSkele: boolean =false;
-  constructor(public learnerService: LearnerServicesService,private gs: GlobalServiceService,private router: Router) {
+  countMonth;
+  filteredValue:any = {
+    activityValue:"All",
+    courseValue :"All"
+  }
+  constructor(public learnerService: LearnerServicesService,private gs: GlobalServiceService,private router: Router, public dialog: MatDialog, ) {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
                 if(!this.userDetailes?.is_password_updated){
                   this.router.navigate(['/Learner/profile']);
@@ -114,6 +121,7 @@ export class UpskillCalendarComponent implements OnInit {
   }
   
   monthChange(value){
+    this.activeDayIsOpen = false;
     const topicStart = new Date(value);
     this.monthView = topicStart;
     this.getLearnerActivity('month',topicStart)
@@ -121,10 +129,22 @@ export class UpskillCalendarComponent implements OnInit {
 
 
   setView(view: CalendarView) {
+    this.activeDayIsOpen = false;
     this.view = view;
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    var description = [];
+    if(events.length > 0){
+      events.forEach((value:any)=>{
+        if(value.description.length > 0){
+          description.push(value.description)
+        }
+      })
+    }
+    if(description.length == 0){
+      return;
+    }
     if (isSameMonth(date, this.viewDate)) {
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -139,6 +159,7 @@ export class UpskillCalendarComponent implements OnInit {
   }
 
   getCalendarCount(value?) {
+    this.countMonth = value;
     const monthValue = moment(value).format('YYYY-MM');
     this.calendarSkele=true
     this.learnerService.getAllActivity(this.userDetails.user_id, monthValue).subscribe((result: any) => {
@@ -147,9 +168,20 @@ export class UpskillCalendarComponent implements OnInit {
         element.start = new Date(element.start);
         element.end = new Date (element.end);
         element.color = {primary : element.color};
+        element.title = element.description;
       //  element.allDay = true;
       });
       this.events = activityDetailsList;​
+      if(activityDetailsList.length > 0){
+        var descriptionAvailable = [];
+        var today = new Date();
+        activityDetailsList.forEach((value)=>{
+          var dateAvailable = moment(today).isBetween(value.start, value.end);
+          if(dateAvailable && value.description){
+            this.activeDayIsOpen = true;
+          }
+        })
+      }
       setTimeout(()=>{
         var eventsParent = document.querySelectorAll('.cal-events');
         eventsParent.forEach((element:any) => {
@@ -172,6 +204,22 @@ export class UpskillCalendarComponent implements OnInit {
       },100)
     });
   }
+  getFilteredActivity(){
+    this.activeDayIsOpen = false;
+    var view = this.daySelected ? 'day' : 'month'
+    if(!this.daySelection){
+      const topicStart = new Date();
+      this.daySelection = moment(topicStart).format('YYYY-MM-DD');
+    }
+    if(this.monthView){
+      this.daySelection = this.monthView
+    }
+    this.courseValue = this.filteredValue.courseValue;
+    this.activityValue = this.filteredValue.activityValue;
+    this.getLearnerActivity(view,this.daySelection);
+    this.getCalendarCount(this.countMonth)
+  }
+ 
   getLearnerActivity(view,selectedDate, day?: CalendarMonthViewDay){
     this.showSkeleton = true;
     if(this.courseValue == 'All') {
@@ -230,6 +278,7 @@ export class UpskillCalendarComponent implements OnInit {
     this.onSortChange('value')
   }
   onSortChange(value){
+    this.activeDayIsOpen = false;
     if(this.courseDetailsList?.length > 0){
       this.courseDetailsList.forEach((course)=>{
         if(course.course_id == value.value){
@@ -260,6 +309,7 @@ export class UpskillCalendarComponent implements OnInit {
       this.daySelection = this.monthView
     }
     this.getLearnerActivity(view,this.daySelection);
+    this.getCalendarCount(this.countMonth)
     }
 
     launchAssignment(value) {
@@ -323,4 +373,23 @@ export class UpskillCalendarComponent implements OnInit {
       window.open(value);
     }
 
+    openFilterDialog( ) {
+    const dialogRef =  this.dialog.open(CalendarFilterComponent, {
+        width:"420px",
+        height:"600px",
+        position: {right: "0px", bottom: "0px"},
+        panelClass: "filter-modal-box",
+        data:this.filteredValue
+      });
+      dialogRef.afterClosed().subscribe((result:any)=>{
+        if(result) {
+          this.filteredValue = result;
+          this.getFilteredActivity();
+        }
+      })
+    }
+  
+    closedialogbox() {
+      this.dialog.closeAll();
+    }
 }

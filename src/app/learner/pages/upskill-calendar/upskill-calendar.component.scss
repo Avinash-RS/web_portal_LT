@@ -1,16 +1,25 @@
-    @import "variable";
+@import "variable";
+
     .upskillActivity {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        // height: calc(100vh - 120px);
+        overflow: hidden;
         @media screen and (max-width: 768px) {
             flex-direction: column;
         }
         .Leftcontainer {
             width: 100%;
             order: 1;
-            @media screen and (min-width: 769px) {
-                width: 70%;
+            @media screen and (min-width: 992px) {
+                width: calc(100% - 400px);
+            }
+            @media screen and (min-width: 1200px) {
+                width: calc(100% - 450px);
+            }
+            @media screen and (min-width: 1540px) {
+                width: calc(100% - 550px);
             }
             .calendar {
                 display: flex;
@@ -19,7 +28,7 @@
                 align-items: center;
                 justify-content: space-between;
                 h1 {
-                    color: #222222;
+                    color: $black1;
                     font-size: 18px;
                     font-weight: 700;
                     margin: 0px !important;
@@ -28,16 +37,16 @@
                 .btn {
                     padding: 0px;
                     .resetbtn {
-                        border: 0.5px solid #004684;
+                        border: 0.5px solid $darkblue1;
                         padding: 5px 15px;
                         background: none;
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         text-transform: uppercase;
-                        box-shadow: 0px 3px 6px #00000029;
+                        box-shadow: 0px 3px 6px $blackshade1;
                         border-radius: 5px;
-                        color: #607D8B;
+                        color: $blueshadecolor;
                         font-size: 12px;
                         em {
                             display: inline-block;
@@ -53,9 +62,18 @@
                 .calender-section {
                     height: auto;
                     overflow-y: auto;
-                    border:  1px solid rgba(112, 112, 112, 0.25);
-                    box-shadow: 0px 4px 4px #0000000A;
+                    border:  1px solid $greyblack;
+                    box-shadow: 0px 4px 4px $blackshade2;
                     border-radius: 15px 0px 0px 15px;
+                    @media only screen and (min-width: 992px) {
+                        height: calc(100vh - 195px);
+                    }
+                    @media only screen and (min-width: 1200px) {
+                        height: calc(100vh - 195px);
+                    }
+                    @media only screen and (min-width: 1540px) {
+                        height: calc(100vh - 215px);
+                    }
                 }
                 .tabs {
                     display: flex;
@@ -81,7 +99,7 @@
                         }
                         h3 {
                             padding: 6px;
-                            color: #303134;
+                            color: $darkgreyshade;
                             text-transform: uppercase;
                             opacity: 1;
                             font-weight: 700;
@@ -93,8 +111,8 @@
                         order: 2;
                         }
                         .btn-group {
-                            background: #EDF1FB;
-                            color: #717579;
+                            background: $whiteshade;
+                            color: $lightgrey2;
                             font-size: 12px;
                             border-radius: 30px;
                         }
@@ -102,10 +120,10 @@
                             padding: 6px 22px;
                             cursor: pointer;
                             &.active {
-                                background: #FFFFFF;
-                                color: #303134;
+                                background: $color-white;
+                                color: $darkgreyshade;
                                 border-radius: 30px;
-                                box-shadow: 0px 6px 20px #B5B5B56B;
+                                box-shadow: 0px 6px 20px $greycolor1;
                             }
                         }
                     }
@@ -118,22 +136,30 @@
         .activities {
             width: 100%;
             order: 2;
-            // background-color: $color-white;
-            box-shadow: 0 0 2px 0 #0000006b;
-            // height: 100%;
-            padding: 5px 15px;
-            @media screen and (min-width: 720px) {
-                padding: 0 0.85em 0 0.85em;
-            }
+            box-shadow: 0 0 2px 0 $blackshade3;
+            height: 100%;
+            padding: 15px;
+            position: relative;
+            padding: 2em 0.85em 1.5 0.85em;
             @media screen and (min-width: 992px) {
                 padding: 1.8em 1.5em 0 1.5em;
-                // order: 2;
+                position: fixed;
+                right: 0;
+                top: 70px;
+                width: 400px
             }
-            @media screen and (min-width:769px) {
-                width: 40%;
+            @media screen and (min-width: 1200px) {
+                width: 450px
+            }
+            @media screen and (min-width: 1540px) {
+                width: 550px
             }
             .viewInfotxt {
-                flex-direction: column;
+                display: flex;
+                flex-direction: row-reverse;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
                 // min-height: 70px;
                 @media screen and (min-width: 1140px) {
                     // flex-direction: row;
@@ -142,7 +168,7 @@
                 .leftPan {
                     order: 2;
                     margin-top: 10px;
-                    width: 100%;
+                    // width: 100%;
                     @media only screen and (min-width: 1140px) {
                         margin-top: 0;
                         // width: 100%;
@@ -151,7 +177,7 @@
                     span {
                         // margin-right: 1.7em;
                         font-size: 1.1em;
-                        color: #999999;
+                        color: $grey3;
                         display: inline-block;
                         cursor: pointer;
                         // padding-bottom: 1em;
@@ -161,17 +187,17 @@
                         height: 35px;
                         transition: color 0.3s ease-in-out;
                         &:hover {
-                            color: #4D4D4D;
+                            color: $gerycolor;
                         }
                         &.active {
-                            color: #4D4D4D;
+                            color: $gerycolor;
                             font-weight: 400;
                         }
                     }
                 }
                 .rightPan {
                     order: 1;
-                    width: 100%;
+                    // width: 100%;
                     @media screen and (max-width: 720px) {
                         margin-top: 10px;
                     }
@@ -196,60 +222,69 @@
                     //     order: 2;
                     //     width: 100%;
                     // }
-                    // .filterBtn {
-                    //     background: #FFFFFF;
-                    //     color: #1F1A17;
-                    //     font-weight: 400;
-                    //     // font-size: 14px;
-                    //     line-height: normal;
-                    //     padding: 5px 7px;
-                    //     line-height: normal;
-                    //     // border: none;
-                    //     box-shadow: none;
-                    //     // border-color: transparent;
-                    //     box-shadow: 0px 3px 6px #00000029;
-                    //     border: 0.5px solid #004684;
-                    //     opacity: 1;
-                    //     overflow: hidden;
-                    //     transition: ease-in;
-                    //     // transform: translateY(-50%) perspective(1px) translateZ(0);
-                    //     // transition-property: color;
-                    //     transition-duration: 0.2s;
-                    //     z-index: 99;
-                    //     &:hover {
-                    //         color: #FFFFFF;
-                    //         background-color: #004684;
-                    //     }
-                    // em {
-                    //     display: inline-block;
-                    //     transform: scaleX(-1);
-                    //     font-size: 12px;
-                    //     margin-right: 7px;
-                    // }
+                    .filterBtn {
+                        background: $color-white;
+                        color: $color-blank;
+                        font-weight: 400;
+                        // font-size: 14px;
+                        line-height: normal;
+                        padding: 5px 7px;
+                        line-height: normal;
+                        // border: none;
+                        box-shadow: none;
+                        // border-color: transparent;
+                        box-shadow: 0px 3px 6px $blackshade1;
+                        border: 0.5px solid $darkblue1;
+                        opacity: 1;
+                        overflow: hidden;
+                        transition: ease-in;
+                        // transform: translateY(-50%) perspective(1px) translateZ(0);
+                        // transition-property: color;
+                        transition-duration: 0.2s;
+                        z-index: 99;
+                        &:hover {
+                            color: $color-white;
+                            background-color: $darkblue1;
+                        }
+                    em {
+                        display: inline-block;
+                        transform: scaleX(-1);
+                        font-size: 12px;
+                        margin-right: 7px;
+                    }
 
-                        // span {
-                        //     padding: 0 1em 0 0;
-                        //     @media screen and (min-width:1140px) {
-                        //         padding: 0 1em;
-                        //     }
-                        // }
+                        span {
+                            padding: 0 1em 0 0;
+                            @media screen and (min-width:1140px) {
+                                padding: 0 1em;
+                            }
+                        }
                         
-                    // }
+                    }
                 }
             }
             .contentarea {
                 padding: 15px 0;
-                @media only screen and (min-width: 1140px) {
+                overflow-y: auto;
+                @media only screen and (min-width: 992px) {
+                    height: calc(100vh - 220px);
                     padding: 10px 0;
+                }
+                @media only screen and (min-width: 1200px) {
+                    height: calc(100vh - 210px);
+                    padding: 10px 10px 10px 0;
+                }
+                @media only screen and (min-width: 1540px) {
+                    height: calc(100vh - 215px);
                 }
                 .contentbox {
                     flex-wrap: wrap;
                     flex-direction: row;
-                    background-color: #ffffff;
+                    background-color: $color-white;
                     padding: 10px;
                     border-radius: 10px;
-                    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
-                    border: 1px solid rgba(112,112,112,0.2);
+                    box-shadow: 0px 3px 6px $blackshade;
+                    border: 1px solid $greyblack;
                     margin-bottom: 1em;
                     position: relative;
                     cursor: pointer;
@@ -257,7 +292,7 @@
                     transition-property: box-shadow, transform;
                     transition-duration: 0.3s;
                     &:hover {
-                        box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+                        box-shadow: 0 10px 10px -10px $blackshadecolor;
                         transform: translateY(-3px);
                     }
                     @media screen and (max-width:480px) {
@@ -288,7 +323,7 @@
                             justify-content: space-between;
                             width: 50%;
                             font-weight: 700;
-                            color: #000;
+                            color: $blackcolor1;
                             em {
                                 font-size: 15px;
                                 margin-right: 10px;
@@ -309,13 +344,13 @@
                                 // margin-left: 1opx;
                             }
                             .notifi.activity {
-                                color: #B8BF00;
+                                color: $lightgreen1;
                             }
                             .notifi.selfplacedlearning {
-                                color: #00A99D;
+                                color: $lightblue11;
                             }
                             .notifi.virtualinstructorled {
-                                color: #B637FA;
+                                color: $lightpink;
                             }
                             // .icon {
                             //     width: 14%;
@@ -325,7 +360,7 @@
                             // }
                         }
                         .statusarea {
-                            width: 9%;
+                            width: auto;
                             text-align: right;
                             order: 2;
                             // order: 5;
@@ -340,7 +375,7 @@
                             span {
                                 margin-left: 5px;
                                 font-size: 12px;
-                                color: #808080;
+                                color: $grey2;
                             }
                             .icon {
                                 border-radius: 50%;
@@ -350,30 +385,30 @@
                             .green {
                                 height: 15px;
                                 width: 15px;
-                                background-color: #49AE31;
-                                color: #ffffff;
+                                background-color: $green1;
+                                color: $color-white;
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
                                 &::before {
-                                    color: #ffffff;
+                                    color: $color-white;
                                     font-size: 6px;
                                 }
                             }
                             .grey {
                                 font-size: 1.2em !important;
                                 &::before {
-                                    color: grey;
+                                    color: $grey2;
                                 }
                             }
                             .red {
                                 font-size: 1.2em !important;
-                                color: #c02222 !important;
+                                color: $lxp-theme-green !important;
                             }
                             .timer {
                                 font-size: 1.2em !important;
                                 &::before {
-                                    color: #FFA800 !important;
+                                    color: $yellow1 !important;
                                 }
                             }
                         }
@@ -412,7 +447,7 @@
                             }
                             .htxt {
                                 font-weight: 700;
-                                color: #004684;
+                                color: $darkblue1;
                                 display: inline-block;
                                 line-height: 15px;
                                 text-overflow: ellipsis;
@@ -421,10 +456,10 @@
                                 width: 95%;
                             }
                             .infotxt {
-                                color: #999999;
+                                color: $grey3;
                                 .moduleTopic {
                                     display: inline-block;
-                                    color: #666666;
+                                    color: $color-lightGray;
                                     margin-left: 5px;
                                     line-height: 15px;
                                     text-overflow: ellipsis;
@@ -462,7 +497,32 @@
                                 }
                             }
                             .htxt {
-                                width: 84%;
+                                width: 64%;
+                                @media only screen and (min-width:1140px) {
+                                    width: 85%;
+                                }
+                            }
+                            .launch {        
+                                position: absolute;
+                                top: 10px;      
+                                div {
+                                    background-color: $darkblue1;
+                                    border-radius: 5px;
+                                    display: inline-flex;
+                                    align-items: center;
+                                    padding: 3px 8px 4px 8px;
+                                    line-height: normal;
+                                    em {
+                                      color: $whitecolor1;
+                                      font-size: 10px;
+                                      margin-right: 5px;
+                                    }
+                                    span {
+                                      font-size: 11px;
+                                      font-weight: 400;
+                                      color: $color-white;
+                                    }
+                                }
                             }
                         }
                     }
@@ -475,15 +535,15 @@
                     }
                     p {
                         font-size: 14px;
-                        color: #000000;
+                        color: $blackcolor;
                         font-weight: 500;
                         line-height: normal;
                         margin-bottom: 30px ​!important;
                     }
                 }
                 .skeleton-container {
-                    background-color: white;
-                    box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+                    background-color: $color-white ;
+                    box-shadow: 0 0 4px $blackshade4;
                     margin-top: 20px;
                     padding: 6px;
                     .skeleton-part {
@@ -503,7 +563,7 @@
                         height: 15px;
                         width: 100%;
                         background-color: $skeletonColor;
-                        border: 1px solid #fff;
+                        border: 1px solid $whitecolor1;
                     }
                 }
             }
@@ -538,8 +598,8 @@
         .mat-form-field-flex {
             border-radius: 6px;
             margin-top: 0;
-            background-color: #ffffff;
-            box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
+            background-color: $color-white;
+            box-shadow: 2px 2px 3px $blackshade1;
         }
         .mat-form-field-outline-start {
             border-radius: 0;
@@ -559,7 +619,7 @@
         opacity: 0.15;
     }
     .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-        color: rgba(0, 0, 0, 0.15);
+        color: $blackshade1;
     }
     .mat-form-field-underline {
         bottom: 0;
@@ -579,12 +639,12 @@
         background-color: transparent;
     }
     .mat-form-field-underline {
-        border: 1px solid #cdcdcd;
+        border: 1px solid $profile-p-grey;
         height: 100%;
     }
     .mat-form-field.mat-focused.mat-primary .mat-select-arrow,
     .mat-select-arrow {
-        color: rgba(0, 0, 0, 0.54);
+        color: $black2;
     }
     .mat-select {
         text-transform: capitalize;
@@ -603,9 +663,12 @@
     // @media screen and (max-width:720px) {
     //     height: 330px;
     // }
+    .cal-month-view .cal-day-number{
+        font-weight: bold;
+    }
     .cal-month-view .cal-open-day-events {
-        background-color: #FFF6F3;
-        color: #303134;
+        background-color: $whiteshade1;
+        color: $darkgreyshade;
         font-size: 12px;
         box-shadow: none;
     }
@@ -621,10 +684,10 @@
             min-height: 70px;
         }
         @media only screen and (min-width: 1200px) {
-            min-height: 80px;
+            min-height: 55px;
         }
         @media only screen and (min-width: 1540px) {
-            min-height: 100px;
+            min-height: 90px;
         }
     }
     .cal-month-view .cal-cell-top {
@@ -636,10 +699,10 @@
             min-height: 70px;
         }
         @media only screen and (min-width: 1200px) {
-            min-height: 80px;
+            min-height: 55px;
         }
         @media only screen and (min-width: 1540px) {
-            min-height: 100px;
+            min-height: 90px;
         }
     }
     .cal-month-view .cal-events{
@@ -656,5 +719,10 @@
     }
     .cal-month-view .cal-day-cell.cal-in-month.cal-has-events{
         position: relative;
+    }
+}
+::ng-deep.filter-modal-box {
+    .mat-dialog-container {
+        padding:0px !important;
     }
 }

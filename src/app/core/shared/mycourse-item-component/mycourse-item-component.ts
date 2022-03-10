@@ -119,7 +119,8 @@ export class MycourseItemComponent implements OnInit {
       lastTopic:c.lastTopic,
       checklevel:c.checklevel,
       module_id:c.module_id,
-      topic_id:c.topic_id
+      topic_id:c.topic_id,
+      course_type:c.course_type
       // persentage : c.coursePlayerStatus.course_percentage || 0
     };
     // if (this.screenWidth < 800) {
@@ -127,6 +128,7 @@ export class MycourseItemComponent implements OnInit {
       console.log(detail)
     localStorage.setItem('currentBatchEndDate', c.batch_end_date_Timer)
     localStorage.setItem('Courseid', c.course_id);
+    localStorage.setItem('CourseType',c.course_type);
     localStorage.setItem('persentage', c && c.coursePlayerStatus && c.coursePlayerStatus.course_percentage ? c.coursePlayerStatus.course_percentage : '');
     localStorage.setItem('currentBatchId', c.batchid);
 
