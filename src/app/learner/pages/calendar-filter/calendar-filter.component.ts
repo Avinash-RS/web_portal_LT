@@ -63,7 +63,7 @@ activities = [{
   ];
 
   constructor(
-    private dialog: MatDialog,  
+    public dialog: MatDialog,  
     public learnerService: LearnerServicesService,
     @Optional() public dialogRef: MatDialogRef<CalendarFilterComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public filteredData
