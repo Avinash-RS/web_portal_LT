@@ -7,10 +7,12 @@ import { LearnerServicesService } from '@learner/services/learner-services.servi
 import { GlobalServiceService } from '@core/services/handlers/global-service.service';
 import * as moment from 'moment';
 import { Subject } from 'rxjs';
+import { MatDialog, MatDialogRef } from  '@angular/material';
 import { Router } from '@angular/router';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { getWeekYearWithOptions } from 'date-fns/fp';
 import { TranslateService } from '@ngx-translate/core';
+import {CalendarFilterComponent} from '../calendar-filter/calendar-filter.component'
 @Component({
   selector: 'app-upskill-calendar',
   templateUrl: './upskill-calendar.component.html',
@@ -72,7 +74,7 @@ export class UpskillCalendarComponent implements OnInit {
   CourseName: string;
   calendarSkele: boolean =false;
   countMonth;
-  constructor(public learnerService: LearnerServicesService,private gs: GlobalServiceService,private router: Router) {
+  constructor(public learnerService: LearnerServicesService,private gs: GlobalServiceService,private router: Router, public dialog: MatDialog, ) {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
                 if(!this.userDetailes?.is_password_updated){
                   this.router.navigate(['/Learner/profile']);
@@ -351,4 +353,17 @@ export class UpskillCalendarComponent implements OnInit {
       window.open(value);
     }
 
+    openFilterDialog( ) {
+     
+     this.dialog.open(CalendarFilterComponent, {
+        width:"430px",
+        height:"520px",
+        position: {right: "0px", bottom: "10px"},
+        panelClass: "filter-modal-box",
+      });
+    }
+  
+    closedialogbox() {
+      this.dialog.closeAll();
+    }
 }
