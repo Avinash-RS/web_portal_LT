@@ -320,7 +320,13 @@
                                 <span>{{'Course Completion Progress' | translate}}</span> 
                             </h4>
                         </div>
-                        
+
+                        <div class="videolinks-btn" (click)="getVideoLink('Java')">
+                            <h4>
+                                <em class="lxp-video_links"></em>
+                                <span>{{'Reference video links' | translate}}</span> 
+                            </h4>
+                        </div>
 
                         <mat-tab-group #tabs (selectedTabChange)="courseTabChange($event,userDetailes.user_id,userDetailes._id);" [(selectedIndex)]="selectedIndex">
                             <mat-tab>
