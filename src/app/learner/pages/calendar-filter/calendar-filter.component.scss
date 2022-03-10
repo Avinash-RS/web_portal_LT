@@ -7,9 +7,12 @@
     font-size: 14px;
     padding: 15px;
     color: #5F646B;
-    mat-icon{
-        font-size: 20px;padding-right:3px;
+    .left {
+        em {
+            margin-right: 1em;
+        }
     }
+    .right {
     .clear{
         font-size: 12px;
         cursor:pointer;
@@ -17,33 +20,9 @@
             color: #3A3A3A;
         }
     }
+ }
 
 }
-// .filtercontent{
-//     padding-left: 20px;
-//     padding-top: 20px;
-//     padding-right: 20px;
-//     h2{
-//         font-size: 15px;
-//         font-weight: bolder;
-//         margin-bottom: 3px;
-//     }
-//     ul{
-//         list-style: none;
-//         padding-left: 0;
-//     }
-//     mat-checkbox{
-   
-//         font-size: 13px;
-//         font-weight: lighter;
-//     }
-    
-//     .content-area{
-//         height: 430px;
-//         overflow: auto;
-//     }
-   
-// }
 .filter-content{
     .left-content{
         height:607px;
@@ -70,9 +49,9 @@
             line-height: 31px;
             li{
                 cursor: pointer;
-                mat-icon{
-                    font-size: 16px;
-                    margin-right: 10px;
+                em {
+                    font-size:0.85em;
+                    margin-right: 1em;
                 }
             }
             li:hover{

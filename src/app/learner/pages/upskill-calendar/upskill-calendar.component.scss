@@ -721,3 +721,8 @@
         position: relative;
     }
 }
+::ng-deep.filter-modal-box {
+    .mat-dialog-container {
+        padding:0px !important;
+    }
+}

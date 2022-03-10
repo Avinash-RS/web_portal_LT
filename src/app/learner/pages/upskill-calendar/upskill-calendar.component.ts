@@ -74,6 +74,10 @@ export class UpskillCalendarComponent implements OnInit {
   CourseName: string;
   calendarSkele: boolean =false;
   countMonth;
+  filteredValue:any = {
+    activityValue:"All",
+    courseValue :"All"
+  }
   constructor(public learnerService: LearnerServicesService,private gs: GlobalServiceService,private router: Router, public dialog: MatDialog, ) {
     this.userDetailes = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
                 if(!this.userDetailes?.is_password_updated){
@@ -200,6 +204,22 @@ export class UpskillCalendarComponent implements OnInit {
       },100)
     });
   }
+  getFilteredActivity(){
+    this.activeDayIsOpen = false;
+    var view = this.daySelected ? 'day' : 'month'
+    if(!this.daySelection){
+      const topicStart = new Date();
+      this.daySelection = moment(topicStart).format('YYYY-MM-DD');
+    }
+    if(this.monthView){
+      this.daySelection = this.monthView
+    }
+    this.courseValue = this.filteredValue.courseValue;
+    this.activityValue = this.filteredValue.activityValue;
+    this.getLearnerActivity(view,this.daySelection);
+    this.getCalendarCount(this.countMonth)
+  }
+ 
   getLearnerActivity(view,selectedDate, day?: CalendarMonthViewDay){
     this.showSkeleton = true;
     if(this.courseValue == 'All') {
@@ -354,13 +374,19 @@ export class UpskillCalendarComponent implements OnInit {
     }
 
     openFilterDialog( ) {
-     
-     this.dialog.open(CalendarFilterComponent, {
-        width:"430px",
-        height:"520px",
-        position: {right: "0px", bottom: "10px"},
+    const dialogRef =  this.dialog.open(CalendarFilterComponent, {
+        width:"420px",
+        height:"600px",
+        position: {right: "0px", bottom: "0px"},
         panelClass: "filter-modal-box",
+        data:this.filteredValue
       });
+      dialogRef.afterClosed().subscribe((result:any)=>{
+        if(result) {
+          this.filteredValue = result;
+          this.getFilteredActivity();
+        }
+      })
     }
   
     closedialogbox() {
