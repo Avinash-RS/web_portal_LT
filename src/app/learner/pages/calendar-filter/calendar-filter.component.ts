@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { E } from '@angular/cdk/keycodes';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LearnerServicesService } from '@learner/services/learner-services.service';
@@ -11,7 +11,8 @@ import el from 'date-fns/locale/el';
 export class CalendarFilterComponent implements OnInit {
   userDetails;
   enrolledCourses;
-  filterByvalue="";
+  activityvalue ="";
+  CourseValue ="";
   filterMenu =[
     {
       key:"Activities",
@@ -25,47 +26,79 @@ export class CalendarFilterComponent implements OnInit {
 ];
 courseDetailsList = [{
   'course_name': 'All Courses',
-  'course_id': 'All'
+  'course_id': 'All',
+  'active':false
 }]
 activeMenu:any;    
-  filterBy = [{
+activities = [{
     'key': 'All Activities',
-    'value': 'All'
+    'value': 'All',
+    'active':false,
   },
   {
     'key': 'Self Learning',
-    'value': 'selfpacedlearning'
+    'value': 'selfpacedlearning',
+    'active':false,
   },
   {
     'key': 'Live Interactions',
-    'value': 'liveclassroom'
+    'value': 'liveclassroom',
+    'active':false,
   },
   {
     'key': 'Assignment',
-    'value': 'assignment'
+    'value': 'assignment',
+    'active':false,
   },
   {
     'key': 'Perform',
-    'value': 'perform'
+    'value': 'perform',
+    'active':false,
   },
   {
     'key': 'Project',
-    'value': 'project'
+    'value': 'project',
+    'active':false,
   }
   ];
+
   constructor(
     private dialog: MatDialog,  
-    public learnerService: LearnerServicesService
+    public learnerService: LearnerServicesService,
+    @Optional() public dialogRef: MatDialogRef<CalendarFilterComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public filteredData
   ) {
     this.userDetails = JSON.parse(localStorage.getItem('UserDetails')) || JSON.parse(localStorage.getItem('UserDetails')) || null;
     this.getCourseData();
    }
      
+   ngOnInit() {
+    this.activeMenu = this.filterMenu[0];
+    this.retainActivityFilter();
+  }
   
-  closeDialog(){
-    this.dialog.closeAll();
-  } 
-   changeMenu(value){
+  getCourseData(){
+    this.learnerService.get_batchwise_learner_dashboard_data(this.userDetails.user_id, 'all', null).subscribe((BcourseData: any) => {
+      const tmpBcourseDetail = BcourseData.data.get_batchwise_learner_dashboard_data.message;
+      this.courseDetailsList = tmpBcourseDetail && tmpBcourseDetail !== null ? tmpBcourseDetail : [];
+      this.learnerService.getLearnerDashboard(this.userDetails.user_id, this.userDetails._id, 'undefined', 'all', 'enrolment').subscribe((EcourseData: any) => {
+        const EcourseDetail = EcourseData.data.get_learner_dashboard.message.enrolled_course_details;
+        this.enrolledCourses = EcourseDetail && EcourseDetail !== null ? EcourseDetail : [];
+        this.courseDetailsList.push({
+          'course_name': 'All Courses',
+          'course_id': 'All',
+          'active' :false
+        })
+        this.courseDetailsList.push(...this.enrolledCourses);
+        this.courseDetailsList.some((item, idx) => 
+        item.course_name == 'All Courses' && 
+        this.courseDetailsList.unshift( 
+          this.courseDetailsList.splice(idx,1)[0]))
+          this.retainCourseFilter();
+      });
+    });
+  }
+  changeMenu(value){
     this.activeMenu = value;
     this.filterMenu.forEach(element => {
       if(element.key == value.key){
@@ -76,46 +109,79 @@ activeMenu:any;
       }
     });
   }
-  changefilterBy(value){
-   this.filterMenu.forEach(element =>{
+  activitiesFilter(value){
+   this.activities.forEach(element =>{
     if(element.key==value.key){
       element.active = true;
-
+      this.activityvalue = element.value;
     }
     else{
       element.active = false;
     }
    });
-   
   }
-
-  getCourseData(){
-    this.learnerService.get_batchwise_learner_dashboard_data(this.userDetails.user_id, 'all', null).subscribe((BcourseData: any) => {
-      const tmpBcourseDetail = BcourseData.data.get_batchwise_learner_dashboard_data.message;
-      this.courseDetailsList = tmpBcourseDetail && tmpBcourseDetail !== null ? tmpBcourseDetail : [];
-      this.learnerService.getLearnerDashboard(this.userDetails.user_id, this.userDetails._id, 'undefined', 'all', 'enrolment').subscribe((EcourseData: any) => {
-        const EcourseDetail = EcourseData.data.get_learner_dashboard.message.enrolled_course_details;
-        this.enrolledCourses = EcourseDetail && EcourseDetail !== null ? EcourseDetail : [];
-        this.courseDetailsList.push({
-          'course_name': 'All Courses',
-          'course_id': 'All'
-        })
-        this.courseDetailsList.push(...this.enrolledCourses);
-        this.courseDetailsList.some((item, idx) => 
-        item.course_name == 'All Courses' && 
-        this.courseDetailsList.unshift( 
-          this.courseDetailsList.splice(idx,1)[0]))
+  changecourseDetailsList(value){
+    this.courseDetailsList.forEach(element =>{
+      if(element.course_id == value.course_id){
+        element.active = true;
+        this.CourseValue = element.course_id;
+      }
+      else{
+        element.active = false;
+      }
+    })
+  }
+  retainActivityFilter(){
+    if(this.filteredData.activityValue && this.filteredData.activityValue !=''){
+      this.activities.forEach(element =>{
+        if(element.value ==this.filteredData.activityValue){
+          element.active = true;
+          this.activityvalue = element.value;
+        }
+        else{
+          element.active = false;
+        }
       });
+    }
+  }
+  retainCourseFilter(){
+    if(this.filteredData.courseValue && this.filteredData.courseValue !=''){
+     this.courseDetailsList.forEach(element =>{
+      if(element.course_id == this.filteredData.courseValue){
+        element.active = true;
+        this.CourseValue = element.course_id;
+      }
+      else{
+        element.active = false;
+      }
     });
   }
-
-
-  ngOnInit() {
-    this.activeMenu = this.filterMenu[0]
   }
   applyFilter(){
-    
- 
+    const FilterValue ={
+      activityValue:this.activityvalue,
+      courseValue :this.CourseValue
+    }
+    this.dialogRef.close(FilterValue);
+  }
+  clearAll(){
+    this.CourseValue ="";
+    this.activityvalue ="";
+    this.filterMenu = [{
+      key:"Activities",
+      active:true,
+  }
+    ,{
+      key:"Course",
+      active:false,
+    }
+   ];
+    this.activities.forEach(element=>{
+      element.active = false;
+    });
+    this.courseDetailsList.forEach(element =>{
+      element.active = false
+    });
   }
 
 }

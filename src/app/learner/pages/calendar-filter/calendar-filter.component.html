@@ -1,11 +1,10 @@
 <div class="filtertemplate">
   <div class="filterheader d-flex justify-content-between align-items-center">
-    <div class="d-flex align-items-center">
-      <div><mat-icon>tune</mat-icon> </div>
-      <div><span>Filter by</span></div>
+    <div class="d-flex align-items-center left">
+      <em class="lxp-Filter"></em>
+      <div>Filters</div>
     </div>
-
-  <div class="d-flex align-items-center">
+  <div class="d-flex align-items-center right">
     <div class="clear">
         <button mat-button>Clear All</button>
     </div>
@@ -19,79 +18,29 @@
               <div>
                 <ul>
                   <ng-container *ngIf ="activeMenu.key == 'Activities'">
-                     <li *ngFor ="let item of filterBy">
-                 <div class="d-flex justify-content-start align-items-center" (click)="changefilterBy(item.key)"
-                 [ngClass]="item.active ? 'filterChildactive': ''">
-                 <!-- <mat-checkbox *ngIf="item.active">
-             
-                </mat-checkbox>     {{item.key}} -->
-                   <mat-icon *ngIf="item.active">done</mat-icon>{{item.key}}
-                 </div>
-                  <hr>x`
+                     <li *ngFor ="let item of activities">
+                      <div class="d-flex justify-content-start align-items-center" (click)="activitiesFilter(item)"
+                      [ngClass]="item.active ? 'filterChildactive': ''">
+                   <em class="lxp-Right" *ngIf="item.active"></em>{{item.key}}
+                    </div>
+                  <hr>
                  </li>
                   </ng-container>
 
               <ng-container *ngIf ="activeMenu.key == 'Course'">
                 <li *ngFor ="let course of courseDetailsList">
-                <div class="d-flex justify-content-start align-items-center" (click)="changecourseDetailsList()">
-                  <mat-icon></mat-icon>{{course.course_name}}
-                  <!-- <mat-checkbox>
-                    {{course.course_name}}
-                  </mat-checkbox>  -->
-                </div>
-                 <hr>
-                </li>
-
-              </ng-container>
-
-              <!-- <ng-container *ngIf ="activeMenu.key == 'Assesment Type'">
-                <li *ngFor ="let item of assements">
-                <div class="d-flex justify-content-start align-items-center" (click)="changeassementtype(item.key)"
-                [ngClass]="item.active ? 'filterChildactive': ''">
-                  <mat-icon *ngIf="item.active">done</mat-icon>{{item.key}}
-                </div>
+                  <div class="d-flex justify-content-start align-items-center" (click)="changecourseDetailsList(course)" [ngClass]="course.active ? 'filterChildactive': ''">
+                    <em class="lxp-Right" *ngIf="course.active"></em>{{course.course_name}}
+                  </div>
                  <hr>
                 </li>
               </ng-container>
-
-              <ng-container *ngIf ="activeMenu.key == 'Batch'">
-                <li *ngFor ="let item of batches">
-                <div class="d-flex justify-content-start align-items-center" (click)="changeBatch(item.key)"
-                [ngClass]="item.active ? 'filterChildactive': ''">
-                  <mat-icon *ngIf="item.active">done</mat-icon>{{item.key}}
-                </div>
-                 <hr>
-                </li>
-              </ng-container> -->
-
-
-
-                </ul>
+               </ul>
               </div>
           </div>
       </div>
         <div class="filterfooter d-flex"> 
-          <button class="closeBtn" mat-button (click)="closeDialog()">Close</button>
+          <button class="closeBtn" mat-button (click)="dialog.closeAll()">Close</button>
           <button class="applyBtn" mat-button (click)="applyFilter()">Apply</button>
         </div>
-
-
-      
 </div>
-
-
-<!-- <mat-form-field class="mr-2" appearance="outline">
-                    <mat-select (selectionChange)="onSortChange($event) " matTooltip="{{CourseName}} "
-                        [(ngModel)]="courseValue ">
-                        <mat-option *ngFor="let course of courseDetailsList " [value]="course.course_id ">
-                            {{course.course_name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-select (selectionChange)="onSortChange($event) " [(ngModel)]="activityValue ">
-                        <mat-option *ngFor="let filter of filterBy " [value]="filter.value ">
-                            {{filter.key}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field> -->
