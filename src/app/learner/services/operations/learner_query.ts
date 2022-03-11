@@ -2680,6 +2680,8 @@ export const recentlycourse = gql`
           topic_id
           checklevel
           course_status
+          lastTopic
+          lastModule
         }
       }
     }
