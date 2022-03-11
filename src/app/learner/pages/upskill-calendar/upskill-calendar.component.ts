@@ -180,6 +180,8 @@ export class UpskillCalendarComponent implements OnInit {
           if(dateAvailable && value.description){
             this.activeDayIsOpen = true;
           }
+          if(moment(value.start).isSame(new Date(),'day'))
+          this.activeDayIsOpen = true;
         })
       }
       setTimeout(()=>{
