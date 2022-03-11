@@ -308,6 +308,35 @@
     .courseCompletion-btn {
       cursor: pointer;
       position: absolute;
+      right: 170px;
+      margin-right: 10px;
+      top: 20px;
+      z-index: 2;
+      h4 {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        font-weight: 400;
+        color: $lightred;
+        position: relative;
+        transition: color 0.2s ease-in-out;
+        &:hover {
+          color: $darkblue1;
+        }
+        span {
+          @media only screen and (min-width: 576px) {
+            font-size: 13px;
+          }
+        }
+        em {
+          margin-right: 6px;
+          font-size: 18px;
+        }
+      }
+    }
+    .videolinks-btn {
+      cursor: pointer;
+      position: absolute;
       right: 0;
       margin-right: 10px;
       top: 20px;
@@ -324,27 +353,28 @@
           color: $darkblue1;
         }
         span {
-          font-size: 0px;
+          &:hover {
+            text-decoration: underline;
+          }
           @media only screen and (min-width: 576px) {
-            font-size: 13px;
-          }
-          @media only screen and (min-width: 720px) {
-            font-size: 13px;
-          }
-          @media only screen and (min-width: 992px) {
-            font-size: 13px;
-          }
-          @media only screen and (min-width: 1140px) {
             font-size: 13px;
           }
         }
         em {
           margin-right: 6px;
-          font-size: 18px;
+          font-size: 18px;      
         }
       }
     }
   }
+
+  .tabsWrapper.No {
+    top: 60px;
+    @media only screen and (min-width: 720px) {
+      top: 0;
+    }
+  }
+
   //MyCourses
   .mycoursesWrapper {
     padding: 20px 85px 20px 20px;
@@ -1518,6 +1548,9 @@
   left: 15px;
   z-index: 8;
   width: 90%;
+  @media only screen and (min-width:576px) {
+    width: 70%;
+  }
   &.handIcon {
     text-align: left;
     @media only screen and (min-width: 992px) {
