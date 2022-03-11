@@ -90,7 +90,7 @@
                        <ng-template [ngTemplateOutlet]="tocContent"></ng-template>
                     </mat-tab>
                   
-                    <mat-tab *ngIf="userType!=='vocational'" [ngClass]="filterkey == 'Bookmarked' ? 'yes':'no'">
+                    <mat-tab *ngIf="userType!=='vocational'&&userType!=='Corporate'" [ngClass]="filterkey == 'Bookmarked' ? 'yes':'no'">
                         <ng-template mat-tab-label>
                             <span class="tabLabel">{{'Bookmarks' | translate}}</span> <span class="labelcount">{{bookmarkedCount}}</span>
                         </ng-template>
@@ -176,7 +176,7 @@
                         class="topicCardLevel" >
                         <!-- (click)="moduleExpand(resDat,i)" -->
                         <mat-card-title  class="d-flex justify-content-between align-items-center pointer">
-                            <div class="tocTitle" >{{'Week -' | translate}} {{resDat.week?resDat.week:wi+1}}</div>
+                            <div class="tocTitle" *ngIf="userType!=='vocational'&&userType!=='Corporate'" >{{'Week -' | translate}} {{resDat.week?resDat.week:wi+1}}</div>
                             <div>
                                 <!-- <i class="expandCollapse" [ngClass]="resDat.expanded?'lxp-Collapse':'lxp-Expand'"></i> -->
                             </div>
