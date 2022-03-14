@@ -1171,6 +1171,10 @@ data{
     topicname
     status
     link
+    module_id
+    topic_id
+    toc
+    checklevel
     self_paced_learning
     liveclassroom
     batch_id

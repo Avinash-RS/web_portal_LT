@@ -274,6 +274,10 @@ export class CoursedetailsComponent implements OnInit {
   subModuleData: Observable<any>;
   topicData$: Observable<any>;
   courseType: string;
+  bkmrk_week: any;
+  bkmrk_topic: any;
+  bkmrk_module: number;
+  bkmrk_subModuleHolder: any;
 
   // FOR DRM(Restriction for right click)
   @HostListener("document:keydown", ["$event"])
@@ -330,7 +334,6 @@ export class CoursedetailsComponent implements OnInit {
       this.route.getCurrentNavigation().extras.state &&
       this.route.getCurrentNavigation().extras.state.detail;
     this.checkDetails = Navdetail;
-    this.courseType = this.checkDetails.course_type;
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     if (this.screenWidth < 800) {
@@ -352,6 +355,8 @@ export class CoursedetailsComponent implements OnInit {
       }
       this.batchId = this.checkDetails.batch_id;
       this.batchEndTime = this.checkDetails.batchEndTime;
+      this.courseType = this.checkDetails?.course_type;
+
     }
 
     if (this.gs.checkLogout()) {
@@ -761,8 +766,18 @@ export class CoursedetailsComponent implements OnInit {
     smi,
     moduleIdx?
   ) {
-    console.log(moduleName);
-    this.weekHolder = weekIndex;
+    
+    if(this.filterkey == "Bookmarked"){
+      this.bkmrk_week = weekIndex;
+      this.bkmrk_topic = topindex;
+      this.bkmrk_module = Number(smi);
+      if (moduleIdx >= 0) {
+        this.bkmrk_subModuleHolder = moduleIdx;
+        this.submoduleTitle = moduleName;
+      }
+    }else
+    {
+      this.weekHolder = weekIndex;
     this.weekHolderUI = weekIndex;
     this.currentTopicTitle = topicName;
     this.currentModuleTitle = moduleName;
@@ -778,6 +793,7 @@ export class CoursedetailsComponent implements OnInit {
     this.topiccurrentPage = this.nextPrevHolder;
     this.moduleHolder = Number(smi);
     this.currentPage = Number(smi);
+  }
     // this.isprevEnable = true;
     // this.isNextEnable = true;
     this.topicInfo = topicDetail;
@@ -1281,9 +1297,32 @@ export class CoursedetailsComponent implements OnInit {
     console.log(tab, "tabs");
     if (tab.index == 1) {
       this.filterkey = "Bookmarked";
+      this.bkmrk_week = undefined;
+      this.bkmrk_topic = undefined;
+      this.bkmrk_module = null
+        this.bkmrk_subModuleHolder = undefined;
       this.filterToc();
     } else {
       this.filterkey = "All";
+      // on all toc list
+      let moduleName
+       if(this.scromApiData.checkLevel)
+      {
+        this.topicInfo = this.scromModuleData[this.weekHolderUI].childData[this.moduleHolder].childData[this.subModuleHolder].childData[this.nextPrevHolder];
+         moduleName = this.scromModuleData[this.weekHolderUI].childData[this.moduleHolder].childData[this.subModuleHolder].module_name
+      }
+      else{
+        this.topicInfo = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.nextPrevHolder];
+          moduleName = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].module_name;
+      }
+      console.log(this.topicInfo)
+      this.playURLConstructor(
+        this.topicInfo.link,
+        moduleName,
+        this.topicInfo.topic_name,
+        this.topicInfo.parent,
+        this.topicInfo.id
+      );
     }
   }
 
