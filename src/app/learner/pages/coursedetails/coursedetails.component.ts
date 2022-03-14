@@ -1308,8 +1308,8 @@ export class CoursedetailsComponent implements OnInit {
       let moduleName
        if(this.scromApiData.checkLevel)
       {
-        this.topicInfo = this.scromModuleData[this.weekHolderUI].childData[this.moduleHolder].childData[this.subModuleHolder].childData[this.nextPrevHolder];
-         moduleName = this.scromModuleData[this.weekHolderUI].childData[this.moduleHolder].childData[this.subModuleHolder].module_name
+        this.topicInfo = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].childData[this.nextPrevHolder];
+         moduleName = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].module_name
       }
       else{
         this.topicInfo = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.nextPrevHolder];
