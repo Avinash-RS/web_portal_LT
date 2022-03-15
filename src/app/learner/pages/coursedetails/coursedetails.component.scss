@@ -64,7 +64,7 @@
   height: calc(100vh - 111px);
   flex-wrap: wrap;
   @media only screen and (min-width: 720px) {
-    height: calc(100vh - 230px);
+    height: calc(100vh - 228px);
   }
   @media only screen and (min-width: 992px) {
     height: calc(100vh - 179px);
@@ -118,7 +118,7 @@
       }
       .leftTocContent {
         @media only screen and (min-width: 720px) {
-          height: calc(100vh - 295px);
+          height: calc(100vh - 297px);
         }
         @media only screen and (min-width: 992px) {
           height: calc(100vh - 248px);
