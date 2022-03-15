@@ -164,9 +164,9 @@ activities = [{
     }
     this.dialogRef.close(FilterValue);
   }
-  clearAll(){
-    this.CourseValue ="";
-    this.activityvalue ="";
+  clearAll(){ 
+    this.filteredData.activityValue ="All";
+    this.filteredData.courseValue ="All";
     this.filterMenu = [{
       key:"Activities",
       active:true,
@@ -176,12 +176,8 @@ activities = [{
       active:false,
     }
    ];
-    this.activities.forEach(element=>{
-      element.active = false;
-    });
-    this.courseDetailsList.forEach(element =>{
-      element.active = false
-    });
+   this.retainActivityFilter();
+   this.retainCourseFilter();
   }
 
 }
