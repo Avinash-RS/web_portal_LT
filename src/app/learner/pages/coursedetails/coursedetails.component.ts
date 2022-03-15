@@ -483,7 +483,6 @@ export class CoursedetailsComponent implements OnInit {
         
         if(result.data.course_id===this.courseid)
         {
-          // alert("in")
           if (result.data.resume) {
           if (result && this.weekHolder) {
           } else {
@@ -651,7 +650,6 @@ export class CoursedetailsComponent implements OnInit {
       this.getuserid = JSON.parse(localStorage.getItem("UserDetails"));
       //single
       //start course
-      console.log(this.checkDetails.course_status)
       if (
         this.checkDetails.course_status == "start" ||
         this.checkDetails.course_status == null ||
