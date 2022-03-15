@@ -353,11 +353,11 @@
                 </div>
                 <div *ngIf="checkDetails?.toc != '0'" class="d-flex align-items-center moduleTopicWrapper">
                     <div *ngIf="!drawersOpen" class="currentModuleTopic">
-                        <div class="curentVideoWeek">{{'Week' | translate}} <span>{{weekHolderUI+1}}</span></div>
+                        <div class="curentVideoWeek">{{'Week' | translate}} <span>{{weekHolderUI +1}}</span></div>
                         <div class="currentVideoModuleTopic">
-                            <h5>{{scromModuleData[weekHolderUI].childData[moduleHolder].title}}</h5>
-                            <h4 title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.childData[nextPrevHolder].title}}">
-                                {{scromModuleData[weekHolderUI].childData[moduleHolder]?.childData[nextPrevHolder].title}}
+                            <h5>{{currentModuleTitle}}</h5>
+                            <h4 title="{{currentTopicTitle}}">
+                                {{currentTopicTitle}}
                             </h4>
                         </div>
                     </div>
