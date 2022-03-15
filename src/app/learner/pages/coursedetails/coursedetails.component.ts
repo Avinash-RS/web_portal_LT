@@ -278,6 +278,7 @@ export class CoursedetailsComponent implements OnInit {
   bkmrk_topic: any;
   bkmrk_module: number;
   bkmrk_subModuleHolder: any;
+  bkup_topicInfo: any;
 
   // FOR DRM(Restriction for right click)
   @HostListener("document:keydown", ["$event"])
@@ -479,8 +480,10 @@ export class CoursedetailsComponent implements OnInit {
     this.socketEmitReciver = this.socketService.change.subscribe(
       (result: any) => {
         console.log(result);
-
-        if (result.data.resume) {
+        
+        if(result.data.course_id===this.courseid)
+        {
+          if (result.data.resume) {
           if (result && this.weekHolder) {
           } else {
             // replace resume data from socket for TOC
@@ -507,7 +510,7 @@ export class CoursedetailsComponent implements OnInit {
               return resultData;
             };
 
-            this.topicInfo = getResumeTopic(this.scromModuleData);
+            this.topicInfo = this.bkup_topicInfo =  getResumeTopic(this.scromModuleData);
             this.currentTopicTitle = this.topicInfo.topic_name;
             this.bookmarkedCount = result.data.bookmarkCount;
           }
@@ -592,6 +595,7 @@ export class CoursedetailsComponent implements OnInit {
           this.isNextEnable = false;
         }
       }
+      }
     );
     // }
     // this.getCoursePlayerStatus();
@@ -665,9 +669,9 @@ export class CoursedetailsComponent implements OnInit {
         this.subModuleHolder = 0;
       }
 
-      if (!this.scromApiData.checkLevel) {
-        this.checkLastFirstIndexReached();
-      }
+      // if (!this.scromApiData.checkLevel) {
+      //   this.checkLastFirstIndexReached();
+      // }
 
       setTimeout(() => {
         this.checkDetails.course_status =
@@ -884,139 +888,139 @@ export class CoursedetailsComponent implements OnInit {
     });
   }
 
-  topicNext() {
-    // console.log(this.scromModuleData)
-    this.isNextEnable = true;
-    this.isprevEnable = true;
-    this.moduleInfo =
-      this.scromModuleData[this.weekHolder].childData[this.currentPage];
-    //WEEK NAVIGATION
-    if (this.weekHolder < this.weekLength) {
-      this.moduleLenth = this.scromModuleData[this.weekHolder].childData.length;
-      // this.getTopicLengthofModule = this.scromModuleData[this.weekHolder].childData[this.currentPage]?.topic_len;
+  // topicNext() {
+  //   // console.log(this.scromModuleData)
+  //   this.isNextEnable = true;
+  //   this.isprevEnable = true;
+  //   this.moduleInfo =
+  //     this.scromModuleData[this.weekHolder].childData[this.currentPage];
+  //   //WEEK NAVIGATION
+  //   if (this.weekHolder < this.weekLength) {
+  //     this.moduleLenth = this.scromModuleData[this.weekHolder].childData.length;
+  //     // this.getTopicLengthofModule = this.scromModuleData[this.weekHolder].childData[this.currentPage]?.topic_len;
 
-      if (this.currentPage < this.moduleLenth) {
-        this.getTopicLengthofModule =
-          this.scromModuleData[this.weekHolder].childData[
-            this.currentPage
-          ]?.topic_len;
-        // topic to module change on previous
-        if (this.topiccurrentPage === this.getTopicLengthofModule - 1) {
-          if (
-            this.currentPage === this.moduleLenth - 1 &&
-            this.topiccurrentPage === this.getTopicLengthofModule - 1
-          ) {
-            this.weekHolder = this.weekHolderUI = Number(this.weekHolder) + 1;
-            this.currentPage = 0;
-            this.moduleHolder = this.currentPage;
-          } else {
-            this.currentPage = Number(this.currentPage) + 1;
-            this.moduleHolder = this.currentPage;
-          }
-          this.topiccurrentPage = 0;
-          this.nextPrevHolder = 0;
-          this.getTopicLengthofModule =
-            this.scromModuleData[this.weekHolder].childData[
-              this.currentPage
-            ]?.topic_len;
-        } else {
-          this.topiccurrentPage = Number(this.topiccurrentPage) + 1;
-          this.nextPrevHolder = this.topiccurrentPage;
-        }
-        // topic
-        if (this.topiccurrentPage <= this.getTopicLengthofModule) {
-          this.moduleInfo =
-            this.scromModuleData[this.weekHolder].childData[this.currentPage];
-          this.gettopicLink =
-            this.scromModuleData[this.weekHolder].childData[
-              this.currentPage
-            ].childData[this.topiccurrentPage];
-          this.moduleSatusCheck = this.moduleInfo.status
-            ? this.moduleInfo.status
-            : "process";
-          this.currentTopicTitle = this.gettopicLink.title;
-          this.currentModuleTitle = this.moduleInfo.title;
-          this.topicPageStatus = this.gettopicLink.status;
-          this.playURLConstructor(
-            this.gettopicLink.link,
-            this.currentModuleTitle,
-            this.currentTopicTitle,
-            this.topicInfo.parent_id,
-            this.topicInfo.id
-          );
-        }
-      }
-    }
-    // this.gettopicLink = this.scromModuleData[this.currentPage - 1]?.childData[this.topiccurrentPage];
-    // const childData = this.scromModuleData[this.moduleLenth - 1]?.childData;
-    // const childlength = this.scromModuleData[this.moduleLenth - 1]?.childData.length;
-    // if (this.gettopicLink.id === childData[childlength - 1].id) {
-    //   this.ratingPopup();
-    // }
-  }
+  //     if (this.currentPage < this.moduleLenth) {
+  //       this.getTopicLengthofModule =
+  //         this.scromModuleData[this.weekHolder].childData[
+  //           this.currentPage
+  //         ]?.topic_len;
+  //       // topic to module change on previous
+  //       if (this.topiccurrentPage === this.getTopicLengthofModule - 1) {
+  //         if (
+  //           this.currentPage === this.moduleLenth - 1 &&
+  //           this.topiccurrentPage === this.getTopicLengthofModule - 1
+  //         ) {
+  //           this.weekHolder = this.weekHolderUI = Number(this.weekHolder) + 1;
+  //           this.currentPage = 0;
+  //           this.moduleHolder = this.currentPage;
+  //         } else {
+  //           this.currentPage = Number(this.currentPage) + 1;
+  //           this.moduleHolder = this.currentPage;
+  //         }
+  //         this.topiccurrentPage = 0;
+  //         this.nextPrevHolder = 0;
+  //         this.getTopicLengthofModule =
+  //           this.scromModuleData[this.weekHolder].childData[
+  //             this.currentPage
+  //           ]?.topic_len;
+  //       } else {
+  //         this.topiccurrentPage = Number(this.topiccurrentPage) + 1;
+  //         this.nextPrevHolder = this.topiccurrentPage;
+  //       }
+  //       // topic
+  //       if (this.topiccurrentPage <= this.getTopicLengthofModule) {
+  //         this.moduleInfo =
+  //           this.scromModuleData[this.weekHolder].childData[this.currentPage];
+  //         this.gettopicLink =
+  //           this.scromModuleData[this.weekHolder].childData[
+  //             this.currentPage
+  //           ].childData[this.topiccurrentPage];
+  //         this.moduleSatusCheck = this.moduleInfo.status
+  //           ? this.moduleInfo.status
+  //           : "process";
+  //         this.currentTopicTitle = this.gettopicLink.title;
+  //         this.currentModuleTitle = this.moduleInfo.title;
+  //         this.topicPageStatus = this.gettopicLink.status;
+  //         this.playURLConstructor(
+  //           this.gettopicLink.link,
+  //           this.currentModuleTitle,
+  //           this.currentTopicTitle,
+  //           this.topicInfo.parent_id,
+  //           this.topicInfo.id
+  //         );
+  //       }
+  //     }
+  //   }
+  //   // this.gettopicLink = this.scromModuleData[this.currentPage - 1]?.childData[this.topiccurrentPage];
+  //   // const childData = this.scromModuleData[this.moduleLenth - 1]?.childData;
+  //   // const childlength = this.scromModuleData[this.moduleLenth - 1]?.childData.length;
+  //   // if (this.gettopicLink.id === childData[childlength - 1].id) {
+  //   //   this.ratingPopup();
+  //   // }
+  // }
 
-  topicPrve() {
-    this.isNextEnable = true;
-    this.isprevEnable = true;
-    this.moduleInfo =
-      this.scromModuleData[this.weekHolder].childData[this.currentPage];
-    this.moduleLenth = this.scromModuleData[this.weekHolder].childData.length;
-    if (this.currentPage < this.moduleLenth) {
-      this.getTopicLengthofModule =
-        this.scromModuleData[this.weekHolder].childData[
-          this.currentPage
-        ]?.topic_len;
-      // topic to module change on previous
+  // topicPrve() {
+  //   this.isNextEnable = true;
+  //   this.isprevEnable = true;
+  //   this.moduleInfo =
+  //     this.scromModuleData[this.weekHolder].childData[this.currentPage];
+  //   this.moduleLenth = this.scromModuleData[this.weekHolder].childData.length;
+  //   if (this.currentPage < this.moduleLenth) {
+  //     this.getTopicLengthofModule =
+  //       this.scromModuleData[this.weekHolder].childData[
+  //         this.currentPage
+  //       ]?.topic_len;
+  //     // topic to module change on previous
 
-      if (this.currentPage - 1 >= 0 && this.topiccurrentPage === 0) {
-        this.currentPage = this.currentPage - 1;
-        this.moduleHolder = this.currentPage;
-        this.topiccurrentPage =
-          this.scromModuleData[this.weekHolder].childData[this.currentPage]
-            .childData.length - 1;
-        this.nextPrevHolder = this.topiccurrentPage;
-        this.getTopicLengthofModule =
-          this.scromModuleData[this.weekHolder].childData[
-            this.currentPage
-          ]?.topic_len;
-      } else {
-        if (this.currentPage == 0 && this.topiccurrentPage == 0) {
-          this.weekHolder = this.weekHolderUI = this.weekHolder - 1;
-          this.moduleHolder =
-            this.scromModuleData[this.weekHolder].childData.length - 1;
-          this.currentPage = Number(this.moduleHolder);
-          this.topiccurrentPage =
-            this.scromModuleData[this.weekHolder].childData[this.currentPage]
-              .childData.length - 1;
-          this.nextPrevHolder = this.topiccurrentPage;
-        } else {
-          this.topiccurrentPage = this.topiccurrentPage - 1;
-          this.nextPrevHolder = this.topiccurrentPage;
-        }
-      }
-      if (this.topiccurrentPage >= 0) {
-        this.moduleInfo =
-          this.scromModuleData[this.weekHolder].childData[this.currentPage];
-        this.gettopicLink =
-          this.scromModuleData[this.weekHolder].childData[
-            this.currentPage
-          ].childData[this.topiccurrentPage];
-        this.moduleSatusCheck = this.moduleInfo.status
-          ? this.moduleInfo.status
-          : "process";
-        this.currentTopicTitle = this.gettopicLink.title;
-        this.currentModuleTitle = this.moduleInfo.title;
-        this.topicPageStatus = this.gettopicLink.status;
-        this.playURLConstructor(
-          this.gettopicLink.link,
-          this.currentModuleTitle,
-          this.currentTopicTitle,
-          this.topicInfo.parent_id,
-          this.topicInfo.id
-        );
-      }
-    }
-  }
+  //     if (this.currentPage - 1 >= 0 && this.topiccurrentPage === 0) {
+  //       this.currentPage = this.currentPage - 1;
+  //       this.moduleHolder = this.currentPage;
+  //       this.topiccurrentPage =
+  //         this.scromModuleData[this.weekHolder].childData[this.currentPage]
+  //           .childData.length - 1;
+  //       this.nextPrevHolder = this.topiccurrentPage;
+  //       this.getTopicLengthofModule =
+  //         this.scromModuleData[this.weekHolder].childData[
+  //           this.currentPage
+  //         ]?.topic_len;
+  //     } else {
+  //       if (this.currentPage == 0 && this.topiccurrentPage == 0) {
+  //         this.weekHolder = this.weekHolderUI = this.weekHolder - 1;
+  //         this.moduleHolder =
+  //           this.scromModuleData[this.weekHolder].childData.length - 1;
+  //         this.currentPage = Number(this.moduleHolder);
+  //         this.topiccurrentPage =
+  //           this.scromModuleData[this.weekHolder].childData[this.currentPage]
+  //             .childData.length - 1;
+  //         this.nextPrevHolder = this.topiccurrentPage;
+  //       } else {
+  //         this.topiccurrentPage = this.topiccurrentPage - 1;
+  //         this.nextPrevHolder = this.topiccurrentPage;
+  //       }
+  //     }
+  //     if (this.topiccurrentPage >= 0) {
+  //       this.moduleInfo =
+  //         this.scromModuleData[this.weekHolder].childData[this.currentPage];
+  //       this.gettopicLink =
+  //         this.scromModuleData[this.weekHolder].childData[
+  //           this.currentPage
+  //         ].childData[this.topiccurrentPage];
+  //       this.moduleSatusCheck = this.moduleInfo.status
+  //         ? this.moduleInfo.status
+  //         : "process";
+  //       this.currentTopicTitle = this.gettopicLink.title;
+  //       this.currentModuleTitle = this.moduleInfo.title;
+  //       this.topicPageStatus = this.gettopicLink.status;
+  //       this.playURLConstructor(
+  //         this.gettopicLink.link,
+  //         this.currentModuleTitle,
+  //         this.currentTopicTitle,
+  //         this.topicInfo.parent_id,
+  //         this.topicInfo.id
+  //       );
+  //     }
+  //   }
+  // }
 
   makeFullScreen() {
     const element = document.querySelector("#myPlayer");
@@ -1306,6 +1310,7 @@ export class CoursedetailsComponent implements OnInit {
       this.filterkey = "All";
       // on all toc list
       let moduleName
+      if(this.weekHolder){
        if(this.scromApiData.checkLevel)
       {
         this.topicInfo = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].childData[this.nextPrevHolder];
@@ -1315,6 +1320,9 @@ export class CoursedetailsComponent implements OnInit {
         this.topicInfo = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.nextPrevHolder];
           moduleName = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].module_name;
       }
+    }else{
+      this.topicInfo = this.bkup_topicInfo
+    }
       console.log(this.topicInfo)
       this.playURLConstructor(
         this.topicInfo.link,
