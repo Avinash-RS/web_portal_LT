@@ -241,91 +241,92 @@
                             </div>
                         </div>
                      </div>
-                    <div class="course-progress" *ngIf="showProgressChart" [@collapseprogress]>
-                    <div class="course-progress-wrapper">
-                        <div class="d-flex justify-content-between align-items-start course-progress-header">
-                            <div class="course-progress-header-text">{{'Course Completion Progress' | translate}}</div>
-                            <div class="d-flex align-items-center course-progress-header-action" (click)="showProgressChart = false;">
-                                <em class="lxp-Close"></em>
-                                <span>{{'Close' | translate}}</span>
-                            </div>
-                        </div>  
-                        <div class="d-flex justify-content-between align-items-center flex-wrap course-progress-content" *ngIf="true;else courseChartSkeleton">
-                            <mat-card class="cousrse-wise-card">
-                                <div class="d-flex justify-content-between align-items-center cousrse-wise-card-header">
-                                    <div class="cousrse-wise-card-header-text">{{'Course Wise Completion' | translate}}</div>
-                                <div class="d-flex justify-content-between align-items-center cousrse-wise-card-date">
-                                    <div class="start-date">
-                                        <mat-form-field style="width:105px;">
-                                            <input matInput [matDatepicker]="CourseFromDatepicker" [placeholder]="'From date' | translate" [(ngModel)]="courseStartDate" [min] = "UserDetails.created_on"
-                                             [max]="today" (dateChange)="changeCourseDate()">
-                                            <mat-datepicker-toggle matSuffix [for]="CourseFromDatepicker"></mat-datepicker-toggle>
-                                            <mat-datepicker #CourseFromDatepicker></mat-datepicker>
-                                         </mat-form-field>
-                                    </div>
+                    <div class="course-progress" [ngClass]="showJobRole ? 'Yes' : 'No'" *ngIf="showProgressChart" [@collapseprogress]>
+                        <div class="course-progress-wrapper">
+                            <div class="d-flex justify-content-between align-items-start course-progress-header">
+                                <div class="course-progress-header-text">{{'Course Completion Progress' | translate}}</div>
+                                <div class="d-flex align-items-center course-progress-header-action" (click)="showProgressChart = false;">
+                                    <em class="lxp-Close"></em>
+                                    <span>{{'Close' | translate}}</span>
+                                </div>
+                            </div>  
+                            <div class="d-flex justify-content-between flex-wrap course-progress-content" *ngIf="true;else courseChartSkeleton">
+                                <mat-card class="cousrse-wise-card">
+                                    <div class="d-flex justify-content-between align-items-center cousrse-wise-card-header">
+                                        <div class="cousrse-wise-card-header-text">{{'Course Wise Completion' | translate}}</div>
+                                    <div class="d-flex justify-content-between align-items-center cousrse-wise-card-date">
+                                        <div class="start-date">
+                                            <mat-form-field style="width:105px;">
+                                                <input matInput [matDatepicker]="CourseFromDatepicker" [placeholder]="'From date' | translate" [(ngModel)]="courseStartDate" [min] = "UserDetails.created_on"
+                                                [max]="today" (dateChange)="changeCourseDate()">
+                                                <mat-datepicker-toggle matSuffix [for]="CourseFromDatepicker"></mat-datepicker-toggle>
+                                                <mat-datepicker #CourseFromDatepicker></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
 
-                                    <div class="end-date">
-                                        <mat-form-field style="width:105px;">
-                                            <input matInput [matDatepicker]="CourseDatepicker" [placeholder]="'To date' | translate" [(ngModel)]="courseEndDate" [min] = "minCourseDate"
-                                             [max]="today" (dateChange)="changeCourseDate()">
-                                            <mat-datepicker-toggle matSuffix [for]="CourseDatepicker"></mat-datepicker-toggle>
-                                            <mat-datepicker #CourseDatepicker></mat-datepicker>
-                                         </mat-form-field>
+                                        <div class="end-date">
+                                            <mat-form-field style="width:105px;">
+                                                <input matInput [matDatepicker]="CourseDatepicker" [placeholder]="'To date' | translate" [(ngModel)]="courseEndDate" [min] = "minCourseDate"
+                                                [max]="today" (dateChange)="changeCourseDate()">
+                                                <mat-datepicker-toggle matSuffix [for]="CourseDatepicker"></mat-datepicker-toggle>
+                                                <mat-datepicker #CourseDatepicker></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
                                     </div>
-                                </div>
-                                </div>
-                                <div class="cousrse-chart-content">
-                                    <h6>{{'Completion %' | translate}}</h6>
-                                    <canvas baseChart [datasets]="coursebarChartData" [labels]="coursebarChartLabels" [options]="courseChartOptions"
-                                    [plugins]="courseChartPlugins" [legend]="coursebarChartLegend" [chartType]="coursebarChartType"></canvas>
-                            </div>
-                                <div class="d-flex justify-content-center align-items-center course-chart-footer">
-                                    {{'Courses' | translate}}
-                                </div>
-                            </mat-card>
-                            <mat-card class="week-wise-card">
-                                <div class="week-wise-card-header">
-                                  <div class="weekwise-card-header-text">{{'Week wise time spent' | translate}}</div>
-                                </div>
-                                <div class="progress-date d-flex">
-                                    <div class="progress-hours-container">
-                                     <h4 class="progress-hours">{{totalhoursSpend}}</h4>
-                                     <span class="hours-spent-label">{{'Hours Spent' | translate}}</span>
                                     </div>
-                                    <div class="progress-date-input">
-                                     <mat-form-field style="width:110px;">
-                                       <input matInput [matDatepicker]="weekWiseDatepicker" [placeholder]="'Choose a date' | translate" [(ngModel)]="weekWiseDate"  [min] = "UserDetails.created_on"
-                                        [max]="today" (dateChange)="changeWeekDate()">
-                                       <mat-datepicker-toggle matSuffix [for]="weekWiseDatepicker"></mat-datepicker-toggle>
-                                       <mat-datepicker #weekWiseDatepicker></mat-datepicker>
-                                     </mat-form-field>
-                                    </div>
+                                    <div class="cousrse-chart-content">
+                                        <h6>{{'Completion %' | translate}}</h6>
+                                        <canvas baseChart [datasets]="coursebarChartData" [labels]="coursebarChartLabels" [options]="courseChartOptions"
+                                        [plugins]="courseChartPlugins" [legend]="coursebarChartLegend" [chartType]="coursebarChartType"></canvas>
                                 </div>
-                                <div class="Week-chart-content">
-                                    <h6>{{'Time in hours' | translate}}</h6>
-                                    <div>
-                                        <canvas baseChart height="174px" [datasets]="WeekbarChartData" [labels]="WeekbarChartLabels" [options]="WeekbarChartOptions"
-                                        [plugins]="WeekbarChartPlugins" [legend]="WeekbarChartLegend" [chartType]="WeekbarChartType"></canvas>
+                                    <div class="d-flex justify-content-center align-items-center course-chart-footer">
+                                        {{'Courses' | translate}}
                                     </div>
-                                </div>
-                            </mat-card>
-                        </div>  
-                    </div>
-                    </div>
-
-                    <div class="tabsWrapper" [ngClass]="userDetailes.org_type == 'Corporate' ? 'Yes' : 'No'">
-                        <div class="courseCompletion-btn" (click)="getCourseProgress()" *ngIf="!showProgressChart">
-                            <h4>
-                                <em class="lxp-Analytics"></em>
-                                <span>{{'Course Completion Progress' | translate}}</span> 
-                            </h4>
+                                </mat-card>
+                                <mat-card class="week-wise-card">
+                                    <div class="week-wise-card-header">
+                                    <div class="weekwise-card-header-text">{{'Week wise time spent' | translate}}</div>
+                                    </div>
+                                    <div class="progress-date d-flex">
+                                        <div class="progress-hours-container">
+                                        <h4 class="progress-hours">{{totalhoursSpend}}</h4>
+                                        <span class="hours-spent-label">{{'Hours Spent' | translate}}</span>
+                                        </div>
+                                        <div class="progress-date-input">
+                                        <mat-form-field style="width:110px;">
+                                        <input matInput [matDatepicker]="weekWiseDatepicker" [placeholder]="'Choose a date' | translate" [(ngModel)]="weekWiseDate"  [min] = "UserDetails.created_on"
+                                            [max]="today" (dateChange)="changeWeekDate()">
+                                        <mat-datepicker-toggle matSuffix [for]="weekWiseDatepicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #weekWiseDatepicker></mat-datepicker>
+                                        </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="Week-chart-content">
+                                        <h6>{{'Time in hours' | translate}}</h6>
+                                        <div>
+                                            <canvas baseChart height="174px" [datasets]="WeekbarChartData" [labels]="WeekbarChartLabels" [options]="WeekbarChartOptions"
+                                            [plugins]="WeekbarChartPlugins" [legend]="WeekbarChartLegend" [chartType]="WeekbarChartType"></canvas>
+                                        </div>
+                                    </div>
+                                </mat-card>
+                            </div>  
                         </div>
+                    </div>
 
-                        <div class="videolinks-btn" (click)="getVideoLink('Java')">
-                            <h4>
-                                <em class="lxp-video_links"></em>
-                                <span>{{'Reference video links' | translate}}</span> 
-                            </h4>
+                    <div class="tabsWrapper" [ngClass]="showJobRole ? 'Yes' : 'No'">
+                        <div class="linksWrapper">
+                            <div class="courseCompletion-btn" (click)="getCourseProgress()" *ngIf="!showProgressChart">
+                                <h4>
+                                    <em class="lxp-Analytics"></em>
+                                    <span>{{'Course Completion Progress' | translate}}</span> 
+                                </h4>
+                            </div>
+                            <div class="videolinks-btn" (click)="getVideoLink('Java')">
+                                <h4>
+                                    <em class="lxp-video_links"></em>
+                                    <span>{{'Reference video links' | translate}}</span> 
+                                </h4>
+                            </div>
                         </div>
 
                         <mat-tab-group #tabs (selectedTabChange)="courseTabChange($event,userDetailes.user_id,userDetailes._id);" [(selectedIndex)]="selectedIndex">
