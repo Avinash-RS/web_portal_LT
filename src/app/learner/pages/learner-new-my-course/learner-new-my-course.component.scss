@@ -338,7 +338,7 @@
         margin-right: 20px;
       }
       h4 {
-        margin: 0 10px 0 0;
+        margin: 0;
         display: flex;
         justify-content: center;
         font-weight: 400;
@@ -387,38 +387,6 @@
         }
       }
     }
-    // .videolinks-btn {
-    //   cursor: pointer;
-    //   // position: absolute;
-    //   // right: 0;
-    //   // margin-right: 10px;
-    //   // top: 20px;
-    //   z-index: 2;
-    //   h4 {
-    //     margin: 0;
-    //     display: flex;
-    //     justify-content: center;
-    //     font-weight: 400;
-    //     color: $lightred;
-    //     position: relative;
-    //     transition: color 0.2s ease-in-out;
-    //     &:hover {
-    //       color: $darkblue1;
-    //     }
-    //     span {
-    //       &:hover {
-    //         text-decoration: underline;
-    //       }
-    //       @media only screen and (min-width: 576px) {
-    //         font-size: 13px;
-    //       }
-    //     }
-    //     em {
-    //       margin-right: 6px;
-    //       font-size: 18px;      
-    //     }
-    //   }
-    // }
   }
 
   //MyCourses
