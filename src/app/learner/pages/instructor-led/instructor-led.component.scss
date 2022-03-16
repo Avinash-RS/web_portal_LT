@@ -1,11 +1,11 @@
 @import "variable";
 .instructorLedWrapper {
   padding: 0;
-  height: 100%;
   display: flex;
   background-color: $grey1;
   flex-direction: column;
-  @media only screen and (min-width: 1024px) {
+  @media only screen and (min-width: 992px) {
+    height: 100%;
     flex-direction: row;
     .leftContainer {
       width: calc(100% - 400px);
