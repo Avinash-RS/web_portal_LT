@@ -81,10 +81,13 @@
                   <mat-card class="p-0 iterationCard" (click)="projectPreviewDoc(projectPreviewDialog, videoDialog, material, 'material')">
                     <div class="row ml-0 mr-0 carouselRow1">
                       <div class="col-12 m-auto">
-                        <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
+                        <!-- <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
                           photo_size_select_actual</mat-icon>
                         <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'">play_circle_outline</mat-icon>
-                        <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type =='application/pdf'" aria-hidden="true"></i>
+                        <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type =='application/pdf'" aria-hidden="true"></i> -->
+                        <em class="lxp-photo iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"></em>
+                        <em class="lxp-PlayCircle iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'"></em>
+                        <em class="lxp-pdf iterationicons" *ngIf="material.doc_type =='application/pdf'"></em>
                       </div>
                     </div>
                     <div class="ml-0 mr-0 h-40" class="fileSelDet">
@@ -169,10 +172,13 @@
                           <mat-card class="p-0 iterationCard">
                             <div class="row ml-0 mr-0 carouselRow1">
                               <div class="col-12 m-auto">
-                                <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
+                                <!-- <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
                                   photo_size_select_actual</mat-icon>
                                 <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'">play_circle_outline</mat-icon>
-                                <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type == 'application/pdf'" aria-hidden="true"></i>
+                                <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type == 'application/pdf'" aria-hidden="true"></i> -->
+                                <em class="lxp-photo iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"></em>
+                                <em class="lxp-PlayCircle iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'"></em>
+                                <em class="lxp-pdf iterationicons" *ngIf="material.doc_type == 'application/pdf'" aria-hidden="true"></em>
                               </div>
                             </div>
                             <div class="row ml-0 mr-0 h-40" class="fileSelDet">
