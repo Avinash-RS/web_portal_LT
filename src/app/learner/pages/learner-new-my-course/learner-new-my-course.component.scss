@@ -305,13 +305,38 @@
 
   .tabsWrapper {
     position: relative;
+    .linksWrapper {
+      position: absolute;
+      right: -20px;
+      top: 11px;
+      z-index: 2;
+      display: flex;
+      justify-content: flex-end;
+      @media only screen and (min-width: 360px) {
+        right: -10px;
+      }
+      @media only screen and (min-width: 576px) {
+        top: 15px;
+        right: 0;
+      }
+      @media only screen and (min-width: 1140px) {
+        top: 20px;
+      }
+      .courseCompletion-btn, .videolinks-btn {
+        span {
+          display: none;
+          @media only screen and (min-width: 992px) {
+            display: inline-block;
+          }
+        }
+      }
+    }
     .courseCompletion-btn {
       cursor: pointer;
-      position: absolute;
-      right: 170px;
       margin-right: 10px;
-      top: 15px;
-      z-index: 2;
+      @media only screen and (min-width: 992px) {
+        margin-right: 20px;
+      }
       h4 {
         margin: 0;
         display: flex;
@@ -336,11 +361,7 @@
     }
     .videolinks-btn {
       cursor: pointer;
-      position: absolute;
-      right: 0;
       margin-right: 10px;
-      top: 20px;
-      z-index: 2;
       h4 {
         margin: 0;
         display: flex;
@@ -368,13 +389,6 @@
     }
   }
 
-  .tabsWrapper.No {
-    top: 60px;
-    @media only screen and (min-width: 720px) {
-      top: 0;
-    }
-  }
-
   //MyCourses
   .mycoursesWrapper {
     padding: 20px 85px 20px 20px;
@@ -385,21 +399,35 @@
     @media only screen and (min-width: 1540px) {
       min-height: 750px;
     }
-    .course-progress{
-      .course-progress-wrapper{
+    .course-progress {
+      &.Yes {
+        .course-progress-wrapper {
+          margin-top: 6.5em;
+          @media only screen and (min-width: 720px) {
+            margin-top: 2.5em;
+          }
+          // @media only screen and (min-width: 992px) {
+          //   margin-top: 2.5em;
+          // }
+          // @media only screen and (min-width: 1140px) {
+          //   margin-top: 2.5em;
+          // }
+        }
+      }
+      .course-progress-wrapper {
         // margin-top: 5.5em;
         margin-top: 2.5em;
-        @media only screen and (min-width: 576px) {
-        }
-        @media only screen and (min-width: 720px) {
-          margin-top: 2.5em;
-        }
-        @media only screen and (min-width: 992px) {
-          margin-top: 2.5em;
-        }
-        @media only screen and (min-width: 1140px) {
-          margin-top: 2.5em;
-        }
+        // @media only screen and (min-width: 576px) {
+        // }
+        // @media only screen and (min-width: 720px) {
+        //   margin-top: 2.5em;
+        // }
+        // @media only screen and (min-width: 992px) {
+        //   margin-top: 2.5em;
+        // }
+        // @media only screen and (min-width: 1140px) {
+        //   margin-top: 2.5em;
+        // }
       .course-progress-header{
         .course-progress-header-text{
           width: 90%;
@@ -436,21 +464,21 @@
           }
           .cousrse-wise-card-header {
             flex-wrap: wrap;
-            @media only screen and (min-width: 576px) {
+            @media only screen and (min-width: 992px) {
               flex-wrap: nowrap;
             }
             .cousrse-wise-card-header-text {
               font-size:14px;
               font-weight: 500;
               width: 100%;
-              @media only screen and (min-width: 576px) {
+              @media only screen and (min-width: 992px) {
                 width: 50%;
               }
             }
             .cousrse-wise-card-date {
               width: 100%;
               margin-top: 10px;
-              @media only screen and (min-width: 576px) {
+              @media only screen and (min-width: 992px) {
                 width: 50%;
                 margin-top: 0;
               }
@@ -2067,3 +2095,11 @@
   }
 }
 
+::ng-deep.tabsWrapper.Yes {
+  .mat-tab-group {
+    margin-top: 80px;
+    @media only screen and (min-width: 720px) {
+      margin-top: 0;
+    }
+  }
+}
