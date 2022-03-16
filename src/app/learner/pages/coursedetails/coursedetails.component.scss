@@ -64,13 +64,13 @@
   height: calc(100vh - 111px);
   flex-wrap: wrap;
   @media only screen and (min-width: 720px) {
-    height: calc(100vh - 111px);
+    height: calc(100vh - 228px);
   }
   @media only screen and (min-width: 992px) {
-    height: calc(100vh - 124px);
+    height: calc(100vh - 179px);
   }
   @media only screen and (min-width: 1140px) {
-    height: calc(100vh - 111px);
+    height: calc(100vh - 142px);
   }
   @media only screen and (min-width: 1440px) {
     // height: calc(100vh - 119px);
@@ -116,6 +116,17 @@
       @media only screen and (max-width: 767px) {
         margin-left: -100%;
       }
+      .leftTocContent {
+        @media only screen and (min-width: 720px) {
+          height: calc(100vh - 297px);
+        }
+        @media only screen and (min-width: 992px) {
+          height: calc(100vh - 248px);
+        }
+        @media only screen and (min-width: 1140px) {
+          height: calc(100vh - 211px);
+        }
+      }
     }
     .filterSection {
       position: relative;
@@ -134,7 +145,13 @@
       //   height: calc(100vh - 219px);
       // }
       @media only screen and (min-width: 720px) {
-        height: calc(100vh - 191px);
+        height: calc(100vh - 272px);
+      }
+      @media only screen and (min-width: 992px) {
+        height: calc(100vh - 225px);
+      }
+      @media only screen and (min-width: 1140px) {
+        height: calc(100vh - 188px);
       }
     }
   }
@@ -428,7 +445,7 @@
     }
     .wrapppper {
       flex-wrap: wrap;
-      margin-top: 20px;
+      margin-top: 10px;
       justify-content: center;
       width: 100%;
       @media only screen and (min-width: 720px) {
