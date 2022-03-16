@@ -513,6 +513,11 @@ export class CoursedetailsComponent implements OnInit {
             this.topicInfo = this.bkup_topicInfo =  getResumeTopic(this.scromModuleData);
             this.currentTopicTitle = this.topicInfo.topic_name;
             this.bookmarkedCount = result.data.bookmarkCount;
+            // to get week index
+            this.scromModuleData.forEach((element,index )=> {
+              if(element.expanded)
+              {this.weekHolderUI = index}
+            });
           }
         } else {
           this.bookmarkedCount = result.data.bookmarkCount;
@@ -797,6 +802,8 @@ export class CoursedetailsComponent implements OnInit {
     this.topiccurrentPage = this.nextPrevHolder;
     this.moduleHolder = Number(smi);
     this.currentPage = Number(smi);
+
+    localStorage.setItem('resumeData', JSON.stringify({'link':url,'lastModule':this.currentModuleTitle,'lastTopic':this.currentTopicTitle,'module_id':topicDetail.parent,'topic_id':topicDetail.id,'checklevel':this.scromApiData.checkLevel,'course_status': this.checkDetails.course_status,}));
   }
     // this.isprevEnable = true;
     // this.isNextEnable = true;
