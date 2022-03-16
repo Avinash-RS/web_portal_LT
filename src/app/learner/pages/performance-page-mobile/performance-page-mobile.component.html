@@ -152,7 +152,7 @@
                                   <em class="lxp-photo iterationicons" [ngClass]="itration.grade_status !== 'Evaluated' ? 'cursorBlock' : ''" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)" *ngIf="videoData.doc_type =='image/jpeg'  || videoData.doc_type == 'image/png' || videoData.doc_type == 'image/jpg'">
                                     </em>
 
-                                  <em class="lxp-PlayCircle iterationicons" [ngClass]="itration.grade_status !== 'Evaluated' ? 'cursorBlock' : ''" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)" *ngIf="videoData.doc_type =='video/mp4' || videoData.doc_type =='video/quicktime'">play_circle_outline</em>
+                                  <em class="lxp-PlayCircle iterationicons" [ngClass]="itration.grade_status !== 'Evaluated' ? 'cursorBlock' : ''" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)" *ngIf="videoData.doc_type =='video/mp4' || videoData.doc_type =='video/quicktime'"></em>
                                   
                                   <em class="lxp-pdf iterationicons" [ngClass]="itration.grade_status !== 'Evaluated' ? 'cursorBlock' : ''" (click)="playVideo(projectPreviewDialog, videoDialog, videoData, videoData.doc_type, preview = true)" *ngIf="videoData.doc_type =='application/pdf'" aria-hidden="true"></em>
                                 </div>
