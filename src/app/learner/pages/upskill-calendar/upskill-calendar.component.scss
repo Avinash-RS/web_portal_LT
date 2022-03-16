@@ -6,7 +6,7 @@
         justify-content: space-between;
         // height: calc(100vh - 120px);
         overflow: hidden;
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 992px) {
             flex-direction: column;
         }
         .Leftcontainer {
@@ -176,11 +176,14 @@
                         display: inline-block;
                         cursor: pointer;
                         // padding-bottom: 1em;
-                        padding: 6px 23px 6px 0;
+                        padding: 6px 12px 6px 0;
                         position: relative;
                         font-weight: 400;
                         height: 35px;
                         transition: color 0.3s ease-in-out;
+                        @media only screen and (min-width: 370px) {
+                            padding: 6px 16px 6px 0;
+                        }
                         &:hover {
                             color: $gerycolor;
                         }
