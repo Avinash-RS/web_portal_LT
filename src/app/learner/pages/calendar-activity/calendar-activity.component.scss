@@ -4,11 +4,11 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 100%;
+    // height: 100%;
     @media screen and (max-width:768px) {
         flex-direction: column; 
     }
-    @media screen and (max-width:1024px)  {
+    @media screen and (min-width:992px)  {
         height: 100%;
     }
 }
@@ -395,7 +395,7 @@
 ::ng-deep.calendarSlide { 
     width: 400px;
     background-color: #fff;
-    padding: 3em 1em; 
+    padding: 2em 1em; 
     box-shadow: 0 0 2px 0 #0000006b;
     order: 2;
     position: fixed;
@@ -652,10 +652,12 @@
     box-shadow: none;
     border-color: transparent;
     overflow: hidden;
-    transform: translateY(-50%) perspective(1px) translateZ(0);
     transition-property: color;
     transition-duration: 0.2s;
-    z-index: 99;
+    z-index: 9;
+    @media only screen and (min-width: 1140px) {
+        transform: translateY(-50%) perspective(1px) translateZ(0);
+    }
     em {
         display: inline-block;
         transform: scaleX(-1);
