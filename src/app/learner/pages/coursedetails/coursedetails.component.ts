@@ -420,6 +420,7 @@ export class CoursedetailsComponent implements OnInit {
       }else{
         this.lastLogIndex = 1;
       }
+      if(this.checkDetails.course_status !== "completed"){
       this.playURLConstructor(
         this.checkDetails.link,
         this.checkDetails.lastModule,
@@ -428,6 +429,7 @@ export class CoursedetailsComponent implements OnInit {
         this.checkDetails.topic_id,
         "entry"
       );
+    }
     }
 
     this.Lservice.getModuleData(
@@ -479,7 +481,6 @@ export class CoursedetailsComponent implements OnInit {
 
     this.socketEmitReciver = this.socketService.change.subscribe(
       (result: any) => {
-        console.log(result);
         
         if(result.data.course_id===this.courseid)
         {
@@ -509,10 +510,11 @@ export class CoursedetailsComponent implements OnInit {
               }
               return resultData;
             };
-
-            this.topicInfo = this.bkup_topicInfo =  getResumeTopic(this.scromModuleData);
+            if(!this.topicInfo)
+            {this.topicInfo = this.bkup_topicInfo =  getResumeTopic(this.scromModuleData);}
             this.currentTopicTitle = this.topicInfo.topic_name;
             this.bookmarkedCount = result.data.bookmarkCount;
+            console.log(this.topicInfo,'resume')
             // to get week index
             this.scromModuleData.forEach((element,index )=> {
               if(element.expanded)
@@ -580,7 +582,6 @@ export class CoursedetailsComponent implements OnInit {
             }
 
             // }
-            console.log(result.data, "helllllllllllllo");
             // this.scromModuleData = result.data.childData;
             // this.moduleExpand(this.weekHolder, this.moduleHolder, this.scromApiData.checkLevel ? this.subModuleHolder : null);
           }
@@ -656,7 +657,7 @@ export class CoursedetailsComponent implements OnInit {
       //single
       //start course
       if (
-        this.checkDetails.course_status == "start" ||
+        this.checkDetails.course_status == "start" ||this.checkDetails.course_status == "completed"||
         this.checkDetails.course_status == null ||
         this.userType === "vocational"
       ) {
@@ -679,8 +680,7 @@ export class CoursedetailsComponent implements OnInit {
       // }
 
       setTimeout(() => {
-        this.checkDetails.course_status =
-          this.checkDetails.course_status == null
+        this.checkDetails.course_status = this.checkDetails.course_status == null||this.checkDetails.course_status=="completed"
             ? "start"
             : this.checkDetails.course_status;
         if (
@@ -715,6 +715,16 @@ export class CoursedetailsComponent implements OnInit {
         body.childData = [...moduletopicApiData];
         if (modul === "start") {
           this.topicInfo = moduletopicApiData[0];
+          if(this.checkDetails.course_status == "completed"){
+            this.playURLConstructor(
+              this.topicInfo.link,
+              body.module_name,
+              this.topicInfo.topic_name,
+              this.topicInfo.parent,
+              this.topicInfo.id,
+              "entry"
+            );
+          }
         }
       });
     }
@@ -808,6 +818,7 @@ export class CoursedetailsComponent implements OnInit {
     // this.isprevEnable = true;
     // this.isNextEnable = true;
     this.topicInfo = topicDetail;
+    console.log(this.topicInfo,'PLaytopic click')
     this.playURLConstructor(
       url,
       moduleName,
@@ -1234,7 +1245,6 @@ export class CoursedetailsComponent implements OnInit {
     event.preventDefault();
   }
   submitMyQuestion() {
-    console.log(this.topicInfo, this.currentTopicTitle);
     if (this.topicInfo || this.currentTopicTitle) {
       if (this.questionText.trim().length) {
         this.Lservice.askaquestion(
@@ -1305,7 +1315,6 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   tabClick(tab) {
-    console.log(tab, "tabs");
     if (tab.index == 1) {
       this.filterkey = "Bookmarked";
       this.bkmrk_week = undefined;
@@ -1330,7 +1339,7 @@ export class CoursedetailsComponent implements OnInit {
     }else{
       this.topicInfo = this.bkup_topicInfo
     }
-      console.log(this.topicInfo)
+      console.log(this.topicInfo,'tabchange')
       this.playURLConstructor(
         this.topicInfo.link,
         moduleName,
