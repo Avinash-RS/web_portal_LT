@@ -420,6 +420,7 @@ export class CoursedetailsComponent implements OnInit {
       }else{
         this.lastLogIndex = 1;
       }
+      if(this.checkDetails.course_status !== "completed"){
       this.playURLConstructor(
         this.checkDetails.link,
         this.checkDetails.lastModule,
@@ -428,6 +429,7 @@ export class CoursedetailsComponent implements OnInit {
         this.checkDetails.topic_id,
         "entry"
       );
+    }
     }
 
     this.Lservice.getModuleData(
@@ -655,7 +657,7 @@ export class CoursedetailsComponent implements OnInit {
       //single
       //start course
       if (
-        this.checkDetails.course_status == "start" ||
+        this.checkDetails.course_status == "start" ||this.checkDetails.course_status == "completed"||
         this.checkDetails.course_status == null ||
         this.userType === "vocational"
       ) {
@@ -678,8 +680,7 @@ export class CoursedetailsComponent implements OnInit {
       // }
 
       setTimeout(() => {
-        this.checkDetails.course_status =
-          this.checkDetails.course_status == null
+        this.checkDetails.course_status = this.checkDetails.course_status == null||this.checkDetails.course_status=="completed"
             ? "start"
             : this.checkDetails.course_status;
         if (
@@ -714,6 +715,16 @@ export class CoursedetailsComponent implements OnInit {
         body.childData = [...moduletopicApiData];
         if (modul === "start") {
           this.topicInfo = moduletopicApiData[0];
+          if(this.checkDetails.course_status == "completed"){
+            this.playURLConstructor(
+              this.topicInfo.link,
+              body.module_name,
+              this.topicInfo.topic_name,
+              this.topicInfo.parent,
+              this.topicInfo.id,
+              "entry"
+            );
+          }
         }
       });
     }
