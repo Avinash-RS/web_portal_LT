@@ -738,7 +738,8 @@ export class CoursedetailsComponent implements OnInit {
     topicId,
     actiondat?
   ) {
-    console.log(moduleId, topicId);
+    console.log(moduleName, topicName);
+    this.currentModuleTitle = moduleName
     const encodedModuleName = encodeURIComponent(moduleName);
     const encodedTopicName = encodeURIComponent(topicName);
     let id = CryptoJS.AES.decrypt(
