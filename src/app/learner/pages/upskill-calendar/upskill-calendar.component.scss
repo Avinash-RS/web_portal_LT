@@ -176,13 +176,12 @@
                         display: inline-block;
                         cursor: pointer;
                         // padding-bottom: 1em;
-                        padding: 6px 12px 6px 0;
+                        padding: 6px 8px 6px 0;
                         position: relative;
                         font-weight: 400;
-                        height: 35px;
                         transition: color 0.3s ease-in-out;
-                        @media only screen and (min-width: 370px) {
-                            padding: 6px 16px 6px 0;
+                        @media only screen and (min-width: 320px) {
+                            padding: 6px 19px 6px 0;
                         }
                         &:hover {
                             color: $gerycolor;
@@ -270,14 +269,12 @@
                     margin-top: 10px;
                     height: calc(100vh - 195px);
                 }
-                // @media only screen and (min-width: 1200px) {
-                //     height: calc(100vh - 195px);
-                //     padding: 0 10px 0 0;
-                //     margin-top: 10px;
-                // }
-                // @media only screen and (min-width: 1540px) {
-                //     height: calc(100vh - 215px);
-                // }
+                @media only screen and (min-width: 1200px) {
+                    height: calc(100vh - 195px);
+                }
+                @media only screen and (min-width: 1540px) {
+                    height: calc(100vh - 215px);
+                }
                 .contentbox {
                     flex-wrap: wrap;
                     flex-direction: row;
