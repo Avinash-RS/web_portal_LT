@@ -129,7 +129,9 @@ export class PerformancePageMobileComponent implements OnInit {
         : localStorage.getItem('CourseName');
     }
   }
-
+  ngOnDestroy(){
+    this.ngxLoader.stop();
+  }
   ngOnInit() {
     this.indexNumber = this.performDetailPageData.index;
     this.performActivityData = this.performDetailPageData.perfornData;
