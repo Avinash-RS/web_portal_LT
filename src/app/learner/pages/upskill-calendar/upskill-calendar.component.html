@@ -24,7 +24,7 @@
                             <em class="lxp-Dropdown "></em>
                         </span>
                     </div>
-                    <div class="selectview ">
+                    <!-- <div class="selectview ">
                         <div class="btn-group ">
                             <div class="btn1 " (click)="setView(CalendarView.Month) "
                                 [class.active]="view===CalendarView.Month ">
@@ -39,11 +39,11 @@
                                 Daily
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <br />
                 <div [ngSwitch]="view ">
-                    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month " [viewDate]="viewDate " [events]="events " [refresh]="refresh " [activeDayIsOpen]="activeDayIsOpen " (dayClicked)="dayClicked($event.day)">
+                    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month " [viewDate]="viewDate " [events]="events " [refresh]="refresh " [activeDayIsOpen]="activeDayIsOpen " (dayClicked)="getLearnerActivity('day',$event.day,$event.day);dayClicked($event.day)">
                     </mwl-calendar-month-view>
                     <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week " [viewDate]="viewDate " [events]="events "
                         [refresh]="refresh ">
