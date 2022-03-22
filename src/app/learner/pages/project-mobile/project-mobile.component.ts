@@ -102,6 +102,9 @@ export class ProjectMobileComponent implements OnInit {
                 this.courseName = this.checkDetails ? this.checkDetails.courseName : localStorage.getItem('CourseName');
   }
 
+  ngOnDestroy(){
+    this.ngxLoader.stop();
+  }
   ngOnInit() {
     this.projectDetails = this.projectDetailPageData;
     this.getprojectActivityData();
