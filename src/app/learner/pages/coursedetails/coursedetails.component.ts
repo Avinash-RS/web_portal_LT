@@ -187,6 +187,7 @@ export class CoursedetailsComponent implements OnInit {
   @ViewChild("demo3Tab") demo3Tab: MatTabGroup;
   @ViewChild("rationPopup") rationPopup: TemplateRef<any>;
   @ViewChild("focuser") inputEl: ElementRef;
+  @ViewChild('scromPlayer') iframe: ElementRef;
   getModuleandtopicInfo: any;
   moduleSatusCheck: any;
   tabInd: any;
@@ -319,7 +320,7 @@ export class CoursedetailsComponent implements OnInit {
       .subscribe((quote) => {});
 
     //::: about blank is to remove 404 error message on player start:::
-    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl("about:blank");
+    // this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl("about:blank");
     this.userType = loginDetails.org_type;
     const token = loginDetails.token;
 
@@ -420,16 +421,7 @@ export class CoursedetailsComponent implements OnInit {
       }else{
         this.lastLogIndex = 1;
       }
-      if(this.checkDetails.course_status !== "completed"){
-      this.playURLConstructor(
-        this.checkDetails.link,
-        this.checkDetails.lastModule,
-        this.checkDetails.lastTopic,
-        this.checkDetails.module_id,
-        this.checkDetails.topic_id,
-        "entry"
-      );
-    }
+    
     }
 
     this.Lservice.getModuleData(
@@ -607,6 +599,18 @@ export class CoursedetailsComponent implements OnInit {
     // this.getCoursePlayerStatus();
     // this.getEboxURL();
   }
+
+  // ngAfterViewInit() {
+  //   const nativeEl =  this.iframe.nativeElement;
+  //   if ( (nativeEl.contentDocument || nativeEl.contentWindow.document).readyState === 'complete' ){
+  //     this.iframe.nativeElement.contentWindow.location.replace("about:blank ")
+  //   } else {
+  //     if (nativeEl.addEventListener) {
+
+  //           } else if (nativeEl.attachEvent) {
+  //     }
+  //   }
+  // }
   //Trigger socket for TOC
   // triggerSocket(){
   //     //call socket playerToC
@@ -679,6 +683,17 @@ export class CoursedetailsComponent implements OnInit {
       //   this.checkLastFirstIndexReached();
       // }
 
+      if(this.checkDetails.course_status !== "completed"){
+        this.playURLConstructor(
+          this.checkDetails.link,
+          this.checkDetails.lastModule,
+          this.checkDetails.lastTopic,
+          this.checkDetails.module_id,
+          this.checkDetails.topic_id,
+          "entry"
+        );
+      }
+
       setTimeout(() => {
         this.checkDetails.course_status = this.checkDetails.course_status == null||this.checkDetails.course_status=="completed"
             ? "start"
@@ -746,8 +761,8 @@ export class CoursedetailsComponent implements OnInit {
       this.getuserid.user_id,
       this.secretKey.trim()
     ).toString(CryptoJS.enc.Utf8);
-    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(
-      environment.scormUrl +
+    //  this.sanitizer.bypassSecurityTrustResourceUrl(
+    this.urlSafe =  environment.scormUrl +
         "/scormPlayer.html?content_id=" +
         this.courseid +
         "&user_id=" +
@@ -771,7 +786,15 @@ export class CoursedetailsComponent implements OnInit {
         this.lastLogIndex +
         "&courseType=" +
         this.courseType
-    );
+    // );
+    if(actiondat == "entry")
+    {setTimeout(() => {
+      this.iframe.nativeElement.contentWindow.location.replace(this.urlSafe)
+    }, 1000);
+      }
+    else{
+      this.iframe.nativeElement.contentWindow.location.replace(this.urlSafe)
+    }
   }
 
   playTopic(
