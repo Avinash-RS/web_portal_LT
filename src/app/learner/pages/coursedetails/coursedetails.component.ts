@@ -662,7 +662,7 @@ export class CoursedetailsComponent implements OnInit {
       //start course
       if (
         this.checkDetails.course_status == "start" ||this.checkDetails.course_status == "completed"||
-        this.checkDetails.course_status == null ||
+        this.checkDetails.course_status == null || this.checkDetails.link == ""||
         this.userType === "vocational"
       ) {
         let bodyData;
@@ -683,7 +683,7 @@ export class CoursedetailsComponent implements OnInit {
       //   this.checkLastFirstIndexReached();
       // }
 
-      if(this.checkDetails.course_status !== "completed"){
+      if(this.checkDetails.course_status !== "completed"&& this.checkDetails.link !== ""){
         this.playURLConstructor(
           this.checkDetails.link,
           this.checkDetails.lastModule,
@@ -730,7 +730,7 @@ export class CoursedetailsComponent implements OnInit {
         body.childData = [...moduletopicApiData];
         if (modul === "start") {
           this.topicInfo = moduletopicApiData[0];
-          if(this.checkDetails.course_status == "completed"){
+          if(this.checkDetails.course_status == "completed"||this.checkDetails.link == ""){
             this.playURLConstructor(
               this.topicInfo.link,
               body.module_name,
