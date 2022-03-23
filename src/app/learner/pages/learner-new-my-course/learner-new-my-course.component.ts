@@ -957,7 +957,7 @@ goToCourse(c){
   localStorage.setItem('persentage', c && c.coursePlayerStatus && c.coursePlayerStatus.course_percentage ? c.coursePlayerStatus.course_percentage : '');
   localStorage.setItem('currentBatchId', c.batchid);
 
-  localStorage.setItem('resumeData', JSON.stringify({'link':c.link,'lastModule':c.lastModule,'lastTopic':c.lastTopic,'module_id':c.module_id,'topic_id':c.topic_id,'checklevel':c.checklevel,'course_status':c.course_status}));
+  localStorage.setItem('resumeData', JSON.stringify({'link':c.link,'lastModule':c.lastModule,'lastTopic':c.lastTopic,'module_id':c.module_id,'topic_id':c.topic_id,'checklevel':c.checklevel,'course_status':c.course_status,'toc':c.toc}));
 
   this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
 }
