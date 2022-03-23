@@ -301,7 +301,7 @@
         </div>
         <!-- COURSE PLAYER -->
         <div class="videoPlayer" [ngClass]="drawersOpen ? 'halfWidth' : 'fullWidth'">
-            <iframe title="player" id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
+            <iframe title="player" #scromPlayer id="myPlayer" class="player" src="about:blank" allowfullscreen></iframe>
             <div class="toccollapsed" *ngIf="!drawersOpen">
                 <em class="lxp-TOC_Collapse" (click)="drawersOpen=drawersOpen?false:true"></em>
             </div>

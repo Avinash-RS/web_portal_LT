@@ -360,7 +360,7 @@ export class UpskillCalendarComponent implements OnInit {
         localStorage.setItem('Courseid', value.courseid);
         localStorage.setItem('persentage', null);
         localStorage.setItem('currentBatchId', value.batch_id);
-        localStorage.setItem('resumeData', JSON.stringify({'link':value.link,'lastModule':value.modulename,'lastTopic':value.topicname,'module_id':value.module_id,'topic_id':value.topic_id,'checklevel':value.checklevel,'course_status': value.status,}));
+        localStorage.setItem('resumeData', JSON.stringify({'link':value.link,'lastModule':value.modulename,'lastTopic':value.topicname,'module_id':value.module_id,'topic_id':value.topic_id,'checklevel':value.checklevel,'course_status': value.status,'toc': value.toc}));
         this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
 
         // this.router.navigate(['Learner/MyCourse']);
