@@ -224,7 +224,6 @@ showNew = true;
   // }
 
   downloadLink(url) {
-    // debugger;
     if(url) {
       const link = document.createElement('a');
       link.target = '_blank';
