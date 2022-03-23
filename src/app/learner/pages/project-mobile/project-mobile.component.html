@@ -8,9 +8,13 @@
               <mat-icon class="assignIcon">{{'assignment' | translate}}</mat-icon>
               <span class="f_size_16 f_wt_600 projHead">{{project.projectActivity.topic_id}}</span>
           </div>
-          <div class="activityDescription">
+          <div class="activityDescription d-flex">
             <span><strong>{{'Activity description:' | translate}}</strong></span>
-            <p>{{project.projectActivity.activityname}}</p>
+            <span class="ml-1">{{project.projectActivity.activityname}}</span>
+          </div>
+          <div class="activityDescription d-flex mb-1" *ngIf="project?.projectActivity?.activityoutcome">
+            <span><strong>{{'Activity Outcome:' | translate}}</strong></span>
+            <span class="ml-1">{{project.projectActivity.activityoutcome}}</span>
           </div>
           <div class="keyboardArrow">
             <!-- <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="!isCollapsed || projectId !== i" (click)="isCollapsed = !isCollapsed; projectId = i">keyboard_arrow_down</mat-icon>
