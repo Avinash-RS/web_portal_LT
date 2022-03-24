@@ -1229,7 +1229,7 @@ export class CoursedetailsComponent implements OnInit {
       this.topicInfo.parent,
       ux,
       this.topicInfo?.id?.toString(),
-      this.topicInfo.status,
+      this.topicInfo?.status?this.topicInfo?.status:'process',
       "",
       this.topicInfo.topic_name
     ).subscribe((data: any) => {
