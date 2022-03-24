@@ -306,13 +306,22 @@ export class CalendarActivityComponent implements OnInit {
           course_status: value.status,
           batch_id: value.batch_id,
           batchEndTime: value.batch_end_date_Timer,
-          fromCalendar : true
+          fromCalendar : true,
+          link:value.link,
+          toc:value.toc,
+          lastModule:value.modulename,
+          lastTopic:value.topicname,
+          checklevel:value.checklevel,
+          module_id:value.module_id,
+          topic_id:value.topic_id,
+          course_type:value?.course_type
         };
 
         localStorage.setItem('currentBatchEndDate', value.batch_end_date_Timer)
         localStorage.setItem('Courseid', value.courseid);
         localStorage.setItem('persentage', null);
         localStorage.setItem('currentBatchId', value.batch_id);
+        localStorage.setItem('resumeData', JSON.stringify({'link':value.link,'lastModule':value.modulename,'lastTopic':value.topicname,'module_id':value.module_id,'topic_id':value.topic_id,'checklevel':value.checklevel,'course_status': value.status,}));
         this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
 
         // this.router.navigate(['Learner/MyCourse']);
