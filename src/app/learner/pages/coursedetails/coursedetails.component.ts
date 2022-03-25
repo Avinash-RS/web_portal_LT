@@ -1220,8 +1220,12 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   understoodClick(ux) {
-    // let current_Status = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].status
+    if(this.userType==="vocational"){
+    let current_Status = this.scromModuleData[0].childData[0].childData[0].status
+    this.topicInfo.status = current_Status
+    }
     this.topicInfo.user_experience = ux;
+    console.log(this.topicInfo)
     this.Lservice.userexperience(
       this.getuserid.user_id,
       this.courseid,
