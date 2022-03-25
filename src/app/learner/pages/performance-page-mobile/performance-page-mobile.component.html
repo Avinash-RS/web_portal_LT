@@ -47,8 +47,12 @@
       </div>
       <div class="ml-0 mr-0 mt-3">
         <div class="pr-0 text-left">
-          <p class="activityDisc font-weight-bold">{{'Activity description' | translate}}</p>
+          <p class="activityDisc font-weight-bold">{{'Activity Description' | translate}}</p>
           <p class="brickMaking">{{performActivityData.performActivity.activityname}}</p>
+        </div>
+        <div class="pr-0 text-left" *ngIf="performActivityData?.performActivity?.activityoutcome">
+          <p class="activityDisc font-weight-bold">{{'Activity Outcome' | translate}}</p>
+          <p class="brickMaking">{{performActivityData.performActivity.activityoutcome}}</p>
         </div>
       </div>
       <div class="ml-0 mr-0">
@@ -313,7 +317,7 @@
             <div class="row ml-0 mr-0 mt-2" *ngIf="videoStart">
               <div class="col-12">
                 <button mat-stroked-button class="cancelBtn mr-4" (click)="videoPerview = !videoPerview; closeDialog()">{{'Cancel' | translate}}</button>
-                <button mat-stroked-button class="saveBtn" (click)="videoPerview = !videoPerview; learnerRecordVideo()">{{'Save' | translate}}</button>
+                <button mat-stroked-button class="saveBtn" (click)="videoPerview = !videoPerview">{{'Save' | translate}}</button>
               </div>
             </div>
         </div>
