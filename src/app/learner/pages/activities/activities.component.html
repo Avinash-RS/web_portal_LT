@@ -41,6 +41,9 @@
                   <div class="t-l-1 ml-4">
                     {{'Activity Description:' | translate}} {{assignment.files.activityname}}
                   </div>
+                  <div class="t-l-1 ml-4" *ngIf="assignment?.files?.activityoutcome">
+                    {{'Activity Outcome:' | translate}} {{assignment.files.activityoutcome}}
+                  </div>
                 </div>
                 <div class="projectRightContent">
                   <div class="text-right activityStatus">
@@ -240,7 +243,8 @@
                 <span class="ml-13">{{perform.performActivity.module_id}}</span>
               </div>
               <div class="t-l">{{perform.performActivity.topic_id}}</div>
-              <div class="t-l">{{'Activity description:' | translate}} {{perform.performActivity.activityname}}</div>
+              <div class="t-l">{{'Activity Description:' | translate}} {{perform.performActivity.activityname}}</div>
+              <div class="t-l" *ngIf="perform?.performActivity?.activityoutcome">{{'Activity Outcome:' | translate}} {{perform.performActivity.activityoutcome}}</div>
             </div>
 
             <div class="performRightContent">
@@ -538,6 +542,9 @@
                    </div>
                   <div class="t-l-1 ml-4">
                     {{'Activity Description:' | translate}} {{project.projectActivity.activityname}}
+                  </div>
+                  <div class="t-l-1 ml-4" *ngIf="project.projectActivity.activityoutcome">
+                    {{'Activity Outcome:' | translate}} {{project.projectActivity.activityoutcome}}
                   </div>
                 </div>
                 <div class="projectRightContent">
@@ -841,6 +848,9 @@
                   </div>
                   <div class="t-l-1">
                     {{'Activity Description:' | translate}} {{lab.labActivity.activityname}}
+                  </div>
+                  <div class="t-l-1" *ngIf="lab?.labActivity?.activityoutcome">
+                    {{'Activity Outcome:' | translate}} {{lab.labActivity.activityoutcome}}
                   </div>
                 </div>
                 <div class="labmiddleContent">

@@ -496,6 +496,11 @@ mutation view_profile($user_id: String){
       created_on
       email
       mobile_no
+      certificateDetails {
+        courseName
+        completedOn
+        certificateBlobURL
+      }
       language_detail{
         id
         name
@@ -518,7 +523,6 @@ mutation view_profile($user_id: String){
           name
         }
       }
-
     }
   }
 }
@@ -1171,6 +1175,10 @@ data{
     topicname
     status
     link
+    module_id
+    topic_id
+    toc
+    checklevel
     self_paced_learning
     liveclassroom
     batch_id

@@ -90,7 +90,7 @@
                        <ng-template [ngTemplateOutlet]="tocContent"></ng-template>
                     </mat-tab>
                   
-                    <mat-tab *ngIf="userType!=='vocational'" [ngClass]="filterkey == 'Bookmarked' ? 'yes':'no'">
+                    <mat-tab *ngIf="userType!=='vocational'&&userType!=='Corporate'" [ngClass]="filterkey == 'Bookmarked' ? 'yes':'no'">
                         <ng-template mat-tab-label>
                             <span class="tabLabel">{{'Bookmarks' | translate}}</span> <span class="labelcount">{{bookmarkedCount}}</span>
                         </ng-template>
@@ -176,7 +176,7 @@
                         class="topicCardLevel" >
                         <!-- (click)="moduleExpand(resDat,i)" -->
                         <mat-card-title  class="d-flex justify-content-between align-items-center pointer">
-                            <div class="tocTitle" >{{'Week -' | translate}} {{resDat.week?resDat.week:wi+1}}</div>
+                            <div class="tocTitle" *ngIf="userType!=='vocational'&&userType!=='Corporate'" >{{'Week -' | translate}} {{resDat.week?resDat.week:wi+1}}</div>
                             <div>
                                 <!-- <i class="expandCollapse" [ngClass]="resDat.expanded?'lxp-Collapse':'lxp-Expand'"></i> -->
                             </div>
@@ -239,7 +239,7 @@
                                             <ul>
                                                 <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of subData?.childData; let ti = index">
                                                     <div *ngIf="(wi==weekHolderUI&&ti==nextPrevHolder && smi==subModuleHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded)" #focuser ></div>
-                                                    <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && smi==subModuleHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod?.topic_name,mod.status,subData?.module_name,res?.status,mod,wi,ti,mi,smi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
+                                                    <div class="icov" [ngClass]="filterkey == 'Bookmarked'?(wi==bkmrk_week&&ti==bkmrk_topic && smi==bkmrk_subModuleHolder && mi==bkmrk_module)?'topicTitleSelected' : '':(wi==weekHolderUI&&ti==nextPrevHolder && smi==subModuleHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod?.topic_name,mod.status,subData?.module_name,res?.status,mod,wi,ti,mi,smi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                         <div class="modTitle">
                                                             <h3 tooltip="{{mod?.topic_name}}">{{mod?.topic_name}}</h3>
                                                             <!-- <span class="playVideo"><em class="lxp-PlayCircle"></em> Video</span>
@@ -270,7 +270,7 @@
                                         <!-- <ng-container *ngIf="(topicData$|async).data.playerstatus.message"></ng-container> -->
                                         <li  [ngClass]="mod?.status === 'Passed' ? 'complete' :  mod?.status === 'process' ? 'current' : ''" *ngFor="let mod of( res.childData) let ti = index">
                                             <div *ngIf="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded)" #focuser ></div>
-                                            <div class="icov" [ngClass]="(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.topic_name,mod.status,res?.module_name,res?.status,mod,wi,ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
+                                            <div class="icov" [ngClass]="filterkey == 'Bookmarked'?(wi==bkmrk_week&&ti==bkmrk_topic && smi==bkmrk_subModuleHolder && mi==bkmrk_module)?'topicTitleSelected' : '':(wi==weekHolderUI&&ti==nextPrevHolder && mi==moduleHolder)||(this.weekHolder==undefined&& mod.expanded) ? 'topicTitleSelected' : ''" (click)="playTopic(mod.link,mod.topic_name,mod.status,res?.module_name,res?.status,mod,wi,ti,mi);drawersOpen=performOverLay?(drawersOpen?false:true):true">
                                                 <div class="modTitle">
                                                     <h3 tooltip="{{mod?.topic_name}}">{{mod?.topic_name}}</h3>
                                                     <!-- <span class="playVideo"><em class="lxp-PlayCircle"></em> Video</span>
@@ -301,7 +301,7 @@
         </div>
         <!-- COURSE PLAYER -->
         <div class="videoPlayer" [ngClass]="drawersOpen ? 'halfWidth' : 'fullWidth'">
-            <iframe title="player" id="myPlayer" class="player" [src]="urlSafe" allowfullscreen></iframe>
+            <iframe title="player" #scromPlayer id="myPlayer" class="player" src="about:blank" allowfullscreen></iframe>
             <div class="toccollapsed" *ngIf="!drawersOpen">
                 <em class="lxp-TOC_Collapse" (click)="drawersOpen=drawersOpen?false:true"></em>
             </div>
@@ -353,11 +353,11 @@
                 </div>
                 <div *ngIf="checkDetails?.toc != '0'" class="d-flex align-items-center moduleTopicWrapper">
                     <div *ngIf="!drawersOpen" class="currentModuleTopic">
-                        <div class="curentVideoWeek">{{'Week' | translate}} <span>{{weekHolderUI+1}}</span></div>
+                        <div class="curentVideoWeek">{{'Week' | translate}} <span>{{weekHolderUI +1}}</span></div>
                         <div class="currentVideoModuleTopic">
-                            <h5>{{scromModuleData[weekHolderUI].childData[moduleHolder].title}}</h5>
-                            <h4 title="{{scromModuleData[weekHolderUI].childData[moduleHolder]?.childData[nextPrevHolder].title}}">
-                                {{scromModuleData[weekHolderUI].childData[moduleHolder]?.childData[nextPrevHolder].title}}
+                            <h5>{{currentModuleTitle}}</h5>
+                            <h4 title="{{currentTopicTitle}}">
+                                {{currentTopicTitle}}
                             </h4>
                         </div>
                     </div>
@@ -385,10 +385,12 @@
                     </button> -->
                 </div>
                 <div class="notesBookmarks">
-                    <div *ngIf="userType=='vocational'" [disabled]="topicInfo.status !== 'Passed'" (click)="understoodClick('like')" data-title="Understood" class="smile" [ngClass]="topicInfo.status==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
+                    <!-- [disabled]="topicInfo.status !== 'Passed'" -->
+                    <div *ngIf="userType=='vocational'"  (click)="understoodClick('like')" data-title="Understood" class="smile" [ngClass]="topicInfo?.status==='Passed'&& topicInfo?.user_experience === 'like'?'fillcol':'nofill'">
                         <em class="lxp-smile"></em> <span>{{'Understood' | translate}}</span>
                     </div>
-                    <div *ngIf="userType=='vocational'"  [disabled]="topicInfo.status !== 'Passed'" (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicInfo.status==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
+                    <!-- [disabled]="topicInfo.status !== 'Passed'" -->
+                    <div *ngIf="userType=='vocational'"   (click)="understoodClick('dislike')" data-title="Not Understood" class="sad" [ngClass]="topicInfo?.status==='Passed' && topicInfo?.user_experience === 'dislike'?'fillcol':'nofill'">
                         <em class="lxp-sad"></em> <span>{{'Not Understood' | translate}}</span>
                     </div>
                     <button data-title="Ask A Question" class="askAQuestion" *ngIf="userType!=='collegeconnect'" type="button" (click)="openAskQuestions(askQuestions)">

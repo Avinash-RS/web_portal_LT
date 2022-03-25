@@ -36,6 +36,7 @@
     "@kolkov/angular-editor": "^1.1.5",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
+    "@trademe/ng-defer-load": "8.0.0",
     "@types/cucumber": "^6.0.1",
     "@types/jasminewd2": "^2.0.8",
     "@types/jquery": "^3.3.35",
@@ -64,7 +65,7 @@
     "jasmine": "~3.3.1",
     "jquery": "^3.5.0",
     "ng-circle-progress": "^1.6.0",
-    "ng-otp-input": "^1.8.1",
+    "ng-otp-input": "1.8.1",
     "ng-recaptcha": "^8.0.1",
     "ng2-charts": "2.2.3",
     "ng2-pdf-viewer": "^6.3.2",
@@ -89,13 +90,12 @@
     "rxjs": "~6.3.3",
     "rxjs-compat": "6.2.1",
     "sweetalert2": "^9.10.12",
-    "@trademe/ng-defer-load": "8.0.0",
     "ts-node": "7.0.1",
     "tslib": "^1.13.0",
     "typescript": "^3.8.3",
     "underscore": "^1.11.0",
     "videogular2": "^7.0.1",
-    "zone.js": "~0.8.26"
+    "zone.js": "^0.11.5"
   },
   "devDependencies": {
     "@angular/cli": "^7.0.7",

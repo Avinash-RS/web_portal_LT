@@ -8,9 +8,13 @@
               <mat-icon class="assignIcon">{{'assignment' | translate}}</mat-icon>
               <span class="f_size_16 f_wt_600 projHead">{{project.projectActivity.topic_id}}</span>
           </div>
-          <div class="activityDescription">
+          <div class="activityDescription d-flex">
             <span><strong>{{'Activity description:' | translate}}</strong></span>
-            <p>{{project.projectActivity.activityname}}</p>
+            <span class="ml-1">{{project.projectActivity.activityname}}</span>
+          </div>
+          <div class="activityDescription d-flex mb-1" *ngIf="project?.projectActivity?.activityoutcome">
+            <span><strong>{{'Activity Outcome:' | translate}}</strong></span>
+            <span class="ml-1">{{project.projectActivity.activityoutcome}}</span>
           </div>
           <div class="keyboardArrow">
             <!-- <mat-icon class="f_size_16 expansionarr" aria-hidden="false" *ngIf="!isCollapsed || projectId !== i" (click)="isCollapsed = !isCollapsed; projectId = i">keyboard_arrow_down</mat-icon>
@@ -81,10 +85,13 @@
                   <mat-card class="p-0 iterationCard" (click)="projectPreviewDoc(projectPreviewDialog, videoDialog, material, 'material')">
                     <div class="row ml-0 mr-0 carouselRow1">
                       <div class="col-12 m-auto">
-                        <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
+                        <!-- <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
                           photo_size_select_actual</mat-icon>
                         <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'">play_circle_outline</mat-icon>
-                        <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type =='application/pdf'" aria-hidden="true"></i>
+                        <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type =='application/pdf'" aria-hidden="true"></i> -->
+                        <em class="lxp-photo iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"></em>
+                        <em class="lxp-PlayCircle iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'"></em>
+                        <em class="lxp-pdf iterationicons" *ngIf="material.doc_type =='application/pdf'"></em>
                       </div>
                     </div>
                     <div class="ml-0 mr-0 h-40" class="fileSelDet">
@@ -169,10 +176,13 @@
                           <mat-card class="p-0 iterationCard">
                             <div class="row ml-0 mr-0 carouselRow1">
                               <div class="col-12 m-auto">
-                                <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
+                                <!-- <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'">
                                   photo_size_select_actual</mat-icon>
                                 <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'">play_circle_outline</mat-icon>
-                                <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type == 'application/pdf'" aria-hidden="true"></i>
+                                <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type == 'application/pdf'" aria-hidden="true"></i> -->
+                                <em class="lxp-photo iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"></em>
+                                <em class="lxp-PlayCircle iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'"></em>
+                                <em class="lxp-pdf iterationicons" *ngIf="material.doc_type == 'application/pdf'" aria-hidden="true"></em>
                               </div>
                             </div>
                             <div class="row ml-0 mr-0 h-40" class="fileSelDet">
@@ -295,9 +305,12 @@
                     <mat-card class="p-0 iterationCard" (click)="projectPreviewDoc(projectPreviewDialog,videoDialog, material, 'files')">
                       <div class="row ml-0 mr-0 carouselRow1">
                         <div class="col-12 m-auto">
-                          <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"> photo_size_select_actual</mat-icon>
+                          <!-- <mat-icon class="iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"> photo_size_select_actual</mat-icon>
                           <mat-icon class="iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'"> play_circle_outline </mat-icon>
-                          <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type == 'application/pdf'" aria-hidden="true"></i>
+                          <i class="fa fa-file-pdf-o iterationicons" *ngIf="material.doc_type == 'application/pdf'" aria-hidden="true"></i> -->
+                          <em class="lxp-photo iterationicons" *ngIf="material.doc_type =='image/jpeg'  || material.doc_type == 'image/png' || material.doc_type == 'image/jpg'"></em>
+                          <em class="lxp-PlayCircle iterationicons" *ngIf="material.doc_type =='video/mp4' || material.doc_type =='video/quicktime'"></em>
+                          <em class="lxp-pdf iterationicons" *ngIf="material.doc_type == 'application/pdf'" aria-hidden="true"></em>
                         </div>
                       </div>
                       <div class="row ml-0 mr-0 h-40" class="fileSelDet">

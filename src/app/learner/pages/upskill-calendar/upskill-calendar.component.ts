@@ -137,12 +137,13 @@ export class UpskillCalendarComponent implements OnInit {
     var description = [];
     if(events.length > 0){
       events.forEach((value:any)=>{
-        if(value.description.length > 0){
+        if(value.description.length > 0 && value.title){
           description.push(value.description)
         }
       })
     }
     if(description.length == 0){
+      this.activeDayIsOpen = false;
       return;
     }
     if (isSameMonth(date, this.viewDate)) {
@@ -168,7 +169,11 @@ export class UpskillCalendarComponent implements OnInit {
         element.start = new Date(element.start);
         element.end = new Date (element.end);
         element.color = {primary : element.color};
-        element.title = element.description;
+        if(element.title != 'Instruction'){
+          element.title = '';
+        } else {
+          element.title = element.description;
+        }
       //  element.allDay = true;
       });
       this.events = activityDetailsList;​
@@ -177,9 +182,11 @@ export class UpskillCalendarComponent implements OnInit {
         var today = new Date();
         activityDetailsList.forEach((value)=>{
           var dateAvailable = moment(today).isBetween(value.start, value.end);
-          if(dateAvailable && value.description){
+          if(dateAvailable && value.title){
             this.activeDayIsOpen = true;
           }
+          if(moment(value.start).isSame(new Date(),'day') && value.title)
+          this.activeDayIsOpen = true;
         })
       }
       setTimeout(()=>{
@@ -339,13 +346,21 @@ export class UpskillCalendarComponent implements OnInit {
           course_status: value.status,
           batch_id: value.batch_id,
           batchEndTime: value.batch_end_date_Timer,
-          fromCalendar : true
+          fromCalendar : true,
+          link:value.link,
+          toc:value.toc,
+          lastModule:value.modulename,
+          lastTopic:value.topicname,
+          checklevel:value.checklevel,
+          module_id:value.module_id,
+          topic_id:value.topic_id,
+          course_type:value?.course_type
         };
-
         localStorage.setItem('currentBatchEndDate', value.batch_end_date_Timer)
         localStorage.setItem('Courseid', value.courseid);
         localStorage.setItem('persentage', null);
         localStorage.setItem('currentBatchId', value.batch_id);
+        localStorage.setItem('resumeData', JSON.stringify({'link':value.link,'lastModule':value.modulename,'lastTopic':value.topicname,'module_id':value.module_id,'topic_id':value.topic_id,'checklevel':value.checklevel,'course_status': value.status,'toc': value.toc}));
         this.router.navigateByUrl('/Learner/courseDetail', { state: { detail } });
 
         // this.router.navigate(['Learner/MyCourse']);

@@ -1406,6 +1406,7 @@ export const getAssignmentmoduleData = gql`
           activitystartdate
           activityenddate
           activityname
+          activityoutcome
           question_doc_type
           score_mark
           comments
@@ -1932,6 +1933,7 @@ export const getprojectActivityData = gql`
           activityId
           module_id
           activityname
+          activityoutcome
           topic_id
           projecttype
           total_mark
@@ -2007,6 +2009,7 @@ export const getperformActivityData = gql`
           iterationTotal
           module_id
           activityname
+          activityoutcome
           topic_id
           materialDetails {
             _id
@@ -2680,6 +2683,8 @@ export const recentlycourse = gql`
           topic_id
           checklevel
           course_status
+          lastTopic
+          lastModule
         }
       }
     }
@@ -2722,6 +2727,7 @@ export const getlabActivityData = gql`
           iterationTotal
           module_id
           activityname
+          activityoutcome
           topic_id
           projecttype
           url
