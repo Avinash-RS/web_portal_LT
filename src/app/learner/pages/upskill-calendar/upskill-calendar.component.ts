@@ -137,12 +137,13 @@ export class UpskillCalendarComponent implements OnInit {
     var description = [];
     if(events.length > 0){
       events.forEach((value:any)=>{
-        if(value.description.length > 0){
+        if(value.description.length > 0 && value.title){
           description.push(value.description)
         }
       })
     }
     if(description.length == 0){
+      this.activeDayIsOpen = false;
       return;
     }
     if (isSameMonth(date, this.viewDate)) {
@@ -168,7 +169,11 @@ export class UpskillCalendarComponent implements OnInit {
         element.start = new Date(element.start);
         element.end = new Date (element.end);
         element.color = {primary : element.color};
-        element.title = element.description;
+        if(element.title != 'Instruction'){
+          element.title = '';
+        } else {
+          element.title = element.description;
+        }
       //  element.allDay = true;
       });
       this.events = activityDetailsList;​
@@ -177,10 +182,10 @@ export class UpskillCalendarComponent implements OnInit {
         var today = new Date();
         activityDetailsList.forEach((value)=>{
           var dateAvailable = moment(today).isBetween(value.start, value.end);
-          if(dateAvailable && value.description){
+          if(dateAvailable && value.title){
             this.activeDayIsOpen = true;
           }
-          if(moment(value.start).isSame(new Date(),'day'))
+          if(moment(value.start).isSame(new Date(),'day') && value.title)
           this.activeDayIsOpen = true;
         })
       }

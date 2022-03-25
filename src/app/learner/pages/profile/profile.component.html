@@ -132,7 +132,6 @@
     </div>
   </div>
 
-
   <div class="container-reg200 fourth">
     <div class="profile-details">
       <form [formGroup]="profileForm" autocomplete="off">
@@ -478,6 +477,30 @@
       <!---------------------------------Password Dialog--------------------------------->
     </div>
   </div>
+  
+  <!-- Certification UI -->
+  <div class="container-reg200 certification">
+    <label _ngcontent-xxc-c2="" class="f_size_19">Certifications</label>
+    <div class="certificateWrapper">
+      <div class="certificate" *ngFor="let cDetails of certificationDetails">
+        <span class="cBadge">
+          <em class="lxp-JoinIcon"></em>
+        </span>
+        <div class="course common">
+          <span>Course</span>
+          <div class="heading">{{cDetails.courseName}}</div>
+        </div>
+        <div class="completedOn common">
+          <span>Completed on</span>
+          <div class="heading">{{cDetails.completedOn | date:'MMM, yyyy'}}</div>
+        </div>
+        <div class="download">
+          <button (click)="downloadLink(cDetails.certificateBlobURL)"><em class="lxp-download"></em> <span>Download</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- <div class="footer">

@@ -725,9 +725,16 @@
     .cal-month-view .cal-day-cell.cal-in-month.cal-has-events{
         position: relative;
     }
+
+    .cal-open-day-events{
+        .cal-event {
+            display: none;
+        }
+    }
 }
 ::ng-deep.filter-modal-box {
     .mat-dialog-container {
         padding:0px !important;
     }
 }
+

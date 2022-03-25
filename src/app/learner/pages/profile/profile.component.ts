@@ -158,6 +158,7 @@ showNew = true;
   duplicateValueCheck = [];
   college_name;
   profileDetails;
+  certificationDetails;
   ngOnDestroy(){
   this.dialog.closeAll();
   }
@@ -222,9 +223,23 @@ showNew = true;
   //   this.cannotEdit = false;
   // }
 
+  downloadLink(url) {
+    if(url) {
+      const link = document.createElement('a');
+      link.target = '_blank';
+      link.style.display = 'none';
+      link.href = url + this.blobKey;
+      link.click();
+    }
+    else {
+      this.toastr.warning('URL not available');
+    }
+  }
+
   getprofileDetails(userid) {
     this.service.view_profile(userid).subscribe((data: any) => {
       if (data.data.view_profile.success) {
+        this.certificationDetails = data.data.view_profile.message && data.data.view_profile.message[0].certificateDetails;
         this.profileDetails = data.data.view_profile.message && data.data.view_profile.message[0].profileObject;
         this.userData = data.data.view_profile.message[0];
         if(this.userData?.mobile_no){
