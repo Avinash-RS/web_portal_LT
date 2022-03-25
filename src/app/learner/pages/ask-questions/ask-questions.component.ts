@@ -148,9 +148,11 @@ export class AskQuestionsComponent implements OnInit {
     this.mainPagenumber=0;
     this.allQuestionList = []
     if(call==='M'){
-      this.getTopicV2(this.mainModule.id,'filter');
-      this.mainModuleName = this.mainModule?this.mainModule.title:null;
-      this.mainTopic=null
+      if(this.mainModule?.id){
+        this.getTopicV2(this.mainModule?.id,'filter');
+        this.mainModuleName = this.mainModule?this.mainModule.module_name:null;
+        this.mainTopic=null
+      }
     }
     this.getQuestionsAnswerlists()
 
