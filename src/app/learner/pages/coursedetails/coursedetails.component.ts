@@ -1220,8 +1220,12 @@ export class CoursedetailsComponent implements OnInit {
   }
 
   understoodClick(ux) {
-    // let current_Status = this.scromModuleData[this.weekHolder].childData[this.moduleHolder].childData[this.subModuleHolder].status
+    if(this.userType==="vocational"){
+    let current_Status = this.scromModuleData[0].childData[0].childData[0].status
+    this.topicInfo.status = current_Status
+    }
     this.topicInfo.user_experience = ux;
+    console.log(this.topicInfo)
     this.Lservice.userexperience(
       this.getuserid.user_id,
       this.courseid,
@@ -1524,11 +1528,11 @@ export class CoursedetailsComponent implements OnInit {
 
   createQuestion() {
     if (this.htmlContent) {
-      let regexKey = /[&<>#]/gi;
-      if (this.htmlContent.search(regexKey) == -1) {
-        this.toastr.warning("Please dont use special characters");
-        return false;
-      }
+      // let regexKey = /[&<>#]/gi;
+      // if (this.htmlContent.search(regexKey) == -1) {
+      //   this.toastr.warning("Please dont use special characters");
+      //   return false;
+      // }
 
       this.Lservice.createEngineersForumData(
         this.userDetail.user_id,
