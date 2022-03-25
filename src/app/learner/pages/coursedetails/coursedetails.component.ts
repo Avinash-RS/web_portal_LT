@@ -1524,11 +1524,11 @@ export class CoursedetailsComponent implements OnInit {
 
   createQuestion() {
     if (this.htmlContent) {
-      let regexKey = /[&<>#]/gi;
-      if (this.htmlContent.search(regexKey) == -1) {
-        this.toastr.warning("Please dont use special characters");
-        return false;
-      }
+      // let regexKey = /[&<>#]/gi;
+      // if (this.htmlContent.search(regexKey) == -1) {
+      //   this.toastr.warning("Please dont use special characters");
+      //   return false;
+      // }
 
       this.Lservice.createEngineersForumData(
         this.userDetail.user_id,
