@@ -126,7 +126,7 @@
                                     <em class="icon lxp-Timelapse red "></em>
                                     <span>Overdue</span>
                                 </ng-container>
-                                <ng-container *ngIf="activity.status=='On going' ">
+                                <ng-container *ngIf="activity.status=='On going' && activity.activitytype!='Live Classroom'">
                                     <em class="icon lxp-Timer timer "></em>
                                     <span>Ongoing</span>
                                 </ng-container>
